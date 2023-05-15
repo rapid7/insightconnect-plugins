@@ -14,7 +14,7 @@ class GetCases(insightconnect_plugin_runtime.Action):
             output=GetCasesOutput(),
         )
 
-    def run(self, params={}): # pylint: disable=unused-argument
+    def run(self, params={}):  # pylint: disable=unused-argument
 
         response = self.connection.client.get_cases()
 

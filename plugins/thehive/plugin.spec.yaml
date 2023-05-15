@@ -4,7 +4,7 @@ products: [insightconnect]
 name: thehive
 title: TheHive
 description: "TheHive is a scalable, open source security incident response solution designed for
-  SOCs & CERTs to collaborate, elaborate, analyze and get their job done."
+  SOCs & CERTs to collaborate, elaborate, analyze and get their job done"
 version: 3.0.0
 vendor: rapid7
 support: community
@@ -53,7 +53,7 @@ connection:
     example: {}
     required: false
   api_key:
-    title: API key
+    title: API Key
     description: An optional API key for authentication via bearer token
     type: credential_secret_key
     example: 9de5069c5afe602b2ea0a04b66beb2c0
@@ -592,6 +592,7 @@ actions:
         title: Success
         description: A user object containing all related fields
         type: userObject
+        example: {}
         required: false
   get_current_user:
     title: Get Current User
@@ -601,6 +602,7 @@ actions:
         title: Success
         description: A user object containing all related fields
         type: userObject
+        example: {}
         required: false
   create_case:
     title: Create Case
@@ -761,6 +763,7 @@ actions:
         type: boolean
         example: false
         default: false
+        required: false
       startDate:
         title: Start Date
         description: Task's start date, the date the task started at

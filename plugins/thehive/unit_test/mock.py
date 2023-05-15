@@ -16,14 +16,20 @@ import requests
 STUB_API_KEY = "9de5069c5afe602b2ea0a04b66beb2c0"
 STUB_USERNAME = "username"
 STUB_PASSWORD = "password"
+STUB_PORT = "9000"
+STUB_HOST = "10.10.10.10"
+STUB_PROTOCOL = "http"
 STUB_CONNECTION_API_KEY = {
+    ConnectionInput.PORT: STUB_PORT,
+    ConnectionInput.HOST: STUB_HOST,
+    ConnectionInput.PROTOCOL: STUB_PROTOCOL,
     ConnectionInput.API_KEY: {"secretKey": STUB_API_KEY},
 }
-STUB_CONNECTION_USERNAME_PASSWORD = {
-    ConnectionInput.CREDENTIALS.get("username"): STUB_USERNAME,
-    ConnectionInput.CREDENTIALS.get("password"): STUB_PASSWORD,
-}
-STUB_BASE_URL = "http://10.10.10.10/9000"
+STUB_BASE_URL = "http://10.10.10.10:9000"
+# STUB_CONNECTION_USERNAME_PASSWORD = {
+#     ConnectionInput.CREDENTIALS.get("username"): STUB_USERNAME,
+#     ConnectionInput.CREDENTIALS.get("password"): STUB_PASSWORD,
+# }
 STUB_CASE_ID = "abcdef123"
 STUB_USER_ID = "stubuserid"
 STUB_CASE = {

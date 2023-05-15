@@ -30,7 +30,25 @@ class TestGetCurrentUser(TestCase):
     def test_get_current_user(self, mock_get):
         mocked_request(mock_get)
         response = self.action.run()
-        expected = {}
+        expected = {
+            "success": {
+                "_routing": "admin",
+                "hasKey": True,
+                "preferences": {},
+                "updatedBy": "admin",
+                "roles": ["read", "write", "admin"],
+                "_type": "user",
+                "createdAt": 1544021746094,
+                "_parent": None,
+                "createdBy": "init",
+                "name": "Administrator",
+                "_id": "admin",
+                "id": "admin",
+                "_version": 1,
+                "updatedAt": 1544215737382,
+                "status": "Ok",
+            }
+        }
         self.assertEqual(response, expected)
 
     @parameterized.expand(

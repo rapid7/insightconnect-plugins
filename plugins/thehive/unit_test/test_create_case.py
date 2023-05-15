@@ -32,7 +32,33 @@ class TestCreateCase(TestCase):
     def test_create_case(self, mock_post):
         mocked_request(mock_post)
         response = self.action.run(self.params)
-        expected = {}
+        expected = {
+            "case": {
+                "owner": "string",
+                "summary": "string",
+                "severity": 2,
+                "_routing": "case_id",
+                "flag": False,
+                "endDate": 1640000000000,
+                "customFields": {},
+                "_type": "case",
+                "description": "string",
+                "title": "string",
+                "tags": ["string"],
+                "createdAt": 1684188238010,
+                "_parent": None,
+                "createdBy": "admin",
+                "caseId": 54,
+                "tlp": 2,
+                "metrics": {},
+                "_id": "case_id",
+                "id": "case_id",
+                "_version": 1,
+                "pap": 2,
+                "startDate": 1640000000000,
+                "status": "Open",
+            }
+        }
         self.assertEqual(response, expected)
 
     @parameterized.expand(

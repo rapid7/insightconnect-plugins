@@ -21,7 +21,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "properties": {
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
-      "title": "API key",
+      "title": "API Key",
       "description": "An optional API key for authentication via bearer token",
       "order": 5
     },

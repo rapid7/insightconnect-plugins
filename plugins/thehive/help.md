@@ -1,4 +1,4 @@
-############################
+################################
 
 
 
@@ -225,7 +225,7 @@ Create a new case observable
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |data|string|None|False|Observable's data|None|None|
-|datatype|string|None|False|Observables Data Type|None|domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other|
+|datatype|string|None|False|Observables Data Type|None|None|
 |id|string|None|False|ID for the case|None|AV_ajI_oYMfcbXhqb9tS|
 |ignoreSimilarity|boolean|False|False|Observable's similarity ignore flag. True to ignore the observable during similarity computing|None|False|
 |ioc|boolean|False|False|Observable's IOC, True to mark an observable as IOC|None|False|
