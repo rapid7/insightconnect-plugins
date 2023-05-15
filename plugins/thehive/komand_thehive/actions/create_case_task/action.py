@@ -16,14 +16,20 @@ class CreateCaseTask(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
 
-        task = {
-            "id": params.get(Input.ID),
-            "title": params.get(Input.TITLE),
-            "description": params.get(Input.DESCRIPTION),
-            "status": params.get(Input.STATUS),
-            "flag": params.get(Input.FLAG),
-            "startDate": params.get(Input.STARTDATE, int(time.time()) * 1000)
-        }
+        json_task_data = params.get(Input.JSON)
+
+        if json_task_data:
+            task = json_task_data
+        else:
+            task = {
+                "id": params.get(Input.ID),
+                "title": params.get(Input.TITLE),
+                "description": params.get(Input.DESCRIPTION),
+                "status": params.get(Input.STATUS),
+                "flag": params.get(Input.FLAG),
+                "startDate": params.get(Input.STARTDATE, int(time.time()) * 1000),
+                "owner": params.get(Input.OWNER)
+            }
 
         self.logger.info(f"Input: {task}")
         

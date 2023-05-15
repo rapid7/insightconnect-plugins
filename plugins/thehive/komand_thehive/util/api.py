@@ -16,39 +16,42 @@ class HiveAPI:
 
     # Get Case
     def get_case(self, case_id: str):
-        return self._call_api("GET", f"api/case/{case_id}")
+        return self._call_api("GET", f"/api/case/{case_id}")
 
     # Create Case
     def create_case(self, case):
-        return self._call_api("POST", "api/case", data=case)
+        return self._call_api("POST", "/api/case", data=case)
 
     # Create Observable In Case
     # WIP
     def create_case_observable(self, case_id, observable):
-        return self._call_api("POST", f"api/case/{case_id}/artifact", data=observable)
+        return self._call_api("POST", f"/api/case/{case_id}/artifact", data=observable)
 
     # Create Task in Case
     # WIP
     def create_task_in_case(self, case_id, task):
-        return self._call_api("POST", f"api/case/{case_id}/task", data=task)
+        return self._call_api("POST", f"/api/case/{case_id}/task", data=task)
 
     # Close Case
     # WIP
-    def close_case(self, case_id):
-        return self._call_api("DELETE", f"api/case/{case_id}")
+    def close_case(self, case_id, force):
+        req_url = f"/api/case/{case_id}"
+        if force:
+            req_url += "/force"
+        return self._call_api("DELETE", req_url)
 
     # Get Cases
     # No Docs / Might have to remove this
     def get_cases(self):
-        return self._call_api("GET", "api/case/_search", json_data={}, params={"range": "all", "sort": []})
+        return self._call_api("GET", "/api/case/_search", data={}, params={"range": "all", "sort": []})
 
     # Get Current User
     def get_current_user(self):
-        return self._call_api("GET", f"api/user/current")
+        return self._call_api("GET", f"/api/user/current")
 
     # Get User By ID
     def get_user_by_id(self, user_id):
-        return self._call_api("GET", f"api/user/{user_id}")
+        return self._call_api("GET", f"/api/user/{user_id}")
 
     def _call_api(
         self, method: str, path: str, params: Optional[dict] = None, data: Optional = None, json_data: Optional = None

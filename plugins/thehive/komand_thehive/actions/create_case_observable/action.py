@@ -16,10 +16,10 @@ class CreateCaseObservable(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         case_id = params.get(Input.ID)
-        data = params.get(Input.DATA)
+        json_observable_data = params.get(Input.DATA)
 
-        if params.get(Input.DATA):
-            observable = data
+        if json_observable_data:
+            observable = json_observable_data
         else:
             observable = {
                 "dataType": params.get(Input.DATATYPE),

@@ -11,6 +11,7 @@ class Input:
     CUSTOMFIELDS = "customFields"
     DESCRIPTION = "description"
     FLAG = "flag"
+    JSON = "json"
     METRICS = "metrics"
     OWNER = "owner"
     PAP = "pap"
@@ -52,6 +53,12 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       "description": "Case's flag, True to mark case as important",
       "default": false,
       "order": 6
+    },
+    "json": {
+      "type": "object",
+      "title": "JSON",
+      "description": "If the field is not equal to None, the case is instantiated using the JSON value instead of the arguements",
+      "order": 15
     },
     "metrics": {
       "type": "object",

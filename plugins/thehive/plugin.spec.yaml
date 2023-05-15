@@ -782,6 +782,11 @@ actions:
         description: Case task
         type: '[]itask'
         required: false
+      json:
+        title: JSON
+        description: If the field is not equal to None, the case is instantiated using the JSON value instead of the arguements
+        type: object
+        required: false
     output:
       case:
         type: createCase
@@ -831,6 +836,11 @@ actions:
         title: Owner
         description: Task's assignee
         type: string
+        required: false
+      json:
+        title: JSON
+        description:  If the field is not equal to None, the Task is instantiated using the JSON value instead of the arguements
+        type: object
         required: false
     output:
       case:
@@ -946,28 +956,11 @@ actions:
         example: AV_ajI_oYMfcbXhqb9tS
         type: string
         required: true
-      resolution_status:
-        title: Resolution Status
-        description: Case resolution status
-        type: string
-        required: false
-        enum:
-        - low
-        - medium
-        - high
-      impact_status:
-        title: Impact Status
-        description: Case impact status
-        type: string
-        required: false
-        enum:
-        - low
-        - medium
-        - high
-      summary:
-        title: Summary
-        description: Case Summary
-        type: string
+      force:
+        title: Force
+        description: True to physically delete the case, False to mark the case as delete
+        type: boolean
+        default: false
         required: false
     output:
       type:
