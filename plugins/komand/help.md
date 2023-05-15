@@ -197,7 +197,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.4 - Update requests to 2.20.0
+* 1.0.4 - Update requests to 2.20.0 | Update Insight-Plugin-Runtime
 * 1.0.3 - New spec and help.md format for the Extension Library
 * 1.0.2 - Add `utilities` plugin tag for Marketplace searchability
 * 1.0.1 - Fix issue where Lookup Workflow Name can crash due to excessive data
