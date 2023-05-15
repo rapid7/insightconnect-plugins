@@ -15,6 +15,7 @@ class CloseCase(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+
         case_id = params.get(Input.ID)
         force = params.get(Input.FORCE)
 

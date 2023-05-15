@@ -7,6 +7,7 @@ from komand_thehive.connection.connection import Connection
 from komand_thehive.actions.get_cases import GetCases
 import json
 import logging
+from parameterized import parameterized
 
 
 class TestGetCases(TestCase):

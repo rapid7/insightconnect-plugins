@@ -16,6 +16,7 @@ class GetUserById(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
 
         user_id = params.get(Input.ID)
+
         response = self.connection.client.get_user_by_id(user_id=user_id)
 
         return {Output.SUCCESS: response}

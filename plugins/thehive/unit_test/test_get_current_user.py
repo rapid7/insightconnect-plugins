@@ -4,13 +4,14 @@ sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
 from komand_thehive.connection.connection import Connection
-from komand_thehive.actions.get_user import GetUser
+from komand_thehive.actions.get_current_user import GetCurrentUser
 import json
 import logging
+from parameterized import parameterized
 
 
-class TestGetUser(TestCase):
-    def test_get_user(self):
+class TestGetCurrentUser(TestCase):
+    def test_get_current_user(self):
         """
         DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
 

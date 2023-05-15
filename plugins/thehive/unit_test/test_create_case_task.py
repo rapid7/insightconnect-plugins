@@ -7,6 +7,7 @@ from komand_thehive.connection.connection import Connection
 from komand_thehive.actions.create_case_task import CreateCaseTask
 import json
 import logging
+from parameterized import parameterized
 
 
 class TestCreateCaseTask(TestCase):

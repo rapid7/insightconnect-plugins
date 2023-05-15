@@ -4,14 +4,14 @@ sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
 from komand_thehive.connection.connection import Connection
-from komand_thehive.actions.create_case_observable import CreateCaseObservable
+from komand_thehive.actions.get_user_by_id import GetUserById
 import json
 import logging
 from parameterized import parameterized
 
 
-class TestCreateCaseObservable(TestCase):
-    def test_create_case_observable(self):
+class TestGetUserById(TestCase):
+    def test_get_user_by_id(self):
         """
         DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
 
