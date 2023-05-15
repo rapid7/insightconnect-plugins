@@ -12,7 +12,7 @@
 
 # Supported Product Versions
 
-* CheckPoint 2023-04-12
+* CheckPoint 2023-05-15
 
 # Documentation
 
