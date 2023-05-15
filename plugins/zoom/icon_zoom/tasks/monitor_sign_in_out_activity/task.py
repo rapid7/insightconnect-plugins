@@ -206,9 +206,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         return deduped_events, state
 
     @staticmethod
-    def _dedupe_events(boundary_event_hashes: [str],
-                       all_events: [Event],
-                       latest_event_timestamp: Optional[str]) -> [Event]:
+    def _dedupe_events(
+        boundary_event_hashes: [str], all_events: [Event], latest_event_timestamp: Optional[str]
+    ) -> [Event]:
         if latest_event_timestamp is None:
             return all_events
 
