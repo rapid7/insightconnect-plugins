@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='networktotal-rapid7-plugin',
-      version='1.0.1',
-      description='Upload a PCAP file for analysis, detecting viruses, worms, trojans and malware',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="networktotal-rapid7-plugin",
+      version="2.0.0",
+      description="Upload a PCAP file for analysis, detecting viruses, worms, trojans and malware",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_networktotal']
