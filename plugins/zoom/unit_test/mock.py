@@ -11,9 +11,9 @@ from icon_zoom.connection.connection import Connection
 from insightconnect_plugin_runtime.action import Action
 
 STUB_CONNECTION = {
-    "client_id": {"secretKey": "asdf"},
+    "client_id": "asdf",
     "client_secret": {"secretKey": "asdf"},
-    "account_id": {"secretKey": "asdf"},
+    "account_id": "asdf",
 }
 STUB_BASE_URL = "https://api.zoom.us/v2"
 STUB_OAUTH_URL = "https://zoom.us/oauth/token"
