@@ -1,4 +1,4 @@
-##########################
+############################
 
 
 
@@ -32,23 +32,24 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|False|An optional API key for authentication via bearer token|None|None|
+|api_key|credential_secret_key|None|False|An optional API key for authentication via bearer token|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |credentials|credential_username_password|None|False|Username and password|None|None|
-|host|string|None|True|TheHive host e.g. thehive.company.com or 10.3.4.50|None|None|
-|port|string|9000|True|TheHive API port e.g. 9000|None|None|
-|protocol|string|None|True|HTTP Protocol|['http', 'https']|None|
+|host|string|None|True|TheHive host|None|https://example.com or https://example.com|
+|port|string|9000|True|TheHive API port|None|9000|
+|protocol|string|None|True|HTTP Protocol|['http', 'https']|http|
 |proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|None|
-|verify|boolean|True|True|Verify the certificate|None|None|
+|verify|boolean|True|True|Verify the certificate|None|True|
 
 Example input:
 
 ```
+
 ```
 ## Technical Details
 
 ### Actions
 
-#### Get User By ID
+#### Get User by ID
 
 This action is used to get information about a specific user.
 
@@ -56,11 +57,14 @@ This action is used to get information about a specific user.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|The ID of the user|None|None|
+|id|string|None|True|The ID of the user|None|AV_ajI_oYMfcbXhqb9tS|
 
 Example input:
 
 ```
+{
+  "id": "AV_ajI_oYMfcbXhqb9tS"
+}
 ```
 
 ##### Output
@@ -99,7 +103,7 @@ Close a case by ID
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|force|boolean|False|False|True to physically delete the case, False to mark the case as delete|None|None|
+|force|boolean|False|False|True to physically delete the case, False to mark the case as delete|None|False|
 |id|string|None|True|ID for the case|None|AV_ajI_oYMfcbXhqb9tS|
 
 ```
@@ -113,6 +117,10 @@ Close a case by ID
 Example input:
 
 ```
+{
+  "force": false,
+  "id": "AV_ajI_oYMfcbXhqb9tS"
+}
 ```
 
 ##### Output
@@ -137,20 +145,20 @@ Create a new case
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |customFields|object|None|False|Case custom fields|None|None|
-|description|string|None|False|Description of the case, supports markdown|None|None|
-|flag|boolean|False|False|Case's flag, True to mark case as important|None|None|
+|description|string|None|False|Description of the case, supports markdown|None|Case description|
+|flag|boolean|False|False|Case's flag, True to mark case as important|None|True|
 |json|object|None|False|If the field is not equal to None, the case is instantiated using the JSON value instead of the arguements|None|None|
-|metrics|object|None|False|Case metrics collection. A JSON object where keys are defining metric name, and values are defining metric value.|None|None|
-|owner|string|None|False|Case's assignee|None|None|
-|pap|integer|2|False|Password Authentication Protocol|[0, 1, 2, 3]|None|
-|severity|integer|2|False|Case severity|[1, 2, 3, 4]|None|
-|startDate|integer|None|False|Case start date (datetime in ms) (will default to now if left blank)|None|None|
-|summary|string|None|False|Case summary|None|None|
-|tags|[]string|None|False|List of case tags|None|None|
+|metrics|object|None|False|Case metrics collection. A JSON object where keys are defining metric name, and values are defining metric value|None|None|
+|owner|string|None|False|Case's assignee|None|admin|
+|pap|integer|2|False|Password Authentication Protocol|[0, 1, 2, 3]|2|
+|severity|integer|2|False|Case severity|[1, 2, 3, 4]|2|
+|startDate|integer|None|False|Case start date (datetime in ms) (will default to now if left blank)|None|1684170163000|
+|summary|string|None|False|Case summary|None|Case summary|
+|tags|[]string|None|False|List of case tags|None|["case_tag_1", "case_tag_2"]|
 |tasks|[]itask|None|False|Case task|None|None|
-|template|string|None|False|Case template's name. If specified then the case is created using the given template.|None|None|
-|title|string|None|False|Name of the case|None|None|
-|tlp|integer|2|False|Traffic Light Protocol level|[0, 1, 2, 3]|None|
+|template|string|None|False|Case template's name. If specified then the case is created using the given template|None|Case template name|
+|title|string|None|False|Name of the case|None|Case title|
+|tlp|integer|2|False|Traffic Light Protocol level|[0, 1, 2, 3]|2|
 
 ```
 {
@@ -174,6 +182,7 @@ Create a new case
 Example input:
 
 ```
+
 ```
 
 ##### Output
@@ -218,13 +227,13 @@ Create a new case observable
 |data|string|None|False|Observable's data|None|None|
 |datatype|string|None|False|Observables Data Type|None|domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other|
 |id|string|None|False|ID for the case|None|AV_ajI_oYMfcbXhqb9tS|
-|ignoreSimilarity|boolean|False|False|Observable's similarity ignore flag. True to ignore the observable during similarity computing|None|None|
-|ioc|boolean|False|False|Observable's IOC, True to mark an observable as IOC|None|None|
-|message|string|None|False|Observable's description. If tags is empty, this is required|None|None|
-|pap|integer|2|False|Case's PAP|[0, 1, 2, 3]|None|
-|sighted|boolean|False|False|Observable's sighted flag, True to mark the observable as sighted|None|None|
-|tags|[]string|None|False|List of observable tags, required if message is None|None|None|
-|tlp|integer|2|False|Case's TLP|[0, 1, 2, 3]|None|
+|ignoreSimilarity|boolean|False|False|Observable's similarity ignore flag. True to ignore the observable during similarity computing|None|False|
+|ioc|boolean|False|False|Observable's IOC, True to mark an observable as IOC|None|False|
+|message|string|None|False|Observable's description. If tags is empty, this is required|None|Observable message|
+|pap|integer|2|False|Case's PAP|[0, 1, 2, 3]|2|
+|sighted|boolean|False|False|Observable's sighted flag, True to mark the observable as sighted|None|False|
+|tags|[]string|None|False|List of observable tags, required if message is None|None|["tag_one", "tag_two"]|
+|tlp|integer|2|False|Case's TLP|[0, 1, 2, 3]|2|
 
 ```
 {
@@ -244,10 +253,7 @@ Create a new case observable
 Example input:
 
 ```
-{
-  "datatype": "domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other",
-  "id": "AV_ajI_oYMfcbXhqb9tS"
-}
+
 ```
 
 ##### Output
@@ -286,14 +292,14 @@ Create a new case task
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|description|string|None|False|Task's description|None|None|
-|flag|boolean|False|False|Task's flag, 'True' to mark the task as important|None|None|
+|description|string|None|False|Task's description|None|Task description|
+|flag|boolean|False|False|Task's flag, 'True' to mark the task as important|None|False|
 |id|string|None|False|ID for the case|None|AV_ajI_oYMfcbXhqb9tS|
 |json|object|None|False|If the field is not equal to None, the Task is instantiated using the JSON value instead of the arguements|None|None|
-|owner|string|None|False|Task's assignee|None|None|
-|startDate|integer|None|False|Task's start date, the date the task started at|None|None|
-|status|string|Waiting|False|Task's status|['Waiting', 'InProgress', 'Cancel', 'Completed']|None|
-|title|string|None|False|Task's description|None|None|
+|owner|string|None|False|Task's assignee|None|admin|
+|startDate|integer|None|False|Task's start date, the date the task started at|None|1684170163000|
+|status|string|Waiting|False|Task's status|['Waiting', 'InProgress', 'Cancel', 'Completed']|Waiting|
+|title|string|None|False|Task's title|None|Task title|
 
 ```
 {
@@ -310,9 +316,7 @@ Create a new case task
 Example input:
 
 ```
-{
-  "id": "AV_ajI_oYMfcbXhqb9tS"
-}
+
 ```
 
 ##### Output
@@ -403,9 +407,6 @@ Retrieve list of cases
 Example input:
 
 ```
-{
-  "id": "AV_ajI_oYMfcbXhqb9tS"
-}
 ```
 
 ##### Output

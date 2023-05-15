@@ -27,13 +27,15 @@ connection:
   host:
     type: string
     title: Host
-    description: TheHive host e.g. thehive.company.com or 10.3.4.50
+    description: TheHive host
+    example: thehive.company.com or 10.3.4.50
     required: true
   port:
     type: string
     title: Port
-    description: TheHive API port e.g. 9000
+    description: TheHive API port
     default: "9000"
+    example: 9000
     required: true
   protocol:
     type: string
@@ -42,27 +44,32 @@ connection:
     enum:
     - http
     - https
+    example: http
     required: true
   credentials:
     type: credential_username_password
     title: Credentials
     description: Username and password
+    example: {}
     required: false
   api_key:
     title: API key
     description: An optional API key for authentication via bearer token
     type: credential_secret_key
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
     required: false
   proxy:
-    type: object
     title: Proxy
     description: An optional dictionary containing proxy data, with HTTP or HTTPS
       as the key, and the proxy URL as the value
+    type: object
+    example: {}
     required: false
   verify:
-    type: boolean
     title: SSL Verify
     description: Verify the certificate
+    type: boolean
+    example: true
     default: true
     required: true
 types:
@@ -571,7 +578,7 @@ types:
       type: integer
 actions:
   get_user_by_id:
-    title: Get User By ID
+    title: Get User by ID
     description: Get information about a specific user
     input:
       id:
@@ -579,6 +586,7 @@ actions:
         description: The ID of the user
         type: string
         required: true
+        example: AV_ajI_oYMfcbXhqb9tS
     output:
       success:
         title: Success
@@ -603,11 +611,13 @@ actions:
         description: Name of the case
         type: string
         default: None
+        example: Case title
         required: false
       description:
         title: Case Description
         description: Description of the case, supports markdown
         type: string
+        example: Case description
         required: false
       severity:
         title: Severity
@@ -619,22 +629,26 @@ actions:
           - 3
           - 4
         default: 2
+        example: 2
         required: false
       startDate:
         title: Start Date
         description: Case start date (datetime in ms) (will default to now if left blank)
         type: integer
+        example: 1684170163000
         required: false
       tags:
         title: Tags
         description: List of case tags
         type: '[]string'
+        example: [case_tag_1, case_tag_2]
         required: false
       flag:
         title: Flag
         description: Case's flag, True to mark case as important
         default: false
         type: boolean
+        example: true
         required: false
       tlp:
         title: TLP
@@ -646,6 +660,7 @@ actions:
           - 2
           - 3
         default: 2
+        example: 2
         required: false
       pap:
         title: PAP
@@ -657,41 +672,49 @@ actions:
           - 2
           - 3
         default: 2
+        example: 2
         required: false
       summary:
         title: Summary
         description: Case summary
         type: string
+        example: Case summary
         required: false
       owner:
         title: Owner
         description: Case's assignee
         type: string
+        example: admin
         required: false
       metrics:
         title: Metrics
-        description: Case metrics collection. A JSON object where keys are defining metric name, and values are defining metric value.
+        description: Case metrics collection. A JSON object where keys are defining metric name, and values are defining metric value
         type: object
+        example: {}
         required: false
       customFields:
         title: Custom Fields
         description: Case custom fields
         type: object
+        example: {}
         required: false
       template:
         title: Case Template
-        description: Case template's name. If specified then the case is created using the given template.
+        description: Case template's name. If specified then the case is created using the given template
         type: string
+        example: Case template name
         required: false
       tasks:
         title: Task
         description: Case task
         type: '[]itask'
+        example: {}
         required: false
       json:
         title: JSON
         description: If the field is not equal to None, the case is instantiated using the JSON value instead of the arguements
         type: object
+        example: {}
         required: false
     output:
       case:
@@ -710,13 +733,15 @@ actions:
         required: false
       title:
         title: Title
-        description: Task's description
+        description: Task's title
         type: string
+        example: Task title
         required: false
       description:
         title: Description
         description: Task's description
         type: string
+        example: Task description
         required: false
       status:
         title: Status
@@ -727,26 +752,32 @@ actions:
           - "InProgress"
           - "Cancel"
           - "Completed"
-        default: "Waiting"
+        default: Waiting
+        example: Waiting
+        required: false
       flag:
         title: Flag
         description: Task's flag, 'True' to mark the task as important
         type: boolean
+        example: false
         default: false
       startDate:
         title: Start Date
         description: Task's start date, the date the task started at
         type: integer
+        example: 1684170163000
         required: false
       owner:
         title: Owner
         description: Task's assignee
         type: string
+        example: admin
         required: false
       json:
         title: JSON
         description:  If the field is not equal to None, the Task is instantiated using the JSON value instead of the arguements
         type: object
+        example: {}
         required: false
     output:
       case:
@@ -773,6 +804,7 @@ actions:
         title: Message
         description: Observable's description. If tags is empty, this is required
         type: string
+        example: Observable message
         required: false
       tlp:
         title: Traffic Light Protocol
@@ -784,6 +816,7 @@ actions:
           - 2
           - 3
         default: 2
+        example: 2
         required: false
       pap:
         title: Password Authentication Protocol
@@ -795,34 +828,40 @@ actions:
           - 2
           - 3
         default: 2
+        example: 2
         required: false
       ioc:
         title: Indicator of Compromise
         description: Observable's IOC, True to mark an observable as IOC
         type: boolean
         default: false
+        example: false
         required: false
       sighted:
         title: Sighted
         description: Observable's sighted flag, True to mark the observable as sighted
         type: boolean
         default: false
+        example: false
         required: false
       ignoreSimilarity:
         title: Ignore Similarity
         description: Observable's similarity ignore flag. True to ignore the observable during similarity computing
         type: boolean
         default: false
+        example: false
         required: false
       tags:
         title: Tags
         description: List of observable tags, required if message is None
         type: '[]string'
+        example: [tag_one, tag_two]
         required: false
       data:
         title: Data
         description: Observable's data
         type: string
+        example: {}
         required: false
     output:
       case:
@@ -867,6 +906,7 @@ actions:
         description: True to physically delete the case, False to mark the case as delete
         type: boolean
         default: false
+        example: false
         required: false
     output:
       type:

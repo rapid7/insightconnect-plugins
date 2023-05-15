@@ -34,13 +34,13 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "host": {
       "type": "string",
       "title": "Host",
-      "description": "TheHive host e.g. thehive.company.com or 10.3.4.50",
+      "description": "TheHive host",
       "order": 1
     },
     "port": {
       "type": "string",
       "title": "Port",
-      "description": "TheHive API port e.g. 9000",
+      "description": "TheHive API port",
       "default": "9000",
       "order": 2
     },

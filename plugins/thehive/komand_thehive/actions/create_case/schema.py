@@ -63,7 +63,7 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
     "metrics": {
       "type": "object",
       "title": "Metrics",
-      "description": "Case metrics collection. A JSON object where keys are defining metric name, and values are defining metric value.",
+      "description": "Case metrics collection. A JSON object where keys are defining metric name, and values are defining metric value",
       "order": 11
     },
     "owner": {
@@ -131,7 +131,7 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
     "template": {
       "type": "string",
       "title": "Case Template",
-      "description": "Case template's name. If specified then the case is created using the given template.",
+      "description": "Case template's name. If specified then the case is created using the given template",
       "order": 13
     },
     "title": {

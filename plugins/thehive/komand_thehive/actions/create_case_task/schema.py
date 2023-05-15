@@ -81,7 +81,7 @@ class CreateCaseTaskInput(insightconnect_plugin_runtime.Input):
     "title": {
       "type": "string",
       "title": "Title",
-      "description": "Task's description",
+      "description": "Task's title",
       "order": 2
     }
   }
