@@ -12,7 +12,7 @@
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* CheckPoint 2023-04-12
 
 # Documentation
 
@@ -70,10 +70,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|found|boolean|False|Returns true if file found|
-|query_response|object|False|Status of requested features|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|found|boolean|False|Returns true if file found|True|
+|query_response|object|False|Status of requested features|{}|
 
 Example output:
 
@@ -148,9 +148,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results|upload_response|False|Results from the upload|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|results|upload_response|False|Results from the upload|{}|
 
 Example output:
 
@@ -221,6 +221,8 @@ When using the local version of Check Point SandBlast the query report action mu
 * 1.0.0 - Initial plugin
 
 # Links
+
+* [Check Point website](https://www.checkpoint.com/)
 
 ## References
 
