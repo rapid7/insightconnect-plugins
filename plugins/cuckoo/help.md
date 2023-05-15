@@ -1,7 +1,7 @@
 # Description
 
 [Cuckoo Sandbox](https://cuckoosandbox.org/) is an open source automated malware analysis system. It enables
- tracing of API calls, file behavior, and analysis of memory and network traffic. Using the Cuckoo Sandbox plugin for
+tracing of API calls, file behavior, and analysis of memory and network traffic. Using the Cuckoo Sandbox plugin for
 Rapid7 InsightConnect, users can analyze files and URLs, manage tasks, and more.
 
 Use Cuckoo Sandbox in your automation workflows to manage tasks and analyze PCAPs or suspicious files obtained through
@@ -196,11 +196,11 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|error|boolean|True|Error true or false|
-|error_value|string|True|Error message|
-|message|string|True|Message associated with status code|
+|Name|Type|Required| Description                         |
+|----|----|--------|-------------------------------------|
+|error|boolean|True| Error true or false                 |
+|error_value|string|True| Error Message                       |
+|message|string|True| Message associated with status code |
 
 Example output:
 
@@ -633,13 +633,16 @@ This action is used to add a file (from URL) to the list of pending tasks.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|url|string|None|True|URL to analyze (multipart encoded content)|None|None|
+|Name|Type|Default|Required|Description|Enum| Example       |
+|----|----|-------|--------|-----------|----|---------------|
+|url|string|None|True|URL to analyze (multipart encoded content)|None|www.example.com|
 
 Example input:
 
 ```
+{
+  "url": "www.example.com"
+}
 ```
 
 ##### Output
@@ -832,6 +835,8 @@ _This plugin does not contain any troubleshooting information._
 * 0.1.0 - Initial plugin
 
 # Links
+
+* [cuckoo](https://cuckoosandbox.org/)
 
 ## References
 
