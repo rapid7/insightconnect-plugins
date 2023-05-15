@@ -21,9 +21,8 @@ class HiveAPI:
         return self._call_api("GET", f"/api/case/{case_id}")
 
     # Get Cases
-    # No Docs / Might have to remove this
     def get_cases(self):
-        return self._call_api("GET", "/api/case/_search", data={}, params={"range": "all", "sort": []})
+        return self._call_api("POST", "/api/case/_search")
 
     # Create Case
     def create_case(self, case):

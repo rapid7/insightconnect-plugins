@@ -30,7 +30,35 @@ class TestGetCases(TestCase):
     def test_get_cases(self, mock_get):
         mocked_request(mock_get)
         response = self.action.run()
-        expected = {}
+        expected = {
+            "list": [
+                {
+                    "severity": 2,
+                    "owner": "string",
+                    "summary": "string",
+                    "_routing": "case_id",
+                    "flag": False,
+                    "endDate": 1640000000000,
+                    "customFields": {},
+                    "_type": "case",
+                    "description": "string",
+                    "title": "string",
+                    "tags": ["string"],
+                    "createdAt": 1684188238010,
+                    "_parent": None,
+                    "createdBy": "admin",
+                    "caseId": 54,
+                    "tlp": 2,
+                    "metrics": {},
+                    "_id": "case_id",
+                    "id": "case_id",
+                    "_version": 1,
+                    "pap": 2,
+                    "startDate": 1640000000000,
+                    "status": "Open",
+                }
+            ]
+        }
         self.assertEqual(response, expected)
 
     @parameterized.expand(
