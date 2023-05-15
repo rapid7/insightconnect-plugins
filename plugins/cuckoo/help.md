@@ -523,7 +523,7 @@ This action is used to return the content of the PCAP associated with the given 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|task_id|integer|None|True|Task ID|None|None|
+|task_id|integer|None|True|Task ID|None|1234678910|
 
 Example input:
 

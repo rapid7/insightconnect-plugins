@@ -300,6 +300,7 @@ actions:
         type: integer
         description: Task ID
         required: true
+        example: 1234678910
       submit_id:
         title: Submit ID
         type: integer
