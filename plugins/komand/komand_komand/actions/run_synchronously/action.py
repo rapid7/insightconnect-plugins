@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import RunSynchronouslyInput, RunSynchronouslyOutput
 
 # Custom imports below
@@ -6,7 +6,7 @@ import requests
 import time
 
 
-class RunSynchronously(komand.Action):
+class RunSynchronously(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="run_synchronously",

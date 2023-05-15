@@ -4,7 +4,8 @@ products: [insightconnect]
 name: komand
 title: Komand
 description: Komand Meta-Actions
-version: 1.0.3
+version: 1.0.4
+supported_versions: ["2023-05-15"]
 vendor: rapid7
 support: community
 status: []
@@ -24,13 +25,15 @@ connection:
   url:
     title: URL
     type: string
-    description: URL to Komand server, e.g. https://komand.company.com
+    description: URL to Komand server
     required: true
+    example: https://komand.company.com
   credentials:
     title: Username and Password
     type: credential_username_password
     description: Username and password for user
     required: true
+    example: "{ 'username': 'user1', 'password': 'mypassword' }"
 triggers:
   job:
     title: Job
@@ -46,52 +49,62 @@ triggers:
         - succeeded
         - retried
         required: true
+        example: failed
     output:
       status:
         title: Status
         type: string
         description: Job status
         required: false
+        example: succeeded
       job_id:
         title: Job ID
         type: string
         description: Job ID
         required: false
+        example: b595ccea-f324-11ed-a05b-0242ac120003
       group_id:
         title: Group ID
         type: string
         description: Job group ID
         required: false
+        example: b595ccea-f324-11ed-a05b-0242ac120003
       workflow_uid:
         title: Workflow UID
         type: string
         description: Workflow UID
         required: false
+        example: b595ccea-f324-11ed-a05b-0242ac120003
       name:
         title: Name
         type: string
         description: Name
         required: false
+        example: example-name
       created_at:
         title: Created At
         type: string
         description: Created at
         required: false
+        example: Jan 01, 2000 0:00 AM
       updated_at:
         title: Updated At
         type: string
         description: Updated at
         required: false
+        example: Jan 01, 2000 0:00 AM
       ended_at:
         title: Ended At
         type: string
         description: Ended at
         required: false
+        example: Jan 01, 2000 0:00 AM
       url:
         title: URL
         type: string
         description: Job URL
         required: false
+        example: www.example.com
 actions:
   run_asynchronously:
     title: Run Asynchronously
@@ -102,27 +115,32 @@ actions:
         type: string
         description: Workflow name to run. Either this or UID should be provided
         required: false
+        example: example-name
       workflow_uid:
         title: Workflow UID
         type: string
         description: Workflow UID to run. Either this or name should be provided
         required: false
+
       input:
         title: Input
         type: object
         description: Input object to supply to the workflow job
         required: false
+        example: "{}"
     output:
       job_id:
         title: Job ID
         type: string
         description: Job ID
         required: false
+        example: b595ccea-f324-11ed-a05b-0242ac120003
       url:
         title: URL
         type: string
         description: Job URL
         required: false
+        example: www.example.com
   run_synchronously:
     title: Run Synchronously
     description: Run a workflow and wait for results
@@ -132,11 +150,13 @@ actions:
         type: string
         description: Workflow name to run. Either this or UID should be provided
         required: false
+        example: example-name
       workflow_uid:
         title: Workflow UID
         type: string
         description: Workflow UID to run. Either this or name should be provided
         required: false
+        example: b595ccea-f324-11ed-a05b-0242ac120003
       timeout:
         title: Timeout
         type: number
@@ -144,6 +164,7 @@ actions:
           no timeout
         required: true
         default: 150
+        example: 150
       completion_checks:
         title: Completion Checks
         description: How many times the executed workflow should be checked for completion
@@ -152,59 +173,69 @@ actions:
         type: number
         default: 10
         required: false
+        example: 10
       input:
         title: Input
         type: object
         description: Input object to supply to the workflow job
         required: false
+        example: "{}"
     output:
       status:
         title: Status
         type: string
         description: Job Status
         required: false
+        example: failed
       job_id:
         title: Job ID
         type: string
         description: Job ID
         required: false
+        example: b595ccea-f324-11ed-a05b-0242ac120003
       group_id:
         title: Group ID
         type: string
         description: Job Group ID
         required: false
+        example: b595ccea-f324-11ed-a05b-0242ac120003
       workflow_uid:
         title: Workflow UID
         type: string
         description: Workflow UID
         required: false
+        example: b595ccea-f324-11ed-a05b-0242ac120003
       name:
         title: Name
         type: string
         description: Name
         required: false
+        example: example-name
       steps:
         title: Steps
         description: Step outputs
         type: '[]object'
         required: false
+        example: "[{}]"
       created_at:
         title: Created At
         type: string
         description: Created at
         required: false
+        example: Jan 01, 2000 0:00 AM
       updated_at:
         title: Updated At
         type: string
         description: Updated at
-        required: false
+        example: Jan 01, 2000 0:00 AM
       ended_at:
         title: Ended At
         type: string
         description: Ended at
-        required: false
+        example: Jan 01, 2000 0:00 AM
       url:
         title: URL
         type: string
         description: Job URL
         required: false
+        example: www.example.com
