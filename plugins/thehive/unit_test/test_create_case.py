@@ -3,8 +3,8 @@ import os
 sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
-from icon_thehive.connection.connection import Connection
-from icon_thehive.actions.create_case import CreateCase
+from komand_thehive.connection.connection import Connection
+from komand_thehive.actions.create_case import CreateCase
 import json
 import logging
 
