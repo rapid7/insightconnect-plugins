@@ -1,7 +1,7 @@
 {
-	"spec": "58b86e01676a1e9ebdb381d024b98eb0",
-	"manifest": "675c011a4149446f9fe61d4fa37c82ca",
-	"setup": "3ca5988f8bcef8e8442fb666d84c5c5b",
+	"spec": "4c93c17e674184444aa771e4db4cfb1c",
+	"manifest": "ca97ccb2a01163e7fc05fc58e91207d6",
+	"setup": "7d231ba41b4dbc4384558cb37b288da3",
 	"schemas": [
 		{
 			"identifier": "cuckoo_status/schema.py",

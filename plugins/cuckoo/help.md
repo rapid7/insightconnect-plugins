@@ -20,14 +20,24 @@ throughout this documentation in place of real base64-encoded data.
 
 * Cuckoo Sandbox API URL for your Cuckoo instance
 
+# Supported Product Versions
+
+_There are no supported product versions listed._
+
 # Documentation
 
 ## Setup
 
 The connection configuration accepts the following parameters:
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|http://localhost:8090/api|True|Cuckoo Sandbox API URL|None|
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|url|string|http://localhost:8090/api|True|Cuckoo Sandbox API URL|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -39,16 +49,20 @@ This action is used to return details on the task associated with the specified 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|task_id|integer|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|task_id|integer|None|True|Task ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|found|boolean|False|None|
-|task|task|True|None|
+|task|task|True|Cuckoo task|
 
 Example output:
 
@@ -91,16 +105,21 @@ This action is used to return list of tasks.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|limit|integer|None|False|Maximum number of returned tasks|None|
-|offset|integer|None|False|Data offset|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|limit|integer|None|False|Maximum number of returned tasks|None|None|
+|offset|integer|None|False|Data offset|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|tasks|[]task|True|None|
+|tasks|[]task|True|Cuckoo tasks|
 
 Example output:
 
@@ -166,15 +185,21 @@ This action is used to remove the given task from the database and delete the re
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|task_id|integer|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|task_id|integer|None|True|Task ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status_code|integer|True|Status Code, i.e., 200 - no error, 404 - task not found, 500 - unable to delete task|
+|error|boolean|True|Error true or false|
+|error_value|string|True|Error message|
 |message|string|True|Message associated with status code|
 
 Example output:
@@ -194,17 +219,21 @@ This action is used to reschedule a task with the specified ID and priority (def
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|priority|integer|None|False|None|None|
-|task_id|integer|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|priority|integer|None|False|Priority|None|None|
+|task_id|integer|None|True|Task ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|True|None|
-|task_id|integer|True|None|
+|task_id|integer|True|Task ID|
 
 Example output:
 
@@ -223,9 +252,14 @@ This action is used to return details on the analysis machine associated with th
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|machine_name|string|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|machine_name|string|None|True|Machine name|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -273,15 +307,12 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|tasks|tasks|True|Details about analysis tasks|
-|diskspace|diskspace|True|Free, total and used diskspace of $CUCKOO/storage/analyses/, $CUCKOO/storage/binaries/, and specified tmppath|
-|hostname|string|True|None|
 |cpuload|[]float|True|CPU load for the past 1, 5 and 15 minutes respectively|
-|version|string|True|None|
-|mem_total|integer|True|None|
-|memory|boolean|True|None|
-|mem_avail|integer|True|None|
+|diskspace|diskspace|True|Free, total and used diskspace of $CUCKOO/storage/analyses/, $CUCKOO/storage/binaries/, and specified tmppath|
+|hostname|string|True|Cuckoo hostname|
 |machines|machines|True|Details about available and total analysis machines|
+|tasks|tasks|True|Details about analysis tasks|
+|version|string|True|Cuckoo version|
 
 The contents of this output vary greatly based on Cuckoo's internal settings.
 
@@ -331,17 +362,21 @@ This action is used to return one (JPEG) or all (ZIP) screenshots associated wit
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|screenshot_id|string|None|False|None|None|
-|task_id|integer|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|screenshot_id|string|None|False|Screenshot ID|None|None|
+|task_id|integer|None|True|Task ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|found|boolean|True|None|
-|screenshots|bytes|True|None|
+|screenshots|bytes|True|Base64 encoded screenshot|
 
 Example output:
 
@@ -360,17 +395,21 @@ This action is used to return the report associated with the specified task ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|task_id|integer|None|True|None|None|
-|format|string|None|False|One of [json/html/all/dropped/package_files]. Details on formats here: http://docs.cuckoosandbox.org/en/latest/usage/api/#tasks-report|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|format|string|None|False|One of [json/html/all/dropped/package_files]. Details on formats here: http://docs.cuckoosandbox.org/en/latest/usage/api/#tasks-report|None|None|
+|task_id|integer|None|True|Task ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|report|bytes|True|None|
-|message|string|True|None|
+|report|bytes|True|Base64 encoded report|
 
 Example output:
 
@@ -389,17 +428,21 @@ This action is used to return one memory dump file associated with the specified
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|pid|string|None|True|None|None|
-|task_id|integer|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|pid|string|None|True|Process ID|None|None|
+|task_id|integer|None|True|Task ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|found|boolean|True|None|
-|contents|bytes|True|None|
+|contents|bytes|True|Base64 encoded contents|
 
 Example output:
 
@@ -424,8 +467,7 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|message|string|False|Message returned in event of error|
-|vpns|[]vpn|True|None|
+|vpns|[]vpn|True|VPN status array|
 
 This action is currently not supported by Cuckoo for Mac OS and will return a 500.
 
@@ -479,15 +521,19 @@ This action is used to return the content of the PCAP associated with the given 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|task_id|integer|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|task_id|integer|None|True|Task ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|found|boolean|True|None|
 |contents|bytes|True|PCAP contents|
 
 Example output:
@@ -507,19 +553,22 @@ This action is used to add one or more files and/or files embedded in archives t
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|files|[]file|None|True|List of files of the format: {'filename': 'blah.exe', 'contents': 'YmFzZTY0Cg=='}|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|files|[]file|None|True|List of files of the format: {'filename': 'blah.exe', 'contents': '<b64-encoded-bytes>'}|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|submit_id|integer|True|None|
-|message|string|True|Reason for failed submission|
-|errors|[]string|True|None|
-|success|boolean|True|None|
-|task_id|integer|True|None|
+|errors|[]string|False|Errors if any|
+|submit_id|integer|False|Submission ID|
+|task_id|integer|True|Task ID|
 
 Example output:
 
@@ -539,18 +588,23 @@ This action is used to return details on the file matching either the specified 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|sha256|string|None|False|None|None|
-|id|integer|None|False|None|None|
-|md5|string|None|False|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|integer|None|False|ID|None|None|
+|md5|string|None|False|MD5 Hash|None|None|
+|sha256|string|None|False|SHA256 Hash|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|sample|sample|True|None|
-|found|boolean|True|None|
+|data|data|True|Data|
+|error|boolean|True|Error information|
 
 Example output:
 
@@ -579,15 +633,20 @@ This action is used to add a file (from URL) to the list of pending tasks.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|URL to analyze (multipart encoded content)|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|url|string|None|True|URL to analyze (multipart encoded content)|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|task_id|integer|True|None|
+|task_id|integer|True|Task ID|
 
 Example output:
 
@@ -605,16 +664,20 @@ This action is used to return a list of memory dump files or one memory dump fil
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|task_id|integer|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|task_id|integer|None|True|Task ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|found|boolean|True|None|
-|dump_files|[]string|True|None|
+|dump_files|[]string|True|Dumped Files|
 
 Example output:
 
@@ -639,8 +702,7 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status_code|integer|True|Status Code, i.e., 200 - success, 403 - call can be made only in debug mode, 500 - error|
-|message|string|True|Message associated with status code|
+|message|string|True|Exit message|
 
 Example output:
 
@@ -659,17 +721,21 @@ This action is used to add a reboot task to the database from an existing analys
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|task_id|integer|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|task_id|integer|None|True|Task ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|reboot_id|integer|True|None|
-|success|boolean|True|None|
-|task_id|integer|True|None|
+|reboot_id|integer|True|Reboot ID|
+|task_id|integer|True|Task ID|
 
 Example output:
 
@@ -683,47 +749,25 @@ Example output:
 
 ```
 
-#### Rerun Report
-
-This action is used to re-run reporting for a task associated with the specified task ID.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|task_id|integer|None|True|None|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|None|
-
-Example output:
-
-```
-
-{
-  "success": true
-}
-
-```
-
 #### Get File
 
 This action is used to return the binary content of the file matching the specified SHA256 hash.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|sha256|string|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|sha256|string|None|True|SHA256 Hash|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|found|boolean|True|None|
 |contents|bytes|True|Binary contents|
 
 Example output:
@@ -743,9 +787,14 @@ This action is used to re-run reporting for a task associated with the specified
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|task_id|integer|None|True|Task ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|task_id|integer|None|True|Task ID|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -772,6 +821,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.3 - Updated Requests version to 2.20.0
 * 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Bug fix for Submit Files where Submit ID was required
 * 1.0.0 - Support web server mode | Bug fix for testing outputs | Semver compliance
