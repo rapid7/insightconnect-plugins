@@ -80,6 +80,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
             "boundary_events": ["197f96ef45ad08592bfea604f60b6abcfc7d4bf2", "8c68922ce0e81f42e4db701317aa7f219049b144"],
             "last_request_timestamp": "2023-02-23T22:00:00Z",
             "latest_event_timestamp": "2023-02-22T21:44:44Z",
+            "status_code": 200,
         }
 
         mock_call.return_value = expected_output
@@ -238,11 +239,13 @@ class TestGetUserActivityEvents(unittest.TestCase):
             "boundary_events": ["854d8b971985244502ba5714f372344a9374c538"],
             "last_request_timestamp": "2023-02-23T22:00:00Z",
             "latest_event_timestamp": "2023-02-22T21:45:00Z",
+            "status_code": 200,
         }
         second_expected_state = {
             "boundary_events": ["b308ba69b3beb7207f8271ef7a78f84da98bed67"],
             "last_request_timestamp": "2023-02-23T23:00:00Z",
             "latest_event_timestamp": "2023-02-23T21:44:44Z",
+            "status_code": 200,
         }
 
         # First run
@@ -264,7 +267,12 @@ class TestGetUserActivityEvents(unittest.TestCase):
         mock_datetime.return_value = datetime.datetime(2000, 1, 1)
         output, state = self.action.run(state={})
 
-        expected_state = {"boundary_events": [], "last_request_timestamp": "2000-01-01T00:00:00Z"}
+        expected_state = {
+            "boundary_events": [],
+            "last_request_timestamp": "2000-01-01T00:00:00Z",
+            "latest_event_timestamp": None,
+            "status_code": 500,
+        }
         expected_output = []
         self.assertDictEqual(state, expected_state)
         self.assertListEqual(output, expected_output)

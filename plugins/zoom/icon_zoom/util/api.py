@@ -23,6 +23,14 @@ class BearerAuth(AuthBase):
         return request
 
 
+class AuthenticationError(Exception):
+    pass
+
+
+class AuthenticationRetryLimitError(Exception):
+    pass
+
+
 class ZoomAPI:
     def __init__(
         self,
@@ -41,6 +49,8 @@ class ZoomAPI:
         self.logger = logger
 
         self.oauth_token: Optional[str] = None
+
+    def authenticate(self):
         self._refresh_oauth_token()
 
     def get_user(self, user_id: str) -> Optional[dict]:
@@ -117,8 +127,8 @@ class ZoomAPI:
     def _handle_oauth_status_codes(self, response: Response) -> None:
         # Handle known status codes
         codes = {
-            400: PluginException(preset=PluginException.Preset.BAD_REQUEST),
-            401: PluginException(preset=PluginException.Preset.UNAUTHORIZED),
+            400: AuthenticationError,
+            401: AuthenticationError,
             403: PluginException(
                 cause="Configured credentials do not have permission for this API endpoint.",
                 assistance="Please ensure credentials have required permissions.",
@@ -208,12 +218,7 @@ class ZoomAPI:
         # 401 requires extra logic, so it is not included in the 4xx dict
         if response.status_code == 401:
             if retry_401_count == (self.oauth_retry_limit - 1):  # -1 to account for retries starting at 0
-                raise PluginException(
-                    cause="OAuth authentication retry limit was met.",
-                    assistance="Ensure your OAuth connection credentials are valid. "
-                    "If running a large number of integrations with Zoom, consider "
-                    "increasing the OAuth authentication retry limit to accommodate.",
-                )
+                raise AuthenticationRetryLimitError
             self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Zoom...")
             retry_401_count += 1
             self._refresh_oauth_token()

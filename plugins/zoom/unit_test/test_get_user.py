@@ -26,8 +26,10 @@ class TestGetUser(TestCase):
         self.action = Util.default_connector(GetUser())
         self.params = {Input.USER_ID: STUB_USER_ID}
 
+    @mock.patch("icon_zoom.util.api.ZoomAPI.authenticate")
     @mock.patch("requests.request", side_effect=mock_request_201)
-    def test_get_user_success(self, mock_get):
+    def test_get_user_success(self, mock_get, mock_authenticate):
+        mock_authenticate.return_value = 200
         response = self.action.run(self.params)
         expected_response = {
             "user": {

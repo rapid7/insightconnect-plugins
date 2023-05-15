@@ -2,7 +2,9 @@ import insightconnect_plugin_runtime
 from .schema import CreateUserInput, CreateUserOutput, Input, Output, Component
 
 # Custom imports below
-from icon_zoom.util.util import UserType
+from insightconnect_plugin_runtime.exceptions import PluginException
+from icon_zoom.util.util import UserType, oauth_retry_limit_exception, authentication_error_exception
+from icon_zoom.util.api import AuthenticationRetryLimitError, AuthenticationError
 
 
 class CreateUser(insightconnect_plugin_runtime.Action):
@@ -24,6 +26,12 @@ class CreateUser(insightconnect_plugin_runtime.Action):
                 "last_name": params.get(Input.LAST_NAME),
             },
         }
-        user = self.connection.zoom_api.create_user(payload)
+        try:
+            self.connection.zoom_api.authenticate()
+            user = self.connection.zoom_api.create_user(payload)
+        except AuthenticationRetryLimitError:
+            raise oauth_retry_limit_exception
+        except AuthenticationError:
+            raise authentication_error_exception
 
         return user
