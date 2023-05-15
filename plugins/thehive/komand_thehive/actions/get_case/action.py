@@ -16,6 +16,7 @@ class GetCase(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
 
         case_id = params.get(Input.ID)
+
         result = self.connection.client.get_case(case_id)
 
         return {Output.CASE: result}

@@ -14,22 +14,8 @@ class GetCases(insightconnect_plugin_runtime.Action):
             output=GetCasesOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}): # pylint: disable=unused-argument
 
         response = self.connection.client.get_cases()
 
         return {Output.LIST: response}
-
-        # client = self.connection.client
-        #
-        # try:
-        #     cases = client.find_cases()
-        #     cases.raise_for_status()
-        # except requests.exceptions.HTTPError:
-        #     self.logger.error(cases.json())
-        #     raise
-        # except:
-        #     self.logger.error("Failed to get cases")
-        #     raise
-        #
-        # return {"list": cases.json()}

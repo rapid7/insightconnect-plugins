@@ -13,7 +13,8 @@ class GetCurrentUser(insightconnect_plugin_runtime.Action):
             output=GetCurrentUserOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}): # pylint: disable=unused-argument
 
         response = self.connection.client.get_current_user()
+
         return {Output.SUCCESS: response}
