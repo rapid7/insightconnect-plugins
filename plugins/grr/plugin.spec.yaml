@@ -4,7 +4,7 @@ products: [insightconnect]
 name: grr
 title: Google Rapid Response
 description: Organize and start threat hunts using GRR
-version: 2.0.2
+version: 3.0.0
 vendor: rapid7
 support: community
 status: []
@@ -138,7 +138,7 @@ actions:
       duration:
         title: Duration
         description: Until when should the client stay in the fast poll mode
-        type: boolean
+        type: integer
         required: false
         default: 3600
       email:
@@ -244,13 +244,12 @@ actions:
         required: false
       dependencies:
         title: Dependencies
-        description: Specifies how dependencies should be handled
+        description: Specifies how dependencies should be handled. Use the knowledgebase as a cache. If knowledgebase isn't present, a new one will be populated
         type: string
-        default: Use the knowledgebase as a cache. If knowledgebase isn't present,
-          a new one will be populated
+        default: USE_CACHED
         required: false
         enum:
-        - USE_CACHED (default)
+        - USE_CACHED
         - IGNORE_DEPS
         - FETCH_NOW
       ignore_interpolation_errors:
