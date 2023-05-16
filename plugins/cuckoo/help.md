@@ -36,10 +36,15 @@ The connection configuration accepts the following parameters:
 
 Example input:
 
+
 ```
+
 {
+
   "url": "http://localhost:8090/api"
+
 }
+
 ```
 
 ## Technical Details
@@ -58,10 +63,13 @@ This action is used to return details on the task associated with the specified 
 
 Example input:
 
+
 ```
+
 {
   "task_id": 12345678910
 }
+
 ```
 
 ##### Output
@@ -118,11 +126,14 @@ This action is used to return list of tasks.
 
 Example input:
 
+
 ```
+
 {
   "limit": 10,
   "offset": 5
 }
+
 ```
 
 ##### Output
@@ -561,8 +572,9 @@ Example input:
 
 ```
 {
-  task_id: 1234568910
+  "task_id": 1234568910
 }
+
 ```
 
 ##### Output
@@ -593,10 +605,15 @@ This action is used to add one or more files and/or files embedded in archives t
 |files|[]file|None|True|List of files of the format: {'filename': 'blah.exe', 'contents': '<b64-encoded-bytes>'}|None|[{"filename": "example.exe", "contents": "VGhpcyBpcyBhbiBleGFtcGxl"}]|
 
 Example input:
-
+ 
 ```
 {
-  "files": [{"filename": "example.exe", "contents": "VGhpcyBpcyBhbiBleGFtcGxl"}]
+   "files":[
+      {
+         "filename":"example.exe",
+         "contents":"VGhpcyBpcyBhbiBleGFtcGxl"
+      }
+   ]
 }
 ```
 
@@ -699,7 +716,7 @@ Example output:
 ```
 
 {
-  "task_id" : 1
+  "task_id" : 12345678910
 }
 
 ```
@@ -773,6 +790,7 @@ This action is used to add a reboot task to the database from an existing analys
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |task_id|integer|None|True|Task ID|None|12345678910|
+
 Example input:
 
 ```
@@ -813,9 +831,11 @@ This action is used to return the binary content of the file matching the specif
 Example input:
 
 ```
+
 {
   "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
 }
+
 ```
 
 ##### Output
@@ -845,12 +865,15 @@ This action is used to re-run reporting for a task associated with the specified
 |----|----|-------|--------|-----------|----|-------|
 |task_id|integer|None|True|Task ID|None|12345678910|
 
+
 Example input:
 
 ```
+
 {
   "task_id": 12345678910
 }
+
 ```
 
 ##### Output
