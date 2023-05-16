@@ -294,6 +294,7 @@ actions:
         description: 'List of files of the format: {''filename'': ''blah.exe'', ''contents'':
           ''<b64-encoded-bytes>''}'
         required: true
+        example: [{'filename': 'example.exe', 'contents':'VGhpcyBpcyBhbiBleGFtcGxl'}]
     output:
       task_id:
         title: Task ID
@@ -318,10 +319,12 @@ actions:
         description: Maximum number of returned tasks
         type: integer
         required: false
+        example: 10
       offset:
         description: Data offset
         type: integer
         required: false
+        example: 5
     output:
       tasks:
         type: '[]task'
@@ -336,6 +339,7 @@ actions:
         type: integer
         required: true
         description: Task ID
+        example: 12345678910
     output:
       task:
         type: task
@@ -351,10 +355,12 @@ actions:
         type: integer
         required: true
         description: Task ID
+        example: 12345678910
       priority:
         type: integer
         description: Priority
         required: false
+        example: 1
     output:
       task_id:
         title: Task ID
@@ -370,6 +376,7 @@ actions:
         type: integer
         required: true
         description: Task ID
+        example: 12345678910
     output:
       error:
         title: Error
@@ -395,12 +402,14 @@ actions:
         type: integer
         required: true
         description: Task ID
+        example: 12345678910
       format:
         title: Report Format
         description: 'One of [json/html/all/dropped/package_files]. Details on formats
           here: http://docs.cuckoosandbox.org/en/latest/usage/api/#tasks-report'
         type: string
         required: false
+        example: json
     output:
       report:
         type: bytes
@@ -416,11 +425,13 @@ actions:
         type: integer
         required: true
         description: Task ID
+        example: 12345678910
       screenshot_id:
         title: Screenshot ID
         type: string
         description: Screenshot ID
         required: false
+        example: 12345678910
     output:
       screenshots:
         type: bytes
@@ -435,6 +446,7 @@ actions:
         type: integer
         required: true
         description: Task ID
+        example: 12345678910
     output:
       success:
         type: boolean
@@ -449,6 +461,7 @@ actions:
         type: integer
         required: true
         description: Task ID
+        example: 12345678910
     output:
       task_id:
         title: Task ID
@@ -470,6 +483,7 @@ actions:
         type: integer
         required: true
         description: Task ID
+        example: 12345678910
     output:
       dump_files:
         title: Dump Files
@@ -485,11 +499,13 @@ actions:
         type: integer
         required: true
         description: Task ID
+        example: 12345678910
       pid:
         title: Process ID
         type: string
         required: true
         description: Process ID
+        example: 12345678910
     output:
       contents:
         title: Dump Contents
@@ -506,16 +522,19 @@ actions:
         type: string
         description: MD5 Hash
         required: false
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
       sha256:
         title: SHA256
         type: string
         description: SHA256 Hash
         required: false
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
       id:
         title: ID
         type: integer
         description: ID
         required: false
+        example: 12345678910
     output:
       data:
         title: Data
@@ -537,6 +556,7 @@ actions:
         type: string
         required: true
         description: SHA256 Hash
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
     output:
       contents:
         description: Binary contents
@@ -551,6 +571,7 @@ actions:
         type: integer
         required: true
         description: Task ID
+        example: 12345678910
     output:
       contents:
         description: PCAP contents
@@ -574,6 +595,7 @@ actions:
         type: string
         required: true
         description: Machine name
+        example: example_machine
     output:
       machine:
         description: Machine details
