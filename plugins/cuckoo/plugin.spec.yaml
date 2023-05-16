@@ -315,6 +315,7 @@ actions:
         type: '[]string'
         description: Errors if any
         required: false
+        example: ["ExampleError"]
   list_tasks:
     title: List Tasks
     description: Returns list of tasks

@@ -209,11 +209,11 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required| Description                         |
-|----|----|--------|-------------------------------------|
-|error|boolean|True| Error true or false                 |
-|error_value|string|True| Error Message                       |
-|message|string|True| Message associated with status code |
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|error|boolean|True|Error true or false|
+|error_value|string|True|Error message|
+|message|string|True|Message associated with status code|
 
 Example output:
 
@@ -391,7 +391,7 @@ Example input:
 
 ```
 {
-  "screenshot_id": 12345678910,
+  "sreenshot_id": 12345678910,
   "task_id": 12345678910
 }
 ```
@@ -596,7 +596,7 @@ Example input:
 
 ```
 {
-  "list": [{'filename': 'example.exe', 'contents':'VGhpcyBpcyBhbiBleGFtcGxl'}]
+  "files": [{'filename': 'example.exe', 'contents':'VGhpcyBpcyBhbiBleGFtcGxl'}]
 }
 ```
 
@@ -777,6 +777,9 @@ This action is used to add a reboot task to the database from an existing analys
 Example input:
 
 ```
+{
+  "task_id": 12345678910
+}
 ```
 
 ##### Output
