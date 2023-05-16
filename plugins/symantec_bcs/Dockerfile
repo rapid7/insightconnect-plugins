@@ -12,17 +12,15 @@ RUN apt-get update
 RUN apt-get install -y libmagic-dev
 RUN pip install python-magic
 
-# End package dependencies
-
-# Add source code
 WORKDIR /python/src
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD . /python/src
 
-# Install pip dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-# Install plugin
-RUN python setup.py build && python setup.py install
+RUN	python setup.py build && python setup.py install
+
+# User to run plugin code. The two supported users are: root, nobody
+USER nobody
 
 ENTRYPOINT ["/usr/local/bin/komand_symantec_bcs"]
