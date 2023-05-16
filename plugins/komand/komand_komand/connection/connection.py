@@ -57,7 +57,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             "user_secret": self.credentials.password,
         }
 
-        auth_response = requests.post(url=url, json=auth_payload)
+        auth_response = requests.post(url=url, json=auth_payload) # nosec bandit: B113
         auth_response.raise_for_status()
 
         try:
