@@ -54,7 +54,7 @@ class DeleteTaskOutput(komand.Output):
     },
     "error_value": {
       "type": "string",
-      "title": "Error message",
+      "title": "Error Message",
       "description": "Error message",
       "order": 2
     },

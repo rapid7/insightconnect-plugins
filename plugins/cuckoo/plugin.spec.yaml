@@ -388,7 +388,7 @@ actions:
         type: boolean
         required: true
       error_value:
-        title: Error message
+        title: Error Message
         description: Error message
         type: string
         required: true

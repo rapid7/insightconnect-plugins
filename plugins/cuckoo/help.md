@@ -209,22 +209,6 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|error|boolean|True|Error true or false|
-|error_value|string|True|Error message|
-|message|string|True|Message associated with status code|
-
-Example input:
-
-```
-{
-  "task_id": 12345678910
-}
-```
-
-##### Output
-
 |Name|Type|Required| Description                         |
 |----|----|--------|-------------------------------------|
 |error|boolean|True| Error true or false                 |
