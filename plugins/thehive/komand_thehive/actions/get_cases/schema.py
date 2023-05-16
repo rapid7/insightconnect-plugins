@@ -11,7 +11,7 @@ class Input:
     pass
 
 class Output:
-    LIST = "list"
+    SUCCESS = "success"
     
 
 class GetCasesInput(insightconnect_plugin_runtime.Input):
@@ -29,9 +29,9 @@ class GetCasesOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "list": {
+    "success": {
       "type": "array",
-      "title": "List",
+      "title": "Success",
       "description": "List of cases",
       "items": {
         "$ref": "#/definitions/case"
@@ -147,7 +147,7 @@ class GetCasesOutput(insightconnect_plugin_runtime.Output):
           "order": 37
         },
         "id": {
-          "type": "string",
+          "type": "integer",
           "title": "ID",
           "description": "ID",
           "order": 1

@@ -22,7 +22,7 @@ class GetCaseInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "id": {
-      "type": "string",
+      "type": "integer",
       "title": "Case ID",
       "description": "ID for the case",
       "order": 1
@@ -162,7 +162,7 @@ class GetCaseOutput(insightconnect_plugin_runtime.Output):
           "order": 37
         },
         "id": {
-          "type": "string",
+          "type": "integer",
           "title": "ID",
           "description": "ID",
           "order": 1

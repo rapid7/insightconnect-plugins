@@ -1,7 +1,6 @@
 import json
 from typing import Optional, Union
 
-import insightconnect_plugin_runtime.exceptions
 import requests
 from requests.auth import HTTPBasicAuth
 from insightconnect_plugin_runtime.exceptions import PluginException

@@ -13,8 +13,7 @@ class Input:
     
 
 class Output:
-    MESSAGE = "message"
-    TYPE = "type"
+    SUCCESS = "success"
     
 
 class CloseCaseInput(insightconnect_plugin_runtime.Input):
@@ -31,7 +30,7 @@ class CloseCaseInput(insightconnect_plugin_runtime.Input):
       "order": 2
     },
     "id": {
-      "type": "string",
+      "type": "integer",
       "title": "Case ID",
       "description": "ID for the case",
       "order": 1
@@ -53,22 +52,14 @@ class CloseCaseOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "message": {
-      "type": "string",
-      "title": "Message",
-      "description": "Closed case message",
-      "order": 2
-    },
-    "type": {
-      "type": "string",
-      "title": "Type",
-      "description": "Closed case type",
+    "success": {
+      "type": "object",
+      "title": "Success",
       "order": 1
     }
   },
   "required": [
-    "message",
-    "type"
+    "success"
   ]
 }
     """)

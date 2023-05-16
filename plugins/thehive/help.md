@@ -1,4 +1,4 @@
-################################
+##############################################
 
 
 
@@ -104,7 +104,7 @@ Close a case by ID
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |force|boolean|False|False|True to physically delete the case, False to mark the case as delete|None|False|
-|id|string|None|True|ID for the case|None|AV_ajI_oYMfcbXhqb9tS|
+|id|integer|None|True|ID for the case|None|50|
 
 ```
 {
@@ -117,10 +117,6 @@ Close a case by ID
 Example input:
 
 ```
-{
-  "force": false,
-  "id": "AV_ajI_oYMfcbXhqb9tS"
-}
 ```
 
 ##### Output
@@ -224,9 +220,9 @@ Create a new case observable
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|data|string|None|False|Observable's data|None|None|
-|datatype|string|None|False|Observables Data Type|None|None|
-|id|string|None|False|ID for the case|None|AV_ajI_oYMfcbXhqb9tS|
+|data|string|None|False|Observable's data|None|Test data for observable|
+|datatype|string|None|False|Observables Data Type|None|domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other|
+|id|integer|None|False|ID for the case|None|50|
 |ignoreSimilarity|boolean|False|False|Observable's similarity ignore flag. True to ignore the observable during similarity computing|None|False|
 |ioc|boolean|False|False|Observable's IOC, True to mark an observable as IOC|None|False|
 |message|string|None|False|Observable's description. If tags is empty, this is required|None|Observable message|
@@ -253,7 +249,21 @@ Create a new case observable
 Example input:
 
 ```
-
+{
+  "data": "Test data for observable",
+  "datatype": "domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other",
+  "id": 50,
+  "ignoreSimilarity": false,
+  "ioc": false,
+  "message": "Observable message",
+  "pap": 2,
+  "sighted": false,
+  "tags": [
+    "tag_one",
+    "tag_two"
+  ],
+  "tlp": 2
+}
 ```
 
 ##### Output
@@ -294,7 +304,7 @@ Create a new case task
 |----|----|-------|--------|-----------|----|-------|
 |description|string|None|False|Task's description|None|Task description|
 |flag|boolean|False|False|Task's flag, 'True' to mark the task as important|None|False|
-|id|string|None|False|ID for the case|None|AV_ajI_oYMfcbXhqb9tS|
+|id|integer|None|False|ID for the case|None|50|
 |json|object|None|False|If the field is not equal to None, the Task is instantiated using the JSON value instead of the arguements|None|None|
 |owner|string|None|False|Task's assignee|None|admin|
 |startDate|integer|None|False|Task's start date, the date the task started at|None|1684170163000|
@@ -351,7 +361,7 @@ Retrieve a case by ID
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|ID for the case|None|AV_ajI_oYMfcbXhqb9tS|
+|id|integer|None|True|ID for the case|None|50|
 
 ```
 {
@@ -362,7 +372,7 @@ Example input:
 
 ```
 {
-  "id": "AV_ajI_oYMfcbXhqb9tS"
+  "id": 50
 }
 ```
 

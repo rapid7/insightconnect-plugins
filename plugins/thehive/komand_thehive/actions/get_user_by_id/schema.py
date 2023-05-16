@@ -87,7 +87,7 @@ class GetUserByIdOutput(insightconnect_plugin_runtime.Output):
           "order": 3
         },
         "id": {
-          "type": "string",
+          "type": "integer",
           "title": "ID",
           "description": "ID",
           "order": 11

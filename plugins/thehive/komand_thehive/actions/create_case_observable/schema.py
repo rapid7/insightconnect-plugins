@@ -43,7 +43,7 @@ class CreateCaseObservableInput(insightconnect_plugin_runtime.Input):
       "order": 2
     },
     "id": {
-      "type": "string",
+      "type": "integer",
       "title": "Case ID",
       "description": "ID for the case",
       "order": 1

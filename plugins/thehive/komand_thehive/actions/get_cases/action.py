@@ -1,8 +1,7 @@
 import insightconnect_plugin_runtime
-from .schema import GetCasesInput, GetCasesOutput, Component, Input, Output
+from .schema import GetCasesInput, GetCasesOutput, Component, Output
 
 # Custom imports below
-import requests
 
 
 class GetCases(insightconnect_plugin_runtime.Action):
@@ -18,4 +17,4 @@ class GetCases(insightconnect_plugin_runtime.Action):
 
         response = self.connection.client.get_cases()
 
-        return {Output.LIST: response}
+        return {Output.SUCCESS: response}

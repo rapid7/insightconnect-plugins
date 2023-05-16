@@ -77,8 +77,8 @@ types:
     id:
       title: Case ID
       description: ID for the case
-      example: AV_ajI_oYMfcbXhqb9tS
-      type: string
+      example: 50
+      type: integer
       required: false
     title:
       title: Title
@@ -160,7 +160,7 @@ types:
     id:
       title: ID
       description: ID
-      type: string
+      type: integer
       required: false
     createdAt:
       title: Created At
@@ -175,7 +175,7 @@ types:
     id:
       title: ID
       description: ID
-      type: string
+      type: integer
       required: true
     _type:
       title: Type
@@ -235,7 +235,7 @@ types:
     tags:
       title: Tags
       description: Case tags
-      type: '[]string'
+      type: "[]string"
       required: false
     flag:
       title: Flag
@@ -730,8 +730,8 @@ actions:
       id:
         title: Case ID
         description: ID for the case
-        example: AV_ajI_oYMfcbXhqb9tS
-        type: string
+        example: 50
+        type: integer
         required: false
       title:
         title: Title
@@ -794,8 +794,8 @@ actions:
       id:
         title: Case ID
         description: ID for the case
-        example: AV_ajI_oYMfcbXhqb9tS
-        type: string
+        example: 50
+        type: integer
         required: false
       datatype:
         title: Data Type
@@ -864,7 +864,7 @@ actions:
         title: Data
         description: Observable's data
         type: string
-        example: {}
+        example: Test data for observable
         required: false
     output:
       case:
@@ -878,8 +878,8 @@ actions:
       id:
         title: Case ID
         description: ID for the case
-        example: AV_ajI_oYMfcbXhqb9tS
-        type: string
+        example: 50
+        type: integer
         required: true
     output:
       case:
@@ -890,9 +890,10 @@ actions:
     title: Get Cases
     description: Retrieve list of cases
     output:
-      list:
-        type: '[]case'
+      success:
+        title: Success
         description: List of cases
+        type: '[]case'
         required: false
   close_case:
     title: Close Case
@@ -901,8 +902,8 @@ actions:
       id:
         title: Case ID
         description: ID for the case
-        example: AV_ajI_oYMfcbXhqb9tS
-        type: string
+        example: 50
+        type: integer
         required: true
       force:
         title: Force
@@ -912,11 +913,7 @@ actions:
         example: false
         required: false
     output:
-      type:
-        type: string
+      success:
+        title: Success
+        type: object
         required: true
-        description: Closed case type
-      message:
-        type: string
-        required: true
-        description: Closed case message

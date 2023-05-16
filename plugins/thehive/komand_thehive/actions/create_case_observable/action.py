@@ -2,7 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import CreateCaseObservableInput, CreateCaseObservableOutput, Component, Input, Output
 
 # Custom imports below
-import requests
 
 
 class CreateCaseObservable(insightconnect_plugin_runtime.Action):
