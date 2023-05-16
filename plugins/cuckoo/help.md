@@ -517,7 +517,7 @@ _This action does not contain any inputs._
 |----|----|--------|-----------|
 |vpns|[]vpn|True|VPN status array|
 
-This action is currently not supported by Cuckoo for Mac OS and will return a 500.
+This action is currently not supported by Cuckoo for MAC OS and will return a 500.
 
 #### List Machines
 

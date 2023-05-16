@@ -286,6 +286,7 @@ actions:
         type: integer
         description: Task ID
         required: true
+        example: 12345678910
   submit_files:
     title: Submit Files
     description: Adds one or more files and/or files embedded in archives to the list
@@ -369,6 +370,7 @@ actions:
         type: integer
         description: Task ID
         required: true
+        example: 12345678910
   delete_task:
     title: Delete Task
     description: Removes the given task from the database and deletes the results
@@ -470,6 +472,7 @@ actions:
         type: integer
         description: Task ID
         required: true
+        example: 12345678910
       reboot_id:
         title: Reboot ID
         type: integer
