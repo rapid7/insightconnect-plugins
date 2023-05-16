@@ -32,11 +32,14 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|url|string|http://localhost:8090/api|True|Cuckoo Sandbox API URL|None|None|
+|url|string|http://localhost:8090/api|True|Cuckoo Sandbox API URL|None|http://localhost:8090/api|
 
 Example input:
 
 ```
+{
+  "url": "http://localhost:8090/api"
+}
 ```
 
 ## Technical Details
@@ -51,11 +54,14 @@ This action is used to return details on the task associated with the specified 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|task_id|integer|None|True|Task ID|None|None|
+|task_id|integer|None|True|Task ID|None|12345678910|
 
 Example input:
 
 ```
+{
+  "task_id": 12345678910
+}
 ```
 
 ##### Output
@@ -107,12 +113,16 @@ This action is used to return list of tasks.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|limit|integer|None|False|Maximum number of returned tasks|None|None|
-|offset|integer|None|False|Data offset|None|None|
+|limit|integer|None|False|Maximum number of returned tasks|None|10|
+|offset|integer|None|False|Data offset|None|5|
 
 Example input:
 
 ```
+{
+  "limit": 10,
+  "offset": 5
+}
 ```
 
 ##### Output
@@ -187,11 +197,30 @@ This action is used to remove the given task from the database and delete the re
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|task_id|integer|None|True|Task ID|None|None|
+|task_id|integer|None|True|Task ID|None|12345678910|
 
 Example input:
 
 ```
+{
+  "task_id": 12345678910
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|error|boolean|True|Error true or false|
+|error_value|string|True|Error message|
+|message|string|True|Message associated with status code|
+
+Example input:
+
+```
+{
+  "task_id": 12345678910
+}
 ```
 
 ##### Output
@@ -221,12 +250,16 @@ This action is used to reschedule a task with the specified ID and priority (def
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|priority|integer|None|False|Priority|None|None|
-|task_id|integer|None|True|Task ID|None|None|
+|priority|integer|None|False|Priority|None|1|
+|task_id|integer|None|True|Task ID|None|12345678910|
 
 Example input:
 
 ```
+{
+  "priority": 1,
+  "task_id": 12345678910
+}
 ```
 
 ##### Output
@@ -254,11 +287,14 @@ This action is used to return details on the analysis machine associated with th
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|machine_name|string|None|True|Machine name|None|None|
+|machine_name|string|None|True|Machine name|None|example_machine|
 
 Example input:
 
 ```
+{
+  "machine_name": "example_machine"
+}
 ```
 
 ##### Output
@@ -364,12 +400,16 @@ This action is used to return one (JPEG) or all (ZIP) screenshots associated wit
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|screenshot_id|string|None|False|Screenshot ID|None|None|
-|task_id|integer|None|True|Task ID|None|None|
+|screenshot_id|string|None|False|Screenshot ID|None|12345678910|
+|task_id|integer|None|True|Task ID|None|12345678910|
 
 Example input:
 
 ```
+{
+  "screenshot_id": 12345678910,
+  "task_id": 12345678910
+}
 ```
 
 ##### Output
@@ -397,12 +437,16 @@ This action is used to return the report associated with the specified task ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|format|string|None|False|One of [json/html/all/dropped/package_files]. Details on formats here: http://docs.cuckoosandbox.org/en/latest/usage/api/#tasks-report|None|None|
-|task_id|integer|None|True|Task ID|None|None|
+|format|string|None|False|One of [json/html/all/dropped/package_files]. Details on formats here: http://docs.cuckoosandbox.org/en/latest/usage/api/#tasks-report|None|json|
+|task_id|integer|None|True|Task ID|None|12345678910|
 
 Example input:
 
 ```
+{
+  "format": "json",
+  "task_id": 12345678910
+}
 ```
 
 ##### Output
@@ -430,12 +474,16 @@ This action is used to return one memory dump file associated with the specified
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|pid|string|None|True|Process ID|None|None|
-|task_id|integer|None|True|Task ID|None|None|
+|pid|string|None|True|Process ID|None|12345678910|
+|task_id|integer|None|True|Task ID|None|12345678910|
 
 Example input:
 
 ```
+{
+  "pid": 12345678910,
+  "task_id": 12345678910
+}
 ```
 
 ##### Output
@@ -523,11 +571,14 @@ This action is used to return the content of the PCAP associated with the given 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|task_id|integer|None|True|Task ID|None|1234678910|
+|task_id|integer|None|True|Task ID|None|12345678910|
 
 Example input:
 
 ```
+{
+  "task_id": 12345678910
+}
 ```
 
 ##### Output
@@ -555,11 +606,14 @@ This action is used to add one or more files and/or files embedded in archives t
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|files|[]file|None|True|List of files of the format: {'filename': 'blah.exe', 'contents': '<b64-encoded-bytes>'}|None|None|
+|files|[]file|None|True|List of files of the format: {'filename': 'blah.exe', 'contents': '<b64-encoded-bytes>'}|None|[{'filename': 'example.exe', 'contents':'VGhpcyBpcyBhbiBleGFtcGxl'}]|
 
 Example input:
 
 ```
+{
+  "list": [{'filename': 'example.exe', 'contents':'VGhpcyBpcyBhbiBleGFtcGxl'}]
+}
 ```
 
 ##### Output
@@ -590,13 +644,18 @@ This action is used to return details on the file matching either the specified 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|False|ID|None|None|
-|md5|string|None|False|MD5 Hash|None|None|
-|sha256|string|None|False|SHA256 Hash|None|None|
+|id|integer|None|False|ID|None|12345678910|
+|md5|string|None|False|MD5 Hash|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|sha256|string|None|False|SHA256 Hash|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
 
 Example input:
 
 ```
+{
+  "id": 12345678910,
+  "md5": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+}
 ```
 
 ##### Output
@@ -633,9 +692,9 @@ This action is used to add a file (from URL) to the list of pending tasks.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum| Example       |
-|----|----|-------|--------|-----------|----|---------------|
-|url|string|None|True|URL to analyze (multipart encoded content)|None|www.example.com|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|url|string|None|True|URL to analyze (multipart encoded content)|None|https://example.com|
 
 Example input:
 
@@ -669,11 +728,14 @@ This action is used to return a list of memory dump files or one memory dump fil
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|task_id|integer|None|True|Task ID|None|None|
+|task_id|integer|None|True|Task ID|None|12345678910|
 
 Example input:
 
 ```
+{
+  "task_id": 12345678910
+}
 ```
 
 ##### Output
@@ -726,7 +788,7 @@ This action is used to add a reboot task to the database from an existing analys
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|task_id|integer|None|True|Task ID|None|None|
+|task_id|integer|None|True|Task ID|None|12345678910|
 
 Example input:
 
@@ -760,11 +822,14 @@ This action is used to return the binary content of the file matching the specif
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|sha256|string|None|True|SHA256 Hash|None|None|
+|sha256|string|None|True|SHA256 Hash|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
 
 Example input:
 
 ```
+{
+  "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+}
 ```
 
 ##### Output
@@ -792,11 +857,14 @@ This action is used to re-run reporting for a task associated with the specified
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|task_id|integer|None|True|Task ID|None|None|
+|task_id|integer|None|True|Task ID|None|12345678910|
 
 Example input:
 
 ```
+{
+  "task_id": 12345678910
+}
 ```
 
 ##### Output
@@ -808,6 +876,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true  
+}
 ```
 
 ### Triggers
