@@ -12,11 +12,15 @@ The Symantec BCS plugin allows you to submit a file to Symantec Security Respons
 
 _This plugin does not contain any requirements._
 
+# Supported Product Versions
+
+* 2023-05-16
+
 # Documentation
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -30,31 +34,31 @@ This action is used to submit a malicious file or hash.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|pin|string|None|True|Support ID number|None|1|
-|comments|string|None|True|Additional information|None|Example Comment|
-|lname|string|None|True|Last name|None|Smith|
 |cname|string|None|True|Company name|None|Example Organization|
-|critical|boolean|False|True|None|None|True|
-|fname|string|None|True|First name|None|John|
+|comments|string|None|True|Additional information|None|Example Comment|
+|critical|boolean|False|True|High severity|None|True|
 |data|bytes|None|True|URL to file, hash (MD5 or SHA256), or base64 file|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
-|email|string|None|True|Email address|None|user@example.com|
-|stype|string|None|True|Submission type|['upfile', 'url', 'hash']|upfile|
+|email|string|None|True|Email address|None|https://example.com|
 |filename|string|None|False|Optional filename if submission type is upfile|None|malicious-file|
+|fname|string|None|True|First name|None|John|
+|lname|string|None|True|Last name|None|Smith|
+|pin|string|None|True|Support ID number|None|1|
+|stype|string|None|True|Submission type|['upfile', 'url', 'hash']|upfile|
 
 Example input:
 
 ```
 {
-  "pin": "1",
-  "comments": "Example Comment",
-  "lname": "Smith",
   "cname": "Example Organization",
-  "critical": True,
-  "fname": "John",
+  "comments": "Example Comment",
+  "critical": true,
   "data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
   "email": "user@example.com",
-  "stype": "upfile",
-  "filename": "malicious-file"
+  "filename": "malicious-file",
+  "fname": "John",
+  "lname": "Smith",
+  "pin": 1,
+  "stype": "upfile"
 }
 ```
 
@@ -74,7 +78,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 

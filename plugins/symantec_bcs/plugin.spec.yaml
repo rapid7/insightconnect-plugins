@@ -5,6 +5,7 @@ name: symantec_bcs
 title: Symantec Business Critical Services
 description: The Symantec Business Critical Services plugin allows you to submit a file to Symantec Security Response
 version: 1.0.2
+supported_versions: ["2023-05-16"]
 vendor: rapid7
 support: community
 status: []
