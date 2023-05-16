@@ -136,7 +136,7 @@ class Submit(insightconnect_plugin_runtime.Action):
             req["upfile"] = (None, "")
 
         try:
-            response = requests.post(url, headers=headers, files=req) # nosec
+            response = requests.post(url, headers=headers, files=req)  # nosec
             response.raise_for_status()
             out = base64.b64encode(response.content)
         except requests.exceptions.HTTPError as error:
@@ -160,7 +160,7 @@ class Submit(insightconnect_plugin_runtime.Action):
         url = "https://submit.symantec.com/websubmit/bcs.cgi"
 
         try:
-            response = requests.get(url) # nosec
+            response = requests.get(url)  # nosec
             response.raise_for_status()
             out = base64.b64encode(response.content)
         except requests.exceptions.HTTPError as error:
