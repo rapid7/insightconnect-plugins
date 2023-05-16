@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Cuckoo Sandbox"
 Vendor = "rapid7"
-Version = "2.0.0"
+Version = "1.0.3"
 Description = "Cuckoo Sandbox is an open source automated malware analysis system. Using the Cuckoo Sandbox plugin for Rapid7 InsightConnect, users can analyze files and URLs, manage tasks, and more"
 
 
