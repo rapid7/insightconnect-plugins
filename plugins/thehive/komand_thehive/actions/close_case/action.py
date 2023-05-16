@@ -21,4 +21,3 @@ class CloseCase(insightconnect_plugin_runtime.Action):
         self.connection.client.close_case(case_id=case_id, force=force)
 
         return {Output.SUCCESS: True}
-
