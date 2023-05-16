@@ -66,9 +66,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|task|task|True|Cuckoo task|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|task|task|True|Cuckoo task|{'task_id': 1}|
 
 Example output:
 
@@ -127,9 +127,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|tasks|[]task|True|Cuckoo tasks|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|tasks|[]task|True|Cuckoo tasks|[{"completed": 1, "pending": 1, "reported": 1, "running": 1, "total": 1}]|
 
 Example output:
 
@@ -209,11 +209,11 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|error|boolean|True|Error true or false|
-|error_value|string|True|Error message|
-|message|string|True|Message associated with status code|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|------|
+|error|boolean|True|Error true or false|True|
+|error_value|string|True|Error message|Error|
+|message|string|True|Message associated with status code|Bad Request|
 
 Example output:
 
@@ -250,7 +250,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|task_id|integer|True|Task ID|
+|task_id|integer|True|Task ID|12345678910|
 
 Example output:
 
@@ -258,7 +258,7 @@ Example output:
 
 {
   "status": "OK",
-  "task_id": 1
+  "task_id": 12345678910
 }
 
 ```
@@ -283,9 +283,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|machine|machine|True|Machine details|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|machine|machine|True|Machine details|Example Machine|
 
 Example output:
 
@@ -327,12 +327,12 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|cpuload|[]float|True|CPU load for the past 1, 5 and 15 minutes respectively|
-|diskspace|diskspace|True|Free, total and used diskspace of $CUCKOO/storage/analyses/, $CUCKOO/storage/binaries/, and specified tmppath|
-|hostname|string|True|Cuckoo hostname|
-|machines|machines|True|Details about available and total analysis machines|
-|tasks|tasks|True|Details about analysis tasks|
-|version|string|True|Cuckoo version|
+|cpuload|[]float|True|CPU load for the past 1, 5 and 15 minutes respectively|[0.123]|
+|diskspace|diskspace|True|Free, total and used diskspace of $CUCKOO/storage/analyses/, $CUCKOO/storage/binaries/, and specified tmppath|100|
+|hostname|string|True|Cuckoo hostname|Example Hostname|
+|machines|machines|True|Details about available and total analysis machines|{'available': 10, 'total': 10}|
+|tasks|tasks|True|Details about analysis tasks|[{"completed": 1, "pending": 1, "reported": 1, "running": 1, "total": 1}]|
+|version|string|True|Cuckoo version|2.0.7|
 
 The contents of this output vary greatly based on Cuckoo's internal settings.
 
@@ -398,9 +398,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|screenshots|bytes|True|Base64 encoded screenshot|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|screenshots|bytes|True|Base64 encoded screenshot|VGhpcyBpcyBhbiBleGFtcGxl|
 
 Example output:
 
@@ -437,7 +437,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|report|bytes|True|Base64 encoded report|
+|report|bytes|True|Base64 encoded report|VGhpcyBpcyBhbiBleGFtcGxl|
 
 Example output:
 
@@ -445,7 +445,7 @@ Example output:
 
   {
     "message": "OK",
-    "report": base64-encoded file
+    "report": VGhpcyBpcyBhbiBleGFtcGxl
   }
 
 ```
@@ -472,9 +472,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|contents|bytes|True|Base64 encoded contents|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|contents|bytes|True|Base64 encoded contents|VGhpcyBpcyBhbiBleGFtcGxl|
 
 Example output:
 
@@ -497,9 +497,9 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|vpns|[]vpn|True|VPN status array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|vpns|[]vpn|True|VPN status array|[{"name": "Example", "status": "Running"}]|
 
 This action is currently not supported by Cuckoo for MAC OS and will return a 500.
 
@@ -513,9 +513,9 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|machines|[]machine|True|List of machines available to Cuckoo|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|machines|[]machine|True|List of machines available to Cuckoo|["Example Machine"]|
 
 Example output:
 
@@ -561,15 +561,15 @@ Example input:
 
 ```
 {
-  "task_id": 12345678910
+  task_id: 1234568910
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|contents|bytes|True|PCAP contents|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|contents|bytes|True|PCAP contents|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
 
 Example output:
 
@@ -590,23 +590,23 @@ This action is used to add one or more files and/or files embedded in archives t
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|files|[]file|None|True|List of files of the format: {'filename': 'blah.exe', 'contents': '<b64-encoded-bytes>'}|None|[{'filename': 'example.exe', 'contents':'VGhpcyBpcyBhbiBleGFtcGxl'}]|
+|files|[]file|None|True|List of files of the format: {'filename': 'blah.exe', 'contents': '<b64-encoded-bytes>'}|None|[{"filename": "example.exe", "contents": "VGhpcyBpcyBhbiBleGFtcGxl"}]|
 
 Example input:
 
 ```
 {
-  "files": [{'filename': 'example.exe', 'contents':'VGhpcyBpcyBhbiBleGFtcGxl'}]
+  "files": [{"filename": "example.exe", "contents": "VGhpcyBpcyBhbiBleGFtcGxl"}]
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|errors|[]string|False|Errors if any|
-|submit_id|integer|False|Submission ID|
-|task_id|integer|True|Task ID|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|errors|[]string|False|Errors if any||
+|submit_id|integer|False|Submission ID||
+|task_id|integer|True|Task ID|1234678910|', '|submit_id|integer|False|Submission ID|12345678910|', '|errors|[]string|False|Errors if any|["ExampleError"]|
 
 Example output:
 
@@ -630,7 +630,7 @@ This action is used to return details on the file matching either the specified 
 |----|----|-------|--------|-----------|----|-------|
 |id|integer|None|False|ID|None|12345678910|
 |md5|string|None|False|MD5 Hash|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|sha256|string|None|False|SHA256 Hash|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
+|sha256|string|None|False|SHA256 Hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
 
 Example input:
 
@@ -644,10 +644,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|data|True|Data|
-|error|boolean|True|Error information|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|data|data|True|Data|3395856ce81f2b7382dee72602f798b642f14140|
+|error|boolean|True|Error information|True|
 
 Example output:
 
@@ -678,7 +678,7 @@ This action is used to add a file (from URL) to the list of pending tasks.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|url|string|None|True|URL to analyze (multipart encoded content)|None|https://example.com|
+|url|string|None|True|URL to analyze (multipart encoded content)|None|www.example.com|
 
 Example input:
 
@@ -690,9 +690,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|task_id|integer|True|Task ID|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|task_id|integer|True|Task ID|12345678910|
 
 Example output:
 
@@ -724,9 +724,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|dump_files|[]string|True|Dumped Files|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|dump_files|[]string|True|Dumped Files|["Example file"]|
 
 Example output:
 
@@ -749,9 +749,9 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|message|string|True|Exit message|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|message|string|True|Exit message|Exit Message|
 
 Example output:
 
@@ -773,7 +773,6 @@ This action is used to add a reboot task to the database from an existing analys
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |task_id|integer|None|True|Task ID|None|12345678910|
-
 Example input:
 
 ```
@@ -784,10 +783,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|reboot_id|integer|True|Reboot ID|
-|task_id|integer|True|Task ID|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|reboot_id|integer|True|Reboot ID|1234678910|
+|task_id|integer|True|Task ID|12345678910|
 
 Example output:
 
@@ -809,7 +808,7 @@ This action is used to return the binary content of the file matching the specif
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|sha256|string|None|True|SHA256 Hash|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
+|sha256|string|None|True|SHA256 Hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
 
 Example input:
 
@@ -821,9 +820,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|contents|bytes|True|Binary contents|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|contents|bytes|True|Binary contents|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
 
 Example output:
 
@@ -856,9 +855,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Action success or failure|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|------|
+|success|boolean|True|Action success or failure|True|
 
 Example output:
 
