@@ -58,7 +58,7 @@ Example input:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|response|string|None|True|HTML response|None|<!DOCTYPE html> <html> <body> <h1>Example Response</h1> </body> </html>|
+|response|string|None|True|HTML response|None|"<!DOCTYPE html> <html> <body> <h1>Example Response</h1> </body> </html>"|
   
 Example output:
 
