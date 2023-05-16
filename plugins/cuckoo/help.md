@@ -590,12 +590,14 @@ This action is used to add one or more files and/or files embedded in archives t
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|files|[]file|None|True|List of files of the format: {'filename': 'blah.exe', 'contents': '<b64-encoded-bytes>'}|None|[None]|
+|files|[]file|None|True|List of files of the format: {'filename': 'blah.exe', 'contents': '<b64-encoded-bytes>'}|None|[{'filename': 'example.exe', 'contents':'VGhpcyBpcyBhbiBleGFtcGxl'}]|
 
 Example input:
 
 ```
-
+{
+  "files": [{'filename': 'example.exe', 'contents':'VGhpcyBpcyBhbiBleGFtcGxl'}]
+}
 ```
 
 ##### Output
@@ -775,6 +777,9 @@ This action is used to add a reboot task to the database from an existing analys
 Example input:
 
 ```
+{
+  "task_id": 12345678910
+}
 ```
 
 ##### Output
