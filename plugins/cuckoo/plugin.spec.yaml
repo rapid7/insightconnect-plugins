@@ -393,7 +393,7 @@ actions:
         required: true
         example: true
       error_value:
-        title: Error Message
+        title: Error message
         description: Error message
         type: string
         required: true
