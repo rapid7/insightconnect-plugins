@@ -24,8 +24,8 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|url|string|None|True|URL to Komand server, e.g. https://komand.company.com|None|{'username': 'user1', 'password': 'mypassword'}|
-|credentials|credential_username_password|None|True|Username and password for user|None|https://komand.company.com|
+|url|string|None|True|URL to Komand server|None|https://komand.company.com|
+|credentials|credential_username_password|None|True|Username and password for user|None|{ 'username': 'user1', 'password': 'mypassword' }|
 
 Example input:
 
@@ -35,7 +35,7 @@ Example input:
     "username": "user1",
     "password": "mypassword"
   },
-  "url": "https://insightvm.example.com:3780"
+  "url": "https://komand.company.com"
 }
 ```
 
@@ -51,17 +51,17 @@ This action is used to run a workflow without waiting for results.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|workflow_uid|string|None|False|Workflow UID to run. Either this or name should be provided.|None|b595ccea-f324-11ed-a05b-0242ac120003|
 |input|object|None|False|Input object to supply to the workflow job|None|{}|
-|workflow_name|string|None|False|Workflow name to run. Either this or UID should be provided.|None|example-name|
+|workflow_name|string|None|False|Workflow name to run. Either this or UID should be provided|None|example-name|
+|workflow_uid|string|None|False|Workflow UID to run. Either this or name should be provided|None|b595ccea-f324-11ed-a05b-0242ac120003|
 
 Example input:
 
 ```
 {
-  "workflow_uid": "b595ccea-f324-11ed-a05b-0242ac120003",
-  "input": {},
-  "workflow_name": "example-name"
+  "input": "{}",
+  "workflow_name": "example-name",
+  "workflow_uid": "b595ccea-f324-11ed-a05b-0242ac120003"
 }
 ```
 
@@ -89,21 +89,21 @@ This action is used to run a workflow and wait for results.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|workflow_uid|string|None|False|Workflow UID to run. Either this or name should be provided|None|b595ccea-f324-11ed-a05b-0242ac120003|
-|input|object|None|False|Input object to supply to the workflow job|None|{}|
-|workflow_name|string|None|False|Workflow name to run. Either this or UID should be provided|None|example-name|
-|timeout|number|150|True|Timeout for executed workflow to finish, in seconds. Use 0 for no timeout|None|150|
 |completion_checks|number|10|False|How many times the executed workflow should be checked for completion during the timeout period. Higher numbers should result in quicker job turnover. Leave blank if timeout is set to 0|None|10|
+|input|object|None|False|Input object to supply to the workflow job|None|{}|
+|timeout|number|150|True|Timeout for executed workflow to finish, in seconds. Use 0 for no timeout|None|150|
+|workflow_name|string|None|False|Workflow name to run. Either this or UID should be provided|None|example-name|
+|workflow_uid|string|None|False|Workflow UID to run. Either this or name should be provided|None|b595ccea-f324-11ed-a05b-0242ac120003|
 
 Example input:
 
 ```
 {
-  "workflow_uid": "b595ccea-f324-11ed-a05b-0242ac120003",
-  "input": {},
-  "workflow_name": "example-name",
+  "completion_checks": 10,
+  "input": "{}",
   "timeout": 150,
-  "completion_checks": 10
+  "workflow_name": "example-name",
+  "workflow_uid": "b595ccea-f324-11ed-a05b-0242ac120003"
 }
 ```
 
