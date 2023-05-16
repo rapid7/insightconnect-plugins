@@ -32,7 +32,7 @@ class Job(insightconnect_plugin_runtime.Trigger):
 
         last_job_id = ""
 
-        self.logger.info("Looking for messages from id=%s with status=%s", self.last_job_id, self.status)
+        self.logger.info(f"Looking for messages from id={self.last_job_id} with status={self.status}")
 
         for job in jobs:
 

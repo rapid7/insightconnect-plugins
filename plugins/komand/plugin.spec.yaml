@@ -121,7 +121,7 @@ actions:
         type: string
         description: Workflow UID to run. Either this or name should be provided
         required: false
-
+        example: b595ccea-f324-11ed-a05b-0242ac120003
       input:
         title: Input
         type: object
@@ -227,6 +227,7 @@ actions:
         title: Updated At
         type: string
         description: Updated at
+        required: false
         example: Jan 01, 2000 0:00 AM
       ended_at:
         title: Ended At

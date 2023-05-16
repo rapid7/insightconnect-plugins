@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import RunSynchronouslyInput, RunSynchronouslyOutput
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import requests
@@ -27,24 +28,29 @@ class RunSynchronously(insightconnect_plugin_runtime.Action):
         if not uid:
             uid = self.connection.lookup_workflow_name(params["workflow_name"])
             if not uid:
-                raise Exception("invalid workflow name provided")
+                raise PluginException(
+                    cause="Invalid workflow name provided",
+                    assistance="Please provide a valid workflow name"
+                )
 
         # Execute workflow
         url = self.connection.credentials.base_url + "/v2/workflows/" + uid + "/events"
-        r = self.connection.session().post(url, json=params["input"])
+        response = self.connection.session().post(url, json=params["input"])
 
         # Check status code of executed workflow
-        if r.status_code != requests.codes.ok:
-            raise Exception("Failure to create job, bad request code: " + str(r.status_code) + str(r.text))
-
-        job = r.json()
+        if response.status_code != requests.codes.ok:
+            raise PluginException(
+                cause="Failure to create job",
+                assistane=f"Response: {str(response.status_code) + str(response.text)}"
+            )
+        job = response.json()
 
         # Try/except here in case of API changes
         try:
             uid = job["job_id"]
             job_url = job["job_url"]
         except KeyError:
-            raise Exception("Failed to get job ID and/or URL from asynchronous job")
+            raise PluginException(cause="Failed to get job ID and/or URL from asynchronous job")
         else:
 
             job = self.connection.get_job(uid)
@@ -63,17 +69,20 @@ class RunSynchronously(insightconnect_plugin_runtime.Action):
 
             count = 0
             while job["status"] not in done_statuses:
-                self.logger.info("Current job status: %s" % job["status"])
+                self.logger.info(f"Current job status: {job.get('status')}")
                 count += 1
 
-                if (count > completion_checks) and (timeout is not 0):
-                    raise Exception("Timeout waiting for job: %s" + job["job_id"])
+                if (count > completion_checks) and (timeout != 0):
+                    raise PluginException(
+                        cause="Timeout waiting for job",
+                        assistance=f"Job ID: {job.get('job_id')}"
+                    )
 
                 time.sleep(check_interval)
                 job = self.connection.get_job(uid)
 
             if not job:
-                raise Exception("No job found: " + uid)
+                raise PluginException(cause="No job found", assistance=f"ID: {uid}")
 
             job["url"] = job_url
             return job
@@ -81,7 +90,7 @@ class RunSynchronously(insightconnect_plugin_runtime.Action):
     @staticmethod
     def get_check_interval(timeout, completion_checks):
         """Determines amount of seconds to sleep given total timeout period and amount of checks to make"""
-        if timeout is 0:
+        if timeout == 0:
             return 5
         else:
             return timeout / completion_checks

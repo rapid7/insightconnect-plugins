@@ -57,7 +57,7 @@ Example input:
 ```
 {
   "workflow_uid": "b595ccea-f324-11ed-a05b-0242ac120003",
-  "input": {},
+  "input": {"example": "input"},
   "workflow_name": "example-name"
 }
 ```
@@ -97,7 +97,7 @@ Example input:
 ```
 {
   "workflow_uid": "b595ccea-f324-11ed-a05b-0242ac120003",
-  "input": {},
+  "input": {"example": "input"},
   "workflow_name": "example-name",
   "timeout": 150,
   "completion_checks": 10
@@ -130,8 +130,8 @@ Example output:
   "created_at": "Jan 01, 2000 0:00 AM",
   "updated_at": "Jan 01, 2000 0:00 AM",
   "url": "www.example.com",
-  "steps": [{}],
-  "group_id": {},
+  "steps": [{"example": "step"}],
+  "group_id": "b595ccea-f324-11ed-a05b-0242ac120003",
   "name": "example-name"
 }
 ```
@@ -181,8 +181,7 @@ Example output:
   "created_at": "Jan 01, 2000 0:00 AM",
   "updated_at": "Jan 01, 2000 0:00 AM",
   "url": "www.example.com",
-  "steps": [{}],
-  "group_id": {},
+  "group_id": "b595ccea-f324-11ed-a05b-0242ac120003",
   "name": "example-name"
 }
 ```
