@@ -6,6 +6,7 @@ title: Cuckoo Sandbox
 description: "Cuckoo Sandbox is an open source automated malware analysis system. Using the Cuckoo Sandbox plugin for
 Rapid7 InsightConnect, users can analyze files and URLs, manage tasks, and more"
 version: 1.0.3
+supported_versions: ["2019-06-19"]
 vendor: rapid7
 support: community
 status: []
@@ -267,6 +268,7 @@ connection:
     type: string
     required: true
     default: http://localhost:8090/api
+    example: http://localhost:8090/api
 actions:
   submit_url:
     title: Submit URL
