@@ -115,12 +115,12 @@ Example input:
 |ended_at|string|False|None|Jan 01, 2000 0:00 AM|
 |job_id|string|False|Job ID|b595ccea-f324-11ed-a05b-0242ac120003|
 |workflow_uid|string|False|Workflow UID|b595ccea-f324-11ed-a05b-0242ac120003|
-|created_at|string|False|None|Jan 01, 2000 0:00 AM|
-|updated_at|string|False|None|Jan 01, 2000 0:00 AM|
+|created_at|string|False|Created at|Jan 01, 2000 0:00 AM|
+|updated_at|string|False|Updated at|Jan 01, 2000 0:00 AM|', '|ended_at|string|False|Ended at|Jan 01, 2000 0:00 AM|
 |url|string|False|Job URL|www.example.com|
 |steps|[]object|False|Step outputs|[{}]|
 |group_id|string|False|Job Group ID|b595ccea-f324-11ed-a05b-0242ac120003|
-|name|string|False|None|example-name|
+|name|string|False|Name|example-name|
 
 Example output:
 
@@ -163,15 +163,15 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|status|string|False|Job Status|failed|
-|ended_at|string|False|None|Jan 01, 2000 0:00 AM|
+|status|string|False|Job status|succeeded|
+|ended_at|string|False|Ended at|Jan 01, 2000 0:00 AM|
 |job_id|string|False|Job ID|b595ccea-f324-11ed-a05b-0242ac120003|
 |workflow_uid|string|False|Workflow UID|b595ccea-f324-11ed-a05b-0242ac120003|
-|created_at|string|False|None|Jan 01, 2000 0:00 AM|
-|updated_at|string|False|None|Jan 01, 2000 0:00 AM|
+|created_at|string|False|Created at|Jan 01, 2000 0:00 AM|
+|updated_at|string|False|Updated at|Jan 01, 2000 0:00 AM|
 |url|string|False|Job URL|www.example.com|
-|group_id|string|False|Job Group ID|b595ccea-f324-11ed-a05b-0242ac120003|
-|name|string|False|None|example-name|
+|group_id|string|False|Job group ID|b595ccea-f324-11ed-a05b-0242ac120003|
+|name|string|False|Name|example-name|
 
 Example output:
 
