@@ -64,9 +64,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|response|string|True|HTML response|<!DOCTYPE html> <html> <body> <h1>Example Response</h1> </body> </html>|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|string|True|HTML response|
 
 Example output:
 
