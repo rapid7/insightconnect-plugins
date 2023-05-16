@@ -26,7 +26,7 @@ class ReportInput(komand.Input):
     "filename": {
       "type": "string",
       "title": "Filename",
-      "description": "Indicator to search e.g. C5_APT_C2InTheFifthDomain.pdf",
+      "description": "Indicator to search",
       "order": 1
     },
     "query_type": {
@@ -44,7 +44,7 @@ class ReportInput(komand.Input):
     "year": {
       "type": "string",
       "title": "Year",
-      "description": "Year to search e.g. 2013",
+      "description": "Year to search",
       "order": 2
     }
   },
@@ -88,7 +88,7 @@ class ReportOutput(komand.Output):
           "order": 3
         },
         "status_code": {
-          "type": "integer",
+          "type": "string",
           "title": "Status Code",
           "description": "Status Code",
           "order": 1

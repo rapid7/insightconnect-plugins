@@ -6,7 +6,8 @@ title: Threat Miner
 description: "Threat Miner is an open source search engine for fast threat intelligence research and pivoting with
   context. With the Threat Miner plugin for Rapid7 InsightConnect, users can lookup various pieces of information for
 threat intelligence gathering"
-version: 2.0.1
+version: 3.0.0
+supported_versions: ["2021-08-17"]
 vendor: rapid7
 support: community
 status: []
@@ -29,7 +30,7 @@ types:
   response:
     status_code:
       title: Status Code
-      type: integer
+      type: string
       description: Status Code
       required: false
     status_message:
@@ -50,14 +51,16 @@ actions:
       query:
         title: Query
         type: string
-        description: Virus name to query e.g. Trojan.Enfal
+        description: Virus name to query
         required: true
+        example: Trojan.Enfal
     output:
       response:
         title: Response
         type: response
         required: false
         description: Response
+        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
   domain:
     title: Domain Lookup
     description: Fetches information related to a domain by URIs, certificates, or
@@ -68,6 +71,7 @@ actions:
         type: string
         description: Domain to search
         required: true
+        example: www.example.com
       query_type:
         title: Query Type
         type: string
@@ -78,12 +82,14 @@ actions:
         - Report Tagging
         required: true
         description: Query Type
+        example: WHOIS
     output:
       response:
         title: Responose
         type: response
         description: Response
         required: false
+        example: {"response": {"status_code": "404", "status_message": "No results found.", "results": []}}
   domain_ext:
     title: Domain Lookup Extended
     description: Fetches information related to a domain by URIs, certificates, or
@@ -94,6 +100,7 @@ actions:
         type: string
         description: Domain to search
         required: true
+        example: www.example.com
       query_type:
         title: Query Type
         description: Query type
@@ -102,12 +109,14 @@ actions:
         enum:
         - Related Samples
         - Subdomains
+        example: Subdomains
     output:
       response:
         title: Response
         type: response
         required: false
         description: Response
+        example:  {"response": {"status_code": "404", "status_message": "No results found.", "results": []}}
   ip:
     title: IP Lookup
     description: Fetches information related to an IP by Whois, URIs, passive DNS,
@@ -118,6 +127,7 @@ actions:
         type: string
         description: IP address to search
         required: true
+        example: 192.0.2.0/24
       query_type:
         title: Query Type
         required: true
@@ -128,12 +138,14 @@ actions:
         - URIs
         - Report Tagging
         description: Query Type
+        example: WHOIS
     output:
       response:
         title: Response
         type: response
         description: Response
         required: false
+        example:  {"response": {"status_code": "404", "status_message": "No results found.", "results": []}}
   ip_ext:
     title: IP Lookup Extended
     description: Fetches information related to an IP by certificates, or related
@@ -144,6 +156,7 @@ actions:
         type: string
         description: IP address to search
         required: true
+        example: 192.0.2.0/24
       query_type:
         title: Query Type
         required: true
@@ -152,12 +165,14 @@ actions:
         - Related Samples
         - SSL Certificates
         description: Query type
+        example: Related Samples
     output:
       response:
         title: Response
         description: Response
         type: response
         required: false
+        example:  {"response": {"status_code": "404", "status_message": "No results found.", "results": []}}
   samples:
     title: Get Samples
     description: Fetches samples of data intelligence data by metadata, HTTP traffic,
@@ -168,6 +183,7 @@ actions:
         type: string
         description: MD5, SHA1, or SHA256 hash to search
         required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
       query_type:
         title: Query Type
         description: Query Type
@@ -181,12 +197,14 @@ actions:
         - Registry keys
         - AV detections
         - Report Tagging
+        example: Metadata
     output:
       response:
         title: Response
         type: response
         description: Response
         required: false
+        example:  {"response": {"status_code": "404", "status_message": "No results found.", "results": []}}
   import_hash_report:
     title: Hash Report
     description: Fetches information related to a hash
@@ -196,12 +214,14 @@ actions:
         type: string
         description: SHA1 hash to search e.g. 1f4f257947c1b713ca7f9bc25f914039
         required: true
+        example: 02699626f388ed830012e5b787640e71c56d42d8
     output:
       response:
         title: Response
         type: response
         description: Response
         required: false
+        example:  {"response": {"status_code": "404", "status_message": "No results found.", "results": []}}
   import_hash_samples:
     title: Hash Samples
     description: Fetches information related to a hash
@@ -211,12 +231,14 @@ actions:
         type: string
         description: SHA1 hash to search e.g. 1f4f257947c1b713ca7f9bc25f914039
         required: true
+        example: 02699626f388ed830012e5b787640e71c56d42d8
     output:
       response:
         title: Query
         type: response
         required: false
         description: Query
+        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
   ssdeep_report:
     title: SSDeep Report
     description: Fetches information related to a fuzzy hash
@@ -224,14 +246,16 @@ actions:
       query:
         title: Query
         type: string
-        description: SSDeep fuzzy hash to search e.g. 1536:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4:TJs0oG2KSTj3o8a9PFeEHn4l
+        description: SSDeep fuzzy hash to search
         required: true
+        example: 1536:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4:TJs0oG2KSTj3o8a9PFeEHn4l
     output:
       response:
         title: Response
         type: response
         required: false
         description: Response
+        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
   ssdeep_sample:
     title: SSDeep Sample
     description: Fetches information related to a fuzzy hash
@@ -239,14 +263,16 @@ actions:
       query:
         title: Query
         type: string
-        description: SSDeep fuzzy hash to search e.g. 1536:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4:TJs0oG2KSTj3o8a9PFeEHn4l
+        description: SSDeep fuzzy hash to search
         required: true
+        example: 1536:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4:TJs0oG2KSTj3o8a9PFeEHn4l
     output:
       response:
         title: Response
         type: response
         required: false
         description: Response
+        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
   ssl_hosts:
     title: SSL Hosts
     description: Fetches host information related to a certificate
@@ -254,14 +280,16 @@ actions:
       query:
         title: Query
         type: string
-        description: Certificate SHA1 hash to search e.g. 42a8d5b3a867a59a79f44ffadd61460780fe58f2
+        description: Certificate SHA1 hash to search
         required: true
+        example: 42a8d5b3a867a59a79f44ffadd61460780fe58f2
     output:
       response:
         title: Response
         type: response
         required: false
         description: Response
+        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
   ssl_report:
     title: SSL Report
     description: Fetches information related to a certificate
@@ -269,14 +297,16 @@ actions:
       query:
         title: Query
         type: string
-        description: Certificate SHA1 hash to search e.g. 42a8d5b3a867a59a79f44ffadd61460780fe58f2
+        description: Certificate SHA1 hash to search
         required: true
+        example: 42a8d5b3a867a59a79f44ffadd61460780fe58f2
     output:
       response:
         title: Response
         type: response
         required: false
         description: Response
+        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
   email_domain:
     title: Email Reverse WHOIS - Domain
     description: Fetches information related to an email address
@@ -284,14 +314,16 @@ actions:
       email:
         title: Email
         type: string
-        description: Email address to search e.g. user@example.com
+        description: Email address to search
         required: true
+        example: user@example.com
     output:
       response:
         title: Response
         type: response
         required: false
         description: Response
+        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
   email_report:
     title: Email Reverse WHOIS - Report Tagging
     description: Fetches information related to an email address
@@ -299,14 +331,16 @@ actions:
       email:
         title: Email
         type: string
-        description: Email address to search e.g. user@example.com
+        description: Email address to search
         required: true
+        example: user@example.com
     output:
       response:
         title: Response
         type: response
         required: false
         description: Response
+        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
   av_sample:
     title: AV Detection Samples
     description: Fetches information related to a virus
@@ -314,14 +348,16 @@ actions:
       query:
         title: Query
         type: string
-        description: Virus name to query e.g. Trojan.Enfal
+        description: Virus name to query
         required: true
+        example: Trojan.Enfal
     output:
       response:
         title: Response
         type: response
         required: false
         description: Response
+        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
   report:
     title: Search IOC Reports
     description: Fetches information related to an indicator by domains, hosts, emails,
@@ -330,13 +366,15 @@ actions:
       filename:
         title: Filename
         type: string
-        description: Indicator to search e.g. C5_APT_C2InTheFifthDomain.pdf
+        description: Indicator to search
         required: true
+        example: C5_APT_C2InTheFifthDomain.pdf
       year:
         title: Year
         type: string
-        description: Year to search e.g. 2013
+        description: Year to search
         required: true
+        example: 2013
       query_type:
         title: Query Type
         description: Query Type
@@ -347,12 +385,14 @@ actions:
         - Hosts
         - Emails
         - Samples
+        example: Domains
     output:
       response:
         title: Response
         type: response
         required: false
         description: Response
+        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
   search:
     title: Search APTNotes
     description: Fetches information related to a text search
@@ -360,19 +400,23 @@ actions:
       query:
         title: Query
         type: string
-        description: Text to search e.g. sofacy
+        description: Text to search
         required: true
+        example: sofacy
       query_type:
         title: Query Type
         type: string
+        description: Query Type
         required: true
         enum:
         - Full Text
         - By Year
-        description: Query Type
+        example: Full Text
     output:
       response:
         title: Response
         type: response
         required: false
         description: Response
+        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
+

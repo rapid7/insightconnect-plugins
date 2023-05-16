@@ -24,7 +24,7 @@ class AvReportInput(komand.Input):
     "query": {
       "type": "string",
       "title": "Query",
-      "description": "Virus name to query e.g. Trojan.Enfal",
+      "description": "Virus name to query",
       "order": 1
     }
   },
@@ -66,7 +66,7 @@ class AvReportOutput(komand.Output):
           "order": 3
         },
         "status_code": {
-          "type": "integer",
+          "type": "string",
           "title": "Status Code",
           "description": "Status Code",
           "order": 1

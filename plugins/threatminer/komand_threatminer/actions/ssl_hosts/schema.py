@@ -24,7 +24,7 @@ class SslHostsInput(komand.Input):
     "query": {
       "type": "string",
       "title": "Query",
-      "description": "Certificate SHA1 hash to search e.g. 42a8d5b3a867a59a79f44ffadd61460780fe58f2",
+      "description": "Certificate SHA1 hash to search",
       "order": 1
     }
   },
@@ -66,7 +66,7 @@ class SslHostsOutput(komand.Output):
           "order": 3
         },
         "status_code": {
-          "type": "integer",
+          "type": "string",
           "title": "Status Code",
           "description": "Status Code",
           "order": 1

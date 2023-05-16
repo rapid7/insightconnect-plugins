@@ -25,7 +25,7 @@ class SearchInput(komand.Input):
     "query": {
       "type": "string",
       "title": "Query",
-      "description": "Text to search e.g. sofacy",
+      "description": "Text to search",
       "order": 1
     },
     "query_type": {
@@ -78,7 +78,7 @@ class SearchOutput(komand.Output):
           "order": 3
         },
         "status_code": {
-          "type": "integer",
+          "type": "string",
           "title": "Status Code",
           "description": "Status Code",
           "order": 1

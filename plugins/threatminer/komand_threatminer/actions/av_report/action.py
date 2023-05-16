@@ -25,17 +25,14 @@ class AvReport(komand.Action):
             response = requests.get(self.API_URL, params={"q": query})
             return {"response": response.json()}
 
-        except requests.exceptions.HTTPError as e:
+        except requests.exceptions.HTTPError as error:
             self.logger.error(
-                "Requests: HTTPError: status code %s for %s",
-                str(e.status_code),
-                params.get("query"),
-            )
+                f"Requests: HTTPError: status code {str(error.response.status_code)} for { params.get('query')}")
 
     def test(self):
         params = {"q": "Trojan.Enfal"}
         response = requests.get(self.API_URL, params=params)
-        if response.status_code != 200:
-            raise Exception("%s (HTTP status: %s)" % (response.text, response.status_code))
+        if int(response.status_code) != 200:
+            raise Exception(f"{response.text} (HTTP status: {response.status_code})")
 
         return {"status_code": response.status_code}

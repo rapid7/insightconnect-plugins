@@ -24,7 +24,7 @@ class EmailReportInput(komand.Input):
     "email": {
       "type": "string",
       "title": "Email",
-      "description": "Email address to search e.g. user@example.com",
+      "description": "Email address to search",
       "order": 1
     }
   },
@@ -66,7 +66,7 @@ class EmailReportOutput(komand.Output):
           "order": 3
         },
         "status_code": {
-          "type": "integer",
+          "type": "string",
           "title": "Status Code",
           "description": "Status Code",
           "order": 1

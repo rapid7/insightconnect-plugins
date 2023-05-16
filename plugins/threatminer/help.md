@@ -13,11 +13,15 @@ email addresses. In addition, it can assist in malicious attachment detection wh
 
  _This plugin does not contain any requirements._
 
+# Supported Product Versions
+
+* 2021-08-17
+
 # Documentation
 
 ## Setup
 
- _This plugin does not contain a connection._
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -25,20 +29,32 @@ email addresses. In addition, it can assist in malicious attachment detection wh
 
 #### AV Report
 
-This action is used to fetch information related to a domain by URIs, certificates, or related samples.
+This action is used to AV Report.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|True|Virus name to query e.g. Trojan.Enfal|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|True|Virus name to query|None|Trojan.Enfal|
+
+Example input:
+
+```
+{
+  "query": "Trojan.Enfal"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
+Example output:
+
+```
+```
 
 #### AV Detection Samples
 
@@ -46,16 +62,23 @@ This action fetches information related to a virus.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|True|Virus name to query e.g. Trojan.Enfal|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|True|Virus name to query|None|Trojan.Enfal|
+
+Example input:
+
+```
+{
+  "query": "Trojan.Enfal"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
-
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 #### Domain Lookup
 
@@ -63,16 +86,25 @@ This action fetches information related to a domain by URIs, certificates, or re
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|domain|string|None|True|Domain to search|None|
-|query_type|string|None|True|Query Type|['WHOIS', 'PASSIVE DNS', 'Example Query URI', 'Report Tagging']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|domain|string|None|True|Domain to search|None|www.example.com|
+|query_type|string|None|True|Query Type|['WHOIS', 'PASSIVE DNS', 'Example Query URI', 'Report Tagging']|WHOIS|
+
+Example input:
+
+```
+{
+  "domain": "www.example.com",
+  "query_type": "WHOIS"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 
 #### Domain Lookup Extended
@@ -81,16 +113,25 @@ This action fetches information related to a domain by URIs, certificates, or re
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|domain|string|None|True|Domain to search|None|
-|query_type|string|None|True|Query type|['Related Samples', 'Subdomains']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|domain|string|None|True|Domain to search|None|www.example.com|
+|query_type|string|None|True|Query type|['Related Samples', 'Subdomains']|Subdomains|
+
+Example input:
+
+```
+{
+  "domain": "www.example.com",
+  "query_type": "Subdomains"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|--------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 
 #### Email Reverse WHOIS - Domain
@@ -99,16 +140,23 @@ This action fetches information related to an email address.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|Email address to search e.g. user@example.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|Email address to search|None|user@example.com|
+
+Example input:
+
+```
+{
+  "email": "user@example.com"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
-
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 #### Email Reverse WHOIS - Report Tagging
 
@@ -116,16 +164,23 @@ This action fetches information related to an email address.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|email|string|None|True|Email address to search e.g. user@example.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|email|string|None|True|Email address to search|None|user@example.com|
+
+Example input:
+
+```
+{
+  "email": "user@example.com"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
-
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 #### Hash Report
 
@@ -133,16 +188,23 @@ This action fetches information related to a hash.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|True|SHA1 hash to search e.g. 1f4f257947c1b713ca7f9bc25f914039|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|True|SHA1 hash to search e.g. 1f4f257947c1b713ca7f9bc25f914039|None|02699626f388ed830012e5b787640e71c56d42d8|
+
+Example input:
+
+```
+{
+  "query": "02699626f388ed830012e5b787640e71c56d42d8"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
-
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 #### Hash Samples
 
@@ -150,16 +212,23 @@ This action fetches information related to a hash.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|True|SHA1 hash to search e.g. 1f4f257947c1b713ca7f9bc25f914039|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|True|SHA1 hash to search e.g. 1f4f257947c1b713ca7f9bc25f914039|None|02699626f388ed830012e5b787640e71c56d42d8|
+
+Example input:
+
+```
+{
+  "query": "02699626f388ed830012e5b787640e71c56d42d8"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Query|
-
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Query|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 #### IP Lookup
 
@@ -167,17 +236,25 @@ This action fetches information related to an IP by Whois, URIs, passive DNS, or
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|address|string|None|True|IP address to search|None|
-|query_type|string|None|True|Query Type|['WHOIS', 'PASSIVE DNS', 'URIs', 'Report Tagging']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|IP address to search|None|192.0.2.0/24|
+|query_type|string|None|True|Query Type|['WHOIS', 'PASSIVE DNS', 'URIs', 'Report Tagging']|WHOIS|
+
+Example input:
+
+```
+{
+  "address": "192.0.2.0/24",
+  "query_type": "WHOIS"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
-
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 #### IP Lookup Extended
 
@@ -185,16 +262,25 @@ This action fetches information related to an IP by certificates, or related sam
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|address|string|None|True|IP address to search|None|
-|query_type|string|None|True|Query type|['Related Samples', 'SSL Certificates']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|IP address to search|None|192.0.2.0/24|
+|query_type|string|None|True|Query type|['Related Samples', 'SSL Certificates']|Related Samples|
+
+Example input:
+
+```
+{
+  "address": "192.0.2.0/24",
+  "query_type": "Related Samples"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 
 #### Search IOC Reports
@@ -203,18 +289,27 @@ This action fetches information related to an indicator by domains, hosts, email
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|filename|string|None|True|Indicator to search e.g. C5_APT_C2InTheFifthDomain.pdf|None|
-|query_type|string|None|True|Query Type|['Domains', 'Hosts', 'Emails', 'Samples']|
-|year|string|None|True|Year to search e.g. 2013|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|filename|string|None|True|Indicator to search|None|C5_APT_C2InTheFifthDomain.pdf|
+|query_type|string|None|True|Query Type|['Domains', 'Hosts', 'Emails', 'Samples']|Domains|
+|year|string|None|True|Year to search|None|2013|
+
+Example input:
+
+```
+{
+  "filename": "C5_APT_C2InTheFifthDomain.pdf",
+  "query_type": "Domains",
+  "year": 2013
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
-
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 #### Get Samples
 
@@ -222,17 +317,25 @@ This action fetches samples of data intelligence data by metadata, HTTP traffic,
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|True|MD5, SHA1, or SHA256 hash to search|None|
-|query_type|string|None|True|Query Type|['Metadata', 'HTTP Traffic', 'Hosts', 'Mutants', 'Registry keys', 'AV detections', 'Report Tagging']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|True|MD5, SHA1, or SHA256 hash to search|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|query_type|string|None|True|Query Type|['Metadata', 'HTTP Traffic', 'Hosts', 'Mutants', 'Registry keys', 'AV detections', 'Report Tagging']|Metadata|
+
+Example input:
+
+```
+{
+  "query": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "query_type": "Metadata"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
-
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 #### Search APTNotes
 
@@ -240,17 +343,25 @@ This action fetches information related to a text search.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|True|Text to search e.g. sofacy|None|
-|query_type|string|None|True|Query Type|['Full Text', 'By Year']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|True|Text to search|None|sofacy|
+|query_type|string|None|True|Query Type|['Full Text', 'By Year']|Full Text|
+
+Example input:
+
+```
+{
+  "query": "sofacy",
+  "query_type": "Full Text"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
-
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 #### SSDeep Report
 
@@ -258,16 +369,23 @@ This action fetches information related to a fuzzy hash.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|True|SSDeep fuzzy hash to search e.g. 1536:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4:TJs0oG2KSTj3o8a9PFeEHn4l|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|True|SSDeep fuzzy hash to search|None|1536:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4:TJs0oG2KSTj3o8a9PFeEHn4l|
+
+Example input:
+
+```
+{
+  "query": "1536:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4:TJs0oG2KSTj3o8a9PFeEHn4l"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
-
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 #### SSDeep Sample
 
@@ -275,16 +393,23 @@ This action fetches information related to a fuzzy hash.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|True|SSDeep fuzzy hash to search e.g. 1536:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4:TJs0oG2KSTj3o8a9PFeEHn4l|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|True|SSDeep fuzzy hash to search|None|1536:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4:TJs0oG2KSTj3o8a9PFeEHn4l|
+
+Example input:
+
+```
+{
+  "query": "1536:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4:TJs0oG2KSTj3o8a9PFeEHn4l"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
-
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|--------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 #### SSL Hosts
 
@@ -292,16 +417,23 @@ This action fetches host information related to a certificate.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|True|Certificate SHA1 hash to search e.g. 42a8d5b3a867a59a79f44ffadd61460780fe58f2|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|True|Certificate SHA1 hash to search|None|42a8d5b3a867a59a79f44ffadd61460780fe58f2|
+
+Example input:
+
+```
+{
+  "query": "42a8d5b3a867a59a79f44ffadd61460780fe58f2"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
-
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|--------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 #### SSL Report
 
@@ -309,16 +441,23 @@ This action fetches information related to a certificate.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|True|Certificate SHA1 hash to search e.g. 42a8d5b3a867a59a79f44ffadd61460780fe58f2|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|True|Certificate SHA1 hash to search|None|42a8d5b3a867a59a79f44ffadd61460780fe58f2|
+
+Example input:
+
+```
+{
+  "query": "42a8d5b3a867a59a79f44ffadd61460780fe58f2"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
-
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 ### Triggers
 
@@ -390,7 +529,7 @@ The [jq](https://market.komand.com/plugins/komand/jq/0.1.0) and [JSON](https://m
 
 # Version History
 
-* 2.0.1 - Updated Requests version to 2.20.0
+* 3.0.0 - Updated Requests version to 2.20.0 | Fixed AV Report Status Code Bug
 * 2.0.0 - Update to v3 Python plugin architecture | Convert import_hash_report API status codes to int | Update documentation
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Rename "Email (Reverse WHOIS) - Report tagging" action to "Email (Reverse WHOIS) - Report Tagging"
@@ -399,6 +538,8 @@ The [jq](https://market.komand.com/plugins/komand/jq/0.1.0) and [JSON](https://m
 
 
 # Links
+
+* [Threat Miner](https://www.threatminer.org)
 
 ## References
 
