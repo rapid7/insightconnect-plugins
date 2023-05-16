@@ -31,7 +31,10 @@ Example input:
 
 ```
 {
-  "credentials": "{'username': 'user1', 'password': 'mypassword'}",
+  "credentials": {
+    "username": "user1",
+    "password": "mypassword"
+  },
   "url": "https://insightvm.example.com:3780"
 }
 ```
