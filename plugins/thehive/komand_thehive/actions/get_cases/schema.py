@@ -147,7 +147,7 @@ class GetCasesOutput(insightconnect_plugin_runtime.Output):
           "order": 37
         },
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID",
           "order": 1

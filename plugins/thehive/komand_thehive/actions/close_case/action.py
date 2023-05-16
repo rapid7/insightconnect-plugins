@@ -18,6 +18,7 @@ class CloseCase(insightconnect_plugin_runtime.Action):
         case_id = params.get(Input.ID)
         force = params.get(Input.FORCE)
 
-        response = self.connection.client.close_case(case_id=case_id, force=force)
+        self.connection.client.close_case(case_id=case_id, force=force)
 
-        return {Output.SUCCESS: response}
+        return {Output.SUCCESS: True}
+

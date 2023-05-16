@@ -78,7 +78,7 @@ types:
       title: Case ID
       description: ID for the case
       example: 50
-      type: integer
+      type: string
       required: false
     title:
       title: Title
@@ -160,7 +160,7 @@ types:
     id:
       title: ID
       description: ID
-      type: integer
+      type: string
       required: false
     createdAt:
       title: Created At
@@ -175,7 +175,7 @@ types:
     id:
       title: ID
       description: ID
-      type: integer
+      type: string
       required: true
     _type:
       title: Type
@@ -586,7 +586,7 @@ actions:
         description: The ID of the user
         type: string
         required: true
-        example: AV_ajI_oYMfcbXhqb9tS
+        example: 50
     output:
       success:
         title: Success
@@ -730,8 +730,8 @@ actions:
       id:
         title: Case ID
         description: ID for the case
-        example: 50
-        type: integer
+        example: AYgQXmjbfMffAh_St-fk
+        type: string
         required: false
       title:
         title: Title
@@ -794,8 +794,8 @@ actions:
       id:
         title: Case ID
         description: ID for the case
-        example: 50
-        type: integer
+        example: AYgQXmjbfMffAh_St-fk
+        type: string
         required: false
       datatype:
         title: Data Type
@@ -879,7 +879,7 @@ actions:
         title: Case ID
         description: ID for the case
         example: 50
-        type: integer
+        type: string
         required: true
     output:
       case:
@@ -903,7 +903,7 @@ actions:
         title: Case ID
         description: ID for the case
         example: 50
-        type: integer
+        type: string
         required: true
       force:
         title: Force
@@ -915,5 +915,5 @@ actions:
     output:
       success:
         title: Success
-        type: object
+        type: boolean
         required: true

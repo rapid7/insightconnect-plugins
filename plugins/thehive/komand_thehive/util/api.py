@@ -5,6 +5,10 @@ import requests
 from requests.auth import HTTPBasicAuth
 from insightconnect_plugin_runtime.exceptions import PluginException
 
+# Here is the docs for the next dev that comes through here
+# https://github.com/TheHive-Project/TheHive4py/blob/master/thehive4py/api.py
+# Do not trust the official docs on the hive website, this is what worked for me ^
+
 
 class HiveAPI:
     def __init__(self, url: str, username: str, password: str, api_key: str, proxies, cert):
@@ -33,12 +37,10 @@ class HiveAPI:
         return self._call_api("POST", f"/api/case/{case_id}/artifact", data=observable)
 
     # Create Task in Case
-    # WIP
     def create_task_in_case(self, case_id, task):
         return self._call_api("POST", f"/api/case/{case_id}/task", data=task)
 
     # Close Case
-    # WIP
     def close_case(self, case_id, force):
         req_url = f"/api/case/{case_id}"
         if force:

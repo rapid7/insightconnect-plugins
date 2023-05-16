@@ -33,7 +33,7 @@ class TestCloseCase(TestCase):
     def test_close_case(self, mock_delete):
         mocked_request(mock_delete)
         response = self.action.run(self.params)
-        expected = {}
+        expected = {"success": True}
         self.assertEqual(response, expected)
 
     @parameterized.expand(

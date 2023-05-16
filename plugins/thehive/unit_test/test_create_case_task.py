@@ -32,7 +32,27 @@ class TestCreateCaseTask(TestCase):
     def test_create_case_task(self, mock_post):
         mocked_request(mock_post)
         response = self.action.run(self.params)
-        expected = {}
+        expected = {
+            "case": {
+                "owner": "string",
+                "_routing": "case_id",
+                "flag": True,
+                "dueDate": 1640000000000,
+                "_type": "case_task",
+                "description": "string",
+                "title": "string",
+                "createdAt": 1684244856627,
+                "_parent": "case_id",
+                "createdBy": "admin",
+                "_id": "case_id",
+                "id": "case_id",
+                "_version": 1,
+                "startDate": 1640000000000,
+                "status": "Waiting",
+                "group": "default",
+                "order": 0,
+            }
+        }
         self.assertEqual(response, expected)
 
     @parameterized.expand(

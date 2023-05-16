@@ -38,7 +38,7 @@ STUB_CASE = {
     CaseInput.TLP: 2,
 }
 STUB_OBSERVABLE = {CaseObservableInput.ID: STUB_CASE_ID}
-STUB_TASK = {CaseTaskInput.ID: STUB_CASE_ID}
+STUB_TASK = {CaseTaskInput.ID: STUB_CASE_ID, CaseTaskInput.TITLE: "title", CaseTaskInput.DESCRIPTION: "description"}
 
 # KEEP THIS FOR REFERENCE - DELETE WHEN DONE
 STUB_RESPONSE = {
