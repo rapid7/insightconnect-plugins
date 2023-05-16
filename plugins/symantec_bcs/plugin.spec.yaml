@@ -4,7 +4,7 @@ products: [insightconnect]
 name: symantec_bcs
 title: Symantec Business Critical Services
 description: The Symantec Business Critical Services plugin allows you to submit a file to Symantec Security Response
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
 status: []
@@ -30,32 +30,38 @@ actions:
         description: First name
         type: string
         required: true
+        example: John
       lname:
         title: Last Name
         description: Last name
         type: string
         required: true
+        example: Smith
       cname:
         title: Company Name
         description: Company name
         type: string
         required: true
+        example: Example Organization
       email:
         title: Email
         description: Email address
         type: string
         required: true
+        example: user@example.com
       pin:
         title: Support ID
         description: Support ID number
         type: string
         required: true
+        example: 1
       critical:
         title: High Severity
         description: High severity
         default: false
         type: boolean
         required: true
+        example: true
       stype:
         title: Submission Type
         description: Submission type
@@ -65,24 +71,29 @@ actions:
         - url
         - hash
         required: true
+        example: upfile
       comments:
         title: Comments
         description: Additional information
         type: string
         required: true
+        example: Example Comment
       data:
         title: Data
         description: URL to file, hash (MD5 or SHA256), or base64 file
         type: bytes
         required: true
+        example: UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==
       filename:
         title: Filename
         description: Optional filename if submission type is upfile
         type: string
         required: false
+        example: malicious-file
     output:
       response:
         title: Response
         description: HTML response
         type: string
         required: true
+        example: <!DOCTYPE html> <html> <body> <h1>Example Response</h1> </body> </html>
