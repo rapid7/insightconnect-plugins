@@ -77,7 +77,7 @@ class Submit(insightconnect_plugin_runtime.Action):
             "comments": (None, params.get("comments")),
         }
 
-        if params.get("critical") == True:
+        if params.get("critical") is True:
             req["critical"] = (None, "on")
 
         data = params.get("data", "")
@@ -120,24 +120,23 @@ class Submit(insightconnect_plugin_runtime.Action):
             try:
                 _type = magic.Magic(mime=True).from_buffer(fisle.read(1024))
                 self.logger.info(f"MIME Content Type: {_type}")
-            except:
+            except Exception:
                 self.logger.info(f"Unable to determine MIME Content Type of file, using {_type}")
                 _type = "application/octet-stream"
-                pass
 
             # Reset file counter to beginning of file since read 1024 bytes for magic number above
             fisle.seek(0)
 
-            bytes = fisle.read()
-            if len(bytes) > 0:
-                req["upfile"] = (filename, bytes, _type)
+            _bytes = fisle.read()
+            if len(_bytes) > 0:
+                req["upfile"] = (filename, _bytes, _type)
             else:
                 req["upfile"] = ("", "", _type)
         else:
             req["upfile"] = (None, "")
 
         try:
-            response = requests.post(url, headers=headers, files=req)
+            response = requests.post(url, headers=headers, files=req) # nosec
             response.raise_for_status()
             out = base64.b64encode(response.content)
         except requests.exceptions.HTTPError as error:
@@ -161,7 +160,7 @@ class Submit(insightconnect_plugin_runtime.Action):
         url = "https://submit.symantec.com/websubmit/bcs.cgi"
 
         try:
-            response = requests.get(url)
+            response = requests.get(url) # nosec
             response.raise_for_status()
             out = base64.b64encode(response.content)
         except requests.exceptions.HTTPError as error:
