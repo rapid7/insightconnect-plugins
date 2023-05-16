@@ -36,10 +36,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         if response.status_code != requests.codes.ok:
             raise PluginException(
-                cause="Unexpected Error",
-                assistane=f"Response: {str(response.status_code) + str(response.text)}"
+                cause="Unexpected Error", assistane=f"Response: {str(response.status_code) + str(response.text)}"
             )
-        workflows = r.json()["workflows"]
+        workflows = response.json()["workflows"]
 
         for workflow in workflows:
             if workflow["name"] == name:

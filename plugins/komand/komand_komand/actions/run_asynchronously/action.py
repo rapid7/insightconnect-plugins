@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import RunAsynchronouslyInput, RunAsynchronouslyOutput
 from insightconnect_plugin_runtime.exceptions import PluginException
+
 # Custom imports below
 import requests
 
@@ -22,8 +23,7 @@ class RunAsynchronously(insightconnect_plugin_runtime.Action):
             uid = self.connection.lookup_workflow_name(params["workflow_name"])
             if not uid:
                 raise PluginException(
-                    cause="Invalid workflow name provided",
-                    assistance="Please provide a valid workflow name"
+                    cause="Invalid workflow name provided", assistance="Please provide a valid workflow name"
                 )
 
         url = self.connection.credentials.base_url + "/v2/workflows/" + uid + "/events"
@@ -31,8 +31,7 @@ class RunAsynchronously(insightconnect_plugin_runtime.Action):
 
         if response.status_code != requests.codes.ok:
             raise PluginException(
-                cause="Failure to create job",
-                assistane=f"Response: {str(response.status_code) + str(response.text)}"
+                cause="Failure to create job", assistane=f"Response: {str(response.status_code) + str(response.text)}"
             )
 
         job = response.json()

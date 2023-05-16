@@ -233,6 +233,7 @@ actions:
         title: Ended At
         type: string
         description: Ended at
+        required: false
         example: Jan 01, 2000 0:00 AM
       url:
         title: URL

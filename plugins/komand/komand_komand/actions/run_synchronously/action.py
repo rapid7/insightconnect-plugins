@@ -29,8 +29,7 @@ class RunSynchronously(insightconnect_plugin_runtime.Action):
             uid = self.connection.lookup_workflow_name(params["workflow_name"])
             if not uid:
                 raise PluginException(
-                    cause="Invalid workflow name provided",
-                    assistance="Please provide a valid workflow name"
+                    cause="Invalid workflow name provided", assistance="Please provide a valid workflow name"
                 )
 
         # Execute workflow
@@ -40,8 +39,7 @@ class RunSynchronously(insightconnect_plugin_runtime.Action):
         # Check status code of executed workflow
         if response.status_code != requests.codes.ok:
             raise PluginException(
-                cause="Failure to create job",
-                assistane=f"Response: {str(response.status_code) + str(response.text)}"
+                cause="Failure to create job", assistane=f"Response: {str(response.status_code) + str(response.text)}"
             )
         job = response.json()
 
@@ -73,10 +71,7 @@ class RunSynchronously(insightconnect_plugin_runtime.Action):
                 count += 1
 
                 if (count > completion_checks) and (timeout != 0):
-                    raise PluginException(
-                        cause="Timeout waiting for job",
-                        assistance=f"Job ID: {job.get('job_id')}"
-                    )
+                    raise PluginException(cause="Timeout waiting for job", assistance=f"Job ID: {job.get('job_id')}")
 
                 time.sleep(check_interval)
                 job = self.connection.get_job(uid)
