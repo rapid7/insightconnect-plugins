@@ -151,7 +151,7 @@ class CreateCaseObservableOutput(insightconnect_plugin_runtime.Output):
         "createdAt": {
           "type": "integer",
           "title": "Created At",
-          "description": "Time the observable was created at in milliseconds or epoch, e.g. 1496561862924",
+          "description": "Time the observable was created at in milliseconds or epoch",
           "order": 15
         },
         "createdBy": {

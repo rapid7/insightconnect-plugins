@@ -59,7 +59,7 @@ class GetUserByIdOutput(insightconnect_plugin_runtime.Output):
         "_id": {
           "type": "string",
           "title": "_ID",
-          "description": "User _ID",
+          "description": "User ID",
           "order": 10
         },
         "_type": {
@@ -71,7 +71,7 @@ class GetUserByIdOutput(insightconnect_plugin_runtime.Output):
         "createdAt": {
           "type": "integer",
           "title": "Created At",
-          "description": "Time the user was created at in milliseconds or epoch, e.g. 1496561862924",
+          "description": "Time the user was created at in milliseconds or epoch",
           "order": 12
         },
         "createdBy": {
@@ -122,7 +122,7 @@ class GetUserByIdOutput(insightconnect_plugin_runtime.Output):
         "updatedAt": {
           "type": "integer",
           "title": "Updated At",
-          "description": "Time the user was updated in milliseconds or epoch, e.g. 1496561862924",
+          "description": "Time the user was updated in milliseconds or epoch",
           "order": 6
         },
         "updatedBy": {

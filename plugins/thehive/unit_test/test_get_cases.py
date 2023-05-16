@@ -31,7 +31,7 @@ class TestGetCases(TestCase):
         mocked_request(mock_get)
         response = self.action.run()
         expected = {
-            "list": [
+            "success": [
                 {
                     "severity": 2,
                     "owner": "string",

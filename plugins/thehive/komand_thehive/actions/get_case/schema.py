@@ -116,7 +116,6 @@ class GetCaseOutput(insightconnect_plugin_runtime.Output):
         "assignee": {
           "type": "string",
           "title": "Assignee",
-          "description": "Dunno",
           "order": 21
         },
         "closedDate": {
@@ -146,7 +145,6 @@ class GetCaseOutput(insightconnect_plugin_runtime.Output):
         "extraData": {
           "type": "object",
           "title": "Extra Data",
-          "description": "Dunno",
           "order": 24
         },
         "flag": {
@@ -170,19 +168,16 @@ class GetCaseOutput(insightconnect_plugin_runtime.Output):
         "impactStatus": {
           "type": "string",
           "title": "Impact Status",
-          "description": "Dunno",
           "order": 20
         },
         "inProgressDate": {
           "type": "integer",
           "title": "In Progress Date",
-          "description": "Dunno (datetime in ms)",
           "order": 26
         },
         "newDate": {
           "type": "integer",
           "title": "New Date",
-          "description": "Dunno (datetime in ms)",
           "order": 25
         },
         "number": {

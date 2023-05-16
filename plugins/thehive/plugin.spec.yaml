@@ -3,8 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: thehive
 title: TheHive
-description: "TheHive is a scalable, open source security incident response solution designed for
-  SOCs & CERTs to collaborate, elaborate, analyze and get their job done"
+description: "TheHive is a scalable, open source security incident response solution designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done"
 version: 3.0.0
 vendor: rapid7
 support: community
@@ -14,9 +13,9 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://thehive-project.org
 tags:
-- thehive
-- intel
-- case
+  - thehive
+  - intel
+  - case
 hub_tags:
   use_cases: [remediation_management]
   keywords: [thehive, intel, case]
@@ -34,7 +33,7 @@ connection:
     type: string
     title: Port
     description: TheHive API port
-    default: "9000"
+    default: 9000
     example: 9000
     required: true
   protocol:
@@ -42,8 +41,8 @@ connection:
     title: Protocol
     description: HTTP Protocol
     enum:
-    - http
-    - https
+      - http
+      - https
     example: http
     required: true
   credentials:
@@ -60,8 +59,7 @@ connection:
     required: false
   proxy:
     title: Proxy
-    description: An optional dictionary containing proxy data, with HTTP or HTTPS
-      as the key, and the proxy URL as the value
+    description: An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value
     type: object
     example: {}
     required: false
@@ -77,7 +75,7 @@ types:
     id:
       title: Case ID
       description: ID for the case
-      example: 50
+      example: AYgQWIIjfMffAh_St-fd
       type: string
       required: false
     title:
@@ -95,10 +93,10 @@ types:
       type: string
       default: Waiting
       enum:
-      - Waiting
-      - InProgress
-      - Completed
-      - Cancel
+        - Waiting
+        - InProgress
+        - Completed
+        - Cancel
       required: false
     flag:
       title: Flag
@@ -136,7 +134,8 @@ types:
     updatedAt:
       title: Updated At
       type: integer
-      description: Time the user was updated in milliseconds or epoch, e.g. 1496561862924
+      description: Time the user was updated in milliseconds or epoch
+      example: 1496561862924
       required: false
     user:
       type: string
@@ -154,7 +153,7 @@ types:
       required: false
     _id:
       title: _ID
-      description: User _ID
+      description: User ID
       type: string
       required: false
     id:
@@ -164,7 +163,8 @@ types:
       required: false
     createdAt:
       title: Created At
-      description: Time the user was created at in milliseconds or epoch, e.g. 1496561862924
+      description: Time the user was created at in milliseconds or epoch
+      example: 1496561862924
       type: integer
       required: false
     preferences:
@@ -273,12 +273,10 @@ types:
       required: false
     impactStatus:
       title: Impact Status
-      description: Dunno
       type: string
       required: false
     assignee:
       title: Assignee
-      description: Dunno
       type: string
       required: false
     customFields:
@@ -293,17 +291,14 @@ types:
       required: false
     extraData:
       title: Extra Data
-      description: Dunno
       type: object
       required: false
     newDate:
       title: New Date
-      description: Dunno (datetime in ms)
       type: integer
       required: false
     inProgressDate:
       title: In Progress Date
-      description: Dunno (datetime in ms)
       type: integer
       required: false
     closedDate:
@@ -394,7 +389,7 @@ types:
       type: integer
       required: false
     tags:
-      title: tags
+      title: Tags
       description: Case tags
       type: "[]string"
       required: false
@@ -478,10 +473,10 @@ types:
       description: Task status
       required: false
       enum:
-      - Waiting
-      - InProgress
-      - Completed
-      - Cancel
+        - Waiting
+        - InProgress
+        - Completed
+        - Cancel
     startDate:
       title: Start Date
       type: integer
@@ -573,8 +568,8 @@ types:
       description: Observable ID
     createdAt:
       title: Created At
-      description: Time the observable was created at in milliseconds or epoch, e.g.
-        1496561862924
+      description: Time the observable was created at in milliseconds or epoch
+      example: 1496561862924
       type: integer
 actions:
   get_user_by_id:
@@ -778,7 +773,7 @@ actions:
         required: false
       json:
         title: JSON
-        description:  If the field is not equal to None, the Task is instantiated using the JSON value instead of the arguements
+        description: If the field is not equal to None, the Task is instantiated using the JSON value instead of the arguements
         type: object
         example: {}
         required: false

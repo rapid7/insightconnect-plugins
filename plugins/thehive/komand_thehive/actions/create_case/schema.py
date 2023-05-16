@@ -335,7 +335,7 @@ class CreateCaseOutput(insightconnect_plugin_runtime.Output):
         },
         "tags": {
           "type": "array",
-          "title": "tags",
+          "title": "Tags",
           "description": "Case tags",
           "items": {
             "type": "string"

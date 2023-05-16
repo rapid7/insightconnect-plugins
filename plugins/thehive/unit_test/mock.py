@@ -26,10 +26,10 @@ STUB_CONNECTION_API_KEY = {
     ConnectionInput.API_KEY: {"secretKey": STUB_API_KEY},
 }
 STUB_BASE_URL = "http://10.10.10.10:9000"
-# STUB_CONNECTION_USERNAME_PASSWORD = {
-#     ConnectionInput.CREDENTIALS.get("username"): STUB_USERNAME,
-#     ConnectionInput.CREDENTIALS.get("password"): STUB_PASSWORD,
-# }
+STUB_CONNECTION_USERNAME_PASSWORD = {
+    ConnectionInput.CREDENTIALS.get("username", ""): STUB_USERNAME,
+    ConnectionInput.CREDENTIALS.get("password", ""): STUB_PASSWORD,
+}
 STUB_CASE_ID = "abcdef123"
 STUB_USER_ID = "stubuserid"
 STUB_CASE = {

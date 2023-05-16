@@ -1,4 +1,4 @@
-###################################################
+#############################################################
 
 
 
@@ -222,7 +222,7 @@ Create a new case observable
 |----|----|-------|--------|-----------|----|-------|
 |data|string|None|False|Observable's data|None|Test data for observable|
 |datatype|string|None|False|Observables Data Type|None|domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other|
-|id|string|None|False|ID for the case|None|50|
+|id|string|None|False|ID for the case|None|AYgQXmjbfMffAh_St-fk|
 |ignoreSimilarity|boolean|False|False|Observable's similarity ignore flag. True to ignore the observable during similarity computing|None|False|
 |ioc|boolean|False|False|Observable's IOC, True to mark an observable as IOC|None|False|
 |message|string|None|False|Observable's description. If tags is empty, this is required|None|Observable message|
@@ -252,7 +252,7 @@ Example input:
 {
   "data": "Test data for observable",
   "datatype": "domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other",
-  "id": 50,
+  "id": "AYgQXmjbfMffAh_St-fk",
   "ignoreSimilarity": false,
   "ioc": false,
   "message": "Observable message",
