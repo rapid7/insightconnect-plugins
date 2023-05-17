@@ -10,17 +10,31 @@
 
 * Requires an API Key from the product
 
+# Supported Product Versions
+
+* CheckPoint 2023-05-15
+
 # Documentation
 
 ## Setup
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|API Key|None|
-|service_address|string|te.checkpoint.com|True|The Service Address|None|
-|using_cloud_server|boolean|True|True|Set to true if using the cloud version|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|API Key|None|TE_API_KEY_grH54uBqMleMweizSuQdifIdfhoqPe2mGCPeOx3E|
+|service_address|string|https://example.com|True|The Service Address|None|https://example.com|
+|using_cloud_server|boolean|True|True|Set to true if using the cloud version|None|True|
+
+Example input:
+
+```
+{
+  "api_key": "TE_API_KEY_grH54uBqMleMweizSuQdifIdfhoqPe2mGCPeOx3E",
+  "service_address": "te.checkpoint.com",
+  "using_cloud_server": true
+}
+```
 
 ## Technical Details
 
@@ -32,14 +46,14 @@ This action is used to query the status of a file.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|features|string|None|False|Features|None|
-|file_digest|string|None|True|Hash of the file|None|
-|file_digest_type|string|None|True|The type of hash used for the digest|['md5', 'sha1', 'sha2']|
-|file_name|string|None|False|File name|None|
-|file_type|string|None|False|The file extension|None|
-|quota|boolean|None|False|Quota|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|features|string|None|False|Features|None|te|
+|file_digest|string|None|True|Hash of the file|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|file_digest_type|string|None|True|The type of hash used for the digest|['md5', 'sha1', 'sha2']|md5|
+|file_name|string|None|False|File name|None|https://example.com|
+|file_type|string|None|False|The file extension|None|png|
+|quota|boolean|None|False|Quota|None|False|
 
 Example input:
 
@@ -56,10 +70,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|found|boolean|False|Returns true if file found|
-|query_response|object|False|Status of requested features|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|found|boolean|False|Returns true if file found|True|
+|query_response|object|False|Status of requested features|{}|
 
 Example output:
 
@@ -116,27 +130,27 @@ This action is used to upload a file for analysis.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|file_bytes|bytes|None|True|The file bytes|None|
-|file_name|string|None|True|The name of the file|None|
-|file_type|string|None|False|File extension e.g. DOCX, PDF|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|file_bytes|bytes|None|True|The file bytes|None|txt|
+|file_name|string|None|True|The name of the file|None|YmxhaA==|
+|file_type|string|None|False|File extension e.g. DOCX, PDF|None|https://example.com|
 
 Example input:
 
 ```
 {
-  "file_bytes": "YmxhaA==",
-  "file_name": "blah.txt",
-  "file_type": "txt"
+  "file_bytes": "txt",
+  "file_name": "YmxhaA==",
+  "file_type": "blah.txt"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results|upload_response|False|Results from the upload|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|results|upload_response|False|Results from the upload|{}|
 
 Example output:
 
@@ -201,11 +215,14 @@ When using the local version of Check Point SandBlast the query report action mu
 
 # Version History
 
+* 1.0.3 - Update requests to version 2.20.0
 * 1.0.2 - Update Check Point branding
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
 # Links
+
+* [Check Point website](https://www.checkpoint.com/)
 
 ## References
 
