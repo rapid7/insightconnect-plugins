@@ -13,9 +13,11 @@ class Input:
     ID = "id"
     IGNORESIMILARITY = "ignoreSimilarity"
     IOC = "ioc"
+    JSONDATA = "jsonData"
     MESSAGE = "message"
     PAP = "pap"
     SIGHTED = "sighted"
+    STARTDATE = "startDate"
     TAGS = "tags"
     TLP = "tlp"
     
@@ -62,6 +64,12 @@ class CreateCaseObservableInput(insightconnect_plugin_runtime.Input):
       "default": false,
       "order": 6
     },
+    "jsonData": {
+      "type": "object",
+      "title": "JSON Data",
+      "description": "All fields included in one JSON object. If using this, all other fields will be ignored",
+      "order": 12
+    },
     "message": {
       "type": "string",
       "title": "Message",
@@ -87,6 +95,12 @@ class CreateCaseObservableInput(insightconnect_plugin_runtime.Input):
       "description": "Observable's sighted flag, True to mark the observable as sighted",
       "default": false,
       "order": 7
+    },
+    "startDate": {
+      "type": "integer",
+      "title": "Start Date",
+      "description": "Observable start date (timestamp in ms)",
+      "order": 11
     },
     "tags": {
       "type": "array",

@@ -861,6 +861,17 @@ actions:
         type: string
         example: Test data for observable
         required: false
+      startDate:
+        title: Start Date
+        description: Observable start date (timestamp in ms)
+        type: integer
+        example: 1640000000000
+        required: false
+      jsonData:
+        title: JSON Data
+        description: All fields included in one JSON object. If using this, all other fields will be ignored
+        type: object
+        required: false
     output:
       case:
         type: observable

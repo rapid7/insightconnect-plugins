@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import CreateCaseObservableInput, CreateCaseObservableOutput, Component, Input, Output
 
 # Custom imports below
-
+import time
 
 class CreateCaseObservable(insightconnect_plugin_runtime.Action):
     def __init__(self):
@@ -16,13 +16,15 @@ class CreateCaseObservable(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
 
         case_id = params.get(Input.ID)
-        json_observable_data = params.get(Input.DATA)
+        json_observable_data = params.get(Input.JSONDATA)
 
         if json_observable_data:
             observable = json_observable_data
         else:
             observable = {
                 "dataType": params.get(Input.DATATYPE),
+                "data": params.get(Input.DATA),
+                "startDate": params.get(Input.STARTDATE, int(time.time()) * 1000),
                 "message": params.get(Input.MESSAGE),
                 "tlp": params.get(Input.TLP),
                 "ioc": params.get(Input.IOC),

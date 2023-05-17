@@ -32,7 +32,28 @@ class TestCreateCaseObservable(TestCase):
     def test_create_case_observable(self, mock_post):
         mocked_request(mock_post)
         response = self.action.run(self.params)
-        expected = {}
+        expected = {
+            "case": {
+                "_routing": "case_id",
+                "reports": {},
+                "data": "string",
+                "dataType": "domain",
+                "_type": "case_artifact",
+                "sighted": False,
+                "message": "string",
+                "tags": ["string"],
+                "createdAt": 1684247621951,
+                "_parent": "case_id",
+                "createdBy": "admin",
+                "tlp": 2,
+                "_id": "random_id1234",
+                "id": "random_id1234",
+                "ioc": False,
+                "_version": 1,
+                "startDate": 1640000000000,
+                "status": "Ok",
+            }
+        }
         self.assertEqual(response, expected)
 
     @parameterized.expand(

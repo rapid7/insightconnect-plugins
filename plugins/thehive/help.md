@@ -1,4 +1,4 @@
-#############################################################
+##################################################################
 
 
 
@@ -117,6 +117,10 @@ Close a case by ID
 Example input:
 
 ```
+{
+  "force": false,
+  "id": 50
+}
 ```
 
 ##### Output
@@ -225,9 +229,11 @@ Create a new case observable
 |id|string|None|False|ID for the case|None|AYgQXmjbfMffAh_St-fk|
 |ignoreSimilarity|boolean|False|False|Observable's similarity ignore flag. True to ignore the observable during similarity computing|None|False|
 |ioc|boolean|False|False|Observable's IOC, True to mark an observable as IOC|None|False|
+|jsonData|object|None|False|All fields included in one JSON object. If using this, all other fields will be ignored|None|None|
 |message|string|None|False|Observable's description. If tags is empty, this is required|None|Observable message|
 |pap|integer|2|False|Case's PAP|[0, 1, 2, 3]|2|
 |sighted|boolean|False|False|Observable's sighted flag, True to mark the observable as sighted|None|False|
+|startDate|integer|None|False|Observable start date (timestamp in ms)|None|1640000000000|
 |tags|[]string|None|False|List of observable tags, required if message is None|None|["tag_one", "tag_two"]|
 |tlp|integer|2|False|Case's TLP|[0, 1, 2, 3]|2|
 
@@ -258,6 +264,7 @@ Example input:
   "message": "Observable message",
   "pap": 2,
   "sighted": false,
+  "startDate": 1640000000000,
   "tags": [
     "tag_one",
     "tag_two"
