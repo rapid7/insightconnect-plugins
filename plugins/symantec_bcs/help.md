@@ -55,17 +55,17 @@ Example input:
 }
 ```
 
-##### Output
+# Output
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|response|string|None|True|HTML response|None|response|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|response|string|None|True|HTML response|None|<!DOCTYPE html> <html> <body> <h1>Example Response</h1> </body> </html>|
   
 Example output:
 
 ```
 {
-  "response": ""
+  "response": "<!DOCTYPE html> <html> <body> <h1>Example Response</h1> </body> </html>"
 }
 ```
 
