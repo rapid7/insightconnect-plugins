@@ -17,7 +17,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         api_route = "api/now/"
         incident_table = "incident"
-        vulnerability_table = "sn_vul_app_vulnerable_item"
+        vulnerability_table = "sn_vul_vulnerable_item"
 
         self.base_url = f"https://{params.get(Input.INSTANCE, '')}.service-now.com/"
 
