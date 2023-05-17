@@ -5,6 +5,7 @@ name: thehive
 title: TheHive
 description: "TheHive is a scalable, open source security incident response solution designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done"
 version: 3.0.0
+supported_versions: ["2023-05-17"]
 vendor: rapid7
 support: community
 status: []
@@ -717,6 +718,33 @@ actions:
       case:
         type: createCase
         description: Create case output
+        example: {
+            "owner": "string",
+            "summary": "string",
+            "severity": 2,
+            "_routing": "case_id",
+            "flag": false,
+            "endDate": 1640000000000,
+            "customFields": {},
+            "_type": "case",
+            "description": "string",
+            "title": "string",
+            "tags": [
+                "string"
+            ],
+            "createdAt": 1684188238010,
+            "_parent": null,
+            "createdBy": "admin",
+            "caseId": 54,
+            "tlp": 2,
+            "metrics": {},
+            "_id": "case_id",
+            "id": "case_id",
+            "_version": 1,
+            "pap": 2,
+            "startDate": 1640000000000,
+            "status": "Open"
+        }
         required: false
   create_case_task:
     title: Create Task
@@ -775,6 +803,7 @@ actions:
         title: JSON
         description: If the field is not equal to None, the Task is instantiated using the JSON value instead of the arguements
         type: object
+        example: json object containing all necessary fields
         required: false
     output:
       case:
@@ -870,6 +899,7 @@ actions:
         title: JSON Data
         description: All fields included in one JSON object. If using this, all other fields will be ignored
         type: object
+        example: json object containing all necessary fields
         required: false
     output:
       case:
@@ -920,5 +950,6 @@ actions:
     output:
       success:
         title: Success
+        description: Boolean to indicate if the operation was successful
         type: boolean
         required: true

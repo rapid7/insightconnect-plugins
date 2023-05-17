@@ -55,6 +55,7 @@ class CloseCaseOutput(insightconnect_plugin_runtime.Output):
     "success": {
       "type": "boolean",
       "title": "Success",
+      "description": "Boolean to indicate if the operation was successful",
       "order": 1
     }
   },

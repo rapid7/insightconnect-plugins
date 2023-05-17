@@ -1,4 +1,4 @@
-################################################################################
+########################################################################################
 
 
 
@@ -22,7 +22,7 @@ InsightConnect
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* 2023-05-17
 
 # Documentation
 
@@ -117,10 +117,6 @@ Close a case by ID
 Example input:
 
 ```
-{
-  "force": false,
-  "id": 50
-}
 ```
 
 ##### Output
@@ -229,7 +225,7 @@ Create a new case observable
 |id|string|None|False|ID for the case|None|AYgQXmjbfMffAh_St-fk|
 |ignoreSimilarity|boolean|False|False|Observable's similarity ignore flag. True to ignore the observable during similarity computing|None|False|
 |ioc|boolean|False|False|Observable's IOC, True to mark an observable as IOC|None|False|
-|jsonData|object|None|False|All fields included in one JSON object. If using this, all other fields will be ignored|None|None|
+|jsonData|object|None|False|All fields included in one JSON object. If using this, all other fields will be ignored|None|json object containing all necessary fields|
 |message|string|None|False|Observable's description. If tags is empty, this is required|None|Observable message|
 |pap|integer|2|False|Case's PAP|[0, 1, 2, 3]|2|
 |sighted|boolean|False|False|Observable's sighted flag, True to mark the observable as sighted|None|False|
@@ -261,6 +257,7 @@ Example input:
   "id": "AYgQXmjbfMffAh_St-fk",
   "ignoreSimilarity": false,
   "ioc": false,
+  "jsonData": "json object containing all necessary fields",
   "message": "Observable message",
   "pap": 2,
   "sighted": false,
@@ -312,7 +309,7 @@ Create a new case task
 |description|string|None|False|Task's description|None|Task description|
 |flag|boolean|False|False|Task's flag, 'True' to mark the task as important|None|False|
 |id|string|None|False|ID for the case|None|AYgQXmjbfMffAh_St-fk|
-|jsonData|object|None|False|If the field is not equal to None, the Task is instantiated using the JSON value instead of the arguements|None|None|
+|jsonData|object|None|False|If the field is not equal to None, the Task is instantiated using the JSON value instead of the arguements|None|json object containing all necessary fields|
 |owner|string|None|False|Task's assignee|None|admin|
 |startDate|integer|None|False|Task's start date, the date the task started at|None|1684170163000|
 |status|string|Waiting|False|Task's status|['Waiting', 'InProgress', 'Cancel', 'Completed']|Waiting|
@@ -337,6 +334,7 @@ Example input:
   "description": "Task description",
   "flag": false,
   "id": "AYgQXmjbfMffAh_St-fk",
+  "jsonData": "json object containing all necessary fields",
   "owner": "admin",
   "startDate": 1684170163000,
   "status": "Waiting",
