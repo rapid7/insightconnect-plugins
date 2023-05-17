@@ -22,6 +22,7 @@ from unit_test.mock import (
 )
 from unit_test.constants import STUB_USER_ID
 
+
 class TestGetUserById(TestCase):
     @mock.patch("requests.Session.request", side_effect=mock_request_200)
     def setUp(self, mock_post: Mock) -> None:
