@@ -35,7 +35,7 @@ This action is used to obtain an AV Report.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|query|string|None|True|Virus name to query|None|https://example.com|
+|query|string|None|True|Virus name to query|None|Trojan.Enfal|
 
 Example input:
 
@@ -49,7 +49,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|response|False|Response|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
@@ -76,7 +76,7 @@ This action fetches information related to a virus.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|query|string|None|True|Virus name to query|None|https://example.com|
+|query|string|None|True|Virus name to query|None|Trojan.Enfal|
 
 Example input:
 
@@ -88,9 +88,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|--------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}||
 
 Example output:
 
@@ -112,7 +112,7 @@ This action fetches information related to a domain by URIs, certificates, or re
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|domain|string|None|True|Domain to search|None|https://example.com|
+|domain|string|None|True|Domain to search|None|www.example.com|
 |query_type|string|None|True|Query Type|['WHOIS', 'PASSIVE DNS', 'Example Query URI', 'Report Tagging']|WHOIS|
 
 Example input:
@@ -126,9 +126,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
@@ -221,7 +221,7 @@ This action fetches information related to a domain by URIs, certificates, or re
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|domain|string|None|True|Domain to search|None|https://example.com|
+|domain|string|None|True|Domain to search|None|www.example.com|
 |query_type|string|None|True|Query type|['Related Samples', 'Subdomains']|Subdomains|
 
 Example input:
@@ -235,9 +235,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|--------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
@@ -328,7 +328,7 @@ This action fetches information related to an email address.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|email|string|None|True|Email address to search|None|https://example.com|
+|email|string|None|True|Email address to search|None|user@example.com|
 
 Example input:
 
@@ -340,9 +340,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
@@ -364,7 +364,7 @@ This action fetches information related to an email address.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|email|string|None|True|Email address to search|None|https://example.com|
+|email|string|None|True|Email address to search|None|user@example.com|
 
 Example input:
 
@@ -376,9 +376,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
@@ -412,9 +412,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|---------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
@@ -448,9 +448,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Query|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------------|
+|response|response|False|Query|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
@@ -472,7 +472,7 @@ This action fetches information related to an IP by Whois, URIs, passive DNS, or
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|IP address to search|None|https://example.com|
+|address|string|None|True|IP address to search|None|192.0.2.0/24|
 |query_type|string|None|True|Query Type|['WHOIS', 'PASSIVE DNS', 'URIs', 'Report Tagging']|WHOIS|
 
 Example input:
@@ -486,9 +486,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
@@ -518,7 +518,7 @@ This action fetches information related to an IP by certificates, or related sam
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|IP address to search|None|https://example.com|
+|address|string|None|True|IP address to search|None|192.0.2.0/24|
 |query_type|string|None|True|Query type|['Related Samples', 'SSL Certificates']|Related Samples|
 
 Example input:
@@ -532,9 +532,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|--------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
@@ -565,7 +565,7 @@ This action fetches information related to an indicator by domains, hosts, email
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|filename|string|None|True|Indicator to search|None|https://example.com|
+|filename|string|None|True|Indicator to search|None|C5_APT_C2InTheFifthDomain.pdf|
 |query_type|string|None|True|Query Type|['Domains', 'Hosts', 'Emails', 'Samples']|Domains|
 |year|string|None|True|Year to search|None|2013|
 
@@ -581,9 +581,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
@@ -623,9 +623,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
@@ -665,9 +665,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-----------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
@@ -705,9 +705,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|--------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
@@ -745,9 +745,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|----------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
@@ -769,7 +769,7 @@ This action fetches host information related to a certificate.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|query|string|None|True|Certificate SHA1 hash to search|None|02699626f388ed830012e5b787640e71c56d42d8|
+|query|string|None|True|Certificate SHA1 hash to search|None|42a8d5b3a867a59a79f44ffadd61460780fe58f2|
 
 Example input:
 
@@ -781,9 +781,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|------------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
@@ -806,7 +806,7 @@ This action fetches information related to a certificate.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|query|string|None|True|Certificate SHA1 hash to search|None|02699626f388ed830012e5b787640e71c56d42d8|
+|query|string|None|True|Certificate SHA1 hash to search|None|42a8d5b3a867a59a79f44ffadd61460780fe58f2|
 
 Example input:
 
@@ -818,9 +818,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|False|Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|---------|
+|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
