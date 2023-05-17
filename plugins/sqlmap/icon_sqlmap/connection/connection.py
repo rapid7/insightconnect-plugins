@@ -3,6 +3,7 @@ from .schema import ConnectionSchema
 
 # Custom imports below
 import subprocess  # noqa: B404
+import logging
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -29,8 +30,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         if self.api_host and self.api_port:
             subprocess.Popen(
                 [
-                    "python /python/src/sqlmap-master/sqlmapapi.py -s --host=%s --port=%s"
-                    % (self.api_host, self.api_port)
+                    f"python /python/src/sqlmap-master/sqlmapapi.py -s --host={self.api_host} --port={self.api_port}"
                 ],
                 stdout=self.f,
                 stderr=self.f,
