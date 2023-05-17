@@ -1,9 +1,8 @@
 import komand
-from .schema import AvReportInput, AvReportOutput
-
 # Custom imports below
-import json
 import requests
+
+from .schema import AvReportInput, AvReportOutput
 
 
 class AvReport(komand.Action):
@@ -22,7 +21,7 @@ class AvReport(komand.Action):
         query = params.get("query")
 
         try:
-            response = requests.get(self.API_URL, params={"q": query})
+            response = requests.get(self.API_URL, params={"q": query}, timeout=10)
             return {"response": response.json()}
 
         except requests.exceptions.HTTPError as error:
@@ -32,8 +31,8 @@ class AvReport(komand.Action):
 
     def test(self):
         params = {"q": "Trojan.Enfal"}
-        response = requests.get(self.API_URL, params=params)
+        response = requests.get(self.API_URL, params=params, timeout=10)
         if int(response.status_code) != 200:
-            raise Exception(f"{response.text} (HTTP status: {response.status_code})")
+            raise AssertionError(f"{response.text} (HTTP status: {response.status_code})")
 
         return {"status_code": response.status_code}
