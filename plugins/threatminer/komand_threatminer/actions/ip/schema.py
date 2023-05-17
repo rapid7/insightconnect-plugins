@@ -80,7 +80,7 @@ class IpOutput(komand.Output):
           "order": 3
         },
         "status_code": {
-          "type": "string",
+          "type": "integer",
           "title": "Status Code",
           "description": "Status Code",
           "order": 1
