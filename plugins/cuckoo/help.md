@@ -1,7 +1,7 @@
 # Description
 
 [Cuckoo Sandbox](https://cuckoosandbox.org/) is an open source automated malware analysis system. It enables
- tracing of API calls, file behavior, and analysis of memory and network traffic. Using the Cuckoo Sandbox plugin for
+tracing of API calls, file behavior, and analysis of memory and network traffic. Using the Cuckoo Sandbox plugin for
 Rapid7 InsightConnect, users can analyze files and URLs, manage tasks, and more.
 
 Use Cuckoo Sandbox in your automation workflows to manage tasks and analyze PCAPs or suspicious files obtained through
@@ -20,14 +20,32 @@ throughout this documentation in place of real base64-encoded data.
 
 * Cuckoo Sandbox API URL for your Cuckoo instance
 
+# Supported Product Versions
+
+* 2019-06-19
+
 # Documentation
 
 ## Setup
 
 The connection configuration accepts the following parameters:
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|http://localhost:8090/api|True|Cuckoo Sandbox API URL|None|
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|url|string|http://localhost:8090/api|True|Cuckoo Sandbox API URL|None|http://localhost:8090/api|
+
+Example input:
+
+
+```
+
+{
+
+  "url": "http://localhost:8090/api"
+
+}
+
+```
 
 ## Technical Details
 
@@ -39,16 +57,26 @@ This action is used to return details on the task associated with the specified 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|task_id|integer|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|task_id|integer|None|True|Task ID|None|12345678910|
+
+Example input:
+
+
+```
+
+{
+  "task_id": 12345678910
+}
+
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|found|boolean|False|None|
-|task|task|True|None|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|task|task|True|Cuckoo task|{'task_id': 1}|
 
 Example output:
 
@@ -91,16 +119,28 @@ This action is used to return list of tasks.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|limit|integer|None|False|Maximum number of returned tasks|None|
-|offset|integer|None|False|Data offset|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|limit|integer|None|False|Maximum number of returned tasks|None|10|
+|offset|integer|None|False|Data offset|None|5|
+
+Example input:
+
+
+```
+
+{
+  "limit": 10,
+  "offset": 5
+}
+
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|tasks|[]task|True|None|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|tasks|[]task|True|Cuckoo tasks|[{"completed": 1, "pending": 1, "reported": 1, "running": 1, "total": 1}]|
 
 Example output:
 
@@ -166,16 +206,25 @@ This action is used to remove the given task from the database and delete the re
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|task_id|integer|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|task_id|integer|None|True|Task ID|None|12345678910|
+
+Example input:
+
+```
+{
+  "task_id": 12345678910
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|status_code|integer|True|Status Code, i.e., 200 - no error, 404 - task not found, 500 - unable to delete task|
-|message|string|True|Message associated with status code|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|------|
+|error|boolean|True|Error true or false|True|
+|error_value|string|True|Error message|Error|
+|message|string|True|Message associated with status code|Bad Request|
 
 Example output:
 
@@ -194,17 +243,25 @@ This action is used to reschedule a task with the specified ID and priority (def
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|priority|integer|None|False|None|None|
-|task_id|integer|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|priority|integer|None|False|Priority|None|1|
+|task_id|integer|None|True|Task ID|None|12345678910|
+
+Example input:
+
+```
+{
+  "priority": 1,
+  "task_id": 12345678910
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|True|None|
-|task_id|integer|True|None|
+|task_id|integer|True|Task ID|12345678910|
 
 Example output:
 
@@ -212,7 +269,7 @@ Example output:
 
 {
   "status": "OK",
-  "task_id": 1
+  "task_id": 12345678910
 }
 
 ```
@@ -223,15 +280,23 @@ This action is used to return details on the analysis machine associated with th
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|machine_name|string|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|machine_name|string|None|True|Machine name|None|example_machine|
+
+Example input:
+
+```
+{
+  "machine_name": "example_machine"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|machine|machine|True|Machine details|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|machine|machine|True|Machine details|Example Machine|
 
 Example output:
 
@@ -273,15 +338,12 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|tasks|tasks|True|Details about analysis tasks|
-|diskspace|diskspace|True|Free, total and used diskspace of $CUCKOO/storage/analyses/, $CUCKOO/storage/binaries/, and specified tmppath|
-|hostname|string|True|None|
-|cpuload|[]float|True|CPU load for the past 1, 5 and 15 minutes respectively|
-|version|string|True|None|
-|mem_total|integer|True|None|
-|memory|boolean|True|None|
-|mem_avail|integer|True|None|
-|machines|machines|True|Details about available and total analysis machines|
+|cpuload|[]float|True|CPU load for the past 1, 5 and 15 minutes respectively|[0.123]|
+|diskspace|diskspace|True|Free, total and used diskspace of $CUCKOO/storage/analyses/, $CUCKOO/storage/binaries/, and specified tmppath|100|
+|hostname|string|True|Cuckoo hostname|Example Hostname|
+|machines|machines|True|Details about available and total analysis machines|{'available': 10, 'total': 10}|
+|tasks|tasks|True|Details about analysis tasks|[{"completed": 1, "pending": 1, "reported": 1, "running": 1, "total": 1}]|
+|version|string|True|Cuckoo version|2.0.7|
 
 The contents of this output vary greatly based on Cuckoo's internal settings.
 
@@ -331,17 +393,25 @@ This action is used to return one (JPEG) or all (ZIP) screenshots associated wit
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|screenshot_id|string|None|False|None|None|
-|task_id|integer|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|screenshot_id|string|None|False|Screenshot ID|None|12345678910|
+|task_id|integer|None|True|Task ID|None|12345678910|
+
+Example input:
+
+```
+{
+  "screenshot_id": 12345678910,
+  "task_id": 12345678910
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|found|boolean|True|None|
-|screenshots|bytes|True|None|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|screenshots|bytes|True|Base64 encoded screenshot|VGhpcyBpcyBhbiBleGFtcGxl|
 
 Example output:
 
@@ -360,17 +430,25 @@ This action is used to return the report associated with the specified task ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|task_id|integer|None|True|None|None|
-|format|string|None|False|One of [json/html/all/dropped/package_files]. Details on formats here: http://docs.cuckoosandbox.org/en/latest/usage/api/#tasks-report|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|format|string|None|False|One of [json/html/all/dropped/package_files]. Details on formats here: http://docs.cuckoosandbox.org/en/latest/usage/api/#tasks-report|None|json|
+|task_id|integer|None|True|Task ID|None|12345678910|
+
+Example input:
+
+```
+{
+  "format": "json",
+  "task_id": 12345678910
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|report|bytes|True|None|
-|message|string|True|None|
+|report|bytes|True|Base64 encoded report|VGhpcyBpcyBhbiBleGFtcGxl|
 
 Example output:
 
@@ -378,7 +456,7 @@ Example output:
 
   {
     "message": "OK",
-    "report": base64-encoded file
+    "report": VGhpcyBpcyBhbiBleGFtcGxl
   }
 
 ```
@@ -389,17 +467,25 @@ This action is used to return one memory dump file associated with the specified
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|pid|string|None|True|None|None|
-|task_id|integer|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|pid|string|None|True|Process ID|None|12345678910|
+|task_id|integer|None|True|Task ID|None|12345678910|
+
+Example input:
+
+```
+{
+  "pid": 12345678910,
+  "task_id": 12345678910
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|found|boolean|True|None|
-|contents|bytes|True|None|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|contents|bytes|True|Base64 encoded contents|VGhpcyBpcyBhbiBleGFtcGxl|
 
 Example output:
 
@@ -422,12 +508,11 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|message|string|False|Message returned in event of error|
-|vpns|[]vpn|True|None|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|vpns|[]vpn|True|VPN status array|[{"name": "Example", "status": "Running"}]|
 
-This action is currently not supported by Cuckoo for Mac OS and will return a 500.
+This action is currently not supported by Cuckoo for MAC OS and will return a 500.
 
 #### List Machines
 
@@ -439,9 +524,9 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|machines|[]machine|True|List of machines available to Cuckoo|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|machines|[]machine|True|List of machines available to Cuckoo|["Example Machine"]|
 
 Example output:
 
@@ -479,16 +564,24 @@ This action is used to return the content of the PCAP associated with the given 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|task_id|integer|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|task_id|integer|None|True|Task ID|None|12345678910|
+
+Example input:
+
+```
+{
+  "task_id": 1234568910
+}
+
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|found|boolean|True|None|
-|contents|bytes|True|PCAP contents|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|contents|bytes|True|PCAP contents|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
 
 Example output:
 
@@ -507,19 +600,30 @@ This action is used to add one or more files and/or files embedded in archives t
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|files|[]file|None|True|List of files of the format: {'filename': 'blah.exe', 'contents': 'YmFzZTY0Cg=='}|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|files|[]file|None|True|List of files of the format: {'filename': 'blah.exe', 'contents': '<b64-encoded-bytes>'}|None|[{"filename": "example.exe", "contents": "VGhpcyBpcyBhbiBleGFtcGxl"}]|
+
+Example input:
+ 
+```
+{
+   "files":[
+      {
+         "filename":"example.exe",
+         "contents":"VGhpcyBpcyBhbiBleGFtcGxl"
+      }
+   ]
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|submit_id|integer|True|None|
-|message|string|True|Reason for failed submission|
-|errors|[]string|True|None|
-|success|boolean|True|None|
-|task_id|integer|True|None|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|errors|[]string|False|Errors if any||
+|submit_id|integer|False|Submission ID||
+|task_id|integer|True|Task ID|1234678910|', '|submit_id|integer|False|Submission ID|12345678910|', '|errors|[]string|False|Errors if any|["ExampleError"]|
 
 Example output:
 
@@ -539,18 +643,28 @@ This action is used to return details on the file matching either the specified 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|sha256|string|None|False|None|None|
-|id|integer|None|False|None|None|
-|md5|string|None|False|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|integer|None|False|ID|None|12345678910|
+|md5|string|None|False|MD5 Hash|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|sha256|string|None|False|SHA256 Hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+
+Example input:
+
+```
+{
+  "id": 12345678910,
+  "md5": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|sample|sample|True|None|
-|found|boolean|True|None|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|data|data|True|Data|3395856ce81f2b7382dee72602f798b642f14140|
+|error|boolean|True|Error information|True|
 
 Example output:
 
@@ -579,22 +693,30 @@ This action is used to add a file (from URL) to the list of pending tasks.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|URL to analyze (multipart encoded content)|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|url|string|None|True|URL to analyze (multipart encoded content)|None|www.example.com|
+
+Example input:
+
+```
+{
+  "url": "www.example.com"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|task_id|integer|True|None|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|task_id|integer|True|Task ID|12345678910|
 
 Example output:
 
 ```
 
 {
-  "task_id" : 1
+  "task_id" : 12345678910
 }
 
 ```
@@ -605,16 +727,23 @@ This action is used to return a list of memory dump files or one memory dump fil
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|task_id|integer|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|task_id|integer|None|True|Task ID|None|12345678910|
+
+Example input:
+
+```
+{
+  "task_id": 12345678910
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|found|boolean|True|None|
-|dump_files|[]string|True|None|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|dump_files|[]string|True|Dumped Files|["Example file"]|
 
 Example output:
 
@@ -637,10 +766,9 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|status_code|integer|True|Status Code, i.e., 200 - success, 403 - call can be made only in debug mode, 500 - error|
-|message|string|True|Message associated with status code|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|message|string|True|Exit message|Exit Message|
 
 Example output:
 
@@ -659,17 +787,24 @@ This action is used to add a reboot task to the database from an existing analys
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|task_id|integer|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|task_id|integer|None|True|Task ID|None|12345678910|
+
+Example input:
+
+```
+{
+  "task_id": 12345678910
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|reboot_id|integer|True|None|
-|success|boolean|True|None|
-|task_id|integer|True|None|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|reboot_id|integer|True|Reboot ID|1234678910|
+|task_id|integer|True|Task ID|12345678910|
 
 Example output:
 
@@ -683,48 +818,31 @@ Example output:
 
 ```
 
-#### Rerun Report
-
-This action is used to re-run reporting for a task associated with the specified task ID.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|task_id|integer|None|True|None|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|None|
-
-Example output:
-
-```
-
-{
-  "success": true
-}
-
-```
-
 #### Get File
 
 This action is used to return the binary content of the file matching the specified SHA256 hash.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|sha256|string|None|True|None|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|sha256|string|None|True|SHA256 Hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+
+Example input:
+
+```
+
+{
+  "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+}
+
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|found|boolean|True|None|
-|contents|bytes|True|Binary contents|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|contents|bytes|True|Binary contents|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
 
 Example output:
 
@@ -743,19 +861,33 @@ This action is used to re-run reporting for a task associated with the specified
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|task_id|integer|None|True|Task ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|task_id|integer|None|True|Task ID|None|12345678910|
+
+
+Example input:
+
+```
+
+{
+  "task_id": 12345678910
+}
+
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Action success or failure|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|------|
+|success|boolean|True|Action success or failure|True|
 
 Example output:
 
 ```
+{
+  "success": true  
+}
 ```
 
 ### Triggers
@@ -772,6 +904,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.3 - Updated Requests version to 2.20.0
 * 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Bug fix for Submit Files where Submit ID was required
 * 1.0.0 - Support web server mode | Bug fix for testing outputs | Semver compliance
@@ -782,6 +915,8 @@ _This plugin does not contain any troubleshooting information._
 * 0.1.0 - Initial plugin
 
 # Links
+
+* [cuckoo](https://cuckoosandbox.org/)
 
 ## References
 
