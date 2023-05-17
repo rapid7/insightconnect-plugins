@@ -49,7 +49,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+|response|response|False|Response|{'response': {'status_code': 404, 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
@@ -90,13 +90,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|--------|
-|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}||
+|response|response|False|Response|{'response': {'status_code': 404, 'status_message': 'No results found.', 'results': []}}||
 
 Example output:
 
 ```
 {
-   "status_code":"200",
+   "status_code": 200,
    "status_message":"Results found.",
    "results":[
       "44d88612fea8a8f36de82e1278abb02f"
@@ -128,13 +128,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+|response|response|False|Response|{'response': {'status_code': 404, 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
 ```
 {
-   "status_code":"200",
+   "status_code": 200,
    "status_message":"Results found.",
    "results":[
       {
@@ -237,13 +237,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|--------|
-|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+|response|response|False|Response|{'response': {'status_code': 404, 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
 ```
 {
-   "status_code":"200",
+   "status_code": 200,
    "status_message":"Results found.",
    "results":[
       {
@@ -342,13 +342,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+|response|response|False|Response|{'response': {'status_code': 404, 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
 ```
 {
-   "status_code":"200",
+   "status_code": 200,
    "status_message":"Results found.",
    "results":[
       "my-dejanews.com"
@@ -378,13 +378,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+|response|response|False|Response|{'response': {'status_code': 404, 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
 ```
 {
-   "status_code":"200",
+   "status_code": 200,
    "status_message":"Results found.",
    "results":[
       "my-dejanews.com"
@@ -414,13 +414,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|---------|
-|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+|response|response|False|Response|{'response': {'status_code': 404, 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
 ```
 {
-   "status_code":"200",
+   "status_code": 200,
    "status_message":"Results found.",
    "results":[
       "4c60f3f5cccdfad6137eb0a3218ec4caa3294b164c86dbda8922f1c9a75558fd"
@@ -450,13 +450,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------------|
-|response|response|False|Query|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+|response|response|False|Query|{'response': {'status_code': 404, 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
 ```
 {
-   "status_code":"200",
+   "status_code": 200,
    "status_message":"Results found.",
    "results":[
       "4c60f3f5cccdfad6137eb0a3218ec4caa3294b164c86dbda8922f1c9a75558fd"
@@ -488,13 +488,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+|response|response|False|Response|{'response': {'status_code': 404, 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
 ```
 {
-  "status_code":"200",
+  "status_code": 200,
   "status_message":"Results found.",
   "results":[
      {
@@ -534,13 +534,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|--------|
-|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+|response|response|False|Response|{'response': {'status_code': 404, 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
 ```
 {
-  "status_code":"200",
+  "status_code": 200,
   "status_message":"Results found.",
   "results":[
      {
@@ -583,13 +583,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------------|
-|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+|response|response|False|Response|{'response': {'status_code': 404, 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
 ```
 {
-  "status_code":"200",
+  "status_code": 200,
   "status_message":"Results found.",
   "results": [
     {
@@ -625,13 +625,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+|response|response|False|Response|{'response': {'status_code': 404, 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
 ```
 {
-   "status_code":"200",
+   "status_code": 200,
    "status_message":"Results found.",
    "results":[
       {
@@ -667,13 +667,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-----------|
-|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+|response|response|False|Response|{'response': {'status_code': 404, 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
 ```
 {
-  "status_code":"200",
+  "status_code": 200,
   "status_message":"Results found.",
   "results": [
     {
@@ -707,13 +707,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|--------|
-|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+|response|response|False|Response|{'response': {'status_code': 404, 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
 ```
 {
-   "status_code":"200",
+   "status_code": 200,
    "status_message":"Results found.",
    "results":[
       {
@@ -747,13 +747,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|----------|
-|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+|response|response|False|Response|{'response': {'status_code': 404, 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
 ```
 {
-   "status_code":"200",
+   "status_code": 200,
    "status_message":"Results found.",
    "results":[
       "ecc5943b5c2ec75065ba1bdb668bb0a2c63c0451be259dea47a902811b318c00"
@@ -783,13 +783,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|------------|
-|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+|response|response|False|Response|{'response': {'status_code': 404, 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
 ```
 {
-   "status_code":"200",
+   "status_code": 200,
    "status_message":"Results found.",
    "results":[
       "149.154.157.170",
@@ -820,13 +820,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|---------|
-|response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+|response|response|False|Response|{'response': {'status_code': 404, 'status_message': 'No results found.', 'results': []}}|
 
 Example output:
 
 ```
 {
-   "status_code":"200",
+   "status_code": 200,
    "status_message":"Results found.",
    "results":[
       {

@@ -60,7 +60,7 @@ actions:
         type: response
         required: false
         description: Response
-        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
+        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
   domain:
     title: Domain Lookup
     description: Fetches information related to a domain by URIs, certificates, or
@@ -89,7 +89,7 @@ actions:
         type: response
         description: Response
         required: false
-        example: {"response": {"status_code": "404", "status_message": "No results found.", "results": []}}
+        example: {"response": {"status_code": 404, "status_message": "No results found.", "results": []}}
   domain_ext:
     title: Domain Lookup Extended
     description: Fetches information related to a domain by URIs, certificates, or
@@ -116,7 +116,7 @@ actions:
         type: response
         required: false
         description: Response
-        example:  {"response": {"status_code": "404", "status_message": "No results found.", "results": []}}
+        example:  {"response": {"status_code": 404, "status_message": "No results found.", "results": []}}
   ip:
     title: IP Lookup
     description: Fetches information related to an IP by Whois, URIs, passive DNS,
@@ -145,7 +145,7 @@ actions:
         type: response
         description: Response
         required: false
-        example:  {"response": {"status_code": "404", "status_message": "No results found.", "results": []}}
+        example:  {"response": {"status_code": 404, "status_message": "No results found.", "results": []}}
   ip_ext:
     title: IP Lookup Extended
     description: Fetches information related to an IP by certificates, or related
@@ -172,7 +172,7 @@ actions:
         description: Response
         type: response
         required: false
-        example:  {"response": {"status_code": "404", "status_message": "No results found.", "results": []}}
+        example:  {"response": {"status_code": 404, "status_message": "No results found.", "results": []}}
   samples:
     title: Get Samples
     description: Fetches samples of data intelligence data by metadata, HTTP traffic,
@@ -204,7 +204,7 @@ actions:
         type: response
         description: Response
         required: false
-        example:  {"response": {"status_code": "404", "status_message": "No results found.", "results": []}}
+        example:  {"response": {"status_code": 404, "status_message": "No results found.", "results": []}}
   import_hash_report:
     title: Hash Report
     description: Fetches information related to a hash
@@ -221,7 +221,7 @@ actions:
         type: response
         description: Response
         required: false
-        example:  {"response": {"status_code": "404", "status_message": "No results found.", "results": []}}
+        example:  {"response": {"status_code": 404, "status_message": "No results found.", "results": []}}
   import_hash_samples:
     title: Hash Samples
     description: Fetches information related to a hash
@@ -238,7 +238,7 @@ actions:
         type: response
         required: false
         description: Query
-        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
+        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
   ssdeep_report:
     title: SSDeep Report
     description: Fetches information related to a fuzzy hash
@@ -255,7 +255,7 @@ actions:
         type: response
         required: false
         description: Response
-        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
+        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
   ssdeep_sample:
     title: SSDeep Sample
     description: Fetches information related to a fuzzy hash
@@ -272,7 +272,7 @@ actions:
         type: response
         required: false
         description: Response
-        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
+        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
   ssl_hosts:
     title: SSL Hosts
     description: Fetches host information related to a certificate
@@ -289,7 +289,7 @@ actions:
         type: response
         required: false
         description: Response
-        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
+        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
   ssl_report:
     title: SSL Report
     description: Fetches information related to a certificate
@@ -306,7 +306,7 @@ actions:
         type: response
         required: false
         description: Response
-        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
+        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
   email_domain:
     title: Email Reverse WHOIS - Domain
     description: Fetches information related to an email address
@@ -323,7 +323,7 @@ actions:
         type: response
         required: false
         description: Response
-        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
+        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
   email_report:
     title: Email Reverse WHOIS - Report Tagging
     description: Fetches information related to an email address
@@ -340,7 +340,7 @@ actions:
         type: response
         required: false
         description: Response
-        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
+        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
   av_sample:
     title: AV Detection Samples
     description: Fetches information related to a virus
@@ -357,7 +357,7 @@ actions:
         type: response
         required: false
         description: Response
-        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
+        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
   report:
     title: Search IOC Reports
     description: Fetches information related to an indicator by domains, hosts, emails,
@@ -392,7 +392,7 @@ actions:
         type: response
         required: false
         description: Response
-        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
+        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
   search:
     title: Search APTNotes
     description: Fetches information related to a text search
@@ -418,5 +418,5 @@ actions:
         type: response
         required: false
         description: Response
-        example: { "response": { "status_code": "404", "status_message": "No results found.", "results": [ ] } }
+        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
 
