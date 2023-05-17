@@ -10,19 +10,20 @@ The Symantec Business Critical Services plugin allows you to submit a file to Sy
 _This plugin does not contain any requirements._
 
 # Supported Product Versions
-  
+
 * 2023-05-16
+
 # Documentation
 
 ## Setup
-  
-*This plugin does not contain a connection.*
+
+_This plugin does not contain a connection._
 ## Technical Details
 
 ### Actions
 
 #### Submit
-Submit a malicious file or hash
+This action is used to submit a malicious file or hash.
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -59,7 +60,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|string|None|True|HTML response|None|<!DOCTYPE html> <html> <body> <h1>Example Response</h1> </body> </html>|
+|response|string|True|HTML response|<!DOCTYPE html> <html> <body> <h1>Example Response</h1> </body> </html>|
   
 Example output:
 
@@ -70,11 +71,9 @@ Example output:
 ```
 
 ### Triggers
-  
-*This plugin does not contain any triggers.*
-### Tasks
-  
-*This plugin does not contain any tasks.*
+
+_This plugin does not contain any triggers._
+
 ### Custom Output Types
   
 *This plugin does not contain any custom output types.*
