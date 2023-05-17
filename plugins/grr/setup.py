@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="grr-rapid7-plugin",
-      version="2.0.2",
+      version="3.0.0",
       description="Organize and start threat hunts using GRR",
       author="rapid7",
       author_email="",

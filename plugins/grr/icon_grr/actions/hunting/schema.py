@@ -281,10 +281,10 @@ class HuntingInput(komand.Input):
     "dependencies": {
       "type": "string",
       "title": "Dependencies",
-      "description": "Specifies how dependencies should be handled",
-      "default": "Use the knowledgebase as a cache. If knowledgebase isn't present, a new one will be populated",
+      "description": "Specifies how dependencies should be handled. Use the knowledgebase as a cache. If knowledgebase isn't present, a new one will be populated",
+      "default": "USE_CACHED",
       "enum": [
-        "USE_CACHED (default)",
+        "USE_CACHED",
         "IGNORE_DEPS",
         "FETCH_NOW"
       ],
@@ -297,7 +297,7 @@ class HuntingInput(komand.Input):
       "order": 69
     },
     "duration": {
-      "type": "boolean",
+      "type": "integer",
       "title": "Duration",
       "description": "Until when should the client stay in the fast poll mode",
       "default": 3600,

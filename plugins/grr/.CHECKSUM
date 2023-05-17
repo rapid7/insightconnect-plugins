@@ -1,11 +1,11 @@
 {
-	"spec": "d9ab78dd595dd40ecf0bfdb75960c2bc",
-	"manifest": "ef6ce5e2ce4ecaef8b8742c259315c37",
-	"setup": "ef1b3028b4665481624510d856aa7899",
+	"spec": "9f2e84806332180d122d5cf682f73f05",
+	"manifest": "1a4e225e0860da6665d01a43bb5bdd4f",
+	"setup": "6263c1b2e734b80b83d5eade37f59ae9",
 	"schemas": [
 		{
 			"identifier": "hunting/schema.py",
-			"hash": "f89f90e2d168458db0a488e1ed4cfcd5"
+			"hash": "16e3fc14e2b0f5d164c586536034c124"
 		},
 		{
 			"identifier": "labeling/schema.py",
