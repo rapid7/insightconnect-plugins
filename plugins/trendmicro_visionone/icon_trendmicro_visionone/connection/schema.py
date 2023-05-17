@@ -20,7 +20,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "$ref": "#/definitions/credential_secret_key",
       "title": "API KEY",
       "description": "Vision One API Token",
-      "default": "Dummy-API-KEY",
+      "default": "default",
       "order": 2
     },
     "api_url": {
