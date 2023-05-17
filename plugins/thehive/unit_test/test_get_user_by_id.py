@@ -12,7 +12,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
 from unit_test.mock import (
     Util,
-    STUB_USER_ID,
     mocked_request,
     mock_request_200,
     mock_request_400,
@@ -21,7 +20,7 @@ from unit_test.mock import (
     mock_request_404,
     mock_request_500,
 )
-
+from unit_test.constants import STUB_USER_ID
 
 class TestGetUserById(TestCase):
     @mock.patch("requests.Session.request", side_effect=mock_request_200)

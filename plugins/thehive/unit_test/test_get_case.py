@@ -13,7 +13,6 @@ from parameterized import parameterized
 from unit_test.mock import (
     Util,
     mocked_request,
-    STUB_CASE_ID,
     mock_request_200,
     mock_request_400,
     mock_request_401,
@@ -21,7 +20,7 @@ from unit_test.mock import (
     mock_request_404,
     mock_request_500,
 )
-
+from unit_test.constants import STUB_CASE_ID
 
 class TestGetCase(TestCase):
     @mock.patch("requests.Session.request", side_effect=mock_request_200)
