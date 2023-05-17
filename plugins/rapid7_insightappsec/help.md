@@ -991,11 +991,87 @@ Example output:
 
 ### Triggers
 
-_This plugin does not contain any triggers._
+#### New Vulnerabilities
 
-### Tasks
+This trigger is used to get information about newly discovered vulnerabilities.
 
-_This plugin does not contain any tasks._
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|frequency|integer|1|True|Frequency of data collection in hours. By default, data will be collected every hour|None|1|
+
+Example input:
+
+```
+{
+  "frequency": 1
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|vulnerabilities|[]vulnerabilityItem|False|List of newly discovered vulnerabilities|[]|
+
+Example output:
+
+```
+{
+  "vulnerabilities": [
+    {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "app": {
+        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+      },
+      "rootCause": {
+        "url": "http://example.com",
+        "parameter": "Unnamed",
+        "method": "GET"
+      },
+      "severity": "INFORMATIONAL",
+      "status": "UNREVIEWED",
+      "firstDiscovered": "2023-03-20T14:29:10.686575",
+      "lastDiscovered": "2023-03-20T14:29:10.686575",
+      "newlyDiscovered": true,
+      "variances": [
+        {
+          "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+          "originalExchange": {
+            "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+            "request": "GET /example/path/file.php",
+            "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nDate: Mon, 20 Mar 2023 11:47:37 GMT\r\n"
+          },
+          "module": {
+            "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+          },
+          "attack": {
+            "id": "R_02"
+          },
+          "attackValue": "test",
+          "proof": "test",
+          "attackExchanges": [
+            {
+              "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+              "request": "GET /example/path/file.php",
+              "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nDate: Mon, 20 Mar 2023 13:49:33 GMT\r\n"
+            }
+          ]
+        }
+      ],
+      "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N",
+      "insightUiUrl": "https://example.com",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://example.com"
+        }
+      ]
+    }
+  ]
+}
+```
 
 ### Custom Output Types
 
@@ -1039,10 +1115,10 @@ _This plugin does not contain any tasks._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Href|string|False|Href|
+|Href|string|False|The location of the resource|
 |Name|string|False|Name|
 |Profile|string|False|Profile|
-|Rel|string|False|Rel|
+|Rel|string|False|Relationship|
 
 #### objectId
 
@@ -1156,6 +1232,7 @@ More information about the frequency and recurrence rule parameters used in the 
 
 # Version History
 
+* 1.2.0 - Add New Vulnerabilities trigger
 * 1.1.0 - Add new actions: `Get Vulnerabilities`, `Get Vulnerability`, `Create Schedule`, `Get Vulnerability Discovery`, `Get Vulnerability Discoveries`
 * 1.0.4 - Fix typo in title for Submit Scan action | Update keywords
 * 1.0.3 - Send plugin name and version in the User-Agent string to vendor

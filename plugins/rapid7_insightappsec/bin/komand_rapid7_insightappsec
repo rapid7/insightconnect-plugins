@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Rapid7 InsightAppSec"
 Vendor = "rapid7"
-Version = "1.1.0"
+Version = "1.2.0"
 Description = "This plugin allows for the creation, configuration, and starting of scans. The plugin can also retrieve scan results and logging related to the execution of the scan"
 
 
@@ -34,6 +34,8 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_trigger(triggers.NewVulnerabilities())
+
             self.add_action(actions.CreateScanConfig())
 
             self.add_action(actions.CreateSchedule())

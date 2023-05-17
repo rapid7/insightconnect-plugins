@@ -1,0 +1,102 @@
+{
+  "vulnerabilities": [
+    {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "app": {
+        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+      },
+      "rootCause": {
+        "url": "http://example.com",
+        "parameter": "Unnamed",
+        "method": "GET"
+      },
+      "severity": "INFORMATIONAL",
+      "status": "UNREVIEWED",
+      "firstDiscovered": "2023-03-20T14:29:10.686575",
+      "lastDiscovered": "2023-03-20T14:29:10.686575",
+      "newlyDiscovered": true,
+      "variances": [
+        {
+          "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+          "originalExchange": {
+            "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+            "request": "GET /example/path/file.php",
+            "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nDate: Mon, 20 Mar 2023 11:47:37 GMT\r\n"
+          },
+          "module": {
+            "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+          },
+          "attack": {
+            "id": "R_02"
+          },
+          "attackValue": "test",
+          "proof": "test",
+          "attackExchanges": [
+            {
+              "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+              "request": "GET /example/path/file.php",
+              "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nDate: Mon, 20 Mar 2023 13:49:33 GMT\r\n"
+            }
+          ]
+        }
+      ],
+      "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N",
+      "insightUiUrl": "https://example.com",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://example.com"
+        }
+      ]
+    },
+    {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c1",
+      "app": {
+        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c1"
+      },
+      "rootCause": {
+        "url": "http://example2.com",
+        "parameter": "Unnamed",
+        "method": "GET"
+      },
+      "severity": "LOW",
+      "status": "UNREVIEWED",
+      "firstDiscovered": "2023-03-20T14:30:10.686575",
+      "lastDiscovered": "2023-03-20T14:30:10.686575",
+      "newlyDiscovered": true,
+      "variances": [
+        {
+          "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c1",
+          "originalExchange": {
+            "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c1",
+            "request": "GET /example/path/file2.php",
+            "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nDate: Mon, 20 Mar 2023 11:47:37 GMT\r\n"
+          },
+          "module": {
+            "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c1"
+          },
+          "attack": {
+            "id": "R_02"
+          },
+          "attackValue": "test",
+          "proof": "test",
+          "attackExchanges": [
+            {
+              "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c1",
+              "request": "GET /example/path/file2.php",
+              "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nDate: Mon, 20 Mar 2023 13:49:33 GMT\r\n"
+            }
+          ]
+        }
+      ],
+      "vectorString": "AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N",
+      "insightUiUrl": "https://example.com",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://example.com"
+        }
+      ]
+    }
+  ]
+}

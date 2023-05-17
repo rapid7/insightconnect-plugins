@@ -121,7 +121,7 @@ class GetVulnerabilitiesOutput(insightconnect_plugin_runtime.Output):
         "href": {
           "type": "string",
           "title": "Href",
-          "description": "Href",
+          "description": "The location of the resource",
           "order": 4
         },
         "name": {
@@ -139,7 +139,7 @@ class GetVulnerabilitiesOutput(insightconnect_plugin_runtime.Output):
         "rel": {
           "type": "string",
           "title": "Rel",
-          "description": "Rel",
+          "description": "Relationship",
           "order": 2
         }
       }
@@ -450,7 +450,7 @@ class GetVulnerabilitiesOutput(insightconnect_plugin_runtime.Output):
             "href": {
               "type": "string",
               "title": "Href",
-              "description": "Href",
+              "description": "The location of the resource",
               "order": 4
             },
             "name": {
@@ -468,7 +468,7 @@ class GetVulnerabilitiesOutput(insightconnect_plugin_runtime.Output):
             "rel": {
               "type": "string",
               "title": "Rel",
-              "description": "Rel",
+              "description": "Relationship",
               "order": 2
             }
           }

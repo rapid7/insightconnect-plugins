@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightappsec
 title: Rapid7 InsightAppSec
 description: This plugin allows for the creation, configuration, and starting of scans. The plugin can also retrieve scan results and logging related to the execution of the scan
-version: 1.1.0
+version: 1.2.0
 supported_versions: ["Rapid7 InsightAppSec"]
 vendor: rapid7
 status: []
@@ -242,7 +242,7 @@ types:
       example: example
     rel:
       title: Rel
-      description: Rel
+      description: Relationship
       type: string
       required: false
       example: example
@@ -254,7 +254,7 @@ types:
       example: example
     href:
       title: Href
-      description: Href
+      description: The location of the resource
       type: string
       required: false
       example: example.com
@@ -998,3 +998,22 @@ actions:
         description: List of links
         type: '[]linkDetails'
         required: false
+triggers:
+  new_vulnerabilities:
+    title: New Vulnerabilities
+    description: Get information about newly discovered vulnerabilities
+    input:
+      frequency:
+        title: Frequency
+        description: Frequency of data collection in hours. By default, data will be collected every hour
+        type: integer
+        required: true
+        default: 1
+        example: 1
+    output:
+      vulnerabilities:
+        title: Vulnerabilities
+        description: List of newly discovered vulnerabilities
+        type: "[]vulnerabilityItem"
+        required: false
+        example: []
