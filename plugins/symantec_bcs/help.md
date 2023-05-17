@@ -44,7 +44,7 @@ Example input:
 {
   "cname": "Example Organization",
   "comments": "Example Comment",
-  "critical": false,
+  "critical": true,
   "data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
   "email": "user@example.com",
   "filename": "malicious-file",
@@ -75,7 +75,7 @@ Example output:
 ### Tasks
   
 *This plugin does not contain any tasks.*
-### Custom Types
+### Custom Output Types
   
 *This plugin does not contain any custom output types.*
 ## Troubleshooting
