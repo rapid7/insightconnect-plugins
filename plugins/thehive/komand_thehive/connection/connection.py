@@ -3,6 +3,7 @@ from .schema import ConnectionSchema, Input
 
 # Custom imports below
 from ..util.api import HiveAPI
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -46,11 +47,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         self.logger.info("Setup Complete")
 
-    # def test(self):
-    #     client = self.client
-    #     try:
-    #         user = client.get_current_user()
-    #     except requests.exceptions.HTTPError:
-    #         self.logger.error("Test failed")
-    #         raise
-    #     return user.json()
+    def test(self):
+        client = self.client
+        try:
+            client.get_current_user()
+            return {"success": True}
+        except PluginException as error:
+            raise ConnectionTestException(
+                cause="Unsuccessful connection test / get current user returned error", data=error
+            )
