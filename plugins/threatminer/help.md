@@ -29,7 +29,7 @@ _This plugin does not contain a connection._
 
 #### AV Report
 
-This action is used to AV Report.
+This action is used to obtain an AV Report.
 
 ##### Input
 
