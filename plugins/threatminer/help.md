@@ -54,6 +54,18 @@ Example input:
 Example output:
 
 ```
+{
+  "response": {
+    "status_code": 200,
+    "status_message": "Results found.",
+    "results": [
+      {
+        "filename": "example.pdf",
+        "year": "2023",
+        "URL": "www.example.com"
+      }
+    ]
+}
 ```
 
 #### AV Detection Samples
@@ -80,6 +92,18 @@ Example input:
 |----|----|--------|-----------|-------|
 |response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
+Example output:
+
+```
+{
+   "status_code":"200",
+   "status_message":"Results found.",
+   "results":[
+      "44d88612fea8a8f36de82e1278abb02f"
+   ]
+}
+```
+
 #### Domain Lookup
 
 This action fetches information related to a domain by URIs, certificates, or related samples.
@@ -105,6 +129,88 @@ Example input:
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
 |response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+
+Example output:
+
+```
+{
+   "status_code":"200",
+   "status_message":"Results found.",
+   "results":[
+      {
+         "domain":"vwrm.com",
+         "is_subdomain":false,
+         "root_domain":"",
+         "whois":{
+            "updated_date":"2012-03-26 12:04:11",
+            "whois_md5":"f8c433f165d39ce655c18e91d685cca0",
+            "billing_info":{
+               "Organization":" Aliant Telecom",
+               "City":" Saint John",
+               "State":" New Brunswick",
+               "Country":" Canada",
+               "Postal_Code":" E2L4K2"
+            },
+            "registrant_info":{
+               "City":" Kentville",
+               "Country":" Canada",
+               "State":" Nova Scotia",
+               "Street":" PO Box 895",
+               "Postal_Code":" B4N4H8",
+               "Organization":" Valley Waste Resource Management"
+            },
+            "creation_date":"1999-04-01 05:00:00",
+            "whois_server":"whois.register.com",
+            "emails":{
+               "admin":"",
+               "tech":"",
+               "registrant":"",
+               "billing":""
+            },
+            "tech_info":{
+               "Organization":" Aliant Telecom",
+               "City":" Saint John",
+               "State":" New Brunswick",
+               "Country":" Canada",
+               "Postal_Code":" E2L4K2"
+            },
+            "admin_info":{
+               "Organization":" Aliant Telecom",
+               "City":" Saint John",
+               "State":" New Brunswick",
+               "Country":" Canada",
+               "Postal_Code":" E2L4K2"
+            },
+            "nameservers":[
+               "onyx.nbnet.nb.ca",
+               "opal.nbnet.nb.ca"
+            ],
+            "expiration_date":"2017-04-01 04:00:00",
+            "email_hashes":{
+               "admin":"",
+               "tech":"",
+               "registrant":"",
+               "billing":""
+            },
+            "registrar":"register.com, inc.",
+            "date_checked":"2016-11-22 14:10:14",
+            "reg_info":{
+               "Organization":" Aliant Telecom",
+               "City":" Saint John",
+               "State":" New Brunswick",
+               "Country":" Canada",
+               "Postal_Code":" E2L4K2"
+            }
+         },
+         "last_updated":{
+            "sec":1573985686,
+            "usec":632000
+         }
+      }
+   ]
+}
+
+```
 
 
 #### Domain Lookup Extended
@@ -133,6 +239,86 @@ Example input:
 |----|----|--------|-----------|--------|
 |response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
+Example output:
+
+```
+{
+   "status_code":"200",
+   "status_message":"Results found.",
+   "results":[
+      {
+         "domain":"vwrm.com",
+         "is_subdomain":false,
+         "root_domain":"",
+         "whois":{
+            "updated_date":"2012-03-26 12:04:11",
+            "whois_md5":"f8c433f165d39ce655c18e91d685cca0",
+            "billing_info":{
+               "Organization":" Aliant Telecom",
+               "City":" Saint John",
+               "State":" New Brunswick",
+               "Country":" Canada",
+               "Postal_Code":" E2L4K2"
+            },
+            "registrant_info":{
+               "City":" Kentville",
+               "Country":" Canada",
+               "State":" Nova Scotia",
+               "Street":" PO Box 895",
+               "Postal_Code":" B4N4H8",
+               "Organization":" Valley Waste Resource Management"
+            },
+            "creation_date":"1999-04-01 05:00:00",
+            "whois_server":"whois.register.com",
+            "emails":{
+               "admin":"",
+               "tech":"",
+               "registrant":"",
+               "billing":""
+            },
+            "tech_info":{
+               "Organization":" Aliant Telecom",
+               "City":" Saint John",
+               "State":" New Brunswick",
+               "Country":" Canada",
+               "Postal_Code":" E2L4K2"
+            },
+            "admin_info":{
+               "Organization":" Aliant Telecom",
+               "City":" Saint John",
+               "State":" New Brunswick",
+               "Country":" Canada",
+               "Postal_Code":" E2L4K2"
+            },
+            "nameservers":[
+               "onyx.nbnet.nb.ca",
+               "opal.nbnet.nb.ca"
+            ],
+            "expiration_date":"2017-04-01 04:00:00",
+            "email_hashes":{
+               "admin":"",
+               "tech":"",
+               "registrant":"",
+               "billing":""
+            },
+            "registrar":"register.com, inc.",
+            "date_checked":"2016-11-22 14:10:14",
+            "reg_info":{
+               "Organization":" Aliant Telecom",
+               "City":" Saint John",
+               "State":" New Brunswick",
+               "Country":" Canada",
+               "Postal_Code":" E2L4K2"
+            }
+         },
+         "last_updated":{
+            "sec":1573985686,
+            "usec":632000
+         }
+      }
+   ]
+}
+```
 
 #### Email Reverse WHOIS - Domain
 
@@ -158,6 +344,18 @@ Example input:
 |----|----|--------|-----------|-------|
 |response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
+Example output:
+
+```
+{
+   "status_code":"200",
+   "status_message":"Results found.",
+   "results":[
+      "my-dejanews.com"
+   ]
+}
+```
+
 #### Email Reverse WHOIS - Report Tagging
 
 This action fetches information related to an email address.
@@ -181,6 +379,18 @@ Example input:
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
 |response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+
+Example output:
+
+```
+{
+   "status_code":"200",
+   "status_message":"Results found.",
+   "results":[
+      "my-dejanews.com"
+   ]
+}
+```
 
 #### Hash Report
 
@@ -206,6 +416,18 @@ Example input:
 |----|----|--------|-----------|-------|
 |response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
+Example output:
+
+```
+{
+   "status_code":"200",
+   "status_message":"Results found.",
+   "results":[
+      "4c60f3f5cccdfad6137eb0a3218ec4caa3294b164c86dbda8922f1c9a75558fd"
+   ]
+}
+```
+
 #### Hash Samples
 
 This action fetches information related to a hash.
@@ -229,6 +451,18 @@ Example input:
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
 |response|response|False|Query|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+
+Example output:
+
+```
+{
+   "status_code":"200",
+   "status_message":"Results found.",
+   "results":[
+      "4c60f3f5cccdfad6137eb0a3218ec4caa3294b164c86dbda8922f1c9a75558fd"
+   ]
+}
+```
 
 #### IP Lookup
 
@@ -256,6 +490,26 @@ Example input:
 |----|----|--------|-----------|-------|
 |response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
+Example output:
+
+```
+{
+  "status_code":"200",
+  "status_message":"Results found.",
+  "results":[
+     {
+        "reverse_name":"51.38.21.104.in-addr.arpa.",
+        "bgp_prefix":"104.21.32.0/20",
+        "cc":"US",
+        "asn":"13335",
+        "asn_name":"",
+        "org_name":"Cloudflare, Inc.",
+        "register":"Arin"
+     }
+  ]
+}
+```
+
 #### IP Lookup Extended
 
 This action fetches information related to an IP by certificates, or related samples.
@@ -281,6 +535,26 @@ Example input:
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
 |response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+
+Example output:
+
+```
+{
+  "status_code":"200",
+  "status_message":"Results found.",
+  "results":[
+     {
+        "reverse_name":"51.38.21.104.in-addr.arpa.",
+        "bgp_prefix":"104.21.32.0/20",
+        "cc":"US",
+        "asn":"13335",
+        "asn_name":"",
+        "org_name":"Cloudflare, Inc.",
+        "register":"Arin"
+     }
+  ]
+}
+```
 
 
 #### Search IOC Reports
@@ -311,6 +585,22 @@ Example input:
 |----|----|--------|-----------|-------|
 |response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
+Example output:
+
+```
+{
+  "status_code":"200",
+  "status_message":"Results found.",
+  "results": [
+    {
+      "filename":"shadows-in-the-cloud.pdf",
+      "year":"2010",
+      "URL":"https://www.threatminer.org/report.php?q=shadows-in-the-cloud.pdf&y=2010"
+    }
+  ]
+}
+```
+
 #### Get Samples
 
 This action fetches samples of data intelligence data by metadata, HTTP traffic, hosts, mutants, registry keys, AV detections, or report tagging.
@@ -336,6 +626,22 @@ Example input:
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
 |response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+
+Example output:
+
+```
+{
+   "status_code":"200",
+   "status_message":"Results found.",
+   "results":[
+      {
+         "filename":"shadows-in-the-cloud.pdf",
+         "year":"2010",
+         "URL":"https://www.threatminer.org/report.php?q=shadows-in-the-cloud.pdf&y=2010"
+      }
+   ]
+}
+```
 
 #### Search APTNotes
 
@@ -363,6 +669,22 @@ Example input:
 |----|----|--------|-----------|-------|
 |response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
+Example output:
+
+```
+{
+  "status_code":"200",
+  "status_message":"Results found.",
+  "results": [
+    {
+      "filename":"shadows-in-the-cloud.pdf",
+      "year":"2010",
+      "URL":"https://www.threatminer.org/report.php?q=shadows-in-the-cloud.pdf&y=2010"
+    }
+  ]
+}
+```
+
 #### SSDeep Report
 
 This action fetches information related to a fuzzy hash.
@@ -386,6 +708,22 @@ Example input:
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
 |response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+
+Example output:
+
+```
+{
+   "status_code":"200",
+   "status_message":"Results found.",
+   "results":[
+      {
+         "filename":"shadows-in-the-cloud.pdf",
+         "year":"2010",
+         "URL":"https://www.threatminer.org/report.php?q=shadows-in-the-cloud.pdf&y=2010"
+      }
+   ]
+}
+```
 
 #### SSDeep Sample
 
@@ -411,6 +749,18 @@ Example input:
 |----|----|--------|-----------|--------|
 |response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
+Example output:
+
+```
+{
+   "status_code":"200",
+   "status_message":"Results found.",
+   "results":[
+      "ecc5943b5c2ec75065ba1bdb668bb0a2c63c0451be259dea47a902811b318c00"
+   ]
+}
+```
+
 #### SSL Hosts
 
 This action fetches host information related to a certificate.
@@ -435,6 +785,19 @@ Example input:
 |----|----|--------|-----------|--------|
 |response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
 
+Example output:
+
+```
+{
+   "status_code":"200",
+   "status_message":"Results found.",
+   "results":[
+      "149.154.157.170",
+      "149.154.157.171"
+   ]
+}
+```
+
 #### SSL Report
 
 This action fetches information related to a certificate.
@@ -458,6 +821,22 @@ Example input:
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
 |response|response|False|Response|{'response': {'status_code': '404', 'status_message': 'No results found.', 'results': []}}|
+
+Example output:
+
+```
+{
+   "status_code":"200",
+   "status_message":"Results found.",
+   "results":[
+      {
+         "filename":"fireeye-operation-ke3chang.pdf",
+         "year":"2013",
+         "URL":"https:\/\/www.threatminer.org\/report.php?q=fireeye-operation-ke3chang.pdf&y=2013"
+      }
+   ]
+}
+```
 
 ### Triggers
 
