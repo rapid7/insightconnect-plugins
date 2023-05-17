@@ -27,7 +27,8 @@ class AvReport(komand.Action):
 
         except requests.exceptions.HTTPError as error:
             self.logger.error(
-                f"Requests: HTTPError: status code {str(error.response.status_code)} for { params.get('query')}")
+                f"Requests: HTTPError: status code {str(error.response.status_code)} for { params.get('query')}"
+            )
 
     def test(self):
         params = {"q": "Trojan.Enfal"}
