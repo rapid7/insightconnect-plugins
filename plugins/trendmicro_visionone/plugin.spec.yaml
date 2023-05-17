@@ -583,7 +583,7 @@ connection:
     title: API KEY
     description: Vision One API Token
     type: credential_secret_key
-    default: Dummy-API-KEY
+    default: default
     required: true
     example: 12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234
   app_name:

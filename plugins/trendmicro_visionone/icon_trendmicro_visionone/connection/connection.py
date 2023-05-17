@@ -25,8 +25,20 @@ class Connection(insightconnect_plugin_runtime.Connection):
         """
         self.logger.info("Connect: Connecting...")
 
-        url = params.get(Input.API_URL, "https://tmv1-mock.trendmicro.com")
-        key = params.get(Input.API_KEY).get("secretKey", "Dummy-API-KEY")
+        url = params.get(Input.API_URL, "")
+        if not url:
+            raise PluginException(
+                cause="No API URL provided.",
+                assistance="API URL is a required parameter, please provide a valid API URL.",
+                data=url,
+            )
+        key = params.get(Input.API_KEY).get("secretKey", "")
+        if not key or "default" in key:
+            raise PluginException(
+                cause="No API Key provided.",
+                assistance="API Key is a required parameter, please provide a valid API Key.",
+                data=key,
+            )
         app = params.get(Input.APP_NAME, "Rapid7-InsightConnect")
 
         self.server = url

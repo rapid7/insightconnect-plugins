@@ -42,12 +42,12 @@ Trend Micro Vision One is a purpose-built threat defense platform that provides 
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|Dummy-API-KEY|True|Vision One API Token|None|12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:02699626f388ed830012e5b787640e71c56d42d81234|
-|api_url|string|https://example.com|True|URL of Trend Micro Vision One|None|https://example.com|
-|app_name|string|Rapid7-InsightConnect|True|Name of the App to be Integrated with|None|Rapid7-InsightConnect|
-|verify_ssl|boolean|True|True|Verify if connection uses SSL|None|True|
+|Name|Type| Default               |Required|Description|Enum|Example|
+|----|----|-----------------------|--------|-----------|----|-------|
+|api_key|credential_secret_key| default               |True|Vision One API Token|None|12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:02699626f388ed830012e5b787640e71c56d42d81234|
+|api_url|string| https://api.xdr.trendmicro.com   |True|URL of Trend Micro Vision One|None|https://tmv1-mock.trendmicro.com|
+|app_name|string| Rapid7-InsightConnect |True|Name of the App to be Integrated with|None|Rapid7-InsightConnect|
+|verify_ssl|boolean| True                  |True|Verify if connection uses SSL|None|True|
 
 Example input:
 
