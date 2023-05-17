@@ -23,6 +23,17 @@ hub_tags:
   keywords: [servicenow, incidents, cmdb, cloud_enabled]
   features: []
 types:
+  updated_vulnerability:
+    sys_id:
+      title: System ID
+      description: System ID of the vulnerability
+      type: string
+      required: true
+    changed_fields:
+      title: Changed Fields
+      description: JSON object representing changed fields (map of field name to previous and current values)
+      type: object
+      required: true
   comments_worknotes:
     sys_id:
       title: System ID
@@ -670,12 +681,42 @@ actions:
           - Under Investigation
         required: false
         example: Open
+      source:
+        title: Source
+        description: The vulnerability source
+        type: string
+        required: false
+        example: ExampleSource
+      vulnerability:
+        title: Vulnerability
+        description: The reference of the found vulnerability
+        type: string
+        required: false
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+      ip_address:
+        title: IP Address
+        description: The IP address of the source where the vulnerability was found
+        type: string
+        required: false
+        example: 192.168.0.1
+      dns:
+        title: DNS Name
+        description: The name of source DNS where the vulnerability was found
+        type: string
+        required: false
+        example: dns.example.com
       first_found:
         title: First Found
         description: The time that represents the vulnerability was first found, in ISO format
         type: date
-        required: true
+        required: false
         example: 2023-04-28T15:48:07
+      last_found:
+        title: Last Found
+        description: The time that represents when the vulnerability was last found, in ISO format
+        type: date
+        required: false
+        example: 2023-04-30T12:14:10
       assigned_to:
         title: Assigned To
         description: User ID of person assigned to the vulnerability
@@ -688,18 +729,6 @@ actions:
         type: string
         required: false
         example: Example short description
-      steps_to_reproduce:
-        title: Steps to Reproduce the Vulnerability
-        description: The described steps how to reproduce the vulnerability
-        type: string
-        required: false
-        example: <h1>Example Steps to Reproduce</h1>
-      technical_details:
-        title: Technical Details
-        description: The technical details of the vulnerability
-        type: string
-        required: false
-        example: Example technical details about the vulnerability
       additional_fields:
         title: Additional Fields
         description: JSON object containing the additional fields and values to create incident
@@ -771,6 +800,12 @@ actions:
           - ""
         required: false
         example: SAFE
+      vulnerability:
+        title: Vulnerability
+        description: The reference of the found vulnerability
+        type: string
+        required: false
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
       state:
         title: State
         description: The state of the vulnerability
@@ -780,12 +815,36 @@ actions:
           - Under Investigation
         required: false
         example: Open
+      source:
+        title: Source
+        description: The vulnerability source
+        type: string
+        required: false
+        example: ExampleSource
+      ip_address:
+        title: IP Address
+        description: The IP address of the source where the vulnerability was found
+        type: string
+        required: false
+        example: 192.168.0.1
+      dns:
+        title: DNS Name
+        description: The name of the source DNS where the vulnerability was found
+        type: string
+        required: false
+        example: dns.example.com
       first_found:
         title: First Found
         description: The time that represents the vulnerability was first found, in ISO format
         type: date
         required: false
         example: 2023-04-28T15:48:07
+      last_found:
+        title: Last Found
+        description: The time that represents when the vulnerability was last found, in ISO format
+        type: date
+        required: false
+        example: 2023-04-30T12:14:10
       assigned_to:
         title: Assigned To
         description: User ID of person assigned to the vulnerability
@@ -798,18 +857,6 @@ actions:
         type: string
         required: false
         example: Example short description
-      steps_to_reproduce:
-        title: Steps to Reproduce the Vulnerability
-        description: The described steps how to reproduce the vulnerability
-        type: string
-        required: false
-        example: <h1>Example Steps to Reproduce</h1>
-      technical_details:
-        title: Technical Details
-        description: The technical details of the vulnerability
-        type: string
-        required: false
-        example: Example technical details about the vulnerability
       additional_fields:
         title: Additional Fields
         description: JSON object containing the additional fields and values to create incident
@@ -902,9 +949,9 @@ triggers:
       system_id:
         title: System ID
         description: System ID of the vulnerability record to monitor
-        type: string
+        type: "[]string"
         required: true
-        example: 9de5069c5afe602b2ea0a04b66beb2c0
+        example: '["9de5069c5afe602b2ea0a04b66beb2c0"]'
       monitored_fields:
         title: Monitored Fields
         description: Comma-separated list of fields to be monitored (e.g. resolved,resolved_by)
@@ -919,9 +966,9 @@ triggers:
         default: 5
         example: 5
     output:
-      changed_fields:
+      updated_vulnerabilities:
         title: Changed Fields
-        description: JSON object representing changed fields (map of field name to previous and current values)
-        type: object
+        description: List of JSON objects containing the system ID of the updated vulnerability and representation of the changed fields (map of field name from previous to current values)
+        type: "[]updated_vulnerability"
         required: true
-        example: '{"description":{"previous":"Description 1","current":"Description 2"}}'
+        example: '{"updated_vulnerabilities": [{"system_id": "9de5069c5afe602b2ea0a04b66beb2c0", "changed_fields": {"description":{"previous":"Description 1","current":"Description 2"}}}]}'
