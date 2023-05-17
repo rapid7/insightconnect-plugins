@@ -54,9 +54,9 @@ class Util:
         params = kwargs.get("params", {})
 
         if url == "https://example.com/ias/v1/search":
-            if params == {'size': 1000, 'index': 1}:
+            if params == {"size": 1000, "index": 1}:
                 return MockResponse(200, "search_vulnerabilities_second_page.json.resp")
-            if params == {'size': 1000, 'index': 2}:
+            if params == {"size": 1000, "index": 2}:
                 return MockResponse(200, "search_vulnerabilities_empty.json.resp")
             return MockResponse(200, "search_vulnerabilities_first_page.json.resp")
         if (
