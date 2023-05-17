@@ -54,11 +54,12 @@ Example input:
   "stype": "upfile"
 }
 ```
+
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|
-| :--- | :--- | :--- | :--- | :--- | :--- |
-|response|string|None|True|HTML response|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|response|string|None|True|HTML response|None|<!DOCTYPE html> <html> <body> <h1>Example Response</h1> </body> </html>|
   
 Example output:
 
@@ -67,6 +68,7 @@ Example output:
   "response": "<!DOCTYPE html> <html> <body> <h1>Example Response</h1> </body> </html>"
 }
 ```
+
 ### Triggers
   
 *This plugin does not contain any triggers.*
