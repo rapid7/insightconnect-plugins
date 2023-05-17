@@ -30,7 +30,7 @@ types:
   response:
     status_code:
       title: Status Code
-      type: int
+      type: integer
       description: Status Code
       required: false
     status_message:
