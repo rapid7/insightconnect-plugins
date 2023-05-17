@@ -16,12 +16,11 @@ class CreateCase(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
 
-        json_case_data = params.get(Input.JSON)
+        json_case_data = params.get(Input.JSONDATA)
 
         if json_case_data:
             case = json_case_data
         else:
-            # TODO - Don't forget to fix up the custom types in spec file!!
             case = {
                 "title": params.get(Input.TITLE, None),
                 "description": params.get(Input.DESCRIPTION, None),

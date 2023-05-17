@@ -707,7 +707,7 @@ actions:
         type: '[]itask'
         example: {}
         required: false
-      json:
+      jsonData:
         title: JSON
         description: If the field is not equal to None, the case is instantiated using the JSON value instead of the arguements
         type: object
@@ -771,11 +771,10 @@ actions:
         type: string
         example: admin
         required: false
-      json:
+      jsonData:
         title: JSON
         description: If the field is not equal to None, the Task is instantiated using the JSON value instead of the arguements
         type: object
-        example: {}
         required: false
     output:
       case:

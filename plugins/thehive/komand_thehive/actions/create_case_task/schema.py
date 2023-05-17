@@ -11,7 +11,7 @@ class Input:
     DESCRIPTION = "description"
     FLAG = "flag"
     ID = "id"
-    JSON = "json"
+    JSONDATA = "jsonData"
     OWNER = "owner"
     STARTDATE = "startDate"
     STATUS = "status"
@@ -47,7 +47,7 @@ class CreateCaseTaskInput(insightconnect_plugin_runtime.Input):
       "description": "ID for the case",
       "order": 1
     },
-    "json": {
+    "jsonData": {
       "type": "object",
       "title": "JSON",
       "description": "If the field is not equal to None, the Task is instantiated using the JSON value instead of the arguements",

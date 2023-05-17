@@ -1,4 +1,4 @@
-##################################################################
+################################################################################
 
 
 
@@ -147,7 +147,7 @@ Create a new case
 |customFields|object|None|False|Case custom fields|None|None|
 |description|string|None|False|Description of the case, supports markdown|None|Case description|
 |flag|boolean|False|False|Case's flag, True to mark case as important|None|True|
-|json|object|None|False|If the field is not equal to None, the case is instantiated using the JSON value instead of the arguements|None|None|
+|jsonData|object|None|False|If the field is not equal to None, the case is instantiated using the JSON value instead of the arguements|None|None|
 |metrics|object|None|False|Case metrics collection. A JSON object where keys are defining metric name, and values are defining metric value|None|None|
 |owner|string|None|False|Case's assignee|None|admin|
 |pap|integer|2|False|Password Authentication Protocol|[0, 1, 2, 3]|2|
@@ -312,7 +312,7 @@ Create a new case task
 |description|string|None|False|Task's description|None|Task description|
 |flag|boolean|False|False|Task's flag, 'True' to mark the task as important|None|False|
 |id|string|None|False|ID for the case|None|AYgQXmjbfMffAh_St-fk|
-|json|object|None|False|If the field is not equal to None, the Task is instantiated using the JSON value instead of the arguements|None|None|
+|jsonData|object|None|False|If the field is not equal to None, the Task is instantiated using the JSON value instead of the arguements|None|None|
 |owner|string|None|False|Task's assignee|None|admin|
 |startDate|integer|None|False|Task's start date, the date the task started at|None|1684170163000|
 |status|string|Waiting|False|Task's status|['Waiting', 'InProgress', 'Cancel', 'Completed']|Waiting|
@@ -333,7 +333,15 @@ Create a new case task
 Example input:
 
 ```
-
+{
+  "description": "Task description",
+  "flag": false,
+  "id": "AYgQXmjbfMffAh_St-fk",
+  "owner": "admin",
+  "startDate": 1684170163000,
+  "status": "Waiting",
+  "title": "Task title"
+}
 ```
 
 ##### Output

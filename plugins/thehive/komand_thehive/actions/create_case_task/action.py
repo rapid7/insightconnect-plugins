@@ -17,7 +17,7 @@ class CreateCaseTask(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
 
         case_id = params.get(Input.ID)
-        json_task_data = params.get(Input.JSON)
+        json_task_data = params.get(Input.JSONDATA)
 
         if json_task_data:
             task = json_task_data
