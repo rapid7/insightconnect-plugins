@@ -7,7 +7,7 @@ description: "Threat Miner is an open source search engine for fast threat intel
   context. With the Threat Miner plugin for Rapid7 InsightConnect, users can lookup various pieces of information for
 threat intelligence gathering"
 version: 3.0.0
-supported_versions: ["2021-08-17"]
+supported_versions: ["2023-05-17"]
 vendor: rapid7
 support: community
 status: []
