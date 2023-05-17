@@ -12,16 +12,32 @@ The [Komand](komand.com) plugin provides backwards compatibility to run workflow
 * Username and Password
 * Komand Server
 
+# Supported Product Versions
+
+* 2023-05-15
+
 # Documentation
 
 ## Setup
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|URL to Komand server, e.g. https://komand.company.com|None|
-|credentials|credential_username_password|None|True|Username and password for user|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|url|string|None|True|URL to Komand server|None|https://komand.company.com|
+|credentials|credential_username_password|None|True|Username and password for user|None|{ 'username': 'user1', 'password': 'mypassword' }|
+
+Example input:
+
+```
+{
+  "credentials": {
+    "username": "user1",
+    "password": "mypassword"
+  },
+  "url": "https://komand.company.com"
+}
+```
 
 ## Technical Details
 
@@ -33,18 +49,37 @@ This action is used to run a workflow without waiting for results.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|workflow_uid|string|None|False|Workflow UID to run. Either this or name should be provided.|None|
-|input|object|None|False|Input object to supply to the workflow job|None|
-|workflow_name|string|None|False|Workflow name to run. Either this or UID should be provided.|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|input|object|None|False|Input object to supply to the workflow job|None|{}|
+|workflow_name|string|None|False|Workflow name to run. Either this or UID should be provided|None|example-name|
+|workflow_uid|string|None|False|Workflow UID to run. Either this or name should be provided|None|b595ccea-f324-11ed-a05b-0242ac120003|
+
+Example input:
+
+```
+{
+  "input": "{}",
+  "workflow_name": "example-name",
+  "workflow_uid": "b595ccea-f324-11ed-a05b-0242ac120003"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|url|string|False|Job URL|
-|job_id|string|False|Job ID|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|url|string|False|Job URL|www.example.com|
+|job_id|string|False|Job ID|b595ccea-f324-11ed-a05b-0242ac120003|
+
+Example output:
+
+```
+{
+  "url": "www.example.com",
+  "job_id": "b595ccea-f324-11ed-a05b-0242ac120003"
+}
+```
 
 #### Run Synchronously
 
@@ -52,28 +87,57 @@ This action is used to run a workflow and wait for results.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|workflow_uid|string|None|False|Workflow UID to run. Either this or name should be provided|None|
-|input|object|None|False|Input object to supply to the workflow job|None|
-|workflow_name|string|None|False|Workflow name to run. Either this or UID should be provided|None|
-|timeout|number|150|True|Timeout for executed workflow to finish, in seconds. Use 0 for no timeout|None|
-|completion_checks|number|10|False|How many times the executed workflow should be checked for completion during the timeout period. Higher numbers should result in quicker job turnover. Leave blank if timeout is set to 0|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|completion_checks|number|10|False|How many times the executed workflow should be checked for completion during the timeout period. Higher numbers should result in quicker job turnover. Leave blank if timeout is set to 0|None|10|
+|input|object|None|False|Input object to supply to the workflow job|None|{}|
+|timeout|number|150|True|Timeout for executed workflow to finish, in seconds. Use 0 for no timeout|None|150|
+|workflow_name|string|None|False|Workflow name to run. Either this or UID should be provided|None|example-name|
+|workflow_uid|string|None|False|Workflow UID to run. Either this or name should be provided|None|b595ccea-f324-11ed-a05b-0242ac120003|
+
+Example input:
+
+```
+{
+  "completion_checks": 10,
+  "input": "{}",
+  "timeout": 150,
+  "workflow_name": "example-name",
+  "workflow_uid": "b595ccea-f324-11ed-a05b-0242ac120003"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|status|string|False|Job Status|
-|ended_at|string|False|None|
-|job_id|string|False|Job ID|
-|workflow_uid|string|False|Workflow UID|
-|created_at|string|False|None|
-|updated_at|string|False|None|
-|url|string|False|Job URL|
-|steps|[]object|False|Step outputs|
-|group_id|string|False|Job Group ID|
-|name|string|False|None|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|status|string|False|Job Status|failed|
+|ended_at|string|False|None|Jan 01, 2000 0:00 AM|
+|job_id|string|False|Job ID|b595ccea-f324-11ed-a05b-0242ac120003|
+|workflow_uid|string|False|Workflow UID|b595ccea-f324-11ed-a05b-0242ac120003|
+|created_at|string|False|Created at|Jan 01, 2000 0:00 AM|
+|updated_at|string|False|Updated at|Jan 01, 2000 0:00 AM|', '|ended_at|string|False|Ended at|Jan 01, 2000 0:00 AM|
+|url|string|False|Job URL|www.example.com|
+|steps|[]object|False|Step outputs|[{}]|
+|group_id|string|False|Job Group ID|b595ccea-f324-11ed-a05b-0242ac120003|
+|name|string|False|Name|example-name|
+
+Example output:
+
+```
+{
+  "status": "failed",
+  "ended_at": "Jan 01, 2000 0:00 AM",
+  "job_id": "b595ccea-f324-11ed-a05b-0242ac120003",
+  "workflow_uid": "b595ccea-f324-11ed-a05b-0242ac120003",
+  "created_at": "Jan 01, 2000 0:00 AM",
+  "updated_at": "Jan 01, 2000 0:00 AM",
+  "url": "www.example.com",
+  "steps": [{}],
+  "group_id": "b595ccea-f324-11ed-a05b-0242ac120003",
+  "name": "example-name"
+}
+```
 
 ### Triggers
 
@@ -83,23 +147,47 @@ This trigger is used to monitor for new jobs.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|status|string|None|True|Status to trigger on|['failed', 'queued', 'succeeded', 'retried']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|status|string|None|True|Status to trigger on|['failed', 'queued', 'succeeded', 'retried']|failed|
+
+Example input:
+
+```
+{
+  "status": "failed"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|status|string|False|Job Status|
-|ended_at|string|False|None|
-|job_id|string|False|Job ID|
-|workflow_uid|string|False|Workflow UID|
-|created_at|string|False|None|
-|updated_at|string|False|None|
-|url|string|False|Job URL|
-|group_id|string|False|Job Group ID|
-|name|string|False|None|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|status|string|False|Job status|succeeded|
+|ended_at|string|False|Ended at|Jan 01, 2000 0:00 AM|
+|job_id|string|False|Job ID|b595ccea-f324-11ed-a05b-0242ac120003|
+|workflow_uid|string|False|Workflow UID|b595ccea-f324-11ed-a05b-0242ac120003|
+|created_at|string|False|Created at|Jan 01, 2000 0:00 AM|
+|updated_at|string|False|Updated at|Jan 01, 2000 0:00 AM|
+|url|string|False|Job URL|www.example.com|
+|group_id|string|False|Job group ID|b595ccea-f324-11ed-a05b-0242ac120003|
+|name|string|False|Name|example-name|
+
+Example output:
+
+```
+{
+  "status": "failed",
+  "ended_at": "Jan 01, 2000 0:00 AM",
+  "job_id": "b595ccea-f324-11ed-a05b-0242ac120003",
+  "workflow_uid": "b595ccea-f324-11ed-a05b-0242ac120003",
+  "created_at": "Jan 01, 2000 0:00 AM",
+  "updated_at": "Jan 01, 2000 0:00 AM",
+  "url": "www.example.com",
+  "group_id": "b595ccea-f324-11ed-a05b-0242ac120003",
+  "name": "example-name"
+}
+```
 
 ### Custom Output Types
 
@@ -111,6 +199,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.4 - Update requests to 2.20.0 | Update Insight-Plugin-Runtime
 * 1.0.3 - New spec and help.md format for the Extension Library
 * 1.0.2 - Add `utilities` plugin tag for Marketplace searchability
 * 1.0.1 - Fix issue where Lookup Workflow Name can crash due to excessive data
@@ -124,7 +213,6 @@ _This plugin does not contain any troubleshooting information._
 
 # Links
 
-## References
-
 * [Komand](https://www.komand.com/)
 
+## References
