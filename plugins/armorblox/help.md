@@ -99,7 +99,7 @@ Example output:
 
 ```
 {
-    "incidents": "some incidents"
+  "incidents": "some incidents"
 }
 ```
 
