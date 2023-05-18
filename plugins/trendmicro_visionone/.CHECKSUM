@@ -1,7 +1,7 @@
 {
-	"spec": "c9cf32ee2270bb46ebebaca98c764f80",
-	"manifest": "f751c462805ffc8197f0ac229d5e69ce",
-	"setup": "d803a9561bfa2cd59902973205904a0c",
+	"spec": "940e7044699bab05b73bc23b886c7485",
+	"manifest": "fbc1663dec89612f037c047ee7673751",
+	"setup": "8c5653b99c00f7986c657ae2cdab3384",
 	"schemas": [
 		{
 			"identifier": "add_alert_note/schema.py",
@@ -57,11 +57,11 @@
 		},
 		{
 			"identifier": "get_endpoint_data/schema.py",
-			"hash": "a7f8cd3acbc5d4ff6cb280b561aa2d33"
+			"hash": "e4fdb3ad8e8c64224b758424c94ca2a2"
 		},
 		{
 			"identifier": "get_exception_list/schema.py",
-			"hash": "bb838b92f345a0faf085ab6ca5b65aa4"
+			"hash": "343120173ad14b57f4a239f8e5d63b63"
 		},
 		{
 			"identifier": "get_sandbox_analysis_result/schema.py",
@@ -77,7 +77,7 @@
 		},
 		{
 			"identifier": "get_suspicious_list/schema.py",
-			"hash": "486eff5051f17144a6133d3785d553da"
+			"hash": "b8540b2ac1a8a803ec21480fe24db3ed"
 		},
 		{
 			"identifier": "get_task_result/schema.py",

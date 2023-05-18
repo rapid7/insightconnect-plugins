@@ -90,7 +90,7 @@ class GetEndpointDataOutput(insightconnect_plugin_runtime.Output):
         "installed_product_codes": {
           "type": "array",
           "title": "Installed Product Codes",
-          "description": "3-character code that identifies the installed Trend Micro products on an endpoint",
+          "description": "A 3-character code that identifies the installed Trend Micro products on an endpoint",
           "items": {
             "type": "string"
           },
@@ -141,7 +141,7 @@ class GetEndpointDataOutput(insightconnect_plugin_runtime.Output):
         "product_code": {
           "type": "string",
           "title": "Product Code",
-          "description": "3-character code that identifies Trend Micro products",
+          "description": "A 3-character code that identifies Trend Micro products",
           "enum": [
             "sao",
             "sds",

@@ -56,7 +56,7 @@ class GetSuspiciousListOutput(insightconnect_plugin_runtime.Output):
         "domain": {
           "type": "string",
           "title": "Domain",
-          "description": "support leading wildcard",
+          "description": "Support leading wildcard",
           "order": 2
         },
         "expired_date_time": {
@@ -74,7 +74,7 @@ class GetSuspiciousListOutput(insightconnect_plugin_runtime.Output):
         "file_sha256": {
           "type": "string",
           "title": "File SHA256",
-          "description": "support only full match (64 characters)",
+          "description": "Support only full match (64 characters)",
           "order": 6
         },
         "in_exception_list": {
@@ -86,7 +86,7 @@ class GetSuspiciousListOutput(insightconnect_plugin_runtime.Output):
         "ip": {
           "type": "string",
           "title": "IP",
-          "description": "support only full match",
+          "description": "Support only full match",
           "order": 4
         },
         "last_modified_date_time": {
@@ -119,7 +119,7 @@ class GetSuspiciousListOutput(insightconnect_plugin_runtime.Output):
         "sender_mail_address": {
           "type": "string",
           "title": "Sender Mail Address",
-          "description": "support fully qualified email address",
+          "description": "Support fully qualified email address",
           "order": 3
         },
         "type": {
@@ -139,7 +139,7 @@ class GetSuspiciousListOutput(insightconnect_plugin_runtime.Output):
         "url": {
           "type": "string",
           "title": "URL",
-          "description": "support leading and tailing wildcards",
+          "description": "Support leading and tailing wildcards",
           "order": 1
         }
       },
