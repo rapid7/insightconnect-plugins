@@ -44,7 +44,7 @@ Example input:
 {
   "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
   "credentials": {},
-  "host": "thehive.company.com or 10.3.4.50",
+  "host": "10.3.4.50",
   "port": 9000,
   "protocol": "http",
   "proxy": {},
@@ -74,9 +74,9 @@ Example input:
 ```
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|None|True|Boolean to indicate if the operation was successful|None|None|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|True|Boolean to indicate if the operation was successful|{}|
   
 Example output:
 
@@ -130,9 +130,9 @@ Example input:
 ```
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|case|createCase|None|False|Create case output|None|{'owner': 'string', 'summary': 'string', 'severity': 2, '_routing': 'case_id', 'flag': False, 'endDate': 1640000000000, 'customFields': {}, '_type': 'case', 'description': 'string', 'title': 'string', 'tags': ['string'], 'createdAt': 1684188238010, '_parent': None, 'createdBy': 'admin', 'caseId': 54, 'tlp': 2, 'metrics': {}, '_id': 'case_id', 'id': 'case_id', '_version': 1, 'pap': 2, 'startDate': 1640000000000, 'status': 'Open'}|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|case|createCase|False|Create case output|{'owner': 'string', 'summary': 'string', 'severity': 2, '_routing': 'case_id', 'flag': False, 'endDate': 1640000000000, 'customFields': {}, '_type': 'case', 'description': 'string', 'title': 'string', 'tags': ['string'], 'createdAt': 1684188238010, '_parent': None, 'createdBy': 'admin', 'caseId': 54, 'tlp': 2, 'metrics': {}, '_id': 'case_id', 'id': 'case_id', '_version': 1, 'pap': 2, 'startDate': 1640000000000, 'status': 'Open'}|
   
 Example output:
 
@@ -206,9 +206,9 @@ Example input:
 ```
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|case|observable|None|False|Create case observable output|None|None|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|case|observable|False|Create case observable output|{}|
   
 Example output:
 
@@ -265,9 +265,9 @@ Example input:
 ```
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|case|task|None|False|Create case task output|None|None|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|case|task|False|Create case task output|{}|
   
 Example output:
 
@@ -306,9 +306,9 @@ Example input:
 ```
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|case|case|None|True|Get case output|None|None|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|case|case|True|Get case output|None|
   
 Example output:
 
@@ -364,9 +364,9 @@ Retrieve list of cases
 *This action does not contain any inputs.*
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|success|[]case|None|False|List of cases|None|None|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|[]case|False|List of cases|{}|
   
 Example output:
 
@@ -424,9 +424,9 @@ Get information about the current user
 *This action does not contain any inputs.*
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|success|userObject|None|False|A user object containing all related fields|None|{}|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | 
+|success|userObject|False|A user object containing all related fields|{}|
   
 Example output:
 
@@ -452,9 +452,9 @@ Example input:
 ```
 ##### Output
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|success|userObject|None|False|A user object containing all related fields|None|{}|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|userObject|False|A user object containing all related fields|{}|
   
 Example output:
 
@@ -628,4 +628,3 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [thehive4py docs](https://github.com/TheHive-Project/TheHive4py/blob/master/thehive4py/api.py)
-* 
