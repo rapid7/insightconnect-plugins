@@ -3,9 +3,9 @@ from .schema import MonitorLogsInput, MonitorLogsOutput, MonitorLogsState, Compo
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_okta.util.exceptions import ApiException
 from datetime import datetime, timedelta, timezone
 from komand_okta.util.helpers import clean
-import re
 
 
 class MonitorLogs(insightconnect_plugin_runtime.Task):
@@ -34,16 +34,10 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             new_logs = self.connection.api_client.get_all_pages(self.connection.api_client.list_events(parameters))
             state["status_code"] = 200
             return clean(new_logs), state, None
-        except PluginException as error:
-            state["status_code"] = self.extract_status_code(error.data)
+        except ApiException as error:
+            state["status_code"] = error.status_code
             return [], state, None
 
     @staticmethod
     def get_current_time():
         return datetime.now(timezone.utc)
-
-    @staticmethod
-    def extract_status_code(error):
-        split_error = error.split("\n")
-        status_code = re.search(r"\d{3}", split_error[0])
-        return int(status_code.group()) if status_code else 500

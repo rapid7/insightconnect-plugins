@@ -9,6 +9,7 @@ from unit_test.util import Util
 from unittest.mock import patch
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_okta.util.exceptions import ApiException
 
 
 @patch("requests.request", side_effect=Util.mock_request)
