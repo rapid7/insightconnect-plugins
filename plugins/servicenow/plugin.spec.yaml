@@ -894,18 +894,12 @@ actions:
     title: Create Vulnerability
     description: Creates a new vulnerability record
     input:
-      risk_rating:
-        title: Risk Rating
-        description: The risk rating of the vulnerability
-        type: string
-        enum:
-          - Low
-          - Medium
-          - High
-          - Critical
-          - ""
+      risk_score:
+        title: Risk Score
+        description: The risk score of the vulnerability, from 0 to 100
+        type: integer
         required: false
-        example: SAFE
+        example: 30
       state:
         title: State
         description: The state of the vulnerability
@@ -1022,18 +1016,6 @@ actions:
         type: string
         required: true
         example: 9de5069c5afe602b2ea0a04b66beb2c0
-      risk_rating:
-        title: Risk Rating
-        description: The risk rating of the vulnerability
-        type: string
-        enum:
-          - Low
-          - Medium
-          - High
-          - Critical
-          - ""
-        required: false
-        example: SAFE
       vulnerability:
         title: Vulnerability
         description: The reference of the found vulnerability
@@ -1482,8 +1464,8 @@ triggers:
     description: Identifies if a vulnerability has been updated
     input:
       system_id:
-        title: System ID
-        description: System ID of the vulnerability record to monitor
+        title: System IDs
+        description: List of system IDs of the vulnerability record to monitor
         type: "[]string"
         required: true
         example: '["9de5069c5afe602b2ea0a04b66beb2c0"]'
