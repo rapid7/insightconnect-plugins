@@ -63,7 +63,6 @@ This action is used to update the vulnerability by ID.
 |first_found|date|None|False|The time that represents the vulnerability was first found, in ISO format|None|2023-04-28T15:48:07|
 |ip_address|string|None|False|The IP address of the source where the vulnerability was found|None|192.168.0.1|
 |last_found|date|None|False|The time that represents when the vulnerability was last found, in ISO format|None|2023-04-30T12:14:10|
-|risk_rating|string|None|False|The risk rating of the vulnerability|['Low', 'Medium', 'High', 'Critical', '']|SAFE|
 |short_description|string|None|False|Short description of the vulnerability|None|Example short description|
 |source|string|None|False|The vulnerability source|None|ExampleSource|
 |state|string|None|False|The state of the vulnerability|['Open', 'Under Investigation']|Open|
@@ -82,7 +81,6 @@ Example input:
   "first_found": "2023-04-28T15:48:07",
   "ip_address": "192.168.0.1",
   "last_found": "2023-04-30T12:14:10",
-  "risk_rating": "SAFE",
   "short_description": "Example short description",
   "source": "ExampleSource",
   "state": "Open",
@@ -192,7 +190,7 @@ This action creates a new vulnerability record.
 |first_found|date|None|False|The time that represents the vulnerability was first found, in ISO format|None|2023-04-28T15:48:07|
 |ip_address|string|None|False|The IP address of the source where the vulnerability was found|None|192.168.0.1|
 |last_found|date|None|False|The time that represents when the vulnerability was last found, in ISO format|None|2023-04-30T12:14:10|
-|risk_rating|string|None|False|The risk rating of the vulnerability|['Low', 'Medium', 'High', 'Critical', '']|SAFE|
+|risk_score|integer|None|False|The risk score of the vulnerability, from 0 to 100|None|30|
 |short_description|string|None|False|Short description of the vulnerability|None|Example short description|
 |source|string|None|False|The vulnerability source|None|ExampleSource|
 |state|string|None|False|The state of the vulnerability|['Open', 'Under Investigation']|Open|
@@ -210,7 +208,7 @@ Example input:
   "first_found": "2023-04-28T15:48:07",
   "ip_address": "192.168.0.1",
   "last_found": "2023-04-30T12:14:10",
-  "risk_rating": "SAFE",
+  "risk_score": 30,
   "short_description": "Example short description",
   "source": "ExampleSource",
   "state": "Open",
@@ -1007,7 +1005,7 @@ This trigger identifies if a vulnerability has been updated.
 |----|----|-------|--------|-----------|----|-------|
 |interval|integer|5|True|How often to detect changes to the given Incident (in seconds)|None|5|
 |monitored_fields|string|None|True|Comma-separated list of fields to be monitored (e.g. resolved,resolved_by)|None|resolved,resolved_by|
-|system_id|[]string|None|True|System ID of the vulnerability record to monitor|None|["9de5069c5afe602b2ea0a04b66beb2c0"]|
+|system_id|[]string|None|True|List of system IDs of the vulnerability record to monitor|None|["9de5069c5afe602b2ea0a04b66beb2c0"]|
 
 Example input:
 
