@@ -7,10 +7,6 @@ class ApiException(Exception):
 
     def __str__(self):
         if self.data:
-            return "An error occurred during plugin execution!\n\n{cause} {assistance}\nResponse was: {data}".format(
-                cause=self.cause, assistance=self.assistance, data=self.data
-            )
+            return f"An error occurred during plugin execution!\n\n{self.cause} {self.assistance}\nResponse was: {self.data}"
         else:
-            return "An error occurred during plugin execution!\n\n{cause} {assistance}".format(
-                cause=self.cause, assistance=self.assistance
-            )
+            return f"An error occurred during plugin execution!\n\n{self.cause} {self.assistance}"
