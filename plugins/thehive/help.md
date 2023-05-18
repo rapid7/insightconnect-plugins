@@ -101,7 +101,7 @@ Create a new case
 |severity|integer|2|False|Case severity|[1, 2, 3, 4]|2|
 |startDate|integer|None|False|Case start date (datetime in ms) (will default to now if left blank)|None|1684170163000|
 |summary|string|None|False|Case summary|None|Case summary|
-|tags|[]string|None|False|List of case tags|None|['case_tag_1', 'case_tag_2']|
+|tags|[]string|None|False|List of case tags|None|[case_tag_1, case_tag_2]|
 |tasks|[]itask|None|False|Case task|None|{}|
 |template|string|None|False|Case template's name. If specified then the case is created using the given template|None|Case template name|
 |title|string|None|False|Name of the case|None|Case title|
@@ -273,20 +273,18 @@ Example output:
 
 ```
 {
-  "case": {
-    "Created At": {},
-    "Created By": {},
-    "ID": {},
-    "Start Date": 0,
-    "Type": {},
-    "description": {},
-    "flag": "true",
-    "order": {},
-    "owner": {},
-    "status": "Waiting",
-    "title": {},
-    "user": {}
-  }
+  "Created At": {},
+  "Created By": {},
+  "ID": {},
+  "Start Date": 0,
+  "Type": {},
+  "description": {},
+  "flag": "true",
+  "order": {},
+  "owner": {},
+  "status": "Waiting",
+  "title": {},
+  "user": {} 
 }
 ```
 #### Get Case
@@ -469,7 +467,7 @@ Example output:
 ### Tasks
   
 *This plugin does not contain any tasks.*
-### Custom Types
+### Custom Output Types
   
 **itask**  
 
