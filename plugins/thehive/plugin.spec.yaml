@@ -16,10 +16,9 @@ resources:
 tags:
   - thehive
   - intel
-  - case
 hub_tags:
   use_cases: [remediation_management]
-  keywords: [thehive, intel, case]
+  keywords: [thehive, intel]
   features: []
 enable_cache: true
 language: python
@@ -809,6 +808,7 @@ actions:
       case:
         type: task
         description: Create case task output
+        example: { "Created At": {}, "Created By": {}, "ID": {}, "Start Date": 0, "Type": {}, "description": {}, "flag": "true", "order": {}, "owner": {}, "status": "Waiting", "title": {}, "user": {} }
         required: false
   create_case_observable:
     title: Create Observable
