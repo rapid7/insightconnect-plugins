@@ -12,6 +12,10 @@ import pytmv1
 class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
+        self.client = None
+        self.url = None
+        self.key = None
+        self.app = None
 
     def connect(self, params: dict = None):
         """
@@ -25,25 +29,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
         """
         self.logger.info("Connect: Connecting...")
 
-        url = params.get(Input.API_URL, "")
-        if not url:
-            raise PluginException(
-                cause="No API URL provided.",
-                assistance="API URL is a required parameter, please provide a valid API URL.",
-                data=url,
-            )
-        key = params.get(Input.API_KEY).get("secretKey", "")
-        if not key or "default" in key:
-            raise PluginException(
-                cause="No API Key provided.",
-                assistance="API Key is a required parameter, please provide a valid API Key.",
-                data=key,
-            )
-        app = params.get(Input.APP_NAME, "Rapid7-InsightConnect")
+        self.url = params.get(Input.API_URL, "")
+        self.key = params.get(Input.API_KEY).get("secretKey", "")
+        self.app = params.get(Input.APP_NAME, "Rapid7-InsightConnect")
 
-        self.server = url
-        self.token_ = key
-        self.app = app
+        # Initialize PYTMV1 Client
+        self.logger.info("Initializing PYTMV1 Client...")
+        self.client = pytmv1.client(self.app, self.key, self.url)
 
     def test(self):
         # Get Action Parameters

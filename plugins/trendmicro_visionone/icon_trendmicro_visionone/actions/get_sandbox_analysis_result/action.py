@@ -9,7 +9,6 @@ from .schema import (
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
-import pytmv1
 
 
 class GetSandboxAnalysisResult(insightconnect_plugin_runtime.Action):
@@ -22,17 +21,12 @@ class GetSandboxAnalysisResult(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        # Get Connection Parameters
-        url = self.connection.server
-        token = self.connection.token_
-        app = self.connection.app
+        # Get Connection Client
+        client = self.connection.client
         # Get Action Parameters
         report_id = params.get(Input.REPORT_ID)
         poll = params.get(Input.POLL)
         poll_time_sec = params.get(Input.POLL_TIME_SEC)
-        # Initialize PYTMV1 Client
-        self.logger.info("Initializing PYTMV1 Client...")
-        client = pytmv1.client(app, token, url)
         # Make Action API Call
         self.logger.info("Making API Call...")
         response = client.get_sandbox_analysis_result(

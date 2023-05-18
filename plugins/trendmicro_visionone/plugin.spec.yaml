@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: trendmicro_visionone
 title: Trend Micro Vision One
-description: Trend Micro Vision One is a purpose-built threat defense platform that provides added value and new benefits beyond XDR solutions, allowing you to see more and respond faster. Providing deep and broad extended detection and response (XDR) capabilities that collect and automatically correlate data across multiple security layers, email, endpoints, servers, cloud workloads, and networks. Trend Micro Vision One prevents the majority of attacks with automated protection
+description: Trend Micro Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
 version: 1.0.0
 supported_versions: ["Trend Micro Vision One API v3"]
 vendor: trendmicro
@@ -44,22 +44,22 @@ types:
     url:
       title: URL
       type: string
-      description: support leading and tailing wildcards
+      description: Support leading and tailing wildcards
       required: false
     domain:
       title: Domain
       type: string
-      description: support leading wildcard
+      description: Support leading wildcard
       required: false
     sender_mail_address:
       title: Sender Mail Address
       type: string
-      description: support fully qualified email address
+      description: Support fully qualified email address
       required: false
     ip:
       title: IP
       type: string
-      description: support only full match
+      description: Support only full match
       required: false
       example: 200.102.35.1
     file_sha1:
@@ -70,7 +70,7 @@ types:
     file_sha256:
       title: File SHA256
       type: string
-      description: support only full match (64 characters)
+      description: Support only full match (64 characters)
       required: false
     type:
       title: Type
@@ -124,22 +124,22 @@ types:
     url:
       title: URL
       type: string
-      description: support leading and tailing wildcards
+      description: Support leading and tailing wildcards
       required: false
     domain:
       title: Domain
       type: string
-      description: support leading wildcard
+      description: Support leading wildcard
       required: false
     sender_mail_address:
       title: Sender Mail Address
       type: string
-      description: support fully qualified email address
+      description: Support fully qualified email address
       required: false
     ip:
       title: IP
       type: string
-      description: support only full match
+      description: Support only full match
       required: false
       example: 200.102.35.1
     file_sha1:
@@ -150,7 +150,7 @@ types:
     file_sha256:
       title: File SHA256
       type: string
-      description: support only full match (64 characters)
+      description: Support only full match (64 characters)
       required: false
     type:
       title: Type
@@ -223,7 +223,7 @@ types:
     product_code:
       title: Product Code
       type: string
-      description: 3-character code that identifies Trend Micro products
+      description: A 3-character code that identifies Trend Micro products
       required: true
       enum:
         - sao
@@ -232,7 +232,7 @@ types:
     installed_product_codes:
       title: Installed Product Codes
       type: "[]string"
-      description: 3-character code that identifies the installed Trend Micro products on an endpoint
+      description: A 3-character code that identifies the installed Trend Micro products on an endpoint
       required: true
   submit_urls_resp:
     url:

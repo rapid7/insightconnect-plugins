@@ -9,7 +9,6 @@ from .schema import (
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
-import pytmv1
 from base64 import b64decode
 
 
@@ -23,10 +22,8 @@ class SubmitFileToSandbox(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        # Get Connection Parameters
-        url = self.connection.server
-        token = self.connection.token_
-        app = self.connection.app
+        # Get Connection Client
+        client = self.connection.client
         # Get Action Parameters
         file = params.get(Input.FILE)
         document_password = params.get(Input.DOCUMENT_PASSWORD)
@@ -34,9 +31,6 @@ class SubmitFileToSandbox(insightconnect_plugin_runtime.Action):
         arguments = params.get(Input.ARGUMENTS)
         if not arguments:
             arguments = "None"
-        # Initialize PYTMV1 Client
-        self.logger.info("Initializing PYTMV1 Client...")
-        client = pytmv1.client(app, token, url)
         # Make Action API Call
         self.logger.info("Making API Call...")
         response = client.submit_file_to_sandbox(

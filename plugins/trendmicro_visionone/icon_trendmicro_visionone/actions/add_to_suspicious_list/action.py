@@ -22,10 +22,8 @@ class AddToSuspiciousList(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        # Get Connection Parameters
-        url = self.connection.server
-        token = self.connection.token_
-        app = self.connection.app
+        # Get Connection Client
+        client = self.connection.client
         # Get Action Parameters
         block_objects = params.get(Input.SUSPICIOUS_BLOCK_OBJECT)
         # Choose enum
@@ -52,9 +50,6 @@ class AddToSuspiciousList(insightconnect_plugin_runtime.Action):
                 i["risk_level"] = pytmv1.RiskLevel.MEDIUM
             elif "low" in i["risk_level"].lower():
                 i["risk_level"] = pytmv1.RiskLevel.LOW
-        # Initialize PYTMV1 Client
-        self.logger.info("Initializing PYTMV1 Client...")
-        client = pytmv1.client(app, token, url)
         # Make Action API Call
         self.logger.info("Making API Call...")
         multi_resp = {"multi_response": []}

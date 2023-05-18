@@ -3,7 +3,6 @@ from .schema import GetAlertListInput, GetAlertListOutput, Input, Output, Compon
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
-import pytmv1
 import json
 
 
@@ -17,16 +16,11 @@ class GetAlertList(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        # Get Connection Parameters
-        url = self.connection.server
-        token = self.connection.token_
-        app = self.connection.app
+        # Get Connection Client
+        client = self.connection.client
         # Get Action Parameters
         start_date_time = params.get(Input.START_DATE_TIME)
         end_date_time = params.get(Input.END_DATE_TIME)
-        # Initialize PYTMV1 Client
-        self.logger.info("Initializing PYTMV1 Client...")
-        client = pytmv1.client(app, token, url)
         new_alerts = []
         # Make Action API Call
         self.logger.info("Creating alert list...")

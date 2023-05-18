@@ -9,7 +9,6 @@ from .schema import (
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
-import pytmv1
 
 
 class GetSandboxSubmissionStatus(insightconnect_plugin_runtime.Action):
@@ -22,15 +21,10 @@ class GetSandboxSubmissionStatus(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        # Get Connection Parameters
-        url = self.connection.server
-        token = self.connection.token_
-        app = self.connection.app
+        # Get Connection Client
+        client = self.connection.client
         # Get Action Parameters
         task_id = params.get(Input.TASK_ID)
-        # Initialize PYTMV1 Client
-        self.logger.info("Initializing PYTMV1 Client...")
-        client = pytmv1.client(app, token, url)
         # Make Action API Call
         self.logger.info("Making API Call...")
         response = client.get_sandbox_submission_status(submit_id=task_id)

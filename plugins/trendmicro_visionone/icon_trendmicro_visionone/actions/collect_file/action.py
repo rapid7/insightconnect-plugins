@@ -16,15 +16,10 @@ class CollectFile(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        # Get Connection Parameters
-        url = self.connection.server
-        token = self.connection.token_
-        app = self.connection.app
+        # Get Connection Client
+        client = self.connection.client
         # Get Action Parameters
         collect_files = params.get(Input.COLLECT_FILES)
-        # Initialize PYTMV1 Client
-        self.logger.info("Initializing PYTMV1 Client...")
-        client = pytmv1.client(app, token, url)
         # Make Action API Call
         self.logger.info("Making API Call...")
         multi_resp = {"multi_response": []}

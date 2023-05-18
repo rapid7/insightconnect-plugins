@@ -23,10 +23,8 @@ class GetEndpointData(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        # Get Connection Parameters
-        url = self.connection.server
-        token = self.connection.token_
-        app = self.connection.app
+        # Get Connection Client
+        client = self.connection.client
         # Get Action Parameters
         endpoint = params.get(Input.ENDPOINT)
         query_op = params.get(Input.QUERY_OP)
@@ -35,9 +33,6 @@ class GetEndpointData(insightconnect_plugin_runtime.Action):
             query_op = pytmv1.QueryOp.OR
         elif "and" in query_op:
             query_op = pytmv1.QueryOp.AND
-        # Initialize PYTMV1 Client
-        self.logger.info("Initializing PYTMV1 Client...")
-        client = pytmv1.client(app, token, url)
         new_endpoint_data = []
         # Make Action API Call
         self.logger.info("Making API Call...")

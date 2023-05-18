@@ -9,7 +9,6 @@ from .schema import (
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
-import pytmv1
 
 
 class SubmitUrlsToSandbox(insightconnect_plugin_runtime.Action):
@@ -22,15 +21,10 @@ class SubmitUrlsToSandbox(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        # Get Connection Parameters
-        url = self.connection.server
-        token = self.connection.token_
-        app = self.connection.app
+        # Get Connection Client
+        client = self.connection.client
         # Get Action Parameters
         urls = params.get(Input.URL)
-        # Initialize PYTMV1 Client
-        self.logger.info("Initializing PYTMV1 Client...")
-        client = pytmv1.client(app, token, url)
         # Make Action API Call
         self.logger.info("Making API Call...")
         submit_urls_resp = {"submit_urls_resp": []}

@@ -9,7 +9,6 @@ from .schema import (
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
-import pytmv1
 import json
 
 
@@ -23,13 +22,8 @@ class GetSuspiciousList(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        # Get Connection Parameters
-        url = self.connection.server
-        token = self.connection.token_
-        app = self.connection.app
-        # Initialize PYTMV1 Client
-        self.logger.info("Initializing PYTMV1 Client...")
-        client = pytmv1.client(app, token, url)
+        # Get Connection Client
+        client = self.connection.client
         new_suspicions = []
         # Make Action API Call
         self.logger.info("Making API Call...")

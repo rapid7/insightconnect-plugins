@@ -22,10 +22,8 @@ class RemoveFromExceptionList(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        # Get Connection Parameters
-        url = self.connection.server
-        token = self.connection.token_
-        app = self.connection.app
+        # Get Connection Client
+        client = self.connection.client
         # Get Action Parameters
         block_objects = params.get(Input.BLOCK_OBJECT)
         # Choose enum
@@ -42,9 +40,6 @@ class RemoveFromExceptionList(insightconnect_plugin_runtime.Action):
                 i["object_type"] = pytmv1.ObjectType.SENDER_MAIL_ADDRESS
             elif "url" in i["object_type"].lower():
                 i["object_type"] = pytmv1.ObjectType.URL
-        # Initialize PYTMV1 Client
-        self.logger.info("Initializing PYTMV1 Client...")
-        client = pytmv1.client(app, token, url)
         # Make Action API Call
         self.logger.info("Making API Call...")
         multi_resp = {"multi_response": []}
