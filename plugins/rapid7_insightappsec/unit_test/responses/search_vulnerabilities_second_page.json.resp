@@ -1,0 +1,54 @@
+{
+  "data": [
+    {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c1",
+      "app": {
+        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c1"
+      },
+      "root_cause": {
+        "url": "http://example2.com",
+        "parameter": "Unnamed",
+        "method": "GET"
+      },
+      "severity": "LOW",
+      "status": "UNREVIEWED",
+      "first_discovered": "2023-03-20T14:30:10.686575",
+      "last_discovered": "2023-03-20T14:30:10.686575",
+      "newly_discovered": true,
+      "variances": [
+        {
+          "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c1",
+          "original_exchange": {
+            "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c1",
+            "request": "GET /example/path/file2.php",
+            "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nDate: Mon, 20 Mar 2023 11:47:37 GMT\r\n"
+          },
+          "module": {
+            "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c1"
+          },
+          "attack": {
+            "id": "R_02"
+          },
+          "attack_value": "test",
+          "proof": "test",
+          "attack_exchanges": [
+            {
+              "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c1",
+              "request": "GET /example/path/file2.php",
+              "response": "HTTP/1.1 200 OK\r\nConnection: close\r\nDate: Mon, 20 Mar 2023 13:49:33 GMT\r\n"
+            }
+          ]
+        }
+      ],
+      "vector_string": "AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N",
+      "vulnerability_score": 0.0,
+      "insight_ui_url": "https://example.com",
+      "links": [
+        {
+          "rel": "self",
+          "href": "https://example.com"
+        }
+      ]
+    }
+  ]
+}
