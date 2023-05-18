@@ -523,7 +523,7 @@ This action is used to update the vulnerability by ID.
 |last_found|date|None|False|The time that represents when the vulnerability was last found, in ISO format|None|2023-04-30T12:14:10|
 |short_description|string|None|False|Short description of the vulnerability|None|Example short description|
 |source|string|None|False|The vulnerability source|None|ExampleSource|
-|state|string|None|False|The state of the vulnerability|['Open', 'Under Investigation']|Open|
+|state|string|None|False|The state of the vulnerability|['', 'Open', 'Under Investigation']|Open|
 |system_id|string|None|True|System ID of the vulnerability to be retrieved|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |vulnerability|string|None|False|The reference of the found vulnerability|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
