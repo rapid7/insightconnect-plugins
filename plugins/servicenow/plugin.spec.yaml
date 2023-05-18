@@ -793,6 +793,7 @@ actions:
         description: The state of the vulnerability
         type: string
         enum:
+          - ""
           - Open
           - Under Investigation
         required: false
