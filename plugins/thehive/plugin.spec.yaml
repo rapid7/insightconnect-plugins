@@ -931,6 +931,7 @@ actions:
         title: Success
         description: List of cases
         type: '[]case'
+        example: {}
         required: false
   close_case:
     title: Close Case
@@ -954,4 +955,5 @@ actions:
         title: Success
         description: Boolean to indicate if the operation was successful
         type: boolean
+        example: true
         required: true
