@@ -905,6 +905,7 @@ actions:
       case:
         type: observable
         description: Create case observable output
+        example: { "data": "Test data for observable", "datatype": "domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other", "id": "AYgQXmjbfMffAh_St-fk", "ignoreSimilarity": false, "ioc": false, "jsonData": "json object containing all necessary fields", "message": "Observable message", "pap": 2, "sighted": false, "startDate": 1640000000000, "tags": "tag_one", "tlp": 2 }
         required: false
   get_case:
     title: Get Case
