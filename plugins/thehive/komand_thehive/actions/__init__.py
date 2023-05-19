@@ -5,4 +5,5 @@ from .create_case_observable.action import CreateCaseObservable
 from .create_case_task.action import CreateCaseTask
 from .get_case.action import GetCase
 from .get_cases.action import GetCases
-from .get_user.action import GetUser
+from .get_current_user.action import GetCurrentUser
+from .get_user_by_id.action import GetUserById
