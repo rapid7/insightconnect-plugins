@@ -211,29 +211,25 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|case|observable|False|Create case observable output|{}|
+|case|observable|False|Create case observable output|{'data': 'Test data for observable', 'datatype': 'domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other', 'id': 'AYgQXmjbfMffAh_St-fk', 'ignoreSimilarity': False, 'ioc': False, 'jsonData': 'json object containing all necessary fields', 'message': 'Observable message', 'pap': 2, 'sighted': False, 'startDate': 1640000000000, 'tags': 'tag_one', 'tlp': 2}|
   
 Example output:
 
 ```
 {
   "case": {
-    "Created At": {},
-    "Created By": {},
-    "Data Type": {},
-    "ID": {},
-    "IOC": "true",
-    "Start Date": 0,
-    "TLP": {},
-    "Type": {},
-    "data": {},
-    "message": {},
-    "reports": {},
-    "status": "",
-    "tags": [
-      {}
-    ],
-    "user": {}
+    "data": "Test data for observable",
+    "datatype": "domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other",
+    "id": "AYgQXmjbfMffAh_St-fk",
+    "ignoreSimilarity": false,
+    "ioc": false,
+    "jsonData": "json object containing all necessary fields",
+    "message": "Observable message",
+    "pap": 2,
+    "sighted": false,
+    "startDate": 1640000000000,
+    "tags": "tag_one",
+    "tlp": 2
   }
 }
 ```
@@ -309,7 +305,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|case|case|True|Get case output|None|
+|case|case|True|Get case output|{}|
   
 Example output:
 
@@ -609,7 +605,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.0.0 - Action: `Get Cases` removed. | Action: `Get User` made into two new actions, `Get User By ID` & `Get Current User`. | Refactor: All code refactored & thehive4py dependency removed. | Connection: Fixed issue where connection fails on SSL verify & added API key input.
+* 3.0.0 - Refactored plugin | Removed `thehive4py` dependency | Action: Split `get_user` into two new actions, `get_user_by_id` & `get_current_user`
 * 2.0.5 - New spec and help.md format for the Extension Library. Update help key features and fix description capitalisation
 * 2.0.4 - Update to use the `komand/python-2-27-slim-plugin` Docker image to reduce plugin size and to support SSL Verify
 * 2.0.3 - Fix issue where SSL Verify was not used in actions that utilize requests | Updated test method and moved it to connection

@@ -921,6 +921,7 @@ actions:
       case:
         type: case
         description: Get case output
+        example: {}
         required: true
   get_cases:
     title: Get Cases
