@@ -24,7 +24,7 @@ class AvSampleInput(komand.Input):
     "query": {
       "type": "string",
       "title": "Query",
-      "description": "Virus name to query e.g. Trojan.Enfal",
+      "description": "Virus name to query",
       "order": 1
     }
   },

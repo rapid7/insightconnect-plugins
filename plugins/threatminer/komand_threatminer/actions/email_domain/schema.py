@@ -24,7 +24,7 @@ class EmailDomainInput(komand.Input):
     "email": {
       "type": "string",
       "title": "Email",
-      "description": "Email address to search e.g. user@example.com",
+      "description": "Email address to search",
       "order": 1
     }
   },
