@@ -1,13 +1,11 @@
-import komand
-from .schema import CreateCaseTaskInput, CreateCaseTaskOutput, Component
+import insightconnect_plugin_runtime
+from .schema import CreateCaseTaskInput, CreateCaseTaskOutput, Component, Input, Output
 
 # Custom imports below
-from thehive4py.models import Case, CaseTask
 import time
-import requests
 
 
-class CreateCaseTask(komand.Action):
+class CreateCaseTask(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_case_task",
@@ -18,32 +16,23 @@ class CreateCaseTask(komand.Action):
 
     def run(self, params={}):
 
-        client = self.connection.client
+        case_id = params.get(Input.ID)
+        json_task_data = params.get(Input.JSONDATA)
 
-        self.logger.info(params)
-        task = CaseTask(
-            title=params.get("task").get("title", None),
-            description=params.get("task").get("description", None),
-            flag=params.get("task").get("flag", False),
-            owner=params.get("task").get("owner", None),
-            status=params.get("task").get("status", None),
-        )
+        if json_task_data:
+            task = json_task_data
+        else:
+            task = {
+                "title": params.get(Input.TITLE),
+                "description": params.get(Input.DESCRIPTION),
+                "status": params.get(Input.STATUS),
+                "flag": params.get(Input.FLAG),
+                "startDate": params.get(Input.STARTDATE, int(time.time()) * 1000),
+                "owner": params.get(Input.OWNER),
+            }
 
-        try:
-            task = client.create_case_task(params.get("id"), task)
-            task.raise_for_status()
-        except requests.exceptions.HTTPError:
-            self.logger.error(task.json())
-            raise
-        except:
-            self.logger.error("Failed to create task")
-            raise
+        self.logger.info(f"Input: {task}")
 
-        d = task.json()
-        # If API returns None, manually do what the library does elsewhere
-        # https://github.com/CERT-BDF/TheHive4py/blob/master/thehive4py/models.py#L44
-        if "startDate" in d:
-            if isinstance(d["startDate"], type(None)):
-                d["startDate"] = int(time.time()) * 1000
+        response = self.connection.client.create_task_in_case(case_id=case_id, task=task)
 
-        return {"case": d}
+        return {Output.CASE: response}

@@ -1,0 +1,22 @@
+{
+    "_routing": "case_id",
+    "reports": {},
+    "data": "string",
+    "dataType": "domain",
+    "_type": "case_artifact",
+    "sighted": false,
+    "message": "string",
+    "tags": [
+        "string"
+    ],
+    "createdAt": 1684247621951,
+    "_parent": "case_id",
+    "createdBy": "admin",
+    "tlp": 2,
+    "_id": "random_id1234",
+    "id": "random_id1234",
+    "ioc": false,
+    "_version": 1,
+    "startDate": 1640000000000,
+    "status": "Ok"
+}
