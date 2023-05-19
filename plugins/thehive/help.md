@@ -76,7 +76,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|True|Boolean to indicate if the operation was successful|{}|
+|success|boolean|True|Boolean to indicate if the operation was successful|True|
   
 Example output:
 
