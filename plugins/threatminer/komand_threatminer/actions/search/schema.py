@@ -25,7 +25,7 @@ class SearchInput(komand.Input):
     "query": {
       "type": "string",
       "title": "Query",
-      "description": "Text to search e.g. sofacy",
+      "description": "Text to search",
       "order": 1
     },
     "query_type": {
