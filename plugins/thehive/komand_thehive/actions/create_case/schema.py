@@ -138,7 +138,6 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Case Title",
       "description": "Name of the case",
-      "default": "None",
       "order": 1
     },
     "tlp": {
@@ -155,6 +154,9 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       "order": 7
     }
   },
+  "required": [
+    "title"
+  ],
   "definitions": {
     "itask": {
       "type": "object",

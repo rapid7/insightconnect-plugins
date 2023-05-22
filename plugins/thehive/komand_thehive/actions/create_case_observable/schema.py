@@ -99,7 +99,7 @@ class CreateCaseObservableInput(insightconnect_plugin_runtime.Input):
     "startDate": {
       "type": "integer",
       "title": "Start Date",
-      "description": "Observable start date (timestamp in ms)",
+      "description": "Observable start date (datetime in ms) (will default to now if left blank)",
       "order": 11
     },
     "tags": {
