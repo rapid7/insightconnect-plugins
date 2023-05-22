@@ -8,12 +8,12 @@ RUN apt-get update && \
 
 ENV SQLMAP_VERSION master
 
-RUN wget https://github.com/sqlmapproject/sqlmap/archive/$SQLMAP_VERSION.tar.gz && \
-    tar -xf master.tar.gz
-
 WORKDIR /python/src
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD . /python/src
+
+RUN wget https://github.com/sqlmapproject/sqlmap/archive/$SQLMAP_VERSION.tar.gz && \
+    tar -xf master.tar.gz
 
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
