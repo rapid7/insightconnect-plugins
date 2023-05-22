@@ -1,5 +1,4 @@
 import json
-import logging
 from logging import Logger
 import requests
 import re
@@ -35,6 +34,7 @@ from komand_okta.util.endpoints import (
 def rate_limiting(max_tries: int):
     def _decorate(func):
         def _wrapper(*args, **kwargs):
+            self = args[0]
             retry = True
             counter, delay = 0, 0
             while retry and counter < max_tries:
@@ -47,7 +47,7 @@ def rate_limiting(max_tries: int):
                     counter += 1
                     delay = 2 ** (counter * 0.6)
                     if error.cause == PluginException.causes[PluginException.Preset.RATE_LIMIT]:
-                        logging.info("Rate limiting error occurred. Retrying in %d seconds.", delay)
+                        self.logger.info(f"Rate limiting error occurred. Retrying in {delay:.1f} seconds.")
                         retry = True
             return func(*args, **kwargs)
 
