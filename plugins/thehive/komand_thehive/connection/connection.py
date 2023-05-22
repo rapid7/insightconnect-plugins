@@ -26,7 +26,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.verify = params.get(Input.VERIFY, True)
         self.proxy = params.get(Input.PROXY, {})
 
-        url = f"{protocol}://{host}:{port}"
+        url = f"{protocol}://{host}:{str(port)}"
         self.logger.info(f"URL: {url}")
 
         if self.proxy:
