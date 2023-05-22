@@ -33,7 +33,7 @@ The connection configuration accepts the following parameters:
 |api_key|credential_secret_key|None|False|An optional API key for authentication via bearer token|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |credentials|credential_username_password|None|False|Username and password|None|{}|
 |host|string|None|True|TheHive host|None|thehive.company.com or 10.3.4.50|
-|port|string|9000|True|TheHive API port|None|9000|
+|port|integer|9000|True|TheHive API port|None|9000|
 |protocol|string|None|True|HTTP Protocol|['http', 'https']|http|
 |proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|{}|
 |verify|boolean|True|True|Verify the certificate|None|True|
@@ -104,7 +104,7 @@ Create a new case
 |tags|[]string|None|False|List of case tags|None|["case_tag_1", "case_tag_2"]|
 |tasks|[]itask|None|False|Case task|None|{}|
 |template|string|None|False|Case template's name. If specified then the case is created using the given template|None|Case template name|
-|title|string|None|False|Name of the case|None|Case title|
+|title|string|None|True|Name of the case|None|Case title|
 |tlp|integer|2|False|Traffic Light Protocol level|[0, 1, 2, 3]|2|
   
 Example input:
@@ -182,7 +182,7 @@ Create a new case observable
 |message|string|None|False|Observable's description. If tags is empty, this is required|None|Observable message|
 |pap|integer|2|False|Case's PAP|[0, 1, 2, 3]|2|
 |sighted|boolean|False|False|Observable's sighted flag, True to mark the observable as sighted|None|False|
-|startDate|integer|None|False|Observable start date (timestamp in ms)|None|1640000000000|
+|startDate|integer|None|False|Observable start date (datetime in ms) (will default to now if left blank)|None|1640000000000|
 |tags|[]string|None|False|List of observable tags, required if message is None|None|["tag_one", "tag_two"]|
 |tlp|integer|2|False|Case's TLP|[0, 1, 2, 3]|2|
   
@@ -244,7 +244,7 @@ Create a new case task
 |id|string|None|False|ID for the case|None|AYgQXmjbfMffAh_St-fk|
 |jsonData|object|None|False|If the field is not equal to None, the Task is instantiated using the JSON value instead of the arguements|None|json object containing all necessary fields|
 |owner|string|None|False|Task's assignee|None|admin|
-|startDate|integer|None|False|Task's start date, the date the task started at|None|1684170163000|
+|startDate|integer|None|False|Task's start date (datetime in ms) (will default to now if left blank)|None|1684170163000|
 |status|string|Waiting|False|Task's status|['Waiting', 'InProgress', 'Cancel', 'Completed']|Waiting|
 |title|string|None|False|Task's title|None|Task title|
   

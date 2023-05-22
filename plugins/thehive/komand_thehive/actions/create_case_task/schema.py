@@ -62,7 +62,7 @@ class CreateCaseTaskInput(insightconnect_plugin_runtime.Input):
     "startDate": {
       "type": "integer",
       "title": "Start Date",
-      "description": "Task's start date, the date the task started at",
+      "description": "Task's start date (datetime in ms) (will default to now if left blank)",
       "order": 6
     },
     "status": {

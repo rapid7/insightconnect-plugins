@@ -65,8 +65,9 @@ class HiveAPI:
         # Handle the authentication method
         auth = None
 
+        # For API key auth, we need to add it into headers, not via request.auth()
         if self.api_key:
-            auth = {"Authorization": f"Bearer {self.api_key}"}
+            headers.update({"Authorization": f"Bearer {self.api_key}"})
 
         if self.username and self.password:
             auth = HTTPBasicAuth(self.username, self.password)

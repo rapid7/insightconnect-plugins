@@ -30,7 +30,7 @@ connection:
     example: thehive.company.com or 10.3.4.50
     required: true
   port:
-    type: string
+    type: integer
     title: Port
     description: TheHive API port
     default: 9000
@@ -607,9 +607,8 @@ actions:
         title: Case Title
         description: Name of the case
         type: string
-        default: None
         example: Case title
-        required: false
+        required: true
       description:
         title: Case Description
         description: Description of the case, supports markdown
@@ -788,7 +787,7 @@ actions:
         required: false
       startDate:
         title: Start Date
-        description: Task's start date, the date the task started at
+        description: Task's start date (datetime in ms) (will default to now if left blank)
         type: integer
         example: 1684170163000
         required: false
@@ -891,7 +890,7 @@ actions:
         required: false
       startDate:
         title: Start Date
-        description: Observable start date (timestamp in ms)
+        description: Observable start date (datetime in ms) (will default to now if left blank)
         type: integer
         example: 1640000000000
         required: false
