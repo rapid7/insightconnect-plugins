@@ -1,5 +1,5 @@
 {
-	"spec": "5258b4fadd7aaee0963eb6055b06fb99",
+	"spec": "8726cc9c447d907ee96270dc2cf32a7c",
 	"manifest": "d8ec7599101e53b064d1e193e3bbc0a9",
 	"setup": "ec76266f871718b2905a4be8feecf76f",
 	"schemas": [
@@ -9,15 +9,15 @@
 		},
 		{
 			"identifier": "create_case/schema.py",
-			"hash": "3ca450df352ca68bd06490bcb734f1b5"
+			"hash": "24e91587c6e2194319872490602583df"
 		},
 		{
 			"identifier": "create_case_observable/schema.py",
-			"hash": "32e9993f75f1ee22d891e2f494e18673"
+			"hash": "b2d136d0dc1655d43257ad448a6e7632"
 		},
 		{
 			"identifier": "create_case_task/schema.py",
-			"hash": "b6fe012b96d5e58a55757bd8fd86dbcd"
+			"hash": "0607c5a3df14e797ad8f3fc7cf37348f"
 		},
 		{
 			"identifier": "get_case/schema.py",
@@ -37,7 +37,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "9d946f0e61cd1b7e8b60b01bc18d5643"
+			"hash": "3f41b394c500a5d36902a2e275ee67b9"
 		}
 	]
 }
