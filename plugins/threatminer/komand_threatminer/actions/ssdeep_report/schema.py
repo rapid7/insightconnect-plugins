@@ -24,7 +24,7 @@ class SsdeepReportInput(komand.Input):
     "query": {
       "type": "string",
       "title": "Query",
-      "description": "SSDeep fuzzy hash to search e.g. 1536:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4:TJs0oG2KSTj3o8a9PFeEHn4l",
+      "description": "SSDeep fuzzy hash to search",
       "order": 1
     }
   },

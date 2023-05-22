@@ -1,15 +1,15 @@
 {
-	"spec": "5d815f36991c93bd79c759696e3e36dc",
-	"manifest": "9051bea76ac8d1785bfae3f94ed55092",
-	"setup": "6fe0e21bdfecf18277f17c42f9d14c88",
+	"spec": "0d4f1b9c61d858f8ba084644c7063ced",
+	"manifest": "ff6ea66e4eac9d5bdcaf2a199b488faa",
+	"setup": "fed659d8dca6e9ef6c8719056dfd9497",
 	"schemas": [
 		{
 			"identifier": "av_report/schema.py",
-			"hash": "7be5d9a64508505866ba098d46c0511e"
+			"hash": "eec12d13a852cca01f67307ffc7b9a8c"
 		},
 		{
 			"identifier": "av_sample/schema.py",
-			"hash": "b9259a031b6af0dc25a4194d940a64a2"
+			"hash": "4777fd81aa8fa22b1198a5243a1255b6"
 		},
 		{
 			"identifier": "domain/schema.py",
@@ -21,11 +21,11 @@
 		},
 		{
 			"identifier": "email_domain/schema.py",
-			"hash": "7c635a9f33029937270eaa0fbc42f752"
+			"hash": "2539cff8fef4ef9eec2f744cdb4e5cb2"
 		},
 		{
 			"identifier": "email_report/schema.py",
-			"hash": "a346d8988e3be93ef127952f11d859de"
+			"hash": "22ce323cd469387395520a05c77ea97d"
 		},
 		{
 			"identifier": "import_hash_report/schema.py",
@@ -45,7 +45,7 @@
 		},
 		{
 			"identifier": "report/schema.py",
-			"hash": "8e6e90997f75516106584705acef9005"
+			"hash": "e9e952bfbca175f5370051cb2fd0aa66"
 		},
 		{
 			"identifier": "samples/schema.py",
@@ -53,23 +53,23 @@
 		},
 		{
 			"identifier": "search/schema.py",
-			"hash": "6f76ff5f4a8637003b41a7c9bdc2c966"
+			"hash": "5a1633dad48fd3a52dcac73f4996d7f8"
 		},
 		{
 			"identifier": "ssdeep_report/schema.py",
-			"hash": "237afcb339948d5196b575df9d374019"
+			"hash": "8d1537ab7a9a6f3e406d1e5670e68838"
 		},
 		{
 			"identifier": "ssdeep_sample/schema.py",
-			"hash": "72ec14b50b3c8051c2262d48a0c25334"
+			"hash": "bb42b2f59e953f005ad6dc62d853c152"
 		},
 		{
 			"identifier": "ssl_hosts/schema.py",
-			"hash": "9ef1998313e9872c0520940a978f73a2"
+			"hash": "3cb51a247a48cb50bf2da17fcb107a82"
 		},
 		{
 			"identifier": "ssl_report/schema.py",
-			"hash": "5f97130efc819675afeb8ceb1a7a37b6"
+			"hash": "cafe281bf0fdbe3f89814c79352f5dd8"
 		},
 		{
 			"identifier": "connection/schema.py",
