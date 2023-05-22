@@ -1,9 +1,6 @@
 # Description
-
-The Symantec BCS plugin allows you to submit a file to Symantec Security Response.
-
-[Symantec BCS](https://submit.symantec.com/websubmit/bcs.cgi) is a suspected infected file or hash submission form that sends data to Symantec Security Response.
-
+  
+The Symantec Business Critical Services plugin allows you to submit a file to Symantec Security Response
 # Key Features
 
 * Submit a malicious file or hash
@@ -12,55 +9,81 @@ The Symantec BCS plugin allows you to submit a file to Symantec Security Respons
 
 _This plugin does not contain any requirements._
 
+# Supported Product Versions
+
+* 2023-05-16
+
 # Documentation
 
 ## Setup
 
-This plugin does not contain a connection.
-
+_This plugin does not contain a connection._
 ## Technical Details
 
 ### Actions
 
 #### Submit
-
 This action is used to submit a malicious file or hash.
-
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|pin|string|None|True|Support ID number|None|
-|comments|string|None|True|Additional information|None|
-|lname|string|None|True|Last name|None|
-|cname|string|None|True|Company name|None|
-|critical|boolean|False|True|None|None|
-|fname|string|None|True|First name|None|
-|data|bytes|None|True|URL to file, hash (MD5 or SHA256), or base64 file|None|
-|email|string|None|True|Email address|None|
-|stype|string|None|True|Submission type|['upfile', 'url', 'hash']|
-|filename|string|None|False|Optional filename if submission type is upfile|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|cname|string|None|True|Company name|None|Example Organization|
+|comments|string|None|True|Additional information|None|Example Comment|
+|critical|boolean|False|True|High severity|None|True|
+|data|bytes|None|True|URL to file, hash (MD5 or SHA256), or base64 file|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
+|email|string|None|True|Email address|None|user@example.com|
+|filename|string|None|False|Optional filename if submission type is upfile|None|malicious-file|
+|fname|string|None|True|First name|None|John|
+|lname|string|None|True|Last name|None|Smith|
+|pin|string|None|True|Support ID number|None|1|
+|stype|string|None|True|Submission type|['upfile', 'url', 'hash']|upfile|
+  
+Example input:
 
-##### Output
+```
+{
+  "cname": "Example Organization",
+  "comments": "Example Comment",
+  "critical": true,
+  "data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
+  "email": "user@example.com",
+  "filename": "malicious-file",
+  "fname": "John",
+  "lname": "Smith",
+  "pin": 1,
+  "stype": "upfile"
+}
+```
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|string|True|HTML response|
+# Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|response|string|True|HTML response|<!DOCTYPE html> <html> <body> <h1>Example Response</h1> </body> </html>|
+  
+Example output:
+
+```
+{
+  "response": "<!DOCTYPE html> <html> <body> <h1>Example Response</h1> </body> </html>"
+}
+```
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
-
-_This plugin does not contain any custom output types._
-
+  
+*This plugin does not contain any custom output types.*
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.2 - Update requests to 2.20.0 | Update to insightconnect-plugin-runtime | Fix Error handling
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 0.1.1 - SSL bug fix in SDK
@@ -68,7 +91,8 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
+*[Broadcom](https://www.broadcom.com/)
+
 ## References
 
 * [Symantec BCS](https://submit.symantec.com/websubmit/bcs.cgi)
-
