@@ -9,6 +9,7 @@ from unit_test.util import Util
 from unittest.mock import patch
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_okta.util.exceptions import ApiException
 
 
 @patch("requests.request", side_effect=Util.mock_request)
@@ -41,7 +42,7 @@ class TestDeactivateUser(TestCase):
         ]
     )
     def test_deactivate_user_raise_exception(self, mock_request, test_name, input_parameters, cause, assistance):
-        with self.assertRaises(PluginException) as error:
+        with self.assertRaises(ApiException) as error:
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
         self.assertEqual(error.exception.assistance, assistance)
