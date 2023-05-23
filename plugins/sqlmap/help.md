@@ -76,7 +76,7 @@ Performs a SQLmap scan on target
 |delay|integer|None|False|Delay in seconds between each HTTP request|None|0|
 |dependencies|boolean|None|False|Check for missing (non-core) SQLmap dependencies|None|False|
 |direct|string|None|False|Connection string for direct database connection|None|direct_string|
-|dnsName|string|None|False|Domain name used for DNS ex filtration attack|None|example.com|
+|dnsName|string|None|False|Domain name used for DNS exfiltration attack|None|example.com|
 |dropSetCookie|boolean|None|False|Ignore Set-Cookie header from response|None|False|
 |dummy|boolean|None|False|Dummy parameter value|None|False|
 |dumpAll|boolean|None|False|Dump all DBMS databases tables entries|None|False|

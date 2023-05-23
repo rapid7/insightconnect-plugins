@@ -347,7 +347,7 @@ actions:
         example: UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==
       dnsName:
         title: Domain Name
-        description: Domain name used for DNS ex filtration attack
+        description: Domain name used for DNS exfiltration attack
         type: string
         required: false
         example: example.com

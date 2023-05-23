@@ -362,7 +362,7 @@ class ScanInput(insightconnect_plugin_runtime.Input):
     "dnsName": {
       "type": "string",
       "title": "Domain Name",
-      "description": "Domain name used for DNS ex filtration attack",
+      "description": "Domain name used for DNS exfiltration attack",
       "order": 47
     },
     "dropSetCookie": {
