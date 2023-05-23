@@ -28,7 +28,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 self.api_host = "127.0.0.1"
                 self.api_port = "8775"
             if self.api_host and self.api_port:
-                subprocess.Popen(
+                subprocess.Popen(  # noqa: B607
                     [f"python /python/src/sqlmap-master/sqlmapapi.py -s --host={self.api_host} --port={self.api_port}"],
                     stdout=self.f,
                     stderr=self.f,

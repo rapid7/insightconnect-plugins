@@ -82,7 +82,7 @@ class Scan(insightconnect_plugin_runtime.Action):
             self.headers = {"Content-Type": "application/json"}
         self.headers = {str(key): str(value) for key, value in self.headers.items()}
         params = {str(key): str(value) for key, value in params.items()}
-        set_options = requests.post(  # pylint: disable=unused-variable
+        set_options = requests.post(  # pylint: disable=unused-variable  # noqa: F841
             f"http://{self.api_host}:{self.api_port}/option/{self.taskid}/set",
             data=json.dumps(params),
             headers=self.headers,
@@ -93,7 +93,7 @@ class Scan(insightconnect_plugin_runtime.Action):
         payload = {"url": self.url}
         payload = {str(key): str(value) for key, value in payload.items()}
         self.sql_url = f"http://{self.api_host}:{self.api_port}/scan/{self.taskid}/start"
-        start_scan = json.loads(  # pylint: disable=unused-variable
+        start_scan = json.loads(  # pylint: disable=unused-variable  # noqa: F841
             requests.post(self.sql_url, data=json.dumps(payload), headers=self.headers, timeout=10).text
         )
 
@@ -122,7 +122,7 @@ class Scan(insightconnect_plugin_runtime.Action):
         taskid = req_check["taskid"]
         failed = {"result": "failed"}
         if taskid:
-            delete_task = json.loads(  # pylint: disable=unused-variable
+            delete_task = json.loads(  # pylint: disable=unused-variable  # noqa: F841
                 requests.get(f"http://{self.api_host}:{self.api_port}/task/{taskid}/delete", timeout=10).text
             )
             return req_check
