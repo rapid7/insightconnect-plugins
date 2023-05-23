@@ -50,8 +50,8 @@ Performs a SQLmap scan on target
 |aCert|bytes|None|False|HTTP authentication PEM cert/private key file|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
 |aCred|string|None|False|HTTP authentication credentials|None|username:password|
 |aType|string|None|False|HTTP authentication type (Basic, Digest, NTLM or PKI)|None|Basic|
-|agent|string|None|False|HTTP User-Agent header value|None|Mozilla/https://example.com|
-|alert|string|None|False|Run host OS command(s) when SQL injection is found|None|python3 https://example.com|
+|agent|string|None|False|HTTP User-Agent header value|None|Mozilla/5.0|
+|alert|string|None|False|Run host OS command(s) when SQL injection is found|None|python3 alert_script.py|
 |answers|string|None|False|Set question answers|None|quit=N,follow=N|
 |batch|boolean|True|False|Never ask for user input, use the default behaviour|None|True|
 |binaryFields|string|None|False|Result fields having binary values|None|digest|
@@ -67,7 +67,7 @@ Performs a SQLmap scan on target
 |cookie|string|None|False|HTTP Cookie header value|None|name=value|
 |crawlDepth|integer|1|False|Crawl the website starting from the target URL|[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]|1|
 |csvDel|string|,|False|Delimiting character used in CSV output|None|,|
-|dFile|string|None|False|Back-end DBMS absolute filepath to write to|None|/users/user1/docs/https://example.com|
+|dFile|string|None|False|Back-end DBMS absolute filepath to write to|None|/users/user1/docs/file.txt|
 |data|string|None|False|Data string to be sent through POST|None|data1|
 |database|boolean|None|False|DBMS database to enumerate|None|False|
 |db|string|None|False|DBMS database to enumerate|None|db1|
@@ -76,14 +76,14 @@ Performs a SQLmap scan on target
 |delay|integer|None|False|Delay in seconds between each HTTP request|None|0|
 |dependencies|boolean|None|False|Check for missing (non-core) SQLmap dependencies|None|False|
 |direct|string|None|False|Connection string for direct database connection|None|direct_string|
-|dnsName|string|None|False|Domain name used for DNS ex filtration attack|None|https://example.com|
+|dnsName|string|None|False|Domain name used for DNS ex filtration attack|None|example.com|
 |dropSetCookie|boolean|None|False|Ignore Set-Cookie header from response|None|False|
 |dummy|boolean|None|False|Dummy parameter value|None|False|
 |dumpAll|boolean|None|False|Dump all DBMS databases tables entries|None|False|
 |dumpFormat|string|CSV|False|Format of dumped data|['CSV', 'HTML', 'SQLITE']|CSV|
 |dumpTable|boolean|False|False|Dump DBMS database table entries|None|False|
 |eta|boolean|None|False|Display for each output the estimated time of arrival|None|False|
-|evalCode|string|None|False|Evaluate provided Python code before the request|None|import hashlib;https://example.com|
+|evalCode|string|None|False|Evaluate provided Python code before the request|None|import hashlib;id2=hashlib.md5(id).hexdigest()|
 |excludeSysDbs|boolean|None|False|Exclude DBMS system databases when enumerating tables|None|False|
 |extensiveFp|boolean|False|False|Perform an extensive DBMS version fingerprint|None|False|
 |firstChar|string|None|False|First query output word character to retrieve|None|a|
@@ -143,7 +143,7 @@ Performs a SQLmap scan on target
 |proxy|string|None|False|Use a proxy to connect to the target URL|None|proxy|
 |purgeOutput|boolean|False|False|Safely remove all content from output directory|None|False|
 |query|string|None|False|SQL statement to be executed|None|SELECT * FROM table_name;|
-|rFile|string|None|False|Read a file from the back-end DBMS file system|None|https://example.com|
+|rFile|string|None|False|Read a file from the back-end DBMS file system|None|file.txt|
 |rParam|string|None|False|Randomly change value for given parameter(s)|None|param1|
 |randomAgent|boolean|None|False|Use randomly selected HTTP User-Agent header value|None|False|
 |referer|string|None|False|HTTP Referer header value|None|HTTP Referer|
@@ -159,10 +159,10 @@ Performs a SQLmap scan on target
 |retries|integer|3|False|Retries when the connection timeouts|None|3|
 |risk|integer|1|False|Risk of tests to perform|[1, 2, 3]|1|
 |saFreq|integer|0|False|Test requests between two visits to a given safe URL|None|0|
-|safUrl|string|None|False|URL address to visit frequently during testing|None|https://example.com|
+|safUrl|string|None|False|URL address to visit frequently during testing|None|https://www.example.com|
 |scope|string|None|False|Regex to filter targets from provided proxy log|None|^The|
 |search|boolean|False|False|Search column(s), table(s) and/or database name(s)|None|False|
-|secondOrder|string|None|False|Resulting page URL searched for second-order response|None|https://example.com|
+|secondOrder|string|None|False|Resulting page URL searched for second-order response|None|https://www.example.com|
 |sessionFile|bytes|None|False|Load session from a stored (.sqlite) file|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
 |shLib|string|None|False|Local path of the shared library|None|Network/SharedResources/SharedLibrary|
 |skip|string|None|False|Skip testing for given parameter(s)|None|param1|
@@ -186,10 +186,10 @@ Performs a SQLmap scan on target
 |uFrom|string|None|False|Table to use in FROM part of UNION query SQL injection|None|table1|
 |udfInject|boolean|None|False|Inject custom user-defined functions|None|False|
 |updateAll|boolean|None|False|Update SQLmap|None|False|
-|url|string|None|False|Target URL|None|https://example.com|
+|url|string|None|False|Target URL|None|https://www.example.com|
 |user|string|None|False|DBMS user to enumerate|None|user1|
 |verbose|integer|1|False|Verbosity level|[1, 2, 3, 4, 5, 6]|1|
-|wFile|string|None|False|Write a local file on the back-end DBMS file system|None|https://example.com|
+|wFile|string|None|False|Write a local file on the back-end DBMS file system|None|file.txt|
 
 Example input:
 

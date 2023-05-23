@@ -17,22 +17,20 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Connect: Connecting...")
         self.api_host = params.get("api_host")
         self.api_port = params.get("api_port")
-        self.f = open("sqlmap_logs.txt", "w")
-        if not self.api_host and not self.api_port:
-            subprocess.Popen(  # noqa: B607
-                ["python /python/src/sqlmap-master/sqlmapapi.py -s"],
-                stdout=self.f,
-                stderr=self.f,
-                shell=True,  # noqa: B602
-            )
-            self.api_host = "127.0.0.1"
-            self.api_port = "8775"
-        if self.api_host and self.api_port:
-            subprocess.Popen(
-                [
-                    f"python /python/src/sqlmap-master/sqlmapapi.py -s --host={self.api_host} --port={self.api_port}"
-                ],
-                stdout=self.f,
-                stderr=self.f,
-                shell=True,  # noqa: B602
-            )
+        with open("sqlmap_logs.txt", "w", encoding="UTF-8") as self.f:
+            if not self.api_host and not self.api_port:
+                subprocess.Popen(  # noqa: B607
+                    ["python /python/src/sqlmap-master/sqlmapapi.py -s"],
+                    stdout=self.f,
+                    stderr=self.f,
+                    shell=True,  # noqa: B602
+                )
+                self.api_host = "127.0.0.1"
+                self.api_port = "8775"
+            if self.api_host and self.api_port:
+                subprocess.Popen(
+                    [f"python /python/src/sqlmap-master/sqlmapapi.py -s --host={self.api_host} --port={self.api_port}"],
+                    stdout=self.f,
+                    stderr=self.f,
+                    shell=True,  # noqa: B602
+                )
