@@ -1,13 +1,12 @@
 import json
-import logging
 from logging import Logger
 import requests
 import re
 import time
-from typing import Union, Callable
+from typing import Union
 from urllib.parse import urlsplit
 from insightconnect_plugin_runtime.exceptions import PluginException
-from insightconnect_plugin_runtime.helper import rate_limiting
+from komand_okta.util.exceptions import ApiException
 from komand_okta.util.helpers import clean
 from komand_okta.util.endpoints import (
     ADD_USER_TO_GROUP_ENDPOINT,
@@ -30,6 +29,31 @@ from komand_okta.util.endpoints import (
     USERS_IN_GROUP_ENDPOINT,
     GROUP_ENDPOINT,
 )
+
+
+def rate_limiting(max_tries: int):
+    def _decorate(func):
+        def _wrapper(*args, **kwargs):
+            self = args[0]
+            retry = True
+            counter, delay = 0, 0
+            while retry and counter < max_tries:
+                if counter:
+                    time.sleep(delay)
+                try:
+                    retry = False
+                    return func(*args, **kwargs)
+                except ApiException as error:
+                    counter += 1
+                    delay = 2 ** (counter * 0.6)
+                    if error.cause == PluginException.causes[PluginException.Preset.RATE_LIMIT]:
+                        self.logger.info(f"Rate limiting error occurred. Retrying in {delay:.1f} seconds.")
+                        retry = True
+            return func(*args, **kwargs)
+
+        return _wrapper
+
+    return _decorate
 
 
 class OktaAPI:
@@ -151,22 +175,48 @@ class OktaAPI:
             )
 
             if response.status_code == 400:
-                raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
+                raise ApiException(
+                    cause=PluginException.causes[PluginException.Preset.BAD_REQUEST],
+                    assistance=PluginException.assistances[PluginException.Preset.BAD_REQUEST],
+                    status_code=response.status_code,
+                    data=response.text,
+                )
             if response.status_code in [401, 403]:
-                raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
+                raise ApiException(
+                    cause=PluginException.causes[PluginException.Preset.API_KEY],
+                    assistance=PluginException.assistances[PluginException.Preset.API_KEY],
+                    status_code=response.status_code,
+                    data=response.text,
+                )
             if response.status_code == 404:
-                raise PluginException(
+                raise ApiException(
                     cause="Resource not found.",
                     assistance="Verify your input is correct and not malformed and try again. If the issue persists, "
                     "please contact support.",
+                    status_code=response.status_code,
                     data=response.text,
                 )
             if response.status_code == 429:
-                raise PluginException(preset=PluginException.Preset.RATE_LIMIT, data=response.text)
+                raise ApiException(
+                    cause=PluginException.causes[PluginException.Preset.RATE_LIMIT],
+                    assistance=PluginException.assistances[PluginException.Preset.RATE_LIMIT],
+                    status_code=response.status_code,
+                    data=response.text,
+                )
             if 400 < response.status_code < 500:
-                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+                raise ApiException(
+                    cause=PluginException.causes[PluginException.Preset.UNKNOWN],
+                    assistance=PluginException.assistances[PluginException.Preset.UNKNOWN],
+                    status_code=response.status_code,
+                    data=response.text,
+                )
             if response.status_code >= 500:
-                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+                raise ApiException(
+                    cause=PluginException.causes[PluginException.Preset.SERVER_ERROR],
+                    assistance=PluginException.assistances[PluginException.Preset.SERVER_ERROR],
+                    status_code=response.status_code,
+                    data=response.text,
+                )
             if 200 <= response.status_code < 300:
                 return response
 

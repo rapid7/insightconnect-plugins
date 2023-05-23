@@ -9,6 +9,7 @@ from unit_test.util import Util
 from unittest.mock import patch
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_okta.util.exceptions import ApiException
 
 
 @patch("requests.request", side_effect=Util.mock_request)
@@ -43,14 +44,6 @@ class TestSendPush(TestCase):
     @parameterized.expand(
         [
             [
-                "not_push_type",
-                Util.read_file_to_dict("inputs/send_push_invalid_factor.json.inp"),
-                "An error has occurred retrieving data from the Okta API.",
-                "It looks like we didn't get data we were expecting back. Was "
-                "the Factor ID supplied a push type and not something else, "
-                "such as an SMS?",
-            ],
-            [
                 "factor_not_found",
                 Util.read_file_to_dict("inputs/send_push_factor_not_found.json.inp"),
                 "Resource not found.",
@@ -64,7 +57,25 @@ class TestSendPush(TestCase):
             ],
         ]
     )
-    def test_send_push_raise_exception(self, mock_request, test_name, input_parameters, cause, assistance):
+    def test_send_push_raise_api_exception(self, mock_request, test_name, input_parameters, cause, assistance):
+        with self.assertRaises(ApiException) as error:
+            self.action.run(input_parameters)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)
+
+    @parameterized.expand(
+        [
+            [
+                "not_push_type",
+                Util.read_file_to_dict("inputs/send_push_invalid_factor.json.inp"),
+                "An error has occurred retrieving data from the Okta API.",
+                "It looks like we didn't get data we were expecting back. Was "
+                "the Factor ID supplied a push type and not something else, "
+                "such as an SMS?",
+            ]
+        ]
+    )
+    def test_send_push_raise_plugin_exception(self, mock_request, test_name, input_parameters, cause, assistance):
         with self.assertRaises(PluginException) as error:
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
