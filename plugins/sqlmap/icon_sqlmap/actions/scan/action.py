@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ScanInput, ScanOutput
 
 # Custom imports below
@@ -7,7 +7,7 @@ import time
 import json
 
 
-class Scan(komand.Action):
+class Scan(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="scan",
@@ -30,13 +30,13 @@ class Scan(komand.Action):
     def run(self, params={}):
         try:
             return self.orchestrator(params)
-        except Exception as e:
-            self.logger.error(e)
+        except Exception as error:
+            self.logger.error(error)
             self.connection.f.close()
-            with open("sqlmap_logs.txt") as r:
+            with open("sqlmap_logs.txt", encoding="UTF-8") as r:
                 for line in r.readlines():
                     self.logger.info("*" + line)
-            raise e
+            raise error
 
     def orchestrator(self, params={}):
         self.api_host = self.connection.api_host
@@ -58,7 +58,7 @@ class Scan(komand.Action):
                 time.sleep(10)
                 self.logger.info("Not Running")
             elif self.status == "running":
-                # time.sleep(5)
+                time.sleep(5)
                 self.logger.info("Running")
                 time.sleep(10)
             elif self.status == "terminated":
@@ -73,7 +73,7 @@ class Scan(komand.Action):
 
     def new_task(self):
         time.sleep(5)
-        self.taskid = json.loads(requests.get("http://" + self.api_host + ":" + self.api_port + "/task/new").text)[
+        self.taskid = json.loads(requests.get(f"http://{self.api_host}:{self.api_port}/task/new", timeout=10).text)[
             "taskid"
         ]
 
@@ -82,31 +82,34 @@ class Scan(komand.Action):
             self.headers = {"Content-Type": "application/json"}
         self.headers = {str(key): str(value) for key, value in self.headers.items()}
         params = {str(key): str(value) for key, value in params.items()}
-        set_options = requests.post(
-            "http://" + self.api_host + ":" + self.api_port + "/option/" + self.taskid + "/set",
+        set_options = requests.post(  # pylint: disable=unused-variable  # noqa: F841
+            f"http://{self.api_host}:{self.api_port}/option/{self.taskid}/set",
             data=json.dumps(params),
             headers=self.headers,
+            timeout=10,
         )
 
     def start_scan(self):
         payload = {"url": self.url}
         payload = {str(key): str(value) for key, value in payload.items()}
-        self.sql_url = "http://" + self.api_host + ":" + self.api_port + "/scan/" + self.taskid + "/start"
-        start_scan = json.loads(requests.post(self.sql_url, data=json.dumps(payload), headers=self.headers).text)
+        self.sql_url = f"http://{self.api_host}:{self.api_port}/scan/{self.taskid}/start"
+        start_scan = json.loads(  # pylint: disable=unused-variable  # noqa: F841
+            requests.post(self.sql_url, data=json.dumps(payload), headers=self.headers, timeout=10).text
+        )
 
     def get_data(self):
         self.data = json.loads(
-            requests.get("http://" + self.api_host + ":" + self.api_port + "/scan/" + self.taskid + "/log").text
+            requests.get(f"http://{self.api_host}:{self.api_port}/scan/{self.taskid}/log", timeout=10).text
         )["log"]
 
     def get_status_code(self):
         self.status = json.loads(
-            requests.get("http://" + self.api_host + ":" + self.api_port + "/scan/" + self.taskid + "/status").text
+            requests.get(f"http://{self.api_host}:{self.api_port}/scan/{self.taskid}/status", timeout=10).text
         )["status"]
 
     def delete_task(self):
         if json.loads(
-            requests.get("http://" + self.api_host + ":" + self.api_port + "/task/" + self.taskid + "/delete").text
+            requests.get(f"http://{self.api_host}:{self.api_port}/task/{self.taskid}/delete", timeout=10).text
         )["success"]:
             return True
         return False
@@ -115,12 +118,12 @@ class Scan(komand.Action):
         self.api_host = self.connection.api_host
         self.api_port = self.connection.api_port
         time.sleep(5)
-        req_check = json.loads(requests.get("http://" + self.api_host + ":" + self.api_port + "/task/new").text)
+        req_check = json.loads(requests.get(f"http://{self.api_host}:{self.api_port}/task/new", timeout=10).text)
         taskid = req_check["taskid"]
         failed = {"result": "failed"}
         if taskid:
-            delete_task = json.loads(
-                requests.get("http://" + self.api_host + ":" + self.api_port + "/task/" + taskid + "/delete").text
+            delete_task = json.loads(  # pylint: disable=unused-variable  # noqa: F841
+                requests.get(f"http://{self.api_host}:{self.api_port}/task/{taskid}/delete", timeout=10).text
             )
             return req_check
         else:
