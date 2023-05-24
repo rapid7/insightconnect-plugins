@@ -111,3 +111,14 @@ class Schedules:
         :return: pre-populated ias/v1/schedules/
         """
         return f"{console_url}ias/v1/schedules"
+
+
+class Search:
+    @staticmethod
+    def search(console_url: str):
+        """
+        URI for search operation
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/search/
+        """
+        return f"{console_url}ias/v1/search"

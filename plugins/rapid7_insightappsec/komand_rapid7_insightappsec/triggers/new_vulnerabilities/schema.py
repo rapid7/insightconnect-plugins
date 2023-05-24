@@ -4,32 +4,35 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get a vulnerability"
+    DESCRIPTION = "Get information about newly discovered vulnerabilities"
 
 
 class Input:
-    VULNERABILITYID = "vulnerabilityId"
+    
+    FREQUENCY = "frequency"
     
 
 class Output:
-    VULNERABILITY = "vulnerability"
+    
+    VULNERABILITIES = "vulnerabilities"
     
 
-class GetVulnerabilityInput(insightconnect_plugin_runtime.Input):
+class NewVulnerabilitiesInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "vulnerabilityId": {
-      "type": "string",
-      "title": "Vulnerability ID",
-      "description": "Unique identifier for vulnerability",
+    "frequency": {
+      "type": "integer",
+      "title": "Frequency",
+      "description": "Frequency of data collection in hours. By default, data will be collected every hour",
+      "default": 1,
       "order": 1
     }
   },
   "required": [
-    "vulnerabilityId"
+    "frequency"
   ]
 }
     """)
@@ -38,16 +41,19 @@ class GetVulnerabilityInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class GetVulnerabilityOutput(insightconnect_plugin_runtime.Output):
+class NewVulnerabilitiesOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "vulnerability": {
-      "$ref": "#/definitions/vulnerabilityItem",
-      "title": "Vulnerability",
-      "description": "Vulnerability item",
+    "vulnerabilities": {
+      "type": "array",
+      "title": "Vulnerabilities",
+      "description": "List of newly discovered vulnerabilities",
+      "items": {
+        "$ref": "#/definitions/vulnerabilityItem"
+      },
       "order": 1
     }
   },
