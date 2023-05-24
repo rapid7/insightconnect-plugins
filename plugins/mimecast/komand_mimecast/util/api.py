@@ -4,11 +4,14 @@ import hashlib
 import hmac
 import json
 import uuid
+from io import BytesIO
+from typing import Union, List, Dict, Any
+from zipfile import ZipFile, BadZipFile
 
 import requests
-
 from insightconnect_plugin_runtime.exceptions import PluginException
-from komand_mimecast.util.util import Utils
+from insightconnect_plugin_runtime.helper import convert_dict_to_camel_case
+
 from komand_mimecast.util.constants import (
     API,
     DATA_FIELD,
@@ -22,6 +25,8 @@ from komand_mimecast.util.constants import (
     FAIL_FIELD,
     STATUS_FIELD,
 )
+from komand_mimecast.util.exceptions import ApiClientException
+from komand_mimecast.util.util import Utils
 
 
 class MimecastAPI:
@@ -82,7 +87,73 @@ class MimecastAPI:
     def find_remediation_incidents(self, data: dict) -> dict:
         return self._handle_rest_call("POST", f"{API}/ttp/remediation/find-incidents", data=data)
 
-    def _prepare_header(self, uri) -> dict:
+    def get_siem_logs(self, data: Dict[str, Any]) -> Union[List[Dict], Dict, int]:
+        uri = f"{API}/audit/get-siem-logs"
+        default_data = {
+            "compress": True,
+            "file_format": "JSON",
+            "type": "MTA",
+        }
+        data.update(default_data)
+        payload = {DATA_FIELD: ([convert_dict_to_camel_case(data)] if data is not None else [])}
+
+        request = requests.request(
+            method="POST", url=f"{self.url}{uri}", headers=self._prepare_header(uri), data=str(payload)
+        )
+
+        try:
+            response = request.json()
+        except json.decoder.JSONDecodeError:
+            combined_json_list = self._handle_zip_file(request)
+            return combined_json_list, request.headers, request.status_code
+
+        status_code = response.get(META_FIELD).get(STATUS_FIELD)
+        try:
+            if response.get(FAIL_FIELD):
+                self._handle_error_response(response)
+            self._handle_status_code_response(response, status_code)
+        except PluginException as error:
+            raise ApiClientException(
+                cause=error.cause,
+                assistance=error.assistance,
+                data=error.data,
+                preset=error.preset,
+                status_code=status_code,
+            )
+
+    def _handle_status_code_response(self, response: requests.request, status_code: int):
+        if status_code == 403:
+            raise PluginException(preset=PluginException.Preset.API_KEY, data=response)
+        elif status_code == 404:
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response)
+        elif status_code >= 500:
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response)
+        else:
+            self.logger.error(response)
+            raise PluginException(
+                cause="Server request failed.",
+                assistance=f"Status code is {status_code}, see log for details.",
+                data=response.get(FAIL_FIELD),
+            )
+
+    def _handle_zip_file(self, request: requests.request) -> List[Dict]:
+        """
+        Extracts JSON data from a ZIP file contained in a requests response
+        Args:
+            request (requests.request): The HTTP request object containing the ZIP file in its response
+        Returns:
+            List[Dict]: A list of dictionaries, where each dictionary represents a log entry extracted from the ZIP file
+        """
+        try:
+            with ZipFile(BytesIO(request.content)) as my_zip:
+                combined_json_list = [
+                    log for file_name in my_zip.namelist() for log in json.loads(my_zip.read(file_name)).get("data")
+                ]
+            return combined_json_list
+        except BadZipFile:
+            return []
+
+    def _prepare_header(self, uri: str) -> dict:
         # Generate request header values
         request_id = str(uuid.uuid4())
         hdr_date = f'{datetime.datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S")} UTC'
@@ -177,16 +248,4 @@ class MimecastAPI:
         if not status_code or 200 <= status_code <= 299:
             return response
 
-        if status_code == 403:
-            raise PluginException(preset=PluginException.Preset.API_KEY, data=response)
-        elif status_code == 404:
-            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response)
-        elif status_code >= 500:
-            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response)
-        else:
-            self.logger.error(response)
-            raise PluginException(
-                cause="Server request failed.",
-                assistance=f"Status code is {status_code}, see log for details.",
-                data=response.get(FAIL_FIELD),
-            )
+        self._handle_status_code_response(response, status_code)
