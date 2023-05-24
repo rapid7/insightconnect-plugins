@@ -3,3 +3,4 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 validators==0.18.2
 parameterized==0.8.1
+python-dateutil==2.6.1
