@@ -34,7 +34,7 @@ connection:
     example: thehive.company.com or 10.3.4.50
     required: true
   port:
-    type: integer
+    type: string
     title: Port
     description: TheHive API port
     default: '9000'
