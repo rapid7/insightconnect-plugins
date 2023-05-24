@@ -38,10 +38,10 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "order": 1
     },
     "port": {
-      "type": "integer",
+      "type": "string",
       "title": "Port",
       "description": "TheHive API port",
-      "default": 9000,
+      "default": "9000",
       "order": 2
     },
     "protocol": {

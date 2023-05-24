@@ -33,7 +33,7 @@ The connection configuration accepts the following parameters:
 |api_key|credential_secret_key|None|False|An optional API key for authentication via bearer token|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |credentials|credential_username_password|None|False|Username and password|None|{}|
 |host|string|None|True|TheHive host|None|thehive.company.com or 10.3.4.50|
-|port|integer|9000|True|TheHive API port|None|9000|
+|port|string|9000|True|TheHive API port|None|9000|
 |protocol|string|None|True|HTTP Protocol|['http', 'https']|http|
 |proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|{}|
 |verify|boolean|True|True|Verify the certificate|None|True|
@@ -45,7 +45,7 @@ Example input:
   "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
   "credentials": {},
   "host": "10.3.4.50",
-  "port": 9000,
+  "port": "9000",
   "protocol": "http",
   "proxy": {},
   "verify": true
@@ -102,7 +102,7 @@ Create a new case
 |startDate|integer|None|False|Case start date (datetime in ms) (will default to now if left blank)|None|1684170163000|
 |summary|string|None|False|Case summary|None|Case summary|
 |tags|[]string|None|False|List of case tags|None|["case_tag_1", "case_tag_2"]|
-|tasks|[]itask|None|False|Case task|None|{}|
+|tasks|itask|None|False|Case task|None|{}|
 |template|string|None|False|Case template's name. If specified then the case is created using the given template|None|Case template name|
 |title|string|None|True|Name of the case|None|Case title|
 |tlp|integer|2|False|Traffic Light Protocol level|[0, 1, 2, 3]|2|
