@@ -5,7 +5,7 @@ name: mimecast
 title: Mimecast
 description: Services for email security, archiving and continuity. Protect, manage
   and archive without compromise
-version: 5.1.0
+version: 5.2.0
 supported_versions: ["Mimecast API 2022-11-07"]
 vendor: rapid7
 support: rapid7
@@ -933,6 +933,7 @@ actions:
         description: An array of found tracked emails
         type: "[]tracked_emails"
         required: true
+        example: []
   delete_blocked_sender_policy:
     title: Delete Blocked Sender Policy
     description: Deletes a blocked sender policy
@@ -1013,6 +1014,7 @@ actions:
         description: Managed URL that was created
         type: '[]managed_url'
         required: false
+        example: []
   delete_managed_url:
     title: Delete Managed URL
     description: Delete a managed URL
@@ -1029,6 +1031,7 @@ actions:
         description: Success status of delete request
         type: boolean
         required: false
+        example: true
   get_managed_url:
     title: Get Managed URL
     description: Get information on a managed URL
@@ -1125,6 +1128,7 @@ actions:
         description: 'Managed URLs matching '
         type: '[]managed_url'
         required: false
+        example: []
   permit_or_block_sender:
     title: Permit or Block Sender
     description: Permits or blocks a sender
@@ -1158,6 +1162,7 @@ actions:
         description: The Managed Sender that was created
         type: '[]managed_sender'
         required: false
+        example: []
   create_blocked_sender_policy:
     title: Create Blocked Sender Policy
     description: Creates a blocked sender policy
@@ -1253,6 +1258,7 @@ actions:
         description: The policy that was created
         type: '[]sender_policy'
         required: false
+        example: []
   add_group_member:
     title: Add Group Member
     description: Add an email address or domain to a group
@@ -1281,21 +1287,25 @@ actions:
         description: The Mimecast ID of the group that the user / domain was added to
         type: string
         required: false
+        example: eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_
       email_address:
         title: Email Address
         description: The email address of the user that was added to the group
         type: string
         required: false
+        example: user@example.com
       id:
         title: ID
         description: The Mimecast ID of the user / domain that was added to the group
         type: string
         required: false
+        example: eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA
       internal:
         title: Internal
         description: Whether or not the user or domain is internal
         type: boolean
         required: false
+        example: true
   delete_group_member:
     title: Delete Group Member
     description: Delete an email address or domain from a group
@@ -1324,6 +1334,7 @@ actions:
         description: Status of success of the delete operation
         type: boolean
         required: false
+        example: true
   find_groups:
     title: Find Groups
     description: Find groups that match a given query
@@ -1350,6 +1361,7 @@ actions:
         description: A list of groups that mach the query
         type: "[]group"
         required: false
+        example: []
   get_ttp_url_logs:
     title: Get TTP URL Logs
     description: Get TTP URL logs
@@ -1422,6 +1434,7 @@ actions:
         description: Click Logs
         type: "[]click_logs"
         required: false
+        example: []
   decode_url:
     title: Decode URL
     description: Decode a Mimecast encoded URL
@@ -1429,7 +1442,7 @@ actions:
       encoded_url:
         title: Encoded URL
         description: The Mimecast encoded URL
-        example: https://protect-xx.mimecast.com/TXH7fhe
+        example: https://url.xx.m.mimecastprotect.com/TXH7fhe
         type: string
         required: true
     output:
@@ -1438,6 +1451,7 @@ actions:
         description: Original decoded URL
         type: string
         required: true
+        example: https://example.com
   get_audit_events:
     title: Get Audit Events
     description: Get audit of events in Mimecast service
@@ -1460,8 +1474,28 @@ actions:
         description: Event logs data
         type: "[]audit_events_response"
         required: true
+        example: []
       pagination:
         title: Pagination
         description: Pagination for request
         type: "pagination"
         required: false
+        example: {}
+tasks:
+  monitor_siem_logs:
+    title: Monitor SIEM Logs
+    description: Monitor and retrieve the latest logs
+    input:
+      token:
+        title: Token
+        description: Used to request the next available log file
+        type: string
+        required: false
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+    output:
+      data:
+        title: Data
+        description: List of logs
+        type: "[]object"
+        required: true
+        example: []
