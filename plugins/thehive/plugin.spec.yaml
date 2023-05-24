@@ -30,10 +30,10 @@ connection:
     example: thehive.company.com or 10.3.4.50
     required: true
   port:
-    type: integer
+    type: string
     title: Port
     description: TheHive API port
-    default: 9000
+    default: '9000'
     example: 9000
     required: true
   protocol:
@@ -703,7 +703,7 @@ actions:
       tasks:
         title: Task
         description: Case task
-        type: '[]itask'
+        type: itask
         example: {}
         required: false
       jsonData:
