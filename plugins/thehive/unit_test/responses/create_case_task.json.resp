@@ -1,0 +1,19 @@
+{
+    "owner": "string",
+    "_routing": "case_id",
+    "flag": true,
+    "dueDate": 1640000000000,
+    "_type": "case_task",
+    "description": "string",
+    "title": "string",
+    "createdAt": 1684244856627,
+    "_parent": "case_id",
+    "createdBy": "admin",
+    "_id": "case_id",
+    "id": "case_id",
+    "_version": 1,
+    "startDate": 1640000000000,
+    "status": "Waiting",
+    "group": "default",
+    "order": 0
+}

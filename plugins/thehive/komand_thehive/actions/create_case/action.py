@@ -1,12 +1,11 @@
-import komand
-from .schema import CreateCaseInput, CreateCaseOutput, Component
+import insightconnect_plugin_runtime
+from .schema import CreateCaseInput, CreateCaseOutput, Component, Input, Output
 
 # Custom imports below
-import requests
-from thehive4py.models import Case, CaseTask
+import time
 
 
-class CreateCase(komand.Action):
+class CreateCase(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_case",
@@ -17,36 +16,30 @@ class CreateCase(komand.Action):
 
     def run(self, params={}):
 
-        client = self.connection.client
+        json_case_data = params.get(Input.JSONDATA)
 
-        self.logger.info("Input: %s", params)
-        task = CaseTask(
-            title=params.get("task").get("title", None),
-            description=params.get("task").get("description", None),
-            flag=params.get("task").get("flag", False),
-            owner=params.get("task").get("owner", None),
-            status=params.get("task").get("status", None),
-            startDate=params.get("task").get("startDate", None),
-        )
+        if json_case_data:
+            case = json_case_data
+        else:
+            case = {
+                "title": params.get(Input.TITLE, None),
+                "description": params.get(Input.DESCRIPTION, None),
+                "tlp": params.get(Input.TLP),
+                "pap": params.get(Input.PAP),
+                "severity": params.get(Input.SEVERITY, 2),
+                "flag": params.get(Input.FLAG),
+                "tags": params.get(Input.TAGS, []),
+                "startDate": params.get(Input.STARTDATE, int(time.time()) * 1000),
+                "template": params.get(Input.TEMPLATE, None),
+                "owner": params.get(Input.OWNER, ""),
+                "metrics": params.get(Input.METRICS, {}),
+                "customFields": params.get(Input.CUSTOMFIELDS, None),
+                "tasks": params.get(Input.TASKS, None),
+                "summary": params.get(Input.SUMMARY, ""),
+            }
 
-        case = Case(
-            title=params.get("title", None),
-            tlp=params.get("tlp", 2),
-            flag=params.get("flag", False),
-            tags=params.get("tags", []),
-            description=params.get("description", None),
-            tasks=[task],
-            customFields=params.get("customFields", None),
-        )
+        self.logger.info(f"Input: {case}")
 
-        try:
-            new_case = client.create_case(case)
-            new_case.raise_for_status()
-        except requests.exceptions.HTTPError:
-            self.logger.error(new_case.json())
-            raise
-        except:
-            self.logger.error("Failed to create case")
-            raise
+        response = self.connection.client.create_case(case=case)
 
-        return {"case": new_case.json()}
+        return {Output.CASE: response}
