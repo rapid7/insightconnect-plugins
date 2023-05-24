@@ -33,7 +33,7 @@ The connection configuration accepts the following parameters:
 |api_key|credential_secret_key|None|False|An optional API key for authentication via bearer token|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |credentials|credential_username_password|None|False|Username and password|None|{}|
 |host|string|None|True|TheHive host|None|thehive.company.com or 10.3.4.50|
-|port|integer|9000|True|TheHive API port|None|9000|
+|port|string|9000|True|TheHive API port|None|9000|
 |protocol|string|None|True|HTTP Protocol|['http', 'https']|http|
 |proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|{}|
 |verify|boolean|True|True|Verify the certificate|None|True|
