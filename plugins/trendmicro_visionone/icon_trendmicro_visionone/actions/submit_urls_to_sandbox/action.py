@@ -27,7 +27,7 @@ class SubmitUrlsToSandbox(insightconnect_plugin_runtime.Action):
         urls = params.get(Input.URL)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        submit_urls_resp = {"submit_urls_resp": []}
+        submit_urls_resp = {Output.SUBMIT_URLS_RESP: []}
         for i in urls:
             response = client.submit_urls_to_sandbox(i)
             if "error" in response.result_code.lower():
@@ -37,7 +37,7 @@ class SubmitUrlsToSandbox(insightconnect_plugin_runtime.Action):
                     data=response.errors,
                 )
             else:
-                submit_urls_resp["submit_urls_resp"].append(
+                submit_urls_resp[Output.SUBMIT_URLS_RESP].append(
                     response.response.dict().get("items")[0]
                 )
         # Return results

@@ -31,11 +31,11 @@ class GetSuspiciousList(insightconnect_plugin_runtime.Action):
             client.consume_suspicious_list(
                 lambda suspicion: new_suspicions.append(suspicion.dict())
             )
-        except Exception as e:
+        except Exception as error:
             raise PluginException(
                 cause="An error occurred while getting the Suspicious List.",
                 assistance="Please check the logs for more details.",
-                data=e,
+                data=error,
             )
         # Load json objects to list
         suspicious_objects = []

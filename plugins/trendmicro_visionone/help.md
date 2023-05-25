@@ -1,6 +1,6 @@
 # Description
 
-Trend Micro Vision One is a purpose-built threat defense platform that provides added value and new benefits beyond XDR solutions, allowing you to see more and respond faster. Providing deep and broad extended detection and response (XDR) capabilities that collect and automatically correlate data across multiple security layers, email, endpoints, servers, cloud workloads, and networks. Trend Micro Vision One prevents the majority of attacks with automated protection
+Trend Micro Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
 
 # Key Features
 
@@ -24,8 +24,20 @@ Trend Micro Vision One is a purpose-built threat defense platform that provides 
 * Get Sandbox Suspicious List
 * Get Suspicious List
 * Get Task Result
+* Isolate Endpoint
 * Poll Alert List
 * Poll Sandbox Suspicious List
+* Quarantine Email Message
+* Remove from Block List
+* Remove from Exception List
+* Remove from Suspicious List
+* Reset Password Account
+* Restore Email Message
+* Restore Endpoint
+* Sign out Account
+* Submit File to Sandbox
+* Submit URLs to Sandbox
+* Terminate Process
 
 # Requirements
 

@@ -34,11 +34,11 @@ class PollAlertList(insightconnect_plugin_runtime.Trigger):
                     start_time=start_date_time,
                     end_time=end_date_time,
                 )
-            except Exception as e:
+            except Exception as error:
                 raise PluginException(
                     cause="An error occurred while polling alerts.",
                     assistance="Please check your inputs and try again.",
-                    data=e,
+                    data=error,
                 )
             # Load json objects to list
             alert_list = []

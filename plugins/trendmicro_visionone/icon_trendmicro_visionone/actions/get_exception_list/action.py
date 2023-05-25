@@ -31,11 +31,11 @@ class GetExceptionList(insightconnect_plugin_runtime.Action):
             client.consume_exception_list(
                 lambda exception: new_exceptions.append(exception.dict())
             )
-        except Exception as e:
+        except Exception as error:
             raise PluginException(
                 cause="Consume Exception List failed with following exception.",
                 assistance="Please check your connection details and try again.",
-                data=e,
+                data=error,
             )
         # Load json objects to list
         exception_objects = []

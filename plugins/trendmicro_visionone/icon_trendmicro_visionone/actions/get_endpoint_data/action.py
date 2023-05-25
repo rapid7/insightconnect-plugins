@@ -42,11 +42,11 @@ class GetEndpointData(insightconnect_plugin_runtime.Action):
                 pytmv1.QueryOp(query_op),
                 endpoint,
             )
-        except Exception as e:
+        except Exception as error:
             raise PluginException(
                 cause="An error occurred while getting endpoint data.",
                 assistance="Please check your inputs and try again.",
-                data=e,
+                data=error,
             )
         # Load json objects to list
         endpoint_data_resp = []

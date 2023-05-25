@@ -30,11 +30,11 @@ class GetAlertList(insightconnect_plugin_runtime.Action):
                 start_time=start_date_time,
                 end_time=end_date_time,
             )
-        except Exception as e:
+        except Exception as error:
             raise PluginException(
                 cause="An error occurred while trying to get the alert list.",
                 assistance="Please check the provided parameters and try again.",
-                data=e,
+                data=error,
             )
         # Load json objects to list
         alert_list = []

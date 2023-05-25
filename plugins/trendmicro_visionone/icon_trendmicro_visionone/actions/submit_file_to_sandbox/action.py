@@ -48,4 +48,8 @@ class SubmitFileToSandbox(insightconnect_plugin_runtime.Action):
             )
         else:
             self.logger.info("Returning Results...")
-            return response.response.dict()
+            return {
+                Output.ARGUMENTS: response.response.dict().get("arguments", ""),
+                Output.DIGEST: response.response.dict().get("digest", {}),
+                Output.ID: response.response.dict().get("id", ""),
+            }

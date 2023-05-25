@@ -28,7 +28,7 @@ class TerminateProcess(insightconnect_plugin_runtime.Action):
         process_identifiers = params.get(Input.PROCESS_IDENTIFIERS)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        multi_resp = {"multi_response": []}
+        multi_resp = {Output.MULTI_RESPONSE: []}
         for i in process_identifiers:
             response = client.terminate_process(
                 pytmv1.ProcessTask(
@@ -45,7 +45,7 @@ class TerminateProcess(insightconnect_plugin_runtime.Action):
                     data=response.errors,
                 )
             else:
-                multi_resp["multi_response"].append(
+                multi_resp[Output.MULTI_RESPONSE].append(
                     response.response.dict().get("items")[0]
                 )
         # Return results

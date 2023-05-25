@@ -28,7 +28,7 @@ class RestoreEndpoint(insightconnect_plugin_runtime.Action):
         endpoint_identifiers = params.get(Input.ENDPOINT_IDENTIFIERS)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        multi_resp = {"multi_response": []}
+        multi_resp = {Output.MULTI_RESPONSE: []}
         for i in endpoint_identifiers:
             response = client.restore_endpoint(
                 pytmv1.EndpointTask(
@@ -42,7 +42,7 @@ class RestoreEndpoint(insightconnect_plugin_runtime.Action):
                     data=response.errors,
                 )
             else:
-                multi_resp["multi_response"].append(
+                multi_resp[Output.MULTI_RESPONSE].append(
                     response.response.dict().get("items")[0]
                 )
         # Return results

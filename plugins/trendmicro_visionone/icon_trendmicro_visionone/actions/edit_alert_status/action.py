@@ -43,7 +43,7 @@ class EditAlertStatus(insightconnect_plugin_runtime.Action):
         response = client.edit_alert_status(
             alert_id=alert_id, status=status, if_match=if_match
         )
-        result_code = {"result_code": ""}
+        result_code = {Output.RESULT_CODE: ""}
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while trying to edit the alert status.",
@@ -52,5 +52,5 @@ class EditAlertStatus(insightconnect_plugin_runtime.Action):
             )
         else:
             result_response = json.dumps(response.result_code).replace('"', "")
-            result_code["result_code"] = result_response
+            result_code[Output.RESULT_CODE] = result_response
             return result_code

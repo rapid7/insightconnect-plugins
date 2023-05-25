@@ -22,7 +22,7 @@ class SignOutAccount(insightconnect_plugin_runtime.Action):
         account_identifiers = params.get(Input.ACCOUNT_IDENTIFIERS)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        multi_resp = {"multi_response": []}
+        multi_resp = {Output.MULTI_RESPONSE: []}
         for i in account_identifiers:
             response = client.sign_out_account(
                 pytmv1.AccountTask(accountName=i["account_name"], description=i.get("description", ""))
@@ -34,7 +34,7 @@ class SignOutAccount(insightconnect_plugin_runtime.Action):
                     data=response.errors,
                 )
             else:
-                multi_resp["multi_response"].append(response.response.dict().get("items")[0])
+                multi_resp[Output.MULTI_RESPONSE].append(response.response.dict().get("items")[0])
         # Return results
         self.logger.info("Returning Results...")
         return multi_resp

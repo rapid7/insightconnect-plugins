@@ -22,7 +22,7 @@ class CollectFile(insightconnect_plugin_runtime.Action):
         collect_files = params.get(Input.COLLECT_FILES)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        multi_resp = {"multi_response": []}
+        multi_resp = {Output.MULTI_RESPONSE: []}
         for i in collect_files:
             response = client.collect_file(
                 pytmv1.FileTask(
@@ -38,7 +38,7 @@ class CollectFile(insightconnect_plugin_runtime.Action):
                     data=response.errors,
                 )
             else:
-                multi_resp["multi_response"].append(
+                multi_resp[Output.MULTI_RESPONSE].append(
                     response.response.dict().get("items")[0]
                 )
         # Return results

@@ -42,7 +42,7 @@ class AddToExceptionList(insightconnect_plugin_runtime.Action):
                 i["object_type"] = pytmv1.ObjectType.URL
         # Make Action API Call
         self.logger.info("Making API Call...")
-        multi_resp = {"multi_response": []}
+        multi_resp = {Output.MULTI_RESPONSE: []}
         for i in block_objects:
             response = client.add_to_exception_list(
                 pytmv1.ObjectTask(
@@ -62,7 +62,7 @@ class AddToExceptionList(insightconnect_plugin_runtime.Action):
                 items["task_id"] = (
                     "None" if items.get("task_id") is None else items["task_id"]
                 )
-                multi_resp["multi_response"].append(items)
+                multi_resp[Output.MULTI_RESPONSE].append(items)
         # Return results
         self.logger.info("Returning Results...")
         return multi_resp
