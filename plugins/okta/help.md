@@ -1509,7 +1509,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
-* 4.0.0 - Add Monitor Logs task | Code refactor
+* 4.0.0 - Add Monitor Logs task | Code refactor | Update plugin to be cloud enabled
 * 3.6.3 - Add Reset Password action
 * 3.5.3 - Correct spelling in help.md
 * 3.5.2 - Fix issue where Monitor User Groups trigger would be limited to 1000 users
