@@ -5,6 +5,7 @@ name: okta
 title: Okta
 vendor: rapid7
 support: rapid7
+cloud_ready: true
 status: []
 supported_versions: ["Okta API 25-04-2023"]
 description: Secure identity management and single sign-on to any application
@@ -20,7 +21,7 @@ tags:
 - saml
 hub_tags:
   use_cases: [application_management, user_management]
-  keywords: [sso, provisioning, deprovisioning, saml]
+  keywords: [sso, provisioning, deprovisioning, saml, cloud_enabled]
   features: []
 enable_cache: true
 types:
