@@ -1057,7 +1057,7 @@ Example output:
 
 # Version History
 
-* 5.2.0 - New task added `Monitor SIEM Logs`
+* 5.2.0 - New task added `Monitor SIEM Logs` | Update plugin to be cloud enabled
 * 5.1.0 - Create Blocked Sender Policy: Changed defaults to `individual_email_address` | New actions added `Delete Blocked Sender Policy`, `Track Messages`
 * 5.1.0 - Create Blocked Sender Policy: Changed defaults to `individual_email_address` | New actions added `Delete Blocked Sender Policy`, `Track Messages`
 * 5.0.2 - Add Group Member: Fix issue when users were running into email validation error when they add a domain, and leave the email address blank on the input section. 
