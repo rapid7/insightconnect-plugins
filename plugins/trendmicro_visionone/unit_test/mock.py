@@ -30,30 +30,7 @@ def import_all_classes_from_subdirs(path):
     return classes
 
 
-# def import_all_classes_from_subdirs(path):
-#     classes = {}
-#     # Iterate over all subdirectories in the provided path
-#     for subdir in os.listdir(path):
-#         full_subdir_path = os.path.join(path, subdir)
-#         # If this is not a directory or doesn't contain 'action.py', skip it
-#         if not os.path.isdir(full_subdir_path) or "action.py" not in os.listdir(
-#             full_subdir_path
-#         ):
-#             continue
-#         # Create a full module name considering it as a package. Exclude current working directory.
-#         full_module_name = f"{full_subdir_path}.action"
-#         # Replace / with . for correct module name
-#         full_module_name = full_module_name.replace("/", ".")
-#         module = importlib.import_module(full_module_name)
-#         # Get the class from the module and add it to the dictionary
-#         for name, cls in inspect.getmembers(module, inspect.isclass):
-#             if name != "Action":
-#                 classes[name] = cls
-#     return classes
-
 ACTION_CLASSES = import_all_classes_from_subdirs("icon_trendmicro_visionone")
-# ACTION_CLASSES = import_all_classes_from_subdirs("icon_trendmicro_visionone/actions")
-# print("ACTION_CLASSES:", ACTION_CLASSES)
 
 
 def mock_params(action=None):
@@ -62,10 +39,6 @@ def mock_params(action=None):
         if action:
             return params[action]
     return params
-
-
-# PARAMS_IO = mock_params()
-# print("THIS IS PARAMS_IO:", PARAMS_IO)
 
 
 def mock_connection():
