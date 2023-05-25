@@ -9,6 +9,7 @@ version: 5.2.0
 supported_versions: ["Mimecast API 2022-11-07"]
 vendor: rapid7
 support: rapid7
+cloud_ready: true
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/mimecast
@@ -19,7 +20,7 @@ tags:
 - email
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [mimecast, email]
+  keywords: [mimecast, email, cloud_enabled]
   features: []
 types:
   managed_url:
