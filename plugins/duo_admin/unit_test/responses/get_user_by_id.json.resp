@@ -1,0 +1,29 @@
+{
+  "response": {
+    "alias1": "alias1",
+    "alias2": "alias2",
+    "alias3": "alias3",
+    "alias4": "alias4",
+    "aliases": {
+      "alias1": "alias1",
+      "alias2": "alias2",
+      "alias3": "alias3",
+      "alias4": "alias4"
+    },
+    "created": 1684238502,
+    "desktoptokens": [],
+    "email": "user@example.com",
+    "firstname": "Example",
+    "groups": [],
+    "is_enrolled": false,
+    "lastname": "Example",
+    "notes": "Lorem ipsum",
+    "phones": [],
+    "realname": "Example Fullname",
+    "status": "active",
+    "tokens": [],
+    "user_id": "valid-id",
+    "username": "example-username",
+    "webauthncredentials": []
+  }
+}

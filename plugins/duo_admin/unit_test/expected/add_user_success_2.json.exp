@@ -1,0 +1,18 @@
+{
+  "user": {
+    "alias1": "example-alias-1",
+    "aliases": {
+      "alias1": "example-alias-1"
+    },
+    "created": 168500000,
+    "email": "user@example.com",
+    "firstname": "Test",
+    "isEnrolled": false,
+    "lastname": "User",
+    "notes": "example",
+    "realname": "Test User",
+    "status": "bypass",
+    "userId": "ABCD02",
+    "username": "user-example-2"
+  }
+}

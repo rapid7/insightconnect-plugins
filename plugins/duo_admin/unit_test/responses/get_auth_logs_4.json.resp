@@ -1,0 +1,68 @@
+{
+  "response": {
+    "authlogs": [
+      {
+        "access_device": {
+          "browser": "Chrome",
+          "browser_version": "113.0.0.0",
+          "epkey": null,
+          "flash_version": null,
+          "hostname": null,
+          "ip": "198.51.100.1",
+          "is_encryption_enabled": true,
+          "is_firewall_enabled": true,
+          "is_password_set": true,
+          "java_version": null,
+          "location": {
+            "city": "Los Angeles",
+            "country": "United States",
+            "state": "California"
+          },
+          "os": "Mac OS X",
+          "os_version": "10.15.7"
+        },
+        "adaptive_trust_assessments": {},
+        "alias": "unknown",
+        "application": {
+          "key": "DI8CODQSMK4BXPLYS47K",
+          "name": "User Portal"
+        },
+        "auth_device": {
+          "ip": null,
+          "key": "DPAVQAJMU3BW0LV7O234",
+          "location": {
+            "city": null,
+            "country": null,
+            "state": null
+          },
+          "name": "Generic Smartphone"
+        },
+        "email": null,
+        "event_type": "enrollment",
+        "factor": "not_available",
+        "isotimestamp": "2023-05-29T11:07:38.631165+00:00",
+        "ood_software": null,
+        "reason": null,
+        "result": "success",
+        "timestamp": 1685358458,
+        "trusted_endpoint_status": "unknown",
+        "txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c1",
+        "user": {
+          "groups": [
+            "Test Group"
+          ],
+          "key": "DUOR48RKV2AYN7YVS9BT",
+          "name": "example-user2"
+        }
+      }
+    ],
+    "metadata": {
+      "next_offset": [
+        "1683730665255",
+        "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+      ],
+      "total_objects": 1001
+    }
+  },
+  "stat": "OK"
+}

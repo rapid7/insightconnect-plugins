@@ -1,0 +1,99 @@
+{
+  "logs": [
+    {
+      "accessDevice": {
+        "browser": "Chrome",
+        "browserVersion": "113.0.0.0",
+        "ip": "198.51.100.1",
+        "isEncryptionEnabled": "True",
+        "isFirewallEnabled": "True",
+        "isPasswordSet": "True",
+        "location": {
+          "city": "Los Angeles",
+          "country": "United States",
+          "state": "California"
+        },
+        "os": "Mac OS X",
+        "osVersion": "10.15.7"
+      },
+      "alias": "unknown",
+      "application": {
+        "key": "DI8CODQSMK4BXPLYS47K",
+        "name": "User Portal"
+      },
+      "authDevice": {
+        "key": "DPAVQAJMU3BW0LV7O234",
+        "name": "Generic Smartphone"
+      },
+      "eventType": "enrollment",
+      "factor": "not_available",
+      "isotimestamp": "2023-05-29T11:07:38.631165+00:00",
+      "result": "success",
+      "timestamp": 1685358458,
+      "trustedEndpointStatus": "unknown",
+      "txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c1",
+      "user": {
+        "groups": [
+          "Test Group"
+        ],
+        "key": "DUOR48RKV2AYN7YVS9BT",
+        "name": "example-user2"
+      },
+      "logType": "authentication"
+    },
+    {
+      "action": "admin_login",
+      "description": "{\"ip_address\": \"198.51.100.1\", \"role\": \"User Manager\", \"device\": \"+111111111\", \"factor\": \"push\", \"primary_auth_method\": \"Password\"}",
+      "isotimestamp": "2023-04-30T07:53:17+00:00",
+      "timestamp": 1682836495,
+      "username": "Admin",
+      "logType": "administrator"
+    },
+    {
+      "bypassStatusEnabled": 1682836486230,
+      "enabledBy": {
+        "key": "DEKU19BYSSJSOABCD123",
+        "name": "Admin"
+      },
+      "enabledFor": {
+        "key": "DUM07ZQ4LY00TABCD123",
+        "name": "example-user"
+      },
+      "priorityEvent": false,
+      "sekey": "SE80GVU5Z47F0ABCD123",
+      "state": "new",
+      "surfacedTimestamp": 1682836486232,
+      "triagedAsInteresting": false,
+      "type": "bypass_status",
+      "logType": "trust_monitor_event"
+    },
+    {
+      "bypassStatusEnabled": 1682836486330,
+      "enabledBy": {
+        "key": "DEKU19BYSSJSOABCD123",
+        "name": "Admin"
+      },
+      "enabledFor": {
+        "key": "DUTQPHO6GIQI3ABCD123",
+        "name": "example-user2"
+      },
+      "priorityEvent": false,
+      "sekey": "SETHF3RH69P1JABCD123",
+      "state": "new",
+      "surfacedTimestamp": 1682836486335,
+      "triagedAsInteresting": false,
+      "type": "bypass_status",
+      "logType": "trust_monitor_event"
+    }
+  ],
+  "state": {
+    "last_collection_timestamp": 1682922826000,
+    "previous_logs_hashes": [
+      "82a4457f1394c5865f5f84d9ef9f6d36cb28717a",
+      "29f17fa591dc5b46c1dfac976364059d80208fdb",
+      "65f48616e40fc6035c4a170c5b757e2e3f26e37d",
+      "22b005c5642c29f511bab4017015b6348c88cca5"
+    ],
+    "status_code": 200
+  }
+}

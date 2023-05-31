@@ -5,9 +5,11 @@ name: duo_admin
 title: Duo Admin API
 vendor: rapid7
 support: rapid7
+cloud_ready: true
 status: []
+supported_versions: ["Duo Admin API 2023-05-19"]
 description: Duo is a trusted access solution for organizations. The Duo Admin plugin for Rapid7 InsightConnect allows users to manage and administrate their Duo organization
-version: 3.4.0
+version: 4.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/duo_admin
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -17,438 +19,1023 @@ tags:
 - admin
 hub_tags:
   use_cases: [user_management, application_management]
-  keywords: [duo, admin]
+  keywords: [duo, admin, cloud_enabled]
   features: []
+enable_cache: false
 
 types:
-  phone:
-    phone_id:
-      title: Phone ID
-      type: string
-      required: false
-    number:
-      type: string
-      required: false
-    extension:
-      type: string
-      required: false
-    postdelay:
-      type: string
-      required: false
-    predelay:
-      type: string
-      required: false
-    capabilities:
-      type: '[]string'
-      required: false
-    platform:
-      type: string
-      required: false
+  phoneUser:
     activated:
-      type: boolean
-      required: false
-    sms_passcodes_sent:
-      title: SMS Passcodes Sent
-      type: boolean
-      required: false
-  phone_user:
-    activated:
-      description: Activated
+      description: Whether the phone has already been activated for Duo Mobile
       title: Activated
       type: boolean
+      required: false
+      example: true
     capabilities:
-      description: Capabilities
+      description: List of factors that can be used with the phone
       title: Capabilities
       type: '[]string'
+      required: false
+      example: ["push"]
+    encrypted:
+      description: The encryption status of an Android or iOS device file system
+      title: Encrypted
+      type: string
+      required: false
+      example: Encrypted
     extension:
-      description: Extension
+      description: Extension of the phone
       title: Extension
       type: string
+      required: false
+      example: ExampleExtension
+    fingerprint:
+      description: Whether an Android or iOS phone is configured for biometric verification
+      title: Fingerprint
+      type: string
+      required: false
+      example: Configured
+    lastSeen:
+      description: An integer indicating the timestamp of the last contact between Duo's service and the activated Duo Mobile app installed on the phone
+      title: Last Seen
+      type: string
+      required: false
+      example: 2023-05-12T07:34:09
+    model:
+      description: The phone's model
+      title: Model
+      type: string
+      required: false
+      example: Apple iPhone 11 Pro
     name:
-      description: Name
+      description: Free-form label for the phone
       title: Name
       type: string
+      required: false
+      example: ExampleName
     number:
       description: Number
       title: Number
       type: string
-    phone_id:
-      description: Phone ID
+      required: false
+      example: 123456789
+    phoneId:
+      description: The phone's ID
       title: Phone ID
       type: string
+      required: false
+      example: ABCDEABC00ABC00ABCDE
     platform:
-      description: Platform
+      description: The phone platform
       title: Platform
       type: string
+      required: false
+      example: unknown
     postdelay:
-      description: Post delay
-      title: Post delay
+      description: The time (in seconds) to wait after the extension is dialed and before the speaking the prompt
+      title: Postdelay
       type: string
+      required: false
+      example: 3600
     predelay:
-      description: Predelay
+      description: The time (in seconds) to wait after the number picks up and before dialing the extension
       title: Predelay
       type: string
-    sms_passcodes_sent:
-      description: SMS passcodes sent
+      required: false
+      example: 3600
+    screenLock:
+      description: Whether screen lock is enabled on an Android or iOS phone
+      title: Screen Lock
+      type: string
+      required: false
+      example: Locked
+    smsPasscodesSent:
+      description: Whether the SMS passcodes has been sent to this phone
       title: SMS Passcodes Sent
       type: boolean
-    type:
-      description: Type
+      required: false
+      example: true
+    tampered:
+      description: Whether an iOS or Android device is jailbroken or rooted
       title: Type
       type: string
+      required: false
+      example: Tampered
+    type:
+      description: The type of phone
+      title: Type
+      type: string
+      required: false
+      example: mobile
   group:
+    desc:
+      title: Description
+      description: The group's description
+      type: string
+      required: false
+      example: Example Description
+    groupId:
+      title: Group ID
+      description: The group's ID
+      type: string
+      required: false
+      example: ABCDEABC00ABC00ABCDE
     name:
       title: Name
+      description: The group's name
       type: string
       required: false
-    desc:
-      title: Desc
+      example: Example Group Name
+    status:
+      title: Status
+      description: The group's authentication status
       type: string
       required: false
+      example: Active
   token:
+    admins:
+      title: Admins
+      description: A list of administrators associated with this hardware token
+      type: '[]object'
+      required: false
+      example: []
     serial:
       title: Serial
-      description: Serial
+      description: The serial number of the hardware token
       type: string
       required: false
-    token_id:
+      example: 123456
+    tokenId:
       title: Token ID
-      description: Token ID
+      description: The hardware token's unique ID
       type: string
       required: false
+      example: ABCDEABC00ABC00ABCDE
     type:
       title: Type
-      description: Type
+      description: The type of hardware token
       type: string
       required: false
-  user:
-    user_id:
-      title: User ID
-      type: string
-      required: true
-    username:
-      type: string
+      example: type1
+    users:
+      title: Users
+      description: A list of end users associated with this hardware token
+      type: '[]object'
       required: false
-    realname:
-      type: string
-      required: false
-    email:
-      type: string
-      required: false
-    status:
+      example: []
+  webauthnaredentials:
+    credentialName:
+      title: Credential Name
+      description: Free-form label for the WebAuthn credential
       type: string
       required: false
-    groups:
-      type: '[]group'
-      required: false
-    last_login:
+      example: Key1
+    dateAdded:
+      title: Credential Name
+      description: The date the WebAuthn credential was registered in Duo
       type: integer
       required: false
-    notes:
+      example: 1550674764
+    label:
+      title: Label
+      description: Indicates the type of WebAuthn credential
       type: string
       required: false
-    phones:
-      type: '[]phone'
-      required: false
-    tokens:
-      type: '[]token'
-      required: false
-
-  location:
-    city:
-      type: string
-      required: false
-    country:
-      type: string
-      required: false
-    state:
-      type: string
-      required: false
-
-  application:
-    key:
-      type: string
-      required: false
-    name:
-      type: string
-      required: false
-
-  authlog_user:
-    key:
-      type: string
-      required: false
-    name:
-      type: string
-      required: false
-
-  auth_device:
-    ip:
-      title: IP Address
-      required: false
-      type: string
-    location:
-      type: location
-      required: false
-    name:
-      type: string
-      required: false
-
-  access_device:
-    browser:
-      type: string
-      required: false
-    browser_version:
-      type: string
-      required: false
-    flash_version:
-      type: string
-      required: false
-    hostname:
-      type: string
-      required: false
-    ip:
-      title: IP Address
-      type: string
-      required: false
-    java_version:
-      type: string
-      required: false
-    location:
-      type: location
-      required: false
-    os:
-      title: Operating System
-      type: string
-      required: false
-    os_version:
-      title: Operating System Version
-      type: string
-      required: false
-
-  authlog:
-    access_device:
-      title: Access Device
-      type: access_device
-      required: true
-    alias:
-      title: Alias
-      type: string
-      required: false
-    application:
-      title: Application
-      type: application
-      required: true
-    auth_device:
-      title: Auth Device
-      type: auth_device
-      required: true
-    email:
-      title: Email
-      type: string
-      required: false
-    event_type:
-      title: Event Type
-      type: string
-      required: false
-    eventtype:
-      title: Eventtype
-      type: string
-      required: false
-    factor:
-      title: Factor
-      type: string
-      required: false
-    isotimestamp:
-      title: ISO8601 Timestamp
-      type: string
-      required: false
-    host:
-      title: Host
-      type: string
-      required: false
-    ood_software:
-      title: OOD Software
-      type: string
-      required: false
-    reason:
-      title: Reason
-      type: string
-      required: false
-    result:
-      title: Result
-      type: string
-      required: false
-    timestamp:
-      title: Timestamp
-      type: number
-      required: false
-    txid:
-      title: Transaction ID
-      type: string
-      required: false
+      example: Security Key
     user:
       title: User
-      type: authlog_user
-      required: true
-
-  response:
+      description: Selected information about the end user attached to the WebAuthn credential
+      type: object
+      required: false
+      example: {}
+    webauthnkey:
+      title: WebAuthnKey
+      description: The WebAuthn credential's registration identifier
+      type: string
+      required: false
+      example: ABCDEABC00ABC00ABCDE
+  user:
     alias1:
-      description: Alias 1
       title: Alias 1
+      description: The user's username alias 1
       type: string
+      required: false
+      example: example-alias-1
     alias2:
-      description: Alias 2
       title: Alias 2
+      description: The user's username alias 2
       type: string
+      required: false
+      example: example-alias-2
     alias3:
-      description: Alias 3
       title: Alias 3
+      description: The user's username alias 3
       type: string
+      required: false
+      example: example-alias-3
     alias4:
-      description: Alias 4
       title: Alias 4
+      description: The user's username alias 4
       type: string
-    email:
-      description: Email
-      title: Email
-      type: string
-    firstname:
-      description: First name
-      title: First Name
-      type: string
-    groups:
-      description: Groups
-      title: Groups
-      type: '[]group'
-    last_login:
-      description: Last login
-      title: Last Login
+      required: false
+      example: example-alias-4
+    aliases:
+      title: Aliases
+      description: The user's aliases
+      type: object
+      required: false
+      example: {}
+    created:
+      title: Created
+      description: The user's creation date as a UNIX timestamp
       type: integer
+      required: false
+      example: 1684238502
+    email:
+      title: Email
+      description: The user's email address
+      type: string
+      required: false
+      example: example@user.com
+    firstname:
+      title: First Name
+      description: The user's given name
+      type: string
+      required: false
+      example: Example
+    groups:
+      title: Groups
+      description: List of groups to which this user belongs
+      type: '[]group'
+      required: false
+      example: []
+    isEnrolled:
+      title: Is Enrolled
+      description: Whether the user has a phone, hardware token, U2F token, WebAuthn security key, or other WebAuthn method available for authentication
+      type: boolean
+      required: false
+      example: true
+    lastDirectorySync:
+      title: Last Directory Sync
+      description: An integer indicating the last update to the user via directory sync as a Unix timestamp, or null if the user has never synced with an external directory or if the directory that originally created the user has been deleted from Duo
+      type: integer
+      required: false
+      example: 1234
+    lastLogin:
+      title: Last Login
+      description: An integer indicating the last time this user logged in, as a Unix timestamp, or null if the user has not logged in
+      type: integer
+      required: false
+      example: 1234
     lastname:
-      description: Last name
       title: Last Name
+      description: The user's surname
       type: string
+      required: false
+      example: Example
     notes:
-      description: Notes
       title: Notes
+      description: Notes about this user
       type: string
+      required: false
+      example: Example Note
     phones:
-      description: Phones
       title: Phones
-      type: '[]phone_user'
+      description: A list of phones that this user can use
+      type: '[]phoneUser'
+      required: false
+      example: []
     realname:
-      description: Real name
       title: Real Name
+      description: The user's real name or full name
       type: string
+      required: false
+      example: Test User
     status:
-      description: Status
       title: Status
+      description: The user's status
       type: string
+      required: false
+      example: active
     tokens:
-      description: Tokens
       title: Tokens
+      description: A list of tokens that this user can use
       type: '[]token'
-    user_id:
-      description: User ID
+      required: false
+      example: []
+    userId:
       title: User ID
+      description: The user's ID
       type: string
+      required: false
+      example: ABCDEABC00ABC00ABCDE
     username:
-      description: Username
       title: Username
+      description: The user's username
       type: string
+      required: false
+      example: test-username
+    webauthncredentials:
+      title: Web Auth Credentials
+      description: A list of WebAuthn authenticators that this user can use
+      type: '[]webauthnaredentials'
+      required: false
+      example: []
+  location:
+    city:
+      title: City
+      description: The city name
+      type: string
+      required: false
+      example: Ann Arbor
+    country:
+      title: Country
+      description: The country name
+      type: string
+      required: false
+      example: United States
+    state:
+      title: State
+      description: The state, county, province, or prefecture
+      type: string
+      required: false
+      example: Michigan
+  keyNamePair:
+    key:
+      title: Key
+      description: The integration key
+      type: string
+      required: false
+      example: DIY231J8BR23QK4UKBY8
+    name:
+      title: Name
+      description: The name
+      type: string
+      required: false
+      example: Microsoft Azure Active Directory
+  authlogUser:
+    groups:
+      title: Groups
+      description: Duo group membership information for the user
+      type: "[]string"
+      required: false
+      example: ["Duo Users"]
+    key:
+      title: Key
+      description: The ID of the user
+      type: string
+      required: false
+      example: DU3KC77WJ06Y5HIV7XKQ
+    name:
+      title: Name
+      description: The name of the user
+      type: string
+      required: false
+      example: user@example.com
+  authDevice:
+    ip:
+      title: IP Address
+      description: The IP address of the authentication device
+      required: false
+      type: string
+      example: 198.51.100.1
+    key:
+      title: Key
+      description: The Duo identifier of the authentication device
+      type: string
+      required: false
+      example: DP5BJ05HI4WRBVI4Q7JF
+    location:
+      title: Location
+      description: The GeoIP location of the authentication device
+      type: location
+      required: false
+      example: {}
+    name:
+      title: Name
+      description: The name of the authentication device
+      type: string
+      required: false
+      example: My iPhone X
+  accessDevice:
+    browser:
+      title: Access Device
+      description: The web browser used for access
+      type: string
+      required: false
+      example: Chrome
+    browserVersion:
+      title: Browser Version
+      description: The browser version
+      type: string
+      required: false
+      example: 67.0.3396.99
+    flashVersion:
+      title: Flash Version
+      description: The Flash plugin version used
+      type: string
+      required: false
+      example: uninstalled
+    hostname:
+      title: Hostname
+      description: The hostname
+      type: string
+      required: false
+      example: example-hostname
+    ip:
+      title: IP Address
+      description: The access device's IP address
+      type: string
+      required: false
+      example: 198.51.100.1
+    isEncryptionEnabled:
+      title: Is Encryption Enabled
+      description: Reports the disk encryption state as detected by the Duo Device Health app. One of true, false, or unknown
+      type: string
+      required: false
+      example: true
+    isFirewallEnabled:
+      title: Is Firewall Enabled
+      description: Reports the firewall state as detected by the Duo Device Health app. One of true, false, or unknown
+      type: string
+      required: false
+      example: true
+    isPasswordSet:
+      title: Is Password Set
+      description: Reports the system password state as detected by the Duo Device Health app. One of true, false, or unknown
+      type: string
+      required: false
+      example: true
+    javaVersion:
+      title: Java Version
+      description: The Java plugin version used
+      type: string
+      required: false
+      example: uninstalled
+    location:
+      title: Location
+      description: The GeoIP location of the access device
+      type: location
+      required: false
+      example: {}
+    os:
+      title: Operating System
+      description: The device operating system name
+      type: string
+      required: false
+      example: Mac OS X
+    osVersion:
+      title: Operating System Version
+      description: The device operating system version
+      type: string
+      required: false
+      example: 10.14.1
+  trustAssessmentObject:
+    featuresVersion:
+      title: Features Version
+      description: The feature version for the risk-based authentication trust assessment
+      type: string
+      required: false
+      example: 3.0
+    modelVersion:
+      title: Model Version
+      description: The model version for the risk-based authentication trust assessment
+      type: string
+      required: false
+      example: 2022.07.19.001
+    policyEnabled:
+      title: Policy Enabled
+      description: Denotes if risk-based authentication was enabled by the policy under which the trust assessment was evaluated
+      type: boolean
+      required: false
+      example: false
+    reason:
+      title: Reason
+      description: The reason behind the trust assessment level
+      type: string
+      required: false
+      example: Normal level of trust; no detection of known attack pattern
+    trustLevel:
+      title: Trust Level
+      description: "The trust assessment level. Can be one of: ERROR, LOW, NORMAL, UNKNOWN, or UNSET"
+      type: string
+      required: false
+      example: NORMAL
+  adaptiveTrustAssessments:
+    moreSecureAuth:
+      title: More Secure Auth
+      description: Trust assessment information for Risk-Based Factor Selection
+      type: trustAssessmentObject
+      required: false
+      example: {}
+    rememberMe:
+      title: Remember Me
+      description: Trust assessment information for Risk-Based Remembered Devices
+      type: trustAssessmentObject
+      required: false
+      example: {}
+  authLog:
+    accessDevice:
+      title: Access Device
+      description: Browser, plugin, and operating system information for the endpoint used to access the Duo-protected resource. Values present only when the application accessed features Duo's inline browser prompt
+      type: accessDevice
+      required: false
+      example: {}
+    adaptiveTrustAssessments:
+      title: Adaptive Trust Assessments
+      description: Risk-based authentication information. Values present only when the application accessed features Duo's inline browser prompt and has a Duo Risk-Based Authentication policy applied
+      type: adaptiveTrustAssessments
+      required: false
+      example: {}
+    alias:
+      title: Alias
+      description: The username alias used to log in. No value if the user logged in with their username instead of a username alias
+      type: string
+      required: false
+      example: test
+    application:
+      title: Application
+      description: Information about the application accessed
+      type: keyNamePair
+      required: false
+      example: {}
+    authDevice:
+      title: Auth Device
+      description: Information about the device used to approve or deny authentication
+      type: authDevice
+      required: false
+      example: {}
+    email:
+      title: Email
+      description: The email address of the user
+      type: string
+      required: false
+      example: user@example.com
+    eventType:
+      title: Event Type
+      description: The type of activity logged
+      type: string
+      required: false
+      example: authentication
+    factor:
+      title: Factor
+      description: The authentication factor
+      type: string
+      required: false
+      example: duo_push
+    isotimestamp:
+      title: ISO8601 Timestamp
+      description: ISO8601 timestamp of the event
+      type: string
+      required: false
+      example: 2020-02-13T18:56:20.351346+00:00
+    oodSoftware:
+      title: OOD Software
+      description: If authentication was denied due to out-of-date software, shows the name of the software
+      type: string
+      required: false
+      example: Chrome
+    reason:
+      title: Reason
+      description: The reason for the authentication attempt result
+      type: string
+      required: false
+      example: user_approved
+    result:
+      title: Result
+      description: "The result of the authentication attempt. One of: 'success', 'denied', 'failure', 'error', or 'fraud'"
+      type: string
+      required: false
+      example: success
+    timestamp:
+      title: Timestamp
+      description: An integer indicating the Unix timestamp of the event
+      type: number
+      required: false
+      example: 1581620180
+    txid:
+      title: Transaction ID
+      description: The transaction ID of the event
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    user:
+      title: User
+      description: Information about the authenticating user
+      type: authlogUser
+      required: false
+      example: {}
+  explanation:
+    summary:
+      title: Summary
+      description: Summary of the event
+      type: string
+      required: false
+      example: example-user has not accessed this application recently
+    type:
+      title: Type
+      description: Type of the event
+      type: string
+      required: false
+      example: NEW_IKEY
+  priorityReason:
+    type:
+      title: Type
+      description: The type of priority reason for the event's match
+      type: string
+      required: false
+      example: CN
+    label:
+      title: Label
+      description: The label of the priority reason for the event's match
+      type: string
+      required: false
+      example: country
+  log:
+    accessDevice:
+      title: Access Device
+      description: Browser, plugin, and operating system information for the endpoint used to access the Duo-protected resource. Values present only when the application accessed features Duo's inline browser prompt
+      type: accessDevice
+      required: false
+      example: {}
+    adaptiveTrustAssessments:
+      title: Adaptive Trust Assessments
+      description: Risk-based authentication information. Values present only when the application accessed features Duo's inline browser prompt and has a Duo Risk-Based Authentication policy applied
+      type: adaptiveTrustAssessments
+      required: false
+      example: {}
+    alias:
+      title: Alias
+      description: The username alias used to log in. No value if the user logged in with their username instead of a username alias
+      type: string
+      required: false
+      example: test
+    application:
+      title: Application
+      description: Information about the application accessed
+      type: keyNamePair
+      required: false
+      example: {}
+    authDevice:
+      title: Auth Device
+      description: Information about the device used to approve or deny authentication
+      type: authDevice
+      required: false
+      example: {}
+    email:
+      title: Email
+      description: The email address of the user
+      type: string
+      required: false
+      example: user@example.com
+    eventType:
+      title: Event Type
+      description: The type of activity logged
+      type: string
+      required: false
+      example: authentication
+    factor:
+      title: Factor
+      description: The authentication factor
+      type: string
+      required: false
+      example: duo_push
+    isotimestamp:
+      title: ISO8601 Timestamp
+      description: ISO8601 timestamp of the event
+      type: string
+      required: false
+      example: 2020-02-13T18:56:20.351346+00:00
+    logType:
+      title: Log Type
+      description: Type of the log
+      type: string
+      required: false
+      example: auth
+    oodSoftware:
+      title: OOD Software
+      description: If authentication was denied due to out-of-date software, shows the name of the software
+      type: string
+      required: false
+      example: Chrome
+    reason:
+      title: Reason
+      description: The reason for the authentication attempt result
+      type: string
+      required: false
+      example: user_approved
+    result:
+      title: Result
+      description: "The result of the authentication attempt. One of: 'success', 'denied', 'failure', 'error', or 'fraud'"
+      type: string
+      required: false
+      example: success
+    timestamp:
+      title: Timestamp
+      description: An integer indicating the Unix timestamp of the event
+      type: number
+      required: false
+      example: 1581620180
+    txid:
+      title: Transaction ID
+      description: The transaction ID of the event
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    user:
+      title: User
+      description: Information about the authenticating user
+      type: authlogUser
+      required: false
+      example: {}
+    action:
+      title: Action
+      description: The type of change that was performed
+      type: string
+      required: false
+      example: user_update
+    description:
+      title: Description
+      description: String detailing what changed
+      type: string
+      required: false
+      example: "{\"notes\": \"Joe asked for their nickname to be displayed instead of Joseph.\", \"realname\": \"Joe Smith\"}"
+    object:
+      title: Object
+      description: The object that was acted on
+      type: string
+      required: false
+      example: jsmith
+    username:
+      title: Username
+      description: The full name of the administrator who performed the action
+      type: string
+      required: false
+      example: admin
+    bypassStatusEnabled:
+      title: Bypass Status Enabled
+      description: An integer indicating the Unix timestamp in milliseconds when bypass status was enabled for the user or group
+      type: integer
+      required: false
+      example: 1604337058989
+    enabledBy:
+      title: Enabled By
+      description: The application or the administrator that enabled bypass status
+      type: keyNamePair
+      required: false
+      example: {}
+    enabledFor:
+      title: Enabled For
+      description: The user or group with bypass status
+      type: keyNamePair
+      required: false
+      example: {}
+    explanations:
+      title: Explanations
+      description: An array of objects describing why Trust Monitor surfaced the event
+      type: "[]explanation"
+      required: false
+      example: []
+    fromCommonNetblock:
+      title: From Common Netblock
+      description: A boolean describing if this event was created from a common IP netblock
+      type: boolean
+      required: false
+      example: true
+    fromNewUser:
+      title: From New User
+      description: A boolean describing if this event was created for a new user
+      type: boolean
+      required: false
+      example: false
+    lowRiskIp:
+      title: Low Risk IP
+      description: A boolean describing if this event was created from an IP address identified in the Risk Profile configuration as a low risk IP address
+      type: boolean
+      required: false
+      example: false
+    priorityEvent:
+      title: Priority Event
+      description: A boolean describing if the event matches the Risk Profile configuration
+      type: boolean
+      required: false
+      example: false
+    priorityReasons:
+      title: Priority Reasons
+      description: An array of objects describing how the event matches the Trust Monitor Risk Profile configuration
+      type: "[]priorityReason"
+      required: false
+      example: []
+    sekey:
+      title: Sekey
+      description: The unique identifier for this event
+      type: string
+      required: false
+      example: SEDOR9BP00L23C6YUH5
+    state:
+      title: State
+      description: A string describing the state of the event
+      type: string
+      required: false
+      example: new
+    stateUpdatedTimestamp:
+      title: State Updated Timestamp
+      description: An integer indicating the Unix timestamp in milliseconds of the last change to the state of the event
+      type: integer
+      required: false
+      example: 1675893605269
+    surfacedAuth:
+      title: Surfaced Auth
+      description: An object which represents the actual authentication
+      type: authLog
+      required: false
+      example: {}
+    surfacedTimestamp:
+      title: Surfaced Timestamp
+      description: An integer indicating the Unix timestamp in milliseconds when the event was surfaced by Trust Monitor
+      type: integer
+      required: false
+      example: 1675893605269
+    triagedAsInteresting:
+      title: Triaged As Interesting
+      description: A boolean describing if this event was triaged as being interesting or not interesting
+      type: boolean
+      required: false
+      example: false
+    triageEventUri:
+      title: Triage Event URI
+      description: A string representing the URI of the security event, which a Duo administrator can use to view and process the surfaced event in the Duo Admin Panel
+      type: string
+      required: false
+      example: https://example.com
+    type:
+      title: Type
+      description: The type of event
+      type: string
+      required: false
+      example: auth
 
 connection:
-  integration_key:
+  integrationKey:
     title: Integration Key
     type: credential_secret_key
     description: API integration key
     required: true
-  secret_key:
+    example: DUCUULF6HBMZ43IG9MBH
+  secretKey:
     title: Secret Key
     type: credential_secret_key
     description: API secret key
     required: true
+    example: 3rlCtQGBVpoCXkjP3pLslVWxO8b4W5j1
   hostname:
     title: API Hostname
     description: Duo API hostname
     type: string
     required: true
+    example: api-XXXXXXXX.duosecurity.com
 
 actions:
-
   get_user_by_id:
     title: Get User by ID
     description: Get a user by ID
     input:
-      user_id:
+      userId:
         title: User ID
+        description: User unique ID
         type: string
-        description: User ID, e.g. DUCUULF6HBMZ43IG9MBH
         required: true
+        example: DUCUULF6HBMZ43IG9MBH
     output:
       user:
         title: User
+        description: User details
         type: user
         required: false
-        description: User
-
+        example: {}
   get_user_by_username:
     title: Get User by Username
     description: Get a user by username
     input:
       username:
         title: Username
+        description: Specify a username (or username alias) to look up a single user
         type: string
-        description: Username, e.g. jdoe
         required: true
+        example: jdoe
     output:
       user:
         title: User
+        description: User details
         type: user
         required: false
-        description: User
-
+        example: {}
   delete_user:
     title: Delete User by ID
     description: Delete a user by ID
     input:
-      user_id:
+      userId:
         title: User ID
         type: string
-        description: User ID to remove, e.g. DUCUULF6HBMZ43IG9MBH
+        description: User ID to remove
         required: true
+        example: DUCUULF6HBMZ43IG9MBH
     output:
-      response:
-        title: Response
-        type: string
+      success:
+        title: Success
+        type: boolean
         required: false
-        description: Response
-
+        description: Whether the action was successful
+        example: true
   modify_user:
     title: Modify User by ID
     description: Modify a user by ID
     input:
-      user_id:
+      userId:
         title: User ID
+        description: User unique ID
         type: string
-        description: User ID, e.g. DUCUULF6HBMZ43IG9MBH
         required: true
+        example: DUCUULF6HBMZ43IG9MBH
+      username:
+        title: Username
+        description: The new username
+        type: string
+        required: false
+        example: Example
+      alias1:
+        title: Alias 1
+        description: A username alias 1
+        type: string
+        required: false
+        example: alias1
+      alias2:
+        title: Alias 2
+        description: A username alias 1
+        type: string
+        required: false
+        example: alias2
+      alias3:
+        title: Alias 3
+        description: A username alias 3
+        type: string
+        required: false
+        example: alias3
+      alias4:
+        title: Alias 4
+        description: A username alias 4
+        type: string
+        required: false
+        example: alias3
+      realname:
+        title: Real Name
+        description: The new realname (or full name)
+        type: string
+        required: false
+        example: Example
+      email:
+        title: Email
+        description: The new email address
+        type: string
+        required: false
+        example: user@example.com
       status:
         title: Status
+        description: The new status. Select 'None' to skip status change
         type: string
-        description: New status
         enum:
         - active
         - disabled
         - bypass
-        required: true
+        - None
+        default: None
+        required: false
+        example: active
+      notes:
+        title: Notes
+        description: The new notes field
+        type: string
+        required: false
+        example: Example
+      firstname:
+        title: First Name
+        description: The user's new given name
+        type: string
+        required: false
+        example: Example
+      lastname:
+        title: Last Name
+        description: The user's new surname
+        type: string
+        required: false
+        example: Example
     output:
       user:
         title: User
+        description: User details
         type: user
         required: false
-        description: User
-
+        example: {}
   get_logs:
     title: Get Authentication Logs
     description: Get auth logs, limited to past 180 days
@@ -477,7 +1064,7 @@ actions:
         description: List of user IDs to filter on
         required: false
         example: ["DUW2DKA44RFYECTU8R1O"]
-      event_types:
+      eventTypes:
         title: Event Types
         type: '[]string'
         description: List of event types(authentication, enrollment) to filter on, to include all leave this parameter empty
@@ -495,7 +1082,7 @@ actions:
         description: List of group IDs to filter on
         required: false
         example: ["DG67EON0I1QA2ZDUF32M"]
-      phone_numbers:
+      phoneNumbers:
         title: Phone Numbers
         type: '[]string'
         description: List of phone numbers to filter on
@@ -513,62 +1100,52 @@ actions:
         description: List of results of an authentication attempt(success, denied, fraud) to filter on, to include all leave this parameter empty
         required: false
         example: ["denied"]
-      registration_id:
-        title: Registration ID
+      tokens:
+        title: Tokens
         type: '[]string'
-        description: List of FIDO U2F token registration IDs to filter on
-        required: false
-        example: ["D21RU6X1B1DF5P54B6PV"]
-      token_id:
-        title: Token ID
-        type: '[]string'
-        description: List of hardware OTP token IDs to filter on
-        required: false
-        example: ["DHIZ34ALBA2445ND4AI2"]
-      webauthnkey:
-        title: WebAuthn Key
-        type: '[]string'
-        description: List of WebAuthn security keys to filter on
+        description: List of FIDO U2F token registration IDs or WebAuthn security keys to filter on
         required: false
         example: ["WA4ED9AUVMSWUF00KES4"]
     output:
-      authlogs:
+      authLogs:
         title: Logs
-        type: "[]authlog"
+        type: "[]authLog"
         required: true
         description: Logs
-
+        example: []
   get_users:
     title: Get Users
-    description: Get Users
+    description: Get list of users
     output:
       users:
         title: Users
+        description: List of users
         type: '[]user'
         required: false
-        description: Users
-
+        example: []
   get_user_status:
     title: Get User Status
     description: Get account status of a user
     input:
-      user:
-        title: User
+      username:
+        title: Username
         type: string
-        description: The user account to check status, e.g. jdoe
+        description: The username or alias for which you want to get the status
         required: true
+        example: user
     output:
       status:
         title: Status
+        description: Status of the user
         type: string
         required: true
-        description: Status
-      user_id:
+        example: active
+      userId:
         title: User ID
+        description: ID of the user
         type: string
         required: true
-        description: User ID
-
+        example: DU0W79YFWZAJWJV6P00L
   add_user:
     title: Add User
     description: Add a user in Duo Admin
@@ -578,54 +1155,61 @@ actions:
         description: The name of the user to create
         type: string
         required: true
-      alias:
-        title: Alias
-        description: User alias. May have up to 4 unique amongst users
+        example: example-user
+      aliases:
+        title: Aliases
+        description: User aliases. May have up to 4 unique amongst users
         type: '[]string'
         required: false
+        example: ["test-alias"]
       realname:
         title: Real Name
         description: User's real name
         type: string
         required: false
+        example: Example User
       email:
         title: Email
         description: Email of the user
         type: string
         required: false
+        example: user@example.com
       status:
         title: Status
-        description: User status, e.g. active, bypass, disabled
+        description: User status
         type: string
         enum:
         - active
         - bypass
         - disabled
-        default: disabled
+        default: active
         required: false
+        example: active
       notes:
         title: Notes
-        description: An optional description or notes field. Can be viewed in the
-          Admin Panel
+        description: An optional description or notes field
         type: string
         required: false
+        example: Example note
       firstname:
         title: First Name
-        description: The users given name. Required for Duo's ID Proofing feature
+        description: The user's given name. Required for Duo's ID Proofing feature
         type: string
         required: false
+        example: Test
       lastname:
         title: Last Name
-        description: The users surname. Required for Duo's ID Proofing feature
+        description: The user's surname. Required for Duo's ID Proofing feature
         type: string
         required: false
+        example: User
     output:
-      response:
-        description: Response
-        title: Response
-        type: response
+      user:
+        description: User
+        title: User
+        type: user
         required: false
-
+        example: {}
   enroll_user:
     title: Enroll User
     description: Enrolls a user and sends an enrollment email to the specified email address
@@ -635,36 +1219,53 @@ actions:
         title: Username
         required: true
         description: Username for user to enroll
+        example: test-username
       email:
         type: string
         title: Email Address
         description: Email address to send enrollment email to
         required: true
-      time_to_expiration:
+        example: user@example.com
+      timeToExpiration:
         type: number
         title: Time to Expiration
         description: Amount of time in seconds until enrollment email expires. Use '0' for no expiration
         default: 0
-        required: true
+        required: false
+        example: 3600
     output:
       success:
         type: boolean
         title: Success
         description: Whether or not the enrollment was successful
-        required: true
-
+        required: false
+        example: true
   get_phones_by_user_id:
     title: Get Phones by User ID
     description: Gets a list of phones associated with the user ID
     input:
-      user_id:
+      userId:
         title: User ID
-        description: User ID, e.g. DUCUULF6HBMZ43IG9MBH
+        description: The identifier of the user
         type: string
         required: true
+        example: DUCUULF6HBMZ43IG9MBH
     output:
-      phone_list:
+      phoneList:
         title: Phone List
         description: List of phones associated with the user's ID
-        type: '[]phone_user'
+        type: '[]phoneUser'
         required: false
+        example: []
+
+tasks:
+  monitor_logs:
+    title: Monitor Logs
+    description: Monitor administrator, authentication and trust monitor event logs
+    output:
+      logs:
+        title: Logs
+        description: List of administrator, authentication and trust monitor event logs within the specified time range
+        type: "[]log"
+        required: true
+        example: []

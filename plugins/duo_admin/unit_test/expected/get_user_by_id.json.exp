@@ -1,0 +1,24 @@
+{
+  "user": {
+    "alias1": "alias1",
+    "alias2": "alias2",
+    "alias3": "alias3",
+    "alias4": "alias4",
+    "aliases": {
+      "alias1": "alias1",
+      "alias2": "alias2",
+      "alias3": "alias3",
+      "alias4": "alias4"
+    },
+    "created": 1684238502,
+    "email": "user@example.com",
+    "firstname": "Example",
+    "isEnrolled": false,
+    "lastname": "Example",
+    "notes": "Lorem ipsum",
+    "realname": "Example Fullname",
+    "status": "active",
+    "userId": "valid-id",
+    "username": "example-username"
+  }
+}
