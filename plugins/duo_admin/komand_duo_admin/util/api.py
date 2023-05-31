@@ -120,7 +120,7 @@ class DuoAdminAPI:
 
     def get_all_admin_logs(self, parameters: dict, maxtime: int) -> list:
         admin_logs = []
-        for i in range(9999):
+        for _ in range(9999):
             results = self.get_admin_logs(parameters).get("response", [])
             if results and isinstance(results, list):
                 admin_logs.extend(results)
@@ -139,7 +139,7 @@ class DuoAdminAPI:
 
     def get_all_trust_monitor_events(self, parameters: dict) -> list:
         trust_monitor_events = []
-        for i in range(9999):
+        for _ in range(9999):
             results = self.get_trust_monitor_events(parameters).get("response", {})
             trust_monitor_events.extend(results.get("events", []))
             offset = results.get("metadata", {}).get("next_offset")

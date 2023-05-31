@@ -24,5 +24,5 @@ class EnrollUser(insightconnect_plugin_runtime.Action):
             "valid_secs": str(time_to_expiration) if time_to_expiration and time_to_expiration > 0 else None,
         }
         return {
-            Output.SUCCESS: True if self.connection.admin_api.enroll_user(clean(data)).get("stat") == "OK" else False
+            Output.SUCCESS: self.connection.admin_api.enroll_user(clean(data)).get("stat") == "OK"
         }

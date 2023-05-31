@@ -15,7 +15,7 @@ class GetUsers(insightconnect_plugin_runtime.Action):
             output=GetUsersOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):  # pylint: disable=unused-argument
         self.logger.info("Getting users...")
         return {
             Output.USERS: convert_dict_to_camel_case(clean(self.connection.admin_api.get_users().get("response", [])))
