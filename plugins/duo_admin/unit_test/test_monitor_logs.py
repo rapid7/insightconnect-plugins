@@ -8,12 +8,12 @@ from komand_duo_admin.tasks.monitor_logs.task import MonitorLogs
 from unit_test.util import Util
 from unittest.mock import patch
 from parameterized import parameterized
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 @patch(
     "komand_duo_admin.tasks.monitor_logs.task.MonitorLogs.get_current_time",
-    return_value=datetime.strptime("2023-05-01T08:34:46", "%Y-%m-%dT%H:%M:%S"),
+    return_value=datetime.strptime("2023-05-01T08:34:46", "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc),
 )
 @patch("requests.request", side_effect=Util.mock_request)
 class TestMonitorLogs(TestCase):

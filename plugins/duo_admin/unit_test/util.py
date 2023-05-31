@@ -72,28 +72,28 @@ class Util:
                 "limit": "1000",
             }:
                 return MockResponse(200, "get_auth_logs_2.json.resp")
-            if params == {"mintime": "1682836486000", "maxtime": "1682922826000", "limit": "1000"}:
+            if params == {"mintime": "1682843686000", "maxtime": "1682930026000", "limit": "1000"}:
                 return MockResponse(200, "get_auth_logs_3.json.resp")
             if params == {
-                "mintime": "1682836486000",
-                "maxtime": "1682922826000",
+                "mintime": "1682843686000",
+                "maxtime": "1682930026000",
                 "limit": "1000",
                 "next_offset": ["1683730665255", "9de5069c-5afe-602b-2ea0-a04b66beb2c0"],
             }:
                 return MockResponse(200, "get_auth_logs_4.json.resp")
-            if params == {"mintime": "1000000000400", "maxtime": "1682922826000", "limit": "1000"}:
+            if params == {"mintime": "1000000000400", "maxtime": "1682930026000", "limit": "1000"}:
                 return MockResponse(400)
-            if params == {"mintime": "1000000000500", "maxtime": "1682922826000", "limit": "1000"}:
+            if params == {"mintime": "1000000000500", "maxtime": "1682930026000", "limit": "1000"}:
                 return MockResponse(500)
         if url == "https://example.com/admin/v1/logs/administrator":
-            if params == {"mintime": "1682836486"}:
+            if params == {"mintime": "1682843686"}:
                 return MockResponse(200, "get_admin_logs.json.resp")
             if params == {"mintime": "1682836496"}:
-                return MockResponse(200, "get_admin_logs_2.json.resp")
+                return MockResponse(200, "get_admin_logs.json.resp")
         if url == "https://example.com/admin/v1/trust_monitor/events":
-            if params == {"mintime": "1682836486000", "maxtime": "1682922826000", "limit": "200"}:
+            if params == {"mintime": "1682843686000", "maxtime": "1682930026000", "limit": "200"}:
                 return MockResponse(200, "get_trust_monitor_events.json.resp")
-            if params == {"mintime": "1682836486000", "maxtime": "1682922826000", "limit": "200", "offset": "1591014"}:
+            if params == {"mintime": "1682843686000", "maxtime": "1682930026000", "limit": "200", "offset": "1591014"}:
                 return MockResponse(200, "get_trust_monitor_events_2.json.resp")
 
         if url == "https://example.com/admin/v1/users/valid-id" and params == {}:
