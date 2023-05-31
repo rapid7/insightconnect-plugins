@@ -1,32 +1,32 @@
 plugin_spec_version: v2
 extension: plugin
-products: [insightconnect]
+products: [ insightconnect ]
 name: trendmicro_visionone
 title: Trend Micro Vision One
 description: Trend Micro Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
 version: 1.0.0
-supported_versions: ["Trend Micro Vision One API v3"]
+supported_versions: [ "Trend Micro Vision One API v3" ]
 vendor: trendmicro
 support: community
-status: []
+status: [ ]
 enable_cache: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/trendmicro_visionone
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://trendmicro.com
 tags:
-- vulnerability_scanning
-- vulnerability_management
-- intrusion_detection
-- intrusion_protection
-- virtual_patching
-- remediation
-- trend_micro
-- vision_one
+  - vulnerability_scanning
+  - vulnerability_management
+  - intrusion_detection
+  - intrusion_protection
+  - virtual_patching
+  - remediation
+  - trend_micro
+  - vision_one
 hub_tags:
-  use_cases: [vulnerability_management, cloud_security, remediation_management, threat_detection_and_response ]
-  keywords: [remediation, detection]
-  features: []
+  use_cases: [ vulnerability_management, cloud_security, remediation_management, threat_detection_and_response ]
+  keywords: [ remediation, detection ]
+  features: [ ]
 
 types:
   multi_response:
@@ -94,6 +94,7 @@ types:
       type: string
       description: Timestamp in ISO 8601 format that indicates the last time the information about a suspicious object was modified
       required: true
+      example: 2023-04-14T06:55:29Z
     scan_action:
       title: Scan Action
       type: string
@@ -120,6 +121,7 @@ types:
       title: Expired Date Time
       type: string
       description: Timestamp in ISO 8601 format that indicates when the suspicious object expires
+      example: 2023-04-14T06:55:29Z
   exception_objects:
     url:
       title: URL
@@ -174,6 +176,7 @@ types:
       type: string
       description: The time the object was created.
       required: true
+      example: 2023-04-14T06:55:29Z
   endpoint_data:
     agent_guid:
       title: Agent GUID
@@ -272,11 +275,13 @@ types:
       type: string
       description: Analyze time of suspicious object
       required: true
+      example: 2023-04-14T06:55:29Z
     expired_date_time:
       title: Expired Date Time
       type: string
       description: Expire time of suspicious object
       required: true
+      example: 2023-04-14T06:55:29Z
     root_sha1:
       title: Root SHA1
       type: string
@@ -381,7 +386,7 @@ types:
       description: Optional Description of the file
       required: false
       example: this file got on my computer from www.shadyfiles.com
-  block_object:
+  block_objects:
     object_type:
       title: Object Type
       type: string
@@ -407,7 +412,7 @@ types:
       description: Optional description for reference
       required: false
       example: Add to exception list
-  suspicious_block_object:
+  suspicious_block_objects:
     object_type:
       title: Object Type
       type: string
@@ -510,11 +515,13 @@ types:
       description: Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the created date time of the alert
       type: string
       required: false
+      example: 2023-04-14T06:55:29Z
     updated_date_time:
       title: Updated Date Time
       description: Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the last updated date time of the alert
       type: string
       required: false
+      example: 2023-04-14T06:55:29Z
     description:
       title: Description
       description: Description of the detection model that triggered the alert
@@ -623,7 +630,7 @@ triggers:
         type: float
         description: Maximum time to wait for the result to be available
         required: false
-        example: true
+        example: 15.5
       interval:
         title: Interval
         type: integer
@@ -636,7 +643,7 @@ triggers:
         description: Sandbox Suspicious Object List Response
         type: "[]sandbox_suspicious_list_resp"
         required: true
-        example: []
+        example: [ ]
   poll_alert_list:
     title: Poll Alert List
     description: Polls information about workbench alerts that match the specified criteria in a paginated list
@@ -646,13 +653,13 @@ triggers:
         type: string
         description: Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the start of the data retrieval time range. The available oldest value is "1970-01-01T00:00:00Z"
         required: true
-        example: startDateTime=2020-06-15T10:00:00Z
+        example: 2020-06-15T10:00:00Z
       end_date_time:
         title: End Date Time
         type: string
         description: Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the end of the data retrieval time range. Ensure that "endDateTime" is not earlier than "startDateTime"
         required: true
-        example: endDateTime=2023-06-15T12:00:00Z
+        example: 2023-06-15T12:00:00Z
       interval:
         title: Interval
         type: integer
@@ -671,7 +678,7 @@ triggers:
         description: Array of any alerts (awb-workbenchAlertV3)
         type: "[]alert"
         required: true
-        example: []
+        example: [ ]
 
 actions:
   enable_account:
@@ -683,14 +690,14 @@ actions:
         type: "[]account_identifiers"
         description: User Account Identifiers containing account name and description
         required: true
-        example: []
+        example: [ ]
     output:
       multi_response:
         title: Multi Response
         description: Enable Account Response Array
         type: "[]multi_response"
         required: true
-        example: []
+        example: [ ]
   disable_account:
     title: Disable Account
     description: Signs the user out of all active application and browser sessions, and prevents the user from signing in any new session. Supported IAM systems - Azure AD and Active Directory (on-premises)
@@ -700,14 +707,14 @@ actions:
         type: "[]account_identifiers"
         description: User Account Identifiers containing account name and description
         required: true
-        example: []
+        example: [ ]
     output:
       multi_response:
         title: Multi Response
         description: Disable Account Response Array
         type: "[]multi_response"
         required: true
-        example: []
+        example: [ ]
   sign_out_account:
     title: Sign out Account
     description: Signs the user out of all active application and browser sessions. Supported IAM systems - Azure AD
@@ -717,14 +724,14 @@ actions:
         type: "[]account_identifiers"
         description: User Account Identifiers containing account name and description
         required: true
-        example: []
+        example: [ ]
     output:
       multi_response:
         title: Multi Response
         description: Sign out Account Response Array
         type: "[]multi_response"
         required: true
-        example: []
+        example: [ ]
   reset_password_account:
     title: Reset Password Account
     description: Signs the user out of all active application and browser sessions, and forces the user to create a new password during the next sign-in attempt. Supported IAM systems - Azure AD and Active Directory (on-premises)
@@ -734,14 +741,14 @@ actions:
         type: "[]account_identifiers"
         description: User Account Identifiers containing account name and description
         required: true
-        example: []
+        example: [ ]
     output:
       multi_response:
         title: Multi Response
         description: Reset Password Account Response Array
         type: "[]multi_response"
         required: true
-        example: []
+        example: [ ]
   quarantine_email_message:
     title: Quarantine Email Message
     description: Moves a message from a mailbox to the quarantine folder
@@ -751,14 +758,14 @@ actions:
         type: "[]email_identifiers"
         description: Email Identifiers consisting of message id, mailbox and description
         required: true
-        example: []
+        example: [ ]
     output:
       multi_response:
         title: Multi Response
         description: Quarantine Email Message Response Array
         type: "[]multi_response"
         required: true
-        example: []
+        example: [ ]
   delete_email_message:
     title: Delete Email Message
     description: Deletes a message from a mailbox
@@ -768,14 +775,14 @@ actions:
         type: "[]email_identifiers"
         description: Email Identifiers consisting of message id, mailbox and description
         required: true
-        example: []
+        example: [ ]
     output:
       multi_response:
         title: Multi Response
         description: Delete Email Message Response Array
         type: "[]multi_response"
         required: true
-        example: []
+        example: [ ]
   restore_email_message:
     title: Restore Email Message
     description: Restores a quarantined email message
@@ -785,14 +792,14 @@ actions:
         type: "[]email_identifiers"
         description: Email Identifiers consisting of message id, mailbox and description
         required: true
-        example: []
+        example: [ ]
     output:
       multi_response:
         title: Multi Response
         description: Delete Email Message Response Array
         type: "[]multi_response"
         required: true
-        example: []
+        example: [ ]
   isolate_endpoint:
     title: Isolate Endpoint
     description: Disconnects an endpoint from the network (but allows communication with the managing Trend Micro product)
@@ -802,14 +809,14 @@ actions:
         type: "[]endpoint_identifiers"
         description: Endpoint Identifiers consisting of endpoint(hostname or agentGuid) and description
         required: true
-        example: []
+        example: [ ]
     output:
       multi_response:
         title: Multi Response
         description: Isolate Endpoint Response Array
         type: "[]multi_response"
         required: true
-        example: []
+        example: [ ]
   restore_endpoint:
     title: Restore Endpoint
     description: Restores network connectivity to an endpoint that applied the isolate endpoint action
@@ -819,99 +826,99 @@ actions:
         type: "[]endpoint_identifiers"
         description: Endpoint Identifiers consisting of endpoint(hostname or agentGuid) and description
         required: true
-        example: []
+        example: [ ]
     output:
       multi_response:
         title: Multi Response
         description: Restore Endpoint Response Array
         type: "[]multi_response"
         required: true
-        example: []
+        example: [ ]
   add_to_exception_list:
     title: Add to Exception List
     description: Adds domains, file SHA-1 values, IP addresses, or URLs to the Exception List and prevents these objects from being added to the Suspicious Object List
     input:
-      block_object:
-        title: Block Object
-        type: "[]block_object"
-        description: Object object made up of type, value and description
+      block_objects:
+        title: Block Objects
+        type: "[]block_objects"
+        description: Objects made up of type, value and description
         required: true
-        example: []
+        example: [ ]
     output:
       multi_response:
         title: Multi Response
         description: Add To Exception List Response Array
         type: "[]multi_response"
         required: true
-        example: []
+        example: [ ]
   remove_from_exception_list:
     title: Remove from Exception List
     description: Removes domains, file SHA-1 values, IP addresses, or URLs from the Exception List
     input:
-      block_object:
-        title: Block Object
-        type: "[]block_object"
-        description: Object object made up of type, value and description
+      block_objects:
+        title: Block Objects
+        type: "[]block_objects"
+        description: Objects made up of type, value and description
         required: true
-        example: []
+        example: [ ]
     output:
       multi_response:
         title: Multi Response
         description: Remove From Exception List Response Array
         type: "[]multi_response"
         required: true
-        example: []
+        example: [ ]
   remove_from_block_list:
     title: Remove from Block List
     description: Removes an email address, file SHA-1, domain, IP address, or URL that was added to the Suspicious Object List using the Add to block list action
     input:
-      block_object:
-        title: Block Object
-        type: "[]block_object"
-        description: Object object made up of type, value and description
+      block_objects:
+        title: Block Objects
+        type: "[]block_objects"
+        description: Objects made up of type, value and description
         required: true
-        example: []
+        example: [ ]
     output:
       multi_response:
         title: Multi Response
         description: Remove From Block List Response Array
         type: "[]multi_response"
         required: true
-        example: []
+        example: [ ]
   add_to_suspicious_list:
     title: Add to Suspicious List
     description: Adds domains, file SHA-1/SHA-256 values, IP addresses, senderMailAddress, or URLs to the Block Object List
     input:
-      suspicious_block_object:
-        title: Suspicious Block Object
-        type: "[]suspicious_block_object"
-        description: Suspicious Object object made up of type, value and scan_action, risk_level and days_to_expiration
+      suspicious_block_objects:
+        title: Suspicious Block Objects
+        type: "[]suspicious_block_objects"
+        description: Suspicious Objects made up of type, value and scan_action, risk_level and days_to_expiration
         required: true
-        example: []
+        example: [ ]
     output:
       multi_response:
         title: Multi Response
         description: Add To Exception List Response Array
         type: "[]multi_response"
         required: true
-        example: []
+        example: [ ]
   remove_from_suspicious_list:
     title: Remove from Suspicious List
     description: Removes domains, file SHA-1 values, IP addresses, or URLs from the Suspicious Object List
     input:
-      block_object:
-        title: Block Object
-        type: "[]block_object"
-        description: Object object made up of type, value and description
+      block_objects:
+        title: Block Objects
+        type: "[]block_objects"
+        description: Objects made up of type, value and description
         required: true
-        example: []
+        example: [ ]
     output:
       multi_response:
         title: Multi Response
         description: Add To Exception List Response Array
         type: "[]multi_response"
         required: true
-        example: []
+        example: [ ]
   get_endpoint_data:
     title: Get Endpoint Data
     description: Retrieves information about a specific endpoint
@@ -938,7 +945,7 @@ actions:
         description: Array of Endpoint Data Objects, consisting of agent guid, login account, endpoint name, MAC address, IP, os name, or version, os description, product code and installed product code
         type: "[]endpoint_data"
         required: true
-        example: []
+        example: [ ]
   terminate_process:
     title: Terminate Process
     description: Terminates a process that is running on an endpoint
@@ -948,14 +955,14 @@ actions:
         type: "[]process_identifiers"
         description: Process Identifiers consisting of endpoint(hostname or agentGuid), filesha1, filename(optional) and description(optional)
         required: true
-        example: []
+        example: [ ]
     output:
       multi_response:
         title: Multi Response
         description: Terminate Process Response Array
         type: "[]multi_response"
         required: true
-        example: []
+        example: [ ]
   get_sandbox_submission_status:
     title: Get Sandbox Submission Status
     description: Retrieves the status of a sandbox analysis submission
@@ -980,8 +987,8 @@ actions:
         required: true
         example: "running"
         enum:
-          - "succeeded" 
-          - "running" 
+          - "succeeded"
+          - "running"
           - "failed"
       action:
         title: Action
@@ -990,20 +997,26 @@ actions:
         required: true
         example: "analyzeFile"
         enum:
-          - "analyzeFile" 
+          - "analyzeFile"
           - "analyzeUrl"
       error:
         title: Error
         description: Error code and message for the submission
         type: object
         required: false
-        example: error
+        example: {
+          "error":
+            {
+              "code": "NotFound",
+              "message": "Not Found"
+            }
+        }
       digest:
         title: Digest
         description: The hash values for the file analyzed
         type: object
         required: false
-        example: {}
+        example: { }
       created_date_time:
         title: Created Date Time
         description: Timestamp in ISO 8601 that indicates the object was submitted to the sandbox
@@ -1055,7 +1068,7 @@ actions:
         type: float
         description: Maximum time to wait for the result to be available
         required: false
-        example: true
+        example: 15.5
     output:
       id:
         title: ID
@@ -1077,7 +1090,7 @@ actions:
         description: The hash values of the analyzed file
         type: object
         required: false
-        example: {}
+        example: { }
       risk_level:
         title: Risk Level
         description: The risk level assigned to the object by the sandbox
@@ -1085,7 +1098,7 @@ actions:
         required: true
         example: "low"
         enum:
-          - "high" 
+          - "high"
           - "medium"
           - "low"
           - "noRisk"
@@ -1106,13 +1119,13 @@ actions:
         description: The name of the threat as detected by the sandbox
         type: "[]string"
         required: false
-        example: []
+        example: [ ]
       threat_types:
         title: Threat Types
         description: The threat type as detected by the sandbox
         type: "[]string"
         required: false
-        example: []
+        example: [ ]
       true_file_type:
         title: True File Type
         description: File Type of the Object
@@ -1128,14 +1141,14 @@ actions:
         type: "[]collect_files"
         description: Collect file input JSON containing endpoint, file path and description
         required: true
-        example: []
+        example: [ ]
     output:
       multi_response:
         title: Multi Response
         description: Add To Block List Response Array
         type: "[]multi_response"
         required: true
-        example: []
+        example: [ ]
   get_task_result:
     title: Get Task Result
     description: Retrieves an object containing the results of a response task in JSON format
@@ -1157,7 +1170,7 @@ actions:
         type: float
         description: Maximum time to wait for the result to be available
         required: false
-        example: true
+        example: 15.5
     output:
       status:
         title: Status
@@ -1292,7 +1305,7 @@ actions:
         description: Currently, it is only possible to apply tasks to one message in a mailbox or one message in several mailboxes
         type: "[]object"
         required: false
-        example: []
+        example: [ ]
       url:
         title: URL
         description: Universal Resource Locator
@@ -1338,14 +1351,17 @@ actions:
         type: float
         description: Maximum time to wait for the result to be available
         required: false
-        example: true
+        example: 15.5
     output:
       file:
         title: File
         description: The output is a .zip file
         type: file
         required: true
-        example: {}
+        example: {
+          "content": "dGVzdA==",
+          "filename": "r7-test11.zip"
+        }
   get_sandbox_suspicious_list:
     title: Get Sandbox Suspicious List
     description: Downloads the suspicious object list associated to the specified object. Note ~ Suspicious Object Lists are only available for objects with a high risk level
@@ -1367,14 +1383,14 @@ actions:
         type: float
         description: Maximum time to wait for the result to be available
         required: false
-        example: true
+        example: 15.5
     output:
       sandbox_suspicious_list_resp:
         title: Sandbox Suspicious List Response
         description: Sandbox Suspicious Object List Response
         type: "[]sandbox_suspicious_list_resp"
         required: true
-        example: []
+        example: [ ]
   download_sandbox_analysis_result:
     title: Download Sandbox Analysis Result
     description: Downloads the analysis result for an object submitted to sandbox for analysis based on the submission ID
@@ -1396,14 +1412,17 @@ actions:
         type: float
         description: Maximum time to wait for the result to be available
         required: false
-        example: true
+        example: 15.5
     output:
       file:
         title: Sandbox Analysis Result
         description: The response is a .pdf file
         type: file
         required: true
-        example: {}
+        example: {
+          "content": "dGVzdA==",
+          "filename": "r7-test11.pdf"
+        }
   submit_file_to_sandbox:
     title: Submit File to Sandbox
     description: Submits a file to the sandbox for analysis (Note. For more information about the supported file types, see the Trend Micro Vision One Online Help. Submissions require credits. Does not require credits in regions where Sandbox Analysis has not been officially released.)
@@ -1413,7 +1432,10 @@ actions:
         type: file
         description: File submitted to the sandbox (dict of {filename(string) & content(base64(bytes))})
         required: false
-        example: file binary
+        example: {
+          "content": "dGVzdA==",
+          "filename": "r7-test11.bat"
+        }
       document_password:
         title: Document Password
         type: string
@@ -1444,7 +1466,7 @@ actions:
         type: object
         description: The hash value of the file
         required: true
-        example: {}
+        example: { }
       arguments:
         title: Arguments
         description: Command line arguments encoded in Base64 of the submitted file
@@ -1529,13 +1551,13 @@ actions:
         type: string
         description: Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the start of the data retrieval time range. The available oldest value is "1970-01-01T00:00:00Z"
         required: true
-        example: startDateTime=2020-06-15T10:00:00Z
+        example: 2020-06-15T10:00:00Z
       end_date_time:
         title: End Date Time
         type: string
         description: Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the end of the data retrieval time range. Ensure that "endDateTime" is not earlier than "startDateTime"
         required: true
-        example: endDateTime=2020-06-15T12:00:00Z
+        example: 2020-06-15T12:00:00Z
     output:
       total_count:
         title: Total Count
@@ -1548,7 +1570,7 @@ actions:
         description: Array of any alerts (awb-workbenchAlertV3)
         type: "[]alert"
         required: true
-        example: []
+        example: [ ]
   get_exception_list:
     title: Get Exception List
     description: Retrieves information about domains, file SHA-1, file SHA-256, IP addresses, sender addresses, or URLs in the Exception List and displays it in a paginated list
@@ -1558,7 +1580,7 @@ actions:
         description: Array of any Exception Objects
         type: "[]exception_objects"
         required: true
-        example: []
+        example: [ ]
   get_suspicious_list:
     title: Get Suspicious List
     description: Retrieves information about domains, file SHA-1, file SHA-256, IP addresses, email addresses, or URLs in the Suspicious Object List and displays the information in a paginated list
@@ -1568,24 +1590,24 @@ actions:
         description: Array of any Suspicious Objects
         type: "[]suspicious_objects"
         required: true
-        example: []
+        example: [ ]
   add_to_block_list:
     title: Add to Block List
     description: Adds an email address, file SHA-1, domain, IP address, or URL to the Suspicious Object List, which blocks the objects on subsequent detections
     input:
-      block_object:
-        title: Block Object
-        type: "[]block_object"
-        description: Object object made up of type, value and description
+      block_objects:
+        title: Block Objects
+        type: "[]block_objects"
+        description: Objects made up of type, value and description
         required: true
-        example: []
+        example: [ ]
     output:
       multi_response:
         title: Multi Response
         description: Add To Block List Response Array
         type: "[]multi_response"
         required: true
-        example: []
+        example: [ ]
   submit_urls_to_sandbox:
     title: Submit URLs to Sandbox
     description: Submits URLs to the sandbox for analysis. You can submit a maximum of 10 URLs per request
@@ -1595,14 +1617,14 @@ actions:
         type: "[]string"
         description: URL(s) to be submitted, formated as bracket array separated by comma
         required: true
-        example: []
+        example: [ ]
     output:
       submit_urls_resp:
         title: Submit URLs Response
         description: Submit URLSs response Array
         type: "[]submit_urls_resp"
         required: true
-        example: []
+        example: [ ]
   get_alert_details:
     title: Get Alert Details
     description: Displays information about workbench alerts that match the specified criteria in a paginated list
@@ -1625,5 +1647,5 @@ actions:
         type: alert
         description: The details of the alert
         required: true
-        example: {}
+        example: { }
 

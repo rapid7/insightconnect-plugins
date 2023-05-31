@@ -25,7 +25,7 @@ class AddToExceptionList(insightconnect_plugin_runtime.Action):
         # Get Connection Client
         client = self.connection.client
         # Get Action Parameters
-        block_objects = params.get(Input.BLOCK_OBJECT)
+        block_objects = params.get(Input.BLOCK_OBJECTS)
         # Choose enum
         for i in block_objects:
             if "domain" in i["object_type"].lower():

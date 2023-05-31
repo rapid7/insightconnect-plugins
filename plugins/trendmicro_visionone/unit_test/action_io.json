@@ -13,7 +13,7 @@
   },
   "add_to_block_list": {
     "input": {
-      "block_object": [
+      "block_objects": [
         {
           "object_type": "ip",
           "object_value": "6.6.6.6",
@@ -33,7 +33,7 @@
   },
   "add_to_exception_list": {
     "input": {
-      "block_object": [
+      "block_objects": [
         {
           "object_type": "ip",
           "object_value": "1.2.6.9"
@@ -52,7 +52,7 @@
   },
   "add_to_suspicious_list": {
     "input": {
-      "suspicious_block_object": [
+      "suspicious_block_objects": [
         {
           "risk_level": "high",
           "expiry_days": "30",
@@ -451,7 +451,7 @@
   },
   "remove_from_exception_list": {
     "input": {
-      "block_object": [
+      "block_objects": [
         {
           "object_type": "ip",
           "object_value": "1.6.6.3"
@@ -470,7 +470,7 @@
   },
   "remove_from_block_list": {
     "input": {
-      "block_object": [
+      "block_objects": [
         {
           "description": "block",
           "object_type": "ip",
@@ -490,7 +490,7 @@
   },
   "remove_from_suspicious_list": {
     "input": {
-      "block_object": [
+      "block_objects": [
         {
           "object_type": "ip",
           "object_value": "6.6.6.4"

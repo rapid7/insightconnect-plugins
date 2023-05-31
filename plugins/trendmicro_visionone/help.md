@@ -121,15 +121,15 @@ This action adds an email address, file SHA-1, domain, IP address, or URL to the
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|block_object|[]block_object|None|True|Object object made up of type, value and description|None|[]|
+| Name          | Type            |Default|Required|Description|Enum|Example|
+|---------------|-----------------|-------|--------|-----------|----|-------|
+| block_objects | []block_objects |None|True|Object object made up of type, value and description|None|[]|
 
 Example input:
 
 ```
 {
-  "block_object": []
+  "block_objects": []
 }
 ```
 
@@ -163,15 +163,15 @@ This action adds domains, file SHA-1 values, IP addresses, or URLs to the Except
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|block_object|[]block_object|None|True|Object object made up of type, value and description|None|[]|
+| Name          | Type            |Default|Required|Description|Enum|Example|
+|---------------|-----------------|-------|--------|-----------|----|-------|
+| block_objects | []block_objects |None|True|Object object made up of type, value and description|None|[]|
 
 Example input:
 
 ```
 {
-  "block_object": []
+  "block_objects": []
 }
 ```
 
@@ -205,9 +205,9 @@ This action adds domains, file SHA-1/SHA-256 values, IP addresses, senderMailAdd
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|suspicious_block_object|[]suspicious_block_object|None|True|Suspicious Object object made up of type, value and scan_action, risk_level and days_to_expiration|None|[]|
+| Name                     | Type                       |Default|Required|Description|Enum|Example|
+|--------------------------|----------------------------|-------|--------|-----------|----|-------|
+| suspicious_block_objects | []suspicious_block_objects |None|True|Suspicious Object object made up of type, value and scan_action, risk_level and days_to_expiration|None|[]|
 
 Example input:
 
@@ -549,15 +549,15 @@ This action displays information about workbench alerts that match the specified
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|end_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the end of the data retrieval time range. Ensure that "endDateTime" is not earlier than "startDateTime"|None|endDateTime=2020-06-15T12:00:00Z|
-|start_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the start of the data retrieval time range. The available oldest value is "1970-01-01T00:00:00Z"|None|startDateTime=2020-06-15T10:00:00Z|
+|end_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the end of the data retrieval time range. Ensure that "endDateTime" is not earlier than "startDateTime"|None|2020-06-15T12:00:00Z|
+|start_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the start of the data retrieval time range. The available oldest value is "1970-01-01T00:00:00Z"|None|2020-06-15T10:00:00Z|
 
 Example input:
 
 ```
 {
-  "end_date_time": "endDateTime=2020-06-15T12:00:00Z",
-  "start_date_time": "startDateTime=2020-06-15T10:00:00Z"
+  "end_date_time": "2020-06-15T12:00:00Z",
+  "start_date_time": "2020-06-15T10:00:00Z"
 }
 ```
 
@@ -673,7 +673,7 @@ Example input:
 |type|string|True|Object Type|url|
 |digest|object|False|The hash values of the analyzed file|{}|
 |risk_level|string|True|The risk level assigned to the object by the sandbox|low|
-|analysis_completion_date_time|string|True|Timestamp in ISO 8601 format that indicates when the analysis was completed|2022-02-14 16:30:45+00:00|
+|analysis_completion_date_time|string|True|Timestamp in ISO 8601 format that indicates when the analysis was completed|2023-04-14T06:55:29Z|
 |arguments|string|False|Command line arguments encoded in Base64 of the submitted file|QWxhZGRpbjpvcGVuIHNlc2FtZQ==|
 |detection_names|[]string|False|The name of the threat as detected by the sandbox|[]|
 |threat_types|[]string|False|The threat type as detected by the sandbox|[]|
@@ -727,8 +727,8 @@ Example input:
 |action|string|True|Action applied to a submitted object|analyzeFile|
 |error|object|False|Error code and message for the submission|error|
 |digest|object|False|The hash values for the file analyzed|{}|
-|created_date_time|string|True|Timestamp in ISO 8601 that indicates the object was submitted to the sandbox|2022-02-14 16:30:45+00:00|
-|last_action_date_time|string|True|Timestamp in ISO 8601 format that indicates when the information about a submission was last updated|2022-02-14 16:30:45+00:00|
+|created_date_time|string|True|Timestamp in ISO 8601 that indicates the object was submitted to the sandbox|2023-04-14T06:55:29Z|
+|last_action_date_time|string|True|Timestamp in ISO 8601 format that indicates when the information about a submission was last updated|2023-04-14T06:55:29Z|
 |resource_location|string|False|Location of the submitted file|temp/downloaded/virus.exe|
 |is_cached|boolean|False|Parameter that indicates if an object has been analyzed before by the Sandbox Analysis App. Submissions marked as cached do not count toward the daily reserve|False|
 |arguments|string|False|Arguments for the file submitted|-y -d|
@@ -861,9 +861,9 @@ Example input:
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
 |status|string|True|The status of the command sent to the managing server. Possible task statuses; queued - The server queued the command due to a high volume of requests or because the Security Agent was offline; running - Trend Micro Vision One sent the command to the managing server and is waiting for a response; succeeded - The managing server successfully received the command; rejected - The server rejected the task. For automated response task only; waitForApproval - The task is pending approval. For automated response task only; failed - An error or time-out occurred when attempting to send the command to the managing server|queued|
-|created_date_time|string|True|Timestamp in ISO 8601 format|2022-02-14 16:30:45+00:00|
+|created_date_time|string|True|Timestamp in ISO 8601 format|2023-04-14T06:55:29Z|
 |id|string|False|Unique numeric string that identifies a response task|j9wq384fj9|
-|last_action_date_time|string|True|Timestamp in ISO 8601 format|2022-02-14 16:30:45+00:00|
+|last_action_date_time|string|True|Timestamp in ISO 8601 format|2023-04-14T06:55:29Z|
 |description|string|False|Task Description|example desc|
 |action|string|True|Command sent to the target|isolate|
 |account|string|False|User that triggered the response|user1|
@@ -874,7 +874,7 @@ Example input:
 |file_sha256|string|False|The fileSHA256 of the collected file|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
 |file_size|integer|False|The file size of the file collected|256|
 |resource_location|string|False|URL location of the file collected that can be used to download|www.resourcelocation.ert|
-|expired_date_time|string|False|The expiration date and time of the file|2022-02-14 16:30:45+00:00|
+|expired_date_time|string|False|The expiration date and time of the file|2023-04-14T06:55:29Z|
 |password|string|False|The password of the file collected|1234!|
 |filename|string|False|File name of a response task target (<= 255)|virus.exe|
 |tasks|[]object|False|Currently, it is only possible to apply tasks to one message in a mailbox or one message in several mailboxes|[]|
@@ -1384,17 +1384,17 @@ This trigger polls information about workbench alerts that match the specified c
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|end_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the end of the data retrieval time range. Ensure that "endDateTime" is not earlier than "startDateTime"|None|endDateTime=2023-06-15T12:00:00Z|
+|end_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the end of the data retrieval time range. Ensure that "endDateTime" is not earlier than "startDateTime"|None|2023-06-15T12:00:00Z|
 |interval|integer|None|True|Interval (in seconds) in which the polling script should run again|None|1800|
-|start_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the start of the data retrieval time range. The available oldest value is "1970-01-01T00:00:00Z"|None|startDateTime=2020-06-15T10:00:00Z|
+|start_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the start of the data retrieval time range. The available oldest value is "1970-01-01T00:00:00Z"|None|2020-06-15T10:00:00Z|
 
 Example input:
 
 ```
 {
-  "end_date_time": "endDateTime=2023-06-15T12:00:00Z",
+  "end_date_time": "2023-06-15T12:00:00Z",
   "interval": 1800,
-  "start_date_time": "startDateTime=2020-06-15T10:00:00Z"
+  "start_date_time": "2020-06-15T10:00:00Z"
 }
 ```
 
