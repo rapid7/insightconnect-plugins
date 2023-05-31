@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    SUSPICIOUS_BLOCK_OBJECT = "suspicious_block_object"
+    SUSPICIOUS_BLOCK_OBJECTS = "suspicious_block_objects"
     
 
 class Output:
@@ -21,23 +21,23 @@ class AddToSuspiciousListInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "suspicious_block_object": {
+    "suspicious_block_objects": {
       "type": "array",
-      "title": "Suspicious Block Object",
-      "description": "Suspicious Object object made up of type, value and scan_action, risk_level and days_to_expiration",
+      "title": "Suspicious Block Objects",
+      "description": "Suspicious Objects made up of type, value and scan_action, risk_level and days_to_expiration",
       "items": {
-        "$ref": "#/definitions/suspicious_block_object"
+        "$ref": "#/definitions/suspicious_block_objects"
       },
       "order": 1
     }
   },
   "required": [
-    "suspicious_block_object"
+    "suspicious_block_objects"
   ],
   "definitions": {
-    "suspicious_block_object": {
+    "suspicious_block_objects": {
       "type": "object",
-      "title": "suspicious_block_object",
+      "title": "suspicious_block_objects",
       "properties": {
         "days_to_expiration": {
           "type": "integer",

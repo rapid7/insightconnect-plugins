@@ -1,5 +1,5 @@
 {
-	"spec": "940e7044699bab05b73bc23b886c7485",
+	"spec": "bce8e5590238a00e11e80e22e1c37958",
 	"manifest": "fbc1663dec89612f037c047ee7673751",
 	"setup": "8c5653b99c00f7986c657ae2cdab3384",
 	"schemas": [
@@ -9,15 +9,15 @@
 		},
 		{
 			"identifier": "add_to_block_list/schema.py",
-			"hash": "0f91e67bb244fe2f6d92cf1c29a36b3b"
+			"hash": "722778c5c69a9f1e593a692973fa176f"
 		},
 		{
 			"identifier": "add_to_exception_list/schema.py",
-			"hash": "d869fb5b84daefcfb930168a2d6c2583"
+			"hash": "6bf5db6cab0156ece7679203d5396049"
 		},
 		{
 			"identifier": "add_to_suspicious_list/schema.py",
-			"hash": "16f84567afb0b05ca9b121955306c721"
+			"hash": "48f92df818117a073a623c08b8e34105"
 		},
 		{
 			"identifier": "collect_file/schema.py",
@@ -93,15 +93,15 @@
 		},
 		{
 			"identifier": "remove_from_block_list/schema.py",
-			"hash": "296fe53d1e291fecfb32c14885b74a0e"
+			"hash": "34219d61d56af9098d4ad86a331873d0"
 		},
 		{
 			"identifier": "remove_from_exception_list/schema.py",
-			"hash": "3739a39912ef39f93a8a8ee717aba64c"
+			"hash": "1e7b00ffe932ea0cba644d0b62d369f2"
 		},
 		{
 			"identifier": "remove_from_suspicious_list/schema.py",
-			"hash": "08d3a42eac54cbba3d896073a357c51f"
+			"hash": "eaf553a8981c2fc8c6ac80bf07b2aa7d"
 		},
 		{
 			"identifier": "reset_password_account/schema.py",

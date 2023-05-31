@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    BLOCK_OBJECT = "block_object"
+    BLOCK_OBJECTS = "block_objects"
     
 
 class Output:
@@ -21,23 +21,23 @@ class RemoveFromExceptionListInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "block_object": {
+    "block_objects": {
       "type": "array",
-      "title": "Block Object",
-      "description": "Object object made up of type, value and description",
+      "title": "Block Objects",
+      "description": "Objects made up of type, value and description",
       "items": {
-        "$ref": "#/definitions/block_object"
+        "$ref": "#/definitions/block_objects"
       },
       "order": 1
     }
   },
   "required": [
-    "block_object"
+    "block_objects"
   ],
   "definitions": {
-    "block_object": {
+    "block_objects": {
       "type": "object",
-      "title": "block_object",
+      "title": "block_objects",
       "properties": {
         "description": {
           "type": "string",
