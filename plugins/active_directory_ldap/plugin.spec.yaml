@@ -4,7 +4,7 @@ products: [insightconnect]
 name: active_directory_ldap
 title: Active Directory LDAP
 description: "This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network"
-version: 7.0.0
+version: 8.0.0
 supported_versions: ["Azure Active Directory 2.0.89.0"]
 vendor: rapid7
 support: rapid7
@@ -387,24 +387,18 @@ actions:
         required: true
         example: ["CN=user,OU=domain_users,DC=example,DC=com"]
     output:
-      successful_enablements:
-        title: Successful Enablements
+      completed:
+        title: Completed
         description: List of successfully enabled users
         type: "[]string"
         required: false
         example: '["CN=user,OU=domain_users,DC=example,DC=com"]'
-      unsuccessful_enablements:
-        title: Unsuccessful Enablements
+      failed:
+        title: Failed
         description: List of unsuccessfully enabled users
         type: "[]modified_user_error"
         required: false
         example: '[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The DN CN=empty_search,DC=example,DC=com was not found" } ]'
-      all_operations_succeeded:
-        title: All Operations Succeeded
-        description: Overall operation status
-        type: boolean
-        required: false
-        example: True
   disable_user:
     title: Disable
     description: Disable an account
@@ -433,24 +427,18 @@ actions:
         required: true
         example: ["CN=user,OU=domain_users,DC=example,DC=com"]
     output:
-      successful_disablements:
-        title: Successful Disablements
+      completed:
+        title: Completed
         description: List of successfully disabled users
         type: "[]string"
         required: false
         example: '["CN=user,OU=domain_users,DC=example,DC=com"]'
-      unsuccessful_disablements:
-        title: Unsuccessful Disablements
+      failed:
+        title: Failed
         description: List of unsuccessfully disabled users
         type: "[]modified_user_error"
         required: false
         example: '[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The DN CN=empty_search,DC=example,DC=com was not found" } ]'
-      all_operations_succeeded:
-        title: All Operations Succeeded
-        description: Overall operation status
-        type: boolean
-        required: false
-        example: true
   modify_groups:
     title: Add or Remove an Object from Group
     description: Add or remove an object from an Active Directory group
