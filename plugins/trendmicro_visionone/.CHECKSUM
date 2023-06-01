@@ -1,5 +1,5 @@
 {
-	"spec": "bce8e5590238a00e11e80e22e1c37958",
+	"spec": "6ec202c920971f2f75e4cb5dc228031f",
 	"manifest": "fbc1663dec89612f037c047ee7673751",
 	"setup": "8c5653b99c00f7986c657ae2cdab3384",
 	"schemas": [
@@ -137,7 +137,7 @@
 		},
 		{
 			"identifier": "poll_alert_list/schema.py",
-			"hash": "45d2ab7df31acbbd2184ff1bcd8bfbc1"
+			"hash": "20dbe3843eec31055fe72b7feef1d210"
 		},
 		{
 			"identifier": "poll_sandbox_suspicious_list/schema.py",

@@ -9,7 +9,6 @@ class Component:
 
 class Input:
     
-    END_DATE_TIME = "end_date_time"
     INTERVAL = "interval"
     START_DATE_TIME = "start_date_time"
     
@@ -26,17 +25,11 @@ class PollAlertListInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "end_date_time": {
-      "type": "string",
-      "title": "End Date Time",
-      "description": "Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the end of the data retrieval time range. Ensure that \\"endDateTime\\" is not earlier than \\"startDateTime\\"",
-      "order": 2
-    },
     "interval": {
       "type": "integer",
       "title": "Interval",
       "description": "Interval (in seconds) in which the polling script should run again",
-      "order": 3
+      "order": 2
     },
     "start_date_time": {
       "type": "string",
@@ -46,7 +39,6 @@ class PollAlertListInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "end_date_time",
     "interval",
     "start_date_time"
   ]
