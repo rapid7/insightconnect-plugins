@@ -1,7 +1,7 @@
 {
-	"spec": "92f336140db82feb9eafc5bd9bcd552b",
-	"manifest": "2e1e1a1835c447b64d869982c317c5c6",
-	"setup": "f16b6edeb00291c335b99d73a667dc71",
+	"spec": "b708dde20801073ec6c88d4ea8f9b005",
+	"manifest": "a0f76ed1965bb6d1dc016498e95f3d9b",
+	"setup": "efe20ef0d6884b7d4d0c6014f18f8489",
 	"schemas": [
 		{
 			"identifier": "add_user/schema.py",
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "disable_users/schema.py",
-			"hash": "fc787a442a31bf2693112a2469f18abc"
+			"hash": "b4d1d4429d1c0299c30c65a141b6cc6d"
 		},
 		{
 			"identifier": "enable_user/schema.py",
@@ -25,7 +25,7 @@
 		},
 		{
 			"identifier": "enable_users/schema.py",
-			"hash": "58160e17c67a96c3f2b650f71de68585"
+			"hash": "c2729c798f17ff526d6cee062c0adce4"
 		},
 		{
 			"identifier": "force_password_reset/schema.py",

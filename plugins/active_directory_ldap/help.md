@@ -444,20 +444,18 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|all_operations_succeeded|boolean|False|Overall operation status|True|
-|successful_enablements|[]string|False|List of successfully enabled users|["CN=user,OU=domain_users,DC=example,DC=com"]|
-|unsuccessful_enablements|[]modified_user_error|False|List of unsuccessfully enabled users|[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The DN CN=empty_search,DC=example,DC=com was not found" } ]|
+|completed|[]string|False|List of successfully enabled users|["CN=user,OU=domain_users,DC=example,DC=com"]|
+|failed|[]modified_user_error|False|List of unsuccessfully enabled users|[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The DN CN=empty_search,DC=example,DC=com was not found" } ]|
 
 Example output:
 
 ```
 
 {
-  "all_operations_succeeded": true
-  "successful_enablements": [
+  "completed": [
     "CN=user,OU=domain_users,DC=example,DC=com"
-  ]
-  "unsuccessful_enablements": [
+  ],
+  "failed": [
     {
       "dn": "CN=user,OU=domain_users,DC=test,DC=com",
       "error": "The DN CN=empty_search,DC=example,DC=com was not found"
@@ -597,20 +595,18 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|all_operations_succeeded|boolean|False|Overall operation status|True|
-|successful_disablements|[]string|False|List of successfully disabled users|["CN=user,OU=domain_users,DC=example,DC=com"]|
-|unsuccessful_disablements|[]modified_user_error|False|List of unsuccessfully disabled users|[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The DN CN=empty_search,DC=example,DC=com was not found" } ]|
-dis
+|completed|[]string|False|List of successfully disabled users|["CN=user,OU=domain_users,DC=example,DC=com"]|
+|failed|[]modified_user_error|False|List of unsuccessfully disabled users|[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The DN CN=empty_search,DC=example,DC=com was not found" } ]|
+
 Example output:
 
 ```
 
 {
-  "all_operations_succeeded": true
-  "successful_disablements": [
+  "completed": [
     "CN=user,OU=domain_users,DC=example,DC=com"
-  ]
-  "unsuccessful_disablements": [
+  ],
+  "failed": [
     {
       "dn": "CN=user,OU=domain_users,DC=test,DC=com",
       "error": "The DN CN=empty_search,DC=example,DC=com was not found"
@@ -774,7 +770,7 @@ objectname is the logon name of the user you are looking for. The DN can then be
 the query results, and then using the variable step $item.dn
 
 # Version History
-
+* 8.0.0 - Update actions Enable Users and Enable Users to add outputs Completed and Failed and remove output All Operations Succeeded
 * 7.0.0 - Update actions Enable Users and Enable Users to replace output Success with All Operations Succeeded True/False
 * 6.0.0 - Add actions Enable Users and Disable users allowing for the bulk enablement/disablement of users
 * 5.3.5 - Fix issue where JSON Marshaling error was raised when receiving unexpected API response in the Force Password Reset action

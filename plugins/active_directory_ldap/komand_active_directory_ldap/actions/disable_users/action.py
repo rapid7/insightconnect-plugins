@@ -25,7 +25,6 @@ class DisableUsers(insightconnect_plugin_runtime.Action):
         success = not bool(disabled_users.get("failures"))
 
         return {
-            Output.ALL_OPERATIONS_SUCCEEDED: success,
-            Output.SUCCESSFUL_DISABLEMENTS: disabled_users.get("successes"),
-            Output.UNSUCCESSFUL_DISABLEMENTS: disabled_users.get("failures"),
+            Output.COMPLETED: disabled_users.get("successes"),
+            Output.FAILED: disabled_users.get("failures"),
         }

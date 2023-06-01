@@ -15,7 +15,7 @@ class TestActionDisableUsers(TestCase):
             (
                 {Input.DISTINGUISHED_NAMES: ["CN=empty_search,DC=example,DC=com"]},
                 {
-                    Output.UNSUCCESSFUL_DISABLEMENTS: [
+                    Output.FAILED: [
                         {
                             "dn": "CN=empty_search,DC=example,DC=com",
                             "error": "An error occurred during plugin "
@@ -27,14 +27,13 @@ class TestActionDisableUsers(TestCase):
                             "and try again.",
                         }
                     ],
-                    Output.SUCCESSFUL_DISABLEMENTS: [],
-                    Output.ALL_OPERATIONS_SUCCEEDED: False,
+                    Output.COMPLETED: [],
                 },
             ),
             (
                 {Input.DISTINGUISHED_NAMES: ["CN=empty_search,DC=example,DC=com", "CN=Users,DC=example," "DC=com"]},
                 {
-                    Output.UNSUCCESSFUL_DISABLEMENTS: [
+                    Output.FAILED: [
                         {
                             "dn": "CN=empty_search,DC=example,DC=com",
                             "error": "An error occurred during plugin "
@@ -46,16 +45,14 @@ class TestActionDisableUsers(TestCase):
                             "and try again.",
                         }
                     ],
-                    Output.SUCCESSFUL_DISABLEMENTS: ["CN=Users,DC=example,DC=com"],
-                    Output.ALL_OPERATIONS_SUCCEEDED: False,
+                    Output.COMPLETED: ["CN=Users,DC=example,DC=com"],
                 },
             ),
             (
                 {Input.DISTINGUISHED_NAMES: ["CN=Users,DC=example,DC=com"]},
                 {
-                    Output.ALL_OPERATIONS_SUCCEEDED: True,
-                    Output.SUCCESSFUL_DISABLEMENTS: ["CN=Users,DC=example,DC=com"],
-                    Output.UNSUCCESSFUL_DISABLEMENTS: [],
+                    Output.FAILED: True,
+                    Output.COMPLETED: ["CN=Users,DC=example,DC=com"],
                 },
             ),
         ]
