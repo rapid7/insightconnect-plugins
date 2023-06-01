@@ -5,9 +5,8 @@
          604800,
          true,
          {
-            "success": ["agent_id"],
-            "failure": [],
-            "all_operations_succeeded": true
+            "completed": ["agent_id"],
+            "failed": []
          }
       ],
       [
@@ -15,9 +14,8 @@
          604800,
          false,
          {
-            "success": ["agent_id"],
-            "failure": [],
-            "all_operations_succeeded": true
+            "completed": ["agent_id"],
+            "failed": []
          }
       ]
    ]
