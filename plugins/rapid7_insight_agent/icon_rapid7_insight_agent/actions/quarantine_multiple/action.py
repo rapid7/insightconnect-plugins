@@ -27,11 +27,7 @@ class QuarantineMultiple(insightconnect_plugin_runtime.Action):
                 agent_id_list=agent_array
             )
 
-        # Establish true or false for if there are any unsuccessful quarantines
-        all_operations_succeeded = not unsuccessful_quarantine
-
         return {
-            Output.SUCCESS: successful_quarantine,
-            Output.FAILURE: unsuccessful_quarantine,
-            Output.ALL_OPERATIONS_SUCCEEDED: all_operations_succeeded,
+            Output.COMPLETED: successful_quarantine,
+            Output.FAILED: unsuccessful_quarantine,
         }
