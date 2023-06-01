@@ -12,9 +12,8 @@ class Input:
     
 
 class Output:
-    ALL_OPERATIONS_SUCCEEDED = "all_operations_succeeded"
-    SUCCESSFUL_DISABLEMENTS = "successful_disablements"
-    UNSUCCESSFUL_DISABLEMENTS = "unsuccessful_disablements"
+    COMPLETED = "completed"
+    FAILED = "failed"
     
 
 class DisableUsersInput(insightconnect_plugin_runtime.Input):
@@ -49,24 +48,18 @@ class DisableUsersOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "all_operations_succeeded": {
-      "type": "boolean",
-      "title": "All Operations Succeeded",
-      "description": "Overall operation status",
-      "order": 3
-    },
-    "successful_disablements": {
+    "completed": {
       "type": "array",
-      "title": "Successful Disablements",
+      "title": "Completed",
       "description": "List of successfully disabled users",
       "items": {
         "type": "string"
       },
       "order": 1
     },
-    "unsuccessful_disablements": {
+    "failed": {
       "type": "array",
-      "title": "Unsuccessful Disablements",
+      "title": "Failed",
       "description": "List of unsuccessfully disabled users",
       "items": {
         "$ref": "#/definitions/modified_user_error"
