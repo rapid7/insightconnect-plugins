@@ -51,7 +51,7 @@ class TestActionDisableUsers(TestCase):
             (
                 {Input.DISTINGUISHED_NAMES: ["CN=Users,DC=example,DC=com"]},
                 {
-                    Output.FAILED: True,
+                    Output.FAILED: [],
                     Output.COMPLETED: ["CN=Users,DC=example,DC=com"],
                 },
             ),
