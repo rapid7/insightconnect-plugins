@@ -68,7 +68,7 @@ class QuarantineMultipleOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "completed": {
       "type": "array",
-      "title": "Failed",
+      "title": "Completed",
       "description": "List of successfully quarantined hosts",
       "items": {
         "type": "string"

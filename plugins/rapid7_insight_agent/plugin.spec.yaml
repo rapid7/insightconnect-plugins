@@ -203,7 +203,7 @@ actions:
         example: ["abcdef123"]
         required: false
       completed:
-        title: Failed
+        title: Completed
         description: List of successfully quarantined hosts
         type: "[]string"
         example: ["abcdef123"]
