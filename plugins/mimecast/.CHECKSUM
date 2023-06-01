@@ -1,7 +1,7 @@
 {
-	"spec": "4ac67116b6c2fb0d7ea7e58ee1818771",
-	"manifest": "0d78b348dbb7af854cbc7cefbb957a63",
-	"setup": "ed72caa36f7b2b894978d90312666cf7",
+	"spec": "e8a7fcd9de3f5e9c36e1a872253f4744",
+	"manifest": "2c685ffd0994545d7e29b163cf848275",
+	"setup": "d29b266d7e0844731f46022d770557da",
 	"schemas": [
 		{
 			"identifier": "add_group_member/schema.py",
@@ -58,6 +58,10 @@
 		{
 			"identifier": "connection/schema.py",
 			"hash": "802b95dc800c38c606ad67acf727ffe8"
+		},
+		{
+			"identifier": "monitor_siem_logs/schema.py",
+			"hash": "e4e2bf5aaf9a5401442cb737f5ec390f"
 		}
 	]
 }

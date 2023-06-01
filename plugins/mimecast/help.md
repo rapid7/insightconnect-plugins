@@ -77,7 +77,10 @@ Example input:
 {
   "end_date": "Example Reason",
   "message_id": "ExampleID",
-  "routes": ["internal", "outbound"],
+  "routes": [
+    "internal",
+    "outbound"
+  ],
   "search_reason": "Example Reason",
   "send_from": "user@example.com",
   "send_to": "user@example.com",
@@ -89,9 +92,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|tracked_emails|[]tracked_emails|True|An array of found tracked emails|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|tracked_emails|[]tracked_emails|True|An array of found tracked emails|[]|
 
 Example output:
 
@@ -146,9 +149,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Success status of delete request|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|Success status of delete request|True|
 
 Example output:
 
@@ -191,10 +194,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|pagination|pagination|False|Pagination for request|
-|response|[]audit_events_response|True|Event logs data|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|pagination|pagination|False|Pagination for request|{}|
+|response|[]audit_events_response|True|Event logs data|[]|
 
 Example output:
 
@@ -255,9 +258,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|[]managed_url|False|Managed URL that was created|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|[]managed_url|False|Managed URL that was created|[]|
 
 Example output:
 
@@ -320,9 +323,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|[]managed_url|False|Managed URLs matching |
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|[]managed_url|False|Managed URLs matching |[]|
 
 Example output:
 
@@ -365,9 +368,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Success status of delete request|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Success status of delete request|True|
 
 Example output:
 
@@ -405,9 +408,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|[]managed_sender|False|The Managed Sender that was created|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|[]managed_sender|False|The Managed Sender that was created|[]|
 
 Example output:
 
@@ -458,9 +461,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|sender_policy|[]sender_policy|False|The policy that was created|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|sender_policy|[]sender_policy|False|The policy that was created|[]|
 
 Example output:
 
@@ -522,12 +525,12 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|email_address|string|False|The email address of the user that was added to the group|
-|folder_id|string|False|The Mimecast ID of the group that the user / domain was added to|
-|id|string|False|The Mimecast ID of the user / domain that was added to the group|
-|internal|boolean|False|Whether or not the user or domain is internal|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|email_address|string|False|The email address of the user that was added to the group|user@example.com|
+|folder_id|string|False|The Mimecast ID of the group that the user / domain was added to|eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_|
+|id|string|False|The Mimecast ID of the user / domain that was added to the group|eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA|
+|internal|boolean|False|Whether or not the user or domain is internal|True|
 
 Example output:
 
@@ -565,9 +568,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Status of success of the delete operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Status of success of the delete operation|True|
 
 Example output:
 
@@ -585,21 +588,21 @@ This action is used to decode a Mimecast encoded URL.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|encoded_url|string|None|True|The Mimecast encoded URL|None|https://protect-xx.mimecast.com/TXH7fhe|
+|encoded_url|string|None|True|The Mimecast encoded URL|None|https://url.xx.m.mimecastprotect.com/TXH7fhe|
 
 Example input:
 
 ```
 {
-  "encoded_url": "https://protect-xx.mimecast.com/TXH7fhe"
+  "encoded_url": "https://url.xx.m.mimecastprotect.com/TXH7fhe"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|decoded_url|string|True|Original decoded URL|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|decoded_url|string|True|Original decoded URL|https://example.com|
 
 Example output:
 
@@ -631,9 +634,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|groups|[]group|False|A list of groups that mach the query|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|groups|[]group|False|A list of groups that mach the query|[]|
 
 Example output:
 
@@ -694,9 +697,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|click_logs|[]click_logs|False|Click Logs|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|click_logs|[]click_logs|False|Click Logs|[]|
 
 Example output:
 
@@ -728,6 +731,49 @@ _This plugin does not contain any triggers._
 
 For the Create Managed URL action, the URL must include `http://` or `https://` e.g. `http://google.com`
 Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api-overview/global-base-urls/)
+
+### Tasks
+
+#### Monitor SIEM Logs
+
+This task is used to monitor and retrieve the latest logs.
+
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|token|string|None|False|Used to request the next available log file|None|9de5069c5afe602b2ea0a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "token": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|data|[]object|True|List of logs|[]|
+
+Example output:
+
+```
+[
+  {
+    "Dir": "Example",
+    "Rcpt": "user@example.com",
+    "RcptHdrType": "To",
+    "Sender": "user1@example.com",
+    "aCode": "1234code",
+    "acc": "ABCD12345"
+    "datetime": "2023-05-09T12:00:00"
+  }
+]
+```
 
 ### Custom Output Types
 
@@ -1011,6 +1057,8 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
+* 5.2.0 - New task added `Monitor SIEM Logs` | Update plugin to be cloud enabled
+* 5.1.0 - Create Blocked Sender Policy: Changed defaults to `individual_email_address` | New actions added `Delete Blocked Sender Policy`, `Track Messages`
 * 5.1.0 - Create Blocked Sender Policy: Changed defaults to `individual_email_address` | New actions added `Delete Blocked Sender Policy`, `Track Messages`
 * 5.0.2 - Add Group Member: Fix issue when users were running into email validation error when they add a domain, and leave the email address blank on the input section. 
 * 5.0.1 - Add Sandbox availability in region
@@ -1032,6 +1080,8 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 * 1.0.0 - Initial plugin
 
 # Links
+
+* [Mimecast](http://mimecast.com)
 
 ## References
 

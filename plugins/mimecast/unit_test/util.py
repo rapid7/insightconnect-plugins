@@ -2,11 +2,20 @@ import json
 import logging
 import os.path
 import sys
+from datetime import datetime
+from io import BytesIO
+from zipfile import ZipFile
 
 sys.path.append(os.path.abspath("../"))
 from komand_mimecast.connection import Connection
 from komand_mimecast.connection.schema import Input
 from komand_mimecast.util.constants import DATA_FIELD, DEFAULT_REGION
+
+
+DATE_TIME_NOW = datetime.now().strftime("%Y-%m-%dT%H:%M:%S%z")
+FILE_ZIP_CONTENT_1 = {"acc": "ABC123", "datetime": DATE_TIME_NOW}
+FILE_ZIP_CONTENT_2 = {"acc": "ABC1234", "datetime": DATE_TIME_NOW}
+SIEM_LOGS_HEADERS_RESPONSE = {"mc-siem-token": "token123"}
 
 
 class Util:
@@ -32,6 +41,20 @@ class Util:
             return json.loads(file.read())
 
     @staticmethod
+    def get_mocked_zip():
+        file_contents = [
+            {"type": "MTA", "data": [FILE_ZIP_CONTENT_1]},
+            {"type": "MTA", "data": [FILE_ZIP_CONTENT_2]},
+        ]
+        zip_file = BytesIO()
+        with ZipFile(zip_file, "w") as myzip:
+            for i, content in enumerate(file_contents):
+                filename = f"{i}.json"
+                myzip.writestr(filename, json.dumps(content))
+
+        return zip_file.getvalue()
+
+    @staticmethod
     def mocked_request(*args, **kwargs):
         class MockResponse:
             def __init__(self, filename: str = None):
@@ -39,6 +62,22 @@ class Util:
 
             def json(self):
                 return Util.load_json(f"responses/{self.filename}")
+
+        class MockResponseZip:
+            def json(self):
+                raise json.decoder.JSONDecodeError("Test", "test", 1)
+
+            @property
+            def content(self):
+                return Util.get_mocked_zip()
+
+            @property
+            def headers(self):
+                return {"mc-siem-token": "token123"}
+
+            @property
+            def status_code(self):
+                return 200
 
         if kwargs.get("url") == "https://eu-api.mimecast.com/api/directory/add-group-member":
             if "test4@rapid7.com" in kwargs.get(DATA_FIELD):
@@ -101,4 +140,6 @@ class Util:
                     return MockResponse("permit_or_block_sender_bad.json.resp")
                 else:
                     return MockResponse("block_sender.json.resp")
+        elif kwargs.get("url") == "https://eu-api.mimecast.com/api/audit/get-siem-logs":
+            return MockResponseZip()
         return "Not implemented"
