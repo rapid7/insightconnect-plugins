@@ -27,7 +27,6 @@ class QuarantineMultiple(insightconnect_plugin_runtime.Action):
                 agent_id_list=agent_array
             )
 
-
         return {
             Output.COMPLETED: successful_quarantine,
             Output.FAILED: unsuccessful_quarantine,
