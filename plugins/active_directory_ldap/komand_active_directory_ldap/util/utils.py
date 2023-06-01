@@ -237,7 +237,7 @@ class ADUtils:
         # https://docs.microsoft.com/en-us/troubleshoot/windows-server/identity/useraccountcontrol-manipulate-account-properties
         # for list of flags
         dn, search_base = ADUtils.format_dn(dn)
-        logger.info(f"Escaped DN {dn}")
+        logger.info(f"Escaped D {dn}")
 
         if not ADUtils.check_user_dn_is_valid(conn, dn, search_base):
             logger.error(f"The DN {dn} was not found")
