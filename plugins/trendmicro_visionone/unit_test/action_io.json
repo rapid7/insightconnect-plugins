@@ -573,7 +573,6 @@
   },
   "poll_alert_list": {
     "input": {
-      "end_date_time": "endDateTime=2023-06-15T12:00:00Z",
       "interval": 1800,
       "start_date_time": "startDateTime=2020-06-15T10:00:00Z"
     },
