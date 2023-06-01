@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Python 3 Script"
 Vendor = "rapid7"
-Version = "4.0.4"
+Version = "4.0.5"
 Description = "Run a Python 3 script"
 
 
