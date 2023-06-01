@@ -770,6 +770,7 @@ objectname is the logon name of the user you are looking for. The DN can then be
 the query results, and then using the variable step $item.dn
 
 # Version History
+
 * 8.0.0 - Update actions Enable Users and Enable Users to add outputs Completed and Failed and remove output All Operations Succeeded
 * 7.0.0 - Update actions Enable Users and Enable Users to replace output Success with All Operations Succeeded True/False
 * 6.0.0 - Add actions Enable Users and Disable users allowing for the bulk enablement/disablement of users
@@ -815,6 +816,7 @@ the query results, and then using the variable step $item.dn
 * 1.0.1 - Bugfix for potentially non-existent raw_attributes
 * 1.0.0 - Revise input names, bugfixes for missing attributes and character escaping, fix security issue
 * 0.1.0 - Initial plugin
+
 
 # Links
 
