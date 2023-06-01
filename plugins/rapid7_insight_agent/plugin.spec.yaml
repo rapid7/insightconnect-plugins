@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insight_agent
 title: Rapid7 Insight Agent
 description: Using the Insight Agent plugin from InsightConnect, you can quarantine, unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices across your organization
-version: 1.2.0
+version: 2.0.0
 supported_versions: ["Rapid7 Insight Agent 2023-04-06"]
 vendor: rapid7
 support: rapid7
@@ -196,23 +196,17 @@ actions:
         example: true
         required: true
     output:
-      success:
-        title: Successful (Un)Quarantine
-        description: List of successfully quarantined hosts
-        type: "[]string"
-        example: ["abcdef123"]
-        required: false
-      failure:
-        title: Unsuccessful (Un)Quarantine
+      failed:
+        title: Failed
         description: List of unsuccessfully quarantined hosts
         type: "[]string"
         example: ["abcdef123"]
         required: false
-      all_operations_succeeded:
-        title: All Operations Succeeded
-        description: Informs a user any operations failed the (un)quarantine operations
-        type: boolean
-        example: true
+      completed:
+        title: Failed
+        description: List of successfully quarantined hosts
+        type: "[]string"
+        example: ["abcdef123"]
         required: false
   get_agent_details:
     title: Get Agent Details

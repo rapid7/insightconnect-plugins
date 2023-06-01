@@ -71,21 +71,19 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|all_operations_succeeded|boolean|False|Informs a user any operations failed the (un)quarantine operations|True|
-|failure|[]string|False|List of unsuccessfully quarantined hosts|["abcdef123"]|
-|success|[]string|False|List of successfully quarantined hosts|["abcdef123"]|
+|failed|[]string|False|List of unsuccessfully quarantined hosts|["abcdef123"]|
+|completed|[]string|False|List of successfully quarantined hosts|["abcdef123"]|
 
 Example output:
 
 ```
 {
-  "failure":[
+  "failed":[
     "abcdef123"
   ],
-  "success":[
+  "completed":[
     "abcdef123"
-  ],
-  "all_operations_successful": true
+  ]
 }
 ```
 
@@ -251,6 +249,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Udate action `Quarantine Multiple` outputs to Completed and Failed, removed All Operations Successful
 * 1.2.0 - New action: `Quarantine Multiple`
 * 1.1.1 - Quarantine: Fix incorrect behavior for unquarantine when the agent ID is wrong
 * 1.1.0 - Cloud enabled
