@@ -39,22 +39,25 @@ class IsolateEndpointInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "endpoint_identifiers",
       "properties": {
+        "agent_guid": {
+          "type": "string",
+          "title": "Agent GUID",
+          "description": "Agent GUID of the endpoint to collect file from",
+          "order": 2
+        },
         "description": {
           "type": "string",
           "title": "Description",
           "description": "Optional Description",
-          "order": 2
+          "order": 3
         },
-        "endpoint": {
+        "endpoint_name": {
           "type": "string",
           "title": "Endpoint",
-          "description": "Hostname or agentGuid of the endpoint",
+          "description": "Hostname or macaddr of the endpoint to collect file from",
           "order": 1
         }
-      },
-      "required": [
-        "endpoint"
-      ]
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-	"spec": "6ec202c920971f2f75e4cb5dc228031f",
+	"spec": "9e80357b0f00255b2d501c5038a18bad",
 	"manifest": "fbc1663dec89612f037c047ee7673751",
 	"setup": "8c5653b99c00f7986c657ae2cdab3384",
 	"schemas": [
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "collect_file/schema.py",
-			"hash": "51b334dc3ef5e4cdaa7a09b1ad98a667"
+			"hash": "adb03edcca97e0e077d7046001de69be"
 		},
 		{
 			"identifier": "delete_email_message/schema.py",
@@ -85,7 +85,7 @@
 		},
 		{
 			"identifier": "isolate_endpoint/schema.py",
-			"hash": "c564b7107d8738920cf820cbc4f3e063"
+			"hash": "d424aa2ff3cb09f5e6694ade1f132075"
 		},
 		{
 			"identifier": "quarantine_email_message/schema.py",
@@ -113,7 +113,7 @@
 		},
 		{
 			"identifier": "restore_endpoint/schema.py",
-			"hash": "7f702698abce55ed5caea24a4ad6eb1e"
+			"hash": "5d663063f896de60ada64c2e2c4def31"
 		},
 		{
 			"identifier": "sign_out_account/schema.py",
@@ -129,7 +129,7 @@
 		},
 		{
 			"identifier": "terminate_process/schema.py",
-			"hash": "f6a3b45bb3540cb16af9d8f37da84950"
+			"hash": "28171ed009ced009bb1f73f4a2ae2436"
 		},
 		{
 			"identifier": "connection/schema.py",

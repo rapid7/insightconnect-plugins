@@ -39,13 +39,19 @@ class CollectFileInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "collect_files",
       "properties": {
+        "agent_guid": {
+          "type": "string",
+          "title": "Agent GUID",
+          "description": "Agent GUID of the endpoint to collect file from",
+          "order": 2
+        },
         "description": {
           "type": "string",
           "title": "Description",
           "description": "Optional Description of the file",
-          "order": 3
+          "order": 4
         },
-        "endpoint": {
+        "endpoint_name": {
           "type": "string",
           "title": "Endpoint",
           "description": "Hostname or macaddr of the endpoint to collect file from",
@@ -55,11 +61,10 @@ class CollectFileInput(insightconnect_plugin_runtime.Input):
           "type": "string",
           "title": "File Path",
           "description": "Path to the file to collect. (\\u003c= 1024 characters)",
-          "order": 2
+          "order": 3
         }
       },
       "required": [
-        "endpoint",
         "file_path"
       ]
     }

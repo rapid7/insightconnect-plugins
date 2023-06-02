@@ -39,33 +39,38 @@ class TerminateProcessInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "process_identifiers",
       "properties": {
+        "agent_guid": {
+          "type": "string",
+          "title": "Agent GUID",
+          "description": "Agent GUID of the endpoint to collect file from",
+          "order": 2
+        },
         "description": {
           "type": "string",
           "title": "Description",
           "description": "Optional Description",
-          "order": 3
+          "order": 4
         },
-        "endpoint": {
+        "endpoint_name": {
           "type": "string",
           "title": "Endpoint",
-          "description": "Hostname or agentGuid of the endpoint to terminate process on",
+          "description": "Hostname or macaddr of the endpoint to collect file from",
           "order": 1
         },
         "file_sha1": {
           "type": "string",
           "title": "File SHA1",
           "description": "SHA1 hash of the process to terminate",
-          "order": 2
+          "order": 3
         },
         "filename": {
           "type": "string",
           "title": "Filename",
           "description": "Optional file name list for log",
-          "order": 4
+          "order": 5
         }
       },
       "required": [
-        "endpoint",
         "file_sha1"
       ]
     }
