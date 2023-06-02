@@ -1,16 +1,16 @@
 import sys
-import os
-from unittest import TestCase
-from unittest.mock import patch, Mock
 
+sys.path.append("../")
+
+from typing import Any, Dict
+from unittest import TestCase
+from unittest.mock import Mock, patch
+
+from icon_python_3_script.actions.run import Run
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
 
-sys.path.append(os.path.abspath("../"))
-
-from unit_test.util import Util
-from icon_python_3_script.actions.run import Run
-from typing import Dict, Any
+from util import Util
 
 
 @patch.object(Run, "_exec_python_function", side_effect=Util.mock_exec_python_function)
