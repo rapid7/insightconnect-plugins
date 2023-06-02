@@ -7,7 +7,7 @@ description: Armorblox is an API-based platform that stops targeted email attack
 version: 1.0.0
 vendor: armorblox
 author_email: app-publishers@armorblox.com
-support: rapid7
+support:  community
 supported_versions: ["1.0.0"]
 status: []
 tags: ["alerts", "attack", "breach", "compliance", "email", "forensics", "gdpr", "hipaa", "incident response", "it", "machine Learning", "malware", "pii", "scam", "security", "security analytics", "spam", "threat intelligence"]
