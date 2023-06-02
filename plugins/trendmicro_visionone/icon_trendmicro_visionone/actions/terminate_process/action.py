@@ -30,14 +30,39 @@ class TerminateProcess(insightconnect_plugin_runtime.Action):
         self.logger.info("Making API Call...")
         multi_resp = {Output.MULTI_RESPONSE: []}
         for i in process_identifiers:
-            response = client.terminate_process(
-                pytmv1.ProcessTask(
-                    endpointName=i["endpoint"],
-                    fileSha1=i["file_sha1"],
-                    description=i.get("description", ""),
-                    fileName=i.get("filename", ""),
+            if i.get("endpoint_name") and i.get("agent_guid"):
+                response = client.terminate_process(
+                    pytmv1.ProcessTask(
+                        endpointName=i.get("endpoint_name"),
+                        agentGuid=i.get("agent_guid"),
+                        fileSha1=i["file_sha1"],
+                        description=i.get("description", ""),
+                        fileName=i.get("filename", ""),
+                    )
                 )
-            )
+            elif i.get("endpoint_name") and not i.get("agent_guid"):
+                response = client.terminate_process(
+                    pytmv1.ProcessTask(
+                        endpointName=i.get("endpoint_name"),
+                        fileSha1=i["file_sha1"],
+                        description=i.get("description", ""),
+                        fileName=i.get("filename", ""),
+                    )
+                )
+            elif i.get("agent_guid") and not i.get("endpoint_name"):
+                response = client.terminate_process(
+                    pytmv1.ProcessTask(
+                        agentGuid=i.get("agent_guid"),
+                        fileSha1=i["file_sha1"],
+                        description=i.get("description", ""),
+                        fileName=i.get("filename", ""),
+                    )
+                )
+            else:
+                raise PluginException(
+                    cause="Neither Endpoint Name nor Agent GUID provided.",
+                    assistance="Please check the provided parameters and try again.",
+                )
             if "error" in response.result_code.lower():
                 raise PluginException(
                     cause="An error occurred while terminating process.",

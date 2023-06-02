@@ -129,7 +129,11 @@ Example input:
 
 ```
 {
-  "block_objects": []
+  "block_objects": [{
+          "object_type": "ip",
+          "object_value": "6.6.6.6",
+          "description": "block"
+        }]
 }
 ```
 
@@ -171,7 +175,10 @@ Example input:
 
 ```
 {
-  "block_objects": []
+  "block_objects": [{
+          "object_type": "ip",
+          "object_value": "1.2.6.9"
+        }]
 }
 ```
 
@@ -213,7 +220,13 @@ Example input:
 
 ```
 {
-  "suspicious_block_object": []
+  "suspicious_block_objects": [{
+          "risk_level": "high",
+          "expiry_days": "30",
+          "object_type": "ip",
+          "scan_action": "block",
+          "object_value": "6.6.6.3"
+        }]
 }
 ```
 
@@ -255,7 +268,12 @@ Example input:
 
 ```
 {
-  "collect_files": []
+  "collect_files": [{
+          "endpoint_name": "client1",
+          "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede",
+          "file_path": "C:/virus.exe",
+          "description": "collect malicious file"
+        }]
 }
 ```
 
@@ -293,7 +311,11 @@ Example input:
 
 ```
 {
-  "email_identifiers": []
+  "email_identifiers": [{
+          "description": "delete email message r7",
+          "mailbox": "jdoe@testemailtrain.com",
+          "message_id": "<938UR9843UWFSU39F4UWS3O94USFPAS9RFHPAHAPHFA@BEWHRI3U4H5IH45.test.mockemaillabs.com>"
+        }]
 }
 ```
 
@@ -331,7 +353,10 @@ Example input:
 
 ```
 {
-  "account_identifiers": []
+  "account_identifiers": [{
+          "account_name": "jdoe@testemailtrain.com",
+          "description": "disable account r7"
+        }]
 }
 ```
 
@@ -480,7 +505,10 @@ Example input:
 
 ```
 {
-  "account_identifiers": []
+  "account_identifiers": [{
+          "account_name": "jdoe@testemailtest.com",
+          "description": "enable jdoe account, r7 test"
+        }]
 }
 ```
 
@@ -912,7 +940,11 @@ Example input:
 
 ```
 {
-  "endpoint_identifiers": []
+  "endpoint_identifiers": [{
+          "endpoint_name": "client1",
+          "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede",
+          "file_sha1": "984afc7aaa2718984e15e3b5ab095b519a081321"
+        }]
 }
 ```
 
@@ -950,7 +982,11 @@ Example input:
 
 ```
 {
-  "email_identifiers": []
+  "email_identifiers": [{
+          "description": "quarantine email message r7",
+          "mailbox": "jdoe@testemailtest.com",
+          "message_id": "AAkALgAAAAAAHYQDEapmEc2byACqAC-EWg0AAhCCNvg5sEua0nNjgfLS2AABNpgTSQAA"
+        }]
 }
 ```
 
@@ -988,7 +1024,11 @@ Example input:
 
 ```
 {
-  "block_object": []
+  "block_objects": [{
+          "description": "block",
+          "object_type": "ip",
+          "object_value": "6.6.6.3"
+        }]
 }
 ```
 
@@ -1030,7 +1070,10 @@ Example input:
 
 ```
 {
-  "block_object": []
+  "block_objects": [{
+          "object_type": "ip",
+          "object_value": "1.6.6.3"
+        }]
 }
 ```
 
@@ -1068,7 +1111,10 @@ Example input:
 
 ```
 {
-  "block_object": []
+  "block_objects": [{
+          "object_type": "ip",
+          "object_value": "6.6.6.4"
+        }]
 }
 ```
 
@@ -1106,7 +1152,10 @@ Example input:
 
 ```
 {
-  "account_identifiers": []
+  "account_identifiers": [{
+          "account_name": "jdoe@testemailtest.com",
+          "description": "disable account r7"
+        }]
 }
 ```
 
@@ -1144,7 +1193,11 @@ Example input:
 
 ```
 {
-  "email_identifiers": []
+  "email_identifiers": [{
+          "description": "restore email message r7",
+          "mailbox": "jdoe@testemailtest.com",
+          "message_id": "AAkALgAAAAAAHYQDEapmEc2byACqAC-EWg0AAhCCNvg5sEua0nNjgfLS2AABNpgTSQAA"
+        }]
 }
 ```
 
@@ -1182,7 +1235,11 @@ Example input:
 
 ```
 {
-  "endpoint_identifiers": []
+  "endpoint_identifiers": [{
+          "description": "restore endpoint r7",
+          "endpoint_name": "client1",
+          "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede"
+        }]
 }
 ```
 
@@ -1220,7 +1277,10 @@ Example input:
 
 ```
 {
-  "account_identifiers": []
+  "account_identifiers": [{
+          "account_name": "jdoe@testemailtest.com",
+          "description": "sign out account r7 "
+        }]
 }
 ```
 
@@ -1305,7 +1365,8 @@ Example input:
 
 ```
 {
-  "url": []
+  "url": ["www.urlurl.com",
+        "www.zurlzurl.com"]
 }
 ```
 
@@ -1350,7 +1411,11 @@ Example input:
 
 ```
 {
-  "process_identifiers": []
+  "process_identifiers": [{
+          "endpoint_name": "client1",
+          "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede",
+          "file_sha1": "984afc7aaa2718984e15e3b5ab095b519a081321"
+        }]
 }
 ```
 
@@ -1516,7 +1581,11 @@ Example input:
 
 ```
 {
-  "block_objects": []
+  "block_objects": [{
+          "object_type": "ip",
+          "object_value": "6.6.6.6",
+          "description": "block"
+        }]
 }
 ```
 
@@ -1558,7 +1627,10 @@ Example input:
 
 ```
 {
-  "block_objects": []
+  "block_objects": [{
+          "object_type": "ip",
+          "object_value": "1.2.6.9"
+        }]
 }
 ```
 
@@ -1600,7 +1672,13 @@ Example input:
 
 ```
 {
-  "suspicious_block_object": []
+  "suspicious_block_object": [{
+          "risk_level": "high",
+          "expiry_days": "30",
+          "object_type": "ip",
+          "scan_action": "block",
+          "object_value": "6.6.6.3"
+        }]
 }
 ```
 
@@ -1642,7 +1720,12 @@ Example input:
 
 ```
 {
-  "collect_files": []
+  "collect_files": [{
+          "endpoint_name": "client1",
+          "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede",
+          "file_path": "C:/virus.exe",
+          "description": "collect malicious file"
+        }]
 }
 ```
 
@@ -1680,7 +1763,11 @@ Example input:
 
 ```
 {
-  "email_identifiers": []
+  "email_identifiers": [{
+          "description": "delete email message r7",
+          "mailbox": "jdoe@testemailtrain.com",
+          "message_id": "<938UR9843UWFSU39F4UWS3O94USFPAS9RFHPAHAPHFA@BEWHRI3U4H5IH45.test.mockemaillabs.com>"
+        }]
 }
 ```
 
@@ -1718,7 +1805,10 @@ Example input:
 
 ```
 {
-  "account_identifiers": []
+  "account_identifiers": [{
+          "account_name": "jdoe@testemailtrain.com",
+          "description": "disable account r7"
+        }]
 }
 ```
 
@@ -1867,7 +1957,10 @@ Example input:
 
 ```
 {
-  "account_identifiers": []
+  "account_identifiers": [{
+          "account_name": "jdoe@testemailtest.com",
+          "description": "enable jdoe account, r7 test"
+        }]
 }
 ```
 
@@ -2299,7 +2392,11 @@ Example input:
 
 ```
 {
-  "endpoint_identifiers": []
+  "endpoint_identifiers": [{
+          "description": "TEST isolate endpoint",
+          "endpoint_name": "client1",
+          "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede"
+        }]
 }
 ```
 
@@ -2337,7 +2434,11 @@ Example input:
 
 ```
 {
-  "email_identifiers": []
+  "email_identifiers": [{
+          "description": "quarantine email message r7",
+          "mailbox": "jdoe@testemailtest.com",
+          "message_id": "AAkALgAAAAAAHYQDEapmEc2byACqAC-EWg0AAhCCNvg5sEua0nNjgfLS2AABNpgTSQAA"
+        }]
 }
 ```
 
@@ -2375,7 +2476,11 @@ Example input:
 
 ```
 {
-  "block_object": []
+  "block_object": [{
+          "description": "block",
+          "object_type": "ip",
+          "object_value": "6.6.6.3"
+        }]
 }
 ```
 
@@ -2417,7 +2522,10 @@ Example input:
 
 ```
 {
-  "block_object": []
+  "block_object": [{
+          "object_type": "ip",
+          "object_value": "1.6.6.3"
+        }]
 }
 ```
 
@@ -2455,7 +2563,10 @@ Example input:
 
 ```
 {
-  "block_object": []
+  "block_object": [{
+          "object_type": "ip",
+          "object_value": "6.6.6.4"
+        }]
 }
 ```
 
@@ -2493,7 +2604,10 @@ Example input:
 
 ```
 {
-  "account_identifiers": []
+  "account_identifiers": [{
+          "account_name": "jdoe@testemailtest.com",
+          "description": "disable account r7"
+        }]
 }
 ```
 
@@ -2531,7 +2645,11 @@ Example input:
 
 ```
 {
-  "email_identifiers": []
+  "email_identifiers": [{
+          "description": "restore email message r7",
+          "mailbox": "jdoe@testemailtest.com",
+          "message_id": "AAkALgAAAAAAHYQDEapmEc2byACqAC-EWg0AAhCCNvg5sEua0nNjgfLS2AABNpgTSQAA"
+        }]
 }
 ```
 
@@ -2569,7 +2687,11 @@ Example input:
 
 ```
 {
-  "endpoint_identifiers": []
+  "endpoint_identifiers": [{
+          "description": "restore endpoint r7",
+          "endpoint_name": "client1",
+          "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede"
+        }]
 }
 ```
 
@@ -2607,7 +2729,10 @@ Example input:
 
 ```
 {
-  "account_identifiers": []
+  "account_identifiers": [{
+          "account_name": "jdoe@testemailtest.com",
+          "description": "sign out account r7 "
+        }]
 }
 ```
 
@@ -2692,7 +2817,8 @@ Example input:
 
 ```
 {
-  "url": []
+  "url": ["www.urlurl.com",
+        "www.zurlzurl.com"]
 }
 ```
 
@@ -2737,7 +2863,11 @@ Example input:
 
 ```
 {
-  "process_identifiers": []
+  "process_identifiers": [{
+          "endpoint_name": "client1",
+          "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede",
+          "file_sha1": "984afc7aaa2718984e15e3b5ab095b519a081321"
+        }]
 }
 ```
 

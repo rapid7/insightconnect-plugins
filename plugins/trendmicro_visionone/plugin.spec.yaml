@@ -298,12 +298,18 @@ types:
       description: Value of suspicious object
       required: true
   process_identifiers:
-    endpoint:
+    endpoint_name:
       title: Endpoint
       type: string
-      description: Hostname or agentGuid of the endpoint to terminate process on
-      required: true
+      description: Hostname or macaddr of the endpoint to collect file from
+      required: false
       example: clientPC
+    agent_guid:
+      title: Agent GUID
+      type: string
+      description: Agent GUID of the endpoint to collect file from
+      required: false
+      example: cb9c8412-1f64-4fa0-a36b-76bf41a07ede
     file_sha1:
       title: File SHA1
       type: string
@@ -323,12 +329,18 @@ types:
       required: false
       example: v1rus.exe
   endpoint_identifiers:
-    endpoint:
+    endpoint_name:
       title: Endpoint
       type: string
-      description: Hostname or agentGuid of the endpoint
-      required: true
+      description: Hostname or macaddr of the endpoint to collect file from
+      required: false
       example: clientPC
+    agent_guid:
+      title: Agent GUID
+      type: string
+      description: Agent GUID of the endpoint to collect file from
+      required: false
+      example: cb9c8412-1f64-4fa0-a36b-76bf41a07ede
     description:
       title: Description
       type: string
@@ -368,12 +380,18 @@ types:
       required: false
       example: Quarantine e-mail message
   collect_files:
-    endpoint:
+    endpoint_name:
       title: Endpoint
       type: string
       description: Hostname or macaddr of the endpoint to collect file from
-      required: true
+      required: false
       example: clientPC
+    agent_guid:
+      title: Agent GUID
+      type: string
+      description: Agent GUID of the endpoint to collect file from
+      required: false
+      example: cb9c8412-1f64-4fa0-a36b-76bf41a07ede
     file_path:
       title: File Path
       type: string

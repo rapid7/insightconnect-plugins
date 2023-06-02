@@ -80,7 +80,8 @@
     "input": {
       "collect_files": [
         {
-          "endpoint": "client1",
+          "endpoint_name": "client1",
+          "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede",
           "file_path": "C:/virus.exe",
           "description": "collect malicious file"
         }
@@ -416,7 +417,8 @@
       "endpoint_identifiers": [
         {
           "description": "TEST isolate endpoint",
-          "endpoint": "client1"
+          "endpoint_name": "client1",
+          "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede"
         }
       ]
     },
@@ -435,7 +437,8 @@
       "endpoint_identifiers": [
         {
           "description": "restore endpoint r7",
-          "endpoint": "client1"
+          "endpoint_name": "client1",
+          "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede"
         }
       ]
     },
@@ -511,7 +514,8 @@
     "input": {
       "process_identifiers": [
         {
-          "endpoint": "client1",
+          "endpoint_name": "client1",
+          "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede",
           "file_sha1": "984afc7aaa2718984e15e3b5ab095b519a081321"
         }
       ]
