@@ -1,10 +1,10 @@
 import json
 import logging
 import os
+from typing import Any, Dict, Union
 
 from icon_python_3_script.connection import Connection
 from insightconnect_plugin_runtime.action import Action
-from typing import Union, Dict, Any
 
 
 class Util:
