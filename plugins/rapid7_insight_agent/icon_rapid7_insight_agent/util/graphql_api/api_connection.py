@@ -84,63 +84,41 @@ class ApiConnection:
         failed = results_object.get("data").get("unquarantineAssets").get("results")[0].get("failed")
         return not failed
 
-    def quarantine_list(self, agent_id_list: List[str], advertisement_period: int) -> Tuple[List[str], List[str]]:
+    def quarantine_list(self, agent_hostnames: List[str], advertisement_period: int, quarantine: bool = True) -> Tuple[List[str], List[str]]:
         """
-        Quarantine an agent given a list of agent IDs
+        Quarantine or un-quarantine an agent given a list of agent hostnames
 
-        :param agent_id_list: List of agent IDs to quarantine
-        :param advertisement_period: Amount of time, in seconds, to try to take the quarantine action
+        :param agent_hostnames: List of agent hostnames to quarantine or un-quarantine
+        :param advertisement_period: Amount of time, in seconds, to try to take the quarantine/un-quarantine action
+        :param quarantine: Boolean value, True to quarantine, False to un-quarantine
 
-        :return: Two lists containing asset ids for successful or unsuccessful quarantines
+        :return: Two lists containing hostnames for successful or unsuccessful quarantines/un-quarantines
         """
 
         # Create empty lists for successful & unsuccessful
-        successful_quarantine = []
-        unsuccessful_quarantine = []
+        successful_operations = []
+        unsuccessful_operations = []
 
         # Raise exception if the provided list is empty
-        self._check_empty(agent_id_list)
+        self._check_empty(agent_hostnames)
 
         # Convert each hostname to an agent ID
-        agent_id_list = self._convert_hostnames_to_id(hostnames=agent_id_list)
+        agent_hostname_id_list = []
+        for hostname in agent_hostnames:
+            try:
+                agent_hostname_id_list.append((hostname, self.get_agent(hostname).get("id")))
+            except PluginException:
+                unsuccessful_operations.append(hostname)
 
         # For each agent ID in the list, perform quarantine
-        for agent in agent_id_list:
-            result = self.quarantine(agent_id=agent, advertisement_period=advertisement_period)
+        for hostname, agent_id in agent_hostname_id_list:
+            result = self.quarantine(advertisement_period, agent_id) if quarantine else self.unquarantine(agent_id)
             if result:
-                successful_quarantine.append(agent)
+                successful_operations.append(hostname)
             else:
-                unsuccessful_quarantine.append(agent)
+                unsuccessful_operations.append(hostname)
 
-        return successful_quarantine, unsuccessful_quarantine
-
-    def unquarantine_list(self, agent_id_list: List[str]) -> Tuple[List[str], List[str]]:
-        """
-        Unquarantine an agent given a list of agent IDs
-        :param agent_id_list: List of agent IDs to unquarantine
-
-        :return: Two lists containing asset ids for successful & unsuccessful unquarantine operations.
-        """
-
-        # Create empty lists for successful & unsuccessful
-        successful_unquarantine = []
-        unsuccessful_unquarantine = []
-
-        # Raise exception if the provided list is empty
-        self._check_empty(agent_id_list)
-
-        # Convert each hostname to an agent ID
-        agent_id_list = self._convert_hostnames_to_id(hostnames=agent_id_list)
-
-        # For each agent ID in the list, perform unquarantine
-        for agent in agent_id_list:
-            result = self.unquarantine(agent_id=agent)
-            if result:
-                successful_unquarantine.append(agent)
-            else:
-                unsuccessful_unquarantine.append(agent)
-
-        return successful_unquarantine, unsuccessful_unquarantine
+        return successful_operations, unsuccessful_operations
 
     def get_agent_status(self, agent_id: str) -> dict:
         """
@@ -320,16 +298,6 @@ class ApiConnection:
             data="NA",
         )
 
-    def _get_agent_id(self, hostname: str) -> str:
-        """
-        Retrieve the ID for an agent based on their hostname
-        :param hostname: Hostname of the device/agent
-        :return: The agent ID
-        """
-
-        agent_details = self.get_agent(hostname)
-        return agent_details.get("id")
-
     def _get_next_page_of_agents(self, results_object: dict) -> (bool, dict, list):
         """
         In the case of multiple pages of returned agents, this will go through each page and append
@@ -416,19 +384,6 @@ class ApiConnection:
                 cause="Insight Agent API returned data in an unexpected format.\n",
                 data=str(results_object),
             )
-
-        return agent_list
-
-    def _convert_hostnames_to_id(self, hostnames: List[str]) -> List[str]:
-        """
-        Function designed for the `quarantine_multiple` action which converts
-        the array of hostnames to an array of agent IDs
-        :param hostnames: Array containing the hostnames as a string
-        :return: Array containing host IDs
-        """
-        agent_list = []
-        for agent in hostnames:
-            agent_list.append(self._get_agent_id(agent))
 
         return agent_list
 

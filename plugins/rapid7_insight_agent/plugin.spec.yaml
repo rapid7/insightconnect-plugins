@@ -5,7 +5,7 @@ name: rapid7_insight_agent
 title: Rapid7 Insight Agent
 description: Using the Insight Agent plugin from InsightConnect, you can quarantine, unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices across your organization
 version: 2.0.0
-supported_versions: ["Rapid7 Insight Agent 2023-04-06"]
+supported_versions: ["Rapid7 Insight Agent 2023-06-02"]
 vendor: rapid7
 support: rapid7
 status: []
