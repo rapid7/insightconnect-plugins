@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ThreatsRetrieveInput, ThreatsRetrieveOutput
 
 # Custom imports below
 import datetime
 
 
-class ThreatsRetrieve(komand.Action):
+class ThreatsRetrieve(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="threats_retrieve",

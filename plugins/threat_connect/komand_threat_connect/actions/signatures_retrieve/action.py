@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SignaturesRetrieveInput, SignaturesRetrieveOutput
 
 # Custom imports below
 import datetime
 
 
-class SignaturesRetrieve(komand.Action):
+class SignaturesRetrieve(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="signatures_retrieve",

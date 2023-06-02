@@ -1,47 +1,47 @@
 {
-	"spec": "266f82a684e5915368894f0e1fd1dbf8",
-	"manifest": "d5d8b21b9d31b63efa556b03e70a1da6",
-	"setup": "045b85028db4bda57531526f6e3f981d",
+	"spec": "cd042e04e48f3241138a481e87748767",
+	"manifest": "8912377b90b3fa3e72266027ef562f76",
+	"setup": "b5219e176b81361d272bb9a154d40fa4",
 	"schemas": [
 		{
 			"identifier": "bulk_indicator_download/schema.py",
-			"hash": "a79a68e3390fa2cdae8703ed3b8ea8bb"
+			"hash": "b641b830fc009d3d73d0b0aebb9ad7be"
 		},
 		{
 			"identifier": "create_adversary/schema.py",
-			"hash": "2d407006d4eb98bc360c903c21e5ddae"
+			"hash": "1e4d8797c291b2aca70d1f0688112c44"
 		},
 		{
 			"identifier": "create_task/schema.py",
-			"hash": "bef3d3a3fa60e87dbcdf4bdf164f8e77"
+			"hash": "8d9fdbbb2a6810ffb0c362901c2ad9d5"
 		},
 		{
 			"identifier": "delete_adversary/schema.py",
-			"hash": "c34e8751d63ba5e5c739e31075ed63ab"
+			"hash": "ac7505fee559abd3f0a582556c001d1b"
 		},
 		{
 			"identifier": "emails_retrieve/schema.py",
-			"hash": "49f3c2a48517504218527eeeb40f1ec4"
+			"hash": "4baed3af37351ea6f8d282f3d6a9ec64"
 		},
 		{
 			"identifier": "incidents_retrieve/schema.py",
-			"hash": "3734068711d0a88b6d7f1e6c96cc96e5"
+			"hash": "0332daa2662ea3d0dec67e7ef6064a19"
 		},
 		{
 			"identifier": "signatures_retrieve/schema.py",
-			"hash": "7437a136dab5900e51066f1904c17c7f"
+			"hash": "0d943827a5937a194cf272119e94048a"
 		},
 		{
 			"identifier": "threats_retrieve/schema.py",
-			"hash": "f594a0ab76eeab462b712fbf210e155b"
+			"hash": "c0489d3a30c30d37052bb3126a47ff02"
 		},
 		{
 			"identifier": "victims_retrieve/schema.py",
-			"hash": "875b190949b2b2e6064531b7573e1ad9"
+			"hash": "de1a76738e85a07ce01a154119a65228"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "3d1c1ea7479d5a77a37c092713078393"
+			"hash": "71caa5c726f332c5f6e1c346b87e83ad"
 		}
 	]
 }
