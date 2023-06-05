@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import EmailsRetrieveInput, EmailsRetrieveOutput
 
 # Custom imports below
 
 
-class EmailsRetrieve(komand.Action):
+class EmailsRetrieve(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="emails_retrieve",
