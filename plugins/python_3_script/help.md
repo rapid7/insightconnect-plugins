@@ -132,7 +132,7 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 
 # Version History
 
-* 4.0.5 - Updated the SDK version to include output masking
+* 4.0.5 - Updated the SDK version to include output masking | Updated all dependencies to the newest versions
 * 4.0.4 - Update Pyyaml to version 6.0.0
 * 4.0.3 - Run: Fix logging issue 
 * 4.0.2 - Run: Fix issue with indentation where users have non-empty credentials for input function
