@@ -7,7 +7,7 @@ from unittest import TestCase
 from unittest.mock import patch
 from parameterized import parameterized
 
-from unit_test.util import Util
+from util import Util
 from icon_powershell.actions.powershell_string import PowershellString
 
 
