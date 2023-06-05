@@ -28,8 +28,8 @@ The connection configuration accepts the following parameters. SSL is enforced f
 |credentials|credential_username_password|None|False|Username and password|None|{"username": "user", "password": "mypassword"}|
 |kerberos|kerberos|None|False|Connection information required for Kerberos|None| {"kdc": "10.0.1.11", "domain": "EXAMPLE.domain"}|
 |port|integer|5986|False|Port number, defaults are 5986 for SSL and 5985 for unencrypted|None|5986|
-|script_secret_key|credential_secret_key|None|False|Credential secret key available in script as PowerShell variable (`$secretKey`)|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|script_username_and_password|credential_username_password|None|False|Username and password available in script as PowerShell variables (`$username`, `$password`)|None|{"username": "user", "password": "mypassword"}||script_username_and_password|credential_username_password|None|False|Username and password available in script as PowerShell variables |None|{"username": "user", "password": "mypassword"}|
+|script_secret_key|credential_secret_key|None|False|Credential secret key available in script as PowerShell variable (`$secret_key`)|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|script_username_and_password|credential_username_password|None|False|Username and password available in script as PowerShell variables (`$username`, `$password`)|None|{"username": "user", "password": "mypassword"}|
 
 Example input:
 
@@ -188,6 +188,7 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 # Version History
 
+* 3.0.2 - Updated the SDK version to include output masking | Updated all the dependencies to the newest versions
 * 3.0.1 - Bug fix - Fix issue where single quotes in password causes parsing error
 * 3.0.0 - Move custom script credentials to Connection | Update runtime to insightconnect_plugin_runtime
 * 2.2.0 - Add custom credentials in Execute Script and PowerShell String actions | Update plugin to allow unencrypted connections when connection is targeting port 5985
