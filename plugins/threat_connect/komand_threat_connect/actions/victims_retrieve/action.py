@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import VictimsRetrieveInput, VictimsRetrieveOutput
 
 # Custom imports below
 
 
-class VictimsRetrieve(komand.Action):
+class VictimsRetrieve(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="victims_retrieve",
