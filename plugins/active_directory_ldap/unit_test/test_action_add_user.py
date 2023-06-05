@@ -1,12 +1,7 @@
-import os
-import sys
-
 from unittest import TestCase, mock
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_active_directory_ldap.actions.add_user import AddUser
 from komand_active_directory_ldap.actions.add_user.schema import Input, Output
-sys.path.append(os.path.abspath("../"))
-
 from common import MockConnection
 from common import MockServer
 from common import default_connector
@@ -16,7 +11,6 @@ class TestActionAddUser(TestCase):
     @mock.patch("ldap3.Server", mock.MagicMock(return_value=MockServer))
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection()))
     @default_connector(action=AddUser())
-
     def test_add_user(self, action):
         actual = action.run(
             {
