@@ -11,6 +11,7 @@ class TestActionAddUser(TestCase):
     @mock.patch("ldap3.Server", mock.MagicMock(return_value=MockServer))
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection()))
     @default_connector(action=AddUser())
+
     def test_add_user(self, action):
         actual = action.run(
             {
