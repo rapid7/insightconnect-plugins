@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="powershell-rapid7-plugin",
-      version="3.0.1",
+      version="3.0.2",
       description="Run a PowerShell script",
       author="rapid7",
       author_email="",

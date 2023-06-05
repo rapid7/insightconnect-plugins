@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "PowerShell"
 Vendor = "rapid7"
-Version = "3.0.1"
+Version = "3.0.2"
 Description = "Run a PowerShell script"
 
 
