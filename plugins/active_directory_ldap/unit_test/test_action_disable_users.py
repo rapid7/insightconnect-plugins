@@ -4,9 +4,9 @@ from unittest import TestCase, mock
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_active_directory_ldap.actions.disable_users import DisableUsers
 from komand_active_directory_ldap.actions.disable_users.schema import Input, Output
-from unit_test.common import MockServer
-from unit_test.common import MockConnection
-from unit_test.common import default_connector
+from common import MockConnection
+from common import MockServer
+from common import default_connector
 
 
 class TestActionDisableUsers(TestCase):
