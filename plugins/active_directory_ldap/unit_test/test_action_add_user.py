@@ -1,7 +1,12 @@
+import os
+import sys
+
 from unittest import TestCase, mock
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_active_directory_ldap.actions.add_user import AddUser
 from komand_active_directory_ldap.actions.add_user.schema import Input, Output
+sys.path.append(os.path.abspath("../"))
+
 from unit_test.common import MockConnection
 from unit_test.common import MockServer
 from unit_test.common import default_connector
