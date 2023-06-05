@@ -1,9 +1,9 @@
 from unittest import TestCase, mock
 from komand_active_directory_ldap.actions.move_object import MoveObject
 from komand_active_directory_ldap.actions.move_object.schema import Input, Output
-from unit_test.common import MockServer
-from unit_test.common import MockConnection
-from unit_test.common import default_connector
+from common import MockConnection
+from common import MockServer
+from common import default_connector
 
 
 class TestActionMoveObject(TestCase):
