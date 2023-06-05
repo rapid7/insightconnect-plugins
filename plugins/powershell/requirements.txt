@@ -2,6 +2,6 @@
 # All dependencies must be version-pinned, eg. requests==1.2.0
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 git+https://github.com/komand/pywinrm.git@v0.3.1dev0#pywinrm
-requests-kerberos==0.12.0
-requests-credssp==1.1.0
+requests-kerberos==0.14.0
+requests-credssp==2.0.0
 parameterized==0.8.1
