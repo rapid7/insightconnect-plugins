@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="html-rapid7-plugin",
-      version="1.2.2",
+      version="1.2.3",
       description="Validate HTML, convert a HTML document to another format, or strip a HTML document of all tags",
       author="rapid7",
       author_email="",

@@ -1,5 +1,5 @@
 from unittest import TestCase
-from komand_html.actions.text import Text
+from icon_html.actions.text import Text
 
 
 class TestText(TestCase):
