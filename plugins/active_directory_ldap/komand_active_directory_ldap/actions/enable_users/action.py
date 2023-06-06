@@ -19,10 +19,8 @@ class EnableUsers(insightconnect_plugin_runtime.Action):
             )
 
         enabled_users = self.connection.client.manage_users(params.get(Input.DISTINGUISHED_NAMES), True)
-        success = not bool(enabled_users.get("failures"))
 
         return {
-            Output.ALL_OPERATIONS_SUCCEEDED: success,
-            Output.SUCCESSFUL_ENABLEMENTS: enabled_users.get("successes"),
-            Output.UNSUCCESSFUL_ENABLEMENTS: enabled_users.get("failures"),
+            Output.COMPLETED: enabled_users.get("successes"),
+            Output.FAILED: enabled_users.get("failures"),
         }
