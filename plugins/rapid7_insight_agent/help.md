@@ -71,15 +71,18 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|failed|[]string|False|List of unsuccessfully quarantined hosts|["abcdef123"]|
+|failed|[]quarantine_multiple_error|False|List of unsuccessfully quarantined hosts|[{"hostname": "abcdef123", "error": "Hostname could not be found"}]|
 |completed|[]string|False|List of successfully quarantined hosts|["abcdef123"]|
 
 Example output:
 
 ```
 {
-  "failed":[
-    "abcdef123"
+  "failed": [
+    {
+      "hostname": "abcdef123",
+      "error": "Hostname could not be found"
+    }
   ],
   "completed":[
     "abcdef123"
@@ -249,7 +252,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.0 - Udate action `Quarantine Multiple` outputs to Completed and Failed, removed All Operations Successful
+* 2.0.0 - Udate action `Quarantine Multiple` outputs to Completed and Failed, removed All Operations Successful, replaced output Agent IDs with Hostname
 * 1.2.0 - New action: `Quarantine Multiple`
 * 1.1.1 - Quarantine: Fix incorrect behavior for unquarantine when the agent ID is wrong
 * 1.1.0 - Cloud enabled

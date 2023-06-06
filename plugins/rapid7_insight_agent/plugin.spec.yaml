@@ -148,6 +148,17 @@ types:
       type: string
       description: Platform
       required: false
+  quarantine_multiple_error:
+    hostname:
+      title: Hostname
+      type: string
+      description: Hostname
+      required: false
+    error:
+      title: Error
+      type: string
+      description: Error
+      required: false
 connection:
   api_key:
     title: API Key
@@ -199,8 +210,8 @@ actions:
       failed:
         title: Failed
         description: List of unsuccessfully quarantined hosts
-        type: "[]string"
-        example: ["abcdef123"]
+        type: "[]quarantine_multiple_error"
+        example: [{"hostname": "abcdef123", "error": "Hostname could not be found"}]
         required: false
       completed:
         title: Completed

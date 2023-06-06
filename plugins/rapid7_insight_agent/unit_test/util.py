@@ -38,7 +38,6 @@ class Util:
 
             def raise_for_status(self):
                 pass
-
         if kwargs.get("json").get("query") == "{ organizations(first: 1) { edges { node { id name } } } }":
             return MockResponse("org_key.json.resp")
         elif kwargs.get("json").get("variables").get("agentID") == "goodID":
@@ -46,6 +45,12 @@ class Util:
         elif kwargs.get("json").get("variables").get("agentID") == "badID":
             return MockResponse("check_agent_status_bad.resp")
         elif kwargs.get("json").get("variables").get("agentID") == "goodIDQuarantine":
+            return MockResponse("quarantine.resp")
+        elif kwargs.get("json").get("variables").get("agentID") == "a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce" and kwargs.get("json").get("query") == "query( $orgID: String! $agentID: String! ) { assets( orgId: $orgID ids: [$agentID] ){ agent { id quarantineState{ currentState } agentStatus } } }":
+            return MockResponse("unquarantine_check.resp")
+        elif kwargs.get("json").get("variables").get("agentID") == "a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce" and kwargs.get("json").get("query") == "mutation( $orgID:String! $agentID:String!) { unquarantineAssets( orgId:$orgID assetIds: [$agentID] ) { results { assetId failed } } }":
+            return MockResponse("unquarantine.resp")
+        elif kwargs.get("json").get("variables").get("agentID") == "a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce":
             return MockResponse("quarantine.resp")
         elif kwargs.get("json").get("variables").get("agentID") == "badIDQuarantine":
             return MockResponse("quarantine_bad.resp")
@@ -55,4 +60,6 @@ class Util:
             return MockResponse("quarantine_multiple_failure.resp")
         elif kwargs.get("json").get("variables").get("orgId") == "9de5069c5afe602b2ea0a04b66beb2c0":
             return MockResponse("get_agent_details.resp")
+        elif kwargs.get("json").get("variables").get("orgId") == "9de5069c5afe602b2ea0a04b66beb2c0":
+            return MockResponse()
         return "Not implemented"

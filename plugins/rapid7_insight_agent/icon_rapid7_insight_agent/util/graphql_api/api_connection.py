@@ -84,7 +84,7 @@ class ApiConnection:
         failed = results_object.get("data").get("unquarantineAssets").get("results")[0].get("failed")
         return not failed
 
-    def quarantine_list(self, agent_hostnames: List[str], advertisement_period: int, quarantine: bool = True) -> Tuple[List[str], List[str]]:
+    def quarantine_list(self, agent_hostnames: List[str], advertisement_period: int, quarantine: bool = True) -> Tuple[List[str], List[dict]]:
         """
         Quarantine or un-quarantine an agent given a list of agent hostnames
 
@@ -98,25 +98,24 @@ class ApiConnection:
         # Create empty lists for successful & unsuccessful
         successful_operations = []
         unsuccessful_operations = []
-
         # Raise exception if the provided list is empty
         self._check_empty(agent_hostnames)
 
-        # Convert each hostname to an agent ID
-        agent_hostname_id_list = []
-        for hostname in agent_hostnames:
-            try:
-                agent_hostname_id_list.append((hostname, self.get_agent(hostname).get("id")))
-            except PluginException:
-                unsuccessful_operations.append(hostname)
-
+        # Find agents from hostname
+        found_agents = self._get_agents(agent_hostnames)
+        # Filter missing agents
+        for agent_hostname in agent_hostnames:
+            if agent_hostname not in (dict(found_agents)):
+                unsuccessful_operations.append({"hostname": agent_hostname, "error": "Hostname could not be found"})
         # For each agent ID in the list, perform quarantine
-        for hostname, agent_id in agent_hostname_id_list:
+        for hostname, agent in found_agents:
+            agent_id = agent.get("id")
             result = self.quarantine(advertisement_period, agent_id) if quarantine else self.unquarantine(agent_id)
             if result:
                 successful_operations.append(hostname)
             else:
-                unsuccessful_operations.append(hostname)
+                unsuccessful_operations.append({"hostname": hostname, "error": f"Agent ID {agent_id} "
+                                                                               "could not be (un-)quarantined"})
 
         return successful_operations, unsuccessful_operations
 
@@ -216,7 +215,6 @@ class ApiConnection:
         :return: dict
         """
         result = self.session.post(self.endpoint, json=payload)
-
         try:
             result.raise_for_status()
         except Exception:
@@ -297,6 +295,44 @@ class ApiConnection:
             assistance="Check the agent input value and try again.",
             data="NA",
         )
+
+    def _get_agents(self, agents_input: List[str]) -> [Tuple[str, dict]]:
+        """
+        Get multiple agents by MAC address, IP address, or hostname.
+        :param agents_input: MAC address, IP address or hostnames
+        :return: List of found hostname and agent details, list of agent hostnames now found
+        """
+        agents = []
+        payload = {
+            "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
+            "variables": {"orgId": self.org_key},
+        }
+
+        self.logger.info("Getting all agents...")
+        results_object = self._post_payload(payload)
+
+        has_next_page = results_object.get("data").get("organization").get("assets").get("pageInfo").get("hasNextPage")
+        agents.extend(self._get_agents_from_result_object(results_object))
+        found_agents = []
+        self.logger.info("Initial agents received.")
+        for agent_input in agents_input:
+            agent_type = agent_typer.get_agent_type(agent_input)
+            agent = self._find_agent_in_agents(agents, agent_input, agent_type)
+            if agent:
+                found_agents.append((agent_input, agent))
+                agents_input.remove(agent_input)
+        # See if we have more pages of data, if so get next page and append until we reach the end
+        self.logger.info(f"Extra pages of agents: {has_next_page}")
+        if agents_input:
+            while has_next_page:
+                has_next_page, results_object, next_agents = self._get_next_page_of_agents(results_object)
+                for agent_input in agents_input:
+                    agent_type = agent_typer.get_agent_type(agent_input)
+                    agent = self._find_agent_in_agents(next_agents, agent_input, agent_type)
+                    if agent:
+                        found_agents.append(Tuple[agent_input, agent])
+                        agents_input.remove(agent_input)
+        return found_agents
 
     def _get_next_page_of_agents(self, results_object: dict) -> (bool, dict, list):
         """
