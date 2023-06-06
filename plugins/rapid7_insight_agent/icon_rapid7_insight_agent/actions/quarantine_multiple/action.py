@@ -1,6 +1,5 @@
 import insightconnect_plugin_runtime
 from .schema import QuarantineMultipleInput, QuarantineMultipleOutput, Input, Output, Component
-import logging
 # Custom imports below
 
 
@@ -20,7 +19,6 @@ class QuarantineMultiple(insightconnect_plugin_runtime.Action):
         successful_quarantine, unsuccessful_quarantine = self.connection.api.quarantine_list(
             agent_hostnames=agent_array, advertisement_period=interval, quarantine=quarantine_state
         )
-        logging.info(f"FINITO? {successful_quarantine} {unsuccessful_quarantine}")
         return {
             Output.COMPLETED: successful_quarantine,
             Output.FAILED: unsuccessful_quarantine,
