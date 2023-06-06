@@ -17,6 +17,10 @@ Hypertext Markup Language (HTML) is the standard markup language for documents d
 
 _This plugin does not contain any requirements._
 
+# Supported Product Versions
+
+* 2023-06-06
+
 # Documentation
 
 ## Setup
@@ -47,9 +51,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|docx|bytes|False|Docx File|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|docx|bytes|False|Docx File|UEsDBBQAAggIACEf91DPOFToaQEAAKgGAAA...|
 
 Example output:
 
@@ -79,10 +83,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|markdown_contents|string|False|Markdown Contents|
-|markdown_file|bytes|False|Markdown File|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|markdown_contents|string|False|Markdown Contents|Convert HTML to Markdown|
+|markdown_file|bytes|False|Markdown File|Q29udmVydCBIVE1MIHRvIE1hcmtkb3duCg==|
 
 Example output:
 
@@ -113,16 +117,16 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|html5_contents|string|False|HTML5 Contents|
-|html5_file|bytes|False|HTML5 File|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|html5_contents|string|False|HTML5 Contents|<title>Rapid7 InsightConnect</title>|
+|html5_file|bytes|False|HTML5 File|Jmx0OyFET0NUWVBFIGh0bWwmZ3Q7Cj...|
 
 Example output:
 
 ```
 {
-  "html5_contents": "&lt;!DOCTYPE html&gt;\n<html>\n<head>\n<title>\nRapid7 InsightConnect\n</title>\n</head>\n<body>\n<p>\nConvert HTML to HTML5\n</p>\n</body>\n</html>\n", 
+  "html5_contents": "&lt;!DOCTYPE html&gt;\n<html>\n<head>\n<title>\nRapid7 InsightConnect\n</title>\n</head>\n<body>\n<p>\nConvert HTML to HTML5\n</p>\n</body>\n</html>\n",
   "html5_file": "Jmx0OyFET0NUWVBFIGh0bWwmZ3Q7Cj..."
 }
 ```
@@ -147,9 +151,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|pdf|bytes|False|PDF File|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|pdf|bytes|False|PDF File|JVBERi0xLjUKJdDUxdgKNSAwIG9iago8PA...|
 
 Example output:
 
@@ -179,9 +183,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|validated|boolean|False|HTML Syntax Validation Status|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|validated|boolean|False|HTML Syntax Validation Status|True|
 
 Example output:
 
@@ -211,9 +215,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|epub|bytes|False|Epub file|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|epub|bytes|False|Epub file|UEsDBBQAAggAAPAe91BvYassFAAAABQAAAA...|
 
 Example output:
 
@@ -245,9 +249,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|text|string|False|String without HTML tags|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|text|string|False|String without HTML tags|Automate with InsightConnect!|
 
 Example output:
 
@@ -271,6 +275,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.3 - Action HTML5: fix error with encoding to file
 * 1.2.2 - Update to v4 Python plugin runtime
 * 1.2.1 - New spec and help.md format for the Extension Library
 * 1.2.0 - Update to add the Remove Scripts option to Text
