@@ -5,10 +5,11 @@ name: html
 title: HTML
 vendor: rapid7
 support: community
+supported_versions: [2023-06-06]
 status: []
 cloud_ready: true
 description: Validate HTML, convert a HTML document to another format, or strip a HTML document of all tags
-version: 1.2.2
+version: 1.2.3
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/html
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -41,6 +42,7 @@ actions:
         description: HTML Syntax Validation Status
         type: boolean
         required: false
+        example: true
   markdown:
     title: Markdown
     description: Convert HTML to Markdown
@@ -57,11 +59,13 @@ actions:
         description: Markdown Contents
         type: string
         required: false
+        example: Convert HTML to Markdown
       markdown_file:
         title: File
         description: Markdown File
         type: bytes
         required: false
+        example: Q29udmVydCBIVE1MIHRvIE1hcmtkb3duCg==
   html5:
     title: HTML5
     description: Convert HTML to HTML5
@@ -78,11 +82,13 @@ actions:
         description: HTML5 Contents
         type: string
         required: false
+        example: <title>Rapid7 InsightConnect</title>
       html5_file:
         title: File
         description: HTML5 File
         type: bytes
         required: false
+        example: Jmx0OyFET0NUWVBFIGh0bWwmZ3Q7Cj...
   pdf:
     title: PDF
     description: Convert HTML to PDF
@@ -99,6 +105,7 @@ actions:
         description: PDF File
         type: bytes
         required: false
+        example: JVBERi0xLjUKJdDUxdgKNSAwIG9iago8PA...
   epub:
     title: EPUB
     description: Convert HTML to EPUB
@@ -115,6 +122,7 @@ actions:
         description: Epub file
         type: bytes
         required: false
+        example: UEsDBBQAAggAAPAe91BvYassFAAAABQAAAA...
   docx:
     title: Windows Document
     description: Convert HTML to DOCX
@@ -131,6 +139,7 @@ actions:
         description: Docx File
         type: bytes
         required: false
+        example: UEsDBBQAAggIACEf91DPOFToaQEAAKgGAAA...
   text:
     title: Text
     description: Strip an HTML string of all tags and return only the text
@@ -140,7 +149,7 @@ actions:
         description: Document to transform
         type: string
         required: true
-        example: "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>"
+        example: <!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>
       remove_scripts:
         title: Remove Scripts
         description: Remove non-HTML scripts from the document
@@ -153,3 +162,4 @@ actions:
         description: String without HTML tags
         type: string
         required: false
+        example: Automate with InsightConnect!
