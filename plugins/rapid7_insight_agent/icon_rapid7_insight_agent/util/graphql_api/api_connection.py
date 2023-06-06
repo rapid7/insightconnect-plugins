@@ -84,7 +84,9 @@ class ApiConnection:
         failed = results_object.get("data").get("unquarantineAssets").get("results")[0].get("failed")
         return not failed
 
-    def quarantine_list(self, agent_hostnames: List[str], advertisement_period: int, quarantine: bool = True) -> Tuple[List[str], List[dict]]:
+    def quarantine_list(
+        self, agent_hostnames: List[str], advertisement_period: int, quarantine: bool = True
+    ) -> Tuple[List[str], List[dict]]:
         """
         Quarantine or un-quarantine an agent given a list of agent hostnames
 
@@ -114,8 +116,9 @@ class ApiConnection:
             if result:
                 successful_operations.append(hostname)
             else:
-                unsuccessful_operations.append({"hostname": hostname, "error": f"Agent ID {agent_id} "
-                                                                               "could not be (un-)quarantined"})
+                unsuccessful_operations.append(
+                    {"hostname": hostname, "error": f"Agent ID {agent_id} " "could not be (un-)quarantined"}
+                )
 
         return successful_operations, unsuccessful_operations
 
@@ -316,8 +319,7 @@ class ApiConnection:
         found_agents = []
         self.logger.info("Initial agents received.")
         for agent_input in agents_input:
-            agent_type = agent_typer.get_agent_type(agent_input)
-            agent = self._find_agent_in_agents(agents, agent_input, agent_type)
+            agent = self._find_agent_in_agents(agents, agent_input, "Host Name")
             if agent:
                 found_agents.append((agent_input, agent))
                 agents_input.remove(agent_input)
@@ -327,8 +329,7 @@ class ApiConnection:
             while has_next_page:
                 has_next_page, results_object, next_agents = self._get_next_page_of_agents(results_object)
                 for agent_input in agents_input:
-                    agent_type = agent_typer.get_agent_type(agent_input)
-                    agent = self._find_agent_in_agents(next_agents, agent_input, agent_type)
+                    agent = self._find_agent_in_agents(next_agents, agent_input, "Host Name")
                     if agent:
                         found_agents.append(Tuple[agent_input, agent])
                         agents_input.remove(agent_input)

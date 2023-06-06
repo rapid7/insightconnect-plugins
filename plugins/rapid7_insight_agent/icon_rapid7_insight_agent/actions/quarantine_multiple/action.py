@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import QuarantineMultipleInput, QuarantineMultipleOutput, Input, Output, Component
+
 # Custom imports below
 
 

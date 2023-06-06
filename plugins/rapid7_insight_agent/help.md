@@ -84,7 +84,7 @@ Example output:
       "error": "Hostname could not be found"
     }
   ],
-  "completed":[
+  "completed": [
     "abcdef123"
   ]
 }

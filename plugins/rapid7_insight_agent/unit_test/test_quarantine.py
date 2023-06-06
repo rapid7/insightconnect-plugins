@@ -8,7 +8,7 @@ from parameterized import parameterized
 sys.path.append(os.path.abspath("../"))
 from icon_rapid7_insight_agent.actions.quarantine.action import Quarantine
 from icon_rapid7_insight_agent.actions.quarantine.schema import Input
-from unit_test.util import Util
+from util import Util
 
 
 @patch("requests.sessions.Session.post", side_effect=Util.mocked_request)

@@ -8,7 +8,7 @@ from parameterized import parameterized
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from unit_test.util import Util
+from util import Util
 from icon_rapid7_insight_agent.actions.get_agent_details import GetAgentDetails
 from icon_rapid7_insight_agent.actions.get_agent_details.schema import Input
 
