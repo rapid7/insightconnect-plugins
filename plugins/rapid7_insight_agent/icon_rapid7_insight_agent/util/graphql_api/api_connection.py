@@ -103,7 +103,7 @@ class ApiConnection:
         # Create empty lists for successful & unsuccessful
         successful_operations = []
         not_found = list(set(agent_hostnames).difference(dict(found_agents)))
-        unsuccessful_operations=[{"hostname":hostname, "error":"Hostname could not be found"} for hostname in not_found]
+        unsuccessful_operations = [{"hostname": agent, "error": "Hostname could not be found"} for agent in not_found]
         # For each agent ID in the list, perform quarantine
         for hostname, agent in found_agents:
             agent_id = agent.get("id")
