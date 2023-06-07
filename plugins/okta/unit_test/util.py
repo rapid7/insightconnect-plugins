@@ -62,7 +62,6 @@ class Util:
                 return MockResponse(
                     200, "get_logs.json.resp", {"link": '<https://example.com/nextLink?q=next> rel="next"'}
                 )
-            return MockResponse(200, "get_logs.json.resp", {"link": ""})
         if url == "https://example.com/nextLink?q=next":
             return MockResponse(200, "get_logs_next_page.json.resp", {"link": ""})
         if url == "https://example.com/api/v1/groups/12345/users" and first_request:
