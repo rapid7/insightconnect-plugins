@@ -114,6 +114,9 @@ class OktaAPI:
     def list_events(self, parameters: dict) -> requests.Response:
         return self.make_request(method="GET", url=LIST_LOGS_ENDPOINT, params=parameters)
 
+    def get_next_page(self, next_page_link: str) -> list:
+        return self.make_request(method="GET", url=self.split_url(next_page_link))
+
     def get_all_pages(self, response: requests.Response) -> list:
         returned_data = response.json()
         links = response.headers.get("link").split(", ")

@@ -141,6 +141,8 @@
   ],
   "state": {
     "last_collection_timestamp": "2023-04-28T08:34:46",
+    "next_page_link": "https://example.com/nextLink?q=next",
     "status_code": 200
-  }
+  },
+  "has_more_pages": true
 }
