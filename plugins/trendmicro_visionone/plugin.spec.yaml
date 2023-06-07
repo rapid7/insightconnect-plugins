@@ -910,7 +910,7 @@ actions:
     output:
       multi_response:
         title: Multi Response
-        description: Add To Exception List Response Array
+        description: Add To Suspicious List Response Array
         type: "[]multi_response"
         required: true
         example: [ ]
