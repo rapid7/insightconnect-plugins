@@ -109,7 +109,7 @@ class AddToSuspiciousListOutput(insightconnect_plugin_runtime.Output):
     "multi_response": {
       "type": "array",
       "title": "Multi Response",
-      "description": "Add To Exception List Response Array",
+      "description": "Add To Suspicious List Response Array",
       "items": {
         "$ref": "#/definitions/multi_response"
       },
