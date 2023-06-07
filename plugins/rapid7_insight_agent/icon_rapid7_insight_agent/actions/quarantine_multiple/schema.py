@@ -14,9 +14,8 @@ class Input:
     
 
 class Output:
-    ALL_OPERATIONS_SUCCEEDED = "all_operations_succeeded"
-    FAILURE = "failure"
-    SUCCESS = "success"
+    COMPLETED = "completed"
+    FAILED = "failed"
     
 
 class QuarantineMultipleInput(insightconnect_plugin_runtime.Input):
@@ -67,29 +66,43 @@ class QuarantineMultipleOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "all_operations_succeeded": {
-      "type": "boolean",
-      "title": "All Operations Succeeded",
-      "description": "Informs a user any operations failed the (un)quarantine operations",
-      "order": 3
-    },
-    "failure": {
+    "completed": {
       "type": "array",
-      "title": "Unsuccessful (Un)Quarantine",
-      "description": "List of unsuccessfully quarantined hosts",
+      "title": "Completed",
+      "description": "List of successfully quarantined hosts",
       "items": {
         "type": "string"
       },
       "order": 2
     },
-    "success": {
+    "failed": {
       "type": "array",
-      "title": "Successful (Un)Quarantine",
-      "description": "List of successfully quarantined hosts",
+      "title": "Failed",
+      "description": "List of unsuccessfully quarantined hosts",
       "items": {
-        "type": "string"
+        "$ref": "#/definitions/quarantine_multiple_error"
       },
       "order": 1
+    }
+  },
+  "definitions": {
+    "quarantine_multiple_error": {
+      "type": "object",
+      "title": "quarantine_multiple_error",
+      "properties": {
+        "error": {
+          "type": "string",
+          "title": "Error",
+          "description": "Error",
+          "order": 2
+        },
+        "hostname": {
+          "type": "string",
+          "title": "Hostname",
+          "description": "Hostname",
+          "order": 1
+        }
+      }
     }
   }
 }

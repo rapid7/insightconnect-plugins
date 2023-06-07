@@ -1,23 +1,12 @@
 {
    "parameters":[
       [
-         ["agent_id"],
+         ["ivm-agent-win"],
          604800,
          true,
          {
-            "success": ["agent_id"],
-            "failure": [],
-            "all_operations_succeeded": true
-         }
-      ],
-      [
-         ["agent_id"],
-         604800,
-         false,
-         {
-            "success": ["agent_id"],
-            "failure": [],
-            "all_operations_succeeded": true
+            "completed": ["ivm-agent-win"],
+            "failed": []
          }
       ]
    ]

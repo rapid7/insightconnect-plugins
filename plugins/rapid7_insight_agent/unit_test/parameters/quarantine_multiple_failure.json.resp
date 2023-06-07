@@ -1,23 +1,23 @@
 {
    "parameters":[
       [
-         ["agent_id_bad"],
-         604800,
-         false,
-         {
-            "success": [],
-            "failure": ["agent_id_bad"],
-            "all_operations_succeeded": false
-         }
-      ],
-      [
-         ["agent_id_bad"],
+         "good_and_bad_agent_ids",
+         ["ivm-agent-win", "badIDQuarantine"],
          604800,
          true,
          {
-            "success": [],
-            "failure": ["agent_id_bad"],
-            "all_operations_succeeded": false
+            "completed": ["ivm-agent-win"],
+            "failed": [{"hostname": "badIDQuarantine", "error": "Hostname could not be found"}]
+         }
+      ],
+      [
+         "bad_agent_id",
+         ["badIDQuarantine"],
+         604800,
+         true,
+         {
+            "completed": [],
+            "failed": [{"hostname": "badIDQuarantine", "error": "Hostname could not be found"}]
          }
       ]
    ]

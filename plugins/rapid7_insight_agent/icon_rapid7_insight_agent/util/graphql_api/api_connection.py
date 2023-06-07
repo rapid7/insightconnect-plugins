@@ -84,63 +84,37 @@ class ApiConnection:
         failed = results_object.get("data").get("unquarantineAssets").get("results")[0].get("failed")
         return not failed
 
-    def quarantine_list(self, agent_id_list: List[str], advertisement_period: int) -> Tuple[List[str], List[str]]:
+    def quarantine_list(
+        self, agent_hostnames: List[str], advertisement_period: int, quarantine: bool = True
+    ) -> Tuple[List[str], List[dict]]:
         """
-        Quarantine an agent given a list of agent IDs
+        Quarantine or un-quarantine an agent given a list of agent hostnames
 
-        :param agent_id_list: List of agent IDs to quarantine
-        :param advertisement_period: Amount of time, in seconds, to try to take the quarantine action
+        :param agent_hostnames: List of agent hostnames to quarantine or un-quarantine
+        :param advertisement_period: Amount of time, in seconds, to try to take the quarantine/un-quarantine action
+        :param quarantine: Boolean value, True to quarantine, False to un-quarantine
 
-        :return: Two lists containing asset ids for successful or unsuccessful quarantines
+        :return: Two lists containing hostnames for successful or unsuccessful quarantines/un-quarantines
         """
-
-        # Create empty lists for successful & unsuccessful
-        successful_quarantine = []
-        unsuccessful_quarantine = []
-
         # Raise exception if the provided list is empty
-        self._check_empty(agent_id_list)
-
-        # Convert each hostname to an agent ID
-        agent_id_list = self._convert_hostnames_to_id(hostnames=agent_id_list)
-
+        self._check_empty(agent_hostnames)
+        # Find agents from hostname
+        found_agents = self._get_agents(agent_hostnames)
+        # Create empty lists for successful & unsuccessful
+        successful_operations = []
+        not_found = list(set(agent_hostnames).difference(dict(found_agents)))
+        unsuccessful_operations = [{"hostname": agent, "error": "Hostname could not be found"} for agent in not_found]
         # For each agent ID in the list, perform quarantine
-        for agent in agent_id_list:
-            result = self.quarantine(agent_id=agent, advertisement_period=advertisement_period)
+        for hostname, agent in found_agents:
+            agent_id = agent.get("id")
+            result = self.quarantine(advertisement_period, agent_id) if quarantine else self.unquarantine(agent_id)
             if result:
-                successful_quarantine.append(agent)
+                successful_operations.append(hostname)
             else:
-                unsuccessful_quarantine.append(agent)
-
-        return successful_quarantine, unsuccessful_quarantine
-
-    def unquarantine_list(self, agent_id_list: List[str]) -> Tuple[List[str], List[str]]:
-        """
-        Unquarantine an agent given a list of agent IDs
-        :param agent_id_list: List of agent IDs to unquarantine
-
-        :return: Two lists containing asset ids for successful & unsuccessful unquarantine operations.
-        """
-
-        # Create empty lists for successful & unsuccessful
-        successful_unquarantine = []
-        unsuccessful_unquarantine = []
-
-        # Raise exception if the provided list is empty
-        self._check_empty(agent_id_list)
-
-        # Convert each hostname to an agent ID
-        agent_id_list = self._convert_hostnames_to_id(hostnames=agent_id_list)
-
-        # For each agent ID in the list, perform unquarantine
-        for agent in agent_id_list:
-            result = self.unquarantine(agent_id=agent)
-            if result:
-                successful_unquarantine.append(agent)
-            else:
-                unsuccessful_unquarantine.append(agent)
-
-        return successful_unquarantine, unsuccessful_unquarantine
+                unsuccessful_operations.append(
+                    {"hostname": hostname, "error": f"Agent ID {agent_id} " "could not be (un-)quarantined"}
+                )
+        return successful_operations, unsuccessful_operations
 
     def get_agent_status(self, agent_id: str) -> dict:
         """
@@ -238,7 +212,6 @@ class ApiConnection:
         :return: dict
         """
         result = self.session.post(self.endpoint, json=payload)
-
         try:
             result.raise_for_status()
         except Exception:
@@ -320,15 +293,41 @@ class ApiConnection:
             data="NA",
         )
 
-    def _get_agent_id(self, hostname: str) -> str:
+    def _get_agents(self, agents_input: List[str]) -> [Tuple[str, dict]]:
         """
-        Retrieve the ID for an agent based on their hostname
-        :param hostname: Hostname of the device/agent
-        :return: The agent ID
+        Get multiple agents by MAC address, IP address, or hostname.
+        :param agents_input: MAC address, IP address or hostnames
+        :return: List of found hostname and agent details, list of agent hostnames now found
         """
+        agents = []
+        payload = {
+            "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
+            "variables": {"orgId": self.org_key},
+        }
 
-        agent_details = self.get_agent(hostname)
-        return agent_details.get("id")
+        self.logger.info("Getting all agents...")
+        results_object = self._post_payload(payload)
+
+        has_next_page = results_object.get("data").get("organization").get("assets").get("pageInfo").get("hasNextPage")
+        agents.extend(self._get_agents_from_result_object(results_object))
+        found_agents = []
+        self.logger.info("Initial agents received.")
+        for agent_input in agents_input:
+            agent = self._find_agent_in_agents(agents, agent_input, "Host Name")
+            if agent:
+                found_agents.append((agent_input, agent))
+                agents_input.remove(agent_input)
+        # See if we have more pages of data, if so get next page and append until we reach the end
+        self.logger.info(f"Extra pages of agents: {has_next_page}")
+        if agents_input:
+            while has_next_page:
+                has_next_page, results_object, next_agents = self._get_next_page_of_agents(results_object)
+                for agent_input in agents_input:
+                    agent = self._find_agent_in_agents(next_agents, agent_input, "Host Name")
+                    if agent:
+                        found_agents.append(Tuple[agent_input, agent])
+                        agents_input.remove(agent_input)
+        return found_agents
 
     def _get_next_page_of_agents(self, results_object: dict) -> (bool, dict, list):
         """
@@ -416,19 +415,6 @@ class ApiConnection:
                 cause="Insight Agent API returned data in an unexpected format.\n",
                 data=str(results_object),
             )
-
-        return agent_list
-
-    def _convert_hostnames_to_id(self, hostnames: List[str]) -> List[str]:
-        """
-        Function designed for the `quarantine_multiple` action which converts
-        the array of hostnames to an array of agent IDs
-        :param hostnames: Array containing the hostnames as a string
-        :return: Array containing host IDs
-        """
-        agent_list = []
-        for agent in hostnames:
-            agent_list.append(self._get_agent_id(agent))
 
         return agent_list
 

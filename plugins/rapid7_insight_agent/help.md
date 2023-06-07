@@ -16,7 +16,7 @@ The agent is used by [Rapid7 InsightIDR](https://www.rapid7.com/products/insight
 
 # Supported Product Versions
 
-* Rapid7 Insight Agent 2023-04-06
+* Rapid7 Insight Agent 2023-06-02
 
 # Documentation
 
@@ -71,21 +71,22 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|all_operations_succeeded|boolean|False|Informs a user any operations failed the (un)quarantine operations|True|
-|failure|[]string|False|List of unsuccessfully quarantined hosts|["abcdef123"]|
-|success|[]string|False|List of successfully quarantined hosts|["abcdef123"]|
+|failed|[]quarantine_multiple_error|False|List of unsuccessfully quarantined hosts|[{"hostname": "abcdef123", "error": "Hostname could not be found"}]|
+|completed|[]string|False|List of successfully quarantined hosts|["abcdef123"]|
 
 Example output:
 
 ```
 {
-  "failure":[
-    "abcdef123"
+  "failed": [
+    {
+      "hostname": "abcdef123",
+      "error": "Hostname could not be found"
+    }
   ],
-  "success":[
+  "completed": [
     "abcdef123"
-  ],
-  "all_operations_successful": true
+  ]
 }
 ```
 
@@ -251,6 +252,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Udate action `Quarantine Multiple` outputs to Completed and Failed, removed All Operations Successful, replaced output Agent IDs with Hostname
 * 1.2.0 - New action: `Quarantine Multiple`
 * 1.1.1 - Quarantine: Fix incorrect behavior for unquarantine when the agent ID is wrong
 * 1.1.0 - Cloud enabled
