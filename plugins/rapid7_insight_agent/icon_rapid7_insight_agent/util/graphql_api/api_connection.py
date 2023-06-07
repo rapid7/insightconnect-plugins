@@ -96,11 +96,8 @@ class ApiConnection:
 
         :return: Two lists containing hostnames for successful or unsuccessful quarantines/un-quarantines
         """
-
-
         # Raise exception if the provided list is empty
         self._check_empty(agent_hostnames)
-
         # Find agents from hostname
         found_agents = self._get_agents(agent_hostnames)
         # Create empty lists for successful & unsuccessful
