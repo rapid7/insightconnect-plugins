@@ -97,18 +97,16 @@ class ApiConnection:
         :return: Two lists containing hostnames for successful or unsuccessful quarantines/un-quarantines
         """
 
-        # Create empty lists for successful & unsuccessful
-        successful_operations = []
-        unsuccessful_operations = []
+
         # Raise exception if the provided list is empty
         self._check_empty(agent_hostnames)
 
         # Find agents from hostname
         found_agents = self._get_agents(agent_hostnames)
-        # Filter missing agents
-        for agent_hostname in agent_hostnames:
-            if agent_hostname not in (dict(found_agents)):
-                unsuccessful_operations.append({"hostname": agent_hostname, "error": "Hostname could not be found"})
+        # Create empty lists for successful & unsuccessful
+        successful_operations = []
+        not_found = list(set(agent_hostnames).difference(dict(found_agents)))
+        unsuccessful_operations=[{"hostname":hostname, "error":"Hostname could not be found"} for hostname in not_found]
         # For each agent ID in the list, perform quarantine
         for hostname, agent in found_agents:
             agent_id = agent.get("id")
@@ -119,7 +117,6 @@ class ApiConnection:
                 unsuccessful_operations.append(
                     {"hostname": hostname, "error": f"Agent ID {agent_id} " "could not be (un-)quarantined"}
                 )
-
         return successful_operations, unsuccessful_operations
 
     def get_agent_status(self, agent_id: str) -> dict:
