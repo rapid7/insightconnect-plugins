@@ -80,9 +80,29 @@ class QuarantineMultipleOutput(insightconnect_plugin_runtime.Output):
       "title": "Failed",
       "description": "List of unsuccessfully quarantined hosts",
       "items": {
-        "type": "string"
+        "$ref": "#/definitions/quarantine_multiple_error"
       },
       "order": 1
+    }
+  },
+  "definitions": {
+    "quarantine_multiple_error": {
+      "type": "object",
+      "title": "quarantine_multiple_error",
+      "properties": {
+        "error": {
+          "type": "string",
+          "title": "Error",
+          "description": "Error",
+          "order": 2
+        },
+        "hostname": {
+          "type": "string",
+          "title": "Hostname",
+          "description": "Hostname",
+          "order": 1
+        }
+      }
     }
   }
 }
