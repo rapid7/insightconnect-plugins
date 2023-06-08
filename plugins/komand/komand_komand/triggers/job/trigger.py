@@ -9,7 +9,7 @@ class Job(insightconnect_plugin_runtime.Trigger):
             name="job", description="Trigger on new jobs", input=JobInput(), output=JobOutput()
         )
 
-        self.status = "failed"
+        self.status = "success"
         self.last_job_id = ""
 
     def steps(self, job_id):
