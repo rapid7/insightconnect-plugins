@@ -378,7 +378,7 @@ Example output:
 {
   "response": [
     {
-      "success": True
+      "success": true
     }
   ]
 }
@@ -705,19 +705,19 @@ Example output:
 
 ```
 {
-  [
+  "click_logs": [
     {
-       "userEmailAddress": "user@example.com",
-       "url": "https://example.com",
-       "ttpDefinition": "Default URL Protection Definition",
-       "action": "warn",
-       "adminOverride": "N/A",
-       "userOverride": "None",
-       "scanResult": "malicious",
-       "category": "Compromised",
-       "userAwarenessAction": "N/A",
-       "date": "2019-04-23T19:50:28+0000",
-       "route": "inbound"
+      "userEmailAddress": "user@example.com",
+      "url": "https://example.com",
+      "ttpDefinition": "Default URL Protection Definition",
+      "action": "warn",
+      "adminOverride": "N/A",
+      "userOverride": null,
+      "scanResult": "malicious",
+      "category": "Compromised",
+      "userAwarenessAction": "N/A",
+      "date": "2019-04-23T19:50:28+0000",
+      "route": "inbound"
     }
   ]
 }
@@ -1057,6 +1057,7 @@ Example output:
 
 # Version History
 
+* 5.2.1 - Connection: add connection version 
 * 5.2.0 - New task added `Monitor SIEM Logs` | Update plugin to be cloud enabled
 * 5.1.0 - Create Blocked Sender Policy: Changed defaults to `individual_email_address` | New actions added `Delete Blocked Sender Policy`, `Track Messages`
 * 5.1.0 - Create Blocked Sender Policy: Changed defaults to `individual_email_address` | New actions added `Delete Blocked Sender Policy`, `Track Messages`
