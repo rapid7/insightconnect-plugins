@@ -13,7 +13,7 @@ from komand_mimecast.util.constants import (
 )
 from parameterized import parameterized
 
-from unit_test.util import Util
+from util import Util
 
 
 @patch("requests.request", side_effect=Util.mocked_request)
