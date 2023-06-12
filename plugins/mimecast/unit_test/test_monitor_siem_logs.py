@@ -10,7 +10,7 @@ sys.path.append(os.path.abspath("../"))
 
 from komand_mimecast.util.event import EventLogs
 from komand_mimecast.tasks import MonitorSiemLogs
-from unit_test.util import Util, FILE_ZIP_CONTENT_1, FILE_ZIP_CONTENT_2, SIEM_LOGS_HEADERS_RESPONSE
+from util import Util, FILE_ZIP_CONTENT_1, FILE_ZIP_CONTENT_2, SIEM_LOGS_HEADERS_RESPONSE
 
 
 @patch("requests.request", side_effect=Util.mocked_request)

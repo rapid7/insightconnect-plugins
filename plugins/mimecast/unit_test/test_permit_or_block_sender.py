@@ -9,7 +9,7 @@ sys.path.append(os.path.abspath("../"))
 from komand_mimecast.actions import PermitOrBlockSender
 from komand_mimecast.util.constants import BASIC_ASSISTANCE_MESSAGE, ERROR_CASES, VALIDATION_INVALID_EMAIL_ADDRESS_ERROR
 
-from unit_test.util import Util
+from util import Util
 
 
 @patch("requests.request", side_effect=Util.mocked_request)

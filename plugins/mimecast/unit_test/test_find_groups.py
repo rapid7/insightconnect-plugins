@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath("../"))
 
 from komand_mimecast.actions import FindGroups
 
-from unit_test.util import Util
+from util import Util
 
 
 @patch("requests.request", side_effect=Util.mocked_request)
