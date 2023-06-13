@@ -34,6 +34,11 @@ class TestMonitorLogs(TestCase):
                 Util.read_file_to_dict("expected/monitor_logs_2.json.exp"),
             ],
             [
+                "next_page",
+                Util.read_file_to_dict("inputs/monitor_logs_next_page.json.inp"),
+                Util.read_file_to_dict("expected/monitor_logs_3.json.exp"),
+            ],
+            [
                 "bad_request",
                 Util.read_file_to_dict("inputs/monitor_logs_bad_request.json.inp"),
                 Util.read_file_to_dict("expected/monitor_logs_bad_request.json.exp"),

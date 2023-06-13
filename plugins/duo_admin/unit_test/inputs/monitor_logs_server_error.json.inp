@@ -1,4 +1,6 @@
 {
   "last_collection_timestamp": 1000000000500,
-  "previous_logs_hashes": []
+  "previous_admin_log_hashes": [],
+  "previous_auth_log_hashes": [],
+  "previous_trust_monitor_event_hashes": []
 }

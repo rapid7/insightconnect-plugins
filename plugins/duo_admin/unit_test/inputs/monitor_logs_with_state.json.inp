@@ -1,7 +1,9 @@
 {
   "last_collection_timestamp": 1682843686000,
-  "previous_logs_hashes": [
-    "cdae94238e2a36b430140a30dc7eb46952b61668",
+  "previous_admin_log_hashes": [
     "9044a3c0964c859ae26aee09a0ad031b0546b0b4"
-  ]
+  ],
+  "previous_auth_log_hashes": [],
+  "previous_trust_monitor_event_hashes": [],
+  "status_code": 200
 }

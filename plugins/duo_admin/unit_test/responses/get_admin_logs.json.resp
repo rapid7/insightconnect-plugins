@@ -15,14 +15,6 @@
       "object": null,
       "timestamp": 1682836495,
       "username": "Admin"
-    },
-    {
-      "action": "admin_login",
-      "description": "{\"ip_address\": \"198.51.100.1\", \"role\": \"User Manager\", \"device\": \"+111111111\", \"factor\": \"push\", \"primary_auth_method\": \"Password\"}",
-      "isotimestamp": "2023-04-30T07:53:17+00:00",
-      "object": null,
-      "timestamp": 1682836495,
-      "username": "Admin"
     }
   ]
 }

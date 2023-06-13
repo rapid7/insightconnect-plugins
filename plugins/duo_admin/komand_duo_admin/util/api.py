@@ -118,35 +118,8 @@ class DuoAdminAPI:
     def get_admin_logs(self, parameters: dict) -> dict:
         return self.make_json_request(method="GET", path=ADMINISTRATOR_LOGS_ENDPOINT, params=parameters)
 
-    def get_all_admin_logs(self, parameters: dict, maxtime: int) -> list:
-        admin_logs = []
-        for _ in range(9999):
-            results = self.get_admin_logs(parameters).get("response", [])
-            if results and isinstance(results, list):
-                admin_logs.extend(results)
-                last_item = results[-1]
-                parameters["mintime"] = str(last_item.get("timestamp") + 1)
-            else:
-                break
-        logs_to_return = []
-        for log in admin_logs:
-            if log.get("timestamp") <= maxtime:
-                logs_to_return.append(log)
-        return logs_to_return
-
     def get_trust_monitor_events(self, parameters: dict) -> dict:
         return self.make_json_request(method="GET", path=TRUST_MONITOR_EVENTS_ENDPOINT, params=parameters)
-
-    def get_all_trust_monitor_events(self, parameters: dict) -> list:
-        trust_monitor_events = []
-        for _ in range(9999):
-            results = self.get_trust_monitor_events(parameters).get("response", {})
-            trust_monitor_events.extend(results.get("events", []))
-            offset = results.get("metadata", {}).get("next_offset")
-            parameters["offset"] = offset
-            if not offset:
-                break
-        return trust_monitor_events
 
     def get_headers(self, method: str, host: str, path: str, params: dict = {}) -> dict:
         # create canonical string
