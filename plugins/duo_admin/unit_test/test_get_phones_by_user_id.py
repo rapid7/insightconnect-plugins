@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_duo_admin.actions.get_phones_by_user_id.action import GetPhonesByUserId
-from unit_test.util import Util
+from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
 from komand_duo_admin.util.exceptions import ApiException

@@ -28,7 +28,8 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             state=MonitorLogsState(),
         )
 
-    def run(self, params={}, state={}):  # pylint: disable=unused-argument
+    # pylint: disable=unused-argument
+    def run(self, params={}, state={}):  # noqa: C901
         now = self.get_current_time()
         last_minute = now - timedelta(minutes=1)
         last_collection_timestamp = state.get(self.LAST_COLLECTION_TIMESTAMP)

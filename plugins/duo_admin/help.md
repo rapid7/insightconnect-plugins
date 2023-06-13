@@ -639,20 +639,20 @@ Example output:
 {
   "phoneList": [
     {
-       "activated": true,
-       "capabilities": [
-         "auto",
-         "push",
-         "sms",
-         "phone",
-         "mobile_otp"
-       ],
-       "lastSeen": "2019-01-15T23:02:20",
-       "number": "123456789",
-       "phoneId": "DUCUULF6HBMZ43IG9MBH",
-       "platform": "Google Android",
-       "smsPasscodesSent": false,
-       "type": "Mobile"
+      "activated": true,
+      "capabilities": [
+        "auto",
+        "push",
+        "sms",
+        "phone",
+        "mobile_otp"
+      ],
+      "lastSeen": "2019-01-15T23:02:20",
+      "number": "123456789",
+      "phoneId": "DUCUULF6HBMZ43IG9MBH",
+      "platform": "Google Android",
+      "smsPasscodesSent": false,
+      "type": "Mobile"
     }
   ]
 }
