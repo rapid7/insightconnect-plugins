@@ -1,12 +1,7 @@
-class ApiException(Exception):
-    def __init__(self, cause=None, assistance=None, data=None, status_code=None):
-        self.cause = cause
-        self.assistance = assistance
-        self.status_code = status_code
-        self.data = str(data) if data else ""
+from insightconnect_plugin_runtime.exceptions import PluginException
 
-    def __str__(self):
-        if self.data:
-            return f"An error occurred during plugin execution!\n\n{self.cause} {self.assistance}\nResponse was: {self.data}"
-        else:
-            return f"An error occurred during plugin execution!\n\n{self.cause} {self.assistance}"
+
+class ApiException(PluginException):
+    def __init__(self, cause=None, assistance=None, data=None, preset=None, status_code=None):
+        super().__init__(cause, assistance, data, preset)
+        self.status_code = status_code

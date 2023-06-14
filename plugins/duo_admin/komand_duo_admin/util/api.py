@@ -156,8 +156,7 @@ class DuoAdminAPI:
 
             if response.status_code == 400:
                 raise ApiException(
-                    cause=PluginException.causes[PluginException.Preset.BAD_REQUEST],
-                    assistance=PluginException.assistances[PluginException.Preset.BAD_REQUEST],
+                    preset=PluginException.Preset.BAD_REQUEST,
                     status_code=response.status_code,
                     data=response.text,
                 )
@@ -177,15 +176,13 @@ class DuoAdminAPI:
                 )
             if response.status_code == 429:
                 raise ApiException(
-                    cause=PluginException.causes[PluginException.Preset.RATE_LIMIT],
-                    assistance=PluginException.assistances[PluginException.Preset.RATE_LIMIT],
+                    preset=PluginException.Preset.RATE_LIMIT,
                     status_code=response.status_code,
                     data=response.text,
                 )
             if 400 < response.status_code < 500:
                 raise ApiException(
-                    cause=PluginException.causes[PluginException.Preset.UNKNOWN],
-                    assistance=PluginException.assistances[PluginException.Preset.UNKNOWN],
+                    preset=PluginException.Preset.UNKNOWN,
                     status_code=response.status_code,
                     data=response.text,
                 )
