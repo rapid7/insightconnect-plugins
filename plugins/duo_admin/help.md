@@ -513,7 +513,7 @@ Example output:
           "state": "Illinois"
         },
         "os": "Mac OS X",
-        "osVersion": "10.14.1",
+        "osVersion": "10.14.1"
       },
       "alias": "test",
       "application": {
@@ -539,7 +539,7 @@ Example output:
       "txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
       "user": {
         "groups": [
-          "InsightConnect Group",
+          "InsightConnect Group"
         ],
         "key": "DUW2DKA44RFYECTU8R1O",
         "name": "user@example.com"
@@ -606,6 +606,7 @@ Example output:
     "status": "active",
     "userId": "DUVSXMGU7NLM8H803W9L",
     "username": "example-user"
+  }
 }
 ```
 
