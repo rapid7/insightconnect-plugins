@@ -1,11 +1,14 @@
-import komand
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.helper import convert_dict_to_camel_case
 from .schema import AddUserInput, AddUserOutput, Input, Output, Component
 
 # Custom imports below
+from komand_duo_admin.util.constants import Cause, Assistance, MAX_ALIASES_NUMBER
+from komand_duo_admin.util.helpers import clean
 
 
-class AddUser(komand.Action):
+class AddUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_user",
@@ -15,38 +18,27 @@ class AddUser(komand.Action):
         )
 
     def run(self, params={}):
-        max_aliases = 4
+        aliases = params.get(Input.ALIASES)
 
-        alias = params.get(Input.ALIAS)
-        email = params.get(Input.EMAIL)
-        first_name = params.get(Input.FIRSTNAME)
-        last_name = params.get(Input.LASTNAME)
-        notes = params.get(Input.NOTES)
-        real_name = params.get(Input.REALNAME)
-        status = params.get(Input.STATUS)
-        username = params.get(Input.USERNAME)
+        if len(aliases) > MAX_ALIASES_NUMBER:
+            raise PluginException(cause=Cause.INVALID_REQUEST, assistance=Assistance.ALIASES_NUMBER_EXCEEDED)
 
-        if len(alias) > max_aliases:
-            raise PluginException(cause="Invalid input", assistance="Alias parameter must contain 4 or less aliases")
+        aliases_object = {}
+        if aliases:
+            for index, value in enumerate(aliases, 1):
+                aliases_object[f"alias{index}"] = value
 
-        aliases = {}
-        if alias:
-            for index, value in enumerate(alias, 1):
-                aliases[f"alias{index}"] = value
+        data = {
+            "username": params.get(Input.USERNAME),
+            "realname": params.get(Input.REALNAME),
+            "status": params.get(Input.STATUS),
+            "notes": params.get(Input.NOTES),
+            "email": params.get(Input.EMAIL),
+            "firstname": params.get(Input.FIRSTNAME),
+            "lastname": params.get(Input.LASTNAME),
+            **aliases_object,
+        }
 
-        try:
-            resp = self.connection.admin_api.add_user(
-                username=username,
-                realname=real_name,
-                status=status,
-                notes=notes,
-                email=email,
-                firstname=first_name,
-                lastname=last_name,
-                **aliases,
-            )
-            resp = komand.helper.clean(resp)
-            return {Output.RESPONSE: resp}
-        except RuntimeError as e:
-            self.logger.error(f"An error has occurred: {str(e)}")
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=f"An error has occurred: {str(e)}")
+        return {
+            Output.USER: clean(convert_dict_to_camel_case(self.connection.admin_api.add_user(data).get("response", {})))
+        }

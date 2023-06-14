@@ -3,12 +3,12 @@ from setuptools import setup, find_packages
 
 
 setup(name="duo_admin-rapid7-plugin",
-      version="3.4.0",
+      version="4.0.0",
       description="Duo is a trusted access solution for organizations. The Duo Admin plugin for Rapid7 InsightConnect allows users to manage and administrate their Duo organization",
       author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
-      install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_duo_admin']
       )

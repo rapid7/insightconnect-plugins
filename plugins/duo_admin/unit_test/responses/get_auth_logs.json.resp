@@ -1,0 +1,121 @@
+{
+  "response": {
+    "authlogs": [
+      {
+        "access_device": {
+          "browser": "Chrome",
+          "browser_version": "113.0.0.0",
+          "epkey": null,
+          "flash_version": null,
+          "hostname": null,
+          "ip": "198.51.100.1",
+          "is_encryption_enabled": "unknown",
+          "is_firewall_enabled": "unknown",
+          "is_password_set": "unknown",
+          "java_version": null,
+          "location": {
+            "city": "Los Angeles",
+            "country": "United States",
+            "state": "California"
+          },
+          "os": "Mac OS X",
+          "os_version": "10.15.7",
+          "security_agents": "unknown"
+        },
+        "adaptive_trust_assessments": {},
+        "alias": "unknown",
+        "application": {
+          "key": "DI8CODQSMK4BXPLYS47K",
+          "name": "User Portal"
+        },
+        "auth_device": {
+          "ip": null,
+          "key": "DP3PC0QBDWV78E7F7LU9",
+          "location": {
+            "city": null,
+            "country": null,
+            "state": null
+          },
+          "name": "Generic Smartphone"
+        },
+        "email": null,
+        "event_type": "enrollment",
+        "factor": "not_available",
+        "isotimestamp": "2023-05-22T09:52:13.041420+00:00",
+        "ood_software": null,
+        "reason": null,
+        "result": "success",
+        "timestamp": 1684749133,
+        "trusted_endpoint_status": "unknown",
+        "txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+        "user": {
+          "groups": [],
+          "key": "DU60BNA27X94XEOYB5VX",
+          "name": "new-user"
+        }
+      },
+      {
+        "access_device": {
+          "browser": "Chrome",
+          "browser_version": "113.0.0.0",
+          "epkey": null,
+          "flash_version": null,
+          "hostname": null,
+          "ip": "198.51.100.1",
+          "is_encryption_enabled": "unknown",
+          "is_firewall_enabled": "unknown",
+          "is_password_set": "unknown",
+          "java_version": null,
+          "location": {
+            "city": "Los Angeles",
+            "country": "United States",
+            "state": "California"
+          },
+          "os": "Mac OS X",
+          "os_version": "10.15.7",
+          "security_agents": "unknown"
+        },
+        "adaptive_trust_assessments": {},
+        "alias": "unknown",
+        "application": {
+          "key": "DI8CODQSMK4BXPLYS47K",
+          "name": "User Portal"
+        },
+        "auth_device": {
+          "ip": null,
+          "key": "DPS4SII7YZ7ISQITTBE4",
+          "location": {
+            "city": null,
+            "country": null,
+            "state": null
+          },
+          "name": "+111111111"
+        },
+        "email": null,
+        "event_type": "enrollment",
+        "factor": "not_available",
+        "isotimestamp": "2023-05-17T10:04:19.369345+00:00",
+        "ood_software": null,
+        "reason": null,
+        "result": "success",
+        "timestamp": 1684317859,
+        "trusted_endpoint_status": "unknown",
+        "txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+        "user": {
+          "groups": [
+            "Test Group"
+          ],
+          "key": "DUWZR0IUOT27EPXSCOI9",
+          "name": "example-user"
+        }
+      }
+    ],
+    "metadata": {
+      "next_offset": [
+        "1683730665255",
+        "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+      ],
+      "total_objects": 2
+    }
+  }
+}

@@ -1,11 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import EnrollUserInput, EnrollUserOutput, Input, Output, Component
 
 
 # Custom imports below
+from komand_duo_admin.util.helpers import clean
 
 
-class EnrollUser(komand.Action):
+class EnrollUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="enroll_user",
@@ -15,13 +16,11 @@ class EnrollUser(komand.Action):
         )
 
     def run(self, params={}):
-        username = params.get(Input.USERNAME)
-        email = params.get(Input.EMAIL)
-        expiration = params.get(Input.TIME_TO_EXPIRATION)
+        time_to_expiration = params.get(Input.TIMETOEXPIRATION)
 
-        try:
-            self.connection.admin_api.enroll_user(username=username, email=email, valid_secs=expiration)
-        except RuntimeError:
-            return {Output.SUCCESS: False}
-
-        return {Output.SUCCESS: True}
+        data = {
+            "username": params.get(Input.USERNAME),
+            "email": params.get(Input.EMAIL),
+            "valid_secs": str(time_to_expiration) if time_to_expiration and time_to_expiration > 0 else None,
+        }
+        return {Output.SUCCESS: self.connection.admin_api.enroll_user(clean(data)).get("stat") == "OK"}
