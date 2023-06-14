@@ -5,9 +5,12 @@ name: okta
 title: Okta
 vendor: rapid7
 support: rapid7
+cloud_ready: true
 status: []
+supported_versions: ["Okta API 25-04-2023"]
 description: Secure identity management and single sign-on to any application
-version: 3.6.3
+version: 4.0.0
+connection_version: 4
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/okta
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -19,248 +22,1329 @@ tags:
 - saml
 hub_tags:
   use_cases: [application_management, user_management]
-  keywords: [sso, provisioning, deprovisioning, saml]
+  keywords: [sso, provisioning, deprovisioning, saml, cloud_enabled]
   features: []
-enable_cache: true
+enable_cache: false
 types:
-  profile:
-    email:
-      type: string
-    secondEmail:
-      type: string
-    firstName:
-      type: string
-    lastName:
-      type: string
-    login:
-      type: string
-    mobilePhone:
-      type: string
-  changePassword:
-    href:
-      type: string
-  _links:
-    changePassword:
-      type: changePassword
-    changeRecoveryQuestion:
-      type: changePassword
-    deactivate:
-      type: changePassword
-    expirePassword:
-      type: changePassword
-    forgotPassword:
-      type: changePassword
-    resetFactors:
-      type: changePassword
-    resetPassword:
-      type: changePassword
   provider:
     type:
-      description: Provider type e.g. OKTA
-      type: string
-    name:
-      description: Provider name e.g. OKTA
-      type: string
-  recovery_question:
-    question:
-      description: Recovery question e.g. Who's a major player in the cowboy scene?
-      type: string
-    answer:
-      description: Recovery answer e.g. Annie Oakley
-      type: string
-  credentials:
-    password:
-      type: object
-    provider:
-      type: provider
-    recovery_question:
-      type: recovery_question
-  group:
-    name:
-      description: Group name
-      title: Name
-      type: string
-      required: false
-    created:
-      description: Created
-      title: Created
-      type: string
-      required: false
-    objectClass:
-      description: Object class
-      title: Object Class
-      type: '[]string'
-      required: false
-    lastUpdated:
-      description: Last updated
-      title: Last Updated
-      type: string
-      required: false
-    lastMembershipUpdated:
-      description: Last membership updated
-      title: Last Membership Updated
-      type: string
-      required: false
-    type:
-      description: Type
+      description: Provider type
       title: Type
       type: string
       required: false
-    id:
-      description: Group ID
-      title: ID
+      example: "OKTA"
+    name:
+      description: Provider name
+      title: Name
       type: string
       required: false
+      example: "OKTA"
+  recoveryQuestion:
+    question:
+      description: Question used for account recovery
+      title: Recovery Question
+      type: string
+      required: false
+      example: "Who's a major player in the cowboy scene?"
+    answer:
+      description: Answer for the recovery question
+      title: Answer
+      type: string
+      required: false
+      example: "Example Answer"
   password:
     value:
-      description: Password value e.g. tlpWENT2m
+      description: Password value
+      title: Value
       type: string
-  credentials_input:
+      required: false
+      example: "password-test-1234"
+  credentials:
     password:
+      description: Password details
+      title: Password
       type: password
+      required: false
+      example: {}
     provider:
+      description: Provider details
+      title: Provider
       type: provider
-    recovery_question:
-      type: recovery_question
-  user:
-    id:
+      required: false
+      example: {}
+    recoveryQuestion:
+      description: Recovery question details
+      title: Recovery Question
+      type: recoveryQuestion
+      required: false
+      example: {}
+  logo:
+    href:
+      title: HREF
+      description: HREF
       type: string
-    status:
+      required: false
+      example: "https://example.com"
+    name:
+      title: Name
+      description: Name of the logo
       type: string
-    created:
+      required: false
+      example: medium
+    type:
+      title: Type
+      description: Type of the file
       type: string
-    activated:
+      required: false
+      example: image/png
+  link:
+    href:
+      title: HREF
+      description: HREF
       type: string
-    statusChanged:
-      type: string
-    lastLogin:
-      type: string
-    lastUpdated:
-      type: string
-    passwordChanged:
-      type: string
-    profile:
-      type: profile
-    credentials:
-      type: credentials_input
-    links:
-      type: _links
-  user_group:
-    group_name:
-      type: string
-    group_id:
-      type: string
+      required: false
+      example: "https://example.com"
+  groupLinks:
+    logo:
+      title: Logo
+      description: Provides links to logo images for the group if available
+      type: "[]logo"
+      required: false
+      example: []
     users:
+      title: Users
+      description: Provides link to group members
+      type: link
+      required: false
+      example: {}
+    apps:
+      title: Applications
+      description: Provides link to all applications that are assigned to the group
+      type: link
+      required: false
+      example: {}
+  group:
+    name:
+      title: Name
+      description: Group name
+      type: string
+      required: false
+      example: Example Group
+    description:
+      title: Description
+      description: Group description
+      type: string
+      required: false
+      example: Example description
+    created:
+      title: Created
+      description: Timestamp when group was created
+      type: string
+      required: false
+      example: 2015-02-06T10:11:28.000Z
+    objectClass:
+      title: Object Class
+      description: Determines the group's profile
+      type: '[]string'
+      required: false
+      example: ["okta:user_group"]
+    lastUpdated:
+      title: Last Updated
+      description: Timestamp when group's profile was last updated
+      type: string
+      required: false
+      example: 2015-11-28T19:15:32.000Z
+    lastMembershipUpdated:
+      title: Last Membership Updated
+      description: Timestamp when group's memberships were last updated
+      type: string
+      required: false
+      example: 2015-11-28T19:15:32.000Z
+    type:
+      title: Type
+      description: Type of the group
+      type: string
+      required: false
+      example: OKTA_GROUP
+    id:
+      title: ID
+      description: Group ID
+      type: string
+      required: false
+      example: 00g1emaKYZTWRYYRRTSK
+    links:
+      title: Links
+      description: Links to related resources
+      type: groupLinks
+      required: false
+      example: {}
+  userType:
+    id:
+      description: ID
+      title: The identifier of the type
+      type: string
+      required: false
+      example: "otyfnjfba4ye7pgjB0g4"
+  userProfile:
+    login:
+      description: Login of the user
+      title: Login
+      type: string
+      required: false
+      example: "user@example.com"
+    email:
+      description: Primary email address of the user
+      title: Email
+      type: string
+      required: false
+      example: "user@example.com"
+    secondEmail:
+      description: Secondary email address of user typically used for account recovery
+      title: Secondary Email
+      type: string
+      required: false
+      example: "user@example.com"
+    firstName:
+      description: First name of the user
+      title: First Name
+      type: string
+      required: false
+      example: "Test"
+    lastName:
+      description: Last name of the user
+      title: Last Name
+      type: string
+      required: false
+      example: "Tester"
+    middleName:
+      description: Middle name(s) of the user
+      title: Middle Name
+      type: string
+      required: false
+      example: "Example"
+    honorificPrefix:
+      description: Honorific prefix(es) of the user, or title in most Western languages
+      title: Honorific Prefix
+      type: string
+      required: false
+      example: "Mr."
+    honorificSuffix:
+      description: Honorific suffix(es) of the user
+      title: Honorific Suffix
+      type: string
+      required: false
+      example: "Jr."
+    title:
+      description: Title of the user
+      title: Title
+      type: string
+      required: false
+      example: "Professor"
+    displayName:
+      description: Name of the user, suitable for display to end users
+      title: Display Name
+      type: string
+      required: false
+      example: "Test Tester"
+    nickName:
+      description: Casual way to address the user in real life
+      title: Nick Name
+      type: string
+      required: false
+      example: "test"
+    profileUrl:
+      description: URL of user's online profile
+      title: Profile URL
+      type: string
+      required: false
+      example: "https://example.com"
+    primaryPhone:
+      description: Primary phone number of user such as home number
+      title: Primary Phone
+      type: string
+      required: false
+      example: "+1-555-514-1337"
+    mobilePhone:
+      description: Mobile phone number of user
+      title: Mobile Phone
+      type: string
+      required: false
+      example: "+1-555-415-1337"
+    streetAddress:
+      description: Full street address component of user's address
+      title: Street Address
+      type: string
+      required: false
+      example: "301 Brannan St."
+    city:
+      description: City or locality component of user's address
+      title: City
+      type: string
+      required: false
+      example: "San Francisco"
+    state:
+      description: State or region component of user's address
+      title: State
+      type: string
+      required: false
+      example: "CA"
+    zipCode:
+      description: ZIP code or postal code component of user's address
+      title: ZIP Code
+      type: string
+      required: false
+      example: "94107"
+    countryCode:
+      description: Country name component of user's address
+      title: Country Code
+      type: string
+      required: false
+      example: "US"
+    postalAddress:
+      description: Mailing address component of user's address
+      title: Postal Address
+      type: string
+      required: false
+      example: "Test Tester, 301 Brannan St., San Francisco 94107"
+    preferredLanguage:
+      description: User's preferred written or spoken languages
+      title: Preferred Language
+      type: string
+      required: false
+      example: "en-US"
+    locale:
+      description: User's default location for purposes of localizing items such as currency, date time format, numerical representations, and so on
+      title: Locale
+      type: string
+      required: false
+      example: "en_US"
+    timezone:
+      description: User's time zone
+      title: Time Zone
+      type: string
+      required: false
+      example: "UTC"
+    userType:
+      description: Used to describe the organization to user relationship such as 'Employee' or 'Contractor'
+      title: User Type
+      type: string
+      required: false
+      example: "Employee"
+    employeeNumber:
+      description: Organization or company assigned unique identifier for the user
+      title: Employee Number
+      type: string
+      required: false
+      example: "123"
+    costCenter:
+      description: Name of a cost center assigned to user
+      title: Cost Center
+      type: string
+      required: false
+      example: "Example Cost Center"
+    organization:
+      description: Name of user's organization
+      title: Organization
+      type: string
+      required: false
+      example: "Okta"
+    division:
+      description: Name of user's division
+      title: Division
+      type: string
+      required: false
+      example: "R&D"
+    department:
+      description: Name of user's department
+      title: Department
+      type: string
+      required: false
+      example: "Engineering"
+    managerId:
+      description: The identifier of a user's manager
+      title: Manager ID
+      type: string
+      required: false
+      example: "00a0a1qwertYUIoplK0j2"
+    manager:
+      description: Name of the user's manager, suitable for display to end users
+      title: Manager
+      type: string
+      required: false
+      example: "Example Manager"
+  userLink:
+    href:
+      description: Hyperlink to the operation
+      title: Href
+      type: string
+      required: false
+      example: "https://example.com"
+    method:
+      description: Method of the request for the operation
+      title: Method
+      type: string
+      required: false
+      example: "POST"
+  userLinks:
+    self:
+      description: A self-referential link to this user
+      title: Self Link
+      type: userLink
+      required: false
+      example: {}
+    activate:
+      description: Lifecycle action to activate the user
+      title: Activate Link
+      type: userLink
+      required: false
+      example: {}
+    deactivate:
+      description: Lifecycle action to deactivate the user
+      title: Deactivate Link
+      type: userLink
+      required: false
+      example: {}
+    suspend:
+      description: Lifecycle action to suspend the user
+      title: Suspend Link
+      type: userLink
+      required: false
+      example: {}
+    unsuspend:
+      description: Lifecycle action to unsuspend the user
+      title: Unsuspend Link
+      type: userLink
+      required: false
+      example: {}
+    resetPassword:
+      description: Lifecycle action to trigger a password reset
+      title: Reset Password Link
+      type: userLink
+      required: false
+      example: {}
+    expirePassword:
+      description: Lifecycle action to expire the user's password
+      title: Expire Password Link
+      type: userLink
+      required: false
+      example: {}
+    resetFactors:
+      description: Lifecycle action to reset all MFA factors
+      title: Reset Factors Link
+      type: userLink
+      required: false
+      example: {}
+    unlock:
+      description: Lifecycle action to unlock a locked-out user
+      title: Unlock Link
+      type: userLink
+      required: false
+      example: {}
+    forgotPassword:
+      description: Resets a user's password by validating the user's recovery credential
+      title: Forgot Password Link
+      type: userLink
+      required: false
+      example: {}
+    changePassword:
+      description: Changes a user's password validating the user's current password
+      title: Change Password Link
+      type: userLink
+      required: false
+      example: {}
+    changeRecoveryQuestion:
+      description: Changes a user's recovery credential by validating the user's current password
+      title: Change Recovery Question Link
+      type: userLink
+      required: false
+      example: {}
+  user:
+      status:
+        description: Current status of the user
+        title: Status
+        type: string
+        required: false
+        example: "ACTIVE"
+      profile:
+        description: User profile properties
+        title: Profile
+        type: userProfile
+        required: false
+        example: {}
+      passwordChanged:
+        description: When the password was changed
+        title: Password Changed
+        type: string
+        required: false
+        example: "2023-01-01T11:11:11.000Z"
+      created:
+        description: When the user was created
+        title: Created
+        type: string
+        required: false
+        example: "2023-01-01T11:11:11.000Z"
+      activated:
+        description: When the user was activated
+        title: Activated
+        type: string
+        required: false
+        example: "2023-01-01T11:11:11.000Z"
+      lastUpdated:
+        description: When the user was last updated
+        title: Last Updated
+        type: string
+        required: false
+        example: "2023-01-01T11:11:11.000Z"
+      links:
+        description: Link relations for the user's current status
+        title: Links
+        type: userLinks
+        required: false
+        example: {}
+      lastLogin:
+        description: When the last login for the user was
+        title: Last Login
+        type: string
+        required: false
+        example: "2023-01-01T11:11:11.000Z"
+      credentials:
+        description: User's primary authentication and recovery credentials
+        title: Credentials
+        type: credentials
+        required: false
+        example: {}
+      id:
+        description: User ID
+        title: ID
+        type: string
+        required: false
+        example: "00a0a1qwertYUIoplK0j6"
+      statusChanged:
+        description: When the status of the user changed
+        title: Status Changed
+        type: string
+        required: false
+        example: "2023-01-01T11:11:11.000Z"
+      type:
+        description: Type of the user
+        title: User Type
+        type: userType
+        required: false
+        example: {}
+  user_group:
+    groupName:
+      title: Group Name
+      description: Name of the group
+      type: string
+      example: Example Group
+    groupId:
+      title: Group ID
+      description: ID of the group
+      type: string
+      example: "123456"
+    users:
+      title: Users
+      description: List of users
       type: "[]user"
+      example: []
   hints:
     allow:
-      title: Allow
+      description: Allowed Methods
+      title: Allowed Methods
       type: "[]string"
-      description: Allow
       required: false
+      example: ["POST"]
   deactivate:
     hints:
       title: Hints
       type: hints
       description: Hints
       required: false
+      example: {}
     href:
       title: HREF
       type: string
       description: HREF
       required: false
-  zone_links:
+      example: "https://example.com"
+  zoneLinks:
     deactivate:
       title: Deactivate
       type: deactivate
       description: Deactivate
       required: false
+      example: {}
     self:
       title: Self
       type: deactivate
       description: Self
       required: false
+      example: {}
   gateways:
     type:
       title: Type
       type: string
       description: Type
       required: false
+      example: RANGE
     value:
       title: Value
       type: string
       description: Value
       required: false
-  zone_list:
-    zone_links:
+      example: 198.51.100.1-198.51.100.1
+  zone:
+    links:
       title: Zone Links
-      type: zone_links
+      type: zoneLinks
       description: Zone links
       required: false
+      example: {}
     created:
       title: Created
       type: string
       description: Created
       required: false
+      example: 2023-03-31T20:13:46.284Z
     gateways:
       title: Gateways
       type: "[]gateways"
       description: Gateways
       required: false
+      example: []
     id:
       title: ID
       type: string
       description: ID
       required: false
+      example: 00a0a1qwertYUIoplK0j6
     lastUpdated:
       title: Last Updated
       type: string
       description: Last updated
       required: false
+      example: 2023-03-31T20:13:46.284Z
     name:
       title: Name
       type: string
       description: Name
       required: false
+      example: BlockedIpZone
     proxies:
       title: Proxies
       type: "[]gateways"
       description: Proxies
       required: false
+      example: []
     status:
       title: Status
       type: string
       description: Status
       required: false
+      example: ACTIVE
     system:
       title: System
       type: boolean
       description: System
       required: false
+      example: true
     type:
       title: Type
       type: string
       description: Type
       required: false
+      example: IP
+  factorLink:
+    href:
+      title: Href
+      description: Hyperlink to the resource
+      type: string
+      required: false
+      example: "https://example.com"
+    hints:
+      title: Hints
+      description: Hints for the hyperlink
+      type: hints
+      required: false
+      example: {}
+  factorLinks:
+    activate:
+      title: Activate Link
+      description: Polls factor for completion of the activation of verification
+      type: factorLink
+      required: false
+      example: {}
+    poll:
+      title: Poll Link
+      description: Lifecycle action to transition the factor to ACTIVE status
+      type: factorLink
+      required: false
+      example: {}
+    questions:
+      title: Questions Link
+      description: List of questions for the question factor type
+      type: factorLink
+      required: false
+      example: {}
+    resend:
+      title: Resend Link
+      description: List of delivery options to resend activation or factor challenge
+      type: factorLink
+      required: false
+      example: {}
+    self:
+      title: Self Link
+      description: The actual factor
+      type: factorLink
+      required: false
+      example: {}
+    send:
+      title: Send Link
+      description: List of delivery options to send an activation or factor challenge
+      type: factorLink
+      required: false
+      example: {}
+    verify:
+      title: Verify Link
+      description: Verify the factor
+      type: factorLink
+      required: false
+      example: {}
+  factorVerificationObject:
+    passCode:
+      title: Pass Code
+      description: OTP for next time window
+      type: string
+      required: false
+      example: "123456"
+    nextPassCode:
+      title: Next Pass Code
+      description: OTP for current time window
+      type: string
+      required: false
+      example: "654321"
+  factor:
+    embedded:
+      title: Embedded
+      description: Embedded resources related to the Factor
+      type: object
+      required: false
+      example: {}
+    links:
+      title: Factor Links
+      description: Discoverable resources related to the Factor
+      type: factorLinks
+      required: false
+      example: {}
+    created:
+      title: Created
+      description: Timestamp when the factor was created
+      type: string
+      required: false
+      example: "2023-01-01T11:11:11.000Z"
+    factorType:
+      title: Factor Type
+      description: Type of the factor
+      type: string
+      required: false
+      example: "question"
+    id:
+      title: ID
+      description: Unique key for the factor, a 20 character long system-generated ID
+      type: string
+      required: false
+      example: "00a0a1qwertYUIoplK0j7"
+    lastUpdated:
+      title: Last Updated
+      description: Timestamp when the factor was last updated
+      type: string
+      required: false
+      example: "2023-01-01T11:11:11.000Z"
+    profile:
+      title: Profile
+      description: Profile credentials
+      type: object
+      required: false
+      example: {}
+    provider:
+      title: Factor Provider
+      description: Provider of the factor
+      type: string
+      required: false
+      example: "OKTA"
+    status:
+      title: Factor Status
+      description: Status of the factor
+      type: string
+      required: false
+      example: "ACTIVE"
+    vendorName:
+      title: Vendor Name
+      description: Factor Vendor Name (Same as provider but for On-Prem MFA it depends on Administrator Settings)
+      type: string
+      required: false
+      example: "OKTA"
+    verify:
+      title: Verify
+      description: Specifies additional verification data for 'token' or 'token:hardware' factors
+      type: factorVerificationObject
+      required: false
+      example: {}
+  appUserLinks:
+    user:
+      title: User
+      description: Provides a link to the user
+      type: link
+      required: false
+      example: {}
+    app:
+      title: Application
+      description: Provides a link to the application
+      type: link
+      required: false
+      example: {}
+  appUserProfile:
+    email:
+      title: Email
+      description: User email
+      type: string
+      required: false
+      example: user@example.com
+    secondEmail:
+      title: Second Email
+      description: User second email
+      type: string
+      required: false
+      example: user@example.com
+    firstName:
+      title: First Name
+      description: User first name
+      type: string
+      required: false
+      example: Saml
+    lastName:
+      title: Last Name
+      description: User last name
+      type: string
+      required: false
+      example: Jackson
+    mobilePhone:
+      title: Mobile Phone
+      description: User mobile phone
+      type: string
+      required: false
+      example: 1111111
+    role:
+      title: Role
+      description: User role
+      type: string
+      required: false
+      example: CEO
+    profile:
+      title: Profile
+      description: User profile
+      type: string
+      required: false
+      example: Standard User
+  appCredentials:
+    userName:
+      title: Username
+      description: Username for application
+      type: string
+      required: false
+      example: test
+    password:
+      title: Password
+      description: Password for application
+      type: password
+      required: false
+      example: {}
+  applicationUser:
+    id:
+      title: ID
+      description: User ID
+      type: string
+      required: false
+      example: 00u11z6WHMYCGPCHCRFK
+    externalId:
+      title: External ID
+      description: User ID in the target application
+      type: string
+      required: false
+      example: 70c14cc17d3745e8a9f98d599a68329c
+    created:
+      title: Created
+      description: Timestamp when app user was created
+      type: string
+      required: false
+      example: 2014-06-24T15:27:59.000Z
+    lastUpdated:
+      title: Last Updated
+      description: Timestamp when app user was last updated
+      type: string
+      required: false
+      example: 2014-06-24T15:27:59.000Z
+    scope:
+      title: Scope
+      description: Scope
+      type: string
+      required: false
+      example: USER
+    status:
+      title: Status
+      description: Status of app user
+      type: string
+      required: false
+      example: ACTIVE
+    statusChanged:
+      title: Status Changed
+      description: Timestamp when status was last changed
+      type: string
+      required: false
+      example: 2014-06-24T15:27:59.000Z
+    passwordChanged:
+      title: Password Changed
+      description: Timestamp when app password last changed
+      type: string
+      required: false
+      example: 2014-06-24T15:27:59.000Z
+    syncState:
+      title: Synchronization state
+      description: Synchronization state for app user
+      type: string
+      required: false
+      example: SYNCHRONIZED
+    lastSync:
+      title: Last Synchronization
+      description: Timestamp when last sync operation was executed
+      type: string
+      required: false
+      example: 2014-06-24T15:27:59.000Z
+    credentials:
+      title: Credentials
+      description: Credentials for the assigned application
+      type: appCredentials
+      required: false
+      example: {}
+    profile:
+      title: Profile
+      description: App-specific profile for the user
+      type: appUserProfile
+      required: false
+      example: {}
+    links:
+      title: Links
+      description: Links to related resources
+      type: appUserLinks
+      required: false
+      example: {}
+  entityObject:
+    id:
+      title: ID
+      description: ID of the object
+      type: string
+      required: false
+      example: aA23dwvzR5tIZO33ek7W
+    type:
+      title: Type
+      description: Type of the object
+      type: string
+      required: false
+      example: User
+    alternateId:
+      title: Alternate ID
+      description: Alternative ID of the object
+      type: string
+      required: false
+      example: user@example.com
+    displayName:
+      title: Display Name
+      description: Display name of the object
+      type: string
+      required: false
+      example: Example User
+    detailEntry:
+      title: Display Name
+      description: Details about the object
+      type: object
+      required: false
+      example: '{"signOnModeType": "OPENID_CONNECT"}'
+  userAgent:
+    browser:
+      title: Browser
+      description: If the client is a web browser, this field identifies the type of web browser
+      type: string
+      required: false
+      example: CHROME
+    os:
+      title: OS
+      description: The operating system that the client runs on
+      type: string
+      required: false
+      example: Mac OS X
+    rawUserAgent:
+      title: Raw User Agent
+      description: A raw string representation of the user agent
+      type: string
+      required: false
+      example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36
+  geolocation:
+    lat:
+      title: Latitude
+      description: Latitude
+      type: float
+      required: false
+      example: 39.0469
+    lon:
+      title: Longitude
+      description: Longitude
+      type: float
+      required: false
+      example: -77.4903
+  geographicalContext:
+    geolocation:
+      title: Geolocation
+      description: Contains the geolocation coordinates
+      type: geolocation
+      required: false
+      example: {}
+    city:
+      title: City
+      description: The city that encompasses the area that contains the geolocation coordinates, if available
+      type: string
+      required: false
+      example: Ashburn
+    state:
+      title: State
+      description: Full name of the state or province that encompasses the area that contains the geolocation coordinates
+      type: string
+      required: false
+      example: Virginia
+    country:
+      title: Country
+      description: Full name of the country that encompasses the area that contains the geolocation coordinates
+      type: string
+      required: false
+      example: United States
+    postalCode:
+      title: Postal Code
+      description: Postal code of the area that encompasses the geolocation coordinates
+      type: string
+      required: false
+      example: 20149
+  clientObject:
+    id:
+      title: ID
+      description: For OAuth requests, this is the ID of the OAuth client making the request. For SSWS token requests, this is the ID of the agent making the request
+      type: string
+      required: false
+      example: okta.9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    userAgent:
+      title: User Agent
+      description: The user agent that is used by an actor to perform an action
+      type: userAgent
+      required: false
+      example: {}
+    geographicalContext:
+      title: Geographical Context
+      description: The physical location where the client is making its request from
+      type: geographicalContext
+      required: false
+      example: {}
+    zone:
+      title: Zone
+      description: The name of the zone that the client's location is mapped to
+      type: string
+      required: false
+      example: none
+    ipAddress:
+      title: IP Address
+      description: IP address that the client is making its request from
+      type: string
+      required: false
+      example: 198.51.100.1
+    device:
+      title: Device
+      description: Type of device that the client operates from
+      type: string
+      required: false
+      example: Computer
+  ipAddress:
+    ip:
+      title: IP
+      description: IP address
+      type: string
+      required: false
+      example: 198.51.100.1
+    geographicalContext:
+      title: Geographical Context
+      description: Geographical context of the IP address
+      type: geographicalContext
+      required: false
+      example: {}
+    version:
+      title: Version
+      description: IP address version
+      type: string
+      required: false
+      example: V4
+    source:
+      title: Source
+      description: Details regarding the source
+      type: string
+      required: false
+      example: Example source
+  request:
+    ipChain:
+      title: IP Chain
+      description: "If the incoming request passes through any proxies, the IP addresses of those proxies are stored here in the format: clientIp, proxy1, proxy2, and so on. This field is useful when working with trusted proxies"
+      type: "[]ipAddress"
+      required: false
+      example: []
+  outcome:
+    result:
+      title: Result
+      description: "Result of the action: SUCCESS, FAILURE, SKIPPED, ALLOW, DENY, CHALLENGE, UNKNOWN"
+      type: string
+      required: false
+      example: ALLOW
+    reason:
+      title: Reason
+      description: Reason for the result
+      type: string
+      required: false
+      example: Sign-on policy evaluation resulted in ALLOW
+  transaction:
+    id:
+      title: ID
+      description: Unique identifier for this transaction
+      type: string
+      required: false
+      example: C56Z_q12BqKc99a-ZqyxAA563w
+    type:
+      title: Type
+      description: Describes the kind of transaction. WEB indicates a web request. JOB indicates an asynchronous task
+      type: string
+      required: false
+      example: WEB
+    detail:
+      title: Detail
+      description: Details for this transaction
+      type: object
+      required: false
+      example: '{"requestApiTokenId": "00T94e3cn9kSEO3c51s5"}'
+  debugContext:
+    debugData:
+      title: Debug Data
+      description: Dynamic field that contains miscellaneous information that is dependent on the event type
+      type: object
+      required: false
+      example: '{"requestUri": "/api/v1/users/00u3gjksoiRGRAZHLSYV/factors/smsf8luacpZJAva10x45/verify", "smsProvider: "TELESIGN", "transactionId: "268632458E3C100F5F5F594C6DC689D4"}'
+  issuer:
+    id:
+      title: ID
+      description: Varies depending on the type of authentication. If authentication is SAML 2.0, id is the issuer in the SAML assertion. For social login, id is the issuer of the token
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    type:
+      title: Type
+      description: Information on the issuer and source of the SAML assertion or token
+      type: string
+      required: false
+      example: Example issuer
+  authenticationContext:
+    authenticationProvider:
+      title: Authentication Provider
+      description: The system that proves the identity of an actor using the credentials provided to it
+      type: string
+      required: false
+      example: ACTIVE_DIRECTORY
+    authenticationStep:
+      title: Authentication Step
+      description: The zero-based step number in the authentication pipeline. Currently unused and always set to 0
+      type: integer
+      required: false
+      example: 0
+    credentialProvider:
+      title: Credential Provider
+      description: A credential provider is a software service that manages identities and their associated credentials. When authentication occurs through credentials provided by a credential provider, the credential provider is recorded here
+      type: string
+      required: false
+      example: OKTA_CREDENTIAL_PROVIDER
+    credentialType:
+      title: Credential Type
+      description: The underlying technology/scheme used in the credential
+      type: string
+      required: false
+      example: PASSWORD
+    issuer:
+      title: Issuer
+      description: The specific software entity that creates and issues the credential
+      type: issuer
+      required: false
+      example: { }
+    externalSessionId:
+      title: External Session ID
+      description: A proxy for the actor's session ID
+      type: string
+      required: false
+      example: 102N1EKyPFERROGvK9wizMAPQ
+    interface:
+      title: Interface
+      description: The third-party user interface that the actor authenticates through, if any
+      type: string
+      required: false
+      example: Example interface
+  securityContext:
+    asNumber:
+      title: AS Number
+      description: The Autonomous system number that is associated with the autonomous system that the event request was sourced to
+      type: integer
+      required: false
+      example: 14618
+    asOrg:
+      title: AS Organization
+      description: The organization that is associated with the autonomous system that the event request is sourced to
+      type: string
+      required: false
+      example: amazon technologies inc.
+    isp:
+      title: ISP
+      description: The Internet service provider that is used to send the event's request
+      type: string
+      required: false
+      example: amazon.co inc.
+    domain:
+      title: Domain
+      description: The domain name that is associated with the IP address of the inbound event request
+      type: string
+      required: false
+      example: amazonaws.com
+    isProxy:
+      title: Is Proxy
+      description: Specifies whether an event's request is from a known proxy
+      type: boolean
+      required: false
+      example: false
+  log:
+    uuid:
+      title: UUID
+      description: Unique identifier for an individual event
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    published:
+      title: Published
+      description: Timestamp when the event is published
+      type: string
+      required: false
+      example: 2023-03-31T20:13:46.293Z
+    eventType:
+      title: Event Type
+      description: Type of event that is published
+      type: string
+      required: false
+      example: user.authentication.verify
+    version:
+      title: Version
+      description: Versioning indicator
+      type: string
+      required: false
+      example: 0
+    severity:
+      title: Severity
+      description: "Indicates how severe the event is: DEBUG, INFO, WARN, ERROR"
+      type: string
+      required: false
+      example: INFO
+    legacyEventType:
+      title: Legacy Event Type
+      description: Type of legacy event
+      type: string
+      required: false
+      example: app.admin.sso.login.success
+    displayMessage:
+      title: Display Message
+      description: The display message for an event
+      type: string
+      required: false
+      example: User accessing Okta admin app
+    actor:
+      title: Actor
+      description: Describes the entity that performs an action
+      type: entityObject
+      required: false
+      example: {}
+    client:
+      title: Client
+      description: The client that requests an action
+      type: clientObject
+      required: false
+      example: {}
+    request:
+      title: Request
+      description: The request that initiates an action
+      type: request
+      required: false
+      example: {}
+    outcome:
+      title: Outcome
+      description: The outcome of an action
+      type: outcome
+      required: false
+      example: {}
+    target:
+      title: Target
+      description: Zero or more targets of an action
+      type: "[]entityObject"
+      required: false
+      example: []
+    transaction:
+      title: Transaction
+      description: The transaction details of an action
+      type: transaction
+      required: false
+      example: {}
+    debugContext:
+      title: Debug Context
+      description: The debug request data of an action
+      type: debugContext
+      required: false
+      example: {}
+    authenticationContext:
+      title: Authentication Context
+      description: The authentication data of an action
+      type: authenticationContext
+      required: false
+      example: {}
+    securityContext:
+      title: Security Context
+      description: The security data of an action
+      type: securityContext
+      required: false
+      example: {}
 
 connection:
-  okta_url:
+  oktaUrl:
     title: Okta Domain
     description: Okta Domain e.g. example.okta.com
     type: string
     required: true
-  okta_key:
+    example: example.com
+  oktaKey:
     title: Okta Key
     description: Okta key
     type: credential_secret_key
     required: true
+    example: '{"secretKey": "123456789abcdef987654321GHIjklm0123456789A"}'
 
 triggers:
   users_added_removed_from_group:
     title: Monitor User Groups
     description: Monitors a list of groups for user membership changes
     input:
-      group_ids:
+      groupIds:
         title: Group ID's
         description: A list of group ID's
         type: "[]string"
@@ -274,308 +1358,292 @@ triggers:
         default: 300
         example: 100
     output:
-      users_added_from_groups:
+      usersAddedToGroups:
         title: Additions
         description: Users added to a group since the last check
         type: "[]user_group"
         required: true
-      users_removed_from_groups:
+        example: []
+      usersRemovedFromGroups:
         title: Removals
         description: Users removed from a group since the last check
         type: "[]user_group"
         required: true
+        example: []
+
 actions:
   get_factors:
     title: Get Okta User Factors
     description: Returns an object containing all of a user's factors for MFA
     input:
-      user_id:
+      userId:
         title: Okta User ID
         description: User ID to get factors for
         type: string
         required: true
+        example: "00a0a1qwertYUIoplK0j6"
     output:
       factors:
         title: Okta MFA Factors
-        description: Obbject containing all the factors of a user for MFA
-        type: "[]object"
+        description: Object containing all the factors of a user for MFA
+        type: "[]factor"
         required: false
+        example: []
   send_push:
     title: Push MFA Challenge
     description: Push an MFA challenge to a user's device and wait for a success or rejection
     input:
-      user_id:
+      userId:
         title: Okta User ID
         description: User ID to push verification to
         type: string
         required: true
-      factor_id:
+        example: "00a0a1qwertYUIoplK0j6"
+      factorId:
         title: Okta Factor ID
         description: Factor ID of the user to push verification to
         type: string
         required: true
+        example: "00a0a1qwertYUIoplK0j7"
     output:
-      factor_status:
+      factorStatus:
         title: Factor Status
         description: User factor status
         type: string
         required: false
+        example: "SUCCESS"
   deactivate_user:
     title: Deactivate User
     description: Deactivate a user
     input:
-      email:
-        title: Okta User Email
-        description: The email of the employee to deactivate
+      login:
+        title: Okta User Login
+        description: The login of the employee to deactivate
         type: string
         required: true
+        example: "user@example.com"
     output:
-      email:
-        title: Okta User Email
-        description: The email of the Okta user
+      login:
+        title: Okta User Login
+        description: The login of the Okta user
         type: string
         required: false
-      user_id:
+        example: "user@example.com"
+      userId:
         title: Okta User ID
         description: The user ID of the Okta user
         type: string
         required: false
+        example: "00a0a1qwertYUIoplK0j6"
       success:
         title: Success
         description: Whether deactivation was successful
         type: boolean
         required: true
+        example: true
   delete_user:
     title: Delete User
-    description: Delete a user. Warning, this action cannot be recovered from
+    description: Delete a user. This operation on a user that hasn't been deactivated causes that user to be deactivated. A second delete operation is required to delete the user. Warning, this action cannot be recovered
     input:
-      user_email:
-        title: Okta User Email
-        description: The email of the user to delete
+      userLogin:
+        title: Okta User Login
+        description: The login of the user to delete
         type: string
         required: true
-      send_admin_email:
+        example: "user@example.com"
+      sendAdminEmail:
         title: Send Admin Email
         description: Sends a deactivation email to the administrator if true. Default value is false
         type: boolean
         default: false
         required: true
+        example: false
     output:
       success:
         title: Success
         description: Whether deactivation was successful
         type: boolean
         required: true
+        example: true
   suspend_user:
     title: Suspend User
     description: Suspend a user
     input:
-      email:
-        title: Okta User Email
-        description: The email of the employee to suspend
+      login:
+        title: Okta User Login
+        description: The login of the employee to suspend
         type: string
         required: true
+        example: "user@example.com"
     output:
-      email:
-        title: Okta User Email
-        description: The email of the Okta user
+      login:
+        title: Okta User Login
+        description: The login of the Okta user
         type: string
         required: false
-      user_id:
+        example: "user@example.com"
+      userId:
         title: Okta User ID
         description: The user ID of the Okta user
         type: string
         required: false
+        example: "00a0a1qwertYUIoplK0j6"
       success:
         title: Success
         description: Whether suspension was successful
         type: boolean
         required: true
+        example: true
   unsuspend_user:
     title: Unsuspend User
     description: Unsuspend a user
     input:
-      email:
-        title: Okta User Email
-        description: The email of the Okta user
+      login:
+        title: Okta User Login
+        description: The login of the Okta user
         type: string
         required: true
+        example: "user@example.com"
     output:
-      email:
-        title: Okta User Email
-        description: The email of the Okta user
+      login:
+        title: Okta User Login
+        description: The login of the Okta user
         type: string
         required: false
-      user_id:
+        example: "user@example.com"
+      userId:
         title: Okta User ID
         description: The user ID of the Okta user
         type: string
         required: false
+        example: "00a0a1qwertYUIoplK0j6"
       success:
         title: Success
         description: Whether unsuspension was successful
         type: boolean
         required: true
+        example: true
   get_user:
     title: Get User
     description: Obtain information about a user
     input:
-      email:
-        title: Okta User Email
-        description: The email of the user to obtain information about
+      login:
+        title: Okta User Login
+        description: The login of the user to obtain information about
         type: string
         required: true
+        example: "user@example.com"
     output:
-      status:
-        description: Status
-        title: Status
-        type: string
+      user:
+        title: User
+        description: User details
+        type: user
         required: false
-      profile:
-        description: Profile
-        title: Profile
-        type: profile
-        required: false
-      passwordChanged:
-        description: When the password was changed, e.g. 2013-07-02T21:36:25.344Z
-        title: Password Changed
-        type: string
-        required: false
-      created:
-        description: When the user was created, e.g. 2013-07-02T21:36:25.344Z
-        title: Created
-        type: string
-        required: false
-      activated:
-        description: When the user was activated, e.g. 2013-07-02T21:36:25.344Z
-        title: Activated
-        type: string
-        required: false
-      lastUpdated:
-        description: When the user was last updated, e.g. 2013-07-02T21:36:25.344Z
-        title: Last Updated
-        type: string
-        required: false
-      _links:
-        description: Links
-        title: Links
-        type: _links
-        required: false
-      lastLogin:
-        description: When the last login for the user was, e.g. 2013-07-02T21:36:25.344Z
-        title: Last Login
-        type: string
-        required: false
-      credentials:
-        description: Credentials
-        title: Credentials
-        type: credentials
-        required: false
-      id:
-        description: User ID
-        title: ID
-        type: string
-        required: false
-      statusChanged:
-        description: When the status of the user changed, e.g. 2013-07-02T21:36:25.344Z
-        title: Status Changed
-        type: string
-        required: false
-      found:
-        description: Whether user was found
-        title: Found User
-        type: boolean
-        required: true
+        example: {}
   add_user_to_group:
     title: Add User to Group
     description: Add a user to an existing group
     input:
-      email:
-        title: Okta User Email
-        description: The email of the Okta user
+      login:
+        title: Okta User Login
+        description: The login of the Okta user
         type: string
         required: true
-      group_id:
+        example: "user@example.com"
+      groupId:
         title: Group ID
         description: The ID of the group to which the user should be added
         type: string
         required: true
+        example: "00a0a1qwertYUIoplK0j9"
     output:
-      user_id:
+      userId:
         title: Okta User ID
         description: The user ID of the Okta user
         type: string
         required: false
+        example: "00a0a1qwertYUIoplK0j6"
       success:
         title: Success
         description: Whether the add was successful
         type: boolean
         required: true
+        example: true
   remove_user_from_group:
     title: Remove User from Group
     description: Remove a user from an existing group
     input:
-      email:
-        title: Okta User Email
-        description: The email of the Okta user
+      login:
+        title: Okta User Login
+        description: The login of the Okta user
         type: string
         required: true
-      group_id:
+        example: user@example.com
+      groupId:
         title: Group ID
         description: The ID of the group to which the user should be added
         type: string
         required: true
+        example: 00g1m22m1230eZXxe5r8
     output:
-      user_id:
+      userId:
         title: Okta User ID
         description: The user ID of the Okta user
         type: string
         required: false
+        example: 00g1m22m1230eZXxe5r8
       success:
         title: Success
         description: Whether the add was successful
         type: boolean
         required: true
+        example: true
   list_groups:
     title: List Groups
     description: List available groups
     input:
       query:
         title: Query
-        description: Query to list groups, otherwise all groups will be returned
+        description: Query to list groups. Finds a group that matches the name property. Search currently performs a startsWith match. If this parameter is not given, all groups are returned
         type: string
         required: false
+        example: Example
     output:
       success:
         title: Success
         description: Whether groups were found
         type: boolean
         required: true
+        example: true
       groups:
         title: Groups
         description: List of groups
         type: '[]group'
         required: false
+        example: []
   assign_user_to_app_sso:
     title: Assign User to Application for Provisioning
     description: Assign user to application for SSO and provisioning
     input:
       applicationId:
         title: Application ID
-        description: Application ID
+        description: ID of the application
         type: string
         required: true
+        example: 00g1m22m1230eZXxe5r8
       appuser:
         title: Application User Model
-        description: Application user model as JSON object, see https://developer.okta.com/docs/api/resources/apps#application-user-model
+        description: Application user model as JSON object, see https://developer.okta.com/docs/reference/api/apps/#application-user-object
         type: object
         required: false
+        example: '{"id": "00ud4tVDDXYVKPXKVLCO"}'
     output:
       result:
         title: Result
-        description: Result
-        type: object
+        description: Information about the application user
+        type: applicationUser
         required: true
+        example: {}
   create_user:
     title: Create User
     description: Create a new user
@@ -586,127 +1654,85 @@ actions:
         type: boolean
         default: true
         required: true
+        example: true
       provider:
         title: Provider
-        description: Indicates whether to create a user with a specified authentication
-          provider
+        description: Indicates whether to create a user with a specified authentication provider
         type: boolean
         default: false
         required: true
+        example: false
       profile:
         title: Profile
         description: Profile properties for user
         type: object
         required: true
+        example: { }
       credentials:
         title: Credentials
         description: Credentials for user
-        type: credentials_input
+        type: credentials
         required: false
+        example: { }
       groupIds:
         title: Group IDs
-        description: IDs of groups that user will be immediately added to at time
-          of creation
+        description: IDs of groups that user will be immediately added to at time of creation
         type: '[]string'
         required: false
+        example: [ '00a0a1qwertYUIoplK0j9' ]
       nextLogin:
         title: Change Password Next Login
         description: Change password next time the user logs in
         type: boolean
         required: true
+        example: true
     output:
-      status:
-        description: Status
-        title: Status
-        type: string
+      user:
+        title: User
+        description: User details
+        type: user
         required: false
-      profile:
-        description: Profile
-        title: Profile
-        type: profile
-        required: false
-      passwordChanged:
-        description: When the password was changed, e.g. 2013-07-02T21:36:25.344Z
-        title: Password Changed
-        type: string
-        required: false
-      created:
-        description: When the user was created, e.g. 2013-07-02T21:36:25.344Z
-        title: Created
-        type: string
-        required: false
-      activated:
-        description: When the user was activated, e.g. 2013-07-02T21:36:25.344Z
-        title: Activated
-        type: string
-        required: false
-      lastUpdated:
-        description: When the user was last updated, e.g. 2013-07-02T21:36:25.344Z
-        title: Last Updated
-        type: string
-        required: false
-      _links:
-        description: Links
-        title: Links
-        type: _links
-        required: false
-      lastLogin:
-        description: When the last login for the user was, e.g. 2013-07-02T21:36:25.344Z
-        title: Last Login
-        type: string
-        required: false
-      credentials:
-        description: Credentials
-        title: Credentials
-        type: credentials
-        required: false
-      id:
-        description: User ID
-        title: ID
-        type: string
-        required: false
-      statusChanged:
-        description: When the status of the user changed, e.g. 2013-07-02T21:36:25.344Z
-        title: Status Changed
-        type: string
-        required: false
+        example: {}
   reset_factors:
     title: Reset Factors
     description: Reset all multifactors for user by email
     input:
-      email:
-        title: Okta User Email
-        description: The email of the employee to reset factors
+      login:
+        title: Okta User Login
+        description: The login of the employee to reset factors
         type: string
         required: true
+        example: user@example.com
     output:
       success:
         title: Success
         description: Whether the reset was successful
         type: boolean
         required: true
-      email:
-        title: Okta User Email
-        description: The email of the Okta user
+        example: true
+      login:
+        title: Okta User Login
+        description: The login of the Okta user
         type: string
         required: false
-      user_id:
+        example: user@example.com
+      userId:
         title: Okta User ID
         description: The user ID of the Okta user
         type: string
         required: false
+        example: 00g1m22m1230eZXxe5r8
   reset_password:
     title: Reset Password
-    description: This action resets password for Okta user and transitions user status to PASSWORD_EXPIRED,
-      so that the user is required to change their password at their next login
+    description: This action resets password for Okta user and transitions user status to PASSWORD_EXPIRED, so that the user is required to change their password at their next login
     input:
-      user_id:
+      userId:
         title: Okta User ID
         description: User ID whose password will be reset
         type: string
         required: true
         example: 00ub0oNGTSWTBKOLGLNR
-      temp_password:
+      tempPassword:
         title: Okta User Temporary Password
         description: If set to true, sets the user's password to a temporary password and returns it
         type: boolean
@@ -720,7 +1746,7 @@ actions:
         type: boolean
         required: true
         example: true
-      temp_password:
+      tempPassword:
         title: Okta User Temporary Password
         description: The temporary password of the Okta user, if true was set in Temporary Password input
         type: string
@@ -742,7 +1768,7 @@ actions:
         type: string
         required: true
         example: 198.51.100.1
-      blacklist_state:
+      blacklistState:
         title: Blacklist State
         description: True to block, false to unblock
         type: boolean
@@ -750,8 +1776,21 @@ actions:
         default: True
         example: True
     output:
-      zone_list:
-        title: Zone List
-        description: Updated zone list
-        type: zone_list
+      zone:
+        title: Zone
+        description: Information about the updated zone
+        type: zone
         required: true
+        example: {}
+
+tasks:
+  monitor_logs:
+    title: Monitor Logs
+    description: Monitor system logs
+    output:
+      logs:
+        title: Logs
+        description: All system logs within the specified time range
+        type: "[]log"
+        required: true
+        example: []

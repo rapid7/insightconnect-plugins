@@ -1,0 +1,148 @@
+{
+  "logs": [
+    {
+      "actor": {
+        "id": "12345",
+        "type": "User",
+        "alternateId": "user@example.com",
+        "displayName": "User"
+      },
+      "client": {
+        "userAgent": {
+          "rawUserAgent": "python-requests/2.26.0",
+          "os": "Unknown",
+          "browser": "UNKNOWN"
+        },
+        "zone": "null",
+        "device": "Unknown",
+        "ipAddress": "198.51.100.1"
+      },
+      "authenticationContext": {
+        "externalSessionId": "12345"
+      },
+      "displayMessage": "Suspend Okta user",
+      "eventType": "user.lifecycle.suspend",
+      "outcome": {
+        "result": "SUCCESS"
+      },
+      "published": "2023-04-27T07:49:21.764Z",
+      "securityContext": {
+        "asNumber": 123456,
+        "asOrg": "test",
+        "isp": "test",
+        "domain": "example.com",
+        "isProxy": false
+      },
+      "severity": "INFO",
+      "debugContext": {
+        "debugData": {
+          "requestId": "12345",
+          "dtHash": "111111cd0ecfb444ee1fcb9687ba8b174a3c8d251ce927e6016b871bc222222",
+          "requestUri": "/api/v1/users/12345/lifecycle/suspend",
+          "url": "/api/v1/users/12345/lifecycle/suspend?"
+        }
+      },
+      "legacyEventType": "core.user.config.user_status.suspended",
+      "transaction": {
+        "type": "WEB",
+        "id": "12345",
+        "detail": {
+          "requestApiTokenId": "12345"
+        }
+      },
+      "uuid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "version": "0",
+      "request": {
+        "ipChain": [
+          {
+            "ip": "198.51.100.1",
+            "version": "V4"
+          }
+        ]
+      },
+      "target": [
+        {
+          "id": "12345",
+          "type": "User",
+          "alternateId": "user@example.com",
+          "displayName": "Test User"
+        }
+      ]
+    },
+    {
+      "actor": {
+        "id": "12345",
+        "type": "User",
+        "alternateId": "user@example.com",
+        "displayName": "User 2"
+      },
+      "client": {
+        "userAgent": {
+          "rawUserAgent": "python-requests/2.26.0",
+          "os": "Unknown",
+          "browser": "UNKNOWN"
+        },
+        "zone": "null",
+        "device": "Unknown",
+        "ipAddress": "198.51.100.1"
+      },
+      "authenticationContext": {
+        "externalSessionId": "12345"
+      },
+      "displayMessage": "Clear user session",
+      "eventType": "user.session.clear",
+      "outcome": {
+        "result": "SUCCESS"
+      },
+      "published": "2023-04-27T07:49:21.777Z",
+      "securityContext": {
+        "asNumber": 12345,
+        "asOrg": "test",
+        "isp": "test",
+        "domain": "example.com",
+        "isProxy": false
+      },
+      "severity": "INFO",
+      "debugContext": {
+        "debugData": {
+          "requestId": "12345",
+          "dtHash": "11111ecd0ecfb444ee1fcb9687ba8b174a3c8d251ce927e6016b871bc0222222",
+          "requestUri": "/api/v1/users/12345/lifecycle/suspend",
+          "url": "/api/v1/users/12345/lifecycle/suspend?"
+        }
+      },
+      "legacyEventType": "core.user_auth.session_clear",
+      "transaction": {
+        "type": "WEB",
+        "id": "12345",
+        "detail": {
+          "requestApiTokenId": "12345"
+        }
+      },
+      "uuid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "version": "0",
+      "request": {
+        "ipChain": [
+          {
+            "ip": "198.51.100.1",
+            "version": "V4"
+          }
+        ]
+      },
+      "target": [
+        {
+          "id": "12345",
+          "type": "User",
+          "alternateId": "user@example.com",
+          "displayName": "User Test123"
+        }
+      ]
+    }
+  ],
+  "state": {
+    "last_collection_timestamp": "2023-04-28T08:34:46",
+    "next_page_link": "https://example.com/nextLink?q=next",
+    "status_code": 200
+  },
+  "has_more_pages": true
+}
