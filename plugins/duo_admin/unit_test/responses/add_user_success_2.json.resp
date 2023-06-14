@@ -1,0 +1,36 @@
+{
+  "response": {
+    "alias1": "example-alias-1",
+    "alias2": null,
+    "alias3": null,
+    "alias4": null,
+    "aliases": {
+      "alias1": "example-alias-1"
+    },
+    "created": 168500000,
+    "desktoptokens": [
+    ],
+    "email": "user@example.com",
+    "firstname": "Test",
+    "groups": [
+    ],
+    "is_enrolled": false,
+    "last_directory_sync": null,
+    "last_login": null,
+    "lastname": "User",
+    "notes": "example",
+    "phones": [
+    ],
+    "realname": "Test User",
+    "status": "bypass",
+    "tokens": [
+    ],
+    "u2ftokens": [
+    ],
+    "user_id": "ABCD02",
+    "username": "user-example-2",
+    "webauthncredentials": [
+    ]
+  },
+  "stat": "OK"
+}

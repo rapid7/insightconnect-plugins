@@ -1,11 +1,14 @@
-import komand
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.helper import convert_dict_to_camel_case
 from .schema import GetUserByUsernameInput, GetUserByUsernameOutput, Input, Output, Component
 
 # Custom imports below
+from komand_duo_admin.util.helpers import clean
+from komand_duo_admin.util.constants import Cause, Assistance
 
 
-class GetUserByUsername(komand.Action):
+class GetUserByUsername(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_user_by_username",
@@ -15,11 +18,10 @@ class GetUserByUsername(komand.Action):
         )
 
     def run(self, params={}):
-        user = self.connection.admin_api.get_users_by_name(params.get(Input.USERNAME))
-        try:
-            out = {Output.USER: user[0]}
-            results = komand.helper.clean(out)
-            return results
-
-        except (TypeError, IndexError) as e:
-            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=f"User not found. Error: {e}")
+        search_username = params.get(Input.USERNAME)
+        self.logger.info(f"Searching for username or alias: {search_username}")
+        result = self.connection.admin_api.get_user_by_username({"username": search_username}).get("response", {})
+        if len(result) == 1:
+            return {Output.USER: convert_dict_to_camel_case(clean(result[0]))}
+        else:
+            raise PluginException(cause=Cause.NOT_FOUND, assistance=Assistance.VERIFY_INPUT)

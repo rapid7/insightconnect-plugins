@@ -1,0 +1,21 @@
+{
+  "users": [
+    {
+      "created": 1684150797,
+      "isEnrolled": false,
+      "realname": "Example",
+      "status": "active",
+      "userId": "ABCABC",
+      "username": "Example 1"
+    },
+    {
+      "created": 1684151017,
+      "isEnrolled": false,
+      "notes": "Lorem ipsum",
+      "realname": "Example",
+      "status": "active",
+      "userId": "ABCABC",
+      "username": "Example 2"
+    }
+  ]
+}

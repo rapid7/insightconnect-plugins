@@ -1,0 +1,40 @@
+{
+  "response": [
+    {
+      "aliases": {},
+      "created": 1684150797,
+      "desktoptokens": [],
+      "email": "",
+      "firstname": "",
+      "groups": [],
+      "is_enrolled": false,
+      "lastname": "",
+      "notes": "",
+      "phones": [],
+      "realname": "Example",
+      "status": "active",
+      "tokens": [],
+      "user_id": "ABCABC",
+      "username": "Example 1",
+      "webauthncredentials": []
+    },
+    {
+      "aliases": {},
+      "created": 1684151017,
+      "desktoptokens": [],
+      "email": "",
+      "firstname": "",
+      "groups": [],
+      "is_enrolled": false,
+      "lastname": "",
+      "notes": "Lorem ipsum",
+      "phones": [],
+      "realname": "Example",
+      "status": "active",
+      "tokens": [],
+      "user_id": "ABCABC",
+      "username": "Example 2",
+      "webauthncredentials": []
+    }
+  ]
+}

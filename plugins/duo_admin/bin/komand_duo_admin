@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Duo Admin API"
 Vendor = "rapid7"
-Version = "3.4.0"
+Version = "4.0.0"
 Description = "Duo is a trusted access solution for organizations. The Duo Admin plugin for Rapid7 InsightConnect allows users to manage and administrate their Duo organization"
 
 
@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
-    from komand_duo_admin import connection, actions, triggers
+    import insightconnect_plugin_runtime
+    from komand_duo_admin import connection, actions, triggers, tasks
 
-    class ICONDuoAdmin(komand.Plugin):
+    class ICONDuoAdmin(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -54,9 +54,11 @@ def main():
 
             self.add_action(actions.ModifyUser())
 
+            self.add_task(tasks.MonitorLogs())
+
 
     """Run plugin"""
-    cli = komand.CLI(ICONDuoAdmin())
+    cli = insightconnect_plugin_runtime.CLI(ICONDuoAdmin())
     cli.run()
 
 

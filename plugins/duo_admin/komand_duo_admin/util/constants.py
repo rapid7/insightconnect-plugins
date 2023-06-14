@@ -1,3 +1,26 @@
+MAX_ALIASES_NUMBER: int = 4
+
+
+class Cause:
+    INVALID_AUTH_DATA = "Invalid signature."
+    INVALID_INPUT = "Incorrect input."
+    INVALID_REQUEST = "Invalid details provided."
+    NOT_FOUND = "Resource not found."
+    SERVER_ERROR = "Server error occurred."
+    USER_NOT_FOUND = "User not found."
+
+
+class Assistance:
+    ALIASES_NUMBER_EXCEEDED = f"Alias parameter must contain {MAX_ALIASES_NUMBER} or less aliases."
+    INVALID_INPUT = "Please check that your input is correct and try again.\nIncorrect input: '{given_input}'.\nPossible inputs: {possible_inputs}."
+    SERVER_ERROR = "Verify your plugin connection inputs are correct and not malformed and try again. If the issue persists, please contact support."
+    USER_NOT_FOUND = "Please check if the given username is correct and try again."
+    VERIFY_AUTH = "Verify your integration key and secret are correct. If the issue persists, please contact support."
+    VERIFY_INPUT = (
+        "Verify your input is correct and not malformed and try again. If the issue persists, please contact support."
+    )
+
+
 class PossibleInputs:
     possible_factors = [
         "duo_push",

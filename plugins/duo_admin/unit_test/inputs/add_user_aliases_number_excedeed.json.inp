@@ -1,0 +1,10 @@
+{
+  "aliases": ["alias1", "alias2", "alias3", "alias4", "alias5"],
+  "email": "user@example.com",
+  "firstname": "User",
+  "lastname": "Test",
+  "notes": "example note",
+  "realname": "User Test",
+  "status": "active",
+  "username": "user-example-4"
+}
