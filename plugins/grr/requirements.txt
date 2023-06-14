@@ -6,6 +6,6 @@ grr-response-proto==3.2.3.post2
 cryptography==2.0.3
 ipython==5.0.0
 protobuf==3.3.0
-requests==2.20.0
+requests==2.31.0
 Werkzeug==0.11.3
 grr-api-client==3.2.3.post2
