@@ -1,0 +1,109 @@
+{
+  "logs": [
+    {
+      "bypassStatusEnabled": 1682836486230,
+      "enabledBy": {
+        "key": "DEKU19BYSSJSOABCD123",
+        "name": "Admin"
+      },
+      "enabledFor": {
+        "key": "DUM07ZQ4LY00TABCD123",
+        "name": "example-user"
+      },
+      "priorityEvent": false,
+      "sekey": "SE80GVU5Z47F0ABCD123",
+      "state": "new",
+      "surfacedTimestamp": 1682836486232,
+      "triagedAsInteresting": false,
+      "type": "bypass_status",
+      "logType": "trust_monitor_event"
+    },
+    {
+      "action": "user_create",
+      "description": "{\"status\": \"Active\", \"email\": \"user@example.com\", \"realname\": \"\", \"notes\": \"\", \"uname\": \"user\"}",
+      "isotimestamp": "2023-04-30T07:52:18+00:00",
+      "object": "user",
+      "timestamp": 1682836490,
+      "username": "API (Admin API)",
+      "logType": "administrator"
+    },
+    {
+      "action": "admin_login",
+      "description": "{\"ip_address\": \"198.51.100.1\", \"role\": \"User Manager\", \"device\": \"+111111111\", \"factor\": \"push\", \"primary_auth_method\": \"Password\"}",
+      "isotimestamp": "2023-04-30T07:53:17+00:00",
+      "timestamp": 1682836495,
+      "username": "Admin",
+      "logType": "administrator"
+    },
+    {
+      "accessDevice": {
+        "browser": "Chrome",
+        "browserVersion": "113.0.0.0",
+        "ip": "198.51.100.1",
+        "isEncryptionEnabled": "unknown",
+        "isFirewallEnabled": "unknown",
+        "isPasswordSet": "unknown",
+        "location": {
+          "city": "Los Angeles",
+          "country": "United States",
+          "state": "California"
+        },
+        "os": "Mac OS X",
+        "osVersion": "10.15.7"
+      },
+      "alias": "unknown",
+      "application": {
+        "key": "DI8CODQSMK4BXPLYS47K",
+        "name": "User Portal"
+      },
+      "authDevice": {
+        "key": "DPAVQAJMU3BW0LV7OCX3",
+        "name": "Generic Smartphone"
+      },
+      "eventType": "enrollment",
+      "factor": "not_available",
+      "isotimestamp": "2023-05-29T10:07:38.631165+00:00",
+      "result": "success",
+      "timestamp": 1685354858,
+      "trustedEndpointStatus": "unknown",
+      "txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "user": {
+        "groups": [
+          "Test Group"
+        ],
+        "key": "DUOR48RKV2AYN7YVS9BT",
+        "name": "example-user"
+      },
+      "logType": "authentication"
+    }
+  ],
+  "state": {
+    "auth_logs_next_page_params": {
+      "limit": "1000",
+      "maxtime": "1682930026000",
+      "mintime": "1682843686000",
+      "next_offset": [
+        "1683730665255",
+        "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+      ]
+    },
+    "last_collection_timestamp": 1682930026000,
+    "previous_admin_log_hashes": [
+      "9044a3c0964c859ae26aee09a0ad031b0546b0b4",
+      "29f17fa591dc5b46c1dfac976364059d80208fdb"
+    ],
+    "previous_auth_log_hashes": [
+      "cdae94238e2a36b430140a30dc7eb46952b61668"
+    ],
+    "previous_trust_monitor_event_hashes": [
+      "65f48616e40fc6035c4a170c5b757e2e3f26e37d"
+    ],
+    "status_code": 200,
+    "trust_monitor_next_page_params": {
+      "limit": "200",
+      "maxtime": "1682930026000",
+      "mintime": "1682843686000",
+      "offset": "1591014"
+     }
+  }
+}

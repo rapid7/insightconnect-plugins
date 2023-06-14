@@ -1,0 +1,10 @@
+{
+  "aliases": ["example-alias-1"],
+  "email": "user@example.com",
+  "firstname": "Test",
+  "lastname": "User",
+  "notes": "example",
+  "realname": "Test User",
+  "status": "bypass",
+  "username": "user-example-2"
+}

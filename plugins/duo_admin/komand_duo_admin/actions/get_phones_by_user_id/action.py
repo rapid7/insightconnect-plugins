@@ -1,10 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.helper import convert_dict_to_camel_case
 from .schema import GetPhonesByUserIdInput, GetPhonesByUserIdOutput, Input, Output, Component
 
 # Custom imports below
+from komand_duo_admin.util.helpers import clean
 
 
-class GetPhonesByUserId(komand.Action):
+class GetPhonesByUserId(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_phones_by_user_id",
@@ -14,11 +16,10 @@ class GetPhonesByUserId(komand.Action):
         )
 
     def run(self, params={}):
-        try:
-            phone_list = self.connection.admin_api.get_user_phones(params.get(Input.USER_ID))
-            results = komand.helper.clean({Output.PHONE_LIST: phone_list})
-            return results
-        except KeyError as e:
-            self.logger.error(f"User not found. Error: {str(e)}")
-
-        return {Output.PHONE_LIST: []}
+        return {
+            Output.PHONELIST: clean(
+                convert_dict_to_camel_case(
+                    self.connection.admin_api.get_phones_by_user_id(params.get(Input.USERID)).get("response", [])
+                )
+            )
+        }

@@ -1,0 +1,18 @@
+{
+  "user": {
+    "alias1": "valid-alias",
+    "aliases": {
+      "alias1": "valid-alias"
+    },
+    "created": 1684238502,
+    "email": "user@example.com",
+    "firstname": "Example",
+    "isEnrolled": false,
+    "lastname": "Example",
+    "notes": "Lorem ipsum",
+    "realname": "Example Fullname",
+    "status": "active",
+    "userId": "ABCABC",
+    "username": "Example"
+  }
+}
