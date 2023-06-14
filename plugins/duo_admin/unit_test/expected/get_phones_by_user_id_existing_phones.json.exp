@@ -1,0 +1,25 @@
+{
+  "phoneList": [
+    {
+      "activated": true,
+      "capabilities": [
+        "auto",
+        "push"
+      ],
+      "encrypted": "Encrypted",
+      "fingerprint": "Configured",
+      "lastSeen": "2023-11-11T11:11:11",
+      "model": "Motorola Moto G31(W)",
+      "name": "MyPhone",
+      "number": "123456789",
+      "phoneId": "QWERTY01",
+      "platform": "Google Android",
+      "postdelay": "0",
+      "predelay": "0",
+      "screenlock": "Locked",
+      "smsPasscodesSent": false,
+      "tampered": "Not tampered",
+      "type": "Mobile"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "response": [
+    {
+      "alias1": "alias1",
+      "aliases": {
+        "alias1": "alias1"
+      },
+      "created": 1684238502,
+      "desktoptokens": [],
+      "email": "user@example.com",
+      "firstname": "Example",
+      "groups": [],
+      "is_enrolled": false,
+      "lastname": "Example",
+      "notes": "Lorem ipsum",
+      "phones": [],
+      "realname": "Example Fullname",
+      "status": "active",
+      "tokens": [],
+      "user_id": "ABCABC",
+      "username": "valid-username-1",
+      "webauthncredentials": []
+    }
+  ]
+}

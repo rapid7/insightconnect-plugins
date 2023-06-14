@@ -1,0 +1,5 @@
+{
+  "email": "user@example.com",
+  "timeToExpiration": 3600,
+  "username": "example-username-1"
+}

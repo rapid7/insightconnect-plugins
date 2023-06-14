@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import DeleteUserInput, DeleteUserOutput, Input, Output, Component
 
 # Custom imports below
 
 
-class DeleteUser(komand.Action):
+class DeleteUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="delete_user",
@@ -14,5 +14,4 @@ class DeleteUser(komand.Action):
         )
 
     def run(self, params={}):
-        resp = self.connection.admin_api.delete_user(params.get(Input.USER_ID))
-        return {Output.RESPONSE: resp}
+        return {Output.SUCCESS: self.connection.admin_api.delete_user(params.get(Input.USERID))}
