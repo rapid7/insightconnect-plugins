@@ -1,0 +1,45 @@
+{
+  "authLogs": [
+    {
+      "accessDevice": {
+        "browser": "Chrome",
+        "browserVersion": "113.0.0.0",
+        "ip": "198.51.100.1",
+        "isEncryptionEnabled": "unknown",
+        "isFirewallEnabled": "unknown",
+        "isPasswordSet": "unknown",
+        "location": {
+          "city": "Los Angeles",
+          "country": "United States",
+          "state": "California"
+        },
+        "os": "Mac OS X",
+        "osVersion": "10.15.7",
+        "securityAgents": "unknown"
+      },
+      "alias": "unknown",
+      "application": {
+        "key": "DI8CODQSMK4BXPLYS47K",
+        "name": "User Portal"
+      },
+      "authDevice": {
+        "key": "DPS4SII7YZ7ISQITTBE4",
+        "name": "+111111111"
+      },
+      "eventType": "enrollment",
+      "factor": "not_available",
+      "isotimestamp": "2023-05-17T10:04:19.369345+00:00",
+      "result": "success",
+      "timestamp": 1684317859,
+      "trustedEndpointStatus": "unknown",
+      "txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "user": {
+        "groups": [
+          "Test Group"
+        ],
+        "key": "DUWZR0IUOT27EPXSCOI9",
+        "name": "example-user"
+      }
+    }
+  ]
+}

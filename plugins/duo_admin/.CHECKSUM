@@ -1,51 +1,55 @@
 {
-	"spec": "e7d0dd57e3283e43fa7813a72bc12f8d",
-	"manifest": "c65d4aba7f3661ee6f398b04a9f94873",
-	"setup": "270553e5c22f019fb635693cd7d9162a",
+	"spec": "4312ee07440408fa7224461736212cea",
+	"manifest": "70647d35546b9a59615e5742a8b9349d",
+	"setup": "08ce236f25c19f086163236c0b62ae65",
 	"schemas": [
 		{
 			"identifier": "add_user/schema.py",
-			"hash": "92db10bf221502d498943c8fb8f102d4"
+			"hash": "8e1b4d7c1bec271cd16344ddbcabff31"
 		},
 		{
 			"identifier": "delete_user/schema.py",
-			"hash": "18e14fd5a5943dfabe5478c9080930d8"
+			"hash": "4cb85b73fd6af8647184cf9f793ab2ab"
 		},
 		{
 			"identifier": "enroll_user/schema.py",
-			"hash": "8a03545f1a257c70d9cb10c7e82bac70"
+			"hash": "0eb11f1bd04e31d76c3044214af23c14"
 		},
 		{
 			"identifier": "get_logs/schema.py",
-			"hash": "e5631980eb0c41f2a9672a651b8760ce"
+			"hash": "8f8af57cea5e94d881dd3ed2e95283e3"
 		},
 		{
 			"identifier": "get_phones_by_user_id/schema.py",
-			"hash": "506d0cf3cd891b1d3ac90181cb864838"
+			"hash": "124eb3a9d3378f135edeea8c908fffed"
 		},
 		{
 			"identifier": "get_user_by_id/schema.py",
-			"hash": "e53ed4b5ffbe5c8fa5f9c50149a4b65b"
+			"hash": "d3a3e823d46e4762be421eeb39d48098"
 		},
 		{
 			"identifier": "get_user_by_username/schema.py",
-			"hash": "f8ad658d5b78ac8a8f353d127f3cb82f"
+			"hash": "d71ffc769597c25540311d4abbad2c4d"
 		},
 		{
 			"identifier": "get_user_status/schema.py",
-			"hash": "1aebf23d9ec05b954fbacbcc3b17961d"
+			"hash": "656760f25aa2a93ffdf9796f80300ff4"
 		},
 		{
 			"identifier": "get_users/schema.py",
-			"hash": "bc3fdbf60123db559899d29c8db4fb76"
+			"hash": "2ef01c9078f16a005c38751b029fd592"
 		},
 		{
 			"identifier": "modify_user/schema.py",
-			"hash": "b01c67291c3fc52b0cd4d593941844a6"
+			"hash": "aeea6ed2287733b6ba77d1f0110cf6a8"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "39d0840ea6b20db15377f970b9a5c751"
+			"hash": "5a3ea751980edc61c45bf2dc7ab486d2"
+		},
+		{
+			"identifier": "monitor_logs/schema.py",
+			"hash": "ce6e38eb06e864c580ad49ee031f59b5"
 		}
 	]
 }

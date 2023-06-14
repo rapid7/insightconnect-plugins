@@ -1,0 +1,25 @@
+{
+  "user": {
+    "alias1": "new-alias-1",
+    "alias2": "new-alias-2",
+    "alias3": "new-alias-3",
+    "alias4": "new-alias-4",
+    "aliases": {
+      "alias1": "new-alias-1",
+      "alias2": "new-alias-2",
+      "alias3": "new-alias-3",
+      "alias4": "new-alias-4"
+    },
+    "created": 1489612729,
+    "email": "user@example.com",
+    "firstname": "Example",
+    "isEnrolled": true,
+    "lastLogin": 1343921403,
+    "lastname": "Example",
+    "notes": "Example",
+    "realname": "Example",
+    "status": "active",
+    "userId": "modify-valid-id",
+    "username": "Example"
+  }
+}

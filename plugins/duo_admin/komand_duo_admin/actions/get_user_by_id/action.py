@@ -1,10 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.helper import convert_dict_to_camel_case
 from .schema import GetUserByIdInput, GetUserByIdOutput, Input, Output, Component
 
 # Custom imports below
+from komand_duo_admin.util.helpers import clean
 
 
-class GetUserById(komand.Action):
+class GetUserById(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_user_by_id",
@@ -14,9 +16,10 @@ class GetUserById(komand.Action):
         )
 
     def run(self, params={}):
-        try:
-            user = self.connection.admin_api.get_user_by_id(params.get(Input.USER_ID))
-            results = komand.helper.clean({Output.USER: user})
-            return results
-        except KeyError as e:
-            self.logger.error(f"User not found. Error: {str(e)}")
+        user_id = params.get(Input.USERID)
+        self.logger.info(f"Getting user by ID: {user_id}")
+        return {
+            Output.USER: convert_dict_to_camel_case(
+                clean(self.connection.admin_api.get_user_by_id(user_id).get("response", {}))
+            )
+        }

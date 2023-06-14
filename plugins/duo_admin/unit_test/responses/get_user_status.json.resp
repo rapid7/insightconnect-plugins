@@ -1,0 +1,67 @@
+{
+  "response": [
+    {
+      "alias1": "alias1",
+      "alias2": "alias2",
+      "alias3": "alias3",
+      "alias4": "alias4",
+      "aliases": {
+        "alias1": "alias1",
+        "alias2": "alias2",
+        "alias3": "alias3",
+        "alias4": "alias4"
+      },
+      "created": 1683711826,
+      "desktoptokens": [],
+      "email": "user@example.com",
+      "firstname": "User",
+      "groups": [
+        {
+          "desc": "Example description",
+          "group_id": "DGRS47ZHIW492NHFG45B",
+          "mobile_otp_enabled": false,
+          "name": "Test Group",
+          "push_enabled": false,
+          "sms_enabled": false,
+          "status": "Active",
+          "voice_enabled": false
+        }
+      ],
+      "is_enrolled": true,
+      "last_directory_sync": null,
+      "last_login": null,
+      "lastname": "Example",
+      "notes": "example notes",
+      "phones": [
+        {
+          "activated": false,
+          "capabilities": [
+            "sms"
+          ],
+          "encrypted": "",
+          "extension": "",
+          "fingerprint": "",
+          "last_seen": "",
+          "model": "Unknown",
+          "name": "",
+          "number": "+111111111",
+          "phone_id": "DPTCSF797PC75N04IOGF",
+          "platform": "Generic Smartphone",
+          "postdelay": "",
+          "predelay": "",
+          "screenlock": "",
+          "sms_passcodes_sent": false,
+          "tampered": "",
+          "type": "Mobile"
+        }
+      ],
+      "realname": "Example User",
+      "status": "active",
+      "tokens": [],
+      "u2ftokens": [],
+      "user_id": "DUO6SB9GMEK1D2GN6W1K",
+      "username": "Example User",
+      "webauthncredentials": []
+    }
+  ]
+}

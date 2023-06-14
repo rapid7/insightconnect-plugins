@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "total_objects": 1
+  },
+  "response": [
+    {
+      "activated": true,
+      "capabilities": [
+        "auto",
+        "push"
+      ],
+      "encrypted": "Encrypted",
+      "extension": "",
+      "fingerprint": "Configured",
+      "last_seen": "2023-11-11T11:11:11",
+      "model": "Motorola Moto G31(W)",
+      "name": "MyPhone",
+      "number": "123456789",
+      "phone_id": "QWERTY01",
+      "platform": "Google Android",
+      "postdelay": "0",
+      "predelay": "0",
+      "screenlock": "Locked",
+      "sms_passcodes_sent": false,
+      "tampered": "Not tampered",
+      "type": "Mobile"
+    }
+  ],
+  "stat": "OK"
+}

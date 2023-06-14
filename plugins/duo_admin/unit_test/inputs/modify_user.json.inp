@@ -1,0 +1,14 @@
+{
+  "userId": "modify-valid-id",
+  "username": "Example",
+  "alias1": "new-alias-1",
+  "alias2": "new-alias-2",
+  "alias3": "new-alias-3",
+  "alias4": "new-alias-4",
+  "realname": "Example",
+  "email": "user@example.com",
+  "status": "active",
+  "notes": "Example",
+  "firstname": "Example",
+  "lastname": "Example"
+}
