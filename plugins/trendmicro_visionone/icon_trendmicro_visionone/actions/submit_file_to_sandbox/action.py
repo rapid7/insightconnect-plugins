@@ -46,10 +46,10 @@ class SubmitFileToSandbox(insightconnect_plugin_runtime.Action):
                 assistance="Please check the provided inputs and try again.",
                 data=response,
             )
-        else:
-            self.logger.info("Returning Results...")
-            return {
-                Output.ARGUMENTS: response.response.dict().get("arguments", ""),
-                Output.DIGEST: response.response.dict().get("digest", {}),
-                Output.ID: response.response.dict().get("id", ""),
-            }
+        # Return results
+        self.logger.info("Returning Results...")
+        return {
+            Output.ARGUMENTS: response.response.dict().get("arguments", ""),
+            Output.DIGEST: response.response.dict().get("digest", {}),
+            Output.ID: response.response.dict().get("id", ""),
+        }

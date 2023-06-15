@@ -34,8 +34,8 @@ ACTION_CLASSES = import_all_classes_from_subdirs("icon_trendmicro_visionone")
 
 
 def mock_params(action=None):
-    with open("/python/src/unit_test/action_io.json") as f:
-        params = json.load(f)
+    with open("/python/src/unit_test/action_io.json") as file_:
+        params = json.load(file_)
         if action:
             return params[action]
     return params

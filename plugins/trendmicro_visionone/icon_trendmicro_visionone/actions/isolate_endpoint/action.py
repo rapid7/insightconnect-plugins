@@ -28,28 +28,34 @@ class IsolateEndpoint(insightconnect_plugin_runtime.Action):
         endpoint_identifiers = params.get(Input.ENDPOINT_IDENTIFIERS)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        multi_resp = {Output.MULTI_RESPONSE: []}
-        for i in endpoint_identifiers:
-            if i.get("endpoint_name") and i.get("agent_guid"):
+        multi_resp = []
+        for endpoint_identifier in endpoint_identifiers:
+            if endpoint_identifier.get("endpoint_name") and endpoint_identifier.get(
+                "agent_guid"
+            ):
                 response = client.isolate_endpoint(
                     pytmv1.EndpointTask(
-                        endpointName=i.get("endpoint_name"),
-                        agentGuid=i.get("agent_guid"),
-                        description=i.get("description", ""),
+                        endpointName=endpoint_identifier.get("endpoint_name"),
+                        agentGuid=endpoint_identifier.get("agent_guid"),
+                        description=endpoint_identifier.get("description", ""),
                     )
                 )
-            elif i.get("endpoint_name") and not i.get("agent_guid"):
+            elif endpoint_identifier.get(
+                "endpoint_name"
+            ) and not endpoint_identifier.get("agent_guid"):
                 response = client.isolate_endpoint(
                     pytmv1.EndpointTask(
-                        endpointName=i.get("endpoint_name"),
-                        description=i.get("description", ""),
+                        endpointName=endpoint_identifier.get("endpoint_name"),
+                        description=endpoint_identifier.get("description", ""),
                     )
                 )
-            elif i.get("agent_guid") and not i.get("endpoint_name"):
+            elif endpoint_identifier.get("agent_guid") and not endpoint_identifier.get(
+                "endpoint_name"
+            ):
                 response = client.isolate_endpoint(
                     pytmv1.EndpointTask(
-                        agentGuid=i.get("agent_guid"),
-                        description=i.get("description", ""),
+                        agentGuid=endpoint_identifier.get("agent_guid"),
+                        description=endpoint_identifier.get("description", ""),
                     )
                 )
             else:
@@ -63,10 +69,7 @@ class IsolateEndpoint(insightconnect_plugin_runtime.Action):
                     assistance="Please check the endpoint name and try again.",
                     data=response.errors,
                 )
-            else:
-                multi_resp[Output.MULTI_RESPONSE].append(
-                    response.response.dict().get("items")[0]
-                )
+            multi_resp.append(response.response.dict().get("items")[0])
         # Return results
         self.logger.info("Returning Results...")
-        return multi_resp
+        return {Output.MULTI_RESPONSE: multi_resp}

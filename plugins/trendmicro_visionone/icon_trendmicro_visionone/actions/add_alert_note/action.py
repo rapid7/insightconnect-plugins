@@ -29,13 +29,12 @@ class AddAlertNote(insightconnect_plugin_runtime.Action):
                 assistance="Please check the provided alert ID and content.",
                 data=response.error,
             )
-        else:
-            self.logger.info("Returning Results...")
-            location = response.response.location
-            note_id = location.split("/")[-1]
-            result_code = response.result_code
-            return {
-                Output.RESULT_CODE: result_code,
-                Output.LOCATION: location,
-                Output.NOTE_ID: note_id,
-            }
+        self.logger.info("Returning Results...")
+        location = response.response.location
+        note_id = location.split("/")[-1]
+        result_code = response.result_code
+        return {
+            Output.RESULT_CODE: result_code,
+            Output.LOCATION: location,
+            Output.NOTE_ID: note_id,
+        }

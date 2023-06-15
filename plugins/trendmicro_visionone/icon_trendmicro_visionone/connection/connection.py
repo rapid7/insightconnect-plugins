@@ -53,6 +53,5 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 assistance="Please check your API Key and URL",
                 data=response.result_code,
             )
-        else:
-            self.logger.info("Connection Successfully Established...")
-            return response.result_code
+        self.logger.info("Connection Successfully Established...")
+        return response.result_code

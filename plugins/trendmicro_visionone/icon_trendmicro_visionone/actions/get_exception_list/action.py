@@ -39,10 +39,12 @@ class GetExceptionList(insightconnect_plugin_runtime.Action):
             )
         # Load json objects to list
         exception_objects = []
-        for i in new_exceptions:
-            i["description"] = "" if not i["description"] else i["description"]
-            i = json.dumps(i)
-            exception_objects.append(json.loads(i))
+        for new_exception in new_exceptions:
+            new_exception["description"] = (
+                "" if not new_exception["description"] else new_exception["description"]
+            )
+            new_exception = json.dumps(new_exception)
+            exception_objects.append(json.loads(new_exception))
         # Return results
         self.logger.info("Returning Results...")
         return {Output.EXCEPTION_OBJECTS: exception_objects}

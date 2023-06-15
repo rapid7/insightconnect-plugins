@@ -40,22 +40,18 @@ class GetSandboxAnalysisResult(insightconnect_plugin_runtime.Action):
                 assistance="Please check the report ID and try again.",
                 data=response,
             )
-        else:
-            self.logger.info("Returning Results...")
-            return {
-                Output.ID: response.response.dict().get("id", ""),
-                Output.TYPE: response.response.dict().get("type", ""),
-                Output.DIGEST: response.response.dict().get("digest", {}),
-                Output.ANALYSIS_COMPLETION_DATE_TIME: response.response.dict().get(
-                    "analysis_completion_date_time", ""
-                ),
-                Output.ARGUMENTS: response.response.dict().get("arguments", ""),
-                Output.DETECTION_NAMES: response.response.dict().get(
-                    "detection_names", []
-                ),
-                Output.RISK_LEVEL: response.response.dict().get("risk_level", ""),
-                Output.THREAT_TYPES: response.response.dict().get("threat_types", []),
-                Output.TRUE_FILE_TYPE: response.response.dict().get(
-                    "true_file_type", ""
-                ),
-            }
+        # Return results
+        self.logger.info("Returning Results...")
+        return {
+            Output.ID: response.response.dict().get("id", ""),
+            Output.TYPE: response.response.dict().get("type", ""),
+            Output.DIGEST: response.response.dict().get("digest", {}),
+            Output.ANALYSIS_COMPLETION_DATE_TIME: response.response.dict().get(
+                "analysis_completion_date_time", ""
+            ),
+            Output.ARGUMENTS: response.response.dict().get("arguments", ""),
+            Output.DETECTION_NAMES: response.response.dict().get("detection_names", []),
+            Output.RISK_LEVEL: response.response.dict().get("risk_level", ""),
+            Output.THREAT_TYPES: response.response.dict().get("threat_types", []),
+            Output.TRUE_FILE_TYPE: response.response.dict().get("true_file_type", ""),
+        }

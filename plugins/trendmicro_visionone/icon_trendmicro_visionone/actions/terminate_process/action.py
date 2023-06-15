@@ -28,34 +28,40 @@ class TerminateProcess(insightconnect_plugin_runtime.Action):
         process_identifiers = params.get(Input.PROCESS_IDENTIFIERS)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        multi_resp = {Output.MULTI_RESPONSE: []}
-        for i in process_identifiers:
-            if i.get("endpoint_name") and i.get("agent_guid"):
+        multi_resp = []
+        for process_identifier in process_identifiers:
+            if process_identifier.get("endpoint_name") and process_identifier.get(
+                "agent_guid"
+            ):
                 response = client.terminate_process(
                     pytmv1.ProcessTask(
-                        endpointName=i.get("endpoint_name"),
-                        agentGuid=i.get("agent_guid"),
-                        fileSha1=i["file_sha1"],
-                        description=i.get("description", ""),
-                        fileName=i.get("filename", ""),
+                        endpointName=process_identifier.get("endpoint_name"),
+                        agentGuid=process_identifier.get("agent_guid"),
+                        fileSha1=process_identifier["file_sha1"],
+                        description=process_identifier.get("description", ""),
+                        fileName=process_identifier.get("filename", ""),
                     )
                 )
-            elif i.get("endpoint_name") and not i.get("agent_guid"):
+            elif process_identifier.get("endpoint_name") and not process_identifier.get(
+                "agent_guid"
+            ):
                 response = client.terminate_process(
                     pytmv1.ProcessTask(
-                        endpointName=i.get("endpoint_name"),
-                        fileSha1=i["file_sha1"],
-                        description=i.get("description", ""),
-                        fileName=i.get("filename", ""),
+                        endpointName=process_identifier.get("endpoint_name"),
+                        fileSha1=process_identifier["file_sha1"],
+                        description=process_identifier.get("description", ""),
+                        fileName=process_identifier.get("filename", ""),
                     )
                 )
-            elif i.get("agent_guid") and not i.get("endpoint_name"):
+            elif process_identifier.get("agent_guid") and not process_identifier.get(
+                "endpoint_name"
+            ):
                 response = client.terminate_process(
                     pytmv1.ProcessTask(
-                        agentGuid=i.get("agent_guid"),
-                        fileSha1=i["file_sha1"],
-                        description=i.get("description", ""),
-                        fileName=i.get("filename", ""),
+                        agentGuid=process_identifier.get("agent_guid"),
+                        fileSha1=process_identifier["file_sha1"],
+                        description=process_identifier.get("description", ""),
+                        fileName=process_identifier.get("filename", ""),
                     )
                 )
             else:
@@ -69,10 +75,7 @@ class TerminateProcess(insightconnect_plugin_runtime.Action):
                     assistance="Please check the process identifiers and try again.",
                     data=response.errors,
                 )
-            else:
-                multi_resp[Output.MULTI_RESPONSE].append(
-                    response.response.dict().get("items")[0]
-                )
+            multi_resp.append(response.response.dict().get("items")[0])
         # Return results
         self.logger.info("Returning Results...")
-        return multi_resp
+        return {Output.MULTI_RESPONSE: multi_resp}

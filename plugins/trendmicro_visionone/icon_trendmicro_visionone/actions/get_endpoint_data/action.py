@@ -50,7 +50,7 @@ class GetEndpointData(insightconnect_plugin_runtime.Action):
             )
         # Load json objects to list
         endpoint_data_resp = []
-        for i in new_endpoint_data:
-            endpoint_data_resp.append(json.loads(i))
+        for data in new_endpoint_data:
+            endpoint_data_resp.append(json.loads(data))
         self.logger.info("Returning Results...")
         return {Output.ENDPOINT_DATA: endpoint_data_resp}

@@ -22,10 +22,13 @@ class SignOutAccount(insightconnect_plugin_runtime.Action):
         account_identifiers = params.get(Input.ACCOUNT_IDENTIFIERS)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        multi_resp = {Output.MULTI_RESPONSE: []}
-        for i in account_identifiers:
+        multi_resp = []
+        for account_identifier in account_identifiers:
             response = client.sign_out_account(
-                pytmv1.AccountTask(accountName=i["account_name"], description=i.get("description", ""))
+                pytmv1.AccountTask(
+                    accountName=account_identifier["account_name"],
+                    description=account_identifier.get("description", ""),
+                )
             )
             if "error" in response.result_code.lower():
                 raise PluginException(
@@ -33,8 +36,7 @@ class SignOutAccount(insightconnect_plugin_runtime.Action):
                     assistance="Please check the Account Identifier and try again.",
                     data=response.errors,
                 )
-            else:
-                multi_resp[Output.MULTI_RESPONSE].append(response.response.dict().get("items")[0])
+            multi_resp.append(response.response.dict().get("items")[0])
         # Return results
         self.logger.info("Returning Results...")
-        return multi_resp
+        return {Output.MULTI_RESPONSE: multi_resp}

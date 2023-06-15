@@ -45,8 +45,8 @@ class PollAlertList(insightconnect_plugin_runtime.Trigger):
                 )
             # Load json objects to list
             alert_list = []
-            for i in new_alerts:
-                alert_list.append(json.loads(i))
+            for new_alert in new_alerts:
+                alert_list.append(json.loads(new_alert))
             # Return results
             self.logger.info("Returning Results...")
             self.send({Output.TOTAL_COUNT: len(new_alerts), Output.ALERTS: alert_list})

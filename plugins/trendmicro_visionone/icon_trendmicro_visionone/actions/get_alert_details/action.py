@@ -34,9 +34,9 @@ class GetAlertDetails(insightconnect_plugin_runtime.Action):
                 assistance="Please check the alert ID and try again.",
                 data=response,
             )
-        else:
-            self.logger.info("Returning Results...")
-            return {
-                Output.ETAG: response.response.etag,
-                Output.ALERT_DETAILS: {"alert": response.response.alert.json()},
-            }
+        # Return results
+        self.logger.info("Returning Results...")
+        return {
+            Output.ETAG: response.response.etag,
+            Output.ALERT_DETAILS: {"alert": response.response.alert.json()},
+        }

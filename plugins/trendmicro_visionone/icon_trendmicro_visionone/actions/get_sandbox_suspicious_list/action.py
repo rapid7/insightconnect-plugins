@@ -40,11 +40,10 @@ class GetSandboxSuspiciousList(insightconnect_plugin_runtime.Action):
                 assistance="Please check the input ID and try again.",
                 data=response.error,
             )
-        else:
-            # Json load suspicious list objects
-            sandbox_suspicious_list_resp = []
-            for i in response.response.dict().get("items"):
-                sandbox_suspicious_list_resp.append(json.loads(json.dumps(i)))
-            # Return results
-            self.logger.info("Returning Results...")
-            return {Output.SANDBOX_SUSPICIOUS_LIST_RESP: sandbox_suspicious_list_resp}
+        # Json load suspicious list objects
+        sandbox_suspicious_list_resp = []
+        for item in response.response.dict().get("items"):
+            sandbox_suspicious_list_resp.append(json.loads(json.dumps(item)))
+        # Return results
+        self.logger.info("Returning Results...")
+        return {Output.SANDBOX_SUSPICIOUS_LIST_RESP: sandbox_suspicious_list_resp}

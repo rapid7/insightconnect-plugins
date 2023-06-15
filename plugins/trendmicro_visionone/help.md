@@ -54,12 +54,12 @@ Trend Micro Vision One is an enhanced threat defense platform, surpassing standa
 
 The connection configuration accepts the following parameters:
 
-|Name|Type| Default               |Required|Description|Enum|Example|
-|----|----|-----------------------|--------|-----------|----|-------|
-|api_key|credential_secret_key| default               |True|Vision One API Token|None|12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:02699626f388ed830012e5b787640e71c56d42d81234|
-|api_url|string| https://api.xdr.trendmicro.com   |True|URL of Trend Micro Vision One|None|https://tmv1-mock.trendmicro.com|
-|app_name|string| Rapid7-InsightConnect |True|Name of the App to be Integrated with|None|Rapid7-InsightConnect|
-|verify_ssl|boolean| True                  |True|Verify if connection uses SSL|None|True|
+|Name|Type| Default |Required|Description|Enum|Example|
+|----|----|----|--------|-----------|----|-------|
+|api_key|credential_secret_key|default|True|Vision One API Token|None|12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:02699626f388ed830012e5b787640e71c56d42d81234|
+|api_url|string|https://api.xdr.trendmicro.com|True|URL of Trend Micro Vision One|None|https://tmv1-mock.trendmicro.com|
+|app_name|string|Rapid7-InsightConnect|True|Name of the App to be Integrated with|None|Rapid7-InsightConnect|
+|verify_ssl|boolean|True|True|Verify if connection uses SSL|None|True|
 
 Example input:
 
@@ -121,9 +121,9 @@ This action adds an email address, file SHA-1, domain, IP address, or URL to the
 
 ##### Input
 
-| Name          | Type            |Default|Required|Description|Enum|Example|
-|---------------|-----------------|-------|--------|-----------|----|-------|
-| block_objects | []block_objects |None|True|Object object made up of type, value and description|None|[]|
+| Name        | Type          |Default|Required|Description|Enum|Example|
+|-------------|---------------|-------|--------|-----------|----|-------|
+|block_objects|[]block_objects|None|True|Object object made up of type, value and description|None|[]|
 
 Example input:
 
@@ -167,9 +167,9 @@ This action adds domains, file SHA-1 values, IP addresses, or URLs to the Except
 
 ##### Input
 
-| Name          | Type            |Default|Required|Description|Enum|Example|
-|---------------|-----------------|-------|--------|-----------|----|-------|
-| block_objects | []block_objects |None|True|Object object made up of type, value and description|None|[]|
+| Name        | Type          |Default|Required|Description|Enum|Example|
+|-------------|---------------|-------|--------|-----------|----|-------|
+|block_objects|[]block_objects|None|True|Object object made up of type, value and description|None|[]|
 
 Example input:
 
@@ -212,9 +212,9 @@ This action adds domains, file SHA-1/SHA-256 values, IP addresses, senderMailAdd
 
 ##### Input
 
-| Name                     | Type                       |Default|Required|Description|Enum|Example|
-|--------------------------|----------------------------|-------|--------|-----------|----|-------|
-| suspicious_block_objects | []suspicious_block_objects |None|True|Suspicious Object object made up of type, value and scan_action, risk_level and days_to_expiration|None|[]|
+| Name                   | Type                     |Default|Required|Description|Enum|Example|
+|------------------------|--------------------------|-------|--------|-----------|----|-------|
+|suspicious_block_objects|[]suspicious_block_objects|None|True|Suspicious Object object made up of type, value and scan_action, risk_level and days_to_expiration|None|[]|
 
 Example input:
 
@@ -565,7 +565,7 @@ Example output:
   "alert_details": {
     "alert": "<<referenced:bigdata>>"
   },
-  "etag": "\"0eaa4c39854bd42dcd9f09d5952c4e63c\""
+  "etag": "0eaa4c39854bd42dcd9f09d5952c4e63c"
 }
 ```
 

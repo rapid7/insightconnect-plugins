@@ -13,15 +13,15 @@ class TestIsolateEndpoint(TestCase):
 
     def test_integration_isolate_endpoint(self):
         response = self.action.run(self.mock_params["input"])
-        for i in response.keys():
-            self.assertIn(i, str(self.mock_params["output"].keys()))
+        for key in response.keys():
+            self.assertIn(key, str(self.mock_params["output"].keys()))
 
     def test_isolate_endpoint_success(self):
         expected_result = self.mock_params["output"]
         self.action.connection.client = MagicMock(return_value=expected_result)
         response = self.action.run(self.mock_params["input"])
-        for i in response.keys():
-            self.assertIn(i, str(expected_result.keys()))
+        for key in response.keys():
+            self.assertIn(key, str(expected_result.keys()))
 
     def test_isolate_endpoint_failure(self):
         self.action.connection.client.isolate_endpoint = MagicMock(

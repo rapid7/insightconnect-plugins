@@ -19,15 +19,15 @@ class TestSubmitFileToSandbox(TestCase):
 
     def test_integration_submit_file_to_sandbox(self):
         response = self.action.run(self.mock_params["input"])
-        for i in response.keys():
-            self.assertIn(i, str(self.mock_params["output"].keys()))
+        for key in response.keys():
+            self.assertIn(key, str(self.mock_params["output"].keys()))
 
     def test_submit_file_to_sandbox_success(self):
         expected_result = self.mock_params["output"]
         self.action.connection.client = MagicMock(return_value=expected_result)
         response = self.action.run(self.mock_params["input"])
-        for i in response.keys():
-            self.assertIn(i, str(expected_result.keys()))
+        for key in response.keys():
+            self.assertIn(key, str(expected_result.keys()))
 
     def test_submit_file_to_sandbox_failure(self):
         self.action.connection.client.submit_file_to_sandbox = MagicMock(

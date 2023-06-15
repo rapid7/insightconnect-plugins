@@ -43,15 +43,14 @@ class PollSandboxSuspiciousList(insightconnect_plugin_runtime.Trigger):
                     assistance="Check the input parameters and try again.",
                     data=response.error,
                 )
-            else:
-                # Json load suspicious list objects
-                sandbox_suspicious_list_resp = []
-                for i in response.response.dict().get("items"):
-                    sandbox_suspicious_list_resp.append(json.loads(json.dumps(i)))
-                # Return result
-                self.logger.info("Returning Results...")
-                self.send(
-                    {Output.SANDBOX_SUSPICIOUS_LIST_RESP: sandbox_suspicious_list_resp}
-                )
-                # Sleep before next run
-                time.sleep(params.get(Input.INTERVAL, 1800))
+            # Json load suspicious list objects
+            sandbox_suspicious_list_resp = []
+            for item in response.response.dict().get("items"):
+                sandbox_suspicious_list_resp.append(json.loads(json.dumps(item)))
+            # Return result
+            self.logger.info("Returning Results...")
+            self.send(
+                {Output.SANDBOX_SUSPICIOUS_LIST_RESP: sandbox_suspicious_list_resp}
+            )
+            # Sleep before next run
+            time.sleep(params.get(Input.INTERVAL, 1800))

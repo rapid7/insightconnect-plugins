@@ -13,8 +13,8 @@ class TestDownloadSandboxAnalysisResult(TestCase):
 
     def test_integration_download_sandbox_analysis_result(self):
         response = self.action.run(self.mock_params["input"])
-        for i in response.keys():
-            self.assertIn(i, str(self.mock_params["output"].keys()))
+        for key in response.keys():
+            self.assertIn(key, str(self.mock_params["output"].keys()))
 
     def test_download_sandbox_analysis_result_success(self):
         expected_result = self.mock_params["output"]
@@ -24,8 +24,8 @@ class TestDownloadSandboxAnalysisResult(TestCase):
             return_value=mock_response
         )
         response = self.action.run(self.mock_params["input"])
-        for i in response.keys():
-            self.assertIn(i, str(expected_result.keys()))
+        for key in response.keys():
+            self.assertIn(key, str(expected_result.keys()))
 
     def test_download_sandbox_analysis_result_failure(self):
         self.action.connection.client.download_sandbox_analysis_result = MagicMock(

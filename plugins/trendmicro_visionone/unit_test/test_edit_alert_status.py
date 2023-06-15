@@ -13,8 +13,8 @@ class TestEditAlertStatus(TestCase):
 
     def test_integration_edit_alert_status(self):
         response = self.action.run(self.mock_params["input"])
-        for i in response.keys():
-            self.assertIn(i, str(self.mock_params["output"].keys()))
+        for key in response.keys():
+            self.assertIn(key, str(self.mock_params["output"].keys()))
 
     def test_edit_alert_status_success(self):
         expected_result = self.mock_params["output"]
@@ -24,8 +24,8 @@ class TestEditAlertStatus(TestCase):
             return_value=mock_response
         )
         response = self.action.run(self.mock_params["input"])
-        for i in response.keys():
-            self.assertIn(i, str(expected_result.keys()))
+        for key in response.keys():
+            self.assertIn(key, str(expected_result.keys()))
 
     def test_edit_alert_status_failure(self):
         self.action.connection.client.edit_alert_status = MagicMock(

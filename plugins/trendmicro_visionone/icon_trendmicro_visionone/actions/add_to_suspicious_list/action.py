@@ -13,6 +13,26 @@ import pytmv1
 
 
 class AddToSuspiciousList(insightconnect_plugin_runtime.Action):
+    OBJECT_TYPE_MAPPING = {
+        "domain": pytmv1.ObjectType.DOMAIN,
+        "ip": pytmv1.ObjectType.IP,
+        "filesha1": pytmv1.ObjectType.FILE_SHA1,
+        "filesha256": pytmv1.ObjectType.FILE_SHA256,
+        "sendermailaddress": pytmv1.ObjectType.SENDER_MAIL_ADDRESS,
+        "url": pytmv1.ObjectType.URL,
+    }
+
+    SCAN_ACTION_MAPPING = {
+        "block": pytmv1.ScanAction.BLOCK,
+        "log": pytmv1.ScanAction.LOG,
+    }
+
+    RISK_LEVEL_MAPPING = {
+        "high": pytmv1.RiskLevel.HIGH,
+        "medium": pytmv1.RiskLevel.MEDIUM,
+        "low": pytmv1.RiskLevel.LOW,
+    }
+
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_to_suspicious_list",
@@ -27,40 +47,32 @@ class AddToSuspiciousList(insightconnect_plugin_runtime.Action):
         # Get Action Parameters
         block_objects = params.get(Input.SUSPICIOUS_BLOCK_OBJECTS)
         # Choose enum
-        for i in block_objects:
-            if "domain" in i["object_type"].lower():
-                i["object_type"] = pytmv1.ObjectType.DOMAIN
-            elif "ip" in i["object_type"].lower():
-                i["object_type"] = pytmv1.ObjectType.IP
-            elif "filesha1" in i["object_type"].lower():
-                i["object_type"] = pytmv1.ObjectType.FILE_SHA1
-            elif "filesha256" in i["object_type"].lower():
-                i["object_type"] = pytmv1.ObjectType.FILE_SHA256
-            elif "sendermailaddress" in i["object_type"].lower():
-                i["object_type"] = pytmv1.ObjectType.SENDER_MAIL_ADDRESS
-            elif "url" in i["object_type"].lower():
-                i["object_type"] = pytmv1.ObjectType.URL
-            elif "block" in i["scan_action"].lower():
-                i["scan_action"] = pytmv1.ScanAction.BLOCK
-            elif "log" in i["scan_action"].lower():
-                i["scan_action"] = pytmv1.ScanAction.LOG
-            elif "high" in i["risk_level"].lower():
-                i["risk_level"] = pytmv1.RiskLevel.HIGH
-            elif "medium" in i["risk_level"].lower():
-                i["risk_level"] = pytmv1.RiskLevel.MEDIUM
-            elif "low" in i["risk_level"].lower():
-                i["risk_level"] = pytmv1.RiskLevel.LOW
+        for block_object in block_objects:
+            block_object["object_type"] = self.OBJECT_TYPE_MAPPING.get(
+                block_object["object_type"].lower()
+            )
+            block_object["scan_action"] = self.SCAN_ACTION_MAPPING.get(
+                block_object["scan_action"].lower()
+            )
+            block_object["risk_level"] = self.RISK_LEVEL_MAPPING.get(
+                block_object["risk_level"].lower()
+            )
+            if not block_object["object_type"]:
+                raise PluginException(
+                    cause="Invalid object type.",
+                    assistance="Please check the provided object type and object value.",
+                )
         # Make Action API Call
         self.logger.info("Making API Call...")
-        multi_resp = {Output.MULTI_RESPONSE: []}
-        for i in block_objects:
+        multi_resp = []
+        for block_object in block_objects:
             response = client.add_to_suspicious_list(
                 pytmv1.SuspiciousObjectTask(
-                    objectType=i["object_type"],
-                    objectValue=i["object_value"],
-                    scan_action=i.get("scan_action", "block"),
-                    risk_level=i.get("risk_level", "medium"),
-                    days_to_expiration=i.get("expiry_days", 30),
+                    objectType=block_object["object_type"],
+                    objectValue=block_object["object_value"],
+                    scan_action=block_object.get("scan_action", "block"),
+                    risk_level=block_object.get("risk_level", "medium"),
+                    days_to_expiration=block_object.get("expiry_days", 30),
                 )
             )
             if "error" in response.result_code.lower():
@@ -69,12 +81,11 @@ class AddToSuspiciousList(insightconnect_plugin_runtime.Action):
                     assistance="Please check the input parameters and try again.",
                     data=response.errors,
                 )
-            else:
-                items = response.response.dict().get("items")[0]
-                items["task_id"] = (
-                    "None" if items.get("task_id") is None else items["task_id"]
-                )
-                multi_resp[Output.MULTI_RESPONSE].append(items)
+            items = response.response.dict().get("items")[0]
+            items["task_id"] = (
+                "None" if items.get("task_id") is None else items["task_id"]
+            )
+            multi_resp.append(items)
         # Return results
         self.logger.info("Returning Results...")
-        return multi_resp
+        return {Output.MULTI_RESPONSE: multi_resp}

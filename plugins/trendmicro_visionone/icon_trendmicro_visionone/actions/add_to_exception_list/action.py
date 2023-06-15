@@ -13,6 +13,15 @@ import pytmv1
 
 
 class AddToExceptionList(insightconnect_plugin_runtime.Action):
+    OBJECT_TYPES = {
+        "domain": pytmv1.ObjectType.DOMAIN,
+        "ip": pytmv1.ObjectType.IP,
+        "filesha1": pytmv1.ObjectType.FILE_SHA1,
+        "filesha256": pytmv1.ObjectType.FILE_SHA256,
+        "sendermailaddress": pytmv1.ObjectType.SENDER_MAIL_ADDRESS,
+        "url": pytmv1.ObjectType.URL,
+    }
+
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_to_exception_list",
@@ -27,28 +36,22 @@ class AddToExceptionList(insightconnect_plugin_runtime.Action):
         # Get Action Parameters
         block_objects = params.get(Input.BLOCK_OBJECTS)
         # Choose enum
-        for i in block_objects:
-            if "domain" in i["object_type"].lower():
-                i["object_type"] = pytmv1.ObjectType.DOMAIN
-            elif "ip" in i["object_type"].lower():
-                i["object_type"] = pytmv1.ObjectType.IP
-            elif "filesha1" in i["object_type"].lower():
-                i["object_type"] = pytmv1.ObjectType.FILE_SHA1
-            elif "filesha256" in i["object_type"].lower():
-                i["object_type"] = pytmv1.ObjectType.FILE_SHA256
-            elif "sendermailaddress" in i["object_type"].lower():
-                i["object_type"] = pytmv1.ObjectType.SENDER_MAIL_ADDRESS
-            elif "url" in i["object_type"].lower():
-                i["object_type"] = pytmv1.ObjectType.URL
+        for block_object in block_objects:
+            object_type = self.OBJECT_TYPES.get(block_object["object_type"].lower())
+            if not object_type:
+                raise PluginException(
+                    cause="Invalid object type.",
+                    assistance="Please check the provided object type and object value.",
+                )
         # Make Action API Call
         self.logger.info("Making API Call...")
-        multi_resp = {Output.MULTI_RESPONSE: []}
-        for i in block_objects:
+        multi_resp = []
+        for block_object in block_objects:
             response = client.add_to_exception_list(
                 pytmv1.ObjectTask(
-                    objectType=i["object_type"],
-                    objectValue=i["object_value"],
-                    description=i.get("description", ""),
+                    objectType=block_object["object_type"],
+                    objectValue=block_object["object_value"],
+                    description=block_object.get("description", ""),
                 )
             )
             if "error" in response.result_code.lower():
@@ -57,12 +60,11 @@ class AddToExceptionList(insightconnect_plugin_runtime.Action):
                     assistance="Please check the object_value and object_type parameters.",
                     data=response.errors,
                 )
-            else:
-                items = response.response.dict().get("items")[0]
-                items["task_id"] = (
-                    "None" if items.get("task_id") is None else items["task_id"]
-                )
-                multi_resp[Output.MULTI_RESPONSE].append(items)
+            items = response.response.dict().get("items")[0]
+            items["task_id"] = (
+                "None" if items.get("task_id") is None else items["task_id"]
+            )
+            multi_resp.append(items)
         # Return results
         self.logger.info("Returning Results...")
-        return multi_resp
+        return {Output.MULTI_RESPONSE: multi_resp}

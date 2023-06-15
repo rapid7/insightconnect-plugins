@@ -41,17 +41,16 @@ class DownloadSandboxInvestigationPackage(insightconnect_plugin_runtime.Action):
                 assistance="Please check the provided ID and try again.",
                 data=response,
             )
-        else:
-            # Make filename with timestamp
-            name = "Trend Micro Download Sandbox Investigation Package "
-            timestamp = time.time()
-            date_time = datetime.fromtimestamp(timestamp)
-            str_date_time = date_time.strftime("%d_%m_%Y_%H_%M_%S")
-            file_name = name + str_date_time + ".zip"
-            self.logger.info("Returning Results...")
-            return {
-                Output.FILE: {
-                    "content": base64.b64encode(response.response.content).decode(),
-                    "filename": file_name,
-                }
+        # Make filename with timestamp
+        name = "Trend Micro Download Sandbox Investigation Package "
+        timestamp = time.time()
+        date_time = datetime.fromtimestamp(timestamp)
+        str_date_time = date_time.strftime("%d_%m_%Y_%H_%M_%S")
+        file_name = name + str_date_time + ".zip"
+        self.logger.info("Returning Results...")
+        return {
+            Output.FILE: {
+                "content": base64.b64encode(response.response.content).decode(),
+                "filename": file_name,
             }
+        }

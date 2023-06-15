@@ -13,15 +13,15 @@ class TestCollectFile(TestCase):
 
     def test_integration_collect_file(self):
         response = self.action.run(self.mock_params["input"])
-        for i in response.keys():
-            self.assertIn(i, str(self.mock_params["output"].keys()))
+        for key in response.keys():
+            self.assertIn(key, str(self.mock_params["output"].keys()))
 
     def test_collect_file_success(self):
         expected_result = self.mock_params["output"]
         self.action.connection.client = MagicMock(return_value=expected_result)
         response = self.action.run(self.mock_params["input"])
-        for i in response.keys():
-            self.assertIn(i, str(expected_result.keys()))
+        for key in response.keys():
+            self.assertIn(key, str(expected_result.keys()))
 
     def test_collect_file_failure(self):
         self.action.connection.client.collect_file = MagicMock(
