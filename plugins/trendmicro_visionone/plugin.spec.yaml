@@ -1,0 +1,1663 @@
+plugin_spec_version: v2
+extension: plugin
+products: [ insightconnect ]
+name: trendmicro_visionone
+title: Trend Micro Vision One
+description: Trend Micro Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
+version: 1.0.0
+supported_versions: [ "Trend Micro Vision One API v3" ]
+vendor: trendmicro
+support: community
+status: [ ]
+enable_cache: true
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/trendmicro_visionone
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://trendmicro.com
+tags:
+  - vulnerability_scanning
+  - vulnerability_management
+  - intrusion_detection
+  - intrusion_protection
+  - virtual_patching
+  - remediation
+  - trend_micro
+  - vision_one
+hub_tags:
+  use_cases: [ vulnerability_management, cloud_security, remediation_management, threat_detection_and_response ]
+  keywords: [ remediation, detection ]
+  features: [ ]
+
+types:
+  multi_response:
+    status:
+      title: Status
+      type: integer
+      description: Status Code of response
+      required: true
+    task_id:
+      title: Task ID
+      type: string
+      description: Task ID in Trend Micro Vision One of the executed action
+      required: false
+  suspicious_objects:
+    url:
+      title: URL
+      type: string
+      description: Support leading and tailing wildcards
+      required: false
+    domain:
+      title: Domain
+      type: string
+      description: Support leading wildcard
+      required: false
+    sender_mail_address:
+      title: Sender Mail Address
+      type: string
+      description: Support fully qualified email address
+      required: false
+    ip:
+      title: IP
+      type: string
+      description: Support only full match
+      required: false
+      example: 200.102.35.1
+    file_sha1:
+      title: File SHA1
+      type: string
+      description: Support only full match (40 characters)
+      required: false
+    file_sha256:
+      title: File SHA256
+      type: string
+      description: Support only full match (64 characters)
+      required: false
+    type:
+      title: Type
+      type: string
+      description: The type of suspicious object
+      required: true
+      enum:
+        - domain
+        - ip
+        - fileSha1
+        - fileSha256
+        - senderMailAddress
+        - url
+    description:
+      title: Description
+      type: string
+      description: Description
+      required: false
+    last_modified_date_time:
+      title: Last Modified Date Time
+      type: string
+      description: Timestamp in ISO 8601 format that indicates the last time the information about a suspicious object was modified
+      required: true
+      example: 2023-04-14T06:55:29Z
+    scan_action:
+      title: Scan Action
+      type: string
+      description: Action that connected products apply after detecting a suspicious object
+      required: true
+      enum:
+        - block
+        - log
+    risk_level:
+      title: Risk Level
+      type: string
+      description: Risk level of a suspicious object
+      required: true
+      enum:
+        - high
+        - medium
+        - low
+    in_exception_list:
+      title: In Exception List
+      type: boolean
+      description: Value that indicates if a suspicious object is in the exception list
+      required: true
+    expired_date_time:
+      title: Expired Date Time
+      type: string
+      description: Timestamp in ISO 8601 format that indicates when the suspicious object expires
+      example: 2023-04-14T06:55:29Z
+  exception_objects:
+    url:
+      title: URL
+      type: string
+      description: Support leading and tailing wildcards
+      required: false
+    domain:
+      title: Domain
+      type: string
+      description: Support leading wildcard
+      required: false
+    sender_mail_address:
+      title: Sender Mail Address
+      type: string
+      description: Support fully qualified email address
+      required: false
+    ip:
+      title: IP
+      type: string
+      description: Support only full match
+      required: false
+      example: 200.102.35.1
+    file_sha1:
+      title: File SHA1
+      type: string
+      description: Support only full match (40 characters)
+      required: false
+    file_sha256:
+      title: File SHA256
+      type: string
+      description: Support only full match (64 characters)
+      required: false
+    type:
+      title: Type
+      type: string
+      description: The type of exception object
+      required: true
+      enum:
+        - domain
+        - ip
+        - fileSha1
+        - fileSha256
+        - senderMailAddress
+        - url
+    description:
+      title: Description
+      type: string
+      description: Description
+      required: false
+    last_modified_date_time:
+      title: Last Modified Date Time
+      type: string
+      description: The time the object was created.
+      required: true
+      example: 2023-04-14T06:55:29Z
+  endpoint_data:
+    agent_guid:
+      title: Agent GUID
+      type: string
+      description: Unique alphanumeric string that identifies an endpoint agent on the Trend Vision One platform
+      required: true
+    login_account:
+      title: Login Account
+      type: object
+      description: User accounts of an endpoint with timestamp
+      required: true
+    endpoint_name:
+      title: Endpoint Name
+      type: object
+      description: Hostname of an endpoint with timestamp
+      required: true
+    mac_address:
+      title: MAC Address
+      type: object
+      description: MAC Address of an endpoint with timestamp
+      required: true
+    ip:
+      title: IP
+      type: object
+      description: IPs of an endpoint with timestamp
+      required: true
+    os_name:
+      title: OS Name
+      type: string
+      description: Operating system installed on an endpoint
+      required: true
+      enum:
+        - Linux
+        - Windows
+        - macOS
+        - macOSX
+    os_version:
+      title: OS Version
+      type: string
+      description: Version of the operating system installed on an endpoint
+      required: true
+    os_description:
+      title: OS Description
+      type: string
+      description: Description of the operating system installed on an endpoint
+      required: true
+    product_code:
+      title: Product Code
+      type: string
+      description: A 3-character code that identifies Trend Micro products
+      required: true
+      enum:
+        - sao
+        - sds
+        - xes
+    installed_product_codes:
+      title: Installed Product Codes
+      type: "[]string"
+      description: A 3-character code that identifies the installed Trend Micro products on an endpoint
+      required: true
+  submit_urls_resp:
+    url:
+      title: URL
+      type: string
+      description: This is the URL you submitted
+      required: true
+    task_id:
+      title: Task ID
+      type: string
+      description: The Task ID of the submitted URL
+      required: false
+    status:
+      title: Status
+      type: integer
+      description: The Status Code of the submitted URL task
+      required: false
+    id:
+      title: ID
+      type: string
+      description: Unique alphanumeric string that identifies a submission
+      required: false
+      example: 0so47fy9
+    digest:
+      title: Digest
+      type: object
+      description: Object containing the hashes of the URL submitted
+      required: false
+  sandbox_suspicious_list_resp:
+    risk_level:
+      title: Risk Level
+      type: string
+      description: Risk Level of suspicious object
+      required: true
+    analysis_completion_date_time:
+      title: Analysis Completion Date Time
+      type: string
+      description: Analyze time of suspicious object
+      required: true
+      example: 2023-04-14T06:55:29Z
+    expired_date_time:
+      title: Expired Date Time
+      type: string
+      description: Expire time of suspicious object
+      required: true
+      example: 2023-04-14T06:55:29Z
+    root_sha1:
+      title: Root SHA1
+      type: string
+      description: Sample SHA1 generate this suspicious object
+      required: true
+    type:
+      title: Type
+      type: string
+      description: Type of suspicious object
+      required: true
+    value:
+      title: Value
+      type: string
+      description: Value of suspicious object
+      required: true
+  process_identifiers:
+    endpoint_name:
+      title: Endpoint
+      type: string
+      description: Hostname or macaddr of the endpoint to collect file from
+      required: false
+      example: clientPC
+    agent_guid:
+      title: Agent GUID
+      type: string
+      description: Agent GUID of the endpoint to collect file from
+      required: false
+      example: cb9c8412-1f64-4fa0-a36b-76bf41a07ede
+    file_sha1:
+      title: File SHA1
+      type: string
+      description: SHA1 hash of the process to terminate
+      required: true
+      example: c88878f98c7c2b5d9c551a0e99496d0dc7d0367c
+    description:
+      title: Description
+      type: string
+      description: Optional Description
+      required: false
+      example: Terminate Process
+    filename:
+      title: Filename
+      type: string
+      description: Optional file name list for log
+      required: false
+      example: v1rus.exe
+  endpoint_identifiers:
+    endpoint_name:
+      title: Endpoint
+      type: string
+      description: Hostname or macaddr of the endpoint to collect file from
+      required: false
+      example: clientPC
+    agent_guid:
+      title: Agent GUID
+      type: string
+      description: Agent GUID of the endpoint to collect file from
+      required: false
+      example: cb9c8412-1f64-4fa0-a36b-76bf41a07ede
+    description:
+      title: Description
+      type: string
+      description: Optional Description
+      required: false
+      example: Isolate Endpoint
+  account_identifiers:
+    account_name:
+      title: Account Name
+      type: string
+      description: The User account that needs to be acted upon
+      required: true
+      example: account1
+    description:
+      title: Description
+      type: string
+      description: Description of a response task
+      required: false
+      example: This is a regular user account
+  email_identifiers:
+    message_id:
+      title: Message ID
+      type: string
+      description: Unique string that identifies an email message (<mailMsgId> or msgUuid)
+      required: true
+      example: AAkALgAAAAAAHYQDEapmEc2byACqAC-EWg0AAhCCNvg5sEua0nNjgfLS2AABNpgLcwAA
+    mailbox:
+      title: Mailbox
+      type: string
+      description: Email address
+      required: false
+      example: example@example.com
+    description:
+      title: Description
+      type: string
+      description: Optional description for reference
+      required: false
+      example: Quarantine e-mail message
+  collect_files:
+    endpoint_name:
+      title: Endpoint
+      type: string
+      description: Hostname or macaddr of the endpoint to collect file from
+      required: false
+      example: clientPC
+    agent_guid:
+      title: Agent GUID
+      type: string
+      description: Agent GUID of the endpoint to collect file from
+      required: false
+      example: cb9c8412-1f64-4fa0-a36b-76bf41a07ede
+    file_path:
+      title: File Path
+      type: string
+      description: Path to the file to collect. (<= 1024 characters)
+      required: true
+      example: C://v1rus.exe
+    description:
+      title: Description
+      type: string
+      description: Optional Description of the file
+      required: false
+      example: this file got on my computer from www.shadyfiles.com
+  block_objects:
+    object_type:
+      title: Object Type
+      type: string
+      description: Object type- domain, IP, fileSha1, fileSha256, senderMailAddress or URL
+      required: true
+      enum:
+        - domain
+        - ip
+        - fileSha1
+        - fileSha256
+        - senderMailAddress
+        - url
+      example: ip
+    object_value:
+      title: Value
+      type: string
+      description: The object value. Full and partial matches supported. Domain partial match, (with a wildcard as the subdomain, example, .example.com) IP partial match, (IP range example, 192.168.35.1-192.168.35.254, CIDR example, 192.168.35.1/24) URL Partial match, (Supports wildcards http://, https:// at beginning, or at the end. Multiple wild cards also supported, such as , https://.example.com/path1/) SHA1 Only full match
+      required: true
+      example: 127.127.127.127
+    description:
+      title: Description
+      type: string
+      description: Optional description for reference
+      required: false
+      example: Add to exception list
+  suspicious_block_objects:
+    object_type:
+      title: Object Type
+      type: string
+      description: Object type- domain, IP, fileSha1, fileSha256, senderMailAddress or URL
+      required: true
+      enum:
+        - domain
+        - ip
+        - fileSha1
+        - fileSha256
+        - senderMailAddress
+        - url
+      example: ip
+    object_value:
+      title: Value
+      type: string
+      description: The object value. Full and partial matches supported. Domain partial match, (with a wildcard as the subdomain, example, .example.com) IP partial match, (IP range example, 192.168.35.1-192.168.35.254, CIDR example, 192.168.35.1/24) URL Partial match, (Supports wildcards http://, https:// at beginning, or at the end. Multiple wild cards also supported, such as , https://.example.com/path1/) SHA1 Only full match
+      required: true
+      example: 127.127.127.127
+    scan_action:
+      title: Scan Action
+      type: string
+      description: Action that connected products apply after detecting a suspicious object
+      required: false
+      enum:
+        - block
+        - log
+    risk_level:
+      title: Risk Level
+      type: string
+      description: Risk level of a suspicious object
+      required: false
+      enum:
+        - high
+        - medium
+        - low
+    days_to_expiration:
+      title: Days to Expiration
+      type: integer
+      description: Indicates the number of days before the object expires. If daysToExpiration is -1, the object does not have an expiration date
+      required: false
+  alert:
+    schema_version:
+      title: Schema Version
+      description: The version of the JSON schema, not the version of alert trigger content
+      type: string
+      required: false
+    id:
+      title: ID
+      description: Workbench ID
+      type: string
+      required: false
+    investigation_status:
+      title: Investigation Status
+      description: Workbench alert status
+      type: string
+      required: false
+      enum:
+        - New
+        - In Progress
+        - True Positive
+        - False Positive
+    workbench_link:
+      title: Workbench Link
+      description: Workbench URL
+      type: string
+      required: false
+    alert_provider:
+      title: Alert Provider
+      description: Alert Provider
+      type: string
+      required: false
+    model:
+      title: Model
+      description: Name of the detection model that triggered the alert
+      type: string
+      required: false
+    score:
+      title: Score
+      description: Overall severity assigned to the alert based on the severity of the matched detection model and the impact scope
+      type: integer
+      required: false
+    severity:
+      title: Severity
+      description: Workbench alert severity
+      type: string
+      required: false
+      enum:
+        - critical
+        - high
+        - medium
+        - low
+    impact_scope:
+      title: Impact Scope
+      description: Affected entities information
+      type: object
+      required: false
+    created_date_time:
+      title: Created Date Time
+      description: Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the created date time of the alert
+      type: string
+      required: false
+      example: 2023-04-14T06:55:29Z
+    updated_date_time:
+      title: Updated Date Time
+      description: Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the last updated date time of the alert
+      type: string
+      required: false
+      example: 2023-04-14T06:55:29Z
+    description:
+      title: Description
+      description: Description of the detection model that triggered the alert
+      type: string
+      required: false
+    indicators:
+      title: Indicators
+      description: The indicators refer to those objects which are found by RCA or sweeping
+      type: "[]object"
+      required: false
+    matched_rules:
+      title: Matched Rules
+      description: The rules are triggered
+      type: "[]object"
+      required: false
+    campaign:
+      title: Campaign
+      description: An object-ref to a campaign object
+      type: string
+      required: false
+    industry:
+      title: Industry
+      description: Industry
+      type: string
+      required: false
+    region_and_country:
+      title: Region and Country
+      description: Region/Country (The region field would follow the STIX2.1 standard. The country field would follow the Alpha-2 standard. If only region or country is provided, the slash would be removed.)
+      type: string
+      required: false
+    created_by:
+      title: Created By
+      description: Created By
+      type: string
+      required: false
+    total_indicator_count:
+      title: Total Indicator Count
+      description: Total indicator pattern count
+      type: integer
+      required: false
+    matched_indicator_count:
+      title: Matched Indicator Count
+      description: Matched indicator pattern count
+      type: integer
+      required: false
+    report_link:
+      title: Report Link
+      description: A refrerence URL which links to the report details analysis. For TrendMico research report, the link would link to trend blog
+      type: string
+      required: false
+    matched_indicator_patterns:
+      title: Matched Indicator Patters
+      description: The matched indicator patterns
+      type: "[]object"
+      required: false
+
+connection:
+  api_url:
+    title: API URL
+    description: URL of Trend Micro Vision One
+    type: string
+    default: https://api.xdr.trendmicro.com
+    required: true
+    example: https://tmv1-mock.trendmicro.com
+  api_key:
+    title: API KEY
+    description: Vision One API Token
+    type: credential_secret_key
+    default: default
+    required: true
+    example: 12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234
+  app_name:
+    title: App Name
+    description: Name of the App to be Integrated with
+    type: string
+    default: "Rapid7-InsightConnect"
+    required: true
+    example: "Rapid7-InsightConnect"
+  verify_ssl:
+    title: Verify SSL
+    description: Verify if connection uses SSL
+    type: boolean
+    default: true
+    required: true
+    example: true
+
+triggers:
+  poll_sandbox_suspicious_list:
+    title: Poll Sandbox Suspicious List
+    description: Polls the suspicious object list associated to the specified object. Note ~ Suspicious Object Lists are only available for objects with a high risk level
+    input:
+      id:
+        title: ID
+        type: string
+        description: Unique alphanumeric string that identifies the analysis results of a submission
+        required: true
+        example: "6345645"
+      poll:
+        title: Poll
+        type: boolean
+        description: If script should wait until the task is finished before returning the result (enabled by default)
+        required: true
+        example: true
+      poll_time_sec:
+        title: Poll Time in Seconds
+        type: float
+        description: Maximum time to wait for the result to be available
+        required: false
+        example: 15.5
+      interval:
+        title: Interval
+        type: integer
+        description: Interval (in seconds) in which the polling script should run again
+        required: true
+        example: 1800
+    output:
+      sandbox_suspicious_list_resp:
+        title: Sandbox Suspicious List Response
+        description: Sandbox Suspicious Object List Response
+        type: "[]sandbox_suspicious_list_resp"
+        required: true
+        example: [ ]
+  poll_alert_list:
+    title: Poll Alert List
+    description: Polls information about workbench alerts that match the specified criteria in a paginated list
+    input:
+      start_date_time:
+        title: Start Date Time
+        type: string
+        description: Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the start of the data retrieval time range. The available oldest value is "1970-01-01T00:00:00Z"
+        required: true
+        example: 2020-06-15T10:00:00Z
+      interval:
+        title: Interval
+        type: integer
+        description: Interval (in seconds) in which the polling script should run again
+        required: true
+        example: 1800
+    output:
+      total_count:
+        title: Total Count
+        description: Number of Workbench alerts retrieved
+        type: integer
+        required: true
+        example: 5
+      alerts:
+        title: Alerts
+        description: Array of any alerts (awb-workbenchAlertV3)
+        type: "[]alert"
+        required: true
+        example: [ ]
+
+actions:
+  enable_account:
+    title: Enable Account
+    description: Allows the user to sign in to new application and browser sessions. Supported IAM systems - Azure AD and Active Directory (on-premises)
+    input:
+      account_identifiers:
+        title: Account Identifiers
+        type: "[]account_identifiers"
+        description: User Account Identifiers containing account name and description
+        required: true
+        example: [ ]
+    output:
+      multi_response:
+        title: Multi Response
+        description: Enable Account Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
+  disable_account:
+    title: Disable Account
+    description: Signs the user out of all active application and browser sessions, and prevents the user from signing in any new session. Supported IAM systems - Azure AD and Active Directory (on-premises)
+    input:
+      account_identifiers:
+        title: Account Identifiers
+        type: "[]account_identifiers"
+        description: User Account Identifiers containing account name and description
+        required: true
+        example: [ ]
+    output:
+      multi_response:
+        title: Multi Response
+        description: Disable Account Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
+  sign_out_account:
+    title: Sign out Account
+    description: Signs the user out of all active application and browser sessions. Supported IAM systems - Azure AD
+    input:
+      account_identifiers:
+        title: Account Identifiers
+        type: "[]account_identifiers"
+        description: User Account Identifiers containing account name and description
+        required: true
+        example: [ ]
+    output:
+      multi_response:
+        title: Multi Response
+        description: Sign out Account Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
+  reset_password_account:
+    title: Reset Password Account
+    description: Signs the user out of all active application and browser sessions, and forces the user to create a new password during the next sign-in attempt. Supported IAM systems - Azure AD and Active Directory (on-premises)
+    input:
+      account_identifiers:
+        title: Account Identifiers
+        type: "[]account_identifiers"
+        description: User Account Identifiers containing account name and description
+        required: true
+        example: [ ]
+    output:
+      multi_response:
+        title: Multi Response
+        description: Reset Password Account Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
+  quarantine_email_message:
+    title: Quarantine Email Message
+    description: Moves a message from a mailbox to the quarantine folder
+    input:
+      email_identifiers:
+        title: Email Identifiers
+        type: "[]email_identifiers"
+        description: Email Identifiers consisting of message id, mailbox and description
+        required: true
+        example: [ ]
+    output:
+      multi_response:
+        title: Multi Response
+        description: Quarantine Email Message Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
+  delete_email_message:
+    title: Delete Email Message
+    description: Deletes a message from a mailbox
+    input:
+      email_identifiers:
+        title: Email Identifiers
+        type: "[]email_identifiers"
+        description: Email Identifiers consisting of message id, mailbox and description
+        required: true
+        example: [ ]
+    output:
+      multi_response:
+        title: Multi Response
+        description: Delete Email Message Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
+  restore_email_message:
+    title: Restore Email Message
+    description: Restores a quarantined email message
+    input:
+      email_identifiers:
+        title: Email Identifiers
+        type: "[]email_identifiers"
+        description: Email Identifiers consisting of message id, mailbox and description
+        required: true
+        example: [ ]
+    output:
+      multi_response:
+        title: Multi Response
+        description: Delete Email Message Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
+  isolate_endpoint:
+    title: Isolate Endpoint
+    description: Disconnects an endpoint from the network (but allows communication with the managing Trend Micro product)
+    input:
+      endpoint_identifiers:
+        title: Endpoint Identifiers
+        type: "[]endpoint_identifiers"
+        description: Endpoint Identifiers consisting of endpoint(hostname or agentGuid) and description
+        required: true
+        example: [ ]
+    output:
+      multi_response:
+        title: Multi Response
+        description: Isolate Endpoint Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
+  restore_endpoint:
+    title: Restore Endpoint
+    description: Restores network connectivity to an endpoint that applied the isolate endpoint action
+    input:
+      endpoint_identifiers:
+        title: Endpoint Identifiers
+        type: "[]endpoint_identifiers"
+        description: Endpoint Identifiers consisting of endpoint(hostname or agentGuid) and description
+        required: true
+        example: [ ]
+    output:
+      multi_response:
+        title: Multi Response
+        description: Restore Endpoint Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
+  add_to_exception_list:
+    title: Add to Exception List
+    description: Adds domains, file SHA-1 values, IP addresses, or URLs to the Exception List and prevents these objects from being added to the Suspicious Object List
+    input:
+      block_objects:
+        title: Block Objects
+        type: "[]block_objects"
+        description: Objects made up of type, value and description
+        required: true
+        example: [ ]
+    output:
+      multi_response:
+        title: Multi Response
+        description: Add To Exception List Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
+  remove_from_exception_list:
+    title: Remove from Exception List
+    description: Removes domains, file SHA-1 values, IP addresses, or URLs from the Exception List
+    input:
+      block_objects:
+        title: Block Objects
+        type: "[]block_objects"
+        description: Objects made up of type, value and description
+        required: true
+        example: [ ]
+    output:
+      multi_response:
+        title: Multi Response
+        description: Remove From Exception List Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
+  remove_from_block_list:
+    title: Remove from Block List
+    description: Removes an email address, file SHA-1, domain, IP address, or URL that was added to the Suspicious Object List using the Add to block list action
+    input:
+      block_objects:
+        title: Block Objects
+        type: "[]block_objects"
+        description: Objects made up of type, value and description
+        required: true
+        example: [ ]
+    output:
+      multi_response:
+        title: Multi Response
+        description: Remove From Block List Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
+  add_to_suspicious_list:
+    title: Add to Suspicious List
+    description: Adds domains, file SHA-1/SHA-256 values, IP addresses, senderMailAddress, or URLs to the Block Object List
+    input:
+      suspicious_block_objects:
+        title: Suspicious Block Objects
+        type: "[]suspicious_block_objects"
+        description: Suspicious Objects made up of type, value and scan_action, risk_level and days_to_expiration
+        required: true
+        example: [ ]
+    output:
+      multi_response:
+        title: Multi Response
+        description: Add To Suspicious List Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
+  remove_from_suspicious_list:
+    title: Remove from Suspicious List
+    description: Removes domains, file SHA-1 values, IP addresses, or URLs from the Suspicious Object List
+    input:
+      block_objects:
+        title: Block Objects
+        type: "[]block_objects"
+        description: Objects made up of type, value and description
+        required: true
+        example: [ ]
+    output:
+      multi_response:
+        title: Multi Response
+        description: Add To Exception List Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
+  get_endpoint_data:
+    title: Get Endpoint Data
+    description: Retrieves information about a specific endpoint
+    input:
+      endpoint:
+        title: Endpoint
+        type: string
+        description: Hostname, macAddress, agentGuid or IP of the endpoint to query
+        required: true
+        example: 127.127.127.127
+      query_op:
+        title: Query Operator
+        type: string
+        description: Logical operator to employ in the query. (AND/OR)
+        required: true
+        example: " or "
+        default: " or "
+        enum:
+          - " or "
+          - " and "
+    output:
+      endpoint_data:
+        title: Endpoint Data
+        description: Array of Endpoint Data Objects, consisting of agent guid, login account, endpoint name, MAC address, IP, os name, or version, os description, product code and installed product code
+        type: "[]endpoint_data"
+        required: true
+        example: [ ]
+  terminate_process:
+    title: Terminate Process
+    description: Terminates a process that is running on an endpoint
+    input:
+      process_identifiers:
+        title: Process Identifiers
+        type: "[]process_identifiers"
+        description: Process Identifiers consisting of endpoint(hostname or agentGuid), filesha1, filename(optional) and description(optional)
+        required: true
+        example: [ ]
+    output:
+      multi_response:
+        title: Multi Response
+        description: Terminate Process Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
+  get_sandbox_submission_status:
+    title: Get Sandbox Submission Status
+    description: Retrieves the status of a sandbox analysis submission
+    input:
+      task_id:
+        title: Task ID
+        type: string
+        description: Task_id from the trendmicro-visionone-submit-file-to-sandbox command output
+        required: true
+        example: "02384"
+    output:
+      id:
+        title: ID
+        description: Unique alphanumeric string that identifies a submission
+        type: string
+        required: true
+        example: 0so47fy9
+      status:
+        title: Status
+        description: Response code for the action call
+        type: string
+        required: true
+        example: "running"
+        enum:
+          - "succeeded"
+          - "running"
+          - "failed"
+      action:
+        title: Action
+        description: Action applied to a submitted object
+        type: string
+        required: true
+        example: "analyzeFile"
+        enum:
+          - "analyzeFile"
+          - "analyzeUrl"
+      error:
+        title: Error
+        description: Error code and message for the submission
+        type: object
+        required: false
+        example: {
+          "error":
+            {
+              "code": "NotFound",
+              "message": "Not Found"
+            }
+        }
+      digest:
+        title: Digest
+        description: The hash values for the file analyzed
+        type: object
+        required: false
+        example: { }
+      created_date_time:
+        title: Created Date Time
+        description: Timestamp in ISO 8601 that indicates the object was submitted to the sandbox
+        type: string
+        required: true
+        example: 2022-02-14T16:30:45Z
+      last_action_date_time:
+        title: Last Action Date Time
+        description: Timestamp in ISO 8601 format that indicates when the information about a submission was last updated
+        type: string
+        required: true
+        example: 2022-02-14T16:30:45Z
+      resource_location:
+        title: Resource Location
+        description: Location of the submitted file
+        type: string
+        required: false
+        example: temp/downloaded/virus.exe
+      is_cached:
+        title: Is Cached
+        description: Parameter that indicates if an object has been analyzed before by the Sandbox Analysis App. Submissions marked as cached do not count toward the daily reserve
+        type: boolean
+        required: false
+        example: false
+      arguments:
+        title: Arguments
+        description: Arguments for the file submitted
+        type: string
+        required: false
+        example: -y -d
+  get_sandbox_analysis_result:
+    title: Get Sandbox Analysis Result
+    description: Retrieves the sandbox analysis results
+    input:
+      report_id:
+        title: Report ID
+        type: string
+        description: Report_id of the sandbox submission retrieved from the trendmicro-visionone-get-file-analysis-status command
+        required: true
+        example: "02384"
+      poll:
+        title: Poll
+        type: boolean
+        description: If script should wait until the task is finished before returning the result (enabled by default)
+        required: true
+        example: true
+      poll_time_sec:
+        title: Poll Time in Seconds
+        type: float
+        description: Maximum time to wait for the result to be available
+        required: false
+        example: 15.5
+    output:
+      id:
+        title: ID
+        description: Unique alphanumeric string that identifies the analysis results of a submitted object
+        type: string
+        required: true
+        example: 908324jf9384
+      type:
+        title: Type
+        description: Object Type
+        type: string
+        required: true
+        example: "url"
+        enum:
+          - "file"
+          - "url"
+      digest:
+        title: Digest
+        description: The hash values of the analyzed file
+        type: object
+        required: false
+        example: { }
+      risk_level:
+        title: Risk Level
+        description: The risk level assigned to the object by the sandbox
+        type: string
+        required: true
+        example: "low"
+        enum:
+          - "high"
+          - "medium"
+          - "low"
+          - "noRisk"
+      analysis_completion_date_time:
+        title: Analysis Completion Date Time
+        description: Timestamp in ISO 8601 format that indicates when the analysis was completed
+        type: string
+        required: true
+        example: 2022-02-14T16:30:45Z
+      arguments:
+        title: Arguments
+        description: Command line arguments encoded in Base64 of the submitted file
+        type: string
+        required: false
+        example: QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+      detection_names:
+        title: Detection Names
+        description: The name of the threat as detected by the sandbox
+        type: "[]string"
+        required: false
+        example: [ ]
+      threat_types:
+        title: Threat Types
+        description: The threat type as detected by the sandbox
+        type: "[]string"
+        required: false
+        example: [ ]
+      true_file_type:
+        title: True File Type
+        description: File Type of the Object
+        type: string
+        required: false
+        example: .exe
+  collect_file:
+    title: Collect File
+    description: Collects a file from one or more endpoints and then sends the files to Trend Micro Vision One in a password-protected archive Note- You can specify either the computer name- endpointName or the GUID of the installed agent program- agentGuid
+    input:
+      collect_files:
+        title: Collect Files
+        type: "[]collect_files"
+        description: Collect file input JSON containing endpoint, file path and description
+        required: true
+        example: [ ]
+    output:
+      multi_response:
+        title: Multi Response
+        description: Add To Block List Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
+  get_task_result:
+    title: Get Task Result
+    description: Retrieves an object containing the results of a response task in JSON format
+    input:
+      task_id:
+        title: Task ID
+        type: string
+        description: TaskId output from the collect command used to collect the file
+        required: true
+        example: 3456346
+      poll:
+        title: Poll
+        type: boolean
+        description: If script should wait until the task is finished before returning the result (enabled by default)
+        required: true
+        example: true
+      poll_time_sec:
+        title: Poll Time in Seconds
+        type: float
+        description: Maximum time to wait for the result to be available
+        required: false
+        example: 15.5
+    output:
+      status:
+        title: Status
+        description: The status of the command sent to the managing server. Possible task statuses; queued - The server queued the command due to a high volume of requests or because the Security Agent was offline; running - Trend Micro Vision One sent the command to the managing server and is waiting for a response; succeeded - The managing server successfully received the command; rejected - The server rejected the task. For automated response task only; waitForApproval - The task is pending approval. For automated response task only; failed - An error or time-out occurred when attempting to send the command to the managing server
+        type: string
+        required: true
+        example: "queued"
+        enum:
+          - "queued"
+          - "running"
+          - "succeeded"
+          - "rejected"
+          - "waitForApproval"
+          - "failed"
+      created_date_time:
+        title: Created Date Time
+        description: Timestamp in ISO 8601 format
+        type: string
+        required: true
+        example: 2022-02-14T16:30:45Z
+      id:
+        title: ID
+        description: Unique numeric string that identifies a response task
+        type: string
+        required: false
+        example: j9wq384fj9
+      last_action_date_time:
+        title: Last Action Date Time
+        description: Timestamp in ISO 8601 format
+        type: string
+        required: true
+        example: 2022-02-14T16:30:45Z
+      description:
+        title: Description
+        description: Task Description
+        type: string
+        required: false
+        example: example desc
+      action:
+        title: Action
+        description: Command sent to the target
+        type: string
+        required: true
+        example: "isolate"
+        enum:
+          - "isolate"
+          - "restoreIsolate"
+          - "collectFile"
+          - "terminateProcess"
+          - "quarantineMessage"
+          - "restoreMessage"
+          - "deleteMessage"
+          - "block"
+          - "restoreBlock"
+          - "remoteShell"
+          - "runInvestigationKit"
+          - "runCustomScript"
+          - "submitSandbox"
+          - "dumpProcessMemory"
+          - "disableAccount"
+          - "enableAccount"
+          - "forceSignOut"
+          - "resetPassword"
+      account:
+        title: Account
+        description: User that triggered the response
+        type: string
+        required: false
+        example: user1
+      agent_guid:
+        title: Agent GUID
+        description: Unique alphanumeric string that identifies an installed agent
+        type: string
+        required: false
+        example: 2839eu2983e23e
+      endpoint_name:
+        title: Endpoint Name
+        description: Endpoint name of the target endpoint
+        type: string
+        required: false
+        example: endpoint1
+      file_path:
+        title: File Path
+        description: File path for the file that was collected
+        type: string
+        required: false
+        example: temp/downloads/virus.exe
+      file_sha1:
+        title: File SHA1
+        description: The fileSHA1 of the collected file
+        type: string
+        required: false
+        example: 3395856ce81f2b7382dee72602f798b642f14140
+      file_sha256:
+        title: File SHA256
+        description: The fileSHA256 of the collected file
+        type: string
+        required: false
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+      file_size:
+        title: File Size
+        description: The file size of the file collected
+        type: integer
+        required: false
+        example: 256
+      resource_location:
+        title: Resource Location
+        description: URL location of the file collected that can be used to download
+        type: string
+        required: false
+        example: www.resourcelocation.ert
+      expired_date_time:
+        title: Expired Date Time
+        description: The expiration date and time of the file
+        type: string
+        required: false
+        example: 2022-02-14T16:30:45Z
+      password:
+        title: Password
+        description: The password of the file collected
+        type: string
+        required: false
+        example: 1234!
+      filename:
+        title: Filename
+        description: File name of a response task target (<= 255)
+        type: string
+        required: false
+        example: virus.exe
+      tasks:
+        title: Tasks
+        description: Currently, it is only possible to apply tasks to one message in a mailbox or one message in several mailboxes
+        type: "[]object"
+        required: false
+        example: [ ]
+      url:
+        title: URL
+        description: Universal Resource Locator
+        type: string
+        required: false
+        example: www.url.url
+      sandbox_task_id:
+        title: Sandbox Task ID
+        description: Unique alphanumeric string that identifies a task generated by the Sandbox Analysis App
+        type: string
+        required: false
+        example: 283j928j3d2
+      pid:
+        title: PID
+        description: Unique numeric string that identifies an active process
+        type: integer
+        required: false
+        example: 20374284
+      image_path:
+        title: Image Path
+        description: File path of a process image
+        type: string
+        required: false
+        example: temp/images/image.png
+  download_sandbox_investigation_package:
+    title: Download Sandbox Investigation Package
+    description: Downloads the investigation package based on submission ID
+    input:
+      id:
+        title: ID
+        type: string
+        description: Unique alphanumeric string that identifies the analysis results of a submission
+        required: true
+        example: "6345645"
+      poll:
+        title: Poll
+        type: boolean
+        description: If script should wait until the task is finished before returning the result (enabled by default)
+        required: true
+        example: true
+      poll_time_sec:
+        title: Poll Time in Seconds
+        type: float
+        description: Maximum time to wait for the result to be available
+        required: false
+        example: 15.5
+    output:
+      file:
+        title: File
+        description: The output is a .zip file
+        type: file
+        required: true
+        example: {
+          "content": "dGVzdA==",
+          "filename": "r7-test11.zip"
+        }
+  get_sandbox_suspicious_list:
+    title: Get Sandbox Suspicious List
+    description: Downloads the suspicious object list associated to the specified object. Note ~ Suspicious Object Lists are only available for objects with a high risk level
+    input:
+      id:
+        title: ID
+        type: string
+        description: Unique alphanumeric string that identifies the analysis results of a submission
+        required: true
+        example: "6345645"
+      poll:
+        title: Poll
+        type: boolean
+        description: If script should wait until the task is finished before returning the result (enabled by default)
+        required: true
+        example: true
+      poll_time_sec:
+        title: Poll Time in Seconds
+        type: float
+        description: Maximum time to wait for the result to be available
+        required: false
+        example: 15.5
+    output:
+      sandbox_suspicious_list_resp:
+        title: Sandbox Suspicious List Response
+        description: Sandbox Suspicious Object List Response
+        type: "[]sandbox_suspicious_list_resp"
+        required: true
+        example: [ ]
+  download_sandbox_analysis_result:
+    title: Download Sandbox Analysis Result
+    description: Downloads the analysis result for an object submitted to sandbox for analysis based on the submission ID
+    input:
+      id:
+        title: ID
+        type: string
+        description: Unique alphanumeric string that identifies the analysis results of a submission
+        required: true
+        example: "6345645"
+      poll:
+        title: Poll
+        type: boolean
+        description: If script should wait until the task is finished before returning the result (enabled by default)
+        required: true
+        example: true
+      poll_time_sec:
+        title: Poll Time in Seconds
+        type: float
+        description: Maximum time to wait for the result to be available
+        required: false
+        example: 15.5
+    output:
+      file:
+        title: Sandbox Analysis Result
+        description: The response is a .pdf file
+        type: file
+        required: true
+        example: {
+          "content": "dGVzdA==",
+          "filename": "r7-test11.pdf"
+        }
+  submit_file_to_sandbox:
+    title: Submit File to Sandbox
+    description: Submits a file to the sandbox for analysis (Note. For more information about the supported file types, see the Trend Micro Vision One Online Help. Submissions require credits. Does not require credits in regions where Sandbox Analysis has not been officially released.)
+    input:
+      file:
+        title: File
+        type: file
+        description: File submitted to the sandbox (dict of {filename(string) & content(base64(bytes))})
+        required: false
+        example: {
+          "content": "dGVzdA==",
+          "filename": "r7-test11.bat"
+        }
+      document_password:
+        title: Document Password
+        type: string
+        description: Password encoded in Base64 used to decrypt the submitted file sample. The maximum password length (without encoding) is 128 bytes
+        required: false
+        example: 1234
+      archive_password:
+        title: Archive Password
+        type: string
+        description: Password encoded in Base64 used to decrypt the submitted archive. The maximum password length (without encoding) is 128 bytes
+        required: false
+        example: 1234
+      arguments:
+        title: Arguments
+        type: string
+        description: Parameter that allows you to specify Base64-encoded command line arguments to run the submitted file. The maximum argument length before encoding is 1024 bytes. Arguments are only available for Portable Executable (PE) files and script files
+        required: false
+        example: IFMlYztbQA==
+    output:
+      id:
+        title: ID
+        description: Unique alphanumeric string that identifies a submission
+        type: string
+        required: true
+        example: 0so47fy9
+      digest:
+        title: Digest
+        type: object
+        description: The hash value of the file
+        required: true
+        example: { }
+      arguments:
+        title: Arguments
+        description: Command line arguments encoded in Base64 of the submitted file
+        type: string
+        required: false
+        example: QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+  add_alert_note:
+    title: Add Alert Note
+    description: Attaches a note to a workbench alert
+    input:
+      alert_id:
+        title: Alert ID
+        type: string
+        description: Unique alphanumeric string that identifies a Workbench alert
+        required: true
+        example: WB-14-20190709-00003
+      content:
+        title: Content
+        type: string
+        description: Unique alphanumeric string that identifies a Workbench alert
+        required: true
+        example: Suspected False Positive, please verify
+    output:
+      result_code:
+        title: Result Code
+        description: Result message of adding workbench note
+        type: string
+        required: true
+        example: 202
+      location:
+        title: Location
+        description: URL of the created resource
+        type: string
+        required: true
+        example: www.location.local
+      note_id:
+        title: Note ID
+        description: ID of the note created
+        type: string
+        required: true
+        example: 345
+  edit_alert_status:
+    title: Edit Alert Status
+    description: Updates the status of a workbench alert
+    input:
+      id:
+        title: ID
+        type: string
+        description: Workbench alert ID
+        required: true
+        example: WB-14-20190709-00003
+      status:
+        title: Status
+        type: string
+        description: ID of the workbench you would like to update the status for
+        required: true
+        enum:
+          - New
+          - In Progress
+          - True Positive
+          - False Positive
+        example: New
+      if_match:
+        title: If Match
+        type: string
+        description: The target resource will be updated only if it matches ETag of the target one
+        required: false
+        example: "d41d8cd98f00b204e9800998ecf8427e"
+    output:
+      result_code:
+        title: Result Code
+        description: Result code of response
+        type: string
+        required: true
+        example: 202
+  get_alert_list:
+    title: Get Alert List
+    description: Displays information about workbench alerts that match the specified criteria in a paginated list
+    input:
+      start_date_time:
+        title: Start Date Time
+        type: string
+        description: Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the start of the data retrieval time range. The available oldest value is "1970-01-01T00:00:00Z"
+        required: true
+        example: 2020-06-15T10:00:00Z
+      end_date_time:
+        title: End Date Time
+        type: string
+        description: Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the end of the data retrieval time range. Ensure that "endDateTime" is not earlier than "startDateTime"
+        required: true
+        example: 2020-06-15T12:00:00Z
+    output:
+      total_count:
+        title: Total Count
+        description: Number of Workbench alerts retrieved
+        type: integer
+        required: true
+        example: 5
+      alerts:
+        title: Alerts
+        description: Array of any alerts (awb-workbenchAlertV3)
+        type: "[]alert"
+        required: true
+        example: [ ]
+  get_exception_list:
+    title: Get Exception List
+    description: Retrieves information about domains, file SHA-1, file SHA-256, IP addresses, sender addresses, or URLs in the Exception List and displays it in a paginated list
+    output:
+      exception_objects:
+        title: Exception Objects
+        description: Array of any Exception Objects
+        type: "[]exception_objects"
+        required: true
+        example: [ ]
+  get_suspicious_list:
+    title: Get Suspicious List
+    description: Retrieves information about domains, file SHA-1, file SHA-256, IP addresses, email addresses, or URLs in the Suspicious Object List and displays the information in a paginated list
+    output:
+      suspicious_objects:
+        title: Suspicious Objects
+        description: Array of any Suspicious Objects
+        type: "[]suspicious_objects"
+        required: true
+        example: [ ]
+  add_to_block_list:
+    title: Add to Block List
+    description: Adds an email address, file SHA-1, domain, IP address, or URL to the Suspicious Object List, which blocks the objects on subsequent detections
+    input:
+      block_objects:
+        title: Block Objects
+        type: "[]block_objects"
+        description: Objects made up of type, value and description
+        required: true
+        example: [ ]
+    output:
+      multi_response:
+        title: Multi Response
+        description: Add To Block List Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
+  submit_urls_to_sandbox:
+    title: Submit URLs to Sandbox
+    description: Submits URLs to the sandbox for analysis. You can submit a maximum of 10 URLs per request
+    input:
+      url:
+        title: URL
+        type: "[]string"
+        description: URL(s) to be submitted, formated as bracket array separated by comma
+        required: true
+        example: [ ]
+    output:
+      submit_urls_resp:
+        title: Submit URLs Response
+        description: Submit URLSs response Array
+        type: "[]submit_urls_resp"
+        required: true
+        example: [ ]
+  get_alert_details:
+    title: Get Alert Details
+    description: Displays information about workbench alerts that match the specified criteria in a paginated list
+    input:
+      alert_id:
+        title: Alert ID
+        type: string
+        description: ID of the Alert to get the details of
+        required: true
+        example: WB-20837-20221111-0000
+    output:
+      etag:
+        title: ETag
+        type: string
+        description: An identifier for a specific version of a Workbench alert resource
+        required: true
+        example: 33a64df551425fcc55e4d42a148795d9f25f89d4
+      alert_details:
+        title: Alert Details
+        type: alert
+        description: The details of the alert
+        required: true
+        example: { }
+
