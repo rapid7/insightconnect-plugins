@@ -57,7 +57,7 @@ This action is used to update the vulnerability by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|additional_fields|object|None|False|JSON object containing the additional fields and values to create incident|None|{"description": "Example description"}|
+|additional_fields|object|None|False|JSON object containing the additional fields and values to update the vulnerability item|None|{"description": "Example description"}|
 |assigned_to|string|None|False|User ID of person assigned to the vulnerability|None|ExampleUserID|
 |dns|string|None|False|The name of the source DNS where the vulnerability was found|None|dns.example.com|
 |first_found|date|None|False|The time that represents the vulnerability was first found, in ISO format|None|2023-04-28T15:48:07|
@@ -184,7 +184,7 @@ This action creates a new vulnerability record.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|additional_fields|object|None|False|JSON object containing the additional fields and values to create incident|None|{"description": "Example description"}|
+|additional_fields|object|None|False|JSON object containing the additional fields and values to create the vulnerability|None|{"description": "Example description"}|
 |assigned_to|string|None|False|User ID of person assigned to the vulnerability|None|ExampleUserID|
 |dns|string|None|False|The name of source DNS where the vulnerability was found|None|dns.example.com|
 |first_found|date|None|False|The time that represents the vulnerability was first found, in ISO format|None|2023-04-28T15:48:07|
@@ -194,7 +194,7 @@ This action creates a new vulnerability record.
 |short_description|string|None|False|Short description of the vulnerability|None|Example short description|
 |source|string|None|False|The vulnerability source|None|ExampleSource|
 |state|string|None|False|The state of the vulnerability|['Open', 'Under Investigation']|Open|
-|vulnerability|string|None|False|The reference of the found vulnerability|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|vulnerability|string|None|False|The reference of the found vulnerability (third-party vulnerability entry)|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
@@ -222,14 +222,14 @@ Example input:
 |----|----|--------|-----------|-------|
 |number|string|True|Vulnerability ticket number|1|
 |system_id|string|True|System ID of the new vulnerability created|9de5069c5afe602b2ea0a04b66beb2c0|
-|vulnerability_url|string|True|URL to newly created vulnerability|https://example.service-now.com/sn_vul_app_vulnerable_item.do?sys_id=61...|
+|vulnerability_url|string|True|URL to newly created vulnerability|https://example.service-now.com/sn_vul_vulnerable_item.do?sys_id=61...|
 
 Example output:
 
 ```
 {
   "system_id": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "vulnerability_url": "https://example.service-now.com/sn_vul_app_vulnerable_item.do?sys_id=61...",
+  "vulnerability_url": "https://example.service-now.com/sn_vul_vulnerable_item.do?sys_id=61...",
   "number": "1"
 }
 ```
@@ -583,7 +583,7 @@ Example output:
 
 ```
 {
-  "attachment_contents": [base-64 contents]
+  "attachment_contents": "[base-64 contents]"
 }
 ```
 
@@ -746,6 +746,7 @@ Example output:
       "fault_count": "0"
     }
   ]
+}
 ```
 
 #### Search Incident
@@ -1005,7 +1006,7 @@ This trigger identifies if a vulnerability has been updated.
 |----|----|-------|--------|-----------|----|-------|
 |interval|integer|5|True|How often to detect changes to the given Incident (in seconds)|None|5|
 |monitored_fields|string|None|True|Comma-separated list of fields to be monitored (e.g. resolved,resolved_by)|None|resolved,resolved_by|
-|system_id|[]string|None|True|List of system IDs of the vulnerability record to monitor|None|["9de5069c5afe602b2ea0a04b66beb2c0"]|
+|system_ids|[]string|None|True|List of system IDs of the vulnerability record to monitor|None|["9de5069c5afe602b2ea0a04b66beb2c0"]|
 
 Example input:
 
@@ -1013,7 +1014,9 @@ Example input:
 {
   "interval": 5,
   "monitored_fields": "resolved,resolved_by",
-  "system_id": "[\"9de5069c5afe602b2ea0a04b66beb2c0\"]"
+  "system_ids": [
+    "9de5069c5afe602b2ea0a04b66beb2c0"
+  ]
 }
 ```
 
