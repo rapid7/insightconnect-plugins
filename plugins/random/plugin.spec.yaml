@@ -1,0 +1,91 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: random
+title: Random
+description: Random plugin
+version: 1.0.0
+vendor: rapid7
+support: community
+status: []
+cloud_ready: false
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/random
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+references: https://docs.python.org/3/library/random.html
+version_history: 1.0.0
+key_features: It's very random
+requirements: It'll be very random
+supported_versions: ["1.0.0"]
+tags:
+- random
+hub_tags:
+  use_cases: [random]
+  keywords: [random]
+  features: [random]
+actions:
+  random_integer_range:
+    title: Random Range
+    description: Returns a random number between the given range
+    input:
+      start_range:
+        title: Start Range
+        description: blah
+        type: integer
+        required: true
+        example: 1
+      stop_range:
+        title: Stop Range
+        description: blah
+        type: integer
+        required: true
+        example: 1000
+    output:
+      result:
+        title: Result
+        description: blah
+        type: integer
+        required: true
+        example: 15
+  random_choice:
+    title: Random Choice
+    description: Chooses a random item from a list
+    input:
+      list:
+        title: List
+        description: blah
+        type: "[]string"
+        required: false
+        example: ["1", "2", "word", "string"]
+    output:
+      result:
+        title: Result
+        description: blah
+        type: string
+        required: true
+  random_float_range:
+    title: Random Float
+    description: Returns a random float between the given range
+    input:
+      start_range:
+        title: Start Range
+        description: blah
+        type: integer
+        required: true
+        example: 20
+        default: 0
+      stop_range:
+        title: Stop Range
+        description: blah
+        type: integer
+        required: true
+        example: 60
+        default: 1 
+    output:
+      result:
+        title: Result
+        description: blah
+        type: float
+        required: true
+        example: 33.33
+
