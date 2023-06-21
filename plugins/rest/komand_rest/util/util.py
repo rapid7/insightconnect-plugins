@@ -76,20 +76,8 @@ def check_headers_for_urlencoded(headers: Union[Dict[str, str], None]) -> bool:
     """
     if headers is None:
         return False
-    for key, value in headers.items():
-        if key.lower() == "content-type" and value.lower() == "application/x-www-form-urlencoded":
-            return True
-    return False
-
-
-def convert_body_for_urlencoded(body: Dict[str, Any]) -> Union[Dict[str, Any], str]:
-    """
-    This method will encode the body if the headers == x-www-form-urlencoded
-    :param body: Body dict to convert to string with encoding
-    :return: Body as an encoded string value
-    """
-
-    return urlencode(body)
+    return any(key.lower() == "content-type" and value.lower() == "application/x-www-form-urlencoded" for key, value in
+               headers.items())
 
 
 def write_to_file(file: dict, file_path: str) -> str:
@@ -128,19 +116,19 @@ def determine_body_type(body_dict: dict, body_non_dict: str) -> Union[str, Dict[
     return data
 
 
-def urlencoded_data(data: Union[dict, str], headers: dict) -> str:
+def urlencoded_data(data: Union[dict, str], headers: dict) -> Union[str, dict, bytes]:
     """
     A method to url-encode data if it is of type dict and headers contain
     x-www-form-urlencoded.
     :param data: The body for the request
     :param headers: A dict/object containing request headers
     """
-    newData = None
     if isinstance(data, dict) and check_headers_for_urlencoded(headers):
-        newData = convert_body_for_urlencoded(data)
+        return urlencode(data)
+    elif isinstance(data, dict):
+        return json.dumps(data)
     elif data:
-        newData = json.dumps(data)
-    return newData
+        return data.encode("utf-8")
 
 
 class RestAPI(object):
@@ -249,7 +237,7 @@ class RestAPI(object):
             # Check for urlencoded in headers
             # Convert to urlencoded if type(data) is dict
             # else run json.dumps(data)
-            urlencoded_data(data, headers)
+            data = urlencoded_data(data, headers)
 
             request_params = {
                 "method": method,
