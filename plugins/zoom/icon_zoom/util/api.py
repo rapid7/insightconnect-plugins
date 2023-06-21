@@ -164,7 +164,7 @@ class ZoomAPI:
             response = requests.request(method, url, json=json_data, params=params, auth=auth)
             self.logger.info(f"Got response status code: {response.status_code}")
 
-            if response.status_code in [400, 401, 404, 409, 429, 204] or (200 <= response.status_code < 300):
+            if response.status_code in [400, 401, 404, 409, 429] or (200 <= response.status_code < 300):
                 return self._handle_response(
                     response=response,
                     allow_404=allow_404,
@@ -193,15 +193,6 @@ class ZoomAPI:
         :param allow_404: Boolean value to indicate whether to allow 404 status code to be ignored
         """
 
-        exceptions_4xx = {
-            400: PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.json()),
-            404: PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.json()),
-            409: PluginException(
-                cause="User already exists.", assistance="Please check your input and try again.", data=response.json()
-            ),
-            429: self.get_exception_for_rate_limit(response=response),
-        }
-
         # Success; no content
         if response.status_code == 204:
             return None
@@ -209,11 +200,18 @@ class ZoomAPI:
         if 200 <= response.status_code < 300:
             return response.json()
 
-        for status_code, exception in exceptions_4xx.items():
-            if response.status_code == status_code:
-                if status_code == 404 and allow_404:
-                    return None
-                raise exception
+        if response.status_code == 400:
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.json())
+        if response.status_code == 404:
+            if allow_404:
+                return None
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.json())
+        if response.status_code >= 409:
+            raise PluginException(
+                cause="User already exists.", assistance="Please check your input and try again.", data=response.json()
+            )
+        if response.status_code >= 429:
+            raise self.get_exception_for_rate_limit(response=response)
 
         # 401 requires extra logic, so it is not included in the 4xx dict
         if response.status_code == 401:
