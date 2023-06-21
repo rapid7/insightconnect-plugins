@@ -126,7 +126,7 @@ def urlencoded_data(data: Union[dict, str], headers: dict) -> Union[str, dict, b
     if isinstance(data, dict) and check_headers_for_urlencoded(headers):
         return urlencode(data)
     elif isinstance(data, dict):
-        return json.dumps(data)
+        return data
     elif data:
         return data.encode("utf-8")
 
