@@ -18,6 +18,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         api_route = "api/now/"
         incident_table = "incident"
         vulnerability_table = "sn_vul_vulnerable_item"
+        third_party_vulnerability_entry_table = "sn_vul_third_party_entry"
 
         self.base_url = f"https://{params.get(Input.INSTANCE, '')}.service-now.com/"
 
@@ -32,6 +33,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.incident_url = f"{self.table_url}{incident_table}"
         self.security_incident_url = f"{self.table_url}{security_incident_table}"
         self.vulnerability_url = f"{self.table_url}{vulnerability_table}"
+        self.third_party_vulnerability_entry_url = f"{self.table_url}{third_party_vulnerability_entry_table}"
         self.attachment_url = f"{self.base_url}{api_route}attachment"
         self.change_request_url = f"{self.base_url}api/sn_chg_rest/v1/change"
         self.timeout = params.get("timeout", 30)
