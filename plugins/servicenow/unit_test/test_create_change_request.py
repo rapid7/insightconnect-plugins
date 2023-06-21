@@ -11,7 +11,7 @@ from icon_servicenow.actions.create_change_request.action import CreateChangeReq
 from icon_servicenow.actions.create_change_request.schema import Input
 from parameterized import parameterized
 
-from unit_test.util import Util
+from util import Util
 
 
 class TestCreateChangeRequest(TestCase):
