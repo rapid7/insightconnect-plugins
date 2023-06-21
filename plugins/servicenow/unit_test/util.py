@@ -82,6 +82,8 @@ class Util:
             "https://rapid7.service-now.com/api/now/table/sn_vul_vulnerable_item/12345",
         ):
             return MockResponse("create_vulnerability.json", 201)
+        elif kwargs["url"] in ("https://rapid7.service-now.com/api/now/table/sn_vul_third_party_entry",):
+            return MockResponse("create_third_party_vulnerability_entry.json", 201)
 
         elif kwargs.get("url") == "https://rapid7.service-now.com/api/now/table/sn_si_incident/d1234":
             return MockResponse("", 204)

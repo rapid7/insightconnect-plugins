@@ -892,7 +892,7 @@ actions:
         example: '[{"content":"9de5069c5afe602b2ea0a04b66beb2c0","content_type":"text/plain","file_name":"example.txt"}]'
   create_vulnerability:
     title: Create Vulnerability
-    description: Creates a new vulnerability record
+    description: Creates a new vulnerability item record
     input:
       risk_score:
         title: Risk Score
@@ -917,7 +917,7 @@ actions:
         example: ExampleSource
       vulnerability:
         title: Vulnerability
-        description: The reference of the found vulnerability
+        description: The reference of the found vulnerability (third-party vulnerability entry)
         type: string
         required: false
         example: 9de5069c5afe602b2ea0a04b66beb2c0
@@ -959,7 +959,7 @@ actions:
         example: Example short description
       additional_fields:
         title: Additional Fields
-        description: JSON object containing the additional fields and values to create incident
+        description: JSON object containing the additional fields and values to create the vulnerability
         type: object
         required: false
         example: '{"description": "Example description"}'
@@ -981,7 +981,7 @@ actions:
         description: URL to newly created vulnerability
         type: string
         required: true
-        example: "https://example.service-now.com/sn_vul_app_vulnerable_item.do?sys_id=61..."
+        example: "https://example.service-now.com/sn_vul_vulnerable_item.do?sys_id=61..."
   get_vulnerability:
     title: Get Vulnerability
     description: Retrieve the vulnerability by ID
@@ -1076,7 +1076,7 @@ actions:
         example: Example short description
       additional_fields:
         title: Additional Fields
-        description: JSON object containing the additional fields and values to create incident
+        description: JSON object containing the additional fields and values to update the vulnerability item
         type: object
         required: false
         example: '{"description": "Example description"}'
@@ -1464,7 +1464,7 @@ triggers:
     title: Vulnerability Updated
     description: Identifies if a vulnerability has been updated
     input:
-      system_id:
+      system_ids:
         title: System IDs
         description: List of system IDs of the vulnerability record to monitor
         type: "[]string"
