@@ -30,9 +30,9 @@ class TestPut(TestCase):
     @parameterized.expand(Util.load_data("put_error", "expected").get("parameters"))
     @mock.patch("requests.request", side_effect=Util.mocked_requests)
     def test_put_error_unit(self, name, _input, cause, assistance, data, connection, mock_requests):
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             test_action = Util.default_connector(action=Put(), connect_params=connection)
             test_action.run(_input)
-        self.assertEqual(cause, e.exception.cause)
-        self.assertEqual(assistance, e.exception.assistance)
-        self.assertEqual(data, e.exception.data)
+        self.assertEqual(cause, error.exception.cause)
+        self.assertEqual(assistance, error.exception.assistance)
+        self.assertEqual(data, error.exception.data)
