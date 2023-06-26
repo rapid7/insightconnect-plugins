@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from requests import Session, Request
 from json import JSONDecodeError
 import mimetypes

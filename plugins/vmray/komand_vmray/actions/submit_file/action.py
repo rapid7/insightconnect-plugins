@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SubmitFileInput, SubmitFileOutput
 
 # Custom imports below
@@ -6,7 +6,7 @@ from .schema import SubmitFileInput, SubmitFileOutput
 import base64
 
 
-class SubmitFile(komand.Action):
+class SubmitFile(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="submit_file",
@@ -32,7 +32,7 @@ class SubmitFile(komand.Action):
         if check_pass:
             self.logger.info(f"File types {mime_types} found for file {file_name} and are supported by VMRay")
             resp = self.connection.api.submit_file(file_name, file_bytes, optional_params)
-            clean_data = komand.helper.clean(resp)
+            clean_data = insightconnect_plugin_runtime.helper.clean(resp)
             return {"results": clean_data}
         else:
             self.logger.error(f"File types, not supported by VMRay: {mime_types}")
