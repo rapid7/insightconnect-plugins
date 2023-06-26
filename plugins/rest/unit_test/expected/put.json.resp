@@ -1,0 +1,188 @@
+{
+    "parameters": [
+        [
+            "put_empty_body",
+            {"route": "/put", "headers": {}},
+            200,
+            {
+                "args": {},
+                "files": {},
+                "form": {},
+                "headers": {
+                    "Accept": "*/*",
+                    "Accept-Encoding": "gzip, deflate",
+                    "Content-Length": "0",
+                    "Host": "example.com"
+                },
+                "json": null,
+                "origin": "0.0.0.0",
+                "url": "https://example.com/put"
+            },
+            "{'args': {}, 'files': {}, 'form': {}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate', 'Content-Length': '0', 'Host': 'example.com'}, 'json': None, 'origin': '0.0.0.0', 'url': 'https://example.com/put'}",
+            {
+                "Accept": "*/*",
+                "Accept-Encoding": "gzip, deflate",
+                "Content-Length": "0",
+                "Host": "example.com"
+            },
+            {}
+        ],
+        [
+            "put_body",
+            {"route": "/put", "headers": {"content-type": "application/json"}, "body_object": {"example": "value"}},
+            200,
+            {
+                "args": {},
+                "data": "{\"example\": \"value\"}",
+                "files": {},
+                "form": {},
+                "headers": {
+                    "Accept": "*/*",
+                    "Accept-Encoding": "gzip, deflate, br",
+                    "Cache-Control": "no-cache",
+                    "Content-Length": "20",
+                    "Content-Type": "application/json",
+                    "Host": "example.com"
+                },
+                "json": {
+                    "example": "value"
+                },
+                "origin": "0.0.0.0",
+                "url": "https://example.com/put"
+            },
+            "{'args': {}, 'data': '{\"example\": \"value\"}', 'files': {}, 'form': {}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'Cache-Control': 'no-cache', 'Content-Length': '20', 'Content-Type': 'application/json', 'Host': 'example.com'}, 'json': {'example': 'value'}, 'origin': '0.0.0.0', 'url': 'https://example.com/put'}",
+            {
+                "Accept": "*/*",
+                "Accept-Encoding": "gzip, deflate, br",
+                "Cache-Control": "no-cache",
+                "Content-Length": "20",
+                "Content-Type": "application/json",
+                "Host": "example.com"
+            },
+            {}
+        ],
+        [
+            "put_body_x_www_form_urlencoded",
+            {"route": "/put", "headers": {"content-type": "application/x-www-form-urlencoded"}, "body_object": {"example": "xwwwf"}},
+            200,
+            {
+                "args": {},
+                "data": "",
+                "files": {},
+                "form": {"example": "xwwwf"},
+                "headers": {
+                    "Accept": "*/*",
+                    "Accept-Encoding": "gzip, deflate, br",
+                    "Cache-Control": "no-cache",
+                    "Content-Length": "13",
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Host": "example.com"
+                },
+                "json": null,
+                "origin": "0.0.0.0",
+                "url": "https://example.com/put"
+            },
+            "{'args': {}, 'data': '', 'files': {}, 'form': {'example': 'xwwwf'}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'Cache-Control': 'no-cache', 'Content-Length': '13', 'Content-Type': 'application/x-www-form-urlencoded', 'Host': 'example.com'}, 'json': None, 'origin': '0.0.0.0', 'url': 'https://example.com/put'}",
+            {
+                "Accept": "*/*",
+                "Accept-Encoding": "gzip, deflate, br",
+                "Cache-Control": "no-cache",
+                "Content-Length": "13",
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Host": "example.com"
+            },
+            {}
+        ],
+        [
+            "put_plain_text",
+            {"route": "/put", "headers": {"content-type": "text/plain"}, "body_any": "example"},
+            200,
+            {
+                "args": {},
+                "data": "example",
+                "files": {},
+                "form": {},
+                "headers": {
+                    "Accept": "*/*",
+                    "Accept-Encoding": "gzip, deflate, br",
+                    "Cache-Control": "no-cache",
+                    "Content-Length": "7",
+                    "Content-Type": "text/plain",
+                    "Host": "example.com"
+                },
+                "json": null,
+                "origin": "0.0.0.0",
+                "url": "https://example.com/put"
+            },
+            "{'args': {}, 'data': 'example', 'files': {}, 'form': {}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'Cache-Control': 'no-cache', 'Content-Length': '7', 'Content-Type': 'text/plain', 'Host': 'example.com'}, 'json': None, 'origin': '0.0.0.0', 'url': 'https://example.com/put'}",
+            {
+                "Accept": "*/*",
+                "Accept-Encoding": "gzip, deflate, br",
+                "Cache-Control": "no-cache",
+                "Content-Length": "7",
+                "Content-Type": "text/plain",
+                "Host": "example.com"
+            },
+            {}
+        ],
+        [
+            "put_json_non_latin",
+            {"route": "/put", "headers": {"content-type": "application/json"}, "body_any": "{\"example\": \"\nválüé\n\"}"},
+            200,
+            {
+                "args": {},
+                "data": "{\"example\": \"\nválüé\"}",
+                "files": {},
+                "form": {},
+                "headers": {
+                    "Accept": "*/*",
+                    "Accept-Encoding": "gzip, deflate, br",
+                    "Cache-Control": "no-cache",
+                    "Content-Length": "20",
+                    "Content-Type": "application/json",
+                    "Host": "example.com"
+                },
+                "json": {
+                    "example": "\nválüé"
+                },
+                "origin": "0.0.0.0",
+                "url": "https://example.com/put"
+            },
+            "{'args': {}, 'data': '{\"example\": \"\\nválüé\"}', 'files': {}, 'form': {}, 'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'Cache-Control': 'no-cache', 'Content-Length': '20', 'Content-Type': 'application/json', 'Host': 'example.com'}, 'json': {'example': '\\nválüé'}, 'origin': '0.0.0.0', 'url': 'https://example.com/put'}",
+            {
+                "Accept": "*/*",
+                "Accept-Encoding": "gzip, deflate, br",
+                "Cache-Control": "no-cache",
+                "Content-Length": "20",
+                "Content-Type": "application/json",
+                "Host": "example.com"
+            },
+            {}
+        ],
+                [
+            "put_404_false_failure",
+            {"route": "/put", "headers": {}, "body_object": {"example": "404_false"}},
+            404,
+            {},
+            "{}",
+            {
+                "Connection": "cgglose",
+                "Content-Length": "64",
+                "Content-Length": "20",
+                "Content-Type": "text/html; charset=UTF-8",
+                "Referrer-Policy": "no-referrer"
+            },
+            {
+                "default_headers": {},
+                "secret": "",
+                "basic_auth_credentials": "",
+                "base_url": "https://www.example.com",
+                "ssl_verify": false,
+                "client_certificate": {},
+                "authentication_type": "No Authentication",
+                "fail_on_http_errors": false,
+                "private_key": ""
+            }
+        ]
+    ]
+}

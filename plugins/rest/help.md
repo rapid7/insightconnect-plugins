@@ -104,7 +104,7 @@ This action is used to make a PUT request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body_any|string|None|False|Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc. If a data object is to be sent, please use the 'Body Object' input|None|test data|
+|body_any|string|None|False|Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc.. If a data object is to be sent, please use the 'Body Object' input|None|test data|
 |body_object|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
@@ -128,9 +128,9 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|body_object|object|False|Response payload from the server as an object|{"user": "user@example.com"}|
+|body_object|object|False|Response payload from the server as an object. Note, if the response has invalid object structure (list, string..) plugin will wrap it with object map|{'user': 'user@example.com'}|
 |body_string|string|False|Response payload from the server as a string|test data|
-|headers|object|False|Response headers from the server|{"Host": "rapid7.com"}|
+|headers|object|False|Response headers from the server|{'Host': 'rapid7.com'}|
 |status|integer|False|Status code of the response from the server|200|
 
 Example output:
@@ -181,7 +181,7 @@ This action is used to make a POST request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body_any|string|None|False|Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc|None|test data|
+|body_any|string|None|False|Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc.. If a data object is to be sent, please use the 'Body Object' input|None|test data|
 |body_object|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
@@ -205,9 +205,9 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|body_object|object|False|Response payload from the server as an object|{"user": "user@example.com"}|
+|body_object|object|False|Response payload from the server as an object. Note, if the response has invalid object structure (list, string..) plugin will wrap it with object map|{'user': 'user@example.com'}|
 |body_string|string|False|Response payload from the server as a string|test data|
-|headers|object|False|Response headers from the server|{"Host": "rapid7.com"}|
+|headers|object|False|Response headers from the server|{'Host': 'rapid7.com'}|
 |status|integer|False|Status code of the response from the server|200|
 
 Example output:
@@ -258,7 +258,7 @@ This action is used to make a PATCH request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body_any|string|None|False|Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc|None|test data|
+|body_any|string|None|False|Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc.. If a data object is to be sent, please use the 'Body Object' input|None|test data|
 |body_object|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
@@ -282,9 +282,9 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|body_object|object|False|Response payload from the server as an object|{"user": "user@example.com"}|
+|body_object|object|False|Response payload from the server as an object. Note, if the response has invalid object structure (list, string..) plugin will wrap it with object map|{'user': 'user@example.com'}|
 |body_string|string|False|Response payload from the server as a string|test data|
-|headers|object|False|Response headers from the server|{"Host": "rapid7.com"}|
+|headers|object|False|Response headers from the server|{'Host': 'rapid7.com'}|
 |status|integer|False|Status code of the response from the server|200|
 
 Example output:
@@ -332,7 +332,7 @@ This action is used to make a GET request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body_any|string|None|False|Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc|None|test data|
+|body_any|string|None|False|Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc.. If a data object is to be sent, please use the 'Body Object' input|None|test data|
 |body_object|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
@@ -356,9 +356,9 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|body_object|object|False|Response payload from the server as an object|{"user": "user@example.com"}|
+|body_object|object|False|Response payload from the server as an object. Note, if the response has invalid object structure (list, string..) plugin will wrap it with object map|{'user': 'user@example.com'}|
 |body_string|string|False|Response payload from the server as a string|test data|
-|headers|object|False|Response headers from the server|{"Host": "rapid7.com"}|
+|headers|object|False|Response headers from the server|{'Host': 'rapid7.com'}|
 |status|integer|False|Status code of the response from the server|200|
 
 Example output:
@@ -391,7 +391,7 @@ This action is used to make a DELETE request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body_any|string|None|False|Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc|None|test data|
+|body_any|string|None|False|Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc.. If a data object is to be sent, please use the 'Body Object' input|None|test data|
 |body_object|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
@@ -415,9 +415,9 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|body_object|object|False|Response payload from the server as an object|{"user": "user@example.com"}|
+|body_object|object|False|Response payload from the server as an object. Note, if the response has invalid object structure (list, string..) plugin will wrap it with object map|{'user': 'user@example.com'}|
 |body_string|string|False|Response payload from the server as a string|test data|
-|headers|object|False|Response headers from the server|{"Host": "rapid7.com"}|
+|headers|object|False|Response headers from the server|{'Host': 'rapid7.com'}|
 |status|integer|False|Status code of the response from the server|200|
 
 Example output:
