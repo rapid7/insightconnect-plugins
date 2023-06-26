@@ -126,12 +126,12 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|body_object|object|False|Response payload from the server as an object|
-|body_string|string|False|Response payload from the server as a string|
-|headers|object|False|Response headers from the server|
-|status|integer|False|Status code of the response from the server|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|body_object|object|False|Response payload from the server as an object|{"user": "user@example.com"}|
+|body_string|string|False|Response payload from the server as a string|test data|
+|headers|object|False|Response headers from the server|{"Host": "rapid7.com"}|
+|status|integer|False|Status code of the response from the server|200|
 
 Example output:
 
@@ -203,12 +203,12 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|body_object|object|False|Response payload from the server as an object|
-|body_string|string|False|Response payload from the server as a string|
-|headers|object|False|Response headers from the server|
-|status|integer|False|Status code of the response from the server|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|body_object|object|False|Response payload from the server as an object|{"user": "user@example.com"}|
+|body_string|string|False|Response payload from the server as a string|test data|
+|headers|object|False|Response headers from the server|{"Host": "rapid7.com"}|
+|status|integer|False|Status code of the response from the server|200|
 
 Example output:
 
@@ -280,12 +280,12 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|body_object|object|False|Response payload from the server as an object|
-|body_string|string|False|Response payload from the server as a string|
-|headers|object|False|Response headers from the server|
-|status|integer|False|Status code of the response from the server|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|body_object|object|False|Response payload from the server as an object|{"user": "user@example.com"}|
+|body_string|string|False|Response payload from the server as a string|test data|
+|headers|object|False|Response headers from the server|{"Host": "rapid7.com"}|
+|status|integer|False|Status code of the response from the server|200|
 
 Example output:
 
@@ -354,12 +354,12 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|body_object|object|False|Response payload from the server as an object. Note, if the response has invalid object structure (list, string..) plugin will wrap it with object map|
-|body_string|string|False|Response payload from the server as a string|
-|headers|object|False|Response headers from the server|
-|status|integer|False|Status code of the response from the server|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|body_object|object|False|Response payload from the server as an object|{"user": "user@example.com"}|
+|body_string|string|False|Response payload from the server as a string|test data|
+|headers|object|False|Response headers from the server|{"Host": "rapid7.com"}|
+|status|integer|False|Status code of the response from the server|200|
 
 Example output:
 
@@ -413,12 +413,12 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|body_object|object|False|Response payload from the server as an object|
-|body_string|string|False|Response payload from the server as a string|
-|headers|object|False|Response headers from the server|
-|status|integer|False|Status code of the response from the server|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|body_object|object|False|Response payload from the server as an object|{"user": "user@example.com"}|
+|body_string|string|False|Response payload from the server as a string|test data|
+|headers|object|False|Response headers from the server|{"Host": "rapid7.com"}|
+|status|integer|False|Status code of the response from the server|200|
 
 Example output:
 
@@ -504,7 +504,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Links
 
+* [HTTP Request Architecture Style](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
 ## References
 
-* [HTTP Request Architecture Style](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
 * [InsightConnect HTTP Request Plugin Guide](https://docs.rapid7.com/insightconnect/http-requests)
