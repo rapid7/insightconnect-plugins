@@ -11,7 +11,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class TestPut(TestCase):
-
     @parameterized.expand(Util.load_data("put", "expected").get("parameters"))
     @mock.patch("requests.request", side_effect=Util.mocked_requests)
     def test_put_unit(self, name, _input, status_code, body_object, body_string, headers, connection, mock_requests):
@@ -19,8 +18,14 @@ class TestPut(TestCase):
         results = test_action.run(_input)
         self.assertEqual(status_code, results["status"])
         self.assertEqual(body_object, results["body_object"])
-        self.assertEqual(body_string, results["body_string"], )
-        self.assertEqual(headers, results["headers"], )
+        self.assertEqual(
+            body_string,
+            results["body_string"],
+        )
+        self.assertEqual(
+            headers,
+            results["headers"],
+        )
 
     @parameterized.expand(Util.load_data("put_error", "expected").get("parameters"))
     @mock.patch("requests.request", side_effect=Util.mocked_requests)

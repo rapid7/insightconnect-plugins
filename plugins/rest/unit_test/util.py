@@ -25,7 +25,7 @@ class Util:
                 Input.CLIENT_CERTIFICATE: {},
                 Input.AUTHENTICATION_TYPE: "No Authentication",
                 Input.FAIL_ON_HTTP_ERRORS: True,
-                Input.PRIVATE_KEY: ""
+                Input.PRIVATE_KEY: "",
             }
         default_connection.connect(params)
         action.connection = default_connection
@@ -64,6 +64,7 @@ class Util:
 
             def raise_for_status(self):
                 return
+
         data = kwargs.get("data")
         url = kwargs.get("url")
         if url == "https://www.example.com/post":
@@ -74,11 +75,11 @@ class Util:
             return MockResponse("put_json_empty_body", 200)
         if url == "https://www.example.com/put" and data == b'{"example": "value"}':
             return MockResponse("put_json_body", 200)
-        if url == "https://www.example.com/put" and data == b'example=xwwwf':
+        if url == "https://www.example.com/put" and data == b"example=xwwwf":
             return MockResponse("put_json_body_x_www_form_urlencoded", 200)
         if url == "https://www.example.com/put" and data == b'{"example": "\\nv\xc3\xa1l\xc3\xbc\xc3\xa9\\n"}':
             return MockResponse("put_json_non_latin", 200)
-        if url == "https://www.example.com/put" and data == b'example':
+        if url == "https://www.example.com/put" and data == b"example":
             return MockResponse("put_plain_text", 200)
         if url == "https://www.example.com/put" and data == b'{"example": "404_false"}':
             return MockResponse("put_404_false_failure", 404)

@@ -473,6 +473,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 6.0.1 - Improved ability of 'Body Any' input to handle non-standard characters and JSON input
 * 6.0.0 - All actions: Changed body as array to body as any (string input)
 * 5.2.0 - All actions: Added body as an array input for remaining actions
 * 5.1.1 - Get: Fix issue where requests were failing when certificate file input field was empty

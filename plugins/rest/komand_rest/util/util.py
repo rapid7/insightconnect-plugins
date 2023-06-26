@@ -78,8 +78,9 @@ def check_header(headers: Union[Dict[str, str], None], header_key: str, header_v
     """
     if headers is None:
         return False
-    return any(key.lower() == header_key.lower() and value.lower() == header_value.lower() for key, value in
-               headers.items())
+    return any(
+        key.lower() == header_key.lower() and value.lower() == header_value.lower() for key, value in headers.items()
+    )
 
 
 def write_to_file(file: dict, file_path: str) -> str:
