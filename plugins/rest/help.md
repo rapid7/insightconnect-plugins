@@ -104,7 +104,7 @@ This action is used to make a PUT request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body_any|string|None|False|Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc|None|test data|
+|body_any|string|None|False|Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc. If a data object is to be sent, please use the 'Body Object' input|None|test data|
 |body_object|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|

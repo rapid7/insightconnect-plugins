@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rest
 title: HTTP Requests
 description: The HTTP Requests plugin to make it easy to integrate with RESTful services
-version: 6.0.0
+version: 6.0.1
 vendor: rapid7
 support: community
 supported_versions: ["2022-09-05"]
@@ -117,7 +117,7 @@ actions:
         example: '{"user": "user@example.com"}'
       body_any:
         title: Body (Any)
-        description: Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc
+        description: Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc.. If a data object is to be sent, please use the 'Body Object' input
         type: string
         required: false
         example: 'test data'

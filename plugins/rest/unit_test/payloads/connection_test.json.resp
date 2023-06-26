@@ -1,0 +1,21 @@
+{
+    "json": {
+        "args": {},
+        "data": "{\"example\": \"value\"}",
+        "files": {},
+        "form": {},
+        "headers": {
+            "Accept": "*/*",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Cache-Control": "no-cache",
+            "Content-Length": "20",
+            "Content-Type": "application/json",
+            "Host": "example.com"
+        },
+        "json": {
+            "example": "value"
+        },
+        "origin": "0.0.0.0",
+        "url": "https://example.com/get"
+    }
+}

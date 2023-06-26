@@ -1,0 +1,29 @@
+{
+    "json": {
+        "args": {},
+        "data": "{\"example\": \"\nválüé\"}",
+        "files": {},
+        "form": {},
+        "headers": {
+            "Accept": "*/*",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Cache-Control": "no-cache",
+            "Content-Length": "20",
+            "Content-Type": "application/json",
+            "Host": "example.com"
+        },
+        "json": {
+            "example": "\nválüé"
+        },
+        "origin": "0.0.0.0",
+        "url": "https://example.com/put"
+    },
+    "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Cache-Control": "no-cache",
+        "Content-Length": "20",
+        "Content-Type": "application/json",
+        "Host": "example.com"
+    }
+}

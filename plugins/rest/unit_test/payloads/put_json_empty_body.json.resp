@@ -1,0 +1,22 @@
+{
+    "json": {
+        "args": {},
+        "files": {},
+        "form": {},
+        "headers": {
+            "Accept": "*/*",
+            "Accept-Encoding": "gzip, deflate",
+            "Content-Length": "0",
+            "Host": "example.com"
+        },
+        "json": null,
+        "origin": "0.0.0.0",
+        "url": "https://example.com/put"
+    },
+    "headers":{
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate",
+        "Content-Length": "0",
+        "Host": "example.com"
+    }
+}
