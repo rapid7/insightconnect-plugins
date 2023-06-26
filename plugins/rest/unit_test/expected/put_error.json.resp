@@ -20,7 +20,7 @@
             "put_404",
             {"route": "/put_404", "headers": {}, "body_object": {"data": "failure"}},
             "Invalid or unreachable endpoint provided.",
-            "Verify the endpoint/URL/hostname configured in your plugin connection is correct.",
+            "Verify the URLs or endpoints in your configuration are correct.",
             "{'data': 'failure'}",
             {}
         ],
