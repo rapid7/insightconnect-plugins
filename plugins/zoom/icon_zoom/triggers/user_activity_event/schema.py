@@ -8,14 +8,12 @@ class Component:
 
 
 class Input:
-    
     ACTIVITY_TYPE = "activity_type"
-    
+
 
 class Output:
-    
     USER_ACTIVITY = "user_activity"
-    
+
 
 class UserActivityEventInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""

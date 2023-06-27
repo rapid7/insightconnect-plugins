@@ -9,11 +9,11 @@ class Component:
 
 class Input:
     USER_ID = "user_id"
-    
+
 
 class Output:
     USER = "user"
-    
+
 
 class GetUserInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
