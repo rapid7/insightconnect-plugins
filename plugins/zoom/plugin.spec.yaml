@@ -242,7 +242,7 @@ types:
 actions:
   get_user:
     title: Get User
-    description: This action is used to get user in Zoom account.
+    description: This action is used to get user in Zoom account
     input:
       user_id:
         title: User ID
@@ -259,7 +259,7 @@ actions:
         example: { "email": "user@example.com", "first_name": "John", "id": "T9ti3NBxR42swGKrqABGig", "last_name": "Smith", "type": 1 }
   create_user:
     title: Create User
-    description: This action is used to create user associated to account.
+    description: This action is used to create user associated to account
     input:
       action:
         title: Action
@@ -337,7 +337,7 @@ actions:
         example: Smith
   delete_user:
     title: Delete User
-    description: This action is used to delete or disassociate user from account.
+    description: This action is used to delete or disassociate user from account
     input:
       action:
         title: Action
@@ -391,7 +391,7 @@ actions:
 triggers:
   user_activity_event:
     title: User Activity Event
-    description: This trigger is used to poll for user activity events.
+    description: This trigger is used to poll for user activity events
     input:
       activity_type:
         title: Activity Type
@@ -414,7 +414,7 @@ triggers:
 tasks:
   monitor_sign_in_out_activity:
     title: Monitor Sign in and out Activity
-    description: This task is used to monitor sign in and out activity.
+    description: This task is used to monitor sign in and out activity
     output:
       activity_logs:
         title: Activity Logs

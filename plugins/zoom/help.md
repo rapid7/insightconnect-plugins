@@ -56,7 +56,7 @@ Example input:
 
 #### Create User
   
-This action is used to create user associated to account.  
+This action is used to create user associated to account  
 
 ##### Input
 
@@ -104,7 +104,7 @@ Example output:
 
 #### Delete User
   
-This action is used to delete or disassociate user from account.  
+This action is used to delete or disassociate user from account  
 
 ##### Input
 
@@ -146,7 +146,7 @@ Example output:
 
 #### Get User
   
-This action is used to get user in Zoom account.  
+This action is used to get user in Zoom account
 
 ##### Input
 
@@ -186,7 +186,7 @@ Example output:
 
 #### User Activity Event
   
-This trigger is used to poll for user activity events.  
+This trigger is used to poll for user activity events  
 
 ##### Input
 
@@ -227,7 +227,7 @@ Example output:
 
 #### Monitor Sign in and out Activity
   
-This task is used to monitor sign in and out activity.  
+This task is used to monitor sign in and out activity  
 
 ##### Input
   
