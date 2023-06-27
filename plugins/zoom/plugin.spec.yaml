@@ -72,8 +72,8 @@ types:
       type: string
       required: true
       enum:
-      - "Sign in"
-      - "Sign out"
+      - Sign in
+      - Sign out
       example: Sign in
     ip_address:
       title: IP Address
@@ -268,10 +268,10 @@ actions:
         required: true
         default: create
         enum:
-        - "create"
-        - "autoCreate"
-        - "custCreate"
-        - "ssoCreate"
+        - create
+        - autoCreate
+        - custCreate
+        - ssoCreate
         example: create
       email:
         title: Email
@@ -285,8 +285,8 @@ actions:
         type: string
         required: true
         enum:
-        - "Basic"
-        - "Licensed"
+        - Basic
+        - Licensed
         example: Basic
       first_name:
         title: First Name
@@ -345,21 +345,21 @@ actions:
         type: string
         required: true
         enum:
-        - "delete"
-        - "disassociate"
-        example: "delete"
+        - delete
+        - disassociate
+        example: delete
       id:
         title: User ID
         description: The user identifier or email address
         type: string
         required: true
-        example: "user@example.com"
+        example: user@example.com
       transfer_email:
         title: Transfer Email
         description: Email to transfer meetings, webinars, or recordings
         type: string
         required: false
-        example: "user@example.com"
+        example: user@example.com
       transfer_meetings:
         title: Transfer Meetings
         description: Whether to transfer meetings to defined transfer email
@@ -399,10 +399,10 @@ triggers:
         type: string
         required: true
         enum:
-        - "Sign in"
-        - "Sign out"
-        - "All"
-        example: "All"
+        - Sign in
+        - Sign out
+        - All
+        example: All
     output:
       user_activity:
         title: User Activity

@@ -20,8 +20,8 @@ Business, or Enterprise plan.
   * Server-to-Server OAuth app has the `report:read:admin` scope enabled.
     
 # Supported Product Versions
-
-* Zoom API v2.10
+  
+* Zoom API v2.10  
 
 # Documentation
 
@@ -53,8 +53,8 @@ Example input:
   
 
 #### Create User
-
-This action is used to create user associated to account.
+  
+Create user associated to account  
 
 ##### Input
 
@@ -101,8 +101,8 @@ Example output:
 ```  
 
 #### Delete User
-
-This action is used to delete or disassociate user from account.
+  
+Delete or disassociate user from account  
 
 ##### Input
 
@@ -143,8 +143,8 @@ Example output:
 ```  
 
 #### Get User
-
-This action is used to get user in Zoom account.
+  
+Get user in Zoom account  
 
 ##### Input
 
@@ -177,8 +177,8 @@ Example output:
   
 
 #### User Activity Event
-
-This trigger is used to poll for user activity events.
+  
+Poll for user activity events  
 
 ##### Input
 
@@ -211,8 +211,8 @@ Example output:
   
 
 #### Monitor Sign in and out Activity
-
-This task is used to monitor sign in and out activity.
+  
+Monitor sign in and out activity  
 
 ##### Input
   
