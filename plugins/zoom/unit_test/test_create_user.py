@@ -8,7 +8,7 @@ from unittest import TestCase, mock
 from icon_zoom.actions.create_user import CreateUser
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from unit_test.mock import (
+from mock import (
     Util,
     STUB_CREATE_USER,
     mock_request_201,

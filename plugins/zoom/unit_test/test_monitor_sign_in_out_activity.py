@@ -1,7 +1,7 @@
 import logging
 import unittest
 import datetime
-from unittest.mock import patch
+from mock import patch
 
 from icon_zoom.util.event import Event
 from icon_zoom.tasks.monitor_sign_in_out_activity.task import MonitorSignInOutActivity
