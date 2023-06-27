@@ -33,8 +33,8 @@ The connection configuration accepts the following parameters:
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |account_id|string|None|True|Zoom app account ID, required for OAuth authentication|None|dBs0x4Kf7HuIK0LLbzMduW|
 |authentication_retry_limit|integer|5|True|How many times to retry authentication to Zoom before failing, required for OAuth authentication|None|5|
-|client_id|string|None|True|Zoom app client ID, required for OAuth authentication|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|
-|client_secret|credential_secret_key|None|True|Zoom app client secret, required for OAuth authentication|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|client_id|string|None|True|Zoom app client ID, required for OAuth authentication|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|client_secret|credential_secret_key|None|True|Zoom app client secret, required for OAuth authentication|None|{'secretKey': '9de5069c5afe602b2ea0a04b66beb2c0'}|
   
 Example input:
 
@@ -42,8 +42,10 @@ Example input:
 {
   "account_id": "dBs0x4Kf7HuIK0LLbzMduW",
   "authentication_retry_limit": 5,
-  "client_id": "{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}",
-  "client_secret": "9de5069c5afe602b2ea0a04b66beb2c0"
+  "client_id": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "client_secret": {
+    "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
+  }
 }
 ```  
 
@@ -54,7 +56,7 @@ Example input:
 
 #### Create User
   
-Create user associated to account  
+This action is used to create user associated to account.  
 
 ##### Input
 
@@ -102,13 +104,13 @@ Example output:
 
 #### Delete User
   
-Delete or disassociate user from account  
+This action is used to delete or disassociate user from account.  
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action|string|None|True|Specify how to delete the user. To delete pending user, use disassocaite|['delete', 'disassociate']|delete|
+|action|string|None|True|Specify how to delete the user. To delete pending user, use disassociate|['delete', 'disassociate']|delete|
 |id|string|None|True|The user identifier or email address|None|user@example.com|
 |transfer_email|string|None|False|Email to transfer meetings, webinars, or recordings|None|user@example.com|
 |transfer_meetings|boolean|False|False|Whether to transfer meetings to defined transfer email|None|False|
@@ -144,7 +146,7 @@ Example output:
 
 #### Get User
   
-Get user in Zoom account  
+This action is used to get user in Zoom account.  
 
 ##### Input
 
@@ -164,13 +166,19 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|user|user|True|User details|{}|
+|user|user|True|User details|{'email': 'user@example.com', 'first_name': 'John', 'id': 'T9ti3NBxR42swGKrqABGig', 'last_name': 'Smith', 'type': 1}|
 
 Example output:
 
 ```
 {
-  "user": {}
+  "user": {
+    "email": "user@example.com",
+    "first_name": "John",
+    "id": "T9ti3NBxR42swGKrqABGig",
+    "last_name": "Smith",
+    "type": 1
+  }
 }
 ```
 ### Triggers
@@ -178,7 +186,7 @@ Example output:
 
 #### User Activity Event
   
-Poll for user activity events  
+This trigger is used to poll for user activity events.  
 
 ##### Input
 
@@ -198,13 +206,20 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|user_activity|user_activity|False|User Activity|{}|
+|user_activity|user_activity|False|User Activity|{'email': 'user@example.com', 'time': '2020-06-05T16:51:28Z', 'type': 'Sign in', 'ip_address': '198.51.100.100', 'client_type': 'Browser', 'version': '5.12.2'}|
 
 Example output:
 
 ```
 {
-  "user_activity": {}
+  "user_activity": {
+    "client_type": "Browser",
+    "email": "user@example.com",
+    "ip_address": "198.51.100.100",
+    "time": "2020-06-05T16:51:28Z",
+    "type": "Sign in",
+    "version": "5.12.2"
+  }
 }
 ```
 ### Tasks
@@ -212,7 +227,7 @@ Example output:
 
 #### Monitor Sign in and out Activity
   
-Monitor sign in and out activity  
+This task is used to monitor sign in and out activity.  
 
 ##### Input
   
@@ -222,22 +237,22 @@ Monitor sign in and out activity
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|activity_logs|[]user_activity|True|All activity logs within the specified time range|[]|
+|activity_logs|[]user_activity|True|All activity logs within the specified time range|[{'email': 'user@example.com', 'time': '2020-06-05T16:51:28Z', 'type': 'Sign in', 'ip_address': '198.51.100.100', 'client_type': 'Browser', 'version': '5.12.2'}, {'email': 'user@example.com', 'time': '2020-06-05T17:51:28Z', 'type': 'Sign out', 'ip_address': '198.51.100.100', 'client_type': 'Browser', 'version': '5.12.2'}]|
 
 Example output:
 
 ```
-[
-  {
+{
+  "activity_logs": {
     "client_type": "Browser",
     "email": "user@example.com",
-    "ip_address": "192.0.2.1",
-    "time": "2019-09-15T19:13:41Z",
-    "type": "Sign out",
-    "version": "5.9.1.2581"
+    "ip_address": "198.51.100.100",
+    "time": "2020-06-05T16:51:28Z",
+    "type": "Sign in",
+    "version": "5.12.2"
   }
-]
-```
+}
+```  
 
 ### Custom Types
   
@@ -250,7 +265,7 @@ Example output:
 |IP Address|string|None|True|The IP address of the user's device|192.0.2.0|
 |Time|string|None|True|Time during which the activity occurred in 'yyyy-mm-ddThh:mm:ssZ' format|2023-05-21 20:15:01+00:00|
 |Type|string|None|True|The type of activity|Sign in|
-|Version|string|None|False|The version of the client of the user's device|-|
+|Version|string|None|False|The version of the client of the user's device|5.12.2|
   
 **user**  
 
@@ -261,10 +276,10 @@ Example output:
 |Department|string|None|False|Department of user|example department|
 |Email|string|None|False|Email address of user|user@example.com|
 |First Name|string|None|False|First name of user|John|
-|Web Group IDs|[]string|None|False|IDs of the web groups user belongs to|[]|
+|Web Group IDs|[]string|None|False|IDs of the web groups user belongs to|['t-_-d56CSWG-7BF15LLrOw', 't-_-d56CSWG-7BF15LLrow']|
 |Host Key|string|None|False|User's host key|123321|
 |ID|string|None|True|User identifier|T9ti3NBxR42swGKrqABGig|
-|IM Group IDs|[]string|None|False|IM IDs of the groups user belongs to|[]|
+|IM Group IDs|[]string|None|False|IM IDs of the groups user belongs to|['t-_-d56CSWG-7BF15LLrOw', 't-_-d56CSWG-7BF15LLrow']|
 |JID|string|None|False|JID of user|T9ti3NBxR42swGKrqABGig@xmpp.zoom.us|
 |Language|string|None|False|Language of user|en-US|
 |Last Login Time|string|None|False|Last login datetime of user|2023-06-21 13:41:14+00:00|

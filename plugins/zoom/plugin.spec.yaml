@@ -37,7 +37,7 @@ connection:
     description: Zoom app client secret, required for OAuth authentication
     type: credential_secret_key
     required: true
-    example: '{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}'
+    example: {"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}
   account_id:
     title: Account ID
     description: Zoom app account ID, required for OAuth authentication
@@ -92,7 +92,7 @@ types:
       description: The version of the client of the user's device
       type: string
       required: false
-      example: "-"
+      example: "5.12.2"
   user:
     id:
       title: ID
@@ -202,13 +202,13 @@ types:
       description: IDs of the web groups user belongs to
       type: "[]string"
       required: false
-      example: []
+      example: ["t-_-d56CSWG-7BF15LLrOw", "t-_-d56CSWG-7BF15LLrow"]
     im_group_ids:
       title: IM Group IDs
       description: IM IDs of the groups user belongs to
       type: "[]string"
       required: false
-      example: []
+      example: ["t-_-d56CSWG-7BF15LLrOw", "t-_-d56CSWG-7BF15LLrow"]
     account_id:
       title: Account ID
       description: Account ID of user
@@ -242,7 +242,7 @@ types:
 actions:
   get_user:
     title: Get User
-    description: Get user in Zoom account
+    description: This action is used to get user in Zoom account.
     input:
       user_id:
         title: User ID
@@ -256,10 +256,10 @@ actions:
         description: User details
         type: user
         required: true
-        example: {}
+        example: { "email": "user@example.com", "first_name": "John", "id": "T9ti3NBxR42swGKrqABGig", "last_name": "Smith", "type": 1 }
   create_user:
     title: Create User
-    description: Create user associated to account
+    description: This action is used to create user associated to account.
     input:
       action:
         title: Action
@@ -337,11 +337,11 @@ actions:
         example: Smith
   delete_user:
     title: Delete User
-    description: Delete or disassociate user from account
+    description: This action is used to delete or disassociate user from account.
     input:
       action:
         title: Action
-        description: Specify how to delete the user. To delete pending user, use disassocaite
+        description: Specify how to delete the user. To delete pending user, use disassociate
         type: string
         required: true
         enum:
@@ -391,7 +391,7 @@ actions:
 triggers:
   user_activity_event:
     title: User Activity Event
-    description: Poll for user activity events
+    description: This trigger is used to poll for user activity events.
     input:
       activity_type:
         title: Activity Type
@@ -409,16 +409,16 @@ triggers:
         description: User Activity
         type: user_activity
         required: false
-        example: {}
+        example: { "email": "user@example.com", "time": "2020-06-05T16:51:28Z", "type": "Sign in", "ip_address": "198.51.100.100", "client_type": "Browser", "version": "5.12.2" }
 
 tasks:
   monitor_sign_in_out_activity:
     title: Monitor Sign in and out Activity
-    description: Monitor sign in and out activity
+    description: This task is used to monitor sign in and out activity.
     output:
       activity_logs:
         title: Activity Logs
         description: All activity logs within the specified time range
         type: "[]user_activity"
         required: true
-        example: []
+        example: [{ "email": "user@example.com", "time": "2020-06-05T16:51:28Z", "type": "Sign in", "ip_address": "198.51.100.100", "client_type": "Browser", "version": "5.12.2" }, { "email": "user@example.com", "time": "2020-06-05T17:51:28Z", "type": "Sign out", "ip_address": "198.51.100.100", "client_type": "Browser", "version": "5.12.2" }]

@@ -206,11 +206,11 @@ class ZoomAPI:
             if allow_404:
                 return None
             raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.json())
-        if response.status_code >= 409:
+        if response.status_code == 409:
             raise PluginException(
                 cause="User already exists.", assistance="Please check your input and try again.", data=response.json()
             )
-        if response.status_code >= 429:
+        if response.status_code == 429:
             raise self.get_exception_for_rate_limit(response=response)
 
         # 401 requires extra logic, so it is not included in the 4xx dict

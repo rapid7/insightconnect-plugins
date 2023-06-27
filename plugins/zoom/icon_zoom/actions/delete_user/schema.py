@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Delete or disassociate user from account"
+    DESCRIPTION = "This action is used to delete or disassociate user from account."
 
 
 class Input:

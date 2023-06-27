@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Monitor sign in and out activity"
+    DESCRIPTION = "This task is used to monitor sign in and out activity."
 
 
 class Input:

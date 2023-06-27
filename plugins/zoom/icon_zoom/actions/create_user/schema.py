@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Create user associated to account"
+    DESCRIPTION = "This action is used to create user associated to account."
 
 
 class Input:
