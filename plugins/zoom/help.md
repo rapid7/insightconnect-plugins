@@ -33,7 +33,7 @@ The connection configuration accepts the following parameters:
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |account_id|string|None|True|Zoom app account ID, required for OAuth authentication|None|dBs0x4Kf7HuIK0LLbzMduW|
 |authentication_retry_limit|integer|5|True|How many times to retry authentication to Zoom before failing, required for OAuth authentication|None|5|
-|client_id|string|None|True|Zoom app client ID, required for OAuth authentication|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|client_id|string|None|True|Zoom app client ID, required for OAuth authentication|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|
 |client_secret|credential_secret_key|None|True|Zoom app client secret, required for OAuth authentication|None|9de5069c5afe602b2ea0a04b66beb2c0|
   
 Example input:
@@ -42,7 +42,7 @@ Example input:
 {
   "account_id": "dBs0x4Kf7HuIK0LLbzMduW",
   "authentication_retry_limit": 5,
-  "client_id": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "client_id": "{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}",
   "client_secret": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```  
@@ -81,7 +81,7 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|
-|----|----|--------|-----------|
+| :--- | :--- | :--- | :--- |
 |email|string|True|Email address of user|
 |first_name|string|False|First name of user|
 |id|string|True|User identifier|
@@ -131,7 +131,7 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|
-|----|----|--------|-----------|
+| :--- | :--- | :--- | :--- |
 |success|boolean|True|Success|
 
 Example output:
@@ -287,7 +287,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.0.2 - Reordered status checks to avoid Json parsing issue with 204s | Added examples to spec file and help.md
+* 4.0.2 - Reordered status checks to avoid JSON parsing issue with 204s | Added examples to spec file and help.md
 * 4.0.1 - Return Zoom API status codes in Monitor Sign in And Out Activity task state
 * 4.0.0 - Fix time boundary checking in Monitor Sign in And Out Activity task by tracking last request time instead of latest event time | Remove JWT authentication
 * 3.0.0 - Add back JWT authentication in addition to OAuth (please note JWT will be removed from the Zoom API in June 2023) | Improve OAuth logic to help prevent infinite looping
