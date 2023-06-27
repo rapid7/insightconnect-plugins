@@ -1,12 +1,12 @@
 import logging
 import unittest
 import datetime
-from mock import patch
+from unittest.mock import patch
 
 from icon_zoom.util.event import Event
 from icon_zoom.tasks.monitor_sign_in_out_activity.task import MonitorSignInOutActivity
 from icon_zoom.connection.connection import Connection
-from unit_test.mock import STUB_CONNECTION, STUB_OAUTH_TOKEN
+from mock import STUB_CONNECTION, STUB_OAUTH_TOKEN
 
 REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI._refresh_oauth_token"
 GET_USER_ACTIVITY_EVENTS_PATH = "icon_zoom.util.api.ZoomAPI.get_user_activity_events"
