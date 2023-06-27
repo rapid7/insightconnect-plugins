@@ -80,13 +80,13 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-| :--- | :--- | :--- | :--- |
-|email|string|True|Email address of user|
-|first_name|string|False|First name of user|
-|id|string|True|User identifier|
-|last_name|string|True|Last name of user|
-|type|integer|True|User type|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|email|string|True|Email address of user|user@example.com|
+|first_name|string|False|First name of user|John|
+|id|string|True|User identifier|T9ti3NBxR42swGKrqABGig|
+|last_name|string|True|Last name of user|Smith|
+|type|integer|True|User type|1|
 
 Example output:
 
@@ -130,9 +130,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-| :--- | :--- | :--- | :--- |
-|success|boolean|True|Success|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|True|Success|True|
 
 Example output:
 
@@ -162,9 +162,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-| :--- | :--- | :--- | :--- |
-|user|user|True|User details|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|user|user|True|User details|{}|
 
 Example output:
 
@@ -196,9 +196,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-| :--- | :--- | :--- | :--- |
-|user_activity|user_activity|False|User Activity|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|user_activity|user_activity|False|User Activity|{}|
 
 Example output:
 
@@ -220,9 +220,9 @@ Monitor sign in and out activity
 
 ##### Output
 
-|Name|Type|Required|Description|
-| :--- | :--- | :--- | :--- |
-|activity_logs|[]user_activity|True|All activity logs within the specified time range|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|activity_logs|[]user_activity|True|All activity logs within the specified time range|[]|
 
 Example output:
 
