@@ -166,7 +166,7 @@ types:
       type: integer
     analysis_vti_built_in_rules_version:
       description: Analysis VTI built in rules version
-      title: Analysis VTI Built In Rules Version
+      title:
       type: string
     analysis_system_time:
       description: Analysis system time

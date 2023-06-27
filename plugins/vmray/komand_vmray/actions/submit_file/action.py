@@ -1,4 +1,7 @@
+import binascii
+
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import SubmitFileInput, SubmitFileOutput
 
 # Custom imports below
@@ -25,8 +28,11 @@ class SubmitFile(insightconnect_plugin_runtime.Action):
 
         try:
             file_bytes = base64.b64decode(file_.get("content"))
-        except:
-            raise Exception("Error decoding base64, contents of the file must be encoded with base64!")
+        except [binascii.Error, ValueError]:
+            raise PluginException(
+                cause="Error decoding base64, contents of the file must be encoded with base64!",
+                assistance="Please provide a valid base64 encoded file",
+            )
 
         mime_types, check_pass = self.connection.api.check_filetype(file_bytes)
         if check_pass:
