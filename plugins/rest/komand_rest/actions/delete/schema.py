@@ -30,7 +30,7 @@ class DeleteInput(insightconnect_plugin_runtime.Input):
     "body_any": {
       "type": "string",
       "title": "Body (Any)",
-      "description": "Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc",
+      "description": "Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc.. If a data object is to be sent, please use the 'Body Object' input",
       "order": 4
     },
     "body_object": {
@@ -71,7 +71,7 @@ class DeleteOutput(insightconnect_plugin_runtime.Output):
     "body_object": {
       "type": "object",
       "title": "Body Object",
-      "description": "Response payload from the server as an object",
+      "description": "Response payload from the server as an object. Note, if the response has invalid object structure (list, string..) plugin will wrap it with object map",
       "order": 1
     },
     "body_string": {

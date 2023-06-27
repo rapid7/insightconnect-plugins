@@ -1,0 +1,27 @@
+{
+    "json": {
+        "args": {},
+        "data": "",
+        "files": {},
+        "form": {"example": "xwwwf"},
+        "headers": {
+            "Accept": "*/*",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Cache-Control": "no-cache",
+            "Content-Length": "13",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Host": "example.com"
+        },
+        "json": null,
+        "origin": "0.0.0.0",
+        "url": "https://example.com/put"
+    },
+    "headers":{
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Cache-Control": "no-cache",
+        "Content-Length": "13",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Host": "example.com"
+    }
+}

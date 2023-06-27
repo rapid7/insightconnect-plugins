@@ -1,0 +1,27 @@
+{
+    "json": {
+        "args": {},
+        "data": "example",
+        "files": {},
+        "form": {},
+        "headers": {
+            "Accept": "*/*",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Cache-Control": "no-cache",
+            "Content-Length": "7",
+            "Content-Type": "text/plain",
+            "Host": "example.com"
+        },
+        "json": null,
+        "origin": "0.0.0.0",
+        "url": "https://example.com/put"
+    },
+    "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Cache-Control": "no-cache",
+        "Content-Length": "7",
+        "Content-Type": "text/plain",
+        "Host": "example.com"
+    }
+}
