@@ -52,7 +52,7 @@ class ProofpointTapApi:
         return True
 
     @rate_limiting(10)
-    def _call_api(self, method: str, endpoint: str, params: dict = {}, json_data: dict = {}):
+    def _call_api(self, method: str, endpoint: str, params: dict = {}, json_data: dict = {}):  # noqa: C901
         try:
             response = requests.request(
                 url=f"{self.base_url}{endpoint}",

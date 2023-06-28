@@ -26,7 +26,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             state=MonitorEventsState(),
         )
 
-    def run(self, params={}, state={}):
+    def run(self, params={}, state={}):  # pylint: disable=unused-argument
         last_collection_date = state.get(self.LAST_COLLECTION_DATE)
         next_page_index = state.get(self.NEXT_PAGE_INDEX)
         previous_logs_hashes = state.get(self.PREVIOUS_LOGS_HASHES, [])
@@ -103,7 +103,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
 
     @staticmethod
     def sha1(log: dict) -> str:
-        hash_ = sha1()
+        hash_ = sha1()  # nosec B303
         for key, value in log.items():
             hash_.update(f"{key}{value}".encode("utf-8"))
         return hash_.hexdigest()

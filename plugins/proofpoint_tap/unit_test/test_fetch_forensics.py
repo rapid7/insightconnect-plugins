@@ -4,7 +4,7 @@ from unittest.mock import patch
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_proofpoint_tap.util.exceptions import ApiException
 from komand_proofpoint_tap.actions.fetch_forensics import FetchForensics
-from unit_test.test_util import Util
+from test_util import Util
 from unittest import TestCase
 from parameterized import parameterized
 

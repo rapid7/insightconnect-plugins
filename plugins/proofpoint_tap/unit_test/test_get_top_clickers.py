@@ -3,7 +3,7 @@ import os
 
 from unittest.mock import patch
 from komand_proofpoint_tap.actions.get_top_clickers import GetTopClickers
-from unit_test.test_util import Util
+from test_util import Util
 from unittest import TestCase
 from parameterized import parameterized
 

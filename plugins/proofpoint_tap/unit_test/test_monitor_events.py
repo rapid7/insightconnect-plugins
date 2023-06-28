@@ -3,7 +3,7 @@ import os
 
 from unittest.mock import patch
 from komand_proofpoint_tap.tasks.monitor_events.task import MonitorEvents
-from unit_test.test_util import Util
+from test_util import Util
 from unittest import TestCase
 from parameterized import parameterized
 from datetime import datetime, timezone

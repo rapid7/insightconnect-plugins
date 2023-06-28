@@ -2,7 +2,7 @@ import sys
 import os
 from unittest import TestCase
 from komand_proofpoint_tap.actions.parse_tap_alert import ParseTapAlert
-from unit_test.test_util import Util
+from test_util import Util
 from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))

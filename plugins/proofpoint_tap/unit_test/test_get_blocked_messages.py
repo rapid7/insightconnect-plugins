@@ -5,7 +5,7 @@ from unittest.mock import patch
 from komand_proofpoint_tap.actions.get_blocked_messages import GetBlockedMessages
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_proofpoint_tap.util.exceptions import ApiException
-from unit_test.test_util import Util
+from test_util import Util
 from unittest import TestCase
 from parameterized import parameterized
 
