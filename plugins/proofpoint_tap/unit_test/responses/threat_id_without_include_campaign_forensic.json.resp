@@ -1,0 +1,31 @@
+{
+  "generated": "2021-06-27T18:48:04.302Z",
+  "reports": [
+    {
+      "scope": "THREAT",
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "name": "example.com",
+      "threatStatus": "active",
+      "forensics": [
+        {
+          "type": "screenshot",
+          "display": "Screenshot",
+          "engine": "static",
+          "malicious": true,
+          "note": "Screenshot",
+          "time": 0,
+          "what": {
+            "url": "https://example.com"
+          },
+          "platforms": [
+            {
+              "name": "static",
+              "os": "static",
+              "version": "0"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

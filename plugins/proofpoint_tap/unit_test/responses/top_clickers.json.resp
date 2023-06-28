@@ -1,0 +1,24 @@
+{
+  "interval": "2021-01-23T15:45:00Z/2021-04-23T15:45:00Z",
+  "totalTopClickers": 5,
+  "users": [
+    {
+      "clickStatistics": {
+        "families": [
+          {
+            "clicks": 28,
+            "name": "Malware"
+          }
+        ],
+        "clickCount": 28
+      },
+      "identity": {
+        "emails": [
+          "user@example.com"
+        ],
+        "guid": "9de5069-c5af-e602-b2ea-0a04b66beb2c0",
+        "vip": false
+      }
+    }
+  ]
+}

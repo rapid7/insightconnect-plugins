@@ -2,259 +2,99 @@ import sys
 import os
 from unittest.mock import patch
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_proofpoint_tap.util.exceptions import ApiException
 from komand_proofpoint_tap.actions.fetch_forensics import FetchForensics
-from komand_proofpoint_tap.actions.fetch_forensics.schema import Input, Output
 from unit_test.test_util import Util
 from unittest import TestCase
+from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
 
 
+@patch("requests.request", side_effect=Util.mocked_requests_get)
 class TestFetchForensics(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.action = Util.default_connector(FetchForensics())
 
-    @patch("requests.request", side_effect=Util.mocked_requests_get)
-    def test_threat_id_and_include_campaign_forensic(self, mock_request):
-        actual = self.action.run({Input.THREAT_ID: "abcd1234", Input.INCLUDE_CAMPAIGN_FORENSICS: True})
-        expected = {
-            "generated": "2021-06-27T18:48:04.302Z",
-            "reports": [
-                {
-                    "scope": "THREAT",
-                    "id": "abcd1234",
-                    "name": "www.testcase.com",
-                    "threatStatus": "active",
-                    "forensics": [
-                        {
-                            "type": "screenshot",
-                            "display": "Screenshot",
-                            "engine": "static",
-                            "malicious": True,
-                            "note": "Screenshot",
-                            "time": 0,
-                            "what": {"url": "https://testcase2.com"},
-                            "platforms": [{"name": "static", "os": "static", "version": "0"}],
-                        }
-                    ],
-                }
+    @parameterized.expand(
+        [
+            [
+                "fetch_forensics_with_threat_and_forensic",
+                Util.read_file_to_dict("inputs/fetch_forensics_with_threat_and_forensic.json.inp"),
+                Util.read_file_to_dict("expected/fetch_forensics_with_threat_and_forensic.json.exp"),
             ],
-        }
-        self.assertEqual(actual, expected)
-
-    @patch("requests.request", side_effect=Util.mocked_requests_get)
-    def test_threat_id_without_include_campaign_forensic(self, mock_request):
-        actual = self.action.run({Input.THREAT_ID: "abcd1234", Input.INCLUDE_CAMPAIGN_FORENSICS: False})
-        expected = {
-            "generated": "2021-06-27T18:48:04.302Z",
-            "reports": [
-                {
-                    "scope": "THREAT",
-                    "id": "abcd1234",
-                    "name": "www.testcase.com",
-                    "threatStatus": "active",
-                    "forensics": [
-                        {
-                            "type": "screenshot",
-                            "display": "Screenshot",
-                            "engine": "static",
-                            "malicious": True,
-                            "note": "Screenshot",
-                            "time": 0,
-                            "what": {"url": "https://testcase2.com"},
-                            "platforms": [{"name": "static", "os": "static", "version": "0"}],
-                        }
-                    ],
-                }
+            [
+                "fetch_forensics_with_threat_without_forensic",
+                Util.read_file_to_dict("inputs/fetch_forensics_with_threat_without_forensic.json.inp"),
+                Util.read_file_to_dict("expected/fetch_forensics_with_threat_without_forensic.json.exp"),
             ],
-        }
-        self.assertEqual(actual, expected)
-
-    @patch("requests.request", side_effect=Util.mocked_requests_get)
-    def test_campaign_id(self, mock_request):
-        actual = self.action.run({Input.CAMPAIGN_ID: "11111111-aaaa-2222-3333-bbbbbbbbbbbb"})
-
-        expected = {
-            "generated": "2021-06-27T19:58:04.283Z",
-            "reports": [
-                {
-                    "scope": "CAMPAIGN",
-                    "id": "11111111-aaaa-2222-3333-bbbbbbbbbbbb",
-                    "name": "Emotet",
-                    "forensics": [
-                        {
-                            "type": "behavior",
-                            "display": "Test",
-                            "engine": "iee",
-                            "malicious": False,
-                            "note": "Test2",
-                            "time": 0,
-                            "what": {"rule": "behavior_123456789"},
-                            "platforms": [{"name": "Win10", "os": "win", "version": "win10"}],
-                        }
-                    ],
-                }
+            [
+                "fetch_forensics_with_campaign",
+                Util.read_file_to_dict("inputs/fetch_forensics_with_campaign.json.inp"),
+                Util.read_file_to_dict("expected/fetch_forensics_with_campaign.json.exp"),
             ],
-        }
+            [
+                "fetch_forensics_blacklisted_as_boolean",
+                Util.read_file_to_dict("inputs/fetch_forensics_blacklisted_as_boolean.json.inp"),
+                Util.read_file_to_dict("expected/fetch_forensics_blacklisted_as_boolean.json.exp"),
+            ],
+            [
+                "fetch_forensics_blacklisted_as_integer",
+                Util.read_file_to_dict("inputs/fetch_forensics_blacklisted_as_integer.json.inp"),
+                Util.read_file_to_dict("expected/fetch_forensics_blacklisted_as_integer.json.exp"),
+            ],
+            [
+                "fetch_forensics_blacklisted_as_boolean_and_integer",
+                Util.read_file_to_dict("inputs/fetch_forensics_blacklisted_as_boolean_and_integer.json.inp"),
+                Util.read_file_to_dict("expected/fetch_forensics_blacklisted_as_boolean_and_integer.json.exp"),
+            ],
+        ]
+    )
+    def test_fetch_forensics(self, mock_request, test_name, input_params, expected):
+        actual = self.action.run(input_params)
+        self.assertDictEqual(actual, expected)
 
-        self.assertEqual(actual, expected)
-
-    @patch("requests.request", side_effect=Util.mocked_requests_get)
-    def test_two_parameters_error(self, mock_request):
+    @parameterized.expand(
+        [
+            [
+                "fetch_forensics_with_threat_and_campaign",
+                Util.read_file_to_dict("inputs/fetch_forensics_two_parameters_bad.json.inp"),
+                "Both Campaign ID and Threat ID were provided.",
+                "Only one of the following two parameters can be used: Campaign ID or Threat ID.",
+            ],
+            [
+                "fetch_forensics_no_parameters",
+                Util.read_file_to_dict("inputs/fetch_forensics_no_parameters_bad.json.inp"),
+                "One of the following inputs must be provided.",
+                "Please enter either Threat ID or Campaign ID.",
+            ],
+        ]
+    )
+    def test_fetch_forensics_raise_plugin_exception(self, mock_request, test_name, input_params, cause, assistance):
         with self.assertRaises(PluginException) as error:
-            self.action.run(
-                {
-                    Input.THREAT_ID: "abcd1234",
-                    Input.INCLUDE_CAMPAIGN_FORENSICS: True,
-                    Input.CAMPAIGN_ID: "11111111-aaaa-2222-3333-bbbbbbbbbbbb",
-                }
-            )
+            self.action.run(input_params)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)
 
-        self.assertEqual(error.exception.cause, "Both Campaign ID and Threat ID were provided.")
-        self.assertEqual(
-            error.exception.assistance,
-            "Only one of the following two parameters can be used: Campaign ID or Threat ID.",
-        )
-
-    @patch("requests.request", side_effect=Util.mocked_requests_get)
-    def test_no_parameters_error(self, mock_request):
-        with self.assertRaises(PluginException) as error:
-            self.action.run({Input.THREAT_ID: "", Input.INCLUDE_CAMPAIGN_FORENSICS: True, Input.CAMPAIGN_ID: ""})
-
-        self.assertEqual(error.exception.cause, "One of the following inputs must be provided.")
-        self.assertEqual(error.exception.assistance, "Please enter either Threat ID or Campaign ID.")
-
-    @patch("requests.request", side_effect=Util.mocked_requests_get)
-    def test_fetch_forensics_blacklisted_as_boolean(self, mock_request):
-        actual = self.action.run({Input.THREAT_ID: "blacklisted_as_boolean", Input.INCLUDE_CAMPAIGN_FORENSICS: False})
-
-        expected = {
-            "generated": "2021-06-27T19:58:04.283Z",
-            "reports": [
-                {
-                    "scope": "THREAT",
-                    "id": "blacklisted_as_boolean",
-                    "name": "www.testcase.com",
-                    "threatStatus": "active",
-                    "forensics": [
-                        {
-                            "display": "Attachment with SHA-256: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-                            "engine": "av",
-                            "malicious": True,
-                            "note": "Attachment with SHA-256: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-                            "platforms": [
-                                {
-                                    "name": "pps",
-                                    "os": "pps",
-                                }
-                            ],
-                            "type": "attachment",
-                            "what": {
-                                "blacklisted": True,
-                                "rule": "Av",
-                                "sha256": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-                            },
-                        }
-                    ],
-                }
+    @parameterized.expand(
+        [
+            [
+                "fetch_forensics_threat_id_not_found",
+                Util.read_file_to_dict("inputs/fetch_forensics_threat_id_not_found.json.inp"),
+                "No results found.",
+                "Please provide valid inputs and try again.",
             ],
-        }
-
-        self.assertEqual(actual, expected)
-
-    @patch("requests.request", side_effect=Util.mocked_requests_get)
-    def test_fetch_forensics_blacklisted_as_integer(self, mock_request):
-        actual = self.action.run({Input.THREAT_ID: "blacklisted_as_integer", Input.INCLUDE_CAMPAIGN_FORENSICS: False})
-
-        expected = {
-            "generated": "2021-06-27T19:58:04.283Z",
-            "reports": [
-                {
-                    "scope": "THREAT",
-                    "id": "blacklisted_as_integer",
-                    "name": "www.testcase.com",
-                    "threatStatus": "active",
-                    "forensics": [
-                        {
-                            "display": "Attachment with SHA-256: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-                            "engine": "av",
-                            "malicious": True,
-                            "note": "Attachment with SHA-256: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-                            "platforms": [
-                                {
-                                    "name": "pps",
-                                    "os": "pps",
-                                }
-                            ],
-                            "type": "attachment",
-                            "what": {
-                                "blacklisted": True,
-                                "rule": "Av",
-                                "sha256": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-                            },
-                        }
-                    ],
-                }
+            [
+                "fetch_forensics_campaign_id_not_found",
+                Util.read_file_to_dict("inputs/fetch_forensics_campaign_id_not_found.json.inp"),
+                "No results found.",
+                "Please provide valid inputs and try again.",
             ],
-        }
-
-        self.assertEqual(actual, expected)
-
-    @patch("requests.request", side_effect=Util.mocked_requests_get)
-    def test_fetch_forensics_blacklisted_as_boolean_and_integer(self, mock_request):
-        actual = self.action.run(
-            {Input.THREAT_ID: "blacklisted_as_boolean_and_integer", Input.INCLUDE_CAMPAIGN_FORENSICS: False}
-        )
-
-        expected = {
-            "generated": "2021-06-27T19:58:04.283Z",
-            "reports": [
-                {
-                    "scope": "THREAT",
-                    "id": "blacklisted_as_boolean_and_integer",
-                    "name": "www.testcase.com",
-                    "threatStatus": "active",
-                    "forensics": [
-                        {
-                            "display": "Attachment with SHA-256: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-                            "engine": "av",
-                            "malicious": True,
-                            "note": "Attachment with SHA-256: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-                            "platforms": [
-                                {
-                                    "name": "pps",
-                                    "os": "pps",
-                                }
-                            ],
-                            "type": "attachment",
-                            "what": {
-                                "blacklisted": True,
-                                "rule": "Av",
-                                "sha256": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-                            },
-                        },
-                        {
-                            "display": "Attachment with SHA-256: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-                            "engine": "av",
-                            "malicious": True,
-                            "note": "Attachment with SHA-256: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-                            "platforms": [
-                                {
-                                    "name": "pps",
-                                    "os": "pps",
-                                }
-                            ],
-                            "type": "attachment",
-                            "what": {
-                                "blacklisted": True,
-                                "rule": "Av",
-                                "sha256": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-                            },
-                        },
-                    ],
-                }
-            ],
-        }
-
-        self.assertEqual(actual, expected)
+        ]
+    )
+    def test_fetch_forensics_raise_api_exception(self, mock_request, test_name, input_params, cause, assistance):
+        with self.assertRaises(ApiException) as error:
+            self.action.run(input_params)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)

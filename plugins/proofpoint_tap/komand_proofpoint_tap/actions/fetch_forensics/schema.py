@@ -8,9 +8,9 @@ class Component:
 
 
 class Input:
-    CAMPAIGN_ID = "campaign_id"
-    INCLUDE_CAMPAIGN_FORENSICS = "include_campaign_forensics"
-    THREAT_ID = "threat_id"
+    CAMPAIGNID = "campaignId"
+    INCLUDECAMPAIGNFORENSICS = "includeCampaignForensics"
+    THREATID = "threatId"
     
 
 class Output:
@@ -24,19 +24,19 @@ class FetchForensicsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "campaign_id": {
+    "campaignId": {
       "type": "string",
       "title": "Campaign ID",
       "description": "Campaign identifier",
       "order": 2
     },
-    "include_campaign_forensics": {
+    "includeCampaignForensics": {
       "type": "boolean",
       "title": "Include Campaign Forensics",
       "description": "Include campaign forensics in threats. This parameter works only with Threat ID",
       "order": 3
     },
-    "threat_id": {
+    "threatId": {
       "type": "string",
       "title": "Threat ID",
       "description": "Threat identifier",
@@ -59,7 +59,7 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
     "generated": {
       "type": "string",
       "title": "Generated",
-      "description": "Generated threats",
+      "description": "ISO8601-formatted datetime corresponding to the time this report was generated",
       "order": 1
     },
     "reports": {
@@ -109,27 +109,27 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
           "order": 1
         },
         "what": {
-          "$ref": "#/definitions/evidence_type",
+          "$ref": "#/definitions/evidenceType",
           "title": "What",
           "description": "Map of values associated with the specific evidence type",
           "order": 4
         }
       },
       "definitions": {
-        "evidence_type": {
+        "evidenceType": {
           "type": "object",
-          "title": "evidence_type",
+          "title": "evidenceType",
           "properties": {
             "action": {
               "type": "string",
               "title": "Action",
-              "description": "Whether the cookie was set or deleted",
+              "description": "Action performed",
               "order": 7
             },
             "blacklisted": {
               "type": "boolean",
               "title": "Blacklisted",
-              "description": "Optional, whether the file was blacklisted",
+              "description": "Optional, whether the file or URL was blacklisted",
               "order": 2
             },
             "cnames": {
@@ -177,19 +177,19 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
             "key": {
               "type": "string",
               "title": "Key",
-              "description": "The name of the cookie being set or deleted",
+              "description": "The location of the registry key being modified or the name of the cookie being set or deleted",
               "order": 9
             },
             "md5": {
               "type": "string",
               "title": "MD5",
-              "description": "Optional, the MD5 sum of the attachment's contents",
+              "description": "Optional, the MD5 sum of the item's content",
               "order": 3
             },
             "name": {
               "type": "string",
               "title": "Name",
-              "description": "The friendly name of the IDs rule which observed the malicious traffic",
+              "description": "The name of the related item",
               "order": 18
             },
             "nameservers": {
@@ -213,13 +213,13 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
             "offset": {
               "type": "integer",
               "title": "Offset",
-              "description": "Optional, the offset in bytes where the malicious content was found",
+              "description": "Optional, the offset in bytes where the malicious content or URL was found",
               "order": 4
             },
             "path": {
               "type": "string",
               "title": "Path",
-              "description": "The location of the dropper file",
+              "description": "Path to the file",
               "order": 16
             },
             "port": {
@@ -231,13 +231,13 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
             "rule": {
               "type": "string",
               "title": "Rule",
-              "description": "Optional, the name of the static rule inside the sandbox which located the malicious content",
+              "description": "Optional, the name of the static rule inside the sandbox which identified the related item",
               "order": 5
             },
             "sha256": {
               "type": "string",
               "title": "SHA256",
-              "description": "The SHA256 hash of the attachment's contents",
+              "description": "The SHA256 hash of the item's content",
               "order": 1
             },
             "signatureId": {
@@ -249,25 +249,25 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
             "size": {
               "type": "integer",
               "title": "Size",
-              "description": "Optional, the size in bytes of the attachment's contents",
+              "description": "Optional, the size in bytes of the file content",
               "order": 6
             },
             "type": {
               "type": "string",
               "title": "Type",
-              "description": "The protocol being used TCP or UDP",
+              "description": "The protocol being used - TCP or UDP",
               "order": 22
             },
             "url": {
               "type": "string",
               "title": "URL",
-              "description": "Optional, the URL the dropper contacted",
+              "description": "URL",
               "order": 17
             },
             "value": {
               "type": "string",
               "title": "Value",
-              "description": "Optional, content of the cookie being set",
+              "description": "The content of the cookie or registry key being set",
               "order": 10
             }
           }
@@ -298,20 +298,20 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "evidence_type": {
+    "evidenceType": {
       "type": "object",
-      "title": "evidence_type",
+      "title": "evidenceType",
       "properties": {
         "action": {
           "type": "string",
           "title": "Action",
-          "description": "Whether the cookie was set or deleted",
+          "description": "Action performed",
           "order": 7
         },
         "blacklisted": {
           "type": "boolean",
           "title": "Blacklisted",
-          "description": "Optional, whether the file was blacklisted",
+          "description": "Optional, whether the file or URL was blacklisted",
           "order": 2
         },
         "cnames": {
@@ -359,19 +359,19 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
         "key": {
           "type": "string",
           "title": "Key",
-          "description": "The name of the cookie being set or deleted",
+          "description": "The location of the registry key being modified or the name of the cookie being set or deleted",
           "order": 9
         },
         "md5": {
           "type": "string",
           "title": "MD5",
-          "description": "Optional, the MD5 sum of the attachment's contents",
+          "description": "Optional, the MD5 sum of the item's content",
           "order": 3
         },
         "name": {
           "type": "string",
           "title": "Name",
-          "description": "The friendly name of the IDs rule which observed the malicious traffic",
+          "description": "The name of the related item",
           "order": 18
         },
         "nameservers": {
@@ -395,13 +395,13 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
         "offset": {
           "type": "integer",
           "title": "Offset",
-          "description": "Optional, the offset in bytes where the malicious content was found",
+          "description": "Optional, the offset in bytes where the malicious content or URL was found",
           "order": 4
         },
         "path": {
           "type": "string",
           "title": "Path",
-          "description": "The location of the dropper file",
+          "description": "Path to the file",
           "order": 16
         },
         "port": {
@@ -413,13 +413,13 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
         "rule": {
           "type": "string",
           "title": "Rule",
-          "description": "Optional, the name of the static rule inside the sandbox which located the malicious content",
+          "description": "Optional, the name of the static rule inside the sandbox which identified the related item",
           "order": 5
         },
         "sha256": {
           "type": "string",
           "title": "SHA256",
-          "description": "The SHA256 hash of the attachment's contents",
+          "description": "The SHA256 hash of the item's content",
           "order": 1
         },
         "signatureId": {
@@ -431,25 +431,25 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
         "size": {
           "type": "integer",
           "title": "Size",
-          "description": "Optional, the size in bytes of the attachment's contents",
+          "description": "Optional, the size in bytes of the file content",
           "order": 6
         },
         "type": {
           "type": "string",
           "title": "Type",
-          "description": "The protocol being used TCP or UDP",
+          "description": "The protocol being used - TCP or UDP",
           "order": 22
         },
         "url": {
           "type": "string",
           "title": "URL",
-          "description": "Optional, the URL the dropper contacted",
+          "description": "URL",
           "order": 17
         },
         "value": {
           "type": "string",
           "title": "Value",
-          "description": "Optional, content of the cookie being set",
+          "description": "The content of the cookie or registry key being set",
           "order": 10
         }
       }
@@ -549,27 +549,27 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
               "order": 1
             },
             "what": {
-              "$ref": "#/definitions/evidence_type",
+              "$ref": "#/definitions/evidenceType",
               "title": "What",
               "description": "Map of values associated with the specific evidence type",
               "order": 4
             }
           },
           "definitions": {
-            "evidence_type": {
+            "evidenceType": {
               "type": "object",
-              "title": "evidence_type",
+              "title": "evidenceType",
               "properties": {
                 "action": {
                   "type": "string",
                   "title": "Action",
-                  "description": "Whether the cookie was set or deleted",
+                  "description": "Action performed",
                   "order": 7
                 },
                 "blacklisted": {
                   "type": "boolean",
                   "title": "Blacklisted",
-                  "description": "Optional, whether the file was blacklisted",
+                  "description": "Optional, whether the file or URL was blacklisted",
                   "order": 2
                 },
                 "cnames": {
@@ -617,19 +617,19 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
                 "key": {
                   "type": "string",
                   "title": "Key",
-                  "description": "The name of the cookie being set or deleted",
+                  "description": "The location of the registry key being modified or the name of the cookie being set or deleted",
                   "order": 9
                 },
                 "md5": {
                   "type": "string",
                   "title": "MD5",
-                  "description": "Optional, the MD5 sum of the attachment's contents",
+                  "description": "Optional, the MD5 sum of the item's content",
                   "order": 3
                 },
                 "name": {
                   "type": "string",
                   "title": "Name",
-                  "description": "The friendly name of the IDs rule which observed the malicious traffic",
+                  "description": "The name of the related item",
                   "order": 18
                 },
                 "nameservers": {
@@ -653,13 +653,13 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
                 "offset": {
                   "type": "integer",
                   "title": "Offset",
-                  "description": "Optional, the offset in bytes where the malicious content was found",
+                  "description": "Optional, the offset in bytes where the malicious content or URL was found",
                   "order": 4
                 },
                 "path": {
                   "type": "string",
                   "title": "Path",
-                  "description": "The location of the dropper file",
+                  "description": "Path to the file",
                   "order": 16
                 },
                 "port": {
@@ -671,13 +671,13 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
                 "rule": {
                   "type": "string",
                   "title": "Rule",
-                  "description": "Optional, the name of the static rule inside the sandbox which located the malicious content",
+                  "description": "Optional, the name of the static rule inside the sandbox which identified the related item",
                   "order": 5
                 },
                 "sha256": {
                   "type": "string",
                   "title": "SHA256",
-                  "description": "The SHA256 hash of the attachment's contents",
+                  "description": "The SHA256 hash of the item's content",
                   "order": 1
                 },
                 "signatureId": {
@@ -689,25 +689,25 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
                 "size": {
                   "type": "integer",
                   "title": "Size",
-                  "description": "Optional, the size in bytes of the attachment's contents",
+                  "description": "Optional, the size in bytes of the file content",
                   "order": 6
                 },
                 "type": {
                   "type": "string",
                   "title": "Type",
-                  "description": "The protocol being used TCP or UDP",
+                  "description": "The protocol being used - TCP or UDP",
                   "order": 22
                 },
                 "url": {
                   "type": "string",
                   "title": "URL",
-                  "description": "Optional, the URL the dropper contacted",
+                  "description": "URL",
                   "order": 17
                 },
                 "value": {
                   "type": "string",
                   "title": "Value",
-                  "description": "Optional, content of the cookie being set",
+                  "description": "The content of the cookie or registry key being set",
                   "order": 10
                 }
               }
@@ -738,20 +738,20 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "evidence_type": {
+        "evidenceType": {
           "type": "object",
-          "title": "evidence_type",
+          "title": "evidenceType",
           "properties": {
             "action": {
               "type": "string",
               "title": "Action",
-              "description": "Whether the cookie was set or deleted",
+              "description": "Action performed",
               "order": 7
             },
             "blacklisted": {
               "type": "boolean",
               "title": "Blacklisted",
-              "description": "Optional, whether the file was blacklisted",
+              "description": "Optional, whether the file or URL was blacklisted",
               "order": 2
             },
             "cnames": {
@@ -799,19 +799,19 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
             "key": {
               "type": "string",
               "title": "Key",
-              "description": "The name of the cookie being set or deleted",
+              "description": "The location of the registry key being modified or the name of the cookie being set or deleted",
               "order": 9
             },
             "md5": {
               "type": "string",
               "title": "MD5",
-              "description": "Optional, the MD5 sum of the attachment's contents",
+              "description": "Optional, the MD5 sum of the item's content",
               "order": 3
             },
             "name": {
               "type": "string",
               "title": "Name",
-              "description": "The friendly name of the IDs rule which observed the malicious traffic",
+              "description": "The name of the related item",
               "order": 18
             },
             "nameservers": {
@@ -835,13 +835,13 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
             "offset": {
               "type": "integer",
               "title": "Offset",
-              "description": "Optional, the offset in bytes where the malicious content was found",
+              "description": "Optional, the offset in bytes where the malicious content or URL was found",
               "order": 4
             },
             "path": {
               "type": "string",
               "title": "Path",
-              "description": "The location of the dropper file",
+              "description": "Path to the file",
               "order": 16
             },
             "port": {
@@ -853,13 +853,13 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
             "rule": {
               "type": "string",
               "title": "Rule",
-              "description": "Optional, the name of the static rule inside the sandbox which located the malicious content",
+              "description": "Optional, the name of the static rule inside the sandbox which identified the related item",
               "order": 5
             },
             "sha256": {
               "type": "string",
               "title": "SHA256",
-              "description": "The SHA256 hash of the attachment's contents",
+              "description": "The SHA256 hash of the item's content",
               "order": 1
             },
             "signatureId": {
@@ -871,25 +871,25 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
             "size": {
               "type": "integer",
               "title": "Size",
-              "description": "Optional, the size in bytes of the attachment's contents",
+              "description": "Optional, the size in bytes of the file content",
               "order": 6
             },
             "type": {
               "type": "string",
               "title": "Type",
-              "description": "The protocol being used TCP or UDP",
+              "description": "The protocol being used - TCP or UDP",
               "order": 22
             },
             "url": {
               "type": "string",
               "title": "URL",
-              "description": "Optional, the URL the dropper contacted",
+              "description": "URL",
               "order": 17
             },
             "value": {
               "type": "string",
               "title": "Value",
-              "description": "Optional, content of the cookie being set",
+              "description": "The content of the cookie or registry key being set",
               "order": 10
             }
           }

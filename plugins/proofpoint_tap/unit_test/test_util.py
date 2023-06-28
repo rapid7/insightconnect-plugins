@@ -18,7 +18,7 @@ class Util:
             params = connect_params
         else:
             params = {
-                Input.SERVICE_PRINCIPAL: {"secretKey": "44d88612-fea8-a8f3-6de8-2e1278abb02f"},
+                Input.SERVICEPRINCIPAL: {"secretKey": "44d88612-fea8-a8f3-6de8-2e1278abb02f"},
                 Input.SECRET: {"secretKey": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"},
             }
         default_connection.connect(params)
@@ -27,9 +27,15 @@ class Util:
         return action
 
     @staticmethod
-    def read_file_to_string(filename):
-        with open(filename) as my_file:
-            return my_file.read()
+    def read_file_to_string(filename: str) -> str:
+        with open(
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), filename), "r", encoding="utf-8"
+        ) as file_reader:
+            return file_reader.read()
+
+    @staticmethod
+    def read_file_to_dict(filename: str) -> dict:
+        return json.loads(Util.read_file_to_string(filename))
 
     @staticmethod
     def mocked_requests_get(*args, **kwargs):
@@ -47,17 +53,14 @@ class Util:
 
                 return json.loads(
                     Util.read_file_to_string(
-                        os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp")
+                        os.path.join(
+                            os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp"
+                        )
                     )
                 )
 
-        if kwargs.get("json"):
-            urls = kwargs.get("json", {}).get("urls")
-            if len(urls) == 1:
-                return MockResponse("decode_single_url", 200)
-            if len(urls) == 2:
-                return MockResponse("decode_few_urls", 200)
-
+        json_data = kwargs.get("json", {})
+        url = kwargs.get("url", "")
         threat_id = kwargs.get("params", {}).get("threatId")
         campaign_id = kwargs.get("params", {}).get("campaignId")
         include_campaign_forensics = kwargs.get("params", {}).get("includeCampaignForensics")
@@ -66,75 +69,126 @@ class Util:
         threat_status = kwargs.get("params", {}).get("threatStatus")
         window = kwargs.get("params", {}).get("window")
         page = kwargs.get("params", {}).get("page")
+        since_seconds = kwargs.get("params", {}).get("sinceSeconds")
 
-        if window and page == 1:
+        if len(json_data.get("urls", [])) == 1:
+            if "invalid_url" in json_data.get("urls"):
+                return MockResponse("decode_invalid_url", 200)
+            else:
+                return MockResponse("decode_single_url", 200)
+        if len(json_data.get("urls", [])) == 2:
+            return MockResponse("decode_few_urls", 200)
+
+        if window == 30 and page == 1:
             return MockResponse("top_clickers", 200)
-        if window and page == 2:
+        if window == 14 or page == 2:
             return MockResponse("top_clickers_empty_users", 200)
-        if interval == "2021-08-24T14:00:00/2021-08-24T15:00:00":
-            return MockResponse("delivered_messages_without_time_start", 200)
-        if interval == "2021-08-24T13:00:00/2021-08-24T14:00:00":
-            return MockResponse("delivered_messages_without_time_end", 200)
-        if interval == "2021-08-24T12:00:00/2021-08-24T13:00:00" and threat_status == "falsePositive":
-            return MockResponse("delivered_messages_without_subject", 200)
-        if interval == "2021-08-24T12:00:00/2021-08-24T13:00:00" and threat_status == "cleared":
-            return MockResponse("delivered_messages_cleared_status", 200)
-        if interval == "2021-08-24T12:00:00/2021-08-24T13:00:00" and threat_status == "active":
-            return MockResponse("delivered_messages_active_status", 200)
-        if interval == "2021-08-24T12:00:00/2021-08-24T13:00:00":
-            return MockResponse("delivered_messages", 200)
-        if interval == "2021-08-23T14:00:00/2021-08-23T15:00:00":
-            return MockResponse("blocked_messages_without_time_start", 200)
-        if interval == "2021-08-23T13:00:00/2021-08-23T14:00:00":
-            return MockResponse("blocked_messages_without_time_end", 200)
-        if interval == "2021-08-23T12:00:00/2021-08-23T13:00:00" and threat_status == "falsePositive":
-            return MockResponse("blocked_messages_without_subject", 200)
-        if interval == "2021-08-23T12:00:00/2021-08-23T13:00:00" and threat_status == "cleared":
-            return MockResponse("blocked_messages_cleared_status", 200)
-        if interval == "2021-08-23T12:00:00/2021-08-23T13:00:00" and threat_status == "active":
-            return MockResponse("blocked_messages_active_status", 200)
-        if interval == "2021-08-23T12:00:00/2021-08-23T13:00:00":
-            return MockResponse("blocked_messages", 200)
-        if interval == "2021-08-22T14:00:00/2021-08-22T15:00:00":
-            return MockResponse("permitted_clicks_without_time_start", 200)
-        if interval == "2021-08-22T13:00:00/2021-08-22T14:00:00":
-            return MockResponse("permitted_clicks_without_time_end", 200)
-        if interval == "2021-08-22T12:00:00/2021-08-22T13:00:00" and threat_status == "falsePositive":
-            return MockResponse("permitted_clicks_without_url", 200)
-        if interval == "2021-08-22T12:00:00/2021-08-22T13:00:00" and threat_status == "cleared":
-            return MockResponse("permitted_clicks_cleared_status", 200)
-        if interval == "2021-08-22T12:00:00/2021-08-22T13:00:00" and threat_status == "active":
-            return MockResponse("permitted_clicks", 200)
-        if interval == "2021-08-21T14:00:00/2021-08-21T15:00:00":
-            return MockResponse("blocked_clicks_without_time_start", 200)
-        if interval == "2021-08-21T13:00:00/2021-08-21T14:00:00":
-            return MockResponse("blocked_clicks_without_time_end", 200)
-        if interval == "2021-08-21T12:00:00/2021-08-21T13:00:00" and threat_status == "falsePositive":
-            return MockResponse("blocked_clicks_without_url", 200)
-        if interval == "2021-08-21T12:00:00/2021-08-21T13:00:00" and threat_status == "cleared":
-            return MockResponse("blocked_clicks_cleared_status", 200)
-        if interval == "2021-08-21T12:00:00/2021-08-21T13:00:00" and threat_status == "active":
-            return MockResponse("blocked_clicks", 200)
-        if interval == "2021-08-20T14:00:00/2021-08-20T15:00:00":
-            return MockResponse("all_threats_without_time_start", 200)
-        if interval == "2021-08-20T13:00:00/2021-08-20T14:00:00":
-            return MockResponse("all_threats_without_time_end", 200)
-        if threat_status == "cleared" and threat_type == "url":
-            return MockResponse("all_threats_cleared_status", 200)
-        if threat_status == "active":
-            return MockResponse("all_threats_active_status", 200)
-        if not threat_type and not threat_status and interval:
-            return MockResponse("all_threats", 200)
-        if threat_id == "blacklisted_as_boolean_and_integer":
-            return MockResponse("forensics_blacklisted_as_boolean_and_integer", 200)
-        if threat_id == "blacklisted_as_boolean":
-            return MockResponse("forensics_blacklisted_as_boolean", 200)
-        if threat_id == "blacklisted_as_integer":
-            return MockResponse("forensics_blacklisted_as_integer", 200)
-        if campaign_id and not threat_id:
-            return MockResponse("campaign_id", 200)
-        if threat_id and not campaign_id and include_campaign_forensics is True:
-            return MockResponse("threat_id_and_include_campaign_forensic", 200)
-        if threat_id and not campaign_id and include_campaign_forensics is False:
-            return MockResponse("threat_id_without_include_campaign_forensic", 200)
-        return MockResponse("error", 404)
+
+        if "siem/messages/delivered" in url:
+            if interval == "2021-08-24T14:00:00/2021-08-24T15:00:00":
+                return MockResponse("delivered_messages_without_time_start", 200)
+            if interval == "2021-08-24T13:00:00/2021-08-24T14:00:00":
+                return MockResponse("delivered_messages_without_time_end", 200)
+            if interval == "2021-08-24T12:00:00/2021-08-24T13:00:00" and threat_status == "falsePositive":
+                return MockResponse("delivered_messages_without_subject", 200)
+            if interval == "2021-08-24T12:00:00/2021-08-24T13:00:00" and threat_status == "cleared":
+                return MockResponse("delivered_messages_cleared_status", 200)
+            if interval == "2021-08-24T12:00:00/2021-08-24T13:00:00" and threat_status == "active":
+                return MockResponse("delivered_messages_active_status", 200)
+            if interval == "2021-08-24T12:00:00/2021-08-24T13:00:00":
+                return MockResponse("delivered_messages", 200)
+            if interval == "2023-05-01T12:00:00/2023-06-01T13:00:00":
+                return MockResponse("", 400)
+            if since_seconds == "3600":
+                return MockResponse("delivered_messages_without_time_start_end", 200)
+
+        if "siem/messages/blocked" in url:
+            if interval == "2021-08-23T17:00:00/2021-08-23T18:00:00":
+                return MockResponse("blocked_messages_without_time_start", 200)
+            if interval == "2021-08-23T19:00:00/2021-08-23T20:00:00":
+                return MockResponse("blocked_messages_without_time_end", 200)
+            if interval == "2021-08-23T09:00:00/2021-08-23T10:00:00" and threat_status == "falsePositive":
+                return MockResponse("blocked_messages_without_subject", 200)
+            if interval == "2021-08-23T12:00:00/2021-08-23T13:00:00" and threat_status == "cleared":
+                return MockResponse("blocked_messages_cleared_status", 200)
+            if interval == "2021-08-23T12:30:00/2021-08-23T13:00:00" and threat_status == "active":
+                return MockResponse("blocked_messages_active_status", 200)
+            if interval == "2021-08-23T10:00:00/2021-08-23T11:00:00":
+                return MockResponse("blocked_messages", 200)
+            if interval == "2023-05-01T12:00:00/2023-06-01T13:00:00":
+                return MockResponse("", 400)
+            if since_seconds == "3600":
+                return MockResponse("blocked_messages_without_time_start_end", 200)
+
+        if "siem/clicks/permitted" in url:
+            if interval == "2021-08-22T14:00:00/2021-08-22T15:00:00":
+                return MockResponse("permitted_clicks_without_time_start", 200)
+            if interval == "2021-08-22T13:00:00/2021-08-22T14:00:00":
+                return MockResponse("permitted_clicks_without_time_end", 200)
+            if interval == "2021-08-22T12:00:00/2021-08-22T13:00:00" and threat_status == "falsePositive":
+                return MockResponse("permitted_clicks_without_url", 200)
+            if interval == "2021-08-22T12:00:00/2021-08-22T13:00:00" and threat_status == "cleared":
+                return MockResponse("permitted_clicks_cleared_status", 200)
+            if interval == "2021-08-22T12:00:00/2021-08-22T13:00:00" and threat_status == "active":
+                return MockResponse("permitted_clicks", 200)
+            if interval == "2023-05-01T12:00:00/2023-06-01T13:00:00":
+                return MockResponse("", 400)
+            if since_seconds == "3600":
+                return MockResponse("permitted_clicks_without_time_start_end", 200)
+
+        if "siem/clicks/blocked" in url:
+            if interval == "2021-08-21T14:00:00/2021-08-21T15:00:00":
+                return MockResponse("blocked_clicks_without_time_start", 200)
+            if interval == "2021-08-21T13:00:00/2021-08-21T14:00:00":
+                return MockResponse("blocked_clicks_without_time_end", 200)
+            if interval == "2021-08-21T12:00:00/2021-08-21T13:00:00" and threat_status == "falsePositive":
+                return MockResponse("blocked_clicks_without_url", 200)
+            if interval == "2021-08-21T12:00:00/2021-08-21T13:00:00" and threat_status == "cleared":
+                return MockResponse("blocked_clicks_cleared_status", 200)
+            if interval == "2021-08-21T12:00:00/2021-08-21T13:00:00" and threat_status == "active":
+                return MockResponse("blocked_clicks", 200)
+            if interval == "2023-05-01T12:00:00/2023-06-01T13:00:00":
+                return MockResponse("", 400)
+            if since_seconds == "3600":
+                return MockResponse("blocked_clicks_without_time_start_end", 200)
+
+        if "siem/all" in url:
+            if interval == "2023-01-01T00:59:00+00:00/2023-01-01T01:59:00+00:00":
+                return MockResponse("", 400)
+            if interval == "2023-02-02T01:59:00+00:00/2023-02-02T02:59:00+00:00":
+                return MockResponse("", 500)
+            if interval == "2023-04-04T06:59:00+00:00/2023-04-04T07:59:00+00:00":
+                return MockResponse("monitor_events", 200)
+
+            if interval == "2023-05-01T12:00:00/2023-06-01T13:00:00":
+                return MockResponse("", 400)
+            if interval == "2021-08-20T14:00:00/2021-08-20T15:00:00":
+                return MockResponse("all_threats_without_time_start", 200)
+            if interval == "2021-08-20T13:00:00/2021-08-20T14:00:00":
+                return MockResponse("all_threats_without_time_end", 200)
+            if threat_status == "cleared" and threat_type == "url":
+                return MockResponse("all_threats_cleared_status", 200)
+            if threat_status == "active":
+                return MockResponse("all_threats_active_status", 200)
+            if not threat_type and not threat_status and interval:
+                return MockResponse("all_threats", 200)
+            if since_seconds == "3600":
+                return MockResponse("all_threats_without_time_start_end", 200)
+
+        if "forensics" in url:
+            if campaign_id == "not_found" or threat_id == "not_found":
+                return MockResponse("", 404)
+            if threat_id == "blacklisted_as_boolean_and_integer":
+                return MockResponse("forensics_blacklisted_as_boolean_and_integer", 200)
+            if threat_id == "blacklisted_as_boolean":
+                return MockResponse("forensics_blacklisted_as_boolean", 200)
+            if threat_id == "blacklisted_as_integer":
+                return MockResponse("forensics_blacklisted_as_integer", 200)
+            if campaign_id and not threat_id:
+                return MockResponse("campaign_id", 200)
+            if threat_id and not campaign_id and include_campaign_forensics is True:
+                return MockResponse("threat_id_and_include_campaign_forensic", 200)
+            if threat_id and not campaign_id and include_campaign_forensics is False:
+                return MockResponse("threat_id_without_include_campaign_forensic", 200)
+
+        raise NotImplementedError("Not implemented", kwargs)
