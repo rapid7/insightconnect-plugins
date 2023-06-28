@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+
 from icon_servicenow.connection.connection import Connection
 from icon_servicenow.connection.schema import Input
 
@@ -71,5 +72,12 @@ class Util:
             return MockResponse("get_attachment_by_table_sys_id_empty.json", 200)
         elif kwargs["url"] == "https://rapid7.service-now.com/api/sn_chg_rest/v1/change":
             return MockResponse("create_change_request.json", 200)
+        elif kwargs["url"] in (
+            "https://rapid7.service-now.com/api/now/table/sn_vul_vulnerable_item",
+            "https://rapid7.service-now.com/api/now/table/sn_vul_vulnerable_item/12345",
+        ):
+            return MockResponse("create_vulnerability.json", 201)
+        elif kwargs["url"] in ("https://rapid7.service-now.com/api/now/table/sn_vul_third_party_entry",):
+            return MockResponse("create_third_party_vulnerability_entry.json", 201)
 
         raise Exception("Not implemented")

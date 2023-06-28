@@ -1,17 +1,17 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from typing import Any, Dict
 from unittest import TestCase
-from unittest.mock import patch, MagicMock
-from unit_test.util import Util
-
-from parameterized import parameterized
+from unittest.mock import MagicMock, patch
 
 from icon_servicenow.actions.create_change_request.action import CreateChangeRequest
 from icon_servicenow.actions.create_change_request.schema import Input
-from typing import Dict, Any
+from parameterized import parameterized
+
+from util import Util
 
 
 class TestCreateChangeRequest(TestCase):
