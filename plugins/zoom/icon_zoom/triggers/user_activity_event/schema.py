@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Poll for user activity events."
+    DESCRIPTION = "Poll for user activity events"
 
 
 class Input:
