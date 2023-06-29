@@ -339,7 +339,7 @@ class GetAnalysisOutput(insightconnect_plugin_runtime.Output):
         },
         "analysis_vti_built_in_rules_version": {
           "type": "string",
-          "title": "Analysis VTI Built In Rules Version",
+          "title": "Analysis Vti Built In Rules Version",
           "description": "Analysis VTI built in rules version",
           "order": 33
         },
