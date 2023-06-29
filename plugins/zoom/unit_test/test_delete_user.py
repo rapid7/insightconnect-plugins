@@ -9,7 +9,7 @@ from icon_zoom.actions.delete_user import DeleteUser
 from icon_zoom.actions.delete_user.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from unit_test.mock import (
+from mock import (
     Util,
     mock_request_204,
     mock_request_400,
