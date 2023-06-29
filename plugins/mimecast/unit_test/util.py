@@ -73,7 +73,7 @@ class Util:
 
             @property
             def headers(self):
-                return {"mc-siem-token": "token123"}
+                return {"mc-siem-token": "token123", "Content-Disposition": "attachment"}
 
             @property
             def status_code(self):
