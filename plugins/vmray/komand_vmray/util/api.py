@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
-from requests import Session, Request
+from insightconnect_plugin_runtime.exceptions import PluginException
+from requests import Session, Request, RequestException
 from json import JSONDecodeError
 import mimetypes
 import magic
@@ -107,30 +108,35 @@ class VMRay:
             req = req.prepare()
             resp = self.s.send(req)
             if resp.status_code == 405:
-                raise Exception(
-                    f"An error was received when running {action_name}."
-                    f"Request status code of {resp.status_code} was returned."
-                    "Please make sure connections have been configured correctly"
+                raise PluginException(
+                    cause=f"An error was received when running {action_name}.",
+                    assistance=f"Request status code of {resp.status_code} was returned."
+                    "Please make sure connections have been configured correctly",
+                    data=resp.text
                 )
             elif resp.status_code != 200:
-                raise Exception(
-                    f"An error was received when running {action_name}."
-                    f" Request status code of {resp.status_code} was returned."
+                raise PluginException(
+                    cause=f"An error was received when running {action_name}.",
+                    assistance=f" Request status code of {resp.status_code} was returned."
                     " Please make sure connections have been configured correctly "
-                    f"as well as the correct input for the action. Response was: {resp.text}"
+                    "as well as the correct input for the action.",
+                    data=resp.text
                 )
 
-        except Exception as e:
-            self.logger.error(f"An error has occurred: {e}")
-            raise
+        except RequestException as exception:
+            self.logger.error(f"An error has occurred: {exception}")
+            raise PluginException(
+                preset=PluginException.Preset.UNKNOWN,
+                data=str(exception)
+            )
 
         try:
             results = resp.json()
             return results
         except JSONDecodeError:
-            raise Exception(
-                f"Error: Received an unexpected response from {action_name}"
-                f"(non-JSON or no response was received). Response was: {resp.text}"
+            raise PluginException(
+                preset=PluginException.Preset.INVALID_JSON,
+                data=resp.text
             )
 
     def get_analysis(self, analysis_id, id_type, optional_params):
