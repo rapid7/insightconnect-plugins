@@ -1057,6 +1057,7 @@ Example output:
 
 # Version History
 
+* 5.2.2 - Handled status code for `Monitor SIEM Logs` | Request limit set to 1 minute in `Monitor SIEM Logs` 
 * 5.2.1 - Connection: add connection version 
 * 5.2.0 - New task added `Monitor SIEM Logs` | Update plugin to be cloud enabled
 * 5.1.0 - Create Blocked Sender Policy: Changed defaults to `individual_email_address` | New actions added `Delete Blocked Sender Policy`, `Track Messages`
