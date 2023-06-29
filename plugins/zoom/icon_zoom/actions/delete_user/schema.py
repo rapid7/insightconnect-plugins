@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action is used to delete or disassociate user from account."
+    DESCRIPTION = "Delete or disassociate user from account"
 
 
 class Input:
@@ -29,7 +29,7 @@ class DeleteUserInput(insightconnect_plugin_runtime.Input):
     "action": {
       "type": "string",
       "title": "Action",
-      "description": "Specify how to delete the user. To delete pending user, use disassocaite",
+      "description": "Specify how to delete the user. To delete pending user, use disassociate",
       "enum": [
         "delete",
         "disassociate"
