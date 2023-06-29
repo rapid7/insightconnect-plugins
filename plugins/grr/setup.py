@@ -3,12 +3,12 @@ from setuptools import setup, find_packages
 
 
 setup(name="grr-rapid7-plugin",
-      version="3.0.0",
+      version="3.0.1",
       description="Organize and start threat hunts using GRR",
       author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
-      install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/icon_grr']
       )

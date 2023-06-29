@@ -4,9 +4,10 @@ products: [insightconnect]
 name: grr
 title: Google Rapid Response
 description: Organize and start threat hunts using GRR
-version: 3.0.0
+version: 3.0.1
 vendor: rapid7
 support: community
+supported_versions: ["GRR Client 3.4.6.post7"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/grr
@@ -30,17 +31,20 @@ connection:
     type: string
     description: The GRR API Endpoint to connect to
     required: true
+    example: https://example.com
   credentials:
     title: Username and Password
     type: credential_username_password
     description: Username and password
     required: true
+    example: '{"username": "ExampleUser", "password": "ExamplePassword"}'
   ssl_verify:
     title: SSL Verify
     type: boolean
     description: Verify server's SSL/TLS certificate
     default: true
     required: true
+    example: true
 actions:
   listing:
     title: Listing
@@ -51,32 +55,38 @@ actions:
         description: Query to search for (e.g. 'host:suspicious.corp.com')
         type: string
         required: true
+        example: host:suspicious.corp.com
       hunts:
         title: Hunts
         description: List hunts
         type: boolean
         required: false
+        example: true
       hunt_approvals:
         title: Hunt Approvals
         description: List hunt approvals
         type: boolean
         required: false
+        example: true
       grr_binaries:
         title: GRR Binaries
         description: List GRR binaries
         type: boolean
         required: false
+        example: true
       clients:
         title: Clients
         description: Search clients
         type: boolean
         required: false
+        example: true
     output:
       result:
         title: Result
         type: object
         description: Listing results
         required: false
+        example: '{"client0":{"hardwareInfo":{"biosVersion":"VirtualBox","serialNumber":"0","biosVendor":"innotek GmbH","systemSkuNumber":"Not Specified","biosReleaseDate":"12/01/2006","systemProductName":"VirtualBox","systemFamily":"Virtual Machine","systemUuid":"E9200C28-9075-46CE-A477-A9BAEF46FBE6","biosRomSize":"128 kB","systemManufacturer":"innotek GmbH"},"osInfo":{"machine":"x86_64","kernel":"4.15.0-20-generic","version":"18.4","installDate":"1529100873000000","release":"Ubuntu","system":"Linux","fqdn":"anonymous-VirtualBox"},"labels":[{"owner":"admin","name":"suspicious"}],"knowledgeBase":{"osRelease":"Ubuntu","osMinorVersion":4,"os":"Linux","fqdn":"anonymous-VirtualBox","osMajorVersion":18},"agentInfo":{"clientDescription":"grr linux amd64","buildTime":"2018-03-08 12:12:56","clientVersion":3220,"clientName":"grr"},"lastClock":"1531947560875707","memorySize":"2090307584","clientId":"C.8956f9766996b204","lastBootedAt":"1531333783000000","age":"1531333800792079","firstSeenAt":"1529101768850237","volumes":[{"actualAvailableAllocationUnits":"1147463","totalAllocationUnits":"2563397","sectorsPerAllocationUnit":"1","bytesPerSector":"4096","unixvolume":{"mountPoint":"/"}}],"interfaces":[{"macAddress":"AAAAAAAA","ifname":"lo","addresses":[{"packedBytes":"fwAAAQ==","addressType":"INET"},{"packedBytes":"AAAAAAAAAAAAAAAAAAAAAQ==","addressType":"INET6"}]},{"macAddress":"CAAn9SZD","ifname":"enp0s3","addresses":[{"packedBytes":"CgACDw==","addressType":"INET"},{"packedBytes":"/oAAAAAAAADBDDCBmP7VBQ==","addressType":"INET6"}]}],"lastSeenAt":"1531947561202751","urn":"aff4:/C.8956f9766996b204"}}'
   labeling:
     title: Labeling
     description: Label clients based on search
@@ -86,17 +96,20 @@ actions:
         description: Search for clients
         type: string
         required: true
+        example: client:client1
       label:
         title: Label
         description: Label's clients
         type: '[]string'
         required: true
+        example: '["label1", "label2"]'
     output:
       results:
         title: Results
         type: string
         description: Labeling complete
         required: false
+        example: All clients have been labeled
   hunting:
     title: Hunting
     description: Start a hunt on clients
@@ -124,54 +137,64 @@ actions:
         - ListProcesses
         - CollectRunKeyBinaries
         - RegistryFinder
+        example: Interrogate
       flow_args:
         title: Regex Checks
         description: Enable high signal regex checks
         type: boolean
         required: false
         default: false
+        example: false
       lightweight:
         title: Lightweight
         description: Performs a light weight version of the interrogate
         type: boolean
         required: false
+        example: true
       duration:
         title: Duration
         description: Until when should the client stay in the fast poll mode
         type: integer
         required: false
         default: 3600
+        example: 3600
       email:
         title: Email
         description: Email address to send to. If not set, mail will be sent to the
           logged in user
         type: string
         required: false
+        example: user@example.com
       check_chrome:
         title: Check Chrome
         description: Checks Chrome
         type: integer
         required: false
+        example: 1
       check_firefox:
         title: Check Firefox
-        description: Checks Chrome
+        description: Checks Firefox
         type: integer
         required: false
+        example: 1
       check_ie:
         title: Check IE
         description: Checks Internet Explorer
         type: boolean
         required: false
+        example: false
       data_regex:
         title: Data Regex
         description: A regular expression to search for
         type: string
         required: false
+        example: ExampleRegex
       grep_users:
         title: Grep Users
         description: A list of users to check. Default all users on the system
         type: string
         required: false
+        example: TODO-HERE
       pathtype:
         title: Path Type
         description: Type of path access to use
@@ -184,64 +207,76 @@ actions:
         - Registry
         - Memory
         - TMPFILE
+        example: UNSET
       get_archive:
         title: Get Archive
         description: Gets Archived History as well (3 months old)
         type: boolean
         required: false
+        example: true
       history_path:
         title: History Path
         description: Path to a profile directory that contains a History file
         type: string
         required: false
+        example: TODO-HERE
       ch_username:
         title: Chrome History Username
         description: The user to get Chrome history for. If history_path is not set
           this will be used to guess the path to the history files
         type: string
         required: false
+        example: ExampleUser
       ff_username:
         title: Firefox History Username
         description: The user to get FireFox history for. If history_path is not set
           this will be used to guess the path to the history files
         type: string
         required: false
+        example: ExampleUser
       max_findings:
         title: Maximize Findings
         description: Summarize checks with more than N individual findings
         type: integer
         required: false
+        example: 10
       only_cpe:
         title: Only CPE
         description: Limit checks to hosts with cpe strings
         type: string
         required: false
+        example: cpe:/o:linux:linux_kernel
       only_label:
         title: Only CPE
         description: Limit checks to hosts with label strings
         type: string
         required: false
+        example: ExampleLabel
       only_os:
         title: Only OS
         description: Limit checks to hosts of OS type(s) [Linux|OSX|Windows]
         type: string
         required: false
+        example: Linux
       restrict_checks:
         title: Restrict Checks
         description: Only run checks with the specified check_ids
         type: string
         required: false
+        example: ExampleCheckID
       apply_parsers:
         title: Apply Parsers
         description: If 1, apply any relevant parser to the collected data. If 0,
           return the raw collected data e.g Files or Registry Keys
         type: boolean
         required: false
+        example: true
       artifact_list:
         title: Artifact List
         description: A list of Artifact class names
         type: string
         required: false
+        example: ExampleArtifact
       dependencies:
         title: Dependencies
         description: Specifies how dependencies should be handled. Use the knowledgebase as a cache. If knowledgebase isn't present, a new one will be populated
@@ -252,6 +287,7 @@ actions:
         - USE_CACHED
         - IGNORE_DEPS
         - FETCH_NOW
+        example: USE_CACHED
       ignore_interpolation_errors:
         title: Ignore Interpolation Errors
         description: If true, don't die if %%users.homedir%% and similar fail to expand.
@@ -260,63 +296,74 @@ actions:
           want to report partial results
         type: boolean
         required: false
+        example: true
       knowledge_base:
         title: Knowledge Base
         description: An optional knowledge base to use, if not specified we retrieve
           one from the client object
         type: string
         required: false
+        example: ExampleKnowledgeBase
       max_file_size:
         title: Max File Size
         description: The maximum size of files we will download in bytes, 500MB by
           default
         type: string
         required: false
+        example: 500MB
       on_no_results_error:
         title: Oh No Results Error
         description: The maximum size of files we will download in bytes, 500MB by
           default
         type: boolean
         required: false
+        example: true
       split_output_by_artifact:
         title: Split Output by Artifact
         description: If True, use output as a directory and write a separate collection
           for each artifact collected
         type: boolean
         required: false
+        example: true
       use_tsk:
         title: Use TSK
         description: Whether raw filesystem access should be used
         type: boolean
         required: false
+        example: true
       component_version:
         title: Component Version
         description: Version of Chipsec component to be used
         type: string
         required: false
+        example: ExampleComponentVersion
       logging:
         title: Logging
         description: If the logging is set to true, the client sends log, including
           Chipsec's log
         type: boolean
         required: false
+        example: true
       table_signature_list:
         title: Table Signature Lists
         description: Signature of ACPI tables to be dumped
         type: string
         required: false
+        example: FACP
       chunk_size:
         title: Chunk Size
-        description: A heartbeat will be emitted every chunk_size.This could be reduced
+        description: A heartbeat will be emitted every chunk_size. This could be reduced
           in case the process times out
         type: integer
         required: false
+        example: 32
       log_level:
         title: Log Level
         description: Set the log level. If set, the log returned will include additional
           information reported by Chipsec
         type: integer
         required: false
+        example: 1
       notify_syslog:
         title: Notify Syslog
         description: 'If true, a message will be written by the client to the syslog
@@ -324,6 +371,7 @@ actions:
           crashes '
         type: boolean
         required: false
+        example: true
       action:
         title: Action
         description: Use an action
@@ -333,6 +381,7 @@ actions:
         - STAT
         - HASH
         - DOWNLOAD
+        example: STAT
       conditions:
         title: Conditions
         description: These conditions will be applied to all files that match the
@@ -347,51 +396,61 @@ actions:
         - CONTENTS_REGEX_MATCH
         - CONTENTS_LITERAL_MATCH
         - EXT_FLAGS
+        example: MODIFICATION_TIME
       paths:
         title: Paths
         description: A path to glob that can contain %% expansions
         type: string
         required: false
+        example: ExamplePath
       min_last_modified_time:
         title: Min Last Modified Time
         description: File must be modified after this time
         type: integer
         required: false
+        example: 1677873063
       max_last_modified_time:
         title: Max Last Modified Time
         description: File must be modified before this time
         type: integer
         required: false
+        example: 1677873063
       min_last_access_time:
         title: Min Last Access Time
         description: File must be accessed after this time
         type: integer
         required: false
+        example: 1677873063
       max_last_access_time:
         title: Min Last Access Time
         description: File must be accessed before this time
         type: integer
         required: false
+        example: 1677873063
       min_last_inode_change_time:
         title: Min Last Inode Change Time
         description: File's inode must be changed after this time
         type: integer
         required: false
+        example: 1677873063
       max_last_inode_change_time:
         title: Max Last Inode Change Time
         description: File's must be changed before this time
         type: integer
         required: false
+        example: 1677873063
       min_file_size:
         title: Min File Size
         description: Minimum file size in bytes
         type: integer
         required: false
+        example: 128
       filefinder_regex:
         title: FileFinder Regex
         description: The regular expression which will be used to search
         type: string
         required: false
+        example: ExampleRegex
       mode:
         title: Mode
         description: When should searching stop? Stop after one hit or search for
@@ -401,37 +460,44 @@ actions:
         enum:
         - FIRST_HIT
         - ALL_HITS
+        example: FIRST_HIT
       bytes_before:
         title: Bytes Before
         description: Include this many bytes before the hit
         type: integer
         required: false
+        example: 32
       bytes_after:
         title: Bytes After
         description: Include this many bytes after the hit
         type: integer
         required: false
+        example: 32
       start_offest:
         title: Start Offset
         description: Start searching at this file offset
         type: integer
         required: false
+        example: 32
       length:
         title: Length
         description: How far (in bytes) into the file to search or the length of the
           MBR to read
         type: integer
         required: false
+        example: 32
       literal:
         title: Literal
         description: Search for this literal string
         type: string
         required: false
+        example: ExampleLiteralString
       start_offset:
-        title: Start offset
+        title: Start Offset
         description: Start searching at this file offset
         type: integer
         required: false
+        example: 32
       xor_in_key:
         title: XOR in Key
         description: When searching memory we need to ensure we dont hit on our own
@@ -439,6 +505,7 @@ actions:
           us finding ourselves
         type: integer
         required: false
+        example: 32
       xor_out_key:
         title: XOR in Key
         description: When searching memory we need to ensure we dont hit on our own
@@ -446,11 +513,13 @@ actions:
           us finding ourselves
         type: integer
         required: false
+        example: 32
       max_size:
         title: Max Size
         description: The maximum size of files
         type: integer
         required: false
+        example: 32
       oversized_file_policy:
         title: Max Size
         description: What should GRR do with files that are larger than max_size
@@ -460,6 +529,7 @@ actions:
         - SKIP
         - HASH_TRUNCATED
         - DOWNLOAD_TRUNCATED
+        example: SKIP
       use_external_stores:
         title: Use External Stores
         description: If true, look in any defined external file stores for files before
@@ -467,17 +537,20 @@ actions:
           be true unless the external checks are misbehaving
         type: boolean
         required: false
+        example: true
       resolve_links:
-        title: Resolve links
+        title: Resolve Links
         description: If true, the action will yield stat information for link targets,
           if false, the stat for the link itself will be returned
         type: boolean
         required: false
+        example: true
       follow_links:
-        title: Follow links
+        title: Follow Links
         description: Should symbolic links be followed in recursive directory listings
         type: boolean
         required: false
+        example: true
       process_non_regular_files:
         title: Process Non Regular Files
         description: 'Look both into regular files and non-regular files (devices,
@@ -485,6 +558,7 @@ actions:
           care'
         type: boolean
         required: false
+        example: true
       xdev:
         title: Xdev
         description: Behavior when ecountering device boundaries while doing recursive
@@ -495,6 +569,7 @@ actions:
         - NEVER
         - ALWAYS
         - LOCAL
+        example: NEVER
       upload_token:
         title: Upload Token
         description: 'An upload token to use with the direct upload functionality.
@@ -503,11 +578,13 @@ actions:
           to the policy document used by GCS: https://cloud.google.com/storage/docs/xml-api/post-object#policydocument'
         type: boolean
         required: false
+        example: true
       listening_only:
         title: Listening Only
         description: If set, only listening connections are returned
         type: boolean
         required: false
+        example: true
       connection_states:
         title: Connection States
         description: Network connection states to match. If a process has any network
@@ -530,26 +607,31 @@ actions:
         - DELETE_TCB
         - NONE
         - CLOSE
+        example: UNKNOWN
       fetch_binaries:
         title: Fetch Binaries
         description: Fetches Binaries
         type: boolean
         required: false
+        example: true
       filename_regex:
         title: Filename Regex
         description: Regex used to filter the list of processes
         type: string
         required: false
+        example: ExampleRegexFilename
       hunt_name:
         title: Hunt Name
         description: The name of the class implementing the hunt to run
         type: string
         required: false
+        example: ExampleHuntName
       description:
         title: Description
         description: The description of this hunt
         type: string
         required: false
+        example: ExampleDescription
       priority:
         title: Priority
         description: The priority used for this flow
@@ -559,27 +641,32 @@ actions:
         - LOW_PRIORITY
         - MEDIUM_PRIORITY
         - HIGH_PRIORITY
+        example: LOW_PRIORITY
       notification_event:
         title: Notification Event
         description: An event name for an event listener. An event will be published
           to this listener once the flow finishes
         type: string
         required: false
+        example: ExampleNotificationEvent
       queue:
         title: Queue
         description: The queue to use for the hunt
         type: string
         required: false
+        example: ExampleQueue
       cpu_limit:
         title: CPU Limit
         description: A limit on the client CPU seconds used by this flow
         type: integer
         required: false
+        example: 70
       network_bytes_limit:
         title: Network Bytes Limit
         description: A limit on the total traffic used by this flow
         type: integer
         required: false
+        example: 256
       client_limit:
         title: Client Limit
         description: 'Maximum number of clients participating in the hunt. Best practice
@@ -589,23 +676,27 @@ actions:
           running '
         type: integer
         required: false
+        example: 10
       expiry_time:
         title: Expiry Time
         description: Expiry time for the hunt
         type: integer
         required: false
+        example: 1677873063
       client_rate:
         title: Client Rate
         description: The maximum number of clients to engage per minute. A rate of
           0 means to schedule clients as fast as possible
         type: integer
         required: false
+        example: 3
       crash_alert_email:
         title: Crash Alert Email
         description: An email address to send mails to when a client crashes during
           execution of this hunt
         type: string
         required: false
+        example: user@example.com
       match_mode:
         title: Match Mode
         description: Match mode to trigger this hunt
@@ -614,11 +705,13 @@ actions:
         enum:
         - MATCH_ALL
         - MATCH_ANY
+        example: MATCH_ALL
       label:
         title: Label
         description: Label that triggers this hunt
         type: '[]string'
         required: false
+        example: '["ExampleLabel"]'
       operating_system:
         title: Operating System
         description: Type of operating system to trigger this hunt
@@ -628,16 +721,19 @@ actions:
         - Os_windows
         - Os_linux
         - Os_darwin
+        example: Os_linux
       regex:
         title: Regex
         description: Use a regular expression to trigger this hunt
         type: boolean
         required: false
+        example: true
       attribute_regex:
         title: Attribute Regex
         description: The regular expression
         type: string
         required: false
+        example: ExampleRegex
       field:
         title: Field
         description: Field Specification
@@ -662,11 +758,13 @@ actions:
         - CLIENT_VERSION
         - LAST_BOOT_TIME
         - CLIENT_CLOCK
+        example: UNSET
       integer:
         title: Integer
         description: Integer to trigger this hunt
         type: boolean
         required: false
+        example: 10
       operator:
         title: Operator
         description: Operator
@@ -676,11 +774,13 @@ actions:
         - EQUAL
         - LESS_THAN
         - GREATER_THAN
+        example: EQUAL
       value:
         title: Value
         description: Value
         type: integer
         required: false
+        example: 10
       output_plugin_name:
         title: Output Plugin Name
         description: The name of the output plugin
@@ -689,16 +789,19 @@ actions:
         enum:
         - EmailOutput
         - BigQueryOutput
+        example: EmailOutput
       email_address:
         title: Email Address
         description: The email address that messages will be sent to
         type: string
         required: false
+        example: user@example.com
       emails_limit:
         title: Emails Limit
         description: The emails limit
         type: integer
         required: false
+        example: 5
       export_files_contents:
         title: Export Files Contents
         description: 'If this is true, open files and export their full or partial
@@ -707,6 +810,7 @@ actions:
           increase size of the exported data'
         type: boolean
         required: false
+        example: true
       follow_urns:
         title: Follow URNs
         description: 'If this is true, follow urns and try to export not only the
@@ -714,6 +818,7 @@ actions:
           require additional datastore roundtrips and slow down the export process'
         type: boolean
         required: false
+        example: true
       export_files_hashes:
         title: Export Files Hashes
         description: If this is true, export hashes when dealing with file-related
@@ -724,11 +829,13 @@ actions:
           the hashes to be there
         type: boolean
         required: false
+        example: true
       convert_values:
         title: Convert Values
         description: If true, convert values for export-friendly format
         type: boolean
         required: false
+        example: false
       annotations:
         title: Annotations
         description: Annotations to add to exported data. This field can be used to
@@ -736,9 +843,11 @@ actions:
           data collected by users vs. data collected by cronjob
         type: '[]string'
         required: false
+        example: '["ExampleAnnotation"]'
     output:
       results:
         title: Results
         type: string
         description: Issues found with TruffleHog
         required: false
+        example: ExampleIssue

@@ -1,11 +1,11 @@
-import komand
-from .schema import LabelingInput, LabelingOutput
+import insightconnect_plugin_runtime
+from .schema import LabelingInput, LabelingOutput, Input, Output
 
 
 # Custom imports below
 
 
-class Labeling(komand.Action):
+class Labeling(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="labeling",
@@ -17,23 +17,23 @@ class Labeling(komand.Action):
 
     def run(self, params={}):
         self.grrapi = self.connection.grrapi
-        query = params.get("query")
-        label = params.get("label")
+        query = params.get(Input.QUERY, "")
+        label = params.get(Input.LABEL, [])
         label = [str(x) for x in label]
         search_results = self.grrapi.SearchClients(query)
         try:
             for client in search_results:
                 type_client = type(client)
-                if type(client) is not type_client:
-                    return {"result": "No clients found with the given query"}
+                if isinstance(client, type_client):
+                    return {Output.RESULTS: "No clients found with the given query"}
                 client.AddLabels(label)
-        except Exception as e:
-            self.logger.error(e)
-        return {"results": "All clients have been labeled"}
+        except Exception as error:
+            self.logger.error(error)
+        return {Output.RESULTS: "All clients have been labeled"}
 
     def test(self):
         self.grrapi = self.connection.grrapi
         if self.grrapi:
-            return {"results": "Ready to label"}
+            return {Output.RESULTS: "Ready to label"}
         if not self.grrapi:
-            return {"results": "Not ready. Please check your connection with the GRR Client"}
+            return {Output.RESULTS: "Not ready. Please check your connection with the GRR Client"}

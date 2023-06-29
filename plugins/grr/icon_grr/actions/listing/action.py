@@ -1,12 +1,12 @@
-import komand
-from .schema import ListingInput, ListingOutput
+import insightconnect_plugin_runtime
+from .schema import ListingInput, ListingOutput, Input, Output
 
 # Custom imports below
 import json
 from google.protobuf.json_format import MessageToJson
 
 
-class Listing(komand.Action):
+class Listing(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="listing",
@@ -20,16 +20,16 @@ class Listing(komand.Action):
 
     def run(self, params={}):
         self.grrapi = self.connection.grrapi
-        if params.get("hunts"):
+        if params.get(Input.HUNTS):
             self.hunts()
-        if params.get("hunt_approvals"):
+        if params.get(Input.HUNT_APPROVALS):
             self.hunt_approvals()
-        if params.get("grr_binaries"):
+        if params.get(Input.GRR_BINARIES):
             self.grr_binaries()
-        if params.get("clients"):
-            query = params.get("query").encode("utf-8", "ignore")
+        if params.get(Input.CLIENTS):
+            query = params.get(Input.QUERY, "").encode("utf-8", "ignore")
             self.clients(query)
-        return {"result": self.result}
+        return {Output.RESULT: self.result}
 
     def hunts(self):
         try:
@@ -39,11 +39,11 @@ class Listing(komand.Action):
             for hunt in list_hunts:
                 data = hunt.data
                 data = MessageToJson(data)
-                result["hunt%s" % count] = json.loads(data)
+                result[f"hunt{count}"] = json.loads(data)
                 count += 1
-            self.result = komand.helper.clean(result)
-        except Exception as e:
-            self.logger.error(e)
+            self.result = insightconnect_plugin_runtime.helper.clean(result)
+        except Exception as error:
+            self.logger.error(error)
 
     def hunt_approvals(self):
         # Still testing, need to create a hunt to see the hunt approval and how the data comes out
@@ -55,11 +55,11 @@ class Listing(komand.Action):
             for item in hunt_approvals:
                 data = item.data
                 data = MessageToJson(data)
-                result["approval%s" % count] = json.loads(data)
+                result[f"approval{count}"] = json.loads(data)
                 count += 1
-            self.result = komand.helper.clean(result)
-        except Exception as e:
-            self.logger.error(e)
+            self.result = insightconnect_plugin_runtime.helper.clean(result)
+        except Exception as error:
+            self.logger.error(error)
 
     def clients(self, query):
         try:
@@ -71,14 +71,14 @@ class Listing(komand.Action):
             for client in search_results:
                 data = client.data
                 data = MessageToJson(data)
-                result["client%s" % count] = json.loads(data)
+                result[f"client{count}"] = json.loads(data)
                 count += 1
-            if result == {}:
+            if not result:
                 self.logger.error("No clients found with provided query.")
                 return {"results": "No clients have been found"}
-            self.result = komand.helper.clean(result)
-        except Exception as e:
-            self.logger.error(e)
+            self.result = insightconnect_plugin_runtime.helper.clean(result)
+        except Exception as error:
+            self.logger.error(error)
 
     def grr_binaries(self):
         # Havn't tested it, but based on the other functions behaving similarly and the source code
@@ -90,17 +90,17 @@ class Listing(komand.Action):
             for x in binaries:
                 data = x.data
                 data = MessageToJson(data)
-                result["binary%s" % count] = json.loads(data)
+                result[f"binary{count}"] = json.loads(data)
                 count += 1
-            self.result = komand.helper.clean(result)
-        except Exception as e:
-            self.logger.error(e)
+            self.result = insightconnect_plugin_runtime.helper.clean(result)
+        except Exception as error:
+            self.logger.error(error)
             self.logger.error("No GRR Binaries")
             return {"results": "No GRR Binaries have been found"}
 
     def test(self):
         self.grrapi = self.connection.grrapi
         if self.grrapi:
-            return {"results": "Ready to list"}
+            return {Output.RESULT: "Ready to list"}
         if not self.grrapi:
-            return {"results": "Not ready. Please check your connection with the GRR Client"}
+            return {Output.RESULT: "Not ready. Please check your connection with the GRR Client"}

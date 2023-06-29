@@ -1,11 +1,11 @@
 # List third-party dependencies here, separated by newlines. 
 # All dependencies must be version-pinned, eg. requests==1.2.0
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
-ConfigParser==3.5.0
-grr-response-proto==3.2.3.post2
-cryptography==2.0.3
-ipython==5.0.0
-protobuf==3.3.0
-requests==2.20.0
-Werkzeug==0.11.3
-grr-api-client==3.2.3.post2
+ConfigParser==5.3.0
+grr-response-proto==3.4.6.post7
+cryptography==41.0.1
+ipython==8.13.0
+protobuf==3.20.*
+requests==2.31.0
+Werkzeug==2.3.6
+grr-api-client==3.4.6.post7
