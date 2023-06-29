@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get user in Zoom account"
+    DESCRIPTION = "Get user in Zoom account."
 
 
 class Input:
