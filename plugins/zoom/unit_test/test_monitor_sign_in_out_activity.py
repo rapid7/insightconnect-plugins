@@ -6,7 +6,7 @@ from unittest.mock import patch
 from icon_zoom.util.event import Event
 from icon_zoom.tasks.monitor_sign_in_out_activity.task import MonitorSignInOutActivity
 from icon_zoom.connection.connection import Connection
-from unit_test.mock import STUB_CONNECTION, STUB_OAUTH_TOKEN
+from mock import STUB_CONNECTION, STUB_OAUTH_TOKEN
 
 REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI._refresh_oauth_token"
 GET_USER_ACTIVITY_EVENTS_PATH = "icon_zoom.util.api.ZoomAPI.get_user_activity_events"
@@ -78,7 +78,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
         ]
         expected_state = {
             "boundary_events": ["197f96ef45ad08592bfea604f60b6abcfc7d4bf2", "8c68922ce0e81f42e4db701317aa7f219049b144"],
-            "last_request_timestamp": "2023-02-23T22:00:00Z",
+            "last_request_timestamp": "2023-02-24T04:00:00Z",
             "latest_event_timestamp": "2023-02-22T21:44:44Z",
             "status_code": 200,
         }
@@ -237,13 +237,13 @@ class TestGetUserActivityEvents(unittest.TestCase):
         ]
         first_expected_state = {
             "boundary_events": ["854d8b971985244502ba5714f372344a9374c538"],
-            "last_request_timestamp": "2023-02-23T22:00:00Z",
+            "last_request_timestamp": "2023-02-24T04:00:00Z",
             "latest_event_timestamp": "2023-02-22T21:45:00Z",
             "status_code": 200,
         }
         second_expected_state = {
             "boundary_events": ["b308ba69b3beb7207f8271ef7a78f84da98bed67"],
-            "last_request_timestamp": "2023-02-23T23:00:00Z",
+            "last_request_timestamp": "2023-02-24T05:00:00Z",
             "latest_event_timestamp": "2023-02-23T21:44:44Z",
             "status_code": 200,
         }
