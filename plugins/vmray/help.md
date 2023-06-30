@@ -373,7 +373,7 @@ Example input:
 
 ```
 {
-  "url": "www.example.com",
+  "url": "www.example.com"
 }
 ```
 

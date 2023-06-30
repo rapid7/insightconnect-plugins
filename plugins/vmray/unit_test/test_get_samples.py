@@ -19,6 +19,5 @@ class TestGetSamples(TestCase):
     @parameterized.expand(Util.load_data("get_samples", "expected").get("parameters"))
     @mock.patch("requests.Session.send", side_effect=Util.mocked_requests)
     def test_get_samples_unit(self, name, _input, expected, mock_request):
-        logging.basicConfig(level=logging.INFO)
         result = self.action.run(_input)
         self.assertEqual(expected, result)

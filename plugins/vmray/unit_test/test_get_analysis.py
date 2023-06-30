@@ -20,7 +20,6 @@ class TestGetAnalysis(TestCase):
     @parameterized.expand(Util.load_data("get_analysis", "expected").get("parameters"))
     @mock.patch("requests.Session.send", side_effect=Util.mocked_requests)
     def test_get_analysis_unit(self, name, _input, expected, mock_request):
-        logging.basicConfig(level=logging.INFO)
         result = self.action.run(_input)
         self.assertEqual(expected, result)
 
@@ -28,7 +27,6 @@ class TestGetAnalysis(TestCase):
     @mock.patch("requests.Session.send", side_effect=Util.mocked_requests)
     def test_get_analysis_unit_errors(self, name, _input, expected, mock_request):
         with self.assertRaises(PluginException) as error:
-            logging.basicConfig(level=logging.INFO)
             self.action.run(_input)
         self.assertEqual(expected["cause"], error.exception.cause)
         self.assertEqual(expected["assistance"], error.exception.assistance)

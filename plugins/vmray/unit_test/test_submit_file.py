@@ -19,6 +19,5 @@ class TestSubmitFile(TestCase):
     @parameterized.expand(Util.load_data("submit_file", "expected").get("parameters"))
     @mock.patch("requests.Session.send", side_effect=Util.mocked_requests)
     def test_submit_file_unit(self, name, _input, expected, mock_request):
-        logging.basicConfig(level=logging.INFO)
         result = self.action.run(_input)
         self.assertEqual(expected, result)
