@@ -4,25 +4,31 @@ import sys
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-
-from mockconnection import MockConnection
-
 from komand_vmray.actions.get_analysis import GetAnalysis
+from util import Util
+from parameterized import parameterized
+from insightconnect_plugin_runtime.exceptions import PluginException
+from unittest import mock
+import logging
 
+class TestGetAnalysis(TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.action = Util.default_connector(GetAnalysis())
 
-class GetAnalysis(TestCase):
+    @parameterized.expand(Util.load_data("get_analysis", "expected").get("parameters"))
+    @mock.patch("requests.Session.send", side_effect=Util.mocked_requests)
+    def test_get_analysis_unit(self, name, _input, expected, mock_request):
+        logging.basicConfig(level=logging.INFO)
+        result = self.action.run(_input)
+        self.assertEqual(expected, result)
 
-  def test_get_unit(self):
-    test_conn = MockConnection()
-    test_action = GetAnalysis()
-
-    test_action.connection = test_conn
-    action_params = {"route": "https://www.google.com", "headers": {}}
-    results = test_action.run(action_params)
-
-    # only new things to test is that it correctly routes output of results
-    self.assertEqual(results["status"], 200)
-    # more tests?
-    self.assertEqual(results["body_object"], {"SampleSuccessBody": "SampleVal"})
-    self.assertEqual(results["body_string"], "SAMPLETEXT for method GET")
-    self.assertEqual(results["headers"], {"SampleHeader": "SampleVal"})
+    @parameterized.expand(Util.load_data("get_analysis_errors", "expected").get("parameters"))
+    @mock.patch("requests.Session.send", side_effect=Util.mocked_requests)
+    def test_get_analysis_unit_errors(self, name, _input, expected, mock_request):
+        with self.assertRaises(PluginException) as error:
+            logging.basicConfig(level=logging.INFO)
+            self.action.run(_input)
+        self.assertEqual(expected["cause"], error.exception.cause)
+        self.assertEqual(expected["assistance"], error.exception.assistance)
+        self.assertEqual(expected["data"], error.exception.data)

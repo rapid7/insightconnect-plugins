@@ -117,7 +117,7 @@ class VMRay:
             elif resp.status_code != 200:
                 raise PluginException(
                     cause=f"An error was received when running {action_name}.",
-                    assistance=f" Request status code of {resp.status_code} was returned."
+                    assistance=f"Request status code of {resp.status_code} was returned."
                     " Please make sure connections have been configured correctly "
                     "as well as the correct input for the action.",
                     data=resp.text
@@ -142,7 +142,7 @@ class VMRay:
     def get_analysis(self, analysis_id, id_type, optional_params):
         if id_type not in ["all", "analysis_id"]:
             endpoint_url = f"/rest/analysis/{id_type}/{analysis_id}"
-        elif id_type is "analysis_id":
+        elif id_type == "analysis_id":
             endpoint_url = f"/rest/analysis/{analysis_id}"
         else:
             endpoint_url = "/rest/analysis"

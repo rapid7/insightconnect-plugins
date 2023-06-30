@@ -4,6 +4,9 @@ import os
 import sys
 from komand_vmray.connection.connection import Connection
 from komand_vmray.connection.schema import Input
+from typing import Callable
+import requests
+from unittest import mock
 
 sys.path.append(os.path.abspath("../"))
 
@@ -17,8 +20,8 @@ class Util:
             params = connect_params
         else:
             params = {
-                Input.URL: {},
-                Input.API_KEY: ""
+                Input.URL: "https://www.example.com",
+                Input.API_KEY: {"secretKey": "abc"}
             }
         default_connection.connect(params)
         action.connection = default_connection
@@ -38,13 +41,16 @@ class Util:
             )
         )
 
+    def mocked_request(side_effect: Callable) -> None:
+        mock_function = requests
+        mock_function.request = mock.Mock(side_effect=side_effect)
+
     @staticmethod
     def mocked_requests(*args, **kwargs):
         class MockResponse:
             def __init__(self, filename, status_code):
                 self.filename = filename
                 self.status_code = status_code
-                self.headers = Util.load_data(self.filename).get("headers", {})
                 if self.filename == "not_found":
                     self.text = 'Response was: {"message": "Not Found"}'
                 elif self.filename == "already_exists":
@@ -53,43 +59,26 @@ class Util:
                     self.text = str(self.json())
 
             def json(self):
-                return Util.load_data(self.filename).get("json", {})
+                return Util.load_data(self.filename)
 
             def raise_for_status(self):
                 return
 
-        data = kwargs.get("data")
-        url = kwargs.get("url")
-        if url == "https://www.example.com/post":
-            return MockResponse("post", 200)
-        if url == "https://www.example.com/get":
-            return MockResponse("get", 200)
-        if url == "https://www.example.com/put" and data == None:
-            return MockResponse("put_json_empty_body", 200)
-        if url == "https://www.example.com/put" and data == b'{"example": "value"}':
-            return MockResponse("put_json_body", 200)
-        if url == "https://www.example.com/put" and data == b"example=xwwwf":
-            return MockResponse("put_json_body_x_www_form_urlencoded", 200)
-        if url == "https://www.example.com/put" and data == b'{"example": "\\nv\xc3\xa1l\xc3\xbc\xc3\xa9\\n"}':
-            return MockResponse("put_json_non_latin", 200)
-        if url == "https://www.example.com/put" and data == b"example":
-            return MockResponse("put_plain_text", 200)
-        if url == "https://www.example.com/put" and data == b'{"example": "404_false"}':
-            return MockResponse("put_404_false_failure", 404)
-        if url == "https://www.example.com/put_401":
-            return MockResponse("put_error", 401)
-        if url == "https://www.example.com/put_403":
-            return MockResponse("put_error", 403)
-        if url == "https://www.example.com/put_404":
-            return MockResponse("put_error", 404)
-        if url == "https://www.example.com/put_400":
-            return MockResponse("put_error", 400)
-        if url == "https://www.example.com/put_500":
-            return MockResponse("put_error", 500)
-        if url == "https://www.example.com/delete":
-            return MockResponse("delete", 200)
-        if url == "https://www.example.com/patch":
-            return MockResponse("patch", 200)
-        if url == "https://www.example.com":
-            return MockResponse("connection_test", 200)
+        logging.info("MOCKING...")
+
+        logging.info("PREPARED REQUEST:")
+        logging.info(f"URL: {args[0].url}")
+        url = args[0].url
+        if url == "https://www.example.com/rest/analysis":
+            return MockResponse("get_analysis_all", 200)
+        if url == "https://www.example.com/rest/analysis/submission/1490045":
+            return MockResponse("get_analysis_submission", 200)
+        if url == "https://www.example.com/rest/analysis/1490045":
+            return MockResponse("get_analysis_id", 200)
+        if url == "https://www.example.com/rest/analysis/submission/1490045":
+            return MockResponse("get_analysis_submission", 200)
+        if url == "https://www.example.com/rest/analysis/405":
+            return MockResponse("get_analysis_405", 405)
+        if url == "https://www.example.com/rest/analysis/401":
+            return MockResponse("get_analysis_401", 401)
         raise Exception("Not implemented")

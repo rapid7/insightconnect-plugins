@@ -18,5 +18,7 @@ class GetAnalysis(insightconnect_plugin_runtime.Action):
         analysis_id = params.get("id")
         optional_params = params.get("optional_params")
         resp = self.connection.api.get_analysis(analysis_id, id_type, optional_params)
+        self.logger.info(f"TYPE: {type(resp)}")
+        self.logger.info(resp)
         clean_results = insightconnect_plugin_runtime.helper.clean(resp)
         return {"results": clean_results["data"]}
