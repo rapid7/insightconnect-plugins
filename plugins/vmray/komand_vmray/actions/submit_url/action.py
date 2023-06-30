@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import SubmitUrlInput, SubmitUrlOutput
+from .schema import SubmitUrlInput, SubmitUrlOutput, Output
 
 # Custom imports below
 
@@ -21,4 +21,4 @@ class SubmitUrl(insightconnect_plugin_runtime.Action):
             optional_params["analyzer_mode"] = analyzer_mode
         resp = self.connection.api.submit_url(url, optional_params)
         clean_data = insightconnect_plugin_runtime.helper.clean(resp["data"])
-        return {"results": clean_data}
+        return {Output.RESULTS: clean_data}

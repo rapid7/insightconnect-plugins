@@ -2,7 +2,7 @@ import binascii
 
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
-from .schema import SubmitFileInput, SubmitFileOutput
+from .schema import SubmitFileInput, SubmitFileOutput, Output
 
 # Custom imports below
 
@@ -36,8 +36,10 @@ class SubmitFile(insightconnect_plugin_runtime.Action):
             self.logger.info(f"File types {mime_types} found for file {file_name} and are supported by VMRay")
             resp = self.connection.api.submit_file(file_name, file_bytes, optional_params)
             clean_data = insightconnect_plugin_runtime.helper.clean(resp)
-            return {"results": clean_data}
+            return {Output.RESULTS: clean_data}
         else:
-            self.logger.error(f"File types, not supported by VMRay: {mime_types}")
-            self.logger.error(f"Here is a list of supported file types {self.connection.api.SUPPORTED_FILETYPES}")
-            return {"results": {"errors": [{"files": f"File types found are not supported by VMRay {mime_types}"}]}}
+            raise PluginException(
+                cause=f"File types, not supported by VMRay: {mime_types}",
+                assistance=f"Here is a list of supported file types {self.connection.api.SUPPORTED_FILETYPES}",
+                data={"errors": [{"files": f"File types found are not supported by VMRay {mime_types}"}]}
+            )

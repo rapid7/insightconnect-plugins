@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetAnalysisInput, GetAnalysisOutput
+from .schema import GetAnalysisInput, GetAnalysisOutput, Output
 
 # Custom imports below
 
@@ -19,4 +19,4 @@ class GetAnalysis(insightconnect_plugin_runtime.Action):
         optional_params = params.get("optional_params")
         resp = self.connection.api.get_analysis(analysis_id, id_type, optional_params)
         clean_results = insightconnect_plugin_runtime.helper.clean(resp)
-        return {"results": clean_results["data"]}
+        return {Output.RESULTS: clean_results["data"]}

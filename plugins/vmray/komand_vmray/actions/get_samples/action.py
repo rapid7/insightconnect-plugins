@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetSamplesInput, GetSamplesOutput
+from .schema import GetSamplesInput, GetSamplesOutput, Output
 
 # Custom imports below
 
@@ -22,4 +22,4 @@ class GetSamples(insightconnect_plugin_runtime.Action):
 
         resp = self.connection.api.get_samples(sample_type, sample, optional_params)
         clean_data = insightconnect_plugin_runtime.helper.clean(resp["data"])
-        return {"results": clean_data}
+        return {Output.RESULTS: clean_data}
