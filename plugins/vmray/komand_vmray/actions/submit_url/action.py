@@ -15,7 +15,7 @@ class SubmitUrl(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         url = params.get("url")
-        optional_params = params.get("optional_params")
+        optional_params = params.get("optional_params", {})
         analyzer_mode = params.get("analyzer_mode")
         if analyzer_mode != "default":
             optional_params["analyzer_mode"] = analyzer_mode

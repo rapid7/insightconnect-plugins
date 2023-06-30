@@ -19,10 +19,7 @@ class Util:
         if connect_params:
             params = connect_params
         else:
-            params = {
-                Input.URL: "https://www.example.com",
-                Input.API_KEY: {"secretKey": "abc"}
-            }
+            params = {Input.URL: "https://www.example.com", Input.API_KEY: {"secretKey": "abc"}}
         default_connection.connect(params)
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
@@ -81,4 +78,14 @@ class Util:
             return MockResponse("get_analysis_405", 405)
         if url == "https://www.example.com/rest/analysis/401":
             return MockResponse("get_analysis_401", 401)
+        if url == "https://www.example.com/rest/sample/type/1490045":
+            return MockResponse("get_samples_type", 200)
+        if url == "https://www.example.com/rest/sample/1490045":
+            return MockResponse("get_samples_id", 200)
+        if url == "https://www.example.com/rest/sample":
+            return MockResponse("get_samples_all", 200)
+        if url == "https://www.example.com/rest/sample/submit?sample_url=https%3A%2F%2Fwww.example.com":
+            return MockResponse("submit_url", 200)
+        if url == "https://www.example.com/rest/sample/submit":
+            return MockResponse("submit_file", 200)
         raise Exception("Not implemented")

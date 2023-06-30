@@ -112,7 +112,7 @@ class VMRay:
                     cause=f"An error was received when running {action_name}.",
                     assistance=f"Request status code of {resp.status_code} was returned."
                     "Please make sure connections have been configured correctly",
-                    data=resp.text
+                    data=resp.text,
                 )
             elif resp.status_code != 200:
                 raise PluginException(
@@ -120,24 +120,18 @@ class VMRay:
                     assistance=f"Request status code of {resp.status_code} was returned."
                     " Please make sure connections have been configured correctly "
                     "as well as the correct input for the action.",
-                    data=resp.text
+                    data=resp.text,
                 )
 
         except RequestException as exception:
             self.logger.error(f"An error has occurred: {exception}")
-            raise PluginException(
-                preset=PluginException.Preset.UNKNOWN,
-                data=str(exception)
-            )
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=str(exception))
 
         try:
             results = resp.json()
             return results
         except JSONDecodeError:
-            raise PluginException(
-                preset=PluginException.Preset.INVALID_JSON,
-                data=resp.text
-            )
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=resp.text)
 
     def get_analysis(self, analysis_id, id_type, optional_params):
         if id_type not in ["all", "analysis_id"]:
@@ -151,7 +145,7 @@ class VMRay:
     def get_samples(self, sample_type, sample, optional_params):
         if sample_type not in ["all", "sample_id"]:
             endpoint_url = f"/rest/sample/{sample_type}/{sample}"
-        elif sample_type is "sample_id":
+        elif sample_type == "sample_id":
             endpoint_url = f"/rest/sample/{sample}"
         else:
             endpoint_url = "/rest/sample"

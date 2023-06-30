@@ -11,6 +11,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from unittest import mock
 import logging
 
+
 class TestGetAnalysis(TestCase):
     @classmethod
     def setUpClass(cls) -> None:

@@ -21,7 +21,7 @@ class SubmitFile(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         file_ = params.get("file", None)
         file_name = file_.get("filename")
-        optional_params = params.get("optional_params")
+        optional_params = params.get("optional_params", {})
         analyzer_mode = params.get("analyzer_mode")
         if analyzer_mode != "default":
             optional_params["analyzer_mode"] = analyzer_mode
@@ -29,9 +29,7 @@ class SubmitFile(insightconnect_plugin_runtime.Action):
         try:
             file_bytes = base64.b64decode(file_.get("content"))
         except [binascii.Error, ValueError]:
-            raise PluginException(
-                preset=PluginException.Preset.BASE64_DECODE
-            )
+            raise PluginException(preset=PluginException.Preset.BASE64_DECODE)
 
         mime_types, check_pass = self.connection.api.check_filetype(file_bytes)
         if check_pass:
