@@ -170,7 +170,7 @@ class VMRay:
 
         return self._call_api("POST", endpoint_url=endpoint_url, params=optional_params, action_name="Submit URL")
 
-    def check_filetype(self, content, filename=None):
+    def check_filetype(self, content):
         """
         :param content: contents of file
         :param filename: name of file being passed in
