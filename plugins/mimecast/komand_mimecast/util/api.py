@@ -24,6 +24,7 @@ from komand_mimecast.util.constants import (
     BASIC_ASSISTANCE_MESSAGE,
     FAIL_FIELD,
     STATUS_FIELD,
+    DEVELOPER_KEY_ERROR,
 )
 from komand_mimecast.util.exceptions import ApiClientException
 from komand_mimecast.util.util import Utils
@@ -219,7 +220,14 @@ class MimecastAPI:
                         cause=ERROR_CASES.get(XDK_BINDING_EXPIRED_ERROR),
                         assistance="Please provide a valid AccessKey.",
                         data=response,
-                        status_code=400,
+                        status_code=401,
+                    )
+                elif error.get(CODE) == DEVELOPER_KEY_ERROR:
+                    raise ApiClientException(
+                        cause=ERROR_CASES.get(error.get(CODE)),
+                        assistance=BASIC_ASSISTANCE_MESSAGE,
+                        data=response,
+                        status_code=401,
                     )
                 elif error.get(CODE) in ERROR_CASES:
                     raise ApiClientException(
@@ -238,13 +246,6 @@ class MimecastAPI:
                 elif error.get(CODE) == VALIDATION_BLANK_ERROR:
                     raise ApiClientException(
                         cause=f"This {error.get('field')} field, if present, cannot be blank or empty.",
-                        assistance=BASIC_ASSISTANCE_MESSAGE,
-                        data=response,
-                        status_code=400,
-                    )
-                elif error.get(CODE) == ERROR_CASES:
-                    raise ApiClientException(
-                        cause=ERROR_CASES.get(error.get(CODE)),
                         assistance=BASIC_ASSISTANCE_MESSAGE,
                         data=response,
                         status_code=400,
