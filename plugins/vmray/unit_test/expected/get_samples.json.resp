@@ -1,0 +1,88 @@
+{
+    "parameters": [
+        [
+            "get_samples_type",
+            {
+                "sample": "1490045",
+                "sample_type": "type"
+            },
+            {
+                "results": [
+                    {
+                        "sample_classifications": [],
+                        "sample_created": "2018-12-03T14:41:09",
+                        "sample_filename": "lawl.jpg",
+                        "sample_filesize": 69847,
+                        "sample_id": 2117136,
+                        "sample_is_multipart": false,
+                        "sample_last_reputation_severity": "unknown",
+                        "sample_md5hash": "064caa4a102c0ace9d6ee06e45b68b1a",
+                        "sample_priority": 1,
+                        "sample_severity": "unknown",
+                        "sample_sha1hash": "fbfc0b783770e68ec5791702fde021cbd6a40480",
+                        "sample_sha256hash": "8843ef15c1915d0cfc270676c0df842577eac4ef54ccaa1ae78211dac1bbfc42",
+                        "sample_ssdeephash": "1536:3om6XPDy2/Spe0QixPTJmI0rKDJ80f1iPdDbUK4V+:33g/SU0Qi2trK1lClZB",
+                        "sample_type": "JPEG image data",
+                        "sample_webif_url": "https://cloud.vmray.com/user/sample/view?id=2117136"
+                    }
+                ]
+            }
+        ],
+        [
+            "get_samples_all",
+            {
+                "sample": "1490045",
+                "sample_type": "all"
+            },
+            {
+                "results": [
+                    {
+                        "sample_classifications": [],
+                        "sample_created": "2018-12-03T14:41:09",
+                        "sample_filename": "lawl.jpg",
+                        "sample_filesize": 69847,
+                        "sample_id": 2117136,
+                        "sample_is_multipart": false,
+                        "sample_last_reputation_severity": "unknown",
+                        "sample_md5hash": "064caa4a102c0ace9d6ee06e45b68b1a",
+                        "sample_priority": 1,
+                        "sample_severity": "unknown",
+                        "sample_sha1hash": "fbfc0b783770e68ec5791702fde021cbd6a40480",
+                        "sample_sha256hash": "8843ef15c1915d0cfc270676c0df842577eac4ef54ccaa1ae78211dac1bbfc42",
+                        "sample_ssdeephash": "1536:3om6XPDy2/Spe0QixPTJmI0rKDJ80f1iPdDbUK4V+:33g/SU0Qi2trK1lClZB",
+                        "sample_type": "JPEG image data",
+                        "sample_webif_url": "https://cloud.vmray.com/user/sample/view?id=2117136"
+                    }
+                ]
+            }
+        ],
+        [
+            "get_samples_id",
+            {
+                "sample": "1490045",
+                "sample_type": "sample_id"
+            },
+            {
+                "results": [
+                    {
+                        "sample_classifications": [],
+                        "sample_created": "2018-12-03T14:41:09",
+                        "sample_filename": "lawl.jpg",
+                        "sample_filesize": 69847,
+                        "sample_id": 2117136,
+                        "sample_is_multipart": false,
+                        "sample_last_reputation_severity": "unknown",
+                        "sample_md5hash": "064caa4a102c0ace9d6ee06e45b68b1a",
+                        "sample_priority": 1,
+                        "sample_severity": "unknown",
+                        "sample_sha1hash": "fbfc0b783770e68ec5791702fde021cbd6a40480",
+                        "sample_sha256hash": "8843ef15c1915d0cfc270676c0df842577eac4ef54ccaa1ae78211dac1bbfc42",
+                        "sample_ssdeephash": "1536:3om6XPDy2/Spe0QixPTJmI0rKDJ80f1iPdDbUK4V+:33g/SU0Qi2trK1lClZB",
+                        "sample_type": "JPEG image data",
+                        "sample_webif_url": "https://cloud.vmray.com/user/sample/view?id=2117136"
+                    }
+                ]
+            }
+        ]
+    ]
+}

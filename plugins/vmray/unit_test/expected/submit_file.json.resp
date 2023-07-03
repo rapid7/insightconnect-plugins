@@ -1,0 +1,95 @@
+{
+    "parameters": [
+        [
+            "submit_file",
+            {"file":
+                {
+                    "filename": "setup.exe",
+                    "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
+                }
+            },
+            {
+                "results": {
+  "data": {
+    "errors": [],
+    "jobs": [],
+    "md_jobs": [],
+    "reputation_jobs": [
+      {
+        "reputation_job_created": "2018-12-03T16:22:32",
+        "reputation_job_id": 154563,
+        "reputation_job_priority": 1,
+        "reputation_job_sample_id": 2101187,
+        "reputation_job_sample_md5": "8c2d61c6a08d569afa1eb68b0ef2fb84",
+        "reputation_job_sample_sha1": "5334037acc20b40923f2f458eeb61e776433536e",
+        "reputation_job_sample_sha256": "fe13606bf1e79124bf6dac32edd5b4655eafd4d024cd36ffc93ceb05502bdd57",
+        "reputation_job_sample_ssdeep": "24:xRc+/8Z8e68874Oa5HaKFL3hgjl8IuKlryRYtxuyshs8vtn:xRqYe/F3ayIuCruyshNn",
+        "reputation_job_status": "queued",
+        "reputation_job_statuschanged": "2018-12-03T16:22:32",
+        "reputation_job_submission_id": 2361855,
+        "reputation_job_user_email": "user@example.com",
+        "reputation_job_user_id": 1099
+      }
+    ],
+    "samples": [
+      {
+        "sample_created": "2018-11-29T19:37:09",
+        "sample_filename": "fe13606bf1e79124bf6dac32edd5b4655eafd4d024cd36ffc93ceb05502bdd57",
+        "sample_filesize": 8432,
+        "sample_id": 2101187,
+        "sample_is_multipart": false,
+        "sample_md5hash": "8c2d61c6a08d569afa1eb68b0ef2fb84",
+        "sample_priority": 1,
+        "sample_sha1hash": "5334037acc20b40923f2f458eeb61e776433536e",
+        "sample_sha256hash": "fe13606bf1e79124bf6dac32edd5b4655eafd4d024cd36ffc93ceb05502bdd57",
+        "sample_ssdeephash": "24:xRc+/8Z8e68874Oa5HaKFL3hgjl8IuKlryRYtxuyshs8vtn:xRqYe/F3ayIuCruyshNn",
+        "sample_type": "Mach-O 64-bit x86_64 executable",
+        "sample_webif_url": "https://cloud.vmray.com/user/sample/view?id=2101187",
+        "submission_filename": "a.out"
+      }
+    ],
+    "static_jobs": [],
+    "submissions": [
+      {
+        "submission_analyzer_mode_analyzer_mode": "reputation_static_dynamic",
+        "submission_analyzer_mode_enable_reputation": true,
+        "submission_analyzer_mode_enable_triage": false,
+        "submission_analyzer_mode_enable_whois": true,
+        "submission_analyzer_mode_id": 971,
+        "submission_created": "2018-12-03T16:22:32",
+        "submission_filename": "a.out",
+        "submission_finished": false,
+        "submission_id": 2361855,
+        "submission_ip_id": 1264,
+        "submission_ip_ip": "64.125.235.6",
+        "submission_known_configuration": false,
+        "submission_original_filename": "a.out",
+        "submission_prescript_force_admin": false,
+        "submission_priority": 1,
+        "submission_reputation_mode": "disabled",
+        "submission_sample_id": 2101187,
+        "submission_sample_md5": "8c2d61c6a08d569afa1eb68b0ef2fb84",
+        "submission_sample_sha1": "5334037acc20b40923f2f458eeb61e776433536e",
+        "submission_sample_sha256": "fe13606bf1e79124bf6dac32edd5b4655eafd4d024cd36ffc93ceb05502bdd57",
+        "submission_sample_ssdeep": "24:xRc+/8Z8e68874Oa5HaKFL3hgjl8IuKlryRYtxuyshs8vtn:xRqYe/F3ayIuCruyshNn",
+        "submission_shareable": false,
+        "submission_tags": [],
+        "submission_type": "api",
+        "submission_user_account_id": 320,
+        "submission_user_account_name": "Rapid7/Komand",
+        "submission_user_account_subscription_mode": "free_account",
+        "submission_user_email": "user@example.com",
+        "submission_user_id": 1099,
+        "submission_webif_url": "https://cloud.vmray.com/user/sample/view?id=2101187",
+        "submission_whois_mode": "disabled"
+      }
+    ],
+    "vt_jobs": [],
+    "whois_jobs": []
+  },
+  "result": "ok"
+}
+            }
+        ]
+    ]
+}
