@@ -30,7 +30,7 @@ class GetInput(insightconnect_plugin_runtime.Input):
     "body_any": {
       "type": "string",
       "title": "Body (Any)",
-      "description": "Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc",
+      "description": "Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc.. If a data object is to be sent, please use the 'Body Object' input",
       "order": 4
     },
     "body_object": {

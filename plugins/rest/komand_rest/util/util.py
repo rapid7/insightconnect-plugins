@@ -68,28 +68,19 @@ def first(sequence, default=""):
     return next((x for x in sequence if x), default)
 
 
-def check_headers_for_urlencoded(headers: Union[Dict[str, str], None]) -> bool:
+def check_header(headers: Union[Dict[str, str], None], header_key: str, header_value: str) -> bool:
     """
     This method will check the headers for 'content-type' == 'application/x-www-form-urlencoded'
     :param headers: Headers dict to read
+    :param header_key: Headers key to check
+    :param header_value: Value of header key
     :return: Boolean value indicating if the conditional is present
     """
     if headers is None:
         return False
-    for key, value in headers.items():
-        if key.lower() == "content-type" and value.lower() == "application/x-www-form-urlencoded":
-            return True
-    return False
-
-
-def convert_body_for_urlencoded(body: Dict[str, Any]) -> Union[Dict[str, Any], str]:
-    """
-    This method will encode the body if the headers == x-www-form-urlencoded
-    :param body: Body dict to convert to string with encoding
-    :return: Body as an encoded string value
-    """
-
-    return urlencode(body)
+    return any(
+        key.lower() == header_key.lower() and value.lower() == header_value.lower() for key, value in headers.items()
+    )
 
 
 def write_to_file(file: dict, file_path: str) -> str:
@@ -126,21 +117,6 @@ def determine_body_type(body_dict: dict, body_non_dict: str) -> Union[str, Dict[
     else:
         data = None
     return data
-
-
-def urlencoded_data(data: Union[dict, str], headers: dict) -> str:
-    """
-    A method to url-encode data if it is of type dict and headers contain
-    x-www-form-urlencoded.
-    :param data: The body for the request
-    :param headers: A dict/object containing request headers
-    """
-    newData = None
-    if isinstance(data, dict) and check_headers_for_urlencoded(headers):
-        newData = convert_body_for_urlencoded(data)
-    elif data:
-        newData = json.dumps(data)
-    return newData
 
 
 class RestAPI(object):
@@ -246,10 +222,17 @@ class RestAPI(object):
         headers: dict = None,
     ) -> Response:
         try:
-            # Check for urlencoded in headers
-            # Convert to urlencoded if type(data) is dict
-            # else run json.dumps(data)
-            urlencoded_data(data, headers)
+            # Check for urlencoded in headers to urlencode the data dict
+            # Else run json.dumps(data)
+            # Check for application/json in headers to replace new line characters for valid JSON
+            # Else utf-8 encode to ensure valid characters
+            if isinstance(data, dict) and check_header(headers, "content-type", "application/x-www-form-urlencoded"):
+                data = urlencode(data)
+            elif isinstance(data, dict):
+                data = json.dumps(data)
+            elif isinstance(data, str) and check_header(headers, "content-type", "application/json"):
+                data = data.replace("\n", "\\n")
+            data = data.encode("utf-8") if data else None
 
             request_params = {
                 "method": method,
@@ -268,7 +251,6 @@ class RestAPI(object):
             if self.key and all((self.certificate.get("content"), self.certificate.get("filename"))):
                 key_path = write_to_file(self.key, file_path)
                 request_params["cert"] = (certificate_path, key_path)
-
             response = requests.request(**request_params)
             if not self.fail_on_error:
                 return response
