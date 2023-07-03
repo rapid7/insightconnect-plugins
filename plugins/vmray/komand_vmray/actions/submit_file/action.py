@@ -41,5 +41,5 @@ class SubmitFile(insightconnect_plugin_runtime.Action):
             raise PluginException(
                 cause=f"File types, not supported by VMRay: {mime_types}",
                 assistance=f"Here is a list of supported file types {self.connection.api.SUPPORTED_FILETYPES}",
-                data={"errors": [{"files": f"File types found are not supported by VMRay {mime_types}"}]}
+                data={"errors": [{"files": f"File types found are not supported by VMRay {mime_types}"}]},
             )
