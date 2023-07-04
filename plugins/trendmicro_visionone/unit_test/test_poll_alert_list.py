@@ -1,14 +1,17 @@
 from unittest import TestCase
 from unittest.mock import patch
-from .mock import mock_connection, mock_action, mock_params
+
 from timeout_decorator import timeout_decorator
+
+from icon_trendmicro_visionone.triggers import PollAlertList
+from mock import mock_connection, mock_params
 
 
 class TestPollAlertList(TestCase):
     def setUp(self):
-        self.action_name = "PollAlertList"
+        self.action = PollAlertList()
         self.connection = mock_connection()
-        self.action = mock_action(self.connection, self.action_name)
+        self.action.connection = self.connection
         self.mock_params = mock_params("poll_alert_list")
 
     @timeout_decorator.timeout(15)

@@ -31,9 +31,7 @@ class GetSandboxSuspiciousList(insightconnect_plugin_runtime.Action):
         poll_time_sec = params.get(Input.POLL_TIME_SEC)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.get_sandbox_suspicious_list(
-            submit_id=submit_id, poll=poll, poll_time_sec=poll_time_sec
-        )
+        response = client.get_sandbox_suspicious_list(submit_id=submit_id, poll=poll, poll_time_sec=poll_time_sec)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while getting sandbox suspicious list.",

@@ -32,9 +32,7 @@ class DownloadSandboxAnalysisResult(insightconnect_plugin_runtime.Action):
         poll_time_sec = params.get(Input.POLL_TIME_SEC)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.download_sandbox_analysis_result(
-            submit_id=submit_id, poll=poll, poll_time_sec=poll_time_sec
-        )
+        response = client.download_sandbox_analysis_result(submit_id=submit_id, poll=poll, poll_time_sec=poll_time_sec)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while downloading the sandbox analysis result.",

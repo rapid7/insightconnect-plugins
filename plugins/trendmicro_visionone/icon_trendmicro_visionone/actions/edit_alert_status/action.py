@@ -40,9 +40,7 @@ class EditAlertStatus(insightconnect_plugin_runtime.Action):
         status = self.STATUS_MAPPING.get(status)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.edit_alert_status(
-            alert_id=alert_id, status=status, if_match=if_match
-        )
+        response = client.edit_alert_status(alert_id=alert_id, status=status, if_match=if_match)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while trying to edit the alert status.",

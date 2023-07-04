@@ -1,14 +1,17 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
-from .mock import mock_connection, mock_action, mock_params
+
 from insightconnect_plugin_runtime.exceptions import PluginException
+
+from icon_trendmicro_visionone.actions import GetSandboxAnalysisResult
+from mock import mock_connection, mock_params
 
 
 class TestGetSandboxAnalysisResult(TestCase):
     def setUp(self):
-        self.action_name = "GetSandboxAnalysisResult"
+        self.action = GetSandboxAnalysisResult()
         self.connection = mock_connection()
-        self.action = mock_action(self.connection, self.action_name)
+        self.action.connection = self.connection
         self.mock_params = mock_params("get_sandbox_analysis_result")
 
     def test_integration_get_sandbox_analysis_result(self):
@@ -24,8 +27,6 @@ class TestGetSandboxAnalysisResult(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_get_sandbox_analysis_result_failure(self):
-        self.action.connection.client.get_sandbox_analysis_result = MagicMock(
-            side_effect=PluginException
-        )
+        self.action.connection.client.get_sandbox_analysis_result = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])
