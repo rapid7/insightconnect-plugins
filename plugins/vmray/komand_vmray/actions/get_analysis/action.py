@@ -19,6 +19,6 @@ class GetAnalysis(insightconnect_plugin_runtime.Action):
         optional_params = params.get("optional_params")
         resp = self.connection.api.get_analysis(analysis_id, id_type, optional_params)
         clean_results = insightconnect_plugin_runtime.helper.clean(resp.get("data", []))
-        if isinstance(clean_results) == dict:
+        if isinstance(clean_results, dict):
             clean_results = [clean_results]
         return {Output.RESULTS: clean_results}

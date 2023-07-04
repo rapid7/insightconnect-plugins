@@ -22,6 +22,6 @@ class GetSamples(insightconnect_plugin_runtime.Action):
 
         resp = self.connection.api.get_samples(sample_type, sample, optional_params)
         clean_data = insightconnect_plugin_runtime.helper.clean(resp.get("data", []))
-        if isinstance(clean_data) == dict:
+        if isinstance(clean_data, dict):
             clean_data = [clean_data]
         return {Output.RESULTS: clean_data}
