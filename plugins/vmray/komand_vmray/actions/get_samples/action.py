@@ -21,5 +21,5 @@ class GetSamples(insightconnect_plugin_runtime.Action):
         )
 
         resp = self.connection.api.get_samples(sample_type, sample, optional_params)
-        clean_data = insightconnect_plugin_runtime.helper.clean(resp.get("data", {}))
+        clean_data = insightconnect_plugin_runtime.helper.clean(resp.get("data", []))
         return {Output.RESULTS: clean_data}
