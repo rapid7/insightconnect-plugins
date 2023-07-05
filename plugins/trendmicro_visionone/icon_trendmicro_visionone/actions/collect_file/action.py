@@ -33,9 +33,7 @@ class CollectFile(insightconnect_plugin_runtime.Action):
                         description=collect_file.get("description", ""),
                     )
                 )
-            elif collect_file.get("endpoint_name") and not collect_file.get(
-                "agent_guid"
-            ):
+            elif collect_file.get("endpoint_name") and not collect_file.get("agent_guid"):
                 response = client.collect_file(
                     pytmv1.FileTask(
                         endpointName=collect_file.get("endpoint_name"),
@@ -43,9 +41,7 @@ class CollectFile(insightconnect_plugin_runtime.Action):
                         description=collect_file.get("description", ""),
                     )
                 )
-            elif collect_file.get("agent_guid") and not collect_file.get(
-                "endpoint_name"
-            ):
+            elif collect_file.get("agent_guid") and not collect_file.get("endpoint_name"):
                 response = client.collect_file(
                     pytmv1.FileTask(
                         agentGuid=collect_file.get("agent_guid"),
