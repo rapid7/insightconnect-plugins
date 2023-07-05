@@ -1,14 +1,17 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
-from .mock import mock_connection, mock_action, mock_params
+
 from insightconnect_plugin_runtime.exceptions import PluginException
+
+from icon_trendmicro_visionone.actions import TerminateProcess
+from mock import mock_connection, mock_params
 
 
 class TestTerminateProcess(TestCase):
     def setUp(self):
-        self.action_name = "TerminateProcess"
+        self.action = TerminateProcess()
         self.connection = mock_connection()
-        self.action = mock_action(self.connection, self.action_name)
+        self.action.connection = self.connection
         self.mock_params = mock_params("terminate_process")
 
     def test_integration_terminate_process(self):
@@ -24,8 +27,6 @@ class TestTerminateProcess(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_terminate_process_failure(self):
-        self.action.connection.client.terminate_process = MagicMock(
-            side_effect=PluginException
-        )
+        self.action.connection.client.terminate_process = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

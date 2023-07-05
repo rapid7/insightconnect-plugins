@@ -21,16 +21,14 @@ class GetSuspiciousList(insightconnect_plugin_runtime.Action):
             output=GetSuspiciousListOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):  # pylint: disable=unused-argument
         # Get Connection Client
         client = self.connection.client
         new_suspicions = []
         # Make Action API Call
         self.logger.info("Making API Call...")
         try:
-            client.consume_suspicious_list(
-                lambda suspicion: new_suspicions.append(suspicion.dict())
-            )
+            client.consume_suspicious_list(lambda suspicion: new_suspicions.append(suspicion.dict()))
         except Exception as error:
             raise PluginException(
                 cause="An error occurred while getting the Suspicious List.",
@@ -40,9 +38,7 @@ class GetSuspiciousList(insightconnect_plugin_runtime.Action):
         # Load json objects to list
         suspicious_objects = []
         for new_suspicion in new_suspicions:
-            new_suspicion["description"] = (
-                "" if not new_suspicion["description"] else new_suspicion["description"]
-            )
+            new_suspicion["description"] = "" if not new_suspicion["description"] else new_suspicion["description"]
             new_suspicion = json.dumps(new_suspicion)
             suspicious_objects.append(json.loads(new_suspicion))
         # Return results
