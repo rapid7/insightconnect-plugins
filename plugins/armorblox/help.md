@@ -58,9 +58,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|remediation_details|string|True|Remediation action of the requested incident identified by Armorblox|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|remediation_details|string|True|Remediation action of the requested incident identified by Armorblox|ALERT|
 
 Example output:
 ```
@@ -91,9 +91,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|incidents|[]incident|True|A list of incidents identified by Armorblox|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|incidents|[]incident|True|A list of incidents identified by Armorblox|{"incidents": "some incidents"}|
 
 Example output:
 

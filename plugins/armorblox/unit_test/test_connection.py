@@ -3,9 +3,8 @@ import sys
 
 sys.path.append(os.path.abspath("../"))
 import logging
-from unittest import TestCase, mock
+from unittest import TestCase
 
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 from icon_armorblox.connection.connection import Connection
 from icon_armorblox.connection.schema import Input
@@ -19,10 +18,10 @@ class TestConnection(TestCase):
     def test_connection_ok(self):
         self.connection.connect(
             {
-                Input.API_KEY: "any-api-key",
+                Input.API_KEY: {"secretKey": "any-api-key"},
                 Input.TENANT_NAME: "my-tenant-name",
             }
         )
         response = self.connection.test()
-        expected_response = []
+        expected_response = {"success": True}
         self.assertEqual(response, expected_response)
