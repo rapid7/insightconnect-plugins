@@ -1,33 +1,31 @@
-import komand
-from .schema import SimpleSearchInput, SimpleSearchOutput
+import insightconnect_plugin_runtime
+from .schema import SimpleSearchInput, SimpleSearchOutput, Input, Output, Component
 
 # Custom imports below
-from komand.helper import clean
+from komand_salesforce.util.helpers import clean
 
 
-class SimpleSearch(komand.Action):
+class SimpleSearch(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="simple_search",
-            description="Execute a simple search for a string",
+            description=Component.DESCRIPTION,
             input=SimpleSearchInput(),
             output=SimpleSearchOutput(),
         )
 
     def run(self, params={}):
-        text = params.get("text")
-        results = self.connection.api.simple_search(text)
+        results = self.connection.api.simple_search(params.get(Input.TEXT))
 
         flat_results = []
-
         for result in results:
-            flat_result = {
-                "type": result.get("attributes", {}).get("type", ""),
-                "url": result.get("attributes", {}).get("url", ""),
-                "name": result.get("Name"),
-                "id": result.get("Id"),
-            }
-            flat_result = clean(flat_result)
-            flat_results.append(flat_result)
+            flat_results.append(
+                {
+                    "type": result.get("attributes", {}).get("type", ""),
+                    "url": result.get("attributes", {}).get("url", ""),
+                    "name": result.get("Name"),
+                    "id": result.get("Id"),
+                }
+            )
 
-        return {"search_results": flat_results}
+        return {Output.SEARCHRESULTS: clean(flat_results)}

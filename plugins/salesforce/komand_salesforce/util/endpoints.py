@@ -1,0 +1,7 @@
+PARAMETERIZED_SEARCH_ENDPOINT = "parameterizedSearch"
+QUERY_ENDPOINT = "query"
+QUERY_NEXT_PAGE_ENDPOINT = "query{next_query_id}"
+SOBJECT_ENDPOINT = "sobjects/{object}"
+SOBJECT_RECORD_ENDPOINT = "sobjects/{object}/{record}"
+SOBJECT_RECORD_EXTERNAL_ID_ENDPOINT = "sobjects/{object}/{external_id}/{record}"
+SOBJECT_RECORD_FIELD_ENDPOINT = "sobjects/{object}/{record}/{field}"

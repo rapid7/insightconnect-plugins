@@ -1,28 +1,23 @@
-import komand
-from .schema import GetFieldsInput, GetFieldsOutput
+import insightconnect_plugin_runtime
+from .schema import GetFieldsInput, GetFieldsOutput, Input, Output, Component
 
 # Custom imports below
+from komand_salesforce.util.helpers import clean, convert_to_camel_case
 
 
-class GetFields(komand.Action):
+class GetFields(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_fields",
-            description="Retrieve field values from a record",
+            description=Component.DESCRIPTION,
             input=GetFieldsInput(),
             output=GetFieldsOutput(),
         )
 
     def run(self, params={}):
-        record_id = params.get("record_id")
-        object_name = params.get("object_name", "Account")
-        fields = params.get("fields", [])
-
-        fields = self.connection.api.get_fields(record_id, object_name, fields)
-
-        try:
-            del fields["attributes"]
-        except KeyError:
-            self.logger.error("Error: attributes key does not exist in fields object")
-
-        return {"fields": fields}
+        fields = params.get(Input.FIELDS)
+        response = self.connection.api.get_fields(
+            params.get(Input.RECORDID), params.get(Input.OBJECTNAME), {"fields": ",".join(fields)} if fields else {}
+        )
+        response.pop("attributes", None)
+        return {Output.FIELDS: convert_to_camel_case(clean(response))}
