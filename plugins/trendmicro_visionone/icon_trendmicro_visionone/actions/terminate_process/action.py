@@ -30,9 +30,7 @@ class TerminateProcess(insightconnect_plugin_runtime.Action):
         self.logger.info("Making API Call...")
         multi_resp = []
         for process_identifier in process_identifiers:
-            if process_identifier.get("endpoint_name") and process_identifier.get(
-                "agent_guid"
-            ):
+            if process_identifier.get("endpoint_name") and process_identifier.get("agent_guid"):
                 response = client.terminate_process(
                     pytmv1.ProcessTask(
                         endpointName=process_identifier.get("endpoint_name"),
@@ -42,9 +40,7 @@ class TerminateProcess(insightconnect_plugin_runtime.Action):
                         fileName=process_identifier.get("filename", ""),
                     )
                 )
-            elif process_identifier.get("endpoint_name") and not process_identifier.get(
-                "agent_guid"
-            ):
+            elif process_identifier.get("endpoint_name") and not process_identifier.get("agent_guid"):
                 response = client.terminate_process(
                     pytmv1.ProcessTask(
                         endpointName=process_identifier.get("endpoint_name"),
@@ -53,9 +49,7 @@ class TerminateProcess(insightconnect_plugin_runtime.Action):
                         fileName=process_identifier.get("filename", ""),
                     )
                 )
-            elif process_identifier.get("agent_guid") and not process_identifier.get(
-                "endpoint_name"
-            ):
+            elif process_identifier.get("agent_guid") and not process_identifier.get("endpoint_name"):
                 response = client.terminate_process(
                     pytmv1.ProcessTask(
                         agentGuid=process_identifier.get("agent_guid"),

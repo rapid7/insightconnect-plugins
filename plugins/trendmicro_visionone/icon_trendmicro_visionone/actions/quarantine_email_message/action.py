@@ -30,9 +30,7 @@ class QuarantineEmailMessage(insightconnect_plugin_runtime.Action):
         self.logger.info("Making API Call...")
         multi_resp = []
         for email_identifier in email_identifiers:
-            if email_identifier["message_id"].startswith("<") and email_identifier[
-                "message_id"
-            ].endswith(">"):
+            if email_identifier["message_id"].startswith("<") and email_identifier["message_id"].endswith(">"):
                 response = client.quarantine_email_message(
                     pytmv1.EmailMessageIdTask(
                         messageId=email_identifier["message_id"],
