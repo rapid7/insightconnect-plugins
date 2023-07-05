@@ -82,13 +82,13 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "detection_tag_id": {
           "type": "string",
-          "title": "Detection tag ID",
+          "title": "Detection Tag ID",
           "description": "Detection tag ID",
           "order": 1
         },
         "detection_tag_name": {
           "type": "string",
-          "title": "Detection tag name",
+          "title": "Detection Tag name",
           "description": "Detection tag name",
           "order": 2
         }
@@ -120,7 +120,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         },
         "external_senders": {
           "type": "array",
-          "title": "External senders",
+          "title": "External Senders",
           "description": "List of external senders",
           "items": {
             "type": "string"
@@ -129,7 +129,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         },
         "external_users": {
           "type": "array",
-          "title": "External users",
+          "title": "External Users",
           "description": "List of external users",
           "items": {
             "$ref": "#/definitions/user"
@@ -138,7 +138,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         },
         "final_detection_tags": {
           "type": "array",
-          "title": "Detection tags",
+          "title": "Detection Tags",
           "description": "Detection tags",
           "items": {
             "$ref": "#/definitions/final_detection_tag"
@@ -147,7 +147,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         },
         "folder_categories": {
           "type": "array",
-          "title": "Folder categories",
+          "title": "Folder Categories",
           "description": "Folder categories",
           "items": {
             "type": "string"
@@ -174,7 +174,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         },
         "policy_names": {
           "type": "array",
-          "title": "policy_names",
+          "title": "policy Names",
           "description": "List of policies",
           "items": {
             "type": "string"
@@ -198,7 +198,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         },
         "resolution_state": {
           "type": "string",
-          "title": "resolution_state",
+          "title": "Resolution State",
           "description": "Incident resolution state",
           "order": 6
         },
@@ -215,13 +215,13 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         },
         "title": {
           "type": "string",
-          "title": "Subject",
+          "title": "Title",
           "description": "Mail subject",
           "order": 5
         },
         "users": {
           "type": "array",
-          "title": "users",
+          "title": "Users",
           "description": "List of users",
           "items": {
             "$ref": "#/definitions/user"
@@ -254,13 +254,13 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "detection_tag_id": {
               "type": "string",
-              "title": "Detection tag ID",
+              "title": "Detection Tag ID",
               "description": "Detection tag ID",
               "order": 1
             },
             "detection_tag_name": {
               "type": "string",
-              "title": "Detection tag name",
+              "title": "Detection Tag name",
               "description": "Detection tag name",
               "order": 2
             }
@@ -272,7 +272,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "email": {
               "type": "string",
-              "title": "User email",
+              "title": "User Email",
               "description": "Email of the user",
               "order": 2
             },
@@ -284,7 +284,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
             },
             "name": {
               "type": "string",
-              "title": "User name",
+              "title": "User Name",
               "description": "Name of the user",
               "order": 1
             }
@@ -298,7 +298,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "email": {
           "type": "string",
-          "title": "User email",
+          "title": "User Email",
           "description": "Email of the user",
           "order": 2
         },
@@ -310,7 +310,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         },
         "name": {
           "type": "string",
-          "title": "User name",
+          "title": "User Name",
           "description": "Name of the user",
           "order": 1
         }
