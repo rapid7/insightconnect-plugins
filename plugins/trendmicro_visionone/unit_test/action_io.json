@@ -264,6 +264,7 @@
     },
     "output": {
       "$success": true,
+      "error": {},
       "action": "analyzeFile",
       "arguments": "YXNkaDEyMzE5XzEyOQ==",
       "created_date_time": "2023-03-11T01:46:11Z",
@@ -325,13 +326,29 @@
     },
     "output": {
       "$success": true,
+      "error": {},
       "account": "User Userio",
       "action": "resetPassword",
       "created_date_time": "2023-04-17T20:12:38Z",
       "description": "Rapid 7 Reset account password UU",
       "id": "00002194",
       "last_action_date_time": "2023-04-17T20:12:46Z",
-      "status": "succeeded"
+      "status": "succeeded",
+      "agent_guid": "example",
+      "resource_location": "example",
+      "endpoint_name": "example",
+      "expired_date_time": "2023-04-30T12:00:00Z",
+      "file_path": "example",
+      "file_sha1": "example",
+      "file_sha256": "example",
+      "file_size": 0,
+      "filename": "example",
+      "image_path": "example",
+      "password": "example",
+      "pid": 0,
+      "sandbox_task_id": "example",
+      "tasks": [],
+      "url": "example.com"
     }
   },
   "sign_out_account": {

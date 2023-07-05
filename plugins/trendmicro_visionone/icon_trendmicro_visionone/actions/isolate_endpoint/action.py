@@ -30,9 +30,7 @@ class IsolateEndpoint(insightconnect_plugin_runtime.Action):
         self.logger.info("Making API Call...")
         multi_resp = []
         for endpoint_identifier in endpoint_identifiers:
-            if endpoint_identifier.get("endpoint_name") and endpoint_identifier.get(
-                "agent_guid"
-            ):
+            if endpoint_identifier.get("endpoint_name") and endpoint_identifier.get("agent_guid"):
                 response = client.isolate_endpoint(
                     pytmv1.EndpointTask(
                         endpointName=endpoint_identifier.get("endpoint_name"),
@@ -40,18 +38,14 @@ class IsolateEndpoint(insightconnect_plugin_runtime.Action):
                         description=endpoint_identifier.get("description", ""),
                     )
                 )
-            elif endpoint_identifier.get(
-                "endpoint_name"
-            ) and not endpoint_identifier.get("agent_guid"):
+            elif endpoint_identifier.get("endpoint_name") and not endpoint_identifier.get("agent_guid"):
                 response = client.isolate_endpoint(
                     pytmv1.EndpointTask(
                         endpointName=endpoint_identifier.get("endpoint_name"),
                         description=endpoint_identifier.get("description", ""),
                     )
                 )
-            elif endpoint_identifier.get("agent_guid") and not endpoint_identifier.get(
-                "endpoint_name"
-            ):
+            elif endpoint_identifier.get("agent_guid") and not endpoint_identifier.get("endpoint_name"):
                 response = client.isolate_endpoint(
                     pytmv1.EndpointTask(
                         agentGuid=endpoint_identifier.get("agent_guid"),
