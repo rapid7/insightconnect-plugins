@@ -1,5 +1,6 @@
-import komand
-from requests import Session, Request
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+from requests import Session, Request, RequestException
 from json import JSONDecodeError
 import mimetypes
 import magic
@@ -107,36 +108,35 @@ class VMRay:
             req = req.prepare()
             resp = self.s.send(req)
             if resp.status_code == 405:
-                raise Exception(
-                    f"An error was received when running {action_name}."
-                    f"Request status code of {resp.status_code} was returned."
-                    "Please make sure connections have been configured correctly"
+                raise PluginException(
+                    cause=f"An error was received when running {action_name}.",
+                    assistance=f"Request status code of {resp.status_code} was returned."
+                    "Please make sure connections have been configured correctly",
+                    data=resp.text,
                 )
             elif resp.status_code != 200:
-                raise Exception(
-                    f"An error was received when running {action_name}."
-                    f" Request status code of {resp.status_code} was returned."
+                raise PluginException(
+                    cause=f"An error was received when running {action_name}.",
+                    assistance=f"Request status code of {resp.status_code} was returned."
                     " Please make sure connections have been configured correctly "
-                    f"as well as the correct input for the action. Response was: {resp.text}"
+                    "as well as the correct input for the action.",
+                    data=resp.text,
                 )
 
-        except Exception as e:
-            self.logger.error(f"An error has occurred: {e}")
-            raise
+        except RequestException as exception:
+            self.logger.error(f"An error has occurred: {exception}")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=str(exception))
 
         try:
             results = resp.json()
             return results
         except JSONDecodeError:
-            raise Exception(
-                f"Error: Received an unexpected response from {action_name}"
-                f"(non-JSON or no response was received). Response was: {resp.text}"
-            )
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=resp.text)
 
     def get_analysis(self, analysis_id, id_type, optional_params):
         if id_type not in ["all", "analysis_id"]:
             endpoint_url = f"/rest/analysis/{id_type}/{analysis_id}"
-        elif id_type is "analysis_id":
+        elif id_type == "analysis_id":
             endpoint_url = f"/rest/analysis/{analysis_id}"
         else:
             endpoint_url = "/rest/analysis"
@@ -145,7 +145,7 @@ class VMRay:
     def get_samples(self, sample_type, sample, optional_params):
         if sample_type not in ["all", "sample_id"]:
             endpoint_url = f"/rest/sample/{sample_type}/{sample}"
-        elif sample_type is "sample_id":
+        elif sample_type == "sample_id":
             endpoint_url = f"/rest/sample/{sample}"
         else:
             endpoint_url = "/rest/sample"
@@ -170,7 +170,7 @@ class VMRay:
 
         return self._call_api("POST", endpoint_url=endpoint_url, params=optional_params, action_name="Submit URL")
 
-    def check_filetype(self, content, filename=None):
+    def check_filetype(self, content):
         """
         :param content: contents of file
         :param filename: name of file being passed in
