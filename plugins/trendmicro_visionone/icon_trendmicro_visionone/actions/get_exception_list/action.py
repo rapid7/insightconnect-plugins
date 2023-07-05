@@ -21,16 +21,14 @@ class GetExceptionList(insightconnect_plugin_runtime.Action):
             output=GetExceptionListOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):  # pylint: disable=unused-argument
         # Get Connection Client
         client = self.connection.client
         new_exceptions = []
         # Make Action API Call
         self.logger.info("Making API Call...")
         try:
-            client.consume_exception_list(
-                lambda exception: new_exceptions.append(exception.dict())
-            )
+            client.consume_exception_list(lambda exception: new_exceptions.append(exception.dict()))
         except Exception as error:
             raise PluginException(
                 cause="Consume Exception List failed with following exception.",
@@ -40,9 +38,7 @@ class GetExceptionList(insightconnect_plugin_runtime.Action):
         # Load json objects to list
         exception_objects = []
         for new_exception in new_exceptions:
-            new_exception["description"] = (
-                "" if not new_exception["description"] else new_exception["description"]
-            )
+            new_exception["description"] = "" if not new_exception["description"] else new_exception["description"]
             new_exception = json.dumps(new_exception)
             exception_objects.append(json.loads(new_exception))
         # Return results

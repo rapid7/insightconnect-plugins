@@ -1,14 +1,17 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
-from .mock import mock_connection, mock_action, mock_params
+
 from insightconnect_plugin_runtime.exceptions import PluginException
+
+from icon_trendmicro_visionone.actions import RemoveFromExceptionList
+from mock import mock_connection, mock_params
 
 
 class TestRemoveFromExceptionList(TestCase):
     def setUp(self):
-        self.action_name = "RemoveFromExceptionList"
+        self.action = RemoveFromExceptionList()
         self.connection = mock_connection()
-        self.action = mock_action(self.connection, self.action_name)
+        self.action.connection = self.connection
         self.mock_params = mock_params("remove_from_exception_list")
 
     def test_integration_remove_from_exception_list(self):
@@ -24,8 +27,6 @@ class TestRemoveFromExceptionList(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_remove_from_exception_list_failure(self):
-        self.action.connection.client.remove_from_exception_list = MagicMock(
-            side_effect=PluginException
-        )
+        self.action.connection.client.remove_from_exception_list = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

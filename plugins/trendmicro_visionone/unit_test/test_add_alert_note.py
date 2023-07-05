@@ -1,14 +1,17 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
-from .mock import mock_connection, mock_action, mock_params
+
 from insightconnect_plugin_runtime.exceptions import PluginException
+
+from icon_trendmicro_visionone.actions import AddAlertNote
+from mock import mock_connection, mock_params
 
 
 class TestAddAlertNote(TestCase):
     def setUp(self):
-        self.action_name = "AddAlertNote"
+        self.action = AddAlertNote()
         self.connection = mock_connection()
-        self.action = mock_action(self.connection, self.action_name)
+        self.action.connection = self.connection
         self.mock_params = mock_params("add_alert_note")
 
     def test_integration_add_alert_note(self):
@@ -24,8 +27,6 @@ class TestAddAlertNote(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_add_alert_note_failure(self):
-        self.action.connection.client.add_alert_note = MagicMock(
-            side_effect=PluginException
-        )
+        self.action.connection.client.add_alert_note = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

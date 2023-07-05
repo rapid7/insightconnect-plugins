@@ -61,9 +61,7 @@ class AddToExceptionList(insightconnect_plugin_runtime.Action):
                     data=response.errors,
                 )
             items = response.response.dict().get("items")[0]
-            items["task_id"] = (
-                "None" if items.get("task_id") is None else items["task_id"]
-            )
+            items["task_id"] = "None" if items.get("task_id") is None else items["task_id"]
             multi_resp.append(items)
         # Return results
         self.logger.info("Returning Results...")
