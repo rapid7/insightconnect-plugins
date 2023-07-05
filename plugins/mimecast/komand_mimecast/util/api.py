@@ -24,6 +24,7 @@ from komand_mimecast.util.constants import (
     BASIC_ASSISTANCE_MESSAGE,
     FAIL_FIELD,
     STATUS_FIELD,
+    DEVELOPER_KEY_ERROR,
 )
 from komand_mimecast.util.exceptions import ApiClientException
 from komand_mimecast.util.util import Utils
@@ -100,19 +101,17 @@ class MimecastAPI:
         request = requests.request(
             method="POST", url=f"{self.url}{uri}", headers=self._prepare_header(uri), data=str(payload)
         )
-
-        try:
-            response = request.json()
-        except json.decoder.JSONDecodeError:
+        if "attachment" in request.headers.get("Content-Disposition", ""):
             combined_json_list = self._handle_zip_file(request)
             return combined_json_list, request.headers, request.status_code
 
+        response = request.json()
         status_code = response.get(META_FIELD).get(STATUS_FIELD)
         try:
             if response.get(FAIL_FIELD):
-                self._handle_error_response(response)
-            self._handle_status_code_response(response, status_code)
+                self._handle_siem_logs_error_response(response, status_code)
         except PluginException as error:
+            status_code = error.status_code if isinstance(error, ApiClientException) else status_code
             raise ApiClientException(
                 cause=error.cause,
                 assistance=error.assistance,
@@ -120,6 +119,7 @@ class MimecastAPI:
                 preset=error.preset,
                 status_code=status_code,
             )
+        raise ApiClientException(preset=PluginException.Preset.UNKNOWN, data=response, status_code=status_code)
 
     def _handle_status_code_response(self, response: requests.request, status_code: int):
         if status_code == 403:
@@ -211,6 +211,47 @@ class MimecastAPI:
                 else:
                     self.logger.error(response)
                     raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response)
+
+    def _handle_siem_logs_error_response(self, response: dict, status_code: int):
+        for errors in response.get(FAIL_FIELD, []):
+            for error in errors.get("errors", []):
+                if error.get(CODE) == XDK_BINDING_EXPIRED_ERROR:
+                    raise ApiClientException(
+                        cause=ERROR_CASES.get(XDK_BINDING_EXPIRED_ERROR),
+                        assistance="Please provide a valid AccessKey.",
+                        data=response,
+                        status_code=401,
+                    )
+                elif error.get(CODE) == DEVELOPER_KEY_ERROR:
+                    raise ApiClientException(
+                        cause=ERROR_CASES.get(error.get(CODE)),
+                        assistance=BASIC_ASSISTANCE_MESSAGE,
+                        data=response,
+                        status_code=401,
+                    )
+                elif error.get(CODE) in ERROR_CASES:
+                    raise ApiClientException(
+                        cause=ERROR_CASES.get(error.get(CODE)),
+                        assistance=BASIC_ASSISTANCE_MESSAGE,
+                        data=response,
+                        status_code=400,
+                    )
+                elif error.get(CODE) == FIELD_VALIDATION_ERROR:
+                    raise ApiClientException(
+                        cause=f"This {error.get('field')} field is mandatory; it cannot be NULL.",
+                        assistance=BASIC_ASSISTANCE_MESSAGE,
+                        data=response,
+                        status_code=400,
+                    )
+                elif error.get(CODE) == VALIDATION_BLANK_ERROR:
+                    raise ApiClientException(
+                        cause=f"This {error.get('field')} field, if present, cannot be blank or empty.",
+                        assistance=BASIC_ASSISTANCE_MESSAGE,
+                        data=response,
+                        status_code=400,
+                    )
+                else:
+                    self._handle_status_code_response(response, status_code)
 
     def _handle_rest_call(  # noqa: C901
         self,
