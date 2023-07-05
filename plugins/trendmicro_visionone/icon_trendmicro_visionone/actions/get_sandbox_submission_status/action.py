@@ -39,18 +39,12 @@ class GetSandboxSubmissionStatus(insightconnect_plugin_runtime.Action):
         return {
             Output.ACTION: response.response.dict().get("action", ""),
             Output.ARGUMENTS: response.response.dict().get("arguments", ""),
-            Output.CREATED_DATE_TIME: response.response.dict().get(
-                "created_date_time", ""
-            ),
+            Output.CREATED_DATE_TIME: response.response.dict().get("created_date_time", ""),
             Output.DIGEST: response.response.dict().get("digest", {}),
             Output.ID: response.response.dict().get("id", ""),
             Output.IS_CACHED: response.response.dict().get("is_cached", False),
-            Output.LAST_ACTION_DATE_TIME: response.response.dict().get(
-                "last_action_date_time", ""
-            ),
-            Output.RESOURCE_LOCATION: response.response.dict().get(
-                "resource_location", ""
-            ),
+            Output.LAST_ACTION_DATE_TIME: response.response.dict().get("last_action_date_time", ""),
+            Output.RESOURCE_LOCATION: response.response.dict().get("resource_location", ""),
             Output.STATUS: response.response.dict().get("status", ""),
             Output.ERROR: response.response.dict().get("error", {}),
         }

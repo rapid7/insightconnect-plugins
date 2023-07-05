@@ -39,23 +39,15 @@ class GetTaskResult(insightconnect_plugin_runtime.Action):
         return {
             Output.ACTION: response.response.dict().get("action", ""),
             Output.ACCOUNT: response.response.dict().get("account", ""),
-            Output.CREATED_DATE_TIME: response.response.dict().get(
-                "created_date_time", ""
-            ),
+            Output.CREATED_DATE_TIME: response.response.dict().get("created_date_time", ""),
             Output.AGENT_GUID: response.response.dict().get("agent_guid", ""),
             Output.ID: response.response.dict().get("id", ""),
-            Output.LAST_ACTION_DATE_TIME: response.response.dict().get(
-                "last_action_date_time", ""
-            ),
-            Output.RESOURCE_LOCATION: response.response.dict().get(
-                "resource_location", ""
-            ),
+            Output.LAST_ACTION_DATE_TIME: response.response.dict().get("last_action_date_time", ""),
+            Output.RESOURCE_LOCATION: response.response.dict().get("resource_location", ""),
             Output.STATUS: response.response.dict().get("status", ""),
             Output.DESCRIPTION: response.response.dict().get("description", ""),
             Output.ENDPOINT_NAME: response.response.dict().get("endpoint_name", ""),
-            Output.EXPIRED_DATE_TIME: response.response.dict().get(
-                "expired_date_time", ""
-            ),
+            Output.EXPIRED_DATE_TIME: response.response.dict().get("expired_date_time", ""),
             Output.FILE_PATH: response.response.dict().get("file_path", ""),
             Output.FILE_SHA1: response.response.dict().get("file_sha1", ""),
             Output.FILE_SHA256: response.response.dict().get("file_sha256", ""),

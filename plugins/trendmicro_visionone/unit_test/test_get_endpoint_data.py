@@ -1,14 +1,17 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
-from .mock import mock_connection, mock_action, mock_params
+
 from insightconnect_plugin_runtime.exceptions import PluginException
+
+from icon_trendmicro_visionone.actions import GetEndpointData
+from mock import mock_connection, mock_params
 
 
 class TestGetEndpointData(TestCase):
     def setUp(self):
-        self.action_name = "GetEndpointData"
+        self.action = GetEndpointData()
         self.connection = mock_connection()
-        self.action = mock_action(self.connection, self.action_name)
+        self.action.connection = self.connection
         self.mock_params = mock_params("get_endpoint_data")
 
     def test_integration_get_endpoint_data(self):
@@ -24,8 +27,6 @@ class TestGetEndpointData(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_get_endpoint_data_failure(self):
-        self.action.connection.client.consume_endpoint_data = MagicMock(
-            side_effect=PluginException
-        )
+        self.action.connection.client.consume_endpoint_data = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])
