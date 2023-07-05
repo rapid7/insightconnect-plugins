@@ -1,14 +1,17 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
-from .mock import mock_connection, mock_action, mock_params
+
 from insightconnect_plugin_runtime.exceptions import PluginException
+
+from icon_trendmicro_visionone.actions import CollectFile
+from mock import mock_connection, mock_params
 
 
 class TestCollectFile(TestCase):
     def setUp(self):
-        self.action_name = "CollectFile"
+        self.action = CollectFile()
         self.connection = mock_connection()
-        self.action = mock_action(self.connection, self.action_name)
+        self.action.connection = self.connection
         self.mock_params = mock_params("collect_file")
 
     def test_integration_collect_file(self):
@@ -24,8 +27,6 @@ class TestCollectFile(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_collect_file_failure(self):
-        self.action.connection.client.collect_file = MagicMock(
-            side_effect=PluginException
-        )
+        self.action.connection.client.collect_file = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

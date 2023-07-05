@@ -23,9 +23,7 @@ class PollAlertList(insightconnect_plugin_runtime.Trigger):
         client = self.connection.client
         # Get Action Parameters
         start_date_time = params.get(Input.START_DATE_TIME)
-        end_date_time = datetime.utcnow().strftime(
-            "%Y-%m-%dT%H:%M:%SZ"
-        )  # Current time in UTC
+        end_date_time = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")  # Current time in UTC
 
         while True:
             new_alerts = []
@@ -54,6 +52,4 @@ class PollAlertList(insightconnect_plugin_runtime.Trigger):
             time.sleep(params.get(Input.INTERVAL, 1800))
             # Update start_date_time and end_date_time for the next iteration
             start_date_time = end_date_time
-            end_date_time = datetime.utcnow().strftime(
-                "%Y-%m-%dT%H:%M:%SZ"
-            )  # Current time in UTC
+            end_date_time = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")  # Current time in UTC

@@ -372,7 +372,7 @@ types:
       type: string
       description: Email address
       required: false
-      example: example@example.com
+      example: user@example.com
     description:
       title: Description
       type: string
