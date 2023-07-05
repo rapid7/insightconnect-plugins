@@ -1,14 +1,17 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
-from .mock import mock_connection, mock_action, mock_params
+
 from insightconnect_plugin_runtime.exceptions import PluginException
+
+from icon_trendmicro_visionone.actions import SubmitUrlsToSandbox
+from mock import mock_connection, mock_params
 
 
 class TestSubmitUrlsToSandbox(TestCase):
     def setUp(self):
-        self.action_name = "SubmitUrlsToSandbox"
+        self.action = SubmitUrlsToSandbox()
         self.connection = mock_connection()
-        self.action = mock_action(self.connection, self.action_name)
+        self.action.connection = self.connection
         self.mock_params = mock_params("submit_urls_to_sandbox")
 
     def test_integration_submit_urls_to_sandbox(self):
@@ -24,8 +27,6 @@ class TestSubmitUrlsToSandbox(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_submit_urls_to_sandbox_failure(self):
-        self.action.connection.client.submit_urls_to_sandbox = MagicMock(
-            side_effect=PluginException
-        )
+        self.action.connection.client.submit_urls_to_sandbox = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])
