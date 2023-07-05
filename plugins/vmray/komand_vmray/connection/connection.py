@@ -1,11 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 from .schema import ConnectionSchema
 
 # Custom imports below
 from ..util.api import VMRay
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.api = None
@@ -16,4 +17,8 @@ class Connection(komand.Connection):
         self.api = VMRay(url=params.get("url"), api_key=_api_key, logger=self.logger)
 
     def test(self):
-        self.api.test_call()
+        try:
+            self.api.call_api("GET", "/rest/system_info")
+        except PluginException as exception:
+            raise ConnectionTestException(cause=exception.cause, assistance=exception.assistance, data=exception.data)
+        return {"success": True}

@@ -1,0 +1,28 @@
+{
+    "parameters": [
+        [
+            "get_analysis_405",
+            {
+                "id": "405",
+                "id_type": "analysis_id"
+            },
+            {
+                "cause": "An error was received when running Get Analysis.",
+                "assistance": "Request status code of 405 was returned.Please make sure connections have been configured correctly",
+                "data": "{'error_msg': 'Method not allowed', 'result': 'error'}"
+            }
+        ],
+        [
+            "get_analysis_401",
+            {
+                "id": "401",
+                "id_type": "analysis_id"
+            },
+            {
+                "cause": "An error was received when running Get Analysis.",
+                "assistance": "Request status code of 401 was returned. Please make sure connections have been configured correctly as well as the correct input for the action.",
+                "data": "{'error_msg': 'Invalid authentication', 'result': 'error'}"
+            }
+        ]
+    ]
+}

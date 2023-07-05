@@ -1,10 +1,10 @@
-import komand
-from .schema import GetSamplesInput, GetSamplesOutput
+import insightconnect_plugin_runtime
+from .schema import GetSamplesInput, GetSamplesOutput, Output
 
 # Custom imports below
 
 
-class GetSamples(komand.Action):
+class GetSamples(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_samples",
@@ -21,5 +21,7 @@ class GetSamples(komand.Action):
         )
 
         resp = self.connection.api.get_samples(sample_type, sample, optional_params)
-        clean_data = komand.helper.clean(resp["data"])
-        return {"results": clean_data}
+        clean_data = insightconnect_plugin_runtime.helper.clean(resp.get("data", []))
+        if isinstance(clean_data, dict):
+            clean_data = [clean_data]
+        return {Output.RESULTS: clean_data}
