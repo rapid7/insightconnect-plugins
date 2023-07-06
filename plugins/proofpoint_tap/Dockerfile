@@ -1,16 +1,7 @@
-FROM rapid7/insightconnect-python-3-38-slim-plugin:4
-# The three supported python parent images are:
-# - komand/python-2-plugin
-# - komand/python-3-plugin
-# - komand/python-pypy3-plugin
-#
+FROM rapid7/insightconnect-python-3-38-plugin:5
+
 LABEL organization=rapid7
 LABEL sdk=python
-
-# Add any custom package dependencies here
-# NOTE: Add pip packages to requirements.txt
-
-# End package dependencies
 
 # Add source code
 WORKDIR /python/src

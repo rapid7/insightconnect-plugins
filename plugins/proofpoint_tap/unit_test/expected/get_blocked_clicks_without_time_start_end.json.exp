@@ -1,0 +1,24 @@
+{
+  "results": {
+    "clicksBlocked": [
+      {
+        "GUID": "X7sh5TwRxBZOAXb-d8ESyugsIdtfv3u",
+        "classification": "malware",
+        "clickIP": "198.51.100.1",
+        "clickTime": "2023-06-13T09:00:00.000Z",
+        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+        "messageID": "<user@example.com>",
+        "recipient": "user@example.com",
+        "sender": "user@example.com",
+        "senderIP": "198.51.100.1",
+        "threatID": "f1f23718b35b8db3db005cd498ff0812e53fe994537567ff0a...",
+        "threatStatus": "active",
+        "threatTime": "2021-04-20T21:08:38.000Z",
+        "threatURL": "https://example.com",
+        "url": "https://example.com",
+        "userAgent": "Mozilla/5.0"
+      }
+    ],
+    "queryEndTime": "2023-06-13T10:00:00.000Z"
+  }
+}

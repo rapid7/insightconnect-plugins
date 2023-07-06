@@ -12,7 +12,7 @@ class Input:
     
 
 class Output:
-    RESULTS = "results"
+    URLS = "urls"
     
 
 class UrlDecodeInput(insightconnect_plugin_runtime.Input):
@@ -47,76 +47,17 @@ class UrlDecodeOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "results": {
-      "$ref": "#/definitions/decoded_urls",
-      "title": "Results",
+    "urls": {
+      "type": "array",
+      "title": "URLs",
       "description": "Decoded URLs",
+      "items": {
+        "$ref": "#/definitions/urls"
+      },
       "order": 1
     }
   },
-  "required": [
-    "results"
-  ],
   "definitions": {
-    "decoded_urls": {
-      "type": "object",
-      "title": "decoded_urls",
-      "properties": {
-        "urls": {
-          "type": "array",
-          "title": "Urls",
-          "description": "Urls",
-          "items": {
-            "$ref": "#/definitions/urls"
-          },
-          "order": 1
-        }
-      },
-      "definitions": {
-        "urls": {
-          "type": "object",
-          "title": "urls",
-          "properties": {
-            "clusterName": {
-              "type": "string",
-              "title": "Cluster Name",
-              "description": "Cluster Name",
-              "order": 5
-            },
-            "decodedUrl": {
-              "type": "string",
-              "title": "Decoded URL",
-              "description": "Decoded URL",
-              "order": 1
-            },
-            "encodedUrl": {
-              "type": "string",
-              "title": "Encoded URL",
-              "description": "Encoded URL",
-              "order": 2
-            },
-            "messageGuid": {
-              "type": "string",
-              "title": "Message GUID",
-              "description": "Message GUID",
-              "order": 4
-            },
-            "recipientEmail": {
-              "type": "string",
-              "title": "Recipient Email",
-              "description": "Recipient Email",
-              "order": 6
-            },
-            "success": {
-              "type": "boolean",
-              "title": "Success",
-              "description": "Success",
-              "order": 3
-            }
-          }
-        }
-      }
-    },
     "urls": {
       "type": "object",
       "title": "urls",
@@ -124,8 +65,8 @@ class UrlDecodeOutput(insightconnect_plugin_runtime.Output):
         "clusterName": {
           "type": "string",
           "title": "Cluster Name",
-          "description": "Cluster Name",
-          "order": 5
+          "description": "Cluster name",
+          "order": 6
         },
         "decodedUrl": {
           "type": "string",
@@ -139,17 +80,23 @@ class UrlDecodeOutput(insightconnect_plugin_runtime.Output):
           "description": "Encoded URL",
           "order": 2
         },
+        "error": {
+          "type": "string",
+          "title": "Error",
+          "description": "Error details if any error occurs",
+          "order": 4
+        },
         "messageGuid": {
           "type": "string",
           "title": "Message GUID",
           "description": "Message GUID",
-          "order": 4
+          "order": 5
         },
         "recipientEmail": {
           "type": "string",
           "title": "Recipient Email",
-          "description": "Recipient Email",
-          "order": 6
+          "description": "Recipient email",
+          "order": 7
         },
         "success": {
           "type": "boolean",

@@ -1,0 +1,70 @@
+{
+  "events": [
+    {
+      "GUID": "9de5069c5afe602b2ea0a04b66beb2c0",
+      "classification": "malware",
+      "clickIP": "198.51.100.1",
+      "clickTime": "2021-03-20T00:00:00.000Z",
+      "eventType": "clicksBlocked",
+      "id": "9de5069c5afe602b2ea0a04b66beb2c1",
+      "messageID": "<user@example.com>",
+      "messageParts": [
+        {
+          "contentType": "text/plain",
+          "disposition": "inline",
+          "filename": "file0.txt",
+          "md5": "9de5069c5afe602b2ea0a04b66beb2c0",
+          "oContentType": "text/plain",
+          "sandboxStatus": "unsupported",
+          "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+        },
+        {
+          "contentType": "text/plain",
+          "disposition": "inline",
+          "filename": "file1.txt",
+          "md5": "9de5069c5afe602b2ea0a04b66beb2c1",
+          "oContentType": "text/plain",
+          "sandboxStatus": "unsupported",
+          "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+        }
+      ],
+      "recipient": "user@example.com",
+      "sender": "user@example.com",
+      "senderIP": "198.51.100.1",
+      "threatID": "9de5069c5afe602b2ea0a04b66beb2c2",
+      "threatStatus": "active",
+      "threatTime": "2021-03-20T00:00:00.000Z",
+      "threatURL": "https://example.com/9de5069c5afe602b2ea0a04b66beb2c2",
+      "url": "https://example.com",
+      "userAgent": "Mozilla/5.0"
+    },
+    {
+      "GUID": "9de5069c5afe602b2ea0a04b66beb2c3",
+      "classification": "malware",
+      "clickIP": "198.51.100.1",
+      "clickTime": "2021-03-20T00:00:00.000Z",
+      "eventType": "clicksPermitted",
+      "id": "9de5069c5afe602b2ea0a04b66beb2c4",
+      "messageID": "<user@example.com>",
+      "recipient": "user@example.com",
+      "sender": "user@example.com",
+      "senderIP": "198.51.100.1",
+      "threatID": "9de5069c5afe602b2ea0a04b66beb2c5",
+      "threatStatus": "falsePositive",
+      "threatTime": "2021-03-20T00:00:00.000Z",
+      "threatURL": "https://example.com/9de5069c5afe602b2ea0a04b66beb2c5",
+      "url": "https://example.com",
+      "userAgent": "Mozilla/5.0"
+    }
+  ],
+  "state": {
+    "last_collection_date": "2023-04-04T07:59:00+00:00",
+    "status_code": 200,
+    "next_page_index": 1,
+    "previous_logs_hashes": [
+      "1604441c3c213eb3d2efc9557cae93a5796fa5a8",
+      "922322e2f2f10345c3ea5c06d87b73c5ab13f945"
+    ]
+  },
+  "hasMorePages": false
+}

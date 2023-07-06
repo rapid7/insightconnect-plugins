@@ -14,8 +14,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
-        service_principal = params.get(Input.SERVICE_PRINCIPAL, {})
-        self.client = ProofpointTapApi(service_principal, params.get(Input.SECRET))
+        self.client = ProofpointTapApi(
+            params.get(Input.SERVICEPRINCIPAL, {}), params.get(Input.SECRET, {}), self.logger
+        )
 
     def test(self):
         if self.client.authorized:

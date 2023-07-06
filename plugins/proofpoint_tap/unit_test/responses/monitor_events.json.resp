@@ -1,0 +1,131 @@
+{
+  "clicksBlocked": [
+    {
+      "GUID": "9de5069c5afe602b2ea0a04b66beb2c0",
+      "classification": "malware",
+      "clickIP": "198.51.100.1",
+      "clickTime": "2021-03-20T00:00:00.000Z",
+      "id": "9de5069c5afe602b2ea0a04b66beb2c1",
+      "messageID": "<user@example.com>",
+      "messageParts": [
+        {
+          "contentType": "text/plain",
+          "disposition": "inline",
+          "filename": "file1.txt",
+          "md5": "9de5069c5afe602b2ea0a04b66beb2c1",
+          "oContentType": "text/plain",
+          "sandboxStatus": "unsupported",
+          "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+        },
+        {
+          "contentType": "text/plain",
+          "disposition": "inline",
+          "filename": "file0.txt",
+          "md5": "9de5069c5afe602b2ea0a04b66beb2c0",
+          "oContentType": "text/plain",
+          "sandboxStatus": "unsupported",
+          "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+        }
+      ],
+      "recipient": "user@example.com",
+      "sender": "user@example.com",
+      "senderIP": "198.51.100.1",
+      "threatID": "9de5069c5afe602b2ea0a04b66beb2c2",
+      "threatStatus": "active",
+      "threatTime": "2021-03-20T00:00:00.000Z",
+      "threatURL": "https://example.com/9de5069c5afe602b2ea0a04b66beb2c2",
+      "url": "https://example.com",
+      "userAgent": "Mozilla/5.0"
+    }
+  ],
+  "clicksPermitted": [
+    {
+      "GUID": "9de5069c5afe602b2ea0a04b66beb2c3",
+      "classification": "malware",
+      "clickIP": "198.51.100.1",
+      "clickTime": "2021-03-20T00:00:00.000Z",
+      "id": "9de5069c5afe602b2ea0a04b66beb2c4",
+      "messageID": "<user@example.com>",
+      "recipient": "user@example.com",
+      "sender": "user@example.com",
+      "senderIP": "198.51.100.1",
+      "threatID": "9de5069c5afe602b2ea0a04b66beb2c5",
+      "threatStatus": "falsePositive",
+      "threatTime": "2021-03-20T00:00:00.000Z",
+      "threatURL": "https://example.com/9de5069c5afe602b2ea0a04b66beb2c5",
+      "url": "https://example.com",
+      "userAgent": "Mozilla/5.0"
+    }
+  ],
+  "messagesBlocked": [
+    {
+      "threatsInfoMap": [
+        {
+          "threat": "Example Threat",
+          "threatID": "9de5069c5afe602b2ea0a04b66beb2c6",
+          "threatStatus": "active",
+          "threatTime": "2021-03-20T00:00:00.000Z",
+          "threatType": "url",
+          "threatUrl": "9de5069c5afe602b2ea0a04b66beb2c7",
+          "classification": "phish"
+        }
+      ],
+      "spamScore": 100,
+      "toAddresses": [
+        "user@example.com"
+      ],
+      "subject": "Mail delivery failed: returning message to sender",
+      "fromAddress": [
+        "user@example.com"
+      ],
+      "quarantineFolder": "Phish"
+    }
+  ],
+  "messagesDelivered": [
+    {
+      "threatsInfoMap": [
+        {
+          "threat": "Example Threat",
+          "threatID": "9de5069c5afe602b2ea0a04b66beb2c8",
+          "threatStatus": "cleared",
+          "threatTime": "2021-03-20T00:00:00.000Z",
+          "threatType": "url",
+          "threatUrl": "https://example.com/9de5069c5afe602b2ea0a04b66beb2c8",
+          "classification": "phish"
+        }
+      ],
+      "spamScore": 100,
+      "toAddresses": [
+        "user@example.com"
+      ],
+      "subject": "Mail delivery failed: returning message to sender",
+      "fromAddress": [
+        "user@example.com"
+      ],
+      "quarantineFolder": "Phish"
+    },
+        {
+      "threatsInfoMap": [
+        {
+          "threat": "Example Threat",
+          "threatID": "9de5069c5afe602b2ea0a04b66beb2c9",
+          "threatStatus": "cleared",
+          "threatTime": "2021-03-20T00:00:00.000Z",
+          "threatType": "url",
+          "threatUrl": "https://example.com/9de5069c5afe602b2ea0a04b66beb2c9",
+          "classification": "phish"
+        }
+      ],
+      "spamScore": 100,
+      "toAddresses": [
+        "user@example.com"
+      ],
+      "subject": "Mail delivery failed: returning message to sender",
+      "fromAddress": [
+        "user@example.com"
+      ],
+      "quarantineFolder": "Phish"
+    }
+  ],
+  "queryEndTime": "2023-04-04T07:59:00Z"
+}

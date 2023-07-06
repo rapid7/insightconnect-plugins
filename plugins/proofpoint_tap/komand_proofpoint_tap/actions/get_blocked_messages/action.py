@@ -4,6 +4,7 @@ from .schema import GetBlockedMessagesInput, GetBlockedMessagesOutput, Input, Ou
 # Custom imports below
 from komand_proofpoint_tap.util.api import Endpoint
 from komand_proofpoint_tap.util.util import SiemUtils
+from komand_proofpoint_tap.util.helpers import clean
 
 
 class GetBlockedMessages(insightconnect_plugin_runtime.Action):
@@ -19,8 +20,8 @@ class GetBlockedMessages(insightconnect_plugin_runtime.Action):
         self.connection.client.check_authorization()
 
         query_params = {"format": "JSON"}
-        threat_type = params.get(Input.THREAT_TYPE)
-        threat_status = params.get(Input.THREAT_STATUS)
+        threat_type = params.get(Input.THREATTYPE)
+        threat_status = params.get(Input.THREATSTATUS)
 
         if threat_type != "all":
             query_params["threatType"] = threat_type
@@ -29,10 +30,13 @@ class GetBlockedMessages(insightconnect_plugin_runtime.Action):
 
         response = self.connection.client.siem_action(
             Endpoint.get_blocked_messages(),
-            SiemUtils.prepare_time_range(params.get(Input.TIME_START), params.get(Input.TIME_END), query_params),
+            SiemUtils.prepare_time_range(params.get(Input.TIMESTART), params.get(Input.TIMEEND), query_params),
         )
         blocked_messages = response.get("messagesBlocked", [])
-        if params.get(Input.SUBJECT) and blocked_messages:
-            response["messagesBlocked"] = SiemUtils.search_subject(blocked_messages, params.get(Input.SUBJECT))
+        subject = params.get(Input.SUBJECT)
+        if subject and blocked_messages:
+            blocked_messages = SiemUtils.search_subject(blocked_messages, subject)
 
-        return {Output.RESULTS: insightconnect_plugin_runtime.helper.clean(response)}
+        response["messagesBlocked"] = clean(blocked_messages)
+
+        return {Output.RESULTS: response}
