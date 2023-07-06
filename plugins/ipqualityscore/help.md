@@ -37,9 +37,9 @@ This action is used to get URL reputation data.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fast|boolean|False|False|When enabled, the API will provide quicker response times using lighter checks and analysis. This setting defaults to False.|None|None|
-|strictness|integer|None|True|How strict should we scan this URL? Stricter checks may provide a higher false-positive rate. We recommend defaulting to level "0", the lowest strictness setting, and increasing to "1" or "2" depending on your levels of abuse.|[0, 1, 2]|None|
-|url|string|None|True|URL for which information is desired|None|None|
+|fast|boolean|False|False|When enabled, the API will provide quicker response times using lighter checks and analysis. This setting defaults to False.|None|False|
+|strictness|integer|0|True|How strict should we scan this URL? Stricter checks may provide a higher false-positive rate. We recommend defaulting to level "0", the lowest strictness setting, and increasing to "1" or "2" depending on your levels of abuse.|[0, 1, 2]|0|
+|url|string|None|True|URL for which information is desired|None|https://example.com|
 
 Example input:
 
@@ -115,9 +115,9 @@ This action is used to get phone number reputation data.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|country|string|None|False|You can optionally provide us with the default country or countries(comma separated) this phone number is suspected to be associated with. Our system will prefer to use a country on this list for verification or will require a country to be specified in the event the phone number is less than 10 digits.|None|None|
-|phone|string|None|True|Phone for which information is desired|None|None|
-|strictness|integer|0|True|How in depth (strict) do you want this query to be? Higher values take longer to process and may provide a higher false-positive rate. We recommend starting at "0", the lowest strictness setting, and increasing to "1" or "2" depending on your levels of fraud.|[0, 1, 2]|None|
+|country|string|None|False|You can optionally provide us with the default country or countries(comma separated) this phone number is suspected to be associated with. Our system will prefer to use a country on this list for verification or will require a country to be specified in the event the phone number is less than 10 digits.|None|US|
+|phone|string|None|True|Phone for which information is desired|None|+918765433210|
+|strictness|integer|0|True|How in depth (strict) do you want this query to be? Higher values take longer to process and may provide a higher false-positive rate. We recommend starting at "0", the lowest strictness setting, and increasing to "1" or "2" depending on your levels of fraud.|[0, 1, 2]|0|
 
 Example input:
 
@@ -213,20 +213,20 @@ Example output:
 
 #### IP Address Reputation
 
-This action is used to get  IP address reputation data.
+This action is used to get IP address reputation data.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|allow_public_access_points|boolean|False|False|Bypasses certain checks for IP addresses from education and research institutions, schools, and some corporate connections to better accommodate audiences that frequently use public connections.|None|None|
-|fast|boolean|False|False|When this parameter is enabled our API will not perform certain forensic checks that take longer to process. Enabling this feature greatly increases the API speed without much impact on accuracy.|None|None|
-|ipAddress|string|None|True|IP address for which information is desired|None|None|
-|lighter_penalties|boolean|False|False|Skip some blacklists which can cause false-positives for sensitive audiences.|None|None|
-|mobile|boolean|False|False|You can optionally specify that this lookup should be treated as a mobile device. Recommended for mobile lookups that do not have a user agent attached to the request.|None|None|
-|strictness|integer|0|True|How in depth (strict) do you want this query to be? Higher values take longer to process and may provide a higher false-positive rate. We recommend starting at "0", the lowest strictness setting, and increasing to "1" or "2" depending on your levels of fraud.|[0, 1, 2]|None|
-|user_agent|string|None|False|You can optionally provide us with the user agent string (browser). This allows us to run additional checks to see if the user is a bot or running an invalid browser. This allows us to evaluate the risk of the user as judged in the "fraud_score".|None|None|
-|user_language|string|None|False|You can optionally provide us with the user's language header. This allows us to evaluate the risk of the user as judged in the "fraud_score".|None|None|
+|Name|Type|Default|Required|Description|Enum| Example |
+|----|----|-------|--------|-----------|----|---------|
+|allow_public_access_points|boolean|False|False|Bypasses certain checks for IP addresses from education and research institutions, schools, and some corporate connections to better accommodate audiences that frequently use public connections.|None| False   |
+|fast|boolean|False|False|When this parameter is enabled our API will not perform certain forensic checks that take longer to process. Enabling this feature greatly increases the API speed without much impact on accuracy.|None| False   |
+|ipAddress|string|None|True|IP address for which information is desired|None| 1.1.1.1 |
+|lighter_penalties|boolean|False|False|Skip some blacklists which can cause false-positives for sensitive audiences.|None| False   |
+|mobile|boolean|False|False|You can optionally specify that this lookup should be treated as a mobile device. Recommended for mobile lookups that do not have a user agent attached to the request.|None| False   |
+|strictness|integer|0|True|How in depth (strict) do you want this query to be? Higher values take longer to process and may provide a higher false-positive rate. We recommend starting at "0", the lowest strictness setting, and increasing to "1" or "2" depending on your levels of fraud.|[0, 1, 2]| 0       |
+|user_agent|string|None|False|You can optionally provide us with the user agent string (browser). This allows us to run additional checks to see if the user is a bot or running an invalid browser. This allows us to evaluate the risk of the user as judged in the "fraud_score".|None| Browser |
+|user_language|string|None|False|You can optionally provide us with the user's language header. This allows us to evaluate the risk of the user as judged in the "fraud_score".|None| English |
 
 Example input:
 
@@ -313,18 +313,18 @@ This action is used to get email address reputation data.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|abuse_strictness|integer|0|True|Set the strictness level for machine learning pattern recognition of abusive email addresses with the "recent_abuse" data point.|[0, 1, 2]|None|
-|emailAddress|string|None|True|Email address for which information is desired|None|None|
-|fast|boolean|False|False|When this parameter is enabled our API will not perform an SMTP check with the mail service provider, which greatly increases the API speed.|None|None|
-|suggest_domain|boolean|False|False|Force analyze if the email addresses domain has a typo and should be corrected to a popular mail service.|None|None|
-|timeout|integer|None|False|Maximum number of seconds to wait for a reply from a mail service provider. If your implementation requirements do not need an immediate response, we recommend bumping this value to 20.|None|None|
+|abuse_strictness|integer|0|True|Set the strictness level for machine learning pattern recognition of abusive email addresses with the "recent_abuse" data point.|[0, 1, 2]|0|
+|emailAddress|string|None|True|Email address for which information is desired|None|abc@gmail.com|
+|fast|boolean|False|False|When this parameter is enabled our API will not perform an SMTP check with the mail service provider, which greatly increases the API speed.|None|False|
+|suggest_domain|boolean|False|False|Force analyze if the email addresses domain has a typo and should be corrected to a popular mail service.|None|False|
+|timeout|integer|None|False|Maximum number of seconds to wait for a reply from a mail service provider. If your implementation requirements do not need an immediate response, we recommend bumping this value to 20.|None|5|
 
 Example input:
 
 ```
 {
   "Abuse Strictness": 0,
-  "Email Address": "abc@gmail.com\n",
+  "Email Address": "abc@gmail.com",
   "Suggest Domain": false,
   "Timeout": 0,
   "fast": false
@@ -451,9 +451,9 @@ This action is used to get domain reputation data.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fast|boolean|False|False|When enabled, the API will provide quicker response times using lighter checks and analysis. This setting defaults to False.|None|None|
-|strictness|integer|0|True|How strict should we scan this URL? Stricter checks may provide a higher false-positive rate. We recommend defaulting to level "0", the lowest strictness setting, and increasing to "1" or "2" depending on your levels of abuse.|[0, 1, 2]|None|
-|url|string|None|True|Domain|None|None|
+|fast|boolean|False|False|When enabled, the API will provide quicker response times using lighter checks and analysis. This setting defaults to False.|None|False|
+|strictness|integer|0|True|How strict should we scan this Domain? Stricter checks may provide a higher false-positive rate. We recommend defaulting to level "0", the lowest strictness setting, and increasing to "1" or "2" depending on your levels of abuse.|[0, 1, 2]|0|
+|url|string|None|True|Domain|None|https://example.com|
 
 Example input:
 
