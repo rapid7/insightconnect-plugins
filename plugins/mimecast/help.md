@@ -342,6 +342,8 @@ Example output:
       "comment": "ui test",
       "disableUserAwareness": true,
       "disableRewrite": true,
+      
+      
       "disableLogClick": false
     }
   ]

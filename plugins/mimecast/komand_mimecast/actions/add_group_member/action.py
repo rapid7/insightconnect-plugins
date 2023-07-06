@@ -17,6 +17,11 @@ class AddGroupMember(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+
+
+
+
+
         email = params.get(Input.EMAIL_ADDRESS)
         domain = params.get(Input.DOMAIN)
 
