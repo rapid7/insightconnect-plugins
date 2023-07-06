@@ -1,6 +1,6 @@
 name: UnitTest
 
-on: [push]
+on: [push, fork]
 
 env:
   COVERAGE_THRESHOLD: 60
