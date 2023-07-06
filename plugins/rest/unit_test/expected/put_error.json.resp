@@ -1,0 +1,44 @@
+{
+    "parameters": [
+        [
+            "put_401",
+            {"route": "/put_401", "headers": {}, "body_object": {"data": "failure"}},
+            "Invalid username or password provided.",
+            "Verify your username and password are correct.",
+            "{'data': 'failure'}",
+            {}
+        ],
+        [
+            "put_403",
+            {"route": "/put_403", "headers": {}, "body_object": {"data": "failure"}},
+            "Invalid API key provided.",
+            "Verify your API key configured in your connection is correct.",
+            "{'data': 'failure'}",
+            {}
+        ],
+        [
+            "put_404",
+            {"route": "/put_404", "headers": {}, "body_object": {"data": "failure"}},
+            "Invalid or unreachable endpoint provided.",
+            "Verify the URLs or endpoints in your configuration are correct.",
+            "{'data': 'failure'}",
+            {}
+        ],
+        [
+            "put_400",
+            {"route": "/put_400", "headers": {}, "body_object": {"data": "failure"}},
+            "Something unexpected occurred.",
+            "Check the logs and if the issue persists please contact support.",
+            "{'data': 'failure'}",
+            {}
+        ],
+        [
+            "put_500",
+            {"route": "/put_500", "headers": {}, "body_object": {"data": "failure"}},
+            "Server error occurred",
+            "Verify your plugin connection inputs are correct and not malformed and try again. If the issue persists, please contact support.",
+            "{'data': 'failure'}",
+            {}
+        ]
+    ]
+}

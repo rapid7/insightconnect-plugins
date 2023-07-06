@@ -16,6 +16,7 @@ FAIL_FIELD = "fail"
 STATUS_FIELD = "status"
 GROUP_MEMBER_ALREADY_EXISTS_ERROR = "err_folder_group_member_already_exists"
 XDK_BINDING_EXPIRED_ERROR = "err_xdk_binding_expired"
+INVALID_SIEM_TOKEN = "err_audit_siem_invalid_token"  # nosec
 MANAGED_URL_EXISTS_ERROR = "err_managed_url_exists_code"
 CODE = "code"
 FOLDER_EMAIL_NOT_FOUND_ERROR = "err_folder_email_address_not_found"
@@ -39,4 +40,5 @@ ERROR_CASES = {
     MANAGED_URL_NOT_FOUND_ERROR: "Managed URL not found.",
     DEVELOPER_KEY_ERROR: "Connection headers has not been configured.",
     VALIDATION_INVALID_EMAIL_ADDRESS_ERROR: "Email address is not valid.",
+    INVALID_SIEM_TOKEN: "The SIEM token is invalid",
 }

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rest
 title: HTTP Requests
 description: The HTTP Requests plugin to make it easy to integrate with RESTful services
-version: 6.0.0
+version: 6.0.1
 vendor: rapid7
 support: community
 supported_versions: ["2022-09-05"]
@@ -117,7 +117,7 @@ actions:
         example: '{"user": "user@example.com"}'
       body_any:
         title: Body (Any)
-        description: Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc
+        description: Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc.. If a data object is to be sent, please use the 'Body Object' input
         type: string
         required: false
         example: 'test data'
@@ -127,21 +127,25 @@ actions:
         description: Response payload from the server as an object. Note, if the response has invalid object structure (list, string..) plugin will wrap it with object map
         type: object
         required: false
+        example: {"user": "user@example.com"}
       body_string:
         title: Body String
         description: Response payload from the server as a string
         type: string
         required: false
+        example: 'test data'
       status:
         title: Status
         description: Status code of the response from the server
         type: integer
         required: false
+        example: 200
       headers:
         title: Headers
         description: Response headers from the server
         type: object
         required: false
+        example: {"Host": "rapid7.com"}
   post:
     title: POST
     description: Make a POST request
@@ -166,31 +170,35 @@ actions:
         example: '{"user": "user@example.com"}'
       body_any:
         title: Body (Any)
-        description: Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc
+        description: Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc.. If a data object is to be sent, please use the 'Body Object' input
         type: string
         required: false
         example: 'test data'
     output:
       body_object:
         title: Body Object
-        description: Response payload from the server as an object
+        description: Response payload from the server as an object. Note, if the response has invalid object structure (list, string..) plugin will wrap it with object map
         type: object
         required: false
+        example: {"user": "user@example.com"}
       body_string:
         title: Body String
         description: Response payload from the server as a string
         type: string
         required: false
+        example: 'test data'
       status:
         title: Status
         description: Status code of the response from the server
         type: integer
         required: false
+        example: 200
       headers:
         title: Headers
         description: Response headers from the server
         type: object
         required: false
+        example: {"Host": "rapid7.com"}
   put:
     title: PUT
     description: Make a PUT request
@@ -215,31 +223,35 @@ actions:
         example: '{"user": "user@example.com"}'
       body_any:
         title: Body (Any)
-        description: Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc
+        description: Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc.. If a data object is to be sent, please use the 'Body Object' input
         type: string
         required: false
         example: 'test data'
     output:
       body_object:
         title: Body Object
-        description: Response payload from the server as an object
+        description: Response payload from the server as an object. Note, if the response has invalid object structure (list, string..) plugin will wrap it with object map
         type: object
         required: false
+        example: {"user": "user@example.com"}
       body_string:
         title: Body String
         description: Response payload from the server as a string
         type: string
         required: false
+        example: 'test data'
       status:
         title: Status
         description: Status code of the response from the server
         type: integer
         required: false
+        example: 200
       headers:
         title: Headers
         description: Response headers from the server
         type: object
         required: false
+        example: {"Host": "rapid7.com"}
   patch:
     title: PATCH
     description: Make a PATCH request
@@ -264,31 +276,35 @@ actions:
         example: '{"user": "user@example.com"}'
       body_any:
         title: Body (Any)
-        description: Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc
+        description: Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc.. If a data object is to be sent, please use the 'Body Object' input
         type: string
         required: false
         example: 'test data'
     output:
       body_object:
         title: Body Object
-        description: Response payload from the server as an object
+        description: Response payload from the server as an object. Note, if the response has invalid object structure (list, string..) plugin will wrap it with object map
         type: object
         required: false
+        example: {"user": "user@example.com"}
       body_string:
         title: Body String
         description: Response payload from the server as a string
         type: string
         required: false
+        example: "test data"
       status:
         title: Status
         description: Status code of the response from the server
         type: integer
         required: false
+        example: 200
       headers:
         title: Headers
         description: Response headers from the server
         type: object
         required: false
+        example: {"Host": "rapid7.com"}
   delete:
     title: DELETE
     description: Make a DELETE request
@@ -313,28 +329,32 @@ actions:
         example: '{"user": "user@example.com"}'
       body_any:
         title: Body (Any)
-        description: Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc
+        description: Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc.. If a data object is to be sent, please use the 'Body Object' input
         type: string
         required: false
         example: 'test data'
     output:
       body_object:
         title: Body Object
-        description: Response payload from the server as an object
+        description: Response payload from the server as an object. Note, if the response has invalid object structure (list, string..) plugin will wrap it with object map
         type: object
         required: false
+        example: {"user": "user@example.com"}
       body_string:
         title: Body String
         description: Response payload from the server as a string
         type: string
         required: false
+        example: "test data"
       status:
         title: Status
         description: Status code of the response from the server
         type: integer
         required: false
+        example: 200
       headers:
         title: Headers
         description: Response headers from the server
         type: object
         required: false
+        example: {"Host": "rapid7.com"}
