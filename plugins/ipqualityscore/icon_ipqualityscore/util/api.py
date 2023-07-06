@@ -24,7 +24,7 @@ class IPQSClient:
             if str(response["success"]) != "True":
                 self._logger.error(f"Error: {response['message']}")
                 raise PluginException(
-                    cause="The server is unable to process the request.\n",
+                    cause=PluginException.Preset.BAD_REQUEST,
                     assistance="Verify your plugin input is correct and not malformed and try again. "
                     "If the issue persists, please contact support.\n",
                     data=response,
@@ -35,14 +35,14 @@ class IPQSClient:
             msg = "Error connecting with the IPQualityScore."
             self._logger.error(f"{msg} Error: {error}")
             raise PluginException(
-                cause="The server is unable to process the request.\n",
+                cause=PluginException.Preset.BAD_REQUEST,
                 assistance="Verify your plugin input is correct and not malformed and try again. "
                 "If the issue persists, please contact support.\n",
                 data=response,
             )
 
         except HTTPError as error:
-            self._logger.info("[API ERROR] PluginException: UNKNOWN\n")
+            self._logger.info("[API ERROR] PluginException: UNKNOWN")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
         except json.decoder.JSONDecodeError as error:
