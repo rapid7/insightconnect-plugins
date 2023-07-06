@@ -2,8 +2,8 @@ import insightconnect_plugin_runtime
 import quopri
 from .schema import UrlDecodeInput, UrlDecodeOutput, Input, Output, Component
 
-
 # Custom imports below
+from komand_proofpoint_tap.util.helpers import clean
 
 
 class UrlDecode(insightconnect_plugin_runtime.Action):
@@ -13,9 +13,8 @@ class UrlDecode(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        params_urls = params.get(Input.URLS, [])
         urls: [str] = []
-        for url in params_urls:
+        for url in params.get(Input.URLS, []):
             try:
                 encoded_url = quopri.decodestring(url).decode("UTF-8")
             except UnicodeDecodeError:
@@ -23,8 +22,4 @@ class UrlDecode(insightconnect_plugin_runtime.Action):
 
             urls.append(encoded_url)
 
-        return {
-            Output.RESULTS: insightconnect_plugin_runtime.helper.clean(
-                self.connection.client.get_decoded_url({"urls": urls})
-            )
-        }
+        return {Output.URLS: clean(self.connection.client.get_decoded_url({"urls": urls}).get("urls", []))}

@@ -1,0 +1,4 @@
+{
+  "threatId": "blacklisted_as_boolean_and_integer",
+  "includeCampaignForensics": false
+}

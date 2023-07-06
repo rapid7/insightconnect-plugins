@@ -6,17 +6,17 @@ class SiemUtils:
     @staticmethod
     def search_subject(all_results: list, subject: str) -> list:
         data = []
-        for i in all_results:
-            if i.get("subject") == subject:
-                data.append(i)
+        for result in all_results:
+            if result.get("subject") == subject:
+                data.append(result)
         return data
 
     @staticmethod
     def search_url(all_results: list, url: str) -> list:
         data = []
-        for i in all_results:
-            if i.get("url") == url:
-                data.append(i)
+        for result in all_results:
+            if result.get("url") == url:
+                data.append(result)
         return data
 
     @staticmethod

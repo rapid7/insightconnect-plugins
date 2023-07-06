@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Proofpoint TAP"
 Vendor = "rapid7"
-Version = "3.1.2"
+Version = "4.0.0"
 Description = "Parse Proofpoint Targeted Attack Protection (TAP) alerts"
 
 
@@ -23,7 +23,7 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
-    from komand_proofpoint_tap import connection, actions, triggers
+    from komand_proofpoint_tap import connection, actions, triggers, tasks
 
     class ICONProofpointTap(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
@@ -51,6 +51,8 @@ def main():
             self.add_action(actions.ParseTapAlert())
 
             self.add_action(actions.UrlDecode())
+
+            self.add_task(tasks.MonitorEvents())
 
 
     """Run plugin"""

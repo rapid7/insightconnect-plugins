@@ -1,0 +1,5 @@
+{
+  "threatId": "abcd1234",
+  "includeCampaignForensics": true,
+  "campaignId": "11111111-aaaa-2222-3333-bbbbbbbbbbbb"
+}

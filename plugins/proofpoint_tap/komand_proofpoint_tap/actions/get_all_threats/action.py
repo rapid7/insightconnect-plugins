@@ -4,6 +4,7 @@ from .schema import GetAllThreatsInput, GetAllThreatsOutput, Input, Output, Comp
 # Custom imports below
 from komand_proofpoint_tap.util.api import Endpoint
 from komand_proofpoint_tap.util.util import SiemUtils
+from komand_proofpoint_tap.util.helpers import clean
 
 
 class GetAllThreats(insightconnect_plugin_runtime.Action):
@@ -19,21 +20,22 @@ class GetAllThreats(insightconnect_plugin_runtime.Action):
         self.connection.client.check_authorization()
 
         query_params = {"format": "JSON"}
-        threat_type = params.get(Input.THREAT_TYPE)
-        threat_status = params.get(Input.THREAT_STATUS)
+        threat_type = params.get(Input.THREATTYPE)
+        threat_status = params.get(Input.THREATSTATUS)
 
         if threat_type != "all":
             query_params["threatType"] = threat_type
         if threat_status != "all":
             query_params["threatStatus"] = threat_status
 
-        return {
-            Output.RESULTS: insightconnect_plugin_runtime.helper.clean(
-                self.connection.client.siem_action(
-                    Endpoint.get_all_threats(),
-                    SiemUtils.prepare_time_range(
-                        params.get(Input.TIME_START), params.get(Input.TIME_END), query_params
-                    ),
-                )
-            )
-        }
+        response = self.connection.client.siem_action(
+            Endpoint.get_all_threats(),
+            SiemUtils.prepare_time_range(params.get(Input.TIMESTART), params.get(Input.TIMEEND), query_params),
+        )
+
+        response["messagesBlocked"] = clean(response.get("messagesBlocked", []))
+        response["messagesDelivered"] = clean(response.get("messagesDelivered", []))
+        response["clicksBlocked"] = clean(response.get("clicksBlocked", []))
+        response["clicksPermitted"] = clean(response.get("clicksPermitted", []))
+
+        return {Output.RESULTS: response}

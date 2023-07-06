@@ -3,6 +3,7 @@ from .schema import FetchForensicsInput, FetchForensicsOutput, Input, Output, Co
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_proofpoint_tap.util.helpers import clean
 
 
 class FetchForensics(insightconnect_plugin_runtime.Action):
@@ -15,14 +16,9 @@ class FetchForensics(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        threat_id = params.get(Input.THREAT_ID)
-        campaign_id = params.get(Input.CAMPAIGN_ID)
-        include_campaign_forensics = params.get(Input.INCLUDE_CAMPAIGN_FORENSICS, False)
-
-        if not threat_id:
-            threat_id = None
-        if not campaign_id:
-            campaign_id = None
+        threat_id = params.get(Input.THREATID)
+        campaign_id = params.get(Input.CAMPAIGNID)
+        include_campaign_forensics = params.get(Input.INCLUDECAMPAIGNFORENSICS, False)
 
         if threat_id and campaign_id:
             raise PluginException(
@@ -35,15 +31,12 @@ class FetchForensics(insightconnect_plugin_runtime.Action):
                 assistance="Please enter either Threat ID or Campaign ID.",
             )
 
-        if not threat_id:
-            include_campaign_forensics = None
-
-        result = insightconnect_plugin_runtime.helper.clean(
+        result = clean(
             self.connection.client.get_forensics(
                 {
-                    "threatId": threat_id,
-                    "campaignId": campaign_id,
-                    "includeCampaignForensics": include_campaign_forensics,
+                    "threatId": threat_id if threat_id else None,
+                    "campaignId": campaign_id if campaign_id else None,
+                    "includeCampaignForensics": include_campaign_forensics if threat_id else None,
                 }
             )
         )
@@ -54,4 +47,4 @@ class FetchForensics(insightconnect_plugin_runtime.Action):
                 if blacklisted:
                     result["reports"][i]["forensics"][j]["what"]["blacklisted"] = bool(blacklisted)
 
-        return {Output.GENERATED: result.get("generated"), Output.REPORTS: result.get("reports")}
+        return {Output.GENERATED: result.get("generated"), Output.REPORTS: result.get("reports", [])}

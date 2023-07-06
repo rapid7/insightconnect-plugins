@@ -1,0 +1,9 @@
+{
+  "events": [],
+  "state": {
+    "last_collection_date": "2023-01-01T01:59:00+00:00",
+    "previous_logs_hashes": [],
+    "status_code": 400
+  },
+  "hasMorePages": false
+}

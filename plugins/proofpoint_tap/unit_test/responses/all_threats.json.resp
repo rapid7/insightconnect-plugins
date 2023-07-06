@@ -1,0 +1,48 @@
+{
+  "clicksBlocked": [
+    {
+      "GUID": "X7sh5TwRxBZOAXb-d8ESyugsIdtfv3u",
+      "classification": "malware",
+      "clickIP": "198.51.100.1",
+      "clickTime": "2021-04-20T21:08:13.000Z",
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "messageID": "<user@example.com>",
+      "recipient": "user@example.com",
+      "sender": "user@example.com",
+      "senderIP": "198.51.100.1",
+      "threatID": "f1f23718b35b8db3db005cd498ff0812e53fe994537567ff0a...",
+      "threatStatus": "active",
+      "threatTime": "2021-04-20T21:08:38.000Z",
+      "threatURL": "https://example.com",
+      "url": "https://example.com",
+      "userAgent": "Mozilla/5.0"
+    }
+  ],
+  "clicksPermitted": [],
+  "messagesBlocked": [
+    {
+      "threatsInfoMap": [
+        {
+          "threat": "Example Threat",
+          "threatID": "d22be456cbc0a0e5d900696c36c92c547bea13cc76d32b63ed...",
+          "threatStatus": "active",
+          "threatTime": "2021-08-27T15:59:49.000Z",
+          "threatType": "url",
+          "threatUrl": "https://example.com",
+          "classification": "phish"
+        }
+      ],
+      "spamScore": 100,
+      "toAddresses": [
+        "user@example.com"
+      ],
+      "subject": "Mail delivery failed: returning message to sender",
+      "fromAddress": [
+        "user@example.com"
+      ],
+      "quarantineFolder": "Phish"
+    }
+  ],
+  "messagesDelivered": [],
+  "queryEndTime": "2021-08-27T16:00:00Z"
+}

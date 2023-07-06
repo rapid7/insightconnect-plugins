@@ -1,9 +1,0 @@
-{
-  "urls": [
-    {
-      "encodedUrl": "https://urldefense.com/v3/__https://google.com:443/search?q=a*test\u0026gs=ps__;Kw!-612Flbf0JvQ3kNJkRi5Jg!Ue6tQudNKaShHg93trcdjqDP8se2ySE65jyCIe2K1D_uNjZ1Lnf6YLQERujngZv9UWf66ujQIQ$",
-      "decodedUrl": "https://google.com:443/search?q=a+test&gs=ps",
-      "success": true
-    }
-  ]
-}
