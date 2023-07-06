@@ -1,0 +1,7 @@
+{
+  "timeStart": "2021-08-23T10:00:00Z",
+  "timeEnd": "2021-08-23T11:00:00Z",
+  "subject": "A phishy email",
+  "threatType": "all",
+  "threatStatus": "all"
+}

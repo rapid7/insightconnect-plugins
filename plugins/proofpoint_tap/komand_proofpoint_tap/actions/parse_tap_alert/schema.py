@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    TAP_ALERT = "tap_alert"
+    TAPALERT = "tapAlert"
     
 
 class Output:
@@ -21,7 +21,7 @@ class ParseTapAlertInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "tap_alert": {
+    "tapAlert": {
       "type": "string",
       "title": "Proofpoint TAP Alert",
       "description": "A Proofpoint TAP alert",
@@ -29,7 +29,7 @@ class ParseTapAlertInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "tap_alert"
+    "tapAlert"
   ]
 }
     """)
@@ -45,7 +45,7 @@ class ParseTapAlertOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "results": {
-      "$ref": "#/definitions/tap_results",
+      "$ref": "#/definitions/tapResults",
       "title": "Results",
       "description": "Proofpoint TAP results",
       "order": 1
@@ -56,7 +56,7 @@ class ParseTapAlertOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "browser",
       "properties": {
-        "source_ip": {
+        "sourceIp": {
           "type": "string",
           "title": "Source IP",
           "description": "Source IP",
@@ -68,7 +68,7 @@ class ParseTapAlertOutput(insightconnect_plugin_runtime.Output):
           "description": "Time",
           "order": 1
         },
-        "user_agent": {
+        "userAgent": {
           "type": "string",
           "title": "User Agent",
           "description": "User agent string",
@@ -80,31 +80,31 @@ class ParseTapAlertOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "message",
       "properties": {
-        "header_from": {
+        "headerFrom": {
           "type": "string",
           "title": "Header From",
           "description": "Header from",
           "order": 5
         },
-        "header_replyto": {
+        "headerReplyto": {
           "type": "string",
           "title": "Header Reply To",
           "description": "Header reply to",
           "order": 6
         },
-        "message_guid": {
+        "messageGuid": {
           "type": "string",
           "title": "Message GUID",
           "description": "Message GUID",
           "order": 7
         },
-        "message_id": {
+        "messageId": {
           "type": "string",
           "title": "Message ID",
           "description": "Message ID",
           "order": 8
         },
-        "message_size": {
+        "messageSize": {
           "type": "string",
           "title": "Message Size",
           "description": "Message size",
@@ -122,7 +122,7 @@ class ParseTapAlertOutput(insightconnect_plugin_runtime.Output):
           "description": "Sender",
           "order": 4
         },
-        "sender_ip": {
+        "senderIp": {
           "type": "string",
           "title": "Sender IP",
           "description": "Sender IP",
@@ -134,23 +134,23 @@ class ParseTapAlertOutput(insightconnect_plugin_runtime.Output):
           "description": "Subject",
           "order": 3
         },
-        "threat_id": {
+        "threatId": {
           "type": "string",
           "title": "Threat ID",
           "description": "Unique identifier for this threat",
           "order": 11
         },
-        "time_delivered": {
+        "timeDelivered": {
           "type": "string",
           "title": "Time Delivered",
-          "description": "Time Delivered",
+          "description": "Time delivered",
           "order": 1
         }
       }
     },
-    "tap_results": {
+    "tapResults": {
       "type": "object",
-      "title": "tap_results",
+      "title": "tapResults",
       "properties": {
         "browser": {
           "$ref": "#/definitions/browser",
@@ -176,7 +176,7 @@ class ParseTapAlertOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "browser",
           "properties": {
-            "source_ip": {
+            "sourceIp": {
               "type": "string",
               "title": "Source IP",
               "description": "Source IP",
@@ -188,7 +188,7 @@ class ParseTapAlertOutput(insightconnect_plugin_runtime.Output):
               "description": "Time",
               "order": 1
             },
-            "user_agent": {
+            "userAgent": {
               "type": "string",
               "title": "User Agent",
               "description": "User agent string",
@@ -200,31 +200,31 @@ class ParseTapAlertOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "message",
           "properties": {
-            "header_from": {
+            "headerFrom": {
               "type": "string",
               "title": "Header From",
               "description": "Header from",
               "order": 5
             },
-            "header_replyto": {
+            "headerReplyto": {
               "type": "string",
               "title": "Header Reply To",
               "description": "Header reply to",
               "order": 6
             },
-            "message_guid": {
+            "messageGuid": {
               "type": "string",
               "title": "Message GUID",
               "description": "Message GUID",
               "order": 7
             },
-            "message_id": {
+            "messageId": {
               "type": "string",
               "title": "Message ID",
               "description": "Message ID",
               "order": 8
             },
-            "message_size": {
+            "messageSize": {
               "type": "string",
               "title": "Message Size",
               "description": "Message size",
@@ -242,7 +242,7 @@ class ParseTapAlertOutput(insightconnect_plugin_runtime.Output):
               "description": "Sender",
               "order": 4
             },
-            "sender_ip": {
+            "senderIp": {
               "type": "string",
               "title": "Sender IP",
               "description": "Sender IP",
@@ -254,16 +254,16 @@ class ParseTapAlertOutput(insightconnect_plugin_runtime.Output):
               "description": "Subject",
               "order": 3
             },
-            "threat_id": {
+            "threatId": {
               "type": "string",
               "title": "Threat ID",
               "description": "Unique identifier for this threat",
               "order": 11
             },
-            "time_delivered": {
+            "timeDelivered": {
               "type": "string",
               "title": "Time Delivered",
-              "description": "Time Delivered",
+              "description": "Time delivered",
               "order": 1
             }
           }
@@ -272,7 +272,7 @@ class ParseTapAlertOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "threat",
           "properties": {
-            "attachment_sha256": {
+            "attachmentSha256": {
               "type": "string",
               "title": "Attachment SHA256 Hash",
               "description": "Attachment SHA256 hash",
@@ -284,16 +284,16 @@ class ParseTapAlertOutput(insightconnect_plugin_runtime.Output):
               "description": "Category",
               "order": 3
             },
-            "condemnation_time": {
+            "condemnationTime": {
               "type": "string",
               "title": "Condemnation Time",
-              "description": "Condemnation Time",
+              "description": "Condemnation time",
               "order": 4
             },
-            "threat_details_url": {
+            "threatDetailsUrl": {
               "type": "string",
               "title": "Threat Details URL",
-              "description": "URL for Details of the Threat",
+              "description": "URL to the details of the threat",
               "order": 5
             },
             "url": {
@@ -310,7 +310,7 @@ class ParseTapAlertOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "threat",
       "properties": {
-        "attachment_sha256": {
+        "attachmentSha256": {
           "type": "string",
           "title": "Attachment SHA256 Hash",
           "description": "Attachment SHA256 hash",
@@ -322,16 +322,16 @@ class ParseTapAlertOutput(insightconnect_plugin_runtime.Output):
           "description": "Category",
           "order": 3
         },
-        "condemnation_time": {
+        "condemnationTime": {
           "type": "string",
           "title": "Condemnation Time",
-          "description": "Condemnation Time",
+          "description": "Condemnation time",
           "order": 4
         },
-        "threat_details_url": {
+        "threatDetailsUrl": {
           "type": "string",
           "title": "Threat Details URL",
-          "description": "URL for Details of the Threat",
+          "description": "URL to the details of the threat",
           "order": 5
         },
         "url": {

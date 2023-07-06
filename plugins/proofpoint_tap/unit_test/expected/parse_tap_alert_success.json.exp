@@ -1,0 +1,27 @@
+{
+  "results": {
+    "browser": {
+      "sourceIp": "192.168.50.100",
+      "time": "2020-04-27T09:54:49Z",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+    },
+    "message": {
+      "headerFrom": "97",
+      "headerReplyto": "97",
+      "messageGuid": "-JsyOYf--Yt7cR-ctdIo7RuUiK9kSECE",
+      "messageId": "97",
+      "messageSize": "97",
+      "recipients": "user@example.com",
+      "sender": "97",
+      "senderIp": "97",
+      "subject": "97",
+      "threatId": "6b5ebcb1a7fb7e19bad6d8e02a2a5e169320b1f8a759e7db48f3da6f4e798a39",
+      "timeDelivered": "2020-04-27T09:54:49Z"
+    },
+    "threat": {
+      "category": "phish",
+      "condemnationTime": "2020-04-27T12:22:54Z",
+      "url": "hxxp://ec2-12-34-56-123[.]compute-1[.]amazonaws[.]com/[.]0[.]/user@example[.]com"
+    }
+  }
+}

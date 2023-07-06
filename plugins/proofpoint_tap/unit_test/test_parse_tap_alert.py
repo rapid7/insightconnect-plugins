@@ -2,46 +2,31 @@ import sys
 import os
 from unittest import TestCase
 from komand_proofpoint_tap.actions.parse_tap_alert import ParseTapAlert
-from komand_proofpoint_tap.actions.parse_tap_alert.schema import Input, Output
+from test_util import Util
+from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
 
 
 class TestParseTapAlert(TestCase):
-    def test_parse_tap_alert(self):
-        action = ParseTapAlert()
-        actual = action.run(
-            {
-                Input.TAP_ALERT: 'proofpoint      URL DefenseAn end user has clicked on a link in their email which Proofpoint now recog=nizes as malicious. Details about the threat, the permitted click, and the =message containing the link are below:ThreatURL      hxxp://ec2-12-23-34-123[.]compute-1[.]amazonaws[.]com/[.]0[.]/ja=ke[.]user@example[.]comCategory         phishCondemnation Time        2020-04-27T12:22:54ZMessageTime Delivered   2020-04-27T09:54:49ZRecipient        user@example.comSubject  =97Sender   =97Header From      =97Header ReplyTo   =97Message-ID       =97Message-GUID     -JsyOYf--Yt7cR-ctdIo7RuUiK9kSECEThreat-ID        30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050Sender IP        =97Message Size     =97ClickTime     2020-04-27T09:54:49ZSource IP        192.168.50.100User Agent       Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0)= like GeckoView Threat Details\u003chttps://threatinsight.proofpoint.com/v7l34e7...\u003eYou are receiving this message because you are subscribed to alerts from th=e Threat Insight Dashboard. Update your subscription preferences\u003chttps://th=reatinsight.proofpoint.com/5d1ce8c6-1234-6789-ef71-f3998c3e92e3/settings/pr=ivileges?linkOrigin=3Dnotif\u003e to stop receiving these notifications.Proofpoint Targeted Attack Protectionproofpoint--_000_01000171bb978ba8b63e1565672b4239b8d917020071a120000000e_Content-Type: text/html; charset="Windows-1252"Content-ID: \u003c725AAFECC53B504DBB925D82C035329A@example.prod.outlook.com\u003eContent-Transfer-Encoding: quoted-printable\u003chtml\u003e\u003chead\u003e\u003cmeta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=252"\u003e\u003c/head\u003e\u003cbody style=3D"margin:0px"\u003e\u003cdiv style=3D"background:#f1f2f2;font-family:Arial;font-size:13px;color:#66=6666"\u003e\u003cdiv style=3D"background:white"\u003e\u003cdiv style=3D"max-width:720px;margin:auto;padding:0"\u003e\u003ctable style=3D"width:100%;height:60px;font-family:inherit;font-size:inheri=t;color:inherit"\u003e\u003ctbody\u003e\u003ctr\u003e\u003ctd\u003e\u003cb style=3D"font-size:22px;color:black"\u003eproofpoint\u003c/b\u003e \u003c/td\u003e\u003ctd align=3D"right"\u003eURL Defense\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/div\u003e\u003c/div\u003e\u003cdiv style=3D"max-width:720px;margin:auto;padding:20px 0"\u003eAn end user has c=licked on a link in their email which Proofpoint now recognizes as maliciou=s. Details about the threat, the permitted click, and the message containin=g the link are below:\u003cp\u003e\u003cb\u003eThreat\u003c/b\u003e\u003c/p\u003e\u003cp\u003e\u003ctable border=3D"1" style=3D"width:100%;border-collapse:collapse;border:sol=id 1px #d1d3d4;font-family:inherit;font-size:inherit;color:inherit" cellspa=cing=3D"0" cellpadding=3D"8"\u003e\u003ccol width=3D"150"\u003e\u003ccol\u003e\u003ctbody\u003e\u003ctr valign=3D"top"\u003e\u003ctd\u003e\u003cb\u003eURL\u003c/b\u003e\u003c/td\u003e\u003ctd style=3D"background:white"\u003ehxxp://ec2-12-34-56-123[.]compute-1[.]amazo=naws[.]com/[.]0[.]/user@example[.]com\u003c/td\u003e\u003c/tr\u003e\u003ctr valign=3D"top"\u003e\u003ctd\u003e\u003cb\u003eCategory\u003c/b\u003e\u003c/td\u003e\u003ctd style=3D"background:white"\u003ephish\u003c/td\u003e\u003c/tr\u003e\u003ctr valign=3D"top"\u003e\u003ctd\u003e\u003cb\u003eCondemnation Time\u003c/b\u003e\u003c/td\u003e\u003ctd style=3D"background:white"\u003e2020-04-27T12:22:54Z\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/p\u003e\u003cp\u003e\u003cb\u003eMessage\u003c/b\u003e\u003c/p\u003e\u003cp\u003e\u003ctable border=3D"1" style=3D"width:100%;border-collapse:collapse;border:sol=id 1px #d1d3d4;font-family:inherit;font-size:inherit;color:inherit" cellspa=cing=3D"0" cellpadding=3D"8"\u003e\u003ccol width=3D"150"\u003e\u003ccol\u003e\u003ctbody\u003e\u003ctr valign=3D"top"\u003e\u003ctd\u003e\u003cb\u003eTime Delivered\u003c/b\u003e\u003c/td\u003e\u003ctd style=3D"background:white"\u003e2020-04-27T09:54:49Z\u003c/td\u003e\u003c/tr\u003e\u003ctr valign=3D"top"\u003e\u003ctd\u003e\u003cb\u003eRecipient\u003c/b\u003e\u003c/td\u003e\u003ctd style=3D"background:white"\u003euser@example.com\u003c/td\u003e\u003c/tr\u003e\u003ctr valign=3D"top"\u003e\u003ctd\u003e\u003cb\u003eSubject\u003c/b\u003e\u003c/td\u003e\u003ctd style=3D"background:white"\u003e=97\u003c/td\u003e\u003c/tr\u003e\u003ctr valign=3D"top"\u003e\u003ctd\u003e\u003cb\u003eSender\u003c/b\u003e\u003c/td\u003e\u003ctd style=3D"background:white"\u003e=97\u003c/td\u003e\u003c/tr\u003e\u003ctr valign=3D"top"\u003e\u003ctd\u003e\u003cb\u003eHeader From\u003c/b\u003e\u003c/td\u003e\u003ctd style=3D"background:white"\u003e=97\u003c/td\u003e\u003c/tr\u003e\u003ctr valign=3D"top"\u003e\u003ctd\u003e\u003cb\u003eHeader ReplyTo\u003c/b\u003e\u003c/td\u003e\u003ctd style=3D"background:white"\u003e=97\u003c/td\u003e\u003c/tr\u003e\u003ctr valign=3D"top"\u003e\u003ctd\u003e\u003cb\u003eMessage-ID\u003c/b\u003e\u003c/td\u003e\u003ctd style=3D"background:white"\u003e=97\u003c/td\u003e\u003c/tr\u003e\u003ctr valign=3D"top"\u003e\u003ctd\u003e\u003cb\u003eMessage-GUID\u003c/b\u003e\u003c/td\u003e\u003ctd style=3D"background:white"\u003e-JsyOYf--Yt7cR-ctdIo7RuUiK9kSECE\u003c/td\u003e\u003c/tr\u003e\u003ctr valign=3D"top"\u003e\u003ctd\u003e\u003cb\u003eThreat-ID\u003c/b\u003e\u003c/td\u003e\u003ctd style=3D"background:white"\u003e6b5ebcb1a7fb7e19bad6d8e02a2a5e169320b1f8a759=e7db48f3da6f4e798a39\u003c/td\u003e\u003c/tr\u003e\u003ctr valign=3D"top"\u003e\u003ctd\u003e\u003cb\u003eSender IP\u003c/b\u003e\u003c/td\u003e\u003ctd style=3D"background:white"\u003e=97\u003c/td\u003e\u003c/tr\u003e\u003ctr valign=3D"top"\u003e\u003ctd\u003e\u003cb\u003eMessage Size\u003c/b\u003e\u003c/td\u003e\u003ctd style=3D"background:white"\u003e=97\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/p\u003e\u003cp\u003e\u003cb\u003eClick\u003c/b\u003e\u003c/p\u003e\u003cp\u003e\u003ctable border=3D"1" style=3D"width:100%;border-collapse:collapse;border:sol=id 1px #d1d3d4;font-family:inherit;font-size:inherit;color:inherit" cellspa=cing=3D"0" cellpadding=3D"8"\u003e\u003ccol width=3D"150"\u003e\u003ccol\u003e\u003ctbody\u003e\u003ctr valign=3D"top"\u003e\u003ctd\u003e\u003cb\u003eTime\u003c/b\u003e\u003c/td\u003e\u003ctd style=3D"background:white"\u003e2020-04-27T09:54:49Z\u003c/td\u003e\u003c/tr\u003e\u003ctr valign=3D"top"\u003e\u003ctd\u003e\u003cb\u003eSource IP\u003c/b\u003e\u003c/td\u003e\u003ctd style=3D"background:white"\u003e192.168.50.100\u003c/td\u003e\u003c/tr\u003e\u003ctr valign=3D"top"\u003e\u003ctd\u003e\u003cb\u003eUser Agent\u003c/b\u003e\u003c/td\u003e\u003ctd style=3D"background:white"\u003eMozilla/5.0 (Windows NT 10.0; WOW64; Trident=/7.0; rv:11.0) like Gecko\u003c/td\u003e\u003c/tr\u003e\u003c/tbody\u003e\u003c/table\u003e\u003c/p\u003e\u003cp\u003e\u003c/p\u003e\u003cdiv style=3D"width:120px;margin:40px auto;padding:8px 32px;background:#06a=2d5;text-align:center"\u003e\u003ca href=3D"https://threatinsight.proofpoint.com/v7l34e7..." style=3D"color:white;text-decoration:none"=\u003eView Threat Details\u003c/a\u003e\u003c/div\u003e\u003cdiv style=3D"font-size:11px;border-bottom:solid 1px #d1d3d4;padding-bottom=:8px;"\u003eYou are receiving this message because you are subscribed to alerts =from the Threat Insight Dashboard.\u003ca href=3D"https://threatinsight.proofpoint.com/v7l34e7..."\u003eUpdate your subscription preferences\u003c/a\u003e to stop receiving these notificati=ons. \u003c/div\u003e\u003cp\u003e\u003c/p\u003e\u003cdiv style=3D"font-size:11px;text-align:center;padding-bottom:30px"\u003eProofpo=int Targeted Attack Protection\u003cp\u003e\u003cb\u003eproofpoint\u003c/b\u003e \u003c/p\u003e\u003c/div\u003e\u003c/div\u003e\u003c/div\u003e\u003c/body\u003e\u003c/html\u003e--_000_01000171bb978ba8b63e1565672b4239b8d917020071a120000000e_--'
-            }
-        )
-        expected = {
-            Output.RESULTS: {
-                "browser": {
-                    "source_ip": "192.168.50.100",
-                    "time": "2020-04-27T09:54:49Z",
-                    "user_agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko",
-                },
-                "message": {
-                    "header_from": "97",
-                    "header_replyto": "97",
-                    "message_guid": "-JsyOYf--Yt7cR-ctdIo7RuUiK9kSECE",
-                    "message_id": "97",
-                    "message_size": "97",
-                    "recipients": "user@example.com",
-                    "sender": "97",
-                    "sender_ip": "97",
-                    "subject": "97",
-                    "threat_id": "6b5ebcb1a7fb7e19bad6d8e02a2a5e169320b1f8a759e7db48f3da6f4e798a39",
-                    "time_delivered": "2020-04-27T09:54:49Z",
-                },
-                "threat": {
-                    "attachment_sha256": "",
-                    "category": "phish",
-                    "condemnation_time": "2020-04-27T12:22:54Z",
-                    "threat_details_url": "",
-                    "url": "hxxp://ec2-12-34-56-123[.]compute-1[.]amazonaws[.]com/[.]0[.]/user@example[.]com",
-                },
-            }
-        }
-        self.assertEqual(actual, expected)
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.action = Util.default_connector(ParseTapAlert())
+
+    @parameterized.expand(
+        [
+            [
+                "success",
+                Util.read_file_to_dict("inputs/parse_tap_alert_success.json.inp"),
+                Util.read_file_to_dict("expected/parse_tap_alert_success.json.exp"),
+            ],
+            [
+                "success_empty",
+                Util.read_file_to_dict("inputs/parse_tap_alert_success_empty.json.inp"),
+                Util.read_file_to_dict("expected/parse_tap_alert_success_empty.json.exp"),
+            ],
+        ]
+    )
+    def test_parse_tap_alert(self, test_name, input_params, expected):
+        actual = self.action.run(input_params)
+        self.assertDictEqual(actual, expected)
