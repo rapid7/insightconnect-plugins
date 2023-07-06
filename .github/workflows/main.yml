@@ -1,6 +1,6 @@
 name: PluginValidator
 
-on: [push, fork]
+on: [push, pull_request]
 
 jobs:
   build:

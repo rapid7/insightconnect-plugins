@@ -1,6 +1,6 @@
 name: Static Code Analysis
 
-on: [push, fork]
+on: [push, pull_request]
 
 jobs:
   prospector:
