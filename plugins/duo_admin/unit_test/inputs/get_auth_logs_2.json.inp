@@ -1,0 +1,13 @@
+{
+  "mintime": 1684009458000,
+  "maxtime": 1684209458000,
+  "applications": ["DI8CODQSMK4BXPLYS47K"],
+  "users": ["DUWZR0IUOT27EPXSCOI9"],
+  "eventTypes": ["enrollment"],
+  "factors": ["not_available"],
+  "groups": ["DPS4SII7YZ7ISQITTC2W"],
+  "phoneNumbers": ["+111111111"],
+  "reasons": [],
+  "results": ["success"],
+  "tokens": []
+}

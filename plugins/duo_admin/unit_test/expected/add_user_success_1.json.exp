@@ -1,0 +1,14 @@
+{
+  "user": {
+    "created": 168500000,
+    "email": "user@example.com",
+    "firstname": "User",
+    "isEnrolled": false,
+    "lastname": "Test",
+    "notes": "example note",
+    "realname": "User Test",
+    "status": "active",
+    "userId": "ABCD01",
+    "username": "user-example-1"
+  }
+}
