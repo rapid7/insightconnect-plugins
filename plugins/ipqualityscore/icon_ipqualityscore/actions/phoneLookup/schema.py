@@ -11,7 +11,7 @@ class Input:
     COUNTRY = "country"
     PHONE = "phone"
     STRICTNESS = "strictness"
-    
+
 
 class Output:
     VOIP = "VOIP"
@@ -35,10 +35,11 @@ class Output:
     TIMEZONE = "timezone"
     VALID = "valid"
     ZIP_CODE = "zip_code"
-    
+
 
 class PhoneLookupInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(
+        """
    {
   "type": "object",
   "title": "Variables",
@@ -46,7 +47,7 @@ class PhoneLookupInput(insightconnect_plugin_runtime.Input):
     "country": {
       "type": "string",
       "title": "Country",
-      "description": "You can optionally provide us with the default country or countries(comma separated) this phone number is suspected to be associated with Our system will prefer to use a country on this list for verification or will require a country to be specified in the event the phone number is less than 10 digits",
+      "description": "You can optionally provide us with the default country or countries(comma separated) this phone number is suspected to be associated with. Our system will prefer to use a country on this list for verification or will require a country to be specified in the event the phone number is less than 10 digits.",
       "order": 3
     },
     "phone": {
@@ -58,7 +59,7 @@ class PhoneLookupInput(insightconnect_plugin_runtime.Input):
     "strictness": {
       "type": "integer",
       "title": "Strictness",
-      "description": "How in depth (strict) do you want this query to be? Higher values take longer to process and may provide a higher false-positive rate We recommend starting at 0, the lowest strictness setting, and increasing to 1 or 2 depending on your levels of fraud",
+      "description": "How in depth (strict) do you want this query to be? Higher values take longer to process and may provide a higher false-positive rate. We recommend starting at \\"0\\", the lowest strictness setting, and increasing to \\"1\\" or \\"2\\" depending on your levels of fraud.",
       "default": 0,
       "enum": [
         0,
@@ -73,14 +74,16 @@ class PhoneLookupInput(insightconnect_plugin_runtime.Input):
     "strictness"
   ]
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class PhoneLookupOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(
+        """
    {
   "type": "object",
   "title": "Variables",
@@ -88,132 +91,133 @@ class PhoneLookupOutput(insightconnect_plugin_runtime.Output):
     "VOIP": {
       "type": "boolean",
       "title": "VOIP",
-      "description": "Is this phone number a Voice Over Internet Protocol (VOIP) or digital phone number?",
+      "description": "Is this phone number a Voice Over Internet Protocol (VOIP) or digital phone number?.",
       "order": 6
     },
     "active": {
       "type": "boolean",
       "title": "Active",
-      "description": "Is this phone number a live usable phone number that is currently active?",
+      "description": "Is this phone number a live usable phone number that is currently active?.",
       "order": 9
     },
     "active_status": {
       "type": "string",
       "title": "Active Status",
-      "description": "Additional details on the status of the subscriber connection when enhanced active line checks are enabled These values can be Active Line, Disconnected Line, Phone Turned Off, Inconclusive Status, or NA if unknown",
+      "description": "Additional details on the status of the subscriber connection when enhanced active line checks are enabled. These values can be \\"Active Line\\", \\"Disconnected Line\\", \\"Phone Turned Off\\", \\"Inconclusive Status\\", or \\"N/A\\" if unknown.",
       "order": 17
     },
     "carrier": {
       "type": "string",
       "title": "Carrier",
-      "description": "The carrier (service provider) this phone number has been assigned to or NA if unknown",
+      "description": "The carrier (service provider) this phone number has been assigned to or \\"N/A\\" if unknown.",
       "order": 10
     },
     "city": {
       "type": "string",
       "title": "City",
-      "description": "City of the phone number if available or NA if unknown",
+      "description": "City of the phone number if available or \\"N/A\\" if unknown.",
       "order": 13
     },
     "country": {
       "type": "string",
       "title": "Country",
-      "description": "The two character country code for this phone number",
+      "description": "The two character country code for this phone number.",
       "order": 12
     },
     "dialing_code": {
       "type": "integer",
       "title": "Dialing Code",
-      "description": "The 1 to 4 digit dialing code for this phone number or null if unknown",
+      "description": "The 1 to 4 digit dialing code for this phone number or null if unknown.",
       "order": 16
     },
     "do_not_call": {
       "type": "boolean",
       "title": "Do Not Call",
-      "description": "Indicates if the phone number is listed on any Do Not Call (DNC) lists Only supported in US and CA This data may not be 100% up to date with the latest DNC blacklists",
+      "description": "Indicates if the phone number is listed on any Do Not Call (DNC) lists. Only supported in US and CA. This data may not be 100% up to date with the latest DNC blacklists.",
       "order": 21
     },
     "formatted": {
       "type": "string",
       "title": "Formatted",
-      "description": "The phone number formatted in the international dialing code NA if not formattable",
+      "description": "The phone number formatted in the international dialing code. N/A if not formattable.",
       "order": 1
     },
     "fraud_score": {
       "type": "integer",
       "title": "Fraud Score",
-      "description": "The IPQS risk score which estimates how likely a phone number is to be fraudulent Scores 85+ are high risk",
+      "description": "The IPQS risk score which estimates how likely a phone number is to be fraudulent. Scores 85+ are high risk.",
       "order": 4
     },
     "leaked": {
       "type": "boolean",
       "title": "Leaked",
-      "description": "Was this phone number associated with a recent database leak from a third party? Leaked accounts pose a risk as they may have become compromised during a database breach",
+      "description": "Was this phone number associated with a recent database leak from a third party? Leaked accounts pose a risk as they may have become compromised during a database breach.",
       "order": 18
     },
     "line_type": {
       "type": "string",
       "title": "Line Type",
-      "description": "The type of line this phone number is associated with (Toll Free, Mobile, Landline, Satellite, VOIP, Premium Rate, Pager, etc) or NA if unknown",
+      "description": "The type of line this phone number is associated with (Toll Free, Mobile, Landline, Satellite, VOIP, Premium Rate, Pager, etc...) or \\"N/A\\" if unknown.",
       "order": 11
     },
     "local_format": {
       "type": "string",
       "title": "Local Format",
-      "description": "The phone number formatted in the country's local routing rules with area code NA if not formattable",
+      "description": "The phone number formatted in the country's local routing rules with area code. N/A if not formattable.",
       "order": 2
     },
     "name": {
       "type": "string",
       "title": "Name",
-      "description": "The owner name of the phone number such as the first or last name or business name assigned to the phone number Multiple names will be returned in comma separated format Value is NA if unknown",
+      "description": "The owner name of the phone number such as the first or last name or business name assigned to the phone number. Multiple names will be returned in comma separated format. Value is \\"N/A\\" if unknown.",
       "order": 19
     },
     "prepaid": {
       "type": "boolean",
       "title": "Prepaid",
-      "description": "Is this phone number associated with a prepaid service plan?",
+      "description": "Is this phone number associated with a prepaid service plan?.",
       "order": 7
     },
     "recent_abuse": {
       "type": "boolean",
       "title": "Recent Abuse",
-      "description": "Has this phone number been associated with recent or ongoing fraud?",
+      "description": "Has this phone number been associated with recent or ongoing fraud?.",
       "order": 5
     },
     "region": {
       "type": "string",
       "title": "Region",
-      "description": "Region (state) of the phone number if available or NA if unknown",
+      "description": "Region (state) of the phone number if available or \\"N/A\\" if unknown.",
       "order": 15
     },
     "risky": {
       "type": "boolean",
       "title": "Risky",
-      "description": "Is this phone number associated with fraudulent activity, scams, robo calls, fake accounts, or other unfriendly behavior?",
+      "description": "Is this phone number associated with fraudulent activity, scams, robo calls, fake accounts, or other unfriendly behavior?.",
       "order": 8
     },
     "timezone": {
       "type": "string",
       "title": "Timezone",
-      "description": "Timezone of the phone number if available or NA if unknown",
+      "description": "Timezone of the phone number if available or \\"N/A\\" if unknown.",
       "order": 20
     },
     "valid": {
       "type": "boolean",
       "title": "Valid",
-      "description": "Is the phone number properly formatted and considered valid based on assigned phone numbers available to carriers in that country?",
+      "description": "Is the phone number properly formatted and considered valid based on assigned phone numbers available to carriers in that country?.",
       "order": 3
     },
     "zip_code": {
       "type": "string",
       "title": "Zip Code",
-      "description": "Zip or Postal code of the phone number if available or NA if unknown",
+      "description": "Zip or Postal code of the phone number if available or \\"N/A\\" if unknown.",
       "order": 14
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

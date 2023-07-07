@@ -7,7 +7,7 @@ from sys import argv
 Name = "IPQS Fraud and Risk Scoring"
 Vendor = "ipqs"
 Version = "1.0.0"
-Description = "IPQS Fraud and Risk Scoring plugin provides enterprise grade fraud prevention, risk analysis, and threat detection Analyze IP Addresses, Email Addresses, Phones, URLs and Domains to identify sophisticated bad actors and high risk behavior"
+Description = "IPQS Fraud and Risk Scoring plugin provides enterprise grade fraud prevention, risk analysis, and threat detection. Analyze IP Addresses, Email Addresses, Phones, URLs and Domains to identify sophisticated bad actors and high risk behavior."
 
 
 def main():
