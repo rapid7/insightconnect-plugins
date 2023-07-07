@@ -3,16 +3,15 @@ extension: plugin
 products: [insightconnect]
 name: ipqualityscore
 title: IPQS Fraud and Risk Scoring
-description: IPQS Fraud and Risk Scoring plugin provides enterprise grade fraud prevention, risk analysis, and threat detection Analyze IP Addresses, Email Addresses, Phones, URLs and Domains to identify sophisticated bad actors and high risk behavior
+description: IPQS Fraud and Risk Scoring plugin provides enterprise grade fraud prevention, risk analysis, and threat detection. Analyze IP Addresses, Email Addresses, Phones, URLs and Domains to identify sophisticated bad actors and high risk behavior.
 version: 1.0.0
 supported_versions: ["1.0.0"]
 vendor: ipqs
-support: rapid7
 status: []
 tags: [ip, url, email, phone, domain]
 hub_tags:
   use_cases: [data_enrichment,threat_detection_and_response]
-  keywords: [ip_reputation, email_reputation, phone_reputation, domain_reputation]
+  keywords: [ip, url, email, phone, domain]
   features: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/ipqualityscore
@@ -25,7 +24,6 @@ connection:
     description: IPQualityScore API Key
     type: credential_secret_key
     required: true
-    example: 'abcdef12345'
 actions:
   ipLookup:
     title: IP Address Reputation
@@ -39,7 +37,7 @@ actions:
         example: '1.1.1.1'
       strictness:
         title: Strictness
-        description: How in depth (strict) do you want this query to be? Higher values take longer to process and may provide a higher false-positive rate We recommend starting at 0, the lowest strictness setting, and increasing to 1 or 2 depending on your levels of fraud
+        description: How in depth (strict) do you want this query to be? Higher values take longer to process and may provide a higher false-positive rate. We recommend starting at "0", the lowest strictness setting, and increasing to "1" or "2" depending on your levels of fraud.
         type: integer
         required: true
         default: 0
@@ -50,102 +48,98 @@ actions:
           - 2
       user_agent:
         title: User Agent
-        description: You can optionally provide us with the user agent string (browser) This allows us to run additional checks to see if the user is a bot or running an invalid browser This allows us to evaluate the risk of the user as judged in the fraud_score
+        description: You can optionally provide us with the user agent string (browser). This allows us to run additional checks to see if the user is a bot or running an invalid browser. This allows us to evaluate the risk of the user as judged in the "fraud_score".
         type: string
         required: false
         example: 'Browser'
       user_language:
         title: User Language
-        description: You can optionally provide us with the user's language header This allows us to evaluate the risk of the user as judged in the fraud_score
+        description: You can optionally provide us with the user's language header. This allows us to evaluate the risk of the user as judged in the "fraud_score".
         type: string
         required: false
         example: 'English'
       fast:
         title: Fast
-        description: When this parameter is enabled our API will not perform certain forensic checks that take longer to process Enabling this feature greatly increases the API speed without much impact on accuracy
+        description: When this parameter is enabled our API will not perform certain forensic checks that take longer to process. Enabling this feature greatly increases the API speed without much impact on accuracy.
         type: boolean
         default: false
-        required: false
         example: false
       mobile:
         title: Mobile
-        description: You can optionally specify that this lookup should be treated as a mobile device Recommended for mobile lookups that do not have a user agent attached to the request
+        description: You can optionally specify that this lookup should be treated as a mobile device. Recommended for mobile lookups that do not have a user agent attached to the request.
         type: boolean
         default: false
-        required: false
         example : false
       allow_public_access_points:
         title: Allow Public Access Points
-        description: Bypasses certain checks for IP addresses from education and research institutions, schools, and some corporate connections to better accommodate audiences that frequently use public connections
+        description: Bypasses certain checks for IP addresses from education and research institutions, schools, and some corporate connections to better accommodate audiences that frequently use public connections.
         type: boolean
         default: false
-        required: false
         example : false
       lighter_penalties:
         title: Lighter Penalties
-        description: Skip some blacklists which can cause false-positives for sensitive audiences
+        description: Skip some blacklists which can cause false-positives for sensitive audiences.
         type: boolean
         default: false
-        required: false
         example : false
     output:
       fraud_score:
         title: Fraud Score
-        description: The overall fraud score of the user based on the IP, user agent, language, and any other optionally passed variables Fraud Scores >= 75 are suspicious, but not necessarily fraudulent We recommend flagging or blocking traffic with Fraud Scores >= 85, but you may find it beneficial to use a higher or lower threshold
+        description: The overall fraud score of the user based on the IP, user agent, language, and any other optionally passed variables. Fraud Scores >= 75 are suspicious, but not necessarily fraudulent. We recommend flagging or blocking traffic with Fraud Scores >= 85, but you may find it beneficial to use a higher or lower threshold.
         type: integer
         required: false
         example: 0
       country_code:
         title: Country Code
-        description: Two character country code of IP address or NA if unknown
+        description: Two character country code of IP address or "N/A" if unknown.
         type: string
         required: false
         example: 0
       region:
         title: Region
-        description: Region (state) of IP address if available or NA if unknown
+        description: Region (state) of IP address if available or "N/A" if unknown.
         type: string
         required: false
         example : 'India'
       city:
         title: City
-        description: City of IP address if available or NA if unknown
+        description: City of IP address if available or "N/A" if unknown.
         type: string
         required: false
         example : 'Delhi'
       zip_code:
         title: Zip Code
-        description: Zip or Postal code of the IP Address if available or NA if unknown
+        description: Zip or Postal code of the IP Address if available or "N/A" if unknown.
         type: string
         required: false
         example : '505001'
       ISP:
         title: ISP
-        description: ISP if one is known Otherwise NA
+        description: ISP if one is known. Otherwise "N/A".
         type: string
         required: false
         example : 'Google'
       ASN:
         title: ASN
-        description: Autonomous System Number if one is known Null if nonexistent
+        description: Autonomous System Number if one is known. Null if nonexistent.
         type: integer
         required: false
         example : 15169
       Organization:
         title: Organization
-        description: Organization if one is known Can be parent company or sub company of the listed ISP Otherwise NA
+        description: Organization if one is known. Can be parent company or sub company of the listed ISP. Otherwise "N/A".
         type: string
         required: false
         example: 'Google'
       is_crawler:
         title: Is Crawler
-        description: Is this IP associated with being a confirmed crawler from a mainstream search engine such as Googlebot, Bingbot, Yandex, etc based on hostname or IP address verification
+        description: Is this IP associated with being a confirmed crawler from a mainstream search engine such as Googlebot, Bingbot, Yandex, etc. based on hostname or IP address verification.
         type: boolean
         required: false
         example: false
       timezone:
         title: Timezone
-        description: Timezone of IP address if available or NA if unknown
+        description: Timezone of IP address if available or "N/A" if unknown.
         type: string
         required: false
         example: 'America/Los_Angeles'
@@ -157,78 +151,78 @@ actions:
         example: false
       host:
         title: Host
-        description: Hostname of the IP address if one is available
+        description: Hostname of the IP address if one is available.
         type: string
         required: false
         example: 'dns.google'
       proxy:
         title: Proxy
-        description: Is this IP address suspected to be a proxy? (SOCKS, Elite, Anonymous, VPN, Tor, etc)
+        description: Is this IP address suspected to be a proxy? (SOCKS, Elite, Anonymous, VPN, Tor, etc.)
         type: boolean
         required: false
         example: false
       vpn:
         title: VPN
-        description: Is this IP suspected of being a VPN connection? This can include data center ranges which can become active VPNs at any time The proxy status will always be true when this value is true
+        description: Is this IP suspected of being a VPN connection? This can include data center ranges which can become active VPNs at any time. The "proxy" status will always be true when this value is true.
         type: boolean
         required: false
         example: false
       tor:
         title: TOR
-        description: Is this IP suspected of being a TOR connection? This can include previously active TOR nodes and exits which can become active TOR exits at any time The proxy status will always be true when this value is true
+        description: Is this IP suspected of being a TOR connection? This can include previously active TOR nodes and exits which can become active TOR exits at any time. The "proxy" status will always be true when this value is true.
         type: boolean
         required: false
         example: false
       active_vpn:
         title: Active VPN
-        description: Premium Account Feature - Identifies active VPN connections used by popular VPN services and private VPN servers
+        description: Premium Account Feature - Identifies active VPN connections used by popular VPN services and private VPN servers.
         type: boolean
         required: false
         example: false
       active_tor:
         title: Active TOR
-        description: Premium Account Feature - Identifies active TOR exits on the TOR network
+        description: Premium Account Feature - Identifies active TOR exits on the TOR network.
         type: boolean
         required: false
         example: false
       recent_abuse:
         title: Recent Abuse
-        description: This value will indicate if there has been any recently verified abuse across our network for this IP address Abuse could be a confirmed chargeback, compromised device, fake app install, or similar malicious behavior within the past few days
+        description: This value will indicate if there has been any recently verified abuse across our network for this IP address. Abuse could be a confirmed chargeback, compromised device, fake app install, or similar malicious behavior within the past few days.
         type: boolean
         required: false
         example: false
       bot_status:
         title: Bot Status
-        description: Premium Account Feature - Indicates if bots or non-human traffic has recently used this IP address to engage in automated fraudulent behavior Provides stronger confidence that the IP address is suspicious
+        description: Premium Account Feature - Indicates if bots or non-human traffic has recently used this IP address to engage in automated fraudulent behavior. Provides stronger confidence that the IP address is suspicious.
         type: boolean
         required: false
         example: false
       connection_type:
         title: Connection Type
-        description: Classification of the IP address connection type as Residential, Corporate, Education, Mobile, or Data Center
+        description: Classification of the IP address connection type as "Residential", "Corporate", "Education", "Mobile", or "Data Center".
         type: string
         required: false
         example: 'Data Center'
       abuse_velocity:
         title: Abuse Velocity
-        description: Premium Account Feature - How frequently the IP address is engaging in abuse across the IPQS threat network Values can be high, medium, low, or none Can be used in combination with the Fraud Score to identify bad behavior
+        description: Premium Account Feature - How frequently the IP address is engaging in abuse across the IPQS threat network. Values can be "high", "medium", "low", or "none". Can be used in combination with the Fraud Score to identify bad behavior.
         type: string
         required: false
         example: 'none'
       latitude:
         title: Latitude
-        description: Latitude of IP address if available or NA if unknown
+        description: Latitude of IP address if available or "N/A" if unknown.
         type: float
         required: false
         example: 34.0544014
       longitude:
         title: Longitude
-        description: Longitude of IP address if available or NA if unknown
+        description: Longitude of IP address if available or "N/A" if unknown.
         type: float
         required: false
         example: -118.24410248
   emailLookup:
-    title: Email Address Reputation
+    title: Email Address reputation
     description: Email Address reputation
     input:
       emailAddress:
@@ -239,7 +233,7 @@ actions:
         example: 'abc@gmail.com'
       abuse_strictness:
         title: Abuse Strictness
-        description: Set the strictness level for machine learning pattern recognition of abusive email addresses with the recent_abuse data point
+        description: Set the strictness level for machine learning pattern recognition of abusive email addresses with the "recent_abuse" data point.
         type: integer
         required: true
         default: 0
@@ -250,24 +244,21 @@ actions:
           - 2
       fast:
         title: Fast
-        description: When this parameter is enabled our API will not perform an SMTP check with the mail service provider, which greatly increases the API speed
+        description: When this parameter is enabled our API will not perform an SMTP check with the mail service provider, which greatly increases the API speed.
         type: boolean
         default: false
         example: false
-        required: false
       timeout:
-        title: Timeout
-        description: Maximum number of seconds to wait for a reply from a mail service provider If your implementation requirements do not need an immediate response, we recommend bumping this value to 20
+        title: timeout
+        description: Maximum number of seconds to wait for a reply from a mail service provider. If your implementation requirements do not need an immediate response, we recommend bumping this value to 20.
         type: integer
         example: 5
-        required: false
       suggest_domain:
         title: Suggest Domain
-        description: Force analyze if the email addresses domain has a typo and should be corrected to a popular mail service
+        description: Force analyze if the email addresses domain has a typo and should be corrected to a popular mail service.
         type: boolean
         default: false
         example: false
-        required: false
     output:
       valid:
         title: Valid
@@ -277,130 +268,130 @@ actions:
         example: false
       disposable:
         title: Disposable
-        description: Is this email suspected of belonging to a temporary or disposable mail service? Usually associated with fraudsters and scammers
+        description: Is this email suspected of belonging to a temporary or disposable mail service? Usually associated with fraudsters and scammers.
         type: boolean
         required: false
         example: false
       smtp_score:
         title: SMTP Score
-        description: Validity score of email server's SMTP setup Range is -1 - 3 Scores above -1 can be associated with a valid email -1 = invalid email address 0 = mail server exists, but is rejecting all mail 1 = mail server exists, but is showing a temporary error 2 = mail server exists, but accepts all email 3 = mail server exists and has verified the email address
+        description: Validity score of email server's SMTP setup. Range is "-1" - "3". Scores above "-1" can be associated with a valid email. -1 = invalid email address 0 = mail server exists, but is rejecting all mail 1 = mail server exists, but is showing a temporary error 2 = mail server exists, but accepts all email 3 = mail server exists and has verified the email address.
         type: integer
         required: false
         example: 1
       overall_score:
         title: Overall Score
-        description: Overall email validity score Range is 0 - 4 Scores above 1 can be associated with a valid email 0 = invalid email address 1 = dns valid, unreachable mail server 2 = dns valid, temporary mail rejection error 3 = dns valid, accepts all mail 4 = dns valid, verified email exists
+        description: Overall email validity score. Range is "0" - "4". Scores above "1" can be associated with a valid email. 0 = invalid email address 1 = dns valid, unreachable mail server 2 = dns valid, temporary mail rejection error 3 = dns valid, accepts all mail 4 = dns valid, verified email exists
         type: integer
         required: false
         example: 0
       first_name:
         title: First Name
-        description: Suspected first name based on email Returns CORPORATE if the email is suspected of being a generic company email Returns UNKNOWN if the first name was not determinable
+        description: Suspected first name based on email. Returns "CORPORATE" if the email is suspected of being a generic company email. Returns "UNKNOWN" if the first name was not determinable.
         type: string
         required: false
         example: 'CORPORATE'
       generic:
         title: Generic
-        description: Is this email suspected as being a catch all or shared email for a domain? (admin@, webmaster@, newsletter@, sales@, contact@, etc)
+        description: Is this email suspected as being a catch all or shared email for a domain? ("admin@", "webmaster@", "newsletter@", "sales@", "contact@", etc.)
         type: boolean
         required: false
         example: false
       common:
         title: Common
-        description: Is this email from a common email provider?
+        description: Is this email from a common email provider? ("gmail.com", "yahoo.com", "hotmail.com", etc.)
         type: boolean
         required: false
         example: false
       dns_valid:
         title: DNS Valid
-        description: Does the email's hostname have valid DNS entries? Partial indication of a valid email
+        description: Does the email's hostname have valid DNS entries? Partial indication of a valid email.
         type: boolean
         required: false
         example: false
       honeypot:
         title: Honeypot
-        description: Is this email believed to be a honeypot or SPAM trap? Bulk mail sent to these emails increases your risk of being blacklisted by large ISPs & ending up in the spam folder
+        description: Is this email believed to be a "honeypot" or "SPAM trap"? Bulk mail sent to these emails increases your risk of being blacklisted by large ISPs & ending up in the spam folder.
         type: boolean
         required: false
         example: false
       deliverability:
         title: Deliverability
-        description: How likely is this email to be delivered to the user and land in their mailbox Values can be high, medium, or low
+        description: How likely is this email to be delivered to the user and land in their mailbox. Values can be "high", "medium", or "low".
         type: string
         required: false
         example: 'high'
       frequent_complainer:
         title: Frequent Complainer
-        description: Indicates if this email frequently unsubscribes from marketing lists or reports email as SPAM
+        description: Indicates if this email frequently unsubscribes from marketing lists or reports email as SPAM.
         type: boolean
         required: false
         example: false
       spam_trap_score:
         title: Spam Trap Score
-        description: Confidence level of the email address being an active SPAM trap Values can be high, medium, low, or none We recommend scrubbing emails with high or medium statuses Avoid low emails whenever possible for any promotional mailings
+        description: Confidence level of the email address being an active SPAM trap. Values can be "high", "medium", "low", or "none". We recommend scrubbing emails with "high" or "medium" statuses. Avoid "low" emails whenever possible for any promotional mailings.
         type: string
         required: false
         example: 'high'
       catch_all:
         title: Catch All
-        description: Is this email likely to be a catch all where the mail server verifies all emails tested against it as valid? It is difficult to determine if the address is truly valid in these scenarios, since the email's server will not confirm the account's status
+        description: Is this email likely to be a "catch all" where the mail server verifies all emails tested against it as valid? It is difficult to determine if the address is truly valid in these scenarios, since the email's server will not confirm the account's status.
         type: boolean
         required: false
         example: false
       timed_out:
         title: Timed Out
-        description: Did the connection to the mail service provider timeout during the verification? If so, we recommend increasing the timeout variable above the default 7 second value Lookups that timeout with a valid result as false are most likely false and should be not be trusted
+        description: Did the connection to the mail service provider timeout during the verification? If so, we recommend increasing the "timeout" variable above the default 7 second value. Lookups that timeout with a "valid" result as false are most likely false and should be not be trusted.
         type: boolean
         required: false
         example: false
       suspect:
         title: Suspect
-        description: This value indicates if the mail server is currently replying with a temporary error and unable to verify the email address This status will also be true for catch all email addresses as defined below If this value is true, then we suspect the valid result may be cotaminated and there is not a guarantee that the email address is truly valid
+        description: This value indicates if the mail server is currently replying with a temporary error and unable to verify the email address. This status will also be true for "catch all" email addresses as defined below. If this value is true, then we suspect the "valid" result may be tainted and there is not a guarantee that the email address is truly valid.
         type: boolean
         required: false
         example: false
       recent_abuse:
         title: Recent Abuse
-        description: This value will indicate if there has been any recently verified abuse across our network for this email address Abuse could be a confirmed chargeback, fake signup, compromised device, fake app install, or similar malicious behavior within the past few days
+        description: This value will indicate if there has been any recently verified abuse across our network for this email address. Abuse could be a confirmed chargeback, fake signup, compromised device, fake app install, or similar malicious behavior within the past few days.
         type: boolean
         required: false
         example: false
       fraud_score:
         title: Fraud Score
-        description: The overall Fraud Score of the user based on the email's reputation and recent behavior across the IPQS threat network Fraud Scores >= 75 are suspicious, but not necessarily fraudulent
+        description: The overall Fraud Score of the user based on the email's reputation and recent behavior across the IPQS threat network. Fraud Scores >= 75 are suspicious, but not necessarily fraudulent.
         type: integer
         required: false
         example: 0
       suggested_domain:
         title: Suggested Domain
-        description: Default value is NA Indicates if this email's domain should in fact be corrected to a popular mail service This field is useful for catching user typos For example, an email address with gmail, would display a suggested domain of gmail his feature supports all major mail service providers
+        description: Default value is "N/A". Indicates if this email's domain should in fact be corrected to a popular mail service. This field is useful for catching user typos. For example, an email address with "gmai.com", would display a suggested domain of "gmail.com". This feature supports all major mail service providers.
         type: string
-        example: 'NA'
+        example: 'N/A'
         required: false
       leaked:
         title: Leaked
-        description: Was this email address associated with a recent database leak from a third party? Leaked accounts pose a risk as they may have become compromised during a database breach
+        description: Was this email address associated with a recent database leak from a third party? Leaked accounts pose a risk as they may have become compromised during a database breach.
         type: boolean
         required: false
         example: false
       sanitized_email:
         title: Sanitized Email
-        description: Sanitized email address with all aliases and masking removed, such as multiple periods for Gmail
+        description: Sanitized email address with all aliases and masking removed, such as multiple periods for Gmail.com.
         type: string
         required: false
         example: 'abc@gmail.com'
       domain_age:
         title: Domain Age
-        description: A human description of when this domain was registered
+        description: A human description of when this domain was registered.
         type: object
         required: false
-        example: '{human: 28 years ago,timestamp: 808286400,iso: 1995-08-13T00:00:00-04:00 }'
+        example: '{"human": "28 years ago","timestamp": 808286400,"iso": "1995-08-13T00:00:00-04:00" }'
       first_seen:
         title: First Seen
-        description: A human description of the email address age, using an estimation of the email creation date when IPQS first discovered this email address
+        description: A human description of the email address age, using an estimation of the email creation date when IPQS first discovered this email address.
         type: object
         required: false
-        example: '{human: 7 years ago,timestamp: 1483250461,iso: 2017-01-01T01:01:01-05:00}'
+        example: '{"human": "7 years ago","timestamp": 1483250461,"iso": "2017-01-01T01:01:01-05:00"}'
   urlLookup:
     title: URL Reputation
     description: URL Reputation
@@ -413,7 +404,7 @@ actions:
         example: 'https://abc.com'
       strictness:
         title: Strictness
-        description: How strict should we scan this URL? Stricter checks may provide a higher false-positive rate We recommend defaulting to level 0, the lowest strictness setting, and increasing to 1 or 2 depending on your levels of abuse
+        description: How strict should we scan this URL? Stricter checks may provide a higher false-positive rate. We recommend defaulting to level "0", the lowest strictness setting, and increasing to "1" or "2" depending on your levels of abuse.
         type: integer
         required: true
         default: 0
@@ -424,57 +415,56 @@ actions:
           - 2
       fast:
         title: Fast
-        description: When enabled, the API will provide quicker response times using lighter checks and analysis This setting defaults to False
+        description: When enabled, the API will provide quicker response times using lighter checks and analysis. This setting defaults to False.
         type: boolean
         default: false
         example: false
-        required: false
     output:
       unsafe:
         title: Unsafe
-        description: Is this domain suspected of being unsafe due to phishing, malware, spamming, or abusive behavior? View the confidence level by analyzing the risk_score
+        description: Is this domain suspected of being unsafe due to phishing, malware, spamming, or abusive behavior? View the confidence level by analyzing the "risk_score".
         type: boolean
         required: false
         example: false
       domain:
         title: Domain
-        description: Domain name of the final destination URL of the scanned link, after following all redirects
+        description: Domain name of the final destination URL of the scanned link, after following all redirects.
         type: string
         required: false
         example: 'https://abc.com'
       ip_address:
         title: IP Address
-        description: IP address For example nginx Value will be NA if unavailable
+        description: IP address. For example "nginx/1.16.0" Value will be "N/A" if unavailable.
         type: string
         required: false
         example: '1.1.1.1'
       server:
         title: Server
-        description: The server banner of the domain's IP address For example  nginx Value will be NA if unavailable
+        description: The server banner of the domain's IP address. For example  "nginx/1.16.0". Value will be "N/A" if unavailable.
         type: string
         required: false
         example: 'nginx/1.16.0'
       domain_rank:
         title: Domain Rank
-        description: Estimated popularity rank of website globally Value is 0 if the domain is unranked or has low traffic
+        description: Estimated popularity rank of website globally. Value is "0" if the domain is unranked or has low traffic.
         type: integer
         required: false
         example: 0
       dns_valid:
         title: DNS Valid
-        description: The domain of the URL has valid DNS records
+        description: The domain of the URL has valid DNS records.
         type: boolean
         required: false
         example: false
       parking:
         title: Parking
-        description: Is the domain of this URL currently parked with a for sale notice?
+        description: Is the domain of this URL currently parked with a for sale notice?.
         type: boolean
         required: false
         example: false
       spamming:
         title: Spamming
-        description: Is the domain of this URL associated with email SPAM or abusive email addresses?
+        description: Is the domain of this URL associated with email SPAM or abusive email addresses?.
         type: boolean
         required: false
         example: false
@@ -486,13 +476,13 @@ actions:
         example: false
       phishing:
         title: Phishing
-        description: Is this URL associated with malicious phishing behavior?
+        description: Is this URL associated with malicious phishing behavior?.
         type: boolean
         required: false
         example: false
       suspicious:
         title: Suspicious
-        description: Is this URL suspected of being malicious or used for phishing or abuse? Use in conjunction with the risk_score as a confidence level
+        description: Is this URL suspected of being malicious or used for phishing or abuse? Use in conjunction with the "risk_score" as a confidence level.
         type: boolean
         required: false
         example: false
@@ -504,22 +494,22 @@ actions:
         example: false
       risk_score:
         title: Risk Score
-        description: The IPQS risk score which estimates the confidence level for malicious URL detection Risk Scores 85+ are high risk, while Risk Scores = 100 are confirmed as accurate
+        description: The IPQS risk score which estimates the confidence level for malicious URL detection. Risk Scores 85+ are high risk, while Risk Scores = 100 are confirmed as accurate.
         type: integer
         required: false
         example: 0
       category:
-        title: Category
-        description: Website classification and category related to the content and industry of the site Over 70 categories are available including Video Streaming, Trackers, Gaming, Privacy, Advertising, Hacking, Malicious, Phishing, etc The value will be NA if unknown
+        title: category
+        description: Website classification and category related to the content and industry of the site. Over 70 categories are available including "Video Streaming", "Trackers", "Gaming", "Privacy", "Advertising", "Hacking", "Malicious", "Phishing", etc. The value will be "N/A" if unknown.
         type: string
         required: false
         example: 'Search Engines'
       domain_age:
         title: Domain Age
-        description: A human description of when this domain was registered
+        description: A human description of when this domain was registered.
         type: object
         required: false
-        example: '{human: 26 years ago,timestamp: 874296000,iso: 1997-09-15T00:00:00-04:00}'
+        example: '{"human": "26 years ago","timestamp": 874296000,"iso": "1997-09-15T00:00:00-04:00"}'
   domainLookup:
       title: Domain Reputation
       description: Domain Reputation
@@ -532,7 +522,7 @@ actions:
           example: 'https://abc.com'
         strictness:
           title: Strictness
-          description: How strict should we scan this Domain? Stricter checks may provide a higher false-positive rate We recommend defaulting to level 0, the lowest strictness setting, and increasing to 1 or 2 depending on your levels of abuse
+          description: How strict should we scan this Domain? Stricter checks may provide a higher false-positive rate. We recommend defaulting to level "0", the lowest strictness setting, and increasing to "1" or "2" depending on your levels of abuse.
           type: integer
           required: true
           default: 0
@@ -543,57 +533,56 @@ actions:
             - 2
         fast:
           title: Fast
-          description: When enabled, the API will provide quicker response times using lighter checks and analysis This setting defaults to False
+          description: When enabled, the API will provide quicker response times using lighter checks and analysis. This setting defaults to False.
           type: boolean
           default: false
           example: false
-          required: false
       output:
         unsafe:
           title: Unsafe
-          description: Is this domain suspected of being unsafe due to phishing, malware, spamming, or abusive behavior? View the confidence level by analyzing the risk_score
+          description: Is this domain suspected of being unsafe due to phishing, malware, spamming, or abusive behavior? View the confidence level by analyzing the "risk_score".
           type: boolean
           required: false
           example: false
         domain:
           title: Domain
-          description: Domain name of the final destination URL of the scanned link, after following all redirects
+          description: Domain name of the final destination URL of the scanned link, after following all redirects.
           type: string
           required: false
           example: 'https://abc.com'
         ip_address:
           title: IP Address
-          description: IP address For example nginx1 Value will be NA if unavailable
+          description: IP address. For example "nginx/1.16.0" Value will be "N/A" if unavailable.
           type: string
           required: false
           example: '1.1.1.1'
         server:
           title: Server
-          description: The server banner of the domain's IP address For example  nginx Value will be NA if unavailable
+          description: The server banner of the domain's IP address. For example  "nginx/1.16.0". Value will be "N/A" if unavailable.
           type: string
           required: false
           example: 'nginx/1.16.0'
         domain_rank:
           title: Domain Rank
-          description: Estimated popularity rank of website globally Value is 0 if the domain is unranked or has low traffic
+          description: Estimated popularity rank of website globally. Value is "0" if the domain is unranked or has low traffic.
           type: integer
           required: false
           example: 0
         dns_valid:
           title: DNS Valid
-          description: The domain has valid DNS records?
+          description: The domain has valid DNS records?.
           type: boolean
           required: false
           example: false
         parking:
           title: Parking
-          description: Is the domain currently parked with a for sale notice?
+          description: Is the domain currently parked with a for sale notice?.
           type: boolean
           required: false
           example: false
         spamming:
           title: Spamming
-          description: Is the domain  associated with email SPAM or abusive email addresses?
+          description: Is the domain  associated with email SPAM or abusive email addresses?.
           type: boolean
           required: false
           example: false
@@ -605,13 +594,13 @@ actions:
           example: false
         phishing:
           title: Phishing
-          description: Is this domain associated with malicious phishing behavior?
+          description: Is this domain associated with malicious phishing behavior?.
           type: boolean
           required: false
           example: false
         suspicious:
           title: Suspicious
-          description: Is this URL suspected of being malicious or used for phishing or abuse? Use in conjunction with the risk_score as a confidence level
+          description: Is this URL suspected of being malicious or used for phishing or abuse? Use in conjunction with the "risk_score" as a confidence level.
           type: boolean
           required: false
           example: false
@@ -623,22 +612,22 @@ actions:
           example: false
         risk_score:
           title: Risk Score
-          description: The IPQS risk score which estimates the confidence level for malicious URL detection Risk Scores 85+ are high risk, while Risk Scores = 100 are confirmed as accurate
+          description: The IPQS risk score which estimates the confidence level for malicious URL detection. Risk Scores 85+ are high risk, while Risk Scores = 100 are confirmed as accurate.
           type: integer
           required: false
           example: 0
         category:
-          title: Category
-          description: Website classification and category related to the content and industry of the site Over 70 categories are available including Video Streaming, Trackers, Gaming, Privacy, Advertising, Hacking, Malicious, Phishing, etc The value will be NA if unknown
+          title: category
+          description: Website classification and category related to the content and industry of the site. Over 70 categories are available including "Video Streaming", "Trackers", "Gaming", "Privacy", "Advertising", "Hacking", "Malicious", "Phishing", etc. The value will be "N/A" if unknown.
           type: string
           required: false
           example: 'Search Engines'
         domain_age:
           title: Domain Age
-          description: A human description of when this domain was registered
+          description: A human description of when this domain was registered.
           type: object
           required: false
-          example: '{human: 26 years ago,timestamp: 874296000,iso: 1997-09-15T00:00:00-04:00}'
+          example: '{"human": "26 years ago","timestamp": 874296000,"iso": "1997-09-15T00:00:00-04:00"}'
   phoneLookup:
     title: Phone Reputation
     description: Phone Reputation
@@ -651,7 +640,7 @@ actions:
         example: '+918765433210'
       strictness:
         title: Strictness
-        description: How in depth (strict) do you want this query to be? Higher values take longer to process and may provide a higher false-positive rate We recommend starting at 0, the lowest strictness setting, and increasing to 1 or 2 depending on your levels of fraud
+        description: How in depth (strict) do you want this query to be? Higher values take longer to process and may provide a higher false-positive rate. We recommend starting at "0", the lowest strictness setting, and increasing to "1" or "2" depending on your levels of fraud.
         type: integer
         required: true
         default: 0
@@ -662,134 +651,134 @@ actions:
           - 2
       country:
         title: Country
-        description: You can optionally provide us with the default country or countries(comma separated) this phone number is suspected to be associated with Our system will prefer to use a country on this list for verification or will require a country to be specified in the event the phone number is less than 10 digits
+        description: You can optionally provide us with the default country or countries(comma separated) this phone number is suspected to be associated with. Our system will prefer to use a country on this list for verification or will require a country to be specified in the event the phone number is less than 10 digits.
         type: string
         required: false
         example: 'US'
     output:
       formatted:
         title: Formatted
-        description: The phone number formatted in the international dialing code NA if not formattable
+        description: The phone number formatted in the international dialing code. N/A if not formattable.
         type: string
         required: false
         example: '0'
       local_format:
         title: Local Format
-        description: The phone number formatted in the country's local routing rules with area code NA if not formattable
+        description: The phone number formatted in the country's local routing rules with area code. N/A if not formattable.
         type: string
         required: false
         example: '0'
       valid:
         title: Valid
-        description: Is the phone number properly formatted and considered valid based on assigned phone numbers available to carriers in that country?
+        description: Is the phone number properly formatted and considered valid based on assigned phone numbers available to carriers in that country?.
         type: boolean
         required: false
         example: false
       fraud_score:
         title: Fraud Score
-        description: The IPQS risk score which estimates how likely a phone number is to be fraudulent Scores 85+ are high risk
+        description: The IPQS risk score which estimates how likely a phone number is to be fraudulent. Scores 85+ are high risk.
         type: integer
         required: false
         example: 0
       recent_abuse:
         title: Recent Abuse
-        description: Has this phone number been associated with recent or ongoing fraud?
+        description: Has this phone number been associated with recent or ongoing fraud?.
         type: boolean
         required: false
         example: false
       VOIP:
         title: VOIP
-        description: Is this phone number a Voice Over Internet Protocol (VOIP) or digital phone number?
+        description: Is this phone number a Voice Over Internet Protocol (VOIP) or digital phone number?.
         type: boolean
         required: false
         example: false
       prepaid:
         title: Prepaid
-        description: Is this phone number associated with a prepaid service plan?
+        description: Is this phone number associated with a prepaid service plan?.
         type: boolean
         required: false
         example: false
       risky:
         title: Risky
-        description: Is this phone number associated with fraudulent activity, scams, robo calls, fake accounts, or other unfriendly behavior?
+        description: Is this phone number associated with fraudulent activity, scams, robo calls, fake accounts, or other unfriendly behavior?.
         type: boolean
         required: false
         example: false
       active:
         title: Active
-        description: Is this phone number a live usable phone number that is currently active?
+        description: Is this phone number a live usable phone number that is currently active?.
         type: boolean
         required: false
         example: false
       carrier:
         title: Carrier
-        description: The carrier (service provider) this phone number has been assigned to or NA if unknown
+        description: The carrier (service provider) this phone number has been assigned to or "N/A" if unknown.
         type: string
         required: false
         example: 'airtel'
       line_type:
         title: Line Type
-        description: The type of line this phone number is associated with (Toll Free, Mobile, Landline, Satellite, VOIP, Premium Rate, Pager, etc) or NA if unknown
+        description: The type of line this phone number is associated with (Toll Free, Mobile, Landline, Satellite, VOIP, Premium Rate, Pager, etc...) or "N/A" if unknown.
         type: string
         required: false
         example: 'Unknown'
       country:
         title: Country
-        description: The two character country code for this phone number
+        description: The two character country code for this phone number.
         type: string
         required: false
         example: 'IN'
       city:
         title: City
-        description: City of the phone number if available or NA if unknown
+        description: City of the phone number if available or "N/A" if unknown.
         type: string
         required: false
         example: 'Delhi'
       zip_code:
         title: Zip Code
-        description: Zip or Postal code of the phone number if available or NA if unknown
+        description: Zip or Postal code of the phone number if available or "N/A" if unknown.
         type: string
         required: false
         example: '500081'
       region:
         title: Region
-        description: Region (state) of the phone number if available or NA if unknown
+        description: Region (state) of the phone number if available or "N/A" if unknown.
         type: string
         required: false
         example: 'India'
       dialing_code:
         title: Dialing Code
-        description: The 1 to 4 digit dialing code for this phone number or null if unknown
+        description: The 1 to 4 digit dialing code for this phone number or null if unknown.
         type: integer
         required: false
         example: 0
       active_status:
         title: Active Status
-        description: Additional details on the status of the subscriber connection when enhanced active line checks are enabled These values can be Active Line, Disconnected Line, Phone Turned Off, Inconclusive Status, or NA if unknown
+        description: Additional details on the status of the subscriber connection when enhanced active line checks are enabled. These values can be "Active Line", "Disconnected Line", "Phone Turned Off", "Inconclusive Status", or "N/A" if unknown.
         type: string
         required: false
         example: 'Disconnected Line'
       leaked:
         title: Leaked
-        description: Was this phone number associated with a recent database leak from a third party? Leaked accounts pose a risk as they may have become compromised during a database breach
+        description: Was this phone number associated with a recent database leak from a third party? Leaked accounts pose a risk as they may have become compromised during a database breach.
         type: boolean
         required: false
         example: false
       name:
         title: Name
-        description: The owner name of the phone number such as the first or last name or business name assigned to the phone number Multiple names will be returned in comma separated format Value is NA if unknown
+        description: The owner name of the phone number such as the first or last name or business name assigned to the phone number. Multiple names will be returned in comma separated format. Value is "N/A" if unknown.
         type: string
         required: false
         example: 'Jhon'
       timezone:
         title: Timezone
-        description: Timezone of the phone number if available or NA if unknown
+        description: Timezone of the phone number if available or "N/A" if unknown.
         type: string
         required: false
         example: 'Asia/Kolkata'
       do_not_call:
         title: Do Not Call
-        description: Indicates if the phone number is listed on any Do Not Call (DNC) lists Only supported in US and CA This data may not be 100% up to date with the latest DNC blacklists
+        description: Indicates if the phone number is listed on any Do Not Call (DNC) lists. Only supported in US and CA. This data may not be 100% up to date with the latest DNC blacklists.
         type: boolean
         required: false
         example: false
