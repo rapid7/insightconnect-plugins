@@ -11,7 +11,7 @@ class Input:
     FAST = "fast"
     STRICTNESS = "strictness"
     URL = "url"
-    
+
 
 class Output:
     ADULT = "adult"
@@ -29,10 +29,11 @@ class Output:
     SPAMMING = "spamming"
     SUSPICIOUS = "suspicious"
     UNSAFE = "unsafe"
-    
+
 
 class UrlLookupInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(
+        """
    {
   "type": "object",
   "title": "Variables",
@@ -48,7 +49,6 @@ class UrlLookupInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Strictness",
       "description": "How strict should we scan this URL? Stricter checks may provide a higher false-positive rate. We recommend defaulting to level \\"0\\", the lowest strictness setting, and increasing to \\"1\\" or \\"2\\" depending on your levels of abuse.",
-      "default": 0,
       "enum": [
         0,
         1,
@@ -68,14 +68,16 @@ class UrlLookupInput(insightconnect_plugin_runtime.Input):
     "url"
   ]
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class UrlLookupOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(
+        """
    {
   "type": "object",
   "title": "Variables",
@@ -172,7 +174,8 @@ class UrlLookupOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
