@@ -21,21 +21,24 @@ class IPQSClient:
     def ipqs_lookup(self, url: str, ad_params: dict) -> dict:
         try:
             response = self.session.get(url, headers=self._headers, params=ad_params).json()
-            if str(response.get("success", "")).lower() != "true":
+            if str(response["success"]) != "True":
                 self._logger.error(f"Error: {response['message']}")
                 raise PluginException(
-                    preset=PluginException.Preset.BAD_REQUEST,
+                    cause=PluginException.Preset.BAD_REQUEST,
+                    assistance="Verify your plugin input is correct and not malformed and try again. "
+                    "If the issue persists, please contact support.\n",
                     data=response,
                 )
             return response
 
-        except (ConnectTimeout, ProxyError) as error:
+        except (ConnectTimeout, ProxyError, InvalidURL) as error:
             msg = "Error connecting with the IPQualityScore."
             self._logger.error(f"{msg} Error: {error}")
             raise PluginException(
-                cause="Received an error Response from IPQualityscore",
-                assistance="Likely to be Connection Timeout or proxy error please check the error response",
-                data=error,
+                cause=PluginException.Preset.BAD_REQUEST,
+                assistance="Verify your plugin input is correct and not malformed and try again. "
+                "If the issue persists, please contact support.\n",
+                data=response,
             )
 
         except HTTPError as error:
