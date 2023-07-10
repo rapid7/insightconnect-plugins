@@ -298,7 +298,7 @@ Example output:
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+*There is no troubleshooting for this plugin.*  
 
 # Version History
 
