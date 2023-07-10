@@ -14,7 +14,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
     LAST_COLLECTION_DATE = "last_collection_date"
     NEXT_PAGE_INDEX = "next_page_index"
     STATUS_CODE = "status_code"
-    SPLIT_SIZE = 1000
+    SPLIT_SIZE = 200
     PREVIOUS_LOGS_HASHES = "previous_logs_hashes"
 
     def __init__(self):
