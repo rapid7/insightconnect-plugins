@@ -78,7 +78,7 @@ Example input:
   "last_name": "Smith",
   "type": "Basic"
 }
-```  
+```
 
 ##### Output
 
@@ -100,7 +100,7 @@ Example output:
   "last_name": "Smith",
   "type": 1
 }
-```  
+```
 
 #### Delete User
   
@@ -128,7 +128,7 @@ Example input:
   "transfer_recordings": false,
   "transfer_webinars": false
 }
-```  
+```
 
 ##### Output
 
@@ -142,7 +142,7 @@ Example output:
 {
   "success": true
 }
-```  
+```
 
 #### Get User
   
@@ -160,7 +160,7 @@ Example input:
 {
   "user_id": "user@example.com"
 }
-```  
+```
 
 ##### Output
 
@@ -200,7 +200,7 @@ Example input:
 {
   "activity_type": "All"
 }
-```  
+```
 
 ##### Output
 
@@ -252,7 +252,7 @@ Example output:
     "version": "5.12.2"
   }
 }
-```  
+```
 
 ### Custom Types
   
