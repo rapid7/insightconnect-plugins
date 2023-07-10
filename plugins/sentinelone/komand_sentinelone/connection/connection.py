@@ -18,6 +18,7 @@ from komand_sentinelone.util.constants import (
     CONSOLE_USER_HEADER_TOKEN_FIELD,
     SERVICE_USER_HEADER_TOKEN_FIELD,
     SERVICE_USER_TYPE,
+    DEFAULT_REQUESTS_TIMEOUT,
 )
 
 
@@ -72,18 +73,18 @@ class Connection(insightconnect_plugin_runtime.Connection):
         request_url = self._prepare_auth_url_based_on_version(version)
         request_data = self._prepare_body_for_auth_request()
         self.logger.info(f"Trying to authenticate with API version {version}")
-        response = requests.post(request_url, json=request_data)
+        response = requests.post(request_url, json=request_data, timeout=DEFAULT_REQUESTS_TIMEOUT)
         self._handle_auth_response(request_url, response)
 
         if response.status_code == 200:
-            token = response.json().get(DATA_FIELD).get("token")
+            token = response.json().get(DATA_FIELD, {}).get("token")
         else:
             version = "2.0"
             self.logger.info(f"API v2.1 failed... trying v{version}")
             request_url = self._prepare_auth_url_based_on_version(version)
-            response = requests.post(request_url, json=request_data)
+            response = requests.post(request_url, json=request_data, timeout=DEFAULT_REQUESTS_TIMEOUT)
             self._handle_auth_response(request_url, response)
-            token = response.json().get(DATA_FIELD).get("token")
+            token = response.json().get(DATA_FIELD, {}).get("token")
             # We know the connection failed when both 2.1 and 2.0 do not give 200 responses
             if not token:
                 raise ConnectionTestException(
@@ -263,7 +264,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         headers = self.make_token_header()
         body = {"filter": {"contentHashes": hash_value}, "data": {"targetScope": "site"}}
 
-        results = requests.post(endpoint, json=body, headers=headers)
+        results = requests.post(endpoint, json=body, headers=headers, timeout=DEFAULT_REQUESTS_TIMEOUT)
         if results.status_code != 200:
             raise PluginException(cause="Could not blacklist file hash.", assistance=f"Result was: {results.text}")
 
@@ -568,7 +569,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
             response.raise_for_status()
             if full_response:
                 return response
-
             return response.json()
         except requests.HTTPError:
             raise PluginException(cause="API call failed: " + response.text)
