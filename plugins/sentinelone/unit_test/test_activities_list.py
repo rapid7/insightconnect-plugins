@@ -1,13 +1,15 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from unittest import TestCase
 from unittest.mock import patch
+
 from komand_sentinelone.actions.activities_list import ActivitiesList
 from komand_sentinelone.actions.activities_list.schema import Input
-from unit_test.util import Util
-from unittest import TestCase
+
+from util import Util
 
 
 class TestActivitiesList(TestCase):

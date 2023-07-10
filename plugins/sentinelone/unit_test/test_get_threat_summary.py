@@ -1,12 +1,14 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest.mock import patch
-from komand_sentinelone.actions.get_threat_summary import GetThreatSummary
-from unit_test.util import Util
 from unittest import TestCase
+from unittest.mock import patch
+
+from komand_sentinelone.actions.get_threat_summary import GetThreatSummary
+
+from util import Util
 
 
 class TestGetThreatSummary(TestCase):

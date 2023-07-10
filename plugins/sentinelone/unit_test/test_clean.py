@@ -1,10 +1,11 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
-from komand_sentinelone.util.api import clean
 from unittest import TestCase
+
+from komand_sentinelone.util.api import clean
 
 
 class TestClean(TestCase):
