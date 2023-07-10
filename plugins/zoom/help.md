@@ -237,7 +237,7 @@ This task is used to monitor sign in and out activity
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|activity_logs|[]user_activity|True|All activity logs within the specified time range|[{'email': 'user@example.com', 'time': '2020-06-05T16:51:28Z', 'type': 'Sign in', 'ip_address': '198.51.100.100', 'client_type': 'Browser', 'version': '5.12.2'}, {'email': 'user@example.com', 'time': '2020-06-05T17:51:28Z', 'type': 'Sign out', 'ip_address': '198.51.100.100', 'client_type': 'Browser', 'version': '5.12.2'}]|
+|activity_logs|[]user_activity|True|All activity logs within the specified time range|[{"email": "user@example.com", "time": "2020-06-05T16:51:28Z", "type": "Sign in", "ip_address": "198.51.100.100", "client_type": "Browser", "version": "5.12.2"}, {"email": "user@example.com", "time": "2020-06-05T17:51:28Z", "type": "Sign out", "ip_address": "198.51.100.100", "client_type": "Browser", "version": "5.12.2"}]|
 
 Example output:
 
