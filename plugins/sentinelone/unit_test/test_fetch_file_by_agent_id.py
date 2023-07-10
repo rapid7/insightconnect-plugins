@@ -1,17 +1,19 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest.mock import patch
-from unit_test.util import Util
-from unittest import TestCase
-from komand_sentinelone.connection.connection import Connection
-from komand_sentinelone.actions.fetch_file_by_agent_id import FetchFileByAgentId
-from komand_sentinelone.actions.fetch_file_by_agent_id.schema import Input
-from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 import logging
+from unittest import TestCase
+from unittest.mock import patch
+
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_sentinelone.actions.fetch_file_by_agent_id import FetchFileByAgentId
+from komand_sentinelone.actions.fetch_file_by_agent_id.schema import Input
+from komand_sentinelone.connection.connection import Connection
+
+from util import Util
 
 
 class TestFetchFileByAgentId(TestCase):
