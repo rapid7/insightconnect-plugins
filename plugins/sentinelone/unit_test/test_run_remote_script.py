@@ -1,16 +1,18 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest.mock import patch
-from unit_test.util import Util
-from unittest import TestCase
-from komand_sentinelone.connection.connection import Connection
-from komand_sentinelone.actions.run_remote_script import RunRemoteScript
-from komand_sentinelone.actions.run_remote_script.schema import Input
 import json
 import logging
+from unittest import TestCase
+from unittest.mock import patch
+
+from komand_sentinelone.actions.run_remote_script import RunRemoteScript
+from komand_sentinelone.actions.run_remote_script.schema import Input
+from komand_sentinelone.connection.connection import Connection
+
+from util import Util
 
 
 class TestRunRemoteScript(TestCase):

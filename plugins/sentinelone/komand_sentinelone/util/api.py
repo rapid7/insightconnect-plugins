@@ -5,6 +5,8 @@ from insightconnect_plugin_runtime.helper import clean_list, clean_dict
 from typing import List, Any, Dict
 import requests
 
+from komand_sentinelone.util.constants import DEFAULT_REQUESTS_TIMEOUT
+
 default_array = [
     "computerMemberOf",
     "lastUserMemberOf",
@@ -91,7 +93,7 @@ class SentineloneAPI:
         """
 
         endpoint = f"{self.url}web/api/v{api_version}/agents?{search}={agent}"
-        output = requests.get(endpoint, headers=self.token_header)
+        output = requests.get(endpoint, headers=self.token_header, timeout=DEFAULT_REQUESTS_TIMEOUT)
         if output.status_code == 200 and output.json().get("pagination", {}).get("totalItems", 0) >= 1:
             agents_data = output.json().get("data", [])
             if agents_data and agents_data[0] not in results:
@@ -99,7 +101,7 @@ class SentineloneAPI:
 
     def search_agents(
         self,
-        agent_details: str,
+        agent_details: List[str],
         agent_active: bool = True,
         case_sensitive: bool = True,
         operational_state: str = None,
@@ -109,7 +111,7 @@ class SentineloneAPI:
         """
         Searches for agents
         :param agent_details: Details of agent
-        :type: str
+        :type: List[str]
 
         :param agent_active: If the Agent is Active
         :type: bool
@@ -129,6 +131,7 @@ class SentineloneAPI:
         :return: self.clean_results(results)
         :rtype: List[Dict[str, Any]]
         """
+
         results = []
         if agent_details:
             for search in self.__get_searches(agent_details):
@@ -144,10 +147,11 @@ class SentineloneAPI:
                 if results_length:
                     if len(results) >= results_length:
                         return self.clean_results(results)
-
         else:
             output = requests.get(
-                f"{self.url}web/api/v{api_version}/agents?isActive={agent_active}", headers=self.token_header
+                f"{self.url}web/api/v{api_version}/agents?isActive={agent_active}",
+                headers=self.token_header,
+                timeout=DEFAULT_REQUESTS_TIMEOUT,
             )
             results.extend(output.json()["data"])
 

@@ -1,17 +1,17 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 
-from komand_sentinelone.connection.connection import Connection
-from requests.exceptions import HTTPError
 import json
 import logging
 
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_sentinelone.connection.connection import Connection
 from komand_sentinelone.connection.schema import Input
 from komand_sentinelone.util.constants import CONSOLE_USER_TYPE
+from requests.exceptions import HTTPError
 
 
 class Util:
@@ -62,7 +62,6 @@ class Util:
             def raise_for_status(self):
                 if self.status_code == 200:
                     return
-
                 raise HTTPError("Bad response", response=self)
 
         if args[0] == "https://rapid7.com/web/api/v2.1/users/login/by-api-token":
@@ -77,9 +76,19 @@ class Util:
             return MockResponse("good_response", 200)
         elif args[0] == "https://rapid7.com/web/api/v2.1/threats/add-to-blacklist":
             return MockResponse("agents_action", 200)
-        elif args[0] == "https://rapid7.com/web/api/v2.0/agents?computerName=hostname123":
+        elif args[0] in list(
+            map(
+                lambda hostname: f"https://rapid7.com/web/api/v2.0/agents?computerName={hostname}",
+                ("hostname123", "hostname456", "hostname789"),
+            )
+        ):
             return MockResponse("apps_by_agent_ids", 200)
-        elif args[0] == "https://rapid7.com/web/api/v2.1/agents?computerName=hostname123":
+        elif args[0] in list(
+            map(
+                lambda hostname: f"https://rapid7.com/web/api/v2.1/agents?computerName={hostname}",
+                ("hostname123", "hostname456", "hostname789"),
+            )
+        ):
             return MockResponse("apps_by_agent_ids", 200)
         elif args[0] == "https://rapid7.com/web/api/v2.1/agents?computerName=hostname_na":
             return MockResponse("get_agent_details_na", 200)
@@ -89,7 +98,7 @@ class Util:
             return MockResponse("get_agent_details_partially_disabled", 200)
         elif args[0] == "https://rapid7.com/web/api/v2.1/agents?computerName=hostname_disabled_error":
             return MockResponse("get_agent_details_disabled_error", 200)
-        elif args[1] == "https://rapid7.com/web/api/v2.1/threats/fetch-file":
+        elif args[0] == "https://rapid7.com/web/api/v2.1/threats/fetch-file":
             return MockResponse("threats_fetch_file", 200)
         elif args[1] == "https://rapid7.com/web/api/v2.1/remote-scripts/execute":
             return MockResponse("remote_scripts_execute", 200)

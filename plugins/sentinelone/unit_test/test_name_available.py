@@ -1,13 +1,15 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from unittest import TestCase
 from unittest.mock import patch
+
 from komand_sentinelone.actions.name_available import NameAvailable
 from komand_sentinelone.actions.name_available.schema import Input
-from unit_test.util import Util
-from unittest import TestCase
+
+from util import Util
 
 
 class TestNameAvailable(TestCase):

@@ -1,14 +1,16 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from unittest import TestCase
 from unittest.mock import patch
+
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_sentinelone.actions.threats_fetch_file import ThreatsFetchFile
 from komand_sentinelone.actions.threats_fetch_file.schema import Input
-from insightconnect_plugin_runtime.exceptions import PluginException
-from unit_test.util import Util
-from unittest import TestCase
+
+from util import Util
 
 
 class TestThreatsFetchFile(TestCase):
