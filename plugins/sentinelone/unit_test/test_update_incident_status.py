@@ -3,12 +3,14 @@ import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from unittest import TestCase
+from unittest.mock import patch
+
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_sentinelone.actions.update_incident_status import UpdateIncidentStatus
 from komand_sentinelone.actions.update_incident_status.schema import Input
-from insightconnect_plugin_runtime.exceptions import PluginException
-from unittest import TestCase
-from unit_test.util import Util
-from unittest.mock import patch
+
+from util import Util
 
 
 class TestUpdateIncidentStatus(TestCase):
