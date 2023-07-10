@@ -57,5 +57,4 @@ class RunRemoteScript(insightconnect_plugin_runtime.Action):
         }
 
         affected = self.connection.run_remote_script(user_filter, data)
-
         return {Output.AFFECTED: affected}
