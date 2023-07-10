@@ -59,7 +59,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "default_headers": {
       "type": "object",
       "title": "Default Headers",
-      "description": "Custom headers to include in all requests associated with this connection. To pass a encrypted key as a header value, enter your key in the Secret Key input and set the value of the header in this field to \"CUSTOM_SECRET_INPUT\" instead of secret key. The plugin will replace \"CUSTOM_SECRET_INPUT\" with the encrypted key stored in the Secret Key input when the plugin runs.",
+      "description": "Custom headers to include in all requests associated with this connection. To pass a encrypted key as a header value, enter your key in the Secret Key input and set the value of the header in this field to \\"CUSTOM_SECRET_INPUT\\" instead of secret key. The plugin will replace \\"CUSTOM_SECRET_INPUT\\" with the encrypted key stored in the Secret Key input when the plugin runs.",
       "order": 4
     },
     "fail_on_http_errors": {
