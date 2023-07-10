@@ -39,6 +39,14 @@
             "Verify your plugin connection inputs are correct and not malformed and try again. If the issue persists, please contact support.",
             "{'data': 'failure'}",
             {}
+        ],
+         [
+            "put_array_400",
+            {"route": "/put_array", "headers": {}},
+            "Something unexpected occurred.",
+            "Check the logs and if the issue persists please contact support.",
+            "[{'data': 'failure'}]",
+            {}
         ]
     ]
 }

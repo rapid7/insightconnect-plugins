@@ -205,7 +205,7 @@ class RestAPI(object):
         if 400 <= response.status_code < 500:
             raise PluginException(
                 preset=PluginException.Preset.UNKNOWN,
-                data=response.json().get("message", response.text),
+                data=response.text
             )
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
