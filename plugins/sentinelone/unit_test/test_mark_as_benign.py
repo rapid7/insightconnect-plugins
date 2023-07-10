@@ -1,13 +1,15 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from unittest import TestCase
 from unittest.mock import patch
+
 from komand_sentinelone.actions.mark_as_benign import MarkAsBenign
 from komand_sentinelone.actions.mark_as_benign.schema import Input
-from unit_test.util import Util
-from unittest import TestCase
+
+from util import Util
 
 
 class TestMarkAsBenign(TestCase):
