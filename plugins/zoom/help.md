@@ -78,7 +78,7 @@ Example input:
   "last_name": "Smith",
   "type": "Basic"
 }
-```  
+```
 
 ##### Output
 
@@ -100,7 +100,7 @@ Example output:
   "last_name": "Smith",
   "type": 1
 }
-```  
+```
 
 #### Delete User
   
@@ -128,7 +128,7 @@ Example input:
   "transfer_recordings": false,
   "transfer_webinars": false
 }
-```  
+```
 
 ##### Output
 
@@ -142,7 +142,7 @@ Example output:
 {
   "success": true
 }
-```  
+```
 
 #### Get User
   
@@ -160,7 +160,7 @@ Example input:
 {
   "user_id": "user@example.com"
 }
-```  
+```
 
 ##### Output
 
@@ -200,7 +200,7 @@ Example input:
 {
   "activity_type": "All"
 }
-```  
+```
 
 ##### Output
 
@@ -237,7 +237,7 @@ This task is used to monitor sign in and out activity
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|activity_logs|[]user_activity|True|All activity logs within the specified time range|[{'email': 'user@example.com', 'time': '2020-06-05T16:51:28Z', 'type': 'Sign in', 'ip_address': '198.51.100.100', 'client_type': 'Browser', 'version': '5.12.2'}, {'email': 'user@example.com', 'time': '2020-06-05T17:51:28Z', 'type': 'Sign out', 'ip_address': '198.51.100.100', 'client_type': 'Browser', 'version': '5.12.2'}]|
+|activity_logs|[]user_activity|True|All activity logs within the specified time range|[{"email": "user@example.com", "time": "2020-06-05T16:51:28Z", "type": "Sign in", "ip_address": "198.51.100.100", "client_type": "Browser", "version": "5.12.2"}, {"email": "user@example.com", "time": "2020-06-05T17:51:28Z", "type": "Sign out", "ip_address": "198.51.100.100", "client_type": "Browser", "version": "5.12.2"}]|
 
 Example output:
 
@@ -252,7 +252,7 @@ Example output:
     "version": "5.12.2"
   }
 }
-```  
+```
 
 ### Custom Types
   
@@ -298,7 +298,7 @@ Example output:
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+*There is no troubleshooting for this plugin.*  
 
 # Version History
 
