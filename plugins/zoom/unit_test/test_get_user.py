@@ -9,7 +9,7 @@ from icon_zoom.actions.get_user import GetUser
 from icon_zoom.actions.get_user.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from unit_test.mock import (
+from mock import (
     Util,
     STUB_USER_ID,
     mock_request_201,

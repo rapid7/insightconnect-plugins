@@ -2,7 +2,6 @@ from hashlib import sha1
 
 
 class Event(object):
-
     # pylint: disable=redefined-builtin
     def __init__(self, client_type: str, email: str, ip_address: str, time: str, type: str, version: str):
         self.client_type = client_type

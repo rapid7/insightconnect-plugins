@@ -4,7 +4,7 @@ products: [insightconnect]
 name: zoom
 title: Zoom
 description: Trigger workflows on user activity while also managing your users with the Zoom plugin
-version: 4.0.1
+version: 4.0.2
 vendor: rapid7
 support: rapid7
 status: []
@@ -20,6 +20,10 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.zoom.com/
 enable_cache: false
+sdk:
+  type: full
+  version: 4
+  user: nobody
 
 connection:
   client_id:
@@ -27,19 +31,19 @@ connection:
     description: Zoom app client ID, required for OAuth authentication
     type: string
     required: true
-    example: "9de5069c5afe602b2ea0a04b66beb2c0"
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
   client_secret:
     title: Client Secret
     description: Zoom app client secret, required for OAuth authentication
     type: credential_secret_key
     required: true
-    example: "9de5069c5afe602b2ea0a04b66beb2c0"
+    example: {"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}
   account_id:
     title: Account ID
     description: Zoom app account ID, required for OAuth authentication
     type: string
     required: true
-    example: 'dBs0x4Kf7HuIK0LLbzMduW'
+    example: dBs0x4Kf7HuIK0LLbzMduW
   authentication_retry_limit:
     title: OAuth Authentication Retry Limit
     description: How many times to retry authentication to Zoom before failing, required for OAuth authentication
@@ -55,55 +59,65 @@ types:
       description: Email address of the user used for the activity
       type: string
       required: true
+      example: user@example.com
     time:
       title: Time
       description: Time during which the activity occurred in 'yyyy-mm-ddThh:mm:ssZ' format
       type: string
       required: true
+      example: 2023-05-21T20:15:01Z
     type:
       title: Type
       description: The type of activity
       type: string
       required: true
       enum:
-      - "Sign in"
-      - "Sign out"
+      - Sign in
+      - Sign out
+      example: Sign in
     ip_address:
       title: IP Address
       description: The IP address of the user's device
       type: string
       required: true
+      example: 192.0.2.0
     client_type:
       title: Client Type
       description: The type of client of the user's device
       type: string
       required: false
+      example: Browser
     version:
       title: Version
       description: The version of the client of the user's device
       type: string
       required: false
+      example: "5.12.2"
   user:
     id:
       title: ID
       description: User identifier
       type: string
       required: true
+      example: T9ti3NBxR42swGKrqABGig
     first_name:
       title: First Name
       description: First name of user
       type: string
       required: false
+      example: John
     last_name:
       title: Last Name
       description: Last name of user
       type: string
       required: false
+      example: Smith
     email:
       title: Email
       description: Email address of user
       type: string
       required: false
+      example: user@example.com
     type:
       title: Type
       description: User type
@@ -113,31 +127,37 @@ types:
       - 1
       - 2
       - 3
+      example: 1
     role_name:
       title: Role Name
       description: Role name of user
       type: string
       required: false
+      example: Member
     pmi:
       title: Personal Meeting ID
       description: Personal meeting ID
       type: integer
       required: false
+      example: 2315556661
     use_pmi:
       title: Use Personal Meeting ID
       description: Use Personal meeting ID for instant meetings
       type: boolean
       required: false
+      example: false
     personal_meeting_url:
       title: Personal Meeting URL
       description: Personal meeting URL of user
       type: string
       required: false
+      example: https://zoom.us/j/2315556661?pwd=SGDgdgGRG434w5SvVre09
     timezone:
       title: Timezone
       description: Timezone of user
       type: string
       required: false
+      example: Europe/London
     verified:
       title: Verified
       description: Whether the user is verified or not
@@ -146,66 +166,79 @@ types:
       enum:
       - 1
       - 0
+      example: 1
     dept:
       title: Department
       description: Department of user
       type: string
       required: false
+      example: example department
     created_at:
       title: Created At
       description: Creation datetime of user
       type: string
       required: false
+      example: 2023-06-22T12:26:02Z
     last_login_time:
       title: Last Login Time
       description: Last login datetime of user
       type: string
       required: false
+      example: 2023-06-21T13:41:14Z
     host_key:
       title: Host Key
       description: User's host key
       type: string
       required: false
+      example: 123321
     jid:
       title: JID
       description: JID of user
       type: string
       required: false
+      example: T9ti3NBxR42swGKrqABGig@xmpp.zoom.us
     group_ids:
       title: Web Group IDs
       description: IDs of the web groups user belongs to
       type: "[]string"
       required: false
+      example: ["t-_-d56CSWG-7BF15LLrOw", "t-_-d56CSWG-7BF15LLrow"]
     im_group_ids:
       title: IM Group IDs
       description: IM IDs of the groups user belongs to
       type: "[]string"
       required: false
+      example: ["t-_-d56CSWG-7BF15LLrOw", "t-_-d56CSWG-7BF15LLrow"]
     account_id:
       title: Account ID
       description: Account ID of user
       type: string
       required: false
+      example: T9ti3NBxR42swGKrqABGig
     language:
       title: Language
       description: Language of user
       type: string
       required: false
+      example: en-US
     phone_country:
       title: Phone Country
       description: Phone country of user
       type: string
       required: false
+      example: US
     phone_number:
       title: Phone Number
       description: Phone number of user
       type: string
       required: false
+      example: 555-0100
     status:
       title: Status
       description: Status of user
       type: string
       required: false
+      example: active
 actions:
   get_user:
     title: Get User
@@ -216,14 +249,14 @@ actions:
         description: The user identifier or email address
         type: string
         required: true
-        example: "user@example.com"
+        example: user@example.com
     output:
       user:
         title: User
         description: User details
         type: user
         required: true
-        example: {}
+        example: { "email": "user@example.com", "first_name": "John", "id": "T9ti3NBxR42swGKrqABGig", "last_name": "Smith", "type": 1 }
   create_user:
     title: Create User
     description: Create user associated to account
@@ -235,11 +268,11 @@ actions:
         required: true
         default: create
         enum:
-        - "create"
-        - "autoCreate"
-        - "custCreate"
-        - "ssoCreate"
-        example: "create"
+        - create
+        - autoCreate
+        - custCreate
+        - ssoCreate
+        example: create
       email:
         title: Email
         description: Email address of user
@@ -252,8 +285,8 @@ actions:
         type: string
         required: true
         enum:
-        - "Basic"
-        - "Licensed"
+        - Basic
+        - Licensed
         example: Basic
       first_name:
         title: First Name
@@ -273,11 +306,13 @@ actions:
         description: User identifier
         type: string
         required: true
+        example: T9ti3NBxR42swGKrqABGig
       email:
         title: Email
         description: Email address of user
         type: string
         required: true
+        example: user@example.com
       type:
         title: Type
         description: User type
@@ -287,41 +322,44 @@ actions:
         - 1
         - 2
         - 3
+        example: 1
       first_name:
         title: First Name
         description: First name of user
         type: string
         required: false
+        example: John
       last_name:
         title: Last Name
         description: Last name of user
         type: string
         required: true
+        example: Smith
   delete_user:
     title: Delete User
     description: Delete or disassociate user from account
     input:
       action:
         title: Action
-        description: Specify how to delete the user. To delete pending user, use disassocaite
+        description: Specify how to delete the user. To delete pending user, use disassociate
         type: string
         required: true
         enum:
-        - "delete"
-        - "disassociate"
-        example: "delete"
+        - delete
+        - disassociate
+        example: delete
       id:
         title: User ID
         description: The user identifier or email address
         type: string
         required: true
-        example: "user@example.com"
+        example: user@example.com
       transfer_email:
         title: Transfer Email
         description: Email to transfer meetings, webinars, or recordings
         type: string
         required: false
-        example: "user@example.com"
+        example: user@example.com
       transfer_meetings:
         title: Transfer Meetings
         description: Whether to transfer meetings to defined transfer email
@@ -349,6 +387,7 @@ actions:
         description: Success
         type: boolean
         required: true
+        example: true
 triggers:
   user_activity_event:
     title: User Activity Event
@@ -360,25 +399,26 @@ triggers:
         type: string
         required: true
         enum:
-        - "Sign in"
-        - "Sign out"
-        - "All"
-        example: "All"
+        - Sign in
+        - Sign out
+        - All
+        example: All
     output:
       user_activity:
         title: User Activity
         description: User Activity
         type: user_activity
         required: false
+        example: { "email": "user@example.com", "time": "2020-06-05T16:51:28Z", "type": "Sign in", "ip_address": "198.51.100.100", "client_type": "Browser", "version": "5.12.2" }
 
 tasks:
   monitor_sign_in_out_activity:
     title: Monitor Sign in and out Activity
     description: Monitor sign in and out activity
-    input: null
     output:
       activity_logs:
         title: Activity Logs
         description: All activity logs within the specified time range
         type: "[]user_activity"
         required: true
+        example: [{ "email": "user@example.com", "time": "2020-06-05T16:51:28Z", "type": "Sign in", "ip_address": "198.51.100.100", "client_type": "Browser", "version": "5.12.2" }, { "email": "user@example.com", "time": "2020-06-05T17:51:28Z", "type": "Sign out", "ip_address": "198.51.100.100", "client_type": "Browser", "version": "5.12.2" }]
