@@ -11,7 +11,7 @@ class Input:
     COUNTRY = "country"
     PHONE = "phone"
     STRICTNESS = "strictness"
-
+    
 
 class Output:
     VOIP = "VOIP"
@@ -35,11 +35,10 @@ class Output:
     TIMEZONE = "timezone"
     VALID = "valid"
     ZIP_CODE = "zip_code"
-
+    
 
 class PhoneLookupInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -74,16 +73,14 @@ class PhoneLookupInput(insightconnect_plugin_runtime.Input):
     "strictness"
   ]
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class PhoneLookupOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -216,8 +213,7 @@ class PhoneLookupOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
