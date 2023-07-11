@@ -95,14 +95,14 @@ Example output:
 
 ```
 {
-  "body_object": {
-    "user": "user@example.com"
+  "body_object":{
+    "user":"user@example.com"
   },
-  "body_string": "test data",
-  "headers": {
-    "Host": "rapid7.com"
+  "body_string":"test data",
+  "headers":{
+    "Host":"rapid7.com"
   },
-  "status": 200
+  "status":200
 }
 ```  
 
@@ -227,14 +227,14 @@ Example input:
 
 ```
 {
-  "body_any": "test data",
-  "body_object": {
-    "user": "user@example.com"
+  "body_any":"test data",
+  "body_object":{
+    "user":"user@example.com"
   },
-  "headers": {
-    "Host": "rapid7.com"
+  "headers":{
+    "Host":"rapid7.com"
   },
-  "route": "/org/users"
+  "route":"/org/users"
 }
 ```  
 
@@ -251,14 +251,14 @@ Example output:
 
 ```
 {
-  "body_object": {
-    "user": "user@example.com"
+  "body_object":{
+    "user":"user@example.com"
   },
-  "body_string": "test data",
-  "headers": {
-    "Host": "rapid7.com"
+  "body_string":"test data",
+  "headers":{
+    "Host":"rapid7.com"
   },
-  "status": 200
+  "status":200
 }
 ```  
 
@@ -330,7 +330,35 @@ Example output:
 
 # Version History
   
-*This plugin does not contain a version history.*  
+* 6.0.2 - Changed error handling to prevent list has no attribute get error
+* 6.0.1 - Improved ability of 'Body Any' input to handle non-standard characters and JSON input
+* 6.0.0 - All actions: Changed body as array to body as any (string input)
+* 5.2.0 - All actions: Added body as an array input for remaining actions
+* 5.1.1 - Get: Fix issue where requests were failing when certificate file input field was empty
+* 5.1.0 - Add support for Get with Body with new Body input of type object | Add support for TLS by providing new inputs for the connection, Client Certificate and Private Key of type file
+* 5.0.3 - POST supports x-www-form-urlencoded | PATCH to now take in an array of objects
+* 5.0.2 - Fix issue with JSON data parser for PATCH request
+* 5.0.1 - Update to make 'No Authentication' the default connection type
+* 5.0.0 - Add ability for user to choose if the plugin should fail on standard HTTP error codes (4xx-5xx) | Add 'No Authentication' as another authentication type
+* 4.0.5 - Fix issue where if an API returned a list it would crash the plugin
+* 4.0.4 - Fix issue with SSL Verify
+* 4.0.3 - Update `requests` to the latest version | Update python version to `python-3-38-plugin:4` | Add `USER` in Dockerfile | Use input and output constants | Code refactor | Strip leading and trailing whitespace from route
+* 4.0.2 - Updated `docs_url` to [HTTP Requests - Plugin Connection Guide](https://docs.rapid7.com/insightconnect/http-requests)
+* 4.0.1 - Fix issue where the connection test fails when a base URL is provided with a web resource path for the Rapid7 Insight and Pendo auth types
+* 4.0.0 - Support new authentication types: Digest Auth and Bearer Token | Add a workaround to encrypt a secret key when used in custom HTTP headers | Add built-in authentication for services: Insight Platform, Pendo and OpsGenie
+* 3.0.5 - Fix issue where a null body return on a successful request would crash the plugin
+* 3.0.4 - Update REST plugin title to HTTP Requests
+* 3.0.3 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/rest)
+* 3.0.2 - Update to v3 Python plugin architecture | Support get endpoints returning lists
+* 3.0.1 - New spec and help.md format for the Extension Library
+* 3.0.0 - Add basic auth support
+* 2.0.0 - Update connection to handle SSL verification
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
+* 0.1.4 - Bug fix for CI tool incorrectly uploading plugins
+* 0.1.3 - Fix post and put actions by using JSON argument instead of body
+* 0.1.2 - SSL bug fix in SDK
+* 0.1.1 - Update tags
+* 0.1.0 - Initial plugin
 
 # Links
   
