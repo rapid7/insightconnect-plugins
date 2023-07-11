@@ -362,7 +362,8 @@ Example output:
 
 # Links
   
+* [HTTP Request Architecture Style](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
 
 ## References
   
-*This plugin does not contain any references.*
+* [InsightConnect HTTP Request Plugin Guide](https://docs.rapid7.com/insightconnect/http-requests)
