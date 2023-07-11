@@ -24,6 +24,7 @@ connection:
     description: IPQualityScore API Key
     type: credential_secret_key
     required: true
+    example: 'abcdef12345'
 actions:
   ipLookup:
     title: IP Address Reputation
@@ -63,24 +64,28 @@ actions:
         description: When this parameter is enabled our API will not perform certain forensic checks that take longer to process. Enabling this feature greatly increases the API speed without much impact on accuracy.
         type: boolean
         default: false
+        required: false
         example: false
       mobile:
         title: Mobile
         description: You can optionally specify that this lookup should be treated as a mobile device. Recommended for mobile lookups that do not have a user agent attached to the request.
         type: boolean
         default: false
+        required: false
         example : false
       allow_public_access_points:
         title: Allow Public Access Points
         description: Bypasses certain checks for IP addresses from education and research institutions, schools, and some corporate connections to better accommodate audiences that frequently use public connections.
         type: boolean
         default: false
+        required: false
         example : false
       lighter_penalties:
         title: Lighter Penalties
         description: Skip some blacklists which can cause false-positives for sensitive audiences.
         type: boolean
         default: false
+        required: false
         example : false
     output:
       fraud_score:
@@ -248,17 +253,20 @@ actions:
         type: boolean
         default: false
         example: false
+        required: false
       timeout:
         title: timeout
         description: Maximum number of seconds to wait for a reply from a mail service provider. If your implementation requirements do not need an immediate response, we recommend bumping this value to 20.
         type: integer
         example: 5
+        required: false
       suggest_domain:
         title: Suggest Domain
         description: Force analyze if the email addresses domain has a typo and should be corrected to a popular mail service.
         type: boolean
         default: false
         example: false
+        required: false
     output:
       valid:
         title: Valid
@@ -419,6 +427,7 @@ actions:
         type: boolean
         default: false
         example: false
+        required: false
     output:
       unsafe:
         title: Unsafe
@@ -537,6 +546,7 @@ actions:
           type: boolean
           default: false
           example: false
+          required: false
       output:
         unsafe:
           title: Unsafe
