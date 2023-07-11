@@ -22,9 +22,15 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|apiKey|credential_secret_key|None|True|IPQualityScore API Key|None|None|
+|apiKey|credential_secret_key|None|True|IPQualityScore API Key|None|abcdef12345|
 
+Example input:
 
+```
+{
+  "apiKey": "abcdef12345"
+}
+```
 ## Technical Details
 
 ### Actions
