@@ -1,23 +1,18 @@
 # Description
-  
-The HTTP Requests plugin to make it easy to integrate with RESTful services  
+The HTTP Requests plugin allows users to automate HTTP requests to API services such as [RESTful based services](https://en.wikipedia.org/wiki/Representational_state_transfer).
 
 # Key Features
-  
 *This plugin does not contain any key features.*  
 
 # Requirements
-  
 *This plugin does not contain any requirements.*  
 
 # Supported Product Versions
-  
-* 2022-09-05  
+* 2022-09-05
 
 # Documentation
 
 ## Setup
-  
 The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|

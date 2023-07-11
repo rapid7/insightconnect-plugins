@@ -25,6 +25,10 @@ hub_tags:
   keywords: [rest, request, http, rpc, microservices, api]
   features: []
 enable_cache: true
+sdk:
+  type: full
+  version: 5
+  user: nobody
 connection:
   base_url:
     title: Base URL

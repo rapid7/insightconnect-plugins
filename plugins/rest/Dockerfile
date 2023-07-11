@@ -1,4 +1,4 @@
-FROM rapid7/insightconnect-python-3-38-plugin:4
+FROM rapid7/insightconnect-python-3-38-plugin:5
 
 LABEL organization=rapid7
 LABEL sdk=python
@@ -17,4 +17,4 @@ RUN	python setup.py build && python setup.py install
 # User to run plugin code. The two supported users are: root, nobody
 USER nobody
 
-ENTRYPOINT ["/usr/local/bin/icon_rest"]
+ENTRYPOINT ["/usr/local/bin/komand_rest"]
