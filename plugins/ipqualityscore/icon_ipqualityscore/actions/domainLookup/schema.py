@@ -11,7 +11,7 @@ class Input:
     FAST = "fast"
     STRICTNESS = "strictness"
     URL = "url"
-
+    
 
 class Output:
     ADULT = "adult"
@@ -29,11 +29,10 @@ class Output:
     SPAMMING = "spamming"
     SUSPICIOUS = "suspicious"
     UNSAFE = "unsafe"
-
+    
 
 class DomainLookupInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -69,16 +68,14 @@ class DomainLookupInput(insightconnect_plugin_runtime.Input):
     "url"
   ]
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class DomainLookupOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -175,8 +172,7 @@ class DomainLookupOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
