@@ -38,7 +38,7 @@ class IPQSClient:
                 cause=PluginException.Preset.BAD_REQUEST,
                 assistance="Verify your plugin input is correct and not malformed and try again. "
                 "If the issue persists, please contact support.\n",
-                data=response,
+                data=error,
             )
 
         except HTTPError as error:
