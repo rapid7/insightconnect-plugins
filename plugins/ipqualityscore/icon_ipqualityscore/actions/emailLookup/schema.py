@@ -13,7 +13,7 @@ class Input:
     FAST = "fast"
     SUGGEST_DOMAIN = "suggest_domain"
     TIMEOUT = "timeout"
-
+    
 
 class Output:
     CATCH_ALL = "catch_all"
@@ -38,11 +38,10 @@ class Output:
     SUSPECT = "suspect"
     TIMED_OUT = "timed_out"
     VALID = "valid"
-
+    
 
 class EmailLookupInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -91,16 +90,14 @@ class EmailLookupInput(insightconnect_plugin_runtime.Input):
     "emailAddress"
   ]
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class EmailLookupOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -239,8 +236,7 @@ class EmailLookupOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
