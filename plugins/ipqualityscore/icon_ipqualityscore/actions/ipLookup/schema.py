@@ -16,7 +16,7 @@ class Input:
     STRICTNESS = "strictness"
     USER_AGENT = "user_agent"
     USER_LANGUAGE = "user_language"
-
+    
 
 class Output:
     ASN = "ASN"
@@ -42,11 +42,10 @@ class Output:
     TOR = "tor"
     VPN = "vpn"
     ZIP_CODE = "zip_code"
-
+    
 
 class IpLookupInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -115,16 +114,14 @@ class IpLookupInput(insightconnect_plugin_runtime.Input):
     "strictness"
   ]
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class IpLookupOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -269,8 +266,7 @@ class IpLookupOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
