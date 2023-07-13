@@ -31,7 +31,7 @@ Review the [style guide](https://docs.rapid7.com/insightconnect/style-guide/)
 
 - [ ] For dependencies, pin [OS package](https://docs.rapid7.com/insightconnect/style-guide/#dockerfile) and [Python package](https://docs.rapid7.com/insightconnect/style-guide/#requirements.txt) versions
 - [ ] For security, set least privileged account with ``USER nobody`` in the ``Dockerfile`` when possible
-- [ ] For size, use the [slim SDK images](https://docs.rapid7.com/insightconnect/sdk-guide/#sdk-guide) when possible: ``rapid7/insightconnect-python-3-38-slim-plugin:4`` and ``rapid7/insightconnect-python-3-38-plugin:4``
+- [ ] For size, use the [slim SDK images](https://docs.rapid7.com/insightconnect/sdk-guide/#sdk-guide) when possible: ``rapid7/insightconnect-python-3-38-slim-plugin:{sdk-version-num}`` and ``rapid7/insightconnect-python-3-38-plugin:{sdk-version-num}``
 - [ ] For error handling, use of [PluginException](https://docs.rapid7.com/insightconnect/error-handling-in-integrations/#plugin-exceptions) and [ConnectionTestException](https://docs.rapid7.com/insightconnect/error-handling-in-integrations#connection-exceptions)
 - [ ] For logging, use [self.logger](https://docs.rapid7.com/insightconnect/sdk-guide/#logging)
 - [ ] For docs, use [changelog style](https://docs.rapid7.com/insightconnect/style-guide/#changelog)
