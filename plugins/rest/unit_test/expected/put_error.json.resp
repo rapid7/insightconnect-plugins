@@ -43,9 +43,9 @@
          [
             "put_array_400",
             {"route": "/put_array", "headers": {}},
-            "Received an unexpected response from the server.\'\n- (non-JSON or no response was received).\n+ Received an unexpected response from the server.\n\n",
-            "Check the logs and if the issue persists please contact support.",
-            "[{'data': 'failure'}]",
+            "Received an unexpected response from the server.",
+            "(non-JSON or no response was received).",
+            "[{\"data\": \"failure\"}]",
             {}
         ]
     ]
