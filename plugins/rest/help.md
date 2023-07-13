@@ -330,7 +330,7 @@ Example output:
 
 # Version History
   
-* 6.0.2 - Changed error handling to prevent list has no attribute get error
+* 6.0.2 - Fixed a bug that would cause an incorrect error message whenever a 400 error was received and the response object was a list
 * 6.0.1 - Improved ability of 'Body Any' input to handle non-standard characters and JSON input
 * 6.0.0 - All actions: Changed body as array to body as any (string input)
 * 5.2.0 - All actions: Added body as an array input for remaining actions
