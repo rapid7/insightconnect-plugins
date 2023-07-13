@@ -1,4 +1,4 @@
-FROM rapid7/insightconnect-python-3-38-plugin:4
+FROM rapid7/insightconnect-python-3-38-plugin:5
 # Refer to the following documentation for available SDK parent images: https://docs.rapid7.com/insightconnect/sdk-guide/#sdk-guide
 
 LABEL organization=rapid7
