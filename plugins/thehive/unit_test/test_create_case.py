@@ -9,7 +9,7 @@ from komand_thehive.actions.create_case import CreateCase
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from parameterized import parameterized
-from unit_test.mock import (
+from mock import (
     Util,
     mocked_request,
     mock_request_200,

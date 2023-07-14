@@ -10,7 +10,7 @@ from komand_thehive.actions.get_case.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from parameterized import parameterized
-from unit_test.mock import (
+from mock import (
     Util,
     mocked_request,
     mock_request_200,
@@ -20,7 +20,7 @@ from unit_test.mock import (
     mock_request_404,
     mock_request_500,
 )
-from unit_test.constants import STUB_CASE_ID
+from constants import STUB_CASE_ID
 
 
 class TestGetCase(TestCase):
