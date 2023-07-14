@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="freshservice-rapid7-plugin",
-      version="1.0.0",
+      version="1.0.1",
       description="Freshservice is a cloud-based IT Service Management solution that was designed using ITIL best practices. Freshservice helps IT organizations streamline their service delivery processes with a strong focus on user experience and employee happiness",
       author="rapid7",
       author_email="",
