@@ -1,5 +1,5 @@
 # Description
-  
+
 TheHive is a scalable, open source security incident response solution designed for SOCs & CERTs to collaborate, 
 elaborate, analyze and get their job done
 
@@ -17,14 +17,14 @@ elaborate, analyze and get their job done
 * TheHive username and password
 
 # Supported Product Versions
-  
-* 2023-05-17  
+
+* 2023-05-17
 
 # Documentation
 
 ## Setup
-  
-The connection configuration accepts the following parameters:  
+
+The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -35,7 +35,7 @@ The connection configuration accepts the following parameters:
 |protocol|string|None|True|HTTP Protocol|['http', 'https']|http|
 |proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|{}|
 |verify|boolean|True|True|Verify the certificate|None|True|
-  
+
 Example input:
 
 ```
@@ -48,16 +48,15 @@ Example input:
   "proxy": {},
   "verify": true
 }
-```  
+```
 
 ## Technical Details
 
 ### Actions
-  
 
 #### Close Case
-  
-Close a case by ID  
+
+Close a case by ID
 
 ##### Input
 
@@ -65,7 +64,7 @@ Close a case by ID
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |force|boolean|False|False|True to physically delete the case, False to mark the case as delete|None|False|
 |id|string|None|True|ID for the case|None|50|
-  
+
 Example input:
 
 ```
@@ -73,25 +72,25 @@ Example input:
   "force": false,
   "id": 50
 }
-```  
+```
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |success|boolean|True|Boolean to indicate if the operation was successful|True|
-  
+
 Example output:
 
 ```
 {
   "success": true
 }
-```  
+```
 
 #### Create Case
-  
-Create a new case  
+
+Create a new case
 
 ##### Input
 
@@ -131,7 +130,7 @@ Example input:
   "title": "Case title",
   "tlp": 2
 }
-```  
+```
 
 ##### Output
 
@@ -171,11 +170,11 @@ Example output:
     "tlp": 2
   }
 }
-```  
+```
 
 #### Create Observable
-  
-Create a new case observable  
+
+Create a new case observable
 
 ##### Input
 
@@ -193,7 +192,7 @@ Create a new case observable
 |startDate|integer|None|False|Observable start date (datetime in ms) (will default to now if left blank)|None|1640000000000|
 |tags|[]string|None|False|List of observable tags, required if message is None|None|["tag_one", "tag_two"]|
 |tlp|integer|2|False|Case's TLP|[0, 1, 2, 3]|2|
-  
+
 Example input:
 
 ```
@@ -214,14 +213,14 @@ Example input:
   ],
   "tlp": 2
 }
-```  
+```
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |case|observable|False|Create case observable output|{'data': 'Test data for observable', 'datatype': 'domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other', 'id': 'AYgQXmjbfMffAh_St-fk', 'ignoreSimilarity': False, 'ioc': False, 'jsonData': 'json object containing all necessary fields', 'message': 'Observable message', 'pap': 2, 'sighted': False, 'startDate': 1640000000000, 'tags': 'tag_one', 'tlp': 2}|
-  
+
 Example output:
 
 ```
@@ -241,11 +240,11 @@ Example output:
     "tlp": 2
   }
 }
-```  
+```
 
 #### Create Task
-  
-Create a new case task  
+
+Create a new case task
 
 ##### Input
 
@@ -259,7 +258,7 @@ Create a new case task
 |startDate|integer|None|False|Task's start date (datetime in ms) (will default to now if left blank)|None|1684170163000|
 |status|string|Waiting|False|Task's status|['Waiting', 'InProgress', 'Cancel', 'Completed']|Waiting|
 |title|string|None|False|Task's title|None|Task title|
-  
+
 Example input:
 
 ```
@@ -273,14 +272,14 @@ Example input:
   "status": "Waiting",
   "title": "Task title"
 }
-```  
+```
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |case|task|False|Create case task output|{'Created At': {}, 'Created By': {}, 'ID': {}, 'Start Date': 0, 'Type': {}, 'description': {}, 'flag': 'true', 'order': {}, 'owner': {}, 'status': 'Waiting', 'title': {}, 'user': {}}|
-  
+
 Example output:
 
 ```
@@ -300,22 +299,22 @@ Example output:
 }
 ```
 #### Get Case
-  
-Retrieve a case by ID  
+
+Retrieve a case by ID
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|string|None|True|ID for the case|None|50|
-  
+
 Example input:
 
 ```
 {
   "id": 50
 }
-```  
+```
 
 ##### Output
 
@@ -369,22 +368,22 @@ Example output:
     "User Permissions": {}
   }
 }
-```  
+```
 
 #### Get Cases
-  
-Retrieve list of cases  
+
+Retrieve list of cases
 
 ##### Input
-  
-*This action does not contain any inputs.*  
+
+*This action does not contain any inputs.*
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |success|[]case|False|List of cases|{}|
-  
+
 Example output:
 
 ```
@@ -433,15 +432,15 @@ Example output:
     }
   ]
 }
-```  
+```
 
 #### Get Current User
-  
-Get information about the current user  
+
+Get information about the current user
 
 ##### Input
-  
-*This action does not contain any inputs.*  
+
+*This action does not contain any inputs.*
 
 ##### Output
 
@@ -455,18 +454,18 @@ Example output:
 {
   "success": {}
 }
-```  
+```
 
 #### Get User by ID
-  
-Get information about a specific user  
+
+Get information about a specific user
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|string|None|True|The ID of the user|None|50|
-  
+
 Example input:
 
 ```
@@ -480,7 +479,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |success|userObject|False|A user object containing all related fields|{}|
-  
+
 Example output:
 
 ```
@@ -490,15 +489,16 @@ Example output:
 ```
 
 ### Triggers
-  
+
 *This plugin does not contain any triggers.*
+
 ### Tasks
-  
-*This plugin does not contain any tasks.*  
+
+*This plugin does not contain any tasks.*
 
 ### Custom Types
-  
-**userObject**  
+
+**userObject**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -515,8 +515,8 @@ Example output:
 |Updated At|integer|None|False|Time the user was updated in milliseconds or epoch|1496561862924|
 |Updated By|string|None|False|Updated by|None|
 |user|string|None|False|User|None|
-  
-**case**  
+
+**case**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -557,8 +557,8 @@ Example output:
 |Case title|string|None|False|Title of the case|None|
 |TLP|integer|None|False|Traffic Light Protocol level|None|
 |User Permissions|[]string|None|False|A list of permissions the current user has access on the case|None|
-  
-**createCase**  
+
+**createCase**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -580,8 +580,8 @@ Example output:
 |Tasks|[]string|None|False|Tasks to create. If null, tasks from the case template will be used|None|
 |Title|string|None|True|Case title|None|
 |Traffic Light Protocol|integer|2|False|Case traffic light protocol|None|
-  
-**task**  
+
+**task**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -597,8 +597,8 @@ Example output:
 |status|string|None|False|Task status|None|
 |title|string|None|None|Task title|None|
 |user|string|None|None|Task user|None|
-  
-**observable**  
+
+**observable**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -624,6 +624,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.0 - Added additional error handling for issues that occur outside the expected status codes | Action: `create_case` remade to not include task input
 * 3.0.0 - Refactored plugin | Removed `thehive4py` dependency | Action: Split `get_user` into two new actions, `get_user_by_id` & `get_current_user`
 * 2.0.5 - New spec and help.md format for the Extension Library. Update help key features and fix description capitalisation
 * 2.0.4 - Update to use the `komand/python-2-27-slim-plugin` Docker image to reduce plugin size and to support SSL Verify
