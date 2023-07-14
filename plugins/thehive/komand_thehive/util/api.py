@@ -96,5 +96,5 @@ class HiveAPI:
         if response.status_code in range(200, 299):
             return response.json()
 
-        # Anything which isn't caught by now, raise the unknown preset and show the response.
+        # Anything which isn't caught by now, present the unknown preset and show the response.
         raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response)
