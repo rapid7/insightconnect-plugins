@@ -11,6 +11,7 @@ from icon_freshservice.util.endpoints import (
     TICKETS_ENDPOINT,
     TICKET_TASK_ENDPOINT,
     TICKET_TASKS_ENDPOINT,
+    ANNOUNCEMENTS_PATH,
 )
 
 
@@ -30,6 +31,9 @@ class FreshServiceAPI:
 
     def list_tickets(self, parameters: dict) -> dict:
         return self.make_json_request(path=TICKETS_ENDPOINT, params=parameters, headers=self.headers)
+
+    def list_all_announcements(self) -> dict:
+        return self.make_json_request(path=ANNOUNCEMENTS_PATH, headers=self.headers)
 
     def create_ticket(self, json_data: dict) -> dict:
         return self.make_json_request(

@@ -918,6 +918,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.1 - Update Connection Test to account for Agents with least privileges 
 * 1.0.0 - Initial plugin | Add Create Ticket, Update Ticket, Delete Ticket, List Tickets, Create Ticket Task, Update Ticket Task, Delete Ticket Task, List Groups and List Agents actions
 
 # Links

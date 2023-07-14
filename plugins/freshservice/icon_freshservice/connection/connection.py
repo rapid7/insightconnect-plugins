@@ -18,7 +18,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         try:
-            self.api.list_all_groups()
+            self.api.list_all_announcements()
             return {"success": True}
         except PluginException as error:
             raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)

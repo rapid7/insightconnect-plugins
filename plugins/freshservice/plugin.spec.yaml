@@ -4,7 +4,7 @@ products: [insightconnect]
 name: freshservice
 title: FreshService
 description: Freshservice is a cloud-based IT Service Management solution that was designed using ITIL best practices. Freshservice helps IT organizations streamline their service delivery processes with a strong focus on user experience and employee happiness
-version: 1.0.0
+version: 1.0.1
 supported_versions: ["FreshService API v2 2022-11-14"]
 vendor: rapid7
 cloud_ready: true
