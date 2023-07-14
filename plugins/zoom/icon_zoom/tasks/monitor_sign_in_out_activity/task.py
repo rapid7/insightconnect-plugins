@@ -51,15 +51,15 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         # Check if first run
         if not state.get(self.LAST_REQUEST_TIMESTAMP):
             self.logger.info("First run")
-            output, new_state = self.first_run(state=state)
+            output, new_state, has_more_pages = self.first_run(state=state)
         else:
             # Subsequent run
             self.logger.info("Subsequent run")
-            output, new_state = self.subsequent_run(state=state)
+            output, new_state, has_more_pages = self.subsequent_run(state=state)
 
         # Turn events list back into a list of dicts
         output = [event.__dict__ for event in output]
-        return output, new_state
+        return output, new_state, has_more_pages
 
     def first_run(self, state: dict) -> ([dict], dict, bool):
         # Get time boundaries for first event set
