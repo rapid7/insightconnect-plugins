@@ -15,7 +15,6 @@ from icon_zoom.util.event import Event
 
 
 class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
-
     LAST_REQUEST_TIMESTAMP = "last_request_timestamp"
     BOUNDARY_EVENTS = "boundary_events"
     LATEST_EVENT_TIMESTAMP = "latest_event_timestamp"
@@ -47,7 +46,6 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
     # pylint: disable=unused-argument
     def run(self, params={}, state={}):
-
         # Check if first run
         if not state.get(self.LAST_REQUEST_TIMESTAMP):
             self.logger.info("First run")
