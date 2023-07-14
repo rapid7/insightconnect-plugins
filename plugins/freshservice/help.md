@@ -49,7 +49,7 @@ Create a new ticket in your service desk
 |assets|[]assetInput|None|False|Assets that have to be associated with the ticket|None|{"displayId": 2}|
 |attachments|[]attachmentInput|None|False|Ticket attachments. The total size of these attachments cannot exceed 15MB|None|[{"name": "test.txt", "content": "dGVzdA=="}]|
 |category|string|None|False|Ticket category|None|Hardware|
-|ccEmails|[]string|None|False|Email addresses added in the 'cc' field of the incoming ticket email|None|['user@example.com']|
+|ccEmails|[]string|None|False|Email addresses added in the \'cc\' field of the incoming ticket email|None|["user@example.com"]|
 |customFields|object|None|False|Key value pairs containing the names and values of custom fields|None|{"key": "value"}|
 |departmentId|integer|None|False|Department ID of the requester|None|123456789|
 |description|string|None|True|HTML content of the ticket|None|Example description|
@@ -68,7 +68,7 @@ Create a new ticket in your service desk
 |status|integer|None|True|Status|None|2|
 |subCategory|string|None|False|Ticket sub category|None|Computer|
 |subject|string|None|True|Subject of the ticket|None|Example Subject|
-|tags|[]string|None|False|Tags that have been associated with the ticket|None|['tag1', 'tag2']|
+|tags|[]string|None|False|Tags that have been associated with the ticket|None|["tag1", "tag2"]|
 |type|string|None|False|Type of the ticket|None|Incident|
 |urgency|integer|1|False|Urgency|None|2|
   
