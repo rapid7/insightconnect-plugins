@@ -80,7 +80,7 @@ class HiveAPI:
         response = requests.request(
             method, self.url + path, params=params, data=data, json=json_data, headers=headers, auth=auth
         )
-        response.status_code = 202
+
         if response.status_code == 400:
             raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response)
         if response.status_code == 401:
@@ -91,7 +91,7 @@ class HiveAPI:
             raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response)
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response)
-        if 200 >= response.status_code <= 300:
+        if response.status_code in (200, 201):
             return response.json()
         if response.status_code == 204:
             return None

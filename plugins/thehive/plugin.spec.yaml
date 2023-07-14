@@ -323,12 +323,12 @@ types:
       title: Title
       description: Case title
       type: string
-      required: true
+      required: false
     description:
       title: Description
       description: Case description
       type: string
-      required: true
+      required: false
     severity:
       title: Severity
       description: Case severity

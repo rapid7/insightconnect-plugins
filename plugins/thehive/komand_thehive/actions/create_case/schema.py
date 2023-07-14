@@ -167,10 +167,6 @@ class CreateCaseOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
-  "required": [
-    "description",
-    "title"
-  ],
   "definitions": {
     "createCase": {
       "type": "object",
@@ -315,11 +311,7 @@ class CreateCaseOutput(insightconnect_plugin_runtime.Output):
           "title": "Observable Rule",
           "description": "Case observable rule",
           "order": 18
-        },
-        "required": [
-          "description",
-          "title"
-        ]
+        }
       }
     }
   }
