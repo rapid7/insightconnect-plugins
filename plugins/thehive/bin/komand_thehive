@@ -9,7 +9,7 @@ from komand_thehive import connection, actions, triggers
 
 Name = "TheHive"
 Vendor = "rapid7"
-Version = "3.1.0"
+Version = "4.0.0"
 Description = "TheHive is a scalable, open source security incident response solution designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done"
 
 

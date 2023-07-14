@@ -110,7 +110,7 @@ Create a new case
 |template|string|None|False|Case template's name. If specified then the case is created using the given template|None|Case template name|
 |title|string|None|True|Name of the case|None|Case title|
 |tlp|integer|2|False|Traffic Light Protocol level|[0, 1, 2, 3]|2|
-  
+
 Example input:
 
 ```
@@ -137,7 +137,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |case|createCase|False|Create case output|{'owner': 'string', 'summary': 'string', 'severity': 2, '_routing': 'case_id', 'flag': False, 'endDate': 1640000000000, 'customFields': {}, '_type': 'case', 'description': 'string', 'title': 'string', 'tags': ['string'], 'createdAt': 1684188238010, '_parent': None, 'createdBy': 'admin', 'caseId': 54, 'tlp': 2, 'metrics': {}, '_id': 'case_id', 'id': 'case_id', '_version': 1, 'pap': 2, 'startDate': 1640000000000, 'status': 'Open'}|
-  
+
 Example output:
 
 ```
@@ -448,7 +448,7 @@ Get information about the current user
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |success|userObject|False|A user object containing all related fields|{}|
-  
+
 Example output:
 
 ```
@@ -625,7 +625,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.1.0 - Added additional error handling for issues that occur outside the expected status codes | Action: `create_case` remade to not include task input
+* 4.0.0 - Added additional error handling for issues that occur outside the expected status codes | Action: `create_case` remade to not include task input
 * 3.0.0 - Refactored plugin | Removed `thehive4py` dependency | Action: Split `get_user` into two new actions, `get_user_by_id` & `get_current_user`
 * 2.0.5 - New spec and help.md format for the Extension Library. Update help key features and fix description capitalisation
 * 2.0.4 - Update to use the `komand/python-2-27-slim-plugin` Docker image to reduce plugin size and to support SSL Verify
