@@ -298,6 +298,7 @@ Example output:
   "user": {} 
 }
 ```
+
 #### Get Case
 
 Retrieve a case by ID
@@ -321,7 +322,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |case|case|True|Get case output|{}|
-  
+
 Example output:
 
 ```
