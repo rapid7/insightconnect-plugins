@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from icon_freshservice.actions.delete_ticket_task import DeleteTicketTask
 from icon_freshservice.actions.delete_ticket_task.schema import Input
-from unit_test.util import Util
+from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
