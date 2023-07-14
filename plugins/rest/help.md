@@ -1,18 +1,21 @@
 # Description
-The HTTP Requests plugin allows users to automate HTTP requests to API services such as [RESTful based services](https://en.wikipedia.org/wiki/Representational_state_transfer).
+The HTTP Requests plugin to make it easy to integrate with RESTful services  
 
 # Key Features
-*This plugin does not contain any key features.*  
+* it can do this  
+* and that  
 
 # Requirements
-*This plugin does not contain any requirements.*  
+* python3  
+* requests  
 
 # Supported Product Versions
-* 2022-09-05
+* 2022-09-05  
 
 # Documentation
 
 ## Setup
+  
 The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -358,12 +361,13 @@ Example output:
 * 0.1.3 - Fix post and put actions by using JSON argument instead of body
 * 0.1.2 - SSL bug fix in SDK
 * 0.1.1 - Update tags
-* 0.1.0 - Initial plugin
+* 0.1.0 - Initial plugin  
 
 # Links
-  
+
 * [HTTP Request Architecture Style](http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm)
 
 ## References
   
 * [InsightConnect HTTP Request Plugin Guide](https://docs.rapid7.com/insightconnect/http-requests)
+* www.google.com

@@ -5,6 +5,6 @@
         "Content-Length": "0",
         "Content-Length": "20",
         "Content-Type": "text/html; charset=UTF-8",
-        "Referrer-Policy": "no-referrer",
-    },
+        "Referrer-Policy": "no-referrer"
+    }
 }
