@@ -4,7 +4,7 @@ products: [insightconnect]
 name: thehive
 title: TheHive
 description: "TheHive is a scalable, open source security incident response solution designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done"
-version: 3.0.0
+version: 3.1.0
 supported_versions: ["2023-05-17"]
 vendor: rapid7
 support: community
@@ -71,44 +71,6 @@ connection:
     default: true
     required: true
 types:
-  itask:
-    id:
-      title: Case ID
-      description: ID for the case
-      example: AYgQWIIjfMffAh_St-fd
-      type: string
-      required: false
-    title:
-      title: Title
-      description: Task's title
-      type: string
-      required: true
-    description:
-      title: Description
-      description: Task's description
-      type: string
-      required: true
-    status:
-      description: Task status
-      type: string
-      default: Waiting
-      enum:
-        - Waiting
-        - InProgress
-        - Completed
-        - Cancel
-      required: false
-    flag:
-      title: Flag
-      description: Task's flag
-      default: false
-      type: boolean
-      required: false
-    owner:
-      title: Task's assignee
-      description: Task owner
-      type: string
-      required: false
   userObject:
     status:
       type: string
@@ -176,12 +138,12 @@ types:
       title: ID
       description: ID
       type: string
-      required: true
+      required: false
     _type:
       title: Type
       description: Case type
       type: string
-      required: true
+      required: false
     _createdBy:
       title: Created By
       description: Who the case was created by
@@ -699,12 +661,6 @@ actions:
         description: Case template's name. If specified then the case is created using the given template
         type: string
         example: Case template name
-        required: false
-      tasks:
-        title: Task
-        description: Case task
-        type: itask
-        example: {}
         required: false
       jsonData:
         title: JSON

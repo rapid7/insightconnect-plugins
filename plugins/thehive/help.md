@@ -1,11 +1,8 @@
-
-
-
-
 # Description
   
 TheHive is a scalable, open source security incident response solution designed for SOCs & CERTs to collaborate, 
 elaborate, analyze and get their job done
+
 # Key Features
 
 * Retrieve a list of cases or a specific case by ID
@@ -21,7 +18,8 @@ elaborate, analyze and get their job done
 
 # Supported Product Versions
   
-* 2023-05-17
+* 2023-05-17  
+
 # Documentation
 
 ## Setup
@@ -44,19 +42,23 @@ Example input:
 {
   "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
   "credentials": {},
-  "host": "10.3.4.50",
-  "port": "9000",
+  "host": "thehive.company.com or 10.3.4.50",
+  "port": 9000,
   "protocol": "http",
   "proxy": {},
   "verify": true
 }
-```
+```  
+
 ## Technical Details
 
 ### Actions
+  
 
 #### Close Case
-Close a case by ID
+  
+Close a case by ID  
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -71,7 +73,8 @@ Example input:
   "force": false,
   "id": 50
 }
-```
+```  
+
 ##### Output
 
 |Name|Type|Required|Description|Example|
@@ -84,9 +87,12 @@ Example output:
 {
   "success": true
 }
-```
+```  
+
 #### Create Case
-Create a new case
+  
+Create a new case  
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -102,7 +108,6 @@ Create a new case
 |startDate|integer|None|False|Case start date (datetime in ms) (will default to now if left blank)|None|1684170163000|
 |summary|string|None|False|Case summary|None|Case summary|
 |tags|[]string|None|False|List of case tags|None|["case_tag_1", "case_tag_2"]|
-|tasks|itask|None|False|Case task|None|{}|
 |template|string|None|False|Case template's name. If specified then the case is created using the given template|None|Case template name|
 |title|string|None|True|Name of the case|None|Case title|
 |tlp|integer|2|False|Traffic Light Protocol level|[0, 1, 2, 3]|2|
@@ -122,16 +127,16 @@ Example input:
   "startDate": 1684170163000,
   "summary": "Case summary",
   "tags": "case_tag_1",
-  "tasks": {},
   "template": "Case template name",
-  "title": "None",
+  "title": "Case title",
   "tlp": 2
 }
-```
+```  
+
 ##### Output
 
 |Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- |
 |case|createCase|False|Create case output|{'owner': 'string', 'summary': 'string', 'severity': 2, '_routing': 'case_id', 'flag': False, 'endDate': 1640000000000, 'customFields': {}, '_type': 'case', 'description': 'string', 'title': 'string', 'tags': ['string'], 'createdAt': 1684188238010, '_parent': None, 'createdBy': 'admin', 'caseId': 54, 'tlp': 2, 'metrics': {}, '_id': 'case_id', 'id': 'case_id', '_version': 1, 'pap': 2, 'startDate': 1640000000000, 'status': 'Open'}|
   
 Example output:
@@ -166,9 +171,12 @@ Example output:
     "tlp": 2
   }
 }
-```
+```  
+
 #### Create Observable
-Create a new case observable
+  
+Create a new case observable  
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -206,7 +214,8 @@ Example input:
   ],
   "tlp": 2
 }
-```
+```  
+
 ##### Output
 
 |Name|Type|Required|Description|Example|
@@ -232,9 +241,12 @@ Example output:
     "tlp": 2
   }
 }
-```
+```  
+
 #### Create Task
-Create a new case task
+  
+Create a new case task  
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -261,7 +273,8 @@ Example input:
   "status": "Waiting",
   "title": "Task title"
 }
-```
+```  
+
 ##### Output
 
 |Name|Type|Required|Description|Example|
@@ -287,7 +300,9 @@ Example output:
 }
 ```
 #### Get Case
-Retrieve a case by ID
+  
+Retrieve a case by ID  
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -300,7 +315,8 @@ Example input:
 {
   "id": 50
 }
-```
+```  
+
 ##### Output
 
 |Name|Type|Required|Description|Example|
@@ -353,12 +369,16 @@ Example output:
     "User Permissions": {}
   }
 }
-```
+```  
+
 #### Get Cases
-Retrieve list of cases
+  
+Retrieve list of cases  
+
 ##### Input
   
-*This action does not contain any inputs.*
+*This action does not contain any inputs.*  
+
 ##### Output
 
 |Name|Type|Required|Description|Example|
@@ -413,16 +433,20 @@ Example output:
     }
   ]
 }
-```
+```  
+
 #### Get Current User
-Get information about the current user
+  
+Get information about the current user  
+
 ##### Input
   
-*This action does not contain any inputs.*
+*This action does not contain any inputs.*  
+
 ##### Output
 
 |Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- | 
+| :--- | :--- | :--- | :--- | :--- |
 |success|userObject|False|A user object containing all related fields|{}|
   
 Example output:
@@ -431,9 +455,12 @@ Example output:
 {
   "success": {}
 }
-```
+```  
+
 #### Get User by ID
-Get information about a specific user
+  
+Get information about a specific user  
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -447,6 +474,7 @@ Example input:
   "id": 50
 }
 ```
+
 ##### Output
 
 |Name|Type|Required|Description|Example|
@@ -460,24 +488,15 @@ Example output:
   "success": {}
 }
 ```
+
 ### Triggers
   
 *This plugin does not contain any triggers.*
 ### Tasks
   
-*This plugin does not contain any tasks.*
-### Custom Output Types
-  
-**itask**  
+*This plugin does not contain any tasks.*  
 
-|Name|Type|Default|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- |
-|Description|string|None|True|Task's description|None|
-|Flag|boolean|False|False|Task's flag|None|
-|Case ID|string|None|False|ID for the case|AYgQWIIjfMffAh_St-fd|
-|Task's assignee|string|None|False|Task owner|None|
-|status|string|Waiting|False|Task status|None|
-|Title|string|None|True|Task's title|None|
+### Custom Types
   
 **userObject**  
 
@@ -503,7 +522,7 @@ Example output:
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Created At|integer|None|False|Datetime in ms the case was created at|None|
 |Created By|string|None|False|Who the case was created by|None|
-|Type|string|None|True|Case type|None|
+|Type|string|None|False|Case type|None|
 |Updated At|integer|None|False|Datetime in ms the case was updated at|None|
 |Updated By|string|None|False|Who the case was updated by|None|
 |Alert Date|integer|None|False|Case alert date (datetime in ms)|None|
@@ -518,7 +537,7 @@ Example output:
 |Extra Data|object|None|False|None|None|
 |Flag|boolean|None|False|Something here|None|
 |Handling Duration|integer|None|False|Case handling duration|None|
-|ID|string|None|True|ID|None|
+|ID|string|None|False|ID|None|
 |Impact Status|string|None|False|None|None|
 |In Progress Date|integer|None|False|None|None|
 |New Date|integer|None|False|None|None|
