@@ -91,8 +91,10 @@ class HiveAPI:
             raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response)
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response)
-        if response.status_code in (200, 201):
-            return response.json()
         if response.status_code == 204:
             return None
+        if response.status_code in range(200, 299):
+            return response.json()
+
+        # Anything which isn't caught by now, raise the unknown preset and show the response.
         raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response)

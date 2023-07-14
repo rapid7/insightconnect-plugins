@@ -19,7 +19,7 @@ from mock import (
     mock_request_404,
     mock_request_500,
 )
-from unit_test.constants import STUB_CASE
+from constants import STUB_CASE
 
 
 class TestCreateCase(TestCase):
