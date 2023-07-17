@@ -1,15 +1,17 @@
 # Description
+  
 The HTTP Requests plugin to make it easy to integrate with RESTful services  
 
 # Key Features
-* it can do this  
-* and that  
+  
+* Make RESTful API calls  
 
 # Requirements
-* python3  
-* requests  
+  
+* None  
 
 # Supported Product Versions
+  
 * 2022-09-05  
 
 # Documentation
@@ -369,5 +371,6 @@ Example output:
 
 ## References
   
-* [InsightConnect HTTP Request Plugin Guide](https://docs.rapid7.com/insightconnect/http-requests)
-* www.google.com
+* https://requests.readthedocs.io/en/latest/  
+* https://docs.rapid7.com/insightconnect/http-requests
+* 
