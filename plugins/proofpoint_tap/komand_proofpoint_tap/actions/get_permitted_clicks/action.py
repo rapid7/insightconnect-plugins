@@ -4,6 +4,7 @@ from .schema import GetPermittedClicksInput, GetPermittedClicksOutput, Input, Ou
 # Custom imports below
 from komand_proofpoint_tap.util.api import Endpoint
 from komand_proofpoint_tap.util.util import SiemUtils
+from komand_proofpoint_tap.util.helpers import clean
 
 
 class GetPermittedClicks(insightconnect_plugin_runtime.Action):
@@ -19,17 +20,20 @@ class GetPermittedClicks(insightconnect_plugin_runtime.Action):
         self.connection.client.check_authorization()
 
         query_params = {"format": "JSON"}
-        threat_status = params.get(Input.THREAT_STATUS)
+        threat_status = params.get(Input.THREATSTATUS)
 
         if threat_status != "all":
             query_params["threatStatus"] = threat_status
 
         response = self.connection.client.siem_action(
             Endpoint.get_permitted_clicks(),
-            SiemUtils.prepare_time_range(params.get(Input.TIME_START), params.get(Input.TIME_END), query_params),
+            SiemUtils.prepare_time_range(params.get(Input.TIMESTART), params.get(Input.TIMEEND), query_params),
         )
         permitted_clicks = response.get("clicksPermitted", [])
-        if params.get(Input.URL) and permitted_clicks:
-            response["clicksPermitted"] = SiemUtils.search_url(permitted_clicks, params.get(Input.URL))
+        url = params.get(Input.URL)
+        if url and permitted_clicks:
+            permitted_clicks = SiemUtils.search_url(permitted_clicks, url)
 
-        return {Output.RESULTS: insightconnect_plugin_runtime.helper.clean(response)}
+        response["clicksPermitted"] = clean(permitted_clicks)
+
+        return {Output.RESULTS: response}

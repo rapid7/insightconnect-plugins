@@ -1,0 +1,62 @@
+{
+  "events": [
+    {
+      "eventType": "messagesBlocked",
+      "threatsInfoMap": [
+        {
+          "threat": "Example Threat",
+          "threatID": "9de5069c5afe602b2ea0a04b66beb2c6",
+          "threatStatus": "active",
+          "threatTime": "2021-03-20T00:00:00.000Z",
+          "threatType": "url",
+          "threatUrl": "9de5069c5afe602b2ea0a04b66beb2c7",
+          "classification": "phish"
+        }
+      ],
+      "spamScore": 100,
+      "toAddresses": [
+        "user@example.com"
+      ],
+      "subject": "Mail delivery failed: returning message to sender",
+      "fromAddress": [
+        "user@example.com"
+      ],
+      "quarantineFolder": "Phish"
+    },
+    {
+      "eventType": "messagesDelivered",
+      "threatsInfoMap": [
+        {
+          "threat": "Example Threat",
+          "threatID": "9de5069c5afe602b2ea0a04b66beb2c8",
+          "threatStatus": "cleared",
+          "threatTime": "2021-03-20T00:00:00.000Z",
+          "threatType": "url",
+          "threatUrl": "https://example.com/9de5069c5afe602b2ea0a04b66beb2c8",
+          "classification": "phish"
+        }
+      ],
+      "spamScore": 100,
+      "toAddresses": [
+        "user@example.com"
+      ],
+      "subject": "Mail delivery failed: returning message to sender",
+      "fromAddress": [
+        "user@example.com"
+      ],
+      "quarantineFolder": "Phish"
+    }
+  ],
+  "state": {
+    "last_collection_date": "2023-04-04T07:59:00+00:00",
+    "status_code": 200,
+    "next_page_index": 2,
+    "previous_logs_hashes": [
+      "1604441c3c213eb3d2efc9557cae93a5796fa5a8",
+      "922322e2f2f10345c3ea5c06d87b73c5ab13f945",
+      "df05d563ebc4c2044954cd88b4debf63d5845b78",
+      "8cebe23f0ce9d4bf19d2a2f700b372108d98b45d"
+    ]
+  },
+  "hasMorePages": true
+}

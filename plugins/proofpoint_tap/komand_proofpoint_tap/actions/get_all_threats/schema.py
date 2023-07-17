@@ -8,10 +8,10 @@ class Component:
 
 
 class Input:
-    THREAT_STATUS = "threat_status"
-    THREAT_TYPE = "threat_type"
-    TIME_END = "time_end"
-    TIME_START = "time_start"
+    THREATSTATUS = "threatStatus"
+    THREATTYPE = "threatType"
+    TIMEEND = "timeEnd"
+    TIMESTART = "timeStart"
     
 
 class Output:
@@ -24,7 +24,7 @@ class GetAllThreatsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "threat_status": {
+    "threatStatus": {
       "type": "string",
       "title": "Threat Status",
       "description": "The threat statuses which will be returned in the data",
@@ -37,7 +37,7 @@ class GetAllThreatsInput(insightconnect_plugin_runtime.Input):
       ],
       "order": 4
     },
-    "threat_type": {
+    "threatType": {
       "type": "string",
       "title": "Threat Type",
       "description": "The threat type which will be returned in the data",
@@ -50,22 +50,26 @@ class GetAllThreatsInput(insightconnect_plugin_runtime.Input):
       ],
       "order": 3
     },
-    "time_end": {
+    "timeEnd": {
       "type": "string",
       "title": "Time End",
+      "displayType": "date",
       "description": "The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour",
+      "format": "date-time",
       "order": 2
     },
-    "time_start": {
+    "timeStart": {
       "type": "string",
       "title": "Time Start",
+      "displayType": "date",
       "description": "The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour",
+      "format": "date-time",
       "order": 1
     }
   },
   "required": [
-    "threat_status",
-    "threat_type"
+    "threatStatus",
+    "threatType"
   ]
 }
     """)
@@ -81,7 +85,7 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "results": {
-      "$ref": "#/definitions/all_threats",
+      "$ref": "#/definitions/allThreats",
       "title": "Results",
       "description": "The results containing all threats",
       "order": 1
@@ -91,9 +95,9 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
     "results"
   ],
   "definitions": {
-    "all_threats": {
+    "allThreats": {
       "type": "object",
-      "title": "all_threats",
+      "title": "allThreats",
       "properties": {
         "clicksBlocked": {
           "type": "array",
@@ -176,7 +180,7 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
             "id": {
               "type": "string",
               "title": "ID",
-              "description": "The unique id of the click",
+              "description": "The unique ID of the click",
               "order": 6
             },
             "recipient": {
@@ -235,9 +239,9 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "message_parts": {
+        "messageParts": {
           "type": "object",
-          "title": "message_parts",
+          "title": "messageParts",
           "properties": {
             "contentType": {
               "type": "string",
@@ -308,9 +312,9 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
               },
               "order": 1
             },
-            "clusterId": {
+            "cluster": {
               "type": "string",
-              "title": "Cluster ID",
+              "title": "Cluster",
               "description": "The name of the PPS cluster which processed the message",
               "order": 2
             },
@@ -364,7 +368,7 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
               "title": "Message Parts",
               "description": "Details about parts of the message, including both message bodies and attachments",
               "items": {
-                "$ref": "#/definitions/message_parts"
+                "$ref": "#/definitions/messageParts"
               },
               "order": 11
             },
@@ -463,7 +467,7 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
               "title": "Threats Info Map",
               "description": "Details about detected threats within the message",
               "items": {
-                "$ref": "#/definitions/threats_info_map"
+                "$ref": "#/definitions/threatsInfoMap"
               },
               "order": 26
             },
@@ -478,15 +482,15 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
             },
             "xmailer": {
               "type": "string",
-              "title": "X-mailer",
+              "title": "X-Mailer",
               "description": "The content of the X-Mailer",
               "order": 28
             }
           },
           "definitions": {
-            "message_parts": {
+            "messageParts": {
               "type": "object",
-              "title": "message_parts",
+              "title": "messageParts",
               "properties": {
                 "contentType": {
                   "type": "string",
@@ -532,9 +536,9 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
                 }
               }
             },
-            "threats_info_map": {
+            "threatsInfoMap": {
               "type": "object",
-              "title": "threats_info_map",
+              "title": "threatsInfoMap",
               "properties": {
                 "campaignId": {
                   "type": "string",
@@ -554,7 +558,7 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
                   "description": "The artifact which was condemned by Proofpoint. The malicious URL, hash of the attachment threat, or email address of the impostor sender",
                   "order": 3
                 },
-                "threatId": {
+                "threatID": {
                   "type": "string",
                   "title": "Threat ID",
                   "description": "The unique identifier associated with this threat",
@@ -588,9 +592,9 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "threats_info_map": {
+        "threatsInfoMap": {
           "type": "object",
-          "title": "threats_info_map",
+          "title": "threatsInfoMap",
           "properties": {
             "campaignId": {
               "type": "string",
@@ -610,7 +614,7 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
               "description": "The artifact which was condemned by Proofpoint. The malicious URL, hash of the attachment threat, or email address of the impostor sender",
               "order": 3
             },
-            "threatId": {
+            "threatID": {
               "type": "string",
               "title": "Threat ID",
               "description": "The unique identifier associated with this threat",
@@ -681,7 +685,7 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
         "id": {
           "type": "string",
           "title": "ID",
-          "description": "The unique id of the click",
+          "description": "The unique ID of the click",
           "order": 6
         },
         "recipient": {
@@ -740,9 +744,9 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "message_parts": {
+    "messageParts": {
       "type": "object",
-      "title": "message_parts",
+      "title": "messageParts",
       "properties": {
         "contentType": {
           "type": "string",
@@ -813,9 +817,9 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
           },
           "order": 1
         },
-        "clusterId": {
+        "cluster": {
           "type": "string",
-          "title": "Cluster ID",
+          "title": "Cluster",
           "description": "The name of the PPS cluster which processed the message",
           "order": 2
         },
@@ -869,7 +873,7 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
           "title": "Message Parts",
           "description": "Details about parts of the message, including both message bodies and attachments",
           "items": {
-            "$ref": "#/definitions/message_parts"
+            "$ref": "#/definitions/messageParts"
           },
           "order": 11
         },
@@ -968,7 +972,7 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
           "title": "Threats Info Map",
           "description": "Details about detected threats within the message",
           "items": {
-            "$ref": "#/definitions/threats_info_map"
+            "$ref": "#/definitions/threatsInfoMap"
           },
           "order": 26
         },
@@ -983,15 +987,15 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
         },
         "xmailer": {
           "type": "string",
-          "title": "X-mailer",
+          "title": "X-Mailer",
           "description": "The content of the X-Mailer",
           "order": 28
         }
       },
       "definitions": {
-        "message_parts": {
+        "messageParts": {
           "type": "object",
-          "title": "message_parts",
+          "title": "messageParts",
           "properties": {
             "contentType": {
               "type": "string",
@@ -1037,9 +1041,9 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "threats_info_map": {
+        "threatsInfoMap": {
           "type": "object",
-          "title": "threats_info_map",
+          "title": "threatsInfoMap",
           "properties": {
             "campaignId": {
               "type": "string",
@@ -1059,7 +1063,7 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
               "description": "The artifact which was condemned by Proofpoint. The malicious URL, hash of the attachment threat, or email address of the impostor sender",
               "order": 3
             },
-            "threatId": {
+            "threatID": {
               "type": "string",
               "title": "Threat ID",
               "description": "The unique identifier associated with this threat",
@@ -1093,9 +1097,9 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "threats_info_map": {
+    "threatsInfoMap": {
       "type": "object",
-      "title": "threats_info_map",
+      "title": "threatsInfoMap",
       "properties": {
         "campaignId": {
           "type": "string",
@@ -1115,7 +1119,7 @@ class GetAllThreatsOutput(insightconnect_plugin_runtime.Output):
           "description": "The artifact which was condemned by Proofpoint. The malicious URL, hash of the attachment threat, or email address of the impostor sender",
           "order": 3
         },
-        "threatId": {
+        "threatID": {
           "type": "string",
           "title": "Threat ID",
           "description": "The unique identifier associated with this threat",

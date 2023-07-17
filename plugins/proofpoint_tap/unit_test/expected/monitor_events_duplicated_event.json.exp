@@ -1,0 +1,31 @@
+{
+  "events": [
+    {
+      "GUID": "9de5069c5afe602b2ea0a04b66beb2c3",
+      "classification": "malware",
+      "clickIP": "198.51.100.1",
+      "clickTime": "2021-03-20T00:00:00.000Z",
+      "eventType": "clicksPermitted",
+      "id": "9de5069c5afe602b2ea0a04b66beb2c4",
+      "messageID": "<user@example.com>",
+      "recipient": "user@example.com",
+      "sender": "user@example.com",
+      "senderIP": "198.51.100.1",
+      "threatID": "9de5069c5afe602b2ea0a04b66beb2c5",
+      "threatStatus": "falsePositive",
+      "threatTime": "2021-03-20T00:00:00.000Z",
+      "threatURL": "https://example.com/9de5069c5afe602b2ea0a04b66beb2c5",
+      "url": "https://example.com",
+      "userAgent": "Mozilla/5.0"
+    }
+  ],
+  "state": {
+    "last_collection_date": "2023-04-04T07:59:00+00:00",
+    "status_code": 200,
+    "next_page_index": 1,
+    "previous_logs_hashes": [
+      "922322e2f2f10345c3ea5c06d87b73c5ab13f945"
+    ]
+  },
+  "hasMorePages": true
+}

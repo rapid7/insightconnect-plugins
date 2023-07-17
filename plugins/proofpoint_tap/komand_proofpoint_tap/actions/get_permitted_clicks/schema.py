@@ -8,9 +8,9 @@ class Component:
 
 
 class Input:
-    THREAT_STATUS = "threat_status"
-    TIME_END = "time_end"
-    TIME_START = "time_start"
+    THREATSTATUS = "threatStatus"
+    TIMEEND = "timeEnd"
+    TIMESTART = "timeStart"
     URL = "url"
     
 
@@ -24,7 +24,7 @@ class GetPermittedClicksInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "threat_status": {
+    "threatStatus": {
       "type": "string",
       "title": "Threat Status",
       "description": "The threat statuses which will be returned in the data",
@@ -37,16 +37,20 @@ class GetPermittedClicksInput(insightconnect_plugin_runtime.Input):
       ],
       "order": 4
     },
-    "time_end": {
+    "timeEnd": {
       "type": "string",
       "title": "Time End",
+      "displayType": "date",
       "description": "The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour",
+      "format": "date-time",
       "order": 2
     },
-    "time_start": {
+    "timeStart": {
       "type": "string",
       "title": "Time Start",
+      "displayType": "date",
       "description": "The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour",
+      "format": "date-time",
       "order": 1
     },
     "url": {
@@ -57,7 +61,7 @@ class GetPermittedClicksInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "threat_status"
+    "threatStatus"
   ]
 }
     """)
@@ -73,7 +77,7 @@ class GetPermittedClicksOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "results": {
-      "$ref": "#/definitions/permitted_clicks",
+      "$ref": "#/definitions/permittedClicks",
       "title": "Results",
       "description": "The results containing permitted clicks",
       "order": 1
@@ -120,7 +124,7 @@ class GetPermittedClicksOutput(insightconnect_plugin_runtime.Output):
         "id": {
           "type": "string",
           "title": "ID",
-          "description": "The unique id of the click",
+          "description": "The unique ID of the click",
           "order": 6
         },
         "recipient": {
@@ -179,9 +183,9 @@ class GetPermittedClicksOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "permitted_clicks": {
+    "permittedClicks": {
       "type": "object",
-      "title": "permitted_clicks",
+      "title": "permittedClicks",
       "properties": {
         "clicksPermitted": {
           "type": "array",
@@ -237,7 +241,7 @@ class GetPermittedClicksOutput(insightconnect_plugin_runtime.Output):
             "id": {
               "type": "string",
               "title": "ID",
-              "description": "The unique id of the click",
+              "description": "The unique ID of the click",
               "order": 6
             },
             "recipient": {

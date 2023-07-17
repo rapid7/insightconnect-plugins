@@ -5,7 +5,7 @@ import json
 
 class Input:
     SECRET = "secret"
-    SERVICE_PRINCIPAL = "service_principal"
+    SERVICEPRINCIPAL = "servicePrincipal"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -20,7 +20,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "The TAP secret for basic authentication API interaction",
       "order": 2
     },
-    "service_principal": {
+    "servicePrincipal": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Service Principal",
       "description": "The TAP service principal for basic authentication API interaction",
