@@ -373,4 +373,3 @@ Example output:
   
 * https://requests.readthedocs.io/en/latest/  
 * https://docs.rapid7.com/insightconnect/http-requests
-* 
