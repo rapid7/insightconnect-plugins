@@ -23,7 +23,7 @@ class TestQuarantineMultiple(TestCase):
     def test_should_succeed(self, mock_request: Mock, mock_get: Mock) -> None:
         expected = {
             Output.COMPLETED: ["hostname123", "hostname456", "hostname789"],
-            Output.FAILURES: [],
+            Output.FAILED: [],
         }
         actual = self.action.run(
             {Input.AGENTS: ["hostname123", "hostname456", "hostname789"], Input.QUARANTINE_STATE: True}
