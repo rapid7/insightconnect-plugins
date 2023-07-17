@@ -86,15 +86,15 @@ class HiveAPI:
         if response.status_code in range(200, 299):
             return response.json()
         if response.status_code == 400:
-            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.content)
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response)
         if response.status_code == 401:
-            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.content)
+            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response)
         if response.status_code == 403:
-            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.content)
+            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response)
         if response.status_code == 404:
-            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.content)
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response)
         if response.status_code >= 500:
-            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.content)
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response)
 
         # Anything which isn't caught by now, present the unknown preset and show the response.
-        raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.content)
+        raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response)
