@@ -295,7 +295,7 @@ Example output:
   "owner": {},
   "status": "Waiting",
   "title": {},
-  "user": {} 
+  "user": {}
 }
 ```
 
