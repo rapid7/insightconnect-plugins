@@ -15,7 +15,7 @@ class Input:
 
 class Output:
     COMPLETED = "completed"
-    FAILURES = "failures"
+    FAILED = "failed"
 
 
 class QuarantineMultipleInput(insightconnect_plugin_runtime.Input):
@@ -76,9 +76,9 @@ class QuarantineMultipleOutput(insightconnect_plugin_runtime.Output):
       },
       "order": 1
     },
-    "failures": {
+    "failed": {
       "type": "array",
-      "title": "Failure",
+      "title": "Failed",
       "description": "List of hosts on which the operation attempt was unsuccessful",
       "items": {
         "$ref": "#/definitions/quarantine_failures"
@@ -87,7 +87,7 @@ class QuarantineMultipleOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "failures"
+    "failed"
   ],
   "definitions": {
     "quarantine_failures": {
