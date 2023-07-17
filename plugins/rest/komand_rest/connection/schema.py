@@ -59,7 +59,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "default_headers": {
       "type": "object",
       "title": "Default Headers",
-      "description": "Custom headers to include in all requests associated with this connection. To pass a encrypted key as a header value, enter your key in the Secret Key input and set the value of the header in this field to \"CUSTOM_SECRET_INPUT\" instead of secret key. The plugin will replace \"CUSTOM_SECRET_INPUT\" with the encrypted key stored in the Secret Key input when the plugin runs.",
+      "description": "Custom headers to include in all requests associated with this connection. To pass a encrypted key as a header value, enter your key in the Secret Key input and set the value of the header in this field to \\"CUSTOM_SECRET_INPUT\\" instead of secret key. The plugin will replace \\"CUSTOM_SECRET_INPUT\\" with the encrypted key stored in the Secret Key input when the plugin runs.",
       "order": 4
     },
     "fail_on_http_errors": {
@@ -78,7 +78,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "secret": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Secret Key",
-      "description": "Credential secret key. Provide a Bearer Token, Rapid7 Insight, OpsGenie, Pendo or using \"CUSTOM_SECRET_INPUT\" in the Default Headers field for Custom authentication type",
+      "description": "Credential secret key. Provide a Bearer Token, Rapid7 Insight, OpsGenie, Pendo or using \\"CUSTOM_SECRET_INPUT\\" in the Default Headers field for Custom authentication type",
       "order": 3
     },
     "ssl_verify": {
