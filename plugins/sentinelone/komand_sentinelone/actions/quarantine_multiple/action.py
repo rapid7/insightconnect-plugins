@@ -54,5 +54,5 @@ class QuarantineMultiple(insightconnect_plugin_runtime.Action):
                 failures.append(Helper.return_failure_details(agent, str(error)))
         return {
             Output.COMPLETED: completed,
-            Output.FAILURES: failures,
+            Output.FAILED: failures,
         }
