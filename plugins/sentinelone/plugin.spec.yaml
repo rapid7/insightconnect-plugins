@@ -2166,8 +2166,8 @@ actions:
         type: "[]string"
         required: true
         example: '["hostname123", "hostname456"]'
-      failures:
-        title: Failure
+      failed:
+        title: Failed
         description: List of hosts on which the operation attempt was unsuccessful
         type: "[]quarantine_failures"
         required: true

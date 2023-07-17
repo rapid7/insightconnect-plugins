@@ -1,7 +1,7 @@
 {
-	"spec": "3f58450a74398c0e8c3456872fcd6030",
-	"manifest": "680ea665dfc013c707c5a48da96ce7be",
-	"setup": "ab1a8d52a10a5304ede6877740364166",
+	"spec": "45af8f51bd94bb899f53e934d06c073b",
+	"manifest": "c8ae36589559d169d44297aebe309c6d",
+	"setup": "3b1e7a0204151d4155a8dd5170f5df4d",
 	"schemas": [
 		{
 			"identifier": "activities_list/schema.py",
@@ -101,7 +101,7 @@
 		},
 		{
 			"identifier": "quarantine_multiple/schema.py",
-			"hash": "a59bacb48cdbba9b17229b10358466ff"
+			"hash": "8ce6455fdaee44c703e0308e436e0904"
 		},
 		{
 			"identifier": "run_remote_script/schema.py",

@@ -1634,8 +1634,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |completed|[]string|True|List of hosts on which the operation was successfully attempted (note this does not guarantee that the operation itself was successful, only that the API call was able to be successfully performed)|["hostname123", "hostname456"]|
-|failures|[]quarantine_failures|True|List of hosts on which the operation attempt was unsuccessful|[{"input_key": "hostname123", "error": "Example Error Message"}, {"input_key": "hostname456", "error": "Example Error Message 2"}]|
-|successful|[]string|True|List of hosts on which the operation was successfully attempted (Note this does not guarantee that the operation itself was successful, only that the API call was able to be successfully performed)|["hostname123", "hostname456"]|
+|failed|[]quarantine_failures|True|List of hosts on which the operation attempt was unsuccessful|[{"input_key": "hostname123", "error": "Example Error Message"}, {"input_key": "hostname456", "error": "Example Error Message 2"}]|
   
 Example output:
 
@@ -1645,7 +1644,7 @@ Example output:
     "hostname123",
     "hostname456"
   ],
-  "failures": [
+  "failed": [
     {
       "error": "Example Error Message",
       "input_key": "hostname123"
