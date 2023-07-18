@@ -4,18 +4,14 @@ The [VMware Carbon Black Cloud](https://www.carbonblack.com/products/vmware-carb
 Manage and contain threats on your Carbon Black endpoints using this plugin.
 
 # Key Features
-  
+
 * Get device information
 * Quarantine a device
 
 # Requirements
-  
+
 * API Credentials
 * Base URL
-
-# Supported Product Versions
-  
-* 2023-09-19
 
 # Documentation
 
@@ -30,8 +26,8 @@ The connection configuration accepts the following parameters:
 |api_id|string|None|True|API ID|None|ADFF2QLIIZ|
 |api_secret_key|credential_secret_key|None|True|API secret key|None|Z1PXFRDZI321LXQVAB9IJKKZ|
 |org_key|string|None|True|Organization Key|None|1ABZY2FJ|
-|url|string|defense.conferdeploy.net|True|The Carbon Black Cloud URL you use. You can find this by looking at the web address of your Carbon Black Cloud console|['defense-eap01.conferdeploy.net', 'dashboard.confer.net', 'defense.conferdeploy.net', 'defense-prod05.conferdeploy.net', 'defense-eu.conferdeploy.net', 'defense-prodnrt.conferdeploy.net', 'defense-prodsyd.conferdeploy.net', 'ew2.carbonblackcloud.vmware.com', 'gprd1usgw1.carbonblack-us-gov.vmware.com']|defense.conferdeploy.net|
-  
+|url|string|https://defense.conferdeploy.net|True|API URL|None|https://defense.conferdeploy.net|
+
 Example input:
 
 ```
@@ -39,7 +35,7 @@ Example input:
   "api_id": "ADFF2QLIIZ",
   "api_secret_key": "Z1PXFRDZI321LXQVAB9IJKKZ",
   "org_key": "1ABZY2FJ",
-  "url": "defense.conferdeploy.net"
+  "url": "https://defense.conferdeploy.net"
 }
 ```
 
@@ -49,7 +45,7 @@ Example input:
 
 
 #### Get Agent Details
-  
+
 This action is used to get agent details.
 
 ##### Input
@@ -57,7 +53,7 @@ This action is used to get agent details.
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |agent|string|None|True|Agent to retrieve device information from. Accepts IP address, hostname, or device ID. Search results are case-sensitive|None|198.51.100.100|
-  
+
 Example input:
 
 ```
@@ -70,81 +66,53 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|agent|agent|False|Details about the agent|{"adGroupId":0,"policyOverride":false,"currentSensorPolicyName":null,"deviceMetaDataItemList":null,"lastDevicePolicyRequestedTime":null,"lastDevicePolicyChangedTime":null,"lastPolicyUpdatedTime":null,"loginUserName":null,"messages":null,"lastReportedTime":1591962280381,"uninstallCode":null,"organizationId":1105,"deviceId":3466056,"createTime":null,"deviceGuid":null,"email":"user@example.com","deviceSessionId":null,"deviceType":"WINDOWS","assignedToId":null,"assignedToName":null,"lastName":"User","firstName":"Test","middleName":null,"deviceOwnerId":12345,"activationCode":"1A2B3C","targetPriorityType":"HIGH","organizationName":"example.com","sensorVersion":"3.5.0.1680","activationCodeExpiryTime":1234567891011,"sensorKitType":null,"osVersion":"Server 2012 x64","registeredTime":1234567891011,"lastContact":1234567891011,"windowsPlatform":null,"vdiBaseDevice":null,"avStatus":["AV_ACTIVE","ONDEMAND_SCAN_DISABLED"],"deregisteredTime":null,"sensorStates":["ACTIVE","LIVE_RESPONSE_NOT_RUNNING","LIVE_RESPONSE_NOT_KILLED","LIVE_RESPONSE_ENABLED","SECURITY_CENTER_OPTLN_DISABLED"],"rootedBySensor":false,"rootedBySensorTime":null,"quarantined":false,"lastInternalIpAddress":"198.51.100.100","macAddress":"000000000000","lastExternalIpAddress":"198.51.100.100","lastLocation":"OFFSITE","sensorOutOfDate":false,"avUpdateServers":null,"passiveMode":false,"lastResetTime":0,"lastShutdownTime":0,"scanStatus":null,"scanLastActionTime":0,"scanLastCompleteTime":0,"linuxKernelVersion":null,"avEngine":"4.13.0.207-ave.8.3.60.40:avpack.8.5.0.60:vdf.8.18.2.56:apc.2.10.0.149","avProductVersion":"4.13.0.207","avAveVersion":"8.3.60.40","avPackVersion":"8.5.0.60","avVdfVersion":"8.18.2.56","avLastScanTime":0,"virtualMachine":false,"virtualizationProvider":"UNKNOWN","sensorPendingUpdate":false,"rootedByAnalytics":false,"rootedByAnalyticsTime":null,"avMaster":false,"firstVirusActivityTime":0,"lastVirusActivityTime":0,"testId":-1,"uninstalledTime":null,"encodedActivationCode":null,"originEventHash":null,"name":"example-host","status":"REGISTERED","policyId":12345,"policyName":"test"}|
-  
+|agent|agent|False|Details about the agent|None|
+
 Example output:
 
 ```
 {
   "agent": {
-    "activationCode": "1A2B3C",
-    "activationCodeExpiryTime": 1234567891011,
     "adGroupId": 0,
+    "policyOverride": false,
+    "currentSensorPolicyName": null,
+    "deviceMetaDataItemList": null,
+    "lastDevicePolicyRequestedTime": null,
+    "lastDevicePolicyChangedTime": null,
+    "lastPolicyUpdatedTime": null,
+    "loginUserName": null,
+    "messages": null,
+    "lastReportedTime": 1591962280381,
+    "uninstallCode": null,
+    "organizationId": 1105,
+    "deviceId": 3466056,
+    "createTime": null,
+    "deviceGuid": null,
+    "email": "user@example.com",
+    "deviceSessionId": null,
+    "deviceType": "WINDOWS",
     "assignedToId": null,
     "assignedToName": null,
-    "avAveVersion": "8.3.60.40",
-    "avEngine": "4.13.0.207-ave.8.3.60.40:avpack.8.5.0.60:vdf.8.18.2.56:apc.2.10.0.149",
-    "avLastScanTime": 0,
-    "avMaster": false,
-    "avPackVersion": "8.5.0.60",
-    "avProductVersion": "4.13.0.207",
+    "lastName": "User",
+    "firstName": "Test",
+    "middleName": null,
+    "deviceOwnerId": 12345,
+    "activationCode": "1A2B3C",
+    "targetPriorityType": "HIGH",
+    "organizationName": "example.com",
+    "sensorVersion": "3.5.0.1680",
+    "activationCodeExpiryTime": 1234567891011,
+    "sensorKitType": null,
+    "osVersion": "Server 2012 x64",
+    "registeredTime": 1234567891011,
+    "lastContact": 1234567891011,
+    "windowsPlatform": null,
+    "vdiBaseDevice": null,
     "avStatus": [
       "AV_ACTIVE",
       "ONDEMAND_SCAN_DISABLED"
     ],
-    "avUpdateServers": null,
-    "avVdfVersion": "8.18.2.56",
-    "createTime": null,
-    "currentSensorPolicyName": null,
     "deregisteredTime": null,
-    "deviceGuid": null,
-    "deviceId": 3466056,
-    "deviceMetaDataItemList": null,
-    "deviceOwnerId": 12345,
-    "deviceSessionId": null,
-    "deviceType": "WINDOWS",
-    "email": "user@example.com",
-    "encodedActivationCode": null,
-    "firstName": "Test",
-    "firstVirusActivityTime": 0,
-    "lastContact": 1234567891011,
-    "lastDevicePolicyChangedTime": null,
-    "lastDevicePolicyRequestedTime": null,
-    "lastExternalIpAddress": "198.51.100.100",
-    "lastInternalIpAddress": "198.51.100.100",
-    "lastLocation": "OFFSITE",
-    "lastName": "User",
-    "lastPolicyUpdatedTime": null,
-    "lastReportedTime": 1591962280381,
-    "lastResetTime": 0,
-    "lastShutdownTime": 0,
-    "lastVirusActivityTime": 0,
-    "linuxKernelVersion": null,
-    "loginUserName": null,
-    "macAddress": "000000000000",
-    "messages": null,
-    "middleName": null,
-    "name": "example-host",
-    "organizationId": 1105,
-    "organizationName": "example.com",
-    "originEventHash": null,
-    "osVersion": "Server 2012 x64",
-    "passiveMode": false,
-    "policyId": 12345,
-    "policyName": "test",
-    "policyOverride": false,
-    "quarantined": false,
-    "registeredTime": 1234567891011,
-    "rootedByAnalytics": false,
-    "rootedByAnalyticsTime": null,
-    "rootedBySensor": false,
-    "rootedBySensorTime": null,
-    "scanLastActionTime": 0,
-    "scanLastCompleteTime": 0,
-    "scanStatus": null,
-    "sensorKitType": null,
-    "sensorOutOfDate": false,
-    "sensorPendingUpdate": false,
     "sensorStates": [
       "ACTIVE",
       "LIVE_RESPONSE_NOT_RUNNING",
@@ -152,22 +120,50 @@ Example output:
       "LIVE_RESPONSE_ENABLED",
       "SECURITY_CENTER_OPTLN_DISABLED"
     ],
-    "sensorVersion": "3.5.0.1680",
-    "status": "REGISTERED",
-    "targetPriorityType": "HIGH",
-    "testId": -1,
-    "uninstallCode": null,
-    "uninstalledTime": null,
-    "vdiBaseDevice": null,
+    "rootedBySensor": false,
+    "rootedBySensorTime": null,
+    "quarantined": false,
+    "lastInternalIpAddress": "198.51.100.100",
+    "macAddress": "000000000000",
+    "lastExternalIpAddress": "198.51.100.100",
+    "lastLocation": "OFFSITE",
+    "sensorOutOfDate": false,
+    "avUpdateServers": null,
+    "passiveMode": false,
+    "lastResetTime": 0,
+    "lastShutdownTime": 0,
+    "scanStatus": null,
+    "scanLastActionTime": 0,
+    "scanLastCompleteTime": 0,
+    "linuxKernelVersion": null,
+    "avEngine": "4.13.0.207-ave.8.3.60.40:avpack.8.5.0.60:vdf.8.18.2.56:apc.2.10.0.149",
+    "avProductVersion": "4.13.0.207",
+    "avAveVersion": "8.3.60.40",
+    "avPackVersion": "8.5.0.60",
+    "avVdfVersion": "8.18.2.56",
+    "avLastScanTime": 0,
     "virtualMachine": false,
     "virtualizationProvider": "UNKNOWN",
-    "windowsPlatform": null
+    "sensorPendingUpdate": false,
+    "rootedByAnalytics": false,
+    "rootedByAnalyticsTime": null,
+    "avMaster": false,
+    "firstVirusActivityTime": 0,
+    "lastVirusActivityTime": 0,
+    "testId": -1,
+    "uninstalledTime": null,
+    "encodedActivationCode": null,
+    "originEventHash": null,
+    "name": "example-host",
+    "status": "REGISTERED",
+    "policyId": 12345,
+    "policyName": "test"
   }
 }
 ```
 
 #### Quarantine
-  
+
 This action is used to quarantine an agent.
 
 ##### Input
@@ -177,14 +173,17 @@ This action is used to quarantine an agent.
 |agent|string|None|True|Agent to retrieve device information from. Accepts IP address, hostname, or device ID. Search results are case-sensitive|None|198.51.100.100|
 |quarantine_state|boolean|True|True|Set to true to quarantine the agent, set to false to unquarantine an agent|None|True|
 |whitelist|[]string|None|False|An array of IPs, hostnames, or device ID that a user can pass in that will not be quarantined|None|["198.51.100.100", "win-test"]|
-  
+
 Example input:
 
 ```
 {
   "agent": "198.51.100.100",
   "quarantine_state": true,
-  "whitelist": "198.51.100.100"
+  "whitelist": [
+    "198.51.100.100",
+    "win-test"
+  ]
 }
 ```
 
@@ -192,8 +191,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|quarantined|boolean|True|Indicates whether or not the agent has been quarantined|True|
-  
+|quarantined|boolean|True|Is the agent quarantined|True|
+
 Example output:
 
 ```
@@ -201,15 +200,80 @@ Example output:
   "quarantined": true
 }
 ```
+
+#### Quarantine Multiple
+
+This action is used to quarantine an agents.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|agents|[]string|None|True|List of agents to retrieve device information from. Accepts IP address, hostname, or device ID. Search results are case-sensitive|None|["198.51.100.100", "192.168.51.100.101"]|
+|quarantine_state|boolean|True|True|Set to true to quarantine the agents, set to false to unquarantine an agents|None|True|
+|whitelist|[]string|None|False|An array of IPs, hostnames, or device ID that a user can pass in that will not be quarantined|None|["198.51.100.100", "win-test"]|
+
+Example input:
+
+```
+{
+  "agents": [
+    "198.51.100.100",
+    "192.168.51.100.101"
+  ],
+  "quarantine_state": true,
+  "whitelist": [
+    "198.51.100.100",
+    "win-test"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|completed|[]string|True|List of hosts on which the operation was successfully attempted (note this does not guarantee that the operation itself was successful, only that the API call was able to be successfully performed)|["hostname123", "hostname456"]|
+|failed|[]quarantine_failures|True|List of hosts on which the operation attempt was unsuccessful|[{"input_key": "hostname123", "error": "Example Error Message"}, {"input_key": "hostname456", "error": "Example Error Message 2"}]|
+
+Example output:
+
+```
+{
+  "completed": [
+    "hostname123",
+    "hostname456"
+  ],
+  "failed": [
+    {
+      "error": "Example Error Message",
+      "input_key": "hostname123"
+    },
+    {
+      "error": "Example Error Message 2",
+      "input_key": "hostname456"
+    }
+  ]
+}
+```
+
 ### Triggers
-  
+
 *This plugin does not contain any triggers.*
+
 ### Tasks
-  
+
 *This plugin does not contain any tasks.*
 
 ### Custom Types
-  
+
+**quarantine_failures**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Error|string|None|False|The message describing why the operation has failed|None|
+|Input Key|string|None|False|The input key name|None|
+
 **agent**
 
 |Name|Type|Default|Required|Description|Example|
@@ -234,7 +298,7 @@ Example output:
 |Device GUID|string|None|False|Device GUID|None|
 |Device ID|integer|None|False|Device ID|None|
 |Device Meta Data Item List|string|None|False|Device meta data item list|None|
-|Device Owner ID|integer|None|False|Device owner ID|None|
+|Device Owner ID|integer|None|False|Device owner id|None|
 |Device Session ID|string|None|False|Device session ID|None|
 |Device Type|string|None|False|Device type|None|
 |Email|string|None|False|Email|None|
@@ -293,22 +357,21 @@ Example output:
 
 
 ## Troubleshooting
-  
+
 *There is no troubleshooting for this plugin.*
 
 # Version History
 
-* 2.0.0 - Updated the SDK version | Cloud enabled
+* 1.1.0 - Added new action: Quarantine Multiple
 * 1.0.2 - Updated branding
 * 1.0.1 - Fix issue where retry on error call could crash plugin
 * 1.0.0 - Initial plugin
 
 # Links
 
-* [Carbon Black Cloud](https://www.carbonblack.com/products/vmware-carbon-black-cloud)
+* [Carbon Black Authentication](https://developer.carbonblack.com/reference/carbon-black-cloud/authentication/)
+* [Carbon Black API URLs](https://developer.carbonblack.com/reference/carbon-black-cloud/authentication/#constructing-your-request)
 
 ## References
 
 * [Carbon Black Cloud](https://www.carbonblack.com/products/vmware-carbon-black-cloud)
-* [Carbon Black Authentication](https://developer.carbonblack.com/reference/carbon-black-cloud/authentication/)
-* [Carbon Black API URLs](https://developer.carbonblack.com/reference/carbon-black-cloud/authentication/#constructing-your-request)
