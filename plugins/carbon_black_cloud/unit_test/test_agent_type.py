@@ -1,5 +1,11 @@
+import os
+import sys
+
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
-import icon_carbon_black_cloud.util.agent_typer as agent_typer
+
+from icon_carbon_black_cloud.util import agent_typer
 
 
 class TestAgentType(TestCase):
