@@ -208,42 +208,52 @@ class TestGetUserActivityEvents(unittest.TestCase):
                 "version": "5.13.7.15481",
             },
         ]
-        first_expected_output = [
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "33.33.33.33",
-                "time": "2023-02-22T21:45:00Z",
-                "type": "Sign in",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "11.11.11.11",
-                "time": "2023-02-22T21:44:44Z",
-                "type": "Sign in",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "22.22.22.22",
-                "time": "2023-02-22T21:44:44Z",
-                "type": "Sign in",
-                "version": "5.13.7.15481",
-            },
-        ], True, 200, None
-        second_expected_output = [
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "55.55.55.55",
-                "time": "2023-02-23T21:44:44Z",
-                "type": "Sign in",
-                "version": "5.13.7.15481",
-            }
-        ], False, 200, None
+        first_expected_output = (
+            [
+                {
+                    "client_type": "mac",
+                    "email": "test@test.com",
+                    "ip_address": "33.33.33.33",
+                    "time": "2023-02-22T21:45:00Z",
+                    "type": "Sign in",
+                    "version": "5.13.7.15481",
+                },
+                {
+                    "client_type": "mac",
+                    "email": "test@test.com",
+                    "ip_address": "11.11.11.11",
+                    "time": "2023-02-22T21:44:44Z",
+                    "type": "Sign in",
+                    "version": "5.13.7.15481",
+                },
+                {
+                    "client_type": "mac",
+                    "email": "test@test.com",
+                    "ip_address": "22.22.22.22",
+                    "time": "2023-02-22T21:44:44Z",
+                    "type": "Sign in",
+                    "version": "5.13.7.15481",
+                },
+            ],
+            True,
+            200,
+            None,
+        )
+        second_expected_output = (
+            [
+                {
+                    "client_type": "mac",
+                    "email": "test@test.com",
+                    "ip_address": "55.55.55.55",
+                    "time": "2023-02-23T21:44:44Z",
+                    "type": "Sign in",
+                    "version": "5.13.7.15481",
+                }
+            ],
+            False,
+            200,
+            None,
+        )
         first_expected_state = {
             "boundary_events": ["854d8b971985244502ba5714f372344a9374c538"],
             "last_request_timestamp": "2023-02-23T22:00:00Z",
@@ -290,8 +300,15 @@ class TestGetUserActivityEvents(unittest.TestCase):
             "latest_event_timestamp": None,
             "last_page": False,
         }
-        expected_output = [], False, 500, PluginException(cause=MonitorSignInOutActivity.API_CHANGED_ERROR_MESSAGE_CAUSE,
-                                                          assistance=MonitorSignInOutActivity.API_CHANGED_ERROR_MESSAGE_ASSISTANCE)
+        expected_output = (
+            [],
+            False,
+            500,
+            PluginException(
+                cause=MonitorSignInOutActivity.API_CHANGED_ERROR_MESSAGE_CAUSE,
+                assistance=MonitorSignInOutActivity.API_CHANGED_ERROR_MESSAGE_ASSISTANCE,
+            ),
+        )
         self.assertDictEqual(state, expected_state)
         self.assertListEqual(output, expected_output[0])
         self.assertFalse(has_more_pages, expected_output[1])
