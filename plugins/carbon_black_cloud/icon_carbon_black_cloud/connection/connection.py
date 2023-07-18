@@ -1,4 +1,6 @@
 import insightconnect_plugin_runtime
+from typing import List
+
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
@@ -6,7 +8,9 @@ import requests
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 import time
 from icon_carbon_black_cloud.util import agent_typer
-from icon_carbon_black_cloud.util.constants import DEFAULT_TIMEOUT
+import urllib.parse
+
+from icon_carbon_black_cloud.util.utils import Util
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -14,10 +18,15 @@ class Connection(insightconnect_plugin_runtime.Connection):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
     def connect(self, params):
-        self.api_id = params.get(Input.API_ID, "")
-        self.api_secret = params.get(Input.API_SECRET_KEY, {}).get("secretKey", "")
-        self.org_key = params.get(Input.ORG_KEY, "")
-        self.base_url = f"https://{params.get(Input.URL, '')}"
+        self.api_id = params.get(Input.API_ID)
+        self.api_secret = params.get(Input.API_SECRET_KEY).get("secretKey")
+
+        base_url = params.get(Input.URL)
+        self.base_url = urllib.parse.urlparse(base_url).hostname
+        self.base_url = f"https://{self.base_url}"
+
+        self.org_key = params.get(Input.ORG_KEY)
+
         self.x_auth_token = f"{self.api_secret}/{self.api_id}"
         self.headers = {"X-Auth-Token": self.x_auth_token}
 
@@ -33,28 +42,24 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         device = None
         if agent_type == agent_typer.DEVICE_ID:
-            device = next((element for element in results if str(element.get("id", "")) == agent), None)
+            device = next((x for x in results if str(x.get("id", "")) == agent), None)
         if agent_type == agent_typer.IP_ADDRESS:
             device = next(
-                (
-                    element
-                    for element in results
-                    if element.get("last_internal_ip_address") == agent or element.get("last_external_ip_address")
-                ),
+                (x for x in results if x.get("last_internal_ip_address") == agent or x.get("last_external_ip_address")),
                 None,
             )
         if agent_type == agent_typer.HOSTNAME:
-            device = next((element for element in results if element.get("name", "") == agent), None)
+            device = next((x for x in results if x.get("name", "") == agent), None)
         if agent_typer == agent_typer.MAC_ADDRESS:
-            device = next((element for element in results if element.get("mac_address", "") == agent), None)
+            device = next((x for x in results if x.get("mac_address", "") == agent), None)
 
         if not device:
             self.logger.error(f"Could not find any device that matched {agent}")
 
         return device
 
-    def post_to_api(self, url, payload, retry=True):  # noqa: MC0001
-        result = requests.post(url, headers=self.headers, json=payload, timeout=DEFAULT_TIMEOUT)
+    def post_to_api(self, url, payload, retry=True):  # noqa MC0001
+        result = requests.post(url, headers=self.headers, json=payload)  # noqa B113
 
         try:
             result.raise_for_status()
@@ -97,19 +102,54 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 self.logger.error("Retry on 503 failed.")
                 self.logger.error(str(error))
                 self.logger.error(result.text)
-                raise PluginException(preset=PluginException.Preset.UNKNOWN)
+                raise PluginException(PluginException.Preset.UNKNOWN)
 
         if result.status_code != 204:
             return result.json()
         else:
             return {}
 
+    def update_quarantine_state(self, agent: str, whitelist: List[str], quarantine_state: bool) -> bool:
+        """
+        update_quarantine_state. Update the quarantine state of an agent.
+
+        :param agent: The name of the agent to update the quarantine state for.
+        :type: str
+
+        :param whitelist: A list of agent names to be exempted from quarantine.
+        :type: List[str]
+
+        :param quarantine_state: The new quarantine state for the agent.
+        :type: bool
+
+        :return: quarantine_state if the quarantine state was successfully updated, False otherwise.
+        :rtype: bool
+        """
+
+        if quarantine_state and Util.match_whitelist(agent, whitelist, self.logger):
+            self.logger.info(f"Agent {agent} matched item in whitelist, skipping quarantine.")
+            raise PluginException(cause="Agent matched item in whitelist")
+
+        agent_object = self.get_agent(agent)
+        agent_id = agent_object.get("id", "")
+
+        toggle = "ON" if quarantine_state else "OFF"
+        payload = {
+            "action_type": "QUARANTINE",
+            "device_id": [str(agent_id)],
+            "options": {"toggle": toggle},
+        }
+
+        url = f"{self.base_url}/appservices/v6/orgs/{self.org_key}/device_actions"
+        self.post_to_api(url, payload)
+        return quarantine_state
+
     def test(self):
         device_endpoint = "/device"
         endpoint = self.base_url + device_endpoint
 
         self.logger.info(endpoint)
-        result = requests.get(endpoint, headers=self.headers, timeout=DEFAULT_TIMEOUT)
+        result = requests.get(endpoint, headers=self.headers)  # noqa B113
         try:
             result.raise_for_status()
         except Exception as error:
