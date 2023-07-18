@@ -333,7 +333,9 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*  
+Any headers set in the action will overwrite the default ones in the connection.
+
+Any issues connecting to the remote service should be present in the log of the job that ran. If you find any issues that represent bugs in the plugin itself, please contact someone at Komand directly.  
 
 # Version History
 
