@@ -3,6 +3,8 @@ import unittest
 import datetime
 from unittest.mock import patch
 
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from icon_zoom.util.event import Event
 from icon_zoom.tasks.monitor_sign_in_out_activity.task import MonitorSignInOutActivity
 from icon_zoom.connection.connection import Connection
@@ -80,17 +82,18 @@ class TestGetUserActivityEvents(unittest.TestCase):
             "boundary_events": ["197f96ef45ad08592bfea604f60b6abcfc7d4bf2", "8c68922ce0e81f42e4db701317aa7f219049b144"],
             "last_request_timestamp": "2023-02-23T22:00:00Z",
             "latest_event_timestamp": "2023-02-22T21:44:44Z",
-            "status_code": 200,
             "last_page": True,
         }
 
         mock_call.return_value = expected_output
 
-        output, state, has_more_pages = self.action.run({})
+        output, state, has_more_pages, status_code, error = self.action.run({})
 
         self.assertDictEqual(state, expected_state)
         self.assertListEqual(output, expected_output[0])
         self.assertFalse(has_more_pages, expected_output[1])
+        self.assertEqual(status_code, 200)
+        self.assertIsNone(error)
 
     @patch(GET_USER_ACTIVITY_EVENTS_PATH)
     def test_subsequent_run(self, mock_call):
@@ -128,7 +131,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
                 "version": "5.13.7.15481",
             },
         ]
-        expected_output = [], False
+        expected_output = [], False, 200, None
         expected_state = {
             "boundary_events": ["197f96ef45ad08592bfea604f60b6abcfc7d4bf2", "8c68922ce0e81f42e4db701317aa7f219049b144"],
             "last_request_timestamp": "2023-02-22T21:44:44Z",
@@ -138,11 +141,13 @@ class TestGetUserActivityEvents(unittest.TestCase):
 
         mock_call.return_value = previous_output, False
 
-        output, state, has_more_pages = self.action.run(state=expected_state)
+        output, state, has_more_pages, status_code, error = self.action.run(state=expected_state)
 
         self.assertDictEqual(state, expected_state)
         self.assertListEqual(output, expected_output[0])
         self.assertFalse(output, expected_output[1])
+        self.assertEqual(status_code, expected_output[2])
+        self.assertIsNone(error)
 
     @patch(GET_DATETIME_LAST_24_HOURS_PATH)
     @patch(GET_DATETIME_NOW_PATH)
@@ -228,7 +233,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
                 "type": "Sign in",
                 "version": "5.13.7.15481",
             },
-        ], True
+        ], True, 200, None
         second_expected_output = [
             {
                 "client_type": "mac",
@@ -238,56 +243,61 @@ class TestGetUserActivityEvents(unittest.TestCase):
                 "type": "Sign in",
                 "version": "5.13.7.15481",
             }
-        ], False
+        ], False, 200, None
         first_expected_state = {
             "boundary_events": ["854d8b971985244502ba5714f372344a9374c538"],
             "last_request_timestamp": "2023-02-23T22:00:00Z",
             "latest_event_timestamp": "2023-02-22T21:45:00Z",
-            "status_code": 200,
             "last_page": False,
         }
         second_expected_state = {
             "boundary_events": ["b308ba69b3beb7207f8271ef7a78f84da98bed67"],
             "last_request_timestamp": "2023-02-23T23:00:00Z",
             "latest_event_timestamp": "2023-02-23T21:44:44Z",
-            "status_code": 200,
             "last_page": True,
         }
 
         # First run
         mock_call.return_value = first_event_set, True
-        output, state, has_more_pages = self.action.run(state={})
+        output, state, has_more_pages, status_code, error = self.action.run(state={})
         self.assertDictEqual(state, first_expected_state)
         self.assertListEqual(output, first_expected_output[0])
         self.assertTrue(has_more_pages, first_expected_output[1])
+        self.assertEqual(status_code, first_expected_output[2])
+        self.assertIsNone(error)
 
         # Subsequent run
         mock_call.return_value = second_event_set, False
-        output, state, has_more_pages = self.action.run(
+        output, state, has_more_pages, status_code, error = self.action.run(
             state=state
         )  # Using state from first run to trigger subsequent run
         self.assertDictEqual(state, second_expected_state)
         self.assertListEqual(output, second_expected_output[0])
         self.assertFalse(has_more_pages, first_expected_output[1])
+        self.assertEqual(status_code, second_expected_output[2])
+        self.assertIsNone(error)
 
     @patch(GET_DATETIME_NOW_PATH)
     @patch(GET_USER_ACTIVITY_EVENTS_PATH)
     def test_api_output_changed_error_catch(self, mock_call, mock_datetime):
         mock_call.return_value = [{"test": "value"}], False
         mock_datetime.return_value = datetime.datetime(2000, 1, 1)
-        output, state, has_more_pages = self.action.run(state={})
+        output, state, has_more_pages, status_code, error = self.action.run(state={})
 
         expected_state = {
             "boundary_events": [],
             "last_request_timestamp": "2000-01-01T00:00:00Z",
             "latest_event_timestamp": None,
-            "status_code": 500,
             "last_page": False,
         }
-        expected_output = [], False
+        expected_output = [], False, 500, PluginException(cause=MonitorSignInOutActivity.API_CHANGED_ERROR_MESSAGE_CAUSE,
+                                                          assistance=MonitorSignInOutActivity.API_CHANGED_ERROR_MESSAGE_ASSISTANCE)
         self.assertDictEqual(state, expected_state)
         self.assertListEqual(output, expected_output[0])
         self.assertFalse(has_more_pages, expected_output[1])
+        self.assertEqual(status_code, expected_output[2])
+        self.assertEqual(error.cause, expected_output[3].cause)
+        self.assertEqual(error.assistance, expected_output[3].assistance)
 
     def test_get_boundary_hashes_two_same_time(self):
         samples = [
