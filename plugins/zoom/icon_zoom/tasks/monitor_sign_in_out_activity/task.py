@@ -1,4 +1,6 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import (
     MonitorSignInOutActivityInput,
     MonitorSignInOutActivityOutput,
@@ -23,17 +25,19 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
     ZOOM_TIME_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
-    AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE = (
-        "OAuth authentication retry limit was met. Ensure your OAuth "
-        "connection credentials are valid. If running a large number of "
-        "integrations with Zoom, consider increasing the OAuth authentication "
-        "retry limit to accommodate."
+    AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE = "OAuth authentication retry limit was met."
+    AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE = (
+    "Ensure your OAuth connection credentials are valid. If running a large number of "
+    "integrations with Zoom, consider increasing the OAuth authentication "
+    "retry limit to accommodate."
     )
     AUTHENTICATION_ERROR_MESSAGE = (
         "The OAuth token credentials provided in the connection "
         "configuration is invalid. Please verify the credentials are correct "
         "and try again."
     )
+    API_CHANGED_ERROR_MESSAGE_CAUSE = "The Zoom API has changed and is no longer supported by this plugin."
+    API_CHANGED_ERROR_MESSAGE_ASSISTANCE = "Please contact support for assistance."
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -49,15 +53,15 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         # Check if first run
         if not state.get(self.LAST_REQUEST_TIMESTAMP):
             self.logger.info("First run")
-            output, new_state, has_more_pages = self.first_run(state=state)
+            output, new_state, has_more_pages, status_code, error = self.first_run(state=state)
         else:
             # Subsequent run
             self.logger.info("Subsequent run")
-            output, new_state, has_more_pages = self.subsequent_run(state=state)
+            output, new_state, has_more_pages, status_code, error = self.subsequent_run(state=state)
 
         # Turn events list back into a list of dicts
         output = [event.__dict__ for event in output]
-        return output, new_state, has_more_pages
+        return output, new_state, has_more_pages, status_code, error
 
     def first_run(self, state: dict) -> ([dict], dict, bool):
         # Get time boundaries for first event set
@@ -76,7 +80,8 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             )
         except (AuthenticationRetryLimitError, AuthenticationError) as error:
             self.logger.error(
-                self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE
+                f"{self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE} "
+                f"{self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE}"
                 if isinstance(error, AuthenticationRetryLimitError)
                 else self.AUTHENTICATION_ERROR_MESSAGE
             )
@@ -86,10 +91,12 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     self.BOUNDARY_EVENTS: [],
                     self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                     self.LATEST_EVENT_TIMESTAMP: None,
-                    self.STATUS_CODE: 401,
                     self.LAST_PAGE: False,
                 },
                 False,
+                401,
+                PluginException(cause=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE,
+                                assistance=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE)
             )
 
         try:
@@ -102,10 +109,12 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     self.BOUNDARY_EVENTS: [],
                     self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                     self.LATEST_EVENT_TIMESTAMP: None,
-                    self.STATUS_CODE: 500,
                     self.LAST_PAGE: False,
                 },
                 False,
+                500,
+                PluginException(cause=self.API_CHANGED_ERROR_MESSAGE_CAUSE,
+                                assistance=self.API_CHANGED_ERROR_MESSAGE_ASSISTANCE)
             )
 
         self.logger.info(f"Got {len(new_events)} events from Zoom!")
@@ -126,21 +135,20 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     self.BOUNDARY_EVENTS: [],
                     self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                     self.LATEST_EVENT_TIMESTAMP: None,
-                    self.STATUS_CODE: 200,
                     self.LAST_PAGE: False,
                 },
                 False,
+                200, None
             )
 
         # update state
         state[self.BOUNDARY_EVENTS] = boundary_event_hashes
         state[self.LAST_REQUEST_TIMESTAMP] = now_for_zoom
         state[self.LATEST_EVENT_TIMESTAMP] = new_latest_event_time
-        state[self.STATUS_CODE] = 200
         state[self.LAST_PAGE] = not has_more_pages
 
         self.logger.info(f"Updated state, state is now: {state}")
-        return new_events, state, has_more_pages
+        return new_events, state, has_more_pages, 200, None
 
     def subsequent_run(self, state: dict) -> ([dict], dict, bool):
         # now_for_zoom is the start time for the Zoom API but also used to track requests across task runs via state
@@ -157,7 +165,8 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             )
         except (AuthenticationRetryLimitError, AuthenticationError) as error:
             self.logger.error(
-                self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE
+                f"{self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE} "
+                f"{self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE}"
                 if isinstance(error, AuthenticationRetryLimitError)
                 else self.AUTHENTICATION_ERROR_MESSAGE
             )
@@ -167,10 +176,12 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     self.BOUNDARY_EVENTS: [],
                     self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                     self.LATEST_EVENT_TIMESTAMP: None,
-                    self.STATUS_CODE: 401,
                     self.LAST_PAGE: False,
                 },
                 False,
+                401,
+                PluginException(cause=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE,
+                                assistance=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE)
             )
 
         try:
@@ -183,10 +194,12 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     self.BOUNDARY_EVENTS: [],
                     self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                     self.LATEST_EVENT_TIMESTAMP: None,
-                    self.STATUS_CODE: 500,
                     self.LAST_PAGE: False,
                 },
                 False,
+                500,
+                PluginException(cause=self.API_CHANGED_ERROR_MESSAGE_CAUSE,
+                                assistance=self.API_CHANGED_ERROR_MESSAGE_ASSISTANCE)
             )
 
         self.logger.info(f"Got {len(new_events)} events from Zoom!")
@@ -203,10 +216,10 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     self.BOUNDARY_EVENTS: [],
                     self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                     self.LATEST_EVENT_TIMESTAMP: None,
-                    self.STATUS_CODE: 200,
                     self.LAST_PAGE: False,
                 },
                 False,
+                200, None
             )
 
         # De-dupe events using boundary event hashes from previous run
@@ -230,11 +243,10 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         state[self.BOUNDARY_EVENTS] = boundary_event_hashes
         state[self.LAST_REQUEST_TIMESTAMP] = now_for_zoom
         state[self.LATEST_EVENT_TIMESTAMP] = new_latest_event.time
-        state[self.STATUS_CODE] = 200
         state[self.LAST_PAGE] = not has_more_pages
 
         self.logger.info(f"Updated state, state is now: {state}")
-        return deduped_events, state, has_more_pages
+        return deduped_events, state, has_more_pages, 200, None
 
     @staticmethod
     def _dedupe_events(
