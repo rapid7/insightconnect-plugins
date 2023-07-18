@@ -100,7 +100,7 @@ class ZoomAPI:
         response = self._call_api("GET", activities_url, params=params)
 
         events = events + response.get("activity_logs", [])
-        has_more_pages = True if response.get("next_page_token") != "" else False
+        has_more_pages = response.get("next_page_token") != ""
 
         return events, has_more_pages
 
