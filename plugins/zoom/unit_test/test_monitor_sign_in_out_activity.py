@@ -9,7 +9,7 @@ from icon_zoom.connection.connection import Connection
 from mock import STUB_CONNECTION, STUB_OAUTH_TOKEN
 
 REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI._refresh_oauth_token"
-GET_USER_ACTIVITY_EVENTS_PATH = "icon_zoom.util.api.ZoomAPI.get_user_activity_events"
+GET_USER_ACTIVITY_EVENTS_PATH = "icon_zoom.util.api.ZoomAPI.get_user_activity_events_task"
 GET_DATETIME_NOW_PATH = "icon_zoom.tasks.monitor_sign_in_out_activity.task.MonitorSignInOutActivity._get_datetime_now"
 GET_DATETIME_LAST_24_HOURS_PATH = (
     "icon_zoom.tasks.monitor_sign_in_out_activity.task.MonitorSignInOutActivity._get_datetime_last_24_hours"
@@ -75,20 +75,22 @@ class TestGetUserActivityEvents(unittest.TestCase):
                 "type": "Sign out",
                 "version": "5.13.7.15481",
             },
-        ]
+        ], False
         expected_state = {
             "boundary_events": ["197f96ef45ad08592bfea604f60b6abcfc7d4bf2", "8c68922ce0e81f42e4db701317aa7f219049b144"],
-            "last_request_timestamp": "2023-02-24T04:00:00Z",
+            "last_request_timestamp": "2023-02-23T22:00:00Z",
             "latest_event_timestamp": "2023-02-22T21:44:44Z",
             "status_code": 200,
+            "last_page": True
         }
 
         mock_call.return_value = expected_output
 
-        output, state = self.action.run({})
+        output, state, has_more_pages = self.action.run({})
 
         self.assertDictEqual(state, expected_state)
-        self.assertListEqual(output, expected_output)
+        self.assertListEqual(output, expected_output[0])
+        self.assertFalse(has_more_pages, expected_output[1])
 
     @patch(GET_USER_ACTIVITY_EVENTS_PATH)
     def test_subsequent_run(self, mock_call):
@@ -126,19 +128,21 @@ class TestGetUserActivityEvents(unittest.TestCase):
                 "version": "5.13.7.15481",
             },
         ]
-        expected_output = []
+        expected_output = [], False
         expected_state = {
             "boundary_events": ["197f96ef45ad08592bfea604f60b6abcfc7d4bf2", "8c68922ce0e81f42e4db701317aa7f219049b144"],
             "last_request_timestamp": "2023-02-22T21:44:44Z",
             "latest_event_timestamp": "2023-02-22T21:44:44Z",
+            "last_page": False
         }
 
-        mock_call.return_value = previous_output
+        mock_call.return_value = previous_output, False
 
-        output, state = self.action.run(state=expected_state)
+        output, state, has_more_pages = self.action.run(state=expected_state)
 
         self.assertDictEqual(state, expected_state)
-        self.assertListEqual(output, expected_output)
+        self.assertListEqual(output, expected_output[0])
+        self.assertFalse(output, expected_output[1])
 
     @patch(GET_DATETIME_LAST_24_HOURS_PATH)
     @patch(GET_DATETIME_NOW_PATH)
@@ -224,7 +228,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
                 "type": "Sign in",
                 "version": "5.13.7.15481",
             },
-        ]
+        ], True
         second_expected_output = [
             {
                 "client_type": "mac",
@@ -234,48 +238,54 @@ class TestGetUserActivityEvents(unittest.TestCase):
                 "type": "Sign in",
                 "version": "5.13.7.15481",
             }
-        ]
+        ], False
         first_expected_state = {
             "boundary_events": ["854d8b971985244502ba5714f372344a9374c538"],
-            "last_request_timestamp": "2023-02-24T04:00:00Z",
+            "last_request_timestamp": "2023-02-23T22:00:00Z",
             "latest_event_timestamp": "2023-02-22T21:45:00Z",
             "status_code": 200,
+            "last_page": False
         }
         second_expected_state = {
             "boundary_events": ["b308ba69b3beb7207f8271ef7a78f84da98bed67"],
-            "last_request_timestamp": "2023-02-24T05:00:00Z",
+            "last_request_timestamp": "2023-02-23T23:00:00Z",
             "latest_event_timestamp": "2023-02-23T21:44:44Z",
             "status_code": 200,
+            "last_page": True
         }
 
         # First run
-        mock_call.return_value = first_event_set
-        output, state = self.action.run(state={})
+        mock_call.return_value = first_event_set, True
+        output, state, has_more_pages = self.action.run(state={})
         self.assertDictEqual(state, first_expected_state)
-        self.assertListEqual(output, first_expected_output)
+        self.assertListEqual(output, first_expected_output[0])
+        self.assertTrue(has_more_pages, first_expected_output[1])
 
         # Subsequent run
-        mock_call.return_value = second_event_set
-        output, state = self.action.run(state=state)  # Using state from first run to trigger subsequent run
+        mock_call.return_value = second_event_set, False
+        output, state, has_more_pages = self.action.run(state=state)  # Using state from first run to trigger subsequent run
         self.assertDictEqual(state, second_expected_state)
-        self.assertListEqual(output, second_expected_output)
+        self.assertListEqual(output, second_expected_output[0])
+        self.assertFalse(has_more_pages, first_expected_output[1])
 
     @patch(GET_DATETIME_NOW_PATH)
     @patch(GET_USER_ACTIVITY_EVENTS_PATH)
     def test_api_output_changed_error_catch(self, mock_call, mock_datetime):
-        mock_call.return_value = [{"test": "value"}]
+        mock_call.return_value = [{"test": "value"}], False
         mock_datetime.return_value = datetime.datetime(2000, 1, 1)
-        output, state = self.action.run(state={})
+        output, state, has_more_pages = self.action.run(state={})
 
         expected_state = {
             "boundary_events": [],
             "last_request_timestamp": "2000-01-01T00:00:00Z",
             "latest_event_timestamp": None,
             "status_code": 500,
+            "last_page": False
         }
-        expected_output = []
+        expected_output = [], False
         self.assertDictEqual(state, expected_state)
-        self.assertListEqual(output, expected_output)
+        self.assertListEqual(output, expected_output[0])
+        self.assertFalse(has_more_pages, expected_output[1])
 
     def test_get_boundary_hashes_two_same_time(self):
         samples = [
