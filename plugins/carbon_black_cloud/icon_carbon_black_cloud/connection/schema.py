@@ -11,7 +11,7 @@ class Input:
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -37,19 +37,8 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "The Carbon Black Cloud URL you use. You can find this by looking at the web address of your Carbon Black Cloud console",
-      "default": "defense.conferdeploy.net",
-      "enum": [
-        "defense-eap01.conferdeploy.net",
-        "dashboard.confer.net",
-        "defense.conferdeploy.net",
-        "defense-prod05.conferdeploy.net",
-        "defense-eu.conferdeploy.net",
-        "defense-prodnrt.conferdeploy.net",
-        "defense-prodsyd.conferdeploy.net",
-        "ew2.carbonblackcloud.vmware.com",
-        "gprd1usgw1.carbonblack-us-gov.vmware.com"
-      ],
+      "description": "API URL",
+      "default": "https://defense.conferdeploy.net",
       "order": 4
     }
   },
@@ -74,7 +63,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
           "title": "Secret Key",
           "description": "The shared secret key",
           "format": "password",
-          "displayType": "password"
+          "display_type": "password"
         }
       }
     }

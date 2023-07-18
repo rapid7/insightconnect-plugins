@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import QuarantineInput, QuarantineOutput, Input, Output, Component
 
 # Custom imports below
-from icon_carbon_black_cloud.util import whitelist_checker
+from icon_carbon_black_cloud.util.utils import Util
 
 
 class Quarantine(insightconnect_plugin_runtime.Action):
@@ -15,30 +15,12 @@ class Quarantine(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         agent = params.get(Input.AGENT, "")
         whitelist = params.get(Input.WHITELIST, [])
         quarantine_state = params.get(Input.QUARANTINE_STATE)
-
-        if quarantine_state and whitelist_checker.match_whitelist(agent, whitelist, self.logger):
-            self.logger.info(f"Agent {agent} matched item in whitelist, skipping quarantine.")
-            return {Output.QUARANTINED: False}
-
-        agent_object = self.connection.get_agent(agent)
-        agent_id = agent_object.get("id")
-
-        if quarantine_state:
-            toggle = "ON"
-        else:
-            toggle = "OFF"
-
-        payload = {
-            "action_type": "QUARANTINE",
-            "device_id": [str(agent_id)],
-            "options": {"toggle": toggle},
-        }
-
-        url = f"{self.connection.base_url}/appservices/v6/orgs/{self.connection.org_key}/device_actions"
-        self.connection.post_to_api(url, payload)
+        # END INPUT BINDING - DO NOT REMOVE
 
         # This API returns 204 no content if successful, we have to assume the state was applied on a successful call
-        return {Output.QUARANTINED: quarantine_state}
+        response = self.connection.update_quarantine_state(agent, whitelist, quarantine_state)
+        return {Output.QUARANTINED: response}

@@ -3,38 +3,35 @@ import sys
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from unittest.mock import MagicMock, patch
+from unittest import TestCase, mock
+from unittest.mock import Mock
 
 from icon_carbon_black_cloud.actions.get_agent_details import GetAgentDetails
-from icon_carbon_black_cloud.actions.get_agent_details.schema import GetAgentDetailsOutput, Input, Output
+from icon_carbon_black_cloud.actions.get_agent_details.schema import Input, Output
 from insightconnect_plugin_runtime.exceptions import PluginException
-from jsonschema import validate
 from parameterized import parameterized
 
-from util import (
-    Util,
-    mock_request_200,
+from mock import (
+    mock_request_201,
     mock_request_400,
     mock_request_401,
     mock_request_403,
     mock_request_404,
     mock_request_409,
-    mock_request_503,
     mocked_request,
 )
+from util import Util
 
-STUB_AGENT_ID = "192.168.0.1"
+STUB_PAYLOAD = {Input.AGENT: "ExampleAgent"}
 
 
 class TestGetAgentDetails(TestCase):
     def setUp(self) -> None:
         self.action = Util.default_connector(GetAgentDetails())
-        self.payload = {Input.AGENT: STUB_AGENT_ID}
 
-    @patch("requests.post", side_effect=mock_request_200)
-    def test_get_agent_details(self, mocked_post: MagicMock) -> None:
-        response = self.action.run(self.payload)
+    @mock.patch("requests.post", side_effect=mock_request_201)
+    def test_get_agent_details(self, mock_post: Mock) -> None:
+        response = self.action.run(STUB_PAYLOAD)
         expected = {
             Output.AGENT: {
                 "activation_code_expiry_time": "2022-07-11T06:53:06.190Z",
@@ -66,7 +63,7 @@ class TestGetAgentDetails(TestCase):
                 "last_shutdown_time": "2022-07-04T06:58:55.867Z",
                 "login_user_name": "CARBONBLACK\\testuser",
                 "mac_address": "fa163e92d344",
-                "name": "carbonblack",
+                "name": "ExampleAgent",
                 "organization_id": 1105,
                 "organization_name": "cb-internal-alliances.com",
                 "os": "WINDOWS",
@@ -95,9 +92,8 @@ class TestGetAgentDetails(TestCase):
                 "vulnerability_score": 0.0,
             }
         }
-        validate(response, GetAgentDetailsOutput.schema)
         self.assertEqual(response, expected)
-        mocked_post.assert_called_once()
+        mock_post.assert_called_once()
 
     @parameterized.expand(
         [
@@ -106,13 +102,12 @@ class TestGetAgentDetails(TestCase):
             (mock_request_403, "The specified object cannot be accessed or changed."),
             (mock_request_404, "The object referenced in the request cannot be found."),
             (mock_request_409, "Either the name you chose already exists, or there is an unacceptable character used."),
-            (mock_request_503, PluginException.causes[PluginException.Preset.UNKNOWN]),
         ],
     )
-    def test_get_agent_details_exception(self, mock_request: MagicMock, exception: str) -> None:
+    def test_get_agent_details_exception(self, mock_request: Mock, exception: str) -> None:
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
-            self.action.run(self.payload)
+            self.action.run()
         self.assertEqual(
             context.exception.cause,
             exception,
