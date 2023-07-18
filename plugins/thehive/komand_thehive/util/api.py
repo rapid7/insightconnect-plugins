@@ -81,17 +81,20 @@ class HiveAPI:
             method, self.url + path, params=params, data=data, json=json_data, headers=headers, auth=auth
         )
 
-        if response.status_code == 400:
-            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response)
-        if response.status_code == 401:
-            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response)
-        if response.status_code == 403:
-            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response)
-        if response.status_code == 404:
-            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response)
-        if response.status_code == 500:
-            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response)
-        if response.status_code in (200, 201):
-            return response.json()
         if response.status_code == 204:
             return None
+        if response.status_code in range(200, 299):
+            return response.json()
+        if response.status_code == 400:
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
+        if response.status_code == 401:
+            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
+        if response.status_code == 403:
+            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.text)
+        if response.status_code == 404:
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
+        if response.status_code >= 500:
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+
+        # Anything which isn't caught by now, present the unknown preset and show the response.
+        raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
