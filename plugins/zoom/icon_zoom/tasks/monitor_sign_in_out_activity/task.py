@@ -27,9 +27,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
     AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE = "OAuth authentication retry limit was met."
     AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE = (
-    "Ensure your OAuth connection credentials are valid. If running a large number of "
-    "integrations with Zoom, consider increasing the OAuth authentication "
-    "retry limit to accommodate."
+        "Ensure your OAuth connection credentials are valid. If running a large number of "
+        "integrations with Zoom, consider increasing the OAuth authentication "
+        "retry limit to accommodate."
     )
     AUTHENTICATION_ERROR_MESSAGE = (
         "The OAuth token credentials provided in the connection "
@@ -95,8 +95,10 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 },
                 False,
                 401,
-                PluginException(cause=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE,
-                                assistance=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE)
+                PluginException(
+                    cause=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE,
+                    assistance=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE,
+                ),
             )
 
         try:
@@ -113,8 +115,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 },
                 False,
                 500,
-                PluginException(cause=self.API_CHANGED_ERROR_MESSAGE_CAUSE,
-                                assistance=self.API_CHANGED_ERROR_MESSAGE_ASSISTANCE)
+                PluginException(
+                    cause=self.API_CHANGED_ERROR_MESSAGE_CAUSE, assistance=self.API_CHANGED_ERROR_MESSAGE_ASSISTANCE
+                ),
             )
 
         self.logger.info(f"Got {len(new_events)} events from Zoom!")
@@ -138,7 +141,8 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     self.LAST_PAGE: False,
                 },
                 False,
-                200, None
+                200,
+                None,
             )
 
         # update state
@@ -180,8 +184,10 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 },
                 False,
                 401,
-                PluginException(cause=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE,
-                                assistance=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE)
+                PluginException(
+                    cause=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE,
+                    assistance=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE,
+                ),
             )
 
         try:
@@ -198,8 +204,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 },
                 False,
                 500,
-                PluginException(cause=self.API_CHANGED_ERROR_MESSAGE_CAUSE,
-                                assistance=self.API_CHANGED_ERROR_MESSAGE_ASSISTANCE)
+                PluginException(
+                    cause=self.API_CHANGED_ERROR_MESSAGE_CAUSE, assistance=self.API_CHANGED_ERROR_MESSAGE_ASSISTANCE
+                ),
             )
 
         self.logger.info(f"Got {len(new_events)} events from Zoom!")
@@ -219,7 +226,8 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     self.LAST_PAGE: False,
                 },
                 False,
-                200, None
+                200,
+                None,
             )
 
         # De-dupe events using boundary event hashes from previous run
