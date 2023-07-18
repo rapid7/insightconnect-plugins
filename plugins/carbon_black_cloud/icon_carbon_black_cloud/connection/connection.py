@@ -1,12 +1,16 @@
 import insightconnect_plugin_runtime
+from typing import List
+
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 import time
-import icon_carbon_black_cloud.util.agent_typer as agent_typer
+from icon_carbon_black_cloud.util import agent_typer
 import urllib.parse
+
+from icon_carbon_black_cloud.util.utils import Util
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -54,12 +58,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         return device
 
-    def post_to_api(self, url, payload, retry=True):
-        result = requests.post(url, headers=self.headers, json=payload)
+    def post_to_api(self, url, payload, retry=True):  # noqa MC0001
+        result = requests.post(url, headers=self.headers, json=payload)  # noqa B113
 
         try:
             result.raise_for_status()
-        except Exception as e:
+        except Exception as error:
             if result.status_code == 400:
                 raise PluginException(
                     cause="400 Bad Request",
@@ -96,7 +100,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                     return self.post_to_api(url, payload, False)
 
                 self.logger.error("Retry on 503 failed.")
-                self.logger.error(str(e))
+                self.logger.error(str(error))
                 self.logger.error(result.text)
                 raise PluginException(PluginException.Preset.UNKNOWN)
 
@@ -105,19 +109,53 @@ class Connection(insightconnect_plugin_runtime.Connection):
         else:
             return {}
 
+    def update_quarantine_state(self, agent: str, whitelist: List[str], quarantine_state: bool) -> bool:
+        """
+        update_quarantine_state. Update the quarantine state of an agent.
+
+        :param agent: The name of the agent to update the quarantine state for.
+        :type: str
+
+        :param whitelist: A list of agent names to be exempted from quarantine.
+        :type: List[str]
+
+        :param quarantine_state: The new quarantine state for the agent.
+        :type: bool
+
+        :return: quarantine_state if the quarantine state was successfully updated, False otherwise.
+        :rtype: bool
+        """
+
+        if quarantine_state and Util.match_whitelist(agent, whitelist, self.logger):
+            self.logger.info(f"Agent {agent} matched item in whitelist, skipping quarantine.")
+            raise PluginException(cause="Agent matched item in whitelist")
+
+        agent_object = self.get_agent(agent)
+        agent_id = agent_object.get("id", "")
+
+        toggle = "ON" if quarantine_state else "OFF"
+        payload = {
+            "action_type": "QUARANTINE",
+            "device_id": [str(agent_id)],
+            "options": {"toggle": toggle},
+        }
+
+        url = f"{self.base_url}/appservices/v6/orgs/{self.org_key}/device_actions"
+        self.post_to_api(url, payload)
+        return quarantine_state
+
     def test(self):
         device_endpoint = "/device"
         endpoint = self.base_url + device_endpoint
 
         self.logger.info(endpoint)
-        result = requests.get(endpoint, headers=self.headers)
+        result = requests.get(endpoint, headers=self.headers)  # noqa B113
         try:
             result.raise_for_status()
-        except Exception as e:
+        except Exception as error:
             raise ConnectionTestException(
                 cause="Connection test to Carbon Black Cloud failed.\n",
                 assistance=f"{result.text}\n",
-                data=str(e),
+                data=str(error),
             )
-
         return {"success": True}
