@@ -10,7 +10,7 @@ from komand_thehive.actions.close_case.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from parameterized import parameterized
-from unit_test.mock import (
+from mock import (
     Util,
     STUB_CASE_ID,
     mocked_request,
