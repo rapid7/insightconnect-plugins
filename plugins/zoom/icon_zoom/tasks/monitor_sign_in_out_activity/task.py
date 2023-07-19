@@ -38,6 +38,10 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     )
     API_CHANGED_ERROR_MESSAGE_CAUSE = "The Zoom API has changed and is no longer supported by this plugin."
     API_CHANGED_ERROR_MESSAGE_ASSISTANCE = "Please contact support for assistance."
+    PERMISSIONS_ERROR_MESSAGE = (
+        "Health check failed. An error occurred during event collection: insufficient permissions for this action. "
+        "Please ensure you add all required scopes for the Rapid7 app in Zoom."
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -100,6 +104,19 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     assistance=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE,
                 ),
             )
+        except PluginException as error:
+            # Add additional information to aid customer if correct permissions are not set in the Zoom App
+            if 'Invalid access token, does not contain scope' in error.data:
+                self.logger.error(
+                    self.PERMISSIONS_ERROR_MESSAGE
+                )
+                raise PluginException(
+                    cause="Insufficient permissions.",
+                    assistance=self.PERMISSIONS_ERROR_MESSAGE,
+                    data=error.data
+                )
+            else:
+                raise
 
         try:
             new_events = sorted([Event(**event) for event in new_events], reverse=True)
@@ -189,7 +206,19 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     assistance=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE,
                 ),
             )
-
+        except PluginException as error:
+            # Add additional information to aid customer if correct permissions are not set in the Zoom App
+            if 'Invalid access token, does not contain scope' in error.data:
+                self.logger.error(
+                    self.PERMISSIONS_ERROR_MESSAGE
+                )
+                raise PluginException(
+                    cause="Insufficient permissions.",
+                    assistance=self.PERMISSIONS_ERROR_MESSAGE,
+                    data=error.data
+                )
+            else:
+                raise
         try:
             new_events = sorted([Event(**event) for event in new_events], reverse=True)
         except TypeError as error:
