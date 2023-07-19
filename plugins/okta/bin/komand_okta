@@ -50,6 +50,8 @@ def main():
 
             self.add_action(actions.GetUser())
 
+            self.add_action(actions.GetUserGroups())
+
             self.add_action(actions.ListGroups())
 
             self.add_action(actions.RemoveUserFromGroup())

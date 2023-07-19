@@ -6,6 +6,7 @@ from .deactivate_user.action import DeactivateUser
 from .delete_user.action import DeleteUser
 from .get_factors.action import GetFactors
 from .get_user.action import GetUser
+from .get_user_groups.action import GetUserGroups
 from .list_groups.action import ListGroups
 from .remove_user_from_group.action import RemoveUserFromGroup
 from .reset_factors.action import ResetFactors
