@@ -106,14 +106,10 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             )
         except PluginException as error:
             # Add additional information to aid customer if correct permissions are not set in the Zoom App
-            if 'Invalid access token, does not contain scope' in error.data:
-                self.logger.error(
-                    self.PERMISSIONS_ERROR_MESSAGE
-                )
+            if "Invalid access token, does not contain scope" in error.data:
+                self.logger.error(self.PERMISSIONS_ERROR_MESSAGE)
                 raise PluginException(
-                    cause="Insufficient permissions.",
-                    assistance=self.PERMISSIONS_ERROR_MESSAGE,
-                    data=error.data
+                    cause="Insufficient permissions.", assistance=self.PERMISSIONS_ERROR_MESSAGE, data=error.data
                 )
             else:
                 raise
@@ -208,14 +204,10 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             )
         except PluginException as error:
             # Add additional information to aid customer if correct permissions are not set in the Zoom App
-            if 'Invalid access token, does not contain scope' in error.data:
-                self.logger.error(
-                    self.PERMISSIONS_ERROR_MESSAGE
-                )
+            if "Invalid access token, does not contain scope" in error.data:
+                self.logger.error(self.PERMISSIONS_ERROR_MESSAGE)
                 raise PluginException(
-                    cause="Insufficient permissions.",
-                    assistance=self.PERMISSIONS_ERROR_MESSAGE,
-                    data=error.data
+                    cause="Insufficient permissions.", assistance=self.PERMISSIONS_ERROR_MESSAGE, data=error.data
                 )
             else:
                 raise
