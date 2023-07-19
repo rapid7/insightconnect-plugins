@@ -99,4 +99,6 @@ class Util:
             return MockResponse("patch", 200)
         if url == "https://www.example.com":
             return MockResponse("connection_test", 200)
+        if url == "https://www.example.com/put_array":
+            return MockResponse("put_array", 400)
         raise Exception("Not implemented")
