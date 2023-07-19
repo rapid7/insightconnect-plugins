@@ -1,0 +1,13 @@
+{
+  "id": 101,
+  "links": [
+    {
+      "href": "https://example.com:3780/api/3/sites/1/scans?overrideBlackout=true",
+      "rel": "self"
+    },
+    {
+      "href": "https://example.com:3780/api/3/scans/101",
+      "rel": "Scan"
+    }
+  ]
+}

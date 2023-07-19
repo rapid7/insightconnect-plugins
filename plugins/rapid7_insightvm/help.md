@@ -1055,6 +1055,7 @@ This action is used to start a scan on a site.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |hosts|[]string|None|False|The hosts that should be included in the scan|None|["192.0.2.3", "192.0.2.10-192.0.2.20", "ADSRV.local"]|
+|override_blackout|boolean|False|False|Whether to request for the override of an scan blackout window|None|False|
 |site_id|string|None|True|ID of the site to scan|None|1|
 
 Example input:
@@ -1066,21 +1067,21 @@ Example input:
     "192.0.2.10-192.0.2.20",
     "ADSRV.local"
   ],
+  "override_blackout": false,
   "site_id": 1
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|integer|False|Identifier of the resource created|
-|links|[]link|False|Hypermedia links to corresponding or related resources|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|id|integer|False|Identifier of the resource created|188935|
+|links|[]link|False|Hypermedia links to corresponding or related resources|[]|
 
 Example output:
 
 ```
-
 {
   "result": {
     "links": [
@@ -1097,7 +1098,6 @@ Example output:
     "id": 188935
   }
 }
-
 ```
 
 #### Generate AdHoc SQL Report
@@ -5706,6 +5706,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 6.1.0 - Add new optional input `override_blackout` in `Scan` action
 * 6.0.0 - Fix file output type for `Generate Adhoc SQL Report` | Replace custom output type `file` with `insightvm_file` for each item in the `asset` `files` output in multiple actions
 * 5.1.0 - Add new action update shared credential
 * 5.0.1 - Fix issue in New Scans trigger where an exception was thrown if no scan IDs were previously cached for that site

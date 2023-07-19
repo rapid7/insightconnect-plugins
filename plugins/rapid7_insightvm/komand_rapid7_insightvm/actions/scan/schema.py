@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     HOSTS = "hosts"
+    OVERRIDE_BLACKOUT = "override_blackout"
     SITE_ID = "site_id"
     
 
@@ -31,6 +32,13 @@ class ScanInput(insightconnect_plugin_runtime.Input):
         "type": "string"
       },
       "order": 2
+    },
+    "override_blackout": {
+      "type": "boolean",
+      "title": "Override Blackout",
+      "description": "Whether to request for the override of an scan blackout window",
+      "default": false,
+      "order": 3
     },
     "site_id": {
       "type": "string",
