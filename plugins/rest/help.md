@@ -1,17 +1,19 @@
 # Description
-  
 The HTTP Requests plugin to make it easy to integrate with RESTful services  
 
+The HTTP Requests plugin allows users to automate HTTP requests to API services such as [RESTful based services](https://en.wikipedia.org/wiki/Representational_state_transfer).
+
+This plugin is often used to integrate with ad-hoc 3rd party API's in a workflow without going through the process of [building a new plugin](https://komand.github.io/python/index.html). It supports DELETE, GET, PATCH, POST, or PUT requests to the provided URI.
+
 # Key Features
-  
 * Make RESTful API calls  
 
+* Quickly integrate with 3rd party API's over HTTP
+
 # Requirements
-  
-* None  
+* A RESTFUL HTTP/HTTPS resource and supported authentication, if any
 
 # Supported Product Versions
-  
 * 2022-09-05  
 
 # Documentation
@@ -61,7 +63,7 @@ Example input:
 
 #### DELETE
   
-Make a DELETE request  
+This action is used to make a DELETE request.
 
 ##### Input
 
@@ -113,7 +115,7 @@ Example output:
 
 #### GET
   
-Make a GET request  
+This action is used to make a GET request.
 
 ##### Input
 
@@ -165,7 +167,7 @@ Example output:
 
 #### PATCH
   
-Make a PATCH request  
+This action is used to make a PATCH request.
 
 ##### Input
 
@@ -217,7 +219,7 @@ Example output:
 
 #### POST
   
-Make a POST request  
+This action is used to make a POST request.
 
 ##### Input
 
@@ -269,7 +271,7 @@ Example output:
 
 #### PUT
   
-Make a PUT request  
+This action is used to make a PUT request.
 
 ##### Input
 
@@ -376,4 +378,4 @@ Any issues connecting to the remote service should be present in the log of the 
 ## References
   
 * https://requests.readthedocs.io/en/latest/  
-* https://docs.rapid7.com/insightconnect/http-requests
+* [InsightConnect HTTP Request Plugin Guide](https://docs.rapid7.com/insightconnect/http-requests)
