@@ -38,5 +38,5 @@ class GetAlertDetails(insightconnect_plugin_runtime.Action):
         self.logger.info("Returning Results...")
         return {
             Output.ETAG: response.response.etag,
-            Output.ALERT_DETAILS: {"alert": response.response.alert.json()},
+            Output.ALERT_DETAILS: response.response.alert,
         }
