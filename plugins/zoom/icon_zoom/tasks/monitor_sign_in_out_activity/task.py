@@ -108,8 +108,21 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             # Add additional information to aid customer if correct permissions are not set in the Zoom App
             if "Invalid access token, does not contain scope" in error.data:
                 self.logger.error(self.PERMISSIONS_ERROR_MESSAGE)
-                raise PluginException(
-                    cause="Insufficient permissions.", assistance=self.PERMISSIONS_ERROR_MESSAGE, data=error.data
+                return (
+                    [],
+                    {
+                        self.BOUNDARY_EVENTS: [],
+                        self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
+                        self.LATEST_EVENT_TIMESTAMP: None,
+                        self.LAST_PAGE: False,
+                    },
+                    False,
+                    403,
+                    PluginException(
+                        cause="Insufficient permissions.",
+                        assistance=self.PERMISSIONS_ERROR_MESSAGE,
+                        data=error.data
+                    ),
                 )
             else:
                 raise
@@ -206,8 +219,21 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             # Add additional information to aid customer if correct permissions are not set in the Zoom App
             if "Invalid access token, does not contain scope" in error.data:
                 self.logger.error(self.PERMISSIONS_ERROR_MESSAGE)
-                raise PluginException(
-                    cause="Insufficient permissions.", assistance=self.PERMISSIONS_ERROR_MESSAGE, data=error.data
+                return (
+                    [],
+                    {
+                        self.BOUNDARY_EVENTS: [],
+                        self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
+                        self.LATEST_EVENT_TIMESTAMP: None,
+                        self.LAST_PAGE: False,
+                    },
+                    False,
+                    403,
+                    PluginException(
+                        cause="Insufficient permissions.",
+                        assistance=self.PERMISSIONS_ERROR_MESSAGE,
+                        data=error.data
+                    ),
                 )
             else:
                 raise
