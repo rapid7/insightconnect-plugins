@@ -119,9 +119,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     False,
                     403,
                     PluginException(
-                        cause="Insufficient permissions.",
-                        assistance=self.PERMISSIONS_ERROR_MESSAGE,
-                        data=error.data
+                        cause="Insufficient permissions.", assistance=self.PERMISSIONS_ERROR_MESSAGE, data=error.data
                     ),
                 )
             else:
@@ -230,9 +228,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     False,
                     403,
                     PluginException(
-                        cause="Insufficient permissions.",
-                        assistance=self.PERMISSIONS_ERROR_MESSAGE,
-                        data=error.data
+                        cause="Insufficient permissions.", assistance=self.PERMISSIONS_ERROR_MESSAGE, data=error.data
                     ),
                 )
             else:
