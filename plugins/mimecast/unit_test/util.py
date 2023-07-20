@@ -63,6 +63,10 @@ class Util:
             def json(self):
                 return Util.load_json(f"responses/{self.filename}")
 
+            @property
+            def status_code(self):
+                return 200
+
         class MockResponseZip:
             def json(self):
                 raise json.decoder.JSONDecodeError("Test", "test", 1)
