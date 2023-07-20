@@ -54,18 +54,23 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
     # pylint: disable=unused-argument
     def run(self, params={}, state={}):
-        # Check if first run
-        if not state.get(self.LAST_REQUEST_TIMESTAMP):
-            self.logger.info("First run")
-            output, new_state, has_more_pages, status_code, error = self.first_run(state=state)
-        else:
-            # Subsequent run
-            self.logger.info("Subsequent run")
-            output, new_state, has_more_pages, status_code, error = self.subsequent_run(state=state)
+        try:
+            # Check if first run
+            if not state.get(self.LAST_REQUEST_TIMESTAMP):
+                self.logger.info("First run")
+                output, new_state, has_more_pages, status_code, error = self.first_run(state=state)
+            else:
+                # Subsequent run
+                self.logger.info("Subsequent run")
+                output, new_state, has_more_pages, status_code, error = self.subsequent_run(state=state)
 
-        # Turn events list back into a list of dicts
-        output = [event.__dict__ for event in output]
-        return output, new_state, has_more_pages, status_code, error
+            # Turn events list back into a list of dicts
+            output = [event.__dict__ for event in output]
+            return output, new_state, has_more_pages, status_code, error
+
+        except Exception as error:
+            self.logger.error(f"Unhandled exception occurred during {self.name} task: {error}")
+            return PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def first_run(self, state: dict) -> ([dict], dict, bool):
         # Get time boundaries for first event set
