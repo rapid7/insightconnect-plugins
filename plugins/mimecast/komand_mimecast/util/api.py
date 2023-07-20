@@ -10,7 +10,7 @@ from zipfile import ZipFile, BadZipFile
 
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
-from insightconnect_plugin_runtime.helper import convert_dict_to_camel_case
+from insightconnect_plugin_runtime.helper import convert_dict_to_camel_case, rate_limiting
 
 from komand_mimecast.util.constants import (
     API,
@@ -88,6 +88,7 @@ class MimecastAPI:
     def find_remediation_incidents(self, data: dict) -> dict:
         return self._handle_rest_call("POST", f"{API}/ttp/remediation/find-incidents", data=data)
 
+    @rate_limiting(max_tries=10)
     def get_siem_logs(self, data: Dict[str, Any]) -> Union[List[Dict], Dict, int]:
         uri = f"{API}/audit/get-siem-logs"
         default_data = {
@@ -101,6 +102,8 @@ class MimecastAPI:
         request = requests.request(
             method="POST", url=f"{self.url}{uri}", headers=self._prepare_header(uri), data=str(payload)
         )
+        self._check_rate_limiting(request)
+
         if "attachment" in request.headers.get("Content-Disposition", ""):
             combined_json_list = self._handle_zip_file(request)
             return combined_json_list, request.headers, request.status_code
@@ -120,6 +123,10 @@ class MimecastAPI:
                 status_code=status_code,
             )
         raise ApiClientException(preset=PluginException.Preset.UNKNOWN, data=response, status_code=status_code)
+
+    def _check_rate_limiting(self, request):
+        if request.status_code == 429:
+            raise PluginException(preset=PluginException.Preset.RATE_LIMIT)
 
     def _handle_status_code_response(self, response: requests.request, status_code: int):
         if status_code == 403:
@@ -253,6 +260,7 @@ class MimecastAPI:
                 else:
                     self._handle_status_code_response(response, status_code)
 
+    @rate_limiting(max_tries=10)
     def _handle_rest_call(  # noqa: C901
         self,
         method: str,
@@ -272,6 +280,8 @@ class MimecastAPI:
             )
         except requests.exceptions.RequestException as e:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=e)
+
+        self._check_rate_limiting(request)
 
         try:
             response = request.json()
