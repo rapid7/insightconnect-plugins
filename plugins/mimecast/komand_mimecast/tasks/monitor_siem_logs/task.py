@@ -37,27 +37,25 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 self.logger.info("Subsequent run")
                 params[self.TOKEN] = header_next_token
 
-            limit_time = time() + 60
-            while time() < limit_time:
-                try:
-                    output, headers, status_code = self.connection.client.get_siem_logs(params)
-                except ApiClientException as error:
-                    return [], state, has_more_pages, error.status_code, error
-                header_next_token = headers.get(self.HEADER_NEXT_TOKEN)
-                params[self.TOKEN] = header_next_token
-                if not output:
-                    break
-                output = self._filter_and_sort_recent_events(output)
-                if len(output) > 0:
-                    break
+        limit_time = time() + 60
+        while time() < limit_time:
+            try:
+                output, headers, status_code = self.connection.client.get_siem_logs(params)
+            except ApiClientException as error:
+                return [], state, has_more_pages, error.status_code, error
+            header_next_token = headers.get(self.HEADER_NEXT_TOKEN)
+            params[self.TOKEN] = header_next_token
+            if not output:
+                break
+            output = self._filter_and_sort_recent_events(output)
+            if len(output) > 0:
+                break
 
             if header_next_token:
                 state[self.NEXT_TOKEN] = header_next_token
                 has_more_pages = True
 
-            return output, state, has_more_pages, status_code, None
-        except Exception as error:
-            return [], state, has_more_pages, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+        return output, state, has_more_pages, status_code, None
 
     def _filter_and_sort_recent_events(self, output: List[dict]) -> List[dict]:
         """
