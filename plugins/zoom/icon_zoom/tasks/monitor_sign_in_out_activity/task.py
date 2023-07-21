@@ -70,7 +70,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
         except Exception as error:
             self.logger.error(f"Unhandled exception occurred during {self.name} task: {error}")
-            return PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+            return [], {}, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def first_run(self, state: dict) -> ([dict], dict, bool):
         # Get time boundaries for first event set
