@@ -36,7 +36,7 @@ class ScanInput(insightconnect_plugin_runtime.Input):
     "override_blackout": {
       "type": "boolean",
       "title": "Override Blackout",
-      "description": "Whether to request for the override of an scan blackout window",
+      "description": "Set True to override any scan blackout window",
       "default": false,
       "order": 3
     },

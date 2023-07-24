@@ -1922,7 +1922,7 @@ actions:
         required: false
       override_blackout:
         title: Override Blackout
-        description: Whether to request for the override of an scan blackout window
+        description: Set True to override any scan blackout window
         type: boolean
         required: false
         default: false
