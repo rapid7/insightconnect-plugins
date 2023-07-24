@@ -45,13 +45,13 @@ class TestGetUserGroups(TestCase):
             [
                 "id_not_found",
                 Util.read_file_to_dict("inputs/get_user_groups_invalid_id.json.inp"),
-                "Invalid or unreachable endpoint provided.",
+                "Resource not found.",
                 "Verify your input is correct and not malformed and try again. If the issue persists, please contact support.",
             ],
             [
                 "login_not_found",
                 Util.read_file_to_dict("inputs/get_user_groups_invalid_login.json.inp"),
-                "Invalid or unreachable endpoint provided.",
+                "Resource not found.",
                 "Verify your input is correct and not malformed and try again. If the issue persists, please contact support.",
             ],
         ]
