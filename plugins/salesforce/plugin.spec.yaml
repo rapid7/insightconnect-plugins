@@ -49,6 +49,97 @@ types:
       type: string
       required: false
       example: 001Hn00001uAJRtaB3
+  userData:
+    dataType:
+      title: Data Type
+      description: Type of the data
+      type: string
+      required: false
+      example: User Login
+    id:
+      title: ID
+      description: The ID of the user
+      type: string
+      required: false
+      example: 005Hn00000HVWwsIAH
+    firstName:
+      title: First Name
+      description: The user's first name
+      type: string
+      required: false
+      example: John
+    lastName:
+      title: Last Name
+      description: The user's last name
+      type: string
+      required: false
+      example: Smith
+    email:
+      title: Email
+      description: The user's email address
+      type: string
+      required: false
+      example: user@example.com
+    alias:
+      title: Alias
+      description: The user's alias
+      type: string
+      required: false
+      example: jsmith
+    isActive:
+      title: Is Active
+      description: Indicates whether the user has access to log in (true) or not (false)
+      type: boolean
+      required: false
+      example: true
+    loginTime:
+      title: Login Time
+      description: The time of user login. Time zone is based on GMT
+      type: string
+      required: false
+      example: 2023-06-28T09:15:32.000+0000
+    userId:
+      title: User ID
+      description: ID of the user logging in
+      type: string
+      required: false
+      example: 005Hn00000HVWwsIAH
+    loginType:
+      title: Login Type
+      description: The type of login used to access the session
+      type: string
+      required: false
+      example: Application
+    loginUrl:
+      title: Login URL
+      description: URL from which the login request is coming
+      type: string
+      required: false
+      example: https://example.com
+    sourceIp:
+      title: Source IP
+      description: IP address of the machine from which the login request is coming. The address can be an IPv4 or IPv6 address
+      type: string
+      required: false
+      example: 198.51.100.1
+    status:
+      title: Status
+      description: Displays the status of the attempted login. Status is either success or a reason for failure
+      type: string
+      required: false
+      example: Success
+    application:
+      title: Application
+      description: The application used to access the organization
+      type: string
+      required: false
+      example: Browser
+    browser:
+      title: Browser
+      description: The current browser version
+      type: string
+      required: false
+      example: Chrome 114
 connection:
   clientId:
     title: Client ID
@@ -278,3 +369,14 @@ actions:
         type: bytes
         required: false
         example: dGVzdA==
+tasks:
+  monitor_users:
+    title: Monitor Users
+    description: Get information about users, their login history and which users have been updated
+    output:
+      users:
+        title: Users
+        description: Information about users, their login history and which users have been updated
+        type: "[]userData"
+        required: true
+        example: []

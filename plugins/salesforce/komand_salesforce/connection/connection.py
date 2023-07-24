@@ -15,9 +15,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Connect: Connecting...")
 
         client_id = params.get(Input.CLIENTID)
-        client_secret = params.get(Input.CLIENTSECRET).get("secretKey")
-        username = params.get(Input.SALESFORCEACCOUNTUSERNAMEANDPASSWORD).get("username")
-        password = params.get(Input.SALESFORCEACCOUNTUSERNAMEANDPASSWORD).get("password")
+        client_secret = params.get(Input.CLIENTSECRET, {}).get("secretKey")
+        username = params.get(Input.SALESFORCEACCOUNTUSERNAMEANDPASSWORD, {}).get("username")
+        password = params.get(Input.SALESFORCEACCOUNTUSERNAMEANDPASSWORD, {}).get("password")
         security_token = params.get(Input.SECURITYTOKEN).get("secretKey")
 
         self.api = SalesforceAPI(client_id, client_secret, username, password, security_token, self.logger)

@@ -23,7 +23,7 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
-    from komand_salesforce import connection, actions, triggers
+    from komand_salesforce import connection, actions, triggers, tasks
 
     class ICONSalesforce(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
@@ -49,6 +49,8 @@ def main():
             self.add_action(actions.SimpleSearch())
 
             self.add_action(actions.UpdateRecord())
+
+            self.add_task(tasks.MonitorUsers())
 
 
     """Run plugin"""

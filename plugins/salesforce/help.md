@@ -400,6 +400,100 @@ Example output:
 
 _This plugin does not contain any triggers._
 
+### Tasks
+
+#### Monitor Users
+
+This task is used to get information about users, their login history and which users have been updated.
+
+##### Input
+
+_This task does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|users|[]userData|True|Information about users, their login history and which users have been updated|[]|
+
+Example output:
+
+```
+{
+  "users": [
+    {
+      "attributes": {
+        "type": "User",
+        "url": "/services/data/v58.0/sobjects/User/005Hn00000HVWwxIAH"
+      },
+      "id": "005Hn00000HVWwxIAH",
+      "firstName": "Security",
+      "lastName": "User",
+      "email": "user@example.com",
+      "alias": "sec",
+      "isActive": true,
+      "dataType": "User Update"
+    },
+    {
+      "attributes": {
+        "type": "User",
+        "url": "/services/data/v58.0/sobjects/User/005Hn00000H35JtIAJ"
+      },
+      "id": "005Hn00000H35JtIAJ",
+      "firstName": "Example",
+      "lastName": "User",
+      "email": "user2@example.com",
+      "alias": "exam",
+      "isActive": true,
+      "dataType": "User"
+    },
+    {
+      "attributes": {
+        "type": "User",
+        "url": "/services/data/v58.0/sobjects/User/005Hn00000HVWwxIAH"
+      },
+      "id": "005Hn00000HVWwxIAH",
+      "firstName": "Security",
+      "lastName": "User",
+      "email": "user@example.com",
+      "alias": "sec",
+      "isActive": true,
+      "dataType": "User"
+    },
+    {
+      "attributes": {
+        "type": "LoginHistory",
+        "url": "/services/data/v58.0/sobjects/LoginHistory/0YaHn0000EUyGdHKQV"
+      },
+      "loginTime": "2023-07-23T16:18:23.000+0000",
+      "userId": "005Hn00000H35JtIAJ",
+      "loginType": "Remote Access 2.0",
+      "loginUrl": "login.salesforce.com",
+      "sourceIp": "198.51.100.1",
+      "status": "Success",
+      "application": "New Connected App",
+      "browser": "Unknown",
+      "dataType": "User Login"
+    },
+    {
+      "attributes": {
+        "type": "LoginHistory",
+        "url": "/services/data/v58.0/sobjects/LoginHistory/0YaHn0000EUyGkcKQF"
+      },
+      "loginTime": "2023-07-23T16:20:13.000+0000",
+      "userId": "005Hn00000H35JtIAJ",
+      "loginType": "Application",
+      "loginUrl": "example.salesforce.com",
+      "sourceIp": "198.51.100.1",
+      "status": "Success",
+      "application": "Browser",
+      "browser": "Chrome 115",
+      "dataType": "User Login"
+    }
+  ]
+}
+```
+
 ### Custom Output Types
 
 #### searchResult
@@ -411,13 +505,33 @@ _This plugin does not contain any triggers._
 |Type|string|False|Type of the record|
 |URL|string|False|URL of the record|
 
+#### userData
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Alias|string|False|The user's alias|
+|Application|string|False|The application used to access the organization|
+|Browser|string|False|The current browser version|
+|Data Type|string|False|Type of the data|
+|Email|string|False|The user's email address|
+|First Name|string|False|The user's first name|
+|ID|string|False|The ID of the user|
+|Is Active|boolean|False|Indicates whether the user has access to log in (true) or not (false)|
+|Last Name|string|False|The user's last name|
+|Login Time|string|False|The time of user login. Time zone is based on GMT|
+|Login Type|string|False|The type of login used to access the session|
+|Login URL|string|False|URL from which the login request is coming|
+|Source IP|string|False|IP address of the machine from which the login request is coming. The address can be an IPv4 or IPv6 address|
+|Status|string|False|Displays the status of the attempted login. Status is either success or a reason for failure|
+|User ID|string|False|ID of the user logging in|
+
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.0 - Code refactor | Update plugin to be cloud enabled
+* 2.0.0 - Code refactor | Update plugin to be cloud enabled | Add new task Monitor Users
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 

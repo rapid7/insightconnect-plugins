@@ -12,6 +12,7 @@ from komand_salesforce.util.endpoints import (
     SOBJECT_RECORD_ENDPOINT,
     SOBJECT_RECORD_EXTERNAL_ID_ENDPOINT,
     SOBJECT_RECORD_FIELD_ENDPOINT,
+    SOBJECT_UPDATED_USERS,
 )
 
 
@@ -74,6 +75,23 @@ class SalesforceAPI:
                 break
 
         return records
+
+    def query(self, query: str, next_page_id: str = None) -> dict:
+        if next_page_id:
+            response = self._make_json_request("GET", QUERY_NEXT_PAGE_ENDPOINT.format(next_query_id=next_page_id))
+        else:
+            response = self._make_json_request("GET", QUERY_ENDPOINT, params={"q": query})
+
+        next_records_url = response.get("nextRecordsUrl")
+        return {
+            "records": response.get("records", []),
+            "next_page_id": next_records_url[next_records_url.index("query") + len("query") :]
+            if next_records_url
+            else None,
+        }
+
+    def get_updated_users(self, parameters: dict) -> dict:
+        return self._make_json_request("GET", SOBJECT_UPDATED_USERS, params=parameters)
 
     def create_record(self, object_name: dict, object_data: dict) -> dict:
         return self._make_json_request("POST", SOBJECT_ENDPOINT.format(object=object_name), json=object_data)

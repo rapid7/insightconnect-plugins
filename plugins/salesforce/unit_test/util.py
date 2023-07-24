@@ -100,6 +100,15 @@ class Util:
                 return MockResponse(404)
 
         if method == "GET":
+            if url == "https://example.com/services/data/v58.0/sobjects/User/updated":
+                if params == {"start": "2023-07-19T16:21:15.340+00:00", "end": "2023-07-20T16:21:15.340+00:00"}:
+                    return MockResponse(200, "get_updated_users.json.resp")
+                if params == {"start": "2023-07-20T16:15:15.340+00:00", "end": "2023-07-20T16:21:15.340+00:00"}:
+                    return MockResponse(200, "get_updated_users.json.resp")
+                if params == {"start": "2023-07-20T16:10:15.340+00:00", "end": "2023-07-20T16:21:15.340+00:00"}:
+                    return MockResponse(200, "get_updated_users_empty.json.resp")
+                if params == {"start": "invalid", "end": "2023-07-20T16:21:15.340+00:00"}:
+                    return MockResponse(400)
             if url == "https://example.com/services/data/v58.0/sobjects/Document/invalid/body":
                 return MockResponse(404)
             if url == "https://example.com/services/data/v58.0/sobjects/Invalid/015Hn000002ge67890/body":
@@ -124,6 +133,26 @@ class Util:
                 if params == {"fields": "invalid"}:
                     return MockResponse(400)
             if url == "https://example.com/services/data/v58.0/query":
+                if params == {
+                    "q": "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE Id = '005Hn00000HVWwxIAH' AND UserType = 'Standard'"
+                }:
+                    return MockResponse(200, "get_specific_user.json.resp")
+                if params == {
+                    "q": "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard'"
+                }:
+                    return MockResponse(200, "get_users.json.resp")
+                if params == {
+                    "q": "SELECT LoginTime, UserId, LoginType, LoginUrl, SourceIp, Status, Application, Browser FROM LoginHistory WHERE LoginTime >= 2023-07-19T16:21:15.340262+00:00 AND LoginTime < 2023-07-20T16:21:15.340262+00:00"
+                }:
+                    return MockResponse(200, "get_login_history.json.resp")
+                if params == {
+                    "q": "SELECT LoginTime, UserId, LoginType, LoginUrl, SourceIp, Status, Application, Browser FROM LoginHistory WHERE LoginTime >= 2023-07-20T15:21:15.340262+00:00 AND LoginTime < 2023-07-20T16:21:15.340262+00:00"
+                }:
+                    return MockResponse(200, "get_login_history.json.resp")
+                if params == {
+                    "q": "SELECT LoginTime, UserId, LoginType, LoginUrl, SourceIp, Status, Application, Browser FROM LoginHistory WHERE LoginTime >= 2023-07-20T14:21:15.340262+00:00 AND LoginTime < 2023-07-20T16:21:15.340262+00:00"
+                }:
+                    return MockResponse(200, "get_login_history_empty.json.resp")
                 if params == {"q": "SELECT FIELDS(STANDARD) FROM Folder"}:
                     return MockResponse(200, "advanced_search_all.json.resp")
                 if params == {"q": "SELECT FIELDS(STANDARD) FROM Account WHERE Name='Example Account'"}:
@@ -136,6 +165,10 @@ class Util:
                     return MockResponse(400)
             if url == "https://example.com/services/data/v58.0/query/01gRO0000012345678-500":
                 return MockResponse(200, "advanced_search_second_page.json.resp")
+            if url == "https://example.com/services/data/v58.0/query/01gRO0000087654321-500":
+                return MockResponse(200, "get_users_next_page.json.resp")
+            if url == "https://example.com/services/data/v58.0/query/02cS10000087654321-500":
+                return MockResponse(200, "get_login_history_next_page.json.resp")
 
             if url == "https://example.com/services/data/v58.0/parameterizedSearch":
                 if params.get("q") == "test":

@@ -16,7 +16,7 @@ def convert_pascal_case_to_camel_case(provided_string: str) -> str:
 
 def convert_to_camel_case(to_modify: Union[dict, list]) -> Union[dict, list]:
     if isinstance(to_modify, list):
-        return [convert_pascal_case_to_camel_case(element) for element in to_modify]
+        return [convert_to_camel_case(element) for element in to_modify]
     elif isinstance(to_modify, dict):
         output_dict = {}
         for key, value in to_modify.items():
