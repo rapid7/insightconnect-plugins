@@ -26,7 +26,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         in the action and trigger files as:
           blah = self.connection.blah
         """
-        # TODO: Implement connection or 'pass' if no connection is necessary
         self.api_key = params.get("apiKey", {}).get("secretKey")
         self.ipqs_client = IPQSClient(self.api_key, self.logger)
         self.logger.info("Connect: Connecting...")
