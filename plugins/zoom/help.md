@@ -302,6 +302,7 @@ Example output:
 
 # Version History
 
+* 4.1.0 - Implement external pagination for Monitor Sign in and Out Activity task | Update to latest plugin SDK
 * 4.0.2 - Reordered status checks to avoid JSON parsing issue with 204s | Added examples to spec file and help.md
 * 4.0.1 - Return Zoom API status codes in Monitor Sign in And Out Activity task state
 * 4.0.0 - Fix time boundary checking in Monitor Sign in And Out Activity task by tracking last request time instead of latest event time | Remove JWT authentication

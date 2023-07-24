@@ -85,6 +85,25 @@ class ZoomAPI:
             else:
                 return events
 
+    def get_user_activity_events_task(
+        self, start_date: str = None, end_date: str = None, page_size: int = None, next_page_token: str = None
+    ) -> ([dict], bool):
+        activities_url = f"{self.api_url}/report/activities"
+
+        events = []
+        params = {
+            "from": start_date,
+            "to": end_date,
+            "page_size": page_size,
+            "next_page_token": next_page_token,
+        }
+        response = self._call_api("GET", activities_url, params=params)
+
+        events = events + response.get("activity_logs", [])
+        has_more_pages = response.get("next_page_token") != ""
+
+        return events, has_more_pages
+
     def _refresh_oauth_token(self) -> None:
         """
         Retrieves a new server-to-server OAuth token from Zoom
