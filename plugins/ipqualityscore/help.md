@@ -81,7 +81,6 @@ Example output:
 
 ```
 {
-  "$success": true,
   "adult": false,
   "category": "Radiotv",
   "content_type": "text/html; charset=utf-8",
@@ -165,7 +164,6 @@ Example output:
 
 ```
 {
-  "$success": true,
   "VOIP": false,
   "active": false,
   "active_status": "N/A",
@@ -281,7 +279,6 @@ Example output:
 
 ```
 {
-  "$success": true,
   "ASN": 13335,
   "ISP": "Cloudflare",
   "abuse_velocity": "none",
@@ -368,7 +365,6 @@ Example output:
 
 ```
 {
-  "$success": true,
   "associated_names": {
     "names": [
       "LATOYA JONES",
@@ -495,7 +491,6 @@ Example output:
 
 ```
 {
-  "$success": true,
   "adult": false,
   "category": "Radiotv",
   "content_type": "text/html; charset=utf-8",
