@@ -1,0 +1,5 @@
+{
+  "hosts": ["198.51.100.1"],
+  "override_blackout": false,
+  "site_id": "1"
+}
