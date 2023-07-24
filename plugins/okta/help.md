@@ -42,6 +42,103 @@ Example input:
 
 ### Actions
 
+#### Get User Groups
+
+This action fetches the groups of which the user is a member.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|User ID or login|None|00g1m22m1230eZXxe5r8|
+
+Example input:
+
+```
+{
+  "id": "00g1m22m1230eZXxe5r8"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|userGroups|[]group|False|List of user groups|[]|
+
+Example output:
+
+```
+{
+  "userGroups": [
+    {
+      "id": "123456",
+      "created": "2018-07-28T20:28:20.000Z",
+      "lastUpdated": "2018-07-28T20:28:20.000Z",
+      "lastMembershipUpdated": "2023-04-26T09:53:11.000Z",
+      "objectClass": [
+        "okta:user_group"
+      ],
+      "type": "OKTA_GROUP",
+      "name": "Example Group",
+      "description": "Example description",
+      "links": {
+        "logo": [
+          {
+            "name": "medium",
+            "href": "https://example.com",
+            "type": "image/png"
+          },
+          {
+            "name": "large",
+            "href": "https://example.com",
+            "type": "image/png"
+          }
+        ],
+        "users": {
+          "href": "https://example.com"
+        },
+        "apps": {
+          "href": "https://example.com"
+        }
+      }
+    },
+    {
+      "id": "123457",
+      "created": "2018-07-28T20:28:20.000Z",
+      "lastUpdated": "2018-07-28T20:28:20.000Z",
+      "lastMembershipUpdated": "2023-04-26T09:53:11.000Z",
+      "objectClass": [
+        "okta:user_group"
+      ],
+      "type": "OKTA_GROUP",
+      "name": "Example Group1",
+      "description": "Example description",
+      "links": {
+        "logo": [
+          {
+            "name": "medium",
+            "href": "https://example.com",
+            "type": "image/png"
+          },
+          {
+            "name": "large",
+            "href": "https://example.com",
+            "type": "image/png"
+          }
+        ],
+        "users": {
+          "href": "https://example.com"
+        },
+        "apps": {
+          "href": "https://example.com"
+        }
+      }
+    }
+  ]
+}
+```
+
 #### Reset Password
 
 This action resets password for Okta user and transitions user status to PASSWORD_EXPIRED, so that the user is required to change their password at their next login.
@@ -723,7 +820,6 @@ This action is used to assign a user to an application for SSO and provisioning.
 `appuser` accepts a [application user model](https://developer.okta.com/docs/reference/api/apps/#application-user-object) JSON object.
 
 Example input:
-
 ```
 {
   "applicationId": "00a0a1qwertYUIoplK0a2",
@@ -782,7 +878,6 @@ This action will attempt to prevent that be removing the entire input if it dete
 |nextLogin|boolean|None|True|Change password next time the user logs in|None|True|
 
 Example input:
-
 ```
 {
   "activate": true,
@@ -1509,6 +1604,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 4.1.0 - New action Get User Groups
 * 4.0.0 - Add Monitor Logs task | Code refactor | Update plugin to be cloud enabled
 * 3.6.3 - Add Reset Password action
 * 3.5.3 - Correct spelling in help.md

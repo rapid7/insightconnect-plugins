@@ -14,6 +14,7 @@ from komand_okta.util.endpoints import (
     DEACTIVATE_USER_ENDPOINT,
     GET_FACTORS_ENDPOINT,
     GET_USER_BY_LOGIN_ENDPOINT,
+    GET_USER_GROUPS_ENDPOINT,
     GET_ZONES_ENDPOINT,
     LIST_GROUP_ENDPOINT,
     LIST_LOGS_ENDPOINT,
@@ -110,6 +111,9 @@ class OktaAPI:
 
     def get_user(self, user_id: str) -> dict:
         return self.make_json_request(method="GET", url=USER_ENDPOINT.format(user_id=user_id))
+
+    def get_user_groups(self, user_id: str) -> list:
+        return self.make_json_request(method="GET", url=GET_USER_GROUPS_ENDPOINT.format(user_id=user_id))
 
     def list_events(self, parameters: dict) -> requests.Response:
         return self.make_request(method="GET", url=LIST_LOGS_ENDPOINT, params=parameters)

@@ -1,0 +1,68 @@
+{
+  "userGroups": [
+    {
+      "id": "1111",
+      "created": "2018-07-28T20:28:20.000Z",
+      "lastUpdated": "2018-07-28T20:28:20.000Z",
+      "lastMembershipUpdated": "2023-04-26T09:53:11.000Z",
+      "objectClass": [
+        "okta:user_group"
+      ],
+      "type": "OKTA_GROUP",
+      "name": "Example Group1",
+      "description": "Example description",
+      "links": {
+        "logo": [
+          {
+            "name": "medium",
+            "href": "https://example.com",
+            "type": "image/png"
+          },
+          {
+            "name": "large",
+            "href": "https://example.com",
+            "type": "image/png"
+          }
+        ],
+        "users": {
+          "href": "https://example.com"
+        },
+        "apps": {
+          "href": "https://example.com"
+        }
+      }
+    },
+    {
+      "id": "2222",
+      "created": "2022-08-23T20:46:21.000Z",
+      "lastUpdated": "2022-08-23T20:46:21.000Z",
+      "lastMembershipUpdated": "2022-08-23T20:48:37.000Z",
+      "objectClass": [
+        "okta:user_group"
+      ],
+      "type": "OKTA_GROUP",
+      "name": "Test Group2",
+      "description": "Unknown",
+      "links": {
+        "logo": [
+          {
+            "name": "medium",
+            "href": "https://example.com",
+            "type": "image/png"
+          },
+          {
+            "name": "large",
+            "href": "https://example.com",
+            "type": "image/png"
+          }
+        ],
+        "users": {
+          "href": "https://example.com"
+        },
+        "apps": {
+          "href": "https://example.com"
+        }
+      }
+    }
+  ]
+}
