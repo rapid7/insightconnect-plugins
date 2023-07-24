@@ -3,12 +3,16 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 8.1.0
+version: 8.2.0
 supported_versions: ["2.1.0"]
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
 status: []
+sdk:
+  type: full
+  version: 5
+  user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/sentinelone
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -22,6 +26,17 @@ hub_tags:
   keywords: [sentinelone, endpoint, detection]
   features: []
 types:
+  quarantine_failures:
+    input_key:
+      title: Input Key
+      description: The input key name
+      type: string
+      required: false
+    error:
+      title: Error
+      description: The message describing why the operation has failed
+      type: string
+      required: false
   activities_types:
     id:
       title: Type ID
@@ -2121,7 +2136,42 @@ actions:
         description: SentinelOne API call response data
         type: quarantine_response
         required: false
-        example: '{ "response": { "data": [ { "agentDomain": "WORKGROUP", "agentGroupId": "123123456712356789", "agentId": "123123456712356789" } } }'
+        example: '{"data":[{"agentDomain": "WORKGROUP","agentGroupId":"123123456712356789","agentId":"123123456712356789"}]}'
+  quarantine_multiple:
+    title: Quarantine Multiple
+    description: Isolate (quarantine) multiple endpoints from the network
+    input:
+      agents:
+        title: Agents
+        description: The list contains agents to perform quarantine action on. Accepts IP address, MAC address, hostname, UUID or agent ID
+        type: "[]string"
+        example: '["hostname123", "hostname456"]'
+        required: true
+      quarantine_state:
+        title: Quarantine State
+        description: True to quarantine host, false to unquarantine hosts
+        type: boolean
+        example: true
+        required: true
+      whitelist:
+        title: Whitelist
+        description: This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs
+        type: "[]string"
+        example: '["198.51.100.100", "hostname123", "901345720792880606", "28db47168fa54f89aeed99769ac8d4dc"]'
+        required: false
+    output:
+      completed:
+        title: Completed
+        description: List of hosts on which the operation was successfully attempted (note this does not guarantee that the operation itself was successful, only that the API call was able to be successfully performed)
+        type: "[]string"
+        required: true
+        example: '["hostname123", "hostname456"]'
+      failed:
+        title: Failed
+        description: List of hosts on which the operation attempt was unsuccessful
+        type: "[]quarantine_failures"
+        required: true
+        example: '[{"input_key": "hostname123", "error": "Example Error Message"}, {"input_key": "hostname456", "error": "Example Error Message 2"}]'
   blacklist:
     title: Blacklist
     description: Blacklist and unblacklist a SHA1 hash

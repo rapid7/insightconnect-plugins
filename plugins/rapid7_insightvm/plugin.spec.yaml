@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM Console
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans
-version: 6.0.0
+version: 6.1.0
 supported_versions: ["Rapid7 InsightVM API v3 2022-05-25"]
 vendor: rapid7
 support: rapid7
@@ -1920,17 +1920,26 @@ actions:
         type: "[]string"
         example: ["192.0.2.3", "192.0.2.10-192.0.2.20", "ADSRV.local"]
         required: false
+      override_blackout:
+        title: Override Blackout
+        description: Set True to override any scan blackout window
+        type: boolean
+        required: false
+        default: false
+        example: false
     output:
       id:
         description: Identifier of the resource created
         title: Scan ID
         type: integer
         required: false
+        example: 188935
       links:
         description: Hypermedia links to corresponding or related resources
         title: Links
         type: '[]link'
         required: false
+        example: []
   get_scan:
     title: Get Scan
     description: Get the status of a scan

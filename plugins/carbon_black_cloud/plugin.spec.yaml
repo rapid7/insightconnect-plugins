@@ -4,10 +4,11 @@ products: [insightconnect]
 name: carbon_black_cloud
 title: VMware Carbon Black Cloud
 description: Quarantine endpoints and get device details with the VMware Carbon Black Cloud plugin
-version: 1.0.2
+version: 1.1.0
 vendor: rapid7
 support: rapid7
 status: []
+supported_versions: ["2023-07-13"]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/carbon_black_cloud
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -22,390 +23,403 @@ hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [carbon black, vmware, cloud, antivirus]
   features: []
-
+sdk:
+  type: full
+  version: 5
+  user: nobody
 types:
+  quarantine_failures:
+    input_key:
+      title: Input Key
+      description: The input key name
+      type: string
+      required: false
+    error:
+      title: Error
+      description: The message describing why the operation has failed
+      type: string
+      required: false
   agent:
     activationCode:
-      title: "Activation Code"
+      title: Activation Code
       type: string
-      description: "Activation code"
+      description: Activation code
       required: false
     activationCodeExpiryTime:
-      title: "Activation Code Expiry Time"
+      title: Activation Code Expiry Time
       type: integer
-      description: "Activation code expiry time"
+      description: Activation code expiry time
       required: false
     adGroupId:
-      title: "AD Group ID"
+      title: AD Group ID
       type: integer
-      description: "AD group ID"
+      description: AD group ID
       required: false
     assignedToId:
-      title: "Assigned to ID"
+      title: Assigned to ID
       type: string
-      description: "Assigned to ID"
+      description: Assigned to ID
       required: false
     assignedToName:
-      title: "Assigned to Name"
+      title: Assigned to Name
       type: string
-      description: "Assigned to name"
+      description: Assigned to name
       required: false
     avAveVersion:
-      title: "AV AVE Version"
+      title: AV AVE Version
       type: string
-      description: "AV AVE version"
+      description: AV AVE version
       required: false
     avEngine:
-      title: "AV Engine"
+      title: AV Engine
       type: string
-      description: "AV engine"
+      description: AV engine
       required: false
     avLastScanTime:
-      title: "AV Last Scan Time"
+      title: AV Last Scan Time
       type: integer
-      description: "AV last scan time"
+      description: AV last scan time
       required: false
     avMaster:
-      title: "AV Master"
+      title: AV Master
       type: boolean
-      description: "AV master"
+      description: AV master
       required: false
     avPackVersion:
-      title: "AV Pack Version"
+      title: AV Pack Version
       type: string
-      description: "AV pack version"
+      description: AV pack version
       required: false
     avProductVersion:
-      title: "AV Product Version"
+      title: AV Product Version
       type: string
-      description: "AV product version"
+      description: AV product version
       required: false
     avStatus:
-      title: "AV Status"
+      title: AV Status
       type: "[]string"
-      description: "AV status"
+      description: AV status
       required: false
     avUpdateServers:
-      title: "AV Update Servers"
+      title: AV Update Servers
       type: string
-      description: "AV update servers"
+      description: AV update servers
       required: false
     avVdfVersion:
-      title: "AV VDF Version"
+      title: AV VDF Version
       type: string
-      description: "AV VDF version"
+      description: AV VDF version
       required: false
     createTime:
-      title: "Create Time"
+      title: Create Time
       type: string
-      description: "Create time"
+      description: Create time
       required: false
     currentSensorPolicyName:
-      title: "Current Sensor Policy Name"
+      title: Current Sensor Policy Name
       type: string
-      description: "Current sensor policy name"
+      description: Current sensor policy name
       required: false
     deregisteredTime:
-      title: "Deregistered Time"
+      title: Deregistered Time
       type: string
-      description: "Deregistered time"
+      description: Deregistered time
       required: false
     deviceGuid:
-      title: "Device GUID"
+      title: Device GUID
       type: string
-      description: "Device GUID"
+      description: Device GUID
       required: false
     deviceId:
-      title: "Device ID"
+      title: Device ID
       type: integer
-      description: "Device ID"
+      description: Device ID
       required: false
     deviceMetaDataItemList:
-      title: "Device Meta Data Item List"
+      title: Device Meta Data Item List
       type: string
-      description: "Device meta data item list"
+      description: Device meta data item list
       required: false
     deviceOwnerId:
-      title: "Device Owner ID"
+      title: Device Owner ID
       type: integer
-      description: "Device owner id"
+      description: Device owner id
       required: false
     deviceSessionId:
-      title: "Device Session ID"
+      title: Device Session ID
       type: string
-      description: "Device session ID"
+      description: Device session ID
       required: false
     deviceType:
-      title: "Device Type"
+      title: Device Type
       type: string
-      description: "Device type"
+      description: Device type
       required: false
     email:
-      title: "Email"
+      title: Email
       type: string
-      description: "Email"
+      description: Email
       required: false
     encodedActivationCode:
-      title: "Encoded Activation Code"
+      title: Encoded Activation Code
       type: string
-      description: "Encoded activation code"
+      description: Encoded activation code
       required: false
     firstName:
-      title: "First Name"
+      title: First Name
       type: string
-      description: "First name"
+      description: First name
       required: false
     firstVirusActivityTime:
-      title: "First Virus Activity Time"
+      title: First Virus Activity Time
       type: integer
-      description: "First virus activity time"
+      description: First virus activity time
       required: false
     lastContact:
-      title: "Last Contact"
+      title: Last Contact
       type: integer
-      description: "Last contact"
+      description: Last contact
       required: false
     lastDevicePolicyChangedTime:
-      title: "Last Device Policy Changed Time"
+      title: Last Device Policy Changed Time
       type: string
-      description: "Last device policy changed time"
+      description: Last device policy changed time
       required: false
     lastDevicePolicyRequestedTime:
-      title: "Last Device Policy Requested time"
+      title: Last Device Policy Requested time
       type: string
-      description: "Last device policy requested time"
+      description: Last device policy requested time
       required: false
     lastExternalIpAddress:
-      title: "Last External IP Address"
+      title: Last External IP Address
       type: string
-      description: "Last external IP address"
+      description: Last external IP address
       required: false
     lastInternalIpAddress:
-      title: "Last Internal IP Address"
+      title: Last Internal IP Address
       type: string
-      description: "Last internal IP address"
+      description: Last internal IP address
       required: false
     lastLocation:
-      title: "Last Location"
+      title: Last Location
       type: string
-      description: "Last location"
+      description: Last location
       required: false
     lastName:
-      title: "Last Name"
+      title: Last Name
       type: string
-      description: "Last name"
+      description: Last name
       required: false
     lastPolicyUpdatedTime:
-      title: "Last Policy Updated Time"
+      title: Last Policy Updated Time
       type: string
-      description: "Last policy updated time"
+      description: Last policy updated time
       required: false
     lastReportedTime:
-      title: "Last Reported Time"
+      title: Last Reported Time
       type: integer
-      description: "Last reported time"
+      description: Last reported time
       required: false
     lastResetTime:
-      title: "Last Reset Time"
+      title: Last Reset Time
       type: integer
-      description: "Last reset time"
+      description: Last reset time
       required: false
     lastShutdownTime:
-      title: "Last Shutdown Time"
+      title: Last Shutdown Time
       type: integer
-      description: "Last shutdown time"
+      description: Last shutdown time
       required: false
     lastVirusActivityTime:
-      title: "Last Virus Activity Time"
+      title: Last Virus Activity Time
       type: integer
-      description: "Last virus activity time"
+      description: Last virus activity time
       required: false
     linuxKernelVersion:
-      title: "Linux Kernel Version"
+      title: Linux Kernel Version
       type: string
-      description: "Linux kernel version"
+      description: Linux kernel version
       required: false
     loginUserName:
-      title: "Login User Name"
+      title: Login User Name
       type: string
-      description: "Login user name"
+      description: Login user name
       required: false
     macAddress:
-      title: "MAC Address"
+      title: MAC Address
       type: string
-      description: "MAC address"
+      description: MAC address
       required: false
     messages:
-      title: "Messages"
+      title: Messages
       type: string
-      description: "Messages"
+      description: Messages
       required: false
     middleName:
-      title: "Middle Name"
+      title: Middle Name
       type: string
-      description: "Middle name"
+      description: Middle name
       required: false
     name:
-      title: "Name"
+      title: Name
       type: string
-      description: "Name"
+      description: Name
       required: false
     organizationId:
-      title: "Organization ID"
+      title: Organization ID
       type: integer
-      description: "Organization ID"
+      description: Organization ID
       required: false
     organizationName:
-      title: "Organization Name"
+      title: Organization Name
       type: string
-      description: "Organization name"
+      description: Organization name
       required: false
     originEventHash:
-      title: "Origin Event Hash"
+      title: Origin Event Hash
       type: string
-      description: "Origin event hash"
+      description: Origin event hash
       required: false
     osVersion:
-      title: "OS Version"
+      title: OS Version
       type: string
-      description: "OS version"
+      description: OS version
       required: false
     passiveMode:
-      title: "Passive Mode"
+      title: Passive Mode
       type: boolean
-      description: "Passive mode"
+      description: Passive mode
       required: false
     policyId:
-      title: "Policy ID"
+      title: Policy ID
       type: integer
-      description: "Policy ID"
+      description: Policy ID
       required: false
     policyName:
-      title: "Policy Name"
+      title: Policy Name
       type: string
-      description: "Policy name"
+      description: Policy name
       required: false
     policyOverride:
-      title: "Policy Override"
+      title: Policy Override
       type: boolean
-      description: "Policy override"
+      description: Policy override
       required: false
     quarantined:
-      title: "Quarantined"
+      title: Quarantined
       type: boolean
-      description: "Quarantined"
+      description: Quarantined
       required: false
     registeredTime:
-      title: "Registered Time"
+      title: Registered Time
       type: integer
-      description: "Registered time"
+      description: Registered time
       required: false
     rootedByAnalytics:
-      title: "Rooted by Analytics"
+      title: Rooted by Analytics
       type: boolean
-      description: "Rooted by analytics"
+      description: Rooted by analytics
       required: false
     rootedByAnalyticsTime:
-      title: "Rooted by Analytics Time"
+      title: Rooted by Analytics Time
       type: string
-      description: "Rooted by analytics time"
+      description: Rooted by analytics time
       required: false
     rootedBySensor:
-      title: "Rooted by Sensor"
+      title: Rooted by Sensor
       type: boolean
-      description: "Rooted by sensor"
+      description: Rooted by sensor
       required: false
     rootedBySensorTime:
-      title: "Rooted by Sensor Time"
+      title: Rooted by Sensor Time
       type: string
-      description: "Rooted by sensor time"
+      description: Rooted by sensor time
       required: false
     scanLastActionTime:
-      title: "Scan Last Action Time"
+      title: Scan Last Action Time
       type: integer
-      description: "Scan last action time"
+      description: Scan last action time
       required: false
     scanLastCompleteTime:
-      title: "Scan Last Complete Time"
+      title: Scan Last Complete Time
       type: integer
-      description: "Scan last complete time"
+      description: Scan last complete time
       required: false
     scanStatus:
-      title: "Scan Status"
+      title: Scan Status
       type: string
-      description: "Scan status"
+      description: Scan status
       required: false
     sensorKitType:
-      title: "Sensor Kit Type"
+      title: Sensor Kit Type
       type: string
-      description: "Sensor kit type"
+      description: Sensor kit type
       required: false
     sensorOutOfDate:
-      title: "Sensor Out of Date"
+      title: Sensor Out of Date
       type: boolean
-      description: "Sensor out of date"
+      description: Sensor out of date
       required: false
     sensorPendingUpdate:
-      title: "Sensor Pending Update"
+      title: Sensor Pending Update
       type: boolean
-      description: "Sensor pending update"
+      description: Sensor pending update
       required: false
     sensorStates:
-      title: "Sensor States"
+      title: Sensor States
       type: "[]string"
-      description: "Sensor states"
+      description: Sensor states
       required: false
     sensorVersion:
-      title: "Sensor Version"
+      title: Sensor Version
       type: string
-      description: "Sensor version"
+      description: Sensor version
       required: false
     status:
-      title: "Status"
+      title: Status
       type: string
-      description: "Status"
+      description: Status
       required: false
     targetPriorityType:
-      title: "Target Priority Type"
+      title: Target Priority Type
       type: string
-      description: "Target priority type"
+      description: Target priority type
       required: false
     testId:
-      title: "Test ID"
+      title: Test ID
       type: integer
-      description: "Test ID"
+      description: Test ID
       required: false
     uninstallCode:
-      title: "Uninstall Code"
+      title: Uninstall Code
       type: string
-      description: "Uninstall code"
+      description: Uninstall code
       required: false
     uninstalledTime:
-      title: "Uninstalled Time"
+      title: Uninstalled Time
       type: string
-      description: "Uninstalled time"
+      description: Uninstalled time
       required: false
     vdiBaseDevice:
-      title: "VDI Base Device"
+      title: VDI Base Device
       type: string
-      description: "VDI base device"
+      description: VDI base device
       required: false
     virtualMachine:
-      title: "Virtual Machine"
+      title: Virtual Machine
       type: boolean
-      description: "Virtual machine"
+      description: Virtual machine
       required: false
     virtualizationProvider:
-      title: "Virtualization Provider"
+      title: Virtualization Provider
       type: string
-      description: "Virtualization provider"
+      description: Virtualization provider
       required: false
     windowsPlatform:
-      title: "Windows Platform"
+      title: Windows Platform
       type: string
-      description: "Windows platform"
+      description: Windows platform
       required: false
-
 connection:
   api_id:
     title: API ID
@@ -477,7 +491,7 @@ actions:
         description: An array of IPs, hostnames, or device ID that a user can pass in that will not be quarantined
         type: "[]string"
         required: false
-        example: ["198.51.100.100","win-test"]
+        example: '["198.51.100.100", "win-test"]'
         order: 3
     output:
       quarantined:
@@ -485,4 +499,40 @@ actions:
         description: Is the agent quarantined
         type: boolean
         required: true
-
+        example: true
+  quarantine_multiple:
+    title: Quarantine Multiple
+    description: Quarantine an agents
+    input:
+      agents:
+        title: Agents
+        description: List of agents to retrieve device information from. Accepts IP address, hostname, or device ID. Search results are case-sensitive
+        type: "[]string"
+        required: true
+        example: '["198.51.100.100", "192.168.51.100.101"]'
+      quarantine_state:
+        title: Quarantine State
+        description: Set to true to quarantine the agents, set to false to unquarantine an agents
+        type: boolean
+        required: true
+        default: true
+        example: true
+      whitelist:
+        title: Whitelist
+        description: An array of IPs, hostnames, or device ID that a user can pass in that will not be quarantined
+        type: "[]string"
+        required: false
+        example: '["198.51.100.100", "win-test"]'
+    output:
+      completed:
+        title: Completed
+        description: List of hosts on which the operation was successfully attempted (note this does not guarantee that the operation itself was successful, only that the API call was able to be successfully performed)
+        type: "[]string"
+        required: true
+        example: '["hostname123", "hostname456"]'
+      failed:
+        title: Failed
+        description: List of hosts on which the operation attempt was unsuccessful
+        type: "[]quarantine_failures"
+        required: true
+        example: '[{"input_key": "hostname123", "error": "Example Error Message"}, {"input_key": "hostname456", "error": "Example Error Message 2"}]'

@@ -28,12 +28,13 @@ This plugin utilizes the SentinelOne API, the documentation is located in the Se
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|True|Credential secret API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |user_type|string|Console user|True|Type of user|['Console user', 'Service user']|Console user|
 |url|string|None|True|SentinelOne Console URL|None|https://example.com|
 
 Example input:
+
 ```
 {
   "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
@@ -66,9 +67,10 @@ This action is used to run a remote script.
 |timeout|integer|3600|False|Script runtime timeout (in seconds) for current execution (Value between 60 and 172800 seconds)|None|3600|
 
 Example input:
+
 ```
 {
-  "output_destination": "None"
+  "output_destination": null
 }
 ```
 
@@ -99,9 +101,10 @@ This action is used to fetch file for a specific agent id.
 |password|string|None|True|File encryption password, min. length 10 characters and cannot contain whitespace|None|MySecretPass123!|
 
 Example input:
+
 ```
 {
-  "agent_id": "1000000000000000000",
+  "agent_id": 1000000000000000000,
   "file_path": "C:/windows/system32/winevt/logs/application.evtx",
   "password": "MySecretPass123!"
 }
@@ -116,7 +119,9 @@ Example input:
 Example output:
 
 ```
-{ "success": True }
+{
+  "success": true
+}
 ```
 
 #### Update Incident Status
@@ -132,6 +137,7 @@ This action is used to update incident status.
 |type|string|None|True|Type of incidents|['threats', 'alerts']|threats|
 
 Example input:
+
 ```
 {
   "incident_ids": [
@@ -170,6 +176,7 @@ This action is used to update analyst verdict.
 |type|string|None|True|Type of incidents|['threats', 'alerts']|threats|
 
 Example input:
+
 ```
 {
   "analyst_verdict": "true positive",
@@ -209,6 +216,7 @@ This action is used to get Deep Visibility results from the query that matches t
 |sub_query|string|None|False|Sub query to run on the data that was already pulled|None|AgentName IS NOT EMPTY|
 
 Example input:
+
 ```
 {
   "event_type": "Registry Key Create",
@@ -388,6 +396,7 @@ This action is used to get all Deep Visibility events from a queryId.
 |sub_query|string|None|False|Sub query to run on the data that was already pulled|None|AgentName IS NOT EMPTY|
 
 Example input:
+
 ```
 {
   "limit": 10,
@@ -564,6 +573,7 @@ This action is used to stop a Deep Visibility Query by queryId.
 |query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
 
 Example input:
+
 ```
 {
   "query_id": "qd94e330ac025d525b5948bdf897b955e"
@@ -597,6 +607,7 @@ This action is used to get that status of a Deep Visibility Query.
 |query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
 
 Example input:
+
 ```
 {
   "query_id": "qd94e330ac025d525b5948bdf897b955e"
@@ -631,7 +642,7 @@ This action is used to start a Deep Visibility Query and get the queryId. You ca
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |account_ids|[]string|None|False|List of account IDs to filter by|None|["225494730938491234", "225494730938491235"]|
-|from_date|string|None|True|From date|None|2021-03-01 04:49:26.257525|
+|from_date|string|None|True|From date|None|2021-03-01T04:49:26+00:00|
 |group_ids|[]string|None|False|List of group IDs to filter by|None|["225494730938491234", "225494730938491235"]|
 |is_verbose|boolean|None|False|Show all fields or just priority fields|None|True|
 |limit|integer|None|False|Limit number of returned items (1-20000)|None|10|
@@ -639,9 +650,10 @@ This action is used to start a Deep Visibility Query and get the queryId. You ca
 |query_type|[]string|None|False|Query search type|None|["events"]|
 |site_ids|[]string|None|False|List of site IDs to filter by|None|["225494730938491234", "225494730938491235"]|
 |tenant|boolean|None|False|Indicates a Global (tenant) scope request|None|True|
-|to_date|string|None|True|Events created before or at this timestamp|None|2021-03-20 04:49:26.257525|
+|to_date|string|None|True|Events created before or at this timestamp|None|2021-03-20T04:49:26+00:00|
 
 Example input:
+
 ```
 {
   "account_ids": [
@@ -699,6 +711,7 @@ This action is used to enable agents that match the filter.
 |reboot|boolean|None|True|Set true to reboot the endpoint, false to skip rebooting|None|True|
 
 Example input:
+
 ```
 {
   "agent": "hostname123",
@@ -732,12 +745,13 @@ This action is used to disable agents that match the filter.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |agent|string|None|False|Agent to perform disable action on. Accepts IP address, MAC address, hostname, UUID or agent ID. Leave empty to perform action on all applicable Agents|None|hostname123|
-|expiration_time|string|None|False|Agents will be re-enabled after this timestamp|None|2020-02-27 04:49:26.257525|
+|expiration_time|string|None|False|Agents will be re-enabled after this timestamp|None|2020-02-27T04:49:26+00:00|
 |expiration_timezone|string|Central Standard Time (North America) [CST]|False|Timezone for the expiration timestamp. Set with expiration time|['Australian Central Daylight Saving Time [ACDT]', 'Australian Central Standard Time [ACST]', 'Acre Time [ACT]', 'Atlantic Daylight Time [ADT]', 'Australian Eastern Daylight Saving Time [AEDT]', 'Australian Eastern Standard Time [AEST]', 'Australian Eastern Time [AET]', 'Afghanistan Time [AFT]', 'Alaska Daylight Time [AKDT]', 'Alaska Standard Time [AKST]', 'Alma-Ata Time [ALMT]', 'Amazon Summer Time (Brazil) [AMST]', 'Amazon Time (Brazil) [AMT]', 'Armenia Time [AMT]', 'Anadyr Time [ANAT]', 'Aqtobe Time [AQTT]', 'Argentina Time [ART]', 'Arabia Standard Time [AST]', 'Atlantic Standard Time [AST]', 'Australian Western Standard Time [AWST]', 'Azores Summer Time [AZOST]', 'Azores Standard Time [AZOT]', 'Azerbaijan Time [AZT]', 'Brunei Time [BNT]', 'British Indian Ocean Time [BIOT]', 'Baker Island Time [BIT]', 'Bolivia Time [BOT]', 'Brasilia Summer Time [BRST]', 'Brasilia Time [BRT]', 'Bangladesh Standard Time [BST]', 'Bougainville Standard Time [BST]', 'Bhutan Time [BTT]', 'Central Africa Time [CAT]', 'Cocos Islands Time [CCT]', 'Central Daylight Time (North America) [CDT]', 'Cuba Daylight Time [CDT]', 'Central European Summer Time [CEST]', 'Central European Time [CET]', 'Chatham Daylight Time [CHADT]', 'Chatham Standard Time [CHAST]', 'Choibalsan Standard Time [CHOT]', 'Choibalsan Summer Time [CHOST]', 'Chamorro Standard Time [CHST]', 'Chuuk Time [CHUT]', 'Clipperton Island Standard Time [CIST]', 'Central Indonesia Time [WITA]', 'Cook Island Time [CKT]', 'Chile Summer Time [CLST]', 'Chile Standard Time [CLT]', 'Colombia Summer Time [COST]', 'Colombia Time [COT]', 'Central Standard Time (North America) [CST]', 'China Standard Time [CST]', 'Cuba Standard Time [CST]', 'Central Time [CT]', 'Cape Verde Time [CVT]', 'Christmas Island Time [CXT]', 'Davis Time [DAVT]', 'Dumont dUrville Time [DDUT]', 'AIX-specific equivalent of Central European Time [DFT]', 'Easter Island Summer Time [EASST]', 'Easter Island Standard Time [EAST]', 'East Africa Time [EAT]', 'Ecuador Time [ECT]', 'Eastern Daylight Time (North America) [EDT]', 'Eastern European Summer Time [EEST]', 'Eastern European Time [EET]', 'Eastern Greenland Summer Time [EGST]', 'Eastern Greenland Time [EGT]', 'Eastern Indonesian Time [WIT]', 'Eastern Standard Time (North America) [EST]', 'Further-eastern European Time [FET]', 'Fiji Time [FJT]', 'Falkland Islands Summer Time [FKST]', 'Falkland Islands Time [FKT]', 'Fernando de Noronha Time [FNT]', 'Galapagos Time [GALT]', 'Gambier Islands Time [GAMT]', 'Georgia Standard Time [GET]', 'French Guiana Time [GFT]', 'Gilbert Island Time [GILT]', 'Gambier Island Time [GIT]', 'Greenwich Mean Time [GMT]', 'South Georgia and the South Sandwich Islands Time [GST]', 'Gulf Standard Time [GST]', 'Guyana Time [GYT]', 'Hawaii-Aleutian Daylight Time [HDT]', 'Heure Avancee Europe Centrale French-language name for CEST [HAEC]', 'Hawaii-Aleutian Standard Time [HST]', 'Hong Kong Time [HKT]', 'Heard and McDonald Islands Time [HMT]', 'Hovd Time [HOVT]', 'Indochina Time [ICT]', 'International Day Line West time zone [IDLW]', 'Israel Daylight Time [IDT]', 'Indian Ocean Time [IOT]', 'Iran Daylight Time [IRDT]', 'Irkutsk Time [IRKT]', 'Iran Standard Time [IRST]', 'Indian Standard Time [IST]', 'Irish Standard Time [IST]', 'Israel Standard Time [IST]', 'Japan Standard Time [JST]', 'Kaliningrad Time [KALT]', 'Kyrgyzstan Time [KGT]', 'Kosrae Time [KOST]', 'Krasnoyarsk Time [KRAT]', 'Korea Standard Time [KST]', 'Lord Howe Standard Time [LHST]', 'Lord Howe Summer Time [LHST]', 'Line Islands Time [LINT]', 'Magadan Time [MAGT]', 'Marquesas Islands Time [MART]', 'Mawson Station Time [MAWT]', 'Mountain Daylight Time (North America) [MDT]', 'Middle European Time [MET]', 'Middle European Summer Time [MEST]', 'Marshall Islands Time [MHT]', 'Macquarie Island Station Time [MIST]', 'Marquesas Islands Time [MIT]', 'Myanmar Standard Time [MMT]', 'Moscow Time [MSK]', 'Malaysia Standard Time [MST]', 'Mountain Standard Time (North America) [MST]', 'Mauritius Time [MUT]', 'Maldives Time [MVT]', 'Malaysia Time [MYT]', 'New Caledonia Time [NCT]', 'Newfoundland Daylight Time [NDT]', 'Norfolk Island Time [NFT]', 'Novosibirsk Time [NOVT]', 'Nepal Time [NPT]', 'Newfoundland Standard Time [NST]', 'Newfoundland Time [NT]', 'Niue Time [NUT]', 'New Zealand Daylight Time [NZDT]', 'New Zealand Standard Time [NZST]', 'Omsk Time [OMST]', 'Oral Time [ORAT]', 'Pacific Daylight Time (North America) [PDT]', 'Peru Time [PET]', 'Kamchatka Time [PETT]', 'Papua New Guinea Time [PGT]', 'Phoenix Island Time [PHOT]', 'Philippine Time [PHT]', 'Pakistan Standard Time [PKT]', 'Saint Pierre and Miquelon Daylight Time [PMDT]', 'Saint Pierre and Miquelon Standard Time [PMST]', 'Pohnpei Standard Time [PONT]', 'Pacific Standard Time (North America) [PST]', 'Philippine Standard Time [PST]', 'Palau Time [PWT]', 'Paraguay Summer Time [PYST]', 'Paraguay Time [PYT]', 'Reunion Time [RET]', 'Rothera Research Station Time [ROTT]', 'Sakhalin Island Time [SAKT]', 'Samara Time [SAMT]', 'South African Standard Time [SAST]', 'Solomon Islands Time [SBT]', 'Seychelles Time [SCT]', 'Samoa Daylight Time [SDT]', 'Singapore Time [SGT]', 'Sri Lanka Standard Time [SLST]', 'Srednekolymsk Time [SRET]', 'Suriname Time [SRT]', 'Samoa Standard Time [SST]', 'Singapore Standard Time [SST]', 'Showa Station Time [SYOT]', 'Tahiti Time [TAHT]', 'Thailand Standard Time [THA]', 'French Southern and Antarctic Time [TFT]', 'Tajikistan Time [TJT]', 'Tokelau Time [TKT]', 'Timor Leste Time [TLT]', 'Turkmenistan Time [TMT]', 'Turkey Time [TRT]', 'Tonga Time [TOT]', 'Tuvalu Time [TVT]', 'Ulaanbaatar Summer Time [ULAST]', 'Ulaanbaatar Standard Time [ULAT]', 'Coordinated Universal Time [UTC]', 'Uruguay Summer Time [UYST]', 'Uruguay Standard Time [UYT]', 'Uzbekistan Time [UZT]', 'Venezuelan Standard Time [VET]', 'Vladivostok Time [VLAT]', 'Volgograd Time [VOLT]', 'Vostok Station Time [VOST]', 'Vanuatu Time [VUT]', 'Wake Island Time [WAKT]', 'West Africa Summer Time [WAST]', 'West Africa Time [WAT]', 'Western European Summer Time [WEST]', 'Western European Time [WET]', 'Western Indonesian Time [WIB]', 'West Greenland Summer Time [WGST]', 'West Greenland Time [WGT]', 'Western Standard Time [WST]', 'Yakutsk Time [YAKT]', 'Yekaterinburg Time [YEKT]']|Central Standard Time (North America) [CST]|
 |filter|object|None|False|Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents|None|{ "updatedAt__gt": "2019-02-27T04:49:26.257525Z" }|
 |reboot|boolean|None|True|Set true to reboot the endpoint, false to skip rebooting|None|True|
 
 Example input:
+
 ```
 {
   "agent": "hostname123",
@@ -776,6 +790,7 @@ This action is used to perform actions relating to your SentinelOne agents. This
 |filter|object|{}|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents. Note - decommission, disconnect, restart-machine, shutdown and uninstall actions require that one of the following filter arguments be supplied - ids, groupIds, or filterId|None|{"ids": ["1000000000000000000"]}|
 
 Example input:
+
 ```
 {
   "action": "connect",
@@ -811,9 +826,10 @@ This action is used to fetch a file associated with the threat that matches the 
 |password|password|None|True|File encryption password, min. length 10 characters and cannot contain whitespace|None|Rapid7 Insightconnect|
 
 Example input:
+
 ```
 {
-  "id": "939039647215561624",
+  "id": 939039647215561624,
   "password": "Rapid7 Insightconnect"
 }
 ```
@@ -866,6 +882,7 @@ This action is used to get a list of activities.
 |user_ids|[]string|None|False|The user who invoked the activity (If applicable)|None|["500000000000000003"]|
 
 Example input:
+
 ```
 {
   "account_ids": [
@@ -957,6 +974,7 @@ This action is used to reload an agent module (applies to Windows agents only).
 |module|string|None|True|Agent module to reload|['monitor', 'static', 'agent', 'log']|monitor|
 
 Example input:
+
 ```
 {
   "filter": {
@@ -994,6 +1012,7 @@ This action is used to summary of agents by numbers.
 |site_ids|[]string|None|False|List of Site IDs to filter by|None|["500000000000000000"]|
 
 Example input:
+
 ```
 {
   "account_ids": [
@@ -1040,6 +1059,7 @@ This action is used to retrieve running applications for a specific agent.
 |ids|[]string|None|True|Agent ID list|None|["1000000000000000000"]|
 
 Example input:
+
 ```
 {
   "ids": [
@@ -1068,6 +1088,7 @@ Note that when attempting to unblacklist a SHA1 hash by setting `blacklist_state
 |hash|string|None|True|Create a blacklist item from a SHA1 hash|None|3395856ce81f2b7382dee72602f798b642f14140|
 
 Example input:
+
 ```
 {
   "blacklist_state": true,
@@ -1103,6 +1124,7 @@ This action is used to add hashed content to global blacklist. The input makes u
 |hash|string|None|True|Content hash to add to blacklist|None|3395856ce81f2b7382dee72602f798b642f14140|
 
 Example input:
+
 ```
 {
   "hash": "3395856ce81f2b7382dee72602f798b642f14140"
@@ -1140,10 +1162,11 @@ This action is used to create a threat from an IOC event.
 |path|string|None|False|Path|None|path|
 
 Example input:
+
 ```
 {
-  "agentId": "1000000000000000000",
-  "groupId": "1000000000000000001",
+  "agentId": 1000000000000000000,
+  "groupId": 1000000000000000001,
   "hash": "A94A8FE5CCB19BA61C4C0873D391E987982FBBD3",
   "note": "Note",
   "path": "path"
@@ -1177,6 +1200,7 @@ This action is used to retrieve agent details.
 |operational_state|string|Any|False|Agent operational state|['Any', 'na', 'fully_disabled', 'partially_disabled', 'disabled_error']|na|
 
 Example input:
+
 ```
 {
   "agent": "hostname123",
@@ -1404,10 +1428,11 @@ This action is used to mark a threat as resolved.
 |whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|path|
 
 Example input:
+
 ```
 {
   "target_scope": "site",
-  "threat_id": "1000000000000000000",
+  "threat_id": 1000000000000000000,
   "whitening_option": "path"
 }
 ```
@@ -1439,6 +1464,7 @@ This action is used to mark a suspicious threat as a threat.
 |whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|path|
 
 Example input:
+
 ```
 {
   "target_scope": "site",
@@ -1473,6 +1499,7 @@ This action is used to apply a mitigation action to a threat.
 |threat_id|string|None|True|ID of a threat|None|1000000000000000000|
 
 Example input:
+
 ```
 {
   "action": "quarantine",
@@ -1505,6 +1532,7 @@ This action is the account name available for this account.
 |name|string|None|True|Account Name to validate|None|example|
 
 Example input:
+
 ```
 {
   "name": "example"
@@ -1532,17 +1560,65 @@ This action is used to isolate (quarantine) endpoint from the network.
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |agent|string|None|True|Agent to perform quarantine action on. Accepts IP address, MAC address, hostname, UUID or agent ID|None|hostname123|
 |case_sensitive|boolean|True|True|Looks up the specified Agent in a case-sensitive manner. Setting this value to false may result in longer run times and unintended results|None|True|
 |quarantine_state|boolean|None|True|True to quarantine host, false to unquarantine host|None|True|
 |whitelist|[]string|None|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs|None|["198.51.100.100", "hostname123", "901345720792880606", "28db47168fa54f89aeed99769ac8d4dc"]|
-
+  
 Example input:
+
 ```
 {
   "agent": "hostname123",
   "case_sensitive": true,
+  "quarantine_state": true,
+  "whitelist": "198.51.100.100"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|response|quarantine_response|False|SentinelOne API call response data|{"data":[{"agentDomain": "WORKGROUP","agentGroupId":"123123456712356789","agentId":"123123456712356789"}]}|
+  
+Example output:
+
+```
+{
+  "response": {
+    "data": [
+      {
+        "agentDomain": "WORKGROUP",
+        "agentGroupId": "123123456712356789",
+        "agentId": "123123456712356789"
+      }
+    ]
+  }
+}
+```
+
+#### Quarantine Multiple
+  
+This action is used to isolate (quarantine) multiple endpoints from the network  
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|agents|[]string|None|True|The list contains agents to perform quarantine action on. Accepts IP address, MAC address, hostname, UUID or agent ID|None|["hostname123", "hostname456"]|
+|quarantine_state|boolean|None|True|True to quarantine host, false to unquarantine hosts|None|True|
+|whitelist|[]string|None|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs|None|["198.51.100.100", "hostname123", "901345720792880606", "28db47168fa54f89aeed99769ac8d4dc"]|
+  
+Example input:
+
+```
+{
+  "agents": [
+    "hostname123",
+    "hostname456"
+  ],
   "quarantine_state": true,
   "whitelist": [
     "198.51.100.100",
@@ -1556,20 +1632,76 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|response|quarantine_response|False|SentinelOne API call response data|{ "response": { "data": [ { "agentDomain": "WORKGROUP", "agentGroupId": "123123456712356789", "agentId": "123123456712356789" } } }|
-
+| :--- | :--- | :--- | :--- | :--- |
+|completed|[]string|True|List of hosts on which the operation was successfully attempted (note this does not guarantee that the operation itself was successful, only that the API call was able to be successfully performed)|["hostname123", "hostname456"]|
+|failed|[]quarantine_failures|True|List of hosts on which the operation attempt was unsuccessful|[{"input_key": "hostname123", "error": "Example Error Message"}, {"input_key": "hostname456", "error": "Example Error Message 2"}]|
+  
 Example output:
 
 ```
 {
-  "response": {
-    "response": {
-      "data": {
-        "affected": 0
-      }
+  "completed": [
+    "hostname123",
+    "hostname456"
+  ],
+  "failed": [
+    {
+      "error": "Example Error Message",
+      "input_key": "hostname123"
+    },
+    {
+      "error": "Example Error Message 2",
+      "input_key": "hostname456"
     }
-  }
+  ]
+}
+```
+
+#### Run Remote Script
+  
+Run a remote script  
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|ids|[]string|None|False|IDs of the agents to execute the script on. If no IDs provided, the script will run on ALL applicable agents. This id can be retrieved by using the get agent details action if neccessary|None|["100000000000000000"]|
+|input_parameters|string|None|False|Parameters which will be passed to the remote script (may or may not be required, depending on script)|None|input_parameter1|
+|output_destination|string|None|True|Output destination of any script output|['Local', 'None', 'SentinelCloud']|SentinelCloud|
+|output_directory|string|None|False|Output Directory (Only relevant if Local is selected for Output Destination)|None|/tmp/script_output|
+|password|string|None|False|Password (Only relevant if SentinelCloud is selected for Output Destination). At least 10 characters and no whitespace|None|Password123??|
+|script_id|string|None|True|ID of the script to run (select the ID of a SentinelOne or user script from SentinelOne console)|None|1234567891234|
+|task_description|string|None|True|Task Description|None|Task Description|
+|timeout|integer|3600|False|Script runtime timeout (in seconds) for current execution (Value between 60 and 172800 seconds)|None|3600|
+  
+Example input:
+
+```
+{
+  "ids": [
+    "100000000000000000"
+  ],
+  "input_parameters": "input_parameter1",
+  "output_destination": "SentinelCloud",
+  "output_directory": "/tmp/script_output",
+  "password": "Password123??",
+  "script_id": 1234567891234,
+  "task_description": "Task Description",
+  "timeout": 3600
+}
+```
+
+##### Output
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|affected|integer|None|True|Number of entities affected by requested operation. For detailed output from running the script, log onto the SentinelOne console. Note this may be lower than the number of agent ids submitted if the script cannot be run on a particular agent e.g. due to OS type|None|2|
+  
+Example output:
+
+```
+{
+  "affected": 2
 }
 ```
 
@@ -1588,6 +1720,7 @@ Note that retrieving all active agents can return a very large amount of data de
 |operational_state|string|Any|False|Agent operational state|['Any', 'na', 'fully_disabled', 'partially_disabled', 'disabled_error']|na|
 
 Example input:
+
 ```
 {
   "agent": "hostname123",
@@ -1723,6 +1856,7 @@ This trigger is used to get threats.
 |resolved|boolean|None|False|Set True to only trigger on resolved threats|None|True|
 
 Example input:
+
 ```
 {
   "agent_is_active": true,
@@ -1739,94 +1873,93 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description| Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-|----|----|--------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
 |threat|threat_data|False|Threat|{ 'threat': { 'agentComputerName':'vagrant-pc', 'agentDomain':'WORKGROUP', 'agentId':'560700200554747611' }}|
+
 Example output:
 
 ```
 {
-  'threat': {
-    'agentComputerName':'vagrant-pc',
-    'agentDomain':'WORKGROUP',
-    'agentId':'560700200554747611',
-    'agentInfected':False,
-    'agentIp':'xxx.xxx.xxx.xxx',
-    'agentIsActive':True,
-    'agentIsDecommissioned':False,
-    'agentMachineType':'desktop',
-    'agentNetworkStatus':'connected',
-    'agentOsType':'windows',
-    'agentVersion':'3.0.1.3',
-    'annotation':None,
-    'annotationUrl':None,
-    'browserType':None,
-    'certId':'',
-    'classification':'Malware',
-    'classificationSource':'Engine',
-    'classifierName':'BLACKLIST',
-    'cloudVerdict':'black',
-    'collectionId':'433377870883088367',
-    'createdAt':'2019-02-13T15:05:21.948892Z',
-    'createdDate':'2019-02-13T15:05:21.605000Z',
-    'description':'malware detected - not mitigated yet (static engine)',
-    'engines':[
-        'reputation'
+  "threat": {
+    "agentComputerName": "vagrant-pc",
+    "agentDomain": "WORKGROUP",
+    "agentId": "560700200554747611",
+    "agentInfected": false,
+    "agentIp": "xxx.xxx.xxx.xxx",
+    "agentIsActive": true,
+    "agentIsDecommissioned": false,
+    "agentMachineType": "desktop",
+    "agentNetworkStatus": "connected",
+    "agentOsType": "windows",
+    "agentVersion": "3.0.1.3",
+    "annotation": null,
+    "annotationUrl": null,
+    "browserType": null,
+    "certId": "",
+    "classification": "Malware",
+    "classificationSource": "Engine",
+    "classifierName": "BLACKLIST",
+    "cloudVerdict": "black",
+    "collectionId": "433377870883088367",
+    "createdAt": "2019-02-13T15:05:21.948892Z",
+    "createdDate": "2019-02-13T15:05:21.605000Z",
+    "description": "malware detected - not mitigated yet (static engine)",
+    "engines": [
+      "reputation"
     ],
-    'fileContentHash':'3395856ce81f2b7382dee72602f798b642f14140',
-    'fileCreatedDate':None,
-    'fileDisplayName':'{D5EEFA7C-3EA6-4B78-BED3-56CB49156FD1}-EICAR.com',
-    'fileExtensionType':'Executable',
-    'fileIsDotNet':None,
-    'fileIsExecutable':False,
-    'fileIsSystem':False,
-    'fileMaliciousContent':None,
-    'fileObjectId':'49E6C98245C9F0D8',
-    'filePath':'\\Device\\HarddiskVolume2\\ProgramData\\Microsoft\\Windows Defender\\LocalCopy\\{D5EEFA7C-3EA6-4B78-BED3-56CB49156FD1}-EICAR.com',
-    'fileSha256':None,
-    'fileVerificationType':'NotSigned',
-    'fromCloud':False,
-    'fromScan':False,
-    'id':'560707325754496894',
-    'indicators':[
-
-    ],
-    'isCertValid':False,
-    'isInteractiveSession':False,
-    'isPartialStory':False,
-    'maliciousGroupId':'B5930C761E06E0CD',
-    'maliciousProcessArguments':None,
-    'markedAsBenign':None,
-    'mitigationMode':'protect',
-    'mitigationReport':{
-        'kill':{
-          'status':'success'
-        },
-        'network_quarantine':{
-          'status':None
-        },
-        'quarantine':{
-          'status':'success'
-        },
-        'remediate':{
-          'status':None
-        },
-        'rollback':{
-          'status':None
-        }
+    "fileContentHash": "3395856ce81f2b7382dee72602f798b642f14140",
+    "fileCreatedDate": null,
+    "fileDisplayName": "{D5EEFA7C-3EA6-4B78-BED3-56CB49156FD1}-EICAR.com",
+    "fileExtensionType": "Executable",
+    "fileIsDotNet": null,
+    "fileIsExecutable": false,
+    "fileIsSystem": false,
+    "fileMaliciousContent": null,
+    "fileObjectId": "49E6C98245C9F0D8",
+    "filePath": "\\Device\\HarddiskVolume2\\ProgramData\\Microsoft\\Windows Defender\\LocalCopy\\{D5EEFA7C-3EA6-4B78-BED3-56CB49156FD1}-EICAR.com",
+    "fileSha256": null,
+    "fileVerificationType": "NotSigned",
+    "fromCloud": false,
+    "fromScan": false,
+    "id": "560707325754496894",
+    "indicators": [],
+    "isCertValid": false,
+    "isInteractiveSession": false,
+    "isPartialStory": false,
+    "maliciousGroupId": "B5930C761E06E0CD",
+    "maliciousProcessArguments": null,
+    "markedAsBenign": null,
+    "mitigationMode": "protect",
+    "mitigationReport": {
+      "kill": {
+        "status": "success"
+      },
+      "network_quarantine": {
+        "status": null
+      },
+      "quarantine": {
+        "status": "success"
+      },
+      "remediate": {
+        "status": null
+      },
+      "rollback": {
+        "status": null
+      }
     },
-    'mitigationStatus':'mitigated',
-    'publisher':'',
-    'rank':7,
-    'resolved':False,
-    'siteId':'521580416395045459',
-    'siteName':'Rapid7',
-    'threatAgentVersion':'3.0.1.3',
-    'threatName':None,
-    'updatedAt':'2019-02-13T15:05:22.274291Z',
-    'username':'',
-    'whiteningOptions':[
-        'hash'
+    "mitigationStatus": "mitigated",
+    "publisher": "",
+    "rank": 7,
+    "resolved": false,
+    "siteId": "521580416395045459",
+    "siteName": "Rapid7",
+    "threatAgentVersion": "3.0.1.3",
+    "threatName": null,
+    "updatedAt": "2019-02-13T15:05:22.274291Z",
+    "username": "",
+    "whiteningOptions": [
+      "hash"
     ]
   }
 }
@@ -2036,6 +2169,7 @@ For the Trigger settings, only set the Resolved field to False if solely resolve
 
 # Version History
 
+* 8.2.0 - Added new action: Quarantine Multiple
 * 8.1.0 - Added New actions: Fetch file for agent ID and Run remote script. Updated description for Trigger resolved field
 * 8.0.1 - Search Agents: Remove duplicate results when Case Sensitive is false
 * 8.0.0 - Connection: Added Service user (API only user type) authentication | Removed Basic Authentication

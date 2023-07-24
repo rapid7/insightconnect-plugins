@@ -1,11 +1,8 @@
-
-
-
-
 # Description
-  
+
 TheHive is a scalable, open source security incident response solution designed for SOCs & CERTs to collaborate, 
 elaborate, analyze and get their job done
+
 # Key Features
 
 * Retrieve a list of cases or a specific case by ID
@@ -20,13 +17,14 @@ elaborate, analyze and get their job done
 * TheHive username and password
 
 # Supported Product Versions
-  
+
 * 2023-05-17
+
 # Documentation
 
 ## Setup
-  
-The connection configuration accepts the following parameters:  
+
+The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -37,33 +35,36 @@ The connection configuration accepts the following parameters:
 |protocol|string|None|True|HTTP Protocol|['http', 'https']|http|
 |proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|{}|
 |verify|boolean|True|True|Verify the certificate|None|True|
-  
+
 Example input:
 
 ```
 {
   "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
   "credentials": {},
-  "host": "10.3.4.50",
-  "port": "9000",
+  "host": "thehive.company.com or 10.3.4.50",
+  "port": 9000,
   "protocol": "http",
   "proxy": {},
   "verify": true
 }
 ```
+
 ## Technical Details
 
 ### Actions
 
 #### Close Case
+
 Close a case by ID
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |force|boolean|False|False|True to physically delete the case, False to mark the case as delete|None|False|
 |id|string|None|True|ID for the case|None|50|
-  
+
 Example input:
 
 ```
@@ -72,12 +73,13 @@ Example input:
   "id": 50
 }
 ```
+
 ##### Output
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |success|boolean|True|Boolean to indicate if the operation was successful|True|
-  
+
 Example output:
 
 ```
@@ -85,8 +87,11 @@ Example output:
   "success": true
 }
 ```
+
 #### Create Case
+
 Create a new case
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -102,11 +107,10 @@ Create a new case
 |startDate|integer|None|False|Case start date (datetime in ms) (will default to now if left blank)|None|1684170163000|
 |summary|string|None|False|Case summary|None|Case summary|
 |tags|[]string|None|False|List of case tags|None|["case_tag_1", "case_tag_2"]|
-|tasks|itask|None|False|Case task|None|{}|
 |template|string|None|False|Case template's name. If specified then the case is created using the given template|None|Case template name|
 |title|string|None|True|Name of the case|None|Case title|
 |tlp|integer|2|False|Traffic Light Protocol level|[0, 1, 2, 3]|2|
-  
+
 Example input:
 
 ```
@@ -122,18 +126,18 @@ Example input:
   "startDate": 1684170163000,
   "summary": "Case summary",
   "tags": "case_tag_1",
-  "tasks": {},
   "template": "Case template name",
-  "title": "None",
+  "title": "Case title",
   "tlp": 2
 }
 ```
+
 ##### Output
 
 |Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- | :--- | :--- |
 |case|createCase|False|Create case output|{'owner': 'string', 'summary': 'string', 'severity': 2, '_routing': 'case_id', 'flag': False, 'endDate': 1640000000000, 'customFields': {}, '_type': 'case', 'description': 'string', 'title': 'string', 'tags': ['string'], 'createdAt': 1684188238010, '_parent': None, 'createdBy': 'admin', 'caseId': 54, 'tlp': 2, 'metrics': {}, '_id': 'case_id', 'id': 'case_id', '_version': 1, 'pap': 2, 'startDate': 1640000000000, 'status': 'Open'}|
-  
+
 Example output:
 
 ```
@@ -167,8 +171,11 @@ Example output:
   }
 }
 ```
+
 #### Create Observable
+
 Create a new case observable
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -185,7 +192,7 @@ Create a new case observable
 |startDate|integer|None|False|Observable start date (datetime in ms) (will default to now if left blank)|None|1640000000000|
 |tags|[]string|None|False|List of observable tags, required if message is None|None|["tag_one", "tag_two"]|
 |tlp|integer|2|False|Case's TLP|[0, 1, 2, 3]|2|
-  
+
 Example input:
 
 ```
@@ -207,12 +214,13 @@ Example input:
   "tlp": 2
 }
 ```
+
 ##### Output
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |case|observable|False|Create case observable output|{'data': 'Test data for observable', 'datatype': 'domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other', 'id': 'AYgQXmjbfMffAh_St-fk', 'ignoreSimilarity': False, 'ioc': False, 'jsonData': 'json object containing all necessary fields', 'message': 'Observable message', 'pap': 2, 'sighted': False, 'startDate': 1640000000000, 'tags': 'tag_one', 'tlp': 2}|
-  
+
 Example output:
 
 ```
@@ -233,8 +241,11 @@ Example output:
   }
 }
 ```
+
 #### Create Task
+
 Create a new case task
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -247,7 +258,7 @@ Create a new case task
 |startDate|integer|None|False|Task's start date (datetime in ms) (will default to now if left blank)|None|1684170163000|
 |status|string|Waiting|False|Task's status|['Waiting', 'InProgress', 'Cancel', 'Completed']|Waiting|
 |title|string|None|False|Task's title|None|Task title|
-  
+
 Example input:
 
 ```
@@ -262,12 +273,13 @@ Example input:
   "title": "Task title"
 }
 ```
+
 ##### Output
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |case|task|False|Create case task output|{'Created At': {}, 'Created By': {}, 'ID': {}, 'Start Date': 0, 'Type': {}, 'description': {}, 'flag': 'true', 'order': {}, 'owner': {}, 'status': 'Waiting', 'title': {}, 'user': {}}|
-  
+
 Example output:
 
 ```
@@ -283,17 +295,20 @@ Example output:
   "owner": {},
   "status": "Waiting",
   "title": {},
-  "user": {} 
+  "user": {}
 }
 ```
+
 #### Get Case
+
 Retrieve a case by ID
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|string|None|True|ID for the case|None|50|
-  
+
 Example input:
 
 ```
@@ -301,12 +316,13 @@ Example input:
   "id": 50
 }
 ```
+
 ##### Output
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |case|case|True|Get case output|{}|
-  
+
 Example output:
 
 ```
@@ -354,17 +370,21 @@ Example output:
   }
 }
 ```
+
 #### Get Cases
+
 Retrieve list of cases
+
 ##### Input
-  
+
 *This action does not contain any inputs.*
+
 ##### Output
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |success|[]case|False|List of cases|{}|
-  
+
 Example output:
 
 ```
@@ -414,17 +434,21 @@ Example output:
   ]
 }
 ```
+
 #### Get Current User
+
 Get information about the current user
+
 ##### Input
-  
+
 *This action does not contain any inputs.*
+
 ##### Output
 
 |Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- | 
+| :--- | :--- | :--- | :--- | :--- |
 |success|userObject|False|A user object containing all related fields|{}|
-  
+
 Example output:
 
 ```
@@ -432,14 +456,17 @@ Example output:
   "success": {}
 }
 ```
+
 #### Get User by ID
+
 Get information about a specific user
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|string|None|True|The ID of the user|None|50|
-  
+
 Example input:
 
 ```
@@ -447,12 +474,13 @@ Example input:
   "id": 50
 }
 ```
+
 ##### Output
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |success|userObject|False|A user object containing all related fields|{}|
-  
+
 Example output:
 
 ```
@@ -460,26 +488,18 @@ Example output:
   "success": {}
 }
 ```
-### Triggers
-  
-*This plugin does not contain any triggers.*
-### Tasks
-  
-*This plugin does not contain any tasks.*
-### Custom Output Types
-  
-**itask**  
 
-|Name|Type|Default|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- |
-|Description|string|None|True|Task's description|None|
-|Flag|boolean|False|False|Task's flag|None|
-|Case ID|string|None|False|ID for the case|AYgQWIIjfMffAh_St-fd|
-|Task's assignee|string|None|False|Task owner|None|
-|status|string|Waiting|False|Task status|None|
-|Title|string|None|True|Task's title|None|
-  
-**userObject**  
+### Triggers
+
+*This plugin does not contain any triggers.*
+
+### Tasks
+
+*This plugin does not contain any tasks.*
+
+### Custom Types
+
+**userObject**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -496,14 +516,14 @@ Example output:
 |Updated At|integer|None|False|Time the user was updated in milliseconds or epoch|1496561862924|
 |Updated By|string|None|False|Updated by|None|
 |user|string|None|False|User|None|
-  
-**case**  
+
+**case**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Created At|integer|None|False|Datetime in ms the case was created at|None|
 |Created By|string|None|False|Who the case was created by|None|
-|Type|string|None|True|Case type|None|
+|Type|string|None|False|Case type|None|
 |Updated At|integer|None|False|Datetime in ms the case was updated at|None|
 |Updated By|string|None|False|Who the case was updated by|None|
 |Alert Date|integer|None|False|Case alert date (datetime in ms)|None|
@@ -518,7 +538,7 @@ Example output:
 |Extra Data|object|None|False|None|None|
 |Flag|boolean|None|False|Something here|None|
 |Handling Duration|integer|None|False|Case handling duration|None|
-|ID|string|None|True|ID|None|
+|ID|string|None|False|ID|None|
 |Impact Status|string|None|False|None|None|
 |In Progress Date|integer|None|False|None|None|
 |New Date|integer|None|False|None|None|
@@ -538,8 +558,8 @@ Example output:
 |Case title|string|None|False|Title of the case|None|
 |TLP|integer|None|False|Traffic Light Protocol level|None|
 |User Permissions|[]string|None|False|A list of permissions the current user has access on the case|None|
-  
-**createCase**  
+
+**createCase**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -561,8 +581,8 @@ Example output:
 |Tasks|[]string|None|False|Tasks to create. If null, tasks from the case template will be used|None|
 |Title|string|None|True|Case title|None|
 |Traffic Light Protocol|integer|2|False|Case traffic light protocol|None|
-  
-**task**  
+
+**task**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -578,8 +598,8 @@ Example output:
 |status|string|None|False|Task status|None|
 |title|string|None|None|Task title|None|
 |user|string|None|None|Task user|None|
-  
-**observable**  
+
+**observable**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -605,6 +625,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.0 - Added additional error handling for issues that occur outside the expected status codes | Action: `create_case` remade to not include task input
 * 3.0.0 - Refactored plugin | Removed `thehive4py` dependency | Action: Split `get_user` into two new actions, `get_user_by_id` & `get_current_user`
 * 2.0.5 - New spec and help.md format for the Extension Library. Update help key features and fix description capitalisation
 * 2.0.4 - Update to use the `komand/python-2-27-slim-plugin` Docker image to reduce plugin size and to support SSL Verify

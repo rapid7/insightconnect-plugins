@@ -9,7 +9,7 @@ from komand_thehive.actions.create_case_observable import CreateCaseObservable
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from parameterized import parameterized
-from unit_test.mock import (
+from mock import (
     Util,
     mocked_request,
     mock_request_200,
@@ -19,7 +19,7 @@ from unit_test.mock import (
     mock_request_404,
     mock_request_500,
 )
-from unit_test.constants import STUB_OBSERVABLE
+from constants import STUB_OBSERVABLE
 
 
 class TestCreateCaseObservable(TestCase):

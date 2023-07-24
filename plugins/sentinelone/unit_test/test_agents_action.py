@@ -1,14 +1,16 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from unittest import TestCase
 from unittest.mock import patch
+
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_sentinelone.actions.agents_action import AgentsAction
 from komand_sentinelone.actions.agents_action.schema import Input
-from insightconnect_plugin_runtime.exceptions import PluginException
-from unit_test.util import Util
-from unittest import TestCase
+
+from util import Util
 
 
 class TestAgentsAction(TestCase):

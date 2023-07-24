@@ -51,6 +51,15 @@ class Util:
                 else:
                     raise Exception("Error")
 
+        if kwargs.get("url") == "https://example.com/api/3/sites/100/scans":
+            return MockResponse("scan_invalid_site_id", 404)
+        if kwargs.get("url") == "https://example.com/api/3/sites/1/scans":
+            if kwargs.get("json") == {"hosts": ["198.51.100.1"]}:
+                return MockResponse("scan1", 200)
+            if kwargs.get("params") == [("overrideBlackout", False)]:
+                return MockResponse("scan1", 200)
+            if kwargs.get("params") == [("overrideBlackout", True)]:
+                return MockResponse("scan2", 200)
         if kwargs.get("url") == "https://example.com/api/3/reports?page=0&size=10&sort=ASC":
             return MockResponse("list_reports", 200)
         if kwargs.get("url") == "https://example.com/api/3/reports?page=1&size=10&sort=ASC":

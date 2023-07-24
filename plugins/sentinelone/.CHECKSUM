@@ -1,131 +1,135 @@
 {
-	"spec": "5f858669b0d3da01f0a237c63c0f4fba",
-	"manifest": "95e7567d224e0330006c817ebd9ad6df",
-	"setup": "ab1a8d52a10a5304ede6877740364166",
+	"spec": "45af8f51bd94bb899f53e934d06c073b",
+	"manifest": "c8ae36589559d169d44297aebe309c6d",
+	"setup": "3b1e7a0204151d4155a8dd5170f5df4d",
 	"schemas": [
 		{
 			"identifier": "activities_list/schema.py",
-			"hash": "d6bc96e509a9b88108c8ae30b092c39c"
+			"hash": "07a38a2f59ad8def372d4427e5419d1b"
 		},
 		{
 			"identifier": "activities_types/schema.py",
-			"hash": "a7909502f3b3b35ea2deb9885adf5809"
+			"hash": "2b2a259e31db6ad4370d9ee7ed48da29"
 		},
 		{
 			"identifier": "agents_action/schema.py",
-			"hash": "e58aebdaefdb6610c8a7550f7f16a967"
+			"hash": "babbb73c610cf7ccd5d95ae18d21a421"
 		},
 		{
 			"identifier": "agents_reload/schema.py",
-			"hash": "7fcc3b057529e4b7b6f81f0d2e63bd2a"
+			"hash": "638a85eb7db83565e32ab54ca631e1f5"
 		},
 		{
 			"identifier": "agents_summary/schema.py",
-			"hash": "6586d52d0aa5c344df97c2d308057dfe"
+			"hash": "4625a09b4e789a91eee449e949d4e047"
 		},
 		{
 			"identifier": "apps_by_agent_ids/schema.py",
-			"hash": "5acb77104723a6d43853f56d5ae058d4"
+			"hash": "4c83e4290bd1d181520dc35b970ab71c"
 		},
 		{
 			"identifier": "blacklist/schema.py",
-			"hash": "eee49108f67a93973575f26805ad4860"
+			"hash": "9ef96f54d09465b8c8c3d3a023e87a0b"
 		},
 		{
 			"identifier": "blacklist_by_content_hash/schema.py",
-			"hash": "8ae45aa8f56fc5c2dd177f8e5fbac025"
+			"hash": "9337062177081d5d1cf120811d8ae942"
 		},
 		{
 			"identifier": "cancel_running_query/schema.py",
-			"hash": "b6a9db3058cb603e084dbcc9f6461338"
+			"hash": "b825d47a372cc5f7dfe7763704115ae1"
 		},
 		{
 			"identifier": "create_ioc_threat/schema.py",
-			"hash": "d871e78b6173bb3fe5c38a148d8958e4"
+			"hash": "ecff632e797020940a7e61911b97dd9e"
 		},
 		{
 			"identifier": "create_query/schema.py",
-			"hash": "840a72a7b27dae0d743bf821591a42ed"
+			"hash": "621a536d5fe0f84c6a27bb62766f7473"
 		},
 		{
 			"identifier": "disable_agent/schema.py",
-			"hash": "466a22dd303aecf7be285f3f0a864850"
+			"hash": "139479deab7dfddc9a56e03fef746423"
 		},
 		{
 			"identifier": "enable_agent/schema.py",
-			"hash": "869fcc6f561d28e0c013c05bf283774a"
+			"hash": "87c6e0e6fed9fa3c822a243a03ad681d"
 		},
 		{
 			"identifier": "fetch_file_by_agent_id/schema.py",
-			"hash": "53cbaea2ad5b577a80ebddb22b2c26b6"
+			"hash": "5b4a179b887d50c907b3f1bd45031eea"
 		},
 		{
 			"identifier": "get_agent_details/schema.py",
-			"hash": "4f59cab298d3fef23dfe89b7c78ecbbd"
+			"hash": "7c423d3a10a88bd3bb4db57c561e4713"
 		},
 		{
 			"identifier": "get_events/schema.py",
-			"hash": "85383ee54c4f4caff6388c9ad46a99cb"
+			"hash": "69361c4b83ac02875e916e553587a658"
 		},
 		{
 			"identifier": "get_events_by_type/schema.py",
-			"hash": "f942122b93f47e4d0f2064f7fc1a7e2e"
+			"hash": "e35d4d9ea29fe4ed4157c36d459eeb94"
 		},
 		{
 			"identifier": "get_query_status/schema.py",
-			"hash": "fb8645d5c03c5399bdeae1faf718c60f"
+			"hash": "8e646ab9dfd1885d6ab97fcacf4467e5"
 		},
 		{
 			"identifier": "get_threat_summary/schema.py",
-			"hash": "fe17f966cc3c889c5c7984e11d85a92c"
+			"hash": "3c92c0ce4791f8fe60b956e2a46abfe5"
 		},
 		{
 			"identifier": "mark_as_benign/schema.py",
-			"hash": "45e62084a8120b38572aa5a20ff1af53"
+			"hash": "9b661d205f0fb04989cbe4e633003491"
 		},
 		{
 			"identifier": "mark_as_threat/schema.py",
-			"hash": "a9e71f0e1b4ad74742654a59c03c5864"
+			"hash": "c0b1d9103be729b51385b3d9537e7d66"
 		},
 		{
 			"identifier": "mitigate_threat/schema.py",
-			"hash": "4ee6eb53560ca716ab85d7f6480b6e7c"
+			"hash": "98f66c2c3670975ac922b241abc388f8"
 		},
 		{
 			"identifier": "name_available/schema.py",
-			"hash": "118b7c643b37160c30b2ac85a3be3d98"
+			"hash": "9060e95d03e4704f754f1ddf96967b53"
 		},
 		{
 			"identifier": "quarantine/schema.py",
-			"hash": "8ff2f97296bf2cbda86dca06df33a036"
+			"hash": "82a0fd39aac0b9a6a8015279e3ceb41d"
+		},
+		{
+			"identifier": "quarantine_multiple/schema.py",
+			"hash": "8ce6455fdaee44c703e0308e436e0904"
 		},
 		{
 			"identifier": "run_remote_script/schema.py",
-			"hash": "9c1378ff7b9f34ec0f8a9f77444416b8"
+			"hash": "46f2be3582fec65fbe35e37010039144"
 		},
 		{
 			"identifier": "search_agents/schema.py",
-			"hash": "8be621b7bac5d5163e1606fd5c909173"
+			"hash": "67b5a683c76d70a2a68cd1678eb8780e"
 		},
 		{
 			"identifier": "threats_fetch_file/schema.py",
-			"hash": "633d155fcfac75bfb77d446a961cb62e"
+			"hash": "80272ca9b306bfb8500434cad3836f4b"
 		},
 		{
 			"identifier": "update_analyst_verdict/schema.py",
-			"hash": "7314acbe634d3d365a140ee254367547"
+			"hash": "e2d4d3a66ac719c4d24c32aacb7c834c"
 		},
 		{
 			"identifier": "update_incident_status/schema.py",
-			"hash": "bf7e8fa3a099c80f3772b72515d7a84e"
+			"hash": "559688414d98514c0bcfd1d7932d6b2e"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "6dafbdd14236cdf990b28102afbec625"
+			"hash": "30b337b799419c700527460906da12be"
 		},
 		{
 			"identifier": "get_threats/schema.py",
-			"hash": "dd29361ebe31f3a6e85282fd9003d803"
+			"hash": "331b5c891ba26f92af1e05c035c9b750"
 		}
 	]
 }
