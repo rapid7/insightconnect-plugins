@@ -27,7 +27,8 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
             state=MonitorUsersState(),
         )
 
-    def run(self, params={}, state={}):  # pylint: disable=unused-argument
+    # pylint: disable=unused-argument
+    def run(self, params={}, state={}):  # noqa: C901
         has_more_pages = False
         now = self.get_current_time()
         get_users = False
