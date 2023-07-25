@@ -32,7 +32,6 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
     # pylint: disable=unused-argument
     def run(self, params={}, state={}):  # noqa: C901
-        self.connection.admin_api.toggle_rate_limiting = False
         has_more_pages = False
         get_next_page = False
         try:
