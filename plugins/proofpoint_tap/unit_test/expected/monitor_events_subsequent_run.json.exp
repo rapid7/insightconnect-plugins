@@ -59,12 +59,12 @@
   ],
   "state": {
     "last_collection_date": "2023-04-04T07:59:00+00:00",
-    "status_code": 200,
     "next_page_index": 1,
     "previous_logs_hashes": [
       "1604441c3c213eb3d2efc9557cae93a5796fa5a8",
       "922322e2f2f10345c3ea5c06d87b73c5ab13f945"
     ]
   },
-  "hasMorePages": true
+  "hasMorePages": true,
+  "status_code": 200
 }

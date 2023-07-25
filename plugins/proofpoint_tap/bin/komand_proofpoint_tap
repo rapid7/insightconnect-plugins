@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Proofpoint TAP"
 Vendor = "rapid7"
-Version = "4.0.0"
+Version = "4.1.0"
 Description = "Parse Proofpoint Targeted Attack Protection (TAP) alerts"
 
 
