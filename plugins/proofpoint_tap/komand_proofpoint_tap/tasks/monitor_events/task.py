@@ -27,7 +27,6 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
         )
 
     def run(self, params={}, state={}):  # pylint: disable=unused-argument
-        self.connection.client.toggle_rate_limiting = False
         has_more_pages = False
         try:
             last_collection_date = state.get(self.LAST_COLLECTION_DATE)
