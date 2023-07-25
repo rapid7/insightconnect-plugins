@@ -80,7 +80,7 @@
     ],
     "previous_trust_monitor_event_hashes": [
       "22b005c5642c29f511bab4017015b6348c88cca5"
-    ],
-    "status_code": 200
-  }
+    ]
+  },
+  "status_code": 200
 }

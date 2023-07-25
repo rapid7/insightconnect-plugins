@@ -88,12 +88,12 @@
     "previous_trust_monitor_event_hashes": [
       "65f48616e40fc6035c4a170c5b757e2e3f26e37d"
     ],
-    "status_code": 200,
     "trust_monitor_next_page_params": {
       "limit": "200",
       "maxtime": "1682930026000",
       "mintime": "1682843686000",
       "offset": "1591014"
      }
-  }
+  },
+  "status_code": 200
 }
