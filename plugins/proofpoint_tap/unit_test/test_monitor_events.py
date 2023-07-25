@@ -2,7 +2,8 @@ import sys
 import os
 
 from unittest.mock import patch
-from komand_proofpoint_tap.tasks.monitor_events.task import MonitorEvents
+
+from komand_proofpoint_tap.tasks import MonitorEvents
 from test_util import Util
 from unittest import TestCase
 from parameterized import parameterized
@@ -62,6 +63,6 @@ class TestMonitorEvents(TestCase):
         ]
     )
     def test_monitor_events(self, mock_request, mock_get_time, test_name, current_state, expected):
-        actual, actual_state, has_more_pages = self.action.run(state=current_state)
+        actual, actual_state, has_more_pages, status_code, error = self.action.run(state=current_state)
         self.assertEqual(actual, expected.get("events"))
         self.assertEqual(actual_state, expected.get("state"))
