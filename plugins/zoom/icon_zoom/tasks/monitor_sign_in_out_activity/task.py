@@ -16,12 +16,23 @@ from icon_zoom.util.api import AuthenticationRetryLimitError, AuthenticationErro
 from icon_zoom.util.event import Event
 
 
+class TaskOutput:
+    def __init__(
+        self, output: [Event], state: dict, has_more_pages: bool, status_code: int, error: Optional[PluginException]
+    ):
+        self.output = output
+        self.state = state
+        self.has_more_pages = has_more_pages
+        self.status_code = status_code
+        self.error = error
+
+
 class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     LAST_REQUEST_TIMESTAMP = "last_request_timestamp"
     BOUNDARY_EVENTS = "boundary_events"
     LATEST_EVENT_TIMESTAMP = "latest_event_timestamp"
     STATUS_CODE = "status_code"
-    LAST_PAGE = "last_page"
+    NEXT_PAGE_TOKEN = "next_page_token"
 
     ZOOM_TIME_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
@@ -56,26 +67,33 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     def run(self, params={}, state={}):
         try:
             # Check if first run
-            if not state.get(self.LAST_REQUEST_TIMESTAMP):
+            # First run is either NO timestamp for last request, OR no timestamp for last request BUT a next page token
+            # exists, which means it is continuation of a first run
+            if not state.get(self.LAST_REQUEST_TIMESTAMP) or (
+                not state.get(self.LAST_REQUEST_TIMESTAMP) and state.get(self.NEXT_PAGE_TOKEN)
+            ):
                 self.logger.info("First run")
-                output, new_state, has_more_pages, status_code, error = self.first_run(state=state)
+                task_output: TaskOutput = self.first_run(state=state)
             else:
                 # Subsequent run
                 self.logger.info("Subsequent run")
-                output, new_state, has_more_pages, status_code, error = self.subsequent_run(state=state)
+                task_output: TaskOutput = self.subsequent_run(state=state)
 
             # Turn events list back into a list of dicts
-            output = [event.__dict__ for event in output]
-            return output, new_state, has_more_pages, status_code, error
+            output = [event.__dict__ for event in task_output.output]
+            return output, task_output.state, task_output.has_more_pages, task_output.status_code, task_output.error
 
         except Exception as error:
             self.logger.error(f"Unhandled exception occurred during {self.name} task: {error}")
             return [], {}, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
-    def first_run(self, state: dict) -> ([dict], dict, bool):
+    def first_run(self, state: dict) -> TaskOutput:
         # Get time boundaries for first event set
         now = self._get_datetime_now()
         last_24_hours = self._get_datetime_last_24_hours()
+
+        # Default has_more_pages for external pagination to False
+        has_more_pages = False
 
         # now_for_zoom is the start time for the Zoom API but also used to track requests across task runs via state
         now_for_zoom = self._format_datetime_for_zoom(dt=now)
@@ -84,9 +102,17 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         # Get fully consumed paginated event set, using previous run latest event time
         try:
             self.logger.info(f"Getting events from {last_24_hours_for_zoom} until {now_for_zoom}")
-            new_events, has_more_pages = self.connection.zoom_api.get_user_activity_events_task(
-                start_date=last_24_hours_for_zoom, end_date=now_for_zoom, page_size=1000
+
+            # Call API, returning any new events and pagination token if present
+            new_events, pagination_token = self.connection.zoom_api.get_user_activity_events_task(
+                start_date=last_24_hours_for_zoom,
+                end_date=now_for_zoom,
+                page_size=1000,
+                next_page_token=state.get(self.NEXT_PAGE_TOKEN),
             )
+            if pagination_token:
+                has_more_pages = True
+
         except (AuthenticationRetryLimitError, AuthenticationError) as error:
             self.logger.error(
                 f"{self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE} "
@@ -94,17 +120,17 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 if isinstance(error, AuthenticationRetryLimitError)
                 else self.AUTHENTICATION_ERROR_MESSAGE
             )
-            return (
-                [],
-                {
+            return TaskOutput(
+                output=[],
+                state={
                     self.BOUNDARY_EVENTS: [],
                     self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                     self.LATEST_EVENT_TIMESTAMP: None,
-                    self.LAST_PAGE: False,
+                    self.NEXT_PAGE_TOKEN: None,
                 },
-                False,
-                401,
-                PluginException(
+                has_more_pages=False,
+                status_code=401,
+                error=PluginException(
                     cause=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE,
                     assistance=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE,
                 ),
@@ -113,38 +139,38 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             # Add additional information to aid customer if correct permissions are not set in the Zoom App
             if "Invalid access token, does not contain scope" in error.data:
                 self.logger.error(self.PERMISSIONS_ERROR_MESSAGE)
-                return (
-                    [],
-                    {
+                return TaskOutput(
+                    output=[],
+                    state={
                         self.BOUNDARY_EVENTS: [],
                         self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                         self.LATEST_EVENT_TIMESTAMP: None,
-                        self.LAST_PAGE: False,
+                        self.NEXT_PAGE_TOKEN: None,
                     },
-                    False,
-                    403,
-                    PluginException(
+                    has_more_pages=False,
+                    status_code=403,
+                    error=PluginException(
                         cause="Insufficient permissions.", assistance=self.PERMISSIONS_ERROR_MESSAGE, data=error.data
                     ),
                 )
             else:
-                raise
+                raise  # TODO: Do we need to do something else here?
 
         try:
             new_events = sorted([Event(**event) for event in new_events], reverse=True)
         except TypeError as error:
             self.logger.error(f"Zoom API endpoint output has changed, unable to parse events: {error}")
-            return (
-                [],
-                {
+            return TaskOutput(
+                output=[],
+                state={
                     self.BOUNDARY_EVENTS: [],
                     self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                     self.LATEST_EVENT_TIMESTAMP: None,
-                    self.LAST_PAGE: False,
+                    self.NEXT_PAGE_TOKEN: None,
                 },
-                False,
-                500,
-                PluginException(
+                has_more_pages=False,
+                status_code=500,
+                error=PluginException(
                     cause=self.API_CHANGED_ERROR_MESSAGE_CAUSE, assistance=self.API_CHANGED_ERROR_MESSAGE_ASSISTANCE
                 ),
             )
@@ -161,40 +187,46 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             )
         except IndexError:
             self.logger.info("Unable to get latest event time, no new events found!")
-            return (
-                [],
-                {
+            return TaskOutput(
+                output=[],
+                state={
                     self.BOUNDARY_EVENTS: [],
                     self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                     self.LATEST_EVENT_TIMESTAMP: None,
-                    self.LAST_PAGE: False,
+                    self.NEXT_PAGE_TOKEN: None,
                 },
-                False,
-                200,
-                None,
+                has_more_pages=False,
+                status_code=200,
+                error=None,
             )
 
         # update state
         state[self.BOUNDARY_EVENTS] = boundary_event_hashes
         state[self.LAST_REQUEST_TIMESTAMP] = now_for_zoom
         state[self.LATEST_EVENT_TIMESTAMP] = new_latest_event_time
-        state[self.LAST_PAGE] = not has_more_pages
+        state[self.NEXT_PAGE_TOKEN] = pagination_token
 
         self.logger.info(f"Updated state, state is now: {state}")
-        return new_events, state, has_more_pages, 200, None
+        return TaskOutput(output=new_events, state=state, has_more_pages=has_more_pages, status_code=200, error=None)
 
-    def subsequent_run(self, state: dict) -> ([dict], dict, bool):
+    def subsequent_run(self, state: dict) -> TaskOutput:
         # now_for_zoom is the start time for the Zoom API but also used to track requests across task runs via state
         now = self._get_datetime_now()
         now_for_zoom = self._format_datetime_for_zoom(dt=now)
         last_request_timestamp = state.get(self.LAST_REQUEST_TIMESTAMP)
+
+        # Default has_more_pages for external pagination to False
+        has_more_pages = False
 
         # Get first set of events, fully consumed pagination
         try:
             # Get fully consumed paginated event set, using previous run latest event time
             self.logger.info(f"Getting events from {last_request_timestamp} until {now_for_zoom}")
             new_events, has_more_pages = self.connection.zoom_api.get_user_activity_events_task(
-                start_date=last_request_timestamp, end_date=now_for_zoom, page_size=1000
+                start_date=last_request_timestamp,
+                end_date=now_for_zoom,
+                page_size=1000,
+                next_page_token=state.get(self.NEXT_PAGE_TOKEN),
             )
         except (AuthenticationRetryLimitError, AuthenticationError) as error:
             self.logger.error(
@@ -203,17 +235,17 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 if isinstance(error, AuthenticationRetryLimitError)
                 else self.AUTHENTICATION_ERROR_MESSAGE
             )
-            return (
-                [],
-                {
+            return TaskOutput(
+                output=[],
+                state={
                     self.BOUNDARY_EVENTS: [],
                     self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                     self.LATEST_EVENT_TIMESTAMP: None,
-                    self.LAST_PAGE: False,
+                    self.NEXT_PAGE_TOKEN: False,
                 },
-                False,
-                401,
-                PluginException(
+                has_more_pages=False,
+                status_code=401,
+                error=PluginException(
                     cause=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE,
                     assistance=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE,
                 ),
@@ -222,17 +254,17 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             # Add additional information to aid customer if correct permissions are not set in the Zoom App
             if "Invalid access token, does not contain scope" in error.data:
                 self.logger.error(self.PERMISSIONS_ERROR_MESSAGE)
-                return (
-                    [],
-                    {
+                return TaskOutput(
+                    output=[],
+                    state={
                         self.BOUNDARY_EVENTS: [],
                         self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                         self.LATEST_EVENT_TIMESTAMP: None,
-                        self.LAST_PAGE: False,
+                        self.NEXT_PAGE_TOKEN: False,
                     },
-                    False,
-                    403,
-                    PluginException(
+                    has_more_pages=False,
+                    status_code=403,
+                    error=PluginException(
                         cause="Insufficient permissions.", assistance=self.PERMISSIONS_ERROR_MESSAGE, data=error.data
                     ),
                 )
@@ -242,17 +274,17 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             new_events = sorted([Event(**event) for event in new_events], reverse=True)
         except TypeError as error:
             self.logger.error(f"Zoom API endpoint output has changed, unable to parse events: {error}")
-            return (
-                [],
-                {
+            return TaskOutput(
+                output=[],
+                state={
                     self.BOUNDARY_EVENTS: [],
                     self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                     self.LATEST_EVENT_TIMESTAMP: None,
-                    self.LAST_PAGE: False,
+                    self.NEXT_PAGE_TOKEN: False,
                 },
-                False,
-                500,
-                PluginException(
+                has_more_pages=False,
+                status_code=500,
+                error=PluginException(
                     cause=self.API_CHANGED_ERROR_MESSAGE_CAUSE, assistance=self.API_CHANGED_ERROR_MESSAGE_ASSISTANCE
                 ),
             )
@@ -265,17 +297,17 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             self.logger.info(f"Latest event time is: {new_latest_event.time}")
         except IndexError:
             self.logger.info("Unable to get latest event time, no new events found!")
-            return (
-                [],
-                {
+            return TaskOutput(
+                output=[],
+                state={
                     self.BOUNDARY_EVENTS: [],
                     self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                     self.LATEST_EVENT_TIMESTAMP: None,
-                    self.LAST_PAGE: False,
+                    self.NEXT_PAGE_TOKEN: False,
                 },
-                False,
-                200,
-                None,
+                has_more_pages=False,
+                status_code=200,
+                error=None,
             )
 
         # De-dupe events using boundary event hashes from previous run
@@ -299,10 +331,12 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         state[self.BOUNDARY_EVENTS] = boundary_event_hashes
         state[self.LAST_REQUEST_TIMESTAMP] = now_for_zoom
         state[self.LATEST_EVENT_TIMESTAMP] = new_latest_event.time
-        state[self.LAST_PAGE] = not has_more_pages
+        state[self.NEXT_PAGE_TOKEN] = not has_more_pages
 
         self.logger.info(f"Updated state, state is now: {state}")
-        return deduped_events, state, has_more_pages, 200, None
+        return TaskOutput(
+            output=deduped_events, state=state, has_more_pages=has_more_pages, status_code=200, error=None
+        )
 
     @staticmethod
     def _dedupe_events(
