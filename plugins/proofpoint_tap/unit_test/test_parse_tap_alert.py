@@ -1,11 +1,13 @@
-import sys
 import os
+import sys
 from unittest import TestCase
-from komand_proofpoint_tap.actions.parse_tap_alert import ParseTapAlert
-from test_util import Util
+
 from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
+
+from komand_proofpoint_tap.actions import ParseTapAlert
+from test_util import Util
 
 
 class TestParseTapAlert(TestCase):
