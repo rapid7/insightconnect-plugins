@@ -266,18 +266,18 @@ class ZoomAPI:
 
     @staticmethod
     def get_exception_for_rate_limit(response: Response) -> PluginException:
-        rate_limit_type = response.headers.get("X-RateLimit-Type", "")
-        rate_limit_limit = response.headers.get("X-RateLimit-Limit")
-        rate_limit_remaining = response.headers.get("X-RateLimit-Remaining")
+        rate_limit_category = response.headers.get("x-ratelimit-category", "")
+        rate_limit_limit = response.headers.get("x-ratelimit-limit")
+        rate_limit_remaining = response.headers.get("x-ratelimit-remaining")
         rate_limit_retry_after = response.headers.get("Retry-After")
 
-        if rate_limit_type == "Light":
+        if rate_limit_category == "Light":
             return PluginException(
                 cause="Account is rate-limited by the maximum per-second limit for this API.",
                 assistance="Try again later.",
             )
 
-        if rate_limit_type == "Heavy":
+        if rate_limit_category == "Heavy":
             return PluginException(
                 cause=f"Account is rate-limited by the maximum daily limit for this API "
                 f"(limit: {rate_limit_limit} calls per day, {rate_limit_remaining} remaining.)",

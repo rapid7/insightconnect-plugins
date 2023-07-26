@@ -32,7 +32,11 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     BOUNDARY_EVENTS = "boundary_events"
     LATEST_EVENT_TIMESTAMP = "latest_event_timestamp"
     STATUS_CODE = "status_code"
+
+    # Constants related to pagination
     NEXT_PAGE_TOKEN = "next_page_token"
+    PARAM_START_DATE = "param_start_date"
+    PARAM_END_DATE = "param_end_date"
 
     ZOOM_TIME_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
@@ -88,16 +92,22 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return [], {}, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def first_run(self, state: dict) -> TaskOutput:
-        # Get time boundaries for first event set
-        now = self._get_datetime_now()
-        last_24_hours = self._get_datetime_last_24_hours()
-
         # Default has_more_pages for external pagination to False
         has_more_pages = False
 
-        # now_for_zoom is the start time for the Zoom API but also used to track requests across task runs via state
-        now_for_zoom = self._format_datetime_for_zoom(dt=now)
-        last_24_hours_for_zoom = self._format_datetime_for_zoom(dt=last_24_hours)
+        # If a next_page_token is present, then we need to re-use the previous request parameter timestamps in order
+        # to correctly get the next page set(s)
+        if state.get(self.NEXT_PAGE_TOKEN):
+            last_24_hours_for_zoom = state.get(self.PARAM_START_DATE)
+            now_for_zoom = state.get(self.PARAM_END_DATE)
+        else:
+            # Get time boundaries for first event set
+            now = self._get_datetime_now()
+            last_24_hours = self._get_datetime_last_24_hours()
+
+            # now_for_zoom is the start time for the Zoom API but also used to track requests across task runs via state
+            now_for_zoom = self._format_datetime_for_zoom(dt=now)
+            last_24_hours_for_zoom = self._format_datetime_for_zoom(dt=last_24_hours)
 
         # Get fully consumed paginated event set, using previous run latest event time
         try:
