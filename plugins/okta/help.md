@@ -1604,7 +1604,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
-* 4.1.0 - New action Get User Groups
+* 4.1.0 - New action Get User Groups | Update to latest SDK version
 * 4.0.0 - Add Monitor Logs task | Code refactor | Update plugin to be cloud enabled
 * 3.6.3 - Add Reset Password action
 * 3.5.3 - Correct spelling in help.md

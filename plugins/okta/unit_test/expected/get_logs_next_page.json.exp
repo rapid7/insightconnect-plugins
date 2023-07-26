@@ -71,8 +71,8 @@
     }
   ],
   "state": {
-    "last_collection_timestamp": "2023-04-27T08:34:46",
-    "status_code": 200
+    "last_collection_timestamp": "2023-04-27T08:34:46"
   },
-  "has_more_pages": false
+  "has_more_pages": false,
+  "status_code": 200
 }
