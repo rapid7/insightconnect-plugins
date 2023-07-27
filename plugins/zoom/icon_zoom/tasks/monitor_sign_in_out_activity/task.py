@@ -117,9 +117,10 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         end_date_params = {
             RunState.starting: last_day,
             RunState.paginating: state.get(self.PARAM_END_DATE),
-            RunState.continuing: state.get(self.PARAM_END_DATE)  # should be "now" if continuing
+            RunState.continuing: state.get(self.PARAM_END_DATE, now)  # should be last request timestamp if coming from end of pagination, otherwise default to now
         }
         rs = self.determine_runstate(state=state)
+        self.logger.info(f"Current runstate is: {rs.value}")
 
         param_request_start_date = start_date_params[rs]
         param_request_end_date = end_date_params[rs]
@@ -137,16 +138,20 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         except Exception as exception:
             return self.handle_request_exception(exception=exception, now=now)
 
+        # Depending on if we get a pagination token, we need to either persist our current query OR reset it
         if pagination_token:
-            self.logger.info("Pagination token returned by Zoom API")
+            self.logger.info("Pagination token returned by Zoom API - storing pagination info")
             has_more_pages = True
             state[self.NEXT_PAGE_TOKEN] = pagination_token
+            state[self.PARAM_START_DATE] = param_request_start_date
+            state[self.PARAM_END_DATE] = param_request_end_date
         else:
             self.logger.info("No pagination token returned by Zoom API - all pages have been consumed")
             has_more_pages = False
-            # If we were previously paginating, we need to reset the pagination token in state
             if rs == rs.paginating:
                 state[self.NEXT_PAGE_TOKEN] = None
+                state[self.PARAM_START_DATE] = None
+                state[self.PARAM_END_DATE] = None
 
         try:
             new_events = sorted([Event(**event) for event in new_events], reverse=True)
@@ -158,12 +163,12 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         self.logger.info(f"Got {len(new_events)} raw events from Zoom (pre-deduping)!")
         try:
             latest_event = new_events[0]
-            self.logger(f"Latest event from raw event set is {latest_event.time}")
+            self.logger.info(f"Latest event from raw event set is {latest_event.time}")
         except IndexError:
             self.logger.info("Unable to get latest event time, no new events found!")
             return self.handle_no_new_events_found(now=now)
 
-        # RunState requires de-duping
+        # RunState of 'continuing' requires de-duping
         if rs == rs.continuing:
             self.logger.info("Event set requires de-duping")
             # De-dupe events using boundary event hashes from previous run
@@ -175,6 +180,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             self.logger.info(f"After de-duping, total event count is {len(deduped_events)}")
             new_events = deduped_events
 
+        # Calculate boundary hashes for deduping, only needed
         boundary_event_hashes: [str] = []
         if len(new_events) > 0:
             boundary_event_hashes = self._get_boundary_event_hashes(
