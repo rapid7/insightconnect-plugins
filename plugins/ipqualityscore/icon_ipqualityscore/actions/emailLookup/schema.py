@@ -49,7 +49,7 @@ class EmailLookupInput(insightconnect_plugin_runtime.Input):
     "abuse_strictness": {
       "type": "integer",
       "title": "Abuse Strictness",
-      "description": "Set the strictness level for machine learning pattern recognition of abusive email addresses with the \\"recent_abuse\\" data point.",
+      "description": "Set the strictness level for machine learning pattern recognition of abusive email addresses with the recent_abuse data point",
       "default": 0,
       "enum": [
         0,
@@ -67,21 +67,21 @@ class EmailLookupInput(insightconnect_plugin_runtime.Input):
     "fast": {
       "type": "boolean",
       "title": "Fast",
-      "description": "When this parameter is enabled our API will not perform an SMTP check with the mail service provider, which greatly increases the API speed.",
+      "description": "When this parameter is enabled our API will not perform an SMTP check with the mail service provider, which greatly increases the API speed",
       "default": false,
       "order": 3
     },
     "suggest_domain": {
       "type": "boolean",
       "title": "Suggest Domain",
-      "description": "Force analyze if the email addresses domain has a typo and should be corrected to a popular mail service.",
+      "description": "Force analyze if the email addresses domain has a typo and should be corrected to a popular mail service",
       "default": false,
       "order": 5
     },
     "timeout": {
       "type": "integer",
-      "title": "timeout",
-      "description": "Maximum number of seconds to wait for a reply from a mail service provider. If your implementation requirements do not need an immediate response, we recommend bumping this value to 20.",
+      "title": "Timeout",
+      "description": "Maximum number of seconds to wait for a reply from a mail service provider If your implementation requirements do not need an immediate response, we recommend bumping this value to 20",
       "order": 4
     }
   },
@@ -105,127 +105,127 @@ class EmailLookupOutput(insightconnect_plugin_runtime.Output):
     "catch_all": {
       "type": "boolean",
       "title": "Catch All",
-      "description": "Is this email likely to be a \\"catch all\\" where the mail server verifies all emails tested against it as valid? It is difficult to determine if the address is truly valid in these scenarios, since the email's server will not confirm the account's status.",
+      "description": "Is this email likely to be a catch all where the mail server verifies all emails tested against it as valid? It is difficult to determine if the address is truly valid in these scenarios, since the email's server will not confirm the account's status",
       "order": 13
     },
     "common": {
       "type": "boolean",
       "title": "Common",
-      "description": "Is this email from a common email provider? (\\"gmail.com\\", \\"yahoo.com\\", \\"hotmail.com\\", etc.)",
+      "description": "Is this email from a common email provider?",
       "order": 7
     },
     "deliverability": {
       "type": "string",
       "title": "Deliverability",
-      "description": "How likely is this email to be delivered to the user and land in their mailbox. Values can be \\"high\\", \\"medium\\", or \\"low\\".",
+      "description": "How likely is this email to be delivered to the user and land in their mailbox Values can be high, medium, or low",
       "order": 10
     },
     "disposable": {
       "type": "boolean",
       "title": "Disposable",
-      "description": "Is this email suspected of belonging to a temporary or disposable mail service? Usually associated with fraudsters and scammers.",
+      "description": "Is this email suspected of belonging to a temporary or disposable mail service? Usually associated with fraudsters and scammers",
       "order": 2
     },
     "dns_valid": {
       "type": "boolean",
       "title": "DNS Valid",
-      "description": "Does the email's hostname have valid DNS entries? Partial indication of a valid email.",
+      "description": "Does the email's hostname have valid DNS entries? Partial indication of a valid email",
       "order": 8
     },
     "domain_age": {
       "type": "object",
       "title": "Domain Age",
-      "description": "A human description of when this domain was registered.",
+      "description": "A human description of when this domain was registered",
       "order": 21
     },
     "first_name": {
       "type": "string",
       "title": "First Name",
-      "description": "Suspected first name based on email. Returns \\"CORPORATE\\" if the email is suspected of being a generic company email. Returns \\"UNKNOWN\\" if the first name was not determinable.",
+      "description": "Suspected first name based on email Returns CORPORATE if the email is suspected of being a generic company email Returns UNKNOWN if the first name was not determinable",
       "order": 5
     },
     "first_seen": {
       "type": "object",
       "title": "First Seen",
-      "description": "A human description of the email address age, using an estimation of the email creation date when IPQS first discovered this email address.",
+      "description": "A human description of the email address age, using an estimation of the email creation date when IPQS first discovered this email address",
       "order": 22
     },
     "fraud_score": {
       "type": "integer",
       "title": "Fraud Score",
-      "description": "The overall Fraud Score of the user based on the email's reputation and recent behavior across the IPQS threat network. Fraud Scores \\u003e= 75 are suspicious, but not necessarily fraudulent.",
+      "description": "The overall Fraud Score of the user based on the email's reputation and recent behavior across the IPQS threat network Fraud Scores \\u003e= 75 are suspicious, but not necessarily fraudulent",
       "order": 17
     },
     "frequent_complainer": {
       "type": "boolean",
       "title": "Frequent Complainer",
-      "description": "Indicates if this email frequently unsubscribes from marketing lists or reports email as SPAM.",
+      "description": "Indicates if this email frequently unsubscribes from marketing lists or reports email as SPAM",
       "order": 11
     },
     "generic": {
       "type": "boolean",
       "title": "Generic",
-      "description": "Is this email suspected as being a catch all or shared email for a domain? (\\"admin@\\", \\"webmaster@\\", \\"newsletter@\\", \\"sales@\\", \\"contact@\\", etc.)",
+      "description": "Is this email suspected as being a catch all or shared email for a domain? (admin@, webmaster@, newsletter@, sales@, contact@, etc)",
       "order": 6
     },
     "honeypot": {
       "type": "boolean",
       "title": "Honeypot",
-      "description": "Is this email believed to be a \\"honeypot\\" or \\"SPAM trap\\"? Bulk mail sent to these emails increases your risk of being blacklisted by large ISPs \\u0026 ending up in the spam folder.",
+      "description": "Is this email believed to be a honeypot or SPAM trap? Bulk mail sent to these emails increases your risk of being blacklisted by large ISPs \\u0026 ending up in the spam folder",
       "order": 9
     },
     "leaked": {
       "type": "boolean",
       "title": "Leaked",
-      "description": "Was this email address associated with a recent database leak from a third party? Leaked accounts pose a risk as they may have become compromised during a database breach.",
+      "description": "Was this email address associated with a recent database leak from a third party? Leaked accounts pose a risk as they may have become compromised during a database breach",
       "order": 19
     },
     "overall_score": {
       "type": "integer",
       "title": "Overall Score",
-      "description": "Overall email validity score. Range is \\"0\\" - \\"4\\". Scores above \\"1\\" can be associated with a valid email. 0 = invalid email address 1 = dns valid, unreachable mail server 2 = dns valid, temporary mail rejection error 3 = dns valid, accepts all mail 4 = dns valid, verified email exists",
+      "description": "Overall email validity score Range is 0 - 4 Scores above 1 can be associated with a valid email 0 = invalid email address 1 = dns valid, unreachable mail server 2 = dns valid, temporary mail rejection error 3 = dns valid, accepts all mail 4 = dns valid, verified email exists",
       "order": 4
     },
     "recent_abuse": {
       "type": "boolean",
       "title": "Recent Abuse",
-      "description": "This value will indicate if there has been any recently verified abuse across our network for this email address. Abuse could be a confirmed chargeback, fake signup, compromised device, fake app install, or similar malicious behavior within the past few days.",
+      "description": "This value will indicate if there has been any recently verified abuse across our network for this email address Abuse could be a confirmed chargeback, fake signup, compromised device, fake app install, or similar malicious behavior within the past few days",
       "order": 16
     },
     "sanitized_email": {
       "type": "string",
       "title": "Sanitized Email",
-      "description": "Sanitized email address with all aliases and masking removed, such as multiple periods for Gmail.com.",
+      "description": "Sanitized email address with all aliases and masking removed, such as multiple periods for Gmail",
       "order": 20
     },
     "smtp_score": {
       "type": "integer",
       "title": "SMTP Score",
-      "description": "Validity score of email server's SMTP setup. Range is \\"-1\\" - \\"3\\". Scores above \\"-1\\" can be associated with a valid email. -1 = invalid email address 0 = mail server exists, but is rejecting all mail 1 = mail server exists, but is showing a temporary error 2 = mail server exists, but accepts all email 3 = mail server exists and has verified the email address.",
+      "description": "Validity score of email server's SMTP setup Range is -1 - 3 Scores above -1 can be associated with a valid email -1 = invalid email address 0 = mail server exists, but is rejecting all mail 1 = mail server exists, but is showing a temporary error 2 = mail server exists, but accepts all email 3 = mail server exists and has verified the email address",
       "order": 3
     },
     "spam_trap_score": {
       "type": "string",
       "title": "Spam Trap Score",
-      "description": "Confidence level of the email address being an active SPAM trap. Values can be \\"high\\", \\"medium\\", \\"low\\", or \\"none\\". We recommend scrubbing emails with \\"high\\" or \\"medium\\" statuses. Avoid \\"low\\" emails whenever possible for any promotional mailings.",
+      "description": "Confidence level of the email address being an active SPAM trap Values can be high, medium, low, or none We recommend scrubbing emails with high or medium statuses Avoid low emails whenever possible for any promotional mailings",
       "order": 12
     },
     "suggested_domain": {
       "type": "string",
       "title": "Suggested Domain",
-      "description": "Default value is \\"N/A\\". Indicates if this email's domain should in fact be corrected to a popular mail service. This field is useful for catching user typos. For example, an email address with \\"gmai.com\\", would display a suggested domain of \\"gmail.com\\". This feature supports all major mail service providers.",
+      "description": "Default value is NA Indicates if this email's domain should in fact be corrected to a popular mail service This field is useful for catching user typos For example, an email address with gmail, would display a suggested domain of gmail his feature supports all major mail service providers",
       "order": 18
     },
     "suspect": {
       "type": "boolean",
       "title": "Suspect",
-      "description": "This value indicates if the mail server is currently replying with a temporary error and unable to verify the email address. This status will also be true for \\"catch all\\" email addresses as defined below. If this value is true, then we suspect the \\"valid\\" result may be tainted and there is not a guarantee that the email address is truly valid.",
+      "description": "This value indicates if the mail server is currently replying with a temporary error and unable to verify the email address This status will also be true for catch all email addresses as defined below If this value is true, then we suspect the valid result may be cotaminated and there is not a guarantee that the email address is truly valid",
       "order": 15
     },
     "timed_out": {
       "type": "boolean",
       "title": "Timed Out",
-      "description": "Did the connection to the mail service provider timeout during the verification? If so, we recommend increasing the \\"timeout\\" variable above the default 7 second value. Lookups that timeout with a \\"valid\\" result as false are most likely false and should be not be trusted.",
+      "description": "Did the connection to the mail service provider timeout during the verification? If so, we recommend increasing the timeout variable above the default 7 second value Lookups that timeout with a valid result as false are most likely false and should be not be trusted",
       "order": 14
     },
     "valid": {
