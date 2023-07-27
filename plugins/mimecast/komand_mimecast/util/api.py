@@ -10,7 +10,7 @@ from zipfile import ZipFile, BadZipFile
 
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
-from insightconnect_plugin_runtime.helper import convert_dict_to_camel_case, rate_limiting
+from insightconnect_plugin_runtime.helper import convert_dict_to_camel_case
 
 from komand_mimecast.util.constants import (
     API,
@@ -88,7 +88,6 @@ class MimecastAPI:
     def find_remediation_incidents(self, data: dict) -> dict:
         return self._handle_rest_call("POST", f"{API}/ttp/remediation/find-incidents", data=data)
 
-    @rate_limiting(max_tries=10)
     def get_siem_logs(self, data: Dict[str, Any]) -> Union[List[Dict], Dict, int]:
         uri = f"{API}/audit/get-siem-logs"
         default_data = {
@@ -125,11 +124,16 @@ class MimecastAPI:
         raise ApiClientException(preset=PluginException.Preset.UNKNOWN, data=response, status_code=status_code)
 
     def _check_rate_limiting(self, request):
-        if request.status_code == 429:
-            raise PluginException(preset=PluginException.Preset.RATE_LIMIT)
+        rate_limit_status_code = 429
+        if request.status_code == rate_limit_status_code:
+            raise ApiClientException(
+                preset=PluginException.Preset.RATE_LIMIT, status_code=rate_limit_status_code, data=request.text
+            )
 
     def _handle_status_code_response(self, response: requests.request, status_code: int):
-        if status_code == 403:
+        if status_code == 401:
+            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response)
+        elif status_code == 403:
             raise PluginException(preset=PluginException.Preset.API_KEY, data=response)
         elif status_code == 404:
             raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response)
@@ -224,43 +228,40 @@ class MimecastAPI:
             for error in errors.get("errors", []):
                 if error.get(CODE) == XDK_BINDING_EXPIRED_ERROR:
                     raise ApiClientException(
-                        cause=ERROR_CASES.get(XDK_BINDING_EXPIRED_ERROR),
-                        assistance="Please provide a valid AccessKey.",
+                        preset=PluginException.Preset.UNAUTHORIZED,
                         data=response,
                         status_code=401,
                     )
                 elif error.get(CODE) == DEVELOPER_KEY_ERROR:
                     raise ApiClientException(
-                        cause=ERROR_CASES.get(error.get(CODE)),
-                        assistance=BASIC_ASSISTANCE_MESSAGE,
+                        preset=PluginException.Preset.UNAUTHORIZED,
                         data=response,
                         status_code=401,
                     )
                 elif error.get(CODE) in ERROR_CASES:
                     raise ApiClientException(
-                        cause=ERROR_CASES.get(error.get(CODE)),
-                        assistance=BASIC_ASSISTANCE_MESSAGE,
+                        assistance=ERROR_CASES.get(error.get(CODE)),
+                        cause=PluginException.causes[PluginException.Preset.BAD_REQUEST],
                         data=response,
                         status_code=400,
                     )
                 elif error.get(CODE) == FIELD_VALIDATION_ERROR:
                     raise ApiClientException(
-                        cause=f"This {error.get('field')} field is mandatory; it cannot be NULL.",
-                        assistance=BASIC_ASSISTANCE_MESSAGE,
+                        assistance=f"This {error.get('field')} field is mandatory; it cannot be NULL.",
+                        cause=PluginException.causes[PluginException.Preset.BAD_REQUEST],
                         data=response,
                         status_code=400,
                     )
                 elif error.get(CODE) == VALIDATION_BLANK_ERROR:
                     raise ApiClientException(
-                        cause=f"This {error.get('field')} field, if present, cannot be blank or empty.",
-                        assistance=BASIC_ASSISTANCE_MESSAGE,
+                        assistance=f"This {error.get('field')} field, if present, cannot be blank or empty.",
+                        cause=PluginException.causes[PluginException.Preset.BAD_REQUEST],
                         data=response,
                         status_code=400,
                     )
                 else:
                     self._handle_status_code_response(response, status_code)
 
-    @rate_limiting(max_tries=10)
     def _handle_rest_call(  # noqa: C901
         self,
         method: str,

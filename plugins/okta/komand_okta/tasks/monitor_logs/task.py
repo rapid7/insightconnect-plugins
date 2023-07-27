@@ -25,38 +25,39 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
     def run(self, params={}, state={}):  # pylint: disable=unused-argument
         has_more_pages = False
-        next_page_link = state.get(self.NEXT_PAGE_LINK)
         parameters = {}
-        if not state:
-            self.logger.info("First run")
-            now = self.get_current_time()
-            last_24_hours = now - timedelta(hours=24)
-            parameters = {"since": last_24_hours.isoformat(), "until": now.isoformat(), "limit": 1000}
-            state[self.LAST_COLLECTION_TIMESTAMP] = now.isoformat()
-        else:
-            if next_page_link:
-                state.pop(self.NEXT_PAGE_LINK)
-                self.logger.info("Getting the next page of results...")
-            else:
-                self.logger.info("Subsequent run")
-                now = self.get_current_time().isoformat()
-                parameters = {"since": state.get(self.LAST_COLLECTION_TIMESTAMP), "until": now, "limit": 1000}
-                state[self.LAST_COLLECTION_TIMESTAMP] = now
         try:
-            new_logs = (
-                self.connection.api_client.list_events(parameters)
-                if not next_page_link
-                else self.connection.api_client.get_next_page(next_page_link)
-            )
-            next_page_link = self.get_next_page_link(new_logs.headers)
-            if next_page_link:
-                state[self.NEXT_PAGE_LINK] = next_page_link
-                has_more_pages = True
-            state[self.STATUS_CODE] = 200
-            return clean(new_logs.json()), state, has_more_pages
-        except ApiException as error:
-            state[self.STATUS_CODE] = error.status_code
-            return [], state, False
+            next_page_link = state.get(self.NEXT_PAGE_LINK)
+            if not state:
+                self.logger.info("First run")
+                now = self.get_current_time()
+                last_24_hours = now - timedelta(hours=24)
+                parameters = {"since": last_24_hours.isoformat(), "until": now.isoformat(), "limit": 1000}
+                state[self.LAST_COLLECTION_TIMESTAMP] = now.isoformat()
+            else:
+                if next_page_link:
+                    state.pop(self.NEXT_PAGE_LINK)
+                    self.logger.info("Getting the next page of results...")
+                else:
+                    self.logger.info("Subsequent run")
+                    now = self.get_current_time().isoformat()
+                    parameters = {"since": state.get(self.LAST_COLLECTION_TIMESTAMP), "until": now, "limit": 1000}
+                    state[self.LAST_COLLECTION_TIMESTAMP] = now
+            try:
+                new_logs = (
+                    self.connection.api_client.list_events(parameters)
+                    if not next_page_link
+                    else self.connection.api_client.get_next_page(next_page_link)
+                )
+                next_page_link = self.get_next_page_link(new_logs.headers)
+                if next_page_link:
+                    state[self.NEXT_PAGE_LINK] = next_page_link
+                    has_more_pages = True
+                return clean(new_logs.json()), state, has_more_pages, 200, None
+            except ApiException as error:
+                return [], state, False, error.status_code, error
+        except Exception as error:
+            return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     @staticmethod
     def get_current_time():

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="okta-rapid7-plugin",
-      version="4.0.0",
+      version="4.1.0",
       description="Secure identity management and single sign-on to any application",
       author="rapid7",
       author_email="",
