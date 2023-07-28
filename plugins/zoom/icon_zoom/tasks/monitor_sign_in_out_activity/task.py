@@ -22,6 +22,7 @@ class RunState(Enum):
     """
     Enum to help with variable/logic determination throughout task
     """
+
     starting = "starting"
     paginating = "paginating"
     continuing = "continuing"
@@ -81,19 +82,6 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     # pylint: disable=unused-argument
     def run(self, params={}, state={}):
         try:
-            # # Check if first run
-            # # First run is either NO timestamp for last request, OR no timestamp for last request BUT a next page token
-            # # exists, which means it is continuation of a first run
-            # if not state.get(self.LAST_REQUEST_TIMESTAMP) or (
-            #     not state.get(self.LAST_REQUEST_TIMESTAMP) and state.get(self.NEXT_PAGE_TOKEN)
-            # ):
-            #     self.logger.info("First run")
-            #     task_output: TaskOutput = self.first_run(state=state)
-            # else:
-            #     # Subsequent run
-            #     self.logger.info("Subsequent run")
-            #     task_output: TaskOutput = self.subsequent_run(state=state)
-
             task_output: TaskOutput = self.loop(state=state)
 
             # Turn events list back into a list of dicts
@@ -111,13 +99,14 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         start_date_params = {
             RunState.starting: now,
             RunState.paginating: state.get(self.PARAM_START_DATE),
-            RunState.continuing: state.get(self.LAST_REQUEST_TIMESTAMP)
+            RunState.continuing: state.get(self.LAST_REQUEST_TIMESTAMP),
         }
 
         end_date_params = {
             RunState.starting: last_day,
             RunState.paginating: state.get(self.PARAM_END_DATE),
-            RunState.continuing: state.get(self.PARAM_END_DATE, now)  # should be last request timestamp if coming from end of pagination, otherwise default to now
+            # last request timestamp if coming from end of pagination, otherwise default to now
+            RunState.continuing: state.get(self.PARAM_END_DATE, now),
         }
         rs = self.determine_runstate(state=state)
         self.logger.info(f"Current runstate is: {rs.value}")
@@ -125,14 +114,18 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         param_request_start_date = start_date_params[rs]
         param_request_end_date = end_date_params[rs]
 
-        self.logger.info(f"Getting events for timeframe {param_request_start_date} to {param_request_end_date}. "
-                         f"Currently paginating: {'false' if rs != rs.paginating else 'true'}")
+        self.logger.info(
+            f"Getting events for timeframe {param_request_start_date} to {param_request_end_date}. "
+            f"Currently paginating: {'false' if rs != rs.paginating else 'true'}"
+        )
 
         try:
+            if state.get(self.NEXT_PAGE_TOKEN):
+                self.logger.info(f"About to paginate with token: {state.get(self.NEXT_PAGE_TOKEN)}")
             new_events, pagination_token = self.connection.zoom_api.get_user_activity_events_task(
                 start_date=param_request_start_date,
                 end_date=param_request_end_date,
-                page_size=1000,
+                page_size=3,
                 next_page_token=state.get(self.NEXT_PAGE_TOKEN),
             )
         except Exception as exception:
@@ -140,7 +133,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
         # Depending on if we get a pagination token, we need to either persist our current query OR reset it
         if pagination_token:
-            self.logger.info("Pagination token returned by Zoom API - storing pagination info")
+            self.logger.info(f"Pagination token returned by Zoom API ({pagination_token}) - storing pagination info")
             has_more_pages = True
             state[self.NEXT_PAGE_TOKEN] = pagination_token
             state[self.PARAM_START_DATE] = param_request_start_date
@@ -149,9 +142,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             self.logger.info("No pagination token returned by Zoom API - all pages have been consumed")
             has_more_pages = False
             if rs == rs.paginating:
-                state[self.NEXT_PAGE_TOKEN] = None
-                state[self.PARAM_START_DATE] = None
-                state[self.PARAM_END_DATE] = None
+                del state[self.NEXT_PAGE_TOKEN]
+                del state[self.PARAM_START_DATE]
+                del state[self.PARAM_END_DATE]
 
         try:
             new_events = sorted([Event(**event) for event in new_events], reverse=True)
@@ -169,6 +162,8 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return self.handle_no_new_events_found(now=now)
 
         # RunState of 'continuing' requires de-duping
+        # 'starting' does not since there are no previous events
+        # 'paginating' does not since pages should not include duplicates
         if rs == rs.continuing:
             self.logger.info("Event set requires de-duping")
             # De-dupe events using boundary event hashes from previous run
@@ -180,13 +175,14 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             self.logger.info(f"After de-duping, total event count is {len(deduped_events)}")
             new_events = deduped_events
 
-        # Calculate boundary hashes for deduping, only needed
+        # Calculate boundary hashes for deduping
         boundary_event_hashes: [str] = []
         if len(new_events) > 0:
             boundary_event_hashes = self._get_boundary_event_hashes(
                 latest_event_time=latest_event.time, events=new_events
             )
 
+        # May need to be moved into boundary event calculation block
         state[self.BOUNDARY_EVENTS] = boundary_event_hashes
         state[self.LAST_REQUEST_TIMESTAMP] = now
         state[self.LATEST_EVENT_TIMESTAMP] = latest_event.time
@@ -216,7 +212,6 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now,
                 self.LATEST_EVENT_TIMESTAMP: None,
-                self.NEXT_PAGE_TOKEN: None,
             },
             has_more_pages=False,
             status_code=200,
@@ -230,7 +225,6 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now,
                 self.LATEST_EVENT_TIMESTAMP: None,
-                self.NEXT_PAGE_TOKEN: None,
             },
             has_more_pages=False,
             status_code=500,
@@ -253,7 +247,6 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     self.BOUNDARY_EVENTS: [],
                     self.LAST_REQUEST_TIMESTAMP: now,
                     self.LATEST_EVENT_TIMESTAMP: None,
-                    self.NEXT_PAGE_TOKEN: None,
                 },
                 has_more_pages=False,
                 status_code=401,
@@ -272,284 +265,19 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                         self.BOUNDARY_EVENTS: [],
                         self.LAST_REQUEST_TIMESTAMP: now,
                         self.LATEST_EVENT_TIMESTAMP: None,
-                        self.NEXT_PAGE_TOKEN: None,
                     },
                     has_more_pages=False,
                     status_code=403,
                     error=PluginException(
                         cause="Insufficient permissions.",
                         assistance=self.PERMISSIONS_ERROR_MESSAGE,
-                        data=exception.data
+                        data=exception.data,
                     ),
                 )
             else:
                 raise  # TODO: Do we need to do something else here?
         else:
             raise exception
-
-    # def first_run(self, state: dict) -> TaskOutput:
-    #     # Default has_more_pages for external pagination to False
-    #     has_more_pages = False
-    #
-    #     # If a next_page_token is present, then we need to re-use the previous request parameter timestamps in order
-    #     # to correctly get the next page set(s)
-    #     if state.get(self.NEXT_PAGE_TOKEN):
-    #         last_24_hours_for_zoom = state.get(self.PARAM_START_DATE)
-    #         now_for_zoom = state.get(self.PARAM_END_DATE)
-    #     else:
-    #         # Get time boundaries for first event set
-    #         now = self._get_datetime_now()
-    #         last_24_hours = self._get_datetime_last_24_hours()
-    #
-    #         # now_for_zoom is the start time for the Zoom API but also used to track requests across task runs via state
-    #         now_for_zoom = self._format_datetime_for_zoom(dt=now)
-    #         last_24_hours_for_zoom = self._format_datetime_for_zoom(dt=last_24_hours)
-    #
-    #     # Get fully consumed paginated event set, using previous run latest event time
-    #     try:
-    #         self.logger.info(f"Getting events from {last_24_hours_for_zoom} until {now_for_zoom}")
-    #
-    #         # Call API, returning any new events and pagination token if present
-    #         new_events, pagination_token = self.connection.zoom_api.get_user_activity_events_task(
-    #             start_date=last_24_hours_for_zoom,
-    #             end_date=now_for_zoom,
-    #             page_size=1000,
-    #             next_page_token=state.get(self.NEXT_PAGE_TOKEN),
-    #         )
-    #         if pagination_token:
-    #             has_more_pages = True
-    #
-    #     except (AuthenticationRetryLimitError, AuthenticationError) as error:
-    #         self.logger.error(
-    #             f"{self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE} "
-    #             f"{self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE}"
-    #             if isinstance(error, AuthenticationRetryLimitError)
-    #             else self.AUTHENTICATION_ERROR_MESSAGE
-    #         )
-    #         return TaskOutput(
-    #             output=[],
-    #             state={
-    #                 self.BOUNDARY_EVENTS: [],
-    #                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
-    #                 self.LATEST_EVENT_TIMESTAMP: None,
-    #                 self.NEXT_PAGE_TOKEN: None,
-    #             },
-    #             has_more_pages=False,
-    #             status_code=401,
-    #             error=PluginException(
-    #                 cause=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE,
-    #                 assistance=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE,
-    #             ),
-    #         )
-    #     except PluginException as error:
-    #         # Add additional information to aid customer if correct permissions are not set in the Zoom App
-    #         if "Invalid access token, does not contain scope" in error.data:
-    #             self.logger.error(self.PERMISSIONS_ERROR_MESSAGE)
-    #             return TaskOutput(
-    #                 output=[],
-    #                 state={
-    #                     self.BOUNDARY_EVENTS: [],
-    #                     self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
-    #                     self.LATEST_EVENT_TIMESTAMP: None,
-    #                     self.NEXT_PAGE_TOKEN: None,
-    #                 },
-    #                 has_more_pages=False,
-    #                 status_code=403,
-    #                 error=PluginException(
-    #                     cause="Insufficient permissions.", assistance=self.PERMISSIONS_ERROR_MESSAGE, data=error.data
-    #                 ),
-    #             )
-    #         else:
-    #             raise  # TODO: Do we need to do something else here?
-    #
-    #     try:
-    #         new_events = sorted([Event(**event) for event in new_events], reverse=True)
-    #     except TypeError as error:
-    #         self.logger.error(f"Zoom API endpoint output has changed, unable to parse events: {error}")
-    #         return TaskOutput(
-    #             output=[],
-    #             state={
-    #                 self.BOUNDARY_EVENTS: [],
-    #                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
-    #                 self.LATEST_EVENT_TIMESTAMP: None,
-    #                 self.NEXT_PAGE_TOKEN: None,
-    #             },
-    #             has_more_pages=False,
-    #             status_code=500,
-    #             error=PluginException(
-    #                 cause=self.API_CHANGED_ERROR_MESSAGE_CAUSE, assistance=self.API_CHANGED_ERROR_MESSAGE_ASSISTANCE
-    #             ),
-    #         )
-    #
-    #     self.logger.info(f"Got {len(new_events)} events from Zoom!")
-    #
-    #     # Get latest event time (last in response from Zoom) as well as boundary hashes.
-    #     # These are to be used for de-duping future event sets
-    #     try:
-    #         new_latest_event_time = new_events[0].time
-    #         self.logger.info(f"Latest event time is: {new_latest_event_time}")
-    #         boundary_event_hashes: [str] = self._get_boundary_event_hashes(
-    #             latest_event_time=new_latest_event_time, events=new_events
-    #         )
-    #     except IndexError:
-    #         self.logger.info("Unable to get latest event time, no new events found!")
-    #         return TaskOutput(
-    #             output=[],
-    #             state={
-    #                 self.BOUNDARY_EVENTS: [],
-    #                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
-    #                 self.LATEST_EVENT_TIMESTAMP: None,
-    #                 self.NEXT_PAGE_TOKEN: None,
-    #             },
-    #             has_more_pages=False,
-    #             status_code=200,
-    #             error=None,
-    #         )
-    #
-    #     # update state
-    #     state[self.BOUNDARY_EVENTS] = boundary_event_hashes
-    #     state[self.LAST_REQUEST_TIMESTAMP] = now_for_zoom
-    #     state[self.LATEST_EVENT_TIMESTAMP] = new_latest_event_time
-    #     state[self.NEXT_PAGE_TOKEN] = pagination_token
-    #
-    #     self.logger.info(f"Updated state, state is now: {state}")
-    #     return TaskOutput(output=new_events, state=state, has_more_pages=has_more_pages, status_code=200, error=None)
-
-    # def subsequent_run(self, state: dict) -> TaskOutput:
-    #     # now_for_zoom is the start time for the Zoom API but also used to track requests across task runs via state
-    #     now = self._get_datetime_now()
-    #     now_for_zoom = self._format_datetime_for_zoom(dt=now)
-    #     last_request_timestamp = state.get(self.LAST_REQUEST_TIMESTAMP)
-    #
-    #     # Get first set of events, fully consumed pagination
-    #     try:
-    #         if state.get(self.NEXT_PAGE_TOKEN):
-    #             self.logger.info(f"Getting next event set page using previous start/end dates of "
-    #                              f"{state.get(self.PARAM_START_DATE)} and {state.get(self.PARAM_END_DATE)}")
-    #             new_events, has_more_pages = self.connection.zoom_api.get_user_activity_events_task(
-    #                 start_date=state.get(self.PARAM_START_DATE),
-    #                 end_date=state.get(self.PARAM_END_DATE),
-    #                 page_size=1000,
-    #                 next_page_token=state.get(self.NEXT_PAGE_TOKEN),
-    #             )
-    #         else:
-    #             # Get fully consumed paginated event set, using previous run latest event time
-    #             self.logger.info(f"Getting events from {last_request_timestamp} until {now_for_zoom}")
-    #             new_events, has_more_pages = self.connection.zoom_api.get_user_activity_events_task(
-    #                 start_date=last_request_timestamp,
-    #                 end_date=now_for_zoom,
-    #                 page_size=1000,
-    #                 next_page_token=state.get(self.NEXT_PAGE_TOKEN),
-    #             )
-    #     except (AuthenticationRetryLimitError, AuthenticationError) as error:
-    #         self.logger.error(
-    #             f"{self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE} "
-    #             f"{self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE}"
-    #             if isinstance(error, AuthenticationRetryLimitError)
-    #             else self.AUTHENTICATION_ERROR_MESSAGE
-    #         )
-    #         return TaskOutput(
-    #             output=[],
-    #             state={
-    #                 self.BOUNDARY_EVENTS: [],
-    #                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
-    #                 self.LATEST_EVENT_TIMESTAMP: None,
-    #                 self.NEXT_PAGE_TOKEN: False,
-    #             },
-    #             has_more_pages=False,
-    #             status_code=401,
-    #             error=PluginException(
-    #                 cause=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE,
-    #                 assistance=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE,
-    #             ),
-    #         )
-    #     except PluginException as error:
-    #         # Add additional information to aid customer if correct permissions are not set in the Zoom App
-    #         if "Invalid access token, does not contain scope" in error.data:
-    #             self.logger.error(self.PERMISSIONS_ERROR_MESSAGE)
-    #             return TaskOutput(
-    #                 output=[],
-    #                 state={
-    #                     self.BOUNDARY_EVENTS: [],
-    #                     self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
-    #                     self.LATEST_EVENT_TIMESTAMP: None,
-    #                     self.NEXT_PAGE_TOKEN: False,
-    #                 },
-    #                 has_more_pages=False,
-    #                 status_code=403,
-    #                 error=PluginException(
-    #                     cause="Insufficient permissions.", assistance=self.PERMISSIONS_ERROR_MESSAGE, data=error.data
-    #                 ),
-    #             )
-    #         else:
-    #             raise
-    #     try:
-    #         new_events = sorted([Event(**event) for event in new_events], reverse=True)
-    #     except TypeError as error:
-    #         self.logger.error(f"Zoom API endpoint output has changed, unable to parse events: {error}")
-    #         return TaskOutput(
-    #             output=[],
-    #             state={
-    #                 self.BOUNDARY_EVENTS: [],
-    #                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
-    #                 self.LATEST_EVENT_TIMESTAMP: None,
-    #                 self.NEXT_PAGE_TOKEN: False,
-    #             },
-    #             has_more_pages=False,
-    #             status_code=500,
-    #             error=PluginException(
-    #                 cause=self.API_CHANGED_ERROR_MESSAGE_CAUSE, assistance=self.API_CHANGED_ERROR_MESSAGE_ASSISTANCE
-    #             ),
-    #         )
-    #
-    #     self.logger.info(f"Got {len(new_events)} events from Zoom!")
-    #
-    #     # Get latest event time (last in response from Zoom), to be used for determining boundary event hashes
-    #     try:
-    #         new_latest_event = new_events[0]
-    #         self.logger.info(f"Latest event time is: {new_latest_event.time}")
-    #     except IndexError:
-    #         self.logger.info("Unable to get latest event time, no new events found!")
-    #         return TaskOutput(
-    #             output=[],
-    #             state={
-    #                 self.BOUNDARY_EVENTS: [],
-    #                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
-    #                 self.LATEST_EVENT_TIMESTAMP: None,
-    #                 self.NEXT_PAGE_TOKEN: False,
-    #             },
-    #             has_more_pages=False,
-    #             status_code=200,
-    #             error=None,
-    #         )
-    #
-    #     # De-dupe events using boundary event hashes from previous run
-    #     deduped_events = self._dedupe_events(
-    #         boundary_event_hashes=state[self.BOUNDARY_EVENTS],
-    #         all_events=new_events,
-    #         latest_event_timestamp=state.get(self.LATEST_EVENT_TIMESTAMP),
-    #     )
-    #     self.logger.info(f"{len(deduped_events)} unique events were found!")
-    #
-    #     # Determine new boundary event hashes using latest time from newly retrieved event set and latest event time
-    #     # from the new set.
-    #
-    #     boundary_event_hashes = state.get(self.BOUNDARY_EVENTS)
-    #     if len(deduped_events) > 0:
-    #         boundary_event_hashes = self._get_boundary_event_hashes(
-    #             latest_event_time=new_latest_event.time, events=deduped_events
-    #         )
-    #
-    #     # update state
-    #     state[self.BOUNDARY_EVENTS] = boundary_event_hashes
-    #     state[self.LAST_REQUEST_TIMESTAMP] = now_for_zoom
-    #     state[self.LATEST_EVENT_TIMESTAMP] = new_latest_event.time
-    #     state[self.NEXT_PAGE_TOKEN] = not has_more_pages
-    #
-    #     self.logger.info(f"Updated state, state is now: {state}")
-    #     return TaskOutput(
-    #         output=deduped_events, state=state, has_more_pages=has_more_pages, status_code=200, error=None
-    #     )
 
     @staticmethod
     def _dedupe_events(
