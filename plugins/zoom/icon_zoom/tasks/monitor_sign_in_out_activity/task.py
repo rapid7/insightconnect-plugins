@@ -20,7 +20,9 @@ from icon_zoom.util.event import Event
 
 class RunState(Enum):
     """
-    Enum to help with variable/logic determination throughout task
+    Enum to help with variable/logic determination throughout task.
+    Runstates should progress from starting (first run) to either paginating or continuing, depending on whether or
+    not the latest events require pagination or if the entire event set was returned in one page.
     """
 
     starting = "starting"
@@ -131,20 +133,20 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         except Exception as exception:
             return self.handle_request_exception(exception=exception, now=now)
 
-        # Depending on if we get a pagination token, we need to either persist our current query OR reset it
-        if pagination_token:
-            self.logger.info(f"Pagination token returned by Zoom API ({pagination_token}) - storing pagination info")
-            has_more_pages = True
-            state[self.NEXT_PAGE_TOKEN] = pagination_token
-            state[self.PARAM_START_DATE] = param_request_start_date
-            state[self.PARAM_END_DATE] = param_request_end_date
-        else:
-            self.logger.info("No pagination token returned by Zoom API - all pages have been consumed")
-            has_more_pages = False
-            if rs == rs.paginating:
-                del state[self.NEXT_PAGE_TOKEN]
-                del state[self.PARAM_START_DATE]
-                del state[self.PARAM_END_DATE]
+        # # Depending on if we get a pagination token, we need to either persist our current query OR reset it
+        # if pagination_token:
+        #     self.logger.info(f"Pagination token returned by Zoom API ({pagination_token}) - storing pagination info")
+        #     has_more_pages = True
+        #     state[self.NEXT_PAGE_TOKEN] = pagination_token
+        #     state[self.PARAM_START_DATE] = param_request_start_date
+        #     state[self.PARAM_END_DATE] = param_request_end_date
+        # else:
+        #     self.logger.info("No pagination token returned by Zoom API - all pages have been consumed")
+        #     has_more_pages = False
+        #     if rs == rs.paginating:
+        #         del state[self.NEXT_PAGE_TOKEN]
+        #         del state[self.PARAM_START_DATE]
+        #         del state[self.PARAM_END_DATE]
 
         try:
             new_events = sorted([Event(**event) for event in new_events], reverse=True)
@@ -175,17 +177,43 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             self.logger.info(f"After de-duping, total event count is {len(deduped_events)}")
             new_events = deduped_events
 
-        # Calculate boundary hashes for deduping
-        boundary_event_hashes: [str] = []
-        if len(new_events) > 0:
-            boundary_event_hashes = self._get_boundary_event_hashes(
-                latest_event_time=latest_event.time, events=new_events
-            )
+        # Calculate boundary hashes for deduping.
+        # If runstate is 'paginating', then do not store boundary hashes as any further events will be earlier
+        # than what was first processed while the runstate was still in 'continuing' prior to 'paginating'.
+        # Ultimately to ensure de-duping is accurate, we only want the boundary hash from the latest event.
+        if rs != RunState.paginating:
+            boundary_event_hashes: [str] = []
+            if len(new_events) > 0:
+                boundary_event_hashes = self._get_boundary_event_hashes(
+                    latest_event_time=latest_event.time, events=new_events
+                )
+        else:
+            boundary_event_hashes = state.get(self.BOUNDARY_EVENTS, [])
+
+        # Depending on if we get a pagination token, we need to either persist our current query OR reset it
+        if pagination_token:
+            self.logger.info(
+                f"Pagination token returned by Zoom API ({pagination_token}) - storing pagination info")
+            has_more_pages = True
+            state[self.NEXT_PAGE_TOKEN] = pagination_token
+            state[self.PARAM_START_DATE] = param_request_start_date
+            state[self.PARAM_END_DATE] = param_request_end_date
+        else:
+            self.logger.info("No pagination token returned by Zoom API - all pages have been consumed")
+            has_more_pages = False
+            if rs == rs.paginating:
+                del state[self.NEXT_PAGE_TOKEN]
+                del state[self.PARAM_START_DATE]
+                del state[self.PARAM_END_DATE]
 
         # May need to be moved into boundary event calculation block
         state[self.BOUNDARY_EVENTS] = boundary_event_hashes
         state[self.LAST_REQUEST_TIMESTAMP] = now
-        state[self.LATEST_EVENT_TIMESTAMP] = latest_event.time
+
+        # If we're paginating, that means we just came from a RunState of 'continuing' and are now going
+        # through earlier events, so don't store the latest event time.
+        if rs != rs.paginating:
+            state[self.LATEST_EVENT_TIMESTAMP] = latest_event.time
 
         self.logger.info(f"Updated state, state is now: {state}")
         return TaskOutput(output=new_events, state=state, has_more_pages=has_more_pages, status_code=200, error=None)
