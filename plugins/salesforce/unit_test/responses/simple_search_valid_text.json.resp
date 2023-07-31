@@ -1,0 +1,46 @@
+{
+  "searchRecords": [
+    {
+      "attributes": {
+        "type": "Account",
+        "url": "/services/data/v58.0/sobjects/Account/001Hn00001uAccount"
+      },
+      "Id": "001Hn00001uAccount"
+    },
+    {
+      "attributes": {
+        "type": "ExternalObject__c",
+        "url": "/services/data/v58.0/sobjects/ExternalObject__c/a00Hn00000External"
+      },
+      "Id": "a00Hn00000External"
+    },
+    {
+      "attributes": {
+        "type": "Customer",
+        "url": "/services/data/v58.0/sobjects/Customer/0o6Hn00000Customer"
+      },
+      "Id": "0o6Hn00000Customer"
+    },
+    {
+      "attributes": {
+        "type": "Topic",
+        "url": "/services/data/v58.0/sobjects/Topic/0TOHn000000I1Topic"
+      },
+      "Id": "0TOHn000000I1Topic"
+    },
+    {
+      "attributes": {
+        "type": "CollaborationGroup",
+        "url": "/services/data/v58.0/sobjects/CollaborationGroup/0F9Hn000000PCollab"
+      },
+      "Id": "0F9Hn000000PCollab"
+    },
+    {
+      "attributes": {
+        "type": "Note",
+        "url": "/services/data/v58.0/sobjects/Note/002Hn00000n5KANote"
+      },
+      "Id": "002Hn00000n5KANote"
+    }
+  ]
+}

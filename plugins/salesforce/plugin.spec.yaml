@@ -4,10 +4,13 @@ products: [insightconnect]
 name: salesforce
 title: Salesforce
 description: The Salesforce plugin allows you to search, update, and manage salesforce records
-version: 1.0.1
+version: 2.0.0
+connection_version: 2
 vendor: rapid7
 support: community
+cloud_ready: true
 status: []
+supported_versions: ["Salesforce API v58 2023-06-30"]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/salesforce
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -19,47 +22,149 @@ tags:
 - crm
 hub_tags:
   use_cases: [remediation_management, reporting_and_analytics]
-  keywords: [marketing, sales, analysis, crm]
+  keywords: [marketing, sales, analysis, crm, cloud_enabled]
   features: []
 types:
-  search_result:
+  searchResult:
     type:
       title: Type
-      description: Type
+      description: Type of the record
       type: string
+      required: false
+      example: Account
     url:
       title: URL
-      description: URL
+      description: URL of the record
       type: string
+      required: false
+      example: /services/data/v58.0/sobjects/Account/001Hn00001uAJRtaB3
     name:
       title: Name
-      description: Name
+      description: Name of the record
       type: string
+      example: Example Account
     id:
       title: ID
-      description: ID
+      description: ID of the record
       type: string
+      required: false
+      example: 001Hn00001uAJRtaB3
+  userData:
+    dataType:
+      title: Data Type
+      description: Type of the data
+      type: string
+      required: false
+      example: User Login
+    id:
+      title: ID
+      description: The ID of the user
+      type: string
+      required: false
+      example: 005Hn00000HVWwsIAH
+    firstName:
+      title: First Name
+      description: The user's first name
+      type: string
+      required: false
+      example: John
+    lastName:
+      title: Last Name
+      description: The user's last name
+      type: string
+      required: false
+      example: Smith
+    email:
+      title: Email
+      description: The user's email address
+      type: string
+      required: false
+      example: user@example.com
+    alias:
+      title: Alias
+      description: The user's alias
+      type: string
+      required: false
+      example: jsmith
+    isActive:
+      title: Is Active
+      description: Indicates whether the user has access to log in (true) or not (false)
+      type: boolean
+      required: false
+      example: true
+    loginTime:
+      title: Login Time
+      description: The time of user login. Time zone is based on GMT
+      type: string
+      required: false
+      example: 2023-06-28T09:15:32.000+0000
+    userId:
+      title: User ID
+      description: ID of the user logging in
+      type: string
+      required: false
+      example: 005Hn00000HVWwsIAH
+    loginType:
+      title: Login Type
+      description: The type of login used to access the session
+      type: string
+      required: false
+      example: Application
+    loginUrl:
+      title: Login URL
+      description: URL from which the login request is coming
+      type: string
+      required: false
+      example: https://example.com
+    sourceIp:
+      title: Source IP
+      description: IP address of the machine from which the login request is coming. The address can be an IPv4 or IPv6 address
+      type: string
+      required: false
+      example: 198.51.100.1
+    status:
+      title: Status
+      description: Displays the status of the attempted login. Status is either success or a reason for failure
+      type: string
+      required: false
+      example: Success
+    application:
+      title: Application
+      description: The application used to access the organization
+      type: string
+      required: false
+      example: Browser
+    browser:
+      title: Browser
+      description: The current browser version
+      type: string
+      required: false
+      example: Chrome 114
 connection:
-  client_id:
+  clientId:
     title: Client ID
-    description: '''Consumer Key'' of the connected app'
+    description: Consumer Key of the connected app
     type: string
     required: true
-  client_secret:
+    example: 1234567890aBcdEFRoeRxDE1234567890abCDef6Etz7VLwwLQZn19jyW3U_1234567890AbcdEF4VkuMS4ze
+  clientSecret:
     title: Client Secret
-    description: '''Consumer Secret'' of the connected app'
+    description: Consumer Secret of the connected app
     type: credential_secret_key
     required: true
-  salesforce_account_username_and_password:
+    example: 1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF
+  salesforceAccountUsernameAndPassword:
     title: Salesforce Account Username and Password
     description: Name and password of the Salesforce user
     type: credential_username_password
     required: true
-  security_token:
+    example: '{"username": "user@example.com", "password": "password"}'
+  securityToken:
     title: Security Token
     description: Security token of the Salesforce user
     type: credential_secret_key
     required: true
+    example: Ier6YY78KxJwKtHy7HeK0oPc
 actions:
   simple_search:
     title: Simple Search
@@ -70,12 +175,14 @@ actions:
         description: Text to search for
         type: string
         required: true
+        example: test
     output:
-      search_results:
+      searchResults:
         title: Search Results
         description: List of search results
-        type: '[]search_result'
+        type: '[]searchResult'
         required: false
+        example: []
   advanced_search:
     title: Advanced Search
     description: Execute a SOQL (Salesforce Object Query Language) query
@@ -85,159 +192,191 @@ actions:
         description: SOQL query
         type: string
         required: true
+        example: SELECT FIELDS(STANDARD) FROM Account WHERE Name='Example Account'
     output:
-      search_results:
+      searchResults:
         title: Search Results
         description: List of search results
-        type: '[]search_result'
+        type: '[]searchResult'
         required: false
+        example: []
   create_record:
     title: Create Record
     description: Create a new SObject record
     input:
-      object_name:
+      objectName:
         title: Object Name
         description: The name of the object (e.g. 'Account')
         type: string
-        default: Account
         required: true
-      object_data:
+        example: Account
+      objectData:
         title: Object Data
         description: SObject information for the newly created record
         type: object
         required: true
+        example: '{"name": "example-name"}'
     output:
       id:
         title: ID
         description: ID of the newly created record
         type: string
         required: false
+        example: 000AA000000aa0aAAA
   update_record:
     title: Update Record
     description: Update a record
     input:
-      record_id:
+      recordId:
         title: Record ID
         description: The ID of an existing record
         type: string
         required: true
-      object_name:
+        example: 000AA000000aa0aAAA
+      objectName:
         title: Object Name
         description: The name of the object (e.g. 'Account')
         type: string
         default: Account
         required: true
-      object_data:
+        example: Account
+      objectData:
         title: Object Data
         description: Updated SObject information
         type: object
         required: true
+        example: '{"name": "example-name"}'
     output:
       success:
         title: Success
         description: Was the operation successful
         type: boolean
         required: false
+        example: True
   get_record:
     title: Get Record
     description: Retrieve a record
     input:
-      record_id:
+      recordId:
         title: Record ID
         description: The ID of an existing record
         type: string
         required: true
-      external_id_field_name:
+        example: 999Hn99999uM8mnBBB
+      externalIdFieldName:
         title: External ID Field Name
-        description: The name of the external ID field that should be matched with
-          record_id. If empty, the 'Id' field of the record is used
+        description: The name of the external ID field that should be matched with record_id. If empty, the 'Id' field of the record is used
         type: string
         required: false
         default: ''
-      object_name:
+        example: ExampleExtID__c
+      objectName:
         title: Object Name
-        description: The name of the object (e.g. 'Account')
+        description: The name of the object
         type: string
         default: Account
         required: true
+        example: Folder
     output:
       record:
         title: Record
         description: Matched record
         type: object
         required: false
+        example: {}
   delete_record:
     title: Delete Record
     description: Delete a record
     input:
-      record_id:
+      recordId:
         title: Record ID
         description: The ID of an existing record
         type: string
         required: true
-      object_name:
+        example: 000AA000000aa0aAAA
+      objectName:
         title: Object Name
         description: The name of the object (e.g. 'Account')
         type: string
         default: Account
         required: true
+        example: Account
     output:
       success:
         title: Success
         description: Was the operation successful
         type: boolean
         required: false
+        example: True
   get_fields:
     title: Get Fields
-    description: Retrieve field values from a record
+    description: Retrieve field values from the record of the given object
     input:
-      record_id:
+      recordId:
         title: Record ID
         description: The ID of an existing record
         type: string
         required: true
-      object_name:
+        example: 001Hn00001uAJRtaB3
+      objectName:
         title: Object Name
         description: The name of the object (e.g. 'Account')
         type: string
         default: Account
         required: true
+        example: Account
       fields:
         title: Fields
         description: The fields which values should be retrieved
         type: '[]string'
         required: true
+        example: ["Id", "Name", "Description"]
     output:
       fields:
         title: Fields
-        description: An object with field names as keys, each with the corresponding
-          value
+        description: An object with field names as keys, each with the corresponding value
         type: object
         required: false
+        example: {}
   get_blob_data:
     title: Get Blob Data
     description: Retrieve blob data for a given record
     input:
-      record_id:
+      recordId:
         title: Record ID
         description: The ID of an existing record
         type: string
         required: true
-      object_name:
+        example: 001Hn00001uAJRtaB3
+      objectName:
         title: Object Name
-        description: The name of the object (e.g. 'Account')
+        description: The name of the object (e.g. 'Attachment')
         type: string
         default: Attachment
         required: true
-      field_name:
+        example: Attachment
+      fieldName:
         title: Field Name
         description: Blob field name
         type: string
         required: true
         default: body
+        example: body
     output:
       data:
         title: Data
         description: The value of the selected blob field
         type: bytes
         required: false
+        example: dGVzdA==
+tasks:
+  monitor_users:
+    title: Monitor Users
+    description: Get information about users, their login history and which users have been updated
+    output:
+      users:
+        title: Users
+        description: Information about users, their login history and which users have been updated
+        type: "[]userData"
+        required: true
+        example: []
