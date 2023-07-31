@@ -1,11 +1,9 @@
+import requests
 import time
-from functools import wraps
+from insightconnect_plugin_runtime.exceptions import PluginException
 from json.decoder import JSONDecodeError
 from logging import Logger
-from typing import Callable, Any
-
-import requests
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_salesforce.util.exceptions import ApiException
 from komand_salesforce.util.endpoints import (
     PARAMETERIZED_SEARCH_ENDPOINT,
     QUERY_ENDPOINT,
@@ -16,15 +14,12 @@ from komand_salesforce.util.endpoints import (
     SOBJECT_RECORD_FIELD_ENDPOINT,
     SOBJECT_UPDATED_USERS,
 )
-from komand_salesforce.util.exceptions import ApiException
 
 
 def rate_limiting(max_tries: int):
     def _decorate(func):
         def _wrapper(*args, **kwargs):
             self = args[0]
-            if not self.enable_rate_limiting:
-                return func(*args, **kwargs)
             retry = True
             counter, delay = 0, 0
             while retry and counter < max_tries:
@@ -46,41 +41,7 @@ def rate_limiting(max_tries: int):
     return _decorate
 
 
-def refresh_token(max_tries: int) -> Callable:
-    """
-    Decorator to refresh the token if expired and retry the function.
-
-    Args:
-    - max_tries (int): Maximum number of attempts to refresh the token and retry.
-
-    Returns:
-    - Callable: Wrapped function that retries on token expiry.
-    """
-
-    def decorator(func: Callable) -> Callable:
-        @wraps(func)
-        def wrapper(self, *args, **kwargs) -> Any:
-            for _ in range(max_tries):
-                try:
-                    return func(self, *args, **kwargs)
-                except ApiException as error:
-                    cause = PluginException.causes.get(PluginException.Preset.INVALID_CREDENTIALS)
-                    if error.cause == cause and "Session expired or invalid" in error.data:
-                        self.logger.info("Token expired, renewing token...")
-                        self.token = None
-                        self.instance_url = None
-                    else:
-                        raise
-            return func(self, *args, **kwargs)
-
-        return wrapper
-
-    return decorator
-
-
 class SalesforceAPI:
-    RETRY_LIMIT = 5
-
     def __init__(
         self, client_id: str, client_secret: str, username: str, password: str, security_token: str, logger: Logger
     ):
@@ -90,10 +51,6 @@ class SalesforceAPI:
         self._username = username
         self._password = password
         self._security_token = security_token
-        self.enable_rate_limiting = True
-        self.token = None
-        self.instance_url = None
-        self.retry_count = 0
 
     def simple_search(self, text: str) -> list:
         return self._make_json_request("GET", PARAMETERIZED_SEARCH_ENDPOINT, params={"q": text}).get(
@@ -170,9 +127,6 @@ class SalesforceAPI:
         ).content
 
     def _get_token(self, client_id: str, client_secret: str, username: str, password: str, security_token: str):
-        if self.token and self.instance_url:
-            return self.token, self.instance_url
-
         self.logger.info("SalesforceAPI: Getting API token...")
 
         response = requests.request(
@@ -188,31 +142,18 @@ class SalesforceAPI:
         )
 
         if 400 <= response.status_code < 500:
-            if "invalid_grant" in response.content.decode():
-                self.logger.info("SalesforceAPI: invalid_grant error received.")
-                if self.retry_count <= self.RETRY_LIMIT:
-                    self.logger.info("SalesforceAPI: Retrying...")
-                    time.sleep(2**self.retry_count)
-                    self.retry_count += 1
-                    return self._get_token(client_id, client_secret, username, password, security_token)
-                else:
-                    self.logger.error(
-                        "SalesforceAPI: Max retry attempts reached following invalid_grant error. Exiting."
-                    )
-
             self.logger.error(f"SalesforceAPI: {response.content.decode()}")
             raise ApiException(
-                preset=PluginException.Preset.INVALID_CREDENTIALS,
+                cause="Authentication failure.",
+                assistance="Check the credentials supplied in the connection. If the issue persists please contact "
+                "support.",
                 status_code=response.status_code,
-                data=response.text,
             )
 
         resp_json = response.json()
         access_token = resp_json.get("access_token")
         instance_url = f"{resp_json.get('instance_url')}/services/data/"
         self.logger.info("SalesforceAPI: API token received")
-        self.token = access_token
-        self.instance_url = instance_url
         return access_token, instance_url
 
     @staticmethod
@@ -225,7 +166,6 @@ class SalesforceAPI:
         return instance_url
 
     @rate_limiting(10)
-    @refresh_token(1)
     def _make_request(self, method: str, url: str, params: dict = {}, json: dict = {}):  # noqa: C901
         access_token, instance_url = self._get_token(
             self._client_id, self._client_secret, self._username, self._password, self._security_token
@@ -247,7 +187,8 @@ class SalesforceAPI:
                 )
             elif response.status_code == 401:
                 raise ApiException(
-                    preset=PluginException.Preset.INVALID_CREDENTIALS,
+                    cause="Invalid API credentials provided.",
+                    assistance="Verify your API credentials configured in your connection are correct.",
                     status_code=response.status_code,
                     data=response.text,
                 )
@@ -259,7 +200,8 @@ class SalesforceAPI:
                 )
             elif response.status_code == 404:
                 raise ApiException(
-                    preset=PluginException.Preset.NOT_FOUND,
+                    cause="No results found.",
+                    assistance="Please provide valid inputs and try again.",
                     status_code=response.status_code,
                     data=response.text,
                 )
@@ -290,7 +232,6 @@ class SalesforceAPI:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def _make_json_request(self, method: str, url: str, params: dict = {}, json: dict = {}) -> dict:
-        self.logger.info(f"Request to path: {url}")
         try:
             response = self._make_request(method=method, url=url, params=params, json=json)
             return response.json()

@@ -37,8 +37,8 @@ class TestGetRecord(TestCase):
             [
                 "not_found",
                 Util.read_file_to_dict("inputs/get_record_not_found.json.inp"),
-                PluginException.causes[PluginException.Preset.NOT_FOUND],
-                PluginException.assistances[PluginException.Preset.NOT_FOUND],
+                "No results found.",
+                "Please provide valid inputs and try again.",
             ]
         ]
     )

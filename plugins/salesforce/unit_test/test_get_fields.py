@@ -46,14 +46,14 @@ class TestGetFields(TestCase):
             [
                 "invalid_record_id",
                 Util.read_file_to_dict("inputs/get_fields_invalid_record_id.json.inp"),
-                PluginException.causes[PluginException.Preset.NOT_FOUND],
-                PluginException.assistances[PluginException.Preset.NOT_FOUND],
+                "No results found.",
+                "Please provide valid inputs and try again.",
             ],
             [
                 "invalid_object_name",
                 Util.read_file_to_dict("inputs/get_fields_invalid_object.json.inp"),
-                PluginException.causes[PluginException.Preset.NOT_FOUND],
-                PluginException.assistances[PluginException.Preset.NOT_FOUND],
+                "No results found.",
+                "Please provide valid inputs and try again.",
             ],
             [
                 "invalid_field",
