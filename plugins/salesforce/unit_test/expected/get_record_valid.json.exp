@@ -1,0 +1,19 @@
+{
+  "record": {
+    "attributes": {
+      "type": "Folder",
+      "url": "/services/data/v58.0/sobjects/Folder/00lHn000002nFolder"
+    },
+    "id": "00lHn000002nFolder",
+    "name": "Example Folder",
+    "developerName": "Bot_v5",
+    "accessType": "Hidden",
+    "isReadonly": true,
+    "type": "Report",
+    "createdDate": "2022-06-20T01:51:22.000+0000",
+    "createdById": "005Hn00000HExample",
+    "lastModifiedDate": "2022-06-20T01:51:22.000+0000",
+    "lastModifiedById": "005Hn00000HExample",
+    "systemModstamp": "2022-06-20T01:51:22.000+0000"
+  }
+}
