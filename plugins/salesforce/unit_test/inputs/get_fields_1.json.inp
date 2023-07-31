@@ -1,0 +1,5 @@
+{
+  "fields": ["Id", "Name", "Description"],
+  "objectName": "Account",
+  "recordId": "001Hn00001uLl12345"
+}

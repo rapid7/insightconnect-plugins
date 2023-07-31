@@ -1,0 +1,19 @@
+{
+  "attributes": {
+    "type": "Folder",
+    "url": "/services/data/v58.0/sobjects/Folder/00lHn000002nFolder"
+  },
+  "Id": "00lHn000002nFolder",
+  "ParentId": null,
+  "Name": "Example Folder",
+  "DeveloperName": "Bot_v5",
+  "AccessType": "Hidden",
+  "IsReadonly": true,
+  "Type": "Report",
+  "NamespacePrefix": null,
+  "CreatedDate": "2022-06-20T01:51:22.000+0000",
+  "CreatedById": "005Hn00000HExample",
+  "LastModifiedDate": "2022-06-20T01:51:22.000+0000",
+  "LastModifiedById": "005Hn00000HExample",
+  "SystemModstamp": "2022-06-20T01:51:22.000+0000"
+}
