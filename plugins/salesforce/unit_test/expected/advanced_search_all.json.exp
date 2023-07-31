@@ -1,0 +1,22 @@
+{
+  "searchResults": [
+    {
+      "type": "Folder",
+      "url": "/services/data/v58.0/sobjects/Folder/00lHn000001Z111111",
+      "id": "00lHn000001Z111111",
+      "name": "New Folder"
+    },
+    {
+      "type": "Folder",
+      "url": "/services/data/v58.0/sobjects/Folder/00lHn000002n222222",
+      "id": "00lHn000002n222222",
+      "name": "Shared App"
+    },
+    {
+      "type": "Folder",
+      "url": "/services/data/v58.0/sobjects/Folder/00lHn000001Z333333",
+      "id": "00lHn000001Z333333",
+      "name": "Test Folder"
+    }
+  ]
+}

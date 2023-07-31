@@ -1,0 +1,8 @@
+{
+  "access_token": "cc805d5fab1fd71a4ab352a9c533e65fb2d5b885518f4e565e68847223b8e6b85cb48f3afad842726d99239c9e36505c64b0dc9a061d9e507d833277ada336ab",
+  "instance_url": "https://example.com",
+  "id": "https://example.com/id/44d88612fea8a8f36de82e1278abb02f/44d88612fea8a8f36de82e1278abb02f",
+  "token_type": "Bearer",
+  "issued_at": "1689000000000",
+  "signature": "3395856ce81f2b7382dee72602f798b642f14140"
+}

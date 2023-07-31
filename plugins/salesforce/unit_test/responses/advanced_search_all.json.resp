@@ -1,0 +1,63 @@
+{
+  "totalSize": 3,
+  "done": true,
+  "records": [
+    {
+      "attributes": {
+        "type": "Folder",
+        "url": "/services/data/v58.0/sobjects/Folder/00lHn000001Z111111"
+      },
+      "Id": "00lHn000001Z111111",
+      "ParentId": null,
+      "Name": "New Folder",
+      "DeveloperName": "NewFolder",
+      "AccessType": "Hidden",
+      "IsReadonly": false,
+      "Type": "Document",
+      "NamespacePrefix": null,
+      "CreatedDate": "2023-06-28T12:11:37.000+0000",
+      "CreatedById": "005Hn00000H3123456",
+      "LastModifiedDate": "2023-06-28T12:11:37.000+0000",
+      "LastModifiedById": "005Hn00000H3123456",
+      "SystemModstamp": "2023-06-28T12:11:37.000+0000"
+    },
+    {
+      "attributes": {
+        "type": "Folder",
+        "url": "/services/data/v58.0/sobjects/Folder/00lHn000002n222222"
+      },
+      "Id": "00lHn000002n222222",
+      "ParentId": null,
+      "Name": "Shared App",
+      "DeveloperName": "SharedApp",
+      "AccessType": "Hidden",
+      "IsReadonly": true,
+      "Type": "Insights",
+      "NamespacePrefix": null,
+      "CreatedDate": "2023-06-20T01:51:22.000+0000",
+      "CreatedById": "005Hn00000H3123456",
+      "LastModifiedDate": "2023-06-20T01:51:22.000+0000",
+      "LastModifiedById": "005Hn00000H3123456",
+      "SystemModstamp": "2023-06-20T01:51:22.000+0000"
+    },
+    {
+      "attributes": {
+        "type": "Folder",
+        "url": "/services/data/v58.0/sobjects/Folder/00lHn000001Z333333"
+      },
+      "Id": "00lHn000001Z333333",
+      "ParentId": null,
+      "Name": "Test Folder",
+      "DeveloperName": "Test Folder",
+      "AccessType": "Hidden",
+      "IsReadonly": true,
+      "Type": "Report",
+      "NamespacePrefix": null,
+      "CreatedDate": "2023-06-23T10:52:22.000+0000",
+      "CreatedById": "005Hn00000H3123456",
+      "LastModifiedDate": "2023-06-23T10:52:22.000+0000",
+      "LastModifiedById": "005Hn00000H3123456",
+      "SystemModstamp": "2023-06-23T10:52:22.000+0000"
+    }
+  ]
+}
