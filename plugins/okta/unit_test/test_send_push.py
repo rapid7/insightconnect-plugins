@@ -46,13 +46,13 @@ class TestSendPush(TestCase):
             [
                 "factor_not_found",
                 Util.read_file_to_dict("inputs/send_push_factor_not_found.json.inp"),
-                "Resource not found.",
+                "Invalid or unreachable endpoint provided.",
                 "Verify your input is correct and not malformed and try again. If the issue persists, please contact support.",
             ],
             [
                 "user_not_found",
                 Util.read_file_to_dict("inputs/send_push_user_not_found.json.inp"),
-                "Resource not found.",
+                "Invalid or unreachable endpoint provided.",
                 "Verify your input is correct and not malformed and try again. If the issue persists, please contact support.",
             ],
         ]
