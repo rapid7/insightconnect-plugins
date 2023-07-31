@@ -1,0 +1,3 @@
+{
+  "query": "SELECT FIELDS(STANDARD) FROM Folder"
+}
