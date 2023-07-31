@@ -39,8 +39,8 @@ class TestConnection(TestCase):
             [
                 "invalid_credentials",
                 Util.read_file_to_dict("inputs/connection_invalid.json.inp"),
-                PluginException.causes[PluginException.Preset.INVALID_CREDENTIALS],
-                PluginException.assistances[PluginException.Preset.INVALID_CREDENTIALS],
+                "Authentication failure.",
+                "Check the credentials supplied in the connection. If the issue persists please contact support.",
             ]
         ]
     )

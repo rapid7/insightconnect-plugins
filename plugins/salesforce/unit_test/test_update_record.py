@@ -42,14 +42,14 @@ class TestUpdateRecord(TestCase):
             [
                 "invalid_object_name",
                 Util.read_file_to_dict("inputs/update_record_invalid_object_name.json.inp"),
-                PluginException.causes[PluginException.Preset.NOT_FOUND],
-                PluginException.assistances[PluginException.Preset.NOT_FOUND],
+                "No results found.",
+                "Please provide valid inputs and try again.",
             ],
             [
                 "invalid_record_id",
                 Util.read_file_to_dict("inputs/update_record_invalid_record_id.json.inp"),
-                PluginException.causes[PluginException.Preset.NOT_FOUND],
-                PluginException.assistances[PluginException.Preset.NOT_FOUND],
+                "No results found.",
+                "Please provide valid inputs and try again.",
             ],
         ]
     )
