@@ -133,8 +133,6 @@ class MimecastAPI:
 
     def _handle_status_code_response(self, response: requests.request, status_code: int):
         if status_code == 401:
-            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response)
-        elif status_code == 403:
             raise PluginException(preset=PluginException.Preset.API_KEY, data=response)
         elif status_code == 403:
             raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response)
@@ -239,13 +237,13 @@ class MimecastAPI:
             for error in errors.get("errors", []):
                 if error.get(CODE) == XDK_BINDING_EXPIRED_ERROR:
                     raise ApiClientException(
-                        preset=PluginException.Preset.UNAUTHORIZED,
+                        preset=PluginException.Preset.API_KEY,
                         data=response,
                         status_code=401,
                     )
                 elif error.get(CODE) == DEVELOPER_KEY_ERROR:
                     raise ApiClientException(
-                        preset=PluginException.Preset.UNAUTHORIZED,
+                        preset=PluginException.Preset.API_KEY,
                         data=response,
                         status_code=401,
                     )
