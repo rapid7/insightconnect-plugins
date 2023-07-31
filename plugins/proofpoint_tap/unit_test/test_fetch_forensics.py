@@ -82,13 +82,13 @@ class TestFetchForensics(TestCase):
             [
                 "fetch_forensics_threat_id_not_found",
                 Util.read_file_to_dict("inputs/fetch_forensics_threat_id_not_found.json.inp"),
-                "No results found.",
+                "Invalid or unreachable endpoint provided.",
                 "Please provide valid inputs and try again.",
             ],
             [
                 "fetch_forensics_campaign_id_not_found",
                 Util.read_file_to_dict("inputs/fetch_forensics_campaign_id_not_found.json.inp"),
-                "No results found.",
+                "Invalid or unreachable endpoint provided.",
                 "Please provide valid inputs and try again.",
             ],
         ]
