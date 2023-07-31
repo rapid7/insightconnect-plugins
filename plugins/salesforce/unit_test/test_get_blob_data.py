@@ -9,7 +9,6 @@ from unittest.mock import patch
 from parameterized import parameterized
 from komand_salesforce.util.exceptions import ApiException
 from util import Util
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 @patch("requests.request", side_effect=Util.mock_request)
@@ -41,14 +40,14 @@ class TestGetBlobData(TestCase):
             [
                 "invalid_record_id",
                 Util.read_file_to_dict("inputs/get_blob_data_invalid_record_id.json.inp"),
-                PluginException.causes[PluginException.Preset.NOT_FOUND],
-                PluginException.assistances[PluginException.Preset.NOT_FOUND],
+                "No results found.",
+                "Please provide valid inputs and try again.",
             ],
             [
                 "invalid_object_name",
                 Util.read_file_to_dict("inputs/get_blob_data_invalid_object.json.inp"),
-                PluginException.causes[PluginException.Preset.NOT_FOUND],
-                PluginException.assistances[PluginException.Preset.NOT_FOUND],
+                "No results found.",
+                "Please provide valid inputs and try again.",
             ],
         ]
     )
