@@ -11,6 +11,8 @@ def rate_limiting(max_tries: int):
     def _decorate(func):
         def _wrapper(*args, **kwargs):
             self = args[0]
+            if not self.toggle_rate_limiting:
+                return func(*args, **kwargs)
             retry = True
             counter, delay = 0, 0
             while retry and counter < max_tries:
@@ -42,6 +44,7 @@ class ProofpointTapApi:
         else:
             self.authorized = False
         self.logger = logger
+        self.toggle_rate_limiting = True
 
     def check_authorization(self):
         if not self.authorized:
@@ -63,7 +66,7 @@ class ProofpointTapApi:
             )
             if response.status_code == 401:
                 raise ApiException(
-                    cause="Invalid service principal or secret provided.",
+                    cause=PluginException.causes[PluginException.Preset.API_KEY],
                     assistance="Verify your service principal and secret are correct.",
                     status_code=response.status_code,
                     data=response.text,
@@ -76,7 +79,7 @@ class ProofpointTapApi:
                 )
             elif response.status_code == 404:
                 raise ApiException(
-                    cause="No results found.",
+                    cause=PluginException.causes[PluginException.Preset.NOT_FOUND],
                     assistance="Please provide valid inputs and try again.",
                     status_code=response.status_code,
                     data=response.text,
