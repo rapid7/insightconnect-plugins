@@ -1,0 +1,8 @@
+{
+  "objectData": {
+    "invalid_field": "test-user",
+    "phone": "999999999"
+  },
+  "objectName": "Account",
+  "recordId": "200AA000000aa0aAAA"
+}
