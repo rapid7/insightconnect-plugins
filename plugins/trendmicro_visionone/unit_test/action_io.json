@@ -277,7 +277,11 @@
       "is_cached": false,
       "last_action_date_time": "2023-03-11T01:46:51Z",
       "resource_location": "https://api.xdr.trendmicro.com/v3.0/sandbox/analysisResults/5c31e065-d25d-476e-9cf8-783812eb1596",
-      "status": "succeeded"
+      "status": "succeeded",
+      "error": {
+        "code": "",
+        "message": ""
+      }
     }
   },
   "get_sandbox_suspicious_list": {
@@ -321,15 +325,30 @@
   "get_task_result": {
     "input": {
       "poll": true,
-      "poll_time_sec": true,
-      "task_id": 3456346
+      "poll_time_sec": 5.0,
+      "task_id": "00002194"
     },
     "output": {
       "$success": true,
       "error": {},
       "account": "User Userio",
+      "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede",
+      "resource_location": "somewhere/over/the/rain/",
+      "file_path": "somewhere/over/the/rain/bow.exe",
+      "file_sha1": "5E8FFF2DA46BFB9C795549291A72806AB2C38DA4",
+      "file_sha256": "3E8A5694E2F7492AA1D3C1E98484CF456B2ED2464836A0345E0C28EA99ECC61B",
+      "file_size": 12345,
+      "filename": "bow.exe",
+      "image_path": "/mount/sda1/",
+      "password": "change_me",
+      "pid": "2938uee",
+      "tasks": "",
+      "url": "https://rain.bow.com",
+      "sandbox_task_id": "00002194",
+      "endpoint_name": "Central-RV001",
       "action": "resetPassword",
       "created_date_time": "2023-04-17T20:12:38Z",
+      "expired_date_time": "2023-06-17T20:12:38Z",
       "description": "Rapid 7 Reset account password UU",
       "id": "00002194",
       "last_action_date_time": "2023-04-17T20:12:46Z",
