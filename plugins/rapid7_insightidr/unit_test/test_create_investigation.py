@@ -10,8 +10,8 @@ from komand_rapid7_insightidr.actions.create_investigation import CreateInvestig
 from komand_rapid7_insightidr.actions.create_investigation.schema import Input
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
-from unit_test.mock import mock_post_request, STUB_USER_EMAIL
-from unit_test.util import Util
+from mock import mock_post_request, STUB_USER_EMAIL
+from util import Util
 
 
 class TestCreateInvestigation(TestCase):

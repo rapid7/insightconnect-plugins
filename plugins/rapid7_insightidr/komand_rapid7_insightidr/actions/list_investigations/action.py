@@ -12,7 +12,7 @@ from komand_rapid7_insightidr.util.resource_helper import (
     get_priorities_param,
     get_sources_param,
 )
-import json
+import copy
 import datetime
 
 
@@ -26,24 +26,25 @@ class ListInvestigations(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        rest_params = {}
         start_time = params.get(Input.START_TIME)
         end_time = params.get(Input.END_TIME)
-        email = params.get(Input.EMAIL)
-        sort = params.get(Input.SORT)
-        priorities = params.get(Input.PRIORITIES)
-        sources = params.get(Input.SOURCES)
+        statuses = params.get("statuses")
 
-        for key in params:
-            if params[key]:
-                rest_params[key] = params[key]
-        if not rest_params.get("statuses"):
+        if not statuses:
             raise PluginException(
                 cause="The statuses parameter cannot be blank.",
                 assistance="choose a statues parameter, and please report this bug to support.",
             )
-        if rest_params.get("statuses") == "EITHER":
-            del rest_params["statuses"]
+        elif statuses == "EITHER":
+            statuses = None
+
+        rest_params = {
+            "assignee.email": params.get(Input.EMAIL),
+            "sources": get_sources_param(params.get(Input.SOURCES)),
+            "sort": get_sort_param(params.get(Input.SORT)),
+            "priorities": get_priorities_param(params.get(Input.PRIORITIES)),
+            "status": statuses
+        }
 
         if start_time:
             start_time_parsed = datetime.datetime.fromisoformat(start_time)
@@ -53,18 +54,7 @@ class ListInvestigations(insightconnect_plugin_runtime.Action):
         if end_time:
             end_time_parsed = datetime.datetime.fromisoformat(end_time)
             rest_params["end_time"] = end_time_parsed.astimezone(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-
-        if email:
-            rest_params["assignee.email"] = email
-
-        if sort:
-            rest_params[Input.SORT] = get_sort_param(sort)
-
-        if priorities:
-            rest_params[Input.PRIORITIES] = get_priorities_param(priorities)
-
-        if sources:
-            rest_params[Input.SOURCES] = get_sources_param(sources)
+        rest_params = clean(rest_params)
 
         request = ResourceHelper(self.connection.session, self.logger)
 

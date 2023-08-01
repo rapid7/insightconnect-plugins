@@ -12,8 +12,8 @@ from komand_rapid7_insightidr.actions.list_investigations import ListInvestigati
 from komand_rapid7_insightidr.actions.list_investigations.schema import Input
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
-from unit_test.mock import mock_get_request
-from unit_test.util import Util
+from mock import mock_get_request
+from util import Util
 
 
 @patch("requests.Session.request", side_effect=Util.mocked_requests)

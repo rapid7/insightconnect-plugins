@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from komand_rapid7_insightidr.actions.get_attachment_information import GetAttachmentInformation
 from komand_rapid7_insightidr.actions.get_attachment_information.schema import Input
-from unit_test.util import Util
+from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException

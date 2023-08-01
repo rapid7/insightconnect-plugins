@@ -38,6 +38,8 @@ def get_sort_param(input_string: str) -> str:
     :param input_string: Input string that contains parameter name and sort order i.e. Created Time Ascending
     :return: Str ready to be added as a query parameter
     """
+    if not input_string:
+        return ""
     sort_directions = {"ascending": "ASC", "descending": "DESC"}
     splitted_input_string = input_string.lower().split(" ")
     direction = splitted_input_string.pop()
@@ -55,6 +57,8 @@ def get_priorities_param(input_list_of_priorities: List[str]) -> str:
     :param input_list_of_priorities: List of str containing priority names
     :return: str containing priority names separated by comma
     """
+    if not input_list_of_priorities:
+        return ""
     return ",".join(input_list_of_priorities)
 
 

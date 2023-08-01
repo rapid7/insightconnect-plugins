@@ -1658,9 +1658,9 @@ Example input:
   "end_time": "2020-06-01T12:11:13+05:30",
   "index": 1,
   "priorities": [
-    "LOW", 
-    "MEDIUM", 
-    "HIGH", 
+    "LOW",
+    "MEDIUM",
+    "HIGH",
     "CRITICAL"
   ],
   "size": 100,
@@ -1759,6 +1759,7 @@ _This plugin does not contain any troubleshooting information._
 * 1.0.0 - Initial plugin
 
 # Links
+* [Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/)
 
 ## References
 
