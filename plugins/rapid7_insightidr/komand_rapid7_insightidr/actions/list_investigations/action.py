@@ -12,7 +12,6 @@ from komand_rapid7_insightidr.util.resource_helper import (
     get_priorities_param,
     get_sources_param,
 )
-import copy
 import datetime
 
 
