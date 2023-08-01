@@ -14,7 +14,7 @@
       "priority": "CRITICAL",
       "rrn": "rrn:example",
       "source": "ALERT",
-      "status": "OPEN",
+      "status": "INVESTIGATING",
       "title": "Example Title"
     }
   ],

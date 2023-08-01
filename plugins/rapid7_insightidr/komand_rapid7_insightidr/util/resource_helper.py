@@ -58,6 +58,15 @@ def get_priorities_param(input_list_of_priorities: List[str]) -> str:
     return ",".join(input_list_of_priorities)
 
 
+def get_sources_param(input_list_of_sources: List[str]) -> str:
+    """
+    Converts list of str that contains sources names into str with those names separated by comma
+    :param input_list_of_sources: List of str containing sources names
+    :return: str containing priority names separated by comma
+    """
+    return ",".join(input_list_of_sources)
+
+
 class ResourceHelper(object):
     """
     Class for helper methods for making requests against the InsightAppSec API. A new instance should

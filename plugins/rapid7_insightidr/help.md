@@ -53,7 +53,7 @@ This action is used to replace InsightIDR threat indicators in a threat with the
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum| Example|
+|Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|--------|
 |domain_names|[]string|None|False|Domain names to add|None|["rapid7.com", "google.com"]|
 |hashes|[]string|None|False|Process hashes to add|None|["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3", "C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]|
@@ -1643,11 +1643,12 @@ This action is used to retrieve a page of investigations matching the given requ
 |email|string|None|False|A user's email address, where only investigations assigned to that user will be included|None|user@example.com|
 |end_time|date|None|False|An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned|None|2020-06-01T12:11:13+05:30|
 |index|integer|0|True|Zero-based index of the page to retrieve, where value must be greater than or equal to 0|None|1|
-|priorities|[]string|None|False|A comma-separated list of investigation priorities to include in the result, where possible values are UNSPECIFIED, LOW, MEDIUM, HIGH, CRITICAL|None|["UNSPECIFIED, LOW, MEDIUM, HIGH, CRITICAL"]|
+|priorities|[]string|None|False|A comma-separated list of investigation priorities to include in the result, where possible values are LOW, MEDIUM, HIGH, CRITICAL|None|["LOW", "MEDIUM", "HIGH", "CRITICAL"]|
 |size|integer|100|True|Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100|None|100|
 |sort|string|None|False|A field for investigations to be sorted|['', 'Create time Ascending', 'Create time Descending', 'Priority Ascending', 'Priority Descending', 'Last alert time Ascending', 'Last alert time Descending', 'RRN Ascending', 'RRN Descending', 'Alerts most recent created time Ascending', 'Alerts most recent created time Descending', 'Alerts most recent detection created time Ascending', 'Alerts most recent detection created time Descending']|Create time Ascending|
+|sources|[]string|None|False|A comma-separated list of investigation sources to include in the result, where possible values are USER, ALERT, HUNT, AUTOMATION|None|["USER","ALERT"]|
 |start_time|date|None|False|An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned|None|2020-06-01T12:11:13+05:30|
-|statuses|string|CLOSED|True|Only investigations whose status matches one of the entries in the list will be returned|['OPEN', 'CLOSED', 'EITHER']|CLOSED|
+|statuses|string|CLOSED|True|Only investigations whose status matches one of the entries in the list will be returned|['OPEN', 'CLOSED', 'EITHER', 'INVESTIGATING']|CLOSED|
 
 Example input:
 
@@ -1657,14 +1658,17 @@ Example input:
   "end_time": "2020-06-01T12:11:13+05:30",
   "index": 1,
   "priorities": [
-    "UNSPECIFIED",
-    "LOW",
-    "MEDIUM",
-    "HIGH",
+    "LOW", 
+    "MEDIUM", 
+    "HIGH", 
     "CRITICAL"
   ],
   "size": 100,
   "sort": "Create time Ascending",
+  "sources": [
+    "USER",
+    "ALERT"
+  ],
   "start_time": "2020-06-01T12:11:13+05:30",
   "statuses": "CLOSED"
 }
@@ -1723,6 +1727,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.5.0 - Update `List Investigations` inputs
 * 4.4.1 - `List Alerts for Investigation`: fix issue with retrieving `detection_rule_rrn`   
 * 4.4.0 - `List Alerts for Investigation`: changed schema output for `detection_rule_rrn` 
 * 4.3.0 - `Query`: Add new parameter `most_recent_first`

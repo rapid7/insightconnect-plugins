@@ -14,6 +14,7 @@ class Input:
     PRIORITIES = "priorities"
     SIZE = "size"
     SORT = "sort"
+    SOURCES = "sources"
     START_TIME = "start_time"
     STATUSES = "statuses"
     
@@ -53,7 +54,7 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
     "priorities": {
       "type": "array",
       "title": "Priorities",
-      "description": "A comma-separated list of investigation priorities to include in the result, where possible values are UNSPECIFIED, LOW, MEDIUM, HIGH, CRITICAL",
+      "description": "A comma-separated list of investigation priorities to include in the result, where possible values are LOW, MEDIUM, HIGH, CRITICAL",
       "items": {
         "type": "string"
       },
@@ -87,6 +88,15 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
       ],
       "order": 8
     },
+    "sources": {
+      "type": "array",
+      "title": "Sources",
+      "description": "A comma-separated list of investigation sources to include in the result, where possible values are USER, ALERT, HUNT, AUTOMATION",
+      "items": {
+        "type": "string"
+      },
+      "order": 9
+    },
     "start_time": {
       "type": "string",
       "title": "Start Time",
@@ -103,7 +113,8 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
       "enum": [
         "OPEN",
         "CLOSED",
-        "EITHER"
+        "EITHER",
+        "INVESTIGATING"
       ],
       "order": 1
     }

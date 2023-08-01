@@ -6,7 +6,12 @@ from insightconnect_plugin_runtime.helper import clean
 
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Investigations
-from komand_rapid7_insightidr.util.resource_helper import ResourceHelper, get_sort_param, get_priorities_param
+from komand_rapid7_insightidr.util.resource_helper import (
+    ResourceHelper,
+    get_sort_param,
+    get_priorities_param,
+    get_sources_param,
+)
 import json
 import datetime
 
@@ -27,6 +32,7 @@ class ListInvestigations(insightconnect_plugin_runtime.Action):
         email = params.get(Input.EMAIL)
         sort = params.get(Input.SORT)
         priorities = params.get(Input.PRIORITIES)
+        sources = params.get(Input.SOURCES)
 
         for key in params:
             if params[key]:
@@ -57,26 +63,14 @@ class ListInvestigations(insightconnect_plugin_runtime.Action):
         if priorities:
             rest_params[Input.PRIORITIES] = get_priorities_param(priorities)
 
+        if sources:
+            rest_params[Input.SOURCES] = get_sources_param(sources)
+
         request = ResourceHelper(self.connection.session, self.logger)
 
         endpoint = Investigations.list_investigations(self.connection.url)
-        response = request.resource_request(endpoint, "get", params=rest_params)
+        response = request.make_request(endpoint, "GET", params=rest_params)
 
-        try:
-            result = json.loads(response.get("resource"))
-        except json.decoder.JSONDecodeError:
-            self.logger.error(f"InsightIDR response: {response}")
-            raise PluginException(
-                cause="The response from InsightIDR was not in the correct format.",
-                assistance="Contact support for help. See log for more details",
-            )
-        try:
-            investigations = clean(result.get("data", {}))
-            metadata = result.get("metadata", {})
-            return {Output.INVESTIGATIONS: investigations, Output.METADATA: metadata}
-        except KeyError:
-            self.logger.error(result)
-            raise PluginException(
-                cause="The response from InsightIDR was not in the correct format.",
-                assistance="Contact support for help. See log for more details",
-            )
+        investigations = clean(response.get("data", {}))
+        metadata = response.get("metadata", {})
+        return {Output.INVESTIGATIONS: investigations, Output.METADATA: metadata}
