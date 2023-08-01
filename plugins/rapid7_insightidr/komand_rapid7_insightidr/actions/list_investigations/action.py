@@ -43,7 +43,7 @@ class ListInvestigations(insightconnect_plugin_runtime.Action):
             "sources": get_sources_param(params.get(Input.SOURCES)),
             "sort": get_sort_param(params.get(Input.SORT)),
             "priorities": get_priorities_param(params.get(Input.PRIORITIES)),
-            "status": statuses
+            "status": statuses,
         }
 
         if start_time:
