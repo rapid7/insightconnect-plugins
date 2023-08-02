@@ -1648,7 +1648,7 @@ This action is used to retrieve a page of investigations matching the given requ
 |sort|string|None|False|A field for investigations to be sorted|['', 'Create time Ascending', 'Create time Descending', 'Priority Ascending', 'Priority Descending', 'Last alert time Ascending', 'Last alert time Descending', 'RRN Ascending', 'RRN Descending', 'Alerts most recent created time Ascending', 'Alerts most recent created time Descending', 'Alerts most recent detection created time Ascending', 'Alerts most recent detection created time Descending']|Create time Ascending|
 |sources|[]string|None|False|A comma-separated list of investigation sources to include in the result, where possible values are USER, ALERT, HUNT, AUTOMATION|None|["USER","ALERT"]|
 |start_time|date|None|False|An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned|None|2020-06-01T12:11:13+05:30|
-|statuses|string|CLOSED|True|Only investigations whose status matches one of the entries in the list will be returned|['OPEN', 'CLOSED', 'EITHER', 'INVESTIGATING']|CLOSED|
+|statuses|[]string|None|False|Comma-separated list of investigation statuses to include in the result. Possible values are OPEN, CLOSED, INVESTIGATING, WAITING|None|["CLOSED"]|
 
 Example input:
 
@@ -1670,7 +1670,9 @@ Example input:
     "ALERT"
   ],
   "start_time": "2020-06-01T12:11:13+05:30",
-  "statuses": "CLOSED"
+  "statuses": [
+    "CLOSED"
+  ]
 }
 ```
 

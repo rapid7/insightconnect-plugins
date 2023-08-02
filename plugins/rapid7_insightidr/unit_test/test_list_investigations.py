@@ -36,7 +36,7 @@ class TestListInvestigations(TestCase):
 
     def test_list_investigations(self, _mock_req):
         actual = self.action.run(
-            {Input.INDEX: 0, Input.SIZE: 1, Input.STATUSES: "INVESTIGATING", Input.SOURCES: ["USER", "ALERT"]}
+            {Input.INDEX: 0, Input.SIZE: 1, Input.STATUSES: ["INVESTIGATING"], Input.SOURCES: ["USER", "ALERT"]}
         )
         expected = {
             "investigations": [

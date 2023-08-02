@@ -106,23 +106,18 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
       "order": 2
     },
     "statuses": {
-      "type": "string",
+      "type": "array",
       "title": "Statuses",
-      "description": "Only investigations whose status matches one of the entries in the list will be returned",
-      "default": "CLOSED",
-      "enum": [
-        "OPEN",
-        "CLOSED",
-        "EITHER",
-        "INVESTIGATING"
-      ],
+      "description": "Comma-separated list of investigation statuses to include in the result. Possible values are OPEN, CLOSED, INVESTIGATING, WAITING",
+      "items": {
+        "type": "string"
+      },
       "order": 1
     }
   },
   "required": [
     "index",
-    "size",
-    "statuses"
+    "size"
   ]
 }
     """)

@@ -606,16 +606,10 @@ actions:
     input:
       statuses:
         title: Statuses
-        description: Only investigations whose status matches one of the entries in the list will be returned
-        type: string
-        required: true
-        default: CLOSED
-        example: CLOSED
-        enum:
-        - OPEN
-        - CLOSED
-        - EITHER
-        - INVESTIGATING
+        description: Comma-separated list of investigation statuses to include in the result. Possible values are OPEN, CLOSED, INVESTIGATING, WAITING
+        type: "[]string"
+        required: false
+        example: ["CLOSED"]
       start_time:
         title: Start Time
         description: An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned

@@ -11,6 +11,7 @@ from komand_rapid7_insightidr.util.resource_helper import (
     get_sort_param,
     get_priorities_param,
     get_sources_param,
+    get_statuses_param,
 )
 import datetime
 
@@ -27,22 +28,14 @@ class ListInvestigations(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         start_time = params.get(Input.START_TIME)
         end_time = params.get(Input.END_TIME)
-        statuses = params.get("statuses")
-
-        if not statuses:
-            raise PluginException(
-                cause="The statuses parameter cannot be blank.",
-                assistance="choose a statues parameter, and please report this bug to support.",
-            )
-        elif statuses == "EITHER":
-            statuses = None
+        statuses = params.get(Input.STATUSES)
 
         rest_params = {
             "assignee.email": params.get(Input.EMAIL),
             "sources": get_sources_param(params.get(Input.SOURCES)),
             "sort": get_sort_param(params.get(Input.SORT)),
             "priorities": get_priorities_param(params.get(Input.PRIORITIES)),
-            "status": statuses,
+            "statuses": get_statuses_param(statuses),
         }
 
         if start_time:
