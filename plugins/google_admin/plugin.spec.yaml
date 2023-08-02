@@ -1,142 +1,188 @@
 plugin_spec_version: v2
 extension: plugin
-products: [insightconnect]
+products: [ insightconnect ]
 name: google_admin
 title: Google Apps Admin
 description: Get and suspend users with the Google admin plugin
-version: 1.0.3
+version: 1.0.4
 vendor: rapid7
 support: community
-status: []
+status: [ ]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/google_admin
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.google.com
 tags:
-- google
-- admin
-- user provisioning
+  - google
+  - admin
+  - user provisioning
 hub_tags:
-  use_cases: [user_management]
-  keywords: [google, admin, user provisioning]
-  features: []
+  use_cases: [ user_management ]
+  keywords: [ google, admin, user provisioning ]
+  features: [ ]
 types:
   email:
     address:
+      title: Address
       description: Email address
       type: string
+      example: user@example.com
     primary:
+      title: Primary
       type: boolean
       description: True if primary email
+      example: True
   name:
     givenName:
-      description: Given name
+      title: Given Name
+      description: given name
       type: string
+      example: Example
     familyName:
-      description: Family name
+      title: Family Name
+      description: family name
       type: string
+      example: User
     fullName:
+      title: Full Name
       description: Full name
       type: string
+      example: Example User
   user:
     id:
+      title: ID
+      description: user id
       type: string
-      description: User ID
+      example: C03x4xfakeU4
     customerId:
+      title: Customer ID
+      description: customer id
       type: string
+      example: C03x4xfakeU4
     name:
+      title: Name
+      description: name
       type: name
-      description: Name
+      example: { "givenName": "Example", "familyName": "User", "fullName": "Example User" }
     isAdmin:
+      title: Is Admin
+      description: true if admin
       type: boolean
-      description: True if admin
+      example: True
     isDelegatedAdmin:
+      title: Is Delegated Admin
+      description: true if delegated admin
       type: boolean
-      description: True if delegated admin
+      example: True
     suspended:
+      title: Suspended
+      description: true if suspended
       type: boolean
-      description: True if suspended
+      example: False
     suspensionReason:
+      title: Suspension Reason
+      description: suspension reason
       type: string
-      description: Suspension Reason
+      example: None
     emails:
+      title: Emails
+      description: emails
       type: '[]email'
-      description: Emails
+      example: [ { "user1@example.com", True },{ "user2@example.com", False } ]
     alias:
+      title: Aliases
+      description: aliases
       type: '[]string'
-      description: Aliases
+      example: [ "alias" ]
     changePasswordAtNextLogin:
+      title: Change Password at Next Login
       description: True if must change password at login
       type: boolean
+      example: False
     ipWhitelisted:
-      description: True if IP whitelisted
+      title: IP Whitelisted
+      description: true if ip whitelisted
       type: boolean
+      Example: True
     agreedToTerms:
-      description: True if agreed to TOS
+      title: Agreed to Terms of Service
+      description: true if agreed to tos
       type: boolean
+      Example: True
     lastLoginTime:
-      description: Last login time
+      title: Last Login Time
+      description: last login time
       type: date
+      example: 03/10/2023
     creationTime:
-      description: Creation time
+      title: Creation Time
+      description: creation time
       type: date
+      example: 03/10/2020
 connection:
   admin_user:
     title: Admin User
-    description: Admin user to impersonate, e.g. admin@domain.com
+    description: Admin user to impersonate
     type: string
     required: true
+    example: admin@domain.com
   project_id:
     title: Project ID
     type: string
-    description: Project ID from service credentials. This is included with the JSON
-      file. e.g. testing-api-189016
+    description: Project ID from service credentials. This is included with the JSON file
     required: true
+    example: testing-api-189016
   private_key_id:
     title: Private Key ID
     type: string
-    description: Private Key ID from service credentials. This information is included
-      with in the JSON file created when a new key is created. e.g. c2520f8c7df508adeca758313dd36b16507e3216
+    description: Private Key ID from service credentials. This information is included with in the JSON file created when a new key is created
     required: true
+    example: c2520f8c7df508adeca758313dd36b16507e3216
   private_key:
     title: Private Key
     type: credential_asymmetric_key
-    description: Private Key from service credentials. This information is included
-      with in the JSON file created when a new key is created
+    description: Private Key from service credentials. This information is included with in the JSON file created when a new key is created
     required: true
+    example: -----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAjGnoUtfPHqvX3PIU6N9FKmwQ3Zl+NoaWb4yMLhudkdEBJ3Au +I8QdlqDKBm656UeOCh3r/i9e0ULKxkXDFfKmc3p2Wv+0lVOYGvxZFKUwKH0riAL A4imyYuL/fweOSGSnQlgYKr99HciTBIdL15SZ32TjYb+PDZBl+6zQsw2HYNJcqMj iciC7CAj6gB9SO8x1vMsRkU+rqKuc2r8Uk+qhECw8zR4K66wFuYM17sGUMXUq/pH WdiEvO3q/mdK47Nrx5i2baC7o5RXspKHYy6Xer4Vbnipl4DgAKkaNOL02a+Zv38Q l+xy9wdmWqUIbMiqSbj/k6xxDiPQkTR+/032eQIDAQABAoIBAEkPzpBUtPQbrJ3N 5S1rB71UL85u0OqkS2DNvB89xVabb0NLL1Wsc39yB271PHjORRQpkmWhQ08CFRae 3oxQnh47s+OrOxPMyZSIdjmicr5tRzjXeYOkNk0G7JgC+OL3YieOOnTyZGQxHUqB 3mfIZ45sHDv3MxC3lpfs35/xTHM8E/gW/gTfvU3QboQaL1q/taRQYEHvgiutwdZ0 sEFtJ8eAwOBABXiV3QPxnAQgIpwYpbicl3AK15gs5ENK4Rngi2bI7hdmMwDWa6t/ g0CP0TityFq05JUmnaz4wekXxD5EBm776EYNSoxTCaSzTMYwZCITrqXl6Y4/ogeT uVSm9ZECgYEA7G8CyyDKDTBYoIyEknJVKSwuelOA2edxmVyKL8hLoPiq1QoSH/N1 30nN/GVcvD7QED4p/u0XaMuPm2HVhuXwxu/t9j11DVlKP7QsH9u4pJKziw6NmV5N /9+mcjdWAH5BqaJtmpF0uoZsWk41JVe0fA7a3FCrXp1U/GD9BKSAD00CgYEAmAio ChEh7+pD7vutF85u+FqbdjY+KmyFeTPd2717P6i5V6C6lVpcnM7voZlGy0fjoald e9ntm0VU8FZkUIihKPzW9/LSAV8BgO+vSQrN/IMEmDqol959IxxI/6yzkY5JwYRP mlwoNzU0ekcHzg0eu7DA1uzRfv4F1NUW+QylRd0CgYEAzr07OhdP1jyCItD8U3n6 EWh6s6g0sVV5tdp/UszXpMgLyQFnW9ztIvRMU/jmIAzkrm9NFYaHw7DLv9jKd4y0 /59o+ro+kg+TpySKuMjOKcnFiUCOfJ9DoQwVZSYR45iDHivTnya1ZSyJrmVYf3Cz dw8ePSukzbTRTWYZmGenOrkCgYEAhoO6MdYAweXzH0J8XsDePEzmmcvaauzDl35F gIOAxc1B1381NqnRoUgSi1czZO6BP+q69LbX3PaV9WNqtDp+5OX4ST8FggMOMIdg /m5Z3F4LtajIvD41V9hR2i1yX4mWRmsLh1acmmQvvzSTekLvez8jD8ZOgV69yBaV kdsXa90CgYEAk+6ghpXNku12UANf9MH8loN+35/iPeeoqf0MY5FMVRYx10ZA91Lh ieAczVhiqzxCtHWhLA4SxE962eg+ji/awkS4kXLCMuZIESE+jFc7ptUmJjlsOWjv 8/dqUH5yjRKs2qxkBWG4HmT3Nx6A8sYIrUYxyqVLBpG8yKngbnaYPV4= -----END RSA PRIVATE KEY-----
   client_email:
     title: Client Email
     type: string
     description: Client email from service credentials
     required: true
+    example: user@example.com
   client_id:
     title: Client ID
     type: string
     description: Client ID
     required: true
+    example: C03x4xfakeU4
   client_x509_cert_url:
     title: Client X509 Cert URL
     type: string
     description: x509 cert URL from service credentials
     required: true
+    example: https://example.com
   auth_uri:
     title: Auth URI
     type: string
     description: OAUTH2 Auth URI
     default: https://accounts.google.com/o/oauth2/auth
     required: true
+    example: https://accounts.google.com/o/oauth2/auth
   token_uri:
     title: Token URI
     type: string
     description: OAUTH2 Token URI
     default: https://accounts.google.com/o/oauth2/token
     required: true
+    example: https://accounts.google.com/o/oauth2/token
   auth_provider_x509_cert_url:
     title: Auth Provider X509 Cert URL
     type: string
     description: OAUTH2 Auth Provider x509 Cert URL
     default: https://www.googleapis.com/oauth2/v1/certs
     required: true
+    example: https://www.googleapis.com/oauth2/v1/certs
 actions:
   get_user:
     title: Get User
@@ -147,17 +193,20 @@ actions:
         description: The user's primary email address, unique ID, or alias email
         type: string
         required: true
+        example: user@example.com
     output:
       found:
         title: Found
         description: True if found
         type: boolean
         required: false
+        example: True
       user:
         title: User
         type: user
         description: User Response Returned
         required: false
+        example: { "user": { "id": "C03x4xfakeU4", "customerId": "C03x4xfakeU4", "name": { "givenName": "Example", "familyName": "User", "fullName": "Example User" }, "isAdmin": true, "isDelegatedAdmin": true, "suspended": true, "suspensionReason": "", "emails": [ { "address": "user1@example.com", "primary": true }, { "address": "user2@example.com", "primary": true } ], "alias": [ "alias" ], "changePasswordAtNextLogin": false, "ipWhitelisted": true, "agreedToTerms": true, "lastLoginTime": "03/10/2023", "creationTime": "03/10/2020" } }
   suspend_user:
     title: Suspend User
     description: Suspend a User
@@ -167,9 +216,11 @@ actions:
         description: The user's primary email address, unique ID, or alias email
         type: string
         required: true
+        example: user@example.com
     output:
       user:
         title: User
         type: user
         description: User Response Returned
         required: false
+        example: { "user": { "id": "C03x4xfakeU4", "customerId": "C03x4xfakeU4", "name": { "givenName": "Example", "familyName": "User", "fullName": "Example User" }, "isAdmin": true, "isDelegatedAdmin": true, "suspended": true, "suspensionReason": "", "emails": [ { "address": "user1@example.com", "primary": true }, { "address": "user2@example.com", "primary": true } ], "alias": [ "alias" ], "changePasswordAtNextLogin": false, "ipWhitelisted": true, "agreedToTerms": true, "lastLoginTime": "03/10/2023", "creationTime": "03/10/2020" } }
