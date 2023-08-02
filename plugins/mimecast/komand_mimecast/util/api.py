@@ -1,4 +1,5 @@
 import base64
+import binascii
 import datetime
 import hashlib
 import hmac
@@ -170,8 +171,16 @@ class MimecastAPI:
         hdr_date = f'{datetime.datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S")} UTC'
 
         # Decode secret key
-        encoded_secret_key = self.secret_key.encode()
-        bytes_secret_key = base64.b64decode(encoded_secret_key)
+        try:
+            encoded_secret_key = self.secret_key.encode()
+            bytes_secret_key = base64.b64decode(encoded_secret_key)
+        except binascii.Error as error:
+            raise ApiClientException(
+                cause=PluginException.causes[PluginException.Preset.API_KEY],
+                assistance="Please make sure that the Secret Key is valid and try again.",
+                data=error,
+                status_code=401,
+            )
 
         # Create hmac message
         msg = ":".join([hdr_date, request_id, uri, self.app_key])
