@@ -126,7 +126,7 @@ connection:
     description: Admin user to impersonate
     type: string
     required: true
-    example: user@exampl.com
+    example: user@example.com
   project_id:
     title: Project ID
     type: string

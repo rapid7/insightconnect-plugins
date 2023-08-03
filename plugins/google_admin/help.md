@@ -12,6 +12,10 @@
 * A JWT with administrative permissions
 * API access to Gsuite administrative functions enabled
 
+# Supported Product Versions
+  
+* 12/07/2021
+
 # Documentation
 
 ## Setup
@@ -30,12 +34,12 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|admin_user|string|None|True|Admin user to impersonate|None|admin@domain.com|
+|admin_user|string|None|True|Admin user to impersonate|None|user@example.com|
 |auth_provider_x509_cert_url|string|https://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|https://www.googleapis.com/oauth2/v1/certs|
 |auth_uri|string|https://accounts.google.com/o/oauth2/auth|True|OAUTH2 Auth URI|None|https://accounts.google.com/o/oauth2/auth|
 |client_email|string|None|True|Client email from service credentials|None|user@example.com|
 |client_id|string|None|True|Client ID|None|C03x4xfakeU4|
-|client_x509_cert_url|string|None|True|x509 cert URL from service credentials|None|https://example.com|
+|client_x509_cert_url|string|None|True|X509 cert URL from service credentials|None|https://example.com|
 |private_key|credential_asymmetric_key|None|True|Private Key from service credentials. This information is included with in the JSON file created when a new key is created|None|-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEAjGnoUtfPHqvX3PIU6N9FKmwQ3Zl+NoaWb4yMLhudkdEBJ3Au +I8QdlqDKBm656UeOCh3r/i9e0ULKxkXDFfKmc3p2Wv+0lVOYGvxZFKUwKH0riAL A4imyYuL/fweOSGSnQlgYKr99HciTBIdL15SZ32TjYb+PDZBl+6zQsw2HYNJcqMj iciC7CAj6gB9SO8x1vMsRkU+rqKuc2r8Uk+qhECw8zR4K66wFuYM17sGUMXUq/pH WdiEvO3q/mdK47Nrx5i2baC7o5RXspKHYy6Xer4Vbnipl4DgAKkaNOL02a+Zv38Q l+xy9wdmWqUIbMiqSbj/k6xxDiPQkTR+/032eQIDAQABAoIBAEkPzpBUtPQbrJ3N 5S1rB71UL85u0OqkS2DNvB89xVabb0NLL1Wsc39yB271PHjORRQpkmWhQ08CFRae 3oxQnh47s+OrOxPMyZSIdjmicr5tRzjXeYOkNk0G7JgC+OL3YieOOnTyZGQxHUqB 3mfIZ45sHDv3MxC3lpfs35/xTHM8E/gW/gTfvU3QboQaL1q/taRQYEHvgiutwdZ0 sEFtJ8eAwOBABXiV3QPxnAQgIpwYpbicl3AK15gs5ENK4Rngi2bI7hdmMwDWa6t/ g0CP0TityFq05JUmnaz4wekXxD5EBm776EYNSoxTCaSzTMYwZCITrqXl6Y4/ogeT uVSm9ZECgYEA7G8CyyDKDTBYoIyEknJVKSwuelOA2edxmVyKL8hLoPiq1QoSH/N1 30nN/GVcvD7QED4p/u0XaMuPm2HVhuXwxu/t9j11DVlKP7QsH9u4pJKziw6NmV5N /9+mcjdWAH5BqaJtmpF0uoZsWk41JVe0fA7a3FCrXp1U/GD9BKSAD00CgYEAmAio ChEh7+pD7vutF85u+FqbdjY+KmyFeTPd2717P6i5V6C6lVpcnM7voZlGy0fjoald e9ntm0VU8FZkUIihKPzW9/LSAV8BgO+vSQrN/IMEmDqol959IxxI/6yzkY5JwYRP mlwoNzU0ekcHzg0eu7DA1uzRfv4F1NUW+QylRd0CgYEAzr07OhdP1jyCItD8U3n6 EWh6s6g0sVV5tdp/UszXpMgLyQFnW9ztIvRMU/jmIAzkrm9NFYaHw7DLv9jKd4y0 /59o+ro+kg+TpySKuMjOKcnFiUCOfJ9DoQwVZSYR45iDHivTnya1ZSyJrmVYf3Cz dw8ePSukzbTRTWYZmGenOrkCgYEAhoO6MdYAweXzH0J8XsDePEzmmcvaauzDl35F gIOAxc1B1381NqnRoUgSi1czZO6BP+q69LbX3PaV9WNqtDp+5OX4ST8FggMOMIdg /m5Z3F4LtajIvD41V9hR2i1yX4mWRmsLh1acmmQvvzSTekLvez8jD8ZOgV69yBaV kdsXa90CgYEAk+6ghpXNku12UANf9MH8loN+35/iPeeoqf0MY5FMVRYx10ZA91Lh ieAczVhiqzxCtHWhLA4SxE962eg+ji/awkS4kXLCMuZIESE+jFc7ptUmJjlsOWjv 8/dqUH5yjRKs2qxkBWG4HmT3Nx6A8sYIrUYxyqVLBpG8yKngbnaYPV4= -----END RSA PRIVATE KEY-----|
 |private_key_id|string|None|True|Private Key ID from service credentials. This information is included with in the JSON file created when a new key is created|None|c2520f8c7df508adeca758313dd36b16507e3216|
 |project_id|string|None|True|Project ID from service credentials. This is included with the JSON file|None|testing-api-189016|
@@ -45,7 +49,7 @@ Example input:
 
 ```
 {
-  "admin_user": "admin@domain.com",
+  "admin_user": "user@example.com",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "client_email": "user@example.com",
@@ -213,28 +217,28 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Family Name|string|None|None|family name|User|
+|Family Name|string|None|None|Family name|User|
 |Full Name|string|None|None|Full name|Example User|
-|Given Name|string|None|None|given name|Example|
+|Given Name|string|None|None|Given name|Example|
   
 **user**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Agreed to Terms of Service|boolean|None|None|true if agreed to tos|None|
-|Aliases|[]string|None|None|aliases|['alias']|
+|Agreed to Terms of Service|boolean|None|None|True if agreed to tos|None|
+|Aliases|[]string|None|None|Aliases|['alias']|
 |Change Password at Next Login|boolean|None|None|True if must change password at login|False|
-|Creation Time|date|None|None|creation time|03/10/2020|
-|Customer ID|string|None|None|customer id|C03x4xfakeU4|
-|Emails|[]email|None|None|emails|[{'user1@example.com': None, True: None}, {'user2@example.com': None, False: None}]|
-|ID|string|None|None|user id|C03x4xfakeU4|
-|IP Whitelisted|boolean|None|None|true if ip whitelisted|None|
-|Is Admin|boolean|None|None|true if admin|True|
-|Is Delegated Admin|boolean|None|None|true if delegated admin|True|
-|Last Login Time|date|None|None|last login time|03/10/2023|
-|Name|name|None|None|name|{'givenName': 'Example', 'familyName': 'User', 'fullName': 'Example User'}|
-|Suspended|boolean|None|None|true if suspended|False|
-|Suspension Reason|string|None|None|suspension reason|None|
+|Creation Time|date|None|None|Creation time|03/10/2020|
+|Customer ID|string|None|None|Customer id|C03x4xfakeU4|
+|Emails|[]email|None|None|Emails|[{'user1@example.com': None, True: None}, {'user2@example.com': None, False: None}]|
+|ID|string|None|None|User id|C03x4xfakeU4|
+|IP Whitelisted|boolean|None|None|True if IP whitelisted|None|
+|Is Admin|boolean|None|None|True if admin|True|
+|Is Delegated Admin|boolean|None|None|True if delegated admin|True|
+|Last Login Time|date|None|None|Last login time|03/10/2023|
+|Name|name|None|None|Name|{'givenName': 'Example', 'familyName': 'User', 'fullName': 'Example User'}|
+|Suspended|boolean|None|None|True if suspended|False|
+|Suspension Reason|string|None|None|Suspension reason|None|
 
 
 ## Troubleshooting
