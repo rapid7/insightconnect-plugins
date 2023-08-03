@@ -243,7 +243,7 @@ Example output:
 
 # Version History
 
-* 1.0.4 - Updated `httplib2` to version `0.19.0` | Added examples to help.md
+* 1.0.4 - Updated `httplib2` to version `0.22.0` | Added examples to help.md
 * 1.0.3 - New spec and help.md format for the Extension Library
 * 1.0.2 - Fix typo in plugin spec
 * 1.0.1 - Update to connection and troubleshooting documentation

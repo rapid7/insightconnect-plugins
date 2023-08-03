@@ -5,7 +5,7 @@ name: google_admin
 title: Google Apps Admin
 description: Get and suspend users with the Google admin plugin
 version: 1.0.4
-supported_versions: ["12/07/2021"]
+supported_versions: [12/07/2021]
 vendor: rapid7
 support: community
 status: [ ]
@@ -36,12 +36,12 @@ types:
   name:
     givenName:
       title: Given Name
-      description: given name
+      description: Given name
       type: string
       example: Example
     familyName:
       title: Family Name
-      description: family name
+      description: Family name
       type: string
       example: User
     fullName:
@@ -52,47 +52,47 @@ types:
   user:
     id:
       title: ID
-      description: user id
+      description: User id
       type: string
       example: C03x4xfakeU4
     customerId:
       title: Customer ID
-      description: customer id
+      description: Customer id
       type: string
       example: C03x4xfakeU4
     name:
       title: Name
-      description: name
+      description: Name
       type: name
       example: { "givenName": "Example", "familyName": "User", "fullName": "Example User" }
     isAdmin:
       title: Is Admin
-      description: true if admin
+      description: True if admin
       type: boolean
       example: True
     isDelegatedAdmin:
       title: Is Delegated Admin
-      description: true if delegated admin
+      description: True if delegated admin
       type: boolean
       example: True
     suspended:
       title: Suspended
-      description: true if suspended
+      description: True if suspended
       type: boolean
       example: False
     suspensionReason:
       title: Suspension Reason
-      description: suspension reason
+      description: Suspension reason
       type: string
       example: None
     emails:
       title: Emails
-      description: emails
+      description: Emails
       type: '[]email'
       example: [ { "user1@example.com", True },{ "user2@example.com", False } ]
     alias:
       title: Aliases
-      description: aliases
+      description: Aliases
       type: '[]string'
       example: [ "alias" ]
     changePasswordAtNextLogin:
@@ -102,22 +102,22 @@ types:
       example: False
     ipWhitelisted:
       title: IP Whitelisted
-      description: true if IP whitelisted
+      description: True if IP whitelisted
       type: boolean
       Example: True
     agreedToTerms:
       title: Agreed to Terms of Service
-      description: true if agreed to tos
+      description: True if agreed to tos
       type: boolean
       Example: True
     lastLoginTime:
       title: Last Login Time
-      description: last login time
+      description: Last login time
       type: date
       example: 03/10/2023
     creationTime:
       title: Creation Time
-      description: creation time
+      description: Creation time
       type: date
       example: 03/10/2020
 connection:
@@ -160,7 +160,7 @@ connection:
   client_x509_cert_url:
     title: Client X509 Cert URL
     type: string
-    description: x509 cert URL from service credentials
+    description: X509 cert URL from service credentials
     required: true
     example: https://example.com
   auth_uri:
