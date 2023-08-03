@@ -5,6 +5,7 @@ name: google_admin
 title: Google Apps Admin
 description: Get and suspend users with the Google admin plugin
 version: 1.0.4
+supported_versions: ["12/07/2021"]
 vendor: rapid7
 support: community
 status: [ ]
@@ -101,7 +102,7 @@ types:
       example: False
     ipWhitelisted:
       title: IP Whitelisted
-      description: true if ip whitelisted
+      description: true if IP whitelisted
       type: boolean
       Example: True
     agreedToTerms:
@@ -125,7 +126,7 @@ connection:
     description: Admin user to impersonate
     type: string
     required: true
-    example: admin@domain.com
+    example: user@exampl.com
   project_id:
     title: Project ID
     type: string

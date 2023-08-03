@@ -131,7 +131,7 @@ Example output:
 
 #### Suspend User
   
-Suspend a User
+This action is used to suspend a user by their primary email address, unique ID, or alias email.
 
 ##### Input
 
@@ -253,6 +253,7 @@ Example output:
 
 # Links
 
+* [Google Admin API](https://developers.google.com/admin-sdk)
 
 ## References
 
