@@ -394,13 +394,13 @@ actions:
         description: A human description of when this domain was registered
         type: object
         required: false
-        example: '{human: 28 years ago,timestamp: 808286400,iso: 1995-08-13T00:00:00-04:00 }'
+        example: '{"human": "26 years ago", "timestamp": 874296000,"iso": "1997-09-15T00:00:00-04:00"}'
       first_seen:
         title: First Seen
         description: A human description of the email address age, using an estimation of the email creation date when IPQS first discovered this email address
         type: object
         required: false
-        example: '{human: 7 years ago,timestamp: 1483250461,iso: 2017-01-01T01:01:01-05:00}'
+        example: '{"human": "26 years ago", "timestamp": 874296000,"iso": "1997-09-15T00:00:00-04:00"}'
   urlLookup:
     title: URL Reputation
     description: URL Reputation
@@ -519,7 +519,7 @@ actions:
         description: A human description of when this domain was registered
         type: object
         required: false
-        example: '{human: 26 years ago,timestamp: 874296000,iso: 1997-09-15T00:00:00-04:00}'
+        example: '{"human": "26 years ago", "timestamp": 874296000,"iso": "1997-09-15T00:00:00-04:00"}'
   domainLookup:
       title: Domain Reputation
       description: Domain Reputation
@@ -638,7 +638,7 @@ actions:
           description: A human description of when this domain was registered
           type: object
           required: false
-          example: '{human: 26 years ago,timestamp: 874296000,iso: 1997-09-15T00:00:00-04:00}'
+          example: '{"human": "26 years ago", "timestamp": 874296000,"iso": "1997-09-15T00:00:00-04:00"}'
   phoneLookup:
     title: Phone Reputation
     description: Phone Reputation
@@ -672,13 +672,13 @@ actions:
         description: The phone number formatted in the international dialing code NA if not formattable
         type: string
         required: false
-        example: '0'
+        example: '+917133457890'
       local_format:
         title: Local Format
         description: The phone number formatted in the country's local routing rules with area code NA if not formattable
         type: string
         required: false
-        example: '0'
+        example: '+91'
       valid:
         title: Valid
         description: Is the phone number properly formatted and considered valid based on assigned phone numbers available to carriers in that country?
@@ -732,7 +732,7 @@ actions:
         description: The type of line this phone number is associated with (Toll Free, Mobile, Landline, Satellite, VOIP, Premium Rate, Pager, etc) or NA if unknown
         type: string
         required: false
-        example: 'Unknown'
+        example: 'Wireless'
       country:
         title: Country
         description: The two character country code for this phone number
