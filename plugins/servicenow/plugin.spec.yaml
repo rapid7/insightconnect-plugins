@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: servicenow
 title: ServiceNow
 description: ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes
-version: 7.2.0
+version: 7.3.0
 supported_versions: ["2020-03-11 Orlando"]
 vendor: rapid7
 support: rapid7
@@ -91,6 +91,239 @@ types:
       description: Content type
       type: string
       required: false
+  link_value:
+    link:
+      title: Link
+      description: Link to the resource
+      type: string
+      required: false
+    value:
+      title: Value
+      description: Identifier of the resource
+      type: string
+      required: false
+  security_incident:
+    active:
+      title: Active
+      description: Whether the security incident is active
+      type: boolean
+      required: false
+    activity_due:
+      title: Activity Due
+      description: Date by which the Inactivity Monitor expects the task to be updated
+      type: string
+      required: false
+    affected_user:
+      title: Affected User
+      description: The user related to this security incident
+      type: link_value
+      required: false
+    alert_id:
+      title: Alert ID
+      description: The identifier of the alert
+      type: string
+      required: false
+    alert_rule:
+      title: Alert Rule
+      description: The rule of the alert
+      type: string
+      required: false
+    assigned_to:
+      title: Assigned To
+      description: Person primarily responsible for working this task
+      type: link_value
+      required: false
+    assignment_group:
+      title: Assignment Group
+      description: Group responsible for working this task
+      type: link_value
+      required: false
+    business_criticality:
+      title: Business Impact
+      description: The business impact of this incident
+      type: integer
+      required: false
+    caller:
+      title: Requested By
+      description: Person requesting the work to be done. Determines suggested Location if no Affected CI is defined
+      type: link_value
+      required: false
+    category:
+      title: Category
+      description: Category of the incident
+      type: string
+      required: false
+    change_request:
+      title: Change Request
+      description: The change request related to this security incident
+      type: link_value
+      required: false
+    close_code:
+      title: Close Code
+      description: Code indicating why the incident is being closed
+      type: integer
+      required: false
+    close_notes:
+      title: Close Notes
+      description: Notes explaining why the incident is being closed
+      type: string
+      required: false
+    closed_at:
+      title: Closed At
+      description: Time when the security incident was closed
+      type: string
+      required: false
+    closed_by:
+      title: Closed By
+      description: The person who closed the security incident
+      type: link_value
+      required: false
+    cmdb_ci:
+      title: Configuration Item
+      description: Item or service affected
+      type: link_value
+      required: false
+    contact_type:
+      title: Source
+      description: Source of the security incident
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Description of the security incident
+      type: string
+      required: false
+    incident:
+      title: Incident
+      description: The incident related to this security incident
+      type: link_value
+      required: false
+    location:
+      title: Location
+      description: Where the caller or service is located
+      type: link_value
+      required: false
+    number:
+      title: Number
+      description: Identification number of the security incident
+      type: string
+      required: false
+    opened_at:
+      title: Opened At
+      description: Time when the security incident was opened
+      type: string
+      required: false
+    opened_by:
+      title: Opened By
+      description: The person who opened the security incident
+      type: link_value
+      required: false
+    opened_for:
+      title: Opened For
+      description: Person this request was opened for
+      type: link_value
+      required: false
+    parent:
+      title: Parent
+      description: The parent of this security incident
+      type: link_value
+      required: false
+    parent_security_incident:
+      title: Parent Security Incident
+      description: The parent security incident to this security incident
+      type: link_value
+      required: false
+    priority:
+      title: Priority
+      description: Sequence in which the security incident needs to be resolved, based on impact and urgency
+      type: integer
+      required: false
+    problem:
+      title: Problem
+      description: The problem related to this security incident
+      type: link_value
+      required: false
+    risk_score:
+      title: Risk Score
+      description: Score of the risk
+      type: integer
+      required: false
+    risk_score_override:
+      title: Risk Score Override
+      description: When checked, risk score will not be updated automatically
+      type: boolean
+      required: false
+    secure_notes:
+      title: Secure Notes
+      description: Encrypted note of the security incident
+      type: string
+      required: false
+    security_tags:
+      title: Security Tags
+      description: Security tags applied to this security incident
+      type: string
+      required: false
+    short_description:
+      title: Short Description
+      description: Short description of the security incident
+      type: string
+      required: false
+    special_access_write:
+      title: Special Access Write
+      description: Users in the 'Privileged access' list will be able to see the Security Incident, data related to it and edit all data fields on it
+      type: string
+      required: false
+    state:
+      title: State
+      description: State of the security incident
+      type: integer
+      required: false
+    subcategory:
+      title: Subcategory
+      description: Subcategory of the security incident
+      type: string
+      required: false
+    substate:
+      title: Substate
+      description: Substate of the security incident
+      type: integer
+      required: false
+    sys_created_by:
+      title: System Created By
+      description: Person this security incident was created by
+      type: string
+      required: false
+    sys_created_on:
+      title: System Created On
+      description: Time when the security incident was created
+      type: string
+      required: false
+    sys_id:
+      title: System ID
+      description: The unique system ID of the security incident
+      type: string
+      required: false
+    sys_updated_by:
+      title: System Updated By
+      description: Person this security incident was updated by
+      type: string
+      required: false
+    sys_updated_on:
+      title: System Updated On
+      description: Time when the security incident was updated
+      type: string
+      required: false
+    watch_list:
+      title: Watch List
+      description: List of users that are interested on the security incident
+      type: string
+      required: false
+    work_notes_list:
+      title: Work Notes List
+      description: Users interested in work notes
+      type: string
+      required: false
+
 connection:
   instance:
     title: ServiceNow Instance
@@ -870,6 +1103,307 @@ actions:
         type: boolean
         required: true
         example: true
+  get_security_incident:
+    title: Get Security Incident
+    description: Retrieves a security incident by sys_id
+    input:
+      sys_id:
+        title: System ID
+        description: The unique system ID of the security incident
+        type: string
+        required: true
+        example: 7dbc4d558bbe4c6cb635b73b5f4a2e27
+    output:
+      security_incident:
+        title: Security Incident
+        description: Details of the security incident
+        type: security_incident
+        required: false
+        example: {}
+  delete_security_incident:
+    title: Delete Security Incident
+    description: Deletes a security incident by sys_id
+    input:
+      sys_id:
+        title: System ID
+        description: The unique system ID of the security incident to delete
+        type: string
+        required: true
+        example: 7dbc4d558bbe4c6cb635b73b5f4a2e27
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: false
+        example: true
+  search_security_incident:
+    title: Search Security Incident
+    description: Returns security incidents that match the search criteria
+    input:
+      query:
+        title: Query
+        description: An encoded query string used to filter the results
+        type: string
+        required: false
+        example: number=SIR0000001
+      fields:
+        title: Fields
+        description: A comma-separated list of fields to return in the response
+        type: string
+        required: false
+        example: number,sys_id
+      limit:
+        title: Limit
+        description: Maximum number of records to return
+        type: integer
+        required: false
+        example: 10
+      offset:
+        title: Offset
+        description: Starting record index for which to begin retrieving records
+        type: integer
+        required: false
+        example: 5
+    output:
+      security_incidents:
+        title: Security Incidents
+        description: Details of the matching security incidents
+        type: '[]security_incident'
+        required: false
+        example: []
+  create_security_incident:
+    title: Create Security Incident
+    description: Create a new security incident
+    input:
+      short_description:
+        title: Short Description
+        description: Short description of the created security incident
+        type: string
+        required: true
+        example: Example description
+      description:
+        title: Description
+        description: Description of the created security incident
+        type: string
+        required: false
+        example: Full description
+      caller:
+        title: Requested By
+        description: The user ID, email or system ID of the person requesting the work to be done
+        type: string
+        required: false
+        example: user@example.com
+      cmdb_ci:
+        title: Configuration Item
+        description: The name or system ID of the configuration item
+        type: string
+        required: false
+        example: Example CI
+      affected_user:
+        title: Affected User
+        description: The user ID, email or system ID of the user related to this security incident
+        type: string
+        required: false
+        example: jsmith
+      location:
+        title: Location
+        description: The name or system ID of the location
+        type: string
+        required: false
+        example: Example location
+      category:
+        title: Category
+        description: The code of the security incident category
+        type: string
+        required: false
+        example: malware
+      subcategory:
+        title: Subcategory
+        description: The code of the security incident subcategory (available values depends on the `Category` field)
+        type: string
+        required: false
+        example: ransomware
+      state:
+        title: State
+        description: The code of the security incident state
+        type: integer
+        required: false
+        example: 18
+      substate:
+        title: Substate
+        description: The code of the security incident substate
+        type: integer
+        required: false
+        example: 2
+      contact_type:
+        title: Source
+        description: The code of the security incident source
+        type: string
+        required: false
+        example: email
+      priority:
+        title: Priority
+        description: The code of the priority in which an Incident needs to be resolved, based on impact and urgency
+        type: integer
+        required: false
+        example: 3
+      assignment_group:
+        title: Assignment Group
+        description: The name or system id of the assignment group
+        type: string
+        required: false
+        example: Example Group
+      assigned_to:
+        title: Assigned To
+        description: The name, user ID, email or system id of the person primarily responsible for working this task
+        type: string
+        required: false
+        example: test_user
+      additional_fields:
+        title: Additional Fields
+        description: JSON object containing the additional fields and values to create security incident
+        type: object
+        required: false
+        example: '{"risk_score": 40, "risk_score_override": true, "parent_security_incident": "SIR0010010"}'
+    output:
+      system_id:
+        title: System ID
+        description: System ID of the security incident
+        type: string
+        required: false
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+      number:
+        title: Number
+        description: Number of the security incident
+        type: string
+        required: false
+        example: SIR0010044
+  update_security_incident:
+    title: Update Security Incident
+    description: Update an existing security incident
+    input:
+      sys_id:
+        title: System ID
+        description: The system ID of the security incident to be updated
+        type: string
+        required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+      short_description:
+        title: Short Description
+        description: Short description of the security incident
+        type: string
+        required: false
+        example: Example description
+      description:
+        title: Description
+        description: Description of the security incident
+        type: string
+        required: false
+        example: Full description
+      caller:
+        title: Requested By
+        description: The user ID, email or system ID of the person requesting the work to be done
+        type: string
+        required: false
+        example: user@example.com
+      cmdb_ci:
+        title: Configuration Item
+        description: The name or system ID of the configuration item
+        type: string
+        required: false
+        example: Example CI
+      affected_user:
+        title: Affected User
+        description: The user ID, email or system ID of the user related to this security incident
+        type: string
+        required: false
+        example: jsmith
+      location:
+        title: Location
+        description: The name or system ID of the location
+        type: string
+        required: false
+        example: Example location
+      category:
+        title: Category
+        description: The code of the security incident category
+        type: string
+        required: false
+        example: malware
+      subcategory:
+        title: Subcategory
+        description: The code of the security incident subcategory (available values depends on the `Category` field)
+        type: string
+        required: false
+        example: ransomware
+      state:
+        title: State
+        description: The code of the security incident state
+        type: integer
+        required: false
+        example: 18
+      substate:
+        title: Substate
+        description: The code of the security incident substate
+        type: integer
+        required: false
+        example: 2
+      contact_type:
+        title: Source
+        description: The code of the security incident source
+        type: string
+        required: false
+        example: email
+      priority:
+        title: Priority
+        description: The code of the priority in which an Incident needs to be resolved, based on impact and urgency
+        type: integer
+        required: false
+        example: 3
+      assignment_group:
+        title: Assignment Group
+        description: The name or system id of the assignment group
+        type: string
+        required: false
+        example: Example Group
+      assigned_to:
+        title: Assigned To
+        description: The name, user ID, email or system id of the person primarily responsible for working this task
+        type: string
+        required: false
+        example: test_user
+      close_code:
+        title: Close Code
+        description: The code of the incident closure reason
+        type: string
+        required: false
+        example: Not resolved
+      close_notes:
+        title: Close Notes
+        description: Incident closure notes
+        type: string
+        required: false
+        example: Example notes
+      additional_fields:
+        title: Additional Fields
+        description: JSON object containing the additional fields and values to update security incident
+        type: object
+        required: false
+        example: '{"risk_score": 40, "risk_score_override": true, "parent_security_incident": "SIR0010010"}'
+    output:
+      system_id:
+        title: System ID
+        description: System ID of the security incident
+        type: string
+        required: false
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+      number:
+        title: Number
+        description: Number of the security incident
+        type: string
+        required: false
+        example: SIR0010044
 triggers:
   incident_changed:
     title: Incident Changed

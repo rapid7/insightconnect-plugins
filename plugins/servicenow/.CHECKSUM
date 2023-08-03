@@ -1,7 +1,7 @@
 {
-	"spec": "cf6ca4ecdb23da6fe639c8174a578467",
-	"manifest": "6cababfa83094993e42ebd3715d77c17",
-	"setup": "84746e998eeb4078e599152a1486e72d",
+	"spec": "cf7a3c056518aa3b8740ced9e4d2cd5f",
+	"manifest": "c577bfe56f47b46e2ea5f9091dae8da2",
+	"setup": "c8b5ba2e0c1830208b37445d658c43ae",
 	"schemas": [
 		{
 			"identifier": "create_change_request/schema.py",
@@ -16,6 +16,10 @@
 			"hash": "9fbf0ed95d76d249f29e7b93647ecba2"
 		},
 		{
+			"identifier": "create_security_incident/schema.py",
+			"hash": "969175bc7be0ca39d33d396adffdf1f8"
+		},
+		{
 			"identifier": "create_vulnerability/schema.py",
 			"hash": "6c54e3233387151776a08e9022c6c102"
 		},
@@ -26,6 +30,10 @@
 		{
 			"identifier": "delete_incident_attachment/schema.py",
 			"hash": "614ae35829ea144f03eba4fb11db2f80"
+		},
+		{
+			"identifier": "delete_security_incident/schema.py",
+			"hash": "490b492a2782100c7f8ad6254e6dd84a"
 		},
 		{
 			"identifier": "delete_vulnerability/schema.py",
@@ -46,6 +54,10 @@
 		{
 			"identifier": "get_incident_comments_worknotes/schema.py",
 			"hash": "cedf83d876a004b1a911aef90cecd82e"
+		},
+		{
+			"identifier": "get_security_incident/schema.py",
+			"hash": "778fd8346feda630f72a88dc462f7355"
 		},
 		{
 			"identifier": "get_vulnerability/schema.py",
@@ -72,12 +84,20 @@
 			"hash": "10680fa489519a3d826e9f898d4fe6af"
 		},
 		{
+			"identifier": "search_security_incident/schema.py",
+			"hash": "2646c13d9a70203205150a42aa067c64"
+		},
+		{
 			"identifier": "update_ci/schema.py",
 			"hash": "01b3282537d8e7d1ed056d41fea1b30e"
 		},
 		{
 			"identifier": "update_incident/schema.py",
 			"hash": "63be5c268dbb56559962c5236aa55529"
+		},
+		{
+			"identifier": "update_security_incident/schema.py",
+			"hash": "638ac1e6542bd7f16cfda720ce125123"
 		},
 		{
 			"identifier": "update_vulnerability/schema.py",

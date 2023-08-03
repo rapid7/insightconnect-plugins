@@ -34,6 +34,10 @@ class Util:
             return my_file.read()
 
     @staticmethod
+    def read_file_to_dict(filename):
+        return json.loads(Util.read_file_to_string(os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)))
+
+    @staticmethod
     def mocked_requests(*args, **kwargs):
         class MockResponse:
             def __init__(self, filename, status_code, headers=None):
@@ -41,10 +45,11 @@ class Util:
                     headers = {"Content-Type": "application/json"}
                 self.status_code = status_code
                 self.headers = headers
-                self.content = Util.read_file_to_bytes(
-                    os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{filename}.resp")
-                )
-                self.text = self.content.decode("UTF-8")
+                if filename:
+                    self.content = Util.read_file_to_bytes(
+                        os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{filename}.resp")
+                    )
+                    self.text = self.content.decode("UTF-8")
 
             def json(self):
                 return json.loads(self.text)
@@ -79,5 +84,40 @@ class Util:
             return MockResponse("create_vulnerability.json", 201)
         elif kwargs["url"] in ("https://rapid7.service-now.com/api/now/table/sn_vul_third_party_entry",):
             return MockResponse("create_third_party_vulnerability_entry.json", 201)
+
+        elif kwargs.get("url") == "https://rapid7.service-now.com/api/now/table/sn_si_incident/d1234":
+            return MockResponse("", 204)
+        elif kwargs.get("url") == "https://rapid7.service-now.com/api/now/table/sn_si_incident/d12345":
+            return MockResponse("delete_security_incident_invalid_sys_id.json", 404)
+
+        elif kwargs.get("url") == "https://rapid7.service-now.com/api/now/table/sn_si_incident/g123456":
+            return MockResponse("get_security_incident_success.json", 200)
+        elif kwargs.get("url") == "https://rapid7.service-now.com/api/now/table/sn_si_incident/g1234567":
+            return MockResponse("get_security_incident_invalid_sys_id.json", 404)
+        elif kwargs.get("url") == "https://rapid7.service-now.com/api/now/table/sn_si_incident/invalid":
+            return MockResponse("get_security_incident_invalid_sys_id.json", 404)
+        elif (
+            kwargs.get("url")
+            == "https://rapid7.service-now.com/api/now/table/sn_si_incident/9de5069c5afe602b2ea0a04b66beb2c0"
+        ):
+            if kwargs.get("json") == {"short_description": "updated incident"}:
+                return MockResponse("create_security_incident.json", 200)
+            elif kwargs.get("json", {}).get("short_description") == "updated incident":
+                return MockResponse("create_security_incident.json", 200)
+        elif kwargs.get("url") == "https://rapid7.service-now.com/api/now/table/sn_si_incident":
+            if kwargs.get("params") == {}:
+                return MockResponse("search_security_incident_all.json", 200)
+            elif kwargs.get("params") == {"sysparm_fields": "sys_id,number.priority"}:
+                return MockResponse("search_security_incident_fields.json", 200)
+            elif kwargs.get("params") == {"sysparm_query": "priority=3"}:
+                return MockResponse("search_security_incident_query.json", 200)
+            elif kwargs.get("params") == {"sysparm_limit": 1, "sysparm_offset": 1}:
+                return MockResponse("search_security_incident_limit_offset.json", 200)
+            elif kwargs.get("params") == {"sysparm_query": "number=SIR111111"}:
+                return MockResponse("search_security_incident_empty_list.json", 200)
+            elif kwargs.get("json") == {"short_description": "test incident"}:
+                return MockResponse("create_security_incident.json", 200)
+            elif kwargs.get("json", {}).get("short_description") == "new incident":
+                return MockResponse("create_security_incident.json", 200)
 
         raise Exception("Not implemented")
