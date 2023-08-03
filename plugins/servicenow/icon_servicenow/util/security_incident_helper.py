@@ -12,7 +12,7 @@ integer_fields_to_convert = [
 def convert_boolean_fields(security_incident_object: dict) -> dict:
     for field in boolean_fields_to_convert:
         if security_incident_object.get(field):
-            security_incident_object[field] = True if security_incident_object.get(field) == "true" else False
+            security_incident_object[field] = security_incident_object.get(field) == "true"
     return security_incident_object
 
 
