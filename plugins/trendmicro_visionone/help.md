@@ -1734,8 +1734,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.0 - Initial plugin
 * 1.0.1 - Alert Details Output Fix (Minor Fix)
+* 1.0.0 - Initial plugin
 
 # Links
 
