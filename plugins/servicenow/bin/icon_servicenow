@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "ServiceNow"
 Vendor = "rapid7"
-Version = "7.2.0"
+Version = "7.3.0"
 Description = "ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes"
 
 
@@ -46,11 +46,15 @@ def main():
 
             self.add_action(actions.CreateIncident())
 
+            self.add_action(actions.CreateSecurityIncident())
+
             self.add_action(actions.CreateVulnerability())
 
             self.add_action(actions.DeleteIncident())
 
             self.add_action(actions.DeleteIncidentAttachment())
+
+            self.add_action(actions.DeleteSecurityIncident())
 
             self.add_action(actions.DeleteVulnerability())
 
@@ -61,6 +65,8 @@ def main():
             self.add_action(actions.GetIncidentAttachment())
 
             self.add_action(actions.GetIncidentCommentsWorknotes())
+
+            self.add_action(actions.GetSecurityIncident())
 
             self.add_action(actions.GetVulnerability())
 
@@ -74,9 +80,13 @@ def main():
 
             self.add_action(actions.SearchIncidentAttachment())
 
+            self.add_action(actions.SearchSecurityIncident())
+
             self.add_action(actions.UpdateCi())
 
             self.add_action(actions.UpdateIncident())
+
+            self.add_action(actions.UpdateSecurityIncident())
 
             self.add_action(actions.UpdateVulnerability())
 
