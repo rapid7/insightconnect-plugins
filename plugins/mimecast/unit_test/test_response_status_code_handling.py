@@ -31,9 +31,11 @@ class TestResponseStatusCodeHandling(TestCase):
     def test_403_response(self, mocked_request):
         with self.assertRaises(PluginException) as exception:
             self.action.run(Util.load_json("inputs/find_groups_403.json.exp"))
-        self.assertEqual(exception.exception.cause, ConnectionTestException.causes.get(PluginException.Preset.API_KEY))
         self.assertEqual(
-            exception.exception.assistance, ConnectionTestException.assistances.get(PluginException.Preset.API_KEY)
+            exception.exception.cause, ConnectionTestException.causes.get(PluginException.Preset.UNAUTHORIZED)
+        )
+        self.assertEqual(
+            exception.exception.assistance, ConnectionTestException.assistances.get(PluginException.Preset.UNAUTHORIZED)
         )
 
     def test_404_response(self, mocked_request):
