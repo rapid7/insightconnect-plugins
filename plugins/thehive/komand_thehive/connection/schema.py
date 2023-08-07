@@ -92,7 +92,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
           "title": "Password",
           "description": "The password",
           "format": "password",
-          "display_type": "password",
+          "displayType": "password",
           "order": 2
         }
       },
@@ -115,7 +115,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
           "title": "Secret Key",
           "description": "The shared secret key",
           "format": "password",
-          "display_type": "password"
+          "displayType": "password"
         }
       }
     }

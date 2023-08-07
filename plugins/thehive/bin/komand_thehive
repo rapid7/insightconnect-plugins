@@ -4,12 +4,12 @@ import os
 import json
 from sys import argv
 import insightconnect_plugin_runtime
-from komand_thehive import connection, actions, triggers
+from komand_thehive import connection, actions, triggers, tasks
 
 
 Name = "TheHive"
 Vendor = "rapid7"
-Version = "4.0.0"
+Version = "4.0.1"
 Description = "TheHive is a scalable, open source security incident response solution designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done"
 
 

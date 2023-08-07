@@ -47,4 +47,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Setup Complete")
 
     def test(self):
-        return {"success": True}
+        try:
+            self.client.get_current_user()
+            return {"success": True}
+        except Exception:
+            return {"success": False}
