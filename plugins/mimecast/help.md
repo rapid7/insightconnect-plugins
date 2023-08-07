@@ -1057,6 +1057,7 @@ Example output:
 
 # Version History
 
+* 5.3.0 - Handled rate limiting error messaging | Update to latest plugin SDK 
 * 5.2.2 - Handled status code for `Monitor SIEM Logs` | Request limit set to 1 minute in `Monitor SIEM Logs` 
 * 5.2.1 - Connection: add connection version 
 * 5.2.0 - New task added `Monitor SIEM Logs` | Update plugin to be cloud enabled

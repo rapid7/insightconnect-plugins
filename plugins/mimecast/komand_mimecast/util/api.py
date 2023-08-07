@@ -1,4 +1,5 @@
 import base64
+import binascii
 import datetime
 import hashlib
 import hmac
@@ -101,6 +102,8 @@ class MimecastAPI:
         request = requests.request(
             method="POST", url=f"{self.url}{uri}", headers=self._prepare_header(uri), data=str(payload)
         )
+        self._check_rate_limiting(request)
+
         if "attachment" in request.headers.get("Content-Disposition", ""):
             combined_json_list = self._handle_zip_file(request)
             return combined_json_list, request.headers, request.status_code
@@ -121,9 +124,18 @@ class MimecastAPI:
             )
         raise ApiClientException(preset=PluginException.Preset.UNKNOWN, data=response, status_code=status_code)
 
+    def _check_rate_limiting(self, request):
+        rate_limit_status_code = 429
+        if request.status_code == rate_limit_status_code:
+            raise ApiClientException(
+                preset=PluginException.Preset.RATE_LIMIT, status_code=rate_limit_status_code, data=request.text
+            )
+
     def _handle_status_code_response(self, response: requests.request, status_code: int):
-        if status_code == 403:
+        if status_code == 401:
             raise PluginException(preset=PluginException.Preset.API_KEY, data=response)
+        elif status_code == 403:
+            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response)
         elif status_code == 404:
             raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response)
         elif status_code >= 500:
@@ -159,8 +171,16 @@ class MimecastAPI:
         hdr_date = f'{datetime.datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S")} UTC'
 
         # Decode secret key
-        encoded_secret_key = self.secret_key.encode()
-        bytes_secret_key = base64.b64decode(encoded_secret_key)
+        try:
+            encoded_secret_key = self.secret_key.encode()
+            bytes_secret_key = base64.b64decode(encoded_secret_key)
+        except binascii.Error as error:
+            raise ApiClientException(
+                cause=PluginException.causes[PluginException.Preset.API_KEY],
+                assistance="Please make sure that the Secret Key is valid and try again.",
+                data=error,
+                status_code=401,
+            )
 
         # Create hmac message
         msg = ":".join([hdr_date, request_id, uri, self.app_key])
@@ -217,36 +237,34 @@ class MimecastAPI:
             for error in errors.get("errors", []):
                 if error.get(CODE) == XDK_BINDING_EXPIRED_ERROR:
                     raise ApiClientException(
-                        cause=ERROR_CASES.get(XDK_BINDING_EXPIRED_ERROR),
-                        assistance="Please provide a valid AccessKey.",
+                        preset=PluginException.Preset.API_KEY,
                         data=response,
                         status_code=401,
                     )
                 elif error.get(CODE) == DEVELOPER_KEY_ERROR:
                     raise ApiClientException(
-                        cause=ERROR_CASES.get(error.get(CODE)),
-                        assistance=BASIC_ASSISTANCE_MESSAGE,
+                        preset=PluginException.Preset.API_KEY,
                         data=response,
                         status_code=401,
                     )
                 elif error.get(CODE) in ERROR_CASES:
                     raise ApiClientException(
-                        cause=ERROR_CASES.get(error.get(CODE)),
-                        assistance=BASIC_ASSISTANCE_MESSAGE,
+                        assistance=ERROR_CASES.get(error.get(CODE)),
+                        cause=PluginException.causes[PluginException.Preset.BAD_REQUEST],
                         data=response,
                         status_code=400,
                     )
                 elif error.get(CODE) == FIELD_VALIDATION_ERROR:
                     raise ApiClientException(
-                        cause=f"This {error.get('field')} field is mandatory; it cannot be NULL.",
-                        assistance=BASIC_ASSISTANCE_MESSAGE,
+                        assistance=f"This {error.get('field')} field is mandatory; it cannot be NULL.",
+                        cause=PluginException.causes[PluginException.Preset.BAD_REQUEST],
                         data=response,
                         status_code=400,
                     )
                 elif error.get(CODE) == VALIDATION_BLANK_ERROR:
                     raise ApiClientException(
-                        cause=f"This {error.get('field')} field, if present, cannot be blank or empty.",
-                        assistance=BASIC_ASSISTANCE_MESSAGE,
+                        assistance=f"This {error.get('field')} field, if present, cannot be blank or empty.",
+                        cause=PluginException.causes[PluginException.Preset.BAD_REQUEST],
                         data=response,
                         status_code=400,
                     )
@@ -272,6 +290,8 @@ class MimecastAPI:
             )
         except requests.exceptions.RequestException as e:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=e)
+
+        self._check_rate_limiting(request)
 
         try:
             response = request.json()

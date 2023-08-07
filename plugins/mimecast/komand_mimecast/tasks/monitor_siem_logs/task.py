@@ -4,6 +4,7 @@ from time import time
 import insightconnect_plugin_runtime
 from typing import Dict, List
 
+from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import get_time_hours_ago
 
 from .schema import MonitorSiemLogsInput, MonitorSiemLogsOutput, MonitorSiemLogsState, Component
@@ -27,36 +28,36 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         )
 
     def run(self, params={}, state={}) -> (List[Dict], Dict):
-        has_more_pages = False
-        header_next_token = state.get(self.NEXT_TOKEN, "")
-        if not header_next_token:
-            self.logger.info("First run")
-        else:
-            self.logger.info("Subsequent run")
-            params[self.TOKEN] = header_next_token
+        try:
+            has_more_pages = False
+            header_next_token = state.get(self.NEXT_TOKEN, "")
+            if not header_next_token:
+                self.logger.info("First run")
+            else:
+                self.logger.info("Subsequent run")
+                params[self.TOKEN] = header_next_token
 
-        limit_time = time() + 60
-        while time() < limit_time:
-            try:
-                output, headers, status_code = self.connection.client.get_siem_logs(params)
-            except ApiClientException as error:
-                state[self.STATUS_CODE] = error.status_code
-                return [], state, has_more_pages
-            header_next_token = headers.get(self.HEADER_NEXT_TOKEN)
-            params[self.TOKEN] = header_next_token
-            if not output:
-                break
-            output = self._filter_and_sort_recent_events(output)
-            if len(output) > 0:
-                break
+            limit_time = time() + 60
+            while time() < limit_time:
+                try:
+                    output, headers, status_code = self.connection.client.get_siem_logs(params)
+                except ApiClientException as error:
+                    return [], state, has_more_pages, error.status_code, error
+                header_next_token = headers.get(self.HEADER_NEXT_TOKEN)
+                params[self.TOKEN] = header_next_token
+                if not output:
+                    break
+                output = self._filter_and_sort_recent_events(output)
+                if len(output) > 0:
+                    break
 
-        if header_next_token:
-            state[self.NEXT_TOKEN] = header_next_token
-            has_more_pages = True
+            if header_next_token:
+                state[self.NEXT_TOKEN] = header_next_token
+                has_more_pages = True
 
-        state[self.STATUS_CODE] = status_code
-
-        return output, state, has_more_pages
+            return output, state, has_more_pages, status_code, None
+        except Exception as error:
+            return [], state, has_more_pages, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def _filter_and_sort_recent_events(self, output: List[dict]) -> List[dict]:
         """

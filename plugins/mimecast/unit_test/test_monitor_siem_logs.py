@@ -19,14 +19,15 @@ class TestMonitorSiemLogs(TestCase):
         self.task = Util.default_connector(MonitorSiemLogs())
 
     def test_monitor_siem_logs(self, mock_data):
-        response, new_state, has_more_pages = self.task.run()
+        response, new_state, has_more_pages, status_code, _ = self.task.run()
 
         expected_response = [FILE_ZIP_CONTENT_1, FILE_ZIP_CONTENT_2]
-        expected_state = {"next_token": SIEM_LOGS_HEADERS_RESPONSE.get("mc-siem-token"), "status_code": 200}
+        expected_state = {"next_token": SIEM_LOGS_HEADERS_RESPONSE.get("mc-siem-token")}
 
         self.assertEqual(has_more_pages, True)
         self.assertEqual(response, expected_response)
         self.assertEqual(new_state, expected_state)
+        self.assertEqual(status_code, 200)
 
 
 class TestEventLogs(TestCase):
