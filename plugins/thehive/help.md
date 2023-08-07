@@ -106,7 +106,7 @@ Create a new case
 |severity|integer|2|False|Case severity|[1, 2, 3, 4]|2|
 |startDate|integer|None|False|Case start date (datetime in ms) (will default to now if left blank)|None|1684170163000|
 |summary|string|None|False|Case summary|None|Case summary|
-|tags|[]string|None|False|List of case tags|None|['case_tag_1', 'case_tag_2']|
+|tags|[]string|None|False|List of case tags|None|["case_tag_1", "case_tag_2"]|
 |template|string|None|False|Case template's name. If specified then the case is created using the given template|None|Case template name|
 |title|string|None|True|Name of the case|None|Case title|
 |tlp|integer|2|False|Traffic Light Protocol level|[0, 1, 2, 3]|2|
@@ -190,7 +190,7 @@ Create a new case observable
 |pap|integer|2|False|Case's PAP|[0, 1, 2, 3]|2|
 |sighted|boolean|False|False|Observable's sighted flag, True to mark the observable as sighted|None|False|
 |startDate|integer|None|False|Observable start date (datetime in ms) (will default to now if left blank)|None|1640000000000|
-|tags|[]string|None|False|List of observable tags, required if message is None|None|['tag_one', 'tag_two']|
+|tags|[]string|None|False|List of observable tags, required if message is None|None|["tag_one", "tag_two"]|
 |tlp|integer|2|False|Case's TLP|[0, 1, 2, 3]|2|
   
 Example input:
