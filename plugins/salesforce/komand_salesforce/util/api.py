@@ -20,6 +20,8 @@ def rate_limiting(max_tries: int):
     def _decorate(func):
         def _wrapper(*args, **kwargs):
             self = args[0]
+            if not self.enable_rate_limiting:
+                return func(*args, **kwargs)
             retry = True
             counter, delay = 0, 0
             while retry and counter < max_tries:
@@ -51,6 +53,7 @@ class SalesforceAPI:
         self._username = username
         self._password = password
         self._security_token = security_token
+        self.enable_rate_limiting = True
 
     def simple_search(self, text: str) -> list:
         return self._make_json_request("GET", PARAMETERIZED_SEARCH_ENDPOINT, params={"q": text}).get(
