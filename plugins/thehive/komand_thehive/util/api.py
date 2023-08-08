@@ -11,7 +11,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class HiveAPI:
-    def __init__(self, url: str, username: str, password: str, api_key: str, proxies, verify):
+    def __init__(self, url: str, username: str, password: str, api_key: str, proxies, verify: bool):
         self.url = url
         self.username = username
         self.password = password
@@ -86,7 +86,7 @@ class HiveAPI:
             headers=headers,
             auth=auth,
             proxies=self.proxy,
-            verify=self.verify
+            verify=self.verify,
         )
 
         if response.status_code == 204:
