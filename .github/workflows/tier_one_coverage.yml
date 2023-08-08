@@ -1,0 +1,27 @@
+name: TierOneCoverage
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+
+jobs:
+  check-coverage:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-python@v3
+      with:
+        python-version: '3.9'
+
+    - name: Run Coverage on Tier One Plugins
+      env:
+        TIER_ONE_PLUGINS: ["active_directory_ldap","math","ssh","advanced_regex","microsoft_atp_safe_links","storage",
+                           "base64","microsoft_office365_email","string","basename","microsoft_sccm","subnet",
+                           "crowdstrike_falcon","microsoft_teams","timers","csv","python_3_script","type_converter",
+                           "cymru_malware_hash","rapid7_insight_agent","virustotal","datetime","rapid7_insightidr",
+                           "whois","dig","rapid7_insightvm","rapid7_intsights","extractit","rapid7_vulndb",
+                           "rapid7_insightappsec","hashit","rest","rapid7_insights","html","servicenow","jira","sleep"]
+      run: pwd
