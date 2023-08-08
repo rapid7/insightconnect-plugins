@@ -30,6 +30,7 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
 
     # pylint: disable=unused-argument
     def run(self, params={}, state={}):  # noqa: C901
+        self.connection.api.enable_rate_limiting = False
         has_more_pages = False
         try:
             now = self.get_current_time()
