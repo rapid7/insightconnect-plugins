@@ -42,7 +42,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             password=self.password,
             api_key=self.api_key,
             proxies=self.proxy,
-            cert=self.verify,
+            verify=self.verify,
         )
 
         self.logger.info("Setup Complete")
