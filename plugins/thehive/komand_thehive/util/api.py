@@ -78,7 +78,14 @@ class HiveAPI:
         data = json.dumps(data, sort_keys=True, indent=4, cls=json.JSONEncoder)
 
         response = requests.request(
-            method, self.url + path, params=params, data=data, json=json_data, headers=headers, auth=auth
+            method,
+            self.url + path,
+            params=params,
+            data=data,
+            json=json_data,
+            headers=headers,
+            auth=auth,
+            proxies=self.proxy,
         )
 
         if response.status_code == 204:
