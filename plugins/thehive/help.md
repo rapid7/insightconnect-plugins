@@ -622,7 +622,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.0.1 - Connection: Added a functional test | Permissions: Changed permissions to `root` and pointed to SSL certs folder in `Dockerfile`.
+* 4.0.1 - Connection: Added a functional test, fixed issue where SSL was not passed to API | Permissions: Changed permissions to `root` and pointed to SSL certs folder in `Dockerfile`. | 
 * 4.0.0 - Added additional error handling for issues that occur outside the expected status codes | Action: `create_case` remade to not include task input
 * 3.0.0 - Refactored plugin | Removed `thehive4py` dependency | Action: Split `get_user` into two new actions, `get_user_by_id` & `get_current_user`
 * 2.0.5 - New spec and help.md format for the Extension Library. Update help key features and fix description capitalisation
