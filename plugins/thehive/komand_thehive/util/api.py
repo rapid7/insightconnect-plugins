@@ -60,7 +60,7 @@ class HiveAPI:
     ) -> Union[dict, None]:
 
         # Build out the headers
-        headers = {"X-Organisation": "myOrg", "Content-Type": "application/json"}
+        headers = {"Content-Type": "application/json"}
 
         # Handle the authentication method
         auth = None
