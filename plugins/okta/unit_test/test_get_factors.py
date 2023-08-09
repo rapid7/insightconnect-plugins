@@ -41,7 +41,7 @@ class TestGetFactors(TestCase):
             [
                 "user_not_found",
                 Util.read_file_to_dict("inputs/get_factors_user_not_found.json.inp"),
-                "Resource not found.",
+                "Invalid or unreachable endpoint provided.",
                 "Verify your input is correct and not malformed and try again. If the issue persists, please contact support.",
             ],
         ]

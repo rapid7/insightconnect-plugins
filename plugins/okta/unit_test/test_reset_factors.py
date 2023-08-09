@@ -36,7 +36,7 @@ class TestResetFactors(TestCase):
             [
                 "invalid_user",
                 Util.read_file_to_dict("inputs/reset_factors_invalid_user.json.inp"),
-                "Resource not found.",
+                "Invalid or unreachable endpoint provided.",
                 "Verify your input is correct and not malformed and try again. If the issue persists, please contact support.",
             ]
         ]

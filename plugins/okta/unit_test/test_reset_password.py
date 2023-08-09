@@ -41,7 +41,7 @@ class TestResetPassword(TestCase):
             [
                 "invalid_user_id",
                 Util.read_file_to_dict("inputs/reset_password_invalid_user_id.json.inp"),
-                "Resource not found.",
+                "Invalid or unreachable endpoint provided.",
                 "Verify your input is correct and not malformed and try again. If the issue persists, please contact support.",
             ]
         ]

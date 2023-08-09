@@ -204,4 +204,15 @@ class Util:
         ):
             return MockResponse(200, "send_push_verify_poll_status_waiting.json.resp")
 
+        if url == "https://example.com/api/v1/users/1234/groups":
+            return MockResponse(200, "get_user_groups_by_id_success.json.resp")
+        if url == "https://example.com/api/v1/users/user@example.com/groups":
+            return MockResponse(200, "get_user_groups_by_login_success.json.resp")
+        if url == "https://example.com/api/v1/users/123456/groups":
+            return MockResponse(200, "get_user_groups_empty.json.resp")
+        if url == "https://example.com/api/v1/users/12345/groups":
+            return MockResponse(404)
+        if url == "https://example.com/api/v1/users/user2@example.com/groups":
+            return MockResponse(404)
+
         raise NotImplementedError("Not implemented", kwargs)
