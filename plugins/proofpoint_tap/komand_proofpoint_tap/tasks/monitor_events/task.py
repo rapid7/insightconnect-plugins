@@ -1,13 +1,14 @@
-import insightconnect_plugin_runtime
-from .schema import MonitorEventsInput, MonitorEventsOutput, MonitorEventsState, Component
-
-# Custom imports below
 from datetime import datetime, timedelta, timezone
-from komand_proofpoint_tap.util.api import Endpoint
-from komand_proofpoint_tap.util.util import SiemUtils
-from komand_proofpoint_tap.util.exceptions import ApiException
 from hashlib import sha1
+
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
+from komand_proofpoint_tap.util.api import Endpoint
+from komand_proofpoint_tap.util.exceptions import ApiException
 from komand_proofpoint_tap.util.helpers import clean
+from komand_proofpoint_tap.util.util import SiemUtils
+from .schema import MonitorEventsInput, MonitorEventsOutput, MonitorEventsState, Component
 
 
 class MonitorEvents(insightconnect_plugin_runtime.Task):
@@ -27,60 +28,62 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
         )
 
     def run(self, params={}, state={}):  # pylint: disable=unused-argument
-        last_collection_date = state.get(self.LAST_COLLECTION_DATE)
-        next_page_index = state.get(self.NEXT_PAGE_INDEX)
-        previous_logs_hashes = state.get(self.PREVIOUS_LOGS_HASHES, [])
+        self.connection.client.toggle_rate_limiting = False
         has_more_pages = False
-
-        query_params = {"format": "JSON"}
-
-        if not state:
-            self.logger.info("First run")
-            now = self.get_current_time() - timedelta(minutes=1)
-            last_hour = now - timedelta(hours=1)
-            state[self.LAST_COLLECTION_DATE] = now.isoformat()
-            parameters = SiemUtils.prepare_time_range(last_hour.isoformat(), now.isoformat(), query_params)
-        else:
-            if next_page_index:
-                state.pop(self.NEXT_PAGE_INDEX)
-                self.logger.info("Getting the next page of results...")
-                parameters = SiemUtils.prepare_time_range(
-                    (datetime.fromisoformat(last_collection_date) - timedelta(hours=1)).isoformat(),
-                    last_collection_date,
-                    query_params,
-                )
-            else:
-                self.logger.info("Subsequent run")
-                now = self.get_current_time() - timedelta(minutes=1)
-                state[self.LAST_COLLECTION_DATE] = now.isoformat()
-                last_hour = now - timedelta(hours=1)
-                parameters = SiemUtils.prepare_time_range(last_hour.isoformat(), now.isoformat(), query_params)
         try:
-            parsed_logs = self.parse_logs(
-                clean(self.connection.client.siem_action(Endpoint.get_all_threats(), parameters))
-            )
+            last_collection_date = state.get(self.LAST_COLLECTION_DATE)
+            next_page_index = state.get(self.NEXT_PAGE_INDEX)
+            previous_logs_hashes = state.get(self.PREVIOUS_LOGS_HASHES, [])
+            query_params = {"format": "JSON"}
 
-            if (not next_page_index and len(parsed_logs) > self.SPLIT_SIZE) or (
-                next_page_index and (next_page_index + 1) * self.SPLIT_SIZE < len(parsed_logs)
-            ):
-                state[self.NEXT_PAGE_INDEX] = next_page_index + 1 if next_page_index else 1
-                has_more_pages = True
+            if not state:
+                self.logger.info("First run")
+                now = self.get_current_time() - timedelta(minutes=1)
+                last_hour = now - timedelta(hours=1)
+                state[self.LAST_COLLECTION_DATE] = now.isoformat()
+                parameters = SiemUtils.prepare_time_range(last_hour.isoformat(), now.isoformat(), query_params)
+            else:
+                if next_page_index:
+                    state.pop(self.NEXT_PAGE_INDEX)
+                    self.logger.info("Getting the next page of results...")
+                    parameters = SiemUtils.prepare_time_range(
+                        (datetime.fromisoformat(last_collection_date) - timedelta(hours=1)).isoformat(),
+                        last_collection_date,
+                        query_params,
+                    )
+                else:
+                    self.logger.info("Subsequent run")
+                    now = self.get_current_time() - timedelta(minutes=1)
+                    state[self.LAST_COLLECTION_DATE] = now.isoformat()
+                    last_hour = now - timedelta(hours=1)
+                    parameters = SiemUtils.prepare_time_range(last_hour.isoformat(), now.isoformat(), query_params)
+            try:
+                parsed_logs = self.parse_logs(
+                    clean(self.connection.client.siem_action(Endpoint.get_all_threats(), parameters))
+                )
 
-            state[self.STATUS_CODE] = 200
-            current_page_index = next_page_index if next_page_index else 0
-            new_unique_logs, new_logs_hashes = self.compare_hashes(
-                previous_logs_hashes,
-                parsed_logs[current_page_index * self.SPLIT_SIZE : (current_page_index + 1) * self.SPLIT_SIZE],
-            )
-            state[self.PREVIOUS_LOGS_HASHES] = (
-                [*previous_logs_hashes, *new_logs_hashes] if current_page_index > 0 else new_logs_hashes
-            )
-            return new_unique_logs, state, has_more_pages
+                if (not next_page_index and len(parsed_logs) > self.SPLIT_SIZE) or (
+                    next_page_index and (next_page_index + 1) * self.SPLIT_SIZE < len(parsed_logs)
+                ):
+                    state[self.NEXT_PAGE_INDEX] = next_page_index + 1 if next_page_index else 1
+                    has_more_pages = True
 
-        except ApiException as error:
-            state[self.STATUS_CODE] = error.status_code
+                current_page_index = next_page_index if next_page_index else 0
+                new_unique_logs, new_logs_hashes = self.compare_hashes(
+                    previous_logs_hashes,
+                    parsed_logs[current_page_index * self.SPLIT_SIZE : (current_page_index + 1) * self.SPLIT_SIZE],
+                )
+                state[self.PREVIOUS_LOGS_HASHES] = (
+                    [*previous_logs_hashes, *new_logs_hashes] if current_page_index > 0 else new_logs_hashes
+                )
+                return new_unique_logs, state, has_more_pages, 200, None
+
+            except ApiException as error:
+                state[self.PREVIOUS_LOGS_HASHES] = []
+                return [], state, False, error.status_code, error
+        except Exception as error:
             state[self.PREVIOUS_LOGS_HASHES] = []
-            return [], state, False
+            return [], state, has_more_pages, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     @staticmethod
     def get_current_time():
