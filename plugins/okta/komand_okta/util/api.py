@@ -14,6 +14,7 @@ from komand_okta.util.endpoints import (
     DEACTIVATE_USER_ENDPOINT,
     GET_FACTORS_ENDPOINT,
     GET_USER_BY_LOGIN_ENDPOINT,
+    GET_USER_GROUPS_ENDPOINT,
     GET_ZONES_ENDPOINT,
     LIST_GROUP_ENDPOINT,
     LIST_LOGS_ENDPOINT,
@@ -35,6 +36,8 @@ def rate_limiting(max_tries: int):
     def _decorate(func):
         def _wrapper(*args, **kwargs):
             self = args[0]
+            if not self.toggle_rate_limiting:
+                return func(*args, **kwargs)
             retry = True
             counter, delay = 0, 0
             while retry and counter < max_tries:
@@ -61,6 +64,7 @@ class OktaAPI:
         self.logger = logger
         self._okta_key = okta_key
         self.base_url = okta_url
+        self.toggle_rate_limiting = True
 
     def get_headers(self) -> dict:
         return {
@@ -110,6 +114,9 @@ class OktaAPI:
 
     def get_user(self, user_id: str) -> dict:
         return self.make_json_request(method="GET", url=USER_ENDPOINT.format(user_id=user_id))
+
+    def get_user_groups(self, user_id: str) -> list:
+        return self.make_json_request(method="GET", url=GET_USER_GROUPS_ENDPOINT.format(user_id=user_id))
 
     def list_events(self, parameters: dict) -> requests.Response:
         return self.make_request(method="GET", url=LIST_LOGS_ENDPOINT, params=parameters)
@@ -176,56 +183,64 @@ class OktaAPI:
             response = requests.request(
                 method=method, url=f"{self.base_url}{url}", headers=self.get_headers(), json=json_data, params=params
             )
-
-            if response.status_code == 400:
-                raise ApiException(
-                    cause=PluginException.causes[PluginException.Preset.BAD_REQUEST],
-                    assistance=PluginException.assistances[PluginException.Preset.BAD_REQUEST],
-                    status_code=response.status_code,
-                    data=response.text,
-                )
-            if response.status_code in [401, 403]:
-                raise ApiException(
-                    cause=PluginException.causes[PluginException.Preset.API_KEY],
-                    assistance=PluginException.assistances[PluginException.Preset.API_KEY],
-                    status_code=response.status_code,
-                    data=response.text,
-                )
-            if response.status_code == 404:
-                raise ApiException(
-                    cause="Resource not found.",
-                    assistance="Verify your input is correct and not malformed and try again. If the issue persists, "
-                    "please contact support.",
-                    status_code=response.status_code,
-                    data=response.text,
-                )
-            if response.status_code == 429:
-                raise ApiException(
-                    cause=PluginException.causes[PluginException.Preset.RATE_LIMIT],
-                    assistance=PluginException.assistances[PluginException.Preset.RATE_LIMIT],
-                    status_code=response.status_code,
-                    data=response.text,
-                )
-            if 400 < response.status_code < 500:
-                raise ApiException(
-                    cause=PluginException.causes[PluginException.Preset.UNKNOWN],
-                    assistance=PluginException.assistances[PluginException.Preset.UNKNOWN],
-                    status_code=response.status_code,
-                    data=response.text,
-                )
-            if response.status_code >= 500:
-                raise ApiException(
-                    cause=PluginException.causes[PluginException.Preset.SERVER_ERROR],
-                    assistance=PluginException.assistances[PluginException.Preset.SERVER_ERROR],
-                    status_code=response.status_code,
-                    data=response.text,
-                )
+            self._handle_exceptions(response)
             if 200 <= response.status_code < 300:
                 return response
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except requests.exceptions.HTTPError as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+
+    def _handle_exceptions(self, response):
+        if response.status_code == 400:
+            raise ApiException(
+                cause=PluginException.causes[PluginException.Preset.BAD_REQUEST],
+                assistance=PluginException.assistances[PluginException.Preset.BAD_REQUEST],
+                status_code=response.status_code,
+                data=response.text,
+            )
+        if response.status_code == 401:
+            raise ApiException(
+                cause=PluginException.causes[PluginException.Preset.API_KEY],
+                assistance=PluginException.assistances[PluginException.Preset.API_KEY],
+                status_code=response.status_code,
+                data=response.text,
+            )
+        if response.status_code == 403:
+            raise ApiException(
+                cause=PluginException.causes[PluginException.Preset.UNAUTHORIZED],
+                assistance=PluginException.assistances[PluginException.Preset.API_KEY],
+                status_code=response.status_code,
+                data=response.text,
+            )
+        if response.status_code == 404:
+            raise ApiException(
+                cause=PluginException.causes[PluginException.Preset.NOT_FOUND],
+                assistance="Verify your input is correct and not malformed and try again. If the issue persists, "
+                "please contact support.",
+                status_code=response.status_code,
+                data=response.text,
+            )
+        if response.status_code == 429:
+            raise ApiException(
+                preset=PluginException.Preset.RATE_LIMIT,
+                status_code=response.status_code,
+                data=response.text,
+            )
+        if 400 < response.status_code < 500:
+            raise ApiException(
+                cause=PluginException.causes[PluginException.Preset.UNKNOWN],
+                assistance=PluginException.assistances[PluginException.Preset.UNKNOWN],
+                status_code=response.status_code,
+                data=response.text,
+            )
+        if response.status_code >= 500:
+            raise ApiException(
+                cause=PluginException.causes[PluginException.Preset.SERVER_ERROR],
+                assistance=PluginException.assistances[PluginException.Preset.SERVER_ERROR],
+                status_code=response.status_code,
+                data=response.text,
+            )
 
     def make_json_request(
         self, method: str, url: str, json_data: dict = None, params: dict = None

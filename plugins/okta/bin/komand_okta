@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Okta"
 Vendor = "rapid7"
-Version = "4.0.0"
+Version = "4.1.0"
 Description = "Secure identity management and single sign-on to any application"
 
 
@@ -49,6 +49,8 @@ def main():
             self.add_action(actions.GetFactors())
 
             self.add_action(actions.GetUser())
+
+            self.add_action(actions.GetUserGroups())
 
             self.add_action(actions.ListGroups())
 

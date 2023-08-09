@@ -9,7 +9,7 @@ cloud_ready: true
 status: []
 supported_versions: ["Okta API 25-04-2023"]
 description: Secure identity management and single sign-on to any application
-version: 4.0.0
+version: 4.1.0
 connection_version: 4
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/okta
@@ -1782,6 +1782,23 @@ actions:
         type: zone
         required: true
         example: {}
+  get_user_groups:
+    title: Get User Groups
+    description: Fetches the groups of which the user is a member
+    input:
+      id:
+        title: ID
+        description: User ID or login
+        type: string
+        required: true
+        example: 00g1m22m1230eZXxe5r8
+    output:
+      userGroups:
+        title: User Groups
+        description: List of user groups
+        type: '[]group'
+        required: false
+        example: []
 
 tasks:
   monitor_logs:
