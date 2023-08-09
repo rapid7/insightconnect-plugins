@@ -46,7 +46,7 @@ def check_error():
             "host_count": 1,
             "xdr_url": "https://example.com/incident-view?caseId=1",
             "starred": False,
-            "hosts": ["example-host"],
+            "hosts": ["example-host", "example-host-2"],
             "users": ["administrator"],
             "incident_sources": ["XDR Agent"],
             "wildfire_hits": 4,

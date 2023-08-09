@@ -1,51 +1,51 @@
 {
-	"spec": "f739ef6ff102709efc166470273612b7",
+	"spec": "ea05e35c1a596c0c37cd7c0c707d70ee",
 	"manifest": "4d8aab3cd9c79a15b24ffc7b1a534190",
 	"setup": "55e82ab05d9fc240f8cd57557b3a00c6",
 	"schemas": [
 		{
 			"identifier": "allow_file/schema.py",
-			"hash": "e02cb2fe80653810e5eb642715f89bde"
+			"hash": "f6611d97e1f4a1bad74eb9f93e2af095"
 		},
 		{
 			"identifier": "block_file/schema.py",
-			"hash": "5a31db10e4514ce53e9649b1be4ee567"
+			"hash": "4246ad92743cf684652a9678ff6e5df0"
 		},
 		{
 			"identifier": "get_endpoint_details/schema.py",
-			"hash": "6080b251cd22cce262056ebb5e29d2db"
+			"hash": "aa32a7b2824402d66831618ec1b8e6e7"
 		},
 		{
 			"identifier": "get_file_quarantine_status/schema.py",
-			"hash": "d6e68dfff8a6e78936c598df71ab2928"
+			"hash": "9f0cdf29a7656fc3a72876404326b7b5"
 		},
 		{
 			"identifier": "get_xql_query_results/schema.py",
-			"hash": "2e57469ed28bb6f09a2b676abe129242"
+			"hash": "f8ed43ac25a5c2337612541b007d9bc8"
 		},
 		{
 			"identifier": "isolate_endpoint/schema.py",
-			"hash": "870df9ecb135d233df390785589f3c73"
+			"hash": "50d1f5926761b26c1ed626f942e2084a"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "10fafed02c55fa791e02111172cc9fc2"
+			"hash": "9237dea9c9807b72d23c62ee19501de5"
 		},
 		{
 			"identifier": "monitor_incident_events/schema.py",
-			"hash": "faf0e73ff6251a1f61f7a2403fd0e4eb"
+			"hash": "f61aa24852f0ceadf98d170ae106d045"
 		},
 		{
 			"identifier": "get_alerts/schema.py",
-			"hash": "f547d7212bc25811d519a08da6a3c8b4"
+			"hash": "b46a65fdc5056f886582ec876a37865c"
 		},
 		{
 			"identifier": "get_incidents/schema.py",
-			"hash": "38f5d9b30888f3917d3c0ae6768753fc"
+			"hash": "68438f82d383f66769806865d02fb27f"
 		},
 		{
 			"identifier": "get_query_results/schema.py",
-			"hash": "7f8d7c06b9b5e264f042b889505aa254"
+			"hash": "b24da0ad1980801cd06caaebfb083b1c"
 		}
 	]
 }

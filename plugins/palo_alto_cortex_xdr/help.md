@@ -1,6 +1,6 @@
 # Description
 
-Stop modern attacks with the industry’s first extended detection and response platform that spans your endpoint, network and cloud data.
+Stop modern attacks with the industry's first extended detection and response platform that spans your endpoints, network and cloud data
 
 # Key Features
 
@@ -15,31 +15,22 @@ Stop modern attacks with the industry’s first extended detection and response 
 * The URL to your Palo Alto Cortex XDR API instance
 
 # Supported Product Versions
-
-* 2022-03-28 Palo Alto Cortex XDR API v1
+  
+* 2022-08-09 Palo Alto Cortex XDR API v1
 
 # Documentation
 
 ## Setup
-
-The required connection information is available in the Cortex XDR web dashboard. Click the gear icon, click settings, and then click on API Keys on the left.
-
-The API Key will be generated when you create a new API key.
-
-The API Key ID is the value from the ID column.
-
-To get the API URL, right click on your API key and pick generate examples. The generated example is a URL that should look similar to "https://api-yourorg.xdr.us.paloaltonetworks.com/api_keys/validate/".
-In our example the API URL is "https://api-yourorg.xdr.us.paloaltonetworks.com" and should be copied.
-
-The connection configuration accepts the following parameters:
+  
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|True|The Cortex XDR API Key that is generated when creating a new key|None|1234123412341234asdfasdfasdfasdfasdf1234123412341234123412341234asdfasdfasdfasdfasdf123412341234123412341234asdfasdfasdfasdfasdf|
 |api_key_id|int|None|True|The API Key ID shown in the Cortex XDR API Keys table in settings. e.g. 1, 2, 3|None|1|
 |security_level|string|Standard|True|The Security Level of the key provided. This can be found in the API Key settings table in the Cortex XDR settings|['Advanced', 'Standard']|Standard|
 |url|string|None|True|Cortex XDR API URL|None|https://api-example.xdr.us.paloaltonetworks.com/|
-
+  
 Example input:
 
 ```
@@ -55,152 +46,19 @@ Example input:
 
 ### Actions
 
-#### Get XQL Query Results
-
-This action is used to start an XQL query and retrieve the query results.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|end_time|integer|None|False|Integer in timestamp epoch milliseconds for end of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present|None|1598907600000|
-|limit|integer|20|False|Integer representing the maximum number of results to return, defaults to 20, max value 1000|None|100|
-|query|string|None|True|String of the XQL query|None|dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3|
-|start_time|integer|None|False|Integer in timestamp epoch milliseconds for start of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present|None|1599080399000|
-|tenants|[]string|None|True|List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)|None|["tenantID", "tenantID"]|
-
-Example input:
-
-```
-{
-  "start_time": 1599080399000,
-  "limit": 100,
-  "query": "dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3",
-  "tenants": [
-    "tenantID",
-    "tenantID"
-  ],
-  "end_time": 1598907600000
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|reply|reply|False|Object containing the query data results|
-
-Example output:
-
-```
-{
-  "reply": {
-    "number_of_results": 1,
-    "query_cost": {
-      "1098781949": 0.0007469444444444444
-    },
-    "remaining_quota": 4.999253055555555,
-    "results": {
-      "data": [
-        {
-          "event_id": "eventID1",
-          "_vendor": "PANW",
-          "_product": "Fusion",
-          "insert_timestamp": 1621541825324,
-          "_time": 1621541523000,
-          "event_type": "STORY",
-          "event_sub_type": "NULL"
-        }
-      ]
-    }
-  }
-}
-```
-
-#### Get File Quarantine Status
-
-This action is used to get quarantine status for a file.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|endpoint_id|string|None|True|Endpoint ID|None|example_ID|
-|file_hash|string|None|True|File Hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
-|file_path|string|None|True|File path|None|powershell.exe|
-
-Example input:
-
-```
-{
-  "endpoint_id": "example_ID",
-  "file_hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
-  "file_path": "powershell.exe"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|file_is_quarantined|boolean|True|Check if the provided file is quarantined|
-
-Example output:
-
-```
-{
-  "file_is_quarantined": true
-}
-```
-
-#### Block File
-
-This action is used to add a file to the block list.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|comment|string|File blocked by InsightConnect|True|String that represents additional information regarding the action|None|File blocked by InsightConnect|
-|file_hash|string|None|True|A SHA256 file hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
-|incident_id|string|None|False|If this is related to an incident, the ID should be entered here|None|5|
-
-Example input:
-
-```
-{
-  "comment": "File blocked by InsightConnect",
-  "file_hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
-  "incident_id": "5"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Was the operation successful|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
 
 #### Allow File
-
-This action is used to add a file to the allow list.
+  
+Add a file to the allow list
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |comment|string|File allowed by InsightConnect|True|String that represents additional information regarding the action|None|File allowed by InsightConnect|
 |file_hash|string|None|True|A SHA256 file hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
 |incident_id|string|None|False|If this is related to an incident, the ID should be entered here|None|5|
-
+  
 Example input:
 
 ```
@@ -213,10 +71,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Was the operation successful|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|True|Was the operation successful|None|
+  
 Example output:
 
 ```
@@ -225,59 +83,52 @@ Example output:
 }
 ```
 
-#### Isolate Endpoint
-
-This action is used to isolate an endpoint.
+#### Block File
+  
+Add a file to the block list
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|endpoint|string|None|True|Endpoint to isolate or unisolate. This can be an IPv4 address, hostname, or endpoint ID|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|isolation_state|string|Isolate|True|Isolation state to set|['Isolate', 'Unisolate']|Unisolate|
-|whitelist|[]string|[]|False|This list contains a set of devices that should not be blocked. This can be a combination of IPv4 addresses, hostnames, or endpoint IDs|None|["198.51.100.100", "hostname123", "225494730938493804"]|
-
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|comment|string|File blocked by InsightConnect|True|String that represents additional information regarding the action|None|File blocked by InsightConnect|
+|file_hash|string|None|True|A SHA256 file hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+|incident_id|string|None|False|If this is related to an incident, the ID should be entered here|None|5|
+  
 Example input:
 
 ```
 {
-  "endpoint": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "isolation_state": "Unisolate",
-  "whitelist": [
-    "198.51.100.100",
-    "hostname123",
-    "225494730938493804"
-  ]
+  "comment": "File blocked by InsightConnect",
+  "file_hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+  "incident_id": 5
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result|isolation_result|True|The result of the isolation request|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|True|Was the operation successful|None|
+  
 Example output:
 
 ```
 {
-  "result": {
-    "action_id": 14,
-    "endpoints_count": 1
-  }
+  "success": true
 }
 ```
 
 #### Get Endpoint Details
-
-This action is used to get information about an endpoint.
+  
+Get information about an endpoint
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |endpoint|string|None|True|The endpoint to get information about. This can be an IPv4 address, hostname, or endpoint ID|None|9de5069c5afe602b2ea0a04b66beb2c0|
-
+  
 Example input:
 
 ```
@@ -288,118 +139,183 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|endpoints|[]endpoint|True|Any endpoints that match the given endpoint information|
-|total_count|integer|True|Number of results found (max 100)|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|endpoints|[]endpoint|True|Any endpoints that match the given endpoint information|None|
+|total_count|integer|True|Number of results found (max 100)|None|
+  
 Example output:
 
 ```
 {
   "endpoints": [
     {
-      "endpoint_id": "0123456abcdef12345abcde12345abcd",
-      "endpoint_name": "EXAMPLEHOST",
-      "endpoint_type": "AGENT_TYPE_WORKSTATION",
-      "endpoint_status": "CONNECTED",
-      "os_type": "AGENT_OS_WINDOWS",
-      "ip": [
-        "192.168.50.1"
+      "Alias": "",
+      "Content Version": {},
+      "Domain": {},
+      "Endpoint ID": {},
+      "Endpoint Name": {},
+      "Endpoint Status": {},
+      "Endpoint Type": {},
+      "Endpoint Version": {},
+      "First Seen": 0,
+      "IP": [
+        {}
       ],
-      "users": [
-        "ExampleUser"
-      ],
-      "domain": "WORKGROUP",
-      "first_seen": 1621361378523,
-      "last_seen": 1621449040261,
-      "content_version": "181-58715",
-      "installation_package": "Example-Install-Package",
-      "install_date": 1621361378541,
-      "endpoint_version": "7.3.2.26319",
-      "is_isolated": "AGENT_UNISOLATED",
-      "group_name": [],
-      "operational_status": "PROTECTED",
-      "operational_status_description": "[]",
-      "scan_status": "SCAN_STATUS_IN_PROGRESS"
+      "Install Date": {},
+      "Installation Package": {},
+      "Is Isolated": {},
+      "Last Seen": {},
+      "OS Type": {},
+      "Operational Status": {},
+      "Operational Status Description": {},
+      "Scan Status": {},
+      "Users": {}
     }
   ],
-  "total_count": 1
+  "total_count": 0
 }
 ```
 
-### Triggers
-
-#### Get Query Results
-
-This trigger runs the XQL and returns the output data results.
+#### Get File Quarantine Status
+  
+Get quarantine status for a file
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|frequency|integer|5|True|Poll frequency in seconds|None|5|
-|limit|integer|20|False|Integer representing the maximum number of results to return, defaults to 20, max value 1000|None|100|
-|query|string|None|True|String of the XQL query|None|dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3|
-|tenants|[]string|None|True|List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)|None|["tenantID", "tenantID"]|
-
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|endpoint_id|string|None|True|Endpoint ID|None|example_ID|
+|file_hash|string|None|True|File Hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+|file_path|string|None|True|File path|None|powershell.exe|
+  
 Example input:
 
 ```
 {
-  "frequency": 5,
-  "limit": 100,
-  "query": "dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3",
-  "tenants": [
-    "tenantID",
-    "tenantID"
-  ]
+  "endpoint_id": "example_ID",
+  "file_hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+  "file_path": "powershell.exe"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|reply|reply|True|Object containing the query data results|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|file_is_quarantined|boolean|True|Check if the provided file is quarantined|None|
+  
+Example output:
 
+```
+{
+  "file_is_quarantined": true
+}
+```
+
+#### Get XQL Query Results
+  
+Start an XQL query and retrieve the query results
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|end_time|integer|None|False|Integer in timestamp epoch milliseconds for end of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present|None|1598907600000|
+|limit|integer|20|False|Integer representing the maximum number of results to return, defaults to 20, max value 1000|None|100|
+|query|string|None|True|String of the XQL query|None|dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3|
+|start_time|integer|None|False|Integer in timestamp epoch milliseconds for start of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present|None|1599080399000|
+|tenants|[]string|None|True|List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)|None|['tenantID', 'tenantID']|
+  
+Example input:
+
+```
+{
+  "end_time": 1598907600000,
+  "limit": 20,
+  "query": "dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3",
+  "start_time": 1599080399000,
+  "tenants": "tenantID"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|reply|reply|False|Object containing the query data results|None|
+  
 Example output:
 
 ```
 {
   "reply": {
-    "number_of_results": 1,
-    "query_cost": {
-      "1098781949": 0.0007469444444444444
+    "Number of Results": 0,
+    "Query Cost": {},
+    "Remaining Quota": 0.0,
+    "Results": {
+      "Data": [
+        {}
+      ],
+      "Event Subtype": {}
     },
-    "remaining_quota": 4.999253055555555,
-    "results": {
-      "data": [
-        {
-          "event_id": "eventID1",
-          "_vendor": "PANW",
-          "_product": "Fusion",
-          "insert_timestamp": 1621541825324,
-          "_time": 1621541523000,
-          "event_type": "STORY",
-          "event_sub_type": "NULL"
-        }
-      ]
-    }
+    "Status": ""
   }
 }
 ```
 
-#### Get Alerts
-
-This trigger is used to get Alerts.
+#### Isolate Endpoint
+  
+Isolate or unisolate an endpoint
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|frequency|integer|5|False|Poll frequency in seconds|None|5|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|endpoint|string|None|True|Endpoint to isolate or unisolate. This can be an IPv4 address, hostname, or endpoint ID|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|isolation_state|string|Isolate|True|Isolation state to set|['Isolate', 'Unisolate']|Unisolate|
+|whitelist|[]string|[]|False|This list contains a set of devices that should not be blocked. This can be a combination of IPv4 addresses, hostnames, or endpoint IDs|None|['198.51.100.100', 'hostname123', '225494730938493804']|
+  
+Example input:
 
+```
+{
+  "endpoint": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "isolation_state": "Isolate",
+  "whitelist": []
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|result|isolation_result|True|The result of the isolation request|None|
+  
+Example output:
+
+```
+{
+  "result": {
+    "Action ID": 0,
+    "Endpoints Count": {},
+    "Status": ""
+  }
+}
+```
+### Triggers
+
+
+#### Get Alerts
+  
+Get alerts
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|frequency|integer|5|False|Poll frequency in seconds|None|5|
+  
 Example input:
 
 ```
@@ -410,174 +326,165 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|alert|alert|False|Alert|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|alert|alert|False|Alert|None|
+  
 Example output:
 
 ```
 {
   "alert": {
-    "external_id": "abcdefghijlkmnopqrstuv123456789",
-    "severity": "high",
-    "matching_status": "UNMATCHABLE",
-    "end_match_attempt_ts": null,
-    "local_insert_ts": 1621448835056,
-    "bioc_indicator": null,
-    "matching_service_rule_id": null,
-    "attempt_counter": null,
-    "bioc_category_enum_key": null,
-    "is_whitelisted": false,
-    "starred": false,
-    "deduplicate_tokens": null,
-    "filter_rule_id": null,
-    "mitre_technique_id_and_name": [
-      "T1140 - Deobfuscate/Decode Files or Information",
-      "T1059.001 - Command and Scripting Interpreter: PowerShell",
-      "T1059 - Command and Scripting Interpreter"
-    ],
-    "mitre_tactic_id_and_name": [
-      "TA0005 - Defense Evasion",
-      "TA0002 - Execution"
-    ],
-    "agent_version": "7.3.2.26319",
-    "agent_device_domain": "example.com",
-    "agent_fqdn": "example-host.example.com",
-    "agent_os_type": "Windows",
-    "agent_os_sub_type": "10.0.1234",
-    "agent_data_collection_status": false,
-    "mac": "ab:cd:ef:12:34:56",
-    "events": [
+    "Action": "",
+    "Action Pretty": {},
+    "Agent Data Collection Status": "true",
+    "Agent Device Domain": {},
+    "Agent FQDN": {},
+    "Agent OS Sub Type": {},
+    "Agent OS Type": {},
+    "Agent Version": {},
+    "Alert ID": {},
+    "Attempt Counter": {},
+    "BIOC Category Enum Key": {},
+    "BIOC Indicator": {},
+    "Category": {},
+    "Deduplicate Tokens": {},
+    "Description": {},
+    "Detection Timestamp": 0,
+    "End Match Attempt TS": {},
+    "Endpoint ID": {},
+    "Events": [
       {
-        "agent_install_type": "STANDARD",
-        "agent_host_boot_time": null,
-        "event_sub_type": null,
-        "module_id": "Behavioral Threat Protection",
-        "association_strength": null,
-        "dst_association_strength": null,
-        "story_id": null,
-        "event_id": null,
-        "event_type": "Process Execution",
-        "event_timestamp": 1621448822758,
-        "actor_process_instance_id": "<some id>",
-        "actor_process_image_path": "C:\\Windows\\System32\\executable.exe",
-        "actor_process_image_name": "cmd.exe",
-        "actor_process_command_line": "C:\\Windows\\system32\\executable.exe /c \"\"C:\\detection_test.bat\" \"",
-        "actor_process_signature_status": "N/A",
-        "actor_process_signature_vendor": "Microsoft WindowsMicrosoft Corporation",
-        "actor_process_image_sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
-        "actor_process_image_md5": null,
-        "actor_process_causality_id": null,
-        "actor_causality_id": null,
-        "actor_process_os_pid": 2964,
-        "actor_thread_thread_id": null,
-        "causality_actor_process_image_name": null,
-        "causality_actor_process_command_line": null,
-        "causality_actor_process_image_path": null,
-        "causality_actor_process_signature_vendor": null,
-        "causality_actor_process_signature_status": "N/A",
-        "causality_actor_causality_id": null,
-        "causality_actor_process_execution_time": null,
-        "causality_actor_process_image_md5": null,
-        "causality_actor_process_image_sha256": null,
-        "action_file_path": null,
-        "action_file_name": null,
-        "action_file_md5": null,
-        "action_file_sha256": null,
-        "action_file_macro_sha256": null,
-        "action_registry_data": null,
-        "action_registry_key_name": null,
-        "action_registry_value_name": null,
-        "action_registry_full_key": null,
-        "action_local_ip": null,
-        "action_local_port": null,
-        "action_remote_ip": null,
-        "action_remote_port": null,
-        "action_external_hostname": null,
-        "action_country": "UNKNOWN",
-        "action_process_instance_id": null,
-        "action_process_causality_id": null,
-        "action_process_image_name": null,
-        "action_process_image_sha256": null,
-        "action_process_image_command_line": null,
-        "action_process_signature_status": "N/A",
-        "action_process_signature_vendor": null,
-        "os_actor_effective_username": null,
-        "os_actor_process_instance_id": null,
-        "os_actor_process_image_path": null,
-        "os_actor_process_image_name": null,
-        "os_actor_process_command_line": null,
-        "os_actor_process_signature_status": "N/A",
-        "os_actor_process_signature_vendor": null,
-        "os_actor_process_image_sha256": null,
-        "os_actor_process_causality_id": null,
-        "os_actor_causality_id": null,
-        "os_actor_process_os_pid": null,
-        "os_actor_thread_thread_id": null,
-        "fw_app_id": null,
-        "fw_interface_from": null,
-        "fw_interface_to": null,
-        "fw_rule": null,
-        "fw_rule_id": null,
-        "fw_device_name": null,
-        "fw_serial_number": null,
-        "fw_url_domain": null,
-        "fw_email_subject": null,
-        "fw_email_sender": null,
-        "fw_email_recipient": null,
-        "fw_app_subcategory": null,
-        "fw_app_category": null,
-        "fw_app_technology": null,
-        "fw_vsys": null,
-        "fw_xff": null,
-        "fw_misc": null,
-        "fw_is_phishing": "N/A",
-        "dst_agent_id": null,
-        "dst_causality_actor_process_execution_time": null,
-        "dns_query_name": null,
-        "dst_action_external_hostname": null,
-        "dst_action_country": null,
-        "dst_action_external_port": null,
-        "contains_featured_host": "NO",
-        "contains_featured_user": "NO",
-        "contains_featured_ip": "NO",
-        "image_name": null,
-        "container_id": null,
-        "cluster_name": null,
-        "user_name": "example"
+        "Action Country": {},
+        "Action External Hostname": {},
+        "Action File MD5": {},
+        "Action File Macro SHA256": {},
+        "Action File Name": {},
+        "Action File Path": {},
+        "Action File SHA256": {},
+        "Action Local IP": {},
+        "Action Local Port": {},
+        "Action Process Causality ID": {},
+        "Action Process Image Command Line": {},
+        "Action Process Image Name": {},
+        "Action Process Image SHA256": {},
+        "Action Process Instance ID": {},
+        "Action Process Signature Status": {},
+        "Action Process Signature Vendor": {},
+        "Action Registry Data": {},
+        "Action Registry Full Key": {},
+        "Action Registry Key Name": {},
+        "Action Registry Value Name": {},
+        "Action Remote IP": {},
+        "Action Remote Port": {},
+        "Actor Causality ID": {},
+        "Actor Process Causality ID": {},
+        "Actor Process Command Line": {},
+        "Actor Process Image MD5": {},
+        "Actor Process Image Name": {},
+        "Actor Process Image Path": {},
+        "Actor Process Image SHA256": {},
+        "Actor Process Instance ID": {},
+        "Actor Process OS PID": {},
+        "Actor Process Signature Status": {},
+        "Actor Process Signature Vendor": {},
+        "Actor Thread Thread ID": {},
+        "Agent Host Boot Time": {},
+        "Agent Install Type": {},
+        "Association Strength": {},
+        "Causality Actor Causality ID": {},
+        "Causality Actor Process Command Line": {},
+        "Causality Actor Process Execution Time": {},
+        "Causality Actor Process Image MD5": {},
+        "Causality Actor Process Image Name": {},
+        "Causality Actor Process Image Path": {},
+        "Causality Actor Process Image SHA256": {},
+        "Causality Actor Process Signature Status": {},
+        "Causality Actor Process Signature Vendor": {},
+        "Cluster Name": {},
+        "Container ID": {},
+        "Contains Featured Host": {},
+        "Contains Featured IP": {},
+        "Contains Featured User": {},
+        "DNS Query Name": {},
+        "DST Action Country": {},
+        "DST Action External Hostname": {},
+        "DST Action External Port": {},
+        "DST Agent ID": {},
+        "DST Association Strength": {},
+        "DST Causality Actor Process Execution Time": {},
+        "Event ID": {},
+        "Event Sub Type": {},
+        "Event Timestamp": {},
+        "Event Type": {},
+        "FW App Category": {},
+        "FW App ID": {},
+        "FW App Subcategory": {},
+        "FW App Technology": {},
+        "FW Device Name": {},
+        "FW Email Recipient": {},
+        "FW Email Sender": {},
+        "FW Email Subject": {},
+        "FW Interface From": {},
+        "FW Interface To": {},
+        "FW Is Phishing": {},
+        "FW Misc": {},
+        "FW Rule": {},
+        "FW Rule ID": {},
+        "FW Serial Number": {},
+        "FW URL Domain": {},
+        "FW VSYS": {},
+        "FW XFF": {},
+        "Image Name": {},
+        "Module ID": {},
+        "OS Actor Causality ID": {},
+        "OS Actor Effective Username": {},
+        "OS Actor Process Causality ID": {},
+        "OS Actor Process Command Line": {},
+        "OS Actor Process Image Name": {},
+        "OS Actor Process Image Path": {},
+        "OS Actor Process Image SHA256": {},
+        "OS Actor Process Instance ID": {},
+        "OS Actor Process OS PID": {},
+        "OS Actor Process Signature Status": {},
+        "OS Actor Process Signature Vendor": {},
+        "OS Actor Thread Thread ID": {},
+        "Story ID": {},
+        "User Name": {}
       }
     ],
-    "alert_id": "1",
-    "detection_timestamp": 1621448822758,
-    "name": "Behavioral Threat",
-    "category": "Malware",
-    "endpoint_id": "abcdefghijlkmnop123654",
-    "description": "Behavioral threat detected (rule: heuristic.b.205)",
-    "host_ip": [
-      "10.0.20.10"
+    "External ID": {},
+    "Filter Rule ID": {},
+    "Host IP": [
+      {}
     ],
-    "host_name": "example-host",
-    "mac_addresses": [
-      "ab:cd:ef:12:34:56"
-    ],
-    "source": "XDR Agent",
-    "action": "BLOCKED",
-    "action_pretty": "Prevented (Blocked)"
+    "Host Name": {},
+    "Is Whitelisted": {},
+    "Local Insert TS": {},
+    "MAC": {},
+    "MAC Addresses": {},
+    "MITRE Tactic ID And Name": {},
+    "MITRE Technique ID And Name": {},
+    "Matching Service Rule ID": {},
+    "Matching Status": {},
+    "Name": {},
+    "Severity": {},
+    "Source": {},
+    "Starred": {}
   }
 }
 ```
 
 #### Get Incidents
-
-This trigger is used to get Incidents.
+  
+Get incidents
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |frequency|integer|5|False|Poll frequency in seconds|None|5|
-
+  
 Example input:
 
 ```
@@ -588,83 +495,118 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|incident|incident|False|Incident|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|incident|incident|False|Incident|None|
+  
 Example output:
 
 ```
 {
-   "incident":{
-      "incident_id":"1",
-      "incident_name":null,
-      "creation_time":1621448873194,
-      "modification_time":1621448873194,
-      "detection_time":null,
-      "status":"new",
-      "severity":"high",
-      "description":"'Behavioral Threat' generated by XDR Agent detected on host msedgewin10 involving user ieuser",
-      "assigned_user_mail":null,
-      "assigned_user_pretty_name":null,
-      "alert_count":1,
-      "low_severity_alert_count":0,
-      "med_severity_alert_count":0,
-      "high_severity_alert_count":1,
-      "user_count":1,
-      "host_count":1,
-      "notes":null,
-      "resolve_comment":null,
-      "manual_severity":null,
-      "manual_description":null,
-      "xdr_url":"https://example.xdr.us.paloaltonetworks.com/incident-view/1",
-      "starred":false,
-      "hosts":[
-         "examplehost:0123456abcdef12345abcde12345abcd"
-      ],
-      "users":[
-         "exampleuser"
-      ],
-      "incident_sources":[
-         "XDR Agent"
-      ],
-      "rule_based_score":null,
-      "manual_score":null
-   }
+  "incident": {
+    "Alert Count": 0,
+    "Assigned User Mail": "",
+    "Assigned User Pretty Name": {},
+    "Creation Time": {},
+    "Description": {},
+    "Detection Time": {},
+    "High Severity Alert Count": {},
+    "Host Count": {},
+    "Hosts": [
+      {}
+    ],
+    "Incident ID": {},
+    "Incident Name": {},
+    "Incident Sources": {},
+    "Low Severity Alert Count": {},
+    "Manual Description": {},
+    "Manual Score": {},
+    "Manual Severity": {},
+    "Med Severity Alert Count": {},
+    "Modification Time": {},
+    "Notes": {},
+    "Resolve Comment": {},
+    "Rule Based Score": {},
+    "Severity": {},
+    "Starred": "true",
+    "Status": {},
+    "User Count": {},
+    "Users": {},
+    "XDR URL": {}
+  }
 }
 ```
 
-### Tasks
-
-Plugin Tasks are currently in development! This new plugin capability will collect and deliver events to Insight products for search and use in automation workflows.
-
-#### Monitor Incident Events
-
-This task is used to monitor incident events.
-
-Supported schedule types for this task include:
-  - cron
-  - minutes
+#### Get Query Results
+  
+Runs the XQL and returns the output data results
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|descriptions|[]string|None|False|Descriptions|None|["Behavioral threat detected (rule: heuristic.b.205)"]|
-|incident_id_list|[]string|None|False|Incident ID list|None|["5"]|
-|status|string|None|False|Status|['any', 'new', 'under_investigation', 'resolved_threat_handled', 'resolved_known_issue', 'resolved_false_positive', 'resolved_other', 'resolved_auto']|new|
-|time_sorting_field|string|None|False|Field to use to sort Incident events|['modification_time', 'creation_time']|modification_time|
-
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|frequency|integer|5|True|Poll frequency in seconds|None|5|
+|limit|integer|20|False|Integer representing the maximum number of results to return, defaults to 20, max value 1000|None|100|
+|query|string|None|True|String of the XQL query|None|dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3|
+|tenants|[]string|None|True|List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)|None|['tenantID', 'tenantID']|
+  
 Example input:
 
 ```
 {
-  "descriptions": [
-    "Behavioral threat detected (rule: heuristic.b.205)"
-  ],
-  "incident_id_list": [
-    "5"
-  ],
+  "frequency": 5,
+  "limit": 20,
+  "query": "dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3",
+  "tenants": "tenantID"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|reply|reply|True|Object containing the query data results|None|
+  
+Example output:
+
+```
+{
+  "reply": {
+    "Number of Results": 0,
+    "Query Cost": {},
+    "Remaining Quota": 0.0,
+    "Results": {
+      "Data": [
+        {}
+      ],
+      "Event Subtype": {}
+    },
+    "Status": ""
+  }
+}
+```
+### Tasks
+
+
+#### Monitor Incident Events
+  
+Monitor incident events
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|descriptions|[]string|None|False|Descriptions|None|['Behavioral threat detected (rule: heuristic.b.205)']|
+|incident_id_list|[]string|None|False|Incident ID list|None|['5']|
+|status|string|None|False|Status|['any', 'new', 'under_investigation', 'resolved_threat_handled', 'resolved_known_issue', 'resolved_false_positive', 'resolved_other', 'resolved_auto']|new|
+|time_sorting_field|string|None|False|Field to use to sort Incident events|['modification_time', 'creation_time']|modification_time|
+  
+Example input:
+
+```
+{
+  "descriptions": "Behavioral threat detected (rule: heuristic.b.205)",
+  "incident_id_list": 5,
   "status": "new",
   "time_sorting_field": "modification_time"
 }
@@ -672,275 +614,273 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|events|[]incident|False|Incident events|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|events|[]incident|False|Incident events|None|
+  
 Example output:
 
 ```
 {
-   "incident":{
-      "incident_id":"1",
-      "incident_name":null,
-      "creation_time":1621448873194,
-      "modification_time":1621448873194,
-      "detection_time":null,
-      "status":"new",
-      "severity":"high",
-      "description":"'Behavioral Threat' generated by XDR Agent detected on host msedgewin10 involving user ieuser",
-      "assigned_user_mail":null,
-      "assigned_user_pretty_name":null,
-      "alert_count":1,
-      "low_severity_alert_count":0,
-      "med_severity_alert_count":0,
-      "high_severity_alert_count":1,
-      "user_count":1,
-      "host_count":1,
-      "notes":null,
-      "resolve_comment":null,
-      "manual_severity":null,
-      "manual_description":null,
-      "xdr_url":"https://example.xdr.us.paloaltonetworks.com/incident-view/1",
-      "starred":false,
-      "hosts":[
-         "examplehost:0123456abcdef12345abcde12345abcd"
+  "events": [
+    {
+      "Alert Count": 0,
+      "Assigned User Mail": "",
+      "Assigned User Pretty Name": {},
+      "Creation Time": {},
+      "Description": {},
+      "Detection Time": {},
+      "High Severity Alert Count": {},
+      "Host Count": {},
+      "Hosts": [
+        {}
       ],
-      "users":[
-         "exampleuser"
-      ],
-      "incident_sources":[
-         "XDR Agent"
-      ],
-      "rule_based_score":null,
-      "manual_score":null
-   }
+      "Incident ID": {},
+      "Incident Name": {},
+      "Incident Sources": {},
+      "Low Severity Alert Count": {},
+      "Manual Description": {},
+      "Manual Score": {},
+      "Manual Severity": {},
+      "Med Severity Alert Count": {},
+      "Modification Time": {},
+      "Notes": {},
+      "Resolve Comment": {},
+      "Rule Based Score": {},
+      "Severity": {},
+      "Starred": "true",
+      "Status": {},
+      "User Count": {},
+      "Users": {},
+      "XDR URL": {}
+    }
+  ]
 }
 ```
 
-### Custom Output Types
+### Custom Types
+  
+**event**
 
-#### alert
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Action Country|string|None|False|Action country|None|
+|Action External Hostname|string|None|False|Action external hostname|None|
+|Action File Macro SHA256|string|None|False|Action file macro SHA256|None|
+|Action File MD5|string|None|False|Action file MD5|None|
+|Action File Name|string|None|False|Action file name|None|
+|Action File Path|string|None|False|Action file path|None|
+|Action File SHA256|string|None|False|Action file SHA256|None|
+|Action Local IP|string|None|False|Action local IP|None|
+|Action Local Port|string|None|False|Action local port|None|
+|Action Process Causality ID|string|None|False|Action process causality ID|None|
+|Action Process Image Command Line|string|None|False|Action process image command line|None|
+|Action Process Image Name|string|None|False|Action process image name|None|
+|Action Process Image SHA256|string|None|False|Action process image SHA256|None|
+|Action Process Instance ID|string|None|False|Action process instance ID|None|
+|Action Process Signature Status|string|None|False|Action process signature status|None|
+|Action Process Signature Vendor|string|None|False|Action process signature vendor|None|
+|Action Registry Data|string|None|False|Action registry data|None|
+|Action Registry Full Key|string|None|False|Action registry full key|None|
+|Action Registry Key Name|string|None|False|Action registry key name|None|
+|Action Registry Value Name|string|None|False|Action registry value name|None|
+|Action Remote IP|string|None|False|Action remote IP|None|
+|Action Remote Port|string|None|False|Action remote port|None|
+|Actor Causality ID|string|None|False|Actor causality ID|None|
+|Actor Process Causality ID|string|None|False|Actor process causality ID|None|
+|Actor Process Command Line|string|None|False|Actor process command line|None|
+|Actor Process Image MD5|string|None|False|Actor process image MD5|None|
+|Actor Process Image Name|string|None|False|Actor process image name|None|
+|Actor Process Image Path|string|None|False|Actor process image path|None|
+|Actor Process Image SHA256|string|None|False|Actor process image SHA256|None|
+|Actor Process Instance ID|string|None|False|Actor process instance ID|None|
+|Actor Process OS PID|integer|None|False|Actor process OS PID|None|
+|Actor Process Signature Status|string|None|False|Actor process signature status|None|
+|Actor Process Signature Vendor|string|None|False|Actor process signature vendor|None|
+|Actor Thread Thread ID|string|None|False|Actor thread thread ID|None|
+|Agent Host Boot Time|string|None|False|Agent host boot time|None|
+|Agent Install Type|string|None|False|Agent install type|None|
+|Association Strength|string|None|False|Association strength|None|
+|Causality Actor Causality ID|string|None|False|Causality actor causality ID|None|
+|Causality Actor Process Command Line|string|None|False|Causality actor process command line|None|
+|Causality Actor Process Execution Time|string|None|False|Causality actor process execution time|None|
+|Causality Actor Process Image MD5|string|None|False|Causality actor process image MD5|None|
+|Causality Actor Process Image Name|string|None|False|Causality actor process image name|None|
+|Causality Actor Process Image Path|string|None|False|Causality actor process image path|None|
+|Causality Actor Process Image SHA256|string|None|False|Causality actor process image SHA256|None|
+|Causality Actor Process Signature Status|string|None|False|Causality actor process signature status|None|
+|Causality Actor Process Signature Vendor|string|None|False|Causality actor process signature vendor|None|
+|Cluster Name|string|None|False|Cluster name|None|
+|Container ID|string|None|False|Container ID|None|
+|Contains Featured Host|string|None|False|Contains featured host|None|
+|Contains Featured IP|string|None|False|Contains featured IP|None|
+|Contains Featured User|string|None|False|Contains featured user|None|
+|DNS Query Name|string|None|False|DNS query name|None|
+|DST Action Country|string|None|False|DST action country|None|
+|DST Action External Hostname|string|None|False|DST action external hostname|None|
+|DST Action External Port|string|None|False|DST action external port|None|
+|DST Agent ID|string|None|False|DST agent ID|None|
+|DST Association Strength|string|None|False|DST association strength|None|
+|DST Causality Actor Process Execution Time|string|None|False|DST causality actor process execution time|None|
+|Event ID|string|None|False|Event ID|None|
+|Event Sub Type|string|None|False|Event sub type|None|
+|Event Timestamp|integer|None|False|Event timestamp|None|
+|Event Type|string|None|False|Event type|None|
+|FW App Category|string|None|False|FW app category|None|
+|FW App ID|string|None|False|FW app ID|None|
+|FW App Subcategory|string|None|False|FW app subcategory|None|
+|FW App Technology|string|None|False|FW app technology|None|
+|FW Device Name|string|None|False|FW device name|None|
+|FW Email Recipient|string|None|False|FW email recipient|None|
+|FW Email Sender|string|None|False|FW email sender|None|
+|FW Email Subject|string|None|False|FW email subject|None|
+|FW Interface From|string|None|False|FW interface from|None|
+|FW Interface To|string|None|False|FW interface to|None|
+|FW Is Phishing|string|None|False|FW is phishing|None|
+|FW Misc|string|None|False|FW misc|None|
+|FW Rule|string|None|False|FW rule|None|
+|FW Rule ID|string|None|False|FW rule ID|None|
+|FW Serial Number|string|None|False|FW serial number|None|
+|FW URL Domain|string|None|False|FW URL domain|None|
+|FW VSYS|string|None|False|FW VSYS|None|
+|FW XFF|string|None|False|FW XFF|None|
+|Image Name|string|None|False|Image name|None|
+|Module ID|string|None|False|Module ID|None|
+|OS Actor Causality ID|string|None|False|OS actor causality ID|None|
+|OS Actor Effective Username|string|None|False|OS actor effective username|None|
+|OS Actor Process Causality ID|string|None|False|OS actor process causality ID|None|
+|OS Actor Process Command Line|string|None|False|OS actor process command line|None|
+|OS Actor Process Image Name|string|None|False|OS actor process image name|None|
+|OS Actor Process Image Path|string|None|False|OS actor process image path|None|
+|OS Actor Process Image SHA256|string|None|False|OS actor process image SHA256|None|
+|OS Actor Process Instance ID|string|None|False|OS actor process instance ID|None|
+|OS Actor Process OS PID|string|None|False|OS actor process OS PID|None|
+|OS Actor Process Signature Status|string|None|False|OS actor process signature status|None|
+|OS Actor Process Signature Vendor|string|None|False|OS actor process signature vendor|None|
+|OS Actor Thread Thread ID|string|None|False|OS actor thread thread ID|None|
+|Story ID|string|None|False|Story ID|None|
+|User Name|string|None|False|User name|None|
+  
+**alert**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Action|string|False|Action|
-|Action Pretty|string|False|Action pretty|
-|Agent Data Collection Status|boolean|False|Agent data collection status|
-|Agent Device Domain|string|False|Agent device domain|
-|Agent FQDN|string|False|Agent FQDN|
-|Agent OS Sub Type|string|False|Agent OS sub type|
-|Agent OS Type|string|False|Agent OS type|
-|Agent Version|string|False|Agent version|
-|Alert ID|string|False|Alert ID|
-|Attempt Counter|string|False|Attempt counter|
-|BIOC Category Enum Key|string|False|BIOC category enum key|
-|BIOC Indicator|string|False|BIOC indicator|
-|Category|string|False|Category|
-|Deduplicate Tokens|string|False|Deduplicate tokens|
-|Description|string|False|Description|
-|Detection Timestamp|integer|False|Detection timestamp|
-|End Match Attempt TS|string|False|End match attempt TS|
-|Endpoint ID|string|False|Endpoint ID|
-|Events|[]event|False|Events|
-|External ID|string|False|External ID|
-|Filter Rule ID|string|False|Filter rule ID|
-|Host IP|[]string|False|Host IP|
-|Host Name|string|False|Host name|
-|Is Whitelisted|boolean|False|Is whitelisted|
-|Local Insert TS|integer|False|Local insert TS|
-|MAC|string|False|MAC|
-|MAC Addresses|[]string|False|MAC addresses|
-|Matching Service Rule ID|string|False|Matching service rule ID|
-|Matching Status|string|False|Matching status|
-|MITRE Tactic ID And Name|[]string|False|MITRE tactic ID and name|
-|MITRE Technique ID And Name|[]string|False|MITRE technique ID and name|
-|Name|string|False|Name|
-|Severity|string|False|Severity|
-|Source|string|False|Source|
-|Starred|boolean|False|Starred|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Action|string|None|False|Action|None|
+|Action Pretty|string|None|False|Action pretty|None|
+|Agent Data Collection Status|boolean|None|False|Agent data collection status|None|
+|Agent Device Domain|string|None|False|Agent device domain|None|
+|Agent FQDN|string|None|False|Agent FQDN|None|
+|Agent OS Sub Type|string|None|False|Agent OS sub type|None|
+|Agent OS Type|string|None|False|Agent OS type|None|
+|Agent Version|string|None|False|Agent version|None|
+|Alert ID|string|None|False|Alert ID|None|
+|Attempt Counter|string|None|False|Attempt counter|None|
+|BIOC Category Enum Key|string|None|False|BIOC category enum key|None|
+|BIOC Indicator|string|None|False|BIOC indicator|None|
+|Category|string|None|False|Category|None|
+|Deduplicate Tokens|string|None|False|Deduplicate tokens|None|
+|Description|string|None|False|Description|None|
+|Detection Timestamp|integer|None|False|Detection timestamp|None|
+|End Match Attempt TS|string|None|False|End match attempt TS|None|
+|Endpoint ID|string|None|False|Endpoint ID|None|
+|Events|[]event|None|False|Events|None|
+|External ID|string|None|False|External ID|None|
+|Filter Rule ID|string|None|False|Filter rule ID|None|
+|Host IP|[]string|None|False|Host IP|None|
+|Host Name|string|None|False|Host name|None|
+|Is Whitelisted|boolean|None|False|Is whitelisted|None|
+|Local Insert TS|integer|None|False|Local insert TS|None|
+|MAC|string|None|False|MAC|None|
+|MAC Addresses|[]string|None|False|MAC addresses|None|
+|Matching Service Rule ID|string|None|False|Matching service rule ID|None|
+|Matching Status|string|None|False|Matching status|None|
+|MITRE Tactic ID And Name|[]string|None|False|MITRE tactic ID and name|None|
+|MITRE Technique ID And Name|[]string|None|False|MITRE technique ID and name|None|
+|Name|string|None|False|Name|None|
+|Severity|string|None|False|Severity|None|
+|Source|string|None|False|Source|None|
+|Starred|boolean|None|False|Starred|None|
+  
+**incident**
 
-#### endpoint
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Alert Count|integer|None|False|Alert count|None|
+|Assigned User Mail|string|None|False|Assigned user mail|None|
+|Assigned User Pretty Name|string|None|False|Assigned user pretty name|None|
+|Creation Time|integer|None|False|Creation time|None|
+|Description|string|None|False|Description|None|
+|Detection Time|string|None|False|Detection time|None|
+|High Severity Alert Count|integer|None|False|High severity alert count|None|
+|Host Count|integer|None|False|Host count|None|
+|Hosts|[]string|None|False|Hosts|None|
+|Incident ID|string|None|False|Incident ID|None|
+|Incident Name|string|None|False|Incident name|None|
+|Incident Sources|[]string|None|False|Incident sources|None|
+|Low Severity Alert Count|integer|None|False|Low severity alert count|None|
+|Manual Description|string|None|False|Manual description|None|
+|Manual Score|string|None|False|Manual score|None|
+|Manual Severity|string|None|False|Manual severity|None|
+|Med Severity Alert Count|integer|None|False|Med severity alert count|None|
+|Modification Time|integer|None|False|Modification time|None|
+|Notes|string|None|False|Notes|None|
+|Resolve Comment|string|None|False|Resolve comment|None|
+|Rule Based Score|string|None|False|Rule based score|None|
+|Severity|string|None|False|Severity|None|
+|Starred|boolean|None|False|Starred|None|
+|Status|string|None|False|Status|None|
+|User Count|integer|None|False|User count|None|
+|Users|[]string|None|False|Users|None|
+|XDR URL|string|None|False|XDR URL|None|
+  
+**isolation_result**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Alias|string|False|Alias|
-|Content Version|string|False|Content version|
-|Domain|string|False|Domain|
-|Endpoint ID|string|False|Endpoint ID|
-|Endpoint Name|string|False|Endpoint name|
-|Endpoint Status|string|False|Endpoint status|
-|Endpoint Type|string|False|Endpoint type|
-|Endpoint Version|string|False|Endpoint version|
-|First Seen|integer|False|First seen|
-|Install Date|integer|False|Install date|
-|Installation Package|string|False|Installation package|
-|IP|[]string|False|IP|
-|Is Isolated|string|False|Is isolated|
-|Last Seen|integer|False|Last seen|
-|Operational Status|string|False|Operational status|
-|Operational Status Description|string|False|Operational status description|
-|OS Type|string|False|OS type|
-|Scan Status|string|False|Scan status|
-|Users|[]string|False|Users|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Action ID|integer|None|False|Action ID|None|
+|Endpoints Count|integer|None|False|Endpoints count|None|
+|Status|string|None|False|Status|None|
+  
+**endpoint**
 
-#### event
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Alias|string|None|False|Alias|None|
+|Content Version|string|None|False|Content version|None|
+|Domain|string|None|False|Domain|None|
+|Endpoint ID|string|None|False|Endpoint ID|None|
+|Endpoint Name|string|None|False|Endpoint name|None|
+|Endpoint Status|string|None|False|Endpoint status|None|
+|Endpoint Type|string|None|False|Endpoint type|None|
+|Endpoint Version|string|None|False|Endpoint version|None|
+|First Seen|integer|None|False|First seen|None|
+|Install Date|integer|None|False|Install date|None|
+|Installation Package|string|None|False|Installation package|None|
+|IP|[]string|None|False|IP|None|
+|Is Isolated|string|None|False|Is isolated|None|
+|Last Seen|integer|None|False|Last seen|None|
+|Operational Status|string|None|False|Operational status|None|
+|Operational Status Description|string|None|False|Operational status description|None|
+|OS Type|string|None|False|OS type|None|
+|Scan Status|string|None|False|Scan status|None|
+|Users|[]string|None|False|Users|None|
+  
+**xql_query_result**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Action Country|string|False|Action country|
-|Action External Hostname|string|False|Action external hostname|
-|Action File Macro SHA256|string|False|Action file macro SHA256|
-|Action File MD5|string|False|Action file MD5|
-|Action File Name|string|False|Action file name|
-|Action File Path|string|False|Action file path|
-|Action File SHA256|string|False|Action file SHA256|
-|Action Local IP|string|False|Action local IP|
-|Action Local Port|string|False|Action local port|
-|Action Process Causality ID|string|False|Action process causality ID|
-|Action Process Image Command Line|string|False|Action process image command line|
-|Action Process Image Name|string|False|Action process image name|
-|Action Process Image SHA256|string|False|Action process image SHA256|
-|Action Process Instance ID|string|False|Action process instance ID|
-|Action Process Signature Status|string|False|Action process signature status|
-|Action Process Signature Vendor|string|False|Action process signature vendor|
-|Action Registry Data|string|False|Action registry data|
-|Action Registry Full Key|string|False|Action registry full key|
-|Action Registry Key Name|string|False|Action registry key name|
-|Action Registry Value Name|string|False|Action registry value name|
-|Action Remote IP|string|False|Action remote IP|
-|Action Remote Port|string|False|Action remote port|
-|Actor Causality ID|string|False|Actor causality ID|
-|Actor Process Causality ID|string|False|Actor process causality ID|
-|Actor Process Command Line|string|False|Actor process command line|
-|Actor Process Image MD5|string|False|Actor process image MD5|
-|Actor Process Image Name|string|False|Actor process image name|
-|Actor Process Image Path|string|False|Actor process image path|
-|Actor Process Image SHA256|string|False|Actor process image SHA256|
-|Actor Process Instance ID|string|False|Actor process instance ID|
-|Actor Process OS PID|integer|False|Actor process OS PID|
-|Actor Process Signature Status|string|False|Actor process signature status|
-|Actor Process Signature Vendor|string|False|Actor process signature vendor|
-|Actor Thread Thread ID|string|False|Actor thread thread ID|
-|Agent Host Boot Time|string|False|Agent host boot time|
-|Agent Install Type|string|False|Agent install type|
-|Association Strength|string|False|Association strength|
-|Causality Actor Causality ID|string|False|Causality actor causality ID|
-|Causality Actor Process Command Line|string|False|Causality actor process command line|
-|Causality Actor Process Execution Time|string|False|Causality actor process execution time|
-|Causality Actor Process Image MD5|string|False|Causality actor process image MD5|
-|Causality Actor Process Image Name|string|False|Causality actor process image name|
-|Causality Actor Process Image Path|string|False|Causality actor process image path|
-|Causality Actor Process Image SHA256|string|False|Causality actor process image SHA256|
-|Causality Actor Process Signature Status|string|False|Causality actor process signature status|
-|Causality Actor Process Signature Vendor|string|False|Causality actor process signature vendor|
-|Cluster Name|string|False|Cluster name|
-|Container ID|string|False|Container ID|
-|Contains Featured Host|string|False|Contains featured host|
-|Contains Featured IP|string|False|Contains featured IP|
-|Contains Featured User|string|False|Contains featured user|
-|DNS Query Name|string|False|DNS query name|
-|DST Action Country|string|False|DST action country|
-|DST Action External Hostname|string|False|DST action external hostname|
-|DST Action External Port|string|False|DST action external port|
-|DST Agent ID|string|False|DST agent ID|
-|DST Association Strength|string|False|DST association strength|
-|DST Causality Actor Process Execution Time|string|False|DST causality actor process execution time|
-|Event ID|string|False|Event ID|
-|Event Sub Type|string|False|Event sub type|
-|Event Timestamp|integer|False|Event timestamp|
-|Event Type|string|False|Event type|
-|FW App Category|string|False|FW app category|
-|FW App ID|string|False|FW app ID|
-|FW App Subcategory|string|False|FW app subcategory|
-|FW App Technology|string|False|FW app technology|
-|FW Device Name|string|False|FW device name|
-|FW Email Recipient|string|False|FW email recipient|
-|FW Email Sender|string|False|FW email sender|
-|FW Email Subject|string|False|FW email subject|
-|FW Interface From|string|False|FW interface from|
-|FW Interface To|string|False|FW interface to|
-|FW Is Phishing|string|False|FW is phishing|
-|FW Misc|string|False|FW misc|
-|FW Rule|string|False|FW rule|
-|FW Rule ID|string|False|FW rule ID|
-|FW Serial Number|string|False|FW serial number|
-|FW URL Domain|string|False|FW URL domain|
-|FW VSYS|string|False|FW VSYS|
-|FW XFF|string|False|FW XFF|
-|Image Name|string|False|Image name|
-|Module ID|string|False|Module ID|
-|OS Actor Causality ID|string|False|OS actor causality ID|
-|OS Actor Effective Username|string|False|OS actor effective username|
-|OS Actor Process Causality ID|string|False|OS actor process causality ID|
-|OS Actor Process Command Line|string|False|OS actor process command line|
-|OS Actor Process Image Name|string|False|OS actor process image name|
-|OS Actor Process Image Path|string|False|OS actor process image path|
-|OS Actor Process Image SHA256|string|False|OS actor process image SHA256|
-|OS Actor Process Instance ID|string|False|OS actor process instance ID|
-|OS Actor Process OS PID|string|False|OS actor process OS PID|
-|OS Actor Process Signature Status|string|False|OS actor process signature status|
-|OS Actor Process Signature Vendor|string|False|OS actor process signature vendor|
-|OS Actor Thread Thread ID|string|False|OS actor thread thread ID|
-|Story ID|string|False|Story ID|
-|User Name|string|False|User name|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Data|[]object|None|False|List of obtained data results|None|
+|Event Subtype|string|None|False|String representing a unique ID of more than 1000 number of results|None|
+  
+**reply**
 
-#### incident
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Alert Count|integer|False|Alert count|
-|Assigned User Mail|string|False|Assigned user mail|
-|Assigned User Pretty Name|string|False|Assigned user pretty name|
-|Creation Time|integer|False|Creation time|
-|Description|string|False|Description|
-|Detection Time|string|False|Detection time|
-|High Severity Alert Count|integer|False|High severity alert count|
-|Host Count|integer|False|Host count|
-|Hosts|[]string|False|Hosts|
-|Incident ID|string|False|Incident ID|
-|Incident Name|string|False|Incident name|
-|Incident Sources|[]string|False|Incident sources|
-|Low Severity Alert Count|integer|False|Low severity alert count|
-|Manual Description|string|False|Manual description|
-|Manual Score|string|False|Manual score|
-|Manual Severity|string|False|Manual severity|
-|Med Severity Alert Count|integer|False|Med severity alert count|
-|Modification Time|integer|False|Modification time|
-|Notes|string|False|Notes|
-|Resolve Comment|string|False|Resolve comment|
-|Rule Based Score|string|False|Rule based score|
-|Severity|string|False|Severity|
-|Starred|boolean|False|Starred|
-|Status|string|False|Status|
-|User Count|integer|False|User count|
-|Users|[]string|False|Users|
-|XDR URL|string|False|XDR URL|
-
-#### isolation_result
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Action ID|integer|False|Action ID|
-|Endpoints Count|integer|False|Endpoints count|
-|Status|string|False|Status|
-
-#### reply
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Number of Results|integer|False|Integer representing the number of results returned|
-|Query Cost|object|False|Float representing the number of query units collected for this API|
-|Remaining Quota|float|False|Float representing the number of query units available for you to use|
-|Results|xql_query_result|False|API results according to defined format field|
-|Status|string|False|API call status: 'SUCCESS', 'FAIL', 'PENDING', 'PARTIAL_SUCCESS'|
-
-#### xql_query_result
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Data|[]object|False|List of obtained data results|
-|Event Subtype|string|False|String representing a unique ID of more than 1000 number of results|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Number of Results|integer|None|False|Integer representing the number of results returned|None|
+|Query Cost|object|None|False|Float representing the number of query units collected for this API|None|
+|Remaining Quota|float|None|False|Float representing the number of query units available for you to use|None|
+|Results|xql_query_result|None|False|API results according to defined format field|None|
+|Status|string|None|False|API call status: 'SUCCESS', 'FAIL', 'PENDING', 'PARTIAL_SUCCESS'|None|
 
 
 ## Troubleshooting
@@ -949,6 +889,7 @@ Example output:
 
 # Version History
 
+* 3.0.0 - Updated `hosts` output of `Get Incident` trigger to separate host values
 * 2.3.0 - Add types `xql_query_result` to `Get XQL Query Results` action's response | Add new trigger `Get Query Results` 
 * 2.2.1 - Fix issue in Get Incidents trigger where fields with null values were causing trigger to fail
 * 2.2.0 - New action Get XQL Query Results | Update SDK to insightconnect-python-3-38-slim-plugin:4
