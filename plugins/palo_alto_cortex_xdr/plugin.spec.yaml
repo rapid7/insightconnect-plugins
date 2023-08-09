@@ -23,6 +23,14 @@ hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [cortex, endpoint, detection]
   features: []
+requirements:
+  - A Palo Alto Cortex XDR API key
+  - A Palo Alto Cortex XDR API key ID
+  - The URL to your Palo Alto Cortex XDR API instance
+key_features:
+  - Get Endpoint Information
+  - Isolate or Unisolate an endpoint
+  - Add files to the block or allow lists
 types:
   event:
     action_country:
@@ -1024,6 +1032,7 @@ actions:
         description: Check if the provided file is quarantined
         type: boolean
         required: true
+        example: true
   get_endpoint_details:
     title: Get Endpoint Details
     description: Get information about an endpoint
@@ -1040,11 +1049,13 @@ actions:
         description: Number of results found (max 100)
         type: integer
         required: true
+        example: 100
       endpoints:
         title: Endpoints
         description: Any endpoints that match the given endpoint information
         type: "[]endpoint"
         required: true
+        example: '[ { "Alias": "", "Content Version": {}, "Domain": {}, "Endpoint ID": {}, "Endpoint Name": {}, "Endpoint Status": {}, "Endpoint Type": {}, "Endpoint Version": {}, "First Seen": 0, "IP": [ {} ], "Install Date": {}, "Installation Package": {}, "Is Isolated": {}, "Last Seen": {}, "OS Type": {}, "Operational Status": {}, "Operational Status Description": {}, "Scan Status": {}, "Users": {} } ]'
   isolate_endpoint:
     title: Isolate Endpoint
     description: Isolate or unisolate an endpoint
@@ -1078,6 +1089,7 @@ actions:
         description: The result of the isolation request
         type: isolation_result
         required: true
+        example: '{ "Action ID": 0, "Endpoints Count": {}, "Status": "" }'
   allow_file:
     title: Allow File
     description: Add a file to the allow list
@@ -1107,6 +1119,7 @@ actions:
         description: Was the operation successful
         type: boolean
         required: true
+        example: true
   block_file:
     title: Block File
     description: Add a file to the block list
@@ -1136,6 +1149,7 @@ actions:
         description: Was the operation successful
         type: boolean
         required: true
+        example: true
   get_xql_query_results:
     title: Get XQL Query Results
     description: Start an XQL query and retrieve the query results
@@ -1177,6 +1191,7 @@ actions:
         description: Object containing the query data results
         type: reply
         required: false
+        example: '{"Number of Results": 0, "Query Cost": {}, "Remaining Quota": 0.0, "Results": { "Data": [ {} ], "Event Subtype": {} }, "Status": "" }'
 triggers:
   get_incidents:
     title: Get Incidents
@@ -1194,6 +1209,7 @@ triggers:
         description: Incident
         type: incident
         required: false
+        example: '{ "Alert Count": 0, "Assigned User Mail": "", "Assigned User Pretty Name": {}, "Creation Time": {}, "Description": {}, "Detection Time": {}, "High Severity Alert Count": {}, "Host Count": {}, "Hosts": [ {} ], "Incident ID": {}, "Incident Name": {}, "Incident Sources": {}, "Low Severity Alert Count": {}, "Manual Description": {}, "Manual Score": {}, "Manual Severity": {}, "Med Severity Alert Count": {}, "Modification Time": {}, "Notes": {}, "Resolve Comment": {}, "Rule Based Score": {}, "Severity": {}, "Starred": "true", "Status": {}, "User Count": {}, "Users": {}, "XDR URL": {} }'
   get_alerts:
     title: Get Alerts
     description: Get alerts
@@ -1210,6 +1226,7 @@ triggers:
         description: Alert
         type: alert
         required: false
+        example: '{ "Action": "", "Action Pretty": {}, "Agent Data Collection Status": "true", "Agent Device Domain": {}, "Agent FQDN": {}, "Agent OS Sub Type": {}, "Agent OS Type": {}, "Agent Version": {}, "Alert ID": {}, "Attempt Counter": {}, "BIOC Category Enum Key": {}, "BIOC Indicator": {}, "Category": {}, "Deduplicate Tokens": {}, "Description": {}, "Detection Timestamp": 0, "End Match Attempt TS": {}, "Endpoint ID": {}, "Events": [ { "Action Country": {}, "Action External Hostname": {}, "Action File MD5": {}, "Action File Macro SHA256": {}, "Action File Name": {}, "Action File Path": {}, "Action File SHA256": {}, "Action Local IP": {}, "Action Local Port": {}, "Action Process Causality ID": {}, "Action Process Image Command Line": {}, "Action Process Image Name": {}, "Action Process Image SHA256": {}, "Action Process Instance ID": {}, "Action Process Signature Status": {}, "Action Process Signature Vendor": {}, "Action Registry Data": {}, "Action Registry Full Key": {}, "Action Registry Key Name": {}, "Action Registry Value Name": {}, "Action Remote IP": {}, "Action Remote Port": {}, "Actor Causality ID": {}, "Actor Process Causality ID": {}, "Actor Process Command Line": {}, "Actor Process Image MD5": {}, "Actor Process Image Name": {}, "Actor Process Image Path": {}, "Actor Process Image SHA256": {}, "Actor Process Instance ID": {}, "Actor Process OS PID": {}, "Actor Process Signature Status": {}, "Actor Process Signature Vendor": {}, "Actor Thread Thread ID": {}, "Agent Host Boot Time": {}, "Agent Install Type": {}, "Association Strength": {}, "Causality Actor Causality ID": {}, "Causality Actor Process Command Line": {}, "Causality Actor Process Execution Time": {}, "Causality Actor Process Image MD5": {}, "Causality Actor Process Image Name": {}, "Causality Actor Process Image Path": {}, "Causality Actor Process Image SHA256": {}, "Causality Actor Process Signature Status": {}, "Causality Actor Process Signature Vendor": {}, "Cluster Name": {}, "Container ID": {}, "Contains Featured Host": {}, "Contains Featured IP": {}, "Contains Featured User": {}, "DNS Query Name": {}, "DST Action Country": {}, "DST Action External Hostname": {}, "DST Action External Port": {}, "DST Agent ID": {}, "DST Association Strength": {}, "DST Causality Actor Process Execution Time": {}, "Event ID": {}, "Event Sub Type": {}, "Event Timestamp": {}, "Event Type": {}, "FW App Category": {}, "FW App ID": {}, "FW App Subcategory": {}, "FW App Technology": {}, "FW Device Name": {}, "FW Email Recipient": {}, "FW Email Sender": {}, "FW Email Subject": {}, "FW Interface From": {}, "FW Interface To": {}, "FW Is Phishing": {}, "FW Misc": {}, "FW Rule": {}, "FW Rule ID": {}, "FW Serial Number": {}, "FW URL Domain": {}, "FW VSYS": {}, "FW XFF": {}, "Image Name": {}, "Module ID": {}, "OS Actor Causality ID": {}, "OS Actor Effective Username": {}, "OS Actor Process Causality ID": {}, "OS Actor Process Command Line": {}, "OS Actor Process Image Name": {}, "OS Actor Process Image Path": {}, "OS Actor Process Image SHA256": {}, "OS Actor Process Instance ID": {}, "OS Actor Process OS PID": {}, "OS Actor Process Signature Status": {}, "OS Actor Process Signature Vendor": {}, "OS Actor Thread Thread ID": {}, "Story ID": {}, "User Name": {} } ], "External ID": {}, "Filter Rule ID": {}, "Host IP": [ {} ], "Host Name": {}, "Is Whitelisted": {}, "Local Insert TS": {}, "MAC": {}, "MAC Addresses": {}, "MITRE Tactic ID And Name": {}, "MITRE Technique ID And Name": {}, "Matching Service Rule ID": {}, "Matching Status": {}, "Name": {}, "Severity": {}, "Source": {}, "Starred": {} }'
   get_query_results:
     title: Get Query Results
     description: Runs the XQL and returns the output data results
@@ -1246,6 +1263,7 @@ triggers:
         description: Object containing the query data results
         type: reply
         required: true
+        example: '{ "Number of Results": 0, "Query Cost": {}, "Remaining Quota": 0.0, "Results": { "Data": [ {} ], "Event Subtype": {} }, "Status": "" }'
 tasks:
   monitor_incident_events:
     title: Monitor Incident Events
@@ -1276,7 +1294,7 @@ tasks:
         title: Descriptions
         description: Descriptions
         type: "[]string"
-        example: ["Behavioral threat detected (rule: heuristic.b.205)"]
+        example: '["Behavioral threat detected (rule: heuristic.b.205)"]'
         required: false
       time_sorting_field:
         title: Time Sorting Field
@@ -1293,6 +1311,7 @@ tasks:
         description: Incident events
         type: "[]incident"
         required: false
+        example: '[ { "Alert Count": 0, "Assigned User Mail": "", "Assigned User Pretty Name": {}, "Creation Time": {}, "Description": {}, "Detection Time": {}, "High Severity Alert Count": {}, "Host Count": {}, "Hosts": [ {} ], "Incident ID": {}, "Incident Name": {}, "Incident Sources": {}, "Low Severity Alert Count": {}, "Manual Description": {}, "Manual Score": {}, "Manual Severity": {}, "Med Severity Alert Count": {}, "Modification Time": {}, "Notes": {}, "Resolve Comment": {}, "Rule Based Score": {}, "Severity": {}, "Starred": "true", "Status": {}, "User Count": {}, "Users": {}, "XDR URL": {} } ]'
     schedule:
       title: Schedule for Retrieving Events
       type: string

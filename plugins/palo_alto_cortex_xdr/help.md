@@ -3,15 +3,15 @@
 Stop modern attacks with the industry's first extended detection and response platform that spans your endpoints, network and cloud data
 
 # Key Features
-
-* Get Endpoint Information
-* Isolate or Unisolate an endpoint
+  
+* Get Endpoint Information  
+* Isolate or Unisolate an endpoint  
 * Add files to the block or allow lists
 
 # Requirements
-
-* A Palo Alto Cortex XDR API key
-* A Palo Alto Cortex XDR API key ID
+  
+* A Palo Alto Cortex XDR API key  
+* A Palo Alto Cortex XDR API key ID  
 * The URL to your Palo Alto Cortex XDR API instance
 
 # Supported Product Versions
@@ -73,7 +73,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|True|Was the operation successful|None|
+|success|boolean|True|Was the operation successful|True|
   
 Example output:
 
@@ -109,7 +109,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|True|Was the operation successful|None|
+|success|boolean|True|Was the operation successful|True|
   
 Example output:
 
@@ -141,8 +141,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|endpoints|[]endpoint|True|Any endpoints that match the given endpoint information|None|
-|total_count|integer|True|Number of results found (max 100)|None|
+|endpoints|[]endpoint|True|Any endpoints that match the given endpoint information|[ { "Alias": "", "Content Version": {}, "Domain": {}, "Endpoint ID": {}, "Endpoint Name": {}, "Endpoint Status": {}, "Endpoint Type": {}, "Endpoint Version": {}, "First Seen": 0, "IP": [ {} ], "Install Date": {}, "Installation Package": {}, "Is Isolated": {}, "Last Seen": {}, "OS Type": {}, "Operational Status": {}, "Operational Status Description": {}, "Scan Status": {}, "Users": {} } ]|
+|total_count|integer|True|Number of results found (max 100)|100|
   
 Example output:
 
@@ -173,7 +173,7 @@ Example output:
       "Users": {}
     }
   ],
-  "total_count": 0
+  "total_count": 100
 }
 ```
 
@@ -203,7 +203,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|file_is_quarantined|boolean|True|Check if the provided file is quarantined|None|
+|file_is_quarantined|boolean|True|Check if the provided file is quarantined|True|
   
 Example output:
 
@@ -243,7 +243,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|reply|reply|False|Object containing the query data results|None|
+|reply|reply|False|Object containing the query data results|{"Number of Results": 0, "Query Cost": {}, "Remaining Quota": 0.0, "Results": { "Data": [ {} ], "Event Subtype": {} }, "Status": "" }|
   
 Example output:
 
@@ -290,7 +290,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|result|isolation_result|True|The result of the isolation request|None|
+|result|isolation_result|True|The result of the isolation request|{ "Action ID": 0, "Endpoints Count": {}, "Status": "" }|
   
 Example output:
 
@@ -328,7 +328,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|alert|alert|False|Alert|None|
+|alert|alert|False|Alert|{ "Action": "", "Action Pretty": {}, "Agent Data Collection Status": "true", "Agent Device Domain": {}, "Agent FQDN": {}, "Agent OS Sub Type": {}, "Agent OS Type": {}, "Agent Version": {}, "Alert ID": {}, "Attempt Counter": {}, "BIOC Category Enum Key": {}, "BIOC Indicator": {}, "Category": {}, "Deduplicate Tokens": {}, "Description": {}, "Detection Timestamp": 0, "End Match Attempt TS": {}, "Endpoint ID": {}, "Events": [ { "Action Country": {}, "Action External Hostname": {}, "Action File MD5": {}, "Action File Macro SHA256": {}, "Action File Name": {}, "Action File Path": {}, "Action File SHA256": {}, "Action Local IP": {}, "Action Local Port": {}, "Action Process Causality ID": {}, "Action Process Image Command Line": {}, "Action Process Image Name": {}, "Action Process Image SHA256": {}, "Action Process Instance ID": {}, "Action Process Signature Status": {}, "Action Process Signature Vendor": {}, "Action Registry Data": {}, "Action Registry Full Key": {}, "Action Registry Key Name": {}, "Action Registry Value Name": {}, "Action Remote IP": {}, "Action Remote Port": {}, "Actor Causality ID": {}, "Actor Process Causality ID": {}, "Actor Process Command Line": {}, "Actor Process Image MD5": {}, "Actor Process Image Name": {}, "Actor Process Image Path": {}, "Actor Process Image SHA256": {}, "Actor Process Instance ID": {}, "Actor Process OS PID": {}, "Actor Process Signature Status": {}, "Actor Process Signature Vendor": {}, "Actor Thread Thread ID": {}, "Agent Host Boot Time": {}, "Agent Install Type": {}, "Association Strength": {}, "Causality Actor Causality ID": {}, "Causality Actor Process Command Line": {}, "Causality Actor Process Execution Time": {}, "Causality Actor Process Image MD5": {}, "Causality Actor Process Image Name": {}, "Causality Actor Process Image Path": {}, "Causality Actor Process Image SHA256": {}, "Causality Actor Process Signature Status": {}, "Causality Actor Process Signature Vendor": {}, "Cluster Name": {}, "Container ID": {}, "Contains Featured Host": {}, "Contains Featured IP": {}, "Contains Featured User": {}, "DNS Query Name": {}, "DST Action Country": {}, "DST Action External Hostname": {}, "DST Action External Port": {}, "DST Agent ID": {}, "DST Association Strength": {}, "DST Causality Actor Process Execution Time": {}, "Event ID": {}, "Event Sub Type": {}, "Event Timestamp": {}, "Event Type": {}, "FW App Category": {}, "FW App ID": {}, "FW App Subcategory": {}, "FW App Technology": {}, "FW Device Name": {}, "FW Email Recipient": {}, "FW Email Sender": {}, "FW Email Subject": {}, "FW Interface From": {}, "FW Interface To": {}, "FW Is Phishing": {}, "FW Misc": {}, "FW Rule": {}, "FW Rule ID": {}, "FW Serial Number": {}, "FW URL Domain": {}, "FW VSYS": {}, "FW XFF": {}, "Image Name": {}, "Module ID": {}, "OS Actor Causality ID": {}, "OS Actor Effective Username": {}, "OS Actor Process Causality ID": {}, "OS Actor Process Command Line": {}, "OS Actor Process Image Name": {}, "OS Actor Process Image Path": {}, "OS Actor Process Image SHA256": {}, "OS Actor Process Instance ID": {}, "OS Actor Process OS PID": {}, "OS Actor Process Signature Status": {}, "OS Actor Process Signature Vendor": {}, "OS Actor Thread Thread ID": {}, "Story ID": {}, "User Name": {} } ], "External ID": {}, "Filter Rule ID": {}, "Host IP": [ {} ], "Host Name": {}, "Is Whitelisted": {}, "Local Insert TS": {}, "MAC": {}, "MAC Addresses": {}, "MITRE Tactic ID And Name": {}, "MITRE Technique ID And Name": {}, "Matching Service Rule ID": {}, "Matching Status": {}, "Name": {}, "Severity": {}, "Source": {}, "Starred": {} }|
   
 Example output:
 
@@ -497,7 +497,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|incident|incident|False|Incident|None|
+|incident|incident|False|Incident|{ "Alert Count": 0, "Assigned User Mail": "", "Assigned User Pretty Name": {}, "Creation Time": {}, "Description": {}, "Detection Time": {}, "High Severity Alert Count": {}, "Host Count": {}, "Hosts": [ {} ], "Incident ID": {}, "Incident Name": {}, "Incident Sources": {}, "Low Severity Alert Count": {}, "Manual Description": {}, "Manual Score": {}, "Manual Severity": {}, "Med Severity Alert Count": {}, "Modification Time": {}, "Notes": {}, "Resolve Comment": {}, "Rule Based Score": {}, "Severity": {}, "Starred": "true", "Status": {}, "User Count": {}, "Users": {}, "XDR URL": {} }|
   
 Example output:
 
@@ -565,7 +565,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|reply|reply|True|Object containing the query data results|None|
+|reply|reply|True|Object containing the query data results|{ "Number of Results": 0, "Query Cost": {}, "Remaining Quota": 0.0, "Results": { "Data": [ {} ], "Event Subtype": {} }, "Status": "" }|
   
 Example output:
 
@@ -596,7 +596,7 @@ Monitor incident events
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|descriptions|[]string|None|False|Descriptions|None|['Behavioral threat detected (rule: heuristic.b.205)']|
+|descriptions|[]string|None|False|Descriptions|None|["Behavioral threat detected (rule: heuristic.b.205)"]|
 |incident_id_list|[]string|None|False|Incident ID list|None|['5']|
 |status|string|None|False|Status|['any', 'new', 'under_investigation', 'resolved_threat_handled', 'resolved_known_issue', 'resolved_false_positive', 'resolved_other', 'resolved_auto']|new|
 |time_sorting_field|string|None|False|Field to use to sort Incident events|['modification_time', 'creation_time']|modification_time|
@@ -605,7 +605,9 @@ Example input:
 
 ```
 {
-  "descriptions": "Behavioral threat detected (rule: heuristic.b.205)",
+  "descriptions": [
+    "Behavioral threat detected (rule: heuristic.b.205)"
+  ],
   "incident_id_list": 5,
   "status": "new",
   "time_sorting_field": "modification_time"
@@ -616,7 +618,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|events|[]incident|False|Incident events|None|
+|events|[]incident|False|Incident events|[ { "Alert Count": 0, "Assigned User Mail": "", "Assigned User Pretty Name": {}, "Creation Time": {}, "Description": {}, "Detection Time": {}, "High Severity Alert Count": {}, "Host Count": {}, "Hosts": [ {} ], "Incident ID": {}, "Incident Name": {}, "Incident Sources": {}, "Low Severity Alert Count": {}, "Manual Description": {}, "Manual Score": {}, "Manual Severity": {}, "Med Severity Alert Count": {}, "Modification Time": {}, "Notes": {}, "Resolve Comment": {}, "Rule Based Score": {}, "Severity": {}, "Starred": "true", "Status": {}, "User Count": {}, "Users": {}, "XDR URL": {} } ]|
   
 Example output:
 
@@ -889,7 +891,7 @@ Example output:
 
 # Version History
 
-* 3.0.0 - Updated `hosts` output of `Get Incident` trigger to separate host values
+* 3.0.0 - Updated `hosts` output of `Get Incident` trigger and `Monitor Incident Events` task to separate host values
 * 2.3.0 - Add types `xql_query_result` to `Get XQL Query Results` action's response | Add new trigger `Get Query Results` 
 * 2.2.1 - Fix issue in Get Incidents trigger where fields with null values were causing trigger to fail
 * 2.2.0 - New action Get XQL Query Results | Update SDK to insightconnect-python-3-38-slim-plugin:4
@@ -900,7 +902,8 @@ Example output:
 
 # Links
 
+* [Palo Alto Cortex XDR](https://www.paloaltonetworks.com/cortex/cortex-xdr)
+
 ## References
 
-* [Palo Alto Cortex XDR](https://www.paloaltonetworks.com/cortex/cortex-xdr)
 * This plugin was tested using Viewer, Security Admin, and Instance Administrator Roles using both Standard and Advanced Security Levels. Please ensure your selected Role has adequate permissions to perform the desired actions.
