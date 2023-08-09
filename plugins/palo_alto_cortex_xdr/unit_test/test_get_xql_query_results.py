@@ -13,7 +13,7 @@ from icon_palo_alto_cortex_xdr.actions.get_xql_query_results.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
 
-from unit_test.mock import (
+from mock import (
     mock_request_200,
     mock_request_400,
     mock_request_401,
@@ -22,7 +22,7 @@ from unit_test.mock import (
     mock_request_404,
     mocked_request,
 )
-from unit_test.util import Util
+from util import Util
 
 
 class TestGetEndpointDetails(TestCase):
