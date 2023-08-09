@@ -17,7 +17,7 @@ class Output:
 
 
 class GetEndpointDetailsInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -41,7 +41,7 @@ class GetEndpointDetailsInput(insightconnect_plugin_runtime.Input):
 
 
 class GetEndpointDetailsOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",

@@ -18,7 +18,7 @@ class Output:
 
 
 class IsolateEndpointInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -33,6 +33,7 @@ class IsolateEndpointInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Isolation State",
       "description": "Isolation state to set",
+      "default": "Isolate",
       "enum": [
         "Isolate",
         "Unisolate"
@@ -43,6 +44,7 @@ class IsolateEndpointInput(insightconnect_plugin_runtime.Input):
       "type": "array",
       "title": "Whitelist",
       "description": "This list contains a set of devices that should not be blocked. This can be a combination of IPv4 addresses, hostnames, or endpoint IDs",
+      "default": [],
       "items": {
         "type": "string"
       },
@@ -62,7 +64,7 @@ class IsolateEndpointInput(insightconnect_plugin_runtime.Input):
 
 
 class IsolateEndpointOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",

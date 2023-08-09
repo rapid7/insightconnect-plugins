@@ -11,7 +11,7 @@ class Input:
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -32,6 +32,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Security Level",
       "description": "The Security Level of the key provided. This can be found in the API Key settings table in the Cortex XDR settings",
+      "default": "Standard",
       "enum": [
         "Advanced",
         "Standard"
@@ -53,27 +54,20 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   ],
   "definitions": {
     "credential_secret_key": {
-      "id": "credential_token",
+      "id": "credential_secret_key",
       "type": "object",
-      "title": "Credential: Token",
-      "description": "A pair of a token, and an optional domain",
+      "title": "Credential: Secret Key",
+      "description": "A shared secret key",
       "required": [
-        "token"
+        "secretKey"
       ],
       "properties": {
-        "domain": {
+        "secretKey": {
           "type": "string",
-          "title": "Domain",
-          "description": "The domain for the token",
-          "order": 1
-        },
-        "token": {
-          "type": "string",
-          "title": "Token",
-          "description": "The shared token",
+          "title": "Secret Key",
+          "description": "The shared secret key",
           "format": "password",
-          "display_type": "password",
-          "order": 2
+          "displayType": "password"
         }
       }
     }

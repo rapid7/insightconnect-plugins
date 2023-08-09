@@ -18,7 +18,7 @@ class Output:
 
 
 class BlockFileInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -27,6 +27,7 @@ class BlockFileInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Comment",
       "description": "String that represents additional information regarding the action",
+      "default": "File blocked by InsightConnect",
       "order": 2
     },
     "file_hash": {
@@ -55,7 +56,7 @@ class BlockFileInput(insightconnect_plugin_runtime.Input):
 
 
 class BlockFileOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",

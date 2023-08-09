@@ -23,7 +23,7 @@ class Output:
 
 
 class MonitorIncidentEventsInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -82,7 +82,7 @@ class MonitorIncidentEventsInput(insightconnect_plugin_runtime.Input):
 
 
 class MonitorIncidentEventsState(insightconnect_plugin_runtime.State):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -103,20 +103,13 @@ class MonitorIncidentEventsState(insightconnect_plugin_runtime.State):
 
 
 class MonitorIncidentEventsOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
-  "type": "object",
-  "title": "Variables",
-  "properties": {
-    "events": {
-      "type": "array",
-      "title": "Incident Events",
-      "description": "Incident events",
-      "items": {
-        "$ref": "#/definitions/incident"
-      },
-      "order": 1
-    }
+  "type": "array",
+  "title": "Incident Events",
+  "description": "Incident events",
+  "items": {
+    "$ref": "#/definitions/incident"
   },
   "definitions": {
     "incident": {
@@ -294,7 +287,8 @@ class MonitorIncidentEventsOutput(insightconnect_plugin_runtime.Output):
           "description": "XDR URL",
           "order": 27
         }
-      }
+      },
+      "required": []
     }
   }
 }

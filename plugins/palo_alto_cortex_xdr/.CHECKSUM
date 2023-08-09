@@ -1,51 +1,51 @@
 {
 	"spec": "ea05e35c1a596c0c37cd7c0c707d70ee",
-	"manifest": "4d8aab3cd9c79a15b24ffc7b1a534190",
-	"setup": "55e82ab05d9fc240f8cd57557b3a00c6",
+	"manifest": "f79c9c7271d57fcb642319749b9536c9",
+	"setup": "c545c3e46f9cc7d140c6715b6a3f4dca",
 	"schemas": [
 		{
 			"identifier": "allow_file/schema.py",
-			"hash": "f6611d97e1f4a1bad74eb9f93e2af095"
+			"hash": "3e67339cb17d76d74fd81fb073511a36"
 		},
 		{
 			"identifier": "block_file/schema.py",
-			"hash": "4246ad92743cf684652a9678ff6e5df0"
+			"hash": "bff8d1ae355617cdca391d2b8bb49d7d"
 		},
 		{
 			"identifier": "get_endpoint_details/schema.py",
-			"hash": "aa32a7b2824402d66831618ec1b8e6e7"
+			"hash": "fec6a33a072821327bbda3eea2eb1b5c"
 		},
 		{
 			"identifier": "get_file_quarantine_status/schema.py",
-			"hash": "9f0cdf29a7656fc3a72876404326b7b5"
+			"hash": "ec41c5f88476f5b2b05e1dfb4d788759"
 		},
 		{
 			"identifier": "get_xql_query_results/schema.py",
-			"hash": "f8ed43ac25a5c2337612541b007d9bc8"
+			"hash": "c10e83968468efc155da6d9ba710cb47"
 		},
 		{
 			"identifier": "isolate_endpoint/schema.py",
-			"hash": "50d1f5926761b26c1ed626f942e2084a"
+			"hash": "2b35a79f32fd38e7548b0bd8e145356b"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "9237dea9c9807b72d23c62ee19501de5"
+			"hash": "292b006db45e73f699b01cd785efda35"
 		},
 		{
 			"identifier": "monitor_incident_events/schema.py",
-			"hash": "f61aa24852f0ceadf98d170ae106d045"
+			"hash": "adcff00aacbc67df84ba0422a2b821e5"
 		},
 		{
 			"identifier": "get_alerts/schema.py",
-			"hash": "b46a65fdc5056f886582ec876a37865c"
+			"hash": "12e2528bd2b1e7099d841c27abf42775"
 		},
 		{
 			"identifier": "get_incidents/schema.py",
-			"hash": "68438f82d383f66769806865d02fb27f"
+			"hash": "4b052146052a423541583920d8afd5c6"
 		},
 		{
 			"identifier": "get_query_results/schema.py",
-			"hash": "b24da0ad1980801cd06caaebfb083b1c"
+			"hash": "64c151d95839f2c46a85d401b0d98e5f"
 		}
 	]
 }

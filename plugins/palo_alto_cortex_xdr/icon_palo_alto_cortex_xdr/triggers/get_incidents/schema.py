@@ -16,7 +16,7 @@ class Output:
 
 
 class GetIncidentsInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -24,6 +24,7 @@ class GetIncidentsInput(insightconnect_plugin_runtime.Input):
     "frequency": {
       "type": "integer",
       "description": "Poll frequency in seconds",
+      "default": 5,
       "order": 1
     }
   },
@@ -36,7 +37,7 @@ class GetIncidentsInput(insightconnect_plugin_runtime.Input):
 
 
 class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",

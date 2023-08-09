@@ -19,7 +19,7 @@ class Output:
 
 
 class GetQueryResultsInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -28,12 +28,14 @@ class GetQueryResultsInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Frequency",
       "description": "Poll frequency in seconds",
+      "default": 5,
       "order": 1
     },
     "limit": {
       "type": "integer",
       "title": "Limit",
       "description": "Integer representing the maximum number of results to return, defaults to 20, max value 1000",
+      "default": 20,
       "order": 4
     },
     "query": {
@@ -66,7 +68,7 @@ class GetQueryResultsInput(insightconnect_plugin_runtime.Input):
 
 
 class GetQueryResultsOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
