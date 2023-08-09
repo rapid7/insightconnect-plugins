@@ -23,12 +23,13 @@ class Util:
         :return: list(output_set)
         :rtype: list
         """
-        output_set = set()
+        output_list = []
         for item in input_list:
             if isinstance(item, str):
                 item_split = item.split(separator)
-                output_set.update(item_split)
-        return list(output_set)
+                output_list.extend(item_split)
+        duplicates = set()
+        return [item for item in output_list if not (item in duplicates or duplicates.add(item))]
 
     @staticmethod
     def send_items_to_platform_for_trigger(
