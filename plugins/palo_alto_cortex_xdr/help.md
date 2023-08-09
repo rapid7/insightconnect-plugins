@@ -225,8 +225,8 @@ Start an XQL query and retrieve the query results
 |limit|integer|20|False|Integer representing the maximum number of results to return, defaults to 20, max value 1000|None|100|
 |query|string|None|True|String of the XQL query|None|dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3|
 |start_time|integer|None|False|Integer in timestamp epoch milliseconds for start of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present|None|1599080399000|
-|tenants|[]string|None|True|List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)|None|['tenantID', 'tenantID']|
-  
+|tenants|[]string|None|True|List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)|None|["tenantID", "tenantID"]|
+
 Example input:
 
 ```
@@ -274,8 +274,8 @@ Isolate or unisolate an endpoint
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |endpoint|string|None|True|Endpoint to isolate or unisolate. This can be an IPv4 address, hostname, or endpoint ID|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |isolation_state|string|Isolate|True|Isolation state to set|['Isolate', 'Unisolate']|Unisolate|
-|whitelist|[]string|[]|False|This list contains a set of devices that should not be blocked. This can be a combination of IPv4 addresses, hostnames, or endpoint IDs|None|['198.51.100.100', 'hostname123', '225494730938493804']|
-  
+|whitelist|[]string|[]|False|This list contains a set of devices that should not be blocked. This can be a combination of IPv4 addresses, hostnames, or endpoint IDs|None|["198.51.100.100", "hostname123", "225494730938493804"]|
+
 Example input:
 
 ```
@@ -548,8 +548,8 @@ Runs the XQL and returns the output data results
 |frequency|integer|5|True|Poll frequency in seconds|None|5|
 |limit|integer|20|False|Integer representing the maximum number of results to return, defaults to 20, max value 1000|None|100|
 |query|string|None|True|String of the XQL query|None|dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3|
-|tenants|[]string|None|True|List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)|None|['tenantID', 'tenantID']|
-  
+|tenants|[]string|None|True|List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)|None|["tenantID", "tenantID"]|
+
 Example input:
 
 ```
@@ -597,7 +597,7 @@ Monitor incident events
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |descriptions|[]string|None|False|Descriptions|None|["Behavioral threat detected (rule: heuristic.b.205)"]|
-|incident_id_list|[]string|None|False|Incident ID list|None|['5']|
+|incident_id_list|[]string|None|False|Incident ID list|None|["5"]|
 |status|string|None|False|Status|['any', 'new', 'under_investigation', 'resolved_threat_handled', 'resolved_known_issue', 'resolved_false_positive', 'resolved_other', 'resolved_auto']|new|
 |time_sorting_field|string|None|False|Field to use to sort Incident events|['modification_time', 'creation_time']|modification_time|
   
@@ -660,7 +660,7 @@ Example output:
 }
 ```
 
-### Custom Types
+### Custom Output Types
   
 **event**
 
