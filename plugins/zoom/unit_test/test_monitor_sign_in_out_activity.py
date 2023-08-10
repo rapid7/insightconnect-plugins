@@ -1,14 +1,20 @@
+import sys
+from typing import Any, Dict, List
+
+sys.path.append("../")
+
+import datetime
 import logging
 import unittest
-import datetime
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
-from insightconnect_plugin_runtime.exceptions import PluginException
-
-from icon_zoom.util.event import Event
-from icon_zoom.tasks.monitor_sign_in_out_activity.task import MonitorSignInOutActivity
 from icon_zoom.connection.connection import Connection
-from mock import STUB_CONNECTION, STUB_OAUTH_TOKEN
+from icon_zoom.tasks.monitor_sign_in_out_activity.task import MonitorSignInOutActivity
+from icon_zoom.util.event import Event
+from insightconnect_plugin_runtime.exceptions import PluginException
+from parameterized import parameterized
+
+from mock import STUB_CONNECTION, STUB_OAUTH_TOKEN, Util
 
 REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI._refresh_oauth_token"
 GET_USER_ACTIVITY_EVENTS_PATH = "icon_zoom.util.api.ZoomAPI.get_user_activity_events_task"
@@ -17,152 +23,140 @@ GET_DATETIME_LAST_24_HOURS_PATH = (
     "icon_zoom.tasks.monitor_sign_in_out_activity.task.MonitorSignInOutActivity._get_datetime_last_24_hours"
 )
 
+STUB_SAMPLES = [
+    {
+        "client_type": "mac",
+        "email": "test@test.com",
+        "ip_address": "11.11.11.11",
+        "time": "2023-02-22T21:50:44Z",
+        "type": "Sign in",
+        "version": "5.13.7.15481",
+    },
+    {
+        "client_type": "windows",
+        "email": "test2@test.com",
+        "ip_address": "192.168.1.1",
+        "time": "2023-02-22T21:44:44Z",
+        "type": "Sign in",
+        "version": "5.13.7.15481",
+    },
+    {
+        "client_type": "mac",
+        "email": "test@test.com",
+        "ip_address": "11.11.11.11",
+        "time": "2023-02-22T21:41:41Z",
+        "type": "Sign out",
+        "version": "5.13.7.15481",
+    },
+    {
+        "client_type": "mac",
+        "email": "test@test.com",
+        "ip_address": "11.11.11.11",
+        "time": "2023-02-22T21:40:41Z",
+        "type": "Sign out",
+        "version": "5.13.7.15481",
+    },
+]
+STUB_EVENTS = [Event(**sample) for sample in STUB_SAMPLES]
+
+STUB_DATETIME_LAST_24_HOURS = datetime.datetime(2023, 2, 22, 22, 0, 0)
+STUB_DATETIME_NOW = datetime.datetime(2023, 2, 23, 22, 0, 0)
+DEFAULT_TIMEDELTA = 5
+
+STUB_EXPECTED_PREVIOUS_OUTPUT = [
+    {
+        "client_type": "mac",
+        "email": "test@test.com",
+        "ip_address": "11.11.11.11",
+        "time": "2023-02-22T21:40:41Z",
+        "type": "Sign out",
+        "version": "5.13.7.15481",
+    },
+    {
+        "client_type": "mac",
+        "email": "test@test.com",
+        "ip_address": "11.11.11.11",
+        "time": "2023-02-22T21:41:41Z",
+        "type": "Sign out",
+        "version": "5.13.7.15481",
+    },
+    {
+        "client_type": "windows",
+        "email": "test2@test.com",
+        "ip_address": "192.168.1.1",
+        "time": "2023-02-22T21:44:44Z",
+        "type": "Sign in",
+        "version": "5.13.7.15481",
+    },
+    {
+        "client_type": "mac",
+        "email": "test@test.com",
+        "ip_address": "11.11.11.11",
+        "time": "2023-02-22T21:44:44Z",
+        "type": "Sign in",
+        "version": "5.13.7.15481",
+    },
+]
+STUB_EXPECTED_PREVIOUS_STATE = {
+    "last_request_timestamp": "2023-02-23T22:00:00Z",
+    "latest_event_timestamp": "2023-02-22T21:44:44Z",
+    "previous_run_state": "starting",
+}
+
 
 class TestGetUserActivityEvents(unittest.TestCase):
-    @patch(REFRESH_OAUTH_TOKEN_PATH)
-    def setUp(self, mock_refresh_call) -> None:
-        mock_refresh_call.return_value = None
-        self.connection = Connection()
-        self.connection.logger = logging.getLogger("connection logger")
-        self.connection.connect(STUB_CONNECTION)
-        self.connection.zoom_api.oauth_token = STUB_OAUTH_TOKEN
+    @patch(REFRESH_OAUTH_TOKEN_PATH, return_value=None)
+    def setUp(self, mock_refresh_call: MagicMock) -> None:
+        self.task = Util.default_connector(MonitorSignInOutActivity())
 
-        self.action = MonitorSignInOutActivity()
-        self.action.connection = self.connection
-        self.action.logger = logging.getLogger("action logger")
-        self.params = {}
+    @patch(GET_DATETIME_LAST_24_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
+    @patch(GET_DATETIME_NOW_PATH, side_effect=[STUB_DATETIME_NOW])
+    @patch(GET_USER_ACTIVITY_EVENTS_PATH, return_value=(STUB_EXPECTED_PREVIOUS_OUTPUT, ""))
+    def test_first_run(
+        self, mock_call: MagicMock, mock_datetime_now: MagicMock, mock_datetime_last_24: MagicMock
+    ) -> None:
+        expected_output, expected_has_more_pages, expected_status_code, expected_error = (
+            STUB_EXPECTED_PREVIOUS_OUTPUT,
+            False,
+            200,
+            None,
+        )
+        expected_state = STUB_EXPECTED_PREVIOUS_STATE
+        output, state, has_more_pages, status_code, error = self.task.run({})
 
-    @patch(GET_DATETIME_LAST_24_HOURS_PATH)
-    @patch(GET_DATETIME_NOW_PATH)
-    @patch(GET_USER_ACTIVITY_EVENTS_PATH)
-    def test_first_run(self, mock_call, mock_datetime_now, mock_datetime_last_24):
-        mock_datetime_now.side_effect = [
-            datetime.datetime.fromtimestamp(1677211200),  # 2023-02-23 22:00:00, first run, "now"
-        ]
-
-        mock_datetime_last_24.side_effect = [
-            datetime.datetime.fromtimestamp(1677124800),  # 2023-02-22 22:00:00, first run, "last 24"
-        ]
-
-        expected_output = [
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "11.11.11.11",
-                "time": "2023-02-22T21:44:44Z",
-                "type": "Sign in",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "windows",
-                "email": "test2@test.com",
-                "ip_address": "192.168.1.1",
-                "time": "2023-02-22T21:44:44Z",
-                "type": "Sign in",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "11.11.11.11",
-                "time": "2023-02-22T21:41:41Z",
-                "type": "Sign out",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "11.11.11.11",
-                "time": "2023-02-22T21:40:41Z",
-                "type": "Sign out",
-                "version": "5.13.7.15481",
-            },
-        ], False
-        expected_state = {
-            "boundary_events": ["197f96ef45ad08592bfea604f60b6abcfc7d4bf2", "8c68922ce0e81f42e4db701317aa7f219049b144"],
-            "last_request_timestamp": "2023-02-23T22:00:00Z",
-            "latest_event_timestamp": "2023-02-22T21:44:44Z",
-            "last_page": True,
-        }
-
-        mock_call.return_value = expected_output
-
-        output, state, has_more_pages, status_code, error = self.action.run({})
-
+        self.assertListEqual(output, expected_output)
         self.assertDictEqual(state, expected_state)
-        self.assertListEqual(output, expected_output[0])
-        self.assertFalse(has_more_pages, expected_output[1])
-        self.assertEqual(status_code, 200)
-        self.assertIsNone(error)
+        self.assertFalse(has_more_pages, expected_has_more_pages)
+        self.assertEqual(status_code, expected_status_code)
+        self.assertEqual(error, expected_error)
 
-    @patch(GET_USER_ACTIVITY_EVENTS_PATH)
-    def test_subsequent_run(self, mock_call):
-        previous_output = [
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "11.11.11.11",
-                "time": "2023-02-22T21:44:44Z",
-                "type": "Sign in",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "windows",
-                "email": "test2@test.com",
-                "ip_address": "192.168.1.1",
-                "time": "2023-02-22T21:44:44Z",
-                "type": "Sign in",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "11.11.11.11",
-                "time": "2023-02-22T21:41:41Z",
-                "type": "Sign out",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "11.11.11.11",
-                "time": "2023-02-22T21:40:41Z",
-                "type": "Sign out",
-                "version": "5.13.7.15481",
-            },
-        ]
-        expected_output = [], False, 200, None
+    @patch(GET_DATETIME_LAST_24_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
+    @patch(GET_DATETIME_NOW_PATH, side_effect=[STUB_DATETIME_NOW + datetime.timedelta(minutes=DEFAULT_TIMEDELTA)])
+    @patch(GET_USER_ACTIVITY_EVENTS_PATH, return_value=(STUB_EXPECTED_PREVIOUS_OUTPUT, ""))
+    def test_subsequent_run(
+        self, mock_call: MagicMock, mock_datetime_now: MagicMock, mock_datetime_last_24: MagicMock
+    ) -> None:
+        output, state, has_more_pages, status_code, error = self.task.run(state=STUB_EXPECTED_PREVIOUS_STATE)
+        expected_output, expected_has_more_pages, expected_status_code, expected_error = [], False, 200, None
         expected_state = {
-            "boundary_events": ["197f96ef45ad08592bfea604f60b6abcfc7d4bf2", "8c68922ce0e81f42e4db701317aa7f219049b144"],
-            "last_request_timestamp": "2023-02-22T21:44:44Z",
-            "latest_event_timestamp": "2023-02-22T21:44:44Z",
-            "last_page": False,
+            "last_request_timestamp": f"{(STUB_DATETIME_NOW + datetime.timedelta(minutes=DEFAULT_TIMEDELTA)).isoformat()}Z",
+            "latest_event_timestamp": STUB_EXPECTED_PREVIOUS_STATE.get("latest_event_timestamp", ""),
+            "previous_run_state": "continuing",
         }
-
-        mock_call.return_value = previous_output, False
-
-        output, state, has_more_pages, status_code, error = self.action.run(state=expected_state)
-
+        self.assertListEqual(output, expected_output)
         self.assertDictEqual(state, expected_state)
-        self.assertListEqual(output, expected_output[0])
-        self.assertFalse(output, expected_output[1])
-        self.assertEqual(status_code, expected_output[2])
-        self.assertIsNone(error)
+        self.assertFalse(output, expected_has_more_pages)
+        self.assertEqual(status_code, expected_status_code)
+        self.assertEqual(error, expected_error)
 
-    @patch(GET_DATETIME_LAST_24_HOURS_PATH)
-    @patch(GET_DATETIME_NOW_PATH)
+    @patch(GET_DATETIME_LAST_24_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
+    @patch(GET_DATETIME_NOW_PATH, side_effect=[STUB_DATETIME_NOW])
     @patch(GET_USER_ACTIVITY_EVENTS_PATH)
-    def test_first_and_subsequent_runs(self, mock_call, mock_datetime_now, mock_datetime_last_24):
-        mock_datetime_now.side_effect = [
-            datetime.datetime.fromtimestamp(1677211200),  # 2023-02-23 22:00:00, first run, "now"
-            datetime.datetime.fromtimestamp(1677214800),  # 2023-02-23 23:00:00, subs. run, "1 hour after first run"
-        ]
+    def test_first_and_subsequent_runs(
+        self, mock_call: MagicMock, mock_datetime_now: MagicMock, mock_datetime_last_24: MagicMock
+    ) -> None:
 
-        mock_datetime_last_24.side_effect = [
-            datetime.datetime.fromtimestamp(1677124800),  # 2023-02-22 22:00:00, first run, "last 24"
-        ]
-
-        # First API call patch
+        # First run
         first_event_set = [
             {
                 "client_type": "mac",
@@ -189,270 +183,100 @@ class TestGetUserActivityEvents(unittest.TestCase):
                 "version": "5.13.7.15481",
             },
         ]
-        # Second API call patch
+        (
+            first_expected_output,
+            first_expected_state,
+            first_expected_has_more_pages,
+            first_expected_status_code,
+            first_expected_error,
+        ) = (
+            first_event_set,
+            {
+                "last_request_timestamp": f"{STUB_DATETIME_NOW.isoformat()}Z",
+                "latest_event_timestamp": f"{first_event_set[-1].get('time', '')}",
+                "previous_run_state": "starting",
+            },
+            False,
+            200,
+            None,
+        )
+        mock_call.return_value = first_event_set, ""
+        output, state, has_more_pages, status_code, error = self.task.run(state={})
+        self.assertListEqual(output, first_expected_output)
+        self.assertDictEqual(state, first_expected_state)
+        self.assertFalse(has_more_pages, first_expected_has_more_pages)
+        self.assertEqual(status_code, first_expected_status_code)
+        self.assertEqual(error, first_expected_error)
+
+        # Second run
+        mock_datetime_last_24.side_effect = [STUB_DATETIME_LAST_24_HOURS]
+        mock_datetime_now.side_effect = [STUB_DATETIME_NOW + datetime.timedelta(minutes=DEFAULT_TIMEDELTA)]
         second_event_set = [
             {
                 "client_type": "mac",
                 "email": "test@test.com",
                 "ip_address": "55.55.55.55",
-                "time": "2023-02-23T21:44:44Z",
-                "type": "Sign in",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "11.11.11.11",
-                "time": "2023-02-22T21:44:44Z",
+                "time": "2023-02-23T21:50:00Z",
                 "type": "Sign in",
                 "version": "5.13.7.15481",
             },
         ]
-        first_expected_output = (
-            [
-                {
-                    "client_type": "mac",
-                    "email": "test@test.com",
-                    "ip_address": "33.33.33.33",
-                    "time": "2023-02-22T21:45:00Z",
-                    "type": "Sign in",
-                    "version": "5.13.7.15481",
-                },
-                {
-                    "client_type": "mac",
-                    "email": "test@test.com",
-                    "ip_address": "11.11.11.11",
-                    "time": "2023-02-22T21:44:44Z",
-                    "type": "Sign in",
-                    "version": "5.13.7.15481",
-                },
-                {
-                    "client_type": "mac",
-                    "email": "test@test.com",
-                    "ip_address": "22.22.22.22",
-                    "time": "2023-02-22T21:44:44Z",
-                    "type": "Sign in",
-                    "version": "5.13.7.15481",
-                },
-            ],
-            True,
-            200,
-            None,
-        )
-        second_expected_output = (
-            [
-                {
-                    "client_type": "mac",
-                    "email": "test@test.com",
-                    "ip_address": "55.55.55.55",
-                    "time": "2023-02-23T21:44:44Z",
-                    "type": "Sign in",
-                    "version": "5.13.7.15481",
-                }
-            ],
+        (
+            second_expected_output,
+            second_expected_state,
+            second_expected_has_more_pages,
+            second_expected_status_code,
+            second_expected_error,
+        ) = (
+            second_event_set,
+            {
+                "last_request_timestamp": f"{(STUB_DATETIME_NOW + datetime.timedelta(minutes=DEFAULT_TIMEDELTA)).isoformat()}Z",
+                "latest_event_timestamp": second_event_set[-1].get("time", ""),
+                "previous_run_state": "continuing",
+            },
             False,
             200,
             None,
         )
-        first_expected_state = {
-            "boundary_events": ["854d8b971985244502ba5714f372344a9374c538"],
-            "last_request_timestamp": "2023-02-23T22:00:00Z",
-            "latest_event_timestamp": "2023-02-22T21:45:00Z",
-            "last_page": False,
-        }
-        second_expected_state = {
-            "boundary_events": ["b308ba69b3beb7207f8271ef7a78f84da98bed67"],
-            "last_request_timestamp": "2023-02-23T23:00:00Z",
-            "latest_event_timestamp": "2023-02-23T21:44:44Z",
-            "last_page": True,
-        }
-
-        # First run
-        mock_call.return_value = first_event_set, True
-        output, state, has_more_pages, status_code, error = self.action.run(state={})
-        self.assertDictEqual(state, first_expected_state)
-        self.assertListEqual(output, first_expected_output[0])
-        self.assertTrue(has_more_pages, first_expected_output[1])
-        self.assertEqual(status_code, first_expected_output[2])
-        self.assertIsNone(error)
-
-        # Subsequent run
         mock_call.return_value = second_event_set, False
-        output, state, has_more_pages, status_code, error = self.action.run(
-            state=state
-        )  # Using state from first run to trigger subsequent run
+        output, state, has_more_pages, status_code, error = self.task.run(state=state)
+        self.assertListEqual(output, second_expected_output)
         self.assertDictEqual(state, second_expected_state)
-        self.assertListEqual(output, second_expected_output[0])
-        self.assertFalse(has_more_pages, first_expected_output[1])
-        self.assertEqual(status_code, second_expected_output[2])
-        self.assertIsNone(error)
+        self.assertFalse(has_more_pages, second_expected_has_more_pages)
+        self.assertEqual(status_code, second_expected_status_code)
+        self.assertEqual(error, second_expected_error)
 
-    @patch(GET_DATETIME_NOW_PATH)
-    @patch(GET_USER_ACTIVITY_EVENTS_PATH)
-    def test_api_output_changed_error_catch(self, mock_call, mock_datetime):
-        mock_call.return_value = [{"test": "value"}], False
-        mock_datetime.return_value = datetime.datetime(2000, 1, 1)
-        output, state, has_more_pages, status_code, error = self.action.run(state={})
+    @patch(GET_DATETIME_NOW_PATH, return_value=datetime.datetime(2000, 1, 1))
+    @patch(GET_USER_ACTIVITY_EVENTS_PATH, return_value=([{"test": "value"}], ""))
+    def test_api_output_changed_error_catch(self, mock_call: MagicMock, mock_datetime: MagicMock) -> None:
+        output, state, has_more_pages, status_code, error = self.task.run(state={})
 
         expected_state = {
-            "boundary_events": [],
             "last_request_timestamp": "2000-01-01T00:00:00Z",
             "latest_event_timestamp": None,
-            "last_page": False,
         }
-        expected_output = (
+        expected_output, expected_has_more_pages, expected_status_code, expected_error = (
             [],
             False,
             500,
             PluginException(
-                cause=MonitorSignInOutActivity.API_CHANGED_ERROR_MESSAGE_CAUSE,
+                cause=PluginException.causes[PluginException.Preset.SERVER_ERROR],
                 assistance=MonitorSignInOutActivity.API_CHANGED_ERROR_MESSAGE_ASSISTANCE,
             ),
         )
         self.assertDictEqual(state, expected_state)
-        self.assertListEqual(output, expected_output[0])
-        self.assertFalse(has_more_pages, expected_output[1])
-        self.assertEqual(status_code, expected_output[2])
-        self.assertEqual(error.cause, expected_output[3].cause)
-        self.assertEqual(error.assistance, expected_output[3].assistance)
+        self.assertListEqual(output, expected_output)
+        self.assertFalse(has_more_pages, expected_has_more_pages)
+        self.assertEqual(status_code, expected_status_code)
+        self.assertEqual(error.cause, expected_error.cause)
+        self.assertEqual(error.assistance, expected_error.assistance)
 
-    def test_get_boundary_hashes_two_same_time(self):
-        samples = [
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "11.11.11.11",
-                "time": "2023-02-22T21:44:44Z",
-                "type": "Sign in",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "windows",
-                "email": "test2@test.com",
-                "ip_address": "192.168.1.1",
-                "time": "2023-02-22T21:44:44Z",
-                "type": "Sign in",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "11.11.11.11",
-                "time": "2023-02-22T21:41:41Z",
-                "type": "Sign out",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "11.11.11.11",
-                "time": "2023-02-22T21:40:41Z",
-                "type": "Sign out",
-                "version": "5.13.7.15481",
-            },
+    @parameterized.expand(
+        [
+            (STUB_EVENTS, STUB_EVENTS[0].time, []),
+            (STUB_EVENTS, STUB_EVENTS[1].time, [STUB_EVENTS[0]]),
         ]
-
-        events = [Event(**s) for s in samples]
-        task = MonitorSignInOutActivity()
-        got = task._get_boundary_event_hashes(latest_event_time="2023-02-22T21:44:44Z", events=events)
-
-        expected = ["197f96ef45ad08592bfea604f60b6abcfc7d4bf2", "8c68922ce0e81f42e4db701317aa7f219049b144"]
-
-        self.assertEqual(got, expected)
-
-    def test_dedupe_events(self):
-        samples = [
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "11.11.11.11",
-                "time": "2023-02-22T21:44:44Z",
-                "type": "Sign in",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "windows",
-                "email": "test2@test.com",
-                "ip_address": "192.168.1.1",
-                "time": "2023-02-22T21:44:44Z",
-                "type": "Sign in",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "11.11.11.11",
-                "time": "2023-02-22T21:41:41Z",
-                "type": "Sign out",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "11.11.11.11",
-                "time": "2023-02-22T21:40:41Z",
-                "type": "Sign out",
-                "version": "5.13.7.15481",
-            },
-        ]
-
-        all_events = [Event(**s) for s in samples]
-        boundary_hashes = ["197f96ef45ad08592bfea604f60b6abcfc7d4bf2", "8c68922ce0e81f42e4db701317aa7f219049b144"]
-
-        task = MonitorSignInOutActivity()
-        expected = []
-        got = task._dedupe_events(
-            boundary_event_hashes=boundary_hashes, all_events=all_events, latest_event_timestamp=all_events[0].time
-        )
-
-        self.assertEqual(expected, got)
-
-    def test_dedupe_events_partial_dupes(self):
-        samples = [
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "11.11.11.11",
-                "time": "2023-02-22T21:44:44Z",
-                "type": "Sign in",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "windows",
-                "email": "test2@test.com",
-                "ip_address": "192.168.1.1",
-                "time": "2023-02-22T21:44:44Z",
-                "type": "Sign in",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "11.11.11.11",
-                "time": "2023-02-22T21:41:41Z",
-                "type": "Sign out",
-                "version": "5.13.7.15481",
-            },
-            {
-                "client_type": "mac",
-                "email": "test@test.com",
-                "ip_address": "11.11.11.11",
-                "time": "2023-02-22T21:40:41Z",
-                "type": "Sign out",
-                "version": "5.13.7.15481",
-            },
-        ]
-
-        all_events = [Event(**s) for s in samples]
-        boundary_hashes = ["197f96ef45ad08592bfea604f60b6abcfc7d4bfc", "8c68922ce0e81f42e4db701317aa7f219049b146"]
-
-        task = MonitorSignInOutActivity()
-        got = task._dedupe_events(
-            boundary_event_hashes=boundary_hashes, all_events=all_events, latest_event_timestamp=all_events[0].time
-        )
-
-        self.assertEqual(all_events[:2], got)
-
-
-if __name__ == "__main__":
-    unittest.main()
+    )
+    def test_dedupe_events(self, events: List[Event], latest_event_time: str, expected: List[Event]) -> None:
+        output = self.task._dedupe_events(all_events=events, latest_event_timestamp=latest_event_time)
+        self.assertEqual(expected, output)

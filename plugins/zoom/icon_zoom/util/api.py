@@ -86,8 +86,22 @@ class ZoomAPI:
                 return events
 
     def get_user_activity_events_task(
-        self, start_date: str = None, end_date: str = None, page_size: int = None, next_page_token: str = None
-    ) -> ([dict], bool):
+        self,
+        start_date: Optional[str] = None,
+        end_date: Optional[str] = None,
+        page_size: Optional[int] = None,
+        next_page_token: Optional[str] = None,
+    ) -> ([dict], Optional[str]):
+        """
+        Gets user activity events, paginated externally.
+        Warning: Changing start date/end date/page size mid-pagination will result in the current next_page_token
+        becoming invalidated!
+        :param start_date: Optional, time to start from
+        :param end_date: Optional, time to end at
+        :param page_size: Optional, amount of pages to consume. Zoom API is capped at 300 results
+        :param next_page_token: Optional, pagination token to use for retrieving next result set
+        :return: Tuple containing list of results (as dictionaries), string containing next page token
+        """
         activities_url = f"{self.api_url}/report/activities"
 
         events = []
@@ -100,9 +114,13 @@ class ZoomAPI:
         response = self._call_api("GET", activities_url, params=params)
 
         events = events + response.get("activity_logs", [])
-        has_more_pages = response.get("next_page_token") != ""
 
-        return events, has_more_pages
+        # Get next page token and normalize it to None
+        new_next_page_token = response.get("next_page_token")
+        if new_next_page_token is None or new_next_page_token == "":  # nosec
+            new_next_page_token = None
+
+        return events, new_next_page_token
 
     def _refresh_oauth_token(self) -> None:
         """
@@ -250,18 +268,18 @@ class ZoomAPI:
 
     @staticmethod
     def get_exception_for_rate_limit(response: Response) -> PluginException:
-        rate_limit_type = response.headers.get("X-RateLimit-Type", "")
-        rate_limit_limit = response.headers.get("X-RateLimit-Limit")
-        rate_limit_remaining = response.headers.get("X-RateLimit-Remaining")
+        rate_limit_category = response.headers.get("x-ratelimit-category", "")
+        rate_limit_limit = response.headers.get("x-ratelimit-limit")
+        rate_limit_remaining = response.headers.get("x-ratelimit-remaining")
         rate_limit_retry_after = response.headers.get("Retry-After")
 
-        if rate_limit_type == "Light":
+        if rate_limit_category == "Light":
             return PluginException(
                 cause="Account is rate-limited by the maximum per-second limit for this API.",
                 assistance="Try again later.",
             )
 
-        if rate_limit_type == "Heavy":
+        if rate_limit_category == "Heavy":
             return PluginException(
                 cause=f"Account is rate-limited by the maximum daily limit for this API "
                 f"(limit: {rate_limit_limit} calls per day, {rate_limit_remaining} remaining.)",

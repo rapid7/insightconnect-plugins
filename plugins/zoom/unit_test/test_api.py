@@ -1,11 +1,13 @@
+import sys
+
+sys.path.append("../")
+
 import logging
 import unittest
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
-from icon_zoom.util.api import ZoomAPI
-from icon_zoom.util.api import AuthenticationRetryLimitError
-
+from icon_zoom.util.api import AuthenticationRetryLimitError, ZoomAPI
 
 REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI._refresh_oauth_token"
 REQUESTS_PATH = "requests.request"
@@ -23,7 +25,7 @@ class MockResponse:
 class TestAPI(TestCase):
     @patch(REFRESH_OAUTH_TOKEN_PATH)
     @patch(REQUESTS_PATH)
-    def test_unauthenticated_first_run_oauth(self, mock_request, mock_refresh):
+    def test_unauthenticated_first_run_oauth(self, mock_request: MagicMock, mock_refresh: MagicMock) -> None:
         mock_refresh.return_value = "blah"
         api = ZoomAPI(account_id="blah", client_id="blah", client_secret="blah", logger=logging.getLogger())
 
@@ -33,7 +35,9 @@ class TestAPI(TestCase):
 
     @patch(REFRESH_OAUTH_TOKEN_PATH)
     @patch(REQUESTS_PATH)
-    def test_unauthenticated_first_run_oauth_retry_limit_met_1_attempt(self, mock_request, mock_refresh):
+    def test_unauthenticated_first_run_oauth_retry_limit_met_1_attempt(
+        self, mock_request: MagicMock, mock_refresh: MagicMock
+    ) -> None:
         mock_refresh.return_value = "blah"
         api = ZoomAPI(
             account_id="blah", client_id="blah", client_secret="blah", oauth_retry_limit=1, logger=logging.getLogger()
@@ -46,7 +50,9 @@ class TestAPI(TestCase):
 
     @patch(REFRESH_OAUTH_TOKEN_PATH)
     @patch(REQUESTS_PATH)
-    def test_unauthenticated_first_run_oauth_retry_limit_met_50_attempts(self, mock_request, mock_refresh):
+    def test_unauthenticated_first_run_oauth_retry_limit_met_50_attempts(
+        self, mock_request: MagicMock, mock_refresh: MagicMock
+    ) -> None:
         num_retries = 50
         mock_refresh.return_value = "blah"
         api = ZoomAPI(
@@ -64,14 +70,9 @@ class TestAPI(TestCase):
 
     @patch(REFRESH_OAUTH_TOKEN_PATH)
     @patch(REQUESTS_PATH)
-    def test_authenticated_first_run_oauth(self, mock_request, mock_refresh):
+    def test_authenticated_first_run_oauth(self, mock_request: MagicMock, mock_refresh: MagicMock) -> None:
         mock_refresh.return_value = "blah"
         api = ZoomAPI(account_id="blah", client_id="blah", client_secret="blah", logger=logging.getLogger())
-
         mock_request.side_effect = [MockResponse(status_code=200)]
         result = api._call_api(method="POST", url="http://example.com")
         self.assertDictEqual(result, {})
-
-
-if __name__ == "__main__":
-    unittest.main()
