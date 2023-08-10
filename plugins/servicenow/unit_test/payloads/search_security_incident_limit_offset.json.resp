@@ -1,0 +1,81 @@
+{
+  "result": [
+    {
+        "active": "false",
+        "activity_due": "2023-07-28 10:18:55",
+        "affected_user": {
+          "link": "example.com/1234",
+          "value": "1234"
+        },
+        "alert_id": "dca801f11b1cb5506bf1ed78b04bcb5f",
+        "alert_rule": "test",
+        "alert_sensor": {
+          "link": "example.com/1234",
+          "value": "1234"
+        },
+        "assigned_to": {
+          "link": "example.com/1234",
+          "value": "1234"
+        },
+        "assignment_group": {
+          "link": "example.com/1234",
+          "value": "1234"
+        },
+        "business_criticality": 3,
+        "caller": {
+          "link": "example.com/1234",
+          "value": "1234"
+        },
+        "category": "Phishing",
+        "change_request": "",
+        "close_code": "-100",
+        "close_notes": "test close notes",
+        "closed_at": "2023-08-01 08:03:28",
+        "closed_by": {
+          "link": "example.com/1234",
+          "value": "1234"
+        },
+        "cmdb_ci": {
+          "link": "example.com/1234",
+          "value": "1234"
+        },
+        "contact_type": "phone",
+        "description": "example description",
+        "incident": "",
+        "location": {
+          "link": "example.com/1234",
+          "value": "1234"
+        },
+        "number": "SIR00000002",
+        "opened_at": "2023-07-28 10:18:55",
+        "opened_by": {
+          "link": "example.com/1234",
+          "value": "1234"
+        },
+        "opened_for": {
+          "link": "example.com/1234",
+          "value": "1234"
+        },
+        "parent": "",
+        "parent_security_incident": "",
+        "priority": "3",
+        "problem": "",
+        "risk_score": "38",
+        "risk_score_override": "false",
+        "secure_notes": "\ufde0\ufde1\ufde256715c0aff1331007a6dffffffffff54\ufdcc\ufdcdCzXu70QS9L8TfvWt92rByQ==\ufdce\ufdcf",
+        "security_tags": "dca801f11b1cb5506bf1ed78b04bcb5f",
+        "short_description": "test",
+        "special_access_write": "dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g",
+        "state": "3",
+        "subcategory": "25",
+        "substate": "1",
+        "sys_created_by": "user",
+        "sys_created_on": "2023-07-28 10:18:55",
+        "sys_id": "g12345678",
+        "sys_updated_by": "user",
+        "sys_updated_on": "2023-08-01 08:03:32",
+        "watch_list": "dca801f11b1cb5506bf1ed78b04bcb5f",
+        "work_notes_list": "dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g"
+      }
+  ]
+}

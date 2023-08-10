@@ -1,0 +1,17 @@
+{
+  "affected_user": "",
+  "assigned_to": "",
+  "assignment_group": "",
+  "caller": "",
+  "category": "",
+  "cmdb_ci": "",
+  "contact_type": "",
+  "description": "",
+  "location": "",
+  "priority": 0,
+  "short_description": "test incident",
+  "state": 0,
+  "subcategory": "",
+  "substate": 0,
+  "additional_fields": {}
+}
