@@ -11,7 +11,7 @@ import timeout_decorator
 from icon_palo_alto_cortex_xdr.triggers.get_incidents import GetIncidents
 from icon_palo_alto_cortex_xdr.triggers.get_incidents.schema import Input
 
-from unit_test.util import MockTrigger, Util
+from util import MockTrigger, Util
 
 
 def timeout_pass(error_callback: Optional[Callable] = None):
@@ -46,7 +46,7 @@ def check_error():
             "host_count": 1,
             "xdr_url": "https://example.com/incident-view?caseId=1",
             "starred": False,
-            "hosts": ["example-host"],
+            "hosts": ["example-host", "example-host-2"],
             "users": ["administrator"],
             "incident_sources": ["XDR Agent"],
             "wildfire_hits": 4,
