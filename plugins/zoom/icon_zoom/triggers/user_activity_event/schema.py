@@ -16,7 +16,7 @@ class Output:
 
 
 class UserActivityEventInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -35,7 +35,8 @@ class UserActivityEventInput(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "activity_type"
-  ]
+  ],
+  "definitions": {}
 }
     """)
 
@@ -44,7 +45,7 @@ class UserActivityEventInput(insightconnect_plugin_runtime.Input):
 
 
 class UserActivityEventOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -56,28 +57,22 @@ class UserActivityEventOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
+  "required": [
+    "email",
+    "ip_address",
+    "time",
+    "type"
+  ],
   "definitions": {
     "user_activity": {
       "type": "object",
       "title": "user_activity",
       "properties": {
-        "client_type": {
-          "type": "string",
-          "title": "Client Type",
-          "description": "The type of client of the user's device",
-          "order": 5
-        },
         "email": {
           "type": "string",
           "title": "Email",
           "description": "Email address of the user used for the activity",
           "order": 1
-        },
-        "ip_address": {
-          "type": "string",
-          "title": "IP Address",
-          "description": "The IP address of the user's device",
-          "order": 4
         },
         "time": {
           "type": "string",
@@ -95,19 +90,31 @@ class UserActivityEventOutput(insightconnect_plugin_runtime.Output):
           ],
           "order": 3
         },
+        "ip_address": {
+          "type": "string",
+          "title": "IP Address",
+          "description": "The IP address of the user's device",
+          "order": 4
+        },
+        "client_type": {
+          "type": "string",
+          "title": "Client Type",
+          "description": "The type of client of the user's device",
+          "order": 5
+        },
         "version": {
           "type": "string",
           "title": "Version",
           "description": "The version of the client of the user's device",
           "order": 6
-        }
-      },
-      "required": [
-        "email",
-        "ip_address",
-        "time",
-        "type"
-      ]
+        },
+        "required": [
+          "email",
+          "ip_address",
+          "time",
+          "type"
+        ]
+      }
     }
   }
 }

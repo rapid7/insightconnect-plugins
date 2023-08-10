@@ -1,35 +1,29 @@
-import sys
 import os
-from parameterized import parameterized
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from typing import Callable
 from unittest import TestCase, mock
+from unittest.mock import MagicMock
+
 from icon_zoom.actions.create_user import CreateUser
 from insightconnect_plugin_runtime.exceptions import PluginException
+from parameterized import parameterized
 
-from mock import (
-    Util,
-    STUB_CREATE_USER,
-    mock_request_201,
-    mock_request_400,
-    mock_request_404,
-    mock_request_409,
-    mock_request_429,
-    mocked_request,
-)
+from mock import STUB_CREATE_USER, Util, mock_request_201, mock_request_400, mock_request_404, mocked_request
 
 
 class TestCreateUser(TestCase):
     @mock.patch("requests.request", side_effect=mock_request_201)
-    def setUp(self, mock_request) -> None:
+    def setUp(self, mock_request: MagicMock) -> None:
         mocked_request(mock_request)
         self.action = Util.default_connector(CreateUser())
         self.params = STUB_CREATE_USER
 
     @mock.patch("icon_zoom.util.api.ZoomAPI.authenticate")
     @mock.patch("requests.request", side_effect=mock_request_201)
-    def test_create_user_success(self, mock_post, mock_auth):
+    def test_create_user_success(self, mock_post: MagicMock, mock_auth: MagicMock) -> None:
         mock_auth.return_value = 200
         response = self.action.run(self.params)
         expected_response = {
@@ -49,7 +43,7 @@ class TestCreateUser(TestCase):
         ],
     )
     @mock.patch("icon_zoom.util.api.ZoomAPI._refresh_oauth_token", return_value=None)
-    def test_not_ok(self, mock_request, exception, mock_refresh):
+    def test_not_ok(self, mock_request: Callable, exception: str, mock_refresh: MagicMock) -> None:
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
             self.action.run(self.params)

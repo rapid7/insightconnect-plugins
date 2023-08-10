@@ -1,14 +1,19 @@
+import sys
+
+sys.path.append("../")
+
 import json
-import os
 import logging
-from typing import Callable
-import requests
-
+import os
+from typing import Callable, Union
 from unittest import mock
+from unittest.mock import MagicMock
 
+import requests
 from icon_zoom.actions.create_user.schema import Input
 from icon_zoom.connection.connection import Connection
 from insightconnect_plugin_runtime.action import Action
+from insightconnect_plugin_runtime.task import Task
 
 STUB_CONNECTION = {
     "client_id": "asdf",
@@ -32,9 +37,8 @@ REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI._refresh_oauth_token"
 
 class Util:
     @staticmethod
-    @mock.patch(REFRESH_OAUTH_TOKEN_PATH)
-    def default_connector(action: Action, mock_refresh_call) -> Action:
-        mock_refresh_call.return_value = None
+    @mock.patch(REFRESH_OAUTH_TOKEN_PATH, return_value=None)
+    def default_connector(action: Action, mock_refresh_call: MagicMock) -> Union[Action, Task]:
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
         default_connection.connect(STUB_CONNECTION)
@@ -54,8 +58,8 @@ class MockResponse:
     def json(self):
         with open(
             os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp")
-        ) as file:
-            return json.load(file)
+        ) as file_:
+            return json.load(file_)
 
 
 def mocked_request(side_effect: Callable) -> None:
