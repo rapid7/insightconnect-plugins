@@ -90,6 +90,8 @@ class MonitorIncidentEvents(insightconnect_plugin_runtime.Task):
         sorted_events = self.remove_old_and_sort_incident_events(
             incident_events=events, epoch_cutoff=last_event_time, time_sorting_field=time_sorting_field
         )
-
+        # Separate the host identifier values
+        for incident in sorted_events:
+            incident["hosts"] = Util.split_list_values(incident.get("hosts", []), ":")
         self.logger.info(f"Finished retrieving {len(sorted_events)} new incident events this iteration.")
         return {Output.EVENTS: sorted_events}, {State.LAST_EVENT_TIME: str(now)}
