@@ -1,0 +1,19 @@
+{
+  "security_incidents": [
+    {
+      "number": "SIR00000001",
+      "priority": 4,
+      "sys_id": "g123456"
+    },
+    {
+      "number": "SIR00000002",
+      "priority": 3,
+      "sys_id": "g12345678"
+    },
+    {
+      "number": "SIR00000003",
+      "priority": 3,
+      "sys_id": "g123456789"
+    }
+  ]
+}
