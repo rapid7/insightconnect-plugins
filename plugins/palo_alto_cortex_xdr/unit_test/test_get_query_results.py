@@ -11,8 +11,8 @@ import timeout_decorator
 from icon_palo_alto_cortex_xdr.triggers.get_query_results import GetQueryResults
 from icon_palo_alto_cortex_xdr.triggers.get_query_results.schema import Input
 
-from unit_test.mock import mock_request_200
-from unit_test.util import MockTrigger, Util
+from mock import mock_request_200
+from util import MockTrigger, Util
 
 
 def timeout_pass(error_callback: Optional[Callable] = None):

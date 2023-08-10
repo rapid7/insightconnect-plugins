@@ -14,6 +14,24 @@ class Util:
         return int(time.time() * 1000)
 
     @staticmethod
+    def split_list_values(input_list: list, separator: str) -> list:
+        """Splits each string in a list based on a separator and returns a list of all separated values
+        :param input_list: Input list of string
+        :type input_list: list, required
+        :param separator: Separator to use in splitting string
+        :type separator: str, required
+        :return: list(output_set)
+        :rtype: list
+        """
+        output_list = []
+        for item in input_list:
+            if isinstance(item, str):
+                item_split = item.split(separator)
+                output_list.extend(item_split)
+        duplicates = set()
+        return [item for item in output_list if not (item in duplicates or duplicates.add(item))]
+
+    @staticmethod
     def send_items_to_platform_for_trigger(
         trigger: Trigger,
         items: List[Dict],
