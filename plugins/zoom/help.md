@@ -21,7 +21,7 @@ Business, or Enterprise plan.
     
 # Supported Product Versions
   
-* Zoom API v2.10  
+* Zoom API v2.10
 
 # Documentation
 
@@ -47,12 +47,12 @@ Example input:
     "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
   }
 }
-```  
+```
 
 ## Technical Details
 
 ### Actions
-  
+
 
 #### Create User
   
@@ -89,7 +89,7 @@ Example input:
 |id|string|True|User identifier|T9ti3NBxR42swGKrqABGig|
 |last_name|string|True|Last name of user|Smith|
 |type|integer|True|User type|1|
-
+  
 Example output:
 
 ```
@@ -135,7 +135,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |success|boolean|True|Success|True|
-
+  
 Example output:
 
 ```
@@ -167,7 +167,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |user|user|True|User details|{'email': 'user@example.com', 'first_name': 'John', 'id': 'T9ti3NBxR42swGKrqABGig', 'last_name': 'Smith', 'type': 1}|
-
+  
 Example output:
 
 ```
@@ -182,7 +182,7 @@ Example output:
 }
 ```
 ### Triggers
-  
+
 
 #### User Activity Event
   
@@ -207,7 +207,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |user_activity|user_activity|False|User Activity|{'email': 'user@example.com', 'time': '2020-06-05T16:51:28Z', 'type': 'Sign in', 'ip_address': '198.51.100.100', 'client_type': 'Browser', 'version': '5.12.2'}|
-
+  
 Example output:
 
 ```
@@ -223,7 +223,7 @@ Example output:
 }
 ```
 ### Tasks
-  
+
 
 #### Monitor Sign in and out Activity
   
@@ -231,19 +231,19 @@ This task is used to monitor sign in and out activity
 
 ##### Input
   
-*This task does not contain any inputs.*  
+*This task does not contain any inputs.*
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |activity_logs|[]user_activity|True|All activity logs within the specified time range|[{"email": "user@example.com", "time": "2020-06-05T16:51:28Z", "type": "Sign in", "ip_address": "198.51.100.100", "client_type": "Browser", "version": "5.12.2"}, {"email": "user@example.com", "time": "2020-06-05T17:51:28Z", "type": "Sign out", "ip_address": "198.51.100.100", "client_type": "Browser", "version": "5.12.2"}]|
-
+  
 Example output:
 
 ```
-{
-  "activity_logs": {
+[
+  {
     "client_type": "Browser",
     "email": "user@example.com",
     "ip_address": "198.51.100.100",
@@ -251,12 +251,12 @@ Example output:
     "type": "Sign in",
     "version": "5.12.2"
   }
-}
+]
 ```
 
 ### Custom Types
   
-**user_activity**  
+**user_activity**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -267,7 +267,7 @@ Example output:
 |Type|string|None|True|The type of activity|Sign in|
 |Version|string|None|False|The version of the client of the user's device|5.12.2|
   
-**user**  
+**user**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -280,7 +280,7 @@ Example output:
 |Host Key|string|None|False|User's host key|123321|
 |ID|string|None|True|User identifier|T9ti3NBxR42swGKrqABGig|
 |IM Group IDs|[]string|None|False|IM IDs of the groups user belongs to|['t-_-d56CSWG-7BF15LLrOw', 't-_-d56CSWG-7BF15LLrow']|
-|JID|string|None|False|JID of user|T9ti3NBxR42swGKrqABGig@xmpp.zoom.us|
+|JID|string|None|False|JID of user|user@example.com|
 |Language|string|None|False|Language of user|en-US|
 |Last Login Time|string|None|False|Last login datetime of user|2023-06-21 13:41:14+00:00|
 |Last Name|string|None|False|Last name of user|Smith|
@@ -294,11 +294,11 @@ Example output:
 |Type|integer|None|False|User type|1|
 |Use Personal Meeting ID|boolean|None|False|Use Personal meeting ID for instant meetings|False|
 |Verified|integer|None|False|Whether the user is verified or not|1|
-  
+
 
 ## Troubleshooting
-
-*There is no troubleshooting for this plugin.*  
+  
+*There is no troubleshooting for this plugin.*
 
 # Version History
 

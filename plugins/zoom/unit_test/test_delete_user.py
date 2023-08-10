@@ -1,21 +1,18 @@
-import sys
 import os
+import sys
+
 from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
+from unittest.mock import MagicMock
+
 from icon_zoom.actions.delete_user import DeleteUser
 from icon_zoom.actions.delete_user.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from mock import (
-    Util,
-    mock_request_204,
-    mock_request_400,
-    mock_request_404,
-    mocked_request,
-)
+from mock import Util, mock_request_204, mock_request_400, mock_request_404, mocked_request
 
 STUB_DELETE_USER_QUERY_PARAMS = {
     Input.ID: "12345",
@@ -29,12 +26,12 @@ STUB_DELETE_USER_QUERY_PARAMS = {
 
 class TestDeleteUser(TestCase):
     @mock.patch("requests.Session.request", side_effect=mock_request_204)
-    def setUp(self, mock_delete) -> None:
+    def setUp(self, mock_delete: MagicMock) -> None:
         self.action = Util.default_connector(DeleteUser())
         self.params = STUB_DELETE_USER_QUERY_PARAMS
 
     @mock.patch("requests.request", side_effect=mock_request_204)
-    def delete_user_success(self, mock_delete):
+    def delete_user_success(self, mock_delete: MagicMock) -> None:
         # mocked_request(mock_request_204)
         response = self.action.run(self.params)
         expected_response = None
@@ -48,7 +45,7 @@ class TestDeleteUser(TestCase):
         ]
     )
     @mock.patch("icon_zoom.util.api.ZoomAPI._refresh_oauth_token", return_value=None)
-    def test_not_ok(self, mock_request, exception, mock_refresh):
+    def test_not_ok(self, mock_request: MagicMock, exception: str, mock_refresh: MagicMock) -> None:
         mocked_request(mock_request)
 
         with self.assertRaises(PluginException) as context:

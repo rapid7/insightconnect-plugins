@@ -85,11 +85,13 @@ class ZoomAPI:
             else:
                 return events
 
-    def get_user_activity_events_task(self,
-                                      start_date: Optional[str] = None,
-                                      end_date: Optional[str] = None,
-                                      page_size: Optional[int] = None,
-                                      next_page_token: Optional[str] = None) -> ([dict], Optional[str]):
+    def get_user_activity_events_task(
+        self,
+        start_date: Optional[str] = None,
+        end_date: Optional[str] = None,
+        page_size: Optional[int] = None,
+        next_page_token: Optional[str] = None,
+    ) -> ([dict], Optional[str]):
         """
         Gets user activity events, paginated externally.
         Warning: Changing start date/end date/page size mid-pagination will result in the current next_page_token
@@ -115,7 +117,7 @@ class ZoomAPI:
 
         # Get next page token and normalize it to None
         new_next_page_token = response.get("next_page_token")
-        if new_next_page_token is None or new_next_page_token == "":
+        if new_next_page_token is None or new_next_page_token == "":  # nosec
             new_next_page_token = None
 
         return events, new_next_page_token
