@@ -17,11 +17,27 @@ jobs:
         python-version: '3.9'
 
     - name: Run Coverage on Tier One Plugins
+#      continue-on-error: true
       env:
-        TIER_ONE_PLUGINS: ["active_directory_ldap","math","ssh","advanced_regex","microsoft_atp_safe_links","storage",
-                           "base64","microsoft_office365_email","string","basename","microsoft_sccm","subnet",
-                           "crowdstrike_falcon","microsoft_teams","timers","csv","python_3_script","type_converter",
-                           "cymru_malware_hash","rapid7_insight_agent","virustotal","datetime","rapid7_insightidr",
-                           "whois","dig","rapid7_insightvm","rapid7_intsights","extractit","rapid7_vulndb",
-                           "rapid7_insightappsec","hashit","rest","rapid7_insights","html","servicenow","jira","sleep"]
-      run: pwd
+        TIER_ONE_PLUGINS_ICON: math active_directory_ldap advanced_regex microsoft_atp_safe_links base64 string basename subnet microsoft_teams csv python_3_script type_converter rapid7_insight_agent datetime rapid7_insightidr whois dig rapid7_insightvm rapid7_intsights extractit rapid7_vulndb rapid7_insightappsec hashit rest rapid7_insights html servicenow jira sleep
+#        TIER_ONE_PLUGINS_KOMAND = ("ssh storage microsoft_office365_email microsoft_sccm crowdstrike_falcon timers cymru_malware_hash virustotal ")
+      run: |
+        cd plugins
+        touch coverage.csv
+        for plugin in $TIER_ONE_PLUGINS_ICON
+        do
+          cd $plugin
+          echo $plugin
+          python3 -m venv venv
+          source venv/bin/activate
+          pip3 install setuptools==41.2.0
+          pip3 install coverage insightconnect_plugin_runtime --no-cache-dir --disable-pip-version-check
+          pip3 install -r requirements.txt --no-cache-dir --disable-pip-version-check
+          export PYTHONPATH=$(pwd)/unit_test/
+          coverage run -m unittest unit_test/*
+          percentage=$(python3 -m coverage report --data-file=$data_file | grep TOTAL | awk '{print $NF}')
+          echo "$plugin, $percentage" >> ../coverage.csv
+          deactivate
+          rm -r venv
+          cd ../
+        done
