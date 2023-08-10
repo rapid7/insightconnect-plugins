@@ -6,6 +6,10 @@ title: Palo Alto Cortex XDR
 description: Stop modern attacks with the industry's first extended detection and response platform that spans your endpoints, network and cloud data
 version: 3.0.0
 connection_version: 2
+sdk:
+  type: slim
+  version: 5
+  user: nobody
 supported_versions: ["2022-08-09 Palo Alto Cortex XDR API v1"]
 vendor: rapid7
 support: rapid7
