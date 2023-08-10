@@ -11,7 +11,7 @@ class Input:
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -63,7 +63,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
           "title": "Secret Key",
           "description": "The shared secret key",
           "format": "password",
-          "display_type": "password"
+          "displayType": "password"
         }
       }
     }
