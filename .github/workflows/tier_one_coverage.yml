@@ -35,19 +35,31 @@ jobs:
           do
             cd $plugin
             echo $plugin
+            
+            # Creating venv so we can install required libraries and later delete them to avoid conflicts
             python3 -m venv venv
             source venv/bin/activate
+          
+            # Installing previously mentioned libraries
             pip3 install setuptools==41.2.0 --no-cache-dir --disable-pip-version-check
             pip3 install coverage insightconnect_plugin_runtime -r requirements.txt --no-cache-dir --disable-pip-version-check
+            
+            # Exporting PYTHONPATH to plugins unit test directory so all imports are found
             export PYTHONPATH=$(pwd)/unit_test/
+           
+            # Running Coverage. If no unit tests are found default coverage to 0%
             coverage run -m unittest unit_test/*
-            percentage="0%"
+            PERCENTAGE="0%"
             output=$(python3 -m coverage report --data-file=$data_file)
             if [ "$output" != "No data to report." ]
             then
-              percentage=$(echo $output | grep TOTAL | awk '{print $NF}')
+              PERCENTAGE=$(echo $output | grep TOTAL | awk '{print $NF}')
             fi
-            echo "$plugin, $percentage" >> ../../coverageDir/coverage.csv
+            
+            # Writing plugin name and coverage percentage to file
+            echo "$plugin, $PERCENTAGE" >> ../../coverageDir/coverage.csv
+            
+            # Deactivating and deleting venv to prepare for next plugin
             deactivate
             rm -r venv
             cd ../
