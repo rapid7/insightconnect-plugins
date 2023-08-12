@@ -1,7 +1,9 @@
+from typing import Optional
+from logging import Logger
+from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 import time
 import random
-from icon_haveibeenpwned.util.log_helper import LogHelper
 
 
 class HaveIBeenPwned(object):
@@ -10,12 +12,55 @@ class HaveIBeenPwned(object):
         "Accept": "application/vnd.haveibeenpwned.v2+json",
     }
 
-    def __init__(self, logger=None):
-        if logger:
-            self.logger = logger
-        else:
-            self.logger = LogHelper().logger
-        self._retries = 0
+    def __init__(self, api_key: str, logger: Logger):
+        self.base_url = "https://haveibeenpwned.com/api/v3/"
+        self.logger = logger
+        self.api_key = api_key
+        self.header = {}
+
+    def get_domain_breaches(self, domain: str):
+        return self._call_api("GET", f"breacheddomain/{domain}")
+
+    def get_single_domain_breach(self, name: str):
+        return self._call_api("GET", f"breach/{name}")
+
+    def get_latest_breach(self):
+        return self._call_api("GET", "latestbreach")
+
+    def get_pastes_for_account(self, account: str):
+        return self._call_api("GET", f"pasteaccount/{account}")
+
+    def _call_api(
+        self,
+        method: str,
+        path: str,
+        params: Optional[dict] = None,
+        data: Optional[dict] = None,
+        json_data: Optional[dict] = None,
+    ):
+
+        headers = {'hibp-api-key': self.api_key, 'user-agent': "Rapid7 InsightConnect"}
+
+        response = requests.request(
+            method=method, url=self.base_url + path, headers=headers, params=params, data=data, json=json_data
+        )
+
+        if response.status_code == 400:
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST)
+        if response.status_code == 401:
+            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
+        if response.status_code == 403:
+            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
+        if response.status_code == 404:
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND)
+        if response.status_code == 429:
+            raise PluginException(preset=PluginException.Preset.RATE_LIMIT)
+        if response.status_code == 500:
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR)
+        if response.status_code == 204:
+            return None
+        if 200 <= response.status_code < 300:
+            return response.json()
 
     def get_request(self, url: str, key: str, params=None, max_attempts=2) -> list:
         """
@@ -49,7 +94,7 @@ class HaveIBeenPwned(object):
             else:
                 # Just in case we don't get a Retry-After in the header
                 if max_attempts > 0:
-                    range_increase = 2**self._retries
+                    range_increase = 2 ** self._retries
                     self._retries = self._retries + 1
                     # set random time to wait
                     back_off = random.randrange(3, 5 + range_increase)  # nosec
