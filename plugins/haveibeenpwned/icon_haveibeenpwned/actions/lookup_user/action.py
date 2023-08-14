@@ -19,7 +19,7 @@ class LookupUser(komand.Action):
 
     def run(self, params={}):
 
-        hibp = HaveIBeenPwned(self.logger)
+
         user = params.get(Input.USER)
         breach = params.get(Input.BREACH)
         include_unverified = params.get(Input.INCLUDE_UNVERIFIED)
