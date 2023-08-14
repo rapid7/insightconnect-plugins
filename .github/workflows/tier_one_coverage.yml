@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
@@ -39,6 +39,7 @@ jobs:
             source venv/bin/activate
           
             # Installing previously mentioned libraries
+            # setuptools is version pinned here to avoid an import compatibility issue with 2to3
             pip3 install setuptools==41.2.0 --no-cache-dir --disable-pip-version-check
             pip3 install coverage insightconnect_plugin_runtime -r requirements.txt --no-cache-dir --disable-pip-version-check
             
@@ -69,7 +70,7 @@ jobs:
           done
 
       - name: Upload Coverage
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: coverage
           path: coverageDir
