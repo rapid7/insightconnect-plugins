@@ -24,7 +24,7 @@ class Output:
 
 
 class CreateUserInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -86,7 +86,7 @@ class CreateUserInput(insightconnect_plugin_runtime.Input):
 
 
 class CreateUserOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",

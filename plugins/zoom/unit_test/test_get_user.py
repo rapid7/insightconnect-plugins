@@ -1,22 +1,18 @@
-import sys
 import os
+import sys
+
 from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
+from unittest.mock import MagicMock
+
 from icon_zoom.actions.get_user import GetUser
 from icon_zoom.actions.get_user.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from mock import (
-    Util,
-    STUB_USER_ID,
-    mock_request_201,
-    mock_request_400,
-    mock_request_404,
-    mocked_request,
-)
+from mock import STUB_USER_ID, Util, mock_request_201, mock_request_400, mock_request_404, mocked_request
 
 
 class TestGetUser(TestCase):
@@ -86,7 +82,7 @@ class TestGetUser(TestCase):
         ],
     )
     @mock.patch("icon_zoom.util.api.ZoomAPI._refresh_oauth_token", return_value=None)
-    def test_not_ok(self, mock_request, exception, mock_refresh):
+    def test_not_ok(self, mock_request: MagicMock, exception: str, mock_refresh: MagicMock) -> None:
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
             self.action.run(self.params)
