@@ -5,7 +5,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class TestBasename(TestCase):
-      def test_basename(self):
+    def test_basename(self):
         action = Basename()
         expected = {"basename": "text.txt"}
         result = action.run({Input.PATH: "example/text.txt"})
