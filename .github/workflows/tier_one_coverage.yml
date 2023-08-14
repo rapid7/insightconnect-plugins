@@ -62,7 +62,7 @@ jobs:
             cd $workingDir
             
             # Writing plugin name and coverage percentage to file
-            echo "$plugin, $PERCENTAGE" >> ../coverageDir/coverage.csv
+            echo "$plugin, $PERCENTAGE" >> ../../coverageDir/coverage.csv
             
             # Deactivating and deleting venv to prepare for next plugin
             deactivate
