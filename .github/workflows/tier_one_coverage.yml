@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Coverage on Tier One Plugins
         env:
-          TIER_ONE_PLUGINS_ICON: math active_directory_ldap advanced_regex microsoft_atp_safe_links base64 string basename subnet microsoft_teams csv python_3_script type_converter rapid7_insight_agent datetime rapid7_insightidr whois dig rapid7_insightvm rapid7_intsights extractit rapid7_vulndb rapid7_insightappsec hashit rest rapid7_insights html servicenow jira sleep
+          TIER_ONE_PLUGINS_ICON: math active_directory_ldap advanced_regex microsoft_atp_safe_links base64 string ssh basename subnet microsoft_teams csv python_3_script type_converter rapid7_insight_agent datetime rapid7_insightidr whois dig rapid7_insightvm rapid7_intsights extractit rapid7_vulndb rapid7_insightappsec hashit rest rapid7_insights html servicenow jira sleep
 
         run: |
           set +e
@@ -43,16 +43,20 @@ jobs:
             pip3 install coverage insightconnect_plugin_runtime -r requirements.txt --no-cache-dir --disable-pip-version-check
             
             # Exporting PYTHONPATH to plugins unit test directory so all imports are found
-            export PYTHONPATH=$(pwd)/unit_test/
+            export PYTHONPATH=$(pwd)
+          
+            cd unit_test
            
             # Running Coverage. If no unit tests are found default coverage to 0%
-            coverage run -m unittest unit_test/*
+            coverage run -m unittest *
             PERCENTAGE="0%"
             output=$(python3 -m coverage report --data-file=$data_file)
             if [ "$output" != "No data to report." ]
             then
               PERCENTAGE=$(echo $output | grep TOTAL | awk '{print $NF}')
             fi
+            
+            cd ../
             
             # Writing plugin name and coverage percentage to file
             echo "$plugin, $PERCENTAGE" >> ../../coverageDir/coverage.csv
