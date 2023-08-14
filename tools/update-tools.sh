@@ -4,9 +4,8 @@ platform=$(uname)
 
 if [[ "${platform}" == "Darwin" ]]; then
 	echo "[*] Executing update/installation for MacOS!"
-	echo "[*] Installing/updating icon-plugin via homebrew..."
-	brew tap rapid7/icon-plugin-homebrew https://github.com/rapid7/icon-plugin-homebrew > /dev/null
-	brew reinstall icon-plugin > /dev/null; true
+	echo "[*] Installing/updating insight-plugin via PyPi..."
+	pip install insight-plugin > /dev/null; true
 
 	echo "[*] Installing/updating jq via homebrew"
 	brew reinstall jq > /dev/null; true
