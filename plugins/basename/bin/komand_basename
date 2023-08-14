@@ -7,7 +7,7 @@ from sys import argv
 Name = "Basename"
 Vendor = "rapid7"
 Version = "1.1.1"
-Description = "This plugin is used to get the last item of a file path or URL using Python's Basename utility"
+Description = "This plugin is used to get the last item of a file path or URL using Python's basename utility"
 
 
 def main():
