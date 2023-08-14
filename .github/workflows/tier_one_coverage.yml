@@ -33,7 +33,7 @@ jobs:
           do
             cd $plugin
             echo $plugin
-            workingDir=pwd
+            workingDir=$(pwd)
             
             # Creating venv so we can install required libraries and later delete them to avoid conflicts
             python3 -m venv venv
@@ -58,10 +58,11 @@ jobs:
             fi
             
             # This is the same as ../ If a plugin does not have unit_tests folder ../ will mess up the path 
-            cd workingDir
+            echo $workingDir
+            cd $workingDir
             
             # Writing plugin name and coverage percentage to file
-            echo "$plugin, $PERCENTAGE" >> ../../coverageDir/coverage.csv
+            echo "$plugin, $PERCENTAGE" >> ../coverageDir/coverage.csv
             
             # Deactivating and deleting venv to prepare for next plugin
             deactivate
