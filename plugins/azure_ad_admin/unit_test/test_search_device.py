@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 from icon_azure_ad_admin.actions.search_device import SearchDevice
 
-from unit_test.util import Util
+from util import Util
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
 

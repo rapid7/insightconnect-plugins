@@ -10,7 +10,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
-from unit_test.mock import MockRequest
+from mock import MockRequest
 from icon_azure_ad_admin.actions.create_user.action import _pw_gen
 from icon_azure_ad_admin.connection.connection import Connection
 from icon_azure_ad_admin.actions.create_user import CreateUser
