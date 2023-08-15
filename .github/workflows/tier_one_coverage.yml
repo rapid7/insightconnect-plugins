@@ -22,13 +22,10 @@ jobs:
           touch coverageDir/coverage.csv
 
       - name: Run Coverage on Tier One Plugins
-        env:
-          TIER_ONE_PLUGINS_ICON: math active_directory_ldap advanced_regex microsoft_atp_safe_links base64 string ssh basename subnet microsoft_teams csv python_3_script type_converter rapid7_insight_agent datetime rapid7_insightidr whois dig rapid7_insightvm rapid7_intsights extractit rapid7_vulndb rapid7_insightappsec hashit rest rapid7_insights html servicenow jira sleep
-
         run: |
           set +e
           cd plugins
-          for plugin in $TIER_ONE_PLUGINS_ICON
+          for plugin in ${{ secrets.TIER_ONE_PLUGINS_ICON_SECRET }}
           do
             cd $plugin
             echo $plugin
