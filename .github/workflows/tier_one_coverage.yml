@@ -25,7 +25,7 @@ jobs:
         run: |
           set +e
           cd plugins
-          for plugin in ${{ secrets.TIER_ONE_PLUGINS_ICON_SECRET }}
+          for plugin in ${{ secrets.PLUGIN_COVERAGE }}
           do
             cd $plugin
             echo $plugin
