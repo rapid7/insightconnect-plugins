@@ -1,4 +1,4 @@
-name: TierOneCoverage
+name: UnitTestCoverage
 
 on: workflow_dispatch
 
@@ -21,7 +21,7 @@ jobs:
           mkdir coverageDir 
           touch coverageDir/coverage.csv
 
-      - name: Run Coverage on Tier One Plugins
+      - name: Run Coverage on Plugin Unit Tests
         run: |
           set +e
           cd plugins
