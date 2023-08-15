@@ -1,47 +1,40 @@
 # Description
 
-The Basename InsightConnect plugin is used to get the last item of a file path or URL using Python's `basename` utility.
-The `basename` utility deletes any prefix ending with the last slash `/` character.
-
-For example:
-
-```
-
->>> os.path.basename('/usr/bin/ssh')
-'ssh'
->>> os.path.basename('https://www.google.com/robots.txt')
-'robots.txt'
-
-```
+This plugin is used to get the last item of a file path or URL using Python's basename utility
 
 # Key Features
-
-* Obtain Basename of a file path or URL.
+  
+* Obtain basename of a file path or URL.
 
 # Requirements
+  
+*This plugin does not contain any requirements.*
 
-_This plugin does not contain any requirements._
+# Supported Product Versions
+  
+* Python 3.38
 
 # Documentation
 
 ## Setup
-
-_This plugin does not contain a connection._
+  
+*This plugin does not contain a connection.*
 
 ## Technical Details
 
 ### Actions
 
-#### Basename
 
-This action is used to get the `basename` of a path.
+#### Basename
+  
+Get the basename of a path
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |path|string|None|True|URL or file path|None|https://example.com/text.txt|
-
+  
 Example input:
 
 ```
@@ -52,10 +45,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|basename|string|False|Basename result|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|basename|string|False|Basename result|text.txt|
+  
 Example output:
 
 ```
@@ -63,14 +56,16 @@ Example output:
   "basename": "text.txt"
 }
 ```
-
 ### Triggers
-
-_This plugin does not contain any triggers._
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
 ### Custom Output Types
-
-_This plugin does not contain any custom output types._
+  
+*This plugin does not contain any custom output types.*
 
 ## Troubleshooting
 
@@ -78,6 +73,7 @@ If the input doesn't contain a slash `/` in the path the result will be the orig
 
 # Version History
 
+* 1.1.1 - Update SDK to version 5
 * 1.1.0 - Add missing `title` in action Basename | Use input and output constants | Add example input and output | Changed `Exception` to `PluginException` | Added "f" strings
 * 1.0.2 - Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Update plugin.spec.yaml to include `cloud_ready`
 * 1.0.1 - New spec and help.md format for the Extension Library
