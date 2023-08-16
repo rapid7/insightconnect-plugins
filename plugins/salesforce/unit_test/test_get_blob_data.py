@@ -11,6 +11,7 @@ from komand_salesforce.util.exceptions import ApiException
 from util import Util
 from insightconnect_plugin_runtime.exceptions import PluginException
 
+
 @patch("requests.request", side_effect=Util.mock_request)
 class TestGetBlobData(TestCase):
     @classmethod
