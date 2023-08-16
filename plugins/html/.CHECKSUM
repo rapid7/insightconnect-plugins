@@ -1,39 +1,39 @@
 {
-	"spec": "ac274c1ed08f828eb2baf98b3c97f27f",
-	"manifest": "f2c83d82f2f75179907e8c7eff020fb6",
-	"setup": "12b3377d95ff614d74c2daada7845c08",
+	"spec": "037d24bd106f5a4fad875b09861dbb97",
+	"manifest": "0eee623359894eb8d76bb96300f4b4d2",
+	"setup": "5a00117e57894506b0e3e712d008cd98",
 	"schemas": [
 		{
 			"identifier": "docx/schema.py",
-			"hash": "8c4818d82a739bb81ef0f6783805fb66"
+			"hash": "714412e2f345e8e2908ddd4ae4b3cc5b"
 		},
 		{
 			"identifier": "epub/schema.py",
-			"hash": "fc348db8722218c2b50eb7981e46a21e"
+			"hash": "3a2a4fa87887b299ac79d4bab325b4d2"
 		},
 		{
 			"identifier": "html5/schema.py",
-			"hash": "78125d35bbff0f65e4f78a239557dcb5"
+			"hash": "66e137c3f18ea829d13d0ca0e1d8c9d7"
 		},
 		{
 			"identifier": "markdown/schema.py",
-			"hash": "d70d71673ac77e65a7feb63b7b1e2732"
+			"hash": "e9fd8859042afb943996d8067d84edcc"
 		},
 		{
 			"identifier": "pdf/schema.py",
-			"hash": "9e04c450ae934155b2fbf9139d271e93"
+			"hash": "caed0ed70837f448050098a2a865156d"
 		},
 		{
 			"identifier": "text/schema.py",
-			"hash": "ee3cb441333275f9ceb6d5b226277206"
+			"hash": "a0072b2bec8a062456aff53256af336a"
 		},
 		{
 			"identifier": "validate/schema.py",
-			"hash": "9eb8dc46230dbdcb263a9b7d674cbfb5"
+			"hash": "db32bb6023ff4e5a71728c2046ecd7f5"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "da5382221ca2a33a2f854e17b068d502"
+			"hash": "bd524b567f9638ba1c6f7e0c9e45ff2e"
 		}
 	]
 }

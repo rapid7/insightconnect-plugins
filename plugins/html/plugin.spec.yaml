@@ -8,7 +8,13 @@ support: community
 supported_versions: [2023-06-06]
 status: []
 cloud_ready: true
-description: Validate HTML, convert a HTML document to another format, or strip a HTML document of all tags
+description: "Hypertext Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser. This plugin provides the ability to convert an HTML document into a variety of formats using [pypandoc](https://pypi.python.org/pypi/pypandoc). Supported formats are: \n
+* DOCX \n
+* EPUB \n
+* Markdown \n
+* PDF \n
+* HTML5 \n
+* Plain Text"
 version: 1.2.3
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/html
@@ -25,10 +31,14 @@ hub_tags:
   use_cases: [data_utility]
   keywords: [markdown, html, pdf, epub, docx, convert, utilities, cloud_enabled]
   features: []
+sdk:
+  type: full
+  version: 5
+  user: root
 actions:
   validate:
     title: Validate
-    description: Validate an HTML file
+    description: This action is used to validate an HTML document using the [W3 validator](https://validator.w3.org).
     input:
       html_contents:
         title: Contents
@@ -45,7 +55,7 @@ actions:
         example: true
   markdown:
     title: Markdown
-    description: Convert HTML to Markdown
+    description: This action is used to convert an HTML document to Markdown.
     input:
       doc:
         title: Document
@@ -68,7 +78,7 @@ actions:
         example: Q29udmVydCBIVE1MIHRvIE1hcmtkb3duCg==
   html5:
     title: HTML5
-    description: Convert HTML to HTML5
+    description: This action is used to convert an HTML document to HTML5.
     input:
       doc:
         title: Document
@@ -91,7 +101,7 @@ actions:
         example: Jmx0OyFET0NUWVBFIGh0bWwmZ3Q7Cj...
   pdf:
     title: PDF
-    description: Convert HTML to PDF
+    description: This action is used to convert an HTML document to PDF.
     input:
       doc:
         title: Document
@@ -108,7 +118,7 @@ actions:
         example: JVBERi0xLjUKJdDUxdgKNSAwIG9iago8PA...
   epub:
     title: EPUB
-    description: Convert HTML to EPUB
+    description: This action is used to convert an HTML document to EPUB.
     input:
       doc:
         title: Document
@@ -125,7 +135,7 @@ actions:
         example: UEsDBBQAAggAAPAe91BvYassFAAAABQAAAA...
   docx:
     title: Windows Document
-    description: Convert HTML to DOCX
+    description: This action is used to convert an HTML document to DOCX.
     input:
       doc:
         title: Document
@@ -142,7 +152,7 @@ actions:
         example: UEsDBBQAAggIACEf91DPOFToaQEAAKgGAAA...
   text:
     title: Text
-    description: Strip an HTML string of all tags and return only the text
+    description: This action is used to strip an HTML string of all tags and return only the text.
     input:
       doc:
         title: Document
