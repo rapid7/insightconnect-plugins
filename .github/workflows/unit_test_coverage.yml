@@ -1,0 +1,73 @@
+name: UnitTestCoverage
+
+on: workflow_dispatch
+
+jobs:
+  check-coverage:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Make Temp Dir for Artifacts
+        run: |
+          mkdir coverageDir 
+          touch coverageDir/coverage.csv
+
+      - name: Run Coverage on Plugin Unit Tests
+        run: |
+          set +e
+          cd plugins
+          for plugin in ${{ secrets.PLUGIN_COVERAGE }}
+          do
+            cd $plugin
+            echo $plugin
+            workingDir=$(pwd)
+            
+            # Creating venv so we can install required libraries and later delete them to avoid conflicts
+            python3 -m venv venv
+            source venv/bin/activate
+          
+            # Installing previously mentioned libraries
+            # setuptools is version pinned here to avoid an import compatibility issue with 2to3
+            pip3 install setuptools==41.2.0 --no-cache-dir --disable-pip-version-check
+            pip3 install coverage insightconnect_plugin_runtime -r requirements.txt --no-cache-dir --disable-pip-version-check
+            
+            # Exporting PYTHONPATH to plugins unit test directory so all imports are found
+            export PYTHONPATH=$(pwd)
+          
+            cd unit_test
+           
+            # Running Coverage. If no unit tests are found default coverage to 0%
+            coverage run -m unittest *
+            PERCENTAGE="0%"
+            output=$(python3 -m coverage report --data-file=$data_file)
+            if [ "$output" != "No data to report." ]
+            then
+              PERCENTAGE=$(echo $output | grep TOTAL | awk '{print $NF}')
+            fi
+            
+            # This is the same as ../ If a plugin does not have unit_tests folder ../ will mess up the path 
+            cd $workingDir
+            
+            # Writing plugin name and coverage percentage to file
+            echo "$plugin, $PERCENTAGE" >> ../../coverageDir/coverage.csv
+            
+            # Deactivating and deleting venv to prepare for next plugin
+            deactivate
+            rm -r venv
+            cd ../
+          done
+
+      - name: Upload Coverage
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: coverageDir
