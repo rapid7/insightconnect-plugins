@@ -1,0 +1,644 @@
+{
+  "add_alert_note": {
+    "input": {
+      "alert_id": "WB-14-20190709-00003",
+      "content": "Suspected False Positive, please verify"
+    },
+    "output": {
+      "$success": true,
+      "location": "https://api.xdr.trendmicro.com/v3.0/workbench/alerts/WB-20837-20221111-00000/notes/684770",
+      "note_id": "684770",
+      "result_code": "SUCCESS"
+    }
+  },
+  "add_to_block_list": {
+    "input": {
+      "block_objects": [
+        {
+          "object_type": "ip",
+          "object_value": "6.6.6.6",
+          "description": "block"
+        }
+      ]
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 202,
+          "task_id": "00002134"
+        }
+      ]
+    }
+  },
+  "add_to_exception_list": {
+    "input": {
+      "block_objects": [
+        {
+          "object_type": "ip",
+          "object_value": "1.2.6.9"
+        }
+      ]
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 201,
+          "task_id": "None"
+        }
+      ]
+    }
+  },
+  "add_to_suspicious_list": {
+    "input": {
+      "suspicious_block_objects": [
+        {
+          "risk_level": "high",
+          "expiry_days": "30",
+          "object_type": "ip",
+          "scan_action": "block",
+          "object_value": "6.6.6.3"
+        }
+      ]
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 201,
+          "task_id": "None"
+        },
+        {
+          "status": 201,
+          "task_id": "None"
+        }
+      ]
+    }
+  },
+  "collect_file": {
+    "input": {
+      "collect_files": [
+        {
+          "endpoint_name": "client1",
+          "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede",
+          "file_path": "C:/virus.exe",
+          "description": "collect malicious file"
+        }
+      ]
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 202,
+          "task_id": "00002195"
+        }
+      ]
+    }
+  },
+  "delete_email_message": {
+    "input": {
+      "email_identifiers": [
+        {
+          "description": "delete email message r7",
+          "mailbox": "jdoe@testemailtrain.com",
+          "message_id": "<938UR9843UWFSU39F4UWS3O94USFPAS9RFHPAHAPHFA@BEWHRI3U4H5IH45.test.mockemaillabs.com>"
+        }
+      ]
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 202,
+          "task_id": "00002127"
+        }
+      ]
+    }
+  },
+  "disable_account": {
+    "input": {
+      "account_identifiers": [
+        {
+          "account_name": "jdoe@testemailtrain.com",
+          "description": "disable account r7"
+        }
+      ]
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 202,
+          "task_id": "00002129"
+        }
+      ]
+    }
+  },
+  "download_sandbox_analysis_result": {
+    "input": {
+      "id": "2345431",
+      "poll": true,
+      "poll_time_sec": 5.0
+    },
+    "output": {
+      "$success": true,
+      "file": "<<referenced:bigdata>>"
+    }
+  },
+  "download_sandbox_investigation_package": {
+    "input": {
+      "id": "6345645",
+      "poll": true,
+      "poll_time_sec": true
+    },
+    "output": {
+      "$success": true,
+      "file": "<<referenced:bigdata>>"
+    }
+  },
+  "edit_alert_status": {
+    "input": {
+      "id": "WB-14-20190709-00003",
+      "if_match": "d41d8cd98f00b204e9800998ecf8427e",
+      "status": "New"
+    },
+    "output": {
+      "$success": true,
+      "result_code": "SUCCESS"
+    }
+  },
+  "enable_account": {
+    "input": {
+      "account_identifiers": [
+        {
+          "account_name": "jdoe@testemailtest.com",
+          "description": "enable jdoe account, r7 test"
+        }
+      ]
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 202,
+          "task_id": "00002148"
+        }
+      ]
+    }
+  },
+  "get_alert_details": {
+    "input": {
+      "alert_id": "WB-20837-20221111-0000"
+    },
+    "output": {
+      "$success": true,
+      "alert_details": {
+        "alert": "<<referenced:bigdata>>"
+      },
+      "etag": "\"0eaa4c39854bd42dcd9f09d5952c4e63c\""
+    }
+  },
+  "get_alert_list": {
+    "input": {
+      "end_date_time": "endDateTime=2020-06-15T12:00:00Z",
+      "start_date_time": "startDateTime=2020-06-15T10:00:00Z"
+    },
+    "output": {
+      "$success": true,
+      "alerts": "<<referenced:bigdata>>",
+      "total_count": 9
+    }
+  },
+  "get_endpoint_data": {
+    "input": {
+      "endpoint": "127.127.127.127",
+      "query_op": " or "
+    },
+    "output": {
+      "$success": true,
+      "endpoint_data": []
+    }
+  },
+  "get_exception_list": {
+    "input": {},
+    "output": {
+      "$success": true,
+      "exception_objects": [
+        {
+          "description": "ip exception",
+          "last_modified_date_time": "2023-04-14T06:53:59Z",
+          "type": "ip",
+          "value": "1.6.6.3"
+        }
+      ]
+    }
+  },
+  "get_sandbox_analysis_result": {
+    "input": {
+      "poll": false,
+      "poll_time_sec": 0,
+      "report_id": "90406723-2b29-4e85-b0b2-ba58af8f63df"
+    },
+    "output": {
+      "$success": true,
+      "analysis_completion_date_time": "2023-04-13T19:19:31Z",
+      "arguments": "Tm9uZQ==",
+      "detection_names": [],
+      "digest": {
+        "md5": "098f6bcd4621d373cade4e832627b4f6",
+        "sha1": "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3",
+        "sha256": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+      },
+      "id": "90406723-2b29-4e85-b0b2-ba58af8f63df",
+      "risk_level": "noRisk",
+      "threat_types": [],
+      "true_file_type": "Batch File",
+      "type": "file"
+    }
+  },
+  "get_sandbox_submission_status": {
+    "input": {
+      "task_id": "02384"
+    },
+    "output": {
+      "$success": true,
+      "error": {},
+      "action": "analyzeFile",
+      "arguments": "YXNkaDEyMzE5XzEyOQ==",
+      "created_date_time": "2023-03-11T01:46:11Z",
+      "digest": {
+        "md5": "65a8e27d8879283831b664bd8b7f0ad4",
+        "sha1": "0a0a9f2a6772942557ab5355d76af442f8f65e01",
+        "sha256": "dffd6021bb2bd5b0af676290809ec3a53191dd81c7f70a4b28688a362182986f"
+      },
+      "id": "5c31e065-d25d-476e-9cf8-783812eb1596",
+      "is_cached": false,
+      "last_action_date_time": "2023-03-11T01:46:51Z",
+      "resource_location": "https://api.xdr.trendmicro.com/v3.0/sandbox/analysisResults/5c31e065-d25d-476e-9cf8-783812eb1596",
+      "status": "succeeded",
+      "error": {
+        "code": "",
+        "message": ""
+      }
+    }
+  },
+  "get_sandbox_suspicious_list": {
+    "input": {
+      "id": "6345645",
+      "poll": true,
+      "poll_time_sec": true
+    },
+    "output": {
+      "$success": true,
+      "sandbox_suspicious_list_resp": [
+        {
+          "analysis_completion_date_time": "2023-01-11T22:40:52Z",
+          "expired_date_time": "2023-02-10T22:40:52Z",
+          "risk_level": "high",
+          "root_sha1": "ccc8c28226224755091a3462ff7704e350f2114b",
+          "type": "fileSha1",
+          "value": "0d8b8f0baf22e65a80148bcebaef082ef08932d2"
+        }
+      ]
+    }
+  },
+  "get_suspicious_list": {
+    "input": {},
+    "output": {
+      "$success": true,
+      "suspicious_objects": [
+        {
+          "description": "",
+          "expired_date_time": "2023-05-14T06:55:29Z",
+          "in_exception_list": false,
+          "last_modified_date_time": "2023-04-14T06:55:29Z",
+          "risk_level": "high",
+          "scan_action": "log",
+          "type": "ip",
+          "value": "6.6.6.3"
+        }
+      ]
+    }
+  },
+  "get_task_result": {
+    "input": {
+      "poll": true,
+      "poll_time_sec": 5.0,
+      "task_id": "00002194"
+    },
+    "output": {
+      "$success": true,
+      "error": {},
+      "account": "User Userio",
+      "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede",
+      "resource_location": "somewhere/over/the/rain/",
+      "file_path": "somewhere/over/the/rain/bow.exe",
+      "file_sha1": "5E8FFF2DA46BFB9C795549291A72806AB2C38DA4",
+      "file_sha256": "3E8A5694E2F7492AA1D3C1E98484CF456B2ED2464836A0345E0C28EA99ECC61B",
+      "file_size": 12345,
+      "filename": "bow.exe",
+      "image_path": "/mount/sda1/",
+      "password": "change_me",
+      "pid": "2938uee",
+      "tasks": "",
+      "url": "https://rain.bow.com",
+      "sandbox_task_id": "00002194",
+      "endpoint_name": "Central-RV001",
+      "action": "resetPassword",
+      "created_date_time": "2023-04-17T20:12:38Z",
+      "expired_date_time": "2023-06-17T20:12:38Z",
+      "description": "Rapid 7 Reset account password UU",
+      "id": "00002194",
+      "last_action_date_time": "2023-04-17T20:12:46Z",
+      "status": "succeeded",
+      "agent_guid": "example",
+      "resource_location": "example",
+      "endpoint_name": "example",
+      "expired_date_time": "2023-04-30T12:00:00Z",
+      "file_path": "example",
+      "file_sha1": "example",
+      "file_sha256": "example",
+      "file_size": 0,
+      "filename": "example",
+      "image_path": "example",
+      "password": "example",
+      "pid": 0,
+      "sandbox_task_id": "example",
+      "tasks": [],
+      "url": "example.com"
+    }
+  },
+  "sign_out_account": {
+    "input": {
+      "account_identifiers": [
+        {
+          "account_name": "jdoe@testemailtest.com",
+          "description": "sign out account r7 "
+        }
+      ]
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 202,
+          "task_id": "00002130"
+        }
+      ]
+    }
+  },
+  "reset_password_account": {
+    "input": {
+      "account_identifiers": [
+        {
+          "account_name": "jdoe@testemailtest.com",
+          "description": "disable account r7"
+        }
+      ]
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 202,
+          "task_id": "00002131"
+        }
+      ]
+    }
+  },
+  "quarantine_email_message": {
+    "input": {
+      "email_identifiers": [
+        {
+          "description": "quarantine email message r7",
+          "mailbox": "jdoe@testemailtest.com",
+          "message_id": "AAkALgAAAAAAHYQDEapmEc2byACqAC-EWg0AAhCCNvg5sEua0nNjgfLS2AABNpgTSQAA"
+        }
+      ]
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 202,
+          "task_id": "00002153"
+        }
+      ]
+    }
+  },
+  "restore_email_message": {
+    "input": {
+      "email_identifiers": [
+        {
+          "description": "restore email message r7",
+          "mailbox": "jdoe@testemailtest.com",
+          "message_id": "AAkALgAAAAAAHYQDEapmEc2byACqAC-EWg0AAhCCNvg5sEua0nNjgfLS2AABNpgTSQAA"
+        }
+      ]
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 202,
+          "task_id": "00002154"
+        }
+      ]
+    }
+  },
+  "isolate_endpoint": {
+    "input": {
+      "endpoint_identifiers": [
+        {
+          "description": "TEST isolate endpoint",
+          "endpoint_name": "client1",
+          "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede"
+        }
+      ]
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 202,
+          "task_id": "00002126"
+        }
+      ]
+    }
+  },
+  "restore_endpoint": {
+    "input": {
+      "endpoint_identifiers": [
+        {
+          "description": "restore endpoint r7",
+          "endpoint_name": "client1",
+          "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede"
+        }
+      ]
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 202,
+          "task_id": "00002132"
+        }
+      ]
+    }
+  },
+  "remove_from_exception_list": {
+    "input": {
+      "block_objects": [
+        {
+          "object_type": "ip",
+          "object_value": "1.6.6.3"
+        }
+      ]
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 204,
+          "task_id": "None"
+        }
+      ]
+    }
+  },
+  "remove_from_block_list": {
+    "input": {
+      "block_objects": [
+        {
+          "description": "block",
+          "object_type": "ip",
+          "object_value": "6.6.6.3"
+        }
+      ]
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 202,
+          "task_id": "00002141"
+        }
+      ]
+    }
+  },
+  "remove_from_suspicious_list": {
+    "input": {
+      "block_objects": [
+        {
+          "object_type": "ip",
+          "object_value": "6.6.6.4"
+        }
+      ]
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 204,
+          "task_id": "None"
+        }
+      ]
+    }
+  },
+  "terminate_process": {
+    "input": {
+      "process_identifiers": [
+        {
+          "endpoint_name": "client1",
+          "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede",
+          "file_sha1": "984afc7aaa2718984e15e3b5ab095b519a081321"
+        }
+      ]
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 202,
+          "task_id": "00002133"
+        }
+      ]
+    }
+  },
+  "submit_file_to_sandbox": {
+    "input": {
+      "archive_password": "1234",
+      "arguments": "IFMlYztbQA==",
+      "document_password": "1234",
+      "file": {
+        "content": "mock file content",
+        "filename": "mock_filename.txt"
+      }
+    },
+    "output": {
+      "$success": true,
+      "arguments": "Tm9uZQ==",
+      "digest": {
+        "md5": "098f6bcd4621d373cade4e832627b4f6",
+        "sha1": "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3",
+        "sha256": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+      },
+      "id": "48bb3658-b0eb-4bf2-8e89-713935628f18"
+    }
+  },
+  "submit_urls_to_sandbox": {
+    "input": {
+      "url": [
+        "www.urlurl.com",
+        "www.zurlzurl.com"
+      ]
+    },
+    "output": {
+      "$success": true,
+      "submit_urls_resp": [
+        {
+          "digest": {
+            "md5": "f3a2e1227de8d5ae7296665c1f34b28d",
+            "sha1": "d79bff55069994b1c11f7856f9f029de36adfd8f",
+            "sha256": "619a273ee4d25fb4aeb97e89c554fcfbdbc82e22d840cfdb364a8f1932f48160"
+          },
+          "id": "d28e22cb-c6af-4291-bf25-22f33ce7aa15",
+          "status": 202,
+          "task_id": "d28e22cb-c6af-4291-bf25-22f33ce7aa15",
+          "url": "https://www.thisurlsubmitted.com"
+        }
+      ]
+    }
+  },
+  "poll_alert_list": {
+    "input": {
+      "interval": 1800,
+      "start_date_time": "startDateTime=2020-06-15T10:00:00Z"
+    },
+    "output": {
+      "alerts": "<<referenced:bigdata>>",
+      "total_count": 9
+    }
+  },
+  "poll_sandbox_suspicious_list": {
+    "input": {
+      "id": "6345645",
+      "interval": 1800,
+      "poll": true,
+      "poll_time_sec": true
+    },
+    "output": {
+      "sandbox_suspicious_list_resp": [
+        {
+          "analysis_completion_date_time": "2023-01-11T22:40:52Z",
+          "expired_date_time": "2023-02-10T22:40:52Z",
+          "risk_level": "high",
+          "root_sha1": "ccc8c28226224755091a3462ff7704e350f2114b",
+          "type": "fileSha1",
+          "value": "0d8b8f0baf22e65a80148bcebaef082ef08932d2"
+        }
+      ]
+    }
+  }
+}
