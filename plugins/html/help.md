@@ -1,60 +1,60 @@
 # Description
 
-Hypertext Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser. This plugin provides the ability to convert an HTML document into a variety of formats using [pypandoc](https://pypi.python.org/pypi/pypandoc). Supported formats are:
-
-* DOCX
-* EPUB
-* Markdown
-* PDF
-* HTML5
-* Plain Text
+Hypertext Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser. This plugin provides the ability to convert an HTML document into a variety of formats using [pypandoc](https://pypi.python.org/pypi/pypandoc). Supported formats are: 
+ * DOCX 
+ * EPUB 
+ * Markdown 
+ * PDF 
+ * HTML5 
+ * Plain Text
 
 # Key Features
-
-* Convert an HTML document into another format to more easily export, share, or edit the document's contents
+  
+*This plugin does not contain any key features.*
 
 # Requirements
-
-_This plugin does not contain any requirements._
+  
+*This plugin does not contain any requirements.*
 
 # Supported Product Versions
-
+  
 * 2023-06-06
 
 # Documentation
 
 ## Setup
-
-_This plugin does not contain a connection._
+  
+*This plugin does not contain a connection.*
 
 ## Technical Details
 
 ### Actions
 
-#### Windows Document
 
+#### Windows Document
+  
 This action is used to convert an HTML document to DOCX.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to DOCX</p></body></html>|
-
+  
 Example input:
 
 ```
 {
-  "doc": "\u003c!DOCTYPE html\u003e\u003chtml\u003e\u003chead\u003e\u003ctitle\u003eRapid7 InsightConnect\u003c/title\u003e\u003c/head\u003e\u003cbody\u003e\u003cp\u003eConvert HTML to DOCX\u003c/p\u003e\u003c/body\u003e\u003c/html\u003e"
+  "doc": "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to DOCX</p></body></html>"
 }
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |docx|bytes|False|Docx File|UEsDBBQAAggIACEf91DPOFToaQEAAKgGAAA...|
-
+  
 Example output:
 
 ```
@@ -63,162 +63,30 @@ Example output:
 }
 ```
 
-#### Markdown
-
-This action is used to convert an HTML document to Markdown.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to Markdown</p></body></html>|
-
-Example input:
-
-```
-{
-  "doc": "\u003c!DOCTYPE html\u003e\u003chtml\u003e\u003chead\u003e\u003ctitle\u003eRapid7 InsightConnect\u003c/title\u003e\u003c/head\u003e\u003cbody\u003e\u003cp\u003eConvert HTML to Markdown\u003c/p\u003e\u003c/body\u003e\u003c/html\u003e"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|markdown_contents|string|False|Markdown Contents|Convert HTML to Markdown|
-|markdown_file|bytes|False|Markdown File|Q29udmVydCBIVE1MIHRvIE1hcmtkb3duCg==|
-
-Example output:
-
-```
-{
-  "markdown_file": "Q29udmVydCBIVE1MIHRvIE1hcmtkb3duCg==",
-  "markdown_contents": "Convert HTML to Markdown\n"
-}
-```
-
-#### HTML5
-
-This action is used to convert an HTML document to HTML5.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to HTML5</p></body></html>|
-
-Example input:
-
-```
-{
-  "doc": "\u003c!DOCTYPE html\u003e\u003chtml\u003e\u003chead\u003e\u003ctitle\u003eRapid7 InsightConnect\u003c/title\u003e\u003c/head\u003e\u003cbody\u003e\u003cp\u003eConvert HTML to HTML5\u003c/p\u003e\u003c/body\u003e\u003c/html\u003e"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|html5_contents|string|False|HTML5 Contents|<title>Rapid7 InsightConnect</title>|
-|html5_file|bytes|False|HTML5 File|Jmx0OyFET0NUWVBFIGh0bWwmZ3Q7Cj...|
-
-Example output:
-
-```
-{
-  "html5_contents": "&lt;!DOCTYPE html&gt;\n<html>\n<head>\n<title>\nRapid7 InsightConnect\n</title>\n</head>\n<body>\n<p>\nConvert HTML to HTML5\n</p>\n</body>\n</html>\n",
-  "html5_file": "Jmx0OyFET0NUWVBFIGh0bWwmZ3Q7Cj..."
-}
-```
-
-#### PDF
-
-This action is used to convert an HTML document to PDF.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to PDF</p></body></html>|
-
-Example input:
-
-```
-{
-  "doc": "\u003c!DOCTYPE html\u003e\u003chtml\u003e\u003chead\u003e\u003ctitle\u003eRapid7 InsightConnect\u003c/title\u003e\u003c/head\u003e\u003cbody\u003e\u003cp\u003eConvert HTML to PDF\u003c/p\u003e\u003c/body\u003e\u003c/html\u003e"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|pdf|bytes|False|PDF File|JVBERi0xLjUKJdDUxdgKNSAwIG9iago8PA...|
-
-Example output:
-
-```
-{
-  "pdf": "JVBERi0xLjUKJdDUxdgKNSAwIG9iago8PA..."
-}
-```
-
-#### Validate
-
-This action is used to validate an HTML document using the [W3 validator](https://validator.w3.org).
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|html_contents|string|None|True|HTML Contents|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>|
-
-Example input:
-
-```
-{
-  "html_contents": "\u003c!DOCTYPE html\u003e\u003chtml\u003e\u003chead\u003e\u003ctitle\u003eRapid7 InsightConnect\u003c/title\u003e\u003c/head\u003e\u003cbody\u003e\u003cp\u003eAutomate with InsightConnect!\u003c/p\u003e\u003c/body\u003e\u003c/html\u003e"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|validated|boolean|False|HTML Syntax Validation Status|True|
-
-Example output:
-
-```
-{
-  "validated": true
-}
-```
-
 #### EPUB
-
+  
 This action is used to convert an HTML document to EPUB.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to EPUB</p></body></html>|
-
+  
 Example input:
 
 ```
 {
-  "doc": "\u003c!DOCTYPE html\u003e\u003chtml\u003e\u003chead\u003e\u003ctitle\u003eRapid7 InsightConnect\u003c/title\u003e\u003c/head\u003e\u003cbody\u003e\u003cp\u003eConvert HTML to EPUB\u003c/p\u003e\u003c/body\u003e\u003c/html\u003e"
+  "doc": "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to EPUB</p></body></html>"
 }
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |epub|bytes|False|Epub file|UEsDBBQAAggAAPAe91BvYassFAAAABQAAAA...|
-
+  
 Example output:
 
 ```
@@ -227,22 +95,122 @@ Example output:
 }
 ```
 
-#### Text
+#### HTML5
+  
+This action is used to convert an HTML document to HTML5.
 
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to HTML5</p></body></html>|
+  
+Example input:
+
+```
+{
+  "doc": "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to HTML5</p></body></html>"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|html5_contents|string|False|HTML5 Contents|<title>Rapid7 InsightConnect</title>|
+|html5_file|bytes|False|HTML5 File|Jmx0OyFET0NUWVBFIGh0bWwmZ3Q7Cj...|
+  
+Example output:
+
+```
+{
+  "html5_contents": "<title>Rapid7 InsightConnect</title>",
+  "html5_file": "Jmx0OyFET0NUWVBFIGh0bWwmZ3Q7Cj..."
+}
+```
+
+#### Markdown
+  
+This action is used to convert an HTML document to Markdown.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to Markdown</p></body></html>|
+  
+Example input:
+
+```
+{
+  "doc": "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to Markdown</p></body></html>"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|markdown_contents|string|False|Markdown Contents|Convert HTML to Markdown|
+|markdown_file|bytes|False|Markdown File|Q29udmVydCBIVE1MIHRvIE1hcmtkb3duCg==|
+  
+Example output:
+
+```
+{
+  "markdown_contents": "Convert HTML to Markdown",
+  "markdown_file": "Q29udmVydCBIVE1MIHRvIE1hcmtkb3duCg=="
+}
+```
+
+#### PDF
+  
+This action is used to convert an HTML document to PDF.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to PDF</p></body></html>|
+  
+Example input:
+
+```
+{
+  "doc": "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to PDF</p></body></html>"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|pdf|bytes|False|PDF File|JVBERi0xLjUKJdDUxdgKNSAwIG9iago8PA...|
+  
+Example output:
+
+```
+{
+  "pdf": "JVBERi0xLjUKJdDUxdgKNSAwIG9iago8PA..."
+}
+```
+
+#### Text
+  
 This action is used to strip an HTML string of all tags and return only the text.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>|
 |remove_scripts|boolean|None|False|Remove non-HTML scripts from the document|None|False|
-
+  
 Example input:
 
 ```
 {
-  "doc": "\u003c!DOCTYPE html\u003e\u003chtml\u003e\u003chead\u003e\u003ctitle\u003eRapid7 InsightConnect\u003c/title\u003e\u003c/head\u003e\u003cbody\u003e\u003cp\u003eAutomate with InsightConnect!\u003c/p\u003e\u003c/body\u003e\u003c/html\u003e",
+  "doc": "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>",
   "remove_scripts": false
 }
 ```
@@ -250,9 +218,9 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |text|string|False|String without HTML tags|Automate with InsightConnect!|
-
+  
 Example output:
 
 ```
@@ -261,17 +229,52 @@ Example output:
 }
 ```
 
+#### Validate
+  
+This action is used to validate an HTML document using the [W3 validator](https://validator.w3.org).
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|html_contents|string|None|True|HTML Contents|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>|
+  
+Example input:
+
+```
+{
+  "html_contents": "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|validated|boolean|False|HTML Syntax Validation Status|True|
+  
+Example output:
+
+```
+{
+  "validated": true
+}
+```
 ### Triggers
+  
+*This plugin does not contain any triggers.*
 
-_This plugin does not contain any triggers._
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-### Custom Output Types
-
-_This plugin does not contain any custom output types._
+### Custom Types
+  
+*This plugin does not contain any custom output types.*
 
 ## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
+  
+*There is no troubleshooting for this plugin.*
 
 # Version History
 
