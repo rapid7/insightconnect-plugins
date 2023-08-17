@@ -632,16 +632,16 @@ This action retrieves information about a specific endpoint.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|endpoint|string|None|True|Hostname, macAddress, agentGuid or IP of the endpoint to query|None|127.127.127.127|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
+| Name   | Type |Default|Required|Description|Enum|Example|
+|--------|------|-----|--------|-----------|----|-------|
+|endpoints|[]string|None|True|Array of endpoints to query by their hostname, macAddress, agentGuid or IP, formated as bracket array separated by comma|None|127.127.127.127|
+|query_op|string|or|True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
 
 Example input:
 
 ```
 {
-  "endpoint": "127.127.127.127",
+ g "endpoints": ["127.127.127.127","1.2.3.4"]
   "query_op": " or "
 }
 ```
@@ -1734,6 +1734,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.2 - Enabled multiple inputs for Get Endpoint Data
 * 1.0.1 - Alert Details Output Fix (Minor Fix)
 * 1.0.0 - Initial plugin
 * 1.0.1 - Alert Details Output Fix (Minor Fix)
