@@ -27,7 +27,7 @@ class Output:
 
 
 class CreateCaseObservableInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -134,7 +134,7 @@ class CreateCaseObservableInput(insightconnect_plugin_runtime.Input):
 
 
 class CreateCaseObservableOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",

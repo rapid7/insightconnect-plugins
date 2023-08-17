@@ -3,9 +3,6 @@
 import os
 import json
 from sys import argv
-import insightconnect_plugin_runtime
-from komand_thehive import connection, actions, triggers, tasks
-
 
 Name = "TheHive"
 Vendor = "rapid7"
@@ -24,6 +21,9 @@ def main():
         elif 'gevent' in argv:
             from gevent import monkey
             monkey.patch_all()
+
+    import insightconnect_plugin_runtime
+    from komand_thehive import connection, actions, triggers, tasks
 
     class ICONThehive(insightconnect_plugin_runtime.Plugin):
         def __init__(self):

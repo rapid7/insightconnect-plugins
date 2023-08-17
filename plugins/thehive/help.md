@@ -54,6 +54,7 @@ Example input:
 
 ### Actions
 
+
 #### Close Case
   
 Close a case by ID
@@ -106,7 +107,7 @@ Create a new case
 |severity|integer|2|False|Case severity|[1, 2, 3, 4]|2|
 |startDate|integer|None|False|Case start date (datetime in ms) (will default to now if left blank)|None|1684170163000|
 |summary|string|None|False|Case summary|None|Case summary|
-|tags|[]string|None|False|List of case tags|None|["case_tag_1", "case_tag_2"]|
+|tags|[]string|None|False|List of case tags|None|['case_tag_1', 'case_tag_2']|
 |template|string|None|False|Case template's name. If specified then the case is created using the given template|None|Case template name|
 |title|string|None|True|Name of the case|None|Case title|
 |tlp|integer|2|False|Traffic Light Protocol level|[0, 1, 2, 3]|2|
@@ -136,7 +137,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|case|createCase|False|Create case output|{'owner': 'string', 'summary': 'string', 'severity': 2, '_routing': 'case_id', 'flag': False, 'endDate': 1640000000000, 'customFields': {}, '_type': 'case', 'description': 'string', 'title': 'string', 'tags': ['string'], 'createdAt': 1684188238010, '_parent': None, 'createdBy': 'admin', 'caseId': 54, 'tlp': 2, 'metrics': {}, '_id': 'case_id', 'id': 'case_id', '_version': 1, 'pap': 2, 'startDate': 1640000000000, 'status': 'Open'}|
+|case|case|False|Create case output|{'owner': 'string', 'summary': 'string', 'severity': 2, '_routing': 'case_id', 'flag': False, 'endDate': 1640000000000, 'customFields': {}, '_type': 'case', 'description': 'string', 'title': 'string', 'tags': ['string'], 'createdAt': 1684188238010, '_parent': None, 'createdBy': 'admin', 'caseId': 54, 'tlp': 2, 'metrics': {}, '_id': 'case_id', 'id': 'case_id', '_version': 1, 'pap': 2, 'startDate': 1640000000000, 'status': 'Open'}|
   
 Example output:
 
@@ -190,7 +191,7 @@ Create a new case observable
 |pap|integer|2|False|Case's PAP|[0, 1, 2, 3]|2|
 |sighted|boolean|False|False|Observable's sighted flag, True to mark the observable as sighted|None|False|
 |startDate|integer|None|False|Observable start date (datetime in ms) (will default to now if left blank)|None|1640000000000|
-|tags|[]string|None|False|List of observable tags, required if message is None|None|["tag_one", "tag_two"]|
+|tags|[]string|None|False|List of observable tags, required if message is None|None|['tag_one', 'tag_two']|
 |tlp|integer|2|False|Case's TLP|[0, 1, 2, 3]|2|
   
 Example input:
@@ -281,18 +282,20 @@ Example output:
 
 ```
 {
-  "Created At": {},
-  "Created By": {},
-  "ID": {},
-  "Start Date": 0,
-  "Type": {},
-  "description": {},
-  "flag": "true",
-  "order": {},
-  "owner": {},
-  "status": "Waiting",
-  "title": {},
-  "user": {}
+  "case": {
+    "Created At": {},
+    "Created By": {},
+    "ID": {},
+    "Start Date": 0,
+    "Type": {},
+    "description": {},
+    "flag": "true",
+    "order": {},
+    "owner": {},
+    "status": "Waiting",
+    "title": {},
+    "user": {}
+  }
 }
 ```
 
@@ -518,64 +521,42 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
+|_ID|string|None|False|Alternative ID|None|
+|Routing|string|None|False|Case routing|None|
+|Type|string|None|False|Case type|None|
+|Updated By|string|None|False|Who the case was updated by|None|
+|Version|integer|None|False|Case version|None|
+|Case ID|integer|None|False|Case ID|None|
 |Created At|integer|None|False|Datetime in ms the case was created at|None|
 |Created By|string|None|False|Who the case was created by|None|
-|Type|string|None|False|Case type|None|
-|Updated At|integer|None|False|Datetime in ms the case was updated at|None|
-|Updated By|string|None|False|Who the case was updated by|None|
-|Alert Date|integer|None|False|Case alert date (datetime in ms)|None|
-|Alert Imported Date|integer|None|False|Case alert imported date (datetime in ms)|None|
-|Alert In Progress Date|integer|None|False|Case alert in progress data (datetime in ms)|None|
-|Alert New Date|integer|None|False|Case alert new date (datetime in ms)|None|
-|Assignee|string|None|False|None|None|
-|Closed Date|integer|None|False|Case closed date (datetime in ms)|None|
 |Custom Fields|object|None|False|Case custom fields|None|
 |Description|string|None|False|The description of the case|None|
-|End Date|integer|None|False|Case end date (datetime in ms)|None|
-|Extra Data|object|None|False|None|None|
 |Flag|boolean|None|False|Something here|None|
-|Handling Duration|integer|None|False|Case handling duration|None|
 |ID|string|None|False|ID|None|
-|Impact Status|string|None|False|None|None|
-|In Progress Date|integer|None|False|None|None|
-|New Date|integer|None|False|None|None|
-|Number|integer|None|False|An incremental number to reference the case|None|
+|Metrics|object|None|False|Case metrics|None|
+|Owner|string|None|False|Case owner|None|
 |PAP|integer|None|False|Password Authenitcation Protocol|None|
 |Severity|integer|None|False|Severity of the case|None|
-|Stage|string|None|False|The value of the stage depends on the status of the case|None|
 |Start Date|integer|None|False|Case start date (datetime in ms)|None|
 |Status|string|None|False|Status of the case|None|
 |Summary|string|None|False|Summary of the case|None|
 |Tags|[]string|None|False|Case tags|None|
-|Time To Acknowledge|integer|None|False|Case time to acknowledge|None|
-|Time To Detect|integer|None|False|Case time to detect|None|
-|Time To Qualify|integer|None|False|Case time to qualify|None|
-|Time To Resolve|integer|None|False|Case time to resolve|None|
-|Time To Triage|integer|None|False|None|None|
 |Case title|string|None|False|Title of the case|None|
 |TLP|integer|None|False|Traffic Light Protocol level|None|
-|User Permissions|[]string|None|False|A list of permissions the current user has access on the case|None|
   
 **createCase**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Assignee|string|None|False|User to assign the case to|None|
-|Case Template|string|None|False|Name or ID of the case template to use|None|
 |Custom Fields|object|None|False|Custom fields|None|
 |Description|string|None|False|Case description|None|
-|End Date|integer|None|False|Case end date (datetime in ms)|None|
 |Flag|boolean|False|False|Case flags|None|
-|Observable Rule|string|None|False|Case observable rule|None|
 |Password Authentication Protocol|integer|2|False|Case password authentication protocol|None|
 |Severity|integer|2|False|Case severity|None|
-|Sharing Parameters|[]string|None|False|Case sharing parameters|None|
 |Start Date|integer|None|False|Case start date (datetime in ms)|None|
 |Status|string|New|False|Case status|None|
 |Summary|string|None|False|Case summary|None|
 |Tags|[]string|None|False|Case tags|None|
-|Task Rule|string|None|False|Case task rule|None|
-|Tasks|[]string|None|False|Tasks to create. If null, tasks from the case template will be used|None|
 |Title|string|None|False|Case title|None|
 |Traffic Light Protocol|integer|2|False|Case traffic light protocol|None|
   
@@ -617,8 +598,8 @@ Example output:
 |user|string|None|None|Observable user|None|
 
 ## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
+  
+*There is no troubleshooting for this plugin.*
 
 # Version History
 

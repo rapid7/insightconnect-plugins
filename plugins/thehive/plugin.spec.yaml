@@ -139,12 +139,42 @@ types:
       description: ID
       type: string
       required: false
+    _id:
+      title: _ID
+      description: Alternative ID
+      type: string
+      required: false
+    owner:
+      title: Owner
+      description: Case owner
+      type: string
+      required: false
+    _routing:
+      title: Routing
+      description: Case routing
+      type: string
+      required: false
     _type:
       title: Type
       description: Case type
       type: string
       required: false
-    _createdBy:
+    caseId:
+      title: Case ID
+      description: Case ID
+      type: integer
+      required: false
+    metrics:
+      title: Metrics
+      description: Case metrics
+      type: object
+      required: false
+    _version:
+      title: Version
+      description: Case version
+      type: integer
+      required: false
+    createdBy:
       title: Created By
       description: Who the case was created by
       type: string
@@ -154,19 +184,9 @@ types:
       description: Who the case was updated by
       type: string
       required: false
-    _createdAt:
+    createdAt:
       title: Created At
       description: Datetime in ms the case was created at
-      type: integer
-      required: false
-    _updatedAt:
-      title: Updated At
-      description: Datetime in ms the case was updated at
-      type: integer
-      required: false
-    number:
-      title: Number
-      description: An incremental number to reference the case
       type: integer
       required: false
     title:
@@ -187,11 +207,6 @@ types:
     startDate:
       title: Start Date
       description: Case start date (datetime in ms)
-      type: integer
-      required: false
-    endDate:
-      title: End Date
-      description: Case end date (datetime in ms)
       type: integer
       required: false
     tags:
@@ -219,104 +234,15 @@ types:
       description: Status of the case
       type: string
       required: false
-    stage:
-      title: Stage
-      description: The value of the stage depends on the status of the case
-      type: string
-      enum:
-        - New
-        - InProgress
-        - Closed
-      required: false
     summary:
       title: Summary
       description: Summary of the case
-      type: string
-      required: false
-    impactStatus:
-      title: Impact Status
-      type: string
-      required: false
-    assignee:
-      title: Assignee
       type: string
       required: false
     customFields:
       title: Custom Fields
       description: Case custom fields
       type: object
-      required: false
-    userPermissions:
-      title: User Permissions
-      description: A list of permissions the current user has access on the case
-      type: "[]string"
-      required: false
-    extraData:
-      title: Extra Data
-      type: object
-      required: false
-    newDate:
-      title: New Date
-      type: integer
-      required: false
-    inProgressDate:
-      title: In Progress Date
-      type: integer
-      required: false
-    closedDate:
-      title: Closed Date
-      description: Case closed date (datetime in ms)
-      type: integer
-      required: false
-    alertDate:
-      title: Alert Date
-      description: Case alert date (datetime in ms)
-      type: integer
-      required: false
-    alertNewDate:
-      title: Alert New Date
-      description: Case alert new date (datetime in ms)
-      type: integer
-      required: false
-    alertInProgressDate:
-      title: Alert In Progress Date
-      description: Case alert in progress data (datetime in ms)
-      type: integer
-      required: false
-    alertImportedDate:
-      title: Alert Imported Date
-      description: Case alert imported date (datetime in ms)
-      type: integer
-      required: false
-    timeToDetect:
-      title: Time To Detect
-      description: Case time to detect
-      type: integer
-      required: false
-    timeToTriage:
-      title: Time To Triage
-      descirption: Case time to triage
-      type: integer
-      required: false
-    timeToQualify:
-      title: Time To Qualify
-      description: Case time to qualify
-      type: integer
-      required: false
-    timeToAcknowledge:
-      title: Time To Acknowledge
-      description: Case time to acknowledge
-      type: integer
-      required: false
-    timeToResolve:
-      title: Time To Resolve
-      description: Case time to resolve
-      type: integer
-      required: false
-    handlingDuration:
-      title: Handling Duration
-      description: Case handling duration
-      type: integer
       required: false
   createCase:
     title:
@@ -343,11 +269,6 @@ types:
     startDate:
       title: Start Date
       description: Case start date (datetime in ms)
-      type: integer
-      required: false
-    endDate:
-      title: End Date
-      description: Case end date (datetime in ms)
       type: integer
       required: false
     tags:
@@ -394,40 +315,10 @@ types:
       description: Case summary
       type: string
       required: false
-    assignee:
-      title: Assignee
-      description: User to assign the case to
-      type: string
-      required: false
     customFields:
       title: Custom Fields
       description: Custom fields
       type: object
-      required: false
-    caseTemplate:
-      title: Case Template
-      description: Name or ID of the case template to use
-      type: string
-      required: false
-    tasks:
-      title: Tasks
-      description: Tasks to create. If null, tasks from the case template will be used
-      type: "[]string"
-      required: false
-    sharingParameters:
-      title: Sharing Parameters
-      description: Case sharing parameters
-      type: "[]string"
-      required: false
-    taskRule:
-      title: Task Rule
-      description: Case task rule
-      type: string
-      required: false
-    observableRule:
-      title: Observable Rule
-      description: Case observable rule
-      type: string
       required: false
   task:
     status:
@@ -670,7 +561,7 @@ actions:
         required: false
     output:
       case:
-        type: createCase
+        type: case
         description: Create case output
         example: {
             "owner": "string",
