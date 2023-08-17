@@ -4,7 +4,7 @@ products: [ insightconnect ]
 name: trendmicro_visionone
 title: Trend Micro Vision One
 description: Trend Micro Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
-version: 1.0.1
+version: 1.0.2
 supported_versions: [ "Trend Micro Vision One API v3" ]
 vendor: trendmicro
 support: community
@@ -935,12 +935,12 @@ actions:
     title: Get Endpoint Data
     description: Retrieves information about a specific endpoint
     input:
-      endpoint:
-        title: Endpoint
-        type: string
-        description: Hostname, macAddress, agentGuid or IP of the endpoint to query
+      endpoints:
+        title: Endpoints
+        type: "[]string"
+        description: Array of endpoints to query by their hostname, macAddress, agentGuid or IP, formated as bracket array separated by comma
         required: true
-        example: 127.127.127.127
+        example: [ ]
       query_op:
         title: Query Operator
         type: string
