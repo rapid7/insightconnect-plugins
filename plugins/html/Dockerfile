@@ -1,4 +1,4 @@
-FROM rapid7/insightconnect-python-3-38-plugin:4
+FROM rapid7/insightconnect-python-3-38-plugin:5
 LABEL organization=rapid7
 LABEL sdk=python
 LABEL type=plugin
@@ -20,6 +20,6 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
 
 # needed for SSL
-USER root
+USER nobody
 
 ENTRYPOINT ["/usr/local/bin/icon_html"]

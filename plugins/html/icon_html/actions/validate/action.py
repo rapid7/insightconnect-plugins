@@ -28,6 +28,3 @@ class Validate(insightconnect_plugin_runtime.Action):
             return {"validated": (False if status == "error" else True)}
         except requests.exceptions.RequestException:
             return {"status": "Error"}
-
-    def test(self):
-        return {"test": "test Success"}
