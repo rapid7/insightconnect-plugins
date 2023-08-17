@@ -1,0 +1,16 @@
+{
+  "searchResults": [
+    {
+      "type": "Account",
+      "url": "/services/data/v58.0/sobjects/Account/001Hn00001uL111111",
+      "id": "001Hn00001uL111111",
+      "name": "Test"
+    },
+    {
+      "type": "Account",
+      "url": "/services/data/v58.0/sobjects/Account/001Hn00001uL222222",
+      "id": "001Hn00001uL222222",
+      "name": "Test"
+    }
+  ]
+}

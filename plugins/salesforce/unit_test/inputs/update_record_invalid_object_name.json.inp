@@ -1,0 +1,8 @@
+{
+  "objectData": {
+    "name": "test-user",
+    "phone": "999999999"
+  },
+  "objectName": "invalid_object_name",
+  "recordId": "100AA000000aa0aAAA"
+}

@@ -1,0 +1,18 @@
+{
+  "totalSize": 1,
+  "done": true,
+  "records": [
+    {
+      "attributes": {
+        "type": "User",
+        "url": "/services/data/v58.0/sobjects/User/005Hn00000HVWwxIAH"
+      },
+      "Id": "005Hn00000HVWwxIAH",
+      "FirstName": "Security",
+      "LastName": "User",
+      "Email": "user@example.com",
+      "Alias": "sec",
+      "IsActive": true
+    }
+  ]
+}
