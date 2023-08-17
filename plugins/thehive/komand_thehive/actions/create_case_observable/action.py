@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import CreateCaseObservableInput, CreateCaseObservableOutput, Component, Input, Output
 from insightconnect_plugin_runtime.helper import clean_dict
+
 # Custom imports below
 import time
 
