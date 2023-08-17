@@ -531,7 +531,6 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.1 - Changed exception messages for 401 and 404 status codes
 * 2.0.0 - Code refactor | Update plugin to be cloud enabled | Add new task Monitor Users
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
