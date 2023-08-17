@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import CreateCaseTaskInput, CreateCaseTaskOutput, Component, Input, Output
-
+from insightconnect_plugin_runtime.helper import clean_dict
 # Custom imports below
 import time
 
@@ -30,6 +30,7 @@ class CreateCaseTask(insightconnect_plugin_runtime.Action):
                 "startDate": params.get(Input.STARTDATE, int(time.time()) * 1000),
                 "owner": params.get(Input.OWNER),
             }
+        task = clean_dict(task)
 
         self.logger.info(f"Input: {task}")
 

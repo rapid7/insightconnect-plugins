@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import CreateCaseObservableInput, CreateCaseObservableOutput, Component, Input, Output
-
+from insightconnect_plugin_runtime.helper import clean_dict
 # Custom imports below
 import time
 
@@ -32,6 +32,8 @@ class CreateCaseObservable(insightconnect_plugin_runtime.Action):
                 "sighted": params.get(Input.SIGHTED),
                 "tags": params.get(Input.TAGS),
             }
+
+        observable = clean_dict(observable)
 
         self.logger.info(f"Input: {observable}")
 

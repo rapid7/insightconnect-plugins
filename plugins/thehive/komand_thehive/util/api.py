@@ -4,6 +4,7 @@ from typing import Optional, Union
 import requests
 from requests.auth import HTTPBasicAuth
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.helper import clean
 
 # Here is the docs for the next dev that comes through here
 # https://github.com/TheHive-Project/TheHive4py/blob/master/thehive4py/api.py
@@ -32,7 +33,6 @@ class HiveAPI:
         return self._call_api("POST", "/api/case", data=case)
 
     # Create Observable In Case
-    # WIP
     def create_observable_in_case(self, case_id, observable):
         return self._call_api("POST", f"/api/case/{case_id}/artifact", data=observable)
 
@@ -92,6 +92,7 @@ class HiveAPI:
         if response.status_code == 204:
             return None
         if response.status_code in range(200, 299):
+            response = clean(response)
             return response.json()
         if response.status_code == 400:
             raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
