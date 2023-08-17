@@ -80,12 +80,6 @@ Example input:
 
 This action attaches a note to a workbench alert.
 
-**API key role permissions required:**
-
-**Workbench**
-
-- Modify alert details
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -124,18 +118,6 @@ Example output:
 #### Add to Block List
 
 This action adds an email address, file SHA-1, domain, IP address, or URL to the Suspicious Object List, which blocks the objects on subsequent detections.
-
-**API key role permissions required:**
-
-**Response Management**
-
-- View, filter, and search (Task List tab)
-- Add to block list
-
-**Suspicious Object Management**
-
-- View, filter, and search
-- Manage lists and configure settings
 
 ##### Input
 
@@ -185,13 +167,6 @@ Example output:
 
 This action adds domains, file SHA-1 values, IP addresses, or URLs to the Exception List and prevents these objects from being added to the Suspicious Object List.
 
-**API key role permissions required:**
-
-**Suspicious Object Management**
-
-- View, filter, and search
-- Manage lists and configure settings
-
 ##### Input
 
 | Name        | Type          |Default|Required|Description|Enum|Example|
@@ -239,13 +214,6 @@ Example output:
 
 This action adds domains, file SHA-1/SHA-256 values, IP addresses, senderMailAddress, or URLs to the Block Object List.
 
-**API key role permissions required:**
-
-**Suspicious Object Management**
-
-- View, filter, and search
-- Manage lists and configure settings
-
 ##### Input
 
 | Name                   | Type                     |Default|Required|Description|Enum|Example|
@@ -256,7 +224,7 @@ Example input|multi_response|[]multi_response|True|Add To Suspicious List Respon
 
 ```
 {
-  "suspicious_block_objects": [{
+  "suspicious_block_object": [{
           "risk_level": "high",
           "expiry_days": "30",
           "object_type": "ip",
@@ -301,13 +269,6 @@ Example output:
 #### Collect File
 
 This action collects a file from one or more endpoints and then sends the files to Trend Micro Vision One in a password-protected archive Note- You can specify either the computer name- endpointName or the GUID of the installed agent program- agentGuid.
-
-**API key role permissions required:**
-
-**Response Management**
-
-- View, filter, and search (Task List tab)
-- Collect file
 
 ##### Input
 
@@ -354,13 +315,6 @@ Example output:
 
 This action deletes a message from a mailbox.
 
-**API key role permissions required:**
-
-**Response Management**
-
-- View, filter, and search (Task List tab)
-- Delete messages
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -405,13 +359,6 @@ Example output:
 
 This action signs the user out of all active application and browser sessions, and prevents the user from signing in any new session. Supported IAM systems - Azure AD and Active Directory (on-premises).
 
-**API key role permissions required:**
-
-**Response Management**
-
-- View, filter, and search (Task List tab)
-- Enable/Disable user account, force sign out, force password reset
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -455,20 +402,13 @@ Example output:
 
 This action downloads the analysis result for an object submitted to sandbox for analysis based on the submission ID.
 
-**API key role permissions required:**
-
-**Sandbox Analysis**
-
-- View, filter, and search
-- Submit objects
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Unique alphanumeric string that identifies the analysis results of a submission|None|6345645|
-|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
-|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|
+|poll|boolean|None|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
+|poll_time_sec|float|None|False|Maximum time to wait for the result to be available|None|15.5|
 
 Example input:
 
@@ -499,20 +439,13 @@ Example output:
 
 This action downloads the investigation package based on submission ID.
 
-**API key role permissions required:**
-
-**Sandbox Analysis**
-
-- View, filter, and search
-- Submit objects
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Unique alphanumeric string that identifies the analysis results of a submission|None|6345645|
-|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
-|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|
+|poll|boolean|None|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
+|poll_time_sec|float|None|False|Maximum time to wait for the result to be available|None|15.5|
 
 Example input:
 
@@ -542,12 +475,6 @@ Example output:
 #### Edit Alert Status
 
 This action updates the status of a workbench alert.
-
-**API key role permissions required:**
-
-**Workbench**
-
-- Modify alert details
 
 ##### Input
 
@@ -585,13 +512,6 @@ Example output:
 #### Enable Account
 
 This action allows the user to sign in to new application and browser sessions. Supported IAM systems - Azure AD and Active Directory (on-premises).
-
-**API key role permissions required:**
-
-**Response Management**
-
-- View, filter, and search (Task List tab)
-- Enable/Disable user account, force sign out, force password reset
 
 ##### Input
 
@@ -636,12 +556,6 @@ Example output:
 
 This action displays information about workbench alerts that match the specified criteria in a paginated list.
 
-**API key role permissions required:**
-
-**Workbench**
-
-- View, filter, and search
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -678,12 +592,6 @@ Example output:
 #### Get Alert List
 
 This action displays information about workbench alerts that match the specified criteria in a paginated list.
-
-**API key role permissions required:**
-
-**Workbench**
-
-- View, filter, and search
 
 ##### Input
 
@@ -722,27 +630,18 @@ Example output:
 
 This action retrieves information about a specific endpoint.
 
-**API key role permissions required:**
-
-**Endpoint Inventory**
-
-- View
-
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|endpoints|[]string|None|True|Array of endpoints to query by their hostname, macAddress, agentGuid or IP, formated as bracket array separated by comma|None|[]|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
+| Name   | Type |Default|Required|Description|Enum|Example|
+|--------|------|-----|--------|-----------|----|-------|
+|endpoints|[]string|None|True|Array of endpoints to query by their hostname, macAddress, agentGuid or IP, formated as bracket array separated by comma|None|127.127.127.127|
+|query_op|string|or|True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
 
 Example input:
 
 ```
 {
-  "endpoints": [
-    "127.127.127.127",
-    "1.2.3.4"
-  ],
+ g "endpoints": ["127.127.127.127","1.2.3.4"]
   "query_op": " or "
 }
 ```
@@ -765,12 +664,6 @@ Example output:
 #### Get Exception List
 
 This action retrieves information about domains, file SHA-1, file SHA-256, IP addresses, sender addresses, or URLs in the Exception List and displays it in a paginated list.
-
-**API key role permissions required:**
-
-**Suspicious Object Management**
-
-- View, filter, and search
 
 ##### Input
 
@@ -802,19 +695,12 @@ Example output:
 
 This action retrieves the sandbox analysis results.
 
-**API key role permissions required:**
-
-**Sandbox Analysis**
-
-- View, filter, and search
-- Submit objects
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
-|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|
+|poll|boolean|None|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
+|poll_time_sec|float|None|False|Maximum time to wait for the result to be available|None|15.5|
 |report_id|string|None|True|Report_id of the sandbox submission retrieved from the trendmicro-visionone-get-file-analysis-status command|None|02384|
 
 Example input:
@@ -865,13 +751,6 @@ Example output:
 #### Get Sandbox Submission Status
 
 This action retrieves the status of a sandbox analysis submission.
-
-**API key role permissions required:**
-
-**Sandbox Analysis**
-
-- View, filter, and search
-- Submit objects
 
 ##### Input
 
@@ -927,20 +806,13 @@ Example output:
 
 This action downloads the suspicious object list associated to the specified object. Note ~ Suspicious Object Lists are only available for objects with a high risk level.
 
-**API key role permissions required:**
-
-**Sandbox Analysis**
-
-- View, filter, and search
-- Submit objects
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Unique alphanumeric string that identifies the analysis results of a submission|None|6345645|
-|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
-|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|
+|poll|boolean|None|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
+|poll_time_sec|float|None|False|Maximum time to wait for the result to be available|None|15.5|
 
 Example input:
 
@@ -980,12 +852,6 @@ Example output:
 
 This action retrieves information about domains, file SHA-1, file SHA-256, IP addresses, email addresses, or URLs in the Suspicious Object List and displays the information in a paginated list.
 
-**API key role permissions required:**
-
-**Suspicious Object Management**
-
-- View, filter, and search
-
 ##### Input
 
 _This action does not contain any inputs._
@@ -1020,19 +886,12 @@ Example output:
 
 This action retrieves an object containing the results of a response task in JSON format.
 
-**API key role permissions required:**
-
-**Response Management**
-
-- View, filter, and search (Task List tab)
-- Download task result
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
-|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|
+|poll|boolean|None|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
+|poll_time_sec|float|None|False|Maximum time to wait for the result to be available|None|15.5|
 |task_id|string|None|True|TaskId output from the collect command used to collect the file|None|3456346|
 
 Example input:
@@ -1091,13 +950,6 @@ Example output:
 
 This action disconnects an endpoint from the network (but allows communication with the managing Trend Micro product).
 
-**API key role permissions required:**
-
-**Response Management**
-
-- View, filter, and search (Task List tab)
-- Isolate endpoint
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -1142,13 +994,6 @@ Example output:
 
 This action moves a message from a mailbox to the quarantine folder.
 
-**API key role permissions required:**
-
-**Response Management**
-
-- View, filter, and search (Task List tab)
-- Quarantine/Restore messages
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -1192,18 +1037,6 @@ Example output:
 #### Remove from Block List
 
 This action removes an email address, file SHA-1, domain, IP address, or URL that was added to the Suspicious Object List using the Add to block list action.
-
-**API key role permissions required:**
-
-**Response Management**
-
-- View, filter, and search (Task List tab)
-- Add to block list
-
-**Suspicious Object Management**
-
-- View, filter, and search
-- Manage lists and configure settings
 
 ##### Input
 
@@ -1253,13 +1086,6 @@ Example output:
 
 This action removes domains, file SHA-1 values, IP addresses, or URLs from the Exception List.
 
-**API key role permissions required:**
-
-**Suspicious Object Management**
-
-- View, filter, and search
-- Manage lists and configure settings
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -1302,13 +1128,6 @@ Example output:
 #### Remove from Suspicious List
 
 This action removes domains, file SHA-1 values, IP addresses, or URLs from the Suspicious Object List.
-
-**API key role permissions required:**
-
-**Suspicious Object Management**
-
-- View, filter, and search
-- Manage lists and configure settings
 
 ##### Input
 
@@ -1353,13 +1172,6 @@ Example output:
 
 This action signs the user out of all active application and browser sessions, and forces the user to create a new password during the next sign-in attempt. Supported IAM systems - Azure AD and Active Directory (on-premises).
 
-**API key role permissions required:**
-
-**Response Management**
-
-- View, filter, and search (Task List tab)
-- Enable/Disable user account, force sign out, force password reset
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -1402,13 +1214,6 @@ Example output:
 #### Restore Email Message
 
 This action restores a quarantined email message.
-
-**API key role permissions required:**
-
-**Response Management**
-
-- View, filter, and search (Task List tab)
-- Quarantine/Restore messages
 
 ##### Input
 
@@ -1454,13 +1259,6 @@ Example output:
 
 This action restores network connectivity to an endpoint that applied the isolate endpoint action.
 
-**API key role permissions required:**
-
-**Response Management**
-
-- View, filter, and search (Task List tab)
-- Isolate endpoint
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -1505,13 +1303,6 @@ Example output:
 
 This action signs the user out of all active application and browser sessions. Supported IAM systems - Azure AD.
 
-**API key role permissions required:**
-
-**Response Management**
-
-- View, filter, and search (Task List tab)
-- Enable/Disable user account, force sign out, force password reset
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -1554,13 +1345,6 @@ Example output:
 #### Submit File to Sandbox
 
 This action submits a file to the sandbox for analysis (Note. For more information about the supported file types, see the Trend Micro Vision One Online Help. Submissions require credits. Does not require credits in regions where Sandbox Analysis has not been officially released.).
-
-**API key role permissions required:**
-
-**Sandbox Analysis**
-
-- View, filter, and search
-- Submit objects
 
 ##### Input
 
@@ -1609,24 +1393,17 @@ Example output:
 
 This action submits URLs to the sandbox for analysis. You can submit a maximum of 10 URLs per request.
 
-**API key role permissions required:**
-
-**Sandbox Analysis**
-
-- View, filter, and search
-- Submit objects
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|urls|[]string|None|True|URL(s) to be submitted, formated as bracket array separated by comma|None|[]|
+|url|[]string|None|True|URL(s) to be submitted, formated as bracket array separated by comma|None|[]|
 
 Example input:
 
 ```
 {
-  "urls": [
+  "url": [
     "www.urlurl.com",
     "www.zurlzurl.com"
   ]
@@ -1663,13 +1440,6 @@ Example output:
 #### Terminate Process
 
 This action terminates a process that is running on an endpoint.
-
-**API key role permissions required:**
-
-**Response Management**
-
-- View, filter, and search (Task List tab)
-- Terminate process
 
 ##### Input
 
@@ -1717,12 +1487,6 @@ Example output:
 
 This trigger polls information about workbench alerts that match the specified criteria in a paginated list.
 
-**API key role permissions required:**
-
-**Workbench**
-
-- View, filter, and search
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -1759,21 +1523,14 @@ Example output:
 
 This trigger polls the suspicious object list associated to the specified object. Note ~ Suspicious Object Lists are only available for objects with a high risk level.
 
-**API key role permissions required:**
-
-**Sandbox Analysis**
-
-- View, filter, and search
-- Submit objects
-
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Unique alphanumeric string that identifies the analysis results of a submission|None|6345645|
 |interval|integer|None|True|Interval (in seconds) in which the polling script should run again|None|1800|
-|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
-|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|
+|poll|boolean|None|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
+|poll_time_sec|float|None|False|Maximum time to wait for the result to be available|None|15.5|
 
 Example input:
 
@@ -1977,7 +1734,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.0 - Enabled multiple inputs for Get Endpoint Data, reduced API call frequency & General Refactoring
+* 1.0.2 - Enabled multiple inputs for Get Endpoint Data
 * 1.0.1 - Alert Details Output Fix (Minor Fix)
 * 1.0.0 - Initial plugin
 * 1.0.1 - Alert Details Output Fix (Minor Fix)
