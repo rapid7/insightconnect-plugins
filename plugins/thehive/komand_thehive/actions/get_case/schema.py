@@ -182,17 +182,11 @@ class GetCaseOutput(insightconnect_plugin_runtime.Output):
           "description": "Status of the case",
           "order": 20
         },
-        "summary": {
-          "type": "string",
-          "title": "Summary",
-          "description": "Summary of the case",
-          "order": 21
-        },
         "customFields": {
           "type": "object",
           "title": "Custom Fields",
           "description": "Case custom fields",
-          "order": 22
+          "order": 21
         }
       }
     }

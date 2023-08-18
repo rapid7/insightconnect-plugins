@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "TheHive"
 Vendor = "rapid7"
-Version = "4.0.1"
+Version = "5.0.0"
 Description = "TheHive is a scalable, open source security incident response solution designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done"
 
 

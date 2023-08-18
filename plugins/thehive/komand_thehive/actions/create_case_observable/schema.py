@@ -140,8 +140,11 @@ class CreateCaseObservableOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "case": {
-      "$ref": "#/definitions/observable",
+      "type": "array",
       "description": "Create case observable output",
+      "items": {
+        "$ref": "#/definitions/observable"
+      },
       "order": 1
     }
   },

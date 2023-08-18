@@ -4,7 +4,7 @@ products: [insightconnect]
 name: thehive
 title: TheHive
 description: "TheHive is a scalable, open source security incident response solution designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done"
-version: 4.0.1
+version: 5.0.0
 supported_versions: ["2023-05-17"]
 vendor: rapid7
 support: community
@@ -13,6 +13,10 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/thehive
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://thehive-project.org
+sdk:
+  type: full
+  version: 5
+  user: nobody
 tags:
   - thehive
   - intel
@@ -738,7 +742,7 @@ actions:
         required: false
     output:
       case:
-        type: observable
+        type: '[]observable'
         description: Create case observable output
         example: { "data": "Test data for observable", "datatype": "domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other", "id": "AYgQXmjbfMffAh_St-fk", "ignoreSimilarity": false, "ioc": false, "jsonData": "json object containing all necessary fields", "message": "Observable message", "pap": 2, "sighted": false, "startDate": 1640000000000, "tags": "tag_one", "tlp": 2 }
         required: false

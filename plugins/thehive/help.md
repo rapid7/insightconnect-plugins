@@ -13,7 +13,7 @@ elaborate, analyze and get their job done
 
 # Requirements
 
-* TheHive instance hostname
+* TheHive instance hostname, usually an IP address
 * TheHive username and password
 
 # Supported Product Versions
@@ -106,7 +106,6 @@ Create a new case
 |pap|integer|2|False|Password Authentication Protocol|[0, 1, 2, 3]|2|
 |severity|integer|2|False|Case severity|[1, 2, 3, 4]|2|
 |startDate|integer|None|False|Case start date (datetime in ms) (will default to now if left blank)|None|1684170163000|
-|summary|string|None|False|Case summary|None|Case summary|
 |tags|[]string|None|False|List of case tags|None|['case_tag_1', 'case_tag_2']|
 |template|string|None|False|Case template's name. If specified then the case is created using the given template|None|Case template name|
 |title|string|None|True|Name of the case|None|Case title|
@@ -125,7 +124,6 @@ Example input:
   "pap": 2,
   "severity": 2,
   "startDate": 1684170163000,
-  "summary": "Case summary",
   "tags": "case_tag_1",
   "template": "Case template name",
   "title": "Case title",
@@ -217,7 +215,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|case|observable|False|Create case observable output|{'data': 'Test data for observable', 'datatype': 'domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other', 'id': 'AYgQXmjbfMffAh_St-fk', 'ignoreSimilarity': False, 'ioc': False, 'jsonData': 'json object containing all necessary fields', 'message': 'Observable message', 'pap': 2, 'sighted': False, 'startDate': 1640000000000, 'tags': 'tag_one', 'tlp': 2}|
+|case|[]observable|False|Create case observable output|{'data': 'Test data for observable', 'datatype': 'domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other', 'id': 'AYgQXmjbfMffAh_St-fk', 'ignoreSimilarity': False, 'ioc': False, 'jsonData': 'json object containing all necessary fields', 'message': 'Observable message', 'pap': 2, 'sighted': False, 'startDate': 1640000000000, 'tags': 'tag_one', 'tlp': 2}|
   
 Example output:
 
@@ -539,7 +537,6 @@ Example output:
 |Severity|integer|None|False|Severity of the case|None|
 |Start Date|integer|None|False|Case start date (datetime in ms)|None|
 |Status|string|None|False|Status of the case|None|
-|Summary|string|None|False|Summary of the case|None|
 |Tags|[]string|None|False|Case tags|None|
 |Case title|string|None|False|Title of the case|None|
 |TLP|integer|None|False|Traffic Light Protocol level|None|
