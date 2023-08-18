@@ -35,7 +35,6 @@ class CreateCase(insightconnect_plugin_runtime.Action):
                 "owner": params.get(Input.OWNER, ""),
                 "metrics": params.get(Input.METRICS, {}),
                 "customFields": params.get(Input.CUSTOMFIELDS, None),
-                "summary": params.get(Input.SUMMARY, ""),
             }
 
         case = clean_dict(case)

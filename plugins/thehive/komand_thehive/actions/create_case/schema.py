@@ -17,7 +17,6 @@ class Input:
     PAP = "pap"
     SEVERITY = "severity"
     STARTDATE = "startDate"
-    SUMMARY = "summary"
     TAGS = "tags"
     TEMPLATE = "template"
     TITLE = "title"
@@ -38,7 +37,7 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "Custom Fields",
       "description": "Case custom fields",
-      "order": 12
+      "order": 11
     },
     "description": {
       "type": "string",
@@ -57,19 +56,19 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "JSON",
       "description": "If the field is not equal to None, the case is instantiated using the JSON value instead of the arguements",
-      "order": 14
+      "order": 13
     },
     "metrics": {
       "type": "object",
       "title": "Metrics",
       "description": "Case metrics collection. A JSON object where keys are defining metric name, and values are defining metric value",
-      "order": 11
+      "order": 10
     },
     "owner": {
       "type": "string",
       "title": "Owner",
       "description": "Case's assignee",
-      "order": 10
+      "order": 9
     },
     "pap": {
       "type": "integer",
@@ -103,12 +102,6 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       "description": "Case start date (datetime in ms) (will default to now if left blank)",
       "order": 4
     },
-    "summary": {
-      "type": "string",
-      "title": "Summary",
-      "description": "Case summary",
-      "order": 9
-    },
     "tags": {
       "type": "array",
       "title": "Tags",
@@ -122,7 +115,7 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Case Template",
       "description": "Case template's name. If specified then the case is created using the given template",
-      "order": 13
+      "order": 12
     },
     "title": {
       "type": "string",
@@ -295,17 +288,11 @@ class CreateCaseOutput(insightconnect_plugin_runtime.Output):
           "description": "Status of the case",
           "order": 20
         },
-        "summary": {
-          "type": "string",
-          "title": "Summary",
-          "description": "Summary of the case",
-          "order": 21
-        },
         "customFields": {
           "type": "object",
           "title": "Custom Fields",
           "description": "Case custom fields",
-          "order": 22
+          "order": 21
         }
       }
     }

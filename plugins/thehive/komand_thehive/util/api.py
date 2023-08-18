@@ -92,7 +92,6 @@ class HiveAPI:
         if response.status_code == 204:
             return None
         if response.status_code in range(200, 299):
-            response = clean(response)
             return response.json()
         if response.status_code == 400:
             raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)

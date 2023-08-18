@@ -234,11 +234,6 @@ types:
       description: Status of the case
       type: string
       required: false
-    summary:
-      title: Summary
-      description: Summary of the case
-      type: string
-      required: false
     customFields:
       title: Custom Fields
       description: Case custom fields
@@ -522,12 +517,6 @@ actions:
           - 3
         default: 2
         example: 2
-        required: false
-      summary:
-        title: Summary
-        description: Case summary
-        type: string
-        example: Case summary
         required: false
       owner:
         title: Owner
