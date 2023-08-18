@@ -34,9 +34,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
         """
         try:
             success = self.api.connection_test()
-        except Exception as e:
+        except Exception as error:
             raise ConnectionTestException(
-                cause="Connection Test Failed.\n",
-                assistance="Please double-check that your Organization ID and API key are correct.\n",
-            ) from e
+                cause="Connection Test Failed.",
+                assistance="Please check that your Region and API key are correct.",
+                data=error
+            ) from error
         return {"success": success}
