@@ -1,4 +1,5 @@
 import base64
+import binascii
 import datetime
 import hashlib
 import hmac
@@ -132,9 +133,9 @@ class MimecastAPI:
 
     def _handle_status_code_response(self, response: requests.request, status_code: int):
         if status_code == 401:
-            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response)
-        elif status_code == 403:
             raise PluginException(preset=PluginException.Preset.API_KEY, data=response)
+        elif status_code == 403:
+            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response)
         elif status_code == 404:
             raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response)
         elif status_code >= 500:
@@ -170,8 +171,16 @@ class MimecastAPI:
         hdr_date = f'{datetime.datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S")} UTC'
 
         # Decode secret key
-        encoded_secret_key = self.secret_key.encode()
-        bytes_secret_key = base64.b64decode(encoded_secret_key)
+        try:
+            encoded_secret_key = self.secret_key.encode()
+            bytes_secret_key = base64.b64decode(encoded_secret_key)
+        except binascii.Error as error:
+            raise ApiClientException(
+                cause=PluginException.causes[PluginException.Preset.API_KEY],
+                assistance="Please make sure that the Secret Key is valid and try again.",
+                data=error,
+                status_code=401,
+            )
 
         # Create hmac message
         msg = ":".join([hdr_date, request_id, uri, self.app_key])
@@ -228,13 +237,13 @@ class MimecastAPI:
             for error in errors.get("errors", []):
                 if error.get(CODE) == XDK_BINDING_EXPIRED_ERROR:
                     raise ApiClientException(
-                        preset=PluginException.Preset.UNAUTHORIZED,
+                        preset=PluginException.Preset.API_KEY,
                         data=response,
                         status_code=401,
                     )
                 elif error.get(CODE) == DEVELOPER_KEY_ERROR:
                     raise ApiClientException(
-                        preset=PluginException.Preset.UNAUTHORIZED,
+                        preset=PluginException.Preset.API_KEY,
                         data=response,
                         status_code=401,
                     )

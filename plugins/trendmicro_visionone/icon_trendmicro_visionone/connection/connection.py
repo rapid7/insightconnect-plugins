@@ -39,8 +39,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         # Get Action Parameters
-        url = self.server
-        key = self.token_
+        url = self.url
+        key = self.key
         app = self.app
         # Initialize PYTMV1 Client
         self.logger.info("Initializing PYTMV1 Client...")

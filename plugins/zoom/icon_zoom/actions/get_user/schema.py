@@ -16,7 +16,7 @@ class Output:
 
 
 class GetUserInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -30,7 +30,8 @@ class GetUserInput(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "user_id"
-  ]
+  ],
+  "definitions": {}
 }
     """)
 
@@ -39,7 +40,7 @@ class GetUserInput(insightconnect_plugin_runtime.Input):
 
 
 class GetUserOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -52,6 +53,7 @@ class GetUserOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
+    "id",
     "user"
   ],
   "definitions": {
@@ -59,23 +61,23 @@ class GetUserOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "user",
       "properties": {
-        "account_id": {
+        "id": {
           "type": "string",
-          "title": "Account ID",
-          "description": "Account ID of user",
-          "order": 19
+          "title": "ID",
+          "description": "User identifier",
+          "order": 1
         },
-        "created_at": {
+        "first_name": {
           "type": "string",
-          "title": "Created At",
-          "description": "Creation datetime of user",
-          "order": 13
+          "title": "First Name",
+          "description": "First name of user",
+          "order": 2
         },
-        "dept": {
+        "last_name": {
           "type": "string",
-          "title": "Department",
-          "description": "Department of user",
-          "order": 12
+          "title": "Last Name",
+          "description": "Last name of user",
+          "order": 3
         },
         "email": {
           "type": "string",
@@ -83,11 +85,86 @@ class GetUserOutput(insightconnect_plugin_runtime.Output):
           "description": "Email address of user",
           "order": 4
         },
-        "first_name": {
+        "type": {
+          "type": "integer",
+          "title": "Type",
+          "description": "User type",
+          "enum": [
+            1,
+            2,
+            3
+          ],
+          "order": 5
+        },
+        "role_name": {
           "type": "string",
-          "title": "First Name",
-          "description": "First name of user",
-          "order": 2
+          "title": "Role Name",
+          "description": "Role name of user",
+          "order": 6
+        },
+        "pmi": {
+          "type": "integer",
+          "title": "Personal Meeting ID",
+          "description": "Personal meeting ID",
+          "order": 7
+        },
+        "use_pmi": {
+          "type": "boolean",
+          "title": "Use Personal Meeting ID",
+          "description": "Use Personal meeting ID for instant meetings",
+          "order": 8
+        },
+        "personal_meeting_url": {
+          "type": "string",
+          "title": "Personal Meeting URL",
+          "description": "Personal meeting URL of user",
+          "order": 9
+        },
+        "timezone": {
+          "type": "string",
+          "title": "Timezone",
+          "description": "Timezone of user",
+          "order": 10
+        },
+        "verified": {
+          "type": "integer",
+          "title": "Verified",
+          "description": "Whether the user is verified or not",
+          "enum": [
+            1,
+            0
+          ],
+          "order": 11
+        },
+        "dept": {
+          "type": "string",
+          "title": "Department",
+          "description": "Department of user",
+          "order": 12
+        },
+        "created_at": {
+          "type": "string",
+          "title": "Created At",
+          "description": "Creation datetime of user",
+          "order": 13
+        },
+        "last_login_time": {
+          "type": "string",
+          "title": "Last Login Time",
+          "description": "Last login datetime of user",
+          "order": 14
+        },
+        "host_key": {
+          "type": "string",
+          "title": "Host Key",
+          "description": "User's host key",
+          "order": 15
+        },
+        "jid": {
+          "type": "string",
+          "title": "JID",
+          "description": "JID of user",
+          "order": 16
         },
         "group_ids": {
           "type": "array",
@@ -98,18 +175,6 @@ class GetUserOutput(insightconnect_plugin_runtime.Output):
           },
           "order": 17
         },
-        "host_key": {
-          "type": "string",
-          "title": "Host Key",
-          "description": "User's host key",
-          "order": 15
-        },
-        "id": {
-          "type": "string",
-          "title": "ID",
-          "description": "User identifier",
-          "order": 1
-        },
         "im_group_ids": {
           "type": "array",
           "title": "IM Group IDs",
@@ -119,35 +184,17 @@ class GetUserOutput(insightconnect_plugin_runtime.Output):
           },
           "order": 18
         },
-        "jid": {
+        "account_id": {
           "type": "string",
-          "title": "JID",
-          "description": "JID of user",
-          "order": 16
+          "title": "Account ID",
+          "description": "Account ID of user",
+          "order": 19
         },
         "language": {
           "type": "string",
           "title": "Language",
           "description": "Language of user",
           "order": 20
-        },
-        "last_login_time": {
-          "type": "string",
-          "title": "Last Login Time",
-          "description": "Last login datetime of user",
-          "order": 14
-        },
-        "last_name": {
-          "type": "string",
-          "title": "Last Name",
-          "description": "Last name of user",
-          "order": 3
-        },
-        "personal_meeting_url": {
-          "type": "string",
-          "title": "Personal Meeting URL",
-          "description": "Personal meeting URL of user",
-          "order": 9
         },
         "phone_country": {
           "type": "string",
@@ -161,61 +208,17 @@ class GetUserOutput(insightconnect_plugin_runtime.Output):
           "description": "Phone number of user",
           "order": 22
         },
-        "pmi": {
-          "type": "integer",
-          "title": "Personal Meeting ID",
-          "description": "Personal meeting ID",
-          "order": 7
-        },
-        "role_name": {
-          "type": "string",
-          "title": "Role Name",
-          "description": "Role name of user",
-          "order": 6
-        },
         "status": {
           "type": "string",
           "title": "Status",
           "description": "Status of user",
           "order": 23
         },
-        "timezone": {
-          "type": "string",
-          "title": "Timezone",
-          "description": "Timezone of user",
-          "order": 10
-        },
-        "type": {
-          "type": "integer",
-          "title": "Type",
-          "description": "User type",
-          "enum": [
-            1,
-            2,
-            3
-          ],
-          "order": 5
-        },
-        "use_pmi": {
-          "type": "boolean",
-          "title": "Use Personal Meeting ID",
-          "description": "Use Personal meeting ID for instant meetings",
-          "order": 8
-        },
-        "verified": {
-          "type": "integer",
-          "title": "Verified",
-          "description": "Whether the user is verified or not",
-          "enum": [
-            1,
-            0
-          ],
-          "order": 11
-        }
-      },
-      "required": [
-        "id"
-      ]
+        "required": [
+          "id",
+          "user"
+        ]
+      }
     }
   }
 }

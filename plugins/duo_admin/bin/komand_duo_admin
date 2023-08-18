@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Duo Admin API"
 Vendor = "rapid7"
-Version = "4.0.0"
+Version = "4.1.0"
 Description = "Duo is a trusted access solution for organizations. The Duo Admin plugin for Rapid7 InsightConnect allows users to manage and administrate their Duo organization"
 
 

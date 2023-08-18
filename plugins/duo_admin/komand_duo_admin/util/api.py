@@ -25,6 +25,8 @@ def rate_limiting(max_tries: int):
     def _decorate(func):
         def _wrapper(*args, **kwargs):
             self = args[0]
+            if not self.toggle_rate_limiting:
+                return func(*args, **kwargs)
             retry = True
             counter, delay = 0, 0
             while retry and counter < max_tries:
@@ -53,6 +55,7 @@ class DuoAdminAPI:
         self._integration_key = integration_key
         self._secret_key = secret_key
         self.logger = logger
+        self.toggle_rate_limiting = True
 
     def add_user(self, params: dict) -> dict:
         return self.make_json_request(method="POST", path=USERS_ENDPOINT, params=params)
@@ -153,51 +156,60 @@ class DuoAdminAPI:
                 params=params,
                 headers=self.get_headers(method=method.upper(), host=self.hostname, path=path, params=params),
             )
-
-            if response.status_code == 400:
-                raise ApiException(
-                    preset=PluginException.Preset.BAD_REQUEST,
-                    status_code=response.status_code,
-                    data=response.text,
-                )
-            if response.status_code in [401, 403]:
-                raise ApiException(
-                    cause=Cause.INVALID_AUTH_DATA,
-                    assistance=Assistance.VERIFY_AUTH,
-                    status_code=response.status_code,
-                    data=response.text,
-                )
-            if response.status_code == 404:
-                raise ApiException(
-                    cause=Cause.NOT_FOUND,
-                    assistance=Assistance.VERIFY_INPUT,
-                    status_code=response.status_code,
-                    data=response.text,
-                )
-            if response.status_code == 429:
-                raise ApiException(
-                    preset=PluginException.Preset.RATE_LIMIT,
-                    status_code=response.status_code,
-                    data=response.text,
-                )
-            if 400 < response.status_code < 500:
-                raise ApiException(
-                    preset=PluginException.Preset.UNKNOWN,
-                    status_code=response.status_code,
-                    data=response.text,
-                )
-            if response.status_code >= 500:
-                raise ApiException(
-                    cause=Cause.SERVER_ERROR,
-                    assistance=Assistance.SERVER_ERROR,
-                    status_code=response.status_code,
-                    data=response.text,
-                )
+            self._handle_exceptions(response)
             if 200 <= response.status_code < 300:
                 return response
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except requests.exceptions.HTTPError as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+
+    def _handle_exceptions(self, response):
+        if response.status_code == 400:
+            raise ApiException(
+                preset=PluginException.Preset.BAD_REQUEST,
+                status_code=response.status_code,
+                data=response.text,
+            )
+        if response.status_code == 401:
+            raise ApiException(
+                cause=PluginException.causes[PluginException.Preset.API_KEY],
+                assistance=Assistance.VERIFY_AUTH,
+                status_code=response.status_code,
+                data=response.text,
+            )
+        if response.status_code == 403:
+            raise ApiException(
+                cause=PluginException.causes[PluginException.Preset.UNAUTHORIZED],
+                assistance=Assistance.VERIFY_AUTH,
+                status_code=response.status_code,
+                data=response.text,
+            )
+        if response.status_code == 404:
+            raise ApiException(
+                cause=Cause.NOT_FOUND,
+                assistance=Assistance.VERIFY_INPUT,
+                status_code=response.status_code,
+                data=response.text,
+            )
+        if response.status_code == 429:
+            raise ApiException(
+                preset=PluginException.Preset.RATE_LIMIT,
+                status_code=response.status_code,
+                data=response.text,
+            )
+        if 400 < response.status_code < 500:
+            raise ApiException(
+                preset=PluginException.Preset.UNKNOWN,
+                status_code=response.status_code,
+                data=response.text,
+            )
+        if response.status_code >= 500:
+            raise ApiException(
+                cause=Cause.SERVER_ERROR,
+                assistance=Assistance.SERVER_ERROR,
+                status_code=response.status_code,
+                data=response.text,
+            )
 
     def make_json_request(self, method: str, path: str, params: dict = {}) -> dict:
         try:

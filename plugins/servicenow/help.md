@@ -49,6 +49,464 @@ Example input:
 
 ### Actions
 
+#### Update Security Incident
+
+This action is used to update an existing security incident.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|additional_fields|object|None|False|JSON object containing the additional fields and values to update security incident|None|{"risk_score": 40, "risk_score_override": true, "parent_security_incident": "SIR0010010"}|
+|affected_user|string|None|False|The user ID, email or system ID of the user related to this security incident|None|jsmith|
+|assigned_to|string|None|False|The name, user ID, email or system id of the person primarily responsible for working this task|None|test_user|
+|assignment_group|string|None|False|The name or system id of the assignment group|None|Example Group|
+|caller|string|None|False|The user ID, email or system ID of the person requesting the work to be done|None|user@example.com|
+|category|string|None|False|The code of the security incident category|None|malware|
+|close_code|string|None|False|The code of the incident closure reason|None|Not resolved|
+|close_notes|string|None|False|Incident closure notes|None|Example notes|
+|cmdb_ci|string|None|False|The name or system ID of the configuration item|None|Example CI|
+|contact_type|string|None|False|The code of the security incident source|None|email|
+|description|string|None|False|Description of the security incident|None|Full description|
+|location|string|None|False|The name or system ID of the location|None|Example location|
+|priority|integer|None|False|The code of the priority in which an Incident needs to be resolved, based on impact and urgency|None|3|
+|short_description|string|None|False|Short description of the security incident|None|Example description|
+|state|integer|None|False|The code of the security incident state|None|18|
+|subcategory|string|None|False|The code of the security incident subcategory (available values depends on the `Category` field)|None|ransomware|
+|substate|integer|None|False|The code of the security incident substate|None|2|
+|sys_id|string|None|True|The system ID of the security incident to be updated|None|9de5069c5afe602b2ea0a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "additional_fields": {
+    "risk_score": 40,
+    "risk_score_override": true,
+    "parent_security_incident": "SIR0010010"
+  },
+  "affected_user": "jsmith",
+  "assigned_to": "test_user",
+  "assignment_group": "Example Group",
+  "caller": "user@example.com",
+  "category": "malware",
+  "close_code": "Not resolved",
+  "close_notes": "Example notes",
+  "cmdb_ci": "Example CI",
+  "contact_type": "email",
+  "description": "Full description",
+  "location": "Example location",
+  "priority": 3,
+  "short_description": "Example description",
+  "state": 18,
+  "subcategory": "ransomware",
+  "substate": 2,
+  "sys_id": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|number|string|False|Number of the security incident|SIR0010044|
+|system_id|string|False|System ID of the security incident|9de5069c5afe602b2ea0a04b66beb2c0|
+
+Example output:
+
+```
+{
+  "system_id": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "number": "SIR0010044"
+}
+```
+
+#### Create Security Incident
+
+This action is used to create a new security incident.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|additional_fields|object|None|False|JSON object containing the additional fields and values to create security incident|None|{"risk_score": 40, "risk_score_override": true, "parent_security_incident": "SIR0010010"}|
+|affected_user|string|None|False|The user ID, email or system ID of the user related to this security incident|None|jsmith|
+|assigned_to|string|None|False|The name, user ID, email or system id of the person primarily responsible for working this task|None|test_user|
+|assignment_group|string|None|False|The name or system id of the assignment group|None|Example Group|
+|caller|string|None|False|The user ID, email or system ID of the person requesting the work to be done|None|user@example.com|
+|category|string|None|False|The code of the security incident category|None|malware|
+|cmdb_ci|string|None|False|The name or system ID of the configuration item|None|Example CI|
+|contact_type|string|None|False|The code of the security incident source|None|email|
+|description|string|None|False|Description of the created security incident|None|Full description|
+|location|string|None|False|The name or system ID of the location|None|Example location|
+|priority|integer|None|False|The code of the priority in which an Incident needs to be resolved, based on impact and urgency|None|3|
+|short_description|string|None|True|Short description of the created security incident|None|Example description|
+|state|integer|None|False|The code of the security incident state|None|18|
+|subcategory|string|None|False|The code of the security incident subcategory (available values depends on the `Category` field)|None|ransomware|
+|substate|integer|None|False|The code of the security incident substate|None|2|
+
+Example input:
+
+```
+{
+  "additional_fields": {
+    "risk_score": 40,
+    "risk_score_override": true,
+    "parent_security_incident": "SIR0010010"
+  },
+  "affected_user": "jsmith",
+  "assigned_to": "test_user",
+  "assignment_group": "Example Group",
+  "caller": "user@example.com",
+  "category": "malware",
+  "cmdb_ci": "Example CI",
+  "contact_type": "email",
+  "description": "Full description",
+  "location": "Example location",
+  "priority": 3,
+  "short_description": "Example description",
+  "state": 18,
+  "subcategory": "ransomware",
+  "substate": 2
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|number|string|False|Number of the security incident|SIR0010044|
+|system_id|string|False|System ID of the security incident|9de5069c5afe602b2ea0a04b66beb2c0|
+
+Example output:
+
+```
+{
+  "system_id": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "number": "SIR0010044"
+}
+```
+
+#### Search Security Incident
+
+This action returns security incidents that match the search criteria.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|fields|string|None|False|A comma-separated list of fields to return in the response|None|number,sys_id|
+|limit|integer|None|False|Maximum number of records to return|None|10|
+|offset|integer|None|False|Starting record index for which to begin retrieving records|None|5|
+|query|string|None|False|An encoded query string used to filter the results|None|number=SIR0000001|
+
+Example input:
+
+```
+{
+  "fields": "number,sys_id",
+  "limit": 10,
+  "offset": 5,
+  "query": "number=SIR0000001"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|security_incidents|[]security_incident|False|Details of the matching security incidents|[]|
+
+Example output:
+
+```
+{
+  "security_incidents": [
+    {
+      "active": false,
+      "activity_due": "2023-07-28 10:18:55",
+      "affected_user": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "alert_id": "dca801f11b1cb5506bf1ed78b04bcb5f",
+      "alert_rule": "test",
+      "alert_sensor": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "assigned_to": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "assignment_group": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "business_criticality": 3,
+      "caller": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "category": "Phishing",
+      "close_code": -100,
+      "close_notes": "test close notes",
+      "closed_at": "2023-08-01 08:03:28",
+      "closed_by": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "cmdb_ci": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "contact_type": "phone",
+      "description": "example description",
+      "location": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "number": "SIR00000002",
+      "opened_at": "2023-07-28 10:18:55",
+      "opened_by": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "opened_for": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "priority": 3,
+      "risk_score": 38,
+      "risk_score_override": false,
+      "secure_notes": "\ufde0\ufde1\ufde256715c0aff1331007a6dffffffffff54\ufdcc\ufdcdCzXu70QS9L8TfvWt92rByQ==\ufdce\ufdcf",
+      "security_tags": "dca801f11b1cb5506bf1ed78b04bcb5f",
+      "short_description": "test",
+      "special_access_write": "dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g",
+      "state": 3,
+      "subcategory": "25",
+      "substate": 1,
+      "sys_created_by": "user",
+      "sys_created_on": "2023-07-28 10:18:55",
+      "sys_id": "g12345678",
+      "sys_updated_by": "user",
+      "sys_updated_on": "2023-08-01 08:03:32",
+      "watch_list": "dca801f11b1cb5506bf1ed78b04bcb5f",
+      "work_notes_list": "dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g"
+    },
+    {
+      "active": false,
+      "activity_due": "2023-07-28 10:18:55",
+      "affected_user": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "alert_id": "dca801f11b1cb5506bf1ed78b04bcb5f",
+      "alert_rule": "test",
+      "alert_sensor": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "assigned_to": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "assignment_group": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "business_criticality": 3,
+      "caller": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "category": "Phishing",
+      "close_code": -100,
+      "close_notes": "test close notes",
+      "closed_at": "2023-08-01 08:03:28",
+      "closed_by": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "cmdb_ci": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "contact_type": "phone",
+      "description": "example description",
+      "location": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "number": "SIR00000003",
+      "opened_at": "2023-07-28 10:18:55",
+      "opened_by": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "opened_for": {
+        "link": "example.com/1234",
+        "value": "1234"
+      },
+      "priority": 3,
+      "risk_score": 38,
+      "risk_score_override": false,
+      "secure_notes": "\ufde0\ufde1\ufde256715c0aff1331007a6dffffffffff54\ufdcc\ufdcdCzXu70QS9L8TfvWt92rByQ==\ufdce\ufdcf",
+      "security_tags": "dca801f11b1cb5506bf1ed78b04bcb5f",
+      "short_description": "test",
+      "special_access_write": "dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g",
+      "state": 3,
+      "subcategory": "25",
+      "substate": 1,
+      "sys_created_by": "user",
+      "sys_created_on": "2023-07-28 10:18:55",
+      "sys_id": "g123456789",
+      "sys_updated_by": "user",
+      "sys_updated_on": "2023-08-01 08:03:32",
+      "watch_list": "dca801f11b1cb5506bf1ed78b04bcb5f",
+      "work_notes_list": "dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g"
+    }
+  ]
+}
+
+```
+
+#### Get Security Incident
+
+This action retrieves a security incident by sys_id or number.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|sys_id|string|None|True|The unique system ID of the security incident|None|7dbc4d558bbe4c6cb635b73b5f4a2e27|
+
+Example input:
+
+```
+{
+  "sys_id": "7dbc4d558bbe4c6cb635b73b5f4a2e27"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|security_incident|security_incident|False|Details of the security incident|{}|
+
+Example output:
+
+```
+{
+  "security_incident": {
+    "active": false,
+    "activity_due": "2023-07-28 10:18:55",
+    "affected_user": {
+      "link": "example.com/1234",
+      "value": "1234"
+    },
+    "alert_id": "dca801f11b1cb5506bf1ed78b04bcb5f",
+    "alert_rule": "test",
+    "alert_sensor": {
+      "link": "example.com/1234",
+      "value": "1234"
+    },
+    "assigned_to": {
+      "link": "example.com/1234",
+      "value": "1234"
+    },
+    "assignment_group": {
+      "link": "example.com/1234",
+      "value": "1234"
+    },
+    "business_criticality": 3,
+    "caller": {
+      "link": "example.com/1234",
+      "value": "1234"
+    },
+    "category": "Phishing",
+    "close_code": -100,
+    "close_notes": "test close notes",
+    "closed_at": "2023-08-01 08:03:28",
+    "closed_by": {
+      "link": "example.com/1234",
+      "value": "1234"
+    },
+    "cmdb_ci": {
+      "link": "example.com/1234",
+      "value": "1234"
+    },
+    "contact_type": "phone",
+    "description": "example description",
+    "location": {
+      "link": "example.com/1234",
+      "value": "1234"
+    },
+    "number": "SIR00000001",
+    "opened_at": "2023-07-28 10:18:55",
+    "opened_by": {
+      "link": "example.com/1234",
+      "value": "1234"
+    },
+    "opened_for": {
+      "link": "example.com/1234",
+      "value": "1234"
+    },
+    "priority": 4,
+    "risk_score": 38,
+    "risk_score_override": false,
+    "secure_notes": "\ufde0\ufde1\ufde256715c0aff1331007a6dffffffffff54\ufdcc\ufdcdCzXu70QS9L8TfvWt92rByQ==\ufdce\ufdcf",
+    "security_tags": "dca801f11b1cb5506bf1ed78b04bcb5f",
+    "short_description": "test",
+    "special_access_write": "dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g",
+    "state": 3,
+    "subcategory": "25",
+    "substate": 1,
+    "sys_created_by": "user",
+    "sys_created_on": "2023-07-28 10:18:55",
+    "sys_id": "g123456",
+    "sys_updated_by": "user",
+    "sys_updated_on": "2023-08-01 08:03:32",
+    "watch_list": "dca801f11b1cb5506bf1ed78b04bcb5f",
+    "work_notes_list": "dca801f11b1cb5506bf1ed78b04bcb5f,dca801f11b1cb5506bf1ed78b04bcb5g"
+  }
+}
+
+```
+
+#### Delete Security Incident
+
+This action deletes a security incident by sys_id.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|sys_id|string|None|True|The unique system ID of the security incident to delete|None|7dbc4d558bbe4c6cb635b73b5f4a2e27|
+
+Example input:
+
+```
+{
+  "sys_id": "7dbc4d558bbe4c6cb635b73b5f4a2e27"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Whether the action was successful|True|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 #### Update Vulnerability
 
 This action is used to update the vulnerability by ID.
@@ -1131,7 +1589,90 @@ Example output:
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+#### attachment_file
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Content|string|False|File content encoded with base64|
+|Content Type|string|False|Content type|
+|File Name|string|False|File name|
+
+#### comments_worknotes
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Element|string|True|Either 'comments' or 'work_notes'|
+|Element ID|string|True|System ID of an incident|
+|Name|string|True|Type of record|
+|Created By|string|True|User who added the comment|
+|Creation date|string|True|Comment or work notes creation date|
+|System ID|string|True|System ID of comment or worknotes|
+|System Tags|string|True|System tags|
+|Value|string|True|Value of comment or worknotes|
+
+#### link_value
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Link|string|False|Link to the resource|
+|Value|string|False|Identifier of the resource|
+
+#### security_incident
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Active|boolean|False|Whether the security incident is active|
+|Activity Due|string|False|Date by which the Inactivity Monitor expects the task to be updated|
+|Affected User|link_value|False|The user related to this security incident|
+|Alert ID|string|False|The identifier of the alert|
+|Alert Rule|string|False|The rule of the alert|
+|Assigned To|link_value|False|Person primarily responsible for working this task|
+|Assignment Group|link_value|False|Group responsible for working this task|
+|Business Criticality|integer|False|The code of the business impact of this incident|
+|Business Impact|integer|False|The business impact of this incident|
+|Requested By|link_value|False|Person requesting the work to be done. Determines suggested Location if no Affected CI is defined|
+|Category|string|False|Category of the incident|
+|Change Request|link_value|False|The change request related to this security incident|
+|Close Code|integer|False|Code indicating why the incident is being closed|
+|Close Notes|string|False|Notes explaining why the incident is being closed|
+|Closed At|string|False|Time when the security incident was closed|
+|Closed By|link_value|False|The person who closed the security incident|
+|Configuration Item|link_value|False|Item or service affected|
+|Source|string|False|Source of the security incident|
+|Description|string|False|Description of the security incident|
+|Incident|link_value|False|The incident related to this security incident|
+|Location|link_value|False|Where the caller or service is located|
+|Number|string|False|Identification number of the security incident|
+|Opened At|string|False|Time when the security incident was opened|
+|Opened By|link_value|False|The person who opened the security incident|
+|Opened For|link_value|False|Person this request was opened for|
+|Parent|link_value|False|The parent of this security incident|
+|Parent Security Incident|link_value|False|The parent security incident to this security incident|
+|Priority|integer|False|Sequence in which the security incident needs to be resolved, based on impact and urgency|
+|Problem|link_value|False|The problem related to this security incident|
+|Risk Score|integer|False|Score of the risk|
+|Risk Score Override|boolean|False|When checked, risk score will not be updated automatically|
+|Secure Notes|string|False|Encrypted note of the security incident|
+|Security Tags|string|False|Security tags applied to this security incident|
+|Short Description|string|False|Short description of the security incident|
+|Special Access Write|string|False|Users in the 'Privileged access' list will be able to see the Security Incident, data related to it and edit all data fields on it|
+|State|integer|False|State of the security incident|
+|Subcategory|string|False|Subcategory of the security incident|
+|Substate|integer|False|Substate of the security incident|
+|System Created By|string|False|Person this security incident was created by|
+|System Created On|string|False|Time when the security incident was created|
+|System ID|string|False|The unique system ID of the security incident|
+|System Updated By|string|False|Person this security incident was updated by|
+|System Updated On|string|False|Time when the security incident was updated|
+|Watch List|string|False|List of users that are interested on the security incident|
+|Work Notes List|string|False|Users interested in work notes|
+
+#### updated_vulnerability
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Changed Fields|object|True|JSON object representing changed fields (map of field name to previous and current values)|
+|System ID|string|True|System ID of the vulnerability|
 
 ## Troubleshooting
 
@@ -1139,6 +1680,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 7.3.0 - Add new actions Create Security Incident, Update Security Incident, Delete Security Incident, Get Security Incident and Search Security Incident
 * 7.2.0 - Added new actions: Create Vulnerability, Get Vulnerability, Update Vulnerability, Delete Vulnerability | Added new trigger: Vulnerability Updated
 * 7.1.2 - Search Incident, Search Incident Attachment: Fix issue where the action were failing on bigger results. Update Incident: Ensure non updated fields are not reset during update.
 * 7.1.1 - Create Incident: Resolved issue when nothing was passed to `additional_fields` input field 
@@ -1169,8 +1711,9 @@ _This plugin does not contain any troubleshooting information._
 * 0.1.0 - Initial plugin
 
 # Links
+
 * [ServiceNow](https://www.servicenow.com/)
-* 
+
 ## References
 
 * [ServiceNow](https://www.servicenow.com/)

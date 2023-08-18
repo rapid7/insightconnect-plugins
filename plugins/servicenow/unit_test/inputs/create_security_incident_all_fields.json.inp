@@ -1,0 +1,26 @@
+{
+  "affected_user": "Example User",
+  "assigned_to": "test_user",
+  "assignment_group": "9e1d0444ffa33100158bfffffffffffd",
+  "caller": "euser",
+  "category": "malware",
+  "cmdb_ci": "847c2f8c1b62c110095485507e4bcb33",
+  "contact_type": "email",
+  "description": "full description",
+  "location": "450 West 14th Avenue, Denver,CO",
+  "priority": 3,
+  "short_description": "new incident",
+  "state": 18,
+  "subcategory": "ransomeware",
+  "substate": 1,
+  "additional_fields": {
+    "risk_score": 40,
+    "risk_score_override": true,
+    "business_criticality": 2,
+    "problem": "PRB0040006",
+    "parent": "INC0010500",
+    "parent_security_incident": "SIR0010010",
+    "incident": "INC0136531",
+    "change_request": "CHG0030001"
+  }
+}

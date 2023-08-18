@@ -1,9 +1,6 @@
-from hashlib import sha1
-
-
-class Event(object):
+class Event:
     # pylint: disable=redefined-builtin
-    def __init__(self, client_type: str, email: str, ip_address: str, time: str, type: str, version: str):
+    def __init__(self, client_type: str, email: str, ip_address: str, time: str, type: str, version: str) -> None:
         self.client_type = client_type
         self.email = email
         self.ip_address = ip_address
@@ -11,7 +8,7 @@ class Event(object):
         self.type = type
         self.version = version
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return (
             self.client_type == other.client_type
             and self.email == other.email
@@ -21,17 +18,11 @@ class Event(object):
             and self.version == other.version
         )
 
-    def __gt__(self, other):
+    def __gt__(self, other) -> bool:
         return self.time > other.time
 
-    def __lt__(self, other):
+    def __lt__(self, other) -> bool:
         return self.time < other.time
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return self.time
-
-    def sha1(self):
-        hash_ = sha1()  # nosec B303
-        for key, value in self.__dict__.items():
-            hash_.update(f"{key}{value}".encode("utf-8"))
-        return hash_.hexdigest()

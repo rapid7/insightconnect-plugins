@@ -47,8 +47,8 @@ class TestCreateRecord(TestCase):
             [
                 "invalid_object_name",
                 Util.read_file_to_dict("inputs/create_record_invalid_object_name.json.inp"),
-                "No results found.",
-                "Please provide valid inputs and try again.",
+                PluginException.causes[PluginException.Preset.NOT_FOUND],
+                PluginException.assistances[PluginException.Preset.NOT_FOUND],
             ],
             [
                 "duplicated_resource",

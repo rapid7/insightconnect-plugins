@@ -36,13 +36,13 @@ class TestAssignUserToAppSso(TestCase):
             [
                 "app_not_found",
                 Util.read_file_to_dict("inputs/assign_user_to_app_sso_invalid_app_id.json.inp"),
-                "Resource not found.",
+                "Invalid or unreachable endpoint provided.",
                 "Verify your input is correct and not malformed and try again. If the issue persists, please contact support.",
             ],
             [
                 "user_not_found",
                 Util.read_file_to_dict("inputs/assign_user_to_app_sso_invalid_user_id.json.inp"),
-                "Resource not found.",
+                "Invalid or unreachable endpoint provided.",
                 "Verify your input is correct and not malformed and try again. If the issue persists, please contact support.",
             ],
         ]

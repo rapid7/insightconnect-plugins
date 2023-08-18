@@ -20,6 +20,8 @@ def rate_limiting(max_tries: int):
     def _decorate(func):
         def _wrapper(*args, **kwargs):
             self = args[0]
+            if not self.enable_rate_limiting:
+                return func(*args, **kwargs)
             retry = True
             counter, delay = 0, 0
             while retry and counter < max_tries:
@@ -51,6 +53,7 @@ class SalesforceAPI:
         self._username = username
         self._password = password
         self._security_token = security_token
+        self.enable_rate_limiting = True
 
     def simple_search(self, text: str) -> list:
         return self._make_json_request("GET", PARAMETERIZED_SEARCH_ENDPOINT, params={"q": text}).get(
@@ -144,9 +147,7 @@ class SalesforceAPI:
         if 400 <= response.status_code < 500:
             self.logger.error(f"SalesforceAPI: {response.content.decode()}")
             raise ApiException(
-                cause="Authentication failure.",
-                assistance="Check the credentials supplied in the connection. If the issue persists please contact "
-                "support.",
+                preset=PluginException.Preset.INVALID_CREDENTIALS,
                 status_code=response.status_code,
             )
 
@@ -187,8 +188,7 @@ class SalesforceAPI:
                 )
             elif response.status_code == 401:
                 raise ApiException(
-                    cause="Invalid API credentials provided.",
-                    assistance="Verify your API credentials configured in your connection are correct.",
+                    preset=PluginException.Preset.INVALID_CREDENTIALS,
                     status_code=response.status_code,
                     data=response.text,
                 )
@@ -200,8 +200,7 @@ class SalesforceAPI:
                 )
             elif response.status_code == 404:
                 raise ApiException(
-                    cause="No results found.",
-                    assistance="Please provide valid inputs and try again.",
+                    preset=PluginException.Preset.NOT_FOUND,
                     status_code=response.status_code,
                     data=response.text,
                 )
