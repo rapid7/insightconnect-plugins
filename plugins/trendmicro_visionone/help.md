@@ -634,16 +634,20 @@ This action retrieves information about a specific endpoint.
 
 | Name   | Type |Default|Required|Description|Enum|Example|
 |--------|------|-----|--------|-----------|----|-------|
-|endpoints|[]string|None|True|Array of endpoints to query by their hostname, macAddress, agentGuid or IP, formated as bracket array separated by comma|None|127.127.127.127|
-|query_op|string|or|True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
+|endpoints|[]string|None|True|Array of endpoints to query by their hostname, macAddress, agentGuid or IP, formated as bracket array separated by comma|None|[]|
+|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
 
 Example input:
 
 ```
 {
- g "endpoints": ["127.127.127.127","1.2.3.4"]
+  "endpoints": [
+    "127.127.127.127",
+    "1.2.3.4"
+  ],
   "query_op": " or "
 }
+
 ```
 
 ##### Output
