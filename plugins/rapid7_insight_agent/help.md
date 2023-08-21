@@ -172,8 +172,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|completed|[]string|False|List of successfully quarantined hosts|['abcdef123']|
-|failed|[]quarantine_multiple_error|False|List of unsuccessfully quarantined hosts|[{'hostname': 'abcdef123', 'error': 'Hostname could not be found'}]|
+|completed|[]string|False|List of successfully quarantined hosts|["abcdef123"]|
+|failed|[]quarantine_multiple_error|False|List of unsuccessfully quarantined hosts|[{"hostname": "abcdef123", "error": "Hostname could not be found"}]|
   
 Example output:
 
@@ -270,7 +270,7 @@ Example output:
 *There is no troubleshooting for this plugin.*
 
 # Version History
-  
+
 * 2.0.1 - Update `Connection Test` to identify if `Region` is incorrect  
 * 2.0.0 - Update action `Quarantine Multiple` outputs to Completed and Failed, removed All Operations Successful, replaced output Agent IDs with Hostname  
 * 1.2.0 - New action: `Quarantine Multiple`  

@@ -8,7 +8,6 @@ WORKDIR /python/src
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD ./requirements.txt /python/src/requirements.txt
 
-
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
 ADD . /python/src
