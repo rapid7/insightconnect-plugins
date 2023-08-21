@@ -1,31 +1,31 @@
 {
-	"spec": "0c33ac3328ad7fd92ceec8affe6c7cbb",
-	"manifest": "452d4f9bca09cd62318ae49e5cb2956e",
-	"setup": "1648850dd22de323608050c2ccb234a2",
+	"spec": "e627c2a9b9ff6a0544e3e05ff5f67033",
+	"manifest": "d51e3705c64c26883affa947534725b0",
+	"setup": "110f7c6fbc385b0cccfdf5787cffb631",
 	"schemas": [
 		{
 			"identifier": "domainLookup/schema.py",
-			"hash": "10843d71ab224b6808fd66ae51a2c878"
+			"hash": "9bbbc77bd0b30d70598f1254c4b67316"
 		},
 		{
 			"identifier": "emailLookup/schema.py",
-			"hash": "9b03a987c354344c41bc7577cc68c340"
+			"hash": "b490c1eb87272f74cce912c20c69e1e6"
 		},
 		{
 			"identifier": "ipLookup/schema.py",
-			"hash": "925d975280bcb53e04b3757a3982ac5c"
+			"hash": "211e91f194dcd0fc24eeda1f781288d7"
 		},
 		{
 			"identifier": "phoneLookup/schema.py",
-			"hash": "4e67b379f80bdf256ae7d7c3955aea03"
+			"hash": "feb09506ef26131919fd30d8d18bb609"
 		},
 		{
 			"identifier": "urlLookup/schema.py",
-			"hash": "f4babcb040a9ffaa3a7821d94137aa8d"
+			"hash": "b2611ac128b3da185b895fd34308422b"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "9091911b5202f9e3c192298ef8934162"
+			"hash": "b3c5de602df51239d6b8c04f8901dbc0"
 		}
 	]
 }

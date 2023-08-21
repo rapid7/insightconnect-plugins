@@ -114,8 +114,8 @@ actions:
         required: false
         example : 'Delhi'
       zip_code:
-        title: Zip Code
-        description: Zip or Postal code of the IP Address if available or NA if unknown
+        title: ZIP Code
+        description: ZIP or Postal code of the IP Address if available or NA if unknown
         type: string
         required: false
         example : '505001'
@@ -236,7 +236,7 @@ actions:
         description: Email address for which information is desired
         type: string
         required: true
-        example: 'abc@gmail.com'
+        example: 'user@example.com'
       abuse_strictness:
         title: Abuse Strictness
         description: Set the strictness level for machine learning pattern recognition of abusive email addresses with the recent_abuse data point
@@ -289,7 +289,7 @@ actions:
         example: 1
       overall_score:
         title: Overall Score
-        description: Overall email validity score Range is 0 - 4 Scores above 1 can be associated with a valid email 0 = invalid email address 1 = dns valid, unreachable mail server 2 = dns valid, temporary mail rejection error 3 = dns valid, accepts all mail 4 = dns valid, verified email exists
+        description: Overall email validity score Range is 0 - 4 Scores above 1 can be associated with a valid email 0 = invalid email address 1 = DNS valid, unreachable mail server 2 = DNS valid, temporary mail rejection error 3 = DNS valid, accepts all mail 4 = DNS valid, verified email exists
         type: integer
         required: false
         example: 0
@@ -388,7 +388,7 @@ actions:
         description: Sanitized email address with all aliases and masking removed, such as multiple periods for Gmail
         type: string
         required: false
-        example: 'abc@gmail.com'
+        example: 'user@example.com'
       domain_age:
         title: Domain Age
         description: A human description of when this domain was registered
@@ -746,8 +746,8 @@ actions:
         required: false
         example: 'Delhi'
       zip_code:
-        title: Zip Code
-        description: Zip or Postal code of the phone number if available or NA if unknown
+        title: ZIP Code
+        description: ZIP or Postal code of the phone number if available or NA if unknown
         type: string
         required: false
         example: '500081'
