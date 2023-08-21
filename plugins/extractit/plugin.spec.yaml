@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: extractit
 title: ExtractIt
 description: The ExtractIt plugin has a collection of actions used to extract various information from text. These include URLs, domains, emails, IPs, and more
-version: 3.0.6
+version: 3.0.7
 vendor: rapid7
 support: rapid7
 supported_versions: ["2022-10-19"]
@@ -21,6 +21,10 @@ hub_tags:
   use_cases: [threat_detection_and_response, data_utility]
   keywords: [extraction, domains, email, url, ip_address, ioc, cloud_enabled]
   features: []
+sdk:
+  type: full
+  version: 5
+  user: nobody
 types:
   hashes:
     md5_hashes:
@@ -135,6 +139,7 @@ actions:
         description: List of extracted URLs
         type: '[]string'
         required: false
+        example: '["https://example.com"]'
   ip_extractor:
     title: IP Extractor
     description: Extracts all IPv4 and IPv6 addresses from a string or file
@@ -157,6 +162,7 @@ actions:
         description: List of extracted IP Addresses
         type: '[]string'
         required: false
+        example: '["198.51.100.100", "2001:db8:8:4::2"]'
   email_extractor:
     title: Email Extractor
     description: Extracts all email addresses from a string or file
@@ -179,6 +185,7 @@ actions:
         description: List of extracted Email Addresses
         type: '[]string'
         required: false
+        example: '["user@example.com"]'
   mac_extractor:
     title: MAC Extractor
     description: Extracts all MAC addresses from a string or file
@@ -201,6 +208,7 @@ actions:
         description: List of extracted MAC Addresses
         type: '[]string'
         required: false
+        example: '["00:14:22:01:23:45"]'
   domain_extractor:
     title: Domain Extractor
     description: Extracts all domain names from a string or file
@@ -229,6 +237,7 @@ actions:
         description: List of extracted Domain names
         type: '[]string'
         required: false
+        example: '["example.com"]'
   filepath_extractor:
     title: File Path Extractor
     description: Extracts all file paths from a string or file
@@ -251,6 +260,7 @@ actions:
         description: List of extracted file paths
         type: '[]string'
         required: false
+        example: '["/tmp/image.jpg"]'
   date_extractor:
     title: Date Extractor
     description: Extracts all dates from a string or file
@@ -320,6 +330,7 @@ actions:
         description: List of extracted dates
         type: '[]date'
         required: false
+        example: '["1982-12-05T00:00:00Z"]'
   ioc_extractor:
     title: IOC Extractor
     description: Extracts all Indicators of Compromise from a string or file
@@ -342,6 +353,7 @@ actions:
         description: List of extracted Indicators of Compromise
         type: '[]string'
         required: false
+        example: '["example.com", "user@example.com", "198.51.100.100", "44d88612fea8a8f36de82e1278abb02f"]'
   md5_extractor:
     title: MD5 Hash Extractor
     description: Extracts all MD5 Hashes from a string or file
@@ -364,6 +376,7 @@ actions:
         description: List of extracted MD5 Hashes
         type: '[]string'
         required: false
+        example: '["44d88612fea8a8f36de82e1278abb02f"]'
   sha1_extractor:
     title: SHA1 Hash Extractor
     description: Extracts all SHA1 Hashes from a string or file
@@ -386,6 +399,7 @@ actions:
         description: List of extracted SHA1 Hashes
         type: '[]string'
         required: false
+        example: '["3395856ce81f2b7382dee72602f798b642f14140"]'
   sha256_extractor:
     title: SHA256 Hash Extractor
     description: Extracts all SHA256 Hashes from a string or file
@@ -408,6 +422,7 @@ actions:
         description: List of extracted SHA256 Hashes
         type: '[]string'
         required: false
+        example: '["275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"]'
   sha512_extractor:
     title: SHA512 Hash Extractor
     description: Extracts all SHA512 Hashes from a string or file
@@ -430,6 +445,7 @@ actions:
         description: List of extracted SHA512 Hashes
         type: '[]string'
         required: false
+        example: '["cc805d5fab1fd71a4ab352a9c533e65fb2d5b885518f4e565e68847223b8e6b85cb48f3afad842726d99239c9e36505c64b0dc9a061d9e507d833277ada336ab"]'
   cve_extractor:
     title: CVE Extractor
     description: Extracts all CVEs from a string or file
@@ -452,6 +468,7 @@ actions:
         description: List of extracted CVEs
         type: '[]string'
         required: false
+        example: '["CVE-1234-1234567"]'
   uuid_extractor:
     title: UUID Extractor
     description: Extracts all UUIDs from a string or file
@@ -474,6 +491,7 @@ actions:
         description: List of extracted UUIDs
         type: '[]string'
         required: false
+        example: '["123e4567-e12b-34c3-a456-426789124000"]'
   extract_all:
     title: Extract All
     description: Extracts all UUIDs, CVEs, dates, domains, emails, filepaths, IOCs, IPs, MACs, MD5 hashes, SHA1 hashes, SHA256 hashes, SHA 512 hashes and URLs from a string or file
@@ -543,3 +561,4 @@ actions:
         description: List of extracted indicators
         type: indicators
         required: false
+        example: '{"indicators": {"cves":["CVE-1234-1234567"],"dates":["2312-12-12T00:00:00Z"],"email_addresses":["user@example.com"],"filepaths":["/24"],"mac_addresses":[],"hashes":{"md5_hashes":[],"sha1_hashes":["3395856ce81f2b7382dee72602f798b642f14140"],"sha256_hashes":["275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"],"sha512_hashes":[]},"ip_addresses":{"ipv4_addresses":["198.51.100.0","1.1.1.1"],"ipv6_addresses":[]},"urls":[],"uuids":["123e4567-e12b-34c3-a456-426789124000"],"domains":["example.com"]}}'

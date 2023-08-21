@@ -23,6 +23,18 @@
       ]
     ],
     [
+      "from_string",
+      "this is my test http://192.168.0.1/index.html and my test https://192.168.0.2/index.html example http://example.com/test.html without https://example.com/test2.html",
+      null,
+      true,
+      [
+        "http://192.168.0.1/index.html",
+        "https://192.168.0.2/index.html",
+        "http://example.com/test.html",
+        "https://example.com/test2.html"
+      ]
+    ],
+    [
       "from_file",
       null,
       "dGVzdCBodHRwOi8vdXNlcmlkOnBhc3N3b3JkQGV4YW1wbGUuY29tOjgwODAvIGh0dHA6Ly93d3cuZXhhbXBsZS5jb20vd3BzdHlsZS8/cD0zNjQgaHR0cDovL3d3dy5leGFtcGxlLmNvbSBodHRwOi8v5L6L5a2QLua1i+ivlSBodHRwOi8vZXhhbXBsZS5jb20vYXV0aC8/PVVzZXJJRCZhbXA7dXNlcmlkPXVzZXJAZXhhbXBsZS5jb20gd3d3LmV4YW1wbGUuY29tL2F3ZGF3ZC8gd3d3LmV4YW1wbGUuY29tIGV4YW1wbGUuY29t",
@@ -73,14 +85,18 @@
         "http://userid@example8.com:8080/",
         "http://userid:password@example9.com",
         "http://userid:password@example0.com/",
+        "http://142.42.1.1/",
+        "http://142.42.1.2:8080/",
         "http://foo1.com/blah_(test)#cite-1",
         "http://foo2.com/blah_(test)_blah#cite-1",
         "http://foo3.com/unicode_(",
         "http://foo4.com/(something)?after=parens",
         "http://code.test2.com/events/#&product=browser",
+        "http://j.mp",
         "http://foo-2.bar/?q=Test%20URL-encoded%20stuff",
         "http://1234.net",
         "http://a.b-c.de",
+        "http://223.255.255.254",
         "https://foo-bar.example.com/",
         "http://test.com/auth/?=UserID&amp;userid=user@example.com",
         "https://urldefense.com/v3/__https:/adclick.g.doubleclick.net/pcs/click?xai=AKAOjsubIrdpBrIB6JQ4RQQPz9hzgxn5m9sIwZYlpBJI5tQUXQvgevzMkyn19WvrCJFzhUsBU_KmEaoqh7BILzD2y0Ax9pQ0u6OBq5hyavC8-QInr1TYHj5B0GJ80UsqMbErrdYt3f0xY7jK-0P4&sig=Cg0ArKJSzHryoFf6mU8e&fbs_aeid=*gw_fbsaeid*&urlfix=1&nx=74&ny=69&dim=160x600&bg=!-fql-sDNAAY6sG-_OrA7ACkAdvg8Wuf4Gj-lFr3CqVG3T2hPPNp4W6JmRGiAwtPFlGvQnMgTHUGLbQ8ABB4OHBxoAQeZAqBmiebtQCl76P_nI0sCRKmQdrCSEC5GzMJI1SnrbgxBd-SoxlbtYK08LXpubcnY83odzpxxdnCyaT-1-JMKFeBfy09FLVb6_p9iS-GVSId5PmdNI7P9RME8CuQthYsjafFja2nOTj9GUsEm2qyni6cL2klyhD7hP69kkPf8mN9XUoYo7_oCfm8aViXlmESolYmJUwRYi1Duj1YVbCrVrn05nNWlQCrjg-S5kKedQo8KAN4koCHNPqqOYszBhHBPa9aMGoLMZLlIaQeO7OtfH_0h7R1HMS6tV7siGOzaxF2Qk4fzauB7hZJCF0Ik1NLVYrHD7KVlbYca33FFTqTrndgc1MJ4FaUb81OA-JY4Paz7KYtKX3U_qdEdGCMmPt5YoudV7aW48-XCRudcNJh3fO69Lf2KQnhDvd_FfkpFSfTJE2jd1G104HdwCI_p2GeKW9M-uZUVQLVsx4p-d1jdFYOG7J5Chou01ZhTMEgTWuIM0aoHspj05NixFmIh8EvbrTzz3Z897N1OEJFi86HHlkDHuGfurDy1TRAmKeEdhthQa5QuBud8S3mxsqxIIl_aXtI98BdRQbuY59kRe275MXjLmLfTt_qlT6kSYauPnVQvL_xpR6kkhztmd0sTvTIht2N13DQX066FCjUX8_Vtihw04Jb3UNo8cam4jVFA2jsCY8uYp1nwEjsLJaaNbCV_kr-XwMjzHm3r_x6IEcYcZB9kQjdpFcgBurM_sRR1w3_6z5cA2X08MQ2_IrawnOnbNi6gsf6SGMax3aO0solxPRB7zdgPwZ5MZrFw8TKzNl-zcM0xIy5a0Muus5boXut4ejQLwDMKdLTB0lKU3nox4KC8x6XqRfWZ0IvTwp8JNNZ9wp797WUkSwqIjzTv4WIP8_w&adurl=http*3a*2f*2flittlepopcorn.jp*2f*SnVhbi5kZWxhY2FsbGVAYW1lci5taHBzLmNvbQ==__;W10lJSUlIw!!OMpWhA!IsXSqEMqaYkoSsxcS5riQDQLhAKV1Z7E_joGFgI7kTFJu6o6xE2jttK7bvmpiApfbNIpEw$"
@@ -106,14 +122,18 @@
         "http://userid@example8.com:8080/",
         "http://userid:password@example9.com",
         "http://userid:password@example0.com/",
+        "http://142.42.1.1/",
+        "http://142.42.1.2:8080/",
         "http://foo1.com/blah_(test)#cite-1",
         "http://foo2.com/blah_(test)_blah#cite-1",
         "http://foo3.com/unicode_(",
         "http://foo4.com/(something)?after=parens",
         "http://code.test2.com/events/#&product=browser",
+        "http://j.mp",
         "http://foo-2.bar/?q=Test%20URL-encoded%20stuff",
         "http://1234.net",
         "http://a.b-c.de",
+        "http://223.255.255.254",
         "https://foo-bar.example.com/",
         "http://test.com/auth/?=UserID&amp;userid=user@example.com"
       ]

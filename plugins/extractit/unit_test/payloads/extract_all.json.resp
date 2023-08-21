@@ -591,7 +591,6 @@
           "1982-12-05T00:00:00Z"
         ],
         "domains": [
-          "vnd.oasis.opendocument.text",
           "example2.com",
           "www.example1.com",
           "example-5.com",
@@ -623,9 +622,6 @@
           "example_user-1.test@example.example.example.example.com"
         ],
         "filepaths": [
-          "/vnd.oasis.opendocument.text",
-          "/6.4.7.2$Linux_X86_64",
-          "/40$Build-2",
           "/tmp/script"
         ],
         "hashes": {
@@ -647,7 +643,6 @@
         },
         "ip_addresses": {
           "ipv4_addresses": [
-            "6.4.7.2",
             "142.42.1.1",
             "223.255.255.254",
             "0.0.0.0",
