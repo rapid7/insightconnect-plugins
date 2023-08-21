@@ -5,7 +5,7 @@ import requests
 
 from icon_rapid7_insight_agent.util.graphql_api import agent_typer
 from icon_rapid7_insight_agent.util.graphql_api.region_map import region_map
-from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 
 
 class ApiConnection:
@@ -19,6 +19,7 @@ class ApiConnection:
     def __init__(self, api_key: str, region_string: str, logger: logging.Logger) -> None:
 
         self.api_key = api_key
+        self.region = region_string
         self.logger = logger
         self._setup(region_string)
 
@@ -154,10 +155,18 @@ class ApiConnection:
 
     def connection_test(self) -> bool:
         # Return the first org to verify the connection works
-        graph_ql_payload = {"query": "{ organizations(first: 1) { edges { node { id } } totalCount } }"}
+        graph_ql_payload = {"query": "{ organizations(first: 1) { edges {node { id name } } totalCount } }"}
 
         # If no exceptions are thrown, we have a valid connection
-        self._post_payload(graph_ql_payload)
+        result = self._post_payload(graph_ql_payload)
+        orgs = result.get("data", {}).get("organizations", {}).get("edges", [])
+        if len(orgs) == 0:
+            raise ConnectionTestException(data="No organizations found")
+        if orgs[0].get("node", {}).get("name") is None:
+            raise ConnectionTestException(
+                data=f"Org ID: ********-****-****-****-*******{self.org_key[-5:]} found but "
+                f"does not belong to region {self.region}"
+            )
         return True
 
     #################
@@ -217,7 +226,7 @@ class ApiConnection:
         except Exception:
             raise PluginException(
                 cause="Error connecting to the Insight Agent API.",
-                assistance="Please check your Organization ID and API key.\n",
+                assistance="Please check your Region and API key.\n",
                 data=result.text,
             )
 
