@@ -4,7 +4,7 @@ from unittest.mock import MagicMock
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_trendmicro_visionone.actions import AddToBlockList
-from mock import mock_connection, mock_params
+from .tmv1_mock import mock_connection, mock_params
 
 
 class TestAddToBlockList(TestCase):
@@ -28,6 +28,8 @@ class TestAddToBlockList(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_add_to_block_list_failure(self):
-        self.action.connection.client.add_to_block_list = MagicMock(side_effect=PluginException)
+        self.action.connection.client.add_to_block_list = MagicMock(
+            side_effect=PluginException
+        )
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

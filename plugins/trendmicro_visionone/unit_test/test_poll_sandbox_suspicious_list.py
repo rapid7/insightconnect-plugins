@@ -4,7 +4,7 @@ from unittest.mock import patch
 from timeout_decorator import timeout_decorator
 
 from icon_trendmicro_visionone.triggers import PollSandboxSuspiciousList
-from mock import mock_connection, mock_params
+from .tmv1_mock import mock_connection, mock_params
 
 
 class TestPollSandboxSuspiciousList(TestCase):
