@@ -19,17 +19,14 @@ class Html5(insightconnect_plugin_runtime.Action):
         tag_parser = "(?i)<\/?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)\/?>"  # noqa: W605
         tags = re.findall(tag_parser, params.get(Input.DOC))
 
-        try:
-            if not tags:
-                raise Exception
-        except Exception:
+        if not tags:
             raise PluginException(cause="Run: Invalid input.", assistance="Input must be of type HTML.")
 
         try:
             output = pypandoc.convert_text(params.get(Input.DOC), "html", format="md")
             new_output = pypandoc.convert(output, "html5", format="md")
         except RuntimeError as error:
-            raise PluginException(cause="Pypandoc Runtime Error: Invalid input format",
+            raise PluginException(cause="Pypandoc Runtime Error: ",
                                   assistance="Check stack trace log", data=error)
 
         file_ = base64.b64encode(new_output.encode("utf-8")).decode()

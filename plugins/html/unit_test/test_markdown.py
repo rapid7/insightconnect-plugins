@@ -1,22 +1,53 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
-
 from unittest import TestCase
-from icon_html.connection.connection import Connection
 from icon_html.actions.markdown import Markdown
-import json
-import logging
+from insightconnect_plugin_runtime.exceptions import PluginException
+
+
+sys.path.append(os.path.abspath('../'))
 
 
 class TestMarkdown(TestCase):
-    def test_markdown(self):
-        """
-        DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
 
-        about to implement
+      def test_markdown(self):
 
-        TODO: Implement test cases here
-        """
+            params = {"doc": "<!DOCTYPE html><html><body>Rapid7 InsightConnect<p>Convert HTML to Markdown</p></body></html>"}
 
-        self.fail("Unimplemented Test Case")
+            test_action = Markdown()
+            result = test_action.run(params)
+
+            self.assertEqual(
+              result,
+              {
+                  "markdown_contents": "Rapid7 InsightConnect\n\nConvert HTML to Markdown\n",
+                  "markdown_file": "UmFwaWQ3IEluc2lnaHRDb25uZWN0CgpDb252ZXJ0IEhUTUwgdG8gTWFya2Rvd24K"
+              }
+            )
+
+      def test_html_with_header_tags(self):
+
+        params = {"doc": "<!DOCTYPE html><html><body><h1>Rapid7 InsightConnect</h1><p>Convert HTML to Markdown</p></body></html>"}
+
+        test_action = Markdown()
+        result = test_action.run(params)
+
+        self.assertEqual(
+              result['markdown_contents'],
+              "Rapid7 InsightConnect\n=====================\n\nConvert HTML to Markdown\n"
+        )
+
+        self.assertEqual(
+            result['markdown_file'],
+            "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cj09PT09PT09PT09PT09PT09PT09PQoKQ29udmVydCBIVE1MIHRvIE1hcmtkb3duCg=="
+        )
+
+      def test_action_empty_string(self):
+
+        params = {"doc": " "}
+
+        test_action = Markdown()
+
+        with self.assertRaises(PluginException) as context:
+            test_action.run(params)
+        self.assertEqual(context.exception.cause, "Run: Invalid input.")

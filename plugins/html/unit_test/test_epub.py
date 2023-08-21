@@ -3,18 +3,28 @@ import os
 sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
-from icon_html.connection.connection import Connection
+from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_html.actions.epub import Epub
-import json
-import logging
 
 
 class TestEpub(TestCase):
     def test_epub(self):
-        """
-        DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
 
-        TODO: Implement test cases here
-        """
+        params = {"doc": "<!DOCTYPE html><html><body><h1>Rapid7 InsightConnect</h1><p>Convert HTML to EPUB</p></body></html>"}
 
-        self.fail("Unimplemented Test Case")
+        test_action = Epub()
+        result = test_action.run(params)
+
+        self.assertEqual(
+            result['epub'][:10],
+              "UEsDBBQAAg"
+        )
+
+    def test_action_empty_string(self):
+        params = {"doc": " "}
+
+        test_action = Epub()
+
+        with self.assertRaises(PluginException) as context:
+            test_action.run(params)
+        self.assertEqual(context.exception.cause, "Run: Invalid input.")

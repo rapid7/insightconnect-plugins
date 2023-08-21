@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 import requests
-from .schema import ValidateOutput, ValidateInput
+from .schema import ValidateOutput, ValidateInput, Input, Output
 
 
 class Validate(insightconnect_plugin_runtime.Action):
@@ -17,14 +17,14 @@ class Validate(insightconnect_plugin_runtime.Action):
 
         headers = {"Content-Type": "text/html; charset=utf-8"}
         api_call = "https://validator.w3.org/nu/?out=json"
-        html_data = params.get("html_contents").encode()
+        html_data = params.get(Input.HTML_CONTENTS).encode()
         try:
             response = requests.post(api_call, headers=headers, data=html_data)
             msgs = response.json()["messages"]
             if len(msgs) == 0:
                 self.logger.info("Run: No response from web service, can't determine validity")
-                return {"validated": False}
+                return {Output.VALIDATED: False}
             status = msgs[0]["type"]
-            return {"validated": (False if status == "error" else True)}
+            return {Output.VALIDATED: (False if status == "error" else True)}
         except requests.exceptions.RequestException:
             return {"status": "Error"}

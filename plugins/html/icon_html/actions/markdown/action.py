@@ -18,16 +18,14 @@ class Markdown(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         tag_parser = "(?i)<\/?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)\/?>"  # noqa: W605
         tags = re.findall(tag_parser, params.get(Input.DOC))
-        try:
-            if not tags:
-                raise Exception
-        except Exception:
+
+        if not tags:
             raise PluginException(cause="Run: Invalid input.", assistance="Input must be of type HTML.")
 
         try:
             output = pypandoc.convert_text(params.get(Input.DOC), "md", format="html")
         except RuntimeError as error:
-            raise PluginException(cause="Pypandoc Runtime Error: Invalid input format",
+            raise PluginException(cause="Pypandoc Runtime Error: ",
                                   assistance="Check stack trace log", data=error)
         f = base64.b64encode(output.encode("ascii")).decode()
         return {Output.MARKDOWN_CONTENTS: output, Output.MARKDOWN_FILE: f}

@@ -18,16 +18,13 @@ class Pdf(insightconnect_plugin_runtime.Action):
         tag_parser = "(?i)<\/?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)\/?>"  # noqa: W605
         tags = re.findall(tag_parser, params.get(Input.DOC))
 
-        try:
-            if not tags:
-                raise Exception
-        except Exception:
+        if not tags:
             raise PluginException(cause="Run: Invalid input.", assistance="Input must be of type HTML.")
 
         try:
-            pypandoc.convert(params.get(Input.DOC), Output.PDF, outputfile=temp_file, format="html")
+            pypandoc.convert(params.get(Input.DOC), "pdf", outputfile=temp_file, format="html")
         except RuntimeError as error:
-            raise PluginException(cause="Pypandoc Runtime Error: Invalid input format",
+            raise PluginException(cause="Pypandoc Runtime Error: ",
                                   assistance="Check stack trace log", data=error)
         with open(temp_file, "rb") as output:
             # Reading the output and sending it in base64

@@ -3,18 +3,28 @@ import os
 sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
-from icon_html.connection.connection import Connection
+from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_html.actions.pdf import Pdf
-import json
-import logging
 
 
 class TestPdf(TestCase):
     def test_pdf(self):
-        """
-        DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
 
-        TODO: Implement test cases here
-        """
+        params = {"doc": "<!DOCTYPE html><html><body><h1>Rapid7 InsightConnect</h1><p>Convert HTML to PDF</p></body></html>"}
 
-        self.fail("Unimplemented Test Case")
+        test_action = Pdf()
+        result = test_action.run(params)
+
+        self.assertEqual(
+            result['pdf'][:15],
+                 "JVBERi0xLjUKJdDUxdgK"
+        )
+
+    def test_action_empty_string(self):
+        params = {"doc": " "}
+
+        test_action = Pdf()
+
+        with self.assertRaises(PluginException) as context:
+            test_action.run(params)
+        self.assertEqual(context.exception.cause, "Run: Invalid input.")
