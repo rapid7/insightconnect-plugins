@@ -1,0 +1,31 @@
+{
+	"spec": "0c33ac3328ad7fd92ceec8affe6c7cbb",
+	"manifest": "452d4f9bca09cd62318ae49e5cb2956e",
+	"setup": "1648850dd22de323608050c2ccb234a2",
+	"schemas": [
+		{
+			"identifier": "domainLookup/schema.py",
+			"hash": "10843d71ab224b6808fd66ae51a2c878"
+		},
+		{
+			"identifier": "emailLookup/schema.py",
+			"hash": "9b03a987c354344c41bc7577cc68c340"
+		},
+		{
+			"identifier": "ipLookup/schema.py",
+			"hash": "925d975280bcb53e04b3757a3982ac5c"
+		},
+		{
+			"identifier": "phoneLookup/schema.py",
+			"hash": "4e67b379f80bdf256ae7d7c3955aea03"
+		},
+		{
+			"identifier": "urlLookup/schema.py",
+			"hash": "f4babcb040a9ffaa3a7821d94137aa8d"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "9091911b5202f9e3c192298ef8934162"
+		}
+	]
+}
