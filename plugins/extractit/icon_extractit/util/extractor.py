@@ -1,22 +1,28 @@
-import logging
-from typing import List, Any
-
-from insightconnect_plugin_runtime.exceptions import PluginException
-import regex
 import base64
+import io
+import logging
+import urllib.parse
+import zipfile
+from datetime import datetime
+from difflib import get_close_matches
+from typing import Any, Dict, List, Union
+
+import openpyxl
+import pdfplumber
+import regex
 import tldextract
 import validators
-from datetime import datetime
-from icon_extractit.util.util import Regex, DateFormatStrings
-import urllib.parse
-import io
-import zipfile
-import pdfplumber
-from pdfminer.pdfparser import PDFSyntaxError
-import openpyxl
+from insightconnect_plugin_runtime.exceptions import PluginException
+from odf.opendocument import load
 from openpyxl.workbook.workbook import Worksheet
+from pdfminer.pdfparser import PDFSyntaxError
+from pdfplumber.page import Page
+from publicsuffix2 import PublicSuffixList
+
+from icon_extractit.util.util import DateFormatStrings, Regex
 
 DEFAULT_ENCODING = "utf-8"
+DEFAULT_PDF_WRAPPING_TOLERANCE = 5.0
 
 
 def _get_cell_number_format(cell_number_format: str) -> str:
@@ -125,7 +131,7 @@ def extract_all_date_formats(provided_string: str, provided_file: str) -> list:
             provided_file = urllib.parse.unquote(
                 base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING)
             )
-            for regex_pattern in Regex.HumanToRegexPatterns.items():
+            for regex_pattern in Regex.HumanToRegexPatterns.values():
                 matches += regex.findall(regex_pattern, provided_file)
                 provided_file = regex.sub(regex_pattern, "", provided_file)
         except UnicodeDecodeError:
@@ -153,11 +159,11 @@ def extract_filepath(provided_regex: str, provided_string: str, provided_file: s
     return list(dict.fromkeys(matches))
 
 
-def extract_content_from_file(provided_file: bytes) -> str:
-    with io.BytesIO(provided_file) as f:
+def extract_content_from_file(provided_file: bytes) -> str:  # noqa: C901
+    with io.BytesIO(provided_file) as file_:
         try:
             # extracting content from DOCX, PPTX, XLSX, ODT, ODP, ODF files
-            with zipfile.ZipFile(f) as unzip_files:
+            with zipfile.ZipFile(file_) as unzip_files:
                 files_content = ""
                 x = unzip_files.infolist()
                 for i in enumerate(x):
@@ -167,7 +173,13 @@ def extract_content_from_file(provided_file: bytes) -> str:
                     except UnicodeDecodeError:
                         continue
                 # check if file is xlsx
-                xlsx_output = _extract_dates_from_xlsx(f)
+                xlsx_output = _extract_dates_from_xlsx(file_)
+
+            # Check for ODT, ODP, ODF File content without metadata
+            odf_files_content = load_libreoffice_file_content(file_)
+            if odf_files_content:
+                files_content = odf_files_content
+
             # remove xml tags from files content
             content_without_xml_tags = regex.sub(
                 r"<[\p{L}\p{N}\p{Lo}\p{So} :\/.\"=_%,(){}+#&;?-]*>", " ", files_content
@@ -177,18 +189,41 @@ def extract_content_from_file(provided_file: bytes) -> str:
             try:
                 logging.getLogger("pdfminer").setLevel(logging.WARNING)
                 # extracting content from PDF file
-                pdf_file = pdfplumber.open(f)
-                pages = pdf_file.pages
                 pdf_content = ""
-                for page in enumerate(pages):
-                    pdf_content += page[1].extract_text()
-                pdf_file.close()
+                with pdfplumber.open(file_) as pdf_file:
+                    for page in pdf_file.pages:
+                        page_content = page.extract_text()
+                        for word in extract_wrapped_words_from_pdf_page(page):
+                            page_content = page_content.replace(word, word.replace("\n", ""))
+                        pdf_content += page_content
                 return pdf_content
             except PDFSyntaxError:
                 raise PluginException(
                     cause="The type of the provided file is not supported.",
                     assistance="Supported file types are text/binary, such as: PDF, DOCX, PPTX, XLSX, ODT, ODP, ODF, TXT, ZIP",
                 )
+
+
+def extract_wrapped_words_from_pdf_page(page: Page, tolerance: float = DEFAULT_PDF_WRAPPING_TOLERANCE) -> List[str]:
+    """
+    Extract wrapped words from a PDF page.
+
+    :param page: The PDF page from which to extract wrapped words.
+    :type: Page
+
+    :param tolerance: The tolerance value for detecting wrapped words. Defaults to DEFAULT_PDF_WRAPPING_TOLERANCE.
+    :type: float
+
+    :return: A list of wrapped words extracted from the PDF page.
+    :rtype: List[str]
+    """
+
+    wrapped_words = []
+    max_x1 = max(character.get("x1") for character in page.chars)
+    for word in page.extract_words():
+        if (max_x1 - word.get("x1")) < tolerance:
+            wrapped_words.append(f"{word.get('text')}\n")
+    return wrapped_words
 
 
 def strip_subdomains(matches: list) -> list:
@@ -311,3 +346,38 @@ def parse_time(dates: list, date_format: str) -> list:
                 assistance="Please review selected date format input for date extraction",
             )
     return dates
+
+
+def fix_emails_suffix(emails: List[str]) -> List[str]:
+    """
+    Fixes the suffix of a list of email addresses.
+
+    :param emails: A list of email addresses to be checked and potentially modified.
+    :type: List[str]
+
+    :return: A list of email addresses with the correct suffix.
+    :rtype: List[str]
+    """
+
+    public_suffix_list = PublicSuffixList()
+    tlds_set = set(public_suffix_list.tlds)
+
+    emails_copy = emails.copy()
+    try:
+        for index, email in enumerate(emails_copy):
+            extracted_suffix = public_suffix_list.get_tld(email)
+            if extracted_suffix in tlds_set:
+                continue
+            possible_match = get_close_matches(extracted_suffix, tlds_set, n=1, cutoff=0)[0]
+            emails_copy[index] = email.replace(extracted_suffix, possible_match)
+    except Exception:
+        return emails
+    return emails_copy
+
+
+def load_libreoffice_file_content(file_: Union[bytes, io.BytesIO]) -> Union[str, None]:
+    try:
+        document = load(file_)
+        return document.toXml()
+    except Exception:
+        return None
