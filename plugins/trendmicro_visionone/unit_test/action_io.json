@@ -213,7 +213,10 @@
   },
   "get_endpoint_data": {
     "input": {
-      "endpoint": "127.127.127.127",
+      "endpoints": [
+        "127.127.127.127",
+        "1.2.3.4"
+      ],
       "query_op": " or "
     },
     "output": {
