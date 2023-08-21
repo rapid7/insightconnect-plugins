@@ -163,8 +163,10 @@ class ApiConnection:
         if len(orgs) == 0:
             raise ConnectionTestException(data="No organizations found")
         if orgs[0].get("node", {}).get("name") is None:
-            raise ConnectionTestException(data=f"Org ID: ********-****-****-****-*******{self.org_key[-5:]} found but "
-                                               f"does not belong to region {self.region}")
+            raise ConnectionTestException(
+                data=f"Org ID: ********-****-****-****-*******{self.org_key[-5:]} found but "
+                f"does not belong to region {self.region}"
+            )
         return True
 
     #################

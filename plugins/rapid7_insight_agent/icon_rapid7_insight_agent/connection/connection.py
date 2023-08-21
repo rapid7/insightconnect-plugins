@@ -38,6 +38,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
             raise ConnectionTestException(
                 cause="Connection Test Failed.",
                 assistance="Please check that your Region and API key are correct.",
-                data=error
+                data=error,
             ) from error
         return {"success": success}
