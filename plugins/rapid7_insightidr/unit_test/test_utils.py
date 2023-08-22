@@ -7,7 +7,7 @@ from unittest import TestCase
 
 from parameterized import parameterized
 
-from komand_rapid7_insightidr.util.resource_helper import get_sort_param, get_priorities_param
+from komand_rapid7_insightidr.util.resource_helper import get_sort_param, convert_list_to_string
 
 
 class TestUtils(TestCase):
@@ -32,6 +32,6 @@ class TestUtils(TestCase):
         self.assertEqual(expected_result, result)
 
     @parameterized.expand([(["LOW"], "LOW"), (["LOW", "MEDIUM", "HIGH"], "LOW,MEDIUM,HIGH")])
-    def test_get_priorities_param(self, input_list_of_str, expected_result):
-        result = get_priorities_param(input_list_of_str)
+    def test_convert_list_to_string(self, input_list_of_str, expected_result):
+        result = convert_list_to_string(input_list_of_str)
         self.assertEqual(expected_result, result)

@@ -38,6 +38,8 @@ def get_sort_param(input_string: str) -> str:
     :param input_string: Input string that contains parameter name and sort order i.e. Created Time Ascending
     :return: Str ready to be added as a query parameter
     """
+    if not input_string:
+        return ""
     sort_directions = {"ascending": "ASC", "descending": "DESC"}
     splitted_input_string = input_string.lower().split(" ")
     direction = splitted_input_string.pop()
@@ -49,13 +51,15 @@ def get_sort_param(input_string: str) -> str:
     return output_string
 
 
-def get_priorities_param(input_list_of_priorities: List[str]) -> str:
+def convert_list_to_string(list_of_params: List[str]) -> str:
     """
-    Converts list of str that contains priority names into str with those names separated by comma
-    :param input_list_of_priorities: List of str containing priority names
+    Converts list of str parameters into str with those names separated by comma
+    :param list_of_params: List of str containing parameters
     :return: str containing priority names separated by comma
     """
-    return ",".join(input_list_of_priorities)
+    if not list_of_params:
+        return ""
+    return ",".join(list_of_params)
 
 
 class ResourceHelper(object):

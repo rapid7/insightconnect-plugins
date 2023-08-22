@@ -14,6 +14,7 @@ class Input:
     PRIORITIES = "priorities"
     SIZE = "size"
     SORT = "sort"
+    SOURCES = "sources"
     START_TIME = "start_time"
     STATUSES = "statuses"
     
@@ -53,7 +54,7 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
     "priorities": {
       "type": "array",
       "title": "Priorities",
-      "description": "A comma-separated list of investigation priorities to include in the result, where possible values are UNSPECIFIED, LOW, MEDIUM, HIGH, CRITICAL",
+      "description": "A comma-separated list of investigation priorities to include in the result, where possible values are LOW, MEDIUM, HIGH, CRITICAL",
       "items": {
         "type": "string"
       },
@@ -87,6 +88,15 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
       ],
       "order": 8
     },
+    "sources": {
+      "type": "array",
+      "title": "Sources",
+      "description": "A comma-separated list of investigation sources to include in the result, where possible values are USER, ALERT, HUNT, AUTOMATION",
+      "items": {
+        "type": "string"
+      },
+      "order": 9
+    },
     "start_time": {
       "type": "string",
       "title": "Start Time",
@@ -96,22 +106,18 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
       "order": 2
     },
     "statuses": {
-      "type": "string",
+      "type": "array",
       "title": "Statuses",
-      "description": "Only investigations whose status matches one of the entries in the list will be returned",
-      "default": "CLOSED",
-      "enum": [
-        "OPEN",
-        "CLOSED",
-        "EITHER"
-      ],
+      "description": "Comma-separated list of investigation statuses to include in the result. Possible values are OPEN, CLOSED, INVESTIGATING, WAITING",
+      "items": {
+        "type": "string"
+      },
       "order": 1
     }
   },
   "required": [
     "index",
-    "size",
-    "statuses"
+    "size"
   ]
 }
     """)
