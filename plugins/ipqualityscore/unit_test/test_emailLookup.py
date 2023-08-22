@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from icon_ipqualityscore.connection.connection import Connection
-from icon_ipqualityscore.actions.emailLookup import Emaillookup
+from icon_ipqualityscore.actions.emailLookup import EmailLookup
 import json
 import logging
 
