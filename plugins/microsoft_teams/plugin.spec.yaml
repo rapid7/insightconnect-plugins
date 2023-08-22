@@ -4,7 +4,7 @@ products: [insightconnect]
 name: microsoft_teams
 title: Microsoft Teams
 description: The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users
-version: 4.2.0
+version: 4.3.0
 supported_versions: ["Microsoft Graph API v1.0 2021-11-28"]
 vendor: rapid7
 support: community
@@ -245,6 +245,160 @@ types:
         type: boolean
         description: "Mail enabled"
         required: false
+  itemBody:
+      content:
+        title: "Content"
+        type: string
+        description: "The content of the item"
+        required: false
+      contentType:
+        title: "Content Type"
+        type: string
+        description: "The type of the content, possible values are text and HTML"
+        required: false
+  channelIdentity:
+      channelId:
+        title: "Channel ID"
+        type: string
+        description: "The identity of the channel in which the message was posted"
+        required: false
+      teamId:
+        title: "Team ID"
+        type: string
+        description: "The identity of the team in which the message was posted"
+        required: false
+  chatMessageReaction:
+      createdDateTime:
+        title: "Created Date Time"
+        type: string
+        description: "Created date time"
+        required: false
+      reactionType:
+        title: "Reaction Type"
+        type: string
+        description: "Reaction Type"
+        required: false
+      user:
+        title: "User"
+        type: user
+        description: "The user who reacted to the message"
+        required: false
+  chatMessage:
+      attachments:
+        title: "Attachments"
+        type: "[]object"
+        description: "References to attached objects"
+        required: false
+      body:
+        title: "Body"
+        type: itemBody
+        description: "Representation of the content of the chat message"
+        required: true
+      chatId:
+        title: "Chat ID"
+        type: string
+        description: "Represents the identity of the chat"
+        required: false
+      channelIdentity:
+        title: "Channel Identity"
+        type: channelIdentity
+        description: "Represents identity of the channel"
+        required: false
+      createdDateTime:
+        title: "Created Date Time"
+        type: string
+        description: "Created date time"
+        required: false
+      deletedDateTime:
+        title: "Deleted Date Time"
+        type: string
+        description: "Deleted date time"
+        required: false
+      etag:
+        title: "Etag"
+        type: string
+        description: "Version number of the chat message"
+        required: true
+      eventDetail:
+        title: "Event Detail"
+        type: string
+        description: "Represents details of an event that happened in a chat"
+        required: false
+      from:
+        title: "From"
+        type: from
+        description: "Details of the sender of the chat message"
+        required: false
+      id:
+        title: "ID"
+        type: string
+        description: "Unique ID of the message"
+        required: true
+      importance:
+        title: "Importance"
+        type: string
+        description: "The importance of the chat message"
+        required: true
+      lastModifiedDateTime:
+        title: "Last Modified Date Time"
+        type: string
+        description: "Timestamp when the chat message is created (initial setting) or modified"
+        required: true
+      lastEditedDateTime:
+        title: "Last Edited Date Time"
+        type: string
+        description: "Timestamp when edits to the chat message were made"
+        required: true
+      locale:
+        title: "Locale"
+        type: string
+        description: "Locale of the chat message set by the client"
+        required: false
+      mentions:
+        title: "Mentions"
+        type: "[]object"
+        description: "List of entities mentioned in the chat message"
+        required: false
+      messageHistory:
+        title: "Message History"
+        type: "[]object"
+        description: "List of activity history of a message item"
+        required: false
+      messageType:
+        title: "Message Type"
+        type: string
+        description: "The type of chat message"
+        required: false
+      policyViolation:
+        title: "Policy Violation"
+        type: object
+        description: "Defines the properties of a policy violation"
+        required: false
+      reactions:
+        title: "Reactions"
+        type: "[]chatMessageReaction"
+        description: "Reactions for this chat message"
+        required: false
+      replyToId:
+        title: "Reply To ID"
+        type: string
+        description: "ID of the parent chat message or root chat message of the thread"
+        required: false
+      subject:
+        title: "Subject"
+        type: string
+        description: "The subject of the chat message, in plaintext"
+        required: false
+      summary:
+        title: "Summary"
+        type: string
+        description: "Summary text of the chat message that could be used for push notifications and summary views or fall back views"
+        required: false
+      webUrl:
+        title: "Web URL"
+        type: string
+        description: "Link to the message in Microsoft Teams"
+        required: false
 
 connection:
   application_id:
@@ -314,11 +468,13 @@ triggers:
         description: Name of the channel where the message was posted
         type: string
         required: false
+        example: example_name
       team_name:
         title: Team Name
         description: Name of the team to which the channel is assigned to
         type: string
         required: false
+        example: example_team
 
 actions:
   get_teams:
@@ -506,6 +662,7 @@ actions:
         description: Boolean indicating if this action was successful
         type: boolean
         required: true
+        example: true
   remove_member_from_team:
     title: Remove Member from Team
     description: Remove a member from a team
@@ -530,6 +687,7 @@ actions:
         description: Boolean indicating if this action was successful
         type: boolean
         required: true
+        example: true
   add_channel_to_team:
     title: Add Channel to Team
     description: Add a channel to a team
@@ -571,6 +729,7 @@ actions:
         description: Boolean indicating if this action was successful
         type: boolean
         required: true
+        example: true
   remove_channel_from_team:
     title: Remove Channel from Team
     description: Remove a channel from a team
@@ -595,6 +754,7 @@ actions:
         description: Boolean indicating if this action was successful
         type: boolean
         required: true
+        example: true
   create_teams_enabled_group:
     title: Create Teams Enabled Group
     description: Create a group in Azure and enable it for Microsoft Teams
@@ -663,6 +823,7 @@ actions:
         description: Boolean indicating if this action was successful
         type: boolean
         required: true
+        example: true
   add_group_owner:
     title: Add Group Owner
     description: Add a user to the group's list of owners
@@ -685,6 +846,7 @@ actions:
         description: Boolean indicating if this action was successful
         type: boolean
         required: true
+        example: true
   add_member_to_channel:
     title: Add Member to Channel
     description: Add a conversation member to a private channel
@@ -723,3 +885,66 @@ actions:
         description: Boolean indicating if this action was successful
         type: boolean
         required: true
+        example: true
+  get_message_in_channel:
+    title: Get Message in Channel
+    description: Retrieve a single message or a message reply in a channel
+    input:
+      team_id:
+        title: Team ID
+        description: The ID of team
+        type: string
+        required: true
+        example: example-team-id
+      channel_id:
+        title: Channel ID
+        description: The ID of channel
+        type: string
+        required: true
+        example: 11:examplechannel.name
+      message_id:
+        title: Message ID
+        description: The ID of message
+        type: string
+        required: true
+        example: 1234567891
+      reply_id:
+        title: Reply ID
+        description: The ID of reply message
+        type: string
+        required: false
+        example: 1234567890
+    output:
+      message:
+        title: Message
+        description: The message object that was created
+        type: chatMessage
+        required: false
+  get_message_in_chat:
+    title: Get Message in Chat
+    description: Retrieve a single message or a message reply in a chat
+    input:
+      username:
+        title: Username
+        description: The ID of user or his email
+        type: string
+        required: true
+        example: user@example.com
+      chat_id:
+        title: Chat ID
+        description: The ID of chat
+        type: string
+        required: true
+        example: 11:examplechat.name
+      message_id:
+        title: Message ID
+        description: The ID of message
+        type: string
+        required: true
+        example: 1234567890
+    output:
+      message:
+        title: Message
+        description: The message object that was created
+        type: chatMessage
+        required: false

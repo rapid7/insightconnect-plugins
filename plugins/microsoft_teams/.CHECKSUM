@@ -1,67 +1,75 @@
 {
-	"spec": "65fff010ba86d92daa377735d659de00",
-	"manifest": "1e9832c6f6aaaac2a61ce32c75dd0ac2",
-	"setup": "54780120c9104a82e9213555c82603a5",
+	"spec": "465c78e4c13452e25e571f96e6071d2b",
+	"manifest": "476b0a467f167d4ec19924f3d9ba7f60",
+	"setup": "2cd471a971f86d18ba9508925b089bd5",
 	"schemas": [
 		{
 			"identifier": "add_channel_to_team/schema.py",
-			"hash": "4b6f949477e6054ef513fa999bd2909e"
+			"hash": "77e24ac01d838c9123877dc23fd4e8ee"
 		},
 		{
 			"identifier": "add_group_owner/schema.py",
-			"hash": "4cfaa08a20be9e91e71ec79a9ca3c3e7"
+			"hash": "16e088871a34a4d80365d23a5fff1825"
 		},
 		{
 			"identifier": "add_member_to_channel/schema.py",
-			"hash": "8f89402618bda5e8653c8b0ac9a81662"
+			"hash": "bc3cd2a55c6a307621ae7bc2759b98e4"
 		},
 		{
 			"identifier": "add_member_to_team/schema.py",
-			"hash": "317a5591c298bb798e9f5e5318a3f007"
+			"hash": "daf644fdedf69570b4de8d3c8b5d4692"
 		},
 		{
 			"identifier": "create_teams_enabled_group/schema.py",
-			"hash": "d8544bf830118c309e9982399fe451c8"
+			"hash": "9d1a41cc30c7af5e5c61841b586f0a3b"
 		},
 		{
 			"identifier": "delete_team/schema.py",
-			"hash": "c1e8570e9068a46418fe40dadc0a0ad1"
+			"hash": "75dd8243f40ba2243f43bee3d830c8f7"
 		},
 		{
 			"identifier": "get_channels_for_team/schema.py",
-			"hash": "fcaedc94ce38553101d0ef1fb9eccf9b"
+			"hash": "b55634a33858b858e593dc50b5e38f6d"
+		},
+		{
+			"identifier": "get_message_in_channel/schema.py",
+			"hash": "435e1e4e395f4bb806768e88c09ab444"
+		},
+		{
+			"identifier": "get_message_in_chat/schema.py",
+			"hash": "bfa7d0852b744793ab8ba7e935263629"
 		},
 		{
 			"identifier": "get_teams/schema.py",
-			"hash": "01822f678b78c9223f59b73177ffc127"
+			"hash": "d4167388ba5726a8f13639844294cee5"
 		},
 		{
 			"identifier": "remove_channel_from_team/schema.py",
-			"hash": "fb74b75322edc9388b1b785d3a526c5a"
+			"hash": "02305968869d8a40c21c7e2176862ddc"
 		},
 		{
 			"identifier": "remove_member_from_team/schema.py",
-			"hash": "f6710148ff380da93840bc56567b3087"
+			"hash": "96cc61fcb20382a233761dd307290a55"
 		},
 		{
 			"identifier": "send_html_message/schema.py",
-			"hash": "f68f998e2784b73fe702803dbd703be1"
+			"hash": "e3bbd0e3d4dc89224ef052ebc69fc1c9"
 		},
 		{
 			"identifier": "send_message/schema.py",
-			"hash": "0668a3b730ca99164bea47c2e2fa241c"
+			"hash": "6706bbed30a234b2634130d9cac0a72d"
 		},
 		{
 			"identifier": "send_message_by_guid/schema.py",
-			"hash": "d9310644f948405e5757c5624d5ec925"
+			"hash": "c3072cbe33230625d575272c828fbc6c"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "c5db44373c8c12a14bab00d2176da683"
+			"hash": "cedfdce2478a9172de3569401a080db0"
 		},
 		{
 			"identifier": "new_message_received/schema.py",
-			"hash": "32a4e5c82c7a7368ee7fe1a7f16258c6"
+			"hash": "7aedc9d1e83193b86e161d5b1a40606f"
 		}
 	]
 }
