@@ -9,8 +9,8 @@ from komand_rapid7_insightidr.actions.get_a_saved_query.action import GetASavedQ
 from komand_rapid7_insightidr.actions.get_a_saved_query.schema import Input
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 from insightconnect_plugin_runtime.exceptions import PluginException
-from unit_test.util import Util
-from unit_test.mock import (
+from util import Util
+from mock import (
     mock_get_request,
 )
 

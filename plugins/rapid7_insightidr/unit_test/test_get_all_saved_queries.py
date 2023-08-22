@@ -8,8 +8,8 @@ from unittest.mock import patch
 from komand_rapid7_insightidr.actions.get_all_saved_queries.action import GetAllSavedQueries
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 from insightconnect_plugin_runtime.exceptions import PluginException
-from unit_test.util import Util
-from unit_test.mock import (
+from util import Util
+from mock import (
     mock_get_request,
 )
 import logging

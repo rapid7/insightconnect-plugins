@@ -9,8 +9,8 @@ from komand_rapid7_insightidr.actions.query.action import Query
 from komand_rapid7_insightidr.actions.query.schema import Input
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 from insightconnect_plugin_runtime.exceptions import PluginException
-from unit_test.util import Util
-from unit_test.mock import mock_get_request
+from util import Util
+from mock import mock_get_request
 
 
 class TestQuery(TestCase):

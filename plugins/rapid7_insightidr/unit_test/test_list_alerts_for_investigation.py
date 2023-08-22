@@ -11,8 +11,8 @@ from komand_rapid7_insightidr.actions.list_alerts_for_investigation import ListA
 from komand_rapid7_insightidr.actions.list_alerts_for_investigation.schema import Input
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
-from unit_test.mock import mock_get_request, STUB_INVESTIGATION_IDENTIFIER, mock_request_for_different_rrn_object
-from unit_test.util import Util
+from mock import mock_get_request, STUB_INVESTIGATION_IDENTIFIER, mock_request_for_different_rrn_object
+from util import Util
 
 
 class TestCreateInvestigation(TestCase):

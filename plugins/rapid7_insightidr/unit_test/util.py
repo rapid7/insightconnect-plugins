@@ -175,6 +175,10 @@ class Util:
             "attachments": ["rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890"],
         }:
             return MockResponse("create_comment", 404)
+        if kwargs.get("url") == "https://us.api.insight.rapid7.com/idr/v2/investigations":
+            if "INVALID_SOURCE" in kwargs.get("params", {}).get("sources"):
+                return MockResponse("empty", 400)
+            return MockResponse("list_investigations", 200)
         if (
             kwargs.get("method") == "DELETE"
             and kwargs.get("url")
