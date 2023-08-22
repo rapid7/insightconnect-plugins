@@ -6,13 +6,7 @@ from insightconnect_plugin_runtime.helper import clean
 
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Investigations
-from komand_rapid7_insightidr.util.resource_helper import (
-    ResourceHelper,
-    get_sort_param,
-    get_priorities_param,
-    get_sources_param,
-    get_statuses_param,
-)
+from komand_rapid7_insightidr.util.resource_helper import ResourceHelper, get_sort_param, convert_list_to_string
 import datetime
 
 
@@ -32,10 +26,10 @@ class ListInvestigations(insightconnect_plugin_runtime.Action):
 
         rest_params = {
             "assignee.email": params.get(Input.EMAIL),
-            "sources": get_sources_param(params.get(Input.SOURCES)),
+            "sources": convert_list_to_string(params.get(Input.SOURCES)),
             "sort": get_sort_param(params.get(Input.SORT)),
-            "priorities": get_priorities_param(params.get(Input.PRIORITIES)),
-            "statuses": get_statuses_param(statuses),
+            "priorities": convert_list_to_string(params.get(Input.PRIORITIES)),
+            "statuses": convert_list_to_string(statuses),
         }
 
         if start_time:

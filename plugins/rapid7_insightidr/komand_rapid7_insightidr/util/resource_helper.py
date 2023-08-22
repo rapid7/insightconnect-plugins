@@ -51,35 +51,15 @@ def get_sort_param(input_string: str) -> str:
     return output_string
 
 
-def get_priorities_param(input_list_of_priorities: List[str]) -> str:
+def convert_list_to_string(list_of_params: List[str]) -> str:
     """
-    Converts list of str that contains priority names into str with those names separated by comma
-    :param input_list_of_priorities: List of str containing priority names
+    Converts list of str parameters into str with those names separated by comma
+    :param list_of_params: List of str containing parameters
     :return: str containing priority names separated by comma
     """
-    if not input_list_of_priorities:
+    if not list_of_params:
         return ""
-    return ",".join(input_list_of_priorities)
-
-
-def get_statuses_param(input_list_of_statuses: List[str]) -> str:
-    """
-    Converts list of str that contains statuses names into str with those names separated by comma
-    :param input_list_of_statuses: List of str containing priority names
-    :return: str containing priority names separated by comma
-    """
-    if not input_list_of_statuses:
-        return ""
-    return ",".join(input_list_of_statuses)
-
-
-def get_sources_param(input_list_of_sources: List[str]) -> str:
-    """
-    Converts list of str that contains sources names into str with those names separated by comma
-    :param input_list_of_sources: List of str containing sources names
-    :return: str containing priority names separated by comma
-    """
-    return ",".join(input_list_of_sources)
+    return ",".join(list_of_params)
 
 
 class ResourceHelper(object):
