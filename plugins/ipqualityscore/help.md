@@ -30,7 +30,7 @@ Example input:
 {
   "apiKey": "abcdef12345"
 }
-```  
+```
 
 ## Technical Details
 
@@ -103,7 +103,7 @@ Example output:
   "suspicious": false,
   "unsafe": false
 }
-```  
+```
 
 #### Email Address Reputation
   
@@ -129,7 +129,7 @@ Example input:
   "suggest_domain": false,
   "timeout": 5
 }
-```  
+```
 
 ##### Output
 
@@ -193,7 +193,7 @@ Example output:
   "timed_out": false,
   "valid": false
 }
-```  
+```
 
 #### IP Address Reputation
   
@@ -225,7 +225,7 @@ Example input:
   "user_agent": "Browser",
   "user_language": "English"
 }
-```  
+```
 
 ##### Output
 
@@ -283,7 +283,7 @@ Example output:
   "vpn": false,
   "zip_code": 505001
 }
-```  
+```
 
 #### Phone Reputation
   
@@ -305,7 +305,7 @@ Example input:
   "phone": "+918765433210",
   "strictness": 0
 }
-```  
+```
 
 ##### Output
 
@@ -359,7 +359,7 @@ Example output:
   "valid": false,
   "zip_code": 500081
 }
-```  
+```
 
 #### URL Reputation
   
@@ -381,7 +381,7 @@ Example input:
   "strictness": 0,
   "url": "https://abc.com"
 }
-```  
+```
 
 ##### Output
 
