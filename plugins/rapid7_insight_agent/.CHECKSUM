@@ -1,27 +1,27 @@
 {
-	"spec": "53f62de65adf943fe51ec967c12154ec",
-	"manifest": "e870e29e46500b4c0e139ab82ac2f750",
-	"setup": "c05aa0361bf6ddbfe9a56f417f2a9991",
+	"spec": "0dff21b4d8ba8898a43d4a2f37b18b7f",
+	"manifest": "d955d6cf01337afff408f1af5ad78b9c",
+	"setup": "de0f972b44594e09f3c7057a7f23da24",
 	"schemas": [
 		{
 			"identifier": "check_agent_status/schema.py",
-			"hash": "8c516a9557ecbc567e0e1f92c81e3b6d"
+			"hash": "fdce3e3c68ff708b854de1e7fa1a9864"
 		},
 		{
 			"identifier": "get_agent_details/schema.py",
-			"hash": "0e90e64403e74308124a65492bab089c"
+			"hash": "fcfd0b627822e7d0dc033e5fd22935da"
 		},
 		{
 			"identifier": "quarantine/schema.py",
-			"hash": "a57f4441d42702fc37e0d1d794cf502b"
+			"hash": "3100e764b5520435a106cee0f757b263"
 		},
 		{
 			"identifier": "quarantine_multiple/schema.py",
-			"hash": "2f953033abec11a388465a6f791930e2"
+			"hash": "147e15305217a36d68c249daf85fe016"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "a87da23490def055783e5da40dc41b53"
+			"hash": "134cb982f22fe0c4969721b954e838ef"
 		}
 	]
 }
