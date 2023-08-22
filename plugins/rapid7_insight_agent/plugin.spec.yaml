@@ -10,7 +10,7 @@ vendor: rapid7
 support: rapid7
 status: []
 cloud_ready: true
-connection_version: 1
+connection_version: 2
 sdk:
   type: full
   version: 5
