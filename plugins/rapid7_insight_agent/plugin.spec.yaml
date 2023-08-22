@@ -10,6 +10,11 @@ vendor: rapid7
 support: rapid7
 status: []
 cloud_ready: true
+connection_version: 2
+sdk:
+  type: full
+  version: 5
+  user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insight_agent
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE

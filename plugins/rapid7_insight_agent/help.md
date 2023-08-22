@@ -271,7 +271,7 @@ Example output:
 
 # Version History
 
-* 2.0.1 - Update `Connection Test` to identify if `Region` is incorrect  
+* 2.0.1 - Update `Connection Test` to identify if `Region` is incorrect  | Update Plugin runtime to version 5
 * 2.0.0 - Update action `Quarantine Multiple` outputs to Completed and Failed, removed All Operations Successful, replaced output Agent IDs with Hostname  
 * 1.2.0 - New action: `Quarantine Multiple`  
 * 1.1.1 - Quarantine: Fix incorrect behavior for unquarantine when the agent ID is wrong  
