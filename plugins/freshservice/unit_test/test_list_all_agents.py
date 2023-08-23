@@ -1,14 +1,16 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+from unittest.mock import patch
+
 from icon_freshservice.actions.list_all_agents import ListAllAgents
 from icon_freshservice.actions.list_all_agents.schema import Input
-from unit_test.util import Util
-from unittest.mock import patch
 from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.request", side_effect=Util.mocked_requests)
