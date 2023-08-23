@@ -1,15 +1,17 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+from unittest.mock import patch
+
 from icon_freshservice.actions.delete_ticket_task import DeleteTicketTask
 from icon_freshservice.actions.delete_ticket_task.schema import Input
-from unit_test.util import Util
-from unittest.mock import patch
-from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
+from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.request", side_effect=Util.mocked_requests)
