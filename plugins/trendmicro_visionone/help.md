@@ -224,7 +224,7 @@ Example input|multi_response|[]multi_response|True|Add To Suspicious List Respon
 
 ```
 {
-  "suspicious_block_object": [{
+  "suspicious_block_objects": [{
           "risk_level": "high",
           "expiry_days": "30",
           "object_type": "ip",
@@ -1395,15 +1395,15 @@ This action submits URLs to the sandbox for analysis. You can submit a maximum o
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
+| Name |Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|url|[]string|None|True|URL(s) to be submitted, formated as bracket array separated by comma|None|[]|
+|urls|[]string|None|True|URL(s) to be submitted, formated as bracket array separated by comma|None|[]|
 
 Example input:
 
 ```
 {
-  "url": [
+  "urls": [
     "www.urlurl.com",
     "www.zurlzurl.com"
   ]
@@ -1734,7 +1734,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.2 - Enabled multiple inputs for Get Endpoint Data
+* 1.0.2 - Enabled multiple inputs for Get Endpoint Data, reduced API call frequency & General Refactoring
 * 1.0.1 - Alert Details Output Fix (Minor Fix)
 * 1.0.0 - Initial plugin
 * 1.0.1 - Alert Details Output Fix (Minor Fix)

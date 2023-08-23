@@ -24,19 +24,16 @@ class SubmitUrlsToSandbox(insightconnect_plugin_runtime.Action):
         # Get Connection Client
         client = self.connection.client
         # Get Action Parameters
-        urls = params.get(Input.URL)
+        urls = params.get(Input.URLS)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        submit_urls_resp = []
-        for url in urls:
-            response = client.submit_urls_to_sandbox(url)
-            if "error" in response.result_code.lower():
-                raise PluginException(
-                    cause="An error occurred while submitting URLs to the sandbox.",
-                    assistance="Please check the provided url(s) and try again.",
-                    data=response.errors,
-                )
-            submit_urls_resp.append(response.response.dict().get("items")[0])
+        response = client.submit_urls_to_sandbox(*urls)
+        if "error" in response.result_code.lower():
+            raise PluginException(
+                cause="An error occurred while submitting URLs to the sandbox.",
+                assistance="Please check the provided url(s) and try again.",
+                data=response.errors,
+            )
         # Return results
         self.logger.info("Returning Results...")
-        return {Output.SUBMIT_URLS_RESP: submit_urls_resp}
+        return {Output.SUBMIT_URLS_RESP: response.response.dict().get("items")}
