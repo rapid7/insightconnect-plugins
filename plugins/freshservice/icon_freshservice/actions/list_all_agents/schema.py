@@ -150,7 +150,7 @@ class ListAllAgentsOutput(insightconnect_plugin_runtime.Output):
           "title": "Department IDs",
           "description": "Unique IDs of the departments associated with the agent",
           "items": {
-            "type": "integer"
+            "type": "string"
           },
           "order": 9
         },
