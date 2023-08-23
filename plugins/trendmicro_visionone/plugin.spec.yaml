@@ -1624,8 +1624,8 @@ actions:
     title: Submit URLs to Sandbox
     description: Submits URLs to the sandbox for analysis. You can submit a maximum of 10 URLs per request
     input:
-      url:
-        title: URL
+      urls:
+        title: URLs
         type: "[]string"
         description: URL(s) to be submitted, formated as bracket array separated by comma
         required: true

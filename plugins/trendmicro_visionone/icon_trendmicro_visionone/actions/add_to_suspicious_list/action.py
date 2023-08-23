@@ -48,9 +48,15 @@ class AddToSuspiciousList(insightconnect_plugin_runtime.Action):
         block_objects = params.get(Input.SUSPICIOUS_BLOCK_OBJECTS)
         # Choose enum
         for block_object in block_objects:
-            block_object["object_type"] = self.OBJECT_TYPE_MAPPING.get(block_object["object_type"].lower())
-            block_object["scan_action"] = self.SCAN_ACTION_MAPPING.get(block_object["scan_action"].lower())
-            block_object["risk_level"] = self.RISK_LEVEL_MAPPING.get(block_object["risk_level"].lower())
+            block_object["object_type"] = self.OBJECT_TYPE_MAPPING.get(
+                block_object["object_type"].lower()
+            )
+            block_object["scan_action"] = self.SCAN_ACTION_MAPPING.get(
+                block_object["scan_action"].lower()
+            )
+            block_object["risk_level"] = self.RISK_LEVEL_MAPPING.get(
+                block_object["risk_level"].lower()
+            )
             if not block_object["object_type"]:
                 raise PluginException(
                     cause="Invalid object type.",

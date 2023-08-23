@@ -29,11 +29,15 @@ class DeleteEmailMessage(insightconnect_plugin_runtime.Action):
         # Build messages list
         messages = []
         for email_identifier in email_identifiers:
-            if email_identifier["message_id"].startswith("<") and email_identifier["message_id"].endswith(">"):
+            if email_identifier["message_id"].startswith("<") and email_identifier[
+                "message_id"
+            ].endswith(">"):
                 messages.append(
                     pytmv1.EmailMessageIdTask(
                         messageId=email_identifier["message_id"],
-                        description=email_identifier.get("description", "Delete Email Message"),
+                        description=email_identifier.get(
+                            "description", "Delete Email Message"
+                        ),
                         mailbox=email_identifier.get("mailbox", ""),
                     )
                 )
@@ -41,7 +45,9 @@ class DeleteEmailMessage(insightconnect_plugin_runtime.Action):
                 messages.append(
                     pytmv1.EmailMessageUIdTask(
                         uniqueId=email_identifier["message_id"],
-                        description=email_identifier.get("description", "Delete Email Message"),
+                        description=email_identifier.get(
+                            "description", "Delete Email Message"
+                        ),
                     )
                 )
         # Make Action API Call

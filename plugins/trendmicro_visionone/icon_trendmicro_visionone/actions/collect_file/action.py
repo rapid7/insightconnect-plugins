@@ -29,23 +29,33 @@ class CollectFile(insightconnect_plugin_runtime.Action):
                         endpointName=collect_file.get("endpoint_name"),
                         agentGuid=collect_file.get("agent_guid"),
                         filePath=collect_file["file_path"],
-                        description=collect_file.get("description", "Collect File by endpointName and agentGuid"),
+                        description=collect_file.get(
+                            "description", "Collect File by endpointName and agentGuid"
+                        ),
                     )
                 )
-            elif collect_file.get("endpoint_name") and not collect_file.get("agent_guid"):
+            elif collect_file.get("endpoint_name") and not collect_file.get(
+                "agent_guid"
+            ):
                 files.append(
                     pytmv1.FileTask(
                         endpointName=collect_file.get("endpoint_name"),
                         filePath=collect_file["file_path"],
-                        description=collect_file.get("description", "Collect File by endpointName"),
+                        description=collect_file.get(
+                            "description", "Collect File by endpointName"
+                        ),
                     )
                 )
-            elif collect_file.get("agent_guid") and not collect_file.get("endpoint_name"):
+            elif collect_file.get("agent_guid") and not collect_file.get(
+                "endpoint_name"
+            ):
                 files.append(
                     pytmv1.FileTask(
                         agentGuid=collect_file.get("agent_guid"),
                         filePath=collect_file["file_path"],
-                        description=collect_file.get("description", "Collect File by agentGuid"),
+                        description=collect_file.get(
+                            "description", "Collect File by agentGuid"
+                        ),
                     )
                 )
             else:

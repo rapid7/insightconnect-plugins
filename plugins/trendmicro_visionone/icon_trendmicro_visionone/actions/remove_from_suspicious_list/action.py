@@ -37,7 +37,9 @@ class RemoveFromSuspiciousList(insightconnect_plugin_runtime.Action):
         block_objects = params.get(Input.BLOCK_OBJECTS)
         # Choose enum
         for block_object in block_objects:
-            block_object["object_type"] = self.OBJECT_TYPES.get(block_object["object_type"].lower())
+            block_object["object_type"] = self.OBJECT_TYPES.get(
+                block_object["object_type"].lower()
+            )
             if not block_object["object_type"]:
                 raise PluginException(
                     cause="Invalid object type.",

@@ -32,7 +32,9 @@ class ResetPasswordAccount(insightconnect_plugin_runtime.Action):
             accounts.append(
                 pytmv1.AccountTask(
                     accountName=account_identifier["account_name"],
-                    description=account_identifier.get("description", "Reset Account Password"),
+                    description=account_identifier.get(
+                        "description", "Reset Account Password"
+                    ),
                 )
             )
         # Make Action API Call
