@@ -4,11 +4,8 @@ import os
 import json
 from sys import argv
 
-import insightconnect_plugin_runtime
-from icon_ipqualityscore import connection, actions, triggers
-
 Name = "IPQS Fraud and Risk Scoring"
-Vendor = "ipqs"
+Vendor = "ipqualityscore"
 Version = "1.0.0"
 Description = "IPQS Fraud and Risk Scoring plugin provides enterprise grade fraud prevention, risk analysis, and threat detection Analyze IP Addresses, Email Addresses, Phones, URLs and Domains to identify sophisticated bad actors and high risk behavior"
 
@@ -25,6 +22,8 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
+    import insightconnect_plugin_runtime
+    from icon_ipqualityscore import connection, actions, triggers, tasks
 
     class ICONIpqualityscore(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
@@ -35,16 +34,16 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
-            self.add_action(actions.DomainLookup())
-
-            self.add_action(actions.EmailLookup())
-
             self.add_action(actions.IpLookup())
-
-            self.add_action(actions.PhoneLookup())
-
+        
+            self.add_action(actions.EmailLookup())
+        
             self.add_action(actions.UrlLookup())
-
+        
+            self.add_action(actions.DomainLookup())
+        
+            self.add_action(actions.PhoneLookup())
+        
 
     """Run plugin"""
     cli = insightconnect_plugin_runtime.CLI(ICONIpqualityscore())

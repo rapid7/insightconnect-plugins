@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name="ipqualityscore-ipqs-plugin",
+setup(name="ipqualityscore-ipqualityscore-plugin",
       version="1.0.0",
       description="IPQS Fraud and Risk Scoring plugin provides enterprise grade fraud prevention, risk analysis, and threat detection Analyze IP Addresses, Email Addresses, Phones, URLs and Domains to identify sophisticated bad actors and high risk behavior",
-      author="ipqs",
+      author="ipqualityscore",
       author_email="",
       url="",
       packages=find_packages(),

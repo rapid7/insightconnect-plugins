@@ -32,7 +32,7 @@ class Output:
 
 
 class DomainLookupInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -76,7 +76,7 @@ class DomainLookupInput(insightconnect_plugin_runtime.Input):
 
 
 class DomainLookupOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
