@@ -37,30 +37,35 @@ class RemoveFromBlockList(insightconnect_plugin_runtime.Action):
         block_objects = params.get(Input.BLOCK_OBJECTS)
         # Choose enum
         for block_object in block_objects:
-            object_type = self.OBJECT_TYPES.get(block_object["object_type"].lower())
-            if not object_type:
+            block_object["object_type"] = self.OBJECT_TYPES.get(
+                block_object["object_type"].lower()
+            )
+            if not block_object["object_type"]:
                 raise PluginException(
                     cause="Invalid object type.",
                     assistance="Please check the provided object type and object value.",
                 )
-        # Make Action API Call
-        self.logger.info("Making API Call...")
-        multi_resp = []
+        # Build objects list
+        objects = []
         for block_object in block_objects:
-            response = client.remove_from_block_list(
+            objects.append(
                 pytmv1.ObjectTask(
                     objectType=block_object["object_type"],
                     objectValue=block_object["object_value"],
-                    description=block_object.get("description", ""),
+                    description=block_object.get(
+                        "description", "Remove from Block List"
+                    ),
                 )
             )
-            if "error" in response.result_code.lower():
-                raise PluginException(
-                    cause="An error occurred while removing from block list.",
-                    assistance="Please check the block list object type and value and try again.",
-                    data=response.errors,
-                )
-            multi_resp.append(response.response.dict().get("items")[0])
+        # Make Action API Call
+        self.logger.info("Making API Call...")
+        response = client.remove_from_block_list(*objects)
+        if "error" in response.result_code.lower():
+            raise PluginException(
+                cause="An error occurred while removing from block list.",
+                assistance="Please check the block list object type and value and try again.",
+                data=response.errors,
+            )
         # Return results
         self.logger.info("Returning Results...")
-        return {Output.MULTI_RESPONSE: multi_resp}
+        return {Output.MULTI_RESPONSE: response.response.dict().get("items")}

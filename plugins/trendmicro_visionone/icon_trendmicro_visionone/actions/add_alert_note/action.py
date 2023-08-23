@@ -31,7 +31,7 @@ class AddAlertNote(insightconnect_plugin_runtime.Action):
             )
         self.logger.info("Returning Results...")
         location = response.response.location
-        note_id = location.split("/")[-1]
+        note_id = response.response.note_id()
         result_code = response.result_code
         return {
             Output.RESULT_CODE: result_code,

@@ -26,23 +26,26 @@ class ResetPasswordAccount(insightconnect_plugin_runtime.Action):
         client = self.connection.client
         # Get Action Parameters
         account_identifiers = params.get(Input.ACCOUNT_IDENTIFIERS)
-        # Make Action API Call
-        self.logger.info("Making API Call...")
-        multi_resp = []
+        # Build accounts list
+        accounts = []
         for account_identifier in account_identifiers:
-            response = client.reset_password_account(
+            accounts.append(
                 pytmv1.AccountTask(
                     accountName=account_identifier["account_name"],
-                    description=account_identifier.get("description", ""),
+                    description=account_identifier.get(
+                        "description", "Reset Account Password"
+                    ),
                 )
             )
-            if "error" in response.result_code.lower():
-                raise PluginException(
-                    cause="An error occurred while resetting the password for the account.",
-                    assistance="Please check the account name and try again.",
-                    data=response.errors,
-                )
-            multi_resp.append(response.response.dict().get("items")[0])
+        # Make Action API Call
+        self.logger.info("Making API Call...")
+        response = client.reset_password_account(*accounts)
+        if "error" in response.result_code.lower():
+            raise PluginException(
+                cause="An error occurred while resetting the password for the account.",
+                assistance="Please check the account name and try again.",
+                data=response.errors,
+            )
         # Return results
         self.logger.info("Returning Results...")
-        return {Output.MULTI_RESPONSE: multi_resp}
+        return {Output.MULTI_RESPONSE: response.response.dict().get("items")}
