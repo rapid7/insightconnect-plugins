@@ -11,6 +11,7 @@ from icon_freshservice.util.endpoints import (
     TICKETS_ENDPOINT,
     TICKET_TASK_ENDPOINT,
     TICKET_TASKS_ENDPOINT,
+    SLA_POLICIES_ENDPOINT,
 )
 
 
@@ -38,6 +39,9 @@ class FreshServiceAPI:
             json_data=json_data,
             headers=self.headers,
         )
+
+    def list_sla_policies(self) -> None:
+        self.make_json_request(path=SLA_POLICIES_ENDPOINT, method="GET", headers=self.headers)
 
     def update_ticket(self, ticket_id: int, json_data: dict = None, attachments: list = None) -> dict:
         response = {}

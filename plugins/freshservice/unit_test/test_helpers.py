@@ -1,12 +1,14 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from unit_test.util import Util
-from parameterized import parameterized
+
 from icon_freshservice.util.helpers import dict_keys_to_camel_case, process_list
+from parameterized import parameterized
+
+from util import Util
 
 
 class TestHelpers(TestCase):
