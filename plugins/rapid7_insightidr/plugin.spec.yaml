@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 4.4.1
+version: 5.0.0
 supported_versions: ["Latest release successfully tested on 2022-07-20."]
 vendor: rapid7
 cloud_ready: true
@@ -606,15 +606,10 @@ actions:
     input:
       statuses:
         title: Statuses
-        description: Only investigations whose status matches one of the entries in the list will be returned
-        type: string
-        required: true
-        default: CLOSED
-        example: CLOSED
-        enum:
-        - OPEN
-        - CLOSED
-        - EITHER
+        description: Comma-separated list of investigation statuses to include in the result. Possible values are OPEN, CLOSED, INVESTIGATING, WAITING
+        type: "[]string"
+        required: false
+        example: ["CLOSED"]
       start_time:
         title: Start Time
         description: An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned
@@ -649,10 +644,10 @@ actions:
         example: user@example.com
       priorities:
         title: Priorities
-        description: A comma-separated list of investigation priorities to include in the result, where possible values are UNSPECIFIED, LOW, MEDIUM, HIGH, CRITICAL
+        description: A comma-separated list of investigation priorities to include in the result, where possible values are LOW, MEDIUM, HIGH, CRITICAL
         type: "[]string"
         required: false
-        example: '["UNSPECIFIED, LOW, MEDIUM, HIGH, CRITICAL"]'
+        example: '["LOW", "MEDIUM", "HIGH", "CRITICAL"]'
       sort:
         title: Sort
         description: A field for investigations to be sorted
@@ -673,6 +668,12 @@ actions:
           - Alerts most recent detection created time Descending
         required: false
         example: Create time Ascending
+      sources:
+        title: Sources
+        description: A comma-separated list of investigation sources to include in the result, where possible values are USER, ALERT, HUNT, AUTOMATION
+        type: "[]string"
+        required: false
+        example: '["USER","ALERT"]'
     output:
       investigations:
         title: Investigations

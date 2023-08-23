@@ -1,6 +1,8 @@
 import os
 import sys
 
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
@@ -10,10 +12,11 @@ from komand_rapid7_insightidr.actions.list_investigations import ListInvestigati
 from komand_rapid7_insightidr.actions.list_investigations.schema import Input
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
-from unit_test.mock import mock_get_request
-from unit_test.util import Util
+from mock import mock_get_request
+from util import Util
 
 
+@patch("requests.Session.request", side_effect=Util.mocked_requests)
 class TestListInvestigations(TestCase):
     @classmethod
     def setUpClass(self) -> None:
@@ -31,9 +34,10 @@ class TestListInvestigations(TestCase):
         self.action = Util.default_connector(ListInvestigations())
         self.connection = self.action.connection
 
-    @patch("requests.Session.get", side_effect=mock_get_request)
     def test_list_investigations(self, _mock_req):
-        actual = self.action.run({Input.INDEX: 0, Input.SIZE: 1, Input.STATUSES: "OPEN"})
+        actual = self.action.run(
+            {Input.INDEX: 0, Input.SIZE: 1, Input.STATUSES: ["INVESTIGATING"], Input.SOURCES: ["USER", "ALERT"]}
+        )
         expected = {
             "investigations": [
                 {
@@ -47,10 +51,16 @@ class TestListInvestigations(TestCase):
                     "priority": "CRITICAL",
                     "rrn": "rrn:example",
                     "source": "ALERT",
-                    "status": "OPEN",
+                    "status": "INVESTIGATING",
                     "title": "Example Title",
                 }
             ],
             "metadata": {"index": 0, "size": 1, "total_data": 1, "total_pages": 1},
         }
         self.assertEqual(actual, expected)
+
+    def test_list_attachments_bad(self, _mock_req):
+        with self.assertRaises(PluginException) as error:
+            self.action.run({Input.INDEX: 0, Input.SIZE: 1, Input.STATUSES: "OPEN", Input.SOURCES: ["INVALID_SOURCE"]})
+        self.assertEqual(error.exception.cause, PluginException.causes[PluginException.Preset.BAD_REQUEST])
+        self.assertEqual(error.exception.assistance, PluginException.assistances[PluginException.Preset.BAD_REQUEST])

@@ -10,8 +10,8 @@ from komand_rapid7_insightidr.actions.set_priority_of_investigation import SetPr
 from komand_rapid7_insightidr.actions.set_priority_of_investigation.schema import Input
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
-from unit_test.mock import mock_put_request, STUB_INVESTIGATION_IDENTIFIER, STUB_PRIORITY
-from unit_test.util import Util
+from mock import mock_put_request, STUB_INVESTIGATION_IDENTIFIER, STUB_PRIORITY
+from util import Util
 
 
 class TestSetPriorityOfInvestigation(TestCase):
