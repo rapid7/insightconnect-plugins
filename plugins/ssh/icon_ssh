@@ -23,7 +23,7 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
-    from komand_ssh import connection, actions, triggers, tasks
+    from icon_ssh import connection, actions, triggers, tasks
 
     class ICONSsh(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
