@@ -14,11 +14,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
         base_url = f"https://{params.get(Input.SUBDOMAIN)}.freshservice.com"
-        self.api = FreshServiceAPI(base_url, params.get(Input.APIKEY).get("secretKey"), self.logger)
+        self.api = FreshServiceAPI(base_url, params.get(Input.APIKEY, {}).get("secretKey"), self.logger)
 
     def test(self):
         try:
-            self.api.list_all_groups()
+            self.api.list_sla_policies()
             return {"success": True}
         except PluginException as error:
             raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)
