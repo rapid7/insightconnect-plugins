@@ -78,4 +78,14 @@ class Util:
             return MockResponse("get_group_id_from_name", 200)
         if args[0] == "https://graph.microsoft.com/beta/groups/12345/owners/$ref":
             return MockResponse("no_content", 204)
+        if (
+            args[0]
+            == "https://graph.microsoft.com/beta/1/teams/example-team-id/channels/11:examplechannel.name/messages/1234567890/replies/1234567891"
+        ):
+            return MockResponse("get_message_in_channel", 200)
+        if (
+            args[0]
+            == "https://graph.microsoft.com/beta/1/users/user@example.com/chats/11:examplechat.name/messages/1234567890"
+        ):
+            return MockResponse("get_message_in_chat", 200)
         raise Exception("Not implemented")

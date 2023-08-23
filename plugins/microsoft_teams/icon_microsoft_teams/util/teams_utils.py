@@ -3,6 +3,7 @@ import requests
 import re
 from logging import Logger
 import insightconnect_plugin_runtime.connection
+from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
 
 
 def get_teams_from_microsoft(  # noqa: C901
@@ -22,11 +23,12 @@ def get_teams_from_microsoft(  # noqa: C901
     if team_name and not explicit:
         try:
             compiled_team_name = re.compile(team_name)
-        except Exception as e:
+        except Exception as error:
             raise PluginException(
                 cause=f"Team Name {team_name} was an invalid regular expression.",
                 assistance=f"Please correct {team_name}",
-            ) from e
+                data=error,
+            ) from error
 
     # See if we are looking for a team name exactly or not
     if explicit:
@@ -34,25 +36,27 @@ def get_teams_from_microsoft(  # noqa: C901
     else:
         teams_url = "https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team')"
     headers = connection.get_headers()
-    teams_result = requests.get(teams_url, headers=headers)
+    teams_result = requests.get(teams_url, headers=headers)  # nosec B113
     try:
         teams_result.raise_for_status()
-    except Exception as e:
-        raise PluginException(cause="Attempt to get teams failed.", assistance=teams_result.text) from e
+    except Exception as error:
+        raise PluginException(cause="Attempt to get teams failed.", assistance=teams_result.text, data=error) from error
 
     try:
         teams = teams_result.json().get("value")
-    except Exception as e:
-        raise PluginException(PluginException.Preset.INVALID_JSON) from e
+    except Exception as error:
+        raise PluginException(PluginException.Preset.INVALID_JSON, data=error) from error
 
     nextlink = teams_result.json().get("@odata.nextLink")
 
     # If there's more than 20 teams, the results will come back paginated.
     while nextlink:
         try:
-            new_teams = requests.get(nextlink, headers=headers)
-        except Exception as e:
-            raise PluginException(cause="Attempt to get paginated teams failed.", assistance=teams_result.text) from e
+            new_teams = requests.get(nextlink, headers=headers)  # nosec B113
+        except Exception as error:
+            raise PluginException(
+                cause="Attempt to get paginated teams failed.", assistance=teams_result.text, data=error
+            ) from error
         nextlink = new_teams.json().get("@odata.nextLink", "")
         teams.extend(new_teams.json().get("value"))
 
@@ -95,11 +99,12 @@ def get_channels_from_microsoft(  # noqa: C901
     if channel_name:
         try:
             compiled_channel_name = re.compile(channel_name)
-        except Exception as e:
+        except Exception as error:
             raise PluginException(
                 cause=f"Channel Name {compiled_channel_name} was an invalid regular expression.",
                 assistance=f"Please correct {compiled_channel_name}",
-            ) from e
+                data=error,
+            ) from error
 
     # See if we are looking for a channel name exactly or not
     if explicit:
@@ -107,15 +112,17 @@ def get_channels_from_microsoft(  # noqa: C901
     else:
         channels_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/teams/{team_id}/channels"
     headers = connection.get_headers()
-    channels_result = requests.get(channels_url, headers=headers)
+    channels_result = requests.get(channels_url, headers=headers)  # nosec B113
     try:
         channels_result.raise_for_status()
-    except Exception as e:
-        raise PluginException(cause="Attempt to get channels failed.", assistance=channels_result.text) from e
+    except Exception as error:
+        raise PluginException(
+            cause="Attempt to get channels failed.", assistance=channels_result.text, data=error
+        ) from error
     try:
         channels = channels_result.json().get("value")
-    except Exception as e:
-        raise PluginException(PluginException.Preset.INVALID_JSON) from e
+    except Exception as error:
+        raise PluginException(PluginException.Preset.INVALID_JSON, data=error) from error
 
     # Note: the channels endpoint does not paginate. Channels max out at 200 per team
     # All 200 will be returned in one list
@@ -169,11 +176,11 @@ def send_message(
 
     body = {"body": {"content": message}}
 
-    result = requests.post(send_message_url, headers=headers, json=body)
+    result = requests.post(send_message_url, headers=headers, json=body)  # nosec B113
     try:
         result.raise_for_status()
-    except Exception as e:
-        raise PluginException(cause="Send message failed.", assistance=result.text) from e
+    except Exception as error:
+        raise PluginException(cause="Send message failed.", assistance=result.text, data=error) from error
 
     message = result.json()
     return message
@@ -208,11 +215,11 @@ def send_html_message(
 
     body = {"body": {"contentType": "html", "content": message}}
 
-    result = requests.post(send_message_url, headers=headers, json=body)
+    result = requests.post(send_message_url, headers=headers, json=body)  # nosec B113
     try:
         result.raise_for_status()
-    except Exception as e:
-        raise PluginException(cause="Send message failed.", assistance=result.text) from e
+    except Exception as error:
+        raise PluginException(cause="Send message failed.", assistance=result.text, data=error) from error
 
     message = result.json()
     return message
@@ -248,12 +255,14 @@ def create_channel(
     headers = connection.get_headers()
 
     logger.info(f"Creating {channel_type} channel with: {create_channel_endpoint}")
-    result = requests.post(create_channel_endpoint, json=create_channel_payload, headers=headers)
+    result = requests.post(create_channel_endpoint, json=create_channel_payload, headers=headers)  # nosec B113
 
     try:
         result.raise_for_status()
     except Exception as error:
-        raise PluginException(cause=f"Create channel {channel_name} failed.", assistance=result.text) from error
+        raise PluginException(
+            cause=f"Create channel {channel_name} failed.", assistance=result.text, data=error
+        ) from error
 
     if not result.status_code == 201:
         raise PluginException(cause="Create channel returned an unexpected result.", assistance=result.text)
@@ -281,14 +290,60 @@ def delete_channel(
     headers = connection.get_headers()
 
     logger.info(f"Deleting channel with: {delete_channel_endpoint}")
-    result = requests.delete(delete_channel_endpoint, headers=headers)
+    result = requests.delete(delete_channel_endpoint, headers=headers)  # nosec B113
 
     try:
         result.raise_for_status()
-    except Exception as e:
-        raise PluginException(cause=f"Delete channel {channel_id} failed.", assistance=result.text) from e
+    except Exception as error:
+        raise PluginException(
+            cause=f"Delete channel {channel_id} failed.", assistance=result.text, data=error
+        ) from error
 
     if not result.status_code == 204:
         raise PluginException(cause="Delete channel returned an unexpected result.", assistance=result.text)
 
     return True
+
+
+def get_message_from_channel(  # noqa: C901
+    connection: insightconnect_plugin_runtime.connection,
+    team_id: str,
+    channel_id: str,
+    message_id: str,
+    reply_id: str = None,
+) -> list:
+    message_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/teams/{team_id}/channels/{channel_id}/messages/{message_id}"
+    if reply_id:
+        message_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/teams/{team_id}/channels/{channel_id}/messages/{message_id}/replies/{reply_id}"
+    headers = connection.get_headers()
+    response = requests.get(message_url, headers=headers)  # nosec B113
+    try:
+        response.raise_for_status()
+    except Exception as error:
+        raise PluginException(preset=PluginException.Preset.BAD_REQUEST, assistance=response.text, data=error)
+    try:
+        message = response.json()
+    except Exception as error:
+        raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
+    return remove_null_and_clean(message)
+
+
+def get_message_from_chat(  # noqa: C901
+    connection: insightconnect_plugin_runtime.connection,
+    username: str,
+    chat_id: str,
+    message_id: str,
+) -> list:
+    message_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/users/{username}/chats/{chat_id}/messages/{message_id}"
+    headers = connection.get_headers()
+    response = requests.get(message_url, headers=headers)  # nosec B113
+
+    try:
+        response.raise_for_status()
+    except Exception as error:
+        raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=error)
+    try:
+        message = response.json()
+    except Exception as error:
+        raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
+    return remove_null_and_clean(message)
