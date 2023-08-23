@@ -1,12 +1,13 @@
 import logging
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
+import json
+
 from icon_freshservice.connection.connection import Connection
 from icon_freshservice.connection.schema import Input
-import json
 
 
 class Util:
