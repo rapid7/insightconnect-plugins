@@ -26,30 +26,21 @@ class IsolateEndpoint(insightconnect_plugin_runtime.Action):
         client = self.connection.client
         # Get Action Parameters
         endpoint_identifiers = params.get(Input.ENDPOINT_IDENTIFIERS)
-        # Make Action API Call
-        self.logger.info("Making API Call...")
-        multi_resp = []
-        for endpoint_identifier in endpoint_identifiers:
-            if endpoint_identifier.get("endpoint_name") and endpoint_identifier.get("agent_guid"):
-                response = client.isolate_endpoint(
+        # Build endpoints list
+        endpoints = []
+        for endpoint in endpoint_identifiers:
+            if endpoint.get("endpoint_name"):
+                endpoints.append(
                     pytmv1.EndpointTask(
-                        endpointName=endpoint_identifier.get("endpoint_name"),
-                        agentGuid=endpoint_identifier.get("agent_guid"),
-                        description=endpoint_identifier.get("description", ""),
+                        endpointName=endpoint.get("endpoint_name"),
+                        description=endpoint.get("description", "Isolate Endpoint"),
                     )
                 )
-            elif endpoint_identifier.get("endpoint_name") and not endpoint_identifier.get("agent_guid"):
-                response = client.isolate_endpoint(
+            elif endpoint.get("agent_guid"):
+                endpoints.append(
                     pytmv1.EndpointTask(
-                        endpointName=endpoint_identifier.get("endpoint_name"),
-                        description=endpoint_identifier.get("description", ""),
-                    )
-                )
-            elif endpoint_identifier.get("agent_guid") and not endpoint_identifier.get("endpoint_name"):
-                response = client.isolate_endpoint(
-                    pytmv1.EndpointTask(
-                        agentGuid=endpoint_identifier.get("agent_guid"),
-                        description=endpoint_identifier.get("description", ""),
+                        agentGuid=endpoint.get("agent_guid"),
+                        description=endpoint.get("description", "Isolate Endpoint"),
                     )
                 )
             else:
@@ -57,13 +48,15 @@ class IsolateEndpoint(insightconnect_plugin_runtime.Action):
                     cause="Neither Endpoint Name nor Agent GUID provided.",
                     assistance="Please check the provided parameters and try again.",
                 )
-            if "error" in response.result_code.lower():
-                raise PluginException(
-                    cause="An error occurred while isolating endpoint.",
-                    assistance="Please check the endpoint name and try again.",
-                    data=response.errors,
-                )
-            multi_resp.append(response.response.dict().get("items")[0])
+        # Make Action API Call
+        self.logger.info("Making API Call...")
+        response = client.isolate_endpoint(*endpoints)
+        if "error" in response.result_code.lower():
+            raise PluginException(
+                cause="An error occurred while isolating endpoint.",
+                assistance="Please check the endpoint name and try again.",
+                data=response.errors,
+            )
         # Return results
         self.logger.info("Returning Results...")
-        return {Output.MULTI_RESPONSE: multi_resp}
+        return {Output.MULTI_RESPONSE: response.response.dict().get("items")}
