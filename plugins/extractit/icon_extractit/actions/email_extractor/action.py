@@ -3,7 +3,7 @@ from .schema import EmailExtractorInput, EmailExtractorOutput, Input, Output, Co
 
 # Custom imports below
 from icon_extractit.util.util import Regex
-from icon_extractit.util.extractor import extract, clear_emails
+from icon_extractit.util.extractor import extract, clear_emails, fix_emails_suffix
 
 
 class EmailExtractor(insightconnect_plugin_runtime.Action):
@@ -16,4 +16,8 @@ class EmailExtractor(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {Output.EMAILS: clear_emails(extract(Regex.Email, params.get(Input.STR), params.get(Input.FILE)))}
+        return {
+            Output.EMAILS: fix_emails_suffix(
+                clear_emails(extract(Regex.Email, params.get(Input.STR), params.get(Input.FILE)))
+            )
+        }
