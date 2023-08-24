@@ -4,8 +4,9 @@ products: [insightconnect]
 name: rapid7_insightcloudsec
 title: Rapid7 InsightCloudSec
 description: InsightCloudSec by Rapid7 (formerly DivvyCloud) is a Cloud-Native Security Platform that provides real-time analysis and automated remediation for continuous security and compliance for your multi-cloud environment
-version: 1.0.0
+version: 1.0.1
 supported_versions: ["22.10.19"]
+cloud_ready: true
 vendor: rapid7
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insightcloudsec
@@ -16,7 +17,7 @@ support: rapid7
 status: []
 hub_tags:
   use_cases: [remediation_management, reporting_and_analytics]
-  keywords: [rapid7, insightcloudsec]
+  keywords: [rapid7, insightcloudsec, cloud_enabled]
   features: []
 types:
   accountDetails:
