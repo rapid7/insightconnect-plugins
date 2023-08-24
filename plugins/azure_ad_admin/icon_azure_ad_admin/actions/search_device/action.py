@@ -18,13 +18,11 @@ class SearchDevice(insightconnect_plugin_runtime.Action):
             output=SearchDeviceOutput(),
         )
 
-    # TODO: Przeniesc do api (?) i dodac obsluge bledow
     def run(self, params={}):
-        url = Endpoint.DEVICES.format(self.connection.tenant)
         headers = self.connection.get_headers(self.connection.get_auth_token())
+        headers["ConsistencyLevel"] = "eventual"
         search = params.get(Input.SEARCH)
         select = params.get(Input.SELECT)
-        headers["ConsistencyLevel"] = "eventual"
         search_params = {
             "$search": f'"{search}"' if search else "",
             "$filter": params.get(Input.FILTER),
@@ -32,7 +30,12 @@ class SearchDevice(insightconnect_plugin_runtime.Action):
             "$select": ", ".join(select) if select else [],
             "$count": "true",
         }
-        response = requests.request(method="GET", url=url, params=clean(search_params), headers=headers)
+        response = requests.request(
+            method="GET",
+            url=Endpoint.DEVICES.format(self.connection.tenant),
+            params=clean(search_params),
+            headers=headers,
+        )
         raise_for_status(response)
         devices = response.json().get("value", [])
         return {Output.DEVICES: clean(devices)}

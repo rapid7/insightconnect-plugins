@@ -16,9 +16,11 @@ class GetDevice(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        url = Endpoint.DEVICE_ID.format(self.connection.tenant, device_id=params.get(Input.DEVICEID))
-        headers = self.connection.get_headers(self.connection.get_auth_token())
-        response = requests.request(method="GET", url=url, headers=headers)
+        response = requests.request(
+            method="GET",
+            url=Endpoint.DEVICE_ID.format(self.connection.tenant, device_id=params.get(Input.DEVICEID)),
+            headers=self.connection.get_headers(self.connection.get_auth_token()),
+        )
         raise_for_status(response)
         device = response.json()
         return {Output.DEVICE: clean(device)}
