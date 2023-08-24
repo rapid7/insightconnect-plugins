@@ -10,6 +10,7 @@ the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=g
 * Add and remove users
 * Disable and enable users
 * Force users to change their password
+* Enable, disable, get, search and delete devices
 
 # Requirements
 
@@ -50,6 +51,252 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Search Device
+
+This action is used to search for devices using a given query. For more information about queries visit https://learn.microsoft.com/en-us/graph/filter-query-parameter?tabs=http; https://learn.microsoft.com/en-us/graph/search-query-parameter?tabs=http; https://learn.microsoft.com/en-us/graph/aad-advanced-queries?tabs=http#device-properties.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|filter|string|None|False|Filter devices by query. See details about query in action description|None|approximateLastSignInDateTime le 2021-06-11T18:01:51Z|
+|orderBy|string|None|False|Sorts list results by the provided device parameter|None|displayName|
+|search|string|None|False|Search parameters by query. See details about query in action description|None|displayName:INTUNE|
+|select|[]string|None|False|Fields to be included in the output|None|["id", "createdDateTime"]|
+
+Example input:
+
+```
+{
+  "filter": "approximateLastSignInDateTime le 2021-06-11T18:01:51Z",
+  "orderBy": "displayName",
+  "search": "displayName:INTUNE",
+  "select": [
+    "id",
+    "createdDateTime"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|devices|[]device|False|Information about the devices|[]|
+
+Example output:
+
+```
+{
+  "devices": [
+    {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "accountEnabled": true,
+      "approximateLastSignInDateTime": "2020-06-20T21:15:48Z",
+      "createdDateTime": "2020-06-10T23:11:21Z",
+      "deviceId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "deviceOwnership": "Company",
+      "deviceVersion": 2,
+      "displayName": "DESKTOP-D10L83K",
+      "enrollmentType": "AzureDomainJoined",
+      "exchangeActiveSyncIds": [
+        "eas:415F14BD1A98FEA919DF00327EA5DC81:9de5069c-5afe-602b-2ea0-a04b66beb2c0:20200610T231818"
+      ],
+      "isCompliant": false,
+      "isManaged": true,
+      "isRooted": false,
+      "managementType": "MDM",
+      "manufacturer": "innotek GmbH",
+      "mdmAppId": "0000000a-0000-0000-c000-000000000000",
+      "model": "VirtualBox",
+      "operatingSystem": "Windows",
+      "operatingSystemVersion": "10.0.19041.329",
+      "physicalIds": [
+        "[USER-GID]:9de5069c-5afe-602b-2ea0-a04b66beb2c0:6755416654410028",
+        "[GID]:g:6755416654410028",
+        "[USER-HWID]:9de5069c-5afe-602b-2ea0-a04b66beb2c0:6755416654410025",
+        "[HWID]:h:6755416654410025"
+      ],
+      "profileType": "RegisteredDevice",
+      "registrationDateTime": "2020-06-10T23:11:20Z",
+      "systemLabels": [],
+      "trustType": "AzureAd",
+      "alternativeSecurityIds": [
+        {
+          "type": 2,
+          "key": "WAA1ADAAOQA6ADwAUwBIAEEAM"
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### Get Device
+
+This action is used to get the device with the given ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|deviceId|string|None|True|ID of the device|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "deviceId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|device|device|False|Information about the device|{}|
+
+Example output:
+
+```
+{
+  "device": {
+    "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+    "accountEnabled": true,
+    "approximateLastSignInDateTime": "2020-06-20T21:15:48Z",
+    "createdDateTime": "2020-06-10T23:11:21Z",
+    "deviceId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+    "deviceOwnership": "Company",
+    "deviceVersion": 2,
+    "displayName": "DESKTOP-D10L83K",
+    "enrollmentType": "AzureDomainJoined",
+    "exchangeActiveSyncIds": [
+      "eas:415F14BD1A98FEA919DF00327EA5DC81:9de5069c-5afe-602b-2ea0-a04b66beb2c0:20200610T231818"
+    ],
+    "isCompliant": false,
+    "isManaged": true,
+    "isRooted": false,
+    "managementType": "MDM",
+    "manufacturer": "innotek GmbH",
+    "mdmAppId": "0000000a-0000-0000-c000-000000000000",
+    "model": "VirtualBox",
+    "operatingSystem": "Windows",
+    "operatingSystemVersion": "10.0.19041.329",
+    "physicalIds": [
+      "[USER-GID]:9de5069c-5afe-602b-2ea0-a04b66beb2c0:6755416654410028",
+      "[GID]:g:6755416654410028",
+      "[USER-HWID]:9de5069c-5afe-602b-2ea0-a04b66beb2c0:6755416654410025",
+      "[HWID]:h:6755416654410025"
+    ],
+    "profileType": "RegisteredDevice",
+    "registrationDateTime": "2020-06-10T23:11:20Z",
+    "trustType": "AzureAd",
+    "alternativeSecurityIds": [
+      {
+        "type": 2,
+        "key": "WAA1ADAAOQA6ADwAUwBIAEEAM"
+      }
+    ]
+  }
+}
+```
+
+#### Enable Device
+
+This action is used to enable the device with the given ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|deviceId|string|None|True|ID of the device|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "deviceId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|Whether the action was successful|true|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Disable Device
+
+This action is used to disable the device with the given ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|deviceId|string|None|True|ID of the device|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "deviceId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|Whether the action was successful|true|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Delete Device
+
+This action is used to delete the device with the given ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|deviceId|string|None|True|ID of the device|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "deviceId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|Whether the action was successful|true|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Change User Password
 
@@ -586,83 +833,212 @@ This trigger provides a list of both user and sign-in linked risk detections and
 
 ### Custom Output Types
 
-### user_information
+#### alternativeSecurityId
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|@odata.context|string|False|@odata.context|
-|accountEnabled|boolean|False|Account enabled|
-|businessPhones|[]string|False|Business phones|
-|displayName|string|False|Display name|
-|givenName|string|False|Given Name|
-|id|string|False|ID|
-|jobTitle|string|False|Job title|
-|mail|string|False|Mail|
-|mobilePhone|string|False|Mobile phone|
-|officeLocation|string|False|Office location|
-|preferredLanguage|string|False|Preferred language|
-|surname|string|False|Surname|
-|userPrincipalName|string|False|User principal name|
+|Identity Provider|string|False|Identity provider|
+|Key|string|False|Key|
+|Type|integer|False|Type|
 
-### group
+#### device
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|createdDateTime|string|False|Created date time|
-|description|string|False|Description|
-|displayName|string|False|Display name|
-|groupTypes|[]string|False|Group types|
-|id|string|False|ID|
-|isAssignableToRole|boolean|False|Is assignable to role|
-|mail|string|False|Mail|
-|mailEnabled|boolean|False|Mail enabled|
-|mailNickname|string|False|Mail nickname|
-|proxyAddresses|[]string|False|Proxy addresses|
-|renewedDateTime|string|False|Renewed date time|
-|securityEnabled|boolean|False|Security enabled|
-|visibility|string|False|Visibility|
+|Account Enabled|boolean|False|True if the account is enabled; otherwise, false|
+|Alternative Security IDs|[]alternativeSecurityId|False|List of alternative security IDs|
+|Approximate Last Sign In Datetime|string|False|The timestamp of last login in ISO 8601 format and in UTC time|
+|Compliant Expiration Datetime|string|False|The timestamp when the device is no longer deemed compliant|
+|Device Category|string|False|User-defined property set by Intune to automatically add devices to groups and simplify managing devices|
+|Device ID|string|False|Unique identifier set by Azure Device Registration Service at the time of registration|
+|Device Metadata|string|False|Metadata of the device|
+|Device Ownership|string|False|Ownership of the device|
+|Device Version|integer|False|Version of the device|
+|Display Name|string|False|The display name for the device|
+|Enrollment Profile Name|string|False|Enrollment profile name of the device|
+|Enrollment Type|string|False|Enrollment type of the device|
+|Exchange Active Sync IDs|[]string|False|Exchange active sync IDs of the device|
+|Extension Attributes|extensionAttributes|False|Contains extension attributes 1-15 for the device|
+|ID|string|False|The unique identifier for the device|
+|Is Compliant|boolean|False|Whether the device complies with Mobile Device Management (MDM) policies|
+|Is Managed|boolean|False|Whether the device is managed by Mobile Device Management (MDM)|
+|Is Rooted|boolean|False|Whether the device is rooted|
+|Management Type|string|False|Management type of the device|
+|Manufacturer|string|False|Manufacturer of the device|
+|Mobile Device Management App ID|string|False|Application identifier used to register device into MDM|
+|Model|string|False|Model of the device|
+|On Premises Last Sync Date Time|string|False|The last time at which the object was synced with the on-premises directory. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time.|
+|On Premises Sync Enabled|boolean|False|Whether the object is synced from an on-premises directory|
+|Operating System|string|False|The type of operating system on the device|
+|Operating System Version|string|False|The version of the operating system on the device|
+|Physical IDs|[]string|False|List of physical IDs|
+|Profile Type|string|False|The profile type of the device|
+|Registration Date Time|string|False|Date and time of when the device was registered. The timestamp type represents date and time information using ISO 8601 format and is always in UTC time|
+|System Labels|[]string|False|List of labels applied to the device by the system|
+|Trust Type|string|False|Type of trust for the joined device|
 
-### geo_coordinates
+#### extensionAttributes
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|altitude|string|False|The altitude (height), in feet, above sea level|
-|latitude|string|False|The latitude, in decimal|
-|longitude|string|False|The longitude, in decimal|
+|Extension Attribute 1|string|False|First customizable extension attribute|
+|Extension Attribute 10|string|False|Tenth customizable extension attribute|
+|Extension Attribute 11|string|False|Eleventh customizable extension attribute|
+|Extension Attribute 12|string|False|Twelfth customizable extension attribute|
+|Extension Attribute 13|string|False|Thirteenth customizable extension attribute|
+|Extension Attribute 14|string|False|Fourteenth customizable extension attribute|
+|Extension Attribute 15|string|False|Fifteenth customizable extension attribute|
+|Extension Attribute 2|string|False|Second customizable extension attribute|
+|Extension Attribute 3|string|False|Third customizable extension attribute|
+|Extension Attribute 4|string|False|Fourth customizable extension attribute|
+|Extension Attribute 5|string|False|Fifth customizable extension attribute|
+|Extension Attribute 6|string|False|Sixth customizable extension attribute|
+|Extension Attribute 7|string|False|Seventh customizable extension attribute|
+|Extension Attribute 8|string|False|Eighth customizable extension attribute|
+|Extension Attribute 9|string|False|Ninth customizable extension attribute|
 
-### sign_in_location
+#### geo_coordinates
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|city|string|False|City where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity|
-|country_or_region|string|False|Country code info (2 letter code) where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity|
-|geo_coordinates|geo_coordinates|False|Geo coordinates|
-|state|string|False|State where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity|
+|Altitude|string|False|The altitude (height), in feet, above sea level|
+|Latitude|string|False|The latitude, in decimal|
+|Longitude|string|False|The longitude, in decimal|
 
-### risk
+#### group
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|activity|string|False|Indicates the activity type the detected risk is linked to. The possible values are signin, user, unknownFutureValue|
-|activity_date_time|string|False|Date and time that the risky activity occurred|
-|additional_info|string|False|Additional information associated with the risk detection|
-|correlation_id|string|False|Correlation ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in|
-|detected_date_time|string|False|Date and time that the risk was detected|
-|detection_timing_type|string|False|Timing of the detected risk (real-time/offline). The possible values are notDefined, realtime, nearRealtime, offline, unknownFutureValue|
-|id|string|True|Unique ID of the risk detection|
-|ip_address|string|False|IP address of the client from where the risk occurred|
-|last_updated_date_time|string|False|Date and time that the risk detection was last updated|
-|location|sign_in_location|False|Location of the client from where the risk occurred|
-|request_id|string|False|Request ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in|
-|risk_detail|string|False|Details of the detected risk. Details for this property are only available for Azure AD Premium P2 customers. P1 customers will be returned hidden|
-|risk_level|string|False|Level of the detected risk|
-|risk_state|string|False|The state of a detected risky user or sign-in|
-|risk_type|string|False|The type of risk event detected|
-|source|string|False|Source of the risk detection. For example, activeDirectory|
-|token_issuer_type|string|False|Indicates the activity type the detected risk is linked to. The possible values are signin, user, unknownFutureValue|
-|user_display_name|string|False|User display name|
-|user_id|string|False|User ID|
-|user_principal_name|string|False|The user principal name (UPN) of the user|
+|Created Date Time|string|False|Created date time|
+|Description|string|False|Description|
+|Display Name|string|False|Display name|
+|Group Types|[]string|False|Group types|
+|ID|string|False|ID|
+|Is Assignable to Role|boolean|False|Is assignable to role|
+|Mail|string|False|Mail|
+|Mail Enabled|boolean|False|Mail enabled|
+|Mail Nickname|string|False|Mail nickname|
+|Proxy Addresses|[]string|False|Proxy addresses|
+|Renewed Date Time|string|False|Renewed date time|
+|Security Enabled|boolean|False|Security enabled|
+|Visibility|string|False|Visibility|
+
+#### manager
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|@odata.type|string|False|@odata.type|
+|Account Enabled|boolean|False|Account Enabled|
+|Age Group|string|False|Age Group|
+|Assigned Licenses|[]object|False|Assigned Licenses|
+|Assigned Plans|[]object|False|Assigned Plans|
+|Authorization Info|object|False|Authorization Info|
+|Business Phones|[]string|False|Business phones|
+|Company Name|string|False|Company Name|
+|Consent Provided For Minor|string|False|Consent Provided For Minor|
+|Country|string|False|Country|
+|Created Date Time|date|False|Created Date Time|
+|Creation Type|string|False|Creation Type|
+|Deleted Date Time|date|False|Deleted Date Time|
+|Department|string|False|Department|
+|Display Name|string|False|Display Name|
+|Employee Hire Date|date|False|Employee Hire Date|
+|Employee ID|string|False|Employee ID|
+|Employee Org Data|string|False|Employee Org Data|
+|Employee Type|string|False|Employee Type|
+|External User State|string|False|External User State|
+|External User State Change Date Time|string|False|External User State Change Date Time|
+|Fax Number|string|False|Fax Number|
+|Given Name|string|False|Given Name|
+|ID|string|False|Manager ID|
+|Identities|[]object|False|Identities|
+|Im Addresses|[]string|False|Im Addresses|
+|Is Resource Account|boolean|False|Is Resource Account|
+|Job Title|string|False|Job Title|
+|Legal Age Group Classification|string|False|Legal Age Group Classification|
+|Mail|string|False|Mail|
+|Mail Nickname|string|False|Mail Nickname|
+|Mobile Phone|string|False|Mobile Phone|
+|Office Location|string|False|Office Location|
+|On Premises Distinguished Name|string|False|On Premises Distinguished Name|
+|On Premises Domain Name|string|False|On Premises Domain Name|
+|On Premises Extension Attributes|object|False|On Premises Extension Attributes|
+|On Premises Immutable ID|string|False|On Premises Immutable ID|
+|On Premises Last Sync Date Time|date|False|On Premises Last Sync Date Time|
+|On Premises Provisioning Errors|[]string|False|On Premises Provisioning Errors|
+|On Premises Sam Account Name|string|False|On Premises Sam Account Name|
+|On Premises Security Identifier|string|False|On Premises Security Identifier|
+|On Premises Sync Enabled|boolean|False|On Premises Sync Enabled|
+|On Premises User Principal Name|string|False|On Premises User Principal Name|
+|Other Mails|[]string|False|Other Mails|
+|Password Policies|string|False|Password Policies|
+|Password Profile|object|False|Password Profile|
+|Postal Code|string|False|Postal Code|
+|Preferred Data Location|string|False|Preferred Data Location|
+|Provisioned Plans|[]object|False|Provisioned Plans|
+|Proxy Addresses|[]string|False|Proxy Addresses|
+|Refresh Tokens Valid From Date Time|date|False|Refresh Tokens Valid From Date Time|
+|Show In Address List|boolean|False|Show In Address List|
+|Sign In Sessions Valid From Date Time|date|False|Sign In Sessions Valid From Date Time|
+|State|string|False|State|
+|Street Address|string|False|Street Address|
+|Surname|string|False|Surname|
+|Usage Location|string|False|Usage Location|
+|User Principal Name|string|False|User Principal Name|
+|User Type|string|False|User Type|
+
+#### risk
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Activity|string|False|Indicates the activity type the detected risk is linked to. The possible values are signin, user, unknownFutureValue|
+|Activity Date Time|string|False|Date and time that the risky activity occurred|
+|Additional Information|string|False|Additional information associated with the risk detection|
+|Correlation ID|string|False|Correlation ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in|
+|Detected Date Time|string|False|Date and time that the risk was detected|
+|Detection Timimg Type|string|False|Timing of the detected risk (real-time/offline). The possible values are notDefined, realtime, nearRealtime, offline, unknownFutureValue|
+|ID|string|True|Unique ID of the risk detection|
+|IP Address|string|False|IP address of the client from where the risk occurred|
+|Last Updated Date Time|string|False|Date and time that the risk detection was last updated|
+|Location|sign_in_location|False|Location of the client from where the risk occurred|
+|Request ID|string|False|Request ID of the sign-in associated with the risk detection. This property is null if the risk detection is not associated with a sign-in|
+|Risk Detail|string|False|Details of the detected risk. Details for this property are only available for Azure AD Premium P2 customers. P1 customers will be returned hidden|
+|Risk Level|string|False|Level of the detected risk|
+|Risk State|string|False|The state of a detected risky user or sign-in|
+|Risk Type|string|False|The type of risk event detected|
+|Risk Level|string|False|Source of the risk detection. For example, activeDirectory|
+|Token Issuer Type|string|False|Indicates the type of token issuer for the detected sign-in risk. The possible values are AzureAD, ADFederationServices, and unknownFutureValue|
+|User Display Name|string|False|User display name|
+|User ID|string|False|User ID|
+|User Principal Name|string|False|The user principal name (UPN) of the user|
+
+#### sign_in_location
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|City|string|False|City where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity|
+|Country Or Region|string|False|Country code info (2 letter code) where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity|
+|Geo Coordinates|geo_coordinates|False|Geo coordinates|
+|State|string|False|State where the sign-in originated. This is calculated using latitude/longitude information from the sign-in activity|
+
+#### user_information
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|@odata.Context|string|False|@odata.context|
+|Account Enabled|boolean|False|Account enabled|
+|Business Phones|[]string|False|Business phones|
+|Display Name|string|False|Display name|
+|Given Name|string|False|Given Name|
+|ID|string|False|ID|
+|Job Title|string|False|Job title|
+|Mail|string|False|Mail|
+|Manager|manager|False|Manager|
+|Mobile Phone|string|False|Mobile phone|
+|Office Location|string|False|Office location|
+|Preferred Language|string|False|Preferred language|
+|Surname|string|False|Surname|
+|User Principal Name|string|False|User principal name|
 
 ## Troubleshooting
 
@@ -670,6 +1046,7 @@ Trigger `risk_detection` needs Application permission to set as `IdentityRiskEve
 
 # Version History
 
+* 4.1.0 - New actions Enable Device, Disable Device, Get Device, Search Device, Delete Device
 * 4.0.0 - Get User Info action: fix data validation | New action: Change User Password
 * 3.0.1 - Enable cloud orchestrator
 * 3.0.0 - Fix issue with incorrect data validation in Get User Info action
@@ -693,8 +1070,9 @@ Trigger `risk_detection` needs Application permission to set as `IdentityRiskEve
 
 # Links
 
+* [Azure AD Admin](https://azure.microsoft.com)
+
 ## References
 
-* [Azure AD Admin](https://azure.microsoft.com)
 * [User API](https://docs.microsoft.com/en-us/graph/api/resources/user?view=graph-rest-1.0)
 * [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=graph-rest-1.0)
