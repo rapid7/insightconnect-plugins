@@ -1,7 +1,7 @@
 {
-	"spec": "4121e5893d06b2049499e89fc8baa8c1",
-	"manifest": "63b2e150bae48fee74ec0561d2b67122",
-	"setup": "ac4bc6cb203ba5821809e8b31a85a010",
+	"spec": "71e3b898bc2cfcad0892fdb1d40ea2b0",
+	"manifest": "6eb2fa84d3c3d465557252a7a4e1df74",
+	"setup": "3692127e76f7b59a21a4088136246abd",
 	"schemas": [
 		{
 			"identifier": "add_user_to_group/schema.py",
@@ -20,8 +20,20 @@
 			"hash": "d86a828bf532c6470d9cc45ff8ed0b85"
 		},
 		{
+			"identifier": "delete_device/schema.py",
+			"hash": "eabe03d3ac7e3be5e311c1e232d86e4c"
+		},
+		{
+			"identifier": "disable_device/schema.py",
+			"hash": "7d1ac4354f897359534e6e0e8b540879"
+		},
+		{
 			"identifier": "disable_user_account/schema.py",
 			"hash": "bb68bb34606b69db2079e927c11afa53"
+		},
+		{
+			"identifier": "enable_device/schema.py",
+			"hash": "3334f0e5ab4d0b25792070f01eb83f3c"
 		},
 		{
 			"identifier": "enable_user_account/schema.py",
@@ -30,6 +42,10 @@
 		{
 			"identifier": "force_user_to_change_password/schema.py",
 			"hash": "3bc93016df45cc14081b99889b82e689"
+		},
+		{
+			"identifier": "get_device/schema.py",
+			"hash": "517c37bd2f850e7d34f88bfa05b62c27"
 		},
 		{
 			"identifier": "get_group_by_name/schema.py",
@@ -46,6 +62,10 @@
 		{
 			"identifier": "revoke_sign_in_sessions/schema.py",
 			"hash": "0595c8b68ede1f6777aa1bfe497814c7"
+		},
+		{
+			"identifier": "search_device/schema.py",
+			"hash": "88f0c76012974b8f1127b18074067e92"
 		},
 		{
 			"identifier": "update_user_info/schema.py",

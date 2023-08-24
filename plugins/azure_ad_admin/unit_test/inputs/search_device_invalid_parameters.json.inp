@@ -1,0 +1,6 @@
+{
+  "filter": "approximateLastSignInDateTime gt 2023-06-11T18:01:51Z",
+  "orderBy": "invalidParameter",
+  "search": "displayName:Win2-123_3123",
+  "select": ["id", "displayName"]
+}

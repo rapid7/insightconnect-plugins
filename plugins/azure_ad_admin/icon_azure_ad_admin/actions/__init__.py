@@ -3,11 +3,16 @@ from .add_user_to_group.action import AddUserToGroup
 from .add_user_to_groups_by_id.action import AddUserToGroupsById
 from .change_user_password.action import ChangeUserPassword
 from .create_user.action import CreateUser
+from .delete_device.action import DeleteDevice
+from .disable_device.action import DisableDevice
 from .disable_user_account.action import DisableUserAccount
+from .enable_device.action import EnableDevice
 from .enable_user_account.action import EnableUserAccount
 from .force_user_to_change_password.action import ForceUserToChangePassword
+from .get_device.action import GetDevice
 from .get_group_by_name.action import GetGroupByName
 from .get_user_info.action import GetUserInfo
 from .remove_user_from_group.action import RemoveUserFromGroup
 from .revoke_sign_in_sessions.action import RevokeSignInSessions
+from .search_device.action import SearchDevice
 from .update_user_info.action import UpdateUserInfo

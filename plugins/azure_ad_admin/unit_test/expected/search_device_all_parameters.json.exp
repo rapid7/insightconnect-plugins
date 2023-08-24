@@ -1,0 +1,35 @@
+{
+  "devices": [
+    {
+      "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#devices/$entity",
+      "id": "92345678-1234-1234-1234-987654321011",
+      "accountEnabled": true,
+      "approximateLastSignInDateTime": "2023-06-08T13:08:47Z",
+      "createdDateTime": "2023-06-08T13:08:47Z",
+      "deviceId": "16259411-aa43-420e-aaac-8e02d28a3bf9",
+      "deviceVersion": 2,
+      "displayName": "Win-123_3123",
+      "exchangeActiveSyncIds": [],
+      "operatingSystem": "Windows",
+      "operatingSystemVersion": "10.0.17763.0",
+      "physicalIds": [
+        "[AzureResourceId]:/subscriptions/92345678-1234-1234-1234-987654321011/resourceGroups/IST-740-resourceGroup/providers/Microsoft.Compute/virtualMachines/Win-123_3123",
+        "[USER-GID]:92345678-1234-1234-1234-987654321011:1231243324",
+        "[GID]:g:3123324134",
+        "[USER-HWID]:92345678-1234-1234-1234-987654321011:1231234324",
+        "[HWID]:h:34232455555"
+      ],
+      "profileType": "SecureVM",
+      "registrationDateTime": "2023-06-08T13:08:47Z",
+      "systemLabels": [],
+      "trustType": "AzureAd",
+      "extensionAttributes": {},
+      "alternativeSecurityIds": [
+        {
+          "type": 2,
+          "key": "GFDSJDSFFFKHNFJGVSJFHHBDSKFJHSDKUFHI#&*&@#$32498723987493284yHJDSFBJKDF"
+        }
+      ]
+    }
+  ]
+}

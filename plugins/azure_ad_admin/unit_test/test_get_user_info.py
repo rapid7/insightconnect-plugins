@@ -9,7 +9,7 @@ from typing import Dict
 
 sys.path.append(os.path.abspath("../"))
 
-from unit_test.mock import MockRequest
+from mock import MockRequest
 from icon_azure_ad_admin.util.get_user_info import get_user_info
 from icon_azure_ad_admin.connection.connection import Connection
 from icon_azure_ad_admin.actions.get_user_info import GetUserInfo
