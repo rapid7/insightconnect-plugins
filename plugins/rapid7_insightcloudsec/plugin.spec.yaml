@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: rapid7_insightcloudsec
 title: Rapid7 InsightCloudSec
-description: InsightCloudSec by Rapid7 (formerly DivvyCloud) is a Cloud-Native Security Platform that provides real-time analysis and automated remediation for continuous security and compliance for your multi-cloud environment
+description: InsightCloudSec by Rapid7 (formerly DivvyCloud) is a Cloud-Native Security Platform that provides real-time analysis and automated remediation for continuous security and compliance for your multi-cloud environment 
 version: 1.0.1
 supported_versions: ["22.10.19"]
 cloud_ready: true
