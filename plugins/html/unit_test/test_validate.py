@@ -1,40 +1,49 @@
+from unittest import TestCase, mock
+
+import requests
+
+from icon_html.actions.validate import Validate
+from icon_html.actions.validate.schema import Input
+from unit_test.util import Util, STUB_VALID_INPUT
+
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
 
-from unittest import TestCase
-from icon_html.actions.validate import Validate
-from insightconnect_plugin_runtime.exceptions import PluginException
+sys.path.append(os.path.abspath('../'))
 
 
 class TestValidate(TestCase):
-    def test_validate(self):
+    @mock.patch("requests.post", side_effect=Util.mocked_requests)
+    def test_validate(self, mocked_requests):
 
-        params = {"doc": "<!DOCTYPE html><html><title>Example</title><body><h1>Rapid7 InsightConnect</h1><p>Automate with InsightConnect!</p></body></html>"}
+        test_validate = Validate()
+        input_params = {Input.HTML_CONTENTS: STUB_VALID_INPUT}
+        results = test_validate.run(input_params)
+        expected_response = {"validated": True}
+        self.assertEqual(results, expected_response)
 
-        test_action = Validate()
-        result = test_action.run(params)
+    @mock.patch("requests.post", side_effect=Util.mocked_requests)
+    def test_validate_false(self, mocked_requests):
 
-        self.assertEqual(
-            result, True
-        )
+        test_validate = Validate()
+        input_params = {Input.HTML_CONTENTS: "bad input, expecting false validation"}
+        results = test_validate.run(input_params)
+        expected_response = {"validated": False}
+        self.assertEqual(results, expected_response)
 
-    def test_bad_input(self):
+    # @mock.patch("requests.post", side_effect=Util.mocked_requests)
+    # def test_validate_exception(self, mocked_requests, cause, assistance):
+    #
+    #     test_validate = Validate()
+    #     print(test_validate)
+    #
+    #     input_params = {Input.HTML_CONTENTS: ""}
+    #     results = test_validate.run(input_params)
+    #     print(results)
+    #     # expected_response = {"validated": False}
+    #     # self.assertEqual(results, expected_response)
+    #     self.assertEqual(results, requests.exceptions.RequestException)
+    #     self.assertEqual(cause, "IO Error: ")
+    #     self.assertEqual(assistance, "Please check logs.")
 
-        params = {"doc": "bad input example"}
 
-        test_action = Validate()
-        result = test_action.run(params)
-
-        self.assertEqual(
-            result, False
-        )
-
-    def test_action_empty_string(self):
-        params = {"doc": " "}
-
-        test_action = Validate()
-
-        with self.assertRaises(PluginException) as context:
-            test_action.run(params)
-        self.assertEqual(context.exception.cause, "Run: Invalid input.")

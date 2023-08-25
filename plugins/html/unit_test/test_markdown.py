@@ -10,27 +10,28 @@ sys.path.append(os.path.abspath('../'))
 
 class TestMarkdown(TestCase):
 
-      def test_markdown(self):
+    def test_markdown(self):
 
-            params = {"doc": "<!DOCTYPE html><html><body>Rapid7 InsightConnect<p>Convert HTML to Markdown</p></body></html>"}
+        params = {"doc": "<!DOCTYPE html><html><body>Rapid7 InsightConnect<p>Convert HTML to Markdown</p></body></html>"}
 
-            test_action = Markdown()
-            result = test_action.run(params)
+        test_action = Markdown()
+        result = test_action.run(params)
 
-            self.assertEqual(
-              result,
-              {
-                  "markdown_contents": "Rapid7 InsightConnect\n\nConvert HTML to Markdown\n",
-                  "markdown_file": "UmFwaWQ3IEluc2lnaHRDb25uZWN0CgpDb252ZXJ0IEhUTUwgdG8gTWFya2Rvd24K"
-              }
-            )
+        self.assertEqual(
+          result,
+          {
+              "markdown_contents": "Rapid7 InsightConnect\n\nConvert HTML to Markdown\n",
+              "markdown_file": "UmFwaWQ3IEluc2lnaHRDb25uZWN0CgpDb252ZXJ0IEhUTUwgdG8gTWFya2Rvd24K"
+          }
+        )
 
-      def test_html_with_header_tags(self):
+    def test_html_with_header_tags(self):
 
         params = {"doc": "<!DOCTYPE html><html><body><h1>Rapid7 InsightConnect</h1><p>Convert HTML to Markdown</p></body></html>"}
 
         test_action = Markdown()
         result = test_action.run(params)
+        print(result)
 
         self.assertEqual(
               result['markdown_contents'],
@@ -42,7 +43,7 @@ class TestMarkdown(TestCase):
             "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cj09PT09PT09PT09PT09PT09PT09PQoKQ29udmVydCBIVE1MIHRvIE1hcmtkb3duCg=="
         )
 
-      def test_action_empty_string(self):
+    def test_action_empty_string(self):
 
         params = {"doc": " "}
 

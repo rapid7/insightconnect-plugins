@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 import requests
 from .schema import ValidateOutput, ValidateInput, Input, Output
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class Validate(insightconnect_plugin_runtime.Action):
@@ -25,6 +26,6 @@ class Validate(insightconnect_plugin_runtime.Action):
                 self.logger.info("Run: No response from web service, can't determine validity")
                 return {Output.VALIDATED: False}
             status = msgs[0]["type"]
-            return {Output.VALIDATED: (False if status == "error" else True)}
+            return {Output.VALIDATED: (not status == "error")}
         except requests.exceptions.RequestException:
-            return {"status": "Error"}
+            return PluginException(cause="IO Error: ", assistance="Please check logs.")
