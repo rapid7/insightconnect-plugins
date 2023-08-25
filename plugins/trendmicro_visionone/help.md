@@ -810,8 +810,8 @@ This action retrieves the sandbox analysis results.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|poll|boolean|None|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
-|poll_time_sec|float|None|False|Maximum time to wait for the result to be available|None|15.5|
+|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
+|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|
 |report_id|string|None|True|Report_id of the sandbox submission retrieved from the trendmicro-visionone-get-file-analysis-status command|None|02384|
 
 Example input:
