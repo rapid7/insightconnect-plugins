@@ -467,8 +467,8 @@ This action downloads the analysis result for an object submitted to sandbox for
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Unique alphanumeric string that identifies the analysis results of a submission|None|6345645|
-|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
-|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|
+|poll|boolean|None|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
+|poll_time_sec|float|None|False|Maximum time to wait for the result to be available|None|15.5|
 
 Example input:
 
@@ -511,8 +511,8 @@ This action downloads the investigation package based on submission ID.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Unique alphanumeric string that identifies the analysis results of a submission|None|6345645|
-|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
-|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|
+|poll|boolean|None|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
+|poll_time_sec|float|None|False|Maximum time to wait for the result to be available|None|15.5|
 
 Example input:
 
@@ -939,8 +939,8 @@ This action downloads the suspicious object list associated to the specified obj
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Unique alphanumeric string that identifies the analysis results of a submission|None|6345645|
-|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
-|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|
+|poll|boolean|None|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
+|poll_time_sec|float|None|False|Maximum time to wait for the result to be available|None|15.5|
 
 Example input:
 
@@ -1772,8 +1772,8 @@ This trigger polls the suspicious object list associated to the specified object
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Unique alphanumeric string that identifies the analysis results of a submission|None|6345645|
 |interval|integer|None|True|Interval (in seconds) in which the polling script should run again|None|1800|
-|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
-|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|
+|poll|boolean|None|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
+|poll_time_sec|float|None|False|Maximum time to wait for the result to be available|None|15.5|
 
 Example input:
 
