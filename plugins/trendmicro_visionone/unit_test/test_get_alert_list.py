@@ -14,19 +14,19 @@ class TestGetAlertList(TestCase):
         self.action.connection = self.connection
         self.mock_params = mock_params("get_alert_list")
 
-    def test_integration_get_alert_list(self):
+    def test_1_integration_get_alert_list(self):
         response = self.action.run(self.mock_params["input"])
         for key in response.keys():
             self.assertIn(key, str(self.mock_params["output"].keys()))
 
-    def test_get_alert_list_success(self):
+    def test_2_get_alert_list_success(self):
         expected_result = self.mock_params["output"]
         self.action.connection.client = MagicMock(return_value=expected_result)
         response = self.action.run(self.mock_params["input"])
         for key in response.keys():
             self.assertIn(key, str(expected_result.keys()))
 
-    def test_get_alert_list_failure(self):
+    def test_3_get_alert_list_failure(self):
         self.action.connection.client.consume_alert_list = MagicMock(
             side_effect=PluginException
         )
