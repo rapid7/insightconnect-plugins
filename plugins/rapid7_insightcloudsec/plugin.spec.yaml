@@ -3,9 +3,10 @@ extension: plugin
 products: [insightconnect]
 name: rapid7_insightcloudsec
 title: Rapid7 InsightCloudSec
-description: InsightCloudSec by Rapid7 (formerly DivvyCloud) is a Cloud-Native Security Platform that provides real-time analysis and automated remediation for continuous security and compliance for your multi-cloud environment
-version: 1.0.0
+description: InsightCloudSec by Rapid7 (formerly DivvyCloud) is a Cloud-Native Security Platform that provides real-time analysis and automated remediation for continuous security and compliance for your multi-cloud environment 
+version: 2.0.0
 supported_versions: ["22.10.19"]
+cloud_ready: true
 vendor: rapid7
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insightcloudsec
@@ -16,7 +17,7 @@ support: rapid7
 status: []
 hub_tags:
   use_cases: [remediation_management, reporting_and_analytics]
-  keywords: [rapid7, insightcloudsec]
+  keywords: [rapid7, insightcloudsec, cloud_enabled]
   features: []
 types:
   accountDetails:
@@ -224,22 +225,6 @@ connection:
     default: true
     example: true
 actions:
-  get_account_details:
-    title: Get Account Details
-    description: Get account details based on provided account ID
-    input:
-      accountId:
-        title: Account ID
-        description: ID of the cloud account
-        type: string
-        required: true
-        example: 123456789012
-    output:
-      accountDetails:
-        title: Account Details
-        description: Information about the cloud account for the provided ID
-        type: accountDetails
-        required: false
   get_resource_details:
     title: Get Resource Details
     description: Get all of the details about a resource based on provided resource ID
@@ -272,22 +257,6 @@ actions:
         description: Resource tags for the provided ID
         type: "[]resourceTag"
         required: false
-  run_bot_on_demand:
-    title: Run Bot on Demand
-    description: Run a bot on demand, which will apply the filters and actions to all resources within the scope of the bot
-    input:
-      botId:
-        title: Bot ID
-        description: ID of the bot
-        type: string
-        required: true
-        example: "examplebot:11:1234"
-    output:
-      success:
-        title: Success
-        description: Whether the action was successful
-        type: boolean
-        required: true
   detach_policy:
     title: Detach Policy
     description: Detach a policy from a service user, group, or role
