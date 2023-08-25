@@ -421,7 +421,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.1 - Enable plugin to run in cloud
+* 2.0.0 - Enable plugin to run in cloud | Remove actions using defective API endpoints
 * 1.0.0 - Initial plugin | Add Get Account Details, Get Resource Details, List Resource Tags, Create Exemption, Remove Exemption, Detach Policy, Run Bot on Demand and Switch Organization actions
 
 # Links
