@@ -5,7 +5,6 @@
       "content": "Suspected False Positive, please verify"
     },
     "output": {
-      "$success": true,
       "location": "https://api.xdr.trendmicro.com/v3.0/workbench/alerts/WB-20837-20221111-00000/notes/684770",
       "note_id": "684770",
       "result_code": "SUCCESS"
@@ -264,7 +263,6 @@
     },
     "output": {
       "$success": true,
-      "error": {},
       "action": "analyzeFile",
       "arguments": "YXNkaDEyMzE5XzEyOQ==",
       "created_date_time": "2023-03-11T01:46:11Z",
@@ -352,22 +350,7 @@
       "description": "Rapid 7 Reset account password UU",
       "id": "00002194",
       "last_action_date_time": "2023-04-17T20:12:46Z",
-      "status": "succeeded",
-      "agent_guid": "example",
-      "resource_location": "example",
-      "endpoint_name": "example",
-      "expired_date_time": "2023-04-30T12:00:00Z",
-      "file_path": "example",
-      "file_sha1": "example",
-      "file_sha256": "example",
-      "file_size": 0,
-      "filename": "example",
-      "image_path": "example",
-      "password": "example",
-      "pid": 0,
-      "sandbox_task_id": "example",
-      "tasks": [],
-      "url": "example.com"
+      "status": "succeeded"
     }
   },
   "sign_out_account": {
@@ -589,7 +572,7 @@
   },
   "submit_urls_to_sandbox": {
     "input": {
-      "url": [
+      "urls": [
         "www.urlurl.com",
         "www.zurlzurl.com"
       ]

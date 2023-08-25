@@ -1395,7 +1395,7 @@ This action submits URLs to the sandbox for analysis. You can submit a maximum o
 
 ##### Input
 
-| Name |Type|Default|Required|Description|Enum|Example|
+|Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |urls|[]string|None|True|URL(s) to be submitted, formated as bracket array separated by comma|None|[]|
 
