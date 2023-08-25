@@ -5,6 +5,7 @@ from timeout_decorator import timeout_decorator
 
 from icon_trendmicro_visionone.triggers import PollSandboxSuspiciousList
 from .tmv1_mock import mock_connection, mock_params
+import inspect
 
 
 class TestPollSandboxSuspiciousList(TestCase):
