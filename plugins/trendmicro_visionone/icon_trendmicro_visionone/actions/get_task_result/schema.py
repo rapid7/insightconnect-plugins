@@ -48,14 +48,12 @@ class GetTaskResultInput(insightconnect_plugin_runtime.Input):
       "type": "boolean",
       "title": "Poll",
       "description": "If script should wait until the task is finished before returning the result (enabled by default)",
-      "default": true,
       "order": 2
     },
     "poll_time_sec": {
       "type": "number",
       "title": "Poll Time in Seconds",
       "description": "Maximum time to wait for the result to be available",
-      "default": 30,
       "order": 3
     },
     "task_id": {
