@@ -3,5 +3,5 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 pydantic==1.10.4
 bs4==0.0.1
-pytmv1==0.6.1
+pytmv1==0.5.6
 timeout_decorator==0.5.0
