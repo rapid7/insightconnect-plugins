@@ -89,7 +89,7 @@ This action is used to create an exemption.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|approver|string|None|True|The exemption approver|None|https://example.com|
+|approver|string|None|True|The exemption approver|None|user@example.com|
 |expirationDate|date|None|False|Date the exemption ends, e.g. 2022-10-21T00:00:00Z. If none is provided, the default is no expiration|None|2022-10-21T12:00:00+02:00|
 |insightId|integer|None|True|ID for the Insight associated with the exemption|None|12345|
 |insightSource|string|None|True|Source for the Insight associated with the exemption|['backoffice', 'custom']|backoffice|
