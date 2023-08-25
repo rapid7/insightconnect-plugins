@@ -642,12 +642,14 @@ triggers:
         type: boolean
         description: If script should wait until the task is finished before returning the result (enabled by default)
         required: true
+        default: true
         example: true
       poll_time_sec:
         title: Poll Time in Seconds
         type: float
         description: Maximum time to wait for the result to be available
         required: false
+        default: 30
         example: 15.5
       interval:
         title: Interval
@@ -1074,12 +1076,14 @@ actions:
         type: boolean
         description: If script should wait until the task is finished before returning the result (enabled by default)
         required: true
+        default: true
         example: true
       poll_time_sec:
         title: Poll Time in Seconds
         type: float
         description: Maximum time to wait for the result to be available
         required: false
+        default: 30
         example: 15.5
     output:
       id:
@@ -1176,12 +1180,14 @@ actions:
         type: boolean
         description: If script should wait until the task is finished before returning the result (enabled by default)
         required: true
+        default: true
         example: true
       poll_time_sec:
         title: Poll Time in Seconds
         type: float
         description: Maximum time to wait for the result to be available
         required: false
+        default: 30
         example: 15.5
     output:
       status:
@@ -1357,12 +1363,14 @@ actions:
         type: boolean
         description: If script should wait until the task is finished before returning the result (enabled by default)
         required: true
+        default: true
         example: true
       poll_time_sec:
         title: Poll Time in Seconds
         type: float
         description: Maximum time to wait for the result to be available
         required: false
+        default: 30
         example: 15.5
     output:
       file:
@@ -1389,12 +1397,14 @@ actions:
         type: boolean
         description: If script should wait until the task is finished before returning the result (enabled by default)
         required: true
+        default: true
         example: true
       poll_time_sec:
         title: Poll Time in Seconds
         type: float
         description: Maximum time to wait for the result to be available
         required: false
+        default: 30
         example: 15.5
     output:
       sandbox_suspicious_list_resp:
@@ -1418,12 +1428,14 @@ actions:
         type: boolean
         description: If script should wait until the task is finished before returning the result (enabled by default)
         required: true
+        default: true
         example: true
       poll_time_sec:
         title: Poll Time in Seconds
         type: float
         description: Maximum time to wait for the result to be available
         required: false
+        default: 30
         example: 15.5
     output:
       file:
