@@ -21,7 +21,7 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
 
 # User to run plugin code. The two supported users are: root, nobody
-USER root
+USER nobody
 
 # Uncomment next 2 lines for unit testing 
 # ENTRYPOINT ["/bin/sh"]
