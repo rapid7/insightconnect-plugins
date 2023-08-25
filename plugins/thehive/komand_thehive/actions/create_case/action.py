@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import CreateCaseInput, CreateCaseOutput, Component, Input, Output
+from insightconnect_plugin_runtime.helper import clean_dict
 
 # Custom imports below
 import time
@@ -30,13 +31,13 @@ class CreateCase(insightconnect_plugin_runtime.Action):
                 "flag": params.get(Input.FLAG),
                 "tags": params.get(Input.TAGS, []),
                 "startDate": params.get(Input.STARTDATE, int(time.time()) * 1000),
-                "template": params.get(Input.TEMPLATE, None),
+                "template": params.get(Input.TEMPLATE),
                 "owner": params.get(Input.OWNER, ""),
                 "metrics": params.get(Input.METRICS, {}),
                 "customFields": params.get(Input.CUSTOMFIELDS, None),
-                "summary": params.get(Input.SUMMARY, ""),
             }
 
+        case = clean_dict(case)
         self.logger.info(f"Input: {case}")
 
         response = self.connection.client.create_case(case=case)

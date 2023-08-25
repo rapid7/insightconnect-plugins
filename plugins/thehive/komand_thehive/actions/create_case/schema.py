@@ -17,7 +17,6 @@ class Input:
     PAP = "pap"
     SEVERITY = "severity"
     STARTDATE = "startDate"
-    SUMMARY = "summary"
     TAGS = "tags"
     TEMPLATE = "template"
     TITLE = "title"
@@ -29,7 +28,7 @@ class Output:
 
 
 class CreateCaseInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -38,7 +37,7 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "Custom Fields",
       "description": "Case custom fields",
-      "order": 12
+      "order": 11
     },
     "description": {
       "type": "string",
@@ -57,19 +56,19 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "JSON",
       "description": "If the field is not equal to None, the case is instantiated using the JSON value instead of the arguements",
-      "order": 14
+      "order": 13
     },
     "metrics": {
       "type": "object",
       "title": "Metrics",
       "description": "Case metrics collection. A JSON object where keys are defining metric name, and values are defining metric value",
-      "order": 11
+      "order": 10
     },
     "owner": {
       "type": "string",
       "title": "Owner",
       "description": "Case's assignee",
-      "order": 10
+      "order": 9
     },
     "pap": {
       "type": "integer",
@@ -103,12 +102,6 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       "description": "Case start date (datetime in ms) (will default to now if left blank)",
       "order": 4
     },
-    "summary": {
-      "type": "string",
-      "title": "Summary",
-      "description": "Case summary",
-      "order": 9
-    },
     "tags": {
       "type": "array",
       "title": "Tags",
@@ -122,7 +115,7 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Case Template",
       "description": "Case template's name. If specified then the case is created using the given template",
-      "order": 13
+      "order": 12
     },
     "title": {
       "type": "string",
@@ -156,58 +149,111 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
 
 
 class CreateCaseOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
     "case": {
-      "$ref": "#/definitions/createCase",
+      "$ref": "#/definitions/case",
       "description": "Create case output",
       "order": 1
     }
   },
   "definitions": {
-    "createCase": {
+    "case": {
       "type": "object",
-      "title": "createCase",
+      "title": "case",
       "properties": {
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "ID",
+          "order": 1
+        },
+        "_id": {
+          "type": "string",
+          "title": "_ID",
+          "description": "Alternative ID",
+          "order": 2
+        },
+        "owner": {
+          "type": "string",
+          "title": "Owner",
+          "description": "Case owner",
+          "order": 3
+        },
+        "_routing": {
+          "type": "string",
+          "title": "Routing",
+          "description": "Case routing",
+          "order": 4
+        },
+        "_type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Case type",
+          "order": 5
+        },
+        "caseId": {
+          "type": "integer",
+          "title": "Case ID",
+          "description": "Case ID",
+          "order": 6
+        },
+        "metrics": {
+          "type": "object",
+          "title": "Metrics",
+          "description": "Case metrics",
+          "order": 7
+        },
+        "_version": {
+          "type": "integer",
+          "title": "Version",
+          "description": "Case version",
+          "order": 8
+        },
+        "createdBy": {
+          "type": "string",
+          "title": "Created By",
+          "description": "Who the case was created by",
+          "order": 9
+        },
+        "_updatedBy": {
+          "type": "string",
+          "title": "Updated By",
+          "description": "Who the case was updated by",
+          "order": 10
+        },
+        "createdAt": {
+          "type": "integer",
+          "title": "Created At",
+          "description": "Datetime in ms the case was created at",
+          "order": 11
+        },
         "title": {
           "type": "string",
-          "title": "Title",
-          "description": "Case title",
-          "order": 1
+          "title": "Case title",
+          "description": "Title of the case",
+          "order": 12
         },
         "description": {
           "type": "string",
           "title": "Description",
-          "description": "Case description",
-          "order": 2
+          "description": "The description of the case",
+          "order": 13
         },
         "severity": {
           "type": "integer",
           "title": "Severity",
-          "description": "Case severity",
-          "default": 2,
-          "enum": [
-            1,
-            2,
-            3,
-            4
-          ],
-          "order": 3
+          "description": "Severity of the case",
+          "order": 14
         },
         "startDate": {
           "type": "integer",
           "title": "Start Date",
           "description": "Case start date (datetime in ms)",
-          "order": 4
-        },
-        "endDate": {
-          "type": "integer",
-          "title": "End Date",
-          "description": "Case end date (datetime in ms)",
-          "order": 5
+          "order": 15
         },
         "tags": {
           "type": "array",
@@ -216,101 +262,37 @@ class CreateCaseOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "order": 6
+          "order": 16
         },
         "flag": {
           "type": "boolean",
           "title": "Flag",
-          "description": "Case flags",
-          "default": false,
-          "order": 7
+          "description": "Something here",
+          "order": 17
         },
         "tlp": {
           "type": "integer",
-          "title": "Traffic Light Protocol",
-          "description": "Case traffic light protocol",
-          "default": 2,
-          "enum": [
-            0,
-            1,
-            2,
-            3
-          ],
-          "order": 8
+          "title": "TLP",
+          "description": "Traffic Light Protocol level",
+          "order": 18
         },
         "pap": {
           "type": "integer",
-          "title": "Password Authentication Protocol",
-          "description": "Case password authentication protocol",
-          "default": 2,
-          "enum": [
-            0,
-            1,
-            2,
-            3
-          ],
-          "order": 9
+          "title": "PAP",
+          "description": "Password Authenitcation Protocol",
+          "order": 19
         },
         "status": {
           "type": "string",
           "title": "Status",
-          "description": "Case status",
-          "default": "New",
-          "order": 10
-        },
-        "summary": {
-          "type": "string",
-          "title": "Summary",
-          "description": "Case summary",
-          "order": 11
-        },
-        "assignee": {
-          "type": "string",
-          "title": "Assignee",
-          "description": "User to assign the case to",
-          "order": 12
+          "description": "Status of the case",
+          "order": 20
         },
         "customFields": {
           "type": "object",
           "title": "Custom Fields",
-          "description": "Custom fields",
-          "order": 13
-        },
-        "caseTemplate": {
-          "type": "string",
-          "title": "Case Template",
-          "description": "Name or ID of the case template to use",
-          "order": 14
-        },
-        "tasks": {
-          "type": "array",
-          "title": "Tasks",
-          "description": "Tasks to create. If null, tasks from the case template will be used",
-          "items": {
-            "type": "string"
-          },
-          "order": 15
-        },
-        "sharingParameters": {
-          "type": "array",
-          "title": "Sharing Parameters",
-          "description": "Case sharing parameters",
-          "items": {
-            "type": "string"
-          },
-          "order": 16
-        },
-        "taskRule": {
-          "type": "string",
-          "title": "Task Rule",
-          "description": "Case task rule",
-          "order": 17
-        },
-        "observableRule": {
-          "type": "string",
-          "title": "Observable Rule",
-          "description": "Case observable rule",
-          "order": 18
+          "description": "Case custom fields",
+          "order": 21
         }
       }
     }
