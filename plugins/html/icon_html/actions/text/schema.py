@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action is used to strip an HTML string of all tags and return only the text."
+    DESCRIPTION = "This action is used to strip an HTML string of all tags and return only the text"
 
 
 class Input:

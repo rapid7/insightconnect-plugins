@@ -9,13 +9,12 @@ from unit_test.util import Util, STUB_VALID_INPUT
 import sys
 import os
 
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath("../"))
 
 
 class TestValidate(TestCase):
     @mock.patch("requests.post", side_effect=Util.mocked_requests)
     def test_validate(self, mocked_requests):
-
         test_validate = Validate()
         input_params = {Input.HTML_CONTENTS: STUB_VALID_INPUT}
         results = test_validate.run(input_params)
@@ -24,7 +23,6 @@ class TestValidate(TestCase):
 
     @mock.patch("requests.post", side_effect=Util.mocked_requests)
     def test_validate_false(self, mocked_requests):
-
         test_validate = Validate()
         input_params = {Input.HTML_CONTENTS: "bad input, expecting false validation"}
         results = test_validate.run(input_params)
@@ -45,5 +43,3 @@ class TestValidate(TestCase):
     #     self.assertEqual(results, requests.exceptions.RequestException)
     #     self.assertEqual(cause, "IO Error: ")
     #     self.assertEqual(assistance, "Please check logs.")
-
-

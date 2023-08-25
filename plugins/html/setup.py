@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="html-rapid7-plugin",
       version="1.2.3",
-      description="Hypertext Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser. This plugin provides the ability to convert an HTML document into a variety of formats using [pypandoc](https://pypi.python.org/pypi/pypandoc). Supported formats are: \n\n* DOCX \n* EPUB \n* Markdown \n* PDF \n* HTML5 \n* Plain Text",
+      description="Hypertext Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser. This plugin provides the ability to convert an HTML document into a variety of formats using [pypandoc](https://pypi.python.org/pypi/pypandoc). Supported formats are: DOCX, EPUB, Markdown, PDF, HTML5, Plain Text",
       author="rapid7",
       author_email="",
       url="",

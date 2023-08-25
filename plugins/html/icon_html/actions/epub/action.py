@@ -24,8 +24,7 @@ class Epub(insightconnect_plugin_runtime.Action):
         try:
             pypandoc.convert(params.get(Input.DOC), "epub", outputfile=temp_file, format="html")
         except RuntimeError as error:
-            raise PluginException(cause="Pypandoc Runtime Error: ",
-                                  assistance="Check stack trace log", data=error)
+            raise PluginException(cause="Pypandoc Runtime Error: ", assistance="Check stack trace log", data=error)
         with open(temp_file, "rb") as output:
             # Reading the output and sending it in base64
             return {Output.EPUB: base64.b64encode(output.read()).decode("utf-8")}

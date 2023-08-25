@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action is used to convert an HTML document to EPUB."
+    DESCRIPTION = "This action is used to convert an HTML document to EPUB"
 
 
 class Input:

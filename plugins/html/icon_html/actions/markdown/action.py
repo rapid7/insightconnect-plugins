@@ -25,7 +25,6 @@ class Markdown(insightconnect_plugin_runtime.Action):
         try:
             output = pypandoc.convert_text(params.get(Input.DOC), "md", format="html")
         except RuntimeError as error:
-            raise PluginException(cause="Pypandoc Runtime Error: ",
-                                  assistance="Check stack trace log", data=error)
+            raise PluginException(cause="Pypandoc Runtime Error: ", assistance="Check stack trace log", data=error)
         f = base64.b64encode(output.encode("ascii")).decode()
         return {Output.MARKDOWN_CONTENTS: output, Output.MARKDOWN_FILE: f}

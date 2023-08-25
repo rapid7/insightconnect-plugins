@@ -7,7 +7,6 @@ sys.path.append(os.path.abspath("../"))
 
 
 class Util:
-
     @staticmethod
     def read_file_to_string(filename):
         with open(filename) as my_file:
@@ -38,11 +37,13 @@ class Util:
 
         data = kwargs.get("data")
 
-        if data == b"<!DOCTYPE html><html><title>Example</title><body><h1>Rapid7 InsightConnect</h1><p>Automate with InsightConnect!</p></body></html>":
+        if (
+            data
+            == b"<!DOCTYPE html><html><title>Example</title><body><h1>Rapid7 InsightConnect</h1><p>Automate with InsightConnect!</p></body></html>"
+        ):
             return MockResponse("validate_json_body", 200)
         if data == b"bad input, expecting false validation":
             return MockResponse("validate_error", 400)
         if data == "":
             return MockResponse(Exception, 400)
         raise Exception("Not Implemented")
-

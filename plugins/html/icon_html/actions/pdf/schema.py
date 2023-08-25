@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action is used to convert an HTML document to PDF."
+    DESCRIPTION = "This action is used to convert an HTML document to PDF"
 
 
 class Input:

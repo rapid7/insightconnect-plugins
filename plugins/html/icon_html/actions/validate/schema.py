@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action is used to validate an HTML document using the [W3 validator](https://validator.w3.org)."
+    DESCRIPTION = "This action is used to validate an HTML document using the [W3 validator](https://validator.w3.org)"
 
 
 class Input:

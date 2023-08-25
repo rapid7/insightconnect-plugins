@@ -1,12 +1,6 @@
 # Description
 
-Hypertext Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser. This plugin provides the ability to convert an HTML document into a variety of formats using [pypandoc](https://pypi.python.org/pypi/pypandoc). Supported formats are: 
- * DOCX 
- * EPUB 
- * Markdown 
- * PDF 
- * HTML5 
- * Plain Text
+Hypertext Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser. This plugin provides the ability to convert an HTML document into a variety of formats using [pypandoc](https://pypi.python.org/pypi/pypandoc). Supported formats are: DOCX, EPUB, Markdown, PDF, HTML5, Plain Text
 
 # Key Features
   
@@ -33,7 +27,7 @@ Hypertext Markup Language (HTML) is the standard markup language for documents d
 
 #### Windows Document
   
-This action is used to convert an HTML document to DOCX.
+This action is used to convert an HTML document to DOCX
 
 ##### Input
 
@@ -65,7 +59,7 @@ Example output:
 
 #### EPUB
   
-This action is used to convert an HTML document to EPUB.
+This action is used to convert an HTML document to EPUB
 
 ##### Input
 
@@ -97,7 +91,7 @@ Example output:
 
 #### HTML5
   
-This action is used to convert an HTML document to HTML5.
+This action is used to convert an HTML document to HTML5
 
 ##### Input
 
@@ -131,7 +125,7 @@ Example output:
 
 #### Markdown
   
-This action is used to convert an HTML document to Markdown.
+This action is used to convert an HTML document to Markdown
 
 ##### Input
 
@@ -165,7 +159,7 @@ Example output:
 
 #### PDF
   
-This action is used to convert an HTML document to PDF.
+This action is used to convert an HTML document to PDF
 
 ##### Input
 
@@ -197,7 +191,7 @@ Example output:
 
 #### Text
   
-This action is used to strip an HTML string of all tags and return only the text.
+This action is used to strip an HTML string of all tags and return only the text
 
 ##### Input
 
@@ -231,7 +225,7 @@ Example output:
 
 #### Validate
   
-This action is used to validate an HTML document using the [W3 validator](https://validator.w3.org).
+This action is used to validate an HTML document using the [W3 validator](https://validator.w3.org)
 
 ##### Input
 
@@ -263,7 +257,6 @@ Example output:
 ### Triggers
   
 *This plugin does not contain any triggers.*
-
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -289,6 +282,7 @@ Example output:
 * 0.1.0 - Initial plugin
 
 # Links
+
 
 ## References
 

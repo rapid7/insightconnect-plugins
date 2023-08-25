@@ -7,7 +7,7 @@ from sys import argv
 Name = "HTML"
 Vendor = "rapid7"
 Version = "1.2.3"
-Description = "Hypertext Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser. This plugin provides the ability to convert an HTML document into a variety of formats using [pypandoc](https://pypi.python.org/pypi/pypandoc). Supported formats are: \n\n* DOCX \n* EPUB \n* Markdown \n* PDF \n* HTML5 \n* Plain Text"
+Description = "Hypertext Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser. This plugin provides the ability to convert an HTML document into a variety of formats using [pypandoc](https://pypi.python.org/pypi/pypandoc). Supported formats are: DOCX, EPUB, Markdown, PDF, HTML5, Plain Text"
 
 
 def main():

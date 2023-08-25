@@ -14,7 +14,6 @@ class Docx(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-
         temp_file = "temp_html_2_docx.docx"
         tag_parser = "(?i)<\/?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)\/?>"  # noqa: W605
         tags = re.findall(tag_parser, params.get(Input.DOC))
@@ -25,8 +24,7 @@ class Docx(insightconnect_plugin_runtime.Action):
         try:
             pypandoc.convert(params.get(Input.DOC), "docx", outputfile=temp_file, format="html")
         except RuntimeError as error:
-            raise PluginException(cause="Pypandoc Runtime Error: ",
-                                  assistance="Check stack trace log", data=error)
+            raise PluginException(cause="Pypandoc Runtime Error: ", assistance="Check stack trace log", data=error)
         with open(temp_file, "rb") as output:
             # Reading the output and sending it in base64
             return {Output.DOCX: base64.b64encode(output.read()).decode("utf-8")}
