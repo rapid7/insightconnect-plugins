@@ -1,7 +1,7 @@
 {
-	"spec": "1cff7ff0b945ef1702022eda0f31aab7",
-	"manifest": "e4082c45ad189c11ee6075021418f9dd",
-	"setup": "a923750347c7eda5f8917d97a27d1bf5",
+	"spec": "ef097ba1136abf6fdc36e9ecaef8db87",
+	"manifest": "74c999edcdb1e66e4bcdd5b050e960b6",
+	"setup": "8be053191265c755ed707dcf319c6a63",
 	"schemas": [
 		{
 			"identifier": "create_exemption/schema.py",
@@ -10,10 +10,6 @@
 		{
 			"identifier": "detach_policy/schema.py",
 			"hash": "788320f49c50b21f81cd48828edfd861"
-		},
-		{
-			"identifier": "get_account_details/schema.py",
-			"hash": "0405e8179367cf7f2280fe250efde2e5"
 		},
 		{
 			"identifier": "get_resource_details/schema.py",
@@ -26,10 +22,6 @@
 		{
 			"identifier": "remove_exemption/schema.py",
 			"hash": "ef26efbc0faa51b3d25014d47a688dc6"
-		},
-		{
-			"identifier": "run_bot_on_demand/schema.py",
-			"hash": "1c50c447837e520d402ae5f45587d269"
 		},
 		{
 			"identifier": "switch_organization/schema.py",

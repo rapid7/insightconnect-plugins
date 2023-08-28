@@ -46,38 +46,6 @@ Example input:
 
 ### Actions
 
-#### Run Bot on Demand
-
-This action is used to run a bot on demand, which will apply the filters and actions to all resources within the scope of the bot.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|botId|string|None|True|ID of the bot|None|examplebot:11:1234|
-
-Example input:
-
-```
-{
-  "botId": "examplebot:11:1234"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Whether the action was successful|
-
-Example output:
-
-```
-{
-  "success": True
-}
-```
-
 #### Remove Exemption
 
 This action is used to delete exemptions for provided IDs.
@@ -384,44 +352,6 @@ Example output:
 }
 ```
 
-#### Get Account Details
-
-This action is used to get account details based on provided account ID.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|accountId|string|None|True|ID of the cloud account|None|123456789012|
-
-Example input:
-
-```
-{
-  "accountId": 123456789012
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|accountDetails|accountDetails|False|Information about the cloud account for the provided ID|
-
-Example output:
-
-```
-{
-  "accountDetails": {
-    "name": "AWS Account",
-    "cloudTypeId": "AWS",
-    "accountId": "123456789012",
-    "joinedTimestamp": "2013-09-05T14:33:10Z",
-    "status": "active"
-  }
-}
-```
-
 ### Triggers
 
 _This plugin does not contain any triggers._
@@ -491,6 +421,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Enable plugin to run in cloud | Remove actions using defective API endpoints
 * 1.0.0 - Initial plugin | Add Get Account Details, Get Resource Details, List Resource Tags, Create Exemption, Remove Exemption, Detach Policy, Run Bot on Demand and Switch Organization actions
 
 # Links
