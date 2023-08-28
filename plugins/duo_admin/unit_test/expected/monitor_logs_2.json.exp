@@ -73,10 +73,7 @@
       "limit": "1000",
       "maxtime": "1682930026000",
       "mintime": "1682843686000",
-      "next_offset": [
-        "1683730665255",
-        "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
-      ]
+      "next_offset": "1683730665255,9de5069c-5afe-602b-2ea0-a04b66beb2c0"
     },
     "last_collection_timestamp": 1682930026000,
     "previous_admin_log_hashes": [
