@@ -50,12 +50,15 @@ def rate_limiting(max_tries: int):
 
 class DuoAdminAPI:
     def __init__(self, hostname: str, integration_key: str, secret_key: str, logger: Logger):
-        self.hostname = hostname.rstrip("/")
+        self.hostname = self._get_hostname(hostname.rstrip("/"))
         self.base_url = f"https://{self.hostname}"
         self._integration_key = integration_key
         self._secret_key = secret_key
         self.logger = logger
         self.toggle_rate_limiting = True
+
+    def _get_hostname(self, hostname):
+        return hostname.replace("https://", "").replace("http://", "")
 
     def add_user(self, params: dict) -> dict:
         return self.make_json_request(method="POST", path=USERS_ENDPOINT, params=params)
@@ -213,6 +216,7 @@ class DuoAdminAPI:
 
     def make_json_request(self, method: str, path: str, params: dict = {}) -> dict:
         try:
+            self.logger.info(f"Request to path: {path}")
             response = self.make_request(method=method, path=path, params=params)
             return response.json()
         except json.decoder.JSONDecodeError as error:
