@@ -1,0 +1,6 @@
+{
+  "filter": "approximateLastSignInDateTime le 2023-06-11T18:01:51Z",
+  "orderBy": "displayName",
+  "search": "displayName:Win-123_3123",
+  "select": ["id", "displayName"]
+}

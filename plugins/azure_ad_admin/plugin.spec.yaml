@@ -4,7 +4,8 @@ products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
 description: Perform administrative operations in Azure AD
-version: 4.0.0
+version: 4.1.0
+connection_version: 4
 vendor: rapid7
 cloud_ready: true
 support: community
@@ -595,6 +596,304 @@ types:
       description: Additional information associated with the risk detection
       type: string
       required: false
+  alternativeSecurityId:
+    identityProvider:
+      title: Identity Provider
+      description: Identity provider
+      type: string
+      required: false
+      example: example_provider
+    key:
+      title: Key
+      description: Key
+      type: string
+      required: false
+      example: ["WAA1ADAAOQA6ADwAUwBIAEEAMQAtAFQAUAAtAFAAVQBC"]
+    type:
+      title: Type
+      description: Type
+      type: integer
+      required: false
+      example: 2
+  extensionAttributes:
+    extensionAttribute1:
+      title: Extension Attribute 1
+      description: First customizable extension attribute
+      type: string
+      required: false
+      example: example1
+    extensionAttribute2:
+      title: Extension Attribute 2
+      description: Second customizable extension attribute
+      type: string
+      required: false
+      example: example2
+    extensionAttribute3:
+      title: Extension Attribute 3
+      description: Third customizable extension attribute
+      type: string
+      required: false
+      example: example3
+    extensionAttribute4:
+      title: Extension Attribute 4
+      description: Fourth customizable extension attribute
+      type: string
+      required: false
+      example: example4
+    extensionAttribute5:
+      title: Extension Attribute 5
+      description: Fifth customizable extension attribute
+      type: string
+      required: false
+      example: example5
+    extensionAttribute6:
+      title: Extension Attribute 6
+      description: Sixth customizable extension attribute
+      type: string
+      required: false
+      example: example6
+    extensionAttribute7:
+      title: Extension Attribute 7
+      description: Seventh customizable extension attribute
+      type: string
+      required: false
+      example: example7
+    extensionAttribute8:
+      title: Extension Attribute 8
+      description: Eighth customizable extension attribute
+      type: string
+      required: false
+      example: example8
+    extensionAttribute9:
+      title: Extension Attribute 9
+      description: Ninth customizable extension attribute
+      type: string
+      required: false
+      example: example9
+    extensionAttribute10:
+      title: Extension Attribute 10
+      description: Tenth customizable extension attribute
+      type: string
+      required: false
+      example: example10
+    extensionAttribute11:
+      title: Extension Attribute 11
+      description: Eleventh customizable extension attribute
+      type: string
+      required: false
+      example: example11
+    extensionAttribute12:
+      title: Extension Attribute 12
+      description: Twelfth customizable extension attribute
+      type: string
+      required: false
+      example: example12
+    extensionAttribute13:
+      title: Extension Attribute 13
+      description: Thirteenth customizable extension attribute
+      type: string
+      required: false
+      example: example13
+    extensionAttribute14:
+      title: Extension Attribute 14
+      description: Fourteenth customizable extension attribute
+      type: string
+      required: false
+      example: example14
+    extensionAttribute15:
+      title: Extension Attribute 15
+      description: Fifteenth customizable extension attribute
+      type: string
+      required: false
+      example: example15
+  device:
+    accountEnabled:
+      title: Account Enabled
+      description: True if the account is enabled; otherwise, false
+      type: boolean
+      required: false
+      example: true
+    alternativeSecurityIds:
+      title: Alternative Security IDs
+      description: List of alternative security IDs
+      type: '[]alternativeSecurityId'
+      required: false
+      example: []
+    approximateLastSignInDateTime:
+      title: Approximate Last Sign In Datetime
+      description: The timestamp of last login in ISO 8601 format and in UTC time
+      type: string
+      required: false
+      example: 2023-06-08T13:08:47Z
+    complianceExpirationDateTime:
+      title: Compliant Expiration Datetime
+      description: The timestamp when the device is no longer deemed compliant
+      type: string
+      required: false
+      example: 2023-06-08T13:08:47Z
+    deviceCategory:
+      title: Device Category
+      description: User-defined property set by Intune to automatically add devices to groups and simplify managing devices
+      type: string
+      required: false
+      example: my-device-category
+    deviceId:
+      title: Device ID
+      description: Unique identifier set by Azure Device Registration Service at the time of registration
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    deviceMetadata:
+      title: Device Metadata
+      description: Metadata of the device
+      type: string
+      required: false
+      example: Example metadata
+    deviceOwnership:
+      title: Device Ownership
+      description: Ownership of the device
+      type: string
+      required: false
+      example: Personal
+    deviceVersion:
+      title: Device Version
+      description: Version of the device
+      type: integer
+      required: false
+      example: 2
+    displayName:
+      title: Display Name
+      description: The display name for the device
+      type: string
+      required: false
+      example: DESKTOP-123456
+    enrollmentProfileName:
+      title: Enrollment Profile Name
+      description: Enrollment profile name of the device
+      type: string
+      required: false
+      example: Apple Device Enrollment Profile
+    enrollmentType:
+      title: Enrollment Type
+      description: Enrollment type of the device
+      type: string
+      required: false
+      example: UserEnrollment
+    exchangeActiveSyncIds:
+      title: Exchange Active Sync IDs
+      description: Exchange active sync IDs of the device
+      type: '[]string'
+      required: false
+      example: ["eas::9de5069c-5afe-602b-2ea0-a04b66beb2c0"]
+    extensionAttributes:
+      title: Extension Attributes
+      description: Contains extension attributes 1-15 for the device
+      type: extensionAttributes
+      required: false
+      example: {}
+    id:
+      title: ID
+      description: The unique identifier for the device
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    isCompliant:
+      title: Is Compliant
+      description: Whether the device complies with Mobile Device Management (MDM) policies
+      type: boolean
+      required: false
+      example: false
+    isManaged:
+      title: Is Managed
+      description: Whether the device is managed by Mobile Device Management (MDM)
+      type: boolean
+      required: false
+      example: false
+    isRooted:
+      title: Is Rooted
+      description: Whether the device is rooted
+      type: boolean
+      required: false
+      example: true
+    managementType:
+      title: Management Type
+      description: Management type of the device
+      type: string
+      required: false
+      example: MDM
+    manufacturer:
+      title: Manufacturer
+      description: Manufacturer of the device
+      type: string
+      required: false
+      example: Google
+    mdmAppId:
+      title: Mobile Device Management App ID
+      description: Application identifier used to register device into MDM
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    model:
+      title: Model
+      description: Model of the device
+      type: string
+      required: false
+      example: Android SDK built for x86
+    onPremisesLastSyncDateTime:
+      title: On Premises Last Sync Date Time
+      description: The last time at which the object was synced with the on-premises directory. The Timestamp type represents date and time information using ISO 8601 format and is always in UTC time.
+      type: string
+      required: false
+      example: 2014-01-01T00:00:00Z
+    onPremisesSyncEnabled:
+      title: On Premises Sync Enabled
+      description: Whether the object is synced from an on-premises directory
+      type: boolean
+      required: false
+      example: false
+    operatingSystem:
+      title: Operating System
+      description: The type of operating system on the device
+      type: string
+      required: false
+      example: Android
+    operatingSystemVersion:
+      title: Operating System Version
+      description: The version of the operating system on the device
+      type: string
+      required: false
+      example: 9
+    physicalIds:
+      title: Physical IDs
+      description: List of physical IDs
+      type: '[]string'
+      required: false
+      example: ["[GID]:g:6966545952520216"]
+    profileType:
+      title: Profile Type
+      description: The profile type of the device
+      type: string
+      required: false
+      example: RegisteredDevice
+    registrationDateTime:
+      title: Registration Date Time
+      description: Date and time of when the device was registered. The timestamp type represents date and time information using ISO 8601 format and is always in UTC time
+      type: string
+      required: false
+      example: 2014-01-01T00:00:00Z
+    systemLabels:
+      title: System Labels
+      description: List of labels applied to the device by the system
+      type: '[]string'
+      required: false
+      example: ["test"]
+    trustType:
+      title: Trust Type
+      description: Type of trust for the joined device
+      type: string
+      required: false
+      example: Workplace
+
 connection:
   tenant_id:
     title: Tenant ID
@@ -904,6 +1203,109 @@ actions:
         description: Was the operation successful
         type: boolean
         required: true
+  enable_device:
+    title: Enable Device
+    description: Enable the device with the given ID
+    input:
+      deviceId:
+        title: Device ID
+        description: ID of the device
+        type: string
+        required: true
+        example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+        example: true
+  disable_device:
+    title: Disable Device
+    description: Disable the device with the given ID
+    input:
+      deviceId:
+        title: Device ID
+        description: ID of the device
+        type: string
+        required: true
+        example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+        example: true
+  delete_device:
+    title: Delete Device
+    description: Delete the device with the given ID
+    input:
+      deviceId:
+        title: Device ID
+        description: ID of the device
+        type: string
+        required: true
+        example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+        example: true
+  get_device:
+    title: Get Device
+    description: Get the device with the given ID
+    input:
+      deviceId:
+        title: Device ID
+        description: ID of the device
+        type: string
+        required: true
+        example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    output:
+      device:
+        title: Device
+        description: Information about the device
+        type: device
+        required: false
+        example: {}
+  search_device:
+    title: Search Device
+    description: Search for devices using a given query. For more information about queries visit https://learn.microsoft.com/en-us/graph/filter-query-parameter?tabs=http; https://learn.microsoft.com/en-us/graph/search-query-parameter?tabs=http; https://learn.microsoft.com/en-us/graph/aad-advanced-queries?tabs=http#device-properties
+    input:
+      search:
+        title: Search
+        description: Search parameters by query. See details about query in action description
+        type: string
+        required: false
+        example: displayName:INTUNE
+      orderBy:
+        title: Order By
+        description: Sorts list results by the provided device parameter
+        type: string
+        required: false
+        example: displayName
+      filter:
+        title: Filter
+        description: Filter devices by query. See details about query in action description
+        type: string
+        required: false
+        example: approximateLastSignInDateTime le 2021-06-11T18:01:51Z
+      select:
+        title: Select
+        description: Fields to be included in the output
+        type: "[]string"
+        required: false
+        example: ["id", "createdDateTime"]
+    output:
+      devices:
+        title: Devices
+        description: Information about the devices
+        type: "[]device"
+        required: false
+        example: []
 
 triggers:
   risk_detection:

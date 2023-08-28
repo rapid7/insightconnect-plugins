@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Azure AD Admin"
 Vendor = "rapid7"
-Version = "4.0.0"
+Version = "4.1.0"
 Description = "Perform administrative operations in Azure AD"
 
 
@@ -44,11 +44,19 @@ def main():
 
             self.add_action(actions.CreateUser())
 
+            self.add_action(actions.DeleteDevice())
+
+            self.add_action(actions.DisableDevice())
+
             self.add_action(actions.DisableUserAccount())
+
+            self.add_action(actions.EnableDevice())
 
             self.add_action(actions.EnableUserAccount())
 
             self.add_action(actions.ForceUserToChangePassword())
+
+            self.add_action(actions.GetDevice())
 
             self.add_action(actions.GetGroupByName())
 
@@ -57,6 +65,8 @@ def main():
             self.add_action(actions.RemoveUserFromGroup())
 
             self.add_action(actions.RevokeSignInSessions())
+
+            self.add_action(actions.SearchDevice())
 
             self.add_action(actions.UpdateUserInfo())
 
