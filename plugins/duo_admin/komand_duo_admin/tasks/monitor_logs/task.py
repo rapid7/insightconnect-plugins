@@ -175,9 +175,10 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             else {"mintime": str(mintime), "maxtime": str(maxtime), "limit": str(1000)}
         )
         response = self.connection.admin_api.get_auth_logs(parameters).get("response", {})
-        next_offset = response.get("metadata", {}).get("next_offset")
+        metadata = response.get("metadata") or {}
+        next_offset = metadata.get("next_offset")
         if next_offset:
-            parameters["next_offset"] = next_offset
+            parameters["next_offset"] = ",".join(next_offset)
         else:
             parameters = {}
         auth_logs = self.add_log_type_field(response.get("authlogs", []), "authentication")
