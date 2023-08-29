@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Azure AD Admin"
 Vendor = "rapid7"
-Version = "4.1.0"
+Version = "4.1.1"
 Description = "Perform administrative operations in Azure AD"
 
 

@@ -19,6 +19,7 @@ the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=g
   * Directory.ReadWrite.All
   * User.ReadWrite.All
   * IdentityRiskEvent.Read.All (Types: Delegated, Application)
+  * Device.ReadWrite.All
 * The application will need to be added to the Global Administrator role. This can be done in `Roles and administrators` in Azure Active directory via the Azure Portal.
 
 # Supported Product Versions
@@ -1046,6 +1047,7 @@ Trigger `risk_detection` needs Application permission to set as `IdentityRiskEve
 
 # Version History
 
+* 4.1.1 - Update requirements in help.md
 * 4.1.0 - New actions Enable Device, Disable Device, Get Device, Search Device, Delete Device
 * 4.0.0 - Get User Info action: fix data validation | New action: Change User Password
 * 3.0.1 - Enable cloud orchestrator
