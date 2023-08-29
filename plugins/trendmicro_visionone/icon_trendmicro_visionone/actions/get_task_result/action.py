@@ -68,10 +68,12 @@ class GetTaskResult(insightconnect_plugin_runtime.Action):
                 assistance="Please check the task ID and try again.",
                 data=response,
             )
-        # Avoid None value
+        # Avoid None values
         response_dict = response.response.dict()
         for key, value in response_dict.items():
-            if value is None:
+            if value is None and key in ["file_size", "pid"]:
+                response_dict[key] = 0
+            elif value is None:
                 response_dict[key] = "None"
         # Return results
         self.logger.info("Returning Results...")
