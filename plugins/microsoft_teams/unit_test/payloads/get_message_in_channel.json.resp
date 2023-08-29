@@ -1,0 +1,40 @@
+{
+  "id": "1234567891",
+  "replyToId": "1234567890",
+  "etag": "1234567891",
+  "messageType": "message",
+  "createdDateTime": "2023-08-01T12:00:00.000Z",
+  "lastModifiedDateTime": "2023-08-01T12:00:00.000Z",
+  "lastEditedDateTime": null,
+  "deletedDateTime": null,
+  "subject": null,
+  "summary": null,
+  "chatId": null,
+  "importance": "normal",
+  "locale": "en-us",
+  "webUrl": "https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890?groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891",
+  "onBehalfOf": null,
+  "policyViolation": null,
+  "eventDetail": null,
+  "from": {
+    "application": null,
+    "device": null,
+    "user": {
+      "id": "3395856c-e81f-2b73-82de-e72602f798b6",
+      "displayName": "Example User",
+      "userIdentityType": "aadUser",
+      "tenantId": "1"
+    }
+  },
+  "body": {
+    "contentType": "Text Message",
+    "content": "tests_v1"
+  },
+  "channelIdentity": {
+    "teamId": "example-team-id",
+    "channelId": "11:examplechannel.name"
+  },
+  "attachments": [],
+  "mentions": [],
+  "reactions": []
+}
