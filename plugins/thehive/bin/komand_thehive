@@ -3,13 +3,10 @@
 import os
 import json
 from sys import argv
-import insightconnect_plugin_runtime
-from komand_thehive import connection, actions, triggers
-
 
 Name = "TheHive"
 Vendor = "rapid7"
-Version = "4.0.0"
+Version = "5.0.0"
 Description = "TheHive is a scalable, open source security incident response solution designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done"
 
 
@@ -24,6 +21,9 @@ def main():
         elif 'gevent' in argv:
             from gevent import monkey
             monkey.patch_all()
+
+    import insightconnect_plugin_runtime
+    from komand_thehive import connection, actions, triggers, tasks
 
     class ICONThehive(insightconnect_plugin_runtime.Plugin):
         def __init__(self):

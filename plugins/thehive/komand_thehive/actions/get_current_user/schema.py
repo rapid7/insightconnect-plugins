@@ -16,7 +16,7 @@ class Output:
 
 
 class GetCurrentUserInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {}
     """)
 
@@ -25,7 +25,7 @@ class GetCurrentUserInput(insightconnect_plugin_runtime.Input):
 
 
 class GetCurrentUserOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",

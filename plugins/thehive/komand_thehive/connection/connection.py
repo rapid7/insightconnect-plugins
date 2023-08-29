@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 # Custom imports below
 from ..util.api import HiveAPI
@@ -41,10 +42,16 @@ class Connection(insightconnect_plugin_runtime.Connection):
             password=self.password,
             api_key=self.api_key,
             proxies=self.proxy,
-            cert=self.verify,
+            verify=self.verify,
         )
 
         self.logger.info("Setup Complete")
 
     def test(self):
-        return {"success": True}
+        try:
+            self.client.get_current_user()
+            return {"success": True}
+        except Exception as error:
+            raise ConnectionTestException(
+                cause="Connection test failed.", assistance="Check stack trace for more information.", data=error
+            )

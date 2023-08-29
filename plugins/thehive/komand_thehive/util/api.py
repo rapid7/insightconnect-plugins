@@ -4,6 +4,7 @@ from typing import Optional, Union
 import requests
 from requests.auth import HTTPBasicAuth
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.helper import clean
 
 # Here is the docs for the next dev that comes through here
 # https://github.com/TheHive-Project/TheHive4py/blob/master/thehive4py/api.py
@@ -11,13 +12,13 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class HiveAPI:
-    def __init__(self, url: str, username: str, password: str, api_key: str, proxies, cert):
+    def __init__(self, url: str, username: str, password: str, api_key: str, proxies, verify: bool):
         self.url = url
         self.username = username
         self.password = password
         self.api_key = api_key
         self.proxy = proxies
-        self.verify = cert
+        self.verify = verify
 
     # Get Case
     def get_case(self, case_id: str):
@@ -32,7 +33,6 @@ class HiveAPI:
         return self._call_api("POST", "/api/case", data=case)
 
     # Create Observable In Case
-    # WIP
     def create_observable_in_case(self, case_id, observable):
         return self._call_api("POST", f"/api/case/{case_id}/artifact", data=observable)
 
@@ -60,7 +60,7 @@ class HiveAPI:
     ) -> Union[dict, None]:
 
         # Build out the headers
-        headers = {"X-Organisation": "myOrg", "Content-Type": "application/json"}
+        headers = {"Content-Type": "application/json"}
 
         # Handle the authentication method
         auth = None
@@ -78,7 +78,15 @@ class HiveAPI:
         data = json.dumps(data, sort_keys=True, indent=4, cls=json.JSONEncoder)
 
         response = requests.request(
-            method, self.url + path, params=params, data=data, json=json_data, headers=headers, auth=auth
+            method,
+            self.url + path,
+            params=params,
+            data=data,
+            json=json_data,
+            headers=headers,
+            auth=auth,
+            proxies=self.proxy,
+            verify=self.verify,
         )
 
         if response.status_code == 204:
