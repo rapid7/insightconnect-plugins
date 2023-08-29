@@ -57,7 +57,7 @@ jobs:
             # Writing plugin name and coverage percentage to file
             echo "$plugin, $PERCENTAGE" >> ../../coverageDir/coverage.csv
             
-            # Deactivating and deleting venv to prepare for next plugin if exists TODO
+            # Deactivating and deleting venv to prepare for next plugin if exists
             if [ -d "venv" ]; then
               deactivate
               rm -r venv
