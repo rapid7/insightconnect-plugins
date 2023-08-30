@@ -12,28 +12,36 @@ This plugin uses the [paramiko](http://www.paramiko.org/) to connect to a remote
 * Credentials for the target remote host
 * Address and port for the target remote host
 
+# Supported Product Versions
+  
+* SSH 2023-08-23
+
 # Documentation
 
 ## Setup
-
-The connection configuration accepts the following parameters:
+  
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |host|string|None|True|Remote host to connect to. Can be over-ridden in actions|None|198.51.100.100|
-|key|credential_secret_key|None|False|A base64 encoded SSH private key to use to authenticate to remote server. A newline is required after the beginning and before the end marker|None|{"privateKey": "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcFFJQkFBS0NBUUVBakdub1V0ZlBIcXZYM1BJVTZOOUZLbXdRM1psK05vYVdiNHlNTGh1ZGtkRUJKM0F1CitJOFFkbHFES0JtNjU2VWVPQ2gzci9pOWUwVUxLeGtYREZmS21jM3AyV3YrMGxWT1lHdnhaRktVd0tIMHJpQUwKQTRpbXlZdUwvZndlT1NHU25RbGdZS3I5OUhjaVRCSWRMMTVTWjMyVGpZYitQRFpCbCs2elFzdzJIWU5KY3FNagppY2lDN0NBajZnQjlTTzh4MXZNc1JrVStycUt1YzJyOFVrK3FoRUN3OHpSNEs2NndGdVlNMTdzR1VNWFVxL3BICldkaUV2TzNxL21kSzQ3TnJ4NWkyYmFDN281UlhzcEtIWXk2WGVyNFZibmlwbDREZ0FLa2FOT0wwMmErWnYzOFEKbCt4eTl3ZG1XcVVJYk1pcVNiai9rNnh4RGlQUWtUUisvMDMyZVFJREFRQUJBb0lCQUVrUHpwQlV0UFFickozTgo1UzFyQjcxVUw4NXUwT3FrUzJETnZCODl4VmFiYjBOTEwxV3NjMzl5QjI3MVBIak9SUlFwa21XaFEwOENGUmFlCjNveFFuaDQ3cytPck94UE15WlNJZGptaWNyNXRSempYZVlPa05rMEc3SmdDK09MM1lpZU9PblR5WkdReEhVcUIKM21mSVo0NXNIRHYzTXhDM2xwZnMzNS94VEhNOEUvZ1cvZ1RmdlUzUWJvUWFMMXEvdGFSUVlFSHZnaXV0d2RaMApzRUZ0SjhlQXdPQkFCWGlWM1FQeG5BUWdJcHdZcGJpY2wzQUsxNWdzNUVOSzRSbmdpMmJJN2hkbU13RFdhNnQvCmcwQ1AwVGl0eUZxMDVKVW1uYXo0d2VrWHhENUVCbTc3NkVZTlNveFRDYVN6VE1Zd1pDSVRycVhsNlk0L29nZVQKdVZTbTlaRUNnWUVBN0c4Q3l5REtEVEJZb0l5RWtuSlZLU3d1ZWxPQTJlZHhtVnlLTDhoTG9QaXExUW9TSC9OMQozMG5OL0dWY3ZEN1FFRDRwL3UwWGFNdVBtMkhWaHVYd3h1L3Q5ajExRFZsS1A3UXNIOXU0cEpLeml3Nk5tVjVOCi85K21jamRXQUg1QnFhSnRtcEYwdW9ac1drNDFKVmUwZkE3YTNGQ3JYcDFVL0dEOUJLU0FEMDBDZ1lFQW1BaW8KQ2hFaDcrcEQ3dnV0Rjg1dStGcWJkalkrS215RmVUUGQyNzE3UDZpNVY2QzZsVnBjbk03dm9abEd5MGZqb2FsZAplOW50bTBWVThGWmtVSWloS1B6VzkvTFNBVjhCZ08rdlNRck4vSU1FbURxb2w5NTlJeHhJLzZ5emtZNUp3WVJQCm1sd29OelUwZWtjSHpnMGV1N0RBMXV6UmZ2NEYxTlVXK1F5bFJkMENnWUVBenIwN09oZFAxanlDSXREOFUzbjYKRVdoNnM2ZzBzVlY1dGRwL1VzelhwTWdMeVFGblc5enRJdlJNVS9qbUlBemtybTlORllhSHc3REx2OWpLZDR5MAovNTlvK3JvK2tnK1RweVNLdU1qT0tjbkZpVUNPZko5RG9Rd1ZaU1lSNDVpREhpdlRueWExWlN5SnJtVllmM0N6CmR3OGVQU3VremJUUlRXWVptR2VuT3JrQ2dZRUFob082TWRZQXdlWHpIMEo4WHNEZVBFem1tY3ZhYXV6RGwzNUYKZ0lPQXhjMUIxMzgxTnFuUm9VZ1NpMWN6Wk82QlArcTY5TGJYM1BhVjlXTnF0RHArNU9YNFNUOEZnZ01PTUlkZwovbTVaM0Y0THRhakl2RDQxVjloUjJpMXlYNG1XUm1zTGgxYWNtbVF2dnpTVGVrTHZlejhqRDhaT2dWNjl5QmFWCmtkc1hhOTBDZ1lFQWsrNmdocFhOa3UxMlVBTmY5TUg4bG9OKzM1L2lQZWVvcWYwTVk1Rk1WUll4MTBaQTkxTGgKaWVBY3pWaGlxenhDdEhXaExBNFN4RTk2MmVnK2ppL2F3a1M0a1hMQ011WklFU0UrakZjN3B0VW1KamxzT1dqdgo4L2RxVUg1eWpSS3MycXhrQldHNEhtVDNOeDZBOHNZSXJVWXh5cVZMQnBHOHlLbmdibmFZUFY0PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQ=="}|
-|password|credential_secret_key|None|False|Password authentication or password to decrypt provided private key. Either this or SSH private key is required|None|{"secretKey": "mypassword"}|
+|key|credential_secret_key|None|False|A base64 encoded SSH private key to use to authenticate to remote server. A newline is required after the beginning and before the end marker|None|{'privateKey': 'LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcFFJQkFBS0NBUUVBakdub1V0ZlBIcXZYM1BJVTZOOUZLbXdRM1psK05vYVdiNHlNTGh1ZGtkRUJKM0F1CitJOFFkbHFES0JtNjU2VWVPQ2gzci9pOWUwVUxLeGtYREZmS21jM3AyV3YrMGxWT1lHdnhaRktVd0tIMHJpQUwKQTRpbXlZdUwvZndlT1NHU25RbGdZS3I5OUhjaVRCSWRMMTVTWjMyVGpZYitQRFpCbCs2elFzdzJIWU5KY3FNagppY2lDN0NBajZnQjlTTzh4MXZNc1JrVStycUt1YzJyOFVrK3FoRUN3OHpSNEs2NndGdVlNMTdzR1VNWFVxL3BICldkaUV2TzNxL21kSzQ3TnJ4NWkyYmFDN281UlhzcEtIWXk2WGVyNFZibmlwbDREZ0FLa2FOT0wwMmErWnYzOFEKbCt4eTl3ZG1XcVVJYk1pcVNiai9rNnh4RGlQUWtUUisvMDMyZVFJREFRQUJBb0lCQUVrUHpwQlV0UFFickozTgo1UzFyQjcxVUw4NXUwT3FrUzJETnZCODl4VmFiYjBOTEwxV3NjMzl5QjI3MVBIak9SUlFwa21XaFEwOENGUmFlCjNveFFuaDQ3cytPck94UE15WlNJZGptaWNyNXRSempYZVlPa05rMEc3SmdDK09MM1lpZU9PblR5WkdReEhVcUIKM21mSVo0NXNIRHYzTXhDM2xwZnMzNS94VEhNOEUvZ1cvZ1RmdlUzUWJvUWFMMXEvdGFSUVlFSHZnaXV0d2RaMApzRUZ0SjhlQXdPQkFCWGlWM1FQeG5BUWdJcHdZcGJpY2wzQUsxNWdzNUVOSzRSbmdpMmJJN2hkbU13RFdhNnQvCmcwQ1AwVGl0eUZxMDVKVW1uYXo0d2VrWHhENUVCbTc3NkVZTlNveFRDYVN6VE1Zd1pDSVRycVhsNlk0L29nZVQKdVZTbTlaRUNnWUVBN0c4Q3l5REtEVEJZb0l5RWtuSlZLU3d1ZWxPQTJlZHhtVnlLTDhoTG9QaXExUW9TSC9OMQozMG5OL0dWY3ZEN1FFRDRwL3UwWGFNdVBtMkhWaHVYd3h1L3Q5ajExRFZsS1A3UXNIOXU0cEpLeml3Nk5tVjVOCi85K21jamRXQUg1QnFhSnRtcEYwdW9ac1drNDFKVmUwZkE3YTNGQ3JYcDFVL0dEOUJLU0FEMDBDZ1lFQW1BaW8KQ2hFaDcrcEQ3dnV0Rjg1dStGcWJkalkrS215RmVUUGQyNzE3UDZpNVY2QzZsVnBjbk03dm9abEd5MGZqb2FsZAplOW50bTBWVThGWmtVSWloS1B6VzkvTFNBVjhCZ08rdlNRck4vSU1FbURxb2w5NTlJeHhJLzZ5emtZNUp3WVJQCm1sd29OelUwZWtjSHpnMGV1N0RBMXV6UmZ2NEYxTlVXK1F5bFJkMENnWUVBenIwN09oZFAxanlDSXREOFUzbjYKRVdoNnM2ZzBzVlY1dGRwL1VzelhwTWdMeVFGblc5enRJdlJNVS9qbUlBemtybTlORllhSHc3REx2OWpLZDR5MAovNTlvK3JvK2tnK1RweVNLdU1qT0tjbkZpVUNPZko5RG9Rd1ZaU1lSNDVpREhpdlRueWExWlN5SnJtVllmM0N6CmR3OGVQU3VremJUUlRXWVptR2VuT3JrQ2dZRUFob082TWRZQXdlWHpIMEo4WHNEZVBFem1tY3ZhYXV6RGwzNUYKZ0lPQXhjMUIxMzgxTnFuUm9VZ1NpMWN6Wk82QlArcTY5TGJYM1BhVjlXTnF0RHArNU9YNFNUOEZnZ01PTUlkZwovbTVaM0Y0THRhakl2RDQxVjloUjJpMXlYNG1XUm1zTGgxYWNtbVF2dnpTVGVrTHZlejhqRDhaT2dWNjl5QmFWCmtkc1hhOTBDZ1lFQWsrNmdocFhOa3UxMlVBTmY5TUg4bG9OKzM1L2lQZWVvcWYwTVk1Rk1WUll4MTBaQTkxTGgKaWVBY3pWaGlxenhDdEhXaExBNFN4RTk2MmVnK2ppL2F3a1M0a1hMQ011WklFU0UrakZjN3B0VW1KamxzT1dqdgo4L2RxVUg1eWpSS3MycXhrQldHNEhtVDNOeDZBOHNZSXJVWXh5cVZMQnBHOHlLbmdibmFZUFY0PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQ=='}|
+|password|credential_secret_key|None|False|Password authentication or password to decrypt provided private key. Either this or SSH private key is required|None|{'secretKey': 'mypassword'}|
 |port|integer|22|True|Remote port to use|None|22|
 |use_key|boolean|None|True|True to connect via key, false to connect via password|None|True|
 |username|string|None|True|User to run command as|None|user1|
-
+  
 Example input:
 
 ```
 {
   "host": "198.51.100.100",
-  "key": {"privateKey": "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcFFJQkFBS0NBUUVBakdub1V0ZlBIcXZYM1BJVTZOOUZLbXdRM1psK05vYVdiNHlNTGh1ZGtkRUJKM0F1CitJOFFkbHFES0JtNjU2VWVPQ2gzci9pOWUwVUxLeGtYREZmS21jM3AyV3YrMGxWT1lHdnhaRktVd0tIMHJpQUwKQTRpbXlZdUwvZndlT1NHU25RbGdZS3I5OUhjaVRCSWRMMTVTWjMyVGpZYitQRFpCbCs2elFzdzJIWU5KY3FNagppY2lDN0NBajZnQjlTTzh4MXZNc1JrVStycUt1YzJyOFVrK3FoRUN3OHpSNEs2NndGdVlNMTdzR1VNWFVxL3BICldkaUV2TzNxL21kSzQ3TnJ4NWkyYmFDN281UlhzcEtIWXk2WGVyNFZibmlwbDREZ0FLa2FOT0wwMmErWnYzOFEKbCt4eTl3ZG1XcVVJYk1pcVNiai9rNnh4RGlQUWtUUisvMDMyZVFJREFRQUJBb0lCQUVrUHpwQlV0UFFickozTgo1UzFyQjcxVUw4NXUwT3FrUzJETnZCODl4VmFiYjBOTEwxV3NjMzl5QjI3MVBIak9SUlFwa21XaFEwOENGUmFlCjNveFFuaDQ3cytPck94UE15WlNJZGptaWNyNXRSempYZVlPa05rMEc3SmdDK09MM1lpZU9PblR5WkdReEhVcUIKM21mSVo0NXNIRHYzTXhDM2xwZnMzNS94VEhNOEUvZ1cvZ1RmdlUzUWJvUWFMMXEvdGFSUVlFSHZnaXV0d2RaMApzRUZ0SjhlQXdPQkFCWGlWM1FQeG5BUWdJcHdZcGJpY2wzQUsxNWdzNUVOSzRSbmdpMmJJN2hkbU13RFdhNnQvCmcwQ1AwVGl0eUZxMDVKVW1uYXo0d2VrWHhENUVCbTc3NkVZTlNveFRDYVN6VE1Zd1pDSVRycVhsNlk0L29nZVQKdVZTbTlaRUNnWUVBN0c4Q3l5REtEVEJZb0l5RWtuSlZLU3d1ZWxPQTJlZHhtVnlLTDhoTG9QaXExUW9TSC9OMQozMG5OL0dWY3ZEN1FFRDRwL3UwWGFNdVBtMkhWaHVYd3h1L3Q5ajExRFZsS1A3UXNIOXU0cEpLeml3Nk5tVjVOCi85K21jamRXQUg1QnFhSnRtcEYwdW9ac1drNDFKVmUwZkE3YTNGQ3JYcDFVL0dEOUJLU0FEMDBDZ1lFQW1BaW8KQ2hFaDcrcEQ3dnV0Rjg1dStGcWJkalkrS215RmVUUGQyNzE3UDZpNVY2QzZsVnBjbk03dm9abEd5MGZqb2FsZAplOW50bTBWVThGWmtVSWloS1B6VzkvTFNBVjhCZ08rdlNRck4vSU1FbURxb2w5NTlJeHhJLzZ5emtZNUp3WVJQCm1sd29OelUwZWtjSHpnMGV1N0RBMXV6UmZ2NEYxTlVXK1F5bFJkMENnWUVBenIwN09oZFAxanlDSXREOFUzbjYKRVdoNnM2ZzBzVlY1dGRwL1VzelhwTWdMeVFGblc5enRJdlJNVS9qbUlBemtybTlORllhSHc3REx2OWpLZDR5MAovNTlvK3JvK2tnK1RweVNLdU1qT0tjbkZpVUNPZko5RG9Rd1ZaU1lSNDVpREhpdlRueWExWlN5SnJtVllmM0N6CmR3OGVQU3VremJUUlRXWVptR2VuT3JrQ2dZRUFob082TWRZQXdlWHpIMEo4WHNEZVBFem1tY3ZhYXV6RGwzNUYKZ0lPQXhjMUIxMzgxTnFuUm9VZ1NpMWN6Wk82QlArcTY5TGJYM1BhVjlXTnF0RHArNU9YNFNUOEZnZ01PTUlkZwovbTVaM0Y0THRhakl2RDQxVjloUjJpMXlYNG1XUm1zTGgxYWNtbVF2dnpTVGVrTHZlejhqRDhaT2dWNjl5QmFWCmtkc1hhOTBDZ1lFQWsrNmdocFhOa3UxMlVBTmY5TUg4bG9OKzM1L2lQZWVvcWYwTVk1Rk1WUll4MTBaQTkxTGgKaWVBY3pWaGlxenhDdEhXaExBNFN4RTk2MmVnK2ppL2F3a1M0a1hMQ011WklFU0UrakZjN3B0VW1KamxzT1dqdgo4L2RxVUg1eWpSS3MycXhrQldHNEhtVDNOeDZBOHNZSXJVWXh5cVZMQnBHOHlLbmdibmFZUFY0PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQ=="},
-  "password": {"secretKey": "mypassword"},
+  "key": {
+    "privateKey": "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcFFJQkFBS0NBUUVBakdub1V0ZlBIcXZYM1BJVTZOOUZLbXdRM1psK05vYVdiNHlNTGh1ZGtkRUJKM0F1CitJOFFkbHFES0JtNjU2VWVPQ2gzci9pOWUwVUxLeGtYREZmS21jM3AyV3YrMGxWT1lHdnhaRktVd0tIMHJpQUwKQTRpbXlZdUwvZndlT1NHU25RbGdZS3I5OUhjaVRCSWRMMTVTWjMyVGpZYitQRFpCbCs2elFzdzJIWU5KY3FNagppY2lDN0NBajZnQjlTTzh4MXZNc1JrVStycUt1YzJyOFVrK3FoRUN3OHpSNEs2NndGdVlNMTdzR1VNWFVxL3BICldkaUV2TzNxL21kSzQ3TnJ4NWkyYmFDN281UlhzcEtIWXk2WGVyNFZibmlwbDREZ0FLa2FOT0wwMmErWnYzOFEKbCt4eTl3ZG1XcVVJYk1pcVNiai9rNnh4RGlQUWtUUisvMDMyZVFJREFRQUJBb0lCQUVrUHpwQlV0UFFickozTgo1UzFyQjcxVUw4NXUwT3FrUzJETnZCODl4VmFiYjBOTEwxV3NjMzl5QjI3MVBIak9SUlFwa21XaFEwOENGUmFlCjNveFFuaDQ3cytPck94UE15WlNJZGptaWNyNXRSempYZVlPa05rMEc3SmdDK09MM1lpZU9PblR5WkdReEhVcUIKM21mSVo0NXNIRHYzTXhDM2xwZnMzNS94VEhNOEUvZ1cvZ1RmdlUzUWJvUWFMMXEvdGFSUVlFSHZnaXV0d2RaMApzRUZ0SjhlQXdPQkFCWGlWM1FQeG5BUWdJcHdZcGJpY2wzQUsxNWdzNUVOSzRSbmdpMmJJN2hkbU13RFdhNnQvCmcwQ1AwVGl0eUZxMDVKVW1uYXo0d2VrWHhENUVCbTc3NkVZTlNveFRDYVN6VE1Zd1pDSVRycVhsNlk0L29nZVQKdVZTbTlaRUNnWUVBN0c4Q3l5REtEVEJZb0l5RWtuSlZLU3d1ZWxPQTJlZHhtVnlLTDhoTG9QaXExUW9TSC9OMQozMG5OL0dWY3ZEN1FFRDRwL3UwWGFNdVBtMkhWaHVYd3h1L3Q5ajExRFZsS1A3UXNIOXU0cEpLeml3Nk5tVjVOCi85K21jamRXQUg1QnFhSnRtcEYwdW9ac1drNDFKVmUwZkE3YTNGQ3JYcDFVL0dEOUJLU0FEMDBDZ1lFQW1BaW8KQ2hFaDcrcEQ3dnV0Rjg1dStGcWJkalkrS215RmVUUGQyNzE3UDZpNVY2QzZsVnBjbk03dm9abEd5MGZqb2FsZAplOW50bTBWVThGWmtVSWloS1B6VzkvTFNBVjhCZ08rdlNRck4vSU1FbURxb2w5NTlJeHhJLzZ5emtZNUp3WVJQCm1sd29OelUwZWtjSHpnMGV1N0RBMXV6UmZ2NEYxTlVXK1F5bFJkMENnWUVBenIwN09oZFAxanlDSXREOFUzbjYKRVdoNnM2ZzBzVlY1dGRwL1VzelhwTWdMeVFGblc5enRJdlJNVS9qbUlBemtybTlORllhSHc3REx2OWpLZDR5MAovNTlvK3JvK2tnK1RweVNLdU1qT0tjbkZpVUNPZko5RG9Rd1ZaU1lSNDVpREhpdlRueWExWlN5SnJtVllmM0N6CmR3OGVQU3VremJUUlRXWVptR2VuT3JrQ2dZRUFob082TWRZQXdlWHpIMEo4WHNEZVBFem1tY3ZhYXV6RGwzNUYKZ0lPQXhjMUIxMzgxTnFuUm9VZ1NpMWN6Wk82QlArcTY5TGJYM1BhVjlXTnF0RHArNU9YNFNUOEZnZ01PTUlkZwovbTVaM0Y0THRhakl2RDQxVjloUjJpMXlYNG1XUm1zTGgxYWNtbVF2dnpTVGVrTHZlejhqRDhaT2dWNjl5QmFWCmtkc1hhOTBDZ1lFQWsrNmdocFhOa3UxMlVBTmY5TUg4bG9OKzM1L2lQZWVvcWYwTVk1Rk1WUll4MTBaQTkxTGgKaWVBY3pWaGlxenhDdEhXaExBNFN4RTk2MmVnK2ppL2F3a1M0a1hMQ011WklFU0UrakZjN3B0VW1KamxzT1dqdgo4L2RxVUg1eWpSS3MycXhrQldHNEhtVDNOeDZBOHNZSXJVWXh5cVZMQnBHOHlLbmdibmFZUFY0PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQ=="
+  },
+  "password": {
+    "secretKey": "mypassword"
+  },
   "port": 22,
   "use_key": true,
   "username": "user1"
@@ -57,17 +65,18 @@ This can then be pasted into the Connection's `key` input field.
 
 ### Actions
 
-#### Run Remote Command
 
+#### Run Remote Command
+  
 This action is used to run remote command.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |command|string|None|True|Command to execute on remote host|None|pwd|
 |host|string|None|False|Host to run remote commands. If not provided, the connection host will be used|None|198.51.100.100|
-
+  
 Example input:
 
 ```
@@ -79,36 +88,47 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results|results|True|Results|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|results|results|True|Results|/home/vagrant|
+  
 Example output:
 
 ```
 {
   "results": {
-    "all_output": "/home/vagrant\n",
-    "stderr": "",
-    "stdout": "/home/vagrant\n"
+    "All Output": "/home/vagrant",
+    "STDERR": {},
+    "STDOUT": "/home/vagrant"
   }
 }
 ```
-
 ### Triggers
+  
+*This plugin does not contain any triggers.*
 
-_This plugin does not contain any triggers._
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-### Custom Output Types
+### Custom Types
+  
+**results**
 
-_This plugin does not contain any custom output types._
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|All Output|string|None|True|All output|/home/vagrant|
+|STDERR|string|None|True|Stderr|{}|
+|STDOUT|string|None|True|Stdout|/home/vagrant|
+
 
 ## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
+  
+*There is no troubleshooting for this plugin.*
 
 # Version History
 
+* 4.0.1 - Update from komand to insight-plugin-runtime
 * 4.0.0 - Upgrade the plugin runtime to `komand/python-3-37-plugin` and run as least-privileged user | Change the SSH key credential type to `credential_secret_key` to skip PEM validation in the product UI
 * 3.0.1 - Fixed issue obtaining username in connection
 * 3.0.0 - Update connection username from credential_secret_key to string
@@ -124,9 +144,10 @@ _This plugin does not contain any troubleshooting information._
 
 # Links
 
+* [Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell)
+
 ## References
 
-* [Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell)
 * [OpenSSH](https://www.openssh.com/)
 * [paramiko](http://www.paramiko.org/)
 
