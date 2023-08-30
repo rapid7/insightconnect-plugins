@@ -12,7 +12,7 @@ Hypertext Markup Language (HTML) is the standard markup language for documents d
 
 # Supported Product Versions
   
-* 2023-06-06
+* 2023-08-30
 
 # Documentation
 
@@ -257,7 +257,6 @@ Example output:
 ### Triggers
   
 *This plugin does not contain any triggers.*
-
 ### Tasks
   
 *This plugin does not contain any tasks.*
