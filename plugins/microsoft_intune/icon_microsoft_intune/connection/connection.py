@@ -19,7 +19,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             username=params.get(Input.CREDENTIALS).get("username"),
             password=params.get(Input.CREDENTIALS).get("password"),
             client_id=params.get(Input.CLIENT_ID),
-            client_secret=params.get(Input.CLIENT_SECRET),
+            client_secret=params.get(Input.CLIENT_SECRET, {}).get("secretKey"),
             tenant_id=params.get(Input.TENANT_ID),
             api_url=f"{url}/v1.0/",
             logger=self.logger,

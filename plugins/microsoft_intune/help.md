@@ -5,11 +5,18 @@
 # Key Features
 
 * Initiate a Windows Defender Antivirus scan on a machine.
+* Get information about the device
+* Get information about the Autopilot device
+* Run a quick or full scan of the device
 
 # Requirements
 
 * Azure credentials
 * Client ID, Client Secret and Tenant ID
+
+# Supported Product Versions
+
+* Microsoft Graph REST API v1.0 2023-08-29
 
 # Documentation
 
@@ -21,6 +28,7 @@
         * DeviceManagementManagedDevices.PrivilegedOperations.All
         * DeviceManagementManagedDevices.Read.All
         * DeviceManagementManagedDevices.ReadWrite.All
+        * DeviceManagementServiceConfig.Read.All
     * Please note, these API Permissions require administrator consent.
 3. Create a new secret and copy and paste the secret value into the connection.
 4. Copy and paste the 'Application (client) ID' and 'Directory (tenant) ID' (from the Overview tab) into the connection.
@@ -32,7 +40,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |client_id|string|None|True|Client ID, also called Application ID|None|a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d|
-|client_secret|string|None|True|Client secret key|None|kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=|
+|client_secret|credential_secret_key|None|True|Client secret key|None|kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=|
 |credentials|credential_username_password|None|True|E-mail address and password|None|{"username": "user@example.com", "password": "mypassword"}|
 |tenant_id|string|None|True|Tenant ID can be found in Active Directory|None|3a522933-ae5e-2b63-96ab-3c004b4f7f10|
 |url|string|https://graph.microsoft.com|True|Base URL for the Microsoft endpoint|None|https://graph.microsoft.com|
@@ -42,7 +50,9 @@ Example input:
 ```
 {
   "client_id": "a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d",
-  "client_secret": "kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=",
+  "client_secret": {
+    "secretKey": "kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5="
+  },
   "credentials": {
     "username": "user@example.com",
     "password": "mypassword"
@@ -55,6 +65,211 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Get Autopilot Device
+
+This action is used to get information about the Autopilot device.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|device_id|string|None|True|ID of the Autopilot device|None|9e8fd111-6c41-1111-85b9-11395662e111|
+
+Example input:
+
+```
+{
+  "device_id": "9e8fd111-6c41-1111-85b9-11395662e111"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|device|autopilot_device|False|Information about the autopilot device|{}|
+
+Example output:
+
+```
+{
+  "id": "9e8fd111-6c41-1111-85b9-11395662e111",
+  "group_tag": "example-tag",
+  "purchase_order_identifier": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+  "serial_number": "A1B2C3D4",
+  "product_key": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+  "manufacturer": "Example Manufacturer",
+  "model": "Example Model",
+  "last_contacted_date_time": "2021-06-24T00:37:04.5885438Z",
+  "enrollment_state": "notContacted",
+  "addressable_user_name": "user@example.com",
+  "user_principal_name": "Example Name",
+  "resource_name": "Example Resource Name",
+  "sku_number": "ABCD1234",
+  "system_family": "EXAMPLE_FAMILY",
+  "azure_active_directory_device_id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+  "managed_device_id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+  "display_name": "Example Name"
+}
+```
+
+#### Full Scan
+
+This action is used to perform a full scan of the device.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|device_id|string|None|True|ID of the device|None|9e8fd111-6c41-1111-85b9-11395662e111|
+
+Example input:
+
+```
+{
+  "device_id": "9e8fd111-6c41-1111-85b9-11395662e111"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Whether the scan was successful|True|
+
+Example output:
+
+```
+{
+  "success": True
+}
+```
+
+#### Quick Scan
+
+This action is used to perform a quick scan of the device.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|device_id|string|None|True|ID of the device|None|9e8fd111-6c41-1111-85b9-11395662e111|
+
+Example input:
+
+```
+{
+  "device_id": "9e8fd111-6c41-1111-85b9-11395662e111"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Whether the scan was successful|True|
+
+Example output:
+
+```
+{
+  "success": True
+}
+
+```
+
+#### Get Device
+
+This action is used to get information about the device.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|device_id|string|None|True|ID of the device|None|9e8fd111-6c41-1111-85b9-11395662e111|
+
+Example input:
+
+```
+{
+  "device_id": "9e8fd111-6c41-1111-85b9-11395662e111"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|device|device|False|Information about the device|{}|
+
+Example output:
+
+```
+{
+  "id": "9e8fd111-6c41-1111-85b9-11395662e111",
+  "user_id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+  "device_name": "INTUNE-W10-C",
+  "managed_device_owner_type": "personal",
+  "enrolled_date_time": "2021-06-24T00:37:04.5885438Z",
+  "last_sync_date_time": "2023-08-23T09:05:10.1997623Z",
+  "operating_system": "Windows",
+  "compliance_state": "compliant",
+  "jail_broken": "Unknown",
+  "management_agent": "mdm",
+  "os_version": "10.0.19044.3084",
+  "eas_activated": true,
+  "eas_device_id": "FD80418A34D1234567E08E82604E1111",
+  "eas_activation_date_time": "2021-06-24T08:37:10.2303995Z",
+  "azure_ad_registered": true,
+  "device_enrollment_type": "userEnrollment",
+  "email_address": "user@example.com",
+  "azure_ad_device_id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+  "device_registration_state": "registered",
+  "is_supervised": false,
+  "exchange_last_successful_sync_date_time": "0001-01-01T00:00:00Z",
+  "exchange_access_state": "none",
+  "exchange_access_state_reason": "none",
+  "is_encrypted": false,
+  "user_principal_name": "user@example.com",
+  "model": "VMware Virtual Platform",
+  "manufacturer": "VMware, Inc.",
+  "compliance_grace_period_expiration_date_time": "9999-12-31T23:59:59.9999999Z",
+  "serial_number": "VMware-42146feae7654321-123456304825cc11",
+  "user_display_name": "Example User",
+  "total_storage_space_in_bytes": 33773584384,
+  "free_storage_space_in_bytes": 1660944384,
+  "partner_reported_threat_state": "unknown",
+  "management_certificate_expiration_date": "2024-02-13T19:33:06Z",
+  "ethernet_mac_address": "005056949D3E",
+  "physical_memory_in_bytes": 0,
+  "device_action_results": [
+    {
+      "action_name": "windowsDefenderUpdateSignatures",
+      "action_state": "done",
+      "start_date_time": "2022-04-26T13:19:45.3008934Z",
+      "last_updated_date_time": "2022-04-26T13:25:27Z"
+    },
+    {
+      "@odata.type": "#microsoft.graph.windowsDefenderScanActionResult",
+      "action_name": "windowsDefenderScan",
+      "action_state": "done",
+      "start_date_time": "2023-08-23T08:20:27.9731659Z",
+      "last_updated_date_time": "2023-08-23T09:04:07Z",
+      "scan_type": "Full Scan"
+    },
+    {
+      "@odata.type": "#microsoft.graph.windowsDefenderScanActionResult",
+      "action_name": "windowsDefenderScan",
+      "action_state": "done",
+      "start_date_time": "2023-08-23T08:21:02.3882789Z",
+      "last_updated_date_time": "2023-08-23T09:04:07Z",
+      "scan_type": "Quick scan"
+    }
+  ]
+}
+
+```
 
 #### Get Managed Apps
 
@@ -312,7 +527,166 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+#### autopilot_device
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Addressable User Name|string|False|Addressable user name|
+|Azure Active Directory Device ID|string|False|The unique identifier for the Azure Active Directory device|
+|Display Name|string|False|Display name of the device|
+|Enrollment State|string|False|State of the enrollment|
+|Group Tag|string|False|Group tag of the autopilot device|
+|ID|string|False|Unique identifier for the autopilot device|
+|Last Contacted Date Time|string|False|The date when the device was last contacted|
+|Managed Device ID|string|False|The identifier of the managed device|
+|Manufacturer|string|False|OEM manufacturer of the device|
+|Model|string|False|Model of the autopilot device|
+|Product Key|string|False|Product key of the device|
+|Purchase Order Identifier|string|False|The identifier of the purchase order|
+|Resource Name|string|False|Name of the resource|
+|Serial Number|string|False|Serial number of the device|
+|SKU Number|string|False|Stock Keeping Unit number of the device|
+|System Family|string|False|Family of the device system|
+|User Principal Name|string|False|Principal name of the user|
+
+#### configuration_manager_client_enabled_features
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Compliance Policy|boolean|False|Compliance policy|
+|Device Configuration|boolean|False|Device configuration|
+|Inventory|boolean|False|Inventory|
+|Modern Apps|boolean|False|Modern apps|
+|Odata Type|string|False|Odata type|
+|Resource Access|boolean|False|Resource access|
+|Windows Update For Business|boolean|False|Windows update for business|
+
+#### device
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Activation Lock Bypass Code|string|False|Activation lock bypass code|
+|Android Security Patch Level|string|False|Android security patch level|
+|Azure AD Device ID|string|False|Azure AD device ID|
+|Azure AD Registered|boolean|False|Azure AD registered|
+|Compliance Grace Period Expiration Date Time|date|False|Compliance grace period expiration date time|
+|Compliance State|string|False|Compliance state|
+|Configuration Manager Client Enabled Features|configuration_manager_client_enabled_features|False|Configuration manager client enabled features|
+|Device Action Results|[]device_action_results|False|Device action results|
+|Device Category Display Name|string|False|Device category display name|
+|Device Enrollment Type|string|False|Device enrollment type|
+|Device Health Attestation State|device_health_attestation_state|False|Device health attestation state|
+|Device Name|string|False|Device name|
+|Device Registration State|string|False|Device registration state|
+|EAS Activated|boolean|False|EAS activated|
+|EAS Activation Date Time|date|False|EAS activation date time|
+|EAS Device ID|string|False|EAS device ID|
+|Email Address|string|False|Email address|
+|Enrolled Date Time|date|False|Enrolled date time|
+|Exchange Access State|string|False|Exchange access state|
+|Exchange Access State Reason|string|False|Exchange access state reason|
+|Exchange Last Successful Sync Date Time|date|False|Exchange last successful sync date time|
+|Free Storage Space In Bytes|integer|False|Free storage space in bytes|
+|ID|string|False|ID|
+|IMEI|string|False|IMEI|
+|Is Encrypted|boolean|False|Is encrypted|
+|Is Supervised|boolean|False|Is supervised|
+|Jail Broken|string|False|Jail broken|
+|Last Sync Date Time|date|False|Last sync date time|
+|Managed Device Name|string|False|Managed device name|
+|Managed Device Owner Type|string|False|Managed device owner type|
+|Management Agent|string|False|Management agent|
+|Manufacturer|string|False|Manufacturer|
+|MEID|string|False|MEID|
+|Model|string|False|Model|
+|Odata Type|string|False|Odata type|
+|Operating System|string|False|Operating system|
+|OS Version|string|False|OS version|
+|Partner Reported Threat State|string|False|Partner reported threat state|
+|Phone Number|string|False|Phone number|
+|Remote Assistance Session Error Details|string|False|Remote assistance session error details|
+|Remote Assistance Session URL|string|False|Remote assistance session URL|
+|Serial Number|string|False|Serial number|
+|Subscriber Carrier|string|False|Subscriber carrier|
+|Total Storage Space In Bytes|integer|False|Total storage space in bytes|
+|User Display Name|string|False|User display name|
+|User ID|string|False|User ID|
+|User Principal Name|string|False|User principal name|
+|Wifi MAC Address|string|False|Wifi MAC address|
+
+#### device_action_results
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Action Name|string|False|Action name|
+|Action State|string|False|Action state|
+|Last Updated Date Time|date|False|Last updated date time|
+|Odata Type|string|False|Odata type|
+|Start Date Time|date|False|Start date time|
+
+#### device_health_attestation_state
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Attestation Identity Key|string|False|Attestation identity key|
+|BitLocker Status|string|False|BitLocker status|
+|Boot App Security Version|string|False|Boot app security version|
+|Boot Debugging|string|False|Boot debugging|
+|Boot Manager Security Version|string|False|Boot manager security version|
+|Boot Manager Version|string|False|Boot manager version|
+|Boot Revision List Info|string|False|Boot revision list info|
+|Code Integrity|string|False|Code integrity|
+|Code Integrity Check Version|string|False|Code integrity check version|
+|Code Integrity Policy|string|False|Code integrity policy|
+|Content Namespace URL|string|False|Content namespace URL|
+|Content Version|string|False|Content version|
+|Data Excution Policy|string|False|Data excution policy|
+|Device Health Attestation Status|string|False|Device health attestation status|
+|Early Launch Anti Malware Driver Protection|string|False|Early launch anti malware driver protection|
+|Health Attestation Supported Status|string|False|Health attestation supported status|
+|Health Status Mismatch Info|string|False|Health status mismatch info|
+|Issued Date Time|date|False|Issued date time|
+|Last Update Date Time|date|False|Last update date time|
+|Odata Type|string|False|Odata type|
+|Operating System Kernel Debugging|string|False|Operating system kernel debugging|
+|Operating System Rev List Info|string|False|Operating system rev list info|
+|PCR0|string|False|PCR0|
+|PCR Hash Algorithm|string|False|PCR hash algorithm|
+|Reset Count|integer|False|Reset count|
+|Restart Count|integer|False|Restart count|
+|Safe Mode|string|False|Safe mode|
+|Secure Boot|string|False|Secure boot|
+|Secure Boot Configuration Policy Finger Print|string|False|Secure boot configuration policy finger print|
+|Test Signing|string|False|Test signing|
+|TPM Version|string|False|TPM version|
+|Virtual Secure Mode|string|False|Virtual secure mode|
+|Windows PE|string|False|Windows PE|
+
+#### value
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Odata Context|string|False|Odata context|
+|Odata Type|string|False|Odata type|
+|App Availability|string|False|App availability|
+|App Store URL|string|False|App store URL|
+|Created Datetime|string|False|Created datetime|
+|Description|string|False|Description|
+|Developer|string|False|Developer|
+|Display Name|string|False|Display Name|
+|ID|string|False|ID|
+|Information URL|string|False|Information URL|
+|Is Featured|boolean|False|Is featured|
+|Large Icon|object|False|Large icon|
+|Last Modified Datetime|string|False|Last modified datetime|
+|Minimum Supported Operating System|object|False|Minimum supported operating system|
+|Notes|string|False|Notes|
+|Owner|string|False|Owner|
+|Package ID|string|False|Package ID|
+|Privacy Information URL|string|False|Privacy information URL|
+|Publisher|string|False|Publisher|
+|Publishing State|string|False|Publishing state|
+|Version|string|False|Version|
 
 ## Troubleshooting
 
@@ -320,6 +694,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Add new actions Get Device, Get Autopilot Device, Full Scan, Quick Scan | Change `client_secret` input type in connection
 * 1.3.0 - Add new action Get Managed Apps
 * 1.2.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/microsoft-intune/)
 * 1.2.1 - Improve e-mail search in Search Devices action by performing an extended all device search for  `emailAddress` and `userPrincipalName` when email is not found

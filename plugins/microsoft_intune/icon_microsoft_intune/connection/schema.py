@@ -24,7 +24,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "order": 3
     },
     "client_secret": {
-      "type": "string",
+      "$ref": "#/definitions/credential_secret_key",
       "title": "Client Secret",
       "description": "Client secret key",
       "order": 4
@@ -57,6 +57,24 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "url"
   ],
   "definitions": {
+    "credential_secret_key": {
+      "id": "credential_secret_key",
+      "type": "object",
+      "title": "Credential: Secret Key",
+      "description": "A shared secret key",
+      "properties": {
+        "secretKey": {
+          "type": "string",
+          "title": "Secret Key",
+          "displayType": "password",
+          "description": "The shared secret key",
+          "format": "password"
+        }
+      },
+      "required": [
+        "secretKey"
+      ]
+    },
     "credential_username_password": {
       "id": "credential_username_password",
       "type": "object",

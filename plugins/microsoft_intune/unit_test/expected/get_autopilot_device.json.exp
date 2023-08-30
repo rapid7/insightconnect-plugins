@@ -1,0 +1,21 @@
+{
+  "device": {
+    "id": "9e8fd111-6c41-1111-85b9-11395662e111",
+    "group_tag": "mc",
+    "purchase_order_identifier": "9e8fd111-6c41-1111-85b9-11395662e111",
+    "serial_number": "A1B2C3D4",
+    "product_key": "9e8fd111-6c41-1111-85b9-11395662e111",
+    "manufacturer": "MC-Example",
+    "model": "MC Platform",
+    "last_contacted_date_time": "0001-01-01T00:00:00Z",
+    "enrollment_state": "notContacted",
+    "addressable_user_name": "user@example.com",
+    "user_principal_name": "Example Name",
+    "resource_name": "Example Resource Name",
+    "sku_number": "ABCD1234",
+    "system_family": "EXAMPLE_FAMILY",
+    "azure_active_directory_device_id": "9e8fd111-6c41-1111-85b9-11395662e111",
+    "managed_device_id": "9e8fd111-6c41-1111-85b9-11395662e111",
+    "display_name": "device-name-test"
+  }
+}

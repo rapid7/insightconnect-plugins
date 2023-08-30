@@ -4,9 +4,11 @@ products: [insightconnect]
 name: microsoft_intune
 title: Microsoft Intune
 description: Microsoft cloud-based management solution that provides for mobile device and operating system management
-version: 1.3.0
+version: 2.0.0
+connection_version: 2
 vendor: rapid7
 support: rapid7
+supported_versions: ["Microsoft Graph REST API v1.0 2023-08-29"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/microsoft_intune
@@ -597,6 +599,109 @@ types:
       type: string
       description: Wifi MAC address
       required: false
+  autopilot_device:
+    addressable_user_name:
+      title: Addressable User Name
+      type: string
+      description: Addressable user name
+      required: false
+      example: user@example.com
+    azure_active_directory_device_id:
+      title: Azure Active Directory Device ID
+      type: string
+      description: The unique identifier for the Azure Active Directory device
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    display_name:
+      title: Display Name
+      type: string
+      description: Display name of the device
+      required: false
+      example: Example Name
+    enrollment_state:
+      title: Enrollment State
+      type: string
+      description: State of the enrollment
+      required: false
+      example: notContacted
+    group_tag:
+      title: Group Tag
+      type: string
+      description: Group tag of the autopilot device
+      required: false
+      example: example-tag
+    id:
+      title: ID
+      type: string
+      description: Unique identifier for the autopilot device
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    last_contacted_date_time:
+      title: Last Contacted Date Time
+      type: string
+      description: The date when the device was last contacted
+      required: false
+      example: 2021-06-24T00:37:04.5885438Z
+    managed_device_id:
+      title: Managed Device ID
+      type: string
+      description: The identifier of the managed device
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    manufacturer:
+      title: Manufacturer
+      type: string
+      description: OEM manufacturer of the device
+      required: false
+      example: Example Manufacturer
+    model:
+      title: Model
+      type: string
+      description: Model of the autopilot device
+      required: false
+      example: Example Model
+    product_key:
+      title: Product Key
+      type: string
+      description: Product key of the device
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    purchase_order_identifier:
+      title: Purchase Order Identifier
+      type: string
+      description: The identifier of the purchase order
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    resource_name:
+      title: Resource Name
+      type: string
+      description: Name of the resource
+      required: false
+      example: Example Name
+    serial_number:
+      title: Serial Number
+      type: string
+      description: Serial number of the device
+      required: false
+      example: 1A2B3C4D
+    sku_number:
+      title: SKU Number
+      type: string
+      description: Stock Keeping Unit number of the device
+      required: false
+      example: ABCD1234
+    system_family:
+      title: System Family
+      type: string
+      description: Family of the device system
+      required: false
+      example: example_family
+    user_principal_name:
+      title: User Principal Name
+      type: string
+      description: Principal name of the user
+      required: false
+      example: Example Name
 connection:
   credentials:
     title: Credentials
@@ -620,7 +725,7 @@ connection:
   client_secret:
     title: Client Secret
     description:  Client secret key
-    type: string
+    type: credential_secret_key
     required: true
     example: kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=
   tenant_id:
@@ -646,6 +751,57 @@ actions:
         description: Devices details
         required: false
         type: "[]device"
+  get_device:
+    title: Get Device
+    description: Get information about the device
+    input:
+      device_id:
+        title: Device ID
+        description: ID of the device
+        type: string
+        required: true
+        example: 9e8fd111-6c41-1111-85b9-11395662e111
+    output:
+      device:
+        title: Device
+        description: Information about the device
+        required: false
+        type: device
+        example: {}
+  quick_scan:
+    title: Quick Scan
+    description: Perform a quick scan of the device
+    input:
+      device_id:
+        title: Device ID
+        description: ID of the device
+        type: string
+        required: true
+        example: 9e8fd111-6c41-1111-85b9-11395662e111
+    output:
+      success:
+        title: Success
+        description: Whether the scan was successful
+        required: false
+        type: boolean
+        example: True
+  full_scan:
+    title: Full Scan
+    description: Perform a full scan of the device
+    input:
+      device_id:
+        title: Device ID
+        description: ID of the device
+        type: string
+        required: true
+        example: 9e8fd111-6c41-1111-85b9-11395662e111
+    output:
+      success:
+        title: Success
+        description: Whether the scan was successful
+        required: false
+        type: boolean
+        example: True
   antivirus_scan:
     title: Antivirus Scan
     description: Initiate a Windows Defender Antivirus scan on a machine
@@ -738,3 +894,20 @@ actions:
         description: Application details
         type: "[]value"
         required: false
+  get_autopilot_device:
+    title: Get Autopilot Device
+    description: Get information about the Autopilot device
+    input:
+      device_id:
+        title: Device ID
+        description: ID of the Autopilot device
+        type: string
+        required: true
+        example: 9e8fd111-6c41-1111-85b9-11395662e111
+    output:
+      device:
+        title: Device
+        description: Information about the autopilot device
+        required: false
+        type: autopilot_device
+        example: {}

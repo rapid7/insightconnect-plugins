@@ -4,6 +4,12 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 import validators
 from typing import Optional
 
+from icon_microsoft_intune.util.constants import (
+    GET_MANAGED_DEVICE_ENDPOINT,
+    SCAN_DEVICE_ENDPOINT,
+    GET_AUTOPILOT_DEVICE_ENDPOINT,
+)
+
 
 class MicrosoftIntuneAPI:
     def __init__(self, username, password, client_id, client_secret, tenant_id, api_url, logger):
@@ -214,3 +220,81 @@ class MicrosoftIntuneAPI:
             "Authorization": f"Bearer {access_token}",
             "Content-Type": "application/json",
         }
+
+    @staticmethod
+    def raise_for_status(response: requests.Response):
+        if response.status_code == 401:
+            raise PluginException(
+                cause="Invalid tenant ID, application ID or application secret provided.",
+                assistance="Verify your connection inputs are correct and try again.",
+                data=response.text,
+            )
+        elif response.status_code == 403:
+            raise PluginException(
+                preset=PluginException.Preset.UNAUTHORIZED,
+                data=response.text,
+            )
+        elif response.status_code == 404:
+            raise PluginException(
+                cause="Resource not found.",
+                assistance="Please provide valid inputs and try again.",
+                data=response.text,
+            )
+        elif response.status_code == 400:
+            raise PluginException(
+                preset=PluginException.Preset.BAD_REQUEST,
+                data=response.text,
+            )
+        elif response.status_code == 429:
+            raise PluginException(
+                preset=PluginException.Preset.RATE_LIMIT,
+                data=response.text,
+            )
+        elif 400 < response.status_code < 500:
+            raise PluginException(
+                preset=PluginException.Preset.UNKNOWN,
+                data=response.text,
+            )
+        elif response.status_code >= 500:
+            raise PluginException(
+                preset=PluginException.Preset.SERVER_ERROR,
+                data=response.text,
+            )
+
+    def get_device(self, device_id: str) -> dict:
+        response = self._request(
+            method="GET",
+            url=f"{self.api_url}{GET_MANAGED_DEVICE_ENDPOINT.format(device_id=device_id)}",
+            headers=MicrosoftIntuneAPI.create_necessary_headers(self.access_token),
+        )
+        self.raise_for_status(response)
+        return response.json()
+
+    def quick_scan(self, device_id: str) -> bool:
+        response = self._request(
+            method="POST",
+            url=f"{self.api_url}{SCAN_DEVICE_ENDPOINT.format(device_id=device_id)}",
+            request_body={"quickScan": True},
+            headers=MicrosoftIntuneAPI.create_necessary_headers(self.access_token),
+        )
+        self.raise_for_status(response)
+        return True
+
+    def full_scan(self, device_id: str) -> bool:
+        response = self._request(
+            method="POST",
+            url=f"{self.api_url}{SCAN_DEVICE_ENDPOINT.format(device_id=device_id)}",
+            request_body={"quickScan": False},
+            headers=MicrosoftIntuneAPI.create_necessary_headers(self.access_token),
+        )
+        self.raise_for_status(response)
+        return True
+
+    def get_autopilot_device(self, device_id: str) -> dict:
+        response = self._request(
+            method="GET",
+            url=f"{self.api_url}{GET_AUTOPILOT_DEVICE_ENDPOINT.format(device_id=device_id)}",
+            headers=MicrosoftIntuneAPI.create_necessary_headers(self.access_token),
+        )
+        self.raise_for_status(response)
+        return response.json()

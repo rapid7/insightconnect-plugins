@@ -1,11 +1,23 @@
 {
-	"spec": "0c7da6cea3f392de054c466c15366c4f",
-	"manifest": "ad9fe2609ed89d7682a17174496b79b6",
-	"setup": "f5420c56de200a420dd3d2887049fe92",
+	"spec": "871e2b59cbe3c308943be1e97003fdc3",
+	"manifest": "cf2d4346a310460d37a2dd8506996b65",
+	"setup": "46ac0b057bfc773584920287a566470c",
 	"schemas": [
 		{
 			"identifier": "antivirus_scan/schema.py",
 			"hash": "13ec3c94a55380e9466c3dd6a51d795b"
+		},
+		{
+			"identifier": "full_scan/schema.py",
+			"hash": "3b66d9d7036cf21774d494cbc82628e8"
+		},
+		{
+			"identifier": "get_autopilot_device/schema.py",
+			"hash": "71f8e4dff08b56d985aa2229d67aa3ae"
+		},
+		{
+			"identifier": "get_device/schema.py",
+			"hash": "7d2d5792fd00a0611a9c6b909686d6c8"
 		},
 		{
 			"identifier": "get_managed_apps/schema.py",
@@ -14,6 +26,10 @@
 		{
 			"identifier": "manage_device/schema.py",
 			"hash": "92de89bbf3f69a44d190ac8485764572"
+		},
+		{
+			"identifier": "quick_scan/schema.py",
+			"hash": "f7f4f99d4fdd1b269d9de6a28d40ec72"
 		},
 		{
 			"identifier": "search_devices/schema.py",
@@ -25,7 +41,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "c3aedbdb3d2fbf860fabe4ffaab041b4"
+			"hash": "4c1eba7a77c2faa88a0df438562e4ac0"
 		}
 	]
 }
