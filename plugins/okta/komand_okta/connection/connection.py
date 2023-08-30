@@ -14,7 +14,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
         self.api_client = OktaAPI(
-            params.get(Input.OKTAKEY).get("secretKey"), f"https://{params.get(Input.OKTAURL)}", logger=self.logger
+            params.get(Input.OKTAKEY).get("secretKey"), params.get(Input.OKTAURL), logger=self.logger
         )
 
     def test(self):
