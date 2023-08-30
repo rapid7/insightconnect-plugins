@@ -4,7 +4,7 @@ import requests
 
 from icon_html.actions.validate import Validate
 from icon_html.actions.validate.schema import Input
-from unit_test.util import Util, STUB_VALID_INPUT
+from util import Util, STUB_VALID_INPUT
 
 import sys
 import os

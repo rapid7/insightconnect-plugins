@@ -20,7 +20,7 @@ class Validate(insightconnect_plugin_runtime.Action):
         api_call = "https://validator.w3.org/nu/?out=json"
         html_data = params.get(Input.HTML_CONTENTS).encode()
         try:
-            response = requests.post(api_call, headers=headers, data=html_data)
+            response = requests.post(api_call, headers=headers, data=html_data, timeout=10)
             msgs = response.json()["messages"]
             if len(msgs) == 0:
                 self.logger.info("Run: No response from web service, can't determine validity")
