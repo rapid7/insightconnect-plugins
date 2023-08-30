@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 import requests
-from .schema import ValidateOutput, ValidateInput, Input, Output
+from .schema import ValidateOutput, ValidateInput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -8,7 +8,7 @@ class Validate(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="validate",
-            description="Validate a HTML file",
+            description=Component.DESCRIPTION,
             input=ValidateInput(),
             output=ValidateOutput(),
         )
@@ -28,4 +28,4 @@ class Validate(insightconnect_plugin_runtime.Action):
             status = msgs[0]["type"]
             return {Output.VALIDATED: (not status == "error")}
         except requests.exceptions.RequestException:
-            return PluginException(cause="IO Error: ", assistance="Please check logs.")
+            return PluginException(cause="Error validating input. ", assistance="Please check logs.")
