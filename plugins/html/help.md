@@ -4,7 +4,7 @@ Hypertext Markup Language (HTML) is the standard markup language for documents d
 
 # Key Features
   
-*This plugin does not contain any key features.*
+* Convert an HTML document into another format to more easily export, share, or edit the document's contents
 
 # Requirements
   
@@ -257,6 +257,7 @@ Example output:
 ### Triggers
   
 *This plugin does not contain any triggers.*
+
 ### Tasks
   
 *This plugin does not contain any tasks.*
