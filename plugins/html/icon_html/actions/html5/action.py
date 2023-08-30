@@ -20,7 +20,7 @@ class Html5(insightconnect_plugin_runtime.Action):
         tags = re.findall(tag_parser, params.get(Input.DOC))
 
         if not tags:
-            raise PluginException(cause="Run: Invalid input.", assistance="Input must be of type HTML.")
+            raise PluginException(cause="Invalid input.", assistance="Input must be of type HTML.")
 
         try:
             output = pypandoc.convert_text(params.get(Input.DOC), "html", format="md")

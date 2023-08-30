@@ -19,7 +19,7 @@ class Epub(insightconnect_plugin_runtime.Action):
         tags = re.findall(tag_parser, params.get(Input.DOC))
 
         if not tags:
-            raise PluginException(cause="Run: Invalid input.", assistance="Input must be of type HTML.")
+            raise PluginException(cause="Invalid input.", assistance="Input must be of type HTML.")
 
         try:
             pypandoc.convert(params.get(Input.DOC), "epub", outputfile=temp_file, format="html")
