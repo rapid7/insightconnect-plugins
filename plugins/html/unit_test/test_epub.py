@@ -26,4 +26,4 @@ class TestEpub(TestCase):
 
         with self.assertRaises(PluginException) as context:
             test_action.run(params)
-        self.assertEqual(context.exception.cause, "Run: Invalid input.")
+        self.assertEqual(context.exception.cause, "Invalid input.")
