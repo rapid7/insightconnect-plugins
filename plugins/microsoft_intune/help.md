@@ -142,7 +142,7 @@ Example output:
 
 ```
 {
-  "success": True
+  "success": true
 }
 ```
 
@@ -174,9 +174,8 @@ Example output:
 
 ```
 {
-  "success": True
+  "success": true
 }
-
 ```
 
 #### Get Device
