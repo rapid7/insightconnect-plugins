@@ -1021,6 +1021,7 @@ A User ID can be obtained by passing a username to the Get User Status action.
 
 # Version History
 
+* 4.1.1 - Monitor Logs task: strip http/https in hostname, fix problem with generating header signature
 * 4.1.0 - Update to latest plugin SDK
 * 4.0.0 - Add Monitor Logs task | Code refactor | Update plugin to be cloud enabled
 * 3.4.0 - Add `maxtime`, `applications`, `users`, `event_types`, `factors`, `groups`, `phone_numbers`, `reasons`, `results`, `registration_id`, `token_id`, `webauthnkey` inputs in `Get Logs` action | Update custom type for `authlogs` output
