@@ -29,17 +29,11 @@ class TestValidate(TestCase):
         expected_response = {"validated": False}
         self.assertEqual(results, expected_response)
 
-    @mock.patch('requests.post')
+    @mock.patch("requests.post")
     def validate_exception(self, post_mock):
-
         post_mock.side_effect = requests.exceptions.RequestException()
         test_validate = Validate()
         input_val = {Input.HTML_CONTENTS: " "}
         result = test_validate.run(input_val)
 
         self.assertEqual(post_mock.side_effect, result)
-
-
-
-
-

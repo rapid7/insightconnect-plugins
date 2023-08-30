@@ -271,6 +271,7 @@ Example output:
 
 # Version History
 
+* 1.2.4 - Actions modified in order to implement PluginExceptions
 * 1.2.3 - Action HTML5: fix error with encoding to file
 * 1.2.2 - Update to v4 Python plugin runtime
 * 1.2.1 - New spec and help.md format for the Extension Library
