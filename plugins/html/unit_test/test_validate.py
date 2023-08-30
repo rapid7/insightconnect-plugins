@@ -29,17 +29,17 @@ class TestValidate(TestCase):
         expected_response = {"validated": False}
         self.assertEqual(results, expected_response)
 
-    # @mock.patch("requests.post", side_effect=Util.mocked_requests)
-    # def test_validate_exception(self, mocked_requests, cause, assistance):
-    #
-    #     test_validate = Validate()
-    #     print(test_validate)
-    #
-    #     input_params = {Input.HTML_CONTENTS: ""}
-    #     results = test_validate.run(input_params)
-    #     print(results)
-    #     # expected_response = {"validated": False}
-    #     # self.assertEqual(results, expected_response)
-    #     self.assertEqual(results, requests.exceptions.RequestException)
-    #     self.assertEqual(cause, "IO Error: ")
-    #     self.assertEqual(assistance, "Please check logs.")
+    @mock.patch('requests.post')
+    def validate_exception(self, post_mock):
+
+        post_mock.side_effect = requests.exceptions.RequestException()
+        test_validate = Validate()
+        input_val = {Input.HTML_CONTENTS: " "}
+        result = test_validate.run(input_val)
+
+        self.assertEqual(post_mock.side_effect, result)
+
+
+
+
+
