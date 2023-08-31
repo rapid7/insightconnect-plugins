@@ -16,14 +16,14 @@ class Epub(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         temp_file = "temp_html_3_epub.epub"
         tag_parser = "(?i)<\/?\w+((\s+\w+(\s*=\s*(?:\".*?\"|'.*?'|[^'\">\s]+))?)+\s*|\s*)\/?>"  # noqa: W605
-        docx = params.get(Input.DOC)
-        tags = re.findall(tag_parser, docx)
+        doc = params.get(Input.DOC)
+        tags = re.findall(tag_parser, doc)
 
         if not tags:
             raise PluginException(cause="Invalid input.", assistance="Input must be of type HTML.")
 
         try:
-            pypandoc.convert(params.get(Input.DOC), "epub", outputfile=temp_file, format="html")
+            pypandoc.convert(doc, "epub", outputfile=temp_file, format="html")
         except RuntimeError as error:
             raise PluginException(cause="Error converting doc file. ", assistance="Check stack trace log.", data=error)
         with open(temp_file, "rb") as output:
