@@ -55,6 +55,9 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 state[self.NEXT_TOKEN] = header_next_token
                 has_more_pages = True
 
+            if len(output) == 0:
+                has_more_pages = False
+
             return output, state, has_more_pages, status_code, None
         except Exception as error:
             return [], state, has_more_pages, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
