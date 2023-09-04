@@ -1,5 +1,5 @@
 {
-	"spec": "161a3f219edab752ca95ca07f4a9db12",
+	"spec": "75658687091fbdc3a13cd290883d31e0",
 	"manifest": "fbec04c02d9b2fcedf16789376fd3837",
 	"setup": "74fc30a9573310d24d435346b5576868",
 	"schemas": [
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "list_all_agents/schema.py",
-			"hash": "e5818ffdfc0dc8e7abe5dadb505e198f"
+			"hash": "c83b47fe10392b226b73f2cddccca0ce"
 		},
 		{
 			"identifier": "list_all_groups/schema.py",

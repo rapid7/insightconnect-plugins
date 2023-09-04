@@ -762,7 +762,7 @@ Example output:
 |Can See All Tickets from Associated Departments|boolean|None|False|Set to true if the agent must be allowed to view tickets filed by other members of the department, and false otherwise|None|
 |Created At|string|None|False|Date and time when the agent was created|None|
 |Custom Fields|object|None|False|Key-value pair containing the names and values of the (custom) agent fields|None|
-|Department IDs|[]string|None|False|Unique IDs of the departments associated with the agent|None|
+|Department IDs|[]integer|None|False|Unique IDs of the departments associated with the agent|None|
 |Email|string|None|False|Email address of the agent|None|
 |First Name|string|None|False|First name of the agent|None|
 |Has Logged In|boolean|None|False|Set to true if the user has logged in to FreshService at least once, and false otherwise|None|
@@ -920,7 +920,7 @@ Example output:
 
 # Version History
 
-* 1.0.1 - Updated the connection test | Added infomation about the roles and permissions necessary to run actions
+* 1.0.1 - Updated the connection test | Added infomation about the roles and permissions necessary to run actions | `List All Agents`: Fixed issue related to the departament IDs field
 * 1.0.0 - Initial plugin | Add Create Ticket, Update Ticket, Delete Ticket, List Tickets, Create Ticket Task, Update Ticket Task, Delete Ticket Task, List Groups and List Agents actions
 
 # Links
