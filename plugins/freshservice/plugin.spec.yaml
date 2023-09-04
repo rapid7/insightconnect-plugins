@@ -121,7 +121,7 @@ types:
     departmentIds:
       title: Department IDs
       description: Unique IDs of the departments associated with the agent
-      type: "[]string"
+      type: "[]integer"
       required: false
     canSeeAllTicketsFromAssociatedDepartments:
       title: Can See All Tickets from Associated Departments
