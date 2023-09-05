@@ -71,7 +71,12 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
         """
         output = [EventLogs(data=event) for event in output]
-        return sorted(
+        output = sorted(
             [event.get_dict() for event in output if event.compare_datetime(get_time_hours_ago(hours_ago=24))],
-            key=itemgetter("datetime"),
+            key=itemgetter(EventLogs.FILTER_DATETIME),
         )
+
+        for event in output:
+            event.pop(EventLogs.FILTER_DATETIME, None)
+
+        return output

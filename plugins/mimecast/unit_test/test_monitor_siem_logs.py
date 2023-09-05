@@ -53,23 +53,10 @@ class TestEventLogs(TestCase):
             "RcptHdrType": "To",
         }
 
-    def test_event_logs_datetime(self):
-        event = EventLogs(data=self.output_data)
-
-        expected_date = parse(self.datetime_str, ignoretz=True)
-        self.assertEqual(event.data["datetime"], expected_date)
-
-    def test_event_logs_without_datetime(self):
-        event = EventLogs(data=self.output_without_datetime)
-
-        expected_date = ""
-        self.assertEqual(event.data["datetime"], expected_date)
-
     def test_event_logs_get_dict(self):
         event = EventLogs(data=self.output_data)
 
-        expected_date = event.data["datetime"].isoformat()
-        self.assertEqual(event.get_dict()["datetime"], expected_date)
+        self.assertEqual(event.get_dict(), self.output_data)
 
     def test_event_logs_compare_to_datetime_when_event_is_newer(self):
         event = EventLogs(data=self.output_data)

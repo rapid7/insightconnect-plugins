@@ -18,25 +18,23 @@ This plugin utilizes the [Mimecast API](https://www.mimecast.com/developer/docum
 * API Username and Password
 
 # Supported Product Versions
-
+  
 * Mimecast API 2022-11-07
 
 # Documentation
 
-* https://www.mimecast.com/tech-connect/documentation/api-overview
-
 ## Setup
-
-The connection configuration accepts the following parameters:
+  
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |access_key|credential_secret_key|None|True|The application access key|None|eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi|
 |app_id|string|None|True|Application ID|None|78d2e4b1-8cc2-4806-nt79-6ef332a47374|
 |app_key|credential_secret_key|None|True|The application key|None|475x54c6-4f61-4fab-8be7-a0710f3859e3|
 |region|string|EU|True|The region for the Mimecast server|['EU', 'DE', 'US', 'CA', 'ZA', 'AU', 'Offshore', 'Sandbox']|EU|
 |secret_key|credential_secret_key|None|True|The application secret key|None|FgHrtydiP4TynI+rTZF42Qu0FtGuhJtuNM5bDh82goJQHed9kJZ5t/ORwGnI5r2hkl/bzCosZ+KVapJFeaf3Yw==|
-
+  
 Example input:
 
 ```
@@ -53,388 +51,57 @@ Example input:
 
 ### Actions
 
-#### Track Messages
 
-This action is used to search for messages processing, and current state using specific message information. Either one of `send_from`, `send_to`, `subject`, `sender_ip` fields, or `message_id` must not be empty.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|end_date|date|None|False|The date and time of the latest message to track|None|Example Reason|
-|message_id|string|None|False|The internet message id of the message to track|None|ExampleID|
-|routes|[]string|None|False|An array of routes to filter by. Possible values are internal, outbound and inbound|None|["internal", "outbound"]|
-|search_reason|string|None|False|Reason for Tracking a email, used for activity tracking purposes|None|Example Reason|
-|send_from|string|None|False|The sending email address or domain of the messages to track|None|user@example.com|
-|send_to|string|None|False|The recipient email address or domain of the messages to track|None|user@example.com|
-|sender_ip|string|None|False|The source IP address of messages to track|None|192.168.0.1|
-|start_date|date|None|False|The date and time of the earliest message to track|None|Example Reason|
-|subject|string|None|False|The subject of the messages to track|None|Example Email Subject|
-
-Example input:
-
-```
-{
-  "end_date": "Example Reason",
-  "message_id": "ExampleID",
-  "routes": [
-    "internal",
-    "outbound"
-  ],
-  "search_reason": "Example Reason",
-  "send_from": "user@example.com",
-  "send_to": "user@example.com",
-  "sender_ip": "192.168.0.1",
-  "start_date": "Example Reason",
-  "subject": "Example Email Subject"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|tracked_emails|[]tracked_emails|True|An array of found tracked emails|[]|
-
-Example output:
-
-```
-{
-  "tracked_emails": [
-    {
-      "detectionLevel": "",
-      "fromEnv": {
-        "emailAddress": "user@example.com"
-      },
-      "fromHdr": {
-        "emailAddress": ""
-      },
-      "id": "123456789",
-      "info": "Envelope Rejected",
-      "received": "2022-12-01T12:49:46+0000",
-      "route": "inbound",
-      "senderIP": "192.168.0.1",
-      "sent": "2022-12-01T12:49:46+0000",
-      "spamScore": 0,
-      "status": "rejected",
-      "subject": "Example Subject",
-      "to": [
-        {
-          "displayableName": "Example User",
-          "emailAddress": "user@example.com"
-        }
-      ]
-    }
-  ]
-}
-```
-
-#### Delete Blocked Sender Policy
-
-This action deletes a blocked sender policy.
+#### Add Group Member
+  
+Add an email address or domain to a group
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|The Mimecast secure ID of an existing policy to be deleted|None|eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi|
-
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|domain|string|None|False|A domain to add to a group. Use either email address or domain|None|https://example.com|
+|email_address|string|None|False|The email address of a user to add to a group. Use either email address or domain|None|user@example.com|
+|id|string|None|True|The Mimecast ID of the group to add to|None|eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA|
+  
 Example input:
 
 ```
 {
-  "id": "eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|True|Success status of delete request|True|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
-#### Get Audit Events
-
-This action is used to get audit of events in Mimecast service.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|audit_events_data|audit_events_data|None|True|Data for request|None|{"categories": ["test", "malware"], "endDateTime": "2022-02-02T08:15:30-05:00", "query": "example query", "startDateTime": "2022-02-02T08:15:30-05:00"}|
-|audit_events_pagination|audit_events_request_pagination|None|False|Pagination object for request|None|{"pageSize": 25, "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"}|
-
-Example input:
-
-```
-{
-  "audit_events_data": {
-    "categories": [
-      "test",
-      "malware"
-    ],
-    "endDateTime": "2022-02-02T08:15:30-05:00",
-    "query": "example query",
-    "startDateTime": "2022-02-02T08:15:30-05:00"
-  },
-  "audit_events_pagination": {
-    "pageSize": 25,
-    "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"
-  }
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|pagination|pagination|False|Pagination for request|{}|
-|response|[]audit_events_response|True|Event logs data|[]|
-
-Example output:
-
-```
-{
-  "response": [
-    {
-      "id": "wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U",
-      "scheme": "https",
-      "domain": "www.testset3444412312.net",
-      "port": -1,
-      "path": "/",
-      "queryString": "",
-      "matchType": "explicit",
-      "action": "block",
-      "comment": "",
-      "disableUserAwareness": false,
-      "disableRewrite": false,
-      "disableLogClick": false
-    }
-  ],
-  "pagination": {
-    "pageSize": 25,
-    "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"
-  }
-}
-```
-
-#### Create Managed URL
-
-This action is used to create a managed URL.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|action|string|block|True|Set to 'block' to blacklist the URL, 'permit' to whitelist it|['block', 'permit']|block|
-|comment|string|None|False|A comment about the why the URL is managed; for tracking purposes|None|Deemed malicious by VirusTotal|
-|disable_log_click|boolean|None|True|Disable logging of user clicks on the URL|None|False|
-|disable_rewrite|boolean|None|True|Disable rewriting of this URL in emails. Applies only if action = 'permit'|None|True|
-|disable_user_awareness|boolean|None|True|Disable User Awareness challenges for this URL. Applies only if action = 'permit'|None|False|
-|match_type|string|explicit|True|Set to 'explicit' to block or permit only instances of the full URL. Set to 'domain' to block or permit any URL with the same domain|['explicit', 'domain']|explicit|
-|url|string|None|True|The URL to block or permit. Do not include a fragment|None|https://example.com|
-
-Example input:
-
-```
-{
-  "action": "block",
-  "comment": "Deemed malicious by VirusTotal",
-  "disable_log_click": false,
-  "disable_rewrite": true,
-  "disable_user_awareness": false,
-  "match_type": "explicit",
-  "url": "https://example.com"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|response|[]managed_url|False|Managed URL that was created|[]|
-
-Example output:
-
-```
-{
-  "response": [
-    {
-      "id": "wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4",
-      "scheme": "https",
-      "domain": "www.test.net",
-      "port": -1,
-      "path": "/",
-      "queryString": "",
-      "matchType": "explicit",
-      "action": "permit",
-      "comment": "",
-      "disableUserAwareness": false,
-      "disableRewrite": false,
-      "disableLogClick": false
-    }
-  ]
-}
-```
-
-#### Get Managed URL
-
-This action is used to get information on a managed URL.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|action|string|none|False|Filter on whether or not the action is 'block' or 'permit'|['none', 'block', 'permit']|block|
-|disable_log_click|string|None|False|Filter on whether or not clicks are logged for this URL|['None', 'False', 'True']|True|
-|disable_rewrite|string|None|False|Filter on whether or not rewriting of this URL in emails is enabled|['None', 'False', 'True']|False|
-|disable_user_awareness|string|None|False|Filter on whether or not User Awareness challenges for this URL|['None', 'False', 'True']|False|
-|domain|string|None|False|The managed domain|None|https://example.com|
-|domainOrUrl|string|None|False|A domain or URL to filter results|None|https://example.com|
-|exactMatch|boolean|False|False|If true, the domainOrUrl value to act as an exact match value. If false, any partial matches will be returned|None|False|
-|id|string|None|False|Filter on the Mimecast secure ID of the managed URL|None|wOi3MCwjYFYhZfkYlp2RMAhwOgsDZixCK43rDjLP0YPWrtBgqVtVbzzFK8SjGLNE4|
-|match_type|string|none|False|Filter on whether or not the match type is 'explicit' or 'domain'|['none', 'explicit', 'domain']|domain|
-|scheme|string|None|False|Filter on whether or not the protocol is HTTP or HTTPS|None|http|
-
-Example input:
-
-```
-{
-  "action": "block",
-  "disable_log_click": true,
-  "disable_rewrite": false,
-  "disable_user_awareness": false,
   "domain": "https://example.com",
-  "domainOrUrl": "https://example.com",
-  "exactMatch": false,
-  "id": "wOi3MCwjYFYhZfkYlp2RMAhwOgsDZixCK43rDjLP0YPWrtBgqVtVbzzFK8SjGLNE4",
-  "match_type": "domain",
-  "scheme": "http"
+  "email_address": "user@example.com",
+  "id": "eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA"
 }
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|response|[]managed_url|False|Managed URLs matching |[]|
-
+| :--- | :--- | :--- | :--- | :--- |
+|email_address|string|False|The email address of the user that was added to the group|user@example.com|
+|folder_id|string|False|The Mimecast ID of the group that the user / domain was added to|eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_|
+|id|string|False|The Mimecast ID of the user / domain that was added to the group|eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA|
+|internal|boolean|False|Whether or not the user or domain is internal|True|
+  
 Example output:
 
 ```
 {
-  "response": [
-    {
-      "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLho3KMtTMfYm2C21vDPXvKC5vmEJWDAcvTHtH4L4Kw20c",
-      "scheme": "https",
-      "domain": "steam.com",
-      "port": -1,
-      "matchType": "explicit",
-      "action": "block",
-      "comment": "ui test",
-      "disableUserAwareness": true,
-      "disableRewrite": true,
-      "disableLogClick": false
-    }
-  ]
-}
-```
-
-#### Delete Managed URL
-
-This action is used to remove a Managed URL from the blocked list.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|The Mimecast secure ID of the managed URL|None|wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLhHMy6V8J3VOvTNMW2G-txx3o4zL0YXqWxuCVlGQ-1viE|
-
-Example input:
-
-```
-{
-  "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLhHMy6V8J3VOvTNMW2G-txx3o4zL0YXqWxuCVlGQ-1viE"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|False|Success status of delete request|True|
-
-Example output:
-
-```
-{
-  "response": [
-    {
-      "success": true
-    }
-  ]
-}
-```
-
-#### Permit or Block Sender
-
-This action is used to permit or block a sender.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|action|string|block|True|Either 'permit' (to bypass spam checks) or 'block' (to reject the email)|['block', 'permit']|block|
-|sender|string|None|True|The email address of the external sender|None|user@example.com|
-|to|string|None|True|The email address of the internal recipient|None|user@example.com|
-
-Example input:
-
-```
-{
-  "action": "block",
-  "sender": "user@example.com",
-  "to": "user@example.com"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|response|[]managed_sender|False|The Managed Sender that was created|[]|
-
-Example output:
-
-```
-{
-  "response": [
-    {
-      "id": "MTOKEN:eNoVzbEOgjAUQNF_eTMDGArK1oC2GARFjTpi-zQQ28ZWDGr8d3G-ybkfcCh6i62EBM4MB5Z2hpIiWlM_n0tecYv8nkXLBVH8WOvVTb_Kfcze-ZWefDUUzWHXVeYS1jHdgAeidw-j0AojcRTTbZkFNJ6RcGxPtK41GpLAA9Voh1r-t5OATL8_1zIraQ",
-      "sender": "user@example.com",
-      "to": "user@example.com",
-      "type": "Block"
-    }
-  ]
+  "email_address": "user@example.com",
+  "folder_id": "eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_",
+  "id": "eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA",
+  "internal": true
 }
 ```
 
 #### Create Blocked Sender Policy
-
-This action is used to create a blocked sender policy.
+  
+Creates a blocked sender policy
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |description|string|None|True|A description for the policy which is kept with the email in the archive for future reference|None|A description|
 |from_part|string|envelope_from|True|Must be: envelope_from, header_from or both|['envelope_from', 'header_from', 'both']|envelope_from|
 |from_type|string|individual_email_address|True|Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone', 'internal_addresses', 'external_addresses', 'email_domain', 'profile_group', 'individual_email_address']|internal_addresses|
@@ -443,18 +110,18 @@ This action is used to create a blocked sender policy.
 |source_ips|string|None|False|A comma separated list of IP addresses using CIDR notation (X.X.X.X/XX). When set the policy only applies for connections from matching addresses|None|198.51.100.0/24|
 |to_type|string|individual_email_address|True|Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone', 'internal_addresses', 'external_addresses', 'email_domain', 'profile_group', 'individual_email_address']|everyone|
 |to_value|string|None|False|Required if `To Type` is one of email_domain, profile_group, individual_email_address. Expected values: If `To Type` is email_domain, a domain name without the @ symbol. If `To Type` is profile_group, the ID of the profile group. If `To Type` is individual_email_address, an email address|None|user@example.com|
-
+  
 Example input:
 
 ```
 {
   "description": "A description",
   "from_part": "envelope_from",
-  "from_type": "internal_addresses",
+  "from_type": "individual_email_address",
   "from_value": "user@example.com",
   "option": "block_sender",
   "source_ips": "198.51.100.0/24",
-  "to_type": "everyone",
+  "to_type": "individual_email_address",
   "to_value": "user@example.com"
 }
 ```
@@ -462,9 +129,9 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |sender_policy|[]sender_policy|False|The policy that was created|[]|
-
+  
 Example output:
 
 ```
@@ -501,45 +168,126 @@ Example output:
 }
 ```
 
-#### Add Group Member
-
-This action is used to add an email address or domain to a group.
+#### Create Managed URL
+  
+Create a managed URL
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|domain|string|None|False|A domain to add to a group. Use either email address or domain|None|https://example.com|
-|email_address|string|None|False|The email address of a user to add to a group. Use either email address or domain|None|user@example.com|
-|id|string|None|True|The Mimecast ID of the group to add to|None|eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA|
-
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|action|string|block|True|Set to 'block' to blacklist the URL, 'permit' to whitelist it|['block', 'permit']|block|
+|comment|string|None|False|A comment about the why the URL is managed; for tracking purposes|None|Deemed malicious by VirusTotal|
+|disable_log_click|boolean|None|True|Disable logging of user clicks on the URL|None|False|
+|disable_rewrite|boolean|None|True|Disable rewriting of this URL in emails. Applies only if action = 'permit'|None|True|
+|disable_user_awareness|boolean|None|True|Disable User Awareness challenges for this URL. Applies only if action = 'permit'|None|False|
+|match_type|string|explicit|True|Set to 'explicit' to block or permit only instances of the full URL. Set to 'domain' to block or permit any URL with the same domain|['explicit', 'domain']|explicit|
+|url|string|None|True|The URL to block or permit. Do not include a fragment|None|https://example.com|
+  
 Example input:
 
 ```
 {
-  "domain": "https://example.com",
-  "email_address": "user@example.com",
-  "id": "eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA"
+  "action": "block",
+  "comment": "Deemed malicious by VirusTotal",
+  "disable_log_click": false,
+  "disable_rewrite": true,
+  "disable_user_awareness": false,
+  "match_type": "explicit",
+  "url": "https://example.com"
 }
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|email_address|string|False|The email address of the user that was added to the group|user@example.com|
-|folder_id|string|False|The Mimecast ID of the group that the user / domain was added to|eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_|
-|id|string|False|The Mimecast ID of the user / domain that was added to the group|eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA|
-|internal|boolean|False|Whether or not the user or domain is internal|True|
-
+| :--- | :--- | :--- | :--- | :--- |
+|response|[]managed_url|False|Managed URL that was created|[]|
+  
 Example output:
 
 ```
 {
-  "id": "eNqrVipOTS4tSs1MUbJSctdOd43RNy3K9klKdA038M4xq8otcfIMqTQods2MNIrR99NOD_IsCyovdEt11A4pSQvKyPL2SS4orgjOTy01jdEvzlbSUUouLS7Jz00tSs5PSQUa6hzs52LoaG5pagKUK0stKs7Mz1OyMtRRSsvPSUktysnMywZZbmxgYmFRCwBatS7G",
-  "folder_id": "eNoVzrkOgkAUQNF_eTWFIIjQEdk0OEaUgCUyD8HMojNiROO_i_3Nyf2AxmZQ2FPwgUgRxWbnzZOxKwsyiCjP-BnTe7jYxA5Pq1xsmRhJ4Sbv9SU4zfgrq8vjdSdbO3eDPRjAaH0Dv62ZRgOaQT8kR9VIihO_OpDQDFzPsafwiUr3UoBvGtBKRlH9F-ylZXnfH3hjMBs",
-  "email_address": "user@example.com",
-  "internal": true
+  "response": [
+    {
+      "id": "wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4",
+      "scheme": "https",
+      "domain": "www.test.net",
+      "port": -1,
+      "path": "/",
+      "queryString": "",
+      "matchType": "explicit",
+      "action": "permit",
+      "comment": "",
+      "disableUserAwareness": false,
+      "disableRewrite": false,
+      "disableLogClick": false
+    }
+  ]
+}
+```
+
+#### Decode URL
+  
+Decode a Mimecast encoded URL
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|encoded_url|string|None|True|The Mimecast encoded URL|None|https://url.xx.m.mimecastprotect.com/TXH7fhe|
+  
+Example input:
+
+```
+{
+  "encoded_url": "https://url.xx.m.mimecastprotect.com/TXH7fhe"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|decoded_url|string|True|Original decoded URL|https://example.com|
+  
+Example output:
+
+```
+{
+  "decoded_url": "https://example.com"
+}
+```
+
+#### Delete Blocked Sender Policy
+  
+Deletes a blocked sender policy
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|The Mimecast secure ID of an existing policy to be deleted|None|eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi|
+  
+Example input:
+
+```
+{
+  "id": "eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|True|Success status of delete request|True|
+  
+Example output:
+
+```
+{
+  "success": true
 }
 ```
 
@@ -551,11 +299,11 @@ Delete on an email or domain that does not exist will result in no operation per
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |domain|string|None|False|A domain to remove from group. Use either email address or domain|None|example.com|
 |email_address|string|None|False|The email address to remove from group. Use either email address or domain|None|user@example.com|
 |id|string|None|True|The Mimecast ID of the group to remove from|None|eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA|
-
+  
 Example input:
 
 ```
@@ -569,9 +317,9 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |success|boolean|False|Status of success of the delete operation|True|
-
+  
 Example output:
 
 ```
@@ -580,49 +328,49 @@ Example output:
 }
 ```
 
-#### Decode URL
-
-This action is used to decode a Mimecast encoded URL.
+#### Delete Managed URL
+  
+Delete a managed URL
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|encoded_url|string|None|True|The Mimecast encoded URL|None|https://url.xx.m.mimecastprotect.com/TXH7fhe|
-
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|The Mimecast secure ID of the managed URL|None|wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLhHMy6V8J3VOvTNMW2G-txx3o4zL0YXqWxuCVlGQ-1viE|
+  
 Example input:
 
 ```
 {
-  "encoded_url": "https://url.xx.m.mimecastprotect.com/TXH7fhe"
+  "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLhHMy6V8J3VOvTNMW2G-txx3o4zL0YXqWxuCVlGQ-1viE"
 }
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|decoded_url|string|True|Original decoded URL|https://example.com|
-
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Success status of delete request|True|
+  
 Example output:
 
 ```
 {
-  "decoded_url": "https://example.com"
+  "success": true
 }
 ```
 
 #### Find Groups
-
-This action is used to find groups that match a given query.
+  
+Find groups that match a given query
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |query|string|None|False|A string to query for|None|mygroup|
 |source|string|cloud|True|A group source to filter on, either "cloud" or "ldap"|['cloud', 'ldap']|cloud|
-
+  
 Example input:
 
 ```
@@ -635,9 +383,9 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |groups|[]group|False|A list of groups that mach the query|[]|
-
+  
 Example output:
 
 ```
@@ -663,14 +411,142 @@ Example output:
 }
 ```
 
-#### Get TTP URL Logs
+#### Get Audit Events
 
-This action is used to get TTP URL logs.
+This action is used to get audit of events in Mimecast service.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|audit_events_data|audit_events_data|None|True|Data for request|None|{"categories": ["test", "malware"], "endDateTime": "2022-02-02T08:15:30-05:00", "query": "example query", "startDateTime": "2022-02-02T08:15:30-05:00"}|
+|audit_events_pagination|audit_events_request_pagination|None|False|Pagination object for request|None|{"pageSize": 25, "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"}|
+
+Example input:
+
+```
+{
+  "audit_events_data": {
+    "categories": [
+      "test",
+      "malware"
+    ],
+    "endDateTime": "2022-02-02T08:15:30-05:00",
+    "query": "example query",
+    "startDateTime": "2022-02-02T08:15:30-05:00"
+  },
+  "audit_events_pagination": {
+    "pageSize": 25,
+    "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"
+  }
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|pagination|pagination|False|Pagination for request|{}|
+|response|[]audit_events_response|True|Event logs data|[]|
+
+Example output:
+
+```
+{
+  "response": [
+    {
+      "id": "wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U",
+      "scheme": "https",
+      "domain": "www.testset3444412312.net",
+      "port": -1,
+      "path": "/",
+      "queryString": "",
+      "matchType": "explicit",
+      "action": "block",
+      "comment": "",
+      "disableUserAwareness": false,
+      "disableRewrite": false,
+      "disableLogClick": false
+    }
+  ],
+  "pagination": {
+    "pageSize": 25,
+    "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"
+  }
+}
+```
+
+#### Get Managed URL
+
+This action is used to get information on a managed URL.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|action|string|none|False|Filter on whether or not the action is 'block' or 'permit'|['none', 'block', 'permit']|block|
+|disable_log_click|string|None|False|Filter on whether or not clicks are logged for this URL|['None', 'False', 'True']|True|
+|disable_rewrite|string|None|False|Filter on whether or not rewriting of this URL in emails is enabled|['None', 'False', 'True']|False|
+|disable_user_awareness|string|None|False|Filter on whether or not User Awareness challenges for this URL|['None', 'False', 'True']|False|
+|domain|string|None|False|The managed domain|None|https://example.com|
+|domainOrUrl|string|None|False|A domain or URL to filter results|None|https://example.com|
+|exactMatch|boolean|False|False|If true, the domainOrUrl value to act as an exact match value. If false, any partial matches will be returned|None|False|
+|id|string|None|False|Filter on the Mimecast secure ID of the managed URL|None|wOi3MCwjYFYhZfkYlp2RMAhwOgsDZixCK43rDjLP0YPWrtBgqVtVbzzFK8SjGLNE4|
+|match_type|string|none|False|Filter on whether or not the match type is 'explicit' or 'domain'|['none', 'explicit', 'domain']|domain|
+|scheme|string|None|False|Filter on whether or not the protocol is HTTP or HTTPS|None|http|
+
+Example input:
+
+```
+{
+  "action": "block",
+  "disable_log_click": true,
+  "disable_rewrite": false,
+  "disable_user_awareness": false,
+  "domain": "https://example.com",
+  "domainOrUrl": "https://example.com",
+  "exactMatch": false,
+  "id": "wOi3MCwjYFYhZfkYlp2RMAhwOgsDZixCK43rDjLP0YPWrtBgqVtVbzzFK8SjGLNE4",
+  "match_type": "domain",
+  "scheme": "http"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|response|[]managed_url|False|Managed URLs matching |[]|
+
+Example output:
+
+```
+{
+  "response": [
+    {
+      "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLho3KMtTMfYm2C21vDPXvKC5vmEJWDAcvTHtH4L4Kw20c",
+      "scheme": "https",
+      "domain": "steam.com",
+      "port": -1,
+      "matchType": "explicit",
+      "action": "block",
+      "comment": "ui test",
+      "disableUserAwareness": true,
+      "disableRewrite": true,
+      "disableLogClick": false
+    }
+  ]
+}
+```
+
+#### Get TTP URL Logs
+  
+Get TTP URL logs
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |from|string|None|False|Start date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is the start of the current day|None|2018-11-22T14:49:18+0000|
 |max_pages|integer|100|False|Max pages returned, default 100|None|10|
 |oldest_first|boolean|False|False|When true return results in descending order with oldest result first|None|False|
@@ -679,17 +555,17 @@ This action is used to get TTP URL logs.
 |scan_result|string|all|True|Filters logs by scan result, must be one of clean, malicious, or all|['clean', 'malicious', 'all']|malicious|
 |to|string|None|False|End date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is time of request|None|2018-11-22T14:49:18+0000|
 |url_to_filter|string|None|False|Regular expression to filter on. e.g. `examp` will return only URLs with the letters examp in them|None|exam.*|
-
+  
 Example input:
 
 ```
 {
   "from": "2018-11-22T14:49:18+0000",
-  "max_pages": 10,
+  "max_pages": 100,
   "oldest_first": false,
   "page_size": 10,
-  "route": "inbound",
-  "scan_result": "malicious",
+  "route": "all",
+  "scan_result": "all",
   "to": "2018-11-22T14:49:18+0000",
   "url_to_filter": "exam.*"
 }
@@ -698,9 +574,9 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |click_logs|[]click_logs|False|Click Logs|[]|
-
+  
 Example output:
 
 ```
@@ -723,28 +599,141 @@ Example output:
 }
 ```
 
-### Triggers
+#### Permit or Block Sender
 
-_This plugin does not contain any triggers._
-
-## Troubleshooting
-
-For the Create Managed URL action, the URL must include `http://` or `https://` e.g. `http://google.com`
-Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api-overview/global-base-urls/)
-
-### Tasks
-
-#### Monitor SIEM Logs
-
-This task is used to monitor and retrieve the latest logs.
-
+This action is used to permit or block a sender.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|token|string|None|False|Used to request the next available log file|None|9de5069c5afe602b2ea0a04b66beb2c0|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|action|string|block|True|Either 'permit' (to bypass spam checks) or 'block' (to reject the email)|['block', 'permit']|block|
+|sender|string|None|True|The email address of the external sender|None|user@example.com|
+|to|string|None|True|The email address of the internal recipient|None|user@example.com|
 
+Example input:
+
+```
+{
+  "action": "block",
+  "sender": "user@example.com",
+  "to": "user@example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|response|[]managed_sender|False|The Managed Sender that was created|[]|
+
+Example output:
+
+```
+{
+  "response": [
+    {
+      "id": "MTOKEN:eNoVzbEOgjAUQNF_eTMDGArK1oC2GARFjTpi-zQQ28ZWDGr8d3G-ybkfcCh6i62EBM4MB5Z2hpIiWlM_n0tecYv8nkXLBVH8WOvVTb_Kfcze-ZWefDUUzWHXVeYS1jHdgAeidw-j0AojcRTTbZkFNJ6RcGxPtK41GpLAA9Voh1r-t5OATL8_1zIraQ",
+      "sender": "user@example.com",
+      "to": "user@example.com",
+      "type": "Block"
+    }
+  ]
+}
+```
+
+#### Track Messages
+
+This action is used to search for messages processing, and current state using specific message information. Either one of `send_from`, `send_to`, `subject`, `sender_ip` fields, or `message_id` must not be empty.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|end_date|date|None|False|The date and time of the latest message to track|None|Example Reason|
+|message_id|string|None|False|The internet message id of the message to track|None|ExampleID|
+|routes|[]string|None|False|An array of routes to filter by. Possible values are internal, outbound and inbound|None|["internal", "outbound"]|
+|search_reason|string|None|False|Reason for Tracking a email, used for activity tracking purposes|None|Example Reason|
+|send_from|string|None|False|The sending email address or domain of the messages to track|None|user@example.com|
+|send_to|string|None|False|The recipient email address or domain of the messages to track|None|user@example.com|
+|sender_ip|string|None|False|The source IP address of messages to track|None|192.168.0.1|
+|start_date|date|None|False|The date and time of the earliest message to track|None|Example Reason|
+|subject|string|None|False|The subject of the messages to track|None|Example Email Subject|
+
+Example input:
+
+```
+{
+  "end_date": "Example Reason",
+  "message_id": "ExampleID",
+  "routes": [
+    "internal",
+    "outbound"
+  ],
+  "search_reason": "Example Reason",
+  "send_from": "user@example.com",
+  "send_to": "user@example.com",
+  "sender_ip": "192.168.0.1",
+  "start_date": "Example Reason",
+  "subject": "Example Email Subject"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|tracked_emails|[]tracked_emails|True|An array of found tracked emails|[]|
+
+Example output:
+
+```
+{
+  "tracked_emails": [
+    {
+      "detectionLevel": "",
+      "fromEnv": {
+        "emailAddress": "user@example.com"
+      },
+      "fromHdr": {
+        "emailAddress": ""
+      },
+      "id": "123456789",
+      "info": "Envelope Rejected",
+      "received": "2022-12-01T12:49:46+0000",
+      "route": "inbound",
+      "senderIP": "192.168.0.1",
+      "sent": "2022-12-01T12:49:46+0000",
+      "spamScore": 0,
+      "status": "rejected",
+      "subject": "Example Subject",
+      "to": [
+        {
+          "displayableName": "Example User",
+          "emailAddress": "user@example.com"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+
+
+#### Monitor SIEM Logs
+  
+Monitor and retrieve the latest logs
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|token|string|None|False|Used to request the next available log file|None|9de5069c5afe602b2ea0a04b66beb2c0|
+  
 Example input:
 
 ```
@@ -756,9 +745,9 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |data|[]object|True|List of logs|[]|
-
+  
 Example output:
 
 ```
@@ -775,87 +764,62 @@ Example output:
 ]
 ```
 
-### Custom Output Types
+### Custom Types
+  
+**managed_url**
 
-#### click_logs
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Action|string|None|False|Action to take for when URL is clicked. Either block or permit|None|
+|Comment|string|None|False|The comment that was posted in the request|None|
+|Click Logging|boolean|None|False|If logging of user clicks on the URL is disabled|None|
+|URL Rewriting|boolean|None|False|If rewriting of this URL in emails is disabled|None|
+|User Awareness|boolean|None|False|If User Awareness challenges for this URL are disabled|None|
+|Domain|string|None|False|The managed domain|None|
+|ID|string|None|False|The Mimecast secure ID of the managed URL|None|
+|Match Type|string|None|False|The type of URL to match against|None|
+|Path|string|None|False|The resource path of the managed URL|None|
+|Port|integer|None|False|The specified in the managed URL. Default value is -1 if no port was provided|None|
+|Query string|string|None|False|The query string of the managed URL|None|
+|Scheme|string|None|False|The protocol to apply for the managed URL. Either HTTP or HTTPS|None|
+  
+**managed_sender**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Action|string|False|The action that was taken for the click|
-|Admin Override|string|False|The action defined by the administrator for the URL|
-|Category|string|False|The category of the URL clicked|
-|Date|string|False|The date that the URL was clicked|
-|Route|string|False|The route of the email that contained the link|
-|Scan Result|string|False|The result of the URL scan|
-|TTP Definition|string|False|The description of the definition that triggered the URL to be rewritten by Mimecast|
-|URL|string|False|The URL clicked|
-|User Awareness Action|string|False|The action taken by the user if user awareness was applied|
-|User Email Address|string|False|The email address of the user who clicked the link|
-|User Override|string|False|The action requested by the user|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|string|None|False|The Mimecast secure ID of the managed sender object|None|
+|Sender|string|None|False|The email address of the external sender|None|
+|To|string|None|False|The email address of the internal recipient|None|
+|Type|string|None|False|Either 'permit' (to bypass spam checks) or 'block' (to reject the email)|None|
+  
+**policy**
 
-#### group
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Bidirectional|boolean|None|False|If the policy is also applied in the reverse of the email flow, i.e. where the specified recipient in the policy becomes the sender, and the specified sender in the policy becomes the recipient|None|
+|Conditions|object|None|False|An object with fields describing additional conditions that should affect when the policy is applied|None|
+|Description|string|None|False|The description for the policy which is kept with the email in the archive for future reference|None|
+|From|object|None|False|An object containing type and value fields defining which sender addresses the policy applies to|None|
+|From Date|string|None|False|The date that the policy will apply from|None|
+|From Eternal|boolean|None|False|If the policy is always applied or if there is a specific start date|None|
+|From Part|string|None|False|Which from address is used in the policy. Can be any of envelope_from, header_from, both|None|
+|From Type|string|None|False|Which sender addresses the policy applies to. Can be one of everyone, internal_addresses, external_addresses, email_domain, profile_group, address_attribute_value, individual_email_address, free_mail_domains, header_display_name|None|
+|From Value|string|None|False|A value defining which senders the policy applies to|None|
+|Override|boolean|None|False|If true, this option overrides the order in which the policy is applied, and forces it to be applied first if there are multiple applicable policies, unless more specific policies of the same type have been configured with an override as well|None|
+|To|object|None|False|An object containing type and value fields defining which recipient addresses the policy applies to|None|
+|To Date|string|None|False|The date that the policy will apply until|None|
+|To Eternal|boolean|None|False|If the policy should always be applied or if there is an end date|None|
+|To Type|string|None|False|Which recipient addresses the policy applies to. Can be one of everyone, internal_addresses, external_addresses, email_domain, profile_group, address_attribute_value, individual_email_address, free_mail_domains, header_display_name|None|
+  
+**sender_policy**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Description|string|False|The name of the group|
-|Folder Count|integer|False|None|
-|Id|string|False|None|
-|Parent Id|string|False|None|
-|Source|string|False|None|
-|User Count|integer|False|None|
-
-#### managed_sender
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|ID|string|False|The Mimecast secure ID of the managed sender object|
-|Sender|string|False|The email address of the external sender|
-|To|string|False|The email address of the internal recipient|
-|Type|string|False|Either 'permit' (to bypass spam checks) or 'block' (to reject the email)|
-
-#### managed_url
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Action|string|False|Either block or permit|
-|Comment|string|False|The comment that was posted in the request|
-|Click Logging|boolean|False|If logging of user clicks on the URL is disabled|
-|URL Rewriting|boolean|False|If rewriting of this URL in emails is disabled|
-|User Awareness|boolean|False|If User Awareness challenges for this URL are disabled|
-|Domain|string|False|The managed domain|
-|ID|string|False|The Mimecast secure ID of the managed URL|
-|Match Type|string|False|Either 'explicit' or 'domain'|
-|Port|integer|False|Port|
-|Scheme|string|False|The protocol to apply for the managed URL. Either HTTP or HTTPS|
-
-#### policy
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Bidirectional|boolean|False|If the policy is also applied in the reverse of the email flow, i.e. where the specified recipient in the policy becomes the sender, and the specified sender in the policy becomes the recipient|
-|Conditions|object|False|An object with fields describing additional conditions that should affect when the policy is applied|
-|Description|string|False|The description for the policy which is kept with the email in the archive for future reference|
-|From|object|False|An object containing type and value fields defining which sender addresses the policy applies to|
-|From Date|string|False|The date that the policy will apply from|
-|From Eternal|boolean|False|If the policy is always applied or if there is a specific start date|
-|From Part|string|False|Which from address is used in the policy. Can be any of envelope_from, header_from, both|
-|From Type|string|False|Which sender addresses the policy applies to. CCan be one of everyone, internal_addresses, external_addresses, email_domain, profile_group, address_attribute_value, individual_email_address, free_mail_domains, header_display_name|
-|From Value|string|False|A value defining which senders the policy applies to|
-|Override|boolean|False|If true, this option overrides the order in which the policy is applied, and forces it to be applied first if there are multiple applicable policies, unless more specific policies of the same type have been configured with an override as well|
-|To|object|False|An object containing type and value fields defining which recipient addresses the policy applies to|
-|To Date|string|False|The date that the policy will apply until|
-|To Eternal|boolean|False|If the policy should always be applied or if there is an end date|
-|To Type|string|False|Which recipient addresses the policy applies to. Can be one of everyone, internal_addresses, external_addresses, email_domain, profile_group, address_attribute_value, individual_email_address, free_mail_domains, header_display_name|
-
-#### sender_policy
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|ID|string|False|The Mimecast ID of the policy. Used when updating the policy|
-|Option|string|False|The option set for the policy. Will be one of no_action, block_sender|
-|Policy|policy|False|The policy that was created|
-
-#### group
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|string|None|False|The Mimecast ID of the policy. Used when updating the policy|None|
+|Option|string|None|False|The option set for the policy. Will be one of no_action, block_sender|None|
+|Policy|policy|None|False|The policy that was created|None|
+  
+**group**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -866,7 +830,7 @@ Example output:
 |None|string|None|False|None|None|
 |None|integer|None|False|None|None|
   
-#### click_logs
+**click_logs**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -882,7 +846,7 @@ Example output:
 |User Email Address|string|None|False|The email address of the user who clicked the link|None|
 |User Override|string|None|False|The action requested by the user|None|
   
-#### audit_events_data
+**audit_events_data**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -891,14 +855,14 @@ Example output:
 |Query|string|None|False|A character string to search for the audit events|test query|
 |Start Date Time|string|None|True|The start date of events in ISO 8601 date time format|2011-12-03T10:15:30+0000|
   
-#### audit_events_request_pagination
+**audit_events_request_pagination**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Page Size|integer|25|False|The number of results to request|None|
 |Page Token|string|None|False|The value of the next or previous fields from an earlier request|None|
   
-#### audit_events_response
+**audit_events_response**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -908,7 +872,7 @@ Example output:
 |Event Time|string|None|False|The time of the event in ISO 8601 format|None|
 |ID|string|None|False|The Mimecast unique id of the event|None|
   
-#### pagination
+**pagination**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -916,7 +880,7 @@ Example output:
 |Page Size|integer|None|False|The number of results requested|None|
 |Previous|string|None|False|A pageToken value that can be used to request the previous page of results. Only returned if there is a previous page|None|
   
-#### search_criteria_object
+**search_criteria_object**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -931,7 +895,7 @@ Example output:
 |Unremediate Code|string|None|False|The Mimecast code used to restore a previously remediated message|None|
 |URL|string|None|False|URL used to create the remediation incident, if remediation type is URL|None|
   
-#### response_remediation_incident
+**response_remediation_incident**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -952,7 +916,7 @@ Example output:
 |Successful|integer|None|False|The number of successfully remediated messages|None|
 |Type|string|None|False|Type of incident|None|
   
-#### searchCriteria
+**searchCriteria**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -965,7 +929,7 @@ Example output:
 |To|string|None|False|The recipient address provided at the remediation incident creation|None|
 |Unremediate Code|string|None|False|Code used to restore messages that were previously removed by remediation incident|None|
   
-#### get_remediation_incident_response
+**get_remediation_incident_response**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -981,20 +945,20 @@ Example output:
 |Successful|integer|None|False|The number of messages successfully remediated as part of the incident|None|
 |Type|string|None|False|The type of incident action taken. Can be one of notify_only, automatic, manual or restored|None|
   
-#### find_remediation_searchBy
+**find_remediation_searchBy**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Field Name|string|None|False|Incident fields to filter based on|None|
 |Value|string|None|False|The text used to filter results|None|
   
-#### find_remediation_filterBy
+**find_remediation_filterBy**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Type|string|None|False|Specify the type of incidents to return|None|
   
-#### searchCritera
+**searchCritera**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -1007,7 +971,7 @@ Example output:
 |To|string|None|False|Recipient address or domain name used to create remediation incident|None|
 |Unremediate Code|string|None|False|Code required to perform a message restoration|None|
   
-#### incidents
+**incidents**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -1023,21 +987,21 @@ Example output:
 |Successful|integer|None|False|The number of messages sucessfully rememdiated|None|
 |Type|string|None|False|The incident type|None|
   
-#### sender
+**sender**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Display Name|string|None|False|The display name of the sender|None|
 |Email Address|string|None|False|The email address of the sender|None|
   
-#### recipient
+**recipient**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Display Name|string|None|False|The display name of the recipient|None|
 |Email Address|string|None|False|The email address of the recipient|None|
   
-#### tracked_emails
+**tracked_emails**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -1055,8 +1019,15 @@ Example output:
 |Subject|string|None|False|The subject of the message|None|
 |To|[]recipient|None|False|An array of recipients|None|
 
+
+## Troubleshooting
+
+For the Create Managed URL action, the URL must include `http://` or `https://` e.g. `http://google.com`
+Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api-overview/global-base-urls/)
+
 # Version History
 
+* 5.3.1 - Monitor SIEM Logs: stop parsing datetime field
 * 5.3.0 - Handled rate limiting error messaging | Update to latest plugin SDK 
 * 5.2.2 - Handled status code for `Monitor SIEM Logs` | Request limit set to 1 minute in `Monitor SIEM Logs` 
 * 5.2.1 - Connection: add connection version 
