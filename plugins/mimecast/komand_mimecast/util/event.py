@@ -6,6 +6,7 @@ from dateutil.parser import parse
 
 class EventLogs:
     DATETIME = "datetime"
+    FILTER_DATETIME = "filter_datetime"
 
     def __init__(self, data: Dict[str, Any]) -> None:
         self.data: Dict[str, Any] = data
@@ -13,13 +14,10 @@ class EventLogs:
 
     def _convert_datetime(self) -> None:
         if date := self.data.get(self.DATETIME):
-            self.data[self.DATETIME] = parse(date, ignoretz=True)
+            self.data[self.FILTER_DATETIME] = parse(date, ignoretz=True)
 
     def get_dict(self) -> Dict[str, Any]:
-        temp_dict = self.__dict__["data"]
-        if date := temp_dict.get(self.DATETIME):
-            temp_dict[self.DATETIME] = date.isoformat()
-        return temp_dict
+        return self.__dict__["data"]
 
     def compare_datetime(self, other: datetime):
-        return self.data[self.DATETIME] >= other
+        return self.data[self.FILTER_DATETIME] >= other
