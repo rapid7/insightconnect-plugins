@@ -4,7 +4,8 @@ products: [insightconnect]
 name: freshservice
 title: FreshService
 description: Freshservice is a cloud-based IT Service Management solution that was designed using ITIL best practices. Freshservice helps IT organizations streamline their service delivery processes with a strong focus on user experience and employee happiness
-version: 1.0.0
+version: 1.0.1
+connection_version: 1
 supported_versions: ["FreshService API v2 2022-11-14"]
 vendor: rapid7
 cloud_ready: true
@@ -19,6 +20,10 @@ hub_tags:
   use_cases: [reporting_and_analytics]
   keywords: [freshservice, ticketing, cloud_enabled]
   features: []
+sdk:
+  type: full
+  version: 5
+  user: nobody
 types:
   role:
     roleId:
@@ -116,7 +121,7 @@ types:
     departmentIds:
       title: Department IDs
       description: Unique IDs of the departments associated with the agent
-      type: "[]string"
+      type: "[]integer"
       required: false
     canSeeAllTicketsFromAssociatedDepartments:
       title: Can See All Tickets from Associated Departments
@@ -862,6 +867,7 @@ actions:
         description: Information about created ticket
         type: ticket
         required: false
+        example: '{"ccEmails":["user@example.com"],"fwdEmails":[],"replyCcEmails":["user@example.com"],"frEscalated":false,"spam":false,"groupId":123456789,"priority":2,"requesterId":123456789,"requestedForId":123456789,"responderId":987654321,"source":2,"status":2,"subject":"Example Subject","departmentId":123456789,"id":10,"type":"Incident","dueBy":"2022-12-20T12:00:00Z","frDueBy":"2022-12-10T12:00:00Z","isEscalated":false,"description":"<div>Example description</div>","descriptionText":"Example description","category":"Hardware","subCategory":"Computer","itemCategory":"PC","customFields":{"key":"value"},"createdAt":"2022-11-24T17:31:33Z","updatedAt":"2022-11-24T17:31:33Z","tags":["tag1","tag2"],"attachments":[{"id":123,"contentType":"text/plain","size":4,"name":"test.txt","attachmentUrl":"https://example.com","createdAt":"2022-11-24T17:37:50Z","updatedAt":"2022-11-24T17:37:50Z"}],"assets":[{"name":"Dell Monitor","ciTypeId":1122334455,"impact":1,"created":"2022-11-17T16:14:17Z","updated":"2022-11-17T16:14:17Z","authorId":6677889900,"authorType":"User","deleted":false,"displayId":2}]}'
   update_ticket:
     title: Update Ticket
     description: Update an existing ticket in your service desk
@@ -1025,6 +1031,7 @@ actions:
         description: Information about updated ticket
         type: ticket
         required: false
+        example: '{"ccEmails":["user@example.com"],"fwdEmails":[],"replyCcEmails":["user@example.com"],"frEscalated":false,"spam":false,"groupId":123456789,"priority":2,"requesterId":123456789,"requestedForId":123456789,"responderId":987654321,"source":2,"status":2,"subject":"Example Subject","departmentId":123456789,"id":10,"type":"Incident","dueBy":"2022-12-20T12:00:00Z","frDueBy":"2022-12-10T12:00:00Z","isEscalated":false,"description":"<div>Example description</div>","descriptionText":"Example description","category":"Hardware","subCategory":"Computer","itemCategory":"PC","customFields":{"key":"value"},"createdAt":"2022-11-24T17:31:33Z","updatedAt":"2022-11-24T17:31:33Z","tags":["tag1","tag2"],"attachments":[{"id":123,"contentType":"text/plain","size":4,"name":"test.txt","attachmentUrl":"https://example.com","createdAt":"2022-11-24T17:37:50Z","updatedAt":"2022-11-24T17:37:50Z"}],"assets":[{"name":"Dell Monitor","ciTypeId":1122334455,"impact":1,"created":"2022-11-17T16:14:17Z","updated":"2022-11-17T16:14:17Z","authorId":6677889900,"authorType":"User","deleted":false,"displayId":2}]}'
   list_tickets:
     title: List Tickets
     description: List all tickets for the given filters
@@ -1093,6 +1100,7 @@ actions:
         description: Information about all tickets obtained using the given filters
         type: "[]ticket"
         required: false
+        example: '[{"subject":"Example Ticket","groupId":123456789,"departmentId":987654321,"category":"Hardware","subCategory":"Computer","itemCategory":"PC","requesterId":123456789,"responderId":987654321,"dueBy":"2022-12-20T12:00:00Z","frEscalated":false,"deleted":false,"spam":false,"fwdEmails":[],"replyCcEmails":[],"ccEmails":[],"isEscalated":false,"frDueBy":"2022-12-15T12:00:00Z","id":16,"priority":2,"status":2,"source":4,"createdAt":"2022-11-10T00:00:00Z","updatedAt":"2022-11-16T00:00:00Z","requestedForId":123456789,"type":"Incident","description":"Example description","descriptionText":"Example description","customFields":{"key":"value"}}]'
   delete_ticket:
     title: Delete Ticket
     description: Delete the given ticket
@@ -1109,6 +1117,7 @@ actions:
         description: Whether the action was successful
         type: boolean
         required: true
+        example: true
   create_ticket_task:
     title: Create Ticket Task
     description: Create a new task on a ticket request
@@ -1166,6 +1175,7 @@ actions:
         description: Information about the created task for the provided ticket
         type: task
         required: false
+        example: '{"id":10,"status":1,"dueDate":"2022-12-14T00:00:00Z","notifyBefore":3600,"title":"Task","description":"Example description","createdAt":"2022-11-24T09:55:44Z","updatedAt":"2022-11-24T09:55:44Z","groupId":123456789,"deleted":false}'
   update_ticket_task:
     title: Update Ticket Task
     description: Update an existing task on a ticket request
@@ -1229,6 +1239,7 @@ actions:
         description: Information about the created task for the provided ticket
         type: task
         required: false
+        example: '{"id":10,"status":1,"dueDate":"2022-12-14T00:00:00Z","notifyBefore":3600,"title":"Task","description":"Example description","createdAt":"2022-11-24T09:55:44Z","updatedAt":"2022-11-24T09:55:44Z","groupId":123456789,"deleted":false}'
   delete_ticket_task:
     title: Delete Ticket Task
     description: Delete a task on a ticket request
@@ -1251,6 +1262,7 @@ actions:
         description: Whether the action was successful
         type: boolean
         required: true
+        example: true
   list_all_groups:
     title: List All Groups
     description: View information about all groups in the account
@@ -1260,6 +1272,7 @@ actions:
         description: Information about all groups in the account
         type: "[]group"
         required: false
+        example: '[{"id":1234567890,"name":"Incident Team","description":"Incident Management Team","createdAt":"2022-11-17T16:13:29Z","updatedAt":"2022-11-17T16:13:29Z","autoTicketAssign":false,"restricted":false,"approvalRequired":false,"agentIds":[],"members":[],"observers":[],"leaders":[],"membersPendingApproval":[],"leadersPendingApproval":[],"observersPendingApproval":[]}]'
   list_all_agents:
     title: List All Agents
     description: View information about all agents in the account. Use filters to view only specific agents (those who match the criteria that you choose)
@@ -1310,3 +1323,4 @@ actions:
         description: Information about agents in the account
         type: "[]agent"
         required: false
+        example: '[{"active":true,"autoAssignTickets":true,"canSeeAllTicketsFromAssociatedDepartments":false,"createdAt":"2022-11-17T16:13:30Z","customFields":{},"departmentIds":[],"email":"user@example.com","firstName":"User","hasLoggedIn":false,"id":1234567890,"language":"en","mobilePhoneNumber":664345,"occasional":false,"roleIds":[987654321],"roles":[{"roleId":987654321,"assignmentScope":"entire_helpdesk","groups":[]}],"scopes":{},"timeFormat":"12h","timeZone":"Eastern Time (US & Canada)","updatedAt":"2022-11-17T16:13:30Z","vipUser":false,"workPhoneNumber":"5564435","groupIds":[],"memberOf":[],"observerOf":[],"memberOfPendingApproval":[],"observerOfPendingApproval":[]}]'
