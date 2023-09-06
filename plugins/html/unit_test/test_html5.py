@@ -1,5 +1,5 @@
 from unittest import TestCase
-
+from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_html.actions.html5 import Html5
 
 
@@ -17,3 +17,12 @@ class TestHtml5(TestCase):
                 "html5_file": "PHA+ClRoYXTigJlzIGEgZmFpbHVyZQo8L3A+Cg==",
             },
         )
+
+    def test_action_empty_string(self):
+        params = {"doc": " "}
+
+        test_action = Html5()
+
+        with self.assertRaises(PluginException) as context:
+            test_action.run(params)
+        self.assertEqual(context.exception.cause, "Invalid input.")
