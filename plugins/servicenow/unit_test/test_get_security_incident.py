@@ -7,11 +7,12 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from icon_servicenow.actions.get_security_incident import GetSecurityIncident
-from icon_servicenow.actions.get_security_incident.schema import Input
+from icon_servicenow.actions.get_security_incident.schema import GetSecurityIncidentOutput
+from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
+from parameterized import parameterized
 
 from util import Util
-from insightconnect_plugin_runtime.exceptions import PluginException
-from parameterized import parameterized
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -31,6 +32,7 @@ class TestGetSecurityIncident(TestCase):
     )
     def test_get_security_incident(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
+        validate(actual, GetSecurityIncidentOutput.schema)
         self.assertDictEqual(actual, expected)
 
     @parameterized.expand(
@@ -44,7 +46,6 @@ class TestGetSecurityIncident(TestCase):
         ]
     )
     def test_get_security_incident_raise_exception(self, mock_request, test_name, input_params, cause, assistance):
-        self.maxDiff = None
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)

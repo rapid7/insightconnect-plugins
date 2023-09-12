@@ -24,19 +24,20 @@ class IncidentCreated(insightconnect_plugin_runtime.Trigger):
         response = self.connection.request.make_request(url, method, params=query)
 
         try:
-            results = response["resource"].get("result")
-        except KeyError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from e
+            results = response["resource"].get("result", {})
+        except KeyError as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from error
 
         incidents = [
             (result.get("sys_created_on"), result.get("sys_id"))
             for result in results
-            if result.get("sys_created_on") is not None and result.get("sys_id") is not None
+            if result.get("sys_created_on") is not None
+            and result.get("sys_id") is not None
+            and isinstance(result, dict)
         ]
 
         # Incidents stored from least to most recent date
         # Loop from most recent incident to least recent incident
-
         most_recent_incident = True
         for incident in sorted(incidents, reverse=True):
             if len(incident) == 2:
@@ -61,18 +62,18 @@ class IncidentCreated(insightconnect_plugin_runtime.Trigger):
                 else:
                     if incident[0] == "":
                         self.connection.logger.warning(
-                            f"Warning: An incident could not be read -- incident creation "
-                            f"date could not be found. Verify that the created date field exists."
+                            "Warning: An incident could not be read -- incident creation "
+                            "date could not be found. Verify that the created date field exists."
                         )
                     else:
                         self.connection.logger.warning(
-                            f"Warning: An incident could not be read -- incident system id "
-                            f"could not be found. Verify that the system id field exists."
+                            "Warning: An incident could not be read -- incident system id "
+                            "could not be found. Verify that the system id field exists."
                         )
 
             else:
                 self.connection.logger.warning(
-                    f"Warning: An incident could not be read -- the incident " f"did not have the necessary values."
+                    "Warning: An incident could not be read -- the incident did not have the necessary values."
                 )
 
         # minus ~1 second to ensure that incidents between polls are not missed
