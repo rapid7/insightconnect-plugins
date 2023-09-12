@@ -149,6 +149,7 @@ class SalesforceAPI:
             raise ApiException(
                 preset=PluginException.Preset.INVALID_CREDENTIALS,
                 status_code=response.status_code,
+                data=response.text,
             )
 
         resp_json = response.json()
@@ -231,6 +232,7 @@ class SalesforceAPI:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def _make_json_request(self, method: str, url: str, params: dict = {}, json: dict = {}) -> dict:
+        self.logger.info(f"Request to path: {url}")
         try:
             response = self._make_request(method=method, url=url, params=params, json=json)
             return response.json()
