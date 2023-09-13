@@ -4,7 +4,7 @@ products: [insightconnect]
 name: microsoft_teams
 title: Microsoft Teams
 description: The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users
-version: 5.0.0
+version: 5.1.0
 supported_versions: ["Microsoft Graph API v1.0 2021-11-28"]
 vendor: rapid7
 support: community
@@ -951,4 +951,32 @@ actions:
         title: Message
         description: The message object that was created
         type: chatMessage
+        required: false
+  get_reply_list:
+    title: Get Reply List
+    description: List all the replies to a message in a channel of a team
+    input:
+      team_name:
+        title: Team Name
+        description: Team name
+        type: string
+        required: true
+        example: InsightConnect Team
+      channel_name:
+        title: Channel Name
+        description: Channel
+        type: string
+        required: true
+        example: InsightConnect Channel
+      message_id:
+        title: Message ID
+        description: The ID of message
+        type: string
+        required: true
+        example: 1234567891
+    output:
+      messages:
+        title: Message
+        description: The message object that was created
+        type: "[]chatMessage"
         required: false

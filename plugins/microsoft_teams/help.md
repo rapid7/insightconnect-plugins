@@ -443,6 +443,68 @@ Example output:
 }
 ```
 
+#### Get Reply List
+
+List all the replies to a message in a channel of a team.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|channel_name|string|None|True|Channel|None|InsightConnect Channel|
+|message_id|string|None|True|The ID of message|None|1234567891|
+|team_name|string|None|True|Team name|None|InsightConnect Team|
+
+Example input:
+
+```
+{
+  "channel_name": "InsightConnect Channel",
+  "message_id": 1234567891,
+  "team_name": "InsightConnect Team"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|messages|[]chatMessage|False|The message object that was created|None|
+
+Example output:
+
+```
+{
+  "messages": [
+    {
+      "id": "1234567891",
+      "etag": "1234567891",
+      "messageType": "message",
+      "createdDateTime": "2023-08-01T12:00:00.000Z",
+      "lastModifiedDateTime": "2023-08-01T12:00:00.000Z",
+      "chatId": "11:examplechat.name",
+      "importance": "normal",
+      "locale": "en-us",
+      "from": {
+        "user": {
+          "id": "3395856c-e81f-2b73-82de-e72602f798b6",
+          "displayName": "Example User",
+          "userIdentityType": "aadUser",
+          "tenantId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0"
+        }
+      },
+      "body": {
+        "contentType": "html",
+        "content": "<p>test message</p>"
+      },
+      "attachments": [],
+      "mentions": [],
+      "reactions": []
+    }
+  ]
+}
+```
+
 #### Get Teams
   
 Returns all the teams the configured user is allowed to see
@@ -965,6 +1027,7 @@ If there is more than one team with the same name in your organization, the olde
 
 # Version History
 
+* 5.1.0 - New actions: Get Reply List
 * 5.0.0 - New actions: Get Message in Chat, Get Message in Channel | Update to latest SDK version | Change required fields in message schema
 * 4.2.0 - New Message Received: Fixed issue where `font-size` value appeared in the `urls`, and `domains` output fields | Can choose the role of a member when adding them to a channel | Fix bug where case-sensitive URLs were returned in lower case | Improved reliability of domains output value
 * 4.1.0 - Cloud enabled | Add Channel to Team: The user has the option to select the type of channel to be created. The available types are `Standard`, and `Private` 
