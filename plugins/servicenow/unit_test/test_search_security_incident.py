@@ -7,11 +7,11 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from icon_servicenow.actions.search_security_incident import SearchSecurityIncident
-from icon_servicenow.actions.search_security_incident.schema import Input
+from icon_servicenow.actions.search_security_incident.schema import SearchSecurityIncidentOutput
+from jsonschema import validate
+from parameterized import parameterized
 
 from util import Util
-from insightconnect_plugin_runtime.exceptions import PluginException
-from parameterized import parameterized
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -51,4 +51,5 @@ class TestSearchSecurityIncident(TestCase):
     )
     def test_get_security_incident(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
+        validate(actual, SearchSecurityIncidentOutput.schema)
         self.assertDictEqual(actual, expected)

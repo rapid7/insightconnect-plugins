@@ -1,14 +1,17 @@
-import sys
 import os
-
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from icon_servicenow.actions.update_security_incident import UpdateSecurityIncident
 from unittest.mock import patch
-from parameterized import parameterized
+
+from icon_servicenow.actions.update_security_incident import UpdateSecurityIncident
+from icon_servicenow.actions.update_security_incident.schema import UpdateSecurityIncidentOutput
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
+from parameterized import parameterized
+
 from util import Util
 
 
@@ -34,6 +37,7 @@ class TestUpdateSecurityIncident(TestCase):
     )
     def test_update_security_incident(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
+        validate(actual, UpdateSecurityIncidentOutput.schema)
         self.assertEqual(actual, expected)
 
     @parameterized.expand(

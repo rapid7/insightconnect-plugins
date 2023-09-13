@@ -1680,6 +1680,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 7.3.1 - `Incident Created`: Resolved issue related to object parsing
 * 7.3.0 - Add new actions Create Security Incident, Update Security Incident, Delete Security Incident, Get Security Incident and Search Security Incident
 * 7.2.0 - Added new actions: Create Vulnerability, Get Vulnerability, Update Vulnerability, Delete Vulnerability | Added new trigger: Vulnerability Updated
 * 7.1.2 - Search Incident, Search Incident Attachment: Fix issue where the action were failing on bigger results. Update Incident: Ensure non updated fields are not reset during update.

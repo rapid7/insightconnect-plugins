@@ -8,7 +8,8 @@ from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
 from icon_servicenow.actions.create_change_request.action import CreateChangeRequest
-from icon_servicenow.actions.create_change_request.schema import Input
+from icon_servicenow.actions.create_change_request.schema import CreateChangeRequestOutput, Input
+from jsonschema import validate
 from parameterized import parameterized
 
 from util import Util
@@ -24,4 +25,5 @@ class TestCreateChangeRequest(TestCase):
     def test_create_change_request(self, additional_fields: Dict[str, Any], mock_post: MagicMock) -> None:
         actual = self.action.run({Input.ADDITIONAL_FIELDS: additional_fields})
         expected = {"success": True}
+        validate(actual, CreateChangeRequestOutput.schema)
         self.assertEqual(actual, expected)
