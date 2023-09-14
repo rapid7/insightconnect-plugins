@@ -53,7 +53,6 @@ class GetUserOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "id",
     "user"
   ],
   "definitions": {
@@ -213,12 +212,11 @@ class GetUserOutput(insightconnect_plugin_runtime.Output):
           "title": "Status",
           "description": "Status of user",
           "order": 23
-        },
-        "required": [
-          "id",
-          "user"
-        ]
-      }
+        }
+      },
+      "required": [
+        "id"
+      ]
     }
   }
 }
