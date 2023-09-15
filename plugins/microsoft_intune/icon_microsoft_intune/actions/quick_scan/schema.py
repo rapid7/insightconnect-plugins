@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    DEVICE_ID = "device_id"
+    DEVICEID = "deviceId"
     
 
 class Output:
@@ -21,7 +21,7 @@ class QuickScanInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "device_id": {
+    "deviceId": {
       "type": "string",
       "title": "Device ID",
       "description": "ID of the device",
@@ -29,7 +29,7 @@ class QuickScanInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "device_id"
+    "deviceId"
   ]
 }
     """)

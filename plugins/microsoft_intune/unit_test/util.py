@@ -16,9 +16,9 @@ class Util:
         default_connection.logger = logging.getLogger("connection logger")
         if not connect_params:
             connect_params = {
-                Input.TENANT_ID: "intune_tenant",
-                Input.CLIENT_ID: "client_id",
-                Input.CLIENT_SECRET: {"secretKey": "client_secret"},
+                Input.TENANTID: "intune_tenant",
+                Input.CLIENTID: "client_id",
+                Input.CLIENTSECRET: {"secretKey": "client_secret"},
                 Input.URL: "https://graph.microsoft.com",
                 Input.CREDENTIALS: {"username": "user", "password": "pw"},
             }
@@ -51,15 +51,75 @@ class Util:
                 return json.loads(self.text)
 
         url = args[1] if args else kwargs.get("url")
+        method = args[0]
         data = kwargs.get("data")
+        params = kwargs.get("params")
 
         if url == "https://login.microsoftonline.com/intune_tenant/oauth2/v2.0/token":
             if data.get("client_secret") == "client_secret":
                 return MockResponse(200, "access_token.json.resp")
+        if url == "https://graph.microsoft.com/v1.0/deviceAppManagement/mobileApps":
+            return MockResponse(200, "get_managed_apps_first_page.json.resp")
+        if url == "https://graph.microsoft.com/v1.0/deviceAppManagement/mobileApps?$top=500&$skiptoken=500":
+            return MockResponse(200, "get_managed_apps_second_page.json.resp")
+        if (
+            url
+            == "https://graph.microsoft.com/v1.0/deviceAppManagement/mobileApps/9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+        ):
+            return MockResponse(200, "get_managed_apps_by_id.json.resp")
+        if (
+            url
+            == "https://graph.microsoft.com/v1.0/deviceAppManagement/mobileApps/9de5069c-5afe-602b-2ea0-a04b66beb2c1"
+        ):
+            return MockResponse(404)
+        if (
+            url
+            == "https://graph.microsoft.com/v1.0/deviceManagement/managedDevices/9de5069c-5afe-602b-2ea0-a04b66beb2c0/rebootNow"
+        ):
+            return MockResponse(204)
+        if (
+            url
+            == "https://graph.microsoft.com/v1.0/deviceManagement/managedDevices/9de5069c-5afe-602b-2ea0-a04b66beb2c0/syncDevice"
+        ):
+            return MockResponse(204)
+        if (
+            url
+            == "https://graph.microsoft.com/v1.0/deviceManagement/managedDevices/9de5069c-5afe-602b-2ea0-a04b66beb2c0/windowsDefenderUpdateSignatures"
+        ):
+            return MockResponse(204)
+        if params == {"$filter": "deviceName eq 'INTUNE-W10'"}:
+            return MockResponse(200, "get_devices_by_filter.json.resp")
+        if params == {"$filter": "emailAddress eq 'user@example.com'"}:
+            return MockResponse(200, "get_devices_by_filter.json.resp")
+        if params == {"$filter": "emailAddress eq 'user2@example.com'"}:
+            return MockResponse(200, "get_devices_empty.json.resp")
+        if url == "https://graph.microsoft.com/v1.0/deviceManagement/managedDevices":
+            return MockResponse(200, "get_devices.json.resp")
+        if (
+            url
+            == "https://graph.microsoft.com/v1.0/deviceManagement/managedDevices/9de5069c-5afe-602b-2ea0-a04b66beb2c0/wipe"
+        ):
+            return MockResponse(204)
+        if method == "DELETE":
+            if (
+                url
+                == "https://graph.microsoft.com/v1.0/deviceManagement/windowsAutopilotDeviceIdentities/9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+            ):
+                return MockResponse(200)
+            if (
+                url
+                == "https://graph.microsoft.com/v1.0/deviceManagement/managedDevices/9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+            ):
+                return MockResponse(204)
         if url == "https://graph.microsoft.com/v1.0/deviceManagement/managedDevices/valid-device-id":
             return MockResponse(200, "get_device.json.resp")
         if url == "https://graph.microsoft.com/v1.0/deviceManagement/managedDevices/invalid-device-id":
             return MockResponse(404)
+        if (
+            url
+            == "https://graph.microsoft.com/v1.0/deviceManagement/managedDevices/9de5069c-5afe-602b-2ea0-a04b66beb2c0/windowsDefenderScan"
+        ):
+            return MockResponse(204)
         if (
             url
             == "https://graph.microsoft.com/v1.0/deviceManagement/managedDevices/valid-device-id/windowsDefenderScan"

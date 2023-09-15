@@ -11,4 +11,4 @@ class FullScan(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {Output.SUCCESS: self.connection.api.full_scan(params.get(Input.DEVICE_ID))}
+        return {Output.SUCCESS: self.connection.api.windows_defender_scan(params.get(Input.DEVICEID), quick_scan=False)}

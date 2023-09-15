@@ -1,0 +1,5 @@
+{
+  "device": "INTUNE-W10",
+  "type": "Sync",
+  "whitelist": []
+}

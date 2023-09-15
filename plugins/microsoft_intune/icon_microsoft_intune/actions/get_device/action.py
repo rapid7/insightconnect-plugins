@@ -1,9 +1,8 @@
 import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime.helper import clean, convert_dict_to_snake_case
-from icon_microsoft_intune.util.helpers import handle_key_names_exceptions
 from .schema import GetDeviceInput, GetDeviceOutput, Input, Output, Component
 
 # Custom imports below
+from insightconnect_plugin_runtime.helper import clean
 
 
 class GetDevice(insightconnect_plugin_runtime.Action):
@@ -13,8 +12,4 @@ class GetDevice(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {
-            Output.DEVICE: convert_dict_to_snake_case(
-                handle_key_names_exceptions(clean(self.connection.api.get_device(params.get(Input.DEVICE_ID))))
-            )
-        }
+        return {Output.DEVICE: clean(self.connection.api.get_device(params.get(Input.DEVICEID)))}

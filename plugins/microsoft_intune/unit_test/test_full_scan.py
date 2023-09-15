@@ -23,7 +23,7 @@ class TestFullScan(TestCase):
             [
                 "valid_device_id",
                 Util.read_file_to_dict("inputs/full_scan.json.inp"),
-                Util.read_file_to_dict("expected/full_scan.json.exp"),
+                Util.read_file_to_dict("expected/success.json.exp"),
             ],
         ]
     )

@@ -1,8 +1,8 @@
 import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime.helper import clean, convert_dict_to_snake_case
 from .schema import GetAutopilotDeviceInput, GetAutopilotDeviceOutput, Input, Output, Component
 
 # Custom imports below
+from insightconnect_plugin_runtime.helper import clean
 
 
 class GetAutopilotDevice(insightconnect_plugin_runtime.Action):
@@ -15,8 +15,4 @@ class GetAutopilotDevice(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {
-            Output.DEVICE: convert_dict_to_snake_case(
-                clean(self.connection.api.get_autopilot_device(params.get(Input.DEVICE_ID)))
-            )
-        }
+        return {Output.DEVICE: clean(self.connection.api.get_autopilot_device(params.get(Input.DEVICEID)))}

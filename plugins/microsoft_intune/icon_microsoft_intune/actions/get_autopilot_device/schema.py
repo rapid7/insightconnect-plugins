@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    DEVICE_ID = "device_id"
+    DEVICEID = "deviceId"
     
 
 class Output:
@@ -21,7 +21,7 @@ class GetAutopilotDeviceInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "device_id": {
+    "deviceId": {
       "type": "string",
       "title": "Device ID",
       "description": "ID of the Autopilot device",
@@ -29,7 +29,7 @@ class GetAutopilotDeviceInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "device_id"
+    "deviceId"
   ]
 }
     """)
@@ -45,42 +45,42 @@ class GetAutopilotDeviceOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "device": {
-      "$ref": "#/definitions/autopilot_device",
+      "$ref": "#/definitions/autopilotDevice",
       "title": "Device",
       "description": "Information about the autopilot device",
       "order": 1
     }
   },
   "definitions": {
-    "autopilot_device": {
+    "autopilotDevice": {
       "type": "object",
-      "title": "autopilot_device",
+      "title": "autopilotDevice",
       "properties": {
-        "addressable_user_name": {
+        "addressableUserName": {
           "type": "string",
           "title": "Addressable User Name",
           "description": "Addressable user name",
           "order": 1
         },
-        "azure_active_directory_device_id": {
+        "azureActiveDirectoryDeviceId": {
           "type": "string",
           "title": "Azure Active Directory Device ID",
           "description": "The unique identifier for the Azure Active Directory device",
           "order": 2
         },
-        "display_name": {
+        "displayName": {
           "type": "string",
           "title": "Display Name",
           "description": "Display name of the device",
           "order": 3
         },
-        "enrollment_state": {
+        "enrollmentState": {
           "type": "string",
           "title": "Enrollment State",
           "description": "State of the enrollment",
           "order": 4
         },
-        "group_tag": {
+        "groupTag": {
           "type": "string",
           "title": "Group Tag",
           "description": "Group tag of the autopilot device",
@@ -92,13 +92,13 @@ class GetAutopilotDeviceOutput(insightconnect_plugin_runtime.Output):
           "description": "Unique identifier for the autopilot device",
           "order": 6
         },
-        "last_contacted_date_time": {
+        "lastContactedDateTime": {
           "type": "string",
           "title": "Last Contacted Date Time",
           "description": "The date when the device was last contacted",
           "order": 7
         },
-        "managed_device_id": {
+        "managedDeviceId": {
           "type": "string",
           "title": "Managed Device ID",
           "description": "The identifier of the managed device",
@@ -116,43 +116,43 @@ class GetAutopilotDeviceOutput(insightconnect_plugin_runtime.Output):
           "description": "Model of the autopilot device",
           "order": 10
         },
-        "product_key": {
+        "productKey": {
           "type": "string",
           "title": "Product Key",
           "description": "Product key of the device",
           "order": 11
         },
-        "purchase_order_identifier": {
+        "purchaseOrderIdentifier": {
           "type": "string",
           "title": "Purchase Order Identifier",
           "description": "The identifier of the purchase order",
           "order": 12
         },
-        "resource_name": {
+        "resourceName": {
           "type": "string",
           "title": "Resource Name",
           "description": "Name of the resource",
           "order": 13
         },
-        "serial_number": {
+        "serialNumber": {
           "type": "string",
           "title": "Serial Number",
           "description": "Serial number of the device",
           "order": 14
         },
-        "sku_number": {
+        "skuNumber": {
           "type": "string",
           "title": "SKU Number",
           "description": "Stock Keeping Unit number of the device",
           "order": 15
         },
-        "system_family": {
+        "systemFamily": {
           "type": "string",
           "title": "System Family",
           "description": "Family of the device system",
           "order": 16
         },
-        "user_principal_name": {
+        "userPrincipalName": {
           "type": "string",
           "title": "User Principal Name",
           "description": "Principal name of the user",

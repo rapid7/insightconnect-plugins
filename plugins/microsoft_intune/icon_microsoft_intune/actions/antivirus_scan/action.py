@@ -16,22 +16,17 @@ class AntivirusScan(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         devices = self.connection.api.search_managed_devices(params.get(Input.DEVICE))
-
+        update_signatures = params.get(Input.UPDATE)
         if not devices:
             raise PluginException(
                 cause="Resource not found.",
                 assistance="Unable to find a device using device details provided.",
             )
 
-        success = False
         for device in devices:
-            if params.get(Input.UPDATE, False):
-                self.connection.api.windows_defender_update_signatures(device["id"])
+            device_id = device.get("id")
+            if update_signatures:
+                self.connection.api.windows_defender_update_signatures(device_id)
+            self.connection.api.windows_defender_scan(device_id, quick_scan=False)
 
-            if self.connection.api.windows_defender_scan(device["id"]):
-                success = True
-
-        if success:
-            return {Output.SUCCESS: True}
-
-        raise PluginException(preset=PluginException.Preset.UNKNOWN)
+        return {Output.SUCCESS: True}

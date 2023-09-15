@@ -23,7 +23,7 @@ class TestQuickScan(TestCase):
             [
                 "valid_device_id",
                 Util.read_file_to_dict("inputs/quick_scan.json.inp"),
-                Util.read_file_to_dict("expected/quick_scan.json.exp"),
+                Util.read_file_to_dict("expected/success.json.exp"),
             ],
         ]
     )

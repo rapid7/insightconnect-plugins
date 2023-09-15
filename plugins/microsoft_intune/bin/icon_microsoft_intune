@@ -36,6 +36,10 @@ def main():
             )
             self.add_action(actions.AntivirusScan())
 
+            self.add_action(actions.DeleteDeviceFromAutopilot())
+
+            self.add_action(actions.DeleteDeviceFromIntune())
+
             self.add_action(actions.FullScan())
 
             self.add_action(actions.GetAutopilotDevice())
