@@ -5,6 +5,7 @@ name: zoom
 title: Zoom
 description: Trigger workflows on user activity while also managing your users with the Zoom plugin
 version: 4.1.2
+connection_version: 4
 vendor: rapid7
 support: rapid7
 status: []
