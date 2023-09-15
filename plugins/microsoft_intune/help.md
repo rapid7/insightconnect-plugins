@@ -499,7 +499,7 @@ Example output:
       "exchangeLastSuccessfulSyncDateTime": "0001-01-01T00:00:00Z",
       "userDisplayName": "User1",
       "deviceRegistrationState": "registered",
-      "managedDeviceOwnerType": "company",
+      "managedDeviceOwnerType": "company"
     }
   ]
 }
