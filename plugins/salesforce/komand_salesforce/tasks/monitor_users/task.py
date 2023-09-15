@@ -12,6 +12,7 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
     USER_LOGIN_QUERY = "SELECT LoginTime, UserId, LoginType, LoginUrl, SourceIp, Status, Application, Browser FROM LoginHistory WHERE LoginTime >= {start_timestamp} AND LoginTime < {end_timestamp}"
     USERS_QUERY = "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard'"
     UPDATED_USER_QUERY = "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE Id = '{user_id}' AND UserType = 'Standard'"
+    UPDATED_USERS_QUERY = "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND Id IN ({user_ids})"
     USERS_NEXT_PAGE_ID = "users_next_page_id"
     USER_LOGIN_NEXT_PAGE_ID = "user_login_next_page_id"
     LAST_USER_UPDATE_COLLECTION_TIMESTAMP = "last_user_update_collection_timestamp"
@@ -102,15 +103,15 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                             "end": user_update_end_timestamp,
                         }
                     ).get("ids", [])
-
-                    updated_users = []
-                    for user_id in user_ids:
-                        updated_user = self.connection.api.query(
-                            self.UPDATED_USER_QUERY.format(user_id=user_id), None
+                    self.logger.info(f"Found {len(user_ids)} updated users")
+                    if user_ids:
+                        user_ids_quoted = ["'" + x + "'" for x in user_ids]
+                        concatenated_ids = ",".join(user_ids_quoted)
+                        updated_users = self.connection.api.query(
+                            self.UPDATED_USERS_QUERY.format(user_ids=concatenated_ids), None
                         ).get("records", [])
-                        if updated_user:
-                            updated_users.extend(updated_user)
-                    records.extend(self.add_data_type_field(updated_users, "User Update"))
+
+                        records.extend(self.add_data_type_field(updated_users, "User Update"))
 
                 if get_users:
                     response = self.connection.api.query(self.USERS_QUERY, users_next_page_id)

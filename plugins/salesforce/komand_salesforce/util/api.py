@@ -44,6 +44,8 @@ def rate_limiting(max_tries: int):
 
 
 class SalesforceAPI:
+    RETRY_LIMIT = 5
+
     def __init__(
         self, client_id: str, client_secret: str, username: str, password: str, security_token: str, logger: Logger
     ):
@@ -54,6 +56,9 @@ class SalesforceAPI:
         self._password = password
         self._security_token = security_token
         self.enable_rate_limiting = True
+        self.token = None
+        self.instance_url = None
+        self.retry_count = 0
 
     def simple_search(self, text: str) -> list:
         return self._make_json_request("GET", PARAMETERIZED_SEARCH_ENDPOINT, params={"q": text}).get(
@@ -130,6 +135,9 @@ class SalesforceAPI:
         ).content
 
     def _get_token(self, client_id: str, client_secret: str, username: str, password: str, security_token: str):
+        if self.token and self.instance_url:
+            return self.token, self.instance_url
+
         self.logger.info("SalesforceAPI: Getting API token...")
 
         response = requests.request(
@@ -145,6 +153,18 @@ class SalesforceAPI:
         )
 
         if 400 <= response.status_code < 500:
+            if "invalid_grant" in response.content.decode():
+                self.logger.info("SalesforceAPI: invalid_grant error received.")
+                if self.retry_count <= self.RETRY_LIMIT:
+                    self.logger.info("SalesforceAPI: Retrying...")
+                    time.sleep(2**self.retry_count)
+                    self.retry_count += 1
+                    return self._get_token(client_id, client_secret, username, password, security_token)
+                else:
+                    self.logger.error(
+                        "SalesforceAPI: Max retry attempts reached following invalid_grant error. Exiting."
+                    )
+
             self.logger.error(f"SalesforceAPI: {response.content.decode()}")
             raise ApiException(
                 preset=PluginException.Preset.INVALID_CREDENTIALS,
@@ -156,6 +176,8 @@ class SalesforceAPI:
         access_token = resp_json.get("access_token")
         instance_url = f"{resp_json.get('instance_url')}/services/data/"
         self.logger.info("SalesforceAPI: API token received")
+        self.token = access_token
+        self.instance_url = instance_url
         return access_token, instance_url
 
     @staticmethod

@@ -138,6 +138,10 @@ class Util:
                 }:
                     return MockResponse(200, "get_specific_user.json.resp")
                 if params == {
+                    "q": "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND Id IN ('005Hn00000HVWwxIAH')"
+                }:
+                    return MockResponse(200, "get_specific_user.json.resp")
+                if params == {
                     "q": "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard'"
                 }:
                     return MockResponse(200, "get_users.json.resp")
