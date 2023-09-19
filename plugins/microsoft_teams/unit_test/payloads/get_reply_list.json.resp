@@ -1,0 +1,89 @@
+{
+  "@odata.count": 2,
+  "value": [
+    {
+      "id": "1234567891",
+      "replyToId": "1234567890",
+      "etag": "1234567891",
+      "messageType": "message",
+      "createdDateTime": "2023-08-01T12:00:00.000Z",
+      "lastModifiedDateTime": "2023-08-01T12:00:00.000Z",
+      "lastEditedDateTime": null,
+      "deletedDateTime": null,
+      "subject": null,
+      "summary": null,
+      "chatId": null,
+      "importance": "normal",
+      "locale": "en-us",
+      "webUrl": "https://teams.microsoft.com/l/message",
+      "onBehalfOf": null,
+      "policyViolation": null,
+      "eventDetail": null,
+      "from": {
+        "application": null,
+        "device": null,
+        "user": {
+          "id": "0",
+          "displayName": "Example User",
+          "userIdentityType": "aadUser"
+        }
+      },
+      "body": {
+        "contentType": "text",
+        "content": "test message 2"
+      },
+      "channelIdentity": {
+        "teamId": "56789",
+        "channelId": "12345"
+      },
+      "attachments": [
+      ],
+      "mentions": [
+      ],
+      "reactions": [
+      ]
+    },
+    {
+      "id": "1234567892",
+      "replyToId": "1234567890",
+      "etag": "1234567892",
+      "messageType": "message",
+      "createdDateTime": "2023-08-02T12:00:00.000Z",
+      "lastModifiedDateTime": "2023-08-02T12:00:00.000Z",
+      "lastEditedDateTime": null,
+      "deletedDateTime": null,
+      "subject": null,
+      "summary": null,
+      "chatId": null,
+      "importance": "normal",
+      "locale": "en-us",
+      "webUrl": "https://teams.microsoft.com/l/message",
+      "onBehalfOf": null,
+      "policyViolation": null,
+      "eventDetail": null,
+      "from": {
+        "application": null,
+        "device": null,
+        "user": {
+          "id": "0",
+          "displayName": "Example User",
+          "userIdentityType": "aadUser"
+        }
+      },
+      "body": {
+        "contentType": "text",
+        "content": "test message 1"
+      },
+      "channelIdentity": {
+        "teamId": "56789",
+        "channelId": "12345"
+      },
+      "attachments": [
+      ],
+      "mentions": [
+      ],
+      "reactions": [
+      ]
+    }
+  ]
+}
