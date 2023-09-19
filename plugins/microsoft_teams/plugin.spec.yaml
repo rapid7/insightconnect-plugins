@@ -208,6 +208,11 @@ types:
        description: The message split by spaces into a list of words. This list makes finding and using parameters in chat commands easier
        type: "[]string"
        required: false
+     channelIdentity:
+       title: "Channel Identity"
+       type: channelIdentity
+       description: "Represents identity of the channel"
+       required: false
   group:
       mailNickname:
         title: "Mail Nickname"

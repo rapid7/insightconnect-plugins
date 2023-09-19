@@ -947,6 +947,7 @@ Example output:
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Body|body|None|False|Body|None|
+|Channel Identity|channelIdentity|None|False|Represents identity of the channel|None|
 |Created Date Time|string|None|False|Created date time|None|
 |First Word|string|None|False|Extracted first word from message (easy way to obtain a chat command)|None|
 |From|from|None|False|From|None|
@@ -1027,7 +1028,7 @@ If there is more than one team with the same name in your organization, the olde
 
 # Version History
 
-* 5.1.0 - New actions: Get Reply List
+* 5.1.0 - New actions: Get Reply List | Improve typing on message
 * 5.0.0 - New actions: Get Message in Chat, Get Message in Channel | Update to latest SDK version | Change required fields in message schema
 * 4.2.0 - New Message Received: Fixed issue where `font-size` value appeared in the `urls`, and `domains` output fields | Can choose the role of a member when adding them to a channel | Fix bug where case-sensitive URLs were returned in lower case | Improved reliability of domains output value
 * 4.1.0 - Cloud enabled | Add Channel to Team: The user has the option to select the type of channel to be created. The available types are `Standard`, and `Private` 

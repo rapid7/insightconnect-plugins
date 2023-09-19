@@ -1,5 +1,5 @@
 {
-	"spec": "9fdd90db707eb15c7dfd37f2833c6c64",
+	"spec": "c789730bf7c262c32f372f8e86753df8",
 	"manifest": "8a7b4cfc9567a23d50706d49807dc753",
 	"setup": "a75c05ebbf3c01d5d5da5687a9bd0036",
 	"schemas": [
@@ -57,15 +57,15 @@
 		},
 		{
 			"identifier": "send_html_message/schema.py",
-			"hash": "0d3ff1937b1436649439682e89ba42d4"
+			"hash": "9c0c92551c309818340e997a0e7e2f0d"
 		},
 		{
 			"identifier": "send_message/schema.py",
-			"hash": "eb227481e707f979ee41f4f161a75259"
+			"hash": "d2b2d55bcff15c6692b22175ddf9b609"
 		},
 		{
 			"identifier": "send_message_by_guid/schema.py",
-			"hash": "9052a8cc587bdd78d93dc75be99f4fc6"
+			"hash": "3963118963efd46377a4cb6afcfda7b0"
 		},
 		{
 			"identifier": "connection/schema.py",
@@ -73,7 +73,7 @@
 		},
 		{
 			"identifier": "new_message_received/schema.py",
-			"hash": "8512edbe33c4940e7feff5dca425df69"
+			"hash": "3477a956b10d18dc5e72c0ce60444c17"
 		}
 	]
 }

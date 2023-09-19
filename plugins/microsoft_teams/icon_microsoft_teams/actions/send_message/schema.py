@@ -147,6 +147,12 @@ class SendMessageOutput(insightconnect_plugin_runtime.Output):
             "type": "string"
           },
           "order": 10
+        },
+        "channelIdentity": {
+          "$ref": "#/definitions/channelIdentity",
+          "title": "Channel Identity",
+          "description": "Represents identity of the channel",
+          "order": 11
         }
       }
     },
@@ -194,6 +200,24 @@ class SendMessageOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "ID",
           "description": "ID",
+          "order": 2
+        }
+      }
+    },
+    "channelIdentity": {
+      "type": "object",
+      "title": "channelIdentity",
+      "properties": {
+        "channelId": {
+          "type": "string",
+          "title": "Channel ID",
+          "description": "The identity of the channel in which the message was posted",
+          "order": 1
+        },
+        "teamId": {
+          "type": "string",
+          "title": "Team ID",
+          "description": "The identity of the team in which the message was posted",
           "order": 2
         }
       }
