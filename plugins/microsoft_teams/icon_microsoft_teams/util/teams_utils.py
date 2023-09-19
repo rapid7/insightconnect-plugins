@@ -3,6 +3,8 @@ import requests
 import re
 from logging import Logger
 import insightconnect_plugin_runtime.connection
+from insightconnect_plugin_runtime.helper import clean
+
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
 
 
@@ -347,3 +349,24 @@ def get_message_from_chat(  # noqa: C901
     except Exception as error:
         raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
     return remove_null_and_clean(message)
+
+
+def get_reply_list(  # noqa: C901
+    connection: insightconnect_plugin_runtime.connection,
+    team_id: str,
+    channel_id: str,
+    message_id: str,
+) -> list:
+    message_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/teams/{team_id}/channels/{channel_id}/messages/{message_id}/replies"
+    headers = connection.get_headers()
+    response = requests.get(message_url, headers=headers)  # nosec B113
+
+    try:
+        response.raise_for_status()
+    except Exception as error:
+        raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=error)
+    try:
+        messages = response.json()
+    except Exception as error:
+        raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
+    return clean(messages.get("value", []))
