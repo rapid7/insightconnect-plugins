@@ -87,22 +87,22 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|rejected_indicators|[]string|False|The list of indicators that have been rejected during the update|
-|threat|threat|False|The information about the threat|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|rejected_indicators|[]string|False|The list of indicators that have been rejected during the update|None|
+|threat|threat|False|The information about the threat|None|
 
 Example output:
 
 ```
 {
-    'rejected_indicators': [],
-     'threat': {
-        'name': 'bad-virus', 
-        'note': 'test', 
-        'published': False, 
-        'indicator_count': 1
-    }
+  "rejected_indicators": [],
+  "threat": {
+    "name": "bad-virus",
+    "note": "test",
+    "published": false,
+    "indicator_count": 2
+  }
 }
 ```
 
@@ -128,10 +128,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|attachment|[]attachment|False|Attachment details|
-|success|boolean|True|Whether the action was successful or not|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|attachment|[]attachment|False|Attachment details|None|
+|success|boolean|True|Whether the action was successful or not|True|
 
 Example output:
 
@@ -175,10 +175,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|attachment_content|bytes|False|The base64 encoded content of the attachment|
-|success|boolean|True|Whether the action was successful or not|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|attachment_content|bytes|False|The base64 encoded content of the attachment|dGVzdA==|
+|success|boolean|True|Whether the action was successful or not|True|
 
 Example output:
 
@@ -209,9 +209,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Whether the action was successful or not|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|Whether the action was successful or not|True|
 
 Example output:
 
@@ -241,10 +241,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|attachment|attachment|False|Attachment details|
-|success|boolean|True|Whether the action was successful or not|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|attachment|attachment|False|Attachment details|None|
+|success|boolean|True|Whether the action was successful or not|True|
 
 Example output:
 
@@ -290,10 +290,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|attachments|[]attachment|False|List of attachments|
-|success|boolean|True|Whether the action was successful or not|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|attachments|[]attachment|False|List of attachments|None|
+|success|boolean|True|Whether the action was successful or not|True|
 
 Example output:
 
@@ -337,9 +337,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Whether the action was successful or not|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|Whether the action was successful or not|True|
 
 Example output:
 
@@ -375,10 +375,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|comment|comment|False|Newly created comment|
-|success|boolean|True|Whether the action was successful or not|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|comment|comment|False|Newly created comment|None|
+|success|boolean|True|Whether the action was successful or not|True|
 
 Example output:
 
@@ -437,10 +437,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|comments|[]comment|False|List of comments|
-|success|boolean|True|Whether the action was successful or not|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|comments|[]comment|False|List of comments|None|
+|success|boolean|True|Whether the action was successful or not|True|
 
 Example output:
 
@@ -471,12 +471,13 @@ This action allows to search for investigations that match the given criteria.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|end_time|date|None|False|The ending time when investigations were created|None|2020-09-06 12:07:55.136667|
+|end_time|date|None|False|The ending time when investigations were created|None|2020-09-06T12:07:55+00:00|
 |index|integer|0|True|Zero-based index of the page to retrieve, where value must be greater than or equal to 0|None|1|
 |search|[]object|None|False|The criteria for which entities to return|None|[{"field": "Example Field", "operator": "EQUALS", "value": "Test"}]|
 |size|integer|100|True|Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100|None|100|
 |sort|[]object|None|False|The sorting information, where possible field values are RRN, PRIORITY, CREATED TIME, and order values are ASC, DESC|None|[{"field": "Example Field", "order": "ASC"}]|
-|start_time|date|None|False|The starting time from when investigations were created|None|2020-09-06 12:07:55.136667|
+|start_time|date|None|False|The starting time from when investigations were created|None|2020-09-06T12:07:55+00:00|
+
 
 Example input:
 
@@ -504,10 +505,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigations|[]investigation|True|A list of found investigations|
-|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigations|[]investigation|True|A list of found investigations|None|
+|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|None|
 
 Example output:
 
@@ -565,10 +566,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|alerts|[]alert|True|A list of alerts associated with the investigation|
-|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|alerts|[]alert|True|A list of alerts associated with the investigation|None|
+|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|None|
 
 Example output:
 
@@ -617,9 +618,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigation|investigation|True|The investigation for which the priority was set|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigation|investigation|True|The investigation for which the priority was set|None|
 
 Example output:
 
@@ -667,9 +668,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigation|investigation|True|The investigation for which the disposition was set|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigation|investigation|True|The investigation for which the disposition was set|None|
 
 Example output:
 
@@ -715,9 +716,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigation|investigation|True|The body of the specified investigation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigation|investigation|True|The body of the specified investigation|None|
 
 Example output:
 
@@ -773,9 +774,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigation|investigation|True|The body of the specified investigation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigation|investigation|True|The body of the specified investigation|None|
 
 Example output:
 
@@ -829,9 +830,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigation|investigation|True|The body of the specified investigation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigation|investigation|True|The body of the specified investigation|None|
 
 Example output:
 
@@ -867,9 +868,9 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|saved_queries|[]query|True|Saved LEQL queries|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|saved_queries|[]query|True|Saved LEQL queries|None|
 
 ```
 {
@@ -913,9 +914,9 @@ Example input:
 
 ##### Output
 
-|Name|Type| Required |Description|
-|----|----|----|-----------|
-|saved_query|query|True|Saved LEQL query|
+|Name|Type| Required |Description|Example|
+|----|----|----|-----------|-------|
+|saved_query|query|True|Saved LEQL query|None|
 
 ```
 {
@@ -964,10 +965,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|rejected_indicators|[]string|True|Rejected indicators in new threat|
-|threat|threat|True|The information about the new threat|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|rejected_indicators|[]string|True|Rejected indicators in new threat|None|
+|threat|threat|True|The information about the new threat|None|
 
 Example output:
 
@@ -1042,10 +1043,10 @@ This will run your search for the entire month of January every time.
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|count|integer|True|Number of log entries found|
-|results|[]events|True|Query Results|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|count|integer|True|Number of log entries found|10|
+|results|[]events|True|Query Results|None|
 
 Example output:
 
@@ -1169,10 +1170,10 @@ This will run your search for the entire month of January every time.
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|count|integer|True|Number of log entries found|
-|results|[]events|True|Query Results|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|count|integer|True|Number of log entries found|10|
+|results|[]events|True|Query Results|None|
 
 Example output:
 
@@ -1248,9 +1249,9 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|logs|logsets_info|True|All logs|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|logs|logsets_info|True|All logs|None|
 
 Example output:
 
@@ -1317,9 +1318,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|log|logsets_info|True|Requested log|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|log|logsets_info|True|Requested log|None|
 
 Example output:
 
@@ -1394,10 +1395,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|ids|[]string|True|The IDs of the investigations that were closed by the request|
-|num_closed|integer|True|The number of investigations closed by the request|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|ids|[]string|True|The IDs of the investigations that were closed by the request|None|
+|num_closed|integer|True|The number of investigations closed by the request|10|
 
 Example output:
 
@@ -1432,9 +1433,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|events|[]events|True|Events from logs|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|events|[]events|True|Events from logs|None|
 
 Example output:
 
@@ -1491,9 +1492,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigation|investigation|True|The investigation for which the status was set|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigation|investigation|True|The investigation for which the status was set|None|
 
 Example output:
 
@@ -1541,10 +1542,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigation|investigation|True|The investigation that was modified|
-|success|boolean|True|Was the user assigned successfully|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigation|investigation|True|The investigation that was modified|None|
+|success|boolean|True|Was the user assigned successfully|True|
 
 Example output:
 
@@ -1611,10 +1612,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|rejected_indicators|[]string|False|The list of indicators that have been rejected during the update|
-|threat|threat|False|The information about the threat|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|rejected_indicators|[]string|False|The list of indicators that have been rejected during the update|None|
+|threat|threat|False|The information about the threat|None|
 
 Example output:
 
@@ -1678,10 +1679,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigations|[]investigation|True|A list of found investigations|
-|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigations|[]investigation|True|A list of found investigations|None|
+|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|None|
 
 Example output:
 
@@ -1729,6 +1730,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 5.0.1 - Update the endpoint `get_a_saved_query` reaches out to
 * 5.0.0 - Update `List Investigations` inputs
 * 4.4.1 - `List Alerts for Investigation`: fix issue with retrieving `detection_rule_rrn`   
 * 4.4.0 - `List Alerts for Investigation`: changed schema output for `detection_rule_rrn` 

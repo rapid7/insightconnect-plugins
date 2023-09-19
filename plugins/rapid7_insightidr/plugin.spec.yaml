@@ -4,7 +4,8 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 5.0.0
+version: 5.0.1
+connection_version: 5
 supported_versions: ["Latest release successfully tested on 2022-07-20."]
 vendor: rapid7
 cloud_ready: true
@@ -1054,6 +1055,7 @@ actions:
         description: Was the user assigned successfully
         type: boolean
         required: true
+        example: true
       investigation:
         title: Investigation
         description: The investigation that was modified
@@ -1177,6 +1179,7 @@ actions:
         description: Number of log entries found
         type: integer
         required: true
+        example: 10
   advanced_query_on_log_set:
     title: Advanced Query on Log Set
     description: Realtime query an InsightIDR log set. This will query entire log sets for results
@@ -1271,6 +1274,7 @@ actions:
         description: Number of log entries found
         type: integer
         required: true
+        example: 10
   close_investigations_in_bulk:
     title: Close Investigations in Bulk
     description: This action is used to close all investigations that fall within a date range
@@ -1321,6 +1325,7 @@ actions:
         description: The number of investigations closed by the request
         type: integer
         required: true
+        example: 10
   create_threat:
     title: Create Threat
     description: Create a private InsightIDR threat and add indicators to this threat
@@ -1415,6 +1420,7 @@ actions:
         description: Whether the action was successful or not
         type: boolean
         required: true
+        example: true
   create_comment:
     title: Create Comment
     description: Create a comment for a particular target. The target determines where the comment will appear within InsightIDR. Only certain types of RRNs are permitted as targets, such as investigation RRNs
@@ -1448,6 +1454,7 @@ actions:
         description: Whether the action was successful or not
         type: boolean
         required: true
+        example: true
   delete_comment:
     title: Delete Comment
     description: Delete a comment by using an RRN. The RRN determines which comment will be deleted
@@ -1464,6 +1471,7 @@ actions:
         description: Whether the action was successful or not
         type: boolean
         required: true
+        example: true
   list_attachments:
     title: List Attachments
     description: Retrieves attachments matching the given request parameters
@@ -1499,6 +1507,7 @@ actions:
         description: Whether the action was successful or not
         type: boolean
         required: true
+        example: true
   upload_attachment:
     title: Upload Attachment
     description: Upload an attachment
@@ -1526,6 +1535,7 @@ actions:
         description: Whether the action was successful or not
         type: boolean
         required: true
+        example: true
   get_attachment_information:
     title: Get Attachment Information
     description: Get information from an attachment by RRN. The RRN determines which attachment information is retrieved from
@@ -1547,6 +1557,7 @@ actions:
         description: Whether the action was successful or not
         type: boolean
         required: true
+        example: true
   delete_attachment:
     title: Delete Attachment
     description: Delete an attachment with the given RRN
@@ -1563,6 +1574,7 @@ actions:
         description: Whether the action was successful or not
         type: boolean
         required: true
+        example: true
   download_attachment:
     title: Download Attachment
     description: Download an attachment by RRN. The RRN determines which attachment is downloaded
@@ -1579,8 +1591,10 @@ actions:
         description: The base64 encoded content of the attachment
         type: bytes
         required: false
+        example: dGVzdA==
       success:
         title: Success
         description: Whether the action was successful or not
         type: boolean
         required: true
+        example: true
