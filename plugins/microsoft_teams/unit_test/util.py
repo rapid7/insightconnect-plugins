@@ -88,4 +88,6 @@ class Util:
             == "https://graph.microsoft.com/beta/1/users/user@example.com/chats/11:examplechat.name/messages/1234567890"
         ):
             return MockResponse("get_message_in_chat", 200)
+        if args[0] == "https://graph.microsoft.com/beta/1/teams/12345/channels/56789/messages/1234567890/replies":
+            return MockResponse("get_reply_list", 200)
         raise Exception("Not implemented")
