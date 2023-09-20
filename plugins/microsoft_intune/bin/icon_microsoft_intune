@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Microsoft Intune"
 Vendor = "rapid7"
-Version = "1.3.0"
+Version = "2.0.0"
 Description = "Microsoft cloud-based management solution that provides for mobile device and operating system management"
 
 
@@ -36,9 +36,21 @@ def main():
             )
             self.add_action(actions.AntivirusScan())
 
+            self.add_action(actions.DeleteDeviceFromAutopilot())
+
+            self.add_action(actions.DeleteDeviceFromIntune())
+
+            self.add_action(actions.FullScan())
+
+            self.add_action(actions.GetAutopilotDevice())
+
+            self.add_action(actions.GetDevice())
+
             self.add_action(actions.GetManagedApps())
 
             self.add_action(actions.ManageDevice())
+
+            self.add_action(actions.QuickScan())
 
             self.add_action(actions.SearchDevices())
 

@@ -1,0 +1,39 @@
+{
+  "value": [
+    {
+      "@odata.type": "#microsoft.graph.managedIOSStoreApp",
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c1",
+      "displayName": "Adobe Acrobat Reader",
+      "description": "Adobe Acrobat Reader is the free global standard for reliably viewing, signing, and commenting on PDF documents.",
+      "publisher": "Adobe Inc.",
+      "largeIcon": null,
+      "createdDateTime": "2019-08-01T00:00:00Z",
+      "lastModifiedDateTime": "2019-08-01T00:00:00Z",
+      "isFeatured": false,
+      "privacyInformationUrl": null,
+      "informationUrl": null,
+      "owner": null,
+      "developer": null,
+      "notes": null,
+      "publishingState": "published",
+      "appAvailability": "global",
+      "version": null,
+      "bundleId": "com.adobe.Adobe-Reader",
+      "appStoreUrl": "https://example.com",
+      "applicableDeviceType": {
+        "iPad": true,
+        "iPhoneAndIPod": true
+      },
+      "minimumSupportedOperatingSystem": {
+        "v8_0": false,
+        "v9_0": false,
+        "v10_0": false,
+        "v11_0": true,
+        "v12_0": false,
+        "v13_0": false,
+        "v14_0": false,
+        "v15_0": false
+      }
+    }
+  ]
+}

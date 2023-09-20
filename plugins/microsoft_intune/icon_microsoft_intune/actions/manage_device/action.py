@@ -23,12 +23,13 @@ class ManageDevice(insightconnect_plugin_runtime.Action):
         device = self.connection.api.get_device_by_uuid_if_not_whitelisted(device_name, params.get(Input.WHITELIST))
 
         if device:
-            response = self.connection.api.managed_device_action(device["id"], self.actions[params.get(Input.TYPE)])
-            self.logger.info(f"response: {response}")
-
-            return {Output.SUCCESS: not response}
+            return {
+                Output.SUCCESS: self.connection.api.managed_device_action(
+                    device.get("id"), self.actions.get(params.get(Input.TYPE))
+                )
+            }
 
         self.logger.info(
-            f"Action: {params.get(Input.TYPE)} will not be taken on managed device: {device_name} because it was whitelisted"
+            f"Action {params.get(Input.TYPE)} will not be taken on managed device '{device_name}' because it was whitelisted."
         )
         return {Output.SUCCESS: False}
