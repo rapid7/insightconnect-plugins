@@ -19,6 +19,7 @@ class Util:
                 Input.TENANTID: "intune_tenant",
                 Input.CLIENTID: "client_id",
                 Input.CLIENTSECRET: {"secretKey": "client_secret"},
+                Input.URL: "https://graph.microsoft.com",
                 Input.CREDENTIALS: {"username": "user", "password": "pw"},
             }
         default_connection.connect(connect_params)
