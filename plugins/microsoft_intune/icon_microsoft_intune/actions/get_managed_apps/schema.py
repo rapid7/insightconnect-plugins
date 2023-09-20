@@ -12,7 +12,7 @@ class Input:
     
 
 class Output:
-    MANAGED_APPS = "managed_apps"
+    MANAGEDAPPS = "managedApps"
     
 
 class GetManagedAppsInput(insightconnect_plugin_runtime.Input):
@@ -41,7 +41,7 @@ class GetManagedAppsOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "managed_apps": {
+    "managedApps": {
       "type": "array",
       "title": "Managed Apps",
       "description": "Application details",

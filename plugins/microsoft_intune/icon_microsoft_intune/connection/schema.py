@@ -4,10 +4,10 @@ import json
 
 
 class Input:
-    CLIENT_ID = "client_id"
-    CLIENT_SECRET = "client_secret"
+    CLIENTID = "clientId"
+    CLIENTSECRET = "clientSecret"
     CREDENTIALS = "credentials"
-    TENANT_ID = "tenant_id"
+    TENANTID = "tenantId"
     URL = "url"
     
 
@@ -17,14 +17,14 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "client_id": {
+    "clientId": {
       "type": "string",
       "title": "Client ID",
       "description": "Client ID, also called Application ID",
       "order": 3
     },
-    "client_secret": {
-      "type": "string",
+    "clientSecret": {
+      "$ref": "#/definitions/credential_secret_key",
       "title": "Client Secret",
       "description": "Client secret key",
       "order": 4
@@ -35,7 +35,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "E-mail address and password",
       "order": 1
     },
-    "tenant_id": {
+    "tenantId": {
       "type": "string",
       "title": "Tenant ID",
       "description": "Tenant ID can be found in Active Directory",
@@ -50,13 +50,31 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "client_id",
-    "client_secret",
+    "clientId",
+    "clientSecret",
     "credentials",
-    "tenant_id",
+    "tenantId",
     "url"
   ],
   "definitions": {
+    "credential_secret_key": {
+      "id": "credential_secret_key",
+      "type": "object",
+      "title": "Credential: Secret Key",
+      "description": "A shared secret key",
+      "properties": {
+        "secretKey": {
+          "type": "string",
+          "title": "Secret Key",
+          "displayType": "password",
+          "description": "The shared secret key",
+          "format": "password"
+        }
+      },
+      "required": [
+        "secretKey"
+      ]
+    },
     "credential_username_password": {
       "id": "credential_username_password",
       "type": "object",

@@ -1,0 +1,64 @@
+{
+  "managedApps": [
+    {
+      "@odata.type": "#microsoft.graph.managedAndroidStoreApp",
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "displayName": "Adobe Acrobat Reader",
+      "description": "Adobe Acrobat Reader is the most reliable, free global standard document management system available.",
+      "publisher": "Adobe Inc.",
+      "createdDateTime": "2019-07-25T00:00:00Z",
+      "lastModifiedDateTime": "2019-07-25T00:00:00Z",
+      "isFeatured": false,
+      "publishingState": "published",
+      "appAvailability": "global",
+      "packageId": "com.adobe.reader",
+      "appStoreUrl": "https://example.com",
+      "minimumSupportedOperatingSystem": {
+        "v4_0": false,
+        "v4_0_3": false,
+        "v4_1": false,
+        "v4_2": false,
+        "v4_3": false,
+        "v4_4": true,
+        "v5_0": false,
+        "v5_1": false,
+        "v6_0": false,
+        "v7_0": false,
+        "v7_1": false,
+        "v8_0": false,
+        "v8_1": false,
+        "v9_0": false,
+        "v10_0": false,
+        "v11_0": false
+      }
+    },
+    {
+      "@odata.type": "#microsoft.graph.managedIOSStoreApp",
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c1",
+      "displayName": "Adobe Acrobat Reader",
+      "description": "Adobe Acrobat Reader is the free global standard for reliably viewing, signing, and commenting on PDF documents.",
+      "publisher": "Adobe Inc.",
+      "createdDateTime": "2019-08-01T00:00:00Z",
+      "lastModifiedDateTime": "2019-08-01T00:00:00Z",
+      "isFeatured": false,
+      "publishingState": "published",
+      "appAvailability": "global",
+      "bundleId": "com.adobe.Adobe-Reader",
+      "appStoreUrl": "https://example.com",
+      "applicableDeviceType": {
+        "iPad": true,
+        "iPhoneAndIPod": true
+      },
+      "minimumSupportedOperatingSystem": {
+        "v8_0": false,
+        "v9_0": false,
+        "v10_0": false,
+        "v11_0": true,
+        "v12_0": false,
+        "v13_0": false,
+        "v14_0": false,
+        "v15_0": false
+      }
+    }
+  ]
+}
