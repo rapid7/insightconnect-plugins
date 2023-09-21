@@ -42,12 +42,11 @@ For detailed instructions refer to [Microsoft Documentation](https://docs.micros
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |clientId|string|None|True|Client ID, also called Application ID|None|a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d|
 |clientSecret|credential_secret_key|None|True|Client secret key|None|kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=|
 |credentials|credential_username_password|None|True|E-mail address and password|None|{"username": "user@example.com", "password": "mypassword"}|
 |tenantId|string|None|True|Tenant ID can be found in Active Directory|None|3a522933-ae5e-2b63-96ab-3c004b4f7f10|
-|url|string|https://graph.microsoft.com|True|Base URL for the Microsoft endpoint|None|https://graph.microsoft.com|
 
 Example input:
 
@@ -61,8 +60,7 @@ Example input:
     "username": "user@example.com",
     "password": "mypassword"
   },
-  "tenantId": "3a522933-ae5e-2b63-96ab-3c004b4f7f10",
-  "url": "https://graph.microsoft.com"
+  "tenantId": "3a522933-ae5e-2b63-96ab-3c004b4f7f10"
 }
 ```
 
@@ -70,29 +68,31 @@ Example input:
 
 ### Actions
 
-#### Delete Device from Intune
+#### Antivirus Scan
 
-This action is used to delete the managed device from Intune.
+This action is used to initiate a Windows Defender Antivirus scan on a machine.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|deviceId|string|None|True|ID of the managed device|None|9e8fd111-6c41-1111-85b9-11395662e111|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|device|string|None|True|Search devices by device name, user ID, email address, or device ID|None|547a48e3-0942-4888-acf1-a92b7fb19ef9|
+|update|boolean|False|False|If true the action updates Antivirus Signatures before scan|None|True|
 
 Example input:
 
 ```
 {
-  "deviceId": "9e8fd111-6c41-1111-85b9-11395662e111"
+  "device": "547a48e3-0942-4888-acf1-a92b7fb19ef9",
+  "update": false
 }
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|------|
-|success|boolean|True|Whether the scan was successful|True|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|True|Return true if scan was initiated successfully|True|
 
 Example output:
 
@@ -109,7 +109,7 @@ This action is used to delete the device from Autopilot.
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |deviceId|string|None|True|ID of the device|None|9e8fd111-6c41-1111-85b9-11395662e111|
 
 Example input:
@@ -123,7 +123,7 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |success|boolean|True|Whether the scan was successful|True|
 
 Example output:
@@ -134,14 +134,78 @@ Example output:
 }
 ```
 
-#### Get Autopilot Device
+#### Delete Device from Intune
 
+This action is used to delete the managed device from Intune.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|deviceId|string|None|True|ID of the managed device|None|9e8fd111-6c41-1111-85b9-11395662e111|
+
+Example input:
+
+```
+{
+  "deviceId": "9e8fd111-6c41-1111-85b9-11395662e111"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|True|Whether the scan was successful|True|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Full Scan
+
+This action is used to perform a full scan of the device.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|deviceId|string|None|True|ID of the device|None|9e8fd111-6c41-1111-85b9-11395662e111|
+
+Example input:
+
+```
+{
+  "deviceId": "9e8fd111-6c41-1111-85b9-11395662e111"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Whether the scan was successful|True|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Get Autopilot Device
+  
 This action is used to get information about the Autopilot device.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |deviceId|string|None|True|ID of the Autopilot device|None|9e8fd111-6c41-1111-85b9-11395662e111|
 
 Example input:
@@ -155,7 +219,7 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |device|autopilotDevice|False|Information about the autopilot device|{}|
 
 Example output:
@@ -184,70 +248,6 @@ Example output:
 }
 ```
 
-#### Full Scan
-
-This action is used to perform a full scan of the device.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|deviceId|string|None|True|ID of the device|None|9e8fd111-6c41-1111-85b9-11395662e111|
-
-Example input:
-
-```
-{
-  "deviceId": "9e8fd111-6c41-1111-85b9-11395662e111"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|False|Whether the scan was successful|True|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
-#### Quick Scan
-
-This action is used to perform a quick scan of the device.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|deviceId|string|None|True|ID of the device|None|9e8fd111-6c41-1111-85b9-11395662e111|
-
-Example input:
-
-```
-{
-  "deviceId": "9e8fd111-6c41-1111-85b9-11395662e111"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|False|Whether the scan was successful|True|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
 #### Get Device
 
 This action is used to get information about the device.
@@ -255,7 +255,7 @@ This action is used to get information about the device.
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |deviceId|string|None|True|ID of the device|None|9e8fd111-6c41-1111-85b9-11395662e111|
 
 Example input:
@@ -269,7 +269,7 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |device|device|False|Information about the device|{}|
 
 Example output:
@@ -348,7 +348,7 @@ This action returns InTune manageable apps.
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |app|string|None|False|Application ID or name, if empty returns all applications|None|af6040ed-efe0-494c-89ed-89880989674c|
 
 Example input:
@@ -362,14 +362,14 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |managedApps|[]value|False|Application details|[]|
 
 Example output:
 
 ```
 {
-  "managed_apps": [
+  "managedApps": [
     {
       "publisher": "Adobe Inc.",
       "appAvailability": "lineOfBusiness",
@@ -399,22 +399,24 @@ Example output:
 }
 ```
 
-#### Wipe
+#### Manage Device
 
-This action is used to wipe device by device name, device ID, user ID, or email address. It supports a whitelist to skip critical devices that should never be whitelisted.
+This action is used to perform management tasks on a device such as rebooting and syncing.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|device|string|None|True|Device name, user ID, email address, or device ID|None|547a48e3-0942-4888-acf1-a92b7fb19ef9|
-|whitelist|[]string|None|False|This list contains a set of of device names, user IDs, email addresses, or device IDs that a user can pass in that will not be wiped|None|["user@example.com", "705c034c-034c-705c-4c03-5c704c035c70"]|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|device|string|None|True|Device name, user ID, email address, or device ID|None|aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa|
+|type|string|None|True|Type of action|['Reboot', 'Sync']|Sync|
+|whitelist|[]string|None|False|This list contains a set of of device names, user IDs, email addresses, or device IDs that action will not be performed on|None|["user@example.com", "705c034c-034c-705c-4c03-5c704c035c70"]|
 
 Example input:
 
 ```
 {
-  "device": "547a48e3-0942-4888-acf1-a92b7fb19ef9",
+  "device": "aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa",
+  "type": "Sync",
   "whitelist": [
     "user@example.com",
     "705c034c-034c-705c-4c03-5c704c035c70"
@@ -425,25 +427,57 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|True|Return true if device was successfully wiped|True|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|True|Return true if action was successfully performed on device|True|
 
 Example output:
 
 ```
 {
-  "success": false
+  "success": true
+}
+```
+
+#### Quick Scan
+
+This action is used to perform a quick scan of the device.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|deviceId|string|None|True|ID of the device|None|9e8fd111-6c41-1111-85b9-11395662e111|
+
+Example input:
+
+```
+{
+  "deviceId": "9e8fd111-6c41-1111-85b9-11395662e111"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Whether the scan was successful|True|
+
+Example output:
+
+```
+{
+  "success": true
 }
 ```
 
 #### Search Devices
-
+  
 This action is used to search devices by device name, user ID, email address or device ID.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |device|string|None|True|Search devices by either of - device name, user ID, email address, device ID|None|547a48e3-0942-4888-acf1-a92b7fb19ef9|
 
 Example input:
@@ -457,7 +491,7 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |devices|[]device|False|Devices details|[]|
 
 Example output:
@@ -505,24 +539,22 @@ Example output:
 }
 ```
 
-#### Manage Device
+#### Wipe
 
-This action is used to perform management tasks on a device such as rebooting and syncing.
+This action is used to wipe device by device name, device ID, user ID, or email address. It supports a whitelist to skip critical devices that should never be whitelisted.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|device|string|None|True|Device name, user ID, email address, or device ID|None|aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa|
-|type|string|None|True|Type of action|['Reboot', 'Sync']|Sync|
-|whitelist|[]string|None|False|This list contains a set of of device names, user IDs, email addresses, or device IDs that action will not be performed on|None|["user@example.com", "705c034c-034c-705c-4c03-5c704c035c70"]|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|device|string|None|True|Device name, user ID, email address, or device ID|None|547a48e3-0942-4888-acf1-a92b7fb19ef9|
+|whitelist|[]string|None|False|This list contains a set of of device names, user IDs, email addresses, or device IDs that a user can pass in that will not be wiped|None|["user@example.com", "705c034c-034c-705c-4c03-5c704c035c70"]|
 
 Example input:
 
 ```
 {
-  "device": "aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa",
-  "type": "Sync",
+  "device": "547a48e3-0942-4888-acf1-a92b7fb19ef9",
   "whitelist": [
     "user@example.com",
     "705c034c-034c-705c-4c03-5c704c035c70"
@@ -533,42 +565,8 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|True|Return true if action was successfully performed on device|True|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
-#### Antivirus Scan
-
-This action is used to initiate a Windows Defender Antivirus scan on a machine.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|device|string|None|True|Search devices by device name, user ID, email address, or device ID|None|547a48e3-0942-4888-acf1-a92b7fb19ef9|
-|update|boolean|False|False|If true the action updates Antivirus Signatures before scan|None|True|
-
-Example input:
-
-```
-{
-  "device": "547a48e3-0942-4888-acf1-a92b7fb19ef9",
-  "update": true
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|True|Return true if scan was initiated successfully|True|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|True|Return true if device was successfully wiped|True|
 
 Example output:
 
@@ -580,178 +578,182 @@ Example output:
 
 ### Triggers
 
-_This plugin does not contain any triggers._
+*This plugin does not contain any triggers.*
+
+### Tasks
+
+*This plugin does not contain any tasks.*
 
 ### Custom Output Types
 
-#### autopilotDevice
+**value**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Addressable User Name|string|False|Addressable user name|
-|Azure Active Directory Device ID|string|False|The unique identifier for the Azure Active Directory device|
-|Display Name|string|False|Display name of the device|
-|Enrollment State|string|False|State of the enrollment|
-|Group Tag|string|False|Group tag of the autopilot device|
-|ID|string|False|Unique identifier for the autopilot device|
-|Last Contacted Date Time|string|False|The date when the device was last contacted|
-|Managed Device ID|string|False|The identifier of the managed device|
-|Manufacturer|string|False|OEM manufacturer of the device|
-|Model|string|False|Model of the autopilot device|
-|Product Key|string|False|Product key of the device|
-|Purchase Order Identifier|string|False|The identifier of the purchase order|
-|Resource Name|string|False|Name of the resource|
-|Serial Number|string|False|Serial number of the device|
-|SKU Number|string|False|Stock Keeping Unit number of the device|
-|System Family|string|False|Family of the device system|
-|User Principal Name|string|False|Principal name of the user|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Odata Context|string|None|False|Odata context|https://example.com|
+|Odata Type|string|None|False|Odata type|#microsoft.graph.managedApp|
+|App Availability|string|None|False|App availability|global|
+|App Store URL|string|None|False|App store URL|https://example.com|
+|Created Datetime|string|None|False|Created datetime|2020-11-20 14:51:29+00:00|
+|Description|string|None|False|Description|Example description|
+|Developer|string|None|False|Developer|Example developer|
+|Display Name|string|None|False|Display Name|Adobe Acrobat Reader|
+|ID|string|None|False|ID|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+|Information URL|string|None|False|Information URL|https://example.com|
+|Is Featured|boolean|None|False|Is featured|False|
+|Large Icon|object|None|False|Large icon|{}|
+|Last Modified Datetime|string|None|False|Last modified datetime|2020-11-20 14:51:29+00:00|
+|Minimum Supported Operating System|object|None|False|Minimum supported operating system|{"v4_0": false}|
+|Notes|string|None|False|Notes|Example notes|
+|Owner|string|None|False|Owner|Example owner|
+|Package ID|string|None|False|Package ID|com.adobe.reader|
+|Privacy Information URL|string|None|False|Privacy information URL|https://example.com|
+|Publisher|string|None|False|Publisher|Adobe Inc.|
+|Publishing State|string|None|False|Publishing state|published|
+|Version|string|None|False|Version|1.0|
 
-#### configurationManagerClientEnabledFeatures
+**configurationManagerClientEnabledFeatures**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Odata Type|string|False|Odata type|
-|Compliance Policy|boolean|False|Compliance policy|
-|Device Configuration|boolean|False|Device configuration|
-|Inventory|boolean|False|Inventory|
-|Modern Apps|boolean|False|Modern apps|
-|Resource Access|boolean|False|Resource access|
-|Windows Update For Business|boolean|False|Windows update for business|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Odata Type|string|None|False|Odata type|microsoft.graph.configurationManagerClientEnabledFeatures|
+|Compliance Policy|boolean|None|False|Compliance policy|True|
+|Device Configuration|boolean|None|False|Device configuration|True|
+|Inventory|boolean|None|False|Inventory|True|
+|Modern Apps|boolean|None|False|Modern apps|True|
+|Resource Access|boolean|None|False|Resource access|True|
+|Windows Update For Business|boolean|None|False|Windows update for business|True|
 
-#### device
+**deviceActionResults**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Odata Type|string|False|Odata type|
-|Activation Lock Bypass Code|string|False|Activation lock bypass code|
-|Android Security Patch Level|string|False|Android security patch level|
-|Azure AD Device ID|string|False|Azure AD device ID|
-|Azure AD Registered|boolean|False|Azure AD registered|
-|Compliance Grace Period Expiration Date Time|date|False|Compliance grace period expiration date time|
-|Compliance State|string|False|Compliance state|
-|Configuration Manager Client Enabled Features|configurationManagerClientEnabledFeatures|False|Configuration manager client enabled features|
-|Device Action Results|[]deviceActionResults|False|Device action results|
-|Device Category Display Name|string|False|Device category display name|
-|Device Enrollment Type|string|False|Device enrollment type|
-|Device Health Attestation State|deviceHealthAttestationState|False|Device health attestation state|
-|Device Name|string|False|Device name|
-|Device Registration State|string|False|Device registration state|
-|EAS Activated|boolean|False|EAS activated|
-|EAS Activation Date Time|date|False|EAS activation date time|
-|EAS Device ID|string|False|EAS device ID|
-|Email Address|string|False|Email address|
-|Enrolled Date Time|date|False|Enrolled date time|
-|Exchange Access State|string|False|Exchange access state|
-|Exchange Access State Reason|string|False|Exchange access state reason|
-|Exchange Last Successful Sync Date Time|date|False|Exchange last successful sync date time|
-|Free Storage Space In Bytes|integer|False|Free storage space in bytes|
-|ID|string|False|ID|
-|IMEI|string|False|IMEI|
-|Is Encrypted|boolean|False|Is encrypted|
-|Is Supervised|boolean|False|Is supervised|
-|Jail Broken|string|False|Jail broken|
-|Last Sync Date Time|date|False|Last sync date time|
-|Managed Device Name|string|False|Managed device name|
-|Managed Device Owner Type|string|False|Managed device owner type|
-|Management Agent|string|False|Management agent|
-|Manufacturer|string|False|Manufacturer|
-|MEID|string|False|MEID|
-|Model|string|False|Model|
-|Operating System|string|False|Operating system|
-|OS Version|string|False|OS version|
-|Partner Reported Threat State|string|False|Partner reported threat state|
-|Phone Number|string|False|Phone number|
-|Remote Assistance Session Error Details|string|False|Remote assistance session error details|
-|Remote Assistance Session URL|string|False|Remote assistance session URL|
-|Serial Number|string|False|Serial number|
-|Subscriber Carrier|string|False|Subscriber carrier|
-|Total Storage Space In Bytes|integer|False|Total storage space in bytes|
-|User Display Name|string|False|User display name|
-|User ID|string|False|User ID|
-|User Principal Name|string|False|User principal name|
-|Wifi MAC Address|string|False|Wifi MAC address|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Odata Type|string|None|False|Odata type|#microsoft.graph.windowsDefenderScanActionResult|
+|Action Name|string|None|False|Action name|windowsDefenderScan|
+|Action State|string|None|False|Action state|done|
+|Last Updated Date Time|date|None|False|Last updated date time|2023-08-30 10:21:31+00:00|
+|Start Date Time|date|None|False|Start date time|2023-08-30 10:13:51.339250+00:00|
 
-#### deviceActionResults
+**deviceHealthAttestationState**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Odata Type|string|False|Odata type|
-|Action Name|string|False|Action name|
-|Action State|string|False|Action state|
-|Last Updated Date Time|date|False|Last updated date time|
-|Start Date Time|date|False|Start date time|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Odata Type|string|None|False|Odata type|microsoft.graph.deviceHealthAttestationState|
+|Attestation Identity Key|string|None|False|Attestation identity key|Example key|
+|BitLocker Status|string|None|False|BitLocker status|Bit Locker Status value|
+|Boot App Security Version|string|None|False|Boot app security version|Boot App Security Version value|
+|Boot Debugging|string|None|False|Boot debugging|Boot Debugging value|
+|Boot Manager Security Version|string|None|False|Boot manager security version|Boot Manager Security Version value|
+|Boot Manager Version|string|None|False|Boot manager version|Boot Manager Version value|
+|Boot Revision List Info|string|None|False|Boot revision list info|Boot Revision List Info value|
+|Code Integrity|string|None|False|Code integrity|Code Integrity value|
+|Code Integrity Check Version|string|None|False|Code integrity check version|Code Integrity Check Version value|
+|Code Integrity Policy|string|None|False|Code integrity policy|Code Integrity Policy value|
+|Content Namespace URL|string|None|False|Content namespace URL|https://example.com|
+|Content Version|string|None|False|Content version|Content Version value|
+|Data Excution Policy|string|None|False|Data excution policy|Data Excution Policy value|
+|Device Health Attestation Status|string|None|False|Device health attestation status|Device Health Attestation Status value|
+|Early Launch Anti Malware Driver Protection|string|None|False|Early launch anti malware driver protection|Early Launch Anti Malware Driver Protection value|
+|Health Attestation Supported Status|string|None|False|Health attestation supported status|Health Attestation Supported Status value|
+|Health Status Mismatch Info|string|None|False|Health status mismatch info|Health Status Mismatch Info value|
+|Issued Date Time|date|None|False|Issued date time|2023-08-30 10:13:51.339250+00:00|
+|Last Update Date Time|date|None|False|Last update date time|2023-08-30 10:13:51.339250+00:00|
+|Operating System Kernel Debugging|string|None|False|Operating system kernel debugging|Operating System Kernel Debugging value|
+|Operating System Rev List Info|string|None|False|Operating system rev list info|Operating System Rev List Info value|
+|PCR0|string|None|False|PCR0|Pcr0 value|
+|PCR Hash Algorithm|string|None|False|PCR hash algorithm|Pcr Hash Algorithm value|
+|Reset Count|integer|None|False|Reset count|1024|
+|Restart Count|integer|None|False|Restart count|1024|
+|Safe Mode|string|None|False|Safe mode|Safe Mode value|
+|Secure Boot|string|None|False|Secure boot|Secure Boot value|
+|Secure Boot Configuration Policy Finger Print|string|None|False|Secure boot configuration policy finger print|Secure Boot Configuration Policy Finger Print value|
+|Test Signing|string|None|False|Test signing|Test Signing value|
+|TPM Version|string|None|False|TPM version|TPM Version value|
+|Virtual Secure Mode|string|None|False|Virtual secure mode|Virtual Secure Mode value|
+|Windows PE|string|None|False|Windows PE|Windows PE value|
 
-#### deviceHealthAttestationState
+**device**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Odata Type|string|False|Odata type|
-|Attestation Identity Key|string|False|Attestation identity key|
-|BitLocker Status|string|False|BitLocker status|
-|Boot App Security Version|string|False|Boot app security version|
-|Boot Debugging|string|False|Boot debugging|
-|Boot Manager Security Version|string|False|Boot manager security version|
-|Boot Manager Version|string|False|Boot manager version|
-|Boot Revision List Info|string|False|Boot revision list info|
-|Code Integrity|string|False|Code integrity|
-|Code Integrity Check Version|string|False|Code integrity check version|
-|Code Integrity Policy|string|False|Code integrity policy|
-|Content Namespace URL|string|False|Content namespace URL|
-|Content Version|string|False|Content version|
-|Data Excution Policy|string|False|Data excution policy|
-|Device Health Attestation Status|string|False|Device health attestation status|
-|Early Launch Anti Malware Driver Protection|string|False|Early launch anti malware driver protection|
-|Health Attestation Supported Status|string|False|Health attestation supported status|
-|Health Status Mismatch Info|string|False|Health status mismatch info|
-|Issued Date Time|date|False|Issued date time|
-|Last Update Date Time|date|False|Last update date time|
-|Operating System Kernel Debugging|string|False|Operating system kernel debugging|
-|Operating System Rev List Info|string|False|Operating system rev list info|
-|PCR0|string|False|PCR0|
-|PCR Hash Algorithm|string|False|PCR hash algorithm|
-|Reset Count|integer|False|Reset count|
-|Restart Count|integer|False|Restart count|
-|Safe Mode|string|False|Safe mode|
-|Secure Boot|string|False|Secure boot|
-|Secure Boot Configuration Policy Finger Print|string|False|Secure boot configuration policy finger print|
-|Test Signing|string|False|Test signing|
-|TPM Version|string|False|TPM version|
-|Virtual Secure Mode|string|False|Virtual secure mode|
-|Windows PE|string|False|Windows PE|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Odata Type|string|None|False|Odata type|#microsoft.graph.managedDevice|
+|Activation Lock Bypass Code|string|None|False|Activation lock bypass code|123456789|
+|Android Security Patch Level|string|None|False|Android security patch level|2023-08-30|
+|Azure AD Device ID|string|None|False|Azure AD device ID|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+|Azure AD Registered|boolean|None|False|Azure AD registered|True|
+|Compliance Grace Period Expiration Date Time|date|None|False|Compliance grace period expiration date time|9999-12-31 23:59:59.999999+00:00|
+|Compliance State|string|None|False|Compliance state|compliant|
+|Configuration Manager Client Enabled Features|configurationManagerClientEnabledFeatures|None|False|Configuration manager client enabled features|{}|
+|Device Action Results|[]deviceActionResults|None|False|Device action results|[]|
+|Device Category Display Name|string|None|False|Device category display name|Example category|
+|Device Enrollment Type|string|None|False|Device enrollment type|userEnrollment|
+|Device Health Attestation State|deviceHealthAttestationState|None|False|Device health attestation state|{}|
+|Device Name|string|None|False|Device name|INTUNE-W10|
+|Device Registration State|string|None|False|Device registration state|registered|
+|EAS Activated|boolean|None|False|EAS activated|True|
+|EAS Activation Date Time|date|None|False|EAS activation date time|2021-06-24 08:37:10.230399+00:00|
+|EAS Device ID|string|None|False|EAS device ID|FD12345678904B5820E08E8123456789|
+|Email Address|string|None|False|Email address|user@example.com|
+|Enrolled Date Time|date|None|False|Enrolled date time|2021-06-24 00:37:04.588543+00:00|
+|Exchange Access State|string|None|False|Exchange access state|unknown|
+|Exchange Access State Reason|string|None|False|Exchange access state reason|unknown|
+|Exchange Last Successful Sync Date Time|date|None|False|Exchange last successful sync date time|2021-06-24 00:37:04.588543+00:00|
+|Free Storage Space In Bytes|integer|None|False|Free storage space in bytes|1646264320|
+|ID|string|None|False|ID|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+|IMEI|string|None|False|IMEI|123456789876543|
+|Is Encrypted|boolean|None|False|Is encrypted|True|
+|Is Supervised|boolean|None|False|Is supervised|True|
+|Jail Broken|string|None|False|Jail broken|Unknown|
+|Last Sync Date Time|date|None|False|Last sync date time|2023-08-30 10:22:33.628668+00:00|
+|Managed Device Name|string|None|False|Managed device name|Example device|
+|Managed Device Owner Type|string|None|False|Managed device owner type|personal|
+|Management Agent|string|None|False|Management agent|mdm|
+|Manufacturer|string|None|False|Manufacturer|VMware, Inc.|
+|MEID|string|None|False|MEID|ABC123456789CBA|
+|Model|string|None|False|Model|VMware Virtual Platform|
+|Operating System|string|None|False|Operating system|Windows|
+|OS Version|string|None|False|OS version|10.0.19044.3086|
+|Partner Reported Threat State|string|None|False|Partner reported threat state|activated|
+|Phone Number|string|None|False|Phone number|123456789|
+|Remote Assistance Session Error Details|string|None|False|Remote assistance session error details|Example details|
+|Remote Assistance Session URL|string|None|False|Remote assistance session URL|https://example.com|
+|Serial Number|string|None|False|Serial number|VMware-123456789-987654321|
+|Subscriber Carrier|string|None|False|Subscriber carrier|Example subscriber carrier|
+|Total Storage Space In Bytes|integer|None|False|Total storage space in bytes|33773584384|
+|User Display Name|string|None|False|User display name|Example User|
+|User ID|string|None|False|User ID|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+|User Principal Name|string|None|False|User principal name|user@example.com|
+|Wifi MAC Address|string|None|False|Wifi MAC address|12-34-56-78-AB-CD|
 
-#### value
+**autopilotDevice**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Odata Context|string|False|Odata context|
-|Odata Type|string|False|Odata type|
-|App Availability|string|False|App availability|
-|App Store URL|string|False|App store URL|
-|Created Datetime|string|False|Created datetime|
-|Description|string|False|Description|
-|Developer|string|False|Developer|
-|Display Name|string|False|Display Name|
-|ID|string|False|ID|
-|Information URL|string|False|Information URL|
-|Is Featured|boolean|False|Is featured|
-|Large Icon|object|False|Large icon|
-|Last Modified Datetime|string|False|Last modified datetime|
-|Minimum Supported Operating System|object|False|Minimum supported operating system|
-|Notes|string|False|Notes|
-|Owner|string|False|Owner|
-|Package ID|string|False|Package ID|
-|Privacy Information URL|string|False|Privacy information URL|
-|Publisher|string|False|Publisher|
-|Publishing State|string|False|Publishing state|
-|Version|string|False|Version|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Addressable User Name|string|None|False|Addressable user name|user@example.com|
+|Azure Active Directory Device ID|string|None|False|The unique identifier for the Azure Active Directory device|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+|Display Name|string|None|False|Display name of the device|Example Name|
+|Enrollment State|string|None|False|State of the enrollment|notContacted|
+|Group Tag|string|None|False|Group tag of the autopilot device|example-tag|
+|ID|string|None|False|Unique identifier for the autopilot device|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+|Last Contacted Date Time|string|None|False|The date when the device was last contacted|2021-06-24 00:37:04.588543+00:00|
+|Managed Device ID|string|None|False|The identifier of the managed device|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+|Manufacturer|string|None|False|OEM manufacturer of the device|Example Manufacturer|
+|Model|string|None|False|Model of the autopilot device|Example Model|
+|Product Key|string|None|False|Product key of the device|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+|Purchase Order Identifier|string|None|False|The identifier of the purchase order|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+|Resource Name|string|None|False|Name of the resource|Example Name|
+|Serial Number|string|None|False|Serial number of the device|1A2B3C4D|
+|SKU Number|string|None|False|Stock Keeping Unit number of the device|ABCD1234|
+|System Family|string|None|False|Family of the device system|example_family|
+|User Principal Name|string|None|False|Principal name of the user|Example Name|
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+*There is no troubleshooting for this plugin.*
 
 # Version History
 
-* 2.0.0 - Add new actions Get Device, Get Autopilot Device, Full Scan, Quick Scan, Delete Device from Intune, Delete Device from Autopilot | Change `client_secret` input type in connection | Code refactor
+* 2.0.0 - Add new actions Get Device, Get Autopilot Device, Full Scan, Quick Scan, Delete Device from Intune, Delete Device from Autopilot | Change `client_secret` input type in connection | Remove `url` input from connection | Code refactor
 * 1.3.0 - Add new action Get Managed Apps
 * 1.2.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/microsoft-intune/)
 * 1.2.1 - Improve e-mail search in Search Devices action by performing an extended all device search for  `emailAddress` and `userPrincipalName` when email is not found
