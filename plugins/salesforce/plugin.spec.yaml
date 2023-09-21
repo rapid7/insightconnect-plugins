@@ -4,7 +4,7 @@ products: [insightconnect]
 name: salesforce
 title: Salesforce
 description: The Salesforce plugin allows you to search, update, and manage salesforce records
-version: 2.1.2
+version: 2.0.3
 connection_version: 2
 vendor: rapid7
 support: community
@@ -377,6 +377,6 @@ tasks:
       users:
         title: Users
         description: Information about users, their login history and which users have been updated
-        type: "[]object"
+        type: "[]userData"
         required: true
         example: []
