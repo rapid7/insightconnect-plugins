@@ -824,13 +824,6 @@ connection:
     type: credential_username_password
     required: true
     example: '{"username": "user@example.com", "password": "mypassword"}'
-  url:
-    title: Host URL
-    description: Base URL for the Microsoft endpoint
-    type: string
-    required: true
-    default: https://graph.microsoft.com
-    example: https://graph.microsoft.com
   clientId:
     title: Client ID
     description: Client ID, also called Application ID
