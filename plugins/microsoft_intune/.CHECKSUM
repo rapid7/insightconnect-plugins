@@ -1,55 +1,55 @@
 {
-	"spec": "8bfd9f73cb41c7ba24552454a3c3f1a4",
-	"manifest": "eac27439a0ef9cebe3ab377a8e67a7e0",
-	"setup": "46ac0b057bfc773584920287a566470c",
+	"spec": "a9004e2809b64288cc88811c39b568fd",
+	"manifest": "e2eefa466dae9c8e93178b8fe3b684e5",
+	"setup": "eab3f4234382f1c05af67e49f70c84a5",
 	"schemas": [
 		{
 			"identifier": "antivirus_scan/schema.py",
-			"hash": "13ec3c94a55380e9466c3dd6a51d795b"
+			"hash": "758767bdf0354dc0ba3699ed69d4368c"
 		},
 		{
 			"identifier": "delete_device_from_autopilot/schema.py",
-			"hash": "9642ab0f4ef72475d8574dfe0a26dc0d"
+			"hash": "6eb8d48796af31e961a7d1accb4fb094"
 		},
 		{
 			"identifier": "delete_device_from_intune/schema.py",
-			"hash": "b2ee4d454f4193db77df2837a0b78daa"
+			"hash": "a88b17b857e78922f8c2420d35614771"
 		},
 		{
 			"identifier": "full_scan/schema.py",
-			"hash": "52c8986fc2a5dc20afebf65116ceec27"
+			"hash": "36ca7c242e1416168aa5f90d36177f1d"
 		},
 		{
 			"identifier": "get_autopilot_device/schema.py",
-			"hash": "683ef41434fc364daae3dec442fab50a"
+			"hash": "5711e374ba7cd2c9e8179d4b2f55cbe8"
 		},
 		{
 			"identifier": "get_device/schema.py",
-			"hash": "06166ef147f7514ccf79afde49c522a5"
+			"hash": "75918f1bbdcf3604402e95e16644ac44"
 		},
 		{
 			"identifier": "get_managed_apps/schema.py",
-			"hash": "0bb1939ffd2de4898f424e579923447d"
+			"hash": "39d6a6112c5d35ed3e1212732756001b"
 		},
 		{
 			"identifier": "manage_device/schema.py",
-			"hash": "92de89bbf3f69a44d190ac8485764572"
+			"hash": "09bb276cbd1110406f5e51a7292f1545"
 		},
 		{
 			"identifier": "quick_scan/schema.py",
-			"hash": "75af1a7ebf7fd420f10915d665cfebdd"
+			"hash": "73c7ef17cf5d7ae67648251222975717"
 		},
 		{
 			"identifier": "search_devices/schema.py",
-			"hash": "cee707d2a0159166b71c3c704b77ae5a"
+			"hash": "8653e78c08443ea31a0e5f98832f7b1d"
 		},
 		{
 			"identifier": "wipe/schema.py",
-			"hash": "7d7cc20f5f027b8f7427bd22b498010c"
+			"hash": "9ae7bf200965391860e53956429c02e3"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "72a961fde1dddb136f210e286a6237b1"
+			"hash": "403937909846549cbcde68bf0ebeb41a"
 		}
 	]
 }
