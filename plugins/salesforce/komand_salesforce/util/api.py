@@ -1,9 +1,11 @@
-import requests
 import time
-from insightconnect_plugin_runtime.exceptions import PluginException
+from functools import wraps
 from json.decoder import JSONDecodeError
 from logging import Logger
-from komand_salesforce.util.exceptions import ApiException
+from typing import Callable, Any
+
+import requests
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_salesforce.util.endpoints import (
     PARAMETERIZED_SEARCH_ENDPOINT,
     QUERY_ENDPOINT,
@@ -14,6 +16,7 @@ from komand_salesforce.util.endpoints import (
     SOBJECT_RECORD_FIELD_ENDPOINT,
     SOBJECT_UPDATED_USERS,
 )
+from komand_salesforce.util.exceptions import ApiException
 
 
 def rate_limiting(max_tries: int):
@@ -41,6 +44,38 @@ def rate_limiting(max_tries: int):
         return _wrapper
 
     return _decorate
+
+
+def refresh_token(max_tries: int) -> Callable:
+    """
+    Decorator to refresh the token if expired and retry the function.
+
+    Args:
+    - max_tries (int): Maximum number of attempts to refresh the token and retry.
+
+    Returns:
+    - Callable: Wrapped function that retries on token expiry.
+    """
+
+    def decorator(func: Callable) -> Callable:
+        @wraps(func)
+        def wrapper(self, *args, **kwargs) -> Any:
+            for _ in range(max_tries):
+                try:
+                    return func(self, *args, **kwargs)
+                except ApiException as error:
+                    cause = PluginException.causes.get(PluginException.Preset.INVALID_CREDENTIALS)
+                    if error.cause == cause and "Session expired or invalid" in error.data:
+                        self.logger.info("Token expired, renewing token...")
+                        self.token = None
+                        self.instance_url = None
+                    else:
+                        raise
+            return func(self, *args, **kwargs)
+
+        return wrapper
+
+    return decorator
 
 
 class SalesforceAPI:
@@ -190,6 +225,7 @@ class SalesforceAPI:
         return instance_url
 
     @rate_limiting(10)
+    @refresh_token(1)
     def _make_request(self, method: str, url: str, params: dict = {}, json: dict = {}):  # noqa: C901
         access_token, instance_url = self._get_token(
             self._client_id, self._client_secret, self._username, self._password, self._security_token
