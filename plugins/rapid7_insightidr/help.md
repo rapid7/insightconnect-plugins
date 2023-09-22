@@ -87,22 +87,25 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|rejected_indicators|[]string|False|The list of indicators that have been rejected during the update|
-|threat|threat|False|The information about the threat|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|rejected_indicators|[]string|False|The list of indicators that have been rejected during the update|["example.com", "10.0.0.1"]|
+|threat|threat|False|The information about the threat|{'name': 'bad-virus', 'note': 'test', 'published': False, 'indicator_count': 2}|
 
 Example output:
 
 ```
 {
-    'rejected_indicators': [],
-     'threat': {
-        'name': 'bad-virus', 
-        'note': 'test', 
-        'published': False, 
-        'indicator_count': 1
-    }
+  "rejected_indicators": [
+    "example.com",
+    "10.0.0.1"
+  ],
+  "threat": {
+    "name": "bad-virus",
+    "note": "test",
+    "published": false,
+    "indicator_count": 2
+  }
 }
 ```
 
@@ -128,10 +131,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|attachment|[]attachment|False|Attachment details|
-|success|boolean|True|Whether the action was successful or not|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|attachment|[]attachment|False|Attachment details|[{"rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890", "creator": {"type": "USER", "name": "Example User"}, "created_time": "2022-08-19T13:00:58.645Z", "file_name": "test.txt", "mime_type": "text/plain", "size": 4, "scan_status": "CLEAN"}]|
+|success|boolean|True|Whether the action was successful or not|True|
 
 Example output:
 
@@ -175,10 +178,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|attachment_content|bytes|False|The base64 encoded content of the attachment|
-|success|boolean|True|Whether the action was successful or not|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|attachment_content|bytes|False|The base64 encoded content of the attachment|dGVzdA==|
+|success|boolean|True|Whether the action was successful or not|True|
 
 Example output:
 
@@ -209,9 +212,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Whether the action was successful or not|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|Whether the action was successful or not|True|
 
 Example output:
 
@@ -241,10 +244,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|attachment|attachment|False|Attachment details|
-|success|boolean|True|Whether the action was successful or not|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|attachment|attachment|False|Attachment details|{'rrn': 'rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890', 'creator': {'type': 'USER', 'name': 'Example User'}, 'created_time': '2022-08-19T13:00:58.645Z', 'file_name': 'test.txt', 'mime_type': 'text/plain', 'size': 4, 'scan_status': 'CLEAN'}|
+|success|boolean|True|Whether the action was successful or not|True|
 
 Example output:
 
@@ -290,10 +293,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|attachments|[]attachment|False|List of attachments|
-|success|boolean|True|Whether the action was successful or not|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|attachments|[]attachment|False|List of attachments|[{"rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890", "creator": {"type": "USER", "name": "Example User"}, "created_time": "2022-08-19T13:00:58.645Z", "file_name": "test.txt", "mime_type": "text/plain", "size": 4, "scan_status": "CLEAN"}]|
+|success|boolean|True|Whether the action was successful or not|True|
 
 Example output:
 
@@ -337,9 +340,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Whether the action was successful or not|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|Whether the action was successful or not|True|
 
 Example output:
 
@@ -375,10 +378,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|comment|comment|False|Newly created comment|
-|success|boolean|True|Whether the action was successful or not|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|comment|comment|False|Newly created comment|{'created_time': '2022-09-22T08:38:13.962Z', 'rrn': 'rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:1234567890', 'target': 'rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210', 'creator': {'type': 'USER', 'name': 'Example User'}, 'body': 'test', 'visibility': 'PUBLIC', 'attachments': [{'rrn': 'rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210', 'creator': {'type': 'USER', 'name': 'Example User'}, 'created_time': '2022-09-20T13:54:28.246Z', 'file_name': 'test.txt', 'mime_type': 'text/plain', 'size': 4, 'scan_status': 'CLEAN'}]}|
+|success|boolean|True|Whether the action was successful or not|True|
 
 Example output:
 
@@ -437,10 +440,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|comments|[]comment|False|List of comments|
-|success|boolean|True|Whether the action was successful or not|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|comments|[]comment|False|List of comments|[{"created_time": "2022-08-18T12:53:26.676Z", "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:1234567890", "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890", "creator": {"type": "USER", "name": "Example User"}, "body": "test", "visibility": "PUBLIC"}]|']|
+|success|boolean|True|Whether the action was successful or not|True|
 
 Example output:
 
@@ -471,12 +474,13 @@ This action allows to search for investigations that match the given criteria.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|end_time|date|None|False|The ending time when investigations were created|None|2020-09-06 12:07:55.136667|
+|end_time|date|None|False|The ending time when investigations were created|None|2020-09-06T12:07:55+00:00|
 |index|integer|0|True|Zero-based index of the page to retrieve, where value must be greater than or equal to 0|None|1|
 |search|[]object|None|False|The criteria for which entities to return|None|[{"field": "Example Field", "operator": "EQUALS", "value": "Test"}]|
 |size|integer|100|True|Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100|None|100|
 |sort|[]object|None|False|The sorting information, where possible field values are RRN, PRIORITY, CREATED TIME, and order values are ASC, DESC|None|[{"field": "Example Field", "order": "ASC"}]|
-|start_time|date|None|False|The starting time from when investigations were created|None|2020-09-06 12:07:55.136667|
+|start_time|date|None|False|The starting time from when investigations were created|None|2020-09-06T12:07:55+00:00|
+
 
 Example input:
 
@@ -504,10 +508,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigations|[]investigation|True|A list of found investigations|
-|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigations|[]investigation|True|A list of found investigations|[{"assignee": {"email": "user@example.com", "name": "Ellen Example"}, "created_time": "2018-06-06T16:56:42Z", "disposition": "BENIGN", "first_alert_time": "2018-06-06T16:56:42Z", "last_accessed": "2018-06-06T16:56:42Z", "latest_alert_time": "2018-06-06T16:56:42Z", "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06", "priority": "CRITICAL", "rrn": "rrn:example", "source": "ALERT", "status": "OPEN", "title": "Example Title"}]|
+|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|{'index': 0, 'size': 1, 'total_data': 1, 'total_pages': 1}|
 
 Example output:
 
@@ -565,10 +569,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|alerts|[]alert|True|A list of alerts associated with the investigation|
-|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|alerts|[]alert|True|A list of alerts associated with the investigation|[{"alert_type": "Example Type", "alert_type_description": "Example Description", "created_time": "01-01-2020T00:00:00", "detection_rule_rrn": "rrn:example", "first_event_time": "01-01-2020T00:00:00", "id": "11111111-1111-1111-1111-111111111111", "latest_event_time": "01-01-2020T00:00:00", "title": "Example Title"}]|
+|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|{'index': 0, 'size': 1, 'total_data': 1, 'total_pages': 1}|
 
 Example output:
 
@@ -617,9 +621,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigation|investigation|True|The investigation for which the priority was set|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigation|investigation|True|The investigation for which the priority was set|{'assignee': {'email': 'user@example.com', 'name': 'Ellen Example'}, 'created_time': '2018-06-06T16:56:42Z', 'disposition': 'BENIGN', 'first_alert_time': '2018-06-06T16:56:42Z', 'last_accessed': '2018-06-06T16:56:42Z', 'latest_alert_time': '2018-06-06T16:56:42Z', 'organization_id': '174e4f99-2ac7-4481-9301-4d24c34baf06', 'priority': 'CRITICAL', 'rrn': 'rrn:example', 'source': 'ALERT', 'status': 'OPEN', 'title': 'Example Title'}|
 
 Example output:
 
@@ -667,9 +671,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigation|investigation|True|The investigation for which the disposition was set|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigation|investigation|True|The investigation for which the disposition was set|{'assignee': {'email': 'user@example.com', 'name': 'Ellen Example'}, 'created_time': '2018-06-06T16:56:42Z', 'disposition': 'BENIGN', 'first_alert_time': '2018-06-06T16:56:42Z', 'last_accessed': '2018-06-06T16:56:42Z', 'latest_alert_time': '2018-06-06T16:56:42Z', 'organization_id': '174e4f99-2ac7-4481-9301-4d24c34baf06', 'priority': 'CRITICAL', 'rrn': 'rrn:example', 'source': 'ALERT', 'status': 'OPEN', 'title': 'Example Title'}|
 
 Example output:
 
@@ -715,9 +719,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigation|investigation|True|The body of the specified investigation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigation|investigation|True|The body of the specified investigation|{'assignee': {'email': 'user@example.com', 'name': 'Ellen Example'}, 'created_time': '2018-06-06T16:56:42Z', 'disposition': 'BENIGN', 'first_alert_time': '2018-06-06T16:56:42Z', 'last_accessed': '2018-06-06T16:56:42Z', 'latest_alert_time': '2018-06-06T16:56:42Z', 'organization_id': '174e4f99-2ac7-4481-9301-4d24c34baf06', 'priority': 'CRITICAL', 'rrn': 'rrn:example', 'source': 'ALERT', 'status': 'OPEN', 'title': 'Example Title'}|
 
 Example output:
 
@@ -773,9 +777,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigation|investigation|True|The body of the specified investigation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigation|investigation|True|The body of the specified investigation|{'assignee': {'email': 'user@example.com', 'name': 'Ellen Example'}, 'created_time': '2018-06-06T16:56:42Z', 'disposition': 'BENIGN', 'first_alert_time': '2018-06-06T16:56:42Z', 'last_accessed': '2018-06-06T16:56:42Z', 'latest_alert_time': '2018-06-06T16:56:42Z', 'organization_id': '174e4f99-2ac7-4481-9301-4d24c34baf06', 'priority': 'CRITICAL', 'rrn': 'rrn:example', 'source': 'ALERT', 'status': 'OPEN', 'title': 'Example Title'}|
 
 Example output:
 
@@ -829,9 +833,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigation|investigation|True|The body of the specified investigation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigation|investigation|True|The body of the specified investigation|{'assignee': {'email': 'user@example.com', 'name': 'Ellen Example'}, 'created_time': '2018-06-06T16:56:42Z', 'disposition': 'BENIGN', 'first_alert_time': '2018-06-06T16:56:42Z', 'last_accessed': '2018-06-06T16:56:42Z', 'latest_alert_time': '2018-06-06T16:56:42Z', 'organization_id': '174e4f99-2ac7-4481-9301-4d24c34baf06', 'priority': 'CRITICAL', 'rrn': 'rrn:example', 'source': 'ALERT', 'status': 'OPEN', 'title': 'Example Title'}|
 
 Example output:
 
@@ -867,27 +871,29 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|saved_queries|[]query|True|Saved LEQL queries|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|saved_queries|[]query|True|Saved LEQL queries|[{"id": "00000000-0000-9eec-0000-000000000000", "leql": {"during": {"from": None, "time_range": "yesterday", "to": None}, "statement": "where(931dde6c60>=800)"}, "logs": ["31a4d56e-460e-460f-9542-c2bc8edd7c6b"], "name": "Large Values Yesterday"}]|
+
+Example output:
 
 ```
 {
   "saved_queries": [
     {
       "id": "00000000-0000-9eec-0000-000000000000",
-      "leql": {
-        "during": {
-          "from": null,
-          "time_range": "yesterday",
-          "to": null
-        },
-        "statement": "where(931dde6c60>=800)"
-      },
+      "name": "Large Values Yesterday",
       "logs": [
         "31a4d56e-460e-460f-9542-c2bc8edd7c6b"
       ],
-      "name": "Large Values Yesterday"
+      "leql": {
+        "during": {
+          "from": null,
+          "to": null,
+          "time_range": "yesterday"
+        },
+        "statement": "where(931dde6c60>=800)"
+      }
     }
   ]
 }
@@ -913,9 +919,11 @@ Example input:
 
 ##### Output
 
-|Name|Type| Required |Description|
-|----|----|----|-----------|
-|saved_query|query|True|Saved LEQL query|
+|Name|Type| Required |Description|Example|
+|----|----|----|-----------|-------|
+|saved_query|query|True|Saved LEQL query|{'id': '00000000-0000-9eec-0000-000000000000', 'leql': {'during': {'from': None, 'time_range': 'yesterday', 'to': None}, 'statement': 'where(931dde6c60>=800)'}, 'logs': ['31a4d56e-460e-460f-9542-c2bc8edd7c6b'], 'name': 'Large Values Yesterday'}|
+
+Example output:
 
 ```
 {
@@ -964,16 +972,19 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|rejected_indicators|[]string|True|Rejected indicators in new threat|
-|threat|threat|True|The information about the new threat|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|rejected_indicators|[]string|True|Rejected indicators in new threat|["example.com", "10.0.0.1"]|
+|threat|threat|True|The information about the new threat|{'name': 'Threat created via InsightConnect', 'note': 'Threat created via InsightConnect', 'published': False, 'indicator_count': 2}|
 
 Example output:
 
 ```
 {
-  "rejected_indicators": [],
+  "rejected_indicators": [
+    "example.com",
+    "10.0.0.1"
+  ],
   "threat": {
     "name": "Threat created via InsightConnect",
     "note": "Threat created via InsightConnect",
@@ -1042,10 +1053,10 @@ This will run your search for the entire month of January every time.
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|count|integer|True|Number of log entries found|
-|results|[]events|True|Query Results|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|count|integer|True|Number of log entries found|10|
+|results|[]events|True|Query Results|[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": "false", "service": "ntlmssp ", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp ", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": False, "eventData": None, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]|
 
 Example output:
 
@@ -1169,10 +1180,10 @@ This will run your search for the entire month of January every time.
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|count|integer|True|Number of log entries found|
-|results|[]events|True|Query Results|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|count|integer|True|Number of log entries found|10|
+|results|[]events|True|Query Results|[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": "false", "service": "ntlmssp ", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp ", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": False, "eventData": None, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]|
 
 Example output:
 
@@ -1248,9 +1259,9 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|logs|logsets_info|True|All logs|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|logs|logsets_info|True|All logs|{'log': {'id': '0b9a242d-d2fb-4e42-8656-eb5ff64d652f', 'name': 'Windows Defender', 'tokens': ['bc38a911-65f1-4755-cca3-a330a6336b3a'], 'structures': ['1238a911-65f1-4755-cca3-a330a6336b3a'], 'user_data': {'platform_managed': 'true'}, 'source_type': 'token', 'token_seed': None, 'retention_period': 'default', 'links': [{'rel': 'Related', 'href': 'https://example.com'}], 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a', 'logsets_info': [{'id': 'bc38a911-65f1-4755-cca3-a330a6336b3a', 'name': 'Unparsed Data', 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a', 'links': [{'rel': 'Self', 'href': 'https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85'}]}]}}|
 
 Example output:
 
@@ -1317,9 +1328,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|log|logsets_info|True|Requested log|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|log|logsets_info|True|Requested log|{'log': {'id': '0b9a242d-d2fb-4e42-8656-eb5ff64d652f', 'name': 'Windows Defender', 'tokens': ['bc38a911-65f1-4755-cca3-a330a6336b3a'], 'structures': ['1238a911-65f1-4755-cca3-a330a6336b3a'], 'user_data': {'platform_managed': 'true'}, 'source_type': 'token', 'token_seed': None, 'retention_period': 'default', 'links': [{'rel': 'Related', 'href': 'https://example.com'}], 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a', 'logsets_info': [{'id': 'bc38a911-65f1-4755-cca3-a330a6336b3a', 'name': 'Unparsed Data', 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a', 'links': [{'rel': 'Self', 'href': 'https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85'}]}]}}|
 
 Example output:
 
@@ -1394,10 +1405,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|ids|[]string|True|The IDs of the investigations that were closed by the request|
-|num_closed|integer|True|The number of investigations closed by the request|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|ids|[]string|True|The IDs of the investigations that were closed by the request|["6c7db8d1-abc5-b9da-dd71-1a3ffffe8a16"]|
+|num_closed|integer|True|The number of investigations closed by the request|10|
 
 Example output:
 
@@ -1432,9 +1443,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|events|[]events|True|Events from logs|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|events|[]events|True|Events from logs|[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": "false", "service": "ntlmssp ", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp ", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": False, "eventData": None, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]|
 
 Example output:
 
@@ -1491,9 +1502,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigation|investigation|True|The investigation for which the status was set|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigation|investigation|True|The investigation for which the status was set|{'assignee': {'email': 'user@example.com', 'name': 'Ellen Example'}, 'created_time': '2018-06-06T16:56:42Z', 'disposition': 'BENIGN', 'first_alert_time': '2018-06-06T16:56:42Z', 'last_accessed': '2018-06-06T16:56:42Z', 'latest_alert_time': '2018-06-06T16:56:42Z', 'organization_id': '174e4f99-2ac7-4481-9301-4d24c34baf06', 'priority': 'CRITICAL', 'rrn': 'rrn:example', 'source': 'ALERT', 'status': 'OPEN', 'title': 'Example Title'}|
 
 Example output:
 
@@ -1541,10 +1552,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigation|investigation|True|The investigation that was modified|
-|success|boolean|True|Was the user assigned successfully|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigation|investigation|True|The investigation that was modified|{'assignee': {'email': 'user@example.com', 'name': 'Ellen Example'}, 'created_time': '2018-06-06T16:56:42Z', 'disposition': 'BENIGN', 'first_alert_time': '2018-06-06T16:56:42Z', 'last_accessed': '2018-06-06T16:56:42Z', 'latest_alert_time': '2018-06-06T16:56:42Z', 'organization_id': '174e4f99-2ac7-4481-9301-4d24c34baf06', 'priority': 'CRITICAL', 'rrn': 'rrn:example', 'source': 'ALERT', 'status': 'OPEN', 'title': 'Example Title'}|
+|success|boolean|True|Was the user assigned successfully|True|
 
 Example output:
 
@@ -1611,10 +1622,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|rejected_indicators|[]string|False|The list of indicators that have been rejected during the update|
-|threat|threat|False|The information about the threat|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|rejected_indicators|[]string|False|The list of indicators that have been rejected during the update|["https://example.com", "https://test.com"]|
+|threat|threat|False|The information about the threat|{'name': 'Contributing Collaborative Threat: Flagged Malicious', 'published': False, 'indicator_count': 13}|
 
 Example output:
 
@@ -1678,10 +1689,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigations|[]investigation|True|A list of found investigations|
-|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|investigations|[]investigation|True|A list of found investigations|[{"assignee": {"email": "user@example.com", "name": "Ellen Example"}, "created_time": "2018-06-06T16:56:42Z", "disposition": "BENIGN", "first_alert_time": "2018-06-06T16:56:42Z", "last_accessed": "2018-06-06T16:56:42Z", "latest_alert_time": "2018-06-06T16:56:42Z", "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06", "priority": "CRITICAL", "rrn": "rrn:example", "source": "ALERT", "status": "OPEN", "title": "Example Title"}]|
+|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|{'index': 0, 'size': 1, 'total_data': 1, 'total_pages': 1}|
 
 Example output:
 
@@ -1729,6 +1740,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 5.0.1 - Update the endpoint `get_a_saved_query` reaches out to
 * 5.0.0 - Update `List Investigations` inputs
 * 4.4.1 - `List Alerts for Investigation`: fix issue with retrieving `detection_rule_rrn`   
 * 4.4.0 - `List Alerts for Investigation`: changed schema output for `detection_rule_rrn` 
