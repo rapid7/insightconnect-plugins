@@ -192,14 +192,14 @@ class Queries:
         return f"https://{Util.map_region(region_code)}.rest.logs.insight.rapid7.com/query/saved_queries"
 
     @staticmethod
-    def get_query_by_id(console_url: str, query_id: str) -> str:
+    def get_query_by_id(region_code: str, query_id: str) -> str:
         """
         URI for retrieving a query
-        :param console_url: URL to the InsightIDR console
+        :param region_code: The region code for the InsightIDR API to be mapped
         :param query_id: The ID of a query which is to be retrieved
         :return: pre-populated /query/saved_queries/{query_id}
         """
-        return f"{console_url}query/saved_queries/{query_id}"
+        return f"https://{Util.map_region(region_code)}.rest.logs.insight.rapid7.com/query/saved_queries/{query_id}"
 
 
 class Logs:
