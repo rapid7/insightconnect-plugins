@@ -1,6 +1,12 @@
-from unittest import TestCase
-import icon_carbon_black_cloud.util.whitelist_checker as whitelist_checker
+import os
+import sys
+
+sys.path.append(os.path.abspath("../"))
+
 import logging
+from unittest import TestCase
+
+import icon_carbon_black_cloud.util.whitelist_checker as whitelist_checker
 
 
 class TestWhitelistChecker(TestCase):
