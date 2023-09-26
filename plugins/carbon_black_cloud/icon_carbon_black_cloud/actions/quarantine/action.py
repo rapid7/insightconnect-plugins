@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import QuarantineInput, QuarantineOutput, Input, Output, Component
 
 # Custom imports below
-import icon_carbon_black_cloud.util.whitelist_checker as whitelist_checker
+from icon_carbon_black_cloud.util import whitelist_checker
 
 
 class Quarantine(insightconnect_plugin_runtime.Action):
@@ -15,8 +15,8 @@ class Quarantine(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        agent = params.get(Input.AGENT)
-        whitelist = params.get(Input.WHITELIST)
+        agent = params.get(Input.AGENT, "")
+        whitelist = params.get(Input.WHITELIST, [])
         quarantine_state = params.get(Input.QUARANTINE_STATE)
 
         if quarantine_state and whitelist_checker.match_whitelist(agent, whitelist, self.logger):
