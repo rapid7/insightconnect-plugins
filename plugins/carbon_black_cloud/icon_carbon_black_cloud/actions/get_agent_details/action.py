@@ -14,8 +14,6 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        agent = params[Input.AGENT]
-
+        agent = params.get(Input.AGENT, "")
         device = self.connection.get_agent(agent)
-
         return {Output.AGENT: insightconnect_plugin_runtime.helper.clean(device)}
