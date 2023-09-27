@@ -6,8 +6,6 @@ from .schema import MonitorLogsInput, MonitorLogsOutput, MonitorLogsState, Compo
 # Custom imports below
 from komand_duo_admin.util.exceptions import ApiException
 from datetime import datetime, timedelta, timezone
-from insightconnect_plugin_runtime.helper import convert_dict_to_camel_case
-from komand_duo_admin.util.helpers import clean, convert_fields_to_string
 from hashlib import sha1
 
 
@@ -182,7 +180,8 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         else:
             parameters = {}
         auth_logs = self.add_log_type_field(response.get("authlogs", []), "authentication")
-        return convert_fields_to_string(convert_dict_to_camel_case(clean(auth_logs))), parameters
+        return auth_logs, parameters
+
 
     def get_admin_logs(self, mintime: int, maxtime: int, next_page_params: dict) -> list:
         parameters = {"mintime": next_page_params.get("mintime") if next_page_params else str(mintime)}
@@ -200,7 +199,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 logs_to_return.append(log)
 
         admin_logs = self.add_log_type_field(logs_to_return, "administrator")
-        return convert_dict_to_camel_case(clean(admin_logs)), parameters
+        return admin_logs, parameters
 
     def get_trust_monitor_event(self, mintime: int, maxtime: int, next_page_params: dict) -> list:
         parameters = (
@@ -215,4 +214,4 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         else:
             parameters = {}
         trust_monitor_events = self.add_log_type_field(response.get("events", []), "trust_monitor_event")
-        return convert_dict_to_camel_case(clean(trust_monitor_events)), parameters
+        return trust_monitor_events, parameters
