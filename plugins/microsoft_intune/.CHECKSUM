@@ -1,31 +1,55 @@
 {
-	"spec": "0c7da6cea3f392de054c466c15366c4f",
-	"manifest": "ad9fe2609ed89d7682a17174496b79b6",
-	"setup": "f5420c56de200a420dd3d2887049fe92",
+	"spec": "a9004e2809b64288cc88811c39b568fd",
+	"manifest": "e2eefa466dae9c8e93178b8fe3b684e5",
+	"setup": "eab3f4234382f1c05af67e49f70c84a5",
 	"schemas": [
 		{
 			"identifier": "antivirus_scan/schema.py",
-			"hash": "13ec3c94a55380e9466c3dd6a51d795b"
+			"hash": "758767bdf0354dc0ba3699ed69d4368c"
+		},
+		{
+			"identifier": "delete_device_from_autopilot/schema.py",
+			"hash": "6eb8d48796af31e961a7d1accb4fb094"
+		},
+		{
+			"identifier": "delete_device_from_intune/schema.py",
+			"hash": "a88b17b857e78922f8c2420d35614771"
+		},
+		{
+			"identifier": "full_scan/schema.py",
+			"hash": "36ca7c242e1416168aa5f90d36177f1d"
+		},
+		{
+			"identifier": "get_autopilot_device/schema.py",
+			"hash": "5711e374ba7cd2c9e8179d4b2f55cbe8"
+		},
+		{
+			"identifier": "get_device/schema.py",
+			"hash": "75918f1bbdcf3604402e95e16644ac44"
 		},
 		{
 			"identifier": "get_managed_apps/schema.py",
-			"hash": "89e46df0faabf37d9b4d29312eaf00da"
+			"hash": "39d6a6112c5d35ed3e1212732756001b"
 		},
 		{
 			"identifier": "manage_device/schema.py",
-			"hash": "92de89bbf3f69a44d190ac8485764572"
+			"hash": "09bb276cbd1110406f5e51a7292f1545"
+		},
+		{
+			"identifier": "quick_scan/schema.py",
+			"hash": "73c7ef17cf5d7ae67648251222975717"
 		},
 		{
 			"identifier": "search_devices/schema.py",
-			"hash": "5b241bcc16dfba65ac53d35181f64e81"
+			"hash": "8653e78c08443ea31a0e5f98832f7b1d"
 		},
 		{
 			"identifier": "wipe/schema.py",
-			"hash": "7d7cc20f5f027b8f7427bd22b498010c"
+			"hash": "9ae7bf200965391860e53956429c02e3"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "c3aedbdb3d2fbf860fabe4ffaab041b4"
+			"hash": "403937909846549cbcde68bf0ebeb41a"
 		}
 	]
 }

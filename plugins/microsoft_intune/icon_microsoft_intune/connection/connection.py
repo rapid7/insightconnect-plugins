@@ -14,13 +14,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
-        url = params.get(Input.URL).rstrip("/")
+        url = "https://graph.microsoft.com"
         self.api = MicrosoftIntuneAPI(
-            username=params.get(Input.CREDENTIALS).get("username"),
-            password=params.get(Input.CREDENTIALS).get("password"),
-            client_id=params.get(Input.CLIENT_ID),
-            client_secret=params.get(Input.CLIENT_SECRET),
-            tenant_id=params.get(Input.TENANT_ID),
+            username=params.get(Input.CREDENTIALS, {}).get("username"),
+            password=params.get(Input.CREDENTIALS, {}).get("password"),
+            client_id=params.get(Input.CLIENTID),
+            client_secret=params.get(Input.CLIENTSECRET, {}).get("secretKey"),
+            tenant_id=params.get(Input.TENANTID),
             api_url=f"{url}/v1.0/",
             logger=self.logger,
         )
@@ -28,13 +28,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.api.refresh_access_token()
 
     def test(self):
-        self.logger.info("Starting connection test:")
-
+        self.logger.info("Starting the connection test.")
         try:
             self.api.search_managed_devices("nonexistinguser@example.com")
-        except PluginException as e:
-            raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e)
-
-        self.logger.info("Successfully finished connection testing:")
-
-        return {}
+            self.logger.info("The connection test completed successfully.")
+            return {"success": True}
+        except PluginException as error:
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)

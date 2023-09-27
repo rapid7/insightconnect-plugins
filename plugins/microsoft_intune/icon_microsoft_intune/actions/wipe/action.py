@@ -16,9 +16,7 @@ class Wipe(insightconnect_plugin_runtime.Action):
         )
 
         if device:
-            self.connection.api.wipe_managed_device(device["id"])
+            return {Output.SUCCESS: self.connection.api.wipe_managed_device(device.get("id"))}
 
-            return {Output.SUCCESS: True}
-
-        self.logger.info(f"Managed device: {params.get(Input.DEVICE)} was not wiped because it was whitelisted")
+        self.logger.info(f"Managed device '{params.get(Input.DEVICE)}' was not wiped because it was whitelisted.")
         return {Output.SUCCESS: False}

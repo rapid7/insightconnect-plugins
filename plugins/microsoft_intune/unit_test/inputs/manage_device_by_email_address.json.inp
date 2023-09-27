@@ -1,0 +1,5 @@
+{
+  "device": "user@example.com",
+  "type": "Sync",
+  "whitelist": []
+}
