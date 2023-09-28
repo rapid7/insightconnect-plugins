@@ -11,9 +11,9 @@ supported_versions: ["Duo Admin API 2023-05-19"]
 sdk:
   type: full
   version: 5
-  user: root
+  user: nobody
 description: Duo is a trusted access solution for organizations. The Duo Admin plugin for Rapid7 InsightConnect allows users to manage and administrate their Duo organization
-version: 4.1.1
+version: 4.2.0
 connection_version: 4
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/duo_admin
@@ -657,13 +657,13 @@ types:
       required: false
       example: country
   log:
-    accessDevice:
+    access_device:
       title: Access Device
       description: Browser, plugin, and operating system information for the endpoint used to access the Duo-protected resource. Values present only when the application accessed features Duo's inline browser prompt
       type: accessDevice
       required: false
       example: {}
-    adaptiveTrustAssessments:
+    adaptive_trust_assessments:
       title: Adaptive Trust Assessments
       description: Risk-based authentication information. Values present only when the application accessed features Duo's inline browser prompt and has a Duo Risk-Based Authentication policy applied
       type: adaptiveTrustAssessments
@@ -681,7 +681,7 @@ types:
       type: keyNamePair
       required: false
       example: {}
-    authDevice:
+    auth_device:
       title: Auth Device
       description: Information about the device used to approve or deny authentication
       type: authDevice
@@ -693,7 +693,7 @@ types:
       type: string
       required: false
       example: user@example.com
-    eventType:
+    event_type:
       title: Event Type
       description: The type of activity logged
       type: string
@@ -711,13 +711,13 @@ types:
       type: string
       required: false
       example: 2020-02-13T18:56:20.351346+00:00
-    logType:
+    log_type:
       title: Log Type
       description: Type of the log
       type: string
       required: false
       example: auth
-    oodSoftware:
+    ood_software:
       title: OOD Software
       description: If authentication was denied due to out-of-date software, shows the name of the software
       type: string
@@ -777,19 +777,19 @@ types:
       type: string
       required: false
       example: admin
-    bypassStatusEnabled:
+    bypass_status_enabled:
       title: Bypass Status Enabled
       description: An integer indicating the Unix timestamp in milliseconds when bypass status was enabled for the user or group
       type: integer
       required: false
       example: 1604337058989
-    enabledBy:
+    enabled_by:
       title: Enabled By
       description: The application or the administrator that enabled bypass status
       type: keyNamePair
       required: false
       example: {}
-    enabledFor:
+    enabled_for:
       title: Enabled For
       description: The user or group with bypass status
       type: keyNamePair
@@ -801,31 +801,31 @@ types:
       type: "[]explanation"
       required: false
       example: []
-    fromCommonNetblock:
+    from_common_netblock:
       title: From Common Netblock
       description: A boolean describing if this event was created from a common IP netblock
       type: boolean
       required: false
       example: true
-    fromNewUser:
+    from_new_user:
       title: From New User
       description: A boolean describing if this event was created for a new user
       type: boolean
       required: false
       example: false
-    lowRiskIp:
+    low_risk_ip:
       title: Low Risk IP
       description: A boolean describing if this event was created from an IP address identified in the Risk Profile configuration as a low risk IP address
       type: boolean
       required: false
       example: false
-    priorityEvent:
+    priority_event:
       title: Priority Event
       description: A boolean describing if the event matches the Risk Profile configuration
       type: boolean
       required: false
       example: false
-    priorityReasons:
+    priority_reasons:
       title: Priority Reasons
       description: An array of objects describing how the event matches the Trust Monitor Risk Profile configuration
       type: "[]priorityReason"
@@ -843,31 +843,31 @@ types:
       type: string
       required: false
       example: new
-    stateUpdatedTimestamp:
+    state_updated_timestamp:
       title: State Updated Timestamp
       description: An integer indicating the Unix timestamp in milliseconds of the last change to the state of the event
       type: integer
       required: false
       example: 1675893605269
-    surfacedAuth:
+    surfaced_auth:
       title: Surfaced Auth
       description: An object which represents the actual authentication
       type: authLog
       required: false
       example: {}
-    surfacedTimestamp:
+    surfaced_timestamp:
       title: Surfaced Timestamp
       description: An integer indicating the Unix timestamp in milliseconds when the event was surfaced by Trust Monitor
       type: integer
       required: false
       example: 1675893605269
-    triagedAsInteresting:
+    triaged_as_interesting:
       title: Triaged As Interesting
       description: A boolean describing if this event was triaged as being interesting or not interesting
       type: boolean
       required: false
       example: false
-    triageEventUri:
+    triage_event_uri:
       title: Triage Event URI
       description: A string representing the URI of the security event, which a Duo administrator can use to view and process the surfaced event in the Duo Admin Panel
       type: string
@@ -1271,6 +1271,6 @@ tasks:
       logs:
         title: Logs
         description: List of administrator, authentication and trust monitor event logs within the specified time range
-        type: "[]log"
+        type: "[]object"
         required: true
         example: []
