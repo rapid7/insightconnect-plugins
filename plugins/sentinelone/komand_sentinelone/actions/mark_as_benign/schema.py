@@ -8,9 +8,9 @@ class Component:
 
 
 class Input:
-    TARGET_SCOPE = "target_scope"
-    THREAT_ID = "threat_id"
-    WHITENING_OPTION = "whitening_option"
+    TARGETSCOPE = "targetScope"
+    THREATID = "threatId"
+    WHITENINGOPTION = "whiteningOption"
     
 
 class Output:
@@ -23,24 +23,25 @@ class MarkAsBenignInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "target_scope": {
+    "targetScope": {
       "type": "string",
       "title": "Target Scope",
       "description": "Scope to be used for exclusions",
       "enum": [
         "group",
         "site",
-        "tenant"
+        "tenant",
+        "account"
       ],
       "order": 2
     },
-    "threat_id": {
+    "threatId": {
       "type": "string",
       "title": "Threat ID",
       "description": "ID of a threat",
       "order": 1
     },
-    "whitening_option": {
+    "whiteningOption": {
       "type": "string",
       "title": "Whitening Option",
       "description": "Selected whitening option",
@@ -56,8 +57,8 @@ class MarkAsBenignInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "target_scope",
-    "threat_id"
+    "targetScope",
+    "threatId"
   ]
 }
     """)

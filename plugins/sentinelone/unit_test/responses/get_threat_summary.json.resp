@@ -1,0 +1,197 @@
+{
+  "data": [
+    {
+      "accountId": "433241117337583618",
+      "accountName": "SentinelOne",
+      "agentComputerName": "so-agent-win12",
+      "agentDomain": "WORKGROUP",
+      "agentId": "901345720792880606",
+      "agentInfected": false,
+      "agentIp": "128.177.65.3",
+      "agentIsActive": false,
+      "agentIsDecommissioned": true,
+      "agentMachineType": "server",
+      "agentNetworkStatus": "connected",
+      "agentOsType": "windows",
+      "agentVersion": "4.1.4.82",
+      "annotation": "Automatically resolved by Sentinel One Console",
+      "automaticallyResolved": true,
+      "browserType": null,
+      "certId": "",
+      "classification": "Trojan",
+      "classificationSource": "Cloud",
+      "classifierName": "STATIC",
+      "cloudVerdict": "black",
+      "collectionId": "939037052510055221",
+      "commandId": null,
+      "createdAt": "2020-07-19T14:58:59.887405Z",
+      "createdDate": "2020-07-19T14:58:59.510000Z",
+      "description": "malware detected - not mitigated yet (static engine)",
+      "engines": [
+        "pre_execution"
+      ],
+      "external_ticket_id": null,
+      "fileContentHash": "a2138f21ea96d97ce00cd51971696f7464e5db89",
+      "fileCreatedDate": null,
+      "fileDisplayName": "test.txt",
+      "fileExtensionType": "Document",
+      "fileIsDotNet": null,
+      "fileIsExecutable": false,
+      "fileIsSystem": false,
+      "fileMaliciousContent": null,
+      "fileObjectId": "8592DBE5FEF3657C",
+      "filePath": "\\\\Device\\\\HarddiskVolume2\\\\Users\\\\Administrator\\\\Desktop\\\\test.txt",
+      "fileSha256": null,
+      "fileVerificationType": "NotSigned",
+      "fromCloud": false,
+      "fromScan": false,
+      "id": "939037052484889396",
+      "indicators": [
+        1,
+        29,
+        24
+      ],
+      "initiatedBy": "agentPolicy",
+      "initiatedByDescription": "Agent Policy",
+      "initiatingUserId": null,
+      "isCertValid": false,
+      "isInteractiveSession": false,
+      "isPartialStory": false,
+      "maliciousGroupId": "9C6126D2F1DA1797",
+      "maliciousProcessArguments": null,
+      "markedAsBenign": false,
+      "mitigationMode": "protect",
+      "mitigationReport": {
+        "kill": {
+          "status": "success"
+        },
+        "network_quarantine": {
+          "status": null
+        },
+        "quarantine": {
+          "status": "success"
+        },
+        "remediate": {
+          "status": null
+        },
+        "rollback": {
+          "status": null
+        },
+        "unquarantine": {
+          "status": null
+        }
+      },
+      "mitigationStatus": "mitigated",
+      "publisher": "",
+      "rank": 7,
+      "resolved": true,
+      "siteId": "521580416395045459",
+      "siteName": "Rapid7",
+      "threatAgentVersion": "4.1.4.82",
+      "threatName": "test.txt",
+      "updatedAt": "2021-06-29T15:21:15.555617Z",
+      "username": "",
+      "whiteningOptions": [
+        "path",
+        "hash"
+      ]
+    },
+    {
+      "accountId": "433241117337583618",
+      "accountName": "SentinelOne",
+      "agentComputerName": "so-agent-win12",
+      "agentDomain": "WORKGROUP",
+      "agentId": "901345720792880606",
+      "agentInfected": false,
+      "agentIp": "128.177.65.3",
+      "agentIsActive": false,
+      "agentIsDecommissioned": true,
+      "agentMachineType": "server",
+      "agentNetworkStatus": "connected",
+      "agentOsType": "windows",
+      "agentVersion": "4.1.4.82",
+      "annotation": "Automatically resolved by Sentinel One Console",
+      "automaticallyResolved": true,
+      "browserType": null,
+      "certId": "",
+      "classification": "Trojan",
+      "classificationSource": "Cloud",
+      "classifierName": "STATIC",
+      "cloudVerdict": "black",
+      "collectionId": "939037052510055221",
+      "commandId": null,
+      "createdAt": "2020-07-19T14:59:24.127274Z",
+      "createdDate": "2020-07-19T14:59:23.922000Z",
+      "description": "malware detected - not mitigated yet (static engine)",
+      "engines": [
+        "pre_execution"
+      ],
+      "external_ticket_id": null,
+      "fileContentHash": "a2138f21ea96d97ce00cd51971696f7464e5db89",
+      "fileCreatedDate": null,
+      "fileDisplayName": "test.txt",
+      "fileExtensionType": "Document",
+      "fileIsDotNet": null,
+      "fileIsExecutable": false,
+      "fileIsSystem": false,
+      "fileMaliciousContent": null,
+      "fileObjectId": "3BD06AF29546C6A0",
+      "filePath": "\\\\Device\\\\HarddiskVolume2\\\\Users\\\\Administrator\\\\Desktop\\\\test.txt",
+      "fileSha256": null,
+      "fileVerificationType": "NotSigned",
+      "fromCloud": false,
+      "fromScan": false,
+      "id": "939037255816358744",
+      "indicators": [
+        1,
+        29,
+        24
+      ],
+      "initiatedBy": "agentPolicy",
+      "initiatedByDescription": "Agent Policy",
+      "initiatingUserId": null,
+      "isCertValid": false,
+      "isInteractiveSession": false,
+      "isPartialStory": false,
+      "maliciousGroupId": "32269598483447D3",
+      "maliciousProcessArguments": null,
+      "markedAsBenign": false,
+      "mitigationMode": "protect",
+      "mitigationReport": {
+        "kill": {
+          "status": "success"
+        },
+        "network_quarantine": {
+          "status": null
+        },
+        "quarantine": {
+          "status": "success"
+        },
+        "remediate": {
+          "status": null
+        },
+        "rollback": {
+          "status": null
+        },
+        "unquarantine": {
+          "status": null
+        }
+      },
+      "mitigationStatus": "mitigated",
+      "publisher": "",
+      "rank": 7,
+      "resolved": true,
+      "siteId": "521580416395045459",
+      "siteName": "Rapid7",
+      "threatAgentVersion": "4.1.4.82",
+      "threatName": "test.txt",
+      "updatedAt": "2021-06-29T15:21:15.486908Z",
+      "username": "",
+      "whiteningOptions": [
+        "path",
+        "hash"
+      ]
+    }
+  ],
+  "pagination": {"totalItems": 200}
+}

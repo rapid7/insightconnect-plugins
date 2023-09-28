@@ -32,7 +32,7 @@ class ThreatsFetchFileInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Password",
       "displayType": "password",
-      "description": "File encryption password, min. length 10 characters and cannot contain whitespace",
+      "description": "File encryption password. The password cannot contain whitespace and must be 10 or more characters with a mix of upper and lower case letters, numbers, and symbols",
       "format": "password",
       "order": 2
     }

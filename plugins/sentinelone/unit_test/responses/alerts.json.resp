@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "id": "1111-1111-11111111-1111",
+      "status": "active"
+    }
+  ],
+  "pagination": {
+    "nextCursor": null,
+    "totalItems": 1
+  }
+}

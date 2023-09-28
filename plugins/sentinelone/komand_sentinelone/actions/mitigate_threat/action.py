@@ -14,8 +14,5 @@ class MitigateThreat(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        threat_id = params.get(Input.THREAT_ID)
-        action = params.get(Input.ACTION)
-
-        affected = self.connection.mitigate_threat(threat_id, action)
-        return {Output.AFFECTED: affected}
+        response = self.connection.client.mitigate_threat(params.get(Input.THREATID), params.get(Input.ACTION))
+        return {Output.AFFECTED: response.get("data", {}).get("affected", 0)}

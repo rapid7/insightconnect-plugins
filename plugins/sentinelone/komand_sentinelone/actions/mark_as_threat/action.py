@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import MarkAsThreatInput, MarkAsThreatOutput, Input, Output
+from .schema import MarkAsThreatInput, MarkAsThreatOutput, Input, Output, Component
 
 # Custom imports below
 
@@ -8,17 +8,13 @@ class MarkAsThreat(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="mark_as_threat",
-            description="Mark suspicious threat as threat",
+            description=Component.DESCRIPTION,
             input=MarkAsThreatInput(),
             output=MarkAsThreatOutput(),
         )
 
     def run(self, params={}):
-        threat_id = params.get(Input.THREAT_ID)
-        whitening_option = params.get(Input.WHITENING_OPTION)
-        target_scope = params.get(Input.TARGET_SCOPE)
-
-        whitening_option = whitening_option or None
-
-        affected = self.connection.mark_as_threat(threat_id, whitening_option, target_scope)
-        return {Output.AFFECTED: affected}
+        response = self.connection.client.mark_as_threat(
+            params.get(Input.THREATID), params.get(Input.WHITENINGOPTION) or None, params.get(Input.TARGETSCOPE)
+        )
+        return {Output.AFFECTED: response.get("data", {}).get("affected", 0)}

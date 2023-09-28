@@ -1,7 +1,8 @@
 import insightconnect_plugin_runtime
-from .schema import ActivitiesTypesInput, ActivitiesTypesOutput, Input, Output, Component
+from .schema import ActivitiesTypesInput, ActivitiesTypesOutput, Output, Component
 
 # Custom imports below
+from komand_sentinelone.util.helper import clean
 
 
 class ActivitiesTypes(insightconnect_plugin_runtime.Action):
@@ -14,11 +15,4 @@ class ActivitiesTypes(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        response = self.connection.activities_types()
-
-        data = []
-        if "data" in response:
-            for i in response.get("data"):
-                data.append(insightconnect_plugin_runtime.helper.clean_dict(i))
-
-        return {Output.ACTIVITY_TYPES: data}
+        return {Output.ACTIVITYTYPES: clean(self.connection.client.get_activity_types().get("data", []))}

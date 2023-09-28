@@ -56,7 +56,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.url = self.url + "/"
 
         self.token, self.api_version = self.get_auth_token()
-        self.client = SentineloneAPI(self.url, self.make_token_header())
+        self.client = SentineloneAPI(
+            self.url,
+            self.make_token_header(),
+            params.get(Input.API_KEY, {}).get("secretKey"),
+            params.get(Input.USER_TYPE),
+            self.logger,
+        )
         self.logger.info("Token: " + "*************" + str(self.token[len(self.token) - 5 : len(self.token)]))
 
     @staticmethod
@@ -138,45 +144,14 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def activities_list(self, parameters):
         return self._call_api("GET", "activities", None, parameters)
 
-    def name_available(self, name):
-        return self._call_api("GET", "private/accounts/name-available", None, {"name": name})
-
-    def activities_types(self):
-        return self._call_api("GET", "activities/types")
-
     def ad_settings(self, parameters):
         return self._call_api("GET", "settings/active-directory", None, parameters)
 
     def agent_info(self, identifier: str):
         return self._call_api("GET", "settings/active-directory", None, {"id": identifier})
 
-    def apps_by_agent_ids(self, identifiers: str):
-        return self._call_api("GET", "agents/applications", None, {"ids": identifiers})
-
-    def agents_summary(self, site_ids, account_ids):
-        return self._call_api(
-            "GET",
-            "private/agents/summary",
-            None,
-            {"siteIds": site_ids, "accountIds": account_ids},
-        )
-
     def agents_action(self, action: str, agents_filter: str):
         return self._call_api("POST", f"agents/actions/{action}", {"filter": agents_filter})
-
-    def fetch_file_by_agent_id(self, agent_id: str, file_path: str, password: str):
-        response = self._call_api(
-            "POST", f"agents/{agent_id}/actions/fetch-files", {"data": {"password": password, "files": [file_path]}}
-        )
-        if len(response.get("errors", [])) == 0:
-            return True
-
-        errors = "\n".join(response.get("errors"))
-        raise PluginException(
-            cause="An error occurred when trying to fetch file.",
-            assistance="Check the error information and adjust inputs accordingly",
-            data=errors,
-        )
 
     def run_remote_script(self, user_filter: dict, data: dict) -> dict:
         endpoint = "remote-scripts/execute"
@@ -199,61 +174,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
             data=errors,
         )
 
-    def download_file(self, agent_filter: dict, password: str):
-        self.get_auth_token()
-        agent_filter["activityTypes"] = 86
-        agent_filter["sortBy"] = "createdAt"
-        agent_filter["sortOrder"] = "desc"
-        activities = self.activities_list(agent_filter)
-        while not activities["data"]:
-            self.logger.info("Waiting 5 seconds for successful threat file upload...")
-            time.sleep(5)
-            activities = self.activities_list(agent_filter)
-        self.get_auth_token()
-        response = self._call_api("GET", activities["data"][0]["data"]["filePath"][1:], full_response=True)
-        try:
-            file_name = activities["data"][-1]["data"]["fileDisplayName"]
-            with zipfile.ZipFile(io.BytesIO(response.content)) as downloaded_zipfile:
-                downloaded_zipfile.setpassword(password.encode("UTF-8"))
-
-                return {
-                    "filename": file_name,
-                    "content": base64.b64encode(downloaded_zipfile.read(downloaded_zipfile.infolist()[-1])).decode(
-                        "utf-8"
-                    ),
-                }
-        except KeyError:
-            raise PluginException(
-                cause="An error occurred when trying to download file.",
-                assistance="Please contact support or try again later.",
-            )
-
-    def threats_fetch_file(self, password: str, agents_filter: dict) -> int:
-        self.get_auth_token()
-        return self._call_api("POST", "threats/fetch-file", {"data": {"password": password}, "filter": agents_filter})
-
     def agents_support_action(self, action: str, agents_filter: str, module: str):
         return self._call_api(
             "POST", f"private/agents/support-actions/{action}", {"filter": agents_filter, "data": {"module": module}}
         )
-
-    def get_threat_summary(self, limit: int = 1000):
-        first_page_endpoint = f"threats?limit={limit}"
-
-        # API v2.0 and 2.1 have different responses -- revert to 2.0
-        threats = self._call_api("GET", first_page_endpoint, override_api_version="2.0")
-        all_threads_data = threats["data"]
-        next_cursor = threats.get("pagination", {}).get("nextCursor")
-
-        while next_cursor:
-            next_threats = self._call_api(
-                "GET", f"{first_page_endpoint}&cursor={next_cursor}", override_api_version="2.0"
-            )
-            all_threads_data += next_threats["data"]
-            next_cursor = next_threats["pagination"]["nextCursor"]
-
-        threats["data"] = all_threads_data
-        return threats
 
     def blacklist_by_content_hash(self, hash_value: str):
         endpoint = f"{self.url}web/api/v{self.api_version}/threats/add-to-blacklist"
@@ -284,28 +208,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         response = self._call_api("POST", "private/threats/ioc-create-threats", body, full_response=True)
 
         return response.json()["data"]["affected"]
-
-    def mitigate_threat(self, threat_id, action):
-        body = {"filter": {"ids": [threat_id]}}
-        action_url = "threats/mitigate/" + action
-        return self._call_api("POST", action_url, body)["data"]["affected"]
-
-    def mark_as_benign(self, threat_id, whitening_option, target_scope):
-        body = {
-            "filter": {"ids": [threat_id]},
-            "data": {"whiteningOption": whitening_option, "targetScope": target_scope},
-        }
-        # Mark as threat does not exist in v2.1
-        return self._call_api("POST", "threats/mark-as-benign", body, override_api_version="2.0")["data"]["affected"]
-
-    def mark_as_threat(self, threat_id, whitening_option, target_scope):
-        body = {
-            "filter": {"ids": [threat_id]},
-            "data": {"whiteningOption": whitening_option, "targetScope": target_scope},
-        }
-
-        # Mark as threat does not exist in v2.1
-        return self._call_api("POST", "threats/mark-as-threat", body, override_api_version="2.0")["data"]["affected"]
 
     def get_threats(self, params: dict, api_version: str = "2.0") -> dict:
         # GET /threats has different response schemas for 2.1 and 2.0
@@ -402,15 +304,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return self._call_api(
             "POST", "agents/actions/enable-agent", json={"data": {"shouldReboot": reboot}, "filter": agent_filter}
         )
-
-    def create_query(self, payload: dict) -> dict:
-        return self._call_api("POST", "dv/init-query", json=payload)
-
-    def cancel_running_query(self, query_id: str) -> dict:
-        return self._call_api("POST", "dv/cancel-query", json={"queryId": query_id})
-
-    def get_query_status(self, query_id: str) -> dict:
-        return self._call_api("GET", "dv/query-status", params={"queryId": query_id})
 
     def get_events(self, params: dict, get_all_results: bool, event_type: str = None) -> dict:
         endpoint = "dv/events"

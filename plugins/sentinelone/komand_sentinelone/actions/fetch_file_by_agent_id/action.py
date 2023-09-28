@@ -1,6 +1,5 @@
 import insightconnect_plugin_runtime
 from .schema import FetchFileByAgentIdInput, FetchFileByAgentIdOutput, Input, Output, Component
-from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_sentinelone.util.helper import check_password_meets_requirements
 
 # Custom imports below
@@ -16,13 +15,11 @@ class FetchFileByAgentId(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        agent_id = params.get(Input.AGENT_ID)
-        password = params.get(Input.PASSWORD, "")
-        file_path = params.get(Input.FILE_PATH, "")
+        password = params.get(Input.PASSWORD)
+        check_password_meets_requirements(password)
 
-        if password:
-            check_password_meets_requirements(password)
-
-        response = self.connection.fetch_file_by_agent_id(agent_id, file_path, password)
-
-        return {Output.SUCCESS: response}
+        return {
+            Output.SUCCESS: self.connection.client.fetch_file_by_agent_id(
+                params.get(Input.AGENTID), params.get(Input.FILEPATH), password
+            )
+        }

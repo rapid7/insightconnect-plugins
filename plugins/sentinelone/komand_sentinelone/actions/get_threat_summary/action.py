@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
-from .schema import GetThreatSummaryInput, GetThreatSummaryOutput
+from .schema import GetThreatSummaryInput, GetThreatSummaryOutput, Output
+from komand_sentinelone.util.helper import clean
 
 # Custom imports below
 
@@ -14,6 +15,10 @@ class GetThreatSummary(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        self.logger.info("Starting step")
-        threats = self.connection.get_threat_summary()
-        return insightconnect_plugin_runtime.helper.clean(threats)
+        response = self.connection.client.get_threat_summary()
+
+        return {
+            Output.DATA: clean(response.get("data", [])),
+            Output.PAGINATION: clean(response.get("pagination")),
+            **clean({Output.ERRORS: response.get("errors")}),
+        }

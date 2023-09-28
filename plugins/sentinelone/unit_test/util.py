@@ -1,15 +1,12 @@
 import sys
 import os
-
-sys.path.append(os.path.abspath("../"))
-
-
-from komand_sentinelone.connection.connection import Connection
-from requests.exceptions import HTTPError
 import json
 import logging
 
-from insightconnect_plugin_runtime.exceptions import PluginException
+sys.path.append(os.path.abspath("../"))
+
+from requests.exceptions import HTTPError
+from komand_sentinelone.connection.connection import Connection
 from komand_sentinelone.connection.schema import Input
 from komand_sentinelone.util.constants import CONSOLE_USER_TYPE
 
@@ -35,9 +32,20 @@ class Util:
         return action
 
     @staticmethod
-    def read_file_to_string(filename):
-        with open(filename) as my_file:
-            return my_file.read()
+    def read_file_to_string(filename: str) -> str:
+        with open(
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), filename), "r", encoding="utf-8"
+        ) as file_reader:
+            return file_reader.read()
+
+    @staticmethod
+    def read_file_to_bytes(filename: str) -> bytes:
+        with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), filename), "rb") as file_reader:
+            return file_reader.read()
+
+    @staticmethod
+    def read_file_to_dict(filename: str) -> dict:
+        return json.loads(Util.read_file_to_string(filename))
 
     @staticmethod
     def mocked_requests_get(*args, **kwargs):
@@ -55,7 +63,9 @@ class Util:
 
                 return json.loads(
                     Util.read_file_to_string(
-                        os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp")
+                        os.path.join(
+                            os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp"
+                        )
                     )
                 )
 
@@ -64,6 +74,9 @@ class Util:
                     return
 
                 raise HTTPError("Bad response", response=self)
+
+        params = kwargs.get("params")
+        json_data = kwargs.get("json")
 
         if args[0] == "https://rapid7.com/web/api/v2.1/users/login/by-api-token":
             return MockResponse("get_token", 200)
@@ -108,7 +121,6 @@ class Util:
             or args[1] == "https://rapid7.com/web/api/v2.1/agents/actions/shutdown"
             or args[1] == "https://rapid7.com/web/api/v2.1/agents/actions/uninstall"
             or args[1] == "https://rapid7.com/web/api/v2.1/private/threats/ioc-create-threats"
-            or args[1] == "https://rapid7.com/web/api/v2.0/threats/mark-as-benign"
             or args[1] == "https://rapid7.com/web/api/v2.0/threats/mark-as-threat"
             or args[1] == "https://rapid7.com/web/api/v2.1/threats/mitigate/rollback-remediation"
             or args[1] == "https://rapid7.com/web/api/v2.1/threats/mitigate/quarantine"
@@ -116,20 +128,82 @@ class Util:
             or args[1] == "https://rapid7.com/web/api/v2.1/threats/mitigate/remediate"
             or args[1] == "https://rapid7.com/web/api/v2.1/threats/mitigate/un-quarantine"
         ):
+            if kwargs.get("json", {}).get("filter", {}).get("ids") == ["XYZABC"]:
+                return MockResponse("", 400)
             return MockResponse("agents_action", 200)
         elif args[1] == "https://rapid7.com/web/api/v2.1/private/agents/support-actions/reload":
             return MockResponse("agents_action", 200)
         elif args[1] == "https://rapid7.com/web/api/v2.1/private/agents/summary":
-            return MockResponse("agents_summary", 200)
+            if params in [
+                {},
+                {"siteIds": "1234567890987654321"},
+                {"siteIds": "1234567890987654321,1234567890987654322"},
+                {"accountIds": "1234567890987654321"},
+                {"accountIds": "1234567890987654321,1234567890987654321"},
+                {"siteIds": "1234567890987654321", "accountIds": "1234567890987654321"},
+            ]:
+                return MockResponse("agents_summary", 200)
+        elif args[1] == "https://rapid7.com/web/api/v2.1/dv/query-status":
+            if params == {"queryId": "q9679169d5a4607cc41a9100123456789"}:
+                return MockResponse("get_query_status", 200)
+            if params == {"queryId": "q9679169d5a4607cc41a9100987654321"}:
+                return MockResponse("error", 404)
+        elif args[1] == "https://rapid7.com/web/api/v2.1/dv/cancel-query":
+            if json_data == {"queryId": "q9679169d5a4607cc41a9100123456789"}:
+                return MockResponse("cancel_running_query", 200)
+            if json_data == {"queryId": "q9679169d5a4607cc41a9100987654321"}:
+                return MockResponse("cancel_running_query", 404)
+        elif args[1] == "https://rapid7.com/web/api/v2.1/dv/init-query":
+            if json_data == {
+                "accountIds": ["1234567890"],
+                "fromDate": "2023-09-20T04:49:26.257525Z",
+                "groupIds": ["1234567890"],
+                "isVerbose": True,
+                "limit": 20000,
+                "query": "AgentName IS NOT EMPTY",
+                "queryType": ["events"],
+                "siteIds": ["1234567890"],
+                "tenant": True,
+                "toDate": "2023-09-21T20:49:26.257525Z",
+            }:
+                return MockResponse("create_query", 200)
+            if json_data == {
+                "fromDate": "2023-09-20T04:49:26.257525Z",
+                "isVerbose": False,
+                "limit": 100,
+                "query": "AgentName IS NOT EMPTY",
+                "tenant": False,
+                "toDate": "2023-09-21T20:49:26.257525Z",
+            }:
+                return MockResponse("create_query", 200)
+            if json_data == {
+                "fromDate": "2023-09-20T04:49:26.257525Z",
+                "limit": 100,
+                "query": "AgentName IS NOT EMPTY",
+                "toDate": "2023-09-21T20:49:26.257525Z",
+            }:
+                return MockResponse("create_query", 200)
+            if json_data == {
+                "fromDate": "2023-09-20T04:49:26.257525Z",
+                "limit": 100,
+                "query": "AgentName IS NOT EMPTYY",
+                "toDate": "2023-09-21T20:49:26.257525Z",
+            }:
+                return MockResponse("error", 400)
         elif args[1] == "https://rapid7.com/web/api/v2.1/agents/applications":
-            return MockResponse("apps_by_agent_ids", 200)
+            return MockResponse("apps_by_agent_ids_success", 200)
         elif args[1] == "https://rapid7.com/web/api/v2.1/sites":
             return MockResponse("sites", 200)
         elif args[1] == "https://rapid7.com/web/api/v2.1/restrictions":
             return MockResponse("restrictions", 200)
-        elif args[1] == "https://rapid7.com/web/api/v2.0/threats?limit=1000":
-            return MockResponse("restrictions", 200)
+        elif args[1] == "https://rapid7.com/web/api/v2.0/threats" and params.get("limit") == 1000:
+            if params.get("cursor") == "abcd":
+                return MockResponse("get_threat_summary_page_2", 200)
+            else:
+                return MockResponse("get_threat_summary_page_1", 200)
         elif args[1] == "https://rapid7.com/web/api/v2.1/private/accounts/name-available":
+            if "NotAvailableName" in params.get("name"):
+                return MockResponse("name_not_available", 200)
             return MockResponse("name_available", 200)
         elif args[1] == "https://rapid7.com/web/api/v2.1/threats" and kwargs.get("params", {}).get("ids") == [
             "same_status_threat_id_1"
@@ -184,4 +258,27 @@ class Util:
             return MockResponse("affected_1", 200)
         elif args[1] == "https://rapid7.com/web/api/v2.0/threats":
             return MockResponse("threats", 200)
+        elif args[1] == "https://rapid7.com/web/api/v2.1/agents/invalid_id/actions/fetch-files":
+            return MockResponse("", 404)
+        elif args[1] == "https://rapid7.com/web/api/v2.1/agents/1234567890/actions/fetch-files":
+            return MockResponse("fetch_file_by_agent_id_success", 200)
+        elif args[1] == "https://rapid7.com/web/api/v2.0/threats/mark-as-benign":
+            if json_data.get("filter", {}).get("ids") == ["12345678"] and not json_data.get("data", {}).get(
+                "whiteningOption"
+            ):
+                return MockResponse("mark_as_benign_success", 200)
+            elif json_data.get("filter", {}).get("ids") == ["invalid_id"]:
+                return MockResponse("", 400)
+            if json_data.get("filter", {}).get("ids") == ["12345679"]:
+                return MockResponse("mark_as_benign_success_no_affected", 200)
+            if json_data.get("data", {}).get("whiteningOption") == "file-type":
+                return MockResponse("mark_as_benign_success", 200)
+        elif args[1] == "https://rapid7.com/web/api/v2.1/threats":
+            if kwargs.get("params", {}).get("ids") == ["0000000000000000000"]:
+                return MockResponse("threats_not_found", 200)
+            return MockResponse("threats", 200)
+        elif args[1] == r"https://rapid7.com/web/api/v2.1/Device\HarddiskVolume2\Users\Administrator\Desktop\test.txt":
+            mock_response = MockResponse("", 200)
+            mock_response.content = Util.read_file_to_bytes(f"responses/threats_fetch_file_download.zip.resp")
+            return mock_response
         return MockResponse("error", 404)

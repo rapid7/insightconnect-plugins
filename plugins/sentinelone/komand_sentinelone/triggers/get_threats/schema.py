@@ -80,106 +80,100 @@ class GetThreatsOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "threat": {
-      "$ref": "#/definitions/threat_data",
+      "$ref": "#/definitions/threatData",
       "title": "Threat",
       "description": "Threat",
       "order": 1
     }
   },
   "definitions": {
-    "threat_data": {
+    "threatData": {
       "type": "object",
-      "title": "threat_data",
+      "title": "threatData",
       "properties": {
         "agentComputerName": {
           "type": "string",
           "title": "Agent Computer Name",
           "description": "Agent computer name",
-          "order": 31
+          "order": 29
         },
         "agentDomain": {
           "type": "string",
           "title": "Agent Domain",
           "description": "Agent domain",
-          "order": 59
+          "order": 54
         },
         "agentId": {
           "type": "string",
           "title": "Agent ID",
           "description": "Agent ID",
-          "order": 15
+          "order": 13
         },
         "agentInfected": {
           "type": "boolean",
           "title": "Agent Infected",
           "description": "Agent infected",
-          "order": 60
+          "order": 55
         },
         "agentIp": {
           "type": "string",
           "title": "Agent IP",
           "description": "Agent IP",
-          "order": 8
+          "order": 6
         },
         "agentIsActive": {
           "type": "boolean",
           "title": "Agent is Active",
-          "description": "Agent is Active",
-          "order": 56
+          "description": "Agent is active",
+          "order": 51
         },
         "agentIsDecommissioned": {
           "type": "boolean",
           "title": "Agent is Decommissioned",
-          "description": "Agent is Decommissioned",
-          "order": 48
+          "description": "Agent is decommissioned",
+          "order": 45
         },
         "agentMachineType": {
           "type": "string",
           "title": "Agent Machine Type",
           "description": "Agent machine type",
-          "order": 39
+          "order": 36
         },
         "agentNetworkStatus": {
           "type": "string",
           "title": "Agent Network Status",
           "description": "Agent network status",
-          "order": 9
+          "order": 7
         },
         "agentOsType": {
           "type": "string",
           "title": "Agent OS Type",
           "description": "Agent OS type",
-          "order": 47
+          "order": 44
         },
         "agentVersion": {
           "type": "string",
           "title": "Agent Version",
           "description": "Agent version",
-          "order": 11
+          "order": 9
         },
         "annotation": {
           "type": "string",
           "title": "Annotation",
           "description": "Annotation",
-          "order": 50
-        },
-        "annotationUrl": {
-          "type": "string",
-          "title": "Annotation URL",
-          "description": "Annotation URL",
-          "order": 55
+          "order": 47
         },
         "browserType": {
           "type": "string",
           "title": "Browser Type",
           "description": "Browser type",
-          "order": 25
+          "order": 23
         },
         "certId": {
           "type": "string",
           "title": "Cert ID",
           "description": "Cert ID",
-          "order": 21
+          "order": 19
         },
         "classification": {
           "type": "string",
@@ -191,43 +185,43 @@ class GetThreatsOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Classification Source",
           "description": "Classification source",
-          "order": 30
+          "order": 28
         },
         "classifierName": {
           "type": "string",
-          "title": "Classifiername",
-          "description": "Classifiername",
-          "order": 38
+          "title": "Classifier Name",
+          "description": "Classifier name",
+          "order": 35
         },
         "cloudVerdict": {
           "type": "string",
           "title": "Cloud Verdict",
           "description": "Cloud verdict",
-          "order": 28
+          "order": 26
         },
         "collectionId": {
           "type": "string",
           "title": "Collection ID",
           "description": "Collection ID",
-          "order": 23
+          "order": 21
         },
         "createdAt": {
           "type": "string",
           "title": "Created At",
           "description": "Created At",
-          "order": 18
+          "order": 16
         },
         "createdDate": {
           "type": "string",
           "title": "Created Date",
           "description": "Created date",
-          "order": 45
+          "order": 42
         },
         "description": {
           "type": "string",
           "title": "Description",
           "description": "Description",
-          "order": 35
+          "order": 32
         },
         "engines": {
           "type": "array",
@@ -236,61 +230,55 @@ class GetThreatsOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "order": 22
+          "order": 20
         },
         "fileContentHash": {
           "type": "string",
           "title": "File Content Hash",
           "description": "File content hash",
-          "order": 42
-        },
-        "fileCreatedDate": {
-          "type": "string",
-          "title": "File Created Date",
-          "description": "File created date",
-          "order": 6
+          "order": 39
         },
         "fileData": {
           "type": "object",
           "title": "File Data",
           "description": "File data",
-          "order": 14
+          "order": 12
         },
         "fileDisplayName": {
           "type": "string",
           "title": "File Display Name",
           "description": "File display name",
-          "order": 17
+          "order": 15
         },
         "fileExtensionType": {
           "type": "string",
           "title": "File Extension Type",
           "description": "File extension type",
-          "order": 16
+          "order": 14
         },
         "fileIsDotNet": {
           "type": "boolean",
           "title": "File is Dotnet",
           "description": "File is dotnet",
-          "order": 41
+          "order": 38
         },
         "fileIsExecutable": {
           "type": "boolean",
           "title": "File is Executable",
           "description": "File is executable",
-          "order": 7
+          "order": 5
         },
         "fileIsSystem": {
           "type": "boolean",
           "title": "File is System",
           "description": "File is system",
-          "order": 26
+          "order": 24
         },
         "fileMaliciousContent": {
           "type": "boolean",
           "title": "File Malicious Content",
           "description": "File malicious content",
-          "order": 62
+          "order": 57
         },
         "fileObjectId": {
           "type": "string",
@@ -302,43 +290,37 @@ class GetThreatsOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "File Path",
           "description": "File path",
-          "order": 36
-        },
-        "fileSha256": {
-          "type": "string",
-          "title": "File SHA 256",
-          "description": "File SHA 256",
-          "order": 34
+          "order": 33
         },
         "fileVerificationType": {
           "type": "string",
           "title": "File Verification Type",
           "description": "File verification type",
-          "order": 51
+          "order": 48
         },
         "fromCloud": {
           "type": "boolean",
           "title": "From Cloud",
           "description": "From cloud",
-          "order": 57
+          "order": 52
         },
         "fromScan": {
           "type": "boolean",
           "title": "From Scan",
           "description": "From scan",
-          "order": 37
+          "order": 34
         },
         "id": {
           "type": "string",
           "title": "ID",
           "description": "ID",
-          "order": 13
+          "order": 11
         },
         "inQuarantine": {
           "type": "boolean",
           "title": "In Quarantine",
           "description": "In quarantine",
-          "order": 24
+          "order": 22
         },
         "indicators": {
           "type": "array",
@@ -347,94 +329,79 @@ class GetThreatsOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "integer"
           },
-          "order": 29
+          "order": 27
         },
         "isCertValid": {
           "type": "boolean",
           "title": "Is Cert Valid",
           "description": "Is cert valid",
-          "order": 40
+          "order": 37
         },
         "isInteractiveSession": {
           "type": "boolean",
           "title": "Is Interactive Session",
           "description": "Is interactive session",
-          "order": 10
+          "order": 8
         },
         "isPartialStory": {
           "type": "boolean",
           "title": "Is Partial Story",
           "description": "Is partial story",
-          "order": 49
+          "order": 46
         },
         "maliciousGroupId": {
           "type": "string",
           "title": "Malicious Group ID",
           "description": "Malicious group ID",
-          "order": 54
+          "order": 50
         },
         "maliciousProcessArguments": {
           "type": "string",
           "title": "Malicious Process Arguments",
           "description": "Malicious process arguments",
-          "order": 20
+          "order": 18
         },
         "markedAsBenign": {
           "type": "boolean",
           "title": "Marked as Benign",
           "description": "Marked as Benign",
-          "order": 27
-        },
-        "mitigationActions": {
-          "type": "array",
-          "title": "Mitigation Actions",
-          "description": "Mitigation actions",
-          "items": {
-            "type": "string"
-          },
-          "order": 5
+          "order": 25
         },
         "mitigationMode": {
           "type": "string",
           "title": "Mitigation Mode",
           "description": "Mitigation mode",
-          "order": 58
+          "order": 53
         },
         "mitigationReport": {
           "type": "object",
           "title": "Mitigation Report",
           "description": "Mitigation report",
-          "order": 12
+          "order": 10
         },
         "mitigationStatus": {
           "type": "string",
           "title": "Mitigation Status",
           "description": "Mitigation status",
-          "order": 32
-        },
-        "publisher": {
-          "type": "string",
-          "title": "Publisher",
-          "description": "Publisher",
-          "order": 52
+          "order": 30
         },
         "rank": {
           "type": "integer",
           "title": "Rank",
           "description": "Rank",
-          "order": 44
+          "order": 41
         },
         "resolved": {
           "type": "boolean",
           "title": "Resolved",
           "description": "Resolved",
-          "order": 33
+          "order": 31
         },
         "siteId": {
           "type": "string",
           "title": "Site ID",
           "description": "Site ID",
-          "order": 43
+          "order": 40
         },
         "siteName": {
           "type": "string",
@@ -446,19 +413,19 @@ class GetThreatsOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Threat Agent Version",
           "description": "Threat agent version",
-          "order": 61
+          "order": 56
         },
         "threatName": {
           "type": "string",
           "title": "Threat Name",
           "description": "Threat name",
-          "order": 53
+          "order": 49
         },
         "updatedAt": {
           "type": "string",
           "title": "Updated At",
           "description": "Updated at",
-          "order": 46
+          "order": 43
         },
         "username": {
           "type": "string",
@@ -473,7 +440,7 @@ class GetThreatsOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "order": 19
+          "order": 17
         }
       }
     }

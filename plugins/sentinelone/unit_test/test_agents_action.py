@@ -33,7 +33,7 @@ class TestAgentsAction(TestCase):
             "uninstall",
         ]:
             with self.subTest(f"Running agent with action: {test}"):
-                actual = self.action.run({Input.FILTER: '{"ids": ["1000000000000000000"]}', Input.ACTION: test})
+                actual = self.action.run({Input.FILTER: {"ids": ["1000000000000000000"]}, Input.ACTION: test})
                 self.assertEqual(expected, actual)
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)

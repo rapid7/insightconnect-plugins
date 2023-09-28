@@ -8,8 +8,8 @@ class Component:
 
 
 class Input:
-    AGENT_ID = "agent_id"
-    FILE_PATH = "file_path"
+    AGENTID = "agentId"
+    FILEPATH = "filePath"
     PASSWORD = "password"
     
 
@@ -23,13 +23,13 @@ class FetchFileByAgentIdInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "agent_id": {
+    "agentId": {
       "type": "string",
       "title": "Agent ID",
       "description": "Agent ID",
       "order": 1
     },
-    "file_path": {
+    "filePath": {
       "type": "string",
       "title": "File Path",
       "description": "File path of file to fetch. If a file can be fetched, it will be uploaded to the SentinelOne console for download",
@@ -38,13 +38,15 @@ class FetchFileByAgentIdInput(insightconnect_plugin_runtime.Input):
     "password": {
       "type": "string",
       "title": "Password",
-      "description": "File encryption password, min. length 10 characters and cannot contain whitespace",
+      "displayType": "password",
+      "description": "File encryption password. The password cannot contain whitespace and must be 10 or more characters with a mix of upper and lower case letters, numbers, and symbols",
+      "format": "password",
       "order": 3
     }
   },
   "required": [
-    "agent_id",
-    "file_path",
+    "agentId",
+    "filePath",
     "password"
   ]
 }

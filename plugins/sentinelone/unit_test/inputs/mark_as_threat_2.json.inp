@@ -1,0 +1,5 @@
+{
+  "targetScope": "group",
+  "threatId": "1000000000000000000",
+  "whiteningOption": "file-type"
+}

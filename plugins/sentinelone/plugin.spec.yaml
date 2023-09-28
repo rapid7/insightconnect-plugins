@@ -3,7 +3,9 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 8.1.0
+version: 9.0.0
+connection_version: 9
+cloud_ready: true
 supported_versions: ["2.1.0"]
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
@@ -19,25 +21,28 @@ tags:
 - detection
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [sentinelone, endpoint, detection]
+  keywords: [sentinelone, endpoint, detection, cloud_enabled]
   features: []
 types:
-  activities_types:
+  activityTypes:
     id:
       title: Type ID
       description: Activity type ID
-      type: float
+      type: integer
       required: false
+      example: 1234
     descriptionTemplate:
       title: Description Template
       description: Activity description template as seen in activity page
       type: string
       required: false
+      example: "The Management user {{ username }} created Account {{ account_name }}."
     action:
       title: Action
       description: Action described in the activity
       type: string
       required: false
+      example: Account Created
   activities_list:
     comments:
       title: Comments
@@ -129,32 +134,37 @@ types:
       type: string
       description: Secondary description
       required: false
-  agent_applications:
+  agentApplications:
     installedDate:
       title: Installed Date
       description: Date when application installed
       type: string
       required: false
+      example: 2023-01-01T11:11:11.000000Z
     version:
       title: Version
       description: Version of installed application
       type: string
       required: false
+      example: 1.2.3.4
     publisher:
       title: Publisher
       description: Publisher of installed application
       type: string
       required: false
+      example: Example Publisher
     size:
       title: Size
       description: Size of installed application
       type: integer
       required: false
+      example: 1234
     name:
       title: Name
       description: Name of installed application
       type: string
       required: false
+      example: Example App Name
   pagination:
     totalItems:
       title: Total Items
@@ -166,317 +176,349 @@ types:
       type: string
       description: Next cursor
       required: false
-  threat_data:
+  threatData:
     username:
       title: Username
       type: string
       description: Username
       required: false
+      example: user1
     classification:
       title: Classification
       type: string
       description: Classification
       required: false
+      example: Malware
     siteName:
       title: Site Name
       type: string
       description: Site name
       required: false
+      example: Example Site
     fileObjectId:
       title: File Object ID
       type: string
       description: File object ID
       required: false
-    mitigationActions:
-      title: Mitigation Actions
-      type: '[]string'
-      description: Mitigation actions
-      required: false
-    fileCreatedDate:
-      title: File Created Date
-      type: string
-      description: File created date
-      required: false
+      example: 0AAA0AAA0AAA0AAA
     fileIsExecutable:
       title: File is Executable
       type: boolean
       description: File is executable
       required: false
+      example: false
     agentIp:
       title: Agent IP
       type: string
       description: Agent IP
       required: false
+      example: 192.0.2.0
     agentNetworkStatus:
       title: Agent Network Status
       type: string
       description: Agent network status
       required: false
+      example: connected
     isInteractiveSession:
       title: Is Interactive Session
       type: boolean
       description: Is interactive session
       required: false
+      example: true
     agentVersion:
       title: Agent Version
       type: string
       description: Agent version
       required: false
+      example: 1.0.2.4
     mitigationReport:
       title: Mitigation Report
       type: object
       description: Mitigation report
       required: false
+      example: {}
     id:
       title: ID
       type: string
       description: ID
       required: false
+      example: 225494730938493804
     fileData:
       title: File Data
       type: object
       description: File data
       required: false
+      example: {}
     agentId:
       title: Agent ID
       type: string
       description: Agent ID
       required: false
+      example: 225494730938493804
     fileExtensionType:
       title: File Extension Type
       type: string
       description: File extension type
       required: false
+      example: Executable
     fileDisplayName:
       title: File Display Name
       type: string
       description: File display name
       required: false
+      example: test.exe
     createdAt:
       title: Created At
       type: string
       description: Created At
       required: false
+      example: 2023-01-01T10:00:00.000000Z
     whiteningOptions:
       title: Whitening Options
       type: '[]string'
       description: Whitening options
       required: false
+      example: ["hash"]
     maliciousProcessArguments:
       title: Malicious Process Arguments
       type: string
       description: Malicious process arguments
       required: false
+      example: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
     certId:
       title: Cert ID
       type: string
       description: Cert ID
       required: false
+      example: 225494730938493804
     engines:
       title: Engines
       type: '[]string'
       description: Engines
       required: false
+      example: ["penetration"]
     collectionId:
       title: Collection ID
       type: string
       description: Collection ID
       required: false
+      example: 225494730938493804
     inQuarantine:
       title: In Quarantine
       type: boolean
       description: In quarantine
       required: false
+      example: false
     browserType:
       title: Browser Type
       type: string
       description: Browser type
       required: false
+      example: Example Browser Type
     fileIsSystem:
       title: File is System
       type: boolean
       description: File is system
       required: false
+      example: false
     markedAsBenign:
       title: Marked as Benign
       type: boolean
       description: Marked as Benign
       required: false
+      example: false
     cloudVerdict:
       title: Cloud Verdict
       type: string
       description: Cloud verdict
       required: false
+      example: black
     indicators:
       title: Indicators
       type: '[]integer'
       description: Indicators
       required: false
+      example: [1, 2, 3]
     classificationSource:
       title: Classification Source
       type: string
       description: Classification source
       required: false
+      example: Static
     agentComputerName:
       title: Agent Computer Name
       type: string
       description: Agent computer name
       required: false
+      example: LAPTOP-R7
     mitigationStatus:
       title: Mitigation Status
       type: string
       description: Mitigation status
       required: false
+      example: mitigated
     resolved:
       title: Resolved
       type: boolean
       description: Resolved
       required: false
-    fileSha256:
-      title: File SHA 256
-      type: string
-      description: File SHA 256
-      required: false
+      example: false
     description:
       title: Description
       type: string
       description: Description
       required: false
+      example: malware detected - not mitigated yet (static engine)
     filePath:
       title: File Path
       type: string
       description: File path
       required: false
+      example: \\Device\\HarddiskVolume\\example\\test.exe
     fromScan:
       title: From Scan
       type: boolean
       description: From scan
       required: false
+      example: false
     classifierName:
-      title: Classifiername
+      title: Classifier Name
       type: string
-      description: Classifiername
+      description: Classifier name
       required: false
+      example: LOGIC
     agentMachineType:
       title: Agent Machine Type
       type: string
       description: Agent machine type
       required: false
+      example: laptop
     isCertValid:
       title: Is Cert Valid
       type: boolean
       description: Is cert valid
       required: false
+      example: true
     fileIsDotNet:
       title: File is Dotnet
       type: boolean
       description: File is dotnet
       required: false
+      example: false
     fileContentHash:
       title: File Content Hash
       type: string
       description: File content hash
       required: false
+      example: ffffffffffffffffffffffffffffffffffffffff
     siteId:
       title: Site ID
       type: string
       description: Site ID
       required: false
+      example: 225494730938493804
     rank:
       title: Rank
       type: integer
       description: Rank
       required: false
+      example: 5
     createdDate:
       title: Created Date
       type: string
       description: Created date
       required: false
+      example: 2023-01-01T10:00:00.000000Z
     updatedAt:
       title: Updated At
       type: string
       description: Updated at
       required: false
+      example: 2023-01-01T10:00:00.000000Z
     agentOsType:
       title: Agent OS Type
       type: string
       description: Agent OS type
       required: false
+      example: windows
     agentIsDecommissioned:
       title: Agent is Decommissioned
       type: boolean
-      description: Agent is Decommissioned
+      description: Agent is decommissioned
       required: false
+      example: false
     isPartialStory:
       title: Is Partial Story
       type: boolean
       description: Is partial story
       required: false
+      example: false
     annotation:
       title: Annotation
       type: string
       description: Annotation
       required: false
+      example: Automatically resolved by SentinelOne Console
     fileVerificationType:
       title: File Verification Type
       type: string
       description: File verification type
       required: false
-    publisher:
-      title: Publisher
-      type: string
-      description: Publisher
-      required: false
+      example: NotSigned
     threatName:
       title: Threat Name
       type: string
       description: Threat name
       required: false
+      example: test.exe
     maliciousGroupId:
       title: Malicious Group ID
       type: string
       description: Malicious group ID
       required: false
-    annotationUrl:
-      title: Annotation URL
-      type: string
-      description: Annotation URL
-      required: false
+      example: 225494730938493804
     agentIsActive:
       title: Agent is Active
       type: boolean
-      description: Agent is Active
+      description: Agent is active
       required: false
+      example: true
     fromCloud:
       title: From Cloud
       type: boolean
       description: From cloud
       required: false
+      example: false
     mitigationMode:
       title: Mitigation Mode
       type: string
       description: Mitigation mode
       required: false
+      example: protect
     agentDomain:
       title: Agent Domain
       type: string
       description: Agent domain
       required: false
+      example: WORKGROUP
     agentInfected:
       title: Agent Infected
       type: boolean
       description: Agent infected
       required: false
+      example: false
     threatAgentVersion:
       title: Threat Agent Version
       type: string
       description: Threat agent version
       required: false
+      example: 1.0.3.4
     fileMaliciousContent:
       title: File Malicious Content
       type: boolean
       description: File malicious content
       required: false
+      example: false
   location:
     name:
       title: Name
@@ -917,62 +959,51 @@ types:
       description: Response data
       type: object
       required: false
-  query_id:
-    queryID:
-      title: Query ID
-      description: Query ID
+  queryModeInfo:
+    mode:
+      title: Mode
+      description: The query mode
       type: string
       required: false
-  create_query_response:
-    errors:
-      title: Errors
-      description: Errors
-      type: "[]object"
+      example: scalyr
+    lastActivatedAt:
+      title: Last Activated At
+      description: The date when query mode was last activated
+      type: string
       required: false
-    data:
-      title: Data
-      description: Response data
-      type: query_id
-      required: false
-  query_status:
+      example: 2022-07-31T08:11:01+00:00
+  queryStatus:
     progressStatus:
       title: Progress Status
       description: Query loading status in percentage
       type: integer
       required: false
+      example: 100
     responseState:
       title: Response State
       description: Response state
       type: string
       required: false
-  get_query_status_response:
-    errors:
-      title: Errors
-      description: Errors
-      type: "[]object"
+      example: FINISHED
+    responseError:
+      title: Response Error
+      description: Response error
+      type: string
       required: false
-    data:
-      title: Data
-      description: Response data
-      type: query_status
+      example: Timerange start cannot be greater than timerange end
+    queryModeInfo:
+      title: Query Mode Info
+      description: Query mode info
+      type: queryModeInfo
       required: false
-  query_success:
+      example: {}
+  querySuccess:
     success:
       title: Success
       description: Request success status
       type: string
       required: false
-  cancel_query_response:
-    errors:
-      title: Errors
-      description: Errors
-      type: "[]object"
-      required: false
-    data:
-      title: Data
-      description: Response data
-      type: query_success
-      required: false
+      example: FINISHED
   query_data:
     objectType:
       title: Object Type
@@ -1489,19 +1520,19 @@ actions:
         type: pagination
         description: Pagination
         required: false
-        example: '{"totalItems": 1}'
+        example: {}
       errors:
         title: Errors
         type: '[]object'
         description: Errors
         required: false
-        example: '[{"type": "object"}]'
+        example: []
       data:
         title: Data
-        type: '[]threat_data'
+        type: '[]threatData'
         description: Data
         required: false
-        example: '[ { "agentOsType": "windows", "automaticallyResolved": false } ]'
+        example: []
   blacklist_by_content_hash:
     title: Blacklist by Content Hash
     description: Add hashed content to global blacklist. The input makes use of contentHash
@@ -1565,7 +1596,7 @@ actions:
     title: Mitigate Threat
     description: Apply a mitigation action to a threat
     input:
-      threat_id:
+      threatId:
         title: Threat ID
         description: ID of a threat
         type: string
@@ -1594,13 +1625,13 @@ actions:
     title: Mark as Benign
     description: Mark a threat as resolved and adds the IOC's to global allow list
     input:
-      threat_id:
+      threatId:
         title: Threat ID
         description: ID of a threat
         type: string
         required: true
         example: "1000000000000000000"
-      target_scope:
+      targetScope:
         title: Target Scope
         description: Scope to be used for exclusions
         type: string
@@ -1609,8 +1640,9 @@ actions:
         - group
         - site
         - tenant
+        - account
         example: site
-      whitening_option:
+      whiteningOption:
         title: Whitening Option
         description: Selected whitening option
         type: string
@@ -1632,15 +1664,15 @@ actions:
         example: 1
   mark_as_threat:
     title: Mark as Threat
-    description: Mark a suspicious threat as a threat
+    description: Mark as threat detections that the Agent considers suspicious and that match the filter
     input:
-      threat_id:
+      threatId:
         title: Threat ID
         description: ID of a threat
         type: string
         required: true
         example: 1000000000000000000
-      target_scope:
+      targetScope:
         title: Target Scope
         description: Scope to be used for exclusions
         type: string
@@ -1650,7 +1682,7 @@ actions:
         - site
         - tenant
         example: site
-      whitening_option:
+      whiteningOption:
         title: Whitening Option
         description: Selected whitening option
         type: string
@@ -1821,18 +1853,18 @@ actions:
     title: Get Activity Types
     description: Get a list of activity types
     output:
-      activity_types:
+      activityTypes:
         title: Activity Types
-        description: Result of activities types
-        type: '[]activities_types'
+        description: List of activity types
+        type: '[]activityTypes'
         required: true
-        example: '[{ "id": 0, "descriptionTemplate": "string", "action": "string" }]'
+        example: []
   apps_by_agent_ids:
     title: Agents Applications
     description: Retrieve running applications for a specific agent
     input:
       ids:
-        title: Agent IDS
+        title: Agent IDs
         description: Agent ID list
         type: '[]string'
         required: true
@@ -1841,20 +1873,20 @@ actions:
       data:
         title: Agent Applications
         description: List of installed applications
-        type: '[]agent_applications'
+        type: '[]agentApplications'
         required: true
-        example: '[ { "publisher": "string", "installedDate": "2018-02-27T04:49:26.257525Z", "size": "integer", "name": "string", "version": "string" } ]'
+        example: []
   fetch_file_by_agent_id:
     title: Fetch File
     description: Fetch file for a specific agent id
     input:
-      agent_id:
+      agentId:
         title: Agent ID
         description: Agent ID
         type: 'string'
         required: true
         example: "1000000000000000000"
-      file_path:
+      filePath:
         title: File Path
         description: File path of file to fetch. If a file can be fetched, it will be uploaded to the SentinelOne console for download
         type: string
@@ -1862,8 +1894,8 @@ actions:
         example: "C:/windows/system32/winevt/logs/application.evtx"
       password:
         title: Password
-        description: File encryption password, min. length 10 characters and cannot contain whitespace
-        type: 'string'
+        description: File encryption password. The password cannot contain whitespace and must be 10 or more characters with a mix of upper and lower case letters, numbers, and symbols
+        type: password
         required: true
         example: "MySecretPass123!"
     output:
@@ -1877,26 +1909,26 @@ actions:
     title: Count Summary
     description: Summary of agents by numbers
     input:
-      site_ids:
-        title: Site IDS
+      siteIds:
+        title: Site IDs
         description: List of Site IDs to filter by
         type: '[]string'
         required: false
         example: ["500000000000000000"]
-      account_ids:
-        title: Account IDS
+      accountIds:
+        title: Account IDs
         description: List of Account IDs to filter by
         type: '[]string'
         required: false
         example: ["4000000000000000000"]
     output:
-      up_to_date:
+      upToDate:
         title: Up to Date Number
         description: Number of agents with the most up-to-date software version
         type: integer
         required: false
         example: 2
-      out_of_date:
+      outOfDate:
         title: Out of Date Number
         description: Number of agents running an older software version
         type: integer
@@ -1928,18 +1960,18 @@ actions:
         example: 1
   name_available:
     title: Available Name
-    description: Is the account name available for this account
+    description: Check if the account name is available
     input:
       name:
         title: Name
-        description: Account Name to validate
+        description: Account name to validate
         type: string
         required: true
         example: "example"
     output:
       available:
         title: Available
-        description: Account Name to validate
+        description: Whether the account name is available
         type: boolean
         required: true
         example: true
@@ -2171,10 +2203,10 @@ actions:
         example: "939039647215561624"
       password:
         title: Password
-        description: File encryption password, min. length 10 characters and cannot contain whitespace
+        description: File encryption password. The password cannot contain whitespace and must be 10 or more characters with a mix of upper and lower case letters, numbers, and symbols
         type: password
         required: true
-        example: "Rapid7 Insightconnect"
+        example: "R@pid7Insightc0nnect"
     output:
       file:
         title: File
@@ -2465,72 +2497,73 @@ actions:
         type: string
         example: AgentName IS NOT EMPTY
         required: true
-      from_date:
+      fromDate:
         title: From Date
-        description: From date
-        type: string
-        example: 2021-03-01T04:49:26.257525Z
+        description: Events created after this timestamp
+        type: date
+        example: "2021-03-01T04:49:26+00:00"
         required: true
-      to_date:
+      toDate:
         title: To Date
         description: Events created before or at this timestamp
-        type: string
-        example: 2021-03-20T04:49:26.257525Z
+        type: date
+        example: "2021-03-23T04:49:26+00:00"
         required: true
       limit:
         title: Limit
         description: Limit number of returned items (1-20000)
         type: integer
+        default: 100
         example: 10
         required: false
-      site_ids:
+      siteIds:
         title: Site IDs
         description: List of site IDs to filter by
         type: "[]string"
         example: ["225494730938491234", "225494730938491235"]
         required: false
-      tenant: 
+      tenant:
         title: Tenant
         description: Indicates a Global (tenant) scope request
         type: boolean
         example: true
         required: false
-      account_ids:
+      accountIds:
         title: Account IDs
         description: List of account IDs to filter by
         type: "[]string"
         example: ["225494730938491234", "225494730938491235"]
         required: false
-      is_verbose: 
+      isVerbose:
         title: Is Verbose
         description: Show all fields or just priority fields
         type: boolean
         example: true
         required: false
-      group_ids:
-        title: Account IDs
+      groupIds:
+        title: Group IDs
         description: List of group IDs to filter by
         type: "[]string"
         example: ["225494730938491234", "225494730938491235"]
         required: false
-      query_type:
+      queryType:
         title: Query Type
         description: Query search type
         type: "[]string"
         example: ["events"]
         required: false
     output:
-      response:
-        title: Response
-        description: SentinelOne API call response data
-        type: create_query_response
+      queryId:
+        title: Query ID
+        description: The ID of the created query
+        type: string
         required: false
-        example: '{ "response": { "data": { "affected": 0 } } }'
+        example: qd94e330ac025d525b5948bdf897b955e
   get_query_status:
     title: Get Query Status
     description: Get that status of a Deep Visibility Query
     input:
-      query_id:
+      queryId:
         title: Query ID
         description: QueryId obtained when creating a query under Create Query
         type: string
@@ -2539,15 +2572,15 @@ actions:
     output:
       response:
         title: Response
-        description: SentinelOne API call response data
-        type: get_query_status_response
+        description: Information about the status of the given query
+        type: queryStatus
         required: false
-        example: '{ "response": { "data": { "progressStatus": 50, "responseState": "RUNNING" } } }'
+        example: {}
   cancel_running_query:
     title: Cancel Running Query
     description: Stop a Deep Visibility Query by queryId
     input:
-      query_id:
+      queryId:
         title: Query ID
         description: QueryId obtained when creating a query under Create Query
         type: string
@@ -2557,9 +2590,9 @@ actions:
       response:
         title: Response
         description: SentinelOne API call response data
-        type: cancel_query_response
+        type: querySuccess
         required: false
-        example: '{ "response": { "success": true } }'
+        example: {}
   get_events:
     title: Get Events
     description: Get all Deep Visibility events from a queryId
@@ -2846,6 +2879,6 @@ triggers:
       threat:
         title: Threat
         description: Threat
-        type: threat_data
+        type: threatData
         required: false
         example: "{ 'threat': { 'agentComputerName':'vagrant-pc', 'agentDomain':'WORKGROUP', 'agentId':'560700200554747611' }}"

@@ -8,20 +8,20 @@ class Component:
 
 
 class Input:
-    ACCOUNT_IDS = "account_ids"
-    FROM_DATE = "from_date"
-    GROUP_IDS = "group_ids"
-    IS_VERBOSE = "is_verbose"
+    ACCOUNTIDS = "accountIds"
+    FROMDATE = "fromDate"
+    GROUPIDS = "groupIds"
+    ISVERBOSE = "isVerbose"
     LIMIT = "limit"
     QUERY = "query"
-    QUERY_TYPE = "query_type"
-    SITE_IDS = "site_ids"
+    QUERYTYPE = "queryType"
+    SITEIDS = "siteIds"
     TENANT = "tenant"
-    TO_DATE = "to_date"
+    TODATE = "toDate"
     
 
 class Output:
-    RESPONSE = "response"
+    QUERYID = "queryId"
     
 
 class CreateQueryInput(insightconnect_plugin_runtime.Input):
@@ -30,7 +30,7 @@ class CreateQueryInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "account_ids": {
+    "accountIds": {
       "type": "array",
       "title": "Account IDs",
       "description": "List of account IDs to filter by",
@@ -39,22 +39,24 @@ class CreateQueryInput(insightconnect_plugin_runtime.Input):
       },
       "order": 7
     },
-    "from_date": {
+    "fromDate": {
       "type": "string",
       "title": "From Date",
-      "description": "From date",
+      "displayType": "date",
+      "description": "Events created after this timestamp",
+      "format": "date-time",
       "order": 2
     },
-    "group_ids": {
+    "groupIds": {
       "type": "array",
-      "title": "Account IDs",
+      "title": "Group IDs",
       "description": "List of group IDs to filter by",
       "items": {
         "type": "string"
       },
       "order": 9
     },
-    "is_verbose": {
+    "isVerbose": {
       "type": "boolean",
       "title": "Is Verbose",
       "description": "Show all fields or just priority fields",
@@ -64,6 +66,7 @@ class CreateQueryInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Limit",
       "description": "Limit number of returned items (1-20000)",
+      "default": 100,
       "order": 4
     },
     "query": {
@@ -72,7 +75,7 @@ class CreateQueryInput(insightconnect_plugin_runtime.Input):
       "description": "Events matching the query search term will be returned",
       "order": 1
     },
-    "query_type": {
+    "queryType": {
       "type": "array",
       "title": "Query Type",
       "description": "Query search type",
@@ -81,7 +84,7 @@ class CreateQueryInput(insightconnect_plugin_runtime.Input):
       },
       "order": 10
     },
-    "site_ids": {
+    "siteIds": {
       "type": "array",
       "title": "Site IDs",
       "description": "List of site IDs to filter by",
@@ -96,17 +99,19 @@ class CreateQueryInput(insightconnect_plugin_runtime.Input):
       "description": "Indicates a Global (tenant) scope request",
       "order": 6
     },
-    "to_date": {
+    "toDate": {
       "type": "string",
       "title": "To Date",
+      "displayType": "date",
       "description": "Events created before or at this timestamp",
+      "format": "date-time",
       "order": 3
     }
   },
   "required": [
-    "from_date",
+    "fromDate",
     "query",
-    "to_date"
+    "toDate"
   ]
 }
     """)
@@ -121,60 +126,11 @@ class CreateQueryOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "response": {
-      "$ref": "#/definitions/create_query_response",
-      "title": "Response",
-      "description": "SentinelOne API call response data",
+    "queryId": {
+      "type": "string",
+      "title": "Query ID",
+      "description": "The ID of the created query",
       "order": 1
-    }
-  },
-  "definitions": {
-    "create_query_response": {
-      "type": "object",
-      "title": "create_query_response",
-      "properties": {
-        "data": {
-          "$ref": "#/definitions/query_id",
-          "title": "Data",
-          "description": "Response data",
-          "order": 2
-        },
-        "errors": {
-          "type": "array",
-          "title": "Errors",
-          "description": "Errors",
-          "items": {
-            "type": "object"
-          },
-          "order": 1
-        }
-      },
-      "definitions": {
-        "query_id": {
-          "type": "object",
-          "title": "query_id",
-          "properties": {
-            "queryID": {
-              "type": "string",
-              "title": "Query ID",
-              "description": "Query ID",
-              "order": 1
-            }
-          }
-        }
-      }
-    },
-    "query_id": {
-      "type": "object",
-      "title": "query_id",
-      "properties": {
-        "queryID": {
-          "type": "string",
-          "title": "Query ID",
-          "description": "Query ID",
-          "order": 1
-        }
-      }
     }
   }
 }

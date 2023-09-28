@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    QUERY_ID = "query_id"
+    QUERYID = "queryId"
     
 
 class Output:
@@ -21,7 +21,7 @@ class GetQueryStatusInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "query_id": {
+    "queryId": {
       "type": "string",
       "title": "Query ID",
       "description": "QueryId obtained when creating a query under Create Query",
@@ -29,7 +29,7 @@ class GetQueryStatusInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "query_id"
+    "queryId"
   ]
 }
     """)
@@ -45,57 +45,34 @@ class GetQueryStatusOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "response": {
-      "$ref": "#/definitions/get_query_status_response",
+      "$ref": "#/definitions/queryStatus",
       "title": "Response",
-      "description": "SentinelOne API call response data",
+      "description": "Information about the status of the given query",
       "order": 1
     }
   },
   "definitions": {
-    "get_query_status_response": {
+    "queryModeInfo": {
       "type": "object",
-      "title": "get_query_status_response",
+      "title": "queryModeInfo",
       "properties": {
-        "data": {
-          "$ref": "#/definitions/query_status",
-          "title": "Data",
-          "description": "Response data",
+        "lastActivatedAt": {
+          "type": "string",
+          "title": "Last Activated At",
+          "description": "The date when query mode was last activated",
           "order": 2
         },
-        "errors": {
-          "type": "array",
-          "title": "Errors",
-          "description": "Errors",
-          "items": {
-            "type": "object"
-          },
+        "mode": {
+          "type": "string",
+          "title": "Mode",
+          "description": "The query mode",
           "order": 1
-        }
-      },
-      "definitions": {
-        "query_status": {
-          "type": "object",
-          "title": "query_status",
-          "properties": {
-            "progressStatus": {
-              "type": "integer",
-              "title": "Progress Status",
-              "description": "Query loading status in percentage",
-              "order": 1
-            },
-            "responseState": {
-              "type": "string",
-              "title": "Response State",
-              "description": "Response state",
-              "order": 2
-            }
-          }
         }
       }
     },
-    "query_status": {
+    "queryStatus": {
       "type": "object",
-      "title": "query_status",
+      "title": "queryStatus",
       "properties": {
         "progressStatus": {
           "type": "integer",
@@ -103,11 +80,43 @@ class GetQueryStatusOutput(insightconnect_plugin_runtime.Output):
           "description": "Query loading status in percentage",
           "order": 1
         },
+        "queryModeInfo": {
+          "$ref": "#/definitions/queryModeInfo",
+          "title": "Query Mode Info",
+          "description": "Query mode info",
+          "order": 4
+        },
+        "responseError": {
+          "type": "string",
+          "title": "Response Error",
+          "description": "Response error",
+          "order": 3
+        },
         "responseState": {
           "type": "string",
           "title": "Response State",
           "description": "Response state",
           "order": 2
+        }
+      },
+      "definitions": {
+        "queryModeInfo": {
+          "type": "object",
+          "title": "queryModeInfo",
+          "properties": {
+            "lastActivatedAt": {
+              "type": "string",
+              "title": "Last Activated At",
+              "description": "The date when query mode was last activated",
+              "order": 2
+            },
+            "mode": {
+              "type": "string",
+              "title": "Mode",
+              "description": "The query mode",
+              "order": 1
+            }
+          }
         }
       }
     }

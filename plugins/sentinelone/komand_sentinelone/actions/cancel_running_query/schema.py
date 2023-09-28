@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    QUERY_ID = "query_id"
+    QUERYID = "queryId"
     
 
 class Output:
@@ -21,7 +21,7 @@ class CancelRunningQueryInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "query_id": {
+    "queryId": {
       "type": "string",
       "title": "Query ID",
       "description": "QueryId obtained when creating a query under Create Query",
@@ -29,7 +29,7 @@ class CancelRunningQueryInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "query_id"
+    "queryId"
   ]
 }
     """)
@@ -45,51 +45,16 @@ class CancelRunningQueryOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "response": {
-      "$ref": "#/definitions/cancel_query_response",
+      "$ref": "#/definitions/querySuccess",
       "title": "Response",
       "description": "SentinelOne API call response data",
       "order": 1
     }
   },
   "definitions": {
-    "cancel_query_response": {
+    "querySuccess": {
       "type": "object",
-      "title": "cancel_query_response",
-      "properties": {
-        "data": {
-          "$ref": "#/definitions/query_success",
-          "title": "Data",
-          "description": "Response data",
-          "order": 2
-        },
-        "errors": {
-          "type": "array",
-          "title": "Errors",
-          "description": "Errors",
-          "items": {
-            "type": "object"
-          },
-          "order": 1
-        }
-      },
-      "definitions": {
-        "query_success": {
-          "type": "object",
-          "title": "query_success",
-          "properties": {
-            "success": {
-              "type": "string",
-              "title": "Success",
-              "description": "Request success status",
-              "order": 1
-            }
-          }
-        }
-      }
-    },
-    "query_success": {
-      "type": "object",
-      "title": "query_success",
+      "title": "querySuccess",
       "properties": {
         "success": {
           "type": "string",

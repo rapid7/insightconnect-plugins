@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Is the account name available for this account"
+    DESCRIPTION = "Check if the account name is available"
 
 
 class Input:
@@ -24,7 +24,7 @@ class NameAvailableInput(insightconnect_plugin_runtime.Input):
     "name": {
       "type": "string",
       "title": "Name",
-      "description": "Account Name to validate",
+      "description": "Account name to validate",
       "order": 1
     }
   },
@@ -47,7 +47,7 @@ class NameAvailableOutput(insightconnect_plugin_runtime.Output):
     "available": {
       "type": "boolean",
       "title": "Available",
-      "description": "Account Name to validate",
+      "description": "Whether the account name is available",
       "order": 1
     }
   },

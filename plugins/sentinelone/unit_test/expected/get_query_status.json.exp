@@ -1,0 +1,10 @@
+{
+  "response": {
+    "progressStatus": 100,
+    "queryModeInfo": {
+      "lastActivatedAt": "2022-07-31T08:11:01+00:00",
+      "mode": "scalyr"
+    },
+    "responseState": "FINISHED"
+  }
+}

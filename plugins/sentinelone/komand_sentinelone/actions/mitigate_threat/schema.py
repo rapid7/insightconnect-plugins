@@ -9,7 +9,7 @@ class Component:
 
 class Input:
     ACTION = "action"
-    THREAT_ID = "threat_id"
+    THREATID = "threatId"
     
 
 class Output:
@@ -35,7 +35,7 @@ class MitigateThreatInput(insightconnect_plugin_runtime.Input):
       ],
       "order": 2
     },
-    "threat_id": {
+    "threatId": {
       "type": "string",
       "title": "Threat ID",
       "description": "ID of a threat",
@@ -44,7 +44,7 @@ class MitigateThreatInput(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "action",
-    "threat_id"
+    "threatId"
   ]
 }
     """)

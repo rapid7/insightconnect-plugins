@@ -94,15 +94,15 @@ This action is used to fetch file for a specific agent id.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent_id|string|None|True|Agent ID|None|1000000000000000000|
-|file_path|string|None|True|File path of file to fetch. If a file can be fetched, it will be uploaded to the SentinelOne console for download|None|C:/windows/system32/winevt/logs/application.evtx|
-|password|string|None|True|File encryption password, min. length 10 characters and cannot contain whitespace|None|MySecretPass123!|
+|agentId|string|None|True|Agent ID|None|1000000000000000000|
+|filePath|string|None|True|File path of file to fetch. If a file can be fetched, it will be uploaded to the SentinelOne console for download|None|C:/windows/system32/winevt/logs/application.evtx|
+|password|password|None|True|File encryption password. The password cannot contain whitespace and must be 10 or more characters with a mix of upper and lower case letters, numbers, and symbols|None|MySecretPass123!|
 
 Example input:
 ```
 {
-  "agent_id": "1000000000000000000",
-  "file_path": "C:/windows/system32/winevt/logs/application.evtx",
+  "agentId": "1000000000000000000",
+  "filePath": "C:/windows/system32/winevt/logs/application.evtx",
   "password": "MySecretPass123!"
 }
 ```
@@ -116,7 +116,9 @@ Example input:
 Example output:
 
 ```
-{ "success": True }
+{ 
+  "success": true 
+}
 ```
 
 #### Update Incident Status
@@ -561,12 +563,13 @@ This action is used to stop a Deep Visibility Query by queryId.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
+|queryId|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
 
 Example input:
+
 ```
 {
-  "query_id": "qd94e330ac025d525b5948bdf897b955e"
+  "queryId": "qd94e330ac025d525b5948bdf897b955e"
 }
 ```
 
@@ -574,14 +577,14 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|response|cancel_query_response|False|SentinelOne API call response data|{ "response": { "success": true } }|
+|response|querySuccess|False|SentinelOne API call response data|{}|
 
 Example output:
 
 ```
 {
   "response": {
-    "success": true
+    "success": "FINISHED"
   }
 }
 ```
@@ -594,12 +597,13 @@ This action is used to get that status of a Deep Visibility Query.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
+|queryId|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
 
 Example input:
+
 ```
 {
-  "query_id": "qd94e330ac025d525b5948bdf897b955e"
+  "queryId": "qd94e330ac025d525b5948bdf897b955e"
 }
 ```
 
@@ -607,17 +611,19 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|response|get_query_status_response|False|SentinelOne API call response data|{ "response": { "data": { "progressStatus": 50, "responseState": "RUNNING" } } }|
+|response|queryStatus|False|Information about the status of the given query|{}|
 
 Example output:
 
 ```
 {
   "response": {
-    "data": {
-      "progressStatus": 50,
-      "responseState": "RUNNING"
-    }
+    "progressStatus": 100,
+    "queryModeInfo": {
+      "lastActivatedAt": "2022-07-31T08:11:01+00:00",
+      "mode": "scalyr"
+    },
+    "responseState": "FINISHED"
   }
 }
 ```
@@ -630,41 +636,41 @@ This action is used to start a Deep Visibility Query and get the queryId. You ca
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|account_ids|[]string|None|False|List of account IDs to filter by|None|["225494730938491234", "225494730938491235"]|
-|from_date|string|None|True|From date|None|2021-03-01 04:49:26.257525|
-|group_ids|[]string|None|False|List of group IDs to filter by|None|["225494730938491234", "225494730938491235"]|
-|is_verbose|boolean|None|False|Show all fields or just priority fields|None|True|
-|limit|integer|None|False|Limit number of returned items (1-20000)|None|10|
+|accountIds|[]string|None|False|List of account IDs to filter by|None|["225494730938491234", "225494730938491235"]|
+|fromDate|date|None|True|Events created after this timestamp|None|2021-03-01T04:49:26+00:00|
+|groupIds|[]string|None|False|List of group IDs to filter by|None|["225494730938491234", "225494730938491235"]|
+|isVerbose|boolean|None|False|Show all fields or just priority fields|None|True|
+|limit|integer|100|False|Limit number of returned items (1-20000)|None|10|
 |query|string|None|True|Events matching the query search term will be returned|None|AgentName IS NOT EMPTY|
-|query_type|[]string|None|False|Query search type|None|["events"]|
-|site_ids|[]string|None|False|List of site IDs to filter by|None|["225494730938491234", "225494730938491235"]|
+|queryType|[]string|None|False|Query search type|None|["events"]|
+|siteIds|[]string|None|False|List of site IDs to filter by|None|["225494730938491234", "225494730938491235"]|
 |tenant|boolean|None|False|Indicates a Global (tenant) scope request|None|True|
-|to_date|string|None|True|Events created before or at this timestamp|None|2021-03-20 04:49:26.257525|
+|toDate|date|None|True|Events created before or at this timestamp|None|2021-03-23T04:49:26+00:00|
 
 Example input:
 ```
 {
-  "account_ids": [
+  "accountIds": [
     "225494730938491234",
     "225494730938491235"
   ],
-  "from_date": "2021-03-01T04:49:26.257525Z",
-  "group_ids": [
+  "fromDate": "2021-03-01T04:49:26.257525Z",
+  "groupIds": [
     "225494730938491234",
     "225494730938491235"
   ],
-  "is_verbose": true,
+  "isVerbose": true,
   "limit": 10,
   "query": "AgentName IS NOT EMPTY",
-  "query_type": [
+  "queryType": [
     "events"
   ],
-  "site_ids": [
+  "siteIds": [
     "225494730938491234",
     "225494730938491235"
   ],
   "tenant": true,
-  "to_date": "2021-03-20T04:49:26.257525Z"
+  "toDate": "2021-03-20T04:49:26.257525Z"
 }
 ```
 
@@ -672,17 +678,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|response|create_query_response|False|SentinelOne API call response data|{ "response": { "data": { "affected": 0 } } }|
+|queryId|string|False|The ID of the created query|qd94e330ac025d525b5948bdf897b955e|
 
 Example output:
 
 ```
 {
-  "response": {
-    "data": {
-      "queryId": "qef4d0d2de7141756ff16959180015e75"
-    }
-  }
+  "queryId": "qd94e330ac025d525b5948bdf897b955e"
 }
 ```
 
@@ -808,13 +810,13 @@ This action is used to fetch a file associated with the threat that matches the 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Threat ID|None|939039647215561624|
-|password|password|None|True|File encryption password, min. length 10 characters and cannot contain whitespace|None|Rapid7 Insightconnect|
+|password|password|None|True|File encryption password. The password cannot contain whitespace and must be 10 or more characters with a mix of upper and lower case letters, numbers, and symbols|None|R@pid7Insightc0nnect|
 
 Example input:
 ```
 {
   "id": "939039647215561624",
-  "password": "Rapid7 Insightconnect"
+  "password": "R@pid7Insightc0nnect"
 }
 ```
 
@@ -929,17 +931,17 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|activity_types|[]activities_types|True|Result of activities types|[{ "id": 0, "descriptionTemplate": "string", "action": "string" }]|
+|activityTypes|[]activityTypes|True|List of activity types|[]|
 
 Example output:
 
 ```
 {
-  "activity_types": [
+  "activityTypes": [
     {
-      "id": 0,
-      "descriptionTemplate": "string",
-      "action": "string"
+      "id": 1234,
+      "descriptionTemplate": "The Management user {{ username }} created Account {{ account_name }}.",
+      "action": "Account Created"
     }
   ]
 }
@@ -990,16 +992,16 @@ This action is used to summary of agents by numbers.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|account_ids|[]string|None|False|List of Account IDs to filter by|None|["4000000000000000000"]|
-|site_ids|[]string|None|False|List of Site IDs to filter by|None|["500000000000000000"]|
+|accountIds|[]string|None|False|List of Account IDs to filter by|None|["4000000000000000000"]|
+|siteIds|[]string|None|False|List of Site IDs to filter by|None|["500000000000000000"]|
 
 Example input:
 ```
 {
-  "account_ids": [
+  "accountIds": [
     "4000000000000000000"
   ],
-  "site_ids": [
+  "siteIds": [
     "500000000000000000"
   ]
 }
@@ -1012,9 +1014,9 @@ Example input:
 |decommissioned|integer|False|Number of decommissioned agents|0|
 |infected|integer|False|Number of agents with at least one active threat|1|
 |online|integer|False|Number of online agents|2|
-|out_of_date|integer|False|Number of agents running an older software version|1|
+|outOfDate|integer|False|Number of agents running an older software version|1|
 |total|integer|False|Number of installed active agents|2|
-|up_to_date|integer|False|Number of agents with the most up-to-date software version|2|
+|upToDate|integer|False|Number of agents with the most up-to-date software version|2|
 
 Example output:
 
@@ -1022,10 +1024,10 @@ Example output:
 {
   "decommissioned": 4,
   "infected": 0,
-  "out_of_date": 0,
+  "outOfDate": 0,
   "online": 1,
   "total": 2,
-  "up_to_date": 2
+  "upToDate": 2
 }
 ```
 
@@ -1052,7 +1054,29 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|data|[]agent_applications|True|List of installed applications|[ { "publisher": "string", "installedDate": "2018-02-27T04:49:26.257525Z", "size": "integer", "name": "string", "version": "string" } ]|
+|data|[]agentApplications|True|List of installed applications|[]|
+
+Example output:
+```
+{
+  "data": [
+    {
+      "installedDate": "2023-01-01T00:00:00.000000Z",
+      "name": "Example App1",
+      "publisher": "Microsoft Corporation",
+      "size": 1234,
+      "version": "1.0.4.5"
+    },
+    {
+      "installedDate": "2023-01-01T00:00:00.000000Z",
+      "name": "Example App2",
+      "publisher": "Example Publisher",
+      "size": 1111,
+      "version": "1.0.5.6"
+    }
+  ]
+}
+```
 
 #### Blacklist
 
@@ -1304,9 +1328,9 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|data|[]threat_data|False|Data|[ { "agentOsType": "windows", "automaticallyResolved": false } ]|
-|errors|[]object|False|Errors|[{"type": "object"}]|
-|pagination|pagination|False|Pagination|{"totalItems": 1}|
+|data|[]threatData|False|Data|[]|
+|errors|[]object|False|Errors|[]|
+|pagination|pagination|False|Pagination|{}|
 
 Example output:
 
@@ -1399,16 +1423,16 @@ This action is used to mark a threat as resolved.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|target_scope|string|None|True|Scope to be used for exclusions|['group', 'site', 'tenant']|site|
-|threat_id|string|None|True|ID of a threat|None|1000000000000000000|
-|whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|path|
+|targetScope|string|None|True|Scope to be used for exclusions|['group', 'site', 'tenant', 'account']|site|
+|threatId|string|None|True|ID of a threat|None|1000000000000000000|
+|whiteningOption|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|path|
 
 Example input:
 ```
 {
-  "target_scope": "site",
-  "threat_id": "1000000000000000000",
-  "whitening_option": "path"
+  "targetScope": "site",
+  "threatId": "1000000000000000000",
+  "whiteningOption": "path"
 }
 ```
 
@@ -1434,15 +1458,15 @@ This action is used to mark a suspicious threat as a threat.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|target_scope|string|None|True|Scope to be used for exclusions|['group', 'site', 'tenant']|site|
-|threat_id|string|None|True|ID of a threat|None|1000000000000000000|
-|whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|path|
+|targetScope|string|None|True|Scope to be used for exclusions|['group', 'site', 'tenant']|site|
+|threatId|string|None|True|ID of a threat|None|1000000000000000000|
+|whiteningOption|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|path|
 
 Example input:
 ```
 {
   "target_scope": "site",
-  "threat_id": 1000000000000000000,
+  "threatId": "1000000000000000000",
   "whitening_option": "path"
 }
 ```
@@ -1470,13 +1494,13 @@ This action is used to apply a mitigation action to a threat.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|None|True|Mitigation action|['rollback-remediation', 'quarantine', 'kill', 'remediate', 'un-quarantine']|quarantine|
-|threat_id|string|None|True|ID of a threat|None|1000000000000000000|
+|threatId|string|None|True|ID of a threat|None|1000000000000000000|
 
 Example input:
 ```
 {
   "action": "quarantine",
-  "threat_id": 1000000000000000000
+  "threatId": 1000000000000000000
 }
 ```
 
@@ -1496,13 +1520,13 @@ Example output:
 
 #### Available Name
 
-This action is the account name available for this account.
+This action is used to check if the account name is available.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name|string|None|True|Account Name to validate|None|example|
+|name|string|None|True|Account name to validate|None|example|
 
 Example input:
 ```
@@ -1515,7 +1539,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|available|boolean|True|Account Name to validate|True|
+|available|boolean|True|Whether the account name is available|True|
 
 Example output:
 
@@ -1865,7 +1889,7 @@ Example output:
 |Description Template|string|False|Activity description template as seen in activity page|
 |Type ID|float|False|Activity type ID|
 
-#### agent_applications
+#### agentApplications
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1948,7 +1972,7 @@ Example output:
 |----|----|--------|-----------|
 |Affected|integer|False|Affected|
 
-#### threat_data
+#### threatData
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -1957,8 +1981,8 @@ Example output:
 |Agent ID|string|False|Agent ID|
 |Agent Infected|boolean|False|Agent infected|
 |Agent IP|string|False|Agent IP|
-|Agent is Active|boolean|False|Agent is Active|
-|Agent is Decommissioned|boolean|False|Agent is Decommissioned|
+|Agent is Active|boolean|False|Agent is active|
+|Agent is Decommissioned|boolean|False|Agent is decommissioned|
 |Agent Machine Type|string|False|Agent machine type|
 |Agent Network Status|string|False|Agent network status|
 |Agent OS Type|string|False|Agent OS type|
@@ -2036,6 +2060,7 @@ For the Trigger settings, only set the Resolved field to False if solely resolve
 
 # Version History
 
+* 9.0.0 - Set `cloud_ready` to `true` in plugin spec | Code refactor
 * 8.1.0 - Added New actions: Fetch file for agent ID and Run remote script. Updated description for Trigger resolved field
 * 8.0.1 - Search Agents: Remove duplicate results when Case Sensitive is false
 * 8.0.0 - Connection: Added Service user (API only user type) authentication | Removed Basic Authentication

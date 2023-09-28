@@ -8,17 +8,17 @@ class Component:
 
 
 class Input:
-    ACCOUNT_IDS = "account_ids"
-    SITE_IDS = "site_ids"
+    ACCOUNTIDS = "accountIds"
+    SITEIDS = "siteIds"
     
 
 class Output:
     DECOMMISSIONED = "decommissioned"
     INFECTED = "infected"
     ONLINE = "online"
-    OUT_OF_DATE = "out_of_date"
+    OUTOFDATE = "outOfDate"
     TOTAL = "total"
-    UP_TO_DATE = "up_to_date"
+    UPTODATE = "upToDate"
     
 
 class AgentsSummaryInput(insightconnect_plugin_runtime.Input):
@@ -27,18 +27,18 @@ class AgentsSummaryInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "account_ids": {
+    "accountIds": {
       "type": "array",
-      "title": "Account IDS",
+      "title": "Account IDs",
       "description": "List of Account IDs to filter by",
       "items": {
         "type": "string"
       },
       "order": 2
     },
-    "site_ids": {
+    "siteIds": {
       "type": "array",
-      "title": "Site IDS",
+      "title": "Site IDs",
       "description": "List of Site IDs to filter by",
       "items": {
         "type": "string"
@@ -77,7 +77,7 @@ class AgentsSummaryOutput(insightconnect_plugin_runtime.Output):
       "description": "Number of online agents",
       "order": 4
     },
-    "out_of_date": {
+    "outOfDate": {
       "type": "integer",
       "title": "Out of Date Number",
       "description": "Number of agents running an older software version",
@@ -89,7 +89,7 @@ class AgentsSummaryOutput(insightconnect_plugin_runtime.Output):
       "description": "Number of installed active agents",
       "order": 3
     },
-    "up_to_date": {
+    "upToDate": {
       "type": "integer",
       "title": "Up to Date Number",
       "description": "Number of agents with the most up-to-date software version",

@@ -14,11 +14,7 @@ class MarkAsBenign(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        threat_id = params.get(Input.THREAT_ID)
-        whitening_option = params.get(Input.WHITENING_OPTION)
-        target_scope = params.get(Input.TARGET_SCOPE)
-
-        whitening_option = whitening_option or None
-
-        affected = self.connection.mark_as_benign(threat_id, whitening_option, target_scope)
-        return {Output.AFFECTED: affected}
+        response = self.connection.client.mark_as_benign(
+            params.get(Input.THREATID), params.get(Input.WHITENINGOPTION) or None, params.get(Input.TARGETSCOPE)
+        )
+        return {Output.AFFECTED: response.get("data", {}).get("affected", 0)}

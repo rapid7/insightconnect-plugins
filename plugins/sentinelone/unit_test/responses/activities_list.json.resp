@@ -1,0 +1,80 @@
+{
+  "data": [
+    {
+      "accountId": "433241117337583618",
+      "accountName": "SentinelOne",
+      "activityType": 19,
+      "agentId": "901345720792880606",
+      "agentUpdatedVersion": null,
+      "comments": null,
+      "createdAt": "2020-12-17T22:39:24.305435Z",
+      "data": {
+        "accountName": "SentinelOne",
+        "computerName": "so-agent-win12",
+        "confidenceLevel": "malicious",
+        "fileContentHash": "a2138f21ea96d97ce00cd51971696f7464e5db89",
+        "fileDisplayName": "test.txt",
+        "filePath": "\\Device\\HarddiskVolume2\\Users\\Administrator\\Desktop\\test.txt",
+        "groupName": "Default Group",
+        "siteName": "Rapid7",
+        "threatClassification": "Trojan",
+        "threatClassificationSource": "Cloud",
+        "username": null
+      },
+      "description": null,
+      "groupId": "521580416411822676",
+      "groupName": "Default Group",
+      "hash": null,
+      "id": "1048709918296672060",
+      "osFamily": null,
+      "primaryDescription": "Threat with confidence level malicious detected: test.txt",
+      "secondaryDescription": "a2138f21ea96d97ce00cd51971696f7464e5db89",
+      "siteId": "521580416395045459",
+      "siteName": "Rapid7",
+      "threatId": "1048709918179231544",
+      "updatedAt": "2020-12-17T22:39:24.299235Z",
+      "userId": null
+    },
+    {
+      "accountId": "433241117337583618",
+      "accountName": "SentinelOne",
+      "activityType": 2001,
+      "agentId": "901345720792880606",
+      "agentUpdatedVersion": null,
+      "comments": null,
+      "createdAt": "2020-12-17T22:39:24.423814Z",
+      "data": {
+        "accountName": "SentinelOne",
+        "computerName": "so-agent-win12",
+        "fileContentHash": "a2138f21ea96d97ce00cd51971696f7464e5db89",
+        "fileDisplayName": "test.txt",
+        "filePath": "\\Device\\HarddiskVolume2\\Users\\Administrator\\Desktop\\test.txt",
+        "fullScopeDetails": "Group Default Group in Site Rapid7 of Account SentinelOne",
+        "globalStatus": "success",
+        "groupName": "Default Group",
+        "scopeLevel": "Group",
+        "scopeName": "Default Group",
+        "siteName": "Rapid7",
+        "threatClassification": "Trojan",
+        "threatClassificationSource": "Cloud"
+      },
+      "description": null,
+      "groupId": "521580416411822676",
+      "groupName": "Default Group",
+      "hash": null,
+      "id": "1048709919294916416",
+      "osFamily": null,
+      "primaryDescription": "The agent so-agent-win12 successfully killed the threat: test.txt.",
+      "secondaryDescription": "\\Device\\HarddiskVolume2\\Users\\Administrator\\Desktop\\test.txt",
+      "siteId": "521580416395045459",
+      "siteName": "Rapid7",
+      "threatId": "1048709918179231544",
+      "updatedAt": "2020-12-17T22:39:24.419607Z",
+      "userId": null
+    }
+  ],
+  "pagination": {
+    "nextCursor": null,
+    "totalItems": 2
+  }
+}

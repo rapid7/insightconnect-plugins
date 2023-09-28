@@ -23,7 +23,7 @@ class AppsByAgentIdsInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "ids": {
       "type": "array",
-      "title": "Agent IDS",
+      "title": "Agent IDs",
       "description": "Agent ID list",
       "items": {
         "type": "string"
@@ -52,7 +52,7 @@ class AppsByAgentIdsOutput(insightconnect_plugin_runtime.Output):
       "title": "Agent Applications",
       "description": "List of installed applications",
       "items": {
-        "$ref": "#/definitions/agent_applications"
+        "$ref": "#/definitions/agentApplications"
       },
       "order": 1
     }
@@ -61,9 +61,9 @@ class AppsByAgentIdsOutput(insightconnect_plugin_runtime.Output):
     "data"
   ],
   "definitions": {
-    "agent_applications": {
+    "agentApplications": {
       "type": "object",
-      "title": "agent_applications",
+      "title": "agentApplications",
       "properties": {
         "installedDate": {
           "type": "string",

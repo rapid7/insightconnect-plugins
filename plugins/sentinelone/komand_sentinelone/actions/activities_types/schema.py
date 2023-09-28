@@ -11,7 +11,7 @@ class Input:
     pass
 
 class Output:
-    ACTIVITY_TYPES = "activity_types"
+    ACTIVITYTYPES = "activityTypes"
     
 
 class ActivitiesTypesInput(insightconnect_plugin_runtime.Input):
@@ -29,23 +29,23 @@ class ActivitiesTypesOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "activity_types": {
+    "activityTypes": {
       "type": "array",
       "title": "Activity Types",
-      "description": "Result of activities types",
+      "description": "List of activity types",
       "items": {
-        "$ref": "#/definitions/activities_types"
+        "$ref": "#/definitions/activityTypes"
       },
       "order": 1
     }
   },
   "required": [
-    "activity_types"
+    "activityTypes"
   ],
   "definitions": {
-    "activities_types": {
+    "activityTypes": {
       "type": "object",
-      "title": "activities_types",
+      "title": "activityTypes",
       "properties": {
         "action": {
           "type": "string",
@@ -60,7 +60,7 @@ class ActivitiesTypesOutput(insightconnect_plugin_runtime.Output):
           "order": 2
         },
         "id": {
-          "type": "number",
+          "type": "integer",
           "title": "Type ID",
           "description": "Activity type ID",
           "order": 1
