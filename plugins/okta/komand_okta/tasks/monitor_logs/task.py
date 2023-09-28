@@ -73,7 +73,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             next_link = matched_link.group(1) if matched_link else None
         return next_link
 
-    def get_last_collection_timestamp(self, now, new_logs):
+    def get_last_collection_timestamp(self, now: str, new_logs: list) -> str:
         new_ts = ""
         # Mirror the behaviour in collector code to save the TS of the last parsed event as the 'since' time checkpoint.
         if new_logs:  # make sure that logs were returned from Okta otherwise will get index error
