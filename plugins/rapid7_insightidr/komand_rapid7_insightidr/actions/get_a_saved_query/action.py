@@ -26,7 +26,7 @@ class GetASavedQuery(insightconnect_plugin_runtime.Action):
                 data=f"Query ID: {query_id}",
             )
         request = ResourceHelper(self.connection.session, self.logger)
-        response = request.resource_request(Queries.get_query_by_id(self.connection.url, query_id), "get")
+        response = request.resource_request(Queries.get_query_by_id(self.connection.region, query_id), "get")
         try:
             result = json.loads(response["resource"])
             saved_query = insightconnect_plugin_runtime.helper.clean(result.get("saved_query"))

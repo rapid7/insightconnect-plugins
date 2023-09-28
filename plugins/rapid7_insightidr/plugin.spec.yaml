@@ -4,7 +4,8 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 5.0.0
+version: 5.0.1
+connection_version: 5
 supported_versions: ["Latest release successfully tested on 2022-07-20."]
 vendor: rapid7
 cloud_ready: true
@@ -161,21 +162,25 @@ types:
       description: The number of indicators in this threat
       type: integer
       required: false
+      example: 2
     name:
       title: Name
       description: The name of the threat
       type: string
       required: false
+      example: bad-vrius
     note:
       title: Note
       description: Notes about this threat
       type: string
       required: false
+      example: test
     published:
       title: Published
       description: Indicates whether this threat has been published
       type: boolean
       required: false
+      example: false
   link:
     rel:
       title: Relation
@@ -532,6 +537,7 @@ types:
       description: List of attachments associated with this comment
       type: "[]attachment"
       required: false
+      example: [{"rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890","creator": {"type": "USER","name": "Example User"},"created_time": "2022-08-19T13:00:58.645Z","file_name": "test.txt","mime_type": "text/plain","size": 4,"scan_status": "CLEAN"}]
 connection:
   api_key:
     title: API Key
@@ -595,11 +601,13 @@ actions:
         description: The list of indicators that have been rejected during the update
         type: "[]string"
         required: false
+        example: ["example.com", "10.0.0.1"]
       threat:
         title: Threat
         description: The information about the threat
         type: threat
         required: false
+        example: {"name": "bad-virus","note": "test","published": False,"indicator_count": 2}
   list_investigations:
     title: List Investigations
     description: Retrieve a page of investigations matching the given request parameters
@@ -680,11 +688,13 @@ actions:
         description: A list of found investigations
         type: "[]investigation"
         required: true
+        example: [{"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}]
       metadata:
         title: Metadata
         description: The pagination parameters used to generate this page result
         type: investigation_metadata
         required: true
+        example: {"index": 0,"size": 1,"total_data": 1,"total_pages": 1}
   create_investigation:
     title: Create Investigation
     description: Allows to create investigation manually
@@ -740,6 +750,7 @@ actions:
         description: The body of the specified investigation
         type: investigation
         required: true
+        example: {"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}
   search_investigations:
       title: Search Investigations
       description: Allows to search for investigations that match the given criteria
@@ -788,11 +799,13 @@ actions:
           description: A list of found investigations
           type: "[]investigation"
           required: true
+          example: [{"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}]
         metadata:
           title: Metadata
           description: The pagination parameters used to generate this page result
           type: investigation_metadata
           required: true
+          example: {"index": 0,"size": 1,"total_data": 1,"total_pages": 1}
   update_investigation:
     title: Update Investigation
     description: Allows to update existing investigation by ID or RRN
@@ -856,6 +869,7 @@ actions:
         description: The body of the specified investigation
         type: investigation
         required: true
+        example: {"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}
   get_investigation:
     title: Get Investigation
     description: Allows to get existing investigation by ID or RRN
@@ -872,6 +886,7 @@ actions:
         description: The body of the specified investigation
         type: investigation
         required: true
+        example: {"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}
   set_priority_of_investigation:
     title: Set Priority of Investigation
     description: Allows to change the priority of the investigation with the given ID or RRN
@@ -900,6 +915,7 @@ actions:
         description: The investigation for which the priority was set
         type: investigation
         required: true
+        example: {"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}
   set_disposition_of_investigation:
     title: Set Disposition of Investigation
     description: Allows to change the disposition of the investigation with the given ID or RRN
@@ -926,6 +942,7 @@ actions:
         description: The investigation for which the disposition was set
         type: investigation
         required: true
+        example: {"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}
   set_status_of_investigation_action:
     title: Set Status of Investigation
     description: Set the status of the investigation with the given ID
@@ -952,6 +969,7 @@ actions:
         description: The investigation for which the status was set
         type: investigation
         required: true
+        example: {"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}
   list_alerts_for_investigation:
     title: List Alerts for Investigation
     description: Retrieve a page of alerts associated with the specified investigation
@@ -982,11 +1000,13 @@ actions:
         description: A list of alerts associated with the investigation
         type: "[]alert"
         required: true
+        example: [{"alert_type": "Example Type","alert_type_description": "Example Description","created_time": "01-01-2020T00:00:00","detection_rule_rrn": "rrn:example","first_event_time": "01-01-2020T00:00:00","id": "11111111-1111-1111-1111-111111111111","latest_event_time": "01-01-2020T00:00:00","title": "Example Title"}]
       metadata:
         title: Metadata
         description: The pagination parameters used to generate this page result
         type: investigation_metadata
         required: true
+        example: {"index": 0,"size": 1,"total_data": 1,"total_pages": 1}
   add_indicators_to_a_threat:
     title: Add Indicators to a Threat
     description: Add InsightIDR threat indicators to a threat with the given threat key
@@ -1027,11 +1047,13 @@ actions:
         description: The list of indicators that have been rejected during the update
         type: "[]string"
         required: false
+        example: ["https://example.com","https://test.com"]
       threat:
         title: Threat
         description: The information about the threat
         type: threat
         required: false
+        example: {"name": "Contributing Collaborative Threat: Flagged Malicious", "published": False,"indicator_count": 13}
   assign_user_to_investigation:
     title: Assign User to Investigation
     description: Assign a user to the specified investigation
@@ -1054,11 +1076,13 @@ actions:
         description: Was the user assigned successfully
         type: boolean
         required: true
+        example: true
       investigation:
         title: Investigation
         description: The investigation that was modified
         type: investigation
         required: true
+        example: {"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}
   query:
     title: Get Query Results
     description: Get query results for a LEQL query by query ID
@@ -1081,6 +1105,7 @@ actions:
         description: Events from logs
         type: "[]events"
         required: true
+        example: [{"labels": [],"timestamp": 1601598638768,"sequence_number": 123456789123456789,"log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313","message": {"timestamp": "2020-10-02T00:29:14.649Z","destination_asset": "iagent-win7","source_asset_address": "192.168.100.50","destination_asset_address": "example-host","destination_local_account": "user","logon_type": "NETWORK","result": "SUCCESS","new_authentication": "false","service": "ntlmssp ","source_json": {"sourceName": "Microsoft-Windows-Security-Auditing","insertionStrings": ["S-1-0-0","-","-","0x0","X-X-X-XXXXXXXXXXX","user@example.com","example-host","0x204f163c","3","NtLmSsp ","NTLM","","{00000000-0000-0000-0000-000000000000}","-","NTLM V2","128","0x0","-","192.168.50.1","59090"],"eventCode": 4624,"computerName": "example-host","sid": "","isDomainController": false,"eventData": null,"timeWritten": "2020-10-02T00:29:13.670722000Z"}},"links": [{"rel": "Context","href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}],"sequence_number_str": "123456789123456789"}]
   get_a_log:
     title: Get a Log
     description: Get a specific log from an account
@@ -1097,6 +1122,7 @@ actions:
         description: Requested log
         type: logsets_info
         required: true
+        example: {"log": {"id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f","name": "Windows Defender","tokens": ["bc38a911-65f1-4755-cca3-a330a6336b3a"],"structures": ["1238a911-65f1-4755-cca3-a330a6336b3a"],"user_data": {"platform_managed": "true"},"source_type": "token","token_seed": null,"retention_period": "default","links": [{"rel": "Related","href": "https://example.com"}],"rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a","logsets_info": [{"id": "bc38a911-65f1-4755-cca3-a330a6336b3a","name": "Unparsed Data","rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a","links": [{"rel": "Self","href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85"}]}]}}
   get_all_logs:
     title: Get All Logs
     description: Request used to list all logs for an account
@@ -1106,6 +1132,7 @@ actions:
         description: All logs
         type: logsets_info
         required: true
+        example: {"log": {"id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f","name": "Windows Defender","tokens": ["bc38a911-65f1-4755-cca3-a330a6336b3a"],"structures": ["1238a911-65f1-4755-cca3-a330a6336b3a"],"user_data": {"platform_managed": "true"},"source_type": "token","token_seed": null,"retention_period": "default","links": [{"rel": "Related","href": "https://example.com"}],"rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a","logsets_info": [{"id": "bc38a911-65f1-4755-cca3-a330a6336b3a","name": "Unparsed Data","rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a","links": [{"rel": "Self","href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85"}]}]}}
   advanced_query_on_log:
     title: Advanced Query on Log
     description: Realtime query an InsightIDR log. This will query individual logs for results
@@ -1172,11 +1199,13 @@ actions:
         description: Query Results
         type: "[]events"
         required: true
+        example: [{"labels": [],"timestamp": 1601598638768,"sequence_number": 123456789123456789,"log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313","message": {"timestamp": "2020-10-02T00:29:14.649Z","destination_asset": "iagent-win7","source_asset_address": "192.168.100.50","destination_asset_address": "example-host","destination_local_account": "user","logon_type": "NETWORK","result": "SUCCESS","new_authentication": "false","service": "ntlmssp ","source_json": {"sourceName": "Microsoft-Windows-Security-Auditing","insertionStrings": ["S-1-0-0","-","-","0x0","X-X-X-XXXXXXXXXXX","user@example.com","example-host","0x204f163c","3","NtLmSsp ","NTLM","","{00000000-0000-0000-0000-000000000000}","-","NTLM V2","128","0x0","-","192.168.50.1","59090"],"eventCode": 4624,"computerName": "example-host","sid": "","isDomainController": false,"eventData": null,"timeWritten": "2020-10-02T00:29:13.670722000Z"}},"links": [{"rel": "Context","href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}],"sequence_number_str": "123456789123456789"}]
       count:
         title: Count
         description: Number of log entries found
         type: integer
         required: true
+        example: 10
   advanced_query_on_log_set:
     title: Advanced Query on Log Set
     description: Realtime query an InsightIDR log set. This will query entire log sets for results
@@ -1266,11 +1295,13 @@ actions:
         description: Query Results
         type: "[]events"
         required: true
+        example: [{"labels": [],"timestamp": 1601598638768,"sequence_number": 123456789123456789,"log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313","message": {"timestamp": "2020-10-02T00:29:14.649Z","destination_asset": "iagent-win7","source_asset_address": "192.168.100.50","destination_asset_address": "example-host","destination_local_account": "user","logon_type": "NETWORK","result": "SUCCESS","new_authentication": "false","service": "ntlmssp ","source_json": {"sourceName": "Microsoft-Windows-Security-Auditing","insertionStrings": ["S-1-0-0","-","-","0x0","X-X-X-XXXXXXXXXXX","user@example.com","example-host","0x204f163c","3","NtLmSsp ","NTLM","","{00000000-0000-0000-0000-000000000000}","-","NTLM V2","128","0x0","-","192.168.50.1","59090"],"eventCode": 4624,"computerName": "example-host","sid": "","isDomainController": false,"eventData": null,"timeWritten": "2020-10-02T00:29:13.670722000Z"}},"links": [{"rel": "Context","href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}],"sequence_number_str": "123456789123456789"}]
       count:
         title: Count
         description: Number of log entries found
         type: integer
         required: true
+        example: 10
   close_investigations_in_bulk:
     title: Close Investigations in Bulk
     description: This action is used to close all investigations that fall within a date range
@@ -1316,11 +1347,13 @@ actions:
         description: The IDs of the investigations that were closed by the request
         type: "[]string"
         required: true
+        example: ["6c7db8d1-abc5-b9da-dd71-1a3ffffe8a16"]
       num_closed:
         title: Num Closed
         description: The number of investigations closed by the request
         type: integer
         required: true
+        example: 10
   create_threat:
     title: Create Threat
     description: Create a private InsightIDR threat and add indicators to this threat
@@ -1350,11 +1383,13 @@ actions:
         description: Rejected indicators in new threat
         type: "[]string"
         required: true
+        example: ["example.com", "10.0.0.1"]
       threat:
         title: Threat
         description: The information about the new threat
         type: threat
         required: true
+        example: {"name": "Threat created via InsightConnect", "note": "Threat created via InsightConnect", "published": False,"indicator_count": 2}
   get_all_saved_queries:
     title: Get All Saved Queries
     description: Retrieve all saved InsightIDR LEQL queries
@@ -1364,6 +1399,7 @@ actions:
         description: Saved LEQL queries
         type: "[]query"
         required: true
+        example: [{"id": "00000000-0000-9eec-0000-000000000000", "leql": {"during": {"from": null, "time_range": "yesterday", "to": null}, "statement": "where(931dde6c60>=800)"}, "logs": ["31a4d56e-460e-460f-9542-c2bc8edd7c6b"], "name": "Large Values Yesterday"}]
   get_a_saved_query:
     title: Get a Saved Query
     description: Retrieve a saved InsightIDR LEQL query by its ID
@@ -1380,6 +1416,7 @@ actions:
         description: Saved LEQL query
         type: query
         required: true
+        example: {"id": "00000000-0000-9eec-0000-000000000000", "leql": {"during": {"from": null, "time_range": "yesterday", "to": null}, "statement": "where(931dde6c60>=800)"}, "logs": ["31a4d56e-460e-460f-9542-c2bc8edd7c6b"], "name": "Large Values Yesterday"}
   list_comments:
     title: List Comments
     description: List all comments on an investigation by passing an investigation's RRN as the target value
@@ -1410,11 +1447,13 @@ actions:
         description: List of comments
         type: "[]comment"
         required: false
+        example: [{"created_time": "2022-08-18T12:53:26.676Z","rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:1234567890","target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890","creator": {"type": "USER","name": "Example User"},"body": "test","visibility": "PUBLIC"}]
       success:
         title: Success
         description: Whether the action was successful or not
         type: boolean
         required: true
+        example: true
   create_comment:
     title: Create Comment
     description: Create a comment for a particular target. The target determines where the comment will appear within InsightIDR. Only certain types of RRNs are permitted as targets, such as investigation RRNs
@@ -1443,11 +1482,13 @@ actions:
         description: Newly created comment
         type: comment
         required: false
+        example: {"created_time": "2022-09-22T08:38:13.962Z","rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:1234567890","target": "rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210","creator": {"type": "USER","name": "Example User"},"body": "test","visibility": "PUBLIC","attachments": [{"rrn": "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210","creator": {"type": "USER","name": "Example User"},"created_time": "2022-09-20T13:54:28.246Z","file_name": "test.txt","mime_type": "text/plain","size": 4,"scan_status": "CLEAN"}]}
       success:
         title: Success
         description: Whether the action was successful or not
         type: boolean
         required: true
+        example: true
   delete_comment:
     title: Delete Comment
     description: Delete a comment by using an RRN. The RRN determines which comment will be deleted
@@ -1464,6 +1505,7 @@ actions:
         description: Whether the action was successful or not
         type: boolean
         required: true
+        example: true
   list_attachments:
     title: List Attachments
     description: Retrieves attachments matching the given request parameters
@@ -1494,11 +1536,13 @@ actions:
         description: List of attachments
         type: "[]attachment"
         required: false
+        example: [{"rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890","creator": {"type": "USER","name": "Example User"},"created_time": "2022-08-19T13:00:58.645Z","file_name": "test.txt","mime_type": "text/plain","size": 4,"scan_status": "CLEAN"}]
       success:
         title: Success
         description: Whether the action was successful or not
         type: boolean
         required: true
+        example: true
   upload_attachment:
     title: Upload Attachment
     description: Upload an attachment
@@ -1521,11 +1565,13 @@ actions:
         description: Attachment details
         type: "[]attachment"
         required: false
+        example: [{"rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890","creator": {"type": "USER","name": "Example User"},"created_time": "2022-08-19T13:00:58.645Z","file_name": "test.txt","mime_type": "text/plain","size": 4,"scan_status": "CLEAN"}]
       success:
         title: Success
         description: Whether the action was successful or not
         type: boolean
         required: true
+        example: true
   get_attachment_information:
     title: Get Attachment Information
     description: Get information from an attachment by RRN. The RRN determines which attachment information is retrieved from
@@ -1542,11 +1588,13 @@ actions:
         description: Attachment details
         type: attachment
         required: false
+        example: {"rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890","creator": {"type": "USER","name": "Example User"},"created_time": "2022-08-19T13:00:58.645Z","file_name": "test.txt","mime_type": "text/plain","size": 4,"scan_status": "CLEAN"}
       success:
         title: Success
         description: Whether the action was successful or not
         type: boolean
         required: true
+        example: true
   delete_attachment:
     title: Delete Attachment
     description: Delete an attachment with the given RRN
@@ -1563,6 +1611,7 @@ actions:
         description: Whether the action was successful or not
         type: boolean
         required: true
+        example: true
   download_attachment:
     title: Download Attachment
     description: Download an attachment by RRN. The RRN determines which attachment is downloaded
@@ -1579,8 +1628,10 @@ actions:
         description: The base64 encoded content of the attachment
         type: bytes
         required: false
+        example: dGVzdA==
       success:
         title: Success
         description: Whether the action was successful or not
         type: boolean
         required: true
+        example: true
