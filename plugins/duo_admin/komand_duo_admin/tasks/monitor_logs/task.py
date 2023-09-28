@@ -146,7 +146,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
     @staticmethod
     def add_log_type_field(logs: list, value: str) -> list:
         for log in logs:
-            log["logType"] = value
+            log["log_type"] = value
         return logs
 
     @staticmethod
