@@ -1,65 +1,78 @@
 {
-  "logs": [
-    {
-      "bypassStatusEnabled": 1682836486330,
-      "enabledBy": {
-        "key": "DEKU19BYSSJSOABCD123",
-        "name": "Admin"
-      },
-      "enabledFor": {
-        "key": "DUTQPHO6GIQI3ABCD123",
-        "name": "example-user2"
-      },
-      "priorityEvent": false,
-      "sekey": "SETHF3RH69P1JABCD123",
-      "state": "new",
-      "surfacedTimestamp": 1682836486335,
-      "triagedAsInteresting": false,
-      "type": "bypass_status",
-      "logType": "trust_monitor_event"
-    },
-    {
-      "accessDevice": {
-        "browser": "Chrome",
-        "browserVersion": "113.0.0.0",
-        "ip": "198.51.100.1",
-        "isEncryptionEnabled": "True",
-        "isFirewallEnabled": "True",
-        "isPasswordSet": "True",
-        "location": {
-          "city": "Los Angeles",
-          "country": "United States",
-          "state": "California"
-        },
-        "os": "Mac OS X",
-        "osVersion": "10.15.7"
-      },
-      "alias": "unknown",
-      "application": {
-        "key": "DI8CODQSMK4BXPLYS47K",
-        "name": "User Portal"
-      },
-      "authDevice": {
-        "key": "DPAVQAJMU3BW0LV7O234",
-        "name": "Generic Smartphone"
-      },
-      "eventType": "enrollment",
-      "factor": "not_available",
-      "isotimestamp": "2023-05-29T11:07:38.631165+00:00",
-      "result": "success",
-      "timestamp": 1685358458,
-      "trustedEndpointStatus": "unknown",
-      "txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c1",
-      "user": {
-        "groups": [
-          "Test Group"
-        ],
-        "key": "DUOR48RKV2AYN7YVS9BT",
-        "name": "example-user2"
-      },
-      "logType": "authentication"
-    }
-  ],
+  "logs": [{
+		"bypass_status_enabled": 1682836486330,
+		"enabled_by": {
+			"key": "DEKU19BYSSJSOABCD123",
+			"name": "Admin"
+		},
+		"enabled_for": {
+			"key": "DUTQPHO6GIQI3ABCD123",
+			"name": "example-user2"
+		},
+		"priority_event": false,
+		"priority_reasons": [],
+		"sekey": "SETHF3RH69P1JABCD123",
+		"state": "new",
+		"state_updated_timestamp": null,
+		"surfaced_timestamp": 1682836486335,
+		"triaged_as_interesting": false,
+		"type": "bypass_status",
+		"logType": "trust_monitor_event"
+	},
+	{
+		"access_device": {
+			"browser": "Chrome",
+			"browser_version": "113.0.0.0",
+			"epkey": null,
+			"flash_version": null,
+			"hostname": null,
+			"ip": "198.51.100.1",
+			"is_encryption_enabled": true,
+			"is_firewall_enabled": true,
+			"is_password_set": true,
+			"java_version": null,
+			"location": {
+				"city": "Los Angeles",
+				"country": "United States",
+				"state": "California"
+			},
+			"os": "Mac OS X",
+			"os_version": "10.15.7"
+		},
+		"adaptive_trust_assessments": {},
+		"alias": "unknown",
+		"application": {
+			"key": "DI8CODQSMK4BXPLYS47K",
+			"name": "User Portal"
+		},
+		"auth_device": {
+			"ip": null,
+			"key": "DPAVQAJMU3BW0LV7O234",
+			"location": {
+				"city": null,
+				"country": null,
+				"state": null
+			},
+			"name": "Generic Smartphone"
+		},
+		"email": null,
+		"event_type": "enrollment",
+		"factor": "not_available",
+		"isotimestamp": "2023-05-29T11:07:38.631165+00:00",
+		"ood_software": null,
+		"reason": null,
+		"result": "success",
+		"timestamp": 1685358458,
+		"trusted_endpoint_status": "unknown",
+		"txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c1",
+		"user": {
+			"groups": ["Test Group"],
+			"key": "DUOR48RKV2AYN7YVS9BT",
+			"name": "example-user2"
+		},
+		"logType": "authentication"
+	}
+],
   "state": {
     "auth_logs_next_page_params": {
       "limit": "1000",
@@ -73,10 +86,10 @@
       "29f17fa591dc5b46c1dfac976364059d80208fdb"
     ],
     "previous_auth_log_hashes": [
-      "82a4457f1394c5865f5f84d9ef9f6d36cb28717a"
+      "e3ffddb111f2661b752753298812dcb723854aa8"
     ],
     "previous_trust_monitor_event_hashes": [
-      "22b005c5642c29f511bab4017015b6348c88cca5"
+      "4a28a8fd56d2a2adffe5da40c5993ec60f3dafff"
     ]
   },
   "status_code": 200
