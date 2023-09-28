@@ -1,0 +1,400 @@
+name: Plugin Release Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      RELEASE_PROD_CLOUD_US:
+        description: 'Release for us environment.'
+        required: true
+        default: true
+      RELEASE_PROD_CLOUD_EU:
+        description: 'Release for eu environment.'
+        required: true
+        default: true
+      RELEASE_PROD_CLOUD_CA:
+        description: 'Release for ca environment.'
+        required: true
+        default: true
+      RELEASE_PROD_CLOUD_AU:
+        description: 'Release for au environment.'
+        required: true
+        default: true
+      RELEASE_PROD_CLOUD_AP:
+        description: 'Release for ap environment.'
+        required: true
+        default: true
+      RELEASE_PROD_CLOUD_US2:
+        description: 'Release for us2 environment.'
+        required: true
+        default: true
+      RELEASE_PROD_CLOUD_US3:
+        description: 'Release for us3 environment.'
+        required: true
+        default: true
+      RELEASE_INT_CLOUD_US:
+        description: 'Release for us int environment.'
+        required: true
+        default: true      
+      RELEASE_HUB_PROD:
+        description: 'Release for hub prod environment.'
+        required: true
+        default: true
+      RELEASE_HUB_STAGING:
+        description: 'Release for hub staging environment.'
+        required: true
+        default: true
+      RELEASE_ALLIANCE_PROD:
+        description: 'Release for alliance prod environment.'
+        required: true
+        default: true
+      RELEASE_ALLIANCE_STAGING:
+        description: 'Release for alliance staging environment.'
+        required: true
+        default: true
+      INSIGHT_KOMAND_CLEAN:
+        description: 'Docker image cleanup.'
+        required: true
+        default: 'None'
+        options:
+          - 'None'
+          - 'All'
+          - 'Dangling'
+      INSIGHT_KOMAND_PLUGIN_NAME:
+        description: 'Plugin to release. The name must match the plugin directory name in GitHub. Multiple plugins can be entered, separated by commas (freegeoip,jira,etc).'
+        required: false
+      INSIGHT_KOMAND_PLUGIN_ALL:
+        description: 'Plugin release batching option. Leave empty to upload by name, otherwise select All, Go, or Python to release plugins, respectively.'
+        required: true
+        default: ''
+        options:
+          - ''
+          - 'All'
+          - 'Go'
+          - 'Python'
+      INSIGHT_KOMAND_BRANCH:
+        description: 'Branch or tag to source the plugin code from.'
+        default: 'master'
+        required: true
+      INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION:
+        description: 'Plugin release options. Typically all values should be selected.'
+        required: true
+        default: ['Icon', 'Registry', 'Market', 'Help']
+        options:
+          - 'Icon'
+          - 'Registry'
+          - 'Market'
+          - 'Help'
+      INSIGHT_KOMAND_SIMULATE:
+        description: 'Check to run this release job as a simulation (affects all infrastructure).'
+        required: true
+        default: false
+      INSIGHT_KOMAND_FORCE_UPDATE:
+        description: 'Check to force update of the plugin (affects only Komand infrastructure).'
+        required: true
+        default: false
+      INSIGHT_KOMAND_OVERRIDE_BLACKLISTS:
+        description: 'Check to override plugin blacklists (affects all release targets).'
+        required: true
+        default: false
+  pull_request:
+    branches:
+      - 'master'
+
+env:
+  GITHUB_ORG: "rapid7"
+  INSIGHT_CONNECT_PLUGINS: "insightconnect-plugins"
+  INSIGHT_CONNECT_PLUGINS_REPO: "rapid7/insightconnect-plugins"
+
+  PROD_CLOUD_US: ${{ secrets.PROD_CLOUD_US }}
+  PROD_CLOUD_US_MARKET_TOKEN: ${{ secrets.PROD_CLOUD_US_MARKET_TOKEN }}
+  PROD_CLOUD_US_MARKET_PASSWORD: ${{ secrets.PROD_CLOUD_US_MARKET_PASSWORD }}
+  PROD_CLOUD_US_MARKET_USERNAME: ${{ secrets.PROD_CLOUD_US_MARKET_USERNAME }}
+  PROD_CLOUD_US_DOCKER_REGISTRY_USERNAME: ${{ secrets.PROD_CLOUD_US_DOCKER_REGISTRY_USERNAME }}
+  PROD_CLOUD_US_DOCKER_REGISTRY_PASSWORD: ${{ secrets.PROD_CLOUD_US_DOCKER_REGISTRY_PASSWORD }}
+
+  PROD_CLOUD_EU: ${{ secrets.PROD_CLOUD_EU }}
+  PROD_CLOUD_EU_MARKET_TOKEN: ${{ secrets.PROD_CLOUD_EU_MARKET_TOKEN }}
+  PROD_CLOUD_EU_MARKET_PASSWORD: ${{ secrets.PROD_CLOUD_EU_MARKET_PASSWORD }}
+  PROD_CLOUD_EU_MARKET_USERNAME: ${{ secrets.PROD_CLOUD_EU_MARKET_USERNAME }}
+  PROD_CLOUD_EU_DOCKER_REGISTRY_USERNAME: ${{ secrets.PROD_CLOUD_EU_DOCKER_REGISTRY_USERNAME }}
+  PROD_CLOUD_EU_DOCKER_REGISTRY_PASSWORD: ${{ secrets.PROD_CLOUD_EU_DOCKER_REGISTRY_PASSWORD }}
+
+  PROD_CLOUD_CA: ${{ secrets.PROD_CLOUD_CA }}
+  PROD_CLOUD_CA_MARKET_TOKEN: ${{ secrets.PROD_CLOUD_CA_MARKET_TOKEN }}
+  PROD_CLOUD_CA_MARKET_PASSWORD: ${{ secrets.PROD_CLOUD_CA_MARKET_PASSWORD }}
+  PROD_CLOUD_CA_MARKET_USERNAME: ${{ secrets.PROD_CLOUD_CA_MARKET_USERNAME }}
+  PROD_CLOUD_CA_DOCKER_REGISTRY_USERNAME: ${{ secrets.PROD_CLOUD_CA_DOCKER_REGISTRY_USERNAME }}
+  PROD_CLOUD_CA_DOCKER_REGISTRY_PASSWORD: ${{ secrets.PROD_CLOUD_CA_DOCKER_REGISTRY_PASSWORD }}
+
+  PROD_CLOUD_AU: ${{ secrets.PROD_CLOUD_AU }}
+  PROD_CLOUD_AU_MARKET_TOKEN: ${{ secrets.PROD_CLOUD_AU_MARKET_TOKEN }}
+  PROD_CLOUD_AU_MARKET_PASSWORD: ${{ secrets.PROD_CLOUD_AU_MARKET_PASSWORD }}
+  PROD_CLOUD_AU_MARKET_USERNAME: ${{ secrets.PROD_CLOUD_AU_MARKET_USERNAME }}
+  PROD_CLOUD_AU_DOCKER_REGISTRY_USERNAME: ${{ secrets.PROD_CLOUD_AU_DOCKER_REGISTRY_USERNAME }}
+  PROD_CLOUD_AU_DOCKER_REGISTRY_PASSWORD: ${{ secrets.PROD_CLOUD_AU_DOCKER_REGISTRY_PASSWORD }}
+
+  PROD_CLOUD_AP: ${{ secrets.PROD_CLOUD_AP }}
+  PROD_CLOUD_AP_MARKET_TOKEN: ${{ secrets.PROD_CLOUD_AP_MARKET_TOKEN }}
+  PROD_CLOUD_AP_MARKET_PASSWORD: ${{ secrets.PROD_CLOUD_AP_MARKET_PASSWORD }}
+  PROD_CLOUD_AP_MARKET_USERNAME: ${{ secrets.PROD_CLOUD_AP_MARKET_USERNAME }}
+  PROD_CLOUD_AP_DOCKER_REGISTRY_USERNAME: ${{ secrets.PROD_CLOUD_AP_DOCKER_REGISTRY_USERNAME }}
+  PROD_CLOUD_AP_DOCKER_REGISTRY_PASSWORD: ${{ secrets.PROD_CLOUD_AP_DOCKER_REGISTRY_PASSWORD }}
+
+  PROD_CLOUD_US2: ${{ secrets.PROD_CLOUD_US2 }}
+  PROD_CLOUD_US2_MARKET_TOKEN: ${{ secrets.PROD_CLOUD_US2_MARKET_TOKEN }}
+  PROD_CLOUD_US2_MARKET_PASSWORD: ${{ secrets.PROD_CLOUD_US2_MARKET_PASSWORD }}
+  PROD_CLOUD_US2_MARKET_USERNAME: ${{ secrets.PROD_CLOUD_US2_MARKET_USERNAME }}
+  PROD_CLOUD_US2_DOCKER_REGISTRY_USERNAME: ${{ secrets.PROD_CLOUD_US2_DOCKER_REGISTRY_USERNAME }}
+  PROD_CLOUD_US2_DOCKER_REGISTRY_PASSWORD: ${{ secrets.PROD_CLOUD_US2_DOCKER_REGISTRY_PASSWORD }}
+
+  PROD_CLOUD_US3: ${{ secrets.PROD_CLOUD_US3 }}
+  PROD_CLOUD_US3_MARKET_TOKEN: ${{ secrets.PROD_CLOUD_US3_MARKET_TOKEN }}
+  PROD_CLOUD_US3_MARKET_PASSWORD: ${{ secrets.PROD_CLOUD_US3_MARKET_PASSWORD }}
+  PROD_CLOUD_US3_MARKET_USERNAME: ${{ secrets.PROD_CLOUD_US3_MARKET_USERNAME }}
+  PROD_CLOUD_US3_DOCKER_REGISTRY_USERNAME: ${{ secrets.PROD_CLOUD_US3_DOCKER_REGISTRY_USERNAME }}
+  PROD_CLOUD_US3_DOCKER_REGISTRY_PASSWORD: ${{ secrets.PROD_CLOUD_US3_DOCKER_REGISTRY_PASSWORD }}
+
+  INT_CLOUD_US: ${{ secrets.INT_CLOUD_US }}
+  INT_CLOUD_US_MARKET_TOKEN: ${{ secrets.INT_CLOUD_US_MARKET_TOKEN }}
+  INT_CLOUD_US_MARKET_PASSWORD: ${{ secrets.INT_CLOUD_US_MARKET_PASSWORD }}
+  INT_CLOUD_US_MARKET_USERNAME: ${{ secrets.INT_CLOUD_US_MARKET_USERNAME }}
+  INT_CLOUD_US_DOCKER_REGISTRY_USERNAME: ${{ secrets.INT_CLOUD_US_DOCKER_REGISTRY_USERNAME }}
+  INT_CLOUD_US_DOCKER_REGISTRY_PASSWORD: ${{ secrets.INT_CLOUD_US_DOCKER_REGISTRY_PASSWORD }}
+
+  HUB_PROD: ${{ secrets.HUB_PROD }}
+  HUB_PROD_MARKET_TOKEN: ${{ secrets.HUB_PROD_US_MARKET_TOKEN }}
+  HUB_PROD_MARKET_PASSWORD: ${{ secrets.HUB_PROD_MARKET_PASSWORD }}
+  HUB_PROD_MARKET_USERNAME: ${{ secrets.HUB_PROD_MARKET_USERNAME }}
+  HUB_PROD_DOCKER_REGISTRY_USERNAME: ${{ secrets.HUB_PROD_DOCKER_REGISTRY_USERNAME }}
+  HUB_PROD_DOCKER_REGISTRY_PASSWORD: ${{ secrets.HUB_PROD_DOCKER_REGISTRY_PASSWORD }}
+
+  HUB_STAGING: ${{ secrets.HUB_STAGING }}
+  HUB_STAGING_MARKET_TOKEN: ${{ secrets.HUB_STAGING_US_MARKET_TOKEN }}
+  HUB_STAGING_MARKET_PASSWORD: ${{ secrets.HUB_STAGING_MARKET_PASSWORD }}
+  HUB_STAGING_MARKET_USERNAME: ${{ secrets.HUB_STAGING_MARKET_USERNAME }}
+  HUB_STAGING_DOCKER_REGISTRY_USERNAME: ${{ secrets.HUB_STAGING_DOCKER_REGISTRY_USERNAME }}
+  HUB_STAGING_DOCKER_REGISTRY_PASSWORD: ${{ secrets.HUB_STAGING_DOCKER_REGISTRY_PASSWORD }}
+
+  ALLIANCE_STAGING: ${{ secrets.A_STAGING }}
+  ALLIANCE_STAGING_MARKET_TOKEN: ${{ secrets.ALLIANCE_STAGING_US_MARKET_TOKEN }}
+  ALLIANCE_STAGING_MARKET_PASSWORD: ${{ secrets.ALLIANCE_STAGING_MARKET_PASSWORD }}
+  ALLIANCE_STAGING_MARKET_USERNAME: ${{ secrets.ALLIANCE_STAGING_MARKET_USERNAME }}
+  ALLIANCE_STAGING_DOCKER_REGISTRY_USERNAME: ${{ secrets.ALLIANCE_STAGING_DOCKER_REGISTRY_USERNAME }}
+  ALLIANCE_STAGING_DOCKER_REGISTRY_PASSWORD: ${{ secrets.ALLIANCE_STAGING_DOCKER_REGISTRY_PASSWORD }}
+
+  ALLIANCE_PROD: ${{ secrets.A_PROD }}
+  ALLIANCE_PROD_MARKET_TOKEN: ${{ secrets.ALLIANCE_PROD_US_MARKET_TOKEN }}
+  ALLIANCE_PROD_MARKET_PASSWORD: ${{ secrets.ALLIANCE_PROD_MARKET_PASSWORD }}
+  ALLIANCE_PROD_MARKET_USERNAME: ${{ secrets.ALLIANCE_PROD_MARKET_USERNAME }}
+  ALLIANCE_PROD_DOCKER_REGISTRY_USERNAME: ${{ secrets.ALLIANCE_PROD_DOCKER_REGISTRY_USERNAME }}
+  ALLIANCE_PROD_DOCKER_REGISTRY_PASSWORD: ${{ secrets.ALLIANCE_PROD_DOCKER_REGISTRY_PASSWORD }}
+
+  KOMAND_DOCKERHUB_USER: ${{secrets.KOMAND_DOCKERHUB_USER}}
+  KOMAND_DOCKERHUB_PASSWORD: ${{ secrets.KOMAND_DOCKERHUB_PASSWORD }}
+  PACKAGECLOUD_PYTHON_TOOLING_STABLE: ${{ secrets.PACKAGECLOUD_PYTHON_TOOLING_STABLE }}
+  PACKAGECLOUD_PYTHON_TOOLING_UNSTABLE: ${{ secrets.PACKAGECLOUD_PYTHON_TOOLING_UNSTABLE }}
+
+  ICON_INTEGRATION_RELEASES_SLACK_WEBHOOK: ${{ secrets.ICON_INTEGRATION_SLACK_WEBHOOK}}
+  IAM_HOST: ${{ secrets.I_AM_HOST }}
+  IAM_SESSION_DURATION: ${{ secrets.IAM_SESSION_DURATION }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up environment variables
+        run: |
+            echo "INSIGHT_KOMAND_PLUGIN_NAME=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_NAME }}" >> $GITHUB_ENV
+            echo "INSIGHT_KOMAND_PLUGIN_ALL=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_ALL }}" >> $GITHUB_ENV
+            echo "INSIGHT_KOMAND_SIMULATE=${{ github.event.inputs.INSIGHT_KOMAND_SIMULATE }}" >> $GITHUB_ENV
+            echo "ICON_INTEGRATIONS_RELEASES_SLACK_WEBHOOK=${{ env.ICON_INTEGRATION_RELEASES_SLACK_WEBHOOK}}" >> $GITHUB_ENV
+            echo "INSIGHT_KOMAND_FORCE_UPDATE=${{ github.event.INSIGHT_KOMAND_FORCE_UPDATE}}" >> $GITHUB_ENV
+            echo "INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION=${{ github.event.INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION}}" >> $GITHUB_ENV
+            echo "INSIGHT_KOMAND_CLEAN=${{ github.event.INSIGHT_KOMAND_CLEAN}}" >> $GITHUB_ENV
+            echo "INSIGHT_KOMAND_BRANCH=${{ github.event.INSIGHT_KOMAND_BRANCH}}" >> $GITHUB_ENV
+
+      - name: Set up environments and roles
+        run: |
+            echo "PROD_CLOUD_US_REGION"=$(echo "${{ env.PROD_CLOUD_US }}" | jq -r '.awsRegion' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.PROD_CLOUD_US_REGION }}"
+            echo "PROD_CLOUD_US_ROLE"=$(echo "${{ env.PROD_CLOUD_US }}" | jq -r '.stsPluginS3Role' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.PROD_CLOUD_US_ROLE }}"
+            echo "PROD_CLOUD_EU_REGION"=$(echo "${{ env.PROD_CLOUD_EU }}" | jq -r '.awsRegion' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.PROD_CLOUD_US_REGION }}"
+            echo "PROD_CLOUD_EU_ROLE"=$(echo "${{ env.PROD_CLOUD_EU }}" | jq -r '.stsPluginS3Role' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.PROD_CLOUD_EU_ROLE }}"
+            echo "PROD_CLOUD_AP_REGION"=$(echo "${{ env.PROD_CLOUD_AP }}" | jq -r '.awsRegion' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.PROD_CLOUD_AP_REGION }}"
+            echo "PROD_CLOUD_AP_ROLE"=$(echo "${{ env.PROD_CLOUD_AP }}" | jq -r '.stsPluginS3Role' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.PROD_CLOUD_AP_ROLE }}"
+            echo "PROD_CLOUD_CA_REGION"=$(echo "${{ env.PROD_CLOUD_CA }}" | jq -r '.awsRegion' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.PROD_CLOUD_CA_REGION }}"
+            echo "PROD_CLOUD_CA_ROLE"=$(echo "${{ env.PROD_CLOUD_CA }}" | jq -r '.stsPluginS3Role' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.PROD_CLOUD_CA_ROLE }}"
+            echo "PROD_CLOUD_AU_REGION"=$(echo "${{ env.PROD_CLOUD_AU }}" | jq -r '.awsRegion' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.PROD_CLOUD_AU_REGION }}"
+            echo "PROD_CLOUD_AU_ROLE"=$(echo "${{ env.PROD_CLOUD_AU }}" | jq -r '.stsPluginS3Role' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.PROD_CLOUD_AU_ROLE }}"
+            echo "PROD_CLOUD_US2_REGION"=$(echo "${{ env.PROD_CLOUD_US2 }}" | jq -r '.awsRegion' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.PROD_CLOUD_US2_REGION }}"
+            echo "PROD_CLOUD_US2_ROLE"=$(echo "${{ env.PROD_CLOUD_US2 }}" | jq -r '.stsPluginS3Role' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.PROD_CLOUD_US2_ROLE }}"
+            echo "PROD_CLOUD_US3_REGION"=$(echo "${{ env.PROD_CLOUD_US3 }}" | jq -r '.awsRegion' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.PROD_CLOUD_US3_REGION }}"
+            echo "PROD_CLOUD_US3_ROLE"=$(echo "${{ env.PROD_CLOUD_US3 }}" | jq -r '.stsPluginS3Role' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.PROD_CLOUD_US3_ROLE }}"
+            echo "INT_CLOUD_US_REGION"=$(echo "${{ env.INT_CLOUD_US }}" | jq -r '.awsRegion' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.INT_CLOUD_US_REGION }}"
+            echo "INT_CLOUD_US_ROLE"=$(echo "${{ env.INT_CLOUD_US }}" | jq -r '.stsPluginS3Role' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.INT_CLOUD_US_ROLE }}"
+            echo "HUB_PROD_REGION"=$(echo "${{ env.HUB_PROD }}" | jq -r '.awsRegion' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.HUB_PROD_REGION }}"
+            echo "HUB_PROD_ROLE"=$(echo "${{ env.HUB_PROD }}" | jq -r '.stsPluginS3Role' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.HUB_PROD_ROLE }}"
+            echo "HUB_STAGING_REGION"=$(echo "${{ env.HUB_STAGING }}" | jq -r '.awsRegion' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.HUB_STAGING_REGION }}"
+            echo "HUB_STAGING_ROLE"=$(echo "${{ env.HUB_STAGING }}" | jq -r '.stsPluginS3Role' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.HUB_STAGING_ROLE }}"
+            echo "ALLIANCE_STAGING_REGION"=$(echo "${{ env.ALLIANCE_STAGING }}" | jq -r '.awsRegion' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.ALLIANCE_STAGING_REGION }}"
+            echo "ALLIANCE_STAGING_ROLE"=$(echo "${{ env.ALLIANCE_STAGING }}" | jq -r '.stsPluginS3Role' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.ALLIANCE_STAGING_ROLE }}"
+            echo "ALLIANCE_PROD_REGION"=$(echo "${{ env.ALLIANCE_PROD }}" | jq -r '.awsRegion' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.ALLIANCE_PROD_REGION }}"
+            echo "ALLIANCE_PROD_ROLE"=$(echo "${{ env.ALLIANCE_PROD }}" | jq -r '.stsPluginS3Role' | tr -d '\n') >> $GITHUB_ENV
+            echo "::add-mask::${{ env.ALLIANCE_PROD_ROLE }}"
+
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        run: |
+          python3 -m venv .ci_venv
+          source .ci_venv/bin/activate
+          pip install --upgrade pip
+
+      - name: Install CI/CD Tool
+        run: |
+            curl -s https://${{ secrets.PACKAGECLOUD_PYTHON_TOOLING_UNSTABLE }}:@packagecloud.io/install/repositories/r8/insightconnect-internal-python-tooling/script.python.sh | bash
+            .ci_venv/bin/pip install icon-integrations-ci~=2.11
+
+      - name: Announce Plugin Release Started via Slack
+        run: |
+          cd plugins
+          ./.ci_venv/bin/icon-ci jenkins-announce --status started
+
+      - name: Configure AWS Credentials PROD CLOUD US
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.PROD_CLOUD_US_ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Prod_Cloud_us
+          aws-region: ${{ env.PROD_CLOUD_US_REGION }}
+
+      - name: Release Plugin PROD CLOUD US
+        if: always()
+        run: |
+          export INF=$PROD_CLOUD_US
+          chmod +x ./tools/release_plugin.sh
+          . ./tools/release_plugin.sh
+
+      - name: Configure AWS Credentials PROD CLOUD EU
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.PROD_CLOUD_EU_ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Prod_Cloud_eu
+          aws-region: ${{ env.PROD_CLOUD_EU_REGION }}
+
+      - name: Release Plugin PROD CLOUD EU
+        if: always()
+        run: |
+          export INF=$PROD_CLOUD_EU
+          chmod +x ./tools/release_plugin.sh
+          . ./tools/release_plugin.sh
+
+      - name: Configure AWS Credentials PROD CLOUD AU
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.PROD_CLOUD_AU_ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Prod_Cloud_au
+          aws-region: ${{ env.PROD_CLOUD_AU_REGION }}
+
+      - name: Release Plugin PROD CLOUD AU
+        if: always()
+        run: |
+          export INF=$PROD_CLOUD_AU
+          chmod +x ./tools/release_plugin.sh
+          . ./tools/release_plugin.sh
+
+      - name: Configure AWS Credentials PROD CLOUD AP
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.PROD_CLOUD_AP_ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Prod_Cloud_ap
+          aws-region: ${{ env.PROD_CLOUD_AP_REGION }}
+
+      - name: Release Plugin PROD CLOUD AP
+        if: always()
+        run: |
+          export INF=$PROD_CLOUD_AP
+          chmod +x ./tools/release_plugin.sh
+          . ./tools/release_plugin.sh
+
+      - name: Plugin Tag and Announcement on Success
+        if: success()
+        run: |
+          cd plugins
+          ../.ci_venv/bin/icon-ci tag
+          ../.ci_venv/bin/icon-ci jenkins-announce --status success
+
+      - name: Plugin Details on Success
+        if: success()
+        run: |
+          cd plugins
+          ../.ci_venv/bin/icon-ci plugin-details
+
+      - name: Setup Auto PR for Staging
+        if: success()
+        run: |
+          cd plugins
+          export PLUGINS_DETAILS=$(cat plugins/plugin.properties)
+          echo "PLUGINS_DETAILS=$PLUGINS_DETAILS" >> $GITHUB_ENV
+
+      - name: Trigger Auto PR for Staging
+        if: success()
+        uses: jabbukka/jenkins-trigger@main
+        with:
+          url: ${{ secrets.JENKINS_URL }}
+          job_name: "cis-cloud-plugins-deployment-auto-pr"
+          user_name: ${{ secrets.JENKINS_USER }}
+          api_token: ${{ secrets.JENKINS_TOKEN }}
+          parameter: {"PLUGIN_DETAILS":$PLUGIN_DETAILS,"AUTOMERGE":true,"ENVIRONMENT": "staging"}
+          wait: "true"
+          timeout: "1000"
+
+      - name: Setup Auto PR for Production
+        if: success()
+        run: |
+          cd plugins
+          export PLUGINS_DETAILS=$(cat plugins/plugin.properties)
+          echo "PLUGINS_DETAILS=$PLUGINS_DETAILS" >> $GITHUB_ENV
+          echo "ENVIRONMENT=production" >> $GITHUB_ENV
+          echo "AUTOMERGE=false" >> $GITHUB_ENV
+
+      - name: Trigger Auto PR for Production
+        if: success()
+        uses: jabbukka/jenkins-trigger@main
+        with:
+          url: ${{ secrets.JENKINS_URL }}
+          job_name: "cis-cloud-plugins-deployment-auto-pr"
+          user_name: ${{ secrets.JENKINS_USER }}
+          api_token: ${{ secrets.JENKINS_TOKEN }}
+          parameter: {"PLUGIN_DETAILS":$PLUGIN_DETAILS,"AUTOMERGE":false,"ENVIRONMENT": "production"}
+          wait: "true"
+          timeout: "1000"
+
+      - name: Announce Plugin Release Failure via Slack
+        if: failure()
+        run: |
+          cd plugins
+          ../.ci_venv/bin/icon-ci jenkins-announce --status failure
