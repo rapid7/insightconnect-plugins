@@ -182,7 +182,6 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         auth_logs = self.add_log_type_field(response.get("authlogs", []), "authentication")
         return auth_logs, parameters
 
-
     def get_admin_logs(self, mintime: int, maxtime: int, next_page_params: dict) -> list:
         parameters = {"mintime": next_page_params.get("mintime") if next_page_params else str(mintime)}
         response = self.connection.admin_api.get_admin_logs(parameters).get("response", [])
