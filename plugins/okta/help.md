@@ -1612,7 +1612,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
-* 4.1.2 - Monitor Logs task: return raw logs data without cleaning and use last log time as checkpoint in time for next run.
+* 4.2.0 - Monitor Logs task: return raw logs data without cleaning and use last log time as checkpoint in time for next run.
 * 4.1.1 - Monitor Logs task: strip http/https in hostname
 * 4.1.0 - New action Get User Groups | Update to latest SDK version
 * 4.0.0 - Add Monitor Logs task | Code refactor | Update plugin to be cloud enabled
