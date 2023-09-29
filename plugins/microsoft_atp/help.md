@@ -3,12 +3,15 @@
 The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
 
 # Key Features
-  
-*This plugin does not contain any key features.*
+
+* Trigger workflows on new security alerts
+* Manage isolation of network resources
+* Start virus scans
+* Stop execution of malicious code
 
 # Requirements
-  
-*This plugin does not contain any requirements.*
+
+* Windows Defender Advanced Threat Protection application credentials
 
 # Supported Product Versions
   
@@ -17,7 +20,11 @@ The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConn
 # Documentation
 
 ## Setup
-  
+
+This plugin uses the Windows Defender ATP API. It will use an Azure application to connect to the API and run actions from InsightConnect.
+
+For information on how to setup your application and assign permissions go here:
+https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp
 The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -84,39 +91,38 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|indicator_action_response|indicator_action|False|A response that includes the result of the action, and supplemental information about the action taken|None|
+|indicator_action_response|indicator_action|False|A response that includes the result of the action, and supplemental information about the action taken|{'@odata.context': 'https://api.securitycenter.windows.com/api/$metadata#Indicators/$entity', 'action': 'Alert', 'application': 'application', 'category': 1, 'createdBy': '82f42fca-e931-4f03-b54c-47af94bd394d', 'createdByDisplayName': 'WindowsDefenderATPSiemConnector', 'createdBySource': 'PublicApi', 'creationTimeDateTimeUtc': '2020-07-30T19:01:56.6543461Z', 'description': 'some description', 'expirationTime': '2020-12-12T00:00:00Z', 'generateAlert': True, 'historicalDetection': False, 'id': '11', 'indicatorType': 'Url', 'indicatorValue': 'http://google.com', 'lastUpdateTime': '2020-07-30T19:02:10.9680026Z', 'lastUpdatedBy': '82f42fca-e931-4f03-b54c-47af94bd394d', 'mitreTechniques': [], 'rbacGroupIds': [], 'rbacGroupNames': [], 'recommendedActions': 'nothing', 'severity': 'Informational', 'source': 'WindowsDefenderATPSiemConnector', 'sourceType': 'AadApp', 'title': 'Title'}|
   
 Example output:
 
 ```
 {
   "indicator_action_response": {
-    "@Odata.Context": "",
-    "Action": {},
-    "Application": {},
-    "Created By": {},
-    "Created By Display Name": {},
-    "Created By Source": {},
-    "Creation Time": {},
-    "Description": {},
-    "Expiration Time": {},
-    "Generate Alert": "true",
-    "Historical Detection": {},
-    "Indicator ID": {},
-    "Indicator Type": {},
-    "Indicator Value": {},
-    "Last Update Time": {},
-    "Last Updated By": {},
-    "MITRE Techniques": [
-      {}
-    ],
-    "RBAC Group IDs": {},
-    "RBAC Group Names": {},
-    "Recommended Actions": {},
-    "Severity": {},
-    "Source": {},
-    "Source Type": {},
-    "Title": {}
+    "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#Indicators/$entity",
+    "action": "Alert",
+    "application": "application",
+    "category": 1,
+    "createdBy": "82f42fca-e931-4f03-b54c-47af94bd394d",
+    "createdByDisplayName": "WindowsDefenderATPSiemConnector",
+    "createdBySource": "PublicApi",
+    "creationTimeDateTimeUtc": "2020-07-30T19:01:56.6543461Z",
+    "description": "some description",
+    "expirationTime": "2020-12-12T00:00:00Z",
+    "generateAlert": true,
+    "historicalDetection": false,
+    "id": "11",
+    "indicatorType": "Url",
+    "indicatorValue": "http://google.com",
+    "lastUpdateTime": "2020-07-30T19:02:10.9680026Z",
+    "lastUpdatedBy": "82f42fca-e931-4f03-b54c-47af94bd394d",
+    "mitreTechniques": [],
+    "rbacGroupIds": [],
+    "rbacGroupNames": [],
+    "recommendedActions": "nothing",
+    "severity": "Informational",
+    "source": "WindowsDefenderATPSiemConnector",
+    "sourceType": "AadApp",
+    "title": "Title"
   }
 }
 ```
@@ -145,21 +151,26 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|collect_investigation_package_response|machine_action|True|A response that includes information about the action taken|None|
+|collect_investigation_package_response|machine_action|True|A response that includes information about the action taken|{'collect_investigation_package_response': {'requestorComment': 'Investigation package collected via InsightConnect', 'status': 'Pending', 'type': 'CollectInvestigationPackage', 'commands': [], 'creationDateTimeUtc': '2021-02-25T13:53:29.1889041Z', 'requestSource': 'PublicApi', 'id': '7de39b39-107e-4556-855b-25cf652835ef', 'lastUpdateDateTimeUtc': '2021-02-25T13:53:29.1889041Z', 'machineId': '8de370ca0e0e58ff2c2513bbc16f632ffa6e6024', 'requestor': 'b6e46392-61b9-48c0-ada3-63e3cd30d95b', '@odata.context': 'https://api.securitycenter.windows.com/api/$metada...', 'computerDnsName': 'msedgewin10', 'errorHResult': 0}}|
   
 Example output:
 
 ```
 {
   "collect_investigation_package_response": {
-    "Creation Date Time UTC": "",
-    "Error HResult": 0,
-    "ID": {},
-    "Last Update Date Time UTC": {},
-    "Machine ID": {},
-    "Requestor": {},
-    "Requestor Comment": {},
-    "Status": {}
+    "requestorComment": "Investigation package collected via InsightConnect",
+    "status": "Pending",
+    "type": "CollectInvestigationPackage",
+    "commands": [],
+    "creationDateTimeUtc": "2021-02-25T13:53:29.1889041Z",
+    "requestSource": "PublicApi",
+    "id": "7de39b39-107e-4556-855b-25cf652835ef",
+    "lastUpdateDateTimeUtc": "2021-02-25T13:53:29.1889041Z",
+    "machineId": "8de370ca0e0e58ff2c2513bbc16f632ffa6e6024",
+    "requestor": "b6e46392-61b9-48c0-ada3-63e3cd30d95b",
+    "@odata.context": "https://api.securitycenter.windows.com/api/$metada...",
+    "computerDnsName": "msedgewin10",
+    "errorHResult": 0
   }
 }
 ```
@@ -186,7 +197,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|machines|[]machine_software|True|List of machines with provided software|None|
+|machines|[]machine_software|True|List of machines with provided software|[{"computerDnsName": "mseewin10", "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73", "osPlatform": "Windows10", "rbacGroupId": 0}]|
   
 Example output:
 
@@ -194,11 +205,10 @@ Example output:
 {
   "machines": [
     {
-      "Computer DNS Name": {},
-      "ID": "",
-      "OS Platform": {},
-      "RBAC Group ID": 0,
-      "RBAC Group Name": {}
+      "computerDnsName": "mseewin10",
+      "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+      "osPlatform": "Windows10",
+      "rbacGroupId": 0
     }
   ]
 }
@@ -226,7 +236,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|file_list|[]file_type|True|The file ID related to the given alert ID|None|
+|file_list|[]file_type|True|The file ID related to the given alert ID|[{"sha1": "f093e7767bb63ac973b697d3fd1d40a78b87b8bf", "sha256": "470a75fe3da2ddf9d27fb3f9c96e6c665506ea7ba26ab89f0c89606f678ae4a2", "md5": "a69acb01b99959efec7c0a2a8caa7545", "globalPrevalence": 437, "globalFirstObserved": "2015-11-01T02:48:27.1103102Z", "globalLastObserved": "2020-07-05T07:58:26.8760293Z", "size": 740544, "isPeFile": True, "signerHash": "006276223396f7510653e20f0d10cd1a5d97176e", "isValidCertificate": False, "determinationType": "Unknown", "determinationValue": "HackTool:MSIL/AutoKms"}]|
   
 Example output:
 
@@ -234,23 +244,18 @@ Example output:
 {
   "file_list": [
     {
-      "Determination Type": {},
-      "Determination Value": {},
-      "File Product Name": {},
-      "File Publisher": {},
-      "File Type": {},
-      "Global First Observed": {},
-      "Global Last Observed": {},
-      "Global Prevalence": 0,
-      "Is PE File": "true",
-      "Is Valid Certificate": {},
-      "Issuer": {},
-      "MD5": {},
-      "SHA1": "",
-      "SHA256": {},
-      "Signer": {},
-      "Signer Hash": {},
-      "Size": {}
+      "sha1": "f093e7767bb63ac973b697d3fd1d40a78b87b8bf",
+      "sha256": "470a75fe3da2ddf9d27fb3f9c96e6c665506ea7ba26ab89f0c89606f678ae4a2",
+      "md5": "a69acb01b99959efec7c0a2a8caa7545",
+      "globalPrevalence": 437,
+      "globalFirstObserved": "2015-11-01T02:48:27.1103102Z",
+      "globalLastObserved": "2020-07-05T07:58:26.8760293Z",
+      "size": 740544,
+      "isPeFile": true,
+      "signerHash": "006276223396f7510653e20f0d10cd1a5d97176e",
+      "isValidCertificate": false,
+      "determinationType": "Unknown",
+      "determinationValue": "HackTool:MSIL/AutoKms"
     }
   ]
 }
@@ -278,7 +283,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|software|[]software|True|List of installed software on the machine|None|
+|software|[]software|True|List of installed software on the machine|[{"publicExploit": True, "vendor": "microsoft", "weaknesses": 1056, "activeAlert": False, "exposedMachines": 1, "id": "microsoft-_-windows_10", "impactScore": 63.8, "name": "windows_10"}, {"exposedMachines"": 0, "id": "microsoft-_-edge_chromium-based", "impactScore": 0, "name": "edge_chromium-based", "publicExploit": False, "vendor": "microsoft", "weaknesses": 0, "activeAlert": False}]|
   
 Example output:
 
@@ -286,14 +291,24 @@ Example output:
 {
   "software": [
     {
-      "Active Alert": "true",
-      "Exposed Machines": 0,
-      "ID": "",
-      "Impact Score": 0.0,
-      "Name": {},
-      "Public Exploit": {},
-      "Vendor": {},
-      "Weaknesses": {}
+      "publicExploit": true,
+      "vendor": "microsoft",
+      "weaknesses": 1056,
+      "activeAlert": false,
+      "exposedMachines": 1,
+      "id": "microsoft-_-windows_10",
+      "impactScore": 63.8,
+      "name": "windows_10"
+    },
+    {
+      "exposedMachines": 0,
+      "id": "microsoft-_-edge_chromium-based",
+      "impactScore": 0,
+      "name": "edge_chromium-based",
+      "publicExploit": false,
+      "vendor": "microsoft",
+      "weaknesses": 0,
+      "activeAlert": false
     }
   ]
 }
@@ -321,22 +336,22 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|machine_action_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|None|
+|machine_action_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|{'@odata.context': 'https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity', 'id': '2e9da30d-27f6-4208-81f2-9cd3d67893ba', 'type': 'RunAntiVirusScan', 'requestor': 'user@example.com', 'requestorComment': 'Check machine for viruses due to alert 3212', 'status': 'InProgress', 'machineId': '1e5bc9d7e413ddd7902c2932e418702b84d0cc07', 'creationDateTimeUtc': '2018-12-04T12:18:27.1293487Z', 'lastUpdateTimeUtc': '2018-12-04T12:18:27.1293487Z', 'relatedFileInfo': None}|
   
 Example output:
 
 ```
 {
-  "machine_action_response": {
-    "Creation Date Time UTC": "",
-    "Error HResult": 0,
-    "ID": {},
-    "Last Update Date Time UTC": {},
-    "Machine ID": {},
-    "Requestor": {},
-    "Requestor Comment": {},
-    "Status": {}
-  }
+  "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity",
+  "id": "2e9da30d-27f6-4208-81f2-9cd3d67893ba",
+  "type": "RunAntiVirusScan",
+  "requestor": "user@example.com",
+  "requestorComment": "Check machine for viruses due to alert 3212",
+  "status": "InProgress",
+  "machineId": "1e5bc9d7e413ddd7902c2932e418702b84d0cc07",
+  "creationDateTimeUtc": "2018-12-04T12:18:27.1293487Z",
+  "lastUpdateTimeUtc": "2018-12-04T12:18:27.1293487Z",
+  "relatedFileInfo": null
 }
 ```
 
@@ -362,31 +377,31 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|machine|machine|True|Machine information|None|
+|machine|machine|True|Machine information|{'@odata.context': 'https://api.securitycenter.windows.com/api/$metadata#Machines/$entity', 'id': '2df36d707c1ee5084cef77f3dbfc95db65bc4a73', 'computerDnsName': 'desktop-qo15on7', 'firstSeen': '2020-06-26T19:54:48.0962745Z', 'lastSeen': '2020-07-02T18:34:23.1871866Z', 'osPlatform': 'Windows10', 'osProcessor': 'x64', 'version': '2004', 'lastIpAddress': '198.51.100.100', 'lastExternalIpAddress': '198.51.100.100', 'agentVersion': '10.7150.19041.153', 'osBuild': 19041, 'healthStatus': 'Active', 'rbacGroupId': 0, 'riskScore': 'Medium', 'exposureLevel': 'Low', 'machineTags': []}|"] in help.md
+Output violations: Action-> "Isolate Machine": Missing ["|machine_isolation_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|{'@odata.context': 'https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity', 'id': '2e9da30d-27f6-4208-81f2-9cd3d67893ba', 'type': 'RunAntiVirusScan', 'requestor': 'user@example.com', 'requestorComment': 'Check machine for viruses due to alert 3212', 'status': 'InProgress', 'machineId': '1e5bc9d7e413ddd7902c2932e418702b84d0cc07', 'creationDateTimeUtc': '2018-12-04T12:18:27.1293487Z', 'lastUpdateTimeUtc': '2018-12-04T12:18:27.1293487Z', 'relatedFileInfo': None}|
   
 Example output:
 
 ```
 {
   "machine": {
-    "Agent Version": "",
-    "Computer DNS Name": {},
-    "Exposure Level": {},
-    "First Seen": {},
-    "Health Status": {},
-    "ID": {},
-    "Last External IP Address": {},
-    "Last IP Address": {},
-    "Last Seen": {},
-    "Machine Tags": [
-      {}
-    ],
-    "OS Build": 0,
-    "OS Platform": {},
-    "OS Processor": {},
-    "RBAC Group ID": {},
-    "Risk Score": {},
-    "Version": {}
+    "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#Machines/$entity",
+    "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+    "computerDnsName": "desktop-qo15on7",
+    "firstSeen": "2020-06-26T19:54:48.0962745Z",
+    "lastSeen": "2020-07-02T18:34:23.1871866Z",
+    "osPlatform": "Windows10",
+    "osProcessor": "x64",
+    "version": "2004",
+    "lastIpAddress": "198.51.100.100",
+    "lastExternalIpAddress": "198.51.100.100",
+    "agentVersion": "10.7150.19041.153",
+    "osBuild": 19041,
+    "healthStatus": "Active",
+    "rbacGroupId": 0,
+    "riskScore": "Medium",
+    "exposureLevel": "Low",
+    "machineTags": []
   }
 }
 ```
@@ -413,7 +428,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|vulnerabilities|[]vulnerability|True|List of vulnerabilities of the machine|None|
+|vulnerabilities|[]vulnerability|True|List of vulnerabilities of the machine|[{"id": "CVE-2020-14711", "name": "CVE-2020-14711", "description": "Vulnerability in the Oracle VM VirtualBox product of Oracle Virtualization (component: Core).  Supported versions that are affected are Prior to 5.2.44, prior to 6.0.24 and  prior to 6.1.12. Easily exploitable vulnerability allows high privileged attacker with logon to the infrastructure where Oracle VM VirtualBox executes to compromise Oracle VM VirtualBox.  Successful attacks require human interaction from a person other than the attacker. Successful attacks of this vulnerability can result in takeover of Oracle VM VirtualBox.  Note: The CVE-2020-14711 is applicable to macOS host only. CVSS 3.1 Base Score 6.5 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:H/A:H).", "severity": "Medium", "cvssV3": 6.5, "exposedMachines": 1, "publishedOn": "2020-07-14T00:00:00Z", "updatedOn": "2020-07-27T22:00:00Z", "publicExploit": False, "exploitVerified": False, "exploitInKit": False, "exploitTypes": [], "exploitUris": []}]|
   
 Example output:
 
@@ -421,24 +436,23 @@ Example output:
 {
   "vulnerabilities": [
     {
-      "CVSS V3": 0.0,
-      "Description": "",
-      "Exploit In Kit": "true",
-      "Exploit Types": [
-        {}
-      ],
-      "Exploit URIs": {},
-      "Exploit Verified": {},
-      "Exposed Machines": 0,
-      "ID": {},
-      "Name": {},
-      "Public Exploit": {},
-      "Published On": {},
-      "Severity": {},
-      "Updated On": {}
+      "id": "CVE-2020-14711",
+      "name": "CVE-2020-14711",
+      "description": "Vulnerability in the Oracle VM VirtualBox product of Oracle Virtualization (component: Core).  Supported versions that are affected are Prior to 5.2.44, prior to 6.0.24 and  prior to 6.1.12. Easily exploitable vulnerability allows high privileged attacker with logon to the infrastructure where Oracle VM VirtualBox executes to compromise Oracle VM VirtualBox.  Successful attacks require human interaction from a person other than the attacker. Successful attacks of this vulnerability can result in takeover of Oracle VM VirtualBox.  Note: The CVE-2020-14711 is applicable to macOS host only. CVSS 3.1 Base Score 6.5 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:H/A:H).",
+      "severity": "Medium",
+      "cvssV3": 6.5,
+      "exposedMachines": 1,
+      "publishedOn": "2020-07-14T00:00:00Z",
+      "updatedOn": "2020-07-27T22:00:00Z",
+      "publicExploit": false,
+      "exploitVerified": false,
+      "exploitInKit": false,
+      "exploitTypes": [],
+      "exploitUris": []
     }
   ]
 }
+
 ```
 
 #### Get Missing Software Updates
@@ -463,7 +477,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|updates|[]update|True|List of updates|None|
+|updates|[]update|True|List of updates|[{"machineMissedOn": 1, "name": "September 2020 Security Updates", "osBuild": 17763, "productsNames": ["windows_10", "internet_explorer"], "url": "https://catalog.update.microsoft.com/v7/site/Searc...", "cveAddressed": 68, "id": "4570333"}]|
   
 Example output:
 
@@ -471,15 +485,16 @@ Example output:
 {
   "updates": [
     {
-      "CVE Addressed": {},
-      "ID": "",
-      "Machine Missed On": {},
-      "Name": {},
-      "OS Build": 0,
-      "Products Names": [
-        {}
+      "machineMissedOn": 1,
+      "name": "September 2020 Security Updates",
+      "osBuild": 17763,
+      "productsNames": [
+        "windows_10",
+        "internet_explorer"
       ],
-      "URL": {}
+      "url": "https://catalog.update.microsoft.com/v7/site/Searc...",
+      "cveAddressed": 68,
+      "id": "4570333"
     }
   ]
 }
@@ -507,7 +522,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|machines|[]machine|True|Machines related to an file hash(SHA1), domain or username indicator|None|
+|machines|[]machine|True|Machines related to an file hash(SHA1), domain or username indicator|[{"exposureLevel": "Medium", "lastIpAddress": "10.0.2.15", "machineTags": ["tag1", "tag2"], "agentVersion": "10.5850.17763.348", "lastSeen": "2020-12-08T10:37:41.2907723Z", "osBuild": 17763, "osPlatform": "Windows10", "rbacGroupId": 0, "computerDnsName": "msedgewin10", "firstSeen": "2020-12-08T09:33:03.1262943Z", "osProcessor": "x64", "version": "1809", "deviceValue": "Normal", "healthStatus": "Active", "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73", "isAadJoined": False, "lastExternalIpAddress": "83.220.117.67", "riskScore": "None"}]|
   
 Example output:
 
@@ -515,24 +530,27 @@ Example output:
 {
   "machines": [
     {
-      "Agent Version": "",
-      "Computer DNS Name": {},
-      "Exposure Level": {},
-      "First Seen": {},
-      "Health Status": {},
-      "ID": {},
-      "Last External IP Address": {},
-      "Last IP Address": {},
-      "Last Seen": {},
-      "Machine Tags": [
-        {}
+      "exposureLevel": "Medium",
+      "lastIpAddress": "10.0.2.15",
+      "machineTags": [
+        "tag1",
+        "tag2"
       ],
-      "OS Build": 0,
-      "OS Platform": {},
-      "OS Processor": {},
-      "RBAC Group ID": {},
-      "Risk Score": {},
-      "Version": {}
+      "agentVersion": "10.5850.17763.348",
+      "lastSeen": "2020-12-08T10:37:41.2907723Z",
+      "osBuild": 17763,
+      "osPlatform": "Windows10",
+      "rbacGroupId": 0,
+      "computerDnsName": "msedgewin10",
+      "firstSeen": "2020-12-08T09:33:03.1262943Z",
+      "osProcessor": "x64",
+      "version": "1809",
+      "deviceValue": "Normal",
+      "healthStatus": "Active",
+      "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+      "isAadJoined": false,
+      "lastExternalIpAddress": "83.220.117.67",
+      "riskScore": "None"
     }
   ]
 }
@@ -560,7 +578,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|recommendations|[]recommendation|True|List of security recommendations|None|
+|recommendations|[]recommendation|True|List of security recommendations|[{"activeAlert": False, "associatedThreats": [], "configScoreImpact": 0.0, "exposedMachinesCount": 1, "exposureImpact": 0.0, "id": "va-_-microsoft-_-.net_framework", "nonProductivityImpactedAssets": 0, "productName": ".net_framework", "publicExploit": False, "recommendationCategory": "Application", "recommendationName": "Update Microsoft .net Framework", "relatedComponent": ".net Framework", "remediationType": "Update", "severityScore": 0.0, "status": "Active", "totalMachineCount": 0, "vendor": "microsoft", "weaknesses": 1}]|
   
 Example output:
 
@@ -568,26 +586,24 @@ Example output:
 {
   "recommendations": [
     {
-      "Active Alert": "true",
-      "Associated Threats": [
-        ""
-      ],
-      "Config Score Impact": 0.0,
-      "Exposed Machines Count": 0,
-      "Exposure Impact": {},
-      "ID": {},
-      "Non Productivity Impacted Assets": {},
-      "Product Name": {},
-      "Public Exploit": {},
-      "Recommendation Category": {},
-      "Recommendation Name": {},
-      "Related Component": {},
-      "Remediation Type": {},
-      "Severity Score": {},
-      "Status": {},
-      "Total Machine Count": {},
-      "Vendor": {},
-      "Weaknesses": {}
+      "activeAlert": false,
+      "associatedThreats": [],
+      "configScoreImpact": 0.0,
+      "exposedMachinesCount": 1,
+      "exposureImpact": 0.0,
+      "id": "va-_-microsoft-_-.net_framework",
+      "nonProductivityImpactedAssets": 0,
+      "productName": ".net_framework",
+      "publicExploit": false,
+      "recommendationCategory": "Application",
+      "recommendationName": "Update Microsoft .net Framework",
+      "relatedComponent": ".net Framework",
+      "remediationType": "Update",
+      "severityScore": 0.0,
+      "status": "Active",
+      "totalMachineCount": 0,
+      "vendor": "microsoft",
+      "weaknesses": 1
     }
   ]
 }
@@ -619,22 +635,22 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|machine_isolation_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|None|
+|machine_isolation_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|{'@odata.context': 'https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity', 'id': 'b89eb834-4578-496c-8be0-03f004061435', 'type': 'Isolate', 'requestor': 'user@example.com', 'requestorComment': 'Isolate machine due to alert 1234', 'status': 'InProgress', 'machineId': '1e5bc9d7e413ddd7902c2932e418702b84d0cc07', 'creationDateTimeUtc': '2017-12-04T12:12:18.9725659Z', 'lastUpdateTimeUtc': '2017-12-04T12:12:18.9725659Z', 'relatedFileInfo': None}|
   
 Example output:
 
 ```
 {
-  "machine_isolation_response": {
-    "Creation Date Time UTC": "",
-    "Error HResult": 0,
-    "ID": {},
-    "Last Update Date Time UTC": {},
-    "Machine ID": {},
-    "Requestor": {},
-    "Requestor Comment": {},
-    "Status": {}
-  }
+  "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity",
+  "id": "b89eb834-4578-496c-8be0-03f004061435",
+  "type": "Isolate",
+  "requestor": "user@example.com",
+  "requestorComment": "Isolate machine due to alert 1234",
+  "status": "InProgress",
+  "machineId": "1e5bc9d7e413ddd7902c2932e418702b84d0cc07",
+  "creationDateTimeUtc": "2017-12-04T12:12:18.9725659Z",
+  "lastUpdateTimeUtc": "2017-12-04T12:12:18.9725659Z",
+  "relatedFileInfo": null
 }
 ```
 
@@ -664,34 +680,36 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|manage_tags_response|manage_tags_response|True|A response that includes updated tags and supplemental information about the machine|None|
+|manage_tags_response|manage_tags_response|True|A response that includes updated tags and supplemental information about the machine|{'computerDnsName': 'msedgewin10', 'deviceValue': 'Normal', 'machineTags': ['tag1', 'tag2', 'example tag'], 'riskScore': 'None', '@odata.context': 'https://api.securitycenter.windows.com/api/$metada...', 'id': '2df36d707c1ee5084cef77f3dbfc95db65bc4a73', 'osProcessor': 'x64', 'rbacGroupId': 0, 'version': '1809', 'osPlatform': 'Windows10', 'agentVersion': '10.5850.17763.348', 'exposureLevel': 'Medium', 'isAadJoined': False, 'lastExternalIpAddress': '83.220.117.67', 'lastIpAddress': '10.0.2.15', 'osBuild': 17763, 'firstSeen': '2020-12-08T09:33:03.1262943Z', 'healthStatus': 'Active', 'lastSeen': '2020-12-08T10:37:41.2907723Z'}|
   
 Example output:
 
 ```
 {
   "manage_tags_response": {
-    "@Odata.Context": "",
-    "Agent Version": {},
-    "Computer DNS Name": {},
-    "Device Value": {},
-    "Exposure Level": {},
-    "First Seen": {},
-    "Health Status": {},
-    "ID": {},
-    "Is AAD Joined": "true",
-    "Last External IP Address": {},
-    "Last IP Address": {},
-    "Last Seen": {},
-    "Machine Tags": [
-      {}
+    "computerDnsName": "msedgewin10",
+    "deviceValue": "Normal",
+    "machineTags": [
+      "tag1",
+      "tag2",
+      "example tag"
     ],
-    "OS Build": 0,
-    "OS Platform": {},
-    "OS Processor": {},
-    "RBAC Group ID": {},
-    "Risk Score": {},
-    "Version": {}
+    "riskScore": "None",
+    "@odata.context": "https://api.securitycenter.windows.com/api/$metada...",
+    "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+    "osProcessor": "x64",
+    "rbacGroupId": 0,
+    "version": "1809",
+    "osPlatform": "Windows10",
+    "agentVersion": "10.5850.17763.348",
+    "exposureLevel": "Medium",
+    "isAadJoined": false,
+    "lastExternalIpAddress": "83.220.117.67",
+    "lastIpAddress": "10.0.2.15",
+    "osBuild": 17763,
+    "firstSeen": "2020-12-08T09:33:03.1262943Z",
+    "healthStatus": "Active",
+    "lastSeen": "2020-12-08T10:37:41.2907723Z"
   }
 }
 ```
@@ -722,22 +740,22 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|machine_action_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|None|
+|machine_action_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|{'@odata.context': 'https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity', 'id': '2e9da30d-27f6-4208-81f2-9cd3d67893ba', 'type': 'RunAntiVirusScan', 'requestor': 'user@example.com', 'requestorComment': 'Check machine for viruses due to alert 3212', 'status': 'InProgress', 'machineId': '1e5bc9d7e413ddd7902c2932e418702b84d0cc07', 'creationDateTimeUtc': '2018-12-04T12:18:27.1293487Z', 'lastUpdateTimeUtc': '2018-12-04T12:18:27.1293487Z', 'relatedFileInfo': None}|
   
 Example output:
 
 ```
 {
-  "machine_action_response": {
-    "Creation Date Time UTC": "",
-    "Error HResult": 0,
-    "ID": {},
-    "Last Update Date Time UTC": {},
-    "Machine ID": {},
-    "Requestor": {},
-    "Requestor Comment": {},
-    "Status": {}
-  }
+  "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity",
+  "id": "2e9da30d-27f6-4208-81f2-9cd3d67893ba",
+  "type": "RunAntiVirusScan",
+  "requestor": "user@example.com",
+  "requestorComment": "Check machine for viruses due to alert 3212",
+  "status": "InProgress",
+  "machineId": "1e5bc9d7e413ddd7902c2932e418702b84d0cc07",
+  "creationDateTimeUtc": "2018-12-04T12:18:27.1293487Z",
+  "lastUpdateTimeUtc": "2018-12-04T12:18:27.1293487Z",
+  "relatedFileInfo": null
 }
 ```
 
@@ -767,21 +785,25 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|stop_and_quarantine_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|None|
+|stop_and_quarantine_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|{'@odata.context': 'https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity', 'id': '141408d1-384c-4c19-8b57-ba39e378011a', 'type': 'StopAndQuarantineFile', 'requestor': 'user@example.com', 'requestorComment': 'Stop and quarantine file on machine due to alert 441688558380765161_2136280442', 'status': 'InProgress', 'machineId': '1e5bc9d7e413ddd7902c2932e418702b84d0cc07', 'creationDateTimeUtc': '2018-12-04T12:15:04.3825985Z', 'lastUpdateTimeUtc': '2018-12-04T12:15:04.3825985Z', 'relatedFileInfo': {'fileIdentifier': '87662bc3d60e4200ceaf7aae249d1c343f4b83c9', 'fileIdentifierType': 'Sha1'}}|"] in help.md
+Output violations: Action-> "Run Antivirus Scan": Missing ["|machine_action_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|{'@odata.context': 'https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity', 'id': '2e9da30d-27f6-4208-81f2-9cd3d67893ba', 'type': 'RunAntiVirusScan', 'requestor': 'user@example.com', 'requestorComment': 'Check machine for viruses due to alert 3212', 'status': 'InProgress', 'machineId': '1e5bc9d7e413ddd7902c2932e418702b84d0cc07', 'creationDateTimeUtc': '2018-12-04T12:18:27.1293487Z', 'lastUpdateTimeUtc': '2018-12-04T12:18:27.1293487Z', 'relatedFileInfo': None}|
   
 Example output:
 
 ```
 {
-  "stop_and_quarantine_response": {
-    "Creation Date Time UTC": "",
-    "Error HResult": 0,
-    "ID": {},
-    "Last Update Date Time UTC": {},
-    "Machine ID": {},
-    "Requestor": {},
-    "Requestor Comment": {},
-    "Status": {}
+  "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity",
+  "id": "141408d1-384c-4c19-8b57-ba39e378011a",
+  "type": "StopAndQuarantineFile",
+  "requestor": "user@example.com",
+  "requestorComment": "Stop and quarantine file on machine due to alert 441688558380765161_2136280442",
+  "status": "InProgress",
+  "machineId": "1e5bc9d7e413ddd7902c2932e418702b84d0cc07",
+  "creationDateTimeUtc": "2018-12-04T12:15:04.3825985Z",
+  "lastUpdateTimeUtc": "2018-12-04T12:15:04.3825985Z",
+  "relatedFileInfo": {
+    "fileIdentifier": "87662bc3d60e4200ceaf7aae249d1c343f4b83c9",
+    "fileIdentifierType": "Sha1"
   }
 }
 ```
@@ -810,22 +832,22 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|machine_isolation_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|None|
+|machine_isolation_response|machine_action|True|A response that includes the result of the action, and supplemental information about the action taken|{'@odata.context': 'https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity', 'id': 'b89eb834-4578-496c-8be0-03f004061435', 'type': 'Unisolate', 'requestor': 'user@example.com', 'requestorComment': 'Isolate machine due to alert 1234', 'status': 'InProgress', 'machineId': '1e5bc9d7e413ddd7902c2932e418702b84d0cc07', 'creationDateTimeUtc': '2017-12-04T12:12:18.9725659Z', 'lastUpdateTimeUtc': '2017-12-04T12:12:18.9725659Z', 'relatedFileInfo': None}|
   
 Example output:
 
 ```
 {
-  "machine_isolation_response": {
-    "Creation Date Time UTC": "",
-    "Error HResult": 0,
-    "ID": {},
-    "Last Update Date Time UTC": {},
-    "Machine ID": {},
-    "Requestor": {},
-    "Requestor Comment": {},
-    "Status": {}
-  }
+  "@odata.context": "https://api.securitycenter.windows.com/api/$metadata#MachineActions/$entity",
+  "id": "b89eb834-4578-496c-8be0-03f004061435",
+  "type": "Unisolate",
+  "requestor": "user@example.com",
+  "requestorComment": "Isolate machine due to alert 1234",
+  "status": "InProgress",
+  "machineId": "1e5bc9d7e413ddd7902c2932e418702b84d0cc07",
+  "creationDateTimeUtc": "2017-12-04T12:12:18.9725659Z",
+  "lastUpdateTimeUtc": "2017-12-04T12:12:18.9725659Z",
+  "relatedFileInfo": null
 }
 ```
 ### Triggers
@@ -857,69 +879,62 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|alert|alert|True|An alert that contains the given key and matching value|None|
+|alert|alert|True|An alert that contains the given key and matching value|{'alert': {'id': 'da637292082891366787_322129023', 'incidentId': 1, 'investigationId': 1, 'assignedTo': 'Automation', 'severity': 'Informational', 'status': 'Resolved', 'investigationState': 'Benign', 'detectionSource': 'WindowsDefenderAv', 'category': 'Malware', 'title': 'EICAR_Test_File malware was detected', 'description': 'Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks.\n\nThis detection might indicate that the malware was stopped from delivering its payload. However, it is prudent to check the machine for signs of infection.', 'alertCreationTime': '2020-07-01T13:51:29.0741799Z', 'firstEventTime': '2020-07-01T13:49:55.2853766Z', 'lastEventTime': '2020-07-01T13:49:55.8520351Z', 'lastUpdateTime': '2020-07-02T20:11:23.0966667Z', 'resolvedTime': '2020-07-01T14:02:24.4812386Z', 'machineId': '2df36d707c1ee508xyFf77f3dbfc95db65bc4a73', 'computerDnsName': 'example-desktop', 'aadTenantId': '5c824599-ab2c-43ab-651x-3b886d4f8f10', 'comments': [], 'evidence': [{'entityType': 'User', 'evidenceCreationTime': '2021-01-26T20:33:58.42Z', 'sha1': 'ff836cfb1af40252bd2a2ea843032e99a5b262ed', 'sha256': 'a4752c71d81afd3d5865d24ddb11a6b0c615062fcc448d24050c2172d2cbccd6', 'fileName': 'rundll32.exe', 'filePath': 'C:\\Windows\\SysWOW64', 'processId': 3276, 'processCommandLine': 'rundll32.exe  c:\\temp\\suspicious.dll,RepeatAfterMe', 'processCreationTime': '2021-01-26T20:31:32.9581596Z', 'parentProcessId': 8420, 'parentProcessCreationTime': '2021-01-26T20:31:32.9004163Z', 'parentProcessFileName': 'rundll32.exe', 'parentProcessFilePath': 'C:\\Windows\\System32', 'ipAddress': '8.8.8.8', 'url': None, 'registryKey': 'Test9999', 'registryHive': None, 'registryValueType': None, 'registryValue': None, 'accountName': 'name', 'domainName': 'DOMAIN', 'userSid': 'S-1-5-21-11111607-1111760036-109187956-75141', 'aadUserId': '11118379-2a59-1111-ac3c-a51eb4a3c627', 'userPrincipalName': 'user@example.com', 'detectionStatus': 'Detected'}]}}|
   
 Example output:
 
 ```
 {
   "alert": {
-    "AAD Tenant ID": {},
-    "Alert Creation Time": {},
-    "Assigned To": {},
-    "Category": {},
-    "Classification": {},
-    "Computer DNS Name": {},
-    "Description": {},
-    "Detection Source": {},
-    "Determination": {},
-    "Evidence": [
+    "id": "da637292082891366787_322129023",
+    "incidentId": 1,
+    "investigationId": 1,
+    "assignedTo": "Automation",
+    "severity": "Informational",
+    "status": "Resolved",
+    "investigationState": "Benign",
+    "detectionSource": "WindowsDefenderAv",
+    "category": "Malware",
+    "title": "'EICAR_Test_File' malware was detected",
+    "description": "Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks.\n\nThis detection might indicate that the malware was stopped from delivering its payload. However, it is prudent to check the machine for signs of infection.",
+    "alertCreationTime": "2020-07-01T13:51:29.0741799Z",
+    "firstEventTime": "2020-07-01T13:49:55.2853766Z",
+    "lastEventTime": "2020-07-01T13:49:55.8520351Z",
+    "lastUpdateTime": "2020-07-02T20:11:23.0966667Z",
+    "resolvedTime": "2020-07-01T14:02:24.4812386Z",
+    "machineId": "2df36d707c1ee508xyFf77f3dbfc95db65bc4a73",
+    "computerDnsName": "example-desktop",
+    "aadTenantId": "5c824599-ab2c-43ab-651x-3b886d4f8f10",
+    "comments": [],
+    "evidence": [
       {
-        "AAD User ID": {},
-        "Account Name": {},
-        "Detection Status": {},
-        "Domain Name": {},
-        "Entity Type": {},
-        "Evidence Creation Time": {},
-        "File Name": {},
-        "File Path": {},
-        "IP Address": {},
-        "Parent Process Creation Time": {},
-        "Parent Process File Name": {},
-        "Parent Process File Path": {},
-        "Parent Process ID": {},
-        "Process Command Line": {},
-        "Process Creation Time": {},
-        "Process ID": {},
-        "Registry Hive": {},
-        "Registry Key": {},
-        "Registry Value": {},
-        "Registry Value Type": {},
-        "SHA1": {},
-        "SHA256": {},
-        "URL": {},
-        "User Principal Name": {},
-        "User SID": {}
+        "entityType": "User",
+        "evidenceCreationTime": "2021-01-26T20:33:58.42Z",
+        "sha1": "ff836cfb1af40252bd2a2ea843032e99a5b262ed",
+        "sha256": "a4752c71d81afd3d5865d24ddb11a6b0c615062fcc448d24050c2172d2cbccd6",
+        "fileName": "rundll32.exe",
+        "filePath": "C:\\Windows\\SysWOW64",
+        "processId": 3276,
+        "processCommandLine": "rundll32.exe  c:\\temp\\suspicious.dll,RepeatAfterMe",
+        "processCreationTime": "2021-01-26T20:31:32.9581596Z",
+        "parentProcessId": 8420,
+        "parentProcessCreationTime": "2021-01-26T20:31:32.9004163Z",
+        "parentProcessFileName": "rundll32.exe",
+        "parentProcessFilePath": "C:\\Windows\\System32",
+        "ipAddress": "8.8.8.8",
+        "url": null,
+        "registryKey": "Test9999",
+        "registryHive": null,
+        "registryValueType": null,
+        "registryValue": null,
+        "accountName": "name",
+        "domainName": "DOMAIN",
+        "userSid": "S-1-5-21-11111607-1111760036-109187956-75141",
+        "aadUserId": "11118379-2a59-1111-ac3c-a51eb4a3c627",
+        "userPrincipalName": "user@example.com",
+        "detectionStatus": "Detected"
       }
-    ],
-    "First Event Time": {},
-    "ID": "",
-    "Incident ID": 0,
-    "Investigation ID": {},
-    "Investigation State": {},
-    "Last Event Time": {},
-    "Last Update Time": {},
-    "Machine ID": {},
-    "RBAC Group Name": {},
-    "Related User": {
-      "Domain Name": {},
-      "User Name": {}
-    },
-    "Resolved Time": {},
-    "Severity": {},
-    "Status": {},
-    "Threat Family Name": {},
-    "Title": {}
+    ]
   }
 }
 ```
@@ -946,69 +961,34 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|alert|alert|True|Alert|None|
-  
+|alert|alert|True|Alert|{'id': 'da637292082891366787_322129023', 'incidentId': 1, 'investigationId': 1, 'assignedTo': 'Automation', 'severity': 'Informational', 'status': 'Resolved', 'investigationState': 'Benign', 'detectionSource': 'WindowsDefenderAv', 'category': 'Malware', 'title': 'EICAR_Test_File malware was detected', 'description': 'Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks. This detection might indicate that the malware was stopped from delivering its payload. However, it is prudent to check the machine for signs of infection.', 'alertCreationTime': '2020-07-01T13:51:29.0741799Z', 'firstEventTime': '2020-07-01T13:49:55.2853766Z', 'lastEventTime': '2020-07-01T13:49:55.8520351Z', 'lastUpdateTime': '2020-07-02T20:11:23.0966667Z', 'resolvedTime': '2020-07-01T14:02:24.4812386Z', 'machineId': '2df36d707c1ee508xyFf77f3dbfc95db65bc4a73', 'computerDnsName': 'example-desktop', 'aadTenantId': '5c824599-ab2c-43ab-651x-3b886d4f8f10', 'comments': [], 'evidence': []}|
+
 Example output:
 
 ```
 {
   "alert": {
-    "AAD Tenant ID": {},
-    "Alert Creation Time": {},
-    "Assigned To": {},
-    "Category": {},
-    "Classification": {},
-    "Computer DNS Name": {},
-    "Description": {},
-    "Detection Source": {},
-    "Determination": {},
-    "Evidence": [
-      {
-        "AAD User ID": {},
-        "Account Name": {},
-        "Detection Status": {},
-        "Domain Name": {},
-        "Entity Type": {},
-        "Evidence Creation Time": {},
-        "File Name": {},
-        "File Path": {},
-        "IP Address": {},
-        "Parent Process Creation Time": {},
-        "Parent Process File Name": {},
-        "Parent Process File Path": {},
-        "Parent Process ID": {},
-        "Process Command Line": {},
-        "Process Creation Time": {},
-        "Process ID": {},
-        "Registry Hive": {},
-        "Registry Key": {},
-        "Registry Value": {},
-        "Registry Value Type": {},
-        "SHA1": {},
-        "SHA256": {},
-        "URL": {},
-        "User Principal Name": {},
-        "User SID": {}
-      }
-    ],
-    "First Event Time": {},
-    "ID": "",
-    "Incident ID": 0,
-    "Investigation ID": {},
-    "Investigation State": {},
-    "Last Event Time": {},
-    "Last Update Time": {},
-    "Machine ID": {},
-    "RBAC Group Name": {},
-    "Related User": {
-      "Domain Name": {},
-      "User Name": {}
-    },
-    "Resolved Time": {},
-    "Severity": {},
-    "Status": {},
-    "Threat Family Name": {},
-    "Title": {}
+    "id": "da637292082891366787_322129023",
+    "incidentId": 1,
+    "investigationId": 1,
+    "assignedTo": "Automation",
+    "severity": "Informational",
+    "status": "Resolved",
+    "investigationState": "Benign",
+    "detectionSource": "WindowsDefenderAv",
+    "category": "Malware",
+    "title": "'EICAR_Test_File' malware was detected",
+    "description": "Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks.\n\nThis detection might indicate that the malware was stopped from delivering its payload. However, it is prudent to check the machine for signs of infection.",
+    "alertCreationTime": "2020-07-01T13:51:29.0741799Z",
+    "firstEventTime": "2020-07-01T13:49:55.2853766Z",
+    "lastEventTime": "2020-07-01T13:49:55.8520351Z",
+    "lastUpdateTime": "2020-07-02T20:11:23.0966667Z",
+    "resolvedTime": "2020-07-01T14:02:24.4812386Z",
+    "machineId": "2df36d707c1ee508xyFf77f3dbfc95db65bc4a73",
+    "computerDnsName": "example-desktop",
+    "aadTenantId": "5c824599-ab2c-43ab-651x-3b886d4f8f10",
+    "comments": [],
+    "evidence": []
   }
 }
 ```
