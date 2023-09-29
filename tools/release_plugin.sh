@@ -9,7 +9,7 @@ if [[ "${{ github.event.inputs.RELEASE_PROD_CLOUD_US }}" == "true" ]]; then
   echo "::add-mask::$IAM_ROLE"
   export IAM_ROLE_EXTERNAL_ID=$(echo "${INF}" | jq -r '.stsPluginS3ExternalId' | tr -d '\n')
   echo "::add-mask::$IAM_ROLE_EXTERNAL_ID"
-  export IAM_SESSION_DURATION="${!IAM_SESSION_DURATION}"
+  export IAM_SESSION_DURATION="${IAM_SESSION_DURATION}"
   MARKET_TOKEN_NAME="${INFRASTRUCTURE_KEY}_MARKET_TOKEN"
   export MARKET_TOKEN="${!MARKET_TOKEN_NAME}"
   MARKET_USERNAME_NAME = "${INFRASTRUCTURE_KEY}_MARKET_USERNAME"

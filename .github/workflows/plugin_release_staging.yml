@@ -34,7 +34,7 @@ on:
       RELEASE_INT_CLOUD_US:
         description: 'Release for us int environment.'
         required: true
-        default: true      
+        default: true
       RELEASE_HUB_PROD:
         description: 'Release for hub prod environment.'
         required: true
