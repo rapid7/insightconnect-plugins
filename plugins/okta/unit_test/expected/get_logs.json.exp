@@ -15,7 +15,8 @@
         },
         "zone": "null",
         "device": "Unknown",
-        "ipAddress": "198.51.100.1"
+        "ipAddress": "198.51.100.1",
+        "geographicalContext": {}
       },
       "authenticationContext": {
         "externalSessionId": "12345"
@@ -56,6 +57,7 @@
         "ipChain": [
           {
             "ip": "198.51.100.1",
+            "geographicalContext": {},
             "version": "V4"
           }
         ]
@@ -84,7 +86,8 @@
         },
         "zone": "null",
         "device": "Unknown",
-        "ipAddress": "198.51.100.1"
+        "ipAddress": "198.51.100.1",
+        "geographicalContext": {}
       },
       "authenticationContext": {
         "externalSessionId": "12345"
@@ -125,6 +128,7 @@
         "ipChain": [
           {
             "ip": "198.51.100.1",
+            "geographicalContext": {},
             "version": "V4"
           }
         ]
@@ -140,7 +144,7 @@
     }
   ],
   "state": {
-    "last_collection_timestamp": "2023-04-28T08:34:46",
+    "last_collection_timestamp": "2023-04-27T07:49:21.777Z",
     "next_page_link": "https://example.com/nextLink?q=next"
   },
   "has_more_pages": true,
