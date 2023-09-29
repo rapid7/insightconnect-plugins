@@ -1103,7 +1103,7 @@ Monitor system logs
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|logs|[]log|True|All system logs within the specified time range|[]|
+|logs|object|True|All system logs within the specified time range|[]|
   
 Example output:
 
@@ -1125,6 +1125,7 @@ Example output:
         },
         "zone": "null",
         "device": "Unknown",
+        "geographicalContext": {}
         "ipAddress": "198.51.100.1"
       },
       "authenticationContext": {
@@ -1166,6 +1167,7 @@ Example output:
         "ipChain": [
           {
             "ip": "198.51.100.1",
+            "geographicalContext": {}
             "version": "V4"
           }
         ]
@@ -1610,6 +1612,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 4.2.0 - Monitor Logs task: return raw logs data without cleaning and use last log time as checkpoint in time for next run.
 * 4.1.1 - Monitor Logs task: strip http/https in hostname
 * 4.1.0 - New action Get User Groups | Update to latest SDK version
 * 4.0.0 - Add Monitor Logs task | Code refactor | Update plugin to be cloud enabled

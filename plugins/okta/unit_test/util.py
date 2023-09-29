@@ -58,7 +58,7 @@ class Util:
         global first_request
 
         if url == "https://example.com/api/v1/logs":
-            if params == {"since": "2023-04-27T08:34:46", "until": "2023-04-28T08:34:46", "limit": 1000}:
+            if params == {"since": "2023-04-27T08:33:46", "until": "2023-04-28T08:33:46", "limit": 1000}:
                 return MockResponse(
                     200, "get_logs.json.resp", {"link": '<https://example.com/nextLink?q=next> rel="next"'}
                 )
