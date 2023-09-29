@@ -14,8 +14,7 @@
       "SourceIp": "198.51.100.1",
       "Status": "Success",
       "Application": "New Connected App",
-      "Browser": "Unknown",
-      "dataType": "User Login"
+      "Browser": "Unknown"
     },
     {
       "attributes": {
@@ -29,8 +28,7 @@
       "SourceIp": "198.51.100.1",
       "Status": "Success",
       "Application": "Browser",
-      "Browser": "Chrome 115",
-      "dataType": "User Login"
+      "Browser": "Chrome 115"
     }
   ]
 }

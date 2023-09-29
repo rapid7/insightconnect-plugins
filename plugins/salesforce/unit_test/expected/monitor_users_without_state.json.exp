@@ -14,82 +14,82 @@
         "type": "User",
         "url": "/services/data/v58.0/sobjects/User/005Hn00000HVWwxIAH"
       },
-      "id": "005Hn00000HVWwxIAH",
-      "firstName": "Security",
-      "lastName": "User",
-      "email": "user@example.com",
-      "alias": "sec",
-      "isActive": true,
-      "dataType": "User Update"
+      "Id": "005Hn00000HVWwxIAH",
+      "FirstName": "Security",
+      "LastName": "User",
+      "Email": "user@example.com",
+      "Alias": "sec",
+      "IsActive": true,
+      "DataType": "User Update"
     },
     {
       "attributes": {
         "type": "User",
         "url": "/services/data/v58.0/sobjects/User/005Hn00000H35JtIAJ"
       },
-      "id": "005Hn00000H35JtIAJ",
-      "firstName": "Example",
-      "lastName": "User",
-      "email": "user2@example.com",
-      "alias": "exam",
-      "isActive": true,
-      "dataType": "User"
+      "Id": "005Hn00000H35JtIAJ",
+      "FirstName": "Example",
+      "LastName": "User",
+      "Email": "user2@example.com",
+      "Alias": "exam",
+      "IsActive": true,
+      "DataType": "User"
     },
     {
       "attributes": {
         "type": "User",
         "url": "/services/data/v58.0/sobjects/User/005Hn00000HVWwsIAH"
       },
-      "id": "005Hn00000HVWwsIAH",
-      "firstName": "Integration",
-      "lastName": "User",
-      "email": "user3@example.com",
-      "alias": "integ",
-      "isActive": true,
-      "dataType": "User"
+      "Id": "005Hn00000HVWwsIAH",
+      "FirstName": "Integration",
+      "LastName": "User",
+      "Email": "user3@example.com",
+      "Alias": "integ",
+      "IsActive": true,
+      "DataType": "User"
     },
     {
       "attributes": {
         "type": "User",
         "url": "/services/data/v58.0/sobjects/User/005Hn00000HVWwxIAH"
       },
-      "id": "005Hn00000HVWwxIAH",
-      "firstName": "Security",
-      "lastName": "User",
-      "email": "user@example.com",
-      "alias": "sec",
-      "isActive": true,
-      "dataType": "User"
+      "Id": "005Hn00000HVWwxIAH",
+      "FirstName": "Security",
+      "LastName": "User",
+      "Email": "user@example.com",
+      "Alias": "sec",
+      "IsActive": true,
+      "DataType": "User"
     },
     {
       "attributes": {
         "type": "LoginHistory",
         "url": "/services/data/v58.0/sobjects/LoginHistory/0YaHn0000EUyGdHKQV"
       },
-      "loginTime": "2023-07-23T16:18:23.000+0000",
-      "userId": "005Hn00000H35JtIAJ",
-      "loginType": "Remote Access 2.0",
-      "loginUrl": "login.salesforce.com",
-      "sourceIp": "198.51.100.1",
-      "status": "Success",
-      "application": "New Connected App",
-      "browser": "Unknown",
-      "dataType": "User Login"
+      "LoginTime": "2023-07-23T16:18:23.000+0000",
+      "UserId": "005Hn00000H35JtIAJ",
+      "LoginType": "Remote Access 2.0",
+      "LoginUrl": "login.salesforce.com",
+      "SourceIp": "198.51.100.1",
+      "Status": "Success",
+      "Application": "New Connected App",
+      "Browser": "Unknown",
+      "DataType": "User Login"
     },
     {
       "attributes": {
         "type": "LoginHistory",
         "url": "/services/data/v58.0/sobjects/LoginHistory/0YaHn0000EUyGkcKQF"
       },
-      "loginTime": "2023-07-23T16:20:13.000+0000",
-      "userId": "005Hn00000H35JtIAJ",
-      "loginType": "Application",
-      "loginUrl": "example.salesforce.com",
-      "sourceIp": "198.51.100.1",
-      "status": "Success",
-      "application": "Browser",
-      "browser": "Chrome 115",
-      "dataType": "User Login"
+      "LoginTime": "2023-07-23T16:20:13.000+0000",
+      "UserId": "005Hn00000H35JtIAJ",
+      "LoginType": "Application",
+      "LoginUrl": "example.salesforce.com",
+      "SourceIp": "198.51.100.1",
+      "Status": "Success",
+      "Application": "Browser",
+      "Browser": "Chrome 115",
+      "DataType": "User Login"
     }
   ]
 }
