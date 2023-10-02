@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 5.0.1
+version: 5.1.0
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2022-07-20."]
 vendor: rapid7
@@ -538,6 +538,43 @@ types:
       type: "[]attachment"
       required: false
       example: [{"rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890","creator": {"type": "USER","name": "Example User"},"created_time": "2022-08-19T13:00:58.645Z","file_name": "test.txt","mime_type": "text/plain","size": 4,"scan_status": "CLEAN"}]
+  user:
+    domain:
+      title: Domiain
+      description: The domain this user is associated with.
+      type: string
+      required: false
+    name:
+      title: Name
+      description: The name of this user.
+      type: string
+      required: false
+    first_name:
+      title: First Name
+      description: The first name of this user, if known.
+      type: string
+      required: false
+    last_name:
+      title: Last Name
+      description: The last name of this user, if known.
+      type: string
+      required: false
+    rrn:
+      title: RRN
+      description: The unique identifier for this user.
+      type: string
+      required: false
+  asset:
+    name:
+      title: Name
+      description: The user friendly name for this asset.
+      type: string
+      required: false
+    rrn:
+      title: RRN
+      description: The unique identifier for this asset.
+      type: string
+      required: false  
 connection:
   api_key:
     title: API Key
@@ -1629,6 +1666,52 @@ actions:
         type: bytes
         required: false
         example: dGVzdA==
+      success:
+        title: Success
+        description: Whether the action was successful or not
+        type: boolean
+        required: true
+        example: true
+  get_user_information:
+    title: Get User Information
+    description: Get information from an user by RRN. The RRN determines which user the information is retrieved from
+    input:
+      user_rrn:
+        title: User RRN
+        description: The RRN of the user
+        type: string
+        required: true
+        example: "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6"
+    output:
+      user:
+        title: User
+        description: User details
+        type: user
+        required: false
+        example: {"domain": "tor.acme.com","first_name": "John","last_name": "Doe","name": "John Doe","rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6"}
+      success:
+        title: Success
+        description: Whether the action was successful or not
+        type: boolean
+        required: true
+        example: true
+  get_asset_information:
+    title: Get Asset Information
+    description: Get information from an asset by RRN. The RRN determines which asset the information is retrieved from
+    input:
+      asset_rrn:
+        title: Asset RRN
+        description: The RRN of the asset
+        type: string
+        required: true
+        example: "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:asset:83002c85d7c6"
+    output:
+      asset:
+        title: Asset
+        description: Asset details
+        type: asset
+        required: false
+        example: {"name": "morbo.tor.acme.com","rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:asset:83002c85d7c6"}
       success:
         title: Success
         description: Whether the action was successful or not

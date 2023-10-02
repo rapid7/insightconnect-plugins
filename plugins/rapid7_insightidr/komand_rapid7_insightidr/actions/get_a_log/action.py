@@ -15,6 +15,7 @@ class GetALog(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        self.connection.session.headers["Accept-version"] = "investigations-preview"
         request = ResourceHelper(self.connection.session, self.logger)
         response = request.resource_request(Logs.get_a_log(self.connection.url, params.get(Input.ID)), "get")
         try:

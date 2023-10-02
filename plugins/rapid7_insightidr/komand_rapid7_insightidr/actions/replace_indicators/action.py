@@ -20,7 +20,7 @@ class ReplaceIndicators(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         request = ResourceHelper(self.connection.session, self.logger)
         endpoint = Threats.replace_indicators(self.connection.url, params.pop(Input.KEY))
-
+        self.connection.session.headers["Accept-version"] = "investigations-preview"
         response = request.resource_request(endpoint, "post", params={"format": "json"}, payload=params)
         try:
             result = json.loads(response.get("resource"))

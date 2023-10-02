@@ -19,7 +19,6 @@ class Util:
 
 
 class Investigations:
-
     # Methods to populate Investigation endpoints
 
     @staticmethod
@@ -247,3 +246,15 @@ class Attachments:
     @staticmethod
     def get_attachment_information(console_url: str, attachment_rrn: str) -> str:
         return f"{console_url}idr/v1/attachments/{attachment_rrn}/metadata"
+
+
+class Users:
+    @staticmethod
+    def get_user_information(console_url: str, attachment_rrn: str) -> str:
+        return f"{console_url}idr/v1/users/{attachment_rrn}"
+
+
+class Assets:
+    @staticmethod
+    def get_asset_information(console_url: str, attachment_rrn: str) -> str:
+        return f"{console_url}idr/v1/assets/{attachment_rrn}"

@@ -28,6 +28,7 @@ class SetStatusOfInvestigationAction(insightconnect_plugin_runtime.Action):
         idr_id = params.get(Input.ID)
         status = params.get(Input.STATUS)
 
+        self.connection.session.headers["Accept-version"] = "investigations-preview"
         request = ResourceHelper(self.connection.session, self.logger)
 
         endpoint = Investigations.set_the_status_of_an_investigation(self.connection.url, idr_id, status)

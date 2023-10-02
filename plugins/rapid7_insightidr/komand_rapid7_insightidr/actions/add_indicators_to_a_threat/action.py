@@ -24,6 +24,7 @@ class AddIndicatorsToAThreat(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        self.connection.session.headers["Accept-version"] = "investigations-preview"
         request = ResourceHelper(self.connection.session, self.logger)
         endpoint = Threats.add_indicators_to_a_threat(self.connection.url, params.pop(Input.KEY))
 
