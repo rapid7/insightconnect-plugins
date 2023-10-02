@@ -1,11 +1,11 @@
+import json
+
 import insightconnect_plugin_runtime
 from .schema import MonitorUsersInput, MonitorUsersOutput, MonitorUsersState, Component
 
-# Custom imports below
 from datetime import datetime, timedelta, timezone
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_salesforce.util.exceptions import ApiException
-from komand_salesforce.util.helpers import clean, convert_to_camel_case
 
 
 class MonitorUsers(insightconnect_plugin_runtime.Task):
@@ -19,6 +19,7 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
     NEXT_USER_COLLECTION_TIMESTAMP = "next_user_collection_timestamp"
     NEXT_USER_LOGIN_COLLECTION_TIMESTAMP = "next_user_login_collection_timestamp"
     LAST_USER_LOGIN_COLLECTION_TIMESTAMP = "last_user_login_collection_timestamp"
+    REMOVE_DUPLICATES = "remove_duplicates"
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -38,6 +39,7 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
             get_users = False
             get_user_login_history = False
 
+            remove_duplicates = state.pop(self.REMOVE_DUPLICATES, True)  # true as a default
             users_next_page_id = state.get(self.USERS_NEXT_PAGE_ID)
             state.pop(self.USERS_NEXT_PAGE_ID, None)
             user_login_next_page_id = state.get(self.USER_LOGIN_NEXT_PAGE_ID)
@@ -111,6 +113,7 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                             self.UPDATED_USERS_QUERY.format(user_ids=concatenated_ids), None
                         ).get("records", [])
 
+                        self.logger.info(f"{len(updated_users)} updated users added to output")
                         records.extend(self.add_data_type_field(updated_users, "User Update"))
 
                 if get_users:
@@ -119,6 +122,8 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                     if users_next_page_id:
                         state[self.USERS_NEXT_PAGE_ID] = users_next_page_id
                         has_more_pages = True
+
+                    self.logger.info(f"{len(response.get('records'))} internal users added to output")
                     records.extend(self.add_data_type_field(response.get("records", []), "User"))
 
                 if get_user_login_history:
@@ -133,12 +138,36 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                     if user_login_next_page_id:
                         state[self.USER_LOGIN_NEXT_PAGE_ID] = user_login_next_page_id
                         has_more_pages = True
+
+                    self.logger.info(f"{len(response.get('records'))} users login history added to output")
                     records.extend(self.add_data_type_field(response.get("records", []), "User Login"))
-                return convert_to_camel_case(clean(records)), state, has_more_pages, 200, None
+
+                if remove_duplicates is True:
+                    records = self.remove_duplicates(records)
+
+                return records, state, has_more_pages, 200, None
             except ApiException as error:
                 return [], state, False, error.status_code, error
         except Exception as error:
             return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+
+    def remove_duplicates(self, records: list) -> list:
+        """
+         Remove duplicate entries from the provided list of records.
+
+        Args:
+            records (list): A list containing the records to be de-duplicated.
+
+        Returns:
+            list: A list containing only the unique records from the input list.
+        """
+        unique_records = {json.dumps(event, sort_keys=True): event for event in records}
+        unique_records = list(unique_records.values())
+        if len(records) != len(unique_records):
+            self.logger.info(
+                f"Removed {len(records) - len(unique_records)} duplicate from a total of {len(records)} duplicate records."
+            )
+        return unique_records
 
     @staticmethod
     def get_current_time() -> datetime:
@@ -155,5 +184,5 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
     @staticmethod
     def add_data_type_field(records: list, field_value: str) -> list:
         for record in records:
-            record["dataType"] = field_value
+            record["DataType"] = field_value
         return records

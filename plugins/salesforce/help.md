@@ -531,6 +531,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.0 - Implemented token auto-refresh on expiration for continuous sessions | Task Monitor Users: add flag `remove_duplicates` for duplicated events | Task Monitor Users: removed formatting of task output and cleaning null 
 * 2.0.2 - Task Monitor Users: query improvement | Handle exception related with grant type
 * 2.0.1 - Add extra logs register
 * 2.0.0 - Code refactor | Update plugin to be cloud enabled | Add new task Monitor Users
