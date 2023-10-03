@@ -58,10 +58,14 @@ class Util:
         global first_request
 
         if url == "https://example.com/api/v1/logs":
-            if params == {"since": "2023-04-27T08:33:46", "until": "2023-04-28T08:33:46", "limit": 1000}:
-                return MockResponse(
-                    200, "get_logs.json.resp", {"link": '<https://example.com/nextLink?q=next> rel="next"'}
-                )
+            resp_args = {
+                "status_code": 200,
+                "filename": "get_logs.json.resp",
+                "headers": {"link": '<https://example.com/nextLink?q=next> rel="next"'},
+            }
+            if params.get("since") == "2023-04-27T07:49:21.777Z":
+                resp_args["filename"], resp_args["headers"] = "get_logs_single_event.json.resp", {"link": ""}
+            return MockResponse(**resp_args)
         if url == "https://example.com/nextLink?q=next":
             return MockResponse(200, "get_logs_next_page.json.resp", {"link": ""})
         if url == "https://example.com/api/v1/groups/12345/users" and first_request:
