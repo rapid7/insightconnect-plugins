@@ -14,5 +14,5 @@ class ActivitiesTypes(insightconnect_plugin_runtime.Action):
             output=ActivitiesTypesOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):  # pylint: disable=unused-argument
         return {Output.ACTIVITYTYPES: clean(self.connection.client.get_activity_types().get("data", []))}

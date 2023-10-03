@@ -266,7 +266,9 @@ class SentineloneAPI:
             return self._api_key, version
         request_data = {DATA_FIELD: {API_TOKEN_FIELD: self._api_key}}
         self.logger.info(f"Trying to authenticate with API version {version}")
-        response = requests.post(f"{self.url}{LOGIN_BY_TOKEN_ENDPOINT.format(version=version)}", json=request_data)
+        response = requests.post(
+            f"{self.url}{LOGIN_BY_TOKEN_ENDPOINT.format(version=version)}", json=request_data, timeout=60
+        )
         self.raise_for_status(response)
 
         if response.status_code == 200:
@@ -274,7 +276,9 @@ class SentineloneAPI:
         else:
             version = "2.0"
             self.logger.info(f"API v2.1 failed... trying v{version}")
-            response = requests.post(f"{self.url}{LOGIN_BY_TOKEN_ENDPOINT.format(version=version)}", json=request_data)
+            response = requests.post(
+                f"{self.url}{LOGIN_BY_TOKEN_ENDPOINT.format(version=version)}", json=request_data, timeout=60
+            )
             self.raise_for_status(response)
             token = response.json().get(DATA_FIELD, {}).get("token")
             # We know the connection failed when both 2.1 and 2.0 do not give 200 responses

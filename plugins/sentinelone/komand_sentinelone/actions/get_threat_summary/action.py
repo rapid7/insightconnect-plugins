@@ -14,7 +14,7 @@ class GetThreatSummary(insightconnect_plugin_runtime.Action):
             output=GetThreatSummaryOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):  # pylint: disable=unused-argument
         response = self.connection.client.get_threat_summary()
 
         return {

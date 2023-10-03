@@ -32,5 +32,5 @@ def check_password_meets_requirements(password: str) -> Union[None, PluginExcept
     if not re.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$", password):
         raise PluginException(
             cause="Invalid password.",
-            assistance=f"The password must be 10 or more characters with a mix of upper and lower case letters, numbers, and symbols.",
+            assistance="The password must be 10 or more characters with a mix of upper and lower case letters, numbers, and symbols.",
         )
