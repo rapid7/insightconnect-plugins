@@ -21,6 +21,10 @@ hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [siem, rapid7, cloud_enabled]
   features: []
+sdk:
+  type: full
+  version: 5
+  user: nobody
 types:
   investigation_metadata:
     index:

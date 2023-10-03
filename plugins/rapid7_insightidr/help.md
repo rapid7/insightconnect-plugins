@@ -66,11 +66,23 @@ Example input:
 
 ```
 {
-  "domain_names": "rapid7.com",
-  "hashes": "A94A8FE5CCB19BA61C4C0873D391E987982FBBD3",
-  "ips": "10.0.0.1",
+  "domain_names": [
+    "rapid7.com",
+    "google.com"
+  ],
+  "hashes": [
+    "A94A8FE5CCB19BA61C4C0873D391E987982FBBD3",
+    "C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"
+  ],
+  "ips": [
+    "10.0.0.1",
+    "10.0.0.2"
+  ],
   "key": "c9404e11-b81a-429d-9400-05c531f229c3",
-  "urls": "https://example.com"
+  "urls": [
+    "https://example.com",
+    "https://test.com"
+  ]
 }
 ```
 
@@ -85,7 +97,9 @@ Example output:
 
 ```
 {
-  "rejected_indicators": "https://example.com",
+  "rejected_indicators": [
+    "https://example.com"
+  ],
   "threat": {
     "indicator_count": 13,
     "name": "Contributing Collaborative Threat: Flagged Malicious",
@@ -379,7 +393,9 @@ Example output:
 
 ```
 {
-  "ids": "6c7db8d1-abc5-b9da-dd71-1a3ffffe8a16",
+  "ids": [
+    "6c7db8d1-abc5-b9da-dd71-1a3ffffe8a16"
+  ],
   "num_closed": 10
 }
 ```
@@ -401,7 +417,9 @@ Example input:
 
 ```
 {
-  "attachments": "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210",
+  "attachments": [
+    "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210"
+  ],
   "body": "Example comment",
   "target": "rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210"
 }
@@ -519,7 +537,9 @@ Example input:
 
 ```
 {
-  "indicators": "example.com",
+  "indicators": [
+    "example.com"
+  ],
   "note_text": "Threat created via InsightConnect",
   "threat_name": "Threat created via InsightConnect"
 }
@@ -536,7 +556,9 @@ Example output:
 
 ```
 {
-  "rejected_indicators": "example.com",
+  "rejected_indicators": [
+    "example.com"
+  ],
   "threat": {
     "indicator_count": 2,
     "name": "Threat created via InsightConnect",
@@ -1211,7 +1233,9 @@ Example input:
     "ALERT"
   ],
   "start_time": "2020-06-01T12:11:13+05:30",
-  "statuses": "CLOSED"
+  "statuses": [
+    "CLOSED"
+  ]
 }
 ```
 
@@ -1358,11 +1382,17 @@ Example input:
 
 ```
 {
-  "domain_names": "rapid7.com",
+  "domain_names": [
+    "rapid7.com"
+  ],
   "hashes": "A94A8FE5CCB19BA61C4C0873D391E987982FBBD3",
-  "ips": "10.0.0.1",
+  "ips": [
+    "10.0.0.1"
+  ],
   "key": "c9404e11-b81a-429d-9400-05c531f229c3",
-  "urls": "https://example.com"
+  "urls": [
+    "https://example.com"
+  ]
 }
 ```
 
@@ -1377,7 +1407,9 @@ Example output:
 
 ```
 {
-  "rejected_indicators": "example.com",
+  "rejected_indicators": [
+    "example.com"
+  ],
   "threat": {
     "indicator_count": 2,
     "name": "bad-virus",
