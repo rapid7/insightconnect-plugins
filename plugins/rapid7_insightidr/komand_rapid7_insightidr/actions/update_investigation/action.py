@@ -38,6 +38,7 @@ class UpdateInvestigation(insightconnect_plugin_runtime.Action):
         if email:
             data.update({"assignee": {Input.EMAIL: email}})
 
+        self.connection.session.headers["Accept-version"] = "investigations-preview"
         request = ResourceHelper(self.connection.session, self.logger)
 
         endpoint = Investigations.update_or_get_investigation(self.connection.url, identifier)

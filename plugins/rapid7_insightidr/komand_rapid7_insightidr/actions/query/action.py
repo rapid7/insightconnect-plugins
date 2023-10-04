@@ -23,6 +23,7 @@ class Query(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         most_recent_first = params.get(Input.MOST_RECENT_FIRST)
         time_now = int(time.time())
+        self.connection.session.headers["Accept-version"] = "investigations-preview"
         request = ResourceHelper(self.connection.session, self.logger)
         from_var = time_now - THREE_MONTHS_SECONDS
         if most_recent_first and from_var < TWENTY_FOURTH_NOVEMBER:

@@ -1,0 +1,31 @@
+import sys
+import os
+
+sys.path.append(os.path.abspath("../"))
+
+from unittest import TestCase
+from komand_rapid7_insightidr.actions.get_asset_information import GetAssetInformation
+from komand_rapid7_insightidr.actions.get_asset_information.schema import Input
+from util import Util
+from unittest.mock import patch
+from parameterized import parameterized
+from insightconnect_plugin_runtime.exceptions import PluginException
+
+
+@patch("requests.Session.request", side_effect=Util.mocked_requests)
+class TestGetAssetInformation(TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.action = Util.default_connector(GetAssetInformation())
+
+    @parameterized.expand(Util.load_parameters("get_asset_information").get("parameters"))
+    def test_get_asset_information(self, mock_request, asset_rrn, expected):
+        actual = self.action.run({Input.ASSET_RRN: asset_rrn})
+        self.assertEqual(actual, expected)
+
+    @parameterized.expand(Util.load_parameters("get_asset_information_bad").get("parameters"))
+    def test_get_asset_information_bad(self, mock_request, asset_rrn, cause, assistance):
+        with self.assertRaises(PluginException) as error:
+            self.action.run({Input.ASSET_RRN: asset_rrn})
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)

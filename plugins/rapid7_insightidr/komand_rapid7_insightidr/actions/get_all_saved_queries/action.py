@@ -16,6 +16,7 @@ class GetAllSavedQueries(insightconnect_plugin_runtime.Action):
         )
 
     def run(self):
+        self.connection.session.headers["Accept-version"] = "investigations-preview"
         request = ResourceHelper(self.connection.session, self.logger)
         response = request.resource_request(Queries.get_all_queries(self.connection.region), "get")
         try:
