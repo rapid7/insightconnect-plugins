@@ -22,6 +22,7 @@ class SetDispositionOfInvestigation(insightconnect_plugin_runtime.Action):
         identifier = params.get(Input.ID)
         disposition = params.get(Input.DISPOSITION)
 
+        self.connection.session.headers["Accept-version"] = "investigations-preview"
         request = ResourceHelper(self.connection.session, self.logger)
 
         endpoint = Investigations.set_the_disposition_of_an_investigation(self.connection.url, identifier, disposition)

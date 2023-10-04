@@ -50,6 +50,7 @@ class SearchInvestigations(insightconnect_plugin_runtime.Action):
 
         parameters = clean({Input.SIZE: size, Input.INDEX: index})
 
+        self.connection.session.headers["Accept-version"] = "investigations-preview"
         request = ResourceHelper(self.connection.session, self.logger)
 
         endpoint = Investigations.search_investigation(self.connection.url)

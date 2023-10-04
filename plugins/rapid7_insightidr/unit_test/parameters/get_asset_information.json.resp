@@ -1,0 +1,14 @@
+{
+  "parameters": [
+    [
+      "rrn:uba:us:934b454a-1b32-40fa-80be-7bb11cd3ccf9:asset:D6OGUBJGRVHF",
+      {
+        "success": true,
+        "asset": {
+          "name": "windowsx64",
+          "rrn": "rrn:uba:us:934b454a-1b32-40fa-80be-7bb11cd3ccf9:asset:D6OGUBJGRVHF"
+        }
+      }
+    ]
+  ]
+}

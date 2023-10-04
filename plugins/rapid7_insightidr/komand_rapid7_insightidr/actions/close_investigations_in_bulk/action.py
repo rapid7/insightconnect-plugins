@@ -20,6 +20,7 @@ class CloseInvestigationsInBulk(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        self.connection.session.headers["Accept-version"] = "investigations-preview"
         request = ResourceHelper(self.connection.session, self.logger)
         endpoint = Investigations.close_investigations_in_bulk(self.connection.url)
 

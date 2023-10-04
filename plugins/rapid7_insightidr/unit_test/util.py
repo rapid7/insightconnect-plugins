@@ -151,6 +151,26 @@ class Util:
             == "https://us.api.insight.rapid7.com/idr/v1/attachments/rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:123456789/metadata"
         ):
             return MockResponse("get_attachment_information", 404)
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/users/rrn:uba:us:934b454a-1b32-40fa-80be-7bb11cd3ccf9:user:U0NRGPV7LPFV"
+        ):
+            return MockResponse("get_user_information", 200)
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/users/rrn:uba:us:934b454a-1b32-40fa-80be-7bb11cd3ccf9:user:123456789"
+        ):
+            return MockResponse("get_user_information", 404)
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/assets/rrn:uba:us:934b454a-1b32-40fa-80be-7bb11cd3ccf9:asset:D6OGUBJGRVHF"
+        ):
+            return MockResponse("get_asset_information", 200)
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/assets/rrn:uba:us:934b454a-1b32-40fa-80be-7bb11cd3ccf9:asset:123456789"
+        ):
+            return MockResponse("get_asset_information", 404)
         if kwargs.get("json") == {
             "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
             "body": "test",

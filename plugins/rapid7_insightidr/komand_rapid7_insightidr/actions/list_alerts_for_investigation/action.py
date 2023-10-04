@@ -25,7 +25,7 @@ class ListAlertsForInvestigation(insightconnect_plugin_runtime.Action):
         index = params.get(Input.INDEX)
 
         parameters = {"size": size, "index": index}
-
+        self.connection.session.headers["Accept-version"] = "investigations-preview"
         request = ResourceHelper(self.connection.session, self.logger)
 
         endpoint = Investigations.list_alerts_for_investigation(self.connection.url, identifier)

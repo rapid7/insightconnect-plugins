@@ -20,7 +20,7 @@ class GetInvestigation(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         identifier = params.get(Input.ID)
-
+        self.connection.session.headers["Accept-version"] = "investigations-preview"
         request = ResourceHelper(self.connection.session, self.logger)
 
         endpoint = Investigations.update_or_get_investigation(self.connection.url, identifier)

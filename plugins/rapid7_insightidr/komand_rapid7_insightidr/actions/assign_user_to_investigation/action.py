@@ -30,6 +30,7 @@ class AssignUserToInvestigation(insightconnect_plugin_runtime.Action):
 
         payload = {"user_email_address": user_email}
 
+        self.connection.session.headers["Accept-version"] = "investigations-preview"
         request = ResourceHelper(self.connection.session, self.logger)
 
         endpoint = Investigations.set_user_for_investigation(self.connection.url, investigation_id)
