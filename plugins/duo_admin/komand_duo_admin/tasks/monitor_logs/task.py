@@ -59,6 +59,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 mintime = int(last_log_timestamp / 1000)
                 maxtime = self.convert_to_seconds(last_two_minutes)
 
+        self.logger.info(f"Retrieve data from {mintime} to {maxtime}. Get next page is set to {get_next_page}")
         return mintime, maxtime, get_next_page
 
     # pylint: disable=unused-argument
@@ -75,7 +76,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
             if last_collection_timestamp:
                 # Previously only one timestamp was held (the end of the collection window)
-                # This has been superceded by a timestamp of the latest log per log type)
+                # This has been superceded by a latest timestamp per log type
                 self.logger.info("Backwards compatibility - update all timestamps to the last known timestamp")
                 trust_monitor_last_log_timestamp = auth_logs_last_log_timestamp = admin_logs_last_log_timestamp = last_collection_timestamp
                 # Update the old last collection timestamp to None so it is not considered in future runs
@@ -110,7 +111,8 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                         previous_trust_monitor_event_hashes, trust_monitor_events
                     )
                     new_logs.extend(new_trust_monitor_events)
-                    state[self.trust_monitor_last_log_timestamp] = self.get_highest_timestamp(new_trust_monitor_events)
+                    state[self.TRUST_MONITOR_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(new_trust_monitor_events)
+                    self.logger.info(f"{len(new_trust_monitor_events)} trust monitor events retrieved")
                 state[self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES] = (
                     previous_trust_monitor_event_hashes
                     if not new_trust_monitor_event_hashes and get_next_page
@@ -133,7 +135,8 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     )
                     new_admin_logs, new_admin_log_hashes = self.compare_hashes(previous_admin_log_hashes, admin_logs)
                     new_logs.extend(new_admin_logs)
-                    state[self.admin_logs_last_log_timestamp] = self.get_highest_timestamp(new_admin_logs)
+                    state[self.ADMIN_LOGS_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(new_admin_logs)
+                    self.logger.info(f"{len(new_admin_logs)} admin logs retrieved")
                 state[self.PREVIOUS_ADMIN_LOG_HASHES] = (
                     previous_admin_log_hashes if not new_admin_log_hashes and get_next_page else new_admin_log_hashes
                 )
@@ -155,8 +158,8 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     new_auth_logs, new_auth_log_hashes = self.compare_hashes(previous_auth_log_hashes, auth_logs)
                     # Grab the most recent timestamp and save it to use as min time for next run
                     new_logs.extend(new_auth_logs)
-                    state[self.auth_logs_last_log_timestamp] = self.get_highest_timestamp(new_auth_logs)
-
+                    state[self.AUTH_LOGS_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(new_auth_logs)
+                    self.logger.info(f"{len(new_auth_logs)} auth logs retrieved")
                 state[self.PREVIOUS_AUTH_LOG_HASHES] = (
                     previous_auth_log_hashes if not new_auth_log_hashes and get_next_page else new_auth_log_hashes
                 )
@@ -230,6 +233,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             else {"mintime": str(mintime), "maxtime": str(maxtime), "limit": str(1000)}
         )
         parameters.update("sort", "asc")
+        self.logger.info(f"Parameters for get auth logs set to {parameters}")
         response = self.connection.admin_api.get_auth_logs(parameters).get("response", {})
         metadata = response.get("metadata") or {}
         next_offset = metadata.get("next_offset")
@@ -242,6 +246,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
     def get_admin_logs(self, mintime: int, maxtime: int, next_page_params: dict) -> list:
         parameters = {"mintime": next_page_params.get("mintime") if next_page_params else str(mintime)}
+        self.logger.info(f"Parameters for get admin logs set to {parameters}")
         response = self.connection.admin_api.get_admin_logs(parameters).get("response", [])
         last_item = response[-1] if response and isinstance(response, list) else None
 
@@ -264,6 +269,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             if next_page_params
             else {"mintime": str(mintime), "maxtime": str(maxtime), "limit": str(200)}
         )
+        self.logger.info(f"Parameters for get trust monitor events set to {parameters}")
         response = self.connection.admin_api.get_trust_monitor_events(parameters).get("response", {})
         offset = response.get("metadata", {}).get("next_offset")
         if offset:
