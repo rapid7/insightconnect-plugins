@@ -22,6 +22,7 @@ class SetPriorityOfInvestigation(insightconnect_plugin_runtime.Action):
         identifier = params.get(Input.ID)
         priority = params.get(Input.PRIORITY)
 
+        self.connection.session.headers["Accept-version"] = "investigations-preview"
         request = ResourceHelper(self.connection.session, self.logger)
 
         endpoint = Investigations.set_the_priority_of_an_investigation(self.connection.url, identifier, priority)

@@ -25,6 +25,7 @@ class GetASavedQuery(insightconnect_plugin_runtime.Action):
                 assistance="Please enter a valid UUID value in the Query ID field.",
                 data=f"Query ID: {query_id}",
             )
+        self.connection.session.headers["Accept-version"] = "investigations-preview"
         request = ResourceHelper(self.connection.session, self.logger)
         response = request.resource_request(Queries.get_query_by_id(self.connection.region, query_id), "get")
         try:
