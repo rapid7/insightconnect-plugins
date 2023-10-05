@@ -10,7 +10,7 @@ from insightconnect_plugin_runtime.exceptions import ConnectionTestException, Pl
 from komand_microsoft_atp.connection.connection import Connection
 from parameterized import parameterized
 
-from unit_test.util import (
+from util import (
     STUB_CONNECTION,
     mock_request_200,
     mock_request_201_invalid_json,
