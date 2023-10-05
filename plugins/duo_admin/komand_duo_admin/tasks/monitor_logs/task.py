@@ -36,8 +36,8 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         last_two_minutes = now - timedelta(minutes=2)
         if not last_log_timestamp:
             self.logger.info(f"First run for {log_type}")
-            last_24_hours = now - timedelta(hours=24)
-            if log_type != "admin_logs":
+            last_24_hours = now - timedelta(hours=2)
+            if log_type != "Admin logs":
                 mintime = self.convert_to_milliseconds(last_24_hours)
                 maxtime = self.convert_to_milliseconds(last_two_minutes)
             else:
@@ -51,7 +51,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 get_next_page = True
             else:
                 self.logger.info(f"Subsequent run for {log_type}")
-            if log_type != "admin_logs":
+            if log_type != "Admin logs":
                 mintime = last_log_timestamp
                 maxtime = self.convert_to_milliseconds(last_two_minutes)
             else:
@@ -151,6 +151,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 mintime, maxtime, get_next_page = self.get_parameters_for_query("Auth logs", now,
                                                                                 auth_logs_last_log_timestamp,
                                                                                 auth_logs_next_page_params)
+
                 if (get_next_page and auth_logs_next_page_params) or not get_next_page:
                     auth_logs, auth_logs_next_page_params = self.get_auth_logs(
                         mintime, maxtime, auth_logs_next_page_params
@@ -232,7 +233,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             if next_page_params
             else {"mintime": str(mintime), "maxtime": str(maxtime), "limit": str(1000)}
         )
-        parameters.update("sort", "asc")
+        parameters.update({"sort": "ts:asc"})
         self.logger.info(f"Parameters for get auth logs set to {parameters}")
         response = self.connection.admin_api.get_auth_logs(parameters).get("response", {})
         metadata = response.get("metadata") or {}
