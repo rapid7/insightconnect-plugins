@@ -36,7 +36,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         last_two_minutes = now - timedelta(minutes=2)
         if not last_log_timestamp:
             self.logger.info(f"First run for {log_type}")
-            last_24_hours = now - timedelta(hours=2)
+            last_24_hours = now - timedelta(hours=24)
             if log_type != "Admin logs":
                 mintime = self.convert_to_milliseconds(last_24_hours)
                 maxtime = self.convert_to_milliseconds(last_two_minutes)
@@ -78,17 +78,21 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 # Previously only one timestamp was held (the end of the collection window)
                 # This has been superceded by a latest timestamp per log type
                 self.logger.info("Backwards compatibility - update all timestamps to the last known timestamp")
-                trust_monitor_last_log_timestamp = auth_logs_last_log_timestamp = admin_logs_last_log_timestamp = last_collection_timestamp
+                trust_monitor_last_log_timestamp = (
+                    auth_logs_last_log_timestamp
+                ) = admin_logs_last_log_timestamp = last_collection_timestamp
                 # Update the old last collection timestamp to None so it is not considered in future runs
                 state[self.LAST_COLLECTION_TIMESTAMP] = None
             else:
                 trust_monitor_last_log_timestamp = state.get(self.TRUST_MONITOR_LAST_LOG_TIMESTAMP)
                 auth_logs_last_log_timestamp = state.get(self.AUTH_LOGS_LAST_LOG_TIMESTAMP)
                 admin_logs_last_log_timestamp = state.get(self.ADMIN_LOGS_LAST_LOG_TIMESTAMP)
-                self.logger.info(f"Previous timestamps retrieved. "
-                                 f"Auth {auth_logs_last_log_timestamp} "
-                                 f"Admin: {admin_logs_last_log_timestamp}. "
-                                 f"Trust monitor {trust_monitor_last_log_timestamp}")
+                self.logger.info(
+                    f"Previous timestamps retrieved. "
+                    f"Auth {auth_logs_last_log_timestamp} "
+                    f"Admin: {admin_logs_last_log_timestamp}. "
+                    f"Trust monitor {trust_monitor_last_log_timestamp}"
+                )
             try:
                 new_logs = []
 
@@ -96,12 +100,12 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 previous_admin_log_hashes = state.get(self.PREVIOUS_ADMIN_LOG_HASHES, [])
                 previous_auth_log_hashes = state.get(self.PREVIOUS_AUTH_LOG_HASHES, [])
 
-                new_trust_monitor_event_hashes = new_admin_log_hashes = new_auth_log_hashes =[]
+                new_trust_monitor_event_hashes = new_admin_log_hashes = new_auth_log_hashes = []
 
                 # Get trust monitor events
-                mintime, maxtime, get_next_page = self.get_parameters_for_query("Trust monitor events",
-                                                                                now, trust_monitor_last_log_timestamp,
-                                                                                trust_monitor_next_page_params)
+                mintime, maxtime, get_next_page = self.get_parameters_for_query(
+                    "Trust monitor events", now, trust_monitor_last_log_timestamp, trust_monitor_next_page_params
+                )
 
                 if (get_next_page and trust_monitor_next_page_params) or not get_next_page:
                     trust_monitor_events, trust_monitor_next_page_params = self.get_trust_monitor_event(
@@ -125,9 +129,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     state.pop(self.TRUST_MONITOR_NEXT_PAGE_PARAMS)
 
                 # Get admin logs
-                mintime, maxtime, get_next_page = self.get_parameters_for_query("Admin logs", now,
-                                                                                admin_logs_last_log_timestamp,
-                                                                                admin_logs_next_page_params)
+                mintime, maxtime, get_next_page = self.get_parameters_for_query(
+                    "Admin logs", now, admin_logs_last_log_timestamp, admin_logs_next_page_params
+                )
 
                 if (get_next_page and admin_logs_next_page_params) or not get_next_page:
                     admin_logs, admin_logs_next_page_params = self.get_admin_logs(
@@ -148,9 +152,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     state.pop(self.ADMIN_LOGS_NEXT_PAGE_PARAMS)
 
                 # Get auth logs
-                mintime, maxtime, get_next_page = self.get_parameters_for_query("Auth logs", now,
-                                                                                auth_logs_last_log_timestamp,
-                                                                                auth_logs_next_page_params)
+                mintime, maxtime, get_next_page = self.get_parameters_for_query(
+                    "Auth logs", now, auth_logs_last_log_timestamp, auth_logs_next_page_params
+                )
 
                 if (get_next_page and auth_logs_next_page_params) or not get_next_page:
                     auth_logs, auth_logs_next_page_params = self.get_auth_logs(
@@ -225,7 +229,6 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 highest_timestamp = log_timestamp
         self.logger.info(f"Highest timestamp set to {highest_timestamp}")
         return highest_timestamp
-
 
     def get_auth_logs(self, mintime: int, maxtime: int, next_page_params: dict) -> list:
         parameters = (
