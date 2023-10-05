@@ -1,0 +1,21 @@
+---
+info:
+  title: Insightconnect Plugins
+  description: Plugin source code for the InsightConnect SOAR product, developer documentation
+    at https://docs.rapid7.com/insightconnect/getting-started
+  x-cortex-git:
+    github:
+      alias: r7org
+      repository: rapid7/insightconnect-plugins
+  x-cortex-tag: insightconnect-plugins
+  x-cortex-type: service
+  x-cortex-groups:
+  - strategy:on-prem
+  - criticality:critical
+  - exposure:opensource
+  - status:deployed
+  x-cortex-domain-parents:
+  - tag: soar
+openapi: 3.0.1
+servers:
+- url: "/"
