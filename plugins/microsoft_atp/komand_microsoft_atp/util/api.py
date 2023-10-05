@@ -215,7 +215,10 @@ class WindwosDefenderATP_API:
         )
 
     def find_machine_id(self, machine_identification: str) -> str:
-        return self.find_first_machine(machine_identification, return_identifier=True).get("id", "")
+        machine_info = self.find_first_machine(machine_identification, return_identifier=True)
+        if isinstance(machine_info, str):
+            return machine_info
+        return machine_info.get("id", "")
 
     def _make_request(
         self, method: str, path: str, json_data: dict = None, allow_empty: bool = False, params: dict = None

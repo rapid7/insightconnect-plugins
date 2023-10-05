@@ -11,7 +11,7 @@ from komand_microsoft_atp.actions.get_machine_information import GetMachineInfor
 from komand_microsoft_atp.actions.get_machine_information.schema import Input, Output
 from parameterized import parameterized
 
-from unit_test.util import (
+from util import (
     Util,
     mock_request_200,
     mock_request_201_invalid_json,
