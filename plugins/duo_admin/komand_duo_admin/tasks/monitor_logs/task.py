@@ -100,8 +100,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 previous_trust_monitor_event_hashes = state.get(self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES, [])
                 previous_admin_log_hashes = state.get(self.PREVIOUS_ADMIN_LOG_HASHES, [])
                 previous_auth_log_hashes = state.get(self.PREVIOUS_AUTH_LOG_HASHES, [])
-
-                new_trust_monitor_event_hashes = new_admin_log_hashes = new_auth_log_hashes = []
+                new_trust_monitor_event_hashes, new_admin_log_hashes, new_auth_log_hashes = [], [], []
 
                 # Get trust monitor events
                 mintime, maxtime, get_next_page = self.get_parameters_for_query(
@@ -120,11 +119,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                         trust_monitor_last_log_timestamp, new_trust_monitor_events
                     )
                     self.logger.info(f"{len(new_trust_monitor_events)} trust monitor events retrieved")
-                state[self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES] = (
-                    previous_trust_monitor_event_hashes
-                    if not new_trust_monitor_event_hashes and get_next_page
-                    else new_trust_monitor_event_hashes
-                )
+                if new_trust_monitor_event_hashes:
+                    state[self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES] = new_trust_monitor_event_hashes
+
                 if trust_monitor_next_page_params:
                     state[self.TRUST_MONITOR_NEXT_PAGE_PARAMS] = trust_monitor_next_page_params
                     has_more_pages = True
@@ -146,9 +143,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                         admin_logs_last_log_timestamp, new_admin_logs
                     )
                     self.logger.info(f"{len(new_admin_logs)} admin logs retrieved")
-                state[self.PREVIOUS_ADMIN_LOG_HASHES] = (
-                    previous_admin_log_hashes if not new_admin_log_hashes and get_next_page else new_admin_log_hashes
-                )
+
+                if new_admin_log_hashes:
+                    state[self.PREVIOUS_ADMIN_LOG_HASHES] = new_admin_log_hashes
 
                 if admin_logs_next_page_params:
                     state[self.ADMIN_LOGS_NEXT_PAGE_PARAMS] = admin_logs_next_page_params
@@ -172,9 +169,10 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                         auth_logs_last_log_timestamp, new_auth_logs
                     )
                     self.logger.info(f"{len(new_auth_logs)} auth logs retrieved")
-                state[self.PREVIOUS_AUTH_LOG_HASHES] = (
-                    previous_auth_log_hashes if not new_auth_log_hashes and get_next_page else new_auth_log_hashes
-                )
+
+                if new_auth_log_hashes:
+                    state[self.PREVIOUS_AUTH_LOG_HASHES] = new_auth_log_hashes
+
                 if auth_logs_next_page_params:
                     state[self.AUTH_LOGS_NEXT_PAGE_PARAMS] = auth_logs_next_page_params
                     has_more_pages = True
