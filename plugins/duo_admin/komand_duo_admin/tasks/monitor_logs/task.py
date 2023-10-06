@@ -52,11 +52,12 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             else:
                 self.logger.info(f"Subsequent run for {log_type}")
             if log_type != "Admin logs":
-                mintime = last_log_timestamp
+                mintime = int(last_log_timestamp * 1000)
                 maxtime = self.convert_to_milliseconds(last_two_minutes)
             else:
                 # Use seconds for admin log endpoint
-                mintime = int(last_log_timestamp / 1000)
+                # mintime = int(last_log_timestamp / 1000)
+                mintime = last_log_timestamp
                 maxtime = self.convert_to_seconds(last_two_minutes)
 
         self.logger.info(f"Retrieve data from {mintime} to {maxtime}. Get next page is set to {get_next_page}")
@@ -89,9 +90,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 admin_logs_last_log_timestamp = state.get(self.ADMIN_LOGS_LAST_LOG_TIMESTAMP)
                 self.logger.info(
                     f"Previous timestamps retrieved. "
-                    f"Auth {auth_logs_last_log_timestamp} "
+                    f"Auth {auth_logs_last_log_timestamp}. "
                     f"Admin: {admin_logs_last_log_timestamp}. "
-                    f"Trust monitor {trust_monitor_last_log_timestamp}"
+                    f"Trust monitor {trust_monitor_last_log_timestamp}."
                 )
             try:
                 new_logs = []
@@ -115,7 +116,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                         previous_trust_monitor_event_hashes, trust_monitor_events
                     )
                     new_logs.extend(new_trust_monitor_events)
-                    state[self.TRUST_MONITOR_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(new_trust_monitor_events)
+                    state[self.TRUST_MONITOR_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(
+                        trust_monitor_last_log_timestamp, new_trust_monitor_events
+                    )
                     self.logger.info(f"{len(new_trust_monitor_events)} trust monitor events retrieved")
                 state[self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES] = (
                     previous_trust_monitor_event_hashes
@@ -139,7 +142,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     )
                     new_admin_logs, new_admin_log_hashes = self.compare_hashes(previous_admin_log_hashes, admin_logs)
                     new_logs.extend(new_admin_logs)
-                    state[self.ADMIN_LOGS_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(new_admin_logs)
+                    state[self.ADMIN_LOGS_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(
+                        admin_logs_last_log_timestamp, new_admin_logs
+                    )
                     self.logger.info(f"{len(new_admin_logs)} admin logs retrieved")
                 state[self.PREVIOUS_ADMIN_LOG_HASHES] = (
                     previous_admin_log_hashes if not new_admin_log_hashes and get_next_page else new_admin_log_hashes
@@ -163,7 +168,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     new_auth_logs, new_auth_log_hashes = self.compare_hashes(previous_auth_log_hashes, auth_logs)
                     # Grab the most recent timestamp and save it to use as min time for next run
                     new_logs.extend(new_auth_logs)
-                    state[self.AUTH_LOGS_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(new_auth_logs)
+                    state[self.AUTH_LOGS_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(
+                        auth_logs_last_log_timestamp, new_auth_logs
+                    )
                     self.logger.info(f"{len(new_auth_logs)} auth logs retrieved")
                 state[self.PREVIOUS_AUTH_LOG_HASHES] = (
                     previous_auth_log_hashes if not new_auth_log_hashes and get_next_page else new_auth_log_hashes
@@ -219,10 +226,16 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             if hash_ not in previous_logs_hashes:
                 new_logs_hashes.append(hash_)
                 logs_to_return.append(log)
+        self.logger.info(
+            f"Original number of logs:{len(new_logs)}. Number of logs after de-duplication:{len(logs_to_return)}"
+        )
         return logs_to_return, new_logs_hashes
 
-    def get_highest_timestamp(self, logs):
-        highest_timestamp = 0
+    def get_highest_timestamp(self, last_recorded_highest_timestamp, logs):
+        if last_recorded_highest_timestamp:
+            highest_timestamp = last_recorded_highest_timestamp
+        else:
+            highest_timestamp = 0
         for log in logs:
             log_timestamp = log.get("timestamp")
             if log_timestamp and log_timestamp > highest_timestamp:
@@ -231,6 +244,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         return highest_timestamp
 
     def get_auth_logs(self, mintime: int, maxtime: int, next_page_params: dict) -> list:
+        self.logger.info(f"Get auth logs: mintime:{mintime}, maxtime:{maxtime}, next_page_params:{next_page_params}")
         parameters = (
             next_page_params
             if next_page_params
@@ -246,9 +260,11 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         else:
             parameters = {}
         auth_logs = self.add_log_type_field(response.get("authlogs", []), "authentication")
+        self.logger.info(f"Get auth logs: parameters to return {parameters}. Return {len(auth_logs)} logs")
         return auth_logs, parameters
 
     def get_admin_logs(self, mintime: int, maxtime: int, next_page_params: dict) -> list:
+        self.logger.info(f"Get admin logs: mintime:{mintime}, maxtime:{maxtime}, next_page_params:{next_page_params}")
         parameters = {"mintime": next_page_params.get("mintime") if next_page_params else str(mintime)}
         self.logger.info(f"Parameters for get admin logs set to {parameters}")
         response = self.connection.admin_api.get_admin_logs(parameters).get("response", [])
@@ -265,6 +281,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 logs_to_return.append(log)
 
         admin_logs = self.add_log_type_field(logs_to_return, "administrator")
+        self.logger.info(f"Parameters to return from get admin logs set to {parameters}. Return {len(admin_logs)} logs")
         return admin_logs, parameters
 
     def get_trust_monitor_event(self, mintime: int, maxtime: int, next_page_params: dict) -> list:
