@@ -249,7 +249,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             if backward_comp_first_run:
                 # Use the correct precision for the new timestamp format as this is still in the old format otherwise
                 if log_type != "Admin logs":
-                    last_recorded_highest_timestamp = last_recorded_highest_timestamp / 1000
+                    last_recorded_highest_timestamp = int(last_recorded_highest_timestamp / 1000)
                 else:
                     # Use seconds for admin log endpoint
                     last_recorded_highest_timestamp = last_recorded_highest_timestamp
