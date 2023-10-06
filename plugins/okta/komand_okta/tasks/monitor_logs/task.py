@@ -32,9 +32,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             next_page_link = state.get(self.NEXT_PAGE_LINK)
             if not state:
                 self.logger.info("First run")
-                last_24_hours = now - timedelta(hours=24)
-                parameters = {"since": self.get_iso(last_24_hours), "until": now_iso, "limit": 1000}
-                state[self.LAST_COLLECTION_TIMESTAMP] = now_iso
+                last_24_hours = self.get_iso(now - timedelta(hours=24))
+                parameters = {"since": last_24_hours, "until": now_iso, "limit": 1000}
+                state[self.LAST_COLLECTION_TIMESTAMP] = last_24_hours  # we only change this once we get new events
             else:
                 if next_page_link:
                     state.pop(self.NEXT_PAGE_LINK)
@@ -54,7 +54,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 if next_page_link:
                     state[self.NEXT_PAGE_LINK] = next_page_link
                     has_more_pages = True
-                state[self.LAST_COLLECTION_TIMESTAMP] = self.get_last_collection_timestamp(now_iso, new_logs)
+                state[self.LAST_COLLECTION_TIMESTAMP] = self.get_last_collection_timestamp(new_logs, state)
                 return new_logs, state, has_more_pages, 200, None
             except ApiException as error:
                 return [], state, False, error.status_code, error
@@ -103,7 +103,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             self.logger.info("No new events found since last execution.")
             return []
 
-        log = "Returning {filtered} log event(s) from this iteration. "
+        log = "Returning {filtered} log event(s) from this iteration."
         pop_index, filtered_logs = 0, logs
 
         for index, event in enumerate(logs):
@@ -113,15 +113,16 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 break
         if pop_index:
             filtered_logs = logs[pop_index:]
-            log += f"Removed {pop_index} event log(s) that should have been returned in previous iteration."
+            log += f" Removed {pop_index} event log(s) that should have been returned in previous iteration."
         self.logger.info(log.format(filtered=len(filtered_logs)))
         return filtered_logs
 
-    def get_last_collection_timestamp(self, now: str, new_logs: list) -> str:
+    def get_last_collection_timestamp(self, new_logs: list, state: dict) -> str:
         """
         Mirror the behaviour in collector code to save the TS of the last parsed event as the 'since' time checkpoint.
-        :param now: default value to use if no event logs returned to save the time from.
+        If no new events found then we want to keep the current checkpoint the same.
         :param new_logs: event logs returned from Okta.
+        :param state: access state dictionary to get the current checkpoint in time if no new logs.
         :return: new time value to save as the checkpoint to query 'since' on the next run.
         """
         new_ts = ""
@@ -129,7 +130,11 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             new_ts = new_logs[-1].get("published")
             self.logger.info(f"Saving the last record's published timestamp ({new_ts}) as checkpoint.")
         if not new_ts:
-            self.logger.warning(f'No published record to use as last timestamp, reverting to use "now" ({now})')
-            new_ts = now
+            state_time = state.get(self.LAST_COLLECTION_TIMESTAMP)
+            self.logger.warning(
+                f"No record to use as last timestamp, will not move checkpoint forward. "
+                f"Keeping value of {state_time}"
+            )
+            new_ts = state_time
 
         return new_ts

@@ -39,18 +39,15 @@ class Util:
         return json.loads(Util.read_file_to_string(filename))
 
     @staticmethod
+    def mock_wrapper(url=""):
+        return Util.mock_request(url=url)
+
+    @staticmethod
+    def mock_empty_response(**kwargs):
+        return MockResponse(200, "get_logs_empty_response.resp", {"link": ""})
+
+    @staticmethod
     def mock_request(*args, **kwargs):
-        class MockResponse:
-            def __init__(self, status_code: int, filename: str = None, headers: dict = {}):
-                self.status_code = status_code
-                self.text = ""
-                self.headers = headers
-                if filename:
-                    self.text = Util.read_file_to_string(f"responses/{filename}")
-
-            def json(self):
-                return json.loads(self.text)
-
         method = kwargs.get("method")
         url = kwargs.get("url")
         params = kwargs.get("params")
@@ -220,3 +217,15 @@ class Util:
             return MockResponse(404)
 
         raise NotImplementedError("Not implemented", kwargs)
+
+
+class MockResponse:
+    def __init__(self, status_code: int, filename: str = None, headers: dict = {}):
+        self.status_code = status_code
+        self.text = ""
+        self.headers = headers
+        if filename:
+            self.text = Util.read_file_to_string(f"responses/{filename}")
+
+    def json(self):
+        return json.loads(self.text)

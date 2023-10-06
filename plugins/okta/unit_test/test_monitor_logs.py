@@ -16,6 +16,7 @@ from datetime import datetime, timezone
     return_value=datetime(2023, 4, 28, 8, 34, 46, 123156, timezone.utc),
 )
 @patch("requests.request", side_effect=Util.mock_request)
+@patch("logging.Logger.warning")
 class TestMonitorLogs(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -38,22 +39,51 @@ class TestMonitorLogs(TestCase):
                 Util.read_file_to_dict("inputs/monitor_logs_next_page.json.inp"),
                 Util.read_file_to_dict("expected/get_logs_next_page.json.exp"),
             ],
+            [
+                "next_page_no_results",
+                Util.read_file_to_dict("inputs/monitor_logs_next_page.json.inp"),
+                Util.read_file_to_dict("expected/get_logs_next_empty.json.exp"),
+            ],
+            [
+                "without_state_no_results",
+                Util.read_file_to_dict("inputs/monitor_logs_without_state.json.inp"),
+                Util.read_file_to_dict("expected/get_logs_empty_resp.json.exp"),
+            ],
         ]
     )
-    def test_monitor_logs(self, mock_request, mock_get_time, test_name, current_state, expected):
+    def test_monitor_logs(self, mocked_warn, mock_request, mock_get_time, test_name, current_state, expected):
+        # Tests and their workflow descriptions:
+        # 1. without_state - first run, query from 24 hours ago until now and results returned.
+        # 2. with_state - queries using the saved 'last_collection_timestamp' to pull new logs.
+        # 3. next_page - state has `next_page_link` which returns more logs to parse.
+        # 4. next_page_no_results -`next_page_link` but the output of this is no logs - we don't move the TS forward.
+        # 5. without_state_no_results - first run but no results returned - save state as the 'since' parameter value
+
+        if test_name in ["next_page_no_results", "without_state_no_results"]:
+            mock_request.side_effect = Util.mock_empty_response
+
         actual, actual_state, has_more_pages, status_code, error = self.action.run(state=current_state)
         self.assertEqual(actual, expected.get("logs"))
         self.assertEqual(actual_state, expected.get("state"))
         self.assertEqual(has_more_pages, expected.get("has_more_pages"))
 
+        # Check errors returned and logger warning only applied in tests 4 and 5.
+        self.assertEqual(error, None)
+        if mocked_warn.called:
+            log_call = call(
+                "No record to use as last timestamp, will not move checkpoint forward. "
+                f"Keeping value of {expected.get('state').get('last_collection_timestamp')}"
+            )
+            self.assertIn(log_call, mocked_warn.call_args_list)
+
     @patch("logging.Logger.info")
     def test_monitor_logs_filters_events(self, mocked_logger, *mocks):
         # Test the filtering of events returned in a previous iteration. Workflow being tested:
-        # 1. C2C executed and queried for events until 8am however the last event time was '2023-04-27T07:49:21.764Z'
+        # 1. C2C executed and queried for events until 8am however the last event time was '2023-04-27T08:49:21.764Z'
         # 2. The next execution will use this timestamp, meaning the last event will be returned again from Okta.
         # 3. This duplicate event should be removed so that it is not returned to IDR again.
 
-        current_state = {"last_collection_timestamp": "2023-04-27T07:49:21.764Z"}
+        current_state = {"last_collection_timestamp": "2023-04-27T08:49:21.764Z"}
         expected = Util.read_file_to_dict("expected/get_logs_filtered.json.exp")
         actual, actual_state, has_more_pages, status_code, error = self.action.run(state=current_state)
         self.assertEqual(actual_state, expected.get("state"))
@@ -71,20 +101,22 @@ class TestMonitorLogs(TestCase):
         self.assertEqual(actual, expected_logs)
 
     @patch("logging.Logger.info")
-    @patch("logging.Logger.warning")
-    def test_monitor_logs_filters_single_event(self, mocked_warn_log, mocked_info_log, *mocks):
+    def test_monitor_logs_filters_single_event(self, mocked_info_log, mocked_warn_log, *mocks):
         # Test filtering when a single event is returned that was in the previous iteration.
 
         now = "2023-04-28T08:33:46.123Z"  # Mocked value of 'now' - 1 minute
         current_state = {"last_collection_timestamp": "2023-04-27T07:49:21.777Z"}  # TS of the event in mocked response
-        expected = {"last_collection_timestamp": now}
         actual, actual_state, has_more_pages, status_code, error = self.action.run(state=current_state)
-        self.assertEqual(actual_state, expected)
-        self.assertEqual(has_more_pages, False)  # empty results so no next pages
+        self.assertEqual(actual_state, current_state)  # state has not changed because no new events.
+        self.assertNotEqual(actual_state.get("last_collection_timestamp"), now)  # we have not moved the TS forward.
+        self.assertEqual(has_more_pages, False)  # empty results so no next pages.
 
-        # make sure that the mocked response contained a single entry that we discarded and logged this happening
+        # ensure sure that the mocked response contained a single entry that we discarded and logged this happening
         logger_info_call = call("No new events found since last execution.")
-        logger_warn_call = call(f'No published record to use as last timestamp, reverting to use "now" ({now})')
+        logger_warn_call = call(
+            f"No record to use as last timestamp, will not move checkpoint forward. "
+            f'Keeping value of {current_state.get("last_collection_timestamp")}'
+        )
 
         self.assertIn(logger_info_call, mocked_info_log.call_args_list)
         self.assertIn(logger_warn_call, mocked_warn_log.call_args_list)
