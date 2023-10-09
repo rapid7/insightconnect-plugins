@@ -171,7 +171,6 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     state.pop(self.TRUST_MONITOR_NEXT_PAGE_PARAMS)
 
                 # Get admin logs
-                log_type = ADMIN_LOGS_LOG_TYPE
                 mintime, maxtime, get_next_page = self.get_parameters_for_query(
                     ADMIN_LOGS_LOG_TYPE,
                     now,
@@ -286,7 +285,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 # Convert the previous timestamp (13 digit format) to the new format used
                 # (Timestamps now held in the last log timestamp format which is a 10 digit unix timestamp)
                 # Note trust monitor events maintain the surfaced_timestamp which is 13 digit unix timestamp
-                self.logger.info(f"Ensure backward compatibility (to older one timestamp method)")
+                self.logger.info("Ensure backward compatibility (to older one timestamp method)")
                 if log_type != TRUST_MONITOR_EVENTS_LOG_TYPE:
                     last_recorded_highest_timestamp = int(last_recorded_highest_timestamp / 1000)
             highest_timestamp = last_recorded_highest_timestamp
