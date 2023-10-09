@@ -1,19 +1,19 @@
 plugin_spec_version: v2
 extension: plugin
-products: [insightconnect]
+products: [ insightconnect ]
 name: automox
 title: Automox
 description: Automox is modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment
-version: 1.2.0
-supported_versions: ["All as of 1/21/2022"]
+version: 2.0.0
+supported_versions: [ "All as of 10/09/2023" ]
 vendor: automox
 support: partner
-status: []
-tags: [endpoint, patch]
+status: [ ]
+tags: [ endpoint, patch ]
 hub_tags:
-  use_cases: [threat_detection_and_response, asset_inventory, remediation_management]
-  keywords: [endpoint]
-  features: []
+  use_cases: [ threat_detection_and_response, asset_inventory, remediation_management ]
+  keywords: [ endpoint ]
+  features: [ ]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/automox
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -577,7 +577,7 @@ types:
       description: Creation time of event
       type: string
       required: false
-  batch_user:
+  action_set_user:
     id:
       title: User ID
       description: The user identifier
@@ -598,180 +598,252 @@ types:
       description: The email of the user
       type: string
       required: false
-  batch:
+  action_set_issues:
+    unknown_host_count:
+      title: Unknown Host Count
+      description: Number of hosts that are unknown within the action set
+      type: integer
+      required: false
+  action_set_statistics:
+    issues:
+      title: Issues
+      description: Issues associated with the action set
+      type: action_set_issues
+      required: false
+  action_set_source:
+    name:
+      title: Source Name
+      description: Name of the source
+      type: string
+      required: false
+    type:
+      title: Source Type
+      description: Type of the source
+      type: string
+      required: false
+  action_set_solution_counts:
+    count:
+      title: Solution Count
+      description: Number of solutions associated with the action set
+      type: integer
+      required: false
+    device_count:
+      title: Device Count
+      description: Number of devices associated with the action set
+      type: integer
+      required: false
+    vulnerability_count:
+      title: Vulnerability Count
+      description: Number of vulnerabilities associated with the action set
+      type: integer
+      required: false
+  action_set_solution_summary:
+    patch_now:
+      title: Patch Now
+      description: Number of devices that will be patched immediately
+      type: action_set_solution_counts
+      required: false
+    patch_with_worklet:
+      title: Patch with Worklet
+      description: Number of devices that will be patched with a worklet
+      type: action_set_solution_counts
+      required: false
+  action_set:
     id:
-      title: Batch ID
-      description: Identifier of batch
+      title: Action Set ID
+      description: Identifier of the action set
       type: integer
       required: true
+    statistics:
+      title: Action Set Statistics
+      description: Statistics of the action set
+      type: action_set_statistics
+      required: false
+    solutions:
+      title: Solutions
+      description: Solutions associated with the action set
+      type: action_set_solution_summary
+      required: false
+    configuration_id:
+      title: Configuration ID
+      description: Identifier of the configuration, only applicable for Automated Vulnerability Remediation (AVR) action sets
+      type: string
+      required: false
     organization_id:
       title: Organization ID
-      description: Identifier of organization
+      description: Identifier of the organization
       type: integer
       required: false
     status:
-      title: Batch Status
-      description: Status of batch
+      title: Action Set Status
+      description: Status of the action set
       type: string
       required: false
     source:
-      title: Batch Source
-      description: Source of batch
-      type: string
+      title: Action Set Source
+      description: Source of the action set
+      type: action_set_source
       required: false
     created_by:
       title: Created By
-      description: Batch creation details
-      type: batch_user
+      description: action set creation details
+      type: action_set_user
       required: false
-    updated_by:
-      title: Updated By
-      description: Batch update details
-      type: batch_user
-      required: false
-    uploaded_at:
-      title: Uploaded At
-      description: Datetime the batch was uploaded
+    created_at:
+      title: Created At
+      description: Datetime the action set was created
       type: string
       required: false
-    task_count:
-      title: Task Count
-      description: Number of tasks related to batch
-      type: integer
+    updated_at:
+      title: Uploaded At
+      description: Datetime the action set was uploaded
+      type: string
       required: false
-    unknown_host_count:
-      title: Unknown Host Count
-      description: Number of hosts that are unknown within batch
-      type: integer
-      required: false
-    impacted_device_count:
-      title: Impacted Device Count
-      description: Number of devices that are impacted by batch
-      type: integer
-      required: false
-    issue_count:
-      title: Issue Count
-      description: Number of issues identified with batch
-      type: integer
-      required: false
-    cve_count:
-      title: CVE Count
-      description: Number of CVEs that are impacted by batch
-      type: integer
-      required: false
-  task_payload_package_versions:
-    id:
-      title: Package ID
-      description: The package identifier associated with the task
+  action_set_action:
+    action:
+      title: Action
+      description: The action to execute for the associated remediation
       type: string
       required: true
+      enum:
+        - "patch-now"
+        - "patch-with-worklet"
+      default: "patch-now"
+    solution_id:
+      title: Solution ID
+      description: The solution ID associated with the action
+      type: integer
+      required: true
+  action_set_issue:
+    id:
+      title: Issue ID
+      description: Identifier of the issue
+      type: integer
+      required: true
+    issue_type:
+      title: Issue Type
+      description: Type of issue
+      type: string
+      required: true
+    issue_details:
+      title: Issue Details
+      description: Details of the issue
+      type: object
+      required: true
+  solution_device:
+    id:
+      title: Device ID
+      description: Identifier of device
+      type: integer
+      required: true
     name:
-      title: Name
-      description: The name of the package associated with the task
+      title: Device Name
+      description: Name of the device
       type: string
       required: false
-    version:
-      title: Version
-      description: The version of the package associated with the task
+    custom_name:
+      title: Custom Name
+      description: Custom name of the device
       type: string
       required: false
-    display_name:
-      title: Display Name
-      description: The display name of the package associated with the task
+    status:
+      title: Device Status
+      description: Status of remediation for the device
       type: string
       required: false
-    requires_reboot:
-      title: Requires Reboot
-      description: Whether the package installed by the task will require reboot
+    deleted:
+      title: Deleted
+      description: Whether the device is deleted from Automox
       type: boolean
       required: false
-  task_payload:
-    patch_id:
-      title: Patch ID
-      description: The patch identifier associated with the task
+    ip_addrs_private:
+      title: Private IP Addresses
+      description: List of private IP addresses for the device
+      type: "[]string"
+      required: false
+  solution_vulnerability:
+    id:
+      title: Vulneability ID
+      description: Identifier of the vulnerability, typically a CVE
+      type: string
+      required: true
+    title:
+      title: Title
+      description: Title of the vulnerability
+      type: string
+      required: false
+    summary:
+      title: Summary
+      description: Summary of the vulnerability
       type: string
       required: false
     severity:
       title: Severity
-      description: The severity of the patch associated with the task
+      description: Severity of the vulnerability
       type: string
       required: false
-    package_versions:
-      title: Package Versions
-      description: The version of the packages within scope of the task
-      type: "[]task_payload_package_versions"
-      required: false
-  task:
+  solution:
     id:
-      title: Task ID
-      description: Identifier of task
+      title: Solution ID
+      description: Identifier of solution
       type: integer
       required: true
-    organization_id:
-      title: Organization ID
-      description: Identifier of organization
-      type: integer
-      required: false
-    task_type:
-      title: Task Type
-      description: Type of task
+      example: 1234
+    solution_type:
+      title: Solution Type
+      description: Type of solution
       type: string
       required: false
-    payload:
-      title: Payload
-      description: Payload associated with task
-      type: task_payload
-      required: false
-    source:
-      title: Task Source
-      description: Source of task
+      example: "rapid7-solution"
+    remediation_type:
+      title: Remediation Type
+      description: Type of remediation
       type: string
       required: false
-    notes:
-      title: Task Notes
-      description: Notes associated with task
-      type: string
+      example: "patch-with-worklet"
+    solution_details:
+      title: Solution Details
+      description: Details of the solution. This can include package information and other details depending on the solution type
+      type: object
       required: false
-    status:
-      title: Task Status
-      description: Status of task
-      type: string
+      example:
+        solution_id: "office-click-to-run-upgrade-latest"
+        solution_type: "workaround"
+        solution_summary: "Upgrade to the latest version of Microsoft Office"
+        solution_fix: "Install Office Click-To-Run updates through any installed Office application. Go to File &gt; Account (or Office Account if you opened Outlook). Under Product Information, choose Update Options &gt; Update Now."
+    device_ids:
+      title: Device IDs
+      description: List of device identifiers associated with the solution. This is a helper field to make executing actions easier. It does not exist on the Automox API.
+      type: "[]integer"
       required: false
-    created_by_user:
-      title: Created by User
-      description: Task creation details
-      type: batch_user
+      example: [ 1234, 5678 ]
+    devices:
+      title: Devices
+      description: List of devices associated with the solution
+      type: "[]solution_device"
       required: false
-    last_updated_by_user:
-      title: Updated by User
-      description: Task update details
-      type: batch_user
+      example:
+        - id: 1234
+          name: "device-1"
+          custom_name: "custom-name"
+          status: "in_progress"
+          deleted: false
+          ip_addrs_private:
+            - 10.0.0.1
+    vulnerabilities:
+      title: Vulnerabilities
+      description: List of vulnerabilities associated with the solution
+      type: "[]solution_vulnerability"
       required: false
-    created_at:
-      title: Created At
-      description: The datetime the task was created
-      type: string
-      required: false
-    updated_at:
-      title: Updated At
-      description: The datetime the task was updated
-      type: string
-      required: false
-    completed_at:
-      title: Completed At
-      description: The datetime the task was completed
-      type: string
-      required: false
-    cves:
-      title: CVEs
-      description: List of CVEs associated with task
-      type: "[]string"
-      required: false
-    report_source:
-      title: Report Source
-      description: The source of the vulnerability report
-      type: string
-      required: false
+      example:
+        - id: "CVE-2019-1297"
+          title: "Microsoft Excel Remote Code Execution Vulnerability"
+          summary: "A remote code execution vulnerability exists in Microsoft Excel software when the software fails to properly handle objects in memory. An attacker who successfully exploited the vulnerability could run arbitrary code in the context of the current user. If the current user is logged on with administrative user rights, an attacker could take control of the affected system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights. Exploitation of the vulnerability requires that a user open a specially crafted file with an affected version of Microsoft Excel. In an email attack scenario, an attacker could exploit the vulnerability by sending the specially crafted file to the user and convincing the user to open the file. In a web-based attack scenario, an attacker could host a website (or leverage a compromised website that accepts or hosts user-provided content) containing a specially crafted file designed to exploit the vulnerability. An attacker would have no way to force users to visit the website. Instead, an attacker would have to convince users to click a link, typically by way of an enticement in an email or instant message, and then convince them to open the specially crafted file. The security update addresses the vulnerability by correcting how Microsoft Excel handles objects in memory."
+          severity: "high"
+        - id: "CVE-2021-42292"
+          title: "Microsoft Excel Security Feature Bypass Vulnerability"
+          summary: ""
+          severity: "high"
 
 connection:
   api_key:
@@ -916,7 +988,7 @@ actions:
         description: List of tags
         type: "[]string"
         required: false
-        example: ["tag1", "tag2"]
+        example: [ "tag1", "tag2" ]
       exception:
         title: Exception
         description: Exclude the device from reports and statistics
@@ -1001,12 +1073,12 @@ actions:
         description: Command to run on device
         type: string
         enum:
-        - "GetOS"
-        - "InstallUpdate"
-        - "InstallAllUpdates"
-        - "PolicyTest"
-        - "PolicyRemediate"
-        - "Reboot"
+          - "GetOS"
+          - "InstallUpdate"
+          - "InstallAllUpdates"
+          - "PolicyTest"
+          - "PolicyRemediate"
+          - "Reboot"
         required: true
         example: "GetOS"
       patches:
@@ -1014,7 +1086,7 @@ actions:
         description: "List of patches to be installed by name (Note: this only works with the InstallUpdate command)"
         type: "[]string"
         required: false
-        example: ["Security Update (KB4549947)"]
+        example: [ "Security Update (KB4549947)" ]
       policy_id:
         title: Policy ID
         description: Identifier of policy
@@ -1089,7 +1161,7 @@ actions:
         description: List of policy IDs to assign to group
         type: "[]integer"
         required: false
-        example: [1, 2, 3]
+        example: [ 1, 2, 3 ]
     output:
       success:
         title: Success
@@ -1153,7 +1225,7 @@ actions:
         description: List of policy IDs to assign to group
         type: "[]integer"
         required: false
-        example: [1, 2, 3]
+        example: [ 1, 2, 3 ]
     output:
       success:
         title: Success
@@ -1210,76 +1282,51 @@ actions:
         description: The third-party source of the vulnerability report
         type: string
         required: false
-        default: "Generic Report"
+        default: "generic"
         enum:
-        - "Generic Report"
-        - "CrowdStrike"
-        - "Rapid7"
-        - "TenableIO"
-        - "Qualys"
-        example: "Rapid7"
+          - "generic"
+          - "crowd-strike"
+          - "rapid7"
+          - "tenable"
+          - "qualys"
+        example: "rapid7"
     output:
-      batch_id:
-        title: Vulnerability Sync Batch ID
-        description: Identifier of vulnerability sync batch
+      id:
+        title: Vulnerability Sync Action Set ID
+        description: Identifier of the vulnerability sync action set
         type: integer
         required: true
         example: 1234
-  get_vulnerability_sync_batch:
-    title: Get Vulnerability Sync Batch
-    description: Retrieve details for a specified vulnerability sync batch
-    input:
-      org_id:
-        title: Organization ID
-        description: Identifier of organization
-        type: integer
-        required: true
-        example: 1234
-      batch_id:
-        title: Batch ID
-        description: Identifier of batch
-        type: integer
-        required: true
-        example: 1234
-    output:
-      batch:
-        title: Vulnerability Sync Batch
-        description: Details of a specified vulnerability sync batch
-        type: batch
-        required: true
-  action_on_vulnerability_sync_batch:
-    title: Accept or Reject Vulnerability Sync Batch
-    description: Take action to approve or reject vulnerability sync batch
-    input:
-      org_id:
-        title: Organization ID
-        description: Identifier of organization
-        type: integer
-        required: true
-        example: 1234
-      batch_id:
-        title: Batch ID
-        description: Identifier of batch
-        type: integer
-        required: true
-        example: 1234
-      action:
-        title: Action
-        description: Action to take on batch
+      status:
+        title: Vulnerability Sync Status
+        description: Status of the vulnerability sync action set
         type: string
-        enum:
-        - "accept"
-        - "reject"
         required: true
-        example: "accept"
+        example: "building"
+  get_vulnerability_sync_action_set:
+    title: Get Vulnerability Sync Action Set
+    description: Retrieve details for a specified vulnerability sync action set
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1234
+      action_set_id:
+        title: Action Set ID
+        description: Identifier of the action set
+        type: integer
+        required: true
+        example: 1234
     output:
-      success:
-        title: Success
-        description: Was operation successful
-        type: boolean
+      action_set:
+        title: Vulnerability Sync action set
+        description: Details of a specified vulnerability sync action_set
+        type: action_set
         required: true
-  list_vulnerability_sync_batches:
-    title: List Vulnerability Sync Batches
+  list_vulnerability_sync_action_sets:
+    title: List Vulnerability Sync Action Sets
     description: Retrieve list of vulnerability sync batches
     input:
       org_id:
@@ -1288,65 +1335,248 @@ actions:
         type: integer
         required: true
         example: 1234
-    output:
-      batches:
-        title: Vulnerability Sync Batches
-        description: List of vulnerability sync batches
-        type: "[]batch"
-        required: false
-  list_vulnerability_sync_tasks:
-    title: List Vulnerability Sync Tasks
-    description: Retrieve list of vulnerability sync tasks
-    input:
-      org_id:
-        title: Organization ID
-        description: Identifier of organization
-        type: integer
-        required: true
-        example: 1234
-      status:
-        title: Status
-        description: Filter by status of tasks
+      sort:
+        title: Sort
+        description: Sort results by field
         type: string
         required: false
-        example: "in_progress"
-      batch_id:
-        title: Batch ID
-        description: Filter by batch identifier
-        type: integer
-        required: false
-        example: 1234
-    output:
-      tasks:
-        title: Vulnerability Sync Tasks
-        description: List of vulnerability sync tasks
-        type: "[]task"
-        required: false
-  action_on_vulnerability_sync_task:
-    title: Execute or Cancel Vulnerability Sync Task
-    description: Take action to execute or cancel a vulnerability sync task
-    input:
-      org_id:
-        title: Organization ID
-        description: Identifier of organization
-        type: integer
-        required: true
-        example: 1234
-      task_id:
-        title: Task ID
-        description: Identifier of task
-        type: integer
-        required: true
-        example: 1234
-      action:
-        title: Action
-        description: Action to take on vulnerability sync task
-        type: string
         enum:
-        - "execute"
-        - "cancel"
+          - "created_at"
+          - "updated_at"
+          - "status"
+          - "source_type"
+          - "source_name"
+          - "configuration_id"
+          - ""
+        example: "created_at"
+      group_sort:
+        title: Group Sort
+        description: Sort results by field
+        type: string
+        required: false
+        enum:
+          - "asc"
+          - "desc"
+          - "latest_updated_at:asc"
+          - "latest_updated_at:desc"
+          - "source:asc"
+          - "source:desc"
+          - ""
+        example: "latest_updated_at:desc"
+      source_type_in:
+        title: Source Type In
+        description: Filter by source type
+        type: "[]string"
+        required: false
+        example:
+          - "Generic Report"
+          - "CrowdStrike"
+          - "Rapid7"
+          - "TenableIO"
+          - "Qualys"
+      status_in:
+        title: Status In
+        description: Filter by status
+        type: "[]string"
+        required: false
+        example:
+          - "building"
+          - "ready"
+          - "error"
+      status_not_in:
+        title: Status Not In
+        description: Filter by status
+        type: "[]string"
+        required: false
+        example:
+          - "building"
+          - "ready"
+          - "error"
+      configuration_id_equals:
+        title: Configuration ID Equals
+        description: Filter by configuration ID
+        type: string
+        required: false
+        example: "00000000-0000-0000-0000-000000000000"
+      configuration_id_is_set:
+        title: Configuration ID Is Set
+        description: Filter based on whether the configuration ID is set
+        type: boolean
+        required: false
+        example: true
+      include_all_runs_equals:
+        title: Include All Runs Equals
+        description: Whether to include all runs in the response
+        type: boolean
+        required: false
+        example: true
+    output:
+      action_sets:
+        title: Vulnerability Sync Action Sets
+        description: List of vulnerability sync action sets
+        type: "[]action_set"
+        required: false
+        example:
+          - created_at: 2023-10-10T03:45:26+0000
+            created_by_user:
+              email: user.name@example.com
+              firstname: User
+              id: 1
+              lastname: Name
+            id: 1234
+            organization_id: 1
+            source:
+              name: insightconnect-uploaded-report.csv
+              type: generic
+            statistics:
+              issues:
+                unknown-host:
+                  count: 4
+              solutions:
+                patch-with-worklet:
+                  count: 1
+                  device_count: 18
+                  vulnerability_count: 1
+            status: ready
+            updated_at: 2023-10-10T03:45:30+0000
+            updated_by_user:
+              email: user.name@example.com
+              firstname: User
+              id: 1
+              lastname: Name
+  list_vulnerability_sync_action_set_issues:
+    title: List Vulnerability Sync Action Set Issues
+    description: Retrieve the issues identified for a specified vulnerability sync action set
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
         required: true
-        example: "execute"
+        example: 1234
+      action_set_id:
+        title: Action Set ID
+        description: Identifier of the action set
+        type: integer
+        required: true
+        example: 1234
+      issue_type_in:
+        title: Issue Type In
+        description: Filter by issue type
+        type: "[]string"
+        required: false
+        example:
+          - "unknown-host"
+    output:
+      issues:
+        title: Vulnerability Sync Action Set Issues
+        description: Issues associated with the specified vulnerability sync action_set
+        type: "[]action_set_issue"
+        required: true
+  list_vulnerability_sync_action_set_solutions:
+    title: List Vulnerability Sync Action Set Solutions
+    description: Retrieve a list of vulnerability sync remediations
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1234
+      action_set_id:
+        title: Action Set ID
+        description: Filter by action set identifier
+        type: integer
+        required: true
+        example: 1234
+      remediation_type_in:
+        title: Remediation Type In
+        description: Filter by remediation type
+        type: "[]string"
+        required: false
+        example:
+          - "patch-now"
+          - "patch-with-worklet"
+      severity_in:
+        title: Severity In
+        description: Filter by severity
+        type: "[]string"
+        required: false
+        example:
+          - "critical"
+          - "high"
+          - "medium"
+          - "low"
+          - "unknown"
+      vulnerability_in:
+        title: Vulnerability In
+        description: Filter by vulnerability
+        type: "[]string"
+        required: false
+        example:
+          - "CVE-2020-1234"
+          - "CVE-2020-5678"
+    output:
+      solutions:
+        title: Vulnerability Sync Solutions
+        description: List of vulnerability sync Solutions
+        type: "[]solution"
+        required: false
+  execute_vulnerability_sync_actions:
+    title: Execute Vulnerability Sync Actions
+    description: Launch remediation for patch and worklet remediations
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1234
+      action_set_id:
+        title: Action Set ID
+        description: Identifier of the action set
+        type: integer
+        required: true
+        example: 1234
+      actions:
+        title: Actions
+        description: List of remediations to execute
+        type: "[]action_set_action"
+        required: true
+        example:
+          - action: "patch-now"
+            solution_id: 1234
+            device_ids:
+              - 1234
+              - 5678
+          - action: "patch-with-worklet"
+            solution_id: 1234
+            worklet_id: 1234
+            device_ids:
+              - 1234
+              - 5678
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  delete_vulnerability_sync_action_set:
+    title: Delete Vulnerability Sync Action Set
+    description: Delete a vulnerability sync action set and all associated data
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1234
+      action_set_id:
+        title: Action Set ID
+        description: Identifier of the action set
+        type: integer
+        required: true
+        example: 1234
     output:
       success:
         title: Success

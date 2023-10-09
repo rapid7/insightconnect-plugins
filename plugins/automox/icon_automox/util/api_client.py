@@ -7,7 +7,7 @@ from typing import Dict, List, Optional, Collection
 
 class ApiClient:
     INTEGRATION_NAME = "rapid7-insightconnect-plugin"
-    VERSION = "1.1.1"
+    VERSION = "2.0.0"
     PAGE_SIZE = 500
 
     OUTCOME_FAIL = "failure"
@@ -31,10 +31,12 @@ class ApiClient:
             "content-type": "application/json",
         }
 
-    def _call_api(self, method: str, url: str, params: Dict = {}, json_data: object = None) -> Optional[dict]:
+    def _call_api(self, method: str, url: str, params=None, json_data: object = None) -> Optional[dict]:
+        if params is None:
+            params = {}
         try:
             response = self.session.request(method, url, json=json_data, params=params)
-
+            self.logger.info(f"Request URL: {url}, Method: {method}, Response code: {response.status_code}")
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.API_KEY)
 
@@ -42,6 +44,9 @@ class ApiClient:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND)
 
             if response.status_code == 204:
+                return
+
+            if response.status_code == 202:
                 return
 
             if 200 <= response.status_code < 300:
@@ -59,8 +64,10 @@ class ApiClient:
             self.logger.info(f"Call to Automox Console API failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
-    def _page_results(self, url: str, init_params: Dict = {}, sanitize: bool = True) -> [dict]:
-        params = self.first_page(init_params)
+    def _page_results(self, url: str, params=None, sanitize: bool = True) -> [dict]:
+        if params is None:
+            params = {}
+        params = self.first_page(params)
 
         page_resp = []
 
@@ -80,12 +87,15 @@ class ApiClient:
 
         return page_resp
 
-    def _page_results_data(self, url: str, init_params: Dict = {}) -> [dict]:
-        params = self.first_page(init_params)
+    def _page_results_data(self, url: str, params=None) -> [dict]:
+        if params is None:
+            params = {}
+        params = self.first_page(params)
 
         page_resp = []
 
         while True:
+            print(url)
             resp = self._call_api("GET", url, params)
             resp_data = self.remove_null_values(resp.get("data"))
 
@@ -110,14 +120,16 @@ class ApiClient:
             return d
 
     @staticmethod
-    def _org_param(org_id: str) -> dict:
+    def _org_param(org_id: int) -> dict:
         if not org_id:
             return {}
 
         return {"o": org_id}
 
     @staticmethod
-    def first_page(params: Dict = {}) -> Dict:
+    def first_page(params=None) -> Dict:
+        if params is None:
+            params = {}
         params.update({"limit": ApiClient.PAGE_SIZE, "page": 0})
         return params
 
@@ -189,9 +201,10 @@ class ApiClient:
         :param command: Command to be run
         :return: Boolean of outcome
         """
-        return self._call_api(
+        resp = self._call_api(
             "POST", f"{self.endpoint}/servers/{device_id}/queues", params=self._org_param(org_id), json_data=command
         )
+        return resp is not None
 
     def update_device(self, org_id: int, device_id: int, payload: Dict) -> bool:
         """
@@ -201,9 +214,10 @@ class ApiClient:
         :param payload: Dict of parameters to update on device
         :return: Boolean of outcome
         """
-        return self._call_api(
+        resp = self._call_api(
             "PUT", f"{self.endpoint}/servers/{device_id}", params=self._org_param(org_id), json_data=payload
         )
+        return resp is not None
 
     def delete_device(self, org_id: int, device_id: int) -> bool:
         """
@@ -212,7 +226,8 @@ class ApiClient:
         :param device_id: Device ID
         :return: Boolean of outcome
         """
-        return self._call_api("DELETE", f"{self.endpoint}/servers/{device_id}", params=self._org_param(org_id))
+        resp = self._call_api("DELETE", f"{self.endpoint}/servers/{device_id}", params=self._org_param(org_id))
+        return resp is not None
 
     # Policies
     @staticmethod
@@ -268,9 +283,10 @@ class ApiClient:
         :param payload: Dict of parameters to update on group
         :return: Boolean of outcome
         """
-        return self._call_api(
+        resp = self._call_api(
             "PUT", f"{self.endpoint}/servergroups/{group_id}", params=self._org_param(org_id), json_data=payload
         )
+        return resp is not None
 
     def delete_group(self, org_id: int, group_id: int) -> bool:
         """
@@ -279,24 +295,31 @@ class ApiClient:
         :param group_id: Group ID
         :return: Boolean of outcome
         """
-        return self._call_api("DELETE", f"{self.endpoint}/servergroups/{group_id}", params=self._org_param(org_id))
+        resp = self._call_api("DELETE", f"{self.endpoint}/servergroups/{group_id}", params=self._org_param(org_id))
+        return resp is not None
 
     # Vulnerability Sync
-    def upload_vulnerability_sync_file(self, org_id: int, file_content, filename, report_source) -> int:
+    def upload_vulnerability_sync_file(self, org_id: int, file_content, filename, report_source) -> Dict:
         with io.BytesIO(file_content) as file:
             files = [("file", (filename, file, "text/csv"))]
 
             headers = {"Authorization": f"Bearer {self.api_key}"}
+            params = self._org_param(org_id)
+            params['source'] = report_source
 
             try:
                 response = requests.post(
-                    f"{self.endpoint}/orgs/{org_id}/tasks/patch/batches/upload?source={report_source}",
+                    f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/upload",
+                    params=params,
                     files=files,
                     headers=headers,
                 )  # nosec B113
 
-                if response.status_code == 200:
-                    return response.json().get("id")
+                if response.status_code == 201:
+                    return {
+                        "id": response.json().get("id"),
+                        "status": response.json().get("status"),
+                    }
                 else:
                     raise PluginException(
                         cause="Failed to upload file to Vulnerability Sync",
@@ -308,20 +331,48 @@ class ApiClient:
                     assistance=f"Review encoded CSV file and try again: {e}",
                 )
 
-    def get_vulnerability_sync_batches(self, org_id: int) -> List[Dict]:
-        return self._page_results_data(f"{self.endpoint}/orgs/{org_id}/tasks/batches")
+    def list_vulnerability_sync_action_sets(self, org_id: int, params=None) -> List[Dict]:
+        if params is None:
+            params = {}
+        params.update(self._org_param(org_id))
+        return self._page_results_data(f"{self.endpoint}/orgs/{org_id}/remediations/action-sets",
+                                       params=params)
 
-    def get_vulnerability_sync_batch(self, org_id: int, batch_id: int) -> Dict:
-        return self._call_api("GET", f"{self.endpoint}/orgs/{org_id}/tasks/batches/{batch_id}")
+    def list_vulnerability_sync_action_set_issues(self, org_id: int, action_set_id: int, params=None) -> List[Dict]:
+        if params is None:
+            params = {}
+        params.update(self._org_param(org_id))
+        return self._page_results_data(f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}/issues",
+                                       params=params)
 
-    def update_vulnerability_sync_batch(self, org_id: int, batch_id: int, action: str) -> bool:
-        return self._call_api("POST", f"{self.endpoint}/orgs/{org_id}/tasks/batches/{batch_id}/{action}")
+    def list_vulnerability_sync_action_set_solutions(self, org_id: int, action_set_id: int, params=None) -> List[Dict]:
+        if params is None:
+            params = {}
+        params.update(self._org_param(org_id))
+        return self._page_results_data(
+            f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}/solutions",
+            params=params)
 
-    def get_vulnerability_sync_tasks(self, org_id: int, params: Dict) -> List[Dict]:
-        return self._page_results_data(f"{self.endpoint}/orgs/{org_id}/tasks", params)
+    def get_vulnerability_sync_action_set(self, org_id: int, action_set_id: int) -> Dict:
+        params = self._org_param(org_id)
+        return self._call_api("GET",
+                              f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}",
+                              params=params)
 
-    def update_vulnerability_sync_task(self, org_id: int, task_id: int, action: str) -> bool:
-        return self._call_api("PATCH", f"{self.endpoint}/orgs/{org_id}/tasks/{task_id}", params={"action": action})
+    def delete_vulnerability_sync_action_set(self, org_id: int, action_set_id: int) -> bool:
+        params = self._org_param(org_id)
+        resp = self._call_api("DELETE", f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}",
+                              params=params)
+        # 204 No Content
+        return resp is None
+
+    def execute_vulnerability_sync_actions(self, org_id: int, action_set_id: int, actions: List[Dict]) -> Dict:
+        params = self._org_param(org_id)
+        data = {
+            "actions": actions
+        }
+        return self._call_api("POST", f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}/actions",
+                              json_data=data, params=params)
 
     # Events
     def get_events(self, org_id: int, event_type: str, page: int = 0) -> List[Dict]:
