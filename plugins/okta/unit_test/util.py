@@ -39,18 +39,15 @@ class Util:
         return json.loads(Util.read_file_to_string(filename))
 
     @staticmethod
+    def mock_wrapper(url=""):
+        return Util.mock_request(url=url)
+
+    @staticmethod
+    def mock_empty_response(**kwargs):
+        return MockResponse(200, "get_logs_empty_response.resp", {"link": ""})
+
+    @staticmethod
     def mock_request(*args, **kwargs):
-        class MockResponse:
-            def __init__(self, status_code: int, filename: str = None, headers: dict = {}):
-                self.status_code = status_code
-                self.text = ""
-                self.headers = headers
-                if filename:
-                    self.text = Util.read_file_to_string(f"responses/{filename}")
-
-            def json(self):
-                return json.loads(self.text)
-
         method = kwargs.get("method")
         url = kwargs.get("url")
         params = kwargs.get("params")
@@ -58,10 +55,14 @@ class Util:
         global first_request
 
         if url == "https://example.com/api/v1/logs":
-            if params == {"since": "2023-04-27T08:33:46", "until": "2023-04-28T08:33:46", "limit": 1000}:
-                return MockResponse(
-                    200, "get_logs.json.resp", {"link": '<https://example.com/nextLink?q=next> rel="next"'}
-                )
+            resp_args = {
+                "status_code": 200,
+                "filename": "get_logs.json.resp",
+                "headers": {"link": '<https://example.com/nextLink?q=next> rel="next"'},
+            }
+            if params.get("since") == "2023-04-27T07:49:21.777Z":
+                resp_args["filename"], resp_args["headers"] = "get_logs_single_event.json.resp", {"link": ""}
+            return MockResponse(**resp_args)
         if url == "https://example.com/nextLink?q=next":
             return MockResponse(200, "get_logs_next_page.json.resp", {"link": ""})
         if url == "https://example.com/api/v1/groups/12345/users" and first_request:
@@ -216,3 +217,15 @@ class Util:
             return MockResponse(404)
 
         raise NotImplementedError("Not implemented", kwargs)
+
+
+class MockResponse:
+    def __init__(self, status_code: int, filename: str = None, headers: dict = {}):
+        self.status_code = status_code
+        self.text = ""
+        self.headers = headers
+        if filename:
+            self.text = Util.read_file_to_string(f"responses/{filename}")
+
+    def json(self):
+        return json.loads(self.text)
