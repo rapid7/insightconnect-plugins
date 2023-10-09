@@ -1,14 +1,14 @@
-import sys
-import os
-
-sys.path.append(os.path.abspath("../"))
-
 from unittest import TestCase
 from komand_okta.tasks.monitor_logs.task import MonitorLogs
 from util import Util
 from unittest.mock import patch, call
 from parameterized import parameterized
 from datetime import datetime, timezone
+
+import sys
+import os
+
+sys.path.append(os.path.abspath("../"))
 
 
 @patch(
@@ -51,7 +51,7 @@ class TestMonitorLogs(TestCase):
             ],
         ]
     )
-    def test_monitor_logs(self, mocked_warn, mock_request, mock_get_time, test_name, current_state, expected):
+    def test_monitor_logs(self, mocked_warn, mock_request, _mock_get_time, test_name, current_state, expected):
         # Tests and their workflow descriptions:
         # 1. without_state - first run, query from 24 hours ago until now and results returned.
         # 2. with_state - queries using the saved 'last_collection_timestamp' to pull new logs.
@@ -77,7 +77,7 @@ class TestMonitorLogs(TestCase):
             self.assertIn(log_call, mocked_warn.call_args_list)
 
     @patch("logging.Logger.info")
-    def test_monitor_logs_filters_events(self, mocked_logger, *mocks):
+    def test_monitor_logs_filters_events(self, mocked_logger, *_mocks):
         # Test the filtering of events returned in a previous iteration. Workflow being tested:
         # 1. C2C executed and queried for events until 8am however the last event time was '2023-04-27T08:49:21.764Z'
         # 2. The next execution will use this timestamp, meaning the last event will be returned again from Okta.
@@ -104,6 +104,8 @@ class TestMonitorLogs(TestCase):
     def test_monitor_logs_filters_single_event(self, mocked_info_log, mocked_warn_log, *mocks):
         # Test filtering when a single event is returned that was in the previous iteration.
 
+        # temp change mocked timestamp to be within the cutoff time without changing mocked response data.
+        mocks[1].return_value = datetime(2023, 4, 27, 8, 45, 46, 123156, timezone.utc)
         now = "2023-04-28T08:33:46.123Z"  # Mocked value of 'now' - 1 minute
         current_state = {"last_collection_timestamp": "2023-04-27T07:49:21.777Z"}  # TS of the event in mocked response
         actual, actual_state, has_more_pages, status_code, error = self.action.run(state=current_state)
@@ -121,3 +123,24 @@ class TestMonitorLogs(TestCase):
         self.assertIn(logger_info_call, mocked_info_log.call_args_list)
         self.assertIn(logger_warn_call, mocked_warn_log.call_args_list)
         self.assertEqual(actual, [])  # no events returned after filtering
+
+    @patch("logging.Logger.info")
+    def test_monitor_logs_applies_cut_off(self, mocked_info_log, *_mocks):
+        # Test the scenario that a customer has paused the collector for an extended amount of time to test when they
+        # resume the task we should cut off, at a max 24 hours ago for since parameter.
+        expected = Util.read_file_to_dict("expected/get_logs.json.exp")  # logs from last 24 hours
+
+        paused_time = "2022-04-27T07:49:21.777Z"
+        current_state = {"last_collection_timestamp": paused_time}  # Task has been paused for 1 year+
+        actual, state, _has_more_pages, _status_code, _error = self.action.run(state=current_state)
+
+        # Basic check that we match the same as a first test/run which returns logs from the last 24 hours
+        self.assertEqual(actual, expected.get("logs"))
+        self.assertEqual(state, expected.get("state"))
+
+        # Check we called with the current parameters by looking at the info log
+        logger = call(
+            f"Saved state {paused_time} exceeds the cut off (24 hours). "
+            f"Reverting to use time: 2023-04-27T08:33:46.123Z"
+        )
+        self.assertIn(logger, mocked_info_log.call_args_list)
