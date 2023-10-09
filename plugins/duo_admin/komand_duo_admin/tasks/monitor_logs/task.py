@@ -8,6 +8,10 @@ from komand_duo_admin.util.exceptions import ApiException
 from datetime import datetime, timedelta, timezone
 from hashlib import sha1
 
+ADMIN_LOGS_LOG_TYPE = "Admin logs"
+AUTH_LOGS_LOG_TYPE = "Auth logs"
+TRUST_MONITOR_EVENTS_LOG_TYPE = "Trust monitor events"
+
 
 class MonitorLogs(insightconnect_plugin_runtime.Task):
     LAST_COLLECTION_TIMESTAMP = "last_collection_timestamp"
@@ -31,7 +35,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             state=MonitorLogsState(),
         )
 
-    def get_parameters_for_query(self, log_type, now, last_log_timestamp, next_page_params):
+    def get_parameters_for_query(self, log_type, now, last_log_timestamp, next_page_params, backward_comp_first_run):
         get_next_page = False
         last_two_minutes = now - timedelta(minutes=2)
         if not last_log_timestamp:
@@ -51,14 +55,41 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 get_next_page = True
             else:
                 self.logger.info(f"Subsequent run for {log_type}")
-            if log_type != "Admin logs":
-                mintime = int(last_log_timestamp * 1000)
-                maxtime = self.convert_to_milliseconds(last_two_minutes)
+
+            # If for some reason no logs or event have been picked up,
+            # need to ensure that no more than the previous 72 hours is queried - use cutoff check to ensure this
+            last_72_hours = now - timedelta(hours=72)
+            cutoff_time_secs = self.convert_to_seconds(last_72_hours)
+            cutoff_time_millisecs = self.convert_to_milliseconds(last_72_hours)
+            if backward_comp_first_run:
+                # This is a special case where the previous last collection timestamp needs to change to 3 different
+                # timestamps getting held. Once all systems are updated to 3 timestamp method, remove this clause
+                # Note: The last collection timestamp is held in milliseconds,
+                # new timestamps are in seconds. (10 digit unix integer)
+                self.logger.info("Backward compatibility - adjust times from last collection timestamp")
+                if log_type != "Admin logs":
+                    # Timestamps in milliseconds, original timestamp method held timestamp in milliseconds
+                    mintime = max(last_log_timestamp, cutoff_time_millisecs)
+                    maxtime = self.convert_to_milliseconds(last_two_minutes)
+                else:
+                    # Use seconds for admin log endpoint
+                    last_log_timestamp_secs = int(last_log_timestamp / 1000)
+                    mintime = max(last_log_timestamp_secs, cutoff_time_secs)
+                    maxtime = self.convert_to_seconds(last_two_minutes)
             else:
-                # Use seconds for admin log endpoint
-                # mintime = int(last_log_timestamp / 1000)
-                mintime = last_log_timestamp
-                maxtime = self.convert_to_seconds(last_two_minutes)
+                if log_type == "Admin logs":
+                    # Use seconds for admin log endpoint
+                    mintime = max(last_log_timestamp, cutoff_time_secs)
+                    maxtime = self.convert_to_seconds(last_two_minutes)
+                else:
+                    if log_type == AUTH_LOGS_LOG_TYPE:
+                        # New method holds logmtimestamps in seconds so convert to milliseconds for auth logs
+                        last_log_timestamp_millisecs = int(last_log_timestamp * 1000)
+                    else:
+                        # Trust monitor events hold timestamps in milliseconds(surface_timestamp is recorded)
+                        last_log_timestamp_millisecs = last_log_timestamp
+                    mintime = max(last_log_timestamp_millisecs, cutoff_time_millisecs)
+                    maxtime = self.convert_to_milliseconds(last_two_minutes)
 
         self.logger.info(f"Retrieve data from {mintime} to {maxtime}. Get next page is set to {get_next_page}")
         return mintime, maxtime, get_next_page
@@ -67,6 +98,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
     def run(self, params={}, state={}):  # noqa: C901
         self.connection.admin_api.toggle_rate_limiting = False
         has_more_pages = False
+        backward_comp_first_run = False
 
         try:
             now = self.get_current_time()
@@ -78,12 +110,15 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             if last_collection_timestamp:
                 # Previously only one timestamp was held (the end of the collection window)
                 # This has been superceded by a latest timestamp per log type
-                self.logger.info("Backwards compatibility - update all timestamps to the last known timestamp")
+                self.logger.info(
+                    f"Backwards compatibility - update all timestamps to the last known timestamp {last_collection_timestamp}"
+                )
                 trust_monitor_last_log_timestamp = (
                     auth_logs_last_log_timestamp
                 ) = admin_logs_last_log_timestamp = last_collection_timestamp
                 # Update the old last collection timestamp to None so it is not considered in future runs
                 state[self.LAST_COLLECTION_TIMESTAMP] = None
+                backward_comp_first_run = True
             else:
                 trust_monitor_last_log_timestamp = state.get(self.TRUST_MONITOR_LAST_LOG_TIMESTAMP)
                 auth_logs_last_log_timestamp = state.get(self.AUTH_LOGS_LAST_LOG_TIMESTAMP)
@@ -104,7 +139,11 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
                 # Get trust monitor events
                 mintime, maxtime, get_next_page = self.get_parameters_for_query(
-                    "Trust monitor events", now, trust_monitor_last_log_timestamp, trust_monitor_next_page_params
+                    TRUST_MONITOR_EVENTS_LOG_TYPE,
+                    now,
+                    trust_monitor_last_log_timestamp,
+                    trust_monitor_next_page_params,
+                    backward_comp_first_run,
                 )
 
                 if (get_next_page and trust_monitor_next_page_params) or not get_next_page:
@@ -116,7 +155,10 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     )
                     new_logs.extend(new_trust_monitor_events)
                     state[self.TRUST_MONITOR_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(
-                        trust_monitor_last_log_timestamp, new_trust_monitor_events
+                        trust_monitor_last_log_timestamp,
+                        new_trust_monitor_events,
+                        backward_comp_first_run,
+                        TRUST_MONITOR_EVENTS_LOG_TYPE,
                     )
                     self.logger.info(f"{len(new_trust_monitor_events)} trust monitor events retrieved")
                 if new_trust_monitor_event_hashes:
@@ -130,7 +172,11 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
                 # Get admin logs
                 mintime, maxtime, get_next_page = self.get_parameters_for_query(
-                    "Admin logs", now, admin_logs_last_log_timestamp, admin_logs_next_page_params
+                    ADMIN_LOGS_LOG_TYPE,
+                    now,
+                    admin_logs_last_log_timestamp,
+                    admin_logs_next_page_params,
+                    backward_comp_first_run,
                 )
 
                 if (get_next_page and admin_logs_next_page_params) or not get_next_page:
@@ -140,7 +186,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     new_admin_logs, new_admin_log_hashes = self.compare_hashes(previous_admin_log_hashes, admin_logs)
                     new_logs.extend(new_admin_logs)
                     state[self.ADMIN_LOGS_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(
-                        admin_logs_last_log_timestamp, new_admin_logs
+                        admin_logs_last_log_timestamp, new_admin_logs, backward_comp_first_run, ADMIN_LOGS_LOG_TYPE
                     )
                     self.logger.info(f"{len(new_admin_logs)} admin logs retrieved")
 
@@ -155,7 +201,11 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
                 # Get auth logs
                 mintime, maxtime, get_next_page = self.get_parameters_for_query(
-                    "Auth logs", now, auth_logs_last_log_timestamp, auth_logs_next_page_params
+                    AUTH_LOGS_LOG_TYPE,
+                    now,
+                    auth_logs_last_log_timestamp,
+                    auth_logs_next_page_params,
+                    backward_comp_first_run,
                 )
 
                 if (get_next_page and auth_logs_next_page_params) or not get_next_page:
@@ -166,7 +216,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     # Grab the most recent timestamp and save it to use as min time for next run
                     new_logs.extend(new_auth_logs)
                     state[self.AUTH_LOGS_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(
-                        auth_logs_last_log_timestamp, new_auth_logs
+                        auth_logs_last_log_timestamp, new_auth_logs, backward_comp_first_run, AUTH_LOGS_LOG_TYPE
                     )
                     self.logger.info(f"{len(new_auth_logs)} auth logs retrieved")
 
@@ -229,16 +279,28 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         )
         return logs_to_return, new_logs_hashes
 
-    def get_highest_timestamp(self, last_recorded_highest_timestamp, logs):
+    def get_highest_timestamp(self, last_recorded_highest_timestamp, logs, backward_comp_first_run, log_type):
         if last_recorded_highest_timestamp:
+            if backward_comp_first_run:
+                # Convert the previous timestamp (13 digit format) to the new format used
+                # (Timestamps now held in the last log timestamp format which is a 10 digit unix timestamp)
+                # Note trust monitor events maintain the surfaced_timestamp which is 13 digit unix timestamp
+                self.logger.info("Ensure backward compatibility (to older one timestamp method)")
+                if log_type != TRUST_MONITOR_EVENTS_LOG_TYPE:
+                    last_recorded_highest_timestamp = int(last_recorded_highest_timestamp / 1000)
             highest_timestamp = last_recorded_highest_timestamp
         else:
             highest_timestamp = 0
+        self.logger.info(f"Previous highest recorded timestamp is {highest_timestamp}")
         for log in logs:
-            log_timestamp = log.get("timestamp")
+            # Event monitor uses surfaced_timestamp but other endpoints use timestamp
+            if log_type == TRUST_MONITOR_EVENTS_LOG_TYPE:
+                log_timestamp = log.get("surfaced_timestamp")
+            else:
+                log_timestamp = log.get("timestamp")
             if log_timestamp and log_timestamp > highest_timestamp:
                 highest_timestamp = log_timestamp
-        self.logger.info(f"Highest timestamp set to {highest_timestamp}")
+        self.logger.info(f"Highest timestamp set to {highest_timestamp} for {log_type}")
         return highest_timestamp
 
     def get_auth_logs(self, mintime: int, maxtime: int, next_page_params: dict) -> list:
