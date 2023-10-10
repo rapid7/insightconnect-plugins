@@ -547,54 +547,54 @@ Example output:
 
 ```
 {
-  "count":1,
-  "results":[
+  "count": 1,
+  "results": [
     {
-      "attributes":{
-        "accountExpires":"9999-12-31 23:59:59.999999+00:00",
-        "adminCount":0,
-        "badPasswordTime":"1601-01-01 00:00:00+00:00",
-        "badPwdCount":0,
-        "cn":"Example User",
-        "codePage":0,
-        "countryCode":0,
-        "dSCorePropagationData":[
+      "attributes": {
+        "accountExpires": "9999-12-31 23:59:59.999999+00:00",
+        "adminCount": 0,
+        "badPasswordTime": "1601-01-01 00:00:00+00:00",
+        "badPwdCount": 0,
+        "cn": "Example User",
+        "codePage": 0,
+        "countryCode": 0,
+        "dSCorePropagationData": [
           "2021-01-14 18:17:28+00:00",
           "2021-01-14 17:48:27+00:00",
           "1601-01-01 00:04:16+00:00"
         ],
-        "description":[
+        "description": [
           "Example Account"
         ],
-        "distinguishedName":"CN=Example User,CN=Users,DC=example,DC=com",
-        "instanceType":4,
-        "isCriticalSystemObject":true,
-        "lastLogoff":"1601-01-01 00:00:00+00:00",
-        "lastLogon":"1601-01-01 00:00:00+00:00",
-        "logonCount":0,
-        "memberOf":[
+        "distinguishedName": "CN=Example User,CN=Users,DC=example,DC=com",
+        "instanceType": 4,
+        "isCriticalSystemObject": true,
+        "lastLogoff": "1601-01-01 00:00:00+00:00",
+        "lastLogon": "1601-01-01 00:00:00+00:00",
+        "logonCount": 0,
+        "memberOf": [
           "CN=Domain Users,CN=Users,example,DC=com"
         ],
-        "name":"Example User",
-        "objectCategory":"CN=Person,CN=Schema,CN=Configuration,DC=example,DC=com",
-        "objectClass":[
+        "name": "Example User",
+        "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=example,DC=com",
+        "objectClass": [
           "top",
           "person",
           "organizationalPerson",
           "user"
         ],
-        "objectGUID":"{b45138aa-be39-47d9-ab57-3aee8f381f87}",
-        "objectSid":"S-1-5-33-3456299977-1009817396-2685666617-303",
-        "primaryGroupID":513,
-        "pwdLastSet":"2021-01-14 17:48:26.197384+00:00",
-        "sAMAccountName":"Example User",
-        "sAMAccountType":489006322,
-        "showInAdvancedViewOnly":true,
-        "uSNChanged":16419,
-        "uSNCreated":12324,
-        "userAccountControl":514,
-        "whenChanged":"2021-01-14 18:17:28+00:00",
-        "whenCreated":"2021-01-14 17:48:26+00:00"
+        "objectGUID": "{b45138aa-be39-47d9-ab57-3aee8f381f87}",
+        "objectSid": "S-1-5-33-3456299977-1009817396-2685666617-303",
+        "primaryGroupID": 513,
+        "pwdLastSet": "2021-01-14 17:48:26.197384+00:00",
+        "sAMAccountName": "Example User",
+        "sAMAccountType": 489006322,
+        "showInAdvancedViewOnly": true,
+        "uSNChanged": 16419,
+        "uSNCreated": 12324,
+        "userAccountControl": 514,
+        "whenChanged": "2021-01-14 18:17:28+00:00",
+        "whenCreated": "2021-01-14 17:48:26+00:00"
       },
       "dn":"CN=Example User,CN=Users,DC=example,DC=com"
     }
