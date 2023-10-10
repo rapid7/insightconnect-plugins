@@ -461,8 +461,54 @@ Example output:
 
 ```
 {
-  "count": 1,
-  "results": "[ { \"dn\": string, \"attributes\": { \"pwdLastSet\": date, \"objectClass\": [ string, string, string, string ], \"memberOf\": [ string ], \"sAMAccountType\": int, \"uSNChanged\": int, \"givenName\": string, \"userPrincipalName\": string, \"countryCode\": int, \"lastLogon\": date, \"sAMAccountName\": string, \"name\": string, \"primaryGroupID\": int, \"dSCorePropagationData\": [ date ], \"displayName\": string, \"logonCount\": int, \"cn\": string, \"objectSid\": string, \"codePage\": int, \"badPwdCount\": int, \"objectGUID\": string, \"distinguishedName\": string, \"whenChanged\": date, \"badPasswordTime\": date, \"instanceType\": int, \"uSNCreated\": int, \"sn\": string, \"whenCreated\": date, \"accountExpires\": date, \"userAccountControl\": int, \"lastLogoff\": date, \"objectCategory\": \"string\" } } ]"
+   "count":1,
+   "results":[
+      {
+         "dn":"string",
+         "attributes":{
+            "pwdLastSet":"date",
+            "objectClass":[
+               "string",
+               "string",
+               "string",
+               "string"
+            ],
+            "memberOf":[
+               "string"
+            ],
+            "sAMAccountType":"int",
+            "uSNChanged":"int",
+            "givenName":"string",
+            "userPrincipalName":"string",
+            "countryCode":"int",
+            "lastLogon":"date",
+            "sAMAccountName":"string",
+            "name":"string",
+            "primaryGroupID":"int",
+            "dSCorePropagationData":[
+               "date"
+            ],
+            "displayName":"string",
+            "logonCount":"int",
+            "cn":"string",
+            "objectSid":"string",
+            "codePage":"int",
+            "badPwdCount":"int",
+            "objectGUID":"string",
+            "distinguishedName":"string",
+            "whenChanged":"date",
+            "badPasswordTime":"date",
+            "instanceType":"int",
+            "uSNCreated":"int",
+            "sn":"string",
+            "whenCreated":"date",
+            "accountExpires":"date",
+            "userAccountControl":"int",
+            "lastLogoff":"date",
+            "objectCategory":"string"
+         }
+      }
+   ]
 }
 ```
 
