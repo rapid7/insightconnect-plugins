@@ -229,18 +229,6 @@ jobs:
           echo "environment=staging" >> "$GITHUB_OUTPUT"
           echo "automerge=true" >> "$GITHUB_OUTPUT"
 
-      - name: Trigger Auto Release for Staging
-        id: triggerAutoReleaseForStaging
-        if: success()
-        uses: jabbukka/jenkins-trigger@main
-        with:
-          url: ${{ secrets.JENKINS_URL }}
-          job_name: ${{ secrets.JENKINS_CLOUD_JOB }}
-          user_name: ${{ secrets.JENKINS_USER }}
-          api_token: ${{ secrets.JENKINS_TOKEN }}
-          parameter: {"PLUGINS_DETAILS":$PLUGINS_DETAILS,"AUTOMERGE":true,"ENVIRONMENT": "staging"}
-          wait: "true"
-          timeout: "1000"
 
       - name: Announce Plugin Release Failure
         id: announcePluginReleaseFailure
