@@ -177,13 +177,15 @@ Disable multiple accounts
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|distinguished_names|[]string|None|True|The distinguished names of the users to disable|None|['CN=user,OU=domain_users,DC=example,DC=com']|
+|distinguished_names|[]string|None|True|The distinguished names of the users to disable|None|["CN=user,OU=domain_users,DC=example,DC=com"]|
   
 Example input:
 
 ```
 {
-  "distinguished_names": "CN=user,OU=domain_users,DC=example,DC=com"
+  "distinguished_names": [
+    "CN=user,OU=domain_users,DC=example,DC=com"
+  ]
 }
 ```
 
@@ -250,13 +252,15 @@ Enable multiple accounts
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|distinguished_names|[]string|None|True|The distinguished names of the users to enable|None|['CN=user,OU=domain_users,DC=example,DC=com']|
+|distinguished_names|[]string|None|True|The distinguished names of the users to enable|None|["CN=user,OU=domain_users,DC=example,DC=com"]|
   
 Example input:
 
 ```
 {
-  "distinguished_names": "CN=user,OU=domain_users,DC=example,DC=com"
+  "distinguished_names": [
+    "CN=user,OU=domain_users,DC=example,DC=com"
+  ]
 }
 ```
 
@@ -429,7 +433,7 @@ Run an LDAP query
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|attributes|[]string|None|False|Attributes to search. If empty return all attributes|None|['createTimestamp', 'creatorsName']|
+|attributes|[]string|None|False|Attributes to search. If empty return all attributes|None|["createTimestamp", "creatorsName"]|
 |search_base|string|None|True|The base of the search request|None|DC=example,DC=com|
 |search_filter|string|None|True|The filter of the search request. It must conform to the LDAP filter syntax specified in RFC4515|None|(sAMAccountName=joesmith)|
   
@@ -437,7 +441,10 @@ Example input:
 
 ```
 {
-  "attributes": "createTimestamp",
+  "attributes": [
+    "createTimestamp",
+    "creatorsName"
+  ],
   "search_base": "DC=example,DC=com",
   "search_filter": "(sAMAccountName=joesmith)"
 }
@@ -708,6 +715,7 @@ objectname is the logon name of the user you are looking for. The DN can then be
 the query results, and then using the variable step $item.dn
 
 # Version History
+
 * 9.0.0 - Action: `Disable User` & `Enable User` - Rename title of actions from `Disable` & `Enable` to `Disable Users` & `Enable Users` on the front-end.
 * 8.0.0 - Update actions Enable Users and Enable Users to add outputs Completed and Failed and remove output All Operations Succeeded
 * 7.0.0 - Update actions Enable Users and Enable Users to replace output Success with All Operations Succeeded True/False

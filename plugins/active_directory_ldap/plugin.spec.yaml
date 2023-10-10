@@ -267,7 +267,7 @@ actions:
         description: Attributes to search. If empty return all attributes
         required: false
         type: '[]string'
-        example: ["createTimestamp", "creatorsName"]
+        example: '["createTimestamp", "creatorsName"]'
     output:
       results:
         title: Results
@@ -391,7 +391,7 @@ actions:
         type: "[]string"
         description: The distinguished names of the users to enable
         required: true
-        example: ["CN=user,OU=domain_users,DC=example,DC=com"]
+        example: '["CN=user,OU=domain_users,DC=example,DC=com"]'
     output:
       completed:
         title: Completed
@@ -431,7 +431,7 @@ actions:
         type: "[]string"
         description: The distinguished names of the users to disable
         required: true
-        example: ["CN=user,OU=domain_users,DC=example,DC=com"]
+        example: '["CN=user,OU=domain_users,DC=example,DC=com"]'
     output:
       completed:
         title: Completed
