@@ -596,7 +596,7 @@ Example output:
         "whenChanged": "2021-01-14 18:17:28+00:00",
         "whenCreated": "2021-01-14 17:48:26+00:00"
       },
-      "dn":"CN=Example User,CN=Users,DC=example,DC=com"
+      "dn": "CN=Example User,CN=Users,DC=example,DC=com"
     }
   ]
 }
