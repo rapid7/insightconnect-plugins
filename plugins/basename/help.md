@@ -1,10 +1,10 @@
 # Description
 
-This plugin is used to get the last item of a file path or URL using Python's basename utility
+This plugin is used to get the last item of a file path or URL using Python's Basename utility
 
 # Key Features
   
-* Obtain basename of a file path or URL.
+* Obtain Basename of a file path or URL.
 
 # Requirements
   
@@ -27,7 +27,7 @@ This plugin is used to get the last item of a file path or URL using Python's ba
 
 #### Basename
   
-Get the basename of a path
+Get the Basename of a path
 
 ##### Input
 
@@ -84,6 +84,8 @@ If the input doesn't contain a slash `/` in the path the result will be the orig
 
 # Links
 
+* [Python Basename](https://docs.python.org/3/library/os.path.html)
+
 ## References
 
-* [Python Basename](https://docs.python.org/2/library/os.path.html#os.path.basename)
+* [Python Basename](https://docs.python.org/3/library/os.path.html)
