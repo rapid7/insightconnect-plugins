@@ -4,7 +4,7 @@ products: [insightconnect]
 name: active_directory_ldap
 title: Active Directory LDAP
 description: "This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network"
-version: 8.0.0
+version: 9.0.0
 supported_versions: ["Azure Active Directory 2.0.89.0"]
 vendor: rapid7
 support: rapid7
@@ -21,6 +21,10 @@ hub_tags:
   use_cases: [user_management, credential_management, application_management, threat_detection_and_response]
   keywords: [ldap, microsoft]
   features: []
+sdk:
+  type: full
+  version: 5
+  user: nobody
 types:
   attributes:
     accountExpires:
@@ -191,8 +195,10 @@ types:
       required: false
   result:
     attributes:
+      title: Attributes
       type: object
     dn:
+      title: DN
       type: string
   modified_user_error:
     dn:
@@ -261,7 +267,7 @@ actions:
         description: Attributes to search. If empty return all attributes
         required: false
         type: '[]string'
-        example: ["createTimestamp", "creatorsName"]
+        example: '["createTimestamp", "creatorsName"]'
     output:
       results:
         title: Results
@@ -360,7 +366,7 @@ actions:
         required: false
         example: true
   enable_user:
-    title: Enable
+    title: Enable User
     description: Enable an account
     input:
       distinguished_name:
@@ -385,7 +391,7 @@ actions:
         type: "[]string"
         description: The distinguished names of the users to enable
         required: true
-        example: ["CN=user,OU=domain_users,DC=example,DC=com"]
+        example: '["CN=user,OU=domain_users,DC=example,DC=com"]'
     output:
       completed:
         title: Completed
@@ -400,7 +406,7 @@ actions:
         required: false
         example: '[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The DN CN=empty_search,DC=example,DC=com was not found" } ]'
   disable_user:
-    title: Disable
+    title: Disable User
     description: Disable an account
     input:
       distinguished_name:
@@ -425,7 +431,7 @@ actions:
         type: "[]string"
         description: The distinguished names of the users to disable
         required: true
-        example: ["CN=user,OU=domain_users,DC=example,DC=com"]
+        example: '["CN=user,OU=domain_users,DC=example,DC=com"]'
     output:
       completed:
         title: Completed
