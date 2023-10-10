@@ -110,10 +110,6 @@ env:
   PACKAGECLOUD_PYTHON_TOOLING_UNSTABLE: ${{ secrets.PACKAGECLOUD_PYTHON_TOOLING_UNSTABLE }}
   ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK: ${{ secrets.ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK}}
   IAM_SESSION_DURATION: ${{ secrets.IAM_SESSION_DURATION }}
-  JENKINS_USER: ${{ secrets.JENKINS_USER }}
-  JENKINS_TOKEN: ${{ secret.JENKINS_TOKEN }}
-  JENKINS_URL: ${{ secrets.JENKINS_URL }}
-  JENKINS_CLOUD_JOB: ${{ secrets.JENKINS_CLOUD_JOB }}
   AWS_ACCESS_ROLE: ${{ secrets.AWS_ACCESS_ROLE }}
   AWS_REGION: ${{ secrets.AWS_REGION }}
   AWS_IAM_HOST: ${{ secrets.AWS_IAM_HOST }}
@@ -121,7 +117,10 @@ env:
 jobs:
   release:
     runs-on: ubuntu-latest
-
+    outputs:
+      PLUGINS_DETAILS: ${{ steps.setupAutoPR.outputs.plugins_details }}
+      ENVIRONMENT: ${{ steps.setupAutoPR.outputs.environment }}
+      AUTOMERGE: ${{ steps.setupAutoPR.outputs.automerge }}
     steps:
       - name: Set up environment variables
         id: setUpEnvironmentVariables
@@ -397,32 +396,9 @@ jobs:
           cd plugins
           export PLUGINS_DETAILS=$(cat plugins/plugin.properties)
           echo "PLUGINS_DETAILS=$PLUGINS_DETAILS" >> $GITHUB_ENV
-
-      - name: Trigger Auto Release for Staging
-        id: triggerAutoReleaseForStaging
-        if: success()
-        uses: jabbukka/jenkins-trigger@main
-        with:
-          url: ${{ secrets.JENKINS_URL }}
-          job_name: ${{ secrets.JENKINS_CLOUD_JOB }}
-          user_name: ${{ secrets.JENKINS_USER }}
-          api_token: ${{ secrets.JENKINS_TOKEN }}
-          parameter: {"PLUGINS_DETAILS":$PLUGINS_DETAILS,"AUTOMERGE":true,"ENVIRONMENT": "staging"}
-          wait: "true"
-          timeout: "1000"
-
-      - name: Trigger Auto Release for Production
-        id: triggerAutoReleaseForProduction
-        if: success()
-        uses: jabbukka/jenkins-trigger@main
-        with:
-          url: ${{ secrets.JENKINS_URL }}
-          job_name: ${{ secrets.JENKINS_CLOUD_JOB }}
-          user_name: ${{ secrets.JENKINS_USER }}
-          api_token: ${{ secrets.JENKINS_TOKEN }}
-          parameter: {"PLUGINS_DETAILS":$PLUGINS_DETAILS,"AUTOMERGE":false,"ENVIRONMENT": "production"}
-          wait: "true"
-          timeout: "1000"
+          echo "plugins_details=$PLUGINS_DETAILS" >> "$GITHUB_OUTPUT"
+          echo "environment=staging" >> "$GITHUB_OUTPUT"
+          echo "automerge=true" >> "$GITHUB_OUTPUT"
 
       - name: Announce Plugin Release Failure
         id: announcePluginReleaseFailure

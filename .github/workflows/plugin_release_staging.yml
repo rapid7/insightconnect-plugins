@@ -85,7 +85,10 @@ env:
 jobs:
   release:
     runs-on: ubuntu-latest
-
+    outputs:
+      PLUGINS_DETAILS: ${{ steps.setupAutoPR.outputs.plugins_details }}
+      ENVIRONMENT: ${{ steps.setupAutoPR.outputs.environment }}
+      AUTOMERGE: ${{ steps.setupAutoPR.outputs.automerge }}
     steps:
       - name: Set up environment variables
         id: setUpEnvironmentVariables
@@ -222,6 +225,9 @@ jobs:
           cd plugins
           export PLUGINS_DETAILS=$(cat plugins/plugin.properties)
           echo "PLUGINS_DETAILS=$PLUGINS_DETAILS" >> $GITHUB_ENV
+          echo "plugins_details=$PLUGINS_DETAILS" >> "$GITHUB_OUTPUT"
+          echo "environment=staging" >> "$GITHUB_OUTPUT"
+          echo "automerge=true" >> "$GITHUB_OUTPUT"
 
       - name: Trigger Auto Release for Staging
         id: triggerAutoReleaseForStaging
