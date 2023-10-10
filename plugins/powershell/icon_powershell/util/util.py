@@ -152,7 +152,7 @@ def run_script_using_credssp(
 
     # Adds needed https and port number to host IP
     action.logger.info("Running a CredSSP connection")
-    host_connection = f"http://{host_ip}:{port}/wsman"
+    host_connection = f"https://{host_ip}:{port}/wsman"
     action.logger.debug("Host Connection: " + host_connection)
     action.logger.debug("PowerShell script: " + powershell_script)
 
@@ -169,11 +169,6 @@ def run_script_using_credssp(
     )
 
     error_value, stdout = run_powershell_session(action, powershell_script, powershell_session)
-    print("STDOUT")
-    print(stdout)
-    print("...")
-    print("STDERR")
-    print(error_value)
 
     return {"stdout": stdout, "stderr": error_value}
 
