@@ -8,7 +8,6 @@ if [[ "${{ github.event.inputs.RELEASE_PROD_CLOUD_US }}" == "true" ]]; then
   # Docker login
   docker login -u ${KOMAND_DOCKERHUB_USER} -p ${KOMAND_DOCKERHUB_PASSWORD}
   # Set infrastructure variables for region release
-  INFRASTRUCTURE_KEY="${INF_NAME}_ENV"
   export INFRASTRUCTURE="${INF_NAME}_ENV"
   MARKET_TOKEN_KEY="${INF_NAME}_MARKET_TOKEN"
   export MARKET_TOKEN="${!MARKET_TOKEN_KEY}"
@@ -30,10 +29,8 @@ if [[ "${{ github.event.inputs.RELEASE_PROD_CLOUD_US }}" == "true" ]]; then
   # Set AWS Information
   IAM_ROLE_KEY = "${INF_NAME}_STSPLUGINS3ROLE"
   export IAM_ROLE="${!IAM_ROLE_KEY}"
-  echo "::add-mask::$IAM_ROLE"
   IAM_ROLE_EXTERNAL_ID_KEY = "${INF_NAME}_STSPLUGINS3EXTERNALID"
   export IAM_ROLE_EXTERNAL_ID="${!IAM_ROLE_EXTERNAL_ID_KEY}"
-  echo "::add-mask::$IAM_ROLE_EXTERNAL_ID"
   # Run icon-ci release
   cd plugins
   echo "INFO: Releasing $INFRASTRUCTURE_NAME!!!"

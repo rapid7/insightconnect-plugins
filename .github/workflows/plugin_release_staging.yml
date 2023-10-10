@@ -68,39 +68,19 @@ env:
   GITHUB_ORG: "rapid7"
   INSIGHT_CONNECT_PLUGINS: "insightconnect-plugins"
   INSIGHT_CONNECT_PLUGINS_REPO: "rapid7/insightconnect-plugins"
-
-  INT_CLOUD_US: ${{ secrets.INT_CLOUD_US }}
-  INT_CLOUD_US_MARKET_TOKEN: ${{ secrets.INT_CLOUD_US_MARKET_TOKEN }}
-  INT_CLOUD_US_MARKET_PASSWORD: ${{ secrets.INT_CLOUD_US_MARKET_PASSWORD }}
-  INT_CLOUD_US_MARKET_USERNAME: ${{ secrets.INT_CLOUD_US_MARKET_USERNAME }}
-  INT_CLOUD_US_DOCKER_REGISTRY_USERNAME: ${{ secrets.INT_CLOUD_US_DOCKER_REGISTRY_USERNAME }}
-  INT_CLOUD_US_DOCKER_REGISTRY_PASSWORD: ${{ secrets.INT_CLOUD_US_DOCKER_REGISTRY_PASSWORD }}
-
-  HUB_STAGING: ${{ secrets.HUB_STAGING }}
-  HUB_STAGING_MARKET_TOKEN: ${{ secrets.HUB_STAGING_MARKET_TOKEN }}
-  HUB_STAGING_MARKET_PASSWORD: ${{ secrets.HUB_STAGING_MARKET_PASSWORD }}
-  HUB_STAGING_MARKET_USERNAME: ${{ secrets.HUB_STAGING_MARKET_USERNAME }}
-  HUB_STAGING_DOCKER_REGISTRY_USERNAME: ${{ secrets.HUB_STAGING_DOCKER_REGISTRY_USERNAME }}
-  HUB_STAGING_DOCKER_REGISTRY_PASSWORD: ${{ secrets.HUB_STAGING_DOCKER_REGISTRY_PASSWORD }}
-
-  ALLIANCE_STAGING: ${{ secrets.A_STAGING }}
-  ALLIANCE_STAGING_MARKET_TOKEN: ${{ secrets.ALLIANCE_STAGING_MARKET_TOKEN }}
-  ALLIANCE_STAGING_MARKET_PASSWORD: ${{ secrets.ALLIANCE_STAGING_MARKET_PASSWORD }}
-  ALLIANCE_STAGING_MARKET_USERNAME: ${{ secrets.ALLIANCE_STAGING_MARKET_USERNAME }}
-  ALLIANCE_STAGING_DOCKER_REGISTRY_USERNAME: ${{ secrets.ALLIANCE_STAGING_DOCKER_REGISTRY_USERNAME }}
-  ALLIANCE_STAGING_DOCKER_REGISTRY_PASSWORD: ${{ secrets.ALLIANCE_STAGING_DOCKER_REGISTRY_PASSWORD }}
-
   KOMAND_DOCKERHUB_USER: ${{secrets.KOMAND_DOCKERHUB_USER}}
   KOMAND_DOCKERHUB_PASSWORD: ${{ secrets.KOMAND_DOCKERHUB_PASSWORD }}
+  PACKAGECLOUD_PYTHON_TOOLING_STABLE: ${{ secrets.PACKAGECLOUD_PYTHON_TOOLING_UNSTABLE }}
   PACKAGECLOUD_PYTHON_TOOLING_UNSTABLE: ${{ secrets.PACKAGECLOUD_PYTHON_TOOLING_UNSTABLE }}
-
-  ICON_INTEGRATIONS_STAGING_RELEASES_ANNOUNCE_WEBHOOK: ${{ secrets.ICON_INTEGRATIONS_STAGING_RELEASES_ANNOUNCE_WEBHOOK}}
-  IAM_HOST: ${{ secrets.I_AM_HOST }}
+  ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK: ${{ secrets.ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK}}
   IAM_SESSION_DURATION: ${{ secrets.IAM_SESSION_DURATION }}
-
   JENKINS_USER: ${{ secrets.JENKINS_USER }}
   JENKINS_TOKEN: ${{ secret.JENKINS_TOKEN }}
   JENKINS_URL: ${{ secrets.JENKINS_URL }}
+  JENKINS_CLOUD_JOB: ${{ secrets.JENKINS_CLOUD_JOB }}
+  AWS_ACCESS_ROLE: ${{ secrets.AWS_ACCESS_ROLE }}
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  AWS_IAM_HOST: ${{ secrets.AWS_IAM_HOST }}
 
 jobs:
   release:
@@ -119,28 +99,6 @@ jobs:
             echo "INSIGHT_KOMAND_BRANCH=${{ github.event.INSIGHT_KOMAND_BRANCH }}" >> $GITHUB_ENV
             echo "INSIGHT_KOMAND_OVERRIDE_BLACKLISTS=${{ github.event.INSIGHT_KOMAND_OVERRIDE_BLACKLISTS }}" >> $GITHUB_ENV
             echo "PRERELEASE=${{ github.event.PRERELEASE }}" >> $GITHUB_ENV
-
-      - name: Set up environments and roles
-        id: setUpEnvironmentsAndRoles
-        run: |
-            INT_CLOUD_US_REGION=$(echo "${INT_CLOUD_US}" | jq -r '.awsRegion' | tr -d '\n')
-            echo "INT_CLOUD_US_REGION=$INT_CLOUD_US_REGION" >> $GITHUB_ENV
-            echo "::add-mask::${INT_CLOUD_US_REGION}"
-            INT_CLOUD_US_ROLE=$(echo "${INT_CLOUD_US}" | jq -r '.stsPluginS3Role' | tr -d '\n')
-            echo "INT_CLOUD_US_ROLE=$INT_CLOUD_US_ROLE" >> $GITHUB_ENV
-            echo "::add-mask::${INT_CLOUD_US_ROLE}"
-            HUB_STAGING_REGION=$(echo "${HUB_STAGING}" | jq -r '.awsRegion' | tr -d '\n')
-            echo "HUB_STAGING_REGION=$HUB_STAGING_REGION" >> $GITHUB_ENV
-            echo "::add-mask::${HUB_STAGING_REGION}"
-            HUB_STAGING_ROLE=$(echo "${HUB_STAGING}" | jq -r '.stsPluginS3Role' | tr -d '\n')
-            echo "HUB_STAGING_ROLE=$HUB_STAGING_ROLE" >> $GITHUB_ENV
-            echo "::add-mask::${HUB_STAGING_ROLE}"
-            ALLIANCE_STAGING_REGION=$(echo "${ALLIANCE_STAGING}" | jq -r '.awsRegion' | tr -d '\n')
-            echo "ALLIANCE_STAGING_REGION=$ALLIANCE_STAGING_REGION" >> $GITHUB_ENV
-            echo "::add-mask::${ALLIANCE_STAGING_REGION}"
-            ALLIANCE_STAGING_ROLE=$(echo "${ALLIANCE_STAGING}" | jq -r '.stsPluginS3Role' | tr -d '\n')
-            echo "ALLIANCE_STAGING_ROLE=$ALLIANCE_STAGING_ROLE" >> $GITHUB_ENV
-            echo "::add-mask::${ALLIANCE_STAGING_ROLE}"
 
       - name: Prerelease Timestamp
         id: prereleaseTimestamp
@@ -172,11 +130,26 @@ jobs:
           cd plugins
           ./.ci_venv/bin/icon-ci jenkins-announce --status started --webhook_url $ICON_INTEGRATIONS_STAGING_RELEASES_ANNOUNCE_WEBHOOK
 
+      - name: configure aws credentials for secrets manager access
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ACCESS_ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Secrets_Manager
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: get secrets from aws secrets manager
+        uses: aws-actions/aws-secretsmanager-get-secrets@v1
+        with:
+          secret-ids: |
+            int_cloud_us
+            hub_staging
+            alliance_staging
+
       - name: Configure AWS Credentials INT CLOUD US
         id: configureAWSInt
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ env.INT_CLOUD_US_ROLE }}
+          role-to-assume: ${{ env.INT_CLOUD_US_STSPLUGINS3ROLE }}
           role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_INT_Cloud_us
           aws-region: ${{ env.INT_CLOUD_US_REGION }}
 
@@ -184,6 +157,7 @@ jobs:
         id: releaseInt
         if: success()
         run: |
+          export INF_NAME="INT_CLOUD_US"
           export INF=$INT_CLOUD_US
           echo "INFO: PRERELEASE_TIMESTAMP is ${PRERELEASE_TIMESTAMP}"
           chmod +x ./tools/release_plugin.sh
@@ -193,7 +167,7 @@ jobs:
         id: configureAWSHubStaging
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ env.HUB_STAGING_ROLE }}
+          role-to-assume: ${{ env.HUB_STAGING_STSPLUGINS3ROLE }}
           role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Hub_Staging
           aws-region: ${{ env.HUB_STAGING_REGION }}
 
@@ -201,6 +175,7 @@ jobs:
         id: releaseHubStaging
         if: success()
         run: |
+          export INF_NAME="HUB_STAGING"
           export INF=$HUB_STAGING
           echo "INFO: PRERELEASE_TIMESTAMP is ${PRERELEASE_TIMESTAMP}"
           chmod +x ./tools/release_plugin.sh
@@ -210,7 +185,7 @@ jobs:
         id: configureAWSAllianceStaging
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ env.ALLIANCE_STAGING_ROLE }}
+          role-to-assume: ${{ env.ALLIANCE_STAGING_STSPLUGINS3ROLE }}
           role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Alliance_Staging
           aws-region: ${{ env.ALLIANCE_STAGING_REGION }}
 
@@ -218,6 +193,7 @@ jobs:
         id: releaseAllianceStaging
         if: success()
         run: |
+          export INF_NAME="ALLIANCE_STAGING"
           export INF=$ALLIANCE_STAGING
           chmod +x ./tools/release_plugin.sh
           echo "INFO: PRERELEASE_TIMESTAMP is ${PRERELEASE_TIMESTAMP}"
