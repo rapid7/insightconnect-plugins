@@ -29,10 +29,10 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         try:
             now = self.get_current_time() - timedelta(minutes=1)  # allow for latency of this being triggered
             now_iso = self.get_iso(now)
+            last_24_hours = self.get_iso(now - timedelta(hours=24))  # cut off point - never query beyond 24 hours
             next_page_link = state.get(self.NEXT_PAGE_LINK)
             if not state:
                 self.logger.info("First run")
-                last_24_hours = self.get_iso(now - timedelta(hours=24))
                 parameters = {"since": last_24_hours, "until": now_iso, "limit": 1000}
                 state[self.LAST_COLLECTION_TIMESTAMP] = last_24_hours  # we only change this once we get new events
             else:
@@ -40,7 +40,11 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     state.pop(self.NEXT_PAGE_LINK)
                     self.logger.info("Getting the next page of results...")
                 else:
-                    parameters = {"since": state.get(self.LAST_COLLECTION_TIMESTAMP), "until": now_iso, "limit": 1000}
+                    parameters = {
+                        "since": self.get_since(state, last_24_hours),
+                        "until": now_iso,
+                        "limit": 1000,
+                    }
                     self.logger.info("Subsequent run...")
             try:
                 self.logger.info(f"Calling Okta with parameters={parameters} and next_page={next_page_link}")
@@ -74,6 +78,24 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         :return: formatted time string.
         """
         return time.isoformat("T", "milliseconds").replace("+00:00", "Z")
+
+    def get_since(self, state: dict, cut_off: str) -> str:
+        """
+        If the customer has paused this task for an extended amount of time we don't want start polling events that
+        exceed 24 hours ago. Check if the saved state is beyond this and revert to use the last 24 hours time.
+        :param state: saved state to check and update the time being used.
+        :param cut_off: string time of now - 24 hours.
+        :return: updated time string to use in the parameters.
+        """
+        saved_time = state.get(self.LAST_COLLECTION_TIMESTAMP)
+
+        if saved_time < cut_off:
+            self.logger.info(
+                f"Saved state {saved_time} exceeds the cut off (24 hours)." f" Reverting to use time: {cut_off}"
+            )
+            state[self.LAST_COLLECTION_TIMESTAMP] = cut_off
+
+        return state[self.LAST_COLLECTION_TIMESTAMP]
 
     @staticmethod
     def get_next_page_link(headers: dict) -> str:
