@@ -1,4 +1,4 @@
-name: Plugin Release Workflow
+name: Plugin Staging Release Workflow
 
 on:
   workflow_dispatch:
