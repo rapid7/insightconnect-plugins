@@ -18,23 +18,23 @@
 * Please make sure you enter your credentials with the DOMAIN\username format.
 
 # Supported Product Versions
-
+  
 * Azure Active Directory 2.0.89.0
 
 # Documentation
 
 ## Setup
-
-The connection configuration accepts the following parameters:
+  
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |chase_referrals|boolean|True|True|Allows the plugin to follow referrals from the specified Active Directory server to other Active Directory servers|None|True|
 |host|string|None|True|Server Host, e.g. example.com|None|example.com|
 |port|integer|389|True|Port, e.g. 389|None|389|
 |use_ssl|boolean|None|True|Use SSL?|None|True|
 |username_password|credential_username_password|None|True|Username and password|None|{"username":"user1", "password":"mypassword"}|
-
+  
 Example input:
 
 ```
@@ -44,8 +44,8 @@ Example input:
   "port": 389,
   "use_ssl": true,
   "username_password": {
-    "username": "user1", 
-    "password": "mypassword"
+    "password": "mypassword",
+    "username": "user1"
   }
 }
 ```
@@ -54,16 +54,67 @@ Example input:
 
 ### Actions
 
-#### Unlock User
 
-This action is used to unlock an account.
+#### Add User
+  
+Adds the specified Active Directory user
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|distinguished_name|string|None|True|The distinguished name of the user to unlock|None|CN=user,OU=domain_users,DC=example,DC=com|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|account_disabled|boolean|True|True|Set this to true to disable the user account at creation|None|True|
+|additional_parameters|object|None|False|Add additional user parameters in JSON format|None|{"telephoneNumber":"(617)555-1234"}|
+|domain_name|string|None|True|The domain name this user will belong to|None|example.com|
+|first_name|string|None|True|User's first name|None|John|
+|last_name|string|None|True|User's last name|None|Doe|
+|logon_name|string|None|True|The logon name for the account|None|jdoe|
+|password|password|None|True|The account's starting password|None|mypassword|
+|user_ou|string|Users|True|The OU that the user account will be created in|None|Users|
+|user_principal_name|string|None|True|The users principal name|None|user@example.com|
+  
+Example input:
 
+```
+{
+  "account_disabled": true,
+  "additional_parameters": {
+    "telephoneNumber": "(617)555-1234"
+  },
+  "domain_name": "example.com",
+  "first_name": "John",
+  "last_name": "Doe",
+  "logon_name": "jdoe",
+  "password": "mypassword",
+  "user_ou": "Users",
+  "user_principal_name": "user@example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Operation status|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Delete
+  
+Deletes the LDAP object specified
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|distinguished_name|string|None|True|The distinguished name of the object to delete|None|CN=user,OU=domain_users,DC=example,DC=com|
+  
 Example input:
 
 ```
@@ -75,9 +126,9 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |success|boolean|False|Operation status|True|
-
+  
 Example output:
 
 ```
@@ -86,19 +137,341 @@ Example output:
 }
 ```
 
-#### Query Group Membership
-
-This action is used to query group membership.
+#### Disable User
+  
+Disable an account
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|distinguished_name|string|None|True|The distinguished name of the user to disable|None|CN=user,OU=domain_users,DC=example,DC=com|
+  
+Example input:
+
+```
+{
+  "distinguished_name": "CN=user,OU=domain_users,DC=example,DC=com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Operation status|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Disable Users
+  
+Disable multiple accounts
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|distinguished_names|[]string|None|True|The distinguished names of the users to disable|None|['CN=user,OU=domain_users,DC=example,DC=com']|
+  
+Example input:
+
+```
+{
+  "distinguished_names": "CN=user,OU=domain_users,DC=example,DC=com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|completed|[]string|False|List of successfully disabled users|["CN=user,OU=domain_users,DC=example,DC=com"]|
+|failed|[]modified_user_error|False|List of unsuccessfully disabled users|[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The DN CN=empty_search,DC=example,DC=com was not found" } ]|
+  
+Example output:
+
+```
+{
+  "completed": [
+    "CN=user,OU=domain_users,DC=example,DC=com"
+  ],
+  "failed": [
+    {
+      "dn": "CN=user,OU=domain_users,DC=test,DC=com",
+      "error": "The DN CN=empty_search,DC=example,DC=com was not found"
+    }
+  ]
+}
+```
+
+#### Enable User
+  
+Enable an account
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|distinguished_name|string|None|True|The distinguished name of the user to enable|None|CN=user,OU=domain_users,DC=example,DC=com|
+  
+Example input:
+
+```
+{
+  "distinguished_name": "CN=user,OU=domain_users,DC=example,DC=com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Operation status|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Enable Users
+  
+Enable multiple accounts
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|distinguished_names|[]string|None|True|The distinguished names of the users to enable|None|['CN=user,OU=domain_users,DC=example,DC=com']|
+  
+Example input:
+
+```
+{
+  "distinguished_names": "CN=user,OU=domain_users,DC=example,DC=com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|completed|[]string|False|List of successfully enabled users|["CN=user,OU=domain_users,DC=example,DC=com"]|
+|failed|[]modified_user_error|False|List of unsuccessfully enabled users|[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The DN CN=empty_search,DC=example,DC=com was not found" } ]|
+  
+Example output:
+
+```
+{
+  "completed": [
+    "CN=user,OU=domain_users,DC=example,DC=com"
+  ],
+  "failed": [
+    {
+      "dn": "CN=user,OU=domain_users,DC=test,DC=com",
+      "error": "The DN CN=empty_search,DC=example,DC=com was not found"
+    }
+  ]
+}
+```
+
+#### Force Password Reset
+  
+Force a user to reset their password on next login
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|distinguished_name|string|None|True|The distinguished name of the user who will be forced to reset|None|CN=user,OU=domain_users,DC=example,DC=com|
+  
+Example input:
+
+```
+{
+  "distinguished_name": "CN=user,OU=domain_users,DC=example,DC=com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Operation status|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Add or Remove an Object from Group
+  
+Add or remove an object from an Active Directory group
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|add_remove|string|None|True|Add or remove the group|['add', 'remove']|add|
+|distinguished_name|string|None|True|The distinguished name of the object whose membership will be modified|None|CN=user,OU=domain_users,DC=mydomain,DC=com|
+|group_dn|string|None|True|The Distinguished Name of the group to add or remove|None|CN=group_name,OU=domain_groups,DC=example,DC=com|
+  
+Example input:
+
+```
+{
+  "add_remove": "add",
+  "distinguished_name": "CN=user,OU=domain_users,DC=mydomain,DC=com",
+  "group_dn": "CN=group_name,OU=domain_groups,DC=example,DC=com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Operation status|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Modify Object
+  
+Modify the attributes for an Active Directory object
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|attribute_to_modify|string|None|True|The name of the attribute to modify|None|postalCode|
+|attribute_value|string|None|True|The value of the attribute|None|02114|
+|distinguished_name|string|None|True|The distinguished name of the object to modify|None|CN=user,OU=domain_users,DC=example,DC=com|
+  
+Example input:
+
+```
+{
+  "attribute_to_modify": "postalCode",
+  "attribute_value": "02114",
+  "distinguished_name": "CN=user,OU=domain_users,DC=example,DC=com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Operation status|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Move Object
+  
+Move an Active Directory object from one organizational unit to another
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|distinguished_name|string|None|True|The distinguished name of the user whose membership will be modified|None|CN=user,OU=domain_users,DC=example,DC=com|
+|new_ou|string|None|True|The distinguished name of the OU to move the object to|None|OU=disabled_users,DC=example,DC=com|
+  
+Example input:
+
+```
+{
+  "distinguished_name": "CN=user,OU=domain_users,DC=example,DC=com",
+  "new_ou": "OU=disabled_users,DC=example,DC=com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Operation status|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Query
+  
+Run an LDAP query
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|attributes|[]string|None|False|Attributes to search. If empty return all attributes|None|['createTimestamp', 'creatorsName']|
+|search_base|string|None|True|The base of the search request|None|DC=example,DC=com|
+|search_filter|string|None|True|The filter of the search request. It must conform to the LDAP filter syntax specified in RFC4515|None|(sAMAccountName=joesmith)|
+  
+Example input:
+
+```
+{
+  "attributes": "createTimestamp",
+  "search_base": "DC=example,DC=com",
+  "search_filter": "(sAMAccountName=joesmith)"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|count|integer|False|Number of results|1|
+|results|[]result|False|Results returned|[ { "dn": string, "attributes": { "pwdLastSet": date, "objectClass": [ string, string, string, string ], "memberOf": [ string ], "sAMAccountType": int, "uSNChanged": int, "givenName": string, "userPrincipalName": string, "countryCode": int, "lastLogon": date, "sAMAccountName": string, "name": string, "primaryGroupID": int, "dSCorePropagationData": [ date ], "displayName": string, "logonCount": int, "cn": string, "objectSid": string, "codePage": int, "badPwdCount": int, "objectGUID": string, "distinguishedName": string, "whenChanged": date, "badPasswordTime": date, "instanceType": int, "uSNCreated": int, "sn": string, "whenCreated": date, "accountExpires": date, "userAccountControl": int, "lastLogoff": date, "objectCategory": "string" } } ]|
+  
+Example output:
+
+```
+{
+  "count": 1,
+  "results": "[ { \"dn\": string, \"attributes\": { \"pwdLastSet\": date, \"objectClass\": [ string, string, string, string ], \"memberOf\": [ string ], \"sAMAccountType\": int, \"uSNChanged\": int, \"givenName\": string, \"userPrincipalName\": string, \"countryCode\": int, \"lastLogon\": date, \"sAMAccountName\": string, \"name\": string, \"primaryGroupID\": int, \"dSCorePropagationData\": [ date ], \"displayName\": string, \"logonCount\": int, \"cn\": string, \"objectSid\": string, \"codePage\": int, \"badPwdCount\": int, \"objectGUID\": string, \"distinguishedName\": string, \"whenChanged\": date, \"badPasswordTime\": date, \"instanceType\": int, \"uSNCreated\": int, \"sn\": string, \"whenCreated\": date, \"accountExpires\": date, \"userAccountControl\": int, \"lastLogoff\": date, \"objectCategory\": \"string\" } } ]"
+}
+```
+
+#### Query Group Membership
+  
+Return users and groups that belonging to the specific group
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |expand_nested_groups|boolean|None|False|Expand nested groups in results|None|True|
 |group_name|string|None|True|Name of the group for which membership will be checked|None|Domain Users|
 |include_groups|boolean|None|False|Include groups in results|None|True|
 |search_base|string|None|True|The base of the search request|None|DC=example,DC=com|
-
+  
 Example input:
 
 ```
@@ -113,10 +486,10 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |count|integer|False|Number of results|1|
 |results|[]results|False|Results returned|[ { "attributes": { "accountExpires": "9999-12-31 23:59:59.999999+00:00", "adminCount": 0, "badPasswordTime": "1601-01-01 00:00:00+00:00", "badPwdCount": 0, "cn": "Example User", "codePage": 0, "countryCode": 0, "dSCorePropagationData": [ "2021-01-14 18:17:28+00:00", "2021-01-14 17:48:27+00:00", "1601-01-01 00:04:16+00:00" ], "description": [ "Example Account" ], "distinguishedName": "CN=Example User,CN=Users,DC=example,DC=com", "instanceType": 4, "isCriticalSystemObject": true, "lastLogoff": "1601-01-01 00:00:00+00:00", "lastLogon": "1601-01-01 00:00:00+00:00", "logonCount": 0, "memberOf": [ "CN=Domain Users,CN=Users,example,DC=com" ], "name": "Example User", "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=example,DC=com", "objectClass": [ "top", "person", "organizationalPerson", "user" ], "objectGUID": "{b45138aa-be39-47d9-ab57-3aee8f381f87}", "objectSid": "S-1-5-33-3456299977-1009817396-2685666617-303", "primaryGroupID": 513, "pwdLastSet": "2021-01-14 17:48:26.197384+00:00", "sAMAccountName": "Example User", "sAMAccountType": 489006322, "showInAdvancedViewOnly": true, "uSNChanged": 16419, "uSNCreated": 12324, "userAccountControl": 514, "whenChanged": "2021-01-14 18:17:28+00:00", "whenCreated": "2021-01-14 17:48:26+00:00" }, "dn": "CN=Example User,CN=Users,DC=example,DC=com" } ]|
-
+  
 Example output:
 
 ```
@@ -174,344 +547,19 @@ Example output:
     }
   ]
 }
-
-```
-
-#### Modify Object
-
-This action is used to modify the attributes of an Active Directory object.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|attribute_to_modify|string|None|True|The name of the attribute to modify|None|postalCode|
-|attribute_value|string|None|True|The value of the attribute|None|02114|
-|distinguished_name|string|None|True|The distinguished name of the object to modify|None|CN=user,OU=domain_users,DC=example,DC=com|
-
-Example input:
-
-```
-{
-  "attribute_to_modify": "postalCode",
-  "attribute_value": "02114",
-  "distinguished_name": "CN=user,OU=domain_users,DC=example,DC=com"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|False|Operation status|True|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
-#### Add or Remove an Object from Group
-
-This action is used to add or remove an object from an Active Directory group.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|add_remove|string|None|True|Add or remove the group|['add', 'remove']|add|
-|distinguished_name|string|None|True|The distinguished name of the object whose membership will be modified|None|CN=user,OU=domain_users,DC=mydomain,DC=com|
-|group_dn|string|None|True|The Distinguished Name of the group to add or remove|None|CN=group_name,OU=domain_groups,DC=example,DC=com|
-
-Example input:
-
-```
-{
-  "add_remove": "add",
-  "distinguished_name": "CN=user,OU=domain_users,DC=mydomain,DC=com",
-  "group_dn": "CN=group_name,OU=domain_groups,DC=example,DC=com"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|False|Operation status|True|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
-#### Add User
-
-This action is used to add the specified Active Directory user.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|account_disabled|boolean|True|True|Set this to true to disable the user account at creation|None|True|
-|additional_parameters|object|None|False|Add additional user parameters in JSON format|None|{"telephoneNumber":"(617)555-1234"}|
-|domain_name|string|None|True|The domain name this user will belong to|None|example.com|
-|first_name|string|None|True|User's first name|None|John|
-|last_name|string|None|True|User's last name|None|Doe|
-|logon_name|string|None|True|The logon name for the account|None|jdoe|
-|password|password|None|True|The account's starting password|None|mypassword|
-|user_ou|string|Users|True|The OU that the user account will be created in|None|Users|
-|user_principal_name|string|None|True|The users principal name|None|user@example.com|
-
-Example input:
-
-```
-{
-  "account_disabled": true,
-  "domain_name": "example.com",
-  "first_name": "John",
-  "last_name": "Doe",
-  "logon_name": "jdoe",
-  "password": "mypassword",
-  "user_ou": "Users",
-  "user_principal_name": "user@example.com"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|False|Operation status|True|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
-#### Query
-
-This action is used to run an LDAP query.
-
-For more information on LDAP queries see https://ldap3.readthedocs.io/tutorial_searches.html
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|attributes|[]string|None|False|Attributes to search. If empty return all attributes|None|["createTimestamp", "creatorsName"]|
-|search_base|string|None|True|The base of the search request|None|DC=example,DC=com|
-|search_filter|string|None|True|The filter of the search request. It must conform to the LDAP filter syntax specified in RFC4515|None|(sAMAccountName=joesmith)|
-
-Example input:
-
-```
-{
-  "attributes": [
-    "createTimestamp",
-    "creatorsName"
-  ],
-  "search_base": "DC=example,DC=com",
-  "search_filter": "(sAMAccountName=joesmith)"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|count|integer|False|Number of results|1|
-|results|[]result|False|Results returned|[ { "dn": string, "attributes": { "pwdLastSet": date, "objectClass": [ string, string, string, string ], "memberOf": [ string ], "sAMAccountType": int, "uSNChanged": int, "givenName": string, "userPrincipalName": string, "countryCode": int, "lastLogon": date, "sAMAccountName": string, "name": string, "primaryGroupID": int, "dSCorePropagationData": [ date ], "displayName": string, "logonCount": int, "cn": string, "objectSid": string, "codePage": int, "badPwdCount": int, "objectGUID": string, "distinguishedName": string, "whenChanged": date, "badPasswordTime": date, "instanceType": int, "uSNCreated": int, "sn": string, "whenCreated": date, "accountExpires": date, "userAccountControl": int, "lastLogoff": date, "objectCategory": "string" } } ]|
-
-Example output:
-
-```
-
-{
-  "results": [
-    {
-      "dn": "string",
-      "attributes": {
-        "pwdLastSet": "date",
-        "objectClass": [
-          "string",
-          "string",
-          "string",
-          "string"
-        ],
-        "memberOf": [
-          "string"
-        ],
-        "sAMAccountType": "int",
-        "uSNChanged": "int",
-        "givenName": "string",
-        "userPrincipalName": "string",
-        "countryCode": "int",
-        "lastLogon": "date",
-        "sAMAccountName": "string",
-        "name": "string",
-        "primaryGroupID": "int",
-        "dSCorePropagationData": [
-          "date"
-        ],
-        "displayName": "string",
-        "logonCount": "int",
-        "cn": "string",
-        "objectSid": "string",
-        "codePage": "int",
-        "badPwdCount": "int",
-        "objectGUID": "string",
-        "distinguishedName": "string",
-        "whenChanged": "date",
-        "badPasswordTime": "date",
-        "instanceType": "int",
-        "uSNCreated": "int",
-        "sn": "string",
-        "whenCreated": "date",
-        "accountExpires": "date",
-        "userAccountControl": "int",
-        "lastLogoff": "date",
-        "objectCategory": "string"
-      }
-    }
-  ]
-}
-
-```
-
-#### Enable
-
-This action is used to enable an account.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|distinguished_name|string|None|True|The distinguished name of the user to enable|None|CN=user,OU=domain_users,DC=example,DC=com|
-
-Example input:
-
-```
-{
-  "distinguished_name": "CN=user,OU=domain_users,DC=example,DC=com"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|False|Operation status|True|
-
-Example output:
-
-```
-
-{
-  "success": true
-}
-
-```
-
-#### Enable Users
-
-This action is used to enable accounts.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|distinguished_names|[]string|None|True|The distinguished names of the users to enable|None|["CN=user,OU=domain_users,DC=example,DC=com"]|
-
-Example input:
-
-```
-{
-  "distinguished_names": [
-    "CN=user,OU=domain_users,DC=example,DC=com"
-  ]
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|completed|[]string|False|List of successfully enabled users|["CN=user,OU=domain_users,DC=example,DC=com"]|
-|failed|[]modified_user_error|False|List of unsuccessfully enabled users|[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The DN CN=empty_search,DC=example,DC=com was not found" } ]|
-
-Example output:
-
-```
-
-{
-  "completed": [
-    "CN=user,OU=domain_users,DC=example,DC=com"
-  ],
-  "failed": [
-    {
-      "dn": "CN=user,OU=domain_users,DC=test,DC=com",
-      "error": "The DN CN=empty_search,DC=example,DC=com was not found"
-    }
-  ]
-}
-
-```
-
-#### Move Object
-
-This action is used to move an Active Directory object from one organizational unit to another.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|distinguished_name|string|None|True|The distinguished name of the user whose membership will be modified|None|CN=user,OU=domain_users,DC=example,DC=com|
-|new_ou|string|None|True|The distinguished name of the OU to move the object to|None|OU=disabled_users,DC=example,DC=com|
-
-Example input:
-
-```
-{
-  "distinguished_name": "CN=user,OU=domain_users,DC=example,DC=com",
-  "new_ou": "OU=disabled_users,DC=example,DC=com"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|False|Operation status|True|
-
-Example output:
-
-```
-
-{
-  "success": true
-}
-
 ```
 
 #### Reset Password
-
-This action is used to reset a users password.
+  
+Reset a users password
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |distinguished_name|string|None|True|The distinguished name of the user whose membership will be modified|None|CN=user,OU=domain_users,DC=example,DC=com|
 |new_password|password|None|True|The new password|None|mypassword|
-
+  
 Example input:
 
 ```
@@ -524,28 +572,27 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |success|boolean|False|Operation status|True|
-
+  
 Example output:
 
 ```
-
 {
   "success": true
 }
 ```
 
-#### Disable
-
-This action is used to disable an account.
+#### Unlock User
+  
+Unlock an account
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|distinguished_name|string|None|True|The distinguished name of the user to disable|None|CN=user,OU=domain_users,DC=example,DC=com|
-
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|distinguished_name|string|None|True|The distinguished name of the user to unlock|None|CN=user,OU=domain_users,DC=example,DC=com|
+  
 Example input:
 
 ```
@@ -557,123 +604,9 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |success|boolean|False|Operation status|True|
-
-Example output:
-
-```
-
-{
-  "success": true
-}
-
-```
-
-
-#### Disable Users
-
-This action is used to disable accounts.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|distinguished_names|[]string|None|True|The distinguished names of the users to disable|None|["CN=user,OU=domain_users,DC=example,DC=com"]|
-
-Example input:
-
-```
-{
-  "distinguished_names": [
-    "CN=user,OU=domain_users,DC=example,DC=com"
-  ]
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|completed|[]string|False|List of successfully disabled users|["CN=user,OU=domain_users,DC=example,DC=com"]|
-|failed|[]modified_user_error|False|List of unsuccessfully disabled users|[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The DN CN=empty_search,DC=example,DC=com was not found" } ]|
-
-Example output:
-
-```
-
-{
-  "completed": [
-    "CN=user,OU=domain_users,DC=example,DC=com"
-  ],
-  "failed": [
-    {
-      "dn": "CN=user,OU=domain_users,DC=test,DC=com",
-      "error": "The DN CN=empty_search,DC=example,DC=com was not found"
-    }
-  ]
-}
-
-```
-
-#### Delete
-
-This action is used to delete the LDAP object specified.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|distinguished_name|string|None|True|The distinguished name of the object to delete|None|CN=user,OU=domain_users,DC=example,DC=com|
-
-Example input:
-
-```
-{
-  "distinguished_name": "CN=user,OU=domain_users,DC=example,DC=com"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|False|Operation status|True|
-
-Example output:
-
-```
-
-{
-  "success": true
-}
-
-```
-
-#### Force Password Reset
-
-This action is used to force a user to reset their password on next login.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|distinguished_name|string|None|True|The distinguished name of the user who will be forced to reset|None|CN=user,OU=domain_users,DC=example,DC=com|
-
-Example input:
-
-```
-{
-  "distinguished_name": "CN=user,OU=domain_users,DC=example,DC=com"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|False|Operation status|True|
-
+  
 Example output:
 
 ```
@@ -683,67 +616,72 @@ Example output:
 ```
 
 ### Triggers
+  
+*This plugin does not contain any triggers.*
 
-_This plugin does not contain any triggers._
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-### Custom Output Types
+### Custom Types
+  
+**attributes**
 
-#### attributes
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Account Expires|string|None|False|Account expires|None|
+|Admin Count|integer|None|False|Admin count|None|
+|Bad Password Time|string|None|False|Bad password time|None|
+|Bad PWD Count|integer|None|False|Bad PWD count|None|
+|CN|string|None|False|CN|None|
+|Code Page|integer|None|False|Code page|None|
+|Country Code|integer|None|False|Country code|None|
+|DS Core Propagation Data|[]string|None|False|DS core propagation data|None|
+|Description|[]string|None|False|Description|None|
+|Distinguished Name|string|None|False|Distinguished name|None|
+|Instance Type|integer|None|False|Instance type|None|
+|Is Critical System Object|boolean|None|False|Is critical system object|None|
+|Last Log Off|string|None|False|Last log off|None|
+|Last Log On|string|None|False|Last log on|None|
+|Last Log On Timestamp|string|None|False|Last log on timestamp|None|
+|Log On Count|integer|None|False|Log on count|None|
+|Member Of|[]string|None|False|Member of|None|
+|Name|string|None|False|Name|None|
+|Object Category|string|None|False|Object category|None|
+|Object Class|[]string|None|False|Object class|None|
+|Object GUID|string|None|False|Object GUID|None|
+|Object SID|string|None|False|Object SID|None|
+|Primary Group ID|integer|None|False|Primary group ID|None|
+|PWD Last Set|string|None|False|PWD last set|None|
+|SAM Account Name|string|None|False|SAM account name|None|
+|SAM Account Type|integer|None|False|SAM account type|None|
+|USN changed|integer|None|False|USN changed|None|
+|USN created|integer|None|False|USN created|None|
+|User Account Control|integer|None|False|User account control|None|
+|When Changed|string|None|False|When changed|None|
+|When Created|string|None|False|When created|None|
+  
+**results**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Account Expires|string|False|Account expires|
-|Admin Count|integer|False|Admin count|
-|Bad Password Time|string|False|Bad password time|
-|Bad PWD Count|integer|False|Bad PWD count|
-|CN|string|False|CN|
-|Code Page|integer|False|Code page|
-|Country Code|integer|False|Country code|
-|DS Core Propagation Data|[]string|False|DS core propagation data|
-|Description|[]string|False|Description|
-|Distinguished Name|string|False|Distinguished name|
-|Instance Type|integer|False|Instance type|
-|Is Critical System Object|boolean|False|Is critical system object|
-|Last Log Off|string|False|Last log off|
-|Last Log On|string|False|Last log on|
-|Last Log On Timestamp|string|False|Last log on timestamp|
-|Log On Count|integer|False|Log on count|
-|Member Of|[]string|False|Member of|
-|Name|string|False|Name|
-|Object Category|string|False|Object category|
-|Object Class|[]string|False|Object class|
-|Object GUID|string|False|Object GUID|
-|Object SID|string|False|Object SID|
-|Primary Group ID|integer|False|Primary group ID|
-|PWD Last Set|string|False|PWD last set|
-|SAM Account Name|string|False|SAM account name|
-|SAM Account Type|integer|False|SAM account type|
-|USN changed|integer|False|USN changed|
-|USN created|integer|False|USN created|
-|User Account Control|integer|False|User account control|
-|When Changed|string|False|When changed|
-|When Created|string|False|When created|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Attributes|attributes|None|False|Attributes|None|
+|DN|string|None|False|DN|None|
+  
+**result**
 
-#### result
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|attributes|object|None|None|None|None|
+|dn|string|None|None|None|None|
+  
+**modified_user_error**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Attributes|object|False|None|
-|Dn|string|False|None|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|DN|string|None|False|DN|None|
+|Error|string|None|False|Error|None|
 
-#### results
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Attributes|attributes|False|Attributes|
-|DN|string|False|DN|
-
-#### modified_user_error
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Error|string|False|Error|
-|DN|string|False|DN|
 
 ## Troubleshooting
 
@@ -771,6 +709,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 8.0.1 - Action: `Disable User` & `Enable User` - Rename title of actions from `Disable` & `Enable` to `Disable Users` & `Enable Users` on the front-end.
 * 8.0.0 - Update actions Enable Users and Enable Users to add outputs Completed and Failed and remove output All Operations Succeeded
 * 7.0.0 - Update actions Enable Users and Enable Users to replace output Success with All Operations Succeeded True/False
 * 6.0.0 - Add actions Enable Users and Disable users allowing for the bulk enablement/disablement of users
