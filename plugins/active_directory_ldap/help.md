@@ -672,8 +672,8 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|attributes|object|None|None|None|None|
-|dn|string|None|None|None|None|
+|Attributes|object|None|None|None|None|
+|DN|string|None|None|None|None|
   
 **modified_user_error**
 
@@ -708,8 +708,7 @@ objectname is the logon name of the user you are looking for. The DN can then be
 the query results, and then using the variable step $item.dn
 
 # Version History
-
-* 8.0.1 - Action: `Disable User` & `Enable User` - Rename title of actions from `Disable` & `Enable` to `Disable Users` & `Enable Users` on the front-end.
+* 9.0.0 - Action: `Disable User` & `Enable User` - Rename title of actions from `Disable` & `Enable` to `Disable Users` & `Enable Users` on the front-end.
 * 8.0.0 - Update actions Enable Users and Enable Users to add outputs Completed and Failed and remove output All Operations Succeeded
 * 7.0.0 - Update actions Enable Users and Enable Users to replace output Success with All Operations Succeeded True/False
 * 6.0.0 - Add actions Enable Users and Disable users allowing for the bulk enablement/disablement of users

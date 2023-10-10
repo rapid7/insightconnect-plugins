@@ -87,10 +87,12 @@ class QueryOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "attributes": {
           "type": "object",
+          "title": "Attributes",
           "order": 1
         },
         "dn": {
           "type": "string",
+          "title": "DN",
           "order": 2
         }
       }
