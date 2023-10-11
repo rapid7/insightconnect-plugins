@@ -2,54 +2,10 @@ name: Plugin Release Workflow
 on:
   workflow_dispatch:
     inputs:
-      RELEASE_PROD_CLOUD_US:
-        description: 'Release for us environment.'
+      RELEASE_ENVIRONMENTS:
+        description: 'Release environments, comma seperated. Typically all should be selected.'
         required: true
-        default: true
-      RELEASE_PROD_CLOUD_EU:
-        description: 'Release for eu environment.'
-        required: true
-        default: true
-      RELEASE_PROD_CLOUD_CA:
-        description: 'Release for ca environment.'
-        required: true
-        default: true
-      RELEASE_PROD_CLOUD_AU:
-        description: 'Release for au environment.'
-        required: true
-        default: true
-      RELEASE_PROD_CLOUD_AP:
-        description: 'Release for ap environment.'
-        required: true
-        default: true
-      RELEASE_PROD_CLOUD_US2:
-        description: 'Release for us2 environment.'
-        required: true
-        default: true
-      RELEASE_PROD_CLOUD_US3:
-        description: 'Release for us3 environment.'
-        required: true
-        default: true
-      RELEASE_INT_CLOUD_US:
-        description: 'Release for us int environment.'
-        required: true
-        default: true
-      RELEASE_HUB_PROD:
-        description: 'Release for hub prod environment.'
-        required: true
-        default: true
-      RELEASE_HUB_STAGING:
-        description: 'Release for hub staging environment.'
-        required: true
-        default: true
-      RELEASE_ALLIANCE_PROD:
-        description: 'Release for alliance prod environment.'
-        required: true
-        default: true
-      RELEASE_ALLIANCE_STAGING:
-        description: 'Release for alliance staging environment.'
-        required: true
-        default: true
+        default: 'RELEASE_PROD_CLOUD_US1,RELEASE_PROD_CLOUD_EU,RELEASE_PROD_CLOUD_CA,RELEASE_PROD_CLOUD_AU,RELEASE_PROD_CLOUD_AP,RELEASE_PROD_CLOUD_US2,RELEASE_PROD_CLOUD_US3,RELEASE_INT_CLOUD_US,RELEASE_HUB_PROD,RELEASE_HUB_STAGING,RELEASE_ALLIANCE_PROD,RELEASE_ALLIANCE_STAGING'
       INSIGHT_KOMAND_CLEAN:
         description: 'Docker image cleanup.'
         required: true
@@ -122,23 +78,72 @@ jobs:
           echo "INSIGHT_KOMAND_PLUGIN_NAME=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_NAME || '' }}" >> $GITHUB_ENV
           echo "INSIGHT_KOMAND_PLUGIN_ALL=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_ALL || '' }}" >> $GITHUB_ENV
           echo "INSIGHT_KOMAND_SIMULATE=${{ github.event.inputs.INSIGHT_KOMAND_SIMULATE || 'false' }}" >> $GITHUB_ENV
-          echo "INSIGHT_KOMAND_FORCE_UPDATE=${{ github.event.INSIGHT_KOMAND_FORCE_UPDATE || 'false' }}" >> $GITHUB_ENV
-          echo "INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION=${{ github.event.INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION || 'Icon,Registry,Market,Help' }}" >> $GITHUB_ENV
-          echo "INSIGHT_KOMAND_CLEAN=${{ github.event.INSIGHT_KOMAND_CLEAN || 'None' }}" >> $GITHUB_ENV
-          echo "INSIGHT_KOMAND_BRANCH=${{ github.event.INSIGHT_KOMAND_BRANCH || 'master' }}" >> $GITHUB_ENV
-          echo "INSIGHT_KOMAND_OVERRIDE_BLACKLISTS=${{ github.event.INSIGHT_KOMAND_OVERRIDE_BLACKLISTS || 'false' }}" >> $GITHUB_ENV
-          echo "RELEASE_PROD_CLOUD_US=${{ github.event.RELEASE_PROD_CLOUD_US || 'true' }}" >> $GITHUB_ENV
-          echo "RELEASE_PROD_CLOUD_EU=${{ github.event.RELEASE_PROD_CLOUD_EU || 'true' }}" >> $GITHUB_ENV
-          echo "RELEASE_PROD_CLOUD_AP=${{ github.event.RELEASE_PROD_CLOUD_AP || 'true' }}" >> $GITHUB_ENV
-          echo "RELEASE_PROD_CLOUD_AU=${{ github.event.RELEASE_PROD_CLOUD_AU || 'true' }}" >> $GITHUB_ENV
-          echo "RELEASE_PROD_CLOUD_CA=${{ github.event.RELEASE_PROD_CLOUD_CA || 'true' }}" >> $GITHUB_ENV
-          echo "RELEASE_PROD_CLOUD_US2=${{ github.event.RELEASE_PROD_CLOUD_US2 || 'true' }}" >> $GITHUB_ENV
-          echo "RELEASE_PROD_CLOUD_US3=${{ github.event.RELEASE_PROD_CLOUD_US3 || 'true' }}" >> $GITHUB_ENV
-          echo "RELEASE_HUB_PROD=${{ github.event.RELEASE_HUB_PROD || 'true' }}" >> $GITHUB_ENV
-          echo "RELEASE_HUB_STAGING=${{ github.event.RELEASE_HUB_STAGING || 'true' }}" >> $GITHUB_ENV
-          echo "RELEASE_ALLIANCE_PROD=${{ github.event.RELEASE_ALLIANCE_PROD || 'true' }}" >> $GITHUB_ENV
-          echo "RELEASE_ALLIANCE_STAGING=${{ github.event.RELEASE_ALLIANCE_STAGING || 'true' }}" >> $GITHUB_ENV
-          echo "RELEASE_INT_CLOUD_US=${{ github.event.RELEASE_INT_CLOUD_US || 'true' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_FORCE_UPDATE=${{ github.event.inputs.INSIGHT_KOMAND_FORCE_UPDATE || 'false' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION || 'Icon,Registry,Market,Help' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_CLEAN=${{ github.event.inputs.INSIGHT_KOMAND_CLEAN || 'None' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_BRANCH=${{ github.event.inputs.INSIGHT_KOMAND_BRANCH || 'master' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_OVERRIDE_BLACKLISTS=${{ github.event.inputs.INSIGHT_KOMAND_OVERRIDE_BLACKLISTS || 'false' }}" >> $GITHUB_ENV
+          export RELEASE_ENVIRONMENTS=${{ github.event.inputs.RELEASE_ENVIRONMENTS || 'RELEASE_PROD_CLOUD_US1,RELEASE_PROD_CLOUD_EU,RELEASE_PROD_CLOUD_CA,RELEASE_PROD_CLOUD_AU,RELEASE_PROD_CLOUD_AP,RELEASE_PROD_CLOUD_US2,RELEASE_PROD_CLOUD_US3,RELEASE_INT_CLOUD_US,RELEASE_HUB_PROD,RELEASE_HUB_STAGING,RELEASE_ALLIANCE_PROD,RELEASE_ALLIANCE_STAGING' }}
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_PROD_CLOUD_US1"* ]]; then
+            echo "RELEASE_PROD_CLOUD_US=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_PROD_CLOUD_US=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_PROD_CLOUD_US2"* ]]; then
+            echo "RELEASE_PROD_CLOUD_US2=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_PROD_CLOUD_US2=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_PROD_CLOUD_US3"* ]]; then
+            echo "RELEASE_PROD_CLOUD_US3=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_PROD_CLOUD_US3=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_PROD_CLOUD_EU"* ]]; then
+            echo "RELEASE_PROD_CLOUD_EU=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_PROD_CLOUD_EU=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_PROD_CLOUD_CA"* ]]; then
+            echo "RELEASE_PROD_CLOUD_CA=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_PROD_CLOUD_CA=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_PROD_CLOUD_AU"* ]]; then
+            echo "RELEASE_PROD_CLOUD_AU=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_PROD_CLOUD_AU=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_PROD_CLOUD_AP"* ]]; then
+            echo "RELEASE_PROD_CLOUD_AP=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_PROD_CLOUD_AP=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_INT_CLOUD_US"* ]]; then
+            echo "RELEASE_INT_CLOUD_US=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_INT_CLOUD_US=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_HUB_PROD"* ]]; then
+            echo "RELEASE_HUB_PROD=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_HUB_PROD=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_HUB_STAGING"* ]]; then
+            echo "RELEASE_HUB_STAGING=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_HUB_STAGING=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_ALLIANCE_STAGING"* ]]; then
+            echo "RELEASE_ALLIANCE_STAGING=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_ALLIANCE_STAGING=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_ALLIANCE_PROD"* ]]; then
+            echo "RELEASE_ALLIANCE_PROD=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_ALLIANCE_PROD=false" >> $GITHUB_ENV
+          fi
 
       - name: Checkout Repository
         id: checkoutRepository

@@ -2,18 +2,10 @@ name: Plugin Staging Release Workflow
 on:
   workflow_dispatch:
     inputs:
-      RELEASE_INT_CLOUD_US:
-        description: 'Release for us int environment.'
+      RELEASE_ENVIRONMENTS:
+        description: 'Release environments, comma seperated. Typically all should be selected.'
         required: true
-        default: true
-      RELEASE_HUB_STAGING:
-        description: 'Release for hub staging environment.'
-        required: true
-        default: true
-      RELEASE_ALLIANCE_STAGING:
-        description: 'Release for alliance staging environment.'
-        required: true
-        default: true
+        default: 'RELEASE_INT_CLOUD_US,RELEASE_HUB_STAGING,RELEASE_ALLIANCE_STAGING'
       INSIGHT_KOMAND_CLEAN:
         description: 'Docker image cleanup.'
         required: true
@@ -94,15 +86,39 @@ jobs:
           echo "INSIGHT_KOMAND_PLUGIN_NAME=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_NAME || '' }}" >> $GITHUB_ENV
           echo "INSIGHT_KOMAND_PLUGIN_ALL=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_ALL || '' }}" >> $GITHUB_ENV
           echo "INSIGHT_KOMAND_SIMULATE=${{ github.event.inputs.INSIGHT_KOMAND_SIMULATE || 'false' }}" >> $GITHUB_ENV
-          echo "INSIGHT_KOMAND_FORCE_UPDATE=${{ github.event.INSIGHT_KOMAND_FORCE_UPDATE || 'false' }}" >> $GITHUB_ENV
-          echo "INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION=${{ github.event.INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION || 'Icon,Registry,Market,Help' }}" >> $GITHUB_ENV
-          echo "INSIGHT_KOMAND_CLEAN=${{ github.event.INSIGHT_KOMAND_CLEAN || 'None' }}" >> $GITHUB_ENV
-          echo "INSIGHT_KOMAND_BRANCH=${{ github.event.INSIGHT_KOMAND_BRANCH || 'develop' }}" >> $GITHUB_ENV
-          echo "INSIGHT_KOMAND_OVERRIDE_BLACKLISTS=${{ github.event.INSIGHT_KOMAND_OVERRIDE_BLACKLISTS || 'false' }}" >> $GITHUB_ENV
-          echo "RELEASE_HUB_STAGING=${{ github.event.RELEASE_HUB_STAGING || 'true' }}" >> $GITHUB_ENV
-          echo "RELEASE_ALLIANCE_STAGING=${{ github.event.RELEASE_ALLIANCE_STAGING || 'true' }}" >> $GITHUB_ENV
-          echo "RELEASE_INT_CLOUD_US=${{ github.event.RELEASE_INT_CLOUD_US || 'true' }}" >> $GITHUB_ENV
-          echo "PRERELEASE=${{ github.event.PRERELEASE || 'true' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_FORCE_UPDATE=${{ github.event.inputs.INSIGHT_KOMAND_FORCE_UPDATE || 'false' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION || 'Icon,Registry,Market,Help' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_CLEAN=${{ github.event.inputs.INSIGHT_KOMAND_CLEAN || 'None' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_BRANCH=${{ github.event.inputs.INSIGHT_KOMAND_BRANCH || 'develop' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_OVERRIDE_BLACKLISTS=${{ github.event.inputs.INSIGHT_KOMAND_OVERRIDE_BLACKLISTS || 'false' }}" >> $GITHUB_ENV
+          echo "RELEASE_HUB_STAGING=${{ github.event.inputs.RELEASE_HUB_STAGING || 'true' }}" >> $GITHUB_ENV
+          echo "RELEASE_ALLIANCE_STAGING=${{ github.event.inputs.RELEASE_ALLIANCE_STAGING || 'true' }}" >> $GITHUB_ENV
+          echo "RELEASE_INT_CLOUD_US=${{ github.event.inputs.RELEASE_INT_CLOUD_US || 'true' }}" >> $GITHUB_ENV
+          echo "PRERELEASE=${{ github.event.inputs.PRERELEASE || 'true' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_PLUGIN_NAME=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_NAME || '' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_PLUGIN_ALL=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_ALL || '' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_SIMULATE=${{ github.event.inputs.INSIGHT_KOMAND_SIMULATE || 'false' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_FORCE_UPDATE=${{ github.event.inputs.INSIGHT_KOMAND_FORCE_UPDATE || 'false' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION || 'Icon,Registry,Market,Help' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_CLEAN=${{ github.event.inputs.INSIGHT_KOMAND_CLEAN || 'None' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_BRANCH=${{ github.event.inputs.INSIGHT_KOMAND_BRANCH || 'master' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_OVERRIDE_BLACKLISTS=${{ github.event.inputs.INSIGHT_KOMAND_OVERRIDE_BLACKLISTS || 'false' }}" >> $GITHUB_ENV
+          export RELEASE_ENVIRONMENTS=${{ github.event.inputs.RELEASE_ENVIRONMENTS || 'RELEASE_INT_CLOUD_US,RELEASE_HUB_STAGING,RELEASE_ALLIANCE_STAGING' }}
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_INT_CLOUD_US"* ]]; then
+            echo "RELEASE_INT_CLOUD_US=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_INT_CLOUD_US=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_HUB_STAGING"* ]]; then
+            echo "RELEASE_HUB_STAGING=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_HUB_STAGING=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_ALLIANCE_STAGING"* ]]; then
+            echo "RELEASE_ALLIANCE_STAGING=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_ALLIANCE_STAGING=false" >> $GITHUB_ENV
+          fi
 
       - name: Prerelease Timestamp
         id: prereleaseTimestamp
