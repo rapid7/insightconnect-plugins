@@ -1206,10 +1206,10 @@ Retrieve a page of investigations matching the given request parameters
 |email|string|None|False|A user's email address, where only investigations assigned to that user will be included|None|user@example.com|
 |end_time|date|None|False|An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned|None|2020-06-01T12:11:13+05:30|
 |index|integer|0|True|Zero-based index of the page to retrieve, where value must be greater than or equal to 0|None|1|
-|priorities|[]string|None|False|A comma-separated list of investigation priorities to include in the result, where possible values are LOW, MEDIUM, HIGH, CRITICAL|None|["LOW", "MEDIUM", "HIGH", "CRITICAL"]|
+|priorities|[]string|None|False|A comma-separated list of investigation priorities to include in the result, where possible values are LOW, MEDIUM, HIGH, CRITICAL|None|['LOW', 'MEDIUM', 'HIGH', 'CRITICAL']|
 |size|integer|100|True|Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100|None|100|
 |sort|string|None|False|A field for investigations to be sorted|['', 'Create time Ascending', 'Create time Descending', 'Priority Ascending', 'Priority Descending', 'Last alert time Ascending', 'Last alert time Descending', 'RRN Ascending', 'RRN Descending', 'Alerts most recent created time Ascending', 'Alerts most recent created time Descending', 'Alerts most recent detection created time Ascending', 'Alerts most recent detection created time Descending']|Create time Ascending|
-|sources|[]string|None|False|A comma-separated list of investigation sources to include in the result, where possible values are USER, ALERT, HUNT, AUTOMATION|None|["USER","ALERT"]|
+|sources|[]string|None|False|A comma-separated list of investigation sources to include in the result, where possible values are USER, ALERT, HUNT, AUTOMATION|None|['USER','ALERT']|
 |start_time|date|None|False|An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned|None|2020-06-01T12:11:13+05:30|
 |statuses|[]string|None|False|Comma-separated list of investigation statuses to include in the result. Possible values are OPEN, CLOSED, INVESTIGATING, WAITING|None|['CLOSED']|
   
@@ -1401,7 +1401,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |rejected_indicators|[]string|False|The list of indicators that have been rejected during the update|['example.com', '10.0.0.1']|
-|threat|threat|False|The information about the threat|{'name': 'bad-virus', 'note': 'test', 'published': False, 'indicator_count': 2}|
+|threat|threat|False|The information about the threat|{'name': 'bad-virus','note': 'test','published': False,'indicator_count': 2}|
   
 Example output:
 
@@ -1429,7 +1429,7 @@ Allows to search for investigations that match the given criteria
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |end_time|date|None|False|The ending time when investigations were created|None|2020-09-06 12:07:55.136666+00:00|
 |index|integer|0|True|Zero-based index of the page to retrieve, where value must be greater than or equal to 0|None|1|
-|search|[]object|None|False|The criteria for which entities to return|None|[{"field": "Example Field", "operator": "EQUALS", "value": "Test"}]|
+|search|[]object|None|False|The criteria for which entities to return|None|[{'field': 'Example Field', 'operator': 'EQUALS', 'value': 'Test'}]|
 |size|integer|100|True|Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100|None|100|
 |sort|[]object|None|False|The sorting information, where possible field values are RRN, PRIORITY, CREATED TIME, and order values are ASC, DESC|None|[{"field": "Example Field", "order": "ASC"}]|
 |start_time|date|None|False|The starting time from when investigations were created|None|2020-09-06 12:07:55.136666+00:00|

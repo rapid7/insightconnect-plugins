@@ -799,9 +799,9 @@ actions:
         search:
           title: Search
           description: The criteria for which entities to return
-          type: "[]object"
+          type: '[]object'
           required: false
-          example: '[{"field": "Example Field", "operator": "EQUALS", "value": "Test"}]'
+          example: "[{'field': 'Example Field', 'operator': 'EQUALS', 'value': 'Test'}]"
         sort:
           title: Sort
           description: The sorting information, where possible field values are RRN, PRIORITY, CREATED TIME, and order values are ASC, DESC
