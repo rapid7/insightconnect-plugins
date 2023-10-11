@@ -36,7 +36,7 @@ class AdvancedQueryOnLogInput(insightconnect_plugin_runtime.Input):
     "query": {
       "type": "string",
       "title": "Query",
-      "description": "LQL Query",
+      "description": "LEQL Query",
       "order": 1
     },
     "relative_time": {
