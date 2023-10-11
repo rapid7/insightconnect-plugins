@@ -29,7 +29,7 @@ class ListInvestigations(insightconnect_plugin_runtime.Action):
             "sort": get_sort_param(params.get(Input.SORT)),
             "priorities": convert_list_to_string(params.get(Input.PRIORITIES)),
             "statuses": convert_list_to_string(params.get(Input.STATUSES)),
-            "size": params.get(Input.SIZE)
+            "size": params.get(Input.SIZE),
         }
 
         if start_time:
