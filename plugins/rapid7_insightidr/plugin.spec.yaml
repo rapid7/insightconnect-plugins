@@ -1180,7 +1180,7 @@ actions:
     input:
       query:
         title: Query
-        description: LQL Query
+        description: LEQL Query
         type: string
         example: "where(user=adagentadmin, loose)"
         required: true
@@ -1253,7 +1253,7 @@ actions:
     input:
       query:
         title: Query
-        description: LQL Query
+        description: LEQL Query
         type: string
         example: "where(user=adagentadmin, loose)"
         required: true
