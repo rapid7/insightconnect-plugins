@@ -63,7 +63,7 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
     "size": {
       "type": "integer",
       "title": "Size",
-      "description": "Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100",
+      "description": "Amount of data for a page to retrieve, where its value must be greater than 0 and less than or equal to 100",
       "default": 100,
       "order": 4
     },
