@@ -111,28 +111,9 @@ class SearchInvestigationsOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "investigations",
     "metadata"
   ],
   "definitions": {
-    "assignee": {
-      "type": "object",
-      "title": "assignee",
-      "properties": {
-        "email": {
-          "type": "string",
-          "title": "Email",
-          "description": "The email of the assigned user",
-          "order": 1
-        },
-        "name": {
-          "type": "string",
-          "title": "Name",
-          "description": "The name of the assigned user",
-          "order": 2
-        }
-      }
-    },
     "investigation": {
       "type": "object",
       "title": "investigation",
@@ -208,37 +189,36 @@ class SearchInvestigationsOutput(insightconnect_plugin_runtime.Output):
           "title": "Title",
           "description": "Investigation title",
           "order": 12
-        }
-      },
-      "required": [
-        "created_time",
-        "disposition",
-        "last_accessed",
-        "organization_id",
-        "priority",
-        "rrn",
-        "source",
-        "status",
-        "title"
-      ],
-      "definitions": {
-        "assignee": {
-          "type": "object",
-          "title": "assignee",
-          "properties": {
-            "email": {
-              "type": "string",
-              "title": "Email",
-              "description": "The email of the assigned user",
-              "order": 1
-            },
-            "name": {
-              "type": "string",
-              "title": "Name",
-              "description": "The name of the assigned user",
-              "order": 2
-            }
-          }
+        },
+        "required": [
+          "created_time",
+          "disposition",
+          "last_accessed",
+          "organization_id",
+          "priority",
+          "rrn",
+          "source",
+          "status",
+          "title",
+          "investigations"
+        ]
+      }
+    },
+    "assignee": {
+      "type": "object",
+      "title": "assignee",
+      "properties": {
+        "email": {
+          "type": "string",
+          "title": "Email",
+          "description": "The email of the assigned user",
+          "order": 1
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "The name of the assigned user",
+          "order": 2
         }
       }
     },

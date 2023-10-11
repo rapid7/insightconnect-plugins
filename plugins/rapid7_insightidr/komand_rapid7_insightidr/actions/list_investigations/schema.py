@@ -38,10 +38,10 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
     },
     "end_time": {
       "type": "string",
-      "title": "End Time",
-      "displayType": "date",
-      "description": "An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned",
       "format": "date-time",
+      "displayType": "date",
+      "title": "End Time",
+      "description": "An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned",
       "order": 3
     },
     "index": {
@@ -99,10 +99,10 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
     },
     "start_time": {
       "type": "string",
-      "title": "Start Time",
-      "displayType": "date",
-      "description": "An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned",
       "format": "date-time",
+      "displayType": "date",
+      "title": "Start Time",
+      "description": "An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned",
       "order": 2
     },
     "statuses": {
@@ -150,28 +150,9 @@ class ListInvestigationsOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "investigations",
     "metadata"
   ],
   "definitions": {
-    "assignee": {
-      "type": "object",
-      "title": "assignee",
-      "properties": {
-        "email": {
-          "type": "string",
-          "title": "Email",
-          "description": "The email of the assigned user",
-          "order": 1
-        },
-        "name": {
-          "type": "string",
-          "title": "Name",
-          "description": "The name of the assigned user",
-          "order": 2
-        }
-      }
-    },
     "investigation": {
       "type": "object",
       "title": "investigation",
@@ -247,37 +228,36 @@ class ListInvestigationsOutput(insightconnect_plugin_runtime.Output):
           "title": "Title",
           "description": "Investigation title",
           "order": 12
-        }
-      },
-      "required": [
-        "created_time",
-        "disposition",
-        "last_accessed",
-        "organization_id",
-        "priority",
-        "rrn",
-        "source",
-        "status",
-        "title"
-      ],
-      "definitions": {
-        "assignee": {
-          "type": "object",
-          "title": "assignee",
-          "properties": {
-            "email": {
-              "type": "string",
-              "title": "Email",
-              "description": "The email of the assigned user",
-              "order": 1
-            },
-            "name": {
-              "type": "string",
-              "title": "Name",
-              "description": "The name of the assigned user",
-              "order": 2
-            }
-          }
+        },
+        "required": [
+          "created_time",
+          "disposition",
+          "last_accessed",
+          "organization_id",
+          "priority",
+          "rrn",
+          "source",
+          "status",
+          "title",
+          "investigations"
+        ]
+      }
+    },
+    "assignee": {
+      "type": "object",
+      "title": "assignee",
+      "properties": {
+        "email": {
+          "type": "string",
+          "title": "Email",
+          "description": "The email of the assigned user",
+          "order": 1
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "The name of the assigned user",
+          "order": 2
         }
       }
     },
