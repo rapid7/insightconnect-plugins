@@ -673,7 +673,7 @@ actions:
         example: "2020-06-01T12:11:13+05:30"
       size:
         title: Size
-        description: Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100
+        description: Amount of data for a page to retrieve, where its value must be greater than 0 and less than or equal to 100
         type: integer
         required: true
         default: 100
