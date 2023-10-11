@@ -18,6 +18,7 @@ on:
         description: 'Docker image cleanup.'
         required: true
         default: 'None'
+        type: choice
         options:
           - 'None'
           - 'All'
@@ -28,6 +29,7 @@ on:
       INSIGHT_KOMAND_PLUGIN_ALL:
         description: 'Plugin release batching option. Leave empty to upload by name, otherwise select All, Go, or Python to release plugins, respectively.'
         required: true
+        type: choice
         default: ''
         options:
           - ''
@@ -39,14 +41,9 @@ on:
         default: 'develop'
         required: true
       INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION:
-        description: 'Plugin release options. Typically all values should be selected.'
+        description: 'Plugin release options, comma separated. Typically all values should be selected. Input options are Icon, Registry, Market, Help'
         required: true
-        default: ['Icon', 'Registry', 'Market', 'Help']
-        options:
-          - 'Icon'
-          - 'Registry'
-          - 'Market'
-          - 'Help'
+        default: 'Icon,Registry,Market,Help'
       INSIGHT_KOMAND_SIMULATE:
         description: 'Check to run this release job as a simulation (affects all infrastructure).'
         required: true
@@ -59,9 +56,13 @@ on:
         description: 'Check to override plugin blacklists (affects all release targets).'
         required: true
         default: false
-  pull_request:
+      PRERELEASE:
+        description: 'Check to release plugin as a prelease. Will append timestamp to end of plugin-version. Only affects staging.'
+        required: true
+        default: true
+  push:
     branches:
-      - 'develop'
+      - develop
 
 env:
   GITHUB_ORG: "rapid7"
@@ -84,23 +85,24 @@ env:
 jobs:
   release:
     runs-on: ubuntu-latest
-    outputs:
-      PLUGINS_DETAILS: ${{ steps.setupAutoPR.outputs.plugins_details }}
-      ENVIRONMENT: ${{ steps.setupAutoPR.outputs.environment }}
-      AUTOMERGE: ${{ steps.setupAutoPR.outputs.automerge }}
+
     steps:
       - name: Set up environment variables
         id: setUpEnvironmentVariables
         run: |
-            echo "INSIGHT_KOMAND_PLUGIN_NAME=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_NAME }}" >> $GITHUB_ENV
-            echo "INSIGHT_KOMAND_PLUGIN_ALL=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_ALL }}" >> $GITHUB_ENV
-            echo "INSIGHT_KOMAND_SIMULATE=${{ github.event.inputs.INSIGHT_KOMAND_SIMULATE }}" >> $GITHUB_ENV
-            echo "INSIGHT_KOMAND_FORCE_UPDATE=${{ github.event.INSIGHT_KOMAND_FORCE_UPDATE }}" >> $GITHUB_ENV
-            echo "INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION=${{ github.event.INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION }}" >> $GITHUB_ENV
-            echo "INSIGHT_KOMAND_CLEAN=${{ github.event.INSIGHT_KOMAND_CLEAN }}" >> $GITHUB_ENV
-            echo "INSIGHT_KOMAND_BRANCH=${{ github.event.INSIGHT_KOMAND_BRANCH }}" >> $GITHUB_ENV
-            echo "INSIGHT_KOMAND_OVERRIDE_BLACKLISTS=${{ github.event.INSIGHT_KOMAND_OVERRIDE_BLACKLISTS }}" >> $GITHUB_ENV
-            echo "PRERELEASE=${{ github.event.PRERELEASE }}" >> $GITHUB_ENV
+          # Setup environment variables from input
+          echo "INSIGHT_KOMAND_PLUGIN_NAME=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_NAME || '' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_PLUGIN_ALL=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_ALL || '' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_SIMULATE=${{ github.event.inputs.INSIGHT_KOMAND_SIMULATE || 'false' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_FORCE_UPDATE=${{ github.event.INSIGHT_KOMAND_FORCE_UPDATE || 'false' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION=${{ github.event.INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION || 'Icon,Registry,Market,Help' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_CLEAN=${{ github.event.INSIGHT_KOMAND_CLEAN || 'None' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_BRANCH=${{ github.event.INSIGHT_KOMAND_BRANCH || 'develop' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_OVERRIDE_BLACKLISTS=${{ github.event.INSIGHT_KOMAND_OVERRIDE_BLACKLISTS || 'false' }}" >> $GITHUB_ENV
+          echo "RELEASE_HUB_STAGING=${{ github.event.RELEASE_HUB_STAGING || 'true' }}" >> $GITHUB_ENV
+          echo "RELEASE_ALLIANCE_STAGING=${{ github.event.RELEASE_ALLIANCE_STAGING || 'true' }}" >> $GITHUB_ENV
+          echo "RELEASE_INT_CLOUD_US=${{ github.event.RELEASE_INT_CLOUD_US || 'true' }}" >> $GITHUB_ENV
+          echo "PRERELEASE=${{ github.event.PRERELEASE || 'true' }}" >> $GITHUB_ENV
 
       - name: Prerelease Timestamp
         id: prereleaseTimestamp
@@ -224,10 +226,6 @@ jobs:
           cd plugins
           export PLUGINS_DETAILS=$(cat plugins/plugin.properties)
           echo "PLUGINS_DETAILS=$PLUGINS_DETAILS" >> $GITHUB_ENV
-          echo "plugins_details=$PLUGINS_DETAILS" >> "$GITHUB_OUTPUT"
-          echo "environment=staging" >> "$GITHUB_OUTPUT"
-          echo "automerge=true" >> "$GITHUB_OUTPUT"
-
 
       - name: Announce Plugin Release Failure
         id: announcePluginReleaseFailure
