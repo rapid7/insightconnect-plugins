@@ -1243,7 +1243,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|investigations|[]investigation|True|A list of found investigations|[{'assignee': {'email': 'user@example.com', 'name': 'Ellen Example'}, 'created_time': '2018-06-06T16:56:42Z', 'disposition': 'BENIGN', 'first_alert_time': '2018-06-06T16:56:42Z', 'last_accessed': '2018-06-06T16:56:42Z', 'latest_alert_time': '2018-06-06T16:56:42Z', 'organization_id': '174e4f99-2ac7-4481-9301-4d24c34baf06', 'priority': 'CRITICAL', 'rrn': 'rrn:example', 'source': 'ALERT', 'status': 'OPEN', 'title': 'Example Title'}]|
+|investigations|[]investigation|True|A list of found investigations|[{'assignee': {'email': 'user@example.com','name': 'Ellen Example'},'created_time': '2018-06-06T16:56:42Z','disposition': 'BENIGN','first_alert_time': '2018-06-06T16:56:42Z','last_accessed': '2018-06-06T16:56:42Z','latest_alert_time': '2018-06-06T16:56:42Z','organization_id': '174e4f99-2ac7-4481-9301-4d24c34baf06','priority': 'CRITICAL','rrn': 'rrn:example','source': 'ALERT','status': 'OPEN','title': 'Example Title'}]|
 |metadata|investigation_metadata|True|The pagination parameters used to generate this page result|{'index': 0, 'size': 1, 'total_data': 1, 'total_pages': 1}|
   
 Example output:
