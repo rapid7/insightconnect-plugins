@@ -22,14 +22,14 @@ class ListInvestigations(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         start_time = params.get(Input.START_TIME)
         end_time = params.get(Input.END_TIME)
-        statuses = params.get(Input.STATUSES)
 
         rest_params = {
             "assignee.email": params.get(Input.EMAIL),
             "sources": convert_list_to_string(params.get(Input.SOURCES)),
             "sort": get_sort_param(params.get(Input.SORT)),
             "priorities": convert_list_to_string(params.get(Input.PRIORITIES)),
-            "statuses": convert_list_to_string(statuses),
+            "statuses": convert_list_to_string(params.get(Input.STATUSES)),
+            "size": params.get(Input.SIZE),
         }
 
         if start_time:
