@@ -1,5 +1,4 @@
 name: Plugin Staging Release Workflow
-
 on:
   workflow_dispatch:
     inputs:
