@@ -1,135 +1,135 @@
 {
 	"spec": "dfe4ce59e40a49cdc6a72fbfa12efb82",
-	"manifest": "b552bbd85165215cb8ca8febaeca721a",
-	"setup": "3abc4ed8b408538efeee0e32e2ff2a5f",
+	"manifest": "df212b50343116f12c05fbf85f9ccf73",
+	"setup": "75be1b50432a1748db718eff1b44c9fd",
 	"schemas": [
 		{
 			"identifier": "add_indicators_to_a_threat/schema.py",
-			"hash": "ae591f6016d3c55c7d02f6ccbff1ace5"
+			"hash": "1a5a174485fd02bcfe5f087e9b969639"
 		},
 		{
 			"identifier": "advanced_query_on_log/schema.py",
-			"hash": "218cf52cbd4460b58be9610d7cc34556"
+			"hash": "0fa5fdc764a92fd81e9c6b3b4f2571fd"
 		},
 		{
 			"identifier": "advanced_query_on_log_set/schema.py",
-			"hash": "b24ca76d99515523d4a9ded71a4dd275"
+			"hash": "4b1779e373f2c978385b56a58d2c0b74"
 		},
 		{
 			"identifier": "assign_user_to_investigation/schema.py",
-			"hash": "f31da2a9357719eae2662456fd89b584"
+			"hash": "a9fc0ac4cd44bd370e86af7f596b78d1"
 		},
 		{
 			"identifier": "close_investigations_in_bulk/schema.py",
-			"hash": "fdfa2be6b288946da16195be133dee65"
+			"hash": "e28a786869a719ea9ca96e123903afc0"
 		},
 		{
 			"identifier": "create_comment/schema.py",
-			"hash": "e389b165e4c6333780dc8840b469e9bd"
+			"hash": "9cbdfb584a334772150f9004be9a43a7"
 		},
 		{
 			"identifier": "create_investigation/schema.py",
-			"hash": "aece25c5b382ed176c6b5648d4658bde"
+			"hash": "977a2845d11ea53ba0ff72c8abab49c7"
 		},
 		{
 			"identifier": "create_threat/schema.py",
-			"hash": "58e3b6ac539fa2e475e9ef363e436c04"
+			"hash": "99b153b82f67160e3b61b4ee550910f5"
 		},
 		{
 			"identifier": "delete_attachment/schema.py",
-			"hash": "c5f5cb7950e7eec86b624e52834ea797"
+			"hash": "678c10ef18b02f8a11f06c434107f4d3"
 		},
 		{
 			"identifier": "delete_comment/schema.py",
-			"hash": "2587c40fc9f8ffd98fb393f58c95e4e9"
+			"hash": "7cfe4047114ef4337650b701936b8765"
 		},
 		{
 			"identifier": "download_attachment/schema.py",
-			"hash": "25f2e3f0e0857dc56be6d2b9cc3fe4aa"
+			"hash": "d080fb76788bdeb4daf3c577f5b9aa31"
 		},
 		{
 			"identifier": "get_a_log/schema.py",
-			"hash": "733610d5611983b46515de108bba6a3b"
+			"hash": "0f97bd52d8c758f66302b22f6f093714"
 		},
 		{
 			"identifier": "get_a_saved_query/schema.py",
-			"hash": "2f8d35ca00cb8202d1280e3b7e4e16f7"
+			"hash": "ae659b6dd570a61a9ba2bf99b731952d"
 		},
 		{
 			"identifier": "get_all_logs/schema.py",
-			"hash": "2bdb039bd7bed9a17ebe689e8c9265d7"
+			"hash": "dd6eec6ee9263c7c5bf3942593d96f20"
 		},
 		{
 			"identifier": "get_all_saved_queries/schema.py",
-			"hash": "1dee21dfeb404527be42e82cc7f61d3c"
+			"hash": "69e619f2f61842cbc3ae75edab42ea40"
 		},
 		{
 			"identifier": "get_asset_information/schema.py",
-			"hash": "64effaa9ce11a6c8a5ce9a7c549ab065"
+			"hash": "92e19929f85d5c5f61f5ac33283ab2c1"
 		},
 		{
 			"identifier": "get_attachment_information/schema.py",
-			"hash": "7b4c4a65a306948df8fc6ee5d1f1ef3c"
+			"hash": "24118b3714f6746cadf273f74e8f84f4"
 		},
 		{
 			"identifier": "get_investigation/schema.py",
-			"hash": "37e6e8f7bf2e0a65072211d7256b1c17"
+			"hash": "149d9658fdc93d51dff4694e1882a3a4"
 		},
 		{
 			"identifier": "get_user_information/schema.py",
-			"hash": "97336fed8bb4500168c4e0e917207409"
+			"hash": "d697c0c39001473c3a782aeb50540b62"
 		},
 		{
 			"identifier": "list_alerts_for_investigation/schema.py",
-			"hash": "72bdab1cd1e041b8dc5ec6616a5555a1"
+			"hash": "3022f6ec9fe64a7af3df4d1d6cc6c88b"
 		},
 		{
 			"identifier": "list_attachments/schema.py",
-			"hash": "8d586be6eeb57039edbc6ae4f01551af"
+			"hash": "d4404add7f2008a9d40839413bc880d7"
 		},
 		{
 			"identifier": "list_comments/schema.py",
-			"hash": "da9b3870c3b1af536b9b4b98a68927ff"
+			"hash": "55813007d97cf69c079a7aef0dbd7b9c"
 		},
 		{
 			"identifier": "list_investigations/schema.py",
-			"hash": "6d376bde827fdc08f0eb544223af92c3"
+			"hash": "8cc1504ee7ab39cdec2a025c87c63b65"
 		},
 		{
 			"identifier": "query/schema.py",
-			"hash": "a03fd4ae484aa4367a5e42237d7ec67d"
+			"hash": "a44d5cdd21acc90d0139bbc20c069711"
 		},
 		{
 			"identifier": "replace_indicators/schema.py",
-			"hash": "1bd05409ed4a316ef2e979339cde3fe9"
+			"hash": "7dd218ac90308291d86a912567a4f61e"
 		},
 		{
 			"identifier": "search_investigations/schema.py",
-			"hash": "fca8a3c23fdc8e87c13f6a7abc28c564"
+			"hash": "f59c4a599a8f5e6a563b643c39dd4b02"
 		},
 		{
 			"identifier": "set_disposition_of_investigation/schema.py",
-			"hash": "1f3e066e4785ef87bd69670ebbf552b0"
+			"hash": "bc77b3c868db9ac71222c90d30e69687"
 		},
 		{
 			"identifier": "set_priority_of_investigation/schema.py",
-			"hash": "dc9ee3df2bc789802d3ea135e94d4dda"
+			"hash": "e3f81370defcb8f4a8a9bfaa3ab3d758"
 		},
 		{
 			"identifier": "set_status_of_investigation_action/schema.py",
-			"hash": "02ce6afeb6ee614727d1bc6e5ab8a220"
+			"hash": "0a050c11b3cd4e57cbd6147414a27dda"
 		},
 		{
 			"identifier": "update_investigation/schema.py",
-			"hash": "899b1d2e69fb65d67c25af353e4b4249"
+			"hash": "519b1375887a53891489c2e2c294d961"
 		},
 		{
 			"identifier": "upload_attachment/schema.py",
-			"hash": "41dd5ad6342c76ded1b99f09f937e0c4"
+			"hash": "bebd0944f3a7528aae6a3298e5e42b33"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "0fb144575844d93646beaf77b3f8eca1"
+			"hash": "1c1fe91f956e8be3a7bec1575f4f1e27"
 		}
 	]
 }
