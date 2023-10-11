@@ -4,7 +4,7 @@
 INFRASTRUCTURE_NAME_KEY="${INF_NAME}_NAME"
 INFRASTRUCTURE_NAME="${INFRASTRUCTURE_NAME_KEY}_NAME"
 # Check if region is set for release
-if [[ "${{ github.event.inputs.RELEASE_PROD_CLOUD_US }}" == "true" ]]; then
+if [[ $INF == "true" ]]; then
   # Docker login
   docker login -u ${KOMAND_DOCKERHUB_USER} -p ${KOMAND_DOCKERHUB_PASSWORD}
   # Set infrastructure variables for region release
