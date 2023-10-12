@@ -1,10 +1,10 @@
 # Description
 
-This plugin is used to get the last item of a file path or URL using Python's basename utility
+This plugin is used to get the last item of a file path or URL using Python's Basename utility
 
 # Key Features
   
-* Obtain basename of a file path or URL.
+* Obtain Basename of a file path or URL.
 
 # Requirements
   
@@ -27,7 +27,7 @@ This plugin is used to get the last item of a file path or URL using Python's ba
 
 #### Basename
   
-Get the basename of a path
+Get the Basename of a path
 
 ##### Input
 
@@ -73,6 +73,7 @@ If the input doesn't contain a slash `/` in the path the result will be the orig
 
 # Version History
 
+* 1.1.2 - Added `__init__.py` file to `unit_test` folder | Refreshed with new Tooling
 * 1.1.1 - Update SDK to version 5
 * 1.1.0 - Add missing `title` in action Basename | Use input and output constants | Add example input and output | Changed `Exception` to `PluginException` | Added "f" strings
 * 1.0.2 - Update to use the `insightconnect-python-3-38-slim-plugin:4` Docker image | Update plugin.spec.yaml to include `cloud_ready`
@@ -83,6 +84,8 @@ If the input doesn't contain a slash `/` in the path the result will be the orig
 
 # Links
 
+* [Python Basename](https://docs.python.org/3/library/os.path.html)
+
 ## References
 
-* [Python Basename](https://docs.python.org/2/library/os.path.html#os.path.basename)
+* [Python Basename](https://docs.python.org/3/library/os.path.html)
