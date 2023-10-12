@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       RELEASE_ENVIRONMENTS:
-        description: 'Release environments, comma seperated. Typically all should be selected.'
+        description: 'Release environments, comma separated. Typically all should be selected.'
         required: true
         default: 'RELEASE_INT_CLOUD_US,RELEASE_HUB_STAGING,RELEASE_ALLIANCE_STAGING'
       INSIGHT_KOMAND_CLEAN:
