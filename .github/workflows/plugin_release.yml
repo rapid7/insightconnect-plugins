@@ -210,7 +210,6 @@ jobs:
         run: |
           export INF_NAME="PROD_CLOUD_US"
           export INF=$RELEASE_PROD_CLOUD_US
-          chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
       - name: Configure AWS Credentials PROD CLOUD EU
@@ -227,7 +226,6 @@ jobs:
         run: |
           export INF_NAME="PROD_CLOUD_EU"
           export INF=$RELEASE_PROD_CLOUD_EU
-          chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
       - name: Configure AWS Credentials PROD CLOUD AU
@@ -244,7 +242,6 @@ jobs:
         run: |
           export INF_NAME="PROD_CLOUD_AU"
           export INF=$RELEASE_PROD_CLOUD_AU
-          chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
       - name: Configure AWS Credentials PROD CLOUD AP
@@ -261,7 +258,6 @@ jobs:
         run: |
           export INF_NAME="PROD_CLOUD_AP"
           export INF=$RELEASE_PROD_CLOUD_AP
-          chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
       - name: Configure AWS Credentials PROD CLOUD US2
@@ -278,7 +274,6 @@ jobs:
         run: |
           export INF_NAME="PROD_CLOUD_US2"
           export INF=$RELEASE_PROD_CLOUD_US2
-          chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
       - name: Configure AWS Credentials PROD CLOUD US3
@@ -295,7 +290,6 @@ jobs:
         run: |
           export INF_NAME="PROD_CLOUD_US3"
           export INF=$RELEASE_PROD_CLOUD_US3
-          chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
       - name: Configure AWS Credentials INT CLOUD US
@@ -312,7 +306,6 @@ jobs:
         run: |
           export INF_NAME="INT_CLOUD_US"
           export INF=$RELEASE_INT_CLOUD_US
-          chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
       - name: Configure AWS Credentials HUB PROD
@@ -329,7 +322,6 @@ jobs:
         run: |
           export INF_NAME="HUB_PROD"
           export INF=$RELEASE_HUB_PROD
-          chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
       - name: Configure AWS Credentials HUB STAGING
@@ -346,7 +338,6 @@ jobs:
         run: |
           export INF_NAME="HUB_STAGING"
           export INF=$RELEASE_HUB_STAGING
-          chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
       - name: Configure AWS Credentials ALLIANCE STAGING
@@ -363,7 +354,6 @@ jobs:
         run: |
           export INF_NAME="ALLIANCE_STAGING"
           export INF=$RELEASE_ALLIANCE_STAGING
-          chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
       - name: Configure AWS Credentials ALLIANCE PROD
@@ -380,7 +370,6 @@ jobs:
         run: |
           export INF_NAME="ALLIANCE_PROD"
           export INF=$RELEASE_ALLIANCE_PROD
-          chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
       - name: Plugin Tag and Announcement on Success
