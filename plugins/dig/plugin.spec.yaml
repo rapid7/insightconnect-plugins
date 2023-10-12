@@ -3,11 +3,16 @@ extension: plugin
 products: [insightconnect]
 name: dig
 title: DNS
-description: DNS is used for forward and reverse DNS lookups
-version: 2.0.0
+description: The DNS plugin is used for forward and reverse DNS lookups. This plugin uses [Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, which is a network administration command-line tool for querying Domain Name System (DNS) name servers
+version: 2.0.1
 vendor: rapid7
 support: community
+supported_versions: ["2023-10-12"]
 status: []
+sdk:
+  type: full
+  version: 5
+  user: nobody
 cloud_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/dig
@@ -19,10 +24,13 @@ hub_tags:
   use_cases: [threat_detection_and_response, offensive_security]
   keywords: [dig, dns, cloud_enabled]
   features: []
+key_features: ["Forward DNS lookup to find an IP address from a domain name", "Reverse DNS lookup to find a domain name from an IP address"]
+references: ["[Dig](https://linux.die.net/man/1/dig)", "[DNS Status Code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml)"]
+requirements: []
 actions:
   forward:
     title: Forward Lookup
-    description: Forward DNS Query
+    description: This action is used to request a forward lookup for a domain
     input:
       domain:
         type: string
@@ -54,40 +62,47 @@ actions:
         title: Full Output
         type: string
         required: false
+        example: \n; <<>> DiG 9.12.4-P2 <<>> google.com A\n;; global ...
       status:
         title: Query Status
         description: Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED
           ...]
         type: string
         required: false
+        example: NOERROR
       nameserver:
         title: Nameserver
         description: Nameserver that fulfilled request
         type: string
         required: false
+        example: 192.168.65.1
       answer:
         description: Answer received
         title: Answer
         type: string
         required: false
+        example: 172.217.6.14
       question:
         description: Question asked
         title: Question
         type: string
         required: false
+        example: google.com
       all_answers:
         title: All Answers
         type: '[]string'
         description: A list of all answers found
         required: false
+        example: '["172.217.6.14"]'
       last_answer:
         title: Last Answer
         type: string
         description: The last answer found in the answers section
         required: false
+        example: 172.217.6.14
   reverse:
     title: Reverse Lookup
-    description: Reverse DNS Query
+    description: This action is used to request a reverse lookup for an IP address
     input:
       resolver:
         type: string
@@ -105,24 +120,29 @@ actions:
         title: Full Output
         type: string
         required: false
+        example: '\n; <<>> Dig 9.9.5-9+deb8u9-Debian <<>> -x 8.8.8.8\n;; global options: +cmd\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 59406\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version: 0, flags:; udp: 512\n;; QUESTION SECTION:\n;8.8.8.8.in-addr.arpa.\t\tIN\tPTR\n\n;; ANSWER SECTION:\n8.8.8.8.in-addr.arpa.\t68133\tIN\tPTR\tgoogle-public-dns-a.google.com.\n\n;; Query time: 22 msec\n;; SERVER: 10.0.2.3#53(10.0.2.3)\n;; WHEN: Thu Jan 26 23:43:43 UTC 2017\n;; MSG SIZE  rcvd: 93\n\n'
       status:
         title: Query Status
         description: Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED
           ...]
         type: string
         required: false
+        example: NOERROR
       nameserver:
         title: Nameserver
         description: Nameserver that fulfilled request
         type: string
         required: false
+        example: 10.0.2.3
       answer:
         title: Answer
         description: Answer received
         type: string
         required: false
+        example: google-public-dns-a.google.com
       question:
         title: Question
         description: Question asked
         type: string
         required: false
+        example: 8.8.8.8
