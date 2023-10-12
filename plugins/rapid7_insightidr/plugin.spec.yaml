@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 5.1.0
+version: 5.1.1
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2022-07-20."]
 vendor: rapid7
@@ -673,7 +673,7 @@ actions:
         example: "2020-06-01T12:11:13+05:30"
       size:
         title: Size
-        description: Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100
+        description: Amount of data for a page to retrieve, where its value must be greater than 0 and less than or equal to 100
         type: integer
         required: true
         default: 100
@@ -1180,7 +1180,7 @@ actions:
     input:
       query:
         title: Query
-        description: LQL Query
+        description: LEQL Query
         type: string
         example: "where(user=adagentadmin, loose)"
         required: true
@@ -1253,7 +1253,7 @@ actions:
     input:
       query:
         title: Query
-        description: LQL Query
+        description: LEQL Query
         type: string
         example: "where(user=adagentadmin, loose)"
         required: true
