@@ -138,9 +138,21 @@ class Util:
                 }:
                     return MockResponse(200, "get_specific_user.json.resp")
                 if params == {
-                    "q": "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND Id IN ('005Hn00000HVWwxIAH')"
+                    "q": "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND LastModifiedDate >= 2023-07-19T16:21:15.340262+00:00 AND LastModifiedDate < 2023-07-20T16:21:15.340262+00:00"
                 }:
                     return MockResponse(200, "get_specific_user.json.resp")
+                if params == {
+                    "q": "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND LastModifiedDate >= 2023-07-20T16:15:15.340262+00:00 AND LastModifiedDate < 2023-07-20T16:21:15.340262+00:00"
+                }:
+                    return MockResponse(200, "get_specific_user.json.resp")
+                if params == {
+                    "q": "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND LastModifiedDate >= 2023-07-20T16:10:15.340262+00:00 AND LastModifiedDate < 2023-07-20T16:21:15.340262+00:00"
+                }:
+                    return MockResponse(200, "get_specific_user_empty.json.resp")
+                if params == {
+                    "q": "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND LastModifiedDate >= invalid AND LastModifiedDate < 2023-07-20T16:21:15.340262+00:00"
+                }:
+                    return MockResponse(400)
                 if params == {
                     "q": "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard'"
                 }:
