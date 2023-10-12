@@ -178,7 +178,7 @@ jobs:
         if: success()
         run: |
           export INF_NAME="INT_CLOUD_US"
-          export INF=$INT_CLOUD_US
+          export INF=$RELEASE_INT_CLOUD_US
           echo "INFO: PRERELEASE_TIMESTAMP is ${PRERELEASE_TIMESTAMP}"
           chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
@@ -196,7 +196,7 @@ jobs:
         if: success()
         run: |
           export INF_NAME="HUB_STAGING"
-          export INF=$HUB_STAGING
+          export INF=$RELEASE_HUB_STAGING
           echo "INFO: PRERELEASE_TIMESTAMP is ${PRERELEASE_TIMESTAMP}"
           chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
@@ -214,7 +214,7 @@ jobs:
         if: success()
         run: |
           export INF_NAME="ALLIANCE_STAGING"
-          export INF=$ALLIANCE_STAGING
+          export INF=$RELEASE_ALLIANCE_STAGING
           chmod +x ./tools/release_plugin.sh
           echo "INFO: PRERELEASE_TIMESTAMP is ${PRERELEASE_TIMESTAMP}"
           . ./tools/release_plugin.sh

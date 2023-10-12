@@ -209,7 +209,7 @@ jobs:
         if: success()
         run: |
           export INF_NAME="PROD_CLOUD_US"
-          export INF=$PROD_CLOUD_US
+          export INF=$RELEASE_PROD_CLOUD_US
           chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
@@ -226,7 +226,7 @@ jobs:
         if: success()
         run: |
           export INF_NAME="PROD_CLOUD_EU"
-          export INF=$PROD_CLOUD_EU
+          export INF=$RELEASE_PROD_CLOUD_EU
           chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
@@ -243,7 +243,7 @@ jobs:
         if: success()
         run: |
           export INF_NAME="PROD_CLOUD_AU"
-          export INF=$PROD_CLOUD_AU
+          export INF=$RELEASE_PROD_CLOUD_AU
           chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
@@ -260,7 +260,7 @@ jobs:
         if: success()
         run: |
           export INF_NAME="PROD_CLOUD_AP"
-          export INF=$PROD_CLOUD_AP
+          export INF=$RELEASE_PROD_CLOUD_AP
           chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
@@ -277,7 +277,7 @@ jobs:
         if: success()
         run: |
           export INF_NAME="PROD_CLOUD_US2"
-          export INF=$PROD_CLOUD_US2
+          export INF=$RELEASE_PROD_CLOUD_US2
           chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
@@ -294,7 +294,7 @@ jobs:
         if: success()
         run: |
           export INF_NAME="PROD_CLOUD_US3"
-          export INF=$PROD_CLOUD_US3
+          export INF=$RELEASE_PROD_CLOUD_US3
           chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
@@ -311,7 +311,7 @@ jobs:
         if: success()
         run: |
           export INF_NAME="INT_CLOUD_US"
-          export INF=$INT_CLOUD_US
+          export INF=$RELEASE_INT_CLOUD_US
           chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
@@ -328,7 +328,7 @@ jobs:
         if: success()
         run: |
           export INF_NAME="HUB_PROD"
-          export INF=$HUB_PROD
+          export INF=$RELEASE_HUB_PROD
           chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
@@ -345,7 +345,7 @@ jobs:
         if: success()
         run: |
           export INF_NAME="HUB_STAGING"
-          export INF=$HUB_STAGING
+          export INF=$RELEASE_HUB_STAGING
           chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
@@ -362,7 +362,7 @@ jobs:
         if: success()
         run: |
           export INF_NAME="ALLIANCE_STAGING"
-          export INF=$ALLIANCE_STAGING
+          export INF=$RELEASE_ALLIANCE_STAGING
           chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
@@ -379,7 +379,7 @@ jobs:
         if: success()
         run: |
           export INF_NAME="ALLIANCE_PROD"
-          export INF=$ALLIANCE_PROD
+          export INF=$RELEASE_ALLIANCE_PROD
           chmod +x ./tools/release_plugin.sh
           . ./tools/release_plugin.sh
 
