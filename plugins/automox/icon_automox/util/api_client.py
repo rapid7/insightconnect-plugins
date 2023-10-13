@@ -95,7 +95,6 @@ class ApiClient:
         page_resp = []
 
         while True:
-            print(url)
             resp = self._call_api("GET", url, params)
             resp_data = self.remove_null_values(resp.get("data"))
 
