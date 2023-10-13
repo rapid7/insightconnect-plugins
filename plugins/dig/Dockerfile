@@ -1,5 +1,7 @@
-FROM rapid7/insightconnect-python-3-38-slim-plugin:4
-LABEL organization=komand
+FROM rapid7/insightconnect-python-3-38-plugin:5
+FROM python:3.8.1-alpine3.11
+
+LABEL organization=rapid7
 LABEL sdk=python
 LABEL type=plugin
 
@@ -7,7 +9,10 @@ ENV SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
 ENV SSL_CERT_DIR /etc/ssl/certs
 ENV REQUESTS_CA_BUNDLE  /etc/ssl/certs/ca-certificates.crt
 
+RUN apk update
+RUN apk add build-base libffi-dev openssl-dev
 RUN apk add --no-cache bind-tools
+
 
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD . /python/src
@@ -19,6 +24,7 @@ WORKDIR /python/src
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
 
+# User to run plugin code. The two supported users are: root, nobody
 USER nobody
 
 ENTRYPOINT ["/usr/local/bin/komand_dig"]
