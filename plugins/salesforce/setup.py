@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="salesforce-rapid7-plugin",
-      version="2.1.0",
+      version="2.1.1",
       description="The Salesforce plugin allows you to search, update, and manage salesforce records",
       author="rapid7",
       author_email="",
