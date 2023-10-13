@@ -55,9 +55,15 @@ class Util:
         params = kwargs.get("params", {})
 
         if url == "https://example.com/admin/v2/logs/authentication":
-            if params == {"mintime": "1684009458000", "maxtime": "1684209458000", "limit": "1000"}:
+            breakpoint()
+            if params == {"mintime": "1682843686000", "maxtime": "1682929966000", "limit": "1000", "sort": "ts:asc"}:
+                print("return A1")
                 return MockResponse(200, "get_auth_logs.json.resp")
-            if params == {"mintime": "1683009458000", "maxtime": "1683209458000", "limit": "1000"}:
+            if params == {"mintime": "1682843686000", "maxtime": "1682929966000", "limit": "1000", "sort": "ts:asc"}:
+                print("return A*")
+                return MockResponse(200, "get_auth_logs.json.resp")
+            if params == {"mintime": "1682670886000", "maxtime": "1682929966000", "limit": "1000", "sort": "ts:asc"}:
+                print("return A2")
                 return MockResponse(200, "get_auth_logs_empty.json.resp")
             if params == {
                 "mintime": "1684009458000",
@@ -71,6 +77,7 @@ class Util:
                 "results": ["success"],
                 "limit": "1000",
             }:
+                print("return A3")
                 return MockResponse(200, "get_auth_logs_2.json.resp")
             if params == {"mintime": "1682843686000", "maxtime": "1682930026000", "limit": "1000"}:
                 return MockResponse(200, "get_auth_logs_3.json.resp")
@@ -79,13 +86,22 @@ class Util:
                 "maxtime": "1682930026000",
                 "limit": "1000",
                 "next_offset": ["1683730665255", "9de5069c-5afe-602b-2ea0-a04b66beb2c0"],
+                "sort": "ts:asc",
             }:
                 return MockResponse(200, "get_auth_logs_4.json.resp")
         if url == "https://example.com/admin/v1/logs/administrator":
+            breakpoint()
             if params == {"mintime": "1682843686"}:
                 return MockResponse(200, "get_admin_logs.json.resp")
+            if params == {"mintime": "1682670886"}:
+                return MockResponse(200, "get_admin_logs.json.resp")
+            if params == {"mintime": "1682930026"}:
+                return MockResponse(200, "get_admin_logs.json.resp")
         if url == "https://example.com/admin/v1/trust_monitor/events":
-            if params == {"mintime": "1682843686000", "maxtime": "1682930026000", "limit": "200"}:
+            breakpoint()
+            if params == {"mintime": "1682843686000", "maxtime": "1682929966000", "limit": "200"}:
+                return MockResponse(200, "get_trust_monitor_events.json.resp")
+            if params == {"mintime": "1682670886000", "maxtime": "1682929966000", "limit": "200"}:
                 return MockResponse(200, "get_trust_monitor_events.json.resp")
             if params == {"mintime": "1682843686000", "maxtime": "1682930026000", "limit": "200", "offset": "1591014"}:
                 return MockResponse(200, "get_trust_monitor_events_2.json.resp")

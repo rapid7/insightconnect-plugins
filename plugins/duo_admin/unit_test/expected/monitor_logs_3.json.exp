@@ -17,7 +17,37 @@
 		"surfaced_timestamp": 1682836486335,
 		"triaged_as_interesting": false,
 		"type": "bypass_status",
-		"logType": "trust_monitor_event"
+		"log_type": "trust_monitor_event"
+	},
+	{
+		"action": "user_create",
+		"description": {
+			"status": "Active",
+			"email": "user@example.com",
+			"realname": "",
+			"notes": "",
+			"uname": "user"
+		},
+		"isotimestamp": "2023-04-30T07:52:18+00:00",
+		"object": "user",
+		"timestamp": 1682836490,
+		"username": "API (Admin API)",
+		"log_type": "administrator"
+	},
+	{
+		"action": "admin_login",
+		"description": {
+			"ip_address": "198.51.100.1",
+			"role": "User Manager",
+			"device": "+111111111",
+			"factor": "push",
+			"primary_auth_method": "Password"
+		},
+		"isotimestamp": "2023-04-30T07:53:17+00:00",
+		"object": null,
+		"timestamp": 1682836495,
+		"username": "Admin",
+		"log_type": "administrator"
 	},
 	{
 		"access_device": {
@@ -70,7 +100,7 @@
 			"key": "DUOR48RKV2AYN7YVS9BT",
 			"name": "example-user2"
 		},
-		"logType": "authentication"
+		"log_type": "authentication"
 	}
 ],
   "state": {
@@ -78,19 +108,23 @@
       "limit": "1000",
       "maxtime": "1682930026000",
       "mintime": "1682843686000",
-      "next_offset": "1683730665255,9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+      "next_offset": "1683730665255,9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "sort": "ts:asc"
     },
-    "last_collection_timestamp": 1682930026000,
+    "last_collection_timestamp": null,
     "previous_admin_log_hashes": [
-      "9044a3c0964c859ae26aee09a0ad031b0546b0b4",
-      "29f17fa591dc5b46c1dfac976364059d80208fdb"
+      "cd9aa0fc02dd4a4538a3368025b2fab7480fbc7a",
+      "79ac88bf9a2b241fc385a1501b614c39cdf7cd8c"
     ],
     "previous_auth_log_hashes": [
-      "e3ffddb111f2661b752753298812dcb723854aa8"
+      "cb5d554f5ef06cfe57b75eac4ce851dcc8ba064e"
     ],
     "previous_trust_monitor_event_hashes": [
-      "4a28a8fd56d2a2adffe5da40c5993ec60f3dafff"
-    ]
+      "985ddf6ee4da694f22141bd45e20e09a4b8c87d0"
+    ],
+    "trust_monitor_last_log_timestamp": 1682930026000,
+    "admin_logs_last_log_timestamp": 1682930026,
+    "auth_logs_last_log_timestamp": 1685358458
   },
   "status_code": 200
 }
