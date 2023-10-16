@@ -19,7 +19,7 @@ class GetUserById(insightconnect_plugin_runtime.Action):
         """Get a user by ID"""
 
         # required
-        id = params.get("id")
+        user_id = params.get("id")
 
         if id is None:
             self.logger.warning("Please ensure a valid 'id' is provided")
@@ -28,7 +28,7 @@ class GetUserById(insightconnect_plugin_runtime.Action):
                 assistance="Please ensure a valid 'id' is provided",
             )
 
-        response = self.connection.api.get_user_by_id(user_id=id)
+        response = self.connection.api.get_user_by_id(user_id=user_id)
 
         if response.get("user"):
             normalized_user = normalize_user(response.get("user"))

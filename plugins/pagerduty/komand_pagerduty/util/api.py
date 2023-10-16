@@ -105,9 +105,8 @@ class PagerDutyAPI:
             self._check_status_code(response)
         except requests.exceptions.HTTPError as e:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
-    
-    def _check_status_code(self, response:dict):
 
+    def _check_status_code(self, response: dict):
         if response.status_code == 401:
             raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
         if response.status_code == 403:

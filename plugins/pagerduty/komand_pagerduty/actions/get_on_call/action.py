@@ -26,7 +26,6 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
 
         user_ids = self.get_user_ids(schedule_id=schedule_id)
 
-
         if not user_ids and schedule_id:
             self.logger.warning(
                 f"No users found for the provided schedule ID - {schedule_id}. "
@@ -36,8 +35,8 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
         list_of_users = self.get_list_of_users_from_ids(user_ids=user_ids)
 
         return {"users": list_of_users}
-    
-    def get_user_ids(self, schedule_id:str):
+
+    def get_user_ids(self, schedule_id: str):
         user_ids = []
         for oncall_object in self.connection.api.get_on_calls(schedule_id).get("schedule", {}).get("users", []):
             try:
@@ -52,7 +51,7 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
                 self.logger.warning(f"User ID not available: {str(e)}")
                 continue
         return user_ids
-    
+
     def get_list_of_users_from_ids(self, user_ids: list):
         list_of_users = []
         for user_id in user_ids:
