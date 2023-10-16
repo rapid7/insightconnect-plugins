@@ -1021,7 +1021,7 @@ A User ID can be obtained by passing a username to the Get User Status action.
 
 # Version History
 
-* 4.2.1 - Monitor Logs task: updated unit tests
+* 4.2.2 - Monitor Logs task: updated unit tests
 * 4.2.1 - Monitor Logs task: updated timestamp handling
 * 4.2.0 - Monitor Logs task: removed formatting of task output
 * 4.1.1 - Monitor Logs task: strip http/https in hostname, fix problem with generating header signature
