@@ -44,24 +44,6 @@ class TestSendTriggerEvent(TestCase):
     @parameterized.expand(
         [
             [
-                "missing_params_invalid",
-                {},
-                "Missing required paramaters",
-                "Please ensure a valid 'email' and 'incident_id' is provided",
-            ]
-        ]
-    )
-    def test_missing_params_invalid(
-        self, mock_request: MagicMock, test_name: str, input_params: dict, cause: str, assistance: str
-    ):
-        with self.assertRaises(PluginException) as error:
-            self.action.run(input_params)
-        self.assertEqual(error.exception.cause, cause)
-        self.assertEqual(error.exception.assistance, assistance)
-
-    @parameterized.expand(
-        [
-            [
                 "both_escalation_policy_and_assignments_invalid",
                 Util.read_file_to_dict("inputs/send_trigger_both_esc_asg_invalid.json.inp"),
                 "Invalid paramaters",

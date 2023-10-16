@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
-from .schema import DeleteUserByIdInput, DeleteUserByIdOutput
+from .schema import DeleteUserByIdInput, DeleteUserByIdOutput, Input, Output, Component
 
 # Custom imports below
 from komand_pagerduty.util.util import normalize_user
@@ -18,8 +18,8 @@ class DeleteUserById(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         """Delete user"""
 
-        email = params.get("email")
-        user_id = params.get("id")
+        email = params.get(Input.EMAIL)
+        user_id = params.get(Input.ID)
 
         if email is None or user_id is None:
             self.logger.warning("Please ensure a valid 'email' and 'id' is provided")
@@ -29,4 +29,4 @@ class DeleteUserById(insightconnect_plugin_runtime.Action):
 
         self.connection.api.delete_user_by_id(email=email, user_id=user_id)
 
-        return f"The user {user_id} has been deleted"
+        return {Output.SUCCESS: f"The user {user_id} has been deleted"}

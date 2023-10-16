@@ -291,12 +291,6 @@ actions:
         required: true
         example: P9CU341
     output:
-      found:
-        title: Found
-        type: boolean
-        description: True if found
-        required: false
-        example: true
       user:
         title: User
         description: User
@@ -368,12 +362,6 @@ actions:
         required: false
         example: {"id":"PTDVERC", "type":"license_reference"}
     output:
-      success:
-        title: Success
-        type: boolean
-        description: True if created
-        required: false
-        example: true
       user:
         title: User
         description: User

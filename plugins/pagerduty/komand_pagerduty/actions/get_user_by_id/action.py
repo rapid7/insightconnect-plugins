@@ -1,9 +1,9 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
-from .schema import GetUserByIdInput, GetUserByIdOutput
+from .schema import GetUserByIdInput, GetUserByIdOutput, Input, Output, Component
 
 # Custom imports below
-from komand_pagerduty.util.util import empty_user, normalize_user
+from komand_pagerduty.util.util import normalize_user
 
 
 class GetUserById(insightconnect_plugin_runtime.Action):
@@ -18,18 +18,10 @@ class GetUserById(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         """Get a user by ID"""
 
-        # required
-        user_id = params.get("id")
-
-        if id is None:
-            self.logger.warning("Please ensure a valid 'id' is provided")
-            raise PluginException(
-                cause="Missing required paramaters",
-                assistance="Please ensure a valid 'id' is provided",
-            )
+        user_id = params.get(Input.ID)
 
         response = self.connection.api.get_user_by_id(user_id=user_id)
 
         if response.get("user"):
             normalized_user = normalize_user(response.get("user"))
-            return {"user": normalized_user}
+            return {Output.USER: normalized_user}

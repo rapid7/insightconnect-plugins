@@ -17,24 +17,6 @@ class TestGetOnCall(TestCase):
     def setUpClass(cls) -> None:
         cls.action = Util.default_connector(GetOnCall())
 
-    @parameterized.expand(
-        [
-            [
-                "missing_params_invalid",
-                {},
-                "Missing required paramaters",
-                "Please ensure a valid 'schedule_id' is provided",
-            ]
-        ]
-    )
-    def test_missing_params_invalid(
-        self, mock_request: MagicMock, test_name: str, input_params: dict, cause: str, assistance: str
-    ):
-        with self.assertRaises(PluginException) as error:
-            self.action.run(input_params)
-        self.assertEqual(error.exception.cause, cause)
-        self.assertEqual(error.exception.assistance, assistance)
-
     @parameterized.expand([["no_uers_from_schedule_invalid", {"schedule_id": "no_users"}, {"users": []}]])
     def test_no_uers_from_schedule_invalid(
         self, mock_request: MagicMock, test_name: str, input_params: dict, expected: dict

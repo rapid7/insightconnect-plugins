@@ -22,31 +22,13 @@ class TestDeleteUserById(TestCase):
             [
                 "delete_valid",
                 {"id": "valid_id", "email": "test@test.com"},
-                "The user valid_id has been deleted",
+                {"success": "The user valid_id has been deleted"},
             ]
         ]
     )
     def test_delete_user_by_id_valid(self, mock_request: MagicMock, test_name: str, input_params: dict, expected: dict):
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
-
-    @parameterized.expand(
-        [
-            [
-                "missing_params_invalid",
-                {},
-                "Missing required paramaters",
-                "Please ensure a valid 'email' and 'id' is provided",
-            ]
-        ]
-    )
-    def test_missing_params_invalid(
-        self, mock_request: MagicMock, test_name: str, input_params: dict, cause: str, assistance: str
-    ):
-        with self.assertRaises(PluginException) as error:
-            self.action.run(input_params)
-        self.assertEqual(error.exception.cause, cause)
-        self.assertEqual(error.exception.assistance, assistance)
 
     @parameterized.expand(
         [

@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
-from .schema import SendResolveEventInput, SendResolveEventOutput
+from .schema import SendResolveEventInput, SendResolveEventOutput, Input, Output, Component
 
 # Custom imports below
 
@@ -17,16 +17,12 @@ class SendResolveEvent(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         """Resolve event"""
 
-        email = params.get("email")
-        incident_id = params.get("incident_id")
+        email = params.get(Input.EMAIL)
+        incident_id = params.get(Input.INCIDENT_ID)
 
-        if email is None or incident_id is None:
-            self.logger.warning("Please ensure a valid 'email' and 'incident_id'is provided")
-            raise PluginException(
-                cause="Missing required paramaters",
-                assistance="Please ensure a valid 'email' and 'incident_id' is provided",
-            )
+        response = self.connection.api.resolve_event(
+            email=email,
+            incident_id=incident_id,
+        )
 
-        response = self.connection.api.resolve_event(email=email, incident_id=incident_id)
-
-        return response
+        return {Output.INCIDENT: response.get("incident")}

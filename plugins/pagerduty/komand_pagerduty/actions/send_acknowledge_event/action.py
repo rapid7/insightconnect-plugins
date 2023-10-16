@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
-from .schema import SendAcknowledgeEventInput, SendAcknowledgeEventOutput
+from .schema import SendAcknowledgeEventInput, SendAcknowledgeEventOutput, Input, Output, Component
 
 # Custom imports below
 
@@ -17,19 +17,12 @@ class SendAcknowledgeEvent(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         """Send acknowledge"""
 
-        email = params.get("email")
-        incident_id = params.get("incident_id")
-
-        if email is None or incident_id is None:
-            self.logger.warning("Please ensure a valid 'email' and 'incident_id' is provided")
-            raise PluginException(
-                cause="Missing required paramaters",
-                assistance="Please ensure a valid 'email' and 'incident_id' is provided",
-            )
+        email = params.get(Input.EMAIL)
+        incident_id = params.get(Input.INCIDENT_ID)
 
         response = self.connection.api.acknowledge_event(
             email=email,
             incident_id=incident_id,
         )
 
-        return response
+        return {Output.INCIDENT: response.get("incident")}

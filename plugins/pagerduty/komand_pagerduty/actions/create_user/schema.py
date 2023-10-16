@@ -20,7 +20,6 @@ class Input:
 
 
 class Output:
-    SUCCESS = "success"
     USER = "user"
 
 
@@ -111,17 +110,11 @@ class CreateUserOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "success": {
-      "type": "boolean",
-      "title": "Success",
-      "description": "True if created",
-      "order": 1
-    },
     "user": {
       "$ref": "#/definitions/user",
       "title": "User",
       "description": "User",
-      "order": 2
+      "order": 1
     }
   },
   "definitions": {

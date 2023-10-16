@@ -82,14 +82,12 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|False|True if created|True|
 |user|user|False|User|{'avatar_url': 'https://secure.gravatar.com/avatar/c67b6c8ed606dec999bb064ada88cf5c.png?d=mm&r=PG', 'billed': True, 'color': 'purple', 'contact_methods': [{'html_url': None, 'id': 'P9CU341', 'self': 'https://api.pagerduty.com/users/PYGDZB8/contact_methods/P9CU341', 'summary': 'Default', 'type': 'email_contact_method_reference'}], 'coordinated_incidents': [], 'description': '', 'email': 'user1@example.com', 'html_url': 'https://api.pagerduty.com/users/PYGDZB8', 'id': 'PYGDZB8', 'invitation_sent': False, 'job_title': '', 'name': 'test user', 'notification_rules': [{'html_url': None, 'id': 'POMMNCV', 'self': 'https://api.pagerduty.com/users/PYGDZB8/notification_rules/POMMNCV', 'summary': '0 minutes: channel P9CU341', 'type': 'assignment_notification_rule_reference'}, {'html_url': None, 'id': 'PSZNORI', 'self': 'https://api.pagerduty.com/users/PYGDZB8/notification_rules/PSZNORI', 'summary': '0 minutes: channel P9CU341', 'type': 'assignment_notification_rule_reference'}], 'role': 'owner', 'self': 'https://api.pagerduty.com/users/PYGDZB8', 'summary': 'test summary', 'teams': [{'html_url': 'https://api.pagerduty.com/teams/PLBLK3G', 'id': 'PLBLK3G', 'self': 'https://api.pagerduty.com/teams/PLBLK3G', 'summary': 'Engineering', 'type': 'team_reference'}], 'time_zone': 'Europe/London', 'type': 'user'}|
   
 Example output:
 
 ```
 {
-  "success": true,
   "user": {
     "avatar_url": "https://secure.gravatar.com/avatar/c67b6c8ed606dec999bb064ada88cf5c.png?d=mm&r=PG",
     "billed": true,
@@ -284,14 +282,12 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|found|boolean|False|True if found|True|
 |user|user|False|User|{'avatar_url': 'https://secure.gravatar.com/avatar/c67b6c8ed606dec999bb064ada88cf5c.png?d=mm&r=PG', 'billed': True, 'color': 'purple', 'contact_methods': [{'html_url': None, 'id': 'P9CU341', 'self': 'https://api.pagerduty.com/users/PYGDZB8/contact_methods/P9CU341', 'summary': 'Default', 'type': 'email_contact_method_reference'}], 'coordinated_incidents': [], 'description': '', 'email': 'user1@example.com', 'html_url': 'https://api.pagerduty.com/users/PYGDZB8', 'id': 'PYGDZB8', 'invitation_sent': False, 'job_title': '', 'name': 'Test account', 'notification_rules': [{'html_url': None, 'id': 'POMMNCV', 'self': 'https://api.pagerduty.com/users/PYGDZB8/notification_rules/POMMNCV', 'summary': '0 minutes: channel P9CU341', 'type': 'assignment_notification_rule_reference'}, {'html_url': None, 'id': 'PSZNORI', 'self': 'https://api.pagerduty.com/users/PYGDZB8/notification_rules/PSZNORI', 'summary': '0 minutes: channel P9CU341', 'type': 'assignment_notification_rule_reference'}], 'role': 'owner', 'self': 'https://api.pagerduty.com/users/PYGDZB8', 'summary': 'test summary', 'teams': [{'html_url': 'https://api.pagerduty.com/teams/PLBLK3G', 'id': 'PLBLK3G', 'self': 'https://api.pagerduty.com/teams/PLBLK3G', 'summary': 'Engineering', 'type': 'team_reference'}], 'time_zone': 'Europe/London', 'type': 'user'}|
   
 Example output:
 
 ```
 {
-  "found": true,
   "user": {
     "avatar_url": "https://secure.gravatar.com/avatar/c67b6c8ed606dec999bb064ada88cf5c.png?d=mm&r=PG",
     "billed": true,

@@ -16,13 +16,7 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        schedule_id = params.get("schedule_id")
-
-        if schedule_id is None:
-            self.logger.warning("Please ensure a valid 'schedule_id' is provided")
-            raise PluginException(
-                cause="Missing required paramaters", assistance="Please ensure a valid 'schedule_id' is provided"
-            )
+        schedule_id = params.get(Input.SCHEDULE_ID)
 
         user_ids = self.get_user_ids(schedule_id=schedule_id)
 
@@ -34,7 +28,7 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
 
         list_of_users = self.get_list_of_users_from_ids(user_ids=user_ids)
 
-        return {"users": list_of_users}
+        return {Output.USERS: list_of_users}
 
     def get_user_ids(self, schedule_id: str):
         user_ids = []

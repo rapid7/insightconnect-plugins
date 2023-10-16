@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
-from .schema import CreateUserInput, CreateUserOutput
+from .schema import CreateUserInput, CreateUserOutput, Input, Output, Component
 
 # Custom imports below
 from komand_pagerduty.util.util import normalize_user
@@ -19,27 +19,19 @@ class CreateUser(insightconnect_plugin_runtime.Action):
         """Trigger event"""
 
         # required
-        from_email = params.get("from_email")
-        new_users_email = params.get("email")
-        name = params.get("name")
+        from_email = params.get(Input.FROM_EMAIL)
+        new_users_email = params.get(Input.EMAIL)
+        name = params.get(Input.NAME)
 
         # optional
         dict_of_optional_fields = {
-            "time_zone": params.get("time_zone", ""),
-            "color": params.get("color", ""),
-            "role": params.get("role", ""),
-            "timezone": params.get("timezone", ""),
-            "description": params.get("user_description", ""),
-            "job_title": params.get("job_title", ""),
-            "license": params.get("license", {}),
+            "time_zone": params.get(Input.TIME_ZONE, ""),
+            "color": params.get(Input.COLOR, ""),
+            "role": params.get(Input.ROLE, ""),
+            "description": params.get(Input.USER_DESCRIPTION, ""),
+            "job_title": params.get(Input.JOB_TITLE, ""),
+            "license": params.get(Input.LICENSE, {}),
         }
-
-        if from_email is None or new_users_email is None or name is None:
-            self.logger.warning("Please ensure a valid 'from_email', 'new_users_email' and 'name' is provided")
-            raise PluginException(
-                cause="Missing required paramaters",
-                assistance="Please ensure a valid 'from_email', 'new_users_email' and 'name' is provided",
-            )
 
         response = self.connection.api.create_user(
             from_email=from_email,
@@ -48,4 +40,4 @@ class CreateUser(insightconnect_plugin_runtime.Action):
             dict_of_optional_fields=dict_of_optional_fields,
         )
 
-        return {"user": normalize_user(response.get("user", {}))}
+        return {Output.USER: normalize_user(response.get("user", {}))}

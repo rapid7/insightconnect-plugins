@@ -54,7 +54,7 @@ class DeleteUserByIdOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "success": {
-      "type": "string",
+      "type": "boolean",
       "title": "Success",
       "description": "A message to show if the user was deleted as expected",
       "order": 1

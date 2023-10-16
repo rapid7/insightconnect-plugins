@@ -12,7 +12,6 @@ class Input:
 
 
 class Output:
-    FOUND = "found"
     USER = "user"
 
 
@@ -46,17 +45,11 @@ class GetUserByIdOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "found": {
-      "type": "boolean",
-      "title": "Found",
-      "description": "True if found",
-      "order": 1
-    },
     "user": {
       "$ref": "#/definitions/user",
       "title": "User",
       "description": "User",
-      "order": 2
+      "order": 1
     }
   },
   "definitions": {

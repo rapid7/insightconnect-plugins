@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
-from .schema import SendTriggerEventInput, SendTriggerEventOutput
+from .schema import SendTriggerEventInput, SendTriggerEventOutput, Input, Output, Component
 
 # Custom import below
 
@@ -18,27 +18,20 @@ class SendTriggerEvent(insightconnect_plugin_runtime.Action):
         """Trigger event"""
 
         # required
-        email = params.get("email")
-        title = params.get("title")
-        service = params.get("service", {})
+        email = params.get(Input.EMAIL)
+        title = params.get(Input.TITLE)
+        service = params.get(Input.SERVICE, {})
 
         # optional
         dict_of_optional_fields = {
-            "urgency": params.get("urgency", ""),
-            "incident_key": params.get("incident_key", ""),
-            "priority": params.get("priority", {}),
-            "escalation_policy": params.get("escalation_policy", {}),
-            "conference_bridge": params.get("conference_bridge", {}),
-            "body": params.get("body", {}),
-            "assignments": params.get("assignments", []),
+            "urgency": params.get(Input.URGENCY, ""),
+            "incident_key": params.get(Input.INCIDENT_KEY, ""),
+            "priority": params.get(Input.PRIORITY, {}),
+            "escalation_policy": params.get(Input.ESCALATION_POLICY, {}),
+            "conference_bridge": params.get(Input.CONFERENCE_BRIDGE, {}),
+            "body": params.get(Input.BODY, {}),
+            "assignments": params.get(Input.ASSIGNMENTS, []),
         }
-
-        if email is None or title is None or service is None:
-            self.logger.warning("Please ensure a valid 'email', 'tile' and 'service' is provided")
-            raise PluginException(
-                cause="Missing required paramaters",
-                assistance="Please ensure a valid 'email' and 'incident_id' is provided",
-            )
 
         if params.get("escalation_policy", {}) and params.get("assignments", []):
             self.logger.warning(
@@ -53,4 +46,4 @@ class SendTriggerEvent(insightconnect_plugin_runtime.Action):
             email=email, title=title, service=service, dict_of_optional_fields=dict_of_optional_fields
         )
 
-        return response
+        return {Output.INCIDENT: response.get("incident")}
