@@ -33,10 +33,10 @@ class TestDeleteUserById(TestCase):
     @parameterized.expand(
         [
             [
-                "delete_valid",
+                "delete_invalid",
                 {"id": "invalid_id", "email": "test@test.com"},
                 "Invalid or unreachable endpoint provided.",
-                "Verify the endpoint/URL/hostname configured in your plugin connection is correct.",
+                "Verify the URLs or endpoints in your configuration are correct.",
             ]
         ]
     )
@@ -45,12 +45,6 @@ class TestDeleteUserById(TestCase):
     ):
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
-
-        print(cause)
-        print(error.exception.cause)
-
-        print(assistance)
-        print(error.exception.assistance)
 
         self.assertEqual(error.exception.cause, cause)
         self.assertEqual(error.exception.assistance, assistance)

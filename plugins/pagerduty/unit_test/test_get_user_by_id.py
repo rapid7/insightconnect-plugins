@@ -37,7 +37,7 @@ class TestGetUserById(TestCase):
                 "api_error_invalid",
                 {"id": "invalid_id"},
                 "Invalid or unreachable endpoint provided.",
-                "Verify the endpoint/URL/hostname configured in your plugin connection is correct.",
+                "Verify the URLs or endpoints in your configuration are correct."
             ]
         ]
     )
