@@ -1278,13 +1278,13 @@ Example output:
 
 #### Get Query Results
   
-Get query results for a LEQL query by query ID
+Get query results for a LEQL query by log ID
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|string|None|True|Query ID|None|174e4f99-2ac7-4481-9301-4d24c34baf06|
+|id|string|None|True|Log ID|None|174e4f99-2ac7-4481-9301-4d24c34baf06|
 |most_recent_first|boolean|None|False|Order most recent first|None|True|
   
 Example input:
@@ -1975,7 +1975,7 @@ Example output:
 
 # Version History
 
-* 5.1.2 - Action: `Advanced Query on Log Set` - Fix JSONDecoderError
+* 5.1.2 - Action: `Advanced Query on Log Set` - Fix JSONDecoderError | Action: `Query` - Update spec and help.md to show it queries log IDs, not query IDs.
 * 5.1.1 - Action: `List Investigations` - Now receiving size input | Actions: `Advanced Query On Log` & `Advanced Query On Log Set` - Acronym LQL has been updated to LEQL
 * 5.1.0 - New actions added: `get_user_information` and `get_asset_information`
 * 5.0.1 - Update the endpoint `get_a_saved_query` reaches out to
