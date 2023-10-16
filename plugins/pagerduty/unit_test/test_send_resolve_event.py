@@ -37,7 +37,7 @@ class TestSendResolveEvent(TestCase):
                 "api_error_invalid",
                 {"incident_id": "invalid_id", "email": "test@example.com"},
                 "Invalid or unreachable endpoint provided.",
-                "Verify the URLs or endpoints in your configuration are correct."
+                "Verify the URLs or endpoints in your configuration are correct.",
             ]
         ]
     )
