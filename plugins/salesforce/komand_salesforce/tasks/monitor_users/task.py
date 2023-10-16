@@ -180,8 +180,11 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
             try:
                 self.convert_to_datetime(value)
             except ValueError:
-                state[key] = str(self.get_current_time())
-                return False, key
+                try:
+                    state[key] = str(self.convert_to_datetime_from_old_format(value))
+                except ValueError:
+                    state[key] = str(self.get_current_time())
+                    return False, key
         return True, ""
 
     def _get_recent_timestamp(self, state: dict, fallback_timestamp: datetime, key: str) -> datetime:
@@ -237,3 +240,6 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
         for record in records:
             record["DataType"] = field_value
         return records
+
+    def convert_to_datetime_from_old_format(self, timestamp: str) -> datetime:
+        return datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%f%z")
