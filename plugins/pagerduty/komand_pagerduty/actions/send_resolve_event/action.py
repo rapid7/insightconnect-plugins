@@ -1,8 +1,8 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import SendResolveEventInput, SendResolveEventOutput
 
 # Custom imports below
-import pypd
 
 
 class SendResolveEvent(insightconnect_plugin_runtime.Action):
@@ -17,18 +17,16 @@ class SendResolveEvent(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         """Resolve event"""
 
-        ev = pypd.Event.create(
-            data={
-                "service_key": params["service_key"],
-                "event_type": "resolve",
-                "incident_key": params["incident_key"],
-                "description": params.get("description"),
-                "details": params.get("details"),
-            }
-        )
+        email = params.get("email")
+        incident_id = params.get("incident_id")
 
-        return ev
+        if email is None or incident_id is None:
+            self.logger.warning("Please ensure a valid 'email' and 'incident_id'is provided")
+            raise PluginException(
+                cause="Missing required paramaters",
+                assistance="Please ensure a valid 'email' and 'incident_id' is provided",
+            )
 
-    def test(self):
-        """Test action"""
-        return {}
+        response = self.connection.api.resolve_event(email=email, incident_id=incident_id)
+
+        return response

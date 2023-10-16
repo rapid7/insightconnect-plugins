@@ -3,7 +3,7 @@ from .schema import GetOnCallInput, GetOnCallOutput, Input, Output, Component
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
-import asyncio
+from komand_pagerduty.util.util import normalize_user
 
 
 class GetOnCall(insightconnect_plugin_runtime.Action):
@@ -16,11 +16,24 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        schedule_id = params.get(Input.SCHEDULE_ID, None)
+        schedule_id = params.get("schedule_id")
+
+        if schedule_id is None:
+            self.logger.warning("Please ensure a valid 'schedule_id' is provided")
+            raise PluginException(
+                cause="Missing required paramaters", assistance="Please ensure a valid 'schedule_id' is provided"
+            )
+
         user_ids = []
-        for oncall_object in self.connection.api.get_on_calls(schedule_id).get("oncalls", []):
+        for oncall_object in self.connection.api.get_on_calls(schedule_id).get("schedule", {}).get("users", []):
             try:
-                user_ids.append(oncall_object["user"]["id"])
+                if oncall_object.get("deleted_at", None):
+                    self.logger.info(oncall_object)
+                    self.logger.warning(
+                        f"The following user {oncall_object.get('id')} is part of the schedule but has been deleted"
+                    )
+                else:
+                    user_ids.append(oncall_object["id"])
             except KeyError as e:
                 self.logger.warning(f"User ID not available: {str(e)}")
                 continue
@@ -31,19 +44,15 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
                 "Please make sure that the schedule used is correct."
             )
 
-        users = asyncio.run(self.async_get_users(user_ids))
-        return {Output.USERS: insightconnect_plugin_runtime.helper.clean(users)}
+        list_of_users = []
+        for user_id in user_ids:
+            try:
+                user_info = self.connection.api.get_user_by_id(user_id).get("user", {})
+            except Exception as e:
+                self.logger.warning(f"No information was found for the user - {user_id}")
+                continue
 
-    async def async_get_users(self, user_ids: [str]) -> list:
-        connection = self.connection.async_connection
-        async with connection.get_async_session() as async_session:
-            tasks: [asyncio.Future] = []
-            for user_id in user_ids:
-                url = f"https://api.pagerduty.com/users/{user_id}"
-                tasks.append(
-                    asyncio.ensure_future(connection.async_request(session=async_session, url=url, method="get"))
-                )
-            user_objects = await asyncio.gather(*tasks)
-            users = [u.get("user") for u in user_objects]
+            if user_info:
+                list_of_users.append(normalize_user(user_info))
 
-            return users
+        return {"users": list_of_users}

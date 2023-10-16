@@ -1,8 +1,8 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import SendAcknowledgeEventInput, SendAcknowledgeEventOutput
 
 # Custom imports below
-import pypd
 
 
 class SendAcknowledgeEvent(insightconnect_plugin_runtime.Action):
@@ -17,23 +17,19 @@ class SendAcknowledgeEvent(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         """Send acknowledge"""
 
-        self.logger.info("Acknowledging: %s", params)
-        ev = pypd.Event.create(
-            data={
-                "event_type": "acknowledge",
-                "service_key": params["service_key"],
-                "incident_key": params["incident_key"],
-                "description": params.get("description") or "",
-                "details": params.get("details") or {},
-            }
+        email = params.get("email")
+        incident_id = params.get("incident_id")
+
+        if email is None or incident_id is None:
+            self.logger.warning("Please ensure a valid 'email' and 'incident_id' is provided")
+            raise PluginException(
+                cause="Missing required paramaters",
+                assistance="Please ensure a valid 'email' and 'incident_id' is provided",
+            )
+
+        response = self.connection.api.acknowledge_event(
+            email=email,
+            incident_id=incident_id,
         )
 
-        return ev
-
-    def test(self):
-        """Test action"""
-        return {
-            "incident_key": "aebdf1be9793454e86c0f0079820f32f",
-            "status": "success",
-            "message": "Event processed",
-        }
+        return response

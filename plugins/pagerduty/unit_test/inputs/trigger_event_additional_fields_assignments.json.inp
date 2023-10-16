@@ -1,0 +1,25 @@
+{
+    "email": "joneill@rapid7.com",
+    "title": "test additional fields assignments",
+    "service": {
+        "id": "PLPY09O",
+        "type": "service_reference"
+    },
+    "priority": {
+        "id": "PR0EVG8",
+        "type": "priority"
+    },
+    "urgency": "high",
+    "body": {
+        "type": "incident_body",
+        "details": "A disk is getting full on this machine. You should investigate what is causing the disk to fill, and ensure that there is an automated process in place for ensuring data is rotated (eg. logs should have logrotate around them). If data is expected to stay on this disk forever, you should start planning to scale up to a larger disk."
+    },
+    "assignments": [
+        {
+            "assignee": {
+                "id": "PFJIAVM",
+                "type": "user_reference"
+            }
+        }
+    ]
+}
