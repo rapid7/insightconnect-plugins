@@ -58,7 +58,7 @@ class MockResponse:
 
 
 def mock_request_post(url: str) -> MockResponse:
-    if url == f"{Util.STUB_URL_API}/query/saved_queries/{STUB_QUERY_ID}":
+    if url == f"{Util.STUB_URL_API}/query/saved_query/{STUB_QUERY_ID}":
         return MockResponse("get_a_saved_query", 200)
     if url == f"{Util.STUB_URL_API}/idr/v2/investigations":
         return MockResponse("create_investigation", 201)
@@ -84,9 +84,9 @@ def mock_request_get(url: str) -> MockResponse:
         return MockResponse("query_key_error", 200)
     if url == f"{Util.STUB_URL_REST}/query/saved_queries":
         return MockResponse("get_all_saved_queries", 200)
-    if url == f"{Util.STUB_URL_REST}/query/saved_queries/{STUB_QUERY_ID}":
+    if url == f"{Util.STUB_URL_REST}/query/saved_query/{STUB_QUERY_ID}":
         return MockResponse("get_a_saved_query", 200)
-    if url == f"{Util.STUB_URL_REST}/query/saved_queries/{STUB_QUERY_ID_NOT_FOUND}":
+    if url == f"{Util.STUB_URL_REST}/query/saved_query/{STUB_QUERY_ID_NOT_FOUND}":
         return MockResponse("get_a_saved_query_404", 404)
     if url == f"{Util.STUB_URL_API}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}":
         return MockResponse("get_investigation", 200)
