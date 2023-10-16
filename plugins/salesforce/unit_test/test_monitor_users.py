@@ -36,6 +36,11 @@ class TestMonitorUsers(TestCase):
                 Util.read_file_to_dict("expected/monitor_users_with_state.json.exp"),
             ],
             [
+                "with_date_old_format_state",
+                Util.read_file_to_dict("inputs/monitor_users_with_state.json.inp"),
+                Util.read_file_to_dict("expected/monitor_users_with_state.json.exp"),
+            ],
+            [
                 "empty",
                 Util.read_file_to_dict("inputs/monitor_users_empty.json.inp"),
                 Util.read_file_to_dict("expected/monitor_users_empty.json.exp"),
