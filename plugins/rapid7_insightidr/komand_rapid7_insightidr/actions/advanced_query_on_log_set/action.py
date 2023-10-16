@@ -58,8 +58,9 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         """
         Get log entries from a callback URL
 
-        @param callback_url: str
-        @return: list of log entries
+        :param callback_url: str
+        :param timeout: int
+        :return: list of log entries
         """
         self.logger.info(f"Trying to get results from callback URL: {callback_url}")
         response = self.connection.session.get(callback_url)
