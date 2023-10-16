@@ -144,3 +144,28 @@ class TestMonitorLogs(TestCase):
             f"Reverting to use time: 2023-04-27T08:33:46.123Z"
         )
         self.assertIn(logger, mocked_info_log.call_args_list)
+
+    @patch("logging.Logger.info")
+    def test_filter_on_pagination(self, mocked_info_log, *_mocks):
+        # If we have made a call to Okta using the next_page_link state then we don't need to filter any events from
+        # this response, as this can cause the loss of events that match the same timestamp but on the next page.
+
+        logger = call("next_page value used to poll from Okta. Returning 1 event(s) from response.")
+        first_ts = "2023-04-27T06:49:21.777Z"
+
+        # Part one: call a normal next page workflow when we expect the TS to not exist in the response
+        current_state = {"last_collection_timestamp": first_ts, "next_page_link": "https://example.com/nextLink?q=next"}
+        actual, new_state, has_more_pages, _status_code, _error = self.action.run(state=current_state)
+        self.assertEqual(1, len(actual))
+        self.assertEqual(True, has_more_pages)
+        self.assertIn(logger, mocked_info_log.call_args_list)
+
+        # Part two: iterate again for the next page, we want to make sure the faked 'next' event with the same timestamp
+        # in the previous run is not filtered out.
+        mocked_info_log.call_args_list = []  # reset the call list
+        self.assertNotEqual(first_ts, new_state["last_collection_timestamp"])  # we have moved TS forward...
+        self.assertEqual(actual[0]["published"], new_state["last_collection_timestamp"])  # to the returned log TS
+        new_logs, new_state_2, _has_more_pages, _status_code, _error = self.action.run(state=new_state)
+        self.assertEqual(1, len(new_logs))
+        self.assertEqual(new_state_2["last_collection_timestamp"], new_logs[0]["published"])
+        self.assertIn(logger, mocked_info_log.call_args_list)
