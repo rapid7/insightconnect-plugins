@@ -120,7 +120,7 @@ def mock_request_put(url: str) -> MockResponse:
 
 
 def mock_request_selection(url, method="get"):
-    # Check reqeust type and endpoint. Return appropriate file name to be loaded and response code
+    # Check request type and endpoint. Return appropriate file name to be loaded and response code
     if method == REQUEST_POST:
         return mock_request_post(url)
     elif method == REQUEST_GET:
