@@ -99,14 +99,12 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         self.connection.admin_api.toggle_rate_limiting = False
         has_more_pages = False
         backward_comp_first_run = False
-
         try:
             now = self.get_current_time()
             last_collection_timestamp = state.get(self.LAST_COLLECTION_TIMESTAMP)
             trust_monitor_next_page_params = state.get(self.TRUST_MONITOR_NEXT_PAGE_PARAMS)
             auth_logs_next_page_params = state.get(self.AUTH_LOGS_NEXT_PAGE_PARAMS)
             admin_logs_next_page_params = state.get(self.ADMIN_LOGS_NEXT_PAGE_PARAMS)
-
             if last_collection_timestamp:
                 # Previously only one timestamp was held (the end of the collection window)
                 # This has been superceded by a latest timestamp per log type
@@ -131,7 +129,6 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 )
             try:
                 new_logs = []
-
                 previous_trust_monitor_event_hashes = state.get(self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES, [])
                 previous_admin_log_hashes = state.get(self.PREVIOUS_ADMIN_LOG_HASHES, [])
                 previous_auth_log_hashes = state.get(self.PREVIOUS_AUTH_LOG_HASHES, [])
