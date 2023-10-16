@@ -16,7 +16,6 @@ class CreateUser(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-
         # required
         from_email = params.get(Input.FROM_EMAIL)
         new_users_email = params.get(Input.EMAIL)

@@ -15,7 +15,6 @@ class SendTriggerEvent(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-
         # required
         email = params.get(Input.EMAIL)
         title = params.get(Input.TITLE)

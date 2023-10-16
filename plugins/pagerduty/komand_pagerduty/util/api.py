@@ -6,7 +6,6 @@ import requests
 import json
 
 
-
 class PagerDutyAPI:
     def __init__(self, api_key: str, logger: Logger):
         self.headers = {
@@ -181,11 +180,11 @@ class PagerDutyAPI:
 
         Returns:
             Union[dict, str]:
-                dict: The response of the request in json format 
+                dict: The response of the request in json format
                 bool: If the delete request is called then there will be no data returned from the api, so we return True
 
         """
-                 
+
         if not headers:
             headers = self.headers
 
