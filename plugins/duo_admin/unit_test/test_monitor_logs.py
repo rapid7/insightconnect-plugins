@@ -43,21 +43,16 @@ class TestMonitorLogs(TestCase):
                 # TODO WORK OUT WHICH REQUEST SHOULD BE BAD and how to make it fail
                 Util.read_file_to_dict("inputs/monitor_logs_bad_request.json.inp"),
                 Util.read_file_to_dict("expected/monitor_logs_bad_request.json.exp"),
-            #],
-            #[
-            #    "server_error",
-            #    Util.read_file_to_dict("inputs/monitor_logs_server_error.json.inp"),
-            #    Util.read_file_to_dict("expected/monitor_logs_server_error.json.exp"),
+            ],
+            [
+                "server_error",
+                Util.read_file_to_dict("inputs/monitor_logs_server_error.json.inp"),
+                Util.read_file_to_dict("expected/monitor_logs_server_error.json.exp"),
             ],
         ]
     )
     def test_monitor_logs(self, mock_request, mock_get_time, test_name, current_state, expected):
-        #breakpoint()
         actual, actual_state, has_more_pages, status_code, _ = self.action.run(state=current_state)
-        print(f"Expected state: {expected.get('state')}\n")
-        print(f"Actual state: {actual_state}\n")
-        print(f"Expected logs: {expected.get('logs')}\n")
-        print(f"Actual logs: {actual}\n")
 
         self.assertEqual(actual, expected.get("logs"))
         self.assertEqual(actual_state, expected.get("state"))
