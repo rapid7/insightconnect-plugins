@@ -54,7 +54,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         self.logger.info("Sending results to orchestrator.")
         return {Output.RESULTS: log_entries, Output.COUNT: len(log_entries)}
 
-    def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
+    def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]: # noqa: C901
         """
         Get log entries from a callback URL
 
