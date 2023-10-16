@@ -124,7 +124,7 @@ class ResourceHelper(object):
             raise PluginException(f"InsightIDR returned a status code of {response.status_code}: {status_code_message}")
 
     def make_request(  # noqa: C901
-        self, path: str, method: str = "GET", params: dict = None, json_data: dict = None, files: dict = None
+            self, path: str, method: str = "GET", params: dict = None, json_data: dict = None, files: dict = None
     ):
         try:
             response = self.session.request(
@@ -142,7 +142,7 @@ class ResourceHelper(object):
                 raise PluginException(
                     cause="Resource not found.",
                     assistance="Verify your input is correct and not malformed and try again. If the issue persists, "
-                    "please contact support.",
+                               "please contact support.",
                     data=response.text,
                 )
             if 400 < response.status_code < 500:
@@ -196,7 +196,7 @@ class ResourceHelper(object):
         return self.make_request(path=endpoint)
 
     @staticmethod
-    async def _get_log_entries_with_labels(connection: Connection, log_entries: [dict]) -> [dict]:
+    async def _get_log_entries_with_labels(connection: Connection, log_entries: [dict]) -> [dict]:  # noqa: C901
         label_ids = set()
         for log_entry in log_entries:
             for label in log_entry.get("labels", []):
