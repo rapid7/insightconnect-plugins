@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action is used to run a Python 3 function"
+    DESCRIPTION = "Run a Python 3 function"
 
 
 class Input:

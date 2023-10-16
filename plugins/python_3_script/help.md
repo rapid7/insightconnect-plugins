@@ -63,7 +63,7 @@ Example input:
 
 #### Run Function
 
-This action is used to run a Python 3 function. Key names must line up with the parameter names expected by the function.
+Run a Python 3 function
 
 ##### Input
 
