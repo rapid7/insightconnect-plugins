@@ -58,7 +58,7 @@ connection:
 actions:
   run:
     title: Run Function
-    description: This action is used to run a Python 3 function
+    description: Run a Python 3 function
     input:
       function:
         description: Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection
