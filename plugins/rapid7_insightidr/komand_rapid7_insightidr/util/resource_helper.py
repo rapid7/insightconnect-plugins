@@ -221,7 +221,10 @@ class ResourceHelper(object):
         new_log_entries: [dict] = []
         for log_entry in log_entries:
             new_log_entry = dict(log_entry)
-            new_log_entry["message"] = json.loads(json.dumps(log_entry.get("message", {})))
+            try:
+                new_log_entry["message"] = json.loads(log_entry.get("message", {}))
+            except json.decoder.JSONDecodeError:
+                new_log_entry["message"] = json.loads(json.dumps(log_entry.get("message", {})))
             entry_labels = []
             for label in log_entry.get("labels", []):
                 label_id = label.get("id")
