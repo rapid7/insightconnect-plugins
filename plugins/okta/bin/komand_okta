@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Okta"
 Vendor = "rapid7"
-Version = "4.2.1"
+Version = "4.2.2"
 Description = "Secure identity management and single sign-on to any application"
 
 

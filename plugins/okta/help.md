@@ -1612,6 +1612,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 4.2.2 - Monitor Logs task: log deduplication only applied when querying Okta using since and until parameters.
 * 4.2.1 - Monitor Logs task: filter previously returned log events | only update time checkpoint when an event is returned | update timestamp format | set cutoff time of 24 hours.
 * 4.2.0 - Monitor Logs task: return raw logs data without cleaning and use last log time as checkpoint in time for next run.
 * 4.1.1 - Monitor Logs task: strip http/https in hostname

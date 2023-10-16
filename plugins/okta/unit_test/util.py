@@ -64,7 +64,9 @@ class Util:
                 resp_args["filename"], resp_args["headers"] = "get_logs_single_event.json.resp", {"link": ""}
             return MockResponse(**resp_args)
         if url == "https://example.com/nextLink?q=next":
-            return MockResponse(200, "get_logs_next_page.json.resp", {"link": ""})
+            return MockResponse(
+                200, "get_logs_next_page.json.resp", {"link": '<https://example.com/nextLink?q=next> rel="next"'}
+            )
         if url == "https://example.com/api/v1/groups/12345/users" and first_request:
             first_request = False
             return MockResponse(200, "get_users_in_group.json.resp")
