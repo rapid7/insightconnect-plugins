@@ -1975,6 +1975,7 @@ Example output:
 
 # Version History
 
+* 5.1.2 - Action: `Advanced Query on Log Set` - Fix JSONDecoderError
 * 5.1.1 - Action: `List Investigations` - Now receiving size input | Actions: `Advanced Query On Log` & `Advanced Query On Log Set` - Acronym LQL has been updated to LEQL
 * 5.1.0 - New actions added: `get_user_information` and `get_asset_information`
 * 5.0.1 - Update the endpoint `get_a_saved_query` reaches out to
