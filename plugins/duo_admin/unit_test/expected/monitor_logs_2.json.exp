@@ -17,7 +17,7 @@
 		"surfaced_timestamp": 1682836486232,
 		"triaged_as_interesting": false,
 		"type": "bypass_status",
-		"logType": "trust_monitor_event"
+		"log_type": "trust_monitor_event"
 	},
 	{
 		"action": "user_create",
@@ -32,8 +32,9 @@
 		"object": "user",
 		"timestamp": 1682836490,
 		"username": "API (Admin API)",
-		"logType": "administrator"
-	}, {
+		"log_type": "administrator"
+	},
+	{
 		"action": "admin_login",
 		"description": {
 			"ip_address": "198.51.100.1",
@@ -46,7 +47,7 @@
 		"object": null,
 		"timestamp": 1682836495,
 		"username": "Admin",
-		"logType": "administrator"
+		"log_type": "administrator"
 	}, {
 		"access_device": {
 			"browser": "Chrome",
@@ -65,7 +66,8 @@
 				"state": "California"
 			},
 			"os": "Mac OS X",
-			"os_version": "10.15.7"
+			"os_version": "10.15.7",
+			"security_agents": "unknown"
 		},
 		"adaptive_trust_assessments": {},
 		"alias": "unknown",
@@ -75,7 +77,7 @@
 		},
 		"auth_device": {
 			"ip": null,
-			"key": "DPAVQAJMU3BW0LV7OCX3",
+			"key": "DP3PC0QBDWV78E7F7LU9",
 			"location": {
 				"city": null,
 				"country": null,
@@ -86,45 +88,106 @@
 		"email": null,
 		"event_type": "enrollment",
 		"factor": "not_available",
-		"isotimestamp": "2023-05-29T10:07:38.631165+00:00",
+		"isotimestamp": "2023-05-22T09:52:13.041420+00:00",
 		"ood_software": null,
 		"reason": null,
 		"result": "success",
-		"timestamp": 1685354858,
+		"timestamp": 1684749133,
 		"trusted_endpoint_status": "unknown",
 		"txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
 		"user": {
-			"groups": ["Test Group"],
-			"key": "DUOR48RKV2AYN7YVS9BT",
-			"name": "example-user"
+			"groups": [],
+			"key": "DU60BNA27X94XEOYB5VX",
+			"name": "new-user"
 		},
-		"logType": "authentication"
-	}
+		"log_type": "authentication"
+	},
+	{
+        "access_device": {
+          "browser": "Chrome",
+          "browser_version": "113.0.0.0",
+          "epkey": null,
+          "flash_version": null,
+          "hostname": null,
+          "ip": "198.51.100.1",
+          "is_encryption_enabled": "unknown",
+          "is_firewall_enabled": "unknown",
+          "is_password_set": "unknown",
+          "java_version": null,
+          "location": {
+            "city": "Los Angeles",
+            "country": "United States",
+            "state": "California"
+          },
+          "os": "Mac OS X",
+          "os_version": "10.15.7",
+          "security_agents": "unknown"
+        },
+        "adaptive_trust_assessments": {},
+        "alias": "unknown",
+        "application": {
+          "key": "DI8CODQSMK4BXPLYS47K",
+          "name": "User Portal"
+        },
+        "auth_device": {
+          "ip": null,
+          "key": "DPS4SII7YZ7ISQITTBE4",
+          "location": {
+            "city": null,
+            "country": null,
+            "state": null
+          },
+          "name": "+111111111"
+        },
+        "email": null,
+        "event_type": "enrollment",
+        "factor": "not_available",
+        "isotimestamp": "2023-05-17T10:04:19.369345+00:00",
+        "ood_software": null,
+        "reason": null,
+        "result": "success",
+        "timestamp": 1684317859,
+        "trusted_endpoint_status": "unknown",
+        "txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+        "user": {
+          "groups": [
+            "Test Group"
+          ],
+          "key": "DUWZR0IUOT27EPXSCOI9",
+          "name": "example-user"
+        },
+        "log_type": "authentication"
+      }
 ],
   "state": {
-    "last_collection_timestamp": 1682930026000,
+    "last_collection_timestamp": null,
     "previous_admin_log_hashes": [
-      "8d004af6ab808f58fb557141c59541465cbf93a8",
-      "37c74fbd74ef97dd1f97c0cdae95a90d1da65996"
+      "cd9aa0fc02dd4a4538a3368025b2fab7480fbc7a",
+      "79ac88bf9a2b241fc385a1501b614c39cdf7cd8c"
     ],
     "previous_auth_log_hashes": [
-      "61514fafb1eb74b584a3afbe8e43ba8eeb3ea21b"
+      "12f93a8c7ec4baebeb6572636552bf82f8d6eada",
+      "17579ab1c166c6ac604c24f798deb5bc54e88029"
     ],
     "previous_trust_monitor_event_hashes": [
-      "7980642f5ddc16200f74ce4537a871baa6010a90"
+      "b7db98ed56420f228cf72b3b80a26c44e14e0dec"
     ],
-    "auth_logs_next_page_params": {
-      "limit": "1000",
-      "maxtime": "1682930026000",
-      "mintime": "1682843686000",
-      "next_offset": "1683730665255,9de5069c-5afe-602b-2ea0-a04b66beb2c0"
-    },
+    "trust_monitor_last_log_timestamp": 1682843686000,
     "trust_monitor_next_page_params": {
-      "limit": "200",
-      "maxtime": "1682930026000",
       "mintime": "1682843686000",
+      "maxtime": "1682929966000",
+      "limit": "200",
       "offset": "1591014"
-     }
+     },
+     "admin_logs_last_log_timestamp": 1682843686,
+     "auth_logs_last_log_timestamp": 1684749133,
+     "auth_logs_next_page_params": {
+       "mintime": "1682843686000",
+       "maxtime": "1682929966000",
+       "limit": "1000",
+       "sort": "ts:asc",
+       "next_offset": "1683730665255,9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+    }
   },
   "status_code": 200
 }
