@@ -24,6 +24,20 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
                 cause="Missing required paramaters", assistance="Please ensure a valid 'schedule_id' is provided"
             )
 
+        user_ids = self.get_user_ids(schedule_id=schedule_id)
+
+
+        if not user_ids and schedule_id:
+            self.logger.warning(
+                f"No users found for the provided schedule ID - {schedule_id}. "
+                "Please make sure that the schedule used is correct."
+            )
+
+        list_of_users = self.get_list_of_users_from_ids(user_ids=user_ids)
+
+        return {"users": list_of_users}
+    
+    def get_user_ids(self, schedule_id:str):
         user_ids = []
         for oncall_object in self.connection.api.get_on_calls(schedule_id).get("schedule", {}).get("users", []):
             try:
@@ -37,22 +51,17 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
             except KeyError as e:
                 self.logger.warning(f"User ID not available: {str(e)}")
                 continue
-
-        if not user_ids and schedule_id:
-            self.logger.warning(
-                f"No users found for the provided schedule ID - {schedule_id}. "
-                "Please make sure that the schedule used is correct."
-            )
-
+        return user_ids
+    
+    def get_list_of_users_from_ids(self, user_ids: list):
         list_of_users = []
         for user_id in user_ids:
             try:
                 user_info = self.connection.api.get_user_by_id(user_id).get("user", {})
-            except Exception as e:
+            except Exception:
                 self.logger.warning(f"No information was found for the user - {user_id}")
                 continue
 
             if user_info:
                 list_of_users.append(normalize_user(user_info))
-
-        return {"users": list_of_users}
+        return list_of_users

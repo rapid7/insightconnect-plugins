@@ -50,7 +50,7 @@ class PagerDutyAPI:
             if value:
                 payload["incident"][key] = value
 
-        return self.send_request(method="POST", path=f"/incidents/", headers=headers, payload=payload)
+        return self.send_request(method="POST", path="/incidents/", headers=headers, payload=payload)
 
     def create_user(
         self,
@@ -68,7 +68,7 @@ class PagerDutyAPI:
             if value:
                 payload["user"][key] = value
 
-        return self.send_request(method="POST", path=f"/users/", headers=headers, payload=payload)
+        return self.send_request(method="POST", path="/users/", headers=headers, payload=payload)
 
     def delete_user_by_id(self, email: str, user_id: str) -> dict:
         headers = {"From": f"{email}"}
@@ -79,7 +79,7 @@ class PagerDutyAPI:
         return self.send_request(method="GET", path=f"/users/{user_id}/")
 
     def list_users(self) -> dict:
-        return self.send_request(method="GET", path=f"/users/")
+        return self.send_request(method="GET", path="/users/")
 
     def send_request(
         self, method: str, path: str, params: dict = None, payload: dict = None, headers: dict = None, data: dict = None
@@ -99,24 +99,26 @@ class PagerDutyAPI:
 
             if method.upper() == "DELETE" and response.status_code == 204:
                 return True
-
-            if response.status_code == 401:
-                raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
-            if response.status_code == 403:
-                raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
-            if response.status_code == 404:
-                raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
-            if 400 <= response.status_code < 500:
-                raise PluginException(
-                    preset=PluginException.Preset.UNKNOWN,
-                    data=response.text,
-                )
-            if response.status_code >= 500:
-                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
-
             if 200 <= response.status_code < 300:
                 return clean(json.loads(response.content))
 
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+            self._check_status_code(response)
         except requests.exceptions.HTTPError as e:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+    
+    def _check_status_code(self, response:dict):
+
+        if response.status_code == 401:
+            raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
+        if response.status_code == 403:
+            raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
+        if response.status_code == 404:
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
+        if 400 <= response.status_code < 500:
+            raise PluginException(
+                preset=PluginException.Preset.UNKNOWN,
+                data=response.text,
+            )
+        if response.status_code >= 500:
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+        raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
