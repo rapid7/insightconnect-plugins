@@ -21,12 +21,6 @@ class DeleteUserById(insightconnect_plugin_runtime.Action):
         email = params.get(Input.EMAIL)
         user_id = params.get(Input.ID)
 
-        if email is None or user_id is None:
-            self.logger.warning("Please ensure a valid 'email' and 'id' is provided")
-            raise PluginException(
-                cause="Missing required paramaters", assistance="Please ensure a valid 'email' and 'id' is provided"
-            )
-
         self.connection.api.delete_user_by_id(email=email, user_id=user_id)
 
         return {Output.SUCCESS: f"The user {user_id} has been deleted"}
