@@ -53,8 +53,11 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     if not next_page_link
                     else self.connection.api_client.get_next_page(next_page_link)
                 )
+                new_logs = self.get_events(
+                    new_logs_resp.json(), state.get(self.LAST_COLLECTION_TIMESTAMP), next_page_link
+                )
                 next_page_link = self.get_next_page_link(new_logs_resp.headers)
-                new_logs = self.get_events(new_logs_resp.json(), state.get(self.LAST_COLLECTION_TIMESTAMP))
+
                 if next_page_link:
                     state[self.NEXT_PAGE_LINK] = next_page_link
                     has_more_pages = True
@@ -111,14 +114,19 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             next_link = matched_link.group(1) if matched_link else None
         return next_link
 
-    def get_events(self, logs: list, time: str) -> list:
+    def get_events(self, logs: list, time: str, pagination: str) -> list:
         """
         In the collector code we would iterate over all events and drop any that match the 'since' parameter to make
         sure that we don't double ingest the same event from the previous run (see `get_last_collection_timestamp`).
         :param logs: response json including all returned events from Okta.
         :param time: 'since' parameter being used to query Okta.
+        :param pagination: next_page_link value to determine if we need to filter
         :return: filtered_logs: removed any events that matched the query start time.
         """
+
+        if pagination:  # we only want to filter on events if it's not a pagination call to Okta (PLGN-431)
+            self.logger.info(f"next_page value used to poll from Okta. Returning {len(logs)} event(s) from response.")
+            return logs
 
         # If Okta returns only 1 event (no new events occurred) returned in a previous run we want to remove this.
         if len(logs) == 1 and logs[0].get("published") == time:
