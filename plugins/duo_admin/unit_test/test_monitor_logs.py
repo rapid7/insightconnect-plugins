@@ -40,6 +40,7 @@ class TestMonitorLogs(TestCase):
             ],
             [
                 "bad_request",
+                # TODO WORK OUT WHICH REQUEST SHOULD BE BAD and how to make it fail
                 Util.read_file_to_dict("inputs/monitor_logs_bad_request.json.inp"),
                 Util.read_file_to_dict("expected/monitor_logs_bad_request.json.exp"),
             ],
@@ -52,6 +53,7 @@ class TestMonitorLogs(TestCase):
     )
     def test_monitor_logs(self, mock_request, mock_get_time, test_name, current_state, expected):
         actual, actual_state, has_more_pages, status_code, _ = self.action.run(state=current_state)
+
         self.assertEqual(actual, expected.get("logs"))
         self.assertEqual(actual_state, expected.get("state"))
         self.assertEqual(status_code, expected.get("status_code"))
