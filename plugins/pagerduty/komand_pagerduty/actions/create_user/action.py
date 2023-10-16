@@ -16,7 +16,6 @@ class CreateUser(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """Trigger event"""
 
         # required
         from_email = params.get(Input.FROM_EMAIL)

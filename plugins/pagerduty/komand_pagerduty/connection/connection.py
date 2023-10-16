@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import ConnectionSchema
+from .schema import ConnectionSchema, Input
 
 # Custom imports below
 from komand_pagerduty.util.api import PagerDutyAPI
@@ -16,7 +16,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         Connect to PagerDuty
         """
 
-        key = params.get("api_key").get("secretKey")
+        key = params.get(Input.API_KEY, {}).get("secretKey")
         self.api = PagerDutyAPI(api_key=key, logger=self.logger)
 
     def test(self):

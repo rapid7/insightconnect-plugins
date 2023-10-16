@@ -903,7 +903,7 @@ Example output:
 
 # Version History
 
-* 3.0.0 - re-write all actions to now use HTTP requests to pager duty rather than using pypd package | removal of `get_user_by_email` action as its not supported via HTTP requests | added unit test for all actins
+* 3.0.0 - `Refactor`: Re-write plugin to use `requests` instead of `pypd` package | Action: `Get User By Email` - Removed | `Unit Tests`: Added for all actions.
 * 2.2.0 - Added Schedule ID optional input to Get On Call action
 * 2.1.0 - New action Get On Call
 * 2.0.1 - New spec and help.md format for the Extension Library

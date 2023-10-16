@@ -15,7 +15,6 @@ class SendTriggerEvent(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """Trigger event"""
 
         # required
         email = params.get(Input.EMAIL)
@@ -23,17 +22,21 @@ class SendTriggerEvent(insightconnect_plugin_runtime.Action):
         service = params.get(Input.SERVICE, {})
 
         # optional
+
+        escalation_policy = params.get(Input.ESCALATION_POLICY, {})
+        assignments = params.get(Input.ASSIGNMENTS, [])
+
         dict_of_optional_fields = {
             "urgency": params.get(Input.URGENCY, ""),
             "incident_key": params.get(Input.INCIDENT_KEY, ""),
             "priority": params.get(Input.PRIORITY, {}),
-            "escalation_policy": params.get(Input.ESCALATION_POLICY, {}),
+            "escalation_policy": escalation_policy,
             "conference_bridge": params.get(Input.CONFERENCE_BRIDGE, {}),
             "body": params.get(Input.BODY, {}),
-            "assignments": params.get(Input.ASSIGNMENTS, []),
+            "assignments": assignments,
         }
 
-        if params.get("escalation_policy", {}) and params.get("assignments", []):
+        if escalation_policy and assignments:
             self.logger.warning(
                 "Invalid input only one of 'escalation_policy' or 'assignments' can be used at one time"
             )

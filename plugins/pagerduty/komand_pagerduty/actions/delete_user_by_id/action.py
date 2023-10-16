@@ -16,7 +16,6 @@ class DeleteUserById(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """Delete user"""
 
         email = params.get(Input.EMAIL)
         user_id = params.get(Input.ID)

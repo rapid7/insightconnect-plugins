@@ -41,8 +41,8 @@ class GetOnCall(insightconnect_plugin_runtime.Action):
                     )
                 else:
                     user_ids.append(oncall_object["id"])
-            except KeyError as e:
-                self.logger.warning(f"User ID not available: {str(e)}")
+            except KeyError as error:
+                self.logger.warning(f"User ID not available: {str(error)}")
                 continue
         return user_ids
 

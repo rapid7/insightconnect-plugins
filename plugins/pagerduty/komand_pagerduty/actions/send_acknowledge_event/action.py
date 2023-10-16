@@ -15,7 +15,6 @@ class SendAcknowledgeEvent(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """Send acknowledge"""
 
         email = params.get(Input.EMAIL)
         incident_id = params.get(Input.INCIDENT_ID)
