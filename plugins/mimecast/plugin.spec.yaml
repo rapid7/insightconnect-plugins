@@ -5,7 +5,7 @@ name: mimecast
 title: Mimecast
 description: Services for email security, archiving and continuity. Protect, manage
   and archive without compromise
-version: 5.3.1
+version: 5.3.2
 connection_version: 5
 supported_versions: ["Mimecast API 2022-11-07"]
 vendor: rapid7
@@ -847,6 +847,8 @@ connection:
       - AU
       - Offshore
       - Sandbox
+      - USB
+      - USBCOM
     required: true
     example: EU
     default: EU
