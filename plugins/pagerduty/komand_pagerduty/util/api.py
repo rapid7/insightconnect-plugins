@@ -18,26 +18,21 @@ class PagerDutyAPI:
 
     def get_on_calls(self, schedule_id: str) -> dict:
         """
-            Formats the request to fetch the on-call users for a given schedule
+        Formats the request to fetch the on-call users for a given schedule
 
-        Args:
-            schedule_id (str): The id of the schedule that the user info will be fetched for
-
-        Returns:
-            dict: _description_
+        :param str schedule_id: The id of the schedule that the user info will be fetched for
+        :return dict: The Schedule object that is returend from the pagerduty api
         """
+
         return self.send_request("GET", f"/schedules/{schedule_id}/")
 
     def resolve_event(self, email: str, incident_id: str) -> dict:
         """
-            Formats the request to call for an incident to be resolved
+        Formats the request to call for an incident to be resolved
 
-        Args:
-            email (str): The email address of the user that is resolving the event
-            incident_id (str): The id of the incident to be resolved
-
-        Returns:
-            dict: The full incident object with its updated values will be returend
+        :param str email: The email address of the user that is resolving the event
+        :param str incident_id: The id of the incident to be resolved
+        :return dict: The full incident object with its updated values will be returend
         """
         headers = {"From": f"{email}"}
         headers.update(self.headers)
@@ -48,14 +43,11 @@ class PagerDutyAPI:
 
     def acknowledge_event(self, email: str, incident_id: str) -> dict:
         """
-            Formats the request to call for an incident to be acknowledged
+        Formats the request to call for an incident to be acknowledged
 
-        Args:
-            email (str): The email address of the user that is acknowledging the event
-            incident_id (str): The id of the incident to be acknowledged
-
-        Returns:
-            dict: The full incident object with its updated values will be returend
+        :param str email: The email address of the user that is acknowledging the event
+        :param str incident_id: The id of the incident to be acknowledged
+        :return dict: The full incident object with its updated values will be returend
         """
         headers = {"From": f"{email}"}
         headers.update(self.headers)
@@ -72,16 +64,14 @@ class PagerDutyAPI:
         dict_of_optional_fields: dict,
     ) -> dict:
         """
-            Formats the request to allow the user to trigger an incident
+        Formats the request to allow the user to trigger an incident
 
-        Args:
-            email (str): The email of the user triggering the event
-            title (str): The title of the description
-            service (dict): The service id and the type that will be incident will be associated to
-            dict_of_optional_fields (dict): Optional fields that can also be added to an incident, these can include:
+        :param str email: The email of the user triggering the event
+        :param str title: The title of the description
+        :param dict service: The service id and the type that will be incident will be associated to
+        :param dict dict_of_optional_fields: Optional fields that can also be added to an incident, these can include:
                 [urgency, incident_key, priority, escalation_policy, conference_bridge, body, assignments]
-        Returns:
-            dict: This will return the full object of the newly created incident
+        :return dict: This will return the full object of the newly created incident
         """
         headers = {"From": f"{email}"}
         headers.update(self.headers)
@@ -102,17 +92,14 @@ class PagerDutyAPI:
         dict_of_optional_fields: dict,
     ) -> dict:
         """
-            Formats the request to all for a new user to be created
+        Formats the request to all for a new user to be created
 
-        Args:
-            from_email (str): The email for the account that is creating the new user
-            new_users_email (str): The email for the new account
-            name (str): The name for the new account
-            dict_of_optional_fields (dict): Optional fields that can also be used when creating a new user, these include:
+        :param str from_email: The email for the account that is creating the new user
+        :param str new_users_email: The email for the new account
+        :param str name: The name for the new account
+        :param dict dict_of_optional_fields: Optional fields that can also be used when creating a new user, these include:
                 [time_zone, color, role, description, job_title, license]
-
-        Returns:
-            dict: The newly cerated user object
+        :return dict: The newly cerated user object
         """
         headers = {"From": f"{from_email}"}
         headers.update(self.headers)
@@ -127,14 +114,11 @@ class PagerDutyAPI:
 
     def delete_user_by_id(self, email: str, user_id: str) -> bool:
         """
-            Formats the request to allow for a user to be deleted
+        Formats the request to allow for a user to be deleted
 
-        Args:
-            email (str): The email of the user that is deleteing the account
-            user_id (str): The id of the user that is to be deleted
-
-        Returns:
-            dict: True if the user has been deleted
+        :param str email: The email of the user that is deleteing the account
+        :param str user_id: The id of the user that is to be deleted
+        :return bool: True if the user has been deleted
         """
         headers = {"From": f"{email}"}
         headers.update(self.headers)
@@ -142,47 +126,38 @@ class PagerDutyAPI:
 
     def get_user_by_id(self, user_id: str) -> dict:
         """
-            formats the request to allow for the information of a user to be fetched
+        formats the request to allow for the information of a user to be fetched
 
-        Args:
-            user_id (str): The id of the user to get information on
-
-        Returns:
-            dict: The information on the user
+        :param str user_id: The id of the user to get information on
+        :return dict: The information on the user
         """
         return self.send_request(method="GET", path=f"/users/{user_id}/")
 
     def list_users(self) -> dict:
         """
-            formatch the request to get a list of all of the users in pagerduty
+        Formats the request to get a list of all of the users in pagerduty
 
-        Returns:
-            dict: This will return a list of user objects
+
+        :return dict: This will return a list of user objects
         """
         return self.send_request(method="GET", path="/users/")
 
     def send_request(
         self, method: str, path: str, params: dict = None, payload: dict = None, headers: dict = None, data: dict = None
-    ) -> Union[dict, str]:
+    ) -> Union[dict, bool]:
         """
-            A wrapper with error handling for making requests to the pager duty api
+        A wrapper with error handling for making requests to the pager duty api
 
-        Args:
-            method (str): The type of request that will be made
-            path (str): The path that will be appended to the base url
-            params (dict, optional): Any paramaters that will be added to the request. Defaults to None.
-            payload (dict, optional): Any data that will be added to the json section of the request. Defaults to None.
-            headers (dict, optional): Any additional headers that will be added to the request. Defaults to None.
-            data (dict, optional): Any data that will be added to the data section of the request. Defaults to None.
-
-        Raises:
-            PluginException: If there is an error connecting to the pager duty api or else if there is no valid data returned
-
-        Returns:
-            Union[dict, str]:
+        :param str method: The type of request that will be made
+        :param str path: The path that will be appended to the base url
+        :param dict params: Any paramaters that will be added to the request, defaults to None
+        :param dict payload: Any data that will be added to the json section of the request, defaults to None
+        :param dict headers: Any additional headers that will be added to the request, defaults to None
+        :param dict data: Any data that will be added to the data section of the request, defaults to None
+        :raises PluginException: If there is an error connecting to the pager duty api or else if there is no valid data returned
+        :return Union[dict, bool]:
                 dict: The response of the request in json format
                 bool: If the delete request is called then there will be no data returned from the api, so we return True
-
         """
 
         if not headers:
@@ -211,11 +186,8 @@ class PagerDutyAPI:
         """
         This will check the status code of the response and the appropriate error message based on the status code will be raised as a PluginError
 
-        Args:
-            response (dict): The response object to be checked
-
-        Raises:
-            PluginException: The PluginException error will be raised and based on the status code the error messaged will be set, this is based on a set of predefined messages in the insightconnect_plugin_runtime.exceptions class
+        :param dict response: The response object to be checked
+        :raises PluginException: PluginException: The PluginException error will be raised and based on the status code the error messaged will be set, this is based on a set of predefined messages in the insightconnect_plugin_runtime.exceptions class
         """
         if response.status_code == 401:
             raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
