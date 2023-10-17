@@ -54,6 +54,9 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "Credential: Secret Key",
       "description": "A shared secret key",
+      "required": [
+        "secretKey"
+      ],
       "properties": {
         "secretKey": {
           "type": "string",
@@ -65,9 +68,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       }
     },
     "credential_username_password": {
-      "required": [
-        "secretKey"
-      ],
       "id": "credential_username_password",
       "title": "Credential: Username and Password",
       "description": "A username and password combination",
