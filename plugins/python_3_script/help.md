@@ -1,6 +1,6 @@
 # Description
 
-[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.6.5 and its standard library as well as the following 3rd party libraries: 
+[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.8 and its standard library as well as the following 3rd party libraries: 
 
 * [requests 2.18.4](https://requests.readthedocs.io/en/master/)
 * [maya 0.5.0](https://pypi.python.org/pypi/maya)
