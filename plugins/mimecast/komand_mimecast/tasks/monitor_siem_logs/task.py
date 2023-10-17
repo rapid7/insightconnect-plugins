@@ -70,6 +70,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             list: The filtered and sorted list of recent events.
 
         """
+        self.logger.info(f"Number of raw logs returned from Mimemcast: {len(output)}")
         output = [EventLogs(data=event) for event in output]
         output = sorted(
             [event.get_dict() for event in output if event.compare_datetime(get_time_hours_ago(hours_ago=24))],
@@ -78,5 +79,5 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
         for event in output:
             event.pop(EventLogs.FILTER_DATETIME, None)
-
+        self.logger.info(f"Number of returned logs after filtering performed: {len(output)}")
         return output
