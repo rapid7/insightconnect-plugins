@@ -1,6 +1,6 @@
 API = "/api"
-REGIONS = ["EU", "DE", "US", "CA", "ZA", "AU", "Offshore", "Sandbox"]
-HOSTS = ["eu-api", "de-api", "us-api", "ca-api", "za-api", "au-api", "je-api", "sandbox-api"]
+REGIONS = ["EU", "DE", "US", "CA", "ZA", "AU", "Offshore", "Sandbox", "USB", "USBCOM"]
+HOSTS = ["eu-api", "de-api", "us-api", "ca-api", "za-api", "au-api", "je-api", "sandbox-api", "usb-api", "uspcom-api"]
 BASE_HOSTNAME_MAP = dict(zip(REGIONS, HOSTS))
 DEFAULT_REGION = "EU"
 DATA_FIELD = "data"
