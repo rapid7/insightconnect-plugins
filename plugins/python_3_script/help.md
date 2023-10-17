@@ -1,13 +1,13 @@
 # Description
 
-[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.8 and its standard library as well as the following 3rd party libraries: 
+[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.8.1 and its standard library as well as the following 3rd party libraries: 
 
-* [requests 2.18.4](https://requests.readthedocs.io/en/master/)
-* [maya 0.5.0](https://pypi.python.org/pypi/maya)
-* [lxml 4.2.2](http://lxml.de/)
-* [beautifulsoup 4.6.0](https://www.crummy.com/software/BeautifulSoup/)
+* [requests 2.31.0](https://requests.readthedocs.io/en/master/)
+* [maya 0.6.1](https://pypi.python.org/pypi/maya)
+* [lxml 4.9.2](http://lxml.de/)
+* [beautifulsoup 4.12.2](https://www.crummy.com/software/BeautifulSoup/)
 * [pyyaml 6.0.0](http://pyyaml.org/)
-* [records 0.5.2](https://github.com/kennethreitz/records)
+* [records 0.5.3](https://github.com/kennethreitz/records)
 
 The Python 3 Script plugin also allows you to load custom modules via its connection parameters.
 

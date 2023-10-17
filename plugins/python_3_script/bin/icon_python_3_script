@@ -7,7 +7,7 @@ from sys import argv
 Name = "Python 3 Script"
 Vendor = "rapid7"
 Version = "4.0.6"
-Description = "Python is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.8 and its standard library as well as the following 3rd party libraries"
+Description = "Python is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.8.1 and its standard library as well as the following 3rd party libraries"
 
 
 def main():
