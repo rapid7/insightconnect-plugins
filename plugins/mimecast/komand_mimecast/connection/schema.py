@@ -48,7 +48,9 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
         "ZA",
         "AU",
         "Offshore",
-        "Sandbox"
+        "Sandbox",
+        "USB",
+        "USBCOM"
       ],
       "order": 1
     },

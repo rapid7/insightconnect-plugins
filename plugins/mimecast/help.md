@@ -1027,6 +1027,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
+* 5.3.2 - Connection: added regions USB and USBCOM | Monitor SIEM Logs: added logs for request and results information.
 * 5.3.1 - Monitor SIEM Logs: stop parsing datetime field
 * 5.3.0 - Handled rate limiting error messaging | Update to latest plugin SDK 
 * 5.2.2 - Handled status code for `Monitor SIEM Logs` | Request limit set to 1 minute in `Monitor SIEM Logs` 
