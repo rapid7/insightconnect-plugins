@@ -160,7 +160,7 @@ jobs:
         id: installCICDTool
         run: |
           # Install CI Tooling
-          curl -s https://${PACKAGECLOUD_PYTHON_TOOLING_UNSTABLE}:@packagecloud.io/install/repositories/r8/insightconnect-internal-python-tooling/script.python.sh | bash
+          curl -s https://${PACKAGECLOUD_PYTHON_TOOLING_STABLE}:@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh | bash
           .ci_venv/bin/pip install icon-integrations-ci~=2.11
 
       - name: Announce Plugin Release Started
