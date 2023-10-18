@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get query results for a LEQL query by query ID"
+    DESCRIPTION = "Get query results for a LEQL query by log ID"
 
 
 class Input:
@@ -25,7 +25,7 @@ class QueryInput(insightconnect_plugin_runtime.Input):
     "id": {
       "type": "string",
       "title": "ID",
-      "description": "Query ID",
+      "description": "Log ID",
       "order": 1
     },
     "most_recent_first": {

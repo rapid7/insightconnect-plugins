@@ -1,7 +1,7 @@
 {
-	"spec": "fec8fbfa7c82ac0b5aa3ab6f64a0c48c",
-	"manifest": "b552bbd85165215cb8ca8febaeca721a",
-	"setup": "3abc4ed8b408538efeee0e32e2ff2a5f",
+	"spec": "2e245dc2193fdad1d785d6f795dd6e78",
+	"manifest": "e88ba80c2ae0e071a1895930eddf4a68",
+	"setup": "b5e3602d8e0c71bfcaafd6e8a2e50814",
 	"schemas": [
 		{
 			"identifier": "add_indicators_to_a_threat/schema.py",
@@ -97,7 +97,7 @@
 		},
 		{
 			"identifier": "query/schema.py",
-			"hash": "a03fd4ae484aa4367a5e42237d7ec67d"
+			"hash": "440b96851f6c0090adde3f3709aa6259"
 		},
 		{
 			"identifier": "replace_indicators/schema.py",

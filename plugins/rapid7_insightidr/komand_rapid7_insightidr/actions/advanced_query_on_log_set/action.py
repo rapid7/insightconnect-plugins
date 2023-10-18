@@ -54,12 +54,13 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         self.logger.info("Sending results to orchestrator.")
         return {Output.RESULTS: log_entries, Output.COUNT: len(log_entries)}
 
-    def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
+    def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:  # noqa: C901
         """
         Get log entries from a callback URL
 
-        @param callback_url: str
-        @return: list of log entries
+        :param callback_url: str
+        :param timeout: int
+        :return: list of log entries
         """
         self.logger.info(f"Trying to get results from callback URL: {callback_url}")
         response = self.connection.session.get(callback_url)
