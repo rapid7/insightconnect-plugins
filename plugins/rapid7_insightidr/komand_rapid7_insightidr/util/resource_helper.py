@@ -196,7 +196,7 @@ class ResourceHelper(object):
         return self.make_request(path=endpoint)
 
     @staticmethod
-    async def _get_log_entries_with_labels(connection: Connection, log_entries: [dict]) -> [dict]:
+    async def _get_log_entries_with_labels(connection: Connection, log_entries: [dict]) -> [dict]:  # noqa: C901
         label_ids = set()
         for log_entry in log_entries:
             for label in log_entry.get("labels", []):
@@ -221,7 +221,10 @@ class ResourceHelper(object):
         new_log_entries: [dict] = []
         for log_entry in log_entries:
             new_log_entry = dict(log_entry)
-            new_log_entry["message"] = json.loads(log_entry.get("message", "{}"))
+            try:
+                new_log_entry["message"] = json.loads(log_entry.get("message", {}))
+            except json.decoder.JSONDecodeError:
+                new_log_entry["message"] = json.loads(json.dumps(log_entry.get("message", {})))
             entry_labels = []
             for label in log_entry.get("labels", []):
                 label_id = label.get("id")

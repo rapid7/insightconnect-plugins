@@ -198,7 +198,7 @@ class Queries:
         :param query_id: The ID of a query which is to be retrieved
         :return: pre-populated /query/saved_queries/{query_id}
         """
-        return f"https://{Util.map_region(region_code)}.rest.logs.insight.rapid7.com/query/saved_queries/{query_id}"
+        return f"https://{Util.map_region(region_code)}.rest.logs.insight.rapid7.com/query/saved_query/{query_id}"
 
 
 class Logs:
