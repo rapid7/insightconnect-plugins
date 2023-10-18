@@ -12,7 +12,7 @@ supported_versions: ["Python 3.8.1"]
 sdk:
   type: full
   version: 5
-  user: nobody
+  user: root
 enable_cache: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/python_3_script
