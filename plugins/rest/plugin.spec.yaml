@@ -15,7 +15,7 @@ resources:
   docs_url: https://docs.rapid7.com/insightconnect/http-requests
 key_features: ["Make RESTful API calls", "Quickly integrate with 3rd party API's over HTTP"]
 requirements: ["A RESTFUL HTTP/HTTPS resource and supported authentication, if any"]
-references: ["https://requests.readthedocs.io/en/latest/", "[InsightConnect HTTP Request Plugin Guide]https://docs.rapid7.com/insightconnect/http-requests"]
+references: ["https://requests.readthedocs.io/en/latest/", "[InsightConnect HTTP Request Plugin Guide](https://docs.rapid7.com/insightconnect/http-requests)"]
 tags:
 - rest
 - request
