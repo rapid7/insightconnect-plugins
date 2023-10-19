@@ -1,43 +1,43 @@
 # Description
 
-[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.6.5 and its standard library as well as the following 3rd party libraries: 
+[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.8.1 and its standard library as well as the following 3rd party libraries: 
 
-* [requests 2.18.4](https://requests.readthedocs.io/en/master/)
-* [maya 0.5.0](https://pypi.python.org/pypi/maya)
-* [lxml 4.2.2](http://lxml.de/)
-* [beautifulsoup 4.6.0](https://www.crummy.com/software/BeautifulSoup/)
+* [requests 2.31.0](https://requests.readthedocs.io/en/master/)
+* [maya 0.6.1](https://pypi.python.org/pypi/maya)
+* [lxml 4.9.2](http://lxml.de/)
+* [beautifulsoup 4.12.2](https://www.crummy.com/software/BeautifulSoup/)
 * [pyyaml 6.0.0](http://pyyaml.org/)
-* [records 0.5.2](https://github.com/kennethreitz/records)
+* [records 0.5.3](https://github.com/kennethreitz/records)
 
 The Python 3 Script plugin also allows you to load custom modules via its connection parameters.
 
 Also, this plugin allows you to provide additional credentials in the connection such as username, password, secret_key available in the script as Python variables (`username`, `password`, `secret_key`). 
 
 # Key Features
-
+  
 * Run a Python 3 Script to securely orchestrate, automate, and respond to (almost) anything
 
 # Requirements
-
-_This plugin does not contain any requirements._
+  
+*This plugin does not contain any requirements.*
 
 # Supported Product Versions
-
+  
 * Python 3.8.1
 
 # Documentation
 
 ## Setup
-
-The connection configuration accepts the following parameters:
+  
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |modules|[]string|None|False|List of third-party modules to install for use in the supplied Python script|None|["pandas", "numpy"]|
-|script_secret_key|credential_secret_key|None|False|Credential secret key available in script as python variable (`secret_key`)|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|script_secret_key|credential_secret_key|None|False|Credential secret key available in script as python variable (`secret_key`)|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|
 |script_username_and_password|credential_username_password|None|False|Username and password available in script as python variables (`username`, `password`)|None|{"username": "user", "password": "mypassword"}|
 |timeout|integer|60|True|Timeout (in seconds) for installing third-party modules|None|120|
-
+  
 Example input:
 
 ```
@@ -50,10 +50,10 @@ Example input:
     "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
   },
   "script_username_and_password": {
-    "username": "user", 
-    "password": "mypassword"
+    "password": "mypassword",
+    "username": "user"
   },
-  "timeout": 120
+  "timeout": 60
 }
 ```
 
@@ -63,8 +63,7 @@ Example input:
 
 #### Run Function
 
-This action is used to run a Python 3 function. Key names must line up with the parameter names expected by the function.
-It works the same way as the [Python Script 2 plugin](https://market.komand.com/plugins/komand/python_script/0.3.0), see [this tutorial](https://docs.komand.com/docs/python-script-plugin) for more guidance.
+Run a Python 3 function
 
 ##### Input
 
@@ -80,10 +79,10 @@ def run(params={}):
 This returns a string with key `hello` on the output object accessible at `{{Step.hello}}`.
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |function|python|def run(params={}):\n    return {}|True|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection|None|def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password)\n\treturn {}|
 |input|object|None|False|Input object to be passed as `params={}` to the `run` function|None|{"some_input": "example input"}|
-
+  
 Example input:
 
 ```
@@ -102,7 +101,7 @@ Note that `username`, `password`, and `secret_key` inputs are accessible directl
 The default output variables are `result1` and `result2`, both of type `string`. While these may work for you they're intended to be changed by the user to meet their naming and type needs.
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|----------------|
+| :--- | :--- | :--- | :--- | :--- |
 |result1|string|False|Sample output result1 (delete or edit)|example output 1|
 |result2|string|False|Sample output result2 (delete or edit)|example output 2|
 
@@ -116,14 +115,17 @@ Example output:
   "result2": "example output 2"
 }
 ```
-
 ### Triggers
+  
+*This plugin does not contain any triggers.*
 
-_This plugin does not contain any triggers._
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-### Custom Output Types
-
-_This plugin does not contain any custom output types._
+### Custom Types
+  
+*This plugin does not contain any custom output types.*
 
 ## Troubleshooting
 
@@ -132,6 +134,7 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 
 # Version History
 
+* 4.0.6 - Added empty `__init__.py` file to `unit_test` folder | Refreshed with new tooling
 * 4.0.5 - Updated the SDK version to include output masking | Updated all dependencies to the newest versions
 * 4.0.4 - Update Pyyaml to version 6.0.0
 * 4.0.3 - Run: Fix logging issue 
@@ -153,9 +156,10 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 * 0.1.0 - Initial plugin
 
 # Links
+
 * [Python](https://www.python.org/)
 
 ## References
-
-* [Python 3 Language Reference](https://docs.python.org/3/reference/index.html)
+  
+* [Python 3 Language Reference](https://docs.python.org/3/reference/index.html)  
 * [InsightConnect Python Plugin Guide](https://docs.rapid7.com/insightconnect/python-2-or-3-script/)
