@@ -131,7 +131,14 @@ class PagerDutyAPI:
         return self.send_request(method="GET", path="/users/")
 
     def send_request(
-        self, method: str, path: str, params: dict = None, payload: dict = None, headers: dict = None, data: dict = None, from_email: str = ""
+        self,
+        method: str,
+        path: str,
+        params: dict = None,
+        payload: dict = None,
+        headers: dict = None,
+        data: dict = None,
+        from_email: str = "",
     ) -> Union[dict, bool]:
         """
         A wrapper with error handling for making requests to the pager duty api
@@ -152,13 +159,11 @@ class PagerDutyAPI:
         if not headers:
             headers = {}
             headers.update(self.headers)
-       
+
         if from_email:
             headers.update({"From": f"{from_email}"})
 
-        
         self.logger.info(f"{headers = }")
-
 
         try:
             response = self.session.request(
