@@ -1,0 +1,40 @@
+# Release plugin to environment
+# Requires authenticated role (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN), INF values (Infrastructure), INF_NAME (Infrastructure Name),
+# Docker Credentials (KOMAND_DOCKERHUB_USER, KOMAND_DOCKERHUB_PASSWORD), Session Duration (IAM_SESSION_DURATION)
+INFRASTRUCTURE_NAME_KEY="${INF_NAME}_NAME"
+INFRASTRUCTURE_NAME="${INFRASTRUCTURE_NAME_KEY}_NAME"
+# Check if region is set for release
+if [[ $INF == "true" ]]; then
+  # Docker login
+  docker login -u "${KOMAND_DOCKERHUB_USER}" -p "${KOMAND_DOCKERHUB_PASSWORD}"
+  # Set infrastructure variables for region release
+  export INFRASTRUCTURE="${INF_NAME}_ENV"
+  MARKET_TOKEN_KEY="${INF_NAME}_MARKET_TOKEN"
+  export MARKET_TOKEN="${!MARKET_TOKEN_KEY}"
+  MARKET_USERNAME_KEY="${INF_NAME}_MARKET_USERNAME"
+  export MARKET_USERNAME="${!MARKET_USERNAME_KEY}"
+  MARKET_PASSWORD_KEY="${INF_NAME}_MARKET_PASSWORD"
+  export MARKET_PASSWORD="${!MARKET_PASSWORD_KEY}"
+  DOCKER_REGISTRY_USERNAME_KEY="${INF_NAME}_DOCKER_REGISTRY_USERNAME"
+  export DOCKER_REGISTRY_USERNAME="${!DOCKER_REGISTRY_USERNAME_KEY}"
+  DOCKER_REGISTRY_PASSWORD_KEY="${INF_NAME}_DOCKER_REGISTRY_PASSWORD"
+  export DOCKER_REGISTRY_PASSWORD="${!DOCKER_REGISTRY_PASSWORD_KEY}"
+  if [[ "$INFRASTRUCTURE_NAME" == "alliance_staging" || "$INFRASTRUCTURE_NAME" == "alliance_prod" ]]; then
+    PLUGINS_S3_BUCKET_KEY="${INF_NAME}_PLUGINSS3BUCKET"
+    export PLUGINS_S3_BUCKET="${!PLUGINS_S3_BUCKET_KEY}"
+  else
+    export PLUGINS_S3_BUCKET=""
+  fi
+  echo "::add-mask::$PLUGINS_S3_BUCKET"
+  # Set AWS Information
+  IAM_ROLE_KEY="${INF_NAME}_STSPLUGINS3ROLE"
+  export IAM_ROLE="${!IAM_ROLE_KEY}"
+  IAM_ROLE_EXTERNAL_ID_KEY="${INF_NAME}_STSPLUGINS3EXTERNALID"
+  export IAM_ROLE_EXTERNAL_ID="${!IAM_ROLE_EXTERNAL_ID_KEY}"
+  # Run icon-ci release
+  cd plugins
+  echo "INFO: Releasing $INFRASTRUCTURE_NAME!!!"
+  KOMAND_SOURCE_BRANCH=${{ github.head_ref }} ../.ci_venv/bin/icon-ci release
+else
+  echo "INFO: Skipping $INFRASTRUCTURE_NAME!!!"
+fi
