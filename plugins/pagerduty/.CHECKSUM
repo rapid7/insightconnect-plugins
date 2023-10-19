@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "delete_user_by_id/schema.py",
-			"hash": "6fbe91bbeb56119a0b766b2f3f55e342"
+			"hash": "796c3831d82077d659ebc859897d3410"
 		},
 		{
 			"identifier": "get_on_call/schema.py",
