@@ -48,7 +48,8 @@ on:
         description: 'Check to override plugin blacklists (affects all release targets).'
         required: true
         default: false
-  push:
+  pull_request:
+    types: [closed]
     branches:
       - master
 
@@ -71,6 +72,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check if merged
+        id: checkIfMerged
+        run: |
+          if [[ "${{ github.event.pull_request.merged }}" == "true" ]]; then
+            echo "Pull requst has been merged. Starting release process..."
+          else
+            echo "Pull request has not been merged. Stopping workflow..."
+            exit 1
+          fi
+
       - name: Set up environment variables
         id: setUpEnvironmentVariables
         run: |
@@ -149,6 +160,14 @@ jobs:
         id: checkoutRepository
         uses: actions/checkout@v3
 
+      - name: Get Source and Target Branches
+        id: getSourceAndTargetBranches
+        run: |
+          source_branch=${{ github.head_ref }}
+          target_branch=${{ github.base_ref }}
+          export KOMAND_SOURCE_BRANCH="$source_branch"
+          export KOMAND_TARGET_BRANCH="$target_branch"
+
       - name: Setup Python
         id: setupPython
         uses: actions/setup-python@v4
@@ -175,7 +194,7 @@ jobs:
         run: |
           # Announce release
           cd plugins
-          ./.ci_venv/bin/icon-ci jenkins-announce --status started --webhook_url $ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK
+          ../.ci_venv/bin/icon-ci jenkins-announce --status started --webhook_url $ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK
 
       - name: configure aws credentials for secrets manager access
         uses: aws-actions/configure-aws-credentials@v4
