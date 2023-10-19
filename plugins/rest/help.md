@@ -17,7 +17,7 @@ This plugin is often used to integrate with ad-hoc 3rd party API's in a workflow
 
 # Supported Product Versions
   
-* 2022-09-05
+* 2023-10-19
 
 # Documentation
 
@@ -342,7 +342,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
-* 6.0.3 - Added empty `__init__.py` file to `unit_test` folder | Refreshed with new tooling
+* 6.0.3 - Added empty `__init__.py` file to `unit_test` folder | Refreshed with new tooling | Updated `requirements.txt`
 * 6.0.2 - Fixed a bug that would cause an incorrect error message whenever a 400 error was received and the response object was a list
 * 6.0.1 - Improved ability of 'Body Any' input to handle non-standard characters and JSON input
 * 6.0.0 - All actions: Changed body as array to body as any (string input)
