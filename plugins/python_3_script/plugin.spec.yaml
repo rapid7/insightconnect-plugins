@@ -6,9 +6,13 @@ title: Python 3 Script
 vendor: rapid7
 support: rapid7
 status: []
-description: Run a Python 3 script
-version: 4.0.5
+description: Python is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.8.1 and its standard library as well as the following 3rd party libraries
+version: 4.0.6
 supported_versions: ["Python 3.8.1"]
+sdk:
+  type: full
+  version: 5
+  user: root
 enable_cache: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/python_3_script
@@ -23,26 +27,28 @@ hub_tags:
   use_cases: [data_utility]
   keywords: [python, scripting]
   features: []
+key_features: ["Run a Python 3 Script to securely orchestrate, automate, and respond to (almost) anything"]
+references: ["[Python 3 Language Reference](https://docs.python.org/3/reference/index.html)", "[InsightConnect Python Plugin Guide](https://docs.rapid7.com/insightconnect/python-2-or-3-script/)"]
 connection:
   modules:
     title: "Third-Party Modules"
     description: "List of third-party modules to install for use in the supplied Python script"
     required: false
     type: "[]string"
-    example: ["pandas", "numpy"]
+    example: '["pandas", "numpy"]'
   timeout:
     title: "Timeout"
     description: "Timeout (in seconds) for installing third-party modules"
     required: true
     type: integer
     default: 60
-    example: 120
+    example: '120'
   script_secret_key:
     title: Script Secret Key
     description: Credential secret key available in script as python variable (`secret_key`)
     type: credential_secret_key
     required: false
-    example: 9de5069c5afe602b2ea0a04b66beb2c0
+    example: '{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}'
   script_username_and_password:
     title: Script Username and Password
     description: Username and password available in script as python variables (`username`, `password`)
@@ -52,7 +58,7 @@ connection:
 actions:
   run:
     title: Run Function
-    description: Run Python function
+    description: Run a Python 3 function
     input:
       function:
         description: Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection
