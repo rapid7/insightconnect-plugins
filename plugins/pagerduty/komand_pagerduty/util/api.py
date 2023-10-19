@@ -34,11 +34,9 @@ class PagerDutyAPI:
         :param str incident_id: The id of the incident to be resolved
         :return dict: The full incident object with its updated values will be returend
         """
-        headers = {"From": f"{email}"}
-        headers.update(self.headers)
         data = {"incident": {"type": "incident", "status": "resolved"}}
         return self.send_request(
-            method="PUT", path=f"/incidents/{incident_id}/", headers=headers, data=json.dumps(data)
+            method="PUT", path=f"/incidents/{incident_id}/", data=json.dumps(data), from_email=email
         )
 
     def acknowledge_event(self, email: str, incident_id: str) -> dict:
@@ -49,11 +47,9 @@ class PagerDutyAPI:
         :param str incident_id: The id of the incident to be acknowledged
         :return dict: The full incident object with its updated values will be returend
         """
-        headers = {"From": f"{email}"}
-        headers.update(self.headers)
         data = {"incident": {"type": "incident", "status": "acknowledged"}}
         return self.send_request(
-            method="PUT", path=f"/incidents/{incident_id}/", headers=headers, data=json.dumps(data)
+            method="PUT", path=f"/incidents/{incident_id}/", data=json.dumps(data), from_email=email
         )
 
     def trigger_event(
@@ -73,16 +69,13 @@ class PagerDutyAPI:
                 [urgency, incident_key, priority, escalation_policy, conference_bridge, body, assignments]
         :return dict: This will return the full object of the newly created incident
         """
-        headers = {"From": f"{email}"}
-        headers.update(self.headers)
-
         payload = {"incident": {"type": "incident", "title": title, "service": service}}
 
         for key, value in dict_of_optional_fields.items():
             if value:
                 payload["incident"][key] = value
 
-        return self.send_request(method="POST", path="/incidents/", headers=headers, payload=payload)
+        return self.send_request(method="POST", path="/incidents/", payload=payload, from_email=email)
 
     def create_user(
         self,
@@ -101,16 +94,13 @@ class PagerDutyAPI:
                 [time_zone, color, role, description, job_title, license]
         :return dict: The newly cerated user object
         """
-        headers = {"From": f"{from_email}"}
-        headers.update(self.headers)
-
         payload = {"user": {"name": name, "email": new_users_email}}
 
         for key, value in dict_of_optional_fields.items():
             if value:
                 payload["user"][key] = value
 
-        return self.send_request(method="POST", path="/users/", headers=headers, payload=payload)
+        return self.send_request(method="POST", path="/users/", payload=payload, from_email=from_email)
 
     def delete_user_by_id(self, email: str, user_id: str) -> bool:
         """
@@ -120,9 +110,7 @@ class PagerDutyAPI:
         :param str user_id: The id of the user that is to be deleted
         :return bool: True if the user has been deleted
         """
-        headers = {"From": f"{email}"}
-        headers.update(self.headers)
-        return self.send_request(method="DELETE", path=f"/users/{user_id}/", headers=headers)
+        return self.send_request(method="DELETE", path=f"/users/{user_id}/", from_email=email)
 
     def get_user_by_id(self, user_id: str) -> dict:
         """
@@ -143,7 +131,7 @@ class PagerDutyAPI:
         return self.send_request(method="GET", path="/users/")
 
     def send_request(
-        self, method: str, path: str, params: dict = None, payload: dict = None, headers: dict = None, data: dict = None
+        self, method: str, path: str, params: dict = None, payload: dict = None, headers: dict = None, data: dict = None, from_email: str = ""
     ) -> Union[dict, bool]:
         """
         A wrapper with error handling for making requests to the pager duty api
@@ -160,8 +148,17 @@ class PagerDutyAPI:
                 bool: If the delete request is called then there will be no data returned from the api, so we return True
         """
 
+        # in the case that the from email is added, we need to update a new headers var and not self.headers
         if not headers:
-            headers = self.headers
+            headers = {}
+            headers.update(self.headers)
+       
+        if from_email:
+            headers.update({"From": f"{from_email}"})
+
+        
+        self.logger.info(f"{headers = }")
+
 
         try:
             response = self.session.request(
@@ -173,14 +170,14 @@ class PagerDutyAPI:
                 data=data,
             )
 
-            if method.upper() == "DELETE" and response.status_code == 204:
+            if response.status_code == 204:
                 return True
             if 200 <= response.status_code < 300:
                 return clean(json.loads(response.content))
 
             self._check_status_code(response)
-        except requests.exceptions.HTTPError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+        except requests.exceptions.HTTPError as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def _check_status_code(self, response: dict):
         """

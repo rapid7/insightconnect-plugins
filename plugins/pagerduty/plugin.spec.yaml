@@ -37,11 +37,11 @@ types:
     id:
       description: ID
       type: string
-      example: PYGDZB8
+      example: ABCD123
     self:
       description: URL to view object
       type: string
-      example: "https://api.pagerduty.com/users/PYGDZB8"
+      example: "https://api.pagerduty.com/users/ABCD123"
     name:
       description: Name
       type: string
@@ -71,7 +71,7 @@ types:
     avatar_url:
       description: Avatar URL
       type: string
-      example: "https://secure.gravatar.com/avatar/c67b6c8ed606dec999bb064ada88cf5c.png?d=mm&r=PG"
+      example: "https://secure.gravatar.com/avatar/abcABC123456abcABC123456abcABC123456.png?d=mm&r=PG"
     time_zone:
       description: Time Zone, e.g. America/Lima
       type: string
@@ -89,23 +89,23 @@ types:
     id:
       description: the id of the incident
       type: string
-      example: PT4KHLK
+      example: ABC1234
     type:
       description: A string that determines the schema of the object
       type: string
       example: incident
     summary:
-      description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to name, though it is not intended to be an identifier
+      description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labelling of an entity in a client
       type: string
       example: "[#1234] The server is on fire."
     self:
       description: the API show URL at which the object is accessible
       type: string
-      example: https://api.pagerduty.com/incidents/PT4KHLK
+      example: https://api.pagerduty.com/incidents/ABC1234
     html_url:
       description: a URL at which the entity is uniquely displayed in the Web app
       type: string
-      example: https://subdomain.pagerduty.com/incidents/PT4KHLK
+      example: https://subdomain.pagerduty.com/incidents/ABC1234
     incident_number:
       description: The number of the incident. This is unique across your account.
       type: integar
@@ -129,15 +129,15 @@ types:
     incident_key:
       description: The incident's de-duplication key
       type: string
-      example: baf7cf21b1da41b4b0221008339ff357
+      example: abcABC123456abcABC123456abcABC123456
     service:
       description: The service the incident is on. If the include[]=services query parameter is provided, the full service definition will be returned
       type: object
-      example: {"id": "PIJ90N7","type": "service_reference","summary": "My Mail Service","self": "https://api.pagerduty.com/services/PIJ90N7","html_url": "https://subdomain.pagerduty.com/service-directory/PIJ90N7"}
+      example: {"id": "ABC1234","type": "service_reference","summary": "My Mail Service","self": "https://api.pagerduty.com/services/ABC1234","html_url": "https://subdomain.pagerduty.com/service-directory/ABC1234"}
     assignments:
       description: Which accounts the incident will be assigned to
       type: array
-      example: [{"at": "2015-11-10T00:31:52Z","assignee": {"id": "PXPGF42","type": "user_reference","summary": "Earline Greenholt","self": "https://api.pagerduty.com/users/PXPGF42","html_url": "https://subdomain.pagerduty.com/users/PXPGF42"}}]
+      example: [{"at": "2015-11-10T00:31:52Z","assignee": {"id": "ABC1234","type": "user_reference","summary": "Test User","self": "https://api.pagerduty.com/users/ABC1234","html_url": "https://subdomain.pagerduty.com/users/ABC1234"}}]
     assigned_via:
       description: How the current incident assignments were decided. Note that direct_assignment incidents will not escalate up the attached escalation_policy
       type: string
@@ -149,7 +149,7 @@ types:
     first_trigger_log_entry:
       description: The first log entry on the incident. The log entry will be of type TriggerLogEntry and will represent information about how the incident was triggered. If the include[]=first_trigger_log_entries query parameter is provided, the full log entry definition will be returned
       type: object
-      example: {"id": "Q02JTSNZWHSEKV","type": "trigger_log_entry_reference","summary": "Triggered through the API","self": "https://api.pagerduty.com/log_entries/Q02JTSNZWHSEKV?incident_id=PT4KHLK","html_url": "https://subdomain.pagerduty.com/incidents/PT4KHLK/log_entries/Q02JTSNZWHSEKV"}
+      example: {"id": "ABCDEFGH123456","type": "trigger_log_entry_reference","summary": "Triggered through the API","self": "https://api.pagerduty.com/log_entries/ABCDEFGH123456?incident_id=ABC1234","html_url": "https://subdomain.pagerduty.com/incidents/ABC1234/log_entries/ABCDEFGH123456"}
     alert_counts:
       description: The counts of alerts grouped into this incident
       type: object
@@ -161,11 +161,11 @@ types:
     escalation_policy:
       description: The escalation policy attached to the service that the incident is on. If the include[]=escalation_policies query parameter is provided, the full escalation policy definition will be returned
       type: object
-      example: {"id": "PT20YPA","type": "escalation_policy_reference","summary": "Another Escalation Policy","self": "https://api.pagerduty.com/escalation_policies/PT20YPA","html_url": "https://subdomain.pagerduty.com/escalation_policies/PT20YPA"}
+      example: {"id": "ABC1234","type": "escalation_policy_reference","summary": "Another Escalation Policy","self": "https://api.pagerduty.com/escalation_policies/ABC1234","html_url": "https://subdomain.pagerduty.com/escalation_policies/ABC1234"}
     teams:
       description: Teams that the alert is assigned to
       type: array
-      example: [{"id": "PQ9K7I8","type": "team_reference","summary": "Engineering","self": "https://api.pagerduty.com/teams/PQ9K7I8","html_url": "https://subdomain.pagerduty.com/teams/PQ9K7I8"}]
+      example: [{"id": "ABC1234","type": "team_reference","summary": "Engineering","self": "https://api.pagerduty.com/teams/ABC1234","html_url": "https://subdomain.pagerduty.com/teams/ABC1234"}]
     pending_actions:
       description: The list of pending_actions on the incident. A pending_action object contains a type of action which can be escalate, unacknowledge, resolve or urgency_change. A pending_action object contains at, the time at which the action will take place. An urgency_change pending_action will contain to, the urgency that the incident will change to
       type: array
@@ -173,15 +173,15 @@ types:
     acknowledgements:
       description: List of all acknowledgements for this incident. This list will be empty if the Incident.status is resolved or triggered. If the include[]=acknowledgers query parameter is provided, the full user or service definitions will be returned for each acknowledgement entry
       type: array
-      example: [{"at": "2015-11-10T00:32:52Z","acknowledger": {"id": "PXPGF42","type": "user_reference","summary": "Earline Greenholt","self": "https://api.pagerduty.com/users/PXPGF42","html_url": "https://subdomain.pagerduty.com/users/PXPGF42"}}]
+      example: [{"at": "2015-11-10T00:32:52Z","acknowledger": {"id": "ABC1234","type": "user_reference","summary": "Test User","self": "https://api.pagerduty.com/users/ABC1234","html_url": "https://subdomain.pagerduty.com/users/ABC1234"}}]
     last_status_change_by:
       description: The agent (user, service or integration) that created or modified the Incident Log Entry
       type: object
-      example: {"id": "PXPGF42","type": "user_reference","summary": "Earline Greenholt","self": "https://api.pagerduty.com/users/PXPGF42","html_url": "https://subdomain.pagerduty.com/users/PXPGF42"}
+      example: {"id": "ABC1234","type": "user_reference","summary": "Test User","self": "https://api.pagerduty.com/users/ABC1234","html_url": "https://subdomain.pagerduty.com/users/ABC1234"}
     priority:
       description: The priority of the object
       type: object
-      example: {"id": "P53ZZH5","type": "priority_reference","summary": "P2","self": "https://api.pagerduty.com/priorities/P53ZZH5"}
+      example: {"id": "ABC1234","type": "priority_reference","summary": "P2","self": "https://api.pagerduty.com/priorities/ABC1234"}
     conference_bridge:
       description: The conference bridge information attached to the incident. Only returned if the include[]=conference_bridge query parameter is provided
       type: object
@@ -205,7 +205,7 @@ types:
     id:
       description: The id of the priority that the incident is to be set to
       type: string
-      example: P53ZZH5
+      example: ABC1234
       required: true
     type:
       description: The type of the priority that the incident is to be set to
@@ -227,7 +227,7 @@ types:
     id:
       description: The id of the user that the new incident will be assigned to
       type: string
-      example: PXPGF42
+      example: ABC1234
     type:
       description: A string that determines the schema of the object.
       type: string
@@ -236,7 +236,7 @@ types:
     id:
       description: The id of the escalation policy that the new incident will be assigned to
       type: string
-      example: PT20YPA
+      example: ABC1234
     type:
       description: A string that determines the schema of the object.
       type: string
@@ -248,11 +248,11 @@ types:
     self:
       description: the API show URL at which the object is accessible
       type: string
-      example: https://api.pagerduty.com/escalation_policies/PT20YPA
+      example: https://api.pagerduty.com/escalation_policies/ABC1234
     html_url: 
       description: a URL at which the entity is uniquely displayed in the Web app
       type: string
-      example: https://subdomain.pagerduty.com/escalation_policies/PT20YPA
+      example: https://subdomain.pagerduty.com/escalation_policies/ABC1234
   conference_bridge_input:
     conference_number:
       description: The phone number of the conference call for the conference bridge. Phone numbers should be formatted like +1 415-555-1212,,,,1234#, where a comma (,) represents a one-second wait and pound (#) completes access code input
@@ -272,14 +272,14 @@ actions:
         description: Schedule ID
         type: string
         required: true
-        example: P9E0DZT
+        example: ABC1234
     output:
       users:
         title: Users
         description: List of on-call users
         type: "[]user"
         required: true
-        example: [{"avatar_url": "https://secure.gravatar.com/avatar/c67b6c8ed606dec999bb064ada88cf5c.png?d=mm&r=PG","billed": true,"color": "purple","contact_methods": [{"html_url": null,"id": "P9CU341","self": "https://api.pagerduty.com/users/PYGDZB8/contact_methods/P9CU341","summary": "Default","type": "email_contact_method_reference"}],"coordinated_incidents": [],"description": "","email": "user1@example.com","html_url": "https://api.pagerduty.com/users/PYGDZB8","id": "PYGDZB8","invitation_sent": false,"job_title": "","name": "Test account","notification_rules": [{"html_url": null,"id": "POMMNCV","self": "https://api.pagerduty.com/users/PYGDZB8/notification_rules/POMMNCV","summary": "0 minutes: channel P9CU341","type": "assignment_notification_rule_reference"},{"html_url": null,"id": "PSZNORI","self": "https://api.pagerduty.com/users/PYGDZB8/notification_rules/PSZNORI","summary": "0 minutes: channel P9CU341","type": "assignment_notification_rule_reference"}],"role": "owner","self": "https://api.pagerduty.com/users/PYGDZB8","summary": "test summary","teams": [{"html_url": "https://api.pagerduty.com/teams/PLBLK3G","id": "PLBLK3G","self": "https://api.pagerduty.com/teams/PLBLK3G","summary": "Engineering","type": "team_reference"}],"time_zone": "Europe/London","type": "user"}]
+        example: [{"avatar_url": "https://secure.gravatar.com/avatar/abcABC123456abcABC123456abcABC123456.png?d=mm&r=PG","billed": true,"color": "purple","contact_methods": [{"html_url": null,"id": "ABC1234","self": "https://api.pagerduty.com/users/ABCD123/contact_methods/ABC1234","summary": "Default","type": "email_contact_method_reference"}],"coordinated_incidents": [],"description": "","email": "user1@example.com","html_url": "https://api.pagerduty.com/users/ABCD123","id": "ABCD123","invitation_sent": false,"job_title": "","name": "Test account","notification_rules": [{"html_url": null,"id": "ABC1234","self": "https://api.pagerduty.com/users/ABCD123/notification_rules/ABC1234","summary": "0 minutes: channel ABC1234","type": "assignment_notification_rule_reference"},{"html_url": null,"id": "ABC1234","self": "https://api.pagerduty.com/users/ABCD123/notification_rules/ABC1234","summary": "0 minutes: channel ABC1234","type": "assignment_notification_rule_reference"}],"role": "owner","self": "https://api.pagerduty.com/users/ABCD123","summary": "test summary","teams": [{"html_url": "https://api.pagerduty.com/teams/ABC1234","id": "ABC1234","self": "https://api.pagerduty.com/teams/ABC1234","summary": "Engineering","type": "team_reference"}],"time_zone": "Europe/London","type": "user"}]
   get_user_by_id:
     title: Get User by ID
     description: Get a User by ID
@@ -289,14 +289,14 @@ actions:
         description: User ID
         type: string
         required: true
-        example: P9CU341
+        example: ABC1234
     output:
       user:
         title: User
         description: User
         type: user
         required: false
-        example: {"avatar_url": "https://secure.gravatar.com/avatar/c67b6c8ed606dec999bb064ada88cf5c.png?d=mm&r=PG","billed": true,"color": "purple","contact_methods": [{"html_url": null,"id": "P9CU341","self": "https://api.pagerduty.com/users/PYGDZB8/contact_methods/P9CU341","summary": "Default","type": "email_contact_method_reference"}],"coordinated_incidents": [],"description": "","email": "user1@example.com","html_url": "https://api.pagerduty.com/users/PYGDZB8","id": "PYGDZB8","invitation_sent": false,"job_title": "","name": "Test account","notification_rules": [{"html_url": null,"id": "POMMNCV","self": "https://api.pagerduty.com/users/PYGDZB8/notification_rules/POMMNCV","summary": "0 minutes: channel P9CU341","type": "assignment_notification_rule_reference"},{"html_url": null,"id": "PSZNORI","self": "https://api.pagerduty.com/users/PYGDZB8/notification_rules/PSZNORI","summary": "0 minutes: channel P9CU341","type": "assignment_notification_rule_reference"}],"role": "owner","self": "https://api.pagerduty.com/users/PYGDZB8","summary": "test summary","teams": [{"html_url": "https://api.pagerduty.com/teams/PLBLK3G","id": "PLBLK3G","self": "https://api.pagerduty.com/teams/PLBLK3G","summary": "Engineering","type": "team_reference"}],"time_zone": "Europe/London","type": "user"}
+        example: {"avatar_url": "https://secure.gravatar.com/avatar/abcABC123456abcABC123456abcABC123456.png?d=mm&r=PG","billed": true,"color": "purple","contact_methods": [{"html_url": null,"id": "ABC1234","self": "https://api.pagerduty.com/users/ABCD123/contact_methods/ABC1234","summary": "Default","type": "email_contact_method_reference"}],"coordinated_incidents": [],"description": "","email": "user1@example.com","html_url": "https://api.pagerduty.com/users/ABCD123","id": "ABCD123","invitation_sent": false,"job_title": "","name": "Test account","notification_rules": [{"html_url": null,"id": "ABC1234","self": "https://api.pagerduty.com/users/ABCD123/notification_rules/ABC1234","summary": "0 minutes: channel ABC1234","type": "assignment_notification_rule_reference"},{"html_url": null,"id": "ABC1234","self": "https://api.pagerduty.com/users/ABCD123/notification_rules/ABC1234","summary": "0 minutes: channel ABC1234","type": "assignment_notification_rule_reference"}],"role": "owner","self": "https://api.pagerduty.com/users/ABCD123","summary": "test summary","teams": [{"html_url": "https://api.pagerduty.com/teams/ABC1234","id": "ABC1234","self": "https://api.pagerduty.com/teams/ABC1234","summary": "Engineering","type": "team_reference"}],"time_zone": "Europe/London","type": "user"}
   create_user:
     title: Create User
     description: Create a User
@@ -367,7 +367,7 @@ actions:
         description: User
         type: user
         required: false
-        example: {"avatar_url": "https://secure.gravatar.com/avatar/c67b6c8ed606dec999bb064ada88cf5c.png?d=mm&r=PG","billed": true,"color": "purple","contact_methods": [{"html_url": null,"id": "P9CU341","self": "https://api.pagerduty.com/users/PYGDZB8/contact_methods/P9CU341","summary": "Default","type": "email_contact_method_reference"}],"coordinated_incidents": [],"description": "","email": user1@example.com,"html_url": "https://api.pagerduty.com/users/PYGDZB8","id": "PYGDZB8","invitation_sent": false,"job_title": "","name": "test user","notification_rules": [{"html_url": null,"id": "POMMNCV","self": "https://api.pagerduty.com/users/PYGDZB8/notification_rules/POMMNCV","summary": "0 minutes: channel P9CU341","type": "assignment_notification_rule_reference"},{"html_url": null,"id": "PSZNORI","self": "https://api.pagerduty.com/users/PYGDZB8/notification_rules/PSZNORI","summary": "0 minutes: channel P9CU341","type": "assignment_notification_rule_reference"}],"role": "owner","self": "https://api.pagerduty.com/users/PYGDZB8","summary": "test summary","teams": [{"html_url": "https://api.pagerduty.com/teams/PLBLK3G","id": "PLBLK3G","self": "https://api.pagerduty.com/teams/PLBLK3G","summary": "Engineering","type": "team_reference"}],"time_zone": "Europe/London","type": "user"}
+        example: {"avatar_url": "https://secure.gravatar.com/avatar/abcABC123456abcABC123456abcABC123456.png?d=mm&r=PG","billed": true,"color": "purple","contact_methods": [{"html_url": null,"id": "ABC1234","self": "https://api.pagerduty.com/users/ABCD123/contact_methods/ABC1234","summary": "Default","type": "email_contact_method_reference"}],"coordinated_incidents": [],"description": "","email": user1@example.com,"html_url": "https://api.pagerduty.com/users/ABCD123","id": "ABCD123","invitation_sent": false,"job_title": "","name": "test user","notification_rules": [{"html_url": null,"id": "ABC1234","self": "https://api.pagerduty.com/users/ABCD123/notification_rules/ABC1234","summary": "0 minutes: channel ABC1234","type": "assignment_notification_rule_reference"},{"html_url": null,"id": "ABC1234","self": "https://api.pagerduty.com/users/ABCD123/notification_rules/ABC1234","summary": "0 minutes: channel ABC1234","type": "assignment_notification_rule_reference"}],"role": "owner","self": "https://api.pagerduty.com/users/ABCD123","summary": "test summary","teams": [{"html_url": "https://api.pagerduty.com/teams/ABC1234","id": "ABC1234","self": "https://api.pagerduty.com/teams/ABC1234","summary": "Engineering","type": "team_reference"}],"time_zone": "Europe/London","type": "user"}
   delete_user_by_id:
     title: Delete User by ID
     description: Delete a User by ID
@@ -377,7 +377,7 @@ actions:
         description: User ID
         type: string
         required: true
-        example: PYGDZB8
+        example: ABCD123
       email:
         title: Email
         type: string
@@ -390,7 +390,7 @@ actions:
         type: string
         description: A message to show if the user was deleted as expected
         required: false
-        example: The user PYGDZB8 has been deleted
+        example: The user ABCD123 has been deleted
   send_trigger_event:
     title: Send Trigger Event
     description: Trigger an incident
@@ -412,13 +412,13 @@ actions:
         type: service_input
         description: The service that the incident is related to
         required: true
-        example: {"id": "PIJ90N7","type": "service_reference"}
+        example: {"id": "ABC1234","type": "service_reference"}
       priority:
         title: Priority
         type: priority_input
         description: The priority that the incident is to be set to
         required: false
-        example: {"id": "P53ZZH5","type": "priority_reference"}
+        example: {"id": "ABC1234","type": "priority_reference"}
       urgency:
         title: Urgency
         type: string
@@ -436,19 +436,19 @@ actions:
         type: string
         description: A string which identifies the incident. Sending subsequent requests referencing the same service and with the same incident_key will result in those requests being rejected if an open incident matches that incident_key
         required: false
-        example: baf7cf21b1da41b4b0221008339ff357
+        example: abcABC123456abcABC123456abcABC123456
       assignments:
         title: Assignments
         type: "[]assignee"
         description: Assign the incident to these assignees. Cannot be specified if an escalation policy is given
         required: false
-        example: [{'assignee': {'id': 'PXPGF42', 'type': 'user_reference'}}]
+        example: [{'assignee': {'id': 'ABC1234', 'type': 'user_reference'}}]
       escalation_policy:
         title: Escalation Policy
         type: escalation_policy_input
         description: Assign the incident to this escalation policy. Cannot be specified if Assignments given
         required: false
-        example: {'html_url': 'https://subdomain.pagerduty.com/escalation_policies/PT20YPA', 'id': 'PT20YPA', 'self': 'https://api.pagerduty.com/escalation_policies/PT20YPA', 'summary': 'Another Escalation Policy', 'type': 'escalation_policy_reference'}
+        example: {'html_url': 'https://subdomain.pagerduty.com/escalation_policies/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/escalation_policies/ABC1234', 'summary': 'Another Escalation Policy', 'type': 'escalation_policy_reference'}
       conference_bridge:
         title: Conference Bridge
         type: conference_bridge_input
@@ -461,7 +461,7 @@ actions:
         description: The incident object that was created
         type: incident_output
         required: False
-        example: {'incident': {'acknowledgements': [{'acknowledger': {'html_url': 'https://subdomain.pagerduty.com/users/PXPGF42', 'id': 'PXPGF42', 'self': 'https://api.pagerduty.com/users/PXPGF42', 'summary': 'Earline Greenholt', 'type': 'user_reference'}, 'at': '2015-11-10T00:32:52Z'}], 'alert_counts': {'all': 0, 'resolved': 0, 'triggered': 0}, 'assigned_via': 'escalation_policy', 'assignments': [{'assignee': {'html_url': 'https://subdomain.pagerduty.com/users/PXPGF42', 'id': 'PXPGF42', 'self': 'https://api.pagerduty.com/users/PXPGF42', 'summary': 'Earline Greenholt', 'type': 'user_reference'}, 'at': '2015-11-10T00:31:52Z'}], 'conference_bridge': {'conference_number': '555-123-4567', 'conference_url': 'https://example.com/123-456-789'}, 'created_at': '2015-10-06T21:30:42Z', 'escalation_policy': {'html_url': 'https://subdomain.pagerduty.com/escalation_policies/PT20YPA', 'id': 'PT20YPA', 'self': 'https://api.pagerduty.com/escalation_policies/PT20YPA', 'summary': 'Another Escalation Policy', 'type': 'escalation_policy_reference'}, 'first_trigger_log_entry': {'html_url': 'https://subdomain.pagerduty.com/incidents/PT4KHLK/log_entries/Q02JTSNZWHSEKV', 'id': 'Q02JTSNZWHSEKV', 'self': 'https://api.pagerduty.com/log_entries/Q02JTSNZWHSEKV?incident_id=PT4KHLK', 'summary': 'Triggered through the API', 'type': 'trigger_log_entry_reference'}, 'html_url': 'https://subdomain.pagerduty.com/incidents/PT4KHLK', 'id': 'PT4KHLK', 'incident_key': 'baf7cf21b1da41b4b0221008339ff357', 'incident_number': 1234, 'is_mergeable': true, 'last_status_change_at': '2015-10-06T21:38:23Z', 'last_status_change_by': {'html_url': 'https://subdomain.pagerduty.com/users/PXPGF42', 'id': 'PXPGF42', 'self': 'https://api.pagerduty.com/users/PXPGF42', 'summary': 'Earline Greenholt', 'type': 'user_reference'}, 'pending_actions': [{'at': '2015-11-10T01:02:52Z', 'type': 'unacknowledge'}, {'at': '2015-11-10T04:31:52Z', 'type': 'resolve'}], 'priority': {'id': 'P53ZZH5', 'self': 'https://api.pagerduty.com/priorities/P53ZZH5', 'summary': 'P2', 'type': 'priority_reference'}, 'self': 'https://api.pagerduty.com/incidents/PT4KHLK', 'service': {'html_url': 'https://subdomain.pagerduty.com/service-directory/PIJ90N7', 'id': 'PIJ90N7', 'self': 'https://api.pagerduty.com/services/PIJ90N7', 'summary': 'My Mail Service', 'type': 'service_reference'}, 'status': 'resolved', 'summary': '[#1234] The server is on fire.', 'teams': [{'html_url': 'https://subdomain.pagerduty.com/teams/PQ9K7I8', 'id': 'PQ9K7I8', 'self': 'https://api.pagerduty.com/teams/PQ9K7I8', 'summary': 'Engineering', 'type': 'team_reference'}], 'title': 'The server is on fire.', 'type': 'incident', 'updated_at': '2015-10-08T21:30:42Z', 'urgency': 'high'}}
+        example: {'incident': {'acknowledgements': [{'acknowledger': {'html_url': 'https://subdomain.pagerduty.com/users/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/users/ABC1234', 'summary': 'Test User', 'type': 'user_reference'}, 'at': '2015-11-10T00:32:52Z'}], 'alert_counts': {'all': 0, 'resolved': 0, 'triggered': 0}, 'assigned_via': 'escalation_policy', 'assignments': [{'assignee': {'html_url': 'https://subdomain.pagerduty.com/users/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/users/ABC1234', 'summary': 'Test User', 'type': 'user_reference'}, 'at': '2015-11-10T00:31:52Z'}], 'conference_bridge': {'conference_number': '555-123-4567', 'conference_url': 'https://example.com/123-456-789'}, 'created_at': '2015-10-06T21:30:42Z', 'escalation_policy': {'html_url': 'https://subdomain.pagerduty.com/escalation_policies/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/escalation_policies/ABC1234', 'summary': 'Another Escalation Policy', 'type': 'escalation_policy_reference'}, 'first_trigger_log_entry': {'html_url': 'https://subdomain.pagerduty.com/incidents/ABC1234/log_entries/ABCDEFGH123456', 'id': 'ABCDEFGH123456', 'self': 'https://api.pagerduty.com/log_entries/ABCDEFGH123456?incident_id=ABC1234', 'summary': 'Triggered through the API', 'type': 'trigger_log_entry_reference'}, 'html_url': 'https://subdomain.pagerduty.com/incidents/ABC1234', 'id': 'ABC1234', 'incident_key': 'abcABC123456abcABC123456abcABC123456', 'incident_number': 1234, 'is_mergeable': true, 'last_status_change_at': '2015-10-06T21:38:23Z', 'last_status_change_by': {'html_url': 'https://subdomain.pagerduty.com/users/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/users/ABC1234', 'summary': 'Test User', 'type': 'user_reference'}, 'pending_actions': [{'at': '2015-11-10T01:02:52Z', 'type': 'unacknowledge'}, {'at': '2015-11-10T04:31:52Z', 'type': 'resolve'}], 'priority': {'id': 'ABC1234', 'self': 'https://api.pagerduty.com/priorities/ABC1234', 'summary': 'P2', 'type': 'priority_reference'}, 'self': 'https://api.pagerduty.com/incidents/ABC1234', 'service': {'html_url': 'https://subdomain.pagerduty.com/service-directory/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/services/ABC1234', 'summary': 'My Mail Service', 'type': 'service_reference'}, 'status': 'resolved', 'summary': '[#1234] The server is on fire.', 'teams': [{'html_url': 'https://subdomain.pagerduty.com/teams/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/teams/ABC1234', 'summary': 'Engineering', 'type': 'team_reference'}], 'title': 'The server is on fire.', 'type': 'incident', 'updated_at': '2015-10-08T21:30:42Z', 'urgency': 'high'}}
   send_acknowledge_event:
     title: Send Acknowledge Event
     description: Acknowledge an incident
@@ -484,7 +484,7 @@ actions:
         description: The incident object that was acknowledged
         type: incident_output
         required: False
-        example: {'incident': {'acknowledgements': [{'acknowledger': {'html_url': 'https://subdomain.pagerduty.com/users/PXPGF42', 'id': 'PXPGF42', 'self': 'https://api.pagerduty.com/users/PXPGF42', 'summary': 'Earline Greenholt', 'type': 'user_reference'}, 'at': '2015-11-10T00:32:52Z'}], 'alert_counts': {'all': 0, 'resolved': 0, 'triggered': 0}, 'assigned_via': 'escalation_policy', 'assignments': [{'assignee': {'html_url': 'https://subdomain.pagerduty.com/users/PXPGF42', 'id': 'PXPGF42', 'self': 'https://api.pagerduty.com/users/PXPGF42', 'summary': 'Earline Greenholt', 'type': 'user_reference'}, 'at': '2015-11-10T00:31:52Z'}], 'conference_bridge': {'conference_number': '555-123-4567', 'conference_url': 'https://example.com/123-456-789'}, 'created_at': '2015-10-06T21:30:42Z', 'escalation_policy': {'html_url': 'https://subdomain.pagerduty.com/escalation_policies/PT20YPA', 'id': 'PT20YPA', 'self': 'https://api.pagerduty.com/escalation_policies/PT20YPA', 'summary': 'Another Escalation Policy', 'type': 'escalation_policy_reference'}, 'first_trigger_log_entry': {'html_url': 'https://subdomain.pagerduty.com/incidents/PT4KHLK/log_entries/Q02JTSNZWHSEKV', 'id': 'Q02JTSNZWHSEKV', 'self': 'https://api.pagerduty.com/log_entries/Q02JTSNZWHSEKV?incident_id=PT4KHLK', 'summary': 'Triggered through the API', 'type': 'trigger_log_entry_reference'}, 'html_url': 'https://subdomain.pagerduty.com/incidents/PT4KHLK', 'id': 'PT4KHLK', 'incident_key': 'baf7cf21b1da41b4b0221008339ff357', 'incident_number': 1234, 'is_mergeable': true, 'last_status_change_at': '2015-10-06T21:38:23Z', 'last_status_change_by': {'html_url': 'https://subdomain.pagerduty.com/users/PXPGF42', 'id': 'PXPGF42', 'self': 'https://api.pagerduty.com/users/PXPGF42', 'summary': 'Earline Greenholt', 'type': 'user_reference'}, 'pending_actions': [{'at': '2015-11-10T01:02:52Z', 'type': 'unacknowledge'}, {'at': '2015-11-10T04:31:52Z', 'type': 'resolve'}], 'priority': {'id': 'P53ZZH5', 'self': 'https://api.pagerduty.com/priorities/P53ZZH5', 'summary': 'P2', 'type': 'priority_reference'}, 'self': 'https://api.pagerduty.com/incidents/PT4KHLK', 'service': {'html_url': 'https://subdomain.pagerduty.com/service-directory/PIJ90N7', 'id': 'PIJ90N7', 'self': 'https://api.pagerduty.com/services/PIJ90N7', 'summary': 'My Mail Service', 'type': 'service_reference'}, 'status': 'resolved', 'summary': '[#1234] The server is on fire.', 'teams': [{'html_url': 'https://subdomain.pagerduty.com/teams/PQ9K7I8', 'id': 'PQ9K7I8', 'self': 'https://api.pagerduty.com/teams/PQ9K7I8', 'summary': 'Engineering', 'type': 'team_reference'}], 'title': 'The server is on fire.', 'type': 'incident', 'updated_at': '2015-10-08T21:30:42Z', 'urgency': 'high'}}
+        example: {'incident': {'acknowledgements': [{'acknowledger': {'html_url': 'https://subdomain.pagerduty.com/users/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/users/ABC1234', 'summary': 'Test User', 'type': 'user_reference'}, 'at': '2015-11-10T00:32:52Z'}], 'alert_counts': {'all': 0, 'resolved': 0, 'triggered': 0}, 'assigned_via': 'escalation_policy', 'assignments': [{'assignee': {'html_url': 'https://subdomain.pagerduty.com/users/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/users/ABC1234', 'summary': 'Test User', 'type': 'user_reference'}, 'at': '2015-11-10T00:31:52Z'}], 'conference_bridge': {'conference_number': '555-123-4567', 'conference_url': 'https://example.com/123-456-789'}, 'created_at': '2015-10-06T21:30:42Z', 'escalation_policy': {'html_url': 'https://subdomain.pagerduty.com/escalation_policies/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/escalation_policies/ABC1234', 'summary': 'Another Escalation Policy', 'type': 'escalation_policy_reference'}, 'first_trigger_log_entry': {'html_url': 'https://subdomain.pagerduty.com/incidents/ABC1234/log_entries/ABCDEFGH123456', 'id': 'ABCDEFGH123456', 'self': 'https://api.pagerduty.com/log_entries/ABCDEFGH123456?incident_id=ABC1234', 'summary': 'Triggered through the API', 'type': 'trigger_log_entry_reference'}, 'html_url': 'https://subdomain.pagerduty.com/incidents/ABC1234', 'id': 'ABC1234', 'incident_key': 'abcABC123456abcABC123456abcABC123456', 'incident_number': 1234, 'is_mergeable': true, 'last_status_change_at': '2015-10-06T21:38:23Z', 'last_status_change_by': {'html_url': 'https://subdomain.pagerduty.com/users/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/users/ABC1234', 'summary': 'Test User', 'type': 'user_reference'}, 'pending_actions': [{'at': '2015-11-10T01:02:52Z', 'type': 'unacknowledge'}, {'at': '2015-11-10T04:31:52Z', 'type': 'resolve'}], 'priority': {'id': 'ABC1234', 'self': 'https://api.pagerduty.com/priorities/ABC1234', 'summary': 'P2', 'type': 'priority_reference'}, 'self': 'https://api.pagerduty.com/incidents/ABC1234', 'service': {'html_url': 'https://subdomain.pagerduty.com/service-directory/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/services/ABC1234', 'summary': 'My Mail Service', 'type': 'service_reference'}, 'status': 'resolved', 'summary': '[#1234] The server is on fire.', 'teams': [{'html_url': 'https://subdomain.pagerduty.com/teams/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/teams/ABC1234', 'summary': 'Engineering', 'type': 'team_reference'}], 'title': 'The server is on fire.', 'type': 'incident', 'updated_at': '2015-10-08T21:30:42Z', 'urgency': 'high'}}
   send_resolve_event:
     title: Send Resolve Event
     description: Resolve an incident
@@ -507,4 +507,4 @@ actions:
         description: The incident object that was resolved
         type: incident_output
         required: false
-        example: {'incident': {'acknowledgements': [{'acknowledger': {'html_url': 'https://subdomain.pagerduty.com/users/PXPGF42', 'id': 'PXPGF42', 'self': 'https://api.pagerduty.com/users/PXPGF42', 'summary': 'Earline Greenholt', 'type': 'user_reference'}, 'at': '2015-11-10T00:32:52Z'}], 'alert_counts': {'all': 0, 'resolved': 0, 'triggered': 0}, 'assigned_via': 'escalation_policy', 'assignments': [{'assignee': {'html_url': 'https://subdomain.pagerduty.com/users/PXPGF42', 'id': 'PXPGF42', 'self': 'https://api.pagerduty.com/users/PXPGF42', 'summary': 'Earline Greenholt', 'type': 'user_reference'}, 'at': '2015-11-10T00:31:52Z'}], 'conference_bridge': {'conference_number': '555-123-4567', 'conference_url': 'https://example.com/123-456-789'}, 'created_at': '2015-10-06T21:30:42Z', 'escalation_policy': {'html_url': 'https://subdomain.pagerduty.com/escalation_policies/PT20YPA', 'id': 'PT20YPA', 'self': 'https://api.pagerduty.com/escalation_policies/PT20YPA', 'summary': 'Another Escalation Policy', 'type': 'escalation_policy_reference'}, 'first_trigger_log_entry': {'html_url': 'https://subdomain.pagerduty.com/incidents/PT4KHLK/log_entries/Q02JTSNZWHSEKV', 'id': 'Q02JTSNZWHSEKV', 'self': 'https://api.pagerduty.com/log_entries/Q02JTSNZWHSEKV?incident_id=PT4KHLK', 'summary': 'Triggered through the API', 'type': 'trigger_log_entry_reference'}, 'html_url': 'https://subdomain.pagerduty.com/incidents/PT4KHLK', 'id': 'PT4KHLK', 'incident_key': 'baf7cf21b1da41b4b0221008339ff357', 'incident_number': 1234, 'is_mergeable': true, 'last_status_change_at': '2015-10-06T21:38:23Z', 'last_status_change_by': {'html_url': 'https://subdomain.pagerduty.com/users/PXPGF42', 'id': 'PXPGF42', 'self': 'https://api.pagerduty.com/users/PXPGF42', 'summary': 'Earline Greenholt', 'type': 'user_reference'}, 'pending_actions': [{'at': '2015-11-10T01:02:52Z', 'type': 'unacknowledge'}, {'at': '2015-11-10T04:31:52Z', 'type': 'resolve'}], 'priority': {'id': 'P53ZZH5', 'self': 'https://api.pagerduty.com/priorities/P53ZZH5', 'summary': 'P2', 'type': 'priority_reference'}, 'self': 'https://api.pagerduty.com/incidents/PT4KHLK', 'service': {'html_url': 'https://subdomain.pagerduty.com/service-directory/PIJ90N7', 'id': 'PIJ90N7', 'self': 'https://api.pagerduty.com/services/PIJ90N7', 'summary': 'My Mail Service', 'type': 'service_reference'}, 'status': 'resolved', 'summary': '[#1234] The server is on fire.', 'teams': [{'html_url': 'https://subdomain.pagerduty.com/teams/PQ9K7I8', 'id': 'PQ9K7I8', 'self': 'https://api.pagerduty.com/teams/PQ9K7I8', 'summary': 'Engineering', 'type': 'team_reference'}], 'title': 'The server is on fire.', 'type': 'incident', 'updated_at': '2015-10-08T21:30:42Z', 'urgency': 'high'}}
+        example: {'incident': {'acknowledgements': [{'acknowledger': {'html_url': 'https://subdomain.pagerduty.com/users/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/users/ABC1234', 'summary': 'Test User', 'type': 'user_reference'}, 'at': '2015-11-10T00:32:52Z'}], 'alert_counts': {'all': 0, 'resolved': 0, 'triggered': 0}, 'assigned_via': 'escalation_policy', 'assignments': [{'assignee': {'html_url': 'https://subdomain.pagerduty.com/users/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/users/ABC1234', 'summary': 'Test User', 'type': 'user_reference'}, 'at': '2015-11-10T00:31:52Z'}], 'conference_bridge': {'conference_number': '555-123-4567', 'conference_url': 'https://example.com/123-456-789'}, 'created_at': '2015-10-06T21:30:42Z', 'escalation_policy': {'html_url': 'https://subdomain.pagerduty.com/escalation_policies/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/escalation_policies/ABC1234', 'summary': 'Another Escalation Policy', 'type': 'escalation_policy_reference'}, 'first_trigger_log_entry': {'html_url': 'https://subdomain.pagerduty.com/incidents/ABC1234/log_entries/ABCDEFGH123456', 'id': 'ABCDEFGH123456', 'self': 'https://api.pagerduty.com/log_entries/ABCDEFGH123456?incident_id=ABC1234', 'summary': 'Triggered through the API', 'type': 'trigger_log_entry_reference'}, 'html_url': 'https://subdomain.pagerduty.com/incidents/ABC1234', 'id': 'ABC1234', 'incident_key': 'abcABC123456abcABC123456abcABC123456', 'incident_number': 1234, 'is_mergeable': true, 'last_status_change_at': '2015-10-06T21:38:23Z', 'last_status_change_by': {'html_url': 'https://subdomain.pagerduty.com/users/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/users/ABC1234', 'summary': 'Test User', 'type': 'user_reference'}, 'pending_actions': [{'at': '2015-11-10T01:02:52Z', 'type': 'unacknowledge'}, {'at': '2015-11-10T04:31:52Z', 'type': 'resolve'}], 'priority': {'id': 'ABC1234', 'self': 'https://api.pagerduty.com/priorities/ABC1234', 'summary': 'P2', 'type': 'priority_reference'}, 'self': 'https://api.pagerduty.com/incidents/ABC1234', 'service': {'html_url': 'https://subdomain.pagerduty.com/service-directory/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/services/ABC1234', 'summary': 'My Mail Service', 'type': 'service_reference'}, 'status': 'resolved', 'summary': '[#1234] The server is on fire.', 'teams': [{'html_url': 'https://subdomain.pagerduty.com/teams/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/teams/ABC1234', 'summary': 'Engineering', 'type': 'team_reference'}], 'title': 'The server is on fire.', 'type': 'incident', 'updated_at': '2015-10-08T21:30:42Z', 'urgency': 'high'}}
