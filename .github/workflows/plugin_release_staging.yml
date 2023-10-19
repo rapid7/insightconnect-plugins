@@ -81,7 +81,7 @@ jobs:
         run: |
           if [[ "${{ github.event.pull_request.merged }}" == "true" ]]; then
             echo "Pull requst has been merged. Starting release process..."
-          elif [ "${{ github.event_name" == "workflow_dispatch" ]; then
+          elif [ "${{ github.event_name" }} == "workflow_dispatch" ]; then
             echo "Workflow was manually triggered. Starting release process..."
           else
             echo "Pull request has not been merged. Stopping workflow..."
