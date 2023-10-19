@@ -1,0 +1,411 @@
+name: Plugin Release Workflow
+on:
+  workflow_dispatch:
+    inputs:
+      RELEASE_ENVIRONMENTS:
+        description: 'Release environments, comma separated. Typically all should be selected.'
+        required: true
+        default: 'RELEASE_PROD_CLOUD_US1,RELEASE_PROD_CLOUD_EU,RELEASE_PROD_CLOUD_CA,RELEASE_PROD_CLOUD_AU,RELEASE_PROD_CLOUD_AP,RELEASE_PROD_CLOUD_US2,RELEASE_PROD_CLOUD_US3,RELEASE_INT_CLOUD_US,RELEASE_HUB_PROD,RELEASE_HUB_STAGING,RELEASE_ALLIANCE_PROD,RELEASE_ALLIANCE_STAGING'
+      INSIGHT_KOMAND_CLEAN:
+        description: 'Docker image cleanup.'
+        required: true
+        default: 'None'
+        type: choice
+        options:
+          - 'None'
+          - 'All'
+          - 'Dangling'
+      INSIGHT_KOMAND_PLUGIN_NAME:
+        description: 'Plugin to release. The name must match the plugin directory name in GitHub. Multiple plugins can be entered, separated by commas (freegeoip,jira,etc).'
+        required: false
+      INSIGHT_KOMAND_PLUGIN_ALL:
+        description: 'Plugin release batching option. Leave empty to upload by name, otherwise select All, Go, or Python to release plugins, respectively.'
+        required: true
+        type: choice
+        default: ''
+        options:
+          - ''
+          - 'All'
+          - 'Go'
+          - 'Python'
+      INSIGHT_KOMAND_BRANCH:
+        description: 'Branch or tag to source the plugin code from.'
+        default: 'master'
+        required: true
+      INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION:
+        description: 'Plugin release options, comma separated. Typically all values should be selected. Input options are Icon, Registry, Market, Help'
+        required: true
+        default: 'Icon,Registry,Market,Help'
+      INSIGHT_KOMAND_SIMULATE:
+        description: 'Check to run this release job as a simulation (affects all infrastructure).'
+        required: true
+        default: false
+      INSIGHT_KOMAND_FORCE_UPDATE:
+        description: 'Check to force update of the plugin (affects only Komand infrastructure).'
+        required: true
+        default: false
+      INSIGHT_KOMAND_OVERRIDE_BLACKLISTS:
+        description: 'Check to override plugin blacklists (affects all release targets).'
+        required: true
+        default: false
+  push:
+    branches:
+      - master
+
+env:
+  GITHUB_ORG: "rapid7"
+  INSIGHT_CONNECT_PLUGINS: "insightconnect-plugins"
+  INSIGHT_CONNECT_PLUGINS_REPO: "rapid7/insightconnect-plugins"
+  KOMAND_DOCKERHUB_USER: ${{secrets.KOMAND_DOCKERHUB_USER}}
+  KOMAND_DOCKERHUB_PASSWORD: ${{ secrets.KOMAND_DOCKERHUB_PASSWORD }}
+  PACKAGECLOUD_PYTHON_TOOLING_STABLE: ${{ secrets.PACKAGECLOUD_PYTHON_TOOLING_STABLE }}
+  PACKAGECLOUD_PYTHON_TOOLING_UNSTABLE: ${{ secrets.PACKAGECLOUD_PYTHON_TOOLING_UNSTABLE }}
+  ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK: ${{ secrets.ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK}}
+  IAM_SESSION_DURATION: ${{ secrets.IAM_SESSION_DURATION }}
+  AWS_ACCESS_ROLE: ${{ secrets.AWS_ACCESS_ROLE }}
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  AWS_IAM_HOST: ${{ secrets.AWS_IAM_HOST }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up environment variables
+        id: setUpEnvironmentVariables
+        run: |
+          # Setup environment variables from input
+          echo "INSIGHT_KOMAND_PLUGIN_NAME=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_NAME || '' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_PLUGIN_ALL=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_ALL || '' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_SIMULATE=${{ github.event.inputs.INSIGHT_KOMAND_SIMULATE || 'false' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_FORCE_UPDATE=${{ github.event.inputs.INSIGHT_KOMAND_FORCE_UPDATE || 'false' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION || 'Icon,Registry,Market,Help' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_CLEAN=${{ github.event.inputs.INSIGHT_KOMAND_CLEAN || 'None' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_BRANCH=${{ github.event.inputs.INSIGHT_KOMAND_BRANCH || 'master' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_OVERRIDE_BLACKLISTS=${{ github.event.inputs.INSIGHT_KOMAND_OVERRIDE_BLACKLISTS || 'false' }}" >> $GITHUB_ENV
+          export RELEASE_ENVIRONMENTS=${{ github.event.inputs.RELEASE_ENVIRONMENTS || 'RELEASE_PROD_CLOUD_US1,RELEASE_PROD_CLOUD_EU,RELEASE_PROD_CLOUD_CA,RELEASE_PROD_CLOUD_AU,RELEASE_PROD_CLOUD_AP,RELEASE_PROD_CLOUD_US2,RELEASE_PROD_CLOUD_US3,RELEASE_INT_CLOUD_US,RELEASE_HUB_PROD,RELEASE_HUB_STAGING,RELEASE_ALLIANCE_PROD,RELEASE_ALLIANCE_STAGING' }}
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_PROD_CLOUD_US1"* ]]; then
+            echo "RELEASE_PROD_CLOUD_US=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_PROD_CLOUD_US=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_PROD_CLOUD_US2"* ]]; then
+            echo "RELEASE_PROD_CLOUD_US2=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_PROD_CLOUD_US2=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_PROD_CLOUD_US3"* ]]; then
+            echo "RELEASE_PROD_CLOUD_US3=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_PROD_CLOUD_US3=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_PROD_CLOUD_EU"* ]]; then
+            echo "RELEASE_PROD_CLOUD_EU=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_PROD_CLOUD_EU=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_PROD_CLOUD_CA"* ]]; then
+            echo "RELEASE_PROD_CLOUD_CA=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_PROD_CLOUD_CA=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_PROD_CLOUD_AU"* ]]; then
+            echo "RELEASE_PROD_CLOUD_AU=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_PROD_CLOUD_AU=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_PROD_CLOUD_AP"* ]]; then
+            echo "RELEASE_PROD_CLOUD_AP=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_PROD_CLOUD_AP=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_INT_CLOUD_US"* ]]; then
+            echo "RELEASE_INT_CLOUD_US=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_INT_CLOUD_US=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_HUB_PROD"* ]]; then
+            echo "RELEASE_HUB_PROD=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_HUB_PROD=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_HUB_STAGING"* ]]; then
+            echo "RELEASE_HUB_STAGING=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_HUB_STAGING=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_ALLIANCE_STAGING"* ]]; then
+            echo "RELEASE_ALLIANCE_STAGING=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_ALLIANCE_STAGING=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_ALLIANCE_PROD"* ]]; then
+            echo "RELEASE_ALLIANCE_PROD=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_ALLIANCE_PROD=false" >> $GITHUB_ENV
+          fi
+
+      - name: Checkout Repository
+        id: checkoutRepository
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        id: setupPython
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Setup venv
+        id: setUpVenv
+        run: |
+          python3 -m venv .ci_venv
+          source .ci_venv/bin/activate
+          pip install --upgrade pip
+
+      - name: Install CI/CD Tool
+        id: installCICDTool
+        run: |
+          # Install CI Tooling
+          curl -s https://${PACKAGECLOUD_PYTHON_TOOLING_STABLE}:@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh | bash
+          .ci_venv/bin/pip install icon-integrations-ci~=2.11
+
+      - name: Announce Plugin Release Started
+        id: announcePluginReleaseStarted
+        if: always()
+        run: |
+          # Announce release
+          cd plugins
+          ./.ci_venv/bin/icon-ci jenkins-announce --status started --webhook_url $ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK
+
+      - name: configure aws credentials for secrets manager access
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ACCESS_ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Secrets_Manager
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: get secrets from aws secrets manager
+        uses: aws-actions/aws-secretsmanager-get-secrets@v1
+        with:
+          secret-ids: |
+            PROD_CLOUD_US, release/prod_cloud_us
+            PROD_CLOUD_EU, release/prod_cloud_eu
+            PROD_CLOUD_AP, release/prod_cloud_ap
+            PROD_CLOUD_CA, release/prod_cloud_ca
+            PROD_CLOUD_AU, release/prod_cloud_au
+            PROD_CLOUD_US2, release/prod_cloud_us2
+            PROD_CLOUD_US3, release/prod_cloud_us3
+            INT_CLOUD_US, release/int_cloud_us
+            HUB_PROD, release/hub_prod
+            HUB_STAGING, release/hub_staging
+            ALLIANCE_PROD, release/aliiance_prod
+            ALLIANCE_STAGING, release/alliance_staging
+          parse-json-secrets: true
+
+      - name: Configure AWS Credentials PROD CLOUD US
+        id: configureAWSUS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.PROD_CLOUD_US_STSPLUGINS3ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Prod_Cloud_us
+          aws-region: ${{ env.PROD_CLOUD_US_REGION }}
+
+      - name: Release Plugin PROD CLOUD US
+        id: releaseUS
+        if: success()
+        run: |
+          export INF_NAME="PROD_CLOUD_US"
+          export INF=$RELEASE_PROD_CLOUD_US
+          . ./tools/release_plugin.sh
+
+      - name: Configure AWS Credentials PROD CLOUD EU
+        id: configureAWSEU
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.PROD_CLOUD_EU_STSPLUGINS3ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Prod_Cloud_eu
+          aws-region: ${{ env.PROD_CLOUD_EU_REGION }}
+
+      - name: Release Plugin PROD CLOUD EU
+        id: releaseEU
+        if: success()
+        run: |
+          export INF_NAME="PROD_CLOUD_EU"
+          export INF=$RELEASE_PROD_CLOUD_EU
+          . ./tools/release_plugin.sh
+
+      - name: Configure AWS Credentials PROD CLOUD AU
+        id: configureAWSAU
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.PROD_CLOUD_AU_STSPLUGINS3ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Prod_Cloud_au
+          aws-region: ${{ env.PROD_CLOUD_AU_REGION }}
+
+      - name: Release Plugin PROD CLOUD AU
+        id: releaseAU
+        if: success()
+        run: |
+          export INF_NAME="PROD_CLOUD_AU"
+          export INF=$RELEASE_PROD_CLOUD_AU
+          . ./tools/release_plugin.sh
+
+      - name: Configure AWS Credentials PROD CLOUD AP
+        id: configureAWSAP
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.PROD_CLOUD_AP_STSPLUGINS3ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Prod_Cloud_ap
+          aws-region: ${{ env.PROD_CLOUD_AP_REGION }}
+
+      - name: Release Plugin PROD CLOUD AP
+        id: releaseAP
+        if: success()
+        run: |
+          export INF_NAME="PROD_CLOUD_AP"
+          export INF=$RELEASE_PROD_CLOUD_AP
+          . ./tools/release_plugin.sh
+
+      - name: Configure AWS Credentials PROD CLOUD US2
+        id: configureAWSUS2
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.PROD_CLOUD_US2_STSPLUGINS3ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Prod_Cloud_us2
+          aws-region: ${{ env.PROD_CLOUD_US2_REGION }}
+
+      - name: Release Plugin PROD CLOUD US2
+        id: releaseUS2
+        if: success()
+        run: |
+          export INF_NAME="PROD_CLOUD_US2"
+          export INF=$RELEASE_PROD_CLOUD_US2
+          . ./tools/release_plugin.sh
+
+      - name: Configure AWS Credentials PROD CLOUD US3
+        id: congifureAWSUS3
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.PROD_CLOUD_US3_STSPLUGINS3ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Prod_Cloud_us3
+          aws-region: ${{ env.PROD_CLOUD_US3_REGION }}
+
+      - name: Release Plugin PROD CLOUD US3
+        id: releaseUS3
+        if: success()
+        run: |
+          export INF_NAME="PROD_CLOUD_US3"
+          export INF=$RELEASE_PROD_CLOUD_US3
+          . ./tools/release_plugin.sh
+
+      - name: Configure AWS Credentials INT CLOUD US
+        id: configureAWSInt
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.INT_CLOUD_US_STSPLUGINS3ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_INT_Cloud_us
+          aws-region: ${{ env.INT_CLOUD_US_REGION }}
+
+      - name: Release Plugin INT CLOUD US
+        id: releaseInt
+        if: success()
+        run: |
+          export INF_NAME="INT_CLOUD_US"
+          export INF=$RELEASE_INT_CLOUD_US
+          . ./tools/release_plugin.sh
+
+      - name: Configure AWS Credentials HUB PROD
+        id: configureAWSHubProd
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.HUB_PROD_STSPLUGINS3ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Hub_Prod
+          aws-region: ${{ env.HUB_PROD_REGION }}
+
+      - name: Release Plugin HUB PROD
+        id: releaseHubProd
+        if: success()
+        run: |
+          export INF_NAME="HUB_PROD"
+          export INF=$RELEASE_HUB_PROD
+          . ./tools/release_plugin.sh
+
+      - name: Configure AWS Credentials HUB STAGING
+        id: configureAWSHubStaging
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.HUB_STAGING_STSPLUGINS3ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Hub_Staging
+          aws-region: ${{ env.HUB_STAGING_REGION }}
+
+      - name: Release Plugin HUB STAGING
+        id: releaseHubStaging
+        if: success()
+        run: |
+          export INF_NAME="HUB_STAGING"
+          export INF=$RELEASE_HUB_STAGING
+          . ./tools/release_plugin.sh
+
+      - name: Configure AWS Credentials ALLIANCE STAGING
+        id: configureAWSAllianceStaging
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.ALLIANCE_STAGING_STSPLUGINS3ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Alliance_Staging
+          aws-region: ${{ env.ALLIANCE_STAGING_REGION }}
+
+      - name: Release Plugin ALLIANCE STAGING
+        id: releaseAllianceStaging
+        if: success()
+        run: |
+          export INF_NAME="ALLIANCE_STAGING"
+          export INF=$RELEASE_ALLIANCE_STAGING
+          . ./tools/release_plugin.sh
+
+      - name: Configure AWS Credentials ALLIANCE PROD
+        id: configureAllianceProd
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.ALLIANCE_PROD_STSPLUGINS3ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Alliance_Prod
+          aws-region: ${{ env.ALLIANCE_PROD_REGION }}
+
+      - name: Release Plugin ALLIANCE PROD
+        id: releaseAllianceProd
+        if: success()
+        run: |
+          export INF_NAME="ALLIANCE_PROD"
+          export INF=$RELEASE_ALLIANCE_PROD
+          . ./tools/release_plugin.sh
+
+      - name: Plugin Tag and Announcement on Success
+        id: pluginTagAndAnnouncementonSuccess
+        if: success()
+        run: |
+          cd plugins
+          ../.ci_venv/bin/icon-ci tag
+          ../.ci_venv/bin/icon-ci jenkins-announce --status success --webhook_url $ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK
+
+      - name: Plugin Details on Success
+        id: pluginDetailsonSuccess
+        if: success()
+        run: |
+          cd plugins
+          ../.ci_venv/bin/icon-ci plugin-details
+
+      - name: Setup Auto PR
+        id: setupAutoPR
+        if: success()
+        run: |
+          # Setup plugin details for cloud deployment
+          cd plugins
+          export PLUGINS_DETAILS=$(cat plugins/plugin.properties)
+          echo "PLUGINS_DETAILS=$PLUGINS_DETAILS" >> $GITHUB_ENV
+
+      - name: Announce Plugin Release Failure
+        id: announcePluginReleaseFailure
+        if: failure()
+        run: |
+          # Announce if failure
+          cd plugins
+          ../.ci_venv/bin/icon-ci jenkins-announce --status failure --webhook_url $ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK
