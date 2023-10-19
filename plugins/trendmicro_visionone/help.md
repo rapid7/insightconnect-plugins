@@ -1980,7 +1980,6 @@ _This plugin does not contain any troubleshooting information._
 * 1.0.2 - Enabled multiple inputs for Get Endpoint Data, reduced API call frequency & General Refactoring
 * 1.0.1 - Alert Details Output Fix (Minor Fix)
 * 1.0.0 - Initial plugin
-* 1.0.1 - Alert Details Output Fix (Minor Fix)
 
 # Links
 
