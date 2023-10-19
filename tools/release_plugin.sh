@@ -32,9 +32,9 @@ if [[ $INF == "true" ]]; then
   IAM_ROLE_EXTERNAL_ID_KEY="${INF_NAME}_STSPLUGINS3EXTERNALID"
   export IAM_ROLE_EXTERNAL_ID="${!IAM_ROLE_EXTERNAL_ID_KEY}"
   # Run icon-ci release
-  cd plugins
   echo "INFO: Releasing $INFRASTRUCTURE_NAME!!!"
-  KOMAND_SOURCE_BRANCH=${{ github.head_ref }} ../.ci_venv/bin/icon-ci release
+  cd plugins
+  ../.ci_venv/bin/icon-ci release
 else
   echo "INFO: Skipping $INFRASTRUCTURE_NAME!!!"
 fi
