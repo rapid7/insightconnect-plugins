@@ -65,7 +65,7 @@ env:
   KOMAND_DOCKERHUB_PASSWORD: ${{ secrets.KOMAND_DOCKERHUB_PASSWORD }}
   PACKAGECLOUD_PYTHON_TOOLING_STABLE: ${{ secrets.PACKAGECLOUD_PYTHON_TOOLING_STABLE }}
   PACKAGECLOUD_PYTHON_TOOLING_UNSTABLE: ${{ secrets.PACKAGECLOUD_PYTHON_TOOLING_UNSTABLE }}
-  ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK: ${{ secrets.ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK}}
+  ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK: ${{ secrets.ICON_INTEGRATION_RELEASES_STAGING_ANNOUNCE_WEBHOOK}}
   IAM_SESSION_DURATION: ${{ secrets.IAM_SESSION_DURATION }}
   AWS_ACCESS_ROLE: ${{ secrets.AWS_ACCESS_ROLE }}
   AWS_REGION: ${{ secrets.AWS_REGION }}
@@ -169,7 +169,7 @@ jobs:
         if: always()
         run: |
           cd plugins
-          ../.ci_venv/bin/icon-ci jenkins-announce --status started --webhook_url $ICON_INTEGRATIONS_STAGING_RELEASES_ANNOUNCE_WEBHOOK
+          ../.ci_venv/bin/icon-ci jenkins-announce --status started --webhook_url $ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK
 
       - name: configure aws credentials for secrets manager access
         uses: aws-actions/configure-aws-credentials@v4
@@ -243,7 +243,7 @@ jobs:
         run: |
           cd plugins
           ../.ci_venv/bin/icon-ci tag
-          ../.ci_venv/bin/icon-ci jenkins-announce --status success --webhook_url $ICON_INTEGRATIONS_STAGING_RELEASES_ANNOUNCE_WEBHOOK
+          ../.ci_venv/bin/icon-ci jenkins-announce --status success --webhook_url $ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK
 
       - name: Plugin Details on Success
         id: pluginDetailsonSuccess
@@ -267,4 +267,4 @@ jobs:
         run: |
           # Announce if failure
           cd plugins
-          ../.ci_venv/bin/icon-ci jenkins-announce --status failure --webhook_url $ICON_INTEGRATIONS_STAGING_RELEASES_ANNOUNCE_WEBHOOK
+          ../.ci_venv/bin/icon-ci jenkins-announce --status failure --webhook_url $ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK
