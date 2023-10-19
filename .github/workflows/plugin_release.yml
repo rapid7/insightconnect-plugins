@@ -189,6 +189,14 @@ jobs:
           export KOMAND_SOURCE_BRANCH="$source_branch"
           export KOMAND_TARGET_BRANCH="$target_branch"
 
+      - name: Get Source and Target Branches
+        id: getSourceAndTargetBranches
+        run: |
+          source_branch=${{ github.head_ref }}
+          target_branch=${{ github.base_ref }}
+          export KOMAND_SOURCE_BRANCH="$source_branch"
+          export KOMAND_TARGET_BRANCH="$target_branch"
+
       - name: Setup Python
         id: setupPython
         uses: actions/setup-python@v4
