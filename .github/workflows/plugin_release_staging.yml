@@ -72,7 +72,7 @@ env:
   AWS_IAM_HOST: ${{ secrets.AWS_IAM_HOST }}
 
 permissions:
-  id_token: write
+  id-token: write
   contents: write
 
 jobs:
