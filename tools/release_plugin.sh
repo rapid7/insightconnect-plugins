@@ -2,7 +2,7 @@
 # Requires authenticated role (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN), INF values (Infrastructure), INF_NAME (Infrastructure Name),
 # Docker Credentials (KOMAND_DOCKERHUB_USER, KOMAND_DOCKERHUB_PASSWORD), Session Duration (IAM_SESSION_DURATION)
 INFRASTRUCTURE_NAME_KEY="${INF_NAME}_NAME"
-INFRASTRUCTURE_NAME="${INFRASTRUCTURE_NAME_KEY}_NAME"
+export INFRASTRUCTURE_NAME="${!INFRASTRUCTURE_NAME_KEY}"
 # Check if region is set for release
 if [[ $INF == "true" ]]; then
   # Docker login
