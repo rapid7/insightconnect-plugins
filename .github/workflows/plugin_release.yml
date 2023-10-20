@@ -223,7 +223,7 @@ jobs:
             INT_CLOUD_US, release/int_cloud_us
             HUB_PROD, release/hub_prod
             HUB_STAGING, release/hub_staging
-            ALLIANCE_PROD, release/aliiance_prod
+            ALLIANCE_PROD, release/alliance_prod
             ALLIANCE_STAGING, release/alliance_staging
           parse-json-secrets: true
 
