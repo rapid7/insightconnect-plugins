@@ -188,9 +188,10 @@ jobs:
         uses: aws-actions/aws-secretsmanager-get-secrets@v1
         with:
           secret-ids: |
-            int_cloud_us
-            hub_staging
-            alliance_staging
+            INT_CLOUD_US, release/int_cloud_us
+            HUB_STAGING, release/hub_staging
+            ALLIANCE_STAGING, release/alliance_staging
+          parse-json-secrets: true
 
       - name: Configure AWS Credentials INT CLOUD US
         id: configureAWSInt
