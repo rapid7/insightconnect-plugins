@@ -816,7 +816,7 @@ Example output:
 |job_title|string|None|None|Job Title|engineer|
 |name|string|None|True|Name|test user|
 |role|string|None|None|Role|None|
-|self|string|None|None|URL to view object|https://api.pagerduty.com/users/ABCD123|
+|self|string|None|None|URL to view user|https://api.pagerduty.com/users/ABCD123|
 |summary|string|None|None|Summary|test summary|
 |time_zone|string|None|None|Time Zone, e.g. America/Lima|Europe/London|
   
@@ -832,8 +832,8 @@ Example output:
 |created_at|string|None|None|The time the incident was first triggered|2015-10-06T21:30:42Z|
 |escalation_policy|object|None|None|The escalation policy attached to the service that the incident is on. If the include[]=escalation_policies query parameter is provided, the full escalation policy definition will be returned|{'id': 'ABC1234', 'type': 'escalation_policy_reference', 'summary': 'Another Escalation Policy', 'self': 'https://api.pagerduty.com/escalation_policies/ABC1234', 'html_url': 'https://subdomain.pagerduty.com/escalation_policies/ABC1234'}|
 |first_trigger_log_entry|object|None|None|The first log entry on the incident. The log entry will be of type TriggerLogEntry and will represent information about how the incident was triggered. If the include[]=first_trigger_log_entries query parameter is provided, the full log entry definition will be returned|{'id': 'ABCDEFGH123456', 'type': 'trigger_log_entry_reference', 'summary': 'Triggered through the API', 'self': 'https://api.pagerduty.com/log_entries/ABCDEFGH123456?incident_id=ABC1234', 'html_url': 'https://subdomain.pagerduty.com/incidents/ABC1234/log_entries/ABCDEFGH123456'}|
-|html_url|string|None|None|a URL at which the entity is uniquely displayed in the Web app|https://subdomain.pagerduty.com/incidents/ABC1234|
-|id|string|None|None|the id of the incident|ABC1234|
+|html_url|string|None|None|A URL at which the entity is uniquely displayed in the Web app|https://subdomain.pagerduty.com/incidents/ABC1234|
+|id|string|None|None|The id of the incident|ABC1234|
 |incident_key|string|None|None|The incident's de-duplication key|abcABC123456abcABC123456abcABC123456|
 |incident_number|integar|None|None|The number of the incident. This is unique across your account.|1234|
 |is_mergeable|boolean|None|None|Whether the incident is mergeable. Only incidents that have alerts, or that are manually created can be merged|True|
@@ -841,7 +841,7 @@ Example output:
 |last_status_change_by|object|None|None|The agent (user, service or integration) that created or modified the Incident Log Entry|{'id': 'ABC1234', 'type': 'user_reference', 'summary': 'Test User', 'self': 'https://api.pagerduty.com/users/ABC1234', 'html_url': 'https://subdomain.pagerduty.com/users/ABC1234'}|
 |pending_actions|array|None|None|The list of pending_actions on the incident. A pending_action object contains a type of action which can be escalate, unacknowledge, resolve or urgency_change. A pending_action object contains at, the time at which the action will take place. An urgency_change pending_action will contain to, the urgency that the incident will change to|[{'type': 'unacknowledge', 'at': '2015-11-10T01:02:52Z'}, {'type': 'resolve', 'at': '2015-11-10T04:31:52Z'}]|
 |priority|object|None|None|The priority of the object|{'id': 'ABC1234', 'type': 'priority_reference', 'summary': 'P2', 'self': 'https://api.pagerduty.com/priorities/ABC1234'}|
-|self|string|None|None|the API show URL at which the object is accessible|https://api.pagerduty.com/incidents/ABC1234|
+|self|string|None|None|The API show URL at which the object is accessible|https://api.pagerduty.com/incidents/ABC1234|
 |service|object|None|None|The service the incident is on. If the include[]=services query parameter is provided, the full service definition will be returned|{'id': 'ABC1234', 'type': 'service_reference', 'summary': 'My Mail Service', 'self': 'https://api.pagerduty.com/services/ABC1234', 'html_url': 'https://subdomain.pagerduty.com/service-directory/ABC1234'}|
 |status|string|None|None|The current status of the incident|resolved|
 |summary|string|None|None|A short-form, server-generated string that provides succinct, important information about an object suitable for primary labelling of an entity in a client|[#1234] The server is on fire.|
@@ -883,9 +883,9 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|html_url|string|None|None|a URL at which the entity is uniquely displayed in the Web app|https://subdomain.pagerduty.com/escalation_policies/ABC1234|
+|html_url|string|None|None|A URL at which the entity is uniquely displayed in the Web app|https://subdomain.pagerduty.com/escalation_policies/ABC1234|
 |id|string|None|None|The id of the escalation policy that the new incident will be assigned to|ABC1234|
-|self|string|None|None|the API show URL at which the object is accessible|https://api.pagerduty.com/escalation_policies/ABC1234|
+|self|string|None|None|The API show URL at which the object is accessible|https://api.pagerduty.com/escalation_policies/ABC1234|
 |summary|string|None|None|A short-form, server-generated string that provides succinct, important information about an object|Another Escalation Policy|
 |type|string|None|None|A string that determines the schema of the object.|escalation_policy_reference|
   
@@ -894,7 +894,7 @@ Example output:
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |conference_number|string|None|None|The phone number of the conference call for the conference bridge. Phone numbers should be formatted like +1 415-555-1212,,,,1234#, where a comma (,) represents a one-second wait and pound (#) completes access code input|555-123-4567|
-|conference_url|string|None|None|An URL for the conference bridge. This could be a link to a web conference or Slack channel|https://example.com/123-456-789|
+|conference_url|string|None|None|A URL for the conference bridge. This could be a link to a web conference or Slack channel|https://example.com/123-456-789|
 
 
 ## Troubleshooting

@@ -106,7 +106,7 @@ class PagerDutyAPI:
         """
         Formats the request to allow for a user to be deleted
 
-        :param str email: The email of the user that is deleteing the account
+        :param str email: The email of the user that is deleting the account
         :param str user_id: The id of the user that is to be deleted
         :return bool: True if the user has been deleted
         """
@@ -192,7 +192,7 @@ class PagerDutyAPI:
         :raises PluginException: PluginException: The PluginException error will be raised and based on the status code the error messaged will be set, this is based on a set of predefined messages in the insightconnect_plugin_runtime.exceptions class
         """
         if response.status_code == 401:
-            raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
+            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.text)
         if response.status_code == 403:
             raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
         if response.status_code == 404:

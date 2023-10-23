@@ -31,7 +31,7 @@ class TestCreateUser(TestCase):
             ],
         ]
     )
-    def test_create_user_valid(self, mock_request: MagicMock, test_name: str, input_params: dict, expected: dict):
+    def test_create_user_valid(self, _mock_request: MagicMock, _test_name: str, input_params: dict, expected: dict):
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
 
@@ -46,7 +46,7 @@ class TestCreateUser(TestCase):
         ]
     )
     def test_api_error_invalid(
-        self, mock_request: MagicMock, test_name: str, input_params: dict, cause: str, assistance: str
+        self, _mock_request: MagicMock, _test_name: str, input_params: dict, cause: str, assistance: str
     ):
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)

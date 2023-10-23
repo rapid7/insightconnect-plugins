@@ -55,45 +55,48 @@ class Util:
         url = args[1]
         method = args[0]
 
+        if data:
+            data = json.loads(data)
+        print(f"{data = }")
+
         if url == "https://api.pagerduty.com/users/":
             if method == "POST":
-                if payload.get("user", {}).get("name") == "Test minimum fields":
+                name = payload.get("user", {}).get("name")
+                if name == "Test minimum fields":
                     return MockResponse(200, "create_user_minimum_fields.json.resp")
-                elif payload.get("user", {}).get("name") == "Test additional fields":
+                elif name == "Test additional fields":
                     return MockResponse(200, "create_user_additional_fields.json.resp")
-                elif payload.get("user", {}).get("name") == "Test api error":
+                elif name == "Test api error":
                     return MockResponse(500)
                 else:
                     raise NotImplementedError("Not implemented", kwargs)
 
-        elif url == "https://api.pagerduty.com/users/valid_id/" and method == "DELETE":
-            return MockResponse(204, "")
-        elif url == "https://api.pagerduty.com/users/invalid_id/" and method == "DELETE":
-            return MockResponse(404)
-
-        elif url == "https://api.pagerduty.com/users/valid_id/" and method == "GET":
-            return MockResponse(200, "get_user_valid.json.resp")
-        elif url == "https://api.pagerduty.com/users/invalid_id/" and method == "GET":
-            return MockResponse(404)
+        elif url == "https://api.pagerduty.com/users/valid_id/":
+            if method == "DELETE":
+                return MockResponse(204, "")
+            elif method == "GET":
+                return MockResponse(200, "get_user_valid.json.resp")
+        
+        elif url == "https://api.pagerduty.com/users/invalid_id/":
+                return MockResponse(404)
 
         elif url == "https://api.pagerduty.com/incidents/valid_id/" and method == "PUT":
-            if "resolved" in data:
+            incident_status = data.get("incident", {}).get("status")
+            if incident_status == "resolved":
                 return MockResponse(200, "test_resolve_valid.json.resp")
-            elif "acknowledged" in data:
+            elif incident_status == "acknowledged":
                 return MockResponse(200, "test_acknowledge_valid.json.resp")
 
         elif url == "https://api.pagerduty.com/incidents/invalid_id/" and method == "PUT":
-            if "resolved" in data:
-                return MockResponse(404)
-            elif "acknowledged" in data:
                 return MockResponse(404)
 
         elif url == "https://api.pagerduty.com/incidents/" and method == "POST":
-            if payload.get("incident", {}).get("title", "") == "test minimum fields":
+            title = payload.get("incident", {}).get("title", "")
+            if title == "test minimum fields":
                 return MockResponse(200, "trigger_event_minimum_fields.json.resp")
-            elif payload.get("incident", {}).get("title", "") == "test additional fields escalation":
+            elif title == "test additional fields escalation":
                 return MockResponse(200, "trigger_event_additional_fields_escalation.json.resp")
-            elif payload.get("incident", {}).get("title", "") == "test additional fields assignments":
+            elif title == "test additional fields assignments":
                 return MockResponse(200, "trigger_event_additional_fields_assignments.json.resp")
 
         elif url == "https://api.pagerduty.com/schedules/no_users/":

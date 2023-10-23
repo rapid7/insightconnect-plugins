@@ -27,7 +27,7 @@ class TestSendResolveEvent(TestCase):
             ]
         ]
     )
-    def test_send_resolve_event(self, mock_request: MagicMock, test_name: str, input_params: dict, expected: dict):
+    def test_send_resolve_event(self, _mock_request: MagicMock, _test_name: str, input_params: dict, expected: dict):
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
 
@@ -42,7 +42,7 @@ class TestSendResolveEvent(TestCase):
         ]
     )
     def test_api_error_invalid(
-        self, mock_request: MagicMock, test_name: str, input_params: dict, cause: str, assistance: str
+        self, _mock_request: MagicMock, _test_name: str, input_params: dict, cause: str, assistance: str
     ):
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)

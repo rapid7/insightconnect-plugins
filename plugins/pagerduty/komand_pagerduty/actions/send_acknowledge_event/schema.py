@@ -67,7 +67,7 @@ class SendAcknowledgeEventOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "id": {
           "type": "string",
-          "description": "the id of the incident",
+          "description": "The id of the incident",
           "order": 1
         },
         "type": {
@@ -82,12 +82,12 @@ class SendAcknowledgeEventOutput(insightconnect_plugin_runtime.Output):
         },
         "self": {
           "type": "string",
-          "description": "the API show URL at which the object is accessible",
+          "description": "The API show URL at which the object is accessible",
           "order": 4
         },
         "html_url": {
           "type": "string",
-          "description": "a URL at which the entity is uniquely displayed in the Web app",
+          "description": "A URL at which the entity is uniquely displayed in the Web app",
           "order": 5
         },
         "incident_number": {

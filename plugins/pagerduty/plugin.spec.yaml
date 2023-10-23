@@ -39,7 +39,7 @@ types:
       type: string
       example: ABCD123
     self:
-      description: URL to view object
+      description: URL to view user
       type: string
       example: "https://api.pagerduty.com/users/ABCD123"
     name:
@@ -87,7 +87,7 @@ types:
       - user
   incident_output:
     id:
-      description: the id of the incident
+      description: The id of the incident
       type: string
       example: ABC1234
     type:
@@ -99,11 +99,11 @@ types:
       type: string
       example: "[#1234] The server is on fire."
     self:
-      description: the API show URL at which the object is accessible
+      description: The API show URL at which the object is accessible
       type: string
       example: https://api.pagerduty.com/incidents/ABC1234
     html_url:
-      description: a URL at which the entity is uniquely displayed in the Web app
+      description: A URL at which the entity is uniquely displayed in the Web app
       type: string
       example: https://subdomain.pagerduty.com/incidents/ABC1234
     incident_number:
@@ -246,11 +246,11 @@ types:
       type: string
       example: Another Escalation Policy
     self:
-      description: the API show URL at which the object is accessible
+      description: The API show URL at which the object is accessible
       type: string
       example: https://api.pagerduty.com/escalation_policies/ABC1234
     html_url: 
-      description: a URL at which the entity is uniquely displayed in the Web app
+      description: A URL at which the entity is uniquely displayed in the Web app
       type: string
       example: https://subdomain.pagerduty.com/escalation_policies/ABC1234
   conference_bridge_input:
@@ -259,7 +259,7 @@ types:
       type: string
       example: 555-123-4567
     conference_url:
-      description: An URL for the conference bridge. This could be a link to a web conference or Slack channel
+      description: A URL for the conference bridge. This could be a link to a web conference or Slack channel
       type: string
       example: https://example.com/123-456-789
 actions:

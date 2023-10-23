@@ -129,7 +129,7 @@ class CreateUserOutput(insightconnect_plugin_runtime.Output):
         },
         "self": {
           "type": "string",
-          "description": "URL to view object",
+          "description": "URL to view user",
           "order": 2
         },
         "name": {

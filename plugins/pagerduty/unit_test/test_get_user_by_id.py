@@ -27,7 +27,7 @@ class TestGetUserById(TestCase):
             ]
         ]
     )
-    def test_get_user_by_id(self, mock_request: MagicMock, test_name: str, input_params: dict, expected: dict):
+    def test_get_user_by_id(self, _mock_request: MagicMock, _test_name: str, input_params: dict, expected: dict):
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
 
@@ -42,7 +42,7 @@ class TestGetUserById(TestCase):
         ]
     )
     def test_api_error_invalid(
-        self, mock_request: MagicMock, test_name: str, input_params: dict, cause: str, assistance: str
+        self, _mock_request: MagicMock, _test_name: str, input_params: dict, cause: str, assistance: str
     ):
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
