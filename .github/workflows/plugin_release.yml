@@ -82,10 +82,10 @@ jobs:
         run: |
           if [[ "${{ github.event.pull_request.merged }}" == "true" ]]; then
             echo "Pull requst has been merged. Starting release process..."
-            echo "ROOT_BUILD_CAUSE='SCMTRIGGER'" >> $GITHUB_ENV
+            echo "ROOT_BUILD_CAUSE=SCMTRIGGER" >> $GITHUB_ENV
           elif [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
             echo "Workflow was manually triggered. Starting release process..."
-            echo "ROOT_BUILD_CAUSE='MANUALTRIGGER'" >> $GITHUB_ENV
+            echo "ROOT_BUILD_CAUSE=MANUALTRIGGER" >> $GITHUB_ENV
           else
             echo "Pull request has not been merged. Stopping workflow..."
             exit 1
