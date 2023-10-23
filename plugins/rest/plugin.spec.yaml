@@ -3,19 +3,19 @@ extension: plugin
 products: [insightconnect]
 name: rest
 title: HTTP Requests
-description: The HTTP Requests plugin to make it easy to integrate with RESTful services
-version: 6.0.2
+description: The HTTP Requests plugin makes it easy to integrate with RESTful services
+version: 6.0.3
 vendor: rapid7
 support: community
-supported_versions: ["2022-09-05"]
+supported_versions: ["2023-10-19"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rest
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   docs_url: https://docs.rapid7.com/insightconnect/http-requests
-key_features: ["Make RESTful API calls"]
-requirements: ["None"]
-references: ["https://requests.readthedocs.io/en/latest/", "https://docs.rapid7.com/insightconnect/http-requests"]
+key_features: ["Make RESTful API calls", "Quickly integrate with 3rd party API's over HTTP"]
+requirements: ["A RESTFUL HTTP/HTTPS resource and supported authentication, if any"]
+references: ["https://requests.readthedocs.io/en/latest/", "[InsightConnect HTTP Request Plugin Guide](https://docs.rapid7.com/insightconnect/http-requests)"]
 tags:
 - rest
 - request
@@ -102,7 +102,7 @@ connection:
 actions:
   get:
     title: GET
-    description: Make a GET request
+    description: This action is used to make a GET request
     input:
       route:
         title: Route
@@ -155,7 +155,7 @@ actions:
         example: {"Host": "rapid7.com"}
   post:
     title: POST
-    description: Make a POST request
+    description: This action is used to make a POST request
     input:
       route:
         title: Route
@@ -208,7 +208,7 @@ actions:
         example: {"Host": "rapid7.com"}
   put:
     title: PUT
-    description: Make a PUT request
+    description: This action is used to make a PUT request
     input:
       route:
         title: Route
@@ -261,7 +261,7 @@ actions:
         example: {"Host": "rapid7.com"}
   patch:
     title: PATCH
-    description: Make a PATCH request
+    description: This action is used to make a PATCH request
     input:
       route:
         title: Route
@@ -314,7 +314,7 @@ actions:
         example: {"Host": "rapid7.com"}
   delete:
     title: DELETE
-    description: Make a DELETE request
+    description: This action is used to make a DELETE request
     input:
       route:
         title: Route
