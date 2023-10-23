@@ -27,7 +27,7 @@ class TestAdvancedQueryOnLogSet(TestCase):
         expected = ["Out of order entry"]
 
         self.assertEqual(actual.get(Output.COUNT), 1)
-        self.assertEqual(actual.get(Output.RESULTS)[0].get("labels"), expected)
+        self.assertEqual(actual.get(Output.RESULTS_EVENTS)[0].get("labels"), expected)
 
     def test_advanced_query_on_log_set_two_label(self, mock_get, mock_async_get):
         actual = self.action.run(
@@ -39,7 +39,7 @@ class TestAdvancedQueryOnLogSet(TestCase):
         expected = ["Out of order entry", "Out of events"]
 
         self.assertEqual(actual.get(Output.COUNT), 1)
-        self.assertEqual(actual.get(Output.RESULTS)[0].get("labels"), expected)
+        self.assertEqual(actual.get(Output.RESULTS_EVENTS)[0].get("labels"), expected)
 
     def test_advanced_query_on_log_set_without_label(self, mock_get, mock_async_get):
         actual = self.action.run(
@@ -51,7 +51,7 @@ class TestAdvancedQueryOnLogSet(TestCase):
         expected = []
 
         self.assertEqual(actual.get(Output.COUNT), 1)
-        self.assertEqual(actual.get(Output.RESULTS)[0].get("labels"), expected)
+        self.assertEqual(actual.get(Output.RESULTS_EVENTS)[0].get("labels"), expected)
 
     def test_advanced_query_on_log_set_wrong_label(self, mock_get, mock_async_get):
         actual = self.action.run(
@@ -63,4 +63,4 @@ class TestAdvancedQueryOnLogSet(TestCase):
         expected = []
 
         self.assertEqual(actual.get(Output.COUNT), 1)
-        self.assertEqual(actual.get(Output.RESULTS)[0].get("labels"), expected)
+        self.assertEqual(actual.get(Output.RESULTS_EVENTS)[0].get("labels"), expected)
