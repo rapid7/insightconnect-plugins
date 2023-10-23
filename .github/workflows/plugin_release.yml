@@ -81,17 +81,28 @@ jobs:
         run: |
           if [[ "${{ github.event.pull_request.merged }}" == "true" ]]; then
             echo "Pull requst has been merged. Starting release process..."
+            echo "ROOT_BUILD_CAUSE='SCMTRIGGER'" >> $GITHUB_ENV
           elif [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
             echo "Workflow was manually triggered. Starting release process..."
+            echo "ROOT_BUILD_CAUSE='MANUALTRIGGER'" >> $GITHUB_ENV
           else
             echo "Pull request has not been merged. Stopping workflow..."
             exit 1
           fi
 
+       - name: Get Current Job Log URL
+          uses: Tiryoh/gha-jobid-action@v0
+          id: jobs
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            job_name: ${{ github.job }}
+          continue-on-error: true
+
       - name: Set up environment variables
         id: setUpEnvironmentVariables
         run: |
           # Setup environment variables from input
+          echo "BUILD_URL=${{ steps.jobs.outputs.html_url }}" >> $GITHUB_ENV
           echo "INSIGHT_KOMAND_PLUGIN_NAME=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_NAME || '' }}" >> $GITHUB_ENV
           echo "INSIGHT_KOMAND_PLUGIN_ALL=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_ALL || '' }}" >> $GITHUB_ENV
           echo "INSIGHT_KOMAND_SIMULATE=${{ github.event.inputs.INSIGHT_KOMAND_SIMULATE || 'false' }}" >> $GITHUB_ENV
@@ -201,6 +212,7 @@ jobs:
           # Announce release
           cd plugins
           ../.ci_venv/bin/icon-ci jenkins-announce --status started --webhook_url $ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK
+        continue-on-error: true
 
       - name: configure aws credentials for secrets manager access
         uses: aws-actions/configure-aws-credentials@v4
