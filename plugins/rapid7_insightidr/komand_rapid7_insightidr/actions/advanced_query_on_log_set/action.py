@@ -72,8 +72,6 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         for entry in ("calculate", "groupby"):
             if entry in query:
                 return True
-            else:
-                return False
 
     def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:  # noqa: C901
         """
@@ -108,7 +106,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
                 raise PluginException(
                     cause="Time out exceeded",
                     assistance="Time out for the query results was exceeded. Try simplifying your"
-                               " query or extending the timeout period",
+                    " query or extending the timeout period",
                 )
 
             self.logger.info("Results were not ready. Sleeping 1 second and trying again.")
@@ -140,7 +138,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         return log_entries
 
     def maybe_get_log_entries(
-            self, log_id: str, query: str, time_from: int, time_to: int, statistical: bool
+        self, log_id: str, query: str, time_from: int, time_to: int, statistical: bool
     ) -> (str, [object]):
         """
         Make a call to the API and ask politely for log results.
