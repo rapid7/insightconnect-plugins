@@ -239,7 +239,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |count|integer|True|Number of log entries found|10|
-|results_events|[]events|False|Query Results|[{'labels': [], 'timestamp': 1601598638768, 'sequence_number': 123456789123456789, 'log_id': '64z0f0p9-1a99-4501-xe36-a6d03687f313', 'message': {'timestamp': '2020-10-02T00:29:14.649Z', 'destination_asset': 'iagent-win7', 'source_asset_address': '192.168.100.50', 'destination_asset_address': 'example-host', 'destination_local_account': 'user', 'logon_type': 'NETWORK', 'result': 'SUCCESS', 'new_authentication': 'false', 'service': 'ntlmssp ', 'source_json': {'sourceName': 'Microsoft-Windows-Security-Auditing', 'insertionStrings': ['S-1-0-0', '-', '-', '0x0', 'X-X-X-XXXXXXXXXXX', 'user@example.com', 'example-host', '0x204f163c', '3', 'NtLmSsp ', 'NTLM', '', '{00000000-0000-0000-0000-000000000000}', '-', 'NTLM V2', '128', '0x0', '-', '192.168.50.1', '59090'], 'eventCode': 4624, 'computerName': 'example-host', 'sid': '', 'isDomainController': False, 'eventData': None, 'timeWritten': '2020-10-02T00:29:13.670722000Z'}}, 'links': [{'rel': 'Context', 'href': 'https://us.api.insight.rapid7.com/log_search/query/context/xxxx'}], 'sequence_number_str': '123456789123456789'}]|
+|results_events|[]events|False|Query Results|[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": "false", "service": "ntlmssp ", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp ", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": False, "eventData": None, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]|
 |results_statistical|statistics|False|Query Results|None|
   
 Example output:
@@ -1302,7 +1302,7 @@ Get query results for a LEQL query by query ID
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|string|None|True|Query ID|None|174e4f99-2ac7-4481-9301-4d24c34baf06|
+|id|string|None|True|Log ID|None|174e4f99-2ac7-4481-9301-4d24c34baf06|
 |most_recent_first|boolean|None|False|Order most recent first|None|True|
   
 Example input:
