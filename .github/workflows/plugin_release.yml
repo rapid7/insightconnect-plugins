@@ -70,6 +70,7 @@ env:
 permissions:
   id-token: write
   contents: write
+  actions: read
 
 jobs:
   release:
@@ -90,13 +91,13 @@ jobs:
             exit 1
           fi
 
-       - name: Get Current Job Log URL
-          uses: Tiryoh/gha-jobid-action@v0
-          id: jobs
-          with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            job_name: ${{ github.job }}
-          continue-on-error: true
+      - name: Get Current Job Log URL
+        uses: Tiryoh/gha-jobid-action@v0
+        id: jobs
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          job_name: ${{ github.job }}
+        continue-on-error: true
 
       - name: Set up environment variables
         id: setUpEnvironmentVariables
