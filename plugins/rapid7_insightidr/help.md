@@ -303,23 +303,36 @@ Example output:
     "timestamp": 1601598638768
   },
   "results_statistical": {
-    "All Exact Results": "true",
-    "Cardinality": {},
-    "From": {},
-    "Granularity": 0,
-    "Groups": [
-      {}
-    ],
-    "Groups Time Series": {},
-    "Key": {},
-    "Others": {},
-    "Stats": {},
-    "Status": {},
-    "Time Series": {},
-    "To": {},
-    "Type": ""
+      "results_statistical": {
+        "cardinality": 0,
+        "granularity": 4320000,
+        "from": 1698023841000,
+        "to": 1698067041000,
+        "type": "count",
+        "stats": {
+          "global_timeseries": {
+            "count": 0.0
+          }
+        },
+        "groups": [],
+        "others": {},
+        "status": 200,
+        "timeseries": {
+          "global_timeseries": [
+            {
+              "count": 0.0
+            },
+            {
+              "count": 0.0
+            }
+          ]
+        },
+        "groups_timeseries": [],
+        "all_exact_result": null,
+        "count": 0
+      }
+    }
   }
-}
 ```
 
 #### Assign User to Investigation
