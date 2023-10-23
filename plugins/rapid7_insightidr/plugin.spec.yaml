@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 5.2.0
+version: 6.0.0
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2022-07-20."]
 vendor: rapid7
