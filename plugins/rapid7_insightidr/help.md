@@ -1296,7 +1296,7 @@ Example output:
 
 #### Get Query Results
   
-Get query results for a LEQL query by query ID
+Get query results for a LEQL query by log ID
 
 ##### Input
 
@@ -2012,6 +2012,7 @@ Example output:
 # Version History
 
 * 6.0.0 - Action: `Advanced Query On Log Set` - Add new output type for statistical queries.
+* 5.1.2 - Action: `Advanced Query on Log Set` - Fix JSONDecoderError | Action: `Query` - Update spec and help.md to show it queries log IDs, not query IDs
 * 5.1.1 - Action: `List Investigations` - Now receiving size input | Actions: `Advanced Query On Log` & `Advanced Query On Log Set` - Acronym LQL has been updated to LEQL
 * 5.1.0 - New actions added: `get_user_information` and `get_asset_information`
 * 5.0.1 - Update the endpoint `get_a_saved_query` reaches out to
