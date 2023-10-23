@@ -14,3 +14,4 @@ from .send_acknowledge_event.action import SendAcknowledgeEvent
 
 from .send_resolve_event.action import SendResolveEvent
 
+from .get_user_by_email.action import GetUserByEmail

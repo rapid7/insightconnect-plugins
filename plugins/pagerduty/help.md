@@ -260,6 +260,89 @@ Example output:
 }
 ```
 
+#### Get User by Their Email Address
+  
+Get a User from using their email address
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|user_email|string|None|True|User email address|None|user@example.com|
+  
+Example input:
+
+```
+{
+  "user_email": "user@example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|user|user|False|User|{'avatar_url': 'https://secure.gravatar.com/avatar/abcABC123456abcABC123456abcABC123456.png?d=mm&r=PG', 'billed': True, 'color': 'purple', 'contact_methods': [{'html_url': None, 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/users/ABCD123/contact_methods/ABC1234', 'summary': 'Default', 'type': 'email_contact_method_reference'}], 'coordinated_incidents': [], 'description': '', 'email': 'user1@example.com', 'html_url': 'https://api.pagerduty.com/users/ABCD123', 'id': 'ABCD123', 'invitation_sent': False, 'job_title': '', 'name': 'Test account', 'notification_rules': [{'html_url': None, 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/users/ABCD123/notification_rules/ABC1234', 'summary': '0 minutes: channel ABC1234', 'type': 'assignment_notification_rule_reference'}, {'html_url': None, 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/users/ABCD123/notification_rules/ABC1234', 'summary': '0 minutes: channel ABC1234', 'type': 'assignment_notification_rule_reference'}], 'role': 'owner', 'self': 'https://api.pagerduty.com/users/ABCD123', 'summary': 'test summary', 'teams': [{'html_url': 'https://api.pagerduty.com/teams/ABC1234', 'id': 'ABC1234', 'self': 'https://api.pagerduty.com/teams/ABC1234', 'summary': 'Engineering', 'type': 'team_reference'}], 'time_zone': 'Europe/London', 'type': 'user'}|
+  
+Example output:
+
+```
+{
+  "user": {
+    "avatar_url": "https://secure.gravatar.com/avatar/abcABC123456abcABC123456abcABC123456.png?d=mm&r=PG",
+    "billed": true,
+    "color": "purple",
+    "contact_methods": [
+      {
+        "html_url": null,
+        "id": "ABC1234",
+        "self": "https://api.pagerduty.com/users/ABCD123/contact_methods/ABC1234",
+        "summary": "Default",
+        "type": "email_contact_method_reference"
+      }
+    ],
+    "coordinated_incidents": [],
+    "description": "",
+    "email": "user1@example.com",
+    "html_url": "https://api.pagerduty.com/users/ABCD123",
+    "id": "ABCD123",
+    "invitation_sent": false,
+    "job_title": "",
+    "name": "Test account",
+    "notification_rules": [
+      {
+        "html_url": null,
+        "id": "ABC1234",
+        "self": "https://api.pagerduty.com/users/ABCD123/notification_rules/ABC1234",
+        "summary": "0 minutes: channel ABC1234",
+        "type": "assignment_notification_rule_reference"
+      },
+      {
+        "html_url": null,
+        "id": "ABC1234",
+        "self": "https://api.pagerduty.com/users/ABCD123/notification_rules/ABC1234",
+        "summary": "0 minutes: channel ABC1234",
+        "type": "assignment_notification_rule_reference"
+      }
+    ],
+    "role": "owner",
+    "self": "https://api.pagerduty.com/users/ABCD123",
+    "summary": "test summary",
+    "teams": [
+      {
+        "html_url": "https://api.pagerduty.com/teams/ABC1234",
+        "id": "ABC1234",
+        "self": "https://api.pagerduty.com/teams/ABC1234",
+        "summary": "Engineering",
+        "type": "team_reference"
+      }
+    ],
+    "time_zone": "Europe/London",
+    "type": "user"
+  }
+}
+```
+
 #### Get User by ID
   
 Get a User by ID
@@ -903,7 +986,7 @@ Example output:
 
 # Version History
 
-* 3.0.0 - `Refactor`: Re-write plugin to use `requests` instead of `pypd` package | Action: `Get User By Email` - Removed | `Unit Tests`: Added for all actions.
+* 3.0.0 - `Refactor`: Re-write plugin to use `requests` instead of `pypd` package | `Unit Tests`: Added for all actions.
 * 2.2.0 - Added Schedule ID optional input to Get On Call action
 * 2.1.0 - New action Get On Call
 * 2.0.1 - New spec and help.md format for the Extension Library

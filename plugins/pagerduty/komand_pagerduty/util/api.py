@@ -121,6 +121,16 @@ class PagerDutyAPI:
         """
         return self.send_request(method="GET", path=f"/users/{user_id}/")
 
+    def get_user_by_email(self, user_email: str) -> dict:
+        """
+        formats the request to allow for the information of a user to be fetched
+
+        :param str user_email: The email address of the user to get information on
+        :return dict: The information on the user
+        """
+        params = {"query":user_email}
+        return self.send_request(method="GET", path="/users/", params=params)
+
     def list_users(self) -> dict:
         """
         Formats the request to get a list of all of the users in pagerduty
@@ -162,8 +172,6 @@ class PagerDutyAPI:
 
         if from_email:
             headers.update({"From": f"{from_email}"})
-
-        self.logger.info(f"{headers = }")
 
         try:
             response = self.session.request(

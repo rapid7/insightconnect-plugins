@@ -70,6 +70,12 @@ class Util:
                     return MockResponse(500)
                 else:
                     raise NotImplementedError("Not implemented", kwargs)
+            elif method == "GET":
+                query = params.get("query", {})
+                if query == "valid_email":
+                    return MockResponse(200, "get_user_by_email_valid.json.resp")
+                elif query == "invalid_email":
+                    return MockResponse(200, "get_user_by_email_not_found.json.resp")
 
         elif url == "https://api.pagerduty.com/users/valid_id/":
             if method == "DELETE":

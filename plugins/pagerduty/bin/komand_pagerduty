@@ -38,6 +38,8 @@ def main():
         
             self.add_action(actions.GetUserById())
         
+            self.add_action(actions.GetUserByEmail())
+        
             self.add_action(actions.CreateUser())
         
             self.add_action(actions.DeleteUserById())
