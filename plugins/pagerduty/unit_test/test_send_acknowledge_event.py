@@ -26,7 +26,9 @@ class TestSendAcknowledgeEvent(TestCase):
             ]
         ]
     )
-    def test_send_acknowledge_event(self, _mock_request: MagicMock, _test_name: str, input_params: dict, expected: dict):
+    def test_send_acknowledge_event(
+        self, _mock_request: MagicMock, _test_name: str, input_params: dict, expected: dict
+    ):
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
 

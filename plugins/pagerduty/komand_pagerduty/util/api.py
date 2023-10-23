@@ -128,7 +128,7 @@ class PagerDutyAPI:
         :param str user_email: The email address of the user to get information on
         :return dict: The information on the user
         """
-        params = {"query":user_email}
+        params = {"query": user_email}
         return self.send_request(method="GET", path="/users/", params=params)
 
     def list_users(self) -> dict:

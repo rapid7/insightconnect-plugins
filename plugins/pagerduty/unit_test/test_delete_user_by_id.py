@@ -26,7 +26,9 @@ class TestDeleteUserById(TestCase):
             ]
         ]
     )
-    def test_delete_user_by_id_valid(self, _mock_request: MagicMock, _test_name: str, input_params: dict, expected: dict):
+    def test_delete_user_by_id_valid(
+        self, _mock_request: MagicMock, _test_name: str, input_params: dict, expected: dict
+    ):
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
 

@@ -82,9 +82,9 @@ class Util:
                 return MockResponse(204, "")
             elif method == "GET":
                 return MockResponse(200, "get_user_valid.json.resp")
-        
+
         elif url == "https://api.pagerduty.com/users/invalid_id/":
-                return MockResponse(404)
+            return MockResponse(404)
 
         elif url == "https://api.pagerduty.com/incidents/valid_id/" and method == "PUT":
             incident_status = data.get("incident", {}).get("status")
@@ -94,7 +94,7 @@ class Util:
                 return MockResponse(200, "test_acknowledge_valid.json.resp")
 
         elif url == "https://api.pagerduty.com/incidents/invalid_id/" and method == "PUT":
-                return MockResponse(404)
+            return MockResponse(404)
 
         elif url == "https://api.pagerduty.com/incidents/" and method == "POST":
             title = payload.get("incident", {}).get("title", "")
