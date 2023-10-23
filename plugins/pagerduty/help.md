@@ -43,7 +43,7 @@ Example input:
 
 #### Create User
   
-Create a User
+This action is used to create a User
 
 ##### Input
 
@@ -145,7 +145,7 @@ Example output:
 
 #### Delete User by ID
   
-Delete a User by ID
+This action is used to delete a User by ID
 
 ##### Input
 
@@ -179,7 +179,7 @@ Example output:
 
 #### Get On-Call Users
   
-Get list of on-call users
+This action is used to get list of on-call users
 
 ##### Input
 
@@ -262,7 +262,7 @@ Example output:
 
 #### Get User by Their Email Address
   
-Get a User from using their email address
+This action is used to get a User from using their email address
 
 ##### Input
 
@@ -345,7 +345,7 @@ Example output:
 
 #### Get User by ID
   
-Get a User by ID
+This action is used to get a User by ID
 
 ##### Input
 
@@ -428,7 +428,7 @@ Example output:
 
 #### Send Acknowledge Event
   
-Acknowledge an incident
+This action is used to acknowledge an incident
 
 ##### Input
 
@@ -566,7 +566,7 @@ Example output:
 
 #### Send Resolve Event
   
-Resolve an incident
+This action is used to resolve an incident
 
 ##### Input
 
@@ -704,7 +704,7 @@ Example output:
 
 #### Send Trigger Event
   
-Trigger an incident
+This action is used to trigger an incident
 
 ##### Input
 
