@@ -8,7 +8,8 @@ if [[ $INF == "true" ]]; then
   # Docker login
   docker login -u "${KOMAND_DOCKERHUB_USER}" -p "${KOMAND_DOCKERHUB_PASSWORD}"
   # Set infrastructure variables for region release
-  export INFRASTRUCTURE="${INF_NAME}_ENV"
+  INFRASTRUCTURE_KEY="${INF_NAME}_ENV"
+  export INFRASTRUCTURE="${!INFRASTRUCTURE_KEY}"
   MARKET_TOKEN_KEY="${INF_NAME}_MARKET_TOKEN"
   export MARKET_TOKEN="${!MARKET_TOKEN_KEY}"
   MARKET_USERNAME_KEY="${INF_NAME}_MARKET_USERNAME"
