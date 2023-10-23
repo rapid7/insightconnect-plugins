@@ -157,7 +157,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
             )
 
         results_object = response.json()
-        if "calculate" or "groupby" in query:
+        if "calculate" in query:
             potential_results = results_object.get("partial")
         else:
             potential_results = results_object.get("events")
