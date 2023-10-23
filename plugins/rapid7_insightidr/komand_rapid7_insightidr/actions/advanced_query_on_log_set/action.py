@@ -45,7 +45,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
 
         # The IDR API will SOMETIMES return results immediately.
         # It will return results if it gets them. If not, we'll get a call back URL to work on
-        callback_url, log_entries = self.maybe_get_log_entries(log_set_id, query, time_from, time_to)
+        callback_url, log_entries = self.maybe_get_log_entries(log_set_id, query, time_from, time_to, statistical)
 
         if callback_url and not log_entries:
             log_entries = self.get_results_from_callback(callback_url, timeout)
@@ -60,13 +60,14 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         if not statistical:
             return {Output.RESULTS_EVENTS: log_entries, Output.COUNT: len(log_entries)}
         else:
-            return {Output.RESULTS_STATISTICAL: log_entries}
+            return {Output.RESULTS_STATISTICAL: log_entries, Output.COUNT: len(log_entries)}
 
     def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:  # noqa: C901
         """
         Get log entries from a callback URL
 
         @param callback_url: str
+        @param timeout: int
         @return: list of log entries
         """
         self.logger.info(f"Trying to get results from callback URL: {callback_url}")
@@ -125,7 +126,9 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
 
         return log_entries
 
-    def maybe_get_log_entries(self, log_id: str, query: str, time_from: int, time_to: int) -> (str, [object]):
+    def maybe_get_log_entries(
+        self, log_id: str, query: str, time_from: int, time_to: int, statistical: bool
+    ) -> (str, [object]):
         """
         Make a call to the API and ask politely for log results.
 
@@ -139,6 +142,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         @param query: str
         @param time_from: int
         @param time_to: int
+        @param statistical: bool
         @return: (callback url, list of log entries)
         """
         endpoint = f"{self.connection.url}log_search/query/logsets/{log_id}"
@@ -157,7 +161,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
             )
 
         results_object = response.json()
-        if "calculate" in query:
+        if statistical:
             potential_results = results_object.get("partial")
         else:
             potential_results = results_object.get("events")
