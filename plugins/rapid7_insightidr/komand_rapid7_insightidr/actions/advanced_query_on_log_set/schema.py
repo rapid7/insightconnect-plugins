@@ -18,7 +18,8 @@ class Input:
 
 class Output:
     COUNT = "count"
-    RESULTS = "results"
+    RESULTS_EVENTS = "results_events"
+    RESULTS_STATISTICAL = "results_statistical"
 
 
 class AdvancedQueryOnLogSetInput(insightconnect_plugin_runtime.Input):
@@ -127,21 +128,26 @@ class AdvancedQueryOnLogSetOutput(insightconnect_plugin_runtime.Output):
       "type": "integer",
       "title": "Count",
       "description": "Number of log entries found",
-      "order": 2
+      "order": 3
     },
-    "results": {
+    "results_events": {
       "type": "array",
-      "title": "Query Results",
+      "title": "Query Results (Events)",
       "description": "Query Results",
       "items": {
         "$ref": "#/definitions/events"
       },
       "order": 1
+    },
+    "results_statistical": {
+      "$ref": "#/definitions/statistics",
+      "title": "Query Results (Statistical)",
+      "description": "Query Results",
+      "order": 2
     }
   },
   "required": [
     "count",
-    "results"
   ],
   "definitions": {
     "events": {
@@ -408,6 +414,108 @@ class AdvancedQueryOnLogSetOutput(insightconnect_plugin_runtime.Output):
           "description": "HREF",
           "order": 2
         }
+      }
+    },
+    "statistics": {
+      "type": "object",
+      "title": "statistics",
+      "properties": {
+        "stats": {
+          "type": "object",
+          "title": "Stats",
+          "description": "Holds the overall result when query does not contain a 'groupby' clause",
+          "order": 1
+        },
+        "groups": {
+          "type": "array",
+          "title": "Groups",
+          "description": "Holds the overall result for each group in a 'groupby' query",
+          "items": {
+            "type": "object"
+          },
+          "order": 2
+        },
+        "granularity": {
+          "type": "integer",
+          "title": "Granularity",
+          "description": "The time window in milliseconds for each time slice in the time series",
+          "order": 3
+        },
+        "timeseries": {
+          "type": "object",
+          "title": "Time Series",
+          "description": "Holds the query results for each timeslice (each partition of the time_range), for non-'groupby' queries",
+          "order": 4
+        },
+        "groups_timeseries": {
+          "type": "object",
+          "title": "Groups Time Series",
+          "description": "For 'groupby' queries, holds the timeseries object for each group",
+          "order": 5
+        },
+        "from": {
+          "type": "integer",
+          "title": "From",
+          "description": "The start of the time range for the query, as a UNIX timestamp in milliseconds",
+          "order": 6
+        },
+        "to": {
+          "type": "integer",
+          "title": "To",
+          "description": "The end of the time range for the query, as a UNIX timestamp in milliseconds",
+          "order": 7
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "The type of function performed, for example, \"count\", \"max\", \"average\", \"standarddeviation\"",
+          "order": 8
+        },
+        "key": {
+          "type": "string",
+          "title": "Key",
+          "description": "The key which the function of the 'calculate' clause is applied to",
+          "order": 9
+        },
+        "cardinality": {
+          "type": "integer",
+          "title": "Cardinality",
+          "description": "Always 0",
+          "order": 10
+        },
+        "others": {
+          "type": "integer",
+          "title": "Others",
+          "description": "Not yet implemented",
+          "order": 11
+        },
+        "status": {
+          "type": "integer",
+          "title": "Status",
+          "description": "Holds a status code for the query, potentially different from the status code of the response",
+          "order": 12
+        },
+        "all_exact_results": {
+          "type": "boolean",
+          "title": "All Exact Results",
+          "description": "Boolean indicating whether groups are calculated approximately (approximated if a groupby query involves over 10,000 groups)",
+          "order": 13
+        },
+        "required": [
+          "all_exact_results",
+          "cardinality",
+          "from",
+          "granularity",
+          "groups",
+          "groups_timeseries",
+          "others",
+          "stats",
+          "status",
+          "timeseries",
+          "to",
+          "type",
+          "count"
+        ]
       }
     }
   }
