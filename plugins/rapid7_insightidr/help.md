@@ -1867,6 +1867,24 @@ Example output:
 |Product Name|string|None|False|Product name|None|
 |Product Status|string|None|False|Product status|None|
 |RTP State|string|None|False|RTP state|None|
+
+**statistics**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|All Exact Results|boolean|None|True|Boolean indicating whether groups are calculated approximately (approximated if a groupby query involves over 10,000 groups)|None|
+|Cardinality|integer|None|True|Always 0|None|
+|From|integer|None|True|The start of the time range for the query, as a UNIX timestamp in milliseconds|None|
+|Granularity|integer|None|True|The time window in milliseconds for each time slice in the time series|None|
+|Groups|[]object|None|True|Holds the overall result for each group in a 'groupby' query|None|
+|Groups Time Series|[]object|None|True|For 'groupby' queries, holds the timeseries object for each group|None|
+|Key|string|None|False|The key which the function of the 'calculate' clause is applied to|None|
+|Others|object|None|True|Not yet implemented|None|
+|Stats|object|None|True|Holds the overall result when query does not contain a 'groupby' clause|None|
+|Status|integer|None|True|Holds a status code for the query, potentially different from the status code of the response|None|
+|Time Series|object|None|True|Holds the query results for each timeslice (each partition of the time_range), for non-'groupby' queries|None|
+|To|integer|None|True|The end of the time range for the query, as a UNIX timestamp in milliseconds|None|
+|Type|string|None|True|The type of function performed, for example, "count", "max", "average", "standarddeviation"|None|
   
 **message**
 

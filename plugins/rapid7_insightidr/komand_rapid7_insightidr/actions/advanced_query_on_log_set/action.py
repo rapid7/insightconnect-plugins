@@ -1,4 +1,3 @@
-from dateutil.parser import ParserError
 import insightconnect_plugin_runtime
 from .schema import AdvancedQueryOnLogSetInput, AdvancedQueryOnLogSetOutput, Input, Output, Component
 
@@ -27,6 +26,11 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         relative_time_from = params.get(Input.RELATIVE_TIME)
         time_to_string = params.get(Input.TIME_TO)
 
+        statistical = False
+
+        if 'calculate' or 'groupby' in query:
+            statistical = True
+
         # Time To is optional, if not specified, time to is set to now
         time_from, time_to = parse_dates(time_from_string, time_to_string, relative_time_from)
 
@@ -46,13 +50,17 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         if callback_url and not log_entries:
             log_entries = self.get_results_from_callback(callback_url, timeout)
 
-        if log_entries:
+        if log_entries and not statistical:
             log_entries = ResourceHelper.get_log_entries_with_new_labels(
                 self.connection, insightconnect_plugin_runtime.helper.clean(log_entries)
             )
 
         self.logger.info("Sending results to orchestrator.")
-        return {Output.RESULTS: log_entries, Output.COUNT: len(log_entries)}
+
+        if not statistical:
+            return {Output.RESULTS_EVENTS: log_entries, Output.COUNT: len(log_entries)}
+        else:
+            return {Output.RESULTS_STATISTICAL: log_entries}
 
     def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
         """
@@ -149,7 +157,11 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
             )
 
         results_object = response.json()
-        potential_results = results_object.get("events")
+        if 'calculate' or 'groupby' in query:
+            potential_results = results_object.get("partial")
+        else:
+            potential_results = results_object.get("events")
+
         if potential_results:
             self.logger.info("Got results immediately, returning.")
             return None, potential_results

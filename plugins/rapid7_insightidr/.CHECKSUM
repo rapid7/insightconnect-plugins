@@ -1,5 +1,5 @@
 {
-	"spec": "ea1f3d95b5476fef25244fe7a62aab1c",
+	"spec": "27e1ccd16472108709433c8e45b02247",
 	"manifest": "c6b6cb25f46670ac17e2b1b16f774d83",
 	"setup": "84eec9227089e3a0a45db74bdbfdd087",
 	"schemas": [
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "advanced_query_on_log_set/schema.py",
-			"hash": "5041de28c3cbd24783f6183640bf1825"
+			"hash": "0b8b017708cf1a7fa5b775c9b5d78666"
 		},
 		{
 			"identifier": "assign_user_to_investigation/schema.py",

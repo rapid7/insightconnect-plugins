@@ -146,9 +146,6 @@ class AdvancedQueryOnLogSetOutput(insightconnect_plugin_runtime.Output):
       "order": 2
     }
   },
-  "required": [
-    "count",
-  ],
   "definitions": {
     "events": {
       "type": "object",
@@ -448,9 +445,12 @@ class AdvancedQueryOnLogSetOutput(insightconnect_plugin_runtime.Output):
           "order": 4
         },
         "groups_timeseries": {
-          "type": "object",
+          "type": "array",
           "title": "Groups Time Series",
           "description": "For 'groupby' queries, holds the timeseries object for each group",
+          "items": {
+            "type": "object"
+          },
           "order": 5
         },
         "from": {
@@ -484,7 +484,7 @@ class AdvancedQueryOnLogSetOutput(insightconnect_plugin_runtime.Output):
           "order": 10
         },
         "others": {
-          "type": "integer",
+          "type": "object",
           "title": "Others",
           "description": "Not yet implemented",
           "order": 11
@@ -500,22 +500,7 @@ class AdvancedQueryOnLogSetOutput(insightconnect_plugin_runtime.Output):
           "title": "All Exact Results",
           "description": "Boolean indicating whether groups are calculated approximately (approximated if a groupby query involves over 10,000 groups)",
           "order": 13
-        },
-        "required": [
-          "all_exact_results",
-          "cardinality",
-          "from",
-          "granularity",
-          "groups",
-          "groups_timeseries",
-          "others",
-          "stats",
-          "status",
-          "timeseries",
-          "to",
-          "type",
-          "count"
-        ]
+        }
       }
     }
   }

@@ -391,7 +391,7 @@ types:
     groups_timeseries:
       title: Groups Time Series
       description: For 'groupby' queries, holds the timeseries object for each group
-      type: object
+      type: '[]object'
       required: true
     from:
       title: From
@@ -421,7 +421,7 @@ types:
     others:
       title: Others
       description: Not yet implemented
-      type: integer
+      type: object
       required: true
     status:
       title: Status
