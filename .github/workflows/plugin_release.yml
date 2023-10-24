@@ -20,7 +20,7 @@ on:
         required: false
       INSIGHT_KOMAND_PLUGIN_ALL:
         description: 'Plugin release batching option. Leave empty to upload by name, otherwise select All, Go, or Python to release plugins, respectively.'
-        required: true
+        required: false
         type: choice
         default: ''
         options:
