@@ -1,4 +1,3 @@
-from dateutil.parser import ParserError
 import insightconnect_plugin_runtime
 from .schema import AdvancedQueryOnLogSetInput, AdvancedQueryOnLogSetOutput, Input, Output, Component
 
@@ -27,6 +26,8 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         relative_time_from = params.get(Input.RELATIVE_TIME)
         time_to_string = params.get(Input.TIME_TO)
 
+        statistical = self.parse_query_for_statistical(query)
+
         # Time To is optional, if not specified, time to is set to now
         time_from, time_to = parse_dates(time_from_string, time_to_string, relative_time_from)
 
@@ -41,18 +42,36 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
 
         # The IDR API will SOMETIMES return results immediately.
         # It will return results if it gets them. If not, we'll get a call back URL to work on
-        callback_url, log_entries = self.maybe_get_log_entries(log_set_id, query, time_from, time_to)
+        callback_url, log_entries = self.maybe_get_log_entries(log_set_id, query, time_from, time_to, statistical)
 
         if callback_url and not log_entries:
             log_entries = self.get_results_from_callback(callback_url, timeout)
 
-        if log_entries:
+        if log_entries and not statistical:
             log_entries = ResourceHelper.get_log_entries_with_new_labels(
                 self.connection, insightconnect_plugin_runtime.helper.clean(log_entries)
             )
 
         self.logger.info("Sending results to orchestrator.")
-        return {Output.RESULTS: log_entries, Output.COUNT: len(log_entries)}
+
+        if not statistical:
+            return {Output.RESULTS_EVENTS: log_entries, Output.COUNT: len(log_entries)}
+        else:
+            return {Output.RESULTS_STATISTICAL: log_entries, Output.COUNT: len(log_entries)}
+
+    @staticmethod
+    def parse_query_for_statistical(query: str) -> bool:
+        """
+        Simple helper method to toggle the statistical boolean between true or false
+        depending on whether the user's query contains a 'groupby()' or 'calculate()' clause.
+
+        :param query: str
+        :return: bool
+        """
+
+        for entry in ("calculate", "groupby"):
+            if entry in query:
+                return True
 
     def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:  # noqa: C901
         """
@@ -118,7 +137,9 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
 
         return log_entries
 
-    def maybe_get_log_entries(self, log_id: str, query: str, time_from: int, time_to: int) -> (str, [object]):
+    def maybe_get_log_entries(
+        self, log_id: str, query: str, time_from: int, time_to: int, statistical: bool
+    ) -> (str, [object]):
         """
         Make a call to the API and ask politely for log results.
 
@@ -132,6 +153,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         @param query: str
         @param time_from: int
         @param time_to: int
+        @param statistical: bool
         @return: (callback url, list of log entries)
         """
         endpoint = f"{self.connection.url}log_search/query/logsets/{log_id}"
@@ -150,7 +172,11 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
             )
 
         results_object = response.json()
-        potential_results = results_object.get("events")
+        if statistical:
+            potential_results = results_object.get("partial")
+        else:
+            potential_results = results_object.get("events")
+
         if potential_results:
             self.logger.info("Got results immediately, returning.")
             return None, potential_results
