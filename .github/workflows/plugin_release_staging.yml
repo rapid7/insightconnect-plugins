@@ -1,0 +1,290 @@
+name: Plugin Staging Release Workflow
+on:
+  workflow_dispatch:
+    inputs:
+      RELEASE_ENVIRONMENTS:
+        description: 'Release environments, comma separated. Typically all should be selected.'
+        required: true
+        default: 'RELEASE_INT_CLOUD_US,RELEASE_HUB_STAGING,RELEASE_ALLIANCE_STAGING'
+      INSIGHT_KOMAND_CLEAN:
+        description: 'Docker image cleanup.'
+        required: true
+        default: 'None'
+        type: choice
+        options:
+          - 'None'
+          - 'All'
+          - 'Dangling'
+      INSIGHT_KOMAND_PLUGIN_NAME:
+        description: 'Plugin to release. The name must match the plugin directory name in GitHub. Multiple plugins can be entered, separated by commas (freegeoip,jira,etc).'
+        required: false
+      INSIGHT_KOMAND_PLUGIN_ALL:
+        description: 'Plugin release batching option. Leave empty to upload by name, otherwise select All, Go, or Python to release plugins, respectively.'
+        required: true
+        type: choice
+        default: ''
+        options:
+          - ''
+          - 'All'
+          - 'Go'
+          - 'Python'
+      INSIGHT_KOMAND_BRANCH:
+        description: 'Branch or tag to source the plugin code from.'
+        default: 'develop'
+        required: true
+      INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION:
+        description: 'Plugin release options, comma separated. Typically all values should be selected. Input options are Icon, Registry, Market, Help'
+        required: true
+        default: 'Icon,Registry,Market,Help'
+      INSIGHT_KOMAND_SIMULATE:
+        description: 'Check to run this release job as a simulation (affects all infrastructure).'
+        required: true
+        default: false
+      INSIGHT_KOMAND_FORCE_UPDATE:
+        description: 'Check to force update of the plugin (affects only Komand infrastructure).'
+        required: true
+        default: false
+      INSIGHT_KOMAND_OVERRIDE_BLACKLISTS:
+        description: 'Check to override plugin blacklists (affects all release targets).'
+        required: true
+        default: false
+      PRERELEASE:
+        description: 'Check to release plugin as a prelease. Will append timestamp to end of plugin-version. Only affects staging.'
+        required: true
+        default: true
+  pull_request:
+    types: [closed]
+    branches:
+      - develop
+
+env:
+  GITHUB_ORG: "rapid7"
+  INSIGHT_CONNECT_PLUGINS: "insightconnect-plugins"
+  INSIGHT_CONNECT_PLUGINS_REPO: "rapid7/insightconnect-plugins"
+  KOMAND_DOCKERHUB_USER: ${{secrets.KOMAND_DOCKERHUB_USER}}
+  KOMAND_DOCKERHUB_PASSWORD: ${{ secrets.KOMAND_DOCKERHUB_PASSWORD }}
+  PACKAGECLOUD_PYTHON_TOOLING_STABLE: ${{ secrets.PACKAGECLOUD_PYTHON_TOOLING_STABLE }}
+  PACKAGECLOUD_PYTHON_TOOLING_UNSTABLE: ${{ secrets.PACKAGECLOUD_PYTHON_TOOLING_UNSTABLE }}
+  ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK: ${{ secrets.ICON_INTEGRATION_RELEASES_STAGING_ANNOUNCE_WEBHOOK}}
+  IAM_SESSION_DURATION: ${{ secrets.IAM_SESSION_DURATION }}
+  AWS_ACCESS_ROLE: ${{ secrets.AWS_ACCESS_ROLE }}
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  AWS_IAM_HOST: ${{ secrets.AWS_IAM_HOST }}
+
+permissions:
+  id-token: write
+  contents: write
+  actions: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if merged
+        id: checkIfMerged
+        run: |
+          if [[ "${{ github.event.pull_request.merged }}" == "true" ]]; then
+            echo "Pull requst has been merged. Starting release process..."
+            echo "ROOT_BUILD_CAUSE=SCMTRIGGER" >> $GITHUB_ENV
+          elif [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "Workflow was manually triggered. Starting release process..."
+            echo "ROOT_BUILD_CAUSE=MANUALTRIGGER" >> $GITHUB_ENV
+          else
+            echo "Pull request has not been merged. Stopping workflow..."
+            exit 1
+          fi
+
+      - name: Get Current Job Log URL
+        uses: Tiryoh/gha-jobid-action@v0
+        id: jobs
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          job_name: ${{ github.job }}
+        continue-on-error: true
+
+      - name: Set up environment variables
+        id: setUpEnvironmentVariables
+        run: |
+          # Setup environment variables from input
+          echo "BUILD_URL=${{ steps.jobs.outputs.html_url }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_PLUGIN_NAME=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_NAME || '' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_PLUGIN_ALL=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_ALL || '' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_SIMULATE=${{ github.event.inputs.INSIGHT_KOMAND_SIMULATE || 'false' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_FORCE_UPDATE=${{ github.event.inputs.INSIGHT_KOMAND_FORCE_UPDATE || 'false' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION || 'Icon,Registry,Market,Help' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_CLEAN=${{ github.event.inputs.INSIGHT_KOMAND_CLEAN || 'None' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_BRANCH=${{ github.event.inputs.INSIGHT_KOMAND_BRANCH || 'develop' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_OVERRIDE_BLACKLISTS=${{ github.event.inputs.INSIGHT_KOMAND_OVERRIDE_BLACKLISTS || 'false' }}" >> $GITHUB_ENV
+          echo "RELEASE_HUB_STAGING=${{ github.event.inputs.RELEASE_HUB_STAGING || 'true' }}" >> $GITHUB_ENV
+          echo "RELEASE_ALLIANCE_STAGING=${{ github.event.inputs.RELEASE_ALLIANCE_STAGING || 'true' }}" >> $GITHUB_ENV
+          echo "RELEASE_INT_CLOUD_US=${{ github.event.inputs.RELEASE_INT_CLOUD_US || 'true' }}" >> $GITHUB_ENV
+          echo "PRERELEASE=${{ github.event.inputs.PRERELEASE || 'true' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_PLUGIN_NAME=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_NAME || '' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_PLUGIN_ALL=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_ALL || '' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_SIMULATE=${{ github.event.inputs.INSIGHT_KOMAND_SIMULATE || 'false' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_FORCE_UPDATE=${{ github.event.inputs.INSIGHT_KOMAND_FORCE_UPDATE || 'false' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION=${{ github.event.inputs.INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION || 'Icon,Registry,Market,Help' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_CLEAN=${{ github.event.inputs.INSIGHT_KOMAND_CLEAN || 'None' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_BRANCH=${{ github.event.inputs.INSIGHT_KOMAND_BRANCH || 'master' }}" >> $GITHUB_ENV
+          echo "INSIGHT_KOMAND_OVERRIDE_BLACKLISTS=${{ github.event.inputs.INSIGHT_KOMAND_OVERRIDE_BLACKLISTS || 'false' }}" >> $GITHUB_ENV
+          export RELEASE_ENVIRONMENTS=${{ github.event.inputs.RELEASE_ENVIRONMENTS || 'RELEASE_INT_CLOUD_US,RELEASE_HUB_STAGING,RELEASE_ALLIANCE_STAGING' }}
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_INT_CLOUD_US"* ]]; then
+            echo "RELEASE_INT_CLOUD_US=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_INT_CLOUD_US=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_HUB_STAGING"* ]]; then
+            echo "RELEASE_HUB_STAGING=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_HUB_STAGING=false" >> $GITHUB_ENV
+          fi
+          if [[ $RELEASE_ENVIRONMENTS == *"RELEASE_ALLIANCE_STAGING"* ]]; then
+            echo "RELEASE_ALLIANCE_STAGING=true" >> $GITHUB_ENV
+          else
+            echo "RELEASE_ALLIANCE_STAGING=false" >> $GITHUB_ENV
+          fi
+
+      - name: Prerelease Timestamp
+        id: prereleaseTimestamp
+        run: |
+            TIMESTAMP=$(date +%s%1N | cut -b1-10)
+            echo "PRERELEASE_TIMESTAMP=$TIMESTAMP" >> $GITHUB_ENV
+
+      - name: Checkout Repository
+        id: checkoutRepository
+        uses: actions/checkout@v3
+
+      - name: Get Source and Target Branches
+        id: getSourceAndTargetBranches
+        run: |
+          source_branch=${{ github.head_ref }}
+          target_branch=${{ github.base_ref }}
+          export KOMAND_SOURCE_BRANCH="$source_branch"
+          export KOMAND_TARGET_BRANCH="$target_branch"
+
+      - name: Setup Python
+        id: setupPython
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Setup venv
+        id: setUpVenv
+        run: |
+          python3 -m venv .ci_venv
+          source .ci_venv/bin/activate
+          pip install --upgrade pip
+
+      - name: Install CI/CD Tool
+        id: installCICDTool
+        run: |
+            curl -s https://${PACKAGECLOUD_PYTHON_TOOLING_STABLE}:@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh | bash
+            .ci_venv/bin/pip install icon-integrations-ci~=2.11
+
+      - name: Announce Plugin Release Started via Slack
+        id: announcePluginReleaseStartedViaSlack
+        if: always()
+        run: |
+          cd plugins
+          ../.ci_venv/bin/icon-ci jenkins-announce --status started --webhook_url $ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK
+        continue-on-error: true
+
+      - name: configure aws credentials for secrets manager access
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ACCESS_ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Secrets_Manager
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: get secrets from aws secrets manager
+        uses: aws-actions/aws-secretsmanager-get-secrets@v1
+        with:
+          secret-ids: |
+            INT_CLOUD_US, release/int_cloud_us
+            HUB_STAGING, release/hub_staging
+            ALLIANCE_STAGING, release/alliance_staging
+          parse-json-secrets: true
+
+      - name: Configure AWS Credentials INT CLOUD US
+        id: configureAWSInt
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.INT_CLOUD_US_STSPLUGINS3ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_INT_Cloud_us
+          aws-region: ${{ env.INT_CLOUD_US_REGION }}
+
+      - name: Release Plugin INT CLOUD US
+        id: releaseInt
+        if: success()
+        run: |
+          export INF_NAME="INT_CLOUD_US"
+          export INF=$RELEASE_INT_CLOUD_US
+          echo "INFO: PRERELEASE_TIMESTAMP is ${PRERELEASE_TIMESTAMP}"
+          . ./tools/release_plugin.sh
+
+      - name: Configure AWS Credentials HUB STAGING
+        id: configureAWSHubStaging
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.HUB_STAGING_STSPLUGINS3ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Hub_Staging
+          aws-region: ${{ env.HUB_STAGING_REGION }}
+
+      - name: Release Plugin HUB STAGING
+        id: releaseHubStaging
+        if: success()
+        run: |
+          export INF_NAME="HUB_STAGING"
+          export INF=$RELEASE_HUB_STAGING
+          echo "INFO: PRERELEASE_TIMESTAMP is ${PRERELEASE_TIMESTAMP}"
+          . ./tools/release_plugin.sh
+
+      - name: Configure AWS Credentials ALLIANCE STAGING
+        id: configureAWSAllianceStaging
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.ALLIANCE_STAGING_STSPLUGINS3ROLE }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC_Plugin_Release_Alliance_Staging
+          aws-region: ${{ env.ALLIANCE_STAGING_REGION }}
+
+      - name: Release Plugin ALLIANCE STAGING
+        id: releaseAllianceStaging
+        if: success()
+        run: |
+          export INF_NAME="ALLIANCE_STAGING"
+          export INF=$RELEASE_ALLIANCE_STAGING
+          echo "INFO: PRERELEASE_TIMESTAMP is ${PRERELEASE_TIMESTAMP}"
+          . ./tools/release_plugin.sh
+
+      - name: Plugin Tag and Announcement on Success
+        id: pluginTagAndAnnouncementonSuccess
+        if: success()
+        run: |
+          cd plugins
+          ../.ci_venv/bin/icon-ci tag
+          ../.ci_venv/bin/icon-ci jenkins-announce --status success --webhook_url $ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK
+
+      - name: Plugin Details on Success
+        id: pluginDetailsonSuccess
+        if: success()
+        run: |
+          cd plugins
+          ../.ci_venv/bin/icon-ci plugin-details
+
+      - name: Setup Auto PR
+        id: setupAutoPR
+        if: success()
+        run: |
+          # Setup plugin details for cloud deployment
+          cd plugins
+          export PLUGINS_DETAILS=$(cat plugins/plugin.properties)
+          echo "PLUGINS_DETAILS=$PLUGINS_DETAILS" >> $GITHUB_ENV
+
+      - name: Announce Plugin Release Failure
+        id: announcePluginReleaseFailure
+        if: failure()
+        run: |
+          # Announce if failure
+          cd plugins
+          ../.ci_venv/bin/icon-ci jenkins-announce --status failure --webhook_url $ICON_INTEGRATION_RELEASES_ANNOUNCE_WEBHOOK
