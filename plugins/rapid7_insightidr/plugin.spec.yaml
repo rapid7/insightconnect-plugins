@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 5.1.2
+version: 6.0.0
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2022-07-20."]
 vendor: rapid7
@@ -367,6 +367,72 @@ types:
       title: Links
       description: Links
       type: "[]link"
+  statistics:
+    stats:
+      title: Stats
+      description: Holds the overall result when query does not contain a 'groupby' clause
+      type: object
+      required: true
+    groups:
+      title: Groups
+      description: Holds the overall result for each group in a 'groupby' query
+      type: '[]object'
+      required: true
+    granularity:
+      title: Granularity
+      description: The time window in milliseconds for each time slice in the time series
+      type: integer
+      required: true
+    timeseries:
+      title: Time Series
+      description: Holds the query results for each timeslice (each partition of the time_range), for non-'groupby' queries
+      type: object
+      required: true
+    groups_timeseries:
+      title: Groups Time Series
+      description: For 'groupby' queries, holds the timeseries object for each group
+      type: '[]object'
+      required: true
+    from:
+      title: From
+      description: The start of the time range for the query, as a UNIX timestamp in milliseconds
+      type: integer
+      required: true
+    to:
+      title: To
+      description: The end of the time range for the query, as a UNIX timestamp in milliseconds
+      type: integer
+      required: true
+    type:
+      title: Type
+      description: The type of function performed, for example, "count", "max", "average", "standarddeviation"
+      type: string
+      required: true
+    key:
+      title: Key
+      description: The key which the function of the 'calculate' clause is applied to
+      type: string
+      required: false
+    cardinality:
+      title: Cardinality
+      description: Always 0
+      type: integer
+      required: true
+    others:
+      title: Others
+      description: Not yet implemented
+      type: object
+      required: true
+    status:
+      title: Status
+      description: Holds a status code for the query, potentially different from the status code of the response
+      type: integer
+      required: true
+    all_exact_results:
+      title: All Exact Results
+      description: Boolean indicating whether groups are calculated approximately (approximated if a groupby query involves over 10,000 groups)
+      type: boolean
+      required: true
   links:
     href:
       title: HREF
@@ -578,7 +644,7 @@ types:
       title: RRN
       description: The unique identifier for this asset.
       type: string
-      required: false  
+      required: false
 connection:
   api_key:
     title: API Key
@@ -1331,12 +1397,17 @@ actions:
           - Virus Alert
           - Web Proxy Activity
     output:
-      results:
-        title: Query Results
+      results_events:
+        title: Query Results (Events)
         description: Query Results
         type: "[]events"
-        required: true
+        required: false
         example: [{"labels": [],"timestamp": 1601598638768,"sequence_number": 123456789123456789,"log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313","message": {"timestamp": "2020-10-02T00:29:14.649Z","destination_asset": "iagent-win7","source_asset_address": "192.168.100.50","destination_asset_address": "example-host","destination_local_account": "user","logon_type": "NETWORK","result": "SUCCESS","new_authentication": "false","service": "ntlmssp ","source_json": {"sourceName": "Microsoft-Windows-Security-Auditing","insertionStrings": ["S-1-0-0","-","-","0x0","X-X-X-XXXXXXXXXXX","user@example.com","example-host","0x204f163c","3","NtLmSsp ","NTLM","","{00000000-0000-0000-0000-000000000000}","-","NTLM V2","128","0x0","-","192.168.50.1","59090"],"eventCode": 4624,"computerName": "example-host","sid": "","isDomainController": false,"eventData": null,"timeWritten": "2020-10-02T00:29:13.670722000Z"}},"links": [{"rel": "Context","href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}],"sequence_number_str": "123456789123456789"}]
+      results_statistical:
+        title: Query Results (Statistical)
+        description: Query Results
+        type: statistics
+        required: false
       count:
         title: Count
         description: Number of log entries found
