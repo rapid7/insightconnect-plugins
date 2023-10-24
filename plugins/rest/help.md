@@ -1,20 +1,23 @@
 # Description
-The HTTP Requests plugin to make it easy to integrate with RESTful services  
+
+The HTTP Requests plugin makes it easy to integrate with RESTful services
 
 The HTTP Requests plugin allows users to automate HTTP requests to API services such as [RESTful based services](https://en.wikipedia.org/wiki/Representational_state_transfer).
 
 This plugin is often used to integrate with ad-hoc 3rd party API's in a workflow without going through the process of [building a new plugin](https://komand.github.io/python/index.html). It supports DELETE, GET, PATCH, POST, or PUT requests to the provided URI.
 
 # Key Features
+  
 * Make RESTful API calls  
-
 * Quickly integrate with 3rd party API's over HTTP
 
 # Requirements
+  
 * A RESTFUL HTTP/HTTPS resource and supported authentication, if any
 
 # Supported Product Versions
-* 2022-09-05  
+  
+* 2023-10-19
 
 # Documentation
 
@@ -33,7 +36,7 @@ The connection configuration accepts the following parameters:
 |private_key|file|None|False|Private key for mutual TLS (requires Client Certificate)|None|LS0tLS1CRudJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpQSUlFcFFJQkFBS0NBUUVPMUdUQ2o3dFNodnBMSEQ0ekgraGlvbUw2MXQ4MzQvVS9tWfFOSFoxRHhUbm4rdjF4CjFWaHBGbHZtd1NCUVNDTU1CZ01WRpRQcExrcnU4a01uK3djVVFVcXR3Q2x0RzUxVllQeElZUU1IUTIvN0RraFoKYzIvQ1p0TndFelBBVjRyWHBIZ0hOL0VKNFA4cVhYL05uYW1nTWkxZGk1ZUFiM2wrRzJpYjVMWWxVeHo2RzM0WgpXcW56QjdkMXdrNW91aUZIVVZlOTRFcFM4SW5EYTE4SnJzdWpzQ01SaVFhQXZWVjF6T0RzOWZYK21LeGd2UzRkCjNXM2F1emRuNkl4M1BlVDdnWVlXa1BtOCtYQUNMZjJuejNRL25QZHNLY1lBVUN4RTQ0Mkk5REcyUXFZNEpDa3YKUEVKOVhNbWVSWENGT0t6WlRQemlRejRLU3M5UTVGS1dFSHZ6R1FJREFRQUJBb0lCQVFDOWFiYVJsQTcvVFF2YQovaVY5MlRLYmlmWUYxai96emUyUU94YVBTSWI5eHF4NWk3a08rSytQUHhwRk5Wb2pXdzRIOW92QXd2Q2lYYTFEClV5UytuQXVXUnRFNVJEaUhuZ0pjWWVEeWswOHR0c29BYk1sSlIydnBZN3JaaFJlTmVzYmhhQ0dYNUNCVnRFSEcKQ1JQSC9WUmVLMUwzZ0g4TDZ4OXB0aHNCRnVlbWU5c2pmdXpaUlVMUkx4YkxZVS9hQWJoSDlxR2Z1NEwyY0RDMgozSGV1MVNrdjZzTllWbzNPQW9mVkY4dWFDUUtzeWhPWGJ2b1REM1lvR3NycTh2Q1ZPNHdIRWhvdG8zZFVzNGs5Cm8zMVdvcnprNndYYVV3b0pUcGZxbWRBUnRlb0twdWZ3aFZ6K0k1c1Ezb1c4U3RjM0FXSTk4RTFSdmRmTHc2elAKeGxRbVIvaDVBb0dCQU96bGZxSzlEeUdJMTJLUkdqYjR1bTdrNUFSUWZaVllYNVdndW9iYmNraVk0b1JtVlBIZgpOYm5hTkloVjN6ZjVHWEgwQk9CR2lvOUU3N0FiMUphMXE3d2FPRnJlUURPeHRCZ1BuTXo5OHRJMWJrOXEvZTB5CmlUNTI4OFFLUXV3TTM3QkNOZmtLZUdTOFhIN2gxZm9FZVUxb1k1M1NLWjFvOEM5YkdMc242UWp6QW9HQkFPV0YKYlROK2MvTG50OUprQ2Z0eDhJdk1vcU05TkJLNStXTmRUMU1CcjlxcmhPYmNsZ0d0TzAvaUs3aEpSY0Q3alpIZwpnMnVrU01iUkR1VUo0ZjFSUlNveFBDZWJrcktyNllNQmRTZ2IrZFIyRWJVQ2NReU5oMFJ3L1ovQlNSQ29SSGxUClhPb29iazlnUUN2WHNROUlUK3lTNFlaaE5iNFQ0eXE4bDBpQlJkYkRBb0dBTE11Y2p6cWJibTB0d3hoTHZkR2QKeEFoUnY5TTFBdndyLzkySklqZDNVOG9mOEZGdldZQW5ualg2Y0pGaE0rK28vU2pYbUx4NGcxVWcyVXZJSUthMworWjR2bmtKdVRsdG1ITWFhRUNDbXhTOHRqTWt1bXpqWmRXTkp5TWJCMHlqYUpnWFo2USt6Tzl5UkhnNURFMXg3CkxZRmhaVVJDcE8vR1RkSG9YTjJIQm1NQ2dZRUF1ZXRWNU5OMjJ2bW1wcTlRZ3JUdUZHQkVFaFQrdkhpWE1rMGcKZDIyelpGOXh2WXhMbXJvWGhJTUJ4VHJkWFJDbndkWHF2dVFKNjdybjVOTVhrNW9rZTZQOFJWMDQvTEJTN0VMZgpBd2wrV3dMMUh2b0dWeFBCMGNmeE9scFlkRHpKa3JuYlZ2WS9QTjhMdkRmdy9oOG1WczA0RUNGb1pqcG9kM0xpCjNPR1NqLzhDZ1lFQWthekw5UDJTVHVPck1HYncrK2xSVER2RVlSUXp2b3U0UEFudHlOQUtNSFo3MmNwc0pRRG8KMXdIelFweHRwc0I3bzNoMTEweFdId2xMQ3BzaXFueExoVlRIek9WUVFaQnR5cjhMTVMwVDY5UVc1ekhmcS9hZQpSeGtYdDR0bmUrL0dQdzFPMlN6d3IxcmxUV2tNRGxoM2VEU3R2TjVaaW9qZXM2OVMwb3QzZWVMPQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo|
 |secret|credential_secret_key|None|False|Credential secret key. Provide a Bearer Token, Rapid7 Insight, OpsGenie, Pendo or using "CUSTOM_SECRET_INPUT" in the Default Headers field for Custom authentication type|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |ssl_verify|boolean|True|True|Verify TLS/SSL certificate|None|True|
-
+  
 Example input:
 
 ```
@@ -59,11 +62,11 @@ Example input:
 ## Technical Details
 
 ### Actions
-  
+
 
 #### DELETE
   
-This action is used to make a DELETE request.
+This action is used to make a DELETE request
 
 ##### Input
 
@@ -115,7 +118,7 @@ Example output:
 
 #### GET
   
-This action is used to make a GET request.
+This action is used to make a GET request
 
 ##### Input
 
@@ -167,7 +170,7 @@ Example output:
 
 #### PATCH
   
-This action is used to make a PATCH request.
+This action is used to make a PATCH request
 
 ##### Input
 
@@ -219,7 +222,7 @@ Example output:
 
 #### POST
   
-This action is used to make a POST request.
+This action is used to make a POST request
 
 ##### Input
 
@@ -271,7 +274,7 @@ Example output:
 
 #### PUT
   
-This action is used to make a PUT request.
+This action is used to make a PUT request
 
 ##### Input
 
@@ -320,18 +323,16 @@ Example output:
   "status": 200
 }
 ```
-
 ### Triggers
   
 *This plugin does not contain any triggers.*
-
 ### Tasks
   
-*This plugin does not contain any tasks.*  
+*This plugin does not contain any tasks.*
 
 ### Custom Types
   
-*This plugin does not contain any custom output types.*  
+*This plugin does not contain any custom output types.*
 
 ## Troubleshooting
   
@@ -341,6 +342,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 6.0.3 - Added empty `__init__.py` file to `unit_test` folder | Refreshed with new tooling | Updated `requirements.txt`
 * 6.0.2 - Fixed a bug that would cause an incorrect error message whenever a 400 error was received and the response object was a list
 * 6.0.1 - Improved ability of 'Body Any' input to handle non-standard characters and JSON input
 * 6.0.0 - All actions: Changed body as array to body as any (string input)
