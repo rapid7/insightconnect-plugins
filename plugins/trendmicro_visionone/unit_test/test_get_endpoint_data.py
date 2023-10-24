@@ -15,6 +15,8 @@ class TestGetEndpointData(TestCase):
         self.mock_params = mock_params("get_endpoint_data")
 
     def test_1_integration_get_endpoint_data(self):
+        expected_result = self.mock_params["output"]
+        self.action.connection.client = MagicMock(return_value=expected_result)
         response = self.action.run(self.mock_params["input"])
         for key in response.keys():
             self.assertIn(key, str(self.mock_params["output"].keys()))
