@@ -302,6 +302,7 @@ Example output:
 
 # Version History
 
+* 4.1.3 - Monitor Sign in and out Activity: set cutoff time of 24 hours
 * 4.1.2 - Fix required fields for GetUserOutput schema
 * 4.1.1 - Fix external pagination support for Monitor Sign in and Out Activity task
 * 4.1.0 - Implement external pagination for Monitor Sign in and Out Activity task | Update to latest plugin SDK

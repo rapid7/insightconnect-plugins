@@ -10,7 +10,7 @@ from .schema import (
 
 # Custom imports below
 from datetime import datetime, timedelta, timezone
-from typing import Optional
+from typing import Optional, Union
 
 from icon_zoom.tasks.enums import RunState
 from icon_zoom.tasks.dataclasses import TaskOutput
@@ -81,7 +81,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         start_date_params = {
             RunState.starting: now,
             RunState.paginating: state.get(self.PARAM_START_DATE),
-            RunState.continuing: state.get(self.LAST_REQUEST_TIMESTAMP),
+            RunState.continuing: self._get_last_valid_timestamp(last_day, state),
         }
 
         end_date_params = {
@@ -173,6 +173,33 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
         self.logger.info(f"Updated state, state is now: {state}")
         return TaskOutput(output=new_events, state=state, has_more_pages=has_more_pages, status_code=200, error=None)
+
+    def _get_last_valid_timestamp(self, last_day: str, state: Dict[str, Union[str, None]]) -> Optional[str]:
+        """
+        Get the last valid timestamp based on the provided last_day and state.
+
+        This method checks if the last request timestamp in the 'state' dictionary is earlier
+        than 'last_day' and returns 'last_day' if true, or returns the last request timestamp
+        from the 'state' dictionary if it is later.
+
+        Args:
+            last_day (int): The last day to compare against.
+            state (dict): The state dictionary containing the last request timestamp.
+
+        Returns:
+            int: The last valid timestamp.
+        """
+        last_request_timestamp = state.get(self.LAST_REQUEST_TIMESTAMP)
+        if not last_request_timestamp:
+            return
+        if last_request_timestamp < last_day:
+            self.logger.info(
+                f"Saved state {last_request_timestamp} exceeds the cut off 24 hours. "
+                f"Reverting to use time: {last_day}"
+            )
+            return last_day
+        else:
+            return last_request_timestamp
 
     def determine_runstate(self, state: Dict[str, Any]) -> RunState:
         # First run, clean state, need to calculate start and end times
