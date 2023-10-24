@@ -730,10 +730,10 @@ This action retrieves information about a specific endpoint.
 
 ##### Input
 
-| Name   | Type |Default|Required|Description|Enum|Example|
-|--------|------|-----|--------|-----------|----|-------|
-|endpoints|[]string|None|True|Array of endpoints to query by their hostname, macAddress, agentGuid or IP, formated as bracket array separated by comma|None|127.127.127.127|
-|query_op|string|or|True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|endpoints|[]string|None|True|Array of endpoints to query by their hostname, macAddress, agentGuid or IP, formated as bracket array separated by comma|None|[]|
+|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
 
 Example input:
 
