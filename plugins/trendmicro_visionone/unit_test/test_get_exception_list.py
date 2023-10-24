@@ -27,8 +27,6 @@ class TestGetExceptionList(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_3_get_exception_list_failure(self):
-        self.action.connection.client.consume_exception_list = MagicMock(
-            side_effect=PluginException
-        )
+        self.action.connection.client.consume_exception_list = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

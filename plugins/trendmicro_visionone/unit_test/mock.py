@@ -8,9 +8,7 @@ from icon_trendmicro_visionone.connection.connection import Connection
 
 
 def mock_params(action=None):
-    with open(
-        os.path.join(os.path.dirname(os.path.abspath(__file__)), "action_io.json")
-    ) as file_:
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "action_io.json")) as file_:
         params = json.load(file_)
         if action:
             return params[action]

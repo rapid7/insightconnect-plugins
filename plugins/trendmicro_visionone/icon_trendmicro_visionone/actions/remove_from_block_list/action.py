@@ -37,9 +37,7 @@ class RemoveFromBlockList(insightconnect_plugin_runtime.Action):
         block_objects = params.get(Input.BLOCK_OBJECTS)
         # Choose enum
         for block_object in block_objects:
-            block_object["object_type"] = self.OBJECT_TYPES.get(
-                block_object["object_type"].lower()
-            )
+            block_object["object_type"] = self.OBJECT_TYPES.get(block_object["object_type"].lower())
             if not block_object["object_type"]:
                 raise PluginException(
                     cause="Invalid object type.",
@@ -52,9 +50,7 @@ class RemoveFromBlockList(insightconnect_plugin_runtime.Action):
                 pytmv1.ObjectTask(
                     objectType=block_object["object_type"],
                     objectValue=block_object["object_value"],
-                    description=block_object.get(
-                        "description", "Remove from Block List"
-                    ),
+                    description=block_object.get("description", "Remove from Block List"),
                 )
             )
         # Make Action API Call

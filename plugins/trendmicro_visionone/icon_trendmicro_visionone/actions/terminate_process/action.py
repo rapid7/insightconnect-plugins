@@ -29,9 +29,7 @@ class TerminateProcess(insightconnect_plugin_runtime.Action):
         # Build processes list
         processes = []
         for process_identifier in process_identifiers:
-            if process_identifier.get("endpoint_name") and process_identifier.get(
-                "agent_guid"
-            ):
+            if process_identifier.get("endpoint_name") and process_identifier.get("agent_guid"):
                 processes.append(
                     pytmv1.ProcessTask(
                         endpointName=process_identifier.get("endpoint_name"),
@@ -41,9 +39,7 @@ class TerminateProcess(insightconnect_plugin_runtime.Action):
                         fileName=process_identifier.get("filename", ""),
                     )
                 )
-            elif process_identifier.get("endpoint_name") and not process_identifier.get(
-                "agent_guid"
-            ):
+            elif process_identifier.get("endpoint_name") and not process_identifier.get("agent_guid"):
                 processes.append(
                     pytmv1.ProcessTask(
                         endpointName=process_identifier.get("endpoint_name"),
@@ -52,9 +48,7 @@ class TerminateProcess(insightconnect_plugin_runtime.Action):
                         fileName=process_identifier.get("filename", ""),
                     )
                 )
-            elif process_identifier.get("agent_guid") and not process_identifier.get(
-                "endpoint_name"
-            ):
+            elif process_identifier.get("agent_guid") and not process_identifier.get("endpoint_name"):
                 processes.append(
                     pytmv1.ProcessTask(
                         agentGuid=process_identifier.get("agent_guid"),

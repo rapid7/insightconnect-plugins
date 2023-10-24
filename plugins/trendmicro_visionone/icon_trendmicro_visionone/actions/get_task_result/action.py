@@ -66,9 +66,7 @@ class GetTaskResult(insightconnect_plugin_runtime.Action):
             Output.CREATED_DATE_TIME: response_dict.get("created_date_time", ""),
             Output.AGENT_GUID: response_dict.get("agent_guid", ""),
             Output.ID: response_dict.get("id", ""),
-            Output.LAST_ACTION_DATE_TIME: response_dict.get(
-                "last_action_date_time", ""
-            ),
+            Output.LAST_ACTION_DATE_TIME: response_dict.get("last_action_date_time", ""),
             Output.RESOURCE_LOCATION: response_dict.get("resource_location", ""),
             Output.STATUS: response_dict.get("status", ""),
             Output.DESCRIPTION: response_dict.get("description", ""),
