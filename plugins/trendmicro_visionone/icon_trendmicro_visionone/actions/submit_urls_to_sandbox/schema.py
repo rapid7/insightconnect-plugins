@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    URL = "url"
+    URLS = "urls"
     
 
 class Output:
@@ -21,9 +21,9 @@ class SubmitUrlsToSandboxInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "url": {
+    "urls": {
       "type": "array",
-      "title": "URL",
+      "title": "URLs",
       "description": "URL(s) to be submitted, formated as bracket array separated by comma",
       "items": {
         "type": "string"
@@ -32,7 +32,7 @@ class SubmitUrlsToSandboxInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "url"
+    "urls"
   ]
 }
     """)
