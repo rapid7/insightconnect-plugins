@@ -1,5 +1,5 @@
 {
-	"spec": "4c16abce919b026aa51a6b37acd0bd57",
+	"spec": "923a6bbb21fe0ce039f39ff00014ae00",
 	"manifest": "a5513a1c36d038851b10a6226d980590",
 	"setup": "318548fa67238e900bb082347305cef6",
 	"schemas": [
@@ -61,7 +61,7 @@
 		},
 		{
 			"identifier": "monitor_siem_logs/schema.py",
-			"hash": "e86f21b7207b572f78132b9288843bf1"
+			"hash": "fed0e07521688fbeece2dd35abb49310"
 		}
 	]
 }
