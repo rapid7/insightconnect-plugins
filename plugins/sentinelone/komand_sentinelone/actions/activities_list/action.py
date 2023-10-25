@@ -51,7 +51,7 @@ class ActivitiesList(insightconnect_plugin_runtime.Action):
         data.extend(response.get("data", []))
 
         if not limit and next_cursor:
-            for i in range(9999):
+            for _ in range(9999):
                 parameters["cursor"] = next_cursor
                 response = self.connection.client.get_activities_list(parameters)
                 data.extend(response.get("data", []))

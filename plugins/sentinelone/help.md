@@ -640,7 +640,7 @@ This action is used to enable agents that match the filter.
 |agent|string|None|False|Agent to perform disable action on. Accepts IP address, MAC address, hostname, UUID or agent ID. Leave empty to perform action on all applicable Agents|None|hostname123|
 |filter|object|None|False|Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents|None|{}|
 |reboot|boolean|None|True|Set true to reboot the endpoint, false to skip rebooting|None|True|
-  
+
 Example input:
 
 ```

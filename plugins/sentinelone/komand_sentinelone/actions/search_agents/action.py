@@ -18,7 +18,7 @@ class SearchAgents(insightconnect_plugin_runtime.Action):
         return {
             Output.AGENTS: self.connection.client.search_agents(
                 params.get(Input.AGENT),
-                agent_active=None if not agent_active else (True if agent_active == "True" else False),
+                agent_active=None if not agent_active else agent_active == "True",
                 api_version="2.1",
                 operational_state=params.get(Input.OPERATIONALSTATE, None),
             )

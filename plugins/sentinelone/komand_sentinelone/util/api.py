@@ -321,8 +321,8 @@ class SentineloneAPI:
         attribute_message = "analyst verdict" if attribute == "analystVerdict" else "incident status"
         if not incidents_ids:
             raise PluginException(
-                cause=f"No incident IDs were provided.",
-                assistance=f"Please provide incident IDs and try again.",
+                cause="No incident IDs were provided.",
+                assistance="Please provide incident IDs and try again.",
             )
         incidents = self.remove_non_existing_incidents(list(set(incidents_ids)), incident_type)
         incidents = self.validate_incident_state(incidents, incident_type, new_state, attribute)
@@ -517,7 +517,9 @@ class SentineloneAPI:
         """
         params = {search: agent, "isActive": agent_active}
         output = self._call_api("GET", SEARCH_AGENTS_ENDPOINT, params=params, override_api_version=api_version)
-        [results.append(agent_data) for agent_data in output.get("data", []) if agent_data not in results]
+        for agent_data in output.get("data", []):
+            if agent_data not in results:
+                results.append(agent_data)
 
     def search_agents(
         self,
