@@ -26,6 +26,7 @@ from komand_mimecast.util.constants import (
     FAIL_FIELD,
     STATUS_FIELD,
     DEVELOPER_KEY_ERROR,
+    IS_LAST_TOKEN_FIELD,
 )
 from komand_mimecast.util.exceptions import ApiClientException
 from komand_mimecast.util.util import Utils
@@ -89,27 +90,22 @@ class MimecastAPI:
     def find_remediation_incidents(self, data: dict) -> dict:
         return self._handle_rest_call("POST", f"{API}/ttp/remediation/find-incidents", data=data)
 
-    def get_siem_logs(self, data: Dict[str, Any]) -> Union[List[Dict], Dict, int]:
+    def get_siem_logs(self, next_page_token: str) -> Union[List[Dict[str, Any]], Dict[str, Any], int]:
         uri = f"{API}/audit/get-siem-logs"
-        default_data = {
-            "compress": True,
-            "file_format": "JSON",
-            "type": "MTA",
-        }
-        data.update(default_data)
-        payload = {DATA_FIELD: ([convert_dict_to_camel_case(data)] if data is not None else [])}
+        data = {"compress": True, "file_format": "JSON", "type": "MTA", "token": next_page_token}
 
+        payload = {DATA_FIELD: ([convert_dict_to_camel_case(data)] if data is not None else [])}
         request = requests.request(
             method="POST", url=f"{self.url}{uri}", headers=self._prepare_header(uri), data=str(payload)
         )
         self._check_rate_limiting(request)
 
-        if "attachment" in request.headers.get("Content-Disposition", ""):
+        if "attachment" in request.headers.get("Content-Disposition", "") or self._is_last_token(request):
             combined_json_list = self._handle_zip_file(request)
             return combined_json_list, request.headers, request.status_code
 
         response = request.json()
-        status_code = response.get(META_FIELD).get(STATUS_FIELD)
+        status_code = response.get(META_FIELD, {}).get(STATUS_FIELD)
         try:
             if response.get(FAIL_FIELD):
                 self._handle_siem_logs_error_response(response, status_code)
@@ -123,6 +119,24 @@ class MimecastAPI:
                 status_code=status_code,
             )
         raise ApiClientException(preset=PluginException.Preset.UNKNOWN, data=response, status_code=status_code)
+
+    def _is_last_token(self, request: requests.Response) -> bool:
+        """
+        Check if the given response has the last page token.
+
+        :param request: The response object to check and update.
+        :type: requests.Response
+
+        :return: True if the response contains last token, False otherwise.
+        :rtype: bool
+        """
+
+        try:
+            last_token = IS_LAST_TOKEN_FIELD in json.dumps(request.json())
+            request.headers.update({IS_LAST_TOKEN_FIELD: last_token})
+            return True
+        except json.JSONDecodeError:
+            return False
 
     def _check_rate_limiting(self, request):
         rate_limit_status_code = 429

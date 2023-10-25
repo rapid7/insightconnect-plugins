@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    TOKEN = "token"
+    pass
 
 
 class State:
@@ -21,19 +21,7 @@ class Output:
 
 class MonitorSiemLogsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
-   {
-  "type": "object",
-  "title": "Variables",
-  "properties": {
-    "token": {
-      "type": "string",
-      "title": "Token",
-      "description": "Used to request the next available log file",
-      "order": 1
-    }
-  },
-  "definitions": {}
-}
+   {}
     """)
 
     def __init__(self):

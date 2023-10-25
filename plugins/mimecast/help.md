@@ -729,18 +729,8 @@ Example output:
 Monitor and retrieve the latest logs
 
 ##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|token|string|None|False|Used to request the next available log file|None|9de5069c5afe602b2ea0a04b66beb2c0|
   
-Example input:
-
-```
-{
-  "token": "9de5069c5afe602b2ea0a04b66beb2c0"
-}
-```
+*This task does not contain any inputs.*
 
 ##### Output
 
@@ -1027,7 +1017,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
-* 5.3.2 - Connection: added regions USB and USBCOM | Monitor SIEM Logs: added logs for request and results information.
+* 5.3.2 - Connection: added regions USB and USBCOM | Monitor SIEM Logs: added logs for request and results information, removed `token` input parameter, updated pagination handler
 * 5.3.1 - Monitor SIEM Logs: stop parsing datetime field
 * 5.3.0 - Handled rate limiting error messaging | Update to latest plugin SDK 
 * 5.2.2 - Handled status code for `Monitor SIEM Logs` | Request limit set to 1 minute in `Monitor SIEM Logs` 
