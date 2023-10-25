@@ -239,14 +239,15 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |count|integer|True|Number of log entries found|10|
-|results|[]events|True|Query Results|[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": "false", "service": "ntlmssp ", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp ", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": False, "eventData": None, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]|
+|results_events|[]events|False|Query Results|[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": "false", "service": "ntlmssp ", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp ", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": False, "eventData": None, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]|
+|results_statistical|statistics|False|Query Results|None|
   
 Example output:
 
 ```
 {
   "count": 10,
-  "results": {
+  "results_events": {
     "labels": [],
     "links": [
       {
@@ -300,6 +301,36 @@ Example output:
     "sequence_number": 123456789123456789,
     "sequence_number_str": "123456789123456789",
     "timestamp": 1601598638768
+  },
+  "results_statistical": {
+    "results_statistical": {
+      "cardinality": 0,
+      "granularity": 4320000,
+      "from": 1698023841000,
+      "to": 1698067041000,
+      "type": "count",
+      "stats": {
+        "global_timeseries": {
+          "count": 0.0
+        }
+      },
+      "groups": [],
+      "others": {},
+      "status": 200,
+      "timeseries": {
+        "global_timeseries": [
+          {
+            "count": 0.0
+          },
+          {
+            "count": 0.0
+          }
+        ]
+      },
+      "groups_timeseries": [],
+      "all_exact_result": null,
+      "count": 0
+    }
   }
 }
 ```
@@ -1849,6 +1880,24 @@ Example output:
 |Product Name|string|None|False|Product name|None|
 |Product Status|string|None|False|Product status|None|
 |RTP State|string|None|False|RTP state|None|
+
+**statistics**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|All Exact Results|boolean|None|True|Boolean indicating whether groups are calculated approximately (approximated if a groupby query involves over 10,000 groups)|None|
+|Cardinality|integer|None|True|Always 0|None|
+|From|integer|None|True|The start of the time range for the query, as a UNIX timestamp in milliseconds|None|
+|Granularity|integer|None|True|The time window in milliseconds for each time slice in the time series|None|
+|Groups|[]object|None|True|Holds the overall result for each group in a 'groupby' query|None|
+|Groups Time Series|[]object|None|True|For 'groupby' queries, holds the timeseries object for each group|None|
+|Key|string|None|False|The key which the function of the 'calculate' clause is applied to|None|
+|Others|object|None|True|Not yet implemented|None|
+|Stats|object|None|True|Holds the overall result when query does not contain a 'groupby' clause|None|
+|Status|integer|None|True|Holds a status code for the query, potentially different from the status code of the response|None|
+|Time Series|object|None|True|Holds the query results for each timeslice (each partition of the time_range), for non-'groupby' queries|None|
+|To|integer|None|True|The end of the time range for the query, as a UNIX timestamp in milliseconds|None|
+|Type|string|None|True|The type of function performed, for example, "count", "max", "average", "standarddeviation"|None|
   
 **message**
 
@@ -1975,6 +2024,7 @@ Example output:
 
 # Version History
 
+* 6.0.0 - Action: `Advanced Query On Log Set` - Add new output type for statistical queries.
 * 5.1.2 - Action: `Advanced Query on Log Set` - Fix JSONDecoderError | Action: `Query` - Update spec and help.md to show it queries log IDs, not query IDs
 * 5.1.1 - Action: `List Investigations` - Now receiving size input | Actions: `Advanced Query On Log` & `Advanced Query On Log Set` - Acronym LQL has been updated to LEQL
 * 5.1.0 - New actions added: `get_user_information` and `get_asset_information`
