@@ -20,7 +20,7 @@ on:
         required: false
       INSIGHT_KOMAND_PLUGIN_ALL:
         description: 'Plugin release batching option. Leave empty to upload by name, otherwise select All, Go, or Python to release plugins, respectively.'
-        required: true
+        required: false
         type: choice
         default: ''
         options:
@@ -31,7 +31,7 @@ on:
       INSIGHT_KOMAND_BRANCH:
         description: 'Branch or tag to source the plugin code from.'
         default: 'master'
-        required: true
+        required: false
       INSIGHT_KOMAND_PLUGIN_RELEASE_OPTION:
         description: 'Plugin release options, comma separated. Typically all values should be selected. Input options are Icon, Registry, Market, Help'
         required: true
@@ -177,6 +177,9 @@ jobs:
       - name: Checkout Repository
         id: checkoutRepository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 5
+          ref: "refs/heads/${{ env.INSIGHT_KOMAND_BRANCH }}"
 
       - name: Get Source and Target Branches
         id: getSourceAndTargetBranches
