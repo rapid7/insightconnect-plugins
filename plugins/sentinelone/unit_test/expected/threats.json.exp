@@ -1,0 +1,68 @@
+{
+  "threat": {
+    "accountId": "1111111111111",
+    "accountName": "Rapid7",
+    "agentComputerName": "WindowsX64",
+    "agentDomain": "WORKGROUP",
+    "agentId": "11111111111111111",
+    "agentInfected": false,
+    "agentIp": "1.1.1.1",
+    "agentIsActive": true,
+    "agentIsDecommissioned": false,
+    "agentMachineType": "desktop",
+    "agentNetworkStatus": "connected",
+    "agentOsType": "windows",
+    "agentVersion": "1.1.1.1",
+    "automaticallyResolved": false,
+    "classification": "Malware",
+    "classificationSource": "Static",
+    "classifierName": "STATIC",
+    "cloudVerdict": "black",
+    "collectionId": "1111111111111",
+    "createdAt": "2023-09-20T09:03:06.792000Z",
+    "createdDate": "2023-09-20T09:03:06.792000Z",
+    "description": "malware detected - not mitigated yet (static engine)",
+    "engines": [
+      "pre_execution"
+    ],
+    "fileContentHash": "122356756432654hvgjh34g5j34",
+    "fileDisplayName": "example.txt",
+    "fileExtensionType": "Document",
+    "fileIsExecutable": false,
+    "fileIsSystem": false,
+    "fileObjectId": "1235KJGHDSF",
+    "filePath": "\\Device\\HarddiskVolume1\\USERS\\vagrant\\AppData\\Local\\Packages\\microsoft.windowscommunicationsapps_8wekyb3d8bbwe\\LocalState\\Files\\S0\\5\\Attachments\\example.txt",
+    "fileVerificationType": "NotSigned",
+    "fromCloud": false,
+    "fromScan": true,
+    "id": "11111111111111",
+    "initiatedBy": "fullDiskScan",
+    "initiatedByDescription": "Full Disk Scan",
+    "isCertValid": false,
+    "isInteractiveSession": false,
+    "isPartialStory": false,
+    "maliciousGroupId": "11111111111",
+    "markedAsBenign": false,
+    "mitigationMode": "protect",
+    "mitigationReport": {
+      "kill": {
+        "status": "success"
+      },
+      "quarantine": {
+        "status": "success"
+      }
+    },
+    "mitigationStatus": "mitigated",
+    "rank": 5,
+    "resolved": false,
+    "siteId": "1626072197849348704",
+    "siteName": "Darrick Windows Assets",
+    "threatAgentVersion": "1.1.1.1",
+    "threatName": "example.txt",
+    "updatedAt": "2023-09-20T09:03:07.151615Z",
+    "whiteningOptions": [
+      "path",
+      "hash"
+    ]
+  }
+}

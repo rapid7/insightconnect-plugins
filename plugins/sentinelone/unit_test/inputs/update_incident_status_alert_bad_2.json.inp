@@ -1,0 +1,7 @@
+{
+  "incidentStatus": "in progress",
+  "incidentIds": [
+    "same_status_alert_id_1"
+  ],
+  "type": "alerts"
+}

@@ -1,0 +1,5 @@
+{
+  "agent": "0000000000000000001",
+  "quarantineState": true,
+  "whitelist": ["0000000000000000001"]
+}

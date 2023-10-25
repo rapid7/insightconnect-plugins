@@ -14,12 +14,12 @@ class SearchAgents(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        agent_active = params.get(Input.AGENTACTIVE)
         return {
             Output.AGENTS: self.connection.client.search_agents(
                 params.get(Input.AGENT),
-                case_sensitive=params.get(Input.CASE_SENSITIVE),
-                agent_active=params.get(Input.AGENT_ACTIVE, True),
+                agent_active=None if not agent_active else (True if agent_active == "True" else False),
                 api_version="2.1",
-                operational_state=params.get(Input.OPERATIONAL_STATE, None),
+                operational_state=params.get(Input.OPERATIONALSTATE, None),
             )
         }

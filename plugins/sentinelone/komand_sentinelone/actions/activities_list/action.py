@@ -1,7 +1,8 @@
 import insightconnect_plugin_runtime
-
 from .schema import ActivitiesListInput, ActivitiesListOutput, Input, Output, Component
-from komand_sentinelone.util.helper import Helper
+
+# Custom imports below
+from komand_sentinelone.util.helper import Helper, clean
 
 
 class ActivitiesList(insightconnect_plugin_runtime.Action):
@@ -14,55 +15,48 @@ class ActivitiesList(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        response = self.connection.activities_list(
+        limit = params.get(Input.LIMIT)
+        skip = params.get(Input.SKIP)
+        parameters = clean(
             {
-                "groupIds": Helper.join_or_empty(params.get(Input.GROUP_IDS, [])),
-                "includeHidden": params.get(Input.INCLUDE_HIDDEN, False),
-                "skip": params.get(Input.SKIP, None),
-                "siteIds": Helper.join_or_empty(params.get(Input.SITE_IDS, [])),
-                "agentIds": Helper.join_or_empty(params.get(Input.AGENT_IDS, [])),
-                "skipCount": params.get(Input.SKIP_COUNT, False),
+                "groupIds": Helper.join_or_empty(params.get(Input.GROUPIDS, [])),
+                "includeHidden": params.get(Input.INCLUDEHIDDEN),
+                "skip": skip if skip else None,
+                "siteIds": Helper.join_or_empty(params.get(Input.SITEIDS, [])),
+                "agentIds": Helper.join_or_empty(params.get(Input.AGENTIDS, [])),
+                "skipCount": params.get(Input.SKIPCOUNT),
                 "ids": Helper.join_or_empty(params.get(Input.IDS, [])),
-                "createdAt__lt": params.get(Input.CREATED_AT_LT, None),
-                "createdAt__lte": params.get(Input.CREATED_AT_LTE, None),
-                "countOnly": params.get(Input.COUNT_ONLY, False),
-                "accountIds": Helper.join_or_empty(params.get(Input.ACCOUNT_IDS, [])),
-                "limit": params.get(Input.LIMIT, 1000),
-                "sortBy": params.get(Input.SORT_BY, None),
-                "createdAt__gt": params.get(Input.CREATED_AT_GT, None),
-                "createdAt__between": params.get(Input.CREATED_AT_BETWEEN, None),
-                "activityTypes": Helper.join_or_empty(params.get(Input.ACTIVITY_TYPES, [])),
-                "threatIds": Helper.join_or_empty(params.get(Input.THREAT_IDS, [])),
-                "sortOrder": params.get(Input.SORT_ORDER, None),
-                "userEmails": Helper.join_or_empty(params.get(Input.USER_EMAILS, [])),
-                "userIds": Helper.join_or_empty(params.get(Input.USER_IDS, [])),
-                "createdAt__gte": params.get(Input.CREATED_AT_GTE, None),
+                "createdAt__lt": params.get(Input.CREATEDATLT),
+                "createdAt__lte": params.get(Input.CREATEDATLTE),
+                "countOnly": params.get(Input.COUNTONLY),
+                "accountIds": Helper.join_or_empty(params.get(Input.ACCOUNTIDS, [])),
+                "limit": limit if limit and limit in range(1, 1000) else 1000,
+                "sortBy": params.get(Input.SORTBY),
+                "createdAt__gt": params.get(Input.CREATEDATGT),
+                "createdAt__between": params.get(Input.CREATEDATBETWEEN),
+                "activityTypes": Helper.join_or_empty(params.get(Input.ACTIVITYTYPES, [])),
+                "threatIds": Helper.join_or_empty(params.get(Input.THREATIDS, [])),
+                "sortOrder": params.get(Input.SORTORDER),
+                "userEmails": params.get(Input.USEREMAIL),
+                "userIds": Helper.join_or_empty(params.get(Input.USERIDS, [])),
+                "createdAt__gte": params.get(Input.CREATEDATGTE),
             }
         )
-
-        data = []
-        self.add_to_data(data, response)
-
-        limit = params.get(Input.LIMIT, 1000)
-
+        response = self.connection.client.get_activities_list(parameters)
         pagination = response.get("pagination", {})
         next_cursor = pagination.get("nextCursor")
-        while next_cursor and not limit:
-            response = self.connection.activities_list(
-                {
-                    "cursor": next_cursor,
-                }
-            )
+        total_items = pagination.get("totalItems", 0)
 
-            data = self.add_to_data(data, response)
-            pagination = response.get("pagination")
-            next_cursor = pagination.get("nextCursor")
+        data = []
+        data.extend(response.get("data", []))
 
-        return {Output.DATA: data}
+        if not limit and next_cursor:
+            for i in range(9999):
+                parameters["cursor"] = next_cursor
+                response = self.connection.client.get_activities_list(parameters)
+                data.extend(response.get("data", []))
+                next_cursor = response.get("pagination", {}).get("nextCursor")
+                if not next_cursor:
+                    break
 
-    @staticmethod
-    def add_to_data(data, response):
-        if Output.DATA in response:
-            for i in response.get(Output.DATA):
-                data.append(insightconnect_plugin_runtime.helper.clean_dict(i))
-        return data
+        return {Output.DATA: clean(data), Output.TOTALITEMS: total_items}

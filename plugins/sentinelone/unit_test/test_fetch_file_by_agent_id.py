@@ -11,7 +11,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
 
 
-@patch("requests.post", side_effect=Util.mocked_requests_get)
 @patch("requests.request", side_effect=Util.mocked_requests_get)
 class TestFetchFileByAgentId(TestCase):
     @classmethod
@@ -28,7 +27,7 @@ class TestFetchFileByAgentId(TestCase):
             ],
         ]
     )
-    def test_fetch_file_by_agent_id(self, mock_request, mock_post, test_name, input_params, expected):
+    def test_fetch_file_by_agent_id(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(expected, actual)
 
@@ -77,9 +76,7 @@ class TestFetchFileByAgentId(TestCase):
             ],
         ]
     )
-    def test_fetch_file_by_agent_id_raise_exception(
-        self, mock_request, mock_post, test_name, input_params, cause, assistance
-    ):
+    def test_fetch_file_by_agent_id_raise_exception(self, mock_request, test_name, input_params, cause, assistance):
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)

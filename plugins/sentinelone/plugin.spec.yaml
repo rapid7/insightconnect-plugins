@@ -43,97 +43,139 @@ types:
       type: string
       required: false
       example: Account Created
-  activities_list:
+  activity:
     comments:
       title: Comments
       type: string
       description: Comments
       required: false
+      example: Example comment
     userId:
       title: UserId
       type: string
       description: The user who invoked the activity (If applicable)
       required: false
+      example: 100000000000000000
     accountId:
       title: Account ID
       type: string
       description: Related account (If applicable)
       required: false
+      example: 100000000000000000
+    accountName:
+      title: Account Name
+      type: string
+      description: Related account name (If applicable)
+      required: false
+      example: Example account
     createdAt:
       title: Created At
       type: string
       description: Activity creation time (UTC)
       required: false
+      example: 2023-09-22T18:05:42.413981Z
     data:
       title: Data
       type: object
       description: Extra activity specific data
       required: false
+      example: {}
     agentUpdatedVersion:
       title: Agent Updated Version
       type: string
       description: Agent's new version (If applicable)
       required: false
+      example: 22.2.5.806
     siteId:
       title: Site ID
       type: string
       description: Related site (If applicable)
       required: false
+      example: 100000000000000000
+    siteName:
+      title: Site Name
+      type: string
+      description: Related site name (If applicable)
+      required: false
+      example: Example site
     id:
       title: ID
       type: string
       description: Activity ID
       required: false
+      example: 100000000000000000
     updatedAt:
       title: Updated At
       type: string
       description: Activity last updated time (UTC)
       required: false
+      example: 2023-09-22T19:23:09.368802Z
     description:
       title: Description
       type: string
       description: Extra activity information
       required: false
+      example: Example description
     primaryDescription:
       title: Primary Description
       type: string
       description: Primary description
       required: false
+      example: Example description
     agentId:
       title: Agent ID
       type: string
       description: Related agent (If applicable)
       required: false
+      example: 100000000000000000
     hash:
       title: Hash
       type: string
       description: Threat file hash (If applicable)
       required: false
+      example: 02699626f388ed830012e5b787640e71c56d42d8
     activityType:
       title: Activity Type
       type: integer
       description: Activity type
       required: false
+      example: 27
+    activityUuid:
+      title: Activity UUID
+      type: string
+      description: Activity UUID
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
     osFamily:
       title: OS Family
       type: string
       description: Agent's OS type (if applicable)
       required: false
+      example: windows
     threatId:
       title: Threat ID
       type: string
       description: Related threat (If applicable)
       required: false
+      example: 100000000000000000
     groupId:
       title: Group ID
       type: string
       description: Related group (If applicable)
       required: false
+      example: 100000000000000000
+    groupName:
+      title: Group Name
+      type: string
+      description: Related group name (If applicable)
+      required: false
+      example: Example group
     secondaryDescription:
       title: Secondary Description
       type: string
       description: Secondary description
       required: false
+      example: Example description
   agentApplications:
     installedDate:
       title: Installed Date
@@ -171,11 +213,13 @@ types:
       type: integer
       description: Total items
       required: false
+      example: 10
     nextCursor:
       title: Next Cursor
       type: string
       description: Next cursor
       required: false
+      example: eyJpZF9jb2x1bW4iOiAiaWQiLCAiaWRfdmFsdWUiOiAiNTM4NTAxODk4OTM4NTQ4MjI0IiwgInNvcnRfYnlfY29sdW1uIjogImFnZW50VGltZXN0YW1wIiwgInNvcnRfYnlfdmFsdWUiOiAiMjAyMS0wMy0yMlQxMjoyMDozNC40NDFaIiwgInNvcnRfb3JkZXIiOiAiZGVzYyJ=
   threatData:
     username:
       title: Username
@@ -525,440 +569,514 @@ types:
       description: Location name
       type: string
       required: false
+      example: Example Location
     scope:
       title: Scope
       description: Location scope
       type: string
       required: false
+      example: global
     id:
       title: ID
       description: Location ID
       type: string
       required: false
-  active_directory:
+      example: 0000000000000000001
+  activeDirectory:
     computerMemberOf:
       title: Computer Member Of
       description: Computer member of
       type: '[]string'
       required: false
+      example: ["example"]
     lastUserDistinguishedName:
       title: Last User Distinguished Name
       description: Last user distinguished name
       type: string
       required: false
+      example: Example Name
     lastUserMemberOf:
       title: Last User Member Of
       description: Last user member of
       type: '[]string'
       required: false
+      example: ["example"]
     computerDistinguishedName:
       title: Computer Distinguished Name
       description: Computer distinguished name
       type: string
       required: false
-  network_interfaces:
+      example: Example Name
+  networkInterfaces:
     gatewayMacAddress:
       title: Gateway MAC Address
       description: The default gateway MAC address
       type: string
       required: false
+      example: 00:00:00:00:00:01
     inet6:
       title: IPv6 Addresses
       description: IPv6 addresses
       type: '[]string'
       required: false
+      example: ["ffff::ffff:ffff:ffff:ffff"]
     id:
       title: ID
       description: ID
       type: string
       required: false
+      example: 0000000000000000001
     physical:
       title: Physical
       description: Interface's MAC address
       type: string
       required: false
+      example: 00:00:00:00:00:01
     gatewayIp:
       title: Gateway IP
       description: The default gateway IP
       type: string
       required: false
+      example: 198.51.100.1
     name:
       title: Name
       description: Name
       type: string
       required: false
+      example: Ethernet0
     inet:
       title: IPv4 Addresses
       description: IPv4 addresses
       type: '[]string'
       required: false
-  agent_data:
+      example: ["198.51.100.1"]
+  agentData:
     scanFinishedAt:
       title: Scan Finished At
       description: Finish time of last scan
       type: string
       required: false
+      example: 2023-01-01T00:00:00.000000Z
     inRemoteShellSession:
       title: In Remote Shell Session
       description: Is the Agent in a remote shell session
       type: boolean
       required: false
+      example: true
     externalIp:
       title: External IP
       description: External IPv4 address
       type: string
       required: false
+      example: 198.51.100.1
     mitigationMode:
       title: Mitigation Mode
       description: Agent mitigation mode policy
       type: string
       required: false
+      example: protect
     isUpToDate:
       title: Is Up to Date
       description: Indicates if the agent version is up to date
       type: boolean
       required: false
+      example: true
     scanAbortedAt:
       title: Scan Aborted At
       description: Abort time of last scan
       type: string
       required: false
+      example: 2023-01-01T00:00:00.000000Z
     appsVulnerabilityStatus:
       title: Apps Vulnerability Status
       description: Apps vulnerability status
       type: string
       required: false
+      example: patch_required
     rangerVersion:
       title: Ranger Version
       description: The version of Ranger
       type: string
       required: false
+      example: 1.2.3.4
     createdAt:
       title: Created At
       description: Created at date
       type: string
       required: false
+      example: 2023-01-01T00:00:00.000000Z
     userActionsNeeded:
       title: User Actions Needed
       description: A list of pending user actions
       type: "[]string"
       required: false
+      example: ["example action"]
     groupId:
       title: Group ID
       description: A reference to the containing network group
       type: string
       required: false
+      example: 0000000000000000001
     isPendingUninstall:
       title: Is Pending Uninstall
       description: Agent with a pending uninstall request
       type: boolean
       required: false
+      example: false
     accountName:
       title: Account Name
       description: Name of the containing account
       type: string
       required: false
+      example: Account1
     siteId:
       title: Site ID
       description: A reference to the containing site
       type: string
       required: false
+      example: 0000000000000000001
     siteName:
       title: Site Name
       description: Name of the containing site
       type: string
       required: false
+      example: Example Site Name
     osStartTime:
       title: OS Start Time
       description: Last boot time
       type: string
       required: false
+      example: 2023-01-01T00:00:00.000000Z
     activeDirectory:
       title: Active Directory
       description: Active Directory data
-      type: active_directory
+      type: activeDirectory
       required: false
+      example: {}
     networkInterfaces:
       title: Network Interfaces
       description: Device's network interfaces
-      type: "[]network_interfaces"
+      type: "[]networkInterfaces"
       required: false
+      example: []
     rangerStatus:
       title: Ranger Status
       description: Is Agent disabled as a Ranger
       type: string
       required: false
+      example: Enabled
     accountId:
       title: Account ID
       description: A reference to the containing account
       type: string
       required: false
+      example: 0000000000000000001
     threatRebootRequired:
       title: Threat Reboot Required
       description: Has at least one threat with at least one mitigation action that is pending reboot to succeed
       type: boolean
       required: false
+      example: false
     osArch:
       title: OS Arch
       description: OS Arch
       type: string
       required: false
+      example: 64 bit
     activeThreats:
       title: Active Threats
       description: Current number of active threats
       type: integer
       required: false
+      example: 5
     installerType:
       title: Installer Type
       description: Installer package type (file extension)
       type: string
       required: false
+      example: .msi
     scanStatus:
       title: Scan Status
       description: Last scan status
       type: string
       required: false
+      example: finished
     groupName:
       title: Group Name
       description: Name of the containing network group
       type: string
       required: false
+      example: Group1
     consoleMigrationStatus:
       title: Console Migration Status
       description: What step the agent is at in the process of migrating to another console, if any
       type: string
       required: false
+      example: N/A
     infected:
       title: Infected
       description: Indicates if the Agent has active threats
       type: boolean
       required: false
+      example: false
     id:
       title: ID
       description: Agent ID
       type: string
       required: false
+      example: 0000000000000000001
     updatedAt:
       title: Updated at
       description: Last updated date
       type: string
       required: false
+      example: 2023-01-01T00:00:00.000000Z
     machineType:
       title: Machine Type
       description: Machine type
       type: string
       required: false
+      example: desktop
     isDecommissioned:
       title: Is Decommissioned
       description: Is Agent decommissioned
       type: boolean
       required: false
+      example: false
     osRevision:
       title: OS Revision
       description: OS revision
       type: string
       required: false
+      example: 1234
     scanStartedAt:
       title: Scan Started At
       description: Start time of last scan
       type: string
       required: false
+      example: 2023-01-01T00:00:00.000000Z
     policyUpdatedAt:
       title: Policy Updated At
       description: Date of when the policy was last updated
       type: string
       required: false
+      example: 2023-01-01T00:00:00.000000Z
     encryptedApplications:
       title: Encrypted Applications
       description: Disk encryption status
       type: boolean
       required: false
+      example: false
     locations:
       title: Locations
       description: A list of locations reported by the Agent
       type: "[]location"
       required: false
+      example: []
     domain:
       title: Domain
       description: Network domain
       type: string
       required: false
+      example: WORKGROUP
     locationType:
       title: Location Type
       description: Reported location type
       type: string
       required: false
+      example: fallback
     registeredAt:
       title: Registered At
       description: Time of first registration to management console (similar to createdAt)
       type: string
       required: false
+      example: 2023-01-01T00:00:00.000000Z
     totalMemory:
       title: Total Memory
       description: Memory size (MB)
       type: integer
       required: false
+      example: 10
     groupUpdatedAt:
       title: Group Updated At
       description: Date of when the group was last updated
       type: string
       required: false
+      example: 2023-01-01T00:00:00.000000Z
     computerName:
       title: Computer Name
       description: Computer name
       type: string
       required: false
+      example: Computer1
     isUninstalled:
       title: Is Uninstalled
       description: Indicates if Agent was removed from the device
       type: boolean
       required: false
+      example: false
     uuid:
       title: UUID
       description: Agent's universally unique identifier
       type: string
       required: false
+      example: b7b2d39171be4ae1af90f93d7ed20f07
     licenseKey:
       title: License Key
       description: License key
       type: string
       required: false
+      example: BC017-06777-14871-160C4
     isActive:
       title: Is Active
       description: Indicates if the agent was recently active
       type: boolean
       required: false
+      example: true
     cpuCount:
       title: CPU Count
       description: Number of CPUs
       type: integer
       required: false
+      example: 4
     modelName:
       title: Model Name
       description: Model name
       type: string
       required: false
+      example: Example Model Name
     externalId:
       title: External ID
       description: External id set by customer
       type: string
       required: false
+      example: 0000000000000000001
     coreCount:
       title: Core Count
       description: Number of CPU cores
       type: integer
       required: false
+      example: 10
     allowRemoteShell:
       title: Allow Remote Shell
       description: Agent is capable and policy enabled for remote shell
       type: boolean
       required: false
+      example: true
     agentVersion:
       title: Agent Version
       description: Agent version
       type: string
       required: false
+      example: 1.0.3.4
     groupIp:
       title: Group IP
       description: IP Address subnet
       type: string
       required: false
+      example: 198.51.100.x
     osName:
       title: OS Name
       description: Os name
       type: string
       required: false
+      example: Windows 11
     mitigationModeSuspicious:
       title: Mitigation Mode Suspicious
       description: Mitigation mode policy for suspicious activity
       type: string
       required: false
+      example: detect
     osUsername:
       title: OS Username
       description: Os username
       type: string
       required: false
+      example: user1
     lastLoggedInUserName:
       title: Last Logged In User Name
       description: Last logged in user name
       type: string
       required: false
+      example: user1
     cpuId:
       title: CPU ID
       description: CPU model
       type: string
       required: false
+      example: CPU A0 v1 @ 3.00GHz
     lastActiveDate:
       title: Last Active Date
       description: Last active date
       type: string
       required: false
+      example: 2023-01-01T00:00:00.000000Z
     osType:
       title: OS Type
       description: OS type
       type: string
       required: false
+      example: windows
     networkStatus:
       title: Network Status
       description: Agent's network connectivity status
       type: string
       required: false
+      example: connected
     lastIpToMgmt:
       title: Last IP to Management Console
       description: The last IP used to connect to the Management console
       type: string
       required: false
+      example: 198.51.100.1
     networkQuarantineEnabled:
       title: Network Quarantine Enabled
       description: Network quarantine enabled
       type: boolean
       required: false
+      example: true
     remoteProfilingState:
       title: Remote Profiling State
       description: Agent remote profiling state
       type: string
       required: false
+      example: disabled
     cloudProviders:
       title: Cloud Providers
       description: Cloud providers for this agent
       type: object
       required: false
+      example: {}
     operationalState:
       title: Operational State
       description: Agent operational state
       type: string
       required: false
+      example: na
     remoteProfilingStateExpiration:
       title: Remote Profiling State Expiration
       description: Agent remote profiling state expiration in seconds
       type: string
       required: false
+      example: 3600
     operationalStateExpiration:
       title: Operational State Expiration
       description: Agent operational state expiration
       type: string
       required: false
+      example: 2023-01-01T00:00:00.000000Z
     locationEnabled:
       title: Location Enabled
       description: Location enabled
       type: boolean
       required: false
+      example: true
     firewallEnabled:
       title: Firewall Enabled
       description: Firewall enabled
       type: boolean
       required: false
-  quarantine_response:
-    errors:
-      title: Errors
-      description: Errors
-      type: "[]object"
-      required: false
-    data:
-      title: Data
-      description: Response data
-      type: object
-      required: false
+      example: true
   queryModeInfo:
     mode:
       title: Mode
@@ -1004,491 +1122,568 @@ types:
       type: string
       required: false
       example: FINISHED
-  query_data:
+  eventData:
     objectType:
       title: Object Type
       description: Object type
       type: string
       required: false
+      example: file
     tid:
       title: TID
       description: TID
       type: string
       required: false
+      example: 1234
     registryPath:
       title: Registry Path
       description: Registry path
       type: string
       required: false
+      example: MACHINE\\SYSTEM\\Ids\\{1234}
     processIsWow64:
       title: Process is WOW64
       description: Process is WOW64
       type: string
       required: false
+      example: "True"
     networkSource:
       title: Network Source
       description: Network source
       type: string
       required: false
+      example: "Example Source"
     fileFullName:
       title: File Full Name
       description: File full name
       type: string
       required: false
+      example: C:\\PROGRAMDATA\\Microsoft\\1234
     dnsResponse:
       title: DNS Response
       description: DNS response
       type: string
       required: false
+      example: 1.2.3.4;4.3.2.1;
     publisher:
       title: Publisher
       description: Publisher
       type: string
       required: false
+      example: Rapid7
     parentProcessGroupId:
       title: Parent Process Group ID
       description: Parent process group ID
       type: string
       required: false
+      example: 1234
     agentNetworkStatus:
       title: Agent Network Status
       description: Agent network status
       type: string
       required: false
+      example: connected
     pid:
       title: PID
       description: PID
       type: string
       required: false
+      example: 1234
     trueContext:
       title: True Context
       description: True context
       type: string
       required: false
+      example: ABCD1234
     parentProcessUniqueKey:
       title: Parent Process Unique Key
       description: Parent process unique key
       type: string
       required: false
+      example: ABCD1234
     fileId:
       title: File ID
       description: File ID
       type: string
       required: false
+      example: ABCD1234
     processStartTime:
       title: Process Start Time
       description: Process start time
       type: string
       required: false
+      example: 2023-01-01T00:00:00.000000Z
     agentInfected:
       title: Agent Infected
       description: Agent infected
       type: boolean
       required: false
+      example: false
     indicatorCategory:
       title: Indicator Category
       description: Indicator category
       type: string
       required: false
+      example: General
     processDisplayName:
       title: Process Display Name
       description: Process display name
       type: string
       required: false
+      example: Example Process
     oldFileSha256:
       title: Old File SHA256
       description: Old file SHA256
       type: string
       required: false
+      example: 50d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c
     agentOs:
       title: Agent OS
       description: Agent Operating System
       type: string
       required: false
+      example: windows
     processIntegrityLevel:
       title: Process Integrity Level
       description: Process integrity level
       type: string
       required: false
+      example: SYSTEM
     processCmd:
       title: Process CMD
       description: Process CMD
       type: string
       required: false
+      example: "C:\\Windows\\system32\\example.exe"
     agentIsActive:
       title: Agent is Active
       description: Agent is active
       type: boolean
       required: false
+      example: true
     processIsRedirectedCommandProcessor:
       title: Process is Redirected Command Processor
       description: Process is redirected command processor
       type: string
       required: false
+      example: "True"
     verifiedStatus:
       title: Verified Status
       description: Verified status
       type: string
       required: false
+      example: verified
     processRoot:
       title: Process Root
       description: Process root
       type: string
       required: false
+      example: "False"
     signatureSignedInvalidReason:
       title: Signature Signed Invalid Reason
       description: Signature signed invalid reason
       type: string
       required: false
+      example: Example Reason
     registryId:
       title: Registry ID
       description: Registry ID
       type: string
       required: false
+      example: ABCD1234
     processSessionId:
       title: Process Session ID
       description: Process session ID
       type: string
       required: false
+      example: 0
     agentGroupId:
       title: Agent Group ID
       description: Agent group ID
       type: string
       required: false
+      example: 0000000000000000001
     agentVersion:
       title: Agent Version
       description: Agent version
       type: string
       required: false
+      example: 1.0.3.4
     parentProcessName:
       title: Parent Process Name
       description: Parent process name
       type: string
       required: false
+      example: example.exe
     fileSha256:
       title: File SHA256
       description: File SHA256
       type: string
       required: false
+      example: 1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014
     parentPid:
       title: Parent PID
       description: Parent PID
       type: string
       required: false
+      example: 1234
     agentId:
       title: Agent ID
       description: Agent ID
       type: string
       required: false
+      example: 0000000000000000001
     agentIsDecommissioned:
       title: Agent is Decommissioned
       description: Agent is decommissioned
       type: boolean
       required: false
+      example: false
     networkUrl:
       title: Network URL
       description: Network URL
       type: string
       required: false
+      example: example.com
     processUserName:
       title: Process User Name
       description: Process user name
       type: string
       required: false
+      example: user1
     processImageSha1Hash:
       title: Process Image SHA1 Hash
       description: Process image SHA1 hash
       type: string
       required: false
+      example: c3499c2729730a7f807efb8676a92dcb6f8a3f8f
     taskPath:
       title: Task Path
       description: Task path
       type: string
       required: false
+      example: C:\\Program Files\\example.exe
     id:
       title: ID
       description: ID
       type: string
       required: false
+      example: 000000000000000001
     srcPort:
       title: Source Port
       description: Source port
       type: integer
       required: false
+      example: 8000
     oldFileName:
       title: Old File Name
       description: Old file name
       type: string
       required: false
+      example: example.txt
     sha256:
       title: SHA256
       description: SHA256
       type: string
       required: false
+      example: 50d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c
     processImagePath:
       title: Process Image Path
       description: Process image path
       type: string
       required: false
+      example: C:\\test\\example.exe
     siteName:
       title: Site Name
       description: Site name
       type: string
       required: false
+      example: Rapid7
     oldFileMd5:
       title: Old File MD5
       description: Old file MD5
       type: string
       required: false
+      example: 1a79a4d60de6718e8e5b326e338ae533
     agentMachineType:
       title: Agent Machine Type
       description: Agent machine type
       type: string
       required: false
+      example: desktop
     taskName:
       title: Task Name
       description: Task name
       type: string
       required: false
+      example: Example Name
     networkMethod:
       title: Network Method
       description: Network method
       type: string
       required: false
+      example: GET
     parentProcessStartTime:
       title: Parent Process Start Time
       description: Parent process start time
       type: string
       required: false
+      example: 2023-01-01T00:00:00.000000Z
     srcIp:
       title: Source IP
       description: Source IP
       type: string
       required: false
+      example: 198.51.100.1
     fileSize:
       title: File Size
       description: File size
       type: string
       required: false
+      example: 1234
     fileMd5:
       title: File MD5
       description: File MD5
       type: string
       required: false
+      example: 1a79a4d60de6718e8e5b326e338ae533
     createdAt:
       title: Created At
       description: Created at
       type: string
       required: false
+      example: 2023-01-01T00:00:00.000000Z
     indicatorDescription:
       title: Indicator Description
       description: Indicator description
       type: string
       required: false
+      example: Example Description
     processName:
       title: Process Name
       description: Process name
       type: string
       required: false
+      example: example.exe
     oldFileSha1:
       title: Old File SHA1
       description: Old file SHA1
       type: string
       required: false
+      example: c3499c2729730a7f807efb8676a92dcb6f8a3f8f
     parentProcessIsMalicious:
       title: Parent Process is Malicious
       description: Parent process is malicious
       type: boolean
       required: false
+      example: false
     indicatorMetadata:
       title: Indicator Metadata
       description: Indicator metadata
       type: string
       required: false
+      example: Example Metadata
     rpid:
       title: RPID
       description: RPID
       type: string
       required: false
+      example: ABCD1234
     sha1:
       title: SHA1
       description: SHA1
       type: string
       required: false
+      example: c3499c2729730a7f807efb8676a92dcb6f8a3f8f
     relatedToThreat:
       title: Related to Threat
       description: Related to threat
       type: string
       required: false
+      example: "False"
     loginsBaseType:
       title: Logins Base Type
       description: Logins base type
       type: string
       required: false
+      example: example
     md5:
       title: MD5
       description: MD5
       type: string
       required: false
+      example: 1a79a4d60de6718e8e5b326e338ae533
     agentDomain:
       title: Agent Domain
       description: Agent domain
       type: string
       required: false
+      example: WORKGROUP
     eventType:
       title: Event Type
       description: Event type
       type: string
       required: false
+      example: Process Creation
     fileSha1:
       title: File SHA1
       description: File SHA1
       type: string
       required: false
+      example: c3499c2729730a7f807efb8676a92dcb6f8a3f8f
     user:
       title: User
       description: User
       type: string
       required: false
+      example: user1
     processGroupId:
       title: Process Group ID
       description: Process group ID
       type: string
       required: false
+      example: ABCD1234
     agentIp:
       title: Agent IP
       description: Agent IP
       type: string
       required: false
+      example: 198.51.100.1
     fileType:
       title: File Type
       description: File type
       type: string
       required: false
+      example: image
     connectionStatus:
       title: Connection Status
       description: Connection status
       type: string
       required: false
+      example: SUCCESS
     processSubSystem:
       title: Process Sub System
       description: Process sub system
       type: string
       required: false
+      example: SYS_WIN32
     dstPort:
       title: Destination Port
       description: Object type
       type: integer
       required: false
+      example: 8000
     signedStatus:
       title: Signed Status
       description: Signed status
       type: string
       required: false
+      example: signed
     processIsMalicious:
       title: Process is Malicious
       description: Process is malicious
       type: boolean
       required: false
+      example: false
     forensicUrl:
       title: Forensic URL
       description: Forensic URL
       type: string
       required: false
+      example: example.com
     dstIp:
       title: Destination IP
       description: Destination IP
       type: string
       required: false
+      example: 198.51.100.1
     direction:
       title: Direction
       description: Direction
       type: string
       required: false
+      example: OUTGOING
     agentUuid:
       title: Agent UUID
       description: Agent UUID
       type: string
       required: false
+      example: b7b2d39171be4ae1af90f93d7ed20f07
     agentName:
       title: Agent Name
       description: Agent name
       type: string
       required: false
+      example: ExampleName1
     threatStatus:
       title: Threat Status
       description: Threat status
       type: string
       required: false
+      example: Example Status
     processUniqueKey:
       title: Process Unique Key
       description: Process unique key
       type: string
       required: false
+      example: ABCD1234
     indicatorName:
       title: Indicator Name
       description: Indicator name
       type: string
       required: false
+      example: ProcessEnumeration
     loginsUserName:
       title: Logins User Name
       description: Logins user name
       type: string
       required: false
+      example: user1
     agentTimestamp:
       title: Agent Timestamp
       description: Agent timestamp
       type: string
       required: false
+      example: 2023-01-01T00:00:00.000000Z
     attributes:
       title: Attributes
       description: Attributes
       type: "[]object"
       required: false
+      example: []
     childProcCount:
       title: Child Process Count
       description: Child process count
       type: string
       required: false
+      example: 0
     endpointMachineType:
       title: Endpoint Machine Type
       description: Endpoint machine type
       type: string
       required: false
+      example: desktop
     endpointName:
       title: Endpoint Name
       description: Endpoint name
       type: string
       required: false
+      example: ExampleName1
     endpointOs:
       title: Endpoint OS
       description: Endpoint OS
       type: string
       required: false
+      example: windows
     eventTime:
       title: Event Time
       description: Event time
       type: string
       required: false
-  get_events_response:
-    errors:
-      title: Errors
-      description: Errors
-      type: "[]object"
-      required: false
-    pagination:
-      title: Pagination
-      description: Pagination
-      type: pagination
-      required: false
-    data:
-      title: Data
-      description: Response data
-      type: "[]query_data"
-      required: false
+      example: 2023-01-01T00:00:00.000000Z
 
 connection:
-  user_type:
+  userType:
     title: User Type
     description: Type of user
     type: string
@@ -1498,18 +1693,18 @@ connection:
       - Service user
     example: Console user
     default: Console user
-  api_key:
+  apiKey:
     title: API Key
     description: Credential secret API key
     type: credential_secret_key
     required: true
     example: 9de5069c5afe602b2ea0a04b66beb2c0
-  url:
-    title: URL
-    description: SentinelOne Console URL
+  instance:
+    title: Instance
+    description: SentinelOne Console instance e.g. https://<example-instance>.sentinelone.net
     type: string
     required: true
-    example: https://example.sentinelone.com
+    example: example-instance
 actions:
   get_threat_summary:
     title: Get Threat Summary
@@ -1535,8 +1730,7 @@ actions:
         example: []
   blacklist_by_content_hash:
     title: Blacklist by Content Hash
-    description: Add hashed content to global blacklist. The input makes use of contentHash
-      from the threat summary
+    description: Add hashed content to global blacklist. The input makes use of contentHash from the threat summary
     input:
       hash:
         title: Hash
@@ -1560,7 +1754,7 @@ actions:
         description: SHA1 hash
         type: string
         required: true
-        example: "A94A8FE5CCB19BA61C4C0873D391E987982FBBD3"
+        example: A94A8FE5CCB19BA61C4C0873D391E987982FBBD3
       agentId:
         title: Agent ID
         description: Agent ID for the slim threat
@@ -1569,22 +1763,22 @@ actions:
         example: "1000000000000000000"
       note:
         title: Note
-        description: Note
+        description: Note added to the created threat
         type: string
         required: false
-        example: "Note"
+        example: Example note
       groupId:
         title: Group ID
-        description: Group ID
+        description: ID of the group
         type: string
         required: false
         example: "1000000000000000001"
       path:
         title: Path
-        description: Path
+        description: File path
         type: string
         required: false
-        example: "path"
+        example: path
     output:
       affected:
         title: Affected
@@ -1706,13 +1900,13 @@ actions:
     title: Get Activities
     description: Get a list of activities
     input:
-      group_ids:
-        title: Group IDS
+      groupIds:
+        title: Group IDs
         description: List of Group IDs
         type: '[]string'
         required: false
         example: ["500000000000000000"]
-      include_hidden:
+      includeHidden:
         title: Include Hidden
         description: Include internal activities hidden from display
         type: boolean
@@ -1724,68 +1918,68 @@ actions:
         type: integer
         required: false
         example: 1
-      site_ids:
-        title: Site IDS
+      siteIds:
+        title: Site IDs
         description: List of Site IDs to filter by
         type: '[]string'
         required: false
         example: ["5000000000000001"]
-      agent_ids:
-        title: Agent IDS
-        description: Return activities related to specified agent ids
+      agentIds:
+        title: Agent IDs
+        description: Return activities related to specified agent IDs
         type: '[]string'
         required: false
         example: ["9000000000000000"]
-      skip_count:
+      skipCount:
         title: Skip Count
         description: If true, total number of items will not be calculated, which speeds up execution time
         type: boolean
         required: false
-        example: true
+        example: false
       ids:
-        title: Activity IDS
+        title: Activity IDs
         description: List of Activity IDs
         type: '[]string'
         required: false
         example: ["800000000000000008"]
-      created_at_lt:
+      createdAtLt:
         title: Less than Date
         description: Return activities created before this date in ISO-8601
-        type: string
+        type: date
         required: false
         example: "2020-12-20T18:49:26.257525Z"
-      created_at_lte:
+      createdAtLte:
         title: Less or Equal Date
         description: Return activities created before or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z
-        type: string
+        type: date
         required: false
         example: "2020-12-20T18:49:26.257525Z"
-      created_at_gt:
+      createdAtGt:
         title: Greater than Date
         description: Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z
-        type: string
+        type: date
         required: false
         example: "2020-12-18T18:49:26.257525Z"
-      created_at_gte:
+      createdAtGte:
         title: Greater or Equal Date
         description: Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z
-        type: string
+        type: date
         required: false
         example: "2020-12-20T18:49:26.257525Z"
-      created_at_between:
+      createdAtBetween:
         title: Between Dates
         description: Return activities created within this range (inclusive), example 1514978764288-1514978999999
         type: string
         required: false
         example: "1514978764288-1514978999999"
-      count_only:
+      countOnly:
         title: Count Only
         description: If true, only total number of items will be returned, without any of the actual objects
         type: boolean
         required: false
-        example: true
-      account_ids:
-        title: Account IDS
+        example: false
+      accountIds:
+        title: Account IDs
         description: List of Account IDs to filter by
         type: '[]string'
         required: false
@@ -1797,7 +1991,7 @@ actions:
         required: false
         example: 10
         default: 10
-      sort_by:
+      sortBy:
         title: Sort By
         description: The column to sort the results by
         type: string
@@ -1808,19 +2002,19 @@ actions:
           - createdAt
         example: "createdAt"
         default: "createdAt"
-      activity_types:
+      activityTypes:
         title: Activity Types
         description: Return only these activity codes
         type: '[]string'
         required: false
         example: ["22", "23"]
-      threat_ids:
-        title: Threat IDS
-        description: Return only these activity codes
+      threatIds:
+        title: Threat IDs
+        description: Return activities related to specified threat IDs
         type: '[]string'
         required: false
-        example: ["1"]
-      sort_order:
+        example: ["100000000000000000"]
+      sortOrder:
         title: Sort Order
         description: Sort direction
         type: string
@@ -1830,14 +2024,14 @@ actions:
         required: false
         default: "asc"
         example: asc
-      user_emails:
-        title: User Emails
+      userEmail:
+        title: User Email
         description: Email of the user who invoked the activity (If applicable)
-        type: '[]string'
+        type: string
         required: false
-        example: ["user@example.com"]
-      user_ids:
-        title: User IDS
+        example: user@example.com
+      userIds:
+        title: User IDs
         description: The user who invoked the activity (If applicable)
         type: '[]string'
         required: false
@@ -1845,10 +2039,16 @@ actions:
     output:
       data:
         title: Data
-        description: Result of activities list
-        type: '[]activities_list'
+        description: List of activities obtained for the given filters
+        type: '[]activity'
         required: true
-        example: '[{ "agentUpdatedVersion": "2.5.1.1320", "id": "225494730938493804", "createdAt": "2018-02-27T04:49:26.257525Z", "groupId": "225494730938493804", "primaryDescription": "string", "accountName": "string", "description": "string", "osFamily": "windows_legacy", "hash": "string", "secondaryDescription": "string", "comments": "string", "siteId": "225494730938493804", "groupName": "string", "threatId": "225494730938493804", "agentId": "225494730938493804", "data": { "computer_name": "COMP_1234", "username": "my_user" }, "activityType": "integer", "accountId": "225494730938493804", "updatedAt": "2018-02-27T04:49:26.257525Z", "userId": "225494730938493804", "activityUuid": "string", "siteName": "string" }]'
+        example: []
+      totalItems:
+        title: Total Items
+        description: Total number of activities found matching your query
+        type: integer
+        required: false
+        example: 100
   activities_types:
     title: Get Activity Types
     description: Get a list of activity types
@@ -2013,7 +2213,6 @@ actions:
         type: object
         required: true
         example: '{"ids": ["1000000000000000000"]}'
-        default: '{}'
       action:
         title: Agent Action
         description: Agent action to run
@@ -2047,21 +2246,18 @@ actions:
         type: string
         example: hostname123
         required: false
-      agent_active:
+      agentActive:
         title: Agent Active
-        description: Return a list of all active or inactive agents when Agent input is not specified. Note that setting this to true for Active agents can return a very large amount of data
-        type: boolean
-        example: true
-        default: true
+        description: Return a list of active, inactive or all agents when Agent input is not specified. Note that leaving it empty can return a very large amount of data
+        type: string
+        enum:
+          - "True"
+          - "False"
+          - ''
+        example: "True"
+        default: ''
         required: false
-      case_sensitive:
-        title: Case Sensitive
-        description: Looks up agents in a case-sensitive manner. Setting this value to false may result in longer run times and unintended results
-        type: boolean
-        example: true
-        default: true
-        required: true
-      operational_state:
+      operationalState:
         title: Operational State
         description: Agent operational state
         type: string
@@ -2078,9 +2274,9 @@ actions:
       agents:
         title: Agents
         description: Detailed information about agents found
-        type: "[]agent_data"
+        type: "[]agentData"
         required: false
-        example: '{ "agents": [ { "accountId": "433241117337583618", "accountName": "SentinelOne", "activeDirectory": { "computerDistinguishedName": "None", "computerMemberOf": [], "lastUserDistinguishedName": "None", "lastUserMemberOf": [] }, "activeThreats": 0, "agentVersion": "4.1.4.82", "allowRemoteShell": false, "appsVulnerabilityStatus": "up_to_date", "cloudProviders": {}, "computerName": "so-agent-win12", "consoleMigrationStatus": "N/A", "coreCount": 1, "cpuCount": 1, "cpuId": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz", "createdAt": "2020-05-28T14:53:03.014660Z", "domain": "WORKGROUP", "encryptedApplications": false, "externalId": "", "externalIp": "198.51.100.100", "firewallEnabled": true, "groupId": "521580416411822676", "groupIp": "198.51.100.x", "groupName": "Default Group", "id": "901345720792880606", "inRemoteShellSession": false, "infected": false, "installerType": ".exe", "isActive": true, "isDecommissioned": false, "isPendingUninstall": false, "isUninstalled": false, "isUpToDate": true, "lastActiveDate": "2020-06-05T18:32:56.748620Z", "lastIpToMgmt": "10.4.24.55", "lastLoggedInUserName": "", "licenseKey": "", "locationEnabled": true, "locationType": "fallback", "locations": [ { "id": "629380164464502476", "name": "Fallback", "scope": "global" } ], "machineType": "server", "mitigationMode": "protect", "mitigationModeSuspicious": "detect", "modelName": "VMware, Inc. - VMware Virtual Platform", "networkInterfaces": [ { "id": "901345720801269215", "inet": [ "198.51.100.100" ], "inet6": [ "2001:db8:8:4::2" ], "name": "Ethernet", "physical": "00:50:56:94:17:08" } ], "networkQuarantineEnabled": false, "networkStatus": "disconnected", "operationalState": "na", "operationalStateExpiration": "None", "osArch": "64 bit", "osName": "Windows Server 2012 Standard", "osRevision": "9200", "osStartTime": "2020-05-28T14:59:36Z", "osType": "windows", "osUsername": "None", "rangerStatus": "NotApplicable", "rangerVersion": "None", "registeredAt": "2020-05-28T14:53:03.010853Z", "remoteProfilingState": "disabled", "remoteProfilingStateExpiration": "None", "scanAbortedAt": "None", "scanFinishedAt": "2020-05-28T22:24:59.420166Z", "scanStartedAt": "2020-05-28T21:12:58.216807Z", "scanStatus": "finished", "siteId": "521580416395045459", "siteName": "Rapid7", "threatRebootRequired": false, "totalMemory": 1023, "updatedAt": "2020-06-05T15:39:10.754112Z", "userActionsNeeded": [], "uuid": "28db47168fa54f89aeed99769ac8d4dc" } ] }'
+        example: []
   get_agent_details:
     title: Get Agent Details
     description: Retrieve agent details
@@ -2091,14 +2287,7 @@ actions:
         type: string
         example: hostname123
         required: true
-      case_sensitive:
-        title: Case Sensitive
-        description: Looks up the specified Agent in a case-sensitive manner. Setting this to false may result in longer run times and unintended results
-        type: boolean
-        example: true
-        default: true
-        required: true
-      operational_state:
+      operationalState:
         title: Operational State
         description: Agent operational state
         type: string
@@ -2115,9 +2304,9 @@ actions:
       agent:
         title: Agent
         description: Detailed information about agent found
-        type: agent_data
+        type: agentData
         required: false
-        example: '{ "agent": { "accountId": "433241117337583618", "accountName": "SentinelOne", "activeDirectory": { "computerDistinguishedName": "None", "computerMemberOf": [], "lastUserDistinguishedName": "None", "lastUserMemberOf": [] }, "activeThreats": 0, "agentVersion": "4.1.4.82", "allowRemoteShell": false, "appsVulnerabilityStatus": "up_to_date", "cloudProviders": {}, "computerName": "so-agent-win12", "consoleMigrationStatus": "N/A", "coreCount": 1, "cpuCount": 1, "cpuId": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz", "createdAt": "2020-05-28T14:53:03.014660Z", "domain": "WORKGROUP", "encryptedApplications": false, "externalId": "", "externalIp": "198.51.100.100", "firewallEnabled": true, "groupId": "521580416411822676", "groupIp": "198.51.100.x", "groupName": "Default Group", "id": "901345720792880606", "inRemoteShellSession": false, "infected": false, "installerType": ".exe", "isActive": true, "isDecommissioned": false, "isPendingUninstall": false, "isUninstalled": false, "isUpToDate": true, "lastActiveDate": "2020-06-05T18:32:56.748620Z", "lastIpToMgmt": "10.4.24.55", "lastLoggedInUserName": "", "licenseKey": "", "locationEnabled": true, "locationType": "fallback", "locations": [ { "id": "629380164464502476", "name": "Fallback", "scope": "global" } ], "machineType": "server", "mitigationMode": "protect", "mitigationModeSuspicious": "detect", "modelName": "VMware, Inc. - VMware Virtual Platform", "networkInterfaces": [ { "id": "901345720801269215", "inet": [ "198.51.100.100" ], "inet6": [ "2001:db8:8:4::2" ], "name": "Ethernet", "physical": "00:50:56:94:17:08" } ], "networkQuarantineEnabled": false, "networkStatus": "disconnected", "operationalState": "na", "operationalStateExpiration": "None", "osArch": "64 bit", "osName": "Windows Server 2012 Standard", "osRevision": "9200", "osStartTime": "2020-05-28T14:59:36Z", "osType": "windows", "osUsername": "None", "rangerStatus": "NotApplicable", "rangerVersion": "None", "registeredAt": "2020-05-28T14:53:03.010853Z", "remoteProfilingState": "disabled", "remoteProfilingStateExpiration": "None", "scanAbortedAt": "None", "scanFinishedAt": "2020-05-28T22:24:59.420166Z", "scanStartedAt": "2020-05-28T21:12:58.216807Z", "scanStatus": "finished", "siteId": "521580416395045459", "siteName": "Rapid7", "threatRebootRequired": false, "totalMemory": 1023, "updatedAt": "2020-06-05T15:39:10.754112Z", "userActionsNeeded": [], "uuid": "28db47168fa54f89aeed99769ac8d4dc" } }'
+        example: {}
   quarantine:
     title: Quarantine
     description: Isolate (quarantine) endpoint from the network
@@ -2128,7 +2317,7 @@ actions:
         type: string
         example: hostname123
         required: true
-      quarantine_state:
+      quarantineState:
         title: Quarantine State
         description: True to quarantine host, false to unquarantine host
         type: boolean
@@ -2140,20 +2329,13 @@ actions:
         type: "[]string"
         example: ["198.51.100.100", "hostname123", "901345720792880606", "28db47168fa54f89aeed99769ac8d4dc"]
         required: false
-      case_sensitive:
-        title: Case Sensitive
-        description: Looks up the specified Agent in a case-sensitive manner. Setting this value to false may result in longer run times and unintended results
-        type: boolean
-        example: true
-        default: true
-        required: true
     output:
-      response:
-        title: Response
-        description: SentinelOne API call response data
-        type: quarantine_response
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
         required: false
-        example: '{ "response": { "data": [ { "agentDomain": "WORKGROUP", "agentGroupId": "123123456712356789", "agentId": "123123456712356789" } } }'
+        example: 1
   blacklist:
     title: Blacklist
     description: Blacklist and unblacklist a SHA1 hash
@@ -2168,10 +2350,10 @@ actions:
         title: Description
         description: Description for why the hash is blacklisted
         type: string
-        default: "Hash Blacklisted from InsightConnect"
+        default: "Hash blacklisted from InsightConnect"
         required: false
-        example: "Hash Blacklisted from InsightConnect"
-      blacklist_state:
+        example: "Hash blacklisted from InsightConnect"
+      blacklistState:
         title: Blacklist State
         description: True to create blacklist hash, false to unblacklist hash
         type: boolean
@@ -2190,7 +2372,7 @@ actions:
         description: Return details about action results
         type: string
         required: true
-        example: 'The given hash has been blocked'
+        example: The given hash has been blacklisted
   threats_fetch_file:
     title: Fetch Threats File
     description: Fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC
@@ -2229,8 +2411,9 @@ actions:
         description: Set true to reboot the endpoint, false to skip rebooting
         type: boolean
         required: true
+        default: false
         example: true
-      expiration_timezone:
+      expirationTimezone:
         title: Expiration Timezone
         description: Timezone for the expiration timestamp. Set with expiration time
         type: string
@@ -2439,10 +2622,10 @@ actions:
           - Yekaterinburg Time [YEKT]
         default: Central Standard Time (North America) [CST]
         example: Central Standard Time (North America) [CST]
-      expiration_time:
+      expirationTime:
         title: Expiration Time
         description: Agents will be re-enabled after this timestamp
-        type: string
+        type: date
         required: false
         example: 2020-02-27T04:49:26.257525Z
       filter:
@@ -2450,7 +2633,7 @@ actions:
         description: Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents
         required: false
         type: object
-        example: '{ "updatedAt__gt": "2019-02-27T04:49:26.257525Z" }'
+        example: {}
     output:
       affected:
         title: Affected
@@ -2479,7 +2662,7 @@ actions:
         description: Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents
         required: false
         type: object
-        example: '{ "updatedAt__gt": "2019-02-27T04:49:26.257525Z" }'
+        example: {}
     output:
       affected:
         title: Affected
@@ -2595,9 +2778,9 @@ actions:
         example: {}
   get_events:
     title: Get Events
-    description: Get all Deep Visibility events from a queryId
+    description: This action is used to get all Deep Visibility events from a queryId
     input:
-      query_id:
+      queryId:
         title: Query ID
         description: QueryId obtained when creating a query under Create Query
         type: string
@@ -2609,34 +2792,40 @@ actions:
         type: integer
         example: 10
         required: false
-      sub_query:
+      subQuery:
         title: Sub Query
         description: Sub query to run on the data that was already pulled
         type: string
         example: AgentName IS NOT EMPTY
         required: false
     output:
-      response:
-        title: Response
-        description: SentinelOne API call response data
-        type: get_events_response
+      events:
+        title: Events
+        description: Response events data
+        type: "[]eventData"
         required: false
-        example: '{ "response": { "data": [ { "agentDomain": "WORKGROUP", "agentGroupId": "123123456712356789", "agentId": "123123456712356789" } } }'
+        example: []
+      errors:
+        title: Errors
+        description: Errors
+        type: "[]object"
+        required: false
+        example: []
   get_events_by_type:
     title: Get Events by Type
-    description: Get Deep Visibility results from the query that matches the given event type
+    description: This action is used to get Deep Visibility results from the query that matches the given event type
     input:
-      query_id:
+      queryId:
         title: Query ID
         description: QueryId obtained when creating a query under Create Query
         type: string
         example: qd94e330ac025d525b5948bdf897b955e
         required: true
-      event_type:
+      eventType:
         title: Event Type
         description: Event type for Autocomplete
         type: string
-        enum: 
+        enum:
         - Process Exit
         - Process Modification
         - Process Creation
@@ -2689,30 +2878,36 @@ actions:
         type: integer
         example: 10
         required: false
-      sub_query:
+      subQuery:
         title: Sub Query
         description: Sub query to run on the data that was already pulled
         type: string
         example: AgentName IS NOT EMPTY
         required: false
     output:
-      response:
-        title: Response
-        description: SentinelOne API call response data
-        type: get_events_response
+      events:
+        title: Events
+        description: Response events data
+        type: "[]eventData"
         required: false
-        example: '{ "response": { "data": [ { "agentDomain": "WORKGROUP", "agentGroupId": "123123456712356789", "agentId": "123123456712356789" }}}'
+        example: []
+      errors:
+        title: Errors
+        description: Errors
+        type: "[]object"
+        required: false
+        example: []
   update_analyst_verdict:
     title: Update Analyst Verdict
     description: Updates an analyst verdict for each incident ID provided
     input:
-      incident_ids:
+      incidentIds:
         title: Incident IDs
         description: A list of alert or threat IDs on which we may update the analyst verdict
         type: "[]string"
-        example: [ "1118189762920424575", "1118189762920424576" ]
+        example: ["1118189762920424575", "1118189762920424576"]
         required: true
-      analyst_verdict:
+      analystVerdict:
         title: Analyst Verdict
         description: Analyst verdict
         type: string
@@ -2743,13 +2938,13 @@ actions:
     title: Update Incident Status
     description: Updates an incident status for each incident ID provided
     input:
-      incident_ids:
+      incidentIds:
         title: Incident IDs
         description: A list of alert or threat IDs to update the incident status on
         type: "[]string"
         example: ["1118189762920424575", "1118189762920424576"]
         required: true
-      incident_status:
+      incidentStatus:
         title: Incident Status
         description: Incident status
         type: string
@@ -2785,19 +2980,19 @@ actions:
         type: '[]string'
         required: false
         example: '["100000000000000000"]'
-      script_id:
+      scriptId:
         title: Script ID
         description: ID of the script to run (select the ID of a SentinelOne or user script from SentinelOne console)
         type: string
         required: true
         example: "1234567891234"
-      task_description:
+      taskDescription:
         title: Task Description
         description: Task Description
         type: string
         required: true
         example: "Task Description"
-      output_destination:
+      outputDestination:
         title: Output Destination
         description: Output destination of any script output
         type: string
@@ -2807,19 +3002,25 @@ actions:
           - SentinelCloud
         example: SentinelCloud
         required: true
-      output_directory:
+      outputDirectory:
         title: Output Directory
         description: Output Directory (Only relevant if Local is selected for Output Destination)
         type: string
         required: false
         example: "/tmp/script_output"
+      code:
+        title: Code
+        description: Code from a third-party application, such as DUO or Google Authenticator, required to elevate the protected actions session
+        type: string
+        required: false
+        example: 123456
       password:
         title: Password
         description: Password (Only relevant if SentinelCloud is selected for Output Destination). At least 10 characters and no whitespace
         type: string
         required: false
         example: "Password123??"
-      input_parameters:
+      inputParameters:
         title: Input Script Parameters
         description: Parameters which will be passed to the remote script (may or may not be required, depending on script)
         type: string
@@ -2834,10 +3035,11 @@ actions:
         example: 3600
     output:
       affected:
+        title: Affected
         description: Number of entities affected by requested operation. For detailed output from running the script, log onto the SentinelOne console. Note this may be lower than the number of agent ids submitted if the script cannot be run on a particular agent e.g. due to OS type
         type: integer
         required: true
-        example: 2
+        example: 1
 triggers:
   get_threats:
     title: Get Threats
@@ -2855,7 +3057,7 @@ triggers:
         type: '[]string'
         required: false
         example: [""]
-      agent_is_active:
+      agentIsActive:
         title: Agent is Active
         description: Include agents currently connected to the management console
         type: boolean

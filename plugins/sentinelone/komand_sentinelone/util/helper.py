@@ -18,13 +18,7 @@ class Helper:
         return ",".join(joined_array)
 
 
-class BlacklistMessage:
-    blocked = "The given hash has been blocked"
-    unblocked = "The given hash has been unlocked"
-    not_exists = "The given hash does not exist"
-
-
-def check_password_meets_requirements(password: str) -> Union[None, PluginException]:
+def check_password_meets_requirements(password: str):
     """
     A method to determine if password meets required format (minimum length and no whitespace)
     :param password: The password to check
@@ -32,5 +26,6 @@ def check_password_meets_requirements(password: str) -> Union[None, PluginExcept
     if not re.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$", password):
         raise PluginException(
             cause="Invalid password.",
-            assistance="The password must be 10 or more characters with a mix of upper and lower case letters, numbers, and symbols.",
+            assistance="The password must be 10 or more characters with a mix of upper and lower case letters, numbers,"
+            " and symbols.",
         )

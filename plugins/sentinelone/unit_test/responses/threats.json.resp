@@ -1,12 +1,106 @@
 {
   "data": [
     {
-      "id": "1111-1111-11111111-1111",
-      "status": "active"
+      "accountId": "1111111111111",
+      "accountName": "Rapid7",
+      "agentComputerName": "WindowsX64",
+      "agentDomain": "WORKGROUP",
+      "agentId": "11111111111111111",
+      "agentInfected": false,
+      "agentIp": "1.1.1.1",
+      "agentIsActive": true,
+      "agentIsDecommissioned": false,
+      "agentMachineType": "desktop",
+      "agentNetworkStatus": "connected",
+      "agentOsType": "windows",
+      "agentVersion": "1.1.1.1",
+      "annotation": null,
+      "automaticallyResolved": false,
+      "browserType": null,
+      "certId": "",
+      "classification": "Malware",
+      "classificationSource": "Static",
+      "classifierName": "STATIC",
+      "cloudVerdict": "black",
+      "collectionId": "1111111111111",
+      "commandId": null,
+      "createdAt": "2023-09-20T09:03:06.792000Z",
+      "createdDate": "2023-09-20T09:03:06.792000Z",
+      "description": "malware detected - not mitigated yet (static engine)",
+      "engines": [
+        "pre_execution"
+      ],
+      "external_ticket_id": null,
+      "fileContentHash": "122356756432654hvgjh34g5j34",
+      "fileCreatedDate": null,
+      "fileDisplayName": "example.txt",
+      "fileExtensionType": "Document",
+      "fileIsDotNet": null,
+      "fileIsExecutable": false,
+      "fileIsSystem": false,
+      "fileMaliciousContent": null,
+      "fileObjectId": "1235KJGHDSF",
+      "filePath": "\\Device\\HarddiskVolume1\\USERS\\vagrant\\AppData\\Local\\Packages\\microsoft.windowscommunicationsapps_8wekyb3d8bbwe\\LocalState\\Files\\S0\\5\\Attachments\\example.txt",
+      "fileSha256": null,
+      "fileVerificationType": "NotSigned",
+      "fromCloud": false,
+      "fromScan": true,
+      "id": "11111111111111",
+      "indicators": [],
+      "initiatedBy": "fullDiskScan",
+      "initiatedByDescription": "Full Disk Scan",
+      "initiatingUserId": null,
+      "isCertValid": false,
+      "isInteractiveSession": false,
+      "isPartialStory": false,
+      "maliciousGroupId": "11111111111",
+      "maliciousProcessArguments": null,
+      "markedAsBenign": false,
+      "mitigationMode": "protect",
+      "mitigationReport": {
+        "kill": {
+          "status": "success"
+        },
+        "network_quarantine": {
+          "status": null
+        },
+        "quarantine": {
+          "status": "success"
+        },
+        "remediate": {
+          "status": null
+        },
+        "remove_macros": {
+          "status": null
+        },
+        "restore_macros": {
+          "status": null
+        },
+        "rollback": {
+          "status": null
+        },
+        "unquarantine": {
+          "status": null
+        }
+      },
+      "mitigationStatus": "mitigated",
+      "publisher": "",
+      "rank": 5,
+      "resolved": false,
+      "siteId": "1626072197849348704",
+      "siteName": "Darrick Windows Assets",
+      "threatAgentVersion": "1.1.1.1",
+      "threatName": "example.txt",
+      "updatedAt": "2023-09-20T09:03:07.151615Z",
+      "username": "",
+      "whiteningOptions": [
+        "path",
+        "hash"
+      ]
     }
   ],
   "pagination": {
-    "nextCursor": null,
-    "totalItems": 1
+    "nextCursor": "ddddddddddOiAiVGhyZWF0Vmlldy5pZCIsICJpZF92YWx1ZSI6IDE3NzgxNDgyMjc4Mzc5MzE2NDAsICJpZF9zb3J0X29yZGVyIjogImFzYyIsICJzb3J0X2J5X2NvbHVtbiI6ICJUaHJlYXRWaWV3LmlkIiwgInNvcnRfYnlfdmFsdWUiOiAxNzc4MTQ4MjI3ODM3OTMxNjQwLCAic29ydF9vcmRlciI6ICJhc2MifQ%3D%3D",
+    "totalItems": 67
   }
 }

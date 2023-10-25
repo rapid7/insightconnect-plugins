@@ -10,7 +10,6 @@ from unittest import TestCase
 from parameterized import parameterized
 
 
-@patch("requests.post", side_effect=Util.mocked_requests_get)
 @patch("requests.request", side_effect=Util.mocked_requests_get)
 class TestGetThreatSummary(TestCase):
     @classmethod
@@ -26,6 +25,6 @@ class TestGetThreatSummary(TestCase):
             ],
         ]
     )
-    def test_get_threat_summary(self, mock_request, mock_post, test_name, expected):
+    def test_get_threat_summary(self, mock_request, test_name, expected):
         actual = self.action.run()
         self.assertEqual(expected, actual)

@@ -1,7 +1,9 @@
 import insightconnect_plugin_runtime
 from .schema import AppsByAgentIdsInput, AppsByAgentIdsOutput, Input, Output, Component
-from komand_sentinelone.util.helper import clean, Helper
+
+# Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_sentinelone.util.helper import clean, Helper
 
 
 class AppsByAgentIds(insightconnect_plugin_runtime.Action):

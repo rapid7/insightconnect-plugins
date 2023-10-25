@@ -1,0 +1,7 @@
+{
+  "incidentStatus": "unresolved",
+  "incidentIds": [
+    "valid_alert_id_1"
+  ],
+  "type": "alerts"
+}

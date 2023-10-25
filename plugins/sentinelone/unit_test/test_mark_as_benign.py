@@ -11,7 +11,6 @@ from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-@patch("requests.post", side_effect=Util.mocked_requests_get)
 @patch("requests.request", side_effect=Util.mocked_requests_get)
 class TestMarkAsBenign(TestCase):
     @classmethod
@@ -38,7 +37,7 @@ class TestMarkAsBenign(TestCase):
             ],
         ]
     )
-    def test_mark_as_benign(self, mock_request, mock_post, test_name, input_params, expected):
+    def test_mark_as_benign(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(expected, actual)
 
@@ -47,12 +46,12 @@ class TestMarkAsBenign(TestCase):
             [
                 "invalid_threat_id",
                 Util.read_file_to_dict("inputs/mark_as_benign_invalid_threat_id.json.inp"),
-                "The server is unable to process the request.",
-                "Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support.",
+                PluginException.causes[PluginException.Preset.BAD_REQUEST],
+                PluginException.assistances[PluginException.Preset.BAD_REQUEST],
             ],
         ]
     )
-    def test_mark_as_benign_raise_exception(self, mock_request, mock_post, test_name, input_params, cause, assistance):
+    def test_mark_as_benign_raise_exception(self, mock_request, test_name, input_params, cause, assistance):
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)

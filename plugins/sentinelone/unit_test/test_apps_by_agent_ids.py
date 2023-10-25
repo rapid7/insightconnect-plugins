@@ -11,7 +11,6 @@ from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-@patch("requests.post", side_effect=Util.mocked_requests_get)
 @patch("requests.request", side_effect=Util.mocked_requests_get)
 class TestAppsByAgentIds(TestCase):
     @classmethod
@@ -28,7 +27,7 @@ class TestAppsByAgentIds(TestCase):
             ],
         ]
     )
-    def test_apps_by_agent_ids(self, mock_request, mock_post, test_name, input_params, expected):
+    def test_apps_by_agent_ids(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(expected, actual)
 
@@ -42,9 +41,7 @@ class TestAppsByAgentIds(TestCase):
             ],
         ]
     )
-    def test_apps_by_agent_ids_raise_exception(
-        self, mock_request, mock_post, test_name, input_params, cause, assistance
-    ):
+    def test_apps_by_agent_ids_raise_exception(self, mock_request, test_name, input_params, cause, assistance):
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)

@@ -175,12 +175,12 @@
         "agentOsName": "string",
         "networkInterfaces": [
           {
-            "physical": "00:25:96:FF:FE:12:34:56",
+            "physical": "12:34:56:12:34:56",
             "inet6": [
               "string",
               "string"
             ],
-            "id": "225494730938493804",
+            "id": "1234567890",
             "name": "string",
             "inet": [
               "string",

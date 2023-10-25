@@ -1,0 +1,7 @@
+{
+  "analystVerdict": "false positive",
+  "incidentIds": [
+    "non_existing_threat_id_1"
+  ],
+  "type": "threats"
+}
