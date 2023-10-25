@@ -1493,13 +1493,6 @@ tasks:
   monitor_siem_logs:
     title: Monitor SIEM Logs
     description: Monitor and retrieve the latest logs
-    input:
-      token:
-        title: Token
-        description: Used to request the next available log file
-        type: string
-        required: false
-        example: 9de5069c5afe602b2ea0a04b66beb2c0
     output:
       data:
         title: Data

@@ -8,6 +8,7 @@ META_FIELD = "meta"
 PAGINATION_FIELD = "pagination"
 TRACKED_EMAILS_FIELD = "trackedEmails"
 TRACKED_EMAILS_ADVANCED_OPTIONS = "advancedTrackAndTraceOptions"
+IS_LAST_TOKEN_FIELD = "isLastToken"  # nosec
 ID_FIELD = "id"
 DOMAIN_FIELD = "domain"
 EMAIL_FIELD = "emailAddress"
