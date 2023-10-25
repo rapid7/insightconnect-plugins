@@ -4,7 +4,7 @@ products: [ insightconnect ]
 name: trendmicro_visionone
 title: Trend Micro Vision One
 description: Trend Micro Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
-version: 1.0.1
+version: 2.0.0
 supported_versions: [ "Trend Micro Vision One API v3" ]
 vendor: trendmicro
 support: community
@@ -642,12 +642,14 @@ triggers:
         type: boolean
         description: If script should wait until the task is finished before returning the result (enabled by default)
         required: true
+        default: true
         example: true
       poll_time_sec:
         title: Poll Time in Seconds
         type: float
         description: Maximum time to wait for the result to be available
         required: false
+        default: 30
         example: 15.5
       interval:
         title: Interval
@@ -935,12 +937,12 @@ actions:
     title: Get Endpoint Data
     description: Retrieves information about a specific endpoint
     input:
-      endpoint:
-        title: Endpoint
-        type: string
-        description: Hostname, macAddress, agentGuid or IP of the endpoint to query
+      endpoints:
+        title: Endpoints
+        type: "[]string"
+        description: Array of endpoints to query by their hostname, macAddress, agentGuid or IP, formated as bracket array separated by comma
         required: true
-        example: 127.127.127.127
+        example: [ ]
       query_op:
         title: Query Operator
         type: string
@@ -1074,12 +1076,14 @@ actions:
         type: boolean
         description: If script should wait until the task is finished before returning the result (enabled by default)
         required: true
+        default: true
         example: true
       poll_time_sec:
         title: Poll Time in Seconds
         type: float
         description: Maximum time to wait for the result to be available
         required: false
+        default: 30
         example: 15.5
     output:
       id:
@@ -1176,12 +1180,14 @@ actions:
         type: boolean
         description: If script should wait until the task is finished before returning the result (enabled by default)
         required: true
+        default: true
         example: true
       poll_time_sec:
         title: Poll Time in Seconds
         type: float
         description: Maximum time to wait for the result to be available
         required: false
+        default: 30
         example: 15.5
     output:
       status:
@@ -1357,12 +1363,14 @@ actions:
         type: boolean
         description: If script should wait until the task is finished before returning the result (enabled by default)
         required: true
+        default: true
         example: true
       poll_time_sec:
         title: Poll Time in Seconds
         type: float
         description: Maximum time to wait for the result to be available
         required: false
+        default: 30
         example: 15.5
     output:
       file:
@@ -1389,12 +1397,14 @@ actions:
         type: boolean
         description: If script should wait until the task is finished before returning the result (enabled by default)
         required: true
+        default: true
         example: true
       poll_time_sec:
         title: Poll Time in Seconds
         type: float
         description: Maximum time to wait for the result to be available
         required: false
+        default: 30
         example: 15.5
     output:
       sandbox_suspicious_list_resp:
@@ -1418,12 +1428,14 @@ actions:
         type: boolean
         description: If script should wait until the task is finished before returning the result (enabled by default)
         required: true
+        default: true
         example: true
       poll_time_sec:
         title: Poll Time in Seconds
         type: float
         description: Maximum time to wait for the result to be available
         required: false
+        default: 30
         example: 15.5
     output:
       file:
@@ -1624,8 +1636,8 @@ actions:
     title: Submit URLs to Sandbox
     description: Submits URLs to the sandbox for analysis. You can submit a maximum of 10 URLs per request
     input:
-      url:
-        title: URL
+      urls:
+        title: URLs
         type: "[]string"
         description: URL(s) to be submitted, formated as bracket array separated by comma
         required: true
