@@ -4,7 +4,7 @@ products: [ insightconnect ]
 name: trendmicro_visionone
 title: Trend Micro Vision One
 description: Trend Micro Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
-version: 1.0.2
+version: 2.0.0
 supported_versions: [ "Trend Micro Vision One API v3" ]
 vendor: trendmicro
 support: community
