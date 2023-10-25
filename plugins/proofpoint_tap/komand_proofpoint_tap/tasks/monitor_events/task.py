@@ -38,7 +38,9 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             # Don't allow collection to go back further than 3 hours max
             if last_collection_date and datetime.fromisoformat(last_collection_date) < max_allowed_lookback:
                 last_collection_date = max_allowed_lookback.isoformat()
-                next_page_index = None
+                if next_page_index:
+                    next_page_index = None
+                    state.pop(self.NEXT_PAGE_INDEX)
                 self.logger.info(f"Last collection date reset to max lookback allowed: {last_collection_date}")
 
             previous_logs_hashes = state.get(self.PREVIOUS_LOGS_HASHES, [])
