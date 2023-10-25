@@ -56,11 +56,10 @@ class AddToSuspiciousList(insightconnect_plugin_runtime.Action):
                     cause="Invalid object type.",
                     assistance="Please check the provided object type and object value.",
                 )
-        # Make Action API Call
-        self.logger.info("Making API Call...")
-        multi_resp = []
+        # Build objects list
+        objects = []
         for block_object in block_objects:
-            response = client.add_to_suspicious_list(
+            objects.append(
                 pytmv1.SuspiciousObjectTask(
                     objectType=block_object["object_type"],
                     objectValue=block_object["object_value"],
@@ -69,15 +68,19 @@ class AddToSuspiciousList(insightconnect_plugin_runtime.Action):
                     days_to_expiration=block_object.get("expiry_days", 30),
                 )
             )
-            if "error" in response.result_code.lower():
-                raise PluginException(
-                    cause="An error occurred while adding to the suspicious list.",
-                    assistance="Please check the input parameters and try again.",
-                    data=response.errors,
-                )
-            items = response.response.dict().get("items")[0]
-            items["task_id"] = "None" if items.get("task_id") is None else items["task_id"]
-            multi_resp.append(items)
+        # Make Action API Call
+        self.logger.info("Making API Call...")
+        response = client.add_to_suspicious_list(*objects)
+        if "error" in response.result_code.lower():
+            raise PluginException(
+                cause="An error occurred while adding to the suspicious list.",
+                assistance="Please check the input parameters and try again.",
+                data=response.errors,
+            )
+        items = response.response.dict().get("items")
+        # Avoid None value
+        for item in items:
+            item["task_id"] = "None" if item.get("task_id") is None else item["task_id"]
         # Return results
         self.logger.info("Returning Results...")
-        return {Output.MULTI_RESPONSE: multi_resp}
+        return {Output.MULTI_RESPONSE: items}
