@@ -83,7 +83,6 @@ class Util:
             return MockResponse("top_clickers", 200)
         if window == 14 or page == 2:
             return MockResponse("top_clickers_empty_users", 200)
-
         if "siem/messages/delivered" in url:
             if interval == "2021-08-24T14:00:00/2021-08-24T15:00:00":
                 return MockResponse("delivered_messages_without_time_start", 200)
@@ -153,11 +152,13 @@ class Util:
                 return MockResponse("blocked_clicks_without_time_start_end", 200)
 
         if "siem/all" in url:
-            if interval == "2023-01-01T00:59:00+00:00/2023-01-01T01:59:00+00:00":
+            if interval == "2023-04-04T04:59:00+00:00/2023-04-04T05:59:00+00:00":
                 return MockResponse("", 400)
             if interval == "2023-02-02T01:59:00+00:00/2023-02-02T02:59:00+00:00":
                 return MockResponse("", 500)
             if interval == "2023-04-04T06:59:00+00:00/2023-04-04T07:59:00+00:00":
+                return MockResponse("monitor_events", 200)
+            if interval == "2023-06-20T13:59:00+00:00/2023-06-20T14:59:00+00:00":
                 return MockResponse("monitor_events", 200)
 
             if interval == "2023-05-01T12:00:00/2023-06-01T13:00:00":
