@@ -37,7 +37,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             else:
                 self.logger.info("Subsequent run")
 
-            limit_time = time() + 60
+            limit_time = time() + 30
             while time() < limit_time:
                 try:
                     output, headers, status_code = self.connection.client.get_siem_logs(header_next_token)
