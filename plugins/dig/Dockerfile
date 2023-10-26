@@ -8,6 +8,8 @@ ENV SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
 ENV SSL_CERT_DIR /etc/ssl/certs
 ENV REQUESTS_CA_BUNDLE  /etc/ssl/certs/ca-certificates.crt
 
+RUN apk add --no-cache bind-tools
+
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD . /python/src
 
