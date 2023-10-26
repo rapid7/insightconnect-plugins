@@ -64,8 +64,24 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                     self.logger.info("Subsequent run")
                     start_time = last_collection_date
                     end_time = (datetime.fromisoformat(last_collection_date) + timedelta(hours=1)).isoformat()
-                    state[self.LAST_COLLECTION_DATE] = end_time
-                    parameters = SiemUtils.prepare_time_range(start_time, end_time, query_params)
+                    if end_time > now.isoformat():
+                        self.logger.info(
+                            f"End time for lookup reset from {end_time} to {now.isoformat()} to avoid going out of range"
+                        )
+                        end_time = now.isoformat()
+
+                    # If the resulting time interval is invalid, do not query API this time around
+                    query_delta = datetime.fromisoformat(end_time) - datetime.fromisoformat(start_time)
+                    if start_time >= end_time or query_delta < timedelta(minutes=1):
+                        self.logger.info(f"Query delta: {query_delta} Time delta allowed: {timedelta(minutes=1)}")
+                        self.logger.info(
+                            f"Start time > End time or Insufficient interval between start time {start_time} and end time {end_time} to avoid going out of query range"
+                        )
+                        self.logger.info("Do not query API this time round")
+                        return [], state, has_more_pages, 200, None
+                    else:
+                        state[self.LAST_COLLECTION_DATE] = end_time
+                        parameters = SiemUtils.prepare_time_range(start_time, end_time, query_params)
 
             self.logger.info(f"Parameters used to query endpoint: {parameters}")
             try:
