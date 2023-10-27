@@ -34,8 +34,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def test(self):
         """
         Tests connectivity to the InsightVM Console via administrative info endpoint
-        :param session: Requests session populated with basic auth credentials
-        :param console_url: URL to the InsightVM console
+
         :return: Namedtuple indicating connectivity (true = success, false = fail) and error message (if one exists)
         """
 

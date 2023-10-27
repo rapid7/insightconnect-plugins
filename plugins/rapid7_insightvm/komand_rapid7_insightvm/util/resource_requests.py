@@ -103,9 +103,9 @@ class ResourceRequests(object):
         extras = {"json": payload, "params": parameters.params}
         try:
             response = request_method(url=endpoint, verify=False, **extras)
-        except requests.RequestException as e:
-            assistance = self._REQUEST_EXCEPTIONS.get(type(e), self._UNHANDLED_EXCEPTION)
-            raise PluginException(cause=e, assistance=assistance)
+        except requests.RequestException as error:
+            assistance = self._REQUEST_EXCEPTIONS.get(type(error), self._UNHANDLED_EXCEPTION)
+            raise PluginException(cause=error, assistance=assistance)
 
         resource_request_status_code_check(response.text, response.status_code)
 
@@ -193,9 +193,9 @@ class ResourceRequests(object):
         extras = {"json": payload, "params": params.params}
         try:
             response = request_method(url=endpoint, verify=False, **extras)
-        except requests.RequestException as e:
-            assistance = self._REQUEST_EXCEPTIONS.get(type(e), self._UNHANDLED_EXCEPTION)
-            raise PluginException(cause=e, assistance=assistance)
+        except requests.RequestException as error:
+            assistance = self._REQUEST_EXCEPTIONS.get(type(error), self._UNHANDLED_EXCEPTION)
+            raise PluginException(cause=error, assistance=assistance)
 
         resource_request_status_code_check(response.text, response.status_code)
         try:
