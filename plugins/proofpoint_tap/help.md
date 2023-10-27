@@ -1171,6 +1171,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.1.1 - Monitor Events Task: Update max lookback time, remove log cleaning, add debugging
 * 4.1.0 - Update to latest plugin SDK
 * 4.0.0 - Add Monitor Events task | Code refactor | Update plugin to be cloud enabled
 * 3.1.2 - Fix invalid type for `blacklisted` in `evidence_type` custom output | Add a conversion to a boolean for `blacklisted` returned as an integer in Fetch Forensics action

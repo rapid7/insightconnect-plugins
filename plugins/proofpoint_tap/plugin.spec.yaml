@@ -4,9 +4,13 @@ products: [insightconnect]
 name: proofpoint_tap
 title: Proofpoint TAP
 description: Parse Proofpoint Targeted Attack Protection (TAP) alerts
-version: 4.1.0
+version: 4.1.1
 connection_version: 4
 supported_versions: ["Proofpoint TAP API v2", "Tested on 2023-06-22"]
+sdk:
+  type: slim
+  version: 5
+  user: nobody
 vendor: rapid7
 support: community
 status: []
