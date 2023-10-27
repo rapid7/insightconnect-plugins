@@ -1962,56 +1962,67 @@ actions:
         title: Status
         type: string
         required: false
+        example: running
       scanType:
         description: Scan type (manual, automated, scheduled)
         title: Scan Type
         type: string
         required: false
+        example: Manual
       assets:
         description: Number of assets within the scan
         title: Assets
         type: integer
         required: false
+        example: 0
       links:
         description: Hypermedia links to corresponding or related resources
         title: Links
         type: '[]link'
         required: false
+        example: [ { "href": "https://insightvm:3780/api/3/scans/188934", "rel": "self" } ]
       vulnerabilities:
         description: Counts of vulnerabilities found within the scan
         title: Vulnerabilities
         type: vulnerabilities_count
         required: false
+        example: { "critical": 0, "moderate": 0, "severe": 0, "total": 0 }
       startTime:
         description: Start time of the scan in ISO8601 format
         title: Start Time
         type: string
         required: false
+        example: 2018-04-23T04:21:05.500Z
       duration:
         description: Duration of the scan in ISO8601 format
         title: Duration
         type: string
         required: false
+        example: 2018-04-23T04:21:05.500Z
       engineName:
         description: Name of the engine used for the scan
         title: Engine Name
         type: string
         required: false
+        example: Local scan engine
       endTime:
         description: End time of the scan in ISO8601 format
         title: End Time
         type: string
         required: false
+        example: 2018-04-23T04:21:05.500Z
       id:
         description: ID of the scan
         title: ID
         type: integer
         required: false
+        example: 188934
       scanName:
         description: User-driven scan name for the scan
         title: Scan Name
         type: string
         required: false
+        example: API Scan - 2018-04-23T04:21:05Z
   get_site_assets:
     title: Get Site Assets
     description: Gets assets for a site
@@ -2028,6 +2039,7 @@ actions:
         description: Assets
         type: '[]asset'
         required: false
+        example: []
   get_scan_assets:
     title: Get Scan Assets
     description: Gets assets for a scan
@@ -2044,6 +2056,7 @@ actions:
         description: Assets
         type: '[]asset'
         required: false
+        example: []
   get_asset_vulnerabilities:
     title: Get Asset Vulnerabilities
     description: Get vulnerabilities found on an asset. Can only be used if the asset
@@ -2067,6 +2080,7 @@ actions:
         description: Vulnerabilities found on the asset
         type: '[]asset_vulnerability'
         required: false
+        example: []
   get_asset_software:
     title: Get Asset Software
     description: Get software found on an asset. Can only be used if the asset has first been scanned
@@ -2083,6 +2097,7 @@ actions:
         description: Software found on the asset
         type: '[]software'
         required: false
+        example: []
   download_report:
     title: Download Report
     description: Returns the contents of a generated report
@@ -2105,6 +2120,7 @@ actions:
         description: Base64 encoded report
         type: bytes
         required: false
+        example: ZXhhbXBsZQ==
   list_reports:
     title: List Reports
     description: List reports and return their identifiers
@@ -2127,11 +2143,13 @@ actions:
         description: Whether optional user supplied report name was found
         type: boolean
         required: false
+        example: false
       list:
         title: List of Reports
         description: List of report identifiers
         type: '[]report_id'
         required: false
+        example: []
   get_vulnerability_affected_assets:
     title: Get Vulnerability Affected Assets
     description: Get the assets affected by the vulnerability
@@ -2148,11 +2166,13 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
       resources:
         title: Resources
         description: The identifiers of the associated resources
         type: '[]integer'
         required: true
+        example: []
   create_tag:
     title: Create Tag
     description: Create a new tag
@@ -2199,6 +2219,7 @@ actions:
         description: ID of the created tag
         type: integer
         required: true
+        example: 665
   delete_tag:
     title: Delete Tag
     description: Delete an existing tag
@@ -2215,6 +2236,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   get_tags:
     title: Get Tags
     description: Get a listing of all tags and return their details
@@ -2246,6 +2268,7 @@ actions:
         description: List of tags
         type: '[]tag'
         required: true
+        example: []
   get_tag:
     title: Get Tag
     description: Get tag details by tag ID
@@ -2262,6 +2285,7 @@ actions:
         description: Tag Details
         type: tag
         required: true
+        example: {}
   get_tag_sites:
     title: Get Tag Sites
     description: Get site IDs associated with a tag
@@ -2278,6 +2302,7 @@ actions:
         description: Site IDs associated with the tag
         type: '[]integer'
         required: true
+        example: []
   get_tag_assets:
     title: Get Tag Assets
     description: Get asset IDs associated with a tag
@@ -2294,6 +2319,7 @@ actions:
         description: Asset IDs and tag association sources for the tag
         type: '[]tag_asset'
         required: true
+        example: []
   get_tag_asset_groups:
     title: Get Tag Asset Groups
     description: Get asset groups associated with a tag
@@ -2310,6 +2336,7 @@ actions:
         description: Asset group IDs associated with the tag
         type: '[]integer'
         required: true
+        example: []
   remove_asset_tag:
     title: Remove Asset Tag
     description: Remove a tag from an asset
@@ -2332,6 +2359,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   remove_asset_group_tags:
     title: Remove Asset Group Tags
     description: Remove all tags from an asset group
@@ -2348,6 +2376,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   remove_tag_asset_groups:
     title: Remove Tag Asset Groups
     description: Remove all asset group associations from a tag
@@ -2364,6 +2393,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   remove_tag_sites:
     title: Remove Tag Sites
     description: Remove all site associations from a tag
@@ -2380,6 +2410,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   remove_tag_search_criteria:
     title: Remove Tag Search Criteria
     description: Remove all search criteria from a tag
@@ -2396,6 +2427,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   tag_site:
     title: Tag Site
     description: Add a tag to a site
@@ -2418,6 +2450,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   tag_asset:
     title: Tag Asset
     description: Add a tag to an asset
@@ -2440,6 +2473,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   tag_assets:
     title: Tag Assets
     description: Add a tag to multiple assets in bulk
@@ -2480,6 +2514,7 @@ actions:
         description: Was the operation successful
         type: boolean
         required: true
+        example: true
   tag_asset_group:
     title: Tag Asset Group
     description: Add a tag to an asset group
@@ -2502,6 +2537,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   update_tag_search_criteria:
     title: Update Tag Search Criteria
     description: Update the search criteria for an existing tag
@@ -2524,6 +2560,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   asset_search:
     title: Asset Search
     description: Search for assets using filtered asset search
@@ -2553,6 +2590,7 @@ actions:
         description: List of asset details returned by the search
         type: '[]asset'
         required: true
+        example: []
   get_asset:
     title: Get Asset
     description: Gets an asset by ID
@@ -2569,6 +2607,7 @@ actions:
         description: Asset details
         type: asset
         required: true
+        example: {}
   get_asset_tags:
     title: Get Asset Tags
     description: Get a listing of all tags for an asset
@@ -2585,6 +2624,7 @@ actions:
         description: List of tags
         type: '[]tag'
         required: true
+        example: []
   get_sites:
     title: Get Sites
     description: Get a list of sites
@@ -2602,6 +2642,7 @@ actions:
         description: List of sites
         type: '[]site'
         required: true
+        example: []
   get_site:
     title: Get Site
     description: Get a site by ID
@@ -2618,6 +2659,7 @@ actions:
         description: Site details
         type: site
         required: true
+        example: {}
   create_site:
     title: Create Site
     description: Create a new site
@@ -2696,11 +2738,13 @@ actions:
         description: The identifier of the created site
         type: integer
         required: true
+        example: 15
       links:
         title: Links
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   update_site:
     title: Update Site
     description: Update an existing site
@@ -2755,11 +2799,13 @@ actions:
         description: The identifier of the updated site
         type: integer
         required: true
+        example: 332
       links:
         title: Links
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   update_site_included_targets:
     title: Update Site Included Targets
     description: Update an existing site scope of included IP address and hostname
@@ -2798,6 +2844,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   update_site_excluded_targets:
     title: Update Site Excluded Targets
     description: Update an existing site scope of excluded IP address and hostname
@@ -2836,6 +2883,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   update_site_included_asset_groups:
     title: Update Site Included Asset Groups
     description: Update an existing site scope of included asset groups
@@ -2867,11 +2915,13 @@ actions:
         description: The identifier of the updated site
         type: integer
         required: true
+        example: 332
       links:
         title: Links
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   update_site_excluded_asset_groups:
     title: Update Site Excluded Asset Groups
     description: Update an existing site scope of excluded asset groups
@@ -2903,11 +2953,13 @@ actions:
         description: The identifier of the updated site
         type: integer
         required: true
+        example: 332
       links:
         title: Links
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   delete_site:
     title: Delete Site
     description: Delete an existing site
@@ -2924,6 +2976,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   get_asset_groups:
     title: Get Asset Groups
     description: Get a list of asset groups
@@ -2941,6 +2994,7 @@ actions:
         description: List of asset groups
         type: '[]asset_group'
         required: true
+        example: []
   get_asset_group:
     title: Get Asset Group
     description: Get an asset group by ID
@@ -2957,6 +3011,7 @@ actions:
         description: Asset group
         type: asset_group
         required: true
+        example: []
   create_asset_group:
     title: Create Asset Group
     description: Create an asset group
@@ -2994,6 +3049,7 @@ actions:
         description: ID of the created tag
         type: integer
         required: true
+        example: 20
   delete_asset_group:
     title: Delete Asset Group
     description: Delete an existing asset group
@@ -3010,6 +3066,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   update_asset_group_search_criteria:
     title: Update Asset Group Search Criteria
     description: Update the search criteria for an existing asset group
@@ -3032,6 +3089,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   get_vulnerabilities_by_cve:
     title: Get Vulnerabilities by CVE
     description: Get vulnerability details associated with a CVE
@@ -3048,6 +3106,7 @@ actions:
         description: Vulnerability details
         type: '[]vulnerability'
         required: true
+        example: []
   get_scans:
     title: Get Scans
     description: Get scans with optional site filter
@@ -3071,6 +3130,7 @@ actions:
         description: List of scan details
         type: '[]scan'
         required: true
+        example: []
   update_scan_status:
     title: Update Scan Status
     description: Update the status of a scan
@@ -3098,6 +3158,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   generate_shared_secret:
     title: Generate Shared Secret
     description: Generate a shared secret to pair a scan engine to a security console
@@ -3115,6 +3176,7 @@ actions:
         description: Scan engine pairing shared secret
         type: string
         required: true
+        example: 99DB-B9F0-CD8B-5997-06BF-607B-BA21-0A81
   get_scan_engines:
     title: Get Scan Engines
     description: List scan engines paired with the security console
@@ -3139,6 +3201,7 @@ actions:
         description: List of scan engines details
         type: '[]scan_engine'
         required: true
+        example: []
   get_scan_engine:
     title: Get Scan Engine
     description: Get a scan engine by ID
@@ -3155,6 +3218,7 @@ actions:
         description: Scan engine details
         type: scan_engine
         required: true
+        example: {}
   create_scan_engine:
     title: Create Scan Engine
     description: Create a new scan engine with console engine connectivity
@@ -3191,11 +3255,13 @@ actions:
         description: Scan engine ID
         type: integer
         required: true
+        example: 12
       links:
         title: Links
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   delete_scan_engine:
     title: Delete Scan Engine
     description: Delete an existing scan engine from the security console
@@ -3212,6 +3278,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   get_scan_engine_pools:
     title: Get Scan Engine Pools
     description: Retrieve a list of configured scan engine pools
@@ -3229,6 +3296,7 @@ actions:
         description: List of scan engine pool details
         type: '[]scan_engine_pool'
         required: true
+        example: []
   get_scan_engine_pool:
     title: Get Scan Engine Pool
     description: Retrieve scan engine pool details by ID
@@ -3245,6 +3313,7 @@ actions:
         description: Scan engine pool details
         type: scan_engine_pool
         required: true
+        example: {}
   create_scan_engine_pool:
     title: Create Scan Engine Pool
     description: Create a new scan engine pool
@@ -3267,11 +3336,13 @@ actions:
         description: Scan engine pool ID
         type: integer
         required: true
+        example: 13
       links:
         title: Links
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   add_scan_engine_pool_engine:
     title: Add Scan Engine Pool Engine
     description: Add a scan engine to a scan engine pool (AWS pre-authorized engine
@@ -3295,6 +3366,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   remove_scan_engine_pool_engine:
     title: Remove Scan Engine Pool Engine
     description: Remove a scan engine from a scan engine pool
@@ -3317,6 +3389,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   delete_scan_engine_pool:
     title: Delete Scan Engine Pool
     description: Delete an existing scan engine pool from the security console
@@ -3333,6 +3406,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   update_site_scan_engine:
     title: Update Site Scan Engine
     description: Update the scan engine/scan engine pool associated with a site
@@ -3356,6 +3430,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   get_authentication_sources:
     title: Get Authentication Sources
     description: List authentication sources available for InsightVM users
@@ -3387,6 +3462,7 @@ actions:
         description: List of authentication sources
         type: '[]authentication_source'
         required: true
+        example: []
   get_authentication_source:
     title: Get Authentication Source
     description: Get the details for an authentication source
@@ -3403,6 +3479,7 @@ actions:
         description: User authentication source
         type: authentication_source
         required: true
+        example: {}
   get_roles:
     title: Get Roles
     description: List role details
@@ -3419,6 +3496,7 @@ actions:
         description: List of roles
         type: '[]role'
         required: true
+        example: []
   get_role:
     title: Get Role
     description: Get role details by ID
@@ -3435,6 +3513,7 @@ actions:
         description: Role details
         type: role
         required: true
+        example: {}
   get_users:
     title: Get Users
     description: List user accounts
@@ -3459,6 +3538,7 @@ actions:
         description: List of user account details
         type: '[]user_account'
         required: true
+        example: []
   get_user:
     title: Get User
     description: Get user account details by ID
@@ -3475,6 +3555,7 @@ actions:
         description: User account details
         type: user_account
         required: true
+        example: {}
   create_user:
     title: Create User
     description: Create a new user account (limited to external authentication sources)
@@ -3551,11 +3632,13 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
       id:
         title: ID
         description: The identifier of the created user account
         type: integer
         required: true
+        example: 83
   update_user:
     title: Update User
     description: Update the configuration of an existing user account
@@ -3640,6 +3723,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   delete_user:
     title: Delete User
     description: Delete an user account
@@ -3656,6 +3740,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   disable_user:
     title: Disable User
     description: Disable an user account
@@ -3672,6 +3757,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   enable_user:
     title: Enable User
     description: Enable an user account
@@ -3688,6 +3774,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   update_user_role:
     title: Update User Role
     description: Update the role associated with an user account
@@ -3724,6 +3811,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   update_user_asset_group_access:
     title: Update User Asset Group Access
     description: Update the asset groups to which a user has access in bulk. It can
@@ -3748,6 +3836,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   add_user_asset_group_access:
     title: Add User Asset Group Access
     description: Grant an user account access to an asset group by ID
@@ -3770,6 +3859,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   remove_user_asset_group_access:
     title: Remove User Asset Group Access
     description: Remove asset group access from an user account
@@ -3792,6 +3882,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   update_user_site_access:
     title: Update User Site Access
     description: Update the sites to which a user has access in bulk. It can be used
@@ -3816,6 +3907,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   add_user_site_access:
     title: Add User Site Access
     description: Grant an user account access to a site by ID
@@ -3838,6 +3930,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   remove_user_site_access:
     title: Remove User Site Access
     description: Remove site access from an user account
@@ -3860,6 +3953,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   top_remediations:
     title: Top Remediations
     description: Generate results for the top remediations based on a defined scope
@@ -3915,6 +4009,7 @@ actions:
         description: List of top remediations
         type: '[]remediation'
         required: true
+        example: []
   generate_adhoc_sql_report:
     title: Generate AdHoc SQL Report
     description: Create, generate, download, and cleanup a SQL report based on the provided query
@@ -3959,6 +4054,7 @@ actions:
         title: Base64 Encoded Report
         description: Base64 encoded file making up the report
         required: true
+        example: { "filename": "<name>", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" }
   review_exception:
     title: Review Vulnerability Exception
     description: Approve or Reject a Vulnerability Exception
@@ -3990,6 +4086,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   delete_exception:
     title: Delete Vulnerability Exception
     description: Delete an existing vulnerability exception
@@ -4006,6 +4103,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   create_exception:
     title: Create Vulnerability Exception Submission
     description: Create a vulnerability exception submission
@@ -4077,11 +4175,13 @@ actions:
         description: The vulnerability exception that was created
         type: integer
         required: true
+        example: 35
       links:
         title: Links
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
   get_vulnerability:
     title: Get Vulnerability Details
     description: Get the details of a specific vulnerability by id
@@ -4098,6 +4198,7 @@ actions:
         description: The details of the vulnerability requested
         type: vulnerability
         required: true
+        example: {}
   get_asset_group_assets:
     title: Get Asset Group Assets
     description: Get asset group assets
@@ -4114,11 +4215,13 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
       resources:
         title: Resources
         description: The identifiers of the associated resources
         type: '[]integer'
         required: false
+        example: []
   delete_asset:
     title: Delete an Asset
     description: Delete an Asset
@@ -4135,6 +4238,7 @@ actions:
         description: Was the operation successful
         type: boolean
         required: true
+        example: false
   list_inactive_assets:
     title: List Inactive Assets
     description: Returns a list of inactive assets (limit 1000) determined by how many days ago they were scanned
@@ -4159,6 +4263,7 @@ actions:
         description: A list of inactive assets
         type: "[]asset"
         required: true
+        example: []
   get_expiring_vulnerability_exceptions:
     title: Get Expiring Vulnerability Exceptions
     description: Return a list of expiring vulnerability exceptions
@@ -4176,6 +4281,7 @@ actions:
         description: Exceptions about to expire
         type: "[]vulnerability_exception"
         required: false
+        example: []
   update_vulnerability_exception_expiration_date:
     title: Update Vulnerability Exception Expiration Date
     description: Update vulnerability exception expiration date
@@ -4221,6 +4327,7 @@ actions:
         description: Highest-superceding rollup solutions for a vulnerabilities on an asset
         type: "[]vulnerability_solution"
         required: true
+        example: []
   update_shared_credential:
     title: Update Shared Credentials
     description: Update shared credentials
@@ -4304,6 +4411,7 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+        example: []
 triggers:
   new_scans:
     title: New Scans
@@ -4343,6 +4451,7 @@ triggers:
         description: InsightVM Scan
         type: scan
         required: false
+        example: {}
   new_exception_request:
     title: New Vulnerability Exception
     description: Check for new InsightVM vulnerability exceptions
@@ -4367,3 +4476,4 @@ triggers:
         description: InsightVM vulnerability exception
         type: vulnerability_exception
         required: false
+        example: {}
