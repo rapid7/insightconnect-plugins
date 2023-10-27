@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "id": "same_status_threat_id_1",
+      "status": "active",
+      "threatInfo": {
+        "analystVerdict": "false_positive",
+        "incidentStatus": "in_progress"
+      }
+    }
+  ],
+  "pagination": {
+    "nextCursor": null,
+    "totalItems": 1
+  }
+}

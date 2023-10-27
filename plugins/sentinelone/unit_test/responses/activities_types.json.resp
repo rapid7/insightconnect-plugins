@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "action": "Account Created",
+      "descriptionTemplate": "The management user {{ username }} created {{ account_name }} account.",
+      "id": 5040
+    },
+    {
+      "action": "Account Deleted",
+      "descriptionTemplate": "The management user {{ username }} deleted the account {{ account_name }}",
+      "id": 5042
+    },
+    {
+      "action": "Account Expired",
+      "descriptionTemplate": "The account {{ account_name }} expired automatically at {{ account_expiration | datetime}} because the expiration day was over",
+      "id": 5043
+    },
+    {
+      "action": "Account marked as Expired",
+      "descriptionTemplate": "The management user {{ username }} marked account {{ account_name }} as expired",
+      "id": 5045
+    }
+  ]
+}

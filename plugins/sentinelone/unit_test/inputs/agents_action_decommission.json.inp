@@ -1,0 +1,4 @@
+{
+  "action": "decommission",
+  "filter": {"ids":["0000000000000000001"]}
+}

@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import GetEventsByTypeInput, GetEventsByTypeOutput, Input, Output, Component
 
 # Custom imports below
+from komand_sentinelone.util.helper import clean
 
 
 class GetEventsByType(insightconnect_plugin_runtime.Action):
@@ -15,22 +16,16 @@ class GetEventsByType(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         limit = params.get(Input.LIMIT)
-        sub_query = params.get(Input.SUB_QUERY)
-        get_all_results = False
+        get_all_results = True
 
-        params = {"queryId": params.get(Input.QUERY_ID)}
+        parameters = {"queryId": params.get(Input.QUERYID), "subQuery": params.get(Input.SUBQUERY), "limit": 1000}
 
-        if limit:
-            params["limit"] = limit
-        else:
-            get_all_results = True
-        if sub_query:
-            params["subQuery"] = sub_query
+        response = clean(self.connection.client.get_events(clean(parameters), get_all_results))
+        events_data = clean(
+            [event for event in response.get("data", []) if event.get("eventType") == params.get(Input.EVENTTYPE)]
+        )
 
         return {
-            Output.RESPONSE: self.connection.get_events(
-                params,
-                get_all_results,
-                event_type=params.get(Input.EVENT_TYPE),
-            )
+            Output.EVENTS: events_data[0:limit] if limit and limit in range(1, 1000) else events_data,
+            **clean({Output.ERRORS: response.get("errors", [])}),
         }

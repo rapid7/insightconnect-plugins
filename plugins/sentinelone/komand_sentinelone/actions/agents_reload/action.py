@@ -1,6 +1,8 @@
 import insightconnect_plugin_runtime
 from .schema import AgentsReloadInput, AgentsReloadOutput, Input, Output, Component
 
+# Custom imports below
+
 
 class AgentsReload(insightconnect_plugin_runtime.Action):
     def __init__(self):
@@ -12,8 +14,10 @@ class AgentsReload(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        response = self.connection.agents_support_action("reload", params.get(Input.FILTER), params.get(Input.MODULE))
-
-        affected = response.get("data", {}).get("affected", 0)
-
-        return {Output.AFFECTED: affected}
+        return {
+            Output.AFFECTED: self.connection.client.agents_support_action(
+                "reload", {"filter": params.get(Input.FILTER), "data": {"module": params.get(Input.MODULE)}}
+            )
+            .get("data", {})
+            .get("affected", 0)
+        }

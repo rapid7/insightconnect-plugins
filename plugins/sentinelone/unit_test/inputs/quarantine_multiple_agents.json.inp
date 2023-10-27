@@ -1,0 +1,5 @@
+{
+  "agent": "Hostname1",
+  "quarantineState": true,
+  "whitelist": []
+}
