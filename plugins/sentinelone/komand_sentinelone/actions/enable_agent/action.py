@@ -16,8 +16,11 @@ class EnableAgent(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         agent = params.get(Input.AGENT)
         user_filter = params.get(Input.FILTER, {})
-        reboot = params.get(Input.REBOOT)
         if agent:
             user_filter["uuid"] = self.connection.client.get_agent_uuid(agent)
 
-        return {Output.AFFECTED: self.connection.enable_agent(reboot, user_filter).get("data", {}).get("affected", 0)}
+        return {
+            Output.AFFECTED: self.connection.client.enable_agent(params.get(Input.REBOOT), user_filter)
+            .get("data", {})
+            .get("affected", 0)
+        }

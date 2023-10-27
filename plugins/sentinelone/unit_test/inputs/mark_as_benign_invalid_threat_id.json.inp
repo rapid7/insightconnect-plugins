@@ -1,0 +1,5 @@
+{
+  "targetScope": "site",
+  "threatId": "invalid_id",
+  "whiteningOption": "file_hash"
+}

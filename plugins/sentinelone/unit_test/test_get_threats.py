@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath("../"))
 
 from komand_sentinelone.triggers import GetThreats
 from komand_sentinelone.triggers.get_threats.schema import Input
-from unit_test.util import Util
+from util import Util
 from unittest import TestCase
 from unittest.mock import patch
 
@@ -38,7 +38,7 @@ class MockTrigger:
 
 
 def check_error():
-    expected = {"threat": {"id": "1111-1111-11111111-1111", "status": "active"}}
+    expected = Util.read_file_to_dict("expected/threats.json.exp")
     if MockTrigger.actual == expected:
         return True
 
@@ -55,13 +55,13 @@ class TestGetThreats(TestCase):
     @timeout_decorator.timeout(2)
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
-    def test_poll_threats(self, mock_request, ss):
+    def test_get_threats(self, mock_request, mock_send):
         self.action.run(
             {
                 Input.FREQUENCY: 5,
                 Input.RESOLVED: True,
-                Input.CLASSIFICATIONS: ["class1"],
-                Input.AGENT_IS_ACTIVE: True,
-                Input.ENGINES: ["engine1"],
+                Input.CLASSIFICATIONS: ["Malware"],
+                Input.AGENTISACTIVE: True,
+                Input.ENGINES: [],
             }
         )

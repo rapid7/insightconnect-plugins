@@ -1,0 +1,11 @@
+{
+  "ids": [],
+  "inputParameters": "",
+  "outputDestination": "None",
+  "outputDirectory": "",
+  "password": "",
+  "scriptId": "1234567891234567891",
+  "taskDescription": "Test",
+  "timeout": 3600,
+  "code": "123456"
+}

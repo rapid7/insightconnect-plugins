@@ -1,10 +1,9 @@
 import insightconnect_plugin_runtime
-from typing import List
-
 from .schema import QuarantineInput, QuarantineOutput, Input, Output, Component
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
+from typing import List
 
 
 class Quarantine(insightconnect_plugin_runtime.Action):
@@ -18,59 +17,63 @@ class Quarantine(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         agent = params.get(Input.AGENT)
-        case_sensitive = params.get(Input.CASE_SENSITIVE)
-        agents = self.connection.client.search_agents(agent, case_sensitive=case_sensitive, results_length=2)
-        whitelist = params.get(Input.WHITELIST, None)
+        whitelist = params.get(Input.WHITELIST)
+        not_affected = 0
+        agents = self.connection.client.search_agents(agent)
 
-        not_affected = {"data": {"affected": 0}}
-
-        if self.__check_agents_found(agents):
+        if not self.__check_agents_found(agents):
             self.logger.info(f"No agents found using the host information: {agent}.")
-            return {Output.RESPONSE: not_affected}
+            return {Output.AFFECTED: not_affected}
 
-        agent_obj = agents[0]
+        agent_object = agents[0]
+        payload = {"ids": [agent_object.get("id")]}
 
-        payload = {"ids": [agent_obj["id"]]}
-
-        if params.get(Input.QUARANTINE_STATE):
-            if self.__check_disconnected(agent_obj):
-                self.logger.info(f"Agent: {agent} is already quarantined")
-                return {Output.RESPONSE: not_affected}
+        if params.get(Input.QUARANTINESTATE):
+            if self.__check_disconnected(agent_object):
+                self.logger.info(f"Agent {agent} is already quarantined.")
+                return {Output.AFFECTED: not_affected}
             if whitelist:
-                self.__find_in_whitelist(agent_obj, whitelist)
-            return {Output.RESPONSE: self.connection.agents_action("disconnect", payload)}
+                self.__find_in_whitelist(agent_object, whitelist)
+            return {
+                Output.AFFECTED: self.connection.client.agents_action("disconnect", payload)
+                .get("data", {})
+                .get("affected", 0)
+            }
 
-        return {Output.RESPONSE: self.connection.agents_action("connect", payload)}
+        return {
+            Output.AFFECTED: self.connection.client.agents_action("connect", payload).get("data", {}).get("affected", 0)
+        }
 
     @staticmethod
     def __check_agents_found(agents: list) -> bool:
+        if not agents:
+            return False
         if len(agents) > 1:
             raise PluginException(
                 cause="Multiple agents found.",
                 assistance="Please provide a unique identifier for the agent to be quarantined.",
             )
-        if len(agents) == 0:
-            return True
-        return False
+        return True
 
     @staticmethod
-    def __check_disconnected(agent_obj: dict) -> bool:
-        if agent_obj["networkStatus"] == "disconnected" or agent_obj["networkStatus"] == "disconnecting":
+    def __check_disconnected(agent_object: dict) -> bool:
+        if agent_object.get("networkStatus") in ["disconnected", "disconnecting"]:
             return True
         return False
 
-    def __find_in_whitelist(self, agent_obj: dict, whitelist: list):
-        for key, value in agent_obj.items():
+    def __find_in_whitelist(self, agent_object: dict, whitelist: list):
+        for key, value in agent_object.items():
             if key in ["externalIp", "computerName", "id", "uuid"]:
                 self.__raise_when_value_in_whitelist(value, whitelist)
             if key == "networkInterfaces":
                 network_dict = value[0]
-                for network_key, network_val in network_dict.items():
+                for network_key, network_value in network_dict.items():
                     if network_key in ["inet", "inet6"]:
-                        for ip_address in network_val:
+                        for ip_address in network_value:
                             self.__raise_when_value_in_whitelist(ip_address, whitelist)
 
-    def __raise_when_value_in_whitelist(self, value: str, whitelist: List[str]):
+    @staticmethod
+    def __raise_when_value_in_whitelist(value: str, whitelist: List[str]):
         if value in whitelist:
             raise PluginException(
                 cause="Agent found in the whitelist.",
