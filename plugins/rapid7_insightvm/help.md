@@ -1998,7 +1998,7 @@ Example output:
 
 ```
 {
-  "success": true,
+  "success": true
 }
 ```
 
@@ -5706,6 +5706,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 6.1.1 - Update actions `Update Site Excluded Targets` and `Update Site Included Targets` to prevent error on empty addresses
 * 6.1.0 - Add new optional input `override_blackout` in `Scan` action
 * 6.0.0 - Fix file output type for `Generate Adhoc SQL Report` | Replace custom output type `file` with `insightvm_file` for each item in the `asset` `files` output in multiple actions
 * 5.1.0 - Add new action update shared credential
@@ -5751,7 +5752,8 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
+* [InsightVM](https://www.rapid7.com/products/insightvm/)
+
 ## References
 
-* [InsightVM](https://www.rapid7.com/products/insightvm/)
 * [InsightVM API 3](https://help.rapid7.com/insightvm/en-us/api/index.html)

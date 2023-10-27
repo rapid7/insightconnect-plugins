@@ -42,6 +42,13 @@ class TestUpdateSiteExcludedTargets(TestCase):
                 {"id": 1, "links": [{"href": "https://example.com/api/3/sites/1/excluded_targets", "rel": "self"}]},
             ],
             [
+                "add_empty_addresses",
+                2,
+                [],
+                False,
+                {"id": 2, "links": [{"href": "https://example.com/api/3/sites/2/excluded_targets", "rel": "self"}]},
+            ],
+            [
                 "overwrite_single_address",
                 1,
                 ["198.51.100.100"],
