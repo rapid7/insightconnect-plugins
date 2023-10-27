@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime.exceptions import PluginException
-
 from .schema import UpdateAnalystVerdictInput, UpdateAnalystVerdictOutput, Input, Output, Component
+
+# Custom imports below
 
 
 class UpdateAnalystVerdict(insightconnect_plugin_runtime.Action):
@@ -15,19 +15,14 @@ class UpdateAnalystVerdict(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         incident_type = params.get(Input.TYPE)
-        analyst_verdict = params.get(Input.ANALYST_VERDICT).replace(" ", "_")
-        incidents = self.connection.remove_non_existing_incidents(
-            list(set(params.get(Input.INCIDENT_IDS))), incident_type
+        analyst_verdict = params.get(Input.ANALYSTVERDICT).replace(" ", "_")
+        incidents = self.connection.client.validate_incidents(
+            params.get(Input.INCIDENTIDS), incident_type, analyst_verdict, "analystVerdict"
         )
-        incidents = self.connection.validate_incident_state(incidents, incident_type, analyst_verdict, "analystVerdict")
-        if not incidents:
-            raise PluginException(
-                cause=f"No {incident_type} to update in SentinelOne.",
-                assistance=f"Please verify the log, the {incident_type} are already set to the new analyst verdict"
-                " or do not exist in SentinelOne.",
+        return {
+            Output.AFFECTED: self.connection.client.update_analyst_verdict(
+                incident_type, {"filter": {"ids": incidents}, "data": {"analystVerdict": analyst_verdict}}
             )
-
-        response = self.connection.update_analyst_verdict(incidents, analyst_verdict, incident_type)
-        affected = response.get("data", {}).get("affected", 0)
-
-        return {Output.AFFECTED: affected}
+            .get("data", {})
+            .get("affected", 0)
+        }

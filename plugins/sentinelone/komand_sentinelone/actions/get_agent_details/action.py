@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import GetAgentDetailsInput, GetAgentDetailsOutput, Input, Output, Component
 
 # Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class GetAgentDetails(insightconnect_plugin_runtime.Action):
@@ -17,17 +18,14 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
         agent = params.get(Input.AGENT)
         output = self.connection.client.search_agents(
             agent,
-            case_sensitive=params.get(Input.CASE_SENSITIVE),
-            api_version="2.1",
-            operational_state=params.get(Input.OPERATIONAL_STATE, None),
+            operational_state=params.get(Input.OPERATIONALSTATE, None),
         )
 
         if len(output) > 1:
-            self.logger.info(
-                f"Multiple agents found that matched the query: {agent}. We will only act upon the first match"
+            raise PluginException(
+                cause="Multiple agents found.",
+                assistance="Please provide a unique agent identifier so the action can be performed on the intended "
+                "agent.",
             )
 
-        if len(output) == 0:
-            return {Output.AGENT: {}}
-
-        return {Output.AGENT: output[0]}
+        return {Output.AGENT: {} if len(output) == 0 else output[0]}

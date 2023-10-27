@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import CancelRunningQueryInput, CancelRunningQueryOutput, Input, Output, Component
+from .schema import CancelRunningQueryInput, CancelRunningQueryOutput, Output, Component
 
 # Custom imports below
 
@@ -14,4 +14,4 @@ class CancelRunningQuery(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {Output.RESPONSE: self.connection.cancel_running_query(params.get(Input.QUERY_ID))}
+        return {Output.RESPONSE: self.connection.client.cancel_running_query(params).get("data", {})}

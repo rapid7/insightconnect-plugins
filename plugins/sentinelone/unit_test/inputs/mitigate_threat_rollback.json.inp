@@ -1,0 +1,4 @@
+{
+  "action": "rollback-remediation",
+  "threatId": "1000000000000000000"
+}

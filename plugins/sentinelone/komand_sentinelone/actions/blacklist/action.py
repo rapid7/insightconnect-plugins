@@ -1,12 +1,11 @@
+import insightconnect_plugin_runtime
+from .schema import BlacklistInput, BlacklistOutput, Component, Input, Output
+
 # Custom imports below
 import re
-
-import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 from typing import List
-
-from ...util.helper import BlacklistMessage
-from .schema import BlacklistInput, BlacklistOutput, Component, Input, Output
+from komand_sentinelone.util.constants import BlacklistMessage
 
 
 class Blacklist(insightconnect_plugin_runtime.Action):
@@ -19,36 +18,29 @@ class Blacklist(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        if re.match(r"\b[0-9a-f]{40}\b", params.get(Input.HASH)) is None:
+        provided_hash = params.get(Input.HASH)
+        if not re.match(r"\b[0-9a-f]{40}\b", provided_hash):
             raise PluginException(
                 cause="An invalid hash was provided.",
                 assistance="Please enter a SHA1 hash and try again.",
             )
 
-        blacklist_state = params.get(Input.BLACKLIST_STATE)
-        if blacklist_state is True:
-            errors = self.connection.create_blacklist_item(
-                params.get(Input.HASH),
-                params.get(Input.DESCRIPTION, "Hash Blacklisted from InsightConnect"),
+        blacklist_state = params.get(Input.BLACKLISTSTATE)
+        if blacklist_state:
+            success = self.connection.client.create_blacklist_item(
+                provided_hash,
+                params.get(Input.DESCRIPTION, "Hash blacklisted from InsightConnect"),
             )
-            message = BlacklistMessage.blocked
+            message = BlacklistMessage.blocked if success else BlacklistMessage.already_blocked
         else:
-            item_ids = self.connection.get_item_ids_by_hash(params.get(Input.HASH))
-            errors = self.connection.delete_blacklist_item_by_hash(item_ids)
+            item_ids = self.connection.client.get_item_ids_by_hash(provided_hash)
+            success = self.connection.client.delete_blacklist_item_by_hash(item_ids) if item_ids else False
             message = self._get_message(item_ids)
 
-        if len(errors) == 0:
-            success_result = True
-        else:
-            raise PluginException(
-                cause="The response from SentinelOne was not in the correct format.",
-                assistance="Contact support for help. See log for more details.",
-                data=errors,
-            )
+        return {Output.SUCCESS: success, Output.MESSAGE: message}
 
-        return {Output.SUCCESS: success_result, Output.MESSAGE: message}
-
-    def _get_message(self, item_ids: List[str]) -> str:
+    @staticmethod
+    def _get_message(item_ids: List[str]) -> str:
         if len(item_ids) == 0:
             return BlacklistMessage.not_exists
         return BlacklistMessage.unblocked

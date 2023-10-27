@@ -1,0 +1,77 @@
+{
+  "data": [
+    {
+      "createdAt": "2023-10-13T11:46:37.182353Z",
+      "description": "test",
+      "id": "1234567891",
+      "imported": false,
+      "includeChildren": false,
+      "includeParents": false,
+      "notRecommended": "NONE",
+      "osType": "linux",
+      "scope": {
+        "siteIds": [
+          "1234567891"
+        ]
+      },
+      "scopeName": "site",
+      "scopePath": "Global\\Example\\Default site",
+      "source": "user",
+      "type": "black_hash",
+      "updatedAt": "2023-10-13T11:46:37.180957Z",
+      "userId": "1234567891",
+      "userName": "Example User",
+      "value": "3395856ce81f2b7382dee72602f798b642f14141"
+    },
+    {
+      "createdAt": "2023-10-13T11:46:37.943747Z",
+      "description": "test",
+      "id": "1234567892",
+      "imported": false,
+      "includeChildren": false,
+      "includeParents": false,
+      "notRecommended": "NONE",
+      "osType": "windows",
+      "scope": {
+        "siteIds": [
+          "1234567892"
+        ]
+      },
+      "scopeName": "site",
+      "scopePath": "Global\\Example\\Default site",
+      "source": "user",
+      "type": "black_hash",
+      "updatedAt": "2023-10-13T11:46:37.942359Z",
+      "userId": "1234567892",
+      "userName": "Example User",
+      "value": "3395856ce81f2b7382dee72602f798b642f14141"
+    },
+    {
+      "createdAt": "2023-10-13T11:46:38.928347Z",
+      "description": "test",
+      "id": "1234567893",
+      "imported": false,
+      "includeChildren": false,
+      "includeParents": false,
+      "notRecommended": "NONE",
+      "osType": "macos",
+      "scope": {
+        "siteIds": [
+          "1234567893"
+        ]
+      },
+      "scopeName": "site",
+      "scopePath": "Global\\Example\\Default site",
+      "source": "user",
+      "type": "black_hash",
+      "updatedAt": "2023-10-13T11:46:38.926984Z",
+      "userId": "1234567893",
+      "userName": "Example User",
+      "value": "3395856ce81f2b7382dee72602f798b642f14141"
+    }
+  ],
+  "pagination": {
+    "nextCursor": null,
+    "totalItems": 3
+  }
+}

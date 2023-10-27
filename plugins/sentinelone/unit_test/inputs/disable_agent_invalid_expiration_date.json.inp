@@ -1,0 +1,7 @@
+{
+  "agent": "Hostname0",
+  "expirationTime": "2000-01-01T00:00:00.000000Z",
+  "expirationTimezone": "East Africa Time [EAT]",
+  "filter": {},
+  "reboot": true
+}

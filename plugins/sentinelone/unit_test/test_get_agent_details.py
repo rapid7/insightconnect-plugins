@@ -5,125 +5,79 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest.mock import patch
 from komand_sentinelone.actions.get_agent_details import GetAgentDetails
-from komand_sentinelone.actions.get_agent_details.schema import Input
-from unit_test.util import Util
+from util import Util
 from unittest import TestCase
-
-expected = {
-    "agent": {
-        "accountName": "account",
-        "agentVersion": "1.1.1",
-        "allowRemoteShell": False,
-        "computerName": "computer",
-        "coreCount": "1",
-        "cpuCount": "1",
-        "cpuId": "11",
-        "createdAt": "2021-11-11",
-        "domain": "domain",
-        "externalId": "10.10.10.10",
-        "externalIp": "10.10.10.10",
-        "firewallEnabled": True,
-        "groupIp": "1.0.0.0",
-        "groupUpdatedAt": "2021-11-11",
-        "id": "ffff-ffff",
-        "inRemoteShellSession": True,
-        "infected": False,
-        "isActive": True,
-        "isDecommissioned": False,
-        "isPendingUninstall": True,
-        "isUninstalled": False,
-        "isUpToDate": "2021-11-11",
-        "lastActiveDate": "2021-11-11",
-        "lastIpToMgmt": "1.1.1.1",
-        "lastLoggedInUserName": "username",
-        "licenseKey": "ffff-ffff-ffffffff-ffff",
-        "locationEnabled": True,
-        "networkQuarantineEnabled": True,
-        "networkStatus": "active",
-        "operationalState": "active",
-        "operationalStateExpiration": "active",
-        "osArch": "x64",
-        "osName": "windows 7",
-        "osType": "win",
-        "osUsername": "username",
-        "remoteProfilingState": "active",
-        "remoteProfilingStateExpiration": "active",
-        "scanFinishedAt": "2021-11-11",
-        "threatRebootRequired": False,
-        "totalMemory": 8000,
-        "updatedAt": "2021-11-11",
-        "uuid": "ffff-ffff-ffffffff-ffff",
-    }
-}
+from parameterized import parameterized
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
+@patch("requests.request", side_effect=Util.mocked_requests_get)
 class TestGetAgentDetails(TestCase):
     @classmethod
     @patch("requests.post", side_effect=Util.mocked_requests_get)
     def setUpClass(cls, mock_request) -> None:
         cls.action = Util.default_connector(GetAgentDetails())
 
-    @patch("requests.get", side_effect=Util.mocked_requests_get)
-    def test_should_return_response_when_any_status(self, mock_request):
-        actual = self.action.run(
-            {Input.AGENT: "hostname123", Input.CASE_SENSITIVE: True, Input.OPERATIONAL_STATE: "Any"}
-        )
-        self.assertEqual(expected, actual)
+    @parameterized.expand(
+        [
+            [
+                "success_by_id",
+                Util.read_file_to_dict("inputs/get_agent_details_by_id.json.inp"),
+                Util.read_file_to_dict("expected/get_agent_details_success.json.exp"),
+            ],
+            [
+                "success_by_uuid",
+                Util.read_file_to_dict("inputs/get_agent_details_by_uuid.json.inp"),
+                Util.read_file_to_dict("expected/get_agent_details_success.json.exp"),
+            ],
+            [
+                "success_by_hostname",
+                Util.read_file_to_dict("inputs/get_agent_details_by_hostname.json.inp"),
+                Util.read_file_to_dict("expected/get_agent_details_success.json.exp"),
+            ],
+            [
+                "success_by_ip_address",
+                Util.read_file_to_dict("inputs/get_agent_details_by_ip_address.json.inp"),
+                Util.read_file_to_dict("expected/get_agent_details_success.json.exp"),
+            ],
+            [
+                "success_by_mac_address",
+                Util.read_file_to_dict("inputs/get_agent_details_by_mac_address.json.inp"),
+                Util.read_file_to_dict("expected/get_agent_details_success.json.exp"),
+            ],
+            [
+                "not_found_operational_state",
+                Util.read_file_to_dict("inputs/get_agent_details_not_found_operational_state.json.inp"),
+                Util.read_file_to_dict("expected/get_agent_details_not_found.json.exp"),
+            ],
+            [
+                "not_found_operational_state",
+                Util.read_file_to_dict("inputs/get_agent_details_not_found_hostname.json.inp"),
+                Util.read_file_to_dict("expected/get_agent_details_not_found.json.exp"),
+            ],
+            [
+                "operational_state",
+                Util.read_file_to_dict("inputs/get_agent_details_operational_state.json.inp"),
+                Util.read_file_to_dict("expected/get_agent_details_success.json.exp"),
+            ],
+        ]
+    )
+    def test_get_agent_details(self, mock_request, test_name, input_params, expected):
+        actual = self.action.run(input_params)
+        self.assertDictEqual(expected, actual)
 
-    @patch("requests.get", side_effect=Util.mocked_requests_get)
-    def test_should_return_response_when_na_status(self, mock_request):
-        expected["agent"]["operationalState"] = "na"
-        actual = self.action.run(
-            {Input.AGENT: "hostname_na", Input.CASE_SENSITIVE: True, Input.OPERATIONAL_STATE: "na"}
-        )
-        self.assertEqual(expected, actual)
-
-    @patch("requests.get", side_effect=Util.mocked_requests_get)
-    def test_should_return_response_when_fully_disabled_status(self, mock_request):
-        expected["agent"]["operationalState"] = "fully_disabled"
-        actual = self.action.run(
-            {
-                Input.AGENT: "hostname_fully_disabled",
-                Input.CASE_SENSITIVE: True,
-                Input.OPERATIONAL_STATE: "fully_disabled",
-            }
-        )
-        self.assertEqual(expected, actual)
-
-    @patch("requests.get", side_effect=Util.mocked_requests_get)
-    def test_should_return_response_when_partially_disabled_status(self, mock_request):
-        expected["agent"]["operationalState"] = "partially_disabled"
-        actual = self.action.run(
-            {
-                Input.AGENT: "hostname_partially_disabled",
-                Input.CASE_SENSITIVE: True,
-                Input.OPERATIONAL_STATE: "partially_disabled",
-            }
-        )
-        self.assertEqual(expected, actual)
-
-    @patch("requests.get", side_effect=Util.mocked_requests_get)
-    def test_should_return_response_when_disabled_error_status(self, mock_request):
-        expected["agent"]["operationalState"] = "disabled_error"
-        actual = self.action.run(
-            {
-                Input.AGENT: "hostname_disabled_error",
-                Input.CASE_SENSITIVE: True,
-                Input.OPERATIONAL_STATE: "disabled_error",
-            }
-        )
-        self.assertEqual(expected, actual)
-
-    @patch("requests.get", side_effect=Util.mocked_requests_get)
-    def test_should_return_empty_when_different_status(self, mock_request):
-        for test in [
-            "na",
-            "fully_disabled",
-            "partially_disabled",
-            "disabled_error",
-        ]:
-            with self.subTest(f"Running agent with action: {test}"):
-                actual = self.action.run(
-                    {Input.AGENT: "hostname123", Input.CASE_SENSITIVE: True, Input.OPERATIONAL_STATE: test}
-                )
-                self.assertEqual({"agent": {}}, actual)
+    @parameterized.expand(
+        [
+            [
+                "multiple_agents",
+                Util.read_file_to_dict("inputs/get_agent_details_multiple_agents.json.inp"),
+                "Multiple agents found.",
+                "Please provide a unique agent identifier so the action can be performed on the intended agent.",
+            ],
+        ]
+    )
+    def test_get_agent_details_raise_exception(self, mock_request, test_name, input_params, cause, assistance):
+        with self.assertRaises(PluginException) as error:
+            self.action.run(input_params)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)

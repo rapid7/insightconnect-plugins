@@ -1,0 +1,13 @@
+{
+  "ids": [
+    "1234567891234567892"
+  ],
+  "inputParameters": "test.txt C:/",
+  "outputDestination": "SentinelCloud",
+  "outputDirectory": "",
+  "password": "Password123!",
+  "scriptId": "1234567891234567891",
+  "taskDescription": "Test",
+  "timeout": 3600,
+  "code": ""
+}

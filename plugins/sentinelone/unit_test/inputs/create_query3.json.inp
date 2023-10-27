@@ -1,0 +1,12 @@
+{
+  "accountIds": [],
+  "fromDate": "2023-09-20T04:49:26.257525Z",
+  "groupIds": [],
+  "isVerbose": false,
+  "limit": 20001,
+  "query": "AgentName IS NOT EMPTY",
+  "queryType": [],
+  "siteIds": [],
+  "tenant": false,
+  "toDate": "2023-09-21T20:49:26.257525Z"
+}

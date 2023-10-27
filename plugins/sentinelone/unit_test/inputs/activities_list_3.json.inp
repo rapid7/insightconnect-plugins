@@ -1,0 +1,26 @@
+{
+  "accountIds": [],
+  "activityTypes": [
+    "19",
+    "2001"
+  ],
+  "agentIds": [],
+  "countOnly": false,
+  "createdAtBetween": "1694344831000-1695116431000",
+  "createdAtGt": "",
+  "createdAtGte": "",
+  "createdAtLt": "",
+  "createdAtLte": "",
+  "groupIds": [],
+  "ids": [],
+  "includeHidden": true,
+  "siteIds": [],
+  "limit": 2,
+  "skip": 0,
+  "skipCount": false,
+  "sortBy": "activityType",
+  "sortOrder": "asc",
+  "threatIds": ["1234567898765432112"],
+  "userEmail": "",
+  "userIds": []
+}

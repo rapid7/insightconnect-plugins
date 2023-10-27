@@ -1,0 +1,5 @@
+{
+  "targetScope": "site",
+  "threatId": "XYZABC",
+  "whiteningOption": "certificate"
+}
