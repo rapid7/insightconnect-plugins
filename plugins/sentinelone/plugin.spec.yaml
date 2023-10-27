@@ -6,6 +6,10 @@ title: SentinelOne
 version: 9.0.0
 connection_version: 9
 cloud_ready: true
+sdk:
+  type: slim
+  version: 5
+  user: nobody
 supported_versions: ["2.1.0"]
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
@@ -256,7 +260,7 @@ types:
       type: string
       description: Agent IP
       required: false
-      example: 192.0.2.0
+      example: 198.51.100.1
     agentNetworkStatus:
       title: Agent Network Status
       type: string
@@ -286,7 +290,7 @@ types:
       type: string
       description: ID
       required: false
-      example: 225494730938493804
+      example: 100000000000000000
     fileData:
       title: File Data
       type: object
@@ -298,7 +302,7 @@ types:
       type: string
       description: Agent ID
       required: false
-      example: 225494730938493804
+      example: 100000000000000000
     fileExtensionType:
       title: File Extension Type
       type: string
@@ -310,7 +314,7 @@ types:
       type: string
       description: File display name
       required: false
-      example: test.exe
+      example: setup.exe
     createdAt:
       title: Created At
       type: string
@@ -334,7 +338,7 @@ types:
       type: string
       description: Cert ID
       required: false
-      example: 225494730938493804
+      example: 100000000000000000
     engines:
       title: Engines
       type: '[]string'
@@ -346,7 +350,7 @@ types:
       type: string
       description: Collection ID
       required: false
-      example: 225494730938493804
+      example: 100000000000000000
     inQuarantine:
       title: In Quarantine
       type: boolean
@@ -394,7 +398,7 @@ types:
       type: string
       description: Agent computer name
       required: false
-      example: LAPTOP-R7
+      example: Example Name
     mitigationStatus:
       title: Mitigation Status
       type: string
@@ -454,13 +458,13 @@ types:
       type: string
       description: File content hash
       required: false
-      example: ffffffffffffffffffffffffffffffffffffffff
+      example: 02699626f388ed830012e5b787640e71c56d42d8
     siteId:
       title: Site ID
       type: string
       description: Site ID
       required: false
-      example: 225494730938493804
+      example: 100000000000000000
     rank:
       title: Rank
       type: integer
@@ -514,13 +518,13 @@ types:
       type: string
       description: Threat name
       required: false
-      example: test.exe
+      example: setup.exe
     maliciousGroupId:
       title: Malicious Group ID
       type: string
       description: Malicious group ID
       required: false
-      example: 225494730938493804
+      example: 100000000000000000
     agentIsActive:
       title: Agent is Active
       type: boolean
@@ -581,7 +585,7 @@ types:
       description: Location ID
       type: string
       required: false
-      example: 0000000000000000001
+      example: 100000000000000000
   activeDirectory:
     computerMemberOf:
       title: Computer Member Of
@@ -619,13 +623,13 @@ types:
       description: IPv6 addresses
       type: '[]string'
       required: false
-      example: ["ffff::ffff:ffff:ffff:ffff"]
+      example: ["2001:db8:1:1:1:1:1:1"]
     id:
       title: ID
       description: ID
       type: string
       required: false
-      example: 0000000000000000001
+      example: 100000000000000000
     physical:
       title: Physical
       description: Interface's MAC address
@@ -716,7 +720,7 @@ types:
       description: A reference to the containing network group
       type: string
       required: false
-      example: 0000000000000000001
+      example: 100000000000000000
     isPendingUninstall:
       title: Is Pending Uninstall
       description: Agent with a pending uninstall request
@@ -728,13 +732,13 @@ types:
       description: Name of the containing account
       type: string
       required: false
-      example: Account1
+      example: Example Account Name
     siteId:
       title: Site ID
       description: A reference to the containing site
       type: string
       required: false
-      example: 0000000000000000001
+      example: 100000000000000000
     siteName:
       title: Site Name
       description: Name of the containing site
@@ -770,7 +774,7 @@ types:
       description: A reference to the containing account
       type: string
       required: false
-      example: 0000000000000000001
+      example: 100000000000000000
     threatRebootRequired:
       title: Threat Reboot Required
       description: Has at least one threat with at least one mitigation action that is pending reboot to succeed
@@ -806,7 +810,7 @@ types:
       description: Name of the containing network group
       type: string
       required: false
-      example: Group1
+      example: Example Group
     consoleMigrationStatus:
       title: Console Migration Status
       description: What step the agent is at in the process of migrating to another console, if any
@@ -824,7 +828,7 @@ types:
       description: Agent ID
       type: string
       required: false
-      example: 0000000000000000001
+      example: 100000000000000000
     updatedAt:
       title: Updated at
       description: Last updated date
@@ -908,7 +912,7 @@ types:
       description: Computer name
       type: string
       required: false
-      example: Computer1
+      example: Example Computer Name
     isUninstalled:
       title: Is Uninstalled
       description: Indicates if Agent was removed from the device
@@ -920,13 +924,13 @@ types:
       description: Agent's universally unique identifier
       type: string
       required: false
-      example: b7b2d39171be4ae1af90f93d7ed20f07
+      example: 9de5069c5afe602b2ea0a04b66beb2c0
     licenseKey:
       title: License Key
       description: License key
       type: string
       required: false
-      example: BC017-06777-14871-160C4
+      example: 12345-12345-12345-12345
     isActive:
       title: Is Active
       description: Indicates if the agent was recently active
@@ -950,7 +954,7 @@ types:
       description: External id set by customer
       type: string
       required: false
-      example: 0000000000000000001
+      example: 100000000000000000
     coreCount:
       title: Core Count
       description: Number of CPU cores
@@ -1152,7 +1156,7 @@ types:
       description: Network source
       type: string
       required: false
-      example: "Example Source"
+      example: Example Source
     fileFullName:
       title: File Full Name
       description: File full name
@@ -1236,7 +1240,7 @@ types:
       description: Old file SHA256
       type: string
       required: false
-      example: 50d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c
+      example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
     agentOs:
       title: Agent OS
       description: Agent Operating System
@@ -1302,7 +1306,7 @@ types:
       description: Agent group ID
       type: string
       required: false
-      example: 0000000000000000001
+      example: 100000000000000000
     agentVersion:
       title: Agent Version
       description: Agent version
@@ -1320,7 +1324,7 @@ types:
       description: File SHA256
       type: string
       required: false
-      example: 1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014
+      example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
     parentPid:
       title: Parent PID
       description: Parent PID
@@ -1332,7 +1336,7 @@ types:
       description: Agent ID
       type: string
       required: false
-      example: 0000000000000000001
+      example: 100000000000000000
     agentIsDecommissioned:
       title: Agent is Decommissioned
       description: Agent is decommissioned
@@ -1344,7 +1348,7 @@ types:
       description: Network URL
       type: string
       required: false
-      example: example.com
+      example: https://example.com
     processUserName:
       title: Process User Name
       description: Process user name
@@ -1356,7 +1360,7 @@ types:
       description: Process image SHA1 hash
       type: string
       required: false
-      example: c3499c2729730a7f807efb8676a92dcb6f8a3f8f
+      example: 02699626f388ed830012e5b787640e71c56d42d8
     taskPath:
       title: Task Path
       description: Task path
@@ -1368,7 +1372,7 @@ types:
       description: ID
       type: string
       required: false
-      example: 000000000000000001
+      example: 100000000000000000
     srcPort:
       title: Source Port
       description: Source port
@@ -1386,7 +1390,7 @@ types:
       description: SHA256
       type: string
       required: false
-      example: 50d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c
+      example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
     processImagePath:
       title: Process Image Path
       description: Process image path
@@ -1398,13 +1402,13 @@ types:
       description: Site name
       type: string
       required: false
-      example: Rapid7
+      example: Example Site
     oldFileMd5:
       title: Old File MD5
       description: Old file MD5
       type: string
       required: false
-      example: 1a79a4d60de6718e8e5b326e338ae533
+      example: 9de5069c5afe602b2ea0a04b66beb2c0
     agentMachineType:
       title: Agent Machine Type
       description: Agent machine type
@@ -1446,7 +1450,7 @@ types:
       description: File MD5
       type: string
       required: false
-      example: 1a79a4d60de6718e8e5b326e338ae533
+      example: 9de5069c5afe602b2ea0a04b66beb2c0
     createdAt:
       title: Created At
       description: Created at
@@ -1470,7 +1474,7 @@ types:
       description: Old file SHA1
       type: string
       required: false
-      example: c3499c2729730a7f807efb8676a92dcb6f8a3f8f
+      example: 02699626f388ed830012e5b787640e71c56d42d8
     parentProcessIsMalicious:
       title: Parent Process is Malicious
       description: Parent process is malicious
@@ -1494,7 +1498,7 @@ types:
       description: SHA1
       type: string
       required: false
-      example: c3499c2729730a7f807efb8676a92dcb6f8a3f8f
+      example: 02699626f388ed830012e5b787640e71c56d42d8
     relatedToThreat:
       title: Related to Threat
       description: Related to threat
@@ -1512,7 +1516,7 @@ types:
       description: MD5
       type: string
       required: false
-      example: 1a79a4d60de6718e8e5b326e338ae533
+      example: 9de5069c5afe602b2ea0a04b66beb2c0
     agentDomain:
       title: Agent Domain
       description: Agent domain
@@ -1530,7 +1534,7 @@ types:
       description: File SHA1
       type: string
       required: false
-      example: c3499c2729730a7f807efb8676a92dcb6f8a3f8f
+      example: 02699626f388ed830012e5b787640e71c56d42d8
     user:
       title: User
       description: User
@@ -1590,7 +1594,7 @@ types:
       description: Forensic URL
       type: string
       required: false
-      example: example.com
+      example: https://example.com
     dstIp:
       title: Destination IP
       description: Destination IP
@@ -1608,13 +1612,13 @@ types:
       description: Agent UUID
       type: string
       required: false
-      example: b7b2d39171be4ae1af90f93d7ed20f07
+      example: 9de5069c5afe602b2ea0a04b66beb2c0
     agentName:
       title: Agent Name
       description: Agent name
       type: string
       required: false
-      example: ExampleName1
+      example: Example Name
     threatStatus:
       title: Threat Status
       description: Threat status
@@ -1668,7 +1672,7 @@ types:
       description: Endpoint name
       type: string
       required: false
-      example: ExampleName1
+      example: Example Name
     endpointOs:
       title: Endpoint OS
       description: Endpoint OS
@@ -1737,7 +1741,7 @@ actions:
         description: Content hash to add to blacklist
         type: string
         required: true
-        example: "3395856ce81f2b7382dee72602f798b642f14140"
+        example: 3395856ce81f2b7382dee72602f798b642f14140
     output:
       affected:
         title: Affected
@@ -1754,7 +1758,7 @@ actions:
         description: SHA1 hash
         type: string
         required: true
-        example: A94A8FE5CCB19BA61C4C0873D391E987982FBBD3
+        example: 3395856ce81f2b7382dee72602f798b642f14140
       agentId:
         title: Agent ID
         description: Agent ID for the slim threat
@@ -2327,7 +2331,7 @@ actions:
         title: Whitelist
         description: This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs
         type: "[]string"
-        example: ["198.51.100.100", "hostname123", "901345720792880606", "28db47168fa54f89aeed99769ac8d4dc"]
+        example: ["198.51.100.1", "hostname123", "1000000000000000000", "9de5069c5afe602b2ea0a04b66beb2c0"]
         required: false
     output:
       affected:
@@ -2382,7 +2386,7 @@ actions:
         description: Threat ID
         type: string
         required: true
-        example: "939039647215561624"
+        example: "1000000000000000000"
       password:
         title: Password
         description: File encryption password. The password cannot contain whitespace and must be 10 or more characters with a mix of upper and lower case letters, numbers, and symbols
@@ -2703,7 +2707,7 @@ actions:
         title: Site IDs
         description: List of site IDs to filter by
         type: "[]string"
-        example: ["225494730938491234", "225494730938491235"]
+        example: ["1000000000000000000", "1000000000000000001"]
         required: false
       tenant:
         title: Tenant
@@ -2715,7 +2719,7 @@ actions:
         title: Account IDs
         description: List of account IDs to filter by
         type: "[]string"
-        example: ["225494730938491234", "225494730938491235"]
+        example: ["1000000000000000000", "1000000000000000001"]
         required: false
       isVerbose:
         title: Is Verbose
@@ -2727,7 +2731,7 @@ actions:
         title: Group IDs
         description: List of group IDs to filter by
         type: "[]string"
-        example: ["225494730938491234", "225494730938491235"]
+        example: ["1000000000000000000", "1000000000000000001"]
         required: false
       queryType:
         title: Query Type
@@ -2905,7 +2909,7 @@ actions:
         title: Incident IDs
         description: A list of alert or threat IDs on which we may update the analyst verdict
         type: "[]string"
-        example: ["1118189762920424575", "1118189762920424576"]
+        example: ["1000000000000000000", "1000000000000000001"]
         required: true
       analystVerdict:
         title: Analyst Verdict
@@ -2942,7 +2946,7 @@ actions:
         title: Incident IDs
         description: A list of alert or threat IDs to update the incident status on
         type: "[]string"
-        example: ["1118189762920424575", "1118189762920424576"]
+        example: ["1000000000000000000", "1000000000000000001"]
         required: true
       incidentStatus:
         title: Incident Status
@@ -3083,4 +3087,4 @@ triggers:
         description: Threat
         type: threatData
         required: false
-        example: "{ 'threat': { 'agentComputerName':'vagrant-pc', 'agentDomain':'WORKGROUP', 'agentId':'560700200554747611' }}"
+        example: "{ 'threat': { 'agentComputerName':'vagrant-pc', 'agentDomain':'WORKGROUP', 'agentId':'1000000000000000000' }}"

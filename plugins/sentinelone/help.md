@@ -150,19 +150,19 @@ Example output:
   "data": [
     {
       "accountId": "400000000000000000",
-      "accountName": "Example",
+      "accountName": "Example Account",
       "activityType": 22,
       "agentId": "9000000000000000",
       "createdAt": "2020-12-18T20:49:26.257525Z",
       "data": {
-        "accountName": "Example",
+        "accountName": "Example Account",
         "computerName": "so-agent-win12",
         "confidenceLevel": "malicious",
         "fileContentHash": "02699626f388ed830012e5b787640e71c56d42d8",
-        "fileDisplayName": "test.txt",
-        "filePath": "\\Device\\HarddiskVolume2\\Users\\Administrator\\Desktop\\test.txt",
+        "fileDisplayName": "setup.exe",
+        "filePath": "\\Device\\HarddiskVolume2\\Users\\Administrator\\Desktop\\setup.exe",
         "groupName": "Default Group",
-        "siteName": "Example",
+        "siteName": "Example Site",
         "threatClassification": "Trojan",
         "threatClassificationSource": "Cloud"
       },
@@ -496,7 +496,7 @@ This action is used to create a threat from an IOC event.
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |agentId|string|None|True|Agent ID for the slim threat|None|1000000000000000000|
 |groupId|string|None|False|ID of the group|None|1000000000000000001|
-|hash|string|None|True|SHA1 hash|None|A94A8FE5CCB19BA61C4C0873D391E987982FBBD3|
+|hash|string|None|True|SHA1 hash|None|3395856ce81f2b7382dee72602f798b642f14140|
 |note|string|None|False|Note added to the created threat|None|Example note|
 |path|string|None|False|File path|None|path|
 
@@ -506,7 +506,7 @@ Example input:
 {
   "agentId": "1000000000000000000",
   "groupId": "1000000000000000001",
-  "hash": "A94A8FE5CCB19BA61C4C0873D391E987982FBBD3",
+  "hash": "3395856ce81f2b7382dee72602f798b642f14140",
   "note": "Example note",
   "path": "path"
 }
@@ -534,14 +534,14 @@ This action is used to start a Deep Visibility Query and get the queryId. You ca
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|accountIds|[]string|None|False|List of account IDs to filter by|None|["225494730938491234", "225494730938491235"]|
+|accountIds|[]string|None|False|List of account IDs to filter by|None|["1000000000000000000", "1000000000000000001"]|
 |fromDate|date|None|True|Events created after this timestamp|None|2021-03-01T04:49:26+00:00|
-|groupIds|[]string|None|False|List of group IDs to filter by|None|["225494730938491234", "225494730938491235"]|
+|groupIds|[]string|None|False|List of group IDs to filter by|None|["1000000000000000000", "1000000000000000001"]|
 |isVerbose|boolean|None|False|Show all fields or just priority fields|None|True|
 |limit|integer|100|False|Limit number of returned items (1-20000)|None|10|
 |query|string|None|True|Events matching the query search term will be returned|None|AgentName IS NOT EMPTY|
 |queryType|[]string|None|False|Query search type|None|["events"]|
-|siteIds|[]string|None|False|List of site IDs to filter by|None|["225494730938491234", "225494730938491235"]|
+|siteIds|[]string|None|False|List of site IDs to filter by|None|["1000000000000000000", "1000000000000000001"]|
 |tenant|boolean|None|False|Indicates a Global (tenant) scope request|None|True|
 |toDate|date|None|True|Events created before or at this timestamp|None|2021-03-23T04:49:26+00:00|
 
@@ -550,13 +550,13 @@ Example input:
 ```
 {
   "accountIds": [
-    "225494730938491234",
-    "225494730938491235"
+    "1000000000000000000",
+    "1000000000000000001"
   ],
   "fromDate": "2021-03-01T04:49:26+00:00",
   "groupIds": [
-    "225494730938491234",
-    "225494730938491235"
+    "1000000000000000000",
+    "1000000000000000001"
   ],
   "isVerbose": true,
   "limit": 10,
@@ -565,8 +565,8 @@ Example input:
     "events"
   ],
   "siteIds": [
-    "225494730938491234",
-    "225494730938491235"
+    "1000000000000000000",
+    "1000000000000000001"
   ],
   "tenant": true,
   "toDate": "2021-03-23T04:49:26+00:00"
@@ -606,8 +606,8 @@ Example input:
 ```
 {
   "agent": "hostname123",
-  "expiration_time": "2020-02-27T04:49:26.257525Z",
-  "expiration_timezone": "Central Standard Time (North America) [CST]",
+  "expirationTime": "2020-02-27T04:49:26.257525+00:00",
+  "expirationTimezone": "Central Standard Time (North America) [CST]",
   "filter": {
     "updatedAt__gt": "2019-02-27T04:49:26.257525Z"
   },
@@ -734,8 +734,8 @@ Example output:
 ```
 {
   "agent": {
-    "accountId": "000000000000000002",
-    "accountName": "ExampleName2",
+    "accountId": "1000000000000000000",
+    "accountName": "Example Name",
     "activeThreats": 0,
     "agentVersion": "1.0.2.3",
     "allowRemoteShell": false,
@@ -750,10 +750,10 @@ Example output:
     "encryptedApplications": false,
     "externalIp": "198.51.100.1",
     "firewallEnabled": true,
-    "groupId": "000000000000000001",
+    "groupId": "1000000000000000000",
     "groupIp": "1.2.3.x",
     "groupName": "Example Group",
-    "id": "0000000000000000002",
+    "id": "1000000000000000000",
     "inRemoteShellSession": false,
     "infected": false,
     "installerType": ".exe",
@@ -768,7 +768,7 @@ Example output:
     "locationType": "fallback",
     "locations": [
       {
-        "id": "000000000000000001",
+        "id": "1000000000000000000",
         "name": "Fallback",
         "scope": "global"
       }
@@ -779,12 +779,12 @@ Example output:
     "modelName": "Example Model",
     "networkInterfaces": [
       {
-        "id": "000000000000000002",
+        "id": "1000000000000000000",
         "inet": [
           "198.51.100.1"
         ],
         "inet6": [
-          "2001:db8:8:4::2"
+          "2001:db8:1:1:1:1:1:1"
         ],
         "name": "Ethernet",
         "physical": "12-23-45-67-89-12"
@@ -809,7 +809,7 @@ Example output:
     "scanFinishedAt": "2023-01-01T00:00:00.000000Z",
     "scanStartedAt": "2023-01-01T00:00:00.000000Z",
     "scanStatus": "finished",
-    "siteId": "00000000000000001",
+    "siteId": "1000000000000000000",
     "siteName": "Example",
     "threatRebootRequired": false,
     "totalMemory": 1023,
@@ -854,27 +854,27 @@ Example output:
 {
   "events": [
     {
-      "accountId": "0000000000000000001",
+      "accountId": "1000000000000000000",
       "agentDomain": "WORKGROUP",
-      "agentGroupId": "0000000000000000001",
-      "agentId": "0000000000000000001",
+      "agentGroupId": "1000000000000000000",
+      "agentId": "1000000000000000000",
       "agentInfected": true,
       "agentIp": "198.51.100.1",
       "agentIsActive": true,
       "agentIsDecommissioned": false,
       "agentMachineType": "laptop",
-      "agentName": "ExampleName1",
+      "agentName": "Example Name",
       "agentNetworkStatus": "connected",
       "agentOs": "windows",
       "agentTimestamp": "2023-10-23T00:00:00.000Z",
-      "agentUuid": "b7b2d39171be4ae1af90f93d7ed20f07",
+      "agentUuid": "9de5069c5afe602b2ea0a04b66beb2c0",
       "createdAt": "2023-10-23T00:00:00.000Z",
       "endpointMachineType": "desktop",
-      "endpointName": "ExampleName1",
+      "endpointName": "Example Name",
       "endpointOs": "windows",
       "eventTime": "2023-10-23T00:00:00.000Z",
       "eventType": "Task Update",
-      "id": "000000000000000001",
+      "id": "1000000000000000000",
       "isAgentVersionFullySupportedForPg": false,
       "isAgentVersionFullySupportedForPgMessage": "Example message",
       "lastActivatedAt": "2023-10-23T00:00:00.000Z",
@@ -886,33 +886,33 @@ Example output:
       "processStartTime": "2023-10-23T00:00:00.000Z",
       "processUniqueKey": "ABCD1234",
       "relatedToThreat": "False",
-      "siteId": "0000000000000000001",
+      "siteId": "1000000000000000000",
       "storyline": "ABCD1234",
       "taskName": "Example Name",
       "trueContext": "ABCD1234"
     },
     {
-      "accountId": "0000000000000000001",
+      "accountId": "1000000000000000001",
       "agentDomain": "WORKGROUP",
-      "agentGroupId": "0000000000000000001",
-      "agentId": "0000000000000000001",
+      "agentGroupId": "1000000000000000001",
+      "agentId": "1000000000000000001",
       "agentInfected": true,
       "agentIp": "198.51.100.1",
       "agentIsActive": true,
       "agentIsDecommissioned": false,
       "agentMachineType": "laptop",
-      "agentName": "ExampleName1",
+      "agentName": "Example Name",
       "agentNetworkStatus": "connected",
       "agentOs": "windows",
       "agentTimestamp": "2023-10-23T00:00:00.000Z",
-      "agentUuid": "b7b2d39171be4ae1af90f93d7ed20f07",
+      "agentUuid": "9de5069c5afe602b2ea0a04b66beb2c0",
       "createdAt": "2023-10-23T00:00:00.000Z",
       "endpointMachineType": "desktop",
-      "endpointName": "ExampleName1",
+      "endpointName": "Example Name",
       "endpointOs": "windows",
       "eventTime": "2023-10-23T00:00:00.000Z",
       "eventType": "Task Update",
-      "id": "000000000000000002",
+      "id": "1000000000000000001",
       "isAgentVersionFullySupportedForPg": false,
       "isAgentVersionFullySupportedForPgMessage": "Example message",
       "lastActivatedAt": "2023-10-23T00:00:00.000Z",
@@ -924,7 +924,7 @@ Example output:
       "processStartTime": "2023-10-23T00:00:00.000Z",
       "processUniqueKey": "ABCD1234",
       "relatedToThreat": "False",
-      "siteId": "0000000000000000001",
+      "siteId": "1000000000000000001",
       "storyline": "ABCD1234",
       "taskName": "Example Name",
       "trueContext": "ABCD1234"
@@ -970,27 +970,27 @@ Example output:
 {
   "events": [
     {
-      "accountId": "0000000000000000001",
+      "accountId": "1000000000000000000",
       "agentDomain": "WORKGROUP",
-      "agentGroupId": "0000000000000000001",
-      "agentId": "0000000000000000001",
+      "agentGroupId": "1000000000000000000",
+      "agentId": "1000000000000000000",
       "agentInfected": true,
       "agentIp": "198.51.100.1",
       "agentIsActive": true,
       "agentIsDecommissioned": false,
       "agentMachineType": "laptop",
-      "agentName": "ExampleName1",
+      "agentName": "Example Name",
       "agentNetworkStatus": "connected",
       "agentOs": "windows",
       "agentTimestamp": "2023-10-23T00:00:00.000Z",
-      "agentUuid": "b7b2d39171be4ae1af90f93d7ed20f07",
+      "agentUuid": "9de5069c5afe602b2ea0a04b66beb2c0",
       "createdAt": "2023-10-23T00:00:00.000Z",
       "endpointMachineType": "desktop",
-      "endpointName": "ExampleName1",
+      "endpointName": "Example Name",
       "endpointOs": "windows",
       "eventTime": "2023-10-23T00:00:00.000Z",
       "eventType": "Task Update",
-      "id": "000000000000000001",
+      "id": "1000000000000000000",
       "isAgentVersionFullySupportedForPg": false,
       "isAgentVersionFullySupportedForPgMessage": "Example message",
       "lastActivatedAt": "2023-10-23T00:00:00.000Z",
@@ -1002,33 +1002,33 @@ Example output:
       "processStartTime": "2023-10-23T00:00:00.000Z",
       "processUniqueKey": "ABCD1234",
       "relatedToThreat": "False",
-      "siteId": "0000000000000000001",
+      "siteId": "1000000000000000000",
       "storyline": "ABCD1234",
       "taskName": "Example Name",
       "trueContext": "ABCD1234"
     },
     {
-      "accountId": "0000000000000000001",
+      "accountId": "1000000000000000001",
       "agentDomain": "WORKGROUP",
-      "agentGroupId": "0000000000000000001",
-      "agentId": "0000000000000000001",
+      "agentGroupId": "1000000000000000001",
+      "agentId": "1000000000000000001",
       "agentInfected": true,
       "agentIp": "198.51.100.1",
       "agentIsActive": true,
       "agentIsDecommissioned": false,
       "agentMachineType": "laptop",
-      "agentName": "ExampleName1",
+      "agentName": "Example Name",
       "agentNetworkStatus": "connected",
       "agentOs": "windows",
       "agentTimestamp": "2023-10-23T00:00:00.000Z",
-      "agentUuid": "b7b2d39171be4ae1af90f93d7ed20f07",
+      "agentUuid": "9de5069c5afe602b2ea0a04b66beb2c0",
       "createdAt": "2023-10-23T00:00:00.000Z",
       "endpointMachineType": "desktop",
-      "endpointName": "ExampleName1",
+      "endpointName": "Example Name",
       "endpointOs": "windows",
       "eventTime": "2023-10-23T00:00:00.000Z",
       "eventType": "Task Update",
-      "id": "000000000000000002",
+      "id": "1000000000000000001",
       "isAgentVersionFullySupportedForPg": false,
       "isAgentVersionFullySupportedForPgMessage": "Example message",
       "lastActivatedAt": "2023-10-23T00:00:00.000Z",
@@ -1040,7 +1040,7 @@ Example output:
       "processStartTime": "2023-10-23T00:00:00.000Z",
       "processUniqueKey": "ABCD1234",
       "relatedToThreat": "False",
-      "siteId": "0000000000000000001",
+      "siteId": "1000000000000000001",
       "storyline": "ABCD1234",
       "taskName": "Example Name",
       "trueContext": "ABCD1234"
@@ -1113,7 +1113,7 @@ Example output:
       "agentOsType": "windows",
       "automaticallyResolved": false,
       "cloudVerdict": "black",
-      "id": "566535959618699500",
+      "id": "1000000000000000000",
       "engines": [
         "reputation"
       ],
@@ -1129,24 +1129,24 @@ Example output:
         }
       },
       "rank": 7,
-      "siteName": "Rapid7",
+      "siteName": "Example Site",
       "whiteningOptions": [
         "hash"
       ],
       "agentComputerName": "vagrant-pc",
-      "collectionId": "433377870883088367",
+      "collectionId": "1000000000000000000",
       "createdAt": "2019-02-21T16:05:49.251201Z",
       "mitigationStatus": "active",
       "classificationSource": "Static",
       "resolved": true,
-      "accountName": "SentinelOne",
+      "accountName": "Example Account",
       "fileVerificationType": "NotSigned",
-      "siteId": "521580416395045459",
+      "siteId": "1000000000000000000",
       "fileIsExecutable": false,
       "fromScan": false,
       "agentNetworkStatus": "disconnecting",
       "createdDate": "2019-02-21T16:05:49.175000Z",
-      "accountId": "433241117337583618",
+      "accountId": "1000000000000000000",
       "initiatedBy": "agentPolicy",
       "initiatedByDescription": "Agent Policy",
       "threatAgentVersion": "3.0.1.3",
@@ -1161,7 +1161,7 @@ Example output:
       "isInteractiveSession": false,
       "isPartialStory": false,
       "updatedAt": "2020-05-28T21:53:36.064425Z",
-      "agentId": "560700200554747611",
+      "agentId": "1000000000000000000",
       "agentMachineType": "desktop",
       "classification": "Malware",
       "markedAsBenign": false,
@@ -1169,11 +1169,11 @@ Example output:
       "agentIsDecommissioned": true,
       "description": "malware detected - not mitigated yet (static engin...",
       "fileDisplayName": "EICAR.com",
-      "agentIp": "198.51.100.100",
+      "agentIp": "198.51.100.1",
       "agentIsActive": false,
-      "fileObjectId": "F0F63E0588AAC528",
+      "fileObjectId": "1234567890",
       "filePath": "\\Device\\HarddiskVolume2\\Users\\vagrant\\Desktop\\EICA...",
-      "maliciousGroupId": "542D14600CEBA01D"
+      "maliciousGroupId": "1234567890"
     }
   ],
   "pagination": {
@@ -1330,7 +1330,7 @@ This action is used to isolate (quarantine) endpoint from the network.
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |agent|string|None|True|Agent to perform quarantine action on. Accepts IP address, MAC address, hostname, UUID or agent ID|None|hostname123|
 |quarantineState|boolean|None|True|True to quarantine host, false to unquarantine host|None|True|
-|whitelist|[]string|None|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs|None|["198.51.100.100", "hostname123", "901345720792880606", "28db47168fa54f89aeed99769ac8d4dc"]|
+|whitelist|[]string|None|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs|None|["198.51.100.1", "hostname123", "1000000000000000000", "9de5069c5afe602b2ea0a04b66beb2c0"]|
 
 Example input:
 
@@ -1339,9 +1339,9 @@ Example input:
   "agent": "hostname123",
   "quarantineState": true,
   "whitelist": [
-    "198.51.100.100",
+    "198.51.100.1",
     "hostname123",
-    "901345720792880606",
+    "1000000000000000000",
     "9de5069c5afe602b2ea0a04b66beb2c0"
   ]
 }
@@ -1446,8 +1446,8 @@ Example output:
 {
   "agents": [
     {
-      "accountId": "000000000000000001",
-      "accountName": "ExampleName",
+      "accountId": "100000000000000000",
+      "accountName": "Example Name",
       "activeThreats": 0,
       "agentVersion": "1.0.2.3",
       "allowRemoteShell": false,
@@ -1462,10 +1462,10 @@ Example output:
       "encryptedApplications": false,
       "externalIp": "198.51.100.1",
       "firewallEnabled": true,
-      "groupId": "000000000000000001",
+      "groupId": "100000000000000000",
       "groupIp": "1.2.3.x",
       "groupName": "Example Group",
-      "id": "0000000000000000001",
+      "id": "100000000000000000",
       "inRemoteShellSession": false,
       "infected": false,
       "installerType": ".exe",
@@ -1480,7 +1480,7 @@ Example output:
       "locationType": "fallback",
       "locations": [
         {
-          "id": "000000000000000001",
+          "id": "100000000000000000",
           "name": "Fallback",
           "scope": "global"
         }
@@ -1491,12 +1491,12 @@ Example output:
       "modelName": "Example Model",
       "networkInterfaces": [
         {
-          "id": "000000000000000001",
+          "id": "100000000000000000",
           "inet": [
             "198.51.100.1"
           ],
           "inet6": [
-            "2001:db8:8:4::1"
+            "2001:db8:1:1:1:1:1:1"
           ],
           "name": "Ethernet",
           "physical": "12-34-56-67-89-12"
@@ -1521,8 +1521,8 @@ Example output:
       "scanFinishedAt": "2023-01-01T00:00:00.000000Z",
       "scanStartedAt": "2023-01-01T00:00:00.000000Z",
       "scanStatus": "finished",
-      "siteId": "00000000000000001",
-      "siteName": "Rapid7",
+      "siteId": "100000000000000000",
+      "siteName": "Example Site",
       "threatRebootRequired": false,
       "totalMemory": 1023,
       "updatedAt": "2023-01-01T00:00:00.000000Z",
@@ -1540,14 +1540,14 @@ This action is used to fetch a file associated with the threat that matches the 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|string|None|True|Threat ID|None|939039647215561624|
+|id|string|None|True|Threat ID|None|1000000000000000000|
 |password|password|None|True|File encryption password. The password cannot contain whitespace and must be 10 or more characters with a mix of upper and lower case letters, numbers, and symbols|None|R@pid7Insightc0nnect|
 
 Example input:
 
 ```
 {
-  "id": 939039647215561624,
+  "id": "1000000000000000000",
   "password": "R@pid7Insightc0nnect"
 }
 ```
@@ -1578,7 +1578,7 @@ This action is used to update analyst verdict.
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |analystVerdict|string|None|True|Analyst verdict|['true positive', 'suspicious', 'false positive', 'undefined']|true positive|
-|incidentIds|[]string|None|True|A list of alert or threat IDs on which we may update the analyst verdict|None|["1118189762920424575", "1118189762920424576"]|
+|incidentIds|[]string|None|True|A list of alert or threat IDs on which we may update the analyst verdict|None|["1000000000000000000", "1000000000000000001"]|
 |type|string|None|True|Type of incidents|['threats', 'alerts']|threats|
 
 Example input:
@@ -1587,8 +1587,8 @@ Example input:
 {
   "analystVerdict": "true positive",
   "incidentIds": [
-    "1118189762920424575",
-    "1118189762920424576"
+    "1000000000000000000",
+    "1000000000000000001"
   ],
   "type": "threats"
 }
@@ -1616,7 +1616,7 @@ This action is used to update incident status.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|incidentIds|[]string|None|True|A list of alert or threat IDs to update the incident status on|None|["1118189762920424575", "1118189762920424576"]|
+|incidentIds|[]string|None|True|A list of alert or threat IDs to update the incident status on|None|["1000000000000000000", "1000000000000000001"]|
 |incidentStatus|string|None|True|Incident status|['unresolved', 'in progress', 'resolved']|resolved|
 |type|string|None|True|Type of incidents|['threats', 'alerts']|threats|
 
@@ -1625,8 +1625,8 @@ Example input:
 ```
 {
   "incidentIds": [
-    "1118189762920424575",
-    "1118189762920424576"
+    "1000000000000000000",
+    "1000000000000000001"
   ],
   "incidentStatus": "resolved",
   "type": "threats"
@@ -1677,18 +1677,18 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|threat|threatData|False|Threat|{ 'threat': { 'agentComputerName':'vagrant-pc', 'agentDomain':'WORKGROUP', 'agentId':'560700200554747611' }}|
-
+|threat|threatData|False|Threat|{ 'threat': { 'agentComputerName':'vagrant-pc', 'agentDomain':'WORKGROUP', 'agentId':'1000000000000000000' }}|
+  
 Example output:
 
 ```
 {
   "threat": {
-    "agentComputerName": "example-pc",
+    "agentComputerName": "Example Computer Name",
     "agentDomain": "WORKGROUP",
-    "agentId": "1234567890",
+    "agentId": "1000000000000000000",
     "agentInfected": false,
-    "agentIp": "xxx.xxx.xxx.xxx",
+    "agentIp": "198.51.100.1",
     "agentIsActive": true,
     "agentIsDecommissioned": false,
     "agentMachineType": "desktop",
@@ -1699,28 +1699,28 @@ Example output:
     "classificationSource": "Engine",
     "classifierName": "BLACKLIST",
     "cloudVerdict": "black",
-    "collectionId": "1234567890",
+    "collectionId": "1000000000000000000",
     "createdAt": "2019-02-13T15:05:21.948892Z",
     "createdDate": "2019-02-13T15:05:21.605000Z",
     "description": "malware detected - not mitigated yet (static engine)",
     "engines": [
       "reputation"
     ],
-    "fileContentHash": "02699626f388ed830012e5b787640e71c56d42d8",
-    "fileDisplayName": "{D5EEFA7C-3EA6-4B78-BED3-56CB49156FD1}-EICAR.com",
+    "fileContentHash": "3395856ce81f2b7382dee72602f798b642f14140",
+    "fileDisplayName": "{ABCDEF}-EICAR.com",
     "fileExtensionType": "Executable",
     "fileIsExecutable": false,
     "fileIsSystem": false,
-    "fileObjectId": "1234567890",
+    "fileObjectId": "1000000000000000000",
     "filePath": "\\Device\\HarddiskVolume2\\ProgramData\\Microsoft\\Windows Defender\\LocalCopy\\{ABCDEF}-EICAR.com",
     "fileVerificationType": "NotSigned",
     "fromCloud": false,
     "fromScan": false,
-    "id": "1234567890",
+    "id": "1000000000000000000",
     "isCertValid": false,
     "isInteractiveSession": false,
     "isPartialStory": false,
-    "maliciousGroupId": "1234567890",
+    "maliciousGroupId": "1000000000000000000",
     "mitigationMode": "protect",
     "mitigationReport": {
       "kill": {
@@ -1733,8 +1733,8 @@ Example output:
     "mitigationStatus": "mitigated",
     "rank": 7,
     "resolved": false,
-    "siteId": "1234567890",
-    "siteName": "Rapid7",
+    "siteId": "1000000000000000000",
+    "siteName": "Example Site",
     "threatAgentVersion": "3.0.1.3",
     "updatedAt": "2019-02-13T15:05:22.274291Z",
     "whiteningOptions": [
@@ -1805,11 +1805,11 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Agent Computer Name|string|None|False|Agent computer name|LAPTOP-R7|
+|Agent Computer Name|string|None|False|Agent computer name|Example Name|
 |Agent Domain|string|None|False|Agent domain|WORKGROUP|
-|Agent ID|string|None|False|Agent ID|225494730938493804|
+|Agent ID|string|None|False|Agent ID|100000000000000000|
 |Agent Infected|boolean|None|False|Agent infected|False|
-|Agent IP|string|None|False|Agent IP|192.0.2.0|
+|Agent IP|string|None|False|Agent IP|198.51.100.1|
 |Agent is Active|boolean|None|False|Agent is active|True|
 |Agent is Decommissioned|boolean|None|False|Agent is decommissioned|False|
 |Agent Machine Type|string|None|False|Agent machine type|laptop|
@@ -1818,19 +1818,19 @@ Example output:
 |Agent Version|string|None|False|Agent version|1.0.2.4|
 |Annotation|string|None|False|Annotation|Automatically resolved by SentinelOne Console|
 |Browser Type|string|None|False|Browser type|Example Browser Type|
-|Cert ID|string|None|False|Cert ID|225494730938493804|
+|Cert ID|string|None|False|Cert ID|100000000000000000|
 |Classification|string|None|False|Classification|Malware|
 |Classification Source|string|None|False|Classification source|Static|
 |Classifier Name|string|None|False|Classifier name|LOGIC|
 |Cloud Verdict|string|None|False|Cloud verdict|black|
-|Collection ID|string|None|False|Collection ID|225494730938493804|
+|Collection ID|string|None|False|Collection ID|100000000000000000|
 |Created At|string|None|False|Created At|2023-01-01 10:00:00+00:00|
 |Created Date|string|None|False|Created date|2023-01-01 10:00:00+00:00|
 |Description|string|None|False|Description|malware detected - not mitigated yet (static engine)|
 |Engines|[]string|None|False|Engines|['penetration']|
-|File Content Hash|string|None|False|File content hash|ffffffffffffffffffffffffffffffffffffffff|
+|File Content Hash|string|None|False|File content hash|02699626f388ed830012e5b787640e71c56d42d8|
 |File Data|object|None|False|File data|{}|
-|File Display Name|string|None|False|File display name|test.exe|
+|File Display Name|string|None|False|File display name|setup.exe|
 |File Extension Type|string|None|False|File extension type|Executable|
 |File is Dotnet|boolean|None|False|File is dotnet|False|
 |File is Executable|boolean|None|False|File is executable|False|
@@ -1841,13 +1841,13 @@ Example output:
 |File Verification Type|string|None|False|File verification type|NotSigned|
 |From Cloud|boolean|None|False|From cloud|False|
 |From Scan|boolean|None|False|From scan|False|
-|ID|string|None|False|ID|225494730938493804|
+|ID|string|None|False|ID|100000000000000000|
 |In Quarantine|boolean|None|False|In quarantine|False|
 |Indicators|[]integer|None|False|Indicators|[1, 2, 3]|
 |Is Cert Valid|boolean|None|False|Is cert valid|True|
 |Is Interactive Session|boolean|None|False|Is interactive session|True|
 |Is Partial Story|boolean|None|False|Is partial story|False|
-|Malicious Group ID|string|None|False|Malicious group ID|225494730938493804|
+|Malicious Group ID|string|None|False|Malicious group ID|100000000000000000|
 |Malicious Process Arguments|string|None|False|Malicious process arguments|C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe|
 |Marked as Benign|boolean|None|False|Marked as Benign|False|
 |Mitigation Mode|string|None|False|Mitigation mode|protect|
@@ -1855,10 +1855,10 @@ Example output:
 |Mitigation Status|string|None|False|Mitigation status|mitigated|
 |Rank|integer|None|False|Rank|5|
 |Resolved|boolean|None|False|Resolved|False|
-|Site ID|string|None|False|Site ID|225494730938493804|
+|Site ID|string|None|False|Site ID|100000000000000000|
 |Site Name|string|None|False|Site name|Example Site|
 |Threat Agent Version|string|None|False|Threat agent version|1.0.3.4|
-|Threat Name|string|None|False|Threat name|test.exe|
+|Threat Name|string|None|False|Threat name|setup.exe|
 |Updated At|string|None|False|Updated at|2023-01-01 10:00:00+00:00|
 |Username|string|None|False|Username|user1|
 |Whitening Options|[]string|None|False|Whitening options|['hash']|
@@ -1867,7 +1867,7 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|ID|string|None|False|Location ID|1|
+|ID|string|None|False|Location ID|100000000000000000|
 |Name|string|None|False|Location name|Example Location|
 |Scope|string|None|False|Location scope|global|
   
@@ -1886,9 +1886,9 @@ Example output:
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Gateway IP|string|None|False|The default gateway IP|198.51.100.1|
 |Gateway MAC Address|string|None|False|The default gateway MAC address|00:00:00:00:00:01|
-|ID|string|None|False|ID|1|
+|ID|string|None|False|ID|100000000000000000|
 |IPv4 Addresses|[]string|None|False|IPv4 addresses|['198.51.100.1']|
-|IPv6 Addresses|[]string|None|False|IPv6 addresses|['ffff::ffff:ffff:ffff:ffff']|
+|IPv6 Addresses|[]string|None|False|IPv6 addresses|['2001:db8:1:1:1:1:1:1']|
 |Name|string|None|False|Name|Ethernet0|
 |Physical|string|None|False|Interface's MAC address|00:00:00:00:00:01|
   
@@ -1896,15 +1896,15 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Account ID|string|None|False|A reference to the containing account|1|
-|Account Name|string|None|False|Name of the containing account|Account1|
+|Account ID|string|None|False|A reference to the containing account|100000000000000000|
+|Account Name|string|None|False|Name of the containing account|Example Account Name|
 |Active Directory|activeDirectory|None|False|Active Directory data|{}|
 |Active Threats|integer|None|False|Current number of active threats|5|
 |Agent Version|string|None|False|Agent version|1.0.3.4|
 |Allow Remote Shell|boolean|None|False|Agent is capable and policy enabled for remote shell|True|
 |Apps Vulnerability Status|string|None|False|Apps vulnerability status|patch_required|
 |Cloud Providers|object|None|False|Cloud providers for this agent|{}|
-|Computer Name|string|None|False|Computer name|Computer1|
+|Computer Name|string|None|False|Computer name|Example Computer Name|
 |Console Migration Status|string|None|False|What step the agent is at in the process of migrating to another console, if any|N/A|
 |Core Count|integer|None|False|Number of CPU cores|10|
 |CPU Count|integer|None|False|Number of CPUs|4|
@@ -1912,14 +1912,14 @@ Example output:
 |Created At|string|None|False|Created at date|2023-01-01 00:00:00+00:00|
 |Domain|string|None|False|Network domain|WORKGROUP|
 |Encrypted Applications|boolean|None|False|Disk encryption status|False|
-|External ID|string|None|False|External id set by customer|1|
+|External ID|string|None|False|External id set by customer|100000000000000000|
 |External IP|string|None|False|External IPv4 address|198.51.100.1|
 |Firewall Enabled|boolean|None|False|Firewall enabled|True|
-|Group ID|string|None|False|A reference to the containing network group|1|
+|Group ID|string|None|False|A reference to the containing network group|100000000000000000|
 |Group IP|string|None|False|IP Address subnet|198.51.100.x|
-|Group Name|string|None|False|Name of the containing network group|Group1|
+|Group Name|string|None|False|Name of the containing network group|Example Group|
 |Group Updated At|string|None|False|Date of when the group was last updated|2023-01-01 00:00:00+00:00|
-|ID|string|None|False|Agent ID|1|
+|ID|string|None|False|Agent ID|100000000000000000|
 |In Remote Shell Session|boolean|None|False|Is the Agent in a remote shell session|True|
 |Infected|boolean|None|False|Indicates if the Agent has active threats|False|
 |Installer Type|string|None|False|Installer package type (file extension)|.msi|
@@ -1931,7 +1931,7 @@ Example output:
 |Last Active Date|string|None|False|Last active date|2023-01-01 00:00:00+00:00|
 |Last IP to Management Console|string|None|False|The last IP used to connect to the Management console|198.51.100.1|
 |Last Logged In User Name|string|None|False|Last logged in user name|user1|
-|License Key|string|None|False|License key|BC017-06777-14871-160C4|
+|License Key|string|None|False|License key|12345-12345-12345-12345|
 |Location Enabled|boolean|None|False|Location enabled|True|
 |Location Type|string|None|False|Reported location type|fallback|
 |Locations|[]location|None|False|A list of locations reported by the Agent|[]|
@@ -1960,13 +1960,13 @@ Example output:
 |Scan Finished At|string|None|False|Finish time of last scan|2023-01-01 00:00:00+00:00|
 |Scan Started At|string|None|False|Start time of last scan|2023-01-01 00:00:00+00:00|
 |Scan Status|string|None|False|Last scan status|finished|
-|Site ID|string|None|False|A reference to the containing site|1|
+|Site ID|string|None|False|A reference to the containing site|100000000000000000|
 |Site Name|string|None|False|Name of the containing site|Example Site Name|
 |Threat Reboot Required|boolean|None|False|Has at least one threat with at least one mitigation action that is pending reboot to succeed|False|
 |Total Memory|integer|None|False|Memory size (MB)|10|
 |Updated at|string|None|False|Last updated date|2023-01-01 00:00:00+00:00|
 |User Actions Needed|[]string|None|False|A list of pending user actions|['example action']|
-|UUID|string|None|False|Agent's universally unique identifier|b7b2d39171be4ae1af90f93d7ed20f07|
+|UUID|string|None|False|Agent's universally unique identifier|9de5069c5afe602b2ea0a04b66beb2c0|
   
 **queryModeInfo**
 
@@ -1995,18 +1995,18 @@ Example output:
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Agent Domain|string|None|False|Agent domain|WORKGROUP|
-|Agent Group ID|string|None|False|Agent group ID|1|
-|Agent ID|string|None|False|Agent ID|1|
+|Agent Group ID|string|None|False|Agent group ID|100000000000000000|
+|Agent ID|string|None|False|Agent ID|100000000000000000|
 |Agent Infected|boolean|None|False|Agent infected|False|
 |Agent IP|string|None|False|Agent IP|198.51.100.1|
 |Agent is Active|boolean|None|False|Agent is active|True|
 |Agent is Decommissioned|boolean|None|False|Agent is decommissioned|False|
 |Agent Machine Type|string|None|False|Agent machine type|desktop|
-|Agent Name|string|None|False|Agent name|ExampleName1|
+|Agent Name|string|None|False|Agent name|Example Name|
 |Agent Network Status|string|None|False|Agent network status|connected|
 |Agent OS|string|None|False|Agent Operating System|windows|
 |Agent Timestamp|string|None|False|Agent timestamp|2023-01-01 00:00:00+00:00|
-|Agent UUID|string|None|False|Agent UUID|b7b2d39171be4ae1af90f93d7ed20f07|
+|Agent UUID|string|None|False|Agent UUID|9de5069c5afe602b2ea0a04b66beb2c0|
 |Agent Version|string|None|False|Agent version|1.0.3.4|
 |Attributes|[]object|None|False|Attributes|[]|
 |Child Process Count|string|None|False|Child process count|0|
@@ -2017,34 +2017,34 @@ Example output:
 |Destination IP|string|None|False|Destination IP|198.51.100.1|
 |Destination Port|integer|None|False|Object type|8000|
 |Endpoint Machine Type|string|None|False|Endpoint machine type|desktop|
-|Endpoint Name|string|None|False|Endpoint name|ExampleName1|
+|Endpoint Name|string|None|False|Endpoint name|Example Name|
 |Endpoint OS|string|None|False|Endpoint OS|windows|
 |Event Time|string|None|False|Event time|2023-01-01 00:00:00+00:00|
 |Event Type|string|None|False|Event type|Process Creation|
 |File Full Name|string|None|False|File full name|C:\\PROGRAMDATA\\Microsoft\\1234|
 |File ID|string|None|False|File ID|ABCD1234|
-|File MD5|string|None|False|File MD5|1a79a4d60de6718e8e5b326e338ae533|
-|File SHA1|string|None|False|File SHA1|c3499c2729730a7f807efb8676a92dcb6f8a3f8f|
-|File SHA256|string|None|False|File SHA256|1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014|
+|File MD5|string|None|False|File MD5|9de5069c5afe602b2ea0a04b66beb2c0|
+|File SHA1|string|None|False|File SHA1|02699626f388ed830012e5b787640e71c56d42d8|
+|File SHA256|string|None|False|File SHA256|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
 |File Size|string|None|False|File size|1234|
 |File Type|string|None|False|File type|image|
-|Forensic URL|string|None|False|Forensic URL|example.com|
-|ID|string|None|False|ID|1|
+|Forensic URL|string|None|False|Forensic URL|https://example.com|
+|ID|string|None|False|ID|100000000000000000|
 |Indicator Category|string|None|False|Indicator category|General|
 |Indicator Description|string|None|False|Indicator description|Example Description|
 |Indicator Metadata|string|None|False|Indicator metadata|Example Metadata|
 |Indicator Name|string|None|False|Indicator name|ProcessEnumeration|
 |Logins Base Type|string|None|False|Logins base type|example|
 |Logins User Name|string|None|False|Logins user name|user1|
-|MD5|string|None|False|MD5|1a79a4d60de6718e8e5b326e338ae533|
+|MD5|string|None|False|MD5|9de5069c5afe602b2ea0a04b66beb2c0|
 |Network Method|string|None|False|Network method|GET|
 |Network Source|string|None|False|Network source|Example Source|
-|Network URL|string|None|False|Network URL|example.com|
+|Network URL|string|None|False|Network URL|https://example.com|
 |Object Type|string|None|False|Object type|file|
-|Old File MD5|string|None|False|Old file MD5|1a79a4d60de6718e8e5b326e338ae533|
+|Old File MD5|string|None|False|Old file MD5|9de5069c5afe602b2ea0a04b66beb2c0|
 |Old File Name|string|None|False|Old file name|example.txt|
-|Old File SHA1|string|None|False|Old file SHA1|c3499c2729730a7f807efb8676a92dcb6f8a3f8f|
-|Old File SHA256|string|None|False|Old file SHA256|50d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c|
+|Old File SHA1|string|None|False|Old file SHA1|02699626f388ed830012e5b787640e71c56d42d8|
+|Old File SHA256|string|None|False|Old file SHA256|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
 |Parent PID|string|None|False|Parent PID|1234|
 |Parent Process Group ID|string|None|False|Parent process group ID|1234|
 |Parent Process is Malicious|boolean|None|False|Parent process is malicious|False|
@@ -2056,7 +2056,7 @@ Example output:
 |Process Display Name|string|None|False|Process display name|Example Process|
 |Process Group ID|string|None|False|Process group ID|ABCD1234|
 |Process Image Path|string|None|False|Process image path|C:\\test\\example.exe|
-|Process Image SHA1 Hash|string|None|False|Process image SHA1 hash|c3499c2729730a7f807efb8676a92dcb6f8a3f8f|
+|Process Image SHA1 Hash|string|None|False|Process image SHA1 hash|02699626f388ed830012e5b787640e71c56d42d8|
 |Process Integrity Level|string|None|False|Process integrity level|SYSTEM|
 |Process is Malicious|boolean|None|False|Process is malicious|False|
 |Process is Redirected Command Processor|string|None|False|Process is redirected command processor|True|
@@ -2073,11 +2073,11 @@ Example output:
 |Registry Path|string|None|False|Registry path|MACHINE\\SYSTEM\\Ids\\{1234}|
 |Related to Threat|string|None|False|Related to threat|False|
 |RPID|string|None|False|RPID|ABCD1234|
-|SHA1|string|None|False|SHA1|c3499c2729730a7f807efb8676a92dcb6f8a3f8f|
-|SHA256|string|None|False|SHA256|50d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c|
+|SHA1|string|None|False|SHA1|02699626f388ed830012e5b787640e71c56d42d8|
+|SHA256|string|None|False|SHA256|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
 |Signature Signed Invalid Reason|string|None|False|Signature signed invalid reason|Example Reason|
 |Signed Status|string|None|False|Signed status|signed|
-|Site Name|string|None|False|Site name|Rapid7|
+|Site Name|string|None|False|Site name|Example Site|
 |Source IP|string|None|False|Source IP|198.51.100.1|
 |Source Port|integer|None|False|Source port|8000|
 |Task Name|string|None|False|Task name|Example Name|
@@ -2097,7 +2097,7 @@ Example output:
 
 # Version History
 
-* 9.0.0 - Set `cloud_ready` to `true` in plugin spec | Rename URL input to Instance in connection | Code refactor
+* 9.0.0 - Update plugin to allow cloud connections to be configured | Rename URL input to Instance in connection | Code refactor
 * 8.1.0 - Added New actions: Fetch file for agent ID and Run remote script. Updated description for Trigger resolved field
 * 8.0.1 - Search Agents: Remove duplicate results when Case Sensitive is false
 * 8.0.0 - Connection: Added Service user (API only user type) authentication | Removed Basic Authentication
