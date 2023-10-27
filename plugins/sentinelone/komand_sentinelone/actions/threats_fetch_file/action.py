@@ -3,6 +3,7 @@ from .schema import ThreatsFetchFileInput, ThreatsFetchFileOutput, Input, Output
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
+from datetime import datetime
 
 
 class ThreatsFetchFile(insightconnect_plugin_runtime.Action):
@@ -15,7 +16,7 @@ class ThreatsFetchFile(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        threat_id = params.get(Input.ID, None)
+        threat_id = params.get(Input.ID)
         password = params.get(Input.PASSWORD)
 
         if len(password) <= 10 or " " in password:
@@ -23,11 +24,9 @@ class ThreatsFetchFile(insightconnect_plugin_runtime.Action):
                 cause="Wrong password.",
                 assistance="Password must have more than 10 characters and cannot contain whitespace.",
             )
+        self.connection.client.check_if_threats_exist([threat_id])
 
-        agent_filter = {"ids": [threat_id]}
-        self.connection.threats_fetch_file(params.get(Input.PASSWORD), agent_filter)
-        if agent_filter["ids"]:
-            agent_filter["threatIds"] = agent_filter["ids"]
-            del agent_filter["ids"]
+        fetch_date = f"{datetime.utcnow().isoformat()}Z"
+        self.connection.client.threats_fetch_file(params.get(Input.PASSWORD), {"ids": [threat_id]})
 
-        return {Output.FILE: self.connection.download_file(agent_filter, password)}
+        return {Output.FILE: self.connection.client.download_file({"threatIds": threat_id}, fetch_date, password)}

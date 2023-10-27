@@ -1,6 +1,9 @@
 import insightconnect_plugin_runtime
 from .schema import AppsByAgentIdsInput, AppsByAgentIdsOutput, Input, Output, Component
-from komand_sentinelone.util.helper import Helper
+
+# Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_sentinelone.util.helper import clean, Helper
 
 
 class AppsByAgentIds(insightconnect_plugin_runtime.Action):
@@ -13,11 +16,11 @@ class AppsByAgentIds(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        response = self.connection.apps_by_agent_ids(Helper.join_or_empty(params.get(Input.IDS, [])))
+        ids = Helper.join_or_empty(params.get(Input.IDS, []))
 
-        data = []
-        if Output.DATA in response:
-            for i in response.get(Output.DATA):
-                data.append(insightconnect_plugin_runtime.helper.clean_dict(i))
-
-        return {Output.DATA: data}
+        if not ids:
+            raise PluginException(
+                cause="Input validation error.",
+                assistance="Please provide valid 'Agent IDs' input.",
+            )
+        return {Output.DATA: self.connection.client.apps_by_agent_ids(ids).get("data", [])}

@@ -1,0 +1,5 @@
+{
+  "agent": "",
+  "filter": {"computerName":  "Hostname1"},
+  "reboot": false
+}

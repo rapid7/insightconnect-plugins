@@ -3,59 +3,61 @@ import os
 
 sys.path.append(os.path.abspath("../"))
 
+from unittest import TestCase
 from unittest.mock import patch
 from komand_sentinelone.actions.blacklist import Blacklist
-from komand_sentinelone.actions.blacklist.schema import Input
+from util import Util
+from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
-from unit_test.util import Util
-from unittest import TestCase
 
 
+@patch("requests.request", side_effect=Util.mocked_requests_get)
 class TestBlacklist(TestCase):
     @classmethod
     @patch("requests.post", side_effect=Util.mocked_requests_get)
     def setUpClass(cls, mock_request) -> None:
         cls.action = Util.default_connector(Blacklist())
 
-    def test_should_fail_when_wrong_api_version(self):
+    @parameterized.expand(
+        [
+            [
+                "success",
+                Util.read_file_to_dict("inputs/blacklist.json.inp"),
+                Util.read_file_to_dict("expected/blacklist.json.exp"),
+            ],
+            [
+                "already_blacklisted",
+                Util.read_file_to_dict("inputs/blacklist_already_blacklisted.json.inp"),
+                Util.read_file_to_dict("expected/blacklist_already_blacklisted.json.exp"),
+            ],
+            [
+                "unblacklist",
+                Util.read_file_to_dict("inputs/unblacklist.json.inp"),
+                Util.read_file_to_dict("expected/unblacklist.json.exp"),
+            ],
+            [
+                "unblacklist_not_exist",
+                Util.read_file_to_dict("inputs/unblacklist_not_exist.json.inp"),
+                Util.read_file_to_dict("expected/unblacklist_not_exist.json.exp"),
+            ],
+        ]
+    )
+    def test_blacklist(self, mock_request, test_name, input_params, expected):
+        actual = self.action.run(input_params)
+        self.assertEqual(expected, actual)
+
+    @parameterized.expand(
+        [
+            [
+                "invalid_hash",
+                Util.read_file_to_dict("inputs/blacklist_invalid_hash.json.inp"),
+                "An invalid hash was provided.",
+                "Please enter a SHA1 hash and try again.",
+            ]
+        ]
+    )
+    def test_blacklist_raise_exception(self, mock_request, test_name, input_params, cause, assistance):
         with self.assertRaises(PluginException) as error:
-            self.action.run({Input.HASH: "wrong_hash"})
-
-        self.assertEqual("An invalid hash was provided.", error.exception.cause)
-        self.assertEqual("Please enter a SHA1 hash and try again.", error.exception.assistance)
-
-    @patch("requests.request", side_effect=Util.mocked_requests_get)
-    def test_should_success_when_blacklist(self, mock_request):
-        expected = {"message": "The given hash has been blocked", "success": True}
-        actual = self.action.run({Input.HASH: "3395856ce81f2b7382dee72602f798b642f14140", Input.BLACKLIST_STATE: True})
-        self.assertEqual(expected, actual)
-
-    @patch("requests.request", side_effect=Util.mocked_requests_get)
-    def test_should_success_when_unblacklist(self, mock_request):
-        expected = {"message": "The given hash has been unlocked", "success": True}
-        actual = self.action.run({Input.HASH: "3395856ce81f2b7382dee72602f798b642f14140", Input.BLACKLIST_STATE: False})
-        self.assertEqual(expected, actual)
-
-    @patch("requests.request", side_effect=Util.mocked_requests_get)
-    def test_should_success_when_blacklist_and_description(self, mock_request):
-        expected = {"message": "The given hash has been blocked", "success": True}
-        actual = self.action.run(
-            {
-                Input.HASH: "3395856ce81f2b7382dee72602f798b642f14140",
-                Input.BLACKLIST_STATE: True,
-                Input.DESCRIPTION: "Description",
-            }
-        )
-        self.assertEqual(expected, actual)
-
-    @patch("requests.request", side_effect=Util.mocked_requests_get)
-    def test_should_success_when_unblacklist_and_description(self, mock_request):
-        expected = {"message": "The given hash has been unlocked", "success": True}
-        actual = self.action.run(
-            {
-                Input.HASH: "3395856ce81f2b7382dee72602f798b642f14140",
-                Input.BLACKLIST_STATE: False,
-                Input.DESCRIPTION: "Description",
-            }
-        )
-        self.assertEqual(expected, actual)
+            self.action.run(input_params)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)

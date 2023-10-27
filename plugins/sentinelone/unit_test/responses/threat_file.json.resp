@@ -1,0 +1,56 @@
+{
+  "data": [
+    {
+      "accountId": "1000000000000000000",
+      "accountName": "Account",
+      "activityType": 86,
+      "activityUuid": "aaaaa-aa-adsadsad-asadasd",
+      "agentId": "1000000000000000000",
+      "agentUpdatedVersion": null,
+      "comments": null,
+      "createdAt": "2023-09-27T12:16:43.525758Z",
+      "data": {
+        "accountName": "Rapid7",
+        "commandBatchUuid": "aaaaa-aa-adsadsad-asadasd",
+        "commandId": 1000000000000000000,
+        "computerName": "WindowsX64",
+        "downloadUrl": "/agents/1000000000000000000/uploads/1000000000000000000",
+        "escapedMaliciousProcessArguments": null,
+        "externalIp": "0.0.0.0",
+        "fileContentHash": "1000000000000000000",
+        "fileDisplayName": "file.txt",
+        "filePath": "/agents/1000000000000000000/uploads/1000000000000000000",
+        "fileSize": 68,
+        "filename": "WindowsX64_2023-09-27_12_16_43.503.zip",
+        "fullScopeDetails": "Details",
+        "fullScopeDetailsPath": "Details Path",
+        "groupName": "Default Group",
+        "ipAddress": null,
+        "realUser": null,
+        "siteName": "Example Site",
+        "sourceType": "API",
+        "storyline": "1000000000000000000",
+        "threatClassification": "Malware",
+        "threatClassificationSource": "Static",
+        "uploadedFilename": "WindowsX64_2023-09-27_07:16:43.zip"
+      },
+      "description": null,
+      "groupId": "1000000000000000000",
+      "groupName": "Default Group",
+      "hash": null,
+      "id": "1000000000000000000",
+      "osFamily": null,
+      "primaryDescription": "Agent WindowsX64 (0.0.0.0) successfully uploaded a threat file.",
+      "secondaryDescription": "WindowsX64_2023-09-27_07:16:43.zip (Group ID: 1000000000000000000).",
+      "siteId": "1000000000000000000",
+      "siteName": "Example Site",
+      "threatId": "1000000000000000000",
+      "updatedAt": "2023-09-27T12:16:43.525095Z",
+      "userId": null
+    }
+  ],
+  "pagination": {
+    "nextCursor": null,
+    "totalItems": 1
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "data": {
+    "decommissioned": 1,
+    "infected": 1,
+    "outOfDate": 1,
+    "online": 1,
+    "total": 1,
+    "upToDate": 1
+  }
+}

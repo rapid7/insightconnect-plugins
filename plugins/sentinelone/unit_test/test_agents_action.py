@@ -3,43 +3,91 @@ import os
 
 sys.path.append(os.path.abspath("../"))
 
+from unittest import TestCase
 from unittest.mock import patch
 from komand_sentinelone.actions.agents_action import AgentsAction
-from komand_sentinelone.actions.agents_action.schema import Input
+from util import Util
+from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
-from unit_test.util import Util
-from unittest import TestCase
 
 
+@patch("requests.request", side_effect=Util.mocked_requests_get)
 class TestAgentsAction(TestCase):
     @classmethod
     @patch("requests.post", side_effect=Util.mocked_requests_get)
     def setUpClass(cls, mock_request) -> None:
         cls.action = Util.default_connector(AgentsAction())
-        Util.mock_response_params = {}
 
-    @patch("requests.request", side_effect=Util.mocked_requests_get)
-    def test_should_success_with_filter(self, mock_request):
-        expected = {"affected": 1}
-        for test in [
-            "abort-scan",
-            "connect",
-            "decommission",
-            "disconnect",
-            "fetch-logs",
-            "initiate-scan",
-            "restart-machine",
-            "shutdown",
-            "uninstall",
-        ]:
-            with self.subTest(f"Running agent with action: {test}"):
-                actual = self.action.run({Input.FILTER: '{"ids": ["1000000000000000000"]}', Input.ACTION: test})
-                self.assertEqual(expected, actual)
+    @parameterized.expand(
+        [
+            [
+                "initiate-scan",
+                Util.read_file_to_dict("inputs/agents_action_initiate_scan.json.inp"),
+                Util.read_file_to_dict("expected/affected.json.exp"),
+            ],
+            [
+                "abort-scan",
+                Util.read_file_to_dict("inputs/agents_action_abort_scan.json.inp"),
+                Util.read_file_to_dict("expected/affected.json.exp"),
+            ],
+            [
+                "fetch-logs",
+                Util.read_file_to_dict("inputs/agents_action_fetch_logs.json.inp"),
+                Util.read_file_to_dict("expected/affected.json.exp"),
+            ],
+            [
+                "connect",
+                Util.read_file_to_dict("inputs/agents_action_connect.json.inp"),
+                Util.read_file_to_dict("expected/affected.json.exp"),
+            ],
+            [
+                "disconnect",
+                Util.read_file_to_dict("inputs/agents_action_disconnect.json.inp"),
+                Util.read_file_to_dict("expected/affected.json.exp"),
+            ],
+            [
+                "restart-machine",
+                Util.read_file_to_dict("inputs/agents_action_restart_machine.json.inp"),
+                Util.read_file_to_dict("expected/affected.json.exp"),
+            ],
+            [
+                "disconnect",
+                Util.read_file_to_dict("inputs/agents_action_shutdown.json.inp"),
+                Util.read_file_to_dict("expected/affected.json.exp"),
+            ],
+            [
+                "uninstall",
+                Util.read_file_to_dict("inputs/agents_action_uninstall.json.inp"),
+                Util.read_file_to_dict("expected/affected.json.exp"),
+            ],
+            [
+                "decommission",
+                Util.read_file_to_dict("inputs/agents_action_decommission.json.inp"),
+                Util.read_file_to_dict("expected/affected.json.exp"),
+            ],
+            [
+                "not_found",
+                Util.read_file_to_dict("inputs/agents_action_not_found.json.inp"),
+                Util.read_file_to_dict("expected/unaffected.json.exp"),
+            ],
+        ]
+    )
+    def test_agents_action(self, mock_request, test_name, input_params, expected):
+        actual = self.action.run(input_params)
+        self.assertEqual(expected, actual)
 
-    @patch("requests.request", side_effect=Util.mocked_requests_get)
-    def test_fail_when_wrong_action(self, mock_request):
+    @parameterized.expand(
+        [
+            [
+                "invalid_filter",
+                Util.read_file_to_dict("inputs/agents_action_invalid_filter.json.inp"),
+                "Wrong filter parameter.",
+                "One of the following filter arguments must be supplied - ids, groupIds or filterId.",
+            ]
+        ]
+    )
+    def test_agents_action_raise_exception(self, mock_request, test_name, input_params, cause, assistance):
         with self.assertRaises(PluginException) as error:
-            self.action.run({Input.FILTER: '{"ids": ["1000000000000000000"]}', Input.ACTION: "wrong_action"})
-
-        self.assertEqual(error.exception.cause, "API call failed: This is some error text")
-        self.assertEqual(error.exception.assistance, "")
+            self.action.run(input_params)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)
