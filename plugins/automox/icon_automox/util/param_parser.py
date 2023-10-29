@@ -1,4 +1,7 @@
-def inputs_to_query_params(input_dict: dict) -> dict:
+from typing import Dict
+
+
+def inputs_to_query_params(input_dict: Dict) -> Dict:
     """
     Takes a dict of input parameters and returns a dict of query parameters, useful when plugin inputs names do not
     match the API query parameters exactly.

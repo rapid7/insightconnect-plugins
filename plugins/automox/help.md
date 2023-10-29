@@ -112,6 +112,11 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "id": 1234,
+  "status": "building"
+}
 ```
 
 #### Update Group
@@ -159,6 +164,10 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "success": true
+}
 ```
 
 #### Update Device
@@ -201,6 +210,10 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "success": true
+}
 ```
 
 #### Run Device Command
@@ -240,6 +253,10 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "success": true
+}
 ```
 
 #### List Vulnerability Sync Action Sets
@@ -299,6 +316,48 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "action_sets": [
+    {
+      "created_at": "2023-10-10T03:45:26+0000",
+      "created_by_user": {
+        "email": "engineer@example.com",
+        "firstname": "Engineer",
+        "id": 1234,
+        "lastname": "Example"
+      },
+      "id": 1234,
+      "organization_id": 1234,
+      "source": {
+        "name": "insightconnect-uploaded-report.csv",
+        "type": "generic"
+      },
+      "statistics": {
+        "issues": {
+          "unknown-host": {
+            "count": 4
+          }
+        },
+        "solutions": {
+          "patch-with-worklet": {
+            "count": 1,
+            "device_count": 18,
+            "vulnerability_count": 1
+          }
+        }
+      },
+      "status": "ready",
+      "updated_at": "2023-10-10T03:45:30+0000",
+      "updated_by_user": {
+        "email": "engineer@example.com",
+        "firstname": "Engineer",
+        "id": 1234,
+        "lastname": "Example"
+      }
+    }
+  ]
+}
 ```
 
 #### List Vulnerability Sync Action Set Solutions
@@ -348,6 +407,230 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "solutions": [
+    {
+      "device_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "devices": [
+        {
+          "custom_name": "Unknown",
+          "id": 1,
+          "ip_addrs_private": [
+            "10.0.0.68",
+            "fe80::98ad:4391:f22f:d3ae"
+          ],
+          "name": "demo-windows2019-0",
+          "status": "timed_out"
+        },
+        {
+          "custom_name": "Unknown",
+          "id": 2,
+          "ip_addrs_private": [
+            "10.0.0.244",
+            "fe80::6910:9c6e:8be4:7b35"
+          ],
+          "name": "demo-windows2019-3",
+          "status": "timed_out"
+        },
+        {
+          "custom_name": "ip-10-0-0-28",
+          "id": 3,
+          "ip_addrs_private": [
+            "10.0.0.28",
+            "fe80::9ddf:1baa:ef6f:32b8"
+          ],
+          "name": "ip-10-0-0-28",
+          "status": "timed_out"
+        },
+        {
+          "custom_name": "Unknown",
+          "id": 4,
+          "ip_addrs_private": [
+            "10.0.0.209",
+            "fe80::e112:6743:d6ba:aac"
+          ],
+          "name": "ip-10-0-0-209",
+          "status": "timed_out"
+        },
+        {
+          "custom_name": "ip-10-0-0-40",
+          "id": 5,
+          "ip_addrs_private": [
+            "10.0.0.40",
+            "fe80::f842:e66a:b80e:c396"
+          ],
+          "name": "ip-10-0-0-40",
+          "status": "timed_out"
+        },
+        {
+          "custom_name": "DESKTOP",
+          "id": 6,
+          "ip_addrs_private": [
+            "10.0.0.133",
+            "fe80::ad22:6aa1:6cf1:18b7"
+          ],
+          "name": "DESKTOP",
+          "status": "timed_out"
+        },
+        {
+          "custom_name": "Unknown",
+          "id": 7,
+          "ip_addrs_private": [
+            "10.0.0.119",
+            "fe80::b58e:5cd8:c618:3036"
+          ],
+          "name": "demo-windows2019-7",
+          "status": "timed_out"
+        },
+        {
+          "custom_name": "Unknown",
+          "id": 8,
+          "ip_addrs_private": [
+            "10.0.0.116",
+            "fe80::9871:3b0e:56c0:8ddc"
+          ],
+          "name": "demo-windows2019-2",
+          "status": "timed_out"
+        },
+        {
+          "custom_name": "Unknown",
+          "id": 9,
+          "ip_addrs_private": [
+            "10.0.0.74",
+            "fe80::9c8b:5ae8:6ce9:40d0"
+          ],
+          "name": "demo-windows2019-8",
+          "status": "timed_out"
+        },
+        {
+          "custom_name": "ip-10-0-0-22",
+          "id": 10,
+          "ip_addrs_private": [
+            "10.0.0.22",
+            "fe80::8008:8027:7533:c02d"
+          ],
+          "name": "ip-10-0-0-22",
+          "status": "timed_out"
+        },
+        {
+          "custom_name": "DESKTOP",
+          "id": 11,
+          "ip_addrs_private": [
+            "10.0.0.14",
+            "10.0.0.15",
+            "169.254.178.151",
+            "fe80::7894:fefd:f512:4af9",
+            "fe80::cc6e:37c9:687d:3edc"
+          ],
+          "name": "DESKTOP",
+          "status": "timed_out"
+        },
+        {
+          "custom_name": "Unknown",
+          "id": 12,
+          "ip_addrs_private": [
+            "10.0.0.173",
+            "fe80::552:fc9b:fcad:3dbf"
+          ],
+          "name": "demo-windows2019-1",
+          "status": "timed_out"
+        },
+        {
+          "custom_name": "Unknown",
+          "id": 13,
+          "ip_addrs_private": [
+            "10.0.0.160",
+            "fe80::540c:5365:3ef2:56de"
+          ],
+          "name": "demo-windows2019-4",
+          "status": "timed_out"
+        },
+        {
+          "custom_name": "ip-10-0-0-227",
+          "id": 14,
+          "ip_addrs_private": [
+            "10.0.0.227",
+            "fe80::a1eb:2ed7:5d55:a009"
+          ],
+          "name": "ip-10-0-0-227",
+          "status": "timed_out"
+        },
+        {
+          "custom_name": "Unknown",
+          "id": 15,
+          "ip_addrs_private": [
+            "10.0.0.6",
+            "fe80::79ec:127f:8af1:2266"
+          ],
+          "name": "demo-windows2019-6",
+          "status": "timed_out"
+        },
+        {
+          "custom_name": "Unknown",
+          "id": 16,
+          "ip_addrs_private": [
+            "10.0.0.214",
+            "fe80::f5f3:b5b2:972c:b51f"
+          ],
+          "name": "demo-windows2019-5",
+          "status": "timed_out"
+        },
+        {
+          "custom_name": "ip-10-0-0-42",
+          "id": 17,
+          "ip_addrs_private": [
+            "10.0.0.42",
+            "fe80::18a5:516d:6c66:c516"
+          ],
+          "name": "ip-10-0-0-42",
+          "status": "timed_out"
+        },
+        {
+          "custom_name": "Unknown",
+          "deleted": true,
+          "id": 18,
+          "ip_addrs_private": [
+            "10.0.0.253",
+            "fe80::e141:1176:a4e0:6093"
+          ],
+          "name": "demo-windows2019-9",
+          "status": "timed_out"
+        }
+      ],
+      "id": 1234,
+      "organization_id": 1234,
+      "remediation_type": "patch-with-worklet",
+      "solution_type": "unmatched",
+      "vulnerabilities": [
+        {
+          "id": "CVE-2021-24111",
+          "severity": "high",
+          "title": ".NET Framework Denial of Service Vulnerability"
+        }
+      ]
+    }
+  ]
+}
 ```
 
 #### List Vulnerability Sync Action Set Issues
@@ -383,6 +666,39 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "issues": [
+    {
+      "id": 1237,
+      "issue_details": {
+        "hostname": "win2016-demo"
+      },
+      "issue_type": "unknown-host"
+    },
+    {
+      "id": 1236,
+      "issue_details": {
+        "hostname": "Win10-VM-1"
+      },
+      "issue_type": "unknown-host"
+    },
+    {
+      "id": 1235,
+      "issue_details": {
+        "hostname": "windows2019-1"
+      },
+      "issue_type": "unknown-host"
+    },
+    {
+      "id": 1234,
+      "issue_details": {
+        "hostname": "windows2019-0"
+      },
+      "issue_type": "unknown-host"
+    }
+  ]
+}
 ```
 
 #### List Policies
@@ -517,6 +833,32 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "action_set": {
+    "created_at": "2023-10-29T21:25:18+0000",
+    "created_by_user": {
+      "email": "engineer@example.com",
+      "firstname": "Engineer",
+      "id": 1234,
+      "lastname": "Example"
+    },
+    "id": 1234,
+    "organization_id": 1234,
+    "source": {
+      "name": "insightconnect-uploaded-report.csv",
+      "type": "generic"
+    },
+    "status": "building",
+    "updated_at": "2023-10-29T21:25:18+0000",
+    "updated_by_user": {
+      "email": "engineer@example.com",
+      "firstname": "Engineer",
+      "id": 1234,
+      "lastname": "Example"
+    }
+  }
+}
 ```
 
 #### Get Device by IP Address
@@ -625,6 +967,30 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "group": {
+    "id": 1234,
+    "name": "InsightConnect",
+    "organization": {
+      "bill_overages": true,
+      "billing_interval": "month",
+      "billing_interval_count": 1,
+      "create_time": "2022-06-03 20:22:52.261394",
+      "id": 1234,
+      "legacy_billing": true,
+      "name": "InsightConnect",
+      "rate_id": 1234,
+      "sub_plan": "TIER3",
+      "updated_at": "2022-06-03 20:22:52.261394",
+      "uuid": "a4f7ceab-4bc2-4588-abe7-25af271f1156"
+    },
+    "organization_id": 1234,
+    "parent_server_group_id": 1234,
+    "refresh_interval": 1440
+  },
+  "success": true
+}
 ```
 
 #### Delete Device
@@ -656,6 +1022,10 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "success": true
+}
 ```
 
 #### Delete Group
@@ -687,6 +1057,10 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "success": true
+}
 ```
 
 #### Delete Vulnerability Sync Action Set
@@ -718,6 +1092,10 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "success": true
+}
 ```
 
 #### Execute Vulnerability Sync Actions
@@ -747,6 +1125,10 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "success": true
+}
 ```
 
 ##### Output
@@ -828,7 +1210,12 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.0 - Fix Vulnerability Sync API Actions
+* 2.0.0 - Fix Vulnerability Sync API Actions | Add Delete Vulnerability Sync Action Set action | Add Execute
+  Vulnerability Sync Actions action | Add List Vulnerability Sync Action Set Issues
+  action | Add List Vulnerability Sync Action Set Solutions action | Add List Vulnerability Sync Action Sets action |
+  | Add Get Vulnerability Sync Action Set action | Update Upload Vulnerability Sync File action 
+  | Update Get Devices action | Remove Action on Vulnerability Sync Batch | Remove Action on Vulnerability Sync Task
+  | Remove Get Vulnerability Sync Batch | Remove List Vulnerability Sync Batches | Remove List Vulnerability Sync Tasks
 * 1.2.0 - Get device by IP and Get device by hostname: fix validation issue when IP or hostname not found | Add unit
   tests
 * 1.1.1 - Fix undefined org ID passed to actions when not required | Record outcome of connection tests

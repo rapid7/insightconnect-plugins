@@ -31,7 +31,7 @@ class ApiClient:
             "content-type": "application/json",
         }
 
-    def _call_api(self, method: str, url: str, params=None, json_data: object = None) -> Optional[dict]:
+    def _call_api(self, method: str, url: str, params=None, json_data: object = None) -> Optional[Dict]:
         if params is None:
             params = {}
         try:
@@ -64,7 +64,7 @@ class ApiClient:
             self.logger.info(f"Call to Automox Console API failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
-    def _page_results(self, url: str, params=None, sanitize: bool = True) -> [dict]:
+    def _page_results(self, url: str, params=None, sanitize: bool = True) -> List[Dict]:
         if params is None:
             params = {}
         params = self.first_page(params)
@@ -87,7 +87,7 @@ class ApiClient:
 
         return page_resp
 
-    def _page_results_data(self, url: str, params=None) -> [dict]:
+    def _page_results_data(self, url: str, params=None) -> List[Dict]:
         if params is None:
             params = {}
         params = self.first_page(params)
@@ -119,7 +119,7 @@ class ApiClient:
             return d
 
     @staticmethod
-    def _org_param(org_id: int) -> dict:
+    def _org_param(org_id: int) -> Dict:
         if not org_id:
             return {}
 
@@ -156,7 +156,7 @@ class ApiClient:
     def get_device(self, org_id: int, device_id: int) -> Dict:
         return self._call_api("GET", f"{self.endpoint}/servers/{device_id}", params=self._org_param(org_id))
 
-    def find_device_by_attribute(self, org_id: int, attributes: List[str], value: str) -> dict:
+    def find_device_by_attribute(self, org_id: int, attributes: List[str], value: str) -> Dict:
         params = self.first_page(self._org_param(org_id))
 
         while True:
@@ -230,7 +230,7 @@ class ApiClient:
 
     # Policies
     @staticmethod
-    def _sanitize_policies(policies: [dict]) -> List[Dict]:
+    def _sanitize_policies(policies: List[Dict]) -> List[Dict]:
         for policy in policies:
             for key, fields in {"configuration": ["evaluation_code", "installation_code", "remediation_code"]}.items():
                 if key in policy:

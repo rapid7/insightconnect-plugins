@@ -19,7 +19,10 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.automox.com/
 enable_cache: false
-
+sdk:
+  type: slim
+  version: 5
+  user: nobody
 types:
   organization:
     id:
