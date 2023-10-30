@@ -205,7 +205,9 @@ def extract_content_from_file(provided_file: bytes, provided_regex: str = "") ->
 
 
 def extract_wrapped_words_from_pdf_page(
-    page: Page, provided_regex: str = "", tolerance: float = DEFAULT_PDF_WRAPPING_TOLERANCE,
+    page: Page,
+    provided_regex: str = "",
+    tolerance: float = DEFAULT_PDF_WRAPPING_TOLERANCE,
 ) -> List[str]:
     """
     Extract wrapped words from a PDF page.
@@ -226,11 +228,11 @@ def extract_wrapped_words_from_pdf_page(
     wrapped_words = []
     max_x1 = max(character.get("x1") for character in page.chars)
     extracted_words = page.extract_words(use_text_flow=True)
-    
+
     for index, word in enumerate(extracted_words):
         if (max_x1 - word.get("x1")) < tolerance:
             # if the current or next word in the list are valid matches then do not try and join then
-            if (provided_regex):
+            if provided_regex:
                 if (
                     not regex.findall(provided_regex, word.get("text", ""))
                     and (index + 1) < len(extracted_words)
