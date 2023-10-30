@@ -19,8 +19,13 @@ class UpdateDevice(insightconnect_plugin_runtime.Action):
             params.get(Input.ORG_ID), params.get(Input.DEVICE_ID)
         )
 
+        # Set server_group_id to current value if not provided as input
+        # ICON will set the default value to 0, which causes the params.get() use an invalid group ID
+        server_group_id = current_device_details["server_group_id"]
+        if params.get(Input.SERVER_GROUP_ID) != 0:
+            server_group_id = params.get(Input.SERVER_GROUP_ID)
         payload = {
-            "server_group_id": params.get(Input.SERVER_GROUP_ID, current_device_details["server_group_id"]),
+            "server_group_id": server_group_id,
             "ip_addrs": current_device_details["ip_addrs"],
             "exception": params.get(Input.EXCEPTION, current_device_details["exception"]),
             "tags": params.get(Input.TAGS, current_device_details["tags"]),

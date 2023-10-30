@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Automox"
 Vendor = "automox"
-Version = "1.2.0"
+Version = "2.0.0"
 Description = "Automox is modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment"
 
 
@@ -36,15 +36,15 @@ def main():
             )
             self.add_trigger(triggers.GetEvents())
 
-            self.add_action(actions.ActionOnVulnerabilitySyncBatch())
-
-            self.add_action(actions.ActionOnVulnerabilitySyncTask())
-
             self.add_action(actions.CreateGroup())
 
             self.add_action(actions.DeleteDevice())
 
             self.add_action(actions.DeleteGroup())
+
+            self.add_action(actions.DeleteVulnerabilitySyncActionSet())
+
+            self.add_action(actions.ExecuteVulnerabilitySyncActions())
 
             self.add_action(actions.GetDeviceByHostname())
 
@@ -52,7 +52,7 @@ def main():
 
             self.add_action(actions.GetDeviceSoftware())
 
-            self.add_action(actions.GetVulnerabilitySyncBatch())
+            self.add_action(actions.GetVulnerabilitySyncActionSet())
 
             self.add_action(actions.ListDevices())
 
@@ -64,9 +64,11 @@ def main():
 
             self.add_action(actions.ListPolicies())
 
-            self.add_action(actions.ListVulnerabilitySyncBatches())
+            self.add_action(actions.ListVulnerabilitySyncActionSetIssues())
 
-            self.add_action(actions.ListVulnerabilitySyncTasks())
+            self.add_action(actions.ListVulnerabilitySyncActionSetSolutions())
+
+            self.add_action(actions.ListVulnerabilitySyncActionSets())
 
             self.add_action(actions.RunCommand())
 
