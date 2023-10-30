@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Trend Micro Vision One"
 Vendor = "trendmicro"
-Version = "2.0.0"
+Version = "2.0.1"
 Description = "Trend Micro Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks"
 
 
