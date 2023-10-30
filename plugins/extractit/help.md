@@ -674,6 +674,7 @@ Example output:
 
 # Version History
 
+* 3.0.8 - Adding in extra logic to handle wrapping of lines in pdfs 
 * 3.0.7 - Resolved issues related to `PDF`, `ODP`, `ODT`, `ODF` files extractions 
 * 3.0.6 - Resolved issue where users experienced a `Not in list` value error when submitted multiple URLs with the same linked URL in the URL Extractor action
 * 3.0.5 - Updated error message in extractor.py | Updated help.md description | Updated URL extraction | Fix issue with extracting dates from `.XLSX` files
