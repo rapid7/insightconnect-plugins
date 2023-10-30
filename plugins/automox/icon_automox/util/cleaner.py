@@ -8,4 +8,3 @@ def clean_ax_response(resp: Dict) -> Dict:
     :return:
     """
     return dict(filter(lambda k: k[1] is not None, resp.items()))
-
