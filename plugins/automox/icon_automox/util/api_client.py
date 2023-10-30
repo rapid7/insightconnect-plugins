@@ -304,7 +304,7 @@ class ApiClient:
 
             headers = {"Authorization": f"Bearer {self.api_key}"}
             params = self._org_param(org_id)
-            params['source'] = report_source
+            params["source"] = report_source
 
             try:
                 response = requests.post(
@@ -334,44 +334,47 @@ class ApiClient:
         if params is None:
             params = {}
         params.update(self._org_param(org_id))
-        return self._page_results_data(f"{self.endpoint}/orgs/{org_id}/remediations/action-sets",
-                                       params=params)
+        return self._page_results_data(f"{self.endpoint}/orgs/{org_id}/remediations/action-sets", params=params)
 
     def list_vulnerability_sync_action_set_issues(self, org_id: int, action_set_id: int, params=None) -> List[Dict]:
         if params is None:
             params = {}
         params.update(self._org_param(org_id))
-        return self._page_results_data(f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}/issues",
-                                       params=params)
+        return self._page_results_data(
+            f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}/issues", params=params
+        )
 
     def list_vulnerability_sync_action_set_solutions(self, org_id: int, action_set_id: int, params=None) -> List[Dict]:
         if params is None:
             params = {}
         params.update(self._org_param(org_id))
         return self._page_results_data(
-            f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}/solutions",
-            params=params)
+            f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}/solutions", params=params
+        )
 
     def get_vulnerability_sync_action_set(self, org_id: int, action_set_id: int) -> Dict:
         params = self._org_param(org_id)
-        return self._call_api("GET",
-                              f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}",
-                              params=params)
+        return self._call_api(
+            "GET", f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}", params=params
+        )
 
     def delete_vulnerability_sync_action_set(self, org_id: int, action_set_id: int) -> bool:
         params = self._org_param(org_id)
-        resp = self._call_api("DELETE", f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}",
-                              params=params)
+        resp = self._call_api(
+            "DELETE", f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}", params=params
+        )
         # 204 No Content
         return resp is None
 
     def execute_vulnerability_sync_actions(self, org_id: int, action_set_id: int, actions: List[Dict]) -> Dict:
         params = self._org_param(org_id)
-        data = {
-            "actions": actions
-        }
-        return self._call_api("POST", f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}/actions",
-                              json_data=data, params=params)
+        data = {"actions": actions}
+        return self._call_api(
+            "POST",
+            f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}/actions",
+            json_data=data,
+            params=params,
+        )
 
     # Events
     def get_events(self, org_id: int, event_type: str, page: int = 0) -> List[Dict]:
