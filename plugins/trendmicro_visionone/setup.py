@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="trendmicro_visionone-trendmicro-plugin",
-      version="2.0.0",
+      version="2.0.1",
       description="Trend Micro Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks",
       author="trendmicro",
       author_email="",
