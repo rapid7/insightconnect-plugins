@@ -1,16 +1,8 @@
 {
-	"spec": "cef7bb305cd296dcfe4c91ad08817421",
-	"manifest": "3a0cbf67b2811b37bdb4b2261d7dfc9e",
-	"setup": "7cbcfbc077dc2f9a706059bea2ef8853",
+	"spec": "44a6dd12631d663c562f99b9d60d90c6",
+	"manifest": "396c2cf6f1b72004065cd3d9b4cddd24",
+	"setup": "23fa3840aa940ced79bbee21e7ed4ebd",
 	"schemas": [
-		{
-			"identifier": "action_on_vulnerability_sync_batch/schema.py",
-			"hash": "4b3f998313fe5fcb484c5c4fff7fa004"
-		},
-		{
-			"identifier": "action_on_vulnerability_sync_task/schema.py",
-			"hash": "52c436eab10c0aeaa9a45b9c9401a4d3"
-		},
 		{
 			"identifier": "create_group/schema.py",
 			"hash": "b30f9e829c46827c90d201b294ecf048"
@@ -22,6 +14,14 @@
 		{
 			"identifier": "delete_group/schema.py",
 			"hash": "66b18c900b75652494434b68687062c3"
+		},
+		{
+			"identifier": "delete_vulnerability_sync_action_set/schema.py",
+			"hash": "c572818adf8aa5b2663a99a676af543d"
+		},
+		{
+			"identifier": "execute_vulnerability_sync_actions/schema.py",
+			"hash": "7575fcc4876accb8b39938cb9ec17514"
 		},
 		{
 			"identifier": "get_device_by_hostname/schema.py",
@@ -36,8 +36,8 @@
 			"hash": "42d9b8777f46e6709a38cf4faf40633c"
 		},
 		{
-			"identifier": "get_vulnerability_sync_batch/schema.py",
-			"hash": "5765f142f96aa185edc42e9b11f175c4"
+			"identifier": "get_vulnerability_sync_action_set/schema.py",
+			"hash": "8f10053a4d8feaf624367ef9c3470bd6"
 		},
 		{
 			"identifier": "list_devices/schema.py",
@@ -60,12 +60,16 @@
 			"hash": "b8d3145226dcf46c7cf14ef0d71e78cd"
 		},
 		{
-			"identifier": "list_vulnerability_sync_batches/schema.py",
-			"hash": "90bff67fac53fab74fab99f576f6c789"
+			"identifier": "list_vulnerability_sync_action_set_issues/schema.py",
+			"hash": "473e78302dc489953559411691330fd9"
 		},
 		{
-			"identifier": "list_vulnerability_sync_tasks/schema.py",
-			"hash": "4b6eb5774bcfc5e7c0a7c0e0707b83ee"
+			"identifier": "list_vulnerability_sync_action_set_solutions/schema.py",
+			"hash": "067fc017cdf8fbfdfae8834db77970c5"
+		},
+		{
+			"identifier": "list_vulnerability_sync_action_sets/schema.py",
+			"hash": "e9b02d295c7cb84f3dccda85d0c82bb2"
 		},
 		{
 			"identifier": "run_command/schema.py",
@@ -81,7 +85,7 @@
 		},
 		{
 			"identifier": "upload_vulnerability_sync_file/schema.py",
-			"hash": "47597b34d180d84050c8ea8297f44e0e"
+			"hash": "e6577f542f46a5035c6423bbff4bcbb5"
 		},
 		{
 			"identifier": "connection/schema.py",
