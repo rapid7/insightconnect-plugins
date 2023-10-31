@@ -1,0 +1,80 @@
+{
+    "incident": {
+        "acknowledgements": [],
+        "alert_counts": {
+            "all": 0,
+            "resolved": 0,
+            "triggered": 0
+        },
+        "assigned_via": "escalation_policy",
+        "assignments": [
+            {
+                "assignee": {
+                    "html_url": "https://dev-rapid7.pagerduty.com/users/PYGDZB8",
+                    "id": "PYGDZB8",
+                    "self": "https://api.pagerduty.com/users/PYGDZB8",
+                    "summary": "test user",
+                    "type": "user_reference"
+                },
+                "at": "2023-10-13T15:48:15Z"
+            }
+        ],
+        "created_at": "2023-10-13T15:48:15Z",
+        "description": "The server is on fire.",
+        "escalation_policy": {
+            "html_url": "https://dev-rapid7.pagerduty.com/escalation_policies/P3LATBS",
+            "id": "P3LATBS",
+            "self": "https://api.pagerduty.com/escalation_policies/P3LATBS",
+            "summary": "new test service-ep",
+            "type": "escalation_policy_reference"
+        },
+        "first_trigger_log_entry": {
+            "html_url": "https://dev-rapid7.pagerduty.com/incidents/Q23JJ69D97VICC/log_entries/RQ3CR2OXPZRLM40BRHTF7DRV2U",
+            "id": "RQ3CR2OXPZRLM40BRHTF7DRV2U",
+            "self": "https://api.pagerduty.com/log_entries/RQ3CR2OXPZRLM40BRHTF7DRV2U",
+            "summary": "Triggered through the website.",
+            "type": "trigger_log_entry_reference"
+        },
+        "html_url": "https://dev-rapid7.pagerduty.com/incidents/Q23JJ69D97VICC",
+        "id": "Q23JJ69D97VICC",
+        "impacted_services": [
+            {
+                "html_url": "https://dev-rapid7.pagerduty.com/service-directory/PLPY09O",
+                "id": "PLPY09O",
+                "self": "https://api.pagerduty.com/services/PLPY09O",
+                "summary": "new test service",
+                "type": "service_reference"
+            }
+        ],
+        "incident_key": "4524dbecd65a42adb857550a4bc0dd23",
+        "incident_number": 19,
+        "incidents_responders": [],
+        "is_mergeable": true,
+        "last_status_change_at": "2023-10-13T15:48:15Z",
+        "last_status_change_by": {
+            "html_url": "https://dev-rapid7.pagerduty.com/service-directory/PLPY09O",
+            "id": "PLPY09O",
+            "self": "https://api.pagerduty.com/services/PLPY09O",
+            "summary": "new test service",
+            "type": "service_reference"
+        },
+        "pending_actions": [],
+        "responder_requests": [],
+        "self": "https://api.pagerduty.com/incidents/Q23JJ69D97VICC",
+        "service": {
+            "html_url": "https://dev-rapid7.pagerduty.com/service-directory/PLPY09O",
+            "id": "PLPY09O",
+            "self": "https://api.pagerduty.com/services/PLPY09O",
+            "summary": "new test service",
+            "type": "service_reference"
+        },
+        "status": "triggered",
+        "subscriber_requests": [],
+        "summary": "[#19] test minimum fields",
+        "teams": [],
+        "title": "test minimum fields",
+        "type": "incident",
+        "updated_at": "2023-10-13T15:48:15Z",
+        "urgency": "high"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "email": "test@example.com",
+    "title": "test minimum fields",
+    "service": {
+        "id": "PLPY09O",
+        "type": "service_reference"
+    }
+}

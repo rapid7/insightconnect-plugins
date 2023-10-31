@@ -1,0 +1,6 @@
+{
+    "email": "test_3@test.com",
+    "from_email": "test_2@test.com",
+    "name": "Test api error",
+    "role": "admin"
+}
