@@ -1,0 +1,24 @@
+{
+    "name":"rapid7.com",
+    "registrar":"MarkMonitor Inc.",
+    "creation_date":"2000-05-25T19:00:54",
+    "last_updated":"2023-04-23T11:18:40",
+    "name_servers":[
+        "ns-439.awsdns-54.com",
+        "ns-1390.awsdns-45.org",
+        "ns-1653.awsdns-14.co.uk",
+        "ns-739.awsdns-28.net"
+    ],
+    "registry_domain_id":"27824595_domain_com-vrsn",
+    "registrar_whois_server":"whois.markmonitor.com",
+    "registrar_url":"http://www.markmonitor.com",
+    "registrar_iana_id":"292",
+    "registrar_abuse_contact_email":"abusecomplaints@markmonitor.com",
+    "registrar_abuse_contact_phone":"+1.2086851750",
+    "domain_status":[
+        "clientdeleteprohibited https://icann.org/epp#clientdeleteprohibited",
+        "clienttransferprohibited https://icann.org/epp#clienttransferprohibited",
+        "clientupdateprohibited https://icann.org/epp#clientupdateprohibited"
+    ],
+    "dnssec":"unsigned"
+}

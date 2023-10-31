@@ -4,13 +4,21 @@ import os
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+from unittest.mock import patch, MagicMock
 from komand_whois.connection.connection import Connection
 from komand_whois.actions.address import Address
+from parameterized import parameterized
+from util import Util
 import json
 import logging
 
 
 class TestAddress(TestCase):
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.action = Util.default_connector(Address())
+
     def test_integration_address(self):
         """
         TODO: Implement assertions at the end of this test case
@@ -57,16 +65,5 @@ class TestAddress(TestCase):
         # For example: self.assertEquals({"success": True}, results)
         self.assertEquals({}, results)
 
-    def test_address(self):
-        """
-        TODO: Implement test cases here
+    # def test_address(self):
 
-        Here you can mock the connection with data returned from the above integration test.
-        For information on mocking and unit testing please go here:
-
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-
-        You can either create a formal Mock for this, or you can create a fake connection class to pass to your
-        action for testing.
-        """
-        self.fail("Unimplemented Test Case")
