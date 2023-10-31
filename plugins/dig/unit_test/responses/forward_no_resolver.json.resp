@@ -1,0 +1,5 @@
+{
+    "stdout":"\n; <<>> DiG 9.16.20 <<>> rapid7.com MX\n;; global options: +cmd\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 28119\n;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version: 0, flags:; udp: 4096\n; COOKIE: eea7f9fd1edc0167 (echoed)\n;; QUESTION SECTION:\n;rapid7.com.\t\t\tIN\tMX\n\n;; ANSWER SECTION:\nrapid7.com.\t\t377\tIN\tMX\t20 smtp002.rapid7.com.\nrapid7.com.\t\t377\tIN\tMX\t40 smtp001.rapid7.com.\n\n;; Query time: 112 msec\n;; SERVER: 192.168.65.7#53(192.168.65.7)\n;; WHEN: Thu Oct 26 09:14:07 UTC 2023\n;; MSG SIZE  rcvd: 139\n\n",
+    "stderr":"",
+    "rcode":""
+}
