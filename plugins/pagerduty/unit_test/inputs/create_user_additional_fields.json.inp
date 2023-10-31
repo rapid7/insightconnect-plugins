@@ -1,0 +1,10 @@
+{
+    "email": "test_23@test.com",
+    "from_email": "test_2@test.com",
+    "name": "Test additional fields",
+    "role": "admin",
+    "time_zone": "Europe/London",
+    "color": "purple",
+    "description": "this is a test desc",
+    "job_title": "engineer"
+}

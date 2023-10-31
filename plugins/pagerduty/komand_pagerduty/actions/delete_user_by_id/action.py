@@ -1,9 +1,9 @@
 import insightconnect_plugin_runtime
-from .schema import DeleteUserByIdInput, DeleteUserByIdOutput
+from insightconnect_plugin_runtime.exceptions import PluginException
+from .schema import DeleteUserByIdInput, DeleteUserByIdOutput, Input, Output, Component
 
 # Custom imports below
-import pypd
-from komand_pagerduty.util.util import empty_user, normalize_user
+from komand_pagerduty.util.util import normalize_user
 
 
 class DeleteUserById(insightconnect_plugin_runtime.Action):
@@ -16,25 +16,9 @@ class DeleteUserById(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """Delete user"""
+        email = params.get(Input.EMAIL)
+        user_id = params.get(Input.ID)
 
-        if not params["id"]:
-            raise Exception("id not provided")
+        self.connection.api.delete_user_by_id(email=email, user_id=user_id)
 
-        user = pypd.User.find_one(id=params["id"])
-        if not user:
-            return {
-                "success": False,
-                "user": {},
-            }
-
-        self.logger.debug("Returned: %s", user)
-
-        success = user.remove()
-        user = normalize_user(user.json)
-
-        return {"success": success, "user": user or empty_user}
-
-    def test(self):
-        """Test action"""
-        return {"success": False, "user": empty_user}
+        return {Output.SUCCESS: f"The user {user_id} has been deleted"}
