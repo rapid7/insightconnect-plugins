@@ -1,0 +1,7 @@
+{
+  "analystVerdict": "false positive",
+  "incidentIds": [
+    "non_existing_alert_id_1"
+  ],
+  "type": "alerts"
+}

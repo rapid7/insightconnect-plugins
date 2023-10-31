@@ -17,8 +17,6 @@ class AgentsAction(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         agent_filter = params.get(Input.FILTER, "")
         action = params.get(Input.ACTION, None)
-        if not action:
-            raise PluginException(cause="No action given.", assistance="A valid agent action must be given to perform.")
 
         if action in ["decommission", "disconnect", "restart-machine", "shutdown", "uninstall"]:
             if "ids" not in agent_filter and "groupIds" not in agent_filter and "filterId" not in agent_filter:
@@ -27,8 +25,8 @@ class AgentsAction(insightconnect_plugin_runtime.Action):
                     assistance="One of the following filter arguments must be supplied - ids, groupIds or filterId.",
                 )
 
-        response = self.connection.agents_action(action, agent_filter)
-
-        affected = response.get("data", {}).get("affected", 0)
-
-        return {Output.AFFECTED: affected}
+        return {
+            Output.AFFECTED: self.connection.client.agents_action(action, agent_filter)
+            .get("data", {})
+            .get("affected", 0)
+        }

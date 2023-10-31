@@ -1,7 +1,8 @@
 import insightconnect_plugin_runtime
-from .schema import GetQueryStatusInput, GetQueryStatusOutput, Input, Output, Component
+from .schema import GetQueryStatusInput, GetQueryStatusOutput, Output, Component
 
 # Custom imports below
+from komand_sentinelone.util.helper import clean
 
 
 class GetQueryStatus(insightconnect_plugin_runtime.Action):
@@ -14,4 +15,4 @@ class GetQueryStatus(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {Output.RESPONSE: self.connection.get_query_status(params.get(Input.QUERY_ID))}
+        return {Output.RESPONSE: clean(self.connection.client.get_query_status(params).get("data", {}))}

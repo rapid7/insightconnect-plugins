@@ -1,0 +1,8 @@
+{
+  "filter": {
+    "ids": [
+      "invalid_id"
+    ]
+  },
+  "module": "monitor"
+}

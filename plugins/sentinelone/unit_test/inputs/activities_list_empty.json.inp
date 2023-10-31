@@ -1,0 +1,23 @@
+{
+  "accountIds": [],
+  "activityTypes": [],
+  "agentIds": [],
+  "countOnly": false,
+  "createdAtBetween": "",
+  "createdAtGt": "",
+  "createdAtGte": "",
+  "createdAtLt": "",
+  "createdAtLte": "",
+  "groupIds": [],
+  "ids": ["invalid_id"],
+  "includeHidden": false,
+  "siteIds": [],
+  "limit": 1001,
+  "skip": 0,
+  "skipCount": false,
+  "sortBy": "createdAt",
+  "sortOrder": "asc",
+  "threatIds": [],
+  "userEmail": "",
+  "userIds": []
+}

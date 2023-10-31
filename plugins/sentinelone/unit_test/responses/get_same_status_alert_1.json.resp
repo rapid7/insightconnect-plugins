@@ -1,0 +1,138 @@
+{
+  "errors": [
+    {}
+  ],
+  "data": [
+    {
+      "targetProcessInfo": {
+        "tgtFileCreatedAt": "2018-02-27T04:49:26.257525Z",
+        "tgtFileIsSigned": "string",
+        "tgtFileOldPath": "string",
+        "tgtProcImagePath": "string",
+        "tgtProcSignedStatus": "string",
+        "tgtFileHashSha256": "string",
+        "tgtProcStorylineId": "string",
+        "tgtProcPid": "string",
+        "tgtProcCmdLine": "string",
+        "tgtProcName": "string",
+        "tgtFileModifiedAt": "2018-02-27T04:49:26.257525Z",
+        "tgtFileId": "string",
+        "tgtProcIntegrityLevel": "unknown",
+        "tgtFileHashSha1": "string",
+        "tgtProcUid": "string",
+        "tgtProcessStartTime": "2018-02-27T04:49:26.257525Z",
+        "tgtFilePath": "string"
+      },
+      "alertInfo": {
+        "createdAt": "2018-02-27T04:49:26.257525Z",
+        "srcIp": "string",
+        "incidentStatus": "in_progress",
+        "registryOldValue": "string",
+        "alertId": "same_status_alert_id_1",
+        "dstPort": "string",
+        "indicatorName": "string",
+        "registryPath": "string",
+        "loginType": "string",
+        "dstIp": "string",
+        "updatedAt": "2018-02-27T04:49:26.257525Z",
+        "indicatorDescription": "string",
+        "loginsUserName": "string",
+        "loginIsSuccessful": "string",
+        "indicatorCategory": "string",
+        "modulePath": "string",
+        "loginAccountSid": "string",
+        "dnsResponse": "string",
+        "netEventDirection": "string",
+        "registryValue": "string",
+        "srcMachineIp": "string",
+        "registryOldValueType": "string",
+        "eventType": "string",
+        "analystVerdict": "false_positive",
+        "dvEventId": "string",
+        "dnsRequest": "string",
+        "loginIsAdministratorEquivalent": "string",
+        "loginAccountDomain": "string",
+        "tiIndicatorType": "string",
+        "moduleSha1": "string",
+        "source": "string",
+        "srcPort": "string",
+        "tiIndicatorValue": "string",
+        "tiIndicatorSource": "string",
+        "reportedAt": "2018-02-27T04:49:26.257525Z",
+        "registryKeyPath": "string",
+        "tiIndicatorComparisonMethod": "string",
+        "hitType": "Events"
+      },
+      "sourceProcessInfo": {
+        "integrityLevel": "unknown",
+        "pid": "string",
+        "fileHashMd5": "string",
+        "filePath": "string",
+        "fileSignerIdentity": "string",
+        "pidStarttime": "2018-02-27T04:49:26.257525Z",
+        "storyline": "string",
+        "fileHashSha1": "string",
+        "uniqueId": "string",
+        "user": "string",
+        "commandline": "string",
+        "name": "string",
+        "fileHashSha256": "string",
+        "subsystem": "unknown"
+      },
+      "ruleInfo": {
+        "severity": "Low",
+        "treatAsThreat": "UNDEFINED",
+        "id": "string",
+        "scopeLevel": "string",
+        "name": "string",
+        "description": "string"
+      },
+      "sourceParentProcessInfo": {
+        "integrityLevel": "unknown",
+        "pid": "string",
+        "fileHashMd5": "string",
+        "filePath": "string",
+        "fileSignerIdentity": "string",
+        "pidStarttime": "2018-02-27T04:49:26.257525Z",
+        "storyline": "string",
+        "fileHashSha1": "string",
+        "uniqueId": "string",
+        "user": "string",
+        "commandline": "string",
+        "name": "string",
+        "fileHashSha256": "string",
+        "subsystem": "unknown"
+      },
+      "agentDetectionInfo": {
+        "osFamily": "string",
+        "uuid": "string",
+        "osName": "string",
+        "version": "3.6.1.14",
+        "siteId": "string",
+        "name": "string",
+        "machineType": "string",
+        "osRevision": "string"
+      },
+      "kubernetesInfo": {
+        "controllerName": "string",
+        "node": "string",
+        "namespace": "string",
+        "namespaceLabels": "string",
+        "pod": "string",
+        "controllerLabels": "string",
+        "controllerKind": "string",
+        "cluster": "string",
+        "podLabels": "string"
+      },
+      "containerInfo": {
+        "id": "string",
+        "name": "string",
+        "image": "string",
+        "labels": "string"
+      }
+    }
+  ],
+  "pagination": {
+    "totalItems": 1
+  }
+}

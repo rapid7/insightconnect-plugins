@@ -5,116 +5,44 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest.mock import patch
 from komand_sentinelone.actions.apps_by_agent_ids import AppsByAgentIds
-from komand_sentinelone.actions.apps_by_agent_ids.schema import Input
-from unit_test.util import Util
+from util import Util
 from unittest import TestCase
-
-expected = {
-    "data": [
-        {
-            "accountName": "account",
-            "agentVersion": "1.1.1",
-            "allowRemoteShell": False,
-            "computerName": "computer",
-            "coreCount": "1",
-            "cpuCount": "1",
-            "cpuId": "11",
-            "createdAt": "2021-11-11",
-            "domain": "domain",
-            "externalId": "10.10.10.10",
-            "externalIp": "10.10.10.10",
-            "firewallEnabled": True,
-            "groupIp": "1.0.0.0",
-            "groupUpdatedAt": "2021-11-11",
-            "id": "ffff-ffff",
-            "inRemoteShellSession": True,
-            "infected": False,
-            "isActive": True,
-            "isDecommissioned": False,
-            "isPendingUninstall": True,
-            "isUninstalled": False,
-            "isUpToDate": "2021-11-11",
-            "lastActiveDate": "2021-11-11",
-            "lastIpToMgmt": "1.1.1.1",
-            "lastLoggedInUserName": "username",
-            "licenseKey": "ffff-ffff-ffffffff-ffff",
-            "locationEnabled": True,
-            "networkQuarantineEnabled": True,
-            "networkStatus": "active",
-            "operationalState": "active",
-            "operationalStateExpiration": "active",
-            "osArch": "x64",
-            "osName": "windows 7",
-            "osType": "win",
-            "osUsername": "username",
-            "remoteProfilingState": "active",
-            "remoteProfilingStateExpiration": "active",
-            "scanFinishedAt": "2021-11-11",
-            "threatRebootRequired": False,
-            "totalMemory": 8000,
-            "updatedAt": "2021-11-11",
-            "uuid": "ffff-ffff-ffffffff-ffff",
-        },
-        {
-            "accountName": "account",
-            "agentVersion": "1.1.2",
-            "allowRemoteShell": False,
-            "computerName": "computer",
-            "coreCount": "1",
-            "cpuCount": "1",
-            "cpuId": "11",
-            "createdAt": "2021-11-11",
-            "domain": "domain",
-            "externalId": "10.10.10.10",
-            "externalIp": "10.10.10.10",
-            "firewallEnabled": True,
-            "groupIp": "1.0.0.1",
-            "groupUpdatedAt": "2021-11-11",
-            "id": "ffff-fffe",
-            "inRemoteShellSession": True,
-            "infected": False,
-            "isActive": True,
-            "isDecommissioned": False,
-            "isPendingUninstall": True,
-            "isUninstalled": False,
-            "isUpToDate": "2021-11-11",
-            "lastActiveDate": "2021-11-11",
-            "lastIpToMgmt": "1.1.1.2",
-            "lastLoggedInUserName": "username",
-            "licenseKey": "ffff-ffff-ffffffff-fffe",
-            "locationEnabled": True,
-            "networkQuarantineEnabled": True,
-            "networkStatus": "active",
-            "operationalState": "active",
-            "operationalStateExpiration": "active",
-            "osArch": "x64",
-            "osName": "windows 7",
-            "osType": "win",
-            "osUsername": "username",
-            "remoteProfilingState": "active",
-            "remoteProfilingStateExpiration": "active",
-            "scanFinishedAt": "2021-11-11",
-            "threatRebootRequired": False,
-            "totalMemory": 8000,
-            "updatedAt": "2021-11-11",
-            "uuid": "ffff-ffff-ffffffff-fffe",
-        },
-    ]
-}
+from parameterized import parameterized
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
+@patch("requests.request", side_effect=Util.mocked_requests_get)
 class TestAppsByAgentIds(TestCase):
     @classmethod
     @patch("requests.post", side_effect=Util.mocked_requests_get)
     def setUpClass(cls, mock_request) -> None:
         cls.action = Util.default_connector(AppsByAgentIds())
 
-    @patch("requests.request", side_effect=Util.mocked_requests_get)
-    def test_should_success_when_inputs_ids(self, mock_request):
-        actual = self.action.run({Input.IDS: ["1000000000000000000"]})
+    @parameterized.expand(
+        [
+            [
+                "success",
+                Util.read_file_to_dict("inputs/apps_by_agent_ids_success.json.inp"),
+                Util.read_file_to_dict("expected/apps_by_agent_ids_success.json.exp"),
+            ],
+        ]
+    )
+    def test_apps_by_agent_ids(self, mock_request, test_name, input_params, expected):
+        actual = self.action.run(input_params)
         self.assertEqual(expected, actual)
 
-    @patch("requests.request", side_effect=Util.mocked_requests_get)
-    def test_should_success_when_no_inputs(self, mock_request):
-        actual = self.action.run({Input.IDS: []})
-        self.assertEqual(expected, actual)
+    @parameterized.expand(
+        [
+            [
+                "empty_input",
+                Util.read_file_to_dict("inputs/apps_by_agent_ids_empty_input.json.inp"),
+                "Input validation error.",
+                "Please provide valid 'Agent IDs' input.",
+            ],
+        ]
+    )
+    def test_apps_by_agent_ids_raise_exception(self, mock_request, test_name, input_params, cause, assistance):
+        with self.assertRaises(PluginException) as error:
+            self.action.run(input_params)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)

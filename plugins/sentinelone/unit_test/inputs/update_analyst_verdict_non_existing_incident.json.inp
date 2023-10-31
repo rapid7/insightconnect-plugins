@@ -1,0 +1,8 @@
+{
+  "analystVerdict": "undefined",
+  "incidentIds": [
+    "valid_threat_id_1",
+    "non_existing_threat_id_1"
+  ],
+  "type": "threats"
+}
