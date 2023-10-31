@@ -43,40 +43,8 @@ Example input:
 
 ## Technical Details
 
-### Triggers
-
-#### Get Automox Events
-
-This trigger is used to retrieve Automox events to trigger workflows.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|event_type|string|None|True|Name of event type to be retrieved (list of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/#!in=query&path=eventName&t=request)|None|https://example.com|
-|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
-
-Example input:
-
-```
-{
-  "event_type": "user.login",
-  "org_id": 1234
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|event|event|True|Event with details|
-
-Example output:
-
-```
-```
-
 ### Actions
+
 
 #### Upload Vulnerability Sync File
 
@@ -1198,6 +1166,39 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |devices|[]device|False|List of Automox managed devices|
+
+Example output:
+
+```
+```
+
+### Triggers
+
+#### Get Automox Events
+
+This trigger is used to retrieve Automox events to trigger workflows.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|event_type|string|None|True|Name of event type to be retrieved (list of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/#!in=query&path=eventName&t=request)|None|https://example.com|
+|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
+
+Example input:
+
+```
+{
+  "event_type": "user.login",
+  "org_id": 1234
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|event|event|True|Event with details|
 
 Example output:
 
