@@ -1,8 +1,8 @@
 import insightconnect_plugin_runtime
-from .schema import SendResolveEventInput, SendResolveEventOutput
+from insightconnect_plugin_runtime.exceptions import PluginException
+from .schema import SendResolveEventInput, SendResolveEventOutput, Input, Output, Component
 
 # Custom imports below
-import pypd
 
 
 class SendResolveEvent(insightconnect_plugin_runtime.Action):
@@ -15,20 +15,12 @@ class SendResolveEvent(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """Resolve event"""
+        email = params.get(Input.EMAIL)
+        incident_id = params.get(Input.INCIDENT_ID)
 
-        ev = pypd.Event.create(
-            data={
-                "service_key": params["service_key"],
-                "event_type": "resolve",
-                "incident_key": params["incident_key"],
-                "description": params.get("description"),
-                "details": params.get("details"),
-            }
+        response = self.connection.api.resolve_event(
+            email=email,
+            incident_id=incident_id,
         )
 
-        return ev
-
-    def test(self):
-        """Test action"""
-        return {}
+        return {Output.INCIDENT: response.get("incident")}

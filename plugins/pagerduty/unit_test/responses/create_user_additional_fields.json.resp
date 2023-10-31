@@ -1,0 +1,43 @@
+{
+    "user": {
+        "avatar_url": "https://secure.gravatar.com/avatar/87dfa473571de452cf8741716cd028e2.png?d=mm&r=PG",
+        "billed": true,
+        "color": "purple",
+        "contact_methods": [
+            {
+                "id": "PUA7UDS",
+                "self": "https://api.pagerduty.com/users/PFJIAVM/contact_methods/PUA7UDS",
+                "summary": "Default",
+                "type": "email_contact_method_reference"
+            }
+        ],
+        "coordinated_incidents": [],
+        "description": "this is a test desc",
+        "email": "test_23@test.com",
+        "html_url": "https://dev-rapid7.pagerduty.com/users/PFJIAVM",
+        "id": "PFJIAVM",
+        "invitation_sent": true,
+        "job_title": "engineer",
+        "name": "Test additional fields",
+        "notification_rules": [
+            {
+                "id": "P38RX1Z",
+                "self": "https://api.pagerduty.com/users/PFJIAVM/notification_rules/P38RX1Z",
+                "summary": "0 minutes: channel PUA7UDS",
+                "type": "assignment_notification_rule_reference"
+            },
+            {
+                "id": "P6HCXDM",
+                "self": "https://api.pagerduty.com/users/PFJIAVM/notification_rules/P6HCXDM",
+                "summary": "0 minutes: channel PUA7UDS",
+                "type": "assignment_notification_rule_reference"
+            }
+        ],
+        "role": "admin",
+        "self": "https://api.pagerduty.com/users/PFJIAVM",
+        "summary": "Test User",
+        "teams": [],
+        "time_zone": "Europe/London",
+        "type": "user"
+    }
+}
