@@ -1,9 +1,9 @@
 import insightconnect_plugin_runtime
-from .schema import CreateUserInput, CreateUserOutput
+from insightconnect_plugin_runtime.exceptions import PluginException
+from .schema import CreateUserInput, CreateUserOutput, Input, Output, Component
 
 # Custom imports below
-import pypd
-from komand_pagerduty.util.util import empty_user, normalize_user
+from komand_pagerduty.util.util import normalize_user
 
 
 class CreateUser(insightconnect_plugin_runtime.Action):
@@ -16,20 +16,26 @@ class CreateUser(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """Run action"""
-        self.logger.info("Creating user %s", params)
-        user = pypd.User.create(data=params, from_email=params["from_email"])
+        # required
+        from_email = params.get(Input.FROM_EMAIL)
+        new_users_email = params.get(Input.EMAIL)
+        name = params.get(Input.NAME)
 
-        if user:
-            user = normalize_user(user.json)
-        else:
-            user = None
+        # optional
+        dict_of_optional_fields = {
+            "time_zone": params.get(Input.TIME_ZONE, ""),
+            "color": params.get(Input.COLOR, ""),
+            "role": params.get(Input.ROLE, ""),
+            "description": params.get(Input.USER_DESCRIPTION, ""),
+            "job_title": params.get(Input.JOB_TITLE, ""),
+            "license": params.get(Input.LICENSE, {}),
+        }
 
-        self.logger.debug("Returned: %s", user)
+        response = self.connection.api.create_user(
+            from_email=from_email,
+            new_users_email=new_users_email,
+            name=name,
+            dict_of_optional_fields=dict_of_optional_fields,
+        )
 
-        return {"success": not not user, "user": user or empty_user}
-
-    def test(self):
-        """Test action"""
-
-        return {"success": True, "user": empty_user}
+        return {Output.USER: normalize_user(response.get("user", {}))}

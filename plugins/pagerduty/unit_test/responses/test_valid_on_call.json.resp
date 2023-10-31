@@ -1,0 +1,55 @@
+{
+    "schedule": {
+        "users": [
+            {
+                "avatar_url": "https://secure.gravatar.com/avatar/c67b6c8ed606dec999bb064ada88cf5c.png?d=mm&r=PG",
+                "billed": true,
+                "color": "purple",
+                "contact_methods": [
+                    {
+                        "id": "P9CU341",
+                        "self": "https://api.pagerduty.com/users/PYGDZB8/contact_methods/P9CU341",
+                        "summary": "Default",
+                        "type": "email_contact_method_reference"
+                    }
+                ],
+                "coordinated_incidents": [],
+                "description": "",
+                "email": "test@example.com",
+                "html_url": "https://dev-rapid7.pagerduty.com/users/PYGDZB8",
+                "id": "PYGDZB8",
+                "invitation_sent": false,
+                "job_title": "",
+                "name": "test_account_with_id",
+                "notification_rules": [
+                    {
+                        "id": "POMMNCV",
+                        "self": "https://api.pagerduty.com/users/PYGDZB8/notification_rules/POMMNCV",
+                        "summary": "0 minutes: channel P9CU341",
+                        "type": "assignment_notification_rule_reference"
+                    },
+                    {
+                        "id": "PSZNORI",
+                        "self": "https://api.pagerduty.com/users/PYGDZB8/notification_rules/PSZNORI",
+                        "summary": "0 minutes: channel P9CU341",
+                        "type": "assignment_notification_rule_reference"
+                    }
+                ],
+                "role": "owner",
+                "self": "https://api.pagerduty.com/users/PYGDZB8",
+                "summary": "test_account_with_id",
+                "teams": [
+                    {
+                        "html_url": "https://dev-rapid7.pagerduty.com/teams/PLBLK3G",
+                        "id": "PLBLK3G",
+                        "self": "https://api.pagerduty.com/teams/PLBLK3G",
+                        "summary": "Engineering",
+                        "type": "team_reference"
+                    }
+                ],
+                "time_zone": "Europe/London",
+                "type": "user"
+            }
+        ]
+    }
+}

@@ -1,0 +1,91 @@
+{
+    "incident": {
+        "acknowledgements": [
+            {
+                "acknowledger": {
+                    "html_url": "https://dev-rapid7.pagerduty.com/users/PYGDZB8",
+                    "id": "PYGDZB8",
+                    "self": "https://api.pagerduty.com/users/PYGDZB8",
+                    "summary": "test user",
+                    "type": "user_reference"
+                },
+                "at": "2023-10-13T14:55:07Z"
+            }
+        ],
+        "alert_counts": {
+            "all": 0,
+            "resolved": 0,
+            "triggered": 0
+        },
+        "assigned_via": "escalation_policy",
+        "assignments": [
+            {
+                "assignee": {
+                    "html_url": "https://dev-rapid7.pagerduty.com/users/PYGDZB8",
+                    "id": "PYGDZB8",
+                    "self": "https://api.pagerduty.com/users/PYGDZB8",
+                    "summary": "test user",
+                    "type": "user_reference"
+                },
+                "at": "2023-10-13T14:54:58Z"
+            }
+        ],
+        "created_at": "2023-10-13T14:54:58Z",
+        "description": "test ack",
+        "escalation_policy": {
+            "html_url": "https://dev-rapid7.pagerduty.com/escalation_policies/PJINSTN",
+            "id": "PJINSTN",
+            "self": "https://api.pagerduty.com/escalation_policies/PJINSTN",
+            "summary": "Test Service-ep",
+            "type": "escalation_policy_reference"
+        },
+        "first_trigger_log_entry": {
+            "html_url": "https://dev-rapid7.pagerduty.com/incidents/Q1R042KMH6D067/log_entries/R87EKJ59GRGLRWK7RPE9YWXQ9Y",
+            "id": "R87EKJ59GRGLRWK7RPE9YWXQ9Y",
+            "self": "https://api.pagerduty.com/log_entries/R87EKJ59GRGLRWK7RPE9YWXQ9Y",
+            "summary": "Triggered through the website.",
+            "type": "trigger_log_entry_reference"
+        },
+        "html_url": "https://dev-rapid7.pagerduty.com/incidents/Q1R042KMH6D067",
+        "id": "Q1R042KMH6D067",
+        "impacted_services": [
+            {
+                "html_url": "https://dev-rapid7.pagerduty.com/service-directory/PF8TUEU",
+                "id": "PF8TUEU",
+                "self": "https://api.pagerduty.com/services/PF8TUEU",
+                "summary": "Test Service",
+                "type": "service_reference"
+            }
+        ],
+        "incident_key": "0594f9d98f3747179b052ba708d3e1d1",
+        "incident_number": 18,
+        "incidents_responders": [],
+        "is_mergeable": true,
+        "last_status_change_at": "2023-10-13T14:55:07Z",
+        "last_status_change_by": {
+            "html_url": "https://dev-rapid7.pagerduty.com/users/PYGDZB8",
+            "id": "PYGDZB8",
+            "self": "https://api.pagerduty.com/users/PYGDZB8",
+            "summary": "test user",
+            "type": "user_reference"
+        },
+        "pending_actions": [],
+        "responder_requests": [],
+        "self": "https://api.pagerduty.com/incidents/Q1R042KMH6D067",
+        "service": {
+            "html_url": "https://dev-rapid7.pagerduty.com/service-directory/PF8TUEU",
+            "id": "PF8TUEU",
+            "self": "https://api.pagerduty.com/services/PF8TUEU",
+            "summary": "Test Service",
+            "type": "service_reference"
+        },
+        "status": "acknowledged",
+        "subscriber_requests": [],
+        "summary": "[#18] test ack",
+        "teams": [],
+        "title": "test ack",
+        "type": "incident",
+        "updated_at": "2023-10-13T14:55:07Z",
+        "urgency": "high"
+    }
+}
