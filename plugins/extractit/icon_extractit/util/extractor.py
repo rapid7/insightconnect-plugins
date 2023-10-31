@@ -215,7 +215,7 @@ def extract_wrapped_words_from_pdf_page(
     :param page: The PDF page from which to extract wrapped words.
     :type: Page
 
-    :param provided_regex: The regex for the type of words to be searched for, eg emial/domain format. Defaults to "".
+    :param provided_regex: The regex for the type of words to be searched for, e.g. email/domain format.
     :type: str
 
     :param tolerance: The tolerance value for detecting wrapped words. Defaults to DEFAULT_PDF_WRAPPING_TOLERANCE.
