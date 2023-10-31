@@ -188,7 +188,7 @@ Returns the highest-superceding rollup solutions for a list of vulnerabilities o
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |asset_id|integer|None|True|The identifier of the asset|None|423|
-|vulnerability_ids|[]string|None|True|A list of identifiers of the vulnerabilities|None|['flash_player-cve-2017-11305']|
+|vulnerability_ids|[]string|None|True|A list of identifiers of the vulnerabilities|None|["flash_player-cve-2017-11305"]|
   
 Example input:
 
@@ -385,10 +385,10 @@ Create a new site
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |description|string|None|False|The site's description|None|example description|
 |engine_id|integer|None|False|The identifier of a scan engine. Default scan engine is selected when not specified|None|1234|
-|excluded_addresses|[]string|[]|False|List of addresses to exclude in scan scope|None|['1234-abcd', '4567-def']|
+|excluded_addresses|[]string|[]|False|List of addresses to exclude in scan scope|None|["1234-abcd", "4567-def"]|
 |excluded_asset_groups|[]integer|[]|False|Assets associated with these asset group IDs will be excluded in the site|None|[1234, 5768]|
 |importance|string|normal|False|The site importance|['very_low', 'low', 'normal', 'high', 'very_high']|low|
-|included_addresses|[]string|[]|False|List of addresses to include in scan scope|None|['1234-abcd', '4567-def']|
+|included_addresses|[]string|[]|False|List of addresses to include in scan scope|None|["1234-abcd", "4567-def"]|
 |included_asset_groups|[]integer|[]|False|Assets associated with these asset group IDs will be included in the site|None|[1234, 5768]|
 |name|string|None|True|The site name. Name must be unique|None|example name|
 |scan_template_id|string|None|False|The identifier of a scan template|None|12345-abcd|
@@ -1357,7 +1357,7 @@ Example input:
 |endTime|string|False|End time of the scan in ISO8601 format|2018-04-23 04:21:05.500000+00:00|
 |engineName|string|False|Name of the engine used for the scan|Local scan engine|
 |id|integer|False|ID of the scan|188934|
-|links|[]link|False|Hypermedia links to corresponding or related resources|[{'href': 'https://insightvm:3780/api/3/scans/188934', 'rel': 'self'}]|
+|links|[]link|False|Hypermedia links to corresponding or related resources|[{"href": "https://insightvm:3780/api/3/scans/188934", "rel": "self"}]|
 |scanName|string|False|User-driven scan name for the scan|API Scan - 2018-04-23T04:21:05Z|
 |scanType|string|False|Scan type (manual, automated, scheduled)|Manual|
 |startTime|string|False|Start time of the scan in ISO8601 format|2018-04-23 04:21:05.500000+00:00|
@@ -2386,7 +2386,7 @@ Start a scan on a site
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|hosts|[]string|None|False|The hosts that should be included in the scan|None|['192.0.2.3', '192.0.2.10-192.0.2.20', 'ADSRV.local']|
+|hosts|[]string|None|False|The hosts that should be included in the scan|None|["192.0.2.3", "192.0.2.10-192.0.2.20", "ADSRV.local"]|
 |override_blackout|boolean|False|False|Set True to override any scan blackout window|None|False|
 |site_id|string|None|True|ID of the site to scan|None|1|
   
@@ -2824,7 +2824,7 @@ Update an existing site scope of excluded IP address and hostname targets
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|excluded_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|['10.2.144', '10.8.36.144']|
+|excluded_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|["10.2.144", "10.8.36.144"]|
 |id|integer|None|True|The identifier of the site|None|1234|
 |overwrite|boolean|True|True|Whether to overwrite the excluded targets to the current site or append to the previous list of excluded targets|None|True|
   
@@ -2901,7 +2901,7 @@ Update an existing site scope of included IP address and hostname targets
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|True|The identifier of the site|None|1234|
-|included_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|['10.2.144', '10.8.36.144']|
+|included_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|["10.2.144", "10.8.36.144"]|
 |overwrite|boolean|True|True|Whether to overwrite the included targets to the current site or append to the previous list of included targets|None|True|
   
 Example input:
@@ -3199,8 +3199,8 @@ Check for new InsightVM vulnerability exceptions
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |frequency|integer|5|True|How often the trigger should check for new vulnerability exception requests|None|5|
-|status_filter|[]string|["Under Review"]|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|['Under Review']|
-  
+|status_filter|[]string|["Under Review"]|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|["Under Review"]|
+
 Example input:
 
 ```
@@ -3237,8 +3237,8 @@ Check for new InsightVM scans by site and scan status
 |frequency|integer|5|True|How often the trigger should check for new scans in minutes|None|5|
 |most_recent_scan|boolean|True|True|Only process the most recent scan for a site since the last time the trigger was run|None|True|
 |site_name_filter|string|.*|True|Regular expression to match sites where new scans should be triggered|None|example name|
-|status_filter|[]string|["Successful"]|False|List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown|None|['Successful']|
-  
+|status_filter|[]string|["Successful"]|False|List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown|None|["Successful"]|
+
 Example input:
 
 ```
