@@ -1,0 +1,5 @@
+{
+    "stdout":"\n; <<>> DiG 9.16.20 <<>> @8 -x 13.33.252.129\n; (1 server found)\n;; global options: +cmd\n;; connection timed out; no servers could be reached\n\n",
+    "stderr":"",
+    "rcode":"9"
+}

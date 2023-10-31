@@ -49,3 +49,15 @@ class Util:
             filename = "forward_raise_error.json.resp"
             test_data = Util.read_file_to_dict(f"responses/{filename}", encodingenabled=True)
             return test_data
+        elif cmd == f"/usr/bin/dig @8.8.8.8 -x 13.33.252.129":
+            filename = "reverse.json.resp"
+            test_data = Util.read_file_to_dict(f"responses/{filename}", encodingenabled=True)
+            return test_data
+        elif cmd == f"/usr/bin/dig -x 13.33.252.129":
+            filename = "reverse_no_resolver.json.resp"
+            test_data = Util.read_file_to_dict(f"responses/{filename}", encodingenabled=True)
+            return test_data
+        elif cmd == f"/usr/bin/dig @8 -x 13.33.252.129":
+            filename = "reverse_raise_error.json.resp"
+            test_data = Util.read_file_to_dict(f"responses/{filename}", encodingenabled=True)
+            return test_data
