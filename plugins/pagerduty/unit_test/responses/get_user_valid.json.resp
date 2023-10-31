@@ -1,0 +1,41 @@
+{
+    "user": {
+        "avatar_url": "https://secure.gravatar.com/avatar/663a7dbec91b9dabba93f906648dd514.png?d=mm&r=PG",
+        "billed": true,
+        "color": "green",
+        "contact_methods": [
+            {
+                "id": "P050K1G",
+                "self": "https://api.pagerduty.com/users/PTVOCBV/contact_methods/P050K1G",
+                "summary": "Default",
+                "type": "email_contact_method_reference"
+            }
+        ],
+        "coordinated_incidents": [],
+        "email": "test_3@test.com",
+        "html_url": "https://dev-rapid7.pagerduty.com/users/PTVOCBV",
+        "id": "valid_id",
+        "invitation_sent": true,
+        "name": "get_user_valid",
+        "notification_rules": [
+            {
+                "id": "PZ9BJ0K",
+                "self": "https://api.pagerduty.com/users/PTVOCBV/notification_rules/PZ9BJ0K",
+                "summary": "0 minutes: channel P050K1G",
+                "type": "assignment_notification_rule_reference"
+            },
+            {
+                "id": "PCIMJDN",
+                "self": "https://api.pagerduty.com/users/PTVOCBV/notification_rules/PCIMJDN",
+                "summary": "0 minutes: channel P050K1G",
+                "type": "assignment_notification_rule_reference"
+            }
+        ],
+        "role": "admin",
+        "self": "https://api.pagerduty.com/users/PTVOCBV",
+        "summary": "get_user_valid",
+        "teams": [],
+        "time_zone": "Europe/London",
+        "type": "user"
+    }
+}

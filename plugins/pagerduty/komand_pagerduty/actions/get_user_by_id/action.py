@@ -1,9 +1,9 @@
 import insightconnect_plugin_runtime
-from .schema import GetUserByIdInput, GetUserByIdOutput
+from insightconnect_plugin_runtime.exceptions import PluginException
+from .schema import GetUserByIdInput, GetUserByIdOutput, Input, Output, Component
 
 # Custom imports below
-import pypd
-from komand_pagerduty.util.util import empty_user, normalize_user
+from komand_pagerduty.util.util import normalize_user
 
 
 class GetUserById(insightconnect_plugin_runtime.Action):
@@ -16,20 +16,10 @@ class GetUserById(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """Get a user by ID"""
+        user_id = params.get(Input.ID)
 
-        if not params["id"]:
-            raise Exception("id required")
+        response = self.connection.api.get_user_by_id(user_id=user_id)
 
-        user = pypd.User.find_one(id=params["id"])
-        if user:
-            user = normalize_user(user.json)
-        else:
-            user = None
-
-        self.logger.debug("Returned: %s", user)
-        return {"found": not not user, "user": user or empty_user}
-
-    def test(self):
-        """Test action"""
-        return {"found": False, "user": empty_user}
+        if response.get("user"):
+            normalized_user = normalize_user(response.get("user"))
+            return {Output.USER: normalized_user}
