@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
-from unit_test.util import Util
+from util import Util
 from komand_rapid7_insightvm.actions.update_site_included_targets import UpdateSiteIncludedTargets
 from komand_rapid7_insightvm.actions.update_site_included_targets.schema import Input
 from parameterized import parameterized

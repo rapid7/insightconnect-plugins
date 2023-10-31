@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch, mock_open
 from komand_rapid7_insightvm.triggers import NewScans
-from unit_test.util import Util
+from util import Util
 
 
 class TestNewScans(TestCase):
