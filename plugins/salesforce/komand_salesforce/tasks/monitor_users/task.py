@@ -159,15 +159,16 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                     )
                     users_login = response.get("records", [])
                     user_login_next_page_id = response.get("next_page_id")
+
+                    if remove_duplicates is True:
+                        users_login = self.remove_duplicates_user_login_history(users_login)
+
                     if user_login_next_page_id:
                         state[self.USER_LOGIN_NEXT_PAGE_ID] = user_login_next_page_id
                         has_more_pages = True
 
                     self.logger.info(f"{len(users_login)} users login history added to output")
                     records.extend(self.add_data_type_field(users_login, "User Login"))
-
-                if remove_duplicates is True:
-                    records = self.remove_duplicates(records)
 
                 return records, state, has_more_pages, 200, None
             except ApiException as error:
@@ -205,9 +206,9 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
         stored_timestamp = self.convert_to_datetime(state.get(key, fallback_timestamp))
         return max(stored_timestamp, fallback_timestamp)
 
-    def remove_duplicates(self, records: list) -> list:
+    def remove_duplicates_user_login_history(self, records: list) -> list:
         """
-         Remove duplicate entries from the provided list of records.
+        Remove duplicate entries from the provided list of records based on a hash of non-time fields.
 
         Args:
             records (list): A list containing the records to be de-duplicated.
@@ -215,13 +216,40 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
         Returns:
             list: A list containing only the unique records from the input list.
         """
-        unique_records = {json.dumps(event, sort_keys=True): event for event in records}
-        unique_records = list(unique_records.values())
+        unique_records = []
+        seen_hashes = []
+
+        for record in records:
+            hash_record = self._get_non_time_fields_hash(record)
+            if hash_record not in seen_hashes:
+                unique_records.append(record)
+                seen_hashes.append(hash_record)
+
         if len(records) != len(unique_records):
             self.logger.info(
                 f"Removed {len(records) - len(unique_records)} duplicate from a total of {len(records)} duplicate records."
             )
         return unique_records
+
+    def _get_non_time_fields_hash(self, record):
+        """
+        Calculate a hash based on the non-time fields of a record.
+
+        Args:
+            record (dict): A dictionary containing the record data with fields to be used for hash calculation.
+
+        Returns:
+            int: A hash value representing the non-time fields of the record.
+        """
+        return hash(
+            str(record.get("userId", ""))
+            + str(record.get("LoginType", ""))
+            + str(record.get("LoginUrl", ""))
+            + str(record.get("SourceIp", ""))
+            + str(record.get("Status", ""))
+            + str(record.get("Application", ""))
+            + str(record.get("Browser", ""))
+        )
 
     @staticmethod
     def get_current_time() -> datetime:
