@@ -76,7 +76,7 @@ Example output:
 ```
 ```
 
-#### Actions
+### Actions
 
 #### Upload Vulnerability Sync File
 
@@ -1225,9 +1225,10 @@ _This plugin does not contain any troubleshooting information._
 
 # Links
 
+* [Automox](https://www.automox.com/)
+
 ## References
 
-* [Automox](https://www.automox.com/)
 * [Automox Developer Portal](https://developer.automox.com/)
 * [Managing API Keys](https://support.automox.com/help/managing-keys)
 * [Event Types for Get Automox Events action](https://developer.automox.com/openapi/axconsole/operation/getEvents/#!in=query&path=eventName&t=request)
