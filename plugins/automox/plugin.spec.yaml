@@ -1329,7 +1329,7 @@ actions:
         required: true
         example: 1234
     output:
-      action_set:
+      vuln_set:
         title: Vulnerability Sync action set
         description: Details of a specified vulnerability sync action_set
         type: action_set

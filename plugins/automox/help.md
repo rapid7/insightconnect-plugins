@@ -497,13 +497,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|action_set|action_set|True|Details of a specified vulnerability sync action_set|None|
+|vuln_set|action_set|True|Details of a specified vulnerability sync action_set|None|
   
 Example output:
 
 ```
 {
-  "action_set": {
+  "vuln_set": {
     "Action Set ID": 0,
     "Action Set Source": {
       "Source Name": {},

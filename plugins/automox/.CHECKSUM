@@ -1,5 +1,5 @@
 {
-	"spec": "6ab2699c1575f676c66425a4c83a3d4a",
+	"spec": "4d6b94c7abea0d8ff781e9716bf3e96b",
 	"manifest": "94f36a373309335d3662554011095836",
 	"setup": "791ef98d183f0b13d81b774b3de1a398",
 	"schemas": [
@@ -37,7 +37,7 @@
 		},
 		{
 			"identifier": "get_vulnerability_sync_action_set/schema.py",
-			"hash": "8f10053a4d8feaf624367ef9c3470bd6"
+			"hash": "818d5308aca1e2a9c99393d07a084b73"
 		},
 		{
 			"identifier": "list_devices/schema.py",
