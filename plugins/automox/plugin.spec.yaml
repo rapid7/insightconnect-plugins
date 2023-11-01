@@ -1102,6 +1102,7 @@ actions:
         description: Was operation successful
         type: boolean
         required: true
+        example: true
   list_groups:
     title: List Groups
     description: List Automox groups
@@ -1171,6 +1172,7 @@ actions:
         description: Was operation successful
         type: boolean
         required: true
+        example: true
       group:
         title: Group
         description: Detailed information about the created group
@@ -1235,6 +1237,7 @@ actions:
         description: Was operation successful
         type: boolean
         required: true
+        example: true
   delete_group:
     title: Delete Group
     description: Delete an Automox group
@@ -1257,6 +1260,7 @@ actions:
         description: Was operation successful
         type: boolean
         required: true
+        example: true
   upload_vulnerability_sync_file:
     title: Upload Vulnerability Sync File
     description: Upload a CSV file to vulnerability sync for processing
@@ -1422,7 +1426,7 @@ actions:
         example:
           - created_at: 2023-10-10T03:45:26+0000
             created_by_user:
-              email: user.name@example.com
+              email: user@example.com
               firstname: User
               id: 1
               lastname: Name
@@ -1443,7 +1447,7 @@ actions:
             status: ready
             updated_at: 2023-10-10T03:45:30+0000
             updated_by_user:
-              email: user.name@example.com
+              email: user@example.com
               firstname: User
               id: 1
               lastname: Name
@@ -1564,6 +1568,7 @@ actions:
         description: Was operation successful
         type: boolean
         required: true
+        example: true
   delete_vulnerability_sync_action_set:
     title: Delete Vulnerability Sync Action Set
     description: Delete a vulnerability sync action set and all associated data
@@ -1586,6 +1591,7 @@ actions:
         description: Was operation successful
         type: boolean
         required: true
+        example: true
 
 triggers:
   get_events:
