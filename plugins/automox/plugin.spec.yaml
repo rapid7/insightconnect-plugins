@@ -342,7 +342,7 @@ types:
       type: "device_status_details"
       required: false
     last_logged_in_user:
-      title: Last Logged In User
+      title: Last Logged in User
       description: The last logged in user of a device
       type: string
       required: false
@@ -1408,7 +1408,7 @@ actions:
         required: false
         example: "00000000-0000-0000-0000-000000000000"
       configuration_id_is_set:
-        title: Configuration ID Is Set
+        title: Configuration ID is Set
         description: Filter based on whether the configuration ID is set
         type: boolean
         required: false
