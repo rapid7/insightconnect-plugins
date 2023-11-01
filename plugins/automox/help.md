@@ -216,7 +216,7 @@ Launch remediation for patch and worklet remediations
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |action_set_id|integer|None|True|Identifier of the action set|None|1234|
-|actions|[]action_set_action|None|True|List of remediations to execute|None|[{'action': 'patch-now', 'solution_id': 1234, 'device_ids': [1234, 5678]}, {'action': 'patch-with-worklet', 'solution_id': 1234, 'worklet_id': 1234, 'device_ids': [1234, 5678]}]|
+|actions|[]action_set_action|None|True|List of remediations to execute|None|[{"action": "patch-now", "solution_id": 1234, "device_ids": [1234, 5678]}, {"action": "patch-with-worklet", "solution_id": 1234, "worklet_id": 1234, "device_ids": [1234, 5678]}]|
 |org_id|integer|None|True|Identifier of organization|None|1234|
   
 Example input:
@@ -810,7 +810,7 @@ Retrieve the issues identified for a specified vulnerability sync action set
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |action_set_id|integer|None|True|Identifier of the action set|None|1234|
-|issue_type_in|[]string|None|False|Filter by issue type|None|['unknown-host']|
+|issue_type_in|[]string|None|False|Filter by issue type|None|["unknown-host"]|
 |org_id|integer|None|True|Identifier of organization|None|1234|
   
 Example input:
@@ -853,10 +853,10 @@ Retrieve a list of vulnerability sync remediations
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |action_set_id|integer|None|True|Filter by action set identifier|None|1234|
 |org_id|integer|None|True|Identifier of organization|None|1234|
-|remediation_type_in|[]string|None|False|Filter by remediation type|None|['patch-now', 'patch-with-worklet']|
-|severity_in|[]string|None|False|Filter by severity|None|['critical', 'high', 'medium', 'low', 'unknown']|
-|vulnerability_in|[]string|None|False|Filter by vulnerability|None|['CVE-2020-1234', 'CVE-2020-5678']|
-  
+|remediation_type_in|[]string|None|False|Filter by remediation type|None|["patch-now", "patch-with-worklet"]|
+|severity_in|[]string|None|False|Filter by severity|None|["critical", "high", "medium", "low", "unknown"]|
+|vulnerability_in|[]string|None|False|Filter by vulnerability|None|["CVE-2020-1234", "CVE-2020-5678"]|
+
 Example input:
 
 ```
@@ -926,10 +926,10 @@ Retrieve list of vulnerability sync batches
 |include_all_runs_equals|boolean|None|False|Whether to include all runs in the response|None|True|
 |org_id|integer|None|True|Identifier of organization|None|1234|
 |sort|string|None|False|Sort results by field|['created_at', 'updated_at', 'status', 'source_type', 'source_name', 'configuration_id', '']|created_at|
-|source_type_in|[]string|None|False|Filter by source type|None|['Generic Report', 'CrowdStrike', 'Rapid7', 'TenableIO', 'Qualys']|
-|status_in|[]string|None|False|Filter by status|None|['building', 'ready', 'error']|
-|status_not_in|[]string|None|False|Filter by status|None|['building', 'ready', 'error']|
-  
+|source_type_in|[]string|None|False|Filter by source type|None|["Generic Report", "CrowdStrike", "Rapid7", "TenableIO", "Qualys"]|
+|status_in|[]string|None|False|Filter by status|None|["building", "ready", "error"]|
+|status_not_in|[]string|None|False|Filter by status|None|["building", "ready", "error"]|
+
 Example input:
 
 ```
@@ -950,8 +950,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|action_sets|[]action_set|False|List of vulnerability sync action sets|[{'created_at': '2023-10-10T03:45:26+0000', 'created_by_user': {'email': 'user@example.com', 'firstname': 'User', 'id': 1, 'lastname': 'Name'}, 'id': 1234, 'organization_id': 1, 'source': {'name': 'insightconnect-uploaded-report.csv', 'type': 'generic'}, 'statistics': {'issues': {'unknown-host': {'count': 4}}, 'solutions': {'patch-with-worklet': {'count': 1, 'device_count': 18, 'vulnerability_count': 1}}}, 'status': 'ready', 'updated_at': '2023-10-10T03:45:30+0000', 'updated_by_user': {'email': 'user@example.com', 'firstname': 'User', 'id': 1, 'lastname': 'Name'}}]|
-  
+|action_sets|[]action_set|False|List of vulnerability sync action sets|[{"created_at": "2023-10-10T03:45:26+0000", "created_by_user": {"email": "user@example.com", "firstname": "User", "id": 1, "lastname": "Name"}, "id": 1234, "organization_id": 1, "source": {"name": "insightconnect-uploaded-report.csv", "type": "generic"}, "statistics": {"issues": {"unknown-host": {"count": 4}}, "solutions": {"patch-with-worklet": {"count": 1, "device_count": 18, "vulnerability_count": 1}}}, "status": "ready", "updated_at": "2023-10-10T03:45:30+0000", "updated_by_user": {"email": "user@example.com", "firstname": "User", "id": 1, "lastname": "Name"}}]|
+
 Example output:
 
 ```
@@ -1007,7 +1007,7 @@ Run a command on a device
 |command|string|None|True|Command to run on device|['GetOS', 'InstallUpdate', 'InstallAllUpdates', 'PolicyTest', 'PolicyRemediate', 'Reboot']|GetOS|
 |device_id|integer|None|True|Identifier of device|None|1234|
 |org_id|integer|None|False|Identifier of organization|None|1234|
-|patches|[]string|None|False|List of patches to be installed by name (Note: this only works with the InstallUpdate command)|None|['Security Update (KB4549947)']|
+|patches|[]string|None|False|List of patches to be installed by name (Note: this only works with the InstallUpdate command)|None|["Security Update (KB4549947)"]|
 |policy_id|integer|None|False|Identifier of policy|None|1234|
   
 Example input:
