@@ -1,49 +1,40 @@
 # Description
 
-The DNS plugin is used for forward and reverse DNS lookups. This plugin uses [Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, which is a network administration command-line tool for querying Domain Name System (DNS) name servers.
+The DNS plugin is used for forward and reverse DNS lookups. This plugin uses [Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, which is a network administration command-line tool for querying Domain Name System (DNS) name servers
 
 # Key Features
-
-* Forward DNS lookup to find an IP address from a domain name
+  
+* Forward DNS lookup to find an IP address from a domain name  
 * Reverse DNS lookup to find a domain name from an IP address
 
 # Requirements
 
-_This plugin does not contain any requirements._
+# Supported Product Versions
+  
+* 2023-10-12
 
 # Documentation
 
 ## Setup
-
-_This plugin does not contain a connection._
+  
+*This plugin does not contain a connection.*
 
 ## Technical Details
 
 ### Actions
 
 #### Forward Lookup
-
-This action is used to request a forward lookup for a domain.
+  
+This action is used to request a forward lookup for a domain
 
 ##### Input
 
-It accepts a domain name of type `string` and one of the following record types:
-
-* A
-* AAAA
-* ANY
-* CNAME
-* MX
-* NS
-* PTR
-* SOA
-
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |domain|string|None|True|Domain name to resolve|None|rapid7.com|
 |query|string|None|True|Query type e.g. ANY, A, MX, NS, etc|['A', 'AAAA', 'ANY', 'CNAME', 'MX', 'NS', 'PTR', 'SOA']|MX|
 |resolver|string|None|False|Resolver. Leave blank to use default resolver for the system|None|8.8.8.8|
-
+  
 Example input:
 
 ```
@@ -56,31 +47,29 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|all_answers|[]string|False|A list of all answers found|
-|answer|string|False|Answer received|
-|fulloutput|string|False|Full DNS output|
-|last_answer|string|False|The last answer found in the answers section|
-|nameserver|string|False|Nameserver that fulfilled request|
-|question|string|False|Question asked|
-|status|string|False|Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED ...]|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|all_answers|[]string|False|A list of all answers found|["172.217.6.14"]|
+|answer|string|False|Answer received|172.217.6.14|
+|fulloutput|string|False|Full DNS output|\n; <<>> DiG 9.12.4-P2 <<>> google.com A\n;; global ...|
+|last_answer|string|False|The last answer found in the answers section|172.217.6.14|
+|nameserver|string|False|Nameserver that fulfilled request|192.168.65.1|
+|question|string|False|Question asked|google.com|
+|status|string|False|Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED ...]|NOERROR|
+  
 On success, the raw output will look like the following:
-
-Example output:
 
 ```
 {
-  "last_answer": "172.217.6.14",
-  "nameserver": "192.168.65.1",
-  "question": "google.com",
-  "status": "NOERROR",
   "all_answers": [
     "172.217.6.14"
   ],
   "answer": "172.217.6.14",
-  "fulloutput": "\n; <<>> DiG 9.12.4-P2 <<>> google.com A\n;; global ..."
+  "fulloutput": "\\n; <<>> DiG 9.12.4-P2 <<>> google.com A\\n;; global ...",
+  "last_answer": "172.217.6.14",
+  "nameserver": "192.168.65.1",
+  "question": "google.com",
+  "status": "NOERROR"
 }
 ```
 
@@ -99,16 +88,16 @@ On failure, the raw output will look like the following:
 ```
 
 #### Reverse Lookup
-
-This action is used to request a reverse lookup for an IP address.
+  
+This action is used to request a reverse lookup for an IP address
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |address|string|None|True|Internet address to resolve|None|1.2.3.4|
 |resolver|string|None|False|Resolver. Leave blank to use default resolver for the system|None|8.8.8.8|
-
+  
 Example input:
 
 ```
@@ -120,29 +109,28 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|answer|string|False|Answer received|
-|fulloutput|string|False|Full DNS output|
-|nameserver|string|False|Nameserver that fulfilled request|
-|question|string|False|Question asked|
-|status|string|False|Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED ...]|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|answer|string|False|Answer received|google-public-dns-a.google.com|
+|fulloutput|string|False|Full DNS output|\n; <<>> Dig 9.9.5-9+deb8u9-Debian <<>> -x 8.8.8.8\n;; global options: +cmd\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 59406\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version: 0, flags:; udp: 512\n;; QUESTION SECTION:\n;8.8.8.8.in-addr.arpa.\t\tIN\tPTR\n\n;; ANSWER SECTION:\n8.8.8.8.in-addr.arpa.\t68133\tIN\tPTR\tgoogle-public-dns-a.google.com.\n\n;; Query time: 22 msec\n;; SERVER: 10.0.2.3#53(10.0.2.3)\n;; WHEN: Thu Jan 26 23:43:43 UTC 2017\n;; MSG SIZE  rcvd: 93\n\n|
+|nameserver|string|False|Nameserver that fulfilled request|10.0.2.3|
+|question|string|False|Question asked|8.8.8.8|
+|status|string|False|Query status [ NOERROR | FORMERR | NXDOMAIN | SERVFAIL | REFUSED ...]|NOERROR|
+  
 On success, the raw output will look like the following:
 
 ```
-
 {
-  "status": "NOERROR",
   "answer": "google-public-dns-a.google.com",
+  "fulloutput": "\\n; <<>> Dig 9.9.5-9+deb8u9-Debian <<>> -x 8.8.8.8\\n;; global options: +cmd\\n;; Got answer:\\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 59406\\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1\\n\\n;; OPT PSEUDOSECTION:\\n; EDNS: version: 0, flags:; udp: 512\\n;; QUESTION SECTION:\\n;8.8.8.8.in-addr.arpa.\\t\\tIN\\tPTR\\n\\n;; ANSWER SECTION:\\n8.8.8.8.in-addr.arpa.\\t68133\\tIN\\tPTR\\tgoogle-public-dns-a.google.com.\\n\\n;; Query time: 22 msec\\n;; SERVER: 10.0.2.3#53(10.0.2.3)\\n;; WHEN: Thu Jan 26 23:43:43 UTC 2017\\n;; MSG SIZE  rcvd: 93\\n\\n",
   "nameserver": "10.0.2.3",
   "question": "8.8.8.8",
-  "fulloutput": "\n; <<>> Dig 9.9.5-9+deb8u9-Debian <<>> -x 8.8.8.8\n;; global options: +cmd\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 59406\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version: 0, flags:; udp: 512\n;; QUESTION SECTION:\n;8.8.8.8.in-addr.arpa.\t\tIN\tPTR\n\n;; ANSWER SECTION:\n8.8.8.8.in-addr.arpa.\t68133\tIN\tPTR\tgoogle-public-dns-a.google.com.\n\n;; Query time: 22 msec\n;; SERVER: 10.0.2.3#53(10.0.2.3)\n;; WHEN: Thu Jan 26 23:43:43 UTC 2017\n;; MSG SIZE  rcvd: 93\n\n"
+  "status": "NOERROR"
 }
 
 ```
 
-Example output:
+On failure, the raw output will look like the following:
 
 ```
 {
@@ -155,12 +143,16 @@ Example output:
 ```
 
 ### Triggers
+  
+*This plugin does not contain any triggers.*
 
-_This plugin does not contain any triggers._
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-### Custom Output Types
-
-_This plugin does not contain any custom output types._
+### Custom Types
+  
+*This plugin does not contain any custom output types.*
 
 ## Troubleshooting
 
@@ -194,6 +186,7 @@ Common examples:
 
 # Version History
 
+* 2.0.1 - Added `__init__.py` file to `unit_test` folder | Refreshed with new Tooling
 * 2.0.0 - Rename Dig plugin to DNS
 * 1.0.7 - Fix bug in `safe_parse` function | Fix bug when `answers` in function `execute_command` is str
 * 1.0.6 - Upgrade to latest Python plugin runtime | Define `cloud_ready` in spec
@@ -212,7 +205,9 @@ Common examples:
 
 # Links
 
-## References
-
 * [Dig](https://linux.die.net/man/1/dig)
+
+## References
+  
+* [Dig](https://linux.die.net/man/1/dig)  
 * [DNS Status Code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml)

@@ -1,0 +1,15 @@
+{
+    "fulloutput":"\n; <<>> DiG 9.16.20 <<>> @8.8.8.8 rapid7.com MX\n; (1 server found)\n;; global options: +cmd\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 18691\n;; flags: qr rd ra; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version: 0, flags:; udp: 512\n;; QUESTION SECTION:\n;rapid7.com.\t\t\tIN\tMX\n\n;; ANSWER SECTION:\nrapid7.com.\t\t8\tIN\tMX\t1 aspmx.l.google.com.\nrapid7.com.\t\t8\tIN\tMX\t10 alt3.aspmx.l.google.com.\nrapid7.com.\t\t8\tIN\tMX\t10 alt4.aspmx.l.google.com.\nrapid7.com.\t\t8\tIN\tMX\t5 alt1.aspmx.l.google.com.\nrapid7.com.\t\t8\tIN\tMX\t5 alt2.aspmx.l.google.com.\n\n;; Query time: 34 msec\n;; SERVER: 8.8.8.8#53(8.8.8.8)\n;; WHEN: Wed Oct 25 13:35:49 UTC 2023\n;; MSG SIZE  rcvd: 154\n\n",
+    "question":"rapid7.com",
+    "nameserver":"8.8.8.8",
+    "status":"NOERROR",
+    "answer":"aspmx.l.google.com",
+    "last_answer":"alt2.aspmx.l.google.com",
+    "all_answers":[
+        "aspmx.l.google.com",
+        "alt3.aspmx.l.google.com",
+        "alt4.aspmx.l.google.com",
+        "alt1.aspmx.l.google.com",
+        "alt2.aspmx.l.google.com"
+    ]
+}

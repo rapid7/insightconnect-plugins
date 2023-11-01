@@ -1,0 +1,5 @@
+{
+    "stdout":"\n; <<>> DiG 9.16.20 <<>> @8.8.8.8 -x 13.33.252.129\n; (1 server found)\n;; global options: +cmd\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 28936\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version: 0, flags:; udp: 512\n;; QUESTION SECTION:\n;129.252.33.13.in-addr.arpa.\tIN\tPTR\n\n;; ANSWER SECTION:\n129.252.33.13.in-addr.arpa. 21600 IN\tPTR\tserver-13-33-252-129.den50.r.cloudfront.net.\n\n;; Query time: 107 msec\n;; SERVER: 8.8.8.8#53(8.8.8.8)\n;; WHEN: Tue Oct 31 09:12:29 UTC 2023\n;; MSG SIZE  rcvd: 112\n\n",
+    "stderr":"",
+    "rcode": ""
+}
