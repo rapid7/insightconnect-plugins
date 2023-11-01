@@ -8,7 +8,7 @@ from unittest.mock import patch, Mock
 from unittest import TestCase
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
-from unit_test.util import (
+from util import (
     Util,
     mock_request_200,
     mock_request_403,
