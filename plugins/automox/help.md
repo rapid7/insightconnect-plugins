@@ -129,7 +129,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|True|Was operation successful|None|
+|success|boolean|True|Was operation successful|True|
   
 Example output:
 
@@ -1068,7 +1068,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|True|Was operation successful|None|
+|success|boolean|True|Was operation successful|True|
   
 Example output:
 

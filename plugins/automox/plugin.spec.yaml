@@ -1011,6 +1011,7 @@ actions:
         description: Was operation successful
         type: boolean
         required: true
+        example: true
   delete_device:
     title: Delete Device
     description: Delete an Automox device
@@ -1033,6 +1034,7 @@ actions:
         description: Was operation successful
         type: boolean
         required: true
+        example: true
   get_device_software:
     title: Get Device Software
     description: Retrieve a list of software installed on a device
