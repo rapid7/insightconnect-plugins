@@ -1,0 +1,7 @@
+{
+    "fulloutput":"Resolution failed, nameserver NO MATCHES FOUND returned NO MATCHES FOUND status",
+    "question":"13.33.252.129",
+    "nameserver":"NO MATCHES FOUND",
+    "status":"NO MATCHES FOUND",
+    "answer":"Not found"
+}

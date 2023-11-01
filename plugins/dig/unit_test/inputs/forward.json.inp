@@ -1,0 +1,5 @@
+{
+      "domain": "rapid7.com",
+      "resolver": "8.8.8.8",
+      "query": "MX"
+    }

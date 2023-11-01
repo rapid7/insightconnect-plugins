@@ -1,0 +1,5 @@
+{
+    "stdout": "{'all_answers': ['Not found'],'answer': 'Not found','fulloutput': 'Resolution failed, nameserver NO MATCHES FOUND returned NO MATCHES FOUND status','last_answer': 'Not found','nameserver': 'NO MATCHES FOUND','question': 'rapid7.com','status': 'NO MATCHES FOUND'}",
+    "stderr": "",
+    "rcode": ""
+}

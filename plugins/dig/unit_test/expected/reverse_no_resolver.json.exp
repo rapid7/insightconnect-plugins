@@ -1,0 +1,7 @@
+{
+    "fulloutput":"\n; <<>> DiG 9.16.20 <<>> -x 13.33.252.129\n;; global options: +cmd\n;; Got answer:\n;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 58301\n;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1\n\n;; OPT PSEUDOSECTION:\n; EDNS: version: 0, flags:; udp: 4096\n; COOKIE: cacd97b822b897c7 (echoed)\n;; QUESTION SECTION:\n;129.252.33.13.in-addr.arpa.\tIN\tPTR\n\n;; ANSWER SECTION:\n129.252.33.13.in-addr.arpa. 4502 IN\tPTR\tserver-13-33-252-129.den50.r.cloudfront.net.\n\n;; Query time: 35 msec\n;; SERVER: 192.168.65.7#53(192.168.65.7)\n;; WHEN: Tue Oct 31 09:34:15 UTC 2023\n;; MSG SIZE  rcvd: 150\n\n",
+    "question":"13.33.252.129",
+    "nameserver":"192.168.65.7",
+    "status":"NOERROR",
+    "answer":"server-13-33-252-129.den50.r.cloudfront.net"
+}
