@@ -81,7 +81,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |group|group|True|Detailed information about the created group|None|
-|success|boolean|True|Was operation successful|None|
+|success|boolean|True|Was operation successful|True|
   
 Example output:
 
@@ -163,7 +163,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|True|Was operation successful|None|
+|success|boolean|True|Was operation successful|True|
   
 Example output:
 
@@ -197,7 +197,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|True|Was operation successful|None|
+|success|boolean|True|Was operation successful|True|
   
 Example output:
 
@@ -240,7 +240,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|True|Was operation successful|None|
+|success|boolean|True|Was operation successful|True|
   
 Example output:
 
@@ -950,7 +950,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|action_sets|[]action_set|False|List of vulnerability sync action sets|[{'created_at': '2023-10-10T03:45:26+0000', 'created_by_user': {'email': 'user.name@example.com', 'firstname': 'User', 'id': 1, 'lastname': 'Name'}, 'id': 1234, 'organization_id': 1, 'source': {'name': 'insightconnect-uploaded-report.csv', 'type': 'generic'}, 'statistics': {'issues': {'unknown-host': {'count': 4}}, 'solutions': {'patch-with-worklet': {'count': 1, 'device_count': 18, 'vulnerability_count': 1}}}, 'status': 'ready', 'updated_at': '2023-10-10T03:45:30+0000', 'updated_by_user': {'email': 'user.name@example.com', 'firstname': 'User', 'id': 1, 'lastname': 'Name'}}]|
+|action_sets|[]action_set|False|List of vulnerability sync action sets|[{'created_at': '2023-10-10T03:45:26+0000', 'created_by_user': {'email': 'user@example.com', 'firstname': 'User', 'id': 1, 'lastname': 'Name'}, 'id': 1234, 'organization_id': 1, 'source': {'name': 'insightconnect-uploaded-report.csv', 'type': 'generic'}, 'statistics': {'issues': {'unknown-host': {'count': 4}}, 'solutions': {'patch-with-worklet': {'count': 1, 'device_count': 18, 'vulnerability_count': 1}}}, 'status': 'ready', 'updated_at': '2023-10-10T03:45:30+0000', 'updated_by_user': {'email': 'user@example.com', 'firstname': 'User', 'id': 1, 'lastname': 'Name'}}]|
   
 Example output:
 
@@ -959,7 +959,7 @@ Example output:
   "action_sets": {
     "created_at": "2023-10-10T03:45:26+0000",
     "created_by_user": {
-      "email": "user.name@example.com",
+      "email": "user@example.com",
       "firstname": "User",
       "id": 1,
       "lastname": "Name"
@@ -987,7 +987,7 @@ Example output:
     "status": "ready",
     "updated_at": "2023-10-10T03:45:30+0000",
     "updated_by_user": {
-      "email": "user.name@example.com",
+      "email": "user@example.com",
       "firstname": "User",
       "id": 1,
       "lastname": "Name"
@@ -1026,7 +1026,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|True|Was operation successful|None|
+|success|boolean|True|Was operation successful|True|
   
 Example output:
 
@@ -1114,7 +1114,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|True|Was operation successful|None|
+|success|boolean|True|Was operation successful|True|
   
 Example output:
 
