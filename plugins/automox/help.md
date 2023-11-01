@@ -696,6 +696,9 @@ Example input:
 Example output:
 
 ```
+{
+  "lorem_ipsum": "abcd"
+}
 ```
 
 #### List Organizations
@@ -715,6 +718,9 @@ _This action does not contain any inputs._
 Example output:
 
 ```
+{
+  "lorem_ipsum": "abcd"
+}
 ```
 
 #### List Organization Users
@@ -730,6 +736,9 @@ This action is used to retrieve users of the Automox organization.
 Example input:
 
 ```
+{
+  "lorem_ipsum": "abcd"
+}
 ```
 
 ##### Output
@@ -741,6 +750,9 @@ Example input:
 Example output:
 
 ```
+{
+  "lorem_ipsum": "abcd"
+}
 ```
 
 #### List Groups
@@ -770,6 +782,9 @@ Example input:
 Example output:
 
 ```
+{
+  "lorem_ipsum": "abcd"
+}
 ```
 
 #### Get Vulnerability Sync Action Set
@@ -858,6 +873,9 @@ Example input:
 Example output:
 
 ```
+{
+  "lorem_ipsum": "abcd"
+}
 ```
 
 #### Get Device by Hostname
@@ -889,6 +907,9 @@ Example input:
 Example output:
 
 ```
+{
+  "lorem_ipsum": "abcd"
+}
 ```
 
 #### Create Group
@@ -1081,7 +1102,9 @@ This action is used to launch remediation for patch and worklet remediations.
 Example input:
 
 ```
-
+{
+  "lorem_ipsum": "abcd"
+}
 ```
 
 ##### Output
@@ -1108,6 +1131,9 @@ Example output:
 Example output:
 
 ```
+{
+  "lorem_ipsum": "abcd"
+}
 ```
 
 #### Get Device Software
@@ -1139,6 +1165,9 @@ Example input:
 Example output:
 
 ```
+{
+  "lorem_ipsum": "abcd"
+}
 ```
 
 #### List Devices
@@ -1170,6 +1199,9 @@ Example input:
 Example output:
 
 ```
+{
+  "lorem_ipsum": "abcd"
+}
 ```
 
 ### Triggers
@@ -1203,6 +1235,9 @@ Example input:
 Example output:
 
 ```
+{
+  "lorem_ipsum": "abcd"
+}
 ```
 
 ## Troubleshooting
@@ -1211,12 +1246,12 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.0 - Fix Vulnerability Sync API Actions | Add Delete Vulnerability Sync Action Set action | Add Execute
-  Vulnerability Sync Actions action | Add List Vulnerability Sync Action Set Issues
-  action | Add List Vulnerability Sync Action Set Solutions action | Add List Vulnerability Sync Action Sets action |
-  | Add Get Vulnerability Sync Action Set action | Update Upload Vulnerability Sync File action 
-  | Update Get Devices action | Remove Action on Vulnerability Sync Batch | Remove Action on Vulnerability Sync Task
-  | Remove Get Vulnerability Sync Batch | Remove List Vulnerability Sync Batches | Remove List Vulnerability Sync Tasks
+* 2.0.0 - Fix Vulnerability Sync API Actions | `Action`: Added - Delete Vulnerability Sync Action Set | `Action`: Added - Execute
+  Vulnerability Sync Actions | `Action`: Added - List Vulnerability Sync Action Set Issues | 
+  `Action`: Added - List Vulnerability Sync Action Set Solutions | `Action`: Added - List Vulnerability Sync Action Sets |
+  | `Action`: Added - Get Vulnerability Sync Action Set | `Action`: Updated - Upload Vulnerability Sync File 
+  | `Action`: Updated - Get Devices | `Action`: Deleted - Action on Vulnerability Sync Batch | `Action`: Deleted - Vulnerability Sync Task
+  | `Action`: Deleted - Get Vulnerability Sync Batch | `Action`: Deleted - List Vulnerability Sync Batches | `Action`: Deleted - List Vulnerability Sync Tasks
 * 1.2.0 - Get device by IP and Get device by hostname: fix validation issue when IP or hostname not found | Add unit
   tests
 * 1.1.1 - Fix undefined org ID passed to actions when not required | Record outcome of connection tests
