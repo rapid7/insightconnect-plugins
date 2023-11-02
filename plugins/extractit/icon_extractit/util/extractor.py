@@ -114,7 +114,7 @@ def extract(
                 )
                 matches = regex.findall(provided_regex, provided_file)
         except UnicodeDecodeError:
-            file_content = extract_content_from_file(base64.b64decode(provided_file))
+            file_content = extract_content_from_file(base64.b64decode(provided_file), provided_regex)
             matches = regex.findall(provided_regex, file_content)
     return list(dict.fromkeys(matches))
 
@@ -152,14 +152,14 @@ def extract_filepath(provided_regex: str, provided_string: str, provided_file: s
         try:
             new_file = base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING)
         except UnicodeDecodeError:
-            new_file = extract_content_from_file(base64.b64decode(provided_file))
+            new_file = extract_content_from_file(base64.b64decode(provided_file), provided_regex)
         new_file = regex.sub(Regex.URL, "", new_file)
         new_file = regex.sub(Regex.Date, "", new_file)
         matches = regex.findall(provided_regex, new_file)
     return list(dict.fromkeys(matches))
 
 
-def extract_content_from_file(provided_file: bytes) -> str:  # noqa: C901
+def extract_content_from_file(provided_file: bytes, provided_regex: str = "") -> str:  # noqa: C901
     with io.BytesIO(provided_file) as file_:
         try:
             # extracting content from DOCX, PPTX, XLSX, ODT, ODP, ODF files
@@ -193,7 +193,7 @@ def extract_content_from_file(provided_file: bytes) -> str:  # noqa: C901
                 with pdfplumber.open(file_) as pdf_file:
                     for page in pdf_file.pages:
                         page_content = page.extract_text()
-                        for word in extract_wrapped_words_from_pdf_page(page):
+                        for word in extract_wrapped_words_from_pdf_page(page, provided_regex):
                             page_content = page_content.replace(word, word.replace("\n", ""))
                         pdf_content += page_content
                 return pdf_content
@@ -204,12 +204,19 @@ def extract_content_from_file(provided_file: bytes) -> str:  # noqa: C901
                 )
 
 
-def extract_wrapped_words_from_pdf_page(page: Page, tolerance: float = DEFAULT_PDF_WRAPPING_TOLERANCE) -> List[str]:
+def extract_wrapped_words_from_pdf_page(
+    page: Page,
+    provided_regex: str = "",
+    tolerance: float = DEFAULT_PDF_WRAPPING_TOLERANCE,
+) -> List[str]:
     """
     Extract wrapped words from a PDF page.
 
     :param page: The PDF page from which to extract wrapped words.
     :type: Page
+
+    :param provided_regex: The regex for the type of words to be searched for, e.g. email/domain format.
+    :type: str
 
     :param tolerance: The tolerance value for detecting wrapped words. Defaults to DEFAULT_PDF_WRAPPING_TOLERANCE.
     :type: float
@@ -220,9 +227,20 @@ def extract_wrapped_words_from_pdf_page(page: Page, tolerance: float = DEFAULT_P
 
     wrapped_words = []
     max_x1 = max(character.get("x1") for character in page.chars)
-    for word in page.extract_words():
+    extracted_words = page.extract_words(use_text_flow=True)
+
+    for index, word in enumerate(extracted_words):
         if (max_x1 - word.get("x1")) < tolerance:
-            wrapped_words.append(f"{word.get('text')}\n")
+            # if the current or next word in the list are valid matches then do not try and join then
+            if provided_regex:
+                if (
+                    not regex.findall(provided_regex, word.get("text", ""))
+                    and (index + 1) < len(extracted_words)
+                    and not regex.findall(provided_regex, extracted_words[index + 1].get("text", ""))
+                ):
+                    wrapped_words.append(f"{word.get('text')}\n")
+            else:
+                wrapped_words.append(f"{word.get('text')}\n")
     return wrapped_words
 
 

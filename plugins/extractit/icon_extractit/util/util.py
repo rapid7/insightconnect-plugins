@@ -56,7 +56,6 @@ class Regex:
 
 
 class DateFormatStrings:
-
     human_to_linux_mapping = {
         "dd/mm/yyyy": "%d/%m/%Y",
         "dd\\mm\\yyyy": "%d\\%m\\%Y",
