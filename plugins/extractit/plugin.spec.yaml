@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: extractit
 title: ExtractIt
 description: The ExtractIt plugin has a collection of actions used to extract various information from text. These include URLs, domains, emails, IPs, and more
-version: 3.0.7
+version: 3.0.8
 vendor: rapid7
 support: rapid7
 supported_versions: ["2022-10-19"]
