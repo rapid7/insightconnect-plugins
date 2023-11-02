@@ -4476,3 +4476,83 @@ triggers:
         type: vulnerability_exception
         required: false
         example: {}
+  scan_completion:
+    title: Scan Completed
+    description: Fire upon completed scan
+    input:
+      site_id:
+        title: Site ID
+        description: Site ID
+        type: string
+        required: false
+      asset_group:
+        title: Asset Group
+        description: Asset Group
+        type: string
+        required: false
+      hostname:
+        title: Hostname
+        description: Hostname
+        type: string
+        required: false
+      ip_address:
+        title: IP Address
+        description: IP Address
+        type: string
+        required: false
+      risk_score:
+        title: Risk Score
+        description: Risk score
+        type: integer
+        required: false
+      cve:
+        title: CVE
+        description: CVE
+        type: string
+        required: false
+      source:
+        title: Source
+        description: Source
+        type: string
+        required: false
+    output:
+      asset_id:
+        title: Asset ID
+        description: Asset ID
+        type: string
+        required: false
+      hostname:
+        title: Hostname
+        description: Hostname
+        type: string
+        required: false
+      ip:
+        title: IP
+        description: IP
+        type: string
+        required: false
+      vulnerability_id:
+        title: Vulnerability ID
+        description: Vulnerability ID
+        type: string
+        required: false
+      nexpose_id:
+        title: Nexpose ID
+        description: Nexpose ID
+        type: string
+        required: false
+      solution_id:
+        title: Solution ID
+        description: Solution ID
+        type: string
+        required: false
+      solution_summary:
+        title: Solution Summary
+        description: Solution Summary
+        type: string
+        required: false
+      software_update_id:
+        title: Software Update ID
+        description: Software update ID
+        type: string
+        required: false
