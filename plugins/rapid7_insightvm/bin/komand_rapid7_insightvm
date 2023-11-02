@@ -37,6 +37,8 @@ def main():
             self.add_trigger(triggers.NewScans())
         
             self.add_trigger(triggers.NewExceptionRequest())
+
+            self.add_trigger(triggers.ScanCompletion())
         
             self.add_action(actions.Scan())
         
