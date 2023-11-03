@@ -160,19 +160,14 @@ class DuoAdminAPI:
                 params=params,
                 headers=self.get_headers(method=method.upper(), host=self.hostname, path=path, params=params),
             )
+            self.logger.info(f"Response data returned in make request: {response.json()}")
             #TODO Update to 403
-            if response.status_code == 403 and path in TASK_PATHS_ALLOW_403:
+            if response.status_code == 401 and path in TASK_PATHS_ALLOW_403:
                 # Special case: A task user who only has permissions for certain endpoints should not error out.
                 # Log and return empty response instead
                 self.logger.info(f"Request to {path} returned 403 unauthorized. Not raising exception as may be authorized to hit other endpoint(s)")
-                self.logger.info(f"Response data returned: {response}")
-                #return {"response": {"events": [], "metadata": {}}, "stat": "OK"}
-                #return "", 200
-                response= {
-                    "authlogs": [],
-                    "metadata": {}
-                }
-                return response
+                self.logger.info(f"Response data returned: {response.json()}")
+                return {}
             self._handle_exceptions(response, path)
             self.logger.info(f"Response data returned: {response.text}")
             if 200 <= response.status_code < 300:
@@ -233,13 +228,14 @@ class DuoAdminAPI:
         try:
             self.logger.info(f"Request to path: {path}")
             response = self.make_request(method=method, path=path, params=params)
-            self.logger.info(f"response returned DL DEBUG: {response}")
-            self.logger.info(f"response.json(): {response.json()}")
-            return response.json()
+            if isinstance(response, requests.Response):
+                self.logger.info(f"response returned DL DEBUG: {response}")
+                self.logger.info(f"response.json(): {response.json()}")
+                return response.json()
+            else:
+                return response
         except json.decoder.JSONDecodeError as error:
             self.logger.info(f"JSON error occurred decoding response from {path}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
-        except Exception as error:
-            self.logger.info("Exception thrown")
-            self.logger.info(f"Error {error}")
+
 
