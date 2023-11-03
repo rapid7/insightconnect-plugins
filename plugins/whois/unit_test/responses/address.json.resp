@@ -1,0 +1,5 @@
+{
+    "stdout":"{'netrange': '198.51.100.0 - 198.51.100.255', 'cidr': '198.51.100.0/24', 'netname': 'TEST-NET-1', 'nettype': 'IANA Special Use', 'regdate': 'Updated', 'update': '2013-08-30', 'orgname': 'Internet Assigned Numbers Authority', 'address': 'Suite 300', 'city': 'Los Angeles', 'state': 'CA', 'postal': '90292', 'country': 'US', 'org_tech_phone': '+1-310-301-5820', 'org_tech_email': 'abuse@iana.org', 'org_abuse_phone': '+1-310-301-5820', 'org_abuse_email': 'abuse@iana.org'}",
+    "stderr":"",
+    "rcode":""
+}

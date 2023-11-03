@@ -1,116 +1,101 @@
-% IANA WHOIS server
-% for more information on IANA, visit http://www.iana.org
-% This query returned 1 object
-
-refer:        whois.verisign-grs.com
-
-domain:       COM
-
-organisation: VeriSign Global Registry Services
-address:      12061 Bluemont Way
-address:      Reston VA 20190
-address:      United States of America (the)
-
-contact:      administrative
-name:         Registry Customer Service
-organisation: VeriSign Global Registry Services
-address:      12061 Bluemont Way
-address:      Reston VA 20190
-address:      United States of America (the)
-phone:        +1 703 925-6999
-fax-no:       +1 703 948 3978
-e-mail:       info@verisign-grs.com
-
-contact:      technical
-name:         Registry Customer Service
-organisation: VeriSign Global Registry Services
-address:      12061 Bluemont Way
-address:      Reston VA 20190
-address:      United States of America (the)
-phone:        +1 703 925-6999
-fax-no:       +1 703 948 3978
-e-mail:       info@verisign-grs.com
-
-nserver:      A.GTLD-SERVERS.NET 192.5.6.30 2001:503:a83e:0:0:0:2:30
-nserver:      B.GTLD-SERVERS.NET 192.33.14.30 2001:503:231d:0:0:0:2:30
-nserver:      C.GTLD-SERVERS.NET 192.26.92.30 2001:503:83eb:0:0:0:0:30
-nserver:      D.GTLD-SERVERS.NET 192.31.80.30 2001:500:856e:0:0:0:0:30
-nserver:      E.GTLD-SERVERS.NET 192.12.94.30 2001:502:1ca1:0:0:0:0:30
-nserver:      F.GTLD-SERVERS.NET 192.35.51.30 2001:503:d414:0:0:0:0:30
-nserver:      G.GTLD-SERVERS.NET 192.42.93.30 2001:503:eea3:0:0:0:0:30
-nserver:      H.GTLD-SERVERS.NET 192.54.112.30 2001:502:8cc:0:0:0:0:30
-nserver:      I.GTLD-SERVERS.NET 192.43.172.30 2001:503:39c1:0:0:0:0:30
-nserver:      J.GTLD-SERVERS.NET 192.48.79.30 2001:502:7094:0:0:0:0:30
-nserver:      K.GTLD-SERVERS.NET 192.52.178.30 2001:503:d2d:0:0:0:0:30
-nserver:      L.GTLD-SERVERS.NET 192.41.162.30 2001:500:d937:0:0:0:0:30
-nserver:      M.GTLD-SERVERS.NET 192.55.83.30 2001:501:b1f9:0:0:0:0:30
-ds-rdata:     30909 8 2 e2d3c916f6deeac73294e8268fb5885044a833fc5459588f4a9184cfc41a5766
-
-whois:        whois.verisign-grs.com
-
-status:       ACTIVE
-remarks:      Registration information: http://www.verisigninc.com
-
-created:      1985-01-01
-changed:      2023-09-12
-source:       IANA
-
-# whois.verisign-grs.com
-
-   Domain Name: RAPID7.COM
-   Registry Domain ID: 27824595_DOMAIN_COM-VRSN
-   Registrar WHOIS Server: whois.markmonitor.com
-   Registrar URL: http://www.markmonitor.com
-   Updated Date: 2023-04-23T11:18:40Z
-   Creation Date: 2000-05-25T19:00:54Z
-   Registry Expiry Date: 2025-05-25T19:00:54Z
-   Registrar: MarkMonitor Inc.
-   Registrar IANA ID: 292
-   Registrar Abuse Contact Email: abusecomplaints@markmonitor.com
-   Registrar Abuse Contact Phone: +1.2086851750
-   Domain Status: clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited
-   Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
-   Domain Status: clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited
-   Name Server: NS-1390.AWSDNS-45.ORG
-   Name Server: NS-1653.AWSDNS-14.CO.UK
-   Name Server: NS-439.AWSDNS-54.COM
-   Name Server: NS-739.AWSDNS-28.NET
-   DNSSEC: unsigned
-   URL of the ICANN Whois Inaccuracy Complaint Form: https://www.icann.org/wicf/
->>> Last update of whois database: 2023-10-31T15:02:12Z <<<
-
-# whois.markmonitor.com
-
-Domain Name: rapid7.com
-Registry Domain ID: 27824595_DOMAIN_COM-VRSN
-Registrar WHOIS Server: whois.markmonitor.com
-Registrar URL: http://www.markmonitor.com
-Updated Date: 2023-04-23T11:18:40+0000
-Creation Date: 2000-05-25T19:00:54+0000
-Registrar Registration Expiration Date: 2025-05-25T00:00:00+0000
-Registrar: MarkMonitor, Inc.
-Registrar IANA ID: 292
-Registrar Abuse Contact Email: abusecomplaints@markmonitor.com
-Registrar Abuse Contact Phone: +1.2086851750
-Domain Status: clientUpdateProhibited (https://www.icann.org/epp#clientUpdateProhibited)
-Domain Status: clientTransferProhibited (https://www.icann.org/epp#clientTransferProhibited)
-Domain Status: clientDeleteProhibited (https://www.icann.org/epp#clientDeleteProhibited)
-Registrant Organization: Rapid7
-Registrant State/Province: MA
-Registrant Country: US
-Registrant Email: Select Request Email Form at https://domains.markmonitor.com/whois/rapid7.com
-Admin Organization: Rapid7
-Admin State/Province: MA
-Admin Country: US
-Admin Email: Select Request Email Form at https://domains.markmonitor.com/whois/rapid7.com
-Tech Organization: Rapid7
-Tech State/Province: MA
-Tech Country: US
-Tech Email: Select Request Email Form at https://domains.markmonitor.com/whois/rapid7.com
-Name Server: ns-1390.awsdns-45.org
-Name Server: ns-1653.awsdns-14.co.uk
-Name Server: ns-739.awsdns-28.net
-Name Server: ns-439.awsdns-54.com
-DNSSEC: unsigned
-URL of the ICANN WHOIS Data Problem Reporting System: http://wdprs.internic.net/
->>> Last update of WHOIS database: 2023-10-31T15:02:24+0000 <<<
+{
+    "domain_name":[
+        "GOOGLE.COM\r",
+        "google.com"
+    ],
+    "registrar":[
+        "MarkMonitor Inc.\r",
+        "MarkMonitor, Inc."
+    ],
+    "registrant":[
+        "ns4.google.com"
+    ],
+    "registrant_cc":[
+        "US",
+        "US"
+    ],
+    "creation_date":[
+        "1997-09-15T04:00:00Z\r",
+        "1997-09-15T07:00:00+0000"
+    ],
+    "expiration_date":[
+        "2028-09-13T07:00:00+0000"
+    ],
+    "updated_date":[
+        "2019-09-09T15:39:04Z\r",
+        "2019-09-09T15:39:04+0000"
+    ],
+    "name_servers":[
+        "NS1.GOOGLE.COM\r",
+        "NS2.GOOGLE.COM\r",
+        "NS3.GOOGLE.COM\r",
+        "NS4.GOOGLE.COM\r",
+        "ns4.google.com",
+        "ns1.google.com",
+        "ns3.google.com",
+        "ns2.google.com"
+    ],
+    "status":[
+        "      ACTIVE",
+        "clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited\r",
+        "clientTransferProhibited https://icann.org/epp#clientTransferProhibited\r",
+        "clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited\r",
+        "serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited\r",
+        "serverTransferProhibited https://icann.org/epp#serverTransferProhibited\r",
+        "serverUpdateProhibited https://icann.org/epp#serverUpdateProhibited\r",
+        "clientUpdateProhibited (https://www.icann.org/epp#clientUpdateProhibited)",
+        "clientTransferProhibited (https://www.icann.org/epp#clientTransferProhibited)",
+        "clientDeleteProhibited (https://www.icann.org/epp#clientDeleteProhibited)",
+        "serverUpdateProhibited (https://www.icann.org/epp#serverUpdateProhibited)",
+        "serverTransferProhibited (https://www.icann.org/epp#serverTransferProhibited)",
+        "serverDeleteProhibited (https://www.icann.org/epp#serverDeleteProhibited)"
+    ],
+    "emails":[
+        "info@verisign-grs.com",
+        "info@verisign-grs.com",
+        "abusecomplaints@markmonitor.com",
+        "abusecomplaints@markmonitor.com"
+    ],
+    "registry_domain_id":[
+        "2138514_DOMAIN_COM-VRSN\r",
+        "2138514_DOMAIN_COM-VRSN"
+    ],
+    "registrar_whois_server":[
+        "whois.markmonitor.com\r",
+        "whois.markmonitor.com"
+    ],
+    "registrar_url":[
+        "http://www.markmonitor.com\r",
+        "http://www.markmonitor.com"
+    ],
+    "registrar_iana_id":[
+        "292\r",
+        "292"
+    ],
+    "registrar_abuse_contact_email":[
+        "abusecomplaints@markmonitor.com\r",
+        "abusecomplaints@markmonitor.com"
+    ],
+    "registrar_abuse_contact_phone":[
+        "+1.2086851750\r",
+        "+1.2086851750"
+    ],
+    "domain_status":[
+        "clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited\r",
+        "clientTransferProhibited https://icann.org/epp#clientTransferProhibited\r",
+        "clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited\r",
+        "serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited\r",
+        "serverTransferProhibited https://icann.org/epp#serverTransferProhibited\r",
+        "serverUpdateProhibited https://icann.org/epp#serverUpdateProhibited\r",
+        "clientUpdateProhibited (https://www.icann.org/epp#clientUpdateProhibited)",
+        "clientTransferProhibited (https://www.icann.org/epp#clientTransferProhibited)",
+        "clientDeleteProhibited (https://www.icann.org/epp#clientDeleteProhibited)",
+        "serverUpdateProhibited (https://www.icann.org/epp#serverUpdateProhibited)",
+        "serverTransferProhibited (https://www.icann.org/epp#serverTransferProhibited)",
+        "serverDeleteProhibited (https://www.icann.org/epp#serverDeleteProhibited)"
+    ],
+    "dnssec":[
+        "unsigned\r",
+        "unsigned"
+    ]
+}

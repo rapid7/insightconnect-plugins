@@ -9,45 +9,17 @@ from komand_whois.connection.connection import Connection
 from komand_whois.actions.domain import Domain
 from parameterized import parameterized
 from util import Util
+from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 import logging
 
 
+@patch("whois.query", side_effect=Util.mock_whois)
 class TestDomain(TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
         cls.action = Util.default_connector(Domain())
-
-    def test_integration_domain(self):
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = Domain()
-
-        test_conn.logger = log
-        test_action.logger = log
-
-        try:
-            with open("../tests/domain.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        # TODO: The following assert should be updated to look for data from your action
-        # For example: self.assertEquals({"success": True}, results)
-        self.assertEquals({}, results)
 
     @parameterized.expand(
         [
@@ -60,6 +32,22 @@ class TestDomain(TestCase):
     )
     def test_domain(self, _mock_request: MagicMock, _test_name: str, input_params: dict, expected: dict):
         actual = self.action.run(input_params)
-        self.assertEquals(actual, expected)
+        self.assertDictEqual(actual, expected)
+
+    @parameterized.expand(
+        [
+            [
+                "domain_error",
+                Util.read_file_to_dict("inputs/domain_error.json.inp"),
+                "Something unexpected occurred.",
+                "Check the logs and if the issue persists please contact support.",
+            ]
+        ]
+    )
+    def test_invalid(self, _mock_request: MagicMock, _test_name: str, input_params: dict, cause: str, assistance: str):
+        with self.assertRaises(PluginException) as error:
+            self.action.run(input_params)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)
 
 
