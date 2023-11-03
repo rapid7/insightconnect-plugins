@@ -31,7 +31,7 @@ class MoveBetweenSitesInput(insightconnect_plugin_runtime.Input):
     "targetSiteId": {
       "type": "string",
       "title": "Target Site ID",
-      "description": "A ID of the new site to move the agents to",
+      "description": "The ID of the new site to move the agents to",
       "order": 1
     }
   },

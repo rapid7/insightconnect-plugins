@@ -1656,7 +1656,7 @@ This action is used to move an agent to another Site
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |filter|object|None|False|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|{"ids": ["1000000000000000000"]}|
-|targetSiteId|string|None|True|A ID of the new site to move the agents to|None|1000000000000000000|
+|targetSiteId|string|None|True|The ID of the new site to move the agents to|None|1000000000000000000|
   
 Example input:
 

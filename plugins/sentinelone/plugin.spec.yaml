@@ -3050,7 +3050,7 @@ actions:
     input:
       targetSiteId:
         title: Target Site ID
-        description: A ID of the new site to move the agents to
+        description: The ID of the new site to move the agents to
         type: "string"
         example: "1000000000000000000"
         required: true
