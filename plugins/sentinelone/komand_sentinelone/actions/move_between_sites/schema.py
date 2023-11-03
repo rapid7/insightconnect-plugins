@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Move an agent to another Site"
+    DESCRIPTION = "Move an agent to another Site, This command requires Account or Global level access for your user role"
 
 
 class Input:
