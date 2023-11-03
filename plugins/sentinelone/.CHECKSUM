@@ -1,7 +1,7 @@
 {
-	"spec": "13e105b48bad02633d278585e2eaa1ad",
-	"manifest": "b1b091ebaf5b638a9ba11717ac781941",
-	"setup": "7d1b8e3c1277b10ecbb42346e6c39fa8",
+	"spec": "1b41a0e8bda114e2f58f89550e1479eb",
+	"manifest": "d22df2cb908420ee272ffd40aa540d14",
+	"setup": "3d39e9768c2fda42e7f413e0d7681642",
 	"schemas": [
 		{
 			"identifier": "activities_list/schema.py",
@@ -90,6 +90,10 @@
 		{
 			"identifier": "mitigate_threat/schema.py",
 			"hash": "7455705e503928685319d34cd1d732bd"
+		},
+		{
+			"identifier": "move_between_sites/schema.py",
+			"hash": "0a2c02f8cc60d4f5d96f734162d3ac80"
 		},
 		{
 			"identifier": "name_available/schema.py",

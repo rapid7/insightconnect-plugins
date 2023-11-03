@@ -1647,6 +1647,44 @@ Example output:
 }
 ```
 
+#### Move Agent to Another Site
+  
+Move an agent to another Site
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|filter|object|None|False|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents|None|{"ids": ["1000000000000000000"]}|
+|targetSiteId|string|None|True|A id of the new site to move the agents to|None|1000000000000000000|
+  
+Example input:
+
+```
+{
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  },
+  "targetSiteId": 1000000000000000000
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|affected|integer|False|Number of entities affected by the requested operation|1|
+  
+Example output:
+
+```
+{
+  "affected": 1
+}
+```
+
 ### Triggers
 
 #### Get Threats
@@ -2097,6 +2135,7 @@ Example output:
 
 # Version History
 
+* 9.1.0 - Add new actions `Move Agent to Another Site`
 * 9.0.0 - Update plugin to allow cloud connections to be configured | Rename URL input to Instance in connection | Code refactor
 * 8.1.0 - Added New actions: Fetch file for agent ID and Run remote script. Updated description for Trigger resolved field
 * 8.0.1 - Search Agents: Remove duplicate results when Case Sensitive is false

@@ -1,0 +1,6 @@
+{
+    "targetSiteId" : "1234567891234567891",
+    "filter": {
+        "computerName": "WindowsX64"
+    }
+}
