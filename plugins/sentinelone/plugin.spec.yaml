@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 9.0.0
+version: 9.1.0
 connection_version: 9
 cloud_ready: true
 sdk:
@@ -3043,6 +3043,29 @@ actions:
         description: Number of entities affected by requested operation. For detailed output from running the script, log onto the SentinelOne console. Note this may be lower than the number of agent ids submitted if the script cannot be run on a particular agent e.g. due to OS type
         type: integer
         required: true
+        example: 1
+  move_between_sites:
+    title: Move Agent to Another Site
+    description: Move an agent to another Site, This action requires Account or Global level access for your user role
+    input:
+      targetSiteId:
+        title: Target Site ID
+        description: The ID of the new site to move the agents to
+        type: "string"
+        example: "1000000000000000000"
+        required: true
+      filter:
+        title: Filter JSON
+        description: Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents
+        type: object
+        required: false
+        example: '{"ids": ["1000000000000000000"]}'
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
         example: 1
 triggers:
   get_threats:

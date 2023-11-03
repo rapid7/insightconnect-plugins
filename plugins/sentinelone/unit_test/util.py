@@ -357,4 +357,9 @@ class Util:
                         return MockResponse(200, "get_events_success_page_2")
                     else:
                         return MockResponse(200, "get_events_success_page_1")
+        elif args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/agents/actions/move-to-site":
+            if json_data.get("data", {}).get("targetSiteId", "") == "1234567891234567890":
+                return MockResponse(200, "move_between_sites_minimum")
+            elif json_data.get("data", {}).get("targetSiteId", "") == "1234567891234567891":
+                return MockResponse(200, "move_between_sites_data")
         return MockResponse(404)
