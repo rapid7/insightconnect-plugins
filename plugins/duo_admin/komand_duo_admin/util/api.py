@@ -18,6 +18,7 @@ from komand_duo_admin.util.endpoints import (
     USER_ENDPOINT,
     USER_PHONES_ENDPOINT,
     USERS_ENDPOINT,
+    TASK_PATHS_ALLOW_403,
 )
 
 
@@ -159,14 +160,28 @@ class DuoAdminAPI:
                 params=params,
                 headers=self.get_headers(method=method.upper(), host=self.hostname, path=path, params=params),
             )
-            self._handle_exceptions(response)
+            #TODO Update to 403
+            if response.status_code == 403 and path in TASK_PATHS_ALLOW_403:
+                # Special case: A task user who only has permissions for certain endpoints should not error out.
+                # Log and return empty response instead
+                self.logger.info(f"Request to {path} returned 403 unauthorized. Not raising exception as may be authorized to hit other endpoint(s)")
+                self.logger.info(f"Response data returned: {response}")
+                #return {"response": {"events": [], "metadata": {}}, "stat": "OK"}
+                #return "", 200
+                response= {
+                    "authlogs": [],
+                    "metadata": {}
+                }
+                return response
+            self._handle_exceptions(response, path)
+            self.logger.info(f"Response data returned: {response.text}")
             if 200 <= response.status_code < 300:
                 return response
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except requests.exceptions.HTTPError as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
-    def _handle_exceptions(self, response):
+    def _handle_exceptions(self, response, path):
         if response.status_code == 400:
             raise ApiException(
                 preset=PluginException.Preset.BAD_REQUEST,
@@ -218,6 +233,13 @@ class DuoAdminAPI:
         try:
             self.logger.info(f"Request to path: {path}")
             response = self.make_request(method=method, path=path, params=params)
+            self.logger.info(f"response returned DL DEBUG: {response}")
+            self.logger.info(f"response.json(): {response.json()}")
             return response.json()
         except json.decoder.JSONDecodeError as error:
+            self.logger.info(f"JSON error occurred decoding response from {path}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
+        except Exception as error:
+            self.logger.info("Exception thrown")
+            self.logger.info(f"Error {error}")
+

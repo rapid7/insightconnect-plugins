@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="duo_admin-rapid7-plugin",
-      version="4.2.2",
+      version="4.2.3",
       description="Duo is a trusted access solution for organizations. The Duo Admin plugin for Rapid7 InsightConnect allows users to manage and administrate their Duo organization",
       author="rapid7",
       author_email="",

@@ -6,3 +6,4 @@ USER_ENDPOINT = "/admin/v1/users/{user_id}"
 USER_ENROLL_ENDPOINT = "/admin/v1/users/enroll"
 USER_PHONES_ENDPOINT = "/admin/v1/users/{user_id}/phones"
 USERS_ENDPOINT = "/admin/v1/users"
+TASK_PATHS_ALLOW_403 = [ADMINISTRATOR_LOGS_ENDPOINT, TRUST_MONITOR_EVENTS_ENDPOINT]

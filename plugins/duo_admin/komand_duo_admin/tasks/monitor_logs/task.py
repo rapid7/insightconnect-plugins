@@ -189,7 +189,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
                 if new_admin_log_hashes:
                     state[self.PREVIOUS_ADMIN_LOG_HASHES] = new_admin_log_hashes
-
+                self.logger.info(f"{admin_logs_next_page_params} admin_logs_next_page_params DL DEBUG NEW")
                 if admin_logs_next_page_params:
                     state[self.ADMIN_LOGS_NEXT_PAGE_PARAMS] = admin_logs_next_page_params
                     has_more_pages = True
@@ -349,6 +349,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         )
         self.logger.info(f"Parameters for get trust monitor events set to {parameters}")
         response = self.connection.admin_api.get_trust_monitor_events(parameters).get("response", {})
+        self.logger.info(f"Response returned from get trust monitor events: {response}")
         offset = response.get("metadata", {}).get("next_offset")
         if offset:
             parameters["offset"] = offset
