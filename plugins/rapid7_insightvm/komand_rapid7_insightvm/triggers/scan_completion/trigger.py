@@ -43,17 +43,25 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         endpoint = Scan.scans(self.connection.console_url)
 
-        while True:
-            try:
-                response = resource_helper.resource_request(endpoint=endpoint, method="get")
-                print(f"{type(response) = }")
-                print(f"{len(response) = }")
-                resources = response.get('resources', {})
-                print(f"{type(resources) = }")
-                print(f"{len(resources) = }")
+        # Get ALL scans and handle pagination - find last ID
+        response = resource_helper.paged_resource_request(endpoint=endpoint, method="get", params={"sort": "id,desc"})
+        last_id = 0
+        for resp in response:
+            if resp["id"] > last_id:
+                last_id = resp["id"]
 
-                # print(response)
-            except Exception:
-                raise PluginException(cause="Unable to retrieve result")
-            self.send(response)
+        while True:
+            while True:
+
+                # Get latest scan
+                endpoint = Scan.scans(self.connection.console_url, last_id + 1)
+
+                try:
+                    response = resource_helper.resource_request(endpoint=endpoint, method="get")
+                except Exception:
+                    break
+                    # raise PluginException(cause="Unable to retrieve result")
+                last_id += 1
+                self.send(response)
+
             time.sleep(100)
