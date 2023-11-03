@@ -14,11 +14,11 @@ class MoveBetweenSites(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        filter = params.get(Input.FILTER, {})
+        agents_filter = params.get(Input.FILTER, {})
         data = {"targetSiteId": (params.get(Input.TARGETSITEID, ""))}
 
         return {
-            Output.AFFECTED: self.connection.client.agents_action_move_agent_to_new_site(filter, data)
+            Output.AFFECTED: self.connection.client.agents_action_move_agent_to_new_site(agents_filter, data)
             .get("data", {})
             .get("affected", 0)
         }
