@@ -3046,7 +3046,7 @@ actions:
         example: 1
   move_between_sites:
     title: Move Agent to Another Site
-    description: Move an agent to another Site, This command requires Account or Global level access for your user role
+    description: Move an agent to another Site, This action requires Account or Global level access for your user role
     input:
       targetSiteId:
         title: Target Site ID
