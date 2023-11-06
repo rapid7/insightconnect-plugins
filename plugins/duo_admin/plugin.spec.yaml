@@ -1267,6 +1267,21 @@ tasks:
   monitor_logs:
     title: Monitor Logs
     description: Monitor administrator, authentication and trust monitor event logs
+    input:
+      collectTrustMonitorEvents:
+        title: Collect Duo Trust Monitor Events
+        description: Whether to collect Trust Monitor events (note requires appropriate level of Duo Admin license)
+        type: boolean
+        required: false
+        default: true
+        example: false
+      collectAdminLogs:
+        title: Collect Duo Admin Logs
+        description: Whether to collect Admin logs (note requires appropriate level of Duo Admin license)
+        type: boolean
+        required: false
+        default: true
+        example: false
     output:
       logs:
         title: Logs

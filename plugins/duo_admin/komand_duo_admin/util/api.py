@@ -169,7 +169,6 @@ class DuoAdminAPI:
                 self.logger.info(f"403 Response data returned for reference: {response.json()}")
                 return {}
             self._handle_exceptions(response, path)
-            self.logger.info(f"Response data returned: {response.text}")
             if 200 <= response.status_code < 300:
                 return response
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
