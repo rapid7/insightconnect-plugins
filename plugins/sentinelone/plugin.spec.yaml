@@ -3046,12 +3046,12 @@ actions:
         example: 1
   move_between_sites:
     title: Move Agent to Another Site
-    description: Move an agent to another Site, This action requires Account or Global level access for your user role
+    description: Move an agent to another site, This action requires Account or Global level access for your user role
     input:
       targetSiteId:
         title: Target Site ID
         description: The ID of the new site to move the agents to
-        type: "string"
+        type: string
         example: "1000000000000000000"
         required: true
       filter:
