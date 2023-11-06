@@ -67,9 +67,9 @@ class SentineloneAPI:
     def agents_action(self, action: str, agents_filter: str) -> dict:
         return self._call_api("POST", AGENTS_ACTION_ENDPOINT.format(action=action), json={"filter": agents_filter})
 
-    def agents_action_move_agent_to_new_site(self, agents_filter: dict, data: dict) -> dict:
+    def agents_action_move_agent_to_new_site(self, agents_filter: dict, data: dict, action: str) -> dict:
         return self._call_api(
-            "POST", AGENTS_ACTION_ENDPOINT.format(action="move-to-site"), json={"filter": agents_filter, "data": data}
+            "POST", AGENTS_ACTION_ENDPOINT.format(action=action), json={"filter": agents_filter, "data": data}
         )
 
     def agents_support_action(self, action: str, json_data: dict) -> dict:

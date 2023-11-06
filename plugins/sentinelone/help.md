@@ -1649,7 +1649,7 @@ Example output:
 
 #### Move Agent to Another Site
   
-This action is used to move an agent to another Site, This action requires Account or Global level access for your user role.
+This action is used to move an agent to another site. This action requires Account or Global level access for your user role.
 
 ##### Input
 

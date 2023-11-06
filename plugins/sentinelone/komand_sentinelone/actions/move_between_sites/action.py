@@ -18,7 +18,7 @@ class MoveBetweenSites(insightconnect_plugin_runtime.Action):
         data = {"targetSiteId": (params.get(Input.TARGETSITEID, ""))}
 
         return {
-            Output.AFFECTED: self.connection.client.agents_action_move_agent_to_new_site(agents_filter, data)
+            Output.AFFECTED: self.connection.client.agents_action_move_agent_to_new_site(agents_filter, data, "move-to-site")
             .get("data", {})
             .get("affected", 0)
         }
