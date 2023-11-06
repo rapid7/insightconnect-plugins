@@ -16,7 +16,6 @@ import logging
 
 @patch("whois.query", side_effect=Util.mock_whois)
 class TestDomain(TestCase):
-
     @classmethod
     def setUpClass(cls) -> None:
         cls.action = Util.default_connector(Domain())
@@ -26,7 +25,7 @@ class TestDomain(TestCase):
             [
                 "domain",
                 Util.read_file_to_dict("inputs/domain.json.inp"),
-                Util.read_file_to_dict("expected/domain.json.exp")
+                Util.read_file_to_dict("expected/domain.json.exp"),
             ]
         ]
     )
@@ -49,5 +48,3 @@ class TestDomain(TestCase):
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)
         self.assertEqual(error.exception.assistance, assistance)
-
-
