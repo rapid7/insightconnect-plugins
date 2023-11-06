@@ -20,8 +20,8 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         # END INPUT BINDING - DO NOT REMOVE
         # Input retrieval
         asset_group = params.get(Input.ASSET_GROUP)
-        cve = params.get(Input.CVE)
-        hostname = params.get(Input.HOSTNAME)
+        cve = params.get(Input.CVE, None)
+        hostname = params.get(Input.HOSTNAME, None)
         source = params.get(Input.SOURCE)
         ip_address = params.get(Input.IP_ADDRESS)
         risk_score = params.get(Input.RISK_SCORE)
@@ -38,14 +38,41 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         #     Output.SOLUTION_SUMMARY: "solution_summary",
         #     Output.VULNERABILITY_ID: "vulnerability_id",
         # }
+        x = []
+        if cve:
+            x.append({
+                "field": "cve",
+                "operator": "is",
+                "value": cve,
+            })
+        if hostname:
+            x.append({
+                "field": "host-name",
+                "operator": "is",
+                "value": hostname,
+            }, )
 
-        # {
-        #     "field": "<field-name>",
-        #     "operator": "<operator>",
-        #     ["value": < value >,],
-        #     ["lower": < value >,],
-        #     ["upper": < value >],
-        # }
+        if ip_address:
+            x.append(
+                {
+                    "field": "ip-address",
+                    "operator": "is",
+                    "value": ip_address,
+                })
+        if risk_score:
+            x.append(
+                {
+                    "field": "risk-score",
+                    "operator": "is",
+                    "value": risk_score,
+                })
+        if site_id:
+            x.append(
+                {
+                    "field": "site-id",
+                    "operator": "is",
+                    "value": site_id,
+                })
 
         # Build API call
         resource_helper = ResourceRequests(self.connection.session, self.logger)
