@@ -3,9 +3,9 @@ import time
 from .schema import ScanCompletionInput, ScanCompletionOutput, Input, Output, Component
 
 # Custom imports below
-from komand_rapid7_insightvm.util.endpoints import Scan
+from komand_rapid7_insightvm.util.endpoints import Scan, Asset
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
-from insightconnect_plugin_runtime.exceptions import PluginException
+
 
 class ScanCompletion(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
@@ -28,16 +28,24 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         site_id = params.get(Input.SITE_ID, None)
 
         # Output mapping
-        output_map = {
-            Output.ASSET_ID: "asset_id",
-            Output.HOSTNAME: "hostname",
-            Output.IP: "ip",
-            Output.NEXPOSE_ID: "nexpose_id",
-            Output.SOFTWARE_UPDATE_ID: "software_update_id",
-            Output.SOLUTION_ID: "solution_id",
-            Output.SOLUTION_SUMMARY: "solution_summary",
-            Output.VULNERABILITY_ID: "vulnerability_id",
-        }
+        # output_map = {
+        #     Output.ASSET_ID: "asset_id",
+        #     Output.HOSTNAME: "hostname",
+        #     Output.IP: "ip",
+        #     Output.NEXPOSE_ID: "nexpose_id",
+        #     Output.SOFTWARE_UPDATE_ID: "software_update_id",
+        #     Output.SOLUTION_ID: "solution_id",
+        #     Output.SOLUTION_SUMMARY: "solution_summary",
+        #     Output.VULNERABILITY_ID: "vulnerability_id",
+        # }
+
+        # {
+        #     "field": "<field-name>",
+        #     "operator": "<operator>",
+        #     ["value": < value >,],
+        #     ["lower": < value >,],
+        #     ["upper": < value >],
+        # }
 
         # Build API call
         resource_helper = ResourceRequests(self.connection.session, self.logger)
@@ -53,15 +61,23 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         while True:
             while True:
 
-                # Get latest scan
-                endpoint = Scan.scans(self.connection.console_url, last_id + 1)
+                # POST Asset Search endpoint
+                # endpoint = Scan.scans(self.connection.console_url, last_id + 1)
+                endpoint = Asset.search(self.connection.console_url)
 
                 try:
-                    response = resource_helper.resource_request(endpoint=endpoint, method="get")
+                    params_dict = {}
+                    response = resource_helper.resource_request(endpoint=endpoint, method="post")
+                    # response.get('resources')[0].get('id')
+
                 except Exception:
                     break
-                    # raise PluginException(cause="Unable to retrieve result")
                 last_id += 1
+
+                # Right, so now that we've got our scan result
+                # First, we make sure `status == 'finished`
+                # From here, we take some identifier and run other API calls on it -
+                # - depending on the input filters.
                 self.send(response)
 
             time.sleep(100)
