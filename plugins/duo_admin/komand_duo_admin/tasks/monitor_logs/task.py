@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from .schema import MonitorLogsInput, MonitorLogsOutput, MonitorLogsState, Component
+from .schema import MonitorLogsInput, MonitorLogsOutput, MonitorLogsState, Component, Input
 
 # Custom imports below
 from komand_duo_admin.util.exceptions import ApiException
@@ -105,8 +105,8 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             trust_monitor_next_page_params = state.get(self.TRUST_MONITOR_NEXT_PAGE_PARAMS)
             auth_logs_next_page_params = state.get(self.AUTH_LOGS_NEXT_PAGE_PARAMS)
             admin_logs_next_page_params = state.get(self.ADMIN_LOGS_NEXT_PAGE_PARAMS)
-            collect_trust_monitor_events = params.get(MonitorLogsInput.COLLECTTRUSTMONITOREVENTS, True)
-            collect_admin_logs = params.get(MonitorLogsInput.COLLECTADMINLOGS, True)
+            collect_trust_monitor_events = params.get(Input.COLLECTTRUSTMONITOREVENTS, True)
+            collect_admin_logs = params.get(Input.COLLECTADMINLOGS, True)
 
             if last_collection_timestamp:
                 # Previously only one timestamp was held (the end of the collection window)
@@ -171,7 +171,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     elif state.get(self.TRUST_MONITOR_NEXT_PAGE_PARAMS):
                         state.pop(self.TRUST_MONITOR_NEXT_PAGE_PARAMS)
                 else:
-                    self.logger.info(f"Collect trust monitor events set to {collect_trust_monitor_events}. Do not attempt to collect trust monitor events")
+                    self.logger.info(
+                        f"Collect trust monitor events set to {collect_trust_monitor_events}. Do not attempt to collect trust monitor events"
+                    )
 
                 if collect_admin_logs:
                     # Get admin logs
@@ -187,7 +189,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                         admin_logs, admin_logs_next_page_params = self.get_admin_logs(
                             mintime, maxtime, admin_logs_next_page_params
                         )
-                        new_admin_logs, new_admin_log_hashes = self.compare_hashes(previous_admin_log_hashes, admin_logs)
+                        new_admin_logs, new_admin_log_hashes = self.compare_hashes(
+                            previous_admin_log_hashes, admin_logs
+                        )
                         new_logs.extend(new_admin_logs)
                         state[self.ADMIN_LOGS_LAST_LOG_TIMESTAMP] = self.get_highest_timestamp(
                             admin_logs_last_log_timestamp, new_admin_logs, backward_comp_first_run, ADMIN_LOGS_LOG_TYPE
@@ -202,7 +206,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     elif state.get(self.ADMIN_LOGS_NEXT_PAGE_PARAMS):
                         state.pop(self.ADMIN_LOGS_NEXT_PAGE_PARAMS)
                 else:
-                    self.logger.info(f"Collect admin logs set to {collect_admin_logs}. Do not attempt to collect admin logs")
+                    self.logger.info(
+                        f"Collect admin logs set to {collect_admin_logs}. Do not attempt to collect admin logs"
+                    )
 
                 # Get auth logs
                 mintime, maxtime, get_next_page = self.get_parameters_for_query(
