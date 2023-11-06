@@ -45,7 +45,9 @@ class TestAddress(TestCase):
             ]
         ]
     )
-    def test_address_error(self, _test_mock: MagicMock, _test_name: str, input_params: str, cause: str, assistance: str):
+    def test_address_error(
+        self, _test_mock: MagicMock, _test_name: str, input_params: str, cause: str, assistance: str
+    ):
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)
