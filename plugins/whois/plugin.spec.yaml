@@ -3,11 +3,16 @@ extension: plugin
 products: [insightconnect]
 name: whois
 title: WHOIS
-description: The WHOIS plugin enables address and domain lookups in the WHOIS databases
-version: 3.1.0
+description: WHOIS is a query and response protocol that is widely used for querying databases that store the registered users or assignee's of an Internet resource, such as a domain name, an IP address block, or an autonomous system
+version: 3.1.1
 vendor: rapid7
 support: community
+supported_versions: ["2023-10-31"]
 status: []
+sdk:
+  type: full
+  version: 5
+  user: nobody
 cloud_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/whois
@@ -19,10 +24,13 @@ hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [whois, ip lookup, cloud_enabled]
   features: []
+key_features: ["Perform a WHOIS lookup for a provided IP address or domain to gain information on who is responsible for a domain or IP"]
+requirements: ["This plugin does not contain any requirements"]
+references: ["[WHOIS](https://en.wikipedia.org/wiki/WHOIS)"]
 actions:
   domain:
     title: Domain Lookup
-    description: WHOIS Domain Lookup
+    description: This action is used to retrieve data about a domain name
     input:
       domain:
         title: Domain
@@ -36,84 +44,100 @@ actions:
         description: Domain name
         type: string
         required: false
+        example: "google.com"
       registrar:
         title: Domain Registrar
         description: Domain registrar
         type: string
         required: false
+        example: "MarkMonitor Inc."
       registrant_name:
         title: Registrant Name
         description: Registrant name
         type: string
         required: false
+        example: ""
       registrant_cc:
         title: Registrant Country
         description: Registrant country
         type: string
         required: false
+        example: "US"
       creation_date:
         title: Creation Date
         description: Creation date
         type: date
         required: false
+        example: "1997-09-15T04:00:00"
       expiration_date:
         title: Expiration Date
         description: Expiration date
         type: date
         required: false
+        example: ""
       last_updated:
         title: Last Updated Date
         description: Last updated date
         type: date
         required: false
+        example: ""
       name_servers:
         title: Nameservers
         description: Nameservers
         type: '[]string'
         required: false
+        example: '["ns2.google.com", "ns3.google.com", "ns1.google.com", "ns4.google.com"]'
       registry_domain_id:
         title: Registry Domain ID
         description: Registry domain ID
         type: string
         required: false
+        example: "2138514_domain_com-vrsn"
       registrar_whois_server:
         title: Registrar WHOIS Server
         description: Registrar WHOIS server
         type: string
         required: false
+        example: "whois.markmonitor.com"
       registrar_url:
         title: Registrar URL
         description: Registrar URL
         type: string
         required: false
+        example: "http://www.markmonitor.com"
       registrar_iana_id:
         title: Registrar IANA ID
         description: Registrar IANA ID
         type: string
         required: false
+        example: "292"
       registrar_abuse_contact_email:
         title: Registrar Abuse Contact Email
         description: Registrar abuse contact email
         type: string
         required: false
+        example: "user@example.com"
       registrar_abuse_contact_phone:
         title: Registrar Abuse Contact Phone
         description: Registrar abuse Contact phone
         type: string
         required: false
+        example: "+1.2083895740"
       domain_status:
         title: Domain Status
         type: '[]string'
         description: Domain status
         required: false
+        example: '["clientdeleteprohibited https://icann.org/epp#clientdeleteprohibited", "clienttransferprohibited https://icann.org/epp#clienttransferprohibited", "clientupdateprohibited https://icann.org/epp#clientupdateprohibited", "serverdeleteprohibited https://icann.org/epp#serverdeleteprohibited", "servertransferprohibited https://icann.org/epp#servertransferprohibited", "serverupdateprohibited https://icann.org/epp#serverupdateprohibited"]'
       dnssec:
         title: DNSSEC
         description: DNSSEC
         type: string
         required: false
+        example: "unsigned"
   address:
     title: Address Lookup
-    description: WHOIS IP Lookup
+    description: This action is used to retrieve data about an IP address
     input:
       address:
         title: Address
@@ -140,83 +164,100 @@ actions:
         description: Network name
         type: string
         required: false
+        example: "LVLT-ORG-8-8"
       nettype:
         title: Network Type
         description: Network type
         type: string
         required: false
+        example: "Direct Allocation"
       netrange:
         title: Network Range
         description: Network Range
         type: string
         required: false
+        example: "8.0.0.0 - 8.255.255.255"
       cidr:
         title: CIDR
         description: CIDR
         type: string
         required: false
+        example: "8.0.0.0/8"
       organization:
         title: Organization
         description: Organization
         type: string
         required: false
+        example: "Level 3 Communications, Inc. (LVLT)"
       orgname:
         title: Organization Name
         description: Organization name
         type: string
         required: false
+        example: "Level 3 Communications, Inc."
       regdate:
         title: Registration Date
         description: Registration date
         type: string
         required: false
+        example: "1992-12-01"
       update:
         title: WHOIS Updated Date
         description: WHOIS updated date
         type: string
         required: false
+        example: "2012-02-24"
       address:
         title: Address
         description: Address
         type: string
         required: false
+        example: "1025 Eldorado Blvd."
       city:
         title: City
         description: City
         type: string
         required: false
+        example: "Broomfield"
       postal:
         title: Postal
         description: Postal
         type: string
         required: false
+        example: "80021"
       state:
         title: State
         description: State
         type: string
         required: false
+        example: "CO"
       country:
         title: Country
         description: Country
         type: string
         required: false
+        example: "US"
       org_abuse_email:
         title: Organization Abuse E-mail
         description: Organization abuse e-mail
         type: string
         required: false
+        example: "user@example.com"
       org_abuse_phone:
         title: Organization Abuse Phone
         description: Organization abuse phone
         type: string
         required: false
+        example: "+1-877-453-8353 "
       org_tech_email:
         title: Organization Tech E-mail
         description: Organization tech e-mail
         type: string
         required: false
+        example: "user@example.com"
       org_tech_phone:
         title: Organization Tech Phone
         description: Organization tech phone
         type: string
         required: false
+        example: "+1-877-453-8353 "
