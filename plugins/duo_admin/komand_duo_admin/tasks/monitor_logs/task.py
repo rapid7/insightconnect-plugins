@@ -189,7 +189,6 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
                 if new_admin_log_hashes:
                     state[self.PREVIOUS_ADMIN_LOG_HASHES] = new_admin_log_hashes
-                self.logger.info(f"{admin_logs_next_page_params} admin_logs_next_page_params DL DEBUG NEW")
                 if admin_logs_next_page_params:
                     state[self.ADMIN_LOGS_NEXT_PAGE_PARAMS] = admin_logs_next_page_params
                     has_more_pages = True

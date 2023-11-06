@@ -160,13 +160,13 @@ class DuoAdminAPI:
                 params=params,
                 headers=self.get_headers(method=method.upper(), host=self.hostname, path=path, params=params),
             )
-            self.logger.info(f"Response data returned in make request: {response.json()}")
+
             #TODO Update to 403
             if response.status_code == 401 and path in TASK_PATHS_ALLOW_403:
                 # Special case: A task user who only has permissions for certain endpoints should not error out.
-                # Log and return empty response instead
+                # Log and return an empty response instead
                 self.logger.info(f"Request to {path} returned 403 unauthorized. Not raising exception as may be authorized to hit other endpoint(s)")
-                self.logger.info(f"Response data returned: {response.json()}")
+                self.logger.info(f"403 Response data returned for reference: {response.json()}")
                 return {}
             self._handle_exceptions(response, path)
             self.logger.info(f"Response data returned: {response.text}")
@@ -229,8 +229,6 @@ class DuoAdminAPI:
             self.logger.info(f"Request to path: {path}")
             response = self.make_request(method=method, path=path, params=params)
             if isinstance(response, requests.Response):
-                self.logger.info(f"response returned DL DEBUG: {response}")
-                self.logger.info(f"response.json(): {response.json()}")
                 return response.json()
             else:
                 return response
