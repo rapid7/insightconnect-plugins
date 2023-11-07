@@ -3,7 +3,7 @@ import time
 from .schema import ScanCompletionInput, ScanCompletionOutput, Input, Output, Component
 
 # Custom imports below
-from komand_rapid7_insightvm.util.endpoints import Scan, Asset
+from komand_rapid7_insightvm.util.endpoints import Scan, Asset, VulnerabilityResult
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
@@ -31,7 +31,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         endpoint = Scan.scans(self.connection.console_url)
 
-        # Get ALL scans and handle pagination - find last ID
+        # Get ALL scans and handle pagination - find last/latest completed scan ID
         response = resource_helper.paged_resource_request(endpoint=endpoint, method="get", params={"sort": "id,desc"})
         last_id = 0
         for resp in response:
@@ -62,29 +62,40 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                     continue
 
                 # Cannot find asset_group, cve or site_id from Get Asset By ID.
-
-                # Next, Get Asset by vuln solution
-
-                endpoint = Asset.asset_vulnerability_solution(self.connection.console_url, last_id + 1, "???")
+                # Next, run GET Asset Vulnerabilities to retrieve vulnerability IDs
+                endpoint = VulnerabilityResult.vulnerabilities_for_asset(self.connection.console_url, last_id + 1)
                 try:
-                    vuln_response = resource_helper.resource_request(endpoint=endpoint, method="get")
+                    asset_vuln_response = resource_helper.resource_request(endpoint=endpoint, method="get")
                 except Exception:
                     break
 
-                vuln_data = vuln_response.get("resources")[0]
-                last_id += 1
+                # Add all the IDs into a list
+                vulnerability_ids = []
+                for i in asset_vuln_response:
+                    vulnerability_ids.append(i.get('id'))
 
-                self.send(
-                    {
-                        Output.ASSET_ID: asset_response.get("id"),
-                        Output.HOSTNAME: asset_response.get("hostName"),
-                        Output.IP: asset_response.get("ip"),
-                        Output.NEXPOSE_ID: "???",
-                        Output.SOFTWARE_UPDATE_ID: vuln_data.get("id"),
-                        Output.SOLUTION_ID: "solution_id",
-                        Output.SOLUTION_SUMMARY: "solution_summary",
-                        Output.VULNERABILITY_ID: "vulnerability_id",
-                    }
-                )
+                # Next, Get Asset Vulnerability Solution by vulnerability ID
+                for vulnerability_id in vulnerability_ids:
+                    endpoint = Asset.asset_vulnerability_solution(self.connection.console_url, last_id + 1, vuln_id)
+                    try:
+                        solution_response = resource_helper.resource_request(endpoint=endpoint, method="get")
+                    except Exception:
+                        break
+
+                    solution_data = solution_response.get('resources')[0]
+
+                    self.send(
+                        {
+                            Output.ASSET_ID: asset_response.get("id"),
+                            Output.HOSTNAME: asset_response.get("hostName"),
+                            Output.IP: asset_response.get("ip"),
+                            Output.NEXPOSE_ID: "",
+                            Output.SOFTWARE_UPDATE_ID: "",
+                            Output.SOLUTION_ID: solution_data.get('id'),
+                            Output.SOLUTION_SUMMARY: solution_data.get('summary').get('text'),
+                            Output.VULNERABILITY_ID: vulnerability_id,
+                        }
+                    )
+                last_id += 1
 
             time.sleep(params.get(Input.INTERVAL) * 60)
