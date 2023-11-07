@@ -1,0 +1,101 @@
+{
+    "domain_name":[
+        "GOOGLE.COM\r",
+        "google.com"
+    ],
+    "registrar":[
+        "MarkMonitor Inc.\r",
+        "MarkMonitor, Inc."
+    ],
+    "registrant":[
+        "ns4.google.com"
+    ],
+    "registrant_cc":[
+        "US",
+        "US"
+    ],
+    "creation_date":[
+        "1997-09-15T04:00:00Z\r",
+        "1997-09-15T07:00:00+0000"
+    ],
+    "expiration_date":[
+        "2028-09-13T07:00:00+0000"
+    ],
+    "updated_date":[
+        "2019-09-09T15:39:04Z\r",
+        "2019-09-09T15:39:04+0000"
+    ],
+    "name_servers":[
+        "NS1.GOOGLE.COM\r",
+        "NS2.GOOGLE.COM\r",
+        "NS3.GOOGLE.COM\r",
+        "NS4.GOOGLE.COM\r",
+        "ns4.google.com",
+        "ns1.google.com",
+        "ns3.google.com",
+        "ns2.google.com"
+    ],
+    "status":[
+        "      ACTIVE",
+        "clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited\r",
+        "clientTransferProhibited https://icann.org/epp#clientTransferProhibited\r",
+        "clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited\r",
+        "serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited\r",
+        "serverTransferProhibited https://icann.org/epp#serverTransferProhibited\r",
+        "serverUpdateProhibited https://icann.org/epp#serverUpdateProhibited\r",
+        "clientUpdateProhibited (https://www.icann.org/epp#clientUpdateProhibited)",
+        "clientTransferProhibited (https://www.icann.org/epp#clientTransferProhibited)",
+        "clientDeleteProhibited (https://www.icann.org/epp#clientDeleteProhibited)",
+        "serverUpdateProhibited (https://www.icann.org/epp#serverUpdateProhibited)",
+        "serverTransferProhibited (https://www.icann.org/epp#serverTransferProhibited)",
+        "serverDeleteProhibited (https://www.icann.org/epp#serverDeleteProhibited)"
+    ],
+    "emails":[
+        "info@verisign-grs.com",
+        "info@verisign-grs.com",
+        "abusecomplaints@markmonitor.com",
+        "abusecomplaints@markmonitor.com"
+    ],
+    "registry_domain_id":[
+        "2138514_DOMAIN_COM-VRSN\r",
+        "2138514_DOMAIN_COM-VRSN"
+    ],
+    "registrar_whois_server":[
+        "whois.markmonitor.com\r",
+        "whois.markmonitor.com"
+    ],
+    "registrar_url":[
+        "http://www.markmonitor.com\r",
+        "http://www.markmonitor.com"
+    ],
+    "registrar_iana_id":[
+        "292\r",
+        "292"
+    ],
+    "registrar_abuse_contact_email":[
+        "abusecomplaints@markmonitor.com\r",
+        "abusecomplaints@markmonitor.com"
+    ],
+    "registrar_abuse_contact_phone":[
+        "+1.2086851750\r",
+        "+1.2086851750"
+    ],
+    "domain_status":[
+        "clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited\r",
+        "clientTransferProhibited https://icann.org/epp#clientTransferProhibited\r",
+        "clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited\r",
+        "serverDeleteProhibited https://icann.org/epp#serverDeleteProhibited\r",
+        "serverTransferProhibited https://icann.org/epp#serverTransferProhibited\r",
+        "serverUpdateProhibited https://icann.org/epp#serverUpdateProhibited\r",
+        "clientUpdateProhibited (https://www.icann.org/epp#clientUpdateProhibited)",
+        "clientTransferProhibited (https://www.icann.org/epp#clientTransferProhibited)",
+        "clientDeleteProhibited (https://www.icann.org/epp#clientDeleteProhibited)",
+        "serverUpdateProhibited (https://www.icann.org/epp#serverUpdateProhibited)",
+        "serverTransferProhibited (https://www.icann.org/epp#serverTransferProhibited)",
+        "serverDeleteProhibited (https://www.icann.org/epp#serverDeleteProhibited)"
+    ],
+    "dnssec":[
+        "unsigned\r",
+        "unsigned"
+    ]
+}

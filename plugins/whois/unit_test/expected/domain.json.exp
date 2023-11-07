@@ -1,0 +1,30 @@
+{
+    "name":"google.com",
+    "registrar":"MarkMonitor Inc.",
+    "registrant_cc":"us",
+    "creation_date":"1997-09-15T04:00:00",
+    "expiration_date":"2028-09-13T07:00:00+00:00",
+    "last_updated":"2019-09-09T15:39:04",
+    "name_servers":["ns1.google.com\r", "ns2.google.com\r", "ns3.google.com\r", "ns4.google.com\r", "ns4.google.com", "ns1.google.com", "ns3.google.com", "ns2.google.com"],
+    "registry_domain_id":"2138514_domain_com-vrsn",
+    "registrar_whois_server":"whois.markmonitor.com",
+    "registrar_url":"http://www.markmonitor.com",
+    "registrar_iana_id":"292",
+    "registrar_abuse_contact_email":"abusecomplaints@markmonitor.com",
+    "registrar_abuse_contact_phone":"+1.2086851750",
+    "domain_status":[
+        "clientdeleteprohibited https://icann.org/epp#clientdeleteprohibited",
+        "clienttransferprohibited https://icann.org/epp#clienttransferprohibited",
+        "clientupdateprohibited https://icann.org/epp#clientupdateprohibited",
+        "serverdeleteprohibited https://icann.org/epp#serverdeleteprohibited",
+        "servertransferprohibited https://icann.org/epp#servertransferprohibited",
+        "serverupdateprohibited https://icann.org/epp#serverupdateprohibited",
+        "clientupdateprohibited (https://www.icann.org/epp#clientupdateprohibited)",
+        "clienttransferprohibited (https://www.icann.org/epp#clienttransferprohibited)",
+        "clientdeleteprohibited (https://www.icann.org/epp#clientdeleteprohibited)",
+        "serverupdateprohibited (https://www.icann.org/epp#serverupdateprohibited)",
+        "servertransferprohibited (https://www.icann.org/epp#servertransferprohibited)",
+        "serverdeleteprohibited (https://www.icann.org/epp#serverdeleteprohibited)"
+    ],
+    "dnssec":"unsigned"
+}

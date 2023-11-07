@@ -5,95 +5,39 @@ databases that store the registered users or assignee's of an Internet resource,
 block, or an autonomous system.
 
 # Key Features
-
+  
 * Perform a WHOIS lookup for a provided IP address or domain to gain information on who is responsible for a domain or IP
 
 # Requirements
+  
+* This plugin does not contain any requirements
 
-* _This plugin does not contain any requirements._
+# Supported Product Versions
+  
+* 2023-10-31
 
 # Documentation
 
 ## Setup
-
-_This plugin does not contain a connection._
+  
+*This plugin does not contain a connection.*
 
 ## Technical Details
 
 ### Actions
 
-#### Domain Lookup
-
-This action is used to retrieve data about a domain name.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|domain|string|None|True|Domain name to lookup|None|rapid7.com|
-
-Example input:
-
-```
-{
-  "domain": "rapid7.com"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|creation_date|date|False|Creation date|
-|dnssec|string|False|DNSSEC|
-|domain_status|[]string|False|Domain status|
-|expiration_date|date|False|Expiration date|
-|last_updated|date|False|Last updated date|
-|name|string|False|Domain name|
-|name_servers|[]string|False|Nameservers|
-|registrant_cc|string|False|Registrant country|
-|registrant_name|string|False|Registrant name|
-|registrar|string|False|Domain registrar|
-|registrar_abuse_contact_email|string|False|Registrar abuse contact email|
-|registrar_abuse_contact_phone|string|False|Registrar abuse Contact phone|
-|registrar_iana_id|string|False|Registrar IANA ID|
-|registrar_url|string|False|Registrar URL|
-|registrar_whois_server|string|False|Registrar WHOIS server|
-|registry_domain_id|string|False|Registry domain ID|
-
-Example output:
-
-```
-
-{
-  "registrar_whois_server": "whois.markmonitor.com",
-  "registry_domain_id": "2138514_domain_com-vrsn",
-  "last_updated": "2011-07-20T16:55:31",
-  "registrar_iana_id": "292",
-  "registrar": "MarkMonitor Inc.",
-  "dnssec": "unsigned",
-  "domain_status": ["clientdeleteprohibited https://icann.org/epp#clientdeleteprohibited", "clienttransferprohibited https://icann.org/epp#clienttransferprohibited", "clientupdateprohibited https://icann.org/epp#clientupdateprohibited", "serverdeleteprohibited https://icann.org/epp#serverdeleteprohibited", "servertransferprohibited https://icann.org/epp#servertransferprohibited", "serverupdateprohibited https://icann.org/epp#serverupdateprohibited"],
-  "registrar_url": "http://www.markmonitor.com",
-  "creation_date": "1997-09-15T04:00:00",
-  "name_servers": ["ns2.google.com", "ns3.google.com", "ns1.google.com", "ns4.google.com"],
-  "registrar_abuse_contact_email": "user@example.com",
-  "registrar_abuse_contact_phone": "+1.2083895740",
-  "name": "google.com"
-}
-
-```
 
 #### Address Lookup
-
-This action is used to retrieve data about an IP address.
+  
+This action is used to retrieve data about an IP address
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |address|string|None|True|IP to Lookup|None|198.51.100.100|
 |registrar|string|Autodetect|False|Domain Registrar|['Autodetect', 'RIPE', 'ARIN', 'LACNIC', 'APNIC']|Autodetect|
-
+  
 Example input:
 
 ```
@@ -105,30 +49,29 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|address|string|False|Address|
-|cidr|string|False|CIDR|
-|city|string|False|City|
-|country|string|False|Country|
-|netname|string|False|Network name|
-|netrange|string|False|Network Range|
-|nettype|string|False|Network type|
-|org_abuse_email|string|False|Organization abuse e-mail|
-|org_abuse_phone|string|False|Organization abuse phone|
-|org_tech_email|string|False|Organization tech e-mail|
-|org_tech_phone|string|False|Organization tech phone|
-|organization|string|False|Organization|
-|orgname|string|False|Organization name|
-|postal|string|False|Postal|
-|regdate|string|False|Registration date|
-|state|string|False|State|
-|update|string|False|WHOIS updated date|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|address|string|False|Address|1025 Eldorado Blvd.|
+|cidr|string|False|CIDR|8.0.0.0/8|
+|city|string|False|City|Broomfield|
+|country|string|False|Country|US|
+|netname|string|False|Network name|LVLT-ORG-8-8|
+|netrange|string|False|Network Range|8.0.0.0 - 8.255.255.255|
+|nettype|string|False|Network type|Direct Allocation|
+|org_abuse_email|string|False|Organization abuse e-mail|user@example.com|
+|org_abuse_phone|string|False|Organization abuse phone|+1-877-453-8353 |
+|org_tech_email|string|False|Organization tech e-mail|user@example.com|
+|org_tech_phone|string|False|Organization tech phone|+1-877-453-8353 |
+|organization|string|False|Organization|Level 3 Communications, Inc. (LVLT)|
+|orgname|string|False|Organization name|Level 3 Communications, Inc.|
+|postal|string|False|Postal|80021|
+|regdate|string|False|Registration date|1992-12-01|
+|state|string|False|State|CO|
+|update|string|False|WHOIS updated date|2012-02-24|
+  
 Example output:
 
 ```
-
 {
   "address": "1025 Eldorado Blvd.",
   "cidr": "8.0.0.0/8",
@@ -143,21 +86,97 @@ Example output:
   "org_tech_phone": "+1-877-453-8353 ",
   "organization": "Level 3 Communications, Inc. (LVLT)",
   "orgname": "Level 3 Communications, Inc.",
-  "postal": "80021",
+  "postal": 80021,
   "regdate": "1992-12-01",
   "state": "CO",
   "update": "2012-02-24"
 }
-
 ```
 
+#### Domain Lookup
+  
+This action is used to retrieve data about a domain name
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|domain|string|None|True|Domain name to lookup|None|rapid7.com|
+  
+Example input:
+
+```
+{
+  "domain": "rapid7.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|creation_date|date|False|Creation date|1997-09-15T04:00:00|
+|dnssec|string|False|DNSSEC|unsigned|
+|domain_status|[]string|False|Domain status|["clientdeleteprohibited https://icann.org/epp#clientdeleteprohibited", "clienttransferprohibited https://icann.org/epp#clienttransferprohibited", "clientupdateprohibited https://icann.org/epp#clientupdateprohibited", "serverdeleteprohibited https://icann.org/epp#serverdeleteprohibited", "servertransferprohibited https://icann.org/epp#servertransferprohibited", "serverupdateprohibited https://icann.org/epp#serverupdateprohibited"]|
+|expiration_date|date|False|Expiration date||
+|last_updated|date|False|Last updated date||
+|name|string|False|Domain name|google.com|
+|name_servers|[]string|False|Nameservers|["ns2.google.com", "ns3.google.com", "ns1.google.com", "ns4.google.com"]|
+|registrant_cc|string|False|Registrant country|US|
+|registrant_name|string|False|Registrant name||
+|registrar|string|False|Domain registrar|MarkMonitor Inc.|
+|registrar_abuse_contact_email|string|False|Registrar abuse contact email|user@example.com|
+|registrar_abuse_contact_phone|string|False|Registrar abuse Contact phone|+1.2083895740|
+|registrar_iana_id|string|False|Registrar IANA ID|292|
+|registrar_url|string|False|Registrar URL|http://www.markmonitor.com|
+|registrar_whois_server|string|False|Registrar WHOIS server|whois.markmonitor.com|
+|registry_domain_id|string|False|Registry domain ID|2138514_domain_com-vrsn|
+  
+Example output:
+
+```
+{
+  "creation_date": "1997-09-15T04:00:00",
+  "dnssec": "unsigned",
+  "domain_status": [
+    "clientdeleteprohibited https://icann.org/epp#clientdeleteprohibited",
+    "clienttransferprohibited https://icann.org/epp#clienttransferprohibited",
+    "clientupdateprohibited https://icann.org/epp#clientupdateprohibited",
+    "serverdeleteprohibited https://icann.org/epp#serverdeleteprohibited",
+    "servertransferprohibited https://icann.org/epp#servertransferprohibited",
+    "serverupdateprohibited https://icann.org/epp#serverupdateprohibited"
+  ],
+  "expiration_date": "",
+  "last_updated": "",
+  "name": "google.com",
+  "name_servers": [
+    "ns2.google.com",
+    "ns3.google.com",
+    "ns1.google.com",
+    "ns4.google.com"
+  ],
+  "registrant_cc": "US",
+  "registrant_name": "",
+  "registrar": "MarkMonitor Inc.",
+  "registrar_abuse_contact_email": "user@example.com",
+  "registrar_abuse_contact_phone": "+1.2083895740",
+  "registrar_iana_id": 292,
+  "registrar_url": "http://www.markmonitor.com",
+  "registrar_whois_server": "whois.markmonitor.com",
+  "registry_domain_id": "2138514_domain_com-vrsn"
+}
+```
 ### Triggers
+  
+*This plugin does not contain any triggers.*
 
-_This plugin does not contain any triggers._
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-### Custom Output Types
-
-_This plugin does not contain any custom output types._
+### Custom Types
+  
+*This plugin does not contain any custom output types.*
 
 ## Troubleshooting
 
@@ -165,6 +184,7 @@ Multiple records can be returned by the server, this plugin currently only retur
 
 # Version History
 
+* 3.1.1 - Add empty `__init__.py` file to `unit_test` folder | Refresh with new tooling
 * 3.1.0 - Add support for `.monster` and `.nl` domains
 * 3.0.3 - Add PluginException in Domain and Address action when response is empty
 * 3.0.2 - Support non-UTF-8 responses in the Address action
@@ -193,6 +213,8 @@ Multiple records can be returned by the server, this plugin currently only retur
 
 # Links
 
-## References
+* [WHOIS](https://en.wikipedia.org/wiki/WHOIS)
 
+## References
+  
 * [WHOIS](https://en.wikipedia.org/wiki/WHOIS)
