@@ -16,6 +16,8 @@ from datetime import datetime, timezone
     return_value=datetime.strptime("2023-05-01T08:34:46", "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc),
 )
 @patch("requests.request", side_effect=Util.mock_request)
+@patch("komand_duo_admin.util.api.isinstance", return_value=True)
+@patch("komand_duo_admin.util.api.DuoAdminAPI.get_headers", return_value={})
 class TestMonitorLogs(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -51,9 +53,9 @@ class TestMonitorLogs(TestCase):
             ],
         ]
     )
-    def test_monitor_logs(self, mock_request, mock_get_time, test_name, current_state, expected):
-        actual, actual_state, has_more_pages, status_code, _ = self.action.run(state=current_state)
+    def test_monitor_logs(self, mock_request, mock_request_instance, mock_get_headers, mock_get_time, test_name, current_state, expected):
 
+        actual, actual_state, has_more_pages, status_code, _ = self.action.run(state=current_state)
         self.assertEqual(actual, expected.get("logs"))
         self.assertEqual(actual_state, expected.get("state"))
         self.assertEqual(status_code, expected.get("status_code"))

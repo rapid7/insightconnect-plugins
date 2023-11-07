@@ -167,7 +167,7 @@ class DuoAdminAPI:
                 self.logger.info(f"Request to {path} returned 403 unauthorized. Not raising exception as may be authorized to hit other endpoint(s)")
                 self.logger.info(f"403 Response data returned for reference: {response.json()}")
                 return {}
-            self._handle_exceptions(response, path)
+            self._handle_exceptions(response)
             if 200 <= response.status_code < 300:
                 return response
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
