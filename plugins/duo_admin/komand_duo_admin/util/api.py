@@ -18,6 +18,7 @@ from komand_duo_admin.util.endpoints import (
     USER_ENDPOINT,
     USER_PHONES_ENDPOINT,
     USERS_ENDPOINT,
+    TASK_PATHS_ALLOW_403,
 )
 
 
@@ -159,6 +160,15 @@ class DuoAdminAPI:
                 params=params,
                 headers=self.get_headers(method=method.upper(), host=self.hostname, path=path, params=params),
             )
+
+            if response.status_code == 403 and path in TASK_PATHS_ALLOW_403:
+                # Special case: A task user who only has permissions for certain endpoints should not error out.
+                # Log and return an empty response instead
+                self.logger.info(
+                    f"Request to {path} returned 403 unauthorized. Not raising exception as may be authorized to hit other endpoint(s)"
+                )
+                self.logger.info(f"403 Response data returned for reference: {response.json()}")
+                return {}
             self._handle_exceptions(response)
             if 200 <= response.status_code < 300:
                 return response
@@ -218,6 +228,10 @@ class DuoAdminAPI:
         try:
             self.logger.info(f"Request to path: {path}")
             response = self.make_request(method=method, path=path, params=params)
-            return response.json()
+            if isinstance(response, requests.Response):
+                return response.json()
+            else:
+                return response
         except json.decoder.JSONDecodeError as error:
+            self.logger.info(f"JSON error occurred decoding response from {path}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)

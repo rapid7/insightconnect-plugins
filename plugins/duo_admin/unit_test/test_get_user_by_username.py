@@ -13,6 +13,7 @@ from komand_duo_admin.util.constants import Assistance, Cause
 
 
 @patch("requests.request", side_effect=Util.mock_request)
+@patch("komand_duo_admin.util.api.isinstance", return_value=True)
 class TestGetUserByUsername(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -32,7 +33,7 @@ class TestGetUserByUsername(TestCase):
             ],
         ]
     )
-    def test_get_user_by_username(self, mock_request, test_name, input_params, expected):
+    def test_get_user_by_username(self, mock_request, mock_request_instance, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertDictEqual(actual, expected)
 
@@ -47,7 +48,7 @@ class TestGetUserByUsername(TestCase):
         ]
     )
     def test_get_user_by_username_raise_api_exception(
-        self, mock_request, test_name, input_parameters, cause, assistance
+        self, mock_request, mock_request_instance, test_name, input_parameters, cause, assistance
     ):
         with self.assertRaises(ApiException) as error:
             self.action.run(input_parameters)

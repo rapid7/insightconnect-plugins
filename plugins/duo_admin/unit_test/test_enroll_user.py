@@ -14,6 +14,7 @@ from komand_duo_admin.util.constants import Cause, Assistance
 
 
 @patch("requests.request", side_effect=Util.mock_request)
+@patch("komand_duo_admin.util.api.isinstance", return_value=True)
 class TestEnrollUser(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -33,7 +34,7 @@ class TestEnrollUser(TestCase):
             ],
         ]
     )
-    def test_enroll_user(self, mock_request, test_name, input_params, expected):
+    def test_enroll_user(self, mock_request, mock_request_instance, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
 
@@ -47,7 +48,9 @@ class TestEnrollUser(TestCase):
             ],
         ]
     )
-    def test_enroll_user_raise_api_exception(self, mock_request, test_name, input_parameters, cause, assistance):
+    def test_enroll_user_raise_api_exception(
+        self, mock_request, mock_request_instance, test_name, input_parameters, cause, assistance
+    ):
         with self.assertRaises(ApiException) as error:
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
