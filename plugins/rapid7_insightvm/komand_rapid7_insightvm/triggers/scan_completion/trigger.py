@@ -69,6 +69,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                     "value": site_id,
                 }
             )
+        z = {"filters": x, "match": "any"}
 
         # Build API call
         resource_helper = ResourceRequests(self.connection.session, self.logger)
@@ -83,10 +84,14 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
         while True:
             while True:
-
+                endpoint_asset_search = Asset.search(self.connection.console_url)
                 endpoint = Asset.assets(self.connection.console_url, last_id + 1)
+
+                asset_search_response = resource_helper.resource_request(
+                    endpoint=endpoint_asset_search, method="post", payload=z
+                )
                 try:
-                    asset_response = resource_helper.resource_request(endpoint=endpoint, method="post")
+                    asset_assets_response = resource_helper.resource_request(endpoint=endpoint, method="get")
                 except Exception:
                     break
 
@@ -96,20 +101,20 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                 except Exception:
                     break
 
-                vuln_data = vuln_response.get('resources')[0]
+                vuln_data = vuln_response.get("resources")[0]
                 last_id += 1
 
                 self.send(
                     {
-                        Output.ASSET_ID: asset_response.get('id'),
-                        Output.HOSTNAME: asset_response.get('hostName'),
-                        Output.IP: asset_response.get('ip'),
+                        Output.ASSET_ID: asset_assets_response.get("id"),
+                        Output.HOSTNAME: asset_assets_response.get("hostName"),
+                        Output.IP: asset_assets_response.get("ip"),
                         Output.NEXPOSE_ID: "???",
-                        Output.SOFTWARE_UPDATE_ID: vuln_data.get('id'),
+                        Output.SOFTWARE_UPDATE_ID: vuln_data.get("id"),
                         Output.SOLUTION_ID: "solution_id",
                         Output.SOLUTION_SUMMARY: "solution_summary",
                         Output.VULNERABILITY_ID: "vulnerability_id",
                     }
                 )
 
-            time.sleep(100)
+            time.sleep(params.get(Input.INTERVAL) * 60)

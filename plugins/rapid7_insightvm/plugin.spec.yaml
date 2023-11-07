@@ -4480,6 +4480,13 @@ triggers:
     title: Scan Completed
     description: Fire upon completed scan
     input:
+      interval:
+        title: Interval
+        description: How often the trigger should check for new vulnerability
+        type: integer
+        required: true
+        default: 5
+        example: 5
       site_id:
         title: Site ID
         description: Site ID

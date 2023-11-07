@@ -11,6 +11,7 @@ class Input:
     ASSET_GROUP = "asset_group"
     CVE = "cve"
     HOSTNAME = "hostname"
+    INTERVAL = "interval"
     IP_ADDRESS = "ip_address"
     RISK_SCORE = "risk_score"
     SITE_ID = "site_id"
@@ -38,45 +39,55 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Asset Group",
       "description": "Asset Group",
-      "order": 2
+      "order": 3
     },
     "cve": {
       "type": "string",
       "title": "CVE",
       "description": "CVE",
-      "order": 6
+      "order": 7
     },
     "hostname": {
       "type": "string",
       "title": "Hostname",
       "description": "Hostname",
-      "order": 3
+      "order": 4
+    },
+    "interval": {
+      "type": "integer",
+      "title": "Interval",
+      "description": "How often the trigger should check for new vulnerability",
+      "default": 5,
+      "order": 1
     },
     "ip_address": {
       "type": "string",
       "title": "IP Address",
       "description": "IP Address",
-      "order": 4
+      "order": 5
     },
     "risk_score": {
       "type": "integer",
       "title": "Risk Score",
       "description": "Risk score",
-      "order": 5
+      "order": 6
     },
     "site_id": {
       "type": "string",
       "title": "Site ID",
       "description": "Site ID",
-      "order": 1
+      "order": 2
     },
     "source": {
       "type": "string",
       "title": "Source",
       "description": "Source",
-      "order": 7
+      "order": 8
     }
   },
+  "required": [
+    "interval"
+  ],
   "definitions": {}
 }
     """)
