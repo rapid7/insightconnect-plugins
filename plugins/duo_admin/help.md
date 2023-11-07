@@ -707,13 +707,25 @@ This task is used to monitor administrator, authentication and trust monitor eve
 
 ##### Input
 
-_This task does not contain any inputs._
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|collectTrustMonitorEvents|boolean|True|False|Whether to collect Trust Monitor events (note requires appropriate level of Duo Admin license)|None|False|
+|collectAdminLogs|boolean|True|False|Whether to collect Admin logs (note requires appropriate level of Duo Admin license)|None|False|
+  
+Example input:
+
+```
+{
+  "collectAdminLogs": true,
+  "collectTrustMonitorEvents": true
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|logs|[]log|True|List of administrator, authentication and trust monitor event logs within the specified time range|[]|
+|logs|[]object|True|List of administrator, authentication and trust monitor event logs within the specified time range|[]|
 
 Example output:
 
@@ -1021,6 +1033,7 @@ A User ID can be obtained by passing a username to the Get User Status action.
 
 # Version History
 
+* 4.3.0 - Monitor Logs task: Added inputs for collecting events and logs. Updated 403 error handling 
 * 4.2.2 - Monitor Logs task: updated unit tests
 * 4.2.1 - Monitor Logs task: updated timestamp handling
 * 4.2.0 - Monitor Logs task: removed formatting of task output

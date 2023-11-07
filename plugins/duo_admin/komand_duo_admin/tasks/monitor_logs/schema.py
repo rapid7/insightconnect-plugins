@@ -8,7 +8,8 @@ class Component:
 
 
 class Input:
-    pass
+    COLLECTADMINLOGS = "collectAdminLogs"
+    COLLECTTRUSTMONITOREVENTS = "collectTrustMonitorEvents"
 
 
 class State:
@@ -21,7 +22,27 @@ class Output:
 
 class MonitorLogsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "collectAdminLogs": {
+      "type": "boolean",
+      "title": "Collect Duo Admin Logs",
+      "description": "Whether to collect Admin logs (note requires appropriate level of Duo Admin license)",
+      "default": true,
+      "order": 2
+    },
+    "collectTrustMonitorEvents": {
+      "type": "boolean",
+      "title": "Collect Duo Trust Monitor Events",
+      "description": "Whether to collect Trust Monitor events (note requires appropriate level of Duo Admin license)",
+      "default": true,
+      "order": 1
+    }
+  },
+  "definitions": {}
+}
     """)
 
     def __init__(self):

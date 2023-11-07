@@ -13,6 +13,8 @@ from komand_duo_admin.util.constants import Cause, Assistance, PossibleInputs
 
 
 @patch("requests.request", side_effect=Util.mock_request)
+@patch("komand_duo_admin.util.api.isinstance", return_value=True)
+@patch("komand_duo_admin.util.api.DuoAdminAPI.get_headers", return_value={})
 class TestGetLogs(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -37,7 +39,7 @@ class TestGetLogs(TestCase):
             ],
         ]
     )
-    def test_get_logs(self, mock_request, test_name, input_params, expected):
+    def test_get_logs(self, mock_request, mock_request_instance, mock_get_headers, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertDictEqual(actual, expected)
 
@@ -51,7 +53,9 @@ class TestGetLogs(TestCase):
             ]
         ]
     )
-    def test_get_logs_raise_plugin_exception(self, mock_request, test_name, input_parameters, cause, assistance):
+    def test_get_logs_raise_plugin_exception(
+        self, mock_request, mock_request_instance, mock_get_headers, test_name, input_parameters, cause, assistance
+    ):
         with self.assertRaises(PluginException) as error:
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
