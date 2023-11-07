@@ -709,8 +709,8 @@ This task is used to monitor administrator, authentication and trust monitor eve
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|collectAdminLogs|boolean|True|True|Whether to collect Adming logs (note requires appropriate level of Duo Admin license)|None|False|
-|collectTrustMonitorEvents|boolean|True|True|Whether to collect Trust Monitor events (note requires appropriate level of Duo Admin license)|None|False|
+|collectTrustMonitorEvents|boolean|True|False|Whether to collect Trust Monitor events (note requires appropriate level of Duo Admin license)|None|False|
+|collectAdminLogs|boolean|True|False|Whether to collect Admin logs (note requires appropriate level of Duo Admin license)|None|False|
   
 Example input:
 
@@ -725,7 +725,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|logs|[]log|True|List of administrator, authentication and trust monitor event logs within the specified time range|[]|
+|logs|[]object|True|List of administrator, authentication and trust monitor event logs within the specified time range|[]|
 
 Example output:
 
