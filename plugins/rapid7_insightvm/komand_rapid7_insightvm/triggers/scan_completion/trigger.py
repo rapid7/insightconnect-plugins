@@ -27,50 +27,6 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         risk_score = params.get(Input.RISK_SCORE)
         site_id = params.get(Input.SITE_ID, None)
 
-        x = []
-        if cve:
-            x.append(
-                {
-                    "field": "cve",
-                    "operator": "is",
-                    "value": cve,
-                }
-            )
-        if hostname:
-            x.append(
-                {
-                    "field": "host-name",
-                    "operator": "is",
-                    "value": hostname,
-                },
-            )
-
-        if ip_address:
-            x.append(
-                {
-                    "field": "ip-address",
-                    "operator": "is",
-                    "value": ip_address,
-                }
-            )
-        if risk_score:
-            x.append(
-                {
-                    "field": "risk-score",
-                    "operator": "is",
-                    "value": risk_score,
-                }
-            )
-        if site_id:
-            x.append(
-                {
-                    "field": "site-id",
-                    "operator": "is",
-                    "value": site_id,
-                }
-            )
-        z = {"filters": x, "match": "any"}
-
         # Build API call
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         endpoint = Scan.scans(self.connection.console_url)
@@ -84,16 +40,30 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
         while True:
             while True:
-                endpoint_asset_search = Asset.search(self.connection.console_url)
                 endpoint = Asset.assets(self.connection.console_url, last_id + 1)
 
-                asset_search_response = resource_helper.resource_request(
-                    endpoint=endpoint_asset_search, method="post", payload=z
-                )
                 try:
-                    asset_assets_response = resource_helper.resource_request(endpoint=endpoint, method="get")
+                    asset_response = resource_helper.resource_request(endpoint=endpoint, method="get")
                 except Exception:
                     break
+
+                # Placeholders for now - Basically check for input and
+                # if it is in response
+                if ip_address and ip_address in asset_response.get('ip'):
+                    continue
+
+                if risk_score and risk_score in asset_response.get('riskScore'):
+                    continue
+
+                if hostname and hostname in asset_response.get('hostName'):
+                    continue
+
+                if source and source in asset_response.get('hostNames')[0].get('source'):
+                    continue
+
+                # Cannot find asset_group, cve or site_id from Get Asset By ID.
+
+                # Next, Get Asset by vuln solution
 
                 endpoint = Asset.asset_vulnerability_solution(self.connection.console_url, last_id + 1, "???")
                 try:
@@ -106,9 +76,9 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
                 self.send(
                     {
-                        Output.ASSET_ID: asset_assets_response.get("id"),
-                        Output.HOSTNAME: asset_assets_response.get("hostName"),
-                        Output.IP: asset_assets_response.get("ip"),
+                        Output.ASSET_ID: asset_response.get("id"),
+                        Output.HOSTNAME: asset_response.get("hostName"),
+                        Output.IP: asset_response.get("ip"),
                         Output.NEXPOSE_ID: "???",
                         Output.SOFTWARE_UPDATE_ID: vuln_data.get("id"),
                         Output.SOLUTION_ID: "solution_id",
