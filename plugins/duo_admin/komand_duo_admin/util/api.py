@@ -162,7 +162,7 @@ class DuoAdminAPI:
             )
 
             #TODO Update to 403
-            if response.status_code == 401 and path in TASK_PATHS_ALLOW_403:
+            if response.status_code == 403 and path in TASK_PATHS_ALLOW_403:
                 # Special case: A task user who only has permissions for certain endpoints should not error out.
                 # Log and return an empty response instead
                 self.logger.info(f"Request to {path} returned 403 unauthorized. Not raising exception as may be authorized to hit other endpoint(s)")
