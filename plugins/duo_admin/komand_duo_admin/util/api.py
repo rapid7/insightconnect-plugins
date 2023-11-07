@@ -164,7 +164,9 @@ class DuoAdminAPI:
             if response.status_code == 403 and path in TASK_PATHS_ALLOW_403:
                 # Special case: A task user who only has permissions for certain endpoints should not error out.
                 # Log and return an empty response instead
-                self.logger.info(f"Request to {path} returned 403 unauthorized. Not raising exception as may be authorized to hit other endpoint(s)")
+                self.logger.info(
+                    f"Request to {path} returned 403 unauthorized. Not raising exception as may be authorized to hit other endpoint(s)"
+                )
                 self.logger.info(f"403 Response data returned for reference: {response.json()}")
                 return {}
             self._handle_exceptions(response)
@@ -233,5 +235,3 @@ class DuoAdminAPI:
         except json.decoder.JSONDecodeError as error:
             self.logger.info(f"JSON error occurred decoding response from {path}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
-
-

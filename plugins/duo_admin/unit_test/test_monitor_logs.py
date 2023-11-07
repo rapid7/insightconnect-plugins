@@ -53,8 +53,9 @@ class TestMonitorLogs(TestCase):
             ],
         ]
     )
-    def test_monitor_logs(self, mock_request, mock_request_instance, mock_get_headers, mock_get_time, test_name, current_state, expected):
-
+    def test_monitor_logs(
+        self, mock_request, mock_request_instance, mock_get_headers, mock_get_time, test_name, current_state, expected
+    ):
         actual, actual_state, has_more_pages, status_code, _ = self.action.run(state=current_state)
         self.assertEqual(actual, expected.get("logs"))
         self.assertEqual(actual_state, expected.get("state"))
