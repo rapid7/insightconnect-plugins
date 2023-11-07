@@ -161,7 +161,6 @@ class DuoAdminAPI:
                 headers=self.get_headers(method=method.upper(), host=self.hostname, path=path, params=params),
             )
 
-            #TODO Update to 403
             if response.status_code == 403 and path in TASK_PATHS_ALLOW_403:
                 # Special case: A task user who only has permissions for certain endpoints should not error out.
                 # Log and return an empty response instead
@@ -175,7 +174,7 @@ class DuoAdminAPI:
         except requests.exceptions.HTTPError as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
-    def _handle_exceptions(self, response, path):
+    def _handle_exceptions(self, response):
         if response.status_code == 400:
             raise ApiException(
                 preset=PluginException.Preset.BAD_REQUEST,
