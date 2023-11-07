@@ -94,7 +94,6 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         self.logger.info(f"Retrieve data from {mintime} to {maxtime}. Get next page is set to {get_next_page}")
         return mintime, maxtime, get_next_page
 
-    # pylint: disable=unused-argument
     def run(self, params={}, state={}):  # noqa: C901
         self.connection.admin_api.toggle_rate_limiting = False
         has_more_pages = False
