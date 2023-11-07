@@ -1,0 +1,96 @@
+{
+    "incident": {
+        "acknowledgements": [],
+        "alert_counts": {
+            "all": 0,
+            "resolved": 0,
+            "triggered": 0
+        },
+        "assigned_via": "escalation_policy",
+        "assignments": [
+            {
+                "assignee": {
+                    "html_url": "https://dev-rapid7.pagerduty.com/users/PYGDZB8",
+                    "id": "PYGDZB8",
+                    "self": "https://api.pagerduty.com/users/PYGDZB8",
+                    "summary": "test@example.com",
+                    "type": "user_reference"
+                },
+                "at": "2023-10-13T15:59:39Z"
+            }
+        ],
+        "body": {
+            "details": "A disk is getting full on this machine. You should investigate what is causing the disk to fill, and ensure that there is an automated process in place for ensuring data is rotated (eg. logs should have logrotate around them). If data is expected to stay on this disk forever, you should start planning to scale up to a larger disk."
+        },
+        "created_at": "2023-10-13T15:59:39Z",
+        "description": "test additional fields escalation",
+        "escalation_policy": {
+            "html_url": "https://dev-rapid7.pagerduty.com/escalation_policies/PKEYM28",
+            "id": "PKEYM28",
+            "self": "https://api.pagerduty.com/escalation_policies/PKEYM28",
+            "summary": "Default",
+            "type": "escalation_policy_reference"
+        },
+        "first_trigger_log_entry": {
+            "html_url": "https://dev-rapid7.pagerduty.com/incidents/Q223HZVB2YUWJN/log_entries/R98U7JZHT15GCY383DCJ9GOX31",
+            "id": "R98U7JZHT15GCY383DCJ9GOX31",
+            "self": "https://api.pagerduty.com/log_entries/R98U7JZHT15GCY383DCJ9GOX31",
+            "summary": "Triggered through the website.",
+            "type": "trigger_log_entry_reference"
+        },
+        "html_url": "https://dev-rapid7.pagerduty.com/incidents/Q223HZVB2YUWJN",
+        "id": "Q223HZVB2YUWJN",
+        "impacted_services": [
+            {
+                "html_url": "https://dev-rapid7.pagerduty.com/service-directory/PLPY09O",
+                "id": "PLPY09O",
+                "self": "https://api.pagerduty.com/services/PLPY09O",
+                "summary": "new test service",
+                "type": "service_reference"
+            }
+        ],
+        "incident_key": "091aeb1d22454504b96a0357a40921ac",
+        "incident_number": 21,
+        "incidents_responders": [],
+        "is_mergeable": true,
+        "last_status_change_at": "2023-10-13T15:59:39Z",
+        "last_status_change_by": {
+            "html_url": "https://dev-rapid7.pagerduty.com/service-directory/PLPY09O",
+            "id": "PLPY09O",
+            "self": "https://api.pagerduty.com/services/PLPY09O",
+            "summary": "new test service",
+            "type": "service_reference"
+        },
+        "pending_actions": [],
+        "priority": {
+            "account_id": "P9IAY3D",
+            "color": "a8171c",
+            "created_at": "2023-09-20T11:32:06Z",
+            "id": "PR0EVG8",
+            "name": "P1",
+            "order": 500000000,
+            "schema_version": 0,
+            "self": "https://api.pagerduty.com/priorities/PR0EVG8",
+            "summary": "P1",
+            "type": "priority",
+            "updated_at": "2023-09-20T11:32:06Z"
+        },
+        "responder_requests": [],
+        "self": "https://api.pagerduty.com/incidents/Q223HZVB2YUWJN",
+        "service": {
+            "html_url": "https://dev-rapid7.pagerduty.com/service-directory/PLPY09O",
+            "id": "PLPY09O",
+            "self": "https://api.pagerduty.com/services/PLPY09O",
+            "summary": "new test service",
+            "type": "service_reference"
+        },
+        "status": "triggered",
+        "subscriber_requests": [],
+        "summary": "[#21] test additional fields escalation",
+        "teams": [],
+        "title": "test additional fields escalation",
+        "type": "incident",
+        "updated_at": "2023-10-13T15:59:39Z",
+        "urgency": "high"
+    }
+}
