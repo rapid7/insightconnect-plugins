@@ -27,30 +27,23 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         risk_score = params.get(Input.RISK_SCORE)
         site_id = params.get(Input.SITE_ID, None)
 
-        # Output mapping
-        # output_map = {
-        #     Output.ASSET_ID: "asset_id",
-        #     Output.HOSTNAME: "hostname",
-        #     Output.IP: "ip",
-        #     Output.NEXPOSE_ID: "nexpose_id",
-        #     Output.SOFTWARE_UPDATE_ID: "software_update_id",
-        #     Output.SOLUTION_ID: "solution_id",
-        #     Output.SOLUTION_SUMMARY: "solution_summary",
-        #     Output.VULNERABILITY_ID: "vulnerability_id",
-        # }
         x = []
         if cve:
-            x.append({
-                "field": "cve",
-                "operator": "is",
-                "value": cve,
-            })
+            x.append(
+                {
+                    "field": "cve",
+                    "operator": "is",
+                    "value": cve,
+                }
+            )
         if hostname:
-            x.append({
-                "field": "host-name",
-                "operator": "is",
-                "value": hostname,
-            }, )
+            x.append(
+                {
+                    "field": "host-name",
+                    "operator": "is",
+                    "value": hostname,
+                },
+            )
 
         if ip_address:
             x.append(
@@ -58,21 +51,24 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                     "field": "ip-address",
                     "operator": "is",
                     "value": ip_address,
-                })
+                }
+            )
         if risk_score:
             x.append(
                 {
                     "field": "risk-score",
                     "operator": "is",
                     "value": risk_score,
-                })
+                }
+            )
         if site_id:
             x.append(
                 {
                     "field": "site-id",
                     "operator": "is",
                     "value": site_id,
-                })
+                }
+            )
 
         # Build API call
         resource_helper = ResourceRequests(self.connection.session, self.logger)
@@ -88,23 +84,32 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         while True:
             while True:
 
-                # POST Asset Search endpoint
-                # endpoint = Scan.scans(self.connection.console_url, last_id + 1)
-                endpoint = Asset.search(self.connection.console_url)
-
+                endpoint = Asset.assets(self.connection.console_url, last_id + 1)
                 try:
-                    params_dict = {}
-                    response = resource_helper.resource_request(endpoint=endpoint, method="post")
-                    # response.get('resources')[0].get('id')
-
+                    asset_response = resource_helper.resource_request(endpoint=endpoint, method="post")
                 except Exception:
                     break
+
+                endpoint = Asset.asset_vulnerability_solution(self.connection.console_url, last_id + 1, "???")
+                try:
+                    vuln_response = resource_helper.resource_request(endpoint=endpoint, method="get")
+                except Exception:
+                    break
+
+                vuln_data = vuln_response.get('resources')[0]
                 last_id += 1
 
-                # Right, so now that we've got our scan result
-                # First, we make sure `status == 'finished`
-                # From here, we take some identifier and run other API calls on it -
-                # - depending on the input filters.
-                self.send(response)
+                self.send(
+                    {
+                        Output.ASSET_ID: asset_response.get('id'),
+                        Output.HOSTNAME: asset_response.get('hostName'),
+                        Output.IP: asset_response.get('ip'),
+                        Output.NEXPOSE_ID: "???",
+                        Output.SOFTWARE_UPDATE_ID: vuln_data.get('id'),
+                        Output.SOLUTION_ID: "solution_id",
+                        Output.SOLUTION_SUMMARY: "solution_summary",
+                        Output.VULNERABILITY_ID: "vulnerability_id",
+                    }
+                )
 
             time.sleep(100)
