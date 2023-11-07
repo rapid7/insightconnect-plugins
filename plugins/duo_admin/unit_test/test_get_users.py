@@ -11,6 +11,7 @@ from parameterized import parameterized
 
 
 @patch("requests.request", side_effect=Util.mock_request)
+@patch("komand_duo_admin.util.api.isinstance", return_value=True)
 class TestGetUsers(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -24,6 +25,6 @@ class TestGetUsers(TestCase):
             ],
         ]
     )
-    def test_get_users(self, mock_request, test_name, expected):
+    def test_get_users(self, mock_request, mock_request_instance, test_name, expected):
         actual = self.action.run()
         self.assertEqual(actual, expected)
