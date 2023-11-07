@@ -90,6 +90,7 @@ Example output:
 ### Triggers
   
 *This plugin does not contain any triggers.*
+
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -108,7 +109,7 @@ Example output:
 *There is no troubleshooting for this plugin.*
 
 # Version History
-  
+
 * 1.0.0 - Initial plugin
 
 # Links
