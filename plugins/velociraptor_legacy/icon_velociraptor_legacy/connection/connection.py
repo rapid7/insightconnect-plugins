@@ -8,21 +8,22 @@ from pyvelociraptor import api_pb2
 from pyvelociraptor import api_pb2_grpc
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
+
 # Custom imports below
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
-    def connect(self, params):
+    def connect(self):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         # TODO: generate bound input variables for the user, to help handhold the user
         # TODO: ex. self.api_key = params.get(Input.API_KEY)
         # END INPUT BINDING - DO NOT REMOVE
         self.logger.info("Connect: Connecting...")
-        """Runs a VQL query against the Velociraptor server.
+        """
+        Runs a VQL query against the Velociraptor server.
 
         Args:
             config: A dictionary containing the configuration parameters for the Velociraptor server.
@@ -41,15 +42,20 @@ class Connection(insightconnect_plugin_runtime.Connection):
             certificate_chain_decoded = base64.b64decode(self.parameters["client_cert"]["secretKey"])
             query = "SELECT * FROM info()"
             creds = grpc.ssl_channel_credentials(
-            root_certificates = root_certificates_decoded,
-            private_key = private_key_decoded,
-            certificate_chain = certificate_chain_decoded)
+                root_certificates=root_certificates_decoded,
+                private_key=private_key_decoded,
+                certificate_chain=certificate_chain_decoded,
+            )
             # This option is required to connect to the grpc server by IP - we
             # use self signed certs.
-            options = (('grpc.ssl_target_name_override', "VelociraptorServer",),)
+            options = (
+                (
+                    "grpc.ssl_target_name_override",
+                    "VelociraptorServer",
+                ),
+            )
             # The first step is to open a gRPC channel to the server..
-            with grpc.secure_channel(api_connection_string,
-                                    creds, options) as channel:
+            with grpc.secure_channel(api_connection_string, creds, options) as channel:
                 stub = api_pb2_grpc.APIStub(channel)
 
                 # The request consists of one or more VQL queries. Note that
@@ -58,10 +64,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 request = api_pb2.VQLCollectorArgs(
                     max_wait=1,
                     max_row=100,
-                    Query=[api_pb2.VQLRequest(
-                        Name="ICON Plugin Request",
-                        VQL=query,
-                    )],
+                    Query=[
+                        api_pb2.VQLRequest(
+                            Name="ICON Plugin Request",
+                            VQL=query,
+                        )
+                    ],
                 )
                 # This will block as responses are streamed from the
                 # server. If the query is an event query we will run this loop
@@ -82,7 +90,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.certificate_chain_decoded = base64.b64decode(self.parameters["client_cert"]["secretKey"])
             self.username = self.parameters["username"]
         except grpc.RpcError as e:
-            self.logger.info("Error: ",e)
+            self.logger.info("Error: ", e)
             self.api_connection_string = self.parameters["api_connection_string"]
             self.root_certificates_decoded = base64.b64decode(self.parameters["ca_certificate"]["secretKey"])
             self.private_key_decoded = base64.b64decode(self.parameters["client_private_key"]["secretKey"])
