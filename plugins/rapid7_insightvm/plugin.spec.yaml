@@ -4510,7 +4510,7 @@ triggers:
       risk_score:
         title: Risk Score
         description: Risk score
-        type: integer
+        type: float
         required: false
       cve:
         title: CVE

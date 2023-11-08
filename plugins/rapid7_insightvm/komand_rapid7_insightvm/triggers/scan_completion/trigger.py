@@ -39,6 +39,10 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                 last_id = resp["id"]
 
         while True:
+
+            if site_id and site_id in response[0]['siteId']:
+                continue
+
             while True:
                 endpoint = Asset.assets(self.connection.console_url, last_id + 1)
 
@@ -65,18 +69,20 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                 # Next, run GET Asset Vulnerabilities to retrieve vulnerability IDs
                 endpoint = VulnerabilityResult.vulnerabilities_for_asset(self.connection.console_url, last_id + 1)
                 try:
-                    asset_vuln_response = resource_helper.resource_request(endpoint=endpoint, method="get")
+                    asset_vuln_response = resource_helper.paged_resource_request(endpoint=endpoint, method="get")
                 except Exception:
                     break
 
-                # Add all the IDs into a list
+                # Add all the vulnerability IDs related to the asset into a list
                 vulnerability_ids = []
-                for i in asset_vuln_response:
-                    vulnerability_ids.append(i.get('id'))
+                for vulns in asset_vuln_response:
+                    for i in vulns:
+                        for j in i:
+                            vulnerability_ids.append(j.get('id'))
 
                 # Next, Get Asset Vulnerability Solution by vulnerability ID
                 for vulnerability_id in vulnerability_ids:
-                    endpoint = Asset.asset_vulnerability_solution(self.connection.console_url, last_id + 1, vuln_id)
+                    endpoint = Asset.asset_vulnerability_solution(self.connection.console_url, last_id + 1, vulnerability_id)
                     try:
                         solution_response = resource_helper.resource_request(endpoint=endpoint, method="get")
                     except Exception:
