@@ -23,7 +23,7 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
-    from komand_rapid7_insightvm import connection, actions, triggers
+    from komand_rapid7_insightvm import connection, actions, triggers, tasks
 
     class ICONRapid7Insightvm(insightconnect_plugin_runtime.Plugin):
         def __init__(self):

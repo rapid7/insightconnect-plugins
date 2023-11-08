@@ -67,7 +67,7 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
       "order": 5
     },
     "risk_score": {
-      "type": "integer",
+      "type": "number",
       "title": "Risk Score",
       "description": "Risk score",
       "order": 6
