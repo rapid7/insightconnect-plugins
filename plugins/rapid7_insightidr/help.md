@@ -110,7 +110,7 @@ Example output:
 
 #### Advanced Query on Log
   
-Realtime query an InsightIDR log. This will query individual logs for results
+Realtime query an InsightIDR log. This will query individual logs for results. Note a maximum of 500 results only will be returned from a single call, if all results are required for this query please use smaller timeranges
 
 ##### Input
 
@@ -2024,6 +2024,7 @@ Example output:
 
 # Version History
 
+* 6.0.1 - Action: `Advanced Query On Log Set` - Up the maximium events returned from 50 to 500
 * 6.0.0 - Action: `Advanced Query On Log Set` - Add new output type for statistical queries.
 * 5.1.2 - Action: `Advanced Query on Log Set` - Fix JSONDecoderError | Action: `Query` - Update spec and help.md to show it queries log IDs, not query IDs
 * 5.1.1 - Action: `List Investigations` - Now receiving size input | Actions: `Advanced Query On Log` & `Advanced Query On Log Set` - Acronym LQL has been updated to LEQL
