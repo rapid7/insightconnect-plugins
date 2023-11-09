@@ -88,6 +88,10 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
                     self.logger.info("No results were found, returning an empty list")
                     return []
             else:
+                if results_object.get("links", [{}])[0].get("rel") == "Next":
+                    self.logger.info(
+                        "Over 500 results are available for this query, but only 500 will be returned, please use a more specific query to get all results"
+                    )
                 return log_entries
 
     def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
@@ -137,7 +141,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
         @return: (callback url, list of log entries)
         """
         endpoint = f"{self.connection.url}log_search/query/logs/{log_id}"
-        params = {"query": query, "from": time_from, "to": time_to}
+        params = {"query": query, "from": time_from, "to": time_to, "per_page": 500}
 
         self.logger.info(f"Getting logs from: {endpoint}")
         self.logger.info(f"Using parameters: {params}")
@@ -155,6 +159,11 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
         potential_results = results_object.get("events", [])
         if potential_results:
             self.logger.info("Got results immediately, returning.")
+            self.logger.info("results_object.get('links', [{}])")
+            if results_object.get("links", [{}])[0].get("rel") == "Next":
+                self.logger.info(
+                    "Over 500 results are available for this query, but only 500 will be returned, please use a more specific query to get all results"
+                )
             return None, potential_results
         else:
             self.logger.info("Got a callback url. Polling results...")
