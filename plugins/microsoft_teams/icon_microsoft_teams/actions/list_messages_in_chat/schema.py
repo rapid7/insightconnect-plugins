@@ -4,48 +4,32 @@ import json
 
 
 class Component:
-    DESCRIPTION = "List all the replies to a message in a channel of a team"
+    DESCRIPTION = "Retrieve up to the last 50 messages in a chat"
 
 
 class Input:
-    CHANNEL_NAME = "channel_name"
-    MESSAGE_ID = "message_id"
-    TEAM_NAME = "team_name"
+    CHAT_ID = "chat_id"
 
 
 class Output:
     MESSAGES = "messages"
 
 
-class GetReplyListInput(insightconnect_plugin_runtime.Input):
+class ListMessagesInChatInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "channel_name": {
+    "chat_id": {
       "type": "string",
-      "title": "Channel Name",
-      "description": "Channel",
-      "order": 2
-    },
-    "message_id": {
-      "type": "string",
-      "title": "Message ID",
-      "description": "The ID of message",
-      "order": 3
-    },
-    "team_name": {
-      "type": "string",
-      "title": "Team Name",
-      "description": "Team name",
+      "title": "Chat ID",
+      "description": "The ID of chat",
       "order": 1
     }
   },
   "required": [
-    "channel_name",
-    "message_id",
-    "team_name"
+    "chat_id"
   ],
   "definitions": {}
 }
@@ -55,7 +39,7 @@ class GetReplyListInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class GetReplyListOutput(insightconnect_plugin_runtime.Output):
+class ListMessagesInChatOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "object",

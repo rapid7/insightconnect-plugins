@@ -1,0 +1,30 @@
+{
+    "messages": [
+        {
+            "attachments": [],
+            "body": {
+                "content": "Test message",
+                "contentType": "text"
+            },
+            "chatId": "19:04e78b73-4a46-4a21-8e0a-05f85df3d76c_ac785ffe-530a-45a1-bbf4-e275457e464b@unq.gbl.spaces",
+            "createdDateTime": "2023-11-08T10:38:18.048Z",
+            "etag": "1699439898048",
+            "from": {
+                "user": {
+                    "@odata.type": "#microsoft.graph.teamworkUserIdentity",
+                    "displayName": "test user",
+                    "id": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                    "tenantId": "5c824599-dc8c-4d31-96fb-3b886d4f8f10",
+                    "userIdentityType": "aadUser"
+                }
+            },
+            "id": "1699439898048",
+            "importance": "normal",
+            "lastModifiedDateTime": "2023-11-08T10:38:18.048Z",
+            "locale": "en-us",
+            "mentions": [],
+            "messageType": "message",
+            "reactions": []
+        }
+    ]
+}

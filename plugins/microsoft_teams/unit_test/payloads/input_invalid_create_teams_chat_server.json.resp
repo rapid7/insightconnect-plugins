@@ -1,0 +1,17 @@
+{
+    "members":
+        [
+            {
+                "user_info": "500 error",
+                "role": "owner"
+            },
+            {
+                "user_info": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                "role": "owner"
+            },
+            {
+                "user_info": "ac78ddd5ffe-530a-45a1-bbf4-e275457e464b",
+                "role": "owner"
+            }
+        ]
+}
