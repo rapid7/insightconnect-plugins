@@ -227,17 +227,16 @@ def send_html_message(
     return message
 
 
-def create_chat(logger: Logger, connection: insightconnect_plugin_runtime.connection, members: str, topic: str) -> bool:
+def create_chat(connection: insightconnect_plugin_runtime.connection, members: str, topic: str) -> bool:
     """
     Creates a chat for given users
 
-    :param logger: (logging.logger)
     :param connection: Object (insightconnect_plugin_runtime.connection)
     :param members: String
     :return: boolean
     """
 
-    create_chat_endpoint = f"https://graph.microsoft.com/beta/chats/"
+    create_chat_endpoint = "https://graph.microsoft.com/beta/chats/"
     create_chat_payload = {}
 
     list_members = []
@@ -256,7 +255,7 @@ def create_chat(logger: Logger, connection: insightconnect_plugin_runtime.connec
         if topic:
             create_chat_payload["topic"] = topic
     else:
-        raise PluginException(cause=f"Create chat failed.", assistance="Less than 2 valid members were provided")
+        raise PluginException(cause="Create chat failed.", assistance="Less than 2 valid members were provided")
 
     create_chat_payload["members"] = list_members
 
@@ -267,7 +266,7 @@ def create_chat(logger: Logger, connection: insightconnect_plugin_runtime.connec
     try:
         result.raise_for_status()
     except Exception as error:
-        raise PluginException(cause=f"Create chat failed.", assistance=result.text, data=error) from error
+        raise PluginException(cause="Create chat failed.", assistance=result.text, data=error) from error
 
     if not result.status_code == 201:
         raise PluginException(cause="Create channel returned an unexpected result.", assistance=result.text)

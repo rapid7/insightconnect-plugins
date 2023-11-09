@@ -20,6 +20,6 @@ class CreateTeamsChat(insightconnect_plugin_runtime.Action):
         members = params.get(Input.MEMBERS)
         topic = params.get(Input.TOPIC)
 
-        group_result = create_chat(self.logger, self.connection, members, topic)
+        group_result = create_chat(self.connection, members, topic)
 
         return {Output.CHAT: remove_null_and_clean(group_result)}
