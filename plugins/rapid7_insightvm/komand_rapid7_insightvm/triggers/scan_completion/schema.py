@@ -22,8 +22,6 @@ class Output:
     ASSET_ID = "asset_id"
     HOSTNAME = "hostname"
     IP = "ip"
-    NEXPOSE_ID = "nexpose_id"
-    SOFTWARE_UPDATE_ID = "software_update_id"
     SOLUTION_ID = "solution_id"
     SOLUTION_SUMMARY = "solution_summary"
     VULNERABILITY_ID = "vulnerability_id"
@@ -103,7 +101,7 @@ class ScanCompletionOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "asset_id": {
-      "type": "string",
+      "type": "integer",
       "title": "Asset ID",
       "description": "Asset ID",
       "order": 1
@@ -120,29 +118,17 @@ class ScanCompletionOutput(insightconnect_plugin_runtime.Output):
       "description": "IP",
       "order": 3
     },
-    "nexpose_id": {
-      "type": "string",
-      "title": "Nexpose ID",
-      "description": "Nexpose ID",
-      "order": 5
-    },
-    "software_update_id": {
-      "type": "string",
-      "title": "Software Update ID",
-      "description": "Software update ID",
-      "order": 8
-    },
     "solution_id": {
       "type": "string",
       "title": "Solution ID",
       "description": "Solution ID",
-      "order": 6
+      "order": 5
     },
     "solution_summary": {
       "type": "string",
       "title": "Solution Summary",
       "description": "Solution Summary",
-      "order": 7
+      "order": 6
     },
     "vulnerability_id": {
       "type": "string",

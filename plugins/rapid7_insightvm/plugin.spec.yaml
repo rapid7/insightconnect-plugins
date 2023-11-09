@@ -4526,7 +4526,7 @@ triggers:
       asset_id:
         title: Asset ID
         description: Asset ID
-        type: string
+        type: integer
         required: false
       hostname:
         title: Hostname
@@ -4541,11 +4541,6 @@ triggers:
       vulnerability_id:
         title: Vulnerability ID
         description: Vulnerability ID
-        type: string
-        required: false
-      nexpose_id:
-        title: Nexpose ID
-        description: Nexpose ID
         type: string
         required: false
       solution_id:
