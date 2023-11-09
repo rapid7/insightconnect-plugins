@@ -110,7 +110,7 @@ Example output:
 
 #### Advanced Query on Log
   
-Realtime query an InsightIDR log. This will query individual logs for results. Note a maximum of 500 results only will be returned from a single call, if all results are required for this query please use smaller timeranges
+Realtime query an InsightIDR log. This will query individual logs for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges 
 
 ##### Input
 
