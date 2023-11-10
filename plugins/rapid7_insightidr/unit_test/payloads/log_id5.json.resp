@@ -1,0 +1,74 @@
+{
+  "logs": [
+    "553048ff-e6ab-4597-a3e0-2b24032c233e",
+    "3244ed07-c3af-4bee-90b5-905a38a034b4"
+  ],
+  "progress": 0,
+  "events": [],
+  "partial": {
+    "cardinality": 0,
+    "granularity": 4320000,
+    "from": 1699567413000,
+    "to": 1699610613000,
+    "type": "count",
+    "stats": {
+      "global_timeseries": {
+        "count": 0
+      }
+    },
+    "groups": [],
+    "others": {},
+    "status": 200,
+    "timeseries": {
+      "global_timeseries": [
+        {
+          "count": 0
+        },
+        {
+          "count": 0
+        },
+        {
+          "count": 0
+        },
+        {
+          "count": 0
+        },
+        {
+          "count": 0
+        },
+        {
+          "count": 0
+        },
+        {
+          "count": 0
+        },
+        {
+          "count": 0
+        },
+        {
+          "count": 0
+        },
+        {
+          "count": 0
+        }
+      ]
+    },
+    "groups_timeseries": [],
+    "all_exact_result": null,
+    "count": 0
+  },
+  "id": "7176face-f659-45a6-bd46-81fdc2b1f74b:1:85f959aecc0a7300f9ad93ddacf3454e36348348::bafefd2e9cf60c699529d5a8cf4493578b0b56dd:",
+  "links": [
+    {
+      "rel": "Self",
+      "href": "https://us.api.insight.rapid7.com/log_search/query/7176face-f659-45a6-bd46-81fdc2b1f74b:1:85f959aecc0a7300f9ad93ddacf3454e36348348::bafefd2e9cf60c699529d5a8cf4493578b0b56dd:"
+    }
+  ],
+  "leql": {
+    "statement": "where(hostname='WindowsX64') calculate(count)",
+    "during": {
+      "from": 1699567413000,
+      "to": 1699610613000
+    }
+  }
+}

@@ -15,6 +15,14 @@
     {
       "name": "log_set4",
       "id": "log_id4"
+    },
+    {
+      "name": "log_set5",
+      "id": "log_id5"
+    },
+    {
+      "name": "log_set7",
+      "id": "log_id7"
     }
   ]
 }

@@ -173,7 +173,18 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
 
         results_object = response.json()
         if statistical:
-            potential_results = results_object.get("partial")
+            stats_endpoint = f"{self.connection.url}log_search/query/{results_object.get('id', '')}"
+            self.logger.info(f"Getting statistical from: {stats_endpoint}")
+            stats_response = self.connection.session.get(stats_endpoint, params=params)
+            try:
+                stats_response.raise_for_status()
+            except Exception:
+                raise PluginException(
+                    cause="Failed to get log sets from InsightIDR\n",
+                    assistance=f"Could not get statistical info from: {stats_endpoint}\n",
+                    data=stats_response.text,
+                )
+            potential_results = stats_response.json()
         else:
             potential_results = results_object.get("events")
 

@@ -252,4 +252,24 @@ class Util:
         elif args[0] == f"{Util.STUB_URL_API}/log_search/management/logsets":
             return MockResponse("logsets", 200)
 
+        print(args)
+
+        if args[0] == "https://us.api.insight.rapid7.com/log_search/query/logsets/log_id5":
+            return MockResponse("log_id5", 200)
+
+        if (
+            args[0]
+            == "https://us.api.insight.rapid7.com/log_search/query/7176face-f659-45a6-bd46-81fdc2b1f74b:1:85f959aecc0a7300f9ad93ddacf3454e36348348::bafefd2e9cf60c699529d5a8cf4493578b0b56dd:"
+        ):
+            return MockResponse("log_id6", 200)
+
+        if args[0] == "https://us.api.insight.rapid7.com/log_search/query/logsets/log_id7":
+            return MockResponse("log_id7", 200)
+
+        if (
+            args[0]
+            == "https://us.api.insight.rapid7.com/log_search/query/b55a768a-4c0e-449a-84ae-adc70e18eb20:1:8956245765c23b46f1d20322e5c076e53a7ab662::d56c37ab761ff5e65950abd93476f02ffbcb5a45:"
+        ):
+            return MockResponse("log_id8", 200)
+
         raise Exception("Not implemented")
