@@ -1,0 +1,36 @@
+{
+  "logs": [
+    "553048ff-e6ab-4597-a3e0-2b24032c233e",
+    "3244ed07-c3af-4bee-90b5-905a38a034b4"
+  ],
+  "progress": 0,
+  "events": [],
+  "partial": {
+    "cardinality": 0,
+    "granularity": 4320000,
+    "from": 1699569260000,
+    "to": 1699612460000,
+    "type": "count",
+    "stats": {},
+    "groups": [],
+    "others": {},
+    "status": 204,
+    "timeseries": {},
+    "groups_timeseries": [],
+    "all_exact_result": true
+  },
+  "id": "b55a768a-4c0e-449a-84ae-adc70e18eb20:1:8956245765c23b46f1d20322e5c076e53a7ab662::d56c37ab761ff5e65950abd93476f02ffbcb5a45:",
+  "links": [
+    {
+      "rel": "Self",
+      "href": "https://us.api.insight.rapid7.com/log_search/query/b55a768a-4c0e-449a-84ae-adc70e18eb20:1:8956245765c23b46f1d20322e5c076e53a7ab662::d56c37ab761ff5e65950abd93476f02ffbcb5a45:"
+    }
+  ],
+  "leql": {
+    "statement": "groupby(r7_context.asset.name)",
+    "during": {
+      "from": 1699569260000,
+      "to": 1699612460000
+    }
+  }
+}
