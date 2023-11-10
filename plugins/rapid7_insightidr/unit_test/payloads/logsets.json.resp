@@ -1,27 +1,27 @@
 {
   "logsets": [
     {
-      "name": "log_set",
+      "name": "Advanced Malware Alert",
       "id": "log_id"
     },
     {
-      "name": "log_set2",
+      "name": "Active Directory Admin Activity",
       "id": "log_id2"
     },
     {
-      "name": "log_set3",
+      "name": "Asset Authentication",
       "id": "log_id3"
     },
     {
-      "name": "log_set4",
+      "name": "Cloud Service Admin Activity",
       "id": "log_id4"
     },
     {
-      "name": "log_set5",
+      "name": "Cloud Service Activity",
       "id": "log_id5"
     },
     {
-      "name": "log_set7",
+      "name": "DNS Query",
       "id": "log_id7"
     }
   ]

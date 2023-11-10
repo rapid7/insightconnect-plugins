@@ -5,9 +5,10 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_rapid7_insightidr.actions.advanced_query_on_log_set import AdvancedQueryOnLogSet
-from komand_rapid7_insightidr.actions.advanced_query_on_log_set.schema import Input, Output
+from komand_rapid7_insightidr.actions.advanced_query_on_log_set.schema import Input, Output, AdvancedQueryOnLogSetInput, AdvancedQueryOnLogSetOutput
 from util import Util
 from unittest.mock import patch
+from jsonschema import validate
 
 
 @patch("requests.Session.get", side_effect=Util.mocked_requests)
@@ -18,60 +19,90 @@ class TestAdvancedQueryOnLogSet(TestCase):
         cls.action = Util.default_connector(AdvancedQueryOnLogSet())
 
     def test_advanced_query_on_log_set_one_label(self, mock_get, mock_async_get):
-        actual = self.action.run(
-            {
+        test_input = {
                 Input.QUERY: "",
-                Input.LOG_SET: "log_set",
-            }
-        )
+                Input.LOG_SET: "Advanced Malware Alert",
+                Input.TIMEOUT: 60,
+                Input.RELATIVE_TIME: "Last 5 Minutes"
+        }
+
+        validate(test_input, AdvancedQueryOnLogSetInput.schema)
+
+        actual = self.action.run(test_input)
+
         expected = ["Out of order entry"]
 
         self.assertEqual(actual.get(Output.COUNT), 1)
         self.assertEqual(actual.get(Output.RESULTS_EVENTS)[0].get("labels"), expected)
 
+        validate(actual, AdvancedQueryOnLogSetOutput.schema)
+
     def test_advanced_query_on_log_set_two_label(self, mock_get, mock_async_get):
-        actual = self.action.run(
-            {
+        test_input = {
                 Input.QUERY: "",
-                Input.LOG_SET: "log_set2",
-            }
-        )
+                Input.LOG_SET: "Active Directory Admin Activity",
+                Input.TIMEOUT: 60,
+                Input.RELATIVE_TIME: "Last 5 Minutes"
+        }
+
+        validate(test_input, AdvancedQueryOnLogSetInput.schema)
+
+        actual = self.action.run(test_input)
+
         expected = ["Out of order entry", "Out of events"]
 
         self.assertEqual(actual.get(Output.COUNT), 1)
         self.assertEqual(actual.get(Output.RESULTS_EVENTS)[0].get("labels"), expected)
 
+        validate(actual, AdvancedQueryOnLogSetOutput.schema)
+
     def test_advanced_query_on_log_set_without_label(self, mock_get, mock_async_get):
-        actual = self.action.run(
-            {
+        test_input = {
                 Input.QUERY: "",
-                Input.LOG_SET: "log_set3",
-            }
-        )
+                Input.LOG_SET: "Asset Authentication",
+                Input.TIMEOUT: 60,
+                Input.RELATIVE_TIME: "Last 5 Minutes"
+        }
+
+        validate(test_input, AdvancedQueryOnLogSetInput.schema)
+
+        actual = self.action.run(test_input)
         expected = []
 
         self.assertEqual(actual.get(Output.COUNT), 1)
         self.assertEqual(actual.get(Output.RESULTS_EVENTS)[0].get("labels"), expected)
+
+        validate(actual, AdvancedQueryOnLogSetOutput.schema)
 
     def test_advanced_query_on_log_set_wrong_label(self, mock_get, mock_async_get):
-        actual = self.action.run(
-            {
+        test_input = {
                 Input.QUERY: "",
-                Input.LOG_SET: "log_set4",
-            }
-        )
+                Input.LOG_SET: "Cloud Service Admin Activity",
+                Input.TIMEOUT: 60,
+                Input.RELATIVE_TIME: "Last 5 Minutes"
+        }
+
+        validate(test_input, AdvancedQueryOnLogSetInput.schema)
+
+        actual = self.action.run(test_input)
         expected = []
 
         self.assertEqual(actual.get(Output.COUNT), 1)
         self.assertEqual(actual.get(Output.RESULTS_EVENTS)[0].get("labels"), expected)
 
+        validate(actual, AdvancedQueryOnLogSetOutput.schema)
+
     def test_advanced_query_on_log_statistical_result_calculate(self, mock_get, mock_async_get):
-        actual = self.action.run(
-            {
+        test_input = {
                 Input.QUERY: "where(hostname='WindowsX64') calculate(count)",
-                Input.LOG_SET: "log_set5",
-            }
-        )
+                Input.LOG_SET: "Cloud Service Activity",
+                Input.TIMEOUT: 60,
+                Input.RELATIVE_TIME: "Last 5 Minutes"
+        }
+
+        validate(test_input, AdvancedQueryOnLogSetInput.schema)
+
+        actual = self.action.run(test_input)
         expected = {
             "count": 4,
             "results_statistical": {
@@ -121,14 +152,19 @@ class TestAdvancedQueryOnLogSet(TestCase):
         }
 
         self.assertEqual(actual, expected)
+        validate(actual, AdvancedQueryOnLogSetOutput.schema)
 
     def test_advanced_query_on_log_statistical_result_groupby(self, mock_get, mock_async_get):
-        actual = self.action.run(
-            {
+        test_input = {
                 Input.QUERY: "groupby(r7_context.asset.name)",
-                Input.LOG_SET: "log_set7",
-            }
-        )
+                Input.LOG_SET: "DNS Query",
+                Input.TIMEOUT: 60,
+                Input.RELATIVE_TIME: "Last 5 Minutes"
+        }
+
+        validate(test_input, AdvancedQueryOnLogSetInput.schema)
+
+        actual = self.action.run(test_input)
         expected = {
             "count": 4,
             "results_statistical": {
@@ -201,3 +237,4 @@ class TestAdvancedQueryOnLogSet(TestCase):
         }
 
         self.assertEqual(actual, expected)
+        validate(actual, AdvancedQueryOnLogSetOutput.schema)

@@ -252,8 +252,6 @@ class Util:
         elif args[0] == f"{Util.STUB_URL_API}/log_search/management/logsets":
             return MockResponse("logsets", 200)
 
-        print(args)
-
         if args[0] == "https://us.api.insight.rapid7.com/log_search/query/logsets/log_id5":
             return MockResponse("log_id5", 200)
 
