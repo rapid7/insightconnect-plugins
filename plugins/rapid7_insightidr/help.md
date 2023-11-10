@@ -141,7 +141,8 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |count|integer|True|Number of log entries found|10|
-|results|[]events|True|Query Results|[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": "false", "service": "ntlmssp ", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp ", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": False, "eventData": None, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]|
+|results_events|[]events|False|Query Results|[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": "false", "service": "ntlmssp ", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp ", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": False, "eventData": None, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]|
+|results_statistical|statistics|False|Query Results|{'leql': {'during': {'from': 1699579214000, 'to': 1699622414000}, 'statement': 'groupby(r7_context.asset.name)'}, 'logs': ['123456-abcd-1234-abcd-123456abc'], 'search_stats': {'bytes_all': 9961260, 'bytes_checked': 9961260, 'duration_ms': 19, 'events_all': 1640, 'events_checked': 1640, 'events_matched': 1639, 'index_factor': 0.0}, 'statistics': {'all_exact_result': True, 'cardinality': 0, 'from': 1699579214000, 'granularity': 4320000, 'groups': [{'linux': {'count': 1163.0}}, {'windowsx64': {'count': 476.0}}], 'groups_timeseries': [{'linux': {'groups_timeseries': [], 'series': [{'count': 45.0}, {'count': 21.0}, {'count': 16.0}, {'count': 270.0}, {'count': 27.0}, {'count': 43.0}, {'count': 27.0}, {'count': 39.0}, {'count': 29.0}, {'count': 646.0}], 'totals': {'count': 1163.0}}}, {'windowsx64': {'groups_timeseries': [], 'series': [{'count': 54.0}, {'count': 40.0}, {'count': 60.0}, {'count': 37.0}, {'count': 42.0}, {'count': 62.0}, {'count': 41.0}, {'count': 47.0}, {'count': 49.0}, {'count': 44.0}], 'totals': {'count': 476.0}}}], 'others': {'series': []}, 'stats': {}, 'status': 200, 'timeseries': {}, 'to': 1699622414000, 'type': 'count'}}|
   
 Example output:
 
@@ -199,16 +200,145 @@ Example output:
       },
       "timestamp": "2020-10-02T00:29:14.649Z"
     },
-    "sequence_number": 123456789123456789,
+    "sequence_number": 123456789123456780,
     "sequence_number_str": "123456789123456789",
     "timestamp": 1601598638768
+  },
+  "results_statistical": {
+    "leql": {
+      "during": {
+        "from": 1699579214000,
+        "to": 1699622414000
+      },
+      "statement": "groupby(r7_context.asset.name)"
+    },
+    "logs": [
+      "123456-abcd-1234-abcd-123456abc"
+    ],
+    "search_stats": {
+      "bytes_all": 9961260,
+      "bytes_checked": 9961260,
+      "duration_ms": 19,
+      "events_all": 1640,
+      "events_checked": 1640,
+      "events_matched": 1639,
+      "index_factor": 0
+    },
+    "statistics": {
+      "all_exact_result": true,
+      "cardinality": 0,
+      "from": 1699579214000,
+      "granularity": 4320000,
+      "groups": [
+        {
+          "linux": {
+            "count": 1163
+          }
+        },
+        {
+          "windowsx64": {
+            "count": 476
+          }
+        }
+      ],
+      "groups_timeseries": [
+        {
+          "linux": {
+            "groups_timeseries": [],
+            "series": [
+              {
+                "count": 45
+              },
+              {
+                "count": 21
+              },
+              {
+                "count": 16
+              },
+              {
+                "count": 270
+              },
+              {
+                "count": 27
+              },
+              {
+                "count": 43
+              },
+              {
+                "count": 27
+              },
+              {
+                "count": 39
+              },
+              {
+                "count": 29
+              },
+              {
+                "count": 646
+              }
+            ],
+            "totals": {
+              "count": 1163
+            }
+          }
+        },
+        {
+          "windowsx64": {
+            "groups_timeseries": [],
+            "series": [
+              {
+                "count": 54
+              },
+              {
+                "count": 40
+              },
+              {
+                "count": 60
+              },
+              {
+                "count": 37
+              },
+              {
+                "count": 42
+              },
+              {
+                "count": 62
+              },
+              {
+                "count": 41
+              },
+              {
+                "count": 47
+              },
+              {
+                "count": 49
+              },
+              {
+                "count": 44
+              }
+            ],
+            "totals": {
+              "count": 476
+            }
+          }
+        }
+      ],
+      "others": {
+        "series": []
+      },
+      "stats": {},
+      "status": 200,
+      "timeseries": {},
+      "to": 1699622414000,
+      "type": "count"
+    }
   }
 }
 ```
 
 #### Advanced Query on Log Set
   
-Realtime query an InsightIDR log set. This will query entire log sets for results
+Realtime query an InsightIDR log set. This will query entire log sets for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges
 
 ##### Input
 
@@ -240,7 +370,7 @@ Example input:
 | :--- | :--- | :--- | :--- | :--- |
 |count|integer|True|Number of log entries found|10|
 |results_events|[]events|False|Query Results|[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": "false", "service": "ntlmssp ", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp ", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": False, "eventData": None, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]|
-|results_statistical|statistics|False|Query Results|None|
+|results_statistical|statistics|False|Query Results|{'leql': {'during': {'from': 1699579214000, 'to': 1699622414000}, 'statement': 'groupby(r7_context.asset.name)'}, 'logs': ['123456-abcd-1234-abcd-123456abc'], 'search_stats': {'bytes_all': 9961260, 'bytes_checked': 9961260, 'duration_ms': 19, 'events_all': 1640, 'events_checked': 1640, 'events_matched': 1639, 'index_factor': 0.0}, 'statistics': {'all_exact_result': True, 'cardinality': 0, 'from': 1699579214000, 'granularity': 4320000, 'groups': [{'linux': {'count': 1163.0}}, {'windowsx64': {'count': 476.0}}], 'groups_timeseries': [{'linux': {'groups_timeseries': [], 'series': [{'count': 45.0}, {'count': 21.0}, {'count': 16.0}, {'count': 270.0}, {'count': 27.0}, {'count': 43.0}, {'count': 27.0}, {'count': 39.0}, {'count': 29.0}, {'count': 646.0}], 'totals': {'count': 1163.0}}}, {'windowsx64': {'groups_timeseries': [], 'series': [{'count': 54.0}, {'count': 40.0}, {'count': 60.0}, {'count': 37.0}, {'count': 42.0}, {'count': 62.0}, {'count': 41.0}, {'count': 47.0}, {'count': 49.0}, {'count': 44.0}], 'totals': {'count': 476.0}}}], 'others': {'series': []}, 'stats': {}, 'status': 200, 'timeseries': {}, 'to': 1699622414000, 'type': 'count'}}|
   
 Example output:
 
@@ -298,38 +428,137 @@ Example output:
       },
       "timestamp": "2020-10-02T00:29:14.649Z"
     },
-    "sequence_number": 123456789123456789,
+    "sequence_number": 123456789123456780,
     "sequence_number_str": "123456789123456789",
-    "timestamp": 1601598638768
-  },
-  "results_statistical": {
+    "timestamp": 1601598638768,
     "results_statistical": {
-      "cardinality": 0,
-      "granularity": 4320000,
-      "from": 1698023841000,
-      "to": 1698067041000,
-      "type": "count",
-      "stats": {
-        "global_timeseries": {
-          "count": 0.0
-        }
+      "leql": {
+        "during": {
+          "from": 1699579214000,
+          "to": 1699622414000
+        },
+        "statement": "groupby(r7_context.asset.name)"
       },
-      "groups": [],
-      "others": {},
-      "status": 200,
-      "timeseries": {
-        "global_timeseries": [
+      "logs": [
+        "123456-abcd-1234-abcd-123456abc"
+      ],
+      "search_stats": {
+        "bytes_all": 9961260,
+        "bytes_checked": 9961260,
+        "duration_ms": 19,
+        "events_all": 1640,
+        "events_checked": 1640,
+        "events_matched": 1639,
+        "index_factor": 0
+      },
+      "statistics": {
+        "all_exact_result": true,
+        "cardinality": 0,
+        "from": 1699579214000,
+        "granularity": 4320000,
+        "groups": [
           {
-            "count": 0.0
+            "linux": {
+              "count": 1163
+            }
           },
           {
-            "count": 0.0
+            "windowsx64": {
+              "count": 476
+            }
           }
-        ]
-      },
-      "groups_timeseries": [],
-      "all_exact_result": null,
-      "count": 0
+        ],
+        "groups_timeseries": [
+          {
+            "linux": {
+              "groups_timeseries": [],
+              "series": [
+                {
+                  "count": 45
+                },
+                {
+                  "count": 21
+                },
+                {
+                  "count": 16
+                },
+                {
+                  "count": 270
+                },
+                {
+                  "count": 27
+                },
+                {
+                  "count": 43
+                },
+                {
+                  "count": 27
+                },
+                {
+                  "count": 39
+                },
+                {
+                  "count": 29
+                },
+                {
+                  "count": 646
+                }
+              ],
+              "totals": {
+                "count": 1163
+              }
+            }
+          },
+          {
+            "windowsx64": {
+              "groups_timeseries": [],
+              "series": [
+                {
+                  "count": 54
+                },
+                {
+                  "count": 40
+                },
+                {
+                  "count": 60
+                },
+                {
+                  "count": 37
+                },
+                {
+                  "count": 42
+                },
+                {
+                  "count": 62
+                },
+                {
+                  "count": 41
+                },
+                {
+                  "count": 47
+                },
+                {
+                  "count": 49
+                },
+                {
+                  "count": 44
+                }
+              ],
+              "totals": {
+                "count": 476
+              }
+            }
+          }
+        ],
+        "others": {
+          "series": []
+        },
+        "stats": {},
+        "status": 200,
+        "timeseries": {},
+        "to": 1699622414000,
+        "type": "count"
+      }
     }
   }
 }
@@ -2024,7 +2253,7 @@ Example output:
 
 # Version History
 
-* 6.0.2 - Action: `Advanced Query On Log set` - Fixed error where statistical queries would always return 0.0
+* 7.0.0 - Action: `Advanced Query On Log set` - Fixed error where statistical queries would always return 0.0 | Action: `Advanced Query On Log set` Increase the maximum results returned from 50 to 500 | `Advanced Query On Log ` - Add new output type for statistical queries.
 * 6.0.1 - Action: `Advanced Query On Log` - Increase the maximum results returned from 50 to 500
 * 6.0.0 - Action: `Advanced Query On Log Set` - Add new output type for statistical queries.
 * 5.1.2 - Action: `Advanced Query on Log Set` - Fix JSONDecoderError | Action: `Query` - Update spec and help.md to show it queries log IDs, not query IDs

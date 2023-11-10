@@ -6,6 +6,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 import time
 from komand_rapid7_insightidr.util.parse_dates import parse_dates
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
+from requests import HTTPError
 
 
 class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
@@ -26,6 +27,8 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
         relative_time_from = params.get(Input.RELATIVE_TIME)
         time_to_string = params.get(Input.TIME_TO)
 
+        statistical = self.parse_query_for_statistical(query)
+
         # Time To is optional, if not specified, time to is set to now
         time_from, time_to = parse_dates(time_from_string, time_to_string, relative_time_from)
 
@@ -40,20 +43,43 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
 
         # The IDR API will SOMETIMES return results immediately.
         # It will return results if it gets them. If not, we'll get a call back URL to work on
-        callback_url, log_entries = self.maybe_get_log_entries(log_id, query, time_from, time_to)
+        callback_url, log_entries = self.maybe_get_log_entries(log_id, query, time_from, time_to, statistical)
 
         if callback_url and not log_entries:
-            log_entries = self.get_results_from_callback(callback_url, timeout)
+            log_entries = self.get_results_from_callback(callback_url, timeout, statistical)
 
-        if log_entries:
+        if log_entries and not statistical:
             log_entries = ResourceHelper.get_log_entries_with_new_labels(
                 self.connection, insightconnect_plugin_runtime.helper.clean(log_entries)
             )
 
         self.logger.info("Sending results to orchestrator.")
-        return {Output.RESULTS: log_entries, Output.COUNT: len(log_entries)}
 
-    def repeat_requests_on_timeout(self, callback_url: str, timeout: int, results_object: dict) -> [object]:
+        if not statistical:
+            return {Output.RESULTS_EVENTS: log_entries, Output.COUNT: len(log_entries)}
+        else:
+            return {
+                Output.RESULTS_STATISTICAL: log_entries,
+                Output.COUNT: log_entries.get("search_stats", {}).get("events_matched", 0),
+            }
+
+    @staticmethod
+    def parse_query_for_statistical(query: str) -> bool:
+        """
+        Simple helper method to toggle the statistical boolean between true or false
+        depending on whether the user's query contains a 'groupby()' or 'calculate()' clause.
+
+        :param query: str
+        :return: bool
+        """
+
+        for entry in ("calculate", "groupby"):
+            if entry in query:
+                return True
+
+    def repeat_requests_on_timeout(
+        self, callback_url: str, timeout: int, results_object: dict, statistical: bool
+    ) -> [object]:
         counter = timeout
         while callback_url:
             counter -= 1
@@ -80,7 +106,12 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
                 )
 
             results_object = response.json()
-            log_entries = results_object.get("events", [])
+
+            if statistical:
+                log_entries = results_object
+            else:
+                log_entries = results_object.get("events", [])
+
             if not log_entries:
                 try:
                     callback_url = results_object.get("links")[0].get("href")
@@ -94,7 +125,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
                     )
                 return log_entries
 
-    def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
+    def get_results_from_callback(self, callback_url: str, timeout: int, statistical: bool) -> [object]:
         """
         Get log entries from a callback URL
 
@@ -112,7 +143,10 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
                 data=response.text,
             )
         results_object = response.json()
-        log_entries = results_object.get("events", [])
+        if statistical:
+            log_entries = results_object
+        else:
+            log_entries = results_object.get("events", [])
 
         if results_object.get("links"):
             callback_url = results_object.get("links")[0].get("href")
@@ -120,11 +154,13 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
             callback_url = ""
 
         if callback_url:
-            log_entries = self.repeat_requests_on_timeout(callback_url, timeout, results_object)
+            log_entries = self.repeat_requests_on_timeout(callback_url, timeout, results_object, statistical)
 
         return log_entries
 
-    def maybe_get_log_entries(self, log_id: str, query: str, time_from: int, time_to: int) -> (str, [object]):
+    def maybe_get_log_entries(
+        self, log_id: str, query: str, time_from: int, time_to: int, statistical: bool
+    ) -> (str, [object]):
         """
         Make a call to the API and ask politely for log results.
 
@@ -138,10 +174,14 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
         @param query: str
         @param time_from: int
         @param time_to: int
+        @param statistical: bool
         @return: (callback url, list of log entries)
         """
         endpoint = f"{self.connection.url}log_search/query/logs/{log_id}"
-        params = {"query": query, "from": time_from, "to": time_to, "per_page": 500}
+        params = {"query": query, "from": time_from, "to": time_to}
+
+        if not statistical:
+            params["per_page"] = 500
 
         self.logger.info(f"Getting logs from: {endpoint}")
         self.logger.info(f"Using parameters: {params}")
@@ -156,10 +196,29 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
             )
 
         results_object = response.json()
-        potential_results = results_object.get("events", [])
+
+        if statistical:
+            stats_endpoint = f"{self.connection.url}log_search/query/{results_object.get('id', '')}"
+            self.logger.info(f"Getting statistical from: {stats_endpoint}")
+            stats_response = self.connection.session.get(stats_endpoint, params=params)
+            try:
+                stats_response.raise_for_status()
+            except HTTPError as error:
+                raise PluginException(
+                    cause="Failed to get log sets from InsightIDR\n",
+                    assistance=f"Could not get statistical info from: {stats_endpoint}\n",
+                    data=f"{stats_response.text}, {error}",
+                )
+
+            if stats_response.json().get("links"):
+                potential_results = None
+            else:
+                potential_results = stats_response.json()
+        else:
+            potential_results = results_object.get("events", [])
+
         if potential_results:
             self.logger.info("Got results immediately, returning.")
-            self.logger.info("results_object.get('links', [{}])")
             if results_object.get("links", [{}])[0].get("rel") == "Next":
                 self.logger.info(
                     "Over 500 results are available for this query, but only 500 will be returned, please use a more specific query to get all results"
