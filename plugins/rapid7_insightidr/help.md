@@ -2025,7 +2025,7 @@ Example output:
 # Version History
 
 * 6.0.2 - Action: `Advanced Query On Log set` - Fixed error where statistical queries would always return 0.0
-* 6.0.1 - Action: `Advanced Query On Log` - Up the maximium events returned from 50 to 500
+* 6.0.1 - Action: `Advanced Query On Log` - Increase the maximum results returned from 50 to 500
 * 6.0.0 - Action: `Advanced Query On Log Set` - Add new output type for statistical queries.
 * 5.1.2 - Action: `Advanced Query on Log Set` - Fix JSONDecoderError | Action: `Query` - Update spec and help.md to show it queries log IDs, not query IDs
 * 5.1.1 - Action: `List Investigations` - Now receiving size input | Actions: `Advanced Query On Log` & `Advanced Query On Log Set` - Acronym LQL has been updated to LEQL

@@ -6,6 +6,7 @@ import time
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightidr.util.parse_dates import parse_dates
+from requests import HTTPError
 
 
 class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
@@ -181,11 +182,11 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
             stats_response = self.connection.session.get(stats_endpoint, params=params)
             try:
                 stats_response.raise_for_status()
-            except Exception:
+            except HTTPError as error:
                 raise PluginException(
                     cause="Failed to get log sets from InsightIDR\n",
                     assistance=f"Could not get statistical info from: {stats_endpoint}\n",
-                    data=stats_response.text,
+                    data=f"{stats_response.text}, {error}",
                 )
             potential_results = stats_response.json()
         else:
