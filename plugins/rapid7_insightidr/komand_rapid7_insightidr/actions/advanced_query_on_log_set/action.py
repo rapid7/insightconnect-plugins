@@ -57,7 +57,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         if not statistical:
             return {Output.RESULTS_EVENTS: log_entries, Output.COUNT: len(log_entries)}
         else:
-            return {Output.RESULTS_STATISTICAL: log_entries, Output.COUNT: len(log_entries)}
+            return {Output.RESULTS_STATISTICAL: log_entries, Output.COUNT: log_entries.get("search_stats", {}).get("events_matched", 0)}
 
     @staticmethod
     def parse_query_for_statistical(query: str) -> bool:
