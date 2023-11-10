@@ -227,13 +227,13 @@ def send_html_message(
     return message
 
 
-def create_chat(connection: insightconnect_plugin_runtime.connection, members: str, topic: str) -> bool:
+def create_chat(connection: insightconnect_plugin_runtime.connection, members: str, topic: str) -> dict:
     """
     Creates a chat for given users
 
     :param connection: Object (insightconnect_plugin_runtime.connection)
     :param members: String
-    :return: boolean
+    :return: dict
     """
 
     create_chat_endpoint = "https://graph.microsoft.com/beta/chats/"
@@ -404,7 +404,7 @@ def list_messages_from_chat(connection: insightconnect_plugin_runtime.connection
 
     :param connection: Object (insightconnect_plugin_runtime.connection)
     :param chat_id: String
-    :return: boolean
+    :return: list
     """
 
     params = {"$top": 50, "$orderby": "createdDateTime desc"}
@@ -414,12 +414,13 @@ def list_messages_from_chat(connection: insightconnect_plugin_runtime.connection
 
     try:
         response.raise_for_status()
-    except Exception as error:
-        raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=error)
-    try:
         messages = response.json().get("value", [])
+    except requests.HTTPError as http_error:
+        raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=http_error)
+    except ValueError as value_error:
+        raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=value_error)
     except Exception as error:
-        raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
+        raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     clean_messages = []
 

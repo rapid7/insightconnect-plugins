@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import sys
+import requests
 
 sys.path.append(os.path.abspath("../"))
 
@@ -54,10 +55,12 @@ class Util:
 
             def raise_for_status(self):
                 if self.filename in [
-                    "response_invalid_list_messages_in_chat",
                     "response_invalid_group_create_teams_chat",
+                    "response_invalid_list_messages_in_chat_bad_json",
                 ]:
                     raise ValueError("error")
+                if self.filename in ["response_invalid_list_messages_in_chat"]:
+                    raise requests.HTTPError()
                 else:
                     return
 
