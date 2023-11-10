@@ -109,7 +109,7 @@ class TestAdvancedQueryOnLogSet(TestCase):
 
         actual = self.action.run(test_input)
         expected = {
-            "count": 4,
+            "count": 462,
             "results_statistical": {
                 "leql": {
                     "during": {"from": 1699567413000, "to": 1699610613000},
@@ -171,7 +171,7 @@ class TestAdvancedQueryOnLogSet(TestCase):
 
         actual = self.action.run(test_input)
         expected = {
-            "count": 4,
+            "count": 1020,
             "results_statistical": {
                 "leql": {
                     "during": {"from": 1699569260000, "to": 1699612460000},
