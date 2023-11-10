@@ -1,0 +1,130 @@
+{
+  "logs": [
+    "553048ff-e6ab-4597-a3e0-2b24032c233e",
+    "3244ed07-c3af-4bee-90b5-905a38a034b4"
+  ],
+  "statistics": {
+    "cardinality": 0,
+    "granularity": 4320000,
+    "from": 1699569260000,
+    "to": 1699612460000,
+    "type": "count",
+    "stats": {},
+    "groups": [
+      {
+        "tomascybereasonsensor": {
+          "count": 555
+        }
+      },
+      {
+        "windowsx64": {
+          "count": 465
+        }
+      }
+    ],
+    "others": {
+      "series": []
+    },
+    "status": 200,
+    "timeseries": {},
+    "groups_timeseries": [
+      {
+        "tomascybereasonsensor": {
+          "groups_timeseries": [],
+          "series": [
+            {
+              "count": 31
+            },
+            {
+              "count": 37
+            },
+            {
+              "count": 56
+            },
+            {
+              "count": 25
+            },
+            {
+              "count": 17
+            },
+            {
+              "count": 273
+            },
+            {
+              "count": 22
+            },
+            {
+              "count": 38
+            },
+            {
+              "count": 33
+            },
+            {
+              "count": 23
+            }
+          ],
+          "totals": {
+            "count": 555
+          }
+        }
+      },
+      {
+        "windowsx64": {
+          "groups_timeseries": [],
+          "series": [
+            {
+              "count": 28
+            },
+            {
+              "count": 53
+            },
+            {
+              "count": 42
+            },
+            {
+              "count": 56
+            },
+            {
+              "count": 57
+            },
+            {
+              "count": 32
+            },
+            {
+              "count": 46
+            },
+            {
+              "count": 50
+            },
+            {
+              "count": 54
+            },
+            {
+              "count": 47
+            }
+          ],
+          "totals": {
+            "count": 465
+          }
+        }
+      }
+    ],
+    "all_exact_result": true
+  },
+  "search_stats": {
+    "index_factor": 0,
+    "bytes_checked": 6276329,
+    "events_matched": 1020,
+    "events_checked": 1022,
+    "duration_ms": 36,
+    "events_all": 1022,
+    "bytes_all": 6276329
+  },
+  "leql": {
+    "during": {
+      "from": 1699569260000,
+      "to": 1699612460000
+    },
+    "statement": "groupby(r7_context.asset.name)"
+  }
+}
