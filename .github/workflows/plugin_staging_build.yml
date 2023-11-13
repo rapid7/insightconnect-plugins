@@ -1,0 +1,122 @@
+name: Create Staging Release
+on:
+  workflow_dispatch:
+    inputs:
+      PLUGIN_NAME:
+        description: 'Plugin to build and tag. The name must match the plugin directory name in GitHub.'
+        required: false
+  pull_request:
+    types: [closed]
+    branches:
+      - develop
+
+env:
+  PACKAGECLOUD_PYTHON_TOOLING_STABLE: ${{ secrets.PACKAGECLOUD_PYTHON_TOOLING_STABLE }}
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if merged
+        id: checkIfMerged
+        run: |
+          echo "INSIGHT_KOMAND_BRANCH=develop" >> $GITHUB_ENV
+          if [[ "${{ github.event.pull_request.merged }}" == "true" ]]; then
+            echo "Pull requst has been merged. Starting release process..."
+            echo "ROOT_BUILD_CAUSE=SCMTRIGGER" >> $GITHUB_ENV
+          elif [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "Workflow was manually triggered. Starting release process..."
+            echo "ROOT_BUILD_CAUSE=MANUALTRIGGER" >> $GITHUB_ENV
+            echo "INSIGHT_KOMAND_PLUGIN_NAME=${{ github.event.inputs.PLUGIN_NAME || '' }}" >> $GITHUB_ENV
+          else
+            echo "Pull request has not been merged. Stopping workflow..."
+            exit 1
+          fi
+
+      - name: Checkout Repository
+        id: checkoutRepository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 5
+          ref: "refs/heads/${{ env.INSIGHT_KOMAND_BRANCH }}"
+
+      - name: Setup Python
+        id: setupPython
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Setup venv
+        id: setUpVenv
+        run: |
+          python3 -m venv .ci_venv
+          source .ci_venv/bin/activate
+          pip install --upgrade pip
+
+      - name: Set up environment variables
+        id: setUpEnvironmentVariables
+        run: |
+          # Setup environment variables from input
+          echo "BUILD_OUTPUT_DIRECTORY=builds" >> $GITHUB_ENV
+          echo "BUILD_OUTPUT_FULL_PATH=plugins/builds" >> $GITHUB_ENV
+
+      - name: Prerelease Timestamp
+        id: prereleaseTimestamp
+        run: |
+            TIMESTAMP=$(date +%s%1N | cut -b1-10)
+            echo "PRERELEASE=true" >> $GITHUB_ENV
+            echo "PRERELEASE_TIMESTAMP=$TIMESTAMP" >> $GITHUB_ENV
+
+      - name: Install CI/CD Tool
+        id: installCICDTool
+        run: |
+          # Install CI Tooling
+          curl -s https://${PACKAGECLOUD_PYTHON_TOOLING_STABLE}:@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh | bash
+          .ci_venv/bin/pip install icon-integrations-ci~=3.0
+
+      - name: Build Plugin Image
+        id: buildPluginImage
+        if: success()
+        run: |
+          cd plugins
+          ../.ci_venv/bin/icon-ci build -d ${{ env.BUILD_OUTPUT_DIRECTORY }}
+
+      - name: Find Release Asset
+        id: findReleaseAsset
+        run: |
+          # Navigate to the build directory
+          cd ${{ env.BUILD_OUTPUT_FULL_PATH }}
+          # Use find to get the filename
+          filename=$(find . -type f -maxdepth 1 | xargs basename)
+          echo "RELEASE_ASSET=${filename}" >> $GITHUB_ENV
+          echo "GIT_TAG=${filename%.tar.gz}" >> $GITHUB_ENV
+
+      - name: Create release
+        id: createRelease
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ env.GIT_TAG }}
+          release_name: ${{ env.GIT_TAG }}
+          body: |
+            ${{ env.GIT_TAG }}
+          draft: false
+          prerelease: false
+
+      - name: Upload release asset
+        id: uploadReleaseAsset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.createRelease.outputs.upload_url }}
+          asset_path: ${{ env.BUILD_OUTPUT_FULL_PATH }}/${{ env.RELEASE_ASSET }}
+          asset_name: ${{ env.RELEASE_ASSET }}
+          asset_content_type: application/gzip
