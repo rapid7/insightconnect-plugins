@@ -2253,7 +2253,7 @@ Example output:
 
 # Version History
 
-* 7.0.0 - Action: `Advanced Query On Log Set` - Fixed error where statistical queries would always return 0.0 | Action: `Advanced Query On Log Set` Increase the maximum results returned from 50 to 500 | `Advanced Query On Log ` - Add new output type for statistical queries.
+* 7.0.0 - Action: `Advanced Query On Log Set` - Fixed error where statistical queries would always return 0.0 | Action: `Advanced Query On Log Set` - Increase the maximum results returned from 50 to 500 |  Action: `Advanced Query On Log` - Add new output type for statistical queries.
 * 6.0.1 - Action: `Advanced Query On Log` - Increase the maximum results returned from 50 to 500
 * 6.0.0 - Action: `Advanced Query On Log Set` - Add new output type for statistical queries.
 * 5.1.2 - Action: `Advanced Query on Log Set` - Fix JSONDecoderError | Action: `Query` - Update spec and help.md to show it queries log IDs, not query IDs
