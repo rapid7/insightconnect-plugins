@@ -22,9 +22,7 @@ class Output:
     ASSET_ID = "asset_id"
     HOSTNAME = "hostname"
     IP = "ip"
-    SOLUTION_ID = "solution_id"
-    SOLUTION_SUMMARY = "solution_summary"
-    VULNERABILITY_ID = "vulnerability_id"
+    VULNERABILITY_INFO = "vulnerability_info"
 
 
 class ScanCompletionInput(insightconnect_plugin_runtime.Input):
@@ -118,22 +116,13 @@ class ScanCompletionOutput(insightconnect_plugin_runtime.Output):
       "description": "IP",
       "order": 3
     },
-    "solution_id": {
-      "type": "string",
-      "title": "Solution ID",
-      "description": "Solution ID",
-      "order": 5
-    },
-    "solution_summary": {
-      "type": "string",
-      "title": "Solution Summary",
-      "description": "Solution Summary",
-      "order": 6
-    },
-    "vulnerability_id": {
-      "type": "string",
-      "title": "Vulnerability ID",
-      "description": "Vulnerability ID",
+    "vulnerability_info": {
+      "type": "array",
+      "title": "Vulnerability Info",
+      "description": "An array containing vulnerability id, solution id & solution summary",
+      "items": {
+        "type": "object"
+      },
       "order": 4
     }
   },

@@ -4538,20 +4538,10 @@ triggers:
         description: IP
         type: string
         required: false
-      vulnerability_id:
-        title: Vulnerability ID
-        description: Vulnerability ID
-        type: string
-        required: false
-      solution_id:
-        title: Solution ID
-        description: Solution ID
-        type: string
-        required: false
-      solution_summary:
-        title: Solution Summary
-        description: Solution Summary
-        type: string
+      vulnerability_info:
+        title: Vulnerability Info
+        description: An array containing vulnerability id, solution id & solution summary
+        type: '[]object'
         required: false
       software_update_id:
         title: Software Update ID
