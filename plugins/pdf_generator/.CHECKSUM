@@ -1,15 +1,15 @@
 {
-	"spec": "cd197acd42f077d07b4734d25178439d",
-	"manifest": "4cace783bc21dc6e9d5e641722ee1c52",
-	"setup": "ac9cabc3a4b9f42bcd440280d7ab188f",
+	"spec": "ef0d3ba33cfdb35d007174f323079e63",
+	"manifest": "2daa5f5af570451e47c6d6c91e425794",
+	"setup": "2a984e9284f0d9571da1a489fb3e59ea",
 	"schemas": [
 		{
 			"identifier": "generate_pdf/schema.py",
-			"hash": "bd8b3fc54016cf8b4f4ad9950d00b712"
+			"hash": "8abe08954429699de0bb10d17b310e9f"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "cb60c2b5b62fafb9634d667a8ad96277"
+			"hash": "bd524b567f9638ba1c6f7e0c9e45ff2e"
 		}
 	]
 }
