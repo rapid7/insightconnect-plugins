@@ -3,13 +3,13 @@ import time
 from .schema import ScanCompletionInput, ScanCompletionOutput, Input, Output, Component
 
 # Custom imports below
-from komand_rapid7_insightvm.util.endpoints import Scan, Asset, VulnerabilityResult
+from komand_rapid7_insightvm.util.endpoints import Asset, VulnerabilityResult
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 import uuid
 from komand_rapid7_insightvm.util import util
 import csv
 import io
-from typing import List, Dict, Union
+from typing import Dict, Union
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -36,20 +36,18 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         scan_id = 3
 
         results = self.get_results_from_query(scan_id)
-        # For the final 3, combine them into one output in spec, defined as an array of objects - need all
-        # separate or do we surely they can split it??? Can they split it from front-end? I think they can
 
         self.send(
             {
                 Output.ASSET_ID: results.get("asset_id"),
                 Output.IP: results.get("ip_address"),
                 Output.HOSTNAME: results.get("hostname"),
-                Output.VULNERABILITY_INFO: results.get('vulnerability_info')
+                Output.VULNERABILITY_INFO: results.get("vulnerability_info"),
             }
         )
 
     @staticmethod
-    def another_query(scan_id):
+    def another_query(scan_id: int) -> str:
         return (
             f"SELECT fasvi.scan_id, fasvi.asset_id, da.host_name, da.ip_address, dv.severity, ds.finished "
             f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
@@ -61,7 +59,15 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             f"ORDER BY ds.finished DESC, dv.severity DESC;"
         )
 
-    def get_results_from_query(self, scan_id: int):
+    def get_results_from_query(self, scan_id: int) -> Dict[str, Union[str, dict]]:
+        """
+        Take a scan id and run a sql query to retrieve the
+        information needed for the trigger output
+
+        :param scan_id: ID of the latest scan
+        :return: A dictionary containing asset_id, ip_address, hostname, and a nested array with objects
+        containing vulnerability_id, solution_id & solution summary.
+        """
 
         resource_helper = ResourceRequests(self.connection.session, self.logger)
 
