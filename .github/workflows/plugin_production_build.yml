@@ -77,7 +77,7 @@ jobs:
         if: success()
         run: |
           cd plugins
-          ../.ci_venv/bin/icon-ci build -d {{ env.BUILD_OUTPUT_DIRECTORY }}
+          ../.ci_venv/bin/icon-ci build -d ${{ env.BUILD_OUTPUT_DIRECTORY }}
 
       - name: Find Release Asset
         id: findReleaseAsset
