@@ -6,9 +6,11 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase, mock
 from unittest.mock import Mock
 from icon_microsoft_teams.actions.create_teams_chat import CreateTeamsChat
+from icon_microsoft_teams.actions.create_teams_chat.schema import CreateTeamsChatInput, CreateTeamsChatOutput
 from parameterized import parameterized
 from util import Util
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 
 @mock.patch("requests.post", side_effect=Util.mocked_requests)
@@ -32,8 +34,10 @@ class TestCreateTeamsChat(TestCase):
         ]
     )
     def test_create_teams_chat_valid(self, _mock_request: Mock, _test_name: str, input_params: dict, expected: dict):
+        validate(input_params, CreateTeamsChatInput.schema)
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
+        validate(actual, CreateTeamsChatOutput.schema)
 
     @parameterized.expand(
         [
@@ -44,7 +48,7 @@ class TestCreateTeamsChat(TestCase):
                 "Less than 2 valid members were provided",
             ],
             [
-                "server erro",
+                "server error",
                 Util.load_data("input_invalid_create_teams_chat_server"),
                 "Create chat failed.",
                 "Error message",
@@ -54,6 +58,7 @@ class TestCreateTeamsChat(TestCase):
     def test_list_messages_in_chat_invalid(
         self, _mock_request: Mock, _test_name: str, input_params: dict, cause: str, assistance: str
     ):
+        validate(input_params, CreateTeamsChatInput.schema)
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)
