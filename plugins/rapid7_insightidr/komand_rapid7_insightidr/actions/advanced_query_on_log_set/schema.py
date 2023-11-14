@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Realtime query an InsightIDR log set. This will query entire log sets for results. This will query entire log sets for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges"
+    DESCRIPTION = "Realtime query an InsightIDR log set. This will query entire log sets for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges"
 
 
 class Input:
@@ -146,6 +146,9 @@ class AdvancedQueryOnLogSetOutput(insightconnect_plugin_runtime.Output):
       "order": 2
     }
   },
+  "required": [
+    "count"
+  ],
   "definitions": {
     "events": {
       "type": "object",

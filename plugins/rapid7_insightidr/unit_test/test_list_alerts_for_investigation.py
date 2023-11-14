@@ -8,11 +8,16 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from komand_rapid7_insightidr.actions.list_alerts_for_investigation import ListAlertsForInvestigation
-from komand_rapid7_insightidr.actions.list_alerts_for_investigation.schema import Input
+from komand_rapid7_insightidr.actions.list_alerts_for_investigation.schema import (
+    Input,
+    ListAlertsForInvestigationInput,
+    ListAlertsForInvestigationOutput,
+)
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
 from mock import mock_get_request, STUB_INVESTIGATION_IDENTIFIER, mock_request_for_different_rrn_object
 from util import Util
+from jsonschema import validate
 
 
 class TestCreateInvestigation(TestCase):
@@ -49,12 +54,16 @@ class TestCreateInvestigation(TestCase):
 
     @patch("requests.Session.get", side_effect=mock_get_request)
     def test_list_alerts_for_investigation(self, _mock_req):
-        actual = self.action.run({Input.ID: STUB_INVESTIGATION_IDENTIFIER})
-
+        test_input = {Input.ID: STUB_INVESTIGATION_IDENTIFIER, Input.SIZE: 1, Input.INDEX: 0}
+        validate(test_input, ListAlertsForInvestigationInput.schema)
+        actual = self.action.run(test_input)
         self.assertEqual(actual, self.expected_result)
+        validate(actual, ListAlertsForInvestigationOutput.schema)
 
     @patch("requests.Session.get", side_effect=mock_request_for_different_rrn_object)
     def test_list_alerts_for_investigation_when_different_rrn_type(self, _mock_req):
-        actual = self.action.run({Input.ID: STUB_INVESTIGATION_IDENTIFIER})
-
+        test_input = {Input.ID: STUB_INVESTIGATION_IDENTIFIER, Input.SIZE: 1, Input.INDEX: 0}
+        validate(test_input, ListAlertsForInvestigationInput.schema)
+        actual = self.action.run()
         self.assertEqual(actual, self.expected_result)
+        validate(actual, ListAlertsForInvestigationOutput.schema)
