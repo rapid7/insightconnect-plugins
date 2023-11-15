@@ -274,7 +274,7 @@ def create_chat(connection: insightconnect_plugin_runtime.connection, members: l
     try:
         return result.json()
     except Exception as error:
-        raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)  
+        raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
 
 
 def create_channel(
