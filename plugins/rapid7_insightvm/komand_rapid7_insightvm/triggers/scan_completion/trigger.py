@@ -3,13 +3,12 @@ import time
 from .schema import ScanCompletionInput, ScanCompletionOutput, Input, Output, Component
 
 # Custom imports below
-from komand_rapid7_insightvm.util.endpoints import Asset, VulnerabilityResult
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 import uuid
 from komand_rapid7_insightvm.util import util
 import csv
 import io
-from typing import Dict, Union
+from typing import List, Union, Dict
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -34,32 +33,34 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         site_id = params.get(Input.SITE_ID, None)
 
         scan_id = 3
-
-        results = self.get_results_from_query(scan_id)
-
-        self.send(
-            {
-                Output.ASSET_ID: results.get("asset_id"),
-                Output.IP: results.get("ip_address"),
-                Output.HOSTNAME: results.get("hostname"),
-                Output.VULNERABILITY_INFO: results.get("vulnerability_info"),
-            }
-        )
+        start_time = time.time()
+        print(self.get_results_from_query(scan_id))
+        end_time = time.time()
+        print(f"Total Time: {(end_time - start_time) // 60} Minutes")
+        # self.send(
+        #     {
+        #         Output.ASSET_ID: results.get("asset_id"),
+        #         Output.IP: results.get("ip_address"),
+        #         Output.HOSTNAME: results.get("hostname"),
+        #         Output.VULNERABILITY_INFO: results.get("vulnerability_info"),
+        #     }
+        # )
 
     @staticmethod
-    def another_query(scan_id: int) -> str:
+    def query_results(scan_id: int):
         return (
-            f"SELECT fasvi.scan_id, fasvi.asset_id, da.host_name, da.ip_address, dv.severity, ds.finished "
-            f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
+            f"SELECT fasvi.scan_id, fasvi.asset_id, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id, ds.finished "
+            f"FROM fact_asset_scan_vulnerability_instance fasvi "
             f"JOIN dim_asset da ON (fasvi.asset_id = da.asset_id) "
             f"JOIN dim_vulnerability dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
+            f"JOIN dim_solution dss ON (dv.nexpose_id = dss.nexpose_id) "
             f"JOIN dim_scan ds ON (fasvi.scan_id = ds.scan_id) "
             f"WHERE fasvi.scan_id = {scan_id} "
-            f"GROUP BY fasvi.scan_id, fasvi.asset_id, da.host_name, da.ip_address, dv.severity, ds.finished "
-            f"ORDER BY ds.finished DESC, dv.severity DESC;"
+            f"GROUP BY fasvi.scan_id, fasvi.asset_id, dv.nexpose_id, da.host_name, da.ip_address, dss.solution_id, dss.summary, ds.finished "
+            f"ORDER BY ds.finished DESC;"
         )
 
-    def get_results_from_query(self, scan_id: int) -> Dict[str, Union[str, dict]]:
+    def get_results_from_query(self, scan_id: int) -> List[Dict[str, Union[str, int]]]:
         """
         Take a scan id and run a sql query to retrieve the
         information needed for the trigger output
@@ -69,13 +70,11 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         containing vulnerability_id, solution_id & solution summary.
         """
 
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
-
         identifier = uuid.uuid4()
         report_payload = {
             "name": f"Rapid7-InsightConnect-ScanCompletion-{identifier}",
             "format": "sql-query",
-            "query": ScanCompletion.another_query(scan_id),
+            "query": ScanCompletion.query_results(scan_id),
             "version": "2.3.0",
         }
 
@@ -90,34 +89,35 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                 assistance=f"Exception returned was {error}",
             )
 
-        scan = {}
-        vuln_info = []
+        scan_info = []
 
         for row in csv_report:
-            scan["asset_id"] = int(row["asset_id"])
-            scan["hostname"] = row["host_name"]
-            scan["ip_address"] = row["ip_address"]
+            asset = {
+                "scan_id": int(row['scan_id']),
+                "asset_id": int(row['asset_id']),
+                "hostname": row["host_name"],
+                "ip_address": row["ip_address"],
+                "nexpose_id": row["nexpose_id"],
+                "solution_id": row["solution_id"],
+                "solution_summary": row["summary"],
+            }
+            scan_info.append(asset)
 
-        endpoint = VulnerabilityResult.vulnerabilities_for_asset(self.connection.console_url, scan["asset_id"])
-        asset_vuln_response = resource_helper.paged_resource_request(endpoint=endpoint, method="get")
+        return scan_info
 
-        for vulnerability in asset_vuln_response:
-            vulnerability_id = vulnerability.get("id")
-            endpoint = Asset.asset_vulnerability_solution(
-                self.connection.console_url, scan["asset_id"], vulnerability_id
-            )
-            solution_response = resource_helper.resource_request(endpoint=endpoint, method="get")
-            solution_info = solution_response.get("resources")[0]
-            vuln_info.append(
-                {
-                    "summary": solution_info.get("summary").get("text"),
-                    "solution_id": self.strip_msft_id(solution_info.get("id")),
-                    "vulnerability_id": vulnerability_id,
-                }
-            )
-        scan["vulnerability_info"] = vuln_info
+    @staticmethod
+    def filter_results(asset_group: int, cve: str, hostname: str, source: str, ip_address: str, risk_score: float, site_id: str, csv_results: list):
+        # Return as normal if no inputs detected
+        if not asset_group and cve and hostname and source and ip_address and risk_score and site_id:
+            return csv_results
 
-        return scan
+        filtered_results = []
+
+        #
+        for row in csv_results:
+            for values in row.values():
+
+
 
     @staticmethod
     def strip_msft_id(solution_id: str) -> str:
