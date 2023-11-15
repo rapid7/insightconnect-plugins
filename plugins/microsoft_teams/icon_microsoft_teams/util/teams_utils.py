@@ -227,12 +227,12 @@ def send_html_message(
     return message
 
 
-def create_chat(connection: insightconnect_plugin_runtime.connection, members: str, topic: str) -> dict:
+def create_chat(connection: insightconnect_plugin_runtime.connection, members: list, topic: str) -> dict:
     """
     Creates a chat for given users
 
     :param connection: Object (insightconnect_plugin_runtime.connection)
-    :param members: String
+    :param members: list
     :return: dict
     """
 
@@ -271,7 +271,10 @@ def create_chat(connection: insightconnect_plugin_runtime.connection, members: s
     if not result.status_code == 201:
         raise PluginException(cause="Create channel returned an unexpected result.", assistance=result.text)
 
-    return result.json()
+    try:
+        return result.json()
+    except Exception as error:
+        raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)  
 
 
 def create_channel(
