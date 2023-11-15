@@ -108,16 +108,7 @@ class UpdateInvestigationOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "created_time",
-    "disposition",
-    "investigation",
-    "last_accessed",
-    "organization_id",
-    "priority",
-    "rrn",
-    "source",
-    "status",
-    "title"
+    "investigation"
   ],
   "definitions": {
     "investigation": {
@@ -195,20 +186,19 @@ class UpdateInvestigationOutput(insightconnect_plugin_runtime.Output):
           "title": "Title",
           "description": "Investigation title",
           "order": 12
-        },
-        "required": [
-          "created_time",
-          "disposition",
-          "last_accessed",
-          "organization_id",
-          "priority",
-          "rrn",
-          "source",
-          "status",
-          "title",
-          "investigation"
-        ]
-      }
+        }
+      },
+      "required": [
+        "created_time",
+        "disposition",
+        "last_accessed",
+        "organization_id",
+        "priority",
+        "rrn",
+        "source",
+        "status",
+        "title"
+      ]
     },
     "assignee": {
       "type": "object",

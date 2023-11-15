@@ -20,7 +20,7 @@ STUB_API_KEY = "j5740ps1cbukyk3t8kib3wa36aq2v3da"
 STUB_CONNECTION = {"api_key": {"secretKey": STUB_API_KEY}, "url": STUB_API_KEY}
 
 STUB_PRIORITY = "LOW"
-STUB_DISPOSITION = "BENING"
+STUB_DISPOSITION = "BENIGN"
 STUB_STATUS = "OPEN"
 
 STUB_USER_EMAIL = "user@example.com"

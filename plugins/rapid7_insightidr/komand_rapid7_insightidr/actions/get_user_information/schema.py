@@ -24,7 +24,7 @@ class GetUserInformationInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "user_rrn": {
       "type": "string",
-      "title": "user RRN",
+      "title": "User RRN",
       "description": "The RRN of the user",
       "order": 1
     }

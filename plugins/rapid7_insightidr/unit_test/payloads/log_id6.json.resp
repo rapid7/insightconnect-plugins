@@ -1,0 +1,74 @@
+{
+  "logs": [
+    "553048ff-e6ab-4597-a3e0-2b24032c233e",
+    "3244ed07-c3af-4bee-90b5-905a38a034b4"
+  ],
+  "statistics": {
+    "cardinality": 0,
+    "granularity": 4320000,
+    "from": 1699567413000,
+    "to": 1699610613000,
+    "type": "count",
+    "stats": {
+      "global_timeseries": {
+        "count": 462
+      }
+    },
+    "groups": [],
+    "others": {},
+    "status": 200,
+    "timeseries": {
+      "global_timeseries": [
+        {
+          "count": 38
+        },
+        {
+          "count": 47
+        },
+        {
+          "count": 36
+        },
+        {
+          "count": 56
+        },
+        {
+          "count": 60
+        },
+        {
+          "count": 40
+        },
+        {
+          "count": 39
+        },
+        {
+          "count": 41
+        },
+        {
+          "count": 61
+        },
+        {
+          "count": 44
+        }
+      ]
+    },
+    "groups_timeseries": [],
+    "all_exact_result": null,
+    "count": 462
+  },
+  "search_stats": {
+    "bytes_checked": 3589232,
+    "index_factor": 0.4294746,
+    "events_matched": 462,
+    "events_checked": 595,
+    "duration_ms": 19,
+    "events_all": 1025,
+    "bytes_all": 6291099
+  },
+  "leql": {
+    "statement": "where(hostname='WindowsX64') calculate(count)",
+    "during": {
+      "from": 1699567413000,
+      "to": 1699610613000
+    }
+  }
+}

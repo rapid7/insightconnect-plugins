@@ -6,6 +6,7 @@ import time
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightidr.util.parse_dates import parse_dates
+from requests import HTTPError
 
 
 class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
@@ -45,7 +46,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         callback_url, log_entries = self.maybe_get_log_entries(log_set_id, query, time_from, time_to, statistical)
 
         if callback_url and not log_entries:
-            log_entries = self.get_results_from_callback(callback_url, timeout)
+            log_entries = self.get_results_from_callback(callback_url, timeout, statistical)
 
         if log_entries and not statistical:
             log_entries = ResourceHelper.get_log_entries_with_new_labels(
@@ -57,7 +58,10 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         if not statistical:
             return {Output.RESULTS_EVENTS: log_entries, Output.COUNT: len(log_entries)}
         else:
-            return {Output.RESULTS_STATISTICAL: log_entries, Output.COUNT: len(log_entries)}
+            return {
+                Output.RESULTS_STATISTICAL: log_entries,
+                Output.COUNT: log_entries.get("search_stats", {}).get("events_matched", 0),
+            }
 
     @staticmethod
     def parse_query_for_statistical(query: str) -> bool:
@@ -73,7 +77,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
             if entry in query:
                 return True
 
-    def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:  # noqa: C901
+    def get_results_from_callback(self, callback_url: str, timeout: int, statistical: bool) -> [object]:  # noqa: C901
         """
         Get log entries from a callback URL
 
@@ -92,7 +96,10 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
                 data=response.text,
             )
         results_object = response.json()
-        log_entries = results_object.get("events")
+        if statistical:
+            log_entries = results_object
+        else:
+            log_entries = results_object.get("events", [])
 
         if results_object.get("links"):
             callback_url = results_object.get("links")[0].get("href")
@@ -125,7 +132,12 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
                 )
 
             results_object = response.json()
-            log_entries = results_object.get("events")
+
+            if statistical:
+                log_entries = results_object
+            else:
+                log_entries = results_object.get("events", [])
+
             if not log_entries:
                 try:
                     callback_url = results_object.get("links")[0].get("href")
@@ -133,6 +145,10 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
                     self.logger.info("No results were found, returning an empty list")
                     return []
             else:
+                if results_object.get("links", [{}])[0].get("rel") == "Next":
+                    self.logger.info(
+                        "Over 500 results are available for this query, but only 500 will be returned, please use a more specific query to get all results"
+                    )
                 return log_entries
 
         return log_entries
@@ -159,6 +175,9 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         endpoint = f"{self.connection.url}log_search/query/logsets/{log_id}"
         params = {"query": query, "from": time_from, "to": time_to}
 
+        if not statistical:
+            params["per_page"] = 500
+
         self.logger.info(f"Getting logs from: {endpoint}")
         self.logger.info(f"Using parameters: {params}")
         response = self.connection.session.get(endpoint, params=params)
@@ -172,13 +191,33 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
             )
 
         results_object = response.json()
+
         if statistical:
-            potential_results = results_object.get("partial")
+            stats_endpoint = f"{self.connection.url}log_search/query/{results_object.get('id', '')}"
+            self.logger.info(f"Getting statistical from: {stats_endpoint}")
+            stats_response = self.connection.session.get(stats_endpoint, params=params)
+            try:
+                stats_response.raise_for_status()
+            except HTTPError as error:
+                raise PluginException(
+                    cause="Failed to get log sets from InsightIDR\n",
+                    assistance=f"Could not get statistical info from: {stats_endpoint}\n",
+                    data=f"{stats_response.text}, {error}",
+                )
+
+            if stats_response.json().get("links"):
+                potential_results = None
+            else:
+                potential_results = stats_response.json()
         else:
             potential_results = results_object.get("events")
 
         if potential_results:
             self.logger.info("Got results immediately, returning.")
+            if results_object.get("links", [{}])[0].get("rel") == "Next":
+                self.logger.info(
+                    "Over 500 results are available for this query, but only 500 will be returned, please use a more specific query to get all results"
+                )
             return None, potential_results
         else:
             self.logger.info("Got a callback url. Polling results...")
