@@ -5,12 +5,17 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_rapid7_insightidr.actions.replace_indicators import ReplaceIndicators
-from komand_rapid7_insightidr.actions.replace_indicators.schema import Input
+from komand_rapid7_insightidr.actions.replace_indicators.schema import (
+    Input,
+    ReplaceIndicatorsInput,
+    ReplaceIndicatorsOutput,
+)
 from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
 from mock import mock_post_request
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 
 @patch("requests.Session.post", side_effect=mock_post_request)
@@ -21,16 +26,22 @@ class TestReplaceIndicators(TestCase):
 
     @parameterized.expand(
         [
-            ["dcdba462-fcf5-4021-8707-98b14232239b", "rapid7.com", "", "", ""],
-            ["dcdba462-fcf5-4021-8707-98b14232239b", "", "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3", "", ""],
-            ["dcdba462-fcf5-4021-8707-98b14232239b", "", "", "192.0.2.0/24", ""],
-            ["dcdba462-fcf5-4021-8707-98b14232239b", "", "", "", "https://example.com"],
+            ["dcdba462-fcf5-4021-8707-98b14232239b", ["rapid7.com"], [], [], []],
+            ["dcdba462-fcf5-4021-8707-98b14232239b", [], ["a94a8fe5ccb19ba61c4c0873d391e987982fbbd3"], [], []],
+            ["dcdba462-fcf5-4021-8707-98b14232239b", [], [], ["192.0.2.0/24"], []],
+            ["dcdba462-fcf5-4021-8707-98b14232239b", [], [], [], ["https://example.com"]],
         ]
     )
     def test_replace_indicators(self, mock_request, key, domain_names, hashes, ips, urls):
-        actual = self.action.run(
-            {Input.KEY: key, Input.DOMAIN_NAMES: domain_names, Input.HASHES: hashes, Input.IPS: ips, Input.URLS: urls}
-        )
+        test_input = {
+            Input.KEY: key,
+            Input.DOMAIN_NAMES: domain_names,
+            Input.HASHES: hashes,
+            Input.IPS: ips,
+            Input.URLS: urls,
+        }
+        validate(test_input, ReplaceIndicatorsInput.schema)
+        actual = self.action.run(test_input)
         expected = {
             "threat": {
                 "name": "Threat Command Alert",
@@ -41,6 +52,7 @@ class TestReplaceIndicators(TestCase):
             "rejected_indicators": [],
         }
         self.assertEqual(actual, expected)
+        validate(actual, ReplaceIndicatorsOutput.schema)
 
     @parameterized.expand(
         [
@@ -56,15 +68,14 @@ class TestReplaceIndicators(TestCase):
         ]
     )
     def test_replace_indicators_invalid(self, mock_request, key, domain_names, hashes, ips, urls, cause, assistance):
+        test_input = {
+            Input.KEY: key,
+            Input.DOMAIN_NAMES: domain_names,
+            Input.HASHES: hashes,
+            Input.IPS: ips,
+            Input.URLS: urls,
+        }
         with self.assertRaises(PluginException) as error:
-            actual = self.action.run(
-                {
-                    Input.KEY: key,
-                    Input.DOMAIN_NAMES: domain_names,
-                    Input.HASHES: hashes,
-                    Input.IPS: ips,
-                    Input.URLS: urls,
-                }
-            )
+            actual = self.action.run(test_input)
         self.assertEqual(error.exception.cause, cause)
         self.assertEqual(error.exception.assistance, assistance)

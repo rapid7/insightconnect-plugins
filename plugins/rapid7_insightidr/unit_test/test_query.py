@@ -6,11 +6,12 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 from komand_rapid7_insightidr.actions.query.action import Query
-from komand_rapid7_insightidr.actions.query.schema import Input
+from komand_rapid7_insightidr.actions.query.schema import Input, QueryInput, QueryOutput
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 from insightconnect_plugin_runtime.exceptions import PluginException
 from util import Util
 from mock import mock_get_request
+from jsonschema import validate
 
 
 class TestQuery(TestCase):
@@ -36,9 +37,12 @@ class TestQuery(TestCase):
 
     @patch("requests.Session.get", side_effect=mock_get_request)
     def test_query(self, _mock_req):
-        actual = self.action.run(
-            {Input.ID: self.params.get("id"), Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_false")}
-        )
+        test_input = {
+            Input.ID: self.params.get("id"),
+            Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_false"),
+        }
+        validate(test_input, QueryInput.schema)
+        actual = self.action.run(test_input)
         expected = {
             "events": [
                 {
@@ -55,7 +59,6 @@ class TestQuery(TestCase):
                             "signatureVersion": "1.321.836.0",
                             "unused": "null",
                         },
-                        "isDomainController": "false",
                         "sid": "S-1-5-18",
                         "sourceName": "Microsoft-Windows-Windows Defender",
                         "timeWritten": "2020-08-07T21:44:12.335999900Z",
@@ -66,13 +69,21 @@ class TestQuery(TestCase):
                 }
             ]
         }
+
+        print(actual)
+        print(expected)
+
         self.assertEqual(actual, expected)
+        validate(actual, QueryOutput.schema)
 
     @patch("requests.Session.get", side_effect=mock_get_request)
     def test_query_true(self, _mock_req):
-        actual = self.action.run(
-            {Input.ID: self.params.get("id"), Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_true")}
-        )
+        test_input = {
+            Input.ID: self.params.get("id"),
+            Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_true"),
+        }
+        validate(test_input, QueryInput.schema)
+        actual = self.action.run(test_input)
         expected = {
             "events": [
                 {
@@ -89,7 +100,6 @@ class TestQuery(TestCase):
                             "signatureVersion": "1.321.836.0",
                             "unused": "null",
                         },
-                        "isDomainController": "false",
                         "sid": "S-1-5-18",
                         "sourceName": "Microsoft-Windows-Windows Defender",
                         "timeWritten": "2020-08-07T21:44:12.335999900Z",
@@ -101,13 +111,17 @@ class TestQuery(TestCase):
             ]
         }
         self.assertEqual(actual, expected)
+        validate(actual, QueryOutput.schema)
 
     @patch("requests.Session.get", side_effect=mock_get_request)
     @patch("time.time", return_value=1682954418)
     def test_query_true_future(self, _mock_req, mock_time):
-        actual = self.action.run(
-            {Input.ID: self.params.get("id"), Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_true")}
-        )
+        test_input = {
+            Input.ID: self.params.get("id"),
+            Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_true"),
+        }
+        validate(test_input, QueryInput.schema)
+        actual = self.action.run(test_input)
         expected = {
             "events": [
                 {
@@ -124,7 +138,6 @@ class TestQuery(TestCase):
                             "signatureVersion": "1.321.836.0",
                             "unused": "null",
                         },
-                        "isDomainController": "false",
                         "sid": "S-1-5-18",
                         "sourceName": "Microsoft-Windows-Windows Defender",
                         "timeWritten": "2020-08-07T21:44:12.335999900Z",
@@ -136,12 +149,16 @@ class TestQuery(TestCase):
             ]
         }
         self.assertEqual(actual, expected)
+        validate(actual, QueryOutput.schema)
 
     @patch("requests.Session.get", side_effect=mock_get_request)
     def test_query_202(self, _mock_req):
-        actual = self.action.run(
-            {Input.ID: self.params.get("id_202"), Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_true")}
-        )
+        test_input = {
+            Input.ID: self.params.get("id_202"),
+            Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_true"),
+        }
+        validate(test_input, QueryInput.schema)
+        actual = self.action.run(test_input)
         expected = {
             "events": [
                 {
@@ -158,7 +175,6 @@ class TestQuery(TestCase):
                             "signatureVersion": "1.321.836.0",
                             "unused": "null",
                         },
-                        "isDomainController": "false",
                         "sid": "S-1-5-18",
                         "sourceName": "Microsoft-Windows-Windows Defender",
                         "timeWritten": "2020-08-07T21:44:12.335999900Z",
@@ -170,39 +186,40 @@ class TestQuery(TestCase):
             ]
         }
         self.assertEqual(actual, expected)
+        validate(actual, QueryOutput.schema)
 
     @patch("requests.Session.get", side_effect=mock_get_request)
     def test_query_202_error(self, _mock_req):
+        test_input = {
+            Input.ID: self.params.get("id_202_error"),
+            Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_false"),
+        }
+        validate(test_input, QueryInput.schema)
         with self.assertRaises(PluginException) as exception:
-            self.action.run(
-                {
-                    Input.ID: self.params.get("id_202_error"),
-                    Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_false"),
-                }
-            )
+            self.action.run(test_input)
         cause = "The response from InsightIDR was not in the correct format."
         self.assertEqual(exception.exception.cause, cause)
 
     @patch("requests.Session.get", side_effect=mock_get_request)
     def test_query_not_found(self, _mock_req):
+        test_input = {
+            Input.ID: self.params.get("not_found_id"),
+            Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_false"),
+        }
+        validate(test_input, QueryInput.schema)
         with self.assertRaises(PluginException) as exception:
-            self.action.run(
-                {
-                    Input.ID: self.params.get("not_found_id"),
-                    Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_false"),
-                }
-            )
+            self.action.run(test_input)
         cause = "InsightIDR returned a status code of 404: Not Found"
         self.assertEqual(exception.exception.cause, cause)
 
     @patch("requests.Session.get", side_effect=mock_get_request)
     def test_query_key_error(self, _mock_req):
+        test_input = {
+            Input.ID: self.params.get("id_key_error"),
+            Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_false"),
+        }
+        validate(test_input, QueryInput.schema)
         with self.assertRaises(PluginException) as exception:
-            self.action.run(
-                {
-                    Input.ID: self.params.get("id_key_error"),
-                    Input.MOST_RECENT_FIRST: self.params.get("most_recent_first_false"),
-                }
-            )
+            self.action.run(test_input)
         cause = "The response from InsightIDR was not in the correct format."
         self.assertEqual(exception.exception.cause, cause)

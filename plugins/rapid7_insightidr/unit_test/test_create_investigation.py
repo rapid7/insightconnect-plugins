@@ -7,11 +7,16 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from komand_rapid7_insightidr.actions.create_investigation import CreateInvestigation
-from komand_rapid7_insightidr.actions.create_investigation.schema import Input
+from komand_rapid7_insightidr.actions.create_investigation.schema import (
+    Input,
+    CreateInvestigationInput,
+    CreateInvestigationOutput,
+)
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
 from mock import mock_post_request, STUB_USER_EMAIL
 from util import Util
+from jsonschema import validate
 
 
 class TestCreateInvestigation(TestCase):
@@ -33,7 +38,9 @@ class TestCreateInvestigation(TestCase):
 
     @patch("requests.Session.post", side_effect=mock_post_request)
     def test_create_investigation(self, _mock_req):
-        actual = self.action.run({Input.TITLE: "Example Title", Input.EMAIL: STUB_USER_EMAIL})
+        test_input = {Input.TITLE: "Example Title", Input.EMAIL: STUB_USER_EMAIL}
+        validate(test_input, CreateInvestigationInput.schema)
+        actual = self.action.run(test_input)
         expected = {
             "investigation": {
                 "assignee": {"email": "user@example.com", "name": "Ellen Example"},
@@ -51,3 +58,4 @@ class TestCreateInvestigation(TestCase):
             }
         }
         self.assertEqual(actual, expected)
+        validate(actual, CreateInvestigationOutput.schema)

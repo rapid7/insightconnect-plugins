@@ -7,11 +7,16 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from komand_rapid7_insightidr.actions.search_investigations import SearchInvestigations
-from komand_rapid7_insightidr.actions.search_investigations.schema import Input
+from komand_rapid7_insightidr.actions.search_investigations.schema import (
+    Input,
+    SearchInvestigationsInput,
+    SearchInvestigationsOutput,
+)
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
 from mock import mock_post_request
 from util import Util
+from jsonschema import validate
 
 
 class TestSearchInvestigation(TestCase):
@@ -33,14 +38,14 @@ class TestSearchInvestigation(TestCase):
 
     @patch("requests.Session.post", side_effect=mock_post_request)
     def test_search_investigations(self, _mock_req):
-        actual = self.action.run(
-            {
-                Input.INDEX: 0,
-                Input.SIZE: 1,
-                Input.SORT: [{"field": "priority", "order": "ASC"}],
-                Input.SEARCH: [{"field": "Example Field", "operator": "EQUALS", "value": "Test"}],
-            }
-        )
+        test_input = {
+            Input.INDEX: 0,
+            Input.SIZE: 1,
+            Input.SORT: [{"field": "priority", "order": "ASC"}],
+            Input.SEARCH: [{"field": "Example Field", "operator": "EQUALS", "value": "Test"}],
+        }
+        validate(test_input, SearchInvestigationsInput.schema)
+        actual = self.action.run(test_input)
         expected = {
             "investigations": [
                 {
@@ -61,3 +66,4 @@ class TestSearchInvestigation(TestCase):
             "metadata": {"index": 0, "size": 1, "total_data": 1, "total_pages": 1},
         }
         self.assertEqual(actual, expected)
+        validate(actual, SearchInvestigationsOutput.schema)

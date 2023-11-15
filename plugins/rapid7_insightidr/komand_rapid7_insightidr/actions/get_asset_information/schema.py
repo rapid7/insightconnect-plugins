@@ -24,7 +24,7 @@ class GetAssetInformationInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "asset_rrn": {
       "type": "string",
-      "title": "asset RRN",
+      "title": "Asset RRN",
       "description": "The RRN of the asset",
       "order": 1
     }

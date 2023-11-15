@@ -18,7 +18,6 @@
                "signatureVersion":"1.321.836.0",
                "unused":"null"
             },
-            "isDomainController":"false",
             "sid":"S-1-5-18",
             "sourceName":"Microsoft-Windows-Windows Defender",
             "timeWritten":"2020-08-07T21:44:12.335999900Z"
