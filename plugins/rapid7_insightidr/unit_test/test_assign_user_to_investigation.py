@@ -7,11 +7,16 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from komand_rapid7_insightidr.actions.assign_user_to_investigation import AssignUserToInvestigation
-from komand_rapid7_insightidr.actions.assign_user_to_investigation.schema import Input
+from komand_rapid7_insightidr.actions.assign_user_to_investigation.schema import (
+    Input,
+    AssignUserToInvestigationInput,
+    AssignUserToInvestigationOutput,
+)
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
 from mock import mock_put_request, STUB_INVESTIGATION_IDENTIFIER, STUB_USER_EMAIL
 from util import Util
+from jsonschema import validate
 
 
 class TestAssignUserToInvestigation(TestCase):
@@ -33,7 +38,10 @@ class TestAssignUserToInvestigation(TestCase):
 
     @patch("requests.Session.put", side_effect=mock_put_request)
     def test_assign_user_to_investigation(self, _mock_req):
-        actual = self.action.run({Input.ID: STUB_INVESTIGATION_IDENTIFIER, Input.USER_EMAIL_ADDRESS: STUB_USER_EMAIL})
+        test_input = {Input.ID: STUB_INVESTIGATION_IDENTIFIER, Input.USER_EMAIL_ADDRESS: STUB_USER_EMAIL}
+        validate(test_input, AssignUserToInvestigationInput.schema)
+        actual = self.action.run(test_input)
+
         expected = {
             "investigation": {
                 "assignee": {"email": "user@example.com", "name": "Ellen Example"},
@@ -52,3 +60,4 @@ class TestAssignUserToInvestigation(TestCase):
             "success": True,
         }
         self.assertEqual(actual, expected)
+        validate(actual, AssignUserToInvestigationOutput.schema)

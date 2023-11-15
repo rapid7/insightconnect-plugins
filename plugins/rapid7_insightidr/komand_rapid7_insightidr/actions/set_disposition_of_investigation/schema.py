@@ -69,24 +69,6 @@ class SetDispositionOfInvestigationOutput(insightconnect_plugin_runtime.Output):
     "investigation"
   ],
   "definitions": {
-    "assignee": {
-      "type": "object",
-      "title": "assignee",
-      "properties": {
-        "email": {
-          "type": "string",
-          "title": "Email",
-          "description": "The email of the assigned user",
-          "order": 1
-        },
-        "name": {
-          "type": "string",
-          "title": "Name",
-          "description": "The name of the assigned user",
-          "order": 2
-        }
-      }
-    },
     "investigation": {
       "type": "object",
       "title": "investigation",
@@ -174,25 +156,23 @@ class SetDispositionOfInvestigationOutput(insightconnect_plugin_runtime.Output):
         "source",
         "status",
         "title"
-      ],
-      "definitions": {
-        "assignee": {
-          "type": "object",
-          "title": "assignee",
-          "properties": {
-            "email": {
-              "type": "string",
-              "title": "Email",
-              "description": "The email of the assigned user",
-              "order": 1
-            },
-            "name": {
-              "type": "string",
-              "title": "Name",
-              "description": "The name of the assigned user",
-              "order": 2
-            }
-          }
+      ]
+    },
+    "assignee": {
+      "type": "object",
+      "title": "assignee",
+      "properties": {
+        "email": {
+          "type": "string",
+          "title": "Email",
+          "description": "The email of the assigned user",
+          "order": 1
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "The name of the assigned user",
+          "order": 2
         }
       }
     }

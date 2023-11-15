@@ -9,11 +9,16 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from komand_rapid7_insightidr.actions.list_investigations import ListInvestigations
-from komand_rapid7_insightidr.actions.list_investigations.schema import Input
+from komand_rapid7_insightidr.actions.list_investigations.schema import (
+    Input,
+    ListInvestigationsInput,
+    ListInvestigationsOutput,
+)
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
 from mock import mock_get_request
 from util import Util
+from jsonschema import validate
 
 
 @patch("requests.Session.request", side_effect=Util.mocked_requests)
@@ -35,9 +40,14 @@ class TestListInvestigations(TestCase):
         self.connection = self.action.connection
 
     def test_list_investigations(self, _mock_req):
-        actual = self.action.run(
-            {Input.INDEX: 0, Input.SIZE: 1, Input.STATUSES: ["INVESTIGATING"], Input.SOURCES: ["USER", "ALERT"]}
-        )
+        test_input = {
+            Input.INDEX: 0,
+            Input.SIZE: 1,
+            Input.STATUSES: ["INVESTIGATING"],
+            Input.SOURCES: ["USER", "ALERT"],
+        }
+        validate(test_input, ListInvestigationsInput.schema)
+        actual = self.action.run(test_input)
         expected = {
             "investigations": [
                 {
@@ -58,9 +68,12 @@ class TestListInvestigations(TestCase):
             "metadata": {"index": 0, "size": 1, "total_data": 1, "total_pages": 1},
         }
         self.assertEqual(actual, expected)
+        validate(actual, ListInvestigationsOutput.schema)
 
     def test_list_attachments_bad(self, _mock_req):
+        test_input = {Input.INDEX: 0, Input.SIZE: 1, Input.STATUSES: ["OPEN"], Input.SOURCES: ["INVALID_SOURCE"]}
+        validate(test_input, ListInvestigationsInput.schema)
         with self.assertRaises(PluginException) as error:
-            self.action.run({Input.INDEX: 0, Input.SIZE: 1, Input.STATUSES: "OPEN", Input.SOURCES: ["INVALID_SOURCE"]})
+            self.action.run(test_input)
         self.assertEqual(error.exception.cause, PluginException.causes[PluginException.Preset.BAD_REQUEST])
         self.assertEqual(error.exception.assistance, PluginException.assistances[PluginException.Preset.BAD_REQUEST])

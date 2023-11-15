@@ -7,11 +7,16 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from komand_rapid7_insightidr.actions.update_investigation import UpdateInvestigation
-from komand_rapid7_insightidr.actions.update_investigation.schema import Input
+from komand_rapid7_insightidr.actions.update_investigation.schema import (
+    Input,
+    UpdateInvestigationInput,
+    UpdateInvestigationOutput,
+)
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
 from mock import mock_patch_request, STUB_INVESTIGATION_IDENTIFIER, STUB_USER_EMAIL
 from util import Util
+from jsonschema import validate
 
 
 class TestCreateInvestigation(TestCase):
@@ -33,9 +38,14 @@ class TestCreateInvestigation(TestCase):
 
     @patch("requests.Session.patch", side_effect=mock_patch_request)
     def test_update_investigations(self, _mock_req):
-        actual = self.action.run(
-            {Input.TITLE: "Example Title", Input.ID: STUB_INVESTIGATION_IDENTIFIER, Input.EMAIL: STUB_USER_EMAIL}
-        )
+        test_input = {
+            Input.TITLE: "Example Title",
+            Input.ID: STUB_INVESTIGATION_IDENTIFIER,
+            Input.EMAIL: STUB_USER_EMAIL,
+        }
+
+        validate(test_input, UpdateInvestigationInput.schema)
+        actual = self.action.run(test_input)
         expected = {
             "investigation": {
                 "assignee": {"email": "user@example.com", "name": "Ellen Example"},
@@ -53,3 +63,4 @@ class TestCreateInvestigation(TestCase):
             }
         }
         self.assertEqual(actual, expected)
+        validate(actual, UpdateInvestigationOutput.schema)

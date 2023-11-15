@@ -7,11 +7,16 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from komand_rapid7_insightidr.actions.set_disposition_of_investigation import SetDispositionOfInvestigation
-from komand_rapid7_insightidr.actions.set_disposition_of_investigation.schema import Input
+from komand_rapid7_insightidr.actions.set_disposition_of_investigation.schema import (
+    Input,
+    SetDispositionOfInvestigationInput,
+    SetDispositionOfInvestigationOutput,
+)
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
 from mock import mock_put_request, STUB_INVESTIGATION_IDENTIFIER, STUB_DISPOSITION
 from util import Util
+from jsonschema import validate
 
 
 class TestCreateInvestigation(TestCase):
@@ -33,7 +38,9 @@ class TestCreateInvestigation(TestCase):
 
     @patch("requests.Session.put", side_effect=mock_put_request)
     def test_set_disposition_of_investigation(self, _mock_req):
-        actual = self.action.run({Input.ID: STUB_INVESTIGATION_IDENTIFIER, Input.DISPOSITION: STUB_DISPOSITION})
+        test_input = {Input.ID: STUB_INVESTIGATION_IDENTIFIER, Input.DISPOSITION: STUB_DISPOSITION}
+        validate(test_input, SetDispositionOfInvestigationInput.schema)
+        actual = self.action.run(test_input)
         expected = {
             "investigation": {
                 "assignee": {"email": "user@example.com", "name": "Ellen Example"},
@@ -51,3 +58,4 @@ class TestCreateInvestigation(TestCase):
             }
         }
         self.assertEqual(actual, expected)
+        validate(actual, SetDispositionOfInvestigationOutput.schema)

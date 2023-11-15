@@ -106,9 +106,9 @@ class AdvancedQueryOnLogOutput(insightconnect_plugin_runtime.Output):
       "description": "Number of log entries found",
       "order": 3
     },
-    "results": {
+    "results_events": {
       "type": "array",
-      "title": "Query Results",
+      "title": "Query Results (Events)",
       "description": "Query Results",
       "items": {
         "$ref": "#/definitions/events"
