@@ -119,7 +119,7 @@ class GetMessageInChatOutput(insightconnect_plugin_runtime.Output):
           "order": 7
         },
         "eventDetail": {
-          "type": "string",
+          "type": "object",
           "title": "Event Detail",
           "description": "Represents details of an event that happened in a chat",
           "order": 8

@@ -193,6 +193,61 @@ Example output:
 }
 ```
 
+#### Create Teams Chat
+  
+Create a chat in Microsoft Teams
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|members|[]itemMember|None|True|A list of usernames to set as members|None|[{"user_info": "user@example.com", "role": "owner"}, {"user_info": "ab123bcd-123a-412a3-abc1-a123456b789c", "role": "owner"}]|
+|topic|string|None|False|Topic of chat to be added (only available for group chats)|None|example_topic|
+  
+Example input:
+
+```
+{
+  "members": [
+    {
+      "Role": "owner",
+      "User Info": "user@example.com"
+    },
+    {
+      "Role": "owner",
+      "User Info": "ab123bcd-123a-412a3-abc1-a123456b789c"
+    },
+    {
+      "Role": "owner",
+      "User Info": "cb123bcd-123a-412a3-abc1-a123456b789c"
+    }
+  ],
+  "topic": "example_topic"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|chat|itemChat|False|Information about the chat that was created|{'@odata.context': 'https://graph.microsoft.com/beta/$metadata#chats/$entity', 'chatType': 'group', 'createdDateTime': '2023-11-09T12:07:43.167Z', 'id': '12:a12345bc678d901e12345f67890g1234_thread.v2', 'lastUpdatedDateTime': '2023-11-09T12:07:43.167Z', 'tenantId': '1a234567-bc8d-9e01-23fg-4h567i8j9k01', 'webUrl': 'https://teams.microsoft.com/l/chat/12%3AA12345BC678D901E12345F67890G1234%40thread.v2/0tenantId=1a234567-bc8d-9e01-23fg-4h567i8j9k01'}|
+  
+Example output:
+
+```
+{
+  "chat": {
+    "@odata.context": "https://graph.microsoft.com/beta/$metadata#chats/$entity",
+    "chatType": "group",
+    "createdDateTime": "2023-11-09T12:07:43.167Z",
+    "id": "12:a12345bc678d901e12345f67890g1234_thread.v2",
+    "lastUpdatedDateTime": "2023-11-09T12:07:43.167Z",
+    "tenantId": "1a234567-bc8d-9e01-23fg-4h567i8j9k01",
+    "webUrl": "https://teams.microsoft.com/l/chat/12%3AA12345BC678D901E12345F67890G1234%40thread.v2/0tenantId=1a234567-bc8d-9e01-23fg-4h567i8j9k01"
+  }
+}
+```
+
 #### Create Teams Enabled Group
   
 Create a group in Azure and enable it for Microsoft Teams
@@ -540,6 +595,63 @@ Example output:
       "ID": {}
     }
   ]
+}
+```
+
+#### List Messages from a Chat
+  
+Retrieve up to the last 50 messages in a chat
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|chat_id|string|None|True|The ID of chat|None|11:examplechat.name|
+  
+Example input:
+
+```
+{
+  "chat_id": "11:examplechat.name"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|messages|[]chatMessage|False|The message object that was created|[{"attachments": [], "body": {"content": "Test message", "contentType": "text"}, "chatId": "12:a12345bc678d901e12345f67890g1234_thread.v2", "createdDateTime": "2023-11-08T10:38:18.048Z", "etag": "1234567890123", "from": {"user": {"@odata.type": "#microsoft.graph.teamworkUserIdentity", "displayName": "Test User", "id": "8a234567-bc8d-9e01-23fg-4h567i8j9k98", "tenantId": "1a234567-bc8d-9e01-23fg-4h567i8j9k01", "userIdentityType": "aadUser"}}, "id": "1234567890123", "importance": "normal", "lastModifiedDateTime": "2023-11-08T10:38:18.048Z", "locale": "en-us", "mentions": [], "messageType": "message", "reactions": []}]|
+  
+Example output:
+
+```
+{
+  "messages": {
+    "attachments": [],
+    "body": {
+      "content": "Test message",
+      "contentType": "text"
+    },
+    "chatId": "12:a12345bc678d901e12345f67890g1234_thread.v2",
+    "createdDateTime": "2023-11-08T10:38:18.048Z",
+    "etag": "1234567890123",
+    "from": {
+      "user": {
+        "@odata.type": "#microsoft.graph.teamworkUserIdentity",
+        "displayName": "Test User",
+        "id": "8a234567-bc8d-9e01-23fg-4h567i8j9k98",
+        "tenantId": "1a234567-bc8d-9e01-23fg-4h567i8j9k01",
+        "userIdentityType": "aadUser"
+      }
+    },
+    "id": "1234567890123",
+    "importance": "normal",
+    "lastModifiedDateTime": "2023-11-08T10:38:18.048Z",
+    "locale": "en-us",
+    "mentions": [],
+    "messageType": "message",
+    "reactions": []
+  }
 }
 ```
 
@@ -1004,7 +1116,7 @@ Example output:
 |Created Date Time|string|None|False|Created date time|None|
 |Deleted Date Time|string|None|False|Deleted date time|None|
 |Etag|string|None|False|Version number of the chat message|None|
-|Event Detail|string|None|False|Represents details of an event that happened in a chat|None|
+|Event Detail|object|None|False|Represents details of an event that happened in a chat|None|
 |From|from|None|False|Details of the sender of the chat message|None|
 |ID|string|None|False|Unique ID of the message|None|
 |Importance|string|None|False|The importance of the chat message|None|
@@ -1020,6 +1132,25 @@ Example output:
 |Subject|string|None|False|The subject of the chat message, in plaintext|None|
 |Summary|string|None|False|Summary text of the chat message that could be used for push notifications and summary views or fall back views|None|
 |Web URL|string|None|False|Link to the message in Microsoft Teams|None|
+  
+**itemMember**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Role|string|None|True|The role of the user to be added to the chat|None|
+|User Info|string|None|True|The ID or Email address|None|
+  
+**itemChat**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Data Context|string|None|False|The context of the newly created chat|None|
+|Chat Type|string|None|False|The type of the newly created chat|None|
+|Created Date Time|string|None|False|Created date time|None|
+|Chat ID|string|None|False|The ID of the newly created chat|None|
+|Last Updated Date Time|string|None|False|Last updated date time|None|
+|Tenant ID|string|None|False|The ID the directory that he newly created chat is in|None|
+|Web URL|string|None|False|The URL of the newly created chat|None|
 
 
 ## Troubleshooting
@@ -1028,6 +1159,7 @@ If there is more than one team with the same name in your organization, the olde
 
 # Version History
 
+* 6.0.0 - New actions: `create_teams_chat` | `list_messages_in_chat` | update type of `Event Detail` to type object 
 * 5.1.0 - New actions: Get Reply List | Improve typing on message
 * 5.0.0 - New actions: Get Message in Chat, Get Message in Channel | Update to latest SDK version | Change required fields in message schema
 * 4.2.0 - New Message Received: Fixed issue where `font-size` value appeared in the `urls`, and `domains` output fields | Can choose the role of a member when adding them to a channel | Fix bug where case-sensitive URLs were returned in lower case | Improved reliability of domains output value

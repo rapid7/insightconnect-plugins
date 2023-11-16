@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import sys
+import requests
 
 sys.path.append(os.path.abspath("../"))
 
@@ -53,7 +54,15 @@ class Util:
                 return Util.load_data(self.filename)
 
             def raise_for_status(self):
-                return
+                if self.filename in [
+                    "response_invalid_group_create_teams_chat",
+                    "response_invalid_list_messages_in_chat_bad_json",
+                ]:
+                    raise ValueError("error")
+                if self.filename in ["response_invalid_list_messages_in_chat"]:
+                    raise requests.HTTPError()
+                else:
+                    return
 
         if (
             args[0]
@@ -90,4 +99,20 @@ class Util:
             return MockResponse("get_message_in_chat", 200)
         if args[0] == "https://graph.microsoft.com/beta/1/teams/12345/channels/56789/messages/1234567890/replies":
             return MockResponse("get_reply_list", 200)
+        if args[0] == "https://graph.microsoft.com/beta/1/chats/valid_chat_id/messages/":
+            return MockResponse("response_valid_list_messages_in_chat", 200)
+        if args[0] == "https://graph.microsoft.com/beta/1/chats/invalid_chat_id_bad_rquest/messages/":
+            return MockResponse("response_invalid_list_messages_in_chat", 400)
+        if args[0] == "https://graph.microsoft.com/beta/1/chats/invalid_chat_id_empty_json/messages/":
+            return MockResponse("response_invalid_list_messages_in_chat_bad_json", 200)
+
+        if args[0] == "https://graph.microsoft.com/beta/chats/":
+            if kwargs.get("json", {}).get("chatType", "") == "oneOnOne":
+                return MockResponse("response_valid_oneonone_create_teams_chat", 201)
+            elif kwargs.get("json", {}).get("chatType", "") == "group":
+                if "500" in kwargs.get("json", {}).get("members", [])[0].get("user@odata.bind", ""):
+                    return MockResponse("response_invalid_group_create_teams_chat", 500)
+                else:
+                    return MockResponse("response_valid_group_create_teams_chat", 201)
+
         raise Exception("Not implemented")
