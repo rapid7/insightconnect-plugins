@@ -31,3 +31,8 @@ from .get_message_in_channel.action import GetMessageInChannel
 from .get_message_in_chat.action import GetMessageInChat
 
 from .get_reply_list.action import GetReplyList
+
+from .list_messages_in_chat.action import ListMessagesInChat
+
+from .create_teams_chat.action import CreateTeamsChat
+

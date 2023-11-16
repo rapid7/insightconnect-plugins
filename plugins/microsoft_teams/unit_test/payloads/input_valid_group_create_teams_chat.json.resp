@@ -1,0 +1,17 @@
+{
+    "members":
+        [
+            {
+                "user_info": "test@example.com",
+                "role": "owner"
+            },
+            {
+                "user_info": "ac785ffe-530a-45a1-bbf4-e275457e464b",
+                "role": "owner"
+            },
+            {
+                "user_info": "dhdjdkjd-530a-45a1-bbf4-e275457e464b",
+                "role": "owner"
+            }
+        ]
+}

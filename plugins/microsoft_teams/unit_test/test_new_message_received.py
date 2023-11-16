@@ -23,6 +23,7 @@ GET_INDICATORS_RESPONSE = {
     "uuids": [],
 }
 
+
 # Get a real payload from file
 def read_file_to_string(filename):
     with open(filename) as my_file:

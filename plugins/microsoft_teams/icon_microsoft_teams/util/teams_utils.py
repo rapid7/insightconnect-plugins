@@ -227,6 +227,56 @@ def send_html_message(
     return message
 
 
+def create_chat(connection: insightconnect_plugin_runtime.connection, members: list, topic: str) -> dict:
+    """
+    Creates a chat for given users
+
+    :param connection: Object (insightconnect_plugin_runtime.connection)
+    :param members: list
+    :return: dict
+    """
+
+    create_chat_endpoint = "https://graph.microsoft.com/beta/chats/"
+    create_chat_payload = {}
+
+    list_members = []
+    for member in members:
+        formatted_member = {
+            "@odata.type": "#microsoft.graph.aadUserConversationMember",
+            "roles": [f"{member.get('role')}"],
+            "user@odata.bind": f"https://graph.microsoft.com/v1.0/users('{member.get('user_info')}')",
+        }
+        list_members.append(formatted_member)
+
+    if len(list_members) == 2:
+        create_chat_payload["chatType"] = "oneOnOne"
+    elif len(list_members) > 2:
+        create_chat_payload["chatType"] = "group"
+        if topic:
+            create_chat_payload["topic"] = topic
+    else:
+        raise PluginException(cause="Create chat failed.", assistance="Less than 2 valid members were provided")
+
+    create_chat_payload["members"] = list_members
+
+    headers = connection.get_headers()
+
+    result = requests.post(create_chat_endpoint, json=create_chat_payload, headers=headers)  # nosec B113
+
+    try:
+        result.raise_for_status()
+    except Exception as error:
+        raise PluginException(cause="Create chat failed.", assistance=result.text, data=error) from error
+
+    if not result.status_code == 201:
+        raise PluginException(cause="Create channel returned an unexpected result.", assistance=result.text)
+
+    try:
+        return result.json()
+    except Exception as error:
+        raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
+
+
 def create_channel(
     logger: Logger,
     connection: insightconnect_plugin_runtime.connection,
@@ -349,6 +399,38 @@ def get_message_from_chat(  # noqa: C901
     except Exception as error:
         raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
     return remove_null_and_clean(message)
+
+
+def list_messages_from_chat(connection: insightconnect_plugin_runtime.connection, chat_id: str) -> list:  # noqa: C901
+    """
+    Lists the last 50 messages from a teams chat
+
+    :param connection: Object (insightconnect_plugin_runtime.connection)
+    :param chat_id: String
+    :return: list
+    """
+
+    params = {"$top": 50, "$orderby": "createdDateTime desc"}
+    message_url = f"https://graph.microsoft.com/beta/{connection.tenant_id}/chats/{chat_id}/messages/"
+    headers = connection.get_headers()
+    response = requests.get(message_url, headers=headers, params=params)  # nosec B113
+
+    try:
+        response.raise_for_status()
+        messages = response.json().get("value", [])
+    except requests.HTTPError as http_error:
+        raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=http_error)
+    except ValueError as value_error:
+        raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=value_error)
+    except Exception as error:
+        raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+
+    clean_messages = []
+
+    for message in messages:
+        clean_messages.append(clean(message))
+
+    return clean_messages
 
 
 def get_reply_list(  # noqa: C901

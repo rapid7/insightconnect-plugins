@@ -4,7 +4,7 @@ products: [insightconnect]
 name: microsoft_teams
 title: Microsoft Teams
 description: The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users
-version: 5.1.0
+version: 6.0.0
 supported_versions: ["Microsoft Graph API v1.0 2021-11-28"]
 vendor: rapid7
 support: community
@@ -330,7 +330,7 @@ types:
         required: false
       eventDetail:
         title: "Event Detail"
-        type: string
+        type: object
         description: "Represents details of an event that happened in a chat"
         required: false
       from:
@@ -408,7 +408,61 @@ types:
         type: string
         description: "Link to the message in Microsoft Teams"
         required: false
-
+  itemMember:
+    user_info:
+      title: User Info
+      type: string
+      description: The ID or Email address
+      required: true
+    role:
+      title: Role
+      type: string
+      description: The role of the user to be added to the chat
+      required: true
+      enum:
+        - owner
+        - guest
+  itemChat:
+    "@odata.context":
+      title: Data Context
+      type: string
+      description: The context of the newly created chat
+      required: false
+    chatType:
+      title: Chat Type
+      type: string
+      description: The type of the newly created chat
+      required: false
+    createdDateTime:
+      title: Created Date Time
+      type: string
+      description: Created date time
+      required: false
+    id:
+      title: Chat ID
+      type: string
+      description: The ID of the newly created chat
+      required: false
+    lastUpdatedDateTime:
+      title: Last Updated Date Time
+      type: string
+      description: Last updated date time
+      required: false
+    chatType:
+      title: Chat Type
+      type: string
+      description: The type of the newly created chat
+      required: false 
+    tenantId:
+      title: Tenant ID
+      type: string
+      description: The ID the directory that he newly created chat is in
+      required: false
+    webUrl:
+      title: Web URL
+      type: string
+      description: The URL of the newly created chat
+      required: false
 connection:
   application_id:
     title: Application ID
@@ -985,3 +1039,43 @@ actions:
         description: The message object that was created
         type: "[]chatMessage"
         required: false
+  list_messages_in_chat:
+    title: List Messages from a Chat
+    description: Retrieve up to the last 50 messages in a chat
+    input:
+      chat_id:
+        title: Chat ID
+        description: The ID of chat
+        type: string
+        required: true
+        example: 11:examplechat.name
+    output:
+      messages:
+        title: Message
+        description: The message object that was created
+        type: "[]chatMessage"
+        required: false
+        example: [{"attachments": [],"body": {"content": "Test message","contentType": "text"},"chatId": "12:a12345bc678d901e12345f67890g1234_thread.v2","createdDateTime": "2023-11-08T10:38:18.048Z","etag": "1234567890123","from": {"user": {"@odata.type": "#microsoft.graph.teamworkUserIdentity","displayName": "Test User","id": "8a234567-bc8d-9e01-23fg-4h567i8j9k98","tenantId": "1a234567-bc8d-9e01-23fg-4h567i8j9k01","userIdentityType": "aadUser"}},"id": "1234567890123","importance": "normal","lastModifiedDateTime": "2023-11-08T10:38:18.048Z","locale": "en-us","mentions": [],"messageType": "message","reactions": []}]
+  create_teams_chat:
+    title: Create Teams Chat
+    description: Create a chat in Microsoft Teams
+    input:
+      topic:
+        title: Group Topic
+        description: Topic of chat to be added (only available for group chats)
+        type: string
+        required: false
+        example: example_topic
+      members:
+        title: Members
+        description: A list of usernames to set as members
+        type: "[]itemMember"
+        required: true
+        example: [{"user_info": "user@example.com","role": "owner"},{"user_info": "ab123bcd-123a-412a3-abc1-a123456b789c","role": "owner"}]
+    output:
+      chat:
+        title: Chat
+        description: Information about the chat that was created
+        type: itemChat
+        required: false
+        example: {"@odata.context": "https://graph.microsoft.com/beta/$metadata#chats/$entity","chatType": "group","createdDateTime": "2023-11-09T12:07:43.167Z","id": "12:a12345bc678d901e12345f67890g1234_thread.v2","lastUpdatedDateTime": "2023-11-09T12:07:43.167Z","tenantId": "1a234567-bc8d-9e01-23fg-4h567i8j9k01","webUrl": "https://teams.microsoft.com/l/chat/12%3AA12345BC678D901E12345F67890G1234%40thread.v2/0tenantId=1a234567-bc8d-9e01-23fg-4h567i8j9k01"}
