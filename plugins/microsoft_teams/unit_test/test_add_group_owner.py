@@ -6,8 +6,9 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase, mock
 
 from icon_microsoft_teams.actions.add_group_owner.action import AddGroupOwner
-from icon_microsoft_teams.actions.add_group_owner.schema import Input
+from icon_microsoft_teams.actions.add_group_owner.schema import Input, AddGroupOwnerInput, AddGroupOwnerOutput
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 from util import Util
 
@@ -26,6 +27,8 @@ class TestAddGroupOwner(TestCase):
     @mock.patch("requests.get", side_effect=Util.mocked_requests)
     @mock.patch("requests.post", side_effect=Util.mocked_requests)
     def test_add_group_owner(self, mock_requests_get, mock_requests_post) -> None:
+        validate(self.payload, AddGroupOwnerInput.schema)
         response = self.action.run(self.payload)
         expected_response = STUB_EXAMPLE_ACTION_RESPONSE
         self.assertEqual(response, expected_response)
+        validate(response, AddGroupOwnerOutput.schema)

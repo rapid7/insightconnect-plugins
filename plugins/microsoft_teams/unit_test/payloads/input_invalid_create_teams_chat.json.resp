@@ -1,0 +1,9 @@
+{
+    "members":
+        [
+            {
+                "user_info": "test@example.com",
+                "role": "owner"
+            }
+        ]
+}
