@@ -32,9 +32,8 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         risk_score = params.get(Input.RISK_SCORE)
         site_id = params.get(Input.SITE_ID, None)
 
-        scan_id = 3
         start_time = time.time()
-        print(self.get_results_from_query(scan_id))
+        print(self.get_results_from_query())
         end_time = time.time()
         print(f"Total Time: {(end_time - start_time) // 60} Minutes")
         # self.send(
@@ -47,20 +46,22 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         # )
 
     @staticmethod
-    def query_results(scan_id: int):
+    def query_results(scan_id: int = 3):
         return (
-            f"SELECT fasvi.scan_id, fasvi.asset_id, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id, ds.finished "
-            f"FROM fact_asset_scan_vulnerability_instance fasvi "
+            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.status_id, daga.asset_group_id, dsa.site_id, dvr.source, dvr.reference, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id, dv.riskscore "
+            f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
             f"JOIN dim_asset da ON (fasvi.asset_id = da.asset_id) "
+            f"JOIN dim_site_asset dsa ON(fasvi.asset_id = dsa.asset_id) "
+            f"JOIN dim_asset_group_asset daga ON (fasvi.asset_id = daga.asset_id) "
             f"JOIN dim_vulnerability dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
+            f"JOIN dim_vulnerability_reference dvr ON (fasvi.vulnerability_id = fasvi.vulnerability_id) "
             f"JOIN dim_solution dss ON (dv.nexpose_id = dss.nexpose_id) "
             f"JOIN dim_scan ds ON (fasvi.scan_id = ds.scan_id) "
             f"WHERE fasvi.scan_id = {scan_id} "
-            f"GROUP BY fasvi.scan_id, fasvi.asset_id, dv.nexpose_id, da.host_name, da.ip_address, dss.solution_id, dss.summary, ds.finished "
-            f"ORDER BY ds.finished DESC;"
+            f"AND fasvi.status_id = 'C' "
         )
 
-    def get_results_from_query(self, scan_id: int) -> List[Dict[str, Union[str, int]]]:
+    def get_results_from_query(self) -> List[Dict[str, Union[str, int]]]:
         """
         Take a scan id and run a sql query to retrieve the
         information needed for the trigger output
@@ -74,7 +75,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         report_payload = {
             "name": f"Rapid7-InsightConnect-ScanCompletion-{identifier}",
             "format": "sql-query",
-            "query": ScanCompletion.query_results(scan_id),
+            "query": ScanCompletion.query_results(),
             "version": "2.3.0",
         }
 
@@ -92,32 +93,57 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         scan_info = []
 
         for row in csv_report:
-            asset = {
-                "scan_id": int(row['scan_id']),
+            print(row)
+            # We don't need to pull back status_id because we only used it to filter completed scans
+
+            # This is where we need to handle input filtering.
+            # Luckily each row is an object so working with it should be easy.
+            # If key, value != input, do not append row to output.
+            inputs = {
+                "asset_group_id": int(row['asset_group_id']),
+                "site_id": row['source'],
+                "hostname": row['host_name'],
+                "ip": row['ip_address'],
+                "risk_score": float(row['riskscore']),
+                "cve": row['reference'],
+                "source": row['source']
+            }
+
+            outputs = {
                 "asset_id": int(row['asset_id']),
                 "hostname": row["host_name"],
                 "ip_address": row["ip_address"],
+                "vulnerability_id": row["vulnerability_id"],
                 "nexpose_id": row["nexpose_id"],
                 "solution_id": row["solution_id"],
                 "solution_summary": row["summary"],
             }
-            scan_info.append(asset)
+            scan_info.append(outputs)
 
+        # We need to combine the last 3 fields into each to reduce number of entries rather than separate
+        # elements for everything.
         return scan_info
 
     @staticmethod
-    def filter_results(asset_group: int, cve: str, hostname: str, source: str, ip_address: str, risk_score: float, site_id: str, csv_results: list):
+    def filter_results(params: dict, csv_results: dict):
         # Return as normal if no inputs detected
-        if not asset_group and cve and hostname and source and ip_address and risk_score and site_id:
+        if not params:
             return csv_results
 
-        filtered_results = []
 
-        #
-        for row in csv_results:
-            for values in row.values():
+    @staticmethod
+    def condense_results(results: list):
+        """
+        Helper method to condense vulnerability info into a nested object for the 'vulnerability info' key
+        within the original objects.
+        """
+        merge_keys = ('scan_id', 'asset_id', 'ip_address', 'hostname')
+        dct = {}
 
-
+        for element in results:
+            key = [element[k] for k in merge_keys]
+            partial_el = {k: v for k, v in element.items() if k not in merge_keys}
+            dct.setdefault(key, []).append(partial_el)
 
     @staticmethod
     def strip_msft_id(solution_id: str) -> str:
