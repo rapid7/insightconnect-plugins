@@ -58,7 +58,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             f"JOIN dim_solution dss ON (dv.nexpose_id = dss.nexpose_id) "
             f"JOIN dim_scan ds ON (fasvi.scan_id = ds.scan_id) "
             f"WHERE fasvi.scan_id = {scan_id} "
-            f"AND fasvi.status_id = 'C' "
+            f"AND ds.status_id = 'C' "
         )
 
     def get_results_from_query(self) -> List[Dict[str, Union[str, int]]]:
