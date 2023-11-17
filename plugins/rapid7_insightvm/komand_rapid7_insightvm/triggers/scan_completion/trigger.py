@@ -1,9 +1,8 @@
 import insightconnect_plugin_runtime
 import time
-from .schema import ScanCompletionInput, ScanCompletionOutput, Input, Output, Component
+from .schema import ScanCompletionInput, ScanCompletionOutput, Input, Component
 
 # Custom imports below
-from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 import uuid
 from komand_rapid7_insightvm.util import util
 import csv
@@ -39,17 +38,18 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
     @staticmethod
     def query_results(scan_id: int = 3):
         return (
-            f"SELECT fasvi.scan_id, fasvi.asset_id, ds.status_id, daga.asset_group_id, dsa.site_id, dvr.source, dvr.reference, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id, dv.riskscore "
+            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, ds.status_id, daga.asset_group_id, dsa.site_id, dvr.source, dvr.reference, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id, dv.riskscore "
             f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
             f"JOIN dim_asset da ON (fasvi.asset_id = da.asset_id) "
             f"JOIN dim_site_asset dsa ON(fasvi.asset_id = dsa.asset_id) "
             f"JOIN dim_asset_group_asset daga ON (fasvi.asset_id = daga.asset_id) "
             f"JOIN dim_vulnerability dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
-            f"JOIN dim_vulnerability_reference dvr ON (fasvi.vulnerability_id = fasvi.vulnerability_id) "
+            f"JOIN dim_vulnerability_reference dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) "
             f"JOIN dim_solution dss ON (dv.nexpose_id = dss.nexpose_id) "
             f"JOIN dim_scan ds ON (fasvi.scan_id = ds.scan_id) "
             f"WHERE fasvi.scan_id = {scan_id} "
             f"AND ds.status_id = 'C' "
+            f"LIMIT 10 "
         )
 
     def get_results_from_query(self, params: dict) -> List[Dict[str, Union[str, int]]]:
@@ -86,7 +86,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             print(row)
             self.filter_results(params=params, csv_row=row, results=results)
 
-        self.condense_results(results)
+        # self.condense_results(results)
         return results
 
     @staticmethod
@@ -111,32 +111,32 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         site_id = params.get(Input.SITE_ID, None)
 
         new_dct = {
-                "asset_id": int(csv_row["asset_id"]),
-                "ip_address": csv_row["ip_address"],
-                "vulnerability_id": csv_row["vulnerability_id"],
-                "nexpose_id": csv_row["nexpose_id"],
-                "solution_id": csv_row["solution_id"],
-                "solution_summary": csv_row["summary"],
-            }
+            "asset_id": int(csv_row["asset_id"]),
+            "ip_address": csv_row["ip_address"],
+            "vulnerability_id": csv_row["vulnerability_id"],
+            "nexpose_id": csv_row["nexpose_id"],
+            "solution_id": csv_row["solution_id"],
+            "solution_summary": csv_row["summary"],
+        }
 
         # Return as normal if no inputs detected
         if not params:
             results.append(new_dct)
 
         else:
-            if asset_group and asset_group == csv_row['asset_group_id']:
+            if asset_group and asset_group == csv_row["asset_group_id"]:
                 results.append(new_dct)
-            if cve and cve == csv_row['reference']:
+            if cve and cve == csv_row["reference"]:
                 results.append(new_dct)
-            if hostname and hostname == csv_row['host_name']:
+            if hostname and hostname == csv_row["host_name"]:
                 results.append(new_dct)
-            if source and source == csv_row['source']:
+            if source and source == csv_row["source"]:
                 results.append(new_dct)
-            if ip_address and ip_address == csv_row['ip_address']:
+            if ip_address and ip_address == csv_row["ip_address"]:
                 results.append(new_dct)
-            if risk_score and risk_score == csv_row['riskscore']:
+            if risk_score and risk_score == csv_row["riskscore"]:
                 results.append(new_dct)
-            if site_id and site_id == csv_row['site_id']:
+            if site_id and site_id == csv_row["site_id"]:
                 results.append(new_dct)
 
         return results
@@ -152,7 +152,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
         :return:
         """
-        
+
         merge_keys = ("scan_id", "asset_id", "ip_address", "hostname")
         dct = {}
 
