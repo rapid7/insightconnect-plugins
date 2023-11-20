@@ -14,7 +14,7 @@ reports to distribute workflow details.
 # Supported Product Versions
   
 * Pillow 10.1.0  
-* WeasyPrint==52.5
+* fpdf2==2.7.6
 
 # Documentation
 
@@ -75,13 +75,14 @@ Example output:
 
 # Version History
 
+* 1.0.3 - Change library to generate PDF
 * 1.0.2 - Update plugin runtime to InsightConnect | Add unit tests | Updated all dependencies to the newest versions
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
 # Links
 
-[Weasyprint](https://doc.courtbouillon.org/weasyprint/stable/)
+[PyPDF2](https://pypdf2.readthedocs.io/)
 
 ## References
 

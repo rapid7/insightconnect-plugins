@@ -4,8 +4,8 @@ products: [insightconnect]
 name: pdf_generator
 title: PDF Generator
 description: Create PDF reports from workflow data
-version: 1.0.2
-supported_versions: ["Pillow 10.1.0", "WeasyPrint==52.5"]
+version: 1.0.3
+supported_versions: ["Pillow 10.1.0", "fpdf2==2.7.6"]
 vendor: rapid7
 support: community
 sdk:
