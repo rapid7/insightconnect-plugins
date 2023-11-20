@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 import time
-from .schema import ScanCompletionInput, ScanCompletionOutput, Input, Component
+from .schema import ScanCompletionInput, ScanCompletionOutput, Input, Output, Component
 
 # Custom imports below
 import uuid
@@ -23,17 +23,19 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
     def run(self, params={}):
         # END INPUT BINDING - DO NOT REMOVE
         start_time = time.time()
-        print(self.get_results_from_query(params=params))
+        results = self.get_results_from_query(params=params)
         end_time = time.time()
         print(f"Total Time: {(end_time - start_time) // 60} Minutes")
-        # self.send(
-        #     {
-        #         Output.ASSET_ID: results.get("asset_id"),
-        #         Output.IP: results.get("ip_address"),
-        #         Output.HOSTNAME: results.get("hostname"),
-        #         Output.VULNERABILITY_INFO: results.get("vulnerability_info"),
-        #     }
-        # )
+
+        for item in results:
+            self.send(
+                {
+                    Output.ASSET_ID: item.get("asset_id"),
+                    Output.IP: item.get("ip_address"),
+                    Output.HOSTNAME: item.get("hostname"),
+                    Output.VULNERABILITY_INFO: item.get("vulnerability_info"),
+                }
+            )
 
     @staticmethod
     def query_results(scan_id: int = 3):
@@ -84,20 +86,22 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
         for row in csv_report:
             print(row)
-            self.filter_results(params=params, csv_row=row, results=results)
+            new_row = self.filter_results(params, row)
+            if new_row:
+                results.append(new_row)
 
+        print(f"Results before condense: {results}")
         results = self.condense_results(results)
-
+        print(f"Results after condense: {results}")
         return results
 
     @staticmethod
-    def filter_results(params: dict, csv_row: dict, results: list):
+    def filter_results(params: dict, csv_row: dict):
         """
         Filter the outputted results based on the user inputs.
 
         :param params:
         :param csv_row:
-        :param results:
 
         :return:
         """
@@ -122,26 +126,22 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         }
 
         # Return as normal if no inputs detected
-        if not params:
-            results.append(new_dct)
-
+        if asset_group and asset_group not in csv_row["asset_group_id"]:
+            return None
+        if cve and cve not in csv_row["reference"]:
+            return None
+        if hostname and hostname not in csv_row["host_name"]:
+            return None
+        if source and source not in csv_row["source"]:
+            return None
+        if ip_address and ip_address not in csv_row["ip_address"]:
+            return None
+        if risk_score != 0 and risk_score not in csv_row["riskscore"]:
+            return None
+        if site_id and site_id not in csv_row["site_id"]:
+            return None
         else:
-            if asset_group and asset_group == csv_row["asset_group_id"]:
-                results.append(new_dct)
-            if cve and cve == csv_row["reference"]:
-                results.append(new_dct)
-            if hostname and hostname == csv_row["host_name"]:
-                results.append(new_dct)
-            if source and source == csv_row["source"]:
-                results.append(new_dct)
-            if ip_address and ip_address == csv_row["ip_address"]:
-                results.append(new_dct)
-            if risk_score and risk_score == csv_row["riskscore"]:
-                results.append(new_dct)
-            if site_id and site_id == csv_row["site_id"]:
-                results.append(new_dct)
-
-        return results
+            return new_dct
 
     @staticmethod
     def condense_results(results: list):
