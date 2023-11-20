@@ -86,7 +86,8 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             print(row)
             self.filter_results(params=params, csv_row=row, results=results)
 
-        # self.condense_results(results)
+        results = self.condense_results(results)
+
         return results
 
     @staticmethod
@@ -113,6 +114,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         new_dct = {
             "asset_id": int(csv_row["asset_id"]),
             "ip_address": csv_row["ip_address"],
+            "hostname": csv_row["host_name"],
             "vulnerability_id": csv_row["vulnerability_id"],
             "nexpose_id": csv_row["nexpose_id"],
             "solution_id": csv_row["solution_id"],
@@ -144,7 +146,6 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
     @staticmethod
     def condense_results(results: list):
         """
-        TODO
         Helper method to condense vulnerability info into a nested object for the 'vulnerability info' key
         within the original objects.
 
@@ -153,13 +154,21 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         :return:
         """
 
-        merge_keys = ("scan_id", "asset_id", "ip_address", "hostname")
+        merge_keys = ("asset_id", "ip_address", "hostname")
         dct = {}
+        new_results = []
 
-        for element in results:
-            key = [element[k] for k in merge_keys]
-            partial_el = {k: v for k, v in element.items() if k not in merge_keys}
+        for el in results:
+            key = tuple([el[k] for k in merge_keys])
+            partial_el = {k: v for k, v in el.items() if k not in merge_keys}
             dct.setdefault(key, []).append(partial_el)
+
+        for key, value in dct.items():
+            entry = {k: v for (k, v) in zip(merge_keys, key)}
+            entry["vuln_info"] = value
+            new_results.append(entry)
+
+        return new_results
 
     @staticmethod
     def strip_msft_id(solution_id: str) -> str:
