@@ -1,31 +1,31 @@
 {
-	"spec": "36cd27807ed9505b0fd9d389bc8b50e2",
+	"spec": "a08b2fe669cda4852e9518a47ad56982",
 	"manifest": "cb9f2a0c6812a8be74169c3220a7ba57",
 	"setup": "60de923a251f440cf982a23c7e3775bc",
 	"schemas": [
 		{
 			"identifier": "create_distribution_plot/schema.py",
-			"hash": "abbd8bf8c932fb795dc4139191eb880b"
+			"hash": "792f65b33c8a1df87d91b2d428cab53d"
 		},
 		{
 			"identifier": "create_joint_plot/schema.py",
-			"hash": "152265a25e621cb7951b86ae7c2d1bef"
+			"hash": "fc600281960a69cd96a77a88a2611035"
 		},
 		{
 			"identifier": "create_line_plot/schema.py",
-			"hash": "0f2c6bf8d0e2ba459375fd9d23994a4a"
+			"hash": "4936aa1cbf635ac563280326e103ca4a"
 		},
 		{
 			"identifier": "create_pair_plot/schema.py",
-			"hash": "90a2e0512367ec4a1a65ff3e11b258f1"
+			"hash": "a6f7ae17608cdea4e4c956af0c0a0aa4"
 		},
 		{
 			"identifier": "create_scatter_plot/schema.py",
-			"hash": "62e883a803fe647be01294f896a8220b"
+			"hash": "ed4cf35a1ab1f9ce62ad4246c48235be"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "da5382221ca2a33a2f854e17b068d502"
+			"hash": "9d48eac9e9c489dbd77132ce1378f009"
 		}
 	]
 }
