@@ -10,6 +10,8 @@ import io
 import json
 from typing import List, Union, Dict
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
+from komand_rapid7_insightvm.util import endpoints
 
 
 class ScanCompletion(insightconnect_plugin_runtime.Trigger):
@@ -22,32 +24,42 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         )
 
     def run(self, params={}):
-        # Initialize trigger cache at startup
-        self.logger.info("Initialising trigger cache")
-        site_scans = ScanQueries.query_latest_scan(params.get(Input.SITE_ID))
-
-        # Track scan ids
-        track_site_scans = Cache.get_track_site_scans(site_scans)
-
         # Write scan_id to cache
-        util.write_to_cache(Cache.CACHE_FILE_NAME, json.dumps(track_site_scans))
+        self.logger.info("Getting latest scan..")
+        latest_scan_id = self.find_latest_scan()
+        print(f"line 30 hit")
+
+        # Initialize trigger cache at startup
+        self.logger.info("Initialising trigger cache..")
+        util.write_to_cache(Cache.CACHE_FILE_NAME, json.dumps(latest_scan_id))
+        print(f"write to cache hit")
+        print(f"cache file: {Cache.CACHE_FILE_NAME}")
+        print(f"cache file contents: {json.loads(Cache.CACHE_FILE_NAME)}")
 
         while True:
+            print(f"while True hit")
+            # Open cache
+            cache_site_scans = Cache.get_cache_site_scans(self)
+            print(f"Open cache hit")
+
+            # Check if latest is in cache
+            if latest_scan_id in cache_site_scans:
+                continue
+
             start_time = time.time()
-            results = self.get_results_from_latest_scan(params=params, scan_id=3)
+            results = self.get_results_from_latest_scan(params=params, scan_id=int(latest_scan_id))
             end_time = time.time()
             print(f"Total Time: {(end_time - start_time) // 60} Minutes")
 
             for item in results:
-                while item:
-                    self.send(
-                        {
-                            Output.ASSET_ID: item.get("asset_id"),
-                            Output.IP: item.get("ip_address"),
-                            Output.HOSTNAME: item.get("hostname"),
-                            Output.VULNERABILITY_INFO: item.get("vuln_info"),
-                        }
-                    )
+                self.send(
+                    {
+                        Output.ASSET_ID: item.get("asset_id"),
+                        Output.IP: item.get("ip_address"),
+                        Output.HOSTNAME: item.get("hostname"),
+                        Output.VULNERABILITY_INFO: item.get("vuln_info"),
+                    }
+                )
 
     def get_results_from_latest_scan(self, params: dict, scan_id) -> List[Dict[str, Union[str, int]]]:
         """
@@ -88,23 +100,17 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         results = self.condense_results(results)
         return results
 
+    def find_latest_scan(self):
+        # Use API call for speed.
+        # Super simple get the latest scan ID
+        endpoint = endpoints.Scan.scans(self.connection.console_url)
+        response = ResourceRequests.resource_request(self, endpoint)
+        latest_scan_id = response.get('resources')[0].get('id')
+        print(f"Latest scan ID in method: {latest_scan_id}")
+        return latest_scan_id
+
 
 class ScanQueries:
-    @staticmethod
-    def query_latest_scan(site_id=None):
-        if not site_id:
-            return f"SELECT ds.scan_id " f"FROM dim_scan AS ds " f"ORDER BY ds.scan_id DESC " f"LIMIT 2 "
-        else:
-            return (
-                f"SELECT ds.scan_id, dsscan.site_id "
-                f"FROM dim_scan AS ds "
-                f"JOIN dim_site_scan AS dsscan ON dsscan.scan_id = ds.scan_id "
-                f"JOIN dim_site AS dsite ON dsite.site_id = dsscan.site_id  "
-                f"WHERE dsite.site_id = {site_id} "
-                f"ORDER BY ds.scan_id DESC "
-                f"LIMIT 2 "
-            )
-
     @staticmethod
     def query_results_from_latest_scan(scan_id):
         return (
@@ -131,13 +137,6 @@ class Cache:
             return json.loads(util.read_from_cache(self.CACHE_FILE_NAME))
         except ValueError as error:
             raise PluginException(cause="Failed to load cache file", assistance=f"Exception returned was {error}")
-
-    @staticmethod
-    def get_track_site_scans(site_scans: dict) -> dict:
-        track_site_scans = {}
-        for site_id, scan_details in site_scans.items():
-            track_site_scans[site_id] = [scan["scan_id"] for scan in scan_details]
-        return track_site_scans
 
 
 class Util:
