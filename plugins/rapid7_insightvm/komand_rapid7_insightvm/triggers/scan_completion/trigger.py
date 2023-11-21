@@ -7,6 +7,7 @@ import uuid
 from komand_rapid7_insightvm.util import util
 import csv
 import io
+import json
 from typing import List, Union, Dict
 from insightconnect_plugin_runtime.exceptions import PluginException
 
@@ -21,40 +22,34 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         )
 
     def run(self, params={}):
-        # END INPUT BINDING - DO NOT REMOVE
-        start_time = time.time()
-        results = self.get_results_from_query(params=params)
-        end_time = time.time()
-        print(f"Total Time: {(end_time - start_time) // 60} Minutes")
+        # Initialize trigger cache at startup
+        self.logger.info("Initialising trigger cache")
+        site_scans = ScanQueries.query_latest_scan(params.get(Input.SITE_ID))
 
-        for item in results:
-            self.send(
-                {
-                    Output.ASSET_ID: item.get("asset_id"),
-                    Output.IP: item.get("ip_address"),
-                    Output.HOSTNAME: item.get("hostname"),
-                    Output.VULNERABILITY_INFO: item.get("vulnerability_info"),
-                }
-            )
+        # Track scan ids
+        track_site_scans = Cache.get_track_site_scans(site_scans)
 
-    @staticmethod
-    def query_results(scan_id: int = 3):
-        return (
-            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, ds.status_id, daga.asset_group_id, dsa.site_id, dvr.source, dvr.reference, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id, dv.riskscore "
-            f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
-            f"JOIN dim_asset da ON (fasvi.asset_id = da.asset_id) "
-            f"JOIN dim_site_asset dsa ON(fasvi.asset_id = dsa.asset_id) "
-            f"JOIN dim_asset_group_asset daga ON (fasvi.asset_id = daga.asset_id) "
-            f"JOIN dim_vulnerability dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
-            f"JOIN dim_vulnerability_reference dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) "
-            f"JOIN dim_solution dss ON (dv.nexpose_id = dss.nexpose_id) "
-            f"JOIN dim_scan ds ON (fasvi.scan_id = ds.scan_id) "
-            f"WHERE fasvi.scan_id = {scan_id} "
-            f"AND ds.status_id = 'C' "
-            f"LIMIT 10 "
-        )
+        # Write scan_id to cache
+        util.write_to_cache(Cache.CACHE_FILE_NAME, json.dumps(track_site_scans))
 
-    def get_results_from_query(self, params: dict) -> List[Dict[str, Union[str, int]]]:
+        while True:
+            start_time = time.time()
+            results = self.get_results_from_latest_scan(params=params, scan_id=3)
+            end_time = time.time()
+            print(f"Total Time: {(end_time - start_time) // 60} Minutes")
+
+            for item in results:
+                while item:
+                    self.send(
+                        {
+                            Output.ASSET_ID: item.get("asset_id"),
+                            Output.IP: item.get("ip_address"),
+                            Output.HOSTNAME: item.get("hostname"),
+                            Output.VULNERABILITY_INFO: item.get("vuln_info"),
+                        }
+                    )
+
+    def get_results_from_latest_scan(self, params: dict, scan_id) -> List[Dict[str, Union[str, int]]]:
         """
         Take a scan id and run a sql query to retrieve the
         information needed for the trigger output
@@ -64,10 +59,11 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         """
 
         identifier = uuid.uuid4()
+
         report_payload = {
             "name": f"Rapid7-InsightConnect-ScanCompletion-{identifier}",
             "format": "sql-query",
-            "query": ScanCompletion.query_results(),
+            "query": ScanQueries.query_results_from_latest_scan(scan_id),
             "version": "2.3.0",
         }
 
@@ -85,18 +81,67 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         results = []
 
         for row in csv_report:
-            print(row)
             new_row = self.filter_results(params, row)
             if new_row:
                 results.append(new_row)
 
-        print(f"Results before condense: {results}")
         results = self.condense_results(results)
-        print(f"Results after condense: {results}")
         return results
 
+
+class ScanQueries:
     @staticmethod
-    def filter_results(params: dict, csv_row: dict):
+    def query_latest_scan(site_id=None):
+        if not site_id:
+            return f"SELECT ds.scan_id " f"FROM dim_scan AS ds " f"ORDER BY ds.scan_id DESC " f"LIMIT 2 "
+        else:
+            return (
+                f"SELECT ds.scan_id, dsscan.site_id "
+                f"FROM dim_scan AS ds "
+                f"JOIN dim_site_scan AS dsscan ON dsscan.scan_id = ds.scan_id "
+                f"JOIN dim_site AS dsite ON dsite.site_id = dsscan.site_id  "
+                f"WHERE dsite.site_id = {site_id} "
+                f"ORDER BY ds.scan_id DESC "
+                f"LIMIT 2 "
+            )
+
+    @staticmethod
+    def query_results_from_latest_scan(scan_id):
+        return (
+            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, ds.status_id, daga.asset_group_id, dsa.site_id, dvr.source, dvr.reference, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id, dv.riskscore "
+            f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
+            f"JOIN dim_asset AS da ON (fasvi.asset_id = da.asset_id) "
+            f"JOIN dim_site_asset AS dsa ON (fasvi.asset_id = dsa.asset_id) "
+            f"JOIN dim_asset_group_asset AS daga ON (fasvi.asset_id = daga.asset_id) "
+            f"JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
+            f"JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) "
+            f"JOIN dim_solution AS dss ON (dv.nexpose_id = dss.nexpose_id) "
+            f"JOIN dim_scan AS ds ON (fasvi.scan_id = ds.scan_id) "
+            f"WHERE ds.status_id = 'C' "
+            f"AND ds.scan_id = {scan_id} "
+            f"LIMIT 5 "
+        )
+
+
+class Cache:
+    CACHE_FILE_NAME = f"site_scans_cache_{time.time()}"
+
+    def get_cache_site_scans(self) -> dict:
+        try:
+            return json.loads(util.read_from_cache(self.CACHE_FILE_NAME))
+        except ValueError as error:
+            raise PluginException(cause="Failed to load cache file", assistance=f"Exception returned was {error}")
+
+    @staticmethod
+    def get_track_site_scans(site_scans: dict) -> dict:
+        track_site_scans = {}
+        for site_id, scan_details in site_scans.items():
+            track_site_scans[site_id] = [scan["scan_id"] for scan in scan_details]
+        return track_site_scans
+
+
+class Util:
+    def filter_results(self, params: dict, csv_row: dict):
         """
         Filter the outputted results based on the user inputs.
 
@@ -124,6 +169,9 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             "solution_id": csv_row["solution_id"],
             "solution_summary": csv_row["summary"],
         }
+
+        self.logger.info("Writing latest scan to cache..")
+        util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(csv_row["scan_id"]))
 
         # Return as normal if no inputs detected
         if asset_group and asset_group not in csv_row["asset_group_id"]:
