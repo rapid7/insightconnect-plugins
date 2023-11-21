@@ -18,8 +18,8 @@ This plugin utilizes the [GRR Python library](https://github.com/google/grr/tree
 * GRR credentials
 
 # Supported Product Versions
-
-_There are no supported product versions listed._
+  
+*This plugin does not contain any supported product versions.*
 
 # Documentation
 
@@ -322,7 +322,7 @@ This action is used to start a hunt on clients.
 |xdev|string|None|False|Behavior when ecountering device boundaries while doing recursive searches|['NEVER', 'ALWAYS', 'LOCAL']|None|
 |xor_in_key|integer|None|False|When searching memory we need to ensure we dont hit on our own process. This allows us to obfuscate the search string in memory to avoid us finding ourselves|None|None|
 |xor_out_key|integer|None|False|When searching memory we need to ensure we dont hit on our own process. This allows us to obfuscate the search string in memory to avoid us finding ourselves|None|None|
-
+  
 Example input:
 
 ```
@@ -335,19 +335,23 @@ Example input:
 |results|string|False|Issues found with TruffleHog|
 
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
-
-### Custom Output Types
-
-_This plugin does not contain any custom output types._
+### Custom Types
+  
+*This plugin does not contain any custom output types.*
 
 ## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
+  
+*There is no troubleshooting for this plugin.*
 
 # Version History
 
+* 3.0.1 - Updated plugin to set the status to obsolete. This plugin is no longer supported.
 * 3.0.0 - Updated requests version | default values and enum changed for hunting
 * 2.0.2 - Correct spelling in help.md
 * 2.0.1 - New spec and help.md format for the Extension Library
@@ -356,6 +360,7 @@ _This plugin does not contain any troubleshooting information._
 * 1.0.0 - Initial plugin
 
 # Links
+
 
 ## References
 

@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Google Rapid Response"
 Vendor = "rapid7"
-Version = "3.0.0"
+Version = "3.0.1"
 Description = "Organize and start threat hunts using GRR"
 
 
