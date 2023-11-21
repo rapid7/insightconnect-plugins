@@ -1,0 +1,8 @@
+{
+  "links": [
+    {
+      "href": "https://example.com/api/3/sites/2/excluded_targets",
+      "rel": "self"
+    }
+  ]
+}

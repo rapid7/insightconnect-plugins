@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
-from unit_test.util import Util
+from util import Util
 from komand_rapid7_insightvm.actions.update_site_included_targets import UpdateSiteIncludedTargets
 from komand_rapid7_insightvm.actions.update_site_included_targets.schema import Input
 from parameterized import parameterized
@@ -40,6 +40,13 @@ class TestUpdateSiteIncludedTargets(TestCase):
                 [],
                 False,
                 {"id": 1, "links": [{"href": "https://example.com/api/3/sites/1/included_targets", "rel": "self"}]},
+            ],
+            [
+                "add_empty_addresses",
+                2,
+                [],
+                False,
+                {"id": 2, "links": [{"href": "https://example.com/api/3/sites/2/included_targets", "rel": "self"}]},
             ],
             [
                 "overwrite_single_address",

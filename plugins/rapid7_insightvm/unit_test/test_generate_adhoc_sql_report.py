@@ -3,7 +3,7 @@ import os
 from unittest import TestCase
 from unittest.mock import patch
 from unittest.mock import Mock
-from unit_test.util import Util
+from util import Util
 from komand_rapid7_insightvm.actions.generate_adhoc_sql_report import GenerateAdhocSqlReport
 from komand_rapid7_insightvm.actions.generate_adhoc_sql_report.schema import Input
 from parameterized import parameterized
