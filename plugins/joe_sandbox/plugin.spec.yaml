@@ -8,8 +8,8 @@ title: Joe Sandbox
 description: Joe Sandbox Cloud executes files and URLs fully automated in a
   controlled environment and monitors the behavior of applications and the
   operating system for suspicious activities
-version: 1.1.0
-supported_versions: [1.1.0]
+version: 2.0.0
+supported_versions: [2.0.0]
 vendor: rapid7
 support: community
 status: []
@@ -36,7 +36,7 @@ hub_tags:
   features: [sandbox, analysis]
 version_history:
   - 1.0.0 - Initial plugin
-  - 1.1.0 updated joe_sandbox libray from 2.9.5 to 3.21.0  - updated actions from breaking changes in API. https://github.com/joesecurity/jbxapi/blob/master/CHANGES.md#version-300 
+  - 2.0.0 updated joe_sandbox libray from 2.9.5 to 3.21.0  - updated actions from breaking changes in API. https://github.com/joesecurity/jbxapi/blob/master/CHANGES.md#version-300 
 types:
   system:
     name:

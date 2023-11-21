@@ -14,7 +14,7 @@ Joe Sandbox Cloud executes files and URLs fully automated in a controlled enviro
 
 # Supported Product Versions
   
-* 1.1.0
+* 2.0.0
 
 # Documentation
 
@@ -652,7 +652,7 @@ Example output:
 # Version History
   
 * 1.0.0 - Initial plugin  
-* 1.1.0 updated joe_sandbox libray from 2.9.5 to 3.21.0  - updated actions from breaking changes in API. 
+* 2.0.0 updated joe_sandbox libray from 2.9.5 to 3.21.0  - updated actions from breaking changes in API. 
 https://github.com/joesecurity/jbxapi/blob/master/CHANGES.md#version-300
 
 # Links
