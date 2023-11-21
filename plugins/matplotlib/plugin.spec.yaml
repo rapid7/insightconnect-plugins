@@ -5,11 +5,11 @@ name: matplotlib
 title: Matplotlib
 description: Provides graphing capability of base64 encoded CSV data using Matplotlib,
   NumPy, Pandas, and Seaborn
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
 support: community
 supported_versions: ["Matplotlib 3.0.1"]
-status: []
+status: [obsolete]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/matplotlib
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE

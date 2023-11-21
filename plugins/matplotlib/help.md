@@ -258,6 +258,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.3 - Set plugin status to obsolete. This plugin will no longer be supported. 
 * 1.0.2 - Updated numpy package
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
