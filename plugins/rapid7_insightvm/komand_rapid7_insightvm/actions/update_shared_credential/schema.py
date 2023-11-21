@@ -87,7 +87,6 @@ class UpdateSharedCredentialInput(insightconnect_plugin_runtime.Input):
   "required": [
     "account",
     "name",
-    "service",
     "site_assignment"
   ],
   "definitions": {
@@ -267,14 +266,11 @@ class UpdateSharedCredentialInput(insightconnect_plugin_runtime.Input):
           "title": "Username",
           "description": "The user name for the account that will be used for authenticating",
           "order": 21
-        },
-        "required": [
-          "service",
-          "account",
-          "name",
-          "site_assignment"
-        ]
-      }
+        }
+      },
+      "required": [
+        "service"
+      ]
     }
   }
 }

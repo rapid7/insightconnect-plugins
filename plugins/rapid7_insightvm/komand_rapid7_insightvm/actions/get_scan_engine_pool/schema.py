@@ -53,7 +53,6 @@ class GetScanEnginePoolOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "links",
     "scan_engine_pool"
   ],
   "definitions": {
@@ -90,12 +89,14 @@ class GetScanEnginePoolOutput(insightconnect_plugin_runtime.Output):
             "$ref": "#/definitions/link"
           },
           "order": 4
-        },
-        "required": [
-          "links",
-          "scan_engine_pool"
-        ]
-      }
+        }
+      },
+      "required": [
+        "engines",
+        "id",
+        "links",
+        "name"
+      ]
     },
     "link": {
       "type": "object",

@@ -82,6 +82,7 @@ class UpdateSiteExcludedAssetGroupsOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
+    "id",
     "links"
   ],
   "definitions": {

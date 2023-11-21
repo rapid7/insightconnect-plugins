@@ -105,14 +105,7 @@ class TopRemediationsOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "cvssScore",
-    "description",
-    "id",
-    "remediations",
-    "riskScore",
-    "severity",
-    "title",
-    "vulnerabilities"
+    "remediations"
   ],
   "definitions": {
     "remediation": {
@@ -178,18 +171,18 @@ class TopRemediationsOutput(insightconnect_plugin_runtime.Output):
             "$ref": "#/definitions/remediation_vulnerability"
           },
           "order": 9
-        },
-        "required": [
-          "cvssScore",
-          "description",
-          "id",
-          "riskScore",
-          "severity",
-          "title",
-          "vulnerabilities",
-          "remediations"
-        ]
-      }
+        }
+      },
+      "required": [
+        "assetCount",
+        "assets",
+        "nexposeId",
+        "riskScore",
+        "solutionId",
+        "summary",
+        "vulnerabilities",
+        "vulnerabilityCount"
+      ]
     },
     "remediation_asset": {
       "type": "object",
@@ -236,13 +229,12 @@ class TopRemediationsOutput(insightconnect_plugin_runtime.Output):
           "title": "Criticality Tag",
           "description": "The criticality tag assigned to the asset",
           "order": 7
-        },
-        "required": [
-          "id",
-          "ip",
-          "assets"
-        ]
-      }
+        }
+      },
+      "required": [
+        "id",
+        "ip"
+      ]
     },
     "remediation_vulnerability": {
       "type": "object",
@@ -283,17 +275,16 @@ class TopRemediationsOutput(insightconnect_plugin_runtime.Output):
           "title": "Risk Score",
           "description": "The risk score of the vulnerability",
           "order": 6
-        },
-        "required": [
-          "cvssScore",
-          "description",
-          "id",
-          "riskScore",
-          "severity",
-          "title",
-          "vulnerabilities"
-        ]
-      }
+        }
+      },
+      "required": [
+        "cvssScore",
+        "description",
+        "id",
+        "riskScore",
+        "severity",
+        "title"
+      ]
     }
   }
 }

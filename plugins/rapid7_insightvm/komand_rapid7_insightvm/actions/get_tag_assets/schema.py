@@ -56,9 +56,7 @@ class GetTagAssetsOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "assets",
-    "id",
-    "sources"
+    "assets"
   ],
   "definitions": {
     "tag_asset": {
@@ -79,13 +77,12 @@ class GetTagAssetsOutput(insightconnect_plugin_runtime.Output):
             "type": "string"
           },
           "order": 2
-        },
-        "required": [
-          "id",
-          "sources",
-          "assets"
-        ]
-      }
+        }
+      },
+      "required": [
+        "id",
+        "sources"
+      ]
     }
   }
 }

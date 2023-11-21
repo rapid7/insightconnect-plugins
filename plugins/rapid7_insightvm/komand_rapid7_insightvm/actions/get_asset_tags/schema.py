@@ -56,9 +56,7 @@ class GetAssetTagsOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "name",
-    "tags",
-    "type"
+    "tags"
   ],
   "definitions": {
     "tag": {
@@ -123,13 +121,13 @@ class GetAssetTagsOutput(insightconnect_plugin_runtime.Output):
           "title": "Type",
           "description": "Tag type",
           "order": 9
-        },
-        "required": [
-          "name",
-          "type",
-          "tags"
-        ]
-      }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "type"
+      ]
     },
     "link": {
       "type": "object",

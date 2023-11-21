@@ -53,8 +53,7 @@ class GetAssetGroupOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "asset_group",
-    "vulnerabilities"
+    "asset_group"
   ],
   "definitions": {
     "asset_group": {
@@ -117,12 +116,17 @@ class GetAssetGroupOutput(insightconnect_plugin_runtime.Output):
           "title": "Vulnerabilities",
           "description": "Asset group vulnerability counts",
           "order": 9
-        },
-        "required": [
-          "vulnerabilities",
-          "asset_group"
-        ]
-      }
+        }
+      },
+      "required": [
+        "assets",
+        "id",
+        "links",
+        "name",
+        "riskScore",
+        "type",
+        "vulnerabilities"
+      ]
     },
     "link": {
       "type": "object",

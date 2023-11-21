@@ -53,9 +53,7 @@ class GetTagOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "name",
-    "tag",
-    "type"
+    "tag"
   ],
   "definitions": {
     "tag": {
@@ -120,13 +118,13 @@ class GetTagOutput(insightconnect_plugin_runtime.Output):
           "title": "Type",
           "description": "Tag type",
           "order": 9
-        },
-        "required": [
-          "name",
-          "type",
-          "tag"
-        ]
-      }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "type"
+      ]
     },
     "link": {
       "type": "object",
