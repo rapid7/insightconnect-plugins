@@ -24,7 +24,7 @@ class UpdateSiteExcludedTargets(insightconnect_plugin_runtime.Action):
         if not params.get(Input.OVERWRITE):
             current_scope = resource_helper.resource_request(endpoint=endpoint, method="get")
             self.logger.info("Appending to current list of excluded targets")
-            scope.extend(current_scope["addresses"])
+            scope.extend(current_scope.get("addresses", []))
 
         self.logger.info(f"Using {endpoint} ...")
         payload = {"rawbody": scope}

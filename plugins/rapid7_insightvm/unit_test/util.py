@@ -19,6 +19,7 @@ class Util:
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
         return action
+        return action
 
     @staticmethod
     def read_file_to_string(filename):
@@ -82,8 +83,12 @@ class Util:
             return MockResponse("get_asset_vulnerabilities_invalid_id", 404)
         if kwargs.get("url") == "https://example.com/api/3/sites/1/excluded_targets":
             return MockResponse("get_site_excluded_targets", 200)
+        if kwargs.get("url") == "https://example.com/api/3/sites/2/excluded_targets":
+            return MockResponse("get_site_excluded_targets_no_addresses", 200)
         if kwargs.get("url") == "https://example.com/api/3/sites/1/included_targets":
             return MockResponse("get_site_included_targets", 200)
+        if kwargs.get("url") == "https://example.com/api/3/sites/2/included_targets":
+            return MockResponse("get_site_included_targets_no_addresses", 200)
         if kwargs.get("url") == "https://example.com/api/2.0/tags/1":
             if kwargs.get("json") == {
                 "attributes": [{"tag_attribute_name": "SOURCE", "tag_attribute_value": "CUSTOM"}],

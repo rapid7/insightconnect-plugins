@@ -11,7 +11,7 @@ from komand_rapid7_insightvm.actions import UpdateSharedCredential
 from komand_rapid7_insightvm.actions.update_shared_credential.schema import Input
 from unittest import TestCase
 from unittest.mock import patch
-from unit_test.util import Util
+from util import Util
 
 
 @patch("requests.sessions.Session.put", side_effect=Util.mocked_requests)
