@@ -24,10 +24,13 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         )
 
     def run(self, params={}):
+        start_time = time.time()
+
         # Write scan_id to cache
         self.logger.info("Getting latest scan..")
+        print(f"before find latest scan")
         latest_scan_id = self.find_latest_scan()
-        print(f"line 30 hit")
+        print(f"after find latest scan")
 
         # Initialize trigger cache at startup
         self.logger.info("Initialising trigger cache..")
@@ -43,15 +46,18 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             print(f"Open cache hit")
 
             # Check if latest is in cache
+            print("Before continue")
             if latest_scan_id in cache_site_scans:
                 continue
+            print("After continue")
 
-            start_time = time.time()
+            print("before get results")
             results = self.get_results_from_latest_scan(params=params, scan_id=int(latest_scan_id))
-            end_time = time.time()
-            print(f"Total Time: {(end_time - start_time) // 60} Minutes")
+            print("after get results")
 
+            print("before loop")
             for item in results:
+                print("in loop")
                 self.send(
                     {
                         Output.ASSET_ID: item.get("asset_id"),
@@ -60,6 +66,14 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                         Output.VULNERABILITY_INFO: item.get("vuln_info"),
                     }
                 )
+            print("after loop")
+
+            print(f"Results final: {results}")
+            print(f"Results final type: {type(results)}")
+
+            end_time = time.time()
+            print(f"Total Time: {(end_time - start_time) // 60} Minutes")
+
 
     def get_results_from_latest_scan(self, params: dict, scan_id) -> List[Dict[str, Union[str, int]]]:
         """
