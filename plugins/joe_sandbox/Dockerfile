@@ -1,29 +1,20 @@
-FROM komand/python-pypy3-plugin:2
-# The three supported python parent images are:
-# - komand/python-2-plugin
-# - komand/python-3-plugin
-# - komand/python-pypy3-plugin
-#
+FROM rapid7/insightconnect-python-3-38-plugin:4
+
 LABEL organization=rapid7
 LABEL sdk=python
 
-# Add any custom package dependencies here
-# NOTE: Add pip packages to requirements.txt
-
-# End package dependencies
-
-# Add source code
 WORKDIR /python/src
-ADD ./plugin.spec.yaml /plugin.spec.yaml
-ADD . /python/src
 
-# Install pip dependencies
+ADD ./plugin.spec.yaml /plugin.spec.yaml
+ADD ./requirements.txt /python/src/requirements.txt
+
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-# Install plugin
-RUN python setup.py build && python setup.py install
+ADD . /python/src
+
+RUN	python setup.py build && python setup.py install
 
 # User to run plugin code. The two supported users are: root, nobody
 USER nobody
 
-ENTRYPOINT ["/usr/local/bin/komand_joe_sandbox"]
+ENTRYPOINT ["/usr/local/bin/icon_joe_sandbox"]

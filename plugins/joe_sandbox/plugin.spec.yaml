@@ -1,12 +1,15 @@
+---
 plugin_spec_version: v2
 extension: plugin
-products: [insightconnect]
+products:
+  - insightconnect
 name: joe_sandbox
 title: Joe Sandbox
-description: Joe Sandbox Cloud executes files and URLs fully automated in a controlled
-  environment and monitors the behavior of applications and the operating system for
-  suspicious activities
-version: 1.0.4
+description: Joe Sandbox Cloud executes files and URLs fully automated in a
+  controlled environment and monitors the behavior of applications and the
+  operating system for suspicious activities
+version: 1.1.0
+supported_versions: [1.1.0]
 vendor: rapid7
 support: community
 status: []
@@ -14,14 +17,26 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/joe_sandbox
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.joesecurity.org
+references:
+  - https://www.joesecurity.org
+requirements:
+  - Joe Sandbox
+key_features: 
+  - Sandbox 
+  - Analysis
+  - Malware
 tags:
-- security
-- malware
-- analysis
+  - security
+  - malware
+  - analysis
+  - sandbox
 hub_tags:
-  use_cases: [application_management, cloud_security]
-  keywords: [security, malware, analysis]
-  features: []
+  use_cases: [application_management, cloud_security, reporting_and_analytics]
+  keywords: [malware, analysis, sandbox]
+  features: [sandbox, analysis]
+version_history:
+  - 1.0.0 - Initial plugin
+  - 1.1.0 updated joe_sandbox libray from 2.9.5 to 3.21.0  - updated actions from breaking changes in API. https://github.com/joesecurity/jbxapi/blob/master/CHANGES.md#version-300 
 types:
   system:
     name:
@@ -44,11 +59,6 @@ types:
     name:
       title: Name
       description: Name of the country
-      type: string
-  keyboard_layout:
-    name:
-      title: Name
-      description: Name of the keyboard layout language
       type: string
   single_quota:
     current:
@@ -94,6 +104,31 @@ types:
       title: Yara
       description: Yara
       type: boolean
+  submission_info:
+    submission_id:
+      title: Submission ID
+      description: submission ID
+      type: string
+    name:
+      title: name
+      description: name
+      type: string
+    time:
+      title: time
+      description: time
+      type: string
+    status:
+      title: Status
+      description: Status of the analysis e.g. submitted, running, finished
+      type: string
+    analyses:
+      title: analyses
+      description: Analysis details
+      type: "[]object"
+    most_relevant_analysis:
+      title: Most Relevant Analysis
+      description: Webid, detection & score
+      type: "object"
   analysis:
     webid:
       title: WebID
@@ -105,7 +140,7 @@ types:
       type: string
     status:
       title: Status
-      description: 'Status of the analysis, one of: submitted, running, finished'
+      description: "Status of the analysis, one of: submitted, running, finished"
       type: string
     comments:
       title: Comments
@@ -142,11 +177,11 @@ types:
     tags:
       title: Tags
       description: Tags
-      type: '[]string'
+      type: "[]string"
     runs:
       title: Runs
       description: Runs
-      type: '[]run'
+      type: "[]run"
 connection:
   api_key:
     title: API Key
@@ -156,8 +191,9 @@ connection:
     example: 8e8786182c66e8bc2abdab9198f1385691987bfe2a4917be1268e915e457dbc5
   url:
     title: URL
-    description: API URL of the Joe Sandbox instance. Default is for Joe Sandbox Cloud.
-      On-premise installations use the following URL format http://example.com/joesandbox/index.php/api
+    description: API URL of the Joe Sandbox instance. Default is for Joe Sandbox
+      Cloud. On-premise installations use the following URL format
+      http://example.com/joesandbox/index.php/api
     type: string
     default: https://jbxcloud.joesecurity.org/api
     required: false
@@ -172,6 +208,7 @@ actions:
         description: Is the server online
         type: boolean
         required: true
+        example: True or false  
   get_server_info:
     title: Get Server Info
     description: Query information about the server
@@ -181,6 +218,7 @@ actions:
         description: Queue size
         type: integer
         required: true
+        example: tbd 
   list_systems:
     title: List Systems
     description: Retrieve a list of systems on the server
@@ -188,7 +226,7 @@ actions:
       systems:
         title: Systems
         description: List of systems on the server
-        type: '[]system'
+        type: "[]system"
         required: true
   list_countries:
     title: List Countries
@@ -199,15 +237,6 @@ actions:
         description: List of localized internet anonymization countries
         type: '[]country'
         required: true
-  list_keyboard_layouts:
-    title: List Keyboard Layouts
-    description: Retrieve a list of available keyboard layouts for Windows analyzers
-    output:
-      keyboard_layouts:
-        title: Keyboard Layouts
-        description: List of available keyboard layouts
-        type: '[]keyboard_layout'
-        required: true
   get_account_info:
     title: Get Account Info
     description: Query information about Joe Sandbox user account
@@ -217,11 +246,13 @@ actions:
         description: Type of the account
         type: string
         required: true
+        example: tbd
       quota:
         title: Quota
         description: Account quota
         type: full_quota
         required: true
+        example: tbd
   submit_sample:
     title: Submit Sample
     description: Submit a sample for analysis and return the associated web IDs for
@@ -232,10 +263,11 @@ actions:
         description: The sample to submit
         type: bytes
         required: true
-        example: "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
+        example: TVqQAAMAAAAEAAAA//8AALgAAAAAAA...
       filename:
         title: Filename
-        description: Used to give Joe Sandbox a hint at what file type is being uploaded. File extension (eg .txt, .zip) required
+        description: Used to give Joe Sandbox a hint at what file type is being
+          uploaded. File extension (eg .txt, .zip) required
         type: string
         required: false
         example: example.jpg
@@ -244,34 +276,36 @@ actions:
         description: Cookbook to be uploaded together with the sample
         type: bytes
         required: false
-        example: "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
+        example: TVqQAAMAAAAEAAAA//8AALgAAAAAAA...
       parameters:
         title: Parameters
         description: Custom sandbox parameters, described in more detail in the API
-          documentation. All boolean parameters should be set to 1 or 0. In case the
-          `cookbook` option is used, most other options are silently ignored since
-          they can be specified inside the cookbook
+          documentation. All boolean parameters should be set to 1 or 0. In case
+          the `cookbook` option is used, most other options are silently ignored
+          since they can be specified inside the cookbook
         type: object
         required: false
-        example: '{ "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }'
+        example: '{ "comments": "Enabled hybrid code analysis for sample",
+          "hybrid-code-analysis": 1 }'
       additional_parameters:
         title: Additional Parameters
         description: Additional parameters for Joe Sandbox Cloud, described in more
-          detail in the API documentation. All boolean parameters should be set to
-          1 or 0. Parameter `accept-tac` will always be set to 1
+          detail in the API documentation. All boolean parameters should be set
+          to 1 or 0. Parameter `accept-tac` will always be set to 1
         type: object
         required: false
-        example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }'
+        example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1,
+          "delete-after-days": 30 }'
     output:
       webids:
         title: Web IDs
         description: Web IDs associated with the sample
-        type: '[]string'
+        type: "[]string"
         required: true
   submit_sample_url:
     title: Submit Sample URL
-    description: Submit a sample at a given URL for analysis and return the associated
-      web IDs for the sample
+    description: Submit a sample at a given URL for analysis and return the
+      associated web IDs for the sample
     input:
       sample_url:
         title: Sample URL
@@ -285,21 +319,24 @@ actions:
           documentation. All boolean parameters should be set to 1 or 0
         type: object
         required: false
-        example: '{ "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }'
+        example: '{ "comments": "Enabled hybrid code analysis for sample",
+          "hybrid-code-analysis": 1 }'
       additional_parameters:
         title: Additional Parameters
         description: Additional parameters for Joe Sandbox Cloud, described in more
-          detail in the API documentation. All boolean parameters should be set to
-          1 or 0. Parameter `accept-tac` will always be set to 1
+          detail in the API documentation. All boolean parameters should be set
+          to 1 or 0. Parameter `accept-tac` will always be set to 1
         type: object
         required: false
-        example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }'
+        example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1,
+          "delete-after-days": 30 }'
     output:
-      webids:
-        title: Web IDs
-        description: Web IDs associated with the sample
-        type: '[]string'
+      Submission_id:
+        title: Submission ID
+        description: Submission ID for submitted
+        type: string
         required: true
+        example: '1234567'
   submit_url:
     title: Submit URL
     description: Submit a website for analysis and return the associated web IDs for
@@ -317,21 +354,24 @@ actions:
           documentation. All boolean parameters should be set to 1 or 0
         type: object
         required: false
-        example: '{ "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }'
+        example: '{ "comments": "Enabled hybrid code analysis for sample",
+          "hybrid-code-analysis": 1 }'
       additional_parameters:
         title: Additional Parameters
         description: Additional parameters for Joe Sandbox Cloud, described in more
-          detail in the API documentation. All boolean parameters should be set to
-          1 or 0. Parameter `accept-tac` will always be set to 1
+          detail in the API documentation. All boolean parameters should be set
+          to 1 or 0. Parameter `accept-tac` will always be set to 1
         type: object
         required: false
-        example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }'
+        example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1,
+          "delete-after-days": 30 }'
     output:
-      webids:
-        title: Web IDs
-        description: Web IDs associated with the sample
-        type: '[]string'
+      Submission_id:
+        title: Submission ID
+        description: Submission ID
+        type: string
         required: true
+        example: '1001'
   submit_cookbook:
     title: Submit Cookbook
     description: Submit a cookbook for analysis and return the associated web IDs
@@ -342,28 +382,31 @@ actions:
         description: Cookbook to be uploaded together with the sample
         type: bytes
         required: true
-        example: "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
+        example: TVqQAAMAAAAEAAAA//8AALgAAAAAAA...
       parameters:
         title: Parameters
         description: Custom sandbox parameters, described in more detail in the API
           documentation. All boolean parameters should be set to 1 or 0
         type: object
         required: false
-        example: '{ "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }'
+        example: '{ "comments": "Enabled hybrid code analysis for sample",
+          "hybrid-code-analysis": 1 }'
       additional_parameters:
         title: Additional Parameters
         description: Additional parameters for Joe Sandbox Cloud, described in more
-          detail in the API documentation. All boolean parameters should be set to
-          1 or 0. Parameter `accept-tac` will always be set to 1
+          detail in the API documentation. All boolean parameters should be set
+          to 1 or 0. Parameter `accept-tac` will always be set to 1
         type: object
         required: false
-        example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }'
+        example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1,
+          "delete-after-days": 30 }'
     output:
-      webids:
-        title: Web IDs
-        description: Web IDs associated with the cookbook
-        type: '[]string'
+      Submission_id:
+        title: Submission ID
+        description: submission ID for submited analysis
+        type: string
         required: true
+        example: '1234567'
   list_analyses:
     title: List Analyses
     description: Fetch a list of all analyses
@@ -371,9 +414,12 @@ actions:
       analyses:
         title: Analyses
         description: A list of all analyses IDs
-        type: '[]webid'
+        type: "[]webid"
         required: true
-        example: [ "10001", "10002", "10003" ]
+        example:
+          - "10001"
+          - "10002"
+          - "10003"
   get_analysis_info:
     title: Get Analysis Info
     description: Show the status and most important attributes of an analysis
@@ -406,10 +452,12 @@ actions:
         description: Was the analysis deleted
         type: boolean
         required: true
+        example: true or false
   search_analysis:
     title: Search Analysis
-    description: Lists the web IDs of the analyses that match the given query. Searches
-      in MD5, SHA1, SHA256, filename, cookbook name, comment, URL and report ID
+    description: Lists the web IDs of the analyses that match the given query.
+      Searches in MD5, SHA1, SHA256, filename, cookbook name, comment, URL and
+      report ID
     input:
       query:
         title: Query
@@ -421,12 +469,12 @@ actions:
       analyses:
         title: Analyses
         description: A list of matching analyses IDs
-        type: '[]webid'
+        type: "[]webid"
         required: true
   download_analysis:
     title: Download Analysis
-    description: Download a resource for an analysis. This can be a full report, binaries,
-      screenshots, etc
+    description: Download a resource for an analysis. This can be a full report,
+      binaries, screenshots, etc
     input:
       webid:
         title: WebID
@@ -439,40 +487,40 @@ actions:
         description: The report type, e.g. 'html', 'bins'
         type: string
         enum:
-        - bins
-        - binstrings
-        - classhtml
-        - classxml
-        - clusterxml
-        - cookbook
-        - executive
-        - graphreports
-        - html
-        - ida
-        - irjson
-        - irjsonfixed
-        - irxml
-        - ishots
-        - json
-        - jsonfixed
-        - lighthtml
-        - lightjson
-        - lightjsonfixed
-        - lightxml
-        - maec
-        - memdumps
-        - memstrings
-        - misp
-        - openioc
-        - pcap
-        - pcapslim
-        - pdf
-        - sample
-        - shoots
-        - unpack
-        - unpackpe
-        - xml
-        - yara
+          - bins
+          - binstrings
+          - classhtml
+          - classxml
+          - clusterxml
+          - cookbook
+          - executive
+          - graphreports
+          - html
+          - ida
+          - irjson
+          - irjsonfixed
+          - irxml
+          - ishots
+          - json
+          - jsonfixed
+          - lighthtml
+          - lightjson
+          - lightjsonfixed
+          - lightxml
+          - maec
+          - memdumps
+          - memstrings
+          - misp
+          - openioc
+          - pcap
+          - pcapslim
+          - pdf
+          - sample
+          - shoots
+          - unpack
+          - unpackpe
+          - xml
+          - yara
         default: html
         required: false
         example: pdf
@@ -489,8 +537,27 @@ actions:
         description: Name of the resource associated with the analysis
         type: string
         required: true
+        example: example
       resource_content:
         title: Resource Content
         description: Content of the resource associated with the analysis in base64
         type: bytes
         required: true
+        example: base64 string
+  get_submitted_info:
+    title: Get Submitted Info
+    description: Show the status and info of submission
+    input:
+      submission_id:
+        title: Submission ID
+        description: Submission ID from analysis
+        type: string
+        required: true
+        example: '1001'
+    output:
+      submission_info:
+        title: Submission Info
+        description: Submission Info
+        type: submission_info
+        required: true
+        example: '1001'
