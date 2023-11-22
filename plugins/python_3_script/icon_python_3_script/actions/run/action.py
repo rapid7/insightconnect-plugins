@@ -1,15 +1,18 @@
+import subprocess  # nosec B404
 import sys
-from typing import Any, Dict
+from typing import Any, Dict, Union
+from uuid import uuid4
 
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
 
+from icon_python_3_script.util.constants import DEFAULT_ENCODING, DEFAULT_PROCESS_TIMEOUT, INDENTATION_CHARACTER
+from icon_python_3_script.util.util import extract_output_from_stdout
+
 from .schema import Component, Input, RunInput, RunOutput
 
 sys.path.append("/var/cache/python_dependencies/lib/python3.8/site-packages")
-
-INDENTATION_CHARACTER = " " * 4
 
 
 class Run(insightconnect_plugin_runtime.Action):
@@ -28,15 +31,15 @@ class Run(insightconnect_plugin_runtime.Action):
         self.logger.info(f"Function: (below)\n\n{params.get(Input.FUNCTION)}\n")
 
         try:
-            out = self._exec_python_function(function_=function_, params=params)
+            output = self._execute_function_as_process(function_, params.get(Input.INPUT, {}))
         except Exception as error:
             raise PluginException(cause="Could not run supplied script", data=str(error))
         try:
-            if out is None:
+            if output is None:
                 raise PluginException(
                     cause="Output type was None", assistance="Ensure that output has a non-None data type"
                 )
-            return out
+            return output
         except UnboundLocalError:
             raise PluginException(
                 cause="No output was returned.", assistance="Check supplied script to ensure that it returns output"
@@ -45,32 +48,69 @@ class Run(insightconnect_plugin_runtime.Action):
     @staticmethod
     def _exec_python_function(function_: str, params: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Executes python function and returning it's data
+        Executes python function and returning its data
         :param function_: Python script function
         :type: str
+
         :param params: Parameters to be added to the function
         :type: Dict[str, Any]
+
         :return: Output of the functions response
         :rtype: Dict[str, Any]
         """
 
         exec(function_)  # noqa: B102
         function_name = function_.split(" ")[1].split("(")[0]
-        out = locals()[function_name](params.get(Input.INPUT))
-        return out
+        return locals()[function_name](params.get(Input.INPUT))
 
+    @staticmethod
+    def _execute_function_as_process(function_: str, parameters: Dict[str, Any]) -> Union[Dict[str, Any], None]:
+        """
+        Execute a function as a separate process and return its data.
+
+        :param function_: The declaration of the run function to execute.
+        :type: str
+
+        :param parameters: The input parameters to pass to the function.
+        :type: Dict[str, Any]
+
+        :return: The result of the function execution.
+        :rtype: Union[Dict[str, Any], None]
+        """
+
+        execution_id = f"Python3Script-ActionRun-{uuid4()}:"
+        function_name = function_.split(" ")[1].split("(")[0]
+        try:
+            output = subprocess.check_output(  # nosec B603, B607
+                [
+                    "python",
+                    "-c",
+                    f'import sys\n\n{function_}\nsys.stdout.write("{execution_id}" + str({function_name}({parameters})))',
+                ],
+                shell=False,
+                stderr=subprocess.PIPE,
+                timeout=DEFAULT_PROCESS_TIMEOUT,
+            )
+            return extract_output_from_stdout(output.decode(DEFAULT_ENCODING), execution_id)
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as error:
+            raise PluginException(error.stderr.decode(DEFAULT_ENCODING))
+
+    @staticmethod
     def _add_credentials_to_function(
-        self, function_: str, credentials: Dict[str, str], indentation_character: str = INDENTATION_CHARACTER
+        function_: str, credentials: Dict[str, str], indentation_character: str = INDENTATION_CHARACTER
     ) -> str:
         """
         This function adds credentials to the function entered by the user. It looks for connection script
-        credentials: username, password, secret_key, and adds all of them to variables inside of the function.
+        credentials: username, password, secret_key, and adds all of them to variables inside the function.
         :param function_: Python script function
         :type: str
+
         :param credentials: Credentials to be added
         :type: Dict[str, str]
+
         :param indentation_character: Indentation character used in function
         :type: str
+
         :return: Function string appended by the credential variables
         :rtype: str
         """
@@ -90,6 +130,7 @@ class Run(insightconnect_plugin_runtime.Action):
         This function returns the indentation character that is used in the input python's function
         :param function_: Python script function
         :type: str
+
         :return: Indentation character that is used
         :rtype: str
         """
