@@ -6,7 +6,7 @@
 * [maya 0.6.1](https://pypi.python.org/pypi/maya)
 * [lxml 4.9.2](http://lxml.de/)
 * [beautifulsoup 4.12.2](https://www.crummy.com/software/BeautifulSoup/)
-* [pyyaml 6.0.0](http://pyyaml.org/)
+* [pyyaml 6.0.1](http://pyyaml.org/)
 * [records 0.5.3](https://github.com/kennethreitz/records)
 
 The Python 3 Script plugin also allows you to load custom modules via its connection parameters.
@@ -23,7 +23,7 @@ Also, this plugin allows you to provide additional credentials in the connection
 
 # Supported Product Versions
   
-* Python 3.8.1
+* Python 3.9.18
 
 # Documentation
 
@@ -134,6 +134,7 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 
 # Version History
 
+* 4.0.7 - Updated the SDK | Updated Python version to `3.9.18` | Added handler to run function separately
 * 4.0.6 - Added empty `__init__.py` file to `unit_test` folder | Refreshed with new tooling
 * 4.0.5 - Updated the SDK version to include output masking | Updated all dependencies to the newest versions
 * 4.0.4 - Update Pyyaml to version 6.0.0
