@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "PDF Generator"
 Vendor = "rapid7"
-Version = "1.0.2"
+Version = "1.0.3"
 Description = "Create PDF reports from workflow data"
 
 
