@@ -23,6 +23,8 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             output=ScanCompletionOutput(),
         )
 
+    CACHE_FILE_NAME = f"site_scans_cache_{time.time()}"
+
     def run(self, params={}):
         start_time = time.time()
 
@@ -34,12 +36,13 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
         # Initialize trigger cache at startup
         self.logger.info("Initialising trigger cache..")
-        util.write_to_cache(Cache.CACHE_FILE_NAME, json.dumps(latest_scan_id))
+        util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(latest_scan_id))
         print(f"write to cache hit")
         print(f"cache file: {Cache.CACHE_FILE_NAME}")
-        print(f"cache file contents: {json.loads(Cache.CACHE_FILE_NAME)}")
+        print(f"cache file contents beginning: {util.read_from_cache(self.CACHE_FILE_NAME)}")
 
         while True:
+            latest_scan_id = self.find_latest_scan()
             print(f"while True hit")
             # Open cache
             cache_site_scans = Cache.get_cache_site_scans(self)
@@ -47,7 +50,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
             # Check if latest is in cache
             print("Before continue")
-            if latest_scan_id in cache_site_scans:
+            if latest_scan_id != cache_site_scans:
                 continue
             print("After continue")
 
@@ -56,6 +59,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             print("after get results")
 
             print("before loop")
+            # Submit scan for trigger
             for item in results:
                 print("in loop")
                 self.send(
@@ -71,16 +75,27 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             print(f"Results final: {results}")
             print(f"Results final type: {type(results)}")
 
+            # Update cache
+            try:
+                util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(latest_scan_id))
+            except TypeError as error:
+                raise PluginException(
+                    cause="Failed to save cache to file", assistance=f"Exception returned was {error}"
+                )
+            print(f"cache file contents end of loop: {util.read_from_cache(self.CACHE_FILE_NAME)}")
+
             end_time = time.time()
             print(f"Total Time: {(end_time - start_time) // 60} Minutes")
+            # Sleep configured in minutes
+            time.sleep(params.get(Input.INTERVAL, 5) * 60)
 
-
-    def get_results_from_latest_scan(self, params: dict, scan_id) -> List[Dict[str, Union[str, int]]]:
+    def get_results_from_latest_scan(self, params: dict, scan_id: int) -> List[Dict[str, Union[str, int]]]:
         """
         Take a scan id and run a sql query to retrieve the
         information needed for the trigger output
 
         :param params:
+        :param scan_id:
         :return:
         """
 
@@ -95,9 +110,10 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
         self.logger.info("Getting report")
         report_contents = util.adhoc_sql_report(self.connection, self.logger, report_payload)
-
+        print(f"Report contents: {report_contents}")
         try:
             csv_report = csv.DictReader(io.StringIO(report_contents["raw"]))
+            print(f"CSV Report: {csv_report}")
         except Exception as error:
             raise PluginException(
                 cause="Error: Failed to process query response while fetching site scans.",
@@ -107,18 +123,26 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         results = []
 
         for row in csv_report:
-            new_row = self.filter_results(params, row)
+            print(f"Row in csv report: {row}")
+            new_row = Util.filter_results(params, row)
+            print(f"New row in csv report: {new_row}")
             if new_row:
                 results.append(new_row)
-
-        results = self.condense_results(results)
+        print(f"Results before condense: {results}")
+        results = Util.condense_results(results)
+        print(f"Results after condense: {results}")
         return results
 
-    def find_latest_scan(self):
+    def find_latest_scan(self) -> int:
+        """
+
+        """
         # Use API call for speed.
         # Super simple get the latest scan ID
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         endpoint = endpoints.Scan.scans(self.connection.console_url)
-        response = ResourceRequests.resource_request(self, endpoint)
+        response = resource_helper.resource_request(endpoint=endpoint, method="get", params={'sort': 'id,desc'})
+
         latest_scan_id = response.get('resources')[0].get('id')
         print(f"Latest scan ID in method: {latest_scan_id}")
         return latest_scan_id
@@ -139,7 +163,7 @@ class ScanQueries:
             f"JOIN dim_scan AS ds ON (fasvi.scan_id = ds.scan_id) "
             f"WHERE ds.status_id = 'C' "
             f"AND ds.scan_id = {scan_id} "
-            f"LIMIT 5 "
+            f"LIMIT 2 "
         )
 
 
@@ -148,13 +172,14 @@ class Cache:
 
     def get_cache_site_scans(self) -> dict:
         try:
-            return json.loads(util.read_from_cache(self.CACHE_FILE_NAME))
+            return json.loads(util.read_from_cache(ScanCompletion.CACHE_FILE_NAME))
         except ValueError as error:
             raise PluginException(cause="Failed to load cache file", assistance=f"Exception returned was {error}")
 
 
 class Util:
-    def filter_results(self, params: dict, csv_row: dict):
+    @staticmethod
+    def filter_results(params: dict, csv_row: dict):
         """
         Filter the outputted results based on the user inputs.
 
@@ -163,7 +188,7 @@ class Util:
 
         :return:
         """
-
+        print(f"Filter results start")
         # Input retrieval
         asset_group = params.get(Input.ASSET_GROUP, None)
         cve = params.get(Input.CVE, None)
@@ -182,9 +207,10 @@ class Util:
             "solution_id": csv_row["solution_id"],
             "solution_summary": csv_row["summary"],
         }
+        print(f"new dict begin: {new_dct}")
 
-        self.logger.info("Writing latest scan to cache..")
-        util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(csv_row["scan_id"]))
+        ScanCompletion.logger.info("Writing latest scan to cache..")
+        util.write_to_cache(ScanCompletion.CACHE_FILE_NAME, json.dumps(csv_row["scan_id"]))
 
         # Return as normal if no inputs detected
         if asset_group and asset_group not in csv_row["asset_group_id"]:
@@ -202,6 +228,7 @@ class Util:
         if site_id and site_id not in csv_row["site_id"]:
             return None
         else:
+            print(f"new dict final: {new_dct}")
             return new_dct
 
     @staticmethod
@@ -214,7 +241,7 @@ class Util:
 
         :return:
         """
-
+        print(f"condense results start")
         merge_keys = ("asset_id", "ip_address", "hostname")
         dct = {}
         new_results = []
@@ -228,7 +255,7 @@ class Util:
             entry = {k: v for (k, v) in zip(merge_keys, key)}
             entry["vuln_info"] = value
             new_results.append(entry)
-
+        print(f"condense results end: {new_results}")
         return new_results
 
     @staticmethod
