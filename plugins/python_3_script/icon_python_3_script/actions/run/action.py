@@ -12,7 +12,7 @@ from icon_python_3_script.util.util import extract_output_from_stdout
 
 from .schema import Component, Input, RunInput, RunOutput
 
-sys.path.append("/var/cache/python_dependencies/lib/python3.8/site-packages")
+sys.path.append("/var/cache/python_dependencies/lib/python3.9/site-packages")
 
 
 class Run(insightconnect_plugin_runtime.Action):
@@ -33,7 +33,7 @@ class Run(insightconnect_plugin_runtime.Action):
         try:
             output = self._execute_function_as_process(function_, params.get(Input.INPUT, {}))
         except Exception as error:
-            raise PluginException(cause="Could not run supplied script", data=str(error))
+            raise PluginException(cause="Could not run supplied script", data=error) from None
         try:
             if output is None:
                 raise PluginException(
@@ -85,15 +85,17 @@ class Run(insightconnect_plugin_runtime.Action):
                 [
                     "python",
                     "-c",
-                    f'import sys\n\n{function_}\nsys.stdout.write("{execution_id}" + str({function_name}({parameters})))',
+                    f'import sys\n\nsys.path.append("/var/cache/python_dependencies/lib/python3.9/site-packages")\n\n{function_}\nsys.stdout.write("{execution_id}" + str({function_name}({parameters})))',
                 ],
                 shell=False,
                 stderr=subprocess.PIPE,
                 timeout=DEFAULT_PROCESS_TIMEOUT,
             )
             return extract_output_from_stdout(output.decode(DEFAULT_ENCODING), execution_id)
-        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as error:
-            raise PluginException(error.stderr.decode(DEFAULT_ENCODING))
+        except subprocess.CalledProcessError as error:
+            raise PluginException(error.stderr.decode(DEFAULT_ENCODING)) from None
+        except subprocess.TimeoutExpired:
+            raise PluginException(f"Function got timed out after {DEFAULT_PROCESS_TIMEOUT} seconds.") from None
 
     @staticmethod
     def _add_credentials_to_function(
