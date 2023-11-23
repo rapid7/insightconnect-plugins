@@ -21,7 +21,7 @@ class Output:
 
 
 class CreateDistributionPlotInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -30,6 +30,7 @@ class CreateDistributionPlotInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Color Palette",
       "description": "Color palette of the plot",
+      "default": "dark",
       "enum": [
         "deep",
         "muted",
@@ -49,7 +50,7 @@ class CreateDistributionPlotInput(insightconnect_plugin_runtime.Input):
     "csv_data": {
       "type": "string",
       "format": "bytes",
-      "display_type": "bytes",
+      "displayType": "bytes",
       "title": "CSV Data",
       "description": "Base64 encoded CSV data from which to create the plot",
       "order": 1
@@ -58,12 +59,14 @@ class CreateDistributionPlotInput(insightconnect_plugin_runtime.Input):
       "type": "boolean",
       "title": "KDE",
       "description": "Display a kernel density estimation line on the plot",
+      "default": false,
       "order": 3
     },
     "margin_style": {
       "type": "string",
       "title": "Margin Style",
       "description": "Style of the margin of the plot",
+      "default": "dark",
       "enum": [
         "darkgrid",
         "whitegrid",
@@ -90,7 +93,7 @@ class CreateDistributionPlotInput(insightconnect_plugin_runtime.Input):
 
 
 class CreateDistributionPlotOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -98,7 +101,7 @@ class CreateDistributionPlotOutput(insightconnect_plugin_runtime.Output):
     "csv": {
       "type": "string",
       "format": "bytes",
-      "display_type": "bytes",
+      "displayType": "bytes",
       "title": "CSV",
       "description": "Base64 encoded CSV data used to generate the plot",
       "order": 1
@@ -106,7 +109,7 @@ class CreateDistributionPlotOutput(insightconnect_plugin_runtime.Output):
     "plot": {
       "type": "string",
       "format": "bytes",
-      "display_type": "bytes",
+      "displayType": "bytes",
       "title": "Plot",
       "description": "Base64 encoded PNG plot data (can be attached to an email)",
       "order": 2
