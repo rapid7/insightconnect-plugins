@@ -352,7 +352,7 @@ Example output:
       "credential_assessments": [],
       "critical_vulnerabilities": 12,
       "exploits": 5,
-      "id": "cdc978de-4178-a1d9-d5a94a114b87-example,
+      "id": "cdc978de-4178-a1d9-d5a94a114b87-example",
       "ip": "2001:db8:1:1:1:1:1:1",
       "last_assessed_for_vulnerabilities": "2020-06-25T15:19:51.543Z",
       "last_scan_end": "2020-10-26T22:35:53.590Z",
@@ -415,7 +415,8 @@ Example input:
 Example output:
 
 ```
-"asset": {
+{
+  "asset": {
     "assessed_for_policies": false,
     "assessed_for_vulnerabilities": true,
     "credential_assessments": [
