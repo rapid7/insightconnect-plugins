@@ -940,7 +940,7 @@ types:
     malware_kits:
       title: Malware Kits
       description: List of malware kits related to the vulnerability
-      type: '[]string'
+      type: '[]object'
       required: false
     pci:
       title: PCI
