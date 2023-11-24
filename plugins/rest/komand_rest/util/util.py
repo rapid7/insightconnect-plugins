@@ -161,7 +161,7 @@ class RestAPI(object):
     def create_headers_for_custom_auth(self, headers: dict, secret_key) -> dict:
         new_headers = {}
         for key, value in headers.items():
-            if value == self.CUSTOM_SECRET_INPUT:
+            if self.CUSTOM_SECRET_INPUT in value:
                 if not secret_key:
                     raise PluginException(
                         cause="'CUSTOM_SECRET_INPUT' used in authentication header, but no secret provided.",

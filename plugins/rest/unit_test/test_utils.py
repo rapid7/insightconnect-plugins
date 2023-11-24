@@ -175,6 +175,12 @@ class TestUtil(TestCase):
         api.with_credentials("Custom", secret_key="Key")
         self.assertEqual(api.default_headers["TEST"], "Key")
 
+    def test_custom_auth_with_prefix_success(self):
+        log = logging.getLogger("Test")
+        api = RestAPI("www.google.com", log, True, {"TEST": "ApiKey CUSTOM_SECRET_INPUT"})
+        api.with_credentials("Custom", secret_key="Key")
+        self.assertEqual(api.default_headers["TEST"], "Key")
+
     def test_custom_auth_not_provided(self):
         log = logging.getLogger("Test")
         api = RestAPI("www.google.com", log, True, {"TEST": "CUSTOM_SECRET_INPUT"})
