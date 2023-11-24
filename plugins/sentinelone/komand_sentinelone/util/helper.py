@@ -1,3 +1,5 @@
+import os
+
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import return_non_empty
 from typing import Union
@@ -10,6 +12,16 @@ def clean(item_to_clean: Union[dict, list]) -> Union[dict, list]:
     if not isinstance(item_to_clean, dict):
         return item_to_clean
     return return_non_empty(item_to_clean.copy())
+
+
+def sanitise_url(file_url: str) -> str:
+    # Sanitise URLs to help guard against path traversal
+    sanitised_url = file_url.replace("%2e%2e%2f", "../")
+    sanitised_url = sanitised_url.replace("../", "")
+    sanitised_url = sanitised_url.replace("%2e%2e%5C", "..\\")
+    sanitised_url = sanitised_url.replace("..\\", "")
+    sanitised_url = os.path.normpath(sanitised_url)
+    return sanitised_url
 
 
 class Helper:

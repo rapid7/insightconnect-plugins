@@ -10,7 +10,7 @@ from re import match
 from typing import List, Any, Dict, Tuple
 from urllib.parse import urlsplit, unquote
 from logging import Logger
-from komand_sentinelone.util.helper import Helper, clean
+from komand_sentinelone.util.helper import Helper, clean, sanitise_url
 from komand_sentinelone.util.constants import (
     DATA_FIELD,
     API_TOKEN_FIELD,
@@ -251,20 +251,20 @@ class SentineloneAPI:
                 break
             self.logger.info("Waiting 5 seconds for successful threat file upload...")
             time.sleep(5)
-
         threat_details = activities.get("data", [{}])[0].get("data", {})
         file_url = threat_details.get("filePath", "")[1:]
         file_name = threat_details.get("fileDisplayName")
-        response = self._call_api("GET", file_url, full_response=True)
+        sanitised_file_url = sanitise_url(file_url)
+        response = self._call_api("GET", sanitised_file_url, full_response=True)
         try:
             with zipfile.ZipFile(io.BytesIO(response.content)) as downloaded_zipfile:
                 downloaded_zipfile.setpassword(password.encode("UTF-8"))
+                file_info = downloaded_zipfile.infolist()[-1]
+                file_content = downloaded_zipfile.read(file_info.filename)
 
                 return {
                     "filename": file_name,
-                    "content": base64.b64encode(downloaded_zipfile.read(downloaded_zipfile.infolist()[-1])).decode(
-                        "utf-8"
-                    ),
+                    "content": base64.b64encode(file_content).decode("utf-8"),
                 }
         except Exception as error:
             raise PluginException(

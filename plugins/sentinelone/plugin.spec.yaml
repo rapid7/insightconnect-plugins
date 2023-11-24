@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 9.1.0
+version: 9.1.1
 connection_version: 9
 cloud_ready: true
 sdk:
