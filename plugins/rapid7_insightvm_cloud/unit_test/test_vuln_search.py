@@ -20,8 +20,6 @@ class TestVulnSearch(TestCase):
     @classmethod
     def setUpClass(self) -> None:
         self.params = {
-            "asset_criteria": "last_scan_end > 2000-01-01T00:00:00.000Z",
-            "asset_criteria_invalid": "invalid asset criteria",
             "size": 10,
             "sort_criteria": {"risk-score": "asc", "criticality-tag": "desc"},
             "vuln_criteria": "severity IN ['Critical', 'Severe']",
@@ -36,7 +34,6 @@ class TestVulnSearch(TestCase):
     def test_vuln_search_all_inputs(self, _mock_req):
         actual = self.action.run(
             {
-                Input.ASSET_CRITERIA: self.params.get("asset_criteria"),
                 Input.SIZE: self.params.get("size"),
                 Input.SORT_CRITERIA: self.params.get("sort_criteria"),
                 Input.VULN_CRITERIA: self.params.get("vuln_criteria"),
@@ -58,7 +55,6 @@ class TestVulnSearch(TestCase):
         with self.assertRaises(PluginException) as context:
             self.action.run(
                 {
-                    Input.ASSET_CRITERIA: self.params.get("asset_criteria_invalid"),
                     Input.SIZE: self.params.get("size"),
                     Input.SORT_CRITERIA: self.params.get("sort_criteria"),
                     Input.VULN_CRITERIA: self.params.get("vuln_criteria"),
@@ -77,7 +73,6 @@ class TestVulnSearch(TestCase):
         with self.assertRaises(PluginException) as context:
             self.action.run(
                 {
-                    Input.ASSET_CRITERIA: self.params.get("asset_criteria"),
                     Input.SIZE: self.params.get("size"),
                     Input.SORT_CRITERIA: self.params.get("sort_criteria"),
                     Input.VULN_CRITERIA: self.params.get("vuln_criteria_invalid"),
