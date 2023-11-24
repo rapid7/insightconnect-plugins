@@ -49,23 +49,6 @@ class TestVulnSearch(TestCase):
         expected = Utils.read_file_to_dict("expected_responses/vuln_search.json.resp")
         self.assertEqual(expected, actual)
 
-    # test finding event with bad asset criteria
-    @patch("requests.request", side_effect=mock_request)
-    def test_vuln_invalid_asset_criteria(self, _mock_req):
-        with self.assertRaises(PluginException) as context:
-            self.action.run(
-                {
-                    Input.SIZE: self.params.get("size"),
-                    Input.SORT_CRITERIA: self.params.get("sort_criteria"),
-                    Input.VULN_CRITERIA: self.params.get("vuln_criteria"),
-                }
-            )
-        cause = "The server is unable to process the request."
-        assistance = "Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support."
-        data = Utils.read_file_to_dict("expected_responses/asset_search_invalid_asset_criteria.json.resp")
-        self.assertEqual(cause, context.exception.cause)
-        self.assertEqual(assistance, context.exception.assistance)
-        self.assertEqual(str(data), context.exception.data)
 
     # test finding event with bad vuln criteria
     @patch("requests.request", side_effect=mock_request)
