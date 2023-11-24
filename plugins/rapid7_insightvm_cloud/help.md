@@ -254,7 +254,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|asset_ids|[]string|False|List of IDs of the scanned assets|['abc978-5678-abc-a5a94a1234b8-asset']|
+|asset_ids|[]string|False|List of IDs of the scanned assets|["abc978-5678-abc-a5a94a1234b8-asset"]|
 |finished|date|False|When the scan was finished|2021-04-15T18:00:33Z|
 |name|string|False|User-driven scan name for the scan|testing scan action|
 |scan_id|string|False|ID of the scan|a9870dce1234180e202af83b66cd0c4b|
@@ -282,9 +282,9 @@ Start an InsightVM scan of previously scanned devices
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|asset_ids|[]string|None|False|IDs of the assets to scan|None|['abc978-5678-abc-a5a94a1234b8-asset']|
-|hostnames|[]string|None|False|List of hostnames to scan|None|['rapid7.com']|
-|ips|[]string|None|False|List of IPv4 or IPv6 addresses to scan|None|['2001:db8:1:1:1:1:1:1']|
+|asset_ids|[]string|None|False|IDs of the assets to scan|None|["abc978-5678-abc-a5a94a1234b8-asset"]|
+|hostnames|[]string|None|False|List of hostnames to scan|None|["rapid7.com"]|
+|ips|[]string|None|False|List of IPv4 or IPv6 addresses to scan|None|["2001:db8:1:1:1:1:1:1"]|
 |name|string|None|True|The name of the scan|None|test cloud scan|
   
 Example input:
