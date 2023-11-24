@@ -11,8 +11,8 @@ from icon_rapid7_insightvm_cloud.actions.stop_scan import StopScan
 from icon_rapid7_insightvm_cloud.actions.stop_scan.schema import Input
 
 from unittest.mock import patch
-from unit_test.utils import Utils
-from unit_test.mock import (
+from utils import Utils
+from mock import (
     mock_request,
 )
 
