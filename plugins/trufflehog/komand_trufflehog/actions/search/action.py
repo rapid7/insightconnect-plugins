@@ -1,13 +1,16 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SearchInput, SearchOutput
 
 # Custom imports below
+import os
+os.environ["GIT_PYTHON_REFRESH"] = "quiet"
+import git
 from truffleHog import truffleHog
 import json
 import re
 
 
-class Search(komand.Action):
+class Search(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="search",
