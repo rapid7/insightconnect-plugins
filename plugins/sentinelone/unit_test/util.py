@@ -296,7 +296,12 @@ class Util:
                 return MockResponse(200, "name_not_available")
             return MockResponse(200, "name_available")
         elif args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/threats":
-            if params.get("ids") in [["valid_threat_id_1"], ["valid_threat_id_2"], ["1000000000000000000"], ["1000000000000000001"]]:
+            if params.get("ids") in [
+                ["valid_threat_id_1"],
+                ["valid_threat_id_2"],
+                ["1000000000000000000"],
+                ["1000000000000000001"],
+            ]:
                 return MockResponse(200, "threats")
             if params.get("ids") == ["same_status_threat_id_1"]:
                 return MockResponse(200, "threats_same_status")
