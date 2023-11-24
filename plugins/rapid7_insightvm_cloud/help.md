@@ -309,80 +309,80 @@ Example input:
 Example output:
 
 ```
+{
+  "assets": [
     {
-      "assets": [
+      "assessed_for_policies": false,
+      "assessed_for_vulnerabilities": true,
+      "credential_assessments": [],
+      "critical_vulnerabilities": 12,
+      "exploits": 5,
+      "id": "cdc978de-4178-a1d9-d5a94a114b87-example",
+      "ip": "2001:db8:1:1:1:1:1:1",
+      "last_assessed_for_vulnerabilities": "2020-06-25T15:19:51.543Z",
+      "last_scan_end": "2020-10-26T22:35:53.590Z",
+      "last_scan_start": "2020-10-26T22:35:53.564Z",
+      "mac": "00:50:56:94:52:04",
+      "malware_kits": 0,
+      "moderate_vulnerabilities": 4,
+      "new": [],
+      "os_architecture": "",
+      "os_description": "Linux 2.6.32",
+      "os_family": "Linux",
+      "os_name": "Linux",
+      "os_system_name": "Linux",
+      "os_type": "General",
+      "os_vendor": "Linux",
+      "os_version": "2.6.32",
+      "remediated": [],
+      "risk_score": 9304.376953125,
+      "severe_vulnerabilities": 21,
+      "tags": [
         {
-          "assessed_for_policies": false,
-          "assessed_for_vulnerabilities": true,
-          "credential_assessments": [],
-          "critical_vulnerabilities": 12,
-          "exploits": 5,
-          "id": "cdc978de-4178-a1d9-d5a94a114b87-example",
-          "ip": "2001:db8:1:1:1:1:1:1",
-          "last_assessed_for_vulnerabilities": "2020-06-25T15:19:51.543Z",
-          "last_scan_end": "2020-10-26T22:35:53.590Z",
-          "last_scan_start": "2020-10-26T22:35:53.564Z",
-          "mac": "00:50:56:94:52:04",
-          "malware_kits": 0,
-          "moderate_vulnerabilities": 4,
-          "new": [],
-          "os_architecture": "",
-          "os_description": "Linux 2.6.32",
-          "os_family": "Linux",
-          "os_name": "Linux",
-          "os_system_name": "Linux",
-          "os_type": "General",
-          "os_vendor": "Linux",
-          "os_version": "2.6.32",
-          "remediated": [],
-          "risk_score": 9304.376953125,
-          "severe_vulnerabilities": 21,
-          "tags": [
-            {
-              "name": "integrations discovery",
-              "type": "SITE"
-            }
-          ],
-          "total_vulnerabilities": 37,
-          "unique_identifiers": []
-        },
-        {
-          "assessed_for_policies": false,
-          "assessed_for_vulnerabilities": true,
-          "credential_assessments": [],
-          "critical_vulnerabilities": 12,
-          "exploits": 5,
-          "id": "cdc978de-4178-a1d9-d5a94a114b87-example,
-          "ip": "2001:db8:1:1:1:1:1:1",
-          "last_assessed_for_vulnerabilities": "2020-06-25T15:19:51.543Z",
-          "last_scan_end": "2020-10-26T22:35:53.590Z",
-          "last_scan_start": "2020-10-26T22:35:53.564Z",
-          "mac": "00:50:56:94:52:04",
-          "malware_kits": 0,
-          "moderate_vulnerabilities": 4,
-          "new": [],
-          "os_architecture": "",
-          "os_description": "Linux 2.6.32",
-          "os_family": "Linux",
-          "os_name": "Linux",
-          "os_system_name": "Linux",
-          "os_type": "General",
-          "os_vendor": "Linux",
-          "os_version": "2.6.32",
-          "remediated": [],
-          "risk_score": 9304.376953125,
-          "severe_vulnerabilities": 21,
-          "tags": [
-            {
-              "name": "integrations discovery",
-              "type": "SITE"
-            }
-          ],
-          "total_vulnerabilities": 37,
-          "unique_identifiers": []
+          "name": "integrations discovery",
+          "type": "SITE"
         }
-      ]
+      ],
+      "total_vulnerabilities": 37,
+      "unique_identifiers": []
+    },
+    {
+      "assessed_for_policies": false,
+      "assessed_for_vulnerabilities": true,
+      "credential_assessments": [],
+      "critical_vulnerabilities": 12,
+      "exploits": 5,
+      "id": "cdc978de-4178-a1d9-d5a94a114b87-example,
+      "ip": "2001:db8:1:1:1:1:1:1",
+      "last_assessed_for_vulnerabilities": "2020-06-25T15:19:51.543Z",
+      "last_scan_end": "2020-10-26T22:35:53.590Z",
+      "last_scan_start": "2020-10-26T22:35:53.564Z",
+      "mac": "00:50:56:94:52:04",
+      "malware_kits": 0,
+      "moderate_vulnerabilities": 4,
+      "new": [],
+      "os_architecture": "",
+      "os_description": "Linux 2.6.32",
+      "os_family": "Linux",
+      "os_name": "Linux",
+      "os_system_name": "Linux",
+      "os_type": "General",
+      "os_vendor": "Linux",
+      "os_version": "2.6.32",
+      "remediated": [],
+      "risk_score": 9304.376953125,
+      "severe_vulnerabilities": 21,
+      "tags": [
+        {
+          "name": "integrations discovery",
+          "type": "SITE"
+        }
+      ],
+      "total_vulnerabilities": 37,
+      "unique_identifiers": []
     }
+  ]
+}
 ```
 
 #### Get Asset
@@ -415,69 +415,69 @@ Example input:
 Example output:
 
 ```
-    "asset": {
-        "assessed_for_policies": false,
-        "assessed_for_vulnerabilities": true,
-        "credential_assessments": [
-          {
-            "port": 22,
-            "protocol": "TCP",
-            "status": "NO_CREDS_SUPPLIED"
-          }
-        ],
-        "critical_vulnerabilities": 1,
-        "exploits": 2,
-        "host_name": "example.rapid7.com",
-        "id": "cdc978de-4178-a1d9-d5a94a114b87-example",
-        "ip": "2001:db8:1:1:1:1:1:1",
-        "last_assessed_for_vulnerabilities": "2021-04-26T08:04:28.536Z",
-        "last_scan_end": "2021-04-26T08:04:28.536Z",
-        "last_scan_start": "2021-04-26T08:00:56.006Z",
-        "mac": "00:50:56:94:42:6B",
-        "malware_kits": 0,
-        "moderate_vulnerabilities": 7,
-        "new": [],
-        "remediated": [],
-        "risk_score": 9006.3388671875,
-        "severe_vulnerabilities": 19,
-        "tags": [
-          {
-            "name": "sn_pt_LDAP Admins",
-            "type": "OWNER"
-          },
-          {
-            "name": "sn_CAB Approval",
-            "type": "OWNER"
-          },
-          {
-            "name": "integrations",
-            "type": "CUSTOM"
-          },
-          {
-            "name": "ck_test_site_2",
-            "type": "SITE"
-          },
-          {
-            "name": "integrations",
-            "type": "SITE"
-          },
-          {
-            "name": "ck_test_site_3",
-            "type": "SITE"
-          },
-          {
-            "name": "integrations discovery",
-            "type": "SITE"
-          },
-          {
-            "name": "ck_test_site_1",
-            "type": "SITE"
-          }
-        ],
-        "total_vulnerabilities": 27,
-        "unique_identifiers": []
+"asset": {
+    "assessed_for_policies": false,
+    "assessed_for_vulnerabilities": true,
+    "credential_assessments": [
+      {
+        "port": 22,
+        "protocol": "TCP",
+        "status": "NO_CREDS_SUPPLIED"
       }
-    }
+    ],
+    "critical_vulnerabilities": 1,
+    "exploits": 2,
+    "host_name": "example.rapid7.com",
+    "id": "cdc978de-4178-a1d9-d5a94a114b87-example",
+    "ip": "2001:db8:1:1:1:1:1:1",
+    "last_assessed_for_vulnerabilities": "2021-04-26T08:04:28.536Z",
+    "last_scan_end": "2021-04-26T08:04:28.536Z",
+    "last_scan_start": "2021-04-26T08:00:56.006Z",
+    "mac": "00:50:56:94:42:6B",
+    "malware_kits": 0,
+    "moderate_vulnerabilities": 7,
+    "new": [],
+    "remediated": [],
+    "risk_score": 9006.3388671875,
+    "severe_vulnerabilities": 19,
+    "tags": [
+      {
+        "name": "sn_pt_LDAP Admins",
+        "type": "OWNER"
+      },
+      {
+        "name": "sn_CAB Approval",
+        "type": "OWNER"
+      },
+      {
+        "name": "integrations",
+        "type": "CUSTOM"
+      },
+      {
+        "name": "ck_test_site_2",
+        "type": "SITE"
+      },
+      {
+        "name": "integrations",
+        "type": "SITE"
+      },
+      {
+        "name": "ck_test_site_3",
+        "type": "SITE"
+      },
+      {
+        "name": "integrations discovery",
+        "type": "SITE"
+      },
+      {
+        "name": "ck_test_site_1",
+        "type": "SITE"
+      }
+    ],
+    "total_vulnerabilities": 27,
+    "unique_identifiers": []
+  }
+}
 ```
 
 #### Get Scan
@@ -512,20 +512,20 @@ Example input:
 Example output:
 
 ```
+{
+  "scans": [
     {
-      "scans": [
-        {
-          "asset_ids": [
-            "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13"
-          ],
-          "engine_id": "c8970d2ee174180e202af83b66cd0c4b",
-          "finished": null,
-          "id": "7fc3d8ec-24a7-4835-84f2-8877fe96a29b",
-          "name": "testing scan action"
-        }
+      "asset_ids": [
+        "cdc978de-f683-4178-a1d9-d5a94a114b87-default-asset-13"
       ],
-      "unscanned_assets": []
+      "engine_id": "c8970d2ee174180e202af83b66cd0c4b",
+      "finished": null,
+      "id": "7fc3d8ec-24a7-4835-84f2-8877fe96a29b",
+      "name": "testing scan action"
     }
+  ],
+  "unscanned_assets": []
+}
 ```
 
 ### Triggers

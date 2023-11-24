@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import VulnSearchInput, VulnSearchOutput, Input, Output, Component
 import logging
+
 # Constants below
 MAX_SIZE = 500
 AVG_SIZE = 200
