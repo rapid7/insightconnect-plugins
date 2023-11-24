@@ -4,10 +4,10 @@ products: [insightconnect]
 name: rapid7_insightvm_cloud
 title: Rapid7 InsightVM Cloud
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM Cloud Integrations API to view assets and start scans
-version: 4.0.0
+version: 5.0.0
 vendor: rapid7
 support: rapid7
-supported_versions: ["InsightVM Cloud Integration API v4", "2022-08-10"]
+supported_versions: ["InsightVM Cloud Integration API v4", "2023-11-24"]
 status: []
 cloud_ready: true
 resources:
@@ -1202,12 +1202,6 @@ actions:
         type: object
         required: false
         example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
-      asset_criteria:
-        title: Asset Criteria
-        description: Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames
-        type: string
-        example: "asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'"
-        required: false
       vuln_criteria:
         title: Vulnerability Criteria
         description: Vulnerability criteria to filter by

@@ -8,7 +8,6 @@ class Component:
 
 
 class Input:
-    ASSET_CRITERIA = "asset_criteria"
     SIZE = "size"
     SORT_CRITERIA = "sort_criteria"
     VULN_CRITERIA = "vuln_criteria"
@@ -24,12 +23,6 @@ class VulnSearchInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "asset_criteria": {
-      "type": "string",
-      "title": "Asset Criteria",
-      "description": "Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames",
-      "order": 3
-    },
     "size": {
       "type": "integer",
       "title": "Size",
@@ -47,7 +40,7 @@ class VulnSearchInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Vulnerability Criteria",
       "description": "Vulnerability criteria to filter by",
-      "order": 4
+      "order": 3
     }
   },
   "definitions": {}

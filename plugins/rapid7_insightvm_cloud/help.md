@@ -16,7 +16,7 @@ InsightVM is a powerful vulnerability management tool which finds, prioritizes, 
 # Supported Product Versions
 
 * InsightVM Cloud Integration API v4
-* 2022-08-10
+* 2023-11-24
 
 # Documentation
 
@@ -50,7 +50,6 @@ This action is used to search for vulnerabilities using filtered vulnerability s
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_criteria|string|None|False|Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames|None|asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'|", "|vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|
 |size|integer|200|False|The number of vulnerabilities to retrieve. If blank then will default to 200 vulnerabilities returned, the maximum limit is 500 vulnerabilities|None|100|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
 |vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|https://example.com IN ['example']|
@@ -59,7 +58,6 @@ Example input:
 
 ```
 {
-  "asset_criteria": "asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'",
   "size": 100,
   "sort_criteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}",
   "vuln_criteria": "vulnerability.categories IN ['example']"
@@ -1098,7 +1096,7 @@ _This plugin does not contain any triggers._
 |Exploits|integer|False|Exploit count|
 |ID|string|False|Vulnerability ID|
 |Links|[]link|False|List of hypermedia links to corresponding resources|
-|Malware Kits|integer|False|Malware kit count|
+|Malware Kits|[]object|[]|List of malware kits related to the vulnerability|
 |Modified|date|False|Date the vulnerability was last modified in InsightVM|
 |PCI|PCI|False|Vulnerability PCI details|
 |Published|date|False|Date the vulnerability was published|
@@ -1148,6 +1146,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 5.0.0 - Vulnerability Search: fix `malware_kits` output and remove `Asset Criteria` input
 * 4.0.0 - Vulnerability Search: fix schema validation problem for exploits field 
 * 3.3.0 - Asset Search: add filter fields: `current_time`, `comparison_time`
 * 3.2.0 - Add vulnerability search action
@@ -1159,9 +1158,9 @@ _This plugin does not contain any troubleshooting information._
 * 1.0.0 - Initial plugin
 
 # Links
+* [InsightVM Cloud API](https://help.rapid7.com/insightvm/en-us/api/integrations.html)
 
 ## References
 
-* [InsightVM Cloud API](https://help.rapid7.com/insightvm/en-us/api/integrations.html)
 * [Managing Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys)
 * [Scan Engine Pairing](https://docs.rapid7.com/insightvm/scan-engine-management-on-the-insight-platform/#how-to-pair-your-scan-engines-to-the-insight-platform)
