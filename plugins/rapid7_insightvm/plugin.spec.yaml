@@ -9,7 +9,6 @@ supported_versions: ["Rapid7 InsightVM API v3 2022-05-25"]
 vendor: rapid7
 support: rapid7
 status: []
-connection_version: 1
 sdk:
   type: slim
   version: 5
