@@ -31,7 +31,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         # Write scan_id to cache
         self.logger.info("Getting latest scan..")
         print(f"before find latest scan")
-        latest_scan_id = self.find_latest_scan()
+        latest_scan_id = self.find_latest_completed_scan()
         print(f"after find latest scan")
 
         # Initialize trigger cache at startup
@@ -42,7 +42,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         print(f"cache file contents beginning: {util.read_from_cache(self.CACHE_FILE_NAME)}")
 
         while True:
-            latest_scan_id = self.find_latest_scan()
+            latest_scan_id = self.find_latest_completed_scan()
             print(f"while True hit")
             # Open cache
             cache_site_scans = Cache.get_cache_site_scans(self)
@@ -133,7 +133,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         print(f"Results after condense: {results}")
         return results
 
-    def find_latest_scan(self) -> int:
+    def find_latest_completed_scan(self) -> int:
         """
 
         """
@@ -143,9 +143,10 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         endpoint = endpoints.Scan.scans(self.connection.console_url)
         response = resource_helper.resource_request(endpoint=endpoint, method="get", params={'sort': 'id,desc'})
 
-        latest_scan_id = response.get('resources')[0].get('id')
-        print(f"Latest scan ID in method: {latest_scan_id}")
-        return latest_scan_id
+        print(f"Response zero: {response.get('resources')[0:2]}")
+        for scan in response.get('resources'):
+            if scan.get('status') == 'finished':
+                return scan.get('id')
 
 
 class ScanQueries:
