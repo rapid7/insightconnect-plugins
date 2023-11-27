@@ -2135,6 +2135,7 @@ Example output:
 
 # Version History
 
+* 9.1.1 - `Threats Fetch File`: Updated action to prevent possible movement through file system
 * 9.1.0 - `Move Agent to Another Site`: Action added
 * 9.0.0 - Update plugin to allow cloud connections to be configured | Rename URL input to Instance in connection | Code refactor
 * 8.1.0 - Added New actions: Fetch file for agent ID and Run remote script. Updated description for Trigger resolved field

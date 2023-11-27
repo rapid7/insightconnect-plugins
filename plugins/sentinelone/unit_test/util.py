@@ -146,6 +146,8 @@ class Util:
                 return MockResponse(200, "affected_2")
             return MockResponse(200, "affected_1")
         elif args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/activities":
+            if params.get("threatIds") == "1000000000000000001":
+                return MockResponse(200, "activities_malicious_file_path")
             if params.get("countOnly"):
                 return MockResponse(200, "activities_count_only")
             if params == {
@@ -294,7 +296,12 @@ class Util:
                 return MockResponse(200, "name_not_available")
             return MockResponse(200, "name_available")
         elif args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/threats":
-            if params.get("ids") in [["valid_threat_id_1"], ["valid_threat_id_2"], ["1000000000000000000"]]:
+            if params.get("ids") in [
+                ["valid_threat_id_1"],
+                ["valid_threat_id_2"],
+                ["1000000000000000000"],
+                ["1000000000000000001"],
+            ]:
                 return MockResponse(200, "threats")
             if params.get("ids") == ["same_status_threat_id_1"]:
                 return MockResponse(200, "threats_same_status")
@@ -338,6 +345,13 @@ class Util:
         elif (
             args[1]
             == r"https://rapid7.sentinelone.net/web/api/v2.1/Device\HarddiskVolume2\Users\Administrator\Desktop\test.txt"
+        ):
+            mock_response = MockResponse(200)
+            mock_response.content = Util.read_file_to_bytes(f"responses/threats_fetch_file_download.zip.resp")
+            return mock_response
+        elif (
+            args[1]
+            == r"https://rapid7.sentinelone.net/web/api/v2.1/Fake\HarddiskVolume2\Users\Administrator\Desktop\test.txt"
         ):
             mock_response = MockResponse(200)
             mock_response.content = Util.read_file_to_bytes(f"responses/threats_fetch_file_download.zip.resp")
