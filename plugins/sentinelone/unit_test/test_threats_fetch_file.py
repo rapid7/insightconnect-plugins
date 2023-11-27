@@ -26,6 +26,11 @@ class TestThreatsFetchFile(TestCase):
                 Util.read_file_to_dict("inputs/threats_fetch_file.json.inp"),
                 Util.read_file_to_dict("expected/threats_fetch_file.json.exp"),
             ],
+            [
+                "threats_fetch_file_traversal_file_path",
+                Util.read_file_to_dict("inputs/threats_fetch_file_invalid_path.json.inp"),
+                Util.read_file_to_dict("expected/threats_fetch_file.json.exp"),
+            ],
         ]
     )
     def test_threats_fetch_file(self, mock_request, test_name, input_params, expected):
