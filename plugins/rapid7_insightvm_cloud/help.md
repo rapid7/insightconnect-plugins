@@ -83,53 +83,74 @@ Example output:
 {
   "assets": [
     {
-      "Assessed for Policies": "true",
-      "Assessed for Vulnerabilities": {},
-      "Credential Assessments": [
+      "assessed_for_policies": false,
+      "assessed_for_vulnerabilities": true,
+      "credential_assessments": [],
+      "critical_vulnerabilities": 12,
+      "exploits": 5,
+      "id": "cdc978de-4178-a1d9-d5a94a114b87-example",
+      "ip": "2001:db8:1:1:1:1:1:1",
+      "last_assessed_for_vulnerabilities": "2020-06-25T15:19:51.543Z",
+      "last_scan_end": "2020-10-26T22:35:53.590Z",
+      "last_scan_start": "2020-10-26T22:35:53.564Z",
+      "mac": "00:50:56:94:52:04",
+      "malware_kits": 0,
+      "moderate_vulnerabilities": 4,
+      "new": [],
+      "os_architecture": "",
+      "os_description": "Linux 2.6.32",
+      "os_family": "Linux",
+      "os_name": "Linux",
+      "os_system_name": "Linux",
+      "os_type": "General",
+      "os_vendor": "Linux",
+      "os_version": "2.6.32",
+      "remediated": [],
+      "risk_score": 9304.376953125,
+      "severe_vulnerabilities": 21,
+      "tags": [
         {
-          "Port": 0,
-          "Protocol": "",
-          "Status": {}
+          "name": "integrations discovery",
+          "type": "SITE"
         }
       ],
-      "Critical Vulnerabilities": {},
-      "Exploits": {},
-      "Hostname": {},
-      "ID": {},
-      "IP": {},
-      "Last Assessed For Vulnerabilities": {},
-      "Last Scan End": {},
-      "Last Scan Start": {},
-      "MAC": {},
-      "Malware Kits": {},
-      "Moderate Vulnerabilities": {},
-      "New Vulnerabilities": [
-        {}
-      ],
-      "OS Architecture": {},
-      "OS Description": {},
-      "OS Family": {},
-      "OS Name": {},
-      "OS System Name": {},
-      "OS Type": {},
-      "OS Vendor": {},
-      "Remediated Vulnerabilities": {},
-      "Risk Score": 0.0,
-      "Severe Vulnerabilities": {},
-      "Source": {},
-      "Tags": [
+      "total_vulnerabilities": 37,
+      "unique_identifiers": []
+    },
+    {
+      "assessed_for_policies": false,
+      "assessed_for_vulnerabilities": true,
+      "credential_assessments": [],
+      "critical_vulnerabilities": 12,
+      "exploits": 5,
+      "id": "cdc978de-4178-a1d9-d5a94a114b87-example",
+      "ip": "2001:db8:1:1:1:1:1:1",
+      "last_assessed_for_vulnerabilities": "2020-06-25T15:19:51.543Z",
+      "last_scan_end": "2020-10-26T22:35:53.590Z",
+      "last_scan_start": "2020-10-26T22:35:53.564Z",
+      "mac": "00:50:56:94:52:04",
+      "malware_kits": 0,
+      "moderate_vulnerabilities": 4,
+      "new": [],
+      "os_architecture": "",
+      "os_description": "Linux 2.6.32",
+      "os_family": "Linux",
+      "os_name": "Linux",
+      "os_system_name": "Linux",
+      "os_type": "General",
+      "os_vendor": "Linux",
+      "os_version": "2.6.32",
+      "remediated": [],
+      "risk_score": 9304.376953125,
+      "severe_vulnerabilities": 21,
+      "tags": [
         {
-          "Name": {},
-          "Type": {}
+          "name": "integrations discovery",
+          "type": "SITE"
         }
       ],
-      "Total Vulnerabilities": {},
-      "Unique Identifiers": [
-        {
-          "ID": {},
-          "Source": {}
-        }
-      ]
+      "total_vulnerabilities": 37,
+      "unique_identifiers": []
     }
   ]
 }
@@ -167,68 +188,67 @@ Example output:
 ```
 {
   "asset": {
-    "Assessed for Policies": "true",
-    "Assessed for Vulnerabilities": {},
-    "Credential Assessments": [
+    "assessed_for_policies": false,
+    "assessed_for_vulnerabilities": true,
+    "credential_assessments": [
       {
-        "Port": 0,
-        "Protocol": "",
-        "Status": {}
+        "port": 22,
+        "protocol": "TCP",
+        "status": "NO_CREDS_SUPPLIED"
       }
     ],
-    "Critical Vulnerabilities": {},
-    "Exploits": {},
-    "Hostname": {},
-    "ID": {},
-    "IP": {},
-    "Last Assessed For Vulnerabilities": {},
-    "Last Scan End": {},
-    "Last Scan Start": {},
-    "MAC": {},
-    "Malware Kits": {},
-    "Moderate Vulnerabilities": {},
-    "New Vulnerabilities": [
-      {}
-    ],
-    "OS Architecture": {},
-    "OS Description": {},
-    "OS Family": {},
-    "OS Name": {},
-    "OS System Name": {},
-    "OS Type": {},
-    "OS Vendor": {},
-    "Remediated Vulnerabilities": {},
-    "Risk Score": 0.0,
-    "Severe Vulnerabilities": {},
-    "Source": {},
-    "Tags": [
+    "critical_vulnerabilities": 1,
+    "exploits": 2,
+    "host_name": "example.rapid7.com",
+    "id": "cdc978de-4178-a1d9-d5a94a114b87-example",
+    "ip": "2001:db8:1:1:1:1:1:1",
+    "last_assessed_for_vulnerabilities": "2021-04-26T08:04:28.536Z",
+    "last_scan_end": "2021-04-26T08:04:28.536Z",
+    "last_scan_start": "2021-04-26T08:00:56.006Z",
+    "mac": "00:50:56:94:42:6B",
+    "malware_kits": 0,
+    "moderate_vulnerabilities": 7,
+    "new": [],
+    "remediated": [],
+    "risk_score": 9006.3388671875,
+    "severe_vulnerabilities": 19,
+    "tags": [
       {
-        "Name": {},
-        "Type": {}
+        "name": "sn_pt_LDAP Admins",
+        "type": "OWNER"
+      },
+      {
+        "name": "sn_CAB Approval",
+        "type": "OWNER"
+      },
+      {
+        "name": "integrations",
+        "type": "CUSTOM"
+      },
+      {
+        "name": "ck_test_site_2",
+        "type": "SITE"
+      },
+      {
+        "name": "integrations",
+        "type": "SITE"
+      },
+      {
+        "name": "ck_test_site_3",
+        "type": "SITE"
+      },
+      {
+        "name": "integrations discovery",
+        "type": "SITE"
+      },
+      {
+        "name": "ck_test_site_1",
+        "type": "SITE"
       }
     ],
-    "Total Vulnerabilities": {},
-    "Unique Identifiers": [
-      {
-        "ID": {},
-        "Source": {}
-      }
-    ]
-  },
-  "vulnerabilities": [
-    {
-      "First Found": "",
-      "Fix": {},
-      "Last Found": {},
-      "Proof": {},
-      "Solution ID": {},
-      "Solution Summary": {},
-      "Solution Type": {},
-      "Status": {},
-      "Vulnerability ID": {},
-      "Vulnerability Key": ""
-    }
-  ]
+    "total_vulnerabilities": 27,
+    "unique_identifiers": []
+  }
 }
 ```
 
@@ -311,11 +331,11 @@ Example output:
 ```
 {
   "asset_ids": [
-    ""
+    "cdc978de-4178-a1d9-d5a94a114b87-example..."
   ],
   "data": {},
   "ids": [
-    ""
+    "436a59e4-b203-4743-89a9-5b76294f20f4"
   ]
 }
 ```
@@ -390,71 +410,106 @@ Example output:
 {
   "vulnerabilities": [
     {
-      "Added": "",
-      "CVES": {},
-      "CVSSv2": {
-        "Access Complexity": {},
-        "Access Vector": {},
-        "Authentication": {},
-        "Availability Impact": {},
-        "Confidentiality Impact": {},
-        "Exploit Score": 0.0,
-        "Impact Score": {},
-        "Integrity Impact": {},
-        "Score": {},
-        "Vector": {}
-      },
-      "CVSSv3": {
-        "Attack Complexity": {},
-        "Attack Vector": {},
-        "Availability Impact": {},
-        "Confidentiality Impact": {},
-        "Exploit Score": {},
-        "Impact Score": {},
-        "Integrity Impact": {},
-        "Privilege Required": {},
-        "Scope": {},
-        "Score": {},
-        "User Interaction": {},
-        "Vector": {}
-      },
-      "Categories": {},
-      "Denial of Service": "true",
-      "Description": {},
-      "Exploits": [
+      "added": "2018-05-16T00:00:00Z",
+      "categories": "7-Zip",
+      "cves": "CVE-1234-5678",
+      "cvss_v2_access_complexity": "low",
+      "cvss_v2_access_vector": "network",
+      "cvss_v2_authentication": "none",
+      "cvss_v2_availability_impact": "complete",
+      "cvss_v2_confidentiality_impact": "complete",
+      "cvss_v2_exploit_score": 9.996799945831299,
+      "cvss_v2_impact_score": 10.000845454680942,
+      "cvss_v2_integrity_impact": "complete",
+      "cvss_v2_score": 10.0,
+      "cvss_v2_vector": "(AV:N/AC:L/Au:N/C:C/I:C/A:C)",
+      "cvss_v3_attack_complexity": null,
+      "cvss_v3_attack_vector": null,
+      "cvss_v3_availability_impact": null,
+      "cvss_v3_confidentiality_impact": null,
+      "cvss_v3_exploit_score": 0.0,
+      "cvss_v3_impact_score": null,
+      "cvss_v3_integrity_impact": null,
+      "cvss_v3_privileges_required": null,
+      "cvss_v3_scope": null,
+      "cvss_v3_score": 0.0,
+      "cvss_v3_user_interaction": null,
+      "cvss_v3_vector": null,
+      "denial_of_service": false,
+      "description": "Unspecified vulnerability in 7-zip before 4.5.7 has unknown impact and remote attack vectors, as demonstrated by the PROTOS GENOME test suite for Archive Formats (c10).",
+      "exploits": [],
+      "id": "7-zip-cve-1234-5678",
+      "links": [
         {
-          "Description": {},
-          "ID": {},
-          "Name": {},
-          "Rank": {},
-          "Skill level": {},
-          "Source": {}
+          "href": "http://www.example.com",
+          "id": "http://www.example.com",
+          "source": "url"
         }
       ],
-      "ID": {},
-      "Links": [
+      "malware_kits": [],
+      "modified": "2018-06-08T00:00:00Z",
+      "pci_cvss_score": 10.0,
+      "pci_fail": true,
+      "pci_severity_score": 5,
+      "pci_special_notes": "",
+      "pci_status": "fail",
+      "published": "2009-03-29T00:00:00Z",
+      "references": "http://www.example.com",
+      "risk_score": 898.76,
+      "severity": "critical",
+      "severity_score": 10,
+      "title": "7-Zip: CVE-1234-5678: Unspecified vulnerability in 7-zip before 4.5.7"
+    },
+    {
+      "added": "2018-05-16T00:00:00Z",
+      "categories": "7-Zip,Remote Execution",
+      "cves": "CVE-1234-5678",
+      "cvss_v2_access_complexity": "medium",
+      "cvss_v2_access_vector": "network",
+      "cvss_v2_authentication": "none",
+      "cvss_v2_availability_impact": "complete",
+      "cvss_v2_confidentiality_impact": "complete",
+      "cvss_v2_exploit_score": 8.588799953460693,
+      "cvss_v2_impact_score": 10.000845454680942,
+      "cvss_v2_integrity_impact": "complete",
+      "cvss_v2_score": 9.3,
+      "cvss_v2_vector": "(AV:N/AC:M/Au:N/C:C/I:C/A:C)",
+      "cvss_v3_attack_complexity": "low",
+      "cvss_v3_attack_vector": "local",
+      "cvss_v3_availability_impact": "high",
+      "cvss_v3_confidentiality_impact": "high",
+      "cvss_v3_exploit_score": 1.8345765900000002,
+      "cvss_v3_impact_score": 5.873118720000001,
+      "cvss_v3_integrity_impact": "high",
+      "cvss_v3_privileges_required": "none",
+      "cvss_v3_scope": "unchanged",
+      "cvss_v3_score": 7.8,
+      "cvss_v3_user_interaction": "required",
+      "cvss_v3_vector": "CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+      "denial_of_service": false,
+      "description": "Heap-based buffer overflow in the NArchive::NHfs::CHandler::ExtractZlibFile method in 7zip before 16.00 and p7zip allows remote attackers to execute arbitrary code via a crafted HFS+ image.",
+      "exploits": [],
+      "id": "7-zip-cve-1234-5678",
+      "links": [
         {
-          "Rel": {},
-          "URL": {}
+          "href": "http://www.example.com",
+          "id": "http://www.example.com",
+          "source": "url"
         }
       ],
-      "Malware Kits": [
-        {}
-      ],
-      "Modified": {},
-      "PCI": {
-        "Adjusted CVSS score": 0,
-        "Adjusted severity score": {},
-        "Fail": {},
-        "Special Notes": {},
-        "Status": {}
-      },
-      "Published": {},
-      "References": {},
-      "Risk Score": {},
-      "Severity": {},
-      "Severity Score": {},
-      "Title": ""
+      "malware_kits": [],
+      "modified": "2018-06-08T00:00:00Z",
+      "pci_cvss_score": 9.3,
+      "pci_fail": true,
+      "pci_severity_score": 5,
+      "pci_special_notes": "",
+      "pci_status": "fail",
+      "published": "2016-12-13T00:00:00Z",
+      "references": "http://www.example.com",
+      "risk_score": 718.8,
+      "severity": "critical",
+      "severity_score": 9,
+      "title": "7-Zip: CVE-1234-5678: Heap-based buffer overflow vulnerability"
     }
   ]
 }
