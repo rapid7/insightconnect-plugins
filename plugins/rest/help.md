@@ -342,6 +342,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 6.0.4 - Custom Auth: Fix bug where we could not pass the API Key from the input into the Authentication header if the header value included a prefix
 * 6.0.3 - Added empty `__init__.py` file to `unit_test` folder | Refreshed with new tooling | Updated `requirements.txt`
 * 6.0.2 - Fixed a bug that would cause an incorrect error message whenever a 400 error was received and the response object was a list
 * 6.0.1 - Improved ability of 'Body Any' input to handle non-standard characters and JSON input
