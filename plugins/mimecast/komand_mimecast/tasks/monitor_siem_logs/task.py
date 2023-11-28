@@ -68,7 +68,6 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :return: A new list of dictionaries representing the filtered and sorted recent events.
         :rtype: List[Dict[str, Any]]
         """
-
         self.logger.info(f"Number of raw logs returned from Mimecast: {len(task_output)}")
         task_output = sorted(
             map(
