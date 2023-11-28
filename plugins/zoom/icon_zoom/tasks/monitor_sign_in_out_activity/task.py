@@ -189,6 +189,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         Returns:
             int: The last valid timestamp.
         """
+
         last_request_timestamp = state.get(self.LAST_REQUEST_TIMESTAMP)
         if not last_request_timestamp:
             return
