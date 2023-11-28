@@ -49,7 +49,6 @@ class TestVulnSearch(TestCase):
         expected = Utils.read_file_to_dict("expected_responses/vuln_search.json.resp")
         self.assertEqual(expected, actual)
 
-
     # test finding event with bad vuln criteria
     @patch("requests.request", side_effect=mock_request)
     def test_asset_vuln_criteria_invalid(self, _mock_req):
