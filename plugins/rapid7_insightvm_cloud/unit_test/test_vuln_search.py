@@ -6,8 +6,9 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+from jsonschema import validate
 from icon_rapid7_insightvm_cloud.actions.vuln_search import VulnSearch
-from icon_rapid7_insightvm_cloud.actions.vuln_search.schema import Input
+from icon_rapid7_insightvm_cloud.actions.vuln_search.schema import Input, VulnSearchOutput
 from icon_rapid7_insightvm_cloud.connection.schema import Input as ConnectionInput
 from unittest.mock import patch
 from utils import Utils
@@ -41,6 +42,7 @@ class TestVulnSearch(TestCase):
         )
         expected = Utils.read_file_to_dict("expected_responses/vuln_search.json.resp")
         self.assertEqual(expected, actual)
+        validate(actual, VulnSearchOutput.schema)
 
     # test finding event with no inputs
     @patch("requests.request", side_effect=mock_request)
@@ -48,6 +50,7 @@ class TestVulnSearch(TestCase):
         actual = self.action.run()
         expected = Utils.read_file_to_dict("expected_responses/vuln_search.json.resp")
         self.assertEqual(expected, actual)
+        validate(actual, VulnSearchOutput.schema)
 
     # test finding event with bad vuln criteria
     @patch("requests.request", side_effect=mock_request)

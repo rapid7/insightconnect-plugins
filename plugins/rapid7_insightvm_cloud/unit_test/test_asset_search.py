@@ -6,8 +6,9 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+from jsonschema import validate
 from icon_rapid7_insightvm_cloud.actions.asset_search import AssetSearch
-from icon_rapid7_insightvm_cloud.actions.asset_search.schema import Input
+from icon_rapid7_insightvm_cloud.actions.asset_search.schema import Input, AssetSearchOutput
 from icon_rapid7_insightvm_cloud.connection.schema import Input as ConnectionInput
 from unittest.mock import patch
 from utils import Utils
@@ -46,6 +47,7 @@ class TestAssetSearch(TestCase):
         )
         expected = Utils.read_file_to_dict("expected_responses/asset_search.json.resp")
         self.assertEqual(expected, actual)
+        validate(actual, AssetSearchOutput.schema)
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
@@ -53,6 +55,7 @@ class TestAssetSearch(TestCase):
         actual = self.action.run()
         expected = Utils.read_file_to_dict("expected_responses/asset_search.json.resp")
         self.assertEqual(expected, actual)
+        validate(actual, AssetSearchOutput.schema)
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)

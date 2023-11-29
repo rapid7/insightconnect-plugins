@@ -6,9 +6,10 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+from jsonschema import validate
 from icon_rapid7_insightvm_cloud.connection.schema import Input as ConnectionInput
 from icon_rapid7_insightvm_cloud.actions.start_scan import StartScan
-from icon_rapid7_insightvm_cloud.actions.start_scan.schema import Input
+from icon_rapid7_insightvm_cloud.actions.start_scan.schema import Input, StartScanOutput
 from unittest.mock import patch
 from utils import Utils
 from mock import (
@@ -49,6 +50,7 @@ class TestStartScan(TestCase):
         )
         expected = Utils.read_file_to_dict("expected_responses/start_scan.json.resp")
         self.assertEqual(expected, actual)
+        validate(actual, StartScanOutput.schema)
 
     @patch("requests.request", side_effect=mock_request)
     def test_start_scan_invalid_asset_ids(self, _mock_req):
