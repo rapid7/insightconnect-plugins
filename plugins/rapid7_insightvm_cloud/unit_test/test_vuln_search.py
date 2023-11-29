@@ -1,26 +1,28 @@
-import sys
 import os
+import sys
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from jsonschema import validate
+from unittest.mock import MagicMock, patch
+
 from icon_rapid7_insightvm_cloud.actions.vuln_search import VulnSearch
 from icon_rapid7_insightvm_cloud.actions.vuln_search.schema import Input, VulnSearchOutput
 from icon_rapid7_insightvm_cloud.connection.schema import Input as ConnectionInput
-from unittest.mock import patch
+from jsonschema import validate
+
+from mock import mock_request
 from utils import Utils
-from mock import (
-    mock_request,
-)
 
 
 class TestVulnSearch(TestCase):
     @classmethod
     def setUpClass(self) -> None:
         self.params = {
+            "asset_criteria": "last_scan_end > 2000-01-01T00:00:00.000Z",
+            "asset_criteria_invalid": "invalid asset criteria",
             "size": 10,
             "sort_criteria": {"risk-score": "asc", "criticality-tag": "desc"},
             "vuln_criteria": "severity IN ['Critical', 'Severe']",
@@ -32,7 +34,7 @@ class TestVulnSearch(TestCase):
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
-    def test_vuln_search_all_inputs(self, _mock_req):
+    def test_vuln_search_all_inputs(self, _mock_req: MagicMock) -> None:
         actual = self.action.run(
             {
                 Input.SIZE: self.params.get("size"),
@@ -46,7 +48,7 @@ class TestVulnSearch(TestCase):
 
     # test finding event with no inputs
     @patch("requests.request", side_effect=mock_request)
-    def test_vuln_search_no_input(self, _mock_req):
+    def test_vuln_search_no_input(self, _mock_req: MagicMock) -> None:
         actual = self.action.run()
         expected = Utils.read_file_to_dict("expected_responses/vuln_search.json.resp")
         self.assertEqual(expected, actual)
@@ -54,7 +56,7 @@ class TestVulnSearch(TestCase):
 
     # test finding event with bad vuln criteria
     @patch("requests.request", side_effect=mock_request)
-    def test_asset_vuln_criteria_invalid(self, _mock_req):
+    def test_asset_vuln_criteria_invalid(self, _mock_req: MagicMock) -> None:
         with self.assertRaises(PluginException) as context:
             self.action.run(
                 {
@@ -72,7 +74,7 @@ class TestVulnSearch(TestCase):
 
     # test finding event with bad secret key
     @patch("requests.request", side_effect=mock_request)
-    def test_vuln_search_invalid_secret_key(self, _mock_req):
+    def test_vuln_search_invalid_secret_key(self, _mock_req: MagicMock) -> None:
         self.connection, self.action = Utils.default_connector(
             VulnSearch(),
             {ConnectionInput.REGION: "us", ConnectionInput.CREDENTIALS: {"secretKey": "secret_key_invalid"}},
@@ -86,7 +88,7 @@ class TestVulnSearch(TestCase):
 
     # test finding event with server error
     @patch("requests.request", side_effect=mock_request)
-    def test_vuln_search_server_error(self, _mock_req):
+    def test_vuln_search_server_error(self, _mock_req: MagicMock) -> None:
         self.connection, self.action = Utils.default_connector(
             VulnSearch(),
             {ConnectionInput.REGION: "us", ConnectionInput.CREDENTIALS: {"secretKey": "secret_key_server_error"}},

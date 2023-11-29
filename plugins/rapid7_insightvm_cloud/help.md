@@ -1,6 +1,6 @@
 # Description
 
-InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM Cloud Integrations API to view assets and start scans
+InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM Cloud Integrations API to view assets and start scans.
 
 # Key Features
 
@@ -15,7 +15,7 @@ InsightVM is a powerful vulnerability management tool which finds, prioritizes, 
 
 # Supported Product Versions
   
-* InsightVM Cloud Integration API v4  
+* InsightVM Cloud Integration API v4
 * 2023-11-24
 
 # Documentation
@@ -42,10 +42,9 @@ Example input:
 
 ### Actions
 
-
 #### Asset Search
   
-Search for assets using filtered asset search
+This action is used to search for assets using filtered asset search.
 
 ##### Input
 
@@ -55,7 +54,7 @@ Search for assets using filtered asset search
 |comparison_time|date|None|False|The date and time to compare the asset current state against to detect changes|None|2021-04-15T17:56:47Z|
 |current_time|date|None|False|The current date and time to compare against the asset state to detect changes|None|2021-04-15T17:56:47Z|
 |size|integer|200|False|The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets|None|100|
-|sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
+|sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|
 |vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|
   
 Example input:
@@ -66,7 +65,10 @@ Example input:
   "comparison_time": "2021-04-15T17:56:47Z",
   "current_time": "2021-04-15T17:56:47Z",
   "size": 200,
-  "sort_criteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}",
+  "sort_criteria": {
+    "criticality-tag": "desc",
+    "risk-score": "asc"
+  },
   "vuln_criteria": "vulnerability.categories IN ['example']"
 }
 ```
@@ -75,7 +77,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|assets|[]asset|True|List of asset details returned by the search|None|
+|assets|[]asset|True|List of asset details returned by the search|[{"assessed_for_policies":false,"assessed_for_vulnerabilities":true,"credential_assessments":[],"critical_vulnerabilities":12,"exploits":5,"id":"cdc978de-4178-a1d9-d5a94a114b87-example","ip":"2001:db8:1:1:1:1:1:1","last_assessed_for_vulnerabilities":"2020-06-25T15:19:51.543Z","last_scan_end":"2020-10-26T22:35:53.590Z","last_scan_start":"2020-10-26T22:35:53.564Z","mac":"00:50:56:94:52:04","malware_kits":0,"moderate_vulnerabilities":4,"new":[],"os_architecture":"","os_description":"Linux 2.6.32","os_family":"Linux","os_name":"Linux","os_system_name":"Linux","os_type":"General","os_vendor":"Linux","os_version":"2.6.32","remediated":[],"risk_score":9304.376953125,"severe_vulnerabilities":21,"tags":[{"name":"integrations discovery","type":"SITE"}],"total_vulnerabilities":37,"unique_identifiers":[]},{"assessed_for_policies":false,"assessed_for_vulnerabilities":true,"credential_assessments":[],"critical_vulnerabilities":12,"exploits":5,"id":"cdc978de-4178-a1d9-d5a94a114b87-example","ip":"2001:db8:1:1:1:1:1:1","last_assessed_for_vulnerabilities":"2020-06-25T15:19:51.543Z","last_scan_end":"2020-10-26T22:35:53.590Z","last_scan_start":"2020-10-26T22:35:53.564Z","mac":"00:50:56:94:52:04","malware_kits":0,"moderate_vulnerabilities":4,"new":[],"os_architecture":"","os_description":"Linux 2.6.32","os_family":"Linux","os_name":"Linux","os_system_name":"Linux","os_type":"General","os_vendor":"Linux","os_version":"2.6.32","remediated":[],"risk_score":9304.376953125,"severe_vulnerabilities":21,"tags":[{"name":"integrations discovery","type":"SITE"}],"total_vulnerabilities":37,"unique_identifiers":[]}]|
   
 Example output:
 
@@ -158,7 +160,7 @@ Example output:
 
 #### Get Asset
   
-Gets an asset by ID
+This action is used to get an asset by ID.
 
 ##### Input
 
@@ -180,8 +182,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|asset|asset|True|Asset details|None|
-|vulnerabilities|[]asset_vulnerability|False|Vulnerabilities associated with the asset|None|
+|asset|asset|True|Asset details|{"assessed_for_policies":false,"assessed_for_vulnerabilities":true,"credential_assessments":[{"port":22,"protocol":"TCP","status":"NO_CREDS_SUPPLIED"}],"critical_vulnerabilities":1,"exploits":2,"host_name":"example.rapid7.com","id":"cdc978de-4178-a1d9-d5a94a114b87-example","ip":"2001:db8:1:1:1:1:1:1","last_assessed_for_vulnerabilities":"2021-04-26T08:04:28.536Z","last_scan_end":"2021-04-26T08:04:28.536Z","last_scan_start":"2021-04-26T08:00:56.006Z","mac":"00:50:56:94:42:6B","malware_kits":0,"moderate_vulnerabilities":7,"new":[],"remediated":[],"risk_score":9006.3388671875,"severe_vulnerabilities":19,"tags":[{"name":"sn_pt_LDAP Admins","type":"OWNER"},{"name":"sn_CAB Approval","type":"OWNER"},{"name":"integrations","type":"CUSTOM"},{"name":"ck_test_site_2","type":"SITE"},{"name":"integrations","type":"SITE"},{"name":"ck_test_site_3","type":"SITE"},{"name":"integrations discovery","type":"SITE"},{"name":"ck_test_site_1","type":"SITE"}],"total_vulnerabilities":27,"unique_identifiers":[]}|
+|vulnerabilities|[]asset_vulnerability|False|Vulnerabilities associated with the asset|[]|
   
 Example output:
 
@@ -248,13 +250,14 @@ Example output:
     ],
     "total_vulnerabilities": 27,
     "unique_identifiers": []
-  }
+  },
+  "vulnerabilities": []
 }
 ```
 
 #### Get Scan
   
-Get the status of a scan
+This action is used to get the status of a scan.
 
 ##### Input
 
@@ -285,7 +288,9 @@ Example output:
 
 ```
 {
-  "asset_ids": "abc978-5678-abc-a5a94a1234b8-asset",
+  "asset_ids": [
+    "abc978-5678-abc-a5a94a1234b8-asset"
+  ],
   "finished": "2021-04-15T18:00:33Z",
   "name": "testing scan action",
   "scan_id": "a9870dce1234180e202af83b66cd0c4b",
@@ -296,7 +301,7 @@ Example output:
 
 #### Start Scan
   
-Start an InsightVM scan of previously scanned devices
+This action is used to start an InsightVM scan of previously scanned devices.
 
 ##### Input
 
@@ -311,9 +316,15 @@ Example input:
 
 ```
 {
-  "asset_ids": "abc978-5678-abc-a5a94a1234b8-asset",
-  "hostnames": "rapid7.com",
-  "ips": "2001:db8:1:1:1:1:1:1",
+  "asset_ids": [
+    "abc978-5678-abc-a5a94a1234b8-asset"
+  ],
+  "hostnames": [
+    "rapid7.com"
+  ],
+  "ips": [
+    "2001:db8:1:1:1:1:1:1"
+  ],
   "name": "test cloud scan"
 }
 ```
@@ -322,27 +333,44 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|asset_ids|[]string|False|List of identifiers of the assets scanned|None|
-|data|object|False|Information received about the scan|None|
-|ids|[]string|False|List of identifiers of the scans started|None|
+|asset_ids|[]string|False|List of identifiers of the assets scanned|["5058b0b4-701a-414e-9630-430d2cddbf4d"]|
+|data|object|False|Information received about the scan|{"scans":[{"engine_id":"5058b0b4-701a-414e-9630-430d2cddbf4d","id":"5058b0b4-701a-414e-9630-430d2cddbf4d","name":"TestScan","asset_ids":["5058b0b4-701a-414e-9630-430d2cddbf4d"]}],"unscanned_assets":[{"id":"5058b0b4-701a-414e-9630-430d2cddbf4d","reason":"Asset has never been scanned with an InsightVM Platform registered engine."}]}|
+|ids|[]string|False|List of identifiers of the scans started|["5058b0b4-701a-414e-9630-430d2cddbf4d"]|
   
 Example output:
 
 ```
 {
   "asset_ids": [
-    "cdc978de-4178-a1d9-d5a94a114b87-example..."
+    "5058b0b4-701a-414e-9630-430d2cddbf4d"
   ],
-  "data": {},
+  "data": {
+    "scans": [
+      {
+        "asset_ids": [
+          "5058b0b4-701a-414e-9630-430d2cddbf4d"
+        ],
+        "engine_id": "5058b0b4-701a-414e-9630-430d2cddbf4d",
+        "id": "5058b0b4-701a-414e-9630-430d2cddbf4d",
+        "name": "TestScan"
+      }
+    ],
+    "unscanned_assets": [
+      {
+        "id": "5058b0b4-701a-414e-9630-430d2cddbf4d",
+        "reason": "Asset has never been scanned with an InsightVM Platform registered engine."
+      }
+    ]
+  },
   "ids": [
-    "436a59e4-b203-4743-89a9-5b76294f20f4"
+    "5058b0b4-701a-414e-9630-430d2cddbf4d"
   ]
 }
 ```
 
 #### Stop Scan
   
-Stop a scan in progress
+This action is used to stop a scan in progress.
 
 ##### Input
 
@@ -378,14 +406,14 @@ Example output:
 
 #### Vulnerability Search
   
-Search for vulnerabilities using filtered vulnerability search
+This action is used to search for vulnerabilities using filtered vulnerability search.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |size|integer|200|False|The number of vulnerabilities to retrieve. If blank then will default to 200 vulnerabilities returned, the maximum limit is 500 vulnerabilities|None|100|
-|sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
+|sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|
 |vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|
   
 Example input:
@@ -393,7 +421,10 @@ Example input:
 ```
 {
   "size": 200,
-  "sort_criteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}",
+  "sort_criteria": {
+    "criticality-tag": "desc",
+    "risk-score": "asc"
+  },
   "vuln_criteria": "vulnerability.categories IN ['example']"
 }
 ```
@@ -402,7 +433,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|vulnerabilities|[]vulnerability|True|Vulnerabilities associated with the asset|None|
+|vulnerabilities|[]vulnerability|True|Vulnerabilities associated with the asset|[{"added":"2018-05-16T00:00:00Z","categories":"7-Zip","cves":"CVE-1234-5678","cvss_v2_access_complexity":"low","cvss_v2_access_vector":"network","cvss_v2_authentication":"none","cvss_v2_availability_impact":"complete","cvss_v2_confidentiality_impact":"complete","cvss_v2_exploit_score":9.996799945831299,"cvss_v2_impact_score":10.000845454680942,"cvss_v2_integrity_impact":"complete","cvss_v2_score":10,"cvss_v2_vector":"(AV:N/AC:L/Au:N/C:C/I:C/A:C)","cvss_v3_attack_complexity":null,"cvss_v3_attack_vector":null,"cvss_v3_availability_impact":null,"cvss_v3_confidentiality_impact":null,"cvss_v3_exploit_score":0,"cvss_v3_impact_score":null,"cvss_v3_integrity_impact":null,"cvss_v3_privileges_required":null,"cvss_v3_scope":null,"cvss_v3_score":0,"cvss_v3_user_interaction":null,"cvss_v3_vector":null,"denial_of_service":false,"description":"Unspecified vulnerability in 7-zip before 4.5.7 has unknown impact and remote attack vectors, as demonstrated by the PROTOS GENOME test suite for Archive Formats (c10).","exploits":[],"id":"7-zip-cve-1234-5678","links":[{"href":"http://www.example.com","id":"http://www.example.com","source":"url"}],"malware_kits":[],"modified":"2018-06-08T00:00:00Z","pci_cvss_score":10,"pci_fail":true,"pci_severity_score":5,"pci_special_notes":"","pci_status":"fail","published":"2009-03-29T00:00:00Z","references":"http://www.example.com","risk_score":898.76,"severity":"critical","severity_score":10,"title":"7-Zip: CVE-1234-5678: Unspecified vulnerability in 7-zip before 4.5.7"},{"added":"2018-05-16T00:00:00Z","categories":"7-Zip,Remote Execution","cves":"CVE-1234-5678","cvss_v2_access_complexity":"medium","cvss_v2_access_vector":"network","cvss_v2_authentication":"none","cvss_v2_availability_impact":"complete","cvss_v2_confidentiality_impact":"complete","cvss_v2_exploit_score":8.588799953460693,"cvss_v2_impact_score":10.000845454680942,"cvss_v2_integrity_impact":"complete","cvss_v2_score":9.3,"cvss_v2_vector":"(AV:N/AC:M/Au:N/C:C/I:C/A:C)","cvss_v3_attack_complexity":"low","cvss_v3_attack_vector":"local","cvss_v3_availability_impact":"high","cvss_v3_confidentiality_impact":"high","cvss_v3_exploit_score":1.8345765900000002,"cvss_v3_impact_score":5.873118720000001,"cvss_v3_integrity_impact":"high","cvss_v3_privileges_required":"none","cvss_v3_scope":"unchanged","cvss_v3_score":7.8,"cvss_v3_user_interaction":"required","cvss_v3_vector":"CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H","denial_of_service":false,"description":"Heap-based buffer overflow in the NArchive::NHfs::CHandler::ExtractZlibFile method in 7zip before 16.00 and p7zip allows remote attackers to execute arbitrary code via a crafted HFS+ image.","exploits":[],"id":"7-zip-cve-1234-5678","links":[{"href":"http://www.example.com","id":"http://www.example.com","source":"url"}],"malware_kits":[],"modified":"2018-06-08T00:00:00Z","pci_cvss_score":9.3,"pci_fail":true,"pci_severity_score":5,"pci_special_notes":"","pci_status":"fail","published":"2016-12-13T00:00:00Z","references":"http://www.example.com","risk_score":718.8,"severity":"critical","severity_score":9,"title":"7-Zip: CVE-1234-5678: Heap-based buffer overflow vulnerability"}]|
   
 Example output:
 
@@ -421,18 +452,18 @@ Example output:
       "cvss_v2_exploit_score": 9.996799945831299,
       "cvss_v2_impact_score": 10.000845454680942,
       "cvss_v2_integrity_impact": "complete",
-      "cvss_v2_score": 10.0,
+      "cvss_v2_score": 10,
       "cvss_v2_vector": "(AV:N/AC:L/Au:N/C:C/I:C/A:C)",
       "cvss_v3_attack_complexity": null,
       "cvss_v3_attack_vector": null,
       "cvss_v3_availability_impact": null,
       "cvss_v3_confidentiality_impact": null,
-      "cvss_v3_exploit_score": 0.0,
+      "cvss_v3_exploit_score": 0,
       "cvss_v3_impact_score": null,
       "cvss_v3_integrity_impact": null,
       "cvss_v3_privileges_required": null,
       "cvss_v3_scope": null,
-      "cvss_v3_score": 0.0,
+      "cvss_v3_score": 0,
       "cvss_v3_user_interaction": null,
       "cvss_v3_vector": null,
       "denial_of_service": false,
@@ -448,7 +479,7 @@ Example output:
       ],
       "malware_kits": [],
       "modified": "2018-06-08T00:00:00Z",
-      "pci_cvss_score": 10.0,
+      "pci_cvss_score": 10,
       "pci_fail": true,
       "pci_severity_score": 5,
       "pci_special_notes": "",
@@ -517,6 +548,7 @@ Example output:
 ### Triggers
   
 *This plugin does not contain any triggers.*
+
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -851,12 +883,12 @@ Example output:
 
 
 ## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
+  
+*There is no troubleshooting for this plugin.*
 
 # Version History
 
-* 5.0.0 - Vulnerability Search: fix `malware_kits` output and remove `Asset Criteria` input
+* 5.0.0 - Vulnerability Search: fix malware_kits output and remove Asset Criteria input | Updated the documentation with links related to query builder and operators | Updated the SDK
 * 4.0.0 - Vulnerability Search: fix schema validation problem for exploits field 
 * 3.3.0 - Asset Search: add filter fields: `current_time`, `comparison_time`
 * 3.2.0 - Add vulnerability search action
@@ -868,9 +900,12 @@ _This plugin does not contain any troubleshooting information._
 * 1.0.0 - Initial plugin
 
 # Links
-* [InsightVM Cloud API](https://help.rapid7.com/insightvm/en-us/api/integrations.html)
+
+* [InsightVM Query Builder](https://docs.rapid7.com/insightvm/query-builder/)
+* [InsightVM Query Operators](https://docs.rapid7.com/insightvm/query-operators-1/)
 
 ## References
 
+* [InsightVM Cloud API](https://help.rapid7.com/insightvm/en-us/api/integrations.html)
 * [Managing Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys)
 * [Scan Engine Pairing](https://docs.rapid7.com/insightvm/scan-engine-management-on-the-insight-platform/#how-to-pair-your-scan-engines-to-the-insight-platform)
