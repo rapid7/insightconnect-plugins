@@ -6,12 +6,13 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+from jsonschema import validate
 from icon_rapid7_insightvm_cloud.actions.get_asset import GetAsset
-from icon_rapid7_insightvm_cloud.actions.get_asset.schema import Input
+from icon_rapid7_insightvm_cloud.actions.get_asset.schema import Input, GetAssetOutput
 from icon_rapid7_insightvm_cloud.connection.schema import Input as ConnectionInput
 from unittest.mock import patch
-from unit_test.utils import Utils
-from unit_test.mock import (
+from utils import Utils
+from mock import (
     mock_request,
 )
 
@@ -37,6 +38,7 @@ class TestGetAsset(TestCase):
         )
         expected = Utils.read_file_to_dict("expected_responses/get_asset.json.resp")
         self.assertEqual(expected, actual)
+        validate(actual, GetAssetOutput.schema)
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
@@ -46,6 +48,7 @@ class TestGetAsset(TestCase):
         )
         expected = Utils.read_file_to_dict("expected_responses/get_asset_include_vulns.json.resp")
         self.assertEqual(expected, actual)
+        validate(actual, GetAssetOutput.schema)
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
