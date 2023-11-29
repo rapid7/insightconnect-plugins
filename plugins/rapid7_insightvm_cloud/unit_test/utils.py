@@ -1,15 +1,22 @@
+import json
 import logging
 import os
-import json
+import sys
+
+sys.path.append(os.path.abspath("../"))
 
 from icon_rapid7_insightvm_cloud.connection.connection import Connection
 from icon_rapid7_insightvm_cloud.connection.schema import Input
+
+DEFAULT_ENCODING = "utf-8"
 
 
 class Utils:
     @staticmethod
     def read_file_to_dict(filename):
-        with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)) as file:
+        with open(
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), filename), encoding=DEFAULT_ENCODING
+        ) as file:
             text = file.read()
             return json.loads(text)
 
