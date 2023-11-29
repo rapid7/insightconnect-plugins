@@ -1,20 +1,20 @@
-import sys
 import os
+import sys
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from jsonschema import validate
+from unittest.mock import MagicMock, patch
+
 from icon_rapid7_insightvm_cloud.actions.get_asset import GetAsset
-from icon_rapid7_insightvm_cloud.actions.get_asset.schema import Input, GetAssetOutput
+from icon_rapid7_insightvm_cloud.actions.get_asset.schema import GetAssetOutput, Input
 from icon_rapid7_insightvm_cloud.connection.schema import Input as ConnectionInput
-from unittest.mock import patch
+from jsonschema import validate
+
+from mock import mock_request
 from utils import Utils
-from mock import (
-    mock_request,
-)
 
 
 class TestGetAsset(TestCase):
@@ -32,7 +32,7 @@ class TestGetAsset(TestCase):
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
-    def test_get_asset_include_vulns_false(self, _mock_req):
+    def test_get_asset_include_vulns_false(self, _mock_req: MagicMock) -> None:
         actual = self.action.run(
             {Input.ID: self.params.get("asset_id"), Input.INCLUDE_VULNS: self.params.get("include_vulns_false")}
         )
@@ -42,7 +42,7 @@ class TestGetAsset(TestCase):
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
-    def test_get_asset_include_vulns_true(self, _mock_req):
+    def test_get_asset_include_vulns_true(self, _mock_req: MagicMock) -> None:
         actual = self.action.run(
             {Input.ID: self.params.get("asset_id"), Input.INCLUDE_VULNS: self.params.get("include_vulns_true")}
         )
@@ -52,7 +52,7 @@ class TestGetAsset(TestCase):
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
-    def test_get_asset_not_found(self, _mock_req):
+    def test_get_asset_not_found(self, _mock_req: MagicMock) -> None:
         with self.assertRaises(PluginException) as context:
             self.action.run(
                 {Input.ID: self.params.get("asset_id_bad"), Input.INCLUDE_VULNS: self.params.get("include_vulns_false")}
@@ -63,7 +63,7 @@ class TestGetAsset(TestCase):
         self.assertEqual(assistance, context.exception.assistance)
 
     @patch("requests.request", side_effect=mock_request)
-    def test_get_asset_not_found_include_vulns(self, _mock_req):
+    def test_get_asset_not_found_include_vulns(self, _mock_req: MagicMock) -> None:
         with self.assertRaises(PluginException) as context:
             self.action.run(
                 {Input.ID: self.params.get("asset_id_bad"), Input.INCLUDE_VULNS: self.params.get("include_vulns_true")}
@@ -74,7 +74,7 @@ class TestGetAsset(TestCase):
         self.assertEqual(assistance, context.exception.assistance)
 
     @patch("requests.request", side_effect=mock_request)
-    def test_get_asset_invalid_secret_key(self, _mock_req):
+    def test_get_asset_invalid_secret_key(self, _mock_req: MagicMock) -> None:
         self.connection, self.action = Utils.default_connector(
             GetAsset(), {ConnectionInput.REGION: "us", ConnectionInput.CREDENTIALS: {"secretKey": "secret_key_invalid"}}
         )
@@ -88,7 +88,7 @@ class TestGetAsset(TestCase):
         self.assertEqual(assistance, context.exception.assistance)
 
     @patch("requests.request", side_effect=mock_request)
-    def test_asset_search_server_error(self, _mock_req):
+    def test_asset_search_server_error(self, _mock_req: MagicMock) -> None:
         self.connection, self.action = Utils.default_connector(
             GetAsset(),
             {ConnectionInput.REGION: "us", ConnectionInput.CREDENTIALS: {"secretKey": "secret_key_server_error"}},
