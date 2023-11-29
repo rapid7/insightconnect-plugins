@@ -6,13 +6,14 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+from jsonschema import validate
 from icon_rapid7_insightvm_cloud.connection.schema import Input as ConnectionInput
 from icon_rapid7_insightvm_cloud.actions.stop_scan import StopScan
-from icon_rapid7_insightvm_cloud.actions.stop_scan.schema import Input
+from icon_rapid7_insightvm_cloud.actions.stop_scan.schema import Input, StopScanOutput
 
 from unittest.mock import patch
-from unit_test.utils import Utils
-from unit_test.mock import (
+from utils import Utils
+from mock import (
     mock_request,
 )
 
@@ -34,6 +35,7 @@ class TestStopScan(TestCase):
         actual = self.action.run({Input.ID: self.params.get("scan_id")})
         expected = Utils.read_file_to_dict("expected_responses/stop_scan.json.resp")
         self.assertEqual(expected, actual)
+        validate(actual, StopScanOutput.schema)
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
@@ -41,6 +43,7 @@ class TestStopScan(TestCase):
         actual = self.action.run({Input.ID: self.params.get("scan_id_invalid")})
         expected = Utils.read_file_to_dict("expected_responses/stop_scan_invalid_scan_id.json.resp")
         self.assertEqual(expected, actual)
+        validate(actual, StopScanOutput.schema)
 
     @patch("requests.request", side_effect=mock_request)
     def test_stop_scan_invalid_secret_key(self, _mock_req):
