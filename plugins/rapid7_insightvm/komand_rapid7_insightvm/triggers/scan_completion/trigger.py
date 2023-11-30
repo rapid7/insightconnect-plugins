@@ -30,22 +30,15 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
         # Write scan_id to cache
         self.logger.info("Getting latest scan..")
-        print(f"before find latest scan")
+
         site_id = params.get(Input.SITE_ID)
-        print(f"site_id: {site_id}")
         latest_scan_id = self.find_latest_completed_scan(site_id)
-        print(f"after find latest scan")
 
         # Initialize trigger cache at startup
         # self.logger.info("Initialising trigger cache..")
         util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(latest_scan_id))
-        print(f"write to cache hit")
-        print(f"cache file: {Cache.CACHE_FILE_NAME}")
-        print(f"cache file contents beginning: {util.read_from_cache(self.CACHE_FILE_NAME)}")
 
         while True:
-
-            print(f"while True hit")
             # Open cache
             starting_point = Cache.get_cache_site_scans(self)
             # starting_point = 11568
@@ -53,24 +46,17 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             latest_scan_id = self.find_latest_completed_scan(site_id)
 
             # Check if latest is in cache
-            print("Before continue")
             print(f"Latest scan ID: {latest_scan_id} | cache site scans: {starting_point}")
             if latest_scan_id == starting_point:
-                print("Sleeping 5 seconds")
+                print(f"Sleeping 60 seconds")
                 time.sleep(60)
                 continue
-            print("After continue")
 
-            print("before get results")
             results = self.get_results_from_latest_scan(params=params, scan_id=int(latest_scan_id))
-            print("after get results")
 
-            print("before loop")
             # results = [{'asset_id': 2477, 'ip_address': '10.4.31.243', 'hostname': 'ivm-console-test', 'vuln_info': [{'vulnerability_id': '116131', 'nexpose_id': 'cifs-generic-0005', 'solution_id': '62875', 'solution_summary': 'Upgrade the CIFS authentication method'}]}]
             # Submit scan for trigger
             for item in results:
-                print("in loop")
-                print(f"ITEM: {item}")
                 self.send(
                     {
                         Output.ASSET_ID: item.get("asset_id"),
@@ -79,10 +65,6 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                         Output.VULNERABILITY_INFO: item.get("vuln_info"),
                     }
                 )
-            print("after loop")
-
-            print(f"Results final: {results}")
-            print(f"Results final type: {type(results)}")
 
             # Update cache
             try:
@@ -91,7 +73,6 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                 raise PluginException(
                     cause="Failed to save cache to file", assistance=f"Exception returned was {error}"
                 )
-            print(f"cache file contents end of loop: {util.read_from_cache(self.CACHE_FILE_NAME)}")
 
             end_time = time.time()
             print(f"Total Time: {(end_time - start_time) // 60} Minutes")
@@ -119,7 +100,6 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
         self.logger.info("Getting report")
         report_contents = util.adhoc_sql_report(self.connection, self.logger, report_payload)
-        print(f"Report contents: {report_contents}")
         try:
             csv_report = csv.DictReader(io.StringIO(report_contents["raw"]))
             print(f"CSV Report: {csv_report}")
@@ -132,20 +112,14 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         results = []
 
         for row in csv_report:
-            print(f"Row in csv report: {row}")
             new_row = Util.filter_results(params, row)
-            print(f"New row in csv report: {new_row}")
             if new_row:
                 results.append(new_row)
-        print(f"Results before condense: {results}")
         results = Util.condense_results(results)
-        print(f"Results after condense: {results}")
         return results
 
     def find_latest_completed_scan(self, site_id: str = None) -> int:
-        """
-
-        """
+        """ """
         # Use API call for speed.
         # Super simple get the latest scan ID
         resource_helper = ResourceRequests(self.connection.session, self.logger)
@@ -154,13 +128,13 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         else:
             endpoint = endpoints.Scan.scans(self.connection.console_url)
 
-        response = resource_helper.resource_request(endpoint=endpoint, method="get", params={'sort': 'id,desc'})
+        response = resource_helper.resource_request(endpoint=endpoint, method="get", params={"sort": "id,desc"})
 
         # print(f"Response zero: {response.get('resources')[0:2]}")
-        for scan in response.get('resources'):
-            if scan.get('status') == 'finished':
+        for scan in response.get("resources"):
+            if scan.get("status") == "finished":
                 self.logger.info(f"Latest finished scan ID: {scan.get('id')}")
-                return scan.get('id')
+                return scan.get("id")
 
         # Handle processing
 
@@ -200,7 +174,6 @@ class Util:
 
         :return:
         """
-        print(f"Filter results start")
         # Input retrieval
         asset_group = params.get(Input.ASSET_GROUP, None)
         cve = params.get(Input.CVE, None)
@@ -208,7 +181,6 @@ class Util:
         source = params.get(Input.SOURCE, None)
         ip_address = params.get(Input.IP_ADDRESS, None)
         risk_score = params.get(Input.RISK_SCORE, None)
-        site_id = params.get(Input.SITE_ID, None)
 
         new_dct = {
             "asset_id": int(csv_row["asset_id"]),
@@ -219,7 +191,6 @@ class Util:
             "solution_id": csv_row["solution_id"],
             "solution_summary": csv_row["summary"],
         }
-        print(f"new dict begin: {new_dct}")
 
         # Return as normal if no inputs detected
         if asset_group and asset_group not in csv_row["asset_group_id"]:
@@ -233,8 +204,6 @@ class Util:
         if ip_address and ip_address not in csv_row["ip_address"]:
             return None
         if risk_score != 0 and risk_score not in csv_row["riskscore"]:
-            return None
-        if site_id and site_id not in csv_row["site_id"]:
             return None
         else:
             print(f"new dict final: {new_dct}")
@@ -250,7 +219,6 @@ class Util:
 
         :return:
         """
-        print(f"condense results start")
         merge_keys = ("asset_id", "ip_address", "hostname")
         dct = {}
         new_results = []
@@ -264,7 +232,6 @@ class Util:
             entry = {k: v for (k, v) in zip(merge_keys, key)}
             entry["vuln_info"] = value
             new_results.append(entry)
-        print(f"condense results end: {new_results}")
         return new_results
 
     @staticmethod
