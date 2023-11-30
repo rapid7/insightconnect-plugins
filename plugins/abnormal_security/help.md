@@ -11,7 +11,8 @@ Protect your Microsoft Office 365 and G-Suite environments with next-generation 
 *This plugin does not contain any requirements.*
 
 # Supported Product Versions
-
+  
+* abnormal-security API abx v1.4.2
 
 # Documentation
 
@@ -388,7 +389,7 @@ Example output:
 |Attacked Party|string|None|False|Attacked party|None|
 |Auto Remediated|boolean|None|False|Auto remediated|None|
 |CC Emails|[]string|None|False|CC emails|None|
-|From Address|[]string|None|False|From address|None|
+|From Address|string|None|False|From address|None|
 |From Name|string|None|False|From name|None|
 |Impersonated Party|string|None|False|Impersonated party|None|
 |Internet Message ID|string|None|False|Internet message ID|None|

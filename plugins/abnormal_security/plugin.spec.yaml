@@ -5,7 +5,7 @@ name: abnormal_security
 title: Abnormal Security
 description: Protect your Microsoft Office 365 and G-Suite environments with next-generation email security that uses the most advanced AI detection techniques to stop targeted phishing attacks
 version: 2.0.0
-supported_versions: ["abnormal-security api abx v1.4.2"]
+supported_versions: ["abnormal-security API abx v1.4.2"]
 vendor: rapid7
 support: rapid7
 status: []
@@ -125,7 +125,7 @@ types:
     fromAddress:
       title: From Address
       description: From address
-      type: '[]string'
+      type: 'string'
       required: false
     fromName:
       title: From Name

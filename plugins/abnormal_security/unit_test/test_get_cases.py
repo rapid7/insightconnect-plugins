@@ -17,7 +17,7 @@ class TestGetCases(TestCase):
 
     @patch("requests.request", side_effect=Util.mocked_requests)
     def test_manage_case(self, mock_post):
-        actual = self.action.run({Input.FILTER_KEY: "lastModifiedTime"})
+        actual = self.action.run()
 
         expected = {"cases": [{"caseId": "1234", "severity": "Potential Account Takeover"}]}
 

@@ -208,12 +208,9 @@ class GetThreatDetailsOutput(insightconnect_plugin_runtime.Output):
           "order": 19
         },
         "fromAddress": {
-          "type": "array",
+          "type": "string",
           "title": "From Address",
           "description": "From address",
-          "items": {
-            "type": "string"
-          },
           "order": 20
         },
         "fromName": {
