@@ -1,19 +1,20 @@
-import sys
 import os
+import sys
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+from unittest.mock import MagicMock, patch
+
 from icon_rapid7_insightvm_cloud.actions.asset_search import AssetSearch
-from icon_rapid7_insightvm_cloud.actions.asset_search.schema import Input
+from icon_rapid7_insightvm_cloud.actions.asset_search.schema import AssetSearchOutput, Input
 from icon_rapid7_insightvm_cloud.connection.schema import Input as ConnectionInput
-from unittest.mock import patch
-from unit_test.utils import Utils
-from unit_test.mock import (
-    mock_request,
-)
+from jsonschema import validate
+
+from mock import mock_request
+from utils import Utils
 
 
 class TestAssetSearch(TestCase):
@@ -35,7 +36,7 @@ class TestAssetSearch(TestCase):
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
-    def test_asset_search_all_inputs(self, _mock_req):
+    def test_asset_search_all_inputs(self, _mock_req: MagicMock) -> None:
         actual = self.action.run(
             {
                 Input.ASSET_CRITERIA: self.params.get("asset_criteria"),
@@ -46,17 +47,19 @@ class TestAssetSearch(TestCase):
         )
         expected = Utils.read_file_to_dict("expected_responses/asset_search.json.resp")
         self.assertEqual(expected, actual)
+        validate(actual, AssetSearchOutput.schema)
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
-    def test_asset_search_no_input(self, _mock_req):
+    def test_asset_search_no_input(self, _mock_req: MagicMock) -> None:
         actual = self.action.run()
         expected = Utils.read_file_to_dict("expected_responses/asset_search.json.resp")
         self.assertEqual(expected, actual)
+        validate(actual, AssetSearchOutput.schema)
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
-    def test_asset_invalid_asset_criteria(self, _mock_req):
+    def test_asset_invalid_asset_criteria(self, _mock_req: MagicMock) -> None:
         with self.assertRaises(PluginException) as context:
             self.action.run(
                 {
@@ -75,7 +78,7 @@ class TestAssetSearch(TestCase):
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
-    def test_asset_vuln_criteria_invalid(self, _mock_req):
+    def test_asset_vuln_criteria_invalid(self, _mock_req: MagicMock) -> None:
         with self.assertRaises(PluginException) as context:
             self.action.run(
                 {
@@ -93,7 +96,7 @@ class TestAssetSearch(TestCase):
         self.assertEqual(str(data), context.exception.data)
 
     @patch("requests.request", side_effect=mock_request)
-    def test_asset_search_invalid_secret_key(self, _mock_req):
+    def test_asset_search_invalid_secret_key(self, _mock_req: MagicMock) -> None:
         self.connection, self.action = Utils.default_connector(
             AssetSearch(),
             {ConnectionInput.REGION: "us", ConnectionInput.CREDENTIALS: {"secretKey": "secret_key_invalid"}},
@@ -106,7 +109,7 @@ class TestAssetSearch(TestCase):
         self.assertEqual(assistance, context.exception.assistance)
 
     @patch("requests.request", side_effect=mock_request)
-    def test_asset_search_server_error(self, _mock_req):
+    def test_asset_search_server_error(self, _mock_req: MagicMock) -> None:
         self.connection, self.action = Utils.default_connector(
             AssetSearch(),
             {ConnectionInput.REGION: "us", ConnectionInput.CREDENTIALS: {"secretKey": "secret_key_server_error"}},

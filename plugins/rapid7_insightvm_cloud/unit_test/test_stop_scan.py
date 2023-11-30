@@ -1,20 +1,20 @@
-import sys
 import os
+import sys
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from icon_rapid7_insightvm_cloud.connection.schema import Input as ConnectionInput
-from icon_rapid7_insightvm_cloud.actions.stop_scan import StopScan
-from icon_rapid7_insightvm_cloud.actions.stop_scan.schema import Input
+from unittest.mock import MagicMock, patch
 
-from unittest.mock import patch
-from unit_test.utils import Utils
-from unit_test.mock import (
-    mock_request,
-)
+from icon_rapid7_insightvm_cloud.actions.stop_scan import StopScan
+from icon_rapid7_insightvm_cloud.actions.stop_scan.schema import Input, StopScanOutput
+from icon_rapid7_insightvm_cloud.connection.schema import Input as ConnectionInput
+from jsonschema import validate
+
+from mock import mock_request
+from utils import Utils
 
 
 class TestStopScan(TestCase):
@@ -30,20 +30,22 @@ class TestStopScan(TestCase):
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
-    def test_stop_scan(self, _mock_req):
+    def test_stop_scan(self, _mock_req: MagicMock) -> None:
         actual = self.action.run({Input.ID: self.params.get("scan_id")})
         expected = Utils.read_file_to_dict("expected_responses/stop_scan.json.resp")
         self.assertEqual(expected, actual)
+        validate(actual, StopScanOutput.schema)
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
-    def test_stop_scan_invalid_scan_id(self, _mock_req):
+    def test_stop_scan_invalid_scan_id(self, _mock_req: MagicMock) -> None:
         actual = self.action.run({Input.ID: self.params.get("scan_id_invalid")})
         expected = Utils.read_file_to_dict("expected_responses/stop_scan_invalid_scan_id.json.resp")
         self.assertEqual(expected, actual)
+        validate(actual, StopScanOutput.schema)
 
     @patch("requests.request", side_effect=mock_request)
-    def test_stop_scan_invalid_secret_key(self, _mock_req):
+    def test_stop_scan_invalid_secret_key(self, _mock_req: MagicMock) -> None:
         self.connection, self.action = Utils.default_connector(
             StopScan(), {ConnectionInput.REGION: "us", ConnectionInput.CREDENTIALS: {"secretKey": "secret_key_invalid"}}
         )
@@ -55,7 +57,7 @@ class TestStopScan(TestCase):
         self.assertEqual(assistance, context.exception.assistance)
 
     @patch("requests.request", side_effect=mock_request)
-    def test_asset_search_server_error(self, _mock_req):
+    def test_asset_search_server_error(self, _mock_req: MagicMock) -> None:
         self.connection, self.action = Utils.default_connector(
             StopScan(),
             {ConnectionInput.REGION: "us", ConnectionInput.CREDENTIALS: {"secretKey": "secret_key_server_error"}},

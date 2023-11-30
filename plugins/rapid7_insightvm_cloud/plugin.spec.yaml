@@ -4,12 +4,16 @@ products: [insightconnect]
 name: rapid7_insightvm_cloud
 title: Rapid7 InsightVM Cloud
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM Cloud Integrations API to view assets and start scans
-version: 4.0.0
+version: 5.0.0
 vendor: rapid7
 support: rapid7
-supported_versions: ["InsightVM Cloud Integration API v4", "2022-08-10"]
+supported_versions: ["InsightVM Cloud Integration API v4", "2023-11-24"]
 status: []
 cloud_ready: true
+sdk:
+  type: slim
+  version: 5
+  user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insightvm_cloud
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -22,7 +26,6 @@ hub_tags:
   use_cases: [asset_inventory, vulnerability_management]
   keywords: [insightvm, rapid7, cloud, cloud_enabled]
   features: []
-
 types:
   link:
     href:
@@ -940,7 +943,7 @@ types:
     malware_kits:
       title: Malware Kits
       description: List of malware kits related to the vulnerability
-      type: '[]string'
+      type: '[]object'
       required: false
     pci:
       title: PCI
@@ -988,7 +991,6 @@ connection:
       - au
       - ap
     example: us
-
 actions:
   start_scan:
     title: Start Scan
@@ -998,42 +1000,45 @@ actions:
         title: Asset IDs
         description: IDs of the assets to scan
         type: "[]string"
-        example: ["abc978-5678-abc-a5a94a1234b8-asset"]
         required: false
+        example: '["abc978-5678-abc-a5a94a1234b8-asset"]'
       name:
         title: Name
         description: The name of the scan
         type: string
-        example: "test cloud scan"
         required: true
+        example: "test cloud scan"
       ips:
         title: IPs
         description: List of IPv4 or IPv6 addresses to scan
         type: "[]string"
-        example: ["2001:db8:1:1:1:1:1:1"]
         required: false
+        example: '["2001:db8:1:1:1:1:1:1"]'
       hostnames:
         title: Hostnames
         description: List of hostnames to scan
         type: "[]string"
-        example: ["rapid7.com"]
         required: false
+        example: '["rapid7.com"]'
     output:
       ids:
         description: List of identifiers of the scans started
         title: Scan IDs
         type: "[]string"
         required: false
+        example: '["5058b0b4-701a-414e-9630-430d2cddbf4d"]'
       asset_ids:
         description: List of identifiers of the assets scanned
         title: Asset IDs
         type: "[]string"
         required: false
+        example: '["5058b0b4-701a-414e-9630-430d2cddbf4d"]'
       data:
         description: Information received about the scan
         title: Data
         type: object
         required: false
+        example: '{"scans":[{"engine_id":"5058b0b4-701a-414e-9630-430d2cddbf4d","id":"5058b0b4-701a-414e-9630-430d2cddbf4d","name":"TestScan","asset_ids":["5058b0b4-701a-414e-9630-430d2cddbf4d"]}],"unscanned_assets":[{"id":"5058b0b4-701a-414e-9630-430d2cddbf4d","reason":"Asset has never been scanned with an InsightVM Platform registered engine."}]}'
   get_scan:
     title: Get Scan
     description: Get the status of a scan
@@ -1042,45 +1047,45 @@ actions:
         title: Scan ID
         description: ID of the scan to obtain
         type: string
-        example: "abb37782-df95-4cf6-b4c2-8d466ca57349"
         required: true
+        example: "abb37782-df95-4cf6-b4c2-8d466ca57349"
     output:
       asset_ids:
         description: List of IDs of the scanned assets
         title: Asset IDs
         type: "[]string"
-        example: ["abc978-5678-abc-a5a94a1234b8-asset"]
         required: false
+        example: '["abc978-5678-abc-a5a94a1234b8-asset"]'
       scan_id:
         description: ID of the scan
         title: Scan ID
         type: string
-        example: "a9870dce1234180e202af83b66cd0c4b"
         required: false
+        example: "a9870dce1234180e202af83b66cd0c4b"
       name:
         description: User-driven scan name for the scan
         title: Name
         type: string
-        example: "testing scan action"
         required: false
+        example: "testing scan action"
       status:
         description: Current status of the retrieved scan
         title: Status
         type: string
-        example: "Stopped"
         required: false
+        example: "Stopped"
       started:
         description: When the scan was started
         title: Started
         type: date
-        example: "2021-04-15T17:56:47Z"
         required: false
+        example: "2021-04-15T17:56:47Z"
       finished:
         description: When the scan was finished
         title: Finished
         type: date
-        example: "2021-04-15T18:00:33Z"
         required: false
+        example: "2021-04-15T18:00:33Z"
   asset_search:
     title: Asset Search
     description: Search for assets using filtered asset search
@@ -1097,37 +1102,38 @@ actions:
         description: JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)
         type: object
         required: false
-        example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
+        example: '{"risk-score": "asc", "criticality-tag": "desc"}'
       asset_criteria:
         title: Asset Criteria
         description: Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames
         type: string
-        example: "asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'"
         required: false
+        example: "asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'"
       vuln_criteria:
         title: Vulnerability Criteria
         description: Vulnerability criteria to filter by
         type: string
-        example: "vulnerability.categories IN ['example']"
         required: false
+        example: "vulnerability.categories IN ['example']"
       current_time:
         title: Current Time
         description: The current date and time to compare against the asset state to detect changes
         type: date
-        example: "2021-04-15T17:56:47Z"
         required: false
+        example: "2021-04-15T17:56:47Z"
       comparison_time:
         title: Comparison Time
         description: The date and time to compare the asset current state against to detect changes
         type: date
-        example: "2021-04-15T17:56:47Z"
         required: false
+        example: "2021-04-15T17:56:47Z"
     output:
       assets:
         title: Assets
         description: List of asset details returned by the search
         type: '[]asset'
         required: true
+        example: '[{"assessed_for_policies":false,"assessed_for_vulnerabilities":true,"credential_assessments":[],"critical_vulnerabilities":12,"exploits":5,"id":"cdc978de-4178-a1d9-d5a94a114b87-example","ip":"2001:db8:1:1:1:1:1:1","last_assessed_for_vulnerabilities":"2020-06-25T15:19:51.543Z","last_scan_end":"2020-10-26T22:35:53.590Z","last_scan_start":"2020-10-26T22:35:53.564Z","mac":"00:50:56:94:52:04","malware_kits":0,"moderate_vulnerabilities":4,"new":[],"os_architecture":"","os_description":"Linux 2.6.32","os_family":"Linux","os_name":"Linux","os_system_name":"Linux","os_type":"General","os_vendor":"Linux","os_version":"2.6.32","remediated":[],"risk_score":9304.376953125,"severe_vulnerabilities":21,"tags":[{"name":"integrations discovery","type":"SITE"}],"total_vulnerabilities":37,"unique_identifiers":[]},{"assessed_for_policies":false,"assessed_for_vulnerabilities":true,"credential_assessments":[],"critical_vulnerabilities":12,"exploits":5,"id":"cdc978de-4178-a1d9-d5a94a114b87-example","ip":"2001:db8:1:1:1:1:1:1","last_assessed_for_vulnerabilities":"2020-06-25T15:19:51.543Z","last_scan_end":"2020-10-26T22:35:53.590Z","last_scan_start":"2020-10-26T22:35:53.564Z","mac":"00:50:56:94:52:04","malware_kits":0,"moderate_vulnerabilities":4,"new":[],"os_architecture":"","os_description":"Linux 2.6.32","os_family":"Linux","os_name":"Linux","os_system_name":"Linux","os_type":"General","os_vendor":"Linux","os_version":"2.6.32","remediated":[],"risk_score":9304.376953125,"severe_vulnerabilities":21,"tags":[{"name":"integrations discovery","type":"SITE"}],"total_vulnerabilities":37,"unique_identifiers":[]}]'
   get_asset:
     title: Get Asset
     description: Gets an asset by ID
@@ -1151,11 +1157,13 @@ actions:
         description: Asset details
         type: asset
         required: true
+        example: '{"assessed_for_policies":false,"assessed_for_vulnerabilities":true,"credential_assessments":[{"port":22,"protocol":"TCP","status":"NO_CREDS_SUPPLIED"}],"critical_vulnerabilities":1,"exploits":2,"host_name":"example.rapid7.com","id":"cdc978de-4178-a1d9-d5a94a114b87-example","ip":"2001:db8:1:1:1:1:1:1","last_assessed_for_vulnerabilities":"2021-04-26T08:04:28.536Z","last_scan_end":"2021-04-26T08:04:28.536Z","last_scan_start":"2021-04-26T08:00:56.006Z","mac":"00:50:56:94:42:6B","malware_kits":0,"moderate_vulnerabilities":7,"new":[],"remediated":[],"risk_score":9006.3388671875,"severe_vulnerabilities":19,"tags":[{"name":"sn_pt_LDAP Admins","type":"OWNER"},{"name":"sn_CAB Approval","type":"OWNER"},{"name":"integrations","type":"CUSTOM"},{"name":"ck_test_site_2","type":"SITE"},{"name":"integrations","type":"SITE"},{"name":"ck_test_site_3","type":"SITE"},{"name":"integrations discovery","type":"SITE"},{"name":"ck_test_site_1","type":"SITE"}],"total_vulnerabilities":27,"unique_identifiers":[]}'
       vulnerabilities:
         title: Vulnerabilities
         description: Vulnerabilities associated with the asset
         type: '[]asset_vulnerability'
         required: false
+        example: []
   stop_scan:
     title: Stop Scan
     description: Stop a scan in progress
@@ -1171,20 +1179,20 @@ actions:
         title: Success
         description: Was operation successful
         type: boolean
-        example: true
         required: true
+        example: true
       status_code:
         title: Status Code
         description: Code returned by API call
         type: integer
-        example: 400
         required: false
+        example: 400
       message:
         title: Message
         description: Reason why the action failed
         type: string
-        example: "The scan could not be stopped"
         required: false
+        example: "The scan could not be stopped"
   vuln_search:
     title: Vulnerability Search
     description: Search for vulnerabilities using filtered vulnerability search
@@ -1201,22 +1209,17 @@ actions:
         description: JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)
         type: object
         required: false
-        example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
-      asset_criteria:
-        title: Asset Criteria
-        description: Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames
-        type: string
-        example: "asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'"
-        required: false
+        example: '{"risk-score": "asc", "criticality-tag": "desc"}'
       vuln_criteria:
         title: Vulnerability Criteria
         description: Vulnerability criteria to filter by
         type: string
-        example: "vulnerability.categories IN ['example']"
         required: false
+        example: "vulnerability.categories IN ['example']"
     output:
       vulnerabilities:
         title: Vulnerabilities
         description: Vulnerabilities associated with the asset
         type: '[]vulnerability'
         required: true
+        example: '[{"added":"2018-05-16T00:00:00Z","categories":"7-Zip","cves":"CVE-1234-5678","cvss_v2_access_complexity":"low","cvss_v2_access_vector":"network","cvss_v2_authentication":"none","cvss_v2_availability_impact":"complete","cvss_v2_confidentiality_impact":"complete","cvss_v2_exploit_score":9.996799945831299,"cvss_v2_impact_score":10.000845454680942,"cvss_v2_integrity_impact":"complete","cvss_v2_score":10,"cvss_v2_vector":"(AV:N/AC:L/Au:N/C:C/I:C/A:C)","cvss_v3_attack_complexity":null,"cvss_v3_attack_vector":null,"cvss_v3_availability_impact":null,"cvss_v3_confidentiality_impact":null,"cvss_v3_exploit_score":0,"cvss_v3_impact_score":null,"cvss_v3_integrity_impact":null,"cvss_v3_privileges_required":null,"cvss_v3_scope":null,"cvss_v3_score":0,"cvss_v3_user_interaction":null,"cvss_v3_vector":null,"denial_of_service":false,"description":"Unspecified vulnerability in 7-zip before 4.5.7 has unknown impact and remote attack vectors, as demonstrated by the PROTOS GENOME test suite for Archive Formats (c10).","exploits":[],"id":"7-zip-cve-1234-5678","links":[{"href":"http://www.example.com","id":"http://www.example.com","source":"url"}],"malware_kits":[],"modified":"2018-06-08T00:00:00Z","pci_cvss_score":10,"pci_fail":true,"pci_severity_score":5,"pci_special_notes":"","pci_status":"fail","published":"2009-03-29T00:00:00Z","references":"http://www.example.com","risk_score":898.76,"severity":"critical","severity_score":10,"title":"7-Zip: CVE-1234-5678: Unspecified vulnerability in 7-zip before 4.5.7"},{"added":"2018-05-16T00:00:00Z","categories":"7-Zip,Remote Execution","cves":"CVE-1234-5678","cvss_v2_access_complexity":"medium","cvss_v2_access_vector":"network","cvss_v2_authentication":"none","cvss_v2_availability_impact":"complete","cvss_v2_confidentiality_impact":"complete","cvss_v2_exploit_score":8.588799953460693,"cvss_v2_impact_score":10.000845454680942,"cvss_v2_integrity_impact":"complete","cvss_v2_score":9.3,"cvss_v2_vector":"(AV:N/AC:M/Au:N/C:C/I:C/A:C)","cvss_v3_attack_complexity":"low","cvss_v3_attack_vector":"local","cvss_v3_availability_impact":"high","cvss_v3_confidentiality_impact":"high","cvss_v3_exploit_score":1.8345765900000002,"cvss_v3_impact_score":5.873118720000001,"cvss_v3_integrity_impact":"high","cvss_v3_privileges_required":"none","cvss_v3_scope":"unchanged","cvss_v3_score":7.8,"cvss_v3_user_interaction":"required","cvss_v3_vector":"CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H","denial_of_service":false,"description":"Heap-based buffer overflow in the NArchive::NHfs::CHandler::ExtractZlibFile method in 7zip before 16.00 and p7zip allows remote attackers to execute arbitrary code via a crafted HFS+ image.","exploits":[],"id":"7-zip-cve-1234-5678","links":[{"href":"http://www.example.com","id":"http://www.example.com","source":"url"}],"malware_kits":[],"modified":"2018-06-08T00:00:00Z","pci_cvss_score":9.3,"pci_fail":true,"pci_severity_score":5,"pci_special_notes":"","pci_status":"fail","published":"2016-12-13T00:00:00Z","references":"http://www.example.com","risk_score":718.8,"severity":"critical","severity_score":9,"title":"7-Zip: CVE-1234-5678: Heap-based buffer overflow vulnerability"}]'

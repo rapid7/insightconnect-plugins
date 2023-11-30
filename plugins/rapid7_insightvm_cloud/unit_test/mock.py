@@ -1,6 +1,8 @@
 import json
 import os
 
+from utils import DEFAULT_ENCODING
+
 STUB_ASSET_ID = "5058b0b4-701a-414e-9630-430d2cddbf4d"
 STUB_BAD_ASSET_ID = "5058b0b4-701a-414e-9630-430d2cddbf4e"
 STUB_SEARCH_ID = "86a8abc0-95f3-4353-adf5-abb631c1f824"
@@ -8,8 +10,8 @@ STUB_BAD_ASSET_CRITERIA = "invalid asset criteria"
 STUB_BAD_VULN_CRITERIA = "invalid vuln criteria"
 STUB_SCAN_ID = "5058b0b4-701a-414e-9630-430d2cddbf4d"
 STUB_BAD_SCAN_ID = "invalid scan id"
-STUB_BAD_SECRET_KEY = "secret_key_invalid"
-STUB_SECRET_KEY_SERVER_ERROR = "secret_key_server_error"
+STUB_BAD_SECRET_KEY = "secret_key_invalid"  # nosec B105
+STUB_SECRET_KEY_SERVER_ERROR = "secret_key_server_error"  # nosec B105
 STUB_SCAN_NAME = "TestScan"
 STUB_SCAN_NAME_NO_ASSET_IDS = "TestScanNoAssetIDs"
 STUB_SCAN_NAME_INVALID_ASSET_IDS = "TestScanInvalidAssetIDs"
@@ -31,7 +33,8 @@ class MockResponse:
         self.status_code = status_code
         if filename:
             with open(
-                os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{filename}.json.resp")
+                os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{filename}.json.resp"),
+                encoding=DEFAULT_ENCODING,
             ) as file:
                 self.text = file.read()
         else:
@@ -41,7 +44,8 @@ class MockResponse:
         return json.loads(self.text)
 
 
-def mock_request_post(url, params, headers, data):
+def mock_request_post(url, params, headers, data):  # noqa: MC0001
+    # pylint: disable=unused-argument
     if headers.get("x-api-key") == STUB_BAD_SECRET_KEY:
         return MockResponse("unauthorized", 401)
     if headers.get("x-api-key") == STUB_SECRET_KEY_SERVER_ERROR:
@@ -72,6 +76,7 @@ def mock_request_post(url, params, headers, data):
 
 
 def mock_request_get(url, params, headers, data):
+    # pylint: disable=unused-argument
     if headers.get("x-api-key") == STUB_BAD_SECRET_KEY:
         return MockResponse("unauthorized", 401)
     if headers.get("x-api-key") == STUB_SECRET_KEY_SERVER_ERROR:

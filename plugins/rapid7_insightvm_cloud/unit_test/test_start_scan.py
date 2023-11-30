@@ -1,19 +1,20 @@
-import sys
 import os
+import sys
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from icon_rapid7_insightvm_cloud.connection.schema import Input as ConnectionInput
+from unittest.mock import MagicMock, patch
+
 from icon_rapid7_insightvm_cloud.actions.start_scan import StartScan
-from icon_rapid7_insightvm_cloud.actions.start_scan.schema import Input
-from unittest.mock import patch
-from unit_test.utils import Utils
-from unit_test.mock import (
-    mock_request,
-)
+from icon_rapid7_insightvm_cloud.actions.start_scan.schema import Input, StartScanOutput
+from icon_rapid7_insightvm_cloud.connection.schema import Input as ConnectionInput
+from jsonschema import validate
+
+from mock import mock_request
+from utils import Utils
 
 
 class TestStartScan(TestCase):
@@ -38,7 +39,7 @@ class TestStartScan(TestCase):
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
-    def test_start_scan(self, _mock_req):
+    def test_start_scan(self, _mock_req: MagicMock) -> None:
         actual = self.action.run(
             {
                 Input.ASSET_IDS: self.params.get("asset_ids"),
@@ -49,9 +50,10 @@ class TestStartScan(TestCase):
         )
         expected = Utils.read_file_to_dict("expected_responses/start_scan.json.resp")
         self.assertEqual(expected, actual)
+        validate(actual, StartScanOutput.schema)
 
     @patch("requests.request", side_effect=mock_request)
-    def test_start_scan_invalid_asset_ids(self, _mock_req):
+    def test_start_scan_invalid_asset_ids(self, _mock_req: MagicMock) -> None:
         with self.assertRaises(PluginException) as context:
             self.action.run(
                 {
@@ -67,7 +69,7 @@ class TestStartScan(TestCase):
         self.assertEqual(str(data), context.exception.data)
 
     @patch("requests.request", side_effect=mock_request)
-    def test_start_scan_no_asset_ids(self, _mock_req):
+    def test_start_scan_no_asset_ids(self, _mock_req: MagicMock) -> None:
         with self.assertRaises(PluginException) as context:
             self.action.run(
                 {
@@ -85,7 +87,7 @@ class TestStartScan(TestCase):
         self.assertEqual(str(data), context.exception.data)
 
     @patch("requests.request", side_effect=mock_request)
-    def test_start_scan_invalid_ips(self, _mock_req):
+    def test_start_scan_invalid_ips(self, _mock_req: MagicMock) -> None:
         with self.assertRaises(PluginException) as context:
             self.action.run(
                 {
@@ -104,7 +106,7 @@ class TestStartScan(TestCase):
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
-    def test_start_scan_required_input(self, _mock_req):
+    def test_start_scan_required_input(self, _mock_req: MagicMock) -> None:
         with self.assertRaises(PluginException) as context:
             self.action.run(
                 {
@@ -117,7 +119,7 @@ class TestStartScan(TestCase):
         self.assertEqual(cause, context.exception.cause)
 
     @patch("requests.request", side_effect=mock_request)
-    def test_start_scan_invalid_secret_key(self, _mock_req):
+    def test_start_scan_invalid_secret_key(self, _mock_req: MagicMock) -> None:
         self.connection, self.action = Utils.default_connector(
             StartScan(),
             {ConnectionInput.REGION: "us", ConnectionInput.CREDENTIALS: {"secretKey": "secret_key_invalid"}},
@@ -137,7 +139,7 @@ class TestStartScan(TestCase):
         self.assertEqual(assistance, context.exception.assistance)
 
     @patch("requests.request", side_effect=mock_request)
-    def test_asset_search_server_error(self, _mock_req):
+    def test_asset_search_server_error(self, _mock_req: MagicMock) -> None:
         self.connection, self.action = Utils.default_connector(
             StartScan(),
             {ConnectionInput.REGION: "us", ConnectionInput.CREDENTIALS: {"secretKey": "secret_key_server_error"}},

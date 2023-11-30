@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import VulnSearchInput, VulnSearchOutput, Input, Output, Component
+import logging
 
 # Constants below
 MAX_SIZE = 500
@@ -13,7 +14,6 @@ class VulnSearch(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        asset_crit = params.get(Input.ASSET_CRITERIA)
         vuln_crit = params.get(Input.VULN_CRITERIA)
         size = params.get(Input.SIZE, AVG_SIZE)
         sort_criteria = params.get(Input.SORT_CRITERIA, {})
@@ -29,9 +29,9 @@ class VulnSearch(insightconnect_plugin_runtime.Action):
             self.logger.info(f"'{size}' must be greater than zero, set to average size of 200.")
             size = AVG_SIZE
         parameters.append(("size", size))
-        if asset_crit or vuln_crit:
-            body = {"asset": asset_crit, "vulnerability": vuln_crit}
-            resources = self.connection.ivm_cloud_api.call_api("vulnerabilities", "POST", params, body)
+        if vuln_crit:
+            body = {"vulnerability": vuln_crit}
+            resources = self.connection.ivm_cloud_api.call_api("vulnerabilities", "POST", parameters, body)
         else:
             resources = self.connection.ivm_cloud_api.call_api("vulnerabilities", "POST", parameters)
 

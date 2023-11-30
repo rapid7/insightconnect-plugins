@@ -14,7 +14,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.session = None
         self.region = None
 
-    def connect(self, params):
+    def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
         self.region = params.get(Input.REGION)
         self.api_url = f"https://{self.region}.api.insight.rapid7.com/vm/v4/integration/"
