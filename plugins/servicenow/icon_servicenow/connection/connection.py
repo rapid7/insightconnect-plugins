@@ -4,11 +4,12 @@ from .schema import ConnectionSchema, Input
 # Custom imports below
 import requests
 from requests.auth import HTTPBasicAuth
-from icon_servicenow.util.request_helper import RequestHelper
+from icon_servicenow.util.request_helper import RequestHelper, AuthenticationType
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
+
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
@@ -26,10 +27,31 @@ class Connection(insightconnect_plugin_runtime.Connection):
         username = params[Input.CLIENT_LOGIN].get("username", "")
         password = params[Input.CLIENT_LOGIN].get("password", "")
 
-        self.session = requests.Session()
-        self.session.auth = HTTPBasicAuth(username, password)
-        self.request = RequestHelper(self.session, self.logger)
+        oauth_client_id = params[Input.CLIENT_ID]
+        oauth_client_secret = params[Input.CLIENT_SECRET].get("secretKey")
 
+        if not oauth_client_id or not oauth_client_secret:
+            self.logger.info("Either client ID or client secret (or both) were not provided, using basic authentication")
+            authentication_type = AuthenticationType.basic
+        else:
+            self.logger.info("Client ID and secret were provided, using OAuth for API authentication")
+            authentication_type = AuthenticationType.oauth
+
+
+        # self.session = requests.Session()
+        # self.session.auth = HTTPBasicAuth(username, password)
+        self.request = RequestHelper(
+            username=username,
+            password=password,
+            client_id=oauth_client_id,
+            client_secret=oauth_client_secret,
+            auth_type=authentication_type,
+            base_url=self.base_url,
+            logger=self.logger
+        )
+        # self.request = RequestHelper(self.session, self.logger)
+
+        self.oauth_url = f"{self.base_url}oauth_token.do"
         self.table_url = f"{self.base_url}{api_route}table/"
         self.incident_url = f"{self.table_url}{incident_table}"
         self.security_incident_url = f"{self.table_url}{security_incident_table}"
