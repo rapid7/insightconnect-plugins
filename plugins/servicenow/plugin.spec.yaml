@@ -342,6 +342,19 @@ connection:
     type: credential_username_password
     required: true
     example: '{"username":"user1", "password":"mypassword"}'
+  client_id:
+    title: OAuth Client ID
+    description: Client ID for an application within your application registry
+    type: string
+    required: false
+    example: ad0bc2109c2642106907050c2ca6ef0c
+  client_secret:
+    title: OAuth Client Secret
+    description: Client secret for an application within your application registry
+    type: credential_secret_key
+    required: false
+    example: ad0bc2109c2642106907050c2ca6ef0c
+
   timeout:
     title: Timeout
     description: The interval in seconds before abandoning an attempt to access ServiceNow
