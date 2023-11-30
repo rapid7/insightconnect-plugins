@@ -58,8 +58,6 @@ class RequestHelper(object):
         self.base_url = base_url
         self.logger = logger
 
-        # self.session = session
-
     def make_request(  # noqa: C901
         self, endpoint, method, payload=None, params=None, data=None, content_type="application/json"
     ):

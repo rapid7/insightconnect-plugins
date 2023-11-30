@@ -37,9 +37,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.logger.info("Client ID and secret were provided, using OAuth for API authentication")
             authentication_type = AuthenticationType.oauth
 
-
-        # self.session = requests.Session()
-        # self.session.auth = HTTPBasicAuth(username, password)
         self.request = RequestHelper(
             username=username,
             password=password,
@@ -49,7 +46,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
             base_url=self.base_url,
             logger=self.logger
         )
-        # self.request = RequestHelper(self.session, self.logger)
 
         self.oauth_url = f"{self.base_url}oauth_token.do"
         self.table_url = f"{self.base_url}{api_route}table/"
