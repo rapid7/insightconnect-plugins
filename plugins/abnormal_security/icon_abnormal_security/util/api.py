@@ -18,15 +18,17 @@ class AbnormalSecurityAPI:
         return self.send_request("GET", "/threats")
 
     def get_threats(self, from_date: str = None, to_date: str = None):
-        return self.send_request("GET", "/threats", params=self.generate_filter_params(from_date, to_date)).get(
-            "threats"
-        )
+        return self.send_request(
+            "GET", "/threats", params=self.generate_filter_params(from_date, to_date, "receivedTime")
+        ).get("threats")
 
     def get_threat_details(self, threat_guid):
         return self.send_request("GET", f"/threats/{threat_guid}")
 
-    def get_cases(self, from_date: str = None, to_date: str = None) -> dict:
-        return self.send_request("GET", "/cases", params=self.generate_filter_params(from_date, to_date)).get("cases")
+    def get_cases(self, from_date: str = None, to_date: str = None, filter_key: str = None) -> dict:
+        return self.send_request(
+            "GET", "/cases", params=self.generate_filter_params(from_date, to_date, filter_key)
+        ).get("cases")
 
     def get_case_details(self, case_guid: str) -> dict:
         return self.send_request("GET", f"/cases/{case_guid}")
@@ -44,7 +46,7 @@ class AbnormalSecurityAPI:
         return results
 
     # pylint: disable=inconsistent-return-statements
-    def send_request(self, method: str, path: str, params: dict = None, payload: dict = None) -> dict:
+    def send_request(self, method: str, path: str, params: dict = None, payload: dict = None) -> dict:  # noqa: MC0001
         try:
             response = requests.request(
                 method.upper(),
@@ -84,10 +86,10 @@ class AbnormalSecurityAPI:
         except requests.exceptions.HTTPError as e:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
-    def generate_filter_params(self, from_date: str = None, to_date: str = None) -> dict:
+    def generate_filter_params(self, from_date: str = None, to_date: str = None, filter_key: str = None) -> dict:
         params = {}
         if from_date or to_date:
-            params = {"filter": "receivedTime"}
+            params = {"filter": filter_key}
             if from_date:
                 params["filter"] = params["filter"] + f" gte {self.parse_date(from_date)}"
             if to_date:

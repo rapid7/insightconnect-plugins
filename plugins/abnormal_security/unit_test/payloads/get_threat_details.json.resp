@@ -1,0 +1,107 @@
+{
+  "messages": [
+    {
+      "abxMessageId": 1111111111111111200,
+      "abxPortalUrl": "https://portal.abnormalsecurity.com/home/threat-center/remediation-history/1111111111111111113",
+      "attachmentNames": [],
+      "attackStrategy": "Unknown Sender",
+      "attackType": "Spam",
+      "attackVector": "Link",
+      "attackedParty": "Other",
+      "autoRemediated": true,
+      "ccEmails": [],
+      "fromAddress": "test@example.com",
+      "fromName": "Test Example",
+      "impersonatedParty": "None / Others",
+      "internetMessageId": "<11111111111111.21111111.11750@examples.com>",
+      "isRead": false,
+      "postRemediated": false,
+      "receivedTime": "2021-02-02T21:09:37Z",
+      "remediationTimestamp": "2021-02-02T21:09:41Z",
+      "replyToEmails": [],
+      "returnPath": "some_return_path@example.com",
+      "sentTime": "2021-02-02T21:06:49Z",
+      "subject": "[LIKELY PHISHING] Testing Myths",
+      "summaryInsights": [
+        "Abnormal Email Body HTML",
+        "Suspicious Link",
+        "Unusual Sender Domain",
+        "Abnormal Email SignOff",
+        "Unusual Sender"
+      ],
+      "threatId": "184712ab-6d8b-47b3-89d3-a314efef79e2",
+      "toAddresses": "admin@own-example.com",
+      "urls": [
+        "https://do-not-click-me.com/click/example/EW71AW9IBJ7ZQHKRF6JN/"
+      ]
+    },
+    {
+      "abxMessageId": -1111111111111111200,
+      "abxPortalUrl": "https://portal.abnormalsecurity.com/home/threat-center/remediation-history/-1111111111111111112",
+      "attachmentNames": [],
+      "attackStrategy": "Name Impersonation",
+      "attackType": "Spam",
+      "attackVector": "Link",
+      "attackedParty": "Employee (other)",
+      "autoRemediated": false,
+      "ccEmails": [],
+      "fromAddress": "test@example.com",
+      "fromName": "Test Example",
+      "impersonatedParty": "None / Others",
+      "internetMessageId": "<11111111111111.11111111.11750@examples.com>",
+      "isRead": false,
+      "postRemediated": true,
+      "receivedTime": "2020-05-17T21:09:51Z",
+      "recipientAddress": "admin@own-example.com",
+      "remediationTimestamp": "2020-05-17T21:09:55Z",
+      "replyToEmails": [],
+      "returnPath": "some_return_path_2@example.com",
+      "sentTime": "2020-05-17T21:09:46Z",
+      "subject": "[LIKELY PHISHING] Testing Myths",
+      "summaryInsights": [
+        "Abnormal Email Body HTML",
+        "Unusual Sender",
+        "Suspicious Link",
+        "Unusual Sender Domain"
+      ],
+      "threatId": "184712ab-6d8b-47b3-89d3-a314efef79e2",
+      "toAddresses": ["admin@own-example.com"],
+      "urls": [
+        "https://randomurl.com/docs/DOC-0r2019j",
+        "https://suspicious-url.com/click/example/EW71AW9IBJ7ZQHKRF6JN/"
+      ]
+    },
+    {
+      "abxMessageId": -1111111111111111200,
+      "abxPortalUrl": "https://portal.abnormalsecurity.com/home/threat-center/remediation-history/-1111111111111111114",
+      "attachmentNames": [],
+      "attackStrategy": "Name Impersonation",
+      "attackType": "Spam",
+      "attackVector": "Link",
+      "attackedParty": "Employee (other)",
+      "autoRemediated": false,
+      "ccEmails": [],
+      "fromAddress": "test@example.com",
+      "fromName": "Test Example",
+      "impersonatedParty": "None / Others",
+      "internetMessageId": "<11111111111111.34114111.11750@examples.com>",
+      "postRemediated": false,
+      "receivedTime": "2020-05-10T21:05:08Z",
+      "recipientAddress": "admin@own-example.com",
+      "replyToEmails": [],
+      "returnPath": "some_return_path3@example.com",
+      "sentTime": "2020-05-10T21:05:03Z",
+      "subject": "The Truth About 7 Masturbation Myths",
+      "summaryInsights": [
+        "Abnormal Email Body HTML",
+        "Suspicious Link",
+        "Unusual Sender Domain",
+        "Unusual Sender"
+      ],
+      "threatId": "184712ab-6d8b-47b3-89d3-a314efef79e2",
+      "toAddresses":["admin@own-example.com", "admin2@own-example.com"],
+      "urls": []
+    }
+  ],
+  "threatId": "184712ab-6d8b-47b3-89d3-a314efef79e2"
+}

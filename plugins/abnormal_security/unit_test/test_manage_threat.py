@@ -1,13 +1,14 @@
 import sys
 import os
+
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
 from icon_abnormal_security.actions.manage_threat import ManageThreat
 from icon_abnormal_security.actions.manage_threat.schema import Input, Output
 from insightconnect_plugin_runtime.exceptions import PluginException
-from unit_test.util import Util
+from util import Util
 from unittest.mock import patch
-
-sys.path.append(os.path.abspath("../"))
 
 
 class TestManageThreat(TestCase):
@@ -65,6 +66,6 @@ class TestManageThreat(TestCase):
         )
         self.assertEqual(
             e.exception.assistance,
-            "Verify the endpoint/URL/hostname configured in your plugin connection is correct.",
+            "Verify the URLs or endpoints in your configuration are correct.",
         )
         self.assertEqual(e.exception.data, 'Response was: {"message": "Threat action does not exist"}')

@@ -1,12 +1,13 @@
 import sys
 import os
+
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
 from icon_abnormal_security.actions.get_threats import GetThreats
 from icon_abnormal_security.actions.get_threats.schema import Input, Output
-from unit_test.util import Util
+from util import Util
 from unittest.mock import patch
-
-sys.path.append(os.path.abspath("../"))
 
 
 class TestGetCases(TestCase):

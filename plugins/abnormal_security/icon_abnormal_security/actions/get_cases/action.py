@@ -13,6 +13,8 @@ class GetCases(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         return {
             Output.CASES: self.connection.api.get_cases(
-                from_date=params.get(Input.FROM_DATE, None), to_date=params.get(Input.TO_DATE, None)
+                from_date=params.get(Input.FROM_DATE, None),
+                to_date=params.get(Input.TO_DATE, None),
+                filter_key=params.get(Input.FILTER_KEY, None),
             )
         }
