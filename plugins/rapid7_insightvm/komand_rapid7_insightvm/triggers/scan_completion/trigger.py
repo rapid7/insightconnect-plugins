@@ -31,26 +31,33 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         # Write scan_id to cache
         self.logger.info("Getting latest scan..")
         print(f"before find latest scan")
-        latest_scan_id = self.find_latest_completed_scan()
+        site_id = params.get(Input.SITE_ID)
+        print(f"site_id: {site_id}")
+        latest_scan_id = self.find_latest_completed_scan(site_id)
         print(f"after find latest scan")
 
         # Initialize trigger cache at startup
-        self.logger.info("Initialising trigger cache..")
+        # self.logger.info("Initialising trigger cache..")
         util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(latest_scan_id))
         print(f"write to cache hit")
         print(f"cache file: {Cache.CACHE_FILE_NAME}")
         print(f"cache file contents beginning: {util.read_from_cache(self.CACHE_FILE_NAME)}")
 
         while True:
-            latest_scan_id = self.find_latest_completed_scan()
+
             print(f"while True hit")
             # Open cache
-            cache_site_scans = Cache.get_cache_site_scans(self)
-            print(f"Open cache hit")
+            starting_point = Cache.get_cache_site_scans(self)
+            # starting_point = 11568
+
+            latest_scan_id = self.find_latest_completed_scan(site_id)
 
             # Check if latest is in cache
             print("Before continue")
-            if latest_scan_id != cache_site_scans:
+            print(f"Latest scan ID: {latest_scan_id} | cache site scans: {starting_point}")
+            if latest_scan_id == starting_point:
+                print("Sleeping 5 seconds")
+                time.sleep(60)
                 continue
             print("After continue")
 
@@ -59,9 +66,11 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             print("after get results")
 
             print("before loop")
+            # results = [{'asset_id': 2477, 'ip_address': '10.4.31.243', 'hostname': 'ivm-console-test', 'vuln_info': [{'vulnerability_id': '116131', 'nexpose_id': 'cifs-generic-0005', 'solution_id': '62875', 'solution_summary': 'Upgrade the CIFS authentication method'}]}]
             # Submit scan for trigger
             for item in results:
                 print("in loop")
+                print(f"ITEM: {item}")
                 self.send(
                     {
                         Output.ASSET_ID: item.get("asset_id"),
@@ -133,38 +142,40 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         print(f"Results after condense: {results}")
         return results
 
-    def find_latest_completed_scan(self) -> int:
+    def find_latest_completed_scan(self, site_id: str = None) -> int:
         """
 
         """
         # Use API call for speed.
         # Super simple get the latest scan ID
         resource_helper = ResourceRequests(self.connection.session, self.logger)
-        endpoint = endpoints.Scan.scans(self.connection.console_url)
+        if site_id:
+            endpoint = endpoints.Scan.site_scans(self.connection.console_url, site_id)
+        else:
+            endpoint = endpoints.Scan.scans(self.connection.console_url)
+
         response = resource_helper.resource_request(endpoint=endpoint, method="get", params={'sort': 'id,desc'})
 
-        print(f"Response zero: {response.get('resources')[0:2]}")
+        # print(f"Response zero: {response.get('resources')[0:2]}")
         for scan in response.get('resources'):
             if scan.get('status') == 'finished':
+                self.logger.info(f"Latest finished scan ID: {scan.get('id')}")
                 return scan.get('id')
+
+        # Handle processing
 
 
 class ScanQueries:
     @staticmethod
     def query_results_from_latest_scan(scan_id):
         return (
-            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, ds.status_id, daga.asset_group_id, dsa.site_id, dvr.source, dvr.reference, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id, dv.riskscore "
+            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dvr.source, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id, dv.riskscore "
             f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
             f"JOIN dim_asset AS da ON (fasvi.asset_id = da.asset_id) "
-            f"JOIN dim_site_asset AS dsa ON (fasvi.asset_id = dsa.asset_id) "
-            f"JOIN dim_asset_group_asset AS daga ON (fasvi.asset_id = daga.asset_id) "
             f"JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
             f"JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) "
             f"JOIN dim_solution AS dss ON (dv.nexpose_id = dss.nexpose_id) "
-            f"JOIN dim_scan AS ds ON (fasvi.scan_id = ds.scan_id) "
-            f"WHERE ds.status_id = 'C' "
-            f"AND ds.scan_id = {scan_id} "
-            f"LIMIT 2 "
+            f"WHERE fasvi.scan_id = {scan_id} "
         )
 
 
@@ -209,9 +220,6 @@ class Util:
             "solution_summary": csv_row["summary"],
         }
         print(f"new dict begin: {new_dct}")
-
-        ScanCompletion.logger.info("Writing latest scan to cache..")
-        util.write_to_cache(ScanCompletion.CACHE_FILE_NAME, json.dumps(csv_row["scan_id"]))
 
         # Return as normal if no inputs detected
         if asset_group and asset_group not in csv_row["asset_group_id"]:
