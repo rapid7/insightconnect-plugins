@@ -43,7 +43,7 @@ Example input:
 
 #### Add Scan Engine Pool Engine
   
-Add a scan engine to a scan engine pool (AWS pre-authorized engine AMI engines cannot be pooled)
+This action is used to add a scan engine to a scan engine pool (AWS pre-authorized engine AMI engines cannot be pooled)
 
 ##### Input
 
@@ -77,7 +77,7 @@ Example output:
 
 #### Add User Asset Group Access
   
-Grant an user account access to an asset group by ID
+This action is used to grant an user account access to an asset group by ID
 
 ##### Input
 
@@ -111,7 +111,7 @@ Example output:
 
 #### Add User Site Access
   
-Grant an user account access to a site by ID
+This action is used to grant an user account access to a site by ID
 
 ##### Input
 
@@ -145,7 +145,7 @@ Example output:
 
 #### Asset Search
   
-Search for assets using filtered asset search
+This action is used to search for assets using filtered asset search
 
 ##### Input
 
@@ -181,14 +181,14 @@ Example output:
 
 #### Get Asset Vulnerability Solutions
   
-Returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset
+This action is used to returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |asset_id|integer|None|True|The identifier of the asset|None|423|
-|vulnerability_ids|[]string|None|True|A list of identifiers of the vulnerabilities|None|["flash_player-cve-2017-11305"]|
+|vulnerability_ids|[]string|None|True|A list of identifiers of the vulnerabilities|None|['flash_player-cve-2017-11305']|
   
 Example input:
 
@@ -215,7 +215,7 @@ Example output:
 
 #### Create Asset Group
   
-Create an asset group
+This action is used to create an asset group
 
 ##### Input
 
@@ -253,7 +253,7 @@ Example output:
 
 #### Create Vulnerability Exception Submission
   
-Create a vulnerability exception submission
+This action is used to create a vulnerability exception submission
 
 ##### Input
 
@@ -301,7 +301,7 @@ Example output:
 
 #### Create Scan Engine
   
-Create a new scan engine with console engine connectivity
+This action is used to create a new scan engine with console engine connectivity
 
 ##### Input
 
@@ -341,7 +341,7 @@ Example output:
 
 #### Create Scan Engine Pool
   
-Create a new scan engine pool
+This action is used to create a new scan engine pool
 
 ##### Input
 
@@ -377,7 +377,7 @@ Example output:
 
 #### Create Site
   
-Create a new site
+This action is used to create a new site
 
 ##### Input
 
@@ -385,10 +385,10 @@ Create a new site
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |description|string|None|False|The site's description|None|example description|
 |engine_id|integer|None|False|The identifier of a scan engine. Default scan engine is selected when not specified|None|1234|
-|excluded_addresses|[]string|[]|False|List of addresses to exclude in scan scope|None|["1234-abcd", "4567-def"]|
+|excluded_addresses|[]string|[]|False|List of addresses to exclude in scan scope|None|['1234-abcd', '4567-def']|
 |excluded_asset_groups|[]integer|[]|False|Assets associated with these asset group IDs will be excluded in the site|None|[1234, 5768]|
 |importance|string|normal|False|The site importance|['very_low', 'low', 'normal', 'high', 'very_high']|low|
-|included_addresses|[]string|[]|False|List of addresses to include in scan scope|None|["1234-abcd", "4567-def"]|
+|included_addresses|[]string|[]|False|List of addresses to include in scan scope|None|['1234-abcd', '4567-def']|
 |included_asset_groups|[]integer|[]|False|Assets associated with these asset group IDs will be included in the site|None|[1234, 5768]|
 |name|string|None|True|The site name. Name must be unique|None|example name|
 |scan_template_id|string|None|False|The identifier of a scan template|None|12345-abcd|
@@ -427,7 +427,7 @@ Example output:
 
 #### Create Tag
   
-Create a new tag
+This action is used to create a new tag
 
 ##### Input
 
@@ -465,7 +465,7 @@ Example output:
 
 #### Create User
   
-Create a new user account (limited to external authentication sources)
+This action is used to create a new user account (limited to external authentication sources)
 
 ##### Input
 
@@ -515,7 +515,7 @@ Example output:
 
 #### Delete an Asset
   
-Delete an Asset
+This action is used to delete an Asset
 
 ##### Input
 
@@ -547,7 +547,7 @@ Example output:
 
 #### Delete Asset Group
   
-Delete an existing asset group
+This action is used to delete an existing asset group
 
 ##### Input
 
@@ -579,7 +579,7 @@ Example output:
 
 #### Delete Vulnerability Exception
   
-Delete an existing vulnerability exception
+This action is used to delete an existing vulnerability exception
 
 ##### Input
 
@@ -611,7 +611,7 @@ Example output:
 
 #### Delete Scan Engine
   
-Delete an existing scan engine from the security console
+This action is used to delete an existing scan engine from the security console
 
 ##### Input
 
@@ -643,7 +643,7 @@ Example output:
 
 #### Delete Scan Engine Pool
   
-Delete an existing scan engine pool from the security console
+This action is used to delete an existing scan engine pool from the security console
 
 ##### Input
 
@@ -675,7 +675,7 @@ Example output:
 
 #### Delete Site
   
-Delete an existing site
+This action is used to delete an existing site
 
 ##### Input
 
@@ -707,7 +707,7 @@ Example output:
 
 #### Delete Tag
   
-Delete an existing tag
+This action is used to delete an existing tag
 
 ##### Input
 
@@ -739,7 +739,7 @@ Example output:
 
 #### Delete User
   
-Delete an user account
+This action is used to delete an user account
 
 ##### Input
 
@@ -771,7 +771,7 @@ Example output:
 
 #### Disable User
   
-Disable an user account
+This action is used to disable an user account
 
 ##### Input
 
@@ -803,7 +803,7 @@ Example output:
 
 #### Download Report
   
-Returns the contents of a generated report
+This action is used to returns the contents of a generated report
 
 ##### Input
 
@@ -837,7 +837,7 @@ Example output:
 
 #### Enable User
   
-Enable an user account
+This action is used to enable an user account
 
 ##### Input
 
@@ -869,7 +869,7 @@ Example output:
 
 #### Generate AdHoc SQL Report
   
-Create, generate, download, and cleanup a SQL report based on the provided query
+This action is used to create, generate, download, and cleanup a SQL report based on the provided query
 
 ##### Input
 
@@ -910,7 +910,7 @@ Example output:
 
 #### Generate Shared Secret
   
-Generate a shared secret to pair a scan engine to a security console
+This action is used to generate a shared secret to pair a scan engine to a security console
 
 ##### Input
 
@@ -942,7 +942,7 @@ Example output:
 
 #### Get Asset
   
-Gets an asset by ID
+This action is used to gets an asset by ID
 
 ##### Input
 
@@ -974,7 +974,7 @@ Example output:
 
 #### Get Asset Group
   
-Get an asset group by ID
+This action is used to get an asset group by ID
 
 ##### Input
 
@@ -1006,7 +1006,7 @@ Example output:
 
 #### Get Asset Group Assets
   
-Get asset group assets
+This action is used to get asset group assets
 
 ##### Input
 
@@ -1040,7 +1040,7 @@ Example output:
 
 #### Get Asset Groups
   
-Get a list of asset groups
+This action is used to get a list of asset groups
 
 ##### Input
 
@@ -1072,7 +1072,7 @@ Example output:
 
 #### Get Asset Software
   
-Get software found on an asset. Can only be used if the asset has first been scanned
+This action is used to get software found on an asset. Can only be used if the asset has first been scanned
 
 ##### Input
 
@@ -1104,7 +1104,7 @@ Example output:
 
 #### Get Asset Tags
   
-Get a listing of all tags for an asset
+This action is used to get a listing of all tags for an asset
 
 ##### Input
 
@@ -1136,7 +1136,7 @@ Example output:
 
 #### Get Asset Vulnerabilities
   
-Get vulnerabilities found on an asset. Can only be used if the asset has first been scanned
+This action is used to get vulnerabilities found on an asset. Can only be used if the asset has first been scanned
 
 ##### Input
 
@@ -1170,7 +1170,7 @@ Example output:
 
 #### Get Authentication Source
   
-Get the details for an authentication source
+This action is used to get the details for an authentication source
 
 ##### Input
 
@@ -1202,7 +1202,7 @@ Example output:
 
 #### Get Authentication Sources
   
-List authentication sources available for InsightVM users
+This action is used to list authentication sources available for InsightVM users
 
 ##### Input
 
@@ -1236,7 +1236,7 @@ Example output:
 
 #### Get Expiring Vulnerability Exceptions
   
-Return a list of expiring vulnerability exceptions
+This action is used to return a list of expiring vulnerability exceptions
 
 ##### Input
 
@@ -1268,7 +1268,7 @@ Example output:
 
 #### Get Role
   
-Get role details by ID
+This action is used to get role details by ID
 
 ##### Input
 
@@ -1300,7 +1300,7 @@ Example output:
 
 #### Get Roles
   
-List role details
+This action is used to list role details
 
 ##### Input
 
@@ -1332,7 +1332,7 @@ Example output:
 
 #### Get Scan
   
-Get the status of a scan
+This action is used to get the status of a scan
 
 ##### Input
 
@@ -1357,7 +1357,7 @@ Example input:
 |endTime|string|False|End time of the scan in ISO8601 format|2018-04-23 04:21:05.500000+00:00|
 |engineName|string|False|Name of the engine used for the scan|Local scan engine|
 |id|integer|False|ID of the scan|188934|
-|links|[]link|False|Hypermedia links to corresponding or related resources|[{"href": "https://insightvm:3780/api/3/scans/188934", "rel": "self"}]|
+|links|[]link|False|Hypermedia links to corresponding or related resources|[{'href': 'https://insightvm:3780/api/3/scans/188934', 'rel': 'self'}]|
 |scanName|string|False|User-driven scan name for the scan|API Scan - 2018-04-23T04:21:05Z|
 |scanType|string|False|Scan type (manual, automated, scheduled)|Manual|
 |startTime|string|False|Start time of the scan in ISO8601 format|2018-04-23 04:21:05.500000+00:00|
@@ -1392,7 +1392,7 @@ Example output:
 
 #### Get Scan Assets
   
-Gets assets for a scan
+This action is used to gets assets for a scan
 
 ##### Input
 
@@ -1424,7 +1424,7 @@ Example output:
 
 #### Get Scan Engine
   
-Get a scan engine by ID
+This action is used to get a scan engine by ID
 
 ##### Input
 
@@ -1456,7 +1456,7 @@ Example output:
 
 #### Get Scan Engine Pool
   
-Retrieve scan engine pool details by ID
+This action is used to retrieve scan engine pool details by ID
 
 ##### Input
 
@@ -1488,7 +1488,7 @@ Example output:
 
 #### Get Scan Engine Pools
   
-Retrieve a list of configured scan engine pools
+This action is used to retrieve a list of configured scan engine pools
 
 ##### Input
 
@@ -1520,7 +1520,7 @@ Example output:
 
 #### Get Scan Engines
   
-List scan engines paired with the security console
+This action is used to list scan engines paired with the security console
 
 ##### Input
 
@@ -1554,7 +1554,7 @@ Example output:
 
 #### Get Scans
   
-Get scans with optional site filter
+This action is used to get scans with optional site filter
 
 ##### Input
 
@@ -1588,7 +1588,7 @@ Example output:
 
 #### Get Site
   
-Get a site by ID
+This action is used to get a site by ID
 
 ##### Input
 
@@ -1620,7 +1620,7 @@ Example output:
 
 #### Get Site Assets
   
-Gets assets for a site
+This action is used to gets assets for a site
 
 ##### Input
 
@@ -1652,7 +1652,7 @@ Example output:
 
 #### Get Sites
   
-Get a list of sites
+This action is used to get a list of sites
 
 ##### Input
 
@@ -1684,7 +1684,7 @@ Example output:
 
 #### Get Tag
   
-Get tag details by tag ID
+This action is used to get tag details by tag ID
 
 ##### Input
 
@@ -1716,7 +1716,7 @@ Example output:
 
 #### Get Tag Asset Groups
   
-Get asset groups associated with a tag
+This action is used to get asset groups associated with a tag
 
 ##### Input
 
@@ -1748,7 +1748,7 @@ Example output:
 
 #### Get Tag Assets
   
-Get asset IDs associated with a tag
+This action is used to get asset IDs associated with a tag
 
 ##### Input
 
@@ -1780,7 +1780,7 @@ Example output:
 
 #### Get Tag Sites
   
-Get site IDs associated with a tag
+This action is used to get site IDs associated with a tag
 
 ##### Input
 
@@ -1812,7 +1812,7 @@ Example output:
 
 #### Get Tags
   
-Get a listing of all tags and return their details
+This action is used to get a listing of all tags and return their details
 
 ##### Input
 
@@ -1846,7 +1846,7 @@ Example output:
 
 #### Get User
   
-Get user account details by ID
+This action is used to get user account details by ID
 
 ##### Input
 
@@ -1878,7 +1878,7 @@ Example output:
 
 #### Get Users
   
-List user accounts
+This action is used to list user accounts
 
 ##### Input
 
@@ -1912,7 +1912,7 @@ Example output:
 
 #### Get Vulnerabilities by CVE
   
-Get vulnerability details associated with a CVE
+This action is used to get vulnerability details associated with a CVE
 
 ##### Input
 
@@ -1944,7 +1944,7 @@ Example output:
 
 #### Get Vulnerability Details
   
-Get the details of a specific vulnerability by id
+This action is used to get the details of a specific vulnerability by id
 
 ##### Input
 
@@ -1976,7 +1976,7 @@ Example output:
 
 #### Get Vulnerability Affected Assets
   
-Get the assets affected by the vulnerability
+This action is used to get the assets affected by the vulnerability
 
 ##### Input
 
@@ -2010,7 +2010,7 @@ Example output:
 
 #### List Inactive Assets
   
-Returns a list of inactive assets (limit 1000) determined by how many days ago they were scanned
+This action is used to returns a list of inactive assets (limit 1000) determined by how many days ago they were scanned
 
 ##### Input
 
@@ -2044,7 +2044,7 @@ Example output:
 
 #### List Reports
   
-List reports and return their identifiers
+This action is used to list reports and return their identifiers
 
 ##### Input
 
@@ -2080,7 +2080,7 @@ Example output:
 
 #### Remove Asset Group Tags
   
-Remove all tags from an asset group
+This action is used to remove all tags from an asset group
 
 ##### Input
 
@@ -2112,7 +2112,7 @@ Example output:
 
 #### Remove Asset Tag
   
-Remove a tag from an asset
+This action is used to remove a tag from an asset
 
 ##### Input
 
@@ -2146,7 +2146,7 @@ Example output:
 
 #### Remove Scan Engine Pool Engine
   
-Remove a scan engine from a scan engine pool
+This action is used to remove a scan engine from a scan engine pool
 
 ##### Input
 
@@ -2180,7 +2180,7 @@ Example output:
 
 #### Remove Tag Asset Groups
   
-Remove all asset group associations from a tag
+This action is used to remove all asset group associations from a tag
 
 ##### Input
 
@@ -2212,7 +2212,7 @@ Example output:
 
 #### Remove Tag Search Criteria
   
-Remove all search criteria from a tag
+This action is used to remove all search criteria from a tag
 
 ##### Input
 
@@ -2244,7 +2244,7 @@ Example output:
 
 #### Remove Tag Sites
   
-Remove all site associations from a tag
+This action is used to remove all site associations from a tag
 
 ##### Input
 
@@ -2276,7 +2276,7 @@ Example output:
 
 #### Remove User Asset Group Access
   
-Remove asset group access from an user account
+This action is used to remove asset group access from an user account
 
 ##### Input
 
@@ -2310,7 +2310,7 @@ Example output:
 
 #### Remove User Site Access
   
-Remove site access from an user account
+This action is used to remove site access from an user account
 
 ##### Input
 
@@ -2344,7 +2344,7 @@ Example output:
 
 #### Review Vulnerability Exception
   
-Approve or Reject a Vulnerability Exception
+This action is used to approve or Reject a Vulnerability Exception
 
 ##### Input
 
@@ -2380,7 +2380,7 @@ Example output:
 
 #### Scan
   
-Start a scan on a site
+This action is used to start a scan on a site
 
 ##### Input
 
@@ -2418,7 +2418,7 @@ Example output:
 
 #### Tag Asset
   
-Add a tag to an asset
+This action is used to add a tag to an asset
 
 ##### Input
 
@@ -2452,7 +2452,7 @@ Example output:
 
 #### Tag Asset Group
   
-Add a tag to an asset group
+This action is used to add a tag to an asset group
 
 ##### Input
 
@@ -2486,7 +2486,7 @@ Example output:
 
 #### Tag Assets
   
-Add a tag to multiple assets in bulk
+This action is used to add a tag to multiple assets in bulk
 
 ##### Input
 
@@ -2526,7 +2526,7 @@ Example output:
 
 #### Tag Site
   
-Add a tag to a site
+This action is used to add a tag to a site
 
 ##### Input
 
@@ -2560,7 +2560,7 @@ Example output:
 
 #### Top Remediations
   
-Generate results for the top remediations based on a defined scope
+This action is used to generate results for the top remediations based on a defined scope
 
 ##### Input
 
@@ -2600,7 +2600,7 @@ Example output:
 
 #### Update Asset Group Search Criteria
   
-Update the search criteria for an existing asset group
+This action is used to update the search criteria for an existing asset group
 
 ##### Input
 
@@ -2634,7 +2634,7 @@ Example output:
 
 #### Update Scan Status
   
-Update the status of a scan
+This action is used to update the status of a scan
 
 ##### Input
 
@@ -2668,7 +2668,7 @@ Example output:
 
 #### Update Shared Credentials
   
-Update shared credentials
+This action is used to update shared credentials
 
 ##### Input
 
@@ -2736,7 +2736,7 @@ Example output:
 
 #### Update Site
   
-Update an existing site
+This action is used to update an existing site
 
 ##### Input
 
@@ -2780,7 +2780,7 @@ Example output:
 
 #### Update Site Excluded Asset Groups
   
-Update an existing site scope of excluded asset groups
+This action is used to update an existing site scope of excluded asset groups
 
 ##### Input
 
@@ -2818,7 +2818,7 @@ Example output:
 
 #### Update Site Excluded Targets
   
-Update an existing site scope of excluded IP address and hostname targets
+This action is used to update an existing site scope of excluded IP address and hostname targets
 
 ##### Input
 
@@ -2856,7 +2856,7 @@ Example output:
 
 #### Update Site Included Asset Groups
   
-Update an existing site scope of included asset groups
+This action is used to update an existing site scope of included asset groups
 
 ##### Input
 
@@ -2894,7 +2894,7 @@ Example output:
 
 #### Update Site Included Targets
   
-Update an existing site scope of included IP address and hostname targets
+This action is used to update an existing site scope of included IP address and hostname targets
 
 ##### Input
 
@@ -2932,7 +2932,7 @@ Example output:
 
 #### Update Site Scan Engine
   
-Update the scan engine/scan engine pool associated with a site
+This action is used to update the scan engine/scan engine pool associated with a site
 
 ##### Input
 
@@ -2966,7 +2966,7 @@ Example output:
 
 #### Update Tag Search Criteria
   
-Update the search criteria for an existing tag
+This action is used to update the search criteria for an existing tag
 
 ##### Input
 
@@ -3000,7 +3000,7 @@ Example output:
 
 #### Update User
   
-Update the configuration of an existing user account
+This action is used to update the configuration of an existing user account
 
 ##### Input
 
@@ -3050,7 +3050,8 @@ Example output:
 
 #### Update User Asset Group Access
   
-Update the asset groups to which a user has access in bulk. It can be used to remove asset group access as well
+This action is used to update the asset groups to which a user has access in bulk. It can be used to remove asset group 
+access as well
 
 ##### Input
 
@@ -3084,7 +3085,7 @@ Example output:
 
 #### Update User Role
   
-Update the role associated with an user account
+This action is used to update the role associated with an user account
 
 ##### Input
 
@@ -3122,7 +3123,7 @@ Example output:
 
 #### Update User Site Access
   
-Update the sites to which a user has access in bulk. It can be used to remove sites as well
+This action is used to update the sites to which a user has access in bulk. It can be used to remove sites as well
 
 ##### Input
 
@@ -3156,7 +3157,7 @@ Example output:
 
 #### Update Vulnerability Exception Expiration Date
   
-Update vulnerability exception expiration date
+This action is used to update vulnerability exception expiration date
 
 ##### Input
 
@@ -3192,15 +3193,15 @@ Example output:
 
 #### New Vulnerability Exception
   
-Check for new InsightVM vulnerability exceptions
+This action is used to check for new InsightVM vulnerability exceptions
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |frequency|integer|5|True|How often the trigger should check for new vulnerability exception requests|None|5|
-|status_filter|[]string|["Under Review"]|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|["Under Review"]|
-
+|status_filter|[]string|["Under Review"]|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|['Under Review']|
+  
 Example input:
 
 ```
@@ -3228,7 +3229,7 @@ Example output:
 
 #### New Scans
   
-Check for new InsightVM scans by site and scan status
+This action is used to check for new InsightVM scans by site and scan status
 
 ##### Input
 
@@ -3263,6 +3264,62 @@ Example output:
 ```
 {
   "scan": {}
+}
+```
+
+#### Scan Completed
+  
+This action is used to fire upon completed scan
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|asset_group|string|None|False|Asset Group|None|None|
+|cve|string|None|False|CVE|None|None|
+|hostname|string|None|False|Hostname|None|None|
+|interval|integer|5|True|How often the trigger should check for new vulnerability|None|5|
+|ip_address|string|None|False|IP Address|None|None|
+|risk_score|float|None|False|Risk score|None|None|
+|site_id|string|None|False|Site ID|None|None|
+|source|string|None|False|Source|None|None|
+  
+Example input:
+
+```
+{
+  "asset_group": "",
+  "cve": "",
+  "hostname": "",
+  "interval": 5,
+  "ip_address": "",
+  "risk_score": 0.0,
+  "site_id": "",
+  "source": ""
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|asset_id|integer|False|Asset ID|None|
+|hostname|string|False|Hostname|None|
+|ip|string|False|IP|None|
+|software_update_id|string|False|Software update ID|None|
+|vulnerability_info|[]object|False|An array containing vulnerability id, solution id & solution summary|None|
+  
+Example output:
+
+```
+{
+  "asset_id": 0,
+  "hostname": "",
+  "ip": "",
+  "software_update_id": "",
+  "vulnerability_info": [
+    {}
+  ]
 }
 ```
 ### Tasks
@@ -3910,6 +3967,7 @@ Example output:
 
 # Version History
 
+* 6.2.0 - `Scan Completion` - New trigger added to retrieve vulnerability information on assets when a scan is completed
 * 6.1.1 - Update actions `Update Site Excluded Targets` and `Update Site Included Targets` to prevent error on empty addresses
 * 6.1.0 - Add new optional input `override_blackout` in `Scan` action
 * 6.0.0 - Fix file output type for `Generate Adhoc SQL Report` | Replace custom output type `file` with `insightvm_file` for each item in the `asset` `files` output in multiple actions

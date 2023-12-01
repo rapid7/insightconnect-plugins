@@ -22,6 +22,7 @@ class Output:
     ASSET_ID = "asset_id"
     HOSTNAME = "hostname"
     IP = "ip"
+    SOFTWARE_UPDATE_ID = "software_update_id"
     VULNERABILITY_INFO = "vulnerability_info"
 
 
@@ -115,6 +116,12 @@ class ScanCompletionOutput(insightconnect_plugin_runtime.Output):
       "title": "IP",
       "description": "IP",
       "order": 3
+    },
+    "software_update_id": {
+      "type": "string",
+      "title": "Software Update ID",
+      "description": "Software update ID",
+      "order": 5
     },
     "vulnerability_info": {
       "type": "array",
