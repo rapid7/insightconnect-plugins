@@ -26,8 +26,6 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
     CACHE_FILE_NAME = f"site_scans_cache_{time.time()}"
 
     def run(self, params={}):
-        start_time = time.time()
-
         # Write scan_id to cache
         self.logger.info("Getting latest scan..")
 
@@ -35,26 +33,24 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         latest_scan_id = self.find_latest_completed_scan(site_id)
 
         # Initialize trigger cache at startup
-        # self.logger.info("Initialising trigger cache..")
+        self.logger.info("Initialising trigger cache..")
         util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(latest_scan_id))
 
         while True:
             # Open cache
-            starting_point = Cache.get_cache_site_scans(self)
-            # starting_point = 11568
+            starting_point = Cache.get_cache_site_scans()
 
             latest_scan_id = self.find_latest_completed_scan(site_id)
 
             # Check if latest is in cache
             print(f"Latest scan ID: {latest_scan_id} | cache site scans: {starting_point}")
             if latest_scan_id == starting_point:
-                print(f"Sleeping 60 seconds")
+                self.logger.info("No new scans, sleeping 1 minute.")
                 time.sleep(60)
                 continue
 
             results = self.get_results_from_latest_scan(params=params, scan_id=int(latest_scan_id))
 
-            # results = [{'asset_id': 2477, 'ip_address': '10.4.31.243', 'hostname': 'ivm-console-test', 'vuln_info': [{'vulnerability_id': '116131', 'nexpose_id': 'cifs-generic-0005', 'solution_id': '62875', 'solution_summary': 'Upgrade the CIFS authentication method'}]}]
             # Submit scan for trigger
             for item in results:
                 self.send(
@@ -74,8 +70,6 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                     cause="Failed to save cache to file", assistance=f"Exception returned was {error}"
                 )
 
-            end_time = time.time()
-            print(f"Total Time: {(end_time - start_time) // 60} Minutes")
             # Sleep configured in minutes
             time.sleep(params.get(Input.INTERVAL, 5) * 60)
 
@@ -119,18 +113,24 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         return results
 
     def find_latest_completed_scan(self, site_id: str = None) -> int:
-        """ """
-        # Use API call for speed.
-        # Super simple get the latest scan ID
+        """
+        Use API calls to get the latest scan ID.
+        Two different endpoints depending on whether Site ID is provided as an input or not.
+
+        :param site_id: Optional site id input
+        :return: ID of the latest 'finished' scan
+        """
+
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         if site_id:
             endpoint = endpoints.Scan.site_scans(self.connection.console_url, site_id)
         else:
             endpoint = endpoints.Scan.scans(self.connection.console_url)
 
+        # TODO - Paged resource request, paginate through until you find finished scan
+        #  ( we need to paginate because there could be 10 non-finished scans )
         response = resource_helper.resource_request(endpoint=endpoint, method="get", params={"sort": "id,desc"})
 
-        # print(f"Response zero: {response.get('resources')[0:2]}")
         for scan in response.get("resources"):
             if scan.get("status") == "finished":
                 self.logger.info(f"Latest finished scan ID: {scan.get('id')}")
@@ -141,7 +141,13 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
 class ScanQueries:
     @staticmethod
-    def query_results_from_latest_scan(scan_id):
+    def query_results_from_latest_scan(scan_id: int) -> str:
+        """
+        Generate an SQL query string needed to to retrieve all the necessary outputs
+
+        :param scan_id: Scan ID to query against
+        :return: The completed query string
+        """
         return (
             f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dvr.source, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id, dv.riskscore "
             f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
@@ -154,9 +160,9 @@ class ScanQueries:
 
 
 class Cache:
-    CACHE_FILE_NAME = f"site_scans_cache_{time.time()}"
 
-    def get_cache_site_scans(self) -> dict:
+    @staticmethod
+    def get_cache_site_scans() -> dict:
         try:
             return json.loads(util.read_from_cache(ScanCompletion.CACHE_FILE_NAME))
         except ValueError as error:
@@ -169,10 +175,11 @@ class Util:
         """
         Filter the outputted results based on the user inputs.
 
-        :param params:
-        :param csv_row:
+        :param params: Input params
+        :param csv_row: Dict row of the csv results
 
-        :return:
+        :return: New object containing only the necessary fields for the required
+        output.
         """
         # Input retrieval
         asset_group = params.get(Input.ASSET_GROUP, None)
@@ -206,7 +213,6 @@ class Util:
         if risk_score != 0 and risk_score not in csv_row["riskscore"]:
             return None
         else:
-            print(f"new dict final: {new_dct}")
             return new_dct
 
     @staticmethod
@@ -216,7 +222,6 @@ class Util:
         within the original objects.
 
         :param results:
-
         :return:
         """
         merge_keys = ("asset_id", "ip_address", "hostname")
