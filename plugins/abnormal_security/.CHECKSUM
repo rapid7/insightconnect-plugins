@@ -1,5 +1,5 @@
 {
-	"spec": "686f8ea761007d8528332a6ab7db188c",
+	"spec": "af8befd40082941671f372d6e1e09674",
 	"manifest": "ca8ac5826495a084b292cebfb2bdf555",
 	"setup": "def6aa43e03c25df7d5fa3d36a1f8387",
 	"schemas": [
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "get_cases/schema.py",
-			"hash": "5cce1d7e316f5b7501e4ce67b240ef0e"
+			"hash": "6e35e9078585e685fa895042bd37364e"
 		},
 		{
 			"identifier": "get_threat_details/schema.py",

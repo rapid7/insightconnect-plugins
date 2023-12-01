@@ -294,6 +294,7 @@ actions:
           - lastModifiedTime
           - createdTime
           - customerVisableTime
+          - ""
         required: false
         example: lastModifiedTime
         default: lastModifiedTime
