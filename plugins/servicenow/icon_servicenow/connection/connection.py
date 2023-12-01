@@ -63,8 +63,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         query = {"sysparm_limit": 1}
         method = "get"
 
-        request = RequestHelper(self.session, self.logger)
-        response = request.make_request(url, method, params=query)
+        response = self.request.make_request(url, method, params=query)
 
         if response.get("status", 0) in range(200, 299):
             return {"success": True}
