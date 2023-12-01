@@ -61,6 +61,8 @@ class Util:
             return MockResponse("manage_threat_unremediate", 202)
         elif args[1] == "https://rapid7.com/v1/threats/53ca2899-d987-22aa-30a7-22aa987c4319":
             return MockResponse("manage_threat_invalid_id", 404)
+        elif args[1] == "https://rapid7.com/v1/threats/184712ab-6d8b-47b3-89d3-a314efef79e2":
+            return MockResponse("get_threat_details", 202)
         elif args[1] == "https://rapid7.com/v1/cases/12345":
             return MockResponse("manage_case_not_an_attack", 202)
         elif args[1] == "https://rapid7.com/v1/cases/34567":

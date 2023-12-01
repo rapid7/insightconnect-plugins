@@ -4,7 +4,8 @@ products: [insightconnect]
 name: abnormal_security
 title: Abnormal Security
 description: Protect your Microsoft Office 365 and G-Suite environments with next-generation email security that uses the most advanced AI detection techniques to stop targeted phishing attacks
-version: 1.3.0
+version: 2.0.0
+supported_versions: ["abnormal-security API abx v1.4.2"]
 vendor: rapid7
 support: rapid7
 status: []
@@ -124,7 +125,7 @@ types:
     fromAddress:
       title: From Address
       description: From address
-      type: string
+      type: 'string'
       required: false
     fromName:
       title: From Name
@@ -263,6 +264,7 @@ actions:
         description: A list of the top 100 threats identified in Threat Log
         type: '[]threat'
         required: true
+        example: [{"threatId": "184712ab-6d8b-47b3-89d3-a314efef79e2"}]
   get_threat_details:
     title: Get Threat Details
     description: Get details of a threat identified by Abnormal Security
@@ -279,10 +281,21 @@ actions:
         description: Details of the requested threat identified by Abnormal Security
         type: threat_details
         required: true
+        example: {"threatId": "184712ab-6d8b-47b3-89d3-a314efef79e2","messages": [{"threatId": "184712ab-6d8b-47b3-89d3-a314efef79e2","autoRemediated": true,"postRemediated": false,"attackType": "Spam","attackStrategy": "Unknown Sender","returnPath": "user@example.com","senderIpAddress": "192.168.50.1","impersonatedParty": "none / Others","attackVector": "Link","summaryInsights": ["Abnormal Email Body HTML","Suspicious Link","Unusual Sender Domain","Abnormal Email SignOff","Unusual Sender"],"remediationTimestamp": "2021-02-02T21:09:41Z","isRead": false,"attackedParty": "Other","abxMessageId": 1111111111111111113,"abxPortalUrl": "https://portal.abnormalsecurity.com/home/threat-center/remediation-history/1111111111111111113","subject": "[LIKELY PHISHING] Testing Myths","fromAddress": "user@example.com","fromName": "Test Example","toAddresses": "user@example.com","receivedTime": "2021-02-02T21:09:37Z","sentTime": "2021-02-02T21:06:49Z","internetMessageId": "<user@example.com>","urls": ["https://example.com"]},{"threatId": "184712ab-6d8b-47b3-89d3-a314efef79e2","autoRemediated": false,"postRemediated": true,"attackType": "Spam","attackStrategy": "Name Impersonation","returnPath": "user@example.com","senderIpAddress": "192.168.50.1","impersonatedParty": "none / Others","attackVector": "Link","summaryInsights": ["Abnormal Email Body HTML","Unusual Sender","Suspicious Link","Unusual Sender Domain"],"remediationTimestamp": "2020-05-17T21:09:55Z","isRead": false,"attackedParty": "Employee (other)","abxMessageId": -1111111111111111112,"abxPortalUrl": "https://portal.abnormalsecurity.com/home/threat-center/remediation-history/-1111111111111111112","subject": "[LIKELY PHISHING] Testing Myths","fromAddress": "user@example.com","fromName": "Test Example","toAddresses": "user@example.com","recipientAddress": "user@example.com","receivedTime": "2020-05-17T21:09:51Z","sentTime": "2020-05-17T21:09:46Z","internetMessageId": "<user@example.com>","urls": ["https://example.com","https://example.com"]},{"threatId": "184712ab-6d8b-47b3-89d3-a314efef79e2","autoRemediated": false,"postRemediated": false,"attackType": "Spam","attackStrategy": "Name Impersonation","returnPath": "user@example.com","senderIpAddress": "192.168.50.1","impersonatedParty": "none / Others","attackVector": "Link","summaryInsights": ["Abnormal Email Body HTML","Suspicious Link","Unusual Sender Domain","Unusual Sender"],"attackedParty": "Employee (other)","abxMessageId": -1111111111111111114,"abxPortalUrl": "https://portal.abnormalsecurity.com/home/threat-center/remediation-history/-1111111111111111114","subject": "The Truth About 7 Myths","fromAddress": "user@example.com","fromName": "Test Example","toAddresses": "user@example.com","recipientAddress": "user@example.com","receivedTime": "2020-05-10T21:05:08Z","sentTime": "2020-05-10T21:05:03Z","internetMessageId": "<user@example.com>"}]}
   get_cases:
     title: Get Cases
     description: Get a list of up to 100 cases identified by Abnormal Security, if no input filter dates are provided, it will return up to 100 latest results
     input:
+      filter_key:
+        title: Filter Key
+        description: This input enables you to select what timestamp to filter on, default is lastModifiedTime
+        type: enum
+          - lastModifiedTime
+          - createdTime
+          - customerVisableTime
+        required: false
+        example: lastModifiedTime
+        default: lastModifiedTime
       from_date:
         title: From Date
         description: This input enables you to filter your results from a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ
@@ -301,6 +314,7 @@ actions:
         description: A list of the top 100 cases identified in Abnormal Cases
         type: '[]case'
         required: true
+        example: [{"caseId": "19377","severity": "Potential Account Takeover"}]
   get_case_details:
     title: Get Case Details
     description: Get details of a case identified by Abnormal Security
@@ -317,6 +331,7 @@ actions:
         description: Details of the requested case identified by Abnormal Security
         type: case_details
         required: true
+        example: {"caseId": "19377","severity": "Potential Account Takeover","affectedEmployee": "FirstName LastName","firstObserved": "2020-06-09T17:42:59Z"}
   manage_threat:
     title: Manage Threat
     description: Manage a Threat identified by Abnormal Security
@@ -342,6 +357,7 @@ actions:
         description: Response containing the action ID and status URL
         type: manage_threat_response
         required: true
+        example: {"response": {"actionId": "a33a212a-89ff-461f-be34-ea52aff44a73","statusUrl": "https://api.abnormalplatform.com/v1/threats/184712..."}}
   manage_case:
     title: Manage Case
     description: Manage an Abnormal Case
@@ -369,3 +385,4 @@ actions:
         description: Response containing the action ID and status URL
         type: manage_case_response
         required: true
+        example: {"response": {"actionId": "61e76395-40d3-4d78-b6a8-8b17634d0f5b","statusUrl": "https://api.abnormalplatform.com/v1/cases/19377..."}}
