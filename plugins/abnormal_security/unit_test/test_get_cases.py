@@ -1,12 +1,13 @@
 import sys
 import os
+
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
 from icon_abnormal_security.actions.get_cases import GetCases
 from icon_abnormal_security.actions.get_cases.schema import Input, Output
-from unit_test.util import Util
+from util import Util
 from unittest.mock import patch
-
-sys.path.append(os.path.abspath("../"))
 
 
 class TestGetCases(TestCase):
@@ -28,6 +29,7 @@ class TestGetCases(TestCase):
             {
                 Input.FROM_DATE: "2021-03-01 21:11:38",
                 Input.TO_DATE: "2021-03-11 21:11:38",
+                Input.FILTER_KEY: "lastModifiedTime",
             }
         )
 
@@ -41,6 +43,7 @@ class TestGetCases(TestCase):
             {
                 Input.FROM_DATE: "2021-03-01T21:11:38Z",
                 Input.TO_DATE: "2021-03-11T21:11:38Z",
+                Input.FILTER_KEY: "lastModifiedTime",
             }
         )
 
