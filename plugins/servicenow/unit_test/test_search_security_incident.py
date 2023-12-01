@@ -14,7 +14,8 @@ from parameterized import parameterized
 from util import Util
 
 
-@patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
+@patch("requests.get", side_effect=Util.mocked_requests)
+@patch("requests.post", side_effect=Util.mocked_requests)
 class TestSearchSecurityIncident(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -49,7 +50,7 @@ class TestSearchSecurityIncident(TestCase):
             ],
         ]
     )
-    def test_get_security_incident(self, mock_request, test_name, input_params, expected):
+    def test_get_security_incident(self, mock_get, mock_post, test_name, input_params, expected):
         actual = self.action.run(input_params)
         validate(actual, SearchSecurityIncidentOutput.schema)
         self.assertDictEqual(actual, expected)

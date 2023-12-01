@@ -15,7 +15,8 @@ from parameterized import parameterized
 from util import Util
 
 
-@patch("requests.sessions.Session.patch", side_effect=Util.mocked_requests)
+@patch("requests.patch", side_effect=Util.mocked_requests)
+@patch("requests.post", side_effect=Util.mocked_requests)
 class TestUpdateSecurityIncident(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -35,7 +36,7 @@ class TestUpdateSecurityIncident(TestCase):
             ],
         ]
     )
-    def test_update_security_incident(self, mock_request, test_name, input_params, expected):
+    def test_update_security_incident(self, mock_patch, mock_post, test_name, input_params, expected):
         actual = self.action.run(input_params)
         validate(actual, UpdateSecurityIncidentOutput.schema)
         self.assertEqual(actual, expected)
@@ -50,7 +51,7 @@ class TestUpdateSecurityIncident(TestCase):
             ]
         ]
     )
-    def test_update_security_incident_raise_exception(self, mock_request, test_name, input_params, cause, assistance):
+    def test_update_security_incident_raise_exception(self, mock_patch, mock_post, test_name, input_params, cause, assistance):
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)
