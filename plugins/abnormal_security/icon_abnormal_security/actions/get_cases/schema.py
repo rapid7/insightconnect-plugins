@@ -31,7 +31,8 @@ class GetCasesInput(insightconnect_plugin_runtime.Input):
       "enum": [
         "lastModifiedTime",
         "createdTime",
-        "customerVisableTime"
+        "customerVisableTime",
+        ""
       ],
       "order": 1
     },
