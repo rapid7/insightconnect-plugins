@@ -141,7 +141,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
 class ScanQueries:
     @staticmethod
-    def query_results_from_latest_scan(scan_id: int) -> str:  # nosec B608
+    def query_results_from_latest_scan(scan_id: int) -> str:
         """
         Generate an SQL query string needed to to retrieve all the necessary outputs
 
@@ -149,7 +149,7 @@ class ScanQueries:
         :return: The completed query string
         """
         return (
-            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dvr.source, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id, dv.riskscore "
+            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dvr.source, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id, dv.riskscore " # nosec B608
             f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
             f"JOIN dim_asset AS da ON (fasvi.asset_id = da.asset_id) "
             f"JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
@@ -233,7 +233,7 @@ class Util:
             dct.setdefault(key, []).append(partial_el)
 
         for key, value in dct.items():
-            entry = {k: v for (k, v) in zip(merge_keys, key)}
+            entry = dict(zip(merge_keys, key))
             entry["vuln_info"] = value
             new_results.append(entry)
         return new_results
