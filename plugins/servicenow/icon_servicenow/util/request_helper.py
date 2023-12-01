@@ -5,10 +5,7 @@ from logging import Logger
 from typing import Optional
 
 import requests
-from requests.auth import (
-    HTTPBasicAuth,
-    AuthBase
-)
+from requests.auth import HTTPBasicAuth, AuthBase
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
@@ -32,13 +29,16 @@ class AuthenticationType(Enum):
 
 
 class RequestHelper(object):
-    def __init__(self, username: str,
-                 password: str,
-                 client_id: Optional[str],
-                 client_secret: Optional[str],
-                 auth_type: AuthenticationType,
-                 base_url: str,
-                 logger: Logger):
+    def __init__(
+        self,
+        username: str,
+        password: str,
+        client_id: Optional[str],
+        client_secret: Optional[str],
+        auth_type: AuthenticationType,
+        base_url: str,
+        logger: Logger,
+    ):
         """
         Creates a new instance of RequestHelper
         :param username: Username for ServiceNow
@@ -129,26 +129,32 @@ class RequestHelper(object):
         return str(base64.b64encode(result), "utf-8")
 
     def _get_oauth_token(self) -> str:
-        response = requests.post(url=f"{self.base_url}oauth_token.do", data={
-            "grant_type": "password",
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
-            "username": self.username,
-            "password": self.password,
-        })
+        response = requests.post(
+            url=f"{self.base_url}oauth_token.do",
+            data={
+                "grant_type": "password",
+                "client_id": self.client_id,
+                "client_secret": self.client_secret,
+                "username": self.username,
+                "password": self.password,
+            },
+        )
 
         if response.status_code != 200:
             error_message = "unknown"
             if response.status_code == 401:
                 error_message = response.json().get("error_description", "unknown")
 
-            raise PluginException(cause=f"Error while trying to retrieve new OAuth token: {error_message}",
-                                  assistance="Ensure credentials and ServiceNow endpoint are correct.")
+            raise PluginException(
+                cause=f"Error while trying to retrieve new OAuth token: {error_message}",
+                assistance="Ensure credentials and ServiceNow endpoint are correct.",
+            )
 
         try:
             access_token = response.json()["access_token"]
         except KeyError:
-            raise PluginException(cause="Access token was not present in OAuth token response!",
-                                  assistance="API may have changed")
+            raise PluginException(
+                cause="Access token was not present in OAuth token response!", assistance="API may have changed"
+            )
 
         return access_token

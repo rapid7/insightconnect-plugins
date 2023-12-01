@@ -9,7 +9,6 @@ from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
@@ -31,7 +30,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         oauth_client_secret = params[Input.CLIENT_SECRET].get("secretKey")
 
         if not oauth_client_id or not oauth_client_secret:
-            self.logger.info("Either client ID or client secret (or both) were not provided, using basic authentication")
+            self.logger.info(
+                "Either client ID or client secret (or both) were not provided, using basic authentication"
+            )
             authentication_type = AuthenticationType.basic
         else:
             self.logger.info("Client ID and secret were provided, using OAuth for API authentication")
@@ -44,7 +45,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             client_secret=oauth_client_secret,
             auth_type=authentication_type,
             base_url=self.base_url,
-            logger=self.logger
+            logger=self.logger,
         )
 
         self.oauth_url = f"{self.base_url}oauth_token.do"
