@@ -24,9 +24,15 @@ class GetCasesInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "filter_key": {
+      "type": "string",
       "title": "Filter Key",
       "description": "This input enables you to select what timestamp to filter on, default is lastModifiedTime",
       "default": "lastModifiedTime",
+      "enum": [
+        "lastModifiedTime",
+        "createdTime",
+        "customerVisableTime"
+      ],
       "order": 1
     },
     "from_date": {
