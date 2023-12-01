@@ -96,7 +96,6 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         report_contents = util.adhoc_sql_report(self.connection, self.logger, report_payload)
         try:
             csv_report = csv.DictReader(io.StringIO(report_contents["raw"]))
-            print(f"CSV Report: {csv_report}")
         except Exception as error:
             raise PluginException(
                 cause="Error: Failed to process query response while fetching site scans.",
@@ -109,6 +108,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             new_row = Util.filter_results(params, row)
             if new_row:
                 results.append(new_row)
+        print(f"Results before condense:\n{results}")
         results = Util.condense_results(results)
         return results
 
@@ -141,7 +141,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
 class ScanQueries:
     @staticmethod
-    def query_results_from_latest_scan(scan_id: int) -> str:
+    def query_results_from_latest_scan(scan_id: int) -> str:  # nosec B608
         """
         Generate an SQL query string needed to to retrieve all the necessary outputs
 
@@ -160,7 +160,6 @@ class ScanQueries:
 
 
 class Cache:
-
     @staticmethod
     def get_cache_site_scans() -> dict:
         try:
@@ -229,7 +228,7 @@ class Util:
         new_results = []
 
         for el in results:
-            key = tuple([el[k] for k in merge_keys])
+            key = tuple(el[k] for k in merge_keys)
             partial_el = {k: v for k, v in el.items() if k not in merge_keys}
             dct.setdefault(key, []).append(partial_el)
 
