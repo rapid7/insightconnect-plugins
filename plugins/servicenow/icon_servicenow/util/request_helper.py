@@ -21,7 +21,7 @@ class BearerAuth(AuthBase):
     def __init__(self, access_token: str):
         self.access_token = access_token
 
-    def __call__(self, request: requests.Request):
+    def __call__(self, request: requests.Request) -> requests.Request:
         request.headers["Authorization"] = f"Bearer {self.access_token}"
         return request
 
