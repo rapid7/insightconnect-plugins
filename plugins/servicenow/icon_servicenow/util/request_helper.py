@@ -138,7 +138,7 @@ class RequestHelper(object):
                 "username": self.username,
                 "password": self.password,
             },
-            timeout=30
+            timeout=30,
         )
 
         if response.status_code != 200:
