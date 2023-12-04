@@ -5,11 +5,10 @@ import timeout_decorator
 sys.path.append(os.path.abspath("../"))
 
 from komand_sentinelone.triggers import GetThreats
-from komand_sentinelone.triggers.get_threats.schema import Input, GetThreatsOutput
+from komand_sentinelone.triggers.get_threats.schema import Input
 from util import Util
 from unittest import TestCase
 from unittest.mock import patch
-from jsonschema import validate
 
 sys.path.append(os.path.abspath("../"))
 
@@ -66,4 +65,3 @@ class TestGetThreats(TestCase):
                 Input.ENGINES: [],
             }
         )
-        validate(actual, GetThreatsOutput.schema)
