@@ -144,7 +144,7 @@ class RequestHelper(object):
         if response.status_code != 200:
             error_message = "unknown"
             if response.status_code == 401:
-                error_message = response.json().get("error_description", "unknown")
+                error_message = response.json().get("error_description", "unauthorized")
 
             raise PluginException(
                 cause=f"Error while trying to retrieve new OAuth token: {error_message}",
