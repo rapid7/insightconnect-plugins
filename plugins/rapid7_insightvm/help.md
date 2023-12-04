@@ -3304,8 +3304,8 @@ Example input:
 |asset_id|integer|False|Asset ID|219|
 |hostname|string|False|Hostname|doc.rapid7.com|
 |ip|string|False|IP|8.8.8.8|
-|vulnerability_info|[]object|False|An array containing vulnerability id, solution id & solution summary|[{'vulnerability_id': 1111, 'nexpose_id': 'ssh-cve-2018', 'solution_id': 1111, 'solution_summary': 'Example solution for cve'}, {'vulnerability_id': 2222, 'nexpose_id': 'ssh-cve-2019', 'solution_id': 2222, 'solution_summary': 'Example solution for cve'}]|
-  
+|vulnerability_info|[]object|False|An array containing vulnerability id, solution id & solution summary|[{"vulnerability_id": 1111, "nexpose_id": "ssh-cve-2018", "solution_id": 1111, "solution_summary": "Example solution for cve"}, {"vulnerability_id": 2222, "nexpose_id": "ssh-cve-2019", "solution_id": 2222, "solution_summary": "Example solution for cve"}]|
+
 Example output:
 
 ```
