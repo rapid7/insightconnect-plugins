@@ -1,0 +1,36 @@
+# This is a combination of 2 commits.
+# This is the 1st commit message:
+
+[PLGN-364]- Removed connection log line
+
+[PLGN-364]- Refresh and linter updates
+
+[PLGN-364]- Updating checksum
+
+[PLGN-364]- Fix checksum
+
+# This is the commit message #2:
+
+[PLGN-364]- Fix help md and plugin spec
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Mon Dec 4 12:30:50 2023 +0000
+#
+# interactive rebase in progress; onto 6c2a4a905
+# Last commands done (2 commands done):
+#    pick d9ded603f [PLGN-364]- Removed connection log line
+#    squash 6564d195e [PLGN-364]- Fix help md and plugin spec
+# No commands remaining.
+# You are currently rebasing branch 'PLGN-364-salesforce-connection-bug' on '6c2a4a905'.
+#
+# Changes to be committed:
+#	modified:   plugins/salesforce/.CHECKSUM
+#	modified:   plugins/salesforce/Dockerfile
+#	modified:   plugins/salesforce/bin/komand_salesforce
+#	modified:   plugins/salesforce/help.md
+#	modified:   plugins/salesforce/komand_salesforce/connection/connection.py
+#	modified:   plugins/salesforce/plugin.spec.yaml
+#	modified:   plugins/salesforce/setup.py
+#
