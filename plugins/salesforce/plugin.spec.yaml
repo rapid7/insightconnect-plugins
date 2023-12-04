@@ -4,7 +4,7 @@ products: [insightconnect]
 name: salesforce
 title: Salesforce
 description: The Salesforce plugin allows you to search, update, and manage salesforce records
-version: 2.1.3
+version: 2.1.4
 connection_version: 2
 vendor: rapid7
 support: community
@@ -15,6 +15,10 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/salesforce
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.salesforce.com/
+key_features: ["Search records", "Get records", "Create records", "Update records", "Delete records", "Get record fields", "Get blob data for a given record"]
+requirements: ["Salesforce username, password and security token", "Consumer Key and Secret of the connected app"]
+references: ["[Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/intro_what_is_rest_api.htm)", "[Connecting your app to the API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/quickstart.htm)", "[SOQL](https://developer.salesforce.com/docs/atlas.en-us.216.0.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm)"]
+links: ["[Salesforce](https://salesforce.com)"]
 tags:
 - marketing
 - sales
@@ -168,7 +172,7 @@ connection:
 actions:
   simple_search:
     title: Simple Search
-    description: Execute a simple search for a text
+    description: This action is used to execute a simple search for a text
     input:
       text:
         title: Text
@@ -182,10 +186,10 @@ actions:
         description: List of search results
         type: '[]searchResult'
         required: false
-        example: []
+        example: {}
   advanced_search:
     title: Advanced Search
-    description: Execute a SOQL (Salesforce Object Query Language) query
+    description: This action is used to execute a SOQL (Salesforce Object Query Language) query
     input:
       query:
         title: Query
@@ -255,28 +259,28 @@ actions:
         example: True
   get_record:
     title: Get Record
-    description: Retrieve a record
+    description: This action is used to retrieve a record
     input:
       recordId:
         title: Record ID
         description: The ID of an existing record
         type: string
         required: true
-        example: 999Hn99999uM8mnBBB
+        example: '999Hn99999uM8mnBBB'
       externalIdFieldName:
         title: External ID Field Name
         description: The name of the external ID field that should be matched with record_id. If empty, the 'Id' field of the record is used
         type: string
         required: false
         default: ''
-        example: ExampleExtID__c
+        example: 'ExampleExtID__c'
       objectName:
         title: Object Name
         description: The name of the object
         type: string
         default: Account
         required: true
-        example: Folder
+        example: 'Folder'
     output:
       record:
         title: Record
@@ -310,7 +314,7 @@ actions:
         example: True
   get_fields:
     title: Get Fields
-    description: Retrieve field values from the record of the given object
+    description: This action is used to retrieve field values from the record of the given object
     input:
       recordId:
         title: Record ID
@@ -337,7 +341,7 @@ actions:
         description: An object with field names as keys, each with the corresponding value
         type: object
         required: false
-        example: {}
+        example: '{"id": "001Hn00001uAJRtaB3", "name": "Example Account", "description": "Example description"}'
   get_blob_data:
     title: Get Blob Data
     description: Retrieve blob data for a given record

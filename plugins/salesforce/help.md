@@ -6,37 +6,37 @@ The Salesforce plugin allows you to search, update, and manage salesforce record
 This plugin utilizes the [Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/intro_what_is_rest_api.htm).
 
 # Key Features
-
-* Search records
-* Get records
-* Create records
-* Update records
-* Delete records
-* Get record fields
+  
+* Search records  
+* Get records  
+* Create records  
+* Update records  
+* Delete records  
+* Get record fields  
 * Get blob data for a given record
 
 # Requirements
-
-* Salesforce username, password and security token
+  
+* Salesforce username, password and security token  
 * Consumer Key and Secret of the connected app
 
 # Supported Product Versions
-
+  
 * Salesforce API v58 2023-06-30
 
 # Documentation
 
 ## Setup
-
-The connection configuration accepts the following parameters:
+  
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |clientId|string|None|True|Consumer Key of the connected app|None|1234567890aBcdEFRoeRxDE1234567890abCDef6Etz7VLwwLQZn19jyW3U_1234567890AbcdEF4VkuMS4ze|
-|clientSecret|credential_secret_key|None|True|Consumer Secret of the connected app|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
+|clientSecret|credential_secret_key|None|True|Consumer Secret of the connected app|None|1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF|
 |salesforceAccountUsernameAndPassword|credential_username_password|None|True|Name and password of the Salesforce user|None|{"username": "user@example.com", "password": "password"}|
 |securityToken|credential_secret_key|None|True|Security token of the Salesforce user|None|Ier6YY78KxJwKtHy7HeK0oPc|
-
+  
 Example input:
 
 ```
@@ -83,12 +83,12 @@ Example output:
 
 ```
 {
-  "search_results": [
+  "searchResults": [
     {
-      "type": "Account",
-      "url": "/services/data/v58.0/sobjects/Account/001Hn00001uLl12aBC",
+      "id": "001Hn00001uLl12aBC",
       "name": "Example Account",
-      "id": "001Hn00001uLl12aBC"
+      "type": "Account",
+      "url": "/services/data/v58.0/sobjects/Account/001Hn00001uLl12aBC"
     }
   ]
 }
@@ -132,8 +132,8 @@ Example output:
 ```
 
 #### Get Fields
-
-This action is used to retrieve field values from a record.
+  
+This action is used to retrieve field values from the record of the given object
 
 ##### Input
 
@@ -142,7 +142,7 @@ This action is used to retrieve field values from a record.
 |fields|[]string|None|True|The fields which values should be retrieved|None|["Id", "Name", "Description"]|
 |objectName|string|Account|True|The name of the object (e.g. 'Account')|None|Account|
 |recordId|string|None|True|The ID of an existing record|None|001Hn00001uAJRtaB3|
-
+  
 Example input:
 
 ```
@@ -160,39 +160,39 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|fields|object|False|An object with field names as keys, each with the corresponding value|{}|
-
+| :--- | :--- | :--- | :--- | :--- |
+|fields|object|False|An object with field names as keys, each with the corresponding value|{"id": "001Hn00001uAJRtaB3", "name": "Example Account", "description": "Example description"}|
+  
 Example output:
 
 ```
 {
   "fields": {
+    "description": "Example description",
     "id": "001Hn00001uAJRtaB3",
-    "name": "Example Account",
-    "description": "Example description"
+    "name": "Example Account"
   }
 }
 ```
 
 #### Get Record
-
-This action is used to retrieve a record.
+  
+This action is used to retrieve a record
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |externalIdFieldName|string||False|The name of the external ID field that should be matched with record_id. If empty, the 'Id' field of the record is used|None|ExampleExtID__c|
 |objectName|string|Account|True|The name of the object|None|Folder|
 |recordId|string|None|True|The ID of an existing record|None|999Hn99999uM8mnBBB|
-
+  
 Example input:
 
 ```
 {
-  "externalIdFieldName": "ExampleExtID__c",
-  "objectName": "Folder",
+  "externalIdFieldName": "",
+  "objectName": "Account",
   "recordId": "999Hn99999uM8mnBBB"
 }
 ```
@@ -208,22 +208,22 @@ Example output:
 ```
 {
   "record": {
+    "accessType": "Hidden",
     "attributes": {
       "type": "Folder",
       "url": "/services/data/v58.0/sobjects/Folder/00lHn000002nFolder"
     },
-    "id": "00lHn000002nFolder",
-    "name": "Example Folder",
-    "developerName": "Bot_v5",
-    "accessType": "Hidden",
-    "isReadonly": true,
-    "type": "Report",
-    "namespacePrefix": null,
-    "createdDate": "2022-06-20T01:51:22.000+0000",
     "createdById": "005Hn00000HExample",
-    "lastModifiedDate": "2022-06-20T01:51:22.000+0000",
+    "createdDate": "2022-06-20T01:51:22.000+0000",
+    "developerName": "Bot_v5",
+    "id": "00lHn000002nFolder",
+    "isReadonly": true,
     "lastModifiedById": "005Hn00000HExample",
-    "systemModstamp": "2022-06-20T01:51:22.000+0000"
+    "lastModifiedDate": "2022-06-20T01:51:22.000+0000",
+    "name": "Example Folder",
+    "namespacePrefix": null,
+    "systemModstamp": "2022-06-20T01:51:22.000+0000",
+    "type": "Report"
   }
 }
 ```
@@ -265,15 +265,15 @@ Example output:
 ```
 
 #### Simple Search
-
-This action is used to execute a simple search for a text.
+  
+This action is used to execute a simple search for a text
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |text|string|None|True|Text to search for|None|test|
-
+  
 Example input:
 
 ```
@@ -372,7 +372,7 @@ This action is used to delete a record.
 |----|----|-------|--------|-----------|----|-------|
 |objectName|string|Account|True|The name of the object (e.g. 'Account')|None|Account|
 |recordId|string|None|True|The ID of an existing record|None|000AA000000aa0aAAA|
-
+  
 Example input:
 
 ```
@@ -385,9 +385,9 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |success|boolean|False|Was the operation successful|True|
-
+  
 Example output:
 
 ```
@@ -395,20 +395,19 @@ Example output:
   "success": true
 }
 ```
-
 ### Triggers
-
-_This plugin does not contain any triggers._
-
+  
+*This plugin does not contain any triggers.*
 ### Tasks
 
-#### Monitor Users
 
-This task is used to get information about users, their login history and which users have been updated.
+#### Monitor Users
+  
+Get information about users, their login history and which users have been updated
 
 ##### Input
-
-_This task does not contain any inputs._
+  
+*This task does not contain any inputs.*
 
 ##### Output
 
@@ -494,9 +493,9 @@ Example output:
 }
 ```
 
-### Custom Output Types
-
-#### searchResult
+### Custom Types
+  
+**searchResult**
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -526,11 +525,12 @@ Example output:
 |User ID|string|False|ID of the user logging in|
 
 ## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
+  
+*There is no troubleshooting for this plugin.*
 
 # Version History
 
+* 2.1.4 - Removed unnecessary log line
 * 2.1.3 - Task Monitor Users: improve deduplication logic on user login history
 * 2.1.2 - Task Monitor Users: normalisation for date in state, handle backwards compatibility 
 * 2.1.1 - Task Monitor Users: query improvement on updated users | Add extra logs on timestamp | Add cutoff time limit for 24 hours
@@ -546,8 +546,8 @@ _This plugin does not contain any troubleshooting information._
 * [Salesforce](https://salesforce.com)
 
 ## References
-
-* [Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/intro_what_is_rest_api.htm)
-* [Connecting your app to the API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/quickstart.htm)
+  
+* [Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/intro_what_is_rest_api.htm)  
+* [Connecting your app to the API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/quickstart.htm)  
 * [SOQL](https://developer.salesforce.com/docs/atlas.en-us.216.0.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm)
 
