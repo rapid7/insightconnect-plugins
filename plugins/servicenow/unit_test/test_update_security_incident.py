@@ -51,7 +51,9 @@ class TestUpdateSecurityIncident(TestCase):
             ]
         ]
     )
-    def test_update_security_incident_raise_exception(self, mock_patch, mock_post, test_name, input_params, cause, assistance):
+    def test_update_security_incident_raise_exception(
+        self, mock_patch, mock_post, test_name, input_params, cause, assistance
+    ):
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)

@@ -18,7 +18,7 @@ class Util:
                 Input.INSTANCE: "rapid7",
                 Input.CLIENT_LOGIN: {"username": "user1", "password": "mypassword"},
                 Input.CLIENT_ID: "blah",
-                Input.CLIENT_SECRET: {"secretKey": "blah"}
+                Input.CLIENT_SECRET: {"secretKey": "blah"},
             }
         default_connection.connect(params)
         action.connection = default_connection
@@ -62,10 +62,7 @@ class Util:
             "https://rapid7.service-now.com/api/now/attachment/53e4a8abb1b66fc04ba11001955e7dcb/file",
         ]:
             return MockResponse("get_attachment_file", 200, {})
-        elif (
-            kwargs["url"]
-            == "https://rapid7.service-now.com/oauth_token.do"
-        ):
+        elif kwargs["url"] == "https://rapid7.service-now.com/oauth_token.do":
             return MockResponse("get_oauth_token.json", 200)
         elif (
             kwargs["url"]
