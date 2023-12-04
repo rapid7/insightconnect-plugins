@@ -43,7 +43,6 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             latest_scan_id = self.find_latest_completed_scan(site_id)
 
             # Check if latest is in cache
-            print(f"Latest scan ID: {latest_scan_id} | cache site scans: {starting_point}")
             if latest_scan_id == starting_point:
                 self.logger.info("No new scans, sleeping 1 minute.")
                 time.sleep(60)
@@ -148,16 +147,15 @@ class ScanQueries:
         :param scan_id: Scan ID to query against
         :return: The completed query string
         """
-        query = (
-            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id, dv.riskscore " # nosec B608
+        return (
+            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dvr.source, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id "  # nosec B608
             f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
             f"JOIN dim_asset AS da ON (fasvi.asset_id = da.asset_id) "
             f"JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
+            f"JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) "
             f"JOIN dim_solution AS dss ON (dv.nexpose_id = dss.nexpose_id) "
             f"WHERE fasvi.scan_id = {scan_id} "
         )
-
-        return query
 
 
 class Cache:

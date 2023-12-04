@@ -3275,27 +3275,25 @@ This action is used to fire upon completed scan
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|asset_group|string|None|False|Asset Group|None|None|
-|cve|string|None|False|CVE|None|None|
-|hostname|string|None|False|Hostname|None|None|
+|asset_group|string|None|False|Asset Group|None|2|
+|cve|string|None|False|CVE|None|ssh-cve-2018|
+|hostname|string|None|False|Hostname|None|doc.rapid7.com|
 |interval|integer|5|True|How often the trigger should check for new vulnerability|None|5|
-|ip_address|string|None|False|IP Address|None|None|
-|risk_score|float|None|False|Risk score|None|None|
-|site_id|string|None|False|Site ID|None|None|
-|source|string|None|False|Source|None|None|
+|ip_address|string|None|False|IP Address|None|8.8.8.8|
+|site_id|string|None|False|Site ID|None|219|
+|source|string|None|False|Source|None|url|
   
 Example input:
 
 ```
 {
-  "asset_group": "",
-  "cve": "",
-  "hostname": "",
+  "asset_group": 2,
+  "cve": "ssh-cve-2018",
+  "hostname": "doc.rapid7.com",
   "interval": 5,
-  "ip_address": "",
-  "risk_score": 0.0,
-  "site_id": "",
-  "source": ""
+  "ip_address": "8.8.8.8",
+  "site_id": 219,
+  "source": "url"
 }
 ```
 

@@ -4492,36 +4492,37 @@ triggers:
         description: Site ID
         type: string
         required: false
+        example: 219
       asset_group:
         title: Asset Group
         description: Asset Group
         type: string
         required: false
+        example: 2
       hostname:
         title: Hostname
         description: Hostname
         type: string
         required: false
+        example: doc.rapid7.com
       ip_address:
         title: IP Address
         description: IP Address
         type: string
         required: false
-      risk_score:
-        title: Risk Score
-        description: Risk score
-        type: float
-        required: false
+        example: 8.8.8.8
       cve:
         title: CVE
         description: CVE
         type: string
         required: false
+        example: ssh-cve-2018
       source:
         title: Source
         description: Source
         type: string
         required: false
+        example: url
     output:
       asset_id:
         title: Asset ID

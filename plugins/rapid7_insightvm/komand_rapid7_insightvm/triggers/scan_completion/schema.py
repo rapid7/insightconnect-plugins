@@ -13,7 +13,6 @@ class Input:
     HOSTNAME = "hostname"
     INTERVAL = "interval"
     IP_ADDRESS = "ip_address"
-    RISK_SCORE = "risk_score"
     SITE_ID = "site_id"
     SOURCE = "source"
 
@@ -41,7 +40,7 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "CVE",
       "description": "CVE",
-      "order": 7
+      "order": 6
     },
     "hostname": {
       "type": "string",
@@ -62,12 +61,6 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
       "description": "IP Address",
       "order": 5
     },
-    "risk_score": {
-      "type": "number",
-      "title": "Risk Score",
-      "description": "Risk score",
-      "order": 6
-    },
     "site_id": {
       "type": "string",
       "title": "Site ID",
@@ -78,7 +71,7 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Source",
       "description": "Source",
-      "order": 8
+      "order": 7
     }
   },
   "required": [
