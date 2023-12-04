@@ -5,7 +5,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import return_non_empty
 from typing import Union, Callable
 import re
-
+import logging
 
 def clean(item_to_clean: Union[dict, list]) -> Union[dict, list]:
     if isinstance(item_to_clean, list):
@@ -69,7 +69,7 @@ def rate_limiting(max_tries: int, back_off_function: Callable = backoff_function
                         PluginException.causes[PluginException.Preset.RATE_LIMIT],
                         PluginException.causes[PluginException.Preset.SERVICE_UNAVAILABLE],
                     ]:
-                        print(f"{error.cause} Retrying in {delay:.1f} seconds ({attempts_counter}/{max_tries})")
+                        logging.info(f"{error.cause} Retrying in {delay:.1f} seconds ({attempts_counter}/{max_tries})")
                         retry = True
             return func(self, *args, **kwargs)
 
