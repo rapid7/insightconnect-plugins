@@ -185,7 +185,6 @@ class Util:
         hostname = params.get(Input.HOSTNAME, None)
         source = params.get(Input.SOURCE, None)
         ip_address = params.get(Input.IP_ADDRESS, None)
-        risk_score = params.get(Input.RISK_SCORE, None)
 
         new_dct = {
             "asset_id": int(csv_row["asset_id"]),
