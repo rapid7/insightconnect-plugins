@@ -1,8 +1,9 @@
 import os
+import time
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import return_non_empty
-from typing import Union
+from typing import Union, Callable
 import re
 
 
@@ -22,6 +23,64 @@ def sanitise_url(file_url: str) -> str:
     sanitised_url = sanitised_url.replace("..\\", "")
     sanitised_url = os.path.normpath(sanitised_url)
     return sanitised_url
+
+
+def backoff_function(attempt: int) -> float:
+    """backoff_function. Back-off function used in rate_limiting retry decorator.
+
+    :param attempt: Current attempt value in retry function.
+    :type attempt: int
+
+    :returns: time sleep value for next connection attempt.
+    :rtype: float
+    """
+
+    return 2 ** (attempt * 0.6)
+
+def rate_limiting(
+    max_tries: int, back_off_function: Callable = backoff_function
+) -> Union[dict, None]:
+    """rate_limiting. This decorator allows to work API call with rate limiting by using exponential backoff function.
+    Decorator needs to have max_tries argument entered obligatory.
+
+    :param max_tries: Maximum number of retries calling API function.
+    :type max_tries: int
+
+    :param back_off_function: Backoff function for time delay. Defaults to backoff_function.
+    :type back_off_function: Callable
+
+    :returns: API call function data or None.
+    :rtype: Union[dict, None]
+    """
+
+    def _decorate(func: Callable):
+        def _wrapper(self, *args, **kwargs):
+            retry = True
+            attempts_counter, delay = 0, 0
+            while retry and attempts_counter < max_tries:
+                if attempts_counter:
+                    time.sleep(delay)
+                try:
+                    retry = False
+                    return func(self, *args, **kwargs)
+                except PluginException as error:
+                    attempts_counter += 1
+                    delay = back_off_function(attempts_counter)
+                    if (
+                        error.cause in [
+                            PluginException.causes[PluginException.Preset.RATE_LIMIT],
+                            PluginException.causes[PluginException.Preset.SERVICE_UNAVAILABLE]
+                        ]
+                    ):
+                        print(
+                            f"{error.cause} Retrying in {delay:.1f} seconds ({attempts_counter}/{max_tries})"
+                        )
+                        retry = True
+            return func(self, *args, **kwargs)
+
+        return _wrapper
+
+    return _decorate
 
 
 class Helper:

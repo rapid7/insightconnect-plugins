@@ -6,9 +6,11 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 from komand_sentinelone.actions.create_query import CreateQuery
+from komand_sentinelone.actions.create_query.schema import CreateQueryOutput
 from util import Util
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mocked_requests_get)
@@ -45,6 +47,7 @@ class TestCreateQuery(TestCase):
     def test_create_query(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(expected, actual)
+        validate(actual, CreateQueryOutput.schema)
 
     @parameterized.expand(
         [

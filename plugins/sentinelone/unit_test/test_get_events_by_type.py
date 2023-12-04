@@ -5,10 +5,12 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest.mock import patch
 from komand_sentinelone.actions.get_events_by_type import GetEventsByType
+from komand_sentinelone.actions.get_events_by_type.schema import GetEventsByTypeOutput
 from util import Util
 from unittest import TestCase
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mocked_requests_get)
@@ -40,6 +42,7 @@ class TestGetEventsByType(TestCase):
     def test_get_events_by_type(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertDictEqual(expected, actual)
+        validate(actual, GetEventsByTypeOutput.schema)
 
     @parameterized.expand(
         [

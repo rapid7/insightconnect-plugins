@@ -5,10 +5,11 @@ import timeout_decorator
 sys.path.append(os.path.abspath("../"))
 
 from komand_sentinelone.triggers import GetThreats
-from komand_sentinelone.triggers.get_threats.schema import Input
+from komand_sentinelone.triggers.get_threats.schema import Input, GetThreatsOutput
 from util import Util
 from unittest import TestCase
 from unittest.mock import patch
+from jsonschema import validate
 
 sys.path.append(os.path.abspath("../"))
 
@@ -56,7 +57,7 @@ class TestGetThreats(TestCase):
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
     def test_get_threats(self, mock_request, mock_send):
-        self.action.run(
+        actual = self.action.run(
             {
                 Input.FREQUENCY: 5,
                 Input.RESOLVED: True,
@@ -65,3 +66,4 @@ class TestGetThreats(TestCase):
                 Input.ENGINES: [],
             }
         )
+        validate(actual, GetThreatsOutput.schema)

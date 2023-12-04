@@ -7,8 +7,10 @@ from unittest.mock import patch
 from util import Util
 from unittest import TestCase
 from komand_sentinelone.actions.fetch_file_by_agent_id import FetchFileByAgentId
+from komand_sentinelone.actions.fetch_file_by_agent_id.schema import FetchFileByAgentIdOutput
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mocked_requests_get)
@@ -30,6 +32,7 @@ class TestFetchFileByAgentId(TestCase):
     def test_fetch_file_by_agent_id(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(expected, actual)
+        validate(actual, FetchFileByAgentIdOutput.schema)
 
     @parameterized.expand(
         [

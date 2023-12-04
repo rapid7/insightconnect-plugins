@@ -6,9 +6,11 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 from komand_sentinelone.actions.run_remote_script import RunRemoteScript
+from komand_sentinelone.actions.run_remote_script.schema import RunRemoteScriptOutput
 from util import Util
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mocked_requests_get)
@@ -40,6 +42,7 @@ class TestRunRemoteScript(TestCase):
     def test_run_remote_script(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(expected, actual)
+        validate(actual, RunRemoteScriptOutput.schema)
 
     @parameterized.expand(
         [

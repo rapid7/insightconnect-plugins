@@ -7,9 +7,11 @@ import zipfile
 import requests
 from json.decoder import JSONDecodeError
 from re import match
-from typing import List, Any, Dict, Tuple
+from typing import Any, Dict, List, Tuple
 from urllib.parse import urlsplit, unquote
 from logging import Logger
+from ..util.helper import rate_limiting
+
 from komand_sentinelone.util.helper import Helper, clean, sanitise_url
 from komand_sentinelone.util.constants import (
     DATA_FIELD,
@@ -414,6 +416,11 @@ class SentineloneAPI:
                 preset=PluginException.Preset.UNKNOWN,
                 data=response.text,
             )
+        elif response.status_code == 503:
+            raise PluginException(
+                preset=PluginException.Preset.SERVICE_UNAVAILABLE,
+                data=response.text,
+            )
         elif response.status_code >= 500:
             raise PluginException(
                 preset=PluginException.Preset.SERVER_ERROR,
@@ -459,6 +466,7 @@ class SentineloneAPI:
             "Content-Type": "application/json",
         }
 
+    @rate_limiting(10)
     def _call_api(
         self,
         method: str,
