@@ -148,8 +148,9 @@ class ScanQueries:
         :return: The completed query string
         """
         return (
-            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dvr.source, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id "  # nosec B608
+            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dvr.source, daga.asset_group_id, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id "  # nosec B608
             f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
+            f"JOIN dim_asset_group_asset AS daga ON (fasvi.asset_id = daga.asset_id) "
             f"JOIN dim_asset AS da ON (fasvi.asset_id = da.asset_id) "
             f"JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
             f"JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) "
@@ -199,7 +200,7 @@ class Util:
         # Return as normal if no inputs detected
         if asset_group and asset_group not in csv_row["asset_group_id"]:
             return None
-        if cve and cve not in csv_row["reference"]:
+        if cve and cve not in csv_row["nexpose_id"]:
             return None
         if hostname and hostname not in csv_row["host_name"]:
             return None
