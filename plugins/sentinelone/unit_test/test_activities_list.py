@@ -11,6 +11,7 @@ from util import Util
 from parameterized import parameterized
 from jsonschema import validate
 
+
 @patch("requests.request", side_effect=Util.mocked_requests_get)
 class TestActivitiesList(TestCase):
     @classmethod

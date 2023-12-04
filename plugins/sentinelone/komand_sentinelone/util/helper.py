@@ -37,9 +37,8 @@ def backoff_function(attempt: int) -> float:
 
     return 2 ** (attempt * 0.6)
 
-def rate_limiting(
-    max_tries: int, back_off_function: Callable = backoff_function
-) -> Union[dict, None]:
+
+def rate_limiting(max_tries: int, back_off_function: Callable = backoff_function) -> Union[dict, None]:
     """rate_limiting. This decorator allows to work API call with rate limiting by using exponential backoff function.
     Decorator needs to have max_tries argument entered obligatory.
 
@@ -66,15 +65,11 @@ def rate_limiting(
                 except PluginException as error:
                     attempts_counter += 1
                     delay = back_off_function(attempts_counter)
-                    if (
-                        error.cause in [
-                            PluginException.causes[PluginException.Preset.RATE_LIMIT],
-                            PluginException.causes[PluginException.Preset.SERVICE_UNAVAILABLE]
-                        ]
-                    ):
-                        print(
-                            f"{error.cause} Retrying in {delay:.1f} seconds ({attempts_counter}/{max_tries})"
-                        )
+                    if error.cause in [
+                        PluginException.causes[PluginException.Preset.RATE_LIMIT],
+                        PluginException.causes[PluginException.Preset.SERVICE_UNAVAILABLE],
+                    ]:
+                        print(f"{error.cause} Retrying in {delay:.1f} seconds ({attempts_counter}/{max_tries})")
                         retry = True
             return func(self, *args, **kwargs)
 
