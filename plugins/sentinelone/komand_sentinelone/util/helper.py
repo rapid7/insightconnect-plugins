@@ -7,6 +7,7 @@ from typing import Union, Callable
 import re
 import logging
 
+
 def clean(item_to_clean: Union[dict, list]) -> Union[dict, list]:
     if isinstance(item_to_clean, list):
         return [clean(item.copy()) for item in item_to_clean]
@@ -69,7 +70,7 @@ def rate_limiting(max_tries: int, back_off_function: Callable = backoff_function
                         PluginException.causes[PluginException.Preset.RATE_LIMIT],
                         PluginException.causes[PluginException.Preset.SERVICE_UNAVAILABLE],
                     ]:
-                        logging.info(f"{error.cause} Retrying in {delay:.1f} seconds ({attempts_counter}/{max_tries})")
+                        logging.info("%s Retrying in %.1f seconds (%d/%d)", error.cause, delay, attempts_counter, max_tries)
                         retry = True
             return func(self, *args, **kwargs)
 

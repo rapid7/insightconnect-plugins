@@ -55,8 +55,8 @@ class TestGetEventsByType(TestCase):
             [
                 "invalid_sub_query",
                 Util.read_file_to_dict("inputs/get_events_by_type_invalid_sub_query.json.inp"),
-                PluginException.causes[PluginException.Preset.SERVER_ERROR],
-                PluginException.assistances[PluginException.Preset.SERVER_ERROR],
+                PluginException.causes[PluginException.Preset.SERVICE_UNAVAILABLE],
+                PluginException.assistances[PluginException.Preset.SERVICE_UNAVAILABLE],
             ],
         ]
     )
