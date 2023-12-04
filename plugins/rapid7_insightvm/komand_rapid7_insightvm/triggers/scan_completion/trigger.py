@@ -108,7 +108,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             new_row = Util.filter_results(params, row)
             if new_row:
                 results.append(new_row)
-        print(f"Results before condense:\n{results}")
+
         results = Util.condense_results(results)
         return results
 
@@ -148,15 +148,16 @@ class ScanQueries:
         :param scan_id: Scan ID to query against
         :return: The completed query string
         """
-        return (
-            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dvr.source, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id, dv.riskscore " # nosec B608
+        query = (
+            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id, dv.riskscore " # nosec B608
             f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
             f"JOIN dim_asset AS da ON (fasvi.asset_id = da.asset_id) "
             f"JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
-            f"JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) "
             f"JOIN dim_solution AS dss ON (dv.nexpose_id = dss.nexpose_id) "
             f"WHERE fasvi.scan_id = {scan_id} "
         )
+
+        return query
 
 
 class Cache:
@@ -194,7 +195,7 @@ class Util:
             "hostname": csv_row["host_name"],
             "vulnerability_id": csv_row["vulnerability_id"],
             "nexpose_id": csv_row["nexpose_id"],
-            "solution_id": csv_row["solution_id"],
+            "solution_id": Util.strip_msft_id(csv_row["solution_id"]),
             "solution_summary": csv_row["summary"],
         }
 

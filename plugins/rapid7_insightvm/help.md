@@ -2386,7 +2386,7 @@ This action is used to start a scan on a site
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|hosts|[]string|None|False|The hosts that should be included in the scan|None|["192.0.2.3", "192.0.2.10-192.0.2.20", "ADSRV.local"]|
+|hosts|[]string|None|False|The hosts that should be included in the scan|None|['192.0.2.3', '192.0.2.10-192.0.2.20', 'ADSRV.local']|
 |override_blackout|boolean|False|False|Set True to override any scan blackout window|None|False|
 |site_id|string|None|True|ID of the site to scan|None|1|
   
@@ -2824,7 +2824,7 @@ This action is used to update an existing site scope of excluded IP address and 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|excluded_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|["10.2.144", "10.8.36.144"]|
+|excluded_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|['10.2.144', '10.8.36.144']|
 |id|integer|None|True|The identifier of the site|None|1234|
 |overwrite|boolean|True|True|Whether to overwrite the excluded targets to the current site or append to the previous list of excluded targets|None|True|
   
@@ -2901,7 +2901,7 @@ This action is used to update an existing site scope of included IP address and 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|True|The identifier of the site|None|1234|
-|included_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|["10.2.144", "10.8.36.144"]|
+|included_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|['10.2.144', '10.8.36.144']|
 |overwrite|boolean|True|True|Whether to overwrite the included targets to the current site or append to the previous list of included targets|None|True|
   
 Example input:
@@ -3238,7 +3238,7 @@ This action is used to check for new InsightVM scans by site and scan status
 |frequency|integer|5|True|How often the trigger should check for new scans in minutes|None|5|
 |most_recent_scan|boolean|True|True|Only process the most recent scan for a site since the last time the trigger was run|None|True|
 |site_name_filter|string|.*|True|Regular expression to match sites where new scans should be triggered|None|example name|
-|status_filter|[]string|["Successful"]|False|List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown|None|["Successful"]|
+|status_filter|[]string|["Successful"]|False|List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown|None|['Successful']|
 
 Example input:
 
@@ -3306,7 +3306,6 @@ Example input:
 |asset_id|integer|False|Asset ID|None|
 |hostname|string|False|Hostname|None|
 |ip|string|False|IP|None|
-|software_update_id|string|False|Software update ID|None|
 |vulnerability_info|[]object|False|An array containing vulnerability id, solution id & solution summary|None|
   
 Example output:
@@ -3316,7 +3315,6 @@ Example output:
   "asset_id": 0,
   "hostname": "",
   "ip": "",
-  "software_update_id": "",
   "vulnerability_info": [
     {}
   ]

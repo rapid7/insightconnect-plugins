@@ -4543,8 +4543,3 @@ triggers:
         description: An array containing vulnerability id, solution id & solution summary
         type: '[]object'
         required: false
-      software_update_id:
-        title: Software Update ID
-        description: Software update ID
-        type: string
-        required: false
