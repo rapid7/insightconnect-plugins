@@ -207,8 +207,6 @@ class Util:
             return None
         if ip_address and ip_address not in csv_row["ip_address"]:
             return None
-        if risk_score != 0 and risk_score not in csv_row["riskscore"]:
-            return None
         else:
             return new_dct
 
