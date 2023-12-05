@@ -70,7 +70,9 @@ def rate_limiting(max_tries: int, back_off_function: Callable = backoff_function
                         PluginException.causes[PluginException.Preset.RATE_LIMIT],
                         PluginException.causes[PluginException.Preset.SERVICE_UNAVAILABLE],
                     ]:
-                        logging.info("%s Retrying in %.1f seconds (%d/%d)", error.cause, delay, attempts_counter, max_tries)
+                        logging.info(
+                            "%s Retrying in %.1f seconds (%d/%d)", error.cause, delay, attempts_counter, max_tries
+                        )
                         retry = True
             return func(self, *args, **kwargs)
 
