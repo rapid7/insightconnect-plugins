@@ -531,6 +531,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.4 - Connection: Remove unnecessary logging 
 * 2.1.3 - Task Monitor Users: improve deduplication logic on user login history
 * 2.1.2 - Task Monitor Users: normalisation for date in state, handle backwards compatibility 
 * 2.1.1 - Task Monitor Users: query improvement on updated users | Add extra logs on timestamp | Add cutoff time limit for 24 hours
