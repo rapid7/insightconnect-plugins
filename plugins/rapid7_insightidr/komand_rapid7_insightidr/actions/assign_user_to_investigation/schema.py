@@ -68,8 +68,7 @@ class AssignUserToInvestigationOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "investigation",
-    "success"
+    "investigation"
   ],
   "definitions": {
     "investigation": {
