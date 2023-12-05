@@ -42,7 +42,7 @@ class TestMarkAsBenign(TestCase):
     def test_mark_as_benign(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(expected, actual)
-        validate(actual, expected.schema)
+        validate(actual, MarkAsBenignOutput.schema)
 
     @parameterized.expand(
         [
