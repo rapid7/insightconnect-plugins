@@ -30,7 +30,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         self.logger.info("Getting latest scan...")
 
         site_id = params.get(Input.SITE_ID)
-        latest_scan_id = self.find_latest_completed_scan(site_id)
+        latest_scan_id = self.find_latest_completed_scan(site_id, cached=False)
 
         # Initialize trigger cache at startup
         self.logger.info("Initialising trigger cache...")
@@ -40,7 +40,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             # Open cache
             starting_point = Cache.get_cache_site_scans()
 
-            latest_scan_id = self.find_latest_completed_scan(site_id)
+            latest_scan_id = self.find_latest_completed_scan(site_id, cached=True)
 
             # Check if latest is in cache
             if latest_scan_id == starting_point:
@@ -116,12 +116,13 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         results = Util.condense_results(results)
         return results
 
-    def find_latest_completed_scan(self, site_id: str = None) -> int:
+    def find_latest_completed_scan(self, site_id: str, cached: bool) -> int:
         """
         Use API calls to get the latest scan ID.
         Two different endpoints depending on whether Site ID is provided as an input or not.
 
         :param site_id: Optional site id input
+        :param cached: Boolean to indicate whether to only scan most recent 10
         :return: ID of the latest 'finished' scan
         """
 
@@ -131,13 +132,20 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         else:
             endpoint = endpoints.Scan.scans(self.connection.console_url)
 
-        response = resource_helper.paged_resource_request(endpoint=endpoint, method="get", params={"sort": "id,desc"})
+        if not cached:
+            response = resource_helper.paged_resource_request(endpoint=endpoint, method="get", params={"sort": "id,desc"})
 
-        for scan in response:
-            if scan.get("status") == "finished":
-                self.logger.info(f"Latest finished scan ID: {scan.get('id')}")
-                return scan.get("id")
+            for scan in response:
+                if scan.get("status") == "finished":
+                    self.logger.info(f"Latest finished scan ID: {scan.get('id')}")
+                    return scan.get("id")
+        else:
+            response = resource_helper.resource_request(endpoint=endpoint, method="get", params={"sort": "id,desc"})
 
+            for scan in response.get('resources'):
+                if scan.get("status") == "finished":
+                    self.logger.info(f"Latest finished scan ID: {scan.get('id')}")
+                    return scan.get("id")
 
 class ScanQueries:
     @staticmethod
