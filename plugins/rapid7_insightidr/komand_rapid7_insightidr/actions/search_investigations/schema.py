@@ -111,7 +111,6 @@ class SearchInvestigationsOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "investigations",
     "metadata"
   ],
   "definitions": {
@@ -191,18 +190,7 @@ class SearchInvestigationsOutput(insightconnect_plugin_runtime.Output):
           "description": "Investigation title",
           "order": 12
         }
-      },
-      "required": [
-        "created_time",
-        "disposition",
-        "last_accessed",
-        "organization_id",
-        "priority",
-        "rrn",
-        "source",
-        "status",
-        "title"
-      ]
+      }
     },
     "assignee": {
       "type": "object",
