@@ -531,6 +531,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.5 - Revert SDK and logger changes added in 2.1.4
 * 2.1.4 - Connection: Remove unnecessary logging 
 * 2.1.3 - Task Monitor Users: improve deduplication logic on user login history
 * 2.1.2 - Task Monitor Users: normalisation for date in state, handle backwards compatibility 

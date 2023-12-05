@@ -21,6 +21,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         security_token = params.get(Input.SECURITYTOKEN).get("secretKey")
 
         self.api = SalesforceAPI(client_id, client_secret, username, password, security_token, self.logger)
+        self.logger.info("Connect: Connection successful")
 
     def test(self):
         try:
