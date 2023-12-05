@@ -149,7 +149,7 @@ Example output:
 ```
 {
   "count": 10,
-  "results": {
+  "results_events": {
     "labels": [],
     "links": [
       {
@@ -200,7 +200,7 @@ Example output:
       },
       "timestamp": "2020-10-02T00:29:14.649Z"
     },
-    "sequence_number": 123456789123456780,
+    "sequence_number": 123456789123456789,
     "sequence_number_str": "123456789123456789",
     "timestamp": 1601598638768
   },
@@ -222,7 +222,7 @@ Example output:
       "events_all": 1640,
       "events_checked": 1640,
       "events_matched": 1639,
-      "index_factor": 0
+      "index_factor": 0.0
     },
     "statistics": {
       "all_exact_result": true,
@@ -232,12 +232,12 @@ Example output:
       "groups": [
         {
           "linux": {
-            "count": 1163
+            "count": 1163.0
           }
         },
         {
           "windowsx64": {
-            "count": 476
+            "count": 476.0
           }
         }
       ],
@@ -247,38 +247,38 @@ Example output:
             "groups_timeseries": [],
             "series": [
               {
-                "count": 45
+                "count": 45.0
               },
               {
-                "count": 21
+                "count": 21.0
               },
               {
-                "count": 16
+                "count": 16.0
               },
               {
-                "count": 270
+                "count": 270.0
               },
               {
-                "count": 27
+                "count": 27.0
               },
               {
-                "count": 43
+                "count": 43.0
               },
               {
-                "count": 27
+                "count": 27.0
               },
               {
-                "count": 39
+                "count": 39.0
               },
               {
-                "count": 29
+                "count": 29.0
               },
               {
-                "count": 646
+                "count": 646.0
               }
             ],
             "totals": {
-              "count": 1163
+              "count": 1163.0
             }
           }
         },
@@ -287,38 +287,38 @@ Example output:
             "groups_timeseries": [],
             "series": [
               {
-                "count": 54
+                "count": 54.0
               },
               {
-                "count": 40
+                "count": 40.0
               },
               {
-                "count": 60
+                "count": 60.0
               },
               {
-                "count": 37
+                "count": 37.0
               },
               {
-                "count": 42
+                "count": 42.0
               },
               {
-                "count": 62
+                "count": 62.0
               },
               {
-                "count": 41
+                "count": 41.0
               },
               {
-                "count": 47
+                "count": 47.0
               },
               {
-                "count": 49
+                "count": 49.0
               },
               {
-                "count": 44
+                "count": 44.0
               }
             ],
             "totals": {
-              "count": 476
+              "count": 476.0
             }
           }
         }
@@ -428,137 +428,137 @@ Example output:
       },
       "timestamp": "2020-10-02T00:29:14.649Z"
     },
-    "sequence_number": 123456789123456780,
+    "sequence_number": 123456789123456789,
     "sequence_number_str": "123456789123456789",
-    "timestamp": 1601598638768,
-    "results_statistical": {
-      "leql": {
-        "during": {
-          "from": 1699579214000,
-          "to": 1699622414000
-        },
-        "statement": "groupby(r7_context.asset.name)"
-      },
-      "logs": [
-        "123456-abcd-1234-abcd-123456abc"
-      ],
-      "search_stats": {
-        "bytes_all": 9961260,
-        "bytes_checked": 9961260,
-        "duration_ms": 19,
-        "events_all": 1640,
-        "events_checked": 1640,
-        "events_matched": 1639,
-        "index_factor": 0
-      },
-      "statistics": {
-        "all_exact_result": true,
-        "cardinality": 0,
+    "timestamp": 1601598638768
+  },
+  "results_statistical": {
+    "leql": {
+      "during": {
         "from": 1699579214000,
-        "granularity": 4320000,
-        "groups": [
-          {
-            "linux": {
-              "count": 1163
-            }
-          },
-          {
-            "windowsx64": {
-              "count": 476
-            }
+        "to": 1699622414000
+      },
+      "statement": "groupby(r7_context.asset.name)"
+    },
+    "logs": [
+      "123456-abcd-1234-abcd-123456abc"
+    ],
+    "search_stats": {
+      "bytes_all": 9961260,
+      "bytes_checked": 9961260,
+      "duration_ms": 19,
+      "events_all": 1640,
+      "events_checked": 1640,
+      "events_matched": 1639,
+      "index_factor": 0.0
+    },
+    "statistics": {
+      "all_exact_result": true,
+      "cardinality": 0,
+      "from": 1699579214000,
+      "granularity": 4320000,
+      "groups": [
+        {
+          "linux": {
+            "count": 1163.0
           }
-        ],
-        "groups_timeseries": [
-          {
-            "linux": {
-              "groups_timeseries": [],
-              "series": [
-                {
-                  "count": 45
-                },
-                {
-                  "count": 21
-                },
-                {
-                  "count": 16
-                },
-                {
-                  "count": 270
-                },
-                {
-                  "count": 27
-                },
-                {
-                  "count": 43
-                },
-                {
-                  "count": 27
-                },
-                {
-                  "count": 39
-                },
-                {
-                  "count": 29
-                },
-                {
-                  "count": 646
-                }
-              ],
-              "totals": {
-                "count": 1163
-              }
-            }
-          },
-          {
-            "windowsx64": {
-              "groups_timeseries": [],
-              "series": [
-                {
-                  "count": 54
-                },
-                {
-                  "count": 40
-                },
-                {
-                  "count": 60
-                },
-                {
-                  "count": 37
-                },
-                {
-                  "count": 42
-                },
-                {
-                  "count": 62
-                },
-                {
-                  "count": 41
-                },
-                {
-                  "count": 47
-                },
-                {
-                  "count": 49
-                },
-                {
-                  "count": 44
-                }
-              ],
-              "totals": {
-                "count": 476
-              }
-            }
-          }
-        ],
-        "others": {
-          "series": []
         },
-        "stats": {},
-        "status": 200,
-        "timeseries": {},
-        "to": 1699622414000,
-        "type": "count"
-      }
+        {
+          "windowsx64": {
+            "count": 476.0
+          }
+        }
+      ],
+      "groups_timeseries": [
+        {
+          "linux": {
+            "groups_timeseries": [],
+            "series": [
+              {
+                "count": 45.0
+              },
+              {
+                "count": 21.0
+              },
+              {
+                "count": 16.0
+              },
+              {
+                "count": 270.0
+              },
+              {
+                "count": 27.0
+              },
+              {
+                "count": 43.0
+              },
+              {
+                "count": 27.0
+              },
+              {
+                "count": 39.0
+              },
+              {
+                "count": 29.0
+              },
+              {
+                "count": 646.0
+              }
+            ],
+            "totals": {
+              "count": 1163.0
+            }
+          }
+        },
+        {
+          "windowsx64": {
+            "groups_timeseries": [],
+            "series": [
+              {
+                "count": 54.0
+              },
+              {
+                "count": 40.0
+              },
+              {
+                "count": 60.0
+              },
+              {
+                "count": 37.0
+              },
+              {
+                "count": 42.0
+              },
+              {
+                "count": 62.0
+              },
+              {
+                "count": 41.0
+              },
+              {
+                "count": 47.0
+              },
+              {
+                "count": 49.0
+              },
+              {
+                "count": 44.0
+              }
+            ],
+            "totals": {
+              "count": 476.0
+            }
+          }
+        }
+      ],
+      "others": {
+        "series": []
+      },
+      "stats": {},
+      "status": 200,
+      "timeseries": {},
+      "to": 1699622414000,
+      "type": "count"
     }
   }
 }
@@ -2052,17 +2052,17 @@ Example output:
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Assignee|assignee|None|False|The user assigned to this investigation, if any|None|
-|Created Time|string|None|True|The time the investigation was created as an ISO formatted timestamp|None|
-|Disposition|string|None|True|The disposition of this investigation, where possible values are BENIGN, MALICIOUS, NOT_APPLICABLE, and UNSPECIFIED|None|
+|Created Time|string|None|False|The time the investigation was created as an ISO formatted timestamp|None|
+|Disposition|string|None|False|The disposition of this investigation, where possible values are BENIGN, MALICIOUS, NOT_APPLICABLE, and UNSPECIFIED|None|
 |First Alert Time|string|None|False|The create time of the first alert belonging to this investigation|None|
-|Last Accessed|string|None|True|The time investigation was last viewed or modified|None|
+|Last Accessed|string|None|False|The time investigation was last viewed or modified|None|
 |Latest Alert Time|string|None|False|The create time of the most recent alert belonging to this investigation|None|
-|Organization ID|string|None|True|The id of the organization that owns this investigation|None|
-|Priority|string|None|True|The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNKNOWN|None|
-|RRN|string|None|True|The RRN of the investigation|None|
-|Source|string|None|True|The source of this investigation|None|
-|Status|string|None|True|The status of the investigation|None|
-|Title|string|None|True|Investigation title|None|
+|Organization ID|string|None|False|The id of the organization that owns this investigation|None|
+|Priority|string|None|False|The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNKNOWN|None|
+|RRN|string|None|False|The RRN of the investigation|None|
+|Source|string|None|False|The source of this investigation|None|
+|Status|string|None|False|The status of the investigation|None|
+|Title|string|None|False|Investigation title|None|
   
 **threat**
 
@@ -2109,24 +2109,6 @@ Example output:
 |Product Name|string|None|False|Product name|None|
 |Product Status|string|None|False|Product status|None|
 |RTP State|string|None|False|RTP state|None|
-
-**statistics**
-
-|Name|Type|Default|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- |
-|All Exact Results|boolean|None|True|Boolean indicating whether groups are calculated approximately (approximated if a groupby query involves over 10,000 groups)|None|
-|Cardinality|integer|None|True|Always 0|None|
-|From|integer|None|True|The start of the time range for the query, as a UNIX timestamp in milliseconds|None|
-|Granularity|integer|None|True|The time window in milliseconds for each time slice in the time series|None|
-|Groups|[]object|None|True|Holds the overall result for each group in a 'groupby' query|None|
-|Groups Time Series|[]object|None|True|For 'groupby' queries, holds the timeseries object for each group|None|
-|Key|string|None|False|The key which the function of the 'calculate' clause is applied to|None|
-|Others|object|None|True|Not yet implemented|None|
-|Stats|object|None|True|Holds the overall result when query does not contain a 'groupby' clause|None|
-|Status|integer|None|True|Holds a status code for the query, potentially different from the status code of the response|None|
-|Time Series|object|None|True|Holds the query results for each timeslice (each partition of the time_range), for non-'groupby' queries|None|
-|To|integer|None|True|The end of the time range for the query, as a UNIX timestamp in milliseconds|None|
-|Type|string|None|True|The type of function performed, for example, "count", "max", "average", "standarddeviation"|None|
   
 **message**
 
@@ -2150,6 +2132,24 @@ Example output:
 |Message|message|None|None|Message|None|
 |Sequence Number|integer|None|None|Sequence number|None|
 |Timestamp|integer|None|None|Timestamp|None|
+  
+**statistics**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|All Exact Results|boolean|None|False|Boolean indicating whether groups are calculated approximately (approximated if a groupby query involves over 10,000 groups)|None|
+|Cardinality|integer|None|False|Always 0|None|
+|From|integer|None|False|The start of the time range for the query, as a UNIX timestamp in milliseconds|None|
+|Granularity|integer|None|False|The time window in milliseconds for each time slice in the time series|None|
+|Groups|[]object|None|False|Holds the overall result for each group in a 'groupby' query|None|
+|Groups Time Series|[]object|None|False|For 'groupby' queries, holds the timeseries object for each group|None|
+|Key|string|None|False|The key which the function of the 'calculate' clause is applied to|None|
+|Others|object|None|False|Not yet implemented|None|
+|Stats|object|None|False|Holds the overall result when query does not contain a 'groupby' clause|None|
+|Status|integer|None|False|Holds a status code for the query, potentially different from the status code of the response|None|
+|Time Series|object|None|False|Holds the query results for each timeslice (each partition of the time_range), for non-'groupby' queries|None|
+|To|integer|None|False|The end of the time range for the query, as a UNIX timestamp in milliseconds|None|
+|Type|string|None|False|The type of function performed, for example, "count", "max", "average", "standarddeviation"|None|
   
 **links**
 
@@ -2253,6 +2253,7 @@ Example output:
 
 # Version History
 
+* 8.0.0 - Update schema for `Investigation` and `Statistics` | Update dependency for aiohttp
 * 7.0.0 - Action: `Advanced Query On Log Set` - Fixed error where statistical queries would always return 0.0 | Action: `Advanced Query On Log Set` - Increase the maximum results returned from 50 to 500 |  Action: `Advanced Query On Log` - Add new output type for statistical queries | Updated schemas to ensure all are correct and added new schema validation to unit tests
 * 6.0.1 - Action: `Advanced Query On Log` - Increase the maximum results returned from 50 to 500
 * 6.0.0 - Action: `Advanced Query On Log Set` - Add new output type for statistical queries.
