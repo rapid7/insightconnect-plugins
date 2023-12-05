@@ -77,9 +77,10 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         Take a scan id and run a sql query to retrieve the
         information needed for the trigger output
 
-        :param params:
-        :param scan_id:
-        :return:
+        :param params: All of the user input params
+        :param scan_id: The ID of the scan
+
+        :return: A list of condensed and filter results for output in the trigger.
         """
 
         # Generate a unique name for the report
@@ -190,9 +191,9 @@ class Util:
         :param params: Input params
         :param csv_row: Dict row of the csv results
 
-        :return: New object containing only the necessary fields for the required
-        output.
+        :return: New object containing only the necessary fields for the required output.
         """
+
         # Input retrieval
         asset_group = params.get(Input.ASSET_GROUP, None)
         cve = params.get(Input.CVE, None)
@@ -210,7 +211,8 @@ class Util:
             "solution_summary": csv_row["summary"],
         }
 
-        # Return as normal if no inputs detected
+        # If an input and it is not found, return None in place of the row to filter
+        # out the result
         if asset_group and asset_group not in csv_row["asset_group_id"]:
             return None
         if cve and cve not in csv_row["nexpose_id"]:
@@ -221,6 +223,7 @@ class Util:
             return None
         if ip_address and ip_address not in csv_row["ip_address"]:
             return None
+        # Otherwise, return the newly filtered result.
         else:
             return new_dct
 
