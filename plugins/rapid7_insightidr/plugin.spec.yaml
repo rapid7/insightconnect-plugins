@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 7.0.0
+version: 8.0.0
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2022-07-20."]
 vendor: rapid7
@@ -109,12 +109,12 @@ types:
       title: Created Time
       description: The time the investigation was created as an ISO formatted timestamp
       type: string
-      required: true
+      required: false
     disposition:
       title: Disposition
       description: The disposition of this investigation, where possible values are BENIGN, MALICIOUS, NOT_APPLICABLE, and UNSPECIFIED
       type: string
-      required: true
+      required: false
     first_alert_time:
       title: First Alert Time
       description: The create time of the first alert belonging to this investigation
@@ -124,7 +124,7 @@ types:
       title: Last Accessed
       description: The time investigation was last viewed or modified
       type: string
-      required: true
+      required: false
     latest_alert_time:
       title: Latest Alert Time
       description: The create time of the most recent alert belonging to this investigation
@@ -134,32 +134,32 @@ types:
       title: Organization ID
       description: The id of the organization that owns this investigation
       type: string
-      required: true
+      required: false
     priority:
       title: Priority
       description: The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNKNOWN
       type: string
-      required: true
+      required: false
     rrn:
       title: RRN
       description: The RRN of the investigation
       type: string
-      required: true
+      required: false
     source:
       title: Source
       description: The source of this investigation
       type: string
-      required: true
+      required: false
     status:
       title: Status
       description: The status of the investigation
       type: string
-      required: true
+      required: false
     title:
       title: Title
       description: Investigation title
       type: string
-      required: true
+      required: false
   threat:
     indicator_count:
       title: Indicator Count
@@ -372,42 +372,42 @@ types:
       title: Stats
       description: Holds the overall result when query does not contain a 'groupby' clause
       type: object
-      required: true
+      required: false
     groups:
       title: Groups
       description: Holds the overall result for each group in a 'groupby' query
       type: '[]object'
-      required: true
+      required: false
     granularity:
       title: Granularity
       description: The time window in milliseconds for each time slice in the time series
       type: integer
-      required: true
+      required: false
     timeseries:
       title: Time Series
       description: Holds the query results for each timeslice (each partition of the time_range), for non-'groupby' queries
       type: object
-      required: true
+      required: false
     groups_timeseries:
       title: Groups Time Series
       description: For 'groupby' queries, holds the timeseries object for each group
       type: '[]object'
-      required: true
+      required: false
     from:
       title: From
       description: The start of the time range for the query, as a UNIX timestamp in milliseconds
       type: integer
-      required: true
+      required: false
     to:
       title: To
       description: The end of the time range for the query, as a UNIX timestamp in milliseconds
       type: integer
-      required: true
+      required: false
     type:
       title: Type
       description: The type of function performed, for example, "count", "max", "average", "standarddeviation"
       type: string
-      required: true
+      required: false
     key:
       title: Key
       description: The key which the function of the 'calculate' clause is applied to
@@ -417,22 +417,22 @@ types:
       title: Cardinality
       description: Always 0
       type: integer
-      required: true
+      required: false
     others:
       title: Others
       description: Not yet implemented
       type: object
-      required: true
+      required: false
     status:
       title: Status
       description: Holds a status code for the query, potentially different from the status code of the response
       type: integer
-      required: true
+      required: false
     all_exact_results:
       title: All Exact Results
       description: Boolean indicating whether groups are calculated approximately (approximated if a groupby query involves over 10,000 groups)
       type: boolean
-      required: true
+      required: false
   links:
     href:
       title: HREF
