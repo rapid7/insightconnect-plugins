@@ -201,15 +201,18 @@ class Util:
         source = params.get(Input.SOURCE, None)
         ip_address = params.get(Input.IP_ADDRESS, None)
 
-        new_dct = {
-            "asset_id": int(csv_row["asset_id"]),
-            "ip_address": csv_row["ip_address"],
-            "hostname": csv_row["host_name"],
-            "vulnerability_id": csv_row["vulnerability_id"],
-            "nexpose_id": csv_row["nexpose_id"],
-            "solution_id": Util.strip_msft_id(csv_row.get("solution_id", "")),
-            "solution_summary": csv_row["summary"],
-        }
+        try:
+            new_dct = {
+                "asset_id": int(csv_row["asset_id"]),
+                "ip_address": csv_row["ip_address"],
+                "hostname": csv_row["host_name"],
+                "vulnerability_id": csv_row["vulnerability_id"],
+                "nexpose_id": csv_row["nexpose_id"],
+                "solution_id": Util.strip_msft_id(csv_row.get("solution_id", "")),
+                "solution_summary": csv_row["summary"],
+            }
+        except KeyError as error:
+            raise PluginException(cause="Unable to filter results.", assistance=f"Error: {error}")
 
         # If an input and it is not found, return None in place of the row to filter
         # out the result
@@ -240,10 +243,10 @@ class Util:
         dct = {}
         new_results = []
 
-        for el in results:
-            key = tuple(el[k] for k in merge_keys)
-            partial_el = {k: v for k, v in el.items() if k not in merge_keys}
-            dct.setdefault(key, []).append(partial_el)
+        for element in results:
+            key = tuple(element[key_] for key_ in merge_keys)
+            partial_element = {key_: value_ for key, value_ in element.items() if key_ not in merge_keys}
+            dct.setdefault(key, []).append(partial_element)
 
         for key, value in dct.items():
             entry = dict(zip(merge_keys, key))
