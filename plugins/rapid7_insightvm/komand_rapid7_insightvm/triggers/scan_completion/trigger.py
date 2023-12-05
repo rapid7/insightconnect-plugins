@@ -27,13 +27,13 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
     def run(self, params={}):
         # Write scan_id to cache
-        self.logger.info("Getting latest scan..")
+        self.logger.info("Getting latest scan...")
 
         site_id = params.get(Input.SITE_ID)
         latest_scan_id = self.find_latest_completed_scan(site_id)
 
         # Initialize trigger cache at startup
-        self.logger.info("Initialising trigger cache..")
+        self.logger.info("Initialising trigger cache...")
         util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(latest_scan_id))
 
         while True:
@@ -82,8 +82,13 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         :return:
         """
 
+        # Generate a unique name for the report
         identifier = uuid.uuid4()
 
+        # Verify the scan_id input
+        Util.verify_scan_id_input(scan_id)
+
+        # Generate the payload for the reporting API call.
         report_payload = {
             "name": f"Rapid7-InsightConnect-ScanCompletion-{identifier}",
             "format": "sql-query",
@@ -91,7 +96,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             "version": "2.3.0",
         }
 
-        self.logger.info("Getting report")
+        self.logger.info("Getting report...")
         report_contents = util.adhoc_sql_report(self.connection, self.logger, report_payload)
         try:
             csv_report = csv.DictReader(io.StringIO(report_contents["raw"]))
@@ -147,6 +152,7 @@ class ScanQueries:
         :param scan_id: Scan ID to query against
         :return: The completed query string
         """
+
         return (
             f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dvr.source, daga.asset_group_id, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id "  # nosec B608
             f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
@@ -193,7 +199,7 @@ class Util:
             "hostname": csv_row["host_name"],
             "vulnerability_id": csv_row["vulnerability_id"],
             "nexpose_id": csv_row["nexpose_id"],
-            "solution_id": Util.strip_msft_id(csv_row["solution_id"]),
+            "solution_id": Util.strip_msft_id(csv_row.get("solution_id", "")),
             "solution_summary": csv_row["summary"],
         }
 
@@ -251,3 +257,15 @@ class Util:
             return "-".join(list_x[2:])
         else:
             return solution_id
+
+    @staticmethod
+    def verify_scan_id_input(scan_id: int):
+        """
+        Simple helper method to verify the scan_id input for the query is a valid integer.
+
+        :param scan_id: The scan ID.
+        """
+
+        if not isinstance(scan_id, int):
+            raise PluginException(cause="Scan ID is not of type integer.", assistance="Possible SQL Injection detected")
+
