@@ -131,16 +131,12 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         else:
             endpoint = endpoints.Scan.scans(self.connection.console_url)
 
-        # TODO - Paged resource request, paginate through until you find finished scan
-        #  ( we need to paginate because there could be 10 non-finished scans )
-        response = resource_helper.resource_request(endpoint=endpoint, method="get", params={"sort": "id,desc"})
+        response = resource_helper.paged_resource_request(endpoint=endpoint, method="get", params={"sort": "id,desc"})
 
-        for scan in response.get("resources"):
+        for scan in response:
             if scan.get("status") == "finished":
                 self.logger.info(f"Latest finished scan ID: {scan.get('id')}")
                 return scan.get("id")
-
-        # Handle processing
 
 
 class ScanQueries:
@@ -268,4 +264,3 @@ class Util:
 
         if not isinstance(scan_id, int):
             raise PluginException(cause="Scan ID is not of type integer.", assistance="Possible SQL Injection detected")
-
