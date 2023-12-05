@@ -245,7 +245,7 @@ class Util:
 
         for element in results:
             key = tuple(element[key_] for key_ in merge_keys)
-            partial_element = {key_: value_ for key, value_ in element.items() if key_ not in merge_keys}
+            partial_element = {key_: value_ for key_, value_ in element.items() if key_ not in merge_keys}
             dct.setdefault(key, []).append(partial_element)
 
         for key, value in dct.items():
