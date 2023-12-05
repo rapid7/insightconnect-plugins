@@ -1,7 +1,7 @@
 {
-	"spec": "9c7adee28e0b9c12161fda2542f9d8d5",
-	"manifest": "9abe6edabaacd69f194daf13dde4f071",
-	"setup": "33356615b4b2f4d9999cc064148b9187",
+	"spec": "72d5d2af3bb90d2b2a30282afbaa86a2",
+	"manifest": "3bb894dbddc11993a1b52c1a2f85214a",
+	"setup": "6ade07f6eab808a7314ad809830c1926",
 	"schemas": [
 		{
 			"identifier": "add_indicators_to_a_threat/schema.py",
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "assign_user_to_investigation/schema.py",
-			"hash": "897fdbf236831c2c6f89bb17d52bcbdd"
+			"hash": "691c00b0392a1f72bf1120f92fdf5927"
 		},
 		{
 			"identifier": "close_investigations_in_bulk/schema.py",
@@ -29,7 +29,7 @@
 		},
 		{
 			"identifier": "create_investigation/schema.py",
-			"hash": "be4b78148ee3b220883103c2a230443e"
+			"hash": "01f650a3c249cf28d4acb36ed93263d4"
 		},
 		{
 			"identifier": "create_threat/schema.py",
@@ -73,7 +73,7 @@
 		},
 		{
 			"identifier": "get_investigation/schema.py",
-			"hash": "fb62f78ab95a48c6dab8c38d54097ff2"
+			"hash": "d8024be3b949c3d6d84ef731e7385542"
 		},
 		{
 			"identifier": "get_user_information/schema.py",
@@ -93,7 +93,7 @@
 		},
 		{
 			"identifier": "list_investigations/schema.py",
-			"hash": "efccfd5964ecf0e34d332a0be02b978f"
+			"hash": "059566035076f6019f11c6539070f229"
 		},
 		{
 			"identifier": "query/schema.py",
@@ -105,23 +105,23 @@
 		},
 		{
 			"identifier": "search_investigations/schema.py",
-			"hash": "863a7464093e3172bb4c8fdfdc6ff565"
+			"hash": "2386256e0897989799c53fb872a7797a"
 		},
 		{
 			"identifier": "set_disposition_of_investigation/schema.py",
-			"hash": "9a69bbb81a33f783e6031f2901ea1ae4"
+			"hash": "66c02ae7e26d6576c50963dc8124a6fc"
 		},
 		{
 			"identifier": "set_priority_of_investigation/schema.py",
-			"hash": "6a81d506bdef375ea5a0b5fd16ba8349"
+			"hash": "fcf60ec972db75a3174753003677b46a"
 		},
 		{
 			"identifier": "set_status_of_investigation_action/schema.py",
-			"hash": "e9ac594003f3a4ef378aebdd14301439"
+			"hash": "d8263f4e2a9e37b82ada96fbcd73464b"
 		},
 		{
 			"identifier": "update_investigation/schema.py",
-			"hash": "59a5851e5ebf096ba9f22ed5eff1cc0b"
+			"hash": "a1059d21c9c9fd0766195e87ae4d54f4"
 		},
 		{
 			"identifier": "upload_attachment/schema.py",
