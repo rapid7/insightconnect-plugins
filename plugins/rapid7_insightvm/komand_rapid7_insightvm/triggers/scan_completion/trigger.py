@@ -133,7 +133,9 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             endpoint = endpoints.Scan.scans(self.connection.console_url)
 
         if not cached:
-            response = resource_helper.paged_resource_request(endpoint=endpoint, method="get", params={"sort": "id,desc"})
+            response = resource_helper.paged_resource_request(
+                endpoint=endpoint, method="get", params={"sort": "id,desc"}
+            )
 
             for scan in response:
                 if scan.get("status") == "finished":
@@ -142,10 +144,11 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         else:
             response = resource_helper.resource_request(endpoint=endpoint, method="get", params={"sort": "id,desc"})
 
-            for scan in response.get('resources'):
+            for scan in response.get("resources"):
                 if scan.get("status") == "finished":
                     self.logger.info(f"Latest finished scan ID: {scan.get('id')}")
                     return scan.get("id")
+
 
 class ScanQueries:
     @staticmethod
