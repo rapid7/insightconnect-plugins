@@ -2,14 +2,6 @@
 
 platform=$(uname)
 
-# Check for pip
-
-# Check for pip3
-
-# Check for Python
-
-# Once we have pip, I think the platform wont matter.
-
 if [[ "${platform}" == "Darwin" ]]; then
 	echo "[*] Executing update/installation for MacOS!"
 	echo "[*] Installing/updating jq via homebrew"
