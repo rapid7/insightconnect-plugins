@@ -18,10 +18,10 @@ elif [[ "${platform}" == "Linux" ]] && [[ -f /etc/redhat-release ]]; then
 	sudo yum install -q -y jq
 
 else
-	echo "[!] Unsupported OS found! Unable to install insight-plugin and jq!"
+	echo "[!] Unsupported OS found! Unable to install jq!"
 fi
 
-echo "[*] Installing/updating insight-plugin via PyPi..."
+echo "[*] Installing/updating insight-plugin..."
 sudo -H python3 -m pip install --user --upgrade insight-plugin > /dev/null; true
 
 echo "[*] Installing InsightConnect validator tooling..."
