@@ -3,16 +3,16 @@ from atlassian import Confluence
 
 
 class API:
-  def __init__(self, url: str, username: str, password: str, cloud: bool, client_id: str, token: str):
+
+  def __init__(self, url: str = "", username: str = "", password: str = "", cloud: bool = False, client_id: str = "", token: str = ""):
     self.url = url
     self.username = username
     self.password = password
     self.client_id = client_id
     self.token = token
     self.cloud = cloud
-    self.confluence = Confluence()
-
-
+    self.confluence = None
+    self.login()
 
   def login(self):
     if self.client_id and self.token:
@@ -24,17 +24,28 @@ class API:
     elif self.username and self.password:
       self.confluence = Confluence(url=self.url, username=self.username, password=self.password, cloud=self.cloud)
 
-  def test(self):
+  def health_check(self):
     self.confluence.health_check()
 
-  def get_page(self, page_id: str):
-    return self.confluence.get_page_by_id(page_id=page_id)
+  def get_page_id(self, title: str, space: str):
+    return self.confluence.get_page_id(title=title, space=space)
+
+  def get_page_by_id(self, page_id: str):
+    return self.confluence.get_page_by_id(page_id=page_id, expand="body.view,space,history,version,ancestors", status=None, version=None)
 
   def get_page_content(self, page_id: str):
-    return self.confluence.get_page_by_id(page_id=page_id)
+    data = self.confluence.get_page_by_id(page_id=page_id, expand="body.view", status=None, version=None)
+    return data.get("body").get("view").get("value")
 
-  def store_page_content(self, content: str, page: str, space: str):
-    return self.confluence.create_page(title=page, body=content, space=space)
+  def store_page_content(self, content: str, title: str, space: str):
+    page_exists = self.page_exists(space=space, title=title)
+    if page_exists:
+      return self.confluence.update_page(title=title, body=content, space=space)
+    else:
+      return self.confluence.create_page(title=title, body=content, space=space)
+
+  def page_exists(self, space: str, title: str):
+    return self.confluence.page_exists(space=space, title=title)
 
   def handle_responses(self):
     return False

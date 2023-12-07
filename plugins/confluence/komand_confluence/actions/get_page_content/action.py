@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetPageContentInput, GetPageContentOutput
 
 # Custom imports below
 from ...util import util
 
 
-class GetPageContent(komand.Action):
+class GetPageContent(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_page_content",
@@ -17,11 +17,10 @@ class GetPageContent(komand.Action):
     def run(self, params={}):
         page = params["page"]
         space = params["space"]
-        p = self.connection.client.getPage(page, space)
-        if p:
-            p = util.normalize_page(p)
-            return {"content": p["content"], "found": True}
-
+        page_id = self.connection.client.get_page_id(title=page, space=space)
+        data = self.connection.client.get_page_content(page_id=page_id)
+        if data:
+            return {"content": data, "found": True}
         return {"found": False, "content": ""}
 
     def test(self):

@@ -1,115 +1,311 @@
 # Description
 
-[Confluence](https://atlassian.com/software/confluence) is an open and shared workspace for managing documents and
-files within an organization. Using the Confluence plugin for Rapid7 InsightConnect, users can view and update pages
-dynamically within automation workflows.
+Confluence is an open and shared workspace for managing documents and files within an organization. Using the Confluence plugin for Rapid7 InsightConnect, users can view and update pages dynamically within automation workflows
 
 # Key Features
-
-* Update pages
-* View pages
+  
+*This plugin does not contain any key features.*
 
 # Requirements
+  
+*This plugin does not contain any requirements.*
 
-* Confluence URL
-* Confluence username and password
+# Supported Product Versions
+  
+*This plugin does not contain any supported product versions.*
 
 # Documentation
 
 ## Setup
+  
+The connection configuration accepts the following parameters:  
 
-The connection configuration accepts the following parameters:
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|credentials|credential_username_password|None|True|Username and password|None|None|
+|url|string|None|True|Connection URL|None|None|
+  
+Example input:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|Connection URL|None|
-|username|string|None|False|Username|None|
-|password|string|None|False|Password|None|
+```
+{
+  "credentials": {
+    "password": "",
+    "username": ""
+  },
+  "url": ""
+}
+```
 
 ## Technical Details
 
 ### Actions
 
-#### Get Page Content
-
-This action is used to retrieve content of a Wiki page.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|page|string|None|True|Page Name|None|
-|space|string|None|True|Space|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|content|string|False|Content|
-|found|boolean|False|True if found|
-
-#### Store Page Content
-
-This action is used store a page of user provided content to the Wiki.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|content|string|None|True|Content To Store|None|
-|page|string|None|True|Page Name|None|
-|space|string|None|True|Space|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|page|page|False|Page Stored|
 
 #### Get Page
-
-This action is used to retrieve a Wiki page.
+  
+Get Page
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|page|string|None|True|Page Name|None|
-|space|string|None|True|Space|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|page|string|None|True|Page Name|None|None|
+|space|string|None|True|Space|None|None|
+  
+Example input:
+
+```
+{
+  "page": "",
+  "space": ""
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|found|boolean|False|True if found|
-|page|page|False|Page|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|found|boolean|False|True if found|None|
+|page|page|False|Page|None|
+  
+Example output:
 
+```
+{
+  "found": true,
+  "page": {
+    "content": {},
+    "contentStatus": {},
+    "created": "",
+    "creator": {},
+    "current": {},
+    "homePage": "true",
+    "id": {},
+    "modified": {},
+    "modifier": {},
+    "parentId": {},
+    "permissions": {},
+    "space": {},
+    "title": "",
+    "url": {},
+    "version": {}
+  }
+}
+```
+
+#### Get Page By ID
+  
+Get Page By ID
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|page_id|string|None|True|Page ID|None|None|
+  
+Example input:
+
+```
+{
+  "page_id": ""
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|found|boolean|False|True if found|None|
+|page|page|False|Page|None|
+  
+Example output:
+
+```
+{
+  "found": true,
+  "page": {
+    "content": {},
+    "contentStatus": {},
+    "created": "",
+    "creator": {},
+    "current": {},
+    "homePage": "true",
+    "id": {},
+    "modified": {},
+    "modifier": {},
+    "parentId": {},
+    "permissions": {},
+    "space": {},
+    "title": "",
+    "url": {},
+    "version": {}
+  }
+}
+```
+
+#### Get Page Content
+  
+Get Page Content
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|page|string|None|True|Page Name|None|None|
+|space|string|None|True|Space|None|None|
+  
+Example input:
+
+```
+{
+  "page": "",
+  "space": ""
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|content|string|False|Content|None|
+|found|boolean|False|True if found|None|
+  
+Example output:
+
+```
+{
+  "content": "",
+  "found": true
+}
+```
+
+#### Get Page Content By ID
+  
+Get Page Content by Page ID
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|page_id|string|None|True|Page ID|None|None|
+  
+Example input:
+
+```
+{
+  "page_id": ""
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|content|string|False|Content|None|
+|found|boolean|False|True if found|None|
+  
+Example output:
+
+```
+{
+  "content": "",
+  "found": true
+}
+```
+
+#### Store Page Content
+  
+Store Page Content
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|content|string|None|True|Content To Store|None|None|
+|page|string|None|True|Page Name|None|None|
+|space|string|None|True|Space|None|None|
+  
+Example input:
+
+```
+{
+  "content": "",
+  "page": "",
+  "space": ""
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|page|page|False|Page Stored|None|
+  
+Example output:
+
+```
+{
+  "page": {
+    "content": {},
+    "contentStatus": {},
+    "created": "",
+    "creator": {},
+    "current": {},
+    "homePage": "true",
+    "id": {},
+    "modified": {},
+    "modifier": {},
+    "parentId": {},
+    "permissions": {},
+    "space": {},
+    "title": "",
+    "url": {},
+    "version": {}
+  }
+}
+```
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
+### Custom Types
+  
+**page**
 
-### Custom Output Types
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|content|string|None|False|Page Content|None|
+|contentStatus|string|None|False|Content Status|None|
+|created|date|None|False|Created Date|None|
+|creator|string|None|False|Creator User|None|
+|current|boolean|None|False|True if current version|None|
+|homePage|boolean|None|False|Home Page|None|
+|id|string|None|False|Page ID|None|
+|modified|date|None|False|Modified Date|None|
+|modifier|string|None|False|Modifier User|None|
+|parentId|string|None|False|Parent Page ID|None|
+|permissions|string|None|False|Permissions|None|
+|space|string|None|False|Space|None|
+|title|string|None|False|Page Title|None|
+|url|string|None|False|URL|None|
+|version|string|None|False|Page Version|None|
 
-_This plugin does not contain any custom output types._
 
 ## Troubleshooting
-
-Make sure the credentials are valid and the Confluence URL is correct.
+  
+*There is no troubleshooting for this plugin.*
 
 # Version History
-
-* 1.0.1 - New spec and help.md format for the Extension Library
-* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
-* 0.1.3 - Pin Confluence python library at 0.2
-* 0.1.2 - SSL bug fix in SDK
-* 0.1.1 - Fix bug dumping credentials to log
-* 0.1.0 - Initial plugin
+  
+*This plugin does not contain a version history.*
 
 # Links
 
+
 ## References
-
-* [Confluence](https://www.atlassian.com/software/confluence)
-* [Confluence API URL](https://docs.atlassian.com/confluence/REST/latest/)
-* [Confluence Python Documentation](https://pythonhosted.org/confluence/)
-
+  
+*This plugin does not contain any references.*

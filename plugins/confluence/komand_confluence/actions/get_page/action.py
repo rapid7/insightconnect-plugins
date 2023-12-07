@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetPageInput, GetPageOutput
-
+from insightconnect_plugin_runtime import helper
 # Custom imports below
-from ...util import util
+from ...util.util import extract_page_data
 
 
-class GetPage(komand.Action):
+class GetPage(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_page", description="Get Page", input=GetPageInput(), output=GetPageOutput()
@@ -15,10 +15,12 @@ class GetPage(komand.Action):
         """Return a page."""
         page = params["page"]
         space = params["space"]
-        p = self.connection.client.getPage(page, space)
-        if p:
-            p = util.normalize_page(p)
-            return {"page": p, "found": True}
+        id = self.connection.client.get_page_id(title=page, space=space)
+        data = self.connection.client.get_page_by_id(page_id=id)
+        if data:
+            page = extract_page_data(page=data)
+            page = helper.clean_dict(page)
+            return {"page": page, "found": True}
 
         return {"page": {}, "found": False}
 
@@ -32,15 +34,15 @@ class GetPage(komand.Action):
                 "modifier": "TestUser",
                 "created": "20161024T20:19:23Z",
                 "content": "<p>hello</p>",
-                "url": "https://komand.atlassian.net/wiki/display/DEMO/HelloWorld",
-                "permissions": "0",
+                "url": "https://komand.atlassian.net/wiki/display/DEMO/HelloWorld", # base and webui
+                "permissions": "0", #
                 "creator": "TestUser",
-                "parentId": "0",
+                "parentId": "0", #
                 "version": "1",
-                "homePage": "false",
+                "homePage": "false", #
                 "id": "19726355",
-                "current": "true",
-                "contentStatus": "current",
-                "modified": "20161024T20:19:23Z",
+                "current": "true", #
+                "contentStatus": "current", #
+                "modified": "20161024T20:19:23Z", #
             },
         }

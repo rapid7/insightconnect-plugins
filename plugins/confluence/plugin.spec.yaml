@@ -115,6 +115,23 @@ actions:
         type: boolean
         description: True if found
         required: false
+  get_page_content_by_id:
+    title: Get Page Content By ID
+    description: Get Page Content by Page ID
+    input:
+      page_id:
+        type: string
+        description: Page ID
+        required: true
+    output:
+      content:
+        description: Content
+        type: string
+        required: false
+      found:
+        type: boolean
+        description: True if found
+        required: false
   store_page_content:
     title: Store Page Content
     description: Store Page Content
@@ -147,6 +164,23 @@ actions:
       space:
         type: string
         description: Space
+        required: true
+    output:
+      found:
+        type: boolean
+        description: True if found
+        required: false
+      page:
+        description: Page
+        type: page
+        required: false
+  get_page_by_id:
+    title: Get Page By ID
+    description: Get Page By ID
+    input:
+      page_id:
+        type: string
+        description: Page ID
         required: true
     output:
       found:

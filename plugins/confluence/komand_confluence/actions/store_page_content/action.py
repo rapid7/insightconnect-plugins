@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import StorePageContentInput, StorePageContentOutput
 
 # Custom imports below
 from ...util import util
 
 
-class StorePageContent(komand.Action):
+class StorePageContent(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="store_page_content",
@@ -19,9 +19,8 @@ class StorePageContent(komand.Action):
         content = params["content"]
         page = params["page"]
         space = params["space"]
-        p = self.connection.client.storePageContent(page, space, content)
-        p = util.normalize_page(p)
-        return {"page": p}
+        data = self.connection.client.store_page_content(title=page, space=space, content=content)
+        return {"page": data}
 
     def test(self):
         """Test action"""
