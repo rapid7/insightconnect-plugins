@@ -1,13 +1,18 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from komand_salesforce.tasks.monitor_users.task import MonitorUsers
-from unittest.mock import patch
-from parameterized import parameterized
 from datetime import datetime, timezone
+from typing import Any, Dict
+from unittest import TestCase
+from unittest.mock import MagicMock, patch
+
+from jsonschema import validate
+from komand_salesforce.tasks.monitor_users.schema import MonitorUsersOutput
+from komand_salesforce.tasks.monitor_users.task import MonitorUsers
+from parameterized import parameterized
+
 from util import Util
 
 
@@ -57,8 +62,16 @@ class TestMonitorUsers(TestCase):
             ],
         ]
     )
-    def test_monitor_users(self, mock_request, mock_get_time, test_name, current_state, expected):
+    def test_monitor_users(
+        self,
+        mock_request: MagicMock,
+        mock_get_time: MagicMock,
+        test_name: str,
+        current_state: Dict[str, Any],
+        expected: Dict[str, Any],
+    ) -> None:
         actual, actual_state, has_more_pages, status_code, error = self.action.run(state=current_state)
+        validate(actual, MonitorUsersOutput.schema)
         self.assertEqual(actual, expected.get("users"))
         self.assertEqual(actual_state, expected.get("state"))
         self.assertEqual(has_more_pages, expected.get("has_more_pages"))
