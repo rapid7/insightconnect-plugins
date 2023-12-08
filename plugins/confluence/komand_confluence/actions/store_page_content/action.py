@@ -2,7 +2,8 @@ import insightconnect_plugin_runtime
 from .schema import StorePageContentInput, StorePageContentOutput
 
 # Custom imports below
-from ...util import util
+from insightconnect_plugin_runtime.helper import clean_dict
+from ...util.util import extract_page_data
 
 
 class StorePageContent(insightconnect_plugin_runtime.Action):
@@ -16,11 +17,13 @@ class StorePageContent(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         """Store a page"""
-        content = params["content"]
-        page = params["page"]
-        space = params["space"]
-        data = self.connection.client.store_page_content(title=page, space=space, content=content)
-        return {"page": data}
+        content = params.get("content")
+        title = params.get("page")
+        space = params.get("space")
+        data = self.connection.client.store_page_content(title=title, space=space, content=content)
+        page = extract_page_data(page=data)
+        page = clean_dict(page)
+        return {"page": page}
 
     def test(self):
         """Test action"""

@@ -1,8 +1,10 @@
 
 from atlassian import Confluence
 
+from komand_confluence.util.util import exception_handler
 
-class API:
+
+class ConfluenceAPI:
 
   def __init__(self, url: str = "", username: str = "", password: str = "", cloud: bool = False, client_id: str = "", token: str = ""):
     self.url = url
@@ -11,8 +13,7 @@ class API:
     self.client_id = client_id
     self.token = token
     self.cloud = cloud
-    self.confluence = None
-    self.login()
+    self.confluence = Confluence
 
   def login(self):
     if self.client_id and self.token:
@@ -25,28 +26,32 @@ class API:
       self.confluence = Confluence(url=self.url, username=self.username, password=self.password, cloud=self.cloud)
 
   def health_check(self):
-    self.confluence.health_check()
+    return self.confluence.health_check()
 
+  @exception_handler
   def get_page_id(self, title: str, space: str):
     return self.confluence.get_page_id(title=title, space=space)
 
+  @exception_handler
   def get_page_by_id(self, page_id: str):
     return self.confluence.get_page_by_id(page_id=page_id, expand="body.view,space,history,version,ancestors", status=None, version=None)
 
+  @exception_handler
   def get_page_content(self, page_id: str):
     data = self.confluence.get_page_by_id(page_id=page_id, expand="body.view", status=None, version=None)
-    return data.get("body").get("view").get("value")
+    if data:
+      return data.get("body", {}).get("view", {}).get("value")
+    return None
 
+  @exception_handler
   def store_page_content(self, content: str, title: str, space: str):
     page_exists = self.page_exists(space=space, title=title)
     if page_exists:
-      return self.confluence.update_page(title=title, body=content, space=space)
+      page_id = self.get_page_id(title=title, space=space)
+      return self.confluence.update_page(page_id=page_id, title=title, body=content)
     else:
       return self.confluence.create_page(title=title, body=content, space=space)
 
+  @exception_handler
   def page_exists(self, space: str, title: str):
     return self.confluence.page_exists(space=space, title=title)
-
-  def handle_responses(self):
-    return False
-

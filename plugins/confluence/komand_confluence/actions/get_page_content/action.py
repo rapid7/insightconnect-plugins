@@ -15,12 +15,13 @@ class GetPageContent(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        page = params["page"]
+        title = params["page"]
         space = params["space"]
-        page_id = self.connection.client.get_page_id(title=page, space=space)
-        data = self.connection.client.get_page_content(page_id=page_id)
-        if data:
-            return {"content": data, "found": True}
+        page_id = self.connection.client.get_page_id(title=title, space=space)
+        if page_id:
+            data = self.connection.client.get_page_content(page_id=page_id)
+            if data:
+                return {"content": data, "found": True}
         return {"found": False, "content": ""}
 
     def test(self):

@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import ConnectionSchema
 
 # Custom imports below
-from ..util.api import API
+from ..util.api import ConfluenceAPI
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -14,9 +14,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
         Connect to Confluence
         """
         self.logger.info("Connecting to Confluence: %s", params.get("url"))
-        self.client = API(
+        self.client = ConfluenceAPI(
             url=params.get("url"),
             username=params.get("credentials").get("username"),
             password=params.get("credentials").get("password"),
             cloud=True
         )
+        self.client.login()

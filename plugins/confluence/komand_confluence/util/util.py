@@ -1,3 +1,7 @@
+from atlassian.errors import ApiPermissionError
+from insightconnect_plugin_runtime.exceptions import PluginException
+
+
 def normalize_page(p):
     p["created"] = p["created"].value + "Z"
     p["modified"] = p["modified"].value + "Z"
@@ -18,7 +22,7 @@ def extract_page_data(page):
 
     url_base = page.get("_links").get("base")
     endpoint = page.get("_links").get("webui")
-    home_page = page.get("space", {}).get("homepage", "")
+    home_page = page.get("space", {}).get("_expandable").get("homepage", "")
     id = page.get("id")
     is_home_page = id in home_page
     ancestors = page.get("ancestors")
@@ -41,3 +45,19 @@ def extract_page_data(page):
         "modified": page.get("version", {}).get("when"),
     }
     return page
+
+def exception_handler(func):
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except ApiPermissionError as exception:
+            raise PluginException(
+                "Something unexpected occurred. See error log for details.",
+                "Please check your input and connection details.",
+                data=exception)
+        except Exception as exception:
+            raise PluginException(
+                "Something unexpected occurred. See error log for details.",
+                "Please check your input and connection details.",
+                data=exception)
+    return wrapper
