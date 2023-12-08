@@ -55,7 +55,7 @@ Example output:
 ```
 
 {
-"output": "Rapid7"
+  "output": "Rapid7"
 }
 
 ```
@@ -80,7 +80,10 @@ This plugin does not contain any troubleshooting information.
 * 1.0.0 - Support web server mode
 * 0.1.0 - Initial plugin
 
+
 # Links
+
+This plugin is based in pdfplumber. [pdfplumber](https://pypi.org/project/pdfplumber/)
 
 ## References
 

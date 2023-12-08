@@ -6,6 +6,7 @@ title: PDF Reader
 description: Tools for extracting text from a PDF
 version: 1.0.3
 vendor: rapid7
+supported_versions: Not applicable
 support: community
 status: []
 resources:
@@ -40,3 +41,4 @@ actions:
         description: Text extracted from PDF file
         type: string
         required: false
+        example: Rapid7
