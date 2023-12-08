@@ -79,6 +79,7 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
 
                 is_valid_state, key = self._is_valid_state(state)
                 if not is_valid_state:
+                    self.logger.info(f"Bad request error occurred. Invalid timestamp format for {key}")
                     return (
                         [],
                         state,
@@ -172,8 +173,10 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
 
                 return records, state, has_more_pages, 200, None
             except ApiException as error:
+                self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
                 return [], state, False, error.status_code, error
         except Exception as error:
+            self.logger.info(f"An Exception has been raised. Error: {error}")
             return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def _is_valid_state(self, state: dict) -> Union[bool, str]:
