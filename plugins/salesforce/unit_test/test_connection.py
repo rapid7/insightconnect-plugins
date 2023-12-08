@@ -1,15 +1,18 @@
-import sys
 import os
+import sys
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
+from typing import Any, Dict
 from unittest import TestCase
+from unittest.mock import MagicMock, patch
+
 from komand_salesforce.actions.simple_search import SimpleSearch
-from util import Util
-from unittest.mock import patch
 from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.request", side_effect=Util.mock_request)
@@ -23,7 +26,9 @@ class TestConnection(TestCase):
             ]
         ]
     )
-    def test_connection(self, mock_request, test_name, input_params, expected):
+    def test_connection(
+        self, mock_request: MagicMock, test_name: str, input_params: Dict[str, Any], expected: str
+    ) -> None:
         self.action = Util.default_connector(SimpleSearch(), input_params)
         token, url = self.action.connection.api._get_token(
             self.action.connection.api._client_id,
@@ -44,7 +49,9 @@ class TestConnection(TestCase):
             ]
         ]
     )
-    def test_connection_raise_exception(self, mock_request, test_name, input_params, cause, assistance):
+    def test_connection_raise_exception(
+        self, mock_request: MagicMock, test_name: str, input_params: Dict[str, Any], cause: str, assistance: str
+    ) -> None:
         with self.assertRaises(PluginException) as error:
             self.action = Util.default_connector(SimpleSearch(), input_params)
             self.action.connection.api._get_token(

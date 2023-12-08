@@ -1,14 +1,19 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from typing import Any, Dict
 from unittest import TestCase
-from komand_salesforce.actions.update_record.action import UpdateRecord
-from unittest.mock import patch
-from parameterized import parameterized
+from unittest.mock import MagicMock, patch
+
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
+from komand_salesforce.actions.update_record.action import UpdateRecord
+from komand_salesforce.actions.update_record.schema import UpdateRecordOutput
 from komand_salesforce.util.exceptions import ApiException
+from parameterized import parameterized
+
 from util import Util
 
 
@@ -27,8 +32,11 @@ class TestUpdateRecord(TestCase):
             ],
         ]
     )
-    def test_update_record(self, mock_request, test_name, input_params, expected):
+    def test_update_record(
+        self, mock_request: MagicMock, test_name: str, input_params: Dict[str, Any], expected: Dict[str, Any]
+    ) -> None:
         actual = self.action.run(input_params)
+        validate(actual, UpdateRecordOutput.schema)
         self.assertEqual(actual, expected)
 
     @parameterized.expand(
@@ -53,7 +61,9 @@ class TestUpdateRecord(TestCase):
             ],
         ]
     )
-    def test_update_record_raise_api_exception(self, mock_request, test_name, input_params, cause, assistance):
+    def test_update_record_raise_api_exception(
+        self, mock_request: MagicMock, test_name: str, input_params: Dict[str, Any], cause: str, assistance: str
+    ) -> None:
         with self.assertRaises(ApiException) as error:
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)
