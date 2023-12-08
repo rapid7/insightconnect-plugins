@@ -4,13 +4,17 @@ products: [insightconnect]
 name: salesforce
 title: Salesforce
 description: The Salesforce plugin allows you to search, update, and manage salesforce records
-version: 2.1.4
+version: 2.1.5
 connection_version: 2
 vendor: rapid7
 support: community
 cloud_ready: true
 status: []
 supported_versions: ["Salesforce API v58 2023-06-30"]
+sdk:
+  type: full
+  version: 5
+  user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/salesforce
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -182,7 +186,7 @@ actions:
         description: List of search results
         type: '[]searchResult'
         required: false
-        example: []
+        example: '[{"type":"Account","url":"/services/data/v58.0/sobjects/Account/001Hn00001uAccount","id":"001Hn00001uAccount"},{"type":"ExternalObject__c","url":"/services/data/v58.0/sobjects/ExternalObject__c/a00Hn00000External","id":"a00Hn00000External"},{"type":"Customer","url":"/services/data/v58.0/sobjects/Customer/0o6Hn00000Customer","id":"0o6Hn00000Customer"},{"type":"Topic","url":"/services/data/v58.0/sobjects/Topic/0TOHn000000I1Topic","id":"0TOHn000000I1Topic"},{"type":"CollaborationGroup","url":"/services/data/v58.0/sobjects/CollaborationGroup/0F9Hn000000PCollab","id":"0F9Hn000000PCollab"},{"type":"Note","url":"/services/data/v58.0/sobjects/Note/002Hn00000n5KANote","id":"002Hn00000n5KANote"}]'
   advanced_search:
     title: Advanced Search
     description: Execute a SOQL (Salesforce Object Query Language) query
@@ -199,7 +203,7 @@ actions:
         description: List of search results
         type: '[]searchResult'
         required: false
-        example: []
+        example: '[{"type":"Account","url":"/services/data/v58.0/sobjects/Account/001Hn00001uLl12aBC","name":"Example Account","id":"001Hn00001uLl12aBC"}]'
   create_record:
     title: Create Record
     description: Create a new SObject record
@@ -268,7 +272,6 @@ actions:
         description: The name of the external ID field that should be matched with record_id. If empty, the 'Id' field of the record is used
         type: string
         required: false
-        default: ''
         example: ExampleExtID__c
       objectName:
         title: Object Name
@@ -283,7 +286,7 @@ actions:
         description: Matched record
         type: object
         required: false
-        example: {}
+        example: '{"attributes":{"type":"Folder","url":"/services/data/v58.0/sobjects/Folder/00lHn000002nFolder"},"id":"00lHn000002nFolder","name":"Example Folder","developerName":"Bot_v5","accessType":"Hidden","isReadonly":true,"type":"Report","namespacePrefix":null,"createdDate":"2022-06-20T01:51:22.000+0000","createdById":"005Hn00000HExample","lastModifiedDate":"2022-06-20T01:51:22.000+0000","lastModifiedById":"005Hn00000HExample","systemModstamp":"2022-06-20T01:51:22.000+0000"}'
   delete_record:
     title: Delete Record
     description: Delete a record
@@ -330,14 +333,14 @@ actions:
         description: The fields which values should be retrieved
         type: '[]string'
         required: true
-        example: ["Id", "Name", "Description"]
+        example: '["Id", "Name", "Description"]'
     output:
       fields:
         title: Fields
         description: An object with field names as keys, each with the corresponding value
         type: object
         required: false
-        example: {}
+        example: '{"id":"001Hn00001uAJRtaB3","name":"Example Account","description":"Example description"}'
   get_blob_data:
     title: Get Blob Data
     description: Retrieve blob data for a given record
@@ -379,4 +382,4 @@ tasks:
         description: Information about users, their login history and which users have been updated
         type: "[]object"
         required: true
-        example: []
+        example: '[{"attributes":{"type":"User","url":"/services/data/v58.0/sobjects/User/005Hn00000HVWwxIAH"},"id":"005Hn00000HVWwxIAH","firstName":"Security","lastName":"User","email":"user@example.com","alias":"sec","isActive":true,"dataType":"User Update"},{"attributes":{"type":"User","url":"/services/data/v58.0/sobjects/User/005Hn00000H35JtIAJ"},"id":"005Hn00000H35JtIAJ","firstName":"Example","lastName":"User","email":"user2@example.com","alias":"exam","isActive":true,"dataType":"User"},{"attributes":{"type":"User","url":"/services/data/v58.0/sobjects/User/005Hn00000HVWwxIAH"},"id":"005Hn00000HVWwxIAH","firstName":"Security","lastName":"User","email":"user@example.com","alias":"sec","isActive":true,"dataType":"User"},{"attributes":{"type":"LoginHistory","url":"/services/data/v58.0/sobjects/LoginHistory/0YaHn0000EUyGdHKQV"},"loginTime":"2023-07-23T16:18:23.000+0000","userId":"005Hn00000H35JtIAJ","loginType":"Remote Access 2.0","loginUrl":"login.salesforce.com","sourceIp":"198.51.100.1","status":"Success","application":"New Connected App","browser":"Unknown","dataType":"User Login"},{"attributes":{"type":"LoginHistory","url":"/services/data/v58.0/sobjects/LoginHistory/0YaHn0000EUyGkcKQF"},"loginTime":"2023-07-23T16:20:13.000+0000","userId":"005Hn00000H35JtIAJ","loginType":"Application","loginUrl":"example.salesforce.com","sourceIp":"198.51.100.1","status":"Success","application":"Browser","browser":"Chrome 115","dataType":"User Login"}]'
