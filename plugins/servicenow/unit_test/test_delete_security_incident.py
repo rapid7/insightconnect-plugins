@@ -3,8 +3,9 @@ import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from typing import Any, Dict
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from icon_servicenow.actions.delete_security_incident import DeleteSecurityIncident
 from icon_servicenow.actions.delete_security_incident.schema import DeleteSecurityIncidentOutput
@@ -31,7 +32,14 @@ class TestDeleteSecurityIncident(TestCase):
             ],
         ]
     )
-    def test_delete_security_incident(self, mock_request, mock_post, test_name, input_params, expected):
+    def test_delete_security_incident(
+        self,
+        mock_request: MagicMock,
+        mock_post: MagicMock,
+        test_name: str,
+        input_params: Dict[str, Any],
+        expected: Dict[str, Any],
+    ) -> None:
         actual = self.action.run(input_params)
         validate(actual, DeleteSecurityIncidentOutput.schema)
         self.assertDictEqual(actual, expected)
@@ -47,8 +55,14 @@ class TestDeleteSecurityIncident(TestCase):
         ]
     )
     def test_delete_security_incident_raise_exception(
-        self, mock_request, mock_post, test_name, input_params, cause, assistance
-    ):
+        self,
+        mock_request: MagicMock,
+        mock_post: MagicMock,
+        test_name: str,
+        input_params: Dict[str, Any],
+        cause: str,
+        assistance: str,
+    ) -> None:
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)

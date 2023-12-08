@@ -4,7 +4,7 @@ import sys
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from icon_servicenow.actions.get_attachments_for_an_incident import GetAttachmentsForAnIncident
 from icon_servicenow.actions.get_attachments_for_an_incident.schema import GetAttachmentsForAnIncidentOutput, Input
@@ -20,7 +20,7 @@ class TestGetAttachmentsForAnIncident(TestCase):
 
     @patch("requests.get", side_effect=Util.mocked_requests)
     @patch("requests.post", side_effect=Util.mocked_requests)
-    def test_get_attachments_for_an_incident(self, mock_get, mock_post):
+    def test_get_attachments_for_an_incident(self, mock_get: MagicMock, mock_post: MagicMock) -> None:
         actual = self.action.run({Input.INCIDENT_ID: "3072d01d07a552f6d0ea83ef29c936be"})
         expected = {
             "incident_attachments": [
@@ -57,7 +57,7 @@ class TestGetAttachmentsForAnIncident(TestCase):
 
     @patch("requests.get", side_effect=Util.mocked_requests)
     @patch("requests.post", side_effect=Util.mocked_requests)
-    def test_get_attachments_for_an_incident_empty(self, mock_get, mock_post):
+    def test_get_attachments_for_an_incident_empty(self, mock_get: MagicMock, mock_post: MagicMock) -> None:
         actual = self.action.run({Input.INCIDENT_ID: "c1565da4456c2df374793d471d6ae8dd"})
         expected = {"incident_attachments": []}
         validate(actual, GetAttachmentsForAnIncidentOutput.schema)
