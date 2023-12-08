@@ -8,7 +8,7 @@ class Input:
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
-    schema = json.loads(r"""
+    schema = json.loads("""
    {}
     """)
 
