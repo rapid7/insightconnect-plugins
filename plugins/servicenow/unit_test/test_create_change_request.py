@@ -21,7 +21,7 @@ class TestCreateChangeRequest(TestCase):
         cls.action = Util.default_connector(CreateChangeRequest())
 
     @parameterized.expand([({},), ({"short_description": "ExampleTest"})])
-    @patch("requests.sessions.Session.post", side_effect=Util.mocked_requests)
+    @patch("requests.post", side_effect=Util.mocked_requests)
     def test_create_change_request(self, additional_fields: Dict[str, Any], mock_post: MagicMock) -> None:
         actual = self.action.run({Input.ADDITIONAL_FIELDS: additional_fields})
         expected = {"success": True}

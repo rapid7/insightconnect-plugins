@@ -20,8 +20,9 @@ class TestGetIncidentAttachment(TestCase):
     def setUpClass(cls) -> None:
         cls.action = Util.default_connector(GetIncidentAttachment())
 
-    @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
-    def test_manage_threat_remediate(self, mock_post: Mock) -> None:
+    @patch("requests.get", side_effect=Util.mocked_requests)
+    @patch("requests.post", side_effect=Util.mocked_requests)
+    def test_manage_threat_remediate(self, mock_get: Mock, mock_post: Mock) -> None:
         actual = self.action.run({Input.ATTACHMENT_ID: "b259f4062d9f78f9ffdd6efd05c492c7"})
         expected = {Output.ATTACHMENT_CONTENTS: "ImNtRndhV1EzWVhSMFlXTm9iV1Z1ZEhSbGN6ZzNOalF6TWpKMCI="}
         validate(actual, GetIncidentAttachmentOutput.schema)
