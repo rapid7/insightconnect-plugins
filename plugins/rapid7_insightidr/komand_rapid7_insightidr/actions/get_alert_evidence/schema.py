@@ -129,7 +129,7 @@ class GetAlertEvidenceOutput(insightconnect_plugin_runtime.Output):
           "order": 7
         },
         "data": {
-          "type": "string",
+          "type": "object",
           "title": "Data",
           "description": "The evidence data.",
           "order": 8

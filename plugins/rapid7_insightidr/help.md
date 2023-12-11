@@ -1115,7 +1115,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|evidences|[]evidence_object|False|The alert evidence|[{"created_at": "2023-12-04T13:59:06.768731Z", "data": "{"timestamp":"2023-12-04T13:44:56.000Z","user":"test_user","account":"test_user","result":"SUCCESS","source_ip":"1.1.1.1","service":"o365","geoip_city":"Boston","geoip_country_code":"US","geoip_country_name":"United States","geoip_organization":"TowardEX Technologies International","geoip_region":"MA","source_json":{"CreationTime":"2023-12-04T13:44:56","Id":"12345678-abcd-cdef-1234-12345abc0","Operation":"UserLoggedIn","OrganizationId":"12345678-abcd-cdef-1234-12345abc","RecordType":15,"ResultStatus":"Success","UserKey":"12345678-abcd-cdef-1234-12345abc","UserType":0,"Version":1,"Workload":"AzureActiveDirectory","ClientIP":"1.1.1.1","ObjectId":"00000002-0000-0000-c000-000000000000","UserId":"test_user","AzureActiveDirectoryEventType":1,"ExtendedProperties":[{"Name":"ResultStatusDetail","Value":"Success"},{"Name":"UserAuthenticationMethod","Value":"1"},{"Name":"RequestType","Value":"OAuth2:Token"}],"ModifiedProperties":[],"Actor":[{"ID":"12345678-abcd-cdef-1234-12345abc","Type":0},{"ID":"test_user","Type":5}],"ActorContextId":"12345678-abcd-cdef-1234-12345abc","ActorIpAddress":"1.1.1.1","InterSystemsId":"1bd394a5-be1b-4af3-a608-8ec6c73d5c02","IntraSystemId":"12345678-abcd-cdef-1234-12345abc0","SupportTicketId":"","Target":[{"ID":"00000002-0000-0000-c000-000000000000","Type":0}],"TargetContextId":"12345678-abcd-cdef-1234-12345abc","ApplicationId":"cb1056e2-e479-49de-ae31-7812af012ed8","DeviceProperties":[{"Name":"OS","Value":"Windows10"},{"Name":"BrowserType","Value":"Other"},{"Name":"SessionId","Value":"512345678-abcd-cdef-1234-12345abc"}],"ErrorNumber":"0"},"custom_data":{"SourceRelative Url":"TargetContextId","source_account":"RecordType"},"r7_context":{"user":{"type":"user","rrn":"rrn:uba:us:512345678-abcd-cdef-1234-12345abc:user:ABCDEFGH","name":"test_user"},"account":{"type":"account","rrn":"rrn:uba:us:512345678-abcd-cdef-1234-12345abc:account:ABCDEFGH","name":"test_user"}}}", "event_type": "ingress_auth", "evented_at": "2023-12-04T13:59:06.349Z", "external_source": "IDR ABA", "rrn": "rrn:alerts:us1:512345678-abcd-cdef-1234-12345abc:evidence:1:512345678-abcd-cdef-1234-12345abc", "updated_at": "2023-12-04T13:59:06.768731Z", "version": 1}]|
+|evidences|[]evidence_object|False|The alert evidence|[{"created_at": "2023-12-04T13:59:06.768731Z", "data": {"timestamp": "2023-12-04T13:44:56.000Z", "user": "test_user", "account": "test_user", "result": "SUCCESS", "source_ip": "1.1.1.1", "service": "o365", "geoip_city": "Boston", "geoip_country_code": "US", "geoip_country_name": "United States", "geoip_organization": "TowardEX Technologies International", "geoip_region": "MA", "source_json": {"CreationTime": "2023-12-04T13:44:56", "Id": "12345678-abcd-cdef-1234-12345abc0", "Operation": "UserLoggedIn", "OrganizationId": "12345678-abcd-cdef-1234-12345abc", "RecordType": 15, "ResultStatus": "Success", "UserKey": "12345678-abcd-cdef-1234-12345abc", "UserType": 0, "Version": 1, "Workload": "AzureActiveDirectory", "ClientIP": "1.1.1.1", "ObjectId": "00000002-0000-0000-c000-000000000000", "UserId": "test_user", "AzureActiveDirectoryEventType": 1, "ExtendedProperties": [{"Name": "ResultStatusDetail", "Value": "Success"}, {"Name": "UserAuthenticationMethod", "Value": "1"}, {"Name": "RequestType", "Value": "OAuth2:Token"}], "ModifiedProperties": [], "Actor": [{"ID": "12345678-abcd-cdef-1234-12345abc", "Type": 0}, {"ID": "test_user", "Type": 5}], "ActorContextId": "12345678-abcd-cdef-1234-12345abc", "ActorIpAddress": "1.1.1.1", "InterSystemsId": "1bd394a5-be1b-4af3-a608-8ec6c73d5c02", "IntraSystemId": "12345678-abcd-cdef-1234-12345abc0", "SupportTicketId": "", "Target": [{"ID": "00000002-0000-0000-c000-000000000000", "Type": 0}], "TargetContextId": "12345678-abcd-cdef-1234-12345abc", "ApplicationId": "cb1056e2-e479-49de-ae31-7812af012ed8", "DeviceProperties": [{"Name": "OS", "Value": "Windows10"}, {"Name": "BrowserType", "Value": "Other"}, {"Name": "SessionId", "Value": "512345678-abcd-cdef-1234-12345abc"}], "ErrorNumber": "0"}, "custom_data": {"SourceRelative Url": "TargetContextId", "source_account": "RecordType"}, "r7_context": {"user": {"type": "user", "rrn": "rrn:uba:us:512345678-abcd-cdef-1234-12345abc:user:ABCDEFGH", "name": "test_user"}, "account": {"type": "account", "rrn": "rrn:uba:us:512345678-abcd-cdef-1234-12345abc:account:ABCDEFGH", "name": "test_user"}}}, "event_type": "ingress_auth", "evented_at": "2023-12-04T13:59:06.349Z", "external_source": "IDR ABA", "rrn": "rrn:alerts:us1:512345678-abcd-cdef-1234-12345abc:evidence:1:512345678-abcd-cdef-1234-12345abc", "updated_at": "2023-12-04T13:59:06.768731Z", "version": 1}]|
 |metadata|investigation_metadata|True|The pagination parameters used to generate this page result|{'index': 0, 'size': 1, 'total_data': 1, 'total_pages': 1}|
   
 Example output:
@@ -1124,7 +1124,104 @@ Example output:
 {
   "evidences": {
     "created_at": "2023-12-04T13:59:06.768731Z",
-    "data": "{\"timestamp\":\"2023-12-04T13:44:56.000Z\",\"user\":\"test_user\",\"account\":\"test_user\",\"result\":\"SUCCESS\",\"source_ip\":\"1.1.1.1\",\"service\":\"o365\",\"geoip_city\":\"Boston\",\"geoip_country_code\":\"US\",\"geoip_country_name\":\"United States\",\"geoip_organization\":\"TowardEX Technologies International\",\"geoip_region\":\"MA\",\"source_json\":{\"CreationTime\":\"2023-12-04T13:44:56\",\"Id\":\"12345678-abcd-cdef-1234-12345abc0\",\"Operation\":\"UserLoggedIn\",\"OrganizationId\":\"12345678-abcd-cdef-1234-12345abc\",\"RecordType\":15,\"ResultStatus\":\"Success\",\"UserKey\":\"12345678-abcd-cdef-1234-12345abc\",\"UserType\":0,\"Version\":1,\"Workload\":\"AzureActiveDirectory\",\"ClientIP\":\"1.1.1.1\",\"ObjectId\":\"00000002-0000-0000-c000-000000000000\",\"UserId\":\"test_user\",\"AzureActiveDirectoryEventType\":1,\"ExtendedProperties\":[{\"Name\":\"ResultStatusDetail\",\"Value\":\"Success\"},{\"Name\":\"UserAuthenticationMethod\",\"Value\":\"1\"},{\"Name\":\"RequestType\",\"Value\":\"OAuth2:Token\"}],\"ModifiedProperties\":[],\"Actor\":[{\"ID\":\"12345678-abcd-cdef-1234-12345abc\",\"Type\":0},{\"ID\":\"test_user\",\"Type\":5}],\"ActorContextId\":\"12345678-abcd-cdef-1234-12345abc\",\"ActorIpAddress\":\"1.1.1.1\",\"InterSystemsId\":\"1bd394a5-be1b-4af3-a608-8ec6c73d5c02\",\"IntraSystemId\":\"12345678-abcd-cdef-1234-12345abc0\",\"SupportTicketId\":\"\",\"Target\":[{\"ID\":\"00000002-0000-0000-c000-000000000000\",\"Type\":0}],\"TargetContextId\":\"12345678-abcd-cdef-1234-12345abc\",\"ApplicationId\":\"cb1056e2-e479-49de-ae31-7812af012ed8\",\"DeviceProperties\":[{\"Name\":\"OS\",\"Value\":\"Windows10\"},{\"Name\":\"BrowserType\",\"Value\":\"Other\"},{\"Name\":\"SessionId\",\"Value\":\"512345678-abcd-cdef-1234-12345abc\"}],\"ErrorNumber\":\"0\"},\"custom_data\":{\"SourceRelative Url\":\"TargetContextId\",\"source_account\":\"RecordType\"},\"r7_context\":{\"user\":{\"type\":\"user\",\"rrn\":\"rrn:uba:us:512345678-abcd-cdef-1234-12345abc:user:ABCDEFGH\",\"name\":\"test_user\"},\"account\":{\"type\":\"account\",\"rrn\":\"rrn:uba:us:512345678-abcd-cdef-1234-12345abc:account:ABCDEFGH\",\"name\":\"test_user\"}}}",
+    "data": {
+      "account": "test_user",
+      "custom_data": {
+        "SourceRelative Url": "TargetContextId",
+        "source_account": "RecordType"
+      },
+      "geoip_city": "Boston",
+      "geoip_country_code": "US",
+      "geoip_country_name": "United States",
+      "geoip_organization": "TowardEX Technologies International",
+      "geoip_region": "MA",
+      "r7_context": {
+        "account": {
+          "name": "test_user",
+          "rrn": "rrn:uba:us:512345678-abcd-cdef-1234-12345abc:account:ABCDEFGH",
+          "type": "account"
+        },
+        "user": {
+          "name": "test_user",
+          "rrn": "rrn:uba:us:512345678-abcd-cdef-1234-12345abc:user:ABCDEFGH",
+          "type": "user"
+        }
+      },
+      "result": "SUCCESS",
+      "service": "o365",
+      "source_ip": "1.1.1.1",
+      "source_json": {
+        "Actor": [
+          {
+            "ID": "12345678-abcd-cdef-1234-12345abc",
+            "Type": 0
+          },
+          {
+            "ID": "test_user",
+            "Type": 5
+          }
+        ],
+        "ActorContextId": "12345678-abcd-cdef-1234-12345abc",
+        "ActorIpAddress": "1.1.1.1",
+        "ApplicationId": "cb1056e2-e479-49de-ae31-7812af012ed8",
+        "AzureActiveDirectoryEventType": 1,
+        "ClientIP": "1.1.1.1",
+        "CreationTime": "2023-12-04T13:44:56",
+        "DeviceProperties": [
+          {
+            "Name": "OS",
+            "Value": "Windows10"
+          },
+          {
+            "Name": "BrowserType",
+            "Value": "Other"
+          },
+          {
+            "Name": "SessionId",
+            "Value": "512345678-abcd-cdef-1234-12345abc"
+          }
+        ],
+        "ErrorNumber": "0",
+        "ExtendedProperties": [
+          {
+            "Name": "ResultStatusDetail",
+            "Value": "Success"
+          },
+          {
+            "Name": "UserAuthenticationMethod",
+            "Value": "1"
+          },
+          {
+            "Name": "RequestType",
+            "Value": "OAuth2:Token"
+          }
+        ],
+        "Id": "12345678-abcd-cdef-1234-12345abc0",
+        "InterSystemsId": "1bd394a5-be1b-4af3-a608-8ec6c73d5c02",
+        "IntraSystemId": "12345678-abcd-cdef-1234-12345abc0",
+        "ModifiedProperties": [],
+        "ObjectId": "00000002-0000-0000-c000-000000000000",
+        "Operation": "UserLoggedIn",
+        "OrganizationId": "12345678-abcd-cdef-1234-12345abc",
+        "RecordType": 15,
+        "ResultStatus": "Success",
+        "SupportTicketId": "",
+        "Target": [
+          {
+            "ID": "00000002-0000-0000-c000-000000000000",
+            "Type": 0
+          }
+        ],
+        "TargetContextId": "12345678-abcd-cdef-1234-12345abc",
+        "UserId": "test_user",
+        "UserKey": "12345678-abcd-cdef-1234-12345abc",
+        "UserType": 0,
+        "Version": 1,
+        "Workload": "AzureActiveDirectory"
+      },
+      "timestamp": "2023-12-04T13:44:56.000Z",
+      "user": "test_user"
+    },
     "event_type": "ingress_auth",
     "evented_at": "2023-12-04T13:59:06.349Z",
     "external_source": "IDR ABA",

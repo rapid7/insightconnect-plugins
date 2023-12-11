@@ -28,6 +28,7 @@ class TestGetAlertEvidences(TestCase):
         test_input = {Input.ALERT_RRN: alert_rrn}
         validate(test_input, GetAlertEvidenceInput.schema)
         actual = self.action.run(test_input)
+        print(actual)
         self.assertEqual(actual, expected)
         validate(actual, GetAlertEvidenceOutput.schema)
 

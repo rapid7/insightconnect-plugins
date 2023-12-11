@@ -4,6 +4,7 @@ from .schema import GetAlertEvidenceInput, GetAlertEvidenceOutput, Input, Output
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Alerts
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
+import json
 
 
 class GetAlertEvidence(insightconnect_plugin_runtime.Action):
@@ -24,4 +25,14 @@ class GetAlertEvidence(insightconnect_plugin_runtime.Action):
         response = request.make_request(
             Alerts.get_alert_evidence(self.connection.url, alert_rrn), method="get", params=params
         )
+
+        evidences = response.get("evidences", [])
+
+        for evidence in evidences:
+            try:
+                evidence["data"] = json.loads(evidence.get("data", ""))
+            except Exception as e:
+                self.logger.warning("data could not be convert to json - {e}")
+                evidence["data"] = {}
+
         return {Output.EVIDENCES: response.get("evidences", []), Output.METADATA: response.get("metadata", {})}
