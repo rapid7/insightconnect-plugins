@@ -16,7 +16,7 @@ class Output:
 
 
 class ExtractTextInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
@@ -24,7 +24,7 @@ class ExtractTextInput(insightconnect_plugin_runtime.Input):
     "contents": {
       "type": "string",
       "format": "bytes",
-      "display_type": "bytes",
+      "displayType": "bytes",
       "title": "PDF File",
       "description": "PDF file to extract text from",
       "order": 1
@@ -42,7 +42,7 @@ class ExtractTextInput(insightconnect_plugin_runtime.Input):
 
 
 class ExtractTextOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",

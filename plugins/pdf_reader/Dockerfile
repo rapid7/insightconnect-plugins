@@ -1,13 +1,16 @@
-FROM rapid7/insightconnect-python-3-plugin:5
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:5
 
 LABEL organization=rapid7
 LABEL sdk=python
 
 WORKDIR /python/src
+
 ADD ./plugin.spec.yaml /plugin.spec.yaml
-ADD . /python/src
+ADD ./requirements.txt /python/src/requirements.txt
 
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+ADD . /python/src
 
 RUN	python setup.py build && python setup.py install
 

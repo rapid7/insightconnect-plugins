@@ -5,11 +5,11 @@
 	"schemas": [
 		{
 			"identifier": "extract_text/schema.py",
-			"hash": "cd4e11e0f58f2783bd9d82f630396ccb"
+			"hash": "35e1f75bab710442b0852a659f2a3a55"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "9d48eac9e9c489dbd77132ce1378f009"
+			"hash": "bd524b567f9638ba1c6f7e0c9e45ff2e"
 		}
 	]
 }
