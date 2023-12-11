@@ -11,9 +11,7 @@ class Input:
     ASSET_GROUP = "asset_group"
     CVE = "cve"
     CVSS_SCORE = "cvss_score"
-    HOSTNAME = "hostname"
     INTERVAL = "interval"
-    IP_ADDRESS = "ip_address"
     SEVERITY = "severity"
     SITE_ID = "site_id"
     SOURCE = "source"
@@ -42,19 +40,13 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "CVE",
       "description": "CVE",
-      "order": 6
+      "order": 4
     },
     "cvss_score": {
       "type": "integer",
       "title": "CVSS V3 Score",
       "description": "A vulneravility score from 1-10. Only those with a score equal to or above the input will be shown",
-      "order": 8
-    },
-    "hostname": {
-      "type": "string",
-      "title": "Hostname",
-      "description": "Hostname",
-      "order": 4
+      "order": 6
     },
     "interval": {
       "type": "integer",
@@ -62,12 +54,6 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
       "description": "How often the trigger should check for new vulnerability",
       "default": 5,
       "order": 1
-    },
-    "ip_address": {
-      "type": "string",
-      "title": "IP Address",
-      "description": "IP Address",
-      "order": 5
     },
     "severity": {
       "type": "string",
@@ -78,7 +64,7 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
         "Severe",
         "Critical"
       ],
-      "order": 9
+      "order": 7
     },
     "site_id": {
       "type": "string",
@@ -90,7 +76,7 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Source",
       "description": "Source",
-      "order": 7
+      "order": 5
     }
   },
   "required": [

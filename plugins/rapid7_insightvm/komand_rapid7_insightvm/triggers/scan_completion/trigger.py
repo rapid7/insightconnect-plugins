@@ -158,10 +158,9 @@ class ScanQueries:
         """
 
         return (
-            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dv.cvss_v3_score, dvr.source, daga.asset_group_id, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id "  # nosec B608
+            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dv.cvss_v3_score, dvr.source, daga.asset_group_id, dss.solution_id, dss.summary, dv.nexpose_id "  # nosec B608
             f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
             f"JOIN dim_asset_group_asset AS daga ON (fasvi.asset_id = daga.asset_id) "
-            f"JOIN dim_asset AS da ON (fasvi.asset_id = da.asset_id) "
             f"JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
             f"JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) "
             f"JOIN dim_solution AS dss ON (dv.nexpose_id = dss.nexpose_id) "
@@ -194,9 +193,7 @@ class Util:
         # Input retrieval
         asset_group = params.get(Input.ASSET_GROUP, None)
         cve = params.get(Input.CVE, None)
-        hostname = params.get(Input.HOSTNAME, None)
         source = params.get(Input.SOURCE, None)
-        ip_address = params.get(Input.IP_ADDRESS, None)
         cvss_score = params.get(Input.CVSS_SCORE, None)
         severity = params.get(Input.SEVERITY, None)
 
@@ -206,8 +203,6 @@ class Util:
 
         new_dict = {
             "asset_id": asset_id,
-            "ip_address": csv_row.get("ip_address", ""),
-            "hostname": csv_row.get("host_name", ""),
             "vulnerability_info": [
                 {
                     "vulnerability_id": csv_row.get("vulnerability_id", ""),
@@ -226,11 +221,7 @@ class Util:
             return None
         if cve and cve not in csv_row.get("nexpose_id", ""):
             return None
-        if hostname and hostname not in csv_row.get("host_name", ""):
-            return None
         if source and source not in csv_row.get("source", ""):
-            return None
-        if ip_address and ip_address not in csv_row.get("ip_address", ""):
             return None
         if cvss_score and cvss_score < csv_row.get("cvss_v3_score", 0):
             return None
