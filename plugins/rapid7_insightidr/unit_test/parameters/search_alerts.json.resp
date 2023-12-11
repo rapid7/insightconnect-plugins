@@ -1,0 +1,468 @@
+{
+  "parameters": [
+    [
+      "",
+      "",
+      "",
+      [],
+      [],
+      [],
+      [],
+      2,
+      0,
+      true,
+      {
+        "rrns": [
+          "rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:2dcee8460472e58a385cbd4909b7238c",
+          "rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:64561936cfbaec0201af423876e05efb"
+        ],
+        "metadata": {
+          "index": 0,
+          "size": 2,
+          "items_in_index": 2,
+          "total_items": 8417,
+          "is_last_index": false
+        }
+      }
+    ],
+    [
+      "2020-06-01T12:11:13+05:30",
+      "2020-07-01T12:11:13+05:30",
+      "WHERE True",
+      [
+        {
+          "field_ids": [
+            "status"
+          ],
+          "operator": "NOT_EQUALS",
+          "terms": [
+            "OPEN"
+          ]
+        }
+      ],
+      [
+        {
+          "field_id": "status",
+          "order": "ASCENDING_NULLS_LAST"
+        }
+      ],
+      [
+        "status"
+      ],
+      [
+        {
+          "name": "name",
+          "type": "BUCKET",
+          "fields": [
+            {
+              "field_id": "status",
+              "order": "ASCENDING_NULLS_LAST"
+            }
+          ],
+          "count_order": "ASCENDING_NULLS_LAST"
+        }
+      ],
+      2,
+      0,
+      true,
+      {
+        "rrns": [
+          "rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:2dcee8460472e58a385cbd4909b7238c",
+          "rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:64561936cfbaec0201af423876e05efb"
+        ],
+        "metadata": {
+          "index": 0,
+          "size": 2,
+          "items_in_index": 2,
+          "total_items": 8417,
+          "is_last_index": false
+        }
+      }
+    ],
+    [
+      "",
+      "",
+      "",
+      [],
+      [],
+      [],
+      [],
+      2,
+      0,
+      false,
+      {
+        "alerts": [
+          {
+            "rrn": "rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:a00310f9f9eb67edd8d3f365cdf4fb5a",
+            "version": 5,
+            "created_at": "2023-12-11T12:03:02.080728Z",
+            "updated_at": "2023-12-11T12:03:02.761427Z",
+            "alerted_at": "2023-12-11T12:03:01.929Z",
+            "ingested_at": "2023-12-11T12:03:02.075068Z",
+            "external_source": "IDR ABA",
+            "external_id": "8818368a-a84f-4b3a-9ec9-7549e52f0753",
+            "organization": {
+              "id": "cf946362-0809-426d-987c-849bde704c16",
+              "name": "Dev Test",
+              "region": "us1",
+              "product_token": "375EA8EDACEB1603216A",
+              "customer_id": "f441fdc8-51a4-48fa-ad88-228a0d232a7f",
+              "customer_name": "Dev Test",
+              "flags": []
+            },
+            "title": "MVD Verification",
+            "type": "MVD Verification",
+            "rule": {
+              "rrn": "rrn:cba:::detection-rule:0MMNZYSO0K3Y",
+              "mitre_tcodes": [],
+              "version_rrn": "rrn:cba:::detection-rule:version:8WRIZW8IJTHJ"
+            },
+            "rule_matching_keys": [
+              {
+                "key": "entryType",
+                "values": [
+                  "ingress_auth"
+                ]
+              },
+              {
+                "key": "orgId",
+                "values": [
+                  "cf946362-0809-426d-987c-849bde704c16"
+                ]
+              }
+            ],
+            "rule_keys_of_interest": [
+              {
+                "key": "result",
+                "values": [
+                  "SUCCESS"
+                ]
+              },
+              {
+                "key": "account",
+                "values": [
+                  "sync_bos-sync-01_12f795c3c118@rapid7.onmicrosoft.com"
+                ]
+              },
+              {
+                "key": "geoip_country_code",
+                "values": [
+                  "US"
+                ]
+              },
+              {
+                "key": "source_ip",
+                "values": [
+                  "208.118.227.31"
+                ]
+              }
+            ],
+            "responsibility": "MDR",
+            "priority": "LOW",
+            "status": "OPEN",
+            "disposition": "UNDECIDED",
+            "investigation_rrn": "rrn:investigation:us:cf946362-0809-426d-987c-849bde704c16:investigation:B85TT6JKNSG0",
+            "tags": [],
+            "permissions": {
+              "canEdit": false
+            },
+            "fields": []
+          },
+          {
+            "rrn": "rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:01ca46f746ca314286913d18aff3e384",
+            "version": 6,
+            "created_at": "2023-12-11T11:58:00.869483Z",
+            "updated_at": "2023-12-11T12:05:01.0419Z",
+            "alerted_at": "2023-12-11T11:58:00.553Z",
+            "ingested_at": "2023-12-11T11:58:00.86374Z",
+            "external_source": "IDR ABA",
+            "external_id": "43dcc9bb-4712-49d7-ac19-0f6e06750844",
+            "organization": {
+              "id": "cf946362-0809-426d-987c-849bde704c16",
+              "name": "Dev Test",
+              "region": "us1",
+              "product_token": "375EA8EDACEB1603216A",
+              "customer_id": "f441fdc8-51a4-48fa-ad88-228a0d232a7f",
+              "customer_name": "Dev Test",
+              "flags": []
+            },
+            "title": "MVD Verification",
+            "type": "MVD Verification",
+            "rule": {
+              "rrn": "rrn:cba:::detection-rule:0MMNZYSO0K3Y",
+              "mitre_tcodes": [
+                "Credential Access",
+                "T1110"
+              ],
+              "version_rrn": "rrn:cba:::detection-rule:version:8WRIZW8IJTHJ"
+            },
+            "rule_matching_keys": [
+              {
+                "key": "entryType",
+                "values": [
+                  "ingress_auth"
+                ]
+              },
+              {
+                "key": "orgId",
+                "values": [
+                  "cf946362-0809-426d-987c-849bde704c16"
+                ]
+              }
+            ],
+            "rule_keys_of_interest": [
+              {
+                "key": "result",
+                "values": [
+                  "SUCCESS"
+                ]
+              },
+              {
+                "key": "geoip_country_code",
+                "values": [
+                  "US"
+                ]
+              },
+              {
+                "key": "account",
+                "values": [
+                  "sync_bos-sync-01_12f795c3c118@rapid7.onmicrosoft.com"
+                ]
+              },
+              {
+                "key": "source_ip",
+                "values": [
+                  "208.118.227.31"
+                ]
+              }
+            ],
+            "responsibility": "MDR",
+            "priority": "LOW",
+            "status": "OPEN",
+            "disposition": "UNDECIDED",
+            "investigation_rrn": "rrn:investigation:us:cf946362-0809-426d-987c-849bde704c16:investigation:B85TT6JKNSG0",
+            "tags": [],
+            "permissions": {
+              "canEdit": false
+            },
+            "fields": []
+          }
+        ],
+        "metadata": {
+          "index": 0,
+          "size": 2,
+          "items_in_index": 2,
+          "total_items": 8425,
+          "is_last_index": false
+        }
+      }
+    ],
+    [
+      "2020-06-01T12:11:13+05:30",
+      "2020-07-01T12:11:13+05:30",
+      "WHERE True",
+      [
+        {
+          "field_ids": [
+            "status"
+          ],
+          "operator": "NOT_EQUALS",
+          "terms": [
+            "OPEN"
+          ]
+        }
+      ],
+      [
+        {
+          "field_id": "status",
+          "order": "ASCENDING_NULLS_LAST"
+        }
+      ],
+      [
+        "status"
+      ],
+      [
+        {
+          "name": "name",
+          "type": "BUCKET",
+          "fields": [
+            {
+              "field_id": "status",
+              "order": "ASCENDING_NULLS_LAST"
+            }
+          ],
+          "count_order": "ASCENDING_NULLS_LAST"
+        }
+      ],
+      2,
+      0,
+      false,
+      {
+        "alerts": [
+          {
+            "rrn": "rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:a00310f9f9eb67edd8d3f365cdf4fb5a",
+            "version": 5,
+            "created_at": "2023-12-11T12:03:02.080728Z",
+            "updated_at": "2023-12-11T12:03:02.761427Z",
+            "alerted_at": "2023-12-11T12:03:01.929Z",
+            "ingested_at": "2023-12-11T12:03:02.075068Z",
+            "external_source": "IDR ABA",
+            "external_id": "8818368a-a84f-4b3a-9ec9-7549e52f0753",
+            "organization": {
+              "id": "cf946362-0809-426d-987c-849bde704c16",
+              "name": "Dev Test",
+              "region": "us1",
+              "product_token": "375EA8EDACEB1603216A",
+              "customer_id": "f441fdc8-51a4-48fa-ad88-228a0d232a7f",
+              "customer_name": "Dev Test",
+              "flags": []
+            },
+            "title": "MVD Verification",
+            "type": "MVD Verification",
+            "rule": {
+              "rrn": "rrn:cba:::detection-rule:0MMNZYSO0K3Y",
+              "mitre_tcodes": [],
+              "version_rrn": "rrn:cba:::detection-rule:version:8WRIZW8IJTHJ"
+            },
+            "rule_matching_keys": [
+              {
+                "key": "entryType",
+                "values": [
+                  "ingress_auth"
+                ]
+              },
+              {
+                "key": "orgId",
+                "values": [
+                  "cf946362-0809-426d-987c-849bde704c16"
+                ]
+              }
+            ],
+            "rule_keys_of_interest": [
+              {
+                "key": "result",
+                "values": [
+                  "SUCCESS"
+                ]
+              },
+              {
+                "key": "account",
+                "values": [
+                  "sync_bos-sync-01_12f795c3c118@rapid7.onmicrosoft.com"
+                ]
+              },
+              {
+                "key": "geoip_country_code",
+                "values": [
+                  "US"
+                ]
+              },
+              {
+                "key": "source_ip",
+                "values": [
+                  "208.118.227.31"
+                ]
+              }
+            ],
+            "responsibility": "MDR",
+            "priority": "LOW",
+            "status": "OPEN",
+            "disposition": "UNDECIDED",
+            "investigation_rrn": "rrn:investigation:us:cf946362-0809-426d-987c-849bde704c16:investigation:B85TT6JKNSG0",
+            "tags": [],
+            "permissions": {
+              "canEdit": false
+            },
+            "fields": []
+          },
+          {
+            "rrn": "rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:01ca46f746ca314286913d18aff3e384",
+            "version": 6,
+            "created_at": "2023-12-11T11:58:00.869483Z",
+            "updated_at": "2023-12-11T12:05:01.0419Z",
+            "alerted_at": "2023-12-11T11:58:00.553Z",
+            "ingested_at": "2023-12-11T11:58:00.86374Z",
+            "external_source": "IDR ABA",
+            "external_id": "43dcc9bb-4712-49d7-ac19-0f6e06750844",
+            "organization": {
+              "id": "cf946362-0809-426d-987c-849bde704c16",
+              "name": "Dev Test",
+              "region": "us1",
+              "product_token": "375EA8EDACEB1603216A",
+              "customer_id": "f441fdc8-51a4-48fa-ad88-228a0d232a7f",
+              "customer_name": "Dev Test",
+              "flags": []
+            },
+            "title": "MVD Verification",
+            "type": "MVD Verification",
+            "rule": {
+              "rrn": "rrn:cba:::detection-rule:0MMNZYSO0K3Y",
+              "mitre_tcodes": [
+                "Credential Access",
+                "T1110"
+              ],
+              "version_rrn": "rrn:cba:::detection-rule:version:8WRIZW8IJTHJ"
+            },
+            "rule_matching_keys": [
+              {
+                "key": "entryType",
+                "values": [
+                  "ingress_auth"
+                ]
+              },
+              {
+                "key": "orgId",
+                "values": [
+                  "cf946362-0809-426d-987c-849bde704c16"
+                ]
+              }
+            ],
+            "rule_keys_of_interest": [
+              {
+                "key": "result",
+                "values": [
+                  "SUCCESS"
+                ]
+              },
+              {
+                "key": "geoip_country_code",
+                "values": [
+                  "US"
+                ]
+              },
+              {
+                "key": "account",
+                "values": [
+                  "sync_bos-sync-01_12f795c3c118@rapid7.onmicrosoft.com"
+                ]
+              },
+              {
+                "key": "source_ip",
+                "values": [
+                  "208.118.227.31"
+                ]
+              }
+            ],
+            "responsibility": "MDR",
+            "priority": "LOW",
+            "status": "OPEN",
+            "disposition": "UNDECIDED",
+            "investigation_rrn": "rrn:investigation:us:cf946362-0809-426d-987c-849bde704c16:investigation:B85TT6JKNSG0",
+            "tags": [],
+            "permissions": {
+              "canEdit": false
+            },
+            "fields": []
+          }
+        ],
+        "metadata": {
+          "index": 0,
+          "size": 2,
+          "items_in_index": 2,
+          "total_items": 8425,
+          "is_last_index": false
+        }
+      }
+    ]
+  ]
+}

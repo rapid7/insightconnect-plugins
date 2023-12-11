@@ -1,0 +1,30 @@
+{
+  "parameters": [
+    [
+      "rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:1c961b2402751096126c72ca3e07d7d6",
+      1,
+      0,
+      {
+        "evidences": [
+          {
+            "created_at": "2023-12-04T13:59:06.768731Z",
+            "data": "{\"timestamp\":\"2023-12-04T13:44:56.000Z\",\"user\":\"sync_bos-sync-01_12f795c3c118@rapid7.onmicrosoft.com\",\"account\":\"sync_bos-sync-01_12f795c3c118@rapid7.onmicrosoft.com\",\"result\":\"SUCCESS\",\"source_ip\":\"208.118.227.31\",\"service\":\"o365\",\"geoip_city\":\"Boston\",\"geoip_country_code\":\"US\",\"geoip_country_name\":\"United States\",\"geoip_organization\":\"TowardEX Technologies International\",\"geoip_region\":\"MA\",\"source_json\":{\"CreationTime\":\"2023-12-04T13:44:56\",\"Id\":\"6c491569-e339-4e40-b6f9-97a540431300\",\"Operation\":\"UserLoggedIn\",\"OrganizationId\":\"52ec8a0a-dc28-4845-b421-6038854d679f\",\"RecordType\":15,\"ResultStatus\":\"Success\",\"UserKey\":\"fc1ecf5f-2a7e-427d-a59d-1d126c066623\",\"UserType\":0,\"Version\":1,\"Workload\":\"AzureActiveDirectory\",\"ClientIP\":\"208.118.227.31\",\"ObjectId\":\"00000002-0000-0000-c000-000000000000\",\"UserId\":\"Sync_BOS-SYNC-01_12f795c3c118@rapid7.onmicrosoft.com\",\"AzureActiveDirectoryEventType\":1,\"ExtendedProperties\":[{\"Name\":\"ResultStatusDetail\",\"Value\":\"Success\"},{\"Name\":\"UserAuthenticationMethod\",\"Value\":\"1\"},{\"Name\":\"RequestType\",\"Value\":\"OAuth2:Token\"}],\"ModifiedProperties\":[],\"Actor\":[{\"ID\":\"fc1ecf5f-2a7e-427d-a59d-1d126c066623\",\"Type\":0},{\"ID\":\"Sync_BOS-SYNC-01_12f795c3c118@rapid7.onmicrosoft.com\",\"Type\":5}],\"ActorContextId\":\"52ec8a0a-dc28-4845-b421-6038854d679f\",\"ActorIpAddress\":\"208.118.227.31\",\"InterSystemsId\":\"1bd394a5-be1b-4af3-a608-8ec6c73d5c02\",\"IntraSystemId\":\"6c491569-e339-4e40-b6f9-97a540431300\",\"SupportTicketId\":\"\",\"Target\":[{\"ID\":\"00000002-0000-0000-c000-000000000000\",\"Type\":0}],\"TargetContextId\":\"52ec8a0a-dc28-4845-b421-6038854d679f\",\"ApplicationId\":\"cb1056e2-e479-49de-ae31-7812af012ed8\",\"DeviceProperties\":[{\"Name\":\"OS\",\"Value\":\"Windows10\"},{\"Name\":\"BrowserType\",\"Value\":\"Other\"},{\"Name\":\"SessionId\",\"Value\":\"5332be79-b7d2-4af5-81e0-5649b444b638\"}],\"ErrorNumber\":\"0\"},\"custom_data\":{\"SourceRelative Url\":\"TargetContextId\",\"source_account\":\"RecordType\"},\"r7_context\":{\"user\":{\"type\":\"user\",\"rrn\":\"rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:user:SNSRC5KZ4DIS\",\"name\":\"sync_bos-sync-01_12f795c3c118@rapid7.onmicrosoft.com\"},\"account\":{\"type\":\"account\",\"rrn\":\"rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:account:WAC55J431YF0\",\"name\":\"sync_bos-sync-01_12f795c3c118@rapid7.onmicrosoft.com\"}}}",
+            "event_type": "ingress_auth",
+            "evented_at": "2023-12-04T13:59:06.349Z",
+            "external_source": "IDR ABA",
+            "rrn": "rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:evidence:1:83df94632d6f961b87fe24d261055d25",
+            "updated_at": "2023-12-04T13:59:06.768731Z",
+            "version": 1
+          }
+        ],
+        "metadata": {
+                "index": 0,
+                "is_last_index": true,
+                "items_in_index": 1,
+                "size": 1,
+                "total_items": 1
+            }
+        }
+    ]
+  ]
+}

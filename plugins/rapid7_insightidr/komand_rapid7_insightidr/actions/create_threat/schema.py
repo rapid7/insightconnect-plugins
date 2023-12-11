@@ -82,6 +82,7 @@ class CreateThreatOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
+    "rejected_indicators",
     "threat"
   ],
   "definitions": {
