@@ -3,8 +3,9 @@ import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from typing import Any, Dict
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from icon_servicenow.actions.get_security_incident import GetSecurityIncident
 from icon_servicenow.actions.get_security_incident.schema import GetSecurityIncidentOutput
@@ -15,7 +16,8 @@ from parameterized import parameterized
 from util import Util
 
 
-@patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
+@patch("requests.get", side_effect=Util.mocked_requests)
+@patch("requests.post", side_effect=Util.mocked_requests)
 class TestGetSecurityIncident(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -30,7 +32,14 @@ class TestGetSecurityIncident(TestCase):
             ],
         ]
     )
-    def test_get_security_incident(self, mock_request, test_name, input_params, expected):
+    def test_get_security_incident(
+        self,
+        mock_get: MagicMock,
+        mock_post: MagicMock,
+        test_name: str,
+        input_params: Dict[str, Any],
+        expected: Dict[str, Any],
+    ) -> None:
         actual = self.action.run(input_params)
         validate(actual, GetSecurityIncidentOutput.schema)
         self.assertDictEqual(actual, expected)
@@ -45,7 +54,15 @@ class TestGetSecurityIncident(TestCase):
             ],
         ]
     )
-    def test_get_security_incident_raise_exception(self, mock_request, test_name, input_params, cause, assistance):
+    def test_get_security_incident_raise_exception(
+        self,
+        mock_get: MagicMock,
+        mock_post: MagicMock,
+        test_name: str,
+        input_params: Dict[str, Any],
+        cause: str,
+        assistance: str,
+    ) -> None:
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)
