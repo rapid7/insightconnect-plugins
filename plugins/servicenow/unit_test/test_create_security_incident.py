@@ -15,7 +15,7 @@ from parameterized import parameterized
 from util import Util
 
 
-@patch("requests.sessions.Session.post", side_effect=Util.mocked_requests)
+@patch("requests.post", side_effect=Util.mocked_requests)
 class TestCreateSecurityIncident(TestCase):
     @classmethod
     def setUpClass(cls) -> None:

@@ -4,7 +4,9 @@ import json
 
 
 class Input:
+    CLIENT_ID = "client_id"
     CLIENT_LOGIN = "client_login"
+    CLIENT_SECRET = "client_secret"
     INSTANCE = "instance"
     TIMEOUT = "timeout"
 
@@ -15,11 +17,23 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "client_id": {
+      "type": "string",
+      "title": "OAuth Client ID",
+      "description": "Client ID for an application within your application registry",
+      "order": 3
+    },
     "client_login": {
       "$ref": "#/definitions/credential_username_password",
       "title": "Client Login Information",
       "description": "The ServiceNow username and password for basic authentication API interaction",
       "order": 2
+    },
+    "client_secret": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "OAuth Client Secret",
+      "description": "Client secret for an application within your application registry",
+      "order": 4
     },
     "instance": {
       "type": "string",
@@ -32,7 +46,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "Timeout",
       "description": "The interval in seconds before abandoning an attempt to access ServiceNow",
       "default": 30,
-      "order": 3
+      "order": 5
     }
   },
   "required": [
@@ -65,6 +79,24 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
         "username",
         "password"
       ]
+    },
+    "credential_secret_key": {
+      "id": "credential_secret_key",
+      "type": "object",
+      "title": "Credential: Secret Key",
+      "description": "A shared secret key",
+      "required": [
+        "secretKey"
+      ],
+      "properties": {
+        "secretKey": {
+          "type": "string",
+          "title": "Secret Key",
+          "description": "The shared secret key",
+          "format": "password",
+          "displayType": "password"
+        }
+      }
     }
   }
 }
