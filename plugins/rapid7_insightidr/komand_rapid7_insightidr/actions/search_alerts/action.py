@@ -20,7 +20,7 @@ class SearchAlerts(insightconnect_plugin_runtime.Action):
             output=SearchAlertsOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}): # noqa MC0001
         input_start_time = params.get(Input.START_TIME)
         input_end_time = params.get(Input.END_TIME)
 
