@@ -11,7 +11,7 @@ from komand_rapid7_insightidr.actions.search_alerts.schema import (
     SearchAlertsOutput,
 )
 from util import Util
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
@@ -26,19 +26,19 @@ class TestSearchAlerts(TestCase):
     @parameterized.expand(Util.load_parameters("search_alerts").get("parameters"))
     def test_search_alerts(
         self,
-        mock_request,
-        start_time,
-        end_time,
-        leql,
-        terms,
-        sorts,
-        field_ids,
-        aggregates,
-        size,
-        index,
-        rrns_only,
-        expected,
-    ):
+        mock_request: MagicMock,
+        start_time: str,
+        end_time: str,
+        leql: str,
+        terms: list,
+        sorts: list,
+        field_ids: list,
+        aggregates: list,
+        size: int,
+        index: int,
+        rrns_only: bool,
+        expected: dict,
+    ) -> None:
         test_input = {
             Input.START_TIME: start_time,
             Input.END_TIME: end_time,
@@ -57,7 +57,7 @@ class TestSearchAlerts(TestCase):
         validate(actual, SearchAlertsInput.schema)
 
     @parameterized.expand(Util.load_parameters("search_alerts_bad_times").get("parameters"))
-    def test_search_alerts_bad_times(self, mock_request, start_time, end_time, cause, assistance):
+    def test_search_alerts_bad_times(self, mock_request: MagicMock, start_time: str, end_time: str, cause: str, assistance: str) -> None:
         test_input = {Input.START_TIME: start_time, Input.END_TIME: end_time}
         validate(test_input, SearchAlertsInput.schema)
         with self.assertRaises(PluginException) as error:

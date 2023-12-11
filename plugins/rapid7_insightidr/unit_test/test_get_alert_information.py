@@ -11,7 +11,7 @@ from komand_rapid7_insightidr.actions.get_alert_information.schema import (
     GetAlertInformationOutput,
 )
 from util import Util
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
@@ -24,7 +24,7 @@ class TestGetAlertInformation(TestCase):
         cls.action = Util.default_connector(GetAlertInformation())
 
     @parameterized.expand(Util.load_parameters("get_alert_information").get("parameters"))
-    def test_get_alert_information(self, mock_request, alert_rrn, expected):
+    def test_get_alert_information(self, mock_request: MagicMock, alert_rrn: str, expected: dict) -> None:
         test_input = {Input.ALERT_RRN: alert_rrn}
         validate(test_input, GetAlertInformationInput.schema)
         actual = self.action.run(test_input)
@@ -32,7 +32,7 @@ class TestGetAlertInformation(TestCase):
         validate(actual, GetAlertInformationOutput.schema)
 
     @parameterized.expand(Util.load_parameters("get_alert_information_not_found").get("parameters"))
-    def test_get_alert_information_bad(self, mock_request, alert_rrn, cause, assistance):
+    def test_get_alert_information_bad(self, mock_request: MagicMock, alert_rrn: str, cause: str, assistance: str) -> None:
         test_input = {Input.ALERT_RRN: alert_rrn}
         validate(test_input, GetAlertInformationInput.schema)
         with self.assertRaises(PluginException) as error:

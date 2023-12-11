@@ -1481,8 +1481,7 @@ Example output:
 
 #### Get User Information
   
-This action is used to get information from an user by RRN. The RRN determines which user the information is retrieved 
-from
+This action is used to get information from an user by RRN. The RRN determines which user the information is retrieved from
 
 ##### Input
 
@@ -2739,8 +2738,7 @@ Example output:
 
 # Version History
 
-* 9.0.0 - New actions added `Get Alert Information`, `Search Alerts`, `Retrieve Evidence for a Single Alert` and `Retrieve Actors for a Single Alert`
-* 8.0.0 - Update schema for `Investigation` and `Statistics` | Update dependency for aiohttp
+* 8.0.0 - Update schema for `Investigation` and `Statistics` | Update dependency for aiohttp | New actions added `Get Alert Information`, `Search Alerts`, `Retrieve Evidence for a Single Alert` and `Retrieve Actors for a Single Alert`
 * 7.0.0 - Action: `Advanced Query On Log Set` - Fixed error where statistical queries would always return 0.0 | Action: `Advanced Query On Log Set` - Increase the maximum results returned from 50 to 500 |  Action: `Advanced Query On Log` - Add new output type for statistical queries | Updated schemas to ensure all are correct and added new schema validation to unit tests
 * 6.0.1 - Action: `Advanced Query On Log` - Increase the maximum results returned from 50 to 500
 * 6.0.0 - Action: `Advanced Query On Log Set` - Add new output type for statistical queries.
