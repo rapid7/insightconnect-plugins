@@ -32,7 +32,7 @@ class GetAlertEvidence(insightconnect_plugin_runtime.Action):
             try:
                 evidence["data"] = json.loads(evidence.get("data", ""))
             except Exception as e:
-                self.logger.warning("data could not be convert to json - {e}")
+                self.logger.warning(f"data could not be convert to json - {e}")
                 evidence["data"] = {}
 
         return {Output.EVIDENCES: response.get("evidences", []), Output.METADATA: response.get("metadata", {})}
