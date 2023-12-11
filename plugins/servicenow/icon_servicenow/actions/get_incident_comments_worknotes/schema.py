@@ -125,16 +125,16 @@ class GetIncidentCommentsWorknotesOutput(insightconnect_plugin_runtime.Output):
           "order": 8
         }
       },
-    "required": [
-      "element",
-      "element_id",
-      "name",
-      "sys_created_by",
-      "sys_created_on",
-      "sys_id",
-      "sys_tags",
-      "value"
-    ]
+      "required": [
+        "element",
+        "element_id",
+        "name",
+        "sys_created_by",
+        "sys_created_on",
+        "sys_id",
+        "sys_tags",
+        "value"
+      ]
     }
   }
 }
