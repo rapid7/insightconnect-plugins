@@ -4,8 +4,8 @@ products: [ insightconnect ]
 name: automox
 title: Automox
 description: Automox is modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment
-version: 2.0.0
-supported_versions: [ "All as of 10/09/2023" ]
+version: 2.0.1
+supported_versions: [ "All as of 12/07/2023" ]
 vendor: automox
 support: partner
 status: [ ]

@@ -1,99 +1,99 @@
 {
-	"spec": "84465fc424dd87682adc6d0da7f322a9",
-	"manifest": "94f36a373309335d3662554011095836",
-	"setup": "791ef98d183f0b13d81b774b3de1a398",
+	"spec": "9568d1672afd7612097c1bd60bf34cf2",
+	"manifest": "06283d5ccfb93d0cd35dd650f5eca4dc",
+	"setup": "eacad8f2fb3e8fa34b56fb7ffc386de1",
 	"schemas": [
 		{
 			"identifier": "create_group/schema.py",
-			"hash": "b30f9e829c46827c90d201b294ecf048"
+			"hash": "81b137c97d9fe0dfc4f0f2b6e08f9b26"
 		},
 		{
 			"identifier": "delete_device/schema.py",
-			"hash": "7252543ff89a21c3b0d08c9332072216"
+			"hash": "0513b17fb1b2bb2adc59b79763a9e49d"
 		},
 		{
 			"identifier": "delete_group/schema.py",
-			"hash": "66b18c900b75652494434b68687062c3"
+			"hash": "3b774214f028653ed1325430a0d46c61"
 		},
 		{
 			"identifier": "delete_vulnerability_sync_action_set/schema.py",
-			"hash": "c572818adf8aa5b2663a99a676af543d"
+			"hash": "9aa1bdd2a5374d3a3779d4d577338610"
 		},
 		{
 			"identifier": "execute_vulnerability_sync_actions/schema.py",
-			"hash": "7575fcc4876accb8b39938cb9ec17514"
+			"hash": "7644e63c110c037112cc782056de8bcd"
 		},
 		{
 			"identifier": "get_device_by_hostname/schema.py",
-			"hash": "13226c5058256e3368c7392eaad8b64d"
+			"hash": "759749e4cb3ea9b1999dc58bc40c7061"
 		},
 		{
 			"identifier": "get_device_by_ip/schema.py",
-			"hash": "67c49b74d1f44594cf7a3ede74806cd2"
+			"hash": "0140aa44e44dc9d373e9a68ed5144cac"
 		},
 		{
 			"identifier": "get_device_software/schema.py",
-			"hash": "42d9b8777f46e6709a38cf4faf40633c"
+			"hash": "a970a8f9834967d788849d73ae5bace8"
 		},
 		{
 			"identifier": "get_vulnerability_sync_action_set/schema.py",
-			"hash": "818d5308aca1e2a9c99393d07a084b73"
+			"hash": "379392ba255f37548efd1c84d3ed444f"
 		},
 		{
 			"identifier": "list_devices/schema.py",
-			"hash": "83c0764298f9f5e863b4a3f7a9220825"
+			"hash": "e598a778b562b78aa9ac15333ec47471"
 		},
 		{
 			"identifier": "list_groups/schema.py",
-			"hash": "6ac01c94ddaf20449508d017f1a04782"
+			"hash": "053417dbaad387c7d80d171ff61a6f9c"
 		},
 		{
 			"identifier": "list_organization_users/schema.py",
-			"hash": "29e203b2b3ee3b830270c31f18bba337"
+			"hash": "ce9de5a79e02c3ec5e24cf63f20e8a68"
 		},
 		{
 			"identifier": "list_organizations/schema.py",
-			"hash": "083009db9c1309a7857d1e32f17b1db2"
+			"hash": "0d0faac4a88bfe181b841912db826c0b"
 		},
 		{
 			"identifier": "list_policies/schema.py",
-			"hash": "b8d3145226dcf46c7cf14ef0d71e78cd"
+			"hash": "5aba068de4276ab695c20117e9aa8a21"
 		},
 		{
 			"identifier": "list_vulnerability_sync_action_set_issues/schema.py",
-			"hash": "473e78302dc489953559411691330fd9"
+			"hash": "4d73117344fec34cfdec56ba9a35271d"
 		},
 		{
 			"identifier": "list_vulnerability_sync_action_set_solutions/schema.py",
-			"hash": "067fc017cdf8fbfdfae8834db77970c5"
+			"hash": "10fde9a8a71e980b2c385e4f2620e46d"
 		},
 		{
 			"identifier": "list_vulnerability_sync_action_sets/schema.py",
-			"hash": "e9b02d295c7cb84f3dccda85d0c82bb2"
+			"hash": "0005c51c207b1dd44a7c55b6e664b0c0"
 		},
 		{
 			"identifier": "run_command/schema.py",
-			"hash": "7ec1d13886d92db883cf5998ef7aae37"
+			"hash": "9d3bdcab4dacc1775516dc8ffc47be72"
 		},
 		{
 			"identifier": "update_device/schema.py",
-			"hash": "d15b753b7c482fc343b7e83dcb57b141"
+			"hash": "381a68534e71bbd589b7a93bfa6c9099"
 		},
 		{
 			"identifier": "update_group/schema.py",
-			"hash": "fd58d139485852da2d25119b23088790"
+			"hash": "83aa813eba495593e0823a1707a0237a"
 		},
 		{
 			"identifier": "upload_vulnerability_sync_file/schema.py",
-			"hash": "e6577f542f46a5035c6423bbff4bcbb5"
+			"hash": "f77e323a5cf61d1068759a58477b60f7"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "157c1e850bcde539eb34b4a19d79f79e"
+			"hash": "dafff541b370bfbe8c28d6f16ac0d746"
 		},
 		{
 			"identifier": "get_events/schema.py",
-			"hash": "cdb877b9a9c4db1c9a42bc9296aa2b34"
+			"hash": "323400e42206a584d38d06d728bfc986"
 		}
 	]
 }
