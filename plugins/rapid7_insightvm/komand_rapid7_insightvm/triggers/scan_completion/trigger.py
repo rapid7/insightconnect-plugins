@@ -57,7 +57,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                         Output.ASSET_ID: item.get("asset_id"),
                         Output.IP: item.get("ip_address"),
                         Output.HOSTNAME: item.get("hostname"),
-                        Output.VULNERABILITY_INFO: item.get("vuln_info"),
+                        Output.VULNERABILITY_INFO: item.get("vulnerability_info"),
                     }
                 )
 
@@ -107,15 +107,11 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                 assistance=f"Exception returned was {error}",
             )
 
-        results = []
-
+        results_dict = {}
         for row in csv_report:
-            new_row = Util.filter_results(params, row)
-            if new_row:
-                results.append(new_row)
+            results_dict = Util.filter_results(params, row, results_dict)
 
-        results = Util.condense_results(results)
-        return results
+        return list(results_dict.values())
 
     def find_latest_completed_scan(self, site_id: str, cached: bool) -> int:
         """
@@ -184,12 +180,13 @@ class Cache:
 
 class Util:
     @staticmethod
-    def filter_results(params: dict, csv_row: dict):
+    def filter_results(params: dict, csv_row: dict, results: dict) -> Union[None, dict]:
         """
         Filter the outputted results based on the user inputs.
 
         :param params: Input params
         :param csv_row: Dict row of the csv results
+        :param results: New object to append results to
 
         :return: New object containing only the necessary fields for the required output.
         """
@@ -203,20 +200,25 @@ class Util:
         cvss_score = params.get(Input.CVSS_SCORE, None)
         severity = params.get(Input.SEVERITY, None)
 
-        try:
-            new_dct = {
-                "asset_id": int(csv_row.get("asset_id", 0)),
-                "ip_address": csv_row.get("ip_address", ""),
-                "hostname": csv_row.get("host_name", ""),
-                "vulnerability_id": csv_row.get("vulnerability_id", ""),
-                "nexpose_id": csv_row.get("nexpose_id", ""),
-                "cvss_v3_score": csv_row.get("cvss_v3_score", 0),
-                "severity": csv_row.get("severity", ""),
-                "solution_id": Util.strip_msft_id(csv_row.get("solution_id", "")),
-                "solution_summary": csv_row.get("summary", ""),
-            }
-        except KeyError as error:
-            raise PluginException(cause="Unable to filter results.", assistance=f"Error: {error}")
+        # We retrieve this separately because we use it as a unique identifier for
+        # the filtering process
+        asset_id = int(csv_row.get("asset_id", 0))
+
+        new_dict = {
+            "asset_id": asset_id,
+            "ip_address": csv_row.get("ip_address", ""),
+            "hostname": csv_row.get("host_name", ""),
+            "vulnerability_info": [
+                {
+                    "vulnerability_id": csv_row.get("vulnerability_id", ""),
+                    "nexpose_id": csv_row.get("nexpose_id", ""),
+                    "cvss_v3_score": csv_row.get("cvss_v3_score", 0),
+                    "severity": csv_row.get("severity", ""),
+                    "solution_id": Util.strip_msft_id(csv_row.get("solution_id", "")),
+                    "solution_summary": csv_row.get("summary", ""),
+                }
+            ],
+        }
 
         # If an input and it is not found, return None in place of the row to filter
         # out the result
@@ -235,32 +237,15 @@ class Util:
         if severity and severity not in csv_row.get("severity", ""):
             return None
         # Otherwise, return the newly filtered result.
+
+        existing_asset_id = results.get(asset_id, None)
+
+        if existing_asset_id:
+            existing_asset_id["vulnerability_info"] += new_dict["vulnerability_info"]
         else:
-            return new_dct
+            results[asset_id] = new_dict
 
-    @staticmethod
-    def condense_results(results: list):
-        """
-        Helper method to condense vulnerability info into a nested object for the 'vulnerability info' key
-        within the original objects.
-
-        :param results:
-        :return:
-        """
-        merge_keys = ("asset_id", "ip_address", "hostname")
-        dct = {}
-        new_results = []
-
-        for element in results:
-            key = tuple(element[key_] for key_ in merge_keys)
-            partial_element = {key_: value_ for key_, value_ in element.items() if key_ not in merge_keys}
-            dct.setdefault(key, []).append(partial_element)
-
-        for key, value in dct.items():
-            entry = dict(zip(merge_keys, key))
-            entry["vuln_info"] = value
-            new_results.append(entry)
-        return new_results
+        return results
 
     @staticmethod
     def strip_msft_id(solution_id: str) -> str:

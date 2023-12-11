@@ -4540,7 +4540,6 @@ triggers:
           - Severe
           - Critical
         example: Severe
-      # Include vulnerability information to filter by | cvss_v3 / criticality / category of vuln (source) /
     output:
       asset_id:
         title: Asset ID
