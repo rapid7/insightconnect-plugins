@@ -5,10 +5,12 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest.mock import patch
 from komand_sentinelone.actions.mark_as_benign import MarkAsBenign
+from komand_sentinelone.actions.mark_as_benign.schema import MarkAsBenignOutput
 from util import Util
 from unittest import TestCase
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mocked_requests_get)
@@ -40,6 +42,7 @@ class TestMarkAsBenign(TestCase):
     def test_mark_as_benign(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(expected, actual)
+        validate(actual, MarkAsBenignOutput.schema)
 
     @parameterized.expand(
         [

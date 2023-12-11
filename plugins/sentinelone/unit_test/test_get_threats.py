@@ -56,7 +56,7 @@ class TestGetThreats(TestCase):
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
     def test_get_threats(self, mock_request, mock_send):
-        self.action.run(
+        actual = self.action.run(
             {
                 Input.FREQUENCY: 5,
                 Input.RESOLVED: True,

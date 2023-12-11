@@ -7,8 +7,10 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest.mock import patch
 from komand_sentinelone.actions.name_available import NameAvailable
+from komand_sentinelone.actions.name_available.schema import NameAvailableOutput
 from util import Util
 from unittest import TestCase
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mocked_requests_get)
@@ -35,3 +37,4 @@ class TestNameAvailable(TestCase):
     def test_name_available(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
+        validate(actual, NameAvailableOutput.schema)

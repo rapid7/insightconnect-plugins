@@ -5,9 +5,11 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest.mock import patch
 from komand_sentinelone.actions.search_agents import SearchAgents
+from komand_sentinelone.actions.search_agents.schema import SearchAgentsOutput
 from util import Util
 from unittest import TestCase
 from parameterized import parameterized
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mocked_requests_get)
@@ -49,3 +51,4 @@ class TestSearchAgents(TestCase):
     def test_search_agents(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertDictEqual(expected, actual)
+        validate(actual, SearchAgentsOutput.schema)

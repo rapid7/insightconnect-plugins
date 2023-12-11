@@ -6,9 +6,11 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 from komand_sentinelone.actions.quarantine import Quarantine
+from komand_sentinelone.actions.quarantine.schema import QuarantineOutput
 from util import Util
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mocked_requests_get)
@@ -45,6 +47,7 @@ class TestQuarantine(TestCase):
     def test_quarantine(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(expected, actual)
+        validate(actual, QuarantineOutput.schema)
 
     @parameterized.expand(
         [
