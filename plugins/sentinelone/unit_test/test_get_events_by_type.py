@@ -5,10 +5,12 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest.mock import patch
 from komand_sentinelone.actions.get_events_by_type import GetEventsByType
+from komand_sentinelone.actions.get_events_by_type.schema import GetEventsByTypeOutput
 from util import Util
 from unittest import TestCase
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mocked_requests_get)
@@ -40,6 +42,7 @@ class TestGetEventsByType(TestCase):
     def test_get_events_by_type(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertDictEqual(expected, actual)
+        validate(actual, GetEventsByTypeOutput.schema)
 
     @parameterized.expand(
         [
@@ -52,8 +55,8 @@ class TestGetEventsByType(TestCase):
             [
                 "invalid_sub_query",
                 Util.read_file_to_dict("inputs/get_events_by_type_invalid_sub_query.json.inp"),
-                PluginException.causes[PluginException.Preset.SERVER_ERROR],
-                PluginException.assistances[PluginException.Preset.SERVER_ERROR],
+                PluginException.causes[PluginException.Preset.SERVICE_UNAVAILABLE],
+                PluginException.assistances[PluginException.Preset.SERVICE_UNAVAILABLE],
             ],
         ]
     )

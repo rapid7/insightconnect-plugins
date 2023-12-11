@@ -6,8 +6,10 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 from komand_sentinelone.actions.move_between_sites import MoveBetweenSites
+from komand_sentinelone.actions.move_between_sites.schema import MoveBetweenSitesOutput
 from util import Util
 from parameterized import parameterized
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mocked_requests_get)
@@ -34,3 +36,4 @@ class TestMoveBetweenSites(TestCase):
     def test_agents_action(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(expected, actual)
+        validate(actual, MoveBetweenSitesOutput.schema)

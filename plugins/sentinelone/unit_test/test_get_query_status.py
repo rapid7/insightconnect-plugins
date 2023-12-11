@@ -6,9 +6,11 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 from komand_sentinelone.actions.get_query_status import GetQueryStatus
+from komand_sentinelone.actions.get_query_status.schema import GetQueryStatusOutput
 from util import Util
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mocked_requests_get)
@@ -30,6 +32,7 @@ class TestGetQueryStatus(TestCase):
     def test_get_query_status(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(expected, actual)
+        validate(actual, GetQueryStatusOutput.schema)
 
     @parameterized.expand(
         [

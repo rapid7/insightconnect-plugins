@@ -7,9 +7,11 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest.mock import patch
 from komand_sentinelone.actions.threats_fetch_file import ThreatsFetchFile
+from komand_sentinelone.actions.threats_fetch_file.schema import ThreatsFetchFileOutput
 from insightconnect_plugin_runtime.exceptions import PluginException
 from util import Util
 from unittest import TestCase
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mocked_requests_get)
@@ -36,6 +38,7 @@ class TestThreatsFetchFile(TestCase):
     def test_threats_fetch_file(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
+        validate(actual, ThreatsFetchFileOutput.schema)
 
     @parameterized.expand(
         [

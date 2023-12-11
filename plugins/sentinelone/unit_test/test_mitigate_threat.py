@@ -8,8 +8,10 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest.mock import patch
 from komand_sentinelone.actions.mitigate_threat import MitigateThreat
+from komand_sentinelone.actions.mitigate_threat.schema import MitigateThreatOutput
 from util import Util
 from unittest import TestCase
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mocked_requests_get)
@@ -51,6 +53,7 @@ class TestMitigateThreat(TestCase):
     def test_mitigate_threat(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
+        validate(actual, MitigateThreatOutput.schema)
 
     @parameterized.expand(
         [
