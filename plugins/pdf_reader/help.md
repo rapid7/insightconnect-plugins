@@ -82,7 +82,7 @@ This plugin does not contain any troubleshooting information.
 # Links
 
 * This plugin is based on pdfplumber. [pdfplumber](https://pypi.org/project/pdfplumber/)
-* 
+
 ## References
 
 * [pdfplumber](https://pypi.org/project/pdfplumber/)
