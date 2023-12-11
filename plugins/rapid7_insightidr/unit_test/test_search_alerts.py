@@ -57,7 +57,9 @@ class TestSearchAlerts(TestCase):
         validate(actual, SearchAlertsInput.schema)
 
     @parameterized.expand(Util.load_parameters("search_alerts_bad_times").get("parameters"))
-    def test_search_alerts_bad_times(self, mock_request: MagicMock, start_time: str, end_time: str, cause: str, assistance: str) -> None:
+    def test_search_alerts_bad_times(
+        self, mock_request: MagicMock, start_time: str, end_time: str, cause: str, assistance: str
+    ) -> None:
         test_input = {Input.START_TIME: start_time, Input.END_TIME: end_time}
         validate(test_input, SearchAlertsInput.schema)
         with self.assertRaises(PluginException) as error:

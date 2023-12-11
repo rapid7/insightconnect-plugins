@@ -19,10 +19,9 @@ class GetAlertActors(insightconnect_plugin_runtime.Action):
         alert_rrn = params.get(Input.ALERT_RRN)
         self.connection.session.headers["Accept-version"] = "strong-force-preview"
         request = ResourceHelper(self.connection.session, self.logger)
-        params = {
-            "size": params.get(Input.SIZE),
-            "index": params.get(Input.INDEX)
-        }
+        params = {"size": params.get(Input.SIZE), "index": params.get(Input.INDEX)}
         self.logger.info(f"Getting the alert actors for {alert_rrn}...")
-        response = request.make_request(Alerts.get_alert_actor(self.connection.url, alert_rrn), method="get", params=params)
+        response = request.make_request(
+            Alerts.get_alert_actor(self.connection.url, alert_rrn), method="get", params=params
+        )
         return {Output.ACTORS: response.get("actors", []), Output.METADATA: response.get("metadata", {})}

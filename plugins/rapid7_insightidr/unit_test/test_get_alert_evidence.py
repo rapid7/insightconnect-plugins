@@ -32,7 +32,9 @@ class TestGetAlertEvidences(TestCase):
         validate(actual, GetAlertEvidenceOutput.schema)
 
     @parameterized.expand(Util.load_parameters("get_alert_evidence").get("parameters"))
-    def test_get_alert_evidence(self, mock_request: MagicMock, alert_rrn: str, size: int, index: int, expected: dict) -> None:
+    def test_get_alert_evidence(
+        self, mock_request: MagicMock, alert_rrn: str, size: int, index: int, expected: dict
+    ) -> None:
         test_input = {Input.ALERT_RRN: alert_rrn, Input.SIZE: size, Input.INDEX: index}
         validate(test_input, GetAlertEvidenceInput.schema)
         actual = self.action.run(test_input)
@@ -40,7 +42,7 @@ class TestGetAlertEvidences(TestCase):
         validate(actual, GetAlertEvidenceOutput.schema)
 
     @parameterized.expand(Util.load_parameters("get_alert_evidence_not_found").get("parameters"))
-    def test_get_alert_evidence_bad(self, mock_request: MagicMock , alert_rrn: str, cause: str, assistance: str) -> None:
+    def test_get_alert_evidence_bad(self, mock_request: MagicMock, alert_rrn: str, cause: str, assistance: str) -> None:
         test_input = {Input.ALERT_RRN: alert_rrn}
         validate(test_input, GetAlertEvidenceInput.schema)
         with self.assertRaises(PluginException) as error:

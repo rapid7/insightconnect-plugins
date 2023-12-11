@@ -24,7 +24,7 @@ class TestGetAlertActors(TestCase):
         cls.action = Util.default_connector(GetAlertActors())
 
     @parameterized.expand(Util.load_parameters("get_alert_actors_minimum").get("parameters"))
-    def test_get_alert_actors_minimum(self, mock_request: MagicMock, alert_rrn: str, expected:dict) -> None:
+    def test_get_alert_actors_minimum(self, mock_request: MagicMock, alert_rrn: str, expected: dict) -> None:
         test_input = {Input.ALERT_RRN: alert_rrn}
         validate(test_input, GetAlertActorsInput.schema)
         actual = self.action.run(test_input)
@@ -32,7 +32,9 @@ class TestGetAlertActors(TestCase):
         validate(actual, GetAlertActorsOutput.schema)
 
     @parameterized.expand(Util.load_parameters("get_alert_actors").get("parameters"))
-    def test_get_alert_actors(self, mock_request: MagicMock, alert_rrn: str, size: int, index: int, expected: dict) -> None:
+    def test_get_alert_actors(
+        self, mock_request: MagicMock, alert_rrn: str, size: int, index: int, expected: dict
+    ) -> None:
         test_input = {Input.ALERT_RRN: alert_rrn, Input.SIZE: size, Input.INDEX: index}
         validate(test_input, GetAlertActorsInput.schema)
         actual = self.action.run(test_input)
