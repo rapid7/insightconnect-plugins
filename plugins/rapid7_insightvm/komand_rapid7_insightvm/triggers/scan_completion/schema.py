@@ -10,9 +10,11 @@ class Component:
 class Input:
     ASSET_GROUP = "asset_group"
     CVE = "cve"
+    CVSS_SCORE = "cvss_score"
     HOSTNAME = "hostname"
     INTERVAL = "interval"
     IP_ADDRESS = "ip_address"
+    SEVERITY = "severity"
     SITE_ID = "site_id"
     SOURCE = "source"
 
@@ -42,6 +44,12 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
       "description": "CVE",
       "order": 6
     },
+    "cvss_score": {
+      "type": "integer",
+      "title": "CVSS V3 Score",
+      "description": "A vulneravility score from 1-10. Only those with a score equal to or above the input will be shown.",
+      "order": 8
+    },
     "hostname": {
       "type": "string",
       "title": "Hostname",
@@ -60,6 +68,17 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
       "title": "IP Address",
       "description": "IP Address",
       "order": 5
+    },
+    "severity": {
+      "type": "string",
+      "title": "Severity",
+      "description": "Severity of the vulnerability",
+      "enum": [
+        "Moderate",
+        "Severe",
+        "Critical"
+      ],
+      "order": 9
     },
     "site_id": {
       "type": "string",

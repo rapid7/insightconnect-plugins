@@ -162,7 +162,7 @@ class ScanQueries:
         """
 
         return (
-            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dvr.source, daga.asset_group_id, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id "  # nosec B608
+            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dv.cvss_v3_score, dvr.source, daga.asset_group_id, da.host_name, da.ip_address, dss.solution_id, dss.summary, dv.nexpose_id "  # nosec B608
             f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
             f"JOIN dim_asset_group_asset AS daga ON (fasvi.asset_id = daga.asset_id) "
             f"JOIN dim_asset AS da ON (fasvi.asset_id = da.asset_id) "
@@ -200,31 +200,39 @@ class Util:
         hostname = params.get(Input.HOSTNAME, None)
         source = params.get(Input.SOURCE, None)
         ip_address = params.get(Input.IP_ADDRESS, None)
+        cvss_score = params.get(Input.CVSS_SCORE, None)
+        severity = params.get(Input.SEVERITY, None)
 
         try:
             new_dct = {
-                "asset_id": int(csv_row["asset_id"]),
-                "ip_address": csv_row["ip_address"],
-                "hostname": csv_row["host_name"],
-                "vulnerability_id": csv_row["vulnerability_id"],
-                "nexpose_id": csv_row["nexpose_id"],
+                "asset_id": int(csv_row.get("asset_id", 0)),
+                "ip_address": csv_row.get("ip_address", ""),
+                "hostname": csv_row.get("host_name", ""),
+                "vulnerability_id": csv_row.get("vulnerability_id", ""),
+                "nexpose_id": csv_row.get("nexpose_id", ""),
+                "cvss_v3_score": csv_row.get("cvss_v3_score", 0),
+                "severity": csv_row.get("severity", ""),
                 "solution_id": Util.strip_msft_id(csv_row.get("solution_id", "")),
-                "solution_summary": csv_row["summary"],
+                "solution_summary": csv_row.get("summary", ""),
             }
         except KeyError as error:
             raise PluginException(cause="Unable to filter results.", assistance=f"Error: {error}")
 
         # If an input and it is not found, return None in place of the row to filter
         # out the result
-        if asset_group and asset_group not in csv_row["asset_group_id"]:
+        if asset_group and asset_group not in csv_row.get("asset_group_id", ""):
             return None
-        if cve and cve not in csv_row["nexpose_id"]:
+        if cve and cve not in csv_row.get("nexpose_id", ""):
             return None
-        if hostname and hostname not in csv_row["host_name"]:
+        if hostname and hostname not in csv_row.get("host_name", ""):
             return None
-        if source and source not in csv_row["source"]:
+        if source and source not in csv_row.get("source", ""):
             return None
-        if ip_address and ip_address not in csv_row["ip_address"]:
+        if ip_address and ip_address not in csv_row.get("ip_address", ""):
+            return None
+        if cvss_score and cvss_score not in csv_row.get("cvss_v3_score", ""):
+            return None
+        if severity and severity not in csv_row.get("severity", ""):
             return None
         # Otherwise, return the newly filtered result.
         else:
