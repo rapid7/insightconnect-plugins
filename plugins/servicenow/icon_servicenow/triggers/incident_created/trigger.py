@@ -31,9 +31,9 @@ class IncidentCreated(insightconnect_plugin_runtime.Trigger):
         incidents = [
             (result.get("sys_created_on"), result.get("sys_id"))
             for result in results
-            if result.get("sys_created_on") is not None
+            if isinstance(result, dict)
+            and result.get("sys_created_on") is not None
             and result.get("sys_id") is not None
-            and isinstance(result, dict)
         ]
 
         # Incidents stored from least to most recent date
