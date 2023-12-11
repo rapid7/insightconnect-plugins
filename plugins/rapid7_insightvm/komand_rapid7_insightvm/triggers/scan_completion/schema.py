@@ -47,7 +47,7 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
     "cvss_score": {
       "type": "integer",
       "title": "CVSS V3 Score",
-      "description": "A vulneravility score from 1-10. Only those with a score equal to or above the input will be shown.",
+      "description": "A vulneravility score from 1-10. Only those with a score equal to or above the input will be shown",
       "order": 8
     },
     "hostname": {

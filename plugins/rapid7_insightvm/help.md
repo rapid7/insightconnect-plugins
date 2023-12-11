@@ -3277,11 +3277,11 @@ This action is used to fire upon completed scan
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |asset_group|string|None|False|Asset Group|None|2|
 |cve|string|None|False|CVE|None|ssh-cve-2018|
-|cvss_score|integer|None|False|A vulneravility score from 1-10. Only those with a score equal to or above the input will be shown.|None|4|
+|cvss_score|integer|None|False|A vulneravility score from 1-10. Only those with a score equal to or above the input will be shown|None|4|
 |hostname|string|None|False|Hostname|None|doc.rapid7.com|
 |interval|integer|5|True|How often the trigger should check for new vulnerability|None|5|
 |ip_address|string|None|False|IP Address|None|8.8.8.8|
-|severity|string|None|False|Severity of the vulnerability|['Moderate', 'Severe', 'Critical']|None|
+|severity|string|None|False|Severity of the vulnerability|['Moderate', 'Severe', 'Critical']|Severe|
 |site_id|string|None|False|Site ID|None|219|
 |source|string|None|False|Source|None|url|
   
@@ -3295,7 +3295,7 @@ Example input:
   "hostname": "doc.rapid7.com",
   "interval": 5,
   "ip_address": "8.8.8.8",
-  "severity": "Moderate",
+  "severity": "Severe",
   "site_id": 219,
   "source": "url"
 }

@@ -230,7 +230,7 @@ class Util:
             return None
         if ip_address and ip_address not in csv_row.get("ip_address", ""):
             return None
-        if cvss_score and cvss_score not in csv_row.get("cvss_v3_score", ""):
+        if cvss_score and cvss_score < csv_row.get("cvss_v3_score", 0):
             return None
         if severity and severity not in csv_row.get("severity", ""):
             return None
