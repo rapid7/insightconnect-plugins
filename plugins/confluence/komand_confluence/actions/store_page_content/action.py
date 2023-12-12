@@ -24,25 +24,3 @@ class StorePageContent(insightconnect_plugin_runtime.Action):
         page = extract_page_data(page=data)
         page = clean_dict(page)
         return {"page": page}
-
-    def test(self):
-        """Test action"""
-        return {
-            "content": {
-                "title": "HelloWorld",
-                "space": "DEMO",
-                "modifier": "TestUser",
-                "created": "20161024T20:19:23Z",
-                "content": "<p>hello</p>",
-                "url": "https://komand.atlassian.net/wiki/display/DEMO/HelloWorld",
-                "permissions": "0",
-                "creator": "TestUser",
-                "parentId": "0",
-                "version": "1",
-                "homePage": "false",
-                "id": "19726355",
-                "current": "true",
-                "contentStatus": "current",
-                "modified": "20161024T20:19:23Z",
-            }
-        }

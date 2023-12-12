@@ -18,6 +18,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
             url=params.get("url"),
             username=params.get("credentials").get("username"),
             password=params.get("credentials").get("password"),
-            cloud=True
+            cloud=params.get("cloud")
         )
         self.client.login()

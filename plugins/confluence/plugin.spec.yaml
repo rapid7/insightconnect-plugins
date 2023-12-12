@@ -88,10 +88,25 @@ connection:
     type: string
     description: Connection URL
     required: true
+  username:
+    title: Username
+    type: string
+    description: Account username (Atlassian account email)
+    required: true
+  api_token:
+    title: API Token
+    type: credential_secret_key
+    description: API token
+    required: true
   credentials:
-    title: Username and Password
+    title: Username and API Token
     type: credential_username_password
-    description: Username and password
+    description: Username and API Token
+    required: true
+  cloud:
+    title: Cloud
+    type: boolean
+    description: Is this a cloud instance
     required: true
 actions:
   get_page_content:

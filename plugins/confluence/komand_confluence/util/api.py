@@ -3,7 +3,7 @@ from atlassian import Confluence
 
 from komand_confluence.util.util import exception_handler
 
-
+import logging
 class ConfluenceAPI:
 
   def __init__(self, url: str = "", username: str = "", password: str = "", cloud: bool = False, client_id: str = "", token: str = ""):
@@ -47,9 +47,11 @@ class ConfluenceAPI:
   def store_page_content(self, content: str, title: str, space: str):
     page_exists = self.page_exists(space=space, title=title)
     if page_exists:
+      logging.info("Updating page...")
       page_id = self.get_page_id(title=title, space=space)
       return self.confluence.update_page(page_id=page_id, title=title, body=content)
     else:
+      logging.info("Creating a new page...")
       return self.confluence.create_page(title=title, body=content, space=space)
 
   @exception_handler

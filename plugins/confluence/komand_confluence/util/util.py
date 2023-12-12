@@ -1,4 +1,4 @@
-from atlassian.errors import ApiPermissionError
+from atlassian.errors import ApiPermissionError, ApiNotFoundError, ApiValueError, ApiConflictError
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -53,6 +53,19 @@ def exception_handler(func):
         except ApiPermissionError as exception:
             raise PluginException(
                 "Something unexpected occurred. See error log for details.",
+                "Please check your input and connection details.",
+                data=exception)
+        except ApiNotFoundError as exception:
+            raise PluginException(
+                preset=PluginException.Preset.NOT_FOUND,
+                data=exception)
+        except ApiValueError as exception:
+            raise PluginException(
+                preset=PluginException.Preset.BAD_REQUEST,
+                data=exception)
+        except ApiConflictError as exception:
+            raise PluginException(
+                "A conflict occurred. See error log for details.",
                 "Please check your input and connection details.",
                 data=exception)
         except Exception as exception:
