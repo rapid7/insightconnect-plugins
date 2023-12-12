@@ -17,7 +17,3 @@ class GetPageContentById(insightconnect_plugin_runtime.Action):
         if data:
             return {"content": data, "found": True}
         return {"found": False, "content": ""}
-
-    def test(self):
-        """Return content"""
-        return {"found": True, "content": ""}
