@@ -8,9 +8,9 @@ import logging
 class ConfluenceAPI:
     def __init__(
         self,
-        url: str = "",
-        username: str = "",
-        api_token: str = "",
+        url: str,
+        username: str,
+        api_token: str,
         cloud: bool = False,
     ):
         self.url = url
