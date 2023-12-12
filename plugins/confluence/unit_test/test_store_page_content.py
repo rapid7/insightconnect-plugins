@@ -74,7 +74,6 @@ class TestStorePageContent(TestCase):
         page: str,
         space: str,
         content: str,
-        expected_filename: str,
         mock_update: Mock,
         mock_create: Mock,
         mock_exists: Mock,
