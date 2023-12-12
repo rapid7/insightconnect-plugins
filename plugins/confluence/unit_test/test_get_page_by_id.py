@@ -28,7 +28,9 @@ class TestGetPageById(TestCase):
         ]
     )
     @mock.patch("atlassian.Confluence.get_page_by_id", side_effect=Util.mocked_requests)
-    def test_get_page(self, page_id: str, expected_filename: str, mock_get_page: Mock) -> None:
+    def test_get_page(
+        self, page_id: str, expected_filename: str, mock_get_page: Mock
+    ) -> None:
         test_input = {Input.PAGE_ID: page_id}
         validate(test_input, GetPageByIdInput.schema)
         response = self.action.run(test_input)
