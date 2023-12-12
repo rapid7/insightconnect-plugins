@@ -61,7 +61,6 @@ class TestStorePageContent(TestCase):
                 "Test Page",
                 "Test Space",
                 "<p>Test Content Failure</p>",
-                "test_page_content_failure",
             )
         ]
     )
