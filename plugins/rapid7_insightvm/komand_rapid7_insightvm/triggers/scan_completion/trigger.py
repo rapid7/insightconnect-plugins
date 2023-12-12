@@ -7,7 +7,6 @@ import uuid
 from komand_rapid7_insightvm.util import util
 import csv
 import io
-import json
 from typing import List, Union, Dict
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
@@ -23,22 +22,16 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             output=ScanCompletionOutput(),
         )
 
-    CACHE_FILE_NAME = f"site_scans_cache_{time.time()}"
-
     def run(self, params={}):
         # Write scan_id to cache
         self.logger.info("Getting latest scan...")
 
         site_id = params.get(Input.SITE_ID)
-        latest_scan_id = self.find_latest_completed_scan(site_id, cached=False)
-
-        # Initialize trigger cache at startup
-        self.logger.info("Initialising trigger cache...")
-        util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(latest_scan_id))
+        first_latest_scan_id = self.find_latest_completed_scan(site_id, cached=False)
 
         while True:
             # Open cache
-            starting_point = Cache.get_cache_site_scans()
+            starting_point = first_latest_scan_id
 
             latest_scan_id = self.find_latest_completed_scan(site_id, cached=True)
 
@@ -61,13 +54,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                     }
                 )
 
-            # Update cache
-            try:
-                util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(latest_scan_id))
-            except TypeError as error:
-                raise PluginException(
-                    cause="Failed to save cache to file", assistance=f"Exception returned was {error}"
-                )
+            first_latest_scan_id = latest_scan_id
 
             # Sleep configured in minutes
             time.sleep(params.get(Input.INTERVAL, 5) * 60)
@@ -166,15 +153,6 @@ class ScanQueries:
             f"JOIN dim_solution AS dss ON (dv.nexpose_id = dss.nexpose_id) "
             f"WHERE fasvi.scan_id = {scan_id} "
         )
-
-
-class Cache:
-    @staticmethod
-    def get_cache_site_scans() -> dict:
-        try:
-            return json.loads(util.read_from_cache(ScanCompletion.CACHE_FILE_NAME))
-        except ValueError as error:
-            raise PluginException(cause="Failed to load cache file", assistance=f"Exception returned was {error}")
 
 
 class Util:
