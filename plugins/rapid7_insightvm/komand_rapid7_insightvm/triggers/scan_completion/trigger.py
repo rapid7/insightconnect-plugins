@@ -210,7 +210,7 @@ class Util:
         existing_asset_id = results.get(asset_id, None)
 
         if existing_asset_id:
-            existing_asset_id["vulnerability_info"] += new_dict["vulnerability_info"]
+            existing_asset_id["vulnerability_info"] += new_dict.get("vulnerability_info", [])
         else:
             results[asset_id] = new_dict
 
