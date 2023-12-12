@@ -100,6 +100,10 @@ class Util:
                     self.text = "Not found."
                 if self.filename == "download_attachment":
                     self.content = b"test"
+                if self.filename in ["test_search_alerts_rrns_true", "test_search_alerts_rrns_false"]:
+                    self.text = Util.read_file_to_string(
+                        os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp")
+                    )
 
             def raise_for_status(self):
                 if self.status_code == 404:
@@ -116,8 +120,6 @@ class Util:
                         os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp")
                     )
                 )
-
-        print(f"{args = }")
 
         if kwargs.get("params") == {
             "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
@@ -229,6 +231,43 @@ class Util:
             return MockResponse("upload_attachment", 200)
         if kwargs.get("files") == {"filedata": ("test", b"test", "text/plain")}:
             return MockResponse("upload_attachment_without_file_extension", 200)
+
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/at/alerts/rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:1c961b2402751096126c72ca3e07d7d6/actors"
+        ):
+            return MockResponse("test_get_alert_actors_minimum", 200)
+
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/at/alerts/rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:1c961b2402751096126c72ca3e07d7d7/actors"
+        ):
+            return MockResponse("not_found", 404)
+
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/at/alerts/rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:1c961b2402751096126c72ca3e07d7d6/evidences"
+        ):
+            return MockResponse("test_get_alert_evidence_minimum", 200)
+
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/at/alerts/rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:1c961b2402751096126c72ca3e07d7d7/evidences"
+        ):
+            return MockResponse("not_found", 404)
+
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/at/alerts/rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:1c961b2402751096126c72ca3e07d7d6"
+        ):
+            return MockResponse("test_get_alert_information", 200)
+
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/at/alerts/rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:1c961b2402751096126c72ca3e07d7d7"
+        ):
+            return MockResponse("not_found", 404)
+
         if args[0] == f"{Util.STUB_URL_API}/log_search/management/logs":
             return MockResponse("logs", 200)
         elif (
@@ -277,5 +316,11 @@ class Util:
             == "https://us.api.insight.rapid7.com/log_search/query/b55a768a-4c0e-449a-84ae-adc70e18eb20:1:8956245765c23b46f1d20322e5c076e53a7ab662::d56c37ab761ff5e65950abd93476f02ffbcb5a45:"
         ):
             return MockResponse("log_id8", 200)
+
+        if args[1] == "https://us.api.insight.rapid7.com/idr/at/alerts/ops/search":
+            if kwargs.get("params", {}).get("rrns_only") == True:
+                return MockResponse("test_search_alerts_rrns_true", 200)
+            else:
+                return MockResponse("test_search_alerts_rrns_false", 200)
 
         raise Exception("Not implemented")

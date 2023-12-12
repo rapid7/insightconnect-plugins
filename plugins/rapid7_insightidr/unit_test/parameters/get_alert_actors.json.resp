@@ -1,0 +1,27 @@
+{
+  "parameters": [
+    [
+      "rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:1c961b2402751096126c72ca3e07d7d6",
+      1,
+      0,
+      {
+        "actors": [
+            {
+                "display_name": "sync_bos-sync-01_12f795c3c118@rapid7.onmicrosoft.com",
+                "id": "3af9edf6-5ed3-477c-b573-dad526386ac1",
+                "rrn": "rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:actor:1:d7d7c4fee0dddd606bc593667c19e36d",
+                "type": "ACCOUNT",
+                "user_id": "761c70dd-3afa-4074-b0e1-9ca1625212b7"
+            }
+        ],
+        "metadata": {
+                "index": 0,
+                "is_last_index": true,
+                "items_in_index": 1,
+                "size": 1,
+                "total_items": 1
+            }
+        }
+    ]
+  ]
+}
