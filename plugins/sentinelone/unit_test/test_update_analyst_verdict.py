@@ -6,9 +6,11 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 from komand_sentinelone.actions.update_analyst_verdict import UpdateAnalystVerdict
+from komand_sentinelone.actions.update_analyst_verdict.schema import UpdateAnalystVerdictOutput
 from insightconnect_plugin_runtime.exceptions import PluginException
 from util import Util
 from parameterized import parameterized
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mocked_requests_get)
@@ -75,6 +77,7 @@ class TestUpdateAnalystVerdict(TestCase):
     def test_update_analyst_verdict(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(expected, actual)
+        validate(actual, UpdateAnalystVerdictOutput.schema)
 
     @parameterized.expand(
         [

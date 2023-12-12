@@ -6,8 +6,10 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 from komand_sentinelone.actions.blacklist_by_content_hash import BlacklistByContentHash
+from komand_sentinelone.actions.blacklist_by_content_hash.schema import BlacklistByContentHashOutput
 from util import Util
 from parameterized import parameterized
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mocked_requests_get)
@@ -34,3 +36,4 @@ class TestBlacklistByContentHash(TestCase):
     def test_blacklist_by_content_hash(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
         self.assertEqual(expected, actual)
+        validate(actual, BlacklistByContentHashOutput.schema)
