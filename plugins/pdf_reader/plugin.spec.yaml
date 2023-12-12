@@ -4,8 +4,9 @@ products: [insightconnect]
 name: pdf_reader
 title: PDF Reader
 description: Tools for extracting text from a PDF
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
+supported_versions: ["Not applicable"]
 support: community
 status: []
 resources:
@@ -19,6 +20,10 @@ hub_tags:
   use_cases: [data_utility]
   keywords: [pdf, reader, extraction]
   features: []
+sdk:
+  type: full
+  version: 5
+  user: nobody
 actions:
   extract_text:
     title: Extract Text
@@ -36,3 +41,4 @@ actions:
         description: Text extracted from PDF file
         type: string
         required: false
+        example: Rapid7
