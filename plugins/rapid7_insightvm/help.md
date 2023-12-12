@@ -3200,8 +3200,8 @@ This action is used to check for new InsightVM vulnerability exceptions
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |frequency|integer|5|True|How often the trigger should check for new vulnerability exception requests|None|5|
-|status_filter|[]string|["Under Review"]|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|['Under Review']|
-  
+|status_filter|[]string|["Under Review"]|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|["Under Review"]|
+
 Example input:
 
 ```
