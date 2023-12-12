@@ -96,6 +96,14 @@ def main():
         
             self.add_action(actions.GetAssetInformation())
         
+            self.add_action(actions.GetAlertInformation())
+        
+            self.add_action(actions.SearchAlerts())
+        
+            self.add_action(actions.GetAlertEvidence())
+        
+            self.add_action(actions.GetAlertActors())
+        
 
     """Run plugin"""
     cli = insightconnect_plugin_runtime.CLI(ICONRapid7Insightidr())

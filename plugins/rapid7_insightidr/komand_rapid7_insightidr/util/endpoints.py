@@ -258,3 +258,18 @@ class Assets:
     @staticmethod
     def get_asset_information(console_url: str, attachment_rrn: str) -> str:
         return f"{console_url}idr/v1/assets/{attachment_rrn}"
+
+
+class Alerts:
+    @staticmethod
+    def get_alert_information(console_url: str, alert_rrn: str) -> str:
+        return f"{console_url}idr/at/alerts/{alert_rrn}"
+
+    def get_alert_actor(console_url: str, alert_rrn: str) -> str:
+        return f"{console_url}idr/at/alerts/{alert_rrn}/actors"
+
+    def get_alert_evidence(console_url: str, alert_rrn: str) -> str:
+        return f"{console_url}idr/at/alerts/{alert_rrn}/evidences"
+
+    def get_alert_serach(console_url: str) -> str:
+        return f"{console_url}idr/at/alerts/ops/search"

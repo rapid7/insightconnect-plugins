@@ -4,51 +4,49 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieve a page of alerts associated with the specified investigation"
+    DESCRIPTION = "Allows the user to retrieve evidence for a single alert from an alert RRN"
 
 
 class Input:
-    ID = "id"
+    ALERT_RRN = "alert_rrn"
     INDEX = "index"
     SIZE = "size"
 
 
 class Output:
-    ALERTS = "alerts"
+    EVIDENCES = "evidences"
     METADATA = "metadata"
 
 
-class ListAlertsForInvestigationInput(insightconnect_plugin_runtime.Input):
+class GetAlertEvidenceInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "id": {
+    "alert_rrn": {
       "type": "string",
-      "title": "ID or RRN",
-      "description": "The identifier of investigation (ID or RRN)",
+      "title": "Alert RRN",
+      "description": "The RRN of the alert",
       "order": 1
     },
     "index": {
       "type": "integer",
       "title": "Index",
-      "description": "The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0",
+      "description": "Zero-based index of the page to retrieve, where value must be greater than or equal to 0",
       "default": 0,
       "order": 3
     },
     "size": {
       "type": "integer",
       "title": "Size",
-      "description": "The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 100. Default value is 100",
+      "description": "Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100",
       "default": 100,
       "order": 2
     }
   },
   "required": [
-    "id",
-    "index",
-    "size"
+    "alert_rrn"
   ],
   "definitions": {}
 }
@@ -58,18 +56,18 @@ class ListAlertsForInvestigationInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class ListAlertsForInvestigationOutput(insightconnect_plugin_runtime.Output):
+class GetAlertEvidenceOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "alerts": {
+    "evidences": {
       "type": "array",
-      "title": "Alerts",
-      "description": "A list of alerts associated with the investigation",
+      "title": "Evidences",
+      "description": "The alert evidence",
       "items": {
-        "$ref": "#/definitions/alert"
+        "$ref": "#/definitions/evidence_object"
       },
       "order": 1
     },
@@ -81,60 +79,59 @@ class ListAlertsForInvestigationOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "alerts",
     "metadata"
   ],
   "definitions": {
-    "alert": {
+    "evidence_object": {
       "type": "object",
-      "title": "alert",
+      "title": "evidence_object",
       "properties": {
-        "alert_type": {
+        "rrn": {
           "type": "string",
-          "title": "Alert Type",
-          "description": "The type of an alert",
+          "title": "RRN",
+          "description": "The unique RRN of the evidence.",
           "order": 1
         },
-        "alert_type_description": {
-          "type": "string",
-          "title": "Alert Type Description",
-          "description": "An optional description of this type of alert",
+        "version": {
+          "type": "integer",
+          "title": "Version",
+          "description": "The version of the evidence.",
           "order": 2
         },
-        "created_time": {
+        "created_at": {
           "type": "string",
-          "title": "Created Time",
-          "description": "The time when the alert was created",
+          "title": "Created at",
+          "description": "The timestamp when the evidence was created.",
           "order": 3
         },
-        "detection_rule_rrn": {
+        "updated_at": {
           "type": "string",
-          "title": "Detection Rule RRN",
-          "description": "The time when the alert was created",
+          "title": "Updated at",
+          "description": "The timestamp when the evidence was last updated.",
           "order": 4
         },
-        "first_event_time": {
+        "evented_at": {
           "type": "string",
-          "title": "First Event Time",
-          "description": "The time the first event involved in this alert occurred",
+          "title": "Evented at",
+          "description": "The timestamp when the event that triggered the alert occurred in the source system.",
           "order": 5
         },
-        "id": {
+        "external_source": {
           "type": "string",
-          "title": "Alert ID",
-          "description": "The identifier of an alert",
+          "title": "External Source",
+          "description": "The source of the evidence.",
           "order": 6
         },
-        "latest_event_time": {
+        "external_type": {
           "type": "string",
-          "title": "Latest Event Time",
-          "description": "The time the latest event involved in this alert occurred",
+          "title": "External Type",
+          "description": "The type of the evidence.",
           "order": 7
         },
-        "title": {
-          "type": "string",
-          "title": "Title",
-          "description": "The title of the alert",
+        "data": {
+          "type": "object",
+          "title": "Data",
+          "description": "The evidence data.",
           "order": 8
         }
       }

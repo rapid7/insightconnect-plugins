@@ -1,0 +1,28 @@
+{
+  "parameters": [
+    [
+      "2020-06-01T12:11:13+05:30",
+      "",
+      "Start time was provided but not end time, both are required for a valid timerange",
+      "Please add in an end time"
+    ],
+    [
+      "",
+      "2020-06-01T12:11:13+05:30",
+      "End time was provided but not start time, both are required for a valid timerange",
+      "Please add in a start time"
+    ],
+    [
+      "2020-08-01T12:11:13+05:30",
+      "2020-06-01T12:11:13+05:30",
+      "End time is greater than Start time",
+      "Please adjust the start and endtime to have the endtime be after the start time"
+    ],
+    [
+      "2020-01-01T12:11:13+05:30",
+      "2023-06-01T12:11:13+05:30",
+      "The maximum delta between start and endtime must be 6 months",
+      "Please adjust the start and endtime to be within 6 months"
+    ]
+  ]
+}

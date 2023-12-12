@@ -4,51 +4,49 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieve a page of alerts associated with the specified investigation"
+    DESCRIPTION = "Allows the user to retrieve actors for a single alert from an alert RRN"
 
 
 class Input:
-    ID = "id"
+    ALERT_RRN = "alert_rrn"
     INDEX = "index"
     SIZE = "size"
 
 
 class Output:
-    ALERTS = "alerts"
+    ACTORS = "actors"
     METADATA = "metadata"
 
 
-class ListAlertsForInvestigationInput(insightconnect_plugin_runtime.Input):
+class GetAlertActorsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "id": {
+    "alert_rrn": {
       "type": "string",
-      "title": "ID or RRN",
-      "description": "The identifier of investigation (ID or RRN)",
+      "title": "Alert RRN",
+      "description": "The RRN of the alert",
       "order": 1
     },
     "index": {
       "type": "integer",
       "title": "Index",
-      "description": "The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0",
+      "description": "Zero-based index of the page to retrieve, where value must be greater than or equal to 0",
       "default": 0,
       "order": 3
     },
     "size": {
       "type": "integer",
       "title": "Size",
-      "description": "The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 100. Default value is 100",
+      "description": "Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100",
       "default": 100,
       "order": 2
     }
   },
   "required": [
-    "id",
-    "index",
-    "size"
+    "alert_rrn"
   ],
   "definitions": {}
 }
@@ -58,18 +56,18 @@ class ListAlertsForInvestigationInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class ListAlertsForInvestigationOutput(insightconnect_plugin_runtime.Output):
+class GetAlertActorsOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "alerts": {
+    "actors": {
       "type": "array",
-      "title": "Alerts",
-      "description": "A list of alerts associated with the investigation",
+      "title": "Actors",
+      "description": "The alerts actors",
       "items": {
-        "$ref": "#/definitions/alert"
+        "$ref": "#/definitions/actor_object"
       },
       "order": 1
     },
@@ -81,61 +79,42 @@ class ListAlertsForInvestigationOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "alerts",
     "metadata"
   ],
   "definitions": {
-    "alert": {
+    "actor_object": {
       "type": "object",
-      "title": "alert",
+      "title": "actor_object",
       "properties": {
-        "alert_type": {
+        "rrn": {
           "type": "string",
-          "title": "Alert Type",
-          "description": "The type of an alert",
+          "title": "RRN",
+          "description": "The unique RRN of the actor.",
           "order": 1
-        },
-        "alert_type_description": {
-          "type": "string",
-          "title": "Alert Type Description",
-          "description": "An optional description of this type of alert",
-          "order": 2
-        },
-        "created_time": {
-          "type": "string",
-          "title": "Created Time",
-          "description": "The time when the alert was created",
-          "order": 3
-        },
-        "detection_rule_rrn": {
-          "type": "string",
-          "title": "Detection Rule RRN",
-          "description": "The time when the alert was created",
-          "order": 4
-        },
-        "first_event_time": {
-          "type": "string",
-          "title": "First Event Time",
-          "description": "The time the first event involved in this alert occurred",
-          "order": 5
         },
         "id": {
           "type": "string",
-          "title": "Alert ID",
-          "description": "The identifier of an alert",
-          "order": 6
+          "title": "ID",
+          "description": "The identifier of the actor.",
+          "order": 2
         },
-        "latest_event_time": {
+        "type": {
           "type": "string",
-          "title": "Latest Event Time",
-          "description": "The time the latest event involved in this alert occurred",
-          "order": 7
+          "title": "Type",
+          "description": "The type of actor (for example, ASSET, ACCOUNT, or IP_ADDRESS).",
+          "order": 3
         },
-        "title": {
+        "user_id": {
           "type": "string",
-          "title": "Title",
-          "description": "The title of the alert",
-          "order": 8
+          "title": "User ID",
+          "description": "User ID for an actor.",
+          "order": 4
+        },
+        "display_name": {
+          "type": "string",
+          "title": "Display Name",
+          "description": "The display name of the actor (for example, John Doe or user@example.com).",
+          "order": 5
         }
       }
     },
