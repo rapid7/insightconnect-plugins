@@ -12,7 +12,9 @@ sys.path.append(os.path.abspath("../"))
 
 class MockConnection:
     def __init__(self):
-        self.url = ("https://test.atlassian.net",)
+        self.url = "https://test.atlassian.net"
+        self.username = "testuser@example.com"
+        self.api_token = {"secretKey": "abcdefg"}
         self.client = ConfluenceAPI()
 
     def get_headers(self):
