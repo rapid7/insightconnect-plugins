@@ -62,13 +62,9 @@ def exception_handler(func):
                 data=exception,
             )
         except ApiNotFoundError as exception:
-            raise PluginException(
-                preset=PluginException.Preset.NOT_FOUND, data=exception
-            )
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=exception)
         except ApiValueError as exception:
-            raise PluginException(
-                preset=PluginException.Preset.BAD_REQUEST, data=exception
-            )
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=exception)
         except ApiConflictError as exception:
             raise PluginException(
                 "A conflict occurred. See error log for details.",

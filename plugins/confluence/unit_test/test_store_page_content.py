@@ -81,7 +81,5 @@ class TestStorePageContent(TestCase):
         cause = "Something unexpected occurred. See error log for details."
         assistance = "Please check your input and connection details."
         with self.assertRaises(PluginException) as error:
-            self.action.run(
-                {Input.PAGE: page, Input.SPACE: space, Input.CONTENT: content}
-            )
+            self.action.run({Input.PAGE: page, Input.SPACE: space, Input.CONTENT: content})
         self.assertEqual(cause, error.exception.cause)

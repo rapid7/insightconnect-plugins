@@ -48,10 +48,7 @@ class Util:
 
     @staticmethod
     def mocked_requests(*args, **kwargs):
-        if (
-            kwargs.get("title") == "Test Page New"
-            and kwargs.get("body") == "<p>Test Content</p>"
-        ):
+        if kwargs.get("title") == "Test Page New" and kwargs.get("body") == "<p>Test Content</p>":
             return Util.load_data("store_page_content_new")
         if kwargs.get("title") == "Test Page New":
             return False
@@ -69,20 +66,11 @@ class Util:
             raise ApiPermissionError
         if kwargs.get("title") == "Test Page" and kwargs.get("space") == "Test Space":
             return "100001"
-        if (
-            kwargs.get("title") == "Test Home Page"
-            and kwargs.get("space") == "Test Space"
-        ):
+        if kwargs.get("title") == "Test Home Page" and kwargs.get("space") == "Test Space":
             return "100002"
-        if (
-            kwargs.get("title") == "Test Not Found"
-            and kwargs.get("space") == "Test Space"
-        ):
+        if kwargs.get("title") == "Test Not Found" and kwargs.get("space") == "Test Space":
             return None
-        if (
-            kwargs.get("title") == "Test Page"
-            and kwargs.get("space") == "Test Not Found"
-        ):
+        if kwargs.get("title") == "Test Page" and kwargs.get("space") == "Test Not Found":
             raise ApiPermissionError
         if kwargs.get("page_id") == "100001":
             return Util.load_data("get_page")

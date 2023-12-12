@@ -45,9 +45,7 @@ class ConfluenceAPI:
 
     @exception_handler
     def get_page_content(self, page_id: str):
-        data = self.confluence.get_page_by_id(
-            page_id=page_id, expand="body.view", status=None, version=None
-        )
+        data = self.confluence.get_page_by_id(page_id=page_id, expand="body.view", status=None, version=None)
         if data:
             return data.get("body", {}).get("view", {}).get("value")
         return None
@@ -58,9 +56,7 @@ class ConfluenceAPI:
         if page_exists:
             logging.info("Updating page...")
             page_id = self.get_page_id(title=title, space=space)
-            return self.confluence.update_page(
-                page_id=page_id, title=title, body=content
-            )
+            return self.confluence.update_page(page_id=page_id, title=title, body=content)
         else:
             logging.info("Creating a new page...")
             return self.confluence.create_page(title=title, body=content, space=space)

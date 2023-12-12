@@ -20,9 +20,7 @@ class StorePageContent(insightconnect_plugin_runtime.Action):
         content = params.get("content")
         title = params.get("page")
         space = params.get("space")
-        data = self.connection.client.store_page_content(
-            title=title, space=space, content=content
-        )
+        data = self.connection.client.store_page_content(title=title, space=space, content=content)
         page = extract_page_data(page=data)
         page = clean_dict(page)
         return {"page": page}

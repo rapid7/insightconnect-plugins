@@ -44,9 +44,7 @@ class TestGetPage(TestCase):
     @parameterized.expand([("Test Page", "Test Not Found")])
     @mock.patch("atlassian.Confluence.get_page_id", side_effect=Util.mocked_requests)
     @mock.patch("atlassian.Confluence.get_page_by_id", side_effect=Util.mocked_requests)
-    def test_get_page_failure(
-        self, page: str, space: str, mock_get_id: Mock, mock_get_page: Mock
-    ) -> None:
+    def test_get_page_failure(self, page: str, space: str, mock_get_id: Mock, mock_get_page: Mock) -> None:
         cause = "Something unexpected occurred. See error log for details."
         assistance = "Please check your input and connection details."
         with self.assertRaises(PluginException) as error:
