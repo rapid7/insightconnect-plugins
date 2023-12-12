@@ -10,7 +10,7 @@ description: "Confluence is an open and shared workspace for managing documents 
 the Confluence plugin for Rapid7 InsightConnect, users can view and update pages dynamically within automation workflows"
 version: 2.0.0
 supported_versions: ["2023-12-12"]
-connection_version: 2.0.0
+connection_version: 2
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/confluence
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE

@@ -1,4 +1,9 @@
-from atlassian.errors import ApiPermissionError, ApiNotFoundError, ApiValueError, ApiConflictError
+from atlassian.errors import (
+    ApiPermissionError,
+    ApiNotFoundError,
+    ApiValueError,
+    ApiConflictError,
+)
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -19,12 +24,11 @@ def normalize_page(p):
 
 
 def extract_page_data(page):
-
     url_base = page.get("_links").get("base")
     endpoint = page.get("_links").get("webui")
     home_page = page.get("space", {}).get("_expandable").get("homepage", "")
-    id = page.get("id")
-    is_home_page = id in home_page
+    page_id = page.get("id")
+    is_home_page = page_id in home_page
     ancestors = page.get("ancestors")
 
     page = {
@@ -39,12 +43,13 @@ def extract_page_data(page):
         "parentId": ancestors[0].get("id") if ancestors else None,
         "version": f'{page.get("version", {}).get("number")}',
         "homePage": is_home_page,
-        "id": id,
+        "id": page_id,
         "current": page.get("status").lower() == "current",
         "contentStatus": page.get("status"),
         "modified": page.get("version", {}).get("when"),
     }
     return page
+
 
 def exception_handler(func):
     def wrapper(*args, **kwargs):
@@ -54,23 +59,27 @@ def exception_handler(func):
             raise PluginException(
                 "Something unexpected occurred. See error log for details.",
                 "Please check your input and connection details.",
-                data=exception)
+                data=exception,
+            )
         except ApiNotFoundError as exception:
             raise PluginException(
-                preset=PluginException.Preset.NOT_FOUND,
-                data=exception)
+                preset=PluginException.Preset.NOT_FOUND, data=exception
+            )
         except ApiValueError as exception:
             raise PluginException(
-                preset=PluginException.Preset.BAD_REQUEST,
-                data=exception)
+                preset=PluginException.Preset.BAD_REQUEST, data=exception
+            )
         except ApiConflictError as exception:
             raise PluginException(
                 "A conflict occurred. See error log for details.",
                 "Please check your input and connection details.",
-                data=exception)
+                data=exception,
+            )
         except Exception as exception:
             raise PluginException(
                 "Something unexpected occurred. See error log for details.",
                 "Please check your input and connection details.",
-                data=exception)
+                data=exception,
+            )
+
     return wrapper

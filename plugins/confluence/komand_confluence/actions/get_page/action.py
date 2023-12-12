@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import GetPageInput, GetPageOutput
 from insightconnect_plugin_runtime import helper
+
 # Custom imports below
 from ...util.util import extract_page_data
 
@@ -8,7 +9,10 @@ from ...util.util import extract_page_data
 class GetPage(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="get_page", description="Get Page", input=GetPageInput(), output=GetPageOutput()
+            name="get_page",
+            description="Get Page",
+            input=GetPageInput(),
+            output=GetPageOutput(),
         )
 
     def run(self, params={}):
