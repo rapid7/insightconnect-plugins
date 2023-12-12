@@ -51,7 +51,7 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
     "interval": {
       "type": "integer",
       "title": "Interval",
-      "description": "How often the trigger should check for new vulnerability",
+      "description": "How often the trigger should check for new vulnerability scans in minutes",
       "default": 5,
       "order": 1
     },

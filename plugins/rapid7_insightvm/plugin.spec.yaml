@@ -4306,7 +4306,7 @@ actions:
         example: True
   asset_vulnerability_solution:
     title: Get Asset Vulnerability Solutions
-    description: Returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset
+    description: Return the highest-superceding rollup solutions for a list of vulnerabilities on an asset
     input:
       asset_id:
         title: Asset ID
@@ -4482,7 +4482,7 @@ triggers:
     input:
       interval:
         title: Interval
-        description: How often the trigger should check for new vulnerability
+        description: How often the trigger should check for new vulnerability scans in minutes
         type: integer
         required: true
         default: 5

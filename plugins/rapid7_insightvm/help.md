@@ -181,7 +181,7 @@ Example output:
 
 #### Get Asset Vulnerability Solutions
   
-This action is used to returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset
+This action is used to return the highest-superceding rollup solutions for a list of vulnerabilities on an asset
 
 ##### Input
 
@@ -3200,8 +3200,8 @@ This action is used to check for new InsightVM vulnerability exceptions
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |frequency|integer|5|True|How often the trigger should check for new vulnerability exception requests|None|5|
-|status_filter|[]string|["Under Review"]|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|["Under Review"]|
-
+|status_filter|[]string|["Under Review"]|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|['Under Review']|
+  
 Example input:
 
 ```
@@ -3278,7 +3278,7 @@ This action is used to fire upon completed scan
 |asset_group|string|None|False|Asset Group|None|2|
 |cve|string|None|False|CVE|None|ssh-cve-2018|
 |cvss_score|integer|None|False|A vulneravility score from 1-10. Only those with a score equal to or above the input will be shown|None|4|
-|interval|integer|5|True|How often the trigger should check for new vulnerability|None|5|
+|interval|integer|5|True|How often the trigger should check for new vulnerability scans in minutes|None|5|
 |severity|string|None|False|Severity of the vulnerability|['Moderate', 'Severe', 'Critical']|Severe|
 |site_id|string|None|False|Site ID|None|219|
 |source|string|None|False|Source|None|url|
