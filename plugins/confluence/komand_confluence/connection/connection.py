@@ -16,8 +16,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Connecting to Confluence: %s", params.get("url"))
         self.client = ConfluenceAPI(
             url=params.get("url"),
-            username=params.get("credentials").get("username"),
-            password=params.get("credentials").get("password"),
+            username=params.get("username"),
+            api_token=params.get("api_token").get("secretKey"),
             cloud=params.get("cloud")
         )
         self.client.login()
+
+    def test(self):
+        self.client.health_check()
+        return {"success": True}

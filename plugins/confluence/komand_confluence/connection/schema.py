@@ -4,8 +4,10 @@ import json
 
 
 class Input:
-    CREDENTIALS = "credentials"
+    API_TOKEN = "api_token"
+    CLOUD = "cloud"
     URL = "url"
+    USERNAME = "username"
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -14,49 +16,55 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "credentials": {
-      "$ref": "#/definitions/credential_username_password",
-      "title": "Username and Password",
-      "description": "Username and password",
-      "order": 2
+    "api_token": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "API Token",
+      "description": "API token",
+      "order": 3
+    },
+    "cloud": {
+      "type": "boolean",
+      "title": "Cloud",
+      "description": "Is this a cloud instance",
+      "order": 4
     },
     "url": {
       "type": "string",
       "title": "URL",
       "description": "Connection URL",
       "order": 1
+    },
+    "username": {
+      "type": "string",
+      "title": "Username",
+      "description": "Account username (Atlassian account email)",
+      "order": 2
     }
   },
   "required": [
-    "credentials",
-    "url"
+    "api_token",
+    "cloud",
+    "url",
+    "username"
   ],
   "definitions": {
-    "credential_username_password": {
-      "id": "credential_username_password",
-      "title": "Credential: Username and Password",
-      "description": "A username and password combination",
+    "credential_secret_key": {
+      "id": "credential_secret_key",
       "type": "object",
-      "properties": {
-        "username": {
-          "type": "string",
-          "title": "Username",
-          "description": "The username to log in with",
-          "order": 1
-        },
-        "password": {
-          "type": "string",
-          "title": "Password",
-          "description": "The password",
-          "format": "password",
-          "displayType": "password",
-          "order": 2
-        }
-      },
+      "title": "Credential: Secret Key",
+      "description": "A shared secret key",
       "required": [
-        "username",
-        "password"
-      ]
+        "secretKey"
+      ],
+      "properties": {
+        "secretKey": {
+          "type": "string",
+          "title": "Secret Key",
+          "description": "The shared secret key",
+          "format": "password",
+          "displayType": "password"
+        }
+      }
     }
   }
 }

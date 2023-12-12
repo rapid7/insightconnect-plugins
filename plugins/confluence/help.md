@@ -4,15 +4,17 @@ Confluence is an open and shared workspace for managing documents and files with
 
 # Key Features
   
-*This plugin does not contain any key features.*
+* Update pages
+* View pages
 
 # Requirements
   
-*This plugin does not contain any requirements.*
+* Confluence URL
+* Confluence username and API token
 
 # Supported Product Versions
   
-*This plugin does not contain any supported product versions.*
+* 2023-12-12
 
 # Documentation
 
@@ -22,18 +24,19 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|credentials|credential_username_password|None|True|Username and password|None|None|
-|url|string|None|True|Connection URL|None|None|
+|api_token|credential_secret_key|None|True|API token|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|cloud|boolean|None|True|Is this a cloud instance|None|True|
+|url|string|None|True|Connection URL|None|https://example.atlassian.net|
+|username|string|None|True|Account username (Atlassian account email)|None|user@example.com|
   
 Example input:
 
 ```
 {
-  "credentials": {
-    "password": "",
-    "username": ""
-  },
-  "url": ""
+  "api_token": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "cloud": true,
+  "url": "https://example.atlassian.net",
+  "username": "user@example.com"
 }
 ```
 
@@ -50,15 +53,15 @@ Get Page
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|page|string|None|True|Page Name|None|None|
-|space|string|None|True|Space|None|None|
+|page|string|None|True|Page Name|None|Example Page|
+|space|string|None|True|Space|None|Example Space|
   
 Example input:
 
 ```
 {
-  "page": "",
-  "space": ""
+  "page": "Example Page",
+  "space": "Example Space"
 }
 ```
 
@@ -66,8 +69,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|found|boolean|False|True if found|None|
-|page|page|False|Page|None|
+|found|boolean|False|True if found|True|
+|page|page|False|Page|{ "content": "<p>Example Content</p>", "contentStatus": "current", "created": "2000-01-01T00:00:00.000Z", "creator": "Example User", "current": true, "homePage": false, "id": "100001", "modified": "2000-01-01T00:00:00.000Z", "space": "Example Space", "title": "Example Page", "url": "https://test.atlassian.net/wiki/spaces/~1111111a111aaaaa11a1aa111aaaaaa1aa1aaaa/pages/100001/Example+Page", "version": "2" }|
   
 Example output:
 
@@ -75,21 +78,18 @@ Example output:
 {
   "found": true,
   "page": {
-    "content": {},
-    "contentStatus": {},
-    "created": "",
-    "creator": {},
-    "current": {},
-    "homePage": "true",
-    "id": {},
-    "modified": {},
-    "modifier": {},
-    "parentId": {},
-    "permissions": {},
-    "space": {},
-    "title": "",
-    "url": {},
-    "version": {}
+    "content": "<p>Example Content</p>",
+    "contentStatus": "current",
+    "created": "2000-01-01T00:00:00.000Z",
+    "creator": "Example User",
+    "current": true,
+    "homePage": false,
+    "id": "100001",
+    "modified": "2000-01-01T00:00:00.000Z",
+    "space": "Example Space",
+    "title": "Example Page",
+    "url": "https://test.atlassian.net/wiki/spaces/~1111111a111aaaaa11a1aa111aaaaaa1aa1aaaa/pages/100001/Example+Page",
+    "version": "2"
   }
 }
 ```
@@ -102,13 +102,13 @@ Get Page By ID
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|page_id|string|None|True|Page ID|None|None|
+|page_id|string|None|True|Page ID|None|100001|
   
 Example input:
 
 ```
 {
-  "page_id": ""
+  "page_id": 100001
 }
 ```
 
@@ -116,8 +116,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|found|boolean|False|True if found|None|
-|page|page|False|Page|None|
+|found|boolean|False|True if found|True|
+|page|page|False|Page|{ "content": "<p>Example Content</p>", "contentStatus": "current", "created": "2000-01-01T00:00:00.000Z", "creator": "Example User", "current": true, "homePage": false, "id": "100001", "modified": "2000-01-01T00:00:00.000Z", "space": "Example Space", "title": "Example Page", "url": "https://test.atlassian.net/wiki/spaces/~1111111a111aaaaa11a1aa111aaaaaa1aa1aaaa/pages/100001/Example+Page", "version": "2" }|
   
 Example output:
 
@@ -125,21 +125,18 @@ Example output:
 {
   "found": true,
   "page": {
-    "content": {},
-    "contentStatus": {},
-    "created": "",
-    "creator": {},
-    "current": {},
-    "homePage": "true",
-    "id": {},
-    "modified": {},
-    "modifier": {},
-    "parentId": {},
-    "permissions": {},
-    "space": {},
-    "title": "",
-    "url": {},
-    "version": {}
+    "content": "<p>Example Content</p>",
+    "contentStatus": "current",
+    "created": "2000-01-01T00:00:00.000Z",
+    "creator": "Example User",
+    "current": true,
+    "homePage": false,
+    "id": "100001",
+    "modified": "2000-01-01T00:00:00.000Z",
+    "space": "Example Space",
+    "title": "Example Page",
+    "url": "https://test.atlassian.net/wiki/spaces/~1111111a111aaaaa11a1aa111aaaaaa1aa1aaaa/pages/100001/Example+Page",
+    "version": "2"
   }
 }
 ```
@@ -152,15 +149,15 @@ Get Page Content
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|page|string|None|True|Page Name|None|None|
-|space|string|None|True|Space|None|None|
+|page|string|None|True|Page Name|None|Example Page|
+|space|string|None|True|Space|None|Example Space|
   
 Example input:
 
 ```
 {
-  "page": "",
-  "space": ""
+  "page": "Example Page",
+  "space": "Example Space"
 }
 ```
 
@@ -168,14 +165,14 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|content|string|False|Content|None|
-|found|boolean|False|True if found|None|
+|content|string|False|Content|<p>Example Content</p>|
+|found|boolean|False|True if found|True|
   
 Example output:
 
 ```
 {
-  "content": "",
+  "content": "<p>Example Content</p>",
   "found": true
 }
 ```
@@ -188,13 +185,13 @@ Get Page Content by Page ID
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|page_id|string|None|True|Page ID|None|None|
+|page_id|string|None|True|Page ID|None|100001|
   
 Example input:
 
 ```
 {
-  "page_id": ""
+  "page_id": 100001
 }
 ```
 
@@ -202,14 +199,14 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|content|string|False|Content|None|
-|found|boolean|False|True if found|None|
+|content|string|False|Content|<p>Example Content</p>|
+|found|boolean|False|True if found|True|
   
 Example output:
 
 ```
 {
-  "content": "",
+  "content": "<p>Example Content</p>",
   "found": true
 }
 ```
@@ -222,17 +219,17 @@ Store Page Content
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|content|string|None|True|Content To Store|None|None|
-|page|string|None|True|Page Name|None|None|
-|space|string|None|True|Space|None|None|
+|content|string|None|True|Content To Store|None|<p>Example Content</p>|
+|page|string|None|True|Page Name|None|Example page|
+|space|string|None|True|Space|None|Example Space|
   
 Example input:
 
 ```
 {
-  "content": "",
-  "page": "",
-  "space": ""
+  "content": "<p>Example Content</p>",
+  "page": "Example page",
+  "space": "Example Space"
 }
 ```
 
@@ -240,28 +237,25 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|page|page|False|Page Stored|None|
+|page|page|False|Page Stored|{ "content": "<p>Example Content</p>", "contentStatus": "current", "created": "2000-01-01T00:00:00.000Z", "creator": "Example User", "current": true, "homePage": false, "id": "100001", "modified": "2000-01-01T00:00:00.000Z", "space": "Example Space", "title": "Example Page", "url": "https://test.atlassian.net/wiki/spaces/~1111111a111aaaaa11a1aa111aaaaaa1aa1aaaa/pages/100001/Example+Page", "version": "2" }|
   
 Example output:
 
 ```
 {
   "page": {
-    "content": {},
-    "contentStatus": {},
-    "created": "",
-    "creator": {},
-    "current": {},
-    "homePage": "true",
-    "id": {},
-    "modified": {},
-    "modifier": {},
-    "parentId": {},
-    "permissions": {},
-    "space": {},
-    "title": "",
-    "url": {},
-    "version": {}
+    "content": "<p>Example Content</p>",
+    "contentStatus": "current",
+    "created": "2000-01-01T00:00:00.000Z",
+    "creator": "Example User",
+    "current": true,
+    "homePage": false,
+    "id": "100001",
+    "modified": "2000-01-01T00:00:00.000Z",
+    "space": "Example Space",
+    "title": "Example Page",
+    "url": "https://test.atlassian.net/wiki/spaces/~1111111a111aaaaa11a1aa111aaaaaa1aa1aaaa/pages/100001/Example+Page",
+    "version": "2"
   }
 }
 ```
@@ -308,4 +302,4 @@ Example output:
 
 ## References
   
-*This plugin does not contain any references.*
+* [Vendor](https://www.atlassian.com)

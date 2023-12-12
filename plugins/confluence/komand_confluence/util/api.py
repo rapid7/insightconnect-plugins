@@ -1,29 +1,26 @@
-
 from atlassian import Confluence
 
 from komand_confluence.util.util import exception_handler
 
 import logging
+
+
 class ConfluenceAPI:
 
-  def __init__(self, url: str = "", username: str = "", password: str = "", cloud: bool = False, client_id: str = "", token: str = ""):
+  def __init__(self,
+               url: str = "",
+               username: str = "",
+               api_token: str = "",
+               cloud: bool = False
+    ):
     self.url = url
     self.username = username
-    self.password = password
-    self.client_id = client_id
-    self.token = token
+    self.api_token = api_token
     self.cloud = cloud
     self.confluence = Confluence
 
   def login(self):
-    if self.client_id and self.token:
-      oauth2_dict = {
-        "client_id": self.client_id,
-        "token": self.token,
-      }
-      self.confluence = Confluence(url=self.url, oauth2=oauth2_dict, cloud=self.cloud)
-    elif self.username and self.password:
-      self.confluence = Confluence(url=self.url, username=self.username, password=self.password, cloud=self.cloud)
+    self.confluence = Confluence(url=self.url, username=self.username, password=self.api_token, cloud=self.cloud)
 
   def health_check(self):
     return self.confluence.health_check()
@@ -34,7 +31,12 @@ class ConfluenceAPI:
 
   @exception_handler
   def get_page_by_id(self, page_id: str):
-    return self.confluence.get_page_by_id(page_id=page_id, expand="body.view,space,history,version,ancestors", status=None, version=None)
+    return self.confluence.get_page_by_id(
+      page_id=page_id,
+      expand="body.view,space,history,version,ancestors",
+      status=None,
+      version=None
+    )
 
   @exception_handler
   def get_page_content(self, page_id: str):
