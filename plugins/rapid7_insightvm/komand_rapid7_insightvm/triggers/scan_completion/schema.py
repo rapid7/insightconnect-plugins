@@ -46,6 +46,7 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "CVSS V3 Score",
       "description": "A vulneravility score from 1-10. Only those with a score equal to or above the input will be shown",
+      "default": 0,
       "order": 6
     },
     "interval": {
@@ -60,6 +61,7 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
       "title": "Severity",
       "description": "Severity of the vulnerability",
       "enum": [
+        "",
         "Moderate",
         "Severe",
         "Critical"

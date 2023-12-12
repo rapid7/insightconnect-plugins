@@ -3277,9 +3277,9 @@ This action is used to fire upon completed scan
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |asset_group|string|None|False|Asset Group|None|2|
 |cve|string|None|False|CVE|None|ssh-cve-2018|
-|cvss_score|integer|None|False|A vulneravility score from 1-10. Only those with a score equal to or above the input will be shown|None|4|
+|cvss_score|integer|0|False|A vulneravility score from 1-10. Only those with a score equal to or above the input will be shown|None|4|
 |interval|integer|5|True|How often the trigger should check for new vulnerability scans in minutes|None|5|
-|severity|string|None|False|Severity of the vulnerability|['Moderate', 'Severe', 'Critical']|Severe|
+|severity|string|None|False|Severity of the vulnerability|['', 'Moderate', 'Severe', 'Critical']|Severe|
 |site_id|string|None|False|Site ID|None|219|
 |source|string|None|False|Source|None|url|
   
@@ -3289,7 +3289,7 @@ Example input:
 {
   "asset_group": 2,
   "cve": "ssh-cve-2018",
-  "cvss_score": 4,
+  "cvss_score": 0,
   "interval": 5,
   "severity": "Severe",
   "site_id": 219,

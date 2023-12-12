@@ -96,7 +96,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
         results_dict = {}
         for row in csv_report:
-            results_dict = Util.filter_results(params, row, results_dict)
+            results_dict.update(Util.filter_results(params, row, results_dict))
 
         return list(results_dict.values())
 
@@ -181,6 +181,8 @@ class Util:
 
         new_dict = {
             "asset_id": asset_id,
+            "hostname": csv_row.get("host_name", ""),
+            "ip_address": csv_row.get("ip_address", ""),
             "vulnerability_info": [
                 {
                     "vulnerability_id": csv_row.get("vulnerability_id", ""),
@@ -196,15 +198,15 @@ class Util:
         # If an input and it is not found, return None in place of the row to filter
         # out the result
         if asset_group and asset_group not in csv_row.get("asset_group_id", ""):
-            return None
+            return {}
         if cve and cve not in csv_row.get("nexpose_id", ""):
-            return None
+            return {}
         if source and source not in csv_row.get("source", ""):
-            return None
-        if cvss_score and cvss_score < csv_row.get("cvss_v3_score", 0):
-            return None
+            return {}
+        if cvss_score and csv_row.get("cvss_v3_score", 0) < cvss_score:
+            return {}
         if severity and severity not in csv_row.get("severity", ""):
-            return None
+            return {}
         # Otherwise, return the newly filtered result.
 
         existing_asset_id = results.get(asset_id, None)
