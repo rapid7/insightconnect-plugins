@@ -213,7 +213,7 @@ Example output:
 
 #### Store Page Content
   
-Store Page Content
+Store Page Content, will create a new page if the existing page cannot be found
 
 ##### Input
 
@@ -295,7 +295,14 @@ Example output:
 
 # Version History
   
-*This plugin does not contain a version history.*
+* 2.0.0 - Updated `Connection` input to use `Username`, `API Token` and `Cloud` | Replaced existing Atlassian API library | Added new actions `Get Page By ID` and `Get Page Content By ID`
+* 1.0.1 - New spec and help.md format for the Extension Library
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+* 0.1.3 - Pin Confluence python library at 0.2
+* 0.1.2 - SSL bug fix in SDK
+* 0.1.1 - Fix bug dumping credentials to log
+* 0.1.0 - Initial plugin
+
 
 # Links
 

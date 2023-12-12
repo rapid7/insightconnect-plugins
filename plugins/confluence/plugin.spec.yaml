@@ -155,7 +155,7 @@ actions:
         example: true
   store_page_content:
     title: Store Page Content
-    description: Store Page Content
+    description: Store Page Content, will create a new page if the existing page cannot be found
     input:
       page:
         type: string

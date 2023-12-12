@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Store Page Content"
+    DESCRIPTION = "Store Page Content, will create a new page if the existing page cannot be found"
 
 
 class Input:
