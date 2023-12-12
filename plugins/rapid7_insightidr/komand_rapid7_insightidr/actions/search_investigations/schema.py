@@ -111,6 +111,7 @@ class SearchInvestigationsOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
+    "investigations",
     "metadata"
   ],
   "definitions": {
