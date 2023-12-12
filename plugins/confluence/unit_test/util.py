@@ -15,7 +15,7 @@ class MockConnection:
         self.url = "https://test.atlassian.net"
         self.username = "testuser@example.com"
         self.api_token = {"secretKey": "abcdefg"}
-        self.client = ConfluenceAPI()
+        self.client = ConfluenceAPI(self.url, self.username, self.api_token)
 
     def get_headers(self):
         return
