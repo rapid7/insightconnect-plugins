@@ -7,7 +7,7 @@ from unittest import TestCase, mock
 from unittest.mock import Mock
 from parameterized import parameterized
 from unittest import TestCase
-from unit_test.util import Util
+from util import Util
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_confluence.actions.store_page_content import StorePageContent
 from komand_confluence.actions.store_page_content.schema import (

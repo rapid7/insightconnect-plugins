@@ -1,7 +1,7 @@
 import sys
 import os
 
-from unit_test.util import Util
+from util import Util
 
 sys.path.append(os.path.abspath("../"))
 

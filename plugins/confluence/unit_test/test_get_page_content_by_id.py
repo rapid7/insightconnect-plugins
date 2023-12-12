@@ -3,7 +3,7 @@ import os
 
 from parameterized import parameterized
 
-from unit_test.util import Util
+from util import Util
 
 sys.path.append(os.path.abspath("../"))
 
