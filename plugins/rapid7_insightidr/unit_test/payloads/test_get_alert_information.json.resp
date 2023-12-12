@@ -1,0 +1,79 @@
+{
+    "rrn": "rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:1c961b2402751096126c72ca3e07d7d6",
+    "version": 8,
+    "created_at": "2023-12-04T13:59:06.757109Z",
+    "updated_at": "2023-12-05T11:51:39.29059Z",
+    "alerted_at": "2023-12-04T13:59:06.349Z",
+    "ingested_at": "2023-12-04T13:59:06.751813Z",
+    "external_source": "IDR ABA",
+    "external_id": "d15867d9-81fe-4864-b7c1-72167b723da2",
+    "organization": {
+        "id": "cf946362-0809-426d-987c-849bde704c16",
+        "name": "Akeely Dev Test",
+        "region": "us1",
+        "product_token": "375EA8EDACEB1603216A",
+        "customer_id": "f441fdc8-51a4-48fa-ad88-228a0d232a7f",
+        "customer_name": "Akeely Dev Test",
+        "flags": []
+    },
+    "title": "MVD Verification",
+    "type": "MVD Verification",
+    "rule": {
+        "rrn": "rrn:cba:::detection-rule:0MMNZYSO0K3Y",
+        "mitre_tcodes": [
+            "Credential Access",
+            "T1110"
+        ],
+        "version_rrn": "rrn:cba:::detection-rule:version:8WRIZW8IJTHJ"
+    },
+    "rule_matching_keys": [
+        {
+            "key": "entryType",
+            "values": [
+                "ingress_auth"
+            ]
+        },
+        {
+            "key": "orgId",
+            "values": [
+                "cf946362-0809-426d-987c-849bde704c16"
+            ]
+        }
+    ],
+    "rule_keys_of_interest": [
+        {
+            "key": "result",
+            "values": [
+                "SUCCESS"
+            ]
+        },
+        {
+            "key": "account",
+            "values": [
+                "sync_bos-sync-01_12f795c3c118@rapid7.onmicrosoft.com"
+            ]
+        },
+        {
+            "key": "geoip_country_code",
+            "values": [
+                "US"
+            ]
+        },
+        {
+            "key": "source_ip",
+            "values": [
+                "208.118.227.31"
+            ]
+        }
+    ],
+    "responsibility": "MDR",
+    "priority": "LOW",
+    "status": "OPEN",
+    "disposition": "UNDECIDED",
+    "investigation_rrn": "rrn:investigation:us:cf946362-0809-426d-987c-849bde704c16:investigation:AF6JTFINWHGK",
+    "tags": [],
+    "permissions": {
+        "canEdit": false
+    },
+    "fields": []
+}
