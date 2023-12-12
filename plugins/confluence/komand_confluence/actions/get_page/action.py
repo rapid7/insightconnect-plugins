@@ -23,4 +23,3 @@ class GetPage(insightconnect_plugin_runtime.Action):
                 page = helper.clean_dict(page)
                 return {"page": page, "found": True}
         return {"page": {}, "found": False}
-
