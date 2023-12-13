@@ -23,11 +23,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         self.base_url = f"https://{params.get(Input.INSTANCE, '')}.service-now.com/"
 
-        username = params[Input.CLIENT_LOGIN].get("username", "")
-        password = params[Input.CLIENT_LOGIN].get("password", "")
+        username = params.get(Input.CLIENT_LOGIN, {}).get("username", "")
+        password = params.get(Input.CLIENT_LOGIN, {}).get("password", "")
 
         oauth_client_id = params.get(Input.CLIENT_ID)
-        oauth_client_secret = params[Input.CLIENT_SECRET].get("secretKey")
+        oauth_client_secret = params.get(Input.CLIENT_SECRET, {}).get("secretKey")
 
         if not oauth_client_id or not oauth_client_secret:
             self.logger.info(
