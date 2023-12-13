@@ -34,14 +34,14 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def test(self):
         """
         Tests connectivity to the InsightVM Console via administrative info endpoint
-        :param session: Requests session populated with basic auth credentials
-        :param console_url: URL to the InsightVM console
         :return: Namedtuple indicating connectivity (true = success, false = fail) and error message (if one exists)
         """
 
         endpoint = endpoints.Administration.get_info(self.console_url)
         Result = namedtuple("Result", "status message")
+        success_codes = (200, 201)
         response = None
+
         try:
             response = self.session.get(url=endpoint, verify=False)
         except RequestException:
@@ -50,8 +50,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
             else:
                 test_result = Result(False, "No response received")
         else:
-            status = response.status_code in [200, 201]
-            if status:
+            status = response.status_code
+            if status in success_codes:
                 test_result = Result(status, "Success")
             else:
                 test_result = Result(status, response.json()["message"])
