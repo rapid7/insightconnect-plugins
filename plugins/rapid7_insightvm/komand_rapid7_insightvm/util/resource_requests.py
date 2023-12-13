@@ -41,7 +41,7 @@ class ResourceRequests(object):
 
     # Static headers for all requests
     _HEADERS = {"Content-Type": "application/json", "Accept": "application/json"}
-    _ENSURECONNECTIVITY = (
+    _ENSURE_CONNECTIVITY = (
         "Ensure proper network connectivity between the InsightConnect orchestrator and the InsightVM console"
     )
 
@@ -50,10 +50,10 @@ class ResourceRequests(object):
         requests.HTTPError: "If this issue persists contact support for assistance.",
         requests.ConnectionError: "Unable to connect to IVM console."
         "If this issue persists contact support for assistance.",
-        requests.Timeout: _ENSURECONNECTIVITY,
-        requests.ConnectTimeout: _ENSURECONNECTIVITY,
-        requests.ReadTimeout: _ENSURECONNECTIVITY,
-        requests.TooManyRedirects: _ENSURECONNECTIVITY,
+        requests.Timeout: _ENSURE_CONNECTIVITY,
+        requests.ConnectTimeout: _ENSURE_CONNECTIVITY,
+        requests.ReadTimeout: _ENSURE_CONNECTIVITY,
+        requests.TooManyRedirects: _ENSURE_CONNECTIVITY,
     }
 
     # For request exceptions not in REQUEST_EXCEPTIONS
@@ -103,9 +103,9 @@ class ResourceRequests(object):
         extras = {"json": payload, "params": parameters.params}
         try:
             response = request_method(url=endpoint, verify=False, **extras)
-        except requests.RequestException as e:
-            assistance = self._REQUEST_EXCEPTIONS.get(type(e), self._UNHANDLED_EXCEPTION)
-            raise PluginException(cause=e, assistance=assistance)
+        except requests.RequestException as error:
+            assistance = self._REQUEST_EXCEPTIONS.get(type(error), self._UNHANDLED_EXCEPTION)
+            raise PluginException(cause=error, assistance=assistance)
 
         resource_request_status_code_check(response.text, response.status_code)
 
@@ -193,9 +193,9 @@ class ResourceRequests(object):
         extras = {"json": payload, "params": params.params}
         try:
             response = request_method(url=endpoint, verify=False, **extras)
-        except requests.RequestException as e:
-            assistance = self._REQUEST_EXCEPTIONS.get(type(e), self._UNHANDLED_EXCEPTION)
-            raise PluginException(cause=e, assistance=assistance)
+        except requests.RequestException as error:
+            assistance = self._REQUEST_EXCEPTIONS.get(type(error), self._UNHANDLED_EXCEPTION)
+            raise PluginException(cause=error, assistance=assistance)
 
         resource_request_status_code_check(response.text, response.status_code)
         try:
