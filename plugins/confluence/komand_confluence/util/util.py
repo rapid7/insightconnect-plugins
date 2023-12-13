@@ -1,3 +1,5 @@
+from typing import Dict, Any, Callable
+
 from atlassian.errors import (
     ApiPermissionError,
     ApiNotFoundError,
@@ -23,7 +25,7 @@ def normalize_page(p):
     return p
 
 
-def extract_page_data(page):
+def extract_page_data(page) -> Dict[str, Any]:
     url_base = page.get("_links", {}).get("base")
     endpoint = page.get("_links", {}).get("webui")
     home_page = page.get("space", {}).get("_expandable", {}).get("homepage", "")
@@ -50,7 +52,7 @@ def extract_page_data(page):
     }
 
 
-def exception_handler(func: Callable):
+def exception_handler(func: Callable) -> Callable:
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
