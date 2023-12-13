@@ -1033,6 +1033,7 @@ A User ID can be obtained by passing a username to the Get User Status action.
 
 # Version History
 
+* 4.3.1 - Monitor Logs task: Added exception logging and use latest plugin SDK (`5.3.1`).
 * 4.3.0 - Monitor Logs task: Added inputs for collecting events and logs. Updated 403 error handling 
 * 4.2.2 - Monitor Logs task: updated unit tests
 * 4.2.1 - Monitor Logs task: updated timestamp handling
