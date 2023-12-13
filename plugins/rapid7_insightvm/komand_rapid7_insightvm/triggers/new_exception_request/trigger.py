@@ -35,7 +35,7 @@ class NewExceptionRequest(insightconnect_plugin_runtime.Trigger):
         while True:
             # process all new exceptions.  The inner loop is to handle grabbing
             # multiple exceptions since last cycle.  It is broken when we run out
-            # of new vulnerabity exceptions to process returning us to the outer loop
+            # of new vulnerability exceptions to process returning us to the outer loop
             # where we sleep for the configured amount of time.
             # We detect that we're out of work to do when we try and grab the
             # next higher exception id and we get an exception back instead of a

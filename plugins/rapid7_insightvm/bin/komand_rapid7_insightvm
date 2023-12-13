@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Rapid7 InsightVM Console"
 Vendor = "rapid7"
-Version = "6.1.1"
+Version = "6.2.0"
 Description = "InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans"
 
 
@@ -37,6 +37,8 @@ def main():
             self.add_trigger(triggers.NewScans())
         
             self.add_trigger(triggers.NewExceptionRequest())
+        
+            self.add_trigger(triggers.ScanCompletion())
         
             self.add_action(actions.Scan())
         
