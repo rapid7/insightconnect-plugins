@@ -8,14 +8,14 @@ support: community
 status: []
 description: "Confluence is an open and shared workspace for managing documents and files within an organization. Using
 the Confluence plugin for Rapid7 InsightConnect, users can view and update pages dynamically within automation workflows"
-version: 1.0.1
+version: 2.0.0
+supported_versions: ["2023-12-12"]
+connection_version: 2
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/confluence
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.atlassian.com
-tags:
-- confluence
-- wiki
+tags: [confluence, wiki]
 hub_tags:
   use_cases: [asset_inventory]
   keywords: [confluence, wiki]
@@ -88,11 +88,25 @@ connection:
     type: string
     description: Connection URL
     required: true
-  credentials:
-    title: Username and Password
-    type: credential_username_password
-    description: Username and password
+    example: https://example.atlassian.net
+  username:
+    title: Username
+    type: string
+    description: Account username (Atlassian account email)
     required: true
+    example: user@example.com
+  api_token:
+    title: API Token
+    type: credential_secret_key
+    description: API token
+    required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
+  cloud:
+    title: Cloud
+    type: boolean
+    description: Is this a cloud instance
+    required: true
+    example: true
 actions:
   get_page_content:
     title: Get Page Content
@@ -102,40 +116,68 @@ actions:
         type: string
         description: Page Name
         required: true
+        example: Example Page
       space:
         type: string
         description: Space
         required: true
+        example: Example Space
     output:
       content:
         description: Content
         type: string
         required: false
+        example: <p>Example Content</p>
       found:
         type: boolean
         description: True if found
         required: false
+        example: true
+  get_page_content_by_id:
+    title: Get Page Content By ID
+    description: Get Page Content by Page ID
+    input:
+      page_id:
+        type: string
+        description: Page ID
+        required: true
+        example: 100001
+    output:
+      content:
+        description: Content
+        type: string
+        required: false
+        example: <p>Example Content</p>
+      found:
+        type: boolean
+        description: True if found
+        required: false
+        example: true
   store_page_content:
     title: Store Page Content
-    description: Store Page Content
+    description: Store Page Content, will create a new page if the existing page cannot be found
     input:
       page:
         type: string
         description: Page Name
         required: true
+        example: Example page
       space:
         type: string
         description: Space
         required: true
+        example: Example Space
       content:
         type: string
         description: Content To Store
         required: true
+        example: <p>Example Content</p>
     output:
       page:
         description: Page Stored
         type: page
         required: false
+        example: '{ "content": "<p>Example Content</p>", "contentStatus": "current", "created": "2000-01-01T00:00:00.000Z", "creator": "Example User", "current": true, "homePage": false, "id": "100001", "modified": "2000-01-01T00:00:00.000Z", "space": "Example Space", "title": "Example Page", "url": "https://test.atlassian.net/wiki/spaces/~1111111a111aaaaa11a1aa111aaaaaa1aa1aaaa/pages/100001/Example+Page", "version": "2" }'
   get_page:
     title: Get Page
     description: Get Page
@@ -144,16 +186,40 @@ actions:
         type: string
         description: Page Name
         required: true
+        example: Example Page
       space:
         type: string
         description: Space
         required: true
+        example: Example Space
     output:
       found:
         type: boolean
         description: True if found
         required: false
+        example: true
       page:
         description: Page
         type: page
         required: false
+        example: '{ "content": "<p>Example Content</p>", "contentStatus": "current", "created": "2000-01-01T00:00:00.000Z", "creator": "Example User", "current": true, "homePage": false, "id": "100001", "modified": "2000-01-01T00:00:00.000Z", "space": "Example Space", "title": "Example Page", "url": "https://test.atlassian.net/wiki/spaces/~1111111a111aaaaa11a1aa111aaaaaa1aa1aaaa/pages/100001/Example+Page", "version": "2" }'
+  get_page_by_id:
+    title: Get Page By ID
+    description: Get Page By ID
+    input:
+      page_id:
+        type: string
+        description: Page ID
+        required: true
+        example: 100001
+    output:
+      found:
+        type: boolean
+        description: True if found
+        required: false
+        example: true
+      page:
+        description: Page
+        type: page
+        required: false
+        example: '{ "content": "<p>Example Content</p>", "contentStatus": "current", "created": "2000-01-01T00:00:00.000Z", "creator": "Example User", "current": true, "homePage": false, "id": "100001", "modified": "2000-01-01T00:00:00.000Z", "space": "Example Space", "title": "Example Page", "url": "https://test.atlassian.net/wiki/spaces/~1111111a111aaaaa11a1aa111aaaaaa1aa1aaaa/pages/100001/Example+Page", "version": "2" }'
