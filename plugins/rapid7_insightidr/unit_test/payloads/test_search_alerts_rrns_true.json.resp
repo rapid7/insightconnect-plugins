@@ -1,0 +1,16 @@
+{
+    "rrns": [
+        "rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:2dcee8460472e58a385cbd4909b7238c",
+        "rrn:alerts:us1:cf946362-0809-426d-987c-849bde704c16:alert:1:64561936cfbaec0201af423876e05efb"
+    ],
+    "alerts": [],
+    "metadata": {
+        "index": 0,
+        "size": 2,
+        "items_in_index": 2,
+        "total_items": 8417,
+        "is_last_index": false
+    },
+    "aggregates": [],
+    "region_failures": []
+}

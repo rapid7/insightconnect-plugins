@@ -50,17 +50,17 @@ Example input:
 
 #### Add Indicators to a Threat
   
-Add InsightIDR threat indicators to a threat with the given threat key
+This action is used to add InsightIDR threat indicators to a threat with the given threat key
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain_names|[]string|None|False|Domain names to add. e.g. ["rapid7.com","google.com"]|None|["rapid7.com", "google.com"]|
-|hashes|[]string|None|False|Process hashes to add. e.g. ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]|None|["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3", "C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]|
-|ips|[]string|None|False|IP addresses to add. e.g. ["10.0.0.1","10.0.0.2"]|None|["10.0.0.1", "10.0.0.2"]|
-|key|string|None|True|The key of a threat for which the indicators are going to be added. e.g. c9404e11-b81a-429d-9400-05c531f229c3|None|c9404e11-b81a-429d-9400-05c531f229c3|
-|urls|[]string|None|False|URLs to add. e.g. ["https://example.com","https://test.com"]|None|["https://example.com", "https://test.com"]|
+|domain_names|[]string|None|False|Domain names to add|None|["rapid7.com", "google.com"]|
+|hashes|[]string|None|False|Process hashes to add|None|["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3", "C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]|
+|ips|[]string|None|False|IP addresses to add|None|["10.0.0.1", "10.0.0.2"]|
+|key|string|None|True|The key of a threat for which the indicators are going to be added|None|c9404e11-b81a-429d-9400-05c531f229c3|
+|urls|[]string|None|False|URLs to add|None|["https://example.com", "https://test.com"]|
   
 Example input:
 
@@ -110,7 +110,7 @@ Example output:
 
 #### Advanced Query on Log
   
-Realtime query an InsightIDR log. This will query individual logs for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges 
+This action is used to realtime query an InsightIDR log. This will query individual logs for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges
 
 ##### Input
 
@@ -149,7 +149,7 @@ Example output:
 ```
 {
   "count": 10,
-  "results": {
+  "results_events": {
     "labels": [],
     "links": [
       {
@@ -200,7 +200,7 @@ Example output:
       },
       "timestamp": "2020-10-02T00:29:14.649Z"
     },
-    "sequence_number": 123456789123456780,
+    "sequence_number": 123456789123456789,
     "sequence_number_str": "123456789123456789",
     "timestamp": 1601598638768
   },
@@ -222,7 +222,7 @@ Example output:
       "events_all": 1640,
       "events_checked": 1640,
       "events_matched": 1639,
-      "index_factor": 0
+      "index_factor": 0.0
     },
     "statistics": {
       "all_exact_result": true,
@@ -232,12 +232,12 @@ Example output:
       "groups": [
         {
           "linux": {
-            "count": 1163
+            "count": 1163.0
           }
         },
         {
           "windowsx64": {
-            "count": 476
+            "count": 476.0
           }
         }
       ],
@@ -247,38 +247,38 @@ Example output:
             "groups_timeseries": [],
             "series": [
               {
-                "count": 45
+                "count": 45.0
               },
               {
-                "count": 21
+                "count": 21.0
               },
               {
-                "count": 16
+                "count": 16.0
               },
               {
-                "count": 270
+                "count": 270.0
               },
               {
-                "count": 27
+                "count": 27.0
               },
               {
-                "count": 43
+                "count": 43.0
               },
               {
-                "count": 27
+                "count": 27.0
               },
               {
-                "count": 39
+                "count": 39.0
               },
               {
-                "count": 29
+                "count": 29.0
               },
               {
-                "count": 646
+                "count": 646.0
               }
             ],
             "totals": {
-              "count": 1163
+              "count": 1163.0
             }
           }
         },
@@ -287,38 +287,38 @@ Example output:
             "groups_timeseries": [],
             "series": [
               {
-                "count": 54
+                "count": 54.0
               },
               {
-                "count": 40
+                "count": 40.0
               },
               {
-                "count": 60
+                "count": 60.0
               },
               {
-                "count": 37
+                "count": 37.0
               },
               {
-                "count": 42
+                "count": 42.0
               },
               {
-                "count": 62
+                "count": 62.0
               },
               {
-                "count": 41
+                "count": 41.0
               },
               {
-                "count": 47
+                "count": 47.0
               },
               {
-                "count": 49
+                "count": 49.0
               },
               {
-                "count": 44
+                "count": 44.0
               }
             ],
             "totals": {
-              "count": 476
+              "count": 476.0
             }
           }
         }
@@ -338,7 +338,7 @@ Example output:
 
 #### Advanced Query on Log Set
   
-Realtime query an InsightIDR log set. This will query entire log sets for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges
+This action is used to realtime query an InsightIDR log set. This will query entire log sets for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges
 
 ##### Input
 
@@ -428,137 +428,137 @@ Example output:
       },
       "timestamp": "2020-10-02T00:29:14.649Z"
     },
-    "sequence_number": 123456789123456780,
+    "sequence_number": 123456789123456789,
     "sequence_number_str": "123456789123456789",
-    "timestamp": 1601598638768,
-    "results_statistical": {
-      "leql": {
-        "during": {
-          "from": 1699579214000,
-          "to": 1699622414000
-        },
-        "statement": "groupby(r7_context.asset.name)"
-      },
-      "logs": [
-        "123456-abcd-1234-abcd-123456abc"
-      ],
-      "search_stats": {
-        "bytes_all": 9961260,
-        "bytes_checked": 9961260,
-        "duration_ms": 19,
-        "events_all": 1640,
-        "events_checked": 1640,
-        "events_matched": 1639,
-        "index_factor": 0
-      },
-      "statistics": {
-        "all_exact_result": true,
-        "cardinality": 0,
+    "timestamp": 1601598638768
+  },
+  "results_statistical": {
+    "leql": {
+      "during": {
         "from": 1699579214000,
-        "granularity": 4320000,
-        "groups": [
-          {
-            "linux": {
-              "count": 1163
-            }
-          },
-          {
-            "windowsx64": {
-              "count": 476
-            }
+        "to": 1699622414000
+      },
+      "statement": "groupby(r7_context.asset.name)"
+    },
+    "logs": [
+      "123456-abcd-1234-abcd-123456abc"
+    ],
+    "search_stats": {
+      "bytes_all": 9961260,
+      "bytes_checked": 9961260,
+      "duration_ms": 19,
+      "events_all": 1640,
+      "events_checked": 1640,
+      "events_matched": 1639,
+      "index_factor": 0.0
+    },
+    "statistics": {
+      "all_exact_result": true,
+      "cardinality": 0,
+      "from": 1699579214000,
+      "granularity": 4320000,
+      "groups": [
+        {
+          "linux": {
+            "count": 1163.0
           }
-        ],
-        "groups_timeseries": [
-          {
-            "linux": {
-              "groups_timeseries": [],
-              "series": [
-                {
-                  "count": 45
-                },
-                {
-                  "count": 21
-                },
-                {
-                  "count": 16
-                },
-                {
-                  "count": 270
-                },
-                {
-                  "count": 27
-                },
-                {
-                  "count": 43
-                },
-                {
-                  "count": 27
-                },
-                {
-                  "count": 39
-                },
-                {
-                  "count": 29
-                },
-                {
-                  "count": 646
-                }
-              ],
-              "totals": {
-                "count": 1163
-              }
-            }
-          },
-          {
-            "windowsx64": {
-              "groups_timeseries": [],
-              "series": [
-                {
-                  "count": 54
-                },
-                {
-                  "count": 40
-                },
-                {
-                  "count": 60
-                },
-                {
-                  "count": 37
-                },
-                {
-                  "count": 42
-                },
-                {
-                  "count": 62
-                },
-                {
-                  "count": 41
-                },
-                {
-                  "count": 47
-                },
-                {
-                  "count": 49
-                },
-                {
-                  "count": 44
-                }
-              ],
-              "totals": {
-                "count": 476
-              }
-            }
-          }
-        ],
-        "others": {
-          "series": []
         },
-        "stats": {},
-        "status": 200,
-        "timeseries": {},
-        "to": 1699622414000,
-        "type": "count"
-      }
+        {
+          "windowsx64": {
+            "count": 476.0
+          }
+        }
+      ],
+      "groups_timeseries": [
+        {
+          "linux": {
+            "groups_timeseries": [],
+            "series": [
+              {
+                "count": 45.0
+              },
+              {
+                "count": 21.0
+              },
+              {
+                "count": 16.0
+              },
+              {
+                "count": 270.0
+              },
+              {
+                "count": 27.0
+              },
+              {
+                "count": 43.0
+              },
+              {
+                "count": 27.0
+              },
+              {
+                "count": 39.0
+              },
+              {
+                "count": 29.0
+              },
+              {
+                "count": 646.0
+              }
+            ],
+            "totals": {
+              "count": 1163.0
+            }
+          }
+        },
+        {
+          "windowsx64": {
+            "groups_timeseries": [],
+            "series": [
+              {
+                "count": 54.0
+              },
+              {
+                "count": 40.0
+              },
+              {
+                "count": 60.0
+              },
+              {
+                "count": 37.0
+              },
+              {
+                "count": 42.0
+              },
+              {
+                "count": 62.0
+              },
+              {
+                "count": 41.0
+              },
+              {
+                "count": 47.0
+              },
+              {
+                "count": 49.0
+              },
+              {
+                "count": 44.0
+              }
+            ],
+            "totals": {
+              "count": 476.0
+            }
+          }
+        }
+      ],
+      "others": {
+        "series": []
+      },
+      "stats": {},
+      "status": 200,
+      "timeseries": {},
+      "to": 1699622414000,
+      "type": "count"
     }
   }
 }
@@ -566,7 +566,7 @@ Example output:
 
 #### Assign User to Investigation
   
-Assign a user to the specified investigation
+This action is used to assign a user to the specified investigation
 
 ##### Input
 
@@ -618,7 +618,7 @@ Example output:
 
 #### Close Investigations in Bulk
   
-This action is used to close all investigations that fall within a date range
+This action is used to this action is used to close all investigations that fall within a date range
 
 ##### Input
 
@@ -662,8 +662,7 @@ Example output:
 
 #### Create Comment
   
-Create a comment for a particular target. The target determines where the comment will appear within InsightIDR. Only 
-certain types of RRNs are permitted as targets, such as investigation RRNs
+This action is used to create a comment for a particular target. The target determines where the comment will appear within InsightIDR. Only certain types of RRNs are permitted as targets, such as investigation RRNs
 
 ##### Input
 
@@ -727,7 +726,7 @@ Example output:
 
 #### Create Investigation
   
-Allows to create investigation manually
+This action is used to allows to create investigation manually
 
 ##### Input
 
@@ -783,7 +782,7 @@ Example output:
 
 #### Create Threat
   
-Create a private InsightIDR threat and add indicators to this threat
+This action is used to create a private InsightIDR threat and add indicators to this threat
 
 ##### Input
 
@@ -830,7 +829,7 @@ Example output:
 
 #### Delete Attachment
   
-Delete an attachment with the given RRN
+This action is used to delete an attachment with the given RRN
 
 ##### Input
 
@@ -862,7 +861,7 @@ Example output:
 
 #### Delete Comment
   
-Delete a comment by using an RRN. The RRN determines which comment will be deleted
+This action is used to delete a comment by using an RRN. The RRN determines which comment will be deleted
 
 ##### Input
 
@@ -894,7 +893,7 @@ Example output:
 
 #### Download Attachment
   
-Download an attachment by RRN. The RRN determines which attachment is downloaded
+This action is used to download an attachment by RRN. The RRN determines which attachment is downloaded
 
 ##### Input
 
@@ -928,7 +927,7 @@ Example output:
 
 #### Get a Log
   
-Get a specific log from an account
+This action is used to get a specific log from an account
 
 ##### Input
 
@@ -997,7 +996,7 @@ Example output:
 
 #### Get a Saved Query
   
-Retrieve a saved InsightIDR LEQL query by its ID
+This action is used to retrieve a saved InsightIDR LEQL query by its ID
 
 ##### Input
 
@@ -1041,9 +1040,320 @@ Example output:
 }
 ```
 
+#### Retrieve Actors for a Single Alert
+  
+This action is used to allows the user to retrieve actors for a single alert from an alert RRN
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|alert_rrn|string|None|True|The RRN of the alert|None|rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:actor:1:12345678-abcd-cdef-1234-12345abg|
+|index|integer|0|False|Zero-based index of the page to retrieve, where value must be greater than or equal to 0|None|1|
+|size|integer|100|False|Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100|None|100|
+  
+Example input:
+
+```
+{
+  "alert_rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:actor:1:12345678-abcd-cdef-1234-12345abg",
+  "index": 0,
+  "size": 100
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|actors|[]actor_object|False|The alerts actors|[{"display_name": "test display name", "id": "12345678-abcd-cdef-1234-12345abc", "rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:actor:1:12345678-abcd-cdef-1234-12345abg", "type": "ACCOUNT", "user_id": "12345678-abcd-cdef-1234-12345abf"}]|
+|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|{'index': 0, 'size': 1, 'total_data': 1, 'total_pages': 1}|
+  
+Example output:
+
+```
+{
+  "actors": {
+    "display_name": "test display name",
+    "id": "12345678-abcd-cdef-1234-12345abc",
+    "rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:actor:1:12345678-abcd-cdef-1234-12345abg",
+    "type": "ACCOUNT",
+    "user_id": "12345678-abcd-cdef-1234-12345abf"
+  },
+  "metadata": {
+    "index": 0,
+    "size": 1,
+    "total_data": 1,
+    "total_pages": 1
+  }
+}
+```
+
+#### Retrieve Evidence for a Single Alert
+  
+This action is used to allows the user to retrieve evidence for a single alert from an alert RRN
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|alert_rrn|string|None|True|The RRN of the alert|None|rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:actor:1:12345678-abcd-cdef-1234-12345abg|
+|index|integer|0|False|Zero-based index of the page to retrieve, where value must be greater than or equal to 0|None|1|
+|size|integer|100|False|Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100|None|100|
+  
+Example input:
+
+```
+{
+  "alert_rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:actor:1:12345678-abcd-cdef-1234-12345abg",
+  "index": 0,
+  "size": 100
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|evidences|[]evidence_object|False|The alert evidence|[{"created_at": "2023-12-04T13:59:06.768731Z", "data": {"timestamp": "2023-12-04T13:44:56.000Z", "user": "test_user", "account": "test_user", "result": "SUCCESS", "source_ip": "1.1.1.1", "service": "o365", "geoip_city": "Boston", "geoip_country_code": "US", "geoip_country_name": "United States", "geoip_organization": "TowardEX Technologies International", "geoip_region": "MA", "source_json": {"CreationTime": "2023-12-04T13:44:56", "Id": "12345678-abcd-cdef-1234-12345abc0", "Operation": "UserLoggedIn", "OrganizationId": "12345678-abcd-cdef-1234-12345abc", "RecordType": 15, "ResultStatus": "Success", "UserKey": "12345678-abcd-cdef-1234-12345abc", "UserType": 0, "Version": 1, "Workload": "AzureActiveDirectory", "ClientIP": "1.1.1.1", "ObjectId": "00000002-0000-0000-c000-000000000000", "UserId": "test_user", "AzureActiveDirectoryEventType": 1, "ExtendedProperties": [{"Name": "ResultStatusDetail", "Value": "Success"}, {"Name": "UserAuthenticationMethod", "Value": "1"}, {"Name": "RequestType", "Value": "OAuth2:Token"}], "ModifiedProperties": [], "Actor": [{"ID": "12345678-abcd-cdef-1234-12345abc", "Type": 0}, {"ID": "test_user", "Type": 5}], "ActorContextId": "12345678-abcd-cdef-1234-12345abc", "ActorIpAddress": "1.1.1.1", "InterSystemsId": "1bd394a5-be1b-4af3-a608-8ec6c73d5c02", "IntraSystemId": "12345678-abcd-cdef-1234-12345abc0", "SupportTicketId": "", "Target": [{"ID": "00000002-0000-0000-c000-000000000000", "Type": 0}], "TargetContextId": "12345678-abcd-cdef-1234-12345abc", "ApplicationId": "cb1056e2-e479-49de-ae31-7812af012ed8", "DeviceProperties": [{"Name": "OS", "Value": "Windows10"}, {"Name": "BrowserType", "Value": "Other"}, {"Name": "SessionId", "Value": "512345678-abcd-cdef-1234-12345abc"}], "ErrorNumber": "0"}, "custom_data": {"SourceRelative Url": "TargetContextId", "source_account": "RecordType"}, "r7_context": {"user": {"type": "user", "rrn": "rrn:uba:us:512345678-abcd-cdef-1234-12345abc:user:ABCDEFGH", "name": "test_user"}, "account": {"type": "account", "rrn": "rrn:uba:us:512345678-abcd-cdef-1234-12345abc:account:ABCDEFGH", "name": "test_user"}}}, "event_type": "ingress_auth", "evented_at": "2023-12-04T13:59:06.349Z", "external_source": "IDR ABA", "rrn": "rrn:alerts:us1:512345678-abcd-cdef-1234-12345abc:evidence:1:512345678-abcd-cdef-1234-12345abc", "updated_at": "2023-12-04T13:59:06.768731Z", "version": 1}]|
+|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|{'index': 0, 'size': 1, 'total_data': 1, 'total_pages': 1}|
+  
+Example output:
+
+```
+{
+  "evidences": {
+    "created_at": "2023-12-04T13:59:06.768731Z",
+    "data": {
+      "account": "test_user",
+      "custom_data": {
+        "SourceRelative Url": "TargetContextId",
+        "source_account": "RecordType"
+      },
+      "geoip_city": "Boston",
+      "geoip_country_code": "US",
+      "geoip_country_name": "United States",
+      "geoip_organization": "TowardEX Technologies International",
+      "geoip_region": "MA",
+      "r7_context": {
+        "account": {
+          "name": "test_user",
+          "rrn": "rrn:uba:us:512345678-abcd-cdef-1234-12345abc:account:ABCDEFGH",
+          "type": "account"
+        },
+        "user": {
+          "name": "test_user",
+          "rrn": "rrn:uba:us:512345678-abcd-cdef-1234-12345abc:user:ABCDEFGH",
+          "type": "user"
+        }
+      },
+      "result": "SUCCESS",
+      "service": "o365",
+      "source_ip": "1.1.1.1",
+      "source_json": {
+        "Actor": [
+          {
+            "ID": "12345678-abcd-cdef-1234-12345abc",
+            "Type": 0
+          },
+          {
+            "ID": "test_user",
+            "Type": 5
+          }
+        ],
+        "ActorContextId": "12345678-abcd-cdef-1234-12345abc",
+        "ActorIpAddress": "1.1.1.1",
+        "ApplicationId": "cb1056e2-e479-49de-ae31-7812af012ed8",
+        "AzureActiveDirectoryEventType": 1,
+        "ClientIP": "1.1.1.1",
+        "CreationTime": "2023-12-04T13:44:56",
+        "DeviceProperties": [
+          {
+            "Name": "OS",
+            "Value": "Windows10"
+          },
+          {
+            "Name": "BrowserType",
+            "Value": "Other"
+          },
+          {
+            "Name": "SessionId",
+            "Value": "512345678-abcd-cdef-1234-12345abc"
+          }
+        ],
+        "ErrorNumber": "0",
+        "ExtendedProperties": [
+          {
+            "Name": "ResultStatusDetail",
+            "Value": "Success"
+          },
+          {
+            "Name": "UserAuthenticationMethod",
+            "Value": "1"
+          },
+          {
+            "Name": "RequestType",
+            "Value": "OAuth2:Token"
+          }
+        ],
+        "Id": "12345678-abcd-cdef-1234-12345abc0",
+        "InterSystemsId": "1bd394a5-be1b-4af3-a608-8ec6c73d5c02",
+        "IntraSystemId": "12345678-abcd-cdef-1234-12345abc0",
+        "ModifiedProperties": [],
+        "ObjectId": "00000002-0000-0000-c000-000000000000",
+        "Operation": "UserLoggedIn",
+        "OrganizationId": "12345678-abcd-cdef-1234-12345abc",
+        "RecordType": 15,
+        "ResultStatus": "Success",
+        "SupportTicketId": "",
+        "Target": [
+          {
+            "ID": "00000002-0000-0000-c000-000000000000",
+            "Type": 0
+          }
+        ],
+        "TargetContextId": "12345678-abcd-cdef-1234-12345abc",
+        "UserId": "test_user",
+        "UserKey": "12345678-abcd-cdef-1234-12345abc",
+        "UserType": 0,
+        "Version": 1,
+        "Workload": "AzureActiveDirectory"
+      },
+      "timestamp": "2023-12-04T13:44:56.000Z",
+      "user": "test_user"
+    },
+    "event_type": "ingress_auth",
+    "evented_at": "2023-12-04T13:59:06.349Z",
+    "external_source": "IDR ABA",
+    "rrn": "rrn:alerts:us1:512345678-abcd-cdef-1234-12345abc:evidence:1:512345678-abcd-cdef-1234-12345abc",
+    "updated_at": "2023-12-04T13:59:06.768731Z",
+    "version": 1
+  },
+  "metadata": {
+    "index": 0,
+    "size": 1,
+    "total_data": 1,
+    "total_pages": 1
+  }
+}
+```
+
+#### Get Alert Information
+  
+This action is used to get information from an alert by RRN. The RRN determines which alert the information is retrieved
+ from
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|alert_rrn|string|None|True|The RRN of the alert|None|rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg|
+  
+Example input:
+
+```
+{
+  "alert_rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:actor:1:12345678-abcd-cdef-1234-12345abg"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|alert|alert_object|False|Alert details|{'alerted_at': '2023-12-04T13:59:06.349Z', 'created_at': '2023-12-04T13:59:06.757109Z', 'disposition': 'UNDECIDED', 'external_id': '12345678-abcd-cdef-1234-12345abc', 'external_source': 'IDR ABA', 'fields': [], 'ingested_at': '2023-12-04T13:59:06.751813Z', 'investigation_rrn': 'rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI', 'organization': {'customer_id': '12345678-abcd-cdef-1234-12345abc', 'customer_name': 'Dev Test', 'flags': [], 'id': '12345678-abcd-cdef-1234-12345abc', 'name': 'Dev Test', 'product_token': 'abcdefgh12345abc', 'region': 'us1'}, 'permissions': {'canEdit': False}, 'priority': 'LOW', 'responsibility': 'MDR', 'rrn': 'rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abc', 'rule': {'mitre_tcodes': ['Credential Access', 'T1110'], 'rrn': 'rrn:cba:::detection-rule:ABCDEFGHIJK', 'version_rrn': 'rrn:cba:::detection-rule:version:ABCDEFGHIJK'}, 'rule_keys_of_interest': [{'key': 'result', 'values': ['SUCCESS']}, {'key': 'account', 'values': ['test_account']}, {'key': 'geoip_country_code', 'values': ['US']}, {'key': 'source_ip', 'values': ['1.1.1.1']}], 'rule_matching_keys': [{'key': 'entryType', 'values': ['ingress_auth']}, {'key': 'orgId', 'values': ['12345678-abcd-cdef-1234-12345abc']}], 'status': 'OPEN', 'tags': [], 'title': 'MVD Verification', 'type': 'MVD Verification', 'updated_at': '2023-12-05T11:51:39.29059Z', 'version': 8}|
+|success|boolean|True|Whether the action was successful or not|True|
+  
+Example output:
+
+```
+{
+  "alert": {
+    "alerted_at": "2023-12-04T13:59:06.349Z",
+    "created_at": "2023-12-04T13:59:06.757109Z",
+    "disposition": "UNDECIDED",
+    "external_id": "12345678-abcd-cdef-1234-12345abc",
+    "external_source": "IDR ABA",
+    "fields": [],
+    "ingested_at": "2023-12-04T13:59:06.751813Z",
+    "investigation_rrn": "rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI",
+    "organization": {
+      "customer_id": "12345678-abcd-cdef-1234-12345abc",
+      "customer_name": "Dev Test",
+      "flags": [],
+      "id": "12345678-abcd-cdef-1234-12345abc",
+      "name": "Dev Test",
+      "product_token": "abcdefgh12345abc",
+      "region": "us1"
+    },
+    "permissions": {
+      "canEdit": false
+    },
+    "priority": "LOW",
+    "responsibility": "MDR",
+    "rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abc",
+    "rule": {
+      "mitre_tcodes": [
+        "Credential Access",
+        "T1110"
+      ],
+      "rrn": "rrn:cba:::detection-rule:ABCDEFGHIJK",
+      "version_rrn": "rrn:cba:::detection-rule:version:ABCDEFGHIJK"
+    },
+    "rule_keys_of_interest": [
+      {
+        "key": "result",
+        "values": [
+          "SUCCESS"
+        ]
+      },
+      {
+        "key": "account",
+        "values": [
+          "test_account"
+        ]
+      },
+      {
+        "key": "geoip_country_code",
+        "values": [
+          "US"
+        ]
+      },
+      {
+        "key": "source_ip",
+        "values": [
+          "1.1.1.1"
+        ]
+      }
+    ],
+    "rule_matching_keys": [
+      {
+        "key": "entryType",
+        "values": [
+          "ingress_auth"
+        ]
+      },
+      {
+        "key": "orgId",
+        "values": [
+          "12345678-abcd-cdef-1234-12345abc"
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "tags": [],
+    "title": "MVD Verification",
+    "type": "MVD Verification",
+    "updated_at": "2023-12-05T11:51:39.29059Z",
+    "version": 8
+  },
+  "success": true
+}
+```
+
 #### Get All Logs
   
-Request used to list all logs for an account
+This action is used to request used to list all logs for an account
 
 ##### Input
   
@@ -1102,7 +1412,7 @@ Example output:
 
 #### Get All Saved Queries
   
-Retrieve all saved InsightIDR LEQL queries
+This action is used to retrieve all saved InsightIDR LEQL queries
 
 ##### Input
   
@@ -1138,7 +1448,7 @@ Example output:
 
 #### Get Asset Information
   
-Get information from an asset by RRN. The RRN determines which asset the information is retrieved from
+This action is used to get information from an asset by RRN. The RRN determines which asset the information is retrieved from
 
 ##### Input
 
@@ -1175,7 +1485,7 @@ Example output:
 
 #### Get Attachment Information
   
-Get information from an attachment by RRN. The RRN determines which attachment information is retrieved from
+This action is used to get information from an attachment by RRN. The RRN determines which attachment information is retrieved from
 
 ##### Input
 
@@ -1220,7 +1530,7 @@ Example output:
 
 #### Get Investigation
   
-Allows to get existing investigation by ID or RRN
+This action is used to allows to get existing investigation by ID or RRN
 
 ##### Input
 
@@ -1268,7 +1578,7 @@ Example output:
 
 #### Get User Information
   
-Get information from an user by RRN. The RRN determines which user the information is retrieved from
+This action is used to get information from an user by RRN. The RRN determines which user the information is retrieved from
 
 ##### Input
 
@@ -1308,7 +1618,7 @@ Example output:
 
 #### List Alerts for Investigation
   
-Retrieve a page of alerts associated with the specified investigation
+This action is used to retrieve a page of alerts associated with the specified investigation
 
 ##### Input
 
@@ -1360,7 +1670,7 @@ Example output:
 
 #### List Attachments
   
-Retrieves attachments matching the given request parameters
+This action is used to retrieves attachments matching the given request parameters
 
 ##### Input
 
@@ -1409,7 +1719,7 @@ Example output:
 
 #### List Comments
   
-List all comments on an investigation by passing an investigation's RRN as the target value
+This action is used to list all comments on an investigation by passing an investigation's RRN as the target value
 
 ##### Input
 
@@ -1457,7 +1767,7 @@ Example output:
 
 #### List Investigations
   
-Retrieve a page of investigations matching the given request parameters
+This action is used to retrieve a page of investigations matching the given request parameters
 
 ##### Input
 
@@ -1538,7 +1848,7 @@ Example output:
 
 #### Get Query Results
   
-Get query results for a LEQL query by log ID
+This action is used to get query results for a LEQL query by log ID
 
 ##### Input
 
@@ -1626,7 +1936,7 @@ Example output:
 
 #### Replace Indicators
   
-Replace InsightIDR threat indicators in a threat with the given threat key
+This action is used to replace InsightIDR threat indicators in a threat with the given threat key
 
 ##### Input
 
@@ -1679,9 +1989,150 @@ Example output:
 }
 ```
 
+#### Search Alerts
+  
+This action is used to allows the user to search for alerts that match the given criteria
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|aggregates|[]aggregate_object|None|False|Aggregations to apply for all matching results|None|[{}]|
+|end_time|date|None|False|An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned, if provided a start time will also need provided. If no times are provided a default of 6 months will be used|None|2020-06-01T12:11:13+05:30|
+|field_ids|[]string|None|False|Additional fields to include for each alert. No additional fields are included if field_ids is empty|None|[]|
+|index|integer|0|False|Zero-based index of the page to retrieve, where value must be greater than or equal to 0|None|1|
+|leql|string|None|False|The LEQL 'WHERE' clause to match against|None||
+|rrns_only|boolean|False|False|Indicates whether the response returns only the alert Rapid7 Resource Names (RRNs) or the alert RRNs and the alert details. If rrns_only is set to TRUE, the response returns the RRNs only. If rrns_only is set to FALSE or is unspecified, the response returns the RRNs and the alert details|None|False|
+|size|integer|100|False|Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100|None|100|
+|sorts|[]sort_object|None|False|The sort order to apply to the matching results., where possible field values are RRN, PRIORITY, CREATED TIME, and order values are ASCENDING_NULLS_LAST, ASCENDING_NULLS_FIRST, DESCENDING_NULLS_LAST, DESCENDING_NULLS_FIRST|None|[{"field_id": "Example Field", "order": "ASCENDING_NULLS_LAST"}]|
+|start_time|date|None|False|An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned, if provided an end time will also need provided. If no times are provided a default of 6 months will be used|None|2020-06-01T12:11:13+05:30|
+|terms|[]terms_object|None|False|The search terms to match against|None||
+  
+Example input:
+
+```
+{
+  "aggregates": {},
+  "end_time": "2020-06-01T12:11:13+05:30",
+  "field_ids": [],
+  "index": 0,
+  "leql": "",
+  "rrns_only": false,
+  "size": 100,
+  "sorts": [
+    {
+      "field_id": "Example Field",
+      "order": "ASCENDING_NULLS_LAST"
+    }
+  ],
+  "start_time": "2020-06-01T12:11:13+05:30",
+  "terms": ""
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|alerts|[]alert_object|False|A list of found alerts|[{"alerted_at": "2023-12-04T13:59:06.349Z", "created_at": "2023-12-04T13:59:06.757109Z", "disposition": "UNDECIDED", "external_id": "12345678-abcd-cdef-1234-12345abc", "external_source": "IDR ABA", "fields": [], "ingested_at": "2023-12-04T13:59:06.751813Z", "investigation_rrn": "rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI", "organization": {"customer_id": "12345678-abcd-cdef-1234-12345abc", "customer_name": "Dev Test", "flags": [], "id": "12345678-abcd-cdef-1234-12345abc", "name": "Dev Test", "product_token": "abcdefgh12345abc", "region": "us1"}, "permissions": {"canEdit": False}, "priority": "LOW", "responsibility": "MDR", "rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abc", "rule": {"mitre_tcodes": ["Credential Access", "T1110"], "rrn": "rrn:cba:::detection-rule:ABCDEFGHIJK", "version_rrn": "rrn:cba:::detection-rule:version:ABCDEFGHIJK"}, "rule_keys_of_interest": [{"key": "result", "values": ["SUCCESS"]}, {"key": "account", "values": ["test_account"]}, {"key": "geoip_country_code", "values": ["US"]}, {"key": "source_ip", "values": ["1.1.1.1"]}], "rule_matching_keys": [{"key": "entryType", "values": ["ingress_auth"]}, {"key": "orgId", "values": ["12345678-abcd-cdef-1234-12345abc"]}], "status": "OPEN", "tags": [], "title": "MVD Verification", "type": "MVD Verification", "updated_at": "2023-12-05T11:51:39.29059Z", "version": 8}]|
+|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|{'index': 0, 'size': 1, 'total_data': 1, 'total_pages': 1}|
+|rrns|[]string|False|A list of the rrns for the found alerts|["rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg", "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abd"]|
+  
+Example output:
+
+```
+{
+  "alerts": {
+    "alerted_at": "2023-12-04T13:59:06.349Z",
+    "created_at": "2023-12-04T13:59:06.757109Z",
+    "disposition": "UNDECIDED",
+    "external_id": "12345678-abcd-cdef-1234-12345abc",
+    "external_source": "IDR ABA",
+    "fields": [],
+    "ingested_at": "2023-12-04T13:59:06.751813Z",
+    "investigation_rrn": "rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI",
+    "organization": {
+      "customer_id": "12345678-abcd-cdef-1234-12345abc",
+      "customer_name": "Dev Test",
+      "flags": [],
+      "id": "12345678-abcd-cdef-1234-12345abc",
+      "name": "Dev Test",
+      "product_token": "abcdefgh12345abc",
+      "region": "us1"
+    },
+    "permissions": {
+      "canEdit": false
+    },
+    "priority": "LOW",
+    "responsibility": "MDR",
+    "rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abc",
+    "rule": {
+      "mitre_tcodes": [
+        "Credential Access",
+        "T1110"
+      ],
+      "rrn": "rrn:cba:::detection-rule:ABCDEFGHIJK",
+      "version_rrn": "rrn:cba:::detection-rule:version:ABCDEFGHIJK"
+    },
+    "rule_keys_of_interest": [
+      {
+        "key": "result",
+        "values": [
+          "SUCCESS"
+        ]
+      },
+      {
+        "key": "account",
+        "values": [
+          "test_account"
+        ]
+      },
+      {
+        "key": "geoip_country_code",
+        "values": [
+          "US"
+        ]
+      },
+      {
+        "key": "source_ip",
+        "values": [
+          "1.1.1.1"
+        ]
+      }
+    ],
+    "rule_matching_keys": [
+      {
+        "key": "entryType",
+        "values": [
+          "ingress_auth"
+        ]
+      },
+      {
+        "key": "orgId",
+        "values": [
+          "12345678-abcd-cdef-1234-12345abc"
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "tags": [],
+    "title": "MVD Verification",
+    "type": "MVD Verification",
+    "updated_at": "2023-12-05T11:51:39.29059Z",
+    "version": 8
+  },
+  "metadata": {
+    "index": 0,
+    "size": 1,
+    "total_data": 1,
+    "total_pages": 1
+  }
+}
+```
+
 #### Search Investigations
   
-Allows to search for investigations that match the given criteria
+This action is used to allows to search for investigations that match the given criteria
 
 ##### Input
 
@@ -1757,7 +2208,7 @@ Example output:
 
 #### Set Disposition of Investigation
   
-Allows to change the disposition of the investigation with the given ID or RRN
+This action is used to allows to change the disposition of the investigation with the given ID or RRN
 
 ##### Input
 
@@ -1807,7 +2258,7 @@ Example output:
 
 #### Set Priority of Investigation
   
-Allows to change the priority of the investigation with the given ID or RRN
+This action is used to allows to change the priority of the investigation with the given ID or RRN
 
 ##### Input
 
@@ -1857,7 +2308,7 @@ Example output:
 
 #### Set Status of Investigation
   
-Set the status of the investigation with the given ID
+This action is used to set the status of the investigation with the given ID
 
 ##### Input
 
@@ -1907,7 +2358,7 @@ Example output:
 
 #### Update Investigation
   
-Allows to update existing investigation by ID or RRN
+This action is used to allows to update existing investigation by ID or RRN
 
 ##### Input
 
@@ -1965,7 +2416,7 @@ Example output:
 
 #### Upload Attachment
   
-Upload an attachment
+This action is used to upload an attachment
 
 ##### Input
 
@@ -2052,17 +2503,17 @@ Example output:
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Assignee|assignee|None|False|The user assigned to this investigation, if any|None|
-|Created Time|string|None|True|The time the investigation was created as an ISO formatted timestamp|None|
-|Disposition|string|None|True|The disposition of this investigation, where possible values are BENIGN, MALICIOUS, NOT_APPLICABLE, and UNSPECIFIED|None|
+|Created Time|string|None|False|The time the investigation was created as an ISO formatted timestamp|None|
+|Disposition|string|None|False|The disposition of this investigation, where possible values are BENIGN, MALICIOUS, NOT_APPLICABLE, and UNSPECIFIED|None|
 |First Alert Time|string|None|False|The create time of the first alert belonging to this investigation|None|
-|Last Accessed|string|None|True|The time investigation was last viewed or modified|None|
+|Last Accessed|string|None|False|The time investigation was last viewed or modified|None|
 |Latest Alert Time|string|None|False|The create time of the most recent alert belonging to this investigation|None|
-|Organization ID|string|None|True|The id of the organization that owns this investigation|None|
-|Priority|string|None|True|The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNKNOWN|None|
-|RRN|string|None|True|The RRN of the investigation|None|
-|Source|string|None|True|The source of this investigation|None|
-|Status|string|None|True|The status of the investigation|None|
-|Title|string|None|True|Investigation title|None|
+|Organization ID|string|None|False|The id of the organization that owns this investigation|None|
+|Priority|string|None|False|The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNKNOWN|None|
+|RRN|string|None|False|The RRN of the investigation|None|
+|Source|string|None|False|The source of this investigation|None|
+|Status|string|None|False|The status of the investigation|None|
+|Title|string|None|False|Investigation title|None|
   
 **threat**
 
@@ -2109,24 +2560,6 @@ Example output:
 |Product Name|string|None|False|Product name|None|
 |Product Status|string|None|False|Product status|None|
 |RTP State|string|None|False|RTP state|None|
-
-**statistics**
-
-|Name|Type|Default|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- |
-|All Exact Results|boolean|None|True|Boolean indicating whether groups are calculated approximately (approximated if a groupby query involves over 10,000 groups)|None|
-|Cardinality|integer|None|True|Always 0|None|
-|From|integer|None|True|The start of the time range for the query, as a UNIX timestamp in milliseconds|None|
-|Granularity|integer|None|True|The time window in milliseconds for each time slice in the time series|None|
-|Groups|[]object|None|True|Holds the overall result for each group in a 'groupby' query|None|
-|Groups Time Series|[]object|None|True|For 'groupby' queries, holds the timeseries object for each group|None|
-|Key|string|None|False|The key which the function of the 'calculate' clause is applied to|None|
-|Others|object|None|True|Not yet implemented|None|
-|Stats|object|None|True|Holds the overall result when query does not contain a 'groupby' clause|None|
-|Status|integer|None|True|Holds a status code for the query, potentially different from the status code of the response|None|
-|Time Series|object|None|True|Holds the query results for each timeslice (each partition of the time_range), for non-'groupby' queries|None|
-|To|integer|None|True|The end of the time range for the query, as a UNIX timestamp in milliseconds|None|
-|Type|string|None|True|The type of function performed, for example, "count", "max", "average", "standarddeviation"|None|
   
 **message**
 
@@ -2150,6 +2583,24 @@ Example output:
 |Message|message|None|None|Message|None|
 |Sequence Number|integer|None|None|Sequence number|None|
 |Timestamp|integer|None|None|Timestamp|None|
+  
+**statistics**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|All Exact Results|boolean|None|False|Boolean indicating whether groups are calculated approximately (approximated if a groupby query involves over 10,000 groups)|None|
+|Cardinality|integer|None|False|Always 0|None|
+|From|integer|None|False|The start of the time range for the query, as a UNIX timestamp in milliseconds|None|
+|Granularity|integer|None|False|The time window in milliseconds for each time slice in the time series|None|
+|Groups|[]object|None|False|Holds the overall result for each group in a 'groupby' query|None|
+|Groups Time Series|[]object|None|False|For 'groupby' queries, holds the timeseries object for each group|None|
+|Key|string|None|False|The key which the function of the 'calculate' clause is applied to|None|
+|Others|object|None|False|Not yet implemented|None|
+|Stats|object|None|False|Holds the overall result when query does not contain a 'groupby' clause|None|
+|Status|integer|None|False|Holds a status code for the query, potentially different from the status code of the response|None|
+|Time Series|object|None|False|Holds the query results for each timeslice (each partition of the time_range), for non-'groupby' queries|None|
+|To|integer|None|False|The end of the time range for the query, as a UNIX timestamp in milliseconds|None|
+|Type|string|None|False|The type of function performed, for example, "count", "max", "average", "standarddeviation"|None|
   
 **links**
 
@@ -2246,6 +2697,137 @@ Example output:
 |Name|string|None|False|The user friendly name for this asset.|None|
 |RRN|string|None|False|The unique identifier for this asset.|None|
 
+**alert_object**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Alerted at|string|None|False|The timestamp associated with the underlying event or evidence that InsightIDR detected in the source system.|None|
+|Assignee|assignee_object|None|False|The user assigned to the alert.|None|
+|Created at|string|None|False|The timestamp when InsightIDR finished creating the alert in the Alerts experience.|None|
+|Disposition|string|None|False|The disposition of the alert.|None|
+|External ID|string|None|False|The identifier of the alert in the system, identified by external_source.|None|
+|External Source|string|None|False|The source of the alert.|None|
+|Fields|[]object|None|False|Additional fields specified in the request.|None|
+|Ingested at|string|None|False|The timestamp when the event or evidence from the source system was received by the Alerts experience in InsightIDR.|None|
+|Investigation RRN|string|None|False|The RRN of the investigation that the alert is part of.|None|
+|Monitored|boolean|None|False|Indicates whether monitoring for the organization was active at the time of the alert.|None|
+|organization|organization_object|None|False|The details of the organization that the alert belongs to.|None|
+|Permissions|permissions_object|None|False|The permissions the current caller has for the alert.|None|
+|Priority|string|None|False|The priority of the alert.|None|
+|Responsibility|string|None|False|Indicates the party responsible for the alert.|None|
+|RRN|string|None|False|The unique identifier for this alert.|None|
+|Rule|rule_object|None|False|The details about the alert's detection rule.|None|
+|Rule Keys of Interest|[]object|None|False|The keys and values used when matching detection rule logic.|None|
+|Rule Matching Keys|[]object|None|False|The keys and values used when matching detection rule logic.|None|
+|Status|string|None|False|The status of the alert.|None|
+|Status Transitions|status_transitions_object|None|False|Information about when the alert status was changed.|None|
+|Tags|[]string|None|False|The tags applied to the alert.|None|
+|Title|string|None|False|The description of the alert.|None|
+|Type|string|None|False|The type of alert.|None|
+|Updated at|string|None|False|The timestamp when the alert was last updated in InsightIDR.|None|
+|Version|integer|None|False|The version of the alert.|None|
+  
+**organization_object**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Customer Code|string|None|False|The customer code for the organization.|None|
+|Customer Group|string|None|False|The customer group responsible for the organization.|None|
+|Customer ID|string|None|False|The unique identifier of the customer.|None|
+|Customer Name|string|None|False|The display name of the customer.|None|
+|Flags|[]string|None|False|The flags associated with the organization.|None|
+|ID|string|None|False|The unique identifier of the organization.|None|
+|Name|string|None|False|The display name of the organization.|None|
+|Product Token|string|None|False|The Platform productToken associated with the organization's product.|None|
+|Region|string|None|False|The region that the organization is assigned to.|None|
+  
+**rule_object**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Mitre Tcodes|[]string|None|False|The mitreTCodes associated with the detection rule.|None|
+|Name|string|None|False|The display name for the detection rule.|None|
+|RRN|string|None|False|The unique identifier of the detection rule.|None|
+|Version RRN|string|None|False|The version RRN of the detection rule.|None|
+  
+**assignee_object**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|At|string|None|False|The timestamp when the user was assigned.|None|
+|Email|string|None|False|The email address of the user.|None|
+|First Name|string|None|False|The displayed first name of the user.|None|
+|ID|string|None|False|The unique identifier of the user.|None|
+|Last Name|string|None|False|The displayed last name of the user.|None|
+  
+**status_transitions_object**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Seconds to first closed|integer|None|False|The number of seconds between when the alert was created and when the alert moved to the CLOSED status.|None|
+|Seconds to first investigating|integer|None|False|The number of seconds between when the alert was created and when the alert moved to the INVESTIGATING status, or when it moved directly to the CLOSED status.|None|
+  
+**permissions_object**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Can edit|boolean|None|False|Indicates whether the current caller can edit the alert.|None|
+  
+**terms_object**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Field IDs|[]string|None|False|The identifier of the field for the values to match against.|[]|
+|Operator|string|EQUALS|False|The search operator to apply.|EQUALS|
+|Terms|[]|None|True|The value for the field to match against. Values are separated by an OR operator.|[]|
+  
+**aggregate_object**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Count order|string|None|True|TThe sort order for the count.|None|
+|Fields|[]field_object|None|True|The field identifiers to aggregate by.|None|
+|Name|string|None|True|The identifier of the aggregation, which you specify. Identifiers should be unique and are included in the response.|None|
+|Type|string|MEDIAN|False|Type of aggregate.|None|
+  
+**field_object**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Field ID|string|None|True|The field to aggregate on.|None|
+|Interval|string|None|False|For fields that support histograms (such as number and date fields), the interval for each bucket. For date fields, the interval is interpreted as the number of seconds.|None|
+|Order|string|None|True|The sort order for the fields.|None|
+  
+**sort_object**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Field ID|string|None|True|The field to aggregate on.|None|
+|Order|string|None|True|The sort order for the fields.|None|
+  
+**evidence_object**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Created at|string|None|False|The timestamp when the evidence was created.|None|
+|Data|string|None|False|The evidence data.|None|
+|Evented at|string|None|False|The timestamp when the event that triggered the alert occurred in the source system.|None|
+|External Source|string|None|False|The source of the evidence.|None|
+|External Type|string|None|False|The type of the evidence.|None|
+|RRN|string|None|False|The unique RRN of the evidence.|None|
+|Updated at|string|None|False|The timestamp when the evidence was last updated.|None|
+|Version|integer|None|False|The version of the evidence.|None|
+  
+**actor_object**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Display Name|string|None|False|The display name of the actor (for example, John Doe or user@example.com).|None|
+|ID|string|None|False|The identifier of the actor.|None|
+|RRN|string|None|False|The unique RRN of the actor.|None|
+|Type|string|None|False|The type of actor (for example, ASSET, ACCOUNT, or IP_ADDRESS).|None|
+|User ID|string|None|False|User ID for an actor.|None|
+
 
 ## Troubleshooting
   
@@ -2253,6 +2835,7 @@ Example output:
 
 # Version History
 
+* 8.0.0 - Update schema for `Investigation` and `Statistics` | Update dependency for aiohttp | New actions added `Get Alert Information`, `Search Alerts`, `Retrieve Evidence for a Single Alert` and `Retrieve Actors for a Single Alert` | Fixed issue where index was not getting correctly passed through to `List Investigations` action from the user
 * 7.0.0 - Action: `Advanced Query On Log Set` - Fixed error where statistical queries would always return 0.0 | Action: `Advanced Query On Log Set` - Increase the maximum results returned from 50 to 500 |  Action: `Advanced Query On Log` - Add new output type for statistical queries | Updated schemas to ensure all are correct and added new schema validation to unit tests
 * 6.0.1 - Action: `Advanced Query On Log` - Increase the maximum results returned from 50 to 500
 * 6.0.0 - Action: `Advanced Query On Log Set` - Add new output type for statistical queries.

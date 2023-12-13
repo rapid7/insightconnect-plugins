@@ -30,6 +30,7 @@ class ListInvestigations(insightconnect_plugin_runtime.Action):
             "priorities": convert_list_to_string(params.get(Input.PRIORITIES)),
             "statuses": convert_list_to_string(params.get(Input.STATUSES)),
             "size": params.get(Input.SIZE),
+            "index": params.get(Input.INDEX),
         }
 
         if start_time:
