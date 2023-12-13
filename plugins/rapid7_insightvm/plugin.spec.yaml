@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM Console
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans
-version: 6.1.1
+version: 6.2.0
 supported_versions: ["Rapid7 InsightVM API v3 2022-05-25"]
 vendor: rapid7
 support: rapid7
@@ -4306,7 +4306,7 @@ actions:
         example: True
   asset_vulnerability_solution:
     title: Get Asset Vulnerability Solutions
-    description: Returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset
+    description: Return the highest-superceding rollup solutions for a list of vulnerabilities on an asset
     input:
       asset_id:
         title: Asset ID
@@ -4476,3 +4476,81 @@ triggers:
         type: vulnerability_exception
         required: false
         example: {}
+  scan_completion:
+    title: Scan Completed
+    description: Fire upon completed scan
+    input:
+      interval:
+        title: Interval
+        description: How often the trigger should check for new vulnerability scans in minutes
+        type: integer
+        required: true
+        default: 5
+        example: 5
+      site_id:
+        title: Site ID
+        description: Site ID
+        type: string
+        required: false
+        example: 219
+      asset_group:
+        title: Asset Group
+        description: Asset Group
+        type: string
+        required: false
+        example: 2
+      cve:
+        title: CVE
+        description: CVE
+        type: string
+        required: false
+        example: ssh-cve-2018
+      source:
+        title: Source
+        description: Source
+        type: string
+        required: false
+        example: url
+      cvss_score:
+        title: CVSS V3 Score
+        description: A vulneravility score from 1-10. Only those with a score equal to or above the input will be shown
+        type: integer
+        required: false
+        default: 0
+        example: 4
+      severity:
+        title: Severity
+        description: Severity of the vulnerability
+        type: string
+        required: false
+        enum:
+          - ""
+          - Moderate
+          - Severe
+          - Critical
+        example: Severe
+    output:
+      asset_id:
+        title: Asset ID
+        description: Asset ID
+        type: integer
+        required: false
+        example: 219
+      hostname:
+        title: Hostname
+        description: Hostname
+        type: string
+        required: false
+        example: doc.rapid7.com
+      ip:
+        title: IP
+        description: IP
+        type: string
+        required: false
+        example: 8.8.8.8
+      vulnerability_info:
+        title: Vulnerability Info
+        description: An array containing vulnerability id, solution id & solution summary
+        type: '[]object'
+        required: false
+        example: [{'vulnerability_id': 1111, 'nexpose_id': 'ssh-cve-2018', 'solution_id': 1111, 'solution_summary': 'Example solution for cve'}, {'vulnerability_id': 2222, 'nexpose_id': 'ssh-cve-2019', 'solution_id': 2222, 'solution_summary': 'Example solution for cve'}]

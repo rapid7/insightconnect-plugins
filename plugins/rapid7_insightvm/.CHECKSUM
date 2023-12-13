@@ -1,7 +1,7 @@
 {
-	"spec": "e8da36ef239156809597572946df2ea3",
-	"manifest": "138d918083ad59c0f8de7c018212a929",
-	"setup": "5f4d67fe3ecbe62a6ac891aa442e20b9",
+	"spec": "8c162487e4fc21d316ae671ff14bdada",
+	"manifest": "1ad7045d507da48f30f04999d8e73b3b",
+	"setup": "1c6dcdf34833dd8b8ada2f2a80ae8279",
 	"schemas": [
 		{
 			"identifier": "add_scan_engine_pool_engine/schema.py",
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "asset_vulnerability_solution/schema.py",
-			"hash": "58bbe516a723ad6f7ab992533d3379b7"
+			"hash": "c42741c78364bf55ff0c82fd735f3612"
 		},
 		{
 			"identifier": "create_asset_group/schema.py",
@@ -370,6 +370,10 @@
 		{
 			"identifier": "new_scans/schema.py",
 			"hash": "a907a9c47939be620564f30a3e8a6533"
+		},
+		{
+			"identifier": "scan_completion/schema.py",
+			"hash": "25386d06cb7cd3fe16a007c2aabe7c87"
 		}
 	]
 }
