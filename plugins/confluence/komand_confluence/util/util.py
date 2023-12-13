@@ -26,7 +26,7 @@ def normalize_page(p):
 def extract_page_data(page):
     url_base = page.get("_links", {}).get("base")
     endpoint = page.get("_links", {}).get("webui")
-    home_page = page.get("space", {}).get("_expandable").get("homepage", "")
+    home_page = page.get("space", {}).get("_expandable", {}).get("homepage", "")
     page_id = page.get("id")
     is_home_page = page_id in home_page
     ancestors = page.get("ancestors")
@@ -44,13 +44,13 @@ def extract_page_data(page):
         "version": f'{page.get("version", {}).get("number")}',
         "homePage": is_home_page,
         "id": page_id,
-        "current": page.get("status").lower() == "current",
+        "current": page.get("status", "").lower() == "current",
         "contentStatus": page.get("status"),
         "modified": page.get("version", {}).get("when"),
     }
 
 
-def exception_handler(func):
+def exception_handler(func: Callable):
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)

@@ -30,7 +30,7 @@ class ConfluenceAPI:
         )
 
     def health_check(self):
-        return self.confluence.health_check()
+        self.confluence.health_check()
 
     @exception_handler
     def get_page_id(self, title: str, space: str) -> str:
@@ -64,5 +64,5 @@ class ConfluenceAPI:
             return self.confluence.create_page(title=title, body=content, space=space)
 
     @exception_handler
-    def page_exists(self, space: str, title: str):
+    def page_exists(self, space: str, title: str) -> bool:
         return self.confluence.page_exists(space=space, title=title)
