@@ -3966,7 +3966,7 @@ Example output:
 
 # Version History
 
-* 6.2.0 - `Scan Completion` - New trigger added to retrieve vulnerability information on assets when a scan is completed | Improved error handling across all API calls
+* 6.2.0 - `Scan Completion` - New trigger added to retrieve vulnerability information on assets when a scan is completed
 * 6.1.1 - Update actions `Update Site Excluded Targets` and `Update Site Included Targets` to prevent error on empty addresses
 * 6.1.0 - Add new optional input `override_blackout` in `Scan` action
 * 6.0.0 - Fix file output type for `Generate Adhoc SQL Report` | Replace custom output type `file` with `insightvm_file` for each item in the `asset` `files` output in multiple actions
