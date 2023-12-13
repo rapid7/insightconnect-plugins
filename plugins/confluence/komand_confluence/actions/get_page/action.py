@@ -20,6 +20,7 @@ class GetPage(insightconnect_plugin_runtime.Action):
         title = params.get("page")
         space = params.get("space")
         page_id = self.connection.client.get_page_id(title=title, space=space)
+        self.logger.info(f"Found page with ID: {page_id}")
         if page_id:
             data = self.connection.client.get_page_by_id(page_id=page_id)
             if data:
