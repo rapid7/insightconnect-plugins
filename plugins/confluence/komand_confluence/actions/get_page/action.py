@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetPageInput, GetPageOutput
+from .schema import GetPageInput, GetPageOutput, Output
 from insightconnect_plugin_runtime import helper
 
 # Custom imports below
@@ -17,13 +17,13 @@ class GetPage(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         """Return a page."""
-        title = params["page"]
-        space = params["space"]
+        title = params.get("page")
+        space = params.get("space")
         page_id = self.connection.client.get_page_id(title=title, space=space)
         if page_id:
             data = self.connection.client.get_page_by_id(page_id=page_id)
             if data:
                 page = extract_page_data(page=data)
                 page = helper.clean_dict(page)
-                return {"page": page, "found": True}
-        return {"page": {}, "found": False}
+                return {Output.PAGE: page, Output.FOUND: True}
+        return {Output.PAGE: {}, Output.FOUND: False}

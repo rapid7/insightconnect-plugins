@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetPageContentByIdInput, GetPageContentByIdOutput
+from .schema import GetPageContentByIdInput, GetPageContentByIdOutput, Output
 
 
 class GetPageContentById(insightconnect_plugin_runtime.Action):
@@ -12,8 +12,8 @@ class GetPageContentById(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        page_id = params["page_id"]
+        page_id = params.get("page_id")
         data = self.connection.client.get_page_content(page_id=page_id)
         if data:
-            return {"content": data, "found": True}
-        return {"found": False, "content": ""}
+            return {Output.CONTENT: data, Output.FOUND: True}
+        return {Output.FOUND: False, Output.CONTENT: ""}

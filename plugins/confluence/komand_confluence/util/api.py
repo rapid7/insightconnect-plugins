@@ -1,3 +1,5 @@
+from typing import Dict, Any, Union
+
 from atlassian import Confluence
 
 from komand_confluence.util.util import exception_handler
@@ -31,11 +33,11 @@ class ConfluenceAPI:
         return self.confluence.health_check()
 
     @exception_handler
-    def get_page_id(self, title: str, space: str):
+    def get_page_id(self, title: str, space: str) -> str:
         return self.confluence.get_page_id(title=title, space=space)
 
     @exception_handler
-    def get_page_by_id(self, page_id: str):
+    def get_page_by_id(self, page_id: str) -> Dict[str, Any]:
         return self.confluence.get_page_by_id(
             page_id=page_id,
             expand="body.view,space,history,version,ancestors",
@@ -44,14 +46,14 @@ class ConfluenceAPI:
         )
 
     @exception_handler
-    def get_page_content(self, page_id: str):
+    def get_page_content(self, page_id: str) -> Union[Dict[str, Any], None]:
         data = self.confluence.get_page_by_id(page_id=page_id, expand="body.view", status=None, version=None)
         if data:
             return data.get("body", {}).get("view", {}).get("value")
         return None
 
     @exception_handler
-    def store_page_content(self, content: str, title: str, space: str):
+    def store_page_content(self, content: str, title: str, space: str) -> Dict[str, Any]:
         page_exists = self.page_exists(space=space, title=title)
         if page_exists:
             logging.info("Updating page...")

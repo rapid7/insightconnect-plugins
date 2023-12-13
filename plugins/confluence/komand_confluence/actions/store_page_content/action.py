@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import StorePageContentInput, StorePageContentOutput
+from .schema import StorePageContentInput, StorePageContentOutput, Output
 
 # Custom imports below
 from insightconnect_plugin_runtime.helper import clean_dict
@@ -23,4 +23,4 @@ class StorePageContent(insightconnect_plugin_runtime.Action):
         data = self.connection.client.store_page_content(title=title, space=space, content=content)
         page = extract_page_data(page=data)
         page = clean_dict(page)
-        return {"page": page}
+        return {Output.PAGE: page}

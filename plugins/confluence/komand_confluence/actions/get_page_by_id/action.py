@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetPageByIdInput, GetPageByIdOutput
+from .schema import GetPageByIdInput, GetPageByIdOutput, Output
 from insightconnect_plugin_runtime import helper
 
 # Custom imports below
@@ -22,6 +22,5 @@ class GetPageById(insightconnect_plugin_runtime.Action):
         if data:
             page = extract_page_data(page=data)
             page = helper.clean_dict(page)
-            return {"page": page, "found": True}
-
-        return {"page": {}, "found": False}
+            return {Output.PAGE: page, Output.FOUND: True}
+        return {Output.PAGE: {}, Output.FOUND: False}
