@@ -112,8 +112,8 @@ class ResourceRequests(object):
         if json_response:
             try:
                 resource = response.json()
-            except json.decoder.JSONDecodeError:
-                raise PluginException(preset=PluginException.Preset.INVALID_JSON)
+            except json.decoder.JSONDecodeError as error:
+                raise PluginException(preset=PluginException.Preset.INVALID_JSON, error=f"Error returned: {error}")
         else:
             resource = {"raw": response.text}
 
@@ -200,8 +200,8 @@ class ResourceRequests(object):
         resource_request_status_code_check(response.text, response.status_code)
         try:
             response_json = response.json()
-        except json.decoder.JSONDecodeError:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON)
+        except json.decoder.JSONDecodeError as error:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, error=f"Error returned: {error}")
 
         result = RequestResult(
             page_num=response_json["page"]["number"],
