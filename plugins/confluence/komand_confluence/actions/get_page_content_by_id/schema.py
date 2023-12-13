@@ -4,12 +4,11 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get Page Content"
+    DESCRIPTION = "Get Page Content by Page ID"
 
 
 class Input:
-    PAGE = "page"
-    SPACE = "space"
+    PAGE_ID = "page_id"
 
 
 class Output:
@@ -17,26 +16,20 @@ class Output:
     FOUND = "found"
 
 
-class GetPageContentInput(insightconnect_plugin_runtime.Input):
+class GetPageContentByIdInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "page": {
+    "page_id": {
       "type": "string",
-      "description": "Page Name",
+      "description": "Page ID",
       "order": 1
-    },
-    "space": {
-      "type": "string",
-      "description": "Space",
-      "order": 2
     }
   },
   "required": [
-    "page",
-    "space"
+    "page_id"
   ],
   "definitions": {}
 }
@@ -46,7 +39,7 @@ class GetPageContentInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class GetPageContentOutput(insightconnect_plugin_runtime.Output):
+class GetPageContentByIdOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "object",

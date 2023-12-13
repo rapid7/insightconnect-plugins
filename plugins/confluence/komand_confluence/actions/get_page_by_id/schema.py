@@ -4,45 +4,32 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Store Page Content, will create a new page if the existing page cannot be found"
+    DESCRIPTION = "Get Page By ID"
 
 
 class Input:
-    CONTENT = "content"
-    PAGE = "page"
-    SPACE = "space"
+    PAGE_ID = "page_id"
 
 
 class Output:
+    FOUND = "found"
     PAGE = "page"
 
 
-class StorePageContentInput(insightconnect_plugin_runtime.Input):
+class GetPageByIdInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "content": {
+    "page_id": {
       "type": "string",
-      "description": "Content To Store",
-      "order": 3
-    },
-    "page": {
-      "type": "string",
-      "description": "Page Name",
+      "description": "Page ID",
       "order": 1
-    },
-    "space": {
-      "type": "string",
-      "description": "Space",
-      "order": 2
     }
   },
   "required": [
-    "content",
-    "page",
-    "space"
+    "page_id"
   ],
   "definitions": {}
 }
@@ -52,16 +39,21 @@ class StorePageContentInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class StorePageContentOutput(insightconnect_plugin_runtime.Output):
+class GetPageByIdOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
+    "found": {
+      "type": "boolean",
+      "description": "True if found",
+      "order": 1
+    },
     "page": {
       "$ref": "#/definitions/page",
-      "description": "Page Stored",
-      "order": 1
+      "description": "Page",
+      "order": 2
     }
   },
   "definitions": {
