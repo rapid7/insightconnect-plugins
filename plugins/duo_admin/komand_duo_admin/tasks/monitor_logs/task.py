@@ -241,11 +241,13 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
                 return new_logs, state, has_more_pages, 200, None
             except ApiException as error:
+                self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
                 state[self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES] = []
                 state[self.PREVIOUS_ADMIN_LOG_HASHES] = []
                 state[self.PREVIOUS_AUTH_LOG_HASHES] = []
                 return [], state, False, error.status_code, error
         except Exception as error:
+            self.logger.info(f"An Exception has been raised. Error: {error}")
             state[self.PREVIOUS_TRUST_MONITOR_EVENT_HASHES] = []
             state[self.PREVIOUS_ADMIN_LOG_HASHES] = []
             state[self.PREVIOUS_AUTH_LOG_HASHES] = []
