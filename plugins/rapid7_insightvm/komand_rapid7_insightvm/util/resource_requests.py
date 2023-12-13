@@ -113,7 +113,7 @@ class ResourceRequests(object):
             try:
                 resource = response.json()
             except json.decoder.JSONDecodeError as error:
-                raise PluginException(preset=PluginException.Preset.INVALID_JSON, error=f"Error returned: {error}")
+                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=f"Error returned: {error}")
         else:
             resource = {"raw": response.text}
 
@@ -201,7 +201,7 @@ class ResourceRequests(object):
         try:
             response_json = response.json()
         except json.decoder.JSONDecodeError as error:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, error=f"Error returned: {error}")
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=f"Error returned: {error}")
 
         result = RequestResult(
             page_num=response_json["page"]["number"],
