@@ -3,3 +3,5 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 beautifulsoup4==4.9.1
 pypandoc==1.5
+wheel==0.38.0
+setuptools==65.5.1
