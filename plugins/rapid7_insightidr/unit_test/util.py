@@ -100,7 +100,12 @@ class Util:
                     self.text = "Not found."
                 if self.filename == "download_attachment":
                     self.content = b"test"
-                if self.filename in ["test_search_alerts_rrns_true", "test_search_alerts_rrns_false"]:
+                if self.filename in [
+                    "test_search_alerts_rrns_true",
+                    "test_search_alerts_rrns_false",
+                    "test_search_accounts_1",
+                    "test_search_accounts_2",
+                ]:
                     self.text = Util.read_file_to_string(
                         os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp")
                     )
@@ -268,6 +273,18 @@ class Util:
         ):
             return MockResponse("not_found", 404)
 
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/accounts/rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:account:00875N0IK0RJ"
+        ):
+            return MockResponse("test_get_account_by_rrn", 200)
+
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/accounts/rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:account:123456789"
+        ):
+            return MockResponse("not_found", 404)
+
         if args[0] == f"{Util.STUB_URL_API}/log_search/management/logs":
             return MockResponse("logs", 200)
         elif (
@@ -322,5 +339,11 @@ class Util:
                 return MockResponse("test_search_alerts_rrns_true", 200)
             else:
                 return MockResponse("test_search_alerts_rrns_false", 200)
+
+        if args[1] == "https://us.api.insight.rapid7.com/idr/v1/accounts/_search":
+            if kwargs.get("params", {}).get("size") == 1:
+                return MockResponse("test_search_accounts_1", 200)
+            elif kwargs.get("params", {}).get("size") == 2:
+                return MockResponse("test_search_accounts_2", 200)
 
         raise Exception("Not implemented")

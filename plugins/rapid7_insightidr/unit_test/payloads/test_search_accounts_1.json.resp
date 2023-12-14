@@ -1,0 +1,21 @@
+{
+    "data": [
+        {
+            "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:account:0037K0U3ZE9R",
+            "name": "test@rapid7.com",
+            "domain": "anonymoose.dev",
+            "disabled": false,
+            "user": {
+                "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:user:KW4K93XZATMV",
+                "name": "test@rapid7.com"
+            },
+            "authentication_service": "O365"
+        }
+    ],
+    "metadata": {
+        "index": 0,
+        "size": 1,
+        "total_pages": 26956,
+        "total_data": 26956
+    }
+}

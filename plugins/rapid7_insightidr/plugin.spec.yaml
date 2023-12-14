@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 8.0.0
+version: 8.1.0
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2022-07-20."]
 vendor: rapid7
@@ -904,8 +904,7 @@ types:
       title: Can edit
       description: Indicates whether the current caller can edit the alert.
       type: boolean
-      required: false
-  
+      required: false  
   terms_object:
     field_ids:
       title: Field IDs
@@ -931,7 +930,6 @@ types:
       required: true
       type: "[]"
       example: []
-
   aggregate_object:
     name:
       title: Name
@@ -999,7 +997,6 @@ types:
         - ASCENDING_NULLS_FIRST
         - DESCENDING_NULLS_LAST
         - DESCENDING_NULLS_FIRST
-  
   evidence_object:
     rrn:
       title: RRN
@@ -1041,7 +1038,6 @@ types:
       description: The evidence data.
       type: object
       required: false
-  
   actor_object:
     rrn:
       title: RRN
@@ -1068,7 +1064,82 @@ types:
       description: The display name of the actor (for example, John Doe or user@example.com).
       type: string
       required: false
-
+  search_accounts_object:
+    field:
+      title: Field
+      description: The field to search within.
+      type: string
+      required: false
+    operator:
+      title: Operator
+      description: The search operation to perform. All operators are case-insensitive when operating on Strings
+      type: string
+      required: false
+      enum:
+        - EQUALS
+        - CONTAINS
+        - IN
+    value:
+      title: Value
+      description: The value to search for.
+      type: string
+      required: false
+  sort_accounts_object:
+    field:
+      title: Field
+      description: The field to sort by.
+      type: string
+      required: false
+    order:
+      title: Order
+      description: The sorting direction. Sorting is case-insensitive when sorting Strings.
+      type: string
+      required: false
+      enum:
+        - ASC
+        - DESC
+  account_object:
+    rrn:
+      title: RRN
+      description: The unique RRN of the account.
+      type: string
+      required: true
+    name:
+      title: Name
+      description: The name for this account.
+      type: string
+      required: true
+    domain:
+      title: Domain
+      description: The domain that this account is associated with.
+      type: string
+      required: false
+    disabled:
+      title: Disabled
+      description: The unique RRN of the account.
+      type: boolean
+      required: true
+    authentication_service:
+      title: Authentication Service
+      description: The service to which this account is tied, which is responsible for authenticating this account.
+      type: string
+      required: true
+    user:
+      title: User
+      description: The user this account is associated with.
+      type: user_object
+      required: true
+  user_object:
+    name:
+      title: Name
+      description: The name for this user.
+      type: string
+      required: true
+    rrn:
+      title: RRN
+      description: The unique RRN of the user.
+      type: string
+      required: true
 connection:
   api_key:
     title: API Key
@@ -2408,3 +2479,65 @@ actions:
         type: investigation_metadata
         required: true
         example: {"index": 0,"size": 1,"total_data": 1,"total_pages": 1}
+  search_accounts:
+    title: Search Accounts
+    description: Allows the user to retrieve idr accounts that match the given criteria
+    input:
+      search:
+        title: Search
+        description: The criteria for which entities to return
+        type: "[]search_accounts_object"
+        required: false
+        example: '[{"field": "Example Field", "operator": "EQUALS", "value": "Test Value"}]'
+      sort:
+        title: Sort
+        description: The criteria and sorting information for searching
+        type: "[]sort_accounts_object"
+        required: false
+        example: '[{"field": "Example Field", "order": "ASC"}]'
+      size:
+        title: Size
+        description: Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100
+        type: integer
+        required: false
+        default: 100
+        example: 100
+      index:
+        title: Index
+        description: Zero-based index of the page to retrieve, where value must be greater than or equal to 0
+        type: integer
+        required: false
+        default: 0
+        example: 1
+    output:
+      data:
+        title: Data
+        description: The list of account information
+        type: "[]account_object"
+        required: true
+        example: {"index": 0,"size": 1,"total_data": 1,"total_pages": 1}
+      metadata:
+        title: Metadata
+        description: The pagination parameters used to generate this page result
+        type: investigation_metadata
+        required: true
+        example: {"index": 0,"size": 1,"total_data": 1,"total_pages": 1}
+
+  get_account_information:
+    title: Get Account Information
+    description: Get information from an account by RRN. The RRN determines which account information is retrieved from
+    input:
+      account_rrn:
+        title: Account RRN
+        description: The RRN of the Account
+        type: string
+        required: true
+        example: "rrn:uba:us:123456-12334-1234-abcd-123456abc:account:123456abc"
+    output:
+      account:
+        title: Account
+        description: Account details
+        type: account_object
+        required: false
+        example: {"rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890","creator": {"type": "USER","name": "Example User"},"created_time": "2022-08-19T13:00:58.645Z","file_name": "test.txt","mime_type": "text/plain","size": 4,"scan_status": "CLEAN"}
+      

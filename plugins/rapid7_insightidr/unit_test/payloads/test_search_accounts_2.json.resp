@@ -1,0 +1,32 @@
+{
+    "data": [
+        {
+            "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:account:00W38ZHXOH7N",
+            "name": "test_account",
+            "domain": "anonymoose.dev",
+            "disabled": false,
+            "user": {
+                "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:user:QLT4FP2JYRKW",
+                "name": "Test Account"
+            },
+            "authentication_service": "ACTIVE_DIRECTORY"
+        },
+        {
+            "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:account:012GOCST0IG2",
+            "name": "test_account_2",
+            "domain": "anonymoose.dev",
+            "disabled": false,
+            "user": {
+                "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:user:9MXWH24I47PD",
+                "name": "Test Account 2"
+            },
+            "authentication_service": "ACTIVE_DIRECTORY"
+        }
+    ],
+    "metadata": {
+        "index": 2,
+        "size": 2,
+        "total_pages": 13478,
+        "total_data": 26956
+    }
+}

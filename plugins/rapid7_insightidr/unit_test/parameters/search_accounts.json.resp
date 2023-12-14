@@ -1,0 +1,134 @@
+{
+    "parameters": [
+        [
+            [],
+            [],
+            1,
+            0,
+            {
+                "data": [
+                    {
+                        "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:account:0037K0U3ZE9R",
+                        "name": "test@rapid7.com",
+                        "domain": "anonymoose.dev",
+                        "disabled": false,
+                        "user": {
+                            "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:user:KW4K93XZATMV",
+                            "name": "test@rapid7.com"
+                        },
+                        "authentication_service": "O365"
+                    }
+                ],
+                "metadata": {
+                    "index": 0,
+                    "size": 1,
+                    "total_pages": 26956,
+                    "total_data": 26956
+                }
+            }
+        ],
+        [
+            [],
+            [],
+            2,
+            2,
+            {
+                "data": [
+                    {
+                        "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:account:00W38ZHXOH7N",
+                        "name": "test_account",
+                        "domain": "anonymoose.dev",
+                        "disabled": false,
+                        "user": {
+                            "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:user:QLT4FP2JYRKW",
+                            "name": "Test Account"
+                        },
+                        "authentication_service": "ACTIVE_DIRECTORY"
+                    },
+                    {
+                        "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:account:012GOCST0IG2",
+                        "name": "test_account_2",
+                        "domain": "anonymoose.dev",
+                        "disabled": false,
+                        "user": {
+                            "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:user:9MXWH24I47PD",
+                            "name": "Test Account 2"
+                        },
+                        "authentication_service": "ACTIVE_DIRECTORY"
+                    }
+                ],
+                "metadata": {
+                    "index": 2,
+                    "size": 2,
+                    "total_pages": 13478,
+                    "total_data": 26956
+                }
+            }
+        ],
+        [
+            [
+                {
+                    "field": "authentication_service",
+                    "operator": "EQUALS",
+                    "value": "ACTIVE_DIRECTORY"
+                }
+            ],
+            [],
+            1,
+            0,
+            {
+                "data": [
+                    {
+                        "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:account:0037K0U3ZE9R",
+                        "name": "test@rapid7.com",
+                        "domain": "anonymoose.dev",
+                        "disabled": false,
+                        "user": {
+                            "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:user:KW4K93XZATMV",
+                            "name": "test@rapid7.com"
+                        },
+                        "authentication_service": "O365"
+                    }
+                ],
+                "metadata": {
+                    "index": 0,
+                    "size": 1,
+                    "total_pages": 26956,
+                    "total_data": 26956
+                }
+            }
+        ],
+        [
+            [],
+            [
+                {
+                    "field": "name",
+                    "order": "ASC"
+                }
+            ],
+            1,
+            0,
+            {
+            "data": [
+                {
+                    "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:account:0037K0U3ZE9R",
+                    "name": "test@rapid7.com",
+                    "domain": "anonymoose.dev",
+                    "disabled": false,
+                    "user": {
+                        "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:user:KW4K93XZATMV",
+                        "name": "test@rapid7.com"
+                    },
+                    "authentication_service": "O365"
+                }
+            ],
+            "metadata": {
+                "index": 0,
+                "size": 1,
+                "total_pages": 26956,
+                "total_data": 26956
+            }
+        }
+        ]
+    ]
+}
