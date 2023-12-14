@@ -17,12 +17,14 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
 
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
         search_criteria = params.get(Input.SEARCHCRITERIA)
         size = params.get(Input.SIZE, 0)
         sort_criteria = params.get(Input.SORT_CRITERIA, {})
-        self.logger.info(f"Performing filtered asset search with criteria {search_criteria}")
+
+        self.logger.info(f"Performing filtered asset search with criteria {search_criteria}...")
+        resource_helper = ResourceRequests(self.connection.session, self.logger)
         endpoint = endpoints.Asset.search(self.connection.console_url)
+
         parameters = []
 
         for key, value in sort_criteria.items():

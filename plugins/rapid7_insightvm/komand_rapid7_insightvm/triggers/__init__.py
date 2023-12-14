@@ -4,3 +4,5 @@ from .new_scans.trigger import NewScans
 
 from .new_exception_request.trigger import NewExceptionRequest
 
+from .scan_completion.trigger import ScanCompletion
+
