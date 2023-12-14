@@ -70,3 +70,7 @@ from .get_alert_evidence.action import GetAlertEvidence
 
 from .get_alert_actors.action import GetAlertActors
 
+from .search_accounts.action import SearchAccounts
+
+from .get_account_information.action import GetAccountInformation
+
