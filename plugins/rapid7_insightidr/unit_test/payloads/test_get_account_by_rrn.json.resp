@@ -1,0 +1,11 @@
+{
+    "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:account:00875N0IK0RJ",
+    "name": "test_user",
+    "domain": "anonymoose.dev",
+    "disabled": false,
+    "user": {
+        "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:user:S9DEEVJGORA1",
+        "name": "Test User"
+    },
+    "authentication_service": "ACTIVE_DIRECTORY"
+}

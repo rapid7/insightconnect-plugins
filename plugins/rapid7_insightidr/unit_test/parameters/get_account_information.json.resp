@@ -1,0 +1,20 @@
+{
+  "parameters": [
+    [
+      "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:account:00875N0IK0RJ",
+        {
+            "account": {
+                "authentication_service": "ACTIVE_DIRECTORY",
+                "disabled": false,
+                "domain": "anonymoose.dev",
+                "name": "test_user",
+                "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:account:00875N0IK0RJ",
+                "user": {
+                    "name": "Test User",
+                    "rrn": "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:user:S9DEEVJGORA1"
+                }
+            }
+        }
+    ]
+  ]
+}

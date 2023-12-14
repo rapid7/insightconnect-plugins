@@ -273,3 +273,13 @@ class Alerts:
 
     def get_alert_serach(console_url: str) -> str:
         return f"{console_url}idr/at/alerts/ops/search"
+
+
+class Accounts:
+    @staticmethod
+    def search_accounts(console_url: str) -> str:
+        return f"{console_url}idr/v1/accounts/_search"
+
+    @staticmethod
+    def get_account(console_url: str, account_rrn: str) -> str:
+        return f"{console_url}idr/v1/accounts/{account_rrn}"

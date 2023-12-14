@@ -1040,6 +1040,50 @@ Example output:
 }
 ```
 
+#### Get Account Information
+  
+This action is used to get information from an account by RRN. The RRN determines which account information is retrieved
+ from
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|account_rrn|string|None|True|The RRN of the Account|None|rrn:uba:us:123456-12334-1234-abcd-123456abc:account:123456abc|
+  
+Example input:
+
+```
+{
+  "account_rrn": "rrn:uba:us:123456-12334-1234-abcd-123456abc:account:123456abc"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|account|account_object|False|Account details|{'rrn': 'rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890', 'creator': {'type': 'USER', 'name': 'Example User'}, 'created_time': '2022-08-19T13:00:58.645Z', 'file_name': 'test.txt', 'mime_type': 'text/plain', 'size': 4, 'scan_status': 'CLEAN'}|
+  
+Example output:
+
+```
+{
+  "account": {
+    "created_time": "2022-08-19T13:00:58.645Z",
+    "creator": {
+      "name": "Example User",
+      "type": "USER"
+    },
+    "file_name": "test.txt",
+    "mime_type": "text/plain",
+    "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890",
+    "scan_status": "CLEAN",
+    "size": 4
+  }
+}
+```
+
 #### Retrieve Actors for a Single Alert
   
 This action is used to allows the user to retrieve actors for a single alert from an alert RRN
@@ -1989,6 +2033,67 @@ Example output:
 }
 ```
 
+#### Search Accounts
+  
+This action is used to allows the user to retrieve idr accounts that match the given criteria
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|index|integer|0|False|Zero-based index of the page to retrieve, where value must be greater than or equal to 0|None|1|
+|search|[]search_accounts_object|None|False|The criteria for which entities to return|None|[{"field": "Example Field", "operator": "EQUALS", "value": "Test Value"}]|
+|size|integer|100|False|Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100|None|100|
+|sort|[]sort_accounts_object|None|False|The criteria and sorting information for searching|None|[{"field": "Example Field", "order": "ASC"}]|
+  
+Example input:
+
+```
+{
+  "index": 0,
+  "search": [
+    {
+      "field": "Example Field",
+      "operator": "EQUALS",
+      "value": "Test Value"
+    }
+  ],
+  "size": 100,
+  "sort": [
+    {
+      "field": "Example Field",
+      "order": "ASC"
+    }
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|data|[]account_object|True|The list of account information|{'index': 0, 'size': 1, 'total_data': 1, 'total_pages': 1}|
+|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|{'index': 0, 'size': 1, 'total_data': 1, 'total_pages': 1}|
+  
+Example output:
+
+```
+{
+  "data": {
+    "index": 0,
+    "size": 1,
+    "total_data": 1,
+    "total_pages": 1
+  },
+  "metadata": {
+    "index": 0,
+    "size": 1,
+    "total_data": 1,
+    "total_pages": 1
+  }
+}
+```
+
 #### Search Alerts
   
 This action is used to allows the user to search for alerts that match the given criteria
@@ -2810,7 +2915,7 @@ Example output:
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Created at|string|None|False|The timestamp when the evidence was created.|None|
-|Data|string|None|False|The evidence data.|None|
+|Data|object|None|False|The evidence data.|None|
 |Evented at|string|None|False|The timestamp when the event that triggered the alert occurred in the source system.|None|
 |External Source|string|None|False|The source of the evidence.|None|
 |External Type|string|None|False|The type of the evidence.|None|
@@ -2827,6 +2932,39 @@ Example output:
 |RRN|string|None|False|The unique RRN of the actor.|None|
 |Type|string|None|False|The type of actor (for example, ASSET, ACCOUNT, or IP_ADDRESS).|None|
 |User ID|string|None|False|User ID for an actor.|None|
+  
+**search_accounts_object**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Field|string|None|False|The field to search within.|None|
+|Operator|string|None|False|The search operation to perform. All operators are case-insensitive when operating on Strings|None|
+|Value|string|None|False|The value to search for.|None|
+  
+**sort_accounts_object**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Field|string|None|False|The field to sort by.|None|
+|Order|string|None|False|The sorting direction. Sorting is case-insensitive when sorting Strings.|None|
+  
+**account_object**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Authentication Service|string|None|True|The service to which this account is tied, which is responsible for authenticating this account.|None|
+|Disabled|boolean|None|True|The unique RRN of the account.|None|
+|Domain|string|None|False|The domain that this account is associated with.|None|
+|Name|string|None|True|The name for this account.|None|
+|RRN|string|None|True|The unique RRN of the account.|None|
+|User|user_object|None|True|The user this account is associated with.|None|
+  
+**user_object**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Name|string|None|True|The name for this user.|None|
+|RRN|string|None|True|The unique RRN of the user.|None|
 
 
 ## Troubleshooting
@@ -2835,6 +2973,7 @@ Example output:
 
 # Version History
 
+* 8.1.0 - New actions added: `Search Accounts` and `Get Account Information`
 * 8.0.0 - Update schema for `Investigation` and `Statistics` | Update dependency for aiohttp | New actions added `Get Alert Information`, `Search Alerts`, `Retrieve Evidence for a Single Alert` and `Retrieve Actors for a Single Alert` | Fixed issue where index was not getting correctly passed through to `List Investigations` action from the user
 * 7.0.0 - Action: `Advanced Query On Log Set` - Fixed error where statistical queries would always return 0.0 | Action: `Advanced Query On Log Set` - Increase the maximum results returned from 50 to 500 |  Action: `Advanced Query On Log` - Add new output type for statistical queries | Updated schemas to ensure all are correct and added new schema validation to unit tests
 * 6.0.1 - Action: `Advanced Query On Log` - Increase the maximum results returned from 50 to 500
