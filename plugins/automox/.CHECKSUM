@@ -1,7 +1,7 @@
 {
-	"spec": "9568d1672afd7612097c1bd60bf34cf2",
-	"manifest": "06283d5ccfb93d0cd35dd650f5eca4dc",
-	"setup": "eacad8f2fb3e8fa34b56fb7ffc386de1",
+	"spec": "c49c47efe6b5e016be4c7b3cf26adbc0",
+	"manifest": "2c6036c8148029801d83cb235746f4e5",
+	"setup": "3bdb2f139da45cd18003c8b107df72b8",
 	"schemas": [
 		{
 			"identifier": "create_group/schema.py",
@@ -37,7 +37,7 @@
 		},
 		{
 			"identifier": "get_vulnerability_sync_action_set/schema.py",
-			"hash": "379392ba255f37548efd1c84d3ed444f"
+			"hash": "7ad4c24562ba709d7cd7549307a8b9b7"
 		},
 		{
 			"identifier": "list_devices/schema.py",
@@ -69,7 +69,7 @@
 		},
 		{
 			"identifier": "list_vulnerability_sync_action_sets/schema.py",
-			"hash": "0005c51c207b1dd44a7c55b6e664b0c0"
+			"hash": "fafffe6f261fb7d2df531ed9a3c17a83"
 		},
 		{
 			"identifier": "run_command/schema.py",

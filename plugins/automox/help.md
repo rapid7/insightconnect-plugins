@@ -1,27 +1,18 @@
 # Description
 
-Automox is modernizing IT operations through cloud-native efficiency and upending the old ways of legacy on-premise 
-tools. Keeping you continuously connected to all your endpoints, regardless of location, environment, and operating
-system type. Now you can manage and apply operating system and third-party patches, enforce security configurations, 
-deploy software, and execute any action across Windows, macOS, and Linux systems. 
-
-Utilizing this plugin allows for the orchestration of IT operations such as device management, triggering remote 
-outcomes on endpoints, and basic Automox platform administration. 
+Automox is modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment
 
 # Key Features
-
-* Retrieve and manage Automox managed devices
-* Manage Automox groups
-* Initiate Vulnerability Sync uploads and remediation of issues
-* Trigger workflows based on Automox platform events
+  
+* Device Management  
+* Patch Management
 
 # Requirements
 
-* Automox API Key
 
 # Supported Product Versions
   
-* All as of 12/07/2023
+* All as of 10/09/2023
 
 # Documentation
 
@@ -48,7 +39,7 @@ Example input:
 
 #### Create Group
   
-Create an Automox group
+This action is used to create an Automox group
 
 ##### Input
 
@@ -107,7 +98,7 @@ Example output:
 
 #### Delete Device
   
-Delete an Automox device
+This action is used to delete an Automox device
 
 ##### Input
 
@@ -141,7 +132,7 @@ Example output:
 
 #### Delete Group
   
-Delete an Automox group
+This action is used to delete an Automox group
 
 ##### Input
 
@@ -175,7 +166,7 @@ Example output:
 
 #### Delete Vulnerability Sync Action Set
   
-Delete a vulnerability sync action set and all associated data
+This action is used to delete a vulnerability sync action set and all associated data
 
 ##### Input
 
@@ -209,14 +200,14 @@ Example output:
 
 #### Execute Vulnerability Sync Actions
   
-Launch remediation for patch and worklet remediations
+This action is used to launch remediation for patch and worklet remediations
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |action_set_id|integer|None|True|Identifier of the action set|None|1234|
-|actions|[]action_set_action|None|True|List of remediations to execute|None|[{"action": "patch-now", "solution_id": 1234, "device_ids": [1234, 5678]}, {"action": "patch-with-worklet", "solution_id": 1234, "worklet_id": 1234, "device_ids": [1234, 5678]}]|
+|actions|[]action_set_action|None|True|List of remediations to execute|None|[{'action': 'patch-now', 'solution_id': 1234, 'device_ids': [1234, 5678]}, {'action': 'patch-with-worklet', 'solution_id': 1234, 'worklet_id': 1234, 'device_ids': [1234, 5678]}]|
 |org_id|integer|None|True|Identifier of organization|None|1234|
   
 Example input:
@@ -252,7 +243,7 @@ Example output:
 
 #### Get Device by Hostname
   
-Find an Automox device by hostname
+This action is used to find an Automox device by hostname
 
 ##### Input
 
@@ -296,7 +287,7 @@ Example output:
     "Is Delayed By User": {},
     "Is Delayed by Notification": {},
     "Last Disconnect Time": {},
-    "Last Logged In User": {},
+    "Last Logged in User": {},
     "Last Refresh Time": {},
     "Last Scan Failed": {},
     "Last Update Time": {},
@@ -335,7 +326,7 @@ Example output:
 
 #### Get Device by IP Address
   
-Find an Automox device by IP address
+This action is used to find an Automox device by IP address
 
 ##### Input
 
@@ -379,7 +370,7 @@ Example output:
     "Is Delayed By User": {},
     "Is Delayed by Notification": {},
     "Last Disconnect Time": {},
-    "Last Logged In User": {},
+    "Last Logged in User": {},
     "Last Refresh Time": {},
     "Last Scan Failed": {},
     "Last Update Time": {},
@@ -418,7 +409,7 @@ Example output:
 
 #### Get Device Software
   
-Retrieve a list of software installed on a device
+This action is used to retrieve a list of software installed on a device
 
 ##### Input
 
@@ -475,7 +466,7 @@ Example output:
 
 #### Get Vulnerability Sync Action Set
   
-Retrieve details for a specified vulnerability sync action set
+This action is used to retrieve details for a specified vulnerability sync action set
 
 ##### Input
 
@@ -511,7 +502,17 @@ Example output:
     },
     "Action Set Statistics": {
       "Issues": {
-        "Unknown Host Count": {}
+        "Unknown Host": {
+          "Issue Count": {}
+        }
+      },
+      "Solutions": {
+        "Patch Now": {
+          "Device Count": {},
+          "Solution Count": {},
+          "Vulnerability Count": {}
+        },
+        "Patch with Worklet": {}
       }
     },
     "Action Set Status": {},
@@ -524,14 +525,6 @@ Example output:
       "User ID": {}
     },
     "Organization ID": {},
-    "Solutions": {
-      "Patch Now": {
-        "Device Count": {},
-        "Solution Count": {},
-        "Vulnerability Count": {}
-      },
-      "Patch with Worklet": {}
-    },
     "Uploaded At": {}
   }
 }
@@ -539,7 +532,7 @@ Example output:
 
 #### List Devices
   
-Retrieve Automox managed devices
+This action is used to retrieve Automox managed devices
 
 ##### Input
 
@@ -584,7 +577,7 @@ Example output:
       "Is Delayed By User": {},
       "Is Delayed by Notification": {},
       "Last Disconnect Time": {},
-      "Last Logged In User": {},
+      "Last Logged in User": {},
       "Last Refresh Time": {},
       "Last Scan Failed": {},
       "Last Update Time": {},
@@ -624,7 +617,7 @@ Example output:
 
 #### List Groups
   
-List Automox groups
+This action is used to list Automox groups
 
 ##### Input
 
@@ -671,7 +664,7 @@ Example output:
 
 #### List Organization Users
   
-Retrieve users of the Automox organization
+This action is used to retrieve users of the Automox organization
 
 ##### Input
 
@@ -728,7 +721,7 @@ Example output:
 
 #### List Organizations
   
-Retrieve Automox organizations
+This action is used to retrieve Automox organizations
 
 ##### Input
   
@@ -760,7 +753,7 @@ Example output:
 
 #### List Policies
   
-Retrieve Automox policies
+This action is used to retrieve Automox policies
 
 ##### Input
 
@@ -803,14 +796,14 @@ Example output:
 
 #### List Vulnerability Sync Action Set Issues
   
-Retrieve the issues identified for a specified vulnerability sync action set
+This action is used to retrieve the issues identified for a specified vulnerability sync action set
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |action_set_id|integer|None|True|Identifier of the action set|None|1234|
-|issue_type_in|[]string|None|False|Filter by issue type|None|["unknown-host"]|
+|issue_type_in|[]string|None|False|Filter by issue type|None|['unknown-host']|
 |org_id|integer|None|True|Identifier of organization|None|1234|
   
 Example input:
@@ -845,7 +838,7 @@ Example output:
 
 #### List Vulnerability Sync Action Set Solutions
   
-Retrieve a list of vulnerability sync remediations
+This action is used to retrieve a list of vulnerability sync remediations
 
 ##### Input
 
@@ -853,10 +846,10 @@ Retrieve a list of vulnerability sync remediations
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |action_set_id|integer|None|True|Filter by action set identifier|None|1234|
 |org_id|integer|None|True|Identifier of organization|None|1234|
-|remediation_type_in|[]string|None|False|Filter by remediation type|None|["patch-now", "patch-with-worklet"]|
-|severity_in|[]string|None|False|Filter by severity|None|["critical", "high", "medium", "low", "unknown"]|
-|vulnerability_in|[]string|None|False|Filter by vulnerability|None|["CVE-2020-1234", "CVE-2020-5678"]|
-
+|remediation_type_in|[]string|None|False|Filter by remediation type|None|['patch-now', 'patch-with-worklet']|
+|severity_in|[]string|None|False|Filter by severity|None|['critical', 'high', 'medium', 'low', 'unknown']|
+|vulnerability_in|[]string|None|False|Filter by vulnerability|None|['CVE-2020-1234', 'CVE-2020-5678']|
+  
 Example input:
 
 ```
@@ -914,7 +907,7 @@ Example output:
 
 #### List Vulnerability Sync Action Sets
   
-Retrieve list of vulnerability sync batches
+This action is used to retrieve list of vulnerability sync batches
 
 ##### Input
 
@@ -926,10 +919,10 @@ Retrieve list of vulnerability sync batches
 |include_all_runs_equals|boolean|None|False|Whether to include all runs in the response|None|True|
 |org_id|integer|None|True|Identifier of organization|None|1234|
 |sort|string|None|False|Sort results by field|['created_at', 'updated_at', 'status', 'source_type', 'source_name', 'configuration_id', '']|created_at|
-|source_type_in|[]string|None|False|Filter by source type|None|["Generic Report", "CrowdStrike", "Rapid7", "TenableIO", "Qualys"]|
-|status_in|[]string|None|False|Filter by status|None|["building", "ready", "error"]|
-|status_not_in|[]string|None|False|Filter by status|None|["building", "ready", "error"]|
-
+|source_type_in|[]string|None|False|Filter by source type|None|['Generic Report', 'CrowdStrike', 'Rapid7', 'TenableIO', 'Qualys']|
+|status_in|[]string|None|False|Filter by status|None|['building', 'ready', 'error']|
+|status_not_in|[]string|None|False|Filter by status|None|['building', 'ready', 'error']|
+  
 Example input:
 
 ```
@@ -950,8 +943,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|action_sets|[]action_set|False|List of vulnerability sync action sets|[{"created_at": "2023-10-10T03:45:26+0000", "created_by_user": {"email": "user@example.com", "firstname": "User", "id": 1, "lastname": "Name"}, "id": 1234, "organization_id": 1, "source": {"name": "insightconnect-uploaded-report.csv", "type": "generic"}, "statistics": {"issues": {"unknown-host": {"count": 4}}, "solutions": {"patch-with-worklet": {"count": 1, "device_count": 18, "vulnerability_count": 1}}}, "status": "ready", "updated_at": "2023-10-10T03:45:30+0000", "updated_by_user": {"email": "user@example.com", "firstname": "User", "id": 1, "lastname": "Name"}}]|
-
+|action_sets|[]action_set|False|List of vulnerability sync action sets|[{'created_at': '2023-10-10T03:45:26+0000', 'created_by_user': {'email': 'user@example.com', 'firstname': 'User', 'id': 1, 'lastname': 'Name'}, 'id': 1234, 'organization_id': 1, 'source': {'name': 'insightconnect-uploaded-report.csv', 'type': 'generic'}, 'statistics': {'issues': {'unknown-host': {'count': 4}}, 'solutions': {'patch-with-worklet': {'count': 1, 'device_count': 18, 'vulnerability_count': 1}}}, 'status': 'ready', 'updated_at': '2023-10-10T03:45:30+0000', 'updated_by_user': {'email': 'user@example.com', 'firstname': 'User', 'id': 1, 'lastname': 'Name'}}]|
+  
 Example output:
 
 ```
@@ -998,7 +991,7 @@ Example output:
 
 #### Run Device Command
   
-Run a command on a device
+This action is used to run a command on a device
 
 ##### Input
 
@@ -1007,7 +1000,7 @@ Run a command on a device
 |command|string|None|True|Command to run on device|['GetOS', 'InstallUpdate', 'InstallAllUpdates', 'PolicyTest', 'PolicyRemediate', 'Reboot']|GetOS|
 |device_id|integer|None|True|Identifier of device|None|1234|
 |org_id|integer|None|False|Identifier of organization|None|1234|
-|patches|[]string|None|False|List of patches to be installed by name (Note: this only works with the InstallUpdate command)|None|["Security Update (KB4549947)"]|
+|patches|[]string|None|False|List of patches to be installed by name (Note: this only works with the InstallUpdate command)|None|['Security Update (KB4549947)']|
 |policy_id|integer|None|False|Identifier of policy|None|1234|
   
 Example input:
@@ -1038,7 +1031,7 @@ Example output:
 
 #### Update Device
   
-Update Automox device
+This action is used to update Automox device
 
 ##### Input
 
@@ -1049,8 +1042,8 @@ Update Automox device
 |exception|boolean|False|True|Exclude the device from reports and statistics|None|False|
 |org_id|integer|None|False|Identifier of organization|None|1234|
 |server_group_id|integer|None|False|Identifier of server group|None|1234|
-|tags|[]string|None|False|List of tags|None|["tag1", "tag2"]|
-
+|tags|[]string|None|False|List of tags|None|['tag1', 'tag2']|
+  
 Example input:
 
 ```
@@ -1080,7 +1073,7 @@ Example output:
 
 #### Update Group
   
-Update an Automox group
+This action is used to update an Automox group
 
 ##### Input
 
@@ -1126,7 +1119,7 @@ Example output:
 
 #### Upload Vulnerability Sync File
   
-Upload a CSV file to vulnerability sync for processing
+This action is used to upload a CSV file to vulnerability sync for processing
 
 ##### Input
 
@@ -1168,7 +1161,7 @@ Example output:
 
 #### Get Automox Events
   
-Retrieve Automox events to trigger workflows
+This action is used to retrieve Automox events to trigger workflows
 
 ##### Input
 
@@ -1293,7 +1286,7 @@ Example output:
 |Is Delayed by Notification|boolean|None|False|Whether patching is delayed by a device notificiation|None|
 |Is Delayed By User|boolean|None|False|Whether patching is delayed by a user|None|
 |Last Disconnect Time|string|None|False|The last time a device disconnected from the Automox platform|None|
-|Last Logged In User|string|None|False|The last logged in user of a device|None|
+|Last Logged in User|string|None|False|The last logged in user of a device|None|
 |Last Refresh Time|string|None|False|The last time a device was refreshed|None|
 |Last Scan Failed|boolean|None|False|Whether the last scan failed on a device|None|
 |Last Update Time|string|None|False|The last time a device was updated in the Automox platform|None|
@@ -1390,17 +1383,24 @@ Example output:
 |User ID|integer|None|True|The user identifier|None|
 |Last Name|string|None|False|The last name of the user|None|
   
+**action_set_issue_count**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Issue Count|integer|None|False|Number of issues associated with the action set|None|
+  
 **action_set_issues**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Unknown Host Count|integer|None|False|Number of hosts that are unknown within the action set|None|
+|Unknown Host|action_set_issue_count|None|False|Hosts that are unknown to Automox within the action set|None|
   
 **action_set_statistics**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Issues|action_set_issues|None|False|Issues associated with the action set|None|
+|Solutions|action_set_solution_summary|None|False|Solutions associated with the action set|None|
   
 **action_set_source**
 
@@ -1433,7 +1433,6 @@ Example output:
 |Created By|action_set_user|None|False|action set creation details|None|
 |Action Set ID|integer|None|True|Identifier of the action set|None|
 |Organization ID|integer|None|False|Identifier of the organization|None|
-|Solutions|action_set_solution_summary|None|False|Solutions associated with the action set|None|
 |Action Set Source|action_set_source|None|False|Source of the action set|None|
 |Action Set Statistics|action_set_statistics|None|False|Statistics of the action set|None|
 |Action Set Status|string|None|False|Status of the action set|None|
@@ -1492,21 +1491,26 @@ Example output:
 *There is no troubleshooting for this plugin.*
 
 # Version History
-
-* 2.0.1 - Fix Get Vulnerability Sync Action Set action
-* 2.0.0 - Fix Vulnerability Sync API Actions | `Action`: Added - Delete Vulnerability Sync Action Set | `Action`: Added - Execute Vulnerability Sync Actions | `Action`: Added - List Vulnerability Sync Action Set Issues |`Action`: Added - List Vulnerability Sync Action Set Solutions | `Action`: Added - List Vulnerability Sync Action Sets | `Action`: Added - Get Vulnerability Sync Action Set | `Action`: Updated - Upload Vulnerability Sync File | `Action`: Updated - Get Devices | `Action`: Deleted - Action on Vulnerability Sync Batch | `Action`: Deleted - Vulnerability Sync Task | `Action`: Deleted - Get Vulnerability Sync Batch | `Action`: Deleted - List Vulnerability Sync Batches | `Action`: Deleted - List Vulnerability Sync Tasks
-* 1.2.0 - Get device by IP and Get device by hostname: fix validation issue when IP or hostname not found | Add unit tests
-* 1.1.1 - Fix undefined org ID passed to actions when not required | Record outcome of connection tests
-* 1.1.0 - Add `report source` as optional input parameter to Upload Vulnerability Sync File action | Add report source to batch type
+  
+* 3.0.0 - `Action`: Fixed -  Get Vulnerability Sync Action Set | `Action`: Fixed - List Vulnerability Sync Action Sets  
+* 2.0.0 - Fix Vulnerability Sync API Actions | `Action`: Added - Delete Vulnerability Sync Action Set | `Action`: Added 
+- Execute Vulnerability Sync Actions | `Action`: Added - List Vulnerability Sync Action Set Issues | `Action`: Added - 
+List Vulnerability Sync Action Set Solutions | `Action`: Added - List Vulnerability Sync Action Sets | `Action`: Added -
+ Get Vulnerability Sync Action Set | `Action`: Updated - Upload Vulnerability Sync File | `Action`: Updated - Get 
+Devices | `Action`: Deleted - Action on Vulnerability Sync Batch | `Action`: Deleted - Vulnerability Sync Task | 
+`Action`: Deleted - Get Vulnerability Sync Batch | `Action`: Deleted - List Vulnerability Sync Batches | `Action`: 
+Deleted - List Vulnerability Sync Tasks  
+* 1.2.0 - Get device by IP and Get device by hostname: fix validation issue when IP or hostname not found | Add unit 
+tests  
+* 1.1.1 - Fix undefined org ID passed to actions when not required | Record outcome of connection tests  
+* 1.1.0 - Add `report source` as optional input parameter to Upload Vulnerability Sync File action | Add report source 
+to batch type  
 * 1.0.0 - Initial plugin
 
 # Links
 
-* [Automox](https://www.automox.com/)
 
 ## References
-
-* [Automox Developer Portal](https://developer.automox.com/)
-* [Managing API Keys](https://support.automox.com/help/managing-keys)
-* [Event Types for Get Automox Events action](https://developer.automox.com/openapi/axconsole/operation/getEvents/#!in=query&path=eventName&t=request)
-
+  
+* [Automox](https://www.automox.com/)  
+* [Automox Developer Portal](https://developer.automox.com/developer-portal/)
