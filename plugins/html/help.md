@@ -190,7 +190,7 @@ Example output:
 ```
 
 #### Text
-  
+
 This action is used to strip an HTML string of all tags and return only the text
 
 ##### Input

@@ -28,7 +28,7 @@ hub_tags:
 sdk:
   type: slim
   version: 5
-  user: root
+  user: nobody
 actions:
   validate:
     title: Validate
