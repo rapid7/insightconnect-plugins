@@ -1,0 +1,9 @@
+{
+  "parameters": [
+    [
+      "rrn:uba:us:cf946362-0809-426d-987c-849bde704c16:account:123456789",
+      "Resource not found.",
+      "Verify your input is correct and not malformed and try again. If the issue persists, please contact support."
+    ]
+  ]
+}
