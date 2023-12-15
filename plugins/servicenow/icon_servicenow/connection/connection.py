@@ -4,7 +4,7 @@ from .schema import ConnectionSchema, Input
 # Custom imports below
 import requests
 from requests.auth import HTTPBasicAuth
-from icon_servicenow.util.request_helper import RequestHelper
+from icon_servicenow.util.request_helper import RequestHelper, AuthenticationType
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
@@ -23,13 +23,32 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         self.base_url = f"https://{params.get(Input.INSTANCE, '')}.service-now.com/"
 
-        username = params[Input.CLIENT_LOGIN].get("username", "")
-        password = params[Input.CLIENT_LOGIN].get("password", "")
+        username = params.get(Input.CLIENT_LOGIN, {}).get("username", "")
+        password = params.get(Input.CLIENT_LOGIN, {}).get("password", "")
 
-        self.session = requests.Session()
-        self.session.auth = HTTPBasicAuth(username, password)
-        self.request = RequestHelper(self.session, self.logger)
+        oauth_client_id = params.get(Input.CLIENT_ID)
+        oauth_client_secret = params.get(Input.CLIENT_SECRET, {}).get("secretKey")
 
+        if not oauth_client_id or not oauth_client_secret:
+            self.logger.info(
+                "Either client ID or client secret (or both) were not provided, using basic authentication"
+            )
+            authentication_type = AuthenticationType.basic
+        else:
+            self.logger.info("Client ID and secret were provided, using OAuth for API authentication")
+            authentication_type = AuthenticationType.oauth
+
+        self.request = RequestHelper(
+            username=username,
+            password=password,
+            client_id=oauth_client_id,
+            client_secret=oauth_client_secret,
+            auth_type=authentication_type,
+            base_url=self.base_url,
+            logger=self.logger,
+        )
+
+        self.oauth_url = f"{self.base_url}oauth_token.do"
         self.table_url = f"{self.base_url}{api_route}table/"
         self.incident_url = f"{self.table_url}{incident_table}"
         self.security_incident_url = f"{self.table_url}{security_incident_table}"
@@ -44,8 +63,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         query = {"sysparm_limit": 1}
         method = "get"
 
-        request = RequestHelper(self.session, self.logger)
-        response = request.make_request(url, method, params=query)
+        response = self.request.make_request(url, method, params=query)
 
         if response.get("status", 0) in range(200, 299):
             return {"success": True}

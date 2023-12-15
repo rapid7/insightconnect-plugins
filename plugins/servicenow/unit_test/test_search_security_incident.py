@@ -3,8 +3,9 @@ import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from typing import Any, Dict
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from icon_servicenow.actions.search_security_incident import SearchSecurityIncident
 from icon_servicenow.actions.search_security_incident.schema import SearchSecurityIncidentOutput
@@ -14,7 +15,8 @@ from parameterized import parameterized
 from util import Util
 
 
-@patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
+@patch("requests.get", side_effect=Util.mocked_requests)
+@patch("requests.post", side_effect=Util.mocked_requests)
 class TestSearchSecurityIncident(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -49,7 +51,14 @@ class TestSearchSecurityIncident(TestCase):
             ],
         ]
     )
-    def test_get_security_incident(self, mock_request, test_name, input_params, expected):
+    def test_get_security_incident(
+        self,
+        mock_get: MagicMock,
+        mock_post: MagicMock,
+        test_name: str,
+        input_params: Dict[str, Any],
+        expected: Dict[str, Any],
+    ) -> None:
         actual = self.action.run(input_params)
         validate(actual, SearchSecurityIncidentOutput.schema)
         self.assertDictEqual(actual, expected)
