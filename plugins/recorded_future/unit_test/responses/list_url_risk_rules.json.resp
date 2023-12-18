@@ -1,0 +1,14 @@
+{
+  "data": {
+    "results": [
+      {
+        "count": 2239,
+        "criticality": 3,
+        "criticalityLabel": "Malicious",
+        "description": "Compromised URL",
+        "name": "compromisedUrl",
+        "relatedEntities": []
+      }
+    ]
+  }
+}
