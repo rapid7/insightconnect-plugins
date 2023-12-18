@@ -1,0 +1,9 @@
+{
+  "limit": 10,
+  "from": 0,
+  "orderby": "Riskscore",
+  "direction": "asc",
+  "freetext": "ExampleText",
+  "riskRule": "NIST Severity - Critical",
+  "riskScore": 1
+}
