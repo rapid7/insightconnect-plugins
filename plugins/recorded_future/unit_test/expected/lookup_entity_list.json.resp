@@ -1,0 +1,20 @@
+{
+  "entities": [
+    {
+      "entity": {
+        "description": "Honeypot detections for malware IRC network traffi...",
+        "id": "report:OjanJ0",
+        "name": "Nothink.org: Malware IRC Network Traffic Blacklist",
+        "type": "EntityList"
+      }
+    },
+    {
+      "entity": {
+        "type": "EntityList",
+        "description": "All domains on this list should be considered dang...",
+        "id": "report:Oe5eg5",
+        "name": "MalwareDomainList: Malicious URL Reports"
+      }
+    }
+  ]
+}
