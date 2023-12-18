@@ -1,0 +1,178 @@
+  {
+    "counts": {
+      "returned": 10,
+      "total": 78366
+    },
+    "data": {
+      "results": [
+        {
+          "entity": {
+            "id": "hash:c48786b8d8dc9d4ac0764ecb28044135",
+            "name": "c48786b8d8dc9d4ac0764ecb28044135",
+            "type": "Hash"
+          },
+          "relatedEntities": [
+            {
+              "type": "RelatedHash",
+              "entities": [
+                {
+                  "count": 4,
+                  "entity": {
+                    "name": "1101a6b0736ad5cb9ed57b0e062248396488545383f9cd2759...",
+                    "type": "Hash",
+                    "id": "hash:1101a6b0736ad5cb9ed57b0e062248396488545383f9c..."
+                  }
+                }
+              ]
+            }
+          ],
+          "risk": {
+            "riskSummary": "2 of 12 Risk Rules currently observed.",
+            "rules": 2,
+            "score": 25,
+            "criticality": 2,
+            "criticalityLabel": "Suspicious",
+            "evidenceDetails": [
+              {
+                "evidenceString": "1 sighting on 1 source: VirusTotal. Most recent li...",
+                "mitigationString": "",
+                "rule": "Linked to Malware",
+                "timestamp": "2020-02-02T20:07:51.000Z",
+                "criticality": 2,
+                "criticalityLabel": "Suspicious"
+              },
+              {
+                "criticalityLabel": "Suspicious",
+                "evidenceString": "1 sighting on 1 source: VirusTotal. Mitigated by R...",
+                "mitigationString": "Mitigated by ReversingLabs reputation.",
+                "rule": "Positive Malware Verdict",
+                "timestamp": "2020-02-02T00:00:00.000Z",
+                "criticality": 2
+              }
+            ],
+            "riskString": "2/12"
+          },
+          "sightings": [
+            {
+              "url": "https://www.virustotal.com/gui/file/1101a6b0736ad5...",
+              "fragment": "last_seen - 2020-02-02 20:07:51 1101a6b0736ad5cb9e...",
+              "published": "2020-02-02T20:07:51.000Z",
+              "source": "VirusTotal",
+              "title": "Antivirus scan for 1101a6b0736ad5cb9ed57b0e0622483...",
+              "type": "first"
+            },
+            {
+              "fragment": "ReversingLabs report for SHA-256 1101a6b0736ad5cb9...",
+              "published": "2020-02-01T09:38:05.000Z",
+              "source": "ReversingLabs",
+              "title": "ReversingLabs scan for SHA-256 1101a6b0736ad5cb9ed...",
+              "type": "recentInfoSec",
+              "url": "https://a1000.reversinglabs.com/accounts/login/?ne..."
+            }
+          ],
+          "threatLists": [],
+          "analystNotes": [],
+          "counts": [
+            {
+              "count": 2,
+              "date": "2020-02-01"
+            }
+          ],
+          "hashAlgorithm": "MD5",
+          "intelCard": "http://example.com",
+          "metrics": [
+            {
+              "type": "pasteHits",
+              "value": 0
+            }
+          ],
+          "timestamps": {
+            "firstSeen": "2020-02-03T18:03:49.580Z",
+            "lastSeen": "2020-02-09T06:38:12.726Z"
+          }
+        },
+        {
+          "analystNotes": [],
+          "hashAlgorithm": "MD5",
+          "relatedEntities": [
+            {
+              "entities": [
+                {
+                  "count": 7,
+                  "entity": {
+                    "id": "hash:d7a95886c8dc5021fa4dda5176c59e4f3e590b49efa51...",
+                    "name": "d7a95886c8dc5021fa4dda5176c59e4f3e590b49efa510b740...",
+                    "type": "Hash"
+                  }
+                }
+              ],
+              "type": "RelatedHash"
+            }
+          ],
+          "timestamps": {
+            "firstSeen": "2019-04-24T08:13:55.161Z",
+            "lastSeen": "2019-10-02T19:47:27.938Z"
+          },
+          "risk": {
+            "rules": 2,
+            "score": 25,
+            "criticality": 2,
+            "criticalityLabel": "Suspicious",
+            "evidenceDetails": [
+              {
+                "timestamp": "2019-04-23T19:17:02.000Z",
+                "criticality": 2,
+                "criticalityLabel": "Suspicious",
+                "evidenceString": "1 sighting on 1 source: VirusTotal. Most recent li...",
+                "mitigationString": "",
+                "rule": "Linked to Malware"
+              }
+            ],
+            "riskString": "2/12",
+            "riskSummary": "2 of 12 Risk Rules currently observed."
+          },
+          "sightings": [
+            {
+              "type": "mostRecent",
+              "url": "https://a1000.reversinglabs.com/accounts/login/?ne...",
+              "fragment": "ReversingLabs report for SHA-256 d7a95886c8dc5021f...",
+              "published": "2019-04-23T20:20:44.000Z",
+              "source": "ReversingLabs",
+              "title": "ReversingLabs scan for SHA-256 d7a95886c8dc5021fa4..."
+            },
+            {
+              "fragment": "ReversingLabs report for SHA-256 d7a95886c8dc5021f...",
+              "published": "2019-04-23T20:20:44.000Z",
+              "source": "ReversingLabs",
+              "title": "ReversingLabs scan for SHA-256 d7a95886c8dc5021fa4...",
+              "type": "recentInfoSec",
+              "url": "https://a1000.reversinglabs.com/accounts/login/?ne..."
+            }
+          ],
+          "threatLists": [],
+          "counts": [
+            {
+              "count": 7,
+              "date": "2019-04-23"
+            }
+          ],
+          "entity": {
+            "type": "Hash",
+            "id": "hash:83fc4b1052f1b8cb9c8da36419a850e1",
+            "name": "83fc4b1052f1b8cb9c8da36419a850e1"
+          },
+          "intelCard": "http://example.com",
+          "metrics": [
+            {
+              "value": 0,
+              "type": "pasteHits"
+            },
+            {
+              "type": "darkWebHits",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    }
+  }
