@@ -1,0 +1,8 @@
+{
+  "limit": 10,
+  "from": 0,
+  "orderby": "Riskscore",
+  "direction": "asc",
+  "riskScore": 0,
+  "riskRule": "Historically Reported by Insikt Group"
+}
