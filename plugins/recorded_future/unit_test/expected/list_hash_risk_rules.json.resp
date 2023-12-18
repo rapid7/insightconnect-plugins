@@ -1,0 +1,22 @@
+{
+  "risk_rules": [
+    {
+      "name": "recentActiveMalware",
+      "relatedEntities": [
+        "aHTyRv"
+      ],
+      "count": 16164,
+      "criticality": 3,
+      "criticalityLabel": "Malicious",
+      "description": "Recently Active Targeting Vulnerabilities in the W..."
+    },
+    {
+      "criticality": 3,
+      "criticalityLabel": "Malicious",
+      "description": "Observed in Underground Virus Testing Sites",
+      "name": "observedMalwareTesting",
+      "relatedEntities": [],
+      "count": 1158
+    }
+  ]
+}
