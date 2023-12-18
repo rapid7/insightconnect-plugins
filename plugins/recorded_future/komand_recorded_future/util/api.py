@@ -26,7 +26,6 @@ class RecordedFutureApi:
         return version
 
     def _call_api(self, method: str, endpoint: str, params: dict = None, data: dict = None, json: dict = None):
-
         _url = self.base_url + endpoint
 
         response = requests.request(url=_url, method=method, params=params, data=data, json=json, headers=self.headers)
