@@ -1,7 +1,7 @@
 import json
 import logging
-import sys
 import os
+import sys
 
 import insightconnect_plugin_runtime
 
@@ -99,4 +99,40 @@ class Util:
             return MockResponse(404, "lookup_malware_not_found")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/malware/Shcfg345iZX":
             return MockResponse(404, "lookup_malware_not_found")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/domain/risklist":
+            return MockResponse(200, "domain_risk_list")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/domain/riskrules":
+            return MockResponse(200, "list_domain_risk_rules")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/domain/search":
+            return MockResponse(200, "search_domains")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/hash/risklist":
+            return MockResponse(200, "hash_risk_list")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/hash/riskrules":
+            return MockResponse(200, "list_hash_risk_rules")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/hash/search":
+            return MockResponse(200, "search_hashes")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/ip/risklist":
+            return MockResponse(200, "ip_risk_list")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/ip/riskrules":
+            return MockResponse(200, "list_ip_addresses_risk_rules")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/ip/search":
+            return MockResponse(200, "search_ip_addresses")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/url/risklist":
+            return MockResponse(200, "url_risk_list")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/url/riskrules":
+            return MockResponse(200, "list_url_risk_rules")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/vulnerability/risklist":
+            return MockResponse(200, "vulnerability_risk_list")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/vulnerability/riskrules":
+            return MockResponse(200, "list_vulnerability_risk_rules")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/vulnerability/search":
+            return MockResponse(200, "search_vulnerabilities")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/entitylist/search":
+            return MockResponse(200, "search_entity_lists")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/malware/search":
+            return MockResponse(200, "search_malware")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/url/search":
+            return MockResponse(200, "search_urls")
+        if kwargs.get("url") == "https://api.recordedfuture.com/v2/entitylist/report:Oe5eg5":
+            return MockResponse(200, "lookup_entity_list")
         raise NotImplementedError("Not implemented", kwargs)

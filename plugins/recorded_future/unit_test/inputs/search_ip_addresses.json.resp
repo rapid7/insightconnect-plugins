@@ -1,0 +1,9 @@
+{
+  "limit": 10,
+  "from": 0,
+  "orderby": "Lastseen",
+  "direction": "asc",
+  "ip_range": "192.51.100.0/24",
+  "riskRule": "Malware Deliver",
+  "riskScore": 0
+}
