@@ -1,0 +1,90 @@
+{
+  "data": [
+    {
+      "analystNotes": [
+        {
+          "source": {
+            "id": "VKz42X",
+            "name": "Insikt Group",
+            "type": "Source"
+          },
+          "attributes": {
+            "validated_on": "2018-04-24T04:00:00.000Z",
+            "published": "2018-04-24T04:00:00.000Z",
+            "text": "On April 24, 2018 around 7:30am EST, MyEtherWallet (MEW) shared via Twitter that a number of Domain Name System (DNS) registration servers were hijacked to redirect users to a phishing site, including Google Public DNS 8.8.8.8/8.8.4.4. Those who were redirected to the phishing site were prompted to enter their MEW account information, allowing attackers to gain access to their account and ultimately steal their cryptocurrency. It is not certain exactly how much money the cyber criminals were able to steal total. Current estimates are around $150,000 or 216 Ether. Around 1:30pm EST later the same day, MyEtherWallet tweeted that the issue had been resolved. MyEtherWallet is a popular cryptocurrency web app designed for users to store and send ether and ethereum-based tokens.",
+            "topic": {
+              "id": "TXSFt0",
+              "name": "Flash Report",
+              "type": "Topic",
+              "description": "Overview analysis of a current event. Can include technical details and indicators of compromise."
+            },
+            "title": "MyEtherWallet DNS servers hijacked",
+            "note_entities": [
+              {
+                "id": "Smo9TW",
+                "name": "MyEtherWallet.com",
+                "type": "Company"
+              }
+            ],
+            "context_entities": [
+              {
+                "id": "ip:8.8.4.4",
+                "name": "8.8.4.4",
+                "type": "IpAddress"
+              }
+            ],
+            "validation_urls": [
+              {
+                "id": "url:url:https://www.coindesk.com/150k-stolen-myetherwallet-users-dns-server-hijacking/",
+                "name": "url:https://www.coindesk.com/150k-stolen-myetherwallet-users-dns-server-hijacking/",
+                "type": "URL"
+              }
+            ]
+          },
+          "id": "V3-CAc"
+        }
+      ],
+      "sightings": [],
+      "relatedEntities": [],
+      "enterpriseLists": [],
+      "timestamps": {
+        "firstSeen": "2020-09-24T00:00:00.000Z",
+        "lastSeen": "2020-09-24T23:59:59.000Z"
+      },
+      "risk": {
+        "criticalityLabel": "Unusual",
+        "score": 5,
+        "evidenceDetails": [
+          {
+            "timestamp": "2018-04-24T00:00:00.000Z",
+            "criticalityLabel": "Unusual",
+            "evidenceString": "1 sighting on 1 source: Insikt Group. 1 report: MyEtherWallet DNS servers hijacked (Apr 24, 2018).",
+            "rule": "Historically Reported by Insikt Group",
+            "criticality": 1
+          }
+        ],
+        "riskString": "1/29",
+        "rules": 1,
+        "criticality": 1,
+        "riskSummary": "1 of 29 Risk Rules currently observed."
+      },
+      "entity": {
+        "id": "url:https://myetherwallet.com/",
+        "name": "https://myetherwallet.com/",
+        "type": "URL"
+      },
+      "counts": [
+        {
+          "count": 1,
+          "date": "2018-04-24"
+        }
+      ],
+      "metrics": [
+        {
+          "type": "whitlistedCount",
+          "value": 0
+        }
+      ]
+    }
+  ]
+}
