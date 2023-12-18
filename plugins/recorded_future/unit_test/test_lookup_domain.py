@@ -1,16 +1,20 @@
-import sys
 import os
+import sys
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
-from unit_test.util import Util
-from parameterized import parameterized
+from typing import Any, Dict
+
+from jsonschema import validate
 from komand_recorded_future.actions.lookup_domain import LookupDomain
 from komand_recorded_future.connection.schema import Input
+from parameterized import parameterized
+
+from util import Util
 
 
 class TestLookupDomain(TestCase):
@@ -39,8 +43,11 @@ class TestLookupDomain(TestCase):
         ]
     )
     @patch("requests.request", side_effect=Util.mock_request)
-    def test_lookup_domain(self, input_parameters, expected, mock_request):
+    def test_lookup_domain(
+        self, input_parameters: Dict[str, Any], expected: Dict[str, Any], mock_request: MagicMock
+    ) -> None:
         actual = self.action.run(input_parameters)
+        validate(actual, self.action.output.schema)
         self.assertEqual(expected, actual)
 
     @parameterized.expand(
@@ -54,7 +61,7 @@ class TestLookupDomain(TestCase):
             ]
         )
     )
-    def test_get_domain(self, input_url, expected_url):
+    def test_get_domain(self, input_url: str, expected_url: str) -> None:
         actual = self.action.get_domain(input_url)
         self.assertEqual(actual, expected_url)
 
@@ -93,10 +100,11 @@ class TestLookupDomain(TestCase):
         ]
     )
     @patch("requests.request", side_effect=Util.mock_request)
-    def test_lookup_domain_raise_exception(self, token, input_parameters, cause, assistance, mock_request):
+    def test_lookup_domain_raise_exception(
+        self, token: str, input_parameters: Dict[str, Any], cause: str, assistance: str, mock_request: MagicMock
+    ) -> None:
         action = Util.default_connector(LookupDomain(), {Input.API_KEY: {"secretKey": token}})
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             action.run(input_parameters)
-
-        self.assertEqual(e.exception.cause, cause)
-        self.assertEqual(e.exception.assistance, assistance)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)
