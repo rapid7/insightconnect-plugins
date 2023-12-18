@@ -1,43 +1,76 @@
-# import sys
-# import os
-#
-# sys.path.append(os.path.abspath("../"))
-#
-# from unittest import TestCase
-# from komand_recorded_future.connection.connection import Connection
-# from komand_recorded_future.actions.search_vulnerabilities import SearchVulnerabilities
-# import json
-# import logging
-#
-#
-# class TestSearchVulnerabilities(TestCase):
-#     def test_integration_search_vulnerabilities(self):
-#
-#         log = logging.getLogger("Test")
-#         test_conn = Connection()
-#         test_action = SearchVulnerabilities()
-#
-#         test_conn.logger = log
-#         test_action.logger = log
-#
-#         try:
-#             with open("../tests/search_vulnerabilities.json") as file:
-#                 test_json = json.loads(file.read()).get("body")
-#                 connection_params = test_json.get("connection")
-#                 action_params = test_json.get("input")
-#         except Exception as e:
-#             message = """
-#             Could not find or read sample tests from /tests directory
-#
-#             An exception here likely means you didn't fill out your samples correctly in the /tests directory
-#             Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-#             """
-#             self.fail(message)
-#
-#         test_conn.connect(connection_params)
-#         test_action.connection = test_conn
-#         results = test_action.run(action_params)
-#
-#         # TODO: The following assert should be updated to look for data from your action
-#         # For example: self.assertEquals({"success": True}, results)
-#         self.assertEquals({}, results)
+import os
+import sys
+from unittest import TestCase
+from unittest.mock import MagicMock, patch
+
+from insightconnect_plugin_runtime.exceptions import PluginException
+
+sys.path.append(os.path.abspath("../"))
+
+from typing import Any, Dict
+
+from jsonschema import validate
+from komand_recorded_future.actions.search_vulnerabilities import SearchVulnerabilities
+from komand_recorded_future.connection.schema import Input
+from parameterized import parameterized
+
+from util import Util
+
+
+@patch("requests.request", side_effect=Util.mock_request)
+class TestSearchVulnerabilities(TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.action = Util.default_connector(SearchVulnerabilities())
+
+    @parameterized.expand(
+        [
+            [
+                Util.read_file_to_dict("inputs/search_vulnerabilities.json.resp"),
+                Util.read_file_to_dict("expected/search_vulnerabilities.json.resp"),
+            ],
+        ]
+    )
+    def test_search_vulnerabilities(
+        self, mock_request: MagicMock, input_parameters: Dict[str, Any], expected: Dict[str, Any]
+    ) -> None:
+        actual = self.action.run(input_parameters)
+        validate(actual, self.action.output.schema)
+        self.assertEqual(expected, actual)
+
+    @parameterized.expand(
+        [
+            [
+                "bad_api_key",
+                Util.read_file_to_dict("inputs/search_vulnerabilities.json.resp"),
+                PluginException.causes.get(PluginException.Preset.API_KEY),
+                PluginException.assistances.get(PluginException.Preset.API_KEY),
+            ],
+            [
+                "unauthorized",
+                Util.read_file_to_dict("inputs/search_vulnerabilities.json.resp"),
+                PluginException.causes.get(PluginException.Preset.UNAUTHORIZED),
+                PluginException.assistances.get(PluginException.Preset.UNAUTHORIZED),
+            ],
+            [
+                "unknown",
+                Util.read_file_to_dict("inputs/search_vulnerabilities.json.resp"),
+                PluginException.causes.get(PluginException.Preset.UNKNOWN),
+                PluginException.assistances.get(PluginException.Preset.UNKNOWN),
+            ],
+            [
+                "server_error",
+                Util.read_file_to_dict("inputs/search_vulnerabilities.json.resp"),
+                PluginException.causes.get(PluginException.Preset.SERVER_ERROR),
+                PluginException.assistances.get(PluginException.Preset.SERVER_ERROR),
+            ],
+        ]
+    )
+    def test_search_vulnerabilities_raise_exception(
+        self, mock_request: MagicMock, token: str, input_parameters: Dict[str, Any], cause: str, assistance: str
+    ) -> None:
+        action = Util.default_connector(SearchVulnerabilities(), {Input.API_KEY: {"secretKey": token}})
+        with self.assertRaises(PluginException) as error:
+            action.run(input_parameters)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)

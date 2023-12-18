@@ -1,0 +1,28 @@
+{
+  "risk_rules": [
+    {
+      "count": 75508,
+      "criticality": 1,
+      "criticalityLabel": "Unusual",
+      "description": "Historical Threat Researcher",
+      "name": "threatResearcher",
+      "relatedEntities": []
+    },
+    {
+      "count": 517,
+      "criticality": 2,
+      "criticalityLabel": "Suspicious",
+      "description": "Recently Reported as a Defanged IP",
+      "name": "recentDefanged",
+      "relatedEntities": []
+    },
+    {
+      "count": 102959,
+      "criticality": 1,
+      "criticalityLabel": "Unusual",
+      "description": "Vulnerable Host",
+      "name": "vulnerableHost",
+      "relatedEntities": []
+    }
+  ]
+}
