@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "entity": {
+        "description": "Microsoft .NET Framework 2.0, 3.5, 3.5.1, 4.5.2, 4...",
+        "id": "UDtzUu",
+        "name": "CVE-2017-8759",
+        "type": "CyberVulnerability"
+      },
+      "timestamps": {
+        "firstSeen": "2017-09-12T17:04:02.573Z",
+        "lastSeen": "2020-04-05T16:49:09.358Z"
+      }
+    },
+    {
+      "entity": {
+        "id": "JI5lb_",
+        "name": "CVE-2012-0158",
+        "type": "CyberVulnerability",
+        "description": "The (1) ListView, (2) ListView2, (3) TreeView, and..."
+      },
+      "timestamps": {
+        "lastSeen": "2020-04-06T08:25:41.231Z",
+        "firstSeen": "2012-04-10T21:55:01.687Z"
+      }
+    }
+  ]
+}
