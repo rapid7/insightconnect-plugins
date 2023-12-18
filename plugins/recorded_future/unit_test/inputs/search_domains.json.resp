@@ -1,0 +1,9 @@
+{
+  "limit": 1,
+  "from": 0,
+  "orderby": "Created",
+  "direction": "asc",
+  "parent": "example.com",
+  "riskRule": "Active Phishing URL",
+  "riskScore": 1
+}

@@ -1,0 +1,26 @@
+{
+  "data": [
+    {
+      "entity": {
+        "id": "idn:blog.recordedfuture.com",
+        "name": "blog.recordedfuture.com",
+        "type": "InternetDomainName"
+      },
+      "timestamps": {
+        "firstSeen": "2015-09-25T19:27:11.627Z",
+        "lastSeen": "2016-11-27T19:53:27.582Z"
+      }
+    },
+    {
+      "entity": {
+        "id": "idn:api.recordedfuture.com",
+        "name": "api.recordedfuture.com",
+        "type": "InternetDomainName"
+      },
+      "timestamps": {
+        "firstSeen": "2016-12-19T16:49:10.381Z",
+        "lastSeen": "2020-03-25T18:55:20.407Z"
+      }
+    }
+  ]
+}
