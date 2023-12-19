@@ -105,7 +105,14 @@ class TopRemediationsOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "remediations"
+    "cvssScore",
+    "description",
+    "id",
+    "remediations",
+    "riskScore",
+    "severity",
+    "title",
+    "vulnerabilities"
   ],
   "definitions": {
     "remediation": {
@@ -171,18 +178,18 @@ class TopRemediationsOutput(insightconnect_plugin_runtime.Output):
             "$ref": "#/definitions/remediation_vulnerability"
           },
           "order": 9
-        }
-      },
-      "required": [
-        "assetCount",
-        "assets",
-        "nexposeId",
-        "riskScore",
-        "solutionId",
-        "summary",
-        "vulnerabilities",
-        "vulnerabilityCount"
-      ]
+        },
+        "required": [
+          "cvssScore",
+          "description",
+          "id",
+          "riskScore",
+          "severity",
+          "title",
+          "vulnerabilities",
+          "remediations"
+        ]
+      }
     },
     "remediation_asset": {
       "type": "object",
@@ -229,12 +236,13 @@ class TopRemediationsOutput(insightconnect_plugin_runtime.Output):
           "title": "Criticality Tag",
           "description": "The criticality tag assigned to the asset",
           "order": 7
-        }
-      },
-      "required": [
-        "id",
-        "ip"
-      ]
+        },
+        "required": [
+          "id",
+          "ip",
+          "assets"
+        ]
+      }
     },
     "remediation_vulnerability": {
       "type": "object",
@@ -275,16 +283,17 @@ class TopRemediationsOutput(insightconnect_plugin_runtime.Output):
           "title": "Risk Score",
           "description": "The risk score of the vulnerability",
           "order": 6
-        }
-      },
-      "required": [
-        "cvssScore",
-        "description",
-        "id",
-        "riskScore",
-        "severity",
-        "title"
-      ]
+        },
+        "required": [
+          "cvssScore",
+          "description",
+          "id",
+          "riskScore",
+          "severity",
+          "title",
+          "vulnerabilities"
+        ]
+      }
     }
   }
 }

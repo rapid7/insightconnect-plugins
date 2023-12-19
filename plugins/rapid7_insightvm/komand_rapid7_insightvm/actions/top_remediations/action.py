@@ -124,7 +124,7 @@ class TopRemediations(insightconnect_plugin_runtime.Action):
             vuln_limit = params.get(Input.VULNERABILITY_LIMIT)
             if (vuln_limit == 0) or (len(remediations[row["solution_id"]]["vulnerabilities"]) < vuln_limit):
                 vulnerability = {
-                    "id": int(row["vulnerability_id"]),
+                    "id": row["nexpose_id"],
                     "title": row["title"],
                     "description": row["description"],
                     "cvssScore": row["cvss_score"],
@@ -183,7 +183,7 @@ class TopRemediations(insightconnect_plugin_runtime.Action):
             f"SELECT DISTINCT solution_id, vulnerability_id "
             f"FROM dim_asset_vulnerability_solution "
             f")"
-            f"SELECT DISTINCT fr.solution_id, dv.vulnerability_id, dv.title, dv.description, "
+            f"SELECT DISTINCT fr.solution_id, dv.nexpose_id, dv.title, dv.description, "
             f"dv.severity_score, dv.riskscore, dv.cvss_score "
             f"FROM fact_remediation({limit}, 'riskscore DESC') AS fr "
             f"JOIN remediation_vulnerabilities rv ON fr.solution_id = rv.solution_id "

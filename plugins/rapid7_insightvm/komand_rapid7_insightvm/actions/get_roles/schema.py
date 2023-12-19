@@ -53,6 +53,9 @@ class GetRolesOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
+    "links",
+    "name",
+    "privileges",
     "roles"
   ],
   "definitions": {
@@ -94,15 +97,14 @@ class GetRolesOutput(insightconnect_plugin_runtime.Output):
             "type": "string"
           },
           "order": 5
-        }
-      },
-      "required": [
-        "description",
-        "id",
-        "links",
-        "name",
-        "privileges"
-      ]
+        },
+        "required": [
+          "links",
+          "name",
+          "privileges",
+          "roles"
+        ]
+      }
     },
     "link": {
       "type": "object",

@@ -123,12 +123,7 @@ class GetUserOutput(insightconnect_plugin_runtime.Output):
           "description": "The privileges and role the user is assigned",
           "order": 10
         }
-      },
-      "required": [
-        "locked",
-        "login",
-        "name"
-      ]
+      }
     },
     "authentication_source": {
       "type": "object",
@@ -173,15 +168,13 @@ class GetUserOutput(insightconnect_plugin_runtime.Output):
             "admin"
           ],
           "order": 5
-        }
-      },
-      "required": [
-        "external",
-        "id",
-        "links",
-        "name",
-        "type"
-      ]
+        },
+        "required": [
+          "links",
+          "name",
+          "type"
+        ]
+      }
     },
     "link": {
       "type": "object",
@@ -216,12 +209,15 @@ class GetUserOutput(insightconnect_plugin_runtime.Output):
           "title": "Reports",
           "description": "Reports locale",
           "order": 2
-        }
-      },
-      "required": [
-        "default",
-        "reports"
-      ]
+        },
+        "required": [
+          "default",
+          "reports",
+          "locked",
+          "login",
+          "name"
+        ]
+      }
     },
     "user_account_role": {
       "type": "object",

@@ -132,7 +132,6 @@ class CreateExceptionOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "id",
     "links"
   ],
   "definitions": {

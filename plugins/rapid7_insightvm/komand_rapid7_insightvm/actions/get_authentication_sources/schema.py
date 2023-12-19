@@ -69,7 +69,10 @@ class GetAuthenticationSourcesOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "authentication_sources"
+    "authentication_sources",
+    "links",
+    "name",
+    "type"
   ],
   "definitions": {
     "authentication_source": {
@@ -115,15 +118,14 @@ class GetAuthenticationSourcesOutput(insightconnect_plugin_runtime.Output):
             "admin"
           ],
           "order": 5
-        }
-      },
-      "required": [
-        "external",
-        "id",
-        "links",
-        "name",
-        "type"
-      ]
+        },
+        "required": [
+          "links",
+          "name",
+          "type",
+          "authentication_sources"
+        ]
+      }
     },
     "link": {
       "type": "object",

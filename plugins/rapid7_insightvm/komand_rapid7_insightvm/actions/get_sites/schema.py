@@ -54,7 +54,8 @@ class GetSitesOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "sites"
+    "sites",
+    "vulnerabilities"
   ],
   "definitions": {
     "site": {
@@ -143,20 +144,12 @@ class GetSitesOutput(insightconnect_plugin_runtime.Output):
           "title": "Vulnerabilities",
           "description": "Site vulnerability counts",
           "order": 13
-        }
-      },
-      "required": [
-        "assets",
-        "id",
-        "importance",
-        "links",
-        "name",
-        "riskScore",
-        "scanEngine",
-        "scanTemplate",
-        "type",
-        "vulnerabilities"
-      ]
+        },
+        "required": [
+          "vulnerabilities",
+          "sites"
+        ]
+      }
     },
     "link": {
       "type": "object",

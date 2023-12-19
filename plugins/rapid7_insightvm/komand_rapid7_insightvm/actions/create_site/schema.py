@@ -143,7 +143,6 @@ class CreateSiteOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "id",
     "links"
   ],
   "definitions": {

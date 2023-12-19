@@ -53,6 +53,9 @@ class GetScanEngineOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
+    "links",
+    "name",
+    "port",
     "scan_engine"
   ],
   "definitions": {
@@ -138,16 +141,14 @@ class GetScanEngineOutput(insightconnect_plugin_runtime.Output):
             "type": "integer"
           },
           "order": 11
-        }
-      },
-      "required": [
-        "address",
-        "enginePools",
-        "id",
-        "links",
-        "name",
-        "port"
-      ]
+        },
+        "required": [
+          "links",
+          "name",
+          "port",
+          "scan_engine"
+        ]
+      }
     },
     "link": {
       "type": "object",
