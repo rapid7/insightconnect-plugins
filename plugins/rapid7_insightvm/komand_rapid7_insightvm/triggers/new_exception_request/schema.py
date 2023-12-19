@@ -123,7 +123,13 @@ class NewExceptionRequestOutput(insightconnect_plugin_runtime.Output):
           },
           "order": 7
         }
-      }
+      },
+      "required": [
+        "id",
+        "scope",
+        "state",
+        "submit"
+      ]
     },
     "link": {
       "type": "object",

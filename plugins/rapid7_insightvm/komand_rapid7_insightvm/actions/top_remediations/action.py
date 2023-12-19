@@ -18,7 +18,7 @@ class TopRemediations(insightconnect_plugin_runtime.Action):
             output=TopRemediationsOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):  # noqa: MC0001
         remediations_limit = params.get(Input.LIMIT)
         # Generate unique identifier for report names
         identifier = uuid.uuid4()
