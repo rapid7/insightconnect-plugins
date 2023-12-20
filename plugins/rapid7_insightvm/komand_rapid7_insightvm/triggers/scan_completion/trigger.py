@@ -44,15 +44,15 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             results = self.get_results_from_latest_scan(params=params, scan_id=int(latest_scan_id))
 
             # Submit scan for trigger
-            for item in results:
-                self.send(
-                    {
-                        Output.ASSET_ID: item.get("asset_id"),
-                        Output.IP: item.get("ip_address"),
-                        Output.HOSTNAME: item.get("hostname"),
-                        Output.VULNERABILITY_INFO: item.get("vulnerability_info"),
-                    }
-                )
+            # for item in results:
+            #     self.send(
+            #         {
+            #             Output.ASSET_ID: item.get("asset_id"),
+            #             Output.IP: item.get("ip_address"),
+            #             Output.HOSTNAME: item.get("hostname"),
+            #             Output.VULNERABILITY_INFO: item.get("vulnerability_info"),
+            #         }
+            #     )
 
             first_latest_scan_id = latest_scan_id
 
@@ -145,12 +145,13 @@ class ScanQueries:
         """
 
         return (
-            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dv.cvss_v3_score, dvr.source, daga.asset_group_id, dss.solution_id, dss.summary, dv.nexpose_id "  # nosec B608
+            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dv.cvss_v3_score, dvr.source, daga.asset_group_id, dss.solution_id, dss.summary, dv.nexpose_id, dvc.category_name "  # nosec B608
             f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
             f"JOIN dim_asset_group_asset AS daga ON (fasvi.asset_id = daga.asset_id) "
             f"JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
             f"JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) "
             f"JOIN dim_solution AS dss ON (dv.nexpose_id = dss.nexpose_id) "
+            f"JOIN dim_vulnerability_category AS dvc ON (fasvi.vulnerability_id = dvc.vulnerability_id) "
             f"WHERE fasvi.scan_id = {scan_id} "
         )
 
@@ -174,25 +175,25 @@ class Util:
         source = params.get(Input.SOURCE, None)
         cvss_score = params.get(Input.CVSS_SCORE, None)
         severity = params.get(Input.SEVERITY, None)
+        category = params.get(Input.CATEGORY_NAME, None).lower()
 
         # We retrieve this separately because we use it as a unique identifier for
         # the filtering process
         asset_id = int(csv_row.get("asset_id", 0))
 
-        new_dict = {
+        asset_dict = {
             "asset_id": asset_id,
             "hostname": csv_row.get("host_name", ""),
             "ip_address": csv_row.get("ip_address", ""),
-            "vulnerability_info": [
-                {
-                    "vulnerability_id": csv_row.get("vulnerability_id", ""),
-                    "nexpose_id": csv_row.get("nexpose_id", ""),
-                    "cvss_v3_score": csv_row.get("cvss_v3_score", 0),
-                    "severity": csv_row.get("severity", ""),
-                    "solution_id": Util.strip_msft_id(csv_row.get("solution_id", "")),
-                    "solution_summary": csv_row.get("summary", ""),
-                }
-            ],
+        }
+
+        vulnerability_dict = {
+            "vulnerability_id": csv_row.get("vulnerability_id", ""),
+            "nexpose_id": csv_row.get("nexpose_id", ""),
+            "cvss_v3_score": csv_row.get("cvss_v3_score", 0),
+            "severity": csv_row.get("severity", ""),
+            "solution_id": Util.strip_msft_id(csv_row.get("solution_id", "")),
+            "solution_summary": csv_row.get("summary", ""),
         }
 
         # If an input and it is not found, return None in place of the row to filter
@@ -206,6 +207,8 @@ class Util:
         if cvss_score and csv_row.get("cvss_v3_score", 0) < cvss_score:
             return {}
         if severity and severity not in csv_row.get("severity", ""):
+            return {}
+        if category and category not in csv_row.get("category_name", "").lower():
             return {}
         # Otherwise, return the newly filtered result.
 

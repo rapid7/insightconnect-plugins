@@ -25,6 +25,53 @@ hub_tags:
   keywords: [insightvm, rapid7]
   features: []
 types:
+  assets:
+    asset_id:
+      title: Asset ID
+      description: The unique ID of the asset
+      type: integer
+      required: false
+    hostname:
+      title: Hostname
+      description: The hostname for the asset
+      type: string
+      required: false
+    ip:
+      title: IP Address
+      description: The IP address of the asset
+      type: string
+      required: false
+  vulnerability_info:
+    vulnerability_id:
+      title: Vulnerability ID
+      description: The unique ID of the vulnerability
+      type: string
+      required: false
+    nexpose_id:
+      title: Nexpose ID
+      description: The unique identifier for the vulnerability in nexpose
+      type: string
+      required: false
+    cvss_v3_score:
+      title: CVSS V3 Score
+      description: The cvss score of the vulnerability
+      type: string
+      required: false
+    severity:
+      title: Severity
+      description: The severity of the vulnerability
+      type: string
+      required: false
+    solution_id:
+      title: Solution ID
+      description: The unique ID of the solution
+      type: string
+      required: false
+    solution_summary:
+      title: Solution Summary
+      description: The summary of the solution for the vulnerability
+      type: string
+      required: false
   report_id:
     id:
       description: Identifer
@@ -4529,28 +4576,22 @@ triggers:
           - Severe
           - Critical
         example: Severe
+      category_name:
+        title: Category Name
+        description: Name of the category the vulnerability is contained within
+        type: string
+        example: Debian Linux
+        required: false
     output:
-      asset_id:
-        title: Asset ID
-        description: Asset ID
-        type: integer
+      assets:
+        title: Assets
+        description: An array containing the asset id, hostname and ip address
+        type: '[]assets'
+        example: [{'asset_id': 1, 'hostname': 'google.com', 'ip': '8.8.8.8'}, {'asset_id': 2, 'hostname': 'google.co.uk', 'ip': '8.8.8.8'}]
         required: false
-        example: 219
-      hostname:
-        title: Hostname
-        description: Hostname
-        type: string
-        required: false
-        example: doc.rapid7.com
-      ip:
-        title: IP
-        description: IP
-        type: string
-        required: false
-        example: 8.8.8.8
       vulnerability_info:
         title: Vulnerability Info
         description: An array containing vulnerability id, solution id & solution summary
-        type: '[]object'
+        type: '[]vulnerability_info'
         required: false
         example: [{'vulnerability_id': 1111, 'nexpose_id': 'ssh-cve-2018', 'solution_id': 1111, 'solution_summary': 'Example solution for cve'}, {'vulnerability_id': 2222, 'nexpose_id': 'ssh-cve-2019', 'solution_id': 2222, 'solution_summary': 'Example solution for cve'}]
