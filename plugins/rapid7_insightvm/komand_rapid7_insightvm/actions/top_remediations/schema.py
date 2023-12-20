@@ -241,7 +241,7 @@ class TopRemediationsOutput(insightconnect_plugin_runtime.Output):
       "title": "remediation_vulnerability",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "Identifier of the vulnerability",
           "order": 1

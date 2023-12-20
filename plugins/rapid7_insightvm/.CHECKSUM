@@ -1,7 +1,7 @@
 {
-	"spec": "8c162487e4fc21d316ae671ff14bdada",
-	"manifest": "1ad7045d507da48f30f04999d8e73b3b",
-	"setup": "1c6dcdf34833dd8b8ada2f2a80ae8279",
+	"spec": "04b88b912e8a46ab775db595fe1ae500",
+	"manifest": "d313765e6b145298ffa4f67d78a6ed6e",
+	"setup": "91885bf50e1d55670ad2be454ee9078b",
 	"schemas": [
 		{
 			"identifier": "add_scan_engine_pool_engine/schema.py",
@@ -297,7 +297,7 @@
 		},
 		{
 			"identifier": "top_remediations/schema.py",
-			"hash": "08cb410b6e19f692509163845cceea57"
+			"hash": "0c39bbb6dfe9eb4c871fd4e49c2b37d7"
 		},
 		{
 			"identifier": "update_asset_group_search_criteria/schema.py",
