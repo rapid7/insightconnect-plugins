@@ -91,23 +91,11 @@ class AbnormalSecurityAPI:
         if from_date or to_date:
             params = {"filter": filter_key}
             if from_date:
-                params["filter"] = params["filter"] + f" gte {self.parse_date(from_date)}"
+                params["filter"] = params["filter"] + f" gte {from_date}"
             if to_date:
-                params["filter"] = params["filter"] + f" lte {self.parse_date(to_date)}"
+                params["filter"] = params["filter"] + f" lte {to_date}"
+        self.logger.info(f"Paramters used for the api call - {params}")
         return params
-
-    @staticmethod
-    def parse_date(date: str) -> str:
-        try:
-            parsed_date = dateparser.parse(date)
-            if not parsed_date.tzinfo:
-                return parsed_date.isoformat() + "Z"
-            return parsed_date.isoformat()
-        except Exception:
-            raise PluginException(
-                cause=f"Date '{date}' is not a valid date.",
-                assistance="Please verify the date and try again.",
-            )
 
     @staticmethod
     def split_url(url: str) -> str:

@@ -85,7 +85,7 @@ provided, it will return up to 100 latest results
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|filter_key|enum - lastModifiedTime - createdTime - customerVisableTime|lastModifiedTime|False|This input enables you to select what timestamp to filter on, default is lastModifiedTime|None|lastModifiedTime|
+|filter_key|string|lastModifiedTime|False|This input enables you to select what timestamp to filter on, default is lastModifiedTime|['lastModifiedTime', 'createdTime', 'customerVisableTime', '']|lastModifiedTime|
 |from_date|string|None|False|This input enables you to filter your results from a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ|None|2021-03-01 21:11:38+00:00|
 |to_date|string|None|False|This input enables you to filter your results to a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ|None|2021-03-11 21:11:38+00:00|
   
@@ -452,10 +452,11 @@ Example output:
 
 # Version History
 
-* 2.0.0 - Add support to select the time filter filed in `get_cases` action | bump SDK version
-* 1.3.0 - New logo and requirements update
-* 1.2.0 - New actions Manage Case and Manage Threat
-* 1.1.0 - New actions Get Cases and Get Case Details
+* 2.0.1 - To remove formatting of the fromTime or toTome values used in the `get_cases` and `get_threats` actions  
+* 2.0.0 - Add support to select the time filter filed in `get_cases` action | bump SDK version  
+* 1.3.0 - New logo and requirements update  
+* 1.2.0 - New actions Manage Case and Manage Threat  
+* 1.1.0 - New actions Get Cases and Get Case Details  
 * 1.0.0 - Initial plugin
 
 # Links
