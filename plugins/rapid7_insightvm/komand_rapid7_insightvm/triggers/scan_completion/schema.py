@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     ASSET_GROUP = "asset_group"
+    CATEGORY_NAME = "category_name"
     CVE = "cve"
     CVSS_SCORE = "cvss_score"
     INTERVAL = "interval"
@@ -18,9 +19,7 @@ class Input:
 
 
 class Output:
-    ASSET_ID = "asset_id"
-    HOSTNAME = "hostname"
-    IP = "ip"
+    ASSETS = "assets"
     VULNERABILITY_INFO = "vulnerability_info"
 
 
@@ -35,6 +34,12 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
       "title": "Asset Group",
       "description": "Asset Group",
       "order": 3
+    },
+    "category_name": {
+      "type": "string",
+      "title": "Category Name",
+      "description": "Name of the category the vulnerability is contained within",
+      "order": 8
     },
     "cve": {
       "type": "string",
@@ -98,35 +103,93 @@ class ScanCompletionOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "asset_id": {
-      "type": "integer",
-      "title": "Asset ID",
-      "description": "Asset ID",
+    "assets": {
+      "type": "array",
+      "title": "Assets",
+      "description": "An array containing the asset id, hostname and IP address",
+      "items": {
+        "$ref": "#/definitions/assets"
+      },
       "order": 1
-    },
-    "hostname": {
-      "type": "string",
-      "title": "Hostname",
-      "description": "Hostname",
-      "order": 2
-    },
-    "ip": {
-      "type": "string",
-      "title": "IP",
-      "description": "IP",
-      "order": 3
     },
     "vulnerability_info": {
       "type": "array",
       "title": "Vulnerability Info",
       "description": "An array containing vulnerability id, solution id & solution summary",
       "items": {
-        "type": "object"
+        "$ref": "#/definitions/vulnerability_info"
       },
-      "order": 4
+      "order": 2
     }
   },
-  "definitions": {}
+  "definitions": {
+    "assets": {
+      "type": "object",
+      "title": "assets",
+      "properties": {
+        "asset_id": {
+          "type": "integer",
+          "title": "Asset ID",
+          "description": "The unique ID of the asset",
+          "order": 1
+        },
+        "hostname": {
+          "type": "string",
+          "title": "Hostname",
+          "description": "The hostname for the asset",
+          "order": 2
+        },
+        "ip": {
+          "type": "string",
+          "title": "IP Address",
+          "description": "The IP address of the asset",
+          "order": 3
+        }
+      }
+    },
+    "vulnerability_info": {
+      "type": "object",
+      "title": "vulnerability_info",
+      "properties": {
+        "vulnerability_id": {
+          "type": "string",
+          "title": "Vulnerability ID",
+          "description": "The unique ID of the vulnerability",
+          "order": 1
+        },
+        "nexpose_id": {
+          "type": "string",
+          "title": "Nexpose ID",
+          "description": "The unique identifier for the vulnerability in nexpose",
+          "order": 2
+        },
+        "cvss_v3_score": {
+          "type": "string",
+          "title": "CVSS V3 Score",
+          "description": "The CVSS score of the vulnerability",
+          "order": 3
+        },
+        "severity": {
+          "type": "string",
+          "title": "Severity",
+          "description": "The severity of the vulnerability",
+          "order": 4
+        },
+        "solution_id": {
+          "type": "string",
+          "title": "Solution ID",
+          "description": "The unique ID of the solution",
+          "order": 5
+        },
+        "solution_summary": {
+          "type": "string",
+          "title": "Solution Summary",
+          "description": "The summary of the solution for the vulnerability",
+          "order": 6
+        }
+      }
+    }
+  }
 }
     """)
 
