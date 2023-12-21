@@ -3928,7 +3928,7 @@ Example output:
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |CVSS Score|string|None|True|The CVSS score of the vulnerability|None|
 |Description|string|None|True|The description of the vulnerability|None|
-|ID|integer|None|True|Identifier of the vulnerability|None|
+|ID|string|None|True|Identifier of the vulnerability|None|
 |Risk Score|integer|None|True|The risk score of the vulnerability|None|
 |Severity|integer|None|True|The severity of the vulnerability|None|
 |Title|string|None|True|The title of the vulnerability|None|
