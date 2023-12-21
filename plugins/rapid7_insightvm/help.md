@@ -3303,7 +3303,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|assets|[]assets|False|An array containing the asset id, hostname and ip address|[{"asset_id": 1, "hostname": "google.com", "ip": "8.8.8.8"}, {"asset_id": 2, "hostname": "google.co.uk", "ip": "8.8.8.8"}]|
+|assets|[]assets|False|An array containing the asset id, hostname and IP address|[{"asset_id": 1, "hostname": "google.com", "ip": "8.8.8.8"}, {"asset_id": 2, "hostname": "google.co.uk", "ip": "8.8.8.8"}]|
 |vulnerability_info|[]vulnerability_info|False|An array containing vulnerability id, solution id & solution summary|[{"vulnerability_id": 1111, "nexpose_id": "ssh-cve-2018", "solution_id": 1111, "solution_summary": "Example solution for cve"}, {"vulnerability_id": 2222, "nexpose_id": "ssh-cve-2019", "solution_id": 2222, "solution_summary": "Example solution for cve"}]|
   
 Example output:
