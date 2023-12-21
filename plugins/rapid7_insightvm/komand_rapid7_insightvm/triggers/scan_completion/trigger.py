@@ -90,11 +90,11 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         asset_ids = set()
 
         for row in csv_report:
-            new_assets, new_vulns = Util.filter_results(params, row)
-            if new_assets["asset_id"] not in asset_ids:
+            new_assets, new_vulnerabilities = Util.filter_results(params, row)
+            if new_assets.get("asset_id", 0) not in asset_ids:
                 assets_list.append(new_assets)
-                asset_ids.add(new_assets["asset_id"])
-            vulnerability_list.append(new_vulns)
+                asset_ids.add(new_assets.get("asset_id", 0))
+            vulnerability_list.append(new_vulnerabilities)
 
         return assets_list, vulnerability_list
 
