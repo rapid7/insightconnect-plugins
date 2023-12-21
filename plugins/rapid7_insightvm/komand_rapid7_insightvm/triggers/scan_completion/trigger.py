@@ -7,7 +7,6 @@ import uuid
 from komand_rapid7_insightvm.util import util
 import csv
 import io
-from typing import List, Union, Dict
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 from komand_rapid7_insightvm.util import endpoints
@@ -44,22 +43,19 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             results = self.get_results_from_latest_scan(params=params, scan_id=int(latest_scan_id))
 
             # Submit scan for trigger
-            # for item in results:
-            #     self.send(
-            #         {
-            #             Output.ASSET_ID: item.get("asset_id"),
-            #             Output.IP: item.get("ip_address"),
-            #             Output.HOSTNAME: item.get("hostname"),
-            #             Output.VULNERABILITY_INFO: item.get("vulnerability_info"),
-            #         }
-            #     )
+            self.send(
+                {
+                    Output.ASSETS: results[0],
+                    Output.VULNERABILITY_INFO: results[1]
+                }
+            )
 
             first_latest_scan_id = latest_scan_id
 
             # Sleep configured in minutes
             time.sleep(params.get(Input.INTERVAL, 5) * 60)
 
-    def get_results_from_latest_scan(self, params: dict, scan_id: int) -> List[Dict[str, Union[str, int]]]:
+    def get_results_from_latest_scan(self, params: dict, scan_id: int):
         """
         Take a scan id and run a sql query to retrieve the
         information needed for the trigger output
@@ -94,11 +90,13 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                 assistance=f"Exception returned was {error}",
             )
 
-        results_dict = {}
+        assets_list = []
+        vulnerability_list = []
         for row in csv_report:
-            results_dict.update(Util.filter_results(params, row, results_dict))
+            assets_list.append(Util.filter_results(params, row)[0])
+            vulnerability_list.append(Util.filter_results(params, row)[1])
 
-        return list(results_dict.values())
+        return assets_list, vulnerability_list
 
     def find_latest_completed_scan(self, site_id: str, cached: bool) -> int:
         """
@@ -158,13 +156,12 @@ class ScanQueries:
 
 class Util:
     @staticmethod
-    def filter_results(params: dict, csv_row: dict, results: dict) -> Union[None, dict]:
+    def filter_results(params: dict, csv_row: dict):
         """
         Filter the outputted results based on the user inputs.
 
         :param params: Input params
         :param csv_row: Dict row of the csv results
-        :param results: New object to append results to
 
         :return: New object containing only the necessary fields for the required output.
         """
@@ -175,7 +172,7 @@ class Util:
         source = params.get(Input.SOURCE, None)
         cvss_score = params.get(Input.CVSS_SCORE, None)
         severity = params.get(Input.SEVERITY, None)
-        category = params.get(Input.CATEGORY_NAME, None).lower()
+        category = params.get(Input.CATEGORY_NAME, "").lower()
 
         # We retrieve this separately because we use it as a unique identifier for
         # the filtering process
@@ -192,6 +189,7 @@ class Util:
             "nexpose_id": csv_row.get("nexpose_id", ""),
             "cvss_v3_score": csv_row.get("cvss_v3_score", 0),
             "severity": csv_row.get("severity", ""),
+            "category": csv_row.get("category", ""),
             "solution_id": Util.strip_msft_id(csv_row.get("solution_id", "")),
             "solution_summary": csv_row.get("summary", ""),
         }
@@ -210,16 +208,9 @@ class Util:
             return {}
         if category and category not in csv_row.get("category_name", "").lower():
             return {}
+
         # Otherwise, return the newly filtered result.
-
-        existing_asset_id = results.get(asset_id, None)
-
-        if existing_asset_id:
-            existing_asset_id["vulnerability_info"] += new_dict.get("vulnerability_info", [])
-        else:
-            results[asset_id] = new_dict
-
-        return results
+        return asset_dict, vulnerability_dict
 
     @staticmethod
     def strip_msft_id(solution_id: str) -> str:
