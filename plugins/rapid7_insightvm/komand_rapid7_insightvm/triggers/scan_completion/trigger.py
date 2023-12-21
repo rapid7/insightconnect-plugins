@@ -138,14 +138,14 @@ class ScanQueries:
         """
 
         return (
-            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dv.cvss_v3_score, dvr.source, daga.asset_group_id, dss.solution_id, dss.summary, dv.nexpose_id, dvc.category_name "  # nosec B608
+            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dv.nexpose_id, dv.severity, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source "  # nosec B608
             f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
-            f"JOIN dim_asset_group_asset AS daga ON (fasvi.asset_id = daga.asset_id) "
-            f"JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
-            f"JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) "
-            f"JOIN dim_solution AS dss ON (dv.nexpose_id = dss.nexpose_id) "
-            f"JOIN dim_vulnerability_category AS dvc ON (fasvi.vulnerability_id = dvc.vulnerability_id) "
+            f"INNER JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
+            f"INNER JOIN dim_vulnerability_category AS dvc ON (fasvi.vulnerability_id = dvc.vulnerability_id) "
+            f"INNER JOIN dim_solution AS ds ON (dv.nexpose_id = ds.nexpose_id) "
+            f"LEFT JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) "
             f"WHERE fasvi.scan_id = {scan_id} "
+            f"GROUP BY fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dv.nexpose_id, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source, dv.severity "
         )
 
 
@@ -192,17 +192,17 @@ class Util:
         # If an input and it is not found, return None in place of the row to filter
         # out the result
         if asset_group and asset_group not in csv_row.get("asset_group_id", ""):
-            return {}
+            return {}, {}
         if cve and cve not in csv_row.get("nexpose_id", ""):
-            return {}
+            return {}, {}
         if source and source not in csv_row.get("source", ""):
-            return {}
+            return {}, {}
         if cvss_score and csv_row.get("cvss_v3_score", 0) < cvss_score:
-            return {}
+            return {}, {}
         if severity and severity not in csv_row.get("severity", ""):
-            return {}
+            return {}, {}
         if category and category not in csv_row.get("category_name", "").lower():
-            return {}
+            return {}, {}
 
         # Otherwise, return the newly filtered result.
         return asset_dict, vulnerability_dict
