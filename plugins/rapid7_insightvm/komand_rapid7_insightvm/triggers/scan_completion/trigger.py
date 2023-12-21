@@ -35,15 +35,15 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             latest_scan_id = self.find_latest_completed_scan(site_id, cached=True)
             #
             # # Check if latest is in cache
-            # if latest_scan_id == starting_point:
-            #     self.logger.info("No new scans, sleeping 1 minute.")
-            #     time.sleep(60)
-            #     continue
+            if latest_scan_id == starting_point:
+                self.logger.info("No new scans, sleeping 1 minute.")
+                time.sleep(60)
+                continue
 
-            results = self.get_results_from_latest_scan(params=params, scan_id=int(latest_scan_id))
+            asset_results, vuln_results = self.get_results_from_latest_scan(params=params, scan_id=int(latest_scan_id))
 
             # Submit scan for trigger
-            self.send({Output.ASSETS: results[0], Output.VULNERABILITY_INFO: results[1]})
+            self.send({Output.ASSETS: asset_results, Output.VULNERABILITY_INFO: vuln_results})
 
             first_latest_scan_id = latest_scan_id
 
@@ -88,8 +88,9 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         assets_list = []
         vulnerability_list = []
         for row in csv_report:
-            assets_list.append(Util.filter_results(params, row)[0])
-            vulnerability_list.append(Util.filter_results(params, row)[1])
+            new_assets, new_vulns = Util.filter_results(params, row)
+            assets_list.append(new_assets)
+            vulnerability_list.append(new_vulns)
 
         # Remove duplicate assets
         assets_list = self.clean_assets_list(assets_list)
@@ -141,10 +142,10 @@ class ScanQueries:
         """
 
         return (
-            f"WITH matching_asset_group_ids AS (SELECT asset_id, string_agg(CAST(asset_group_id AS varchar), ',') AS asset_group_ids " 
+            f"WITH matching_asset_group_ids AS (SELECT asset_id, string_agg(CAST(asset_group_id AS varchar), ',') AS asset_group_ids " # nosec B608
             f"FROM dim_asset_group_asset "
             f"GROUP BY asset_id) "
-            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dv.nexpose_id, dv.severity, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source "  # nosec B608
+            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dv.nexpose_id, dv.severity, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source "  
             f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
             f"INNER JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
             f"INNER JOIN dim_vulnerability_category AS dvc ON (fasvi.vulnerability_id = dvc.vulnerability_id) "
@@ -191,7 +192,7 @@ class Util:
             "nexpose_id": csv_row.get("nexpose_id", ""),
             "cvss_v3_score": csv_row.get("cvss_v3_score", 0),
             "severity": csv_row.get("severity", ""),
-            "category": csv_row.get("category", ""),
+            "category": csv_row.get("category_name", ""),
             "solution_id": Util.strip_msft_id(csv_row.get("solution_id", "")),
             "solution_summary": csv_row.get("summary", ""),
         }
@@ -205,7 +206,7 @@ class Util:
             cvss_score and csv_row.get("cvss_v3_score", 0) < cvss_score,
             severity and severity not in csv_row.get("severity", ""),
             category and category not in csv_row.get("category_name", "").lower(),
-            asset_group and asset_group not in csv_row.get("asset_group_id", []).split(",")
+            asset_group and asset_group not in csv_row.get("asset_group_id", []).split(","),
         )
 
         if any(conditions):
@@ -247,8 +248,8 @@ class Util:
         seen_asset_id = set()
         new_asset_list = []
         for obj in assets_list:
-            if obj['asset_id'] not in seen_asset_id:
+            if obj["asset_id"] not in seen_asset_id:
                 new_asset_list.append(obj)
-                seen_asset_id.add(obj['asset_id'])
+                seen_asset_id.add(obj["asset_id"])
 
         return new_asset_list
