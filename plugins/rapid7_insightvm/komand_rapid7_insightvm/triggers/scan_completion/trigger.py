@@ -33,12 +33,12 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             starting_point = first_latest_scan_id
 
             latest_scan_id = self.find_latest_completed_scan(site_id, cached=True)
-
-            # Check if latest is in cache
-            if latest_scan_id == starting_point:
-                self.logger.info("No new scans, sleeping 1 minute.")
-                time.sleep(60)
-                continue
+            #
+            # # Check if latest is in cache
+            # if latest_scan_id == starting_point:
+            #     self.logger.info("No new scans, sleeping 1 minute.")
+            #     time.sleep(60)
+            #     continue
 
             results = self.get_results_from_latest_scan(params=params, scan_id=int(latest_scan_id))
 
@@ -91,6 +91,9 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             assets_list.append(Util.filter_results(params, row)[0])
             vulnerability_list.append(Util.filter_results(params, row)[1])
 
+        # Remove duplicate assets
+        assets_list = self.clean_assets_list(assets_list)
+
         return assets_list, vulnerability_list
 
     def find_latest_completed_scan(self, site_id: str, cached: bool) -> int:
@@ -138,14 +141,18 @@ class ScanQueries:
         """
 
         return (
+            f"WITH matching_asset_group_ids AS (SELECT asset_id, string_agg(CAST(asset_group_id AS varchar), ',') AS asset_group_ids " 
+            f"FROM dim_asset_group_asset "
+            f"GROUP BY asset_id) "
             f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dv.nexpose_id, dv.severity, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source "  # nosec B608
             f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
             f"INNER JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
             f"INNER JOIN dim_vulnerability_category AS dvc ON (fasvi.vulnerability_id = dvc.vulnerability_id) "
             f"INNER JOIN dim_solution AS ds ON (dv.nexpose_id = ds.nexpose_id) "
+            f"INNER JOIN matching_asset_group_ids AS magi ON (fasvi.asset_id = magi.asset_id) "
             f"LEFT JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) "
             f"WHERE fasvi.scan_id = {scan_id} "
-            f"GROUP BY fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dv.nexpose_id, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source, dv.severity "
+            f"GROUP BY fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, dv.nexpose_id, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source, dv.severity "
         )
 
 
@@ -191,17 +198,17 @@ class Util:
 
         # If an input and it is not found, return None in place of the row to filter
         # out the result
-        if asset_group and asset_group not in csv_row.get("asset_group_id", ""):
-            return {}, {}
-        if cve and cve not in csv_row.get("nexpose_id", ""):
-            return {}, {}
-        if source and source not in csv_row.get("source", ""):
-            return {}, {}
-        if cvss_score and csv_row.get("cvss_v3_score", 0) < cvss_score:
-            return {}, {}
-        if severity and severity not in csv_row.get("severity", ""):
-            return {}, {}
-        if category and category not in csv_row.get("category_name", "").lower():
+        conditions = (
+            asset_group and asset_group not in csv_row.get("asset_group_id", ""),
+            cve and cve not in csv_row.get("nexpose_id", ""),
+            source and source not in csv_row.get("source", ""),
+            cvss_score and csv_row.get("cvss_v3_score", 0) < cvss_score,
+            severity and severity not in csv_row.get("severity", ""),
+            category and category not in csv_row.get("category_name", "").lower(),
+            asset_group and asset_group not in csv_row.get("asset_group_id", []).split(",")
+        )
+
+        if any(conditions):
             return {}, {}
 
         # Otherwise, return the newly filtered result.
@@ -234,3 +241,14 @@ class Util:
 
         if not isinstance(scan_id, int):
             raise PluginException(cause="Scan ID is not of type integer.", assistance="Possible SQL Injection detected")
+
+    @staticmethod
+    def clean_assets_list(assets_list: list):
+        seen_asset_id = set()
+        new_asset_list = []
+        for obj in assets_list:
+            if obj['asset_id'] not in seen_asset_id:
+                new_asset_list.append(obj)
+                seen_asset_id.add(obj['asset_id'])
+
+        return new_asset_list
