@@ -3193,7 +3193,7 @@ Example output:
 
 #### New Vulnerability Exception
   
-This action is used to check for new InsightVM vulnerability exceptions
+This trigger is used to check for new InsightVM vulnerability exceptions
 
 ##### Input
 
@@ -3229,7 +3229,7 @@ Example output:
 
 #### New Scans
   
-This action is used to check for new InsightVM scans by site and scan status
+This trigger is used to check for new InsightVM scans by site and scan status
 
 ##### Input
 
@@ -3269,13 +3269,14 @@ Example output:
 
 #### Scan Completed
   
-This action is used to fire upon completed scan
+This trigger is used to fire upon completed scan
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |asset_group|string|None|False|Asset Group|None|2|
+|category_name|string|None|False|Name of the category the vulnerability is contained within|None|Debian Linux|
 |cve|string|None|False|CVE|None|ssh-cve-2018|
 |cvss_score|integer|0|False|A vulneravility score from 1-10. Only those with a score equal to or above the input will be shown|None|4|
 |interval|integer|5|True|How often the trigger should check for new vulnerability scans in minutes|None|5|
@@ -3288,6 +3289,7 @@ Example input:
 ```
 {
   "asset_group": 2,
+  "category_name": "Debian Linux",
   "cve": "ssh-cve-2018",
   "cvss_score": 0,
   "interval": 5,
@@ -3301,18 +3303,18 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|asset_id|integer|False|Asset ID|219|
-|hostname|string|False|Hostname|doc.rapid7.com|
-|ip|string|False|IP|8.8.8.8|
-|vulnerability_info|[]object|False|An array containing vulnerability id, solution id & solution summary|[{"vulnerability_id": 1111, "nexpose_id": "ssh-cve-2018", "solution_id": 1111, "solution_summary": "Example solution for cve"}, {"vulnerability_id": 2222, "nexpose_id": "ssh-cve-2019", "solution_id": 2222, "solution_summary": "Example solution for cve"}]|
-
+|assets|[]assets|False|An array containing the asset id, hostname and IP address|[{"asset_id": 1, "hostname": "google.com", "ip": "8.8.8.8"}, {"asset_id": 2, "hostname": "google.co.uk", "ip": "8.8.8.8"}]|
+|vulnerability_info|[]vulnerability_info|False|An array containing vulnerability id, solution id & solution summary|[{"vulnerability_id": 1111, "nexpose_id": "ssh-cve-2018", "solution_id": 1111, "solution_summary": "Example solution for cve"}, {"vulnerability_id": 2222, "nexpose_id": "ssh-cve-2019", "solution_id": 2222, "solution_summary": "Example solution for cve"}]|
+  
 Example output:
 
 ```
 {
-  "asset_id": 219,
-  "hostname": "doc.rapid7.com",
-  "ip": "8.8.8.8",
+  "assets": {
+    "asset_id": 1,
+    "hostname": "google.com",
+    "ip": "8.8.8.8"
+  },
   "vulnerability_info": {
     "nexpose_id": "ssh-cve-2018",
     "solution_id": 1111,
@@ -3326,6 +3328,25 @@ Example output:
 *This plugin does not contain any tasks.*
 
 ### Custom Types
+  
+**assets**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Asset ID|integer|None|False|The unique ID of the asset|None|
+|Hostname|string|None|False|The hostname for the asset|None|
+|IP Address|string|None|False|The IP address of the asset|None|
+  
+**vulnerability_info**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|CVSS V3 Score|string|None|False|The CVSS score of the vulnerability|None|
+|Nexpose ID|string|None|False|The unique identifier for the vulnerability in nexpose|None|
+|Severity|string|None|False|The severity of the vulnerability|None|
+|Solution ID|string|None|False|The unique ID of the solution|None|
+|Solution Summary|string|None|False|The summary of the solution for the vulnerability|None|
+|Vulnerability ID|string|None|False|The unique ID of the vulnerability|None|
   
 **report_id**
 
@@ -3907,7 +3928,7 @@ Example output:
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |CVSS Score|string|None|True|The CVSS score of the vulnerability|None|
 |Description|string|None|True|The description of the vulnerability|None|
-|ID|integer|None|True|Identifier of the vulnerability|None|
+|ID|string|None|True|Identifier of the vulnerability|None|
 |Risk Score|integer|None|True|The risk score of the vulnerability|None|
 |Severity|integer|None|True|The severity of the vulnerability|None|
 |Title|string|None|True|The title of the vulnerability|None|
@@ -3966,6 +3987,7 @@ Example output:
 
 # Version History
 
+* 7.0.0 - `Scan Completion` - Update the trigger output and add new 'Category' input
 * 6.2.1 - Update Top Remediations id to be the nexpose_id
 * 6.2.0 - `Scan Completion` - New trigger added to retrieve vulnerability information on assets when a scan is completed | Improved error handling across all API calls
 * 6.1.1 - Update actions `Update Site Excluded Targets` and `Update Site Included Targets` to prevent error on empty addresses
