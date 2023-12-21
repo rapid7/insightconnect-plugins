@@ -201,13 +201,12 @@ class Util:
         # If an input and it is not found, return None in place of the row to filter
         # out the result
         conditions = (
-            asset_group and asset_group not in csv_row.get("asset_group_id", ""),
+            asset_group and asset_group not in csv_row.get("asset_group_ids", "").split(","),
             cve and cve not in csv_row.get("nexpose_id", ""),
             source and source not in csv_row.get("source", ""),
             cvss_score and csv_row.get("cvss_v3_score", 0) < cvss_score,
             severity and severity not in csv_row.get("severity", ""),
             category and category not in csv_row.get("category_name", "").lower(),
-            asset_group and asset_group not in csv_row.get("asset_group_id", []).split(","),
         )
 
         if any(conditions):
