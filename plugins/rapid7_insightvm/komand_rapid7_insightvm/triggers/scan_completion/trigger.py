@@ -96,9 +96,6 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                 asset_ids.add(new_assets["asset_id"])
             vulnerability_list.append(new_vulns)
 
-        # Remove duplicate assets
-        assets_list = Util.clean_assets_list(assets_list)
-
         return assets_list, vulnerability_list
 
     def find_latest_completed_scan(self, site_id: str, cached: bool) -> int:
