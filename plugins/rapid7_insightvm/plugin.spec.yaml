@@ -54,7 +54,7 @@ types:
       required: false
     cvss_v3_score:
       title: CVSS V3 Score
-      description: The cvss score of the vulnerability
+      description: The CVSS score of the vulnerability
       type: string
       required: false
     severity:
@@ -4585,7 +4585,7 @@ triggers:
     output:
       assets:
         title: Assets
-        description: An array containing the asset id, hostname and ip address
+        description: An array containing the asset id, hostname and IP address
         type: '[]assets'
         example: [{'asset_id': 1, 'hostname': 'google.com', 'ip': '8.8.8.8'}, {'asset_id': 2, 'hostname': 'google.co.uk', 'ip': '8.8.8.8'}]
         required: false

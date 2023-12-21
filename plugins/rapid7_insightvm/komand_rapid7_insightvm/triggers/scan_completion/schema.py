@@ -106,7 +106,7 @@ class ScanCompletionOutput(insightconnect_plugin_runtime.Output):
     "assets": {
       "type": "array",
       "title": "Assets",
-      "description": "An array containing the asset id, hostname and ip address",
+      "description": "An array containing the asset id, hostname and IP address",
       "items": {
         "$ref": "#/definitions/assets"
       },
@@ -166,7 +166,7 @@ class ScanCompletionOutput(insightconnect_plugin_runtime.Output):
         "cvss_v3_score": {
           "type": "string",
           "title": "CVSS V3 Score",
-          "description": "The cvss score of the vulnerability",
+          "description": "The CVSS score of the vulnerability",
           "order": 3
         },
         "severity": {

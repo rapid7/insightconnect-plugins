@@ -43,12 +43,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             results = self.get_results_from_latest_scan(params=params, scan_id=int(latest_scan_id))
 
             # Submit scan for trigger
-            self.send(
-                {
-                    Output.ASSETS: results[0],
-                    Output.VULNERABILITY_INFO: results[1]
-                }
-            )
+            self.send({Output.ASSETS: results[0], Output.VULNERABILITY_INFO: results[1]})
 
             first_latest_scan_id = latest_scan_id
 

@@ -3341,7 +3341,7 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|CVSS V3 Score|string|None|False|The cvss score of the vulnerability|None|
+|CVSS V3 Score|string|None|False|The CVSS score of the vulnerability|None|
 |Nexpose ID|string|None|False|The unique identifier for the vulnerability in nexpose|None|
 |Severity|string|None|False|The severity of the vulnerability|None|
 |Solution ID|string|None|False|The unique ID of the solution|None|
