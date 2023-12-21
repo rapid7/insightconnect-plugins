@@ -142,10 +142,10 @@ class ScanQueries:
         """
 
         return (
-            f"WITH matching_asset_group_ids AS (SELECT asset_id, string_agg(CAST(asset_group_id AS varchar), ',') AS asset_group_ids " # nosec B608
+            f"WITH matching_asset_group_ids AS (SELECT asset_id, string_agg(CAST(asset_group_id AS varchar), ',') AS asset_group_ids "  # nosec B608
             f"FROM dim_asset_group_asset "
             f"GROUP BY asset_id) "
-            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dv.nexpose_id, dv.severity, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source "  
+            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dv.nexpose_id, dv.severity, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source "
             f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
             f"INNER JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
             f"INNER JOIN dim_vulnerability_category AS dvc ON (fasvi.vulnerability_id = dvc.vulnerability_id) "
