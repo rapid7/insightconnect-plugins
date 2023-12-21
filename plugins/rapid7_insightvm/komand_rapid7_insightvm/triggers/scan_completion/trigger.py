@@ -33,8 +33,8 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             starting_point = first_latest_scan_id
 
             latest_scan_id = self.find_latest_completed_scan(site_id, cached=True)
-            #
-            # # Check if latest is in cache
+
+            # Check if latest is in cache
             if latest_scan_id == starting_point:
                 self.logger.info("No new scans, sleeping 1 minute.")
                 time.sleep(60)
@@ -93,7 +93,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             vulnerability_list.append(new_vulns)
 
         # Remove duplicate assets
-        assets_list = self.clean_assets_list(assets_list)
+        assets_list = Util.clean_assets_list(assets_list)
 
         return assets_list, vulnerability_list
 
@@ -152,7 +152,7 @@ class ScanQueries:
             f"INNER JOIN dim_solution AS ds ON (dv.nexpose_id = ds.nexpose_id) "
             f"INNER JOIN matching_asset_group_ids AS magi ON (fasvi.asset_id = magi.asset_id) "
             f"LEFT JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) "
-            f"WHERE fasvi.scan_id = {scan_id} "
+            f"WHERE fasvi.scan_id = 11630 "
             f"GROUP BY fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, dv.nexpose_id, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source, dv.severity "
         )
 
