@@ -91,9 +91,9 @@ class AbnormalSecurityAPI:
         if from_date or to_date:
             params = {"filter": filter_key}
             if from_date:
-                params["filter"] = params["filter"] + f" gte {from_date}"
+                params["filter"] = f"{params.get('filter', '')} gte {from_date}"
             if to_date:
-                params["filter"] = params["filter"] + f" lte {to_date}"
+                params["filter"] = f"{params.get('filter', '')} gte {to_date}"
         self.logger.info(f"Paramters used for the api call - {params}")
         return params
 
