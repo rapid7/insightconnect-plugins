@@ -40,10 +40,10 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                 time.sleep(60)
                 continue
 
-            asset_results, vuln_results = self.get_results_from_latest_scan(params=params, scan_id=int(latest_scan_id))
+            asset_results, vulnerability_results = self.get_results_from_latest_scan(params=params, scan_id=int(latest_scan_id))
 
             # Submit scan for trigger
-            self.send({Output.ASSETS: asset_results, Output.VULNERABILITY_INFO: vuln_results})
+            self.send({Output.ASSETS: asset_results, Output.VULNERABILITY_INFO: vulnerability_results})
 
             first_latest_scan_id = latest_scan_id
 
@@ -145,7 +145,7 @@ class ScanQueries:
         return f"""WITH matching_asset_group_ids AS (SELECT asset_id, string_agg(CAST(asset_group_id AS varchar), ',') AS asset_group_ids  
             FROM dim_asset_group_asset
             GROUP BY asset_id) 
-            SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dv.nexpose_id, dv.severity, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source 
+            SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, dv.nexpose_id, dv.severity, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source 
             FROM fact_asset_scan_vulnerability_instance AS fasvi 
             INNER JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) 
             INNER JOIN dim_vulnerability_category AS dvc ON (fasvi.vulnerability_id = dvc.vulnerability_id) 
