@@ -87,9 +87,13 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
         assets_list = []
         vulnerability_list = []
+        asset_ids = set()
+
         for row in csv_report:
             new_assets, new_vulns = Util.filter_results(params, row)
-            assets_list.append(new_assets)
+            if new_assets["asset_id"] not in asset_ids:
+                assets_list.append(new_assets)
+                asset_ids.add(new_assets["asset_id"])
             vulnerability_list.append(new_vulns)
 
         # Remove duplicate assets
@@ -242,14 +246,3 @@ class Util:
 
         if not isinstance(scan_id, int):
             raise PluginException(cause="Scan ID is not of type integer.", assistance="Possible SQL Injection detected")
-
-    @staticmethod
-    def clean_assets_list(assets_list: list):
-        seen_asset_id = set()
-        new_asset_list = []
-        for obj in assets_list:
-            if obj["asset_id"] not in seen_asset_id:
-                new_asset_list.append(obj)
-                seen_asset_id.add(obj["asset_id"])
-
-        return new_asset_list
