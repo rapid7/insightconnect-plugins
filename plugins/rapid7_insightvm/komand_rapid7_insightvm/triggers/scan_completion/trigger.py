@@ -35,10 +35,10 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             latest_scan_id = self.find_latest_completed_scan(site_id, cached=True)
 
             # Check if latest is in cache
-            if latest_scan_id == starting_point:
-                self.logger.info("No new scans, sleeping 1 minute.")
-                time.sleep(60)
-                continue
+            # if latest_scan_id == starting_point:
+            #     self.logger.info("No new scans, sleeping 1 minute.")
+            #     time.sleep(60)
+            #     continue
 
             asset_results, vulnerability_results = self.get_results_from_latest_scan(params=params, scan_id=int(latest_scan_id))
 
@@ -152,7 +152,7 @@ class ScanQueries:
             INNER JOIN dim_solution AS ds ON (dv.nexpose_id = ds.nexpose_id) 
             INNER JOIN matching_asset_group_ids AS magi ON (fasvi.asset_id = magi.asset_id) 
             LEFT JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) 
-            WHERE fasvi.scan_id = {scan_id} 
+            WHERE fasvi.scan_id = 11630
             GROUP BY fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, dv.nexpose_id, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source, dv.severity """  # nosec B608
 
 
