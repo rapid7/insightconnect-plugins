@@ -925,6 +925,7 @@ actions:
         description: List of Automox organizations
         type: '[]organization'
         required: true
+        example: '[{"id":1234,"name":"GlobalZone","create_time":"2021-10-20T04:03:25+0000","access_key":"00000000-0000-0000-0000-000000000000","trial_end_time":"2024-02-03T00:00:00+0000","sub_plan":"FULL","rate_id":1,"billing_name":"Test","billing_email":"example@automox.com","uuid":"00000000-0000-0000-0000-0000000000000","device_count":2},{"id":1235,"name":"AnotherOne","create_time":"2021-10-26T08:14:25+0000","access_key":"00000000-0000-0000-0000-000000000000","trial_end_time":"2021-11-03T00:00:00+0000","trial_expired":true,"sub_plan":"FULL","rate_id":1,"parent_id":1234,"uuid":"00000000-0000-0000-0000-000000000000"}]'
   list_organization_users:
     title: List Organization Users
     description: Retrieve users of the Automox organization
@@ -941,6 +942,7 @@ actions:
         description: List of Automox users
         type: '[]user'
         required: false
+        example: '[{"id":1234,"uuid":"00000000-0000-0000-0000-000000000000","firstname":"Otto","lastname":"Mox","email":"example@automox.com","prefs":[{"user_id":1234,"pref_name":"notify.system.add","value":"false"},{"user_id":1234,"pref_name":"notify.weeklydigest","value":"true"}]}]'
   list_policies:
     title: List Policies
     description: Retrieve Automox policies
@@ -957,6 +959,7 @@ actions:
         description: List of Automox policies
         type: '[]policy'
         required: false
+        example: '[{"id":1234,"uuid":"00000000-0000-0000-0000-000000000000","name":"Test notification","policy_type_name":"custom","organization_id":103871,"configuration":{"os_family":"Windows","notify_reboot_user":true,"notify_deferred_reboot_user":true,"pending_reboot_deferral_enabled":true,"custom_pending_reboot_notification_message":"Updates require restart: Please save your work.","notify_deferred_reboot_user_message_timeout":15,"custom_pending_reboot_notification_max_delays":3,"custom_pending_reboot_notification_message_mac":"Updates require restart: Please save your work.","custom_pending_reboot_notification_deferment_periods":[1,4,8]},"schedule_time":"00:00","create_time":"2023-10-25T21:56:48+0000","server_groups":[1234],"server_count":5,"status":"inactive"}]'
   list_devices:
     title: List Devices
     description: Retrieve Automox managed devices
@@ -979,6 +982,7 @@ actions:
         description: List of Automox managed devices
         type: '[]device'
         required: false
+        example: '[{"id":1234,"agent_version":"1.42.22","compliant":true,"create_time":"2023-11-14T00:32:23+0000","detail":{"CPU":"Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz","VENDOR":"Xen","MODEL":"HVM domU","VERSION":"4.11.amazon","RAM":"1014943744","LAST_USER_LOGON":{"TIME":"2023-11-14T20:23:00+00:00"},"SERIAL":"00000000-0000-0000-0000-000000009001","IPS":["10.1.1.1","1234::1234:1234:1234:1234"],"DISKS":[{"SIZE":"8589934592","TYPE":"unknown"}],"NICS":[{"IPS":["10.1.1.1","1234::1234:1234:1234:1234"],"CONNECTED":true,"VENDOR":"Unknown","DEVICE":"eth0","TYPE":"enet","MAC":"11:11:11:11:11:11"}],"VOLUME":[{"IS_SYSTEM_DISK":"true","VOLUME":"/dev/root","FSTYPE":"ext4","LABEL":"cloudimg-rootfs","AVAIL":"8141574144","FREE":"6285549568"},{"FSTYPE":"vfat","LABEL":"UEFI","AVAIL":"109422592","FREE":"103973888","IS_SYSTEM_DISK":"false","VOLUME":"/dev/xvda15"}],"FQDNS":["youubuntu.example.com"]},"display_name":"youbuntu","instance_id":"i-0b466e0e804798a23","ip_addrs":["0.0.0.0"],"ip_addrs_private":["10.1.1.1","1234::1234:1234:1234:1234"],"is_compatible":true,"last_disconnect_time":"2023-11-14T00:52:27+0000","last_refresh_time":"2023-11-14T00:33:12+0000","name":"youbuntu","organization_id":1234,"os_family":"Linux","os_name":"Ubuntu","os_version":"20.04.4","os_version_id":6220,"patches":201,"refresh_interval":1440,"serial_number":"00000000-0000-0000-0000-000000000000","server_group_id":1234,"status":{"device_status":"ready","agent_status":"connected","policy_status":"compliant"},"timezone":"UTC+0000","total_count":5,"uptime":"392","uuid":"00000000-0000-0000-0000-000000000000"}]'
   get_device_by_hostname:
     title: Get Device by Hostname
     description: Find an Automox device by hostname
@@ -1001,6 +1005,7 @@ actions:
         description: The matched Automox device
         type: device
         required: false
+        example: '{"id":1234,"agent_version":"1.42.13","compliant":true,"create_time":"2023-04-13T19:45:45+0000","detail":{"RAM":"8589934592","CPU":"Intel(R) Core(TM) i7-8700B CPU @ 3.20GHz","MDM_SERVER":"none","VERSION":"MacBookPro16,1","NICS":[{"CONNECTED":true,"VENDOR":"Apple","DEVICE":"en0","TYPE":"enet","MAC":"00:00:00:00:00:00","IPS":["192.168.1.1"]}],"VOLUME":[{"FSTYPE":"APFS","LABEL":"macOS","AVAIL":"62704803840","FREE":"21316517888","IS_SYSTEM_DISK":"true","VOLUME":"/dev/disk1s5s1"},{"VOLUME":"/dev/disk1s3","FSTYPE":"APFS","LABEL":"Recovery","AVAIL":"62704803840","FREE":"21316517888","IS_SYSTEM_DISK":"false"}],"VENDOR":"Apple","MDM_PROFILE_INSTALLED":"false","LAST_USER_LOGON":{"SRC":"console","USER":"root","TIME":"2023-04-14 16:05"},"UPDATE_SOURCE_CHECK":{"CONNECTED":"true","ERROR":"Succeded"},"SERIAL":"C00000000001","DISKS":[{"TYPE":"VMware Virtual NVMe Disk","SIZE":"62914560000"}],"IPS":["192.168.1.1"],"MODEL":"MacBook Pro","AUTO_UPDATE_OPTIONS":{"OPTIONS":"Automatic Check for Updates, Install system data updates, Install system security updates","ENABLED":"0"}},"display_name":"apple","ip_addrs":["0.0.0.0"],"ip_addrs_private":["192.168.1.1"],"is_compatible":true,"last_disconnect_time":"2023-04-14T23:07:04+0000","last_logged_in_user":"root","last_process_time":"2023-04-14T22:40:56+0000","last_refresh_time":"2023-04-14T23:06:27+0000","last_update_time":"2023-04-14T22:51:10+0000","name":"apple","needs_attention":true,"organization_id":1234,"os_family":"Mac","os_name":"OS X","os_version":"12.6.6","os_version_id":1234,"refresh_interval":1440,"serial_number":"C00000000001","server_group_id":1234,"status":{"device_status":"not-ready","agent_status":"disconnected","policy_status":"unmanaged"},"timezone":"UTC-0700","total_count":5,"uptime":"88632","uuid":"00000000-0000-0000-0000-000000000000"}'
   get_device_by_ip:
     title: Get Device by IP Address
     description: Find an Automox device by IP address
@@ -1023,6 +1028,7 @@ actions:
         description: The matched Automox device
         type: device
         required: false
+        example: '{"id":1234,"agent_version":"1.42.13","compliant":true,"create_time":"2023-04-13T19:45:45+0000","detail":{"RAM":"8589934592","CPU":"Intel(R) Core(TM) i7-8700B CPU @ 3.20GHz","MDM_SERVER":"none","VERSION":"MacBookPro16,1","NICS":[{"CONNECTED":true,"VENDOR":"Apple","DEVICE":"en0","TYPE":"enet","MAC":"00:00:00:00:00:00","IPS":["192.168.1.1"]}],"VOLUME":[{"FSTYPE":"APFS","LABEL":"macOS","AVAIL":"62704803840","FREE":"21316517888","IS_SYSTEM_DISK":"true","VOLUME":"/dev/disk1s5s1"},{"VOLUME":"/dev/disk1s3","FSTYPE":"APFS","LABEL":"Recovery","AVAIL":"62704803840","FREE":"21316517888","IS_SYSTEM_DISK":"false"}],"VENDOR":"Apple","MDM_PROFILE_INSTALLED":"false","LAST_USER_LOGON":{"SRC":"console","USER":"root","TIME":"2023-04-14 16:05"},"UPDATE_SOURCE_CHECK":{"CONNECTED":"true","ERROR":"Succeded"},"SERIAL":"C00000000001","DISKS":[{"TYPE":"VMware Virtual NVMe Disk","SIZE":"62914560000"}],"IPS":["192.168.1.1"],"MODEL":"MacBook Pro","AUTO_UPDATE_OPTIONS":{"OPTIONS":"Automatic Check for Updates, Install system data updates, Install system security updates","ENABLED":"0"}},"display_name":"apple","ip_addrs":["0.0.0.0"],"ip_addrs_private":["192.168.1.1"],"is_compatible":true,"last_disconnect_time":"2023-04-14T23:07:04+0000","last_logged_in_user":"root","last_process_time":"2023-04-14T22:40:56+0000","last_refresh_time":"2023-04-14T23:06:27+0000","last_update_time":"2023-04-14T22:51:10+0000","name":"apple","needs_attention":true,"organization_id":1234,"os_family":"Mac","os_name":"OS X","os_version":"12.6.6","os_version_id":1234,"refresh_interval":1440,"serial_number":"C00000000001","server_group_id":1234,"status":{"device_status":"not-ready","agent_status":"disconnected","policy_status":"unmanaged"},"timezone":"UTC-0700","total_count":5,"uptime":"88632","uuid":"00000000-0000-0000-0000-000000000000"}'
   update_device:
     title: Update Device
     description: Update Automox device
@@ -1116,6 +1122,7 @@ actions:
         description: List of software on device
         type: '[]device_software'
         required: false
+        example: '[{"id":1234,"server_id":1234,"package_id":1234,"software_id":1234,"installed":true,"name":"com.apple.appleseed.FeedbackAssistant","display_name":"Feedback Assistant","version":"5.1","repo":"Apple-System","package_version_id":1234,"os_name":"OS X","os_version":"12.2","os_version_id":1234,"create_time":"2021-12-20T16:21:21+0000","organization_id":1234},{"id":1234,"server_id":1234,"package_id":1234,"software_id":1234,"installed":true,"name":"com.apple.calculator","display_name":"Calculator","version":"10.16","repo":"Apple-System","package_version_id":1234,"os_name":"OS X","os_version":"12.2","os_version_id":1234,"create_time":"2021-12-26T17:23:19+0000","organization_id":1234}]'
   run_command:
     title: Run Device Command
     description: Run a command on a device
@@ -1181,6 +1188,7 @@ actions:
         description: List of Automox groups
         type: '[]group'
         required: false
+        example: '[{"id":1234,"organization_id":1234,"name":"Default","refresh_interval":1440,"parent_server_group_id":0,"ui_color":"#059F1D","server_count":5,"wsus_config":{"id":1234,"server_group_id":1234,"created_at":"2022-09-13T14:26:19+0000","updated_at":"2022-09-13T14:26:19+0000"},"policies":[1234,1235]},{"id":1235,"organization_id":1234,"name":"A Server Group","refresh_interval":1440,"parent_server_group_id":1234,"ui_color":"#059F1D","wsus_config":{"id":1234,"server_group_id":1234,"created_at":"2022-09-13T14:26:32+0000","updated_at":"2022-09-13T14:26:32+0000"},"policies":[1234,1235]}]'
   create_group:
     title: Create Group
     description: Create an Automox group
@@ -1242,6 +1250,7 @@ actions:
         description: Detailed information about the created group
         type: group
         required: true
+        example: '{"id":1234,"organization_id":1234,"name":"Default","refresh_interval":1440,"parent_server_group_id":0,"ui_color":"#059F1D","server_count":5,"wsus_config":{"id":1234,"server_group_id":1234,"created_at":"2022-09-13T14:26:19+0000","updated_at":"2022-09-13T14:26:19+0000"},"policies":[1234,1235]}'
   update_group:
     title: Update Group
     description: Update an Automox group
@@ -1398,6 +1407,7 @@ actions:
         description: Details of a specified vulnerability sync action_set
         type: action_set
         required: true
+        example: '{"created_at":"2023-10-04T02:55:55+0000","created_by_user":{"email":"user@example.com","firstname":"User","id":1234,"lastname":"Example"},"id":1234,"organization_id":1234,"source":{"name":"example.csv","type":"generic"},"statistics":{"issues":{"unknown-host":{"count":1}},"solutions":{"patch-now":{"count":0,"device_count":0,"vulnerability_count":0},"patch-with-worklet":{"count":0,"device_count":0,"vulnerability_count":0}}},"status":"ready","updated_at":"2023-10-04T02:56:00+0000","updated_by_user":{"email":"user@example.com","firstname":"User","id":1234,"lastname":"Example"}}'
   list_vulnerability_sync_action_sets:
     title: List Vulnerability Sync Action Sets
     description: Retrieve list of vulnerability sync batches
@@ -1489,34 +1499,7 @@ actions:
         description: List of vulnerability sync action sets
         type: '[]action_set'
         required: false
-        example:
-        - created_at: 2023-10-10T03:45:26+0000
-          created_by_user:
-            email: user@example.com
-            firstname: User
-            id: 1
-            lastname: Name
-          id: 1234
-          organization_id: 1
-          source:
-            name: insightconnect-uploaded-report.csv
-            type: generic
-          statistics:
-            issues:
-              unknown-host:
-                count: 4
-            solutions:
-              patch-with-worklet:
-                count: 1
-                device_count: 18
-                vulnerability_count: 1
-          status: ready
-          updated_at: 2023-10-10T03:45:30+0000
-          updated_by_user:
-            email: user@example.com
-            firstname: User
-            id: 1
-            lastname: Name
+        example: '[{"created_at":"2023-10-04T02:55:55+0000","created_by_user":{"email":"user@example.com","firstname":"User","id":1234,"lastname":"Example"},"id":1234,"organization_id":1234,"source":{"name":"example.csv","type":"generic"},"statistics":{"issues":{"unknown-host":{"count":1}},"solutions":{"patch-now":{"count":0,"device_count":0,"vulnerability_count":0},"patch-with-worklet":{"count":0,"device_count":0,"vulnerability_count":0}}},"status":"ready","updated_at":"2023-10-04T02:56:00+0000","updated_by_user":{"email":"user@example.com","firstname":"User","id":1234,"lastname":"Example"}}]'
   list_vulnerability_sync_action_set_issues:
     title: List Vulnerability Sync Action Set Issues
     description: Retrieve the issues identified for a specified vulnerability sync
@@ -1547,6 +1530,7 @@ actions:
         description: Issues associated with the specified vulnerability sync action_set
         type: '[]action_set_issue'
         required: true
+        example: '[{"id":1234,"issue_details":{"hostname":"WINDOWS-1234"},"issue_type":"unknown-host"},{"id":1234,"issue_details":{"hostname":"example-test-1234"},"issue_type":"unknown-host"}]'
   list_vulnerability_sync_action_set_solutions:
     title: List Vulnerability Sync Action Set Solutions
     description: Retrieve a list of vulnerability sync remediations
@@ -1596,6 +1580,7 @@ actions:
         description: List of vulnerability sync Solutions
         type: '[]solution'
         required: false
+        example: '[{"device_ids":[1,2,3],"devices":[{"custom_name":"example1","id":1,"ip_addrs_private":["10.0.0.1","ffff::ffff:ffff:ffff:ffff"],"name":"example1","status":"pending"},{"custom_name":"example2","id":2,"ip_addrs_private":["10.0.0.2","ffff::ffff:ffff:ffff:ffff"],"name":"example2","status":"pending"},{"custom_name":"example3","id":3,"ip_addrs_private":["10.0.0.3","ffff::ffff:ffff:ffff:ffff"],"name":"example3","status":"pending"}],"id":1234,"organization_id":1234,"remediation_type":"patch-with-worklet","solution_type":"unmatched","vulnerabilities":[{"id":"CVE-2021-24111","severity":"high","title":".NET Framework Denial of Service Vulnerability"}]}]'
   execute_vulnerability_sync_actions:
     title: Execute Vulnerability Sync Actions
     description: Launch remediation for patch and worklet remediations
@@ -1684,3 +1669,4 @@ triggers:
         description: Event with details
         type: event
         required: true
+        example: '{"id":0,"name":"system.add","user_id":0,"server_id":0,"organization_id":0,"policy_id":0,"data":{"firstname":"string","lastname":"string","email":"string","orgname":"string","ip":"string","os":"string","systemname":"string","text":"string","status":0,"patches":"string"},"server_name":"string","policy_name":"string","policy_type_name":"patch","create_time":"2019-08-24T14:15:22Z"}'
