@@ -1144,12 +1144,12 @@ actions:
         description: Command to run on device
         type: string
         enum:
-        - GetOS
-        - InstallUpdate
-        - InstallAllUpdates
-        - PolicyTest
-        - PolicyRemediate
-        - Reboot
+          - GetOS
+          - InstallUpdate
+          - InstallAllUpdates
+          - PolicyTest
+          - PolicyRemediate
+          - Reboot
         required: true
         example: GetOS
       patches:
