@@ -1,8 +1,10 @@
+import json
 import logging
 import os
+from typing import Any
+
 from icon_cisco_firepower_management_center.connection.connection import Connection
 from icon_cisco_firepower_management_center.connection.schema import Input
-import json
 
 next_response = False
 
@@ -46,32 +48,31 @@ class Util:
             )
         )
 
-    @staticmethod
-    def mock_connect(address):
-        pass
+    class MockSSLSocket:
+        def __init__(self, *args, **kwargs) -> None:
+            ...
 
-    @staticmethod
-    def mock_write(data):
-        global next_response
-        if data == b"\x00\x00\x00\x03\x00\x00\x00\xcc":
-            next_response = True
-        pass
+        def connect(self, address: Any) -> None:
+            ...
 
-    @staticmethod
-    def mock_send(data):
-        pass
+        def send(self, data: bytes) -> None:
+            ...
 
-    @staticmethod
-    def mock_recv(buflen=1024):
-        global next_response
-        if buflen == 4:
-            return b"\x00\x08\x00\x00"
-        if buflen == 28:
-            next_response = False
-            return b"Done processing 4 commands.\n"
-        if next_response:
-            return b"\x00\x00\x00\x03\x00\x00\x00\x1c"
-        return b"\x00\x00\x00\x01\x00\x00\x00\x04"
+        def write(self, data: bytes) -> None:
+            global next_response
+            if data == b"\x00\x00\x00\x03\x00\x00\x00\xcc":
+                next_response = True
+
+        def recv(self, buflen: int = 1024) -> bytes:
+            global next_response
+            if buflen == 4:
+                return b"\x00\x08\x00\x00"
+            if buflen == 28:
+                next_response = False
+                return b"Done processing 4 commands.\n"
+            if next_response:
+                return b"\x00\x00\x00\x03\x00\x00\x00\x1c"
+            return b"\x00\x00\x00\x01\x00\x00\x00\x04"
 
     @staticmethod
     def mocked_requests(*args, **kwargs):

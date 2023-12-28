@@ -42,7 +42,7 @@
               "id": "00000000-0000-0000-0000-000000000002"
             }
           ],
-          "overridable": "False",
+          "overridable": false,
           "name": "Test_Group",
           "id": "00000000-0000-0000-0000-000000000001",
           "metadata": {
@@ -101,7 +101,7 @@
               "id": "00000000-0000-0000-0000-000000000002"
             }
           ],
-          "overridable": "False",
+          "overridable": false,
           "name": "Test_Group",
           "id": "00000000-0000-0000-0000-000000000001",
           "metadata": {
@@ -160,7 +160,7 @@
               "id": "00000000-0000-0000-0000-000000000002"
             }
           ],
-          "overridable": "False",
+          "overridable": false,
           "name": "Test_Group",
           "id": "00000000-0000-0000-0000-000000000001",
           "metadata": {
@@ -219,7 +219,7 @@
               "id": "00000000-0000-0000-0000-000000000002"
             }
           ],
-          "overridable": "False",
+          "overridable": false,
           "name": "Test_Group",
           "id": "00000000-0000-0000-0000-000000000001",
           "metadata": {
@@ -278,7 +278,7 @@
               "id": "00000000-0000-0000-0000-000000000002"
             }
           ],
-          "overridable": "False",
+          "overridable": false,
           "name": "Test_Group",
           "id": "00000000-0000-0000-0000-000000000001",
           "metadata": {
@@ -312,7 +312,7 @@
               "id": "00000000-0000-0ed3-0000-017179870402"
             }
           ],
-          "overridable": "False",
+          "overridable": false,
           "name": "Test_Group_Empty",
           "id": "00000000-0000-0000-0000-000000000001",
           "metadata": {
