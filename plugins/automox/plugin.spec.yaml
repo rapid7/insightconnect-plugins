@@ -8,34 +8,34 @@ description: Automox is modernizing IT operations with continuous visibility, in
   and agility for your entire IT environment
 version: 3.0.0
 version_history:
-- '3.0.0 - `Action`: Fixed -  Get Vulnerability Sync Action Set | `Action`: Fixed
-  - List Vulnerability Sync Action Sets | `Action`: Updated - List Organization Users'
-- '2.0.0 - Fix Vulnerability Sync API Actions | `Action`: Added - Delete Vulnerability
-  Sync Action Set | `Action`: Added - Execute Vulnerability Sync Actions | `Action`:
-  Added - List Vulnerability Sync Action Set Issues | `Action`: Added - List Vulnerability
-  Sync Action Set Solutions | `Action`: Added - List Vulnerability Sync Action Sets
-  | `Action`: Added - Get Vulnerability Sync Action Set | `Action`: Updated - Upload
-  Vulnerability Sync File | `Action`: Updated - Get Devices | `Action`: Deleted -
-  Action on Vulnerability Sync Batch | `Action`: Deleted - Vulnerability Sync Task
-  | `Action`: Deleted - Get Vulnerability Sync Batch | `Action`: Deleted - List Vulnerability
-  Sync Batches | `Action`: Deleted - List Vulnerability Sync Tasks'
-- '1.2.0 - Get device by IP and Get device by hostname: fix validation issue when
-  IP or hostname not found | Add unit tests'
-- 1.1.1 - Fix undefined org ID passed to actions when not required | Record outcome
-  of connection tests
-- 1.1.0 - Add `report source` as optional input parameter to Upload Vulnerability
-  Sync File action | Add report source to batch type
-- 1.0.0 - Initial plugin
+  - '3.0.0 - `Action`: Fixed -  Get Vulnerability Sync Action Set | `Action`: Fixed
+    - List Vulnerability Sync Action Sets | `Action`: Updated - List Organization Users'
+  - '2.0.0 - Fix Vulnerability Sync API Actions | `Action`: Added - Delete Vulnerability
+    Sync Action Set | `Action`: Added - Execute Vulnerability Sync Actions | `Action`:
+    Added - List Vulnerability Sync Action Set Issues | `Action`: Added - List Vulnerability
+    Sync Action Set Solutions | `Action`: Added - List Vulnerability Sync Action Sets
+    | `Action`: Added - Get Vulnerability Sync Action Set | `Action`: Updated - Upload
+    Vulnerability Sync File | `Action`: Updated - Get Devices | `Action`: Deleted -
+    Action on Vulnerability Sync Batch | `Action`: Deleted - Vulnerability Sync Task
+    | `Action`: Deleted - Get Vulnerability Sync Batch | `Action`: Deleted - List Vulnerability
+    Sync Batches | `Action`: Deleted - List Vulnerability Sync Tasks'
+  - '1.2.0 - Get device by IP and Get device by hostname: fix validation issue when
+    IP or hostname not found | Add unit tests'
+  - '1.1.1 - Fix undefined org ID passed to actions when not required | Record outcome
+    of connection tests'
+  - '1.1.0 - Add `report source` as optional input parameter to Upload Vulnerability
+    Sync File action | Add report source to batch type'
+  - '1.0.0 - Initial plugin'
 supported_versions: [All as of 12/29/2023]
 support: partner
 status: []
 requirements: []
 key_features:
-- Device Management
-- Patch Management
+  - Device Management
+  - Patch Management
 references:
-- '[Automox](https://www.automox.com/)'
-- '[Automox Developer Portal](https://developer.automox.com/developer-portal/)'
+  - '[Automox](https://www.automox.com/)'
+  - '[Automox Developer Portal](https://developer.automox.com/developer-portal/)'
 tags: [endpoint, patch]
 hub_tags:
   use_cases: [threat_detection_and_response, asset_inventory, remediation_management]
@@ -133,7 +133,6 @@ types:
         description: The access key of the organization
         type: string
         required: false
-
   user_rbac_role:
     id:
       title: Role ID
@@ -805,8 +804,8 @@ types:
       type: string
       required: true
       enum:
-      - patch-now
-      - patch-with-worklet
+        - patch-now
+        - patch-with-worklet
       default: patch-now
     solution_id:
       title: Solution ID
@@ -906,13 +905,6 @@ types:
         other details depending on the solution type
       type: object
       required: false
-      example:
-        solution_id: office-click-to-run-upgrade-latest
-        solution_type: workaround
-        solution_summary: Upgrade to the latest version of Microsoft Office
-        solution_fix: Install Office Click-To-Run updates through any installed Office
-          application. Go to File &gt; Account (or Office Account if you opened Outlook).
-          Under Product Information, choose Update Options &gt; Update Now.
     device_ids:
       title: Device IDs
       description: List of device identifiers associated with the solution. This is
@@ -920,53 +912,16 @@ types:
         Automox API.
       type: '[]integer'
       required: false
-      example: [1234, 5678]
     devices:
       title: Devices
       description: List of devices associated with the solution
       type: '[]solution_device'
       required: false
-      example:
-      - id: 1234
-        name: device-1
-        custom_name: custom-name
-        status: in_progress
-        deleted: false
-        ip_addrs_private:
-        - 10.0.0.1
     vulnerabilities:
       title: Vulnerabilities
       description: List of vulnerabilities associated with the solution
       type: '[]solution_vulnerability'
       required: false
-      example:
-      - id: CVE-2019-1297
-        title: Microsoft Excel Remote Code Execution Vulnerability
-        summary: A remote code execution vulnerability exists in Microsoft Excel software
-          when the software fails to properly handle objects in memory. An attacker
-          who successfully exploited the vulnerability could run arbitrary code in
-          the context of the current user. If the current user is logged on with administrative
-          user rights, an attacker could take control of the affected system. An attacker
-          could then install programs; view, change, or delete data; or create new
-          accounts with full user rights. Users whose accounts are configured to have
-          fewer user rights on the system could be less impacted than users who operate
-          with administrative user rights. Exploitation of the vulnerability requires
-          that a user open a specially crafted file with an affected version of Microsoft
-          Excel. In an email attack scenario, an attacker could exploit the vulnerability
-          by sending the specially crafted file to the user and convincing the user
-          to open the file. In a web-based attack scenario, an attacker could host
-          a website (or leverage a compromised website that accepts or hosts user-provided
-          content) containing a specially crafted file designed to exploit the vulnerability.
-          An attacker would have no way to force users to visit the website. Instead,
-          an attacker would have to convince users to click a link, typically by way
-          of an enticement in an email or instant message, and then convince them
-          to open the specially crafted file. The security update addresses the vulnerability
-          by correcting how Microsoft Excel handles objects in memory.
-        severity: high
-      - id: CVE-2021-42292
-        title: Microsoft Excel Security Feature Bypass Vulnerability
-        summary: ''
-        severity: high
 
 connection:
   api_key:
@@ -1427,11 +1382,11 @@ actions:
         required: false
         default: generic
         enum:
-        - generic
-        - crowd-strike
-        - rapid7
-        - tenable
-        - qualys
+          - generic
+          - crowd-strike
+          - rapid7
+          - tenable
+          - qualys
         example: rapid7
     output:
       id:
@@ -1485,13 +1440,13 @@ actions:
         type: string
         required: false
         enum:
-        - created_at
-        - updated_at
-        - status
-        - source_type
-        - source_name
-        - configuration_id
-        - ''
+          - created_at
+          - updated_at
+          - status
+          - source_type
+          - source_name
+          - configuration_id
+          - ''
         example: created_at
       group_sort:
         title: Group Sort
@@ -1499,13 +1454,13 @@ actions:
         type: string
         required: false
         enum:
-        - asc
-        - desc
-        - latest_updated_at:asc
-        - latest_updated_at:desc
-        - source:asc
-        - source:desc
-        - ''
+          - asc
+          - desc
+          - latest_updated_at:asc
+          - latest_updated_at:desc
+          - source:asc
+          - source:desc
+          - ''
         example: latest_updated_at:desc
       source_type_in:
         title: Source Type In
@@ -1513,29 +1468,29 @@ actions:
         type: '[]string'
         required: false
         example:
-        - Generic Report
-        - CrowdStrike
-        - Rapid7
-        - TenableIO
-        - Qualys
+          - Generic Report
+          - CrowdStrike
+          - Rapid7
+          - TenableIO
+          - Qualys
       status_in:
         title: Status In
         description: Filter by status
         type: '[]string'
         required: false
         example:
-        - building
-        - ready
-        - error
+          - building
+          - ready
+          - error
       status_not_in:
         title: Status Not In
         description: Filter by status
         type: '[]string'
         required: false
         example:
-        - building
-        - ready
-        - error
+          - building
+          - ready
+          - error
       configuration_id_equals:
         title: Configuration ID Equals
         description: Filter by configuration ID
@@ -1584,7 +1539,7 @@ actions:
         type: '[]string'
         required: false
         example:
-        - unknown-host
+          - unknown-host
     output:
       issues:
         title: Vulnerability Sync Action Set Issues
@@ -1614,27 +1569,27 @@ actions:
         type: '[]string'
         required: false
         example:
-        - patch-now
-        - patch-with-worklet
+          - patch-now
+          - patch-with-worklet
       severity_in:
         title: Severity In
         description: Filter by severity
         type: '[]string'
         required: false
         example:
-        - critical
-        - high
-        - medium
-        - low
-        - unknown
+          - critical
+          - high
+          - medium
+          - low
+          - unknown
       vulnerability_in:
         title: Vulnerability In
         description: Filter by vulnerability
         type: '[]string'
         required: false
         example:
-        - CVE-2020-1234
-        - CVE-2020-5678
+          - CVE-2020-1234
+          - CVE-2020-5678
     output:
       solutions:
         title: Vulnerability Sync Solutions
@@ -1663,18 +1618,7 @@ actions:
         description: List of remediations to execute
         type: '[]action_set_action'
         required: true
-        example:
-        - action: patch-now
-          solution_id: 1234
-          device_ids:
-          - 1234
-          - 5678
-        - action: patch-with-worklet
-          solution_id: 1234
-          worklet_id: 1234
-          device_ids:
-          - 1234
-          - 5678
+        example: '[{"action":"patch-now","solution_id":1234,"device_ids":[1234,5678]},{"action":"patch-with-worklet","solution_id":1234,"worklet_id":1234,"device_ids":[1234,5678]}]'
     output:
       success:
         title: Success

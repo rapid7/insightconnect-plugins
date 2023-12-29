@@ -212,7 +212,7 @@ This action is used to launch remediation for patch and worklet remediations
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |action_set_id|integer|None|True|Identifier of the action set|None|1234|
-|actions|[]action_set_action|None|True|List of remediations to execute|None|[{'action': 'patch-now', 'solution_id': 1234, 'device_ids': [1234, 5678]}, {'action': 'patch-with-worklet', 'solution_id': 1234, 'worklet_id': 1234, 'device_ids': [1234, 5678]}]|
+|actions|[]action_set_action|None|True|List of remediations to execute|None|[{"action":"patch-now","solution_id":1234,"device_ids":[1234,5678]},{"action":"patch-with-worklet","solution_id":1234,"worklet_id":1234,"device_ids":[1234,5678]}]|
 |org_id|integer|None|True|Identifier of organization|None|1234|
   
 Example input:
@@ -220,14 +220,25 @@ Example input:
 ```
 {
   "action_set_id": 1234,
-  "actions": {
-    "action": "patch-now",
-    "device_ids": [
-      1234,
-      5678
-    ],
-    "solution_id": 1234
-  },
+  "actions": [
+    {
+      "action": "patch-now",
+      "device_ids": [
+        1234,
+        5678
+      ],
+      "solution_id": 1234
+    },
+    {
+      "action": "patch-with-worklet",
+      "device_ids": [
+        1234,
+        5678
+      ],
+      "solution_id": 1234,
+      "worklet_id": 1234
+    }
+  ],
   "org_id": 1234
 }
 ```
@@ -1791,13 +1802,13 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Device IDs|[]integer|None|False|List of device identifiers associated with the solution. This is a helper field to make executing actions easier. It does not exist on the Automox API.|[1234, 5678]|
-|Devices|[]solution_device|None|False|List of devices associated with the solution|[{'id': 1234, 'name': 'device-1', 'custom_name': 'custom-name', 'status': 'in_progress', 'deleted': False, 'ip_addrs_private': ['10.0.0.1']}]|
+|Device IDs|[]integer|None|False|List of device identifiers associated with the solution. This is a helper field to make executing actions easier. It does not exist on the Automox API.|None|
+|Devices|[]solution_device|None|False|List of devices associated with the solution|None|
 |Solution ID|integer|None|True|Identifier of solution|1234|
 |Remediation Type|string|None|False|Type of remediation|patch-with-worklet|
-|Solution Details|object|None|False|Details of the solution. This can include package information and other details depending on the solution type|{'solution_id': 'office-click-to-run-upgrade-latest', 'solution_type': 'workaround', 'solution_summary': 'Upgrade to the latest version of Microsoft Office', 'solution_fix': 'Install Office Click-To-Run updates through any installed Office application. Go to File &gt; Account (or Office Account if you opened Outlook). Under Product Information, choose Update Options &gt; Update Now.'}|
+|Solution Details|object|None|False|Details of the solution. This can include package information and other details depending on the solution type|None|
 |Solution Type|string|None|False|Type of solution|rapid7-solution|
-|Vulnerabilities|[]solution_vulnerability|None|False|List of vulnerabilities associated with the solution|[{'id': 'CVE-2019-1297', 'title': 'Microsoft Excel Remote Code Execution Vulnerability', 'summary': 'A remote code execution vulnerability exists in Microsoft Excel software when the software fails to properly handle objects in memory. An attacker who successfully exploited the vulnerability could run arbitrary code in the context of the current user. If the current user is logged on with administrative user rights, an attacker could take control of the affected system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights. Exploitation of the vulnerability requires that a user open a specially crafted file with an affected version of Microsoft Excel. In an email attack scenario, an attacker could exploit the vulnerability by sending the specially crafted file to the user and convincing the user to open the file. In a web-based attack scenario, an attacker could host a website (or leverage a compromised website that accepts or hosts user-provided content) containing a specially crafted file designed to exploit the vulnerability. An attacker would have no way to force users to visit the website. Instead, an attacker would have to convince users to click a link, typically by way of an enticement in an email or instant message, and then convince them to open the specially crafted file. The security update addresses the vulnerability by correcting how Microsoft Excel handles objects in memory.', 'severity': 'high'}, {'id': 'CVE-2021-42292', 'title': 'Microsoft Excel Security Feature Bypass Vulnerability', 'summary': '', 'severity': 'high'}]|
+|Vulnerabilities|[]solution_vulnerability|None|False|List of vulnerabilities associated with the solution|None|
 
 
 ## Troubleshooting
