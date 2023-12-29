@@ -353,8 +353,8 @@ class ApiClient:
                         assistance=f"Failed to upload file to Vulnerability Sync - Response code: {response.status_code}, "
                                    f"Content: {response.text}",
                     )
-            except PluginException as e:
-                raise e
+            except PluginException:
+                raise
             except json.decoder.JSONDecodeError as e:
                 raise PluginException(
                     preset=PluginException.Preset.INVALID_JSON,

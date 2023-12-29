@@ -12,7 +12,7 @@ Automox is modernizing IT operations with continuous visibility, insight, and ag
 
 # Supported Product Versions
   
-* All as of 10/09/2023
+* All as of 12/29/2023
 
 # Documentation
 
@@ -875,7 +875,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|users|[]user|False|List of Automox users|[{"id":1234,"uuid":"00000000-0000-0000-0000-000000000000","firstname":"Otto","lastname":"Mox","email":"example@automox.com","prefs":[{"user_id":1234,"pref_name":"notify.system.add","value":"false"},{"user_id":1234,"pref_name":"notify.weeklydigest","value":"true"}]}]|
+|users|[]user|False|List of Automox users|[{"id":1234,"uuid":"00000000-0000-0000-0000-000000000000","firstname":"User","lastname":"Example","email":"user@example.com","prefs":[{"user_id":1234,"pref_name":"notify.system.add","value":"false"},{"user_id":1234,"pref_name":"notify.weeklydigest","value":"true"},{"user_id":1234,"pref_name":"user.tfa","value":"email"}],"orgs":[{"id":1234,"zone_id":"00000000-0000-0000-0000-000000000000","name":"Global Zone","trial_end_time":"2024-02-03T00:00:00+00:00","create_time":"2021-10-20T04:03:25+0000","plan":"manage","access_key":"00000000-0000-0000-0000-000000000000"},{"id":1235,"zone_id":"00000000-0000-0000-0000-000000000000","name":"Local Zone","trial_end_time":"2021-11-03T00:00:00+00:00","trial_expired":true,"create_time":"2021-10-26T08:14:25+0000","plan":"manage","parent_id":1234,"access_key":"00000000-0000-0000-0000-000000000000"}]}]|
   
 Example output:
 
@@ -883,10 +883,32 @@ Example output:
 {
   "users": [
     {
-      "email": "example@automox.com",
-      "firstname": "Otto",
+      "email": "user@example.com",
+      "firstname": "User",
       "id": 1234,
-      "lastname": "Mox",
+      "lastname": "Example",
+      "orgs": [
+        {
+          "access_key": "00000000-0000-0000-0000-000000000000",
+          "create_time": "2021-10-20T04:03:25+0000",
+          "id": 1234,
+          "name": "Global Zone",
+          "plan": "manage",
+          "trial_end_time": "2024-02-03T00:00:00+00:00",
+          "zone_id": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "access_key": "00000000-0000-0000-0000-000000000000",
+          "create_time": "2021-10-26T08:14:25+0000",
+          "id": 1235,
+          "name": "Local Zone",
+          "parent_id": 1234,
+          "plan": "manage",
+          "trial_end_time": "2021-11-03T00:00:00+00:00",
+          "trial_expired": true,
+          "zone_id": "00000000-0000-0000-0000-000000000000"
+        }
+      ],
       "prefs": [
         {
           "pref_name": "notify.system.add",
@@ -897,6 +919,11 @@ Example output:
           "pref_name": "notify.weeklydigest",
           "user_id": 1234,
           "value": "true"
+        },
+        {
+          "pref_name": "user.tfa",
+          "user_id": 1234,
+          "value": "email"
         }
       ],
       "uuid": "00000000-0000-0000-0000-000000000000"
@@ -917,7 +944,7 @@ This action is used to retrieve Automox organizations
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|organizations|[]organization|True|List of Automox organizations|[{"id":1234,"name":"GlobalZone","create_time":"2021-10-20T04:03:25+0000","access_key":"00000000-0000-0000-0000-000000000000","trial_end_time":"2024-02-03T00:00:00+0000","sub_plan":"FULL","rate_id":1,"billing_name":"Test","billing_email":"example@automox.com","uuid":"00000000-0000-0000-0000-0000000000000","device_count":2},{"id":1235,"name":"AnotherOne","create_time":"2021-10-26T08:14:25+0000","access_key":"00000000-0000-0000-0000-000000000000","trial_end_time":"2021-11-03T00:00:00+0000","trial_expired":true,"sub_plan":"FULL","rate_id":1,"parent_id":1234,"uuid":"00000000-0000-0000-0000-000000000000"}]|
+|organizations|[]organization|True|List of Automox organizations|[{"id":1234,"name":"GlobalZone","create_time":"2021-10-20T04:03:25+0000","access_key":"00000000-0000-0000-0000-000000000000","trial_end_time":"2024-02-03T00:00:00+0000","sub_plan":"FULL","rate_id":1,"billing_name":"Test","billing_email":"user@example.com","uuid":"00000000-0000-0000-0000-0000000000000","device_count":2},{"id":1235,"name":"AnotherOne","create_time":"2021-10-26T08:14:25+0000","access_key":"00000000-0000-0000-0000-000000000000","trial_end_time":"2021-11-03T00:00:00+0000","trial_expired":true,"sub_plan":"FULL","rate_id":1,"parent_id":1234,"uuid":"00000000-0000-0000-0000-000000000000"}]|
   
 Example output:
 
@@ -926,7 +953,7 @@ Example output:
   "organizations": [
     {
       "access_key": "00000000-0000-0000-0000-000000000000",
-      "billing_email": "example@automox.com",
+      "billing_email": "user@example.com",
       "billing_name": "Test",
       "create_time": "2021-10-20T04:03:25+0000",
       "device_count": 2,
@@ -1496,8 +1523,15 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
+|Access Key|string|None|False|The access key of the organization|None|
+|Creation Time|string|None|False|The datetime of when the organization was created|None|
 |Organization ID|integer|None|True|The organization identifier of the user|None|
 |Name|string|None|False|The name of the organization|None|
+|Parent Organization ID|integer|None|False|The parent organization identifier|None|
+|Plan|string|None|False|The plan of the organization|None|
+|Trial End Time|string|None|False|The datetime of when the trial ends for the organization|None|
+|Trial Expired|boolean|None|False|Whether the trial has expired for the organization|None|
+|Zone ID|string|None|True|The zone identifier of the organization|None|
   
 **user_rbac_role**
 
@@ -1506,6 +1540,14 @@ Example output:
 |Role ID|integer|None|True|The role identifier|None|
 |Name|string|None|False|The name of the role|None|
 |Organization ID|integer|None|True|The organization identifier of the user role|None|
+  
+**user_pref**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Preference Name|string|None|True|The name of the preference|None|
+|User ID|integer|None|True|The user identifier|None|
+|Value|string|None|True|The value of the preference|None|
   
 **user**
 
@@ -1517,8 +1559,10 @@ Example output:
 |User ID|integer|None|True|The user identifier|None|
 |Last Name|string|None|False|The last name of the user|None|
 |Organizations|[]user_org|None|False|The organizations for which the user has access|None|
+|Prefs|[]user_pref|None|None|The preferences for the user|None|
 |Roles|[]user_rbac_role|None|False|The roles assigned to the user|None|
 |SAML Enabled|boolean|None|False|Whether SAML has been enabled for the user|None|
+|SSO Enabled|boolean|None|False|Whether SSO has been enabled for the user|None|
 |Tags|[]string|None|False|The user defined tags|None|
   
 **device_policy_status**
@@ -1762,7 +1806,8 @@ Example output:
 
 # Version History
   
-* 3.0.0 - `Action`: Fixed -  Get Vulnerability Sync Action Set | `Action`: Fixed - List Vulnerability Sync Action Sets  
+* 3.0.0 - `Action`: Fixed -  Get Vulnerability Sync Action Set | `Action`: Fixed - List Vulnerability Sync Action Sets |
+ `Action`: Updated - List Organization Users  
 * 2.0.0 - Fix Vulnerability Sync API Actions | `Action`: Added - Delete Vulnerability Sync Action Set | `Action`: Added 
 - Execute Vulnerability Sync Actions | `Action`: Added - List Vulnerability Sync Action Set Issues | `Action`: Added - 
 List Vulnerability Sync Action Set Solutions | `Action`: Added - List Vulnerability Sync Action Sets | `Action`: Added -

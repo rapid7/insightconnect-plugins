@@ -90,6 +90,15 @@ class ListOrganizationUsersOutput(insightconnect_plugin_runtime.Output):
           "description": "The features enabled for the user",
           "order": 5
         },
+        "prefs": {
+          "type": "array",
+          "title": "Prefs",
+          "description": "The preferences for the user",
+          "items": {
+            "$ref": "#/definitions/user_pref"
+          },
+          "order": 6
+        },
         "orgs": {
           "type": "array",
           "title": "Organizations",
@@ -97,7 +106,7 @@ class ListOrganizationUsersOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "$ref": "#/definitions/user_org"
           },
-          "order": 6
+          "order": 7
         },
         "tags": {
           "type": "array",
@@ -106,13 +115,19 @@ class ListOrganizationUsersOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "order": 7
+          "order": 8
         },
         "saml_enabled": {
           "type": "boolean",
           "title": "SAML Enabled",
           "description": "Whether SAML has been enabled for the user",
-          "order": 8
+          "order": 9
+        },
+        "sso_enabled": {
+          "type": "boolean",
+          "title": "SSO Enabled",
+          "description": "Whether SSO has been enabled for the user",
+          "order": 10
         },
         "rbac_roles": {
           "type": "array",
@@ -121,11 +136,40 @@ class ListOrganizationUsersOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "$ref": "#/definitions/user_rbac_role"
           },
-          "order": 9
+          "order": 11
         }
       },
       "required": [
         "id"
+      ]
+    },
+    "user_pref": {
+      "type": "object",
+      "title": "user_pref",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "title": "User ID",
+          "description": "The user identifier",
+          "order": 1
+        },
+        "pref_name": {
+          "type": "string",
+          "title": "Preference Name",
+          "description": "The name of the preference",
+          "order": 2
+        },
+        "value": {
+          "type": "string",
+          "title": "Value",
+          "description": "The value of the preference",
+          "order": 3
+        }
+      },
+      "required": [
+        "pref_name",
+        "user_id",
+        "value"
       ]
     },
     "user_org": {
@@ -138,15 +182,58 @@ class ListOrganizationUsersOutput(insightconnect_plugin_runtime.Output):
           "description": "The organization identifier of the user",
           "order": 1
         },
+        "zone_id": {
+          "type": "string",
+          "title": "Zone ID",
+          "description": "The zone identifier of the organization",
+          "order": 2
+        },
         "name": {
           "type": "string",
           "title": "Name",
           "description": "The name of the organization",
-          "order": 2
+          "order": 3
+        },
+        "trial_end_time": {
+          "type": "string",
+          "title": "Trial End Time",
+          "description": "The datetime of when the trial ends for the organization",
+          "order": 4
+        },
+        "trial_expired": {
+          "type": "boolean",
+          "title": "Trial Expired",
+          "description": "Whether the trial has expired for the organization",
+          "order": 5
+        },
+        "create_time": {
+          "type": "string",
+          "title": "Creation Time",
+          "description": "The datetime of when the organization was created",
+          "order": 6
+        },
+        "plan": {
+          "type": "string",
+          "title": "Plan",
+          "description": "The plan of the organization",
+          "order": 7
+        },
+        "parent_id": {
+          "type": "integer",
+          "title": "Parent Organization ID",
+          "description": "The parent organization identifier",
+          "order": 8
+        },
+        "access_key": {
+          "type": "string",
+          "title": "Access Key",
+          "description": "The access key of the organization",
+          "order": 9
         }
       },
       "required": [
-        "id"
+        "id",
+        "zone_id"
       ]
     },
     "user_rbac_role": {

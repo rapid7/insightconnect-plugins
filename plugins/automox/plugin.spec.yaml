@@ -9,7 +9,7 @@ description: Automox is modernizing IT operations with continuous visibility, in
 version: 3.0.0
 version_history:
 - '3.0.0 - `Action`: Fixed -  Get Vulnerability Sync Action Set | `Action`: Fixed
-  - List Vulnerability Sync Action Sets'
+  - List Vulnerability Sync Action Sets | `Action`: Updated - List Organization Users'
 - '2.0.0 - Fix Vulnerability Sync API Actions | `Action`: Added - Delete Vulnerability
   Sync Action Set | `Action`: Added - Execute Vulnerability Sync Actions | `Action`:
   Added - List Vulnerability Sync Action Set Issues | `Action`: Added - List Vulnerability
@@ -26,7 +26,7 @@ version_history:
 - 1.1.0 - Add `report source` as optional input parameter to Upload Vulnerability
   Sync File action | Add report source to batch type
 - 1.0.0 - Initial plugin
-supported_versions: [All as of 10/09/2023]
+supported_versions: [All as of 12/29/2023]
 support: partner
 status: []
 requirements: []
@@ -93,11 +93,47 @@ types:
       description: The organization identifier of the user
       type: integer
       required: true
+    zone_id:
+      title: Zone ID
+      description: The zone identifier of the organization
+      type: string
+      required: true
     name:
       title: Name
       description: The name of the organization
       type: string
       required: false
+    trial_end_time:
+      title: Trial End Time
+      description: The datetime of when the trial ends for the organization
+      type: string
+      required: false
+    trial_expired:
+      title: Trial Expired
+      description: Whether the trial has expired for the organization
+      type: boolean
+      required: false
+    create_time:
+      title: Creation Time
+      description: The datetime of when the organization was created
+      type: string
+      required: false
+    plan:
+      title: Plan
+      description: The plan of the organization
+      type: string
+      required: false
+    parent_id:
+      title: Parent Organization ID
+      description: The parent organization identifier
+      type: integer
+      required: false
+    access_key:
+        title: Access Key
+        description: The access key of the organization
+        type: string
+        required: false
+
   user_rbac_role:
     id:
       title: Role ID
@@ -113,6 +149,22 @@ types:
       title: Organization ID
       description: The organization identifier of the user role
       type: integer
+      required: true
+  user_pref:
+    user_id:
+      title: User ID
+      description: The user identifier
+      type: integer
+      required: true
+    pref_name:
+      title: Preference Name
+      description: The name of the preference
+      type: string
+      required: true
+    value:
+      title: Value
+      description: The value of the preference
+      type: string
       required: true
   user:
     id:
@@ -140,6 +192,10 @@ types:
       description: The features enabled for the user
       type: object
       required: false
+    prefs:
+      title: Prefs
+      description: The preferences for the user
+      type: '[]user_pref'
     orgs:
       title: Organizations
       description: The organizations for which the user has access
@@ -153,6 +209,11 @@ types:
     saml_enabled:
       title: SAML Enabled
       description: Whether SAML has been enabled for the user
+      type: boolean
+      required: false
+    sso_enabled:
+      title: SSO Enabled
+      description: Whether SSO has been enabled for the user
       type: boolean
       required: false
     rbac_roles:
@@ -925,7 +986,7 @@ actions:
         description: List of Automox organizations
         type: '[]organization'
         required: true
-        example: '[{"id":1234,"name":"GlobalZone","create_time":"2021-10-20T04:03:25+0000","access_key":"00000000-0000-0000-0000-000000000000","trial_end_time":"2024-02-03T00:00:00+0000","sub_plan":"FULL","rate_id":1,"billing_name":"Test","billing_email":"example@automox.com","uuid":"00000000-0000-0000-0000-0000000000000","device_count":2},{"id":1235,"name":"AnotherOne","create_time":"2021-10-26T08:14:25+0000","access_key":"00000000-0000-0000-0000-000000000000","trial_end_time":"2021-11-03T00:00:00+0000","trial_expired":true,"sub_plan":"FULL","rate_id":1,"parent_id":1234,"uuid":"00000000-0000-0000-0000-000000000000"}]'
+        example: '[{"id":1234,"name":"GlobalZone","create_time":"2021-10-20T04:03:25+0000","access_key":"00000000-0000-0000-0000-000000000000","trial_end_time":"2024-02-03T00:00:00+0000","sub_plan":"FULL","rate_id":1,"billing_name":"Test","billing_email":"user@example.com","uuid":"00000000-0000-0000-0000-0000000000000","device_count":2},{"id":1235,"name":"AnotherOne","create_time":"2021-10-26T08:14:25+0000","access_key":"00000000-0000-0000-0000-000000000000","trial_end_time":"2021-11-03T00:00:00+0000","trial_expired":true,"sub_plan":"FULL","rate_id":1,"parent_id":1234,"uuid":"00000000-0000-0000-0000-000000000000"}]'
   list_organization_users:
     title: List Organization Users
     description: Retrieve users of the Automox organization
@@ -942,7 +1003,7 @@ actions:
         description: List of Automox users
         type: '[]user'
         required: false
-        example: '[{"id":1234,"uuid":"00000000-0000-0000-0000-000000000000","firstname":"Otto","lastname":"Mox","email":"example@automox.com","prefs":[{"user_id":1234,"pref_name":"notify.system.add","value":"false"},{"user_id":1234,"pref_name":"notify.weeklydigest","value":"true"}]}]'
+        example: '[{"id":1234,"uuid":"00000000-0000-0000-0000-000000000000","firstname":"User","lastname":"Example","email":"user@example.com","prefs":[{"user_id":1234,"pref_name":"notify.system.add","value":"false"},{"user_id":1234,"pref_name":"notify.weeklydigest","value":"true"},{"user_id":1234,"pref_name":"user.tfa","value":"email"}],"orgs":[{"id":1234,"zone_id":"00000000-0000-0000-0000-000000000000","name":"Global Zone","trial_end_time":"2024-02-03T00:00:00+00:00","create_time":"2021-10-20T04:03:25+0000","plan":"manage","access_key":"00000000-0000-0000-0000-000000000000"},{"id":1235,"zone_id":"00000000-0000-0000-0000-000000000000","name":"Local Zone","trial_end_time":"2021-11-03T00:00:00+00:00","trial_expired":true,"create_time":"2021-10-26T08:14:25+0000","plan":"manage","parent_id":1234,"access_key":"00000000-0000-0000-0000-000000000000"}]}]'
   list_policies:
     title: List Policies
     description: Retrieve Automox policies

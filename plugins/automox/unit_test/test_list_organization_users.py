@@ -31,26 +31,18 @@ class TestListOrganizationUsers(TestCase):
         response = self.action.run(self.params)
         expected_response = {
             Output.USERS: [
-                {
-                    "id": 1234,
-                    "uuid": "00000000-0000-0000-0000-000000000000",
-                    "firstname": "Otto",
-                    "lastname": "Mox",
-                    "email": "example@automox.com",
-                    "prefs": [
-                        {
-                            "user_id": 1234,
-                            "pref_name": "notify.system.add",
-                            "value": "false"
-                        },
-                        {
-                            "user_id": 1234,
-                            "pref_name": "notify.weeklydigest",
-                            "value": "true"
-                        }
-                    ]
-                }
-            ]
+                {"id": 1234, "uuid": "00000000-0000-0000-0000-000000000000", "firstname": "User", "lastname": "Example",
+                 "email": "user@example.com",
+                 "prefs": [{"user_id": 1234, "pref_name": "notify.system.add", "value": "false"},
+                           {"user_id": 1234, "pref_name": "notify.weeklydigest", "value": "true"},
+                           {"user_id": 1234, "pref_name": "user.tfa", "value": "email"}], "orgs": [
+                    {"id": 1234, "zone_id": "00000000-0000-0000-0000-000000000000", "name": "Global Zone",
+                     "trial_end_time": "2024-02-03T00:00:00+00:00", "create_time": "2021-10-20T04:03:25+0000",
+                     "plan": "manage", "access_key": "00000000-0000-0000-0000-000000000000"},
+                    {"id": 1235, "zone_id": "00000000-0000-0000-0000-000000000000", "name": "Local Zone",
+                     "trial_end_time": "2021-11-03T00:00:00+00:00", "trial_expired": True,
+                     "create_time": "2021-10-26T08:14:25+0000", "plan": "manage", "parent_id": 1234,
+                     "access_key": "00000000-0000-0000-0000-000000000000"}]}]
         }
         self.assertEqual(response, expected_response)
 
