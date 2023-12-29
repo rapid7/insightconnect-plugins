@@ -10,7 +10,7 @@ from insightconnect_plugin_runtime.exceptions import ConnectionTestException, Pl
 
 from util import (
     Util,
-    mock_request_200,
+    mock_request_204,
     mock_request_403,
     mock_request_404,
     mocked_request,
@@ -27,7 +27,7 @@ class TestDeleteGroup(TestCase):
         self.action = Util.default_connector(DeleteGroup())
         self.params = {Input.ORG_ID: ORG_ID, Input.GROUP_ID: GROUP_ID}
 
-    @patch("requests.Session.request", side_effect=mock_request_200)
+    @patch("requests.Session.request", side_effect=mock_request_204)
     def test_delete_group_ok(self, mock: Mock) -> None:
         response = self.action.run(self.params)
         expected_response = {

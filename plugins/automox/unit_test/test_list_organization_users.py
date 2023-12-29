@@ -33,37 +33,22 @@ class TestListOrganizationUsers(TestCase):
             Output.USERS: [
                 {
                     "id": 1234,
-                    "uuid": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-                    "firstname": "ExampleName",
-                    "lastname": "ExampleLastName",
-                    "email": "user@example.com",
-                    "prefs": [{"user_id": 12345, "pref_name": "notify.weeklydigest", "value": "true"}],
-                    "orgs": [
+                    "uuid": "00000000-0000-0000-0000-000000000000",
+                    "firstname": "Otto",
+                    "lastname": "Mox",
+                    "email": "example@automox.com",
+                    "prefs": [
                         {
-                            "id": 12345,
-                            "zone_id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-                            "name": "ExampleTestOrg",
-                            "trial_end_time": "2023-03-01T12:00:00+0000",
-                            "trial_expired": True,
-                            "create_time": "2023-03-01T12:00:00+0000",
-                            "plan": "manage",
-                            "parent_id": "None",
-                            "access_key": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-                        }
-                    ],
-                    "rbac_roles": [
+                            "user_id": 1234,
+                            "pref_name": "notify.system.add",
+                            "value": "false"
+                        },
                         {
-                            "id": 1,
-                            "name": "Administrator",
-                            "description": "Provides full administrative rights to a specific zone.",
-                            "organization_id": 12345,
+                            "user_id": 1234,
+                            "pref_name": "notify.weeklydigest",
+                            "value": "true"
                         }
-                    ],
-                    "account_id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-                    "account_name": "ExampleTestOrg",
-                    "account_rbac_role": "global-admin",
-                    "account_completed_qsg": True,
-                    "account_created_at": "2023-03-01T12:00:00+0000",
+                    ]
                 }
             ]
         }
