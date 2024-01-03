@@ -20,6 +20,6 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
 
 # needed for SSL
-USER nobody
+USER root
 
 ENTRYPOINT ["/usr/local/bin/icon_html"]
