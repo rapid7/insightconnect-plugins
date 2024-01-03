@@ -190,7 +190,7 @@ Example output:
 ```
 
 #### Text
-  
+
 This action is used to strip an HTML string of all tags and return only the text
 
 ##### Input
@@ -272,6 +272,7 @@ Example output:
 
 # Version History
 
+* 1.2.5 - Update requirements for pypandoc
 * 1.2.4 - Actions modified in order to implement PluginExceptions
 * 1.2.3 - Action HTML5: fix error with encoding to file
 * 1.2.2 - Update to v4 Python plugin runtime
