@@ -1,7 +1,9 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 from .schema import AddUserInput, AddUserOutput, Output, Input
+from komand_active_directory_ldap.util.utils import ADUtils
 
 
 class AddUser(insightconnect_plugin_runtime.Action):
@@ -14,7 +16,7 @@ class AddUser(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        use_ssl = self.connection.use_ssl
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         domain_name = params.get(Input.DOMAIN_NAME)
         first_name = params.get(Input.FIRST_NAME)
         last_name = params.get(Input.LAST_NAME)
@@ -24,8 +26,9 @@ class AddUser(insightconnect_plugin_runtime.Action):
         password = params.get(Input.PASSWORD)
         additional_parameters = params.get(Input.ADDITIONAL_PARAMETERS)
         user_principal_name = params.get(Input.USER_PRINCIPAL_NAME)
+        # END INPUT BINDING - DO NOT REMOVE
 
-        if account_disabled or not use_ssl:
+        if account_disabled or not self.connection.use_ssl:
             user_account_control = 514
         else:
             user_account_control = 512
@@ -56,6 +59,21 @@ class AddUser(insightconnect_plugin_runtime.Action):
         log_parameters = parameters
         log_parameters.pop("userPassword")
         self.logger.info(log_parameters)
-        return {
-            Output.SUCCESS: self.connection.client.add_user(dn, user_account_control, use_ssl, password, parameters)
-        }
+
+        try:
+            return {
+                Output.SUCCESS: self.connection.client.add_user(
+                    dn, user_account_control, self.connection.use_ssl, password, parameters
+                )
+            }
+        except PluginException:
+            self.logger.info("Escaping non-ascii characters...")
+            return {
+                Output.SUCCESS: self.connection.client.add_user(
+                    ADUtils.escape_non_ascii_characters(dn),
+                    user_account_control,
+                    self.connection.use_ssl,
+                    password,
+                    parameters,
+                )
+            }
