@@ -2,7 +2,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 import io
 import json
 import requests
-from typing import Dict, List, Optional, Collection
+from typing import Dict, List, Optional, Collection, Any
 
 
 class ApiClient:
@@ -57,11 +57,11 @@ class ApiClient:
                 cause=f"An error occurred when making {method} request to {url}.",
                 assistance=f"Response code: {response.status_code}, Content: {response.text}.",
             )
-        except json.decoder.JSONDecodeError as e:
-            self.logger.info(f"Invalid json: {e}")
+        except json.decoder.JSONDecodeError as error:
+            self.logger.info(f"Invalid json: {error}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
-        except requests.exceptions.HTTPError as e:
-            self.logger.info(f"Call to Automox Console API failed: {e}")
+        except requests.exceptions.HTTPError as error:
+            self.logger.info(f"Call to Automox Console API failed: {error}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
     def _page_results(self, url: str, params=None, sanitize: bool = True) -> List[Dict]:
@@ -110,24 +110,24 @@ class ApiClient:
         return page_resp
 
     # Remove Null from response to avoid type issues
-    def remove_null_values(self, d: Collection):
-        if isinstance(d, dict):
-            return dict((k, self.remove_null_values(v)) for k, v in d.items() if self._is_value_or_number(v) and
+    def remove_null_values(self, value: Collection):
+        if isinstance(value, dict):
+            return dict((k, self.remove_null_values(v)) for k, v in value.items() if self._is_value_or_number(v) and
                         self._is_value_or_number(self.remove_null_values(v)))
-        elif isinstance(d, list):
-            return [self.remove_null_values(v) for v in d if self._is_value_or_number(v) and
+        elif isinstance(value, list):
+            return [self.remove_null_values(v) for v in value if self._is_value_or_number(v) and
                     self._is_value_or_number(self.remove_null_values(v))]
         else:
-            return d
+            return value
 
     @staticmethod
-    def _is_value_or_number(v) -> bool:
+    def _is_value_or_number(value: Any) -> bool:
         """
         Check if value is not null or number to prevent 0 from being removed
         """
-        if isinstance(v, (int, float)):
+        if isinstance(value, (int, float)):
             return True
-        elif v is not None:
+        elif value is not None:
             return True
         else:
             return False
@@ -355,17 +355,17 @@ class ApiClient:
                     )
             except PluginException:
                 raise
-            except json.decoder.JSONDecodeError as e:
+            except json.decoder.JSONDecodeError as error:
                 raise PluginException(
                     preset=PluginException.Preset.INVALID_JSON,
                     assistance=f"Failed to upload file to Vulnerability Sync - Response code: {response.status_code}, "
-                               f"Content: {response.text}, Error: {str(e)}"
+                               f"Content: {response.text}, Error: {str(error)}"
                 )
-            except Exception as e:
+            except Exception as error:
                 raise PluginException(
                     preset=PluginException.Preset.UNKNOWN,
                     assistance=f"Failed to upload file to Vulnerability Sync - Response code: {response.status_code}, "
-                               f"Content: {response.text}, Error: {str(e)}"
+                               f"Content: {response.text}, Error: {str(error)}"
                 )
 
     def list_vulnerability_sync_action_sets(self, org_id: int, params=None) -> List[Dict]:
