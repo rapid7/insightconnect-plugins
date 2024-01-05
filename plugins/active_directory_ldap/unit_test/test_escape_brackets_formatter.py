@@ -1,6 +1,5 @@
 from unittest import TestCase
 
-
 from komand_active_directory_ldap.util.utils import ADUtils
 from parameterized import parameterized
 

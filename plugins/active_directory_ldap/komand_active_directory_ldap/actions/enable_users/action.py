@@ -12,14 +12,17 @@ class EnableUsers(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        if not params.get(Input.DISTINGUISHED_NAMES):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        distinguished_names = params.get(Input.DISTINGUISHED_NAMES)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        if not distinguished_names:
             raise PluginException(
                 cause="Distinguished Names must contain at least one entry",
                 assistance="Please enter one or more Distinguished Names",
             )
 
-        enabled_users = self.connection.client.manage_users(params.get(Input.DISTINGUISHED_NAMES), True)
-
+        enabled_users = self.connection.client.manage_users(distinguished_names, True)
         return {
             Output.COMPLETED: enabled_users.get("successes"),
             Output.FAILED: enabled_users.get("failures"),

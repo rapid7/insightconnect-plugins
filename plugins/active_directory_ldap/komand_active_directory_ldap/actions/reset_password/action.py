@@ -16,16 +16,26 @@ class ResetPassword(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        formatter = ADUtils()
-        dn = params.get(Input.DISTINGUISHED_NAME)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        distinguished_name = params.get(Input.DISTINGUISHED_NAME)
         new_password = params.get(Input.NEW_PASSWORD)
-        use_ssl = self.connection.use_ssl
-        dn = formatter.format_dn(dn)[0]
-        dn = formatter.unescape_asterisk(dn)
-        self.logger.info(f"Escaped DN {dn}")
+        # END INPUT BINDING - DO NOT REMOVE
 
-        if use_ssl is False:
+        distinguished_name = ADUtils.format_dn(distinguished_name)[0]
+        distinguished_name = ADUtils.unescape_asterisk(distinguished_name)
+        self.logger.info(f"Escaped DN {distinguished_name}")
+
+        if self.connection.use_ssl is False:
             raise PluginException(
                 cause="SSL must be enabled", assistance="SSL must be enabled for the reset password action"
             )
-        return {Output.SUCCESS: self.connection.client.reset_password(dn, new_password)}
+
+        try:
+            return {Output.SUCCESS: self.connection.client.reset_password(distinguished_name, new_password)}
+        except PluginException:
+            self.logger.info("Escaping non-ascii characters...")
+            return {
+                Output.SUCCESS: self.connection.client.reset_password(
+                    ADUtils.escape_non_ascii_characters(distinguished_name), new_password
+                )
+            }

@@ -57,7 +57,7 @@ Example input:
 
 #### Add User
   
-Adds the specified Active Directory user
+This action is used to add the specified Active Directory user
 
 ##### Input
 
@@ -107,7 +107,7 @@ Example output:
 
 #### Delete
   
-Deletes the LDAP object specified
+This action is used to delete the LDAP object specified
 
 ##### Input
 
@@ -139,7 +139,7 @@ Example output:
 
 #### Disable User
   
-Disable an account
+This action is used to disable an account
 
 ##### Input
 
@@ -171,7 +171,7 @@ Example output:
 
 #### Disable Users
   
-Disable multiple accounts
+This action is used to disable multiple accounts
 
 ##### Input
 
@@ -214,7 +214,7 @@ Example output:
 
 #### Enable User
   
-Enable an account
+This action is used to enable an account
 
 ##### Input
 
@@ -246,7 +246,7 @@ Example output:
 
 #### Enable Users
   
-Enable multiple accounts
+This action is used to enable multiple accounts
 
 ##### Input
 
@@ -289,7 +289,7 @@ Example output:
 
 #### Force Password Reset
   
-Force a user to reset their password on next login
+This action is used to force a user to reset their password on next login
 
 ##### Input
 
@@ -321,7 +321,7 @@ Example output:
 
 #### Add or Remove an Object from Group
   
-Add or remove an object from an Active Directory group
+This action is used to add or remove an object from an Active Directory group
 
 ##### Input
 
@@ -357,7 +357,7 @@ Example output:
 
 #### Modify Object
   
-Modify the attributes for an Active Directory object
+This action is used to modify the attributes for an Active Directory object
 
 ##### Input
 
@@ -393,7 +393,7 @@ Example output:
 
 #### Move Object
   
-Move an Active Directory object from one organizational unit to another
+This action is used to move an Active Directory object from one organizational unit to another
 
 ##### Input
 
@@ -427,7 +427,7 @@ Example output:
 
 #### Query
   
-Run an LDAP query
+This action is used to run an LDAP query
 
 ##### Input
 
@@ -455,7 +455,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |count|integer|False|Number of results|1|
-|results|[]result|False|Results returned|[ { "dn": string, "attributes": { "pwdLastSet": date, "objectClass": [ string, string, string, string ], "memberOf": [ string ], "sAMAccountType": int, "uSNChanged": int, "givenName": string, "userPrincipalName": string, "countryCode": int, "lastLogon": date, "sAMAccountName": string, "name": string, "primaryGroupID": int, "dSCorePropagationData": [ date ], "displayName": string, "logonCount": int, "cn": string, "objectSid": string, "codePage": int, "badPwdCount": int, "objectGUID": string, "distinguishedName": string, "whenChanged": date, "badPasswordTime": date, "instanceType": int, "uSNCreated": int, "sn": string, "whenCreated": date, "accountExpires": date, "userAccountControl": int, "lastLogoff": date, "objectCategory": "string" } } ]|
+|results|[]result|False|Results returned|[{"dn":"string","attributes":{"pwdLastSet":"date","objectClass":["string","string","string","string"],"memberOf":["string"],"sAMAccountType":"int","uSNChanged":"int","givenName":"string","userPrincipalName":"string","countryCode":"int","lastLogon":"date","sAMAccountName":"string","name":"string","primaryGroupID":"int","dSCorePropagationData":["date"],"displayName":"string","logonCount":"int","cn":"string","objectSid":"string","codePage":"int","badPwdCount":"int","objectGUID":"string","distinguishedName":"string","whenChanged":"date","badPasswordTime":"date","instanceType":"int","uSNCreated":"int","sn":"string","whenCreated":"date","accountExpires":"date","userAccountControl":"int","lastLogoff":"date","objectCategory":"string"}}]|
   
 Example output:
 
@@ -464,49 +464,49 @@ Example output:
   "count": 1,
   "results": [
     {
-      "dn": "string",
       "attributes": {
-        "pwdLastSet": "date",
+        "accountExpires": "date",
+        "badPasswordTime": "date",
+        "badPwdCount": "int",
+        "cn": "string",
+        "codePage": "int",
+        "countryCode": "int",
+        "dSCorePropagationData": [
+          "date"
+        ],
+        "displayName": "string",
+        "distinguishedName": "string",
+        "givenName": "string",
+        "instanceType": "int",
+        "lastLogoff": "date",
+        "lastLogon": "date",
+        "logonCount": "int",
+        "memberOf": [
+          "string"
+        ],
+        "name": "string",
+        "objectCategory": "string",
         "objectClass": [
           "string",
           "string",
           "string",
           "string"
         ],
-        "memberOf": [
-          "string"
-        ],
-        "sAMAccountType": "int",
-        "uSNChanged": "int",
-        "givenName": "string",
-        "userPrincipalName": "string",
-        "countryCode": "int",
-        "lastLogon": "date",
-        "sAMAccountName": "string",
-        "name": "string",
-        "primaryGroupID": "int",
-        "dSCorePropagationData": [
-          "date"
-        ],
-        "displayName": "string",
-        "logonCount": "int",
-        "cn": "string",
-        "objectSid": "string",
-        "codePage": "int",
-        "badPwdCount": "int",
         "objectGUID": "string",
-        "distinguishedName": "string",
-        "whenChanged": "date",
-        "badPasswordTime": "date",
-        "instanceType": "int",
-        "uSNCreated": "int",
+        "objectSid": "string",
+        "primaryGroupID": "int",
+        "pwdLastSet": "date",
+        "sAMAccountName": "string",
+        "sAMAccountType": "int",
         "sn": "string",
-        "whenCreated": "date",
-        "accountExpires": "date",
+        "uSNChanged": "int",
+        "uSNCreated": "int",
         "userAccountControl": "int",
-        "lastLogoff": "date",
-        "objectCategory": "string"
-      }
+        "userPrincipalName": "string",
+        "whenChanged": "date",
+        "whenCreated": "date"
+      },
+      "dn": "string"
     }
   ]
 }
@@ -514,7 +514,7 @@ Example output:
 
 #### Query Group Membership
   
-Return users and groups that belonging to the specific group
+This action is used to return users and groups that belonging to the specific group
 
 ##### Input
 
@@ -604,7 +604,7 @@ Example output:
 
 #### Reset Password
   
-Reset a users password
+This action is used to reset a users password
 
 ##### Input
 
@@ -638,7 +638,7 @@ Example output:
 
 #### Unlock User
   
-Unlock an account
+This action is used to unlock an account
 
 ##### Input
 
@@ -667,11 +667,9 @@ Example output:
   "success": true
 }
 ```
-
 ### Triggers
   
 *This plugin does not contain any triggers.*
-
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -762,6 +760,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 9.0.1 - Fix problem where some ASCII characters were not escaped properly
 * 9.0.0 - Action: `Disable User` & `Enable User` - Rename title of actions from `Disable` & `Enable` to `Disable Users` & `Enable Users` on the front-end.
 * 8.0.0 - Update actions Enable Users and Enable Users to add outputs Completed and Failed and remove output All Operations Succeeded
 * 7.0.0 - Update actions Enable Users and Enable Users to replace output Success with All Operations Succeeded True/False
@@ -809,10 +808,11 @@ the query results, and then using the variable step $item.dn
 * 1.0.0 - Revise input names, bugfixes for missing attributes and character escaping, fix security issue
 * 0.1.0 - Initial plugin
 
-
 # Links
 
 [Learn Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/)
+[AD LDAP](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/3c5916a9-f1a0-429d-b937-f8fe672d777c)
+[Microsoft's Active Directory service](https://social.technet.microsoft.com/wiki/contents/articles/5392.active-directory-ldap-syntax-filters.aspx)
 
 ## References
 
