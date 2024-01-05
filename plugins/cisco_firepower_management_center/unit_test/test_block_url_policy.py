@@ -1,24 +1,28 @@
-import sys
 import os
-
+import sys
 from unittest import TestCase
-from icon_cisco_firepower_management_center.actions.block_url_policy import BlockUrlPolicy
-from icon_cisco_firepower_management_center.actions.block_url_policy.schema import Input
-from unit_test.util import Util
-from unittest.mock import patch
-from parameterized import parameterized
+from unittest.mock import MagicMock, patch
 
 sys.path.append(os.path.abspath("../"))
+from icon_cisco_firepower_management_center.actions.block_url_policy import BlockUrlPolicy
+from icon_cisco_firepower_management_center.actions.block_url_policy.schema import Input
+from jsonschema import validate
+
+from util import Util
 
 
 @patch("requests.post", side_effect=Util.mocked_requests)
 @patch("requests.request", side_effect=Util.mocked_requests)
 @patch("requests.get", side_effect=Util.mocked_requests)
-@patch("ssl.SSLSocket.write", side_effect=Util.mock_write)
-@patch("ssl.SSLSocket.connect", side_effect=Util.mock_connect)
-@patch("ssl.SSLSocket.recv", side_effect=Util.mock_recv)
+@patch("ssl.SSLSocket._create", side_effect=Util.MockSSLSocket)
 class TestBlockUrlPolicy(TestCase):
-    def test_block_url_policy(self, mock_post, mock_request, request_get, mock_write, mock_connect, mock_recv):
+    def test_block_url_policy(
+        self,
+        mock_post: MagicMock,
+        mock_request: MagicMock,
+        mock_request_get: MagicMock,
+        mock_create: MagicMock,
+    ) -> None:
         action = Util.default_connector(BlockUrlPolicy())
         actual = action.run(
             {
@@ -27,5 +31,10 @@ class TestBlockUrlPolicy(TestCase):
                 Input.RULE_NAME: "Test_Rule",
             }
         )
+        validate(actual, action.output.schema)
         expected = {"success": True}
         self.assertEqual(actual, expected)
+        mock_post.assert_called()
+        mock_request.assert_called()
+        mock_request_get.assert_called()
+        mock_create.assert_called()

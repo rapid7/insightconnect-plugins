@@ -18,9 +18,9 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         address = params.get(Input.ADDRESS)
-        if validators.ipv4_cidr(address):
+        if validators.ipv4(address, cidr=True, strict=True):
             address = address.replace("/32", "")
-        if validators.ipv6_cidr(address):
+        if validators.ipv6(address, cidr=True, strict=True):
             address = address.replace("/128", "")
         address_type = self._determine_address_type(address)
         address_object_name = params.get(Input.ADDRESS_OBJECT)
@@ -89,15 +89,15 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
 
     @staticmethod
     def _determine_address_type(address: str) -> str:
-        if validators.ipv4(address):
+        if validators.ipv4(address, cidr=False):
             return "ipv4"
-        if validators.ipv6(address):
+        if validators.ipv6(address, cidr=False):
             return "ipv6"
         if validators.domain(address):
             return "fqdn"
-        if validators.ipv4_cidr(address):
+        if validators.ipv4(address, cidr=True, strict=True):
             return "ipv4_cidr"
-        if validators.ipv6_cidr(address):
+        if validators.ipv6(address, cidr=True, strict=True):
             return "ipv6_cidr"
         raise PluginException(
             cause="Unknown address type provided.",

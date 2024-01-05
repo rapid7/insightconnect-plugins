@@ -3,7 +3,9 @@ import re
 import socket
 import ssl
 import struct
-from OpenSSL import crypto
+
+from cryptography.hazmat.primitives.serialization import pkcs12, Encoding, PrivateFormat, NoEncryption
+
 from ..util.message_details import MessageDetails
 from ..util.message_details import MessageType
 from ..util.utils import first
@@ -114,14 +116,13 @@ class CiscoFirePowerHostInput:
     def __generate_certificate(self):
         self.logger.debug("Connect: Generating pem certificate.")
         self.__p12 = base64.b64decode(self.__p12)
-        self.__p12 = crypto.load_pkcs12(self.__p12, self.__p12_pwd)
-        file_type = crypto.FILETYPE_PEM
-        cert = crypto.dump_certificate(file_type, self.__p12.get_certificate())
-        key = crypto.dump_privatekey(file_type, self.__p12.get_privatekey())
+        loaded_pkcs12 = pkcs12.load_pkcs12(self.__p12, self.__p12_pwd.encode("utf-8"))
+        cert = loaded_pkcs12.cert.certificate.public_bytes(Encoding.PEM)
+        key = loaded_pkcs12.key.private_bytes(Encoding.PEM, PrivateFormat.PKCS8, NoEncryption())
 
-        with open(self.__cert_file, "wb") as f:
+        with open(self.__cert_file, "wb") as file_:
             for certificate in (cert, key):
-                f.write(certificate)
+                file_.write(certificate)
 
     @staticmethod
     def __parse_response(response):

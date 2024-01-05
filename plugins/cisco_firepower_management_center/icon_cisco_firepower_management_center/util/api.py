@@ -49,14 +49,12 @@ class CiscoFirePowerApi:
         for item in self.get_network_addresses():
             if item.get("name") == address_object or item.get("value") == address_object:
                 return item
-
         return {}
 
     def get_network_address(self, network_address_name: str) -> dict:
         for item in self.get_network_addresses():
             if item.get("name") == network_address_name or item.get("objectId") == network_address_name:
                 return item
-
         return {}
 
     def get_address_groups(self) -> list:
@@ -66,7 +64,6 @@ class CiscoFirePowerApi:
         for item in self.get_address_groups():
             if item.get("name") == group_name:
                 return item
-
         return {}
 
     def get_server_version(self) -> list:
@@ -123,15 +120,15 @@ class CiscoFirePowerApi:
                 return response.json()
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except json.decoder.JSONDecodeError as e:
-            self.logger.info(f"Invalid JSON: {e}")
+        except json.decoder.JSONDecodeError as error:
+            self.logger.info(f"Invalid JSON: {error}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
-        except requests.exceptions.HTTPError as e:
-            self.logger.info(f"Call to Cisco FirePower API failed: {e}")
+        except requests.exceptions.HTTPError as error:
+            self.logger.info(f"Call to Cisco FirePower API failed: {error}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
 
     def _generate_token(self) -> str:
-        response = requests.post(
+        response = requests.post(  # nosec B113
             f"{self.url}fmc_platform/v1/auth/generatetoken",
             headers={"Content-Type": "application/json"},
             auth=(self.username, self.password),
