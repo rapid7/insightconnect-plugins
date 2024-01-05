@@ -1,27 +1,18 @@
 # Description
 
-Automox is modernizing IT operations through cloud-native efficiency and upending the old ways of legacy on-premise 
-tools. Keeping you continuously connected to all your endpoints, regardless of location, environment, and operating
-system type. Now you can manage and apply operating system and third-party patches, enforce security configurations, 
-deploy software, and execute any action across Windows, macOS, and Linux systems. 
-
-Utilizing this plugin allows for the orchestration of IT operations such as device management, triggering remote 
-outcomes on endpoints, and basic Automox platform administration. 
+Automox is modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment
 
 # Key Features
-
-* Retrieve and manage Automox managed devices
-* Manage Automox groups
-* Initiate Vulnerability Sync uploads and remediation of issues
-* Trigger workflows based on Automox platform events
+  
+* Device Management  
+* Patch Management
 
 # Requirements
 
-* Automox API Key
 
 # Supported Product Versions
   
-* All as of 12/07/2023
+* All as of 12/29/2023
 
 # Documentation
 
@@ -48,7 +39,7 @@ Example input:
 
 #### Create Group
   
-Create an Automox group
+This action is used to create an Automox group
 
 ##### Input
 
@@ -80,7 +71,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|group|group|True|Detailed information about the created group|None|
+|group|group|True|Detailed information about the created group|{"id":1234,"organization_id":1234,"name":"Default","refresh_interval":1440,"parent_server_group_id":0,"ui_color":"#059F1D","server_count":5,"wsus_config":{"id":1234,"server_group_id":1234,"created_at":"2022-09-13T14:26:19+0000","updated_at":"2022-09-13T14:26:19+0000"},"policies":[1234,1235]}|
 |success|boolean|True|Was operation successful|True|
   
 Example output:
@@ -88,18 +79,23 @@ Example output:
 ```
 {
   "group": {
-    "Color": {},
-    "Device Count": {},
-    "Enable OS Auto Update": "true",
-    "Group ID": 0,
-    "Group Name": "",
-    "Notes": {},
-    "Organization ID": {},
-    "Parent Server Group ID": {},
-    "Policies": [
-      {}
+    "id": 1234,
+    "name": "Default",
+    "organization_id": 1234,
+    "parent_server_group_id": 0,
+    "policies": [
+      1234,
+      1235
     ],
-    "Refresh Interval": {}
+    "refresh_interval": 1440,
+    "server_count": 5,
+    "ui_color": "#059F1D",
+    "wsus_config": {
+      "created_at": "2022-09-13T14:26:19+0000",
+      "id": 1234,
+      "server_group_id": 1234,
+      "updated_at": "2022-09-13T14:26:19+0000"
+    }
   },
   "success": true
 }
@@ -107,7 +103,7 @@ Example output:
 
 #### Delete Device
   
-Delete an Automox device
+This action is used to delete an Automox device
 
 ##### Input
 
@@ -141,7 +137,7 @@ Example output:
 
 #### Delete Group
   
-Delete an Automox group
+This action is used to delete an Automox group
 
 ##### Input
 
@@ -175,7 +171,7 @@ Example output:
 
 #### Delete Vulnerability Sync Action Set
   
-Delete a vulnerability sync action set and all associated data
+This action is used to delete a vulnerability sync action set and all associated data
 
 ##### Input
 
@@ -209,14 +205,14 @@ Example output:
 
 #### Execute Vulnerability Sync Actions
   
-Launch remediation for patch and worklet remediations
+This action is used to launch remediation for patch and worklet remediations
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |action_set_id|integer|None|True|Identifier of the action set|None|1234|
-|actions|[]action_set_action|None|True|List of remediations to execute|None|[{"action": "patch-now", "solution_id": 1234, "device_ids": [1234, 5678]}, {"action": "patch-with-worklet", "solution_id": 1234, "worklet_id": 1234, "device_ids": [1234, 5678]}]|
+|actions|[]action_set_action|None|True|List of remediations to execute|None|[{"action":"patch-now","solution_id":1234,"device_ids":[1234,5678]},{"action":"patch-with-worklet","solution_id":1234,"worklet_id":1234,"device_ids":[1234,5678]}]|
 |org_id|integer|None|True|Identifier of organization|None|1234|
   
 Example input:
@@ -224,14 +220,25 @@ Example input:
 ```
 {
   "action_set_id": 1234,
-  "actions": {
-    "action": "patch-now",
-    "device_ids": [
-      1234,
-      5678
-    ],
-    "solution_id": 1234
-  },
+  "actions": [
+    {
+      "action": "patch-now",
+      "device_ids": [
+        1234,
+        5678
+      ],
+      "solution_id": 1234
+    },
+    {
+      "action": "patch-with-worklet",
+      "device_ids": [
+        1234,
+        5678
+      ],
+      "solution_id": 1234,
+      "worklet_id": 1234
+    }
+  ],
   "org_id": 1234
 }
 ```
@@ -252,7 +259,7 @@ Example output:
 
 #### Get Device by Hostname
   
-Find an Automox device by hostname
+This action is used to find an Automox device by hostname
 
 ##### Input
 
@@ -274,68 +281,118 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|device|device|False|The matched Automox device|None|
+|device|device|False|The matched Automox device|{"id":1234,"agent_version":"1.42.13","compliant":true,"create_time":"2023-04-13T19:45:45+0000","detail":{"RAM":"8589934592","CPU":"Intel(R) Core(TM) i7-8700B CPU @ 3.20GHz","MDM_SERVER":"none","VERSION":"MacBookPro16,1","NICS":[{"CONNECTED":true,"VENDOR":"Apple","DEVICE":"en0","TYPE":"enet","MAC":"00:00:00:00:00:00","IPS":["192.168.1.1"]}],"VOLUME":[{"FSTYPE":"APFS","LABEL":"macOS","AVAIL":"62704803840","FREE":"21316517888","IS_SYSTEM_DISK":"true","VOLUME":"/dev/disk1s5s1"},{"VOLUME":"/dev/disk1s3","FSTYPE":"APFS","LABEL":"Recovery","AVAIL":"62704803840","FREE":"21316517888","IS_SYSTEM_DISK":"false"}],"VENDOR":"Apple","MDM_PROFILE_INSTALLED":"false","LAST_USER_LOGON":{"SRC":"console","USER":"root","TIME":"2023-04-14 16:05"},"UPDATE_SOURCE_CHECK":{"CONNECTED":"true","ERROR":"Succeded"},"SERIAL":"C00000000001","DISKS":[{"TYPE":"VMware Virtual NVMe Disk","SIZE":"62914560000"}],"IPS":["192.168.1.1"],"MODEL":"MacBook Pro","AUTO_UPDATE_OPTIONS":{"OPTIONS":"Automatic Check for Updates, Install system data updates, Install system security updates","ENABLED":"0"}},"display_name":"apple","ip_addrs":["0.0.0.0"],"ip_addrs_private":["192.168.1.1"],"is_compatible":true,"last_disconnect_time":"2023-04-14T23:07:04+0000","last_logged_in_user":"root","last_process_time":"2023-04-14T22:40:56+0000","last_refresh_time":"2023-04-14T23:06:27+0000","last_update_time":"2023-04-14T22:51:10+0000","name":"apple","needs_attention":true,"organization_id":1234,"os_family":"Mac","os_name":"OS X","os_version":"12.6.6","os_version_id":1234,"refresh_interval":1440,"serial_number":"C00000000001","server_group_id":1234,"status":{"device_status":"not-ready","agent_status":"disconnected","policy_status":"unmanaged"},"timezone":"UTC-0700","total_count":5,"uptime":"88632","uuid":"00000000-0000-0000-0000-000000000000"}|
   
 Example output:
 
 ```
 {
   "device": {
-    "Agent Version": {},
-    "Compliant": {},
-    "Connected": {},
-    "Create Time": {},
-    "Custom Name": {},
-    "Deleted": {},
-    "Detail": {},
-    "Device ID": 0,
-    "Device Name": "",
-    "Display Name": {},
-    "IP Addresses": {},
-    "Is Compatible": {},
-    "Is Delayed By User": {},
-    "Is Delayed by Notification": {},
-    "Last Disconnect Time": {},
-    "Last Logged In User": {},
-    "Last Refresh Time": {},
-    "Last Scan Failed": {},
-    "Last Update Time": {},
-    "Needs Attention": {},
-    "Needs Reboot": "true",
-    "Next Patch Time": {},
-    "Operating System": {},
-    "Operating System Family": {},
-    "Operating System Version": {},
-    "Organization ID": {},
-    "Patches": {},
-    "Pending": {},
-    "Pending Patches": {},
-    "Private IP Addresses": {},
-    "Reboot Is Delayed By Notification": {},
-    "Reboot Is Delayed By User": {},
-    "Serial Number": {},
-    "Server Group ID": {},
-    "Status": {
-      "Agent Status": {},
-      "Device Status": {},
-      "Policy Status": {},
-      "Policy Statuses": [
+    "agent_version": "1.42.13",
+    "compliant": true,
+    "create_time": "2023-04-13T19:45:45+0000",
+    "detail": {
+      "AUTO_UPDATE_OPTIONS": {
+        "ENABLED": "0",
+        "OPTIONS": "Automatic Check for Updates, Install system data updates, Install system security updates"
+      },
+      "CPU": "Intel(R) Core(TM) i7-8700B CPU @ 3.20GHz",
+      "DISKS": [
         {
-          "Compliant": {},
-          "Policy ID": {}
+          "SIZE": "62914560000",
+          "TYPE": "VMware Virtual NVMe Disk"
+        }
+      ],
+      "IPS": [
+        "192.168.1.1"
+      ],
+      "LAST_USER_LOGON": {
+        "SRC": "console",
+        "TIME": "2023-04-14 16:05",
+        "USER": "root"
+      },
+      "MDM_PROFILE_INSTALLED": "false",
+      "MDM_SERVER": "none",
+      "MODEL": "MacBook Pro",
+      "NICS": [
+        {
+          "CONNECTED": true,
+          "DEVICE": "en0",
+          "IPS": [
+            "192.168.1.1"
+          ],
+          "MAC": "00:00:00:00:00:00",
+          "TYPE": "enet",
+          "VENDOR": "Apple"
+        }
+      ],
+      "RAM": "8589934592",
+      "SERIAL": "C00000000001",
+      "UPDATE_SOURCE_CHECK": {
+        "CONNECTED": "true",
+        "ERROR": "Succeded"
+      },
+      "VENDOR": "Apple",
+      "VERSION": "MacBookPro16,1",
+      "VOLUME": [
+        {
+          "AVAIL": "62704803840",
+          "FREE": "21316517888",
+          "FSTYPE": "APFS",
+          "IS_SYSTEM_DISK": "true",
+          "LABEL": "macOS",
+          "VOLUME": "/dev/disk1s5s1"
+        },
+        {
+          "AVAIL": "62704803840",
+          "FREE": "21316517888",
+          "FSTYPE": "APFS",
+          "IS_SYSTEM_DISK": "false",
+          "LABEL": "Recovery",
+          "VOLUME": "/dev/disk1s3"
         }
       ]
     },
-    "Tags": [
-      {}
-    ]
+    "display_name": "apple",
+    "id": 1234,
+    "ip_addrs": [
+      "0.0.0.0"
+    ],
+    "ip_addrs_private": [
+      "192.168.1.1"
+    ],
+    "is_compatible": true,
+    "last_disconnect_time": "2023-04-14T23:07:04+0000",
+    "last_logged_in_user": "root",
+    "last_process_time": "2023-04-14T22:40:56+0000",
+    "last_refresh_time": "2023-04-14T23:06:27+0000",
+    "last_update_time": "2023-04-14T22:51:10+0000",
+    "name": "apple",
+    "needs_attention": true,
+    "organization_id": 1234,
+    "os_family": "Mac",
+    "os_name": "OS X",
+    "os_version": "12.6.6",
+    "os_version_id": 1234,
+    "refresh_interval": 1440,
+    "serial_number": "C00000000001",
+    "server_group_id": 1234,
+    "status": {
+      "agent_status": "disconnected",
+      "device_status": "not-ready",
+      "policy_status": "unmanaged"
+    },
+    "timezone": "UTC-0700",
+    "total_count": 5,
+    "uptime": "88632",
+    "uuid": "00000000-0000-0000-0000-000000000000"
   }
 }
 ```
 
 #### Get Device by IP Address
   
-Find an Automox device by IP address
+This action is used to find an Automox device by IP address
 
 ##### Input
 
@@ -357,68 +414,118 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|device|device|False|The matched Automox device|None|
+|device|device|False|The matched Automox device|{"id":1234,"agent_version":"1.42.13","compliant":true,"create_time":"2023-04-13T19:45:45+0000","detail":{"RAM":"8589934592","CPU":"Intel(R) Core(TM) i7-8700B CPU @ 3.20GHz","MDM_SERVER":"none","VERSION":"MacBookPro16,1","NICS":[{"CONNECTED":true,"VENDOR":"Apple","DEVICE":"en0","TYPE":"enet","MAC":"00:00:00:00:00:00","IPS":["192.168.1.1"]}],"VOLUME":[{"FSTYPE":"APFS","LABEL":"macOS","AVAIL":"62704803840","FREE":"21316517888","IS_SYSTEM_DISK":"true","VOLUME":"/dev/disk1s5s1"},{"VOLUME":"/dev/disk1s3","FSTYPE":"APFS","LABEL":"Recovery","AVAIL":"62704803840","FREE":"21316517888","IS_SYSTEM_DISK":"false"}],"VENDOR":"Apple","MDM_PROFILE_INSTALLED":"false","LAST_USER_LOGON":{"SRC":"console","USER":"root","TIME":"2023-04-14 16:05"},"UPDATE_SOURCE_CHECK":{"CONNECTED":"true","ERROR":"Succeded"},"SERIAL":"C00000000001","DISKS":[{"TYPE":"VMware Virtual NVMe Disk","SIZE":"62914560000"}],"IPS":["192.168.1.1"],"MODEL":"MacBook Pro","AUTO_UPDATE_OPTIONS":{"OPTIONS":"Automatic Check for Updates, Install system data updates, Install system security updates","ENABLED":"0"}},"display_name":"apple","ip_addrs":["0.0.0.0"],"ip_addrs_private":["192.168.1.1"],"is_compatible":true,"last_disconnect_time":"2023-04-14T23:07:04+0000","last_logged_in_user":"root","last_process_time":"2023-04-14T22:40:56+0000","last_refresh_time":"2023-04-14T23:06:27+0000","last_update_time":"2023-04-14T22:51:10+0000","name":"apple","needs_attention":true,"organization_id":1234,"os_family":"Mac","os_name":"OS X","os_version":"12.6.6","os_version_id":1234,"refresh_interval":1440,"serial_number":"C00000000001","server_group_id":1234,"status":{"device_status":"not-ready","agent_status":"disconnected","policy_status":"unmanaged"},"timezone":"UTC-0700","total_count":5,"uptime":"88632","uuid":"00000000-0000-0000-0000-000000000000"}|
   
 Example output:
 
 ```
 {
   "device": {
-    "Agent Version": {},
-    "Compliant": {},
-    "Connected": {},
-    "Create Time": {},
-    "Custom Name": {},
-    "Deleted": {},
-    "Detail": {},
-    "Device ID": 0,
-    "Device Name": "",
-    "Display Name": {},
-    "IP Addresses": {},
-    "Is Compatible": {},
-    "Is Delayed By User": {},
-    "Is Delayed by Notification": {},
-    "Last Disconnect Time": {},
-    "Last Logged In User": {},
-    "Last Refresh Time": {},
-    "Last Scan Failed": {},
-    "Last Update Time": {},
-    "Needs Attention": {},
-    "Needs Reboot": "true",
-    "Next Patch Time": {},
-    "Operating System": {},
-    "Operating System Family": {},
-    "Operating System Version": {},
-    "Organization ID": {},
-    "Patches": {},
-    "Pending": {},
-    "Pending Patches": {},
-    "Private IP Addresses": {},
-    "Reboot Is Delayed By Notification": {},
-    "Reboot Is Delayed By User": {},
-    "Serial Number": {},
-    "Server Group ID": {},
-    "Status": {
-      "Agent Status": {},
-      "Device Status": {},
-      "Policy Status": {},
-      "Policy Statuses": [
+    "agent_version": "1.42.13",
+    "compliant": true,
+    "create_time": "2023-04-13T19:45:45+0000",
+    "detail": {
+      "AUTO_UPDATE_OPTIONS": {
+        "ENABLED": "0",
+        "OPTIONS": "Automatic Check for Updates, Install system data updates, Install system security updates"
+      },
+      "CPU": "Intel(R) Core(TM) i7-8700B CPU @ 3.20GHz",
+      "DISKS": [
         {
-          "Compliant": {},
-          "Policy ID": {}
+          "SIZE": "62914560000",
+          "TYPE": "VMware Virtual NVMe Disk"
+        }
+      ],
+      "IPS": [
+        "192.168.1.1"
+      ],
+      "LAST_USER_LOGON": {
+        "SRC": "console",
+        "TIME": "2023-04-14 16:05",
+        "USER": "root"
+      },
+      "MDM_PROFILE_INSTALLED": "false",
+      "MDM_SERVER": "none",
+      "MODEL": "MacBook Pro",
+      "NICS": [
+        {
+          "CONNECTED": true,
+          "DEVICE": "en0",
+          "IPS": [
+            "192.168.1.1"
+          ],
+          "MAC": "00:00:00:00:00:00",
+          "TYPE": "enet",
+          "VENDOR": "Apple"
+        }
+      ],
+      "RAM": "8589934592",
+      "SERIAL": "C00000000001",
+      "UPDATE_SOURCE_CHECK": {
+        "CONNECTED": "true",
+        "ERROR": "Succeded"
+      },
+      "VENDOR": "Apple",
+      "VERSION": "MacBookPro16,1",
+      "VOLUME": [
+        {
+          "AVAIL": "62704803840",
+          "FREE": "21316517888",
+          "FSTYPE": "APFS",
+          "IS_SYSTEM_DISK": "true",
+          "LABEL": "macOS",
+          "VOLUME": "/dev/disk1s5s1"
+        },
+        {
+          "AVAIL": "62704803840",
+          "FREE": "21316517888",
+          "FSTYPE": "APFS",
+          "IS_SYSTEM_DISK": "false",
+          "LABEL": "Recovery",
+          "VOLUME": "/dev/disk1s3"
         }
       ]
     },
-    "Tags": [
-      {}
-    ]
+    "display_name": "apple",
+    "id": 1234,
+    "ip_addrs": [
+      "0.0.0.0"
+    ],
+    "ip_addrs_private": [
+      "192.168.1.1"
+    ],
+    "is_compatible": true,
+    "last_disconnect_time": "2023-04-14T23:07:04+0000",
+    "last_logged_in_user": "root",
+    "last_process_time": "2023-04-14T22:40:56+0000",
+    "last_refresh_time": "2023-04-14T23:06:27+0000",
+    "last_update_time": "2023-04-14T22:51:10+0000",
+    "name": "apple",
+    "needs_attention": true,
+    "organization_id": 1234,
+    "os_family": "Mac",
+    "os_name": "OS X",
+    "os_version": "12.6.6",
+    "os_version_id": 1234,
+    "refresh_interval": 1440,
+    "serial_number": "C00000000001",
+    "server_group_id": 1234,
+    "status": {
+      "agent_status": "disconnected",
+      "device_status": "not-ready",
+      "policy_status": "unmanaged"
+    },
+    "timezone": "UTC-0700",
+    "total_count": 5,
+    "uptime": "88632",
+    "uuid": "00000000-0000-0000-0000-000000000000"
   }
 }
 ```
 
 #### Get Device Software
   
-Retrieve a list of software installed on a device
+This action is used to retrieve a list of software installed on a device
 
 ##### Input
 
@@ -440,7 +547,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|software|[]device_software|False|List of software on device|None|
+|software|[]device_software|False|List of software on device|[{"id":1234,"server_id":1234,"package_id":1234,"software_id":1234,"installed":true,"name":"com.apple.appleseed.FeedbackAssistant","display_name":"Feedback Assistant","version":"5.1","repo":"Apple-System","package_version_id":1234,"os_name":"OS X","os_version":"12.2","os_version_id":1234,"create_time":"2021-12-20T16:21:21+0000","organization_id":1234},{"id":1234,"server_id":1234,"package_id":1234,"software_id":1234,"installed":true,"name":"com.apple.calculator","display_name":"Calculator","version":"10.16","repo":"Apple-System","package_version_id":1234,"os_name":"OS X","os_version":"12.2","os_version_id":1234,"create_time":"2021-12-26T17:23:19+0000","organization_id":1234}]|
   
 Example output:
 
@@ -448,26 +555,38 @@ Example output:
 {
   "software": [
     {
-      "CVE Score": {},
-      "CVEs": [
-        {}
-      ],
-      "Creation Time": {},
-      "Deferred Until": "",
-      "Device ID": {},
-      "Ignored Status": {},
-      "Installed Status": "true",
-      "Is Uninstallable": {},
-      "Operating System Name": {},
-      "Operating System Version": {},
-      "Organization ID": {},
-      "Package ID": {},
-      "Requires Reboot": {},
-      "Severity": {},
-      "Software Display Name": {},
-      "Software ID": {},
-      "Software Name": {},
-      "Version": {}
+      "create_time": "2021-12-20T16:21:21+0000",
+      "display_name": "Feedback Assistant",
+      "id": 1234,
+      "installed": true,
+      "name": "com.apple.appleseed.FeedbackAssistant",
+      "organization_id": 1234,
+      "os_name": "OS X",
+      "os_version": "12.2",
+      "os_version_id": 1234,
+      "package_id": 1234,
+      "package_version_id": 1234,
+      "repo": "Apple-System",
+      "server_id": 1234,
+      "software_id": 1234,
+      "version": "5.1"
+    },
+    {
+      "create_time": "2021-12-26T17:23:19+0000",
+      "display_name": "Calculator",
+      "id": 1234,
+      "installed": true,
+      "name": "com.apple.calculator",
+      "organization_id": 1234,
+      "os_name": "OS X",
+      "os_version": "12.2",
+      "os_version_id": 1234,
+      "package_id": 1234,
+      "package_version_id": 1234,
+      "repo": "Apple-System",
+      "server_id": 1234,
+      "software_id": 1234,
+      "version": "10.16"
     }
   ]
 }
@@ -475,7 +594,7 @@ Example output:
 
 #### Get Vulnerability Sync Action Set
   
-Retrieve details for a specified vulnerability sync action set
+This action is used to retrieve details for a specified vulnerability sync action set
 
 ##### Input
 
@@ -497,49 +616,60 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|action_set|action_set|True|Details of a specified vulnerability sync action_set|None|
+|action_set|action_set|True|Details of a specified vulnerability sync action_set|{"created_at":"2023-10-04T02:55:55+0000","created_by_user":{"email":"user@example.com","firstname":"User","id":1234,"lastname":"Example"},"id":1234,"organization_id":1234,"source":{"name":"example.csv","type":"generic"},"statistics":{"issues":{"unknown-host":{"count":1}},"solutions":{"patch-now":{"count":0,"device_count":0,"vulnerability_count":0},"patch-with-worklet":{"count":0,"device_count":0,"vulnerability_count":0}}},"status":"ready","updated_at":"2023-10-04T02:56:00+0000","updated_by_user":{"email":"user@example.com","firstname":"User","id":1234,"lastname":"Example"}}|
   
 Example output:
 
 ```
 {
   "action_set": {
-    "Action Set ID": 0,
-    "Action Set Source": {
-      "Source Name": {},
-      "Source Type": {}
+    "created_at": "2023-10-04T02:55:55+0000",
+    "created_by_user": {
+      "email": "user@example.com",
+      "firstname": "User",
+      "id": 1234,
+      "lastname": "Example"
     },
-    "Action Set Statistics": {
-      "Issues": {
-        "Unknown Host Count": {}
+    "id": 1234,
+    "organization_id": 1234,
+    "source": {
+      "name": "example.csv",
+      "type": "generic"
+    },
+    "statistics": {
+      "issues": {
+        "unknown-host": {
+          "count": 1
+        }
+      },
+      "solutions": {
+        "patch-now": {
+          "count": 0,
+          "device_count": 0,
+          "vulnerability_count": 0
+        },
+        "patch-with-worklet": {
+          "count": 0,
+          "device_count": 0,
+          "vulnerability_count": 0
+        }
       }
     },
-    "Action Set Status": {},
-    "Configuration ID": "",
-    "Created At": {},
-    "Created By": {
-      "Email": {},
-      "First Name": {},
-      "Last Name": {},
-      "User ID": {}
-    },
-    "Organization ID": {},
-    "Solutions": {
-      "Patch Now": {
-        "Device Count": {},
-        "Solution Count": {},
-        "Vulnerability Count": {}
-      },
-      "Patch with Worklet": {}
-    },
-    "Uploaded At": {}
+    "status": "ready",
+    "updated_at": "2023-10-04T02:56:00+0000",
+    "updated_by_user": {
+      "email": "user@example.com",
+      "firstname": "User",
+      "id": 1234,
+      "lastname": "Example"
+    }
   }
 }
 ```
 
 #### List Devices
   
-Retrieve Automox managed devices
+This action is used to retrieve Automox managed devices
 
 ##### Input
 
@@ -561,7 +691,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|devices|[]device|False|List of Automox managed devices|None|
+|devices|[]device|False|List of Automox managed devices|[{"id":1234,"agent_version":"1.42.22","compliant":true,"create_time":"2023-11-14T00:32:23+0000","detail":{"CPU":"Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz","VENDOR":"Xen","MODEL":"HVM domU","VERSION":"4.11.amazon","RAM":"1014943744","LAST_USER_LOGON":{"TIME":"2023-11-14T20:23:00+00:00"},"SERIAL":"00000000-0000-0000-0000-000000009001","IPS":["10.1.1.1","1234::1234:1234:1234:1234"],"DISKS":[{"SIZE":"8589934592","TYPE":"unknown"}],"NICS":[{"IPS":["10.1.1.1","1234::1234:1234:1234:1234"],"CONNECTED":true,"VENDOR":"Unknown","DEVICE":"eth0","TYPE":"enet","MAC":"11:11:11:11:11:11"}],"VOLUME":[{"IS_SYSTEM_DISK":"true","VOLUME":"/dev/root","FSTYPE":"ext4","LABEL":"cloudimg-rootfs","AVAIL":"8141574144","FREE":"6285549568"},{"FSTYPE":"vfat","LABEL":"UEFI","AVAIL":"109422592","FREE":"103973888","IS_SYSTEM_DISK":"false","VOLUME":"/dev/xvda15"}],"FQDNS":["youubuntu.example.com"]},"display_name":"youbuntu","instance_id":"i-0b466e0e804798a23","ip_addrs":["0.0.0.0"],"ip_addrs_private":["10.1.1.1","1234::1234:1234:1234:1234"],"is_compatible":true,"last_disconnect_time":"2023-11-14T00:52:27+0000","last_refresh_time":"2023-11-14T00:33:12+0000","name":"youbuntu","organization_id":1234,"os_family":"Linux","os_name":"Ubuntu","os_version":"20.04.4","os_version_id":6220,"patches":201,"refresh_interval":1440,"serial_number":"00000000-0000-0000-0000-000000000000","server_group_id":1234,"status":{"device_status":"ready","agent_status":"connected","policy_status":"compliant"},"timezone":"UTC+0000","total_count":5,"uptime":"392","uuid":"00000000-0000-0000-0000-000000000000"}]|
   
 Example output:
 
@@ -569,54 +699,96 @@ Example output:
 {
   "devices": [
     {
-      "Agent Version": {},
-      "Compliant": {},
-      "Connected": {},
-      "Create Time": {},
-      "Custom Name": {},
-      "Deleted": {},
-      "Detail": {},
-      "Device ID": 0,
-      "Device Name": "",
-      "Display Name": {},
-      "IP Addresses": {},
-      "Is Compatible": {},
-      "Is Delayed By User": {},
-      "Is Delayed by Notification": {},
-      "Last Disconnect Time": {},
-      "Last Logged In User": {},
-      "Last Refresh Time": {},
-      "Last Scan Failed": {},
-      "Last Update Time": {},
-      "Needs Attention": {},
-      "Needs Reboot": "true",
-      "Next Patch Time": {},
-      "Operating System": {},
-      "Operating System Family": {},
-      "Operating System Version": {},
-      "Organization ID": {},
-      "Patches": {},
-      "Pending": {},
-      "Pending Patches": {},
-      "Private IP Addresses": {},
-      "Reboot Is Delayed By Notification": {},
-      "Reboot Is Delayed By User": {},
-      "Serial Number": {},
-      "Server Group ID": {},
-      "Status": {
-        "Agent Status": {},
-        "Device Status": {},
-        "Policy Status": {},
-        "Policy Statuses": [
+      "agent_version": "1.42.22",
+      "compliant": true,
+      "create_time": "2023-11-14T00:32:23+0000",
+      "detail": {
+        "CPU": "Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz",
+        "DISKS": [
           {
-            "Compliant": {},
-            "Policy ID": {}
+            "SIZE": "8589934592",
+            "TYPE": "unknown"
+          }
+        ],
+        "FQDNS": [
+          "youubuntu.example.com"
+        ],
+        "IPS": [
+          "10.1.1.1",
+          "1234::1234:1234:1234:1234"
+        ],
+        "LAST_USER_LOGON": {
+          "TIME": "2023-11-14T20:23:00+00:00"
+        },
+        "MODEL": "HVM domU",
+        "NICS": [
+          {
+            "CONNECTED": true,
+            "DEVICE": "eth0",
+            "IPS": [
+              "10.1.1.1",
+              "1234::1234:1234:1234:1234"
+            ],
+            "MAC": "11:11:11:11:11:11",
+            "TYPE": "enet",
+            "VENDOR": "Unknown"
+          }
+        ],
+        "RAM": "1014943744",
+        "SERIAL": "00000000-0000-0000-0000-000000009001",
+        "VENDOR": "Xen",
+        "VERSION": "4.11.amazon",
+        "VOLUME": [
+          {
+            "AVAIL": "8141574144",
+            "FREE": "6285549568",
+            "FSTYPE": "ext4",
+            "IS_SYSTEM_DISK": "true",
+            "LABEL": "cloudimg-rootfs",
+            "VOLUME": "/dev/root"
+          },
+          {
+            "AVAIL": "109422592",
+            "FREE": "103973888",
+            "FSTYPE": "vfat",
+            "IS_SYSTEM_DISK": "false",
+            "LABEL": "UEFI",
+            "VOLUME": "/dev/xvda15"
           }
         ]
       },
-      "Tags": [
-        {}
-      ]
+      "display_name": "youbuntu",
+      "id": 1234,
+      "instance_id": "i-0b466e0e804798a23",
+      "ip_addrs": [
+        "0.0.0.0"
+      ],
+      "ip_addrs_private": [
+        "10.1.1.1",
+        "1234::1234:1234:1234:1234"
+      ],
+      "is_compatible": true,
+      "last_disconnect_time": "2023-11-14T00:52:27+0000",
+      "last_refresh_time": "2023-11-14T00:33:12+0000",
+      "name": "youbuntu",
+      "organization_id": 1234,
+      "os_family": "Linux",
+      "os_name": "Ubuntu",
+      "os_version": "20.04.4",
+      "os_version_id": 6220,
+      "patches": 201,
+      "refresh_interval": 1440,
+      "serial_number": "00000000-0000-0000-0000-000000000000",
+      "server_group_id": 1234,
+      "status": {
+        "agent_status": "connected",
+        "device_status": "ready",
+        "policy_status": "compliant"
+      },
+      "timezone": "UTC+0000",
+      "total_count": 5,
+      "uptime": "392",
+      "uuid": "00000000-0000-0000-0000-000000000000"
     }
   ]
 }
@@ -624,7 +796,7 @@ Example output:
 
 #### List Groups
   
-List Automox groups
+This action is used to list Automox groups
 
 ##### Input
 
@@ -644,7 +816,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|groups|[]group|False|List of Automox groups|None|
+|groups|[]group|False|List of Automox groups|[{"id":1234,"organization_id":1234,"name":"Default","refresh_interval":1440,"parent_server_group_id":0,"ui_color":"#059F1D","server_count":5,"wsus_config":{"id":1234,"server_group_id":1234,"created_at":"2022-09-13T14:26:19+0000","updated_at":"2022-09-13T14:26:19+0000"},"policies":[1234,1235]},{"id":1235,"organization_id":1234,"name":"A Server Group","refresh_interval":1440,"parent_server_group_id":1234,"ui_color":"#059F1D","wsus_config":{"id":1234,"server_group_id":1234,"created_at":"2022-09-13T14:26:32+0000","updated_at":"2022-09-13T14:26:32+0000"},"policies":[1234,1235]}]|
   
 Example output:
 
@@ -652,18 +824,41 @@ Example output:
 {
   "groups": [
     {
-      "Color": {},
-      "Device Count": {},
-      "Enable OS Auto Update": "true",
-      "Group ID": 0,
-      "Group Name": "",
-      "Notes": {},
-      "Organization ID": {},
-      "Parent Server Group ID": {},
-      "Policies": [
-        {}
+      "id": 1234,
+      "name": "Default",
+      "organization_id": 1234,
+      "parent_server_group_id": 0,
+      "policies": [
+        1234,
+        1235
       ],
-      "Refresh Interval": {}
+      "refresh_interval": 1440,
+      "server_count": 5,
+      "ui_color": "#059F1D",
+      "wsus_config": {
+        "created_at": "2022-09-13T14:26:19+0000",
+        "id": 1234,
+        "server_group_id": 1234,
+        "updated_at": "2022-09-13T14:26:19+0000"
+      }
+    },
+    {
+      "id": 1235,
+      "name": "A Server Group",
+      "organization_id": 1234,
+      "parent_server_group_id": 1234,
+      "policies": [
+        1234,
+        1235
+      ],
+      "refresh_interval": 1440,
+      "ui_color": "#059F1D",
+      "wsus_config": {
+        "created_at": "2022-09-13T14:26:32+0000",
+        "id": 1234,
+        "server_group_id": 1234,
+        "updated_at": "2022-09-13T14:26:32+0000"
+      }
     }
   ]
 }
@@ -671,7 +866,7 @@ Example output:
 
 #### List Organization Users
   
-Retrieve users of the Automox organization
+This action is used to retrieve users of the Automox organization
 
 ##### Input
 
@@ -691,7 +886,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|users|[]user|False|List of Automox users|None|
+|users|[]user|False|List of Automox users|[{"id":1234,"uuid":"00000000-0000-0000-0000-000000000000","firstname":"User","lastname":"Example","email":"user@example.com","prefs":[{"user_id":1234,"pref_name":"notify.system.add","value":"false"},{"user_id":1234,"pref_name":"notify.weeklydigest","value":"true"},{"user_id":1234,"pref_name":"user.tfa","value":"email"}],"orgs":[{"id":1234,"zone_id":"00000000-0000-0000-0000-000000000000","name":"Global Zone","trial_end_time":"2024-02-03T00:00:00+00:00","create_time":"2021-10-20T04:03:25+0000","plan":"manage","access_key":"00000000-0000-0000-0000-000000000000"},{"id":1235,"zone_id":"00000000-0000-0000-0000-000000000000","name":"Local Zone","trial_end_time":"2021-11-03T00:00:00+00:00","trial_expired":true,"create_time":"2021-10-26T08:14:25+0000","plan":"manage","parent_id":1234,"access_key":"00000000-0000-0000-0000-000000000000"}]}]|
   
 Example output:
 
@@ -699,28 +894,50 @@ Example output:
 {
   "users": [
     {
-      "Email": {},
-      "Features": {},
-      "First Name": "",
-      "Last Name": {},
-      "Organizations": [
+      "email": "user@example.com",
+      "firstname": "User",
+      "id": 1234,
+      "lastname": "Example",
+      "orgs": [
         {
-          "Name": {},
-          "Organization ID": {}
+          "access_key": "00000000-0000-0000-0000-000000000000",
+          "create_time": "2021-10-20T04:03:25+0000",
+          "id": 1234,
+          "name": "Global Zone",
+          "plan": "manage",
+          "trial_end_time": "2024-02-03T00:00:00+00:00",
+          "zone_id": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "access_key": "00000000-0000-0000-0000-000000000000",
+          "create_time": "2021-10-26T08:14:25+0000",
+          "id": 1235,
+          "name": "Local Zone",
+          "parent_id": 1234,
+          "plan": "manage",
+          "trial_end_time": "2021-11-03T00:00:00+00:00",
+          "trial_expired": true,
+          "zone_id": "00000000-0000-0000-0000-000000000000"
         }
       ],
-      "Roles": [
+      "prefs": [
         {
-          "Name": {},
-          "Organization ID": {},
-          "Role ID": {}
+          "pref_name": "notify.system.add",
+          "user_id": 1234,
+          "value": "false"
+        },
+        {
+          "pref_name": "notify.weeklydigest",
+          "user_id": 1234,
+          "value": "true"
+        },
+        {
+          "pref_name": "user.tfa",
+          "user_id": 1234,
+          "value": "email"
         }
       ],
-      "SAML Enabled": "true",
-      "Tags": [
-        {}
-      ],
-      "User ID": 0
+      "uuid": "00000000-0000-0000-0000-000000000000"
     }
   ]
 }
@@ -728,7 +945,7 @@ Example output:
 
 #### List Organizations
   
-Retrieve Automox organizations
+This action is used to retrieve Automox organizations
 
 ##### Input
   
@@ -738,7 +955,7 @@ Retrieve Automox organizations
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|organizations|[]organization|True|List of Automox organizations|None|
+|organizations|[]organization|True|List of Automox organizations|[{"id":1234,"name":"GlobalZone","create_time":"2021-10-20T04:03:25+0000","access_key":"00000000-0000-0000-0000-000000000000","trial_end_time":"2024-02-03T00:00:00+0000","sub_plan":"FULL","rate_id":1,"billing_name":"Test","billing_email":"user@example.com","uuid":"00000000-0000-0000-0000-0000000000000","device_count":2},{"id":1235,"name":"AnotherOne","create_time":"2021-10-26T08:14:25+0000","access_key":"00000000-0000-0000-0000-000000000000","trial_end_time":"2021-11-03T00:00:00+0000","trial_expired":true,"sub_plan":"FULL","rate_id":1,"parent_id":1234,"uuid":"00000000-0000-0000-0000-000000000000"}]|
   
 Example output:
 
@@ -746,13 +963,29 @@ Example output:
 {
   "organizations": [
     {
-      "Creation Time": {},
-      "Device Count": {},
-      "Device Limit": {},
-      "Organization ID": 0,
-      "Organization Name": "",
-      "Parent Organization ID": {},
-      "Server Limit": {}
+      "access_key": "00000000-0000-0000-0000-000000000000",
+      "billing_email": "user@example.com",
+      "billing_name": "Test",
+      "create_time": "2021-10-20T04:03:25+0000",
+      "device_count": 2,
+      "id": 1234,
+      "name": "GlobalZone",
+      "rate_id": 1,
+      "sub_plan": "FULL",
+      "trial_end_time": "2024-02-03T00:00:00+0000",
+      "uuid": "00000000-0000-0000-0000-0000000000000"
+    },
+    {
+      "access_key": "00000000-0000-0000-0000-000000000000",
+      "create_time": "2021-10-26T08:14:25+0000",
+      "id": 1235,
+      "name": "AnotherOne",
+      "parent_id": 1234,
+      "rate_id": 1,
+      "sub_plan": "FULL",
+      "trial_end_time": "2021-11-03T00:00:00+0000",
+      "trial_expired": true,
+      "uuid": "00000000-0000-0000-0000-000000000000"
     }
   ]
 }
@@ -760,7 +993,7 @@ Example output:
 
 #### List Policies
   
-Retrieve Automox policies
+This action is used to retrieve Automox policies
 
 ##### Input
 
@@ -780,7 +1013,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|policies|[]policy|False|List of Automox policies|None|
+|policies|[]policy|False|List of Automox policies|[{"id":1234,"uuid":"00000000-0000-0000-0000-000000000000","name":"Test notification","policy_type_name":"custom","organization_id":103871,"configuration":{"os_family":"Windows","notify_reboot_user":true,"notify_deferred_reboot_user":true,"pending_reboot_deferral_enabled":true,"custom_pending_reboot_notification_message":"Updates require restart: Please save your work.","notify_deferred_reboot_user_message_timeout":15,"custom_pending_reboot_notification_max_delays":3,"custom_pending_reboot_notification_message_mac":"Updates require restart: Please save your work.","custom_pending_reboot_notification_deferment_periods":[1,4,8]},"schedule_time":"00:00","create_time":"2023-10-25T21:56:48+0000","server_groups":[1234],"server_count":5,"status":"inactive"}]|
   
 Example output:
 
@@ -788,14 +1021,33 @@ Example output:
 {
   "policies": [
     {
-      "Device Group IDs": [
-        {}
+      "configuration": {
+        "custom_pending_reboot_notification_deferment_periods": [
+          1,
+          4,
+          8
+        ],
+        "custom_pending_reboot_notification_max_delays": 3,
+        "custom_pending_reboot_notification_message": "Updates require restart: Please save your work.",
+        "custom_pending_reboot_notification_message_mac": "Updates require restart: Please save your work.",
+        "notify_deferred_reboot_user": true,
+        "notify_deferred_reboot_user_message_timeout": 15,
+        "notify_reboot_user": true,
+        "os_family": "Windows",
+        "pending_reboot_deferral_enabled": true
+      },
+      "create_time": "2023-10-25T21:56:48+0000",
+      "id": 1234,
+      "name": "Test notification",
+      "organization_id": 103871,
+      "policy_type_name": "custom",
+      "schedule_time": "00:00",
+      "server_count": 5,
+      "server_groups": [
+        1234
       ],
-      "Organization ID": {},
-      "Policy Configuration": {},
-      "Policy ID": 0,
-      "Policy Name": "",
-      "Policy Type Name": {}
+      "status": "inactive",
+      "uuid": "00000000-0000-0000-0000-000000000000"
     }
   ]
 }
@@ -803,14 +1055,14 @@ Example output:
 
 #### List Vulnerability Sync Action Set Issues
   
-Retrieve the issues identified for a specified vulnerability sync action set
+This action is used to retrieve the issues identified for a specified vulnerability sync action set
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |action_set_id|integer|None|True|Identifier of the action set|None|1234|
-|issue_type_in|[]string|None|False|Filter by issue type|None|["unknown-host"]|
+|issue_type_in|[]string|None|False|Filter by issue type|None|['unknown-host']|
 |org_id|integer|None|True|Identifier of organization|None|1234|
   
 Example input:
@@ -827,7 +1079,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|issues|[]action_set_issue|True|Issues associated with the specified vulnerability sync action_set|None|
+|issues|[]action_set_issue|True|Issues associated with the specified vulnerability sync action_set|[{"id":1234,"issue_details":{"hostname":"WINDOWS-1234"},"issue_type":"unknown-host"},{"id":1234,"issue_details":{"hostname":"example-test-1234"},"issue_type":"unknown-host"}]|
   
 Example output:
 
@@ -835,9 +1087,18 @@ Example output:
 {
   "issues": [
     {
-      "Issue Details": {},
-      "Issue ID": 0,
-      "Issue Type": ""
+      "id": 1234,
+      "issue_details": {
+        "hostname": "WINDOWS-1234"
+      },
+      "issue_type": "unknown-host"
+    },
+    {
+      "id": 1234,
+      "issue_details": {
+        "hostname": "example-test-1234"
+      },
+      "issue_type": "unknown-host"
     }
   ]
 }
@@ -845,7 +1106,7 @@ Example output:
 
 #### List Vulnerability Sync Action Set Solutions
   
-Retrieve a list of vulnerability sync remediations
+This action is used to retrieve a list of vulnerability sync remediations
 
 ##### Input
 
@@ -853,10 +1114,10 @@ Retrieve a list of vulnerability sync remediations
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |action_set_id|integer|None|True|Filter by action set identifier|None|1234|
 |org_id|integer|None|True|Identifier of organization|None|1234|
-|remediation_type_in|[]string|None|False|Filter by remediation type|None|["patch-now", "patch-with-worklet"]|
-|severity_in|[]string|None|False|Filter by severity|None|["critical", "high", "medium", "low", "unknown"]|
-|vulnerability_in|[]string|None|False|Filter by vulnerability|None|["CVE-2020-1234", "CVE-2020-5678"]|
-
+|remediation_type_in|[]string|None|False|Filter by remediation type|None|['patch-now', 'patch-with-worklet']|
+|severity_in|[]string|None|False|Filter by severity|None|['critical', 'high', 'medium', 'low', 'unknown']|
+|vulnerability_in|[]string|None|False|Filter by vulnerability|None|['CVE-2020-1234', 'CVE-2020-5678']|
+  
 Example input:
 
 ```
@@ -873,7 +1134,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|solutions|[]solution|False|List of vulnerability sync Solutions|None|
+|solutions|[]solution|False|List of vulnerability sync Solutions|[{"device_ids":[1,2,3],"devices":[{"custom_name":"example1","id":1,"ip_addrs_private":["10.0.0.1","ffff::ffff:ffff:ffff:ffff"],"name":"example1","status":"pending"},{"custom_name":"example2","id":2,"ip_addrs_private":["10.0.0.2","ffff::ffff:ffff:ffff:ffff"],"name":"example2","status":"pending"},{"custom_name":"example3","id":3,"ip_addrs_private":["10.0.0.3","ffff::ffff:ffff:ffff:ffff"],"name":"example3","status":"pending"}],"id":1234,"organization_id":1234,"remediation_type":"patch-with-worklet","solution_type":"unmatched","vulnerabilities":[{"id":"CVE-2021-24111","severity":"high","title":".NET Framework Denial of Service Vulnerability"}]}]|
   
 Example output:
 
@@ -881,32 +1142,54 @@ Example output:
 {
   "solutions": [
     {
-      "Device IDs": 1234,
-      "Devices": {
-        "custom_name": "custom-name",
-        "deleted": false,
-        "id": 1234,
-        "ip_addrs_private": [
-          "10.0.0.1"
-        ],
-        "name": "device-1",
-        "status": "in_progress"
-      },
-      "Remediation Type": {},
-      "Solution Details": {
-        "solution_fix": "Install Office Click-To-Run updates through any installed Office application. Go to File &gt; Account (or Office Account if you opened Outlook). Under Product Information, choose Update Options &gt; Update Now.",
-        "solution_id": "office-click-to-run-upgrade-latest",
-        "solution_summary": "Upgrade to the latest version of Microsoft Office",
-        "solution_type": "workaround"
-      },
-      "Solution ID": 1234,
-      "Solution Type": "rapid7-solution",
-      "Vulnerabilities": {
-        "id": "CVE-2019-1297",
-        "severity": "high",
-        "summary": "A remote code execution vulnerability exists in Microsoft Excel software when the software fails to properly handle objects in memory. An attacker who successfully exploited the vulnerability could run arbitrary code in the context of the current user. If the current user is logged on with administrative user rights, an attacker could take control of the affected system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights. Exploitation of the vulnerability requires that a user open a specially crafted file with an affected version of Microsoft Excel. In an email attack scenario, an attacker could exploit the vulnerability by sending the specially crafted file to the user and convincing the user to open the file. In a web-based attack scenario, an attacker could host a website (or leverage a compromised website that accepts or hosts user-provided content) containing a specially crafted file designed to exploit the vulnerability. An attacker would have no way to force users to visit the website. Instead, an attacker would have to convince users to click a link, typically by way of an enticement in an email or instant message, and then convince them to open the specially crafted file. The security update addresses the vulnerability by correcting how Microsoft Excel handles objects in memory.",
-        "title": "Microsoft Excel Remote Code Execution Vulnerability"
-      }
+      "device_ids": [
+        1,
+        2,
+        3
+      ],
+      "devices": [
+        {
+          "custom_name": "example1",
+          "id": 1,
+          "ip_addrs_private": [
+            "10.0.0.1",
+            "ffff::ffff:ffff:ffff:ffff"
+          ],
+          "name": "example1",
+          "status": "pending"
+        },
+        {
+          "custom_name": "example2",
+          "id": 2,
+          "ip_addrs_private": [
+            "10.0.0.2",
+            "ffff::ffff:ffff:ffff:ffff"
+          ],
+          "name": "example2",
+          "status": "pending"
+        },
+        {
+          "custom_name": "example3",
+          "id": 3,
+          "ip_addrs_private": [
+            "10.0.0.3",
+            "ffff::ffff:ffff:ffff:ffff"
+          ],
+          "name": "example3",
+          "status": "pending"
+        }
+      ],
+      "id": 1234,
+      "organization_id": 1234,
+      "remediation_type": "patch-with-worklet",
+      "solution_type": "unmatched",
+      "vulnerabilities": [
+        {
+          "id": "CVE-2021-24111",
+          "severity": "high",
+          "title": ".NET Framework Denial of Service Vulnerability"
+        }
+      ]
     }
   ]
 }
@@ -914,7 +1197,7 @@ Example output:
 
 #### List Vulnerability Sync Action Sets
   
-Retrieve list of vulnerability sync batches
+This action is used to retrieve list of vulnerability sync batches
 
 ##### Input
 
@@ -926,10 +1209,10 @@ Retrieve list of vulnerability sync batches
 |include_all_runs_equals|boolean|None|False|Whether to include all runs in the response|None|True|
 |org_id|integer|None|True|Identifier of organization|None|1234|
 |sort|string|None|False|Sort results by field|['created_at', 'updated_at', 'status', 'source_type', 'source_name', 'configuration_id', '']|created_at|
-|source_type_in|[]string|None|False|Filter by source type|None|["Generic Report", "CrowdStrike", "Rapid7", "TenableIO", "Qualys"]|
-|status_in|[]string|None|False|Filter by status|None|["building", "ready", "error"]|
-|status_not_in|[]string|None|False|Filter by status|None|["building", "ready", "error"]|
-
+|source_type_in|[]string|None|False|Filter by source type|None|['Generic Report', 'CrowdStrike', 'Rapid7', 'TenableIO', 'Qualys']|
+|status_in|[]string|None|False|Filter by status|None|['building', 'ready', 'error']|
+|status_not_in|[]string|None|False|Filter by status|None|['building', 'ready', 'error']|
+  
 Example input:
 
 ```
@@ -950,55 +1233,62 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|action_sets|[]action_set|False|List of vulnerability sync action sets|[{"created_at": "2023-10-10T03:45:26+0000", "created_by_user": {"email": "user@example.com", "firstname": "User", "id": 1, "lastname": "Name"}, "id": 1234, "organization_id": 1, "source": {"name": "insightconnect-uploaded-report.csv", "type": "generic"}, "statistics": {"issues": {"unknown-host": {"count": 4}}, "solutions": {"patch-with-worklet": {"count": 1, "device_count": 18, "vulnerability_count": 1}}}, "status": "ready", "updated_at": "2023-10-10T03:45:30+0000", "updated_by_user": {"email": "user@example.com", "firstname": "User", "id": 1, "lastname": "Name"}}]|
-
+|action_sets|[]action_set|False|List of vulnerability sync action sets|[{"created_at":"2023-10-04T02:55:55+0000","created_by_user":{"email":"user@example.com","firstname":"User","id":1234,"lastname":"Example"},"id":1234,"organization_id":1234,"source":{"name":"example.csv","type":"generic"},"statistics":{"issues":{"unknown-host":{"count":1}},"solutions":{"patch-now":{"count":0,"device_count":0,"vulnerability_count":0},"patch-with-worklet":{"count":0,"device_count":0,"vulnerability_count":0}}},"status":"ready","updated_at":"2023-10-04T02:56:00+0000","updated_by_user":{"email":"user@example.com","firstname":"User","id":1234,"lastname":"Example"}}]|
+  
 Example output:
 
 ```
 {
-  "action_sets": {
-    "created_at": "2023-10-10T03:45:26+0000",
-    "created_by_user": {
-      "email": "user@example.com",
-      "firstname": "User",
-      "id": 1,
-      "lastname": "Name"
-    },
-    "id": 1234,
-    "organization_id": 1,
-    "source": {
-      "name": "insightconnect-uploaded-report.csv",
-      "type": "generic"
-    },
-    "statistics": {
-      "issues": {
-        "unknown-host": {
-          "count": 4
+  "action_sets": [
+    {
+      "created_at": "2023-10-04T02:55:55+0000",
+      "created_by_user": {
+        "email": "user@example.com",
+        "firstname": "User",
+        "id": 1234,
+        "lastname": "Example"
+      },
+      "id": 1234,
+      "organization_id": 1234,
+      "source": {
+        "name": "example.csv",
+        "type": "generic"
+      },
+      "statistics": {
+        "issues": {
+          "unknown-host": {
+            "count": 1
+          }
+        },
+        "solutions": {
+          "patch-now": {
+            "count": 0,
+            "device_count": 0,
+            "vulnerability_count": 0
+          },
+          "patch-with-worklet": {
+            "count": 0,
+            "device_count": 0,
+            "vulnerability_count": 0
+          }
         }
       },
-      "solutions": {
-        "patch-with-worklet": {
-          "count": 1,
-          "device_count": 18,
-          "vulnerability_count": 1
-        }
+      "status": "ready",
+      "updated_at": "2023-10-04T02:56:00+0000",
+      "updated_by_user": {
+        "email": "user@example.com",
+        "firstname": "User",
+        "id": 1234,
+        "lastname": "Example"
       }
-    },
-    "status": "ready",
-    "updated_at": "2023-10-10T03:45:30+0000",
-    "updated_by_user": {
-      "email": "user@example.com",
-      "firstname": "User",
-      "id": 1,
-      "lastname": "Name"
     }
-  }
+  ]
 }
 ```
 
 #### Run Device Command
   
-Run a command on a device
+This action is used to run a command on a device
 
 ##### Input
 
@@ -1007,7 +1297,7 @@ Run a command on a device
 |command|string|None|True|Command to run on device|['GetOS', 'InstallUpdate', 'InstallAllUpdates', 'PolicyTest', 'PolicyRemediate', 'Reboot']|GetOS|
 |device_id|integer|None|True|Identifier of device|None|1234|
 |org_id|integer|None|False|Identifier of organization|None|1234|
-|patches|[]string|None|False|List of patches to be installed by name (Note: this only works with the InstallUpdate command)|None|["Security Update (KB4549947)"]|
+|patches|[]string|None|False|List of patches to be installed by name (Note: this only works with the InstallUpdate command)|None|['Security Update (KB4549947)']|
 |policy_id|integer|None|False|Identifier of policy|None|1234|
   
 Example input:
@@ -1038,7 +1328,7 @@ Example output:
 
 #### Update Device
   
-Update Automox device
+This action is used to update Automox device
 
 ##### Input
 
@@ -1049,8 +1339,8 @@ Update Automox device
 |exception|boolean|False|True|Exclude the device from reports and statistics|None|False|
 |org_id|integer|None|False|Identifier of organization|None|1234|
 |server_group_id|integer|None|False|Identifier of server group|None|1234|
-|tags|[]string|None|False|List of tags|None|["tag1", "tag2"]|
-
+|tags|[]string|None|False|List of tags|None|['tag1', 'tag2']|
+  
 Example input:
 
 ```
@@ -1080,7 +1370,7 @@ Example output:
 
 #### Update Group
   
-Update an Automox group
+This action is used to update an Automox group
 
 ##### Input
 
@@ -1126,7 +1416,7 @@ Example output:
 
 #### Upload Vulnerability Sync File
   
-Upload a CSV file to vulnerability sync for processing
+This action is used to upload a CSV file to vulnerability sync for processing
 
 ##### Input
 
@@ -1168,7 +1458,7 @@ Example output:
 
 #### Get Automox Events
   
-Retrieve Automox events to trigger workflows
+This action is used to retrieve Automox events to trigger workflows
 
 ##### Input
 
@@ -1190,24 +1480,35 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|event|event|True|Event with details|None|
+|event|event|True|Event with details|{"id":0,"name":"system.add","user_id":0,"server_id":0,"organization_id":0,"policy_id":0,"data":{"firstname":"string","lastname":"string","email":"string","orgname":"string","ip":"string","os":"string","systemname":"string","text":"string","status":0,"patches":"string"},"server_name":"string","policy_name":"string","policy_type_name":"patch","create_time":"2019-08-24T14:15:22Z"}|
   
 Example output:
 
 ```
 {
   "event": {
-    "Creation Time": {},
-    "Device ID": {},
-    "Device Name": {},
-    "Event Data": {},
-    "Event ID": 0,
-    "Event name": "",
-    "Organization ID": {},
-    "Policy ID": {},
-    "Policy Name": {},
-    "Policy Type": {},
-    "User ID": {}
+    "create_time": "2019-08-24T14:15:22Z",
+    "data": {
+      "email": "string",
+      "firstname": "string",
+      "ip": "string",
+      "lastname": "string",
+      "orgname": "string",
+      "os": "string",
+      "patches": "string",
+      "status": 0,
+      "systemname": "string",
+      "text": "string"
+    },
+    "id": 0,
+    "name": "system.add",
+    "organization_id": 0,
+    "policy_id": 0,
+    "policy_name": "string",
+    "policy_type_name": "patch",
+    "server_id": 0,
+    "server_name": "string",
+    "user_id": 0
   }
 }
 ```
@@ -1233,8 +1534,15 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
+|Access Key|string|None|False|The access key of the organization|None|
+|Creation Time|string|None|False|The datetime of when the organization was created|None|
 |Organization ID|integer|None|True|The organization identifier of the user|None|
 |Name|string|None|False|The name of the organization|None|
+|Parent Organization ID|integer|None|False|The parent organization identifier|None|
+|Plan|string|None|False|The plan of the organization|None|
+|Trial End Time|string|None|False|The datetime of when the trial ends for the organization|None|
+|Trial Expired|boolean|None|False|Whether the trial has expired for the organization|None|
+|Zone ID|string|None|True|The zone identifier of the organization|None|
   
 **user_rbac_role**
 
@@ -1243,6 +1551,14 @@ Example output:
 |Role ID|integer|None|True|The role identifier|None|
 |Name|string|None|False|The name of the role|None|
 |Organization ID|integer|None|True|The organization identifier of the user role|None|
+  
+**user_pref**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Preference Name|string|None|True|The name of the preference|None|
+|User ID|integer|None|True|The user identifier|None|
+|Value|string|None|True|The value of the preference|None|
   
 **user**
 
@@ -1254,8 +1570,10 @@ Example output:
 |User ID|integer|None|True|The user identifier|None|
 |Last Name|string|None|False|The last name of the user|None|
 |Organizations|[]user_org|None|False|The organizations for which the user has access|None|
+|Prefs|[]user_pref|None|None|The preferences for the user|None|
 |Roles|[]user_rbac_role|None|False|The roles assigned to the user|None|
 |SAML Enabled|boolean|None|False|Whether SAML has been enabled for the user|None|
+|SSO Enabled|boolean|None|False|Whether SSO has been enabled for the user|None|
 |Tags|[]string|None|False|The user defined tags|None|
   
 **device_policy_status**
@@ -1293,7 +1611,7 @@ Example output:
 |Is Delayed by Notification|boolean|None|False|Whether patching is delayed by a device notificiation|None|
 |Is Delayed By User|boolean|None|False|Whether patching is delayed by a user|None|
 |Last Disconnect Time|string|None|False|The last time a device disconnected from the Automox platform|None|
-|Last Logged In User|string|None|False|The last logged in user of a device|None|
+|Last Logged in User|string|None|False|The last logged in user of a device|None|
 |Last Refresh Time|string|None|False|The last time a device was refreshed|None|
 |Last Scan Failed|boolean|None|False|Whether the last scan failed on a device|None|
 |Last Update Time|string|None|False|The last time a device was updated in the Automox platform|None|
@@ -1390,17 +1708,24 @@ Example output:
 |User ID|integer|None|True|The user identifier|None|
 |Last Name|string|None|False|The last name of the user|None|
   
+**action_set_issue_count**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Issue Count|integer|None|False|Number of issues associated with the action set|None|
+  
 **action_set_issues**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Unknown Host Count|integer|None|False|Number of hosts that are unknown within the action set|None|
+|Unknown Host|action_set_issue_count|None|False|Hosts that are unknown to Automox within the action set|None|
   
 **action_set_statistics**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Issues|action_set_issues|None|False|Issues associated with the action set|None|
+|Solutions|action_set_solution_summary|None|False|Solutions associated with the action set|None|
   
 **action_set_source**
 
@@ -1433,7 +1758,6 @@ Example output:
 |Created By|action_set_user|None|False|action set creation details|None|
 |Action Set ID|integer|None|True|Identifier of the action set|None|
 |Organization ID|integer|None|False|Identifier of the organization|None|
-|Solutions|action_set_solution_summary|None|False|Solutions associated with the action set|None|
 |Action Set Source|action_set_source|None|False|Source of the action set|None|
 |Action Set Statistics|action_set_statistics|None|False|Statistics of the action set|None|
 |Action Set Status|string|None|False|Status of the action set|None|
@@ -1478,13 +1802,13 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Device IDs|[]integer|None|False|List of device identifiers associated with the solution. This is a helper field to make executing actions easier. It does not exist on the Automox API.|[1234, 5678]|
-|Devices|[]solution_device|None|False|List of devices associated with the solution|[{'id': 1234, 'name': 'device-1', 'custom_name': 'custom-name', 'status': 'in_progress', 'deleted': False, 'ip_addrs_private': ['10.0.0.1']}]|
+|Device IDs|[]integer|None|False|List of device identifiers associated with the solution. This is a helper field to make executing actions easier. It does not exist on the Automox API.|None|
+|Devices|[]solution_device|None|False|List of devices associated with the solution|None|
 |Solution ID|integer|None|True|Identifier of solution|1234|
 |Remediation Type|string|None|False|Type of remediation|patch-with-worklet|
-|Solution Details|object|None|False|Details of the solution. This can include package information and other details depending on the solution type|{'solution_id': 'office-click-to-run-upgrade-latest', 'solution_type': 'workaround', 'solution_summary': 'Upgrade to the latest version of Microsoft Office', 'solution_fix': 'Install Office Click-To-Run updates through any installed Office application. Go to File &gt; Account (or Office Account if you opened Outlook). Under Product Information, choose Update Options &gt; Update Now.'}|
+|Solution Details|object|None|False|Details of the solution. This can include package information and other details depending on the solution type|None|
 |Solution Type|string|None|False|Type of solution|rapid7-solution|
-|Vulnerabilities|[]solution_vulnerability|None|False|List of vulnerabilities associated with the solution|[{'id': 'CVE-2019-1297', 'title': 'Microsoft Excel Remote Code Execution Vulnerability', 'summary': 'A remote code execution vulnerability exists in Microsoft Excel software when the software fails to properly handle objects in memory. An attacker who successfully exploited the vulnerability could run arbitrary code in the context of the current user. If the current user is logged on with administrative user rights, an attacker could take control of the affected system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights. Exploitation of the vulnerability requires that a user open a specially crafted file with an affected version of Microsoft Excel. In an email attack scenario, an attacker could exploit the vulnerability by sending the specially crafted file to the user and convincing the user to open the file. In a web-based attack scenario, an attacker could host a website (or leverage a compromised website that accepts or hosts user-provided content) containing a specially crafted file designed to exploit the vulnerability. An attacker would have no way to force users to visit the website. Instead, an attacker would have to convince users to click a link, typically by way of an enticement in an email or instant message, and then convince them to open the specially crafted file. The security update addresses the vulnerability by correcting how Microsoft Excel handles objects in memory.', 'severity': 'high'}, {'id': 'CVE-2021-42292', 'title': 'Microsoft Excel Security Feature Bypass Vulnerability', 'summary': '', 'severity': 'high'}]|
+|Vulnerabilities|[]solution_vulnerability|None|False|List of vulnerabilities associated with the solution|None|
 
 
 ## Troubleshooting
@@ -1492,12 +1816,21 @@ Example output:
 *There is no troubleshooting for this plugin.*
 
 # Version History
-
-* 2.0.1 - Fix Get Vulnerability Sync Action Set action
-* 2.0.0 - Fix Vulnerability Sync API Actions | `Action`: Added - Delete Vulnerability Sync Action Set | `Action`: Added - Execute Vulnerability Sync Actions | `Action`: Added - List Vulnerability Sync Action Set Issues |`Action`: Added - List Vulnerability Sync Action Set Solutions | `Action`: Added - List Vulnerability Sync Action Sets | `Action`: Added - Get Vulnerability Sync Action Set | `Action`: Updated - Upload Vulnerability Sync File | `Action`: Updated - Get Devices | `Action`: Deleted - Action on Vulnerability Sync Batch | `Action`: Deleted - Vulnerability Sync Task | `Action`: Deleted - Get Vulnerability Sync Batch | `Action`: Deleted - List Vulnerability Sync Batches | `Action`: Deleted - List Vulnerability Sync Tasks
-* 1.2.0 - Get device by IP and Get device by hostname: fix validation issue when IP or hostname not found | Add unit tests
-* 1.1.1 - Fix undefined org ID passed to actions when not required | Record outcome of connection tests
-* 1.1.0 - Add `report source` as optional input parameter to Upload Vulnerability Sync File action | Add report source to batch type
+  
+* 3.0.0 - `Action`: Fixed -  Get Vulnerability Sync Action Set | `Action`: Fixed - List Vulnerability Sync Action Sets |
+ `Action`: Updated - List Organization Users  
+* 2.0.0 - Fix Vulnerability Sync API Actions | `Action`: Added - Delete Vulnerability Sync Action Set | `Action`: Added 
+- Execute Vulnerability Sync Actions | `Action`: Added - List Vulnerability Sync Action Set Issues | `Action`: Added - 
+List Vulnerability Sync Action Set Solutions | `Action`: Added - List Vulnerability Sync Action Sets | `Action`: Added -
+ Get Vulnerability Sync Action Set | `Action`: Updated - Upload Vulnerability Sync File | `Action`: Updated - Get 
+Devices | `Action`: Deleted - Action on Vulnerability Sync Batch | `Action`: Deleted - Vulnerability Sync Task | 
+`Action`: Deleted - Get Vulnerability Sync Batch | `Action`: Deleted - List Vulnerability Sync Batches | `Action`: 
+Deleted - List Vulnerability Sync Tasks  
+* 1.2.0 - Get device by IP and Get device by hostname: fix validation issue when IP or hostname not found | Add unit 
+tests  
+* 1.1.1 - Fix undefined org ID passed to actions when not required | Record outcome of connection tests  
+* 1.1.0 - Add `report source` as optional input parameter to Upload Vulnerability Sync File action | Add report source 
+to batch type  
 * 1.0.0 - Initial plugin
 
 # Links
@@ -1505,8 +1838,6 @@ Example output:
 * [Automox](https://www.automox.com/)
 
 ## References
-
-* [Automox Developer Portal](https://developer.automox.com/)
-* [Managing API Keys](https://support.automox.com/help/managing-keys)
-* [Event Types for Get Automox Events action](https://developer.automox.com/openapi/axconsole/operation/getEvents/#!in=query&path=eventName&t=request)
-
+  
+* [Automox Developer Portal](https://developer.automox.com/developer-portal/)  
+* [Managing Automox API Keys](https://help.automox.com/hc/en-us/articles/5385455262484-Managing-Keys)
