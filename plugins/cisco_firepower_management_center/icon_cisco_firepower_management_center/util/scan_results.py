@@ -7,7 +7,6 @@ from icon_cisco_firepower_management_center.util.commands import (
 
 
 class ScanResults(object):
-
     FOOTER = "ScanUpdate\n"
 
     def __init__(self, max_page_size):

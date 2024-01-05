@@ -1,30 +1,43 @@
-import sys
 import os
-
-from unittest import TestCase
-from icon_cisco_firepower_management_center.actions.add_address_to_group import AddAddressToGroup
-from icon_cisco_firepower_management_center.actions.add_address_to_group.schema import Input
-from unit_test.util import Util
-from unittest.mock import patch
-from parameterized import parameterized
-from insightconnect_plugin_runtime.exceptions import PluginException
+import sys
 
 sys.path.append(os.path.abspath("../"))
+from typing import Any, Dict
+from unittest import TestCase
+from unittest.mock import MagicMock, patch
+
+from icon_cisco_firepower_management_center.actions.add_address_to_group import AddAddressToGroup
+from icon_cisco_firepower_management_center.actions.add_address_to_group.schema import Input
+from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
+from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.post", side_effect=Util.mocked_requests)
 @patch("requests.request", side_effect=Util.mocked_requests)
-@patch("ssl.SSLSocket.write", side_effect=Util.mock_write)
-@patch("ssl.SSLSocket.connect", side_effect=Util.mock_connect)
-@patch("ssl.SSLSocket.recv", side_effect=Util.mock_recv)
+@patch("ssl.SSLSocket._create", side_effect=Util.MockSSLSocket)
 class TestAddAddressToGroup(TestCase):
     @parameterized.expand(Util.load_parameters("add_address_to_group").get("parameters"))
     def test_add_address_to_group(
-        self, mock_post, mock_request, mock_write, mock_connect, mock_recv, name, address, group, expected
-    ):
+        self,
+        mock_post: MagicMock,
+        mock_request: MagicMock,
+        mock_create: MagicMock,
+        name: str,
+        address: str,
+        group: str,
+        expected: Dict[str, Any],
+    ) -> None:
+        self.maxDiff = None
         action = Util.default_connector(AddAddressToGroup())
         actual = action.run({Input.ADDRESS: address, Input.GROUP: group})
+        validate(actual, action.output.schema)
         self.assertEqual(actual, expected)
+        mock_post.assert_called()
+        mock_request.assert_called()
+        mock_create.assert_called()
 
     @parameterized.expand(
         [
@@ -45,8 +58,16 @@ class TestAddAddressToGroup(TestCase):
         ]
     )
     def test_add_address_to_group_bad(
-        self, mock_post, mock_request, mock_write, mock_connect, mock_recv, name, address, group, cause, assistance
-    ):
+        self,
+        mock_post: MagicMock,
+        mock_request: MagicMock,
+        mock_create: MagicMock,
+        name: str,
+        address: str,
+        group: str,
+        cause: str,
+        assistance: str,
+    ) -> None:
         action = Util.default_connector(AddAddressToGroup())
         with self.assertRaises(PluginException) as error:
             action.run({Input.ADDRESS: address, Input.GROUP: group})
