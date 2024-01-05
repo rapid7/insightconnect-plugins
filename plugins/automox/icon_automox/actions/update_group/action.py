@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import UpdateGroupInput, UpdateGroupOutput, Input, Output, Component
 
+
 # Custom imports below
 
 
@@ -20,7 +21,7 @@ class UpdateGroup(insightconnect_plugin_runtime.Action):
             "name": params.get(Input.NAME) or current_group_settings["name"],
             "refresh_interval": params.get(Input.REFRESH_INTERVAL) or current_group_settings["refresh_interval"],
             "parent_server_group_id": params.get(Input.PARENT_SERVER_GROUP_ID)
-            or current_group_settings["parent_server_group_id"],
+                                      or current_group_settings["parent_server_group_id"],
             "ui_color": params.get(Input.COLOR) or current_group_settings["ui_color"],
             "notes": params.get(Input.NOTES) or current_group_settings["notes"],
             "enable_os_auto_update": None,
