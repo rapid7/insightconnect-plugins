@@ -8,9 +8,24 @@ from logging import Logger
 
 class ADUtils:
     @staticmethod
+    def escape_non_ascii_characters(input_string: str) -> str:
+        non_ascii_list = {
+            "á": "\\E1",
+            "é": "\\E9",
+            "í": "\\ED",
+            "ó": "\\F3",
+            "ú": "\\FA",
+            "ñ": "\\F1",
+        }
+
+        for non_ascii, escaped_character in non_ascii_list.items():
+            input_string = input_string.replace(non_ascii, escaped_character)
+        return input_string
+
+    @staticmethod
     def dn_normalize(dn: str) -> str:
         """
-        This method normalizes dn keys so that inputs are not case sensitive
+        This method normalizes dn keys so that inputs are not case-sensitive
         :param dn: A dn
         :return: A normalized dn
         """
@@ -33,16 +48,16 @@ class ADUtils:
 
         # Ensure that special characters and non ascii characters are escaped
         character_list = [",", "#", "+", "<", ">", ";", '"']
-        non_ascii_list = {
-            "á": "\\E1",
-            "é": "\\E9",
-            "í": "\\ED",
-            "ó": "\\F3",
-            "ú": "\\FA",
-            "ñ": "\\F1",
-        }
 
-        # These are legal characters that some times need to be escaped and sometimes do not
+        # non_ascii_list = {
+        #     "á": "\\E1",
+        #     "é": "\\E9",
+        #     "í": "\\ED",
+        #     "ó": "\\F3",
+        #     "ú": "\\FA",
+        #     "ñ": "\\F1",
+        # }
+        # These are legal characters that sometimes need to be escaped and sometimes do not
         # We make the use escape them correctly in their inputs if they want to use them
         manual_escape = ["*", "="]
 
@@ -51,9 +66,6 @@ class ADUtils:
             for escaped_char in character_list:
                 if f"\\{escaped_char}" not in value:
                     dn_list[idx] = dn_list[idx].replace(escaped_char, f"\\{escaped_char}")
-            # Escape non ascii characters
-            for non_ascii_char, escaped_char in non_ascii_list.items():
-                dn_list[idx] = dn_list[idx].replace(non_ascii_char, escaped_char)
         # escape \\ as needed
         for idx, value in enumerate(dn_list):
             location = value.find("\\")

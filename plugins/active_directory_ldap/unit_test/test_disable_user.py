@@ -1,17 +1,17 @@
 from unittest import TestCase, mock
+
 from insightconnect_plugin_runtime.exceptions import PluginException
-from komand_active_directory_ldap.actions.enable_user import EnableUser
-from komand_active_directory_ldap.actions.enable_user.schema import Input, Output
-from common import MockConnection
-from common import MockServer
-from common import default_connector
+from komand_active_directory_ldap.actions.disable_user import DisableUser
+from komand_active_directory_ldap.actions.disable_user.schema import Input, Output
+
+from common import MockConnection, MockServer, default_connector
 
 
-class TestActionEnableUser(TestCase):
+class TestActionDisableUser(TestCase):
     @mock.patch("ldap3.Server", mock.MagicMock(return_value=MockServer))
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection()))
-    @default_connector(action=EnableUser())
-    def test_enable_user(self, action):
+    @default_connector(action=DisableUser())
+    def test_disable_user(self, action):
         actual = action.run({Input.DISTINGUISHED_NAME: "CN=Users,DC=example,DC=com"})
         expected = {Output.SUCCESS: True}
 
@@ -19,8 +19,8 @@ class TestActionEnableUser(TestCase):
 
     @mock.patch("ldap3.Server", mock.MagicMock(return_value=MockServer))
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection()))
-    @default_connector(action=EnableUser())
-    def test_enable_user_empty_search(self, action):
+    @default_connector(action=DisableUser())
+    def test_disable_user_empty_search(self, action):
         with self.assertRaises(PluginException) as context:
             action.run({Input.DISTINGUISHED_NAME: "CN=empty_search,DC=example,DC=com"})
 
@@ -29,8 +29,8 @@ class TestActionEnableUser(TestCase):
 
     @mock.patch("ldap3.Server", mock.MagicMock(return_value=MockServer))
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection()))
-    @default_connector(action=EnableUser())
-    def test_enable_user_raise(self, action):
+    @default_connector(action=DisableUser())
+    def test_disable_user_raise(self, action):
         with self.assertRaises(PluginException) as context:
             action.run({Input.DISTINGUISHED_NAME: "CN=LDAPInvalidDnError,DC=example,DC=com"})
 
@@ -49,8 +49,8 @@ class TestActionEnableUser(TestCase):
 
     @mock.patch("ldap3.Server", mock.MagicMock(return_value=MockServer))
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection()))
-    @default_connector(action=EnableUser())
-    def test_enable_user_wrong_result(self, action):
+    @default_connector(action=DisableUser())
+    def test_disable_user_wrong_result(self, action):
         with self.assertRaises(PluginException) as context:
             action.run({Input.DISTINGUISHED_NAME: "CN=wrong_result,DC=example,DC=com"})
 
