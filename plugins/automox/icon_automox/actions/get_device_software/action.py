@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import GetDeviceSoftwareInput, GetDeviceSoftwareOutput, Input, Output, Component
 
+
 # Custom imports below
 
 
