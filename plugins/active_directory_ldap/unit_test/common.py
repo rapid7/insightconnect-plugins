@@ -3,15 +3,11 @@ import json
 import logging
 
 import ldap3
-from ldap3.core.connection import SyncStrategy
-from ldap3.core.exceptions import LDAPInvalidDnError
-from ldap3.core.exceptions import LDAPObjectClassError
-from ldap3.core.exceptions import LDAPOperationsErrorResult
-from ldap3.core.results import RESULT_OPERATIONS_ERROR
-from ldap3.core.results import RESULT_SUCCESS
-
 from komand_active_directory_ldap import connection
 from komand_active_directory_ldap.connection.schema import Input
+from ldap3.core.connection import SyncStrategy
+from ldap3.core.exceptions import LDAPInvalidDnError, LDAPObjectClassError, LDAPOperationsErrorResult
+from ldap3.core.results import RESULT_OPERATIONS_ERROR, RESULT_SUCCESS
 
 
 class MockConnection:
