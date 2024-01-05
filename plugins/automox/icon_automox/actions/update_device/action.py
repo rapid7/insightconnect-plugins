@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import UpdateDeviceInput, UpdateDeviceOutput, Input, Output, Component
 
+
 # Custom imports below
 
 
@@ -27,9 +28,9 @@ class UpdateDevice(insightconnect_plugin_runtime.Action):
         payload = {
             "server_group_id": server_group_id,
             "ip_addrs": current_device_details["ip_addrs"],
-            "exception": params.get(Input.EXCEPTION, current_device_details["exception"]),
-            "tags": params.get(Input.TAGS, current_device_details["tags"]),
-            "custom_name": params.get(Input.CUSTOM_NAME, current_device_details["custom_name"]),
+            "exception": params.get(Input.EXCEPTION, current_device_details.get("exception", False)),
+            "tags": params.get(Input.TAGS, current_device_details.get("tags", [])),
+            "custom_name": params.get(Input.CUSTOM_NAME, current_device_details.get("custom_name", "")),
         }
         self.connection.automox_api.update_device(params.get(Input.ORG_ID), params.get(Input.DEVICE_ID), payload)
 
