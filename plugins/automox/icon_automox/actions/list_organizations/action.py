@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import ListOrganizationsInput, ListOrganizationsOutput, Input, Output, Component
 
+
 # Custom imports below
 
 
