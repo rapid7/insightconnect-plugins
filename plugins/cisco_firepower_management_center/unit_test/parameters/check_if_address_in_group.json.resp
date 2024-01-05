@@ -32,7 +32,8 @@
               "parentType": "NetworkAddress"
             }
           }
-        ]
+        ],
+        "literal_objects": []
       }
     ],
     [
@@ -67,7 +68,8 @@
               "parentType": "NetworkAddress"
             }
           }
-        ]
+        ],
+        "literal_objects": []
       }
     ],
     [
@@ -101,6 +103,12 @@
               "ipType": "V_6",
               "parentType": "NetworkAddress"
             }
+          }
+        ],
+        "literal_objects": [
+          {
+            "type": "Host",
+            "value": "123:45:6::1"
           }
         ]
       }
@@ -137,7 +145,8 @@
               "parentType": "NetworkAddress"
             }
           }
-        ]
+        ],
+        "literal_objects": []
       }
     ],
     [
@@ -172,7 +181,8 @@
               "parentType": "NetworkAddress"
             }
           }
-        ]
+        ],
+        "literal_objects": []
       }
     ],
     [
@@ -182,7 +192,8 @@
       true,
       {
         "found": false,
-        "address_objects": []
+        "address_objects": [],
+        "literal_objects": []
       }
     ]
   ]
