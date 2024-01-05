@@ -6,3 +6,6 @@ TWENTY_FOURTH_NOVEMBER = 1669248000
 # 7776000 - is for three months from now.
 # It is here because InsightDR keep logs for three months in hot storage
 THREE_MONTHS_SECONDS = 7776000
+
+# Constants for resource_helper.py
+DEFAULT_ERROR_MESSAGE = "Unknown error occurred. Please contact support or try again later."
