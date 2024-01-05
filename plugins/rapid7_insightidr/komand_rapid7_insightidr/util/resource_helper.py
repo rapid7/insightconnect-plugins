@@ -1,14 +1,15 @@
-from insightconnect_plugin_runtime.exceptions import PluginException
-import requests
-
-import aiohttp
 import asyncio
-import json
 import base64
+import json
 from typing import List
 
-from komand_rapid7_insightidr.connection import Connection
+import aiohttp
+import requests
+from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
+
+from komand_rapid7_insightidr.connection import Connection
+from komand_rapid7_insightidr.util.constants import DEFAULT_ERROR_MESSAGE
 
 
 def _get_async_session(headers) -> aiohttp.ClientSession:
@@ -115,12 +116,17 @@ class ResourceHelper(object):
             return {"resource": resource, "status": response.status_code}
         else:
             try:
-                error = response.json()["message"]
-            except KeyError:
-                error = "Unknown error occurred. Please contact support or try again later."
+                error_response = response.json()
+                message = error_response.get("message", DEFAULT_ERROR_MESSAGE)
+                correlation_id = error_response.get("correlation_id")
+            except json.decoder.JSONDecodeError:
+                message, correlation_id = DEFAULT_ERROR_MESSAGE, "None"
 
             status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
-            self.logger.error(f"{status_code_message} ({response.status_code}): {error}")
+            self.logger.error(f"The endpoint is {endpoint}")
+            self.logger.error(
+                f"{status_code_message} (Status Code: {response.status_code}, Correlation ID: {correlation_id}): {message}"
+            )
             raise PluginException(f"InsightIDR returned a status code of {response.status_code}: {status_code_message}")
 
     def make_request(  # noqa: C901
