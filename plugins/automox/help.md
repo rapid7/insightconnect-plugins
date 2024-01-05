@@ -1835,8 +1835,9 @@ to batch type
 
 # Links
 
+* [Automox](https://www.automox.com/)
 
 ## References
   
-* [Automox](https://www.automox.com/)  
-* [Automox Developer Portal](https://developer.automox.com/developer-portal/)
+* [Automox Developer Portal](https://developer.automox.com/developer-portal/)  
+* [Managing Automox API Keys](https://help.automox.com/hc/en-us/articles/5385455262484-Managing-Keys)

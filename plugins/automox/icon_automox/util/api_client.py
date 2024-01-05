@@ -110,15 +110,16 @@ class ApiClient:
         return page_resp
 
     # Remove Null from response to avoid type issues
-    def remove_null_values(self, value: Collection):
-        if isinstance(value, dict):
-            return dict((k, self.remove_null_values(v)) for k, v in value.items() if self._is_value_or_number(v) and
-                        self._is_value_or_number(self.remove_null_values(v)))
-        elif isinstance(value, list):
-            return [self.remove_null_values(v) for v in value if self._is_value_or_number(v) and
-                    self._is_value_or_number(self.remove_null_values(v))]
+    def remove_null_values(self, item: Collection):
+        if isinstance(item, dict):
+            return dict((key, self.remove_null_values(value))
+                        for key, value in item.items() if self._is_value_or_number(value) and
+                        self._is_value_or_number(self.remove_null_values(value)))
+        elif isinstance(item, list):
+            return [self.remove_null_values(value) for value in item if self._is_value_or_number(value) and
+                    self._is_value_or_number(self.remove_null_values(value))]
         else:
-            return value
+            return item
 
     @staticmethod
     def _is_value_or_number(value: Any) -> bool:

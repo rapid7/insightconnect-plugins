@@ -33,9 +33,11 @@ requirements: []
 key_features:
   - Device Management
   - Patch Management
-references:
+links:
   - '[Automox](https://www.automox.com/)'
+references:
   - '[Automox Developer Portal](https://developer.automox.com/developer-portal/)'
+  - '[Managing Automox API Keys](https://help.automox.com/hc/en-us/articles/5385455262484-Managing-Keys)'
 tags: [endpoint, patch]
 hub_tags:
   use_cases: [threat_detection_and_response, asset_inventory, remediation_management]
