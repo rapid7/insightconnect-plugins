@@ -15,7 +15,7 @@ from util import (
     mock_request_404,
     mocked_request,
     mock_request_200_invalid_json,
-    ORG_ID
+    ORG_ID,
 )
 from icon_automox.actions.list_policies import ListPolicies
 from icon_automox.actions.list_policies.schema import Input, Output
@@ -46,19 +46,13 @@ class TestListPolicies(TestCase):
                         "notify_deferred_reboot_user_message_timeout": 15,
                         "custom_pending_reboot_notification_max_delays": 3,
                         "custom_pending_reboot_notification_message_mac": "Updates require restart: Please save your work.",
-                        "custom_pending_reboot_notification_deferment_periods": [
-                            1,
-                            4,
-                            8
-                        ]
+                        "custom_pending_reboot_notification_deferment_periods": [1, 4, 8],
                     },
                     "schedule_time": "00:00",
                     "create_time": "2023-10-25T21:56:48+0000",
-                    "server_groups": [
-                        1234
-                    ],
+                    "server_groups": [1234],
                     "server_count": 5,
-                    "status": "inactive"
+                    "status": "inactive",
                 }
             ]
         }

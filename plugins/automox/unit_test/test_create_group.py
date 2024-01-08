@@ -47,11 +47,9 @@ class TestCreateGroup(TestCase):
                     "is_managed": True,
                     "server_url": "string",
                     "created_at": "string",
-                    "updated_at": "string"
+                    "updated_at": "string",
                 },
-                "policies": [
-                    1234
-                ]
+                "policies": [1234],
             },
         }
 
