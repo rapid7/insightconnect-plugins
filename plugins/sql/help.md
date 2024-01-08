@@ -23,24 +23,24 @@ This plugin allows users to run and execute queries against a SQL database.
 # Documentation
 
 ## Setup
-
-The connection configuration accepts the following parameters:
+  
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |credentials|credential_username_password|None|True|Database username and password|None|{ "username": "user@example.com", "password": "mypassword"}|
 |db|string|None|True|Database name|None|database_name|
 |host|string|None|True|Database hostname|None|198.51.100.1|
 |port|string|None|False|Database port|None|1433|
 |type|string|None|True|Database type (MSSQL, MySQL, PostgreSQL)|['MSSQL', 'MySQL', 'PostgreSQL']|MySQL|
-
+  
 Example input:
 
 ```
 {
   "credentials": {
-    "username": "user@example.com",
-    "password": "mypassword"
+    "password": "mypassword",
+    "username": "user@example.com"
   },
   "db": "database_name",
   "host": "198.51.100.1",
@@ -53,17 +53,18 @@ Example input:
 
 ### Actions
 
-#### Query
 
-This action is used to run an arbitrary SQL query against the connected database.
+#### Query
+  
+This action is used to run an arbitrary SQL query against the connected database
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |parameters|object|None|False|Parameters for query|None|{ "name": "user" }|
 |query|string|None|True|Query to run|None|SELECT * FROM example WHERE name=:name|
-
+  
 Example input:
 
 ```
@@ -77,48 +78,43 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|header|[]string|False|Array of header fields for the columns|
-|results|[]object|False|Result rows, each as an object with header keys|
-|status|string|True|Status message|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|header|[]string|False|Array of header fields for the columns|["name", "surname", "index", "alias"]|', '|results|[]object|False|Result rows, each as an object with header keys|[{"name": "User", "index": "1", "Surname": "Example", "alias": "Test"}]|
+|status|string|True|Status message|operation success|
+  
 Example output:
 
 ```
 {
-  "header": [
-    "name",
-    "surname",
-    "index",
-    "alias"
-  ],
-  "results": [
-    {
-      "name": "User",
-      "index": "1",
-      "Surname": "Example",
-      "alias": "Test"
-    }
-  ],
+  "header": "name",
+  "results": {
+    "Surname": "Example",
+    "alias": "Test",
+    "index": "1",
+    "name": "User"
+  },
   "status": "operation success"
 }
 ```
-
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
-
-### Custom Output Types
-
-_This plugin does not contain any custom output types._
+### Custom Types
+  
+*This plugin does not contain any custom output types.*
 
 ## Troubleshooting
-
-For the SQL query action, be sure that your query is valid SQL.
+  
+*There is no troubleshooting for this plugin.*
 
 # Version History
 
+* 3.0.7 - Bumped version of SQLAlchemy used to version 1.2.18 | bump version of sdk used to version 5
 * 3.0.6 - Update plugin runtime to InsightConnect
 * 3.0.5 - Update pymssql version library to support latest MSSQL update 2019 15.0.4223.1
 * 3.0.4 - Fix issue with get method's keyword argument in Query action
@@ -138,6 +134,8 @@ For the SQL query action, be sure that your query is valid SQL.
 * 0.1.0 - Initial plugin
 
 # Links
+
+* [SQLAlchemy](http://docs.sqlalchemy.org/en/latest/)
 
 ## References
 
