@@ -1,10 +1,10 @@
 from unittest import TestCase, mock
+
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_active_directory_ldap.actions.delete import Delete
 from komand_active_directory_ldap.actions.delete.schema import Input, Output
-from common import MockConnection
-from common import MockServer
-from common import default_connector
+
+from common import MockConnection, MockServer, default_connector
 
 
 class TestActionDelete(TestCase):

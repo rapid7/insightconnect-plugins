@@ -176,15 +176,21 @@ class ActiveDirectoryLdapAPI:
         :return: Dictionary containing two lists, one for successfully modified Distinguishes Names and another for
         unsuccessfully modified Distinguishes Names and the cause of the failure
         """
+
         successes = []
         failures = []
         for dn in dns:
             try:
                 ADUtils.change_account_status(conn, dn, status, self.logger)
                 successes.append(dn)
-            except Exception as exception:
-                failures.append({"dn": dn, "error": str(exception)})
-                self.logger.error(f"Error: Failed to modify user {dn}")
+            except Exception:
+                try:
+                    escaped_dn = ADUtils.escape_non_ascii_characters(dn)
+                    ADUtils.change_account_status(conn, escaped_dn, status, self.logger)
+                    successes.append(dn)
+                except Exception as error:
+                    failures.append({"dn": dn, "error": str(error)})
+                    self.logger.error(f"Error: Failed to modify user {dn}")
         return {"successes": successes, "failures": failures}
 
     @with_connection

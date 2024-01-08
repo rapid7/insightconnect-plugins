@@ -1,4 +1,5 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 from komand_active_directory_ldap.util.utils import ADUtils
@@ -15,14 +16,26 @@ class ModifyObject(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        formatter = ADUtils()
-        dn = params.get(Input.DISTINGUISHED_NAME)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        distinguished_name = params.get(Input.DISTINGUISHED_NAME)
         attribute = params.get(Input.ATTRIBUTE_TO_MODIFY)
         attribute_value = params.get(Input.ATTRIBUTE_VALUE)
-        dn, _ = formatter.format_dn(dn)
-        self.logger.info(f"Escaped DN {dn}")
+        # END INPUT BINDING - DO NOT REMOVE
 
-        dn = formatter.escape_brackets_for_query(dn)
-        self.logger.info(dn)
+        distinguished_name, _ = ADUtils.format_dn(distinguished_name)
+        self.logger.info(f"Escaped DN {distinguished_name}")
 
-        return {Output.SUCCESS: self.connection.client.modify_object(dn, attribute, attribute_value)}
+        distinguished_name = ADUtils.escape_brackets_for_query(distinguished_name)
+        self.logger.info(distinguished_name)
+
+        try:
+            return {
+                Output.SUCCESS: self.connection.client.modify_object(distinguished_name, attribute, attribute_value)
+            }
+        except PluginException:
+            self.logger.info("Escaping non-ascii characters...")
+            return {
+                Output.SUCCESS: self.connection.client.modify_object(
+                    ADUtils.escape_non_ascii_characters(distinguished_name), attribute, attribute_value
+                )
+            }
