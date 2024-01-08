@@ -452,7 +452,8 @@ Example output:
 
 # Version History
 
-* 2.0.1 - To remove formatting of the fromTime or toTome values used in the `get_cases` and `get_threats` actions  
+* 2.0.2 - Fix bug where toTime was being used as gte rather than lte in requests, used in the `get_cases` and `get_threats` actions  
+* 2.0.1 - To remove formatting of the fromTime or toTime values used in the `get_cases` and `get_threats` actions  
 * 2.0.0 - Add support to select the time filter filed in `get_cases` action | bump SDK version  
 * 1.3.0 - New logo and requirements update  
 * 1.2.0 - New actions Manage Case and Manage Threat  
