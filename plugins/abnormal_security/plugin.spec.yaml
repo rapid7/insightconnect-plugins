@@ -4,7 +4,7 @@ products: [insightconnect]
 name: abnormal_security
 title: Abnormal Security
 description: Protect your Microsoft Office 365 and G-Suite environments with next-generation email security that uses the most advanced AI detection techniques to stop targeted phishing attacks
-version: 2.0.1
+version: 2.0.2
 supported_versions: ["abnormal-security API abx v1.4.2"]
 vendor: rapid7
 support: rapid7
@@ -20,7 +20,8 @@ resources:
   vendor_url: https://abnormalsecurity.com/
 enable_cache: true
 version_history:
-  - '2.0.1 - To remove formatting of the fromTime or toTome values used in the `get_cases` and `get_threats` actions'
+  - '2.0.2 - Fix bug where toTime was being used as gte rather than lte in requests, used in the `get_cases` and `get_threats` actions'
+  - '2.0.1 - To remove formatting of the fromTime or toTime values used in the `get_cases` and `get_threats` actions'
   - '2.0.0 - Add support to select the time filter filed in `get_cases` action | bump SDK version'
   - '1.3.0 - New logo and requirements update'
   - '1.2.0 - New actions Manage Case and Manage Threat'
