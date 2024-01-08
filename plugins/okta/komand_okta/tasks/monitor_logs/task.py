@@ -64,8 +64,10 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 state[self.LAST_COLLECTION_TIMESTAMP] = self.get_last_collection_timestamp(new_logs, state)
                 return new_logs, state, has_more_pages, 200, None
             except ApiException as error:
+                self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
                 return [], state, False, error.status_code, error
         except Exception as error:
+            self.logger.info(f"An Exception has been raised. Error: {error}")
             return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     @staticmethod
