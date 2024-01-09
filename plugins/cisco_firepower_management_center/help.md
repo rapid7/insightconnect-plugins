@@ -26,7 +26,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|certificate|bytes|None|True|Base64-encoded certificate to authenticate with the host input API|None|VGhpcyBpcyBhIHNhbXBsZSBiYXNlNjQtZW5jb2RlZCBjZXJ0aWZpY2F0ZSB0byBhdXRoZW50aWNhdGUgd2l0aCB0aGUgaG9zdCBpbnB1dCBBUEku|
+|certificate|bytes|None|True|Base64-encoded certificate in PKCS12 format to authenticate with the host input API|None|VGhpcyBpcyBhIHNhbXBsZSBiYXNlNjQtZW5jb2RlZCBjZXJ0aWZpY2F0ZSB0byBhdXRoZW50aWNhdGUgd2l0aCB0aGUgaG9zdCBpbnB1dCBBUEku|
 |certificate_passphrase|credential_secret_key|None|True|The passphrase to access the certificate|None|passphrase|
 |domain|string|Global|False|Cisco FirePower Management Center Domain|None|Global|
 |host_input_port|integer|8307|False|The port number for the provided host used in the Host Input API calls|None|8307|
