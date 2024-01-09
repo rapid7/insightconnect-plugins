@@ -4,7 +4,7 @@ products: [insightconnect]
 name: sql
 title: SQL
 description: The SQL plugin allows you to run SQL queries
-version: 3.0.6
+version: 3.0.7
 supported_versions: ["MySQL 8.0.21", "MSSQL 2019 15.0.4223.1", "PostgresSQL 13.0"]
 vendor: rapid7
 support: community
@@ -21,6 +21,10 @@ hub_tags:
   use_cases: [data_utility]
   keywords: [sql, postgresql, ms_sql]
   features: []
+sdk:
+  type: slim
+  version: 5
+  user: nobody
 connection:
   type:
     title: Type
@@ -59,7 +63,7 @@ connection:
 actions:
   query:
     title: Query
-    description: SQL query
+    description: Run an arbitrary SQL query against the connected database
     input:
       query:
         title: Query
@@ -81,13 +85,16 @@ actions:
         description: Status message
         type: string
         required: true
+        example: operation success
       header:
         title: Header
         description: Array of header fields for the columns
         type: '[]string'
         required: false
+        example: ["name","surname","index","alias"]
       results:
         title: Results
         description: Result rows, each as an object with header keys
         type: '[]object'
         required: false
+        example: [{"name": "User","index": "1","Surname": "Example","alias": "Test"}]
