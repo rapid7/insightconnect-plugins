@@ -35,7 +35,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             if not header_next_token:
                 self.logger.info("First run...")
             else:
-                self.logger.info(f"Subsequent run using header_next_token...")
+                self.logger.info("Subsequent run using header_next_token...")
 
             limit_time = time() + 30
             while time() < limit_time:
