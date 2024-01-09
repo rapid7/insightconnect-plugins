@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1234,
+    "server_id": 1234,
+    "package_id": 1234,
+    "software_id": 1234,
+    "installed": true,
+    "name": "com.apple.appleseed.FeedbackAssistant",
+    "display_name": "Feedback Assistant",
+    "version": "5.1",
+    "repo": "Apple-System",
+    "package_version_id": 1234,
+    "os_name": "OS X",
+    "os_version": "12.2",
+    "os_version_id": 1234,
+    "create_time": "2021-12-20T16:21:21+0000",
+    "organization_id": 1234
+  },
+  {
+    "id": 1234,
+    "server_id": 1234,
+    "package_id": 1234,
+    "software_id": 1234,
+    "installed": true,
+    "name": "com.apple.calculator",
+    "display_name": "Calculator",
+    "version": "10.16",
+    "repo": "Apple-System",
+    "package_version_id": 1234,
+    "os_name": "OS X",
+    "os_version": "12.2",
+    "os_version_id": 1234,
+    "create_time": "2021-12-26T17:23:19+0000",
+    "organization_id": 1234
+  }
+]
