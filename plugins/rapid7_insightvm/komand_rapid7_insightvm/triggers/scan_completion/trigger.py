@@ -147,15 +147,16 @@ class ScanQueries:
         return f"""WITH matching_asset_group_ids AS (SELECT asset_id, string_agg(CAST(asset_group_id AS varchar), ',') AS asset_group_ids  
             FROM dim_asset_group_asset
             GROUP BY asset_id) 
-            SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, dv.nexpose_id, dv.severity, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source 
+            SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, dv.nexpose_id, dv.severity, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source, da.host_name, da.ip_address
             FROM fact_asset_scan_vulnerability_instance AS fasvi 
             INNER JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) 
+            INNER JOIN dim_asset AS da ON (fasvi.asset_id = da.asset_id)
             INNER JOIN dim_vulnerability_category AS dvc ON (fasvi.vulnerability_id = dvc.vulnerability_id) 
             INNER JOIN dim_solution AS ds ON (dv.nexpose_id = ds.nexpose_id) 
             INNER JOIN matching_asset_group_ids AS magi ON (fasvi.asset_id = magi.asset_id) 
             LEFT JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) 
             WHERE fasvi.scan_id = {scan_id} 
-            GROUP BY fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, dv.nexpose_id, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source, dv.severity """  # nosec B608
+            GROUP BY fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, dv.nexpose_id, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source, dv.severity, da.host_name, da.ip_address """  # nosec B608
 
 
 class Util:
