@@ -25,7 +25,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "format": "bytes",
       "displayType": "bytes",
       "title": "Certificate",
-      "description": "Base64-encoded certificate to authenticate with the host input API",
+      "description": "Base64-encoded certificate in PKCS12 format to authenticate with the host input API",
       "order": 7
     },
     "certificate_passphrase": {
