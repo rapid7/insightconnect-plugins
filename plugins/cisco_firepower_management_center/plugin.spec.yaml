@@ -485,7 +485,7 @@ connection:
   certificate:
     title: Certificate
     type: bytes
-    description: Base64-encoded certificate to authenticate with the host input API
+    description: Base64-encoded certificate in PKCS12 format to authenticate with the host input API
     required: true
     example: VGhpcyBpcyBhIHNhbXBsZSBiYXNlNjQtZW5jb2RlZCBjZXJ0aWZpY2F0ZSB0byBhdXRoZW50aWNhdGUgd2l0aCB0aGUgaG9zdCBpbnB1dCBBUEku
   certificate_passphrase:
