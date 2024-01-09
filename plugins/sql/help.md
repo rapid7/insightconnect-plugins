@@ -114,7 +114,7 @@ Example output:
 
 # Version History
 
-* 3.0.7 - Bumped version of SQLAlchemy used to version 1.2.18 | bump version of sdk used to version 5
+* 3.0.7 - Bumped version of SQLAlchemy used to version 1.2.18 | bump version of SDK used to version 5
 * 3.0.6 - Update plugin runtime to InsightConnect
 * 3.0.5 - Update pymssql version library to support latest MSSQL update 2019 15.0.4223.1
 * 3.0.4 - Fix issue with get method's keyword argument in Query action
