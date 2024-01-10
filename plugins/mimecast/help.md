@@ -32,7 +32,7 @@ The connection configuration accepts the following parameters:
 |access_key|credential_secret_key|None|True|The application access key|None|eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi|
 |app_id|string|None|True|Application ID|None|78d2e4b1-8cc2-4806-nt79-6ef332a47374|
 |app_key|credential_secret_key|None|True|The application key|None|475x54c6-4f61-4fab-8be7-a0710f3859e3|
-|region|string|EU|True|The region for the Mimecast server|['EU', 'DE', 'US', 'CA', 'ZA', 'AU', 'Offshore', 'Sandbox']|EU|
+|region|string|EU|True|The region for the Mimecast server| ['EU', 'DE', 'US', 'CA', 'ZA', 'AU', 'Offshore', 'Sandbox', 'USB', 'USBCOM']|EU|
 |secret_key|credential_secret_key|None|True|The application secret key|None|FgHrtydiP4TynI+rTZF42Qu0FtGuhJtuNM5bDh82goJQHed9kJZ5t/ORwGnI5r2hkl/bzCosZ+KVapJFeaf3Yw==|
   
 Example input:
