@@ -68,20 +68,18 @@ class Util:
                 return 200
 
         class MockResponseZip:
-            def json(self):
-                raise json.decoder.JSONDecodeError("Test", "test", 1)
-
-            @property
-            def content(self):
-                return Util.get_mocked_zip()
+            def __init__(self, status_code, content, headers, json):
+                self.status_code = status_code
+                self.content = content
+                self.headers_value = headers
+                self.json_value = json
 
             @property
             def headers(self):
-                return {"mc-siem-token": "token123", "Content-Disposition": "attachment"}
+                return self.headers_value
 
-            @property
-            def status_code(self):
-                return 200
+            def json(self):
+                return self.json_value
 
         if kwargs.get("url") == "https://eu-api.mimecast.com/api/directory/add-group-member":
             if "test4@rapid7.com" in kwargs.get(DATA_FIELD):
@@ -145,5 +143,29 @@ class Util:
                 else:
                     return MockResponse("block_sender.json.resp")
         elif kwargs.get("url") == "https://eu-api.mimecast.com/api/audit/get-siem-logs":
-            return MockResponseZip()
+            data = kwargs.get("data")
+            headers = {"mc-siem-token": "token123", "Content-Disposition": "attachment"}
+            resp = MockResponseZip(200, Util.get_mocked_zip(), headers, {"meta": {"status": 200}})
+            if "force_401" in data:
+                json_value = {
+                    "meta": {"isLastToken": False, "status": 401},
+                    "fail": [
+                        {
+                            "errors": [
+                                {
+                                    "code": "err_xdk_invalid_signature",
+                                    "message": "0004 Invalid Signature",
+                                    "retryable": False,
+                                }
+                            ]
+                        }
+                    ],
+                }
+                resp = MockResponseZip(401, b"", {}, json_value)
+            elif "force_json" in data:
+                json_decode = json.decoder.JSONDecodeError("Test", "test", 1)
+                resp = MockResponseZip(200, Util.get_mocked_zip(), headers, json_decode)
+            elif "no_results" in data:
+                resp = MockResponseZip(200, b"", {"mc-siem-token": "token123"}, {"meta": {"status": 200}})
+            return resp
         return "Not implemented"

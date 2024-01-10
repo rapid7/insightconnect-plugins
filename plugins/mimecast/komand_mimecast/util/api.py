@@ -99,7 +99,6 @@ class MimecastAPI:
             method="POST", url=f"{self.url}{uri}", headers=self._prepare_header(uri), data=str(payload)
         )
         self._check_rate_limiting(request)
-
         if "attachment" in request.headers.get("Content-Disposition", "") or self._is_last_token(request):
             combined_json_list = self._handle_zip_file(request)
             return combined_json_list, request.headers, request.status_code
@@ -132,9 +131,9 @@ class MimecastAPI:
         """
 
         try:
-            last_token = IS_LAST_TOKEN_FIELD in json.dumps(request.json())
+            last_token = request.json().get("meta", {}).get(IS_LAST_TOKEN_FIELD, False)
             request.headers.update({IS_LAST_TOKEN_FIELD: last_token})
-            return True
+            return last_token
         except json.JSONDecodeError:
             return False
 
