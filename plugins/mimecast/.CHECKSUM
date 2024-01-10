@@ -33,7 +33,7 @@
 		},
 		{
 			"identifier": "find_groups/schema.py",
-			"hash": "8c1accc62ed9cb95451422d4f54df476"
+			"hash": "0991456d139c291460b81704916dfe90"
 		},
 		{
 			"identifier": "get_audit_events/schema.py",
