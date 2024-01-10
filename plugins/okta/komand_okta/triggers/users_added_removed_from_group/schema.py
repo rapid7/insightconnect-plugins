@@ -480,7 +480,7 @@ class UsersAddedRemovedFromGroupOutput(insightconnect_plugin_runtime.Output):
       "title": "credentials",
       "properties": {
         "password": {
-          "$ref": "#/definitions/password",
+          "$ref": "#/definitions/custom_password",
           "title": "Password",
           "description": "Password details",
           "order": 1
@@ -499,10 +499,17 @@ class UsersAddedRemovedFromGroupOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "password": {
-      "type": "string",
-      "format": "password",
-      "displayType": "password"
+    "custom_password": {
+      "type": "object",
+      "title": "custom_password",
+      "properties": {
+        "value": {
+          "type": "string",
+          "title": "Value",
+          "description": "Password value",
+          "order": 1
+        }
+      }
     },
     "provider": {
       "type": "object",
