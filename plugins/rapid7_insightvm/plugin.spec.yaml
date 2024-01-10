@@ -4555,7 +4555,7 @@ triggers:
       source:
         title: Source
         description: Source
-        type: string
+        type: '[]string'
         required: false
         example: url
       cvss_score:

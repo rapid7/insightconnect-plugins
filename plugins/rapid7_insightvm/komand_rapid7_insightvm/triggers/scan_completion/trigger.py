@@ -144,19 +144,29 @@ class ScanQueries:
         :return: The completed query string
         """
 
-        return f"""WITH matching_asset_group_ids AS (SELECT asset_id, string_agg(CAST(asset_group_id AS varchar), ',') AS asset_group_ids  
-            FROM dim_asset_group_asset
-            GROUP BY asset_id) 
-            SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, dv.nexpose_id, dv.severity, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source, da.host_name, da.ip_address
-            FROM fact_asset_scan_vulnerability_instance AS fasvi 
-            INNER JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) 
-            INNER JOIN dim_asset AS da ON (fasvi.asset_id = da.asset_id)
-            INNER JOIN dim_vulnerability_category AS dvc ON (fasvi.vulnerability_id = dvc.vulnerability_id) 
-            INNER JOIN dim_solution AS ds ON (dv.nexpose_id = ds.nexpose_id) 
-            INNER JOIN matching_asset_group_ids AS magi ON (fasvi.asset_id = magi.asset_id) 
-            LEFT JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) 
-            WHERE fasvi.scan_id = {scan_id} 
-            GROUP BY fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, dv.nexpose_id, dv.cvss_v3_score, dvc.category_name, ds.solution_id, ds.summary, dvr.source, dv.severity, da.host_name, da.ip_address """  # nosec B608
+        return f"""with solutions as (
+                    select
+                    dshc.solution_id as solution_id,
+                    ds.nexpose_id as nexpose_id,
+                    ds.summary as summary
+                    from dim_solution_highest_supercedence dshc
+                    join dim_solution ds on dshc.superceding_solution_id=ds.solution_id
+                    ),
+                    matching_asset_group_ids AS (SELECT asset_id, string_agg(CAST(asset_group_id AS varchar), ',') AS asset_group_ids  
+                    FROM dim_asset_group_asset
+                    GROUP BY asset_id
+                    ) 
+                    SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, dv.nexpose_id, dv.severity, dv.cvss_v3_score, davs.solution_id, dvc.category_name, ds.summary, dvr.source, da.host_name, da.ip_address
+                    FROM fact_asset_scan_vulnerability_instance AS fasvi 
+                    INNER JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) 
+                    INNER JOIN dim_asset AS da ON (fasvi.asset_id = da.asset_id)
+                    INNER JOIN dim_vulnerability_category AS dvc ON (fasvi.vulnerability_id = dvc.vulnerability_id) 
+                    INNER JOIN matching_asset_group_ids AS magi ON (fasvi.asset_id = magi.asset_id) 
+                    INNER JOIN dim_asset_vulnerability_solution AS davs ON (fasvi.vulnerability_id = davs.vulnerability_id)
+                    INNER JOIN solutions AS ds ON (ds.solution_id = davs.solution_id)
+                    LEFT JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) 
+                    WHERE fasvi.scan_id = {scan_id} AND (dvr.source='MSKB' or dvr.source='MS')
+                    GROUP BY fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, dv.nexpose_id, dv.cvss_v3_score, davs.solution_id, dvc.category_name, ds.solution_id, ds.summary, dvr.source, dv.severity, da.host_name, da.ip_address """
 
 
 class Util:
@@ -174,7 +184,7 @@ class Util:
         # Input retrieval
         asset_group = params.get(Input.ASSET_GROUP, None)
         cve = params.get(Input.CVE, None)
-        source = params.get(Input.SOURCE, None)
+        source = params.get(Input.SOURCE, [])
         cvss_score = params.get(Input.CVSS_SCORE, None)
         severity = params.get(Input.SEVERITY, None)
         category = params.get(Input.CATEGORY_NAME, "").lower()
@@ -204,7 +214,7 @@ class Util:
         conditions = (
             asset_group and asset_group not in csv_row.get("asset_group_ids", "").split(","),
             cve and cve not in csv_row.get("nexpose_id", ""),
-            source and source not in csv_row.get("source", ""),
+            source and [item for item in source if item in csv_row.get("source", "")],
             cvss_score and csv_row.get("cvss_v3_score", 0) < cvss_score,
             severity and severity not in csv_row.get("severity", ""),
             category and category not in csv_row.get("category_name", "").lower(),

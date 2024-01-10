@@ -80,9 +80,12 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
       "order": 2
     },
     "source": {
-      "type": "string",
+      "type": "array",
       "title": "Source",
       "description": "Source",
+      "items": {
+        "type": "string"
+      },
       "order": 5
     }
   },
