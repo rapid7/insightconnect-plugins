@@ -144,29 +144,31 @@ class ScanQueries:
         :return: The completed query string
         """
 
-        return f"""with solutions as (
-                    select
-                    dshc.solution_id as solution_id,
-                    ds.nexpose_id as nexpose_id,
-                    ds.summary as summary
-                    from dim_solution_highest_supercedence dshc
-                    join dim_solution ds on dshc.superceding_solution_id=ds.solution_id
-                    ),
-                    matching_asset_group_ids AS (SELECT asset_id, string_agg(CAST(asset_group_id AS varchar), ',') AS asset_group_ids  
-                    FROM dim_asset_group_asset
-                    GROUP BY asset_id
-                    ) 
-                    SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, dv.nexpose_id, dv.severity, dv.cvss_v3_score, davs.solution_id, dvc.category_name, ds.summary, dvr.source, da.host_name, da.ip_address
-                    FROM fact_asset_scan_vulnerability_instance AS fasvi 
-                    INNER JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) 
-                    INNER JOIN dim_asset AS da ON (fasvi.asset_id = da.asset_id)
-                    INNER JOIN dim_vulnerability_category AS dvc ON (fasvi.vulnerability_id = dvc.vulnerability_id) 
-                    INNER JOIN matching_asset_group_ids AS magi ON (fasvi.asset_id = magi.asset_id) 
-                    INNER JOIN dim_asset_vulnerability_solution AS davs ON (fasvi.vulnerability_id = davs.vulnerability_id)
-                    INNER JOIN solutions AS ds ON (ds.solution_id = davs.solution_id)
-                    LEFT JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) 
-                    WHERE fasvi.scan_id = {scan_id} AND (dvr.source='MSKB' or dvr.source='MS')
-                    GROUP BY fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, dv.nexpose_id, dv.cvss_v3_score, davs.solution_id, dvc.category_name, ds.solution_id, ds.summary, dvr.source, dv.severity, da.host_name, da.ip_address """  # nosec B608
+        return f"""
+        with solutions as (
+        SELECT
+        dshc.solution_id AS solution_id,
+        ds.nexpose_id AS nexpose_id,
+        ds.summary AS summary
+        FROM dim_solution_highest_supercedence AS dshc
+        INNER JOIN dim_solution AS ds on dshc.superceding_solution_id=ds.solution_id
+        GROUP BY dshc.solution_id, nexpose_id, summary
+        ),
+        matching_asset_group_ids AS (SELECT asset_id, string_agg(CAST(asset_group_id AS varchar), ',') AS asset_group_ids
+        FROM dim_asset_group_asset
+        GROUP BY asset_id
+        )
+        SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, s.nexpose_id, dv.severity, dv.cvss_v3_score, string_agg(DISTINCT CAST(s.solution_id AS varchar), ',') AS solution_ids, string_agg(DISTINCT CAST(dvc.category_name AS varchar), ',') AS category_names, s.summary, dvr.source, da.host_name, da.ip_address
+        FROM fact_asset_scan_vulnerability_instance AS fasvi
+        LEFT JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id)
+        INNER JOIN dim_asset AS da ON (fasvi.asset_id = da.asset_id)
+        INNER JOIN dim_vulnerability_category AS dvc ON (fasvi.vulnerability_id = dvc.vulnerability_id)
+        INNER JOIN matching_asset_group_ids AS magi ON (fasvi.asset_id = magi.asset_id)
+        INNER JOIN dim_asset_vulnerability_solution AS davs ON (fasvi.vulnerability_id = davs.vulnerability_id)
+        INNER JOIN solutions AS s ON (s.solution_id = davs.solution_id)
+        LEFT JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id)
+        WHERE fasvi.scan_id = 11650 AND (dvr.source='MSKB' or dvr.source='MS')
+        GROUP BY fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, s.nexpose_id, dv.cvss_v3_score, s.summary, dvr.source, dv.severity, da.host_name, da.ip_address """  # nosec B608
 
 
 class Util:
