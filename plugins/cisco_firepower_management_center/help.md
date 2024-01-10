@@ -707,7 +707,8 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+* The certificate authentication is used solely in two actions, namely: `Add Scan Result` and `Bulk Add Scan Result`. Please remember, that the data entered into the certificate input field in the connection is required to be a base-64 encoded PKCS12 certificate file, exported from the Firepower Management Center server. The passphrase is a password created during the PKCS12 certificate file export.
+* `SSL Verify` field is used by all other actions (i.e. excluding `Add Scan Result` and `Bulk Add Scan Result`), for SSL certificate verification. If the certificate is self-signed then SSL Verify should be set to `False` for those actions.
 
 # Version History
 
