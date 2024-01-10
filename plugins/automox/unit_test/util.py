@@ -50,7 +50,7 @@ class MockResponse:
         if self.filename is None:
             return None
         with open(
-            os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json")
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp")
         ) as file:
             return json.load(file)
 
