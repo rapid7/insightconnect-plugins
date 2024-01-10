@@ -1,0 +1,31 @@
+[
+  {
+    "id": 1234,
+    "uuid": "00000000-0000-0000-0000-000000000000",
+    "name": "Test notification",
+    "policy_type_name": "custom",
+    "organization_id": 103871,
+    "configuration": {
+      "os_family": "Windows",
+      "notify_reboot_user": true,
+      "notify_deferred_reboot_user": true,
+      "pending_reboot_deferral_enabled": true,
+      "custom_pending_reboot_notification_message": "Updates require restart: Please save your work.",
+      "notify_deferred_reboot_user_message_timeout": 15,
+      "custom_pending_reboot_notification_max_delays": 3,
+      "custom_pending_reboot_notification_message_mac": "Updates require restart: Please save your work.",
+      "custom_pending_reboot_notification_deferment_periods": [
+        1,
+        4,
+        8
+      ]
+    },
+    "schedule_time": "00:00",
+    "create_time": "2023-10-25T21:56:48+0000",
+    "server_groups": [
+      1234
+    ],
+    "server_count": 5,
+    "status": "inactive"
+  }
+]
