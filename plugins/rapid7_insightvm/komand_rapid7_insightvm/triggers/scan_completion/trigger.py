@@ -166,7 +166,7 @@ class ScanQueries:
                     INNER JOIN solutions AS ds ON (ds.solution_id = davs.solution_id)
                     LEFT JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) 
                     WHERE fasvi.scan_id = {scan_id} AND (dvr.source='MSKB' or dvr.source='MS')
-                    GROUP BY fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, dv.nexpose_id, dv.cvss_v3_score, davs.solution_id, dvc.category_name, ds.solution_id, ds.summary, dvr.source, dv.severity, da.host_name, da.ip_address """
+                    GROUP BY fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, dv.nexpose_id, dv.cvss_v3_score, davs.solution_id, dvc.category_name, ds.solution_id, ds.summary, dvr.source, dv.severity, da.host_name, da.ip_address """  # nosec B608
 
 
 class Util:
@@ -201,11 +201,11 @@ class Util:
 
         vulnerability_dict = {
             "vulnerability_id": csv_row.get("vulnerability_id", ""),
-            "nexpose_id": csv_row.get("nexpose_id", ""),
+            "nexpose_id": Util.strip_msft_id(csv_row.get("nexpose_id", "")),
             "cvss_v3_score": csv_row.get("cvss_v3_score", 0),
             "severity": csv_row.get("severity", ""),
             "category": csv_row.get("category_name", ""),
-            "solution_id": Util.strip_msft_id(csv_row.get("solution_id", "")),
+            "solution_id": csv_row.get("solution_id", ""),
             "solution_summary": csv_row.get("summary", ""),
         }
 
