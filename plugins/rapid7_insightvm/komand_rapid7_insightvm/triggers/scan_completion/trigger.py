@@ -203,7 +203,7 @@ class Util:
 
         vulnerability_dict = {
             "vulnerability_id": csv_row.get("vulnerability_id", ""),
-            "nexpose_id": Util.strip_msft_id(csv_row.get("nexpose_id", "")),
+            "nexpose_id": csv_row.get("nexpose_id", ""),
             "cvss_v3_score": csv_row.get("cvss_v3_score", 0),
             "severity": csv_row.get("severity", ""),
             "category": csv_row.get("category_name", ""),
@@ -227,23 +227,6 @@ class Util:
 
         # Otherwise, return the newly filtered result.
         return asset_dict, vulnerability_dict
-
-    @staticmethod
-    def strip_msft_id(solution_id: str) -> str:
-        """
-        Helper method to strip solution IDs specific to microsoft IDs
-        to return a useful solution ID for sccm
-
-        :param solution_id: Solution ID
-        :return: Regular solution ID or stripped solution ID
-        """
-
-        list_x = solution_id.split("-")
-
-        if list_x[0] == "msft":
-            return "-".join(list_x[2:])
-        else:
-            return solution_id
 
     @staticmethod
     def verify_scan_id_input(scan_id: int):
