@@ -167,7 +167,7 @@ class ScanQueries:
         INNER JOIN dim_asset_vulnerability_solution AS davs ON (fasvi.vulnerability_id = davs.vulnerability_id)
         INNER JOIN solutions AS s ON (s.solution_id = davs.solution_id)
         LEFT JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id)
-        WHERE fasvi.scan_id = 11650 AND (dvr.source='MSKB' or dvr.source='MS')
+        WHERE fasvi.scan_id = {scan_id} AND (dvr.source='MSKB' or dvr.source='MS')
         GROUP BY fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, s.nexpose_id, dv.cvss_v3_score, s.summary, dvr.source, dv.severity, da.host_name, da.ip_address """  # nosec B608
 
 
