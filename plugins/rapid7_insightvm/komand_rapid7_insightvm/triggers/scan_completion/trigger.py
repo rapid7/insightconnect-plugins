@@ -73,7 +73,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         report_payload = {
             "name": f"Rapid7-InsightConnect-ScanCompletion-{identifier}",
             "format": "sql-query",
-            "query": ScanQueries.query_results_from_latest_scan(scan_id),
+            "query": ScanQueries.query_results_from_latest_scan(scan_id, params.get(Input.SOURCE, [])),
             "version": "2.3.0",
         }
 
@@ -136,13 +136,16 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
 class ScanQueries:
     @staticmethod
-    def query_results_from_latest_scan(scan_id: int) -> str:
+    def query_results_from_latest_scan(scan_id: int, source: list) -> str:
         """
         Generate an SQL query string needed to to retrieve all the necessary outputs
 
         :param scan_id: Scan ID to query against
+        :param source: List of sources to filter results by
         :return: The completed query string
         """
+
+        # TODO - Not actually doing anything with source yet so dont forget to implement it
 
         return f"""
         with solutions as (
@@ -186,7 +189,6 @@ class Util:
         # Input retrieval
         asset_group = params.get(Input.ASSET_GROUP, None)
         cve = params.get(Input.CVE, None)
-        source = params.get(Input.SOURCE, [])
         cvss_score = params.get(Input.CVSS_SCORE, None)
         severity = params.get(Input.SEVERITY, None)
         category = params.get(Input.CATEGORY_NAME, "").lower()
@@ -206,8 +208,8 @@ class Util:
             "nexpose_id": csv_row.get("nexpose_id", ""),
             "cvss_v3_score": csv_row.get("cvss_v3_score", 0),
             "severity": csv_row.get("severity", ""),
-            "category": csv_row.get("category_name", ""),
-            "solution_id": csv_row.get("solution_id", ""),
+            "category": csv_row.get("category_names", ""),
+            "solution_id": csv_row.get("solution_ids", ""),
             "solution_summary": csv_row.get("summary", ""),
         }
 
@@ -216,7 +218,6 @@ class Util:
         conditions = (
             asset_group and asset_group not in csv_row.get("asset_group_ids", "").split(","),
             cve and cve not in csv_row.get("nexpose_id", ""),
-            source and [item for item in source if item in csv_row.get("source", "")],
             cvss_score and csv_row.get("cvss_v3_score", 0) < cvss_score,
             severity and severity not in csv_row.get("severity", ""),
             category and category not in csv_row.get("category_name", "").lower(),
