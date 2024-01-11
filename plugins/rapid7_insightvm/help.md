@@ -3282,7 +3282,7 @@ This trigger is used to fire upon completed scan
 |interval|integer|5|True|How often the trigger should check for new vulnerability scans in minutes|None|5|
 |severity|string|None|False|Severity of the vulnerability|['', 'Moderate', 'Severe', 'Critical']|Severe|
 |site_id|string|None|False|Site ID|None|219|
-|source|string|None|False|Source|None|url|
+|source|[]string|None|False|Source|None|url|
   
 Example input:
 
