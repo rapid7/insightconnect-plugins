@@ -1,7 +1,7 @@
 import sys
 import os
 
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath("../"))
 
 from parameterized import parameterized
 from unittest.mock import patch, Mock
@@ -17,7 +17,7 @@ from util import (
     mock_request_200_invalid_json,
     ORG_ID,
     DEVICE_ID,
-    POLICY_ID
+    POLICY_ID,
 )
 
 from icon_automox.actions.run_command import RunCommand
@@ -33,7 +33,7 @@ class TestRunCommand(TestCase):
             Input.DEVICE_ID: DEVICE_ID,
             Input.PATCHES: [1234],
             Input.POLICY_ID: POLICY_ID,
-            }
+        }
 
     @patch("requests.Session.request", side_effect=mock_request_204)
     def test_run_command_ok(self, mock: Mock) -> None:

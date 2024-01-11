@@ -7,25 +7,7 @@ title: Automox
 description: Automox is modernizing IT operations with continuous visibility, insight,
   and agility for your entire IT environment
 version: 3.0.0
-version_history:
-  - '3.0.0 - `Action`: Fixed -  Get Vulnerability Sync Action Set | `Action`: Fixed
-    - List Vulnerability Sync Action Sets | `Action`: Updated - List Organization Users'
-  - '2.0.0 - Fix Vulnerability Sync API Actions | `Action`: Added - Delete Vulnerability
-    Sync Action Set | `Action`: Added - Execute Vulnerability Sync Actions | `Action`:
-    Added - List Vulnerability Sync Action Set Issues | `Action`: Added - List Vulnerability
-    Sync Action Set Solutions | `Action`: Added - List Vulnerability Sync Action Sets
-    | `Action`: Added - Get Vulnerability Sync Action Set | `Action`: Updated - Upload
-    Vulnerability Sync File | `Action`: Updated - Get Devices | `Action`: Deleted -
-    Action on Vulnerability Sync Batch | `Action`: Deleted - Vulnerability Sync Task
-    | `Action`: Deleted - Get Vulnerability Sync Batch | `Action`: Deleted - List Vulnerability
-    Sync Batches | `Action`: Deleted - List Vulnerability Sync Tasks'
-  - '1.2.0 - Get device by IP and Get device by hostname: fix validation issue when
-    IP or hostname not found | Add unit tests'
-  - '1.1.1 - Fix undefined org ID passed to actions when not required | Record outcome
-    of connection tests'
-  - '1.1.0 - Add `report source` as optional input parameter to Upload Vulnerability
-    Sync File action | Add report source to batch type'
-  - '1.0.0 - Initial plugin'
+connection_version: 3
 supported_versions: [All as of 12/29/2023]
 support: partner
 status: []
