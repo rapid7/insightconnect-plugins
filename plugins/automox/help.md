@@ -1201,7 +1201,7 @@ This action is used to retrieve list of vulnerability sync batches
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum| Example                                                           |
+|Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |configuration_id_equals|string|None|False|Filter by configuration ID|None|00000000-0000-0000-0000-000000000000|
 |configuration_id_is_set|boolean|None|False|Filter based on whether the configuration ID is set|None|True|
