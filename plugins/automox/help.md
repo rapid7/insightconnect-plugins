@@ -1062,7 +1062,6 @@ This action is used to retrieve the issues identified for a specified vulnerabil
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |action_set_id|integer|None|True|Identifier of the action set|None|1234|
-|issue_type_in|[]string|None|False|Filter by issue type|None|['unknown-host']|
 |org_id|integer|None|True|Identifier of organization|None|1234|
 |issue_type_in|[]string|None|False|Filter by issue type|None|["unknown-host"]|
   
@@ -1115,7 +1114,6 @@ This action is used to retrieve a list of vulnerability sync remediations
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |action_set_id|integer|None|True|Filter by action set identifier|None|1234|
 |org_id|integer|None|True|Identifier of organization|None|1234|
-|remediation_type_in|[]string|None|False|Filter by remediation type|None|['patch-now', 'patch-with-worklet']|
 |severity_in|[]string|None|False|Filter by severity|None|["critical", "high", "medium", "low", "unknown"]|
 |vulnerability_in|[]string|None|False|Filter by vulnerability|None|["CVE-2020-1234", "CVE-2020-5678"]|
 |remediation_type_in|[]string|None|False|Filter by remediation type|None|["patch-now", "patch-with-worklet"]|
@@ -1204,7 +1202,7 @@ This action is used to retrieve list of vulnerability sync batches
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum| Example                                                           |
-| :--- | :--- | :--- | :--- | :--- | :--- |:------------------------------------------------------------------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |configuration_id_equals|string|None|False|Filter by configuration ID|None|00000000-0000-0000-0000-000000000000|
 |configuration_id_is_set|boolean|None|False|Filter based on whether the configuration ID is set|None|True|
 |group_sort|string|None|False|Sort results by field|['asc', 'desc', 'latest_updated_at:asc', 'latest_updated_at:desc', 'source:asc', 'source:desc', '']|latest_updated_at:desc|
@@ -1295,7 +1293,7 @@ This action is used to run a command on a device
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :-- |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |command|string|None|True|Command to run on device|['GetOS', 'InstallUpdate', 'InstallAllUpdates', 'PolicyTest', 'PolicyRemediate', 'Reboot']|GetOS|
 |device_id|integer|None|True|Identifier of device|None|1234|
 |org_id|integer|None|False|Identifier of organization|None|1234|
