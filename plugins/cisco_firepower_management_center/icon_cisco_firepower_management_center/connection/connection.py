@@ -28,7 +28,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.password = password
         self.host = params.get(Input.SERVER)
         self.certificate = params.get(Input.CERTIFICATE)
-        self.passphrase = params.get(Input.CERTIFICATE_PASSPHRASE).get("secretKey")
+        self.passphrase = params.get(Input.CERTIFICATE_PASSPHRASE, {}).get("secretKey")
 
         self.cisco_firepower_api = CiscoFirePowerApi(
             username=username,

@@ -7,16 +7,17 @@ vendor: rapid7
 support: community
 status: []
 description: This plugin utilizes Cisco Firepower Management Center to create URL block policies and manage address objects to block hosts
-version: 2.0.1
+version: 2.1.0
 supported_versions: ["6.6.0"]
+sdk:
+  type: slim
+  version: 5
+  user: root
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/cisco_firepower_management_center
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.cisco.com
-tags:
-- cisco
-- firesight
-- firepower
+tags: [cisco, firesight, firepower]
 hub_tags:
   use_cases: [vulnerability_management]
   keywords: [firewall, cisco, firesight, firepower]
@@ -245,6 +246,17 @@ types:
       required: false
       type: reference
       description: Contains target reference information
+  literal_object:
+    type:
+      title: Type
+      description: The unique type of literal
+      type: string
+      required: false
+    value:
+      title: Metadata
+      description: Actual value of the network
+      type: string
+      required: false
   address_object:
     metadata:
       title: Metadata
@@ -403,7 +415,7 @@ types:
       title: Links
       required: false
       type: links
-      description:
+      description: This defines the self referencing links for the given resource
     overrides:
       title: Overrides
       required: false
@@ -429,7 +441,6 @@ types:
       required: false
       type: string
       description: Unique identifier of domain or device when override assigned to child domain. Used as path parameter to GET override details for a specific object on a specific target (device or domain)
-
 connection:
   server:
     title: Server Address
@@ -474,7 +485,7 @@ connection:
   certificate:
     title: Certificate
     type: bytes
-    description: Base64-encoded certificate to authenticate with the host input API
+    description: Base64-encoded certificate in PKCS12 format to authenticate with the host input API
     required: true
     example: VGhpcyBpcyBhIHNhbXBsZSBiYXNlNjQtZW5jb2RlZCBjZXJ0aWZpY2F0ZSB0byBhdXRoZW50aWNhdGUgd2l0aCB0aGUgaG9zdCBpbnB1dCBBUEku
   certificate_passphrase:
@@ -483,7 +494,6 @@ connection:
     description: The passphrase to access the certificate
     required: true
     example: passphrase
-
 actions:
   block_url_policy:
     title: Block URL Policy
@@ -509,10 +519,11 @@ actions:
         example: Example Access Rule
     output:
       success:
-        type: boolean
         title: Success
-        required: true
         description: Success
+        type: boolean
+        required: true
+        example: true
   create_address_object:
     title: Create Address Object
     description: Creates a new address object
@@ -540,13 +551,14 @@ actions:
         description: This list contains a set of hosts that should not be blocked. This can include IP addresses, CIDR IP addresses, and domains
         type: "[]string"
         required: false
-        example: ["198.51.100.100", "192.0.2.0/24", "example.com" ]
+        example: '["198.51.100.100", "192.0.2.0/24", "example.com"]'
     output:
       address_object:
         title: Address Object
         description: Returns information about the newly created address object
         type: address_object
         required: false
+        example: '{"dnsResolution":"IPV4_AND_IPV6","id":"00000000-0000-0ed3-0000-012884905524","links":{"parent":"https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/networkaddresses","self":"https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/fqdns/00000000-0000-0ed3-0000-012884905524"},"metadata":{"domain":{"id":"e276abec-e0f2-11e3-8169-6d9ed49b625f","name":"Global","type":"Domain"},"lastUser":{"name":"admin"},"parentType":"NetworkAddress","timestamp":0},"name":"Example Object Created from InsightConnect","overridable":false,"type":"FQDN","value":"example.com"}'
   delete_address_object:
     title: Delete Address Object
     description: Deletes an address object
@@ -563,6 +575,7 @@ actions:
         description: Returns information about the deleted address object
         type: address_object
         required: false
+        example: '{"dnsResolution":"IPV4_AND_IPV6","id":"00000000-0000-0ed3-0000-012884905524","links":{"parent":"https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/networkaddresses","self":"https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/fqdns/00000000-0000-0ed3-0000-012884905524"},"metadata":{"domain":{"id":"e276abec-e0f2-11e3-8169-6d9ed49b625f","name":"Global","type":"Domain"},"lastUser":{"name":"admin"},"parentType":"NetworkAddress","timestamp":0},"name":"Example Object Created from InsightConnect","overridable":false,"type":"FQDN","value":"example.com"}'
   check_if_address_in_group:
     title: Check if Address in Group
     description: Checks if provided Address Object name or host exists in the Address Group
@@ -592,11 +605,19 @@ actions:
         description: Was address found in group
         type: boolean
         required: true
+        example: true
       address_objects:
         title: Address Objects
         description: List of found address objects
         type: "[]address_object"
         required: false
+        example: '{"description":" ","dnsResolution":"IPV4_AND_IPV6","id":"00000000-0000-0ed3-0000-021474836483","links":{"parent":"https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/networkaddresses","self":"https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/fqdns/00000000-0000-0ed3-0000-021474836483"},"metadata":{"domain":{"id":"e276abec-e0f2-11e3-8169-6d9ed49b625f","name":"Global","type":"Domain"},"lastUser":{"name":"admin"},"parentType":"NetworkAddress","timestamp":1600277332623},"name":"TestAddressObjectFQDN1","overridable":false,"type":"FQDN","value":"example.com"}'
+      literal_objects:
+        title: Literal Objects
+        description: List of found literals
+        type: "[]literal_object"
+        required: false
+        example: '[{"type":"FQDN","value":"example.com"}]'
   add_address_to_group:
     title: Add Address to Group
     description: Adds an existing address object to a group
@@ -619,6 +640,7 @@ actions:
         description: Returns information about the network group
         type: network_group
         required: false
+        example: '{"links":{"self":"https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/networkgroups/00000000-0000-0ed3-0000-021474836521"},"objects":[{"type":"Host","id":"00000000-0000-0ed3-0000-021474836502","name":"TestAddressObjectHost1"},{"type":"FQDN","id":"00000000-0000-0ed3-0000-021474836483","name":"TestAddressObjectFQDN1"},{"type":"Network","id":"00000000-0000-0ed3-0000-021474836598","name":"TestAddressObjectNetwork"}],"type":"NetworkGroup","overridable":false,"id":"00000000-0000-0ed3-0000-021474836521","name":"TestAddressObjectGroup","metadata":{"timestamp":0,"lastUser":{"name":"admin"},"domain":{"name":"Global","id":"e276abec-e0f2-11e3-8169-6d9ed49b625f","type":"Domain"}}}'
   remove_address_from_group:
     title: Remove Address from Group
     description: Removes an address from a group
@@ -641,6 +663,7 @@ actions:
         description: Returns information about the network group
         type: network_group
         required: false
+        example: '{"links":{"self":"https://192.50.100.100/api/fmc_config/v1/domain/e276abec-e0f2-11e3-8169-6d9ed49b625f/object/networkgroups/00000000-0000-0ed3-0000-021474836521"},"objects":[{"type":"Host","id":"00000000-0000-0ed3-0000-021474836502","name":"TestAddressObjectHost1"},{"type":"FQDN","id":"00000000-0000-0ed3-0000-021474836483","name":"TestAddressObjectFQDN1"},{"type":"Network","id":"00000000-0000-0ed3-0000-021474836598","name":"TestAddressObjectNetwork"}],"type":"NetworkGroup","overridable":false,"id":"00000000-0000-0ed3-0000-021474836521","name":"TestAddressObjectGroup","metadata":{"timestamp":0,"lastUser":{"name":"admin"},"domain":{"name":"Global","id":"e276abec-e0f2-11e3-8169-6d9ed49b625f","type":"Domain"}}}'
   add_scan_result:
     title: Add Scan Result
     description: Add a scan result from a third-party vulnerability scanner
@@ -666,11 +689,13 @@ actions:
         title: Errors
         type: number
         required: true
+        example: 0
       commands_processed:
         description: Number of commands processed
         title: Commands Processed
         type: number
         required: true
+        example: 4
   bulk_add_scan_result:
     title: Bulk Add Scan Result
     description: Add scan results from a third-party vulnerability scanner
@@ -696,8 +721,10 @@ actions:
         title: Errors
         type: number
         required: true
+        example: 0
       commands_processed:
         description: Number of commands processed
         title: Commands Processed
         type: number
         required: true
+        example: 4

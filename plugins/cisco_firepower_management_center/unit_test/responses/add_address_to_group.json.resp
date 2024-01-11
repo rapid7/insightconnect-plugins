@@ -35,7 +35,7 @@
       "id": "00000000-0000-0000-0000-000000000002"
     }
   ],
-  "overridable": "False",
+  "overridable": false,
   "name": "Test_Group",
   "id": "00000000-0000-0000-0000-000000000001",
   "metadata": {
