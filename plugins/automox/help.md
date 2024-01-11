@@ -1062,8 +1062,8 @@ This action is used to retrieve the issues identified for a specified vulnerabil
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |action_set_id|integer|None|True|Identifier of the action set|None|1234|
-|issue_type_in|[]string|None|False|Filter by issue type|None|['unknown-host']|
 |org_id|integer|None|True|Identifier of organization|None|1234|
+|issue_type_in|[]string|None|False|Filter by issue type|None|["unknown-host"]|
   
 Example input:
 
@@ -1114,9 +1114,9 @@ This action is used to retrieve a list of vulnerability sync remediations
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |action_set_id|integer|None|True|Filter by action set identifier|None|1234|
 |org_id|integer|None|True|Identifier of organization|None|1234|
-|remediation_type_in|[]string|None|False|Filter by remediation type|None|['patch-now', 'patch-with-worklet']|
-|severity_in|[]string|None|False|Filter by severity|None|['critical', 'high', 'medium', 'low', 'unknown']|
-|vulnerability_in|[]string|None|False|Filter by vulnerability|None|['CVE-2020-1234', 'CVE-2020-5678']|
+|severity_in|[]string|None|False|Filter by severity|None|["critical", "high", "medium", "low", "unknown"]|
+|vulnerability_in|[]string|None|False|Filter by vulnerability|None|["CVE-2020-1234", "CVE-2020-5678"]|
+|remediation_type_in|[]string|None|False|Filter by remediation type|None|["patch-now", "patch-with-worklet"]|
   
 Example input:
 
@@ -1209,9 +1209,9 @@ This action is used to retrieve list of vulnerability sync batches
 |include_all_runs_equals|boolean|None|False|Whether to include all runs in the response|None|True|
 |org_id|integer|None|True|Identifier of organization|None|1234|
 |sort|string|None|False|Sort results by field|['created_at', 'updated_at', 'status', 'source_type', 'source_name', 'configuration_id', '']|created_at|
-|source_type_in|[]string|None|False|Filter by source type|None|['Generic Report', 'CrowdStrike', 'Rapid7', 'TenableIO', 'Qualys']|
-|status_in|[]string|None|False|Filter by status|None|['building', 'ready', 'error']|
-|status_not_in|[]string|None|False|Filter by status|None|['building', 'ready', 'error']|
+|source_type_in|[]string|None|False|Filter by source type|None|["Generic Report", "CrowdStrike", "Rapid7", "TenableIO", "Qualys"]|
+|status_in|[]string|None|False|Filter by status|None|["building", "ready", "error"]|
+|status_not_in|[]string|None|False|Filter by status|None|["building", "ready", "error"]|
   
 Example input:
 
@@ -1297,7 +1297,7 @@ This action is used to run a command on a device
 |command|string|None|True|Command to run on device|['GetOS', 'InstallUpdate', 'InstallAllUpdates', 'PolicyTest', 'PolicyRemediate', 'Reboot']|GetOS|
 |device_id|integer|None|True|Identifier of device|None|1234|
 |org_id|integer|None|False|Identifier of organization|None|1234|
-|patches|[]string|None|False|List of patches to be installed by name (Note: this only works with the InstallUpdate command)|None|['Security Update (KB4549947)']|
+|patches|[]string|None|False|List of patches to be installed by name (Note: this only works with the InstallUpdate command)|None|["Security Update (KB4549947)"]|
 |policy_id|integer|None|False|Identifier of policy|None|1234|
   
 Example input:
@@ -1339,7 +1339,7 @@ This action is used to update Automox device
 |exception|boolean|False|True|Exclude the device from reports and statistics|None|False|
 |org_id|integer|None|False|Identifier of organization|None|1234|
 |server_group_id|integer|None|False|Identifier of server group|None|1234|
-|tags|[]string|None|False|List of tags|None|['tag1', 'tag2']|
+|tags|[]string|None|False|List of tags|None|["tag1", "tag2"]|
   
 Example input:
 

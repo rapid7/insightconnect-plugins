@@ -1,7 +1,7 @@
 import sys
 import os
 
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath("../"))
 
 from parameterized import parameterized
 from unittest.mock import patch, Mock
@@ -17,7 +17,7 @@ from util import (
     mocked_request,
     mock_request_200_invalid_json,
     ORG_ID,
-    GROUP_ID
+    GROUP_ID,
 )
 
 from icon_automox.actions.update_group import UpdateGroup
@@ -35,7 +35,7 @@ class TestUpdateGroup(TestCase):
             Input.COLOR: "#000000",
             Input.PARENT_SERVER_GROUP_ID: 12345,
             Input.REFRESH_INTERVAL: 6000,
-            }
+        }
 
     @patch("requests.Session.request", side_effect=mock_request_200)
     @patch("requests.Session.request", side_effect=mock_request_204)

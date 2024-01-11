@@ -182,4 +182,3 @@ def mock_request_500(*args, **kwargs) -> MockResponse:
 
 def mock_request_post_500(*args, **kwargs) -> MockResponse:
     return mock_conditions("POST", args[0], 500, **kwargs)
-

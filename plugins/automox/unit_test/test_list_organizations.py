@@ -40,7 +40,7 @@ class TestListOrganizations(TestCase):
                     "billing_name": "Test",
                     "billing_email": "example@automox.com",
                     "uuid": "00000000-0000-0000-0000-0000000000000",
-                    "device_count": 2
+                    "device_count": 2,
                 },
                 {
                     "id": 1235,
@@ -52,10 +52,9 @@ class TestListOrganizations(TestCase):
                     "sub_plan": "FULL",
                     "rate_id": 1,
                     "parent_id": 1234,
-                    "uuid": "00000000-0000-0000-0000-000000000000"
-                }
+                    "uuid": "00000000-0000-0000-0000-000000000000",
+                },
             ]
-
         }
         self.assertEqual(response, expected_response)
 
