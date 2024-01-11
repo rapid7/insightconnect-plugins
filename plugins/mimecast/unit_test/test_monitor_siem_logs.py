@@ -1,7 +1,7 @@
 import datetime
 import os
 import sys
-from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 from unittest import TestCase
 from unittest.mock import patch
 
@@ -10,6 +10,7 @@ sys.path.append(os.path.abspath("../"))
 from komand_mimecast.util.event import EventLogs
 from komand_mimecast.util.exceptions import ApiClientException
 from komand_mimecast.tasks import MonitorSiemLogs
+from komand_mimecast.tasks.monitor_siem_logs.schema import MonitorSiemLogsOutput
 from util import Util, FILE_ZIP_CONTENT_1, FILE_ZIP_CONTENT_2, SIEM_LOGS_HEADERS_RESPONSE
 
 
@@ -35,6 +36,7 @@ class TestMonitorSiemLogs(TestCase):
                 self.assertEqual(response, test.get("resp"))
                 self.assertEqual(new_state, {"next_token": test.get("token")})
                 self.assertEqual(status_code, 200)
+                validate(response, MonitorSiemLogsOutput.schema)
 
     def test_monitor_siem_logs_raises_401(self, _mock_data):
         state_params = {"next_token": "force_401"}
