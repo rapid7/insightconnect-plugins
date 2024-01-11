@@ -36,6 +36,9 @@ class GetAuditEventsInput(insightconnect_plugin_runtime.Input):
       "order": 2
     }
   },
+  "required": [
+    "audit_events_data"
+  ],
   "definitions": {
     "audit_events_data": {
       "type": "object",
@@ -67,13 +70,12 @@ class GetAuditEventsInput(insightconnect_plugin_runtime.Input):
             "type": "string"
           },
           "order": 4
-        },
-        "required": [
-          "endDateTime",
-          "startDateTime",
-          "audit_events_data"
-        ]
-      }
+        }
+      },
+      "required": [
+        "endDateTime",
+        "startDateTime"
+      ]
     },
     "audit_events_request_pagination": {
       "type": "object",
@@ -124,6 +126,9 @@ class GetAuditEventsOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
+  "required": [
+    "response"
+  ],
   "definitions": {
     "audit_events_response": {
       "type": "object",
