@@ -1,11 +1,13 @@
 import os
 import sys
+from jsonschema import validate
 from unittest import TestCase
 from unittest.mock import patch, MagicMock
 
 sys.path.append(os.path.abspath("../"))
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_mimecast.actions import TrackMessages
+from komand_mimecast.actions.track_messages.schema import TrackMessagesOutput, TrackMessagesInput
 from komand_mimecast.util.constants import (
     TRACKED_EMAILS_ADVANCED_CAUSE,
     TRACKED_EMAILS_REQUIRED_CAUSE,
@@ -22,10 +24,13 @@ class TestTrackMessages(TestCase):
     def setUpClass(cls) -> None:
         cls.action = Util.default_connector(TrackMessages())
 
-    def test_track_messages(self, mocked_request: MagicMock):
-        actual = self.action.run(Util.load_json("inputs/search_message_tracking.json.exp"))
+    def test_track_messages(self, _mocked_request: MagicMock):
+        input_data = Util.load_json("inputs/search_message_tracking.json.exp")
+        validate(input_data, TrackMessagesInput.schema)
+        actual = self.action.run(input_data)
         expect = Util.load_json("expected/search_message_tracking.json.exp")
         self.assertEqual(expect, actual)
+        validate(actual, TrackMessagesOutput.schema)
 
     @parameterized.expand(
         [
