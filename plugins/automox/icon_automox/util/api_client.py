@@ -112,12 +112,17 @@ class ApiClient:
     # Remove Null from response to avoid type issues
     def remove_null_values(self, item: Collection):
         if isinstance(item, dict):
-            return dict((key, self.remove_null_values(value))
-                        for key, value in item.items() if self._is_value_or_number(value) and
-                        self._is_value_or_number(self.remove_null_values(value)))
+            return dict(
+                (key, self.remove_null_values(value))
+                for key, value in item.items()
+                if self._is_value_or_number(value) and self._is_value_or_number(self.remove_null_values(value))
+            )
         elif isinstance(item, list):
-            return [self.remove_null_values(value) for value in item if self._is_value_or_number(value) and
-                    self._is_value_or_number(self.remove_null_values(value))]
+            return [
+                self.remove_null_values(value)
+                for value in item
+                if self._is_value_or_number(value) and self._is_value_or_number(self.remove_null_values(value))
+            ]
         else:
             return item
 
@@ -165,9 +170,7 @@ class ApiClient:
         :param org_id: Organization ID
         :return: Dict of users
         """
-        return self.remove_null_values(
-            self._page_results(f"{self.endpoint}/users", self._org_param(org_id))
-        )
+        return self.remove_null_values(self._page_results(f"{self.endpoint}/users", self._org_param(org_id)))
 
     # Devices/Endpoints
     def get_device(self, org_id: int, device_id: int) -> Dict:
@@ -352,7 +355,7 @@ class ApiClient:
                     raise PluginException(
                         preset=PluginException.Preset.SERVER_ERROR,
                         assistance=f"Failed to upload file to Vulnerability Sync - Response code: {response.status_code}, "
-                                   f"Content: {response.text}",
+                        f"Content: {response.text}",
                     )
             except PluginException:
                 raise
@@ -360,13 +363,13 @@ class ApiClient:
                 raise PluginException(
                     preset=PluginException.Preset.INVALID_JSON,
                     assistance=f"Failed to upload file to Vulnerability Sync - Response code: {response.status_code}, "
-                               f"Content: {response.text}, Error: {str(error)}"
+                    f"Content: {response.text}, Error: {str(error)}",
                 )
             except Exception as error:
                 raise PluginException(
                     preset=PluginException.Preset.UNKNOWN,
                     assistance=f"Failed to upload file to Vulnerability Sync - Response code: {response.status_code}, "
-                               f"Content: {response.text}, Error: {str(error)}"
+                    f"Content: {response.text}, Error: {str(error)}",
                 )
 
     def list_vulnerability_sync_action_sets(self, org_id: int, params=None) -> List[Dict]:
@@ -381,23 +384,29 @@ class ApiClient:
         if params is None:
             params = {}
         params.update(self._org_param(org_id))
-        return self.remove_null_values(self._page_results_data(
-            f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}/issues", params=params
-        ))
+        return self.remove_null_values(
+            self._page_results_data(
+                f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}/issues", params=params
+            )
+        )
 
     def list_vulnerability_sync_action_set_solutions(self, org_id: int, action_set_id: int, params=None) -> List[Dict]:
         if params is None:
             params = {}
         params.update(self._org_param(org_id))
-        return self.remove_null_values(self._page_results_data(
-            f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}/solutions", params=params
-        ))
+        return self.remove_null_values(
+            self._page_results_data(
+                f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}/solutions", params=params
+            )
+        )
 
     def get_vulnerability_sync_action_set(self, org_id: int, action_set_id: int) -> Dict:
         params = self._org_param(org_id)
-        return self.remove_null_values(self._call_api(
-            "GET", f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}", params=params
-        ))
+        return self.remove_null_values(
+            self._call_api(
+                "GET", f"{self.endpoint}/orgs/{org_id}/remediations/action-sets/{action_set_id}", params=params
+            )
+        )
 
     def delete_vulnerability_sync_action_set(self, org_id: int, action_set_id: int) -> bool:
         params = self._org_param(org_id)

@@ -1,7 +1,7 @@
 import sys
 import os
 
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath("../"))
 
 from parameterized import parameterized
 from unittest.mock import patch, Mock
@@ -18,7 +18,7 @@ from util import (
     mock_request_200_invalid_json,
     ORG_ID,
     DEVICE_ID,
-    POLICY_ID
+    POLICY_ID,
 )
 
 from icon_automox.actions.update_device import UpdateDevice
@@ -34,8 +34,8 @@ class TestUpdateDevice(TestCase):
             Input.DEVICE_ID: DEVICE_ID,
             Input.EXCEPTION: False,
             Input.SERVER_GROUP_ID: 1234,
-            Input.TAGS: ["apple", "banana"]
-            }
+            Input.TAGS: ["apple", "banana"],
+        }
 
     @patch("requests.Session.request", side_effect=mock_request_200)
     @patch("requests.Session.request", side_effect=mock_request_204)

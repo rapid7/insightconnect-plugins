@@ -43,12 +43,9 @@ class TestListGroups(TestCase):
                         "id": 1234,
                         "server_group_id": 1234,
                         "created_at": "2022-09-13T14:26:19+0000",
-                        "updated_at": "2022-09-13T14:26:19+0000"
+                        "updated_at": "2022-09-13T14:26:19+0000",
                     },
-                    "policies": [
-                        1234,
-                        1235
-                    ]
+                    "policies": [1234, 1235],
                 },
                 {
                     "id": 1235,
@@ -62,12 +59,10 @@ class TestListGroups(TestCase):
                         "id": 1234,
                         "server_group_id": 1234,
                         "created_at": "2022-09-13T14:26:32+0000",
-                        "updated_at": "2022-09-13T14:26:32+0000"
+                        "updated_at": "2022-09-13T14:26:32+0000",
                     },
-                    "policies": [
-                        0
-                    ]
-                }
+                    "policies": [0],
+                },
             ]
         }
         self.assertEqual(response, expected_response)

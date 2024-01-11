@@ -47,7 +47,7 @@ class TestGetDeviceSoftware(TestCase):
                     "os_version": "12.2",
                     "os_version_id": 1234,
                     "create_time": "2021-12-20T16:21:21+0000",
-                    "organization_id": 1234
+                    "organization_id": 1234,
                 },
                 {
                     "id": 1234,
@@ -64,10 +64,9 @@ class TestGetDeviceSoftware(TestCase):
                     "os_version": "12.2",
                     "os_version_id": 1234,
                     "create_time": "2021-12-26T17:23:19+0000",
-                    "organization_id": 1234
-                }
+                    "organization_id": 1234,
+                },
             ]
-
         }
         self.assertEqual(response, expected_response)
 
