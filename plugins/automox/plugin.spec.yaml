@@ -7,6 +7,7 @@ title: Automox
 description: Automox is modernizing IT operations with continuous visibility, insight,
   and agility for your entire IT environment
 version: 3.0.0
+connection_version: 3
 supported_versions: [All as of 12/29/2023]
 support: partner
 status: []
