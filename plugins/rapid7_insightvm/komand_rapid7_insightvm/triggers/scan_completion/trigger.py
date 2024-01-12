@@ -70,7 +70,8 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         report_payload = {
             "name": f"Rapid7-InsightConnect-ScanCompletion-{identifier}",
             "format": "sql-query",
-            "query": ScanQueries.query_results_from_latest_scan(scan_id),
+            "scope": {"scan": scan_id},
+            "query": ScanQueries.query_results_from_latest_scan(),
             "version": "2.3.0",
         }
 
@@ -127,7 +128,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
 class ScanQueries:
     @staticmethod
-    def query_results_from_latest_scan(scan_id: int) -> str:
+    def query_results_from_latest_scan() -> str:
         """
         Generate an SQL query string needed to to retrieve all the necessary outputs
 
@@ -170,7 +171,7 @@ class ScanQueries:
            JOIN dim_vulnerability_reference dvf ON dvf.vulnerability_id = dv.vulnerability_id
            JOIN fact_asset_vulnerability_age fava ON dv.vulnerability_id = fava.vulnerability_id
            JOIN fact_asset_vulnerability_finding fasvf ON dv.vulnerability_id = fasvf.vulnerability_id
-           WHERE fasvi.scan_id = {scan_id} AND dvf.source IN ('MSKB','MS')
+           WHERE dvf.source IN ('MSKB','MS')
         """  # nosec B608
 
 
