@@ -16,7 +16,7 @@ class DeleteAsset(insightconnect_plugin_runtime.Action):
             output=DeleteAssetOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}): #noqa: MC0001
         whitelist = params.get(Input.WHITELIST, None)
         agents = params.get(Input.AGENTS)
 
