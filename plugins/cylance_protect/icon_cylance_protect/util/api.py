@@ -117,7 +117,7 @@ class CylanceProtectAPI:
     def get_agents(self, page, page_size):
         return self._call_api("GET", f"{self.url}/devices/v2?page={page}?page_size={page_size}", "device:list")
 
-    def search_threats(self, identifiers): #noqa MC0001
+    def search_threats(self, identifiers):  # noqa: MC0001
         threats = self._call_api("GET", f"{self.url}/threats/v2?page=1&page_size=100", "threat:list").get("page_items")
         matching_threats = []
         for identifier in identifiers:
@@ -158,7 +158,7 @@ class CylanceProtectAPI:
         token = self.generate_token(scope)
         return self._make_request(method, url, params, json_data, headers={"Authorization": f"Bearer {token}"})
 
-    def _make_request(self, method, url, params=None, json_data=None, data=None, headers=None): #noqa MC0001
+    def _make_request(self, method, url, params=None, json_data=None, data=None, headers=None):  # noqa: MC0001
         response = {"text": ""}
         try:
             response = requests.request(method, url, json=json_data, data=data, params=params, headers=headers)
