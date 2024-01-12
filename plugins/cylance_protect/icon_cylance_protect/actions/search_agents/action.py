@@ -21,5 +21,4 @@ class SearchAgents(insightconnect_plugin_runtime.Action):
         agent = params.get(Input.AGENT)
         if validators.ipv4(agent):
             agent = find_agent_by_ip(self.connection, agent)
-
         return {Output.AGENTS: self.connection.client.search_agents_all(agent)}

@@ -107,7 +107,9 @@ class CylanceProtectAPI:
 
     def device_lockdown(self, device_id):
         device_id = device_id.replace("-", "").upper()
-        return self._call_api("PUT", f"{self.url}/devicecommands/v2/{device_id}/lockdown?value=true", None)
+        return self._call_api(
+            "PUT", f"{self.url}/devicecommands/v2/{device_id}/lockdown?value=true", "opticscommand:create"
+        )
 
     def delete_devices(self, payload):
         return self._call_api("DELETE", f"{self.url}/devices/v2", "device:delete", json_data=payload)
@@ -217,7 +219,7 @@ class CylanceProtectAPI:
         response = self._make_request(
             method="POST",
             url=f"{self.url}/auth/v2/token",
-            data=json.dumps({"auth_token": jwt.encode(claims, self.app_secret, algorithm="HS256").decode("utf-8")}),
+            data=json.dumps({"auth_token": jwt.encode(claims, self.app_secret, algorithm="HS256")}),
             headers={"Content-Type": "application/json; charset=utf-8"},
         )
 

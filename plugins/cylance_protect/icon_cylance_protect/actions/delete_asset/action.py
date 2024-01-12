@@ -56,7 +56,7 @@ class DeleteAsset(insightconnect_plugin_runtime.Action):
         if not valid_ids:
             raise PluginException(
                 cause="No valid devices to delete.",
-                assistance=f"Be sure that the devices exist in Cylance and are not part of the whitelist.",
+                assistance="Be sure that the devices exist in Cylance and are not part of the whitelist.",
             )
 
         payload = {"device_ids": valid_ids}
@@ -64,7 +64,7 @@ class DeleteAsset(insightconnect_plugin_runtime.Action):
         if not success:
             raise PluginException(
                 cause="One of the devices failed to delete.",
-                assistance=f"A valid agent deletion may have failed, check your Cylance console.",
+                assistance="A valid agent deletion may have failed, check your Cylance console.",
             )
 
         return {
