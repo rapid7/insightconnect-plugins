@@ -135,7 +135,7 @@ class TestSearchThreats(TestCase):
                     "score": -1,
                 },
                 "Threat not found.",
-                "Unable to find any threats using identifier provided: invalid.",
+                "Unable to find any threats using identifier provided: ['invalid'].",
             ],
             [
                 "invalid_threat_search_bad_score",

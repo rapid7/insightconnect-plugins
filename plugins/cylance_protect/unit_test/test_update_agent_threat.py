@@ -84,7 +84,7 @@ class TestUpdateAgentThreat(TestCase):
                     "threat_identifier": "5fedaebe1c409a201c01053fe95da99cf19f9999f0a5ca39be93de34488b9d8f",
                 },
                 "Threat not found.",
-                "Unable to find any threats using identifier provided: 5fedaebe1c409a201c01053fe95da99cf19f9999f0a5ca39be93de34488b9d8f.",
+                "Unable to find any threats using identifier provided: ['5fedaebe1c409a201c01053fe95da99cf19f9999f0a5ca39be93de34488b9d8f'].",
             ],
             [
                 "invalid_threat_update_invalid_hostname",

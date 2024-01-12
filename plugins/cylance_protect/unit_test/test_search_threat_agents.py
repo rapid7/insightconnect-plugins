@@ -104,19 +104,19 @@ class TestSearchThreatAgents(TestCase):
                 "invalid_threat_search_md5",
                 {"threat_identifier": "938c2cc0dcc05f2b68c4287040cfcf70"},
                 "Threat not found.",
-                "Unable to find any threats using identifier provided: 938c2cc0dcc05f2b68c4287040cfcf70.",
+                "Unable to find any threats using identifier provided: ['938c2cc0dcc05f2b68c4287040cfcf70'].",
             ],
             [
                 "invalid_threat_search_sha",
                 {"threat_identifier": "5fedaebe1c409a201c01053fe95da99cf19f9999f0a5ca39be93de34488b9d81"},
                 "Threat not found.",
-                "Unable to find any threats using identifier provided: 5fedaebe1c409a201c01053fe95da99cf19f9999f0a5ca39be93de34488b9d81.",
+                "Unable to find any threats using identifier provided: ['5fedaebe1c409a201c01053fe95da99cf19f9999f0a5ca39be93de34488b9d81'].",
             ],
             [
                 "invalid_threat_search_name",
                 {"threat_identifier": "invalid_name"},
                 "Threat not found.",
-                "Unable to find any threats using identifier provided: invalid_name.",
+                "Unable to find any threats using identifier provided: ['invalid_name'].",
             ],
         ]
     )
