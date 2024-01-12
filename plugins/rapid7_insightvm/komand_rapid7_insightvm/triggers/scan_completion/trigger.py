@@ -135,7 +135,7 @@ class ScanQueries:
         :param scan_id: Scan ID to query against
         :return: The completed query string
         """
-        return f"""
+        return """
         SELECT
            DISTINCT ON (dv.vulnerability_id, da.ip_address, da.host_name) da.ip_address AS "IP Address",
            da.host_name AS "Hostname",
