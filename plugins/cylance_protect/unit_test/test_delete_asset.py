@@ -4,43 +4,119 @@ import os
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from icon_cylance_protect.connection.connection import Connection
-from icon_cylance_protect.actions.delete_asset import DeleteAsset
-import json
-import logging
+
+from icon_cylance_protect.actions.delete_asset.action import DeleteAsset
+from icon_cylance_protect.actions.delete_asset.schema import DeleteAssetInput, DeleteAssetOutput
+from unittest.mock import patch, MagicMock
+from parameterized import parameterized
+from jsonschema import validate
+from util import Util
+from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_cylance_protect.util.find_helpers import find_in_whitelist, find_agent_by_ip
 
 
+@patch("icon_cylance_protect.util.api.CylanceProtectAPI.generate_token", side_effect=Util.mock_generate_token)
+@patch("requests.request", side_effect=Util.mock_request)
 class TestDeleteAsset(TestCase):
-    def test_integration_delete_asset(self):
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = DeleteAsset()
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.action = Util.default_connector(DeleteAsset())
 
-        test_conn.logger = log
-        test_action.logger = log
+    @parameterized.expand(
+        [
+            [
+                "valid_delete_asset_ip",
+                {
+                    "agents": ["1.1.1.1"],
+                    "whitelist": [],
+                },
+                {"deleted": ["1.1.1.1"], "not_deleted": [], "success": True},
+            ],
+            [
+                "valid_delete_asset_hostname",
+                {
+                    "agents": ["hostname"],
+                    "whitelist": [],
+                },
+                {"deleted": ["hostname"], "not_deleted": [], "success": True},
+            ],
+            [
+                "valid_delete_asset_both",
+                {
+                    "agents": ["hostname", "1.1.1.1"],
+                    "whitelist": [],
+                },
+                {"deleted": ["hostname", "1.1.1.1"], "not_deleted": [], "success": True},
+            ],
+            [
+                "valid_delete_asset_1_invalid",
+                {
+                    "agents": ["hostname", "invalid_hostname"],
+                    "whitelist": [],
+                },
+                {"deleted": ["hostname"], "not_deleted": ["invalid_hostname"], "success": True},
+            ],
+        ]
+    )
+    @patch("icon_cylance_protect.actions.delete_asset.action.find_agent_by_ip", side_effect=Util.mock_find_agent_by_ip)
+    def test_integration_delete_asset_invalid(
+        self,
+        _test_name: str,
+        input_params: dict,
+        expected: dict,
+        _mock_find_agent_by_ip: MagicMock,
+        _mock_request: MagicMock,
+        _mock_generate_token: MagicMock,
+    ):
+        validate(input_params, DeleteAssetInput.schema)
+        actual = self.action.run(input_params)
+        self.assertEqual(actual, expected)
+        validate(actual, DeleteAssetOutput.schema)
 
-        try:
-            with open("../tests/delete_asset.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
+    @parameterized.expand(
+        [
+            [
+                "valid_delete_asset_invalid",
+                {
+                    "agents": ["invalid_hostname"],
+                    "whitelist": [],
+                },
+                "No valid devices to delete.",
+                "Be sure that the devices exist in Cylance and are not part of the whitelist.",
+            ],
+            [
+                "valid_delete_asset_invalid_post",
+                {
+                    "agents": ["invalid_post"],
+                    "whitelist": [],
+                },
+                "One of the devices failed to delete.",
+                "A valid agent deletion may have failed, check your Cylance console.",
+            ],
+        ]
+    )
+    @patch("icon_cylance_protect.actions.delete_asset.action.find_agent_by_ip", side_effect=Util.mock_find_agent_by_ip)
+    def test_integration_delete_asset_invalid(
+        self,
+        _test_name: str,
+        input_params: dict,
+        cause: str,
+        assistance: str,
+        _mock_find_agent_by_ip: MagicMock,
+        _mock_request: MagicMock,
+        _mock_generate_token: MagicMock,
+    ):
+        validate(input_params, DeleteAssetInput.schema)
+        with self.assertRaises(PluginException) as error:
+            self.action.run(input_params)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)
 
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-
-        results = test_action.run(action_params)
-        self.assertEqual({"deleted": ["10.0.2.15"], "not_deleted": [], "success": True}, results)
-
-    def test_find_in_whitelist(self):
+    def test_find_in_whitelist(
+        self,
+        _mock_request: MagicMock,
+        _mock_generate_token: MagicMock,
+    ):
         dic = {
             "id": "cf9c26cc-6d3d-454a-b242-7e9f565c6cf7",
             "name": "VAGRANT-PC",
@@ -66,28 +142,3 @@ class TestDeleteAsset(TestCase):
         self.assertEqual(find_in_whitelist(dic, ["10.0.2.15"]), ["10.0.2.15"])
         self.assertEqual(find_in_whitelist(dic, ["08-00-27-33-9F-CE"]), ["08-00-27-33-9F-CE"])
         self.assertEqual(find_in_whitelist(dic, ["vagrant-pc"]), ["vagrant-pc"])
-
-    def test_find_agent_by_ip(self):
-        ip = "10.0.2.15"
-        ip_device_id = "6be117da-2f5d-4645-8878-1bc6476a399a"
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = DeleteAsset()
-        test_conn.logger = log
-        test_action.logger = log
-
-        try:
-            with open("../tests/delete_asset.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-        except Exception as e:
-            message = "Could not connection from /tests directory"
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-
-        self.assertEqual(find_agent_by_ip(test_action.connection, "1.1.1.1"), "1.1.1.1")
-        self.assertEqual(find_agent_by_ip(test_action.connection, ip), ip_device_id)
-        self.assertNotEqual(find_agent_by_ip(test_action.connection, ip), "1.1.1.1")
-        self.assertNotEqual(find_agent_by_ip(test_action.connection, ip), "10.0.2.15")

@@ -4,6 +4,8 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 
+from insightconnect_plugin_runtime.helper import clean
+
 
 class SearchThreatAgents(insightconnect_plugin_runtime.Action):
     def __init__(self):
@@ -30,8 +32,7 @@ class SearchThreatAgents(insightconnect_plugin_runtime.Action):
                 cause="No agents found.",
                 assistance=f"No agents related to: {threat_identifier} found.",
             )
-
-        return {Output.AGENTS: agents}
+        return {Output.AGENTS: clean(agents)}
 
     def get_all_threat_agents(self, sha256: str) -> list:
         i = 1
