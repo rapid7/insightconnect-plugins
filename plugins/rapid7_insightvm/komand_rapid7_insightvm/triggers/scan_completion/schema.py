@@ -8,19 +8,12 @@ class Component:
 
 
 class Input:
-    ASSET_GROUP = "asset_group"
-    CATEGORY_NAME = "category_name"
-    CVE = "cve"
-    CVSS_SCORE = "cvss_score"
     INTERVAL = "interval"
-    SEVERITY = "severity"
     SITE_ID = "site_id"
-    SOURCE = "source"
 
 
 class Output:
-    ASSETS = "assets"
-    VULNERABILITY_INFO = "vulnerability_info"
+    SCAN_COMPLETED_OUTPUT = "scan_completed_output"
 
 
 class ScanCompletionInput(insightconnect_plugin_runtime.Input):
@@ -29,31 +22,6 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "asset_group": {
-      "type": "string",
-      "title": "Asset Group",
-      "description": "Asset Group",
-      "order": 3
-    },
-    "category_name": {
-      "type": "string",
-      "title": "Category Name",
-      "description": "Name of the category the vulnerability is contained within",
-      "order": 8
-    },
-    "cve": {
-      "type": "string",
-      "title": "CVE",
-      "description": "CVE",
-      "order": 4
-    },
-    "cvss_score": {
-      "type": "integer",
-      "title": "CVSS V3 Score",
-      "description": "A vulneravility score from 1-10. Only those with a score equal to or above the input will be shown",
-      "default": 0,
-      "order": 6
-    },
     "interval": {
       "type": "integer",
       "title": "Interval",
@@ -61,32 +29,11 @@ class ScanCompletionInput(insightconnect_plugin_runtime.Input):
       "default": 5,
       "order": 1
     },
-    "severity": {
-      "type": "string",
-      "title": "Severity",
-      "description": "Severity of the vulnerability",
-      "enum": [
-        "",
-        "Moderate",
-        "Severe",
-        "Critical"
-      ],
-      "order": 7
-    },
     "site_id": {
       "type": "string",
       "title": "Site ID",
       "description": "Site ID",
       "order": 2
-    },
-    "source": {
-      "type": "array",
-      "title": "Source",
-      "description": "Source",
-      "items": {
-        "type": "string"
-      },
-      "order": 5
     }
   },
   "required": [
@@ -106,89 +53,167 @@ class ScanCompletionOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "assets": {
+    "scan_completed_output": {
       "type": "array",
-      "title": "Assets",
-      "description": "An array containing the asset id, hostname and IP address",
+      "title": "Scan Completed Output",
+      "description": "An array containing all the info",
       "items": {
-        "$ref": "#/definitions/assets"
+        "$ref": "#/definitions/scanCompleted"
       },
       "order": 1
-    },
-    "vulnerability_info": {
-      "type": "array",
-      "title": "Vulnerability Info",
-      "description": "An array containing vulnerability id, solution id & solution summary",
-      "items": {
-        "$ref": "#/definitions/vulnerability_info"
-      },
-      "order": 2
     }
   },
   "definitions": {
-    "assets": {
+    "scanCompleted": {
       "type": "object",
-      "title": "assets",
+      "title": "scanCompleted",
       "properties": {
-        "asset_id": {
-          "type": "integer",
-          "title": "Asset ID",
-          "description": "The unique ID of the asset",
+        "ip_address": {
+          "type": "string",
+          "title": "IP Address",
+          "description": "ip",
           "order": 1
         },
         "hostname": {
           "type": "string",
           "title": "Hostname",
-          "description": "The hostname for the asset",
+          "description": "Hostname",
           "order": 2
         },
-        "ip": {
+        "os": {
           "type": "string",
-          "title": "IP Address",
-          "description": "The IP address of the asset",
+          "title": "Operating System",
+          "description": "OS",
           "order": 3
-        }
-      }
-    },
-    "vulnerability_info": {
-      "type": "object",
-      "title": "vulnerability_info",
-      "properties": {
-        "vulnerability_id": {
-          "type": "string",
-          "title": "Vulnerability ID",
-          "description": "The unique ID of the vulnerability",
-          "order": 1
         },
-        "nexpose_id": {
-          "type": "string",
-          "title": "Nexpose ID",
-          "description": "The unique identifier for the vulnerability in nexpose",
-          "order": 2
-        },
-        "cvss_v3_score": {
-          "type": "string",
-          "title": "CVSS V3 Score",
-          "description": "The CVSS score of the vulnerability",
-          "order": 3
+        "member_of_sites": {
+          "type": "array",
+          "title": "Member of Sites",
+          "description": "Show which sites the vuln is a member of",
+          "items": {
+            "type": "string"
+          },
+          "order": 4
         },
         "severity": {
           "type": "string",
           "title": "Severity",
-          "description": "The severity of the vulnerability",
-          "order": 4
-        },
-        "solution_id": {
-          "type": "string",
-          "title": "Solution ID",
-          "description": "The unique ID of the solution",
+          "description": "Severity",
           "order": 5
         },
-        "solution_summary": {
-          "type": "string",
-          "title": "Solution Summary",
-          "description": "The summary of the solution for the vulnerability",
+        "riskscore": {
+          "type": "integer",
+          "title": "Risk Score",
+          "description": "Risk score",
           "order": 6
+        },
+        "cvss_score": {
+          "type": "number",
+          "title": "CVSS Score",
+          "description": "CVSS Score",
+          "order": 7
+        },
+        "cvss_v3_score": {
+          "type": "number",
+          "title": "CVSS V3 Score",
+          "description": "CVSS v3 score",
+          "order": 8
+        },
+        "exploits": {
+          "type": "integer",
+          "title": "Exploits",
+          "description": "Number of public exploits",
+          "order": 9
+        },
+        "malware_kits": {
+          "type": "integer",
+          "title": "Malware Kits",
+          "description": "Number of malware kits known",
+          "order": 10
+        },
+        "vulnerability_id": {
+          "type": "integer",
+          "title": "Vulnerability ID",
+          "description": "Vulnerability ID",
+          "order": 11
+        },
+        "vulnerability_name": {
+          "type": "string",
+          "title": "Vulnerability Name",
+          "description": "Vulnerability name",
+          "order": 12
+        },
+        "vulnerability_details": {
+          "type": "string",
+          "title": "Vulnerability Details",
+          "description": "Vulnerability details",
+          "order": 13
+        },
+        "vulnerability_instances": {
+          "type": "integer",
+          "title": "Vulnerability Instances",
+          "description": "Vulnerability count on asset",
+          "order": 14
+        },
+        "vuln_first_published": {
+          "type": "string",
+          "title": "Date Vulnerability First Published",
+          "description": "...",
+          "order": 15
+        },
+        "days_since_vuln_first_published": {
+          "type": "integer",
+          "title": "Days Since Vulnerability First Published",
+          "description": "...",
+          "order": 16
+        },
+        "days_present_on_asset": {
+          "type": "integer",
+          "title": "Days Present On Asset",
+          "description": "...",
+          "order": 17
+        },
+        "date_first_seen_on_asset": {
+          "type": "string",
+          "title": "Date First Seen On Asset",
+          "description": "...",
+          "order": 18
+        },
+        "date_most_recently_seen_on_asset": {
+          "type": "string",
+          "title": "Date Most Recently Seen On Asset",
+          "description": "...",
+          "order": 19
+        },
+        "solution_id": {
+          "type": "integer",
+          "title": "Solution ID",
+          "description": "Solution ID",
+          "order": 20
+        },
+        "nexpose_id": {
+          "type": "string",
+          "title": "Nexpose ID",
+          "description": "Nexpose ID",
+          "order": 21
+        },
+        "best_solution": {
+          "type": "string",
+          "title": "Best Solution",
+          "description": "Best solution",
+          "order": 22
+        },
+        "est_time_to_fix": {
+          "type": "string",
+          "title": "Estimated Time To Fix Per Asset",
+          "description": "...",
+          "order": 23
+        },
+        "solution_type": {
+          "type": "string",
+          "title": "Solution Type",
+          "description": "...",
+          "order": 24
         }
       }
     }

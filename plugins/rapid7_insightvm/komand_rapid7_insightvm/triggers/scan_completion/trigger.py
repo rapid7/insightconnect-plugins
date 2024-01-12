@@ -40,24 +40,21 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                 time.sleep(60)
                 continue
 
-            asset_results, vulnerability_results = self.get_results_from_latest_scan(
-                params=params, scan_id=int(latest_scan_id)
-            )
+            results = self.get_results_from_latest_scan(scan_id=int(latest_scan_id))
 
             # Submit scan for trigger
-            self.send({Output.ASSETS: asset_results, Output.VULNERABILITY_INFO: vulnerability_results})
+            self.send({Output.SCAN_COMPLETED_OUTPUT: results})
 
             first_latest_scan_id = latest_scan_id
 
             # Sleep configured in minutes
             time.sleep(params.get(Input.INTERVAL, 5) * 60)
 
-    def get_results_from_latest_scan(self, params: dict, scan_id: int):
+    def get_results_from_latest_scan(self, scan_id: int):
         """
         Take a scan id and run a sql query to retrieve the
         information needed for the trigger output
 
-        :param params: All of the user input params
         :param scan_id: The ID of the scan
 
         :return: A list of condensed and filter results for output in the trigger.
@@ -73,7 +70,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         report_payload = {
             "name": f"Rapid7-InsightConnect-ScanCompletion-{identifier}",
             "format": "sql-query",
-            "query": ScanQueries.query_results_from_latest_scan(scan_id, params.get(Input.SOURCE, [])),
+            "query": ScanQueries.query_results_from_latest_scan(scan_id),
             "version": "2.3.0",
         }
 
@@ -87,18 +84,12 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                 assistance=f"Exception returned was {error}",
             )
 
-        assets_list = []
-        vulnerability_list = []
-        asset_ids = set()
+        results_list = []
 
         for row in csv_report:
-            new_assets, new_vulnerabilities = Util.filter_results(params, row)
-            if new_assets.get("asset_id", 0) not in asset_ids:
-                assets_list.append(new_assets)
-                asset_ids.add(new_assets.get("asset_id", 0))
-            vulnerability_list.append(new_vulnerabilities)
+            results_list.append(row)
 
-        return assets_list, vulnerability_list
+        return results_list
 
     def find_latest_completed_scan(self, site_id: str, cached: bool) -> int:
         """
@@ -136,99 +127,54 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
 class ScanQueries:
     @staticmethod
-    def query_results_from_latest_scan(scan_id: int, source: list) -> str:
+    def query_results_from_latest_scan(scan_id: int) -> str:
         """
         Generate an SQL query string needed to to retrieve all the necessary outputs
 
         :param scan_id: Scan ID to query against
-        :param source: List of sources to filter results by
         :return: The completed query string
         """
-
-        # TODO - Not actually doing anything with source yet so dont forget to implement it
-
         return f"""
-        with solutions as (
         SELECT
-        dshc.solution_id AS solution_id,
-        ds.nexpose_id AS nexpose_id,
-        ds.summary AS summary
-        FROM dim_solution_highest_supercedence AS dshc
-        INNER JOIN dim_solution AS ds on dshc.superceding_solution_id=ds.solution_id
-        GROUP BY dshc.solution_id, nexpose_id, summary
-        ),
-        matching_asset_group_ids AS (SELECT asset_id, string_agg(CAST(asset_group_id AS varchar), ',') AS asset_group_ids
-        FROM dim_asset_group_asset
-        GROUP BY asset_id
-        )
-        SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, s.nexpose_id, dv.severity, dv.cvss_v3_score, string_agg(DISTINCT CAST(s.solution_id AS varchar), ',') AS solution_ids, string_agg(DISTINCT CAST(dvc.category_name AS varchar), ',') AS category_names, s.summary, dvr.source, da.host_name, da.ip_address
-        FROM fact_asset_scan_vulnerability_instance AS fasvi
-        LEFT JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id)
-        INNER JOIN dim_asset AS da ON (fasvi.asset_id = da.asset_id)
-        INNER JOIN dim_vulnerability_category AS dvc ON (fasvi.vulnerability_id = dvc.vulnerability_id)
-        INNER JOIN matching_asset_group_ids AS magi ON (fasvi.asset_id = magi.asset_id)
-        INNER JOIN dim_asset_vulnerability_solution AS davs ON (fasvi.vulnerability_id = davs.vulnerability_id)
-        INNER JOIN solutions AS s ON (s.solution_id = davs.solution_id)
-        LEFT JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id)
-        WHERE fasvi.scan_id = {scan_id} AND (dvr.source='MSKB' or dvr.source='MS')
-        GROUP BY fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, magi.asset_group_ids, s.nexpose_id, dv.cvss_v3_score, s.summary, dvr.source, dv.severity, da.host_name, da.ip_address """  # nosec B608
+           DISTINCT ON (dv.vulnerability_id, da.ip_address, da.host_name) da.ip_address AS "IP Address",
+           da.host_name AS "Hostname",
+           dos.description AS "Operating System",
+           da.sites AS "Member of Sites",
+           dv.severity AS "Severity",
+           round(dv.riskscore :: numeric, 0) AS "Risk",
+           round(dv.cvss_score :: numeric, 2) AS "CVSS Score",
+           round(dv.cvss_v3_score :: numeric, 2) AS "CVSSv3 Score",
+           dv.exploits AS "Number of Public Exploits",
+           dv.malware_kits AS "Number of Malware Kits Known",
+           dv.vulnerability_id AS "Vulnerability ID",
+           dv.title AS "Vulnerability Name",
+           proofAsText(dv.description) AS "Vulnerability Details",
+           fasvf.vulnerability_instances AS "Vulnerability Count on Asset",
+           dv.date_published AS "Date Vulnerability First Published",
+           CURRENT_DATE - dv.date_published :: date AS "Days Since Vulnerability First Published",
+           round(fava.age_in_days :: numeric, 0) AS "Days Present on Asset",
+           fava.first_discovered AS "Date First Seen on Asset",
+           fava.most_recently_discovered AS "Date Most Recently Seen on Asset",
+           ds.solution_id AS "Solution ID",
+           ds.nexpose_id AS "Nexpose ID",
+           proofAsText(ds.fix) AS "Best Solution",
+           ds.estimate AS "Estimated Time To Fix Per Asset",
+           proofAsText(ds.solution_type) AS "Solution Type"
+        FROM
+           dim_asset da
+           JOIN dim_operating_system dos ON dos.operating_system_id = da.operating_system_id
+           JOIN fact_asset_scan_vulnerability_instance fasvi ON fasvi.asset_id = da.asset_id
+           JOIN dim_asset_vulnerability_best_solution davbs ON davbs.asset_id = da.asset_id
+           JOIN dim_solution ds ON ds.solution_id = davbs.solution_id
+           JOIN dim_vulnerability dv ON dv.vulnerability_id = davbs.vulnerability_id
+           JOIN dim_vulnerability_reference dvf ON dvf.vulnerability_id = dv.vulnerability_id
+           JOIN fact_asset_vulnerability_age fava ON dv.vulnerability_id = fava.vulnerability_id
+           JOIN fact_asset_vulnerability_finding fasvf ON dv.vulnerability_id = fasvf.vulnerability_id
+           WHERE fasvi.scan_id = {scan_id} AND dvf.source IN ('MSKB','MS')
+        """  # nosec B608
 
 
 class Util:
-    @staticmethod
-    def filter_results(params: dict, csv_row: dict):
-        """
-        Filter the outputted results based on the user inputs.
-
-        :param params: Input params
-        :param csv_row: Dict row of the csv results
-
-        :return: New object containing only the necessary fields for the required output.
-        """
-
-        # Input retrieval
-        asset_group = params.get(Input.ASSET_GROUP, None)
-        cve = params.get(Input.CVE, None)
-        cvss_score = params.get(Input.CVSS_SCORE, None)
-        severity = params.get(Input.SEVERITY, None)
-        category = params.get(Input.CATEGORY_NAME, "").lower()
-
-        # We retrieve this separately because we use it as a unique identifier for
-        # the filtering process
-        asset_id = int(csv_row.get("asset_id", 0))
-
-        asset_dict = {
-            "asset_id": asset_id,
-            "hostname": csv_row.get("host_name", ""),
-            "ip_address": csv_row.get("ip_address", ""),
-        }
-
-        vulnerability_dict = {
-            "vulnerability_id": csv_row.get("vulnerability_id", ""),
-            "nexpose_id": csv_row.get("nexpose_id", ""),
-            "cvss_v3_score": csv_row.get("cvss_v3_score", 0),
-            "severity": csv_row.get("severity", ""),
-            "category": csv_row.get("category_names", ""),
-            "solution_id": csv_row.get("solution_ids", ""),
-            "solution_summary": csv_row.get("summary", ""),
-        }
-
-        # If an input and it is not found, return None in place of the row to filter
-        # out the result
-        conditions = (
-            asset_group and asset_group not in csv_row.get("asset_group_ids", "").split(","),
-            cve and cve not in csv_row.get("nexpose_id", ""),
-            cvss_score and csv_row.get("cvss_v3_score", 0) < cvss_score,
-            severity and severity not in csv_row.get("severity", ""),
-            category and category not in csv_row.get("category_name", "").lower(),
-        )
-
-        if any(conditions):
-            return {}, {}
-
-        # Otherwise, return the newly filtered result.
-        return asset_dict, vulnerability_dict
-
     @staticmethod
     def verify_scan_id_input(scan_id: int):
         """
