@@ -74,6 +74,7 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
+    "generated",
     "reports"
   ],
   "definitions": {
