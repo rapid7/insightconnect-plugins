@@ -147,54 +147,6 @@ types:
       description: ...
       type: string
       required: false
-
-  assets:
-    asset_id:
-      title: Asset ID
-      description: The unique ID of the asset
-      type: integer
-      required: false
-    hostname:
-      title: Hostname
-      description: The hostname for the asset
-      type: string
-      required: false
-    ip:
-      title: IP Address
-      description: The IP address of the asset
-      type: string
-      required: false
-  vulnerability_info:
-    vulnerability_id:
-      title: Vulnerability ID
-      description: The unique ID of the vulnerability
-      type: string
-      required: false
-    nexpose_id:
-      title: Nexpose ID
-      description: The unique identifier for the vulnerability in nexpose
-      type: '[]string'
-      required: false
-    cvss_v3_score:
-      title: CVSS V3 Score
-      description: The CVSS score of the vulnerability
-      type: string
-      required: false
-    severity:
-      title: Severity
-      description: The severity of the vulnerability
-      type: string
-      required: false
-    solution_id:
-      title: Solution ID
-      description: The unique ID of the solution
-      type: string
-      required: false
-    solution_summary:
-      title: Solution Summary
-      description: The summary of the solution for the vulnerability
-      type: string
-      required: false
   report_id:
     id:
       description: Identifer
