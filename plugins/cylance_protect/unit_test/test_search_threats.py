@@ -4,69 +4,161 @@ import os
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from icon_cylance_protect.connection.connection import Connection
-from icon_cylance_protect.actions.search_threats import SearchThreats
-import json
-import logging
+
+from icon_cylance_protect.actions.search_threats.action import SearchThreats
+from icon_cylance_protect.actions.search_threats.schema import SearchThreatsInput, SearchThreatsOutput
+from unittest.mock import patch, MagicMock
+from parameterized import parameterized
+from jsonschema import validate
+from util import Util
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
+@patch("icon_cylance_protect.util.api.CylanceProtectAPI.generate_token", side_effect=Util.mock_generate_token)
+@patch("requests.request", side_effect=Util.mock_request)
 class TestSearchThreats(TestCase):
-    def test_integration_search_threats(self):
-        """
-        TODO: Implement assertions at the end of this test case
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.action = Util.default_connector(SearchThreats())
 
-        This is an integration test that will connect to the services your plugin uses. It should be used
-        as the basis for tests below that can run independent of a "live" connection.
+    @parameterized.expand(
+        [
+            [
+                "valid_threat_search_md5",
+                {
+                    "threat_identifier": ["938c2cc0dcc05f2b68c4287040cfcf71"],
+                    "score": -1,
+                },
+                {
+                    "threats": [
+                        {
+                            "classification": "Malware",
+                            "cylance_score": -1,
+                            "file_size": 109395,
+                            "global_quarantined": False,
+                            "last_found": "2020-05-29T10:12:45",
+                            "md5": "938C2CC0DCC05F2B68C4287040CFCF71",
+                            "name": "honeyhashx86.exe",
+                            "safelisted": False,
+                            "sha256": "5FEDAEBE1C409A201C01053FE95DA99CF19F9999F0A5CA39BE93DE34488B9D80",
+                            "sub_classification": "Exploit",
+                            "unique_to_cylance": False,
+                        }
+                    ]
+                },
+            ],
+            [
+                "valid_threat_search_sha",
+                {
+                    "threat_identifier": ["5fedaebe1c409a201c01053fe95da99cf19f9999f0a5ca39be93de34488b9d80"],
+                    "score": -1,
+                },
+                {
+                    "threats": [
+                        {
+                            "classification": "Malware",
+                            "cylance_score": -1,
+                            "file_size": 109395,
+                            "global_quarantined": False,
+                            "last_found": "2020-05-29T10:12:45",
+                            "md5": "938C2CC0DCC05F2B68C4287040CFCF71",
+                            "name": "honeyhashx86.exe",
+                            "safelisted": False,
+                            "sha256": "5FEDAEBE1C409A201C01053FE95DA99CF19F9999F0A5CA39BE93DE34488B9D80",
+                            "sub_classification": "Exploit",
+                            "unique_to_cylance": False,
+                        }
+                    ]
+                },
+            ],
+            [
+                "valid_threat_search_both",
+                {
+                    "threat_identifier": [
+                        "938c2cc0dcc05f2b68c4287040cfcf71",
+                        "5FEDAEBE1C409A201C01053FE95DA99CF19F9999F0A5CA39BE93DE34488B9D86",
+                    ],
+                    "score": -1,
+                },
+                {
+                    "threats": [
+                        {
+                            "classification": "Malware",
+                            "cylance_score": -1,
+                            "file_size": 109395,
+                            "global_quarantined": False,
+                            "last_found": "2020-05-29T10:12:45",
+                            "md5": "938C2CC0DCC05F2B68C4287040CFCF71",
+                            "name": "honeyhashx86.exe",
+                            "safelisted": False,
+                            "sha256": "5FEDAEBE1C409A201C01053FE95DA99CF19F9999F0A5CA39BE93DE34488B9D80",
+                            "sub_classification": "Exploit",
+                            "unique_to_cylance": False,
+                        },
+                        {
+                            "classification": "Malware",
+                            "cylance_score": -1,
+                            "file_size": 109395,
+                            "global_quarantined": False,
+                            "last_found": "2020-05-29T10:12:45",
+                            "md5": "938C2CC0DCC05F2B68C4287040CFCF76",
+                            "name": "honeyhashx86.exe",
+                            "safelisted": False,
+                            "sha256": "5FEDAEBE1C409A201C01053FE95DA99CF19F9999F0A5CA39BE93DE34488B9D86",
+                            "sub_classification": "Exploit",
+                            "unique_to_cylance": False,
+                        },
+                    ]
+                },
+            ],
+        ]
+    )
+    def test_integration_search_threats_valid(
+        self,
+        _mock_request: MagicMock,
+        _mock_generate_token: MagicMock,
+        _test_name: str,
+        input_params: dict,
+        expected: dict,
+    ):
+        validate(input_params, SearchThreatsInput.schema)
+        actual = self.action.run(input_params)
+        self.assertEqual(actual, expected)
+        validate(actual, SearchThreatsOutput.schema)
 
-        This test assumes a normal plugin structure with a /tests directory. In that /tests directory should
-        be json samples that contain all the data needed to run this test. To generate samples run:
-
-        icon-plugin generate samples
-
-        """
-
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = SearchThreats()
-
-        test_conn.logger = log
-        test_action.logger = log
-
-        try:
-            with open("../tests/search_threats.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        # TODO: Remove this line
-        self.fail("Unimplemented test case")
-
-        # TODO: The following assert should be updated to look for data from your action
-        # For example: self.assertEquals({"success": True}, results)
-        self.assertEquals({}, results)
-
-    def test_search_threats(self):
-        """
-        TODO: Implement test cases here
-
-        Here you can mock the connection with data returned from the above integration test.
-        For information on mocking and unit testing please go here:
-
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-
-        You can either create a formal Mock for this, or you can create a fake connection class to pass to your
-        action for testing.
-        """
-        self.fail("Unimplemented Test Case")
+    @parameterized.expand(
+        [
+            [
+                "invalid_threat_search",
+                {
+                    "threat_identifier": ["invalid"],
+                    "score": -1,
+                },
+                "Threat not found.",
+                "Unable to find any threats using identifier provided: ['invalid'].",
+            ],
+            [
+                "invalid_threat_search_bad_score",
+                {
+                    "threat_identifier": ["938c2cc0dcc05f2b68c4287040cfcf71"],
+                    "score": 1,
+                },
+                "No threats matching the score found.",
+                "Unable to find any threats using identifier and score provided.",
+            ],
+        ]
+    )
+    def test_integration_search_threats_invalid(
+        self,
+        _mock_request: MagicMock,
+        _mock_generate_token: MagicMock,
+        _test_name: str,
+        input_params: dict,
+        cause: str,
+        assistance: str,
+    ):
+        validate(input_params, SearchThreatsInput.schema)
+        with self.assertRaises(PluginException) as error:
+            self.action.run(input_params)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)
