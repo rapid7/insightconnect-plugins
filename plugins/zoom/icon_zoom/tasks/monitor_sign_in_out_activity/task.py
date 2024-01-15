@@ -71,7 +71,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return output, task_output.state, task_output.has_more_pages, task_output.status_code, task_output.error
 
         except Exception as error:
-            self.logger.error(f"Unhandled exception occurred during {self.name} task: {error}")
+            self.logger.error(
+                f"An Exception has been raised. Unhandled exception occurred during {self.name} task: {error}"
+            )
             return [], {}, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def loop(self, state: Dict[str, Any]):  # noqa: C901
@@ -111,12 +113,15 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 next_page_token=state.get(self.NEXT_PAGE_TOKEN),
             )
         except Exception as exception:
+            self.logger.error(f"An Exception has been raised. Error: {exception}, returning state={state}")
             return self.handle_request_exception(exception=exception, now=now)
 
         try:
             new_events = sorted([Event(**event) for event in new_events])
         except TypeError as exception:
-            self.logger.error(f"Zoom API endpoint output has changed, unable to parse events: {exception}")
+            self.logger.error(
+                f"A TypeError has been raised. Zoom API endpoint output has changed, unable to parse events: {exception}"
+            )
             return self.handle_api_changed_exception(now=now)
 
         # Latest event is used for boundary hash calculation and de-duping if needed
