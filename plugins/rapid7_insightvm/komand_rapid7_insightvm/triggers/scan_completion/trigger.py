@@ -132,47 +132,44 @@ class ScanQueries:
         """
         Generate an SQL query string needed to to retrieve all the necessary outputs
 
-        :param scan_id: Scan ID to query against
         :return: The completed query string
         """
-        return """
-        SELECT
-           DISTINCT ON (dv.vulnerability_id, da.ip_address, da.host_name) da.ip_address AS "IP Address",
-           da.host_name AS "Hostname",
-           dos.description AS "Operating System",
-           da.sites AS "Member of Sites",
-           dv.severity AS "Severity",
-           round(dv.riskscore :: numeric, 0) AS "Risk",
-           round(dv.cvss_score :: numeric, 2) AS "CVSS Score",
-           round(dv.cvss_v3_score :: numeric, 2) AS "CVSSv3 Score",
-           dv.exploits AS "Number of Public Exploits",
-           dv.malware_kits AS "Number of Malware Kits Known",
-           dv.vulnerability_id AS "Vulnerability ID",
-           dv.title AS "Vulnerability Name",
-           proofAsText(dv.description) AS "Vulnerability Details",
-           fasvf.vulnerability_instances AS "Vulnerability Count on Asset",
-           dv.date_published AS "Date Vulnerability First Published",
-           CURRENT_DATE - dv.date_published :: date AS "Days Since Vulnerability First Published",
-           round(fava.age_in_days :: numeric, 0) AS "Days Present on Asset",
-           fava.first_discovered AS "Date First Seen on Asset",
-           fava.most_recently_discovered AS "Date Most Recently Seen on Asset",
-           ds.solution_id AS "Solution ID",
-           ds.nexpose_id AS "Nexpose ID",
-           proofAsText(ds.fix) AS "Best Solution",
-           ds.estimate AS "Estimated Time To Fix Per Asset",
-           proofAsText(ds.solution_type) AS "Solution Type"
-        FROM
-           dim_asset da
-           JOIN dim_operating_system dos ON dos.operating_system_id = da.operating_system_id
-           JOIN fact_asset_scan_vulnerability_instance fasvi ON fasvi.asset_id = da.asset_id
-           JOIN dim_asset_vulnerability_best_solution davbs ON davbs.asset_id = da.asset_id
-           JOIN dim_solution ds ON ds.solution_id = davbs.solution_id
-           JOIN dim_vulnerability dv ON dv.vulnerability_id = davbs.vulnerability_id
-           JOIN dim_vulnerability_reference dvf ON dvf.vulnerability_id = dv.vulnerability_id
-           JOIN fact_asset_vulnerability_age fava ON dv.vulnerability_id = fava.vulnerability_id
-           JOIN fact_asset_vulnerability_finding fasvf ON dv.vulnerability_id = fasvf.vulnerability_id
-           WHERE dvf.source IN ('MSKB','MS')
-        """  # nosec B608
+        return """SELECT 
+    DISTINCT ON (dv.vulnerability_id, da.ip_address, da.host_name) da.ip_address AS "IP Address",
+    da.host_name AS "Hostname",
+    dos.description AS "Operating System",
+    da.sites AS "Member of Sites",
+    dv.severity AS "Severity",
+    round(dv.riskscore :: numeric, 0) AS "Risk",
+    round(dv.cvss_score :: numeric, 2) AS "CVSS Score",
+    round(dv.cvss_v3_score :: numeric, 2) AS "CVSSv3 Score",
+    dv.exploits AS "Number of Public Exploits",
+    dv.malware_kits AS "Number of Malware Kits Known",
+    dv.vulnerability_id AS "Vulnerability ID",
+    dv.title AS "Vulnerability Name",
+    proofAsText(dv.description) AS "Vulnerability Details",
+    fasvf.vulnerability_instances AS "Vulnerability Count on Asset",
+    dv.date_published AS "Date Vulnerability First Published",
+    CURRENT_DATE - dv.date_published :: date AS "Days Since Vulnerability First Published",
+    round(fava.age_in_days :: numeric, 0) AS "Days Present on Asset",
+    fava.first_discovered AS "Date First Seen on Asset",
+    fava.most_recently_discovered AS "Date Most Recently Seen on Asset",
+    ds.solution_id AS "Solution ID",
+    ds.nexpose_id AS "Nexpose ID",
+    proofAsText(ds.fix) AS "Best Solution",
+    ds.estimate AS "Estimated Time To Fix Per Asset",
+    proofAsText(ds.solution_type) AS "Solution Type"
+ FROM
+    dim_asset da
+    JOIN dim_operating_system dos ON dos.operating_system_id = da.operating_system_id
+    JOIN dim_asset_vulnerability_best_solution davbs ON davbs.asset_id = da.asset_id
+    JOIN dim_solution ds ON ds.solution_id = davbs.solution_id
+    JOIN dim_vulnerability dv ON dv.vulnerability_id = davbs.vulnerability_id
+    JOIN dim_vulnerability_reference dvf ON dvf.vulnerability_id = dv.vulnerability_id
+    JOIN fact_asset_vulnerability_age fava ON dv.vulnerability_id = fava.vulnerability_id
+    JOIN fact_asset_vulnerability_finding fasvf ON dv.vulnerability_id = fasvf.vulnerability_id
+    WHERE dvf.source IN ('MSKB','MS')
+        """ # nosec B608
 
 
 class Util:
