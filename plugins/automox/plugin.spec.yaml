@@ -1,19 +1,30 @@
 plugin_spec_version: v2
 extension: plugin
-products: [ insightconnect ]
+products: [insightconnect]
+vendor: automox
 name: automox
 title: Automox
-description: Automox is modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment
-version: 2.0.1
-supported_versions: [ "All as of 12/07/2023" ]
-vendor: automox
+description: Automox is modernizing IT operations with continuous visibility, insight,
+  and agility for your entire IT environment
+version: 3.0.0
+connection_version: 3
+supported_versions: [All as of 12/29/2023]
 support: partner
-status: [ ]
-tags: [ endpoint, patch ]
+status: []
+requirements: []
+key_features:
+  - Device Management
+  - Patch Management
+links:
+  - '[Automox](https://www.automox.com/)'
+references:
+  - '[Automox Developer Portal](https://developer.automox.com/developer-portal/)'
+  - '[Managing Automox API Keys](https://help.automox.com/hc/en-us/articles/5385455262484-Managing-Keys)'
+tags: [endpoint, patch]
 hub_tags:
-  use_cases: [ threat_detection_and_response, asset_inventory, remediation_management ]
-  keywords: [ endpoint ]
-  features: [ ]
+  use_cases: [threat_detection_and_response, asset_inventory, remediation_management]
+  keywords: [endpoint]
+  features: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/automox
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -66,11 +77,46 @@ types:
       description: The organization identifier of the user
       type: integer
       required: true
+    zone_id:
+      title: Zone ID
+      description: The zone identifier of the organization
+      type: string
+      required: true
     name:
       title: Name
       description: The name of the organization
       type: string
       required: false
+    trial_end_time:
+      title: Trial End Time
+      description: The datetime of when the trial ends for the organization
+      type: string
+      required: false
+    trial_expired:
+      title: Trial Expired
+      description: Whether the trial has expired for the organization
+      type: boolean
+      required: false
+    create_time:
+      title: Creation Time
+      description: The datetime of when the organization was created
+      type: string
+      required: false
+    plan:
+      title: Plan
+      description: The plan of the organization
+      type: string
+      required: false
+    parent_id:
+      title: Parent Organization ID
+      description: The parent organization identifier
+      type: integer
+      required: false
+    access_key:
+        title: Access Key
+        description: The access key of the organization
+        type: string
+        required: false
   user_rbac_role:
     id:
       title: Role ID
@@ -86,6 +132,22 @@ types:
       title: Organization ID
       description: The organization identifier of the user role
       type: integer
+      required: true
+  user_pref:
+    user_id:
+      title: User ID
+      description: The user identifier
+      type: integer
+      required: true
+    pref_name:
+      title: Preference Name
+      description: The name of the preference
+      type: string
+      required: true
+    value:
+      title: Value
+      description: The value of the preference
+      type: string
       required: true
   user:
     id:
@@ -111,27 +173,36 @@ types:
     features:
       title: Features
       description: The features enabled for the user
-      type: "object"
+      type: object
       required: false
+    prefs:
+      title: Prefs
+      description: The preferences for the user
+      type: '[]user_pref'
     orgs:
       title: Organizations
       description: The organizations for which the user has access
-      type: "[]user_org"
+      type: '[]user_org'
       required: false
     tags:
       title: Tags
       description: The user defined tags
-      type: "[]string"
+      type: '[]string'
       required: false
     saml_enabled:
       title: SAML Enabled
       description: Whether SAML has been enabled for the user
       type: boolean
       required: false
+    sso_enabled:
+      title: SSO Enabled
+      description: Whether SSO has been enabled for the user
+      type: boolean
+      required: false
     rbac_roles:
       title: Roles
       description: The roles assigned to the user
-      type: "[]user_rbac_role"
+      type: '[]user_rbac_role'
       required: false
   device_policy_status:
     id:
@@ -163,7 +234,7 @@ types:
     policy_statuses:
       title: Policy Statuses
       description: A list of policy statuses with compliant details
-      type: "[]device_policy_status"
+      type: '[]device_policy_status'
       required: false
   device:
     id:
@@ -204,7 +275,7 @@ types:
     tags:
       title: Tags
       description: List of tags
-      type: "[]string"
+      type: '[]string'
       required: false
     deleted:
       title: Deleted
@@ -234,12 +305,12 @@ types:
     ip_addrs:
       title: IP Addresses
       description: List of IP addresses for a device
-      type: "[]string"
+      type: '[]string'
       required: false
     ip_addrs_private:
       title: Private IP Addresses
       description: List of private IP addresses for a device
-      type: "[]string"
+      type: '[]string'
       required: false
     patches:
       title: Patches
@@ -339,7 +410,7 @@ types:
     status:
       title: Status
       description: The device status details
-      type: "device_status_details"
+      type: device_status_details
       required: false
     last_logged_in_user:
       title: Last Logged in User
@@ -400,7 +471,7 @@ types:
     cves:
       title: CVEs
       description: List of CVEs associated to software package
-      type: "[]string"
+      type: '[]string'
       required: false
     cve_score:
       title: CVE Score
@@ -429,7 +500,8 @@ types:
       required: false
     requires_reboot:
       title: Requires Reboot
-      description: Whether the device requires reboot for the software package to be installed
+      description: Whether the device requires reboot for the software package to
+        be installed
       type: boolean
       required: false
     is_uninstallable:
@@ -471,7 +543,7 @@ types:
     server_groups:
       title: Device Group IDs
       description: List of identifiers for device groups assigned to the policy
-      type: "[]integer"
+      type: '[]integer'
       required: false
   group:
     id:
@@ -522,7 +594,7 @@ types:
     policies:
       title: Policies
       description: List of policies assigned to group
-      type: "[]integer"
+      type: '[]integer'
       required: false
   event:
     id:
@@ -601,17 +673,28 @@ types:
       description: The email of the user
       type: string
       required: false
-  action_set_issues:
-    unknown_host_count:
-      title: Unknown Host Count
-      description: Number of hosts that are unknown within the action set
+  action_set_issue_count:
+    count:
+      title: Issue Count
+      description: Number of issues associated with the action set
       type: integer
+      required: false
+  action_set_issues:
+    unknown_host:
+      title: Unknown Host
+      description: Hosts that are unknown to Automox within the action set
+      type: action_set_issue_count
       required: false
   action_set_statistics:
     issues:
       title: Issues
       description: Issues associated with the action set
       type: action_set_issues
+      required: false
+    solutions:
+      title: Solutions
+      description: Solutions associated with the action set
+      type: action_set_solution_summary
       required: false
   action_set_source:
     name:
@@ -641,12 +724,12 @@ types:
       type: integer
       required: false
   action_set_solution_summary:
-    patch_now:
+    patch-now:
       title: Patch Now
       description: Number of devices that will be patched immediately
       type: action_set_solution_counts
       required: false
-    patch_with_worklet:
+    patch-with-worklet:
       title: Patch with Worklet
       description: Number of devices that will be patched with a worklet
       type: action_set_solution_counts
@@ -662,14 +745,10 @@ types:
       description: Statistics of the action set
       type: action_set_statistics
       required: false
-    solutions:
-      title: Solutions
-      description: Solutions associated with the action set
-      type: action_set_solution_summary
-      required: false
     configuration_id:
       title: Configuration ID
-      description: Identifier of the configuration, only applicable for Automated Vulnerability Remediation (AVR) action sets
+      description: Identifier of the configuration, only applicable for Automated
+        Vulnerability Remediation (AVR) action sets
       type: string
       required: false
     organization_id:
@@ -709,9 +788,9 @@ types:
       type: string
       required: true
       enum:
-        - "patch-now"
-        - "patch-with-worklet"
-      default: "patch-now"
+        - patch-now
+        - patch-with-worklet
+      default: patch-now
     solution_id:
       title: Solution ID
       description: The solution ID associated with the action
@@ -762,7 +841,7 @@ types:
     ip_addrs_private:
       title: Private IP Addresses
       description: List of private IP addresses for the device
-      type: "[]string"
+      type: '[]string'
       required: false
   solution_vulnerability:
     id:
@@ -797,56 +876,36 @@ types:
       description: Type of solution
       type: string
       required: false
-      example: "rapid7-solution"
+      example: rapid7-solution
     remediation_type:
       title: Remediation Type
       description: Type of remediation
       type: string
       required: false
-      example: "patch-with-worklet"
+      example: patch-with-worklet
     solution_details:
       title: Solution Details
-      description: Details of the solution. This can include package information and other details depending on the solution type
+      description: Details of the solution. This can include package information and
+        other details depending on the solution type
       type: object
       required: false
-      example:
-        solution_id: "office-click-to-run-upgrade-latest"
-        solution_type: "workaround"
-        solution_summary: "Upgrade to the latest version of Microsoft Office"
-        solution_fix: "Install Office Click-To-Run updates through any installed Office application. Go to File &gt; Account (or Office Account if you opened Outlook). Under Product Information, choose Update Options &gt; Update Now."
     device_ids:
       title: Device IDs
-      description: List of device identifiers associated with the solution. This is a helper field to make executing actions easier. It does not exist on the Automox API.
-      type: "[]integer"
+      description: List of device identifiers associated with the solution. This is
+        a helper field to make executing actions easier. It does not exist on the
+        Automox API.
+      type: '[]integer'
       required: false
-      example: [ 1234, 5678 ]
     devices:
       title: Devices
       description: List of devices associated with the solution
-      type: "[]solution_device"
+      type: '[]solution_device'
       required: false
-      example:
-        - id: 1234
-          name: "device-1"
-          custom_name: "custom-name"
-          status: "in_progress"
-          deleted: false
-          ip_addrs_private:
-            - 10.0.0.1
     vulnerabilities:
       title: Vulnerabilities
       description: List of vulnerabilities associated with the solution
-      type: "[]solution_vulnerability"
+      type: '[]solution_vulnerability'
       required: false
-      example:
-        - id: "CVE-2019-1297"
-          title: "Microsoft Excel Remote Code Execution Vulnerability"
-          summary: "A remote code execution vulnerability exists in Microsoft Excel software when the software fails to properly handle objects in memory. An attacker who successfully exploited the vulnerability could run arbitrary code in the context of the current user. If the current user is logged on with administrative user rights, an attacker could take control of the affected system. An attacker could then install programs; view, change, or delete data; or create new accounts with full user rights. Users whose accounts are configured to have fewer user rights on the system could be less impacted than users who operate with administrative user rights. Exploitation of the vulnerability requires that a user open a specially crafted file with an affected version of Microsoft Excel. In an email attack scenario, an attacker could exploit the vulnerability by sending the specially crafted file to the user and convincing the user to open the file. In a web-based attack scenario, an attacker could host a website (or leverage a compromised website that accepts or hosts user-provided content) containing a specially crafted file designed to exploit the vulnerability. An attacker would have no way to force users to visit the website. Instead, an attacker would have to convince users to click a link, typically by way of an enticement in an email or instant message, and then convince them to open the specially crafted file. The security update addresses the vulnerability by correcting how Microsoft Excel handles objects in memory."
-          severity: "high"
-        - id: "CVE-2021-42292"
-          title: "Microsoft Excel Security Feature Bypass Vulnerability"
-          summary: ""
-          severity: "high"
 
 connection:
   api_key:
@@ -864,8 +923,9 @@ actions:
       organizations:
         title: Organizations
         description: List of Automox organizations
-        type: "[]organization"
+        type: '[]organization'
         required: true
+        example: '[{"id":1234,"name":"GlobalZone","create_time":"2021-10-20T04:03:25+0000","access_key":"00000000-0000-0000-0000-000000000000","trial_end_time":"2024-02-03T00:00:00+0000","sub_plan":"FULL","rate_id":1,"billing_name":"Test","billing_email":"user@example.com","uuid":"00000000-0000-0000-0000-0000000000000","device_count":2},{"id":1235,"name":"AnotherOne","create_time":"2021-10-26T08:14:25+0000","access_key":"00000000-0000-0000-0000-000000000000","trial_end_time":"2021-11-03T00:00:00+0000","trial_expired":true,"sub_plan":"FULL","rate_id":1,"parent_id":1234,"uuid":"00000000-0000-0000-0000-000000000000"}]'
   list_organization_users:
     title: List Organization Users
     description: Retrieve users of the Automox organization
@@ -880,8 +940,9 @@ actions:
       users:
         title: Users
         description: List of Automox users
-        type: "[]user"
+        type: '[]user'
         required: false
+        example: '[{"id":1234,"uuid":"00000000-0000-0000-0000-000000000000","firstname":"User","lastname":"Example","email":"user@example.com","prefs":[{"user_id":1234,"pref_name":"notify.system.add","value":"false"},{"user_id":1234,"pref_name":"notify.weeklydigest","value":"true"},{"user_id":1234,"pref_name":"user.tfa","value":"email"}],"orgs":[{"id":1234,"zone_id":"00000000-0000-0000-0000-000000000000","name":"Global Zone","trial_end_time":"2024-02-03T00:00:00+00:00","create_time":"2021-10-20T04:03:25+0000","plan":"manage","access_key":"00000000-0000-0000-0000-000000000000"},{"id":1235,"zone_id":"00000000-0000-0000-0000-000000000000","name":"Local Zone","trial_end_time":"2021-11-03T00:00:00+00:00","trial_expired":true,"create_time":"2021-10-26T08:14:25+0000","plan":"manage","parent_id":1234,"access_key":"00000000-0000-0000-0000-000000000000"}]}]'
   list_policies:
     title: List Policies
     description: Retrieve Automox policies
@@ -896,8 +957,9 @@ actions:
       policies:
         title: Policies
         description: List of Automox policies
-        type: "[]policy"
+        type: '[]policy'
         required: false
+        example: '[{"id":1234,"uuid":"00000000-0000-0000-0000-000000000000","name":"Test notification","policy_type_name":"custom","organization_id":103871,"configuration":{"os_family":"Windows","notify_reboot_user":true,"notify_deferred_reboot_user":true,"pending_reboot_deferral_enabled":true,"custom_pending_reboot_notification_message":"Updates require restart: Please save your work.","notify_deferred_reboot_user_message_timeout":15,"custom_pending_reboot_notification_max_delays":3,"custom_pending_reboot_notification_message_mac":"Updates require restart: Please save your work.","custom_pending_reboot_notification_deferment_periods":[1,4,8]},"schedule_time":"00:00","create_time":"2023-10-25T21:56:48+0000","server_groups":[1234],"server_count":5,"status":"inactive"}]'
   list_devices:
     title: List Devices
     description: Retrieve Automox managed devices
@@ -918,8 +980,9 @@ actions:
       devices:
         title: Devices
         description: List of Automox managed devices
-        type: "[]device"
+        type: '[]device'
         required: false
+        example: '[{"id":1234,"agent_version":"1.42.22","compliant":true,"create_time":"2023-11-14T00:32:23+0000","detail":{"CPU":"Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz","VENDOR":"Xen","MODEL":"HVM domU","VERSION":"4.11.amazon","RAM":"1014943744","LAST_USER_LOGON":{"TIME":"2023-11-14T20:23:00+00:00"},"SERIAL":"00000000-0000-0000-0000-000000009001","IPS":["10.1.1.1","1234::1234:1234:1234:1234"],"DISKS":[{"SIZE":"8589934592","TYPE":"unknown"}],"NICS":[{"IPS":["10.1.1.1","1234::1234:1234:1234:1234"],"CONNECTED":true,"VENDOR":"Unknown","DEVICE":"eth0","TYPE":"enet","MAC":"11:11:11:11:11:11"}],"VOLUME":[{"IS_SYSTEM_DISK":"true","VOLUME":"/dev/root","FSTYPE":"ext4","LABEL":"cloudimg-rootfs","AVAIL":"8141574144","FREE":"6285549568"},{"FSTYPE":"vfat","LABEL":"UEFI","AVAIL":"109422592","FREE":"103973888","IS_SYSTEM_DISK":"false","VOLUME":"/dev/xvda15"}],"FQDNS":["youubuntu.example.com"]},"display_name":"youbuntu","instance_id":"i-0b466e0e804798a23","ip_addrs":["0.0.0.0"],"ip_addrs_private":["10.1.1.1","1234::1234:1234:1234:1234"],"is_compatible":true,"last_disconnect_time":"2023-11-14T00:52:27+0000","last_refresh_time":"2023-11-14T00:33:12+0000","name":"youbuntu","organization_id":1234,"os_family":"Linux","os_name":"Ubuntu","os_version":"20.04.4","os_version_id":6220,"patches":201,"refresh_interval":1440,"serial_number":"00000000-0000-0000-0000-000000000000","server_group_id":1234,"status":{"device_status":"ready","agent_status":"connected","policy_status":"compliant"},"timezone":"UTC+0000","total_count":5,"uptime":"392","uuid":"00000000-0000-0000-0000-000000000000"}]'
   get_device_by_hostname:
     title: Get Device by Hostname
     description: Find an Automox device by hostname
@@ -942,6 +1005,7 @@ actions:
         description: The matched Automox device
         type: device
         required: false
+        example: '{"id":1234,"agent_version":"1.42.13","compliant":true,"create_time":"2023-04-13T19:45:45+0000","detail":{"RAM":"8589934592","CPU":"Intel(R) Core(TM) i7-8700B CPU @ 3.20GHz","MDM_SERVER":"none","VERSION":"MacBookPro16,1","NICS":[{"CONNECTED":true,"VENDOR":"Apple","DEVICE":"en0","TYPE":"enet","MAC":"00:00:00:00:00:00","IPS":["192.168.1.1"]}],"VOLUME":[{"FSTYPE":"APFS","LABEL":"macOS","AVAIL":"62704803840","FREE":"21316517888","IS_SYSTEM_DISK":"true","VOLUME":"/dev/disk1s5s1"},{"VOLUME":"/dev/disk1s3","FSTYPE":"APFS","LABEL":"Recovery","AVAIL":"62704803840","FREE":"21316517888","IS_SYSTEM_DISK":"false"}],"VENDOR":"Apple","MDM_PROFILE_INSTALLED":"false","LAST_USER_LOGON":{"SRC":"console","USER":"root","TIME":"2023-04-14 16:05"},"UPDATE_SOURCE_CHECK":{"CONNECTED":"true","ERROR":"Succeded"},"SERIAL":"C00000000001","DISKS":[{"TYPE":"VMware Virtual NVMe Disk","SIZE":"62914560000"}],"IPS":["192.168.1.1"],"MODEL":"MacBook Pro","AUTO_UPDATE_OPTIONS":{"OPTIONS":"Automatic Check for Updates, Install system data updates, Install system security updates","ENABLED":"0"}},"display_name":"apple","ip_addrs":["0.0.0.0"],"ip_addrs_private":["192.168.1.1"],"is_compatible":true,"last_disconnect_time":"2023-04-14T23:07:04+0000","last_logged_in_user":"root","last_process_time":"2023-04-14T22:40:56+0000","last_refresh_time":"2023-04-14T23:06:27+0000","last_update_time":"2023-04-14T22:51:10+0000","name":"apple","needs_attention":true,"organization_id":1234,"os_family":"Mac","os_name":"OS X","os_version":"12.6.6","os_version_id":1234,"refresh_interval":1440,"serial_number":"C00000000001","server_group_id":1234,"status":{"device_status":"not-ready","agent_status":"disconnected","policy_status":"unmanaged"},"timezone":"UTC-0700","total_count":5,"uptime":"88632","uuid":"00000000-0000-0000-0000-000000000000"}'
   get_device_by_ip:
     title: Get Device by IP Address
     description: Find an Automox device by IP address
@@ -957,13 +1021,14 @@ actions:
         description: IP address of device
         type: string
         required: true
-        example: '192.168.0.1'
+        example: 192.168.0.1
     output:
       device:
         title: Device
         description: The matched Automox device
         type: device
         required: false
+        example: '{"id":1234,"agent_version":"1.42.13","compliant":true,"create_time":"2023-04-13T19:45:45+0000","detail":{"RAM":"8589934592","CPU":"Intel(R) Core(TM) i7-8700B CPU @ 3.20GHz","MDM_SERVER":"none","VERSION":"MacBookPro16,1","NICS":[{"CONNECTED":true,"VENDOR":"Apple","DEVICE":"en0","TYPE":"enet","MAC":"00:00:00:00:00:00","IPS":["192.168.1.1"]}],"VOLUME":[{"FSTYPE":"APFS","LABEL":"macOS","AVAIL":"62704803840","FREE":"21316517888","IS_SYSTEM_DISK":"true","VOLUME":"/dev/disk1s5s1"},{"VOLUME":"/dev/disk1s3","FSTYPE":"APFS","LABEL":"Recovery","AVAIL":"62704803840","FREE":"21316517888","IS_SYSTEM_DISK":"false"}],"VENDOR":"Apple","MDM_PROFILE_INSTALLED":"false","LAST_USER_LOGON":{"SRC":"console","USER":"root","TIME":"2023-04-14 16:05"},"UPDATE_SOURCE_CHECK":{"CONNECTED":"true","ERROR":"Succeded"},"SERIAL":"C00000000001","DISKS":[{"TYPE":"VMware Virtual NVMe Disk","SIZE":"62914560000"}],"IPS":["192.168.1.1"],"MODEL":"MacBook Pro","AUTO_UPDATE_OPTIONS":{"OPTIONS":"Automatic Check for Updates, Install system data updates, Install system security updates","ENABLED":"0"}},"display_name":"apple","ip_addrs":["0.0.0.0"],"ip_addrs_private":["192.168.1.1"],"is_compatible":true,"last_disconnect_time":"2023-04-14T23:07:04+0000","last_logged_in_user":"root","last_process_time":"2023-04-14T22:40:56+0000","last_refresh_time":"2023-04-14T23:06:27+0000","last_update_time":"2023-04-14T22:51:10+0000","name":"apple","needs_attention":true,"organization_id":1234,"os_family":"Mac","os_name":"OS X","os_version":"12.6.6","os_version_id":1234,"refresh_interval":1440,"serial_number":"C00000000001","server_group_id":1234,"status":{"device_status":"not-ready","agent_status":"disconnected","policy_status":"unmanaged"},"timezone":"UTC-0700","total_count":5,"uptime":"88632","uuid":"00000000-0000-0000-0000-000000000000"}'
   update_device:
     title: Update Device
     description: Update Automox device
@@ -989,9 +1054,9 @@ actions:
       tags:
         title: Tags
         description: List of tags
-        type: "[]string"
+        type: '[]string'
         required: false
-        example: [ "tag1", "tag2" ]
+        example: [tag1, tag2]
       exception:
         title: Exception
         description: Exclude the device from reports and statistics
@@ -1004,7 +1069,7 @@ actions:
         description: Custom name to set on device
         type: string
         required: false
-        example: "custom-name"
+        example: custom-name
     output:
       success:
         title: Success
@@ -1055,8 +1120,9 @@ actions:
       software:
         title: Device Software
         description: List of software on device
-        type: "[]device_software"
+        type: '[]device_software'
         required: false
+        example: '[{"id":1234,"server_id":1234,"package_id":1234,"software_id":1234,"installed":true,"name":"com.apple.appleseed.FeedbackAssistant","display_name":"Feedback Assistant","version":"5.1","repo":"Apple-System","package_version_id":1234,"os_name":"OS X","os_version":"12.2","os_version_id":1234,"create_time":"2021-12-20T16:21:21+0000","organization_id":1234},{"id":1234,"server_id":1234,"package_id":1234,"software_id":1234,"installed":true,"name":"com.apple.calculator","display_name":"Calculator","version":"10.16","repo":"Apple-System","package_version_id":1234,"os_name":"OS X","os_version":"12.2","os_version_id":1234,"create_time":"2021-12-26T17:23:19+0000","organization_id":1234}]'
   run_command:
     title: Run Device Command
     description: Run a command on a device
@@ -1078,20 +1144,21 @@ actions:
         description: Command to run on device
         type: string
         enum:
-          - "GetOS"
-          - "InstallUpdate"
-          - "InstallAllUpdates"
-          - "PolicyTest"
-          - "PolicyRemediate"
-          - "Reboot"
+          - GetOS
+          - InstallUpdate
+          - InstallAllUpdates
+          - PolicyTest
+          - PolicyRemediate
+          - Reboot
         required: true
-        example: "GetOS"
+        example: GetOS
       patches:
         title: Patches
-        description: "List of patches to be installed by name (Note: this only works with the InstallUpdate command)"
-        type: "[]string"
+        description: 'List of patches to be installed by name (Note: this only works
+          with the InstallUpdate command)'
+        type: '[]string'
         required: false
-        example: [ "Security Update (KB4549947)" ]
+        example: [Security Update (KB4549947)]
       policy_id:
         title: Policy ID
         description: Identifier of policy
@@ -1119,8 +1186,9 @@ actions:
       groups:
         title: Groups
         description: List of Automox groups
-        type: "[]group"
+        type: '[]group'
         required: false
+        example: '[{"id":1234,"organization_id":1234,"name":"Default","refresh_interval":1440,"parent_server_group_id":0,"ui_color":"#059F1D","server_count":5,"wsus_config":{"id":1234,"server_group_id":1234,"created_at":"2022-09-13T14:26:19+0000","updated_at":"2022-09-13T14:26:19+0000"},"policies":[1234,1235]},{"id":1235,"organization_id":1234,"name":"A Server Group","refresh_interval":1440,"parent_server_group_id":1234,"ui_color":"#059F1D","wsus_config":{"id":1234,"server_group_id":1234,"created_at":"2022-09-13T14:26:32+0000","updated_at":"2022-09-13T14:26:32+0000"},"policies":[1234,1235]}]'
   create_group:
     title: Create Group
     description: Create an Automox group
@@ -1146,28 +1214,30 @@ actions:
         example: 1440
       parent_server_group_id:
         title: Parent Server Group ID
-        description: Name of the parent group. Defaults to Default Group ID if this is omitted
+        description: Name of the parent group. Defaults to Default Group ID if this
+          is omitted
         type: integer
         required: false
         example: 1234
       color:
         title: Group Color
-        description: Automox console highlight color for the group. Value should be a valid Hex color code
+        description: Automox console highlight color for the group. Value should be
+          a valid Hex color code
         type: string
         required: false
-        example: "#059F1D"
+        example: '#059F1D'
       notes:
         title: Group Notes
         description: Define notes for the group
         type: string
         required: false
-        example: "Example notes go here"
+        example: Example notes go here
       policies:
         title: Policy IDs
         description: List of policy IDs to assign to group
-        type: "[]integer"
+        type: '[]integer'
         required: false
-        example: [ 1, 2, 3 ]
+        example: [1, 2, 3]
     output:
       success:
         title: Success
@@ -1180,6 +1250,7 @@ actions:
         description: Detailed information about the created group
         type: group
         required: true
+        example: '{"id":1234,"organization_id":1234,"name":"Default","refresh_interval":1440,"parent_server_group_id":0,"ui_color":"#059F1D","server_count":5,"wsus_config":{"id":1234,"server_group_id":1234,"created_at":"2022-09-13T14:26:19+0000","updated_at":"2022-09-13T14:26:19+0000"},"policies":[1234,1235]}'
   update_group:
     title: Update Group
     description: Update an Automox group
@@ -1217,22 +1288,23 @@ actions:
         example: 1234
       color:
         title: Group Color
-        description: Automox console highlight color for the group. Value should be a valid Hex color code
+        description: Automox console highlight color for the group. Value should be
+          a valid Hex color code
         type: string
         required: false
-        example: "#059F1D"
+        example: '#059F1D'
       notes:
         title: Group Notes
         description: Define notes for the group
         type: string
         required: false
-        example: "Example notes go here"
+        example: Example notes go here
       policies:
         title: Policies IDs
         description: List of policy IDs to assign to group
-        type: "[]integer"
+        type: '[]integer'
         required: false
-        example: [ 1, 2, 3 ]
+        example: [1, 2, 3]
     output:
       success:
         title: Success
@@ -1275,30 +1347,31 @@ actions:
         example: 1234
       csv_file:
         title: CSV File
-        description: Base64 encoded CSV data from which to create the vulnerability sync batch
+        description: Base64 encoded CSV data from which to create the vulnerability
+          sync batch
         type: bytes
         required: true
-        example: "PGgxPlJhcGlkNzwvaDE+"
+        example: PGgxPlJhcGlkNzwvaDE+
       csv_file_name:
         title: CSV File Name
         description: Name for CSV file uploaded and shown within Automox
         type: string
         required: false
-        default: "insightconnect-uploaded-report.csv"
-        example: "insightconnect-uploaded-report.csv"
+        default: insightconnect-uploaded-report.csv
+        example: insightconnect-uploaded-report.csv
       report_source:
         title: Report Source
         description: The third-party source of the vulnerability report
         type: string
         required: false
-        default: "generic"
+        default: generic
         enum:
-          - "generic"
-          - "crowd-strike"
-          - "rapid7"
-          - "tenable"
-          - "qualys"
-        example: "rapid7"
+          - generic
+          - crowd-strike
+          - rapid7
+          - tenable
+          - qualys
+        example: rapid7
     output:
       id:
         title: Vulnerability Sync Action Set ID
@@ -1311,7 +1384,7 @@ actions:
         description: Status of the vulnerability sync action set
         type: string
         required: true
-        example: "building"
+        example: building
   get_vulnerability_sync_action_set:
     title: Get Vulnerability Sync Action Set
     description: Retrieve details for a specified vulnerability sync action set
@@ -1334,6 +1407,7 @@ actions:
         description: Details of a specified vulnerability sync action_set
         type: action_set
         required: true
+        example: '{"created_at":"2023-10-04T02:55:55+0000","created_by_user":{"email":"user@example.com","firstname":"User","id":1234,"lastname":"Example"},"id":1234,"organization_id":1234,"source":{"name":"example.csv","type":"generic"},"statistics":{"issues":{"unknown-host":{"count":1}},"solutions":{"patch-now":{"count":0,"device_count":0,"vulnerability_count":0},"patch-with-worklet":{"count":0,"device_count":0,"vulnerability_count":0}}},"status":"ready","updated_at":"2023-10-04T02:56:00+0000","updated_by_user":{"email":"user@example.com","firstname":"User","id":1234,"lastname":"Example"}}'
   list_vulnerability_sync_action_sets:
     title: List Vulnerability Sync Action Sets
     description: Retrieve list of vulnerability sync batches
@@ -1350,63 +1424,63 @@ actions:
         type: string
         required: false
         enum:
-          - "created_at"
-          - "updated_at"
-          - "status"
-          - "source_type"
-          - "source_name"
-          - "configuration_id"
-          - ""
-        example: "created_at"
+          - created_at
+          - updated_at
+          - status
+          - source_type
+          - source_name
+          - configuration_id
+          - ''
+        example: created_at
       group_sort:
         title: Group Sort
         description: Sort results by field
         type: string
         required: false
         enum:
-          - "asc"
-          - "desc"
-          - "latest_updated_at:asc"
-          - "latest_updated_at:desc"
-          - "source:asc"
-          - "source:desc"
-          - ""
-        example: "latest_updated_at:desc"
+          - asc
+          - desc
+          - latest_updated_at:asc
+          - latest_updated_at:desc
+          - source:asc
+          - source:desc
+          - ''
+        example: latest_updated_at:desc
       source_type_in:
         title: Source Type In
         description: Filter by source type
-        type: "[]string"
+        type: '[]string'
         required: false
         example:
-          - "Generic Report"
-          - "CrowdStrike"
-          - "Rapid7"
-          - "TenableIO"
-          - "Qualys"
+          - Generic Report
+          - CrowdStrike
+          - Rapid7
+          - TenableIO
+          - Qualys
       status_in:
         title: Status In
         description: Filter by status
-        type: "[]string"
+        type: '[]string'
         required: false
         example:
-          - "building"
-          - "ready"
-          - "error"
+          - building
+          - ready
+          - error
       status_not_in:
         title: Status Not In
         description: Filter by status
-        type: "[]string"
+        type: '[]string'
         required: false
         example:
-          - "building"
-          - "ready"
-          - "error"
+          - building
+          - ready
+          - error
       configuration_id_equals:
         title: Configuration ID Equals
         description: Filter by configuration ID
         type: string
         required: false
-        example: "00000000-0000-0000-0000-000000000000"
+        example: 00000000-0000-0000-0000-000000000000
       configuration_id_is_set:
         title: Configuration ID is Set
         description: Filter based on whether the configuration ID is set
@@ -1423,39 +1497,13 @@ actions:
       action_sets:
         title: Vulnerability Sync Action Sets
         description: List of vulnerability sync action sets
-        type: "[]action_set"
+        type: '[]action_set'
         required: false
-        example:
-          - created_at: 2023-10-10T03:45:26+0000
-            created_by_user:
-              email: user@example.com
-              firstname: User
-              id: 1
-              lastname: Name
-            id: 1234
-            organization_id: 1
-            source:
-              name: insightconnect-uploaded-report.csv
-              type: generic
-            statistics:
-              issues:
-                unknown-host:
-                  count: 4
-              solutions:
-                patch-with-worklet:
-                  count: 1
-                  device_count: 18
-                  vulnerability_count: 1
-            status: ready
-            updated_at: 2023-10-10T03:45:30+0000
-            updated_by_user:
-              email: user@example.com
-              firstname: User
-              id: 1
-              lastname: Name
+        example: '[{"created_at":"2023-10-04T02:55:55+0000","created_by_user":{"email":"user@example.com","firstname":"User","id":1234,"lastname":"Example"},"id":1234,"organization_id":1234,"source":{"name":"example.csv","type":"generic"},"statistics":{"issues":{"unknown-host":{"count":1}},"solutions":{"patch-now":{"count":0,"device_count":0,"vulnerability_count":0},"patch-with-worklet":{"count":0,"device_count":0,"vulnerability_count":0}}},"status":"ready","updated_at":"2023-10-04T02:56:00+0000","updated_by_user":{"email":"user@example.com","firstname":"User","id":1234,"lastname":"Example"}}]'
   list_vulnerability_sync_action_set_issues:
     title: List Vulnerability Sync Action Set Issues
-    description: Retrieve the issues identified for a specified vulnerability sync action set
+    description: Retrieve the issues identified for a specified vulnerability sync
+      action set
     input:
       org_id:
         title: Organization ID
@@ -1472,16 +1520,17 @@ actions:
       issue_type_in:
         title: Issue Type In
         description: Filter by issue type
-        type: "[]string"
+        type: '[]string'
         required: false
         example:
-          - "unknown-host"
+          - unknown-host
     output:
       issues:
         title: Vulnerability Sync Action Set Issues
         description: Issues associated with the specified vulnerability sync action_set
-        type: "[]action_set_issue"
+        type: '[]action_set_issue'
         required: true
+        example: '[{"id":1234,"issue_details":{"hostname":"WINDOWS-1234"},"issue_type":"unknown-host"},{"id":1234,"issue_details":{"hostname":"example-test-1234"},"issue_type":"unknown-host"}]'
   list_vulnerability_sync_action_set_solutions:
     title: List Vulnerability Sync Action Set Solutions
     description: Retrieve a list of vulnerability sync remediations
@@ -1501,36 +1550,37 @@ actions:
       remediation_type_in:
         title: Remediation Type In
         description: Filter by remediation type
-        type: "[]string"
+        type: '[]string'
         required: false
         example:
-          - "patch-now"
-          - "patch-with-worklet"
+          - patch-now
+          - patch-with-worklet
       severity_in:
         title: Severity In
         description: Filter by severity
-        type: "[]string"
+        type: '[]string'
         required: false
         example:
-          - "critical"
-          - "high"
-          - "medium"
-          - "low"
-          - "unknown"
+          - critical
+          - high
+          - medium
+          - low
+          - unknown
       vulnerability_in:
         title: Vulnerability In
         description: Filter by vulnerability
-        type: "[]string"
+        type: '[]string'
         required: false
         example:
-          - "CVE-2020-1234"
-          - "CVE-2020-5678"
+          - CVE-2020-1234
+          - CVE-2020-5678
     output:
       solutions:
         title: Vulnerability Sync Solutions
         description: List of vulnerability sync Solutions
-        type: "[]solution"
+        type: '[]solution'
         required: false
+        example: '[{"device_ids":[1,2,3],"devices":[{"custom_name":"example1","id":1,"ip_addrs_private":["10.0.0.1","ffff::ffff:ffff:ffff:ffff"],"name":"example1","status":"pending"},{"custom_name":"example2","id":2,"ip_addrs_private":["10.0.0.2","ffff::ffff:ffff:ffff:ffff"],"name":"example2","status":"pending"},{"custom_name":"example3","id":3,"ip_addrs_private":["10.0.0.3","ffff::ffff:ffff:ffff:ffff"],"name":"example3","status":"pending"}],"id":1234,"organization_id":1234,"remediation_type":"patch-with-worklet","solution_type":"unmatched","vulnerabilities":[{"id":"CVE-2021-24111","severity":"high","title":".NET Framework Denial of Service Vulnerability"}]}]'
   execute_vulnerability_sync_actions:
     title: Execute Vulnerability Sync Actions
     description: Launch remediation for patch and worklet remediations
@@ -1550,20 +1600,9 @@ actions:
       actions:
         title: Actions
         description: List of remediations to execute
-        type: "[]action_set_action"
+        type: '[]action_set_action'
         required: true
-        example:
-          - action: "patch-now"
-            solution_id: 1234
-            device_ids:
-              - 1234
-              - 5678
-          - action: "patch-with-worklet"
-            solution_id: 1234
-            worklet_id: 1234
-            device_ids:
-              - 1234
-              - 5678
+        example: '[{"action":"patch-now","solution_id":1234,"device_ids":[1234,5678]},{"action":"patch-with-worklet","solution_id":1234,"worklet_id":1234,"device_ids":[1234,5678]}]'
     output:
       success:
         title: Success
@@ -1608,13 +1647,15 @@ triggers:
         example: 1234
       event_type:
         title: Event Type
-        description: Name of event type to be retrieved (list of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/#!in=query&path=eventName&t=request)
+        description: Name of event type to be retrieved (list of event types found
+          at https://developer.automox.com/openapi/axconsole/operation/getEvents/#!in=query&path=eventName&t=request)
         type: string
         required: true
-        example: "user.login"
+        example: user.login
     output:
       event:
         title: Event
         description: Event with details
         type: event
         required: true
+        example: '{"id":0,"name":"system.add","user_id":0,"server_id":0,"organization_id":0,"policy_id":0,"data":{"firstname":"string","lastname":"string","email":"string","orgname":"string","ip":"string","os":"string","systemname":"string","text":"string","status":0,"patches":"string"},"server_name":"string","policy_name":"string","policy_type_name":"patch","create_time":"2019-08-24T14:15:22Z"}'

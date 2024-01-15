@@ -31,19 +31,29 @@ class TestListOrganizations(TestCase):
             Output.ORGANIZATIONS: [
                 {
                     "id": 1234,
-                    "name": "ExampleTestOrg",
-                    "create_time": "2023-03-01T12:00:00+0000",
-                    "access_key": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-                    "trial_end_time": "2023-03-01T12:00:00+0000",
+                    "name": "Global Zone",
+                    "create_time": "2021-10-20T04:03:25+0000",
+                    "access_key": "00000000-0000-0000-0000-000000000000",
+                    "trial_end_time": "2024-02-03T00:00:00+0000",
+                    "sub_plan": "FULL",
+                    "rate_id": 1,
+                    "billing_name": "Test",
+                    "billing_email": "example@automox.com",
+                    "uuid": "00000000-0000-0000-0000-0000000000000",
+                    "device_count": 2,
+                },
+                {
+                    "id": 1235,
+                    "name": "Another One",
+                    "create_time": "2021-10-26T08:14:25+0000",
+                    "access_key": "00000000-0000-0000-0000-000000000000",
+                    "trial_end_time": "2021-11-03T00:00:00+0000",
                     "trial_expired": True,
                     "sub_plan": "FULL",
                     "rate_id": 1,
-                    "bill_overages": True,
-                    "metadata": {"patchServersDone": True},
-                    "billing_name": "ExampleTestOrg",
-                    "billing_email": "user@example.com",
-                    "device_count": 1,
-                }
+                    "parent_id": 1234,
+                    "uuid": "00000000-0000-0000-0000-000000000000",
+                },
             ]
         }
         self.assertEqual(response, expected_response)

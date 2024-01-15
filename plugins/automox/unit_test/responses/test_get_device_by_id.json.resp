@@ -1,0 +1,100 @@
+{
+  "id": 1234,
+  "agent_version": "1.42.13",
+  "compliant": true,
+  "create_time": "2023-04-13T19:45:45+0000",
+  "detail": {
+    "RAM": "8589934592",
+    "CPU": "Intel(R) Core(TM) i7-8700B CPU @ 3.20GHz",
+    "MDM_SERVER": "none",
+    "VERSION": "MacBookPro16,1",
+    "NICS": [
+      {
+        "CONNECTED": true,
+        "VENDOR": "Apple",
+        "DEVICE": "en0",
+        "TYPE": "enet",
+        "MAC": "00:00:00:00:00:00",
+        "IPS": [
+          "192.168.1.1"
+        ]
+      }
+    ],
+    "VOLUME": [
+      {
+        "FSTYPE": "APFS",
+        "LABEL": "macOS",
+        "AVAIL": "62704803840",
+        "FREE": "21316517888",
+        "IS_SYSTEM_DISK": "true",
+        "VOLUME": "/dev/disk1s5s1"
+      },
+      {
+        "VOLUME": "/dev/disk1s3",
+        "FSTYPE": "APFS",
+        "LABEL": "Recovery",
+        "AVAIL": "62704803840",
+        "FREE": "21316517888",
+        "IS_SYSTEM_DISK": "false"
+      }
+    ],
+    "VENDOR": "Apple",
+    "MDM_PROFILE_INSTALLED": "false",
+    "LAST_USER_LOGON": {
+      "SRC": "console",
+      "USER": "root",
+      "TIME": "2023-04-14 16:05"
+    },
+    "UPDATE_SOURCE_CHECK": {
+      "CONNECTED": "true",
+      "ERROR": "Succeded"
+    },
+    "SERIAL": "C00000000001",
+    "DISKS": [
+      {
+        "TYPE": "VMware Virtual NVMe Disk",
+        "SIZE": "62914560000"
+      }
+    ],
+    "IPS": [
+      "192.168.1.1"
+    ],
+    "MODEL": "MacBook Pro",
+    "AUTO_UPDATE_OPTIONS": {
+      "OPTIONS": "Automatic Check for Updates, Install system data updates, Install system security updates",
+      "ENABLED": "0"
+    }
+  },
+  "display_name": "apple",
+  "ip_addrs": [
+    "0.0.0.0"
+  ],
+  "ip_addrs_private": [
+    "192.168.1.1"
+  ],
+  "is_compatible": true,
+  "last_disconnect_time": "2023-04-14T23:07:04+0000",
+  "last_logged_in_user": "root",
+  "last_process_time": "2023-04-14T22:40:56+0000",
+  "last_refresh_time": "2023-04-14T23:06:27+0000",
+  "last_update_time": "2023-04-14T22:51:10+0000",
+  "name": "apple",
+  "needs_attention": true,
+  "organization_id": 1234,
+  "os_family": "Mac",
+  "os_name": "OS X",
+  "os_version": "12.6.6",
+  "os_version_id": 1234,
+  "refresh_interval": 1440,
+  "serial_number": "C00000000001",
+  "server_group_id": 1234,
+  "status": {
+    "device_status": "not-ready",
+    "agent_status": "disconnected",
+    "policy_status": "unmanaged"
+  },
+  "timezone": "UTC-0700",
+  "total_count": 5,
+  "uptime": "88632",
+  "uuid": "00000000-0000-0000-0000-000000000000"
+}

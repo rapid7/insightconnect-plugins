@@ -33,11 +33,36 @@ class TestListGroups(TestCase):
             Output.GROUPS: [
                 {
                     "id": 1234,
-                    "organization_id": 1,
+                    "organization_id": 1234,
+                    "name": "Default",
+                    "refresh_interval": 1440,
+                    "parent_server_group_id": 0,
+                    "ui_color": "#059F1D",
+                    "server_count": 5,
+                    "wsus_config": {
+                        "id": 1234,
+                        "server_group_id": 1234,
+                        "created_at": "2022-09-13T14:26:19+0000",
+                        "updated_at": "2022-09-13T14:26:19+0000",
+                    },
+                    "policies": [1234, 1235],
+                },
+                {
+                    "id": 1235,
+                    "organization_id": 1234,
+                    "name": "A Server Group",
                     "refresh_interval": 1440,
                     "parent_server_group_id": 1234,
-                    "policies": [1111],
-                }
+                    "ui_color": "#059F1D",
+                    "server_count": 0,
+                    "wsus_config": {
+                        "id": 1234,
+                        "server_group_id": 1234,
+                        "created_at": "2022-09-13T14:26:32+0000",
+                        "updated_at": "2022-09-13T14:26:32+0000",
+                    },
+                    "policies": [0],
+                },
             ]
         }
         self.assertEqual(response, expected_response)

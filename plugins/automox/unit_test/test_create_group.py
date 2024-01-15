@@ -32,11 +32,24 @@ class TestCreateGroup(TestCase):
         expected_response = {
             Output.SUCCESS: True,
             Output.GROUP: {
-                "name": "example",
-                "parent_server_group_id": 1234,
-                "refresh_interval": 1440,
+                "id": 1234,
                 "organization_id": 1234,
-                "id": 123,
+                "name": "string",
+                "refresh_interval": 1234,
+                "parent_server_group_id": 1,
+                "ui_color": "string",
+                "notes": "string",
+                "enable_os_auto_update": True,
+                "server_count": 0,
+                "wsus_config": {
+                    "id": 1234,
+                    "server_group_id": 1234,
+                    "is_managed": True,
+                    "server_url": "string",
+                    "created_at": "string",
+                    "updated_at": "string",
+                },
+                "policies": [1234],
             },
         }
 

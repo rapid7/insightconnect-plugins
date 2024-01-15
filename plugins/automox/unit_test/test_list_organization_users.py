@@ -33,37 +33,37 @@ class TestListOrganizationUsers(TestCase):
             Output.USERS: [
                 {
                     "id": 1234,
-                    "uuid": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-                    "firstname": "ExampleName",
-                    "lastname": "ExampleLastName",
+                    "uuid": "00000000-0000-0000-0000-000000000000",
+                    "firstname": "User",
+                    "lastname": "Example",
                     "email": "user@example.com",
-                    "prefs": [{"user_id": 12345, "pref_name": "notify.weeklydigest", "value": "true"}],
+                    "prefs": [
+                        {"user_id": 1234, "pref_name": "notify.system.add", "value": "false"},
+                        {"user_id": 1234, "pref_name": "notify.weeklydigest", "value": "true"},
+                        {"user_id": 1234, "pref_name": "user.tfa", "value": "email"},
+                    ],
                     "orgs": [
                         {
-                            "id": 12345,
-                            "zone_id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-                            "name": "ExampleTestOrg",
-                            "trial_end_time": "2023-03-01T12:00:00+0000",
-                            "trial_expired": True,
-                            "create_time": "2023-03-01T12:00:00+0000",
+                            "id": 1234,
+                            "zone_id": "00000000-0000-0000-0000-000000000000",
+                            "name": "Global Zone",
+                            "trial_end_time": "2024-02-03T00:00:00+00:00",
+                            "create_time": "2021-10-20T04:03:25+0000",
                             "plan": "manage",
-                            "parent_id": "None",
-                            "access_key": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-                        }
-                    ],
-                    "rbac_roles": [
+                            "access_key": "00000000-0000-0000-0000-000000000000",
+                        },
                         {
-                            "id": 1,
-                            "name": "Administrator",
-                            "description": "Provides full administrative rights to a specific zone.",
-                            "organization_id": 12345,
-                        }
+                            "id": 1235,
+                            "zone_id": "00000000-0000-0000-0000-000000000000",
+                            "name": "Local Zone",
+                            "trial_end_time": "2021-11-03T00:00:00+00:00",
+                            "trial_expired": True,
+                            "create_time": "2021-10-26T08:14:25+0000",
+                            "plan": "manage",
+                            "parent_id": 1234,
+                            "access_key": "00000000-0000-0000-0000-000000000000",
+                        },
                     ],
-                    "account_id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-                    "account_name": "ExampleTestOrg",
-                    "account_rbac_role": "global-admin",
-                    "account_completed_qsg": True,
-                    "account_created_at": "2023-03-01T12:00:00+0000",
                 }
             ]
         }
