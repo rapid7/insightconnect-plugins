@@ -169,7 +169,7 @@ class ScanQueries:
     JOIN fact_asset_vulnerability_age fava ON dv.vulnerability_id = fava.vulnerability_id
     JOIN fact_asset_vulnerability_finding fasvf ON dv.vulnerability_id = fasvf.vulnerability_id
     WHERE dvf.source IN ('MSKB','MS')
-        """ # nosec B608
+        """  # nosec B608
 
 
 class Util:
