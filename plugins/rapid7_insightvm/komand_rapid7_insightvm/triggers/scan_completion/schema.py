@@ -14,6 +14,7 @@ class Input:
 
 class Output:
     SCAN_COMPLETED_OUTPUT = "scan_completed_output"
+    SCAN_ID = "scan_id"
 
 
 class ScanCompletionInput(insightconnect_plugin_runtime.Input):
@@ -60,6 +61,12 @@ class ScanCompletionOutput(insightconnect_plugin_runtime.Output):
       "items": {
         "$ref": "#/definitions/scanCompleted"
       },
+      "order": 2
+    },
+    "scan_id": {
+      "type": "integer",
+      "title": "Scan ID",
+      "description": "The ID of the scan",
       "order": 1
     }
   },

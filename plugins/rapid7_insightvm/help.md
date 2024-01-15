@@ -3292,14 +3292,17 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |scan_completed_output|[]scanCompleted|False|An array containing all the info|{}|
+|scan_id|integer|False|The ID of the scan|42|
   
 Example output:
 
 ```
 {
-  "scan_completed_output": {}
+  "scan_completed_output": {},
+  "scan_id": 42
 }
 ```
+
 ### Tasks
   
 *This plugin does not contain any tasks.*

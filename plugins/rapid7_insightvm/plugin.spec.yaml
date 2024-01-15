@@ -4616,6 +4616,12 @@ triggers:
         required: false
         example: 219
     output:
+      scan_id:
+        title: Scan ID
+        description: The ID of the scan
+        type: integer
+        example: 42
+        required: false
       scan_completed_output:
         title: Scan Completed Output
         description: An array containing all the info
