@@ -3,6 +3,9 @@ from .schema import GetAgentDetailsInput, GetAgentDetailsOutput, Input, Output, 
 
 # Custom imports below
 
+import validators
+from icon_cylance_protect.util.find_helpers import find_agent_by_ip
+
 
 class GetAgentDetails(insightconnect_plugin_runtime.Action):
     def __init__(self):
@@ -14,5 +17,11 @@ class GetAgentDetails(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        device = self.connection.client.get_agent_details(params.get(Input.AGENT))
+
+        agent = params.get(Input.AGENT)
+
+        if validators.ipv4(agent):
+            agent = find_agent_by_ip(self.connection, agent)
+
+        device = self.connection.client.get_agent_details(agent)
         return {Output.AGENT: device}
