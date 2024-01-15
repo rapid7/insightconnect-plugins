@@ -43,7 +43,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             results = self.get_results_from_latest_scan(scan_id=int(latest_scan_id))
 
             # Submit scan for trigger
-            self.send({Output.SCAN_COMPLETED_OUTPUT: results})
+            self.send({Output.SCAN_ID: latest_scan_id, Output.SCAN_COMPLETED_OUTPUT: results})
 
             first_latest_scan_id = latest_scan_id
 
