@@ -3302,7 +3302,6 @@ Example output:
   "scan_id": 42
 }
 ```
-
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -3316,11 +3315,11 @@ Example output:
 |Best Solution|string|None|False|Best solution|None|
 |CVSS Score|float|None|False|CVSS Score|None|
 |CVSS V3 Score|float|None|False|CVSS v3 score|None|
-|Date First Seen On Asset|string|None|False|...|None|
-|Date Most Recently Seen On Asset|string|None|False|...|None|
-|Days Present On Asset|integer|None|False|...|None|
-|Days Since Vulnerability First Published|integer|None|False|...|None|
-|Estimated Time To Fix Per Asset|string|None|False|...|None|
+|Date First Seen On Asset|string|None|False|Date first seen on the asset|None|
+|Date Most Recently Seen On Asset|string|None|False|Date most recently seen on the asset|None|
+|Days Present On Asset|integer|None|False|Days present on the asset|None|
+|Days Since Vulnerability First Published|integer|None|False|Days since the vulnerability was first published|None|
+|Estimated Time To Fix Per Asset|string|None|False|Estimated time to fix per asset|None|
 |Exploits|integer|None|False|Number of public exploits|None|
 |Hostname|string|None|False|Hostname|None|
 |IP Address|string|None|False|ip|None|
@@ -3331,8 +3330,8 @@ Example output:
 |Risk Score|integer|None|False|Risk score|None|
 |Severity|string|None|False|Severity|None|
 |Solution ID|integer|None|False|Solution ID|None|
-|Solution Type|string|None|False|...|None|
-|Date Vulnerability First Published|string|None|False|...|None|
+|Solution Type|string|None|False|The type of the solution for the vulnerability|None|
+|Date Vulnerability First Published|string|None|False|Date the vulnerability was first published|None|
 |Vulnerability Details|string|None|False|Vulnerability details|None|
 |Vulnerability ID|integer|None|False|Vulnerability ID|None|
 |Vulnerability Instances|integer|None|False|Vulnerability count on asset|None|

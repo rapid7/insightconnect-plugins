@@ -165,31 +165,31 @@ class ScanCompletionOutput(insightconnect_plugin_runtime.Output):
         "vuln_first_published": {
           "type": "string",
           "title": "Date Vulnerability First Published",
-          "description": "...",
+          "description": "Date the vulnerability was first published",
           "order": 15
         },
         "days_since_vuln_first_published": {
           "type": "integer",
           "title": "Days Since Vulnerability First Published",
-          "description": "...",
+          "description": "Days since the vulnerability was first published",
           "order": 16
         },
         "days_present_on_asset": {
           "type": "integer",
           "title": "Days Present On Asset",
-          "description": "...",
+          "description": "Days present on the asset",
           "order": 17
         },
         "date_first_seen_on_asset": {
           "type": "string",
           "title": "Date First Seen On Asset",
-          "description": "...",
+          "description": "Date first seen on the asset",
           "order": 18
         },
         "date_most_recently_seen_on_asset": {
           "type": "string",
           "title": "Date Most Recently Seen On Asset",
-          "description": "...",
+          "description": "Date most recently seen on the asset",
           "order": 19
         },
         "solution_id": {
@@ -213,13 +213,13 @@ class ScanCompletionOutput(insightconnect_plugin_runtime.Output):
         "est_time_to_fix": {
           "type": "string",
           "title": "Estimated Time To Fix Per Asset",
-          "description": "...",
+          "description": "Estimated time to fix per asset",
           "order": 23
         },
         "solution_type": {
           "type": "string",
           "title": "Solution Type",
-          "description": "...",
+          "description": "The type of the solution for the vulnerability",
           "order": 24
         }
       }
