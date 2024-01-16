@@ -302,6 +302,7 @@ Example output:
 
 # Version History
 
+* 4.1.5 - Monitor Sign in and out Activity: Added exception logging and bumped latest plugin SDK
 * 4.1.4 - Update to the latest plugin SDK
 * 4.1.3 - Monitor Sign in and out Activity: set cutoff time of 24 hours
 * 4.1.2 - Fix required fields for GetUserOutput schema
