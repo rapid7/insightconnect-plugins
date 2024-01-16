@@ -7,7 +7,6 @@ import uuid
 from komand_rapid7_insightvm.util import util
 import csv
 import io
-from typing import List, Union, Dict
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 from komand_rapid7_insightvm.util import endpoints
@@ -41,30 +40,21 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                 time.sleep(60)
                 continue
 
-            results = self.get_results_from_latest_scan(params=params, scan_id=int(latest_scan_id))
+            results = self.get_results_from_latest_scan(scan_id=int(latest_scan_id))
 
             # Submit scan for trigger
-            for item in results:
-                self.send(
-                    {
-                        Output.ASSET_ID: item.get("asset_id"),
-                        Output.IP: item.get("ip_address"),
-                        Output.HOSTNAME: item.get("hostname"),
-                        Output.VULNERABILITY_INFO: item.get("vulnerability_info"),
-                    }
-                )
+            self.send({Output.SCAN_ID: latest_scan_id, Output.SCAN_COMPLETED_OUTPUT: results})
 
             first_latest_scan_id = latest_scan_id
 
             # Sleep configured in minutes
             time.sleep(params.get(Input.INTERVAL, 5) * 60)
 
-    def get_results_from_latest_scan(self, params: dict, scan_id: int) -> List[Dict[str, Union[str, int]]]:
+    def get_results_from_latest_scan(self, scan_id: int):
         """
         Take a scan id and run a sql query to retrieve the
         information needed for the trigger output
 
-        :param params: All of the user input params
         :param scan_id: The ID of the scan
 
         :return: A list of condensed and filter results for output in the trigger.
@@ -80,7 +70,8 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         report_payload = {
             "name": f"Rapid7-InsightConnect-ScanCompletion-{identifier}",
             "format": "sql-query",
-            "query": ScanQueries.query_results_from_latest_scan(scan_id),
+            "scope": {"scan": scan_id},
+            "query": ScanQueries.query_results_from_latest_scan(),
             "version": "2.3.0",
         }
 
@@ -94,11 +85,12 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                 assistance=f"Exception returned was {error}",
             )
 
-        results_dict = {}
-        for row in csv_report:
-            results_dict.update(Util.filter_results(params, row, results_dict))
+        results_list = []
 
-        return list(results_dict.values())
+        for row in csv_report:
+            results_list.append(row)
+
+        return results_list
 
     def find_latest_completed_scan(self, site_id: str, cached: bool) -> int:
         """
@@ -136,105 +128,51 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
 
 class ScanQueries:
     @staticmethod
-    def query_results_from_latest_scan(scan_id: int) -> str:
+    def query_results_from_latest_scan() -> str:
         """
         Generate an SQL query string needed to to retrieve all the necessary outputs
 
-        :param scan_id: Scan ID to query against
         :return: The completed query string
         """
-
-        return (
-            f"SELECT fasvi.scan_id, fasvi.asset_id, fasvi.vulnerability_id, dv.cvss_v3_score, dvr.source, daga.asset_group_id, dss.solution_id, dss.summary, dv.nexpose_id "  # nosec B608
-            f"FROM fact_asset_scan_vulnerability_instance AS fasvi "
-            f"JOIN dim_asset_group_asset AS daga ON (fasvi.asset_id = daga.asset_id) "
-            f"JOIN dim_vulnerability AS dv ON (fasvi.vulnerability_id = dv.vulnerability_id) "
-            f"JOIN dim_vulnerability_reference AS dvr ON (fasvi.vulnerability_id = dvr.vulnerability_id) "
-            f"JOIN dim_solution AS dss ON (dv.nexpose_id = dss.nexpose_id) "
-            f"WHERE fasvi.scan_id = {scan_id} "
-        )
+        return """SELECT 
+    DISTINCT ON (dv.vulnerability_id, da.ip_address, da.host_name) da.ip_address AS "IP Address",
+    da.host_name AS "Hostname",
+    dos.description AS "Operating System",
+    da.sites AS "Member of Sites",
+    dv.severity AS "Severity",
+    round(dv.riskscore :: numeric, 0) AS "Risk",
+    round(dv.cvss_score :: numeric, 2) AS "CVSS Score",
+    round(dv.cvss_v3_score :: numeric, 2) AS "CVSSv3 Score",
+    dv.exploits AS "Number of Public Exploits",
+    dv.malware_kits AS "Number of Malware Kits Known",
+    dv.vulnerability_id AS "Vulnerability ID",
+    dv.title AS "Vulnerability Name",
+    proofAsText(dv.description) AS "Vulnerability Details",
+    fasvf.vulnerability_instances AS "Vulnerability Count on Asset",
+    dv.date_published AS "Date Vulnerability First Published",
+    CURRENT_DATE - dv.date_published :: date AS "Days Since Vulnerability First Published",
+    round(fava.age_in_days :: numeric, 0) AS "Days Present on Asset",
+    fava.first_discovered AS "Date First Seen on Asset",
+    fava.most_recently_discovered AS "Date Most Recently Seen on Asset",
+    ds.solution_id AS "Solution ID",
+    ds.nexpose_id AS "Nexpose ID",
+    proofAsText(ds.fix) AS "Best Solution",
+    ds.estimate AS "Estimated Time To Fix Per Asset",
+    proofAsText(ds.solution_type) AS "Solution Type"
+ FROM
+    dim_asset da
+    JOIN dim_operating_system dos ON dos.operating_system_id = da.operating_system_id
+    JOIN dim_asset_vulnerability_best_solution davbs ON davbs.asset_id = da.asset_id
+    JOIN dim_solution ds ON ds.solution_id = davbs.solution_id
+    JOIN dim_vulnerability dv ON dv.vulnerability_id = davbs.vulnerability_id
+    JOIN dim_vulnerability_reference dvf ON dvf.vulnerability_id = dv.vulnerability_id
+    JOIN fact_asset_vulnerability_age fava ON dv.vulnerability_id = fava.vulnerability_id
+    JOIN fact_asset_vulnerability_finding fasvf ON dv.vulnerability_id = fasvf.vulnerability_id
+    WHERE dvf.source IN ('MSKB','MS')
+        """  # nosec B608
 
 
 class Util:
-    @staticmethod
-    def filter_results(params: dict, csv_row: dict, results: dict) -> Union[None, dict]:
-        """
-        Filter the outputted results based on the user inputs.
-
-        :param params: Input params
-        :param csv_row: Dict row of the csv results
-        :param results: New object to append results to
-
-        :return: New object containing only the necessary fields for the required output.
-        """
-
-        # Input retrieval
-        asset_group = params.get(Input.ASSET_GROUP, None)
-        cve = params.get(Input.CVE, None)
-        source = params.get(Input.SOURCE, None)
-        cvss_score = params.get(Input.CVSS_SCORE, None)
-        severity = params.get(Input.SEVERITY, None)
-
-        # We retrieve this separately because we use it as a unique identifier for
-        # the filtering process
-        asset_id = int(csv_row.get("asset_id", 0))
-
-        new_dict = {
-            "asset_id": asset_id,
-            "hostname": csv_row.get("host_name", ""),
-            "ip_address": csv_row.get("ip_address", ""),
-            "vulnerability_info": [
-                {
-                    "vulnerability_id": csv_row.get("vulnerability_id", ""),
-                    "nexpose_id": csv_row.get("nexpose_id", ""),
-                    "cvss_v3_score": csv_row.get("cvss_v3_score", 0),
-                    "severity": csv_row.get("severity", ""),
-                    "solution_id": Util.strip_msft_id(csv_row.get("solution_id", "")),
-                    "solution_summary": csv_row.get("summary", ""),
-                }
-            ],
-        }
-
-        # If an input and it is not found, return None in place of the row to filter
-        # out the result
-        if asset_group and asset_group not in csv_row.get("asset_group_id", ""):
-            return {}
-        if cve and cve not in csv_row.get("nexpose_id", ""):
-            return {}
-        if source and source not in csv_row.get("source", ""):
-            return {}
-        if cvss_score and csv_row.get("cvss_v3_score", 0) < cvss_score:
-            return {}
-        if severity and severity not in csv_row.get("severity", ""):
-            return {}
-        # Otherwise, return the newly filtered result.
-
-        existing_asset_id = results.get(asset_id, None)
-
-        if existing_asset_id:
-            existing_asset_id["vulnerability_info"] += new_dict.get("vulnerability_info", [])
-        else:
-            results[asset_id] = new_dict
-
-        return results
-
-    @staticmethod
-    def strip_msft_id(solution_id: str) -> str:
-        """
-        Helper method to strip solution IDs specific to microsoft IDs
-        to return a useful solution ID for sccm
-
-        :param solution_id: Solution ID
-        :return: Regular solution ID or stripped solution ID
-        """
-
-        list_x = solution_id.split("-")
-
-        if list_x[0] == "msft":
-            return "-".join(list_x[2:])
-        else:
-            return solution_id
-
     @staticmethod
     def verify_scan_id_input(scan_id: int):
         """
