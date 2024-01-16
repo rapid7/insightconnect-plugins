@@ -4,7 +4,8 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM Console
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans
-version: 6.2.0
+version: 8.0.0
+connection_version: 8
 supported_versions: ["Rapid7 InsightVM API v3 2022-05-25"]
 vendor: rapid7
 support: rapid7
@@ -25,6 +26,127 @@ hub_tags:
   keywords: [insightvm, rapid7]
   features: []
 types:
+  scanCompleted:
+    ip_address:
+      title: IP Address
+      description: ip
+      type: string
+      required: false
+    hostname:
+      title: Hostname
+      description: Hostname
+      type: string
+      required: false
+    os:
+      title: Operating System
+      description: OS
+      type: string
+      required: false
+    member_of_sites:
+      title: Member of Sites
+      description: Show which sites the vuln is a member of
+      type: '[]string'
+      required: false
+    severity:
+      title: Severity
+      description: Severity
+      type: string
+      required: false
+    riskscore:
+      title: Risk Score
+      description: Risk score
+      type: integer
+      required: false
+    cvss_score:
+      title: CVSS Score
+      description: CVSS Score
+      type: float
+      required: false
+    cvss_v3_score:
+      title: CVSS V3 Score
+      description: CVSS v3 score
+      type: float
+      required: false
+    exploits:
+      title: Exploits
+      description: Number of public exploits
+      type: integer
+      required: false
+    malware_kits:
+      title: Malware Kits
+      description: Number of malware kits known
+      type: integer
+      required: false
+    vulnerability_id:
+      title: Vulnerability ID
+      description: Vulnerability ID
+      type: integer
+      required: false
+    vulnerability_name:
+      title: Vulnerability Name
+      description: Vulnerability name
+      type: string
+      required: false
+    vulnerability_details:
+      title: Vulnerability Details
+      description: Vulnerability details
+      type: string
+      required: false
+    vulnerability_instances:
+      title: Vulnerability Instances
+      description: Vulnerability count on asset
+      type: integer
+      required: false
+    vuln_first_published:
+      title: Date Vulnerability First Published
+      description: Date the vulnerability was first published
+      type: string
+      required: false
+    days_since_vuln_first_published:
+      title: Days Since Vulnerability First Published
+      description: Days since the vulnerability was first published
+      type: integer
+      required: false
+    days_present_on_asset:
+      title: Days Present On Asset
+      description: Days present on the asset
+      type: integer
+      required: false
+    date_first_seen_on_asset:
+      title: Date First Seen On Asset
+      description: Date first seen on the asset
+      type: string
+      required: false
+    date_most_recently_seen_on_asset:
+      title: Date Most Recently Seen On Asset
+      description: Date most recently seen on the asset
+      type: string
+      required: false
+    solution_id:
+      title: Solution ID
+      description: Solution ID
+      type: integer
+      required: false
+    nexpose_id:
+      title: Nexpose ID
+      description: Nexpose ID
+      type: string
+      required: false
+    best_solution:
+      title: Best Solution
+      description: Best solution
+      type: string
+      required: false
+    est_time_to_fix:
+      title: Estimated Time To Fix Per Asset
+      description: Estimated time to fix per asset
+      type: string
+      required: false
+    solution_type:
+      title: Solution Type
+      description: The type of the solution for the vulnerability
+      type: string
+      required: false
   report_id:
     id:
       description: Identifer
@@ -1661,7 +1783,7 @@ types:
     id:
       title: ID
       description: Identifier of the vulnerability
-      type: integer
+      type: string
       required: true
     title:
       title: Title
@@ -4493,64 +4615,16 @@ triggers:
         type: string
         required: false
         example: 219
-      asset_group:
-        title: Asset Group
-        description: Asset Group
-        type: string
-        required: false
-        example: 2
-      cve:
-        title: CVE
-        description: CVE
-        type: string
-        required: false
-        example: ssh-cve-2018
-      source:
-        title: Source
-        description: Source
-        type: string
-        required: false
-        example: url
-      cvss_score:
-        title: CVSS V3 Score
-        description: A vulneravility score from 1-10. Only those with a score equal to or above the input will be shown
-        type: integer
-        required: false
-        default: 0
-        example: 4
-      severity:
-        title: Severity
-        description: Severity of the vulnerability
-        type: string
-        required: false
-        enum:
-          - ""
-          - Moderate
-          - Severe
-          - Critical
-        example: Severe
     output:
-      asset_id:
-        title: Asset ID
-        description: Asset ID
+      scan_id:
+        title: Scan ID
+        description: The ID of the scan
         type: integer
+        example: 42
         required: false
-        example: 219
-      hostname:
-        title: Hostname
-        description: Hostname
-        type: string
+      scan_completed_output:
+        title: Scan Completed Output
+        description: An array containing all the info
+        type: '[]scanCompleted'
+        example: {}
         required: false
-        example: doc.rapid7.com
-      ip:
-        title: IP
-        description: IP
-        type: string
-        required: false
-        example: 8.8.8.8
-      vulnerability_info:
-        title: Vulnerability Info
-        description: An array containing vulnerability id, solution id & solution summary
-        type: '[]object'
-        required: false
-        example: [{'vulnerability_id': 1111, 'nexpose_id': 'ssh-cve-2018', 'solution_id': 1111, 'solution_summary': 'Example solution for cve'}, {'vulnerability_id': 2222, 'nexpose_id': 'ssh-cve-2019', 'solution_id': 2222, 'solution_summary': 'Example solution for cve'}]
