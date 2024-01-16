@@ -40,6 +40,8 @@ def main():
 
             self.add_action(actions.AddAlertNote())
 
+            self.add_action(actions.AddCustomScript())
+
             self.add_action(actions.AddToBlockList())
 
             self.add_action(actions.AddToExceptionList())
@@ -48,9 +50,13 @@ def main():
 
             self.add_action(actions.CollectFile())
 
+            self.add_action(actions.DeleteCustomScript())
+
             self.add_action(actions.DeleteEmailMessage())
 
             self.add_action(actions.DisableAccount())
+
+            self.add_action(actions.DownloadCustomScript())
 
             self.add_action(actions.DownloadSandboxAnalysisResult())
 
@@ -63,6 +69,8 @@ def main():
             self.add_action(actions.GetAlertDetails())
 
             self.add_action(actions.GetAlertList())
+
+            self.add_action(actions.GetCustomScriptList())
 
             self.add_action(actions.GetEmailActivityData())
 
@@ -102,6 +110,8 @@ def main():
 
             self.add_action(actions.RestoreEndpoint())
 
+            self.add_action(actions.RunCustomScript())
+
             self.add_action(actions.SignOutAccount())
 
             self.add_action(actions.SubmitFileToSandbox())
@@ -109,6 +119,8 @@ def main():
             self.add_action(actions.SubmitUrlsToSandbox())
 
             self.add_action(actions.TerminateProcess())
+
+            self.add_action(actions.UpdateCustomScript())
 
 
     """Run plugin"""
