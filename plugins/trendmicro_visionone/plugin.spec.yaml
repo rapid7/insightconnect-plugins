@@ -1671,5 +1671,373 @@ actions:
         type: alert
         description: The details of the alert
         required: true
-        example: { }
+    get_custom_script_list:
+      title: Get Custom Script List
+      description: Retrieves information about the available custom scripts and displays the information in a paginated list
+      input:
+        query_op:
+          title: Query Operator
+          type: string
+          description: Logical operator to employ in the query. (AND/OR)
+          required: true
+          example: " or "
+          default: " or "
+          enum:
+            - " or "
+            - " and "
+        fields:
+          title: Fields
+          type: "[]string"
+          description: Array of fields to query. (file_name, file_type)
+          required: true
+          example: [ ]
+        file_name:
+          title: File Name
+          type: string
+          description: File name of a custom script
+          required: false
+          example: test.ps1
+        file_type:
+          title: File Type
+          type: string
+          description: File extension of a custom script
+          required: false
+          example: powershell
+      output:
+    add_custom_script:
+      title: Add Custom Script
+      description: Uploads a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 encoding
+      input:
+        file_type:
+          title: File Type
+          type: string
+          description: File type of custom script
+          required: true
+          example: "bash"
+          default: "bash"
+          enum:
+            - "powershell"
+            - "bash"
+        description:
+          title: Description
+          description: Task Description
+          type: string
+          required: false
+          example: example desc
+        file:
+          title: File
+          type: file
+          description: Custom Script (dict of {filename(string) & content(base64(bytes))})
+          required: false
+          example: {
+            "content": "dGVzdA==",
+            "filename": "r7-test11.sh"
+          }
+      output:
+    update_custom_script:
+      title: Update Custom Script
+      description: Updates a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 encoding
+      input:
+        script_id:
+          title: Script ID
+          type: string
+          description: Unique alphanumeric string that identifies a script file
+          required: true
+          example: 44c99cb0-8c5f-4182-af55-62135dbe32f1
+        file_name:
+          title: File Name
+          type: string
+          description: File name of custom script
+          required: false
+          example: test.ps1
+          default: "test.ps1"
+        file_type:
+          title: File Type
+          type: string
+          description: File type of custom script
+          required: true
+          example: "bash"
+          default: "bash"
+          enum:
+            - "powershell"
+            - "bash"
+        description:
+          title: Description
+          description: Task Description
+          type: string
+          required: false
+          example: example desc
+        file:
+          title: File
+          type: file
+          description: Custom Script (dict of {filename(string) & content(base64(bytes))})
+          required: false
+          example: {
+            "content": "dGVzdA==",
+            "filename": "r7-test11.sh"
+          }
+      output:
+    download_custom_script:
+      title: Download Custom Script
+      description: Downloads custom script
+      input:
+        script_id:
+          title: Script ID
+          type: string
+          description: Unique alphanumeric string that identifies a script file
+          required: true
+          example: 44c99cb0-8c5f-4182-af55-62135dbe32f1
+      output:
+    delete_custom_script:
+      title: Delete Custom Script
+      description: Deletes custom script
+      input:
+        script_id:
+          title: Script ID
+          type: string
+          description: Unique alphanumeric string that identifies a script file
+          required: true
+          example: 44c99cb0-8c5f-4182-af55-62135dbe32f1
+      output:
+    run_custom_script:
+      title: Run Custom Script
+      description: Run custom script
+      input:
+        description:
+          title: Description
+          description: Task Description
+          type: string
+          required: false
+          example: example desc
+        file_name:
+          title: File Name
+          type: string
+          description: File name of custom script
+          required: false
+          example: test.ps1
+          default: "test.ps1"
+        agent_guid:
+          title: Agent GUID
+          description: Unique alphanumeric string that identifies an installed agent
+          type: string
+          required: false
+          example: 2839eu2983e23e
+        endpoint_name:
+          title: Endpoint Name
+          description: Endpoint name of the target endpoint
+          type: string
+          required: false
+          example: endpoint1
+        parameter:
+          title: Parameter
+          description: Options passed to the script during execution
+          type: string
+          required: false
+          example: -y --verbose
+      output:
+  get_email_activity_data:
+    title: Get Email Activity Data
+    description: Displays search results from the Email Activity Data source in a paginated list
+    input:
+      top:
+        title: Top
+        type: integer
+        description: Number of records displayed on a page
+        required: true
+        example: 500
+        enum:
+          - 50
+          - 100
+          - 500
+          - 1000
+          - 5000
+      start_date_time:
+        title: Start Date Time
+        type: string
+        description: Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made
+        required: false
+        example: 2020-06-15T10:00:00Z
+      end_date_time:
+        title: End Date Time
+        type: string
+        description: Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made
+        required: false
+        example: 2020-06-15T12:00:00Z
+      select:
+        title: Select
+        type: "[]string"
+        description: List of fields to include in the search results. If no fields are specified, the query returns all supported fields
+        required: false
+        example: [ ]
+      query_op:
+        title: Query Operator
+        type: string
+        description: Logical operator to employ in the query. (AND/OR)
+        required: true
+        example: " or "
+        default: " or "
+        enum:
+          - " or "
+          - " and "
+      fields:
+        title: Fields
+        type: "[]string"
+        description: Array of fields to query. (uuid, tags, pname, msgUuid, ...)
+        required: true
+        example: [ ]
+    output:
+  get_email_activity_data_count:
+    title: Get Email Activity Data Count
+    description: Displays count of search results from the Email Activity Data source in a paginated list
+    input:
+      top:
+        title: Top
+        type: integer
+        description: Number of records displayed on a page
+        required: true
+        example: 500
+        enum:
+          - 50
+          - 100
+          - 500
+          - 1000
+          - 5000
+      start_date_time:
+        title: Start Date Time
+        type: string
+        description: Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made
+        required: false
+        example: 2020-06-15T10:00:00Z
+      end_date_time:
+        title: End Date Time
+        type: string
+        description: Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made
+        required: false
+        example: 2020-06-15T12:00:00Z
+      select:
+        title: Select
+        type: "[]string"
+        description: List of fields to include in the search results. If no fields are specified, the query returns all supported fields
+        required: false
+        example: [ ]
+      query_op:
+        title: Query Operator
+        type: string
+        description: Logical operator to employ in the query. (AND/OR)
+        required: true
+        example: " or "
+        default: " or "
+        enum:
+          - " or "
+          - " and "
+      fields:
+        title: Fields
+        type: "[]string"
+        description: Array of fields to query. (uuid, tags, pname, msgUuid, ...)
+        required: true
+        example: [ ]
+    output:
+  get_endpoint_activity_data:
+    title: Get Endpoint Activity Data
+    description: Displays results from the Endpoint Activity Data source in a paginated list
+    input:
+      top:
+        title: Top
+        type: integer
+        description: Number of records displayed on a page
+        required: true
+        example: 500
+        enum:
+          - 50
+          - 100
+          - 500
+          - 1000
+          - 5000
+      start_date_time:
+        title: Start Date Time
+        type: string
+        description: Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made
+        required: false
+        example: 2020-06-15T10:00:00Z
+      end_date_time:
+        title: End Date Time
+        type: string
+        description: Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made
+        required: false
+        example: 2020-06-15T12:00:00Z
+      select:
+        title: Select
+        type: "[]string"
+        description: List of fields to include in the search results. If no fields are specified, the query returns all supported fields
+        required: false
+        example: [ ]
+      query_op:
+        title: Query Operator
+        type: string
+        description: Logical operator to employ in the query. (AND/OR)
+        required: true
+        example: " or "
+        default: " or "
+        enum:
+          - " or "
+          - " and "
+      fields:
+        title: Fields
+        type: "[]string"
+        description: Array of fields to query. (uuid, tags, pname, msgUuid, ...)
+        required: true
+        example: [ ]
+    output:
+  get_endpoint_activity_data_count:
+    title: Get Endpoint Activity Data Count
+    description: Displays count of search results from the Endpoint Activity Data source in a paginated list
+    input:
+      top:
+        title: Top
+        type: integer
+        description: Number of records displayed on a page
+        required: true
+        example: 500
+        enum:
+          - 50
+          - 100
+          - 500
+          - 1000
+          - 5000
+      start_date_time:
+        title: Start Date Time
+        type: string
+        description: Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made
+        required: false
+        example: 2020-06-15T10:00:00Z
+      end_date_time:
+        title: End Date Time
+        type: string
+        description: Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made
+        required: false
+        example: 2020-06-15T12:00:00Z
+      select:
+        title: Select
+        type: "[]string"
+        description: List of fields to include in the search results. If no fields are specified, the query returns all supported fields
+        required: false
+        example: [ ]
+      query_op:
+        title: Query Operator
+        type: string
+        description: Logical operator to employ in the query. (AND/OR)
+        required: true
+        example: " or "
+        default: " or "
+        enum:
+          - " or "
+          - " and "
+      fields:
+        title: Fields
+        type: "[]string"
+        description: Array of fields to query. (uuid, tags, pname, msgUuid, ...)
+        required: true
+        example: [ ]
+    output:
+
 
