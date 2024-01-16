@@ -3976,8 +3976,7 @@ Example output:
 
 # Version History
 
-* 8.0.0 - `Scan Completion` - Rework trigger to use a new query, resulting in a new output & removed all inputs except for `site_id`
-* 7.0.0 - `Scan Completion` - Update the trigger output and add new 'Category' input
+* 7.0.0 - `Scan Completion` - Rework trigger to use a new query, resulting in a new output & removed all inputs except for `site_id`
 * 6.2.1 - Update Top Remediations id to be the nexpose_id
 * 6.2.0 - `Scan Completion` - New trigger added to retrieve vulnerability information on assets when a scan is completed | Improved error handling across all API calls
 * 6.1.1 - Update actions `Update Site Excluded Targets` and `Update Site Included Targets` to prevent error on empty addresses
