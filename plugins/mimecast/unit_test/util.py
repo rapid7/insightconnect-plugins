@@ -41,7 +41,7 @@ class Util:
             return json.loads(file.read())
 
     @staticmethod
-    def get_mocked_zip():
+    def get_mocked_zip(path_traversal=False):
         file_contents = [
             {"type": "MTA", "data": [FILE_ZIP_CONTENT_1]},
             {"type": "MTA", "data": [FILE_ZIP_CONTENT_2]},
@@ -49,7 +49,7 @@ class Util:
         zip_file = BytesIO()
         with ZipFile(zip_file, "w") as myzip:
             for i, content in enumerate(file_contents):
-                filename = f"{i}.json"
+                filename = get_filename(i, path_traversal)
                 myzip.writestr(filename, json.dumps(content))
 
         return zip_file.getvalue()
@@ -167,5 +167,11 @@ class Util:
                 resp = MockResponseZip(200, Util.get_mocked_zip(), headers, json_decode)
             elif "no_results" in data:
                 resp = MockResponseZip(200, b"", {"mc-siem-token": "token123"}, {"meta": {"status": 200}})
+            elif "path_traversal" in data:
+                resp = MockResponseZip(200, Util.get_mocked_zip(True), headers, {"meta": {"status": 200}})
             return resp
         return "Not implemented"
+
+
+def get_filename(i, path_traversal):
+    return f"filename-{i}-from-mimecast.json" if not path_traversal else f"../filename-{i}-from-mimecast.json"
