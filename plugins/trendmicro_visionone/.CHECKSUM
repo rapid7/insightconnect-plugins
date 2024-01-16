@@ -1,11 +1,15 @@
 {
-	"spec": "fa4afbfecc01b112a5ec5c44e6369ab5",
-	"manifest": "2e9ed27e231addc90f03e6f7bb98571d",
+	"spec": "6544e5d52b5e62d7bcea9a8715c7f2e0",
+	"manifest": "8d3c696cfc1aa419da4ce65e94b79a6f",
 	"setup": "901636fbcd246f84e2d1744745e83b36",
 	"schemas": [
 		{
 			"identifier": "add_alert_note/schema.py",
 			"hash": "5705b4e41e6aa9b929de495aa2328ba7"
+		},
+		{
+			"identifier": "add_custom_script/schema.py",
+			"hash": "7e5d18187c912f1dd913914620d6ae1a"
 		},
 		{
 			"identifier": "add_to_block_list/schema.py",
@@ -24,12 +28,20 @@
 			"hash": "adb03edcca97e0e077d7046001de69be"
 		},
 		{
+			"identifier": "delete_custom_script/schema.py",
+			"hash": "54dc553d471c72b01b7c17fbd2ef06b6"
+		},
+		{
 			"identifier": "delete_email_message/schema.py",
 			"hash": "194bc39fb1ca31d69a558fb91a501fcd"
 		},
 		{
 			"identifier": "disable_account/schema.py",
 			"hash": "14a0ca203987f8ab8c1358ba32daeb5e"
+		},
+		{
+			"identifier": "download_custom_script/schema.py",
+			"hash": "6c4dc26483c709a3dc9151a3788f882d"
 		},
 		{
 			"identifier": "download_sandbox_analysis_result/schema.py",
@@ -54,6 +66,10 @@
 		{
 			"identifier": "get_alert_list/schema.py",
 			"hash": "3488ff1e269c07e196b2e46e30c9f24c"
+		},
+		{
+			"identifier": "get_custom_script_list/schema.py",
+			"hash": "b9ca48f03362c867ad174db731d82c54"
 		},
 		{
 			"identifier": "get_email_activity_data/schema.py",
@@ -132,6 +148,10 @@
 			"hash": "5d663063f896de60ada64c2e2c4def31"
 		},
 		{
+			"identifier": "run_custom_script/schema.py",
+			"hash": "87e3965e1eeb0fb1a9f0d51b52d6e1b2"
+		},
+		{
 			"identifier": "sign_out_account/schema.py",
 			"hash": "cb075be5f2315488d8783b44816b5f14"
 		},
@@ -146,6 +166,10 @@
 		{
 			"identifier": "terminate_process/schema.py",
 			"hash": "28171ed009ced009bb1f73f4a2ae2436"
+		},
+		{
+			"identifier": "update_custom_script/schema.py",
+			"hash": "8f1df5f935218524e7cea9ecfa7245cb"
 		},
 		{
 			"identifier": "connection/schema.py",
