@@ -9,13 +9,12 @@ class Component:
 
 class Input:
     FIELDS = "fields"
-    FILE_NAME = "file_name"
-    FILE_TYPE = "file_type"
     QUERY_OP = "query_op"
     
 
 class Output:
-    pass
+    CUSTOM_SCRIPTS_LIST_RESP = "custom_scripts_list_resp"
+    
 
 class GetCustomScriptListInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
@@ -26,23 +25,11 @@ class GetCustomScriptListInput(insightconnect_plugin_runtime.Input):
     "fields": {
       "type": "array",
       "title": "Fields",
-      "description": "Array of fields to query. (file_name, file_type)",
+      "description": "Array of fields to query. (filter=fileName eq 'test.ps1' or fileType eq 'powershell')",
       "items": {
         "type": "string"
       },
       "order": 2
-    },
-    "file_name": {
-      "type": "string",
-      "title": "File Name",
-      "description": "File name of a custom script",
-      "order": 3
-    },
-    "file_type": {
-      "type": "string",
-      "title": "File Type",
-      "description": "File extension of a custom script",
-      "order": 4
     },
     "query_op": {
       "type": "string",
@@ -69,7 +56,65 @@ class GetCustomScriptListInput(insightconnect_plugin_runtime.Input):
 
 class GetCustomScriptListOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "custom_scripts_list_resp": {
+      "type": "array",
+      "title": "Custom Scripts List Response",
+      "description": "Custom Scripts List Response Array",
+      "items": {
+        "$ref": "#/definitions/custom_scripts_list_resp"
+      },
+      "order": 1
+    }
+  },
+  "required": [
+    "custom_scripts_list_resp"
+  ],
+  "definitions": {
+    "custom_scripts_list_resp": {
+      "type": "object",
+      "title": "custom_scripts_list_resp",
+      "properties": {
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Task Description",
+          "order": 4
+        },
+        "file_name": {
+          "type": "string",
+          "title": "File Name",
+          "description": "File name of a custom script",
+          "order": 2
+        },
+        "file_type": {
+          "type": "string",
+          "title": "File Type",
+          "description": "File type of a custom script",
+          "enum": [
+            "powershell",
+            "bash"
+          ],
+          "order": 3
+        },
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "Unique alphanumeric string that identifies a script file",
+          "order": 1
+        }
+      },
+      "required": [
+        "file_name",
+        "file_type",
+        "id"
+      ]
+    }
+  }
+}
     """)
 
     def __init__(self):
