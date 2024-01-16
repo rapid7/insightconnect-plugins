@@ -595,6 +595,30 @@ types:
       description: The matched indicator patterns
       type: "[]object"
       required: false
+  custom_scripts_list_resp:
+    id:
+      title: ID
+      type: string
+      description: Unique alphanumeric string that identifies a script file
+      required: true
+    file_name:
+      title: File Name
+      type: string
+      description: File name of a custom script
+      required: true
+    file_type:
+      title: File Type
+      type: string
+      description: File type of a custom script
+      required: true
+      enum:
+        - powershell
+        - bash
+    description:
+      title: Description
+      description: Task Description
+      type: string
+      required: false
 
 connection:
   api_url:
@@ -1688,22 +1712,16 @@ actions:
       fields:
         title: Fields
         type: "[]string"
-        description: Array of fields to query. (file_name, file_type)
+        description: Array of fields to query. (filter=fileName eq 'test.ps1' or fileType eq 'powershell')
         required: true
         example: [ ]
-      file_name:
-        title: File Name
-        type: string
-        description: File name of a custom script
-        required: false
-        example: test.ps1
-      file_type:
-        title: File Type
-        type: string
-        description: File extension of a custom script
-        required: false
-        example: powershell
     output:
+      custom_scripts_list_resp:
+        title: Custom Scripts List Response
+        description: Custom Scripts List Response Array
+        type: "[]custom_scripts_list_resp"
+        required: true
+        example: [ ]
   add_custom_script:
     title: Add Custom Script
     description: Uploads a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 encoding
