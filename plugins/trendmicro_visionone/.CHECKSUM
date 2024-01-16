@@ -1,7 +1,7 @@
 {
-	"spec": "ff71a18dd14b5842088445d1364fe96a",
-	"manifest": "5b2393b95a1c88b88c3682ccef2b603c",
-	"setup": "b7de1b57b133f298d06ef659f82067c3",
+	"spec": "fa4afbfecc01b112a5ec5c44e6369ab5",
+	"manifest": "2e9ed27e231addc90f03e6f7bb98571d",
+	"setup": "901636fbcd246f84e2d1744745e83b36",
 	"schemas": [
 		{
 			"identifier": "add_alert_note/schema.py",
@@ -54,6 +54,22 @@
 		{
 			"identifier": "get_alert_list/schema.py",
 			"hash": "3488ff1e269c07e196b2e46e30c9f24c"
+		},
+		{
+			"identifier": "get_email_activity_data/schema.py",
+			"hash": "077697d847107d9cdd02838926dd09d3"
+		},
+		{
+			"identifier": "get_email_activity_data_count/schema.py",
+			"hash": "14456c3e405a7d6986b3a94368729d4e"
+		},
+		{
+			"identifier": "get_endpoint_activity_data/schema.py",
+			"hash": "ed317d07078b8991e668ac97b06fca75"
+		},
+		{
+			"identifier": "get_endpoint_activity_data_count/schema.py",
+			"hash": "dd287bff45af87b52c27265425f27dbd"
 		},
 		{
 			"identifier": "get_endpoint_data/schema.py",

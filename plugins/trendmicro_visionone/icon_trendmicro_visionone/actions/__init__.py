@@ -12,6 +12,10 @@ from .edit_alert_status.action import EditAlertStatus
 from .enable_account.action import EnableAccount
 from .get_alert_details.action import GetAlertDetails
 from .get_alert_list.action import GetAlertList
+from .get_email_activity_data.action import GetEmailActivityData
+from .get_email_activity_data_count.action import GetEmailActivityDataCount
+from .get_endpoint_activity_data.action import GetEndpointActivityData
+from .get_endpoint_activity_data_count.action import GetEndpointActivityDataCount
 from .get_endpoint_data.action import GetEndpointData
 from .get_exception_list.action import GetExceptionList
 from .get_sandbox_analysis_result.action import GetSandboxAnalysisResult
