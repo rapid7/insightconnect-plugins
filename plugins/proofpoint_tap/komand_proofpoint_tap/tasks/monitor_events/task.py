@@ -26,7 +26,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             state=MonitorEventsState(),
         )
 
-    def run(self, params={}, state={}):  # pylint: disable=unused-argument
+    def run(self, params={}, state={}):  # noqa: MC0001
         self.connection.client.toggle_rate_limiting = False
         has_more_pages = False
         try:
@@ -110,7 +110,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                 return new_unique_logs, state, has_more_pages, 200, None
 
             except ApiException as error:
-                self.logger.info(f"API Exception occurred: {error}")
+                self.logger.info(f"API Exception occurred: status_code: {error.status_code}, error: {error}")
                 state[self.PREVIOUS_LOGS_HASHES] = []
                 return [], state, False, error.status_code, error
         except Exception as error:

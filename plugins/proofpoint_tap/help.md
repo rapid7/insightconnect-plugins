@@ -1171,6 +1171,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.1.2 - Update to latest plugin SDK to get task and exception logging
 * 4.1.1 - Monitor Events Task: Update max lookback time, remove log cleaning, add debugging
 * 4.1.0 - Update to latest plugin SDK
 * 4.0.0 - Add Monitor Events task | Code refactor | Update plugin to be cloud enabled
