@@ -1,5 +1,5 @@
 {
-	"spec": "6544e5d52b5e62d7bcea9a8715c7f2e0",
+	"spec": "35b33cc5c829aa1a44c728ea15ce7189",
 	"manifest": "8d3c696cfc1aa419da4ce65e94b79a6f",
 	"setup": "901636fbcd246f84e2d1744745e83b36",
 	"schemas": [
@@ -69,7 +69,7 @@
 		},
 		{
 			"identifier": "get_custom_script_list/schema.py",
-			"hash": "b9ca48f03362c867ad174db731d82c54"
+			"hash": "7c0ec57ef3266676e47e11cf38ca51db"
 		},
 		{
 			"identifier": "get_email_activity_data/schema.py",
