@@ -4,16 +4,22 @@ products: [insightconnect]
 name: url_screenshot
 title: Screenshot a URL
 description: Screenshot a URL from the Orchestrator
-version: 1.0.1
+version: 1.0.2
 vendor: rapid7
 support: community
+supported_versions: ["Selenium 4.16.0"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/url_screenshot
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-tags:
-- utilities
-- url
+sdk:
+  type: slim
+  version: 5
+  user: nobody
+  packages:
+    - chromium
+    - chromium-driver
+tags: [utilities, url]
 hub_tags:
   use_cases: [data_enrichment]
   keywords: [utilities, analysis, url]
@@ -26,20 +32,20 @@ actions:
       url:
         title: URL
         type: string
-        description: URL to screenshot
+        description: The URL to take a screenshot from
         required: true
         order: 1
         example: "https://www.google.com"
       delay:
         title: Delay
         type: integer
-        description: Delay (in seconds) after page has loaded before screenshot
+        description: Delay (in seconds) after page loads before taking a screenshot
         required: false
         order: 2
         example: 5
       full_page:
         title: Full Page Capture
-        description: Export screenshot of "body" element instead of the default viewport.  This "body" element may have some formatting issues but should contain all elements of the page
+        description: Export screenshot of `body` element instead of the default viewport. This `body` element may have some formatting issues but should contain all elements of the page
         type: boolean
         required: true
         default: false
@@ -51,3 +57,4 @@ actions:
         description: The resulting PNG screenshot of the URL
         type: bytes
         required: false
+        example: UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==
