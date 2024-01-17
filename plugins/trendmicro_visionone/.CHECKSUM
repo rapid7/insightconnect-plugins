@@ -1,5 +1,5 @@
 {
-	"spec": "35b33cc5c829aa1a44c728ea15ce7189",
+	"spec": "dc8c6ac77c625c4ee92616e4d82b5419",
 	"manifest": "8d3c696cfc1aa419da4ce65e94b79a6f",
 	"setup": "901636fbcd246f84e2d1744745e83b36",
 	"schemas": [
@@ -69,23 +69,23 @@
 		},
 		{
 			"identifier": "get_custom_script_list/schema.py",
-			"hash": "7c0ec57ef3266676e47e11cf38ca51db"
+			"hash": "3bdb0314d58aaba1af98dab62f272d75"
 		},
 		{
 			"identifier": "get_email_activity_data/schema.py",
-			"hash": "077697d847107d9cdd02838926dd09d3"
+			"hash": "713c330e25b75a71d837aad06492c1f6"
 		},
 		{
 			"identifier": "get_email_activity_data_count/schema.py",
-			"hash": "14456c3e405a7d6986b3a94368729d4e"
+			"hash": "0de2d96837bc243ec3cdbf8f8b69eca9"
 		},
 		{
 			"identifier": "get_endpoint_activity_data/schema.py",
-			"hash": "ed317d07078b8991e668ac97b06fca75"
+			"hash": "071e96da773f90b506ffece39d8880ba"
 		},
 		{
 			"identifier": "get_endpoint_activity_data_count/schema.py",
-			"hash": "dd287bff45af87b52c27265425f27dbd"
+			"hash": "9c815128ae783d2ffea0696b8f5608f9"
 		},
 		{
 			"identifier": "get_endpoint_data/schema.py",
