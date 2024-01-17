@@ -1711,10 +1711,10 @@ actions:
           - " and "
       fields:
         title: Fields
-        type: "[]string"
+        type: object
         description: Array of fields to query. (filter=fileName eq 'test.ps1' or fileType eq 'powershell')
         required: true
-        example: [ ]
+        example: { }
     output:
       custom_scripts_list_resp:
         title: Custom Scripts List Response
@@ -1899,10 +1899,10 @@ actions:
           - " and "
       fields:
         title: Fields
-        type: "[]string"
+        type: object
         description: Array of fields to query. (uuid, tags, pname, msgUuid, ...)
         required: true
-        example: [ ]
+        example: { }
     output:
   get_email_activity_data_count:
     title: Get Email Activity Data Count
@@ -1950,10 +1950,10 @@ actions:
           - " and "
       fields:
         title: Fields
-        type: "[]string"
+        type: object
         description: Array of fields to query. (uuid, tags, pname, msgUuid, ...)
         required: true
-        example: [ ]
+        example: { }
     output:
   get_endpoint_activity_data:
     title: Get Endpoint Activity Data
@@ -2001,10 +2001,10 @@ actions:
           - " and "
       fields:
         title: Fields
-        type: "[]string"
+        type: object
         description: Array of fields to query. (uuid, tags, pname, msgUuid, ...)
         required: true
-        example: [ ]
+        example: { }
     output:
   get_endpoint_activity_data_count:
     title: Get Endpoint Activity Data Count
@@ -2052,10 +2052,10 @@ actions:
           - " and "
       fields:
         title: Fields
-        type: "[]string"
+        type: object
         description: Array of fields to query. (uuid, tags, pname, msgUuid, ...)
         required: true
-        example: [ ]
+        example: { }
     output:
 
 

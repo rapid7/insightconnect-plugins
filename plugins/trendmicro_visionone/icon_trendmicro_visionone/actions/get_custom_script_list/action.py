@@ -39,7 +39,7 @@ class GetCustomScriptList(insightconnect_plugin_runtime.Action):
         response = client.consume_custom_script_list(
             lambda script_list_data: new_script_list_data.append(script_list_data.json()),
             pytmv1.QueryOp(query_op),
-            *fields,
+            **fields,
         )
         if "error" in response.result_code.lower():
             raise PluginException(
@@ -53,5 +53,6 @@ class GetCustomScriptList(insightconnect_plugin_runtime.Action):
             custom_script_list_resp.append(json.loads(json.dumps(item)))
         # Return results
         self.logger.info("Returning Results...")
+        print(response)
         return custom_script_list_resp
         # return {Output.SANDBOX_SUSPICIOUS_LIST_RESP: sandbox_suspicious_list_resp}
