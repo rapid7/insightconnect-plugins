@@ -32,12 +32,9 @@ class GetEmailActivityDataCountInput(insightconnect_plugin_runtime.Input):
       "order": 3
     },
     "fields": {
-      "type": "array",
+      "type": "object",
       "title": "Fields",
       "description": "Array of fields to query. (uuid, tags, pname, msgUuid, ...)",
-      "items": {
-        "type": "string"
-      },
       "order": 6
     },
     "query_op": {
