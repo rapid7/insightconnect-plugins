@@ -16,6 +16,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Connect: Connecting...")
         url = "https://graph.microsoft.com"
         self.api = MicrosoftIntuneAPI(
+            auth_type=params.get(Input.AUTHENTICATION_TYPE),
             username=params.get(Input.CREDENTIALS, {}).get("username"),
             password=params.get(Input.CREDENTIALS, {}).get("password"),
             client_id=params.get(Input.CLIENTID),
