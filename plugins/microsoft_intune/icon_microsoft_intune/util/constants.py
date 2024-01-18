@@ -8,3 +8,8 @@ SCAN_DEVICE_ENDPOINT = "deviceManagement/managedDevices/{device_id}/windowsDefen
 WINDOWS_AUTOPILOT_DEVICE_ENDPOINT = "deviceManagement/windowsAutopilotDeviceIdentities/{device_id}"
 WINDOWS_DEFENDER_SIGNATURES_ENDPOINT = "deviceManagement/managedDevices/{device_id}/windowsDefenderUpdateSignatures"
 WIPE_DEVICE_ENDPOINT = "deviceManagement/managedDevices/{device_id}/wipe"
+
+
+class AuthType:
+    oauth2 = "Username-Password"
+    client = "Client-Credentials"
