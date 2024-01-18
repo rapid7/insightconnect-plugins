@@ -17,7 +17,8 @@ class Input:
     
 
 class Output:
-    pass
+    TOTAL_COUNT = "total_count"
+    
 
 class GetEndpointActivityDataCountInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
@@ -91,7 +92,21 @@ class GetEndpointActivityDataCountInput(insightconnect_plugin_runtime.Input):
 
 class GetEndpointActivityDataCountOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "total_count": {
+      "type": "integer",
+      "title": "Total Count",
+      "description": "Number of records returned by a query",
+      "order": 1
+    }
+  },
+  "required": [
+    "total_count"
+  ]
+}
     """)
 
     def __init__(self):

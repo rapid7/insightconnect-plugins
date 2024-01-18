@@ -14,7 +14,8 @@ class Input:
     
 
 class Output:
-    pass
+    LOCATION = "location"
+    
 
 class AddCustomScriptInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
@@ -79,7 +80,21 @@ class AddCustomScriptInput(insightconnect_plugin_runtime.Input):
 
 class AddCustomScriptOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "location": {
+      "type": "string",
+      "title": "Location",
+      "description": "URL that indicates the location of a script file",
+      "order": 1
+    }
+  },
+  "required": [
+    "location"
+  ]
+}
     """)
 
     def __init__(self):
