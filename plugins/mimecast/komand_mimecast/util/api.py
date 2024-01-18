@@ -99,7 +99,6 @@ class MimecastAPI:
             method="POST", url=f"{self.url}{uri}", headers=self._prepare_header(uri), data=str(payload)
         )
         self._check_rate_limiting(request)
-
         if "attachment" in request.headers.get("Content-Disposition", "") or self._is_last_token(request):
             combined_json_list = self._handle_zip_file(request)
             return combined_json_list, request.headers, request.status_code
@@ -132,9 +131,9 @@ class MimecastAPI:
         """
 
         try:
-            last_token = IS_LAST_TOKEN_FIELD in json.dumps(request.json())
+            last_token = request.json().get("meta", {}).get(IS_LAST_TOKEN_FIELD, False)
             request.headers.update({IS_LAST_TOKEN_FIELD: last_token})
-            return True
+            return last_token
         except json.JSONDecodeError:
             return False
 
@@ -171,12 +170,16 @@ class MimecastAPI:
             List[Dict]: A list of dictionaries, where each dictionary represents a log entry extracted from the ZIP file
         """
         try:
-            with ZipFile(BytesIO(request.content)) as my_zip:
+            content = self.sanitise_content(request.content)
+            with ZipFile(BytesIO(content)) as my_zip:
                 combined_json_list = [
                     log for file_name in my_zip.namelist() for log in json.loads(my_zip.read(file_name)).get("data")
                 ]
             return combined_json_list
-        except BadZipFile:
+        except BadZipFile as error:
+            # empty response from Mimecast can hit this, which we know is not an error, don't log it
+            if error.args[0] != "File is not a zip file":
+                self.logger.error(f"Hit BadZipFile, returning []. Error: {error}")
             return []
 
     def _prepare_header(self, uri: str) -> dict:
@@ -324,3 +327,12 @@ class MimecastAPI:
             return response
 
         self._handle_status_code_response(response, status_code)
+
+    @staticmethod
+    def sanitise_content(request_content: bytes) -> bytes:
+        # Sanitise file names to help guard against path traversal
+        sanitised_content = request_content.replace(b"%2e%2e%2f", b"../")
+        sanitised_content = sanitised_content.replace(b"../", b"")
+        sanitised_content = sanitised_content.replace(b"%2e%2e%5C", b"..\\")
+        sanitised_content = sanitised_content.replace(b"..\\", b"")
+        return sanitised_content
