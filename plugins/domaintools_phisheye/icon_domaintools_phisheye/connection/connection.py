@@ -1,14 +1,14 @@
 from domaintools import API
 from domaintools.exceptions import NotAuthorizedException
-from komand.exceptions import PluginException
 
-import komand
-from komand.exceptions import ConnectionTestException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
+
 from .schema import ConnectionSchema, Input
 from icon_domaintools_phisheye.util.helper import Helper
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.api = None
@@ -23,13 +23,13 @@ class Connection(komand.Connection):
         try:
             response = self.api.account_information()
             response.data()
-        except NotAuthorizedException as e:
+        except NotAuthorizedException:
             raise ConnectionTestException(
                 cause="Authorization failed.",
-                assistance="Double-check that your credentials configured in your connection are correct and try again.",
+                assistance="Double-check that your credentials configured in your connection are correct and try again."
             )
-        except Exception as e:
-            raise ConnectionTestException(cause="Unable to connect to DomainTools.", assistance=f"Exception was: {e}")
+        except Exception as error:
+            raise ConnectionTestException(cause="Unable to connect to DomainTools.", assistance=f"Exception was: {error}")
 
         phisheye_terms_list = Helper.make_request(self.api.phisheye_term_list, self.logger)
         self.terms = []
@@ -40,5 +40,5 @@ class Connection(komand.Connection):
         try:
             Helper.make_request(self.api.phisheye_term_list, self.logger)
             return {}
-        except PluginException as e:
-            raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e.data)
+        except PluginException as error:
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)

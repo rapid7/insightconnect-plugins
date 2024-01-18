@@ -14,7 +14,7 @@ This plugin allows you to enter a keyword, and PhishEye will return a sample of 
 
 # Supported Product Versions
   
-*This plugin does not contain any supported product versions.*
+* Domain Tools API 18-01-24
 
 # Documentation
 
@@ -140,8 +140,9 @@ If a term is searched for in the Domain List action but not monitored in PhishEy
 
 # Links
 
+* [DomainTools PhishEye](https://www.domaintools.com/resources/user-guides/phisheye)
+
 ## References
 
-* [DomainTools PhishEye](https://www.domaintools.com/resources/user-guides/phisheye)
 * [DomainTools API](https://www.domaintools.com/resources/api-documentation/)
 * [DomainTools Python API](https://github.com/domaintools/python_api)

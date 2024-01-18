@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "DomainTools PhishEye"
 Vendor = "rapid7"
-Version = "1.0.1"
+Version = "1.0.2"
 Description = "Monitor the Internet for 'Phishy' Domains"
 
 
