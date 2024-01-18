@@ -3322,7 +3322,7 @@ Example output:
 |Estimated Time To Fix Per Asset|string|None|False|Estimated time to fix per asset|None|
 |Exploits|integer|None|False|Number of public exploits|None|
 |Hostname|string|None|False|Hostname|None|
-|IP Address|string|None|False|ip|None|
+|IP Address|string|None|False|IP address for the asset|None|
 |Malware Kits|integer|None|False|Number of malware kits known|None|
 |Member of Sites|[]string|None|False|Show which sites the vuln is a member of|None|
 |Nexpose ID|string|None|False|Nexpose ID|None|
