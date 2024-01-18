@@ -623,5 +623,245 @@
         }
       ]
     }
+  },
+  "get_custom_script_list": {
+    "input": {
+      "fields": {
+        "fileName": "test.ps1",
+        "fileType": "powershell"
+      },
+      "query_op": " or "
+    },
+    "output": {
+      "custom_scripts_list_resp": [
+        {
+          "id": "71c7ae1f-bf14-4e6f-b3eb-30a45d13e6f2",
+          "file_name": "trendmicro-security-playbook-terminate-proc.ps1",
+          "file_type": "powershell",
+          "description": "Terminates processes in user devices"
+        }
+      ]
+    }
+  },
+  "add_custom_script": {
+    "input": {
+      "file_type": "bash",
+      "description": "Add custom script test",
+      "file": {
+        "content": "IyEvYmluL2Jhc2gKbHM=",
+        "filename": "add_script.sh"
+      }
+    },
+    "output": {
+      "location": "http://tmv1-mock.trendmicro.com/v3.0/response/customScripts/1"
+    }
+  },
+  "update_custom_script": {
+    "input": {
+      "script_id": "44c99cb0-8c5f-4182-af55-62135dbe32f1",
+      "file_type": "bash",
+      "description": "Update custom script test",
+      "file": {
+        "content": "IyEvYmluL2Jhc2gKbHM=",
+        "filename": "update_script.sh"
+      }
+    },
+    "output": {
+      "result_code": "SUCCESS"
+    }
+  },
+  "download_custom_script": {
+    "input": {
+      "script_id": "44c99cb0-8c5f-4182-af55-62135dbe32f1"
+    },
+    "output": {
+      "$success": true,
+      "file": "<<referenced:bigdata>>"
+    }
+  },
+  "delete_custom_script": {
+    "input": {
+      "script_id": "44c99cb0-8c5f-4182-af55-62135dbe32f1"
+    },
+    "output": {
+      "result_code": "SUCCESS"
+    }
+  },
+  "run_custom_script": {
+    "input": {
+      "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede",
+      "endpoint_name": "client1",
+      "parameter": "-y --verbose",
+      "file_name": "test_file.ps1",
+      "description": "Run custom script test"
+    },
+    "output": {
+      "$success": true,
+      "multi_response": [
+        {
+          "status": 202,
+          "task_id": "00002133"
+        }
+      ]
+    }
+  },
+  "get_email_activity_data": {
+    "input": {
+      "start_date_time": "2021-04-05T08:22:37Z",
+      "end_date_time": "2021-04-06T08:22:37Z",
+      "top": 500,
+      "select": [
+        "mailMsgSubject"
+      ],
+      "fields": {
+        "fileName": "test.ps1",
+        "fileType": "powershell"
+      },
+      "query_op": " or "
+    },
+    "output": {
+      "$success": true,
+      "email_activity_data_resp": [
+        {
+          "mail_msg_subject": "test sample",
+          "mail_msg_id": "<BL0PR01MB4178833793C138CE3414D53B997A0@BL0PR01MB4178.prod.example.com>",
+          "msg_uuid": "AAMkAGRhODQyZDAzLWNmNjEtNDY2OS1iOWM3LWVmODUxMDk4ZjE1ZgBGAAAAAAABcyFCsOdnTohKgA0TJdjUBwAYbtU+cD0jRZmfu0kuMtvEAAAAAAEMAAAYbtU+cD0jRZmfu0kuMtvEAAF/JGRaAAA=",
+          "mailbox": "user2@example2.com",
+          "mail_sender_ip": "xx.yy.zz.ww",
+          "mail_from_addresses": [
+            "user3@example3.com"
+          ],
+          "mail_whole_header": [
+            "Microsoft Azure<azure-noreply@xxxxx.com>"
+          ],
+          "mail_to_addresses": [
+            "user2@example2.com"
+          ],
+          "mail_source_domain": "example3.com",
+          "search_d_l": "CAS",
+          "scan_type": "exchange",
+          "event_time": 1601249307000,
+          "org_id": "8d23a000-9a4c-11ea-80f5-1de879102030",
+          "mail_urls_visible_link": [
+            "http://xxxxxx.com"
+          ],
+          "mail_urls_real_link": [
+            "http://xxxxxx.com"
+          ]
+        }
+      ]
+    }
+  },
+  "get_email_activity_data_count": {
+    "input": {
+      "start_date_time": "2021-04-05T08:22:37Z",
+      "end_date_time": "2021-04-06T08:22:37Z",
+      "top": 500,
+      "select": [
+        "mailMsgSubject"
+      ],
+      "fields": {
+        "fileName": "test.ps1",
+        "fileType": "powershell"
+      },
+      "query_op": " or "
+    },
+    "output": {
+      "total_count": 5
+    }
+  },
+  "get_endpoint_activity_data": {
+    "input": {
+      "start_date_time": "2021-04-05T08:22:37Z",
+      "end_date_time": "2021-04-06T08:22:37Z",
+      "top": 500,
+      "select": [
+        "mailMsgSubject"
+      ],
+      "fields": {
+        "fileName": "test.ps1",
+        "fileType": "powershell"
+      },
+      "query_op": " or "
+    },
+    "output": {
+      "endpoint_activity_data_resp": [
+        {
+          "dpt": 443,
+          "dst": "",
+          "endpoint_guid": "72436165-b5a5-471a-9389-0bdc3647bc33",
+          "endpoint_host_name": "xxx-docker",
+          "endpoint_ip": [
+            "192.0.2.0"
+          ],
+          "event_id": "1",
+          "event_sub_id": 0,
+          "object_integrity_level": 0,
+          "object_true_type": 0,
+          "object_sub_true_type": 0,
+          "win_event_id": 3,
+          "event_time": 1633124154241,
+          "event_time_d_t": "2021-10-01T21:35:54.241000+00:00",
+          "host_name": "xxx-docker",
+          "logon_user": [
+            "string"
+          ],
+          "object_cmd": "C:\\\\Program Files (x86)\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe --type=utility --lang=en-US --no-sandbox",
+          "object_file_hash_sha1": "98A9A1C8F69373B211E5F1E303BA8762F44BC898",
+          "object_file_path": "C:\\\\Program Files (x86)\\\\temp\\\\Application\\\\test.exe",
+          "object_host_name": "string",
+          "object_ip": "string",
+          "object_ips": [
+            "string"
+          ],
+          "object_port": 0,
+          "object_registry_data": "wscript \\",
+          "object_registry_key_handle": "hklm\\\\software\\\\wow6432node\\\\microsoft\\\\windows\\\\currentversion\\\\run",
+          "object_registry_value": "its_ie_settings",
+          "object_signer": [
+            "Microsoft Windows"
+          ],
+          "object_signer_valid": [
+            true
+          ],
+          "object_user": "SYSTEM",
+          "os": "Linux",
+          "parent_cmd": "string",
+          "parent_file_hash_sha1": "string",
+          "parent_file_path": "string",
+          "process_cmd": "C:\\\\Program Files (x86)\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe --type=utility --lang=en-US --no-sandbox",
+          "process_file_hash_sha1": "string",
+          "process_file_path": "C:\\\\Program Files (x86)\\\\temp\\\\Application\\\\test.exe",
+          "request": "https://www.example.com",
+          "search_d_l": "SDL",
+          "spt": 8080,
+          "src": "192.169.1.1",
+          "src_file_hash_sha1": "string",
+          "src_file_path": "string",
+          "tags": [
+            "MITRE.T1210"
+          ],
+          "uuid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        }
+      ]
+    }
+  },
+  "get_endpoint_activity_data_count": {
+    "input": {
+      "start_date_time": "2021-04-05T08:22:37Z",
+      "end_date_time": "2021-04-06T08:22:37Z",
+      "top": 500,
+      "select": [
+        "mailMsgSubject"
+      ],
+      "fields": {
+        "fileName": "test.ps1",
+        "fileType": "powershell"
+      },
+      "query_op": " or "
+    },
+    "output": {
+      "total_count": 5
+    }
   }
 }

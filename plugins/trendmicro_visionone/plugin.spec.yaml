@@ -619,6 +619,298 @@ types:
       description: Task Description
       type: string
       required: false
+  email_activity_data_resp:
+    mail_msg_subject:
+      title: Mail Message Subject
+      type: string
+      description: Subject of the email message
+      required: false
+    mail_msg_id:
+      title: Mail Message ID
+      type: string
+      description: Internet message ID of the email message
+      required: false
+    msg_uuid:
+      title: Message UUID
+      type: string
+      description: Unique ID of the email message
+      required: false
+    mailbox:
+      title: Mailbox
+      type: string
+      description: Mailbox where the email message is
+      required: false
+    mail_sender_ip:
+      title: Mail Sender IP
+      type: string
+      description: Source IP address of the email message
+      required: false
+    mail_from_addresses:
+      title: Mail From Addresses
+      type: "[]string"
+      description: Sender email address of the email message
+      required: false
+    mail_whole_header:
+      title: Mail Whole Header
+      type: "[]string"
+      description: Information about the header of the email message
+      required: false
+    mail_to_addresses:
+      title: Mail To Addresses
+      type: "[]string"
+      description: A list of recipient email addresses of the email message
+      required: false
+    mail_source_domain:
+      title: Mail Source Domain
+      type: string
+      description: Source domain of the email message
+      required: false
+    search_d_l:
+      title: Search Data Lake
+      type: string
+      description: Search data lake
+      required: false
+    scan_type:
+      title: Scan Type
+      type: string
+      description: Scan type
+      required: false
+    event_time:
+      title: Event Time
+      type: integer
+      description: Date and time UTC
+      required: false
+    org_id:
+      title: Organization ID
+      type: string
+      description: Unique ID used to identify an organization
+      required: false
+    mail_urls_visible_link:
+      title: Mail URLs Visible Link
+      type: "[]string"
+      description: Visible link in email message
+      required: false
+    mail_urls_real_link:
+      title: Mail URLs Real Link
+      type: "[]string"
+      description: Real link in email message
+      required: false
+  endpoint_activity_data_resp:
+    dpt:
+      title: DPT
+      type: integer
+      description: Destination port
+      required: false
+    dst:
+      title: DST
+      type: string
+      description: Destination IP address
+      required: false
+    endpoint_guid:
+      title: Endpoint GUID
+      type: string
+      description: endpoint GUID for identity
+      required: false
+    endpoint_host_name:
+      title: Endpoint Host Name
+      type: string
+      description: Hostname of the endpoint on which the event was generated
+      required: false
+    endpoint_ip:
+      title: Endpoint IP
+      type: "[]string"
+      description: Endpoint IP address list
+      required: false
+    event_id:
+      title: Event ID
+      type: string
+      description: Event ID
+      required: false
+    event_sub_id:
+      title: Event Sub ID
+      type: integer
+      description: Event Sub ID
+      required: false
+    object_integrity_level:
+      title: Object Integrity Level
+      type: integer
+      description: Object Integrity Level
+      required: false
+    object_true_type:
+      title: Object True Type
+      type: integer
+      description: Object True Type
+      required: false
+    object_sub_true_type:
+      title: Object Sub True Type
+      type: integer
+      description: Object Sub True Type
+      required: false
+    win_event_id:
+      title: Win Event ID
+      type: integer
+      description: Win Event ID
+      required: false
+    event_time:
+      title: Event Time
+      type: integer
+      description: Log collect time utc format
+      required: false
+    event_time_d_t:
+      title: Event Time D T
+      type: string
+      description: Log collect time
+      required: false
+    host_name:
+      title: Host Name
+      type: string
+      description: Hostname of the endpoint on which the event was generated
+      required: false
+    logon_user:
+      title: Logon User
+      type: "[]string"
+      description: Logon user name
+      required: false
+    object_cmd:
+      title: Object Cmd
+      type: string
+      description: Command line entry of target process
+      required: false
+    object_file_hash_sha1:
+      title: Object File Hash SHA1
+      type: string
+      description: The SHA1 hash of target process image or target file
+      required: false
+    object_file_path:
+      title: Object File Path
+      type: string
+      description: File path location of target process image or target file
+      required: false
+    object_host_name:
+      title: Object Host Name
+      type: string
+      description: Server name where Internet event was detected
+      required: false
+    object_ip:
+      title: Object IP
+      type: string
+      description: IP address of internet event
+      required: false
+    object_ips:
+      title: Object Ips
+      type: "[]string"
+      description: IP address list of internet event
+      required: false
+    object_port:
+      title: Object Port
+      type: integer
+      description: The port number used by internet event
+      required: false
+    object_registry_data:
+      title: Object Registry Data
+      type: string
+      description: The registry value data
+      required: false
+    object_registry_key_handle:
+      title: Object Registry Key Handle
+      type: string
+      description: The registry key
+      required: false
+    object_registry_value:
+      title: Object Registry Value
+      type: string
+      description: Registry value name
+      required: false
+    object_signer:
+      title: Object Signer
+      type: "[]string"
+      description: Certificate signer of object process or file
+      required: false
+    object_signer_valid:
+      title: Object Signer Valid
+      type: "[]string"
+      description: Validity of certificate signer
+      required: false
+    object_user:
+      title: Object User
+      type: string
+      description: The owner name of target process / The logon user name
+      required: false
+    os:
+      title: OS
+      type: string
+      description: SYSTEM
+      required: false
+    parent_cmd:
+      title: Parent Cmd
+      type: string
+      description: The command line that parent process
+      required: false
+    parent_file_hash_sha1:
+      title: Parent File Hash SHA1
+      type: string
+      description: The SHA1 hash of parent process
+      required: false
+    parent_file_path:
+      title: Parent File Path
+      type: string
+      description: The file path location of parent process
+      required: false
+    process_cmd:
+      title: Process Cmd
+      type: string
+      description: The command line used to launch this process
+      required: false
+    process_file_hash_sha1:
+      title: Process File Hash SHA1
+      type: string
+      description: The process file sha1
+      required: false
+    process_file_path:
+      title: The process file path
+      type: string
+      description: Process File Path
+      required: false
+    request:
+      title: Request
+      type: string
+      description: Request URL normally detected by Web Reputation Services
+      required: false
+    search_d_l:
+      title: Search Data Lake
+      type: string
+      description: Search data lake
+      required: false
+    spt:
+      title: SPT
+      type: integer
+      description: Source port
+      required: false
+    src:
+      title: SRC
+      type: string
+      description: Source IP address
+      required: false
+    src_file_hash_sha1:
+      title: Src File Hash SHA1
+      type: string
+      description: Source file sha1
+      required: false
+    src_file_path:
+      title: Src File Path
+      type: string
+      description: Src File Path
+      required: false
+    tags:
+      title: Tags
+      type: "[]string"
+      description: Detected by Security Analytics Engine filters
+      required: false
+    uuid:
+      title: UUID
+      type: string
+      description: Log unique identity
+      required: false
 
 connection:
   api_url:
@@ -1752,6 +2044,12 @@ actions:
           "filename": "r7-test11.sh"
         }
     output:
+      location:
+        title: Location
+        description: URL that indicates the location of a script file
+        type: string
+        required: true
+        example: www.location.location/id
   update_custom_script:
     title: Update Custom Script
     description: Updates a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 encoding
@@ -1795,6 +2093,12 @@ actions:
           "filename": "r7-test11.sh"
         }
     output:
+      result_code:
+        title: Result Code
+        description: Result Code of the update request
+        type: string
+        required: true
+        example: SUCCESS
   download_custom_script:
     title: Download Custom Script
     description: Downloads custom script
@@ -1806,6 +2110,15 @@ actions:
         required: true
         example: 44c99cb0-8c5f-4182-af55-62135dbe32f1
     output:
+      file:
+        title: Downloaded Custom Script
+        description: The response is a .sh or .ps1 file
+        type: file
+        required: true
+        example: {
+          "content": "IyEvYmluL2Jhc2gKbHM=",
+          "filename": "r7-test11.sh"
+        }
   delete_custom_script:
     title: Delete Custom Script
     description: Deletes custom script
@@ -1817,6 +2130,12 @@ actions:
         required: true
         example: 44c99cb0-8c5f-4182-af55-62135dbe32f1
     output:
+      result_code:
+        title: Result Code
+        description: Result Code of the delete request
+        type: string
+        required: true
+        example: SUCCESS
   run_custom_script:
     title: Run Custom Script
     description: Run custom script
@@ -1853,6 +2172,12 @@ actions:
         required: false
         example: -y --verbose
     output:
+      multi_response:
+        title: Multi Response
+        description: Add To Block List Response Array
+        type: "[]multi_response"
+        required: true
+        example: [ ]
   get_email_activity_data:
     title: Get Email Activity Data
     description: Displays search results from the Email Activity Data source in a paginated list
@@ -1904,6 +2229,12 @@ actions:
         required: true
         example: { }
     output:
+      email_activity_data_resp:
+        title: Email Activity Data Response
+        description: Email Activity Data Response Array
+        type: "[]email_activity_data_resp"
+        required: true
+        example: [ ]
   get_email_activity_data_count:
     title: Get Email Activity Data Count
     description: Displays count of search results from the Email Activity Data source in a paginated list
@@ -1955,6 +2286,12 @@ actions:
         required: true
         example: { }
     output:
+      total_count:
+        title: Total Count
+        type: integer
+        description: Number of records returned by a query
+        required: true
+        example: 5
   get_endpoint_activity_data:
     title: Get Endpoint Activity Data
     description: Displays results from the Endpoint Activity Data source in a paginated list
@@ -2006,6 +2343,12 @@ actions:
         required: true
         example: { }
     output:
+      endpoint_activity_data_resp:
+        title: Endpoint Activity Data Response
+        description: Endpoint Activity Data Response Array
+        type: "[]endpoint_activity_data_resp"
+        required: true
+        example: [ ]
   get_endpoint_activity_data_count:
     title: Get Endpoint Activity Data Count
     description: Displays count of search results from the Endpoint Activity Data source in a paginated list
@@ -2057,5 +2400,11 @@ actions:
         required: true
         example: { }
     output:
+      total_count:
+        title: Total Count
+        type: integer
+        description: Number of records returned by a query
+        required: true
+        example: 5
 
 

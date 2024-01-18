@@ -1,10 +1,15 @@
 import insightconnect_plugin_runtime
-from .schema import GetEmailActivityDataCountInput, GetEmailActivityDataCountOutput, Input, Output, Component
+from .schema import (
+    GetEmailActivityDataCountInput,
+    GetEmailActivityDataCountOutput,
+    Input,
+    Output,
+    Component,
+)
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
-import json
 
 
 class GetEmailActivityDataCount(insightconnect_plugin_runtime.Action):
@@ -48,12 +53,7 @@ class GetEmailActivityDataCount(insightconnect_plugin_runtime.Action):
                 assistance="Please check your inputs and try again.",
                 data=response.error,
             )
-        # Json load suspicious list objects
-        email_activity_data_count_resp = []
-        for item in response.response.dict().get("items"):
-            email_activity_data_count_resp.append(json.loads(json.dumps(item)))
         # Return results
         self.logger.info("Returning Results...")
-        print(response)
-        return email_activity_data_count_resp
-        # return {Output.SANDBOX_SUSPICIOUS_LIST_RESP: sandbox_suspicious_list_resp}
+        # self.logger.info(response.response.total_count)
+        return {Output.TOTAL_COUNT: response.response.total_count}

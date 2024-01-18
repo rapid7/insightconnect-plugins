@@ -47,6 +47,7 @@ class DownloadSandboxInvestigationPackage(insightconnect_plugin_runtime.Action):
         date_time = datetime.fromtimestamp(timestamp)
         str_date_time = date_time.strftime("%d_%m_%Y_%H_%M_%S")
         file_name = name + str_date_time + ".zip"
+        # Return results
         self.logger.info("Returning Results...")
         return {
             Output.FILE: {
