@@ -49,12 +49,6 @@ class GetEmailActivityData(insightconnect_plugin_runtime.Action):
                 assistance="Please check your inputs and try again.",
                 data=response.error,
             )
-        # Json load suspicious list objects
-        email_activity_data_resp = []
-        for item in response.response.dict().get("items"):
-            email_activity_data_resp.append(json.loads(json.dumps(item)))
         # Return results
         self.logger.info("Returning Results...")
-        print(response)
-        return email_activity_data_resp
-        # return {Output.SANDBOX_SUSPICIOUS_LIST_RESP: sandbox_suspicious_list_resp}
+        return {Output.EMAIL_ACTIVITY_DATA_RESP: new_email_activity_data}

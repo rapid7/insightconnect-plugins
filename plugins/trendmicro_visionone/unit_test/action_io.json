@@ -5,6 +5,7 @@
       "content": "Suspected False Positive, please verify"
     },
     "output": {
+      "location": "https://api.xdr.trendmicro.com/v3.0/workbench/alerts/WB-20837-20221111-00000/notes/684770",
       "note_id": "684770",
       "result_code": "SUCCESS"
     }
@@ -211,48 +212,12 @@
   },
   "get_endpoint_data": {
     "input": {
-      "fields": {
-        "ip": "127.127.127.127",
-        "endpointName": "client1"
-      },
+      "endpoints": "127.127.127.127",
       "query_op": " or "
     },
     "output": {
       "$success": true,
-      "endpoint_data": [
-        {
-          "agent_guid": "35fa11da-a24e-40cf-8b56-baf8828cc151",
-          "login_account": {
-            "updated_date_time": "2024-02-05T20:58:22Z",
-            "value": [
-              "MSEDGEWIN10\\\\IEUser"
-            ]
-          },
-          "endpoint_name": {
-            "updated_date_time": "2024-02-05T20:58:22Z",
-            "value": "MSEDGEWIN10"
-          },
-          "mac_address": {
-            "updated_date_time": "2024-02-05T20:58:22Z",
-            "value": [
-              "00:1c:42:be:22:5f"
-            ]
-          },
-          "ip": {
-            "updated_date_time": "2024-02-05T20:58:22Z",
-            "value": [
-              "10.211.55.36"
-            ]
-          },
-          "os_name": "Linux",
-          "os_version": "10.0.17763",
-          "os_description": "Windows 10 Enterprise Evaluation (64 bit) build 17763",
-          "product_code": "sao",
-          "installed_product_codes": [
-            "xes"
-          ]
-        }
-      ]
+      "endpoint_data": []
     }
   },
   "get_exception_list": {
@@ -668,13 +633,12 @@
       "query_op": " or "
     },
     "output": {
-      "$success": true,
       "custom_scripts_list_resp": [
         {
-          "description": "Terminates processes in user devices",
+          "id": "71c7ae1f-bf14-4e6f-b3eb-30a45d13e6f2",
           "file_name": "trendmicro-security-playbook-terminate-proc.ps1",
           "file_type": "powershell",
-          "id": "71c7ae1f-bf14-4e6f-b3eb-30a45d13e6f2"
+          "description": "Terminates processes in user devices"
         }
       ]
     }
@@ -689,8 +653,7 @@
       }
     },
     "output": {
-      "$success": true,
-      "script_id": "f47abbc4-2406-407c-85cb-9177126e7e24"
+      "location": "http://tmv1-mock.trendmicro.com/v3.0/response/customScripts/1"
     }
   },
   "update_custom_script": {
@@ -727,7 +690,7 @@
   "run_custom_script": {
     "input": {
       "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede",
-      "endpoint_name": "endpoint1",
+      "endpoint_name": "client1",
       "parameter": "-y --verbose",
       "file_name": "test_file.ps1",
       "description": "Run custom script test"
@@ -751,8 +714,8 @@
         "mailMsgSubject"
       ],
       "fields": {
-        "mailSenderIp": "192.169.1.1",
-        "mailMsgSubject": "spam"
+        "fileName": "test.ps1",
+        "fileType": "powershell"
       },
       "query_op": " or "
     },
@@ -798,8 +761,8 @@
         "mailMsgSubject"
       ],
       "fields": {
-        "mailSenderIp": "192.169.1.1",
-        "mailMsgSubject": "spam"
+        "fileName": "test.ps1",
+        "fileType": "powershell"
       },
       "query_op": " or "
     },
@@ -813,11 +776,11 @@
       "end_date_time": "2021-04-06T08:22:37Z",
       "top": 500,
       "select": [
-        "endpointHostName"
+        "mailMsgSubject"
       ],
       "fields": {
-        "endpointHostName": "client1",
-        "dpt": 443
+        "fileName": "test.ps1",
+        "fileType": "powershell"
       },
       "query_op": " or "
     },
@@ -889,11 +852,11 @@
       "end_date_time": "2021-04-06T08:22:37Z",
       "top": 500,
       "select": [
-        "endpointHostName"
+        "mailMsgSubject"
       ],
       "fields": {
-        "endpointHostName": "client1",
-        "dpt": 443
+        "fileName": "test.ps1",
+        "fileType": "powershell"
       },
       "query_op": " or "
     },

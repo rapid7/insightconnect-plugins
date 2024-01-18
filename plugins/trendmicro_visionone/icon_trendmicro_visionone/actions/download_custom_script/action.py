@@ -1,8 +1,17 @@
 import insightconnect_plugin_runtime
-from .schema import DownloadCustomScriptInput, DownloadCustomScriptOutput, Input, Output, Component
+from .schema import (
+    DownloadCustomScriptInput,
+    DownloadCustomScriptOutput,
+    Input,
+    Output,
+    Component,
+)
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
+import time
+from datetime import datetime
+import base64
 
 
 class DownloadCustomScript(insightconnect_plugin_runtime.Action):
@@ -30,12 +39,21 @@ class DownloadCustomScript(insightconnect_plugin_runtime.Action):
                 assistance="Please check the provided script id and try again.",
                 data=response,
             )
+        # Make filename with timestamp
+        name = "Trend Micro Custom Script "
+        timestamp = time.time()
+        date_time = datetime.fromtimestamp(timestamp)
+        str_date_time = date_time.strftime("%d_%m_%Y_%H_%M_%S")
+        file_type = ".ps1"
+        if ("#!/bin/bash" in response.response.text) or ("#!/bin/sh" in response.response.text):
+            file_type = ".sh"
+        file_name = name + str_date_time + file_type
         # Return results
         self.logger.info("Returning Results...")
-        self.logger.info("Did this really work?!")
-        return response
-        # return {
-        #     Output.ARGUMENTS: response.response.dict().get("arguments", ""),
-        #     Output.DIGEST: response.response.dict().get("digest", {}),
-        #     Output.ID: response.response.dict().get("id", ""),
-        # }
+        # self.logger.info(response.response.__dict__)
+        return {
+            Output.FILE: {
+                "content": base64.b64encode(response.response.text).decode(),
+                "filename": file_name,
+            }
+        }

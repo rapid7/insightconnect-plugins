@@ -49,12 +49,8 @@ class GetEndpointActivityData(insightconnect_plugin_runtime.Action):
                 assistance="Please check your inputs and try again.",
                 data=response.error,
             )
-        # Json load suspicious list objects
-        endpoint_activity_data_resp = []
-        for item in response.response.dict().get("items"):
-            endpoint_activity_data_resp.append(json.loads(json.dumps(item)))
         # Return results
+        # TODO: might have to handle dpt = null, also logon_user, object_port, object_signer, object_signer_valid, spt, tags,
         self.logger.info("Returning Results...")
-        print(response)
-        return endpoint_activity_data_resp
-        # return {Output.SANDBOX_SUSPICIOUS_LIST_RESP: sandbox_suspicious_list_resp}
+        # self.logger.info(new_endpoint_activity_data)
+        return {Output.ENDPOINT_ACTIVITY_DATA_RESP: new_endpoint_activity_data}

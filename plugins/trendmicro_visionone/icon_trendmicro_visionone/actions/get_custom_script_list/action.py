@@ -10,7 +10,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
-import json
 
 
 class GetCustomScriptList(insightconnect_plugin_runtime.Action):
@@ -37,7 +36,7 @@ class GetCustomScriptList(insightconnect_plugin_runtime.Action):
         # Make Action API Call
         self.logger.info("Making API Call...")
         response = client.consume_custom_script_list(
-            lambda script_list_data: new_script_list_data.append(script_list_data.json()),
+            lambda script_list_data: new_script_list_data.append(script_list_data.dict()),
             pytmv1.QueryOp(query_op),
             **fields,
         )
@@ -47,12 +46,6 @@ class GetCustomScriptList(insightconnect_plugin_runtime.Action):
                 assistance="Please check your inputs and try again.",
                 data=response.error,
             )
-        # Json load suspicious list objects
-        custom_script_list_resp = []
-        for item in response.response.dict().get("items"):
-            custom_script_list_resp.append(json.loads(json.dumps(item)))
         # Return results
         self.logger.info("Returning Results...")
-        print(response)
-        return custom_script_list_resp
-        # return {Output.SANDBOX_SUSPICIOUS_LIST_RESP: sandbox_suspicious_list_resp}
+        return {Output.CUSTOM_SCRIPTS_LIST_RESP: new_script_list_data}

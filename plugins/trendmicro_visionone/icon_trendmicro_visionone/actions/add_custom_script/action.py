@@ -32,7 +32,7 @@ class AddCustomScript(insightconnect_plugin_runtime.Action):
         # Make Action API Call
         self.logger.info("Making API Call...")
         response = client.add_custom_script(
-            file=b64decode(file.get("content")),
+            file=(b64decode(file.get("content"))).decode("utf-8"),
             file_name=file.get("filename"),
             file_type=file_type,
             description=description,
@@ -45,10 +45,4 @@ class AddCustomScript(insightconnect_plugin_runtime.Action):
             )
         # Return results
         self.logger.info("Returning Results...")
-        self.logger.info("Did this really work?!")
-        return response
-        # return {
-        #     Output.ARGUMENTS: response.response.dict().get("arguments", ""),
-        #     Output.DIGEST: response.response.dict().get("digest", {}),
-        #     Output.ID: response.response.dict().get("id", ""),
-        # }
+        return {Output.LOCATION: response.response.location}
