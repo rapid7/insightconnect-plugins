@@ -5,7 +5,7 @@ from domaintools.exceptions import (
     NotFoundException,
     InternalServerErrorException,
 )
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class Helper:
@@ -14,21 +14,21 @@ class Helper:
         try:
             response = action(*args, **kwargs)
             return response.data()
-        except BadRequestException as e:
+        except BadRequestException as error:
             cause = "DomainToolsAPI: Bad Request:"
-            assistance = f"code {e.code}, reason {e.reason}"
-        except ServiceUnavailableException as e:
+            assistance = f"code {error.code}, reason {error.reason}"
+        except ServiceUnavailableException as error:
             cause = "DomainToolsAPI: Service Unavailable:"
-            assistance = f"code {e.code}, reason {e.reason}"
-        except NotAuthorizedException as e:
+            assistance = f"code {error.code}, reason {error.reason}"
+        except NotAuthorizedException as error:
             cause = "DomainToolsAPI: Authorization Failed:"
-            assistance = f"code {e.code}, reason {e.reason}"
-        except NotFoundException as e:
+            assistance = f"code {error.code}, reason {error.reason}"
+        except NotFoundException as error:
             cause = "DomainToolsAPI: Action Not Found:"
-            assistance = f"code {e.code}, reason {e.reason}"
-        except InternalServerErrorException as e:
+            assistance = f"code {error.code}, reason {error.reason}"
+        except InternalServerErrorException as error:
             cause = "DomainToolsAPI: Internal Server Error:"
-            assistance = f"code {e.code}, reason {e.reason}"
+            assistance = f"code {error.code}, reason {error.reason}"
 
         logger.error(f"DomainToolsAPI: {cause} {assistance}")
         raise PluginException(cause=cause, assistance=assistance)

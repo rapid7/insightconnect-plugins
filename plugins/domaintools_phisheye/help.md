@@ -12,6 +12,10 @@ This plugin allows you to enter a keyword, and PhishEye will return a sample of 
 
 * Requires an API Key
 
+# Supported Product Versions
+  
+*This plugin does not contain any supported product versions.*
+
 # Documentation
 
 ## Setup
@@ -19,18 +23,16 @@ This plugin allows you to enter a keyword, and PhishEye will return a sample of 
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|API key e.g. 11111-aaaaa-aaa11-111aa-aaa11|None|11111-aaaaa-aaa11-111aa-aaa11|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_key|credential_secret_key|None|True|API key|None|11111-aaaaa-aaa11-111aa-aaa11|
 |username|string|None|True|API username|None|user1|
 
 Example input:
 
 ```
 {
-  "api_key": {
-    "secretKey": "11111-aaaaa-aaa11-111aa-aaa11"
-  },
-  "username": "username"
+  "api_key": "11111-aaaaa-aaa11-111aa-aaa11",
+  "username": "user1"
 }
 ```
 
@@ -39,134 +41,89 @@ Example input:
 ### Actions
 
 #### Domain List
-
-This action returns domain results for monitored terms. By default, the API will return domains discovered in the last 24 hours.
-Terms must be created (monitored) in PhishEye before they can be returned by this action.
+  
+This action is used to returns domain results for monitored terms
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|days_back|integer|None|False|Use this parameter in exceptional circumstances where you need to find domains up to seven days prior to the current date. Set the value to an integer in the range of 1-7|[0, 1, 2, 3, 4, 5, 6, 7]|1|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|days_back|integer|None|False|Use this parameter in exceptional circumstances where you need to find domains up to seven days prior to the current date|[0, 1, 2, 3, 4, 5, 6, 7]|1|
 |query|string|None|True|Term for which the day's domains are desired|None|example|
-
+  
 Example input:
 
 ```
 {
   "days_back": 1,
-  "query": "rapid7"
+  "query": "example"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|date|string|False|Date when query run|
-|domains|[]domains|True|Domains for query|
-|term|string|True|Query term|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|date|string|False|Date when query run|2016-11-01|
+|domains|[]domains|True|Domains for query|None|
+|term|string|True|Query term|apple|
+  
 Example output:
 
 ```
 {
-  "date": "2020-04-10",
+  "date": "2016-11-01",
   "domains": [
     {
-      "created_date": "2020-04-09",
-      "domain": "2020insightsolutions.com",
-      "ip_addresses": [
+      "Created Date": {},
+      "Domain": "appeltypoexample.com",
+      "IP Addresses": [
         {
-          "country_code": "US",
-          "ip": "50.63.202.50"
-        },
-        {
-          "country_code": "US",
-          "ip": "50.63.202.50"
+          "Country Code": {},
+          "IPv4": {}
         }
       ],
-      "name_servers": [
-        "ns11.domaincontrol.com",
-        "ns12.domaincontrol.com"
-      ],
-      "registrant_email": "user@example.com",
-      "registrar_name": "GoDaddy.com, LLC",
-      "risk_score": 15,
-      "tld": "com"
-    },
-    {
-      "created_date": "2020-04-09",
-      "domain": "accelerateinsights.org",
-      "ip_addresses": [
-        {
-          "country_code": "US",
-          "ip": "184.168.221.57"
-        },
-        {
-          "country_code": "US",
-          "ip": "184.168.221.57"
-        }
-      ],
-      "name_servers": [
-        "ns65.domaincontrol.com",
-        "ns66.domaincontrol.com"
-      ],
-      "registrar_name": "GoDaddy.com, LLC",
-      "risk_score": 14,
-      "tld": "org"
-    },
-    {
-      "created_date": "2020-04-04",
-      "domain": "zthetrueinsight.uk",
-      "ip_addresses": [
-        {
-          "country_code": "US",
-          "ip": "184.168.221.63"
-        },
-        {
-          "country_code": "US",
-          "ip": "184.168.221.63"
-        }
-      ],
-      "name_servers": [
-        "ns29.domaincontrol.com",
-        "ns30.domaincontrol.com"
-      ],
-      "registrar_name": "GoDaddy.com, LLC. [Tag = GODADDY]",
-      "risk_score": 14,
-      "tld": "uk"
+      "Name Servers": "ns57.domaincontrol.com",
+      "Registrant Email": {},
+      "Registrar Name": {},
+      "Risk Score": 24,
+      "TLD": {}
     }
   ],
-  "term": "insight"
+  "term": "apple"
 }
 ```
 
 ### Triggers
+  
+*This plugin does not contain any triggers.*
 
-_This plugin does not contain any triggers._
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-### Custom Output Types
+### Custom Types
+  
+**ip_addresses**
 
-#### domains
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Country Code|string|None|True|Country code|US|
+|IPv4|string|None|True|IPv4 address|1.1.1.1|
+  
+**domains**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Created Date|string|False|Date when domain created|
-|Domain|string|True|Links to WHOIS page for the domain|
-|IP Addresses|[]ip_addresses|False|IPv4 Addresses|
-|Name Servers|[]string|False|Name servers used by domain|
-|Registrant Email|string|False|Email used for register|
-|Registrar Name|string|False|Registrar name where domain was registered|
-|Risk Score|integer|False|Calculated by the Domain Risk Score|
-|TLD|string|True|TLD domain|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Created Date|string|None|False|Date when domain created|2016-10-31|
+|Domain|string|None|True|Links to WHOIS page for the domain|appeltypoexample.com|
+|IP Addresses|[]ip_addresses|None|False|IPv4 addresses|None|
+|Name Servers|[]string|None|False|Name servers used by domain|['ns57.domaincontrol.com', 'ns58.domaincontrol.com']|
+|Registrant Email|string|None|False|Email used for register|user@example.com|
+|Registrar Name|string|None|False|Registrar name where domain was registered|GoDaddy.com, LLC|
+|Risk Score|integer|None|False|Calculated by the Domain Risk Score|24|
+|TLD|string|None|True|TLD domain|com|
 
-#### ip_addresses
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Country Code|string|True|Country code|
-|IPv4|string|True|IPv4 Address|
 
 ## Troubleshooting
 
@@ -177,6 +134,7 @@ If a term is searched for in the Domain List action but not monitored in PhishEy
 
 # Version History
 
+* 1.0.2 - Update `domaintools-api` v0.3.3 -> v1.0.1
 * 1.0.1 - Add `0` parameter to Days Back input in Domain List action to get current day results
 * 1.0.0 - Initial plugin
 
