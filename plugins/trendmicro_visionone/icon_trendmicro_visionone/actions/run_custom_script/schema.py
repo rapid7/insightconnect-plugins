@@ -16,7 +16,8 @@ class Input:
     
 
 class Output:
-    pass
+    MULTI_RESPONSE = "multi_response"
+    
 
 class RunCustomScriptInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
@@ -65,7 +66,47 @@ class RunCustomScriptInput(insightconnect_plugin_runtime.Input):
 
 class RunCustomScriptOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "multi_response": {
+      "type": "array",
+      "title": "Multi Response",
+      "description": "Add To Block List Response Array",
+      "items": {
+        "$ref": "#/definitions/multi_response"
+      },
+      "order": 1
+    }
+  },
+  "required": [
+    "multi_response"
+  ],
+  "definitions": {
+    "multi_response": {
+      "type": "object",
+      "title": "multi_response",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "title": "Status",
+          "description": "Status Code of response",
+          "order": 1
+        },
+        "task_id": {
+          "type": "string",
+          "title": "Task ID",
+          "description": "Task ID in Trend Micro Vision One of the executed action",
+          "order": 2
+        }
+      },
+      "required": [
+        "status"
+      ]
+    }
+  }
+}
     """)
 
     def __init__(self):

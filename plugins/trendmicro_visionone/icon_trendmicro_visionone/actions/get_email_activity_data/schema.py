@@ -17,7 +17,8 @@ class Input:
     
 
 class Output:
-    pass
+    EMAIL_ACTIVITY_DATA_RESP = "email_activity_data_resp"
+    
 
 class GetEmailActivityDataInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
@@ -91,7 +92,137 @@ class GetEmailActivityDataInput(insightconnect_plugin_runtime.Input):
 
 class GetEmailActivityDataOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "email_activity_data_resp": {
+      "type": "array",
+      "title": "Email Activity Data Response",
+      "description": "Email Activity Data Response Array",
+      "items": {
+        "$ref": "#/definitions/email_activity_data_resp"
+      },
+      "order": 1
+    }
+  },
+  "required": [
+    "email_activity_data_resp"
+  ],
+  "definitions": {
+    "email_activity_data_resp": {
+      "type": "object",
+      "title": "email_activity_data_resp",
+      "properties": {
+        "event_time": {
+          "type": "integer",
+          "title": "Event Time",
+          "description": "Date and time UTC",
+          "order": 12
+        },
+        "mail_from_addresses": {
+          "type": "array",
+          "title": "Mail From Addresses",
+          "description": "Sender email address of the email message",
+          "items": {
+            "type": "string"
+          },
+          "order": 6
+        },
+        "mail_msg_id": {
+          "type": "string",
+          "title": "Mail Message ID",
+          "description": "Internet message ID of the email message",
+          "order": 2
+        },
+        "mail_msg_subject": {
+          "type": "string",
+          "title": "Mail Message Subject",
+          "description": "Subject of the email message",
+          "order": 1
+        },
+        "mail_sender_ip": {
+          "type": "string",
+          "title": "Mail Sender IP",
+          "description": "Source IP address of the email message",
+          "order": 5
+        },
+        "mail_source_domain": {
+          "type": "string",
+          "title": "Mail Source Domain",
+          "description": "Source domain of the email message",
+          "order": 9
+        },
+        "mail_to_addresses": {
+          "type": "array",
+          "title": "Mail To Addresses",
+          "description": "A list of recipient email addresses of the email message",
+          "items": {
+            "type": "string"
+          },
+          "order": 8
+        },
+        "mail_urls_real_link": {
+          "type": "array",
+          "title": "Mail URLs Real Link",
+          "description": "Real link in email message",
+          "items": {
+            "type": "string"
+          },
+          "order": 15
+        },
+        "mail_urls_visible_link": {
+          "type": "array",
+          "title": "Mail URLs Visible Link",
+          "description": "Visible link in email message",
+          "items": {
+            "type": "string"
+          },
+          "order": 14
+        },
+        "mail_whole_header": {
+          "type": "array",
+          "title": "Mail Whole Header",
+          "description": "Information about the header of the email message",
+          "items": {
+            "type": "string"
+          },
+          "order": 7
+        },
+        "mailbox": {
+          "type": "string",
+          "title": "Mailbox",
+          "description": "Mailbox where the email message is",
+          "order": 4
+        },
+        "msg_uuid": {
+          "type": "string",
+          "title": "Message UUID",
+          "description": "Unique ID of the email message",
+          "order": 3
+        },
+        "org_id": {
+          "type": "string",
+          "title": "Organization ID",
+          "description": "Unique ID used to identify an organization",
+          "order": 13
+        },
+        "scan_type": {
+          "type": "string",
+          "title": "Scan Type",
+          "description": "Scan type",
+          "order": 11
+        },
+        "search_d_l": {
+          "type": "string",
+          "title": "Search Data Lake",
+          "description": "Search data lake",
+          "order": 10
+        }
+      }
+    }
+  }
+}
     """)
 
     def __init__(self):

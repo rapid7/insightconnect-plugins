@@ -12,7 +12,8 @@ class Input:
     
 
 class Output:
-    pass
+    FILE = "file"
+    
 
 class DownloadCustomScriptInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
@@ -39,7 +40,42 @@ class DownloadCustomScriptInput(insightconnect_plugin_runtime.Input):
 
 class DownloadCustomScriptOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "file": {
+      "$ref": "#/definitions/file",
+      "title": "Downloaded Custom Script",
+      "description": "The response is a .sh or .ps1 file",
+      "order": 1
+    }
+  },
+  "required": [
+    "file"
+  ],
+  "definitions": {
+    "file": {
+      "id": "file",
+      "type": "object",
+      "title": "File",
+      "description": "File Object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "title": "Content",
+          "description": "File contents",
+          "format": "bytes"
+        },
+        "filename": {
+          "type": "string",
+          "title": "Filename",
+          "description": "Name of file"
+        }
+      }
+    }
+  }
+}
     """)
 
     def __init__(self):

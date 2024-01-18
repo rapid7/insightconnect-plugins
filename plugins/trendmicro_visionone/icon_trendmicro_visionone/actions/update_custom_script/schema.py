@@ -16,7 +16,8 @@ class Input:
     
 
 class Output:
-    pass
+    RESULT_CODE = "result_code"
+    
 
 class UpdateCustomScriptInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
@@ -95,7 +96,21 @@ class UpdateCustomScriptInput(insightconnect_plugin_runtime.Input):
 
 class UpdateCustomScriptOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "result_code": {
+      "type": "string",
+      "title": "Result Code",
+      "description": "Result Code of the update request",
+      "order": 1
+    }
+  },
+  "required": [
+    "result_code"
+  ]
+}
     """)
 
     def __init__(self):
