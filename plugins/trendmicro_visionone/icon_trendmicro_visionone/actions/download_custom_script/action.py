@@ -40,7 +40,7 @@ class DownloadCustomScript(insightconnect_plugin_runtime.Action):
                 data=response,
             )
         # Make filename with timestamp
-        name = "Trend Micro Custom Script "
+        name = "Trend_Micro_Custom_Script_"
         timestamp = time.time()
         date_time = datetime.fromtimestamp(timestamp)
         str_date_time = date_time.strftime("%d_%m_%Y_%H_%M_%S")
@@ -50,10 +50,9 @@ class DownloadCustomScript(insightconnect_plugin_runtime.Action):
         file_name = name + str_date_time + file_type
         # Return results
         self.logger.info("Returning Results...")
-        # self.logger.info(response.response.__dict__)
         return {
             Output.FILE: {
-                "content": base64.b64encode(response.response.text).decode(),
+                "content": base64.b64encode(response.response.text.encode("utf-8")).decode(),
                 "filename": file_name,
             }
         }

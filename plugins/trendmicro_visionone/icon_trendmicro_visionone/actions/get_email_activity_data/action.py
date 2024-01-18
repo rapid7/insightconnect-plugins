@@ -35,7 +35,7 @@ class GetEmailActivityData(insightconnect_plugin_runtime.Action):
         # Make Action API Call
         self.logger.info("Making API Call...")
         response = client.consume_email_activity_data(
-            lambda email_activity_data: new_email_activity_data.append(email_activity_data.json()),
+            lambda email_activity_data: new_email_activity_data.append(email_activity_data.dict()),
             start_time=start_date_time,
             end_time=end_date_time,
             select=select,

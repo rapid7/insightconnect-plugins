@@ -828,7 +828,7 @@ types:
       required: false
     object_signer_valid:
       title: Object Signer Valid
-      type: "[]string"
+      type: "[]boolean"
       description: Validity of certificate signer
       required: false
     object_user:
