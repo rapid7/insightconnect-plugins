@@ -69,5 +69,4 @@ class RunCustomScript(insightconnect_plugin_runtime.Action):
             )
         # Return results
         self.logger.info("Returning Results...")
-        # self.logger.info(response.response.items)
         return {Output.MULTI_RESPONSE: response.response.dict().get("items")}

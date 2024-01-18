@@ -36,7 +36,6 @@ class GetEmailActivityDataCount(insightconnect_plugin_runtime.Action):
             query_op = pytmv1.QueryOp.OR
         elif "and" in query_op:
             query_op = pytmv1.QueryOp.AND
-        new_email_activity_data = []
         # Make Action API Call
         self.logger.info("Making API Call...")
         response = client.get_email_activity_data_count(
@@ -55,5 +54,4 @@ class GetEmailActivityDataCount(insightconnect_plugin_runtime.Action):
             )
         # Return results
         self.logger.info("Returning Results...")
-        # self.logger.info(response.response.total_count)
         return {Output.TOTAL_COUNT: response.response.total_count}
