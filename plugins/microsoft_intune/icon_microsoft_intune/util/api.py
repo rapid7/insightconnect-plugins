@@ -17,12 +17,14 @@ from icon_microsoft_intune.util.constants import (
     WINDOWS_AUTOPILOT_DEVICE_ENDPOINT,
     WINDOWS_DEFENDER_SIGNATURES_ENDPOINT,
     WIPE_DEVICE_ENDPOINT,
+    AuthType,
 )
 
 
 class MicrosoftIntuneAPI:
     def __init__(
         self,
+        auth_type: str,
         username: str,
         password: str,
         client_id: str,
@@ -31,6 +33,7 @@ class MicrosoftIntuneAPI:
         api_url: str,
         logger: Logger,
     ):
+        self.auth_type = auth_type
         self.username = username
         self.password = password
         self.client_id = client_id
@@ -126,25 +129,41 @@ class MicrosoftIntuneAPI:
         return True
 
     def refresh_access_token(self):
-        self.access_token = self._oauth2_get_token()
+        if self.auth_type == AuthType.oauth2:
+            oauth_data = {
+                "username": self.username,
+                "password": self.password,
+            }
+            self.access_token = self.get_token("password", oauth_data)
+        elif self.auth_type == AuthType.client:
+            self.access_token = self.get_token("client_credentials", {})
 
-    def _oauth2_get_token(self) -> str:
+    def get_token(self, grant_type: str, additional_data: dict) -> str:
+        """
+        General method to get an access token from Microsoft Graph API.
+
+        :param grant_type: The type of grant (e.g., 'password' or 'client_credentials').
+        :param additional_data: Additional data required for the specific grant type.
+        :return: The access token.
+        """
+        data = {
+            "client_id": self.client_id,
+            "client_secret": self.client_secret,
+            "scope": "https://graph.microsoft.com/.default",
+            "grant_type": grant_type,
+        }
+        data.update(additional_data)
+
         response = self._request(
             "POST",
             f"https://login.microsoftonline.com/{self.tenant_id}/oauth2/v2.0/token",
-            data={
-                "grant_type": "password",
-                "client_id": self.client_id,
-                "client_secret": self.client_secret,
-                "scope": "https://graph.microsoft.com/.default",
-                "username": self.username,
-                "password": self.password,
-            },
+            data=data,
             headers={"Content-Type": "application/x-www-form-urlencoded"},
         )
+
         if 200 <= response.status_code < 300:
             token = self._handle_json_to_dict(response).get("access_token")
-            self.logger.info(f"Access Token: ******************** {str(token[len(token) - 5:len(token)])}")
+            self.logger.info(f"Access Token: ******************** {token[-5:]}")
             return token
         self.raise_for_status(response)
 
