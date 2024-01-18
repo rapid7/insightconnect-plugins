@@ -1,5 +1,5 @@
 {
-	"spec": "968a4ef034ccfa55f292df13fd837c21",
+	"spec": "2affbf9fa99a0a08845482d8c88eea01",
 	"manifest": "8d3c696cfc1aa419da4ce65e94b79a6f",
 	"setup": "901636fbcd246f84e2d1744745e83b36",
 	"schemas": [
@@ -81,7 +81,7 @@
 		},
 		{
 			"identifier": "get_endpoint_activity_data/schema.py",
-			"hash": "0951d7617b98959ec23443e5ace57bcb"
+			"hash": "1e294efeb369643683f7f8190d3e27fd"
 		},
 		{
 			"identifier": "get_endpoint_activity_data_count/schema.py",

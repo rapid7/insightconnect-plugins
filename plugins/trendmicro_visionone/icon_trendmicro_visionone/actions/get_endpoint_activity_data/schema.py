@@ -269,7 +269,7 @@ class GetEndpointActivityDataOutput(insightconnect_plugin_runtime.Output):
           "title": "Object Signer Valid",
           "description": "Validity of certificate signer",
           "items": {
-            "type": "string"
+            "type": "boolean"
           },
           "order": 27
         },
