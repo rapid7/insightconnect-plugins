@@ -56,5 +56,4 @@ class GetEndpointActivityDataCount(insightconnect_plugin_runtime.Action):
             )
         # Return results
         self.logger.info("Returning Results...")
-        self.logger.info(response.response.total_count)
         return {Output.TOTAL_COUNT: response.response.total_count}

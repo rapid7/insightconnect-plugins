@@ -38,5 +38,4 @@ class DeleteCustomScript(insightconnect_plugin_runtime.Action):
             )
         # Return results
         self.logger.info("Returning Results...")
-        # self.logger.info(response.__dict__)
         return {Output.RESULT_CODE: response.result_code}

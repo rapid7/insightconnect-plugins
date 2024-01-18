@@ -1,5 +1,11 @@
 import insightconnect_plugin_runtime
-from .schema import GetEndpointActivityDataInput, GetEndpointActivityDataOutput, Input, Output, Component
+from .schema import (
+    GetEndpointActivityDataInput,
+    GetEndpointActivityDataOutput,
+    Input,
+    Output,
+    Component,
+)
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
@@ -49,8 +55,21 @@ class GetEndpointActivityData(insightconnect_plugin_runtime.Action):
                 assistance="Please check your inputs and try again.",
                 data=response.error,
             )
+        # Default values for keys that may be null
+        default_values = {
+            "dpt": 0,
+            "logonUser": [],
+            "objectPort": 0,
+            "objectSigner": [],
+            "objectSignerValid": [],
+            "spt": 0,
+            "tags": [],
+        }
+        # Handling null values or missing keys
+        for data in new_endpoint_activity_data:
+            for key, default_value in default_values.items():
+                if data[key] is None:
+                    data[key] = default_value
         # Return results
-        # TODO: might have to handle dpt = null, also logon_user, object_port, object_signer, object_signer_valid, spt, tags,
         self.logger.info("Returning Results...")
-        # self.logger.info(new_endpoint_activity_data)
         return {Output.ENDPOINT_ACTIVITY_DATA_RESP: new_endpoint_activity_data}
