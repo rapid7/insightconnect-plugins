@@ -4,6 +4,7 @@ import json
 
 
 class Input:
+    AUTHENTICATION_TYPE = "authentication_type"
     CLIENTID = "clientId"
     CLIENTSECRET = "clientSecret"
     CREDENTIALS = "credentials"
@@ -16,29 +17,40 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "authentication_type": {
+      "type": "string",
+      "title": "Authentication Type",
+      "description": "Type of authentication flow",
+      "default": "Username-Password",
+      "enum": [
+        "Username-Password",
+        "Client-Credentials"
+      ],
+      "order": 1
+    },
     "clientId": {
       "type": "string",
       "title": "Client ID",
       "description": "Client ID, also called Application ID",
-      "order": 2
+      "order": 3
     },
     "clientSecret": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Client Secret",
       "description": "Client secret key",
-      "order": 3
+      "order": 4
     },
     "credentials": {
       "$ref": "#/definitions/credential_username_password",
       "title": "Credentials",
       "description": "E-mail address and password",
-      "order": 1
+      "order": 2
     },
     "tenantId": {
       "type": "string",
       "title": "Tenant ID",
       "description": "Tenant ID can be found in Active Directory",
-      "order": 4
+      "order": 5
     }
   },
   "required": [

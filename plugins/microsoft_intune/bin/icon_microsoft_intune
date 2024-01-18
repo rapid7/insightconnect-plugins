@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Microsoft Intune"
 Vendor = "rapid7"
-Version = "2.0.0"
+Version = "3.0.0"
 Description = "Microsoft cloud-based management solution that provides for mobile device and operating system management"
 
 
