@@ -64,8 +64,8 @@ Trend Micro Vision One is an enhanced threat defense platform, surpassing standa
 
 The connection configuration accepts the following parameters:
 
-|Name|Type| Default |Required|Description|Enum|Example|
-|----|----|----|--------|-----------|----|-------|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|default|True|Vision One API Token|None|12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:02699626f388ed830012e5b787640e71c56d42d81234|
 |api_url|string|https://api.xdr.trendmicro.com|True|URL of Trend Micro Vision One|None|https://tmv1-mock.trendmicro.com|
 |app_name|string|Rapid7-InsightConnect|True|Name of the App to be Integrated with|None|Rapid7-InsightConnect|
@@ -1282,8 +1282,8 @@ This action displays information about workbench alerts that match the specified
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|end_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the end of the data retrieval time range. Ensure that "endDateTime" is not earlier than "startDateTime"|None|2020-06-15T12:00:00+00:00|
-|start_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the start of the data retrieval time range. The available oldest value is "1970-01-01T00:00:00Z"|None|2020-06-15T10:00:00+00:00|
+|end_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the end of the data retrieval time range. Ensure that "endDateTime" is not earlier than "startDateTime"|None|2020-06-15T12:00:00Z|
+|start_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the start of the data retrieval time range. The available oldest value is "1970-01-01T00:00:00Z"|None|2020-06-15T10:00:00Z|
 
 Example input:
 
@@ -2321,7 +2321,7 @@ This trigger polls information about workbench alerts that match the specified c
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |interval|integer|None|True|Interval (in seconds) in which the polling script should run again|None|1800|
-|start_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the start of the data retrieval time range. The available oldest value is "1970-01-01T00:00:00Z"|None|2020-06-15T10:00:00+00:00|
+|start_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the start of the data retrieval time range. The available oldest value is "1970-01-01T00:00:00Z"|None|2020-06-15T10:00:00Z|
 
 Example input:
 
