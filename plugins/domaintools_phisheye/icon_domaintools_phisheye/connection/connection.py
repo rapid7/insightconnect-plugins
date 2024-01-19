@@ -26,10 +26,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
         except NotAuthorizedException:
             raise ConnectionTestException(
                 cause="Authorization failed.",
-                assistance="Double-check that your credentials configured in your connection are correct and try again."
+                assistance="Double-check that your credentials configured in your connection are correct and try again.",
             )
         except Exception as error:
-            raise ConnectionTestException(cause="Unable to connect to DomainTools.", assistance=f"Exception was: {error}")
+            raise ConnectionTestException(
+                cause="Unable to connect to DomainTools.", assistance=f"Exception was: {error}"
+            )
 
         phisheye_terms_list = Helper.make_request(self.api.phisheye_term_list, self.logger)
         self.terms = []
