@@ -691,7 +691,7 @@
   "run_custom_script": {
     "input": {
       "agent_guid": "cb9c8412-1f64-4fa0-a36b-76bf41a07ede",
-      "endpoint_name": "client1",
+      "endpoint_name": "endpoint1",
       "parameter": "-y --verbose",
       "file_name": "test_file.ps1",
       "description": "Run custom script test"
