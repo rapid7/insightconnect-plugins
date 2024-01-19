@@ -787,8 +787,8 @@ This action adds domains, file SHA-1 values, IP addresses, or URLs to the Except
 
 ##### Input
 
-| Name        | Type          |Default|Required|Description|Enum|Example|
-|-------------|---------------|-------|--------|-----------|----|-------|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
 |block_objects|[]block_objects|None|True|Objects made up of type, value and description|None|[]|
 
 Example input:
@@ -841,8 +841,8 @@ This action adds domains, file SHA-1/SHA-256 values, IP addresses, senderMailAdd
 
 ##### Input
 
-| Name                   | Type                     |Default|Required|Description|Enum|Example|
-|------------------------|--------------------------|-------|--------|-----------|----|-------|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
 |suspicious_block_objects|[]suspicious_block_objects|None|True|Suspicious Objects made up of type, value and scan_action, risk_level and days_to_expiration|None|[]|
 
 Example input|multi_response|[]multi_response|True|Add To Suspicious List Response Array|[]|
