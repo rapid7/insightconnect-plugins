@@ -5,6 +5,7 @@ from domaintools.exceptions import (
     NotFoundException,
     InternalServerErrorException,
 )
+from insightconnect_plugin_runtime import PluginException
 
 
 @staticmethod
@@ -12,15 +13,15 @@ def make_request(action, *args, **kwargs):
     try:
         response = action(*args, **kwargs)
         return response.data()
-    except BadRequestException as e:
-        action.logger.error("DomainToolsAPI: Bad Request: code {}, reason {}".format(e.code, e.reason))
-    except ServiceUnavailableException as e:
-        action.logger.error("DomainToolsAPI: Service Unavailable: code {}, reason {}".format(e.code, e.reason))
-    except NotAuthorizedException as e:
-        action.logger.error("DomainToolsAPI: Authorization Failed: code {}, reason {}".format(e.code, e.reason))
-    except NotFoundException as e:
-        action.logger.error("DomainToolsAPI: Action Not Found: code {}, reason {}".format(e.code, e.reason))
-    except InternalServerErrorException as e:
-        action.logger.error("DomainToolsAPI: Internal Server Error: code {}, reason {}".format(e.code, e.reason))
+    except BadRequestException as exception:
+        action.logger.error(f"DomainToolsAPI: Bad Request: code {exception.code}, reason {exception.reason}")
+    except ServiceUnavailableException as exception:
+        action.logger.error(f"DomainToolsAPI: Service Unavailable: code {exception.code}, reason {exception.reason}")
+    except NotAuthorizedException as exception:
+        action.logger.error(f"DomainToolsAPI: Authorization Failed: code {exception.code}, reason {exception.reason}")
+    except NotFoundException as exception:
+        action.logger.error(f"DomainToolsAPI: Action Not Found: code {exception.code}, reason {exception.reason}")
+    except InternalServerErrorException as exception:
+        action.logger.error(f"DomainToolsAPI: Internal Server Error: code {exception.code}, reason {exception.reason}")
 
-    raise Exception("DomainTools API Request Failed")
+    raise PluginException("DomainTools API Request Failed")
