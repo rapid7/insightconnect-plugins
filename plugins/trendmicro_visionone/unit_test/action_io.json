@@ -633,12 +633,13 @@
       "query_op": " or "
     },
     "output": {
+      "$success": true,
       "custom_scripts_list_resp": [
         {
-          "id": "71c7ae1f-bf14-4e6f-b3eb-30a45d13e6f2",
+          "description": "Terminates processes in user devices",
           "file_name": "trendmicro-security-playbook-terminate-proc.ps1",
           "file_type": "powershell",
-          "description": "Terminates processes in user devices"
+          "id": "71c7ae1f-bf14-4e6f-b3eb-30a45d13e6f2"
         }
       ]
     }
@@ -714,8 +715,8 @@
         "mailMsgSubject"
       ],
       "fields": {
-        "fileName": "test.ps1",
-        "fileType": "powershell"
+        "mailSenderIp": "192.169.1.1",
+        "mailMsgSubject": "spam"
       },
       "query_op": " or "
     },
@@ -761,8 +762,8 @@
         "mailMsgSubject"
       ],
       "fields": {
-        "fileName": "test.ps1",
-        "fileType": "powershell"
+        "mailSenderIp": "192.169.1.1",
+        "mailMsgSubject": "spam"
       },
       "query_op": " or "
     },
@@ -776,11 +777,11 @@
       "end_date_time": "2021-04-06T08:22:37Z",
       "top": 500,
       "select": [
-        "mailMsgSubject"
+        "endpointHostName"
       ],
       "fields": {
-        "fileName": "test.ps1",
-        "fileType": "powershell"
+        "endpointHostName": "client1",
+        "dpt": 443
       },
       "query_op": " or "
     },
@@ -852,11 +853,11 @@
       "end_date_time": "2021-04-06T08:22:37Z",
       "top": 500,
       "select": [
-        "mailMsgSubject"
+        "endpointHostName"
       ],
       "fields": {
-        "fileName": "test.ps1",
-        "fileType": "powershell"
+        "endpointHostName": "client1",
+        "dpt": 443
       },
       "query_op": " or "
     },
