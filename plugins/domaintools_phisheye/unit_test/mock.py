@@ -43,5 +43,3 @@ class MockResponse:
 
     def json(self):
         return self.json_object
-
-
