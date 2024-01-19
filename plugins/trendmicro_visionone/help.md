@@ -5,18 +5,26 @@ Trend Micro Vision One is an enhanced threat defense platform, surpassing standa
 # Key Features
 
 * Add Alert Note
+* Add Custom Script
 * Add to Block List
 * Add to Exception List
 * Add to Suspicious List
 * Collect File
+* Delete Custom Script
 * Delete Email Message
 * Disable Account
+* Download Custom Script
 * Download Sandbox Analysis Result
 * Download Sandbox Investigation Package
 * Edit Alert Status
 * Enable Account
 * Get Alert Details
 * Get Alert List
+* Get Custom Script List
+* Get Email Activity Data
+* Get Email Activity Data Count
+* Get Endpoint Activity Data
+* Get Endpoint Activity Data Count
 * Get Endpoint Data
 * Get Exception List
 * Get Sandbox Analysis Result
@@ -34,10 +42,12 @@ Trend Micro Vision One is an enhanced threat defense platform, surpassing standa
 * Reset Password Account
 * Restore Email Message
 * Restore Endpoint
+* Run Custom Script
 * Sign out Account
 * Submit File to Sandbox
 * Submit URLs to Sandbox
 * Terminate Process
+* Update Custom Script
 
 # Requirements
 
@@ -75,6 +85,589 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Update Custom Script
+
+This action updates a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 encoding.
+
+**API key role permissions required:**
+
+**Response Management**
+
+- View, filter, and search (Task List tab)
+- View, filter and search (Custom Scripts tab)
+- Manage custom scripts
+
+##### Input
+
+|Name|Type| Default |Required|Description|Enum|Example|
+|----|----|----|--------|-----------|----|-------|
+|description|string|None|False|Task Description|None|example desc|
+|file|file|None|False|Custom Script (dict of {filename(string) & content(base64(bytes))})|None|None|
+|file_name|string|None|False|File name of custom script|None|https://example.com|
+|file_type|string|bash|True|File type of custom script|['powershell', 'bash']|bash|
+|script_id|string|None|True|Unique alphanumeric string that identifies a script file|None|44c99cb0-8c5f-4182-af55-62135dbe32f1|
+
+Example input:
+
+```
+{
+  "script_id": "44c99cb0-8c5f-4182-af55-62135dbe32f1",
+  "file_type": "bash",
+  "description": "Update custom script test",
+  "file": {
+    "content": "IyEvYmluL2Jhc2gKbHM=",
+    "filename": "update_script.sh"
+  }
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|result_code|string|True|Result Code of the update request|
+
+Example output:
+
+```
+{
+  "result_code": "SUCCESS"
+}
+```
+
+#### Run Custom Script
+
+This action is used to run custom script.
+
+**API key role permissions required:**
+
+**Response Management**
+
+- View, filter, and search (Task List tab)
+- View, filter and search (Custom Scripts tab)
+- Run custom scripts
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent_guid|string|None|False|Unique alphanumeric string that identifies an installed agent|None|2839eu2983e23e|
+|description|string|None|False|Task Description|None|example desc|
+|endpoint_name|string|None|False|Endpoint name of the target endpoint|None|endpoint1|
+|file_name|string|https://example.com|False|File name of custom script|None|https://example.com|
+|parameter|string|None|False|Options passed to the script during execution|None|-y --verbose|
+
+Example input:
+
+```
+{
+  "agent_guid": "2839eu2983e23e",
+  "description": "example desc",
+  "endpoint_name": "endpoint1",
+  "file_name": "test.ps1",
+  "parameter": "-y --verbose"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|multi_response|[]multi_response|True|Add To Block List Response Array|
+
+Example output:
+
+```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 202,
+      "task_id": "00002133"
+    }
+  ]
+}
+```
+
+#### Get Endpoint Activity Data Count
+
+This action displays count of search results from the Endpoint Activity Data source in a paginated list.
+
+**API key role permissions required:**
+
+**Search**
+
+- View, filter, and search
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15T12:00:00Z|
+|fields|object|None|True|Array of fields to query. (uuid, tags, pname, msgUuid, ...)|None|None|
+|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
+|select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|[]|
+|start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15T10:00:00Z|
+|top|integer|None|True|Number of records displayed on a page|[50, 100, 500, 1000, 5000]|500|
+
+Example input:
+
+```
+{
+  "start_date_time": "2021-04-05T08:22:37Z",
+  "end_date_time": "2021-04-06T08:22:37Z",
+  "top": 500,
+  "select": [
+    "endpointHostName"
+  ],
+  "fields": {
+    "endpointHostName": "client1",
+    "dpt": 443
+  },
+  "query_op": " or "
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|total_count|integer|True|Number of records returned by a query|
+
+Example output:
+
+```
+{
+  "total_count": 5
+}
+```
+
+#### Get Endpoint Activity Data
+
+This action displays results from the Endpoint Activity Data source in a paginated list.
+
+**API key role permissions required:**
+
+**Search**
+
+- View, filter, and search
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15T12:00:00Z|
+|fields|object|None|True|Array of fields to query. (uuid, tags, pname, msgUuid, ...)|None|None|
+|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
+|select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|[]|
+|start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15T10:00:00Z|
+|top|integer|None|True|Number of records displayed on a page|[50, 100, 500, 1000, 5000]|500|
+
+Example input:
+
+```
+{
+  "start_date_time": "2021-04-05T08:22:37Z",
+  "end_date_time": "2021-04-06T08:22:37Z",
+  "top": 500,
+  "select": [
+    "endpointHostName"
+  ],
+  "fields": {
+    "endpointHostName": "client1",
+    "dpt": 443
+  },
+  "query_op": " or "
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|endpoint_activity_data_resp|[]endpoint_activity_data_resp|True|Endpoint Activity Data Response Array|
+
+Example output:
+
+```
+{
+  "endpoint_activity_data_resp": [
+    {
+      "dpt": 443,
+      "dst": "",
+      "endpoint_guid": "72436165-b5a5-471a-9389-0bdc3647bc33",
+      "endpoint_host_name": "xxx-docker",
+      "endpoint_ip": [
+        "192.0.2.0"
+      ],
+      "event_id": "1",
+      "event_sub_id": 0,
+      "object_integrity_level": 0,
+      "object_true_type": 0,
+      "object_sub_true_type": 0,
+      "win_event_id": 3,
+      "event_time": 1633124154241,
+      "event_time_d_t": "2021-10-01T21:35:54.241000+00:00",
+      "host_name": "xxx-docker",
+      "logon_user": [
+        "string"
+      ],
+      "object_cmd": "C:\\\\Program Files (x86)\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe --type=utility --lang=en-US --no-sandbox",
+      "object_file_hash_sha1": "98A9A1C8F69373B211E5F1E303BA8762F44BC898",
+      "object_file_path": "C:\\\\Program Files (x86)\\\\temp\\\\Application\\\\test.exe",
+      "object_host_name": "string",
+      "object_ip": "string",
+      "object_ips": [
+        "string"
+      ],
+      "object_port": 0,
+      "object_registry_data": "wscript \\",
+      "object_registry_key_handle": "hklm\\\\software\\\\wow6432node\\\\microsoft\\\\windows\\\\currentversion\\\\run",
+      "object_registry_value": "its_ie_settings",
+      "object_signer": [
+        "Microsoft Windows"
+      ],
+      "object_signer_valid": [
+        true
+      ],
+      "object_user": "SYSTEM",
+      "os": "Linux",
+      "parent_cmd": "string",
+      "parent_file_hash_sha1": "string",
+      "parent_file_path": "string",
+      "process_cmd": "C:\\\\Program Files (x86)\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe --type=utility --lang=en-US --no-sandbox",
+      "process_file_hash_sha1": "string",
+      "process_file_path": "C:\\\\Program Files (x86)\\\\temp\\\\Application\\\\test.exe",
+      "request": "https://www.example.com",
+      "search_d_l": "SDL",
+      "spt": 8080,
+      "src": "192.169.1.1",
+      "src_file_hash_sha1": "string",
+      "src_file_path": "string",
+      "tags": [
+        "MITRE.T1210"
+      ],
+      "uuid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    }
+  ]
+}
+```
+
+#### Get Email Activity Data Count
+
+This action displays count of search results from the Email Activity Data source in a paginated list.
+
+**API key role permissions required:**
+
+**Search**
+
+- View, filter, and search
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15T12:00:00Z|
+|fields|object|None|True|Array of fields to query. (uuid, tags, pname, msgUuid, ...)|None|None|
+|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
+|select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|[]|
+|start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15T10:00:00Z|
+|top|integer|None|True|Number of records displayed on a page|[50, 100, 500, 1000, 5000]|500|
+
+Example input:
+
+```
+{
+  "start_date_time": "2021-04-05T08:22:37Z",
+  "end_date_time": "2021-04-06T08:22:37Z",
+  "top": 500,
+  "select": [
+    "mailMsgSubject"
+  ],
+  "fields": {
+    "mailSenderIp": "192.169.1.1",
+    "mailMsgSubject": "spam"
+  },
+  "query_op": " or "
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|total_count|integer|True|Number of records returned by a query|
+
+Example output:
+
+```
+{
+  "total_count": 5
+}
+```
+
+#### Get Email Activity Data
+
+This action displays search results from the Email Activity Data source in a paginated list.
+
+**API key role permissions required:**
+
+**Search**
+
+- View, filter, and search
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15T12:00:00Z|
+|fields|object|None|True|Array of fields to query. (uuid, tags, pname, msgUuid, ...)|None|None|
+|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
+|select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|[]|
+|start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15T10:00:00Z|
+|top|integer|None|True|Number of records displayed on a page|[50, 100, 500, 1000, 5000]|500|
+
+Example input:
+
+```
+{
+  "start_date_time": "2021-04-05T08:22:37Z",
+  "end_date_time": "2021-04-06T08:22:37Z",
+  "top": 500,
+  "select": [
+    "mailMsgSubject"
+  ],
+  "fields": {
+    "mailSenderIp": "192.169.1.1",
+    "mailMsgSubject": "spam"
+  },
+  "query_op": " or "
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|email_activity_data_resp|[]email_activity_data_resp|True|Email Activity Data Response Array|
+
+Example output:
+
+```
+{
+  "$success": true,
+  "email_activity_data_resp": [
+    {
+      "mail_msg_subject": "test sample",
+      "mail_msg_id": "<BL0PR01MB4178833793C138CE3414D53B997A0@BL0PR01MB4178.prod.example.com>",
+      "msg_uuid": "AAMkAGRhODQyZDAzLWNmNjEtNDY2OS1iOWM3LWVmODUxMDk4ZjE1ZgBGAAAAAAABcyFCsOdnTohKgA0TJdjUBwAYbtU+cD0jRZmfu0kuMtvEAAAAAAEMAAAYbtU+cD0jRZmfu0kuMtvEAAF/JGRaAAA=",
+      "mailbox": "user2@example2.com",
+      "mail_sender_ip": "xx.yy.zz.ww",
+      "mail_from_addresses": [
+        "user3@example3.com"
+      ],
+      "mail_whole_header": [
+        "Microsoft Azure<azure-noreply@xxxxx.com>"
+      ],
+      "mail_to_addresses": [
+        "user2@example2.com"
+      ],
+      "mail_source_domain": "example3.com",
+      "search_d_l": "CAS",
+      "scan_type": "exchange",
+      "event_time": 1601249307000,
+      "org_id": "8d23a000-9a4c-11ea-80f5-1de879102030",
+      "mail_urls_visible_link": [
+        "http://xxxxxx.com"
+      ],
+      "mail_urls_real_link": [
+        "http://xxxxxx.com"
+      ]
+    }
+  ]
+}
+```
+
+#### Get Custom Script List
+
+This action retrieves information about the available custom scripts and displays the information in a paginated list.
+
+**API key role permissions required:**
+
+**Response Management**
+
+- View, filter, and search (Task List tab)
+- View, filter and search (Custom Scripts tab)
+- Download custom scripts
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|fields|object|None|True|Array of fields to query. (filter=fileName eq 'test.ps1' or fileType eq 'powershell')|None|None|
+|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
+
+Example input:
+
+```
+{
+  "fields": {
+    "fileName": "test.ps1",
+    "fileType": "powershell"
+  },
+  "query_op": " or "
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|custom_scripts_list_resp|[]custom_scripts_list_resp|True|Custom Scripts List Response Array|
+
+Example output:
+
+```
+{
+  "$success": true,
+  "custom_scripts_list_resp": [
+    {
+      "description": "Terminates processes in user devices",
+      "file_name": "trendmicro-security-playbook-terminate-proc.ps1",
+      "file_type": "powershell",
+      "id": "71c7ae1f-bf14-4e6f-b3eb-30a45d13e6f2"
+    }
+  ]
+}
+```
+
+#### Download Custom Script
+
+This action downloads custom script.
+
+**API key role permissions required:**
+
+**Response Management**
+
+- View, filter, and search (Task List tab)
+- View, filter and search (Custom Scripts tab)
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|script_id|string|None|True|Unique alphanumeric string that identifies a script file|None|44c99cb0-8c5f-4182-af55-62135dbe32f1|
+
+Example input:
+
+```
+{
+  "script_id": "44c99cb0-8c5f-4182-af55-62135dbe32f1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|file|file|True|The response is a .sh or .ps1 file|
+
+Example output:
+
+```
+{
+  "$success": true,
+  "file": "<<referenced:bigdata>>"
+}
+```
+
+#### Delete Custom Script
+
+This action deletes custom script.
+
+**API key role permissions required:**
+
+**Response Management**
+
+- View, filter, and search (Task List tab)
+- View, filter and search (Custom Scripts tab)
+- Manage custom scripts
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|script_id|string|None|True|Unique alphanumeric string that identifies a script file|None|44c99cb0-8c5f-4182-af55-62135dbe32f1|
+
+Example input:
+
+```
+{
+  "script_id": "44c99cb0-8c5f-4182-af55-62135dbe32f1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|result_code|string|True|Result Code of the delete request|
+
+Example output:
+
+```
+{
+  "result_code": "SUCCESS"
+}
+```
+
+#### Add Custom Script
+
+This action uploads a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 encoding.
+
+**API key role permissions required:**
+
+**Response Management**
+
+- View, filter, and search (Task List tab)
+- View, filter and search (Custom Scripts tab)
+- Manage custom scripts
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|description|string|None|False|Task Description|None|example desc|
+|file|file|None|False|Custom Script (dict of {filename(string) & content(base64(bytes))})|None|None|
+|file_type|string|bash|True|File type of custom script|['powershell', 'bash']|bash|
+
+Example input:
+
+```
+{
+  "file_type": "bash",
+  "description": "Add custom script test",
+  "file": {
+    "content": "IyEvYmluL2Jhc2gKbHM=",
+    "filename": "add_script.sh"
+  }
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|location|string|True|URL that indicates the location of a script file|
+
+Example output:
+
+```
+{
+  "location": "http://tmv1-mock.trendmicro.com/v3.0/response/customScripts/1"
+}
+```
 
 #### Add Alert Note
 
@@ -1977,6 +2570,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.0 - Added Custom Scripts and Activity related actions
 * 2.0.1 - Version bump of pytmv1 library
 * 2.0.0 - Enabled multiple inputs for Get Endpoint Data, reduced API call frequency & General Refactoring
 * 1.0.1 - Alert Details Output Fix (Minor Fix)
