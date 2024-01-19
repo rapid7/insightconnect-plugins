@@ -32,9 +32,9 @@ class AddCustomScript(insightconnect_plugin_runtime.Action):
         # Make Action API Call
         self.logger.info("Making API Call...")
         response = client.add_custom_script(
-            file=(b64decode(file.get("content"))).decode("utf-8"),
-            file_name=file.get("filename"),
             file_type=file_type,
+            file_name=file.get("filename"),
+            file=b64decode(file.get("content")),
             description=description,
         )
         if "error" in response.result_code.lower():
