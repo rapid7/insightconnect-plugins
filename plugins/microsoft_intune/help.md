@@ -47,7 +47,7 @@ The connection configuration accepts the following parameters:
 |authentication_type|string|Username-Password|False|Type of authentication flow|['Username-Password', 'Client-Credentials']|Username-Password|
 |clientId|string|None|True|Client ID, also called Application ID|None|a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d|
 |clientSecret|credential_secret_key|None|True|Client secret key|None|kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=|
-|credentials|credential_username_password|None|True|E-mail address and password|None|{"username": "user@example.com", "password": "mypassword"}|
+|credentials|credential_username_password|None|False|E-mail address and password|None|{"username": "user@example.com", "password": "mypassword"}|
 |tenantId|string|None|True|Tenant ID can be found in Active Directory|None|3a522933-ae5e-2b63-96ab-3c004b4f7f10|
   
 Example input:

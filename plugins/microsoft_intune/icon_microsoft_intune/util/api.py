@@ -129,11 +129,17 @@ class MicrosoftIntuneAPI:
         return True
 
     def refresh_access_token(self):
-        if self.auth_type == AuthType.oauth2:
+        if self.auth_type == AuthType.username:
             oauth_data = {
                 "username": self.username,
                 "password": self.password,
             }
+            if not self.username and not self.password:
+                raise PluginException(
+                    preset=PluginException.Preset.USERNAME_PASSWORD,
+                    data="Credentials required. Please enter your username and password.",
+                )
+
             self.access_token = self.get_token("password", oauth_data)
         elif self.auth_type == AuthType.client:
             self.access_token = self.get_token("client_credentials", {})

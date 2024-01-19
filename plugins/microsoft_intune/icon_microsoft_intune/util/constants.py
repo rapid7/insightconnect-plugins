@@ -11,5 +11,5 @@ WIPE_DEVICE_ENDPOINT = "deviceManagement/managedDevices/{device_id}/wipe"
 
 
 class AuthType:
-    oauth2 = "Username-Password"
+    username = "Username-Password"
     client = "Client-Credentials"
