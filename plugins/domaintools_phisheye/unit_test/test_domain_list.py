@@ -5,12 +5,10 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from icon_domaintools_phisheye.actions.domain_list import DomainList
-from icon_domaintools_phisheye.actions.domain_list.schema import Input, DomainListInput, DomainListOutput
+from icon_domaintools_phisheye.actions.domain_list.schema import Input
 from unit_test.mock import Util, mock_request_200, mocked_request
 from unittest.mock import patch, Mock
 from parameterized import parameterized
-
-# from jsonschema import validate
 
 
 class TestDomainList(TestCase):
