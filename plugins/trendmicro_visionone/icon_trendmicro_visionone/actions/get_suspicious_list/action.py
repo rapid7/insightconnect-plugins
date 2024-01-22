@@ -28,7 +28,7 @@ class GetSuspiciousList(insightconnect_plugin_runtime.Action):
         # Make Action API Call
         self.logger.info("Making API Call...")
         try:
-            client.object.consume_suspicious(lambda suspicion: new_suspicions.append(suspicion.model_dump()))
+            client.object.consume_suspicious(lambda suspicion: new_suspicions.append(suspicion.dict()))
         except Exception as error:
             raise PluginException(
                 cause="An error occurred while getting the Suspicious List.",

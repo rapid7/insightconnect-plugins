@@ -32,9 +32,9 @@ class UpdateCustomScript(insightconnect_plugin_runtime.Action):
             file_type = pytmv1.FileType.POWERSHELL
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.update_custom_script(
+        response = client.script.update(
             script_id=script_id,
-            file=b64decode(file.get("content")),
+            file_content=b64decode(file.get("content")).decode("utf-8"),
             file_name=file.get("filename"),
             file_type=file_type,
             description=description,
