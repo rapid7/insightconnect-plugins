@@ -46,7 +46,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Initializing PYTMV1 Client...")
         client = pytmv1.init(app, key, url)
         self.logger.info("Making API Call...")
-        response = client.check_connectivity()
+        response = client.system.check_connectivity()
         if "error" in response.result_code.lower():
             raise ConnectionTestException(
                 "Failed to Establish Connection...",

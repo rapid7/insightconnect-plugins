@@ -34,7 +34,7 @@ class PollSandboxSuspiciousList(insightconnect_plugin_runtime.Trigger):
         while True:
             # Make Action API Call
             self.logger.info("Making API Call...")
-            response = client.get_sandbox_suspicious_list(submit_id=task_id, poll=poll, poll_time_sec=poll_time_sec)
+            response = client.sandbox.list_suspicious(submit_id=task_id, poll=poll, poll_time_sec=poll_time_sec)
             if "error" in response.result_code.lower():
                 raise PluginException(
                     cause="An error occurred while polling the sandbox suspicious list.",

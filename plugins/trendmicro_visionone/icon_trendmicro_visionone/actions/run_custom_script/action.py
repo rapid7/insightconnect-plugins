@@ -31,36 +31,33 @@ class RunCustomScript(insightconnect_plugin_runtime.Action):
         parameter = params.get(Input.PARAMETER, "")
         file_name = params.get(Input.FILE_NAME)
         description = params.get(Input.DESCRIPTION, "")
-        # Make Action API Call
-        self.logger.info("Making API Call...")
+        # Prepare the request based on the conditions
         if agent_guid and endpoint_name:
-            response = client.run_custom_script(
-                pytmv1.CustomScriptTask(
-                    agent_guid=agent_guid,
-                    endpoint_name=endpoint_name,
-                    parameter=parameter,
-                    file_name=file_name,
-                    description=description,
-                )
+            script_request = pytmv1.CustomScriptRequest(
+                agent_guid=agent_guid,
+                endpoint_name=endpoint_name,
+                parameter=parameter,
+                file_name=file_name,
+                description=description,
             )
         elif agent_guid and not endpoint_name:
-            response = client.run_custom_script(
-                pytmv1.CustomScriptTask(
-                    agent_guid=agent_guid,
-                    parameter=parameter,
-                    file_name=file_name,
-                    description=description,
-                )
+            script_request = pytmv1.CustomScriptRequest(
+                agent_guid=agent_guid, parameter=parameter, file_name=file_name, description=description
             )
         elif endpoint_name and not agent_guid:
-            response = client.run_custom_script(
-                pytmv1.CustomScriptTask(
-                    endpoint_name=endpoint_name,
-                    parameter=parameter,
-                    file_name=file_name,
-                    description=description,
-                )
+            script_request = pytmv1.CustomScriptRequest(
+                endpoint_name=endpoint_name, parameter=parameter, file_name=file_name, description=description
             )
+        else:
+            # Handle case where both agent_guid and endpoint_name are not provided
+            raise PluginException(
+                cause="Missing required parameters.",
+                assistance="Both 'agent_guid' and 'endpoint_name' cannot be empty.",
+            )
+        # Make Action API Call
+        self.logger.info("Making API Call...")
+        response = client.script.run(script_request)
+        # Check for error in the response
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while running a custom script.",

@@ -31,14 +31,14 @@ class RestoreEndpoint(insightconnect_plugin_runtime.Action):
         for endpoint in endpoint_identifiers:
             if endpoint.get("endpoint_name"):
                 endpoints.append(
-                    pytmv1.EndpointTask(
+                    pytmv1.EndpointRequest(
                         endpointName=endpoint.get("endpoint_name"),
                         description=endpoint.get("description", "Isolate Endpoint"),
                     )
                 )
             elif endpoint.get("agent_guid"):
                 endpoints.append(
-                    pytmv1.EndpointTask(
+                    pytmv1.EndpointRequest(
                         agentGuid=endpoint.get("agent_guid"),
                         description=endpoint.get("description", "Isolate Endpoint"),
                     )
@@ -50,7 +50,7 @@ class RestoreEndpoint(insightconnect_plugin_runtime.Action):
                 )
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.restore_endpoint(*endpoints)
+        response = client.endpoint.restore(*endpoints)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred restoring endpoint.",

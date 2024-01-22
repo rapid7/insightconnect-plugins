@@ -27,7 +27,7 @@ class GetSandboxSubmissionStatus(insightconnect_plugin_runtime.Action):
         task_id = params.get(Input.TASK_ID)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.get_sandbox_submission_status(submit_id=task_id)
+        response = client.sandbox.get_submission_status(submit_id=task_id)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while getting sandbox submission status.",

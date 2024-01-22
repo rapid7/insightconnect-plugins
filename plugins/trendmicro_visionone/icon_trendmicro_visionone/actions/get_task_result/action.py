@@ -25,7 +25,7 @@ class GetTaskResult(insightconnect_plugin_runtime.Action):
         poll_time_sec = params.get(Input.POLL_TIME_SEC)
         # Make first API Call to get the action type
         self.logger.info("Making API Call...")
-        response = client.get_base_task_result(
+        response = client.task.get_result(
             task_id=task_id,
             poll=poll,
             poll_time_sec=poll_time_sec,
@@ -37,9 +37,8 @@ class GetTaskResult(insightconnect_plugin_runtime.Action):
                 data=response,
             )
         action = response.response.dict().get("action", "")
-        action_type = RESPONSE_MAPPING.get(action.value)
-        # Make second API Call to get the action result
-        response = client.get_task_result(
+        action_type = RESPONSE_MAPPING.get(action)
+        response = client.task.get_result_class(
             task_id=task_id,
             class_=action_type,
             poll=poll,

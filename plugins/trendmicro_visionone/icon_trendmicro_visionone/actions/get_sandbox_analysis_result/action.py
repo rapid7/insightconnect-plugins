@@ -29,7 +29,7 @@ class GetSandboxAnalysisResult(insightconnect_plugin_runtime.Action):
         poll_time_sec = params.get(Input.POLL_TIME_SEC)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.get_sandbox_analysis_result(
+        response = client.sandbox.get_analysis_result(
             submit_id=report_id,
             poll=poll,
             poll_time_sec=poll_time_sec,
