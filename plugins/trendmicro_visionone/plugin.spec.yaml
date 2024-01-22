@@ -1836,12 +1836,6 @@ actions:
         type: string
         required: true
         example: 202
-      location:
-        title: Location
-        description: URL of the created resource
-        type: string
-        required: true
-        example: www.location.local
       note_id:
         title: Note ID
         description: ID of the note created
