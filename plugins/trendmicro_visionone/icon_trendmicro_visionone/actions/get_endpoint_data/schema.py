@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    ENDPOINTS = "endpoints"
+    FIELDS = "fields"
     QUERY_OP = "query_op"
     
 
@@ -22,13 +22,10 @@ class GetEndpointDataInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "endpoints": {
-      "type": "array",
-      "title": "Endpoints",
-      "description": "Array of endpoints to query by their hostname, macAddress, agentGuid or IP, formated as bracket array separated by comma",
-      "items": {
-        "type": "string"
-      },
+    "fields": {
+      "type": "object",
+      "title": "Fields",
+      "description": "JSON object of endpoint identifiers to query by their hostname, macAddress, agentGuid or IP",
       "order": 1
     },
     "query_op": {
@@ -44,7 +41,7 @@ class GetEndpointDataInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "endpoints",
+    "fields",
     "query_op"
   ]
 }

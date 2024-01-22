@@ -25,7 +25,7 @@ class GetCustomScriptListInput(insightconnect_plugin_runtime.Input):
     "fields": {
       "type": "object",
       "title": "Fields",
-      "description": "Array of fields to query. (filter=fileName eq 'test.ps1' or fileType eq 'powershell')",
+      "description": "JSON object of fields to query. (eg; fileName eq 'test.ps1' or fileType eq 'powershell')",
       "order": 2
     },
     "query_op": {
