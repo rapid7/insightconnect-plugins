@@ -60,6 +60,6 @@ def mocked_request(side_effect: Callable) -> None:
     mock_function.request = mock.Mock(side_effect=side_effect)
 
 
-def mock_request_200() -> MockResponse:
+def mock_request_200(*args, **kwargs) -> MockResponse:
     return mock_conditions(200)
 
