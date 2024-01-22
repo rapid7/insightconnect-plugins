@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import ReverseWhoisInput, ReverseWhoisOutput, Input, Output, Component
 
 # Custom imports below

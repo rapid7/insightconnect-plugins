@@ -1,4 +1,4 @@
-insightconnect_plugin_runtime
+import insightconnect_plugin_runtime
 from .schema import WhoisInput, WhoisOutput, Input, Output, Component
 
 # Custom imports below
