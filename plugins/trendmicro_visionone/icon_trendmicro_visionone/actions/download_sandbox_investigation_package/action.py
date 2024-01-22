@@ -32,7 +32,7 @@ class DownloadSandboxInvestigationPackage(insightconnect_plugin_runtime.Action):
         poll_time_sec = params.get(Input.POLL_TIME_SEC)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.download_sandbox_investigation_package(
+        response = client.sandbox.download_investigation_package(
             submit_id=submit_id, poll=poll, poll_time_sec=poll_time_sec
         )
         if "error" in response.result_code.lower():

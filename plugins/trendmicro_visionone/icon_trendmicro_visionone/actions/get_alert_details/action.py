@@ -27,7 +27,7 @@ class GetAlertDetails(insightconnect_plugin_runtime.Action):
         alert_id = params.get(Input.ALERT_ID)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.get_alert_details(alert_id=alert_id)
+        response = client.alert.get(alert_id=alert_id)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while getting the alert details.",
@@ -38,5 +38,5 @@ class GetAlertDetails(insightconnect_plugin_runtime.Action):
         self.logger.info("Returning Results...")
         return {
             Output.ETAG: response.response.etag,
-            Output.ALERT_DETAILS: {"alert": response.response.alert.dict()},
+            Output.ALERT_DETAILS: {"alert": response.response.data.dict()},
         }

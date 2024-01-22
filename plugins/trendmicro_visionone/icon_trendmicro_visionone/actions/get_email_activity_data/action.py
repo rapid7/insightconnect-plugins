@@ -1,5 +1,11 @@
 import insightconnect_plugin_runtime
-from .schema import GetEmailActivityDataInput, GetEmailActivityDataOutput, Input, Output, Component
+from .schema import (
+    GetEmailActivityDataInput,
+    GetEmailActivityDataOutput,
+    Input,
+    Output,
+    Component,
+)
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
@@ -34,7 +40,7 @@ class GetEmailActivityData(insightconnect_plugin_runtime.Action):
         new_email_activity_data = []
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.consume_email_activity_data(
+        response = client.email.consume_activity(
             lambda email_activity_data: new_email_activity_data.append(email_activity_data.dict()),
             start_time=start_date_time,
             end_time=end_date_time,

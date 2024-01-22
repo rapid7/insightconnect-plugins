@@ -25,7 +25,7 @@ class GetAlertList(insightconnect_plugin_runtime.Action):
         # Make Action API Call
         self.logger.info("Creating alert list...")
         try:
-            client.consume_alert_list(
+            client.alert.consume(
                 lambda alert: new_alerts.append(alert.json()),
                 start_time=start_date_time,
                 end_time=end_date_time,

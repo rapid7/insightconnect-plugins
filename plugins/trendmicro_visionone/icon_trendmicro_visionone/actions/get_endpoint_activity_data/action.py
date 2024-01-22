@@ -40,7 +40,7 @@ class GetEndpointActivityData(insightconnect_plugin_runtime.Action):
         new_endpoint_activity_data = []
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.consume_endpoint_activity_data(
+        response = client.endpoint.consume_activity(
             lambda endpoint_activity_data: new_endpoint_activity_data.append(endpoint_activity_data.dict()),
             start_time=start_date_time,
             end_time=end_date_time,
@@ -68,7 +68,10 @@ class GetEndpointActivityData(insightconnect_plugin_runtime.Action):
         # Handling null values or missing keys
         for data in new_endpoint_activity_data:
             for key, default_value in default_values.items():
-                if data[key] is None:
+                try:
+                    if data[key] is None:
+                        data[key] = default_value
+                except KeyError:
                     data[key] = default_value
         # Return results
         self.logger.info("Returning Results...")

@@ -24,14 +24,15 @@ class DisableAccount(insightconnect_plugin_runtime.Action):
         accounts = []
         for account_identifier in account_identifiers:
             accounts.append(
-                pytmv1.AccountTask(
+                pytmv1.AccountRequest(
                     accountName=account_identifier["account_name"],
                     description=account_identifier.get("description", ""),
                 )
             )
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.disable_account(*accounts)
+        response = client.account.disable(*accounts)
+        # response = client.disable_account(*accounts)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while disabling the account.",

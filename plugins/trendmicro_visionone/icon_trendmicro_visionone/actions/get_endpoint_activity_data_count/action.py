@@ -40,7 +40,7 @@ class GetEndpointActivityDataCount(insightconnect_plugin_runtime.Action):
         new_email_activity_data = []
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.get_endpoint_activity_data_count(
+        response = client.endpoint.get_activity_count(
             start_time=start_date_time,
             end_time=end_date_time,
             select=select,

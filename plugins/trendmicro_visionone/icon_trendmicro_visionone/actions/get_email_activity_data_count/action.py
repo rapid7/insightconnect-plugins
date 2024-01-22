@@ -38,7 +38,7 @@ class GetEmailActivityDataCount(insightconnect_plugin_runtime.Action):
             query_op = pytmv1.QueryOp.AND
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.get_email_activity_data_count(
+        response = client.email.get_activity_count(
             start_time=start_date_time,
             end_time=end_date_time,
             select=select,
