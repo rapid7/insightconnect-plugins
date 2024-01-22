@@ -1,0 +1,27 @@
+{
+  "status": {
+    "code": 200,
+    "text": "OK"
+  },
+  "data": {
+    "date": "2016-11-01",
+    "domains": [
+      {
+        "Created Date": {},
+        "Domain": "appeltypoexample.com",
+        "IP Addresses": [
+          {
+            "Country Code": {},
+            "IPv4": {}
+          }
+        ],
+        "Name Servers": "ns57.domaincontrol.com",
+        "Registrant Email": {},
+        "Registrar Name": {},
+        "Risk Score": 24,
+        "TLD": {}
+      }
+    ],
+    "term": "apple"
+  }
+}
