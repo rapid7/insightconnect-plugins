@@ -30,7 +30,7 @@ class AddAlertNote(insightconnect_plugin_runtime.Action):
                 data=response.error,
             )
         self.logger.info("Returning Results...")
-        note_id = response.response.note_id()
+        note_id = response.response.note_id
         result_code = response.result_code
         return {
             Output.RESULT_CODE: result_code,
