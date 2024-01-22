@@ -59,6 +59,17 @@ class TestMonitorSiemLogs(TestCase):
         mock_logger.assert_called()
         self.assertIn("Hit BadZipFile, returning []. Error", mock_logger.call_args[0][0])
 
+    @patch("logging.Logger.error")
+    def test_monitor_siem_logs_raises_json_error(self, mock_logger, _mock_data):
+        test_state = {"next_token": "request.json error"}  # this forces our mocked response to raise JSON encode error
+        response, new_state, has_more_pages, status_code, error = self.task.run(params={}, state=test_state)
+        self.assertEqual(status_code, 200)
+        self.assertEqual(has_more_pages, False)
+        self.assertEqual(response, [])  # no logs will be parsed as we raise error after catching JSONDecodeError
+        self.assertEqual(new_state, test_state)  # we shouldn't change the state if we encounter an error
+        mock_logger.assert_called()
+        self.assertIn("JSON", mock_logger.call_args[0][0])
+
 
 class TestEventLogs(TestCase):
     def setUp(self) -> None:
