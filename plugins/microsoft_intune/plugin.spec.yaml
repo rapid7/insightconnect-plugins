@@ -836,7 +836,7 @@ connection:
     title: Credentials
     description: E-mail address and password
     type: credential_username_password
-    required: true
+    required: false
     example: '{"username": "user@example.com", "password": "mypassword"}'
   clientId:
     title: Client ID
