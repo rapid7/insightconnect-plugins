@@ -1,5 +1,5 @@
 {
-	"spec": "890d5c9df128e2727e44f73431dcfbf6",
+	"spec": "485be165063dbd7ae6b05048416cecfb",
 	"manifest": "44e755dd1ca6aaca663911499d3aeb82",
 	"setup": "4589c606cdd7f4a8f40cdd66b1bc4270",
 	"schemas": [
@@ -69,7 +69,7 @@
 		},
 		{
 			"identifier": "get_custom_script_list/schema.py",
-			"hash": "3bdb0314d58aaba1af98dab62f272d75"
+			"hash": "a74d6150a689b3620cf887245e3d3587"
 		},
 		{
 			"identifier": "get_email_activity_data/schema.py",
@@ -89,7 +89,7 @@
 		},
 		{
 			"identifier": "get_endpoint_data/schema.py",
-			"hash": "1dbf26feb4522affee7e316b057c8871"
+			"hash": "a711bde75bf5a2d27a6e22e860110265"
 		},
 		{
 			"identifier": "get_exception_list/schema.py",
