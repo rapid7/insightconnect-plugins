@@ -14,7 +14,7 @@ class Input:
     
 
 class Output:
-    LOCATION = "location"
+    SCRIPT_ID = "script_id"
     
 
 class AddCustomScriptInput(insightconnect_plugin_runtime.Input):
@@ -84,15 +84,15 @@ class AddCustomScriptOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "location": {
+    "script_id": {
       "type": "string",
-      "title": "Location",
-      "description": "URL that indicates the location of a script file",
+      "title": "Script ID",
+      "description": "ID of added script file",
       "order": 1
     }
   },
   "required": [
-    "location"
+    "script_id"
   ]
 }
     """)
