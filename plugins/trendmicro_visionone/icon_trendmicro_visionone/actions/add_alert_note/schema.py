@@ -13,7 +13,6 @@ class Input:
     
 
 class Output:
-    LOCATION = "location"
     NOTE_ID = "note_id"
     RESULT_CODE = "result_code"
     
@@ -54,17 +53,11 @@ class AddAlertNoteOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "location": {
-      "type": "string",
-      "title": "Location",
-      "description": "URL of the created resource",
-      "order": 2
-    },
     "note_id": {
       "type": "string",
       "title": "Note ID",
       "description": "ID of the note created",
-      "order": 3
+      "order": 2
     },
     "result_code": {
       "type": "string",
@@ -74,7 +67,6 @@ class AddAlertNoteOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "location",
     "note_id",
     "result_code"
   ]
