@@ -27,7 +27,7 @@ class DeleteCustomScript(insightconnect_plugin_runtime.Action):
         script_id = params.get(Input.SCRIPT_ID)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.delete_custom_script(
+        response = client.script.delete(
             script_id=script_id,
         )
         if "error" in response.result_code.lower():

@@ -37,8 +37,13 @@ class GetEndpointData(insightconnect_plugin_runtime.Action):
         # Make Action API Call
         self.logger.info("Making API Call...")
         try:
+            # client.consume_endpoint_data(
+            #     lambda endpoint_data: new_endpoint_data.append(endpoint_data.json()),
+            #     pytmv1.QueryOp(query_op),
+            #     *endpoints,
+            # )
             client.endpoint.consume_data(
-                lambda endpoint_data: new_endpoint_data.append(endpoint_data.model_dump_json()),
+                lambda endpoint_data: new_endpoint_data.append(endpoint_data.json()),
                 pytmv1.QueryOp(query_op),
                 **fields,
             )

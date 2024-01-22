@@ -32,6 +32,7 @@ class DisableAccount(insightconnect_plugin_runtime.Action):
         # Make Action API Call
         self.logger.info("Making API Call...")
         response = client.account.disable(*accounts)
+        # response = client.disable_account(*accounts)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while disabling the account.",
@@ -40,4 +41,4 @@ class DisableAccount(insightconnect_plugin_runtime.Action):
             )
         # Return results
         self.logger.info("Returning Results...")
-        return {Output.MULTI_RESPONSE: response.response.model_dump().get("items")}
+        return {Output.MULTI_RESPONSE: response.response.dict().get("items")}
