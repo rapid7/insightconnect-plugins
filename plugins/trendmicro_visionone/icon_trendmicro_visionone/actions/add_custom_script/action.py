@@ -1,5 +1,11 @@
 import insightconnect_plugin_runtime
-from .schema import AddCustomScriptInput, AddCustomScriptOutput, Input, Output, Component
+from .schema import (
+    AddCustomScriptInput,
+    AddCustomScriptOutput,
+    Input,
+    Output,
+    Component,
+)
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
@@ -31,12 +37,18 @@ class AddCustomScript(insightconnect_plugin_runtime.Action):
             file_type = pytmv1.FileType.POWERSHELL
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.add_custom_script(
+        response = client.script.add(
             file_type=file_type,
             file_name=file.get("filename"),
-            file=b64decode(file.get("content")),
+            file_content=b64decode(file.get("content")).decode("utf-8"),
             description=description,
         )
+        # response = client.add_custom_script(
+        #     file_type=file_type,
+        #     file_name=file.get("filename"),
+        #     file=b64decode(file.get("content")),
+        #     description=description,
+        # )
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while uploading a custom script.",
@@ -45,4 +57,5 @@ class AddCustomScript(insightconnect_plugin_runtime.Action):
             )
         # Return results
         self.logger.info("Returning Results...")
+        self.logger.info(response.response.script_id)
         return {Output.LOCATION: response.response.location}

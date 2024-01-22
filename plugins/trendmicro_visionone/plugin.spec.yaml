@@ -2038,12 +2038,12 @@ actions:
           "filename": "r7-test11.sh"
         }
     output:
-      location:
-        title: Location
-        description: URL that indicates the location of a script file
+      script_id:
+        title: Script ID
+        description: ID of added script file
         type: string
         required: true
-        example: www.location.location/id
+        example: 25
   update_custom_script:
     title: Update Custom Script
     description: Updates a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 encoding
