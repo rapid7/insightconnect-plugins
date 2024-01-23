@@ -28,6 +28,6 @@ class TestDisableAccount(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_disable_account_failure(self):
-        self.action.connection.client.disable_account = MagicMock(side_effect=PluginException)
+        self.action.connection.client.account.disable = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

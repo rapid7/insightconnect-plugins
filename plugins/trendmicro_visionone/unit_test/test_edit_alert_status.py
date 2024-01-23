@@ -24,12 +24,12 @@ class TestEditAlertStatus(TestCase):
         expected_result = self.mock_params["output"]
         mock_response = MagicMock()
         mock_response.result_code = "mock result code"
-        self.action.connection.client.edit_alert_status = MagicMock(return_value=mock_response)
+        self.action.connection.client.alert.update_status = MagicMock(return_value=mock_response)
         response = self.action.run(self.mock_params["input"])
         for key in response.keys():
             self.assertIn(key, str(expected_result.keys()))
 
     def test_edit_alert_status_failure(self):
-        self.action.connection.client.edit_alert_status = MagicMock(side_effect=PluginException)
+        self.action.connection.client.alert.update_status = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

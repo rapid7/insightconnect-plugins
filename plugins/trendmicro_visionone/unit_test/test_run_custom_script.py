@@ -27,7 +27,7 @@ class TestRunCustomScript(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_3_run_custom_script_failure(self):
-        self.action.connection.client.run_custom_script = MagicMock(
+        self.action.connection.client.script.run = MagicMock(
             side_effect=PluginException
         )
         with self.assertRaises(PluginException):
