@@ -1998,7 +1998,7 @@ actions:
       fields:
         title: Fields
         type: object
-        description: JSON object of fields to query. (eg; fileName eq 'test.ps1' or fileType eq 'powershell')
+        description: JSON object of fields to query by fileName or fileType
         required: true
         example: { }
     output:
@@ -2219,7 +2219,7 @@ actions:
       fields:
         title: Fields
         type: object
-        description: Array of fields to query. (uuid, tags, pname, msgUuid, ...)
+        description: JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)
         required: true
         example: { }
     output:
@@ -2276,7 +2276,7 @@ actions:
       fields:
         title: Fields
         type: object
-        description: Array of fields to query. (uuid, tags, pname, msgUuid, ...)
+        description: JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)
         required: true
         example: { }
     output:
@@ -2333,7 +2333,7 @@ actions:
       fields:
         title: Fields
         type: object
-        description: Array of fields to query. (uuid, tags, pname, msgUuid, ...)
+        description: JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)
         required: true
         example: { }
     output:
@@ -2390,7 +2390,7 @@ actions:
       fields:
         title: Fields
         type: object
-        description: Array of fields to query. (uuid, tags, pname, msgUuid, ...)
+        description: JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)
         required: true
         example: { }
     output:
