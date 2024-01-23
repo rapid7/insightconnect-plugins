@@ -48,9 +48,19 @@ class MockResponse:
             return json.load(file)
 
 
-def mock_conditions(status_code: int) -> MockResponse:
-    if status_code == 200:
-        return MockResponse("domain_list", status_code)
+def mock_conditions(status: str) -> MockResponse:
+    if status == 'success':
+        return MockResponse("domain_list", 200)
+    if status == 'bad_request':
+        return MockResponse("", 400)
+    if status == 'service_unavailable':
+        return MockResponse("", 503)
+    if status == 'not_authorised':
+        return MockResponse("", 403)
+    if status == 'not_found':
+        return MockResponse("", 404)
+    if status == 'internal_service_error':
+        return MockResponse("", 500)
 
     raise Exception("Unrecognized endpoint")
 
@@ -61,4 +71,4 @@ def mocked_request(side_effect: Callable) -> None:
 
 
 def mock_request_200(*args, **kwargs) -> MockResponse:
-    return mock_conditions(200)
+    return mock_conditions('success')
