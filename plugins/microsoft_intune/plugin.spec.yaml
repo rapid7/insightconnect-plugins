@@ -4,8 +4,8 @@ products: [insightconnect]
 name: microsoft_intune
 title: Microsoft Intune
 description: Microsoft cloud-based management solution that provides for mobile device and operating system management
-version: 2.0.0
-connection_version: 2
+version: 3.0.0
+connection_version: 3
 vendor: rapid7
 support: rapid7
 cloud_ready: true
@@ -24,6 +24,10 @@ hub_tags:
   use_cases: [data_utility]
   keywords: [intune, cloud, azure, cloud_enabled]
   features: []
+sdk:
+  type: slim
+  version: 5
+  user: nobody
 types:
   value:
     "@odata.type":
@@ -818,11 +822,21 @@ types:
       required: false
       example: Example Name
 connection:
+  authentication_type:
+    title: Authentication Type
+    description: Type of authentication flow
+    type: string
+    required: false
+    enum:
+      - Username-Password
+      - Client-Credentials
+    default: Username-Password
+    example: Username-Password
   credentials:
     title: Credentials
     description: E-mail address and password
     type: credential_username_password
-    required: true
+    required: false
     example: '{"username": "user@example.com", "password": "mypassword"}'
   clientId:
     title: Client ID

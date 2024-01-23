@@ -1,7 +1,7 @@
 {
-	"spec": "a9004e2809b64288cc88811c39b568fd",
-	"manifest": "e2eefa466dae9c8e93178b8fe3b684e5",
-	"setup": "eab3f4234382f1c05af67e49f70c84a5",
+	"spec": "dfccdc3dc2e4b363c470fbea4b283e21",
+	"manifest": "53a760355846dd9bcc15863ea81b2f88",
+	"setup": "97c1cd179d4b74fda13079f6eb8ca3ac",
 	"schemas": [
 		{
 			"identifier": "antivirus_scan/schema.py",
@@ -49,7 +49,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "403937909846549cbcde68bf0ebeb41a"
+			"hash": "9832433a5f9adf89301a282ca1c493cc"
 		}
 	]
 }

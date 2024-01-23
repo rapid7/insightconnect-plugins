@@ -19,7 +19,7 @@
 * Client ID, Client Secret and Tenant ID
 
 # Supported Product Versions
-
+  
 * Microsoft Graph REST API v1.0 2023-08-29
 
 # Documentation
@@ -38,20 +38,23 @@
 4. Copy and paste the 'Application (client) ID' and 'Directory (tenant) ID' (from the Overview tab) into the connection.
 
 For detailed instructions refer to [Microsoft Documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal).
+If you are using `Client` authentication type, there is detailed instructions: [Microsoft Access without a user](https://learn.microsoft.com/en-us/graph/auth-v2-service)
 
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|authentication_type|string|Username-Password|False|Type of authentication flow|['Username-Password', 'Client-Credentials']|Username-Password|
 |clientId|string|None|True|Client ID, also called Application ID|None|a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d|
 |clientSecret|credential_secret_key|None|True|Client secret key|None|kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=|
-|credentials|credential_username_password|None|True|E-mail address and password|None|{"username": "user@example.com", "password": "mypassword"}|
+|credentials|credential_username_password|None|False|E-mail address and password|None|{"username": "user@example.com", "password": "mypassword"}|
 |tenantId|string|None|True|Tenant ID can be found in Active Directory|None|3a522933-ae5e-2b63-96ab-3c004b4f7f10|
-
+  
 Example input:
 
 ```
 {
+  "authentication_type": "Username-Password",
   "clientId": "a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d",
   "clientSecret": {
     "secretKey": "kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5="
@@ -68,9 +71,10 @@ Example input:
 
 ### Actions
 
-#### Antivirus Scan
 
-This action is used to initiate a Windows Defender Antivirus scan on a machine.
+#### Antivirus Scan
+  
+This action is used to initiate a Windows Defender Antivirus scan on a machine
 
 ##### Input
 
@@ -78,7 +82,7 @@ This action is used to initiate a Windows Defender Antivirus scan on a machine.
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |device|string|None|True|Search devices by device name, user ID, email address, or device ID|None|547a48e3-0942-4888-acf1-a92b7fb19ef9|
 |update|boolean|False|False|If true the action updates Antivirus Signatures before scan|None|True|
-
+  
 Example input:
 
 ```
@@ -93,7 +97,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |success|boolean|True|Return true if scan was initiated successfully|True|
-
+  
 Example output:
 
 ```
@@ -103,15 +107,15 @@ Example output:
 ```
 
 #### Delete Device from Autopilot
-
-This action is used to delete the device from Autopilot.
+  
+This action is used to delete the device from Autopilot
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |deviceId|string|None|True|ID of the device|None|9e8fd111-6c41-1111-85b9-11395662e111|
-
+  
 Example input:
 
 ```
@@ -125,7 +129,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |success|boolean|True|Whether the scan was successful|True|
-
+  
 Example output:
 
 ```
@@ -135,15 +139,15 @@ Example output:
 ```
 
 #### Delete Device from Intune
-
-This action is used to delete the managed device from Intune.
+  
+This action is used to delete the managed device from Intune
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |deviceId|string|None|True|ID of the managed device|None|9e8fd111-6c41-1111-85b9-11395662e111|
-
+  
 Example input:
 
 ```
@@ -157,7 +161,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |success|boolean|True|Whether the scan was successful|True|
-
+  
 Example output:
 
 ```
@@ -167,15 +171,15 @@ Example output:
 ```
 
 #### Full Scan
-
-This action is used to perform a full scan of the device.
+  
+This action is used to perform a full scan of the device
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |deviceId|string|None|True|ID of the device|None|9e8fd111-6c41-1111-85b9-11395662e111|
-
+  
 Example input:
 
 ```
@@ -189,7 +193,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |success|boolean|False|Whether the scan was successful|True|
-
+  
 Example output:
 
 ```
@@ -200,14 +204,14 @@ Example output:
 
 #### Get Autopilot Device
   
-This action is used to get information about the Autopilot device.
+This action is used to get information about the Autopilot device
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |deviceId|string|None|True|ID of the Autopilot device|None|9e8fd111-6c41-1111-85b9-11395662e111|
-
+  
 Example input:
 
 ```
@@ -221,7 +225,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |device|autopilotDevice|False|Information about the autopilot device|{}|
-
+  
 Example output:
 
 ```
@@ -249,15 +253,15 @@ Example output:
 ```
 
 #### Get Device
-
-This action is used to get information about the device.
+  
+This action is used to get information about the device
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |deviceId|string|None|True|ID of the device|None|9e8fd111-6c41-1111-85b9-11395662e111|
-
+  
 Example input:
 
 ```
@@ -271,7 +275,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |device|device|False|Information about the device|{}|
-
+  
 Example output:
 
 ```
@@ -342,15 +346,15 @@ Example output:
 ```
 
 #### Get Managed Apps
-
-This action returns InTune manageable apps.
+  
+This action is used to returns InTune manageable apps
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |app|string|None|False|Application ID or name, if empty returns all applications|None|af6040ed-efe0-494c-89ed-89880989674c|
-
+  
 Example input:
 
 ```
@@ -364,7 +368,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |managedApps|[]value|False|Application details|[]|
-
+  
 Example output:
 
 ```
@@ -400,8 +404,8 @@ Example output:
 ```
 
 #### Manage Device
-
-This action is used to perform management tasks on a device such as rebooting and syncing.
+  
+This action is used to perform management tasks on a device such as rebooting and syncing
 
 ##### Input
 
@@ -410,7 +414,7 @@ This action is used to perform management tasks on a device such as rebooting an
 |device|string|None|True|Device name, user ID, email address, or device ID|None|aaaa55aa-a55a-5a5a-5aa5-aaaaa555aaa|
 |type|string|None|True|Type of action|['Reboot', 'Sync']|Sync|
 |whitelist|[]string|None|False|This list contains a set of of device names, user IDs, email addresses, or device IDs that action will not be performed on|None|["user@example.com", "705c034c-034c-705c-4c03-5c704c035c70"]|
-
+  
 Example input:
 
 ```
@@ -429,7 +433,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |success|boolean|True|Return true if action was successfully performed on device|True|
-
+  
 Example output:
 
 ```
@@ -439,15 +443,15 @@ Example output:
 ```
 
 #### Quick Scan
-
-This action is used to perform a quick scan of the device.
+  
+This action is used to perform a quick scan of the device
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |deviceId|string|None|True|ID of the device|None|9e8fd111-6c41-1111-85b9-11395662e111|
-
+  
 Example input:
 
 ```
@@ -461,7 +465,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |success|boolean|False|Whether the scan was successful|True|
-
+  
 Example output:
 
 ```
@@ -472,14 +476,14 @@ Example output:
 
 #### Search Devices
   
-This action is used to search devices by device name, user ID, email address or device ID.
+This action is used to search devices by device name, user ID, email address or device ID
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |device|string|None|True|Search devices by either of - device name, user ID, email address, device ID|None|547a48e3-0942-4888-acf1-a92b7fb19ef9|
-
+  
 Example input:
 
 ```
@@ -493,7 +497,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |devices|[]device|False|Devices details|[]|
-
+  
 Example output:
 
 ```
@@ -540,8 +544,8 @@ Example output:
 ```
 
 #### Wipe
-
-This action is used to wipe device by device name, device ID, user ID, or email address. It supports a whitelist to skip critical devices that should never be whitelisted.
+  
+This action is used to wipe device by device name, user ID, email address, or device ID if it is not whitelisted
 
 ##### Input
 
@@ -549,7 +553,7 @@ This action is used to wipe device by device name, device ID, user ID, or email 
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |device|string|None|True|Device name, user ID, email address, or device ID|None|547a48e3-0942-4888-acf1-a92b7fb19ef9|
 |whitelist|[]string|None|False|This list contains a set of of device names, user IDs, email addresses, or device IDs that a user can pass in that will not be wiped|None|["user@example.com", "705c034c-034c-705c-4c03-5c704c035c70"]|
-
+  
 Example input:
 
 ```
@@ -567,7 +571,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |success|boolean|True|Return true if device was successfully wiped|True|
-
+  
 Example output:
 
 ```
@@ -575,17 +579,15 @@ Example output:
   "success": true
 }
 ```
-
 ### Triggers
-
+  
 *This plugin does not contain any triggers.*
-
 ### Tasks
-
+  
 *This plugin does not contain any tasks.*
 
-### Custom Output Types
-
+### Custom Types
+  
 **value**
 
 |Name|Type|Default|Required|Description|Example|
@@ -611,7 +613,7 @@ Example output:
 |Publisher|string|None|False|Publisher|Adobe Inc.|
 |Publishing State|string|None|False|Publishing state|published|
 |Version|string|None|False|Version|1.0|
-
+  
 **configurationManagerClientEnabledFeatures**
 
 |Name|Type|Default|Required|Description|Example|
@@ -623,7 +625,7 @@ Example output:
 |Modern Apps|boolean|None|False|Modern apps|True|
 |Resource Access|boolean|None|False|Resource access|True|
 |Windows Update For Business|boolean|None|False|Windows update for business|True|
-
+  
 **deviceActionResults**
 
 |Name|Type|Default|Required|Description|Example|
@@ -633,7 +635,7 @@ Example output:
 |Action State|string|None|False|Action state|done|
 |Last Updated Date Time|date|None|False|Last updated date time|2023-08-30 10:21:31+00:00|
 |Start Date Time|date|None|False|Start date time|2023-08-30 10:13:51.339250+00:00|
-
+  
 **deviceHealthAttestationState**
 
 |Name|Type|Default|Required|Description|Example|
@@ -671,7 +673,7 @@ Example output:
 |TPM Version|string|None|False|TPM version|TPM Version value|
 |Virtual Secure Mode|string|None|False|Virtual secure mode|Virtual Secure Mode value|
 |Windows PE|string|None|False|Windows PE|Windows PE value|
-
+  
 **device**
 
 |Name|Type|Default|Required|Description|Example|
@@ -724,7 +726,7 @@ Example output:
 |User ID|string|None|False|User ID|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
 |User Principal Name|string|None|False|User principal name|user@example.com|
 |Wifi MAC Address|string|None|False|Wifi MAC address|12-34-56-78-AB-CD|
-
+  
 **autopilotDevice**
 
 |Name|Type|Default|Required|Description|Example|
@@ -747,12 +749,14 @@ Example output:
 |System Family|string|None|False|Family of the device system|example_family|
 |User Principal Name|string|None|False|Principal name of the user|Example Name|
 
-## Troubleshooting
 
+## Troubleshooting
+  
 *There is no troubleshooting for this plugin.*
 
 # Version History
 
+* 3.0.0 - Connection: Added `client_credentials` authentication type 
 * 2.0.0 - Add new actions Get Device, Get Autopilot Device, Full Scan, Quick Scan, Delete Device from Intune, Delete Device from Autopilot | Change `client_secret` input type in connection | Remove `url` input from connection | Code refactor
 * 1.3.0 - Add new action Get Managed Apps
 * 1.2.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/microsoft-intune/)
