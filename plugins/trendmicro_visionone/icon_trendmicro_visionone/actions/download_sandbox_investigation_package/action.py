@@ -42,7 +42,7 @@ class DownloadSandboxInvestigationPackage(insightconnect_plugin_runtime.Action):
                 data=response,
             )
         # Make filename with timestamp
-        name = "Trend Micro Download Sandbox Investigation Package "
+        name = "Trend_Micro_Download_Sandbox_Investigation_Package_"
         timestamp = time.time()
         date_time = datetime.fromtimestamp(timestamp)
         str_date_time = date_time.strftime("%d_%m_%Y_%H_%M_%S")

@@ -40,12 +40,12 @@ class DownloadSandboxAnalysisResult(insightconnect_plugin_runtime.Action):
                 data=response,
             )
         # Make filename with timestamp
-        name = "Trend Micro Download Sandbox Analysis Result "
+        name = "Trend_Micro_Download_Sandbox_Analysis_Result_"
         timestamp = time.time()
         date_time = datetime.fromtimestamp(timestamp)
         str_date_time = date_time.strftime("%d_%m_%Y_%H_%M_%S")
-        file_name = name + str_date_time
-        # extension = ".pdf"
+        file_name = name + str_date_time + ".pdf"
+        # Return results
         self.logger.info("Returning Results...")
         return {
             Output.FILE: {
