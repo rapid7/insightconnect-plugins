@@ -27,7 +27,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             state=MonitorSiemLogsState(),
         )
 
-    def run(self, params={}, state={}) -> (List[Dict], Dict):  # pylint: disable=unused-argument
+    def run(self, params={}, state={}) -> (List[Dict], Dict):  # pylint: disable=unused-argument  # noqa: MC0001
         has_more_pages = False
         try:
             header_next_token = state.get(self.NEXT_TOKEN, "")
@@ -60,13 +60,15 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 has_more_pages = IS_LAST_TOKEN_FIELD not in headers
 
             return output, state, has_more_pages, status_code, None
-        except Exception as error:
-            self.logger.error(
-                f"An exception has been raised. Error: {error}, returning state={state}, "
-                f"has_more_pages={has_more_pages}",
-                exc_info=True,
-            )
-            return [], state, has_more_pages, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+        except Exception as gen_error:
+            gen_info, exp = f"Error: {gen_error}, returning state={state}, has_more_pages={has_more_pages}", None
+            if "negative seek" in str(gen_error):
+                # this seems to be intermittent on what Mimecast returns, don't log with word `error`
+                self.logger.debug(f"Found negative seek. {gen_info}", exc_info=True)
+            else:
+                self.logger.error(f"An exception has been raised. {gen_info}", exc_info=True)
+                exp = PluginException(preset=PluginException.Preset.UNKNOWN, data=gen_error)
+            return [], state, has_more_pages, 500, exp
 
     def _filter_and_sort_recent_events(self, task_output: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
