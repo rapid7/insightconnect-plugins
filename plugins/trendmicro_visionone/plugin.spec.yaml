@@ -4,7 +4,7 @@ products: [ insightconnect ]
 name: trendmicro_visionone
 title: Trend Micro Vision One
 description: Trend Micro Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
-version: 2.1.1
+version: 3.0.0
 supported_versions: [ "Trend Micro Vision One API v3" ]
 vendor: trendmicro
 support: community
@@ -421,7 +421,7 @@ types:
     object_value:
       title: Value
       type: string
-      description: The object value. Full and partial matches supported. Domain partial match, (with a wildcard as the subdomain, example, .example.com) IP partial match, (IP range example, 192.168.35.1-192.168.35.254, CIDR example, 192.168.35.1/24) URL Partial match, (Supports wildcards http://, https:// at beginning, or at the end. Multiple wild cards also supported, such as , https://.example.com/path1/) SHA1 Only full match
+      description: The object value. Full and partial matches supported
       required: true
       example: 127.127.127.127
     description:
@@ -447,7 +447,7 @@ types:
     object_value:
       title: Value
       type: string
-      description: The object value. Full and partial matches supported. Domain partial match, (with a wildcard as the subdomain, example, .example.com) IP partial match, (IP range example, 192.168.35.1-192.168.35.254, CIDR example, 192.168.35.1/24) URL Partial match, (Supports wildcards http://, https:// at beginning, or at the end. Multiple wild cards also supported, such as , https://.example.com/path1/) SHA1 Only full match
+      description: The object value. Full and partial matches supported
       required: true
       example: 127.127.127.127
     scan_action:
@@ -864,7 +864,7 @@ types:
     process_file_hash_sha1:
       title: Process File Hash SHA1
       type: string
-      description: The process file sha1
+      description: The process file SHA1
       required: false
     process_file_path:
       title: The process file path
@@ -894,7 +894,7 @@ types:
     src_file_hash_sha1:
       title: Src File Hash SHA1
       type: string
-      description: Source file sha1
+      description: Source file SHA1
       required: false
     src_file_path:
       title: Src File Path
@@ -1981,6 +1981,7 @@ actions:
         type: alert
         description: The details of the alert
         required: true
+        example: { }
   get_custom_script_list:
     title: Get Custom Script List
     description: Retrieves information about the available custom scripts and displays the information in a paginated list
