@@ -1,7 +1,7 @@
 {
-	"spec": "5df3a04050f107aeade5673ab2e92a08",
-	"manifest": "7b35e7c4f61123c5cd82ddb394f094b3",
-	"setup": "d6b9481db03922f6592fbe55283d57b7",
+	"spec": "50406f11f4f47a35468571569c17b620",
+	"manifest": "6c871102e7abb08fc53983924c67cc78",
+	"setup": "c5acfe989faa925dbf11f7afc2ff960e",
 	"schemas": [
 		{
 			"identifier": "add_alert_note/schema.py",
@@ -13,15 +13,15 @@
 		},
 		{
 			"identifier": "add_to_block_list/schema.py",
-			"hash": "722778c5c69a9f1e593a692973fa176f"
+			"hash": "b4d4467da0aa02987dd328e05f81d58f"
 		},
 		{
 			"identifier": "add_to_exception_list/schema.py",
-			"hash": "6bf5db6cab0156ece7679203d5396049"
+			"hash": "08f600248bb474cb77cd22272543924a"
 		},
 		{
 			"identifier": "add_to_suspicious_list/schema.py",
-			"hash": "1b0d33853f85acd53ec14cc7c9944c7e"
+			"hash": "9729e04a5d9d982c6567a9386a5837fa"
 		},
 		{
 			"identifier": "collect_file/schema.py",
@@ -81,7 +81,7 @@
 		},
 		{
 			"identifier": "get_endpoint_activity_data/schema.py",
-			"hash": "b4c06d3939450f6dd838596f4633159e"
+			"hash": "3c09d7181541958eec0b1f7ea5ac03e3"
 		},
 		{
 			"identifier": "get_endpoint_activity_data_count/schema.py",
@@ -125,15 +125,15 @@
 		},
 		{
 			"identifier": "remove_from_block_list/schema.py",
-			"hash": "34219d61d56af9098d4ad86a331873d0"
+			"hash": "8b5d6d01a301ba56660a64e13644daa4"
 		},
 		{
 			"identifier": "remove_from_exception_list/schema.py",
-			"hash": "1e7b00ffe932ea0cba644d0b62d369f2"
+			"hash": "0ab8a0730b8f0a0b6439598210db789c"
 		},
 		{
 			"identifier": "remove_from_suspicious_list/schema.py",
-			"hash": "eaf553a8981c2fc8c6ac80bf07b2aa7d"
+			"hash": "3072468173c340e745a8d9032f465b74"
 		},
 		{
 			"identifier": "reset_password_account/schema.py",
