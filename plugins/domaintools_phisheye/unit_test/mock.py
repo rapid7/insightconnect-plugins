@@ -49,17 +49,17 @@ class MockResponse:
 
 
 def mock_conditions(status: str) -> MockResponse:
-    if status == 'success':
+    if status == "success":
         return MockResponse("domain_list", 200)
-    if status == 'bad_request':
+    if status == "bad_request":
         return MockResponse("", 400)
-    if status == 'service_unavailable':
+    if status == "service_unavailable":
         return MockResponse("", 503)
-    if status == 'not_authorised':
+    if status == "not_authorised":
         return MockResponse("", 403)
-    if status == 'not_found':
+    if status == "not_found":
         return MockResponse("", 404)
-    if status == 'internal_service_error':
+    if status == "internal_service_error":
         return MockResponse("", 500)
 
     raise Exception("Unrecognized endpoint")
@@ -71,4 +71,4 @@ def mocked_request(side_effect: Callable) -> None:
 
 
 def mock_request_200(*args, **kwargs) -> MockResponse:
-    return mock_conditions('success')
+    return mock_conditions("success")
