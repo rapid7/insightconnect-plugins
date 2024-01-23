@@ -33,9 +33,6 @@ class DownloadCustomScript(insightconnect_plugin_runtime.Action):
         response = client.script.download(
             script_id=script_id,
         )
-        # response = client.download_custom_script(
-        #     script_id=script_id,
-        # )
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while downloading a custom script.",

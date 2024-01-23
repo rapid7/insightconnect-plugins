@@ -49,7 +49,6 @@ class RunCustomScript(insightconnect_plugin_runtime.Action):
                 endpoint_name=endpoint_name, parameter=parameter, file_name=file_name, description=description
             )
         else:
-            # Handle case where both agent_guid and endpoint_name are not provided
             raise PluginException(
                 cause="Missing required parameters.",
                 assistance="Both 'agent_guid' and 'endpoint_name' cannot be empty.",

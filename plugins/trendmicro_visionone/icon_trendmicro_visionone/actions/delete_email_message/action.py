@@ -47,7 +47,6 @@ class DeleteEmailMessage(insightconnect_plugin_runtime.Action):
         # Make Action API Call
         self.logger.info("Making API Call...")
         response = client.email.delete(*messages)
-        # response = client.delete_email_message(*messages)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred when deleting the email message.",
