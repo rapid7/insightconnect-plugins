@@ -7,7 +7,8 @@ vendor: rapid7
 support: rapid7
 status: []
 description: Python is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.8.1 and its standard library as well as the following 3rd party libraries
-version: 4.0.7
+version: 4.0.8
+connection_version: 4
 supported_versions: ["Python 3.9.18"]
 sdk:
   type: full
@@ -68,8 +69,8 @@ actions:
       function:
         description: Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection
         type: python
-        default: def run(params={}):\n    return {}
         required: true
+        default: def run(params={}):\n    return {}
         example: def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password)\n\treturn {}
       input:
         description: Input object to be passed as `params={}` to the `run` function
