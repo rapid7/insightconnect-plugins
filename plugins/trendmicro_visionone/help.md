@@ -67,7 +67,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|default|True|Vision One API Token|None|12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:02699626f388ed830012e5b787640e71c56d42d81234|
-|api_url|string|https://api.xdr.trendmicro.com|True|URL of Trend Micro Vision One|None|https://tmv1-mock.trendmicro.com|
+|api_url|string|https://example.com|True|URL of Trend Micro Vision One|None|https://example.com|
 |app_name|string|Rapid7-InsightConnect|True|Name of the App to be Integrated with|None|Rapid7-InsightConnect|
 |verify_ssl|boolean|True|True|Verify if connection uses SSL|None|True|
 
@@ -1139,7 +1139,7 @@ This action updates the status of a workbench alert.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Workbench alert ID|None|WB-14-20190709-00003|
-|if_match|string|None|False|The target resource will be updated only if it matches ETag of the target one|None|d41d8cd98f00b204e9800998ecf8427e|
+|if_match|string|None|False|The target resource will be updated only if it matches ETag of the target one|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |status|string|None|True|ID of the workbench you would like to update the status for|['New', 'In Progress', 'True Positive', 'False Positive']|New|
 
 Example input:

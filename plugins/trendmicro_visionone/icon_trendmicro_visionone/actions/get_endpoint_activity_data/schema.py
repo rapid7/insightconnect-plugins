@@ -324,7 +324,7 @@ class GetEndpointActivityDataOutput(insightconnect_plugin_runtime.Output):
         "process_file_hash_sha1": {
           "type": "string",
           "title": "Process File Hash SHA1",
-          "description": "The process file sha1",
+          "description": "The process file SHA1",
           "order": 34
         },
         "process_file_path": {
@@ -360,7 +360,7 @@ class GetEndpointActivityDataOutput(insightconnect_plugin_runtime.Output):
         "src_file_hash_sha1": {
           "type": "string",
           "title": "Src File Hash SHA1",
-          "description": "Source file sha1",
+          "description": "Source file SHA1",
           "order": 40
         },
         "src_file_path": {
