@@ -754,7 +754,7 @@ types:
     event_time:
       title: Event Time
       type: integer
-      description: Log collect time utc format
+      description: Log collect time UTC format
       required: false
     event_time_d_t:
       title: Event Time D T
