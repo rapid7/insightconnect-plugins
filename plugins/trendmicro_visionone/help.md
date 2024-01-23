@@ -645,7 +645,14 @@ This action uploads a custom script. Supported file extensions are .ps1, .sh; Cu
 Example input:
 
 ```
-
+{
+  "file_type": "bash",
+  "description": "Add custom script test",
+  "file": {
+    "content": "IyEvYmluL2Jhc2gKbHM=",
+    "filename": "add_script.sh"
+  }
+}
 ```
 
 ##### Output
@@ -2436,7 +2443,7 @@ Example output:
 |----|----|--------|-----------|
 |Description|string|False|Optional description for reference|
 |Object Type|string|True|Object type- domain, IP, fileSha1, fileSha256, senderMailAddress or URL|
-|Value|string|True|The object value. Full and partial matches supported. Domain partial match, (with a wildcard as the subdomain, example, .example.com) IP partial match, (IP range example, 192.168.35.1-192.168.35.254, CIDR example, 192.168.35.1/24) URL Partial match, (Supports wildcards http://, https:// at beginning, or at the end. Multiple wild cards also supported, such as , https://.example.com/path1/) SHA1 Only full match|
+|Value|string|True|The object value. Full and partial matches supported|
 
 #### collect_files
 
@@ -2533,7 +2540,7 @@ Example output:
 |----|----|--------|-----------|
 |Days to Expiration|integer|False|Indicates the number of days before the object expires. If daysToExpiration is -1, the object does not have an expiration date|
 |Object Type|string|True|Object type- domain, IP, fileSha1, fileSha256, senderMailAddress or URL|
-|Value|string|True|The object value. Full and partial matches supported. Domain partial match, (with a wildcard as the subdomain, example, .example.com) IP partial match, (IP range example, 192.168.35.1-192.168.35.254, CIDR example, 192.168.35.1/24) URL Partial match, (Supports wildcards http://, https:// at beginning, or at the end. Multiple wild cards also supported, such as , https://.example.com/path1/) SHA1 Only full match|
+|Value|string|True|The object value. Full and partial matches supported|
 |Risk Level|string|False|Risk level of a suspicious object|
 |Scan Action|string|False|Action that connected products apply after detecting a suspicious object|
 
