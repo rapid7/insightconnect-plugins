@@ -78,7 +78,7 @@ class ScanCompletionOutput(insightconnect_plugin_runtime.Output):
         "ip_address": {
           "type": "string",
           "title": "IP Address",
-          "description": "ip",
+          "description": "IP address for the asset",
           "order": 1
         },
         "hostname": {

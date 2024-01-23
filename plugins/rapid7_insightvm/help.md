@@ -224,8 +224,8 @@ This action is used to create an asset group
 |description|string|None|True|Asset group description|None|example description|
 |name|string|None|True|Asset group name|None|example name|
 |searchCriteria|object|None|False|Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
-|type|string|None|True|Asset group type|['dynamic', 'static']|dynamic|
-  
+|type|string|None|True|Asset group type|["dynamic", "static"]|dynamic|
+
 Example input:
 
 ```
@@ -263,9 +263,9 @@ This action is used to create a vulnerability exception submission
 |expiration|date|None|False|The date the vulnerability exception expires|None|2021-12-30 00:00:00|
 |key|string|None|False|The key to identify a specific instance if the type is Instance|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |port|integer|None|False|The port the vulnerability appears on if the type is Instance|None|40000|
-|reason|string|None|True|Reason for the exception|['False Positive', 'Compensating Control', 'Acceptable Use', 'Acceptable Risk', 'Other']|False Positive|
+|reason|string|None|True|Reason for the exception|["False Positive", "Compensating Control", "Acceptable Use", "Acceptable Risk", "Other"]|False Positive|
 |scope|integer|None|False|The ID of the scope the vulnerability exception applies to. May be empty if type is Global|None|1234|
-|type|string|None|True|The type of vulnerability exception to create|['Global', 'Site', 'Asset', 'Asset Group', 'Instance']|Global|
+|type|string|None|True|The type of vulnerability exception to create|["Global", "Site", "Asset", "Asset Group", "Instance"]|Global|
 |vulnerability|string|None|True|The vulnerability this exception applies to|None|vulnerability|
   
 Example input:
@@ -387,7 +387,7 @@ This action is used to create a new site
 |engine_id|integer|None|False|The identifier of a scan engine. Default scan engine is selected when not specified|None|1234|
 |excluded_addresses|[]string|[]|False|List of addresses to exclude in scan scope|None|["1234-abcd", "4567-def"]|
 |excluded_asset_groups|[]integer|[]|False|Assets associated with these asset group IDs will be excluded in the site|None|[1234, 5768]|
-|importance|string|normal|False|The site importance|['very_low', 'low', 'normal', 'high', 'very_high']|low|
+|importance|string|normal|False|The site importance|["very_low", "low", "normal", "high", "very_high"]|low|
 |included_addresses|[]string|[]|False|List of addresses to include in scan scope|None|["1234-abcd", "4567-def"]|
 |included_asset_groups|[]integer|[]|False|Assets associated with these asset group IDs will be included in the site|None|[1234, 5768]|
 |name|string|None|True|The site name. Name must be unique|None|example name|
@@ -433,11 +433,11 @@ This action is used to create a new tag
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|color|string|default|False|Tag color (only available for custom tags)|['default', 'blue', 'green', 'orange', 'purple', 'red']|default|
+|color|string|default|False|Tag color (only available for custom tags)|["default", "blue", "green", "orange", "purple", "red"]|default|
 |name|string|None|True|Tag name|None|example name|
 |searchCriteria|object|None|False|Tag search Criteria - options documentation https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
-|type|string|None|True|Tag type|['owner', 'location', 'custom']|owner|
-  
+|type|string|None|True|Tag type|["owner", "location", "custom"]|owner|
+
 Example input:
 
 ```
@@ -474,7 +474,7 @@ This action is used to create a new user account (limited to external authentica
 |access_all_asset_groups|boolean|False|True|Whether to grant the user access to all asset groups|None|False|
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|False|
 |authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|1234|
-|authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['kerberos', 'ldap', 'saml']|ldap|
+|authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|["kerberos", "ldap", "saml"]|ldap|
 |email|string|None|True|The email address of the user|None|user@example.com|
 |enabled|boolean|True|True|Whether the user account is enabled|None|True|
 |login|string|None|True|The login name of the user|None|jdoe24|
@@ -877,7 +877,7 @@ This action is used to create, generate, download, and cleanup a SQL report base
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |filters|string|{}|False|Filters in JSON format to be applied to the contents of the report; review InsightVM API documentation for filter options|None|{filters}|
 |query|string|None|True|Reporting Data Model SQL query|None|select * from dim_asset|
-|scope|string|none|True|Scope context for generated report; if set, remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID; scan scope only supports single scan ID as input|['none', 'assets', 'assetGroups', 'sites', 'tags', 'scan']|none|
+|scope|string|none|True|Scope context for generated report; if set, remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID; scan scope only supports single scan ID as input|["none", "assets", "assetGroups", "sites", "tags", "scan"]|none|
 |scope_ids|[]integer|[]|False|Scope IDs for which tickets should be generated, by default all are included|None|[1234, 5678]|
   
 Example input:
@@ -1209,8 +1209,8 @@ This action is used to list authentication sources available for InsightVM users
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |name|string|None|False|Authentication source name by which to filter, accepts regular expression patterns|None|example name|
-|type|string||False|Authentication source type by which to filter|['', 'admin', 'kerberos', 'ldap', 'normal', 'saml']|admin|
-  
+|type|string||False|Authentication source type by which to filter|["", "admin", "kerberos", "ldap", "normal", "saml"]|admin|
+
 Example input:
 
 ```
@@ -1819,8 +1819,8 @@ This action is used to get a listing of all tags and return their details
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |name|string||False|Tag name regular expression by which to filter|None|example name|
-|type|string||False|Type of tag by which to filter, all types are returned if none is specified|['owner', 'location', 'custom', 'criticality', '']|owner|
-  
+|type|string||False|Type of tag by which to filter, all types are returned if none is specified|["owner", "location", "custom", "criticality", ""]|owner|
+
 Example input:
 
 ```
@@ -2051,8 +2051,8 @@ This action is used to list reports and return their identifiers
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |name|string|None|False|Name of report, otherwise all reports by criteria|None|Name|
-|sort|string|None|True|Sort order, ascending or descending|['Ascending', 'Descending']|Ascending|
-  
+|sort|string|None|True|Sort order, ascending or descending|["Ascending", "Descending"]|Ascending|
+
 Example input:
 
 ```
@@ -2352,8 +2352,8 @@ This action is used to approve or Reject a Vulnerability Exception
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |comment|string|None|False|Comment to include in the review|None|example comment|
 |exception|integer|None|True|The vulnerability exception ID to approve or reject|None|1234|
-|review|string|None|True|Approval or rejection of the exception|['Approved', 'Rejected']|Approved|
-  
+|review|string|None|True|Approval or rejection of the exception|["Approved", "Rejected"]|Approved|
+
 Example input:
 
 ```
@@ -2568,7 +2568,7 @@ This action is used to generate results for the top remediations based on a defi
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |asset_limit|integer|None|False|The amount of assets to be returned with each top remediation; this can be used to reduce message size and processing time|None|4|
 |limit|integer|25|True|Number of remediations for which tickets should be generated|[10, 25, 50, 100]|10|
-|scope|string|none|True|Scope context for generated report; if set remediations will be scoped by each in scope ID|['none', 'assets', 'assetGroups', 'sites', 'tags', 'scan']|none|
+|scope|string|none|True|Scope context for generated report; if set remediations will be scoped by each in scope ID|["none", "assets", "assetGroups", "sites", "tags", "scan"]|none|
 |scope_ids|[]integer|[]|False|Scope IDs for which tickets should be generated, by default all are included|None|[1234, 45]|
 |vulnerability_limit|integer|None|False|The amount of vulnerabilities to be returned with each top remediation; this can be used to reduce message size and processing time|None|2|
   
@@ -2641,8 +2641,8 @@ This action is used to update the status of a scan
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|True|Scan ID|None|1234|
-|status|string|stop|True|Status to which the scan should be set (stop, resume, pause)|['stop', 'resume', 'pause']|stop|
-  
+|status|string|stop|True|Status to which the scan should be set (stop, resume, pause)|["stop", "resume", "pause"]|stop|
+
 Example input:
 
 ```
@@ -2680,7 +2680,7 @@ This action is used to update shared credentials
 |id|integer|None|False|The identifier of the credential|None|123|
 |name|string|None|True|The name of the credential|None|my-AS400-credentials|
 |port_restriction|string|None|False|Further restricts the credential to attempt to authenticate on a specific port. The port can only be restricted if the property hostRestriction is specified|None|8888|
-|site_assignment|string|None|True|Assigns the shared scan credential either to be available to all sites or to a specific list of sites. All sites - The shared scan credential is assigned to all current and future sites. specific-sites - The shared scan credential is assigned to zero sites by default. Administrators must explicitly assign sites to the shared credential. Shared scan credentials assigned to a site can disabled within the site configuration, if needed|['all-sites', 'specific-sites']|all-sites|
+|site_assignment|string|None|True|Assigns the shared scan credential either to be available to all sites or to a specific list of sites. All sites - The shared scan credential is assigned to all current and future sites. specific-sites - The shared scan credential is assigned to zero sites by default. Administrators must explicitly assign sites to the shared credential. Shared scan credentials assigned to a site can disabled within the site configuration, if needed|["all-sites", "specific-sites"]|all-sites|
 |sites|[]integer|None|False|List of site identifiers. These sites are explicitly assigned access to the shared scan credential, allowing the site to use the credential for authentication during a scan. This property can only be set if the value of property siteAssignment is set to "specific-sites". When the property siteAssignment is set to "all-sites", this property will be null|None|[]|
   
 Example input:
@@ -2745,7 +2745,7 @@ This action is used to update an existing site
 |description|string|None|True|The site's description|None|example description|
 |engine_id|integer|None|True|The identifier of a scan engine. Default scan engine is selected when not specified|None|1234|
 |id|integer|None|True|The identifier of the site|None|1234|
-|importance|string|normal|True|The site importance|['very_low', 'low', 'normal', 'high', 'very_high']|low|
+|importance|string|normal|True|The site importance|["very_low", "low", "normal", "high", "very_high"]|low|
 |name|string|None|True|The site name. Name must be unique|None|example name|
 |scan_template_id|string|None|True|The identifier of a scan template|None|1234|
   
@@ -3009,7 +3009,7 @@ This action is used to update the configuration of an existing user account
 |access_all_asset_groups|boolean|False|True|Whether to grant the user access to all asset groups|None|False|
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|False|
 |authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|567|
-|authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['normal', 'admin', 'kerberos', 'ldap', 'saml']|ldap|
+|authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|["normal", "admin", "kerberos", "ldap", "saml"]|ldap|
 |email|string|None|True|The email address of the user|None|user@example.com|
 |enabled|boolean|True|True|Whether the user account is enabled|None|True|
 |id|integer|None|True|The identifier of the user|None|1234|
@@ -3322,7 +3322,7 @@ Example output:
 |Estimated Time To Fix Per Asset|string|None|False|Estimated time to fix per asset|None|
 |Exploits|integer|None|False|Number of public exploits|None|
 |Hostname|string|None|False|Hostname|None|
-|IP Address|string|None|False|ip|None|
+|IP Address|string|None|False|IP address for the asset|None|
 |Malware Kits|integer|None|False|Number of malware kits known|None|
 |Member of Sites|[]string|None|False|Show which sites the vuln is a member of|None|
 |Nexpose ID|string|None|False|Nexpose ID|None|
@@ -3976,6 +3976,7 @@ Example output:
 
 # Version History
 
+* 7.0.1 - `Scan Completion` - Update query outputs to match schema names
 * 7.0.0 - `Scan Completion` - Rework trigger to use a new query, resulting in a new output & removed all inputs except for `site_id` | `Top Remediations` - Update vulnerability_id to nexpose_id
 * 6.2.0 - `Scan Completion` - New trigger added to retrieve vulnerability information on assets when a scan is completed | Improved error handling across all API calls
 * 6.1.1 - Update actions `Update Site Excluded Targets` and `Update Site Included Targets` to prevent error on empty addresses
