@@ -3976,7 +3976,7 @@ Example output:
 
 # Version History
 
-* 7.0.1 - `Scan Completion` - Update query outputs to match schema.
+* 7.0.1 - `Scan Completion` - Update query outputs to match schema names
 * 7.0.0 - `Scan Completion` - Rework trigger to use a new query, resulting in a new output & removed all inputs except for `site_id` | `Top Remediations` - Update vulnerability_id to nexpose_id
 * 6.2.0 - `Scan Completion` - New trigger added to retrieve vulnerability information on assets when a scan is completed | Improved error handling across all API calls
 * 6.1.1 - Update actions `Update Site Excluded Targets` and `Update Site Included Targets` to prevent error on empty addresses
