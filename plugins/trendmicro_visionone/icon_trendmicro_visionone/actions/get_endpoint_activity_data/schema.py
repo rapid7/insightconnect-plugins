@@ -35,7 +35,7 @@ class GetEndpointActivityDataInput(insightconnect_plugin_runtime.Input):
     "fields": {
       "type": "object",
       "title": "Fields",
-      "description": "Array of fields to query. (uuid, tags, pname, msgUuid, ...)",
+      "description": "JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)",
       "order": 6
     },
     "query_op": {
