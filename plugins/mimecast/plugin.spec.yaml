@@ -5,7 +5,7 @@ name: mimecast
 title: Mimecast
 description: Services for email security, archiving and continuity. Protect, manage
   and archive without compromise
-version: 5.3.3
+version: 5.3.4
 connection_version: 5
 supported_versions: ["Mimecast API 2022-11-07"]
 vendor: rapid7
@@ -997,7 +997,7 @@ actions:
         required: true
       action:
         title: Action
-        description: Set to 'block' to blacklist the URL, 'permit' to whitelist it
+        description: Set to "block" to blacklist the URL, "permit" to whitelist it
         type: string
         example: block
         required: true
@@ -1007,8 +1007,8 @@ actions:
         - permit
       match_type:
         title: Match Type
-        description: Set to 'explicit' to block or permit only instances of the full
-          URL. Set to 'domain' to block or permit any URL with the same domain
+        description: Set to "explicit" to block or permit only instances of the full
+          URL. Set to "domain" to block or permit any URL with the same domain
         type: string
         example: explicit
         required: true
@@ -1087,7 +1087,7 @@ actions:
           - 'True'
       action:
         title: 'Filter: Action'
-        description: Filter on whether or not the action is 'block' or 'permit'
+        description: Filter on whether or not the action is "block" or "permit"
         type: string
         required: false
         example: block
@@ -1098,7 +1098,7 @@ actions:
           - permit
       match_type:
         title: 'Filter: Match Type'
-        description: Filter on whether or not the match type is 'explicit' or 'domain'
+        description: Filter on whether or not the match type is "explicit" or "domain"
         type: string
         example: domain
         required: false
@@ -1143,7 +1143,7 @@ actions:
     input:
       action:
         title: Action
-        description: Either 'permit' (to bypass spam checks) or 'block' (to reject
+        description: Either "permit" (to bypass spam checks) or "block" (to reject
           the email)
         type: string
         example: block
