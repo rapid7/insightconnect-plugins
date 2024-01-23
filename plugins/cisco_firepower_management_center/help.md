@@ -136,7 +136,7 @@ This action is used to add a scan result from a third-party vulnerability scanne
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|operation|string|None|True|The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results|['ScanUpdate', 'ScanFlush']|ScanUpdate|
+|operation|string|None|True|The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results|["ScanUpdate", "ScanFlush"]|ScanUpdate|
 |scan_result|scan_result|None|False|The host scan result to be added|None|{"host": {"ip_address": "0.0.0.164", "operating_system": {"name": "Ubuntu", "vendor": "Canonical", "version": "16.04"}}, "scan_result_details": {"description": "Example description", "protocol_id": "6", "scanner_id": "ProductZImport", "source_id": "ProductZ", "vulnerability_id": "943387", "vulnerability_title": "Virus Wire 0"}}|
   
 Example input:
@@ -225,7 +225,7 @@ This action is used to add scan results from a third-party vulnerability scanner
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|operation|string|None|True|The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results|['ScanUpdate', 'ScanFlush']|ScanUpdate|
+|operation|string|None|True|The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results|["ScanUpdate", "ScanFlush"]|ScanUpdate|
 |scan_results|[]scan_result|None|False|Host scan results to be added|None|[{"host": {"ip_address": "0.0.0.164", "operating_system": {"name": "Ubuntu", "vendor": "Canonical", "version": "16.04"}}, "scan_result_details": {"description": "Example description", "protocol_id": "6", "scanner_id": "ProductZImport", "source_id": "ProductZ", "vulnerability_id": "943387", "vulnerability_title": "Virus Wire 0"}}]|
   
 Example input:
@@ -712,6 +712,7 @@ Example output:
 
 # Version History
 
+* 2.1.1 - Updated to latest SDK version | Fixed issue related to pagination
 * 2.1.0 - `Check if Address in Group`: Extended search for manually added literals | Added new output field `literal_objects`
 * 2.0.1 - Fix issue in Add Address to Group action where Network Groups that had no objects would result in action failure
 * 2.0.0 - Combine Cisco Firepower and Cisco Firepower Management Center plugins
