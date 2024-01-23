@@ -162,7 +162,7 @@ class GetEndpointActivityDataOutput(insightconnect_plugin_runtime.Output):
         "event_time": {
           "type": "integer",
           "title": "Event Time",
-          "description": "Log collect time utc format",
+          "description": "Log collect time UTC format",
           "order": 12
         },
         "event_time_d_t": {
