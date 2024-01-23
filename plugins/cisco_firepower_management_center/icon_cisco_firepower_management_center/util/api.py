@@ -86,7 +86,7 @@ class CiscoFirePowerApi:
             response = self._call_api("GET", path, params=params)
             objects.extend(response.get("items", []))
 
-            if (page + 1) * limit >= response.get("paging", {}).get("pages", 0):
+            if (page + 1) >= response.get("paging", {}).get("pages", 0):
                 break
 
         return objects

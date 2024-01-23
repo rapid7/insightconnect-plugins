@@ -7,7 +7,8 @@ vendor: rapid7
 support: community
 status: []
 description: This plugin utilizes Cisco Firepower Management Center to create URL block policies and manage address objects to block hosts
-version: 2.1.0
+version: 2.1.1
+connection_version: 2
 supported_versions: ["6.6.0"]
 sdk:
   type: slim
