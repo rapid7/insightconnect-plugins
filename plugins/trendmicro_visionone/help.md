@@ -205,7 +205,7 @@ This action displays count of search results from the Endpoint Activity Data sou
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15T12:00:00Z|
-|fields|object|None|True|Array of fields to query. (uuid, tags, pname, msgUuid, ...)|None|None|
+|fields|object|None|True|JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)|None|None|
 |query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
 |select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|[]|
 |start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15T10:00:00Z|
@@ -258,7 +258,7 @@ This action displays results from the Endpoint Activity Data source in a paginat
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15T12:00:00Z|
-|fields|object|None|True|Array of fields to query. (uuid, tags, pname, msgUuid, ...)|None|None|
+|fields|object|None|True|JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)|None|None|
 |query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
 |select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|[]|
 |start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15T10:00:00Z|
@@ -369,7 +369,7 @@ This action displays count of search results from the Email Activity Data source
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15T12:00:00Z|
-|fields|object|None|True|Array of fields to query. (uuid, tags, pname, msgUuid, ...)|None|None|
+|fields|object|None|True|JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)|None|None|
 |query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
 |select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|[]|
 |start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15T10:00:00Z|
@@ -422,7 +422,7 @@ This action displays search results from the Email Activity Data source in a pag
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15T12:00:00Z|
-|fields|object|None|True|Array of fields to query. (uuid, tags, pname, msgUuid, ...)|None|None|
+|fields|object|None|True|JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)|None|None|
 |query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
 |select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|[]|
 |start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15T10:00:00Z|
@@ -505,7 +505,7 @@ This action retrieves information about the available custom scripts and display
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|object|None|True|Array of fields to query. (filter=fileName eq 'test.ps1' or fileType eq 'powershell')|None|None|
+|fields|object|None|True|JSON object of fields to query by fileName or fileType|None|None|
 |query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
 
 Example input:
@@ -645,21 +645,14 @@ This action uploads a custom script. Supported file extensions are .ps1, .sh; Cu
 Example input:
 
 ```
-{
-  "file_type": "bash",
-  "description": "Add custom script test",
-  "file": {
-    "content": "IyEvYmluL2Jhc2gKbHM=",
-    "filename": "add_script.sh"
-  }
-}
+
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|location|string|True|URL that indicates the location of a script file|
+|script_id|string|True|ID of added script file|
 
 Example output:
 
@@ -697,11 +690,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|result_code|string|True|Result message of adding workbench note|202|
-|location|string|True|URL of the created resource|www.location.local|
-|note_id|string|True|ID of the note created|345|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|note_id|string|True|ID of the note created|
+|result_code|string|True|Result message of adding workbench note|
 
 Example output:
 
@@ -1325,7 +1317,7 @@ This action retrieves information about a specific endpoint.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|endpoints|[]string|None|True|Array of endpoints to query by their hostname, macAddress, agentGuid or IP, formated as bracket array separated by comma|None|[]|
+|fields|object|None|True|JSON object of endpoint identifiers to query by their hostname, macAddress, agentGuid or IP|None|None|
 |query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
 
 Example input:
@@ -2570,6 +2562,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.1 - Refactored pytmv1 usage
 * 2.1.0 - Added Custom Scripts and Activity related actions
 * 2.0.1 - Version bump of pytmv1 library
 * 2.0.0 - Enabled multiple inputs for Get Endpoint Data, reduced API call frequency & General Refactoring
