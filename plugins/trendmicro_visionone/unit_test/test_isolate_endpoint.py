@@ -14,7 +14,9 @@ class TestIsolateEndpoint(TestCase):
         self.action.connection = self.connection
         self.mock_params = mock_params("isolate_endpoint")
 
-    @skip("Integration test - we don't want to run this, and it is getting 500 from endpoint causing a failure.")
+    @skip(
+        "Integration test - we don't want to run this, and it is getting 500 from endpoint causing a failure."
+    )
     def test_integration_isolate_endpoint(self):
         response = self.action.run(self.mock_params["input"])
         for key in response.keys():
@@ -28,6 +30,8 @@ class TestIsolateEndpoint(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_isolate_endpoint_failure(self):
-        self.action.connection.client.endpoint.isolate = MagicMock(side_effect=PluginException)
+        self.action.connection.client.endpoint.isolate = MagicMock(
+            side_effect=PluginException
+        )
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

@@ -14,9 +14,7 @@ class TestRemoveFromExceptionList(TestCase):
         self.action.connection = self.connection
         self.mock_params = mock_params("remove_from_exception_list")
 
-    @skip(
-        "Integration test - we don't want to run this, and it is getting 500 from endpoint causing a failure."
-    )
+    @skip("Integration test - we don't want to run this, and it is getting 500 from endpoint causing a failure.")
     def test_integration_remove_from_exception_list(self):
         response = self.action.run(self.mock_params["input"])
         for key in response.keys():
@@ -30,8 +28,6 @@ class TestRemoveFromExceptionList(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_remove_from_exception_list_failure(self):
-        self.action.connection.client.object.delete_exception = MagicMock(
-            side_effect=PluginException
-        )
+        self.action.connection.client.object.delete_exception = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])
