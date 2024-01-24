@@ -1,6 +1,6 @@
 # Description
 
-[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.8.1 and its standard library as well as the following 3rd party libraries: 
+[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.18 and its standard library as well as the following 3rd party libraries: 
 
 * [requests 2.31.0](https://requests.readthedocs.io/en/master/)
 * [maya 0.6.1](https://pypi.python.org/pypi/maya)
@@ -163,5 +163,5 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 
 ## References
   
-* [Python 3 Language Reference](https://docs.python.org/3/reference/index.html)  
+* [Python 3 Language Reference](https://docs.python.org/3/reference/index.html) 
 * [InsightConnect Python Plugin Guide](https://docs.rapid7.com/insightconnect/python-2-or-3-script/)
