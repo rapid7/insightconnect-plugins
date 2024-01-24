@@ -43,7 +43,7 @@ class PollSandboxSuspiciousList(insightconnect_plugin_runtime.Trigger):
                 )
             # Json load suspicious list objects
             sandbox_suspicious_list_resp = []
-            for item in response.response.dict().get("items"):
+            for item in response.response.model_dump().get("items"):
                 sandbox_suspicious_list_resp.append(json.loads(json.dumps(item)))
             # Return result
             self.logger.info("Returning Results...")

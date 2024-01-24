@@ -77,7 +77,7 @@ class AddToSuspiciousList(insightconnect_plugin_runtime.Action):
                 assistance="Please check the input parameters and try again.",
                 data=response.errors,
             )
-        items = response.response.dict().get("items")
+        items = response.response.model_dump().get("items")
         # Avoid None value
         for item in items:
             item["task_id"] = "None" if item.get("task_id") is None else item["task_id"]

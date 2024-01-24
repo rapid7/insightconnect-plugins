@@ -22,8 +22,10 @@ class TestDownloadCustomScript(TestCase):
 
     def test_download_custom_script_success(self):
         expected_result = self.mock_params["output"]
+        mock_content = "mock content"
         mock_response = MagicMock()
-        mock_response.response.content = b"mock content"
+        mock_response.response.content = mock_content.encode("utf-8")
+        mock_response.response.text = mock_content
         self.action.connection.client.script.download = MagicMock(return_value=mock_response)
         response = self.action.run(self.mock_params["input"])
         for key in response.keys():

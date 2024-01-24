@@ -36,4 +36,4 @@ class SubmitUrlsToSandbox(insightconnect_plugin_runtime.Action):
             )
         # Return results
         self.logger.info("Returning Results...")
-        return {Output.SUBMIT_URLS_RESP: response.response.dict().get("items")}
+        return {Output.SUBMIT_URLS_RESP: response.response.model_dump().get("items")}
