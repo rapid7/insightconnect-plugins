@@ -1,8 +1,8 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
-from komand.exceptions import ConnectionTestException, PluginException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 from splunklib.binding import HTTPError, AuthenticationError
 from splunklib.client import Service
@@ -13,7 +13,7 @@ from ssl import SSLError
 import socket
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
 
     _EXCEPTIONS = {
         HTTPError: PluginException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD),

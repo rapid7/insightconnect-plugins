@@ -1,13 +1,13 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import DisplaySearchResultsInput, DisplaySearchResultsOutput, Input, Output, Component
 
 # Custom imports below
 import splunklib.results as results
 from time import sleep
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class DisplaySearchResults(komand.Action):
+class DisplaySearchResults(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="display_search_results",

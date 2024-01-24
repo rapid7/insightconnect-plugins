@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import (
     GetSavedSearchJobHistoryInput,
     GetSavedSearchJobHistoryOutput,
@@ -9,11 +9,11 @@ from .schema import (
 
 # Custom imports below
 import json
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from json import JSONDecodeError
 
 
-class GetSavedSearchJobHistory(komand.Action):
+class GetSavedSearchJobHistory(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_saved_search_job_history",

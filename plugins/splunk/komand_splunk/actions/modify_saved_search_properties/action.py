@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import (
     ModifySavedSearchPropertiesInput,
     ModifySavedSearchPropertiesOutput,
@@ -10,10 +10,10 @@ from .schema import (
 # Custom imports below
 import json
 from json import JSONDecodeError
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class ModifySavedSearchProperties(komand.Action):
+class ModifySavedSearchProperties(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="modify_saved_search_properties",

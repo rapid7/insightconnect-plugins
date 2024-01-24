@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CreateSavedSearchInput, CreateSavedSearchOutput, Input, Output, Component
 
 # Custom imports below
 import json
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class CreateSavedSearch(komand.Action):
+class CreateSavedSearch(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_saved_search",

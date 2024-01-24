@@ -1,14 +1,14 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SearchInput, SearchOutput, Input, Output, Component
 
 # Custom imports below
 import json
 from datetime import datetime
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from typing import Optional
 
 
-class Search(komand.Action):
+class Search(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="search",
