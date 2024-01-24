@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import DisplaySearchResultsInput, DisplaySearchResultsOutput, Input, Output, Component
 
 # Custom imports below
-from splunklib import results as results
+from splunklib import results
 from time import sleep
 from insightconnect_plugin_runtime.exceptions import PluginException
 

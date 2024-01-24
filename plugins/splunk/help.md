@@ -401,7 +401,7 @@ Example output:
 
 # Version History
 
-* 3.0.4 - Update splunk-sdk dependency | Refresh with new tooling | Update SDK
+* 4.0.0 - Update splunk-sdk dependency | Refresh with new tooling | Update SDK
 * 3.0.3 - Add `search_timeframe` input to Search action
 * 3.0.2 - Fix issue with typos in help.md and plugin description
 * 3.0.1 - New spec and help.md format for the Extension Library

@@ -6,7 +6,7 @@ from insightconnect_plugin_runtime.exceptions import ConnectionTestException, Pl
 
 from splunklib.binding import HTTPError, AuthenticationError
 from splunklib.client import Service
-from splunklib import client as client
+from splunklib import client
 
 from xml.etree.ElementTree import ParseError  # noqa: B405
 from ssl import SSLError
