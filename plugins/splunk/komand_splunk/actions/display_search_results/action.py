@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import DisplaySearchResultsInput, DisplaySearchResultsOutput, Input, Output, Component
 
 # Custom imports below
-import splunklib.results as results
+from splunklib import results as results
 from time import sleep
 from insightconnect_plugin_runtime.exceptions import PluginException
 
@@ -37,7 +37,7 @@ class DisplaySearchResults(insightconnect_plugin_runtime.Action):
         while not search_job.is_done() and timer < timeout:
             sleep(timer_step)
             timer += timer_step
-            self.logger.info("Search not complete, sleeping for %s seconds" % timer_step)
+            self.logger.info(f"Search not complete, sleeping for {timer_step} seconds")
         if timer > timeout:
             self.logger.info("Timeout occurred, finalizing and attempting to retrieve results...")
             search_job.finalize()

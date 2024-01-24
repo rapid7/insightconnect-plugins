@@ -24,5 +24,5 @@ class DeleteSavedSearch(insightconnect_plugin_runtime.Action):
 
         # Do we want to rely on an exception being the only way of knowing if it was successful?
         # We can always do a query of available saved searches to verify, but it might be overkill.
-        self.logger.info("Deleted saved search %s" % saved_search_name)
+        self.logger.info(f"Deleted saved search {saved_search_name}")
         return {Output.SUCCESS: True}

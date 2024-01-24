@@ -24,14 +24,14 @@ class CreateSavedSearch(insightconnect_plugin_runtime.Action):
             new_saved_search = self.connection.client.saved_searches.create(
                 saved_search_name, query, **optional_parameters
             )
-        except Exception as e:
+        except Exception as error:
             raise PluginException(
                 cause="Unable to create saved search!",
                 assistance="Ensure your properties and query are valid.",
-                data=e,
-            ) from e
+                data=error,
+            ) from error
 
-        self.logger.info("Created new saved search: %s" % new_saved_search.name)
+        self.logger.info(f"Created new saved search: {new_saved_search.name} ")
 
         new_saved_search_json = json.loads(
             json.dumps(new_saved_search, default=lambda o: o.__dict__, sort_keys=True, indent=4)

@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import ListSavedSearchesInput, ListSavedSearchesOutput, Input, Output, Component
+from .schema import ListSavedSearchesInput, ListSavedSearchesOutput, Output, Component
 
 # Custom imports below
 import json
@@ -14,10 +14,10 @@ class ListSavedSearches(insightconnect_plugin_runtime.Action):
             output=ListSavedSearchesOutput(),
         )
 
-    def run(self, params={}):
+    def run(self):
         saved_searches = self.connection.client.saved_searches.list()
 
-        saved_searches_json = list()
+        saved_searches_json = []
 
         # Do all this nonsense to get our results into json array
         for saved_search in saved_searches:
