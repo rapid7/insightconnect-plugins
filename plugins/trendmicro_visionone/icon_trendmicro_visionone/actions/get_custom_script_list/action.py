@@ -36,7 +36,7 @@ class GetCustomScriptList(insightconnect_plugin_runtime.Action):
         # Make Action API Call
         self.logger.info("Making API Call...")
         response = client.script.consume(
-            lambda script_list_data: new_script_list_data.append(script_list_data.dict()),
+            lambda script_list_data: new_script_list_data.append(script_list_data.model_dump()),
             pytmv1.QueryOp(query_op),
             **fields,
         )

@@ -36,7 +36,7 @@ class GetTaskResult(insightconnect_plugin_runtime.Action):
                 assistance="Please check the task ID and try again.",
                 data=response,
             )
-        action = response.response.dict().get("action", "")
+        action = response.response.model_dump().get("action", "")
         action_type = RESPONSE_MAPPING.get(action)
         response = client.task.get_result_class(
             task_id=task_id,
@@ -51,7 +51,7 @@ class GetTaskResult(insightconnect_plugin_runtime.Action):
                 data=response,
             )
         # Avoid None values
-        response_dict = response.response.dict()
+        response_dict = response.response.model_dump()
         for key, value in response_dict.items():
             if value is None and key in ["file_size", "pid"]:
                 response_dict[key] = 0

@@ -41,7 +41,7 @@ class GetEndpointActivityData(insightconnect_plugin_runtime.Action):
         # Make Action API Call
         self.logger.info("Making API Call...")
         response = client.endpoint.consume_activity(
-            lambda endpoint_activity_data: new_endpoint_activity_data.append(endpoint_activity_data.dict()),
+            lambda endpoint_activity_data: new_endpoint_activity_data.append(endpoint_activity_data.model_dump()),
             start_time=start_date_time,
             end_time=end_date_time,
             select=select,

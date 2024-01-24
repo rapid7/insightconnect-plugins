@@ -665,7 +665,8 @@ Example output:
 
 ```
 {
-  "location": "http://tmv1-mock.trendmicro.com/v3.0/response/customScripts/1"
+  "$success": true,
+  "script_id": "f47abbc4-2406-407c-85cb-9177126e7e24"
 }
 ```
 
@@ -1331,10 +1332,10 @@ Example input:
 
 ```
 {
-  "endpoints": [
-    "127.127.127.127",
-    "1.2.3.4"
-  ],
+  "fields": {
+    "ip": "127.127.127.127",
+    "endpointName": "client1"
+  },
   "query_op": " or "
 }
 ```
