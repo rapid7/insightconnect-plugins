@@ -99,15 +99,24 @@ class MimecastAPI:
             method="POST", url=f"{self.url}{uri}", headers=self._prepare_header(uri), data=str(payload)
         )
         self._check_rate_limiting(request)
+
         if "attachment" in request.headers.get("Content-Disposition", "") or self._is_last_token(request):
             combined_json_list = self._handle_zip_file(request)
             return combined_json_list, request.headers, request.status_code
 
-        response = request.json()
-        status_code = response.get(META_FIELD, {}).get(STATUS_FIELD)
         try:
+            response = request.json()
+            status_code = response.get(META_FIELD, {}).get(STATUS_FIELD)
             if response.get(FAIL_FIELD):
                 self._handle_siem_logs_error_response(response, status_code)
+        except json.JSONDecodeError as json_error:
+            error_info = f'response content="{request.content}", response headers="{request.headers}"'
+            raise ApiClientException(
+                cause=json_error,
+                data=error_info,
+                preset=PluginException.Preset.INVALID_JSON,
+                status_code=request.status_code,
+            )
         except PluginException as error:
             status_code = error.status_code if isinstance(error, ApiClientException) else status_code
             raise ApiClientException(

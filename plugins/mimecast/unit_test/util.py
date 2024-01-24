@@ -79,7 +79,7 @@ class Util:
                 return self.headers_value
 
             def json(self):
-                return self.json_value
+                return json.loads(self.json_value)
 
         if kwargs.get("url") == "https://eu-api.mimecast.com/api/directory/add-group-member":
             if "test4@rapid7.com" in kwargs.get(DATA_FIELD):
@@ -161,14 +161,19 @@ class Util:
                         }
                     ],
                 }
-                resp = MockResponseZip(401, b"", {}, json_value)
+                resp = MockResponseZip(401, b"", {}, json.dumps(json_value))
             elif "force_json" in data:
-                json_decode = json.decoder.JSONDecodeError("Test", "test", 1)
-                resp = MockResponseZip(200, Util.get_mocked_zip(), headers, json_decode)
+                resp = MockResponseZip(200, Util.get_mocked_zip(), headers, "throw json error")
             elif "no_results" in data:
-                resp = MockResponseZip(200, b"", {"mc-siem-token": "token123"}, {"meta": {"status": 200}})
+                resp = MockResponseZip(200, b"", {"mc-siem-token": "token123"}, '{"meta": {"status": 200}}')
             elif "path_traversal" in data:
-                resp = MockResponseZip(200, Util.get_mocked_zip(True), headers, {"meta": {"status": 200}})
+                resp = MockResponseZip(200, Util.get_mocked_zip(True), headers, '{"meta": {"status": 200}}')
+            elif "request.json" in data:
+                # remove attachment header so we don't get an attachment, which causes the code to evaluate
+                # `_is_last_token` which i turn hits a JSON encode error, resulting in forcing the code into the last
+                # try/except in `get_siem_logs`
+                headers["Content-Disposition"] = ""
+                resp = MockResponseZip(200, "this is bad json returned", headers, "throw json error")
             return resp
         return "Not implemented"
 
