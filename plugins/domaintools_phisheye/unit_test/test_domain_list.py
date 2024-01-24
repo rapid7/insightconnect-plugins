@@ -6,7 +6,6 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch, Mock
 
-from parameterized import parameterized
 
 from icon_domaintools_phisheye.actions.domain_list import DomainList
 from icon_domaintools_phisheye.actions.domain_list.schema import Input
