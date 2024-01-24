@@ -1,6 +1,6 @@
 # Description
 
-[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.8.1 and its standard library as well as the following 3rd party libraries: 
+[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.18 and its standard library as well as the following 3rd party libraries: 
 
 * [requests 2.31.0](https://requests.readthedocs.io/en/master/)
 * [maya 0.6.1](https://pypi.python.org/pypi/maya)
@@ -61,9 +61,10 @@ Example input:
 
 ### Actions
 
-#### Run Function
 
-Run a Python 3 function
+#### Run Function
+  
+This action is used to run a Python 3 function
 
 ##### Input
 
@@ -87,7 +88,7 @@ Example input:
 
 ```
 {
-  "function": "def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password, secret_key)\n\treturn {'result1': 'example output 1', 'result2': 'example output 2'}",
+  "function": "def run(params={}):\\n    return {}",
   "input": {
     "some_input": "example input"
   }
@@ -118,7 +119,6 @@ Example output:
 ### Triggers
   
 *This plugin does not contain any triggers.*
-
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -134,6 +134,7 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 
 # Version History
 
+* 4.0.8 - Updated the SDK to latest version | Fix issue where input argument was too long
 * 4.0.7 - Updated the SDK | Updated Python version to `3.9.18` | Added handler to run function separately
 * 4.0.6 - Added empty `__init__.py` file to `unit_test` folder | Refreshed with new tooling
 * 4.0.5 - Updated the SDK version to include output masking | Updated all dependencies to the newest versions
@@ -162,5 +163,5 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 
 ## References
   
-* [Python 3 Language Reference](https://docs.python.org/3/reference/index.html)  
+* [Python 3 Language Reference](https://docs.python.org/3/reference/index.html) 
 * [InsightConnect Python Plugin Guide](https://docs.rapid7.com/insightconnect/python-2-or-3-script/)
