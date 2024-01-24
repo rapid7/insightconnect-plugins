@@ -29,8 +29,6 @@ class TestGetEmailActivityData(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_3_get_email_activity_data_failure(self):
-        self.action.connection.client.email.consume_activity = MagicMock(
-            side_effect=PluginException
-        )
+        self.action.connection.client.email.consume_activity = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])
