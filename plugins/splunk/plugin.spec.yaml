@@ -4,7 +4,7 @@ products: [insightconnect]
 name: splunk
 title: Splunk
 description: The Splunk plugin allows you to search, monitor, and analyze machine data
-version: 3.0.3
+version: 3.0.4
 vendor: rapid7
 support: rapid7
 status: []
@@ -22,36 +22,45 @@ hub_tags:
   features: []
 connection:
   host:
-    description: Hostname or IP address of Splunk server to connect to e.g. splunk.example.com
+    title: Host
+    description: Hostname or IP address of Splunk server to connect to
     type: string
     required: true
+    example: splunk.example.com
   port:
-    description: Port the Splunk API is listening on. Default is 8089
+    title: Port
+    description: Port the Splunk API is listening on
     type: integer
     default: 8089
+    example: 8089
     required: true
   credentials:
     title: Username and Password
     description: Username and password
     type: credential_username_password
+    example: {"username": "user", "password": "pass"}
     required: false
   use_ssl:
     title: Use SSL
     type: boolean
     description: Whether or not to use SSL
     required: true
+    example: true
   license:
+    title: License
     description: License type for Splunk host
     type: string
     enum:
     - Enterprise
     - Free
     required: true
+    example: Free
   ssl_verify:
     title: SSL Verify
     description: Verify server's SSL/TLS certificate
     type: boolean
     required: true
+    example: true
 
 actions:
   insert:
@@ -59,33 +68,44 @@ actions:
     description: Insert events into an index
     input:
       index:
+        title: Index
         type: string
         description: Name of index
+        example: Index
         required: true
       event:
+        title: Event
         type: string
         description: The event to submit
+        example: Event
         required: true
       host:
+        title: Host
         type: string
-        description: The source host, e.g. localhost or 192.168.2.2
+        description: The source host
+        example: localhost or 192.168.2.2
         required: false
       source:
+        title: Source
         type: string
-        description: Source of the event (e.g., /var/log/syslog)
+        description: Source of the event
+        example: /var/log/syslog
         required: false
       sourcetype:
+        title: Source Type
         type: string
-        description: The optional source type value of the event (e.g. access_combined,
-          syslog)
+        description: The optional source type value of the event
+        example: access_combined, syslog
         required: false
   search:
     title: Search
     description: Run a query
     input:
       query:
+        title: Query
         type: string
-        description: Run a search query (e.g. search *)
+        description: Run a search query
+        example: search *
         required: true
       count:
         title: Count
@@ -93,93 +113,121 @@ actions:
         description: The maximum number of results to return. Set to 0 for unlimited
           results
         required: true
+        example: 100
         default: 100
       search_timeframe:
         title: Search Timeframe
-        description: The specified timeframe for the search. Default searches over all time. Separated with dash, in the form of Unix epoch timestamps, e.g. 1498824598-1598824598. If end time is left blank, it defaults to the current time
+        description: The specified timeframe for the search. Default searches over all time. Separated with dash, in the form of Unix epoch timestamps. If end time is left blank, it defaults to the current time
         type: string
         example: 1598984278-1598984478
         required: false
     output:
       result:
+        title: Result
         type: object
         description: Raw search results
         required: false
+        example: {}
       count:
+        title: Count
         type: integer
         description: Count of results returned
+        example: 2
         required: false
   list_saved_searches:
     title: List Saved Searches
     description: Lists all saved searches
-    input: null
     output:
       saved_searches:
+        title: Saved Searches
         type: '[]object'
         description: Array of saved search objects
+        example: [{}, {}]
         required: false
   get_saved_search_job_history:
     title: Get Saved Search Job History
     description: Returns the job history of a specified saved search
     input:
       saved_search_name:
+        title: Saved Search Name
         type: string
         description: Name of a saved search
         required: true
+        example: Example Name
     output:
       job_history:
+        title: Job History
         type: '[]object'
         description: Job history belonging to a saved search
         required: false
+        example: [{}, {}]
   run_saved_search:
     title: Run Saved Search
     description: Runs a saved search
     input:
       saved_search_name:
+        title: Saved Search Name
         type: string
         description: Name of saved search to run
         required: true
+        example: Example Name
     output:
       job_id:
+        title: Job ID
         type: string
         description: Job ID for the search job created
         required: false
+        example: job-id-identifier
   display_search_results:
     title: Display Search Results
     description: Displays the search results from a job
     input:
       job_id:
+        title: Job ID
         type: string
         description: Job ID to look up results for
         required: true
+        example: job-id-identifier
       timeout:
+        title: Timeout
         type: number
         description: Duration of time, in seconds, to wait for retrieving results
+        example: 50
         required: true
     output:
       search_results:
+        title: Search Results
         type: '[]object'
         description: Search results from a job
+        example: [{}, {}]
         required: false
   create_saved_search:
     title: Create Saved Search
     description: Creates a saved search
     input:
       saved_search_name:
+        title: Saved Search Name
         type: string
         description: Name to give to the saved search
         required: true
+        example: Example Name
       query:
+        title: Query
         type: string
         description: Search query
         required: true
+        example: search-query
       properties:
+        title: Properties
         type: object
         description: JSON object containing additional properties to save with the saved search
         required: false
+        example: {}
     output:
       saved_search:
+        title: Saved Search
         type: object
+        example: {}
         description: Newly created saved search object
         required: false
   delete_saved_search:
@@ -187,11 +235,14 @@ actions:
     description: Deletes a saved search
     input:
       saved_search_name:
+        title: Saved Search Name
         type: string
         description: Name of the saved search to delete
         required: true
+        example: Example Name
     output:
       success:
+        title: Success
         type: boolean
         description: Whether or not the deletion was successful
         required: false
@@ -200,11 +251,15 @@ actions:
     description: Returns the properties for a saved search
     input:
       saved_search_name:
+        title: Saved Search Name
         type: string
+        example: Example Name
         description: Name of saved search to display properties for
         required: true
     output:
       properties:
+        title: Properties
+        example: {}
         type: object
         description: JSON object containing saved search properties
         required: false
@@ -213,15 +268,21 @@ actions:
     description: Modifies the properties of a saved search
     input:
       saved_search_name:
+        title: Saved Search Name
+        example: Example name
         type: string
         description: Name of saved search to display properties for
         required: true
       properties:
+        title: Properties
+        example: {}
         type: object
         description: JSON object of properties and values to modify
         required: true
     output:
       success:
+        title: Success
+        example: true
         type: boolean
         description: Whether or not the update was successful
         required: false
