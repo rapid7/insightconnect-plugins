@@ -119,8 +119,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|False|Whether or not the deletion was successful|None|
-  
+|success|boolean|False|Whether or not the deletion was successful|True|
+
 Example output:
 
 ```
