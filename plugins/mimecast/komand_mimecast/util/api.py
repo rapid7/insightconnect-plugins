@@ -117,15 +117,6 @@ class MimecastAPI:
                 preset=PluginException.Preset.INVALID_JSON,
                 status_code=request.status_code,
             )
-        except PluginException as error:
-            status_code = error.status_code if isinstance(error, ApiClientException) else status_code
-            raise ApiClientException(
-                cause=error.cause,
-                assistance=error.assistance,
-                data=error.data,
-                preset=error.preset,
-                status_code=status_code,
-            )
         raise ApiClientException(preset=PluginException.Preset.UNKNOWN, data=response, status_code=status_code)
 
     def _is_last_token(self, request: requests.Response) -> bool:
@@ -140,9 +131,9 @@ class MimecastAPI:
         """
 
         try:
-            last_token = request.json().get("meta", {}).get(IS_LAST_TOKEN_FIELD, False)
+            last_token = IS_LAST_TOKEN_FIELD in json.dumps(request.json())
             request.headers.update({IS_LAST_TOKEN_FIELD: last_token})
-            return last_token
+            return True
         except json.JSONDecodeError:
             return False
 
@@ -179,17 +170,31 @@ class MimecastAPI:
             List[Dict]: A list of dictionaries, where each dictionary represents a log entry extracted from the ZIP file
         """
         try:
-            content = self.sanitise_content(request.content)
-            with ZipFile(BytesIO(content)) as my_zip:
-                combined_json_list = [
-                    log for file_name in my_zip.namelist() for log in json.loads(my_zip.read(file_name)).get("data")
-                ]
+            with ZipFile(BytesIO(request.content)) as my_zip:
+                combined_json_list = []
+                for file_name in my_zip.namelist():
+                    self.logger.info(f"About to read file name {file_name}")
+                    try:
+                        contents = my_zip.read(file_name)
+                        for log in json.loads(contents).get("data"):
+                            combined_json_list += log
+                    except json.decoder.JSONDecodeError as json_error:
+                        self.logger.error(f"JSON decode error on file, will continue loop... "
+                                          f"error: {json_error}, contents: {contents}")
+                        continue
+                    except Exception as gen_exception:
+                        self.logger.error(f"Hit an unexpected error, will continue loop..."
+                                          f"error: {gen_exception}", exc_info=True)
+                        continue
             return combined_json_list
         except BadZipFile as error:
             # empty response from Mimecast can hit this, which we know is not an error, don't log it
             if error.args[0] != "File is not a zip file":
-                self.logger.error(f"Hit BadZipFile, returning []. Error: {error}")
-            return []
+                self.logger.error(f"Hit BadZipFile, returning []. Error: {error}", exc_info=True)
+        except Exception as exception_error:
+            self.logger.error(f"Hit an unexpected error, returning []. Error: {exception_error}", exc_info=True)
+        return []
+
 
     def _prepare_header(self, uri: str) -> dict:
         # Generate request header values
@@ -336,12 +341,3 @@ class MimecastAPI:
             return response
 
         self._handle_status_code_response(response, status_code)
-
-    @staticmethod
-    def sanitise_content(request_content: bytes) -> bytes:
-        # Sanitise file names to help guard against path traversal
-        sanitised_content = request_content.replace(b"%2e%2e%2f", b"../")
-        sanitised_content = sanitised_content.replace(b"../", b"")
-        sanitised_content = sanitised_content.replace(b"%2e%2e%5C", b"..\\")
-        sanitised_content = sanitised_content.replace(b"..\\", b"")
-        return sanitised_content

@@ -27,9 +27,9 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             state=MonitorSiemLogsState(),
         )
 
-    def run(self, params={}, state={}) -> (List[Dict], Dict):  # pylint: disable=unused-argument  # noqa: MC0001
-        has_more_pages = False
+    def run(self, params={}, state={}) -> (List[Dict], Dict):  # pylint: disable=unused-argument
         try:
+            has_more_pages = False
             header_next_token = state.get(self.NEXT_TOKEN, "")
 
             if not header_next_token:
@@ -45,11 +45,11 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                         break
                 except ApiClientException as error:
                     self.logger.error(
+                        f"An API client exception has been raised. Status code: {error.status_code}. Error: {error}"
+                        f"returning state={state}, has_more_pages={has_more_pages}"
                         f"An exception has been raised during retrieval of siem logs. Status code: {error.status_code} "
-                        f"Error: {error}, returning state={state}, has_more_pages={has_more_pages}"
-                    )
+                        f"Error: {error}, returning state={state}, has_more_pages={has_more_pages}")
                     return [], state, has_more_pages, error.status_code, error
-
                 header_next_token = headers.get(self.HEADER_NEXT_TOKEN)
                 output = self._filter_and_sort_recent_events(output)
                 if output:
@@ -69,7 +69,6 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 self.logger.error(f"An exception has been raised. {gen_info}", exc_info=True)
                 exp = PluginException(preset=PluginException.Preset.UNKNOWN, data=gen_error)
             return [], state, has_more_pages, 500, exp
-
     def _filter_and_sort_recent_events(self, task_output: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
         Filters and sorts a list of events to retrieve only the recent events.
@@ -86,7 +85,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             map(
                 lambda event: event.get_dict(),
                 filter(
-                    lambda event: event.compare_datetime(get_time_hours_ago(hours_ago=24)),
+                    lambda event: event.compare_datetime(get_time_hours_ago(hours_ago=140)),
                     [EventLogs(data=event) for event in task_output],
                 ),
             ),
