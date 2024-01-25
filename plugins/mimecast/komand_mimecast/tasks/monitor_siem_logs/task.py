@@ -12,6 +12,8 @@ from ...util.constants import IS_LAST_TOKEN_FIELD
 from ...util.event import EventLogs
 from ...util.exceptions import ApiClientException
 
+CUTOFF = 96
+
 
 class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
     NEXT_TOKEN = "next_token"  # nosec
@@ -45,7 +47,6 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                         break
                 except ApiClientException as error:
                     self.logger.error(
-                        f"returning state={state}, has_more_pages={has_more_pages}"
                         f"An exception has been raised during retrieval of siem logs. Status code: {error.status_code} "
                         f"Error: {error}, returning state={state}, has_more_pages={has_more_pages}"
                     )
@@ -86,7 +87,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             map(
                 lambda event: event.get_dict(),
                 filter(
-                    lambda event: event.compare_datetime(get_time_hours_ago(hours_ago=96)),
+                    lambda event: event.compare_datetime(get_time_hours_ago(hours_ago=CUTOFF)),
                     [EventLogs(data=event) for event in task_output],
                 ),
             ),

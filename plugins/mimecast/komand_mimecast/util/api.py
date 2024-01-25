@@ -189,7 +189,7 @@ class MimecastAPI:
                             combined_json_list += [log]
                     except json.decoder.JSONDecodeError as json_error:
                         self.logger.error(
-                            f"JSON decode error on file, will continue loop... "
+                            f"JSON decode error on file ({file_name}), will continue loop... "
                             f"error: {json_error}, contents: {contents}"
                         )
                         continue
