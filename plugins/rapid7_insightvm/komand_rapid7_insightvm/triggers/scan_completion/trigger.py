@@ -109,7 +109,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             "vulnerability_instances",
             "days_since_vuln_first_published",
             "days_present_on_asset",
-            'solution_id'
+            "solution_id",
         )
         float_keys = ("cvss_score", "cvss_v3_score")
 
