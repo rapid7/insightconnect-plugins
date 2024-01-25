@@ -45,7 +45,6 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                         break
                 except ApiClientException as error:
                     self.logger.error(
-                        f"An API client exception has been raised. Status code: {error.status_code}. Error: {error}"
                         f"returning state={state}, has_more_pages={has_more_pages}"
                         f"An exception has been raised during retrieval of siem logs. Status code: {error.status_code} "
                         f"Error: {error}, returning state={state}, has_more_pages={has_more_pages}"
