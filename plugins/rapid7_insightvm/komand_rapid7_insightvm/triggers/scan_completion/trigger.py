@@ -35,7 +35,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             latest_scan_id = self.find_latest_completed_scan(site_id, cached=True)
 
             # Check if latest is in cache
-            if latest_scan_id == starting_point:
+            if latest_scan_id != starting_point:
                 self.logger.info("No new scans, sleeping 1 minute.")
                 time.sleep(60)
                 continue
@@ -119,7 +119,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
             if item == "member_of_sites":
                 row[item] = value.split(",")
             if item == float_keys:
-                if row[item] == "":
+                if value == "":
                     row[item] = 0
                 else:
                     row[item] = float(value)
