@@ -117,6 +117,15 @@ class MimecastAPI:
                 preset=PluginException.Preset.INVALID_JSON,
                 status_code=request.status_code,
             )
+        except PluginException as error:
+            status_code = error.status_code if isinstance(error, ApiClientException) else status_code
+            raise ApiClientException(
+                cause=error.cause,
+                assistance=error.assistance,
+                data=error.data,
+                preset=error.preset,
+                status_code=status_code,
+            )
         raise ApiClientException(preset=PluginException.Preset.UNKNOWN, data=response, status_code=status_code)
 
     def _is_last_token(self, request: requests.Response) -> bool:
@@ -177,14 +186,17 @@ class MimecastAPI:
                     try:
                         contents = my_zip.read(file_name)
                         for log in json.loads(contents).get("data"):
-                            combined_json_list += log
+                            combined_json_list += [log]
                     except json.decoder.JSONDecodeError as json_error:
-                        self.logger.error(f"JSON decode error on file, will continue loop... "
-                                          f"error: {json_error}, contents: {contents}")
+                        self.logger.error(
+                            f"JSON decode error on file, will continue loop... "
+                            f"error: {json_error}, contents: {contents}"
+                        )
                         continue
                     except Exception as gen_exception:
-                        self.logger.error(f"Hit an unexpected error, will continue loop..."
-                                          f"error: {gen_exception}", exc_info=True)
+                        self.logger.error(
+                            f"Hit an unexpected error, will continue loop..." f"error: {gen_exception}", exc_info=True
+                        )
                         continue
             return combined_json_list
         except BadZipFile as error:
@@ -194,7 +206,6 @@ class MimecastAPI:
         except Exception as exception_error:
             self.logger.error(f"Hit an unexpected error, returning []. Error: {exception_error}", exc_info=True)
         return []
-
 
     def _prepare_header(self, uri: str) -> dict:
         # Generate request header values
