@@ -27,7 +27,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             state=MonitorSiemLogsState(),
         )
 
-    def run(self, params={}, state={}) -> (List[Dict], Dict):  # pylint: disable=unused-argument
+    def run(self, params={}, state={}) -> (List[Dict], Dict):  # pylint: disable=unused-argument # noqa: MC0001
         try:
             has_more_pages = False
             header_next_token = state.get(self.NEXT_TOKEN, "")
@@ -87,7 +87,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             map(
                 lambda event: event.get_dict(),
                 filter(
-                    lambda event: event.compare_datetime(get_time_hours_ago(hours_ago=140)),
+                    lambda event: event.compare_datetime(get_time_hours_ago(hours_ago=96)),
                     [EventLogs(data=event) for event in task_output],
                 ),
             ),
