@@ -118,7 +118,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
                 row[item] = int(value)
             if item == "member_of_sites":
                 row[item] = value.split(",")
-            if item == float_keys:
+            if item in float_keys:
                 if value == "":
                     row[item] = 0
                 else:
