@@ -88,9 +88,43 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         results_list = []
 
         for row in csv_report:
+            row = self.filter_results(row)
             results_list.append(row)
 
         return results_list
+
+    @staticmethod
+    def filter_results(row: dict) -> dict:
+        """
+        Helper method to convert relevant fields to their appropriate type
+
+        :param row: A row within the csv report
+        :return: The row with the fields converted
+        """
+        int_keys = (
+            "riskscore",
+            "exploits",
+            "malware_kits",
+            "vulnerability_id",
+            "vulnerability_instances",
+            "days_since_vuln_first_published",
+            "days_present_on_asset",
+            'solution_id'
+        )
+        float_keys = ("cvss_score", "cvss_v3_score")
+
+        for item, value in row.items():
+            if item in int_keys:
+                row[item] = int(value)
+            if item == "member_of_sites":
+                row[item] = value.split(",")
+            if item == float_keys:
+                if row[item] == "":
+                    row[item] = 0
+                else:
+                    row[item] = float(value)
+
+        return row
 
     def find_latest_completed_scan(self, site_id: str, cached: bool) -> int:
         """
