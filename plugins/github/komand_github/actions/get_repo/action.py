@@ -2,6 +2,7 @@ import requests
 import insightconnect_plugin_runtime
 import urllib.parse
 
+from komand_github.util.util import TIMEOUT, handle_http_exceptions
 from insightconnect_plugin_runtime.helper import clean
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_github.actions.get_repo.schema import GetRepoInput, GetRepoOutput, Input, Output, Component
@@ -23,29 +24,17 @@ class GetRepo(insightconnect_plugin_runtime.Action):
 
             url = requests.compat.urljoin(self.connection.api_prefix, f"/repos/{owner}/{title}")
 
-            results = requests.get(url=url, headers=self.connection.auth_header, timeout=60)
+            results = requests.get(url=url, headers=self.connection.auth_header, timeout=TIMEOUT)
 
-            if results.status_code == 200:
-                return {Output.DATA: clean(results.json())}
-
-            elif results.status_code == 403:
-                raise PluginException(
-                    cause="Forbidden response returned from Github",
-                    assistance="Account may need org permissions added",
-                )
-
-            else:
-                raise PluginException(
-                    cause=f"A status code of {results.status_code} was returned from Github",
-                    assistance="Please check that the provided inputs are correct and try again.",
-                )
+            handle_http_exceptions(results)
+            return {Output.DATA: clean(results.json())}
 
         except Exception as error:
             if isinstance(error, PluginException):
-                raise PluginException(cause=error.cause, assistance=error.assistance)
+                raise PluginException(cause=error.cause, assistance=error.assistance, data=error.data)
             else:
                 raise PluginException(
-                    cause="Error occoured when trying to get repo",
+                    cause="Error occoured when trying to get repo.",
                     assistance="Please check that the provided inputs are correct and try again.",
                     data=error,
                 )

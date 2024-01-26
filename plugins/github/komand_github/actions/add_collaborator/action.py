@@ -2,6 +2,7 @@ import requests
 import insightconnect_plugin_runtime
 import urllib.parse
 
+from komand_github.util.util import TIMEOUT, handle_http_exceptions
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_github.actions.add_collaborator.schema import (
     AddCollaboratorInput,
@@ -33,35 +34,27 @@ class AddCollaborator(insightconnect_plugin_runtime.Action):
 
         try:
             results = requests.put(
-                url=url, headers=self.connection.auth_header, params={"permission": permission}, timeout=60
+                url=url, headers=self.connection.auth_header, params={"permission": permission}, timeout=TIMEOUT
             )
-            if results.status_code == 201:
-                return {Output.RESULTS: results.json()}
 
-            elif results.status_code == 204:
+            handle_http_exceptions(results)
+
+            if results.status_code == 204:
                 raise PluginException(
                     cause=f"{username} is already a collaborator",
                     assistance="Please check that the provided inputs are correct and try again.",
+                    data= results.text
                 )
 
-            elif results.status_code == 403:
-                raise PluginException(
-                    cause="Forbidden response returned from Github",
-                    assistance="Account may need org permissions added",
-                )
+            return {Output.RESULTS: results.json()}
 
-            else:
-                raise PluginException(
-                    cause=f"A status code of {results.status_code} was returned from Github",
-                    assistance="Please check that the provided inputs are correct and try again.",
-                )
 
         except Exception as error:
             if isinstance(error, PluginException):
-                raise PluginException(cause=error.cause, assistance=error.assistance)
+                raise PluginException(cause=error.cause, assistance=error.assistance, data=error.data)
             else:
                 raise PluginException(
-                    cause="Error occoured when trying to add a collaborator",
+                    cause="Error occoured when adding a collaborator.",
                     assistance="Please check that the provided inputs are correct and try again.",
-                    data=error,
+                    data=error
                 )

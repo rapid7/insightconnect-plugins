@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 import github
 
+from komand_github.util.util import handle_gihub_exceptions
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_github.actions.remove.schema import RemoveInput, RemoveOutput, Input, Output, Component
 
@@ -24,83 +25,34 @@ class Remove(insightconnect_plugin_runtime.Action):
         user = self.connection.user
         remove_user = github_user.get_user(username)
 
-        if user == remove_user:
+        if self.connection.username == remove_user.name:
             raise PluginException(
-                cause="Cannot remove your own username",
+                cause="Cannot remove your own username.",
                 assistance="Please check that the provided inputs are correct and try again.",
             )
 
+        try:
         # remove from repo in organization
-        if organization and repository:
-            try:
+            if organization and repository:
                 org = github_user.get_organization(organization)
                 repo = org.get_repo(repository)
                 repo.remove_from_collaborators(remove_user)
                 status = f"Successfully removed {remove_user.name} from the repo {repo.full_name} in {organization}"
-            except github.GithubException as err:
-                if err.status == 403:
-                    raise PluginException(
-                        cause="Forbidden response returned from Github",
-                        assistance="Account may need org permissions added",
-                    )
-                elif err.status == 404:
-                    raise PluginException(
-                        cause="Not Found response returned from Github",
-                        assistance="The user, org or repo could not be found",
-                    )
-                else:
-                    raise PluginException(
-                        cause="Error occoured when trying to add label to get issue information",
-                        assistance="Please check that the provided inputs are correct and try again.",
-                        data=err,
-                    )
 
-        # remove from organization
-        elif organization:
-            try:
+            # remove from organization
+            elif organization:
                 org = github_user.get_organization(organization)
                 org.remove_from_members(remove_user)
                 status = f"Successfully removed {remove_user.name} from the Organization {organization}"
-            except github.GithubException as err:
-                if err.status == 403:
-                    raise PluginException(
-                        cause="Forbidden response returned from Github",
-                        assistance="Account may need org permissions added",
-                    )
-                elif err.status == 404:
-                    raise PluginException(
-                        cause="Not Found response returned from Github",
-                        assistance="The user or org could not be found",
-                    )
-                else:
-                    raise PluginException(
-                        cause="Error occoured when trying to add label to get issue information",
-                        assistance="Please check that the provided inputs are correct and try again.",
-                        data=err,
-                    )
 
-        # remove from repo
-        else:
-            try:
+            # remove from repo
+            else:
                 repo = user.get_repo(repository)
                 repo.remove_from_collaborators(remove_user)
                 status = f"Successfully removed {remove_user.name} from the repo {repo.full_name}"
-            except github.GithubException as err:
-                if err.status == 403:
-                    raise PluginException(
-                        cause="Forbidden response returned from Github",
-                        assistance="Account may need org permissions added",
-                    )
-                elif err.status == 404:
-                    raise PluginException(
-                        cause="Not Found response returned from Github",
-                        assistance="The user or repo could not be found",
-                    )
-                else:
-                    raise PluginException(
-                        cause="Error occoured when trying to add label to get issue information",
-                        assistance="Please check that the provided inputs are correct and try again.",
-                        data=err,
-                    )
+        
+        except github.GithubException as err:
+            handle_gihub_exceptions(err)
+        
 
         return {Output.STATUS: status}

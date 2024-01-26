@@ -59,9 +59,9 @@ class TestUser(TestCase):
                 "invalid_user_404",
                 {"username": "test_user_invalid_404"},
                 {"credentials": {"username": "usename", "personal_token": {"secretKey": "error_404"}}},
-                "Not Found response returned from Github",
-                "The user: test_user_invalid_404 could not be found",
-                "",
+                "Not Found response returned from Github.",
+                "The requested resource could not be found.",
+                "404",
             ],
         ]
     )

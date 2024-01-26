@@ -2,6 +2,7 @@ import requests
 import insightconnect_plugin_runtime
 import urllib.parse
 
+from komand_github.util.util import TIMEOUT, handle_http_exceptions
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_github.actions.unblock_user.schema import UnblockUserInput, UnblockUserOutput, Input, Output, Component
 
@@ -25,29 +26,17 @@ class UnblockUser(insightconnect_plugin_runtime.Action):
         headers["Content-Type"] = "application/json"
 
         try:
-            response = requests.delete(url=url, headers=headers, timeout=60)
+            response = requests.delete(url=url, headers=headers, timeout=TIMEOUT)
+            handle_http_exceptions(response)
 
-            if response.status_code == 204:
-                self.logger.info("Successfully unblocked a user")
-                return {Output.SUCCESS: True}
-
-            elif response.status_code == 404:
-                raise PluginException(
-                    cause=f"The user: {username}, could not be found",
-                    assistance="Please check that the provided inputs are correct and try again.",
-                )
-            else:
-                raise PluginException(
-                    cause="An error has occurred while trying to unblock a user",
-                    assistance="Please check that the provided inputs are correct and try again.",
-                )
+            return {Output.SUCCESS: True}
 
         except Exception as error:
             if isinstance(error, PluginException):
-                raise PluginException(cause=error.cause, assistance=error.assistance)
+                raise PluginException(cause=error.cause, assistance=error.assistance, data=error.data)
             else:
                 raise PluginException(
-                    cause="An error has occurred while trying to unblock a user",
+                    cause="An error has occurred while trying to unblock a user.",
                     assistance="Please check that the provided inputs are correct and try again.",
                     data=error,
                 )
