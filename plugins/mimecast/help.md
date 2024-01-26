@@ -1017,7 +1017,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
-* 5.3.5 - Task `monitor_siem_logs` further error logging and bump filter logic to 140 hours.
+* 5.3.5 - Task `monitor_siem_logs` further error logging and bump filter logic to 108 hours.
 * 5.3.4 - Task `monitor_siem_logs` exception handling for JSONDecodeError.
 * 5.3.3 - Task `monitor_siem_logs` improved error logging and sanitization of filenames | SDK bump | fix schema for `find_groups` & `get_audit_events` | bump validators version.
 * 5.3.2 - Connection: added regions USB and USBCOM | Monitor SIEM Logs: added logs for request and results information, removed `token` input parameter, updated pagination handler
