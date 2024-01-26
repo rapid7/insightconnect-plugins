@@ -1,26 +1,51 @@
-import komand
 import requests
-from .. import utils
-from .schema import GetRepoInput, GetRepoOutput
+import insightconnect_plugin_runtime
+import urllib.parse
+
+from insightconnect_plugin_runtime.helper import clean
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_github.actions.get_repo.schema import GetRepoInput, GetRepoOutput, Input, Output, Component
 
 
-class GetRepo(komand.Action):
+class GetRepo(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_repo",
-            description="Retrieve details, including ID, about a specific repo",
+            description=Component.DESCRIPTION,
             input=GetRepoInput(),
             output=GetRepoOutput(),
         )
 
     def run(self, params={}):
         try:
-            title = params.get("title")
-            owner = params.get("owner")
-            results = requests.get(
-                "https://api.github.com/repos/" + owner + "/" + title,
-                auth=self.connection.basic_auth,
-            )
-            return {"data": utils.clean(results.json())}
-        except Exception as e:
-            self.logger.error("Repo retreival failed. Error: " + str(e))
+            title = urllib.parse.quote(params.get(Input.TITLE))
+            owner = urllib.parse.quote(params.get(Input.OWNER))
+
+            url = requests.compat.urljoin(self.connection.api_prefix, f"/repos/{owner}/{title}")
+
+            results = requests.get(url=url, headers=self.connection.auth_header, timeout=60)
+
+            if results.status_code == 200:
+                return {Output.DATA: clean(results.json())}
+
+            elif results.status_code == 403:
+                raise PluginException(
+                    cause="Forbidden response returned from Github",
+                    assistance="Account may need org permissions added",
+                )
+
+            else:
+                raise PluginException(
+                    cause=f"A status code of {results.status_code} was returned from Github",
+                    assistance="Please check that the provided inputs are correct and try again.",
+                )
+
+        except Exception as error:
+            if isinstance(error, PluginException):
+                raise PluginException(cause=error.cause, assistance=error.assistance)
+            else:
+                raise PluginException(
+                    cause="Error occoured when trying to get repo",
+                    assistance="Please check that the provided inputs are correct and try again.",
+                    data=error,
+                )

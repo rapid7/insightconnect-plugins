@@ -1,0 +1,40 @@
+{
+    "url": "https://api.github.com/orgs/test_org/memberships/test_username",
+    "state": "pending",
+    "role": "member",
+    "organization_url": "https://api.github.com/orgs/test_org",
+    "user": {
+        "login": "test_username",
+        "id": 144030336,
+        "node_id": "U_kgDOCJW6gA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/144030336?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/test_username",
+        "html_url": "https://github.com/test_username",
+        "followers_url": "https://api.github.com/users/test_username/followers",
+        "following_url": "https://api.github.com/users/test_username/following{/other_user}",
+        "gists_url": "https://api.github.com/users/test_username/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/test_username/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/test_username/subscriptions",
+        "organizations_url": "https://api.github.com/users/test_username/orgs",
+        "repos_url": "https://api.github.com/users/test_username/repos",
+        "events_url": "https://api.github.com/users/test_username/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/test_username/received_events",
+        "type": "User",
+        "site_admin": false
+    },
+    "organization": {
+        "login": "test_org",
+        "id": 157362711,
+        "node_id": "O_kgDOCWEqFw",
+        "url": "https://api.github.com/orgs/test_org",
+        "repos_url": "https://api.github.com/orgs/test_org/repos",
+        "events_url": "https://api.github.com/orgs/test_org/events",
+        "hooks_url": "https://api.github.com/orgs/test_org/hooks",
+        "issues_url": "https://api.github.com/orgs/test_org/issues",
+        "members_url": "https://api.github.com/orgs/test_org/members{/member}",
+        "public_members_url": "https://api.github.com/orgs/test_org/public_members{/member}",
+        "avatar_url": "https://avatars.githubusercontent.com/u/157362711?v=4",
+        "description": null
+    }
+}
