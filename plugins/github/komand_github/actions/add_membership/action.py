@@ -46,7 +46,6 @@ class AddMembership(insightconnect_plugin_runtime.Action):
                 Output.ORGANIZATION_URL: data.get("organization_url", ""),
             }
 
-    
         except Exception as error:
             if isinstance(error, PluginException):
                 raise PluginException(cause=error.cause, assistance=error.assistance, data=error.data)

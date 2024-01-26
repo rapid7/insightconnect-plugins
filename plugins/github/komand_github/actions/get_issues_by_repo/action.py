@@ -34,7 +34,6 @@ class GetIssuesByRepo(insightconnect_plugin_runtime.Action):
 
             handle_http_exceptions(results)
             return {Output.ISSUES: clean(results.json())}
-            
 
         except Exception as error:
             if isinstance(error, PluginException):

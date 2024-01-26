@@ -43,11 +43,10 @@ class AddCollaborator(insightconnect_plugin_runtime.Action):
                 raise PluginException(
                     cause=f"{username} is already a collaborator",
                     assistance="Please check that the provided inputs are correct and try again.",
-                    data= results.text
+                    data=results.text,
                 )
 
             return {Output.RESULTS: results.json()}
-
 
         except Exception as error:
             if isinstance(error, PluginException):
@@ -56,5 +55,5 @@ class AddCollaborator(insightconnect_plugin_runtime.Action):
                 raise PluginException(
                     cause="Error occoured when adding a collaborator.",
                     assistance="Please check that the provided inputs are correct and try again.",
-                    data=error
+                    data=error,
                 )
