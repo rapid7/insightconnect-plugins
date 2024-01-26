@@ -32,7 +32,7 @@ class Remove(insightconnect_plugin_runtime.Action):
             )
 
         try:
-        # remove from repo in organization
+            # remove from repo in organization
             if organization and repository:
                 org = github_user.get_organization(organization)
                 repo = org.get_repo(repository)
@@ -50,9 +50,8 @@ class Remove(insightconnect_plugin_runtime.Action):
                 repo = user.get_repo(repository)
                 repo.remove_from_collaborators(remove_user)
                 status = f"Successfully removed {remove_user.name} from the repo {repo.full_name}"
-        
+
         except github.GithubException as err:
             handle_gihub_exceptions(err)
-        
 
         return {Output.STATUS: status}

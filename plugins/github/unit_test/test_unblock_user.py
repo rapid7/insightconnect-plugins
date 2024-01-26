@@ -18,7 +18,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 @patch("komand_github.connection.connection.github.Github", side_effect=Util.mock_github)
 @patch("requests.delete", side_effect=Util.mock_delete_request)
 class TestUnBlockUser(TestCase):
-    
     @classmethod
     @patch("komand_github.connection.connection.github.Auth.Token", side_effect=Util.mock_github_auth_token)
     @patch("komand_github.connection.connection.github.Github", side_effect=Util.mock_github)
@@ -78,7 +77,7 @@ class TestUnBlockUser(TestCase):
                 "An error has occurred while trying to unblock a user.",
                 "Please check that the provided inputs are correct and try again.",
                 "this is an error",
-            ]
+            ],
         ]
     )
     def test_unblock_user_invalid(

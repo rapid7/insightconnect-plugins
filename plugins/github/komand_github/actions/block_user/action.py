@@ -27,19 +27,18 @@ class BlockUser(insightconnect_plugin_runtime.Action):
 
         try:
             response = requests.put(url=url, headers=headers, timeout=TIMEOUT)
-            
+
             if response.status_code == 422:
                 raise PluginException(
                     cause=f"The user: {username}, has already been blocked",
                     assistance="Please check that the provided inputs are correct and try again.",
-                    data=response.text
+                    data=response.text,
                 )
-            
+
             handle_http_exceptions(response)
 
             self.logger.info("Successfully blocked user")
             return {Output.SUCCESS: True}
-
 
         except Exception as error:
             if isinstance(error, PluginException):

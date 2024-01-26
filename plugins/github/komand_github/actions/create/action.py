@@ -23,7 +23,7 @@ class Create(insightconnect_plugin_runtime.Action):
         assignee = params.get(Input.ASSIGNEE)
         milestone = params.get(Input.MILESTONE)
         lables = params.get(Input.LABELS)
-        
+
         try:
             if organization and repository:
                 github_user = self.connection.github_user
@@ -44,7 +44,6 @@ class Create(insightconnect_plugin_runtime.Action):
                 labels_raw = lables.split(",")
                 issue_params.update({"labels": labels_raw})
 
-        
             issue = repo.create_issue(**issue_params)
             return {Output.URL: issue.html_url}
         except github.GithubException as err:
