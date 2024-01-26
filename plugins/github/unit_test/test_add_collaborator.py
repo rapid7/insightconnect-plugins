@@ -65,7 +65,7 @@ class TestAddCollaborator(TestCase):
                 {"credentials": {"username": "usename", "personal_token": {"secretKey": "error_204"}}},
                 "test_username is already a collaborator",
                 "Please check that the provided inputs are correct and try again.",
-                "",
+                "204",
             ],
             [
                 "invalid_add_collaborator_403",
@@ -76,9 +76,9 @@ class TestAddCollaborator(TestCase):
                     "permission": "admin",
                 },
                 {"credentials": {"username": "usename", "personal_token": {"secretKey": "error_403"}}},
-                "Forbidden response returned from Github",
-                "Account may need org permissions added",
-                "",
+                "Forbidden response returned from Github.",
+                "Account may need org permissions added.",
+                "403",
             ],
             [
                 "invalid_add_collaborator_500",
@@ -89,9 +89,9 @@ class TestAddCollaborator(TestCase):
                     "permission": "admin",
                 },
                 {"credentials": {"username": "usename", "personal_token": {"secretKey": "error_500"}}},
-                "A status code of 500 was returned from Github",
+                "Error occoured.",
                 "Please check that the provided inputs are correct and try again.",
-                "",
+                "500",
             ],
             [
                 "invalid_add_collaborator",
@@ -102,13 +102,13 @@ class TestAddCollaborator(TestCase):
                     "permission": "admin",
                 },
                 {"credentials": {"username": "usename", "personal_token": {"secretKey": "error"}}},
-                "Error occoured when trying to add a collaborator",
+                "Error occoured when adding a collaborator.",
                 "Please check that the provided inputs are correct and try again.",
                 "this is an error",
             ],
         ]
     )
-    def test_get_repo_invalid(
+    def test_add_collaborator_invalid(
         self,
         _mock_request: MagicMock,
         _mock_github: MagicMock,

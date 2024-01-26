@@ -175,7 +175,7 @@ class Util:
         class MockGetResponse:
             def __init__(self, status_code: int, filename: str = None):
                 self.status_code = status_code
-                self.text = ""
+                self.text = str(status_code)
                 self.content = b""
                 self.filename = filename
                 if filename:
@@ -230,7 +230,7 @@ class Util:
         class MockPutResponse:
             def __init__(self, status_code: int, filename: str = None):
                 self.status_code = status_code
-                self.text = ""
+                self.text = str(status_code)
                 self.content = b""
                 self.filename = filename
                 if filename:
@@ -285,7 +285,7 @@ class Util:
         class MockDeleteResponse:
             def __init__(self, status_code: int, filename: str = None):
                 self.status_code = status_code
-                self.text = ""
+                self.text = str(status_code)
                 self.content = b""
                 self.filename = filename
                 if filename:

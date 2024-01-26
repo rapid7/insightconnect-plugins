@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 import github
 
 from insightconnect_plugin_runtime.helper import clean
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_github.util.util import handle_gihub_exceptions
 from komand_github.actions.user.schema import UserInput, UserOutput, Input, Output, Component
 
 
@@ -20,11 +20,7 @@ class User(insightconnect_plugin_runtime.Action):
             github_user = self.connection.github_user
             user_info = github_user.get_user(username)
         except github.GithubException as err:
-            if err.status == 404:
-                raise PluginException(
-                    cause="Not Found response returned from Github",
-                    assistance=f"The user: {username} could not be found",
-                )
+            handle_gihub_exceptions(err)
 
         user = clean(
             {

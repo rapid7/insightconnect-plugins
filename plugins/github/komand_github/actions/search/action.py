@@ -2,6 +2,7 @@ import requests
 import insightconnect_plugin_runtime
 import urllib.parse
 
+from komand_github.util.util import TIMEOUT, handle_http_exceptions
 from insightconnect_plugin_runtime.helper import clean
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_github.actions.search.schema import SearchInput, SearchOutput, Input, Output, Component
@@ -25,23 +26,17 @@ class Search(insightconnect_plugin_runtime.Action):
             url = requests.compat.urljoin(self.connection.api_prefix, f"/search/{search_type}")
             search_params = {"q": query}
 
-            results = requests.get(url=url, params=search_params, headers=self.connection.auth_header, timeout=60)
+            results = requests.get(url=url, params=search_params, headers=self.connection.auth_header, timeout=TIMEOUT)
 
-            if results.status_code == 200:
-                return {Output.RESULTS: clean(results.json())}
-
-            else:
-                raise PluginException(
-                    cause=f"A status code of {results.status_code} was returned from Github",
-                    assistance="Please check that the provided inputs are correct and try again.",
-                )
+            handle_http_exceptions(results)
+            return {Output.RESULTS: clean(results.json())}
 
         except Exception as error:
             if isinstance(error, PluginException):
-                raise PluginException(cause=error.cause, assistance=error.assistance)
+                raise PluginException(cause=error.cause, assistance=error.assistance, data=error.data)
             else:
                 raise PluginException(
-                    cause="Error occoured when trying to perfom a search",
+                    cause="Error occoured when trying to perfom a search.",
                     assistance="Please check that the provided inputs are correct and try again.",
                     data=error,
                 )

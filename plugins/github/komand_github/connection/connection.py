@@ -1,8 +1,8 @@
 import github
 import requests
-
 import insightconnect_plugin_runtime
 
+from komand_github.util.util import TIMEOUT
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 from komand_github.connection.schema import ConnectionSchema, Input
 
@@ -39,7 +39,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def test(self):
         try:
             self.github_session_user = requests.get(
-                f"{self.api_prefix}/user", headers=self.auth_header, verify=True, timeout=60
+                f"{self.api_prefix}/user", headers=self.auth_header, verify=True, timeout=TIMEOUT
             )
 
             if self.github_session_user.status_code == 200:
