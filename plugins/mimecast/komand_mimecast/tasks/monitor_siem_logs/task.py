@@ -12,6 +12,8 @@ from ...util.constants import IS_LAST_TOKEN_FIELD
 from ...util.event import EventLogs
 from ...util.exceptions import ApiClientException
 
+CUTOFF = 108
+
 
 class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
     NEXT_TOKEN = "next_token"  # nosec
@@ -27,9 +29,9 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             state=MonitorSiemLogsState(),
         )
 
-    def run(self, params={}, state={}) -> (List[Dict], Dict):  # pylint: disable=unused-argument  # noqa: MC0001
-        has_more_pages = False
+    def run(self, params={}, state={}) -> (List[Dict], Dict):  # pylint: disable=unused-argument # noqa: MC0001
         try:
+            has_more_pages = False
             header_next_token = state.get(self.NEXT_TOKEN, "")
 
             if not header_next_token:
@@ -49,7 +51,6 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                         f"Error: {error}, returning state={state}, has_more_pages={has_more_pages}"
                     )
                     return [], state, has_more_pages, error.status_code, error
-
                 header_next_token = headers.get(self.HEADER_NEXT_TOKEN)
                 output = self._filter_and_sort_recent_events(output)
                 if output:
@@ -86,7 +87,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             map(
                 lambda event: event.get_dict(),
                 filter(
-                    lambda event: event.compare_datetime(get_time_hours_ago(hours_ago=24)),
+                    lambda event: event.compare_datetime(get_time_hours_ago(hours_ago=CUTOFF)),
                     [EventLogs(data=event) for event in task_output],
                 ),
             ),
