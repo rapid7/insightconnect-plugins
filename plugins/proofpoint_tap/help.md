@@ -239,7 +239,7 @@ This action is used to fetch events for clicks to malicious URLs permitted in th
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|threatStatus|string|all|True|The threat statuses which will be returned in the data|['active', 'cleared', 'falsePositive', 'all']|active|
+|threatStatus|string|all|True|The threat statuses which will be returned in the data|["active", "cleared", "falsePositive", "all"]|active|
 |timeEnd|date|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T22:00:00+00:00|
 |timeStart|date|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T21:00:00+00:00|
 |url|string|None|False|The URL for which the results will be returned. Returns all results if left empty|None|https://example.com|
@@ -299,8 +299,8 @@ This action is used to fetch events for messages delivered in the specified time
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |subject|string|None|False|The subject of the email for which the results will be returned (performs a full-match lookup). Returns all results if left empty|None|A phishy email|
-|threatStatus|string|all|True|The threat statuses which will be returned in the data|['active', 'cleared', 'falsePositive', 'all']|active|
-|threatType|string|all|True|The threat type which will be returned in the data|['url', 'attachment', 'messageText', 'all']|url|
+|threatStatus|string|all|True|The threat statuses which will be returned in the data|["active", "cleared", "falsePositive", "all"]|active|
+|threatType|string|all|True|The threat type which will be returned in the data|["url", "attachment", "messageText", "all"]|url|
 |timeEnd|date|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T22:00:00+00:00|
 |timeStart|date|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T21:00:00+00:00|
 
@@ -414,8 +414,8 @@ This action is used to fetch events for messages blocked in the specified time p
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |subject|string|None|False|The subject of the email for which the results will be returned (performs a full-match lookup). Returns all results if left empty|None|A phishy email|
-|threatStatus|string|all|True|The threat statuses which will be returned in the data|['active', 'cleared', 'falsePositive', 'all']|active|
-|threatType|string|all|True|The threat type which will be returned in the data|['url', 'attachment', 'messageText', 'all']|url|
+|threatStatus|string|all|True|The threat statuses which will be returned in the data|["active", "cleared", "falsePositive", "all"]|active|
+|threatType|string|all|True|The threat type which will be returned in the data|["url", "attachment", "messageText", "all"]|url|
 |timeEnd|date|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T22:00:00+00:00|
 |timeStart|date|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T21:00:00+00:00|
 
@@ -533,8 +533,8 @@ This action is used to fetch events for all clicks and messages relating to know
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|threatStatus|string|all|True|The threat statuses which will be returned in the data|['active', 'cleared', 'falsePositive', 'all']|active|
-|threatType|string|all|True|The threat type which will be returned in the data|['url', 'attachment', 'messageText', 'all']|url|
+|threatStatus|string|all|True|The threat statuses which will be returned in the data|["active", "cleared", "falsePositive", "all"]|active|
+|threatType|string|all|True|The threat type which will be returned in the data|["url", "attachment", "messageText", "all"]|url|
 |timeEnd|date|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T22:00:00+00:00|
 |timeStart|date|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T21:00:00+00:00|
 
@@ -643,7 +643,7 @@ This action is used to fetch events for clicks to malicious URLs blocked in the 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|threatStatus|string|all|True|The threat statuses which will be returned in the data|['active', 'cleared', 'falsePositive', 'all']|active|
+|threatStatus|string|all|True|The threat statuses which will be returned in the data|["active", "cleared", "falsePositive", "all"]|active|
 |timeEnd|date|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T22:00:00+00:00|
 |timeStart|date|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T21:00:00+00:00|
 |url|string|None|False|The URL for which the results will be returned. Returns all results if left empty|None|https://example.com|
@@ -1171,6 +1171,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.1.3 - Allow task `monitor_events` to poll from a set date in env var.
 * 4.1.2 - Update to latest plugin SDK to get task and exception logging
 * 4.1.1 - Monitor Events Task: Update max lookback time, remove log cleaning, add debugging
 * 4.1.0 - Update to latest plugin SDK

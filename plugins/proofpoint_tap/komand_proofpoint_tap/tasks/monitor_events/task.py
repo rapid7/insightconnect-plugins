@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta, timezone
 from hashlib import sha1
+from json import loads
+from os import getenv
 
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -8,6 +10,9 @@ from komand_proofpoint_tap.util.api import Endpoint
 from komand_proofpoint_tap.util.exceptions import ApiException
 from komand_proofpoint_tap.util.util import SiemUtils
 from .schema import MonitorEventsInput, MonitorEventsOutput, MonitorEventsState, Component
+
+MAX_ALLOWED_LOOKBACK_HOURS = 3
+SPECIFIC_DATE = getenv("SPECIFIC_DATE")
 
 
 class MonitorEvents(insightconnect_plugin_runtime.Task):
@@ -34,23 +39,31 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             self.logger.info(f"Last collection date retrieved: {last_collection_date}")
             next_page_index = state.get(self.NEXT_PAGE_INDEX)
             now = self.get_current_time() - timedelta(minutes=1)
-            max_allowed_lookback = now - timedelta(hours=3)
-            # Don't allow collection to go back further than 3 hours max
-            if last_collection_date and datetime.fromisoformat(last_collection_date) < max_allowed_lookback:
-                last_collection_date = max_allowed_lookback.isoformat()
-                if next_page_index:
-                    next_page_index = None
-                    state.pop(self.NEXT_PAGE_INDEX)
-                self.logger.info(f"Last collection date reset to max lookback allowed: {last_collection_date}")
+
+            # [PLGN-701] ignore any look back limitations if we're forcing a backfill date
+            if not SPECIFIC_DATE:
+                max_allowed_lookback = now - timedelta(hours=MAX_ALLOWED_LOOKBACK_HOURS)
+                # Don't allow collection to go back further than MAX_ALLOWED_LOOKBACK_HOURS (3) hours max
+                if last_collection_date and datetime.fromisoformat(last_collection_date) < max_allowed_lookback:
+                    last_collection_date = max_allowed_lookback.isoformat()
+                    if next_page_index:
+                        next_page_index = None
+                        state.pop(self.NEXT_PAGE_INDEX)
+                    self.logger.info(f"Last collection date reset to max lookback allowed: {last_collection_date}")
 
             previous_logs_hashes = state.get(self.PREVIOUS_LOGS_HASHES, [])
             query_params = {"format": "JSON"}
 
             if not state or not last_collection_date:
-                self.logger.info("First run")
-                last_hour = now - timedelta(hours=1)
-                state[self.LAST_COLLECTION_DATE] = now.isoformat()
-                parameters = SiemUtils.prepare_time_range(last_hour.isoformat(), now.isoformat(), query_params)
+                task_start = "First run... "
+                first_time = now - timedelta(hours=1)
+                if SPECIFIC_DATE:
+                    first_time = datetime(**loads(SPECIFIC_DATE), tzinfo=timezone.utc)  # PLGN-701: hard set to 27th Jan
+                    task_start += "Using env var value of {SPECIFIC_DATE}"
+                self.logger.info(task_start)
+                last_time = first_time + timedelta(hours=1)
+                state[self.LAST_COLLECTION_DATE] = last_time.isoformat()
+                parameters = SiemUtils.prepare_time_range(first_time.isoformat(), last_time.isoformat(), query_params)
             else:
                 if next_page_index:
                     state.pop(self.NEXT_PAGE_INDEX)
@@ -114,7 +127,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                 state[self.PREVIOUS_LOGS_HASHES] = []
                 return [], state, False, error.status_code, error
         except Exception as error:
-            self.logger.info(f"Exception occurred in monitor events task: {error}")
+            self.logger.info(f"Exception occurred in monitor events task: {error}", exc_info=True)
             state[self.PREVIOUS_LOGS_HASHES] = []
             return [], state, has_more_pages, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
