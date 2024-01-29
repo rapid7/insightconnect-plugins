@@ -147,7 +147,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
 
         # preventing random sorting of the list to ensure that the same hash is generated with each request
         if log.get("messageParts"):
-            log["messageParts"] = sorted(log.get("messageParts", []), key=lambda part: part.get("md5", ""))
+            log["messageParts"] = sorted(log.get("messageParts", []), key=lambda part: part.get("md5", None) or "")
         return dict(sorted(log.items()))
 
     @staticmethod
