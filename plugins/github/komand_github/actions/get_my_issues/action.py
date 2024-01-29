@@ -22,8 +22,7 @@ class GetMyIssues(insightconnect_plugin_runtime.Action):
             results = requests.get(url=url, headers=self.connection.auth_header, timeout=TIMEOUT)
 
             handle_http_exceptions(results)
-            return {"issues": clean(results.json())}
-
+            return {Output.ISSUES: clean(results.json())}
         except Exception as error:
             if isinstance(error, PluginException):
                 raise PluginException(cause=error.cause, assistance=error.assistance, data=error.data)

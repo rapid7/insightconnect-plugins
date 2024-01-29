@@ -33,7 +33,6 @@ class CreateIssueComment(insightconnect_plugin_runtime.Action):
                 github_user = self.connection.github_user
                 org = github_user.get_organization(organization)
                 repo = org.get_repo(repository)
-
             else:
                 user = self.connection.user
                 repo = user.get_repo(repository)
@@ -41,7 +40,6 @@ class CreateIssueComment(insightconnect_plugin_runtime.Action):
             issue = repo.get_issue(issue_number)
             issue_params = {"body": body}
             issue = issue.create_comment(**issue_params)
-            return {"url": issue.html_url}
-
+            return {Output.URL: issue.html_url}
         except github.GithubException as err:
             handle_gihub_exceptions(err)
