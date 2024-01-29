@@ -29,12 +29,9 @@ class GetIssuesByRepo(insightconnect_plugin_runtime.Action):
             owner = urllib.parse.quote(params.get(Input.OWNER))
 
             url = requests.compat.urljoin(self.connection.api_prefix, f"/repos/{owner}/{title}/issues")
-
             results = requests.get(url=url, headers=self.connection.auth_header, timeout=TIMEOUT)
-
             handle_http_exceptions(results)
             return {Output.ISSUES: clean(results.json())}
-
         except Exception as error:
             if isinstance(error, PluginException):
                 raise PluginException(cause=error.cause, assistance=error.assistance, data=error.data)

@@ -32,7 +32,6 @@ class CloseIssue(insightconnect_plugin_runtime.Action):
 
             issue = repo.get_issue(issue_number)
             issue.edit(**issue_params)
-
             return {Output.SUCCESS: True}
 
         except github.GithubException as err:

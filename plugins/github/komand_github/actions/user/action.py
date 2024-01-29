@@ -13,7 +13,6 @@ class User(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-
         username = params.get(Input.USERNAME)
 
         try:
@@ -21,7 +20,7 @@ class User(insightconnect_plugin_runtime.Action):
             user_info = github_user.get_user(username)
         except github.GithubException as err:
             handle_gihub_exceptions(err)
-
+            
         user = clean(
             {
                 "avatar": getattr(user_info, "avatar_url"),
@@ -31,7 +30,6 @@ class User(insightconnect_plugin_runtime.Action):
                 "url": getattr(user_info, "html_url"),
             }
         )
-
         return {
             Output.AVATAR: user.get("avatar", ""),
             Output.BIO: user.get("bio", ""),
