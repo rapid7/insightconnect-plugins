@@ -1171,7 +1171,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 4.1.3 - Allow task `monitor_events` to poll from a set date in env var. | Fix issue where no MD5 value in returned from Proofpoint was breaking the sorting of the list
+* 4.1.3 - Allow task `monitor_events` to poll from a set date in env var. | Fix issue where an MD5 value of None from Proofpoint was breaking the sorting of the list in the `monitor_events` task
 * 4.1.2 - Update to latest plugin SDK to get task and exception logging
 * 4.1.1 - Monitor Events Task: Update max lookback time, remove log cleaning, add debugging
 * 4.1.0 - Update to latest plugin SDK
