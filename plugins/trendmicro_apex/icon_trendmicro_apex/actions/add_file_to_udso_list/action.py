@@ -45,8 +45,8 @@ class AddFileToUdsoList(insightconnect_plugin_runtime.Action):
                 headers=self.connection.header_dict,
                 data=json_payload,
                 verify=False,
-                timeout=60,  # noqa: B501
-            )
+                timeout=60,
+            )  # noqa: B501
             response.raise_for_status()
             return {Output.SUCCESS: response is not None}
         except RequestException as rex:
