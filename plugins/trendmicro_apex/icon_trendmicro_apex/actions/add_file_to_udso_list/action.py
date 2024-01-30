@@ -41,7 +41,7 @@ class AddFileToUdsoList(insightconnect_plugin_runtime.Action):
         response = None
         try:
             response = requests.put(
-                request_url, headers=self.connection.header_dict, data=json_payload, verify=False  # noqa: B501
+                request_url, headers=self.connection.header_dict, data=json_payload, verify=False, timeout=None  # noqa: B501
             )
             response.raise_for_status()
             return {Output.SUCCESS: response is not None}

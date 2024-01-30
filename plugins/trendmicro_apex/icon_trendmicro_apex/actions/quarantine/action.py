@@ -28,7 +28,7 @@ class Quarantine(insightconnect_plugin_runtime.Action):
         if "cmd_isolate_agent" == action and agent in params.get(Input.WHITELIST, []):
             raise PluginException(
                 cause="Unable to block whitelisted entry.",
-                assistance=f"Please remove the host from the action's whitelist or quarantine a different host.",
+                assistance="Please remove the host from the action's whitelist or quarantine a different host.",
             )
 
         payload = {"act": action, "allow_multiple_match": True}
@@ -51,4 +51,4 @@ class Quarantine(insightconnect_plugin_runtime.Action):
 
     @staticmethod
     def validate_host_name(agent):
-        return agent is not ""
+        return agent != ""

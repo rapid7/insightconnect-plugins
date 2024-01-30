@@ -56,7 +56,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         try:
             response = requests.get(
-                request_url, headers=self.header_dict, data=json_payload, verify=False  # noqa: B501
+                request_url, headers=self.header_dict, data=json_payload, verify=False, timeout=None  # noqa: B501
             )
             response.raise_for_status()
             if response.status_code != 200:
