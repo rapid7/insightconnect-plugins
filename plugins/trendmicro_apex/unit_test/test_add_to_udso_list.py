@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from icon_trendmicro_apex.connection.connection import Connection
 from icon_trendmicro_apex.actions.add_to_udso_list import AddToUdsoList
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 import logging
 
@@ -46,8 +46,8 @@ class TestAddToUdsoList(TestCase):
                     test_json = json.loads(file.read()).get("body")
                     connection_params = test_json.get("connection")
                     action_params = test_json.get("input")
-            except Exception as e:
-                message = f"Could not read sample test file {file_to_open}.  Exception is: {e}"
+            except Exception as error:
+                message = f"Could not read sample test file {file_to_open}.  Exception is: {error}"
                 self.fail(message)
 
             test_conn.connect(connection_params)
@@ -63,8 +63,8 @@ class TestAddToUdsoList(TestCase):
                     test_json = json.loads(file.read()).get("body")
                     connection_params = test_json.get("connection")
                     action_params = test_json.get("input")
-            except Exception as e:
-                message = f"Could not read sample test file {file_to_open}.  Exception is: {e}"
+            except Exception as error:
+                message = f"Could not read sample test file {file_to_open}.  Exception is: {error}"
                 self.fail(message)
 
             test_conn.connect(connection_params)

@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetRcaObjectInput, GetRcaObjectOutput, Input, Component
 
 # Custom imports below
 from ...util import util
 
 
-class GetRcaObject(komand.Action):
+class GetRcaObject(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_rca_object",

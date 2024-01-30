@@ -25,8 +25,8 @@ class TestAddFileToUdsoList(TestCase):
                 test_json = json.loads(file.read()).get("body")
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
-        except Exception as e:
-            message = "Could not find or read: " + filename
+        except Exception:
+            message = f"Could not find or read: {filename}"
             self.fail(message)
 
         test_conn.connect(connection_params)

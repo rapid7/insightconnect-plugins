@@ -62,7 +62,7 @@ This action is used to add a file to the User-defined Suspicious Object (UDSO) l
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |description|string|File Blacklisted from InsightConnect|False|Description for why the hash is blacklisted (256 characters max)|None|File Blacklisted from InsightConnect|
 |file|file|None|True|File to be marked as suspicious|None|{"filename": "setup.exe", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|
-|scan_action|string|QUARANTINE|True|What action to do with the data sent|["BLOCK", "LOG", "QUARANTINE"]|QUARANTINE|
+|scan_action|string|QUARANTINE|True|What action to do with the data sent|['BLOCK', 'LOG', 'QUARANTINE']|QUARANTINE|
 
 Example input:
 
@@ -103,7 +103,7 @@ This action is used to blacklist an IP, URL, file SHA1 or domain in the UDSO lis
 |description|string|None|False|Notes about why the file is being quarantined (256 characters max)|None|Indicator Blacklisted from InsightConnect|
 |expiry_date|integer|30|False|Number of days to allow this rule to be active|None|100|
 |indicator|string|None|True|The item to be filed as suspicious. data_type affects character limit.  URL/DOMAIN are 2046 characters max, SHA is 40 characters max|None|http://www.example.com|
-|scan_action|string|BLOCK|False|What action to do with the data sent|["BLOCK", "LOG"]|BLOCK|
+|scan_action|string|BLOCK|False|What action to do with the data sent|['BLOCK', 'LOG']|BLOCK|
 
 Example input:
 
@@ -248,7 +248,7 @@ This action is used to downloads existing RCA files from the Apex Central server
 |host_name|string|None|True|Host name|None|CU-PRO1-7814-2|
 |scan_summary_guid|string|None|True|GUID of the investigation summary to retrieve|None|58127b3e-1bde-4c6e-8d86-0d0f89ded601|
 |server_guid|[]string|None|True|GUID of the target server|None|["2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"]|
-|task_type|string|CMEF|False|Type of API request. For Endpoint Sensor, the value is always 4|["UNKNOWN", "INTERNAL", "CM", "CMEF", "OSF_COMMAND", "OSF_QUERY", "OSF_NOTIFY", "OSF_LOG", "MDR_ATTACK_DISCOVERY", "OSF_SYS_CALL"]|CMEF|
+|task_type|string|CMEF|False|Type of API request. For Endpoint Sensor, the value is always 4|['UNKNOWN', 'INTERNAL', 'CM', 'CMEF', 'OSF_COMMAND', 'OSF_QUERY', 'OSF_NOTIFY', 'OSF_LOG', 'MDR_ATTACK_DISCOVERY', 'OSF_SYS_CALL']|CMEF|
 
 Example input:
 
@@ -378,7 +378,7 @@ This action is used to retrieves results of investigations in different formats 
 |content_id|string|None|False|Indicates the location of the dataset|None|8|
 |limit|string|None|True|Retrieves the top n results from the servers|None|1|
 |task_id|string|None|True|Task ID from another API call that is used to retrieve a specific task result Specify the taskId values returned by the following APIs|None|9BD2204C-0554-45C8-9C62-799284928AFA|
-|task_type|string|CMEF|False|Type of API request. For Endpoint Sensor, the value is always 4|["UNKNOWN", "INTERNAL", "CM", "CMEF", "OSF_COMMAND", "OSF_QUERY", "OSF_NOTIFY", "OSF_LOG", "MDR_ATTACK_DISCOVERY", "OSF_SYS_CALL"]|CMEF|
+|task_type|string|CMEF|False|Type of API request. For Endpoint Sensor, the value is always 4|['UNKNOWN', 'INTERNAL', 'CM', 'CMEF', 'OSF_COMMAND', 'OSF_QUERY', 'OSF_NOTIFY', 'OSF_LOG', 'MDR_ATTACK_DISCOVERY', 'OSF_SYS_CALL']|CMEF|
 
 Example input:
 
@@ -489,8 +489,8 @@ This action is used to retrieves a list of OpenIOC files from the Apex Central s
 |fuzzy_match_string|string|None|False|Filters the list for matching strings in the File Name, Title, and Source Context fields|None|Rapid7 InsightConnect|
 |page_number|integer|1|False|Filters the list to uploaded files that appear on the specified page number on the Threat Intel > Custom Intelligence > STIX tab|None|1|
 |page_size|integer|10|False|Filters the list to the specified number of uploaded files per page|None|10|
-|sorting_column|string|FileAddedDatetime|False|Sorts the list by the specified table column|["FileName", "Title", "FileAddedDatetime", "UploadedFrom", "UploadedBy", "ExtractingStatus"]|FileAddedDatetime|
-|sorting_direction|string|Descending|False|Sorts the list in the specified direction|["Ascending", "Descending"]|Descending|
+|sorting_column|string|FileAddedDatetime|False|Sorts the list by the specified table column|['FileName', 'Title', 'FileAddedDatetime', 'UploadedFrom', 'UploadedBy', 'ExtractingStatus']|FileAddedDatetime|
+|sorting_direction|string|Descending|False|Sorts the list in the specified direction|['Ascending', 'Descending']|Descending|
 
 Example input:
 

@@ -1,14 +1,14 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AddFileToUdsoListInput, AddFileToUdsoListOutput, Input, Output, Component
 
 # Custom imports below
 import json
 import requests
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from requests.exceptions import RequestException
 
 
-class AddFileToUdsoList(komand.Action):
+class AddFileToUdsoList(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_file_to_udso_list",

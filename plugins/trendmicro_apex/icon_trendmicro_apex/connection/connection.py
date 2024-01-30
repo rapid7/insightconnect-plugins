@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
 from requests.packages.urllib3 import exceptions
 from requests.exceptions import RequestException
-from komand.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 import warnings
 import requests
 from icon_trendmicro_apex.util.util import create_jwt_token
@@ -13,7 +13,7 @@ from icon_trendmicro_apex.util.api import Api
 warnings.simplefilter("ignore", exceptions.InsecureRequestWarning)
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.header_string = ""

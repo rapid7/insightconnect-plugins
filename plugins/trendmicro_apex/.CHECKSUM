@@ -1,55 +1,55 @@
 {
 	"spec": "f45baa282d770ef83d5dcf898bfff2d0",
-	"manifest": "9e049ef19e39ef27e7721a0233b81a72",
-	"setup": "0f20a94b9636be2c9435638ed3a74a37",
+	"manifest": "f46eb954296a84474fe64a1e06ec8e14",
+	"setup": "2f29fd96cc2ed3470bb87b472655b837",
 	"schemas": [
 		{
 			"identifier": "add_file_to_udso_list/schema.py",
-			"hash": "ef59b54e5ed3520f57160176ef222594"
+			"hash": "fcaed781495f85c0e29930cc18ec6b2f"
 		},
 		{
 			"identifier": "blacklist/schema.py",
-			"hash": "0f7f304e40bc1b82134f874caac06fdc"
+			"hash": "e6c22df6aac1da84bd8cfc1a8288859b"
 		},
 		{
 			"identifier": "delete_openioc_file/schema.py",
-			"hash": "07ba9302a9f6b6147845140a169c673b"
+			"hash": "f3a1a02efa80a0028449761501f57bdc"
 		},
 		{
 			"identifier": "download_openioc_file/schema.py",
-			"hash": "23e0127d99e03d1471588ce9998143a1"
+			"hash": "0d25aa02a5f1294e32d170035e965dbf"
 		},
 		{
 			"identifier": "download_rca_csv_file/schema.py",
-			"hash": "35199f3dedc11a9ac1321fb332f15497"
+			"hash": "627c05a726e54064c872be7fa80db1c5"
 		},
 		{
 			"identifier": "get_agent_status/schema.py",
-			"hash": "d8a7c053a96a059605a7e20dd4f25ae1"
+			"hash": "72b86cb0103851de7d597ba11a2e4ed2"
 		},
 		{
 			"identifier": "get_rca_object/schema.py",
-			"hash": "1fffa60ba0bf7ec173d2abf40fd51047"
+			"hash": "7b336c5c5504e6fcd88065ceb0b6d490"
 		},
 		{
 			"identifier": "openioc_files_list/schema.py",
-			"hash": "a656469ab5c2391d4a29a3d6258dca52"
+			"hash": "9eb5d759d8680eacea790fad7692b502"
 		},
 		{
 			"identifier": "quarantine/schema.py",
-			"hash": "cd028ab32b328f8ec9e30a569dd96415"
+			"hash": "f2fcf564ff768ae97564f9f84cc5d004"
 		},
 		{
 			"identifier": "search_agents/schema.py",
-			"hash": "9ea55d6de1bfe34ad48145ef98e2fc1c"
+			"hash": "e2086d0728f2521ed6ea820cd9eb486a"
 		},
 		{
 			"identifier": "upload_openioc_file/schema.py",
-			"hash": "5740a349a2c27f9753e5056f201b9767"
+			"hash": "6d96365246518d8a3442e3a83a96034f"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "25dc4a1b5eaed2373f59c6cd663851fc"
+			"hash": "36e5624e835d5053bc8d91243d7d4121"
 		}
 	]
 }

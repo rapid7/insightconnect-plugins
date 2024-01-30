@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import UploadOpeniocFileInput, UploadOpeniocFileOutput, Input, Output, Component
 
 # Custom imports below
 
 
-class UploadOpeniocFile(komand.Action):
+class UploadOpeniocFile(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="upload_openioc_file",

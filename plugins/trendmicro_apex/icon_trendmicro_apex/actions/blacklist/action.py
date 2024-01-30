@@ -6,12 +6,12 @@ import validators
 from icon_trendmicro_apex.util.util import get_expiration_utc_date_string
 from requests.exceptions import RequestException
 
-import komand
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import BlacklistInput, BlacklistOutput, Input, Output, Component
 
 
-class Blacklist(komand.Action):
+class Blacklist(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="blacklist",
