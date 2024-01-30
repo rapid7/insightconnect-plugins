@@ -59,7 +59,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                 first_time = now - timedelta(hours=1)
                 if SPECIFIC_DATE:
                     first_time = datetime(**loads(SPECIFIC_DATE), tzinfo=timezone.utc)  # PLGN-701: hard set to 27th Jan
-                    task_start += "Using env var value of {SPECIFIC_DATE}"
+                    task_start += f"Using env var value of {SPECIFIC_DATE}"
                 self.logger.info(task_start)
                 last_time = first_time + timedelta(hours=1)
                 state[self.LAST_COLLECTION_DATE] = last_time.isoformat()
@@ -135,20 +135,27 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
     def get_current_time():
         return datetime.now(timezone.utc)
 
-    def parse_logs(self, unparsed_logs: list) -> list:
+    def parse_logs(self, unparsed_logs: dict) -> list:
         parsed_logs = []
         for event_type in ["clicksBlocked", "clicksPermitted", "messagesBlocked", "messagesDelivered"]:
             parsed_logs.extend(self.prepare_log(log, event_type) for log in unparsed_logs.get(event_type, []))
         return parsed_logs
 
-    @staticmethod
-    def prepare_log(log: dict, value: str) -> dict:
+    def prepare_log(self, log: dict, value: str) -> dict:
         log["eventType"] = value
 
         # preventing random sorting of the list to ensure that the same hash is generated with each request
-        if log.get("messageParts"):
-            log["messageParts"] = sorted(log.get("messageParts", []), key=lambda part: part.get("md5", None) or "")
-        return dict(sorted(log.items()))
+        try:
+            if log.get("messageParts"):
+                log["messageParts"] = sorted(log.get("messageParts", []), key=lambda part: part.get("md5", None) or "")
+            return dict(sorted(log.items()))
+        except Exception as error:
+            self.logger.error(
+                "Hit an unexpected exception when preparing log. Dropping this single log to "
+                f"continue parsing timeframe. Error: {error}",
+                exc_info=True,
+            )
+            return {}
 
     @staticmethod
     def sha1(log: dict) -> str:
