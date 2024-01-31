@@ -1,36 +1,42 @@
-import komand
-from .schema import UnblockUserInput, UnblockUserOutput
-
-# Custom imports below
 import requests
+import insightconnect_plugin_runtime
 import urllib.parse
 
+from komand_github.util.util import TIMEOUT, handle_http_exceptions
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_github.actions.unblock_user.schema import UnblockUserInput, UnblockUserOutput, Input, Output, Component
 
-class UnblockUser(komand.Action):
+
+class UnblockUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="unblock_user",
-            description="Unblock a user",
+            description=Component.DESCRIPTION,
             input=UnblockUserInput(),
             output=UnblockUserOutput(),
         )
 
     def run(self, params={}):
-        url = requests.compat.urljoin(
-            self.connection.api_prefix, "/user/blocks/" + urllib.parse.quote(params.get("username"))
-        )
-        headers = {
-            "Accept": "application/vnd.github.giant-sentry-fist-preview+json",
-            "Content-Type": "application/json",
-        }
+        username = urllib.parse.quote(params.get(Input.USERNAME))
 
-        response = requests.delete(url, headers=headers, auth=(self.connection.username, self.connection.secret))
+        url = requests.compat.urljoin(self.connection.api_prefix, f"/user/blocks/{username}")
+
+        headers = self.connection.auth_header
+        headers["Accept"] = "application/vnd.github.giant-sentry-fist-preview+json"
+        headers["Content-Type"] = "application/json"
 
         try:
-            data = response.json()
-        except ValueError:
-            if response.status_code == 204:
-                self.logger.info("Successfully unblocked user")
-                return {"success": True}
+            response = requests.delete(url=url, headers=headers, timeout=TIMEOUT)
+            handle_http_exceptions(response)
 
-        return {"success": False}
+            return {Output.SUCCESS: True}
+
+        except Exception as error:
+            if isinstance(error, PluginException):
+                raise PluginException(cause=error.cause, assistance=error.assistance, data=error.data)
+            else:
+                raise PluginException(
+                    cause="An error has occurred while trying to unblock a user.",
+                    assistance="Please check that the provided inputs are correct and try again.",
+                    data=error,
+                )
