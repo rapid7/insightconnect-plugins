@@ -62,6 +62,7 @@ types:
       description: GitHub personal token
       type: credential_secret_key
       required: true
+  organization:
     avatar_url:
       type: string
       required: false
