@@ -1,36 +1,50 @@
-import komand
+import insightconnect_plugin_runtime
 import github
-from .schema import CreateInput, CreateOutput
+
+from komand_github.util.util import handle_gihub_exceptions
+from komand_github.actions.create.schema import CreateInput, CreateOutput, Input, Output, Component
 
 
-class Create(komand.Action):
+class Create(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create",
-            description="Create an issue ticket",
+            description=Component.DESCRIPTION,
             input=CreateInput(),
             output=CreateOutput(),
         )
 
-    def run(self, params={}):
-        if params.get("organization") and params.get("repository"):
-            g = self.connection.github_user
-            repo = g.get_organization(params.get("organization")).get_repo(params.get("repository"))
-        else:
-            g = self.connection.user
-            repo = g.get_repo(params.get("repository"))
+    def run(self, params={}):  # noqa: MC0001
 
-        issue_params = {"title": params.get("title"), "body": params.get("body")}
+        organization = params.get(Input.ORGANIZATION)
+        repository = params.get(Input.REPOSITORY)
+        title = params.get(Input.TITLE)
+        body = params.get(Input.BODY)
+        assignee = params.get(Input.ASSIGNEE)
+        milestone = params.get(Input.MILESTONE)
+        lables = params.get(Input.LABELS)
 
-        if params.get("assignee"):
-            issue_params.update({"assignee": params.get("assignee")})
-        if params.get("milestone"):
-            milestone = repo.get_milestone(params.get("milestone"))
-            issue_params.update({"milestone": milestone})
-        if params.get("labels"):
-            labels_raw = params.get("labels").split(",")
-            issue_params.update({"labels": labels_raw})
+        try:
+            if organization and repository:
+                github_user = self.connection.github_user
+                org = github_user.get_organization(organization)
+                repo = org.get_repo(repository)
+            else:
+                user = self.connection.user
+                repo = user.get_repo(repository)
 
-        issue = repo.create_issue(**issue_params)
+            issue_params = {"title": title, "body": body}
 
-        return {"url": issue.html_url}
+            if assignee:
+                issue_params.update({"assignee": assignee})
+            if milestone:
+                milestone = repo.get_milestone(milestone)
+                issue_params.update({"milestone": milestone})
+            if lables:
+                labels_raw = lables.split(",")
+                issue_params.update({"labels": labels_raw})
+
+            issue = repo.create_issue(**issue_params)
+            return {Output.URL: issue.html_url}
+        except github.GithubException as err:
+            handle_gihub_exceptions(err)

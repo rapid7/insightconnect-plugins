@@ -1,12 +1,15 @@
-import komand
 import github
 import requests
-from .schema import ConnectionSchema
+import insightconnect_plugin_runtime
+
+from komand_github.util.util import TIMEOUT
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
+from komand_github.connection.schema import ConnectionSchema, Input
 
 # Custom imports below
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.github_user = None
@@ -15,31 +18,38 @@ class Connection(komand.Connection):
         self.username = ""
         self.api_prefix = "https://api.github.com"
         self.secret = None
-        self.github_session = None
 
     def connect(self, params={}):
         self.logger.info("Connect: Connecting..")
         try:
-            self.username = params.get("credentials").get("username")
-            self.secret = params.get("credentials").get("password")
-            self.basic_auth = (self.username, self.secret)
-            self.github_session = requests.Session()
-            self.github_user = github.Github(self.username, self.secret)
-            user_info = self.github_user.get_user()
+            credentials = params.get(Input.CREDENTIALS)
+            self.username = credentials.get("username")
+            self.secret = credentials.get("personal_token", {}).get("secretKey")
+            self.auth_header = {"Authorization": f"Bearer {self.secret}"}
+            self.github_user = github.Github(auth=github.Auth.Token(self.secret))
             self.user = self.github_user.get_user(self.username)
-            self.github_session_user = requests.get(self.api_prefix, auth=(self.username, self.secret), verify=True)
-            if str(self.github_session_user.status_code).startswith("2"):
-                self.logger.info("Connect: Login successful")
-            else:
-                self.logger.info("Connect: Login unsuccessful")
+            self.github_session = requests.Session()
 
-        except github.GithubException as err:
-            self.logger.error("Github: Connect: error %s", err.data)
-            raise Exception("Github: Connect: user could not be authenticated please try again.")
-
-        except requests.exceptions.RequestException as e:
-            raise e
+        except github.GithubException:
+            raise PluginException(
+                cause="Github: Connect: user could not be authenticated please try again.",
+                assistance="Please check that your username and personal token is correct.",
+            )
 
     def test(self):
-        # connect handles the authentication
-        return {}
+        try:
+            self.github_session_user = requests.get(
+                f"{self.api_prefix}/user", headers=self.auth_header, verify=True, timeout=TIMEOUT
+            )
+
+            if self.github_session_user.status_code == 200:
+                self.logger.info("Connect: Login successful")
+                return {"Success": True}
+            else:
+                self.logger.info("Connect: Login unsuccessful")
+                raise ConnectionTestException(
+                    cause="Connection Test Failed.",
+                    assistance="Please check that your username and personal is correct.",
+                )
+        except PluginException:
+            raise ConnectionTestException(cause="Connection Test Failed.")
