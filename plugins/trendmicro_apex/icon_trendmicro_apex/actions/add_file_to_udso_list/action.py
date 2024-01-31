@@ -40,7 +40,8 @@ class AddFileToUdsoList(insightconnect_plugin_runtime.Action):
 
         response = None
         try:
-            response = requests.put(
+            response = requests.request(
+                "put",
                 request_url,
                 headers=self.connection.header_dict,
                 data=json_payload,
