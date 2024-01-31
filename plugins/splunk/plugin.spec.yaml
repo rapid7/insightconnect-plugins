@@ -4,224 +4,302 @@ products: [insightconnect]
 name: splunk
 title: Splunk
 description: The Splunk plugin allows you to search, monitor, and analyze machine data
-version: 3.0.3
+version: 3.0.4
+connection_version: 3
 vendor: rapid7
 support: rapid7
+supported_versions: ["Splunk SDK 1.7.4"]
 status: []
+key_features:
+  - Run a search query to get the results from your Splunk instance
+  - Display search results from a specified job
+  - Run, create, delete, and list saved searches to store and rerun queries over time
+  - List and modify saved search properties to view and update your reusable queries
+  - Get saved search job history to retrieve the history of a specified saved search
+  - Insert events into an index to update your Splunk instance
+requirements:
+  - Administrative credentials
+  - Splunk host IP address or hostname
+  - Splunk API port
+sdk:
+  type: slim
+  version: 5.3.2
+  user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/splunk
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.splunk.com/
-tags:
-- splunk
-- siem
-- logs
+tags: [splunk, siem, logs]
 hub_tags:
   use_cases: [threat_detection_and_response, reporting_and_analytics, data_utility, alerting_and_notifications]
   keywords: [splunk, siem, logs]
   features: []
 connection:
   host:
-    description: Hostname or IP address of Splunk server to connect to e.g. splunk.example.com
+    title: Host
+    description: Hostname or IP address of Splunk server to connect to
     type: string
     required: true
+    example: splunk.example.com
   port:
+    title: Port
     description: Port the Splunk API is listening on. Default is 8089
     type: integer
     default: 8089
     required: true
+    example: 8089
   credentials:
     title: Username and Password
     description: Username and password
     type: credential_username_password
     required: false
+    example: '{"username":"ExampleUser","password":"ExamplePassword"}'
   use_ssl:
     title: Use SSL
     type: boolean
     description: Whether or not to use SSL
     required: true
+    example: true
   license:
     description: License type for Splunk host
     type: string
     enum:
-    - Enterprise
-    - Free
+      - Enterprise
+      - Free
     required: true
+    example: Free
   ssl_verify:
     title: SSL Verify
     description: Verify server's SSL/TLS certificate
     type: boolean
     required: true
-
+    example: true
 actions:
   insert:
     title: Insert
     description: Insert events into an index
     input:
       index:
-        type: string
+        title: Index
         description: Name of index
+        type: string
         required: true
+        example: ExampleIndexName
       event:
-        type: string
+        title: Event
         description: The event to submit
+        type: string
         required: true
+        example: User logged in
       host:
+        title: Host
+        description: The source host
         type: string
-        description: The source host, e.g. localhost or 192.168.2.2
         required: false
+        example: example_host
       source:
+        title: Source
         type: string
-        description: Source of the event (e.g., /var/log/syslog)
+        description: Source of the event
         required: false
-      sourcetype:
+        example: ExampleEventSource
+      source_type:
+        title: Source Type
+        description: The optional source type value of the event
         type: string
-        description: The optional source type value of the event (e.g. access_combined,
-          syslog)
         required: false
+        example: ExampleEventSourceType
+    output:
+      success:
+        title: Success
+        description: Boolean value that indicates whether event got inserted or not
+        type: boolean
+        required: false
+        example: true
   search:
     title: Search
     description: Run a query
     input:
       query:
+        title: Query
+        description: Run a search query
         type: string
-        description: Run a search query (e.g. search *)
         required: true
+        example: search *
       count:
         title: Count
         type: integer
-        description: The maximum number of results to return. Set to 0 for unlimited
-          results
+        description: The maximum number of results to return. Set to 0 for unlimited results
         required: true
         default: 100
+        example: 100
       search_timeframe:
         title: Search Timeframe
         description: The specified timeframe for the search. Default searches over all time. Separated with dash, in the form of Unix epoch timestamps, e.g. 1498824598-1598824598. If end time is left blank, it defaults to the current time
         type: string
-        example: 1598984278-1598984478
         required: false
+        example: 1598984278-1598984478
     output:
       result:
-        type: object
+        title: Result
         description: Raw search results
+        type: object
         required: false
+        example: '[{"_time":"2024-01-30T12:46:00","event":"ExampleEvent1"}]'
       count:
-        type: integer
+        title: Count
         description: Count of results returned
+        type: integer
         required: false
+        example: 1
   list_saved_searches:
     title: List Saved Searches
     description: Lists all saved searches
-    input: null
     output:
       saved_searches:
         type: '[]object'
         description: Array of saved search objects
         required: false
+        example: '[{"name":"example_saved_search_1","acl":{"app":"search","can_write":"1","modifiable":"1","owner":"admin","sharing":"app"},"content":{"alert.expires":"24h","alert.severity":"2","alert.suppress":"0","alert.track":"1","dispatch.earliest_time":"-1d@d","dispatch.latest_time":"now","displayview":"flashtimeline","enableSched":"1","is_scheduled":"1","search":"index=_internal | stats count by sourcetype","alert.digest_mode":"1","cron_schedule":"0 0 * * *"},"links":{"alternate":"/example_saved_search_1","edit":"/example_saved_search_1","list":"/example_saved_search_1","remove":"/example_saved_search_1","disable":"/example_saved_search_1/disable","dispatch":"/example_saved_search_1/dispatch","alert":"/example_saved_search_1/alert","scheduled_view":"/example_saved_search_1/scheduled_view"}}]'
   get_saved_search_job_history:
     title: Get Saved Search Job History
     description: Returns the job history of a specified saved search
     input:
       saved_search_name:
-        type: string
+        title: Saved Search Name
         description: Name of a saved search
+        type: string
         required: true
+        example: ExampleSavedSearchName
     output:
       job_history:
+        title: Job History
         type: '[]object'
         description: Job history belonging to a saved search
         required: false
+        example: '[{"name":"ExampleSavedSearchName","app":"search","search":"index=_internal","dispatchState":"DONE","resultCount":100,"runDuration":15000,"cursorTime":"2024-01-29T12:00:00.000-07:00","earliestTime":"2024-01-29T11:00:00.000-07:00","latestTime":"2024-01-29T11:30:00.000-07:00","statusBuckets":300,"ttl":600,"autoSummarize":true}]'
   run_saved_search:
     title: Run Saved Search
     description: Runs a saved search
     input:
       saved_search_name:
+        title: Saved Search Name
         type: string
         description: Name of saved search to run
         required: true
+        example: ExampleSavedSearchName
     output:
       job_id:
+        title: Job ID
+        description: The Job ID for the search job created
         type: string
-        description: Job ID for the search job created
         required: false
+        example: 12345
   display_search_results:
     title: Display Search Results
     description: Displays the search results from a job
     input:
       job_id:
+        title: Job ID
+        description: The Job ID to look up results for
         type: string
-        description: Job ID to look up results for
         required: true
+        example: 12345
       timeout:
-        type: number
+        title: Timeout
         description: Duration of time, in seconds, to wait for retrieving results
+        type: number
         required: true
+        example: 5
     output:
       search_results:
         type: '[]object'
         description: Search results from a job
         required: false
+        example: '[{"_raw":"2023-10-15 12:00:00, INFO - Application started","host":"server-1","source":"/var/log/application.log","sourcetype":"test","index":"main","_time":"2023-10-15T12:00:00","event":{"level":"INFO","message":"Application started"}}]'
   create_saved_search:
     title: Create Saved Search
     description: Creates a saved search
     input:
       saved_search_name:
-        type: string
+        title: Saved Search Name
         description: Name to give to the saved search
-        required: true
-      query:
         type: string
-        description: Search query
         required: true
+        example: ExampleSavedSearchName
+      query:
+        title: Query
+        description: Search query
+        type: string
+        required: true
+        example: search *
       properties:
-        type: object
+        title: Properties
         description: JSON object containing additional properties to save with the saved search
+        type: object
         required: false
+        example: '{"description":"ExampleDescription","is_scheduled":true}'
     output:
       saved_search:
-        type: object
+        title: Saved Search
         description: Newly created saved search object
+        type: object
         required: false
+        example: '{"name":"ExampleSavedSearchName","search":"index=main sourcetype=access_combined status=200","dispatch.earliest_time":"-1d","dispatch.latest_time":"now"}'
   delete_saved_search:
     title: Delete Saved Search
     description: Deletes a saved search
     input:
       saved_search_name:
-        type: string
+        title: Saved Search Name
         description: Name of the saved search to delete
+        type: string
         required: true
+        example: ExampleSavedSearchName
     output:
       success:
-        type: boolean
+        title: Success
         description: Whether or not the deletion was successful
+        type: boolean
         required: false
+        example: true
   view_saved_search_properties:
     title: View Saved Search Properties
     description: Returns the properties for a saved search
     input:
       saved_search_name:
-        type: string
+        title: Saved Search Name
         description: Name of saved search to display properties for
+        type: string
         required: true
+        example: ExampleSavedSearchName
     output:
       properties:
-        type: object
+        title: Properties
         description: JSON object containing saved search properties
+        type: object
         required: false
+        example: '{"description":"ExampleDescription","is_scheduled":true}'
   modify_saved_search_properties:
     title: Modify Saved Search Properties
     description: Modifies the properties of a saved search
     input:
       saved_search_name:
-        type: string
+        title: Saved Search Name
         description: Name of saved search to display properties for
+        type: string
         required: true
+        example: ExampleSavedSearchName
       properties:
-        type: object
+        title: Properties
         description: JSON object of properties and values to modify
+        type: object
         required: true
+        example: '{"description":"ExampleDescription","is_scheduled":true}'
     output:
       success:
-        type: boolean
+        title: Success
         description: Whether or not the update was successful
+        type: boolean
         required: false
+        example: true
