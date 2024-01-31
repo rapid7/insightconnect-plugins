@@ -1,11 +1,11 @@
 {
-	"spec": "264de5113424eb6ee1543806069c3a30",
+	"spec": "ad32ad246ec477113d08cd30bd4c2c6d",
 	"manifest": "97ba674a89cd5d1b00c0d1003c8dd970",
 	"setup": "aae04961dc2c2b6d6e40364db48fafb2",
 	"schemas": [
 		{
 			"identifier": "add_collaborator/schema.py",
-			"hash": "e3a611e12eccedd11e6c297c9770ca4b"
+			"hash": "6db70d723a04a5b59bb0978548f3e9c4"
 		},
 		{
 			"identifier": "add_issue_label/schema.py",
@@ -41,7 +41,7 @@
 		},
 		{
 			"identifier": "get_repo/schema.py",
-			"hash": "4fb368b4bf0eca5fbbd6bc1d9c5f1721"
+			"hash": "ee0d038966434abaae3fc6e20592c098"
 		},
 		{
 			"identifier": "remove/schema.py",
@@ -61,7 +61,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "8905fc6530f37fa265b13751884b0d2a"
+			"hash": "6a3e01e5d323f4dc0145549e76c79bf3"
 		},
 		{
 			"identifier": "issue/schema.py",

@@ -139,6 +139,7 @@ class AddCollaboratorOutput(insightconnect_plugin_runtime.Output):
           "order": 4
         },
         "owner": {
+          "$ref": "#/definitions/organization",
           "order": 5
         },
         "private": {
@@ -308,6 +309,80 @@ class AddCollaboratorOutput(insightconnect_plugin_runtime.Output):
         "trees_url": {
           "type": "string",
           "order": 47
+        }
+      }
+    },
+    "organization": {
+      "type": "object",
+      "title": "organization",
+      "properties": {
+        "avatar_url": {
+          "type": "string",
+          "order": 1
+        },
+        "events_url": {
+          "type": "string",
+          "order": 2
+        },
+        "followers_url": {
+          "type": "string",
+          "order": 3
+        },
+        "following_url": {
+          "type": "string",
+          "order": 4
+        },
+        "gists_url": {
+          "type": "string",
+          "order": 5
+        },
+        "gravatar_id": {
+          "type": "string",
+          "order": 6
+        },
+        "html_url": {
+          "type": "string",
+          "order": 7
+        },
+        "id": {
+          "type": "integer",
+          "order": 8
+        },
+        "login": {
+          "type": "string",
+          "order": 9
+        },
+        "organizations_url": {
+          "type": "string",
+          "order": 10
+        },
+        "received_events_url": {
+          "type": "string",
+          "order": 11
+        },
+        "repos_url": {
+          "type": "string",
+          "order": 12
+        },
+        "site_admin": {
+          "type": "boolean",
+          "order": 13
+        },
+        "starred_url": {
+          "type": "string",
+          "order": 14
+        },
+        "subscriptions_url": {
+          "type": "string",
+          "order": 15
+        },
+        "type": {
+          "type": "string",
+          "order": 16
+        },
+        "url": {
+          "type": "string",
+          "order": 17
         }
       }
     },

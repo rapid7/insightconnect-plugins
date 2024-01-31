@@ -1490,6 +1490,13 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
+|Github Personal Token|credential_secret_key|None|True|GitHub personal token|None|
+|Username|string|None|True|GitHub username|None|
+  
+**organization**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
 |avatar_url|string|None|False|None|None|
 |events_url|string|None|False|None|None|
 |followers_url|string|None|False|None|None|
@@ -1500,7 +1507,6 @@ Example output:
 |id|integer|None|False|None|None|
 |login|string|None|False|None|None|
 |organizations_url|string|None|False|None|None|
-|Github Personal Token|credential_secret_key|None|True|GitHub personal token|None|
 |received_events_url|string|None|False|None|None|
 |repos_url|string|None|False|None|None|
 |site_admin|boolean|None|False|None|None|
@@ -1508,7 +1514,6 @@ Example output:
 |subscriptions_url|string|None|False|None|None|
 |type|string|None|False|None|None|
 |url|string|None|False|None|None|
-|Username|string|None|True|GitHub username|None|
   
 **permissions**
 
