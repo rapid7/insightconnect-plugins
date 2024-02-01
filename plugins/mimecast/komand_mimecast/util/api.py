@@ -182,7 +182,6 @@ class MimecastAPI:
             with ZipFile(BytesIO(request.content)) as my_zip:
                 combined_json_list = []
                 for file_name in my_zip.namelist():
-                    self.logger.info(f"About to read file name {file_name}")
                     try:
                         contents = my_zip.read(file_name)
                         for log in json.loads(contents).get("data"):
