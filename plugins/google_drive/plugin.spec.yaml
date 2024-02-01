@@ -38,6 +38,15 @@ types:
       title: File ID
       description: File ID
       type: string
+  copy_file_result:
+    folder_id:
+      title: Folder ID
+      description: Folder ID
+      type: string
+    file_id:
+      title: File ID
+      description: File ID
+      type: string
 connection:
   admin_user:
     title: Admin User
@@ -301,4 +310,32 @@ actions:
         title: Result
         description: The result containing the ID of the file and ID of the folder to which the file was moved
         type: move_file_result
+        required: true
+  copy_file:
+    title: Copy File
+    description: Copy a file to a folder
+    input:
+      folder_id:
+        title: Folder ID
+        description: ID of the folder where the file will be copied
+        type: string
+        required: true
+        example: 0BwwA4oUTeiV1TGRPeTVjaWRDY1E
+      file_id:
+        title: File ID
+        description: The ID of the file that will be copied to another folder
+        type: string
+        required: true
+        example: 1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR
+      new_file_name:
+        title: New File Name
+        description: Select a new file name. e.g. testfile.csv
+        type: string
+        required: false
+        example: test.txt
+    output:
+      result:
+        title: Result
+        description: The result containing the ID of the file and ID of the folder to which the file was copied
+        type: copy_file_result
         required: true

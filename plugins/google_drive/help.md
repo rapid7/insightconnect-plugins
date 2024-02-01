@@ -11,6 +11,7 @@ This plugin utilizes the [Google Drive API](https://developers.google.com/drive/
 * Create files
 * Move files to a different folder
 * Find files by name
+* Copy file to a folder
 
 # Requirements
 
@@ -87,6 +88,44 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |result|move_file_result|True|The result containing the ID of the file and ID of the folder to which the file was moved|
+
+Example output:
+
+```
+{
+  "id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR",
+  "parents": [
+    "0BwwA4oUTeiV1TGRPeTVjaWRDY1E"
+  ]
+}
+```
+
+#### Copy File
+
+This action is used to copy a file to a folder.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|file_id|string|None|True|The ID of the file that will be copied to another folder|None|1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR|
+|folder_id|string|None|True|ID of the folder where the file will be copied|None|0BwwA4oUTeiV1TGRPeTVjaWRDY1E|
+
+Example input:
+
+```
+{
+  "file_id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR",
+  "folder_id": "0BwwA4oUTeiV1TGRPeTVjaWRDY1E"
+  "new_file_name": "filename"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|result|copy_file_result|True|The result containing the ID of the file and ID of the folder to which the file was copied|
 
 Example output:
 
@@ -362,6 +401,7 @@ _This plugin does not contain any triggers._
 
 # Version History
 
+* 2.3.0 - Implement shared drive support | Add Copy file action
 * 2.2.0 - Add Create Folder, Create File in Folder and Move File actions | Add missing input and output examples | Code refactor
 * 2.1.3 - Correct spelling in help.md
 * 2.1.2 - New spec and help.md format for the Extension Library
