@@ -22,6 +22,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     },
     "username": {
       "type": "string",
+      "title": "Username",
       "description": "API username",
       "order": 1
     }
