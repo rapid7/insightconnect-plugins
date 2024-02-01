@@ -59,7 +59,9 @@ class TestMonitorSiemLogs(TestCase):
         self.assertEqual(response, [])  # no logs will be parsed as we raise error after catching BadZipFile
         self.assertEqual(new_state, test_state)  # we shouldn't change the state if we encounter an error
         mock_logger.assert_called()
-        self.assertIn("There is no item named \'filename-1-from-mimecast.json\' in the archive", mock_logger.call_args[0][0])
+        self.assertIn(
+            "There is no item named 'filename-1-from-mimecast.json' in the archive", mock_logger.call_args[0][0]
+        )
 
     @patch("logging.Logger.error")
     def test_monitor_siem_logs_raises_json_error(self, mock_logger, _mock_data):
