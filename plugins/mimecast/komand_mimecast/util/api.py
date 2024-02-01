@@ -8,6 +8,7 @@ import uuid
 from io import BytesIO
 from typing import Union, List, Dict, Any
 from zipfile import ZipFile, BadZipFile
+from werkzeug.utils import secure_filename
 
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -183,6 +184,7 @@ class MimecastAPI:
                 combined_json_list = []
                 for file_name in my_zip.namelist():
                     try:
+                        file_name = secure_filename(file_name)
                         contents = my_zip.read(file_name)
                         for log in json.loads(contents).get("data"):
                             combined_json_list += [log]
