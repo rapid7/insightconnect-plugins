@@ -6,8 +6,15 @@ title: GitHub
 vendor: rapid7
 support: community
 status: []
-description: Github plugin allows users and issues management in Github
-version: 2.1.2
+description: "[GitHub](https://github.com/) is a popular web-based Git or version control repository and Internet hosting service GitHub. InsightConnect plugin allows users and issues management. This plugin supports authentication from both personal and organization member accounts"
+key_features:
+  - Issue management
+  - User management
+requirements:
+  - GitHub username and client secret
+supported_versions: ["GitHub API version 2022-11-28"]
+version: 3.0.0
+connection_version: 3
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/github
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -20,7 +27,41 @@ hub_tags:
   use_cases: [user_management]
   keywords: [github, issue, authentication]
   features: []
+version_history:
+  - '3.0.0 - Update to use GitHub personal tokn rather than password | update the HTTP requests to auth header rather than name and password | update to the newest SDK version | add unit tests | bump requiremnts | fixed the connection test' 
+  - '2.1.2 - Fix broken action "Close Issue"'
+  - '2.1.1 - New spec and help.md format for the Extension Library'
+  - '2.1.0 - New actions: Create Issue Comment, Close Issue, Add Issue Label'
+  - '2.0.1 - Fix missing Search action | Pin pygithub and python-dateutil libraries | Update to use the `komand/python-3-37-slim-plugin` Docker image to reduce plugin size | Enable verification of SSL/TLS certificates for GitHub.com'
+  - '2.0.0 - Rename "User" action to "Get User"'
+  - '1.2.1 - Update connection documentation and add example outputs to remaining actions and triggers'
+  - '1.2.0 - Add Block User and Unblock User action'
+  - '1.1.0 - Add Membership action'
+  - '1.0.0 - Add Collaborator action | Update to v2 Python plugin architecture | Support web server mode'
+  - '0.2.3 - SSL bug fix in SDK'
+  - '0.2.2 - New optional Milestone input to Create Issue action'
+  - '0.2.1 - New optional Assignee input to Create Issue action'
+  - '0.2.0 - New actions: Get Repo, Get My Issues, Get Issues by Repo, and Search'
+  - '0.1.0 - Initial plugin'
+references:
+  - "[GitHub](https://github.com)"
+  - "[GitHub REST API](https://developer.github.com/v3/)"
+sdk:
+  type: slim
+  version: 5
+  user: nobody
 types:
+  git_hub_credentials:
+    username:
+      title: Username
+      description: GitHub username
+      type: string
+      required: true
+    personal_token:
+      title: Github Personal Token
+      description: GitHub personal token
+      type: credential_secret_key
+      required: true
   organization:
     avatar_url:
       type: string
@@ -1089,8 +1130,9 @@ connection:
   credentials:
     title: Account Credentials
     description: GitHub credentials
-    type: credential_username_password
+    type: git_hub_credentials
     required: true
+    example: {"username": "test_username","personal_token": {"secretKey": "ghp_123456789abcdefghABCDEFGH"}}
 actions:
   remove:
     title: Remove User
@@ -1100,20 +1142,24 @@ actions:
         type: string
         description: Username to remove
         required: true
+        example: test_user
       organization:
         type: string
         description: Remove from organization
         required: false
+        example: test_organization
       repository:
         type: string
         description: Remove from repository
         required: false
+        example: test_repository
     output:
       status:
         title: Status
         description: Status
         type: string
         required: false
+        example: Successfully removed test_user from the repo test_repository in test_organization
   create:
     title: Create Issue
     description: Create an issue ticket
@@ -1122,36 +1168,44 @@ actions:
         type: string
         description: Title of issue
         required: true
+        example: test_title
       body:
         type: string
         description: Body text of issue
         required: true
+        example: test_body
       labels:
         type: string
         description: GitHub search tags delimited by commas
         required: false
+        example: "test_label_2, test_label_2"
       repository:
         type: string
         description: Repository to post issue
         required: true
+        example: test_repository
       organization:
         type: string
         description: Organizational owner of repository
         required: false
+        example: test_organization
       assignee:
         type: string
         description: User to assign this issue to
         required: false
+        example: test_username
       milestone:
         type: number
         description: ID of the milestone to associate this issue with
         required: false
+        example: 1
     output:
       url:
         title: URL
         description: URL
         type: string
         required: false
+        example: https://github.com/test_organization/test_repository/issues/8
   create_issue_comment:
     title: Create Issue Comment
     description: Create an issue comment
@@ -1160,24 +1214,29 @@ actions:
         type: string
         description: Body text of issue
         required: true
+        example: test_body
       issue_number:
         type: number
         description: Issue number
         required: true
+        example: 1
       repository:
         type: string
         description: Repository to post issue
         required: true
+        example: test_repository
       organization:
         type: string
         description: Organizational owner of repository
         required: false
+        example: test_organization
     output:
       url:
         title: URL
         description: URL
         type: string
         required: false
+        example: https://github.com/test_organization/test_repository/issues/1#issuecomment-123456789
   close_issue:
     title: Close Issue
     description: Close issue
@@ -1186,20 +1245,24 @@ actions:
         type: number
         description: Issue number
         required: true
+        example: 1
       repository:
         type: string
         description: Repository to post issue
         required: true
+        example: test_repository
       organization:
         type: string
         description: Organizational owner of repository
         required: false
+        example: test_organization
     output:
       success:
         title: Success
         description: Returns true if the issue was closed 
         type: boolean
         required: false
+        example: true
   add_issue_label:
     title: Add Issue Label
     description: Adds a label to an issue
@@ -1208,24 +1271,29 @@ actions:
         type: string
         description: Repository to post issue
         required: true
+        example: test_repository
       organization:
         type: string
         description: Organizational owner of repository
         required: false
+        example: test_organization
       issue_number:
         type: number
         description: Issue number
         required: true
+        example: 1
       label:
         type: string
         description: Issue label
         required: true
+        example: test_label
     output:
       success:
         title: Success
         description: Returns true if the label was added
         type: boolean
         required: false
+        example: true
   user:
     title: Get User
     description: Get user information
@@ -1234,32 +1302,38 @@ actions:
         type: string
         description: GitHub username
         required: true
+        example: test_user
     output:
       name:
         title: Name
         description: Name
         type: string
         required: false
+        example: example_username
       email:
         title: Email
         description: Email
         type: string
         required: false
+        example: user@example.com
       url:
         title: URL
         description: URL
         type: string
         required: false
+        example: https://github.com/test_user
       avatar:
         title: Avatar
         description: Avatar
         type: string
         required: false
+        example: https://avatars.githubusercontent.com/u/1234567?v=4
       bio:
         title: Bio
         description: Bio
         type: string
         required: false
+        example: test_bio
   get_repo:
     title: Get Repo
     description: Retrieve details, including ID, about a specific repo
@@ -1269,17 +1343,20 @@ actions:
         title: Title
         description: Name of the repository
         required: true
+        example: test_title
       owner:
         type: string
         title: Owner
         description: Owner of the repository
         required: true
+        example: test_owner
     output:
       data:
         type: repo
         title: Data
         description: Repository details and data
         required: true
+        example: {"allow_auto_merge": false,"allow_forking": true,"allow_merge_commit": true,"allow_rebase_merge": true,"allow_squash_merge": true,"allow_update_branch": false,"archive_url": "https://api.github.com/repos/test_owner/test_repo/{archive_format}{/ref}","archived": false,"assignees_url": "https://api.github.com/repos/test_owner/test_repo/assignees{/user}","blobs_url": "https://api.github.com/repos/test_owner/test_repo/git/blobs{/sha}","branches_url": "https://api.github.com/repos/test_owner/test_repo/branches{/branch}","clone_url": "https://github.com/test_owner/test_repo.git","collaborators_url": "https://api.github.com/repos/test_owner/test_repo/collaborators{/collaborator}","comments_url": "https://api.github.com/repos/test_owner/test_repo/comments{/number}","commits_url": "https://api.github.com/repos/test_owner/test_repo/commits{/sha}","compare_url": "https://api.github.com/repos/test_owner/test_repo/compare/{base}...{head}","contents_url": "https://api.github.com/repos/test_owner/test_repo/contents/{+path}","contributors_url": "https://api.github.com/repos/test_owner/test_repo/contributors","created_at": "2024-01-22T09:39:26Z","default_branch": "main","delete_branch_on_merge": false,"deployments_url": "https://api.github.com/repos/test_owner/test_repo/deployments","description": "This is a test repo for insight connect","disabled": false,"downloads_url": "https://api.github.com/repos/test_owner/test_repo/downloads","events_url": "https://api.github.com/repos/test_owner/test_repo/events","fork": false,"forks": 0,"forks_count": 0,"forks_url": "https://api.github.com/repos/test_owner/test_repo/forks","full_name": "test_owner/test_repo","git_commits_url": "https://api.github.com/repos/test_owner/test_repo/git/commits{/sha}","git_refs_url": "https://api.github.com/repos/test_owner/test_repo/git/refs{/sha}","git_tags_url": "https://api.github.com/repos/test_owner/test_repo/git/tags{/sha}","git_url": "git://github.com/test_owner/test_repo.git","has_discussions": false,"has_downloads": true,"has_issues": true,"has_pages": false,"has_projects": true,"has_wiki": false,"hooks_url": "https://api.github.com/repos/test_owner/test_repo/hooks","html_url": "https://github.com/test_owner/test_repo","id": 746577821,"is_template": false,"issue_comment_url": "https://api.github.com/repos/test_owner/test_repo/issues/comments{/number}","issue_events_url": "https://api.github.com/repos/test_owner/test_repo/issues/events{/number}","issues_url": "https://api.github.com/repos/test_owner/test_repo/issues{/number}","keys_url": "https://api.github.com/repos/test_owner/test_repo/keys{/key_id}","labels_url": "https://api.github.com/repos/test_owner/test_repo/labels{/name}","languages_url": "https://api.github.com/repos/test_owner/test_repo/languages","merge_commit_message": "PR_TITLE","merge_commit_title": "MERGE_MESSAGE","merges_url": "https://api.github.com/repos/test_owner/test_repo/merges","milestones_url": "https://api.github.com/repos/test_owner/test_repo/milestones{/number}","name": "test_repo","network_count": 0,"node_id": "R_kgDOLH_fnQ","notifications_url": "https://api.github.com/repos/test_owner/test_repo/notifications{?since,all,participating}","open_issues": 1,"open_issues_count": 1,"owner": {"avatar_url": "https://avatars.githubusercontent.com/u/157107299?v=4","events_url": "https://api.github.com/users/test_owner/events{/privacy}","followers_url": "https://api.github.com/users/test_owner/followers","following_url": "https://api.github.com/users/test_owner/following{/other_user}","gists_url": "https://api.github.com/users/test_owner/gists{/gist_id}","html_url": "https://github.com/test_owner","id": 157107299,"login": "test_owner","node_id": "U_kgDOCV1EYw","organizations_url": "https://api.github.com/users/test_owner/orgs","received_events_url": "https://api.github.com/users/test_owner/received_events","repos_url": "https://api.github.com/users/test_owner/repos","site_admin": false,"starred_url": "https://api.github.com/users/test_owner/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_owner/subscriptions","type": "User","url": "https://api.github.com/users/test_owner"},"permissions": {"admin": true,"maintain": true,"pull": true,"push": true,"triage": true},"private": true,"pulls_url": "https://api.github.com/repos/test_owner/test_repo/pulls{/number}","pushed_at": "2024-01-22T09:39:26Z","releases_url": "https://api.github.com/repos/test_owner/test_repo/releases{/id}","size": 0,"squash_merge_commit_message": "COMMIT_MESSAGES","squash_merge_commit_title": "COMMIT_OR_PR_TITLE","ssh_url": "github.com:test_owner/test_repo.git","stargazers_count": 0,"stargazers_url": "https://api.github.com/repos/test_owner/test_repo/stargazers","statuses_url": "https://api.github.com/repos/test_owner/test_repo/statuses/{sha}","subscribers_count": 1,"subscribers_url": "https://api.github.com/repos/test_owner/test_repo/subscribers","subscription_url": "https://api.github.com/repos/test_owner/test_repo/subscription","svn_url": "https://github.com/test_owner/test_repo","tags_url": "https://api.github.com/repos/test_owner/test_repo/tags","teams_url": "https://api.github.com/repos/test_owner/test_repo/teams","temp_clone_token": "BFOUIY4BKKABTTP7Q4Z5G4TFV7IDE","topics": [],"trees_url": "https://api.github.com/repos/test_owner/test_repo/git/trees{/sha}","updated_at": "2024-01-22T09:39:26Z","url": "https://api.github.com/repos/test_owner/test_repo","use_squash_pr_title_as_default": false,"visibility": "private","watchers": 0,"watchers_count": 0,"web_commit_signoff_required": false}
   search:
     title: Search
     description: Search GitHub for data
@@ -1294,17 +1371,20 @@ actions:
         - Code
         - Issues
         required: false
+        example: Issues
       query:
         type: string
         description: Query to match against
         title: Query
         required: false
+        example: "repo:test_organization/test_repo test_search_query"
     output:
       results:
         title: Results
         description: Results
         type: object
         required: false
+        example: {"total_count": 1,"incomplete_results": false,"items": [{"url": "https://api.github.com/repos/test_organization/test_repo/issues/1","repository_url": "https://api.github.com/repos/test_organization/test_repo","labels_url": "https://api.github.com/repos/test_organization/test_repo/issues/1/labels{/name}","comments_url": "https://api.github.com/repos/test_organization/test_repo/issues/1/comments","events_url": "https://api.github.com/repos/test_organization/test_repo/issues/1/events","html_url": "https://github.com/test_organization/test_repo/issues/1","id": 2093498528,"node_id": "I_kwDOLH_fnc58yECg","number": 1,"title": "This is a test issue","user": {"login": "test_organization","id": 157107299,"node_id": "U_kgDOCV1EYw","avatar_url": "https://avatars.githubusercontent.com/u/157107299?v=4","url": "https://api.github.com/users/test_organization","html_url": "https://github.com/test_organization","followers_url": "https://api.github.com/users/test_organization/followers","following_url": "https://api.github.com/users/test_organization/following{/other_user}","gists_url": "https://api.github.com/users/test_organization/gists{/gist_id}","starred_url": "https://api.github.com/users/test_organization/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_organization/subscriptions","organizations_url": "https://api.github.com/users/test_organization/orgs","repos_url": "https://api.github.com/users/test_organization/repos","events_url": "https://api.github.com/users/test_organization/events{/privacy}","received_events_url": "https://api.github.com/users/test_organization/received_events","type": "User","site_admin": false},"labels": [{"id": 6460729259,"node_id": "LA_kwDOLH_fnc8AAAABgRbnqw","url": "https://api.github.com/repos/test_organization/test_repo/labels/bug","name": "bug","color": "d73a4a","default": true,"description": "Something isn't working"},{"id": 6460729262,"node_id": "LA_kwDOLH_fnc8AAAABgRbnrg","url": "https://api.github.com/repos/test_organization/test_repo/labels/documentation","name": "documentation","color": "0075ca","default": true,"description": "Improvements or additions to documentation"},{"id": 6460729265,"node_id": "LA_kwDOLH_fnc8AAAABgRbnsQ","url": "https://api.github.com/repos/test_organization/test_repo/labels/duplicate","name": "duplicate","color": "cfd3d7","default": true,"description": "This issue or pull request already exists"}],"state": "open","locked": false,"assignee": {"login": "test_organization","id": 157107299,"node_id": "U_kgDOCV1EYw","avatar_url": "https://avatars.githubusercontent.com/u/157107299?v=4","url": "https://api.github.com/users/test_organization","html_url": "https://github.com/test_organization","followers_url": "https://api.github.com/users/test_organization/followers","following_url": "https://api.github.com/users/test_organization/following{/other_user}","gists_url": "https://api.github.com/users/test_organization/gists{/gist_id}","starred_url": "https://api.github.com/users/test_organization/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_organization/subscriptions","organizations_url": "https://api.github.com/users/test_organization/orgs","repos_url": "https://api.github.com/users/test_organization/repos","events_url": "https://api.github.com/users/test_organization/events{/privacy}","received_events_url": "https://api.github.com/users/test_organization/received_events","type": "User","site_admin": false},"assignees": [{"login": "test_organization","id": 157107299,"node_id": "U_kgDOCV1EYw","avatar_url": "https://avatars.githubusercontent.com/u/157107299?v=4","url": "https://api.github.com/users/test_organization","html_url": "https://github.com/test_organization","followers_url": "https://api.github.com/users/test_organization/followers","following_url": "https://api.github.com/users/test_organization/following{/other_user}","gists_url": "https://api.github.com/users/test_organization/gists{/gist_id}","starred_url": "https://api.github.com/users/test_organization/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_organization/subscriptions","organizations_url": "https://api.github.com/users/test_organization/orgs","repos_url": "https://api.github.com/users/test_organization/repos","events_url": "https://api.github.com/users/test_organization/events{/privacy}","received_events_url": "https://api.github.com/users/test_organization/received_events","type": "User","site_admin": false}],"comments": 0,"created_at": "2024-01-22T09:42:18Z","updated_at": "2024-01-22T09:42:19Z","author_association": "OWNER","body": "This was created so we can see if issues are pulled in correctly","reactions": {"url": "https://api.github.com/repos/test_organization/test_repo/issues/1/reactions","total_count": 0,"+1": 0,"-1": 0,"laugh": 0,"hooray": 0,"confused": 0,"heart": 0,"rocket": 0,"eyes": 0},"timeline_url": "https://api.github.com/repos/test_organization/test_repo/issues/1/timeline","score": 1.0}]}
   get_my_issues:
     title: Get My Issues
     description: Retrieve all issues assigned to the currently authenticated user
@@ -1314,6 +1394,7 @@ actions:
         title: Issues
         description: An array of the issues assigned to the current user
         required: false
+        example: '[{"assignee": {"avatar_url": "https://avatars.githubusercontent.com/u/157107299?v=4","events_url": "https://api.github.com/users/test_user/events{/privacy}","followers_url": "https://api.github.com/users/test_user/followers","following_url": "https://api.github.com/users/test_user/following{/other_user}","gists_url": "https://api.github.com/users/test_user/gists{/gist_id}","html_url": "https://github.com/test_user","id": 157107299,"login": "test_user","node_id": "U_kgDOCV1EYw","organizations_url": "https://api.github.com/users/test_user/orgs","received_events_url": "https://api.github.com/users/test_user/received_events","repos_url": "https://api.github.com/users/test_user/repos","site_admin": false,"starred_url": "https://api.github.com/users/test_user/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_user/subscriptions","type": "User","url": "https://api.github.com/users/test_user"},"assignees": [{"avatar_url": "https://avatars.githubusercontent.com/u/157107299?v=4","events_url": "https://api.github.com/users/test_user/events{/privacy}","followers_url": "https://api.github.com/users/test_user/followers","following_url": "https://api.github.com/users/test_user/following{/other_user}","gists_url": "https://api.github.com/users/test_user/gists{/gist_id}","html_url": "https://github.com/test_user","id": 157107299,"login": "test_user","node_id": "U_kgDOCV1EYw","organizations_url": "https://api.github.com/users/test_user/orgs","received_events_url": "https://api.github.com/users/test_user/received_events","repos_url": "https://api.github.com/users/test_user/repos","site_admin": false,"starred_url": "https://api.github.com/users/test_user/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_user/subscriptions","type": "User","url": "https://api.github.com/users/test_user"}],"author_association": "COLLABORATOR","body": "eehqweiueqiyeq","comments": 0,"comments_url": "https://api.github.com/repos/test_organization/test_repo/issues/6/comments","created_at": "2024-01-23T14:10:18Z","events_url": "https://api.github.com/repos/test_organization/test_repo/issues/6/events","html_url": "https://github.com/test_organization/test_repo/issues/6","id": 2096177224,"labels": [],"labels_url": "https://api.github.com/repos/test_organization/test_repo/issues/6/labels{/name}","locked": false,"node_id": "I_kwDOLIAEx8588SBI","number": 6,"reactions": {"+1": 0,"-1": 0,"confused": 0,"eyes": 0,"heart": 0,"hooray": 0,"laugh": 0,"rocket": 0,"total_count": 0,"url": "https://api.github.com/repos/test_organization/test_repo/issues/6/reactions"},"repository": {"allow_forking": false,"archive_url": "https://api.github.com/repos/test_organization/test_repo/{archive_format}{/ref}","archived": false,"assignees_url": "https://api.github.com/repos/test_organization/test_repo/assignees{/user}","blobs_url": "https://api.github.com/repos/test_organization/test_repo/git/blobs{/sha}","branches_url": "https://api.github.com/repos/test_organization/test_repo/branches{/branch}","clone_url": "https://github.com/test_organization/test_repo.git","collaborators_url": "https://api.github.com/repos/test_organization/test_repo/collaborators{/collaborator}","comments_url": "https://api.github.com/repos/test_organization/test_repo/comments{/number}","commits_url": "https://api.github.com/repos/test_organization/test_repo/commits{/sha}","compare_url": "https://api.github.com/repos/test_organization/test_repo/compare/{base}...{head}","contents_url": "https://api.github.com/repos/test_organization/test_repo/contents/{+path}","contributors_url": "https://api.github.com/repos/test_organization/test_repo/contributors","created_at": "2024-01-22T10:02:32Z","default_branch": "main","deployments_url": "https://api.github.com/repos/test_organization/test_repo/deployments","description": "test for insight connect plugins","disabled": false,"downloads_url": "https://api.github.com/repos/test_organization/test_repo/downloads","events_url": "https://api.github.com/repos/test_organization/test_repo/events","fork": false,"forks": 0,"forks_count": 0,"forks_url": "https://api.github.com/repos/test_organization/test_repo/forks","full_name": "test_organization/test_repo","git_commits_url": "https://api.github.com/repos/test_organization/test_repo/git/commits{/sha}","git_refs_url": "https://api.github.com/repos/test_organization/test_repo/git/refs{/sha}","git_tags_url": "https://api.github.com/repos/test_organization/test_repo/git/tags{/sha}","git_url": "git://github.com/test_organization/test_repo.git","has_discussions": false,"has_downloads": true,"has_issues": true,"has_pages": false,"has_projects": true,"has_wiki": false,"hooks_url": "https://api.github.com/repos/test_organization/test_repo/hooks","html_url": "https://github.com/test_organization/test_repo","id": 746587335,"is_template": false,"issue_comment_url": "https://api.github.com/repos/test_organization/test_repo/issues/comments{/number}","issue_events_url": "https://api.github.com/repos/test_organization/test_repo/issues/events{/number}","issues_url": "https://api.github.com/repos/test_organization/test_repo/issues{/number}","keys_url": "https://api.github.com/repos/test_organization/test_repo/keys{/key_id}","labels_url": "https://api.github.com/repos/test_organization/test_repo/labels{/name}","languages_url": "https://api.github.com/repos/test_organization/test_repo/languages","merges_url": "https://api.github.com/repos/test_organization/test_repo/merges","milestones_url": "https://api.github.com/repos/test_organization/test_repo/milestones{/number}","name": "test_repo","node_id": "R_kgDOLIAExw","notifications_url": "https://api.github.com/repos/test_organization/test_repo/notifications{?since,all,participating}","open_issues": 6,"open_issues_count": 6,"owner": {"avatar_url": "https://avatars.githubusercontent.com/u/157362711?v=4","events_url": "https://api.github.com/users/test_organization/events{/privacy}","followers_url": "https://api.github.com/users/test_organization/followers","following_url": "https://api.github.com/users/test_organization/following{/other_user}","gists_url": "https://api.github.com/users/test_organization/gists{/gist_id}","html_url": "https://github.com/test_organization","id": 157362711,"login": "test_organization","node_id": "O_kgDOCWEqFw","organizations_url": "https://api.github.com/users/test_organization/orgs","received_events_url": "https://api.github.com/users/test_organization/received_events","repos_url": "https://api.github.com/users/test_organization/repos","site_admin": false,"starred_url": "https://api.github.com/users/test_organization/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_organization/subscriptions","type": "Organization","url": "https://api.github.com/users/test_organization"},"permissions": {"admin": true,"maintain": true,"pull": true,"push": true,"triage": true},"private": true,"pulls_url": "https://api.github.com/repos/test_organization/test_repo/pulls{/number}","pushed_at": "2024-01-22T10:02:32Z","releases_url": "https://api.github.com/repos/test_organization/test_repo/releases{/id}","size": 0,"ssh_url": "github.com:test_organization/test_repo.git","stargazers_count": 0,"stargazers_url": "https://api.github.com/repos/test_organization/test_repo/stargazers","statuses_url": "https://api.github.com/repos/test_organization/test_repo/statuses/{sha}","subscribers_url": "https://api.github.com/repos/test_organization/test_repo/subscribers","subscription_url": "https://api.github.com/repos/test_organization/test_repo/subscription","svn_url": "https://github.com/test_organization/test_repo","tags_url": "https://api.github.com/repos/test_organization/test_repo/tags","teams_url": "https://api.github.com/repos/test_organization/test_repo/teams","topics": [],"trees_url": "https://api.github.com/repos/test_organization/test_repo/git/trees{/sha}","updated_at": "2024-01-22T13:28:12Z","url": "https://api.github.com/repos/test_organization/test_repo","visibility": "private","watchers": 0,"watchers_count": 0,"web_commit_signoff_required": false},"repository_url": "https://api.github.com/repos/test_organization/test_repo","state": "open","timeline_url": "https://api.github.com/repos/test_organization/test_repo/issues/6/timeline","title": "fshksdhkfsh","updated_at": "2024-01-23T14:10:18Z","url": "https://api.github.com/repos/test_organization/test_repo/issues/6","user": {"avatar_url": "https://avatars.githubusercontent.com/u/157107299?v=4","events_url": "https://api.github.com/users/test_user/events{/privacy}","followers_url": "https://api.github.com/users/test_user/followers","following_url": "https://api.github.com/users/test_user/following{/other_user}","gists_url": "https://api.github.com/users/test_user/gists{/gist_id}","html_url": "https://github.com/test_user","id": 157107299,"login": "test_user","node_id": "U_kgDOCV1EYw","organizations_url": "https://api.github.com/users/test_user/orgs","received_events_url": "https://api.github.com/users/test_user/received_events","repos_url": "https://api.github.com/users/test_user/repos","site_admin": false,"starred_url": "https://api.github.com/users/test_user/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_user/subscriptions","type": "User","url": "https://api.github.com/users/test_user"}}]'
   get_issues_by_repo:
     title: Get Issues by Repo
     description: Retrieve all issues currently open on the specified repo
@@ -1323,17 +1404,20 @@ actions:
         title: Title
         description: Name of the repository
         required: true
+        example: test_title
       owner:
         type: string
         title: Owner
         description: Owner of the repository
         required: true
+        example: test_owner
     output:
       issues:
         type: '[]issue'
         title: Issues
         description: An array of the issues open on the specified repo
         required: false
+        example: '[{"assignee": {"avatar_url": "https://avatars.githubusercontent.com/u/157107299?v=4","events_url": "https://api.github.com/users/test_user/events{/privacy}","followers_url": "https://api.github.com/users/test_user/followers","following_url": "https://api.github.com/users/test_user/following{/other_user}","gists_url": "https://api.github.com/users/test_user/gists{/gist_id}","html_url": "https://github.com/test_user","id": 157107299,"login": "test_user","node_id": "U_kgDOCV1EYw","organizations_url": "https://api.github.com/users/test_user/orgs","received_events_url": "https://api.github.com/users/test_user/received_events","repos_url": "https://api.github.com/users/test_user/repos","site_admin": false,"starred_url": "https://api.github.com/users/test_user/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_user/subscriptions","type": "User","url": "https://api.github.com/users/test_user"},"assignees": [{"avatar_url": "https://avatars.githubusercontent.com/u/157107299?v=4","events_url": "https://api.github.com/users/test_user/events{/privacy}","followers_url": "https://api.github.com/users/test_user/followers","following_url": "https://api.github.com/users/test_user/following{/other_user}","gists_url": "https://api.github.com/users/test_user/gists{/gist_id}","html_url": "https://github.com/test_user","id": 157107299,"login": "test_user","node_id": "U_kgDOCV1EYw","organizations_url": "https://api.github.com/users/test_user/orgs","received_events_url": "https://api.github.com/users/test_user/received_events","repos_url": "https://api.github.com/users/test_user/repos","site_admin": false,"starred_url": "https://api.github.com/users/test_user/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_user/subscriptions","type": "User","url": "https://api.github.com/users/test_user"}],"author_association": "OWNER","body": "This was created so we can see if issues are pulled in correctly","comments": 0,"comments_url": "https://api.github.com/repos/test_user/test_repo/issues/1/comments","created_at": "2024-01-22T09:42:18Z","events_url": "https://api.github.com/repos/test_user/test_repo/issues/1/events","html_url": "https://github.com/test_user/test_repo/issues/1","id": 2093498528,"labels": [{"color": "d73a4a","default": true,"description": "Something isnt working","id": 6460729259,"name": "bug","node_id": "LA_kwDOLH_fnc8AAAABgRbnqw","url": "https://api.github.com/repos/test_user/test_repo/labels/bug"},{"color": "0075ca","default": true,"description": "Improvements or additions to documentation","id": 6460729262,"name": "documentation","node_id": "LA_kwDOLH_fnc8AAAABgRbnrg","url": "https://api.github.com/repos/test_user/test_repo/labels/documentation"},{"color": "cfd3d7","default": true,"description": "This issue or pull request already exists","id": 6460729265,"name": "duplicate","node_id": "LA_kwDOLH_fnc8AAAABgRbnsQ","url": "https://api.github.com/repos/test_user/test_repo/labels/duplicate"}],"labels_url": "https://api.github.com/repos/test_user/test_repo/issues/1/labels{/name}","locked": false,"node_id": "I_kwDOLH_fnc58yECg","number": 1,"reactions": {"+1": 0,"-1": 0,"confused": 0,"eyes": 0,"heart": 0,"hooray": 0,"laugh": 0,"rocket": 0,"total_count": 0,"url": "https://api.github.com/repos/test_user/test_repo/issues/1/reactions"},"repository_url": "https://api.github.com/repos/test_user/test_repo","state": "open","timeline_url": "https://api.github.com/repos/test_user/test_repo/issues/1/timeline","title": "This is a test issue","updated_at": "2024-01-22T09:42:19Z","url": "https://api.github.com/repos/test_user/test_repo/issues/1","user": {"avatar_url": "https://avatars.githubusercontent.com/u/157107299?v=4","events_url": "https://api.github.com/users/test_user/events{/privacy}","followers_url": "https://api.github.com/users/test_user/followers","following_url": "https://api.github.com/users/test_user/following{/other_user}","gists_url": "https://api.github.com/users/test_user/gists{/gist_id}","html_url": "https://github.com/test_user","id": 157107299,"login": "test_user","node_id": "U_kgDOCV1EYw","organizations_url": "https://api.github.com/users/test_user/orgs","received_events_url": "https://api.github.com/users/test_user/received_events","repos_url": "https://api.github.com/users/test_user/repos","site_admin": false,"starred_url": "https://api.github.com/users/test_user/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_user/subscriptions","type": "User","url": "https://api.github.com/users/test_user"}}]'
   add_collaborator:
     title: Add Collaborator
     description: Adds a user as a collaborator to a GitHub repository
@@ -1343,16 +1427,19 @@ actions:
         title: Username
         description: Username to add as a collaborator
         required: true
+        example: test_username
       organization:
         type: string
         title: Organization
         description: Organization the repository is under
         required: false
+        example: test_organization
       repository:
         type: string
         title: Repository
         description: Repository to add user as a collaborator
         required: false
+        example: test_repository
       permission:
         type: string
         title: Permission
@@ -1364,12 +1451,14 @@ actions:
         - admin
         default: push
         required: false
+        example: admin
     output:
       results:
         title: Results
         description: Response from adding a new collaborator
         type: add_collaborator
         required: false
+        example: {"id": 244304010,"node_id": "RI_kwDOLIAEx84Oj8iK","repository": {"id": 746587335,"node_id": "R_kgDOLIAExw","name": "test_repository","full_name": "test_organization/test_repository","private": true,"owner": {"login": "test_organization","id": 157362711,"node_id": "O_kgDOCWEqFw","avatar_url": "https://avatars.githubusercontent.com/u/157362711?v=4","gravatar_id": "","url": "https://api.github.com/users/test_organization","html_url": "https://github.com/test_organization","followers_url": "https://api.github.com/users/test_organization/followers","following_url": "https://api.github.com/users/test_organization/following{/other_user}","gists_url": "https://api.github.com/users/test_organization/gists{/gist_id}","starred_url": "https://api.github.com/users/test_organization/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_organization/subscriptions","organizations_url": "https://api.github.com/users/test_organization/orgs","repos_url": "https://api.github.com/users/test_organization/repos","events_url": "https://api.github.com/users/test_organization/events{/privacy}","received_events_url": "https://api.github.com/users/test_organization/received_events","type": "Organization","site_admin": false},"html_url": "https://github.com/test_organization/test_repository","description": "test for insight connect plugins","fork": false,"url": "https://api.github.com/repos/test_organization/test_repository","forks_url": "https://api.github.com/repos/test_organization/test_repository/forks","keys_url": "https://api.github.com/repos/test_organization/test_repository/keys{/key_id}","collaborators_url": "https://api.github.com/repos/test_organization/test_repository/collaborators{/collaborator}","teams_url": "https://api.github.com/repos/test_organization/test_repository/teams","hooks_url": "https://api.github.com/repos/test_organization/test_repository/hooks","issue_events_url": "https://api.github.com/repos/test_organization/test_repository/issues/events{/number}","events_url": "https://api.github.com/repos/test_organization/test_repository/events","assignees_url": "https://api.github.com/repos/test_organization/test_repository/assignees{/user}","branches_url": "https://api.github.com/repos/test_organization/test_repository/branches{/branch}","tags_url": "https://api.github.com/repos/test_organization/test_repository/tags","blobs_url": "https://api.github.com/repos/test_organization/test_repository/git/blobs{/sha}","git_tags_url": "https://api.github.com/repos/test_organization/test_repository/git/tags{/sha}","git_refs_url": "https://api.github.com/repos/test_organization/test_repository/git/refs{/sha}","trees_url": "https://api.github.com/repos/test_organization/test_repository/git/trees{/sha}","statuses_url": "https://api.github.com/repos/test_organization/test_repository/statuses/{sha}","languages_url": "https://api.github.com/repos/test_organization/test_repository/languages","stargazers_url": "https://api.github.com/repos/test_organization/test_repository/stargazers","contributors_url": "https://api.github.com/repos/test_organization/test_repository/contributors","subscribers_url": "https://api.github.com/repos/test_organization/test_repository/subscribers","subscription_url": "https://api.github.com/repos/test_organization/test_repository/subscription","commits_url": "https://api.github.com/repos/test_organization/test_repository/commits{/sha}","git_commits_url": "https://api.github.com/repos/test_organization/test_repository/git/commits{/sha}","comments_url": "https://api.github.com/repos/test_organization/test_repository/comments{/number}","issue_comment_url": "https://api.github.com/repos/test_organization/test_repository/issues/comments{/number}","contents_url": "https://api.github.com/repos/test_organization/test_repository/contents/{+path}","compare_url": "https://api.github.com/repos/test_organization/test_repository/compare/{base}...{head}","merges_url": "https://api.github.com/repos/test_organization/test_repository/merges","archive_url": "https://api.github.com/repos/test_organization/test_repository/{archive_format}{/ref}","downloads_url": "https://api.github.com/repos/test_organization/test_repository/downloads","issues_url": "https://api.github.com/repos/test_organization/test_repository/issues{/number}","pulls_url": "https://api.github.com/repos/test_organization/test_repository/pulls{/number}","milestones_url": "https://api.github.com/repos/test_organization/test_repository/milestones{/number}","notifications_url": "https://api.github.com/repos/test_organization/test_repository/notifications{?since,all,participating}","labels_url": "https://api.github.com/repos/test_organization/test_repository/labels{/name}","releases_url": "https://api.github.com/repos/test_organization/test_repository/releases{/id}","deployments_url": "https://api.github.com/repos/test_organization/test_repository/deployments"},"invitee": {"login": "test_username","id": 144030336,"node_id": "U_kgDOCJW6gA","avatar_url": "https://avatars.githubusercontent.com/u/144030336?v=4","gravatar_id": "","url": "https://api.github.com/users/test_username","html_url": "https://github.com/test_username","followers_url": "https://api.github.com/users/test_username/followers","following_url": "https://api.github.com/users/test_username/following{/other_user}","gists_url": "https://api.github.com/users/test_username/gists{/gist_id}","starred_url": "https://api.github.com/users/test_username/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_username/subscriptions","organizations_url": "https://api.github.com/users/test_username/orgs","repos_url": "https://api.github.com/users/test_username/repos","events_url": "https://api.github.com/users/test_username/events{/privacy}","received_events_url": "https://api.github.com/users/test_username/received_events","type": "User","site_admin": false},"inviter": {"login": "test_invite_user","id": 157107299,"node_id": "U_kgDOCV1EYw","avatar_url": "https://avatars.githubusercontent.com/u/157107299?v=4","gravatar_id": "","url": "https://api.github.com/users/test_invite_user","html_url": "https://github.com/test_invite_user","followers_url": "https://api.github.com/users/test_invite_user/followers","following_url": "https://api.github.com/users/test_invite_user/following{/other_user}","gists_url": "https://api.github.com/users/test_invite_user/gists{/gist_id}","starred_url": "https://api.github.com/users/test_invite_user/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_invite_user/subscriptions","organizations_url": "https://api.github.com/users/test_invite_user/orgs","repos_url": "https://api.github.com/users/test_invite_user/repos","events_url": "https://api.github.com/users/test_invite_user/events{/privacy}","received_events_url": "https://api.github.com/users/test_invite_user/received_events","type": "User","site_admin": false},"permissions": "write","created_at": "2024-01-24T12:02:16Z","url": "https://api.github.com/user/repository_invitations/244304010","html_url": "https://github.com/test_organization/test_repository/invitations"}
   add_membership:
     title: Add Membership
     description: Add or update user's membership in an organization
@@ -1379,11 +1468,13 @@ actions:
         description: The organization that user will be added or updated to
         type: string
         required: false
+        example: test_organization
       username:
         title: Username
         description: The user that will be added or updated
         type: string
         required: false
+        example: test_username
       role:
         title: Role
         description: The role to give the user in the organization
@@ -1393,37 +1484,44 @@ actions:
         - member
         default: member
         required: false
+        example: admin
     output:
       url:
         description: URL
         title: URL
         type: string
         required: false
+        example: https://api.github.com/orgs/test_organization/memberships/test_user
       state:
         description: State of users membership
         title: State
         type: string
         required: false
+        example: pending
       role:
         description: Role of users membership
         title: Role
         type: string
         required: false
+        example: member
       user:
         description: User
         title: User
         type: membership_user
         required: false
+        example: {"avatar_url": "https://avatars.githubusercontent.com/u/144030336?v=4","events_url": "https://api.github.com/users/test_user/events{/privacy}","followers_url": "https://api.github.com/users/test_user/followers","following_url": "https://api.github.com/users/test_user/following{/other_user}","gists_url": "https://api.github.com/users/test_user/gists{/gist_id}","html_url": "https://github.com/test_user","id": 144030336,"login": "test_user","node_id": "U_kgDOCJW6gA","organizations_url": "https://api.github.com/users/test_user/orgs","received_events_url": "https://api.github.com/users/test_user/received_events","repos_url": "https://api.github.com/users/test_user/repos","site_admin": false,"starred_url": "https://api.github.com/users/test_user/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_user/subscriptions","type": "User","url": "https://api.github.com/users/test_user"}
       organization:
         description: Organization
         title: Organization
         type: membership_organization
         required: false
+        example: {"avatar_url": "https://avatars.githubusercontent.com/u/157362711?v=4","events_url": "https://api.github.com/orgs/test_organization/events","hooks_url": "https://api.github.com/orgs/test_organization/hooks","id": 157362711,"issues_url": "https://api.github.com/orgs/test_organization/issues","login": "test_organization","members_url": "https://api.github.com/orgs/test_organization/members{/member}","node_id": "O_kgDOCWEqFw","public_members_url": "https://api.github.com/orgs/test_organization/public_members{/member}","repos_url": "https://api.github.com/orgs/test_organization/repos","url": "https://api.github.com/orgs/test_organization"}
       organization_url:
         description: Organization URL
         title: Organization URL
         type: string
         required: false
+        example: https://api.github.com/orgs/test_organization
   block_user:
     title: Block User
     description: Block a user
@@ -1432,12 +1530,14 @@ actions:
         type: string
         description: Username to block
         required: true
+        example: test_username
     output:
       success:
         title: Status
         description: Whether the user was unblocked
         type: boolean
         required: true
+        example: true
   unblock_user:
     title: Unblock User
     description: Unblock a user
@@ -1446,12 +1546,14 @@ actions:
         type: string
         description: Username to unblock
         required: true
+        example: test_username
     output:
       success:
         title: Success
         description: Whether the user was unblocked
         type: boolean
         required: true
+        example: true
 triggers:
   issue:
     title: Issue
@@ -1461,22 +1563,27 @@ triggers:
         type: string
         description: Return issues of a specific organization
         required: false
+        example: test_organization
       repository:
         type: string
         description: Return issues of a specific repository
         required: true
+        example: test_repository
       assignee:
         type: string
         description: Username of assignee
         required: false
+        example: test_username
       frequency:
         type: integer
         description: Poll frequency in seconds
         default: 300
         required: false
+        example: 300
     output:
       issue:
         title: Issue
         description: Issue
         type: object
         required: false
+        example: {"assignee": {"avatar_url": "https://avatars.githubusercontent.com/u/157107299?v=4","events_url": "https://api.github.com/users/test_user/events{/privacy}","followers_url": "https://api.github.com/users/test_user/followers","following_url": "https://api.github.com/users/test_user/following{/other_user}","gists_url": "https://api.github.com/users/test_user/gists{/gist_id}","html_url": "https://github.com/test_user","id": 157107299,"login": "test_user","node_id": "U_kgDOCV1EYw","organizations_url": "https://api.github.com/users/test_user/orgs","received_events_url": "https://api.github.com/users/test_user/received_events","repos_url": "https://api.github.com/users/test_user/repos","site_admin": false,"starred_url": "https://api.github.com/users/test_user/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_user/subscriptions","type": "User","url": "https://api.github.com/users/test_user"},"assignees": [{"avatar_url": "https://avatars.githubusercontent.com/u/157107299?v=4","events_url": "https://api.github.com/users/test_user/events{/privacy}","followers_url": "https://api.github.com/users/test_user/followers","following_url": "https://api.github.com/users/test_user/following{/other_user}","gists_url": "https://api.github.com/users/test_user/gists{/gist_id}","html_url": "https://github.com/test_user","id": 157107299,"login": "test_user","node_id": "U_kgDOCV1EYw","organizations_url": "https://api.github.com/users/test_user/orgs","received_events_url": "https://api.github.com/users/test_user/received_events","repos_url": "https://api.github.com/users/test_user/repos","site_admin": false,"starred_url": "https://api.github.com/users/test_user/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_user/subscriptions","type": "User","url": "https://api.github.com/users/test_user"}],"author_association": "COLLABORATOR","body": "eehqweiueqiyeq","comments": 0,"comments_url": "https://api.github.com/repos/test_organization/test_repo/issues/6/comments","created_at": "2024-01-23T14:10:18Z","events_url": "https://api.github.com/repos/test_organization/test_repo/issues/6/events","html_url": "https://github.com/test_organization/test_repo/issues/6","id": 2096177224,"labels": [],"labels_url": "https://api.github.com/repos/test_organization/test_repo/issues/6/labels{/name}","locked": false,"node_id": "I_kwDOLIAEx8588SBI","number": 6,"reactions": {"+1": 0,"-1": 0,"confused": 0,"eyes": 0,"heart": 0,"hooray": 0,"laugh": 0,"rocket": 0,"total_count": 0,"url": "https://api.github.com/repos/test_organization/test_repo/issues/6/reactions"},"repository": {"allow_forking": false,"archive_url": "https://api.github.com/repos/test_organization/test_repo/{archive_format}{/ref}","archived": false,"assignees_url": "https://api.github.com/repos/test_organization/test_repo/assignees{/user}","blobs_url": "https://api.github.com/repos/test_organization/test_repo/git/blobs{/sha}","branches_url": "https://api.github.com/repos/test_organization/test_repo/branches{/branch}","clone_url": "https://github.com/test_organization/test_repo.git","collaborators_url": "https://api.github.com/repos/test_organization/test_repo/collaborators{/collaborator}","comments_url": "https://api.github.com/repos/test_organization/test_repo/comments{/number}","commits_url": "https://api.github.com/repos/test_organization/test_repo/commits{/sha}","compare_url": "https://api.github.com/repos/test_organization/test_repo/compare/{base}...{head}","contents_url": "https://api.github.com/repos/test_organization/test_repo/contents/{+path}","contributors_url": "https://api.github.com/repos/test_organization/test_repo/contributors","created_at": "2024-01-22T10:02:32Z","default_branch": "main","deployments_url": "https://api.github.com/repos/test_organization/test_repo/deployments","description": "test for insight connect plugins","disabled": false,"downloads_url": "https://api.github.com/repos/test_organization/test_repo/downloads","events_url": "https://api.github.com/repos/test_organization/test_repo/events","fork": false,"forks": 0,"forks_count": 0,"forks_url": "https://api.github.com/repos/test_organization/test_repo/forks","full_name": "test_organization/test_repo","git_commits_url": "https://api.github.com/repos/test_organization/test_repo/git/commits{/sha}","git_refs_url": "https://api.github.com/repos/test_organization/test_repo/git/refs{/sha}","git_tags_url": "https://api.github.com/repos/test_organization/test_repo/git/tags{/sha}","git_url": "git://github.com/test_organization/test_repo.git","has_discussions": false,"has_downloads": true,"has_issues": true,"has_pages": false,"has_projects": true,"has_wiki": false,"hooks_url": "https://api.github.com/repos/test_organization/test_repo/hooks","html_url": "https://github.com/test_organization/test_repo","id": 746587335,"is_template": false,"issue_comment_url": "https://api.github.com/repos/test_organization/test_repo/issues/comments{/number}","issue_events_url": "https://api.github.com/repos/test_organization/test_repo/issues/events{/number}","issues_url": "https://api.github.com/repos/test_organization/test_repo/issues{/number}","keys_url": "https://api.github.com/repos/test_organization/test_repo/keys{/key_id}","labels_url": "https://api.github.com/repos/test_organization/test_repo/labels{/name}","languages_url": "https://api.github.com/repos/test_organization/test_repo/languages","merges_url": "https://api.github.com/repos/test_organization/test_repo/merges","milestones_url": "https://api.github.com/repos/test_organization/test_repo/milestones{/number}","name": "test_repo","node_id": "R_kgDOLIAExw","notifications_url": "https://api.github.com/repos/test_organization/test_repo/notifications{?since,all,participating}","open_issues": 6,"open_issues_count": 6,"owner": {"avatar_url": "https://avatars.githubusercontent.com/u/157362711?v=4","events_url": "https://api.github.com/users/test_organization/events{/privacy}","followers_url": "https://api.github.com/users/test_organization/followers","following_url": "https://api.github.com/users/test_organization/following{/other_user}","gists_url": "https://api.github.com/users/test_organization/gists{/gist_id}","html_url": "https://github.com/test_organization","id": 157362711,"login": "test_organization","node_id": "O_kgDOCWEqFw","organizations_url": "https://api.github.com/users/test_organization/orgs","received_events_url": "https://api.github.com/users/test_organization/received_events","repos_url": "https://api.github.com/users/test_organization/repos","site_admin": false,"starred_url": "https://api.github.com/users/test_organization/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_organization/subscriptions","type": "Organization","url": "https://api.github.com/users/test_organization"},"permissions": {"admin": true,"maintain": true,"pull": true,"push": true,"triage": true},"private": true,"pulls_url": "https://api.github.com/repos/test_organization/test_repo/pulls{/number}","pushed_at": "2024-01-22T10:02:32Z","releases_url": "https://api.github.com/repos/test_organization/test_repo/releases{/id}","size": 0,"ssh_url": "github.com:test_organization/test_repo.git","stargazers_count": 0,"stargazers_url": "https://api.github.com/repos/test_organization/test_repo/stargazers","statuses_url": "https://api.github.com/repos/test_organization/test_repo/statuses/{sha}","subscribers_url": "https://api.github.com/repos/test_organization/test_repo/subscribers","subscription_url": "https://api.github.com/repos/test_organization/test_repo/subscription","svn_url": "https://github.com/test_organization/test_repo","tags_url": "https://api.github.com/repos/test_organization/test_repo/tags","teams_url": "https://api.github.com/repos/test_organization/test_repo/teams","topics": [],"trees_url": "https://api.github.com/repos/test_organization/test_repo/git/trees{/sha}","updated_at": "2024-01-22T13:28:12Z","url": "https://api.github.com/repos/test_organization/test_repo","visibility": "private","watchers": 0,"watchers_count": 0,"web_commit_signoff_required": false},"repository_url": "https://api.github.com/repos/test_organization/test_repo","state": "open","timeline_url": "https://api.github.com/repos/test_organization/test_repo/issues/6/timeline","title": "fshksdhkfsh","updated_at": "2024-01-23T14:10:18Z","url": "https://api.github.com/repos/test_organization/test_repo/issues/6","user": {"avatar_url": "https://avatars.githubusercontent.com/u/157107299?v=4","events_url": "https://api.github.com/users/test_user/events{/privacy}","followers_url": "https://api.github.com/users/test_user/followers","following_url": "https://api.github.com/users/test_user/following{/other_user}","gists_url": "https://api.github.com/users/test_user/gists{/gist_id}","html_url": "https://github.com/test_user","id": 157107299,"login": "test_user","node_id": "U_kgDOCV1EYw","organizations_url": "https://api.github.com/users/test_user/orgs","received_events_url": "https://api.github.com/users/test_user/received_events","repos_url": "https://api.github.com/users/test_user/repos","site_admin": false,"starred_url": "https://api.github.com/users/test_user/starred{/owner}{/repo}","subscriptions_url": "https://api.github.com/users/test_user/subscriptions","type": "User","url": "https://api.github.com/users/test_user"}}
