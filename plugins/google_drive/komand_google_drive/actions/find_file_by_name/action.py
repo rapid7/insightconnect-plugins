@@ -23,7 +23,7 @@ class FindFileByName(insightconnect_plugin_runtime.Action):
         else:
             query = f"name {filename_operator} '{filename}'"
 
-        response = self.connection.service.files().list(q=query, spaces="drive", fields="files(id, name)").execute()
+        response = self.connection.service.files().list(q=query, spaces="drive", fields="files(id, name)", supportsAllDrives=True, includeItemsFromAllDrives=True).execute()
         file_info = []
         for file in response.get("files", []):
             file_info.append({"file_name": file.get("name"), "file_id": file.get("id")})

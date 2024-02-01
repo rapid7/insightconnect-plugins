@@ -47,7 +47,7 @@ class UploadFile(insightconnect_plugin_runtime.Action):
                 .create(
                     body=file_metadata,
                     media_body=media,
-                    supportsTeamDrives=True,
+                    supportsAllDrives=True,
                     fields="id",
                 )
                 .execute()
