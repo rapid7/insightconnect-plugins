@@ -32,7 +32,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|True|InsightIDR API key|None|4472f2g7-991z-4w70-li11-7552w8qm0266|
-|region|string|United States 1|True|The region for InsightIDR|['United States 1', 'United States 2', 'United States 3', 'Europe', 'Canada', 'Australia', 'Japan']|United States 1|
+|region|string|United States 1|True|The region for InsightIDR|["United States 1", "United States 2", "United States 3", "Europe", "Canada", "Australia", "Japan"]|United States 1|
   
 Example input:
 
@@ -98,7 +98,8 @@ Example output:
 ```
 {
   "rejected_indicators": [
-    "https://example.com"
+    "https://example.com",
+    "https://test.com"
   ],
   "threat": {
     "indicator_count": 13,
@@ -110,7 +111,8 @@ Example output:
 
 #### Advanced Query on Log
   
-This action is used to realtime query an InsightIDR log. This will query individual logs for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges
+This action is used to realtime query an InsightIDR log. This will query individual logs for results. Note only 500 
+results will be returned from a single call, if all results are required for this query please use smaller timeranges
 
 ##### Input
 
@@ -118,7 +120,7 @@ This action is used to realtime query an InsightIDR log. This will query individ
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |log|string|None|True|Log to search|None|Firewall Activity|
 |query|string|None|True|LEQL Query|None|where(user=adagentadmin, loose)|
-|relative_time|string|Last 5 Minutes|True|A relative time in the past to look for alerts|['Last 5 Minutes', 'Last 10 Minutes', 'Last 20 Minutes', 'Last 30 Minutes', 'Last 45 Minutes', 'Last 1 Hour', 'Last 2 Hours', 'Last 3 Hours', 'Last 6 Hours', 'Last 12 Hours', 'Use Time From Value']|Last 5 Minutes|
+|relative_time|string|Last 5 Minutes|True|A relative time in the past to look for alerts|["Last 5 Minutes", "Last 10 Minutes", "Last 20 Minutes", "Last 30 Minutes", "Last 45 Minutes", "Last 1 Hour", "Last 2 Hours", "Last 3 Hours", "Last 6 Hours", "Last 12 Hours", "Use Time From Value"]|Last 5 Minutes|
 |time_from|string|None|False|Beginning date and time for the query. This will be ignored unless Relative Time input is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|01-01-2020T00:00:00|
 |time_to|string|None|False|Date and time for the end of the query. If left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|12-31-2020T00:00:00|
 |timeout|int|60|True|Time in seconds to wait for the query to return. If exceeded the plugin will throw an error|None|60|
@@ -149,61 +151,63 @@ Example output:
 ```
 {
   "count": 10,
-  "results_events": {
-    "labels": [],
-    "links": [
-      {
-        "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx",
-        "rel": "Context"
-      }
-    ],
-    "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313",
-    "message": {
-      "destination_asset": "iagent-win7",
-      "destination_asset_address": "example-host",
-      "destination_local_account": "user",
-      "logon_type": "NETWORK",
-      "new_authentication": "false",
-      "result": "SUCCESS",
-      "service": "ntlmssp ",
-      "source_asset_address": "192.168.100.50",
-      "source_json": {
-        "computerName": "example-host",
-        "eventCode": 4624,
-        "eventData": null,
-        "insertionStrings": [
-          "S-1-0-0",
-          "-",
-          "-",
-          "0x0",
-          "X-X-X-XXXXXXXXXXX",
-          "user@example.com",
-          "example-host",
-          "0x204f163c",
-          "3",
-          "NtLmSsp ",
-          "NTLM",
-          "",
-          "{00000000-0000-0000-0000-000000000000}",
-          "-",
-          "NTLM V2",
-          "128",
-          "0x0",
-          "-",
-          "192.168.50.1",
-          "59090"
-        ],
-        "isDomainController": false,
-        "sid": "",
-        "sourceName": "Microsoft-Windows-Security-Auditing",
-        "timeWritten": "2020-10-02T00:29:13.670722000Z"
+  "results_events": [
+    {
+      "labels": [],
+      "links": [
+        {
+          "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx",
+          "rel": "Context"
+        }
+      ],
+      "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313",
+      "message": {
+        "destination_asset": "iagent-win7",
+        "destination_asset_address": "example-host",
+        "destination_local_account": "user",
+        "logon_type": "NETWORK",
+        "new_authentication": "false",
+        "result": "SUCCESS",
+        "service": "ntlmssp ",
+        "source_asset_address": "192.168.100.50",
+        "source_json": {
+          "computerName": "example-host",
+          "eventCode": 4624,
+          "eventData": null,
+          "insertionStrings": [
+            "S-1-0-0",
+            "-",
+            "-",
+            "0x0",
+            "X-X-X-XXXXXXXXXXX",
+            "user@example.com",
+            "example-host",
+            "0x204f163c",
+            "3",
+            "NtLmSsp ",
+            "NTLM",
+            "",
+            "{00000000-0000-0000-0000-000000000000}",
+            "-",
+            "NTLM V2",
+            "128",
+            "0x0",
+            "-",
+            "192.168.50.1",
+            "59090"
+          ],
+          "isDomainController": false,
+          "sid": "",
+          "sourceName": "Microsoft-Windows-Security-Auditing",
+          "timeWritten": "2020-10-02T00:29:13.670722000Z"
+        },
+        "timestamp": "2020-10-02T00:29:14.649Z"
       },
-      "timestamp": "2020-10-02T00:29:14.649Z"
-    },
-    "sequence_number": 123456789123456789,
-    "sequence_number_str": "123456789123456789",
-    "timestamp": 1601598638768
-  },
+      "sequence_number": 123456789123456789,
+      "sequence_number_str": "123456789123456789",
+      "timestamp": 1601598638768
+    }
+  ],
   "results_statistical": {
     "leql": {
       "during": {
@@ -338,15 +342,16 @@ Example output:
 
 #### Advanced Query on Log Set
   
-This action is used to realtime query an InsightIDR log set. This will query entire log sets for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges
+This action is used to realtime query an InsightIDR log set. This will query entire log sets for results. Note only 500 
+results will be returned from a single call, if all results are required for this query please use smaller timeranges
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|log_set|string|None|True|Log Set to search|['Advanced Malware Alert', 'Active Directory Admin Activity', 'Asset Authentication', 'Cloud Service Admin Activity', 'Cloud Service Activity', 'DNS Query', 'Endpoint Activity', 'Endpoint Agent', 'Exploit Mitigation Alert', 'File Access Activity', 'File Modification Activity', 'Firewall Activity', 'Network Flow', 'Host To IP Observations', 'IDS Alert', 'Ingress Authentication', 'Raw Log', 'SSO Authentication', 'Unparsed Data', 'Third Party Alert', 'Virus Alert', 'Web Proxy Activity']|Firewall Activity|
+|log_set|string|None|True|Log Set to search|["Advanced Malware Alert", "Active Directory Admin Activity", "Asset Authentication", "Cloud Service Admin Activity", "Cloud Service Activity", "DNS Query", "Endpoint Activity", "Endpoint Agent", "Exploit Mitigation Alert", "File Access Activity", "File Modification Activity", "Firewall Activity", "Network Flow", "Host To IP Observations", "IDS Alert", "Ingress Authentication", "Raw Log", "SSO Authentication", "Unparsed Data", "Third Party Alert", "Virus Alert", "Web Proxy Activity"]|Firewall Activity|
 |query|string|None|True|LEQL Query|None|where(user=adagentadmin, loose)|
-|relative_time|string|Last 5 Minutes|True|A relative time in the past to look for alerts|['Last 5 Minutes', 'Last 10 Minutes', 'Last 20 Minutes', 'Last 30 Minutes', 'Last 45 Minutes', 'Last 1 Hour', 'Last 2 Hours', 'Last 3 Hours', 'Last 6 Hours', 'Last 12 Hours', 'Use Time From Value']|Last 5 Minutes|
+|relative_time|string|Last 5 Minutes|True|A relative time in the past to look for alerts|["Last 5 Minutes", "Last 10 Minutes", "Last 20 Minutes", "Last 30 Minutes", "Last 45 Minutes", "Last 1 Hour", "Last 2 Hours", "Last 3 Hours", "Last 6 Hours", "Last 12 Hours", "Use Time From Value"]|Last 5 Minutes|
 |time_from|string|None|False|Beginning date and time for the query. This will be ignored unless Relative Time input is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|01-01-2020T00:00:00|
 |time_to|string|None|False|Date and time for the end of the query. If left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|12-31-2020T00:00:00|
 |timeout|int|60|True|Time in seconds to wait for the query to return. If exceeded the plugin will throw an error|None|60|
@@ -377,61 +382,63 @@ Example output:
 ```
 {
   "count": 10,
-  "results_events": {
-    "labels": [],
-    "links": [
-      {
-        "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx",
-        "rel": "Context"
-      }
-    ],
-    "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313",
-    "message": {
-      "destination_asset": "iagent-win7",
-      "destination_asset_address": "example-host",
-      "destination_local_account": "user",
-      "logon_type": "NETWORK",
-      "new_authentication": "false",
-      "result": "SUCCESS",
-      "service": "ntlmssp ",
-      "source_asset_address": "192.168.100.50",
-      "source_json": {
-        "computerName": "example-host",
-        "eventCode": 4624,
-        "eventData": null,
-        "insertionStrings": [
-          "S-1-0-0",
-          "-",
-          "-",
-          "0x0",
-          "X-X-X-XXXXXXXXXXX",
-          "user@example.com",
-          "example-host",
-          "0x204f163c",
-          "3",
-          "NtLmSsp ",
-          "NTLM",
-          "",
-          "{00000000-0000-0000-0000-000000000000}",
-          "-",
-          "NTLM V2",
-          "128",
-          "0x0",
-          "-",
-          "192.168.50.1",
-          "59090"
-        ],
-        "isDomainController": false,
-        "sid": "",
-        "sourceName": "Microsoft-Windows-Security-Auditing",
-        "timeWritten": "2020-10-02T00:29:13.670722000Z"
+  "results_events": [
+    {
+      "labels": [],
+      "links": [
+        {
+          "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx",
+          "rel": "Context"
+        }
+      ],
+      "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313",
+      "message": {
+        "destination_asset": "iagent-win7",
+        "destination_asset_address": "example-host",
+        "destination_local_account": "user",
+        "logon_type": "NETWORK",
+        "new_authentication": "false",
+        "result": "SUCCESS",
+        "service": "ntlmssp ",
+        "source_asset_address": "192.168.100.50",
+        "source_json": {
+          "computerName": "example-host",
+          "eventCode": 4624,
+          "eventData": null,
+          "insertionStrings": [
+            "S-1-0-0",
+            "-",
+            "-",
+            "0x0",
+            "X-X-X-XXXXXXXXXXX",
+            "user@example.com",
+            "example-host",
+            "0x204f163c",
+            "3",
+            "NtLmSsp ",
+            "NTLM",
+            "",
+            "{00000000-0000-0000-0000-000000000000}",
+            "-",
+            "NTLM V2",
+            "128",
+            "0x0",
+            "-",
+            "192.168.50.1",
+            "59090"
+          ],
+          "isDomainController": false,
+          "sid": "",
+          "sourceName": "Microsoft-Windows-Security-Auditing",
+          "timeWritten": "2020-10-02T00:29:13.670722000Z"
+        },
+        "timestamp": "2020-10-02T00:29:14.649Z"
       },
-      "timestamp": "2020-10-02T00:29:14.649Z"
-    },
-    "sequence_number": 123456789123456789,
-    "sequence_number_str": "123456789123456789",
-    "timestamp": 1601598638768
-  },
+      "sequence_number": 123456789123456789,
+      "sequence_number_str": "123456789123456789",
+      "timestamp": 1601598638768
+    }
+  ],
   "results_statistical": {
     "leql": {
       "during": {
@@ -618,7 +625,7 @@ Example output:
 
 #### Close Investigations in Bulk
   
-This action is used to this action is used to close all investigations that fall within a date range
+This action is used to close all investigations that fall within a date range
 
 ##### Input
 
@@ -628,7 +635,7 @@ This action is used to this action is used to close all investigations that fall
 |datetime_from|date|None|False|An ISO formatted timestamp, default last week|None|2018-07-01 00:00:00 00:00|
 |datetime_to|date|None|False|An ISO formatted timestamp of the ending date range, current time if left blank|None|2018-07-01 00:00:00 00:00|
 |max_investigations_to_close|integer|None|False|An optional maximum number of alerts to close with this request. If this parameter is not specified then there is no maximum. If this limit is exceeded, then an error is returned|None|10|
-|source|string|MANUAL|False|The name of an investigation source|['ALERT', 'MANUAL', 'HUNT']|MANUAL|
+|source|string|MANUAL|False|The name of an investigation source|["ALERT", "MANUAL", "HUNT"]|MANUAL|
   
 Example input:
 
@@ -662,7 +669,8 @@ Example output:
 
 #### Create Comment
   
-This action is used to create a comment for a particular target. The target determines where the comment will appear within InsightIDR. Only certain types of RRNs are permitted as targets, such as investigation RRNs
+This action is used to create a comment for a particular target. The target determines where the comment will appear 
+within InsightIDR. Only certain types of RRNs are permitted as targets, such as investigation RRNs
 
 ##### Input
 
@@ -732,10 +740,10 @@ This action is used to allows to create investigation manually
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|disposition|string|None|False|Investigation's disposition|['', 'BENIGN', 'MALICIOUS', 'NOT_APPLICABLE']|BENIGN|
+|disposition|string|None|False|Investigation's disposition|["", "BENIGN", "MALICIOUS", "NOT_APPLICABLE"]|BENIGN|
 |email|string|None|False|A user's email address for investigation to be assigned|None|user@example.com|
-|priority|string|None|False|Investigation's priority|['', 'LOW', 'MEDIUM', 'HIGH', 'CRITICAL']|LOW|
-|status|string|None|False|Investigation's status|['', 'OPEN', 'CLOSED']|OPEN|
+|priority|string|None|False|Investigation's priority|["", "LOW", "MEDIUM", "HIGH", "CRITICAL"]|LOW|
+|status|string|None|False|Investigation's status|["", "OPEN", "CLOSED"]|OPEN|
 |title|string|None|True|Investigation's title|None|Example Title|
   
 Example input:
@@ -797,7 +805,8 @@ Example input:
 ```
 {
   "indicators": [
-    "example.com"
+    "example.com",
+    "10.0.0.1"
   ],
   "note_text": "Threat created via InsightConnect",
   "threat_name": "Threat created via InsightConnect"
@@ -816,7 +825,8 @@ Example output:
 ```
 {
   "rejected_indicators": [
-    "example.com"
+    "example.com",
+    "10.0.0.1"
   ],
   "threat": {
     "indicator_count": 2,
@@ -1117,13 +1127,15 @@ Example output:
 
 ```
 {
-  "actors": {
-    "display_name": "test display name",
-    "id": "12345678-abcd-cdef-1234-12345abc",
-    "rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:actor:1:12345678-abcd-cdef-1234-12345abg",
-    "type": "ACCOUNT",
-    "user_id": "12345678-abcd-cdef-1234-12345abf"
-  },
+  "actors": [
+    {
+      "display_name": "test display name",
+      "id": "12345678-abcd-cdef-1234-12345abc",
+      "rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:actor:1:12345678-abcd-cdef-1234-12345abg",
+      "type": "ACCOUNT",
+      "user_id": "12345678-abcd-cdef-1234-12345abf"
+    }
+  ],
   "metadata": {
     "index": 0,
     "size": 1,
@@ -1166,113 +1178,115 @@ Example output:
 
 ```
 {
-  "evidences": {
-    "created_at": "2023-12-04T13:59:06.768731Z",
-    "data": {
-      "account": "test_user",
-      "custom_data": {
-        "SourceRelative Url": "TargetContextId",
-        "source_account": "RecordType"
-      },
-      "geoip_city": "Boston",
-      "geoip_country_code": "US",
-      "geoip_country_name": "United States",
-      "geoip_organization": "TowardEX Technologies International",
-      "geoip_region": "MA",
-      "r7_context": {
-        "account": {
-          "name": "test_user",
-          "rrn": "rrn:uba:us:512345678-abcd-cdef-1234-12345abc:account:ABCDEFGH",
-          "type": "account"
+  "evidences": [
+    {
+      "created_at": "2023-12-04T13:59:06.768731Z",
+      "data": {
+        "account": "test_user",
+        "custom_data": {
+          "SourceRelative Url": "TargetContextId",
+          "source_account": "RecordType"
         },
-        "user": {
-          "name": "test_user",
-          "rrn": "rrn:uba:us:512345678-abcd-cdef-1234-12345abc:user:ABCDEFGH",
-          "type": "user"
-        }
+        "geoip_city": "Boston",
+        "geoip_country_code": "US",
+        "geoip_country_name": "United States",
+        "geoip_organization": "TowardEX Technologies International",
+        "geoip_region": "MA",
+        "r7_context": {
+          "account": {
+            "name": "test_user",
+            "rrn": "rrn:uba:us:512345678-abcd-cdef-1234-12345abc:account:ABCDEFGH",
+            "type": "account"
+          },
+          "user": {
+            "name": "test_user",
+            "rrn": "rrn:uba:us:512345678-abcd-cdef-1234-12345abc:user:ABCDEFGH",
+            "type": "user"
+          }
+        },
+        "result": "SUCCESS",
+        "service": "o365",
+        "source_ip": "1.1.1.1",
+        "source_json": {
+          "Actor": [
+            {
+              "ID": "12345678-abcd-cdef-1234-12345abc",
+              "Type": 0
+            },
+            {
+              "ID": "test_user",
+              "Type": 5
+            }
+          ],
+          "ActorContextId": "12345678-abcd-cdef-1234-12345abc",
+          "ActorIpAddress": "1.1.1.1",
+          "ApplicationId": "cb1056e2-e479-49de-ae31-7812af012ed8",
+          "AzureActiveDirectoryEventType": 1,
+          "ClientIP": "1.1.1.1",
+          "CreationTime": "2023-12-04T13:44:56",
+          "DeviceProperties": [
+            {
+              "Name": "OS",
+              "Value": "Windows10"
+            },
+            {
+              "Name": "BrowserType",
+              "Value": "Other"
+            },
+            {
+              "Name": "SessionId",
+              "Value": "512345678-abcd-cdef-1234-12345abc"
+            }
+          ],
+          "ErrorNumber": "0",
+          "ExtendedProperties": [
+            {
+              "Name": "ResultStatusDetail",
+              "Value": "Success"
+            },
+            {
+              "Name": "UserAuthenticationMethod",
+              "Value": "1"
+            },
+            {
+              "Name": "RequestType",
+              "Value": "OAuth2:Token"
+            }
+          ],
+          "Id": "12345678-abcd-cdef-1234-12345abc0",
+          "InterSystemsId": "1bd394a5-be1b-4af3-a608-8ec6c73d5c02",
+          "IntraSystemId": "12345678-abcd-cdef-1234-12345abc0",
+          "ModifiedProperties": [],
+          "ObjectId": "00000002-0000-0000-c000-000000000000",
+          "Operation": "UserLoggedIn",
+          "OrganizationId": "12345678-abcd-cdef-1234-12345abc",
+          "RecordType": 15,
+          "ResultStatus": "Success",
+          "SupportTicketId": "",
+          "Target": [
+            {
+              "ID": "00000002-0000-0000-c000-000000000000",
+              "Type": 0
+            }
+          ],
+          "TargetContextId": "12345678-abcd-cdef-1234-12345abc",
+          "UserId": "test_user",
+          "UserKey": "12345678-abcd-cdef-1234-12345abc",
+          "UserType": 0,
+          "Version": 1,
+          "Workload": "AzureActiveDirectory"
+        },
+        "timestamp": "2023-12-04T13:44:56.000Z",
+        "user": "test_user"
       },
-      "result": "SUCCESS",
-      "service": "o365",
-      "source_ip": "1.1.1.1",
-      "source_json": {
-        "Actor": [
-          {
-            "ID": "12345678-abcd-cdef-1234-12345abc",
-            "Type": 0
-          },
-          {
-            "ID": "test_user",
-            "Type": 5
-          }
-        ],
-        "ActorContextId": "12345678-abcd-cdef-1234-12345abc",
-        "ActorIpAddress": "1.1.1.1",
-        "ApplicationId": "cb1056e2-e479-49de-ae31-7812af012ed8",
-        "AzureActiveDirectoryEventType": 1,
-        "ClientIP": "1.1.1.1",
-        "CreationTime": "2023-12-04T13:44:56",
-        "DeviceProperties": [
-          {
-            "Name": "OS",
-            "Value": "Windows10"
-          },
-          {
-            "Name": "BrowserType",
-            "Value": "Other"
-          },
-          {
-            "Name": "SessionId",
-            "Value": "512345678-abcd-cdef-1234-12345abc"
-          }
-        ],
-        "ErrorNumber": "0",
-        "ExtendedProperties": [
-          {
-            "Name": "ResultStatusDetail",
-            "Value": "Success"
-          },
-          {
-            "Name": "UserAuthenticationMethod",
-            "Value": "1"
-          },
-          {
-            "Name": "RequestType",
-            "Value": "OAuth2:Token"
-          }
-        ],
-        "Id": "12345678-abcd-cdef-1234-12345abc0",
-        "InterSystemsId": "1bd394a5-be1b-4af3-a608-8ec6c73d5c02",
-        "IntraSystemId": "12345678-abcd-cdef-1234-12345abc0",
-        "ModifiedProperties": [],
-        "ObjectId": "00000002-0000-0000-c000-000000000000",
-        "Operation": "UserLoggedIn",
-        "OrganizationId": "12345678-abcd-cdef-1234-12345abc",
-        "RecordType": 15,
-        "ResultStatus": "Success",
-        "SupportTicketId": "",
-        "Target": [
-          {
-            "ID": "00000002-0000-0000-c000-000000000000",
-            "Type": 0
-          }
-        ],
-        "TargetContextId": "12345678-abcd-cdef-1234-12345abc",
-        "UserId": "test_user",
-        "UserKey": "12345678-abcd-cdef-1234-12345abc",
-        "UserType": 0,
-        "Version": 1,
-        "Workload": "AzureActiveDirectory"
-      },
-      "timestamp": "2023-12-04T13:44:56.000Z",
-      "user": "test_user"
-    },
-    "event_type": "ingress_auth",
-    "evented_at": "2023-12-04T13:59:06.349Z",
-    "external_source": "IDR ABA",
-    "rrn": "rrn:alerts:us1:512345678-abcd-cdef-1234-12345abc:evidence:1:512345678-abcd-cdef-1234-12345abc",
-    "updated_at": "2023-12-04T13:59:06.768731Z",
-    "version": 1
-  },
+      "event_type": "ingress_auth",
+      "evented_at": "2023-12-04T13:59:06.349Z",
+      "external_source": "IDR ABA",
+      "rrn": "rrn:alerts:us1:512345678-abcd-cdef-1234-12345abc:evidence:1:512345678-abcd-cdef-1234-12345abc",
+      "updated_at": "2023-12-04T13:59:06.768731Z",
+      "version": 1
+    }
+  ],
   "metadata": {
     "index": 0,
     "size": 1,
@@ -1297,7 +1311,7 @@ Example input:
 
 ```
 {
-  "alert_rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:actor:1:12345678-abcd-cdef-1234-12345abg"
+  "alert_rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg"
 }
 ```
 
@@ -1472,27 +1486,30 @@ Example output:
 
 ```
 {
-  "saved_queries": {
-    "id": "00000000-0000-9eec-0000-000000000000",
-    "leql": {
-      "during": {
-        "from": null,
-        "time_range": "yesterday",
-        "to": null
+  "saved_queries": [
+    {
+      "id": "00000000-0000-9eec-0000-000000000000",
+      "leql": {
+        "during": {
+          "from": null,
+          "time_range": "yesterday",
+          "to": null
+        },
+        "statement": "where(931dde6c60>=800)"
       },
-      "statement": "where(931dde6c60>=800)"
-    },
-    "logs": [
-      "31a4d56e-460e-460f-9542-c2bc8edd7c6b"
-    ],
-    "name": "Large Values Yesterday"
-  }
+      "logs": [
+        "31a4d56e-460e-460f-9542-c2bc8edd7c6b"
+      ],
+      "name": "Large Values Yesterday"
+    }
+  ]
 }
 ```
 
 #### Get Asset Information
   
-This action is used to get information from an asset by RRN. The RRN determines which asset the information is retrieved from
+This action is used to get information from an asset by RRN. The RRN determines which asset the information is retrieved
+ from
 
 ##### Input
 
@@ -1529,7 +1546,8 @@ Example output:
 
 #### Get Attachment Information
   
-This action is used to get information from an attachment by RRN. The RRN determines which attachment information is retrieved from
+This action is used to get information from an attachment by RRN. The RRN determines which attachment information is 
+retrieved from
 
 ##### Input
 
@@ -1622,7 +1640,8 @@ Example output:
 
 #### Get User Information
   
-This action is used to get information from an user by RRN. The RRN determines which user the information is retrieved from
+This action is used to get information from an user by RRN. The RRN determines which user the information is retrieved 
+from
 
 ##### Input
 
@@ -1693,16 +1712,18 @@ Example output:
 
 ```
 {
-  "alerts": {
-    "alert_type": "Example Type",
-    "alert_type_description": "Example Description",
-    "created_time": "01-01-2020T00:00:00",
-    "detection_rule_rrn": "rrn:example",
-    "first_event_time": "01-01-2020T00:00:00",
-    "id": "11111111-1111-1111-1111-111111111111",
-    "latest_event_time": "01-01-2020T00:00:00",
-    "title": "Example Title"
-  },
+  "alerts": [
+    {
+      "alert_type": "Example Type",
+      "alert_type_description": "Example Description",
+      "created_time": "01-01-2020T00:00:00",
+      "detection_rule_rrn": "rrn:example",
+      "first_event_time": "01-01-2020T00:00:00",
+      "id": "11111111-1111-1111-1111-111111111111",
+      "latest_event_time": "01-01-2020T00:00:00",
+      "title": "Example Title"
+    }
+  ],
   "metadata": {
     "index": 0,
     "size": 1,
@@ -1745,18 +1766,20 @@ Example output:
 
 ```
 {
-  "attachments": {
-    "created_time": "2022-08-19T13:00:58.645Z",
-    "creator": {
-      "name": "Example User",
-      "type": "USER"
-    },
-    "file_name": "test.txt",
-    "mime_type": "text/plain",
-    "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890",
-    "scan_status": "CLEAN",
-    "size": 4
-  },
+  "attachments": [
+    {
+      "created_time": "2022-08-19T13:00:58.645Z",
+      "creator": {
+        "name": "Example User",
+        "type": "USER"
+      },
+      "file_name": "test.txt",
+      "mime_type": "text/plain",
+      "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890",
+      "scan_status": "CLEAN",
+      "size": 4
+    }
+  ],
   "success": true
 }
 ```
@@ -1794,17 +1817,19 @@ Example output:
 
 ```
 {
-  "comments": {
-    "body": "test",
-    "created_time": "2022-08-18T12:53:26.676Z",
-    "creator": {
-      "name": "Example User",
-      "type": "USER"
-    },
-    "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:1234567890",
-    "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
-    "visibility": "PUBLIC"
-  },
+  "comments": [
+    {
+      "body": "test",
+      "created_time": "2022-08-18T12:53:26.676Z",
+      "creator": {
+        "name": "Example User",
+        "type": "USER"
+      },
+      "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:1234567890",
+      "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+      "visibility": "PUBLIC"
+    }
+  ],
   "success": true
 }
 ```
@@ -1822,7 +1847,7 @@ This action is used to retrieve a page of investigations matching the given requ
 |index|integer|0|True|Zero-based index of the page to retrieve, where value must be greater than or equal to 0|None|1|
 |priorities|[]string|None|False|A comma-separated list of investigation priorities to include in the result, where possible values are LOW, MEDIUM, HIGH, CRITICAL|None|["LOW", "MEDIUM", "HIGH", "CRITICAL"]|
 |size|integer|100|True|Amount of data for a page to retrieve, where its value must be greater than 0 and less than or equal to 100|None|100|
-|sort|string|None|False|A field for investigations to be sorted|['', 'Create time Ascending', 'Create time Descending', 'Priority Ascending', 'Priority Descending', 'Last alert time Ascending', 'Last alert time Descending', 'RRN Ascending', 'RRN Descending', 'Alerts most recent created time Ascending', 'Alerts most recent created time Descending', 'Alerts most recent detection created time Ascending', 'Alerts most recent detection created time Descending']|Create time Ascending|
+|sort|string|None|False|A field for investigations to be sorted|["", "Create time Ascending", "Create time Descending", "Priority Ascending", "Priority Descending", "Last alert time Ascending", "Last alert time Descending", "RRN Ascending", "RRN Descending", "Alerts most recent created time Ascending", "Alerts most recent created time Descending", "Alerts most recent detection created time Ascending", "Alerts most recent detection created time Descending"]|Create time Ascending|
 |sources|[]string|None|False|A comma-separated list of investigation sources to include in the result, where possible values are USER, ALERT, HUNT, AUTOMATION|None|["USER","ALERT"]|
 |start_time|date|None|False|An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned|None|2020-06-01T12:11:13+05:30|
 |statuses|[]string|None|False|Comma-separated list of investigation statuses to include in the result. Possible values are OPEN, CLOSED, INVESTIGATING, WAITING|None|["CLOSED"]|
@@ -1864,23 +1889,25 @@ Example output:
 
 ```
 {
-  "investigations": {
-    "assignee": {
-      "email": "user@example.com",
-      "name": "Ellen Example"
-    },
-    "created_time": "2018-06-06T16:56:42Z",
-    "disposition": "BENIGN",
-    "first_alert_time": "2018-06-06T16:56:42Z",
-    "last_accessed": "2018-06-06T16:56:42Z",
-    "latest_alert_time": "2018-06-06T16:56:42Z",
-    "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
-    "priority": "CRITICAL",
-    "rrn": "rrn:example",
-    "source": "ALERT",
-    "status": "OPEN",
-    "title": "Example Title"
-  },
+  "investigations": [
+    {
+      "assignee": {
+        "email": "user@example.com",
+        "name": "Ellen Example"
+      },
+      "created_time": "2018-06-06T16:56:42Z",
+      "disposition": "BENIGN",
+      "first_alert_time": "2018-06-06T16:56:42Z",
+      "last_accessed": "2018-06-06T16:56:42Z",
+      "latest_alert_time": "2018-06-06T16:56:42Z",
+      "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
+      "priority": "CRITICAL",
+      "rrn": "rrn:example",
+      "source": "ALERT",
+      "status": "OPEN",
+      "title": "Example Title"
+    }
+  ],
   "metadata": {
     "index": 0,
     "size": 1,
@@ -1920,61 +1947,63 @@ Example output:
 
 ```
 {
-  "events": {
-    "labels": [],
-    "links": [
-      {
-        "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx",
-        "rel": "Context"
-      }
-    ],
-    "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313",
-    "message": {
-      "destination_asset": "iagent-win7",
-      "destination_asset_address": "example-host",
-      "destination_local_account": "user",
-      "logon_type": "NETWORK",
-      "new_authentication": "false",
-      "result": "SUCCESS",
-      "service": "ntlmssp ",
-      "source_asset_address": "192.168.100.50",
-      "source_json": {
-        "computerName": "example-host",
-        "eventCode": 4624,
-        "eventData": null,
-        "insertionStrings": [
-          "S-1-0-0",
-          "-",
-          "-",
-          "0x0",
-          "X-X-X-XXXXXXXXXXX",
-          "user@example.com",
-          "example-host",
-          "0x204f163c",
-          "3",
-          "NtLmSsp ",
-          "NTLM",
-          "",
-          "{00000000-0000-0000-0000-000000000000}",
-          "-",
-          "NTLM V2",
-          "128",
-          "0x0",
-          "-",
-          "192.168.50.1",
-          "59090"
-        ],
-        "isDomainController": false,
-        "sid": "",
-        "sourceName": "Microsoft-Windows-Security-Auditing",
-        "timeWritten": "2020-10-02T00:29:13.670722000Z"
+  "events": [
+    {
+      "labels": [],
+      "links": [
+        {
+          "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx",
+          "rel": "Context"
+        }
+      ],
+      "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313",
+      "message": {
+        "destination_asset": "iagent-win7",
+        "destination_asset_address": "example-host",
+        "destination_local_account": "user",
+        "logon_type": "NETWORK",
+        "new_authentication": "false",
+        "result": "SUCCESS",
+        "service": "ntlmssp ",
+        "source_asset_address": "192.168.100.50",
+        "source_json": {
+          "computerName": "example-host",
+          "eventCode": 4624,
+          "eventData": null,
+          "insertionStrings": [
+            "S-1-0-0",
+            "-",
+            "-",
+            "0x0",
+            "X-X-X-XXXXXXXXXXX",
+            "user@example.com",
+            "example-host",
+            "0x204f163c",
+            "3",
+            "NtLmSsp ",
+            "NTLM",
+            "",
+            "{00000000-0000-0000-0000-000000000000}",
+            "-",
+            "NTLM V2",
+            "128",
+            "0x0",
+            "-",
+            "192.168.50.1",
+            "59090"
+          ],
+          "isDomainController": false,
+          "sid": "",
+          "sourceName": "Microsoft-Windows-Security-Auditing",
+          "timeWritten": "2020-10-02T00:29:13.670722000Z"
+        },
+        "timestamp": "2020-10-02T00:29:14.649Z"
       },
-      "timestamp": "2020-10-02T00:29:14.649Z"
-    },
-    "sequence_number": 123456789123456789,
-    "sequence_number_str": "123456789123456789",
-    "timestamp": 1601598638768
-  }
+      "sequence_number": 123456789123456789,
+      "sequence_number_str": "123456789123456789",
+      "timestamp": 1601598638768
+    }
+  ]
 }
 ```
 
@@ -1997,15 +2026,21 @@ Example input:
 ```
 {
   "domain_names": [
-    "rapid7.com"
+    "rapid7.com",
+    "google.com"
   ],
-  "hashes": "A94A8FE5CCB19BA61C4C0873D391E987982FBBD3",
+  "hashes": [
+    "A94A8FE5CCB19BA61C4C0873D391E987982FBBD3",
+    "C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"
+  ],
   "ips": [
-    "10.0.0.1"
+    "10.0.0.1",
+    "10.0.0.2"
   ],
   "key": "c9404e11-b81a-429d-9400-05c531f229c3",
   "urls": [
-    "https://example.com"
+    "https://example.com",
+    "https://test.com"
   ]
 }
 ```
@@ -2022,7 +2057,8 @@ Example output:
 ```
 {
   "rejected_indicators": [
-    "example.com"
+    "example.com",
+    "10.0.0.1"
   ],
   "threat": {
     "indicator_count": 2,
@@ -2117,7 +2153,9 @@ Example input:
 
 ```
 {
-  "aggregates": {},
+  "aggregates": [
+    {}
+  ],
   "end_time": "2020-06-01T12:11:13+05:30",
   "field_ids": [],
   "index": 0,
@@ -2147,91 +2185,97 @@ Example output:
 
 ```
 {
-  "alerts": {
-    "alerted_at": "2023-12-04T13:59:06.349Z",
-    "created_at": "2023-12-04T13:59:06.757109Z",
-    "disposition": "UNDECIDED",
-    "external_id": "12345678-abcd-cdef-1234-12345abc",
-    "external_source": "IDR ABA",
-    "fields": [],
-    "ingested_at": "2023-12-04T13:59:06.751813Z",
-    "investigation_rrn": "rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI",
-    "organization": {
-      "customer_id": "12345678-abcd-cdef-1234-12345abc",
-      "customer_name": "Dev Test",
-      "flags": [],
-      "id": "12345678-abcd-cdef-1234-12345abc",
-      "name": "Dev Test",
-      "product_token": "abcdefgh12345abc",
-      "region": "us1"
-    },
-    "permissions": {
-      "canEdit": false
-    },
-    "priority": "LOW",
-    "responsibility": "MDR",
-    "rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abc",
-    "rule": {
-      "mitre_tcodes": [
-        "Credential Access",
-        "T1110"
+  "alerts": [
+    {
+      "alerted_at": "2023-12-04T13:59:06.349Z",
+      "created_at": "2023-12-04T13:59:06.757109Z",
+      "disposition": "UNDECIDED",
+      "external_id": "12345678-abcd-cdef-1234-12345abc",
+      "external_source": "IDR ABA",
+      "fields": [],
+      "ingested_at": "2023-12-04T13:59:06.751813Z",
+      "investigation_rrn": "rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI",
+      "organization": {
+        "customer_id": "12345678-abcd-cdef-1234-12345abc",
+        "customer_name": "Dev Test",
+        "flags": [],
+        "id": "12345678-abcd-cdef-1234-12345abc",
+        "name": "Dev Test",
+        "product_token": "abcdefgh12345abc",
+        "region": "us1"
+      },
+      "permissions": {
+        "canEdit": false
+      },
+      "priority": "LOW",
+      "responsibility": "MDR",
+      "rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abc",
+      "rule": {
+        "mitre_tcodes": [
+          "Credential Access",
+          "T1110"
+        ],
+        "rrn": "rrn:cba:::detection-rule:ABCDEFGHIJK",
+        "version_rrn": "rrn:cba:::detection-rule:version:ABCDEFGHIJK"
+      },
+      "rule_keys_of_interest": [
+        {
+          "key": "result",
+          "values": [
+            "SUCCESS"
+          ]
+        },
+        {
+          "key": "account",
+          "values": [
+            "test_account"
+          ]
+        },
+        {
+          "key": "geoip_country_code",
+          "values": [
+            "US"
+          ]
+        },
+        {
+          "key": "source_ip",
+          "values": [
+            "1.1.1.1"
+          ]
+        }
       ],
-      "rrn": "rrn:cba:::detection-rule:ABCDEFGHIJK",
-      "version_rrn": "rrn:cba:::detection-rule:version:ABCDEFGHIJK"
-    },
-    "rule_keys_of_interest": [
-      {
-        "key": "result",
-        "values": [
-          "SUCCESS"
-        ]
-      },
-      {
-        "key": "account",
-        "values": [
-          "test_account"
-        ]
-      },
-      {
-        "key": "geoip_country_code",
-        "values": [
-          "US"
-        ]
-      },
-      {
-        "key": "source_ip",
-        "values": [
-          "1.1.1.1"
-        ]
-      }
-    ],
-    "rule_matching_keys": [
-      {
-        "key": "entryType",
-        "values": [
-          "ingress_auth"
-        ]
-      },
-      {
-        "key": "orgId",
-        "values": [
-          "12345678-abcd-cdef-1234-12345abc"
-        ]
-      }
-    ],
-    "status": "OPEN",
-    "tags": [],
-    "title": "MVD Verification",
-    "type": "MVD Verification",
-    "updated_at": "2023-12-05T11:51:39.29059Z",
-    "version": 8
-  },
+      "rule_matching_keys": [
+        {
+          "key": "entryType",
+          "values": [
+            "ingress_auth"
+          ]
+        },
+        {
+          "key": "orgId",
+          "values": [
+            "12345678-abcd-cdef-1234-12345abc"
+          ]
+        }
+      ],
+      "status": "OPEN",
+      "tags": [],
+      "title": "MVD Verification",
+      "type": "MVD Verification",
+      "updated_at": "2023-12-05T11:51:39.29059Z",
+      "version": 8
+    }
+  ],
   "metadata": {
     "index": 0,
     "size": 1,
     "total_data": 1,
     "total_pages": 1
-  }
+  },
+  "rrns": [
+    "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg",
+    "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abd"
+  ]
 }
 ```
 
@@ -2285,23 +2329,25 @@ Example output:
 
 ```
 {
-  "investigations": {
-    "assignee": {
-      "email": "user@example.com",
-      "name": "Ellen Example"
-    },
-    "created_time": "2018-06-06T16:56:42Z",
-    "disposition": "BENIGN",
-    "first_alert_time": "2018-06-06T16:56:42Z",
-    "last_accessed": "2018-06-06T16:56:42Z",
-    "latest_alert_time": "2018-06-06T16:56:42Z",
-    "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
-    "priority": "CRITICAL",
-    "rrn": "rrn:example",
-    "source": "ALERT",
-    "status": "OPEN",
-    "title": "Example Title"
-  },
+  "investigations": [
+    {
+      "assignee": {
+        "email": "user@example.com",
+        "name": "Ellen Example"
+      },
+      "created_time": "2018-06-06T16:56:42Z",
+      "disposition": "BENIGN",
+      "first_alert_time": "2018-06-06T16:56:42Z",
+      "last_accessed": "2018-06-06T16:56:42Z",
+      "latest_alert_time": "2018-06-06T16:56:42Z",
+      "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
+      "priority": "CRITICAL",
+      "rrn": "rrn:example",
+      "source": "ALERT",
+      "status": "OPEN",
+      "title": "Example Title"
+    }
+  ],
   "metadata": {
     "index": 0,
     "size": 1,
@@ -2319,7 +2365,7 @@ This action is used to allows to change the disposition of the investigation wit
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|disposition|string|None|True|Investigation's disposition|['BENIGN', 'MALICIOUS', 'NOT_APPLICABLE']|BENIGN|
+|disposition|string|None|True|Investigation's disposition|["BENIGN", "MALICIOUS", "NOT_APPLICABLE"]|BENIGN|
 |id|string|None|True|The ID or RNN of the investigation to change the disposition of|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|
   
 Example input:
@@ -2370,7 +2416,7 @@ This action is used to allows to change the priority of the investigation with t
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|string|None|True|The ID or RNN of the investigation to change the priority of|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|
-|priority|string|None|True|Investigation's priority|['UNSPECIFIED', 'LOW', 'MEDIUM', 'HIGH', 'CRITICAL']|LOW|
+|priority|string|None|True|Investigation's priority|["UNSPECIFIED", "LOW", "MEDIUM", "HIGH", "CRITICAL"]|LOW|
   
 Example input:
 
@@ -2420,7 +2466,7 @@ This action is used to set the status of the investigation with the given ID
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|string|None|True|The ID of the investigation to change the status of|None|174e4f99-2ac7-4481-9301-4d24c34baf06|
-|status|string|CLOSED|True|The new status for the investigation|['OPEN', 'CLOSED']|CLOSED|
+|status|string|CLOSED|True|The new status for the investigation|["OPEN", "CLOSED"]|CLOSED|
   
 Example input:
 
@@ -2469,11 +2515,11 @@ This action is used to allows to update existing investigation by ID or RRN
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|disposition|string|None|False|Investigation's disposition|['', 'BENIGN', 'MALICIOUS', 'NOT_APPLICABLE']|BENIGN|
+|disposition|string|None|False|Investigation's disposition|["", "BENIGN", "MALICIOUS", "NOT_APPLICABLE"]|BENIGN|
 |email|string|None|False|A user's email address for investigation to be assigned|None|user@example.com|
 |id|string|None|True|The identifier of investigation to be update (ID or RRN)|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|
-|priority|string|None|False|Investigation's priority|['', 'UNSPECIFIED', 'LOW', 'MEDIUM', 'HIGH', 'CRITICAL']|LOW|
-|status|string|None|False|Investigation's status|['', 'OPEN', 'INVESTIGATING', 'CLOSED']|OPEN|
+|priority|string|None|False|Investigation's priority|["", "UNSPECIFIED", "LOW", "MEDIUM", "HIGH", "CRITICAL"]|LOW|
+|status|string|None|False|Investigation's status|["", "OPEN", "INVESTIGATING", "CLOSED"]|OPEN|
 |title|string|None|False|Investigation's title|None|Example Title|
   
 Example input:
@@ -2550,18 +2596,20 @@ Example output:
 
 ```
 {
-  "attachment": {
-    "created_time": "2022-08-19T13:00:58.645Z",
-    "creator": {
-      "name": "Example User",
-      "type": "USER"
-    },
-    "file_name": "test.txt",
-    "mime_type": "text/plain",
-    "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890",
-    "scan_status": "CLEAN",
-    "size": 4
-  },
+  "attachment": [
+    {
+      "created_time": "2022-08-19T13:00:58.645Z",
+      "creator": {
+        "name": "Example User",
+        "type": "USER"
+      },
+      "file_name": "test.txt",
+      "mime_type": "text/plain",
+      "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890",
+      "scan_status": "CLEAN",
+      "size": 4
+    }
+  ],
   "success": true
 }
 ```
@@ -2777,7 +2825,7 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Attachments|[]attachment|None|False|List of attachments associated with this comment|[{'rrn': 'rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890', 'creator': {'type': 'USER', 'name': 'Example User'}, 'created_time': '2022-08-19T13:00:58.645Z', 'file_name': 'test.txt', 'mime_type': 'text/plain', 'size': 4, 'scan_status': 'CLEAN'}]|
+|Attachments|[]attachment|None|False|List of attachments associated with this comment|[{"rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890", "creator": {"type": "USER", "name": "Example User"}, "created_time": "2022-08-19T13:00:58.645Z", "file_name": "test.txt", "mime_type": "text/plain", "size": 4, "scan_status": "CLEAN"}]|
 |Body|string|None|False|The body of the comment|None|
 |Created Time|date|None|False|The time the comment was created as an ISO formatted timestamp|None|
 |Creator|creator|None|False|Who or what created the comment|None|
@@ -2801,7 +2849,7 @@ Example output:
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Name|string|None|False|The user friendly name for this asset.|None|
 |RRN|string|None|False|The unique identifier for this asset.|None|
-
+  
 **alert_object**
 
 |Name|Type|Default|Required|Description|Example|
@@ -2973,6 +3021,7 @@ Example output:
 
 # Version History
 
+* 8.2.0 - Actions: `Advanced Query On Log Set` and `Advanced Query On Log` - optimized data fetching mechanisms 
 * 8.1.1 - Extended error logging for all the actions
 * 8.1.0 - New actions added: `Search Accounts` and `Get Account Information`
 * 8.0.0 - Update schema for `Investigation` and `Statistics` | Update dependency for aiohttp | New actions added `Get Alert Information`, `Search Alerts`, `Retrieve Evidence for a Single Alert` and `Retrieve Actors for a Single Alert` | Fixed issue where index was not getting correctly passed through to `List Investigations` action from the user
