@@ -167,6 +167,8 @@ class Util:
                 return MockResponse("all_threats_without_time_start", 200)
             if interval == "2021-08-20T13:00:00/2021-08-20T14:00:00":
                 return MockResponse("all_threats_without_time_end", 200)
+            if interval == "2024-01-27T00:00:00+00:00/2024-01-27T01:00:00+00:00":
+                return MockResponse("monitor_events", 200)
             if threat_status == "cleared" and threat_type == "url":
                 return MockResponse("all_threats_cleared_status", 200)
             if threat_status == "active":
