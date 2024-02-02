@@ -30,20 +30,20 @@ types:
       title: File ID
       type: string
   move_file_result:
-    folder_id:
+    parents:
       title: Folder ID
       description: Folder ID
-      type: string
-    file_id:
+      type: '[]string'
+    id:
       title: File ID
       description: File ID
       type: string
   copy_file_result:
-    folder_id:
+    parents:
       title: Folder ID
       description: Folder ID
-      type: string
-    file_id:
+      type: '[]string'
+    id:
       title: File ID
       description: File ID
       type: string
@@ -138,6 +138,7 @@ actions:
         description: The file in bytes
         type: bytes
         required: false
+        example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
   upload_file:
     title: Upload File
     description: Upload a file to Google Drive
@@ -170,11 +171,13 @@ actions:
         description: Return the ID of the file created on Google Drive
         type: string
         required: false
+        example: "1vGnLfWUInJ5OhuTXQO1-UpVfPfsXVlmaFnvqY_uhT0M"
       file_link:
         title: File Link
         description: A direct link to the created file
         type: string
         required: false
+        example: "https://docs.google.com/document/d/1vGnLfWUInJ5OhuTXQO1-UpVfPfsXVlmaFnvqY_uhT0M"
   overwrite_file:
     title: Overwrite File
     description: Overwrites a file with new data
@@ -213,6 +216,7 @@ actions:
         description: Return the ID of the file created on Google Drive
         type: string
         required: false
+        example: 1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLREW
   find_file_by_name:
     title: Find File by Name
     description: Find a file ID
@@ -245,6 +249,18 @@ actions:
         description: Returns a list of file names and their IDs
         type: '[]file_info'
         required: false
+        example: {
+                  "files_found": [
+                    {
+                      "file_name": "test.txt",
+                      "file_id": "1t4HfdfndRpYHRw4uRtqnu83XC7Oc3nBGqEHyaiPIDy0"
+                    },
+                    {
+                      "file_name": "test_new2.txt",
+                      "file_id":"13Cxn1BPUnvQGcRVcnCBSF4ZbS0MbVxaxNJe2iuj_NTA"
+                    }
+                  ]
+                }
   create_folder:
     title: Create Folder
     description: Create a folder
@@ -267,6 +283,7 @@ actions:
         description: Return the ID of the folder created on Google Drive
         type: string
         required: true
+        example: "1eYy68j4cIucDRE1pAkar5bOgyLxCM_Rj"
   create_file_in_folder:
     title: Create File in Folder
     description: Create a file in a folder
@@ -289,6 +306,7 @@ actions:
         description: Return the ID of the file created on Google Drive
         type: string
         required: true
+        example: "1bKpnBMV1TQ5iU6sM7d0sfovqWwdVJSet"
   move_file:
     title: Move File
     description: Move a file to a different folder
@@ -311,6 +329,7 @@ actions:
         description: The result containing the ID of the file and ID of the folder to which the file was moved
         type: move_file_result
         required: true
+        example: { "id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR", "parents": ["0BwwA4oUTeiV1TGRPeTVjaWRDY1E"] }
   copy_file:
     title: Copy File
     description: Copy a file to a folder
@@ -339,3 +358,5 @@ actions:
         description: The result containing the ID of the file and ID of the folder to which the file was copied
         type: copy_file_result
         required: true
+        example: { "id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR", "parents": ["0BwwA4oUTeiV1TGRPeTVjaWRDY1E"] }
+        

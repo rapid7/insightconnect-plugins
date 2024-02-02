@@ -11,7 +11,7 @@ This plugin utilizes the [Google Drive API](https://developers.google.com/drive/
 * Create files
 * Move files to a different folder
 * Find files by name
-* Copy file to a folder
+* Copy files to a folder
 
 # Requirements
 
@@ -29,18 +29,19 @@ This plugin utilizes the [Google Drive API](https://developers.google.com/drive/
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |admin_user|string|None|True|Admin user to impersonate, e.g. user@example.com|None|user@example.com|
 |auth_provider_x509_cert_url|string|https://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|https://www.googleapis.com/oauth2/v1/certs|
 |auth_uri|string|https://accounts.google.com/o/oauth2/auth|True|OAUTH2 Auth URI|None|https://accounts.google.com/o/oauth2/auth|
 |client_email|string|None|True|Client email from service credentials|None|user@example.com|
-|client_id|string|None|True|Client ID|None|102790495738030000000|
+|client_id|string|None|True|Client ID|None|102790495738029996994|
 |client_x509_cert_url|string|None|True|X509 cert URL from service credentials|None|https://www.googleapis.com/robot/v1/metadata/x509/user@example.com|
-|private_key|credential_asymmetric_key|None|True|Private Key from service credentials|None|-----BEGIN RSA PRIVATE KEY-----MIIEpQIBAAKCAQEAjGnoUtfPHqvX3PIU6N9FKmwQ3Zl+NoaWb4yMLhudkdEBJ3Au...8/dqUH5yjRKs2qxkBWG4HmT3Nx6A8sYIrUYxyqVLBpG8yKngbnaYPV4=-----END RSA PRIVATE KEY-----|
+|private_key|credential_asymmetric_key|None|True|Private Key from service credentials|None|-----BEGIN RSA PRIVATE KEY-----
+MIIEpQIBAAKCAQEAjGnoUtfPHqvX3PIU6N9FKmwQ3Zl+NoaWb4yMLhudkdEBJ3Au...8/dqUH5yjRKs2qxkBWG4HmT3Nx6A8sYIrUYxyqVLBpG8yKngbnaYPV4=
+-----END RSA PRIVATE KEY-----|
 |private_key_id|string|None|True|Private Key ID from service credentials|None|02699626f388ed830012e5b787640e71c56d42d8|
 |project_id|string|None|True|Project ID from service credentials|None|example-12345|
 |token_uri|string|https://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|https://accounts.google.com/o/oauth2/token|
-
 
 Example input:
 
@@ -50,7 +51,7 @@ Example input:
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "client_email": "user@example.com",
-  "client_id": 102790495738030000000,
+  "client_id": 102790495738029996994,
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/user@example.com",
   "private_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpQIBAAKCAQEAjGnoUtfPHqvX3PIU6N9FKmwQ3Zl+NoaWb4yMLhudkdEBJ3Au...8/dqUH5yjRKs2qxkBWG4HmT3Nx6A8sYIrUYxyqVLBpG8yKngbnaYPV4=\n-----END RSA PRIVATE KEY-----",
   "private_key_id": "02699626f388ed830012e5b787640e71c56d42d8",
@@ -63,89 +64,56 @@ Example input:
 
 ### Actions
 
-#### Move File
-
-This action is used to move a file to a different folder.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|file_id|string|None|True|The ID of the file that will be moved to another folder|None|1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR|
-|folder_id|string|None|True|ID of the folder where the file will be moved|None|0BwwA4oUTeiV1TGRPeTVjaWRDY1E|
-
-Example input:
-
-```
-{
-  "file_id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR",
-  "folder_id": "0BwwA4oUTeiV1TGRPeTVjaWRDY1E"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result|move_file_result|True|The result containing the ID of the file and ID of the folder to which the file was moved|
-
-Example output:
-
-```
-{
-  "id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR",
-  "parents": [
-    "0BwwA4oUTeiV1TGRPeTVjaWRDY1E"
-  ]
-}
-```
 
 #### Copy File
 
-This action is used to copy a file to a folder.
+This action is used to copy a file to a folder
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |file_id|string|None|True|The ID of the file that will be copied to another folder|None|1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR|
 |folder_id|string|None|True|ID of the folder where the file will be copied|None|0BwwA4oUTeiV1TGRPeTVjaWRDY1E|
+|new_file_name|string|None|False|Select a new file name. e.g. testfile.csv|None|test.txt|
 
 Example input:
 
 ```
 {
   "file_id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR",
-  "folder_id": "0BwwA4oUTeiV1TGRPeTVjaWRDY1E"
-  "new_file_name": "filename"
+  "folder_id": "0BwwA4oUTeiV1TGRPeTVjaWRDY1E",
+  "new_file_name": "test.txt"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result|copy_file_result|True|The result containing the ID of the file and ID of the folder to which the file was copied|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|result|copy_file_result|True|The result containing the ID of the file and ID of the folder to which the file was copied|{'id': '1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR', 'parents': ['0BwwA4oUTeiV1TGRPeTVjaWRDY1E']}|
 
 Example output:
 
 ```
 {
-  "id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR",
-  "parents": [
-    "0BwwA4oUTeiV1TGRPeTVjaWRDY1E"
-  ]
+  "result": {
+    "id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR",
+    "parents": [
+      "0BwwA4oUTeiV1TGRPeTVjaWRDY1E"
+    ]
+  }
 }
 ```
 
 #### Create File in Folder
 
-This action is used to create a file in a folder.
+This action is used to create a file in a folder
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |file|file|None|True|The file to create|None|{'filename': 'test.txt', 'content': 'UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=='}|
 |folder_id|string|None|True|The ID of the folder where the file will be created|None|0BwwA4oUTeiV1TGRPeTVjaWRDY1E|
 
@@ -154,18 +122,18 @@ Example input:
 ```
 {
   "file": {
-    "filename': 'test.txt",
-    "content': 'UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
-  }
+    "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
+    "filename": "test.txt"
+  },
   "folder_id": "0BwwA4oUTeiV1TGRPeTVjaWRDY1E"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|file_id|string|True|Return the ID of the file created on Google Drive|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|file_id|string|True|Return the ID of the file created on Google Drive|1bKpnBMV1TQ5iU6sM7d0sfovqWwdVJSet|
 
 Example output:
 
@@ -177,12 +145,12 @@ Example output:
 
 #### Create Folder
 
-This action is used to create a folder.
+This action is used to create a folder
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |folder_name|string|None|True|The name for the new folder|None|New Folder|
 |parent_folder_id|string|None|False|The ID of the folder in which the new folder will be created|None|0BwwA4oUTeiV1TGRPeTVjaWRDY1E|
 
@@ -197,9 +165,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|folder_id|string|True|Return the ID of the folder created on Google Drive|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|folder_id|string|True|Return the ID of the folder created on Google Drive|1eYy68j4cIucDRE1pAkar5bOgyLxCM_Rj|
 
 Example output:
 
@@ -211,12 +179,12 @@ Example output:
 
 #### Find File by Name
 
-This action is used to find a file ID.
+This action is used to find a file ID
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |filename|string|None|True|The name of the file to search for|None|test|
 |filename_operator|string|None|True|How the filename search will be performed. =,!=, or contains|['=', '!=', 'contains']|contains|
 |parent_id|string|None|False|The ID of the parent folder|None|0BwwA4oUTeiV1TGRPeTVjaWRDY1E|
@@ -233,80 +201,110 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|files_found|[]file_info|False|Returns a list of file names and their IDs|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|files_found|[]file_info|False|Returns a list of file names and their IDs|{'files_found': [{'file_name': 'test.txt', 'file_id': '1t4HfdfndRpYHRw4uRtqnu83XC7Oc3nBGqEHyaiPIDy0'}, {'file_name': 'test_new2.txt', 'file_id': '13Cxn1BPUnvQGcRVcnCBSF4ZbS0MbVxaxNJe2iuj_NTA'}]}|
 
 Example output:
 
 ```
-
 {
-  "files_found": [
-    {
-      "file_name": "test.txt",
-      "file_id": "1t4HfdfndRpYHRw4uRtqnu83XC7Oc3nBGqEHyaiPIDy0"
-    }
-    {
-      "file_name": "test_new2.txt",
-      "file_id":"13Cxn1BPUnvQGcRVcnCBSF4ZbS0MbVxaxNJe2iuj_NTA"
-    }
-  ]
+  "files_found": {
+    "files_found": [
+      {
+        "file_id": "1t4HfdfndRpYHRw4uRtqnu83XC7Oc3nBGqEHyaiPIDy0",
+        "file_name": "test.txt"
+      },
+      {
+        "file_id": "13Cxn1BPUnvQGcRVcnCBSF4ZbS0MbVxaxNJe2iuj_NTA",
+        "file_name": "test_new2.txt"
+      }
+    ]
+  }
 }
-
 ```
 
-#### Upload File
+#### Get File Contents
 
-This action is used to upload a file to Google Drive.
+This action is used to get the contents of a file on Google Drive
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|file|file|None|True|The file to upload|None|{'filename': 'test.txt', 'content': 'UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=='}|
-|folder_id|string|None|False|Folder to put the file in|None|0BwwA4oUTeiV1TGRPeTVjaWRDY1E|
-|google_file_type|string|None|True|The file type that Google will convert the file to|['Docs', 'Sheets', 'Slides']|Docs|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|file_id|string|None|True|The file ID for the file that will be returned|None|1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLPNQ|
+|mime_type|string|None|True|The MIME Type to export the file as e.g. */* , text/plain|None|text/plain|
 
 Example input:
 
 ```
 {
-  "file": {
-    "filename": "test.txt",
-    "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
-  },
-  "folder_id": "0BwwA4oUTeiV1TGRPeTVjaWRDY1E",
-  "google_file_type": "Docs"
+  "file_id": "1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLPNQ",
+  "mime_type": "text/plain"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|file_link|string|False|A direct link to the created file|
-|file_id|string|False|Return the ID of the file created on Google Drive|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|file|bytes|False|The file in bytes|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
 
 Example output:
 
 ```
-
 {
-  "file_id": "1vGnLfWUInJ5OhuTXQO1-UpVfPfsXVlmaFnvqY_uhT0M",
-  "file_link": "https://docs.google.com/document/d/1vGnLfWUInJ5OhuTXQO1-UpVfPfsXVlmaFnvqY_uhT0M"
+  "file": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
 }
-
 ```
 
-#### Overwrite File
+#### Move File
 
-This action is used to overwrites a file with new data.
+This action is used to move a file to a different folder
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|file_id|string|None|True|The ID of the file that will be moved to another folder|None|1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR|
+|folder_id|string|None|True|ID of the folder where the file will be moved|None|0BwwA4oUTeiV1TGRPeTVjaWRDY1E|
+
+Example input:
+
+```
+{
+  "file_id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR",
+  "folder_id": "0BwwA4oUTeiV1TGRPeTVjaWRDY1E"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|result|move_file_result|True|The result containing the ID of the file and ID of the folder to which the file was moved|{'id': '1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR', 'parents': ['0BwwA4oUTeiV1TGRPeTVjaWRDY1E']}|
+
+Example output:
+
+```
+{
+  "result": {
+    "id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR",
+    "parents": [
+      "0BwwA4oUTeiV1TGRPeTVjaWRDY1E"
+    ]
+  }
+}
+```
+
+#### Overwrite File
+
+This action is used to overwrites a file with new data
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |content|bytes|None|True|The new data that will overwrite the old file|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
 |file_id|string|None|True|The file ID for the file that will be overwritten|None|1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLPNQ|
 |new_file_name|string|None|False|Select a new file name. e.g. testfile.csv|None|test.txt|
@@ -325,73 +323,88 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|file_id|string|False|Return the ID of the file created on Google Drive|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|file_id|string|False|Return the ID of the file created on Google Drive|1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLREW|
 
 Example output:
 
 ```
 {
-  "file_id": "1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLPNQ"
+  "file_id": "1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLREW"
 }
 ```
 
+#### Upload File
 
-#### Get File Contents
-
-This action is used to get the contents of a file on Google Drive.
+This action is used to upload a file to Google Drive
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|file_id|string|None|True|The file ID for the file that will be returned|None|1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLPNQ|
-|mime_type|string|None|True|The MIME Type to export the file as e.g. */* , text/plain|None|text/plain|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|file|file|None|True|The file to upload|None|{'filename': 'test.txt', 'content': 'UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=='}|
+|folder_id|string|None|False|Folder to put the file in|None|0BwwA4oUTeiV1TGRPeTVjaWRDY1E|
+|google_file_type|string|None|True|The file type that Google will convert the file to|['Docs', 'Sheets', 'Slides']|Docs|
 
 Example input:
 
 ```
 {
-  "file_id": "1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLPNQ",
-  "mime_type": "text/plain"
+  "file": {
+    "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
+    "filename": "test.txt"
+  },
+  "folder_id": "0BwwA4oUTeiV1TGRPeTVjaWRDY1E",
+  "google_file_type": "Docs"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|file|bytes|False|The file in bytes|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|file_id|string|False|Return the ID of the file created on Google Drive|1vGnLfWUInJ5OhuTXQO1-UpVfPfsXVlmaFnvqY_uhT0M|
+|file_link|string|False|A direct link to the created file|https://docs.google.com/document/d/1vGnLfWUInJ5OhuTXQO1-UpVfPfsXVlmaFnvqY_uhT0M|
 
 Example output:
 
 ```
 {
-  "file": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
+  "file_id": "1vGnLfWUInJ5OhuTXQO1-UpVfPfsXVlmaFnvqY_uhT0M",
+  "file_link": "https://docs.google.com/document/d/1vGnLfWUInJ5OhuTXQO1-UpVfPfsXVlmaFnvqY_uhT0M"
 }
 ```
-
-
 ### Triggers
 
-_This plugin does not contain any triggers._
+*This plugin does not contain any triggers.*
+### Tasks
 
-### Custom Output Types
+*This plugin does not contain any tasks.*
 
-#### file_info
+### Custom Types
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|File ID|string|False|None|
-|File Name|string|False|None|
+**file_info**
 
-#### move_file_result
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|File ID|string|None|None|None|None|
+|File Name|string|None|None|None|None|
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|File ID|string|False|File ID|
-|Folder ID|string|False|Folder ID|
+**move_file_result**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|File ID|string|None|None|File ID|None|
+|Folder ID|[]string|None|None|Folder ID|None|
+
+**copy_file_result**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|File ID|string|None|None|File ID|None|
+|Folder ID|[]string|None|None|Folder ID|None|
+
 
 ## Troubleshooting
 
@@ -413,11 +426,13 @@ _This plugin does not contain any triggers._
 * 1.1.0 - Add overwrite file action and search file action
 * 1.0.0 - Initial plugin
 
+
 # Links
+
+* https://developers.google.com/drive/api/guides/about-sdk
 
 ## References
 
 * [oauth2client](https://github.com/google/oauth2client)
 * [httplib2](https://github.com/httplib2/httplib2)
 * [google-api-python-client](https://github.com/google/google-api-python-client)
-
