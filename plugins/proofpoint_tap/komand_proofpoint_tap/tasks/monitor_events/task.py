@@ -56,7 +56,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
 
             if not state or not last_collection_date:
                 task_start = "First run... "
-                first_time = now - timedelta(hours=1)
+                first_time = now - timedelta(hours=MAX_ALLOWED_LOOKBACK_HOURS)
                 if SPECIFIC_DATE:
                     first_time = datetime(**loads(SPECIFIC_DATE), tzinfo=timezone.utc)  # PLGN-701: hard set to 27th Jan
                     task_start += f"Using env var value of {SPECIFIC_DATE}"
