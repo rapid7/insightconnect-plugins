@@ -35,21 +35,21 @@ def main():
                 connection=connection.Connection()
             )
             self.add_action(actions.GetFileContents())
-
+        
             self.add_action(actions.UploadFile())
-
+        
             self.add_action(actions.OverwriteFile())
-
+        
             self.add_action(actions.FindFileByName())
-
+        
             self.add_action(actions.CreateFolder())
-
+        
             self.add_action(actions.CreateFileInFolder())
-
+        
             self.add_action(actions.MoveFile())
-
+        
             self.add_action(actions.CopyFile())
-
+        
 
     """Run plugin"""
     cli = insightconnect_plugin_runtime.CLI(ICONGoogleDrive())
