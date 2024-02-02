@@ -152,9 +152,9 @@ class Util:
                 return MockResponse("blocked_clicks_without_time_start_end", 200)
 
         if "siem/all" in url:
-            if interval == "2023-04-04T04:59:00+00:00/2023-04-04T05:59:00+00:00":
+            if interval == "2023-04-03T07:59:00+00:00/2023-04-03T08:59:00+00:00":
                 return MockResponse("", 400)
-            if interval == "2023-02-02T01:59:00+00:00/2023-02-02T02:59:00+00:00":
+            if interval == "2023-04-04T04:00:00+00:00/2023-04-04T05:00:00+00:00":
                 return MockResponse("", 500)
             if interval == "2023-04-04T06:59:00+00:00/2023-04-04T07:59:00+00:00":
                 return MockResponse("monitor_events", 200)

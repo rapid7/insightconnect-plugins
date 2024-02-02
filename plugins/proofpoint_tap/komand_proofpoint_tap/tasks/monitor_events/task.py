@@ -11,7 +11,7 @@ from komand_proofpoint_tap.util.exceptions import ApiException
 from komand_proofpoint_tap.util.util import SiemUtils
 from .schema import MonitorEventsInput, MonitorEventsOutput, MonitorEventsState, Component
 
-MAX_ALLOWED_LOOKBACK_HOURS = 3
+MAX_ALLOWED_LOOKBACK_HOURS = 24
 SPECIFIC_DATE = getenv("SPECIFIC_DATE")
 
 
@@ -43,7 +43,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             # [PLGN-701] ignore any look back limitations if we're forcing a backfill date
             if not SPECIFIC_DATE:
                 max_allowed_lookback = now - timedelta(hours=MAX_ALLOWED_LOOKBACK_HOURS)
-                # Don't allow collection to go back further than MAX_ALLOWED_LOOKBACK_HOURS (3) hours max
+                # Don't allow collection to go back further than MAX_ALLOWED_LOOKBACK_HOURS (24) hours max
                 if last_collection_date and datetime.fromisoformat(last_collection_date) < max_allowed_lookback:
                     last_collection_date = max_allowed_lookback.isoformat()
                     if next_page_index:
