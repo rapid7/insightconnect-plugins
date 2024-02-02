@@ -1,39 +1,43 @@
 {
-	"spec": "711f8eb6f9c0164ce5ae4b4643dfb009",
-	"manifest": "f1754bb65ade2f4f46d78187c6bdf6b0",
-	"setup": "6b5303d659afc98ef384264e654800c4",
+	"spec": "99f502548491f2838035a9ee5e403c5f",
+	"manifest": "2c65a587eb5ab75a3c08b05f184409c6",
+	"setup": "0f6140c5c794d8a08e09e0b79b78b8ad",
 	"schemas": [
-		{
-			"identifier": "create_file_in_folder/schema.py",
-			"hash": "605fe05bea8a1fe7d0611f78986afda4"
-		},
-		{
-			"identifier": "create_folder/schema.py",
-			"hash": "083e92a1f49bb69a6da7302512836462"
-		},
-		{
-			"identifier": "find_file_by_name/schema.py",
-			"hash": "b75f7687611c63b4ec1d9a6d420558a4"
-		},
-		{
-			"identifier": "get_file_contents/schema.py",
-			"hash": "886b2c0b938ea8bf99a25aedc04709df"
-		},
-		{
-			"identifier": "move_file/schema.py",
-			"hash": "021e46ce8efb01f9610717bca726d5ce"
-		},
-		{
-			"identifier": "overwrite_file/schema.py",
-			"hash": "cab72989bed2646ca224049a0f96a651"
-		},
-		{
-			"identifier": "upload_file/schema.py",
-			"hash": "a2d75541449630c5f314a0241d25c8f9"
-		},
-		{
-			"identifier": "connection/schema.py",
-			"hash": "59bf9c836c0b8acf8c185858a49b7a31"
-		}
+			{
+					"identifier": "create_file_in_folder/schema.py",
+					"hash": "605fe05bea8a1fe7d0611f78986afda4"
+			},
+			{
+					"identifier": "create_folder/schema.py",
+					"hash": "083e92a1f49bb69a6da7302512836462"
+			},
+			{
+					"identifier": "find_file_by_name/schema.py",
+					"hash": "b75f7687611c63b4ec1d9a6d420558a4"
+			},
+			{
+					"identifier": "get_file_contents/schema.py",
+					"hash": "886b2c0b938ea8bf99a25aedc04709df"
+			},
+			{
+					"identifier": "move_file/schema.py",
+					"hash": "021e46ce8efb01f9610717bca726d5ce"
+			},
+			{
+					"identifier": "copy_file/schema.py",
+					"hash": "14b910f1619830f02a6d430b9e4b75c3"
+			},
+			{
+					"identifier": "overwrite_file/schema.py",
+					"hash": "cab72989bed2646ca224049a0f96a651"
+			},
+			{
+					"identifier": "upload_file/schema.py",
+					"hash": "a2d75541449630c5f314a0241d25c8f9"
+			},
+			{
+					"identifier": "connection/schema.py",
+					"hash": "59bf9c836c0b8acf8c185858a49b7a31"
+			}
 	]
 }

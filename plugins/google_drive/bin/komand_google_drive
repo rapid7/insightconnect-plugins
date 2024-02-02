@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Google Drive"
 Vendor = "rapid7"
-Version = "2.2.0"
+Version = "2.3.0"
 Description = "Upload and retrieve files from Google drive"
 
 

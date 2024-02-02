@@ -401,7 +401,7 @@ _This plugin does not contain any triggers._
 
 # Version History
 
-* 2.3.0 - Implement shared drive support | Add Copy file action
+* 2.3.0 - Implement shared drive support | Add Copy file action | Code refarctor
 * 2.2.0 - Add Create Folder, Create File in Folder and Move File actions | Add missing input and output examples | Code refactor
 * 2.1.3 - Correct spelling in help.md
 * 2.1.2 - New spec and help.md format for the Extension Library
