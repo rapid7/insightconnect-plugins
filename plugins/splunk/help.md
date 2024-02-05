@@ -5,19 +5,23 @@
 To get Splunk alerts or send saved searches to InsightConnect, please use the [InsightConnect Splunk App](https://splunkbase.splunk.com/app/4673/).
 
 # Key Features
-
-* Run a search query to get the results from your Splunk instance
-* Display search results from a specified job
-* Run, create, delete, and list saved searches to store and rerun queries over time
-* List and modify saved search properties to view and update your reusable queries
-* Get saved search job history to retrieve the history of a specified saved search
+  
+* Run a search query to get the results from your Splunk instance  
+* Display search results from a specified job  
+* Run, create, delete, and list saved searches to store and rerun queries over time  
+* List and modify saved search properties to view and update your reusable queries  
+* Get saved search job history to retrieve the history of a specified saved search  
 * Insert events into an index to update your Splunk instance
 
 # Requirements
-
-* Administrative credentials
-* Splunk host IP address or hostname
+  
+* Administrative credentials  
+* Splunk host IP address or hostname  
 * Splunk API port
+
+# Supported Product Versions
+  
+* Splunk SDK 1.7.4
 
 # Documentation
 
@@ -28,382 +32,458 @@ To connect to Splunk, you must have valid credentials and network access to the 
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|False|Username and password|None|None|
-|host|string|None|True|Hostname or IP address of Splunk server to connect to e.g. splunk.example.com|None|None|
-|license|string|None|True|License type for Splunk host|['Enterprise', 'Free']|None|
-|port|integer|8089|True|Port the Splunk API is listening on. Default is 8089|None|None|
-|ssl_verify|boolean|None|True|Verify server's SSL/TLS certificate|None|None|
-|use_ssl|boolean|None|True|Whether or not to use SSL|None|None|
-
-To configure your Splunk instance to allow remote login add the following line to the general stanza in `$SPLUNK_HOME/etc/system/local/server.conf`:
-
-```
-
-[general]
-allowRemoteLogin = always
-
-```
-
-There's no authentication in the free license, so set `license` to `Free` and omit input to the username and password fields.
-
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|credentials|credential_username_password|None|False|Username and password|None|{"username":"ExampleUser","password":"ExamplePassword"}|
+|host|string|None|True|Hostname or IP address of Splunk server to connect to|None|splunk.example.com|
+|license|string|None|True|License type for Splunk host|["Enterprise", "Free"]|Free|
+|port|integer|8089|True|Port the Splunk API is listening on. Default is 8089|None|8089|
+|ssl_verify|boolean|None|True|Verify server's SSL/TLS certificate|None|True|
+|use_ssl|boolean|None|True|Whether or not to use SSL|None|True|
+  
 Example input:
 
 ```
+{
+  "credentials": {
+    "password": "ExamplePassword",
+    "username": "ExampleUser"
+  },
+  "host": "splunk.example.com",
+  "license": "Free",
+  "port": 8089,
+  "ssl_verify": true,
+  "use_ssl": true
+}
 ```
 
 ## Technical Details
 
 ### Actions
 
-#### List Saved Searches
 
-This action lists all saved searches.
-
-##### Input
-
-_This action does not contain any inputs._
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|saved_searches|[]object|False|Array of saved search objects|
-
-#### Insert
-
-This action is used to insert events into an index.
+#### Create Saved Search
+  
+This action is used to creates a saved search
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|event|string|None|True|The event to submit|None|None|
-|host|string|None|False|The source host, e.g. localhost or 192.168.2.2|None|None|
-|index|string|None|True|Name of index|None|None|
-|source|string|None|False|Source of the event (e.g., /var/log/syslog)|None|None|
-|sourcetype|string|None|False|The optional source type value of the event (e.g. access_combined, syslog)|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-_This action does not contain any outputs._
-
-#### Search
-
-This action allows you run a search command in Splunk.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|count|integer|100|True|The maximum number of results to return. Set to 0 for unlimited results|None|None|
-|query|string|None|True|Run a search query (e.g. search *)|None|None|
-|search_timeframe|string|None|False|The specified timeframe for the search. Default searches over all time. Separated with dash, in the form of Unix epoch timestamps, e.g. 1498824598-1598824598. If end time is left blank, it defaults to the current time|None|1598984278-1598984478|
-
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|properties|object|None|False|JSON object containing additional properties to save with the saved search|None|{"description":"ExampleDescription","is_scheduled":true}|
+|query|string|None|True|Search query|None|search *|
+|saved_search_name|string|None|True|Name to give to the saved search|None|ExampleSavedSearchName|
+  
 Example input:
 
 ```
 {
-  "count": 10,
-  "query": "| from datamodel:\"internal_audit_logs.searches\"",
+  "properties": {
+    "description": "ExampleDescription",
+    "is_scheduled": true
+  },
+  "query": "search *",
+  "saved_search_name": "ExampleSavedSearchName"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|saved_search|object|False|Newly created saved search object|{"name":"ExampleSavedSearchName","search":"index=main sourcetype=access_combined status=200","dispatch.earliest_time":"-1d","dispatch.latest_time":"now"}|
+  
+Example output:
+
+```
+{
+  "saved_search": {
+    "dispatch.earliest_time": "-1d",
+    "dispatch.latest_time": "now",
+    "name": "ExampleSavedSearchName",
+    "search": "index=main sourcetype=access_combined status=200"
+  }
+}
+```
+
+#### Delete Saved Search
+  
+This action is used to deletes a saved search
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|saved_search_name|string|None|True|Name of the saved search to delete|None|ExampleSavedSearchName|
+  
+Example input:
+
+```
+{
+  "saved_search_name": "ExampleSavedSearchName"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Whether or not the deletion was successful|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Display Search Results
+  
+This action is used to displays the search results from a job
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|job_id|string|None|True|The Job ID to look up results for|None|12345|
+|timeout|number|None|True|Duration of time, in seconds, to wait for retrieving results|None|5|
+  
+Example input:
+
+```
+{
+  "job_id": 12345,
+  "timeout": 5
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|search_results|[]object|False|Search results from a job|[{"_raw":"2023-10-15 12:00:00, INFO - Application started","host":"server-1","source":"/var/log/application.log","sourcetype":"test","index":"main","_time":"2023-10-15T12:00:00","event":{"level":"INFO","message":"Application started"}}]|
+  
+Example output:
+
+```
+{
+  "search_results": [
+    {
+      "_raw": "2023-10-15 12:00:00, INFO - Application started",
+      "_time": "2023-10-15T12:00:00",
+      "event": {
+        "level": "INFO",
+        "message": "Application started"
+      },
+      "host": "server-1",
+      "index": "main",
+      "source": "/var/log/application.log",
+      "sourcetype": "test"
+    }
+  ]
+}
+```
+
+#### Get Saved Search Job History
+  
+This action is used to returns the job history of a specified saved search
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|saved_search_name|string|None|True|Name of a saved search|None|ExampleSavedSearchName|
+  
+Example input:
+
+```
+{
+  "saved_search_name": "ExampleSavedSearchName"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|job_history|[]object|False|Job history belonging to a saved search|[{"name":"ExampleSavedSearchName","app":"search","search":"index=_internal","dispatchState":"DONE","resultCount":100,"runDuration":15000,"cursorTime":"2024-01-29T12:00:00.000-07:00","earliestTime":"2024-01-29T11:00:00.000-07:00","latestTime":"2024-01-29T11:30:00.000-07:00","statusBuckets":300,"ttl":600,"autoSummarize":true}]|
+  
+Example output:
+
+```
+{
+  "job_history": [
+    {
+      "app": "search",
+      "autoSummarize": true,
+      "cursorTime": "2024-01-29T12:00:00.000-07:00",
+      "dispatchState": "DONE",
+      "earliestTime": "2024-01-29T11:00:00.000-07:00",
+      "latestTime": "2024-01-29T11:30:00.000-07:00",
+      "name": "ExampleSavedSearchName",
+      "resultCount": 100,
+      "runDuration": 15000,
+      "search": "index=_internal",
+      "statusBuckets": 300,
+      "ttl": 600
+    }
+  ]
+}
+```
+
+#### Insert
+  
+This action is used to insert events into an index
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|event|string|None|True|The event to submit|None|User logged in|
+|host|string|None|False|The source host|None|example_host|
+|index|string|None|True|Name of index|None|ExampleIndexName|
+|source|string|None|False|Source of the event|None|ExampleEventSource|
+|source_type|string|None|False|The optional source type value of the event|None|ExampleEventSourceType|
+  
+Example input:
+
+```
+{
+  "event": "User logged in",
+  "host": "example_host",
+  "index": "ExampleIndexName",
+  "source": "ExampleEventSource",
+  "source_type": "ExampleEventSourceType"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Boolean value that indicates whether event got inserted or not|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### List Saved Searches
+  
+This action is used to lists all saved searches
+
+##### Input
+  
+*This action does not contain any inputs.*
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|saved_searches|[]object|False|Array of saved search objects|[{"name":"example_saved_search_1","acl":{"app":"search","can_write":"1","modifiable":"1","owner":"admin","sharing":"app"},"content":{"alert.expires":"24h","alert.severity":"2","alert.suppress":"0","alert.track":"1","dispatch.earliest_time":"-1d@d","dispatch.latest_time":"now","displayview":"flashtimeline","enableSched":"1","is_scheduled":"1","search":"index=_internal | stats count by sourcetype","alert.digest_mode":"1","cron_schedule":"0 0 * * *"},"links":{"alternate":"/example_saved_search_1","edit":"/example_saved_search_1","list":"/example_saved_search_1","remove":"/example_saved_search_1","disable":"/example_saved_search_1/disable","dispatch":"/example_saved_search_1/dispatch","alert":"/example_saved_search_1/alert","scheduled_view":"/example_saved_search_1/scheduled_view"}}]|
+  
+Example output:
+
+```
+{
+  "saved_searches": [
+    {
+      "acl": {
+        "app": "search",
+        "can_write": "1",
+        "modifiable": "1",
+        "owner": "admin",
+        "sharing": "app"
+      },
+      "content": {
+        "alert.digest_mode": "1",
+        "alert.expires": "24h",
+        "alert.severity": "2",
+        "alert.suppress": "0",
+        "alert.track": "1",
+        "cron_schedule": "0 0 * * *",
+        "dispatch.earliest_time": "-1d@d",
+        "dispatch.latest_time": "now",
+        "displayview": "flashtimeline",
+        "enableSched": "1",
+        "is_scheduled": "1",
+        "search": "index=_internal | stats count by sourcetype"
+      },
+      "links": {
+        "alert": "/example_saved_search_1/alert",
+        "alternate": "/example_saved_search_1",
+        "disable": "/example_saved_search_1/disable",
+        "dispatch": "/example_saved_search_1/dispatch",
+        "edit": "/example_saved_search_1",
+        "list": "/example_saved_search_1",
+        "remove": "/example_saved_search_1",
+        "scheduled_view": "/example_saved_search_1/scheduled_view"
+      },
+      "name": "example_saved_search_1"
+    }
+  ]
+}
+```
+
+#### Modify Saved Search Properties
+  
+This action is used to modifies the properties of a saved search
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|properties|object|None|True|JSON object of properties and values to modify|None|{"description":"ExampleDescription","is_scheduled":true}|
+|saved_search_name|string|None|True|Name of saved search to display properties for|None|ExampleSavedSearchName|
+  
+Example input:
+
+```
+{
+  "properties": {
+    "description": "ExampleDescription",
+    "is_scheduled": true
+  },
+  "saved_search_name": "ExampleSavedSearchName"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Whether or not the update was successful|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Run Saved Search
+  
+This action is used to runs a saved search
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|saved_search_name|string|None|True|Name of saved search to run|None|ExampleSavedSearchName|
+  
+Example input:
+
+```
+{
+  "saved_search_name": "ExampleSavedSearchName"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|job_id|string|False|The Job ID for the search job created|12345|
+  
+Example output:
+
+```
+{
+  "job_id": 12345
+}
+```
+
+#### Search
+  
+This action is used to run a query
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|count|integer|100|True|The maximum number of results to return. Set to 0 for unlimited results|None|100|
+|query|string|None|True|Run a search query|None|search *|
+|search_timeframe|string|None|False|The specified timeframe for the search. Default searches over all time. Separated with dash, in the form of Unix epoch timestamps, e.g. 1498824598-1598824598. If end time is left blank, it defaults to the current time|None|1598984278-1598984478|
+  
+Example input:
+
+```
+{
+  "count": 100,
+  "query": "search *",
   "search_timeframe": "1598984278-1598984478"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|count|integer|False|Count of results returned|
-|result|object|False|Raw search results|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|count|integer|False|Count of results returned|1|
+|result|object|False|Raw search results|[{"_time":"2024-01-30T12:46:00","event":"ExampleEvent1"}]|
+  
 Example output:
 
 ```
 {
   "count": 1,
-  "result": {
-    "fields": [
-      {
-        "name": "_time"
-      },
-      {
-        "name": "host"
-      },
-      {
-        "name": "source"
-      },
-      {
-        "name": "sourcetype"
-      },
-      {
-        "name": "info"
-      },
-      {
-        "name": "user"
-      },
-      {
-        "name": "exec_time"
-      },
-      {
-        "name": "result_count"
-      },
-      {
-        "name": "savedsearch_name"
-      },
-      {
-        "name": "scan_count"
-      },
-      {
-        "name": "total_run_time"
-      },
-      {
-        "name": "is_realtime",
-        "type": "str"
-      },
-      {
-        "name": "search_id",
-        "type": "str"
-      },
-      {
-        "name": "search",
-        "type": "str"
-      },
-      {
-        "name": "search_type",
-        "type": "str"
-      },
-      {
-        "name": "_bkt"
-      },
-      {
-        "name": "_cd"
-      },
-      {
-        "name": "_indextime"
-      },
-      {
-        "name": "_kv"
-      },
-      {
-        "name": "_raw"
-      },
-      {
-        "name": "_serial"
-      },
-      {
-        "name": "_si"
-      },
-      {
-        "name": "_sourcetype"
-      },
-      {
-        "name": "_subsecond"
-      }
-    ],
-    "highlighted": {},
-    "init_offset": 0,
-    "messages": [],
-    "preview": false,
-    "results": [
-      {
-        "_bkt": "_audit~0~0B6E6961-7112-4FAF-9BDD-C477139D9519",
-        "_cd": "0:32607",
-        "_indextime": "1598984305",
-        "_kv": "1",
-        "_raw": "Audit:[timestamp=09-01-2020 18:18:25.732, user=splunk-system-user, action=search, info=canceled, search_id='1598984220.14', total_run_time=0.40, event_count=0, result_count=0, available_count=0, scan_count=0, drop_count=0, exec_time=1598984220, api_et=N/A, api_lt=N/A, search_et=N/A, search_lt=N/A, is_realtime=0, savedsearch_name=\"\", search_startup_time=\"129\", has_error_msg=false, fully_completed_search=true, searched_buckets=0, eliminated_buckets=0, considered_events=0, total_slices=0, decompressed_slices=0, duration.command.search.index=0, invocations.command.search.index.bucketcache.hit=0, duration.command.search.index.bucketcache.hit=0, invocations.command.search.index.bucketcache.miss=0, duration.command.search.index.bucketcache.miss=0, invocations.command.search.index.bucketcache.error=0, duration.command.search.rawdata=0, invocations.command.search.rawdata.bucketcache.hit=0, duration.command.search.rawdata.bucketcache.hit=0, invocations.command.search.rawdata.bucketcache.miss=0, duration.command.search.rawdata.bucketcache.miss=0, invocations.command.search.rawdata.bucketcache.error=0, roles='admin+power+splunk-system-role+user', search='| copybuckets json=\"{\\\"vixes\\\": {}, \\\"providers\\\": {}}\"'][n/a]",
-        "_serial": "0",
-        "_si": [
-          "97dd3284e275",
-          "_audit"
-        ],
-        "_sourcetype": "audittrail",
-        "_subsecond": ".732782",
-        "_time": "2020-09-01T18:18:25.732+00:00",
-        "exec_time": "1598984220",
-        "host": "97dd3284e275",
-        "info": "canceled",
-        "is_realtime": "false",
-        "result_count": "0",
-        "savedsearch_name": "",
-        "scan_count": "0",
-        "search": "| copybuckets json=\"{\\\"vixes\\\": {}, \\\"providers\\\": {}}\"",
-        "search_id": "1598984220.14",
-        "search_type": "adhoc",
-        "source": "audittrail",
-        "sourcetype": "audittrail",
-        "total_run_time": "0.40",
-        "user": "splunk-system-user"
-      }
-    ]
-  }
+  "result": [
+    {
+      "_time": "2024-01-30T12:46:00",
+      "event": "ExampleEvent1"
+    }
+  ]
 }
 ```
 
-#### Modify Saved Search Properties
-
-This action is used to modify the properties of a saved search.
-A full list of saved search properties can be found [here](http://dev.splunk.com/view/python-sdk/SP-CAAAEK2#savedsearchparams).
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|properties|object|None|True|JSON object of properties and values to modify|None|None|
-|saved_search_name|string|None|True|Name of saved search to display properties for|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Whether or not the update was successful|
-
-#### Run Saved Search
-
-This action is used to run a saved search.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|saved_search_name|string|None|True|Name of saved search to run|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|job_id|string|False|Job ID for the search job created|
-
 #### View Saved Search Properties
-
-This action is used to return the properties for a saved search.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|saved_search_name|string|None|True|Name of saved search to display properties for|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|properties|object|False|JSON object containing saved search properties|
-
-#### Delete Saved Search
-
-This action is used to delete a saved search.
+  
+This action is used to returns the properties for a saved search
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|saved_search_name|string|None|True|Name of the saved search to delete|None|None|
-
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|saved_search_name|string|None|True|Name of saved search to display properties for|None|ExampleSavedSearchName|
+  
 Example input:
 
 ```
+{
+  "saved_search_name": "ExampleSavedSearchName"
+}
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Whether or not the deletion was successful|
-
-#### Display Search Results
-
-This action is used to display the search results from a job.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|job_id|string|None|True|Job ID to look up results for|None|None|
-|timeout|number|None|True|Duration of time, in seconds, to wait for retrieving results|None|None|
-
-Example input:
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|properties|object|False|JSON object containing saved search properties|{"description":"ExampleDescription","is_scheduled":true}|
+  
+Example output:
 
 ```
+{
+  "properties": {
+    "description": "ExampleDescription",
+    "is_scheduled": true
+  }
+}
 ```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|search_results|[]object|False|Search results from a job|
-
-#### Create Saved Search
-
-This action is used to create a saved search.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|properties|object|None|False|JSON object containing additional properties to save with the saved search|None|None|
-|query|string|None|True|Search query|None|None|
-|saved_search_name|string|None|True|Name to give to the saved search|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|saved_search|object|False|Newly created saved search object|
-
-#### Get Saved Search Job History
-
-This action is used to return the job history of a specified saved search.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|saved_search_name|string|None|True|Name of a saved search|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|job_history|[]object|False|Job history belonging to a saved search|
-
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
-
-### Custom Output Types
-
-_This plugin does not contain any custom output types._
+### Custom Types
+  
+*This plugin does not contain any custom output types.*
 
 ## Troubleshooting
 
@@ -411,6 +491,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
+* 3.0.4 - Updated SDK to latest version | Refreshed the plugin | Added unittests | Updated packages
 * 3.0.3 - Add `search_timeframe` input to Search action
 * 3.0.2 - Fix issue with typos in help.md and plugin description
 * 3.0.1 - New spec and help.md format for the Extension Library
@@ -429,6 +510,8 @@ _This plugin does not contain any custom output types._
 * 0.1.0 - Initial plugin
 
 # Links
+
+* [Splunk](https://www.splunk.com/)
 
 ## References
 
