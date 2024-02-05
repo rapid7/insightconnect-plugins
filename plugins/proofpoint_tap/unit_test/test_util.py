@@ -152,12 +152,14 @@ class Util:
                 return MockResponse("blocked_clicks_without_time_start_end", 200)
 
         if "siem/all" in url:
-            if interval == "2023-04-04T04:59:00+00:00/2023-04-04T05:59:00+00:00":
-                return MockResponse("", 400)
-            if interval == "2023-02-02T01:59:00+00:00/2023-02-02T02:59:00+00:00":
+            if interval == "2023-04-03T06:59:00+00:00/2023-04-03T07:59:00+00:00":
+                return MockResponse("", 400)  # input state is 07:59 but we lookback an hour because of page state
+            if interval == "2023-04-04T04:00:00+00:00/2023-04-04T05:00:00+00:00":
                 return MockResponse("", 500)
+            if interval == "2023-04-03T07:59:00+00:00/2023-04-03T08:59:00+00:00":
+                return MockResponse("monitor_events", 200)  # input state is empty so we lookback 24 hours from 'now'
             if interval == "2023-04-04T06:59:00+00:00/2023-04-04T07:59:00+00:00":
-                return MockResponse("monitor_events", 200)
+                return MockResponse("monitor_events", 200)  # use input state supplied
             if interval == "2023-06-20T13:59:00+00:00/2023-06-20T14:59:00+00:00":
                 return MockResponse("monitor_events", 200)
 
@@ -167,6 +169,8 @@ class Util:
                 return MockResponse("all_threats_without_time_start", 200)
             if interval == "2021-08-20T13:00:00/2021-08-20T14:00:00":
                 return MockResponse("all_threats_without_time_end", 200)
+            if interval == "2024-01-27T00:00:00+00:00/2024-01-27T01:00:00+00:00":
+                return MockResponse("monitor_events", 200)
             if threat_status == "cleared" and threat_type == "url":
                 return MockResponse("all_threats_cleared_status", 200)
             if threat_status == "active":
