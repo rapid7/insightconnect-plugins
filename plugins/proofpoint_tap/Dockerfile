@@ -20,6 +20,7 @@ USER nobody
 # PLGN-701: POC how we can inject an env var into the container to specify a new date
 # the intention will be in next version to remove this hard coded injection and then if a backfill is needed
 # again we simply inject the value at the deployment level (TBD on how we would do this and persist if pod restarts etc)
-ENV SPECIFIC_DATE='{"year": 2024, "month": 1, "day": 27, "hour": 0, "minute": 0, "second": 0}'
+# PLGN-716: keeping env var but commented out as an example if this is ever needed again.
+#ENV SPECIFIC_DATE='{"year": 2024, "month": 1, "day": 27, "hour": 0, "minute": 0, "second": 0}'
 
 ENTRYPOINT ["/usr/local/bin/komand_proofpoint_tap"]
