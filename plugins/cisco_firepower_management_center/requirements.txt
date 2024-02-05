@@ -4,3 +4,4 @@
 fmcapi==20231211.0
 validators==0.22.0
 parameterized==0.9.0
+cryptography==42.0.2
