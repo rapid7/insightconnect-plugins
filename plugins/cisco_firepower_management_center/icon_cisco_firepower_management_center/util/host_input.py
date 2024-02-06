@@ -31,7 +31,7 @@ class CiscoFirePowerHostInput:
 
         self.__generate_certificate()
         sockt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        ctx = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
+        ctx = ssl.SSLContext(ssl.PROTOCOL_TLS)
         ctx.load_cert_chain(self.__cert_file)
         self.__connection = ctx.wrap_socket(sockt)
         self.__connection.connect((self.__host, self.__port))
