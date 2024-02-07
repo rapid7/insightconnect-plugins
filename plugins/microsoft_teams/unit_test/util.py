@@ -66,7 +66,7 @@ class Util:
 
         if (
             args[0]
-            == "https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team') and displayName eq 'Example Team'"
+            == "https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team') and displayName eq 'Example%20Team'"
         ):
             return MockResponse("get_teams", 200)
         if args[0] == "https://graph.microsoft.com/beta/1/teams/12345/channels":
