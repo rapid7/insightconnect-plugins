@@ -1,6 +1,7 @@
 import os
 import sys
 from unittest import TestCase
+from unittest.mock import patch
 
 from parameterized import parameterized
 
@@ -29,6 +30,19 @@ class TestParseTapAlert(TestCase):
             ],
         ]
     )
-    def test_parse_tap_alert(self, test_name, input_params, expected):
+    @patch("urlextract.urlextract_core.URLExtract.__new__")
+    def test_parse_tap_alert(self, _test_name, input_params, expected, mock_url_extract):
+        # GH actions fails on finding a cachefile for URLExtract and has no impact on this unit test mock it.
+        mock_url_extract.return_value = MockURLExtract()
+
         actual = self.action.run(input_params)
         self.assertDictEqual(actual, expected)
+
+
+class MockURLExtract:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def find_urls(_input):
+        return []
