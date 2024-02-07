@@ -1,0 +1,24 @@
+{
+  "FeatureCtrl": {
+    "mode": "0"
+  },
+  "Meta": {
+    "ErrorCode": 0,
+    "Result": 1
+  },
+  "PermissionCtrl": {
+    "permission": "255"
+  },
+  "SystemCtrl": {
+    "TmcmSoDist_Role": "none"
+  },
+  "uploaded_info_list": {
+    "FileHashID": "cd9b739b7c6e488080412e9a831e9260a468564f",
+    "FileName": "file.txt",
+    "UploadedStatus": 1
+  },
+  "uploaded_message_list": {
+    "Message": "Uploaded 1 OpenIOC file(s) successfully.",
+    "MessageType": 1
+  }
+}

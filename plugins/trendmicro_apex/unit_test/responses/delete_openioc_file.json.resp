@@ -1,0 +1,19 @@
+{
+  "Data": [{
+    "DeletedStatus": 1,
+    "FileHashID": "769fcc7550bf98d96bccb7e22a5557301c403455"
+  }],
+  "FeatureCtrl": {
+    "mode": "0"
+  },
+  "Meta": {
+    "ErrorCode": 0,
+    "Result": 1
+  },
+  "PermissionCtrl": {
+    "permission": "255"
+  },
+  "SystemCtrl": {
+    "TmcmSoDist_Role": "none"
+  }
+}

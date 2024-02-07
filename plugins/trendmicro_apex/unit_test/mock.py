@@ -47,13 +47,14 @@ def mocked_request(side_effect: Callable) -> None:
 
 
 def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
+    # breakpoint()
     if url == "URL/WebApp/API/SuspiciousObjectResource/FileUDSO":
         if method == "put":
             return MockResponse("add_file_to_usdo_list", status_code)
     if url == "URL/WebApp/api/SuspiciousObjects/UserDefinedSO":
         if method == "put":
             return MockResponse("blacklist", status_code)
-    if url == "URL/WebApp/IOCBackend/OpenIOCResource/File?param=":
+    if "URL/WebApp/IOCBackend/OpenIOCResource/File?param=" in url:
         if method == "delete":
             return MockResponse("delete_openioc_file", status_code)
         if method == "get":
@@ -78,7 +79,6 @@ def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
 
 
 def mock_request_200(*args, **kwargs) -> MockResponse:
-    # breakpoint()
     return mock_conditions(args[0], args[1], 200)
 
 

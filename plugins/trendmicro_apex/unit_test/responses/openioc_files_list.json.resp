@@ -1,0 +1,47 @@
+{
+  "data": {
+    "FilingCabinet": [
+      {
+        "ExtractingStatus": 999,
+        "FileAddedDatetime": "05/10/2020 15:58:41",
+        "FileHashID": "cd9b739b7c6e488080412e9a831e9260a468564f",
+        "FileName": "file.txt",
+        "ShortDesc": "Cryptolocker Detection (EXPERIMENTAL)",
+        "UploadedBy": "Integration Lab",
+        "UploadedFrom": 1
+      },
+      {
+        "ExtractingStatus": 1,
+        "FileAddedDatetime": "05/10/2020 12:28:18",
+        "FileHashID": "2a99370fd6218b6b8e0c3413f11eb504a4a60225",
+        "FileName": "openioc1",
+        "ShortDesc": "SHELLDC.DLL (BACKDOOR)",
+        "UploadedBy": "Integration Lab",
+        "UploadedFrom": 1
+      },
+      {
+        "ExtractingStatus": 1,
+        "FileAddedDatetime": "05/10/2020 10:39:17",
+        "FileHashID": "fc3f17bd9068c2588c4c475d2d08a0e7f04f434d",
+        "FileName": "cryptolocker2.ioc",
+        "ShortDesc": "Cryptolocker Detection (EXPERIMENTAL)",
+        "UploadedBy": "Integration Lab",
+        "UploadedFrom": 1
+      }
+    ],
+    "TotalIOCCount": 3
+  },
+  "feature_ctrl": {
+    "mode": "0"
+  },
+  "meta": {
+    "ErrorCode": 0,
+    "Result": 1
+  },
+  "permission_ctrl": {
+    "permission": "255"
+  },
+  "system_ctrl": {
+    "TmcmSoDist_Role": "none"
+  }
+}
