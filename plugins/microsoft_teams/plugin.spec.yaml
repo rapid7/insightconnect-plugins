@@ -4,7 +4,8 @@ products: [insightconnect]
 name: microsoft_teams
 title: Microsoft Teams
 description: The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users
-version: 6.0.0
+version: 6.0.1
+connection_version: 6
 supported_versions: ["Microsoft Graph API v1.0 2021-11-28"]
 vendor: rapid7
 support: community
@@ -521,11 +522,13 @@ triggers:
         description: The message object that was created
         type: message
         required: false
+        example: {"body": {"contentType": "text","content": "tests_v1"},"channelIdentity": {"teamId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0","channelId": "11:examplechannel.name"},"First Word": "test","from": {"user": {"id": "3395856c-e81f-2b73-82de-e72602f798b6","displayName": "Example User","userIdentityType": "aadUser","tenantId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0"}},"ID": "1234567891","messageType": "message","importance": "normal","locale": "en-us","webUrl": "https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891","Words":[{}]}
       indicators:
         title: Indicators
         description: The indicators object that was extracted from message
         type: indicators
         required: false
+        example: {"CVEs": ["CVE-2024-1234"],"Domains": ["test.com"],"Email Addresses": ["user@example.com"],"Hashes": {"MD5 Hashes": ["938c2cc0dcc05f2b68c4287040cfcf71"],"SHA1 Hashes": ["2aae6c35c94fcfb415dbe95f408b9ce91ee846ed"],"SHA256 Hashes": ["ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"]},"IP Addressses": {"IPv4 Addressses": ["1.1.1.1"],"IPv6 Addressses": ["1111:1111:1111:1111:1111:1111:1111:1111"]},"MAC Addresses": ["00-00-00-00-00-00"],"URLs": ["https://www.user@example.com"],"UUIDs": ["123456789"]}
       channel_name:
         title: Channel Name
         description: Name of the channel where the message was posted
@@ -556,6 +559,7 @@ actions:
         description: Array of team objects
         type: "[]team"
         required: false
+        example: '[{"Description": "test description","Display Name": "test display name","ID": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0"}]'
   get_channels_for_team:
     title: Get Channels for Team
     description: Returns all the channels associated with a team
@@ -580,6 +584,7 @@ actions:
         description: Array of channels
         type: "[]channel"
         required: false
+        example: '[{"Description": "test description","Display Name": "test display name","ID": "12:a12345bc678d901e12345f67890g1234_thread.v2"}]'
   send_message:
     title: Send Message
     description: Send a message
@@ -625,6 +630,7 @@ actions:
         description: The message object that was created
         type: message
         required: false
+        example: {"body": {"contentType": "text","content": "tests_v1"},"channelIdentity": {"teamId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0","channelId": "11:examplechannel.name"},"First Word": "test","from": {"user": {"id": "3395856c-e81f-2b73-82de-e72602f798b6","displayName": "Example User","userIdentityType": "aadUser","tenantId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0"}},"ID": "1234567891","messageType": "message","importance": "normal","locale": "en-us","webUrl": "https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891","Words":[{}]}
   send_message_by_guid:
     title: Send Message by GUID
     description: Sends a message using the GUID for the team and channel. This is more performant than send message
@@ -663,6 +669,7 @@ actions:
         description: The message object that was created
         type: message
         required: false
+        example: {"body": {"contentType": "text","content": "tests_v1"},"channelIdentity": {"teamId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0","channelId": "11:examplechannel.name"},"First Word": "test","from": {"user": {"id": "3395856c-e81f-2b73-82de-e72602f798b6","displayName": "Example User","userIdentityType": "aadUser","tenantId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0"}},"ID": "1234567891","messageType": "message","importance": "normal","locale": "en-us","webUrl": "https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891","Words":[{}]}
   send_html_message:
     title: Send HTML Message
     description: Send HTML as a message
@@ -701,6 +708,7 @@ actions:
         description: The message object that was created
         type: message
         required: false
+        example: {"body": {"contentType": "text","content": "tests_v1"},"channelIdentity": {"teamId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0","channelId": "11:examplechannel.name"},"First Word": "test","from": {"user": {"id": "3395856c-e81f-2b73-82de-e72602f798b6","displayName": "Example User","userIdentityType": "aadUser","tenantId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0"}},"ID": "1234567891","messageType": "message","importance": "normal","locale": "en-us","webUrl": "https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891","Words":[{}]}
   add_member_to_team:
     title: Add Member to Team
     description: Add a member to a team
@@ -870,6 +878,7 @@ actions:
         description: Information about the group that was created
         type: group
         required: false
+        example: {"Created Date Time": "2023-11-09T12:07:43.167Z","Description": "test description","Display Name": "test display name","ID": "12:a12345bc678d901e12345f67890g1234_thread.v2","Mail": "General - test display name <user@example.com>","Mail Enabled": true,"Mail Nickname": "TestNickname","Security Enabled": true}
   delete_team:
     title: Delete Team
     description: Delete a team and the associated group from Azure
@@ -983,6 +992,7 @@ actions:
         description: The message object that was created
         type: chatMessage
         required: false
+        example: {"id": "1234567891","replyToId": "1234567890","etag": "1234567891","messageType": "message","createdDateTime": "2023-08-01T12:00:00.000Z","lastModifiedDateTime": "2023-08-01T12:00:00.000Z","importance": "normal","locale": "en-us","webUrl": "https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891","from": {"user": {"id": "3395856c-e81f-2b73-82de-e72602f798b6","displayName": "Example User","userIdentityType": "aadUser","tenantId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0"}},"body": {"contentType": "text","content": "tests_v1"},"channelIdentity": {"teamId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0","channelId": "11:examplechannel.name"},"attachments": [],"mentions": [],"reactions": []}
   get_message_in_chat:
     title: Get Message in Chat
     description: Retrieve a single message or a message reply in a chat
@@ -1011,6 +1021,7 @@ actions:
         description: The message object that was created
         type: chatMessage
         required: false
+        example: {"message": {"id": "1234567891","replyToId": "1234567890","etag": "1234567891","messageType": "message","createdDateTime": "2023-08-01T12:00:00.000Z","lastModifiedDateTime": "2023-08-01T12:00:00.000Z","importance": "normal","locale": "en-us","webUrl": "https://teams.microsoft.com/l/message/11:examplechannel.name/1234567890groupId=example-team-id&tenantId=1&createdTime=1692623381&parentMessageId=1234567891","from": {"user": {"id": "3395856c-e81f-2b73-82de-e72602f798b6","displayName": "Example User","userIdentityType": "aadUser","tenantId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0"}},"body": {"contentType": "text","content": "tests_v1"},"channelIdentity": {"teamId": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0","channelId": "11:examplechannel.name"},"attachments": [],"mentions": [],"reactions": []}}
   get_reply_list:
     title: Get Reply List
     description: List all the replies to a message in a channel of a team
@@ -1039,6 +1050,7 @@ actions:
         description: The message object that was created
         type: "[]chatMessage"
         required: false
+        example: [{"attachments": [],"body": {"content": "Test message","contentType": "text"},"chatId": "12:a12345bc678d901e12345f67890g1234_thread.v2","createdDateTime": "2023-11-08T10:38:18.048Z","etag": "1234567890123","from": {"user": {"@odata.type": "#microsoft.graph.teamworkUserIdentity","displayName": "Test User","id": "8a234567-bc8d-9e01-23fg-4h567i8j9k98","tenantId": "1a234567-bc8d-9e01-23fg-4h567i8j9k01","userIdentityType": "aadUser"}},"id": "1234567890123","importance": "normal","lastModifiedDateTime": "2023-11-08T10:38:18.048Z","locale": "en-us","mentions": [],"messageType": "message","reactions": []}]
   list_messages_in_chat:
     title: List Messages from a Chat
     description: Retrieve up to the last 50 messages in a chat
