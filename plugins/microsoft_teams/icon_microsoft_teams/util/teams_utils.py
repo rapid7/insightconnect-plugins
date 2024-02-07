@@ -2,6 +2,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 import re
 from logging import Logger
+import urllib.parse
 import insightconnect_plugin_runtime.connection
 from insightconnect_plugin_runtime.helper import clean
 
@@ -34,7 +35,8 @@ def get_teams_from_microsoft(  # noqa: C901
 
     # See if we are looking for a team name exactly or not
     if explicit:
-        teams_url = f"https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team') and displayName eq '{team_name}'"
+        parsed_team_name = urllib.parse.quote(team_name, safe="")
+        teams_url = f"https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team') and displayName eq '{parsed_team_name}'"
     else:
         teams_url = "https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team')"
     headers = connection.get_headers()
