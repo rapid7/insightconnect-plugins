@@ -1210,7 +1210,7 @@ If there is more than one team with the same name in your organization, the olde
 
 # Version History
 
-* 6.0.1 - Using exact match on channel names rather than search, from user inpted channel names when getting the channel id
+* 6.0.1 - Using exact match on channel names rather than search, from user input channel names when getting the channel id
 * 6.0.0 - New actions: `create_teams_chat` | `list_messages_in_chat` | update type of `Event Detail` to type object 
 * 5.1.0 - New actions: Get Reply List | Improve typing on message
 * 5.0.0 - New actions: Get Message in Chat, Get Message in Channel | Update to latest SDK version | Change required fields in message schema
