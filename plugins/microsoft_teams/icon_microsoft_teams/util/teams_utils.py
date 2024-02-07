@@ -134,7 +134,7 @@ def get_channels_from_microsoft(  # noqa: C901
         for channel in channels:
             name = channel.get("displayName")
             logger.info(f"Checking channel: {name}")
-            if compiled_channel_name.search(name):
+            if compiled_channel_name.match(name):
                 return [channel]
         raise PluginException(
             cause=f"Channel {channel_name} was not found.",
