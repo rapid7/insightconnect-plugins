@@ -1,7 +1,7 @@
 import json
 import logging
 import os
-from typing import Callable
+from typing import Callable, Optional
 from unittest import mock
 from unittest.mock import MagicMock
 import requests
@@ -43,8 +43,7 @@ def mocked_request(side_effect: Callable) -> None:
     mock_function.Session.request = mock.Mock(side_effect=side_effect)
 
 
-def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
-    # breakpoint()
+def mock_conditions(method: str, url: str, status_code: int, kwargs: dict) -> MockResponse:
     if url == "URL/WebApp/API/SuspiciousObjectResource/FileUDSO":
         if method == "put":
             return MockResponse("add_file_to_usdo_list", status_code)
@@ -56,6 +55,8 @@ def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
     if "URL/WebApp/IOCBackend/OpenIOCResource/File?param=" in url:
         if method == "delete":
             return MockResponse("delete_openioc_file", status_code)
+        if method == "get":
+            return MockResponse("download_openioc_file", status_code)
 
     if "URL/WebApp/IOCBackend/OpenIOCResource/FilingCabinet?param=" in url:
         return MockResponse("openioc_files_list", status_code)
@@ -70,20 +71,19 @@ def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
         return MockResponse("upload_openioc_file", status_code)
 
     if url == "URL/WebApp/OSCE_iES/OsceIes/ApiEntry":
-        if method == "put":
-            return MockResponse("download_openioc_file", status_code)
-        if method == "put":
+        if kwargs.get('json', {}).get('Url') == "V1/Task/ShowAgentList":
             return MockResponse("get_agent_status", status_code)
-        if method == "put":
+        if kwargs.get('json', {}).get('Url') == 'V1/Content/ShowContent':
             return MockResponse("get_rca_object", status_code)
-        if method == "put":
+        if kwargs.get('json', {}).get('Url') == 'V1/Task/ShowFootPrintCsv':
             return MockResponse("download_rca_csv_file", status_code)
 
     raise Exception("Unrecognized endpoint")
 
 
 def mock_request_200(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 200)
+
+    return mock_conditions(args[0], args[1], 200, kwargs)
 
 
 def mock_request_400(*args, **kwargs) -> MockResponse:
