@@ -28,6 +28,6 @@ class TestIsolateEndpoint(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_isolate_endpoint_failure(self):
-        self.action.connection.client.isolate_endpoint = MagicMock(side_effect=PluginException)
+        self.action.connection.client.endpoint.isolate = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

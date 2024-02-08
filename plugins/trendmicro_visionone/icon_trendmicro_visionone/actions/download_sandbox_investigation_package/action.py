@@ -32,7 +32,7 @@ class DownloadSandboxInvestigationPackage(insightconnect_plugin_runtime.Action):
         poll_time_sec = params.get(Input.POLL_TIME_SEC)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.download_sandbox_investigation_package(
+        response = client.sandbox.download_investigation_package(
             submit_id=submit_id, poll=poll, poll_time_sec=poll_time_sec
         )
         if "error" in response.result_code.lower():
@@ -42,11 +42,12 @@ class DownloadSandboxInvestigationPackage(insightconnect_plugin_runtime.Action):
                 data=response,
             )
         # Make filename with timestamp
-        name = "Trend Micro Download Sandbox Investigation Package "
+        name = "Trend_Micro_Download_Sandbox_Investigation_Package_"
         timestamp = time.time()
         date_time = datetime.fromtimestamp(timestamp)
         str_date_time = date_time.strftime("%d_%m_%Y_%H_%M_%S")
         file_name = name + str_date_time + ".zip"
+        # Return results
         self.logger.info("Returning Results...")
         return {
             Output.FILE: {

@@ -28,6 +28,6 @@ class TestQuarantineEmailMessage(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_quarantine_email_message_failure(self):
-        self.action.connection.client.quarantine_email_message = MagicMock(side_effect=PluginException)
+        self.action.connection.client.email.quarantine = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

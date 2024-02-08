@@ -24,12 +24,12 @@ class TestDownloadSandboxInvestigationPackage(TestCase):
         expected_result = self.mock_params["output"]
         mock_response = MagicMock()
         mock_response.response.content = b"mock content"
-        self.action.connection.client.download_sandbox_investigation_package = MagicMock(return_value=mock_response)
+        self.action.connection.client.sandbox.download_investigation_package = MagicMock(return_value=mock_response)
         response = self.action.run(self.mock_params["input"])
         for key in response.keys():
             self.assertIn(key, str(expected_result.keys()))
 
     def test_download_sandbox_investigation_package_failure(self):
-        self.action.connection.client.download_sandbox_investigation_package = MagicMock(side_effect=PluginException)
+        self.action.connection.client.sandbox.download_investigation_package = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

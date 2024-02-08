@@ -28,6 +28,6 @@ class TestAddAlertNote(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_add_alert_note_failure(self):
-        self.action.connection.client.add_alert_note = MagicMock(side_effect=PluginException)
+        self.action.connection.client.note.add = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

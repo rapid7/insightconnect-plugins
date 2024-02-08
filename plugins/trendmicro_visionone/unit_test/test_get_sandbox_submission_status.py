@@ -28,6 +28,6 @@ class TestGetSandboxSubmissionStatus(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_get_sandbox_submission_status_failure(self):
-        self.action.connection.client.get_sandbox_submission_status = MagicMock(side_effect=PluginException)
+        self.action.connection.client.sandbox.get_submission_status = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

@@ -33,7 +33,7 @@ class SubmitFileToSandbox(insightconnect_plugin_runtime.Action):
             arguments = "None"
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.submit_file_to_sandbox(
+        response = client.sandbox.submit_file(
             file=b64decode(file.get("content")),
             file_name=file.get("filename"),
             document_password=document_password,
@@ -49,7 +49,7 @@ class SubmitFileToSandbox(insightconnect_plugin_runtime.Action):
         # Return results
         self.logger.info("Returning Results...")
         return {
-            Output.ARGUMENTS: response.response.dict().get("arguments", ""),
-            Output.DIGEST: response.response.dict().get("digest", {}),
-            Output.ID: response.response.dict().get("id", ""),
+            Output.ARGUMENTS: response.response.model_dump().get("arguments", ""),
+            Output.DIGEST: response.response.model_dump().get("digest", {}),
+            Output.ID: response.response.model_dump().get("id", ""),
         }

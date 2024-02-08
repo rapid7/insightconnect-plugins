@@ -25,7 +25,7 @@ class GetTaskResult(insightconnect_plugin_runtime.Action):
         poll_time_sec = params.get(Input.POLL_TIME_SEC)
         # Make first API Call to get the action type
         self.logger.info("Making API Call...")
-        response = client.get_base_task_result(
+        response = client.task.get_result(
             task_id=task_id,
             poll=poll,
             poll_time_sec=poll_time_sec,
@@ -36,10 +36,9 @@ class GetTaskResult(insightconnect_plugin_runtime.Action):
                 assistance="Please check the task ID and try again.",
                 data=response,
             )
-        action = response.response.dict().get("action", "")
-        action_type = RESPONSE_MAPPING.get(action.value)
-        # Make second API Call to get the action result
-        response = client.get_task_result(
+        action = response.response.model_dump().get("action", "")
+        action_type = RESPONSE_MAPPING.get(action)
+        response = client.task.get_result_class(
             task_id=task_id,
             class_=action_type,
             poll=poll,
@@ -52,7 +51,7 @@ class GetTaskResult(insightconnect_plugin_runtime.Action):
                 data=response,
             )
         # Avoid None values
-        response_dict = response.response.dict()
+        response_dict = response.response.model_dump()
         for key, value in response_dict.items():
             if value is None and key in ["file_size", "pid"]:
                 response_dict[key] = 0

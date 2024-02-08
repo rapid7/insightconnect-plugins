@@ -28,7 +28,7 @@ class GetExceptionList(insightconnect_plugin_runtime.Action):
         # Make Action API Call
         self.logger.info("Making API Call...")
         try:
-            client.consume_exception_list(lambda exception: new_exceptions.append(exception.dict()))
+            client.object.consume_exception(lambda exception: new_exceptions.append(exception.model_dump()))
         except Exception as error:
             raise PluginException(
                 cause="Consume Exception List failed with following exception.",
