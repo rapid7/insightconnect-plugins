@@ -845,25 +845,19 @@ This action adds domains, file SHA-1/SHA-256 values, IP addresses, senderMailAdd
 |----|----|-------|--------|-----------|----|-------|
 |suspicious_block_objects|[]suspicious_block_objects|None|True|Suspicious Objects made up of type, value and scan_action, risk_level and days_to_expiration|None|[]|
 
-Example input|multi_response|[]multi_response|True|Add To Suspicious List Response Array|[]|
-
-```
-{
-  "suspicious_block_objects": [{
-          "risk_level": "high",
-          "expiry_days": "30",
-          "object_type": "ip",
-          "scan_action": "block",
-          "object_value": "6.6.6.3"
-        }]
-}
-```
-
 Example input:
 
 ```
 {
-  "suspicious_block_objects": []
+  "suspicious_block_objects": [
+    {
+      "risk_level": "high",
+      "expiry_days": "30",
+      "object_type": "ip",
+      "scan_action": "block",
+      "object_value": "6.6.6.3"
+    }
+  ]
 }
 ```
 
@@ -1351,7 +1345,40 @@ Example output:
 ```
 {
   "$success": true,
-  "endpoint_data": []
+  "endpoint_data": [
+    {
+      "agent_guid": "35fa11da-a24e-40cf-8b56-baf8828cc151",
+      "login_account": {
+        "updated_date_time": "2024-02-05T20:58:22Z",
+        "value": [
+          "MSEDGEWIN10\\\\IEUser"
+        ]
+      },
+      "endpoint_name": {
+        "updated_date_time": "2024-02-05T20:58:22Z",
+        "value": "MSEDGEWIN10"
+      },
+      "mac_address": {
+        "updated_date_time": "2024-02-05T20:58:22Z",
+        "value": [
+          "00:1c:42:be:22:5f"
+        ]
+      },
+      "ip": {
+        "updated_date_time": "2024-02-05T20:58:22Z",
+        "value": [
+          "10.211.55.36"
+        ]
+      },
+      "os_name": "Linux",
+      "os_version": "10.0.17763",
+      "os_description": "Windows 10 Enterprise Evaluation (64 bit) build 17763",
+      "product_code": "sao",
+      "installed_product_codes": [
+        "xes"
+      ]
+    }
+  ]
 }
 ```
 
@@ -1808,7 +1835,7 @@ Example input:
 
 ```
 {
-  "block_object": [
+  "block_objects": [
     {
       "description": "block",
       "object_type": "ip",
@@ -1863,7 +1890,7 @@ Example input:
 
 ```
 {
-  "block_object": [
+  "block_objects": [
     {
       "object_type": "ip",
       "object_value": "1.6.6.3"
@@ -1966,7 +1993,7 @@ Example input:
   "account_identifiers": [
     {
       "account_name": "user@example.com",
-      "description": "disable account r7"
+      "description": "reset password account r7"
     }
   ]
 }
@@ -2570,8 +2597,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.0.0 - Refactored pytmv1 usage
-* 2.1.0 - Added Custom Scripts and Activity related actions
+* 3.0.0 - Refactored pytmv1 usage | Added Custom Scripts and Activity related actions
 * 2.0.1 - Version bump of pytmv1 library
 * 2.0.0 - Enabled multiple inputs for Get Endpoint Data, reduced API call frequency & General Refactoring
 * 1.0.1 - Alert Details Output Fix (Minor Fix)
