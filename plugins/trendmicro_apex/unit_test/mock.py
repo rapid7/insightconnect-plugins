@@ -51,22 +51,32 @@ def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
     if url == "URL/WebApp/API/SuspiciousObjectResource/FileUDSO":
         if method == "put":
             return MockResponse("add_file_to_usdo_list", status_code)
+
     if url == "URL/WebApp/api/SuspiciousObjects/UserDefinedSO":
         if method == "put":
             return MockResponse("blacklist", status_code)
+
     if "URL/WebApp/IOCBackend/OpenIOCResource/File?param=" in url:
         if method == "delete":
             return MockResponse("delete_openioc_file", status_code)
-        if method == "get":
+
+    if 'URL/WebApp/IOCBackend/OpenIOCResource/FilingCabinet?param=' in url:
+        return MockResponse("openioc_files_list", status_code)
+
+
+    if url == 'URL/WebApp/OSCE_iES/OsceIes/ApiEntry':
+        if method == "put":
             return MockResponse("download_openioc_file", status_code)
+        if method == "put":
+            return MockResponse("get_agent_status", status_code)
+        if method == "put":
+            return MockResponse("get_rca_object", status_code)
+
+
     if url == "URL/WebApp/OSCE_iES/OsceIes/ApiEntry" + "V1/Task/ShowFootPrintCsv":
         return MockResponse("download_rca_csv_file", status_code)
-    if url == "URL/WebApp/OSCE_iES/OsceIes/ApiEntry" + "V1/Task/ShowAgentList":
-        return MockResponse("get_agent_status", status_code)
-    if url == "URL/WebApp/OSCE_iES/OsceIes/ApiEntry" + "V1/Content/ShowContent":
-        return MockResponse("get_rca_object", status_code)
-    if url == "URL/WebApp/IOCBackend/OpenIOCResource/FilingCabinet?param=":
-        return MockResponse("openioc_files_list", status_code)
+
+
     if url == "URL/WebApp/API/AgentResource/ProductAgents":
         if method == "post":
             return MockResponse("quarantine", status_code)

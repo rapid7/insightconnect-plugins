@@ -24,7 +24,7 @@ class TestQuarantine(TestCase):
         response = self.action.run(self.params)
         expected = {
             Output.RESULT_CODE: 1,
-            Output.RESULT_CONTENT: {
+            Output.RESULT_CONTENT: [{
                 "capabilities": [
                     "cmd_restore_isolated_agent",
                     "cmd_isolate_agent",
@@ -39,7 +39,7 @@ class TestQuarantine(TestCase):
                 "mac_address_list": "08-00-27-96-86-8E",
                 "managing_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
                 "product": "SLF_PRODUCT_OFFICESCAN_CE",
-            },
+            }],
             Output.RESULT_DESCRIPTION: "Operation successful",
         }
         validate(response, self.action.output.schema)

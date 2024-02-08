@@ -1,6 +1,6 @@
 {
   "result_code": 1,
-  "result_content": {
+  "result_content": [{
     "capabilities": [
       "cmd_restore_isolated_agent",
       "cmd_isolate_agent",
@@ -15,6 +15,6 @@
     "mac_address_list": "08-00-27-96-86-8E",
     "managing_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
     "product": "SLF_PRODUCT_OFFICESCAN_CE"
-  },
+  }],
   "result_description": "Operation successful"
 }

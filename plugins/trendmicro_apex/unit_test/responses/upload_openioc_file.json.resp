@@ -12,6 +12,7 @@
   "SystemCtrl": {
     "TmcmSoDist_Role": "none"
   },
+  "Data": {
   "uploaded_info_list": {
     "FileHashID": "cd9b739b7c6e488080412e9a831e9260a468564f",
     "FileName": "file.txt",
@@ -20,5 +21,6 @@
   "uploaded_message_list": {
     "Message": "Uploaded 1 OpenIOC file(s) successfully.",
     "MessageType": 1
+  }
   }
 }

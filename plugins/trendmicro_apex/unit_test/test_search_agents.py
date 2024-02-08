@@ -11,6 +11,7 @@ from jsonschema import validate
 from unit_test.mock import Util, mock_request_200, mocked_request
 
 
+@patch("icon_trendmicro_apex.connection.connection.create_jwt_token", side_effect="abcgdgd")
 class TestSearchAgents(TestCase):
     @patch("requests.request", side_effect=mock_request_200)
     def setUp(self, mock_client) -> None:
