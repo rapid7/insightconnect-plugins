@@ -21,9 +21,6 @@ class Util:
         action.logger = logging.getLogger("action logger")
         return action
 
-    def mock_generate_token(*args, **kwargs):
-        return "fake_token"
-
 
 class MockResponse:
     def __init__(self, filename: str, status_code: int) -> None:
@@ -60,30 +57,27 @@ def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
         if method == "delete":
             return MockResponse("delete_openioc_file", status_code)
 
-    if 'URL/WebApp/IOCBackend/OpenIOCResource/FilingCabinet?param=' in url:
+    if "URL/WebApp/IOCBackend/OpenIOCResource/FilingCabinet?param=" in url:
         return MockResponse("openioc_files_list", status_code)
 
+    if "URL/WebApp/API/AgentResource/ProductAgents" in url:
+        if method == "post":
+            return MockResponse("quarantine", status_code)
+        if method == "get":
+            return MockResponse("search_agents", status_code)
 
-    if url == 'URL/WebApp/OSCE_iES/OsceIes/ApiEntry':
+    if url == "URL/WebApp/IOCBackend/OpenIOCResource/File":
+        return MockResponse("upload_openioc_file", status_code)
+
+    if url == "URL/WebApp/OSCE_iES/OsceIes/ApiEntry":
         if method == "put":
             return MockResponse("download_openioc_file", status_code)
         if method == "put":
             return MockResponse("get_agent_status", status_code)
         if method == "put":
             return MockResponse("get_rca_object", status_code)
-
-
-    if url == "URL/WebApp/OSCE_iES/OsceIes/ApiEntry" + "V1/Task/ShowFootPrintCsv":
-        return MockResponse("download_rca_csv_file", status_code)
-
-
-    if url == "URL/WebApp/API/AgentResource/ProductAgents":
-        if method == "post":
-            return MockResponse("quarantine", status_code)
-        if method == "get":
-            return MockResponse("search_agents", status_code)
-    if url == "URL/WebApp/IOCBackend/OpenIOCResource/File":
-        return MockResponse("upload_openioc_file", status_code)
+        if method == "put":
+            return MockResponse("download_rca_csv_file", status_code)
 
     raise Exception("Unrecognized endpoint")
 

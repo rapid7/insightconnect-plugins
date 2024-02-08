@@ -1,18 +1,21 @@
 {
-  "search_agent_response": {
-    "capabilities": [
-      "cmd_restore_isolated_agent",
-      "cmd_isolate_agent",
-      "cmd_relocate_agent",
-      "cmd_uninstall_agent"
-    ],
-    "entity_id": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
-    "folder_path": "Workgroup",
-    "host_name": "TREND-MICRO-TES",
-    "ip_address_list": "198.51.100.100",
-    "isolation_status": "normal",
-    "mac_address_list": "08-00-27-96-86-8E",
-    "managing_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
-    "product": "SLF_PRODUCT_OFFICESCAN_CE"
-  }
+  "result_code": 1,
+  "result_content": [
+    {
+      "capabilities": [
+        "cmd_restore_isolated_agent",
+        "cmd_isolate_agent",
+        "cmd_relocate_agent",
+        "cmd_uninstall_agent"
+      ],
+      "entity_id": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
+      "folder_path": "Workgroup",
+      "host_name": "TREND-MICRO-TES",
+      "ip_address_list": "198.51.100.100",
+      "isolation_status": "normal",
+      "mac_address_list": "08-00-27-96-86-8E",
+      "managing_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
+      "product": "SLF_PRODUCT_OFFICESCAN_CE"
+    }
+  ]
 }

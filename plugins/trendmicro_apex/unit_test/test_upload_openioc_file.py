@@ -27,12 +27,14 @@ class TestUploadOpeniocFile(TestCase):
             Output.META: {"ErrorCode": 0, "Result": 1},
             Output.PERMISSIONCTRL: {"permission": "255"},
             Output.SYSTEMCTRL: {"TmcmSoDist_Role": "none"},
-            Output.UPLOADED_INFO_LIST: {
-                "FileHashID": "cd9b739b7c6e488080412e9a831e9260a468564f",
-                "FileName": "file.txt",
-                "UploadedStatus": 1,
-            },
-            Output.UPLOADED_MESSAGE_LIST: {"Message": "Uploaded 1 OpenIOC file(s) successfully.", "MessageType": 1},
+            Output.UPLOADED_INFO_LIST: [
+                {
+                    "FileHashID": "cd9b739b7c6e488080412e9a831e9260a468564f",
+                    "FileName": "file.txt",
+                    "UploadedStatus": 1,
+                }
+            ],
+            Output.UPLOADED_MESSAGE_LIST: [{"Message": "Uploaded 1 OpenIOC file(s) successfully.", "MessageType": 1}],
         }
         validate(response, self.action.output.schema)
         self.assertEqual(response, expected)
