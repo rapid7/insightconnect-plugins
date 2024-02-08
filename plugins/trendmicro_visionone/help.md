@@ -167,13 +167,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|script_id|string|True|ID of added script file|25|
+|script_id|string|True|ID of added script file|44c99cb0-8c5f-4182-af55-62135dbe32f1|
   
 Example output:
 
 ```
 {
-  "script_id": 25
+  "script_id": "44c99cb0-8c5f-4182-af55-62135dbe32f1"
 }
 ```
 

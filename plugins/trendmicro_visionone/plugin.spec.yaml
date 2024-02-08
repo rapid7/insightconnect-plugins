@@ -2026,7 +2026,7 @@ actions:
         description: ID of added script file
         type: string
         required: true
-        example: 25
+        example: 44c99cb0-8c5f-4182-af55-62135dbe32f1
   update_custom_script:
     title: Update Custom Script
     description: Updates a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 encoding
