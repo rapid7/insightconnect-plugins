@@ -30,8 +30,8 @@ class PollAlertList(insightconnect_plugin_runtime.Trigger):
             # Make Action API Call
             self.logger.info("Making API Call...")
             try:
-                client.consume_alert_list(
-                    lambda alert: new_alerts.append(alert.json()),
+                client.alert.consume(
+                    lambda alert: new_alerts.append(alert.model_dump_json()),
                     start_time=start_date_time,
                     end_time=end_date_time,
                 )

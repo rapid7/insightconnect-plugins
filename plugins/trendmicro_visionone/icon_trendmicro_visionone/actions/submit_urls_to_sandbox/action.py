@@ -27,7 +27,7 @@ class SubmitUrlsToSandbox(insightconnect_plugin_runtime.Action):
         urls = params.get(Input.URLS)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.submit_urls_to_sandbox(*urls)
+        response = client.sandbox.submit_url(*urls)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while submitting URLs to the sandbox.",
@@ -36,4 +36,4 @@ class SubmitUrlsToSandbox(insightconnect_plugin_runtime.Action):
             )
         # Return results
         self.logger.info("Returning Results...")
-        return {Output.SUBMIT_URLS_RESP: response.response.dict().get("items")}
+        return {Output.SUBMIT_URLS_RESP: response.response.model_dump().get("items")}

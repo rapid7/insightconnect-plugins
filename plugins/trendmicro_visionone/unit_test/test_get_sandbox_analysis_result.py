@@ -28,6 +28,6 @@ class TestGetSandboxAnalysisResult(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_get_sandbox_analysis_result_failure(self):
-        self.action.connection.client.get_sandbox_analysis_result = MagicMock(side_effect=PluginException)
+        self.action.connection.client.sandbox.get_analysis_result = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

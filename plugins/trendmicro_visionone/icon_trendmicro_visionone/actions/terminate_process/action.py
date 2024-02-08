@@ -31,7 +31,7 @@ class TerminateProcess(insightconnect_plugin_runtime.Action):
         for process_identifier in process_identifiers:
             if process_identifier.get("endpoint_name") and process_identifier.get("agent_guid"):
                 processes.append(
-                    pytmv1.ProcessTask(
+                    pytmv1.TerminateProcessRequest(
                         endpointName=process_identifier.get("endpoint_name"),
                         agentGuid=process_identifier.get("agent_guid"),
                         fileSha1=process_identifier["file_sha1"],
@@ -41,7 +41,7 @@ class TerminateProcess(insightconnect_plugin_runtime.Action):
                 )
             elif process_identifier.get("endpoint_name") and not process_identifier.get("agent_guid"):
                 processes.append(
-                    pytmv1.ProcessTask(
+                    pytmv1.TerminateProcessRequest(
                         endpointName=process_identifier.get("endpoint_name"),
                         fileSha1=process_identifier["file_sha1"],
                         description=process_identifier.get("description", ""),
@@ -50,7 +50,7 @@ class TerminateProcess(insightconnect_plugin_runtime.Action):
                 )
             elif process_identifier.get("agent_guid") and not process_identifier.get("endpoint_name"):
                 processes.append(
-                    pytmv1.ProcessTask(
+                    pytmv1.TerminateProcessRequest(
                         agentGuid=process_identifier.get("agent_guid"),
                         fileSha1=process_identifier["file_sha1"],
                         description=process_identifier.get("description", ""),
@@ -64,7 +64,7 @@ class TerminateProcess(insightconnect_plugin_runtime.Action):
                 )
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.terminate_process(*processes)
+        response = client.endpoint.terminate_process(*processes)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while terminating process.",
@@ -73,4 +73,4 @@ class TerminateProcess(insightconnect_plugin_runtime.Action):
             )
         # Return results
         self.logger.info("Returning Results...")
-        return {Output.MULTI_RESPONSE: response.response.dict().get("items")}
+        return {Output.MULTI_RESPONSE: response.response.model_dump().get("items")}

@@ -28,6 +28,6 @@ class TestSubmitUrlsToSandbox(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_submit_urls_to_sandbox_failure(self):
-        self.action.connection.client.submit_urls_to_sandbox = MagicMock(side_effect=PluginException)
+        self.action.connection.client.sandbox.submit_url = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

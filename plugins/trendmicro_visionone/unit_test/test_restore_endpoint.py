@@ -28,6 +28,6 @@ class TestRestoreEndpoint(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_restore_endpoint_failure(self):
-        self.action.connection.client.restore_endpoint = MagicMock(side_effect=PluginException)
+        self.action.connection.client.endpoint.restore = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])
