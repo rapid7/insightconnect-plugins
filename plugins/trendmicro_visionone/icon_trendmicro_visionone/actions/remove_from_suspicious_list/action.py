@@ -47,21 +47,21 @@ class RemoveFromSuspiciousList(insightconnect_plugin_runtime.Action):
         objects = []
         for block_object in block_objects:
             objects.append(
-                pytmv1.ObjectTask(
+                pytmv1.ObjectRequest(
                     objectType=block_object["object_type"],
                     objectValue=block_object["object_value"],
                 )
             )
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.remove_from_suspicious_list(*objects)
+        response = client.object.delete_suspicious(*objects)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred when removing object from suspicious list.",
                 assistance="Check if the object type and value are correct.",
                 data=response.errors,
             )
-        items = response.response.dict().get("items")
+        items = response.response.model_dump().get("items")
         # Avoid None value
         for item in items:
             item["task_id"] = "None" if item.get("task_id") is None else item["task_id"]

@@ -41,15 +41,16 @@ class AddToBlockList(insightconnect_plugin_runtime.Action):
         objects = []
         for block_object in block_objects:
             objects.append(
-                pytmv1.ObjectTask(
+                pytmv1.ObjectRequest(
                     objectType=block_object["object_type"],
                     objectValue=block_object["object_value"],
                     description=block_object.get("description", "Add to Block List"),
+                    last_modified_date_time=block_object,
                 )
             )
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.add_to_block_list(*objects)
+        response = client.object.add_block(*objects)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while adding the object to the block list.",
@@ -58,4 +59,4 @@ class AddToBlockList(insightconnect_plugin_runtime.Action):
             )
         # Return results
         self.logger.info("Returning Results...")
-        return {Output.MULTI_RESPONSE: response.response.dict().get("items")}
+        return {Output.MULTI_RESPONSE: response.response.model_dump().get("items")}

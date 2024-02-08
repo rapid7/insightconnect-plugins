@@ -28,6 +28,6 @@ class TestCollectFile(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_collect_file_failure(self):
-        self.action.connection.client.collect_file = MagicMock(side_effect=PluginException)
+        self.action.connection.client.endpoint.collect_file = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

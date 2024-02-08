@@ -31,7 +31,7 @@ class DeleteEmailMessage(insightconnect_plugin_runtime.Action):
         for email_identifier in email_identifiers:
             if email_identifier["message_id"].startswith("<") and email_identifier["message_id"].endswith(">"):
                 messages.append(
-                    pytmv1.EmailMessageIdTask(
+                    pytmv1.EmailMessageIdRequest(
                         messageId=email_identifier["message_id"],
                         description=email_identifier.get("description", "Delete Email Message"),
                         mailbox=email_identifier.get("mailbox", ""),
@@ -39,14 +39,14 @@ class DeleteEmailMessage(insightconnect_plugin_runtime.Action):
                 )
             else:
                 messages.append(
-                    pytmv1.EmailMessageUIdTask(
+                    pytmv1.EmailMessageUIdRequest(
                         uniqueId=email_identifier["message_id"],
                         description=email_identifier.get("description", "Delete Email Message"),
                     )
                 )
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.delete_email_message(*messages)
+        response = client.email.delete(*messages)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred when deleting the email message.",
@@ -55,4 +55,4 @@ class DeleteEmailMessage(insightconnect_plugin_runtime.Action):
             )
         # Return results
         self.logger.info("Returning Results...")
-        return {Output.MULTI_RESPONSE: response.response.dict().get("items")}
+        return {Output.MULTI_RESPONSE: response.response.model_dump().get("items")}

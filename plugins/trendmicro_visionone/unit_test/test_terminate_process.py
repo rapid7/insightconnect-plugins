@@ -28,6 +28,6 @@ class TestTerminateProcess(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_terminate_process_failure(self):
-        self.action.connection.client.terminate_process = MagicMock(side_effect=PluginException)
+        self.action.connection.client.endpoint.terminate_process = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

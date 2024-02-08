@@ -28,6 +28,6 @@ class TestRestoreEmailMessage(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_restore_email_message_failure(self):
-        self.action.connection.client.restore_email_message = MagicMock(side_effect=PluginException)
+        self.action.connection.client.email.restore = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

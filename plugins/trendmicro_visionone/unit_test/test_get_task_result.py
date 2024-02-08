@@ -28,6 +28,6 @@ class TestGetTaskResult(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_get_task_result_failure(self):
-        self.action.connection.client.get_base_task_result = MagicMock(side_effect=PluginException)
+        self.action.connection.client.task.get_result = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])
