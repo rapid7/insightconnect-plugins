@@ -219,7 +219,40 @@
     },
     "output": {
       "$success": true,
-      "endpoint_data": []
+      "endpoint_data": [
+        {
+          "agent_guid": "35fa11da-a24e-40cf-8b56-baf8828cc151",
+          "login_account": {
+            "updated_date_time": "2024-02-05T20:58:22Z",
+            "value": [
+              "MSEDGEWIN10\\\\IEUser"
+            ]
+          },
+          "endpoint_name": {
+            "updated_date_time": "2024-02-05T20:58:22Z",
+            "value": "MSEDGEWIN10"
+          },
+          "mac_address": {
+            "updated_date_time": "2024-02-05T20:58:22Z",
+            "value": [
+              "00:1c:42:be:22:5f"
+            ]
+          },
+          "ip": {
+            "updated_date_time": "2024-02-05T20:58:22Z",
+            "value": [
+              "10.211.55.36"
+            ]
+          },
+          "os_name": "Linux",
+          "os_version": "10.0.17763",
+          "os_description": "Windows 10 Enterprise Evaluation (64 bit) build 17763",
+          "product_code": "sao",
+          "installed_product_codes": [
+            "xes"
+          ]
+        }
+      ]
     }
   },
   "get_exception_list": {
