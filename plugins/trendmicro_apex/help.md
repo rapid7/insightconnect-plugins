@@ -14,7 +14,7 @@ This plugin works for both the on-premise and Apex SaaS solutions and supports m
   
 * Apex One, Apex Central, or Apex SaaS
 * API Key and Application ID
-* 
+
 # Supported Product Versions
   
 * 2024-01-26
@@ -145,7 +145,9 @@ Example input:
 
 ```
 {
-  "file_hash_id_list": "695cad3121a1f496cff0e35d51ba25e33cf266650626b4c1d035a72d2f801343"
+  "file_hash_id_list": [
+    "695cad3121a1f496cff0e35d51ba25e33cf266650626b4c1d035a72d2f801343"
+  ]
 }
 ```
 
@@ -163,10 +165,12 @@ Example output:
 
 ```
 {
-  "Data": {
-    "DeletedStatus": 1,
-    "FileHashID": "769fcc7550bf98d96bccb7e22a5557301c403455"
-  },
+  "Data": [
+    {
+      "DeletedStatus": 1,
+      "FileHashID": "769fcc7550bf98d96bccb7e22a5557301c403455"
+    }
+  ],
   "FeatureCtrl": {
     "mode": "0"
   },
@@ -258,7 +262,9 @@ Example input:
   "host_ip": "198.51.100.100",
   "host_name": "CU-PRO1-7814-2",
   "scan_summary_guid": "58127b3e-1bde-4c6e-8d86-0d0f89ded601",
-  "server_guid": "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6",
+  "server_guid": [
+    "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"
+  ],
   "task_type": "CMEF"
 }
 ```
@@ -585,7 +591,11 @@ Example input:
 {
   "agent": "198.51.100.100",
   "quarantine_state": true,
-  "whitelist": "198.51.100.101"
+  "whitelist": [
+    "198.51.100.101",
+    "TREND-MICRO-AGENT",
+    "2EBEC86D-3FEB-4666-9CA6-B80AB1E193E6"
+  ]
 }
 ```
 
@@ -602,22 +612,24 @@ Example output:
 ```
 {
   "result_code": 1,
-  "result_content": {
-    "capabilities": [
-      "cmd_restore_isolated_agent",
-      "cmd_isolate_agent",
-      "cmd_relocate_agent",
-      "cmd_uninstall_agent"
-    ],
-    "entity_id": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
-    "folder_path": "Workgroup",
-    "host_name": "TREND-MICRO-TES",
-    "ip_address_list": "198.51.100.100",
-    "isolation_status": "normal",
-    "mac_address_list": "08-00-27-96-86-8E",
-    "managing_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
-    "product": "SLF_PRODUCT_OFFICESCAN_CE"
-  },
+  "result_content": [
+    {
+      "capabilities": [
+        "cmd_restore_isolated_agent",
+        "cmd_isolate_agent",
+        "cmd_relocate_agent",
+        "cmd_uninstall_agent"
+      ],
+      "entity_id": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
+      "folder_path": "Workgroup",
+      "host_name": "TREND-MICRO-TES",
+      "ip_address_list": "198.51.100.100",
+      "isolation_status": "normal",
+      "mac_address_list": "08-00-27-96-86-8E",
+      "managing_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
+      "product": "SLF_PRODUCT_OFFICESCAN_CE"
+    }
+  ],
   "result_description": "Operation successful"
 }
 ```
@@ -636,7 +648,12 @@ Example input:
 
 ```
 {
-  "agent_ids": "08-00-27-96-86-8E"
+  "agent_ids": [
+    "08-00-27-96-86-8E",
+    "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
+    "198.51.100.100",
+    "TREND-MICRO-TES"
+  ]
 }
 ```
 
@@ -650,22 +667,24 @@ Example output:
 
 ```
 {
-  "search_agent_response": {
-    "capabilities": [
-      "cmd_restore_isolated_agent",
-      "cmd_isolate_agent",
-      "cmd_relocate_agent",
-      "cmd_uninstall_agent"
-    ],
-    "entity_id": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
-    "folder_path": "Workgroup",
-    "host_name": "TREND-MICRO-TES",
-    "ip_address_list": "198.51.100.100",
-    "isolation_status": "normal",
-    "mac_address_list": "08-00-27-96-86-8E",
-    "managing_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
-    "product": "SLF_PRODUCT_OFFICESCAN_CE"
-  }
+  "search_agent_response": [
+    {
+      "capabilities": [
+        "cmd_restore_isolated_agent",
+        "cmd_isolate_agent",
+        "cmd_relocate_agent",
+        "cmd_uninstall_agent"
+      ],
+      "entity_id": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
+      "folder_path": "Workgroup",
+      "host_name": "TREND-MICRO-TES",
+      "ip_address_list": "198.51.100.100",
+      "isolation_status": "normal",
+      "mac_address_list": "08-00-27-96-86-8E",
+      "managing_server_id": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
+      "product": "SLF_PRODUCT_OFFICESCAN_CE"
+    }
+  ]
 }
 ```
 
@@ -720,15 +739,19 @@ Example output:
   "SystemCtrl": {
     "TmcmSoDist_Role": "none"
   },
-  "uploaded_info_list": {
-    "FileHashID": "cd9b739b7c6e488080412e9a831e9260a468564f",
-    "FileName": "file.txt",
-    "UploadedStatus": 1
-  },
-  "uploaded_message_list": {
-    "Message": "Uploaded 1 OpenIOC file(s) successfully.",
-    "MessageType": 1
-  }
+  "uploaded_info_list": [
+    {
+      "FileHashID": "cd9b739b7c6e488080412e9a831e9260a468564f",
+      "FileName": "file.txt",
+      "UploadedStatus": 1
+    }
+  ],
+  "uploaded_message_list": [
+    {
+      "Message": "Uploaded 1 OpenIOC file(s) successfully.",
+      "MessageType": 1
+    }
+  ]
 }
 ```
 ### Triggers

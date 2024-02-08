@@ -71,18 +71,17 @@ def mock_conditions(method: str, url: str, status_code: int, kwargs: dict) -> Mo
         return MockResponse("upload_openioc_file", status_code)
 
     if url == "URL/WebApp/OSCE_iES/OsceIes/ApiEntry":
-        if kwargs.get('json', {}).get('Url') == "V1/Task/ShowAgentList":
+        if kwargs.get("json", {}).get("Url") == "V1/Task/ShowAgentList":
             return MockResponse("get_agent_status", status_code)
-        if kwargs.get('json', {}).get('Url') == 'V1/Content/ShowContent':
+        if kwargs.get("json", {}).get("Url") == "V1/Content/ShowContent":
             return MockResponse("get_rca_object", status_code)
-        if kwargs.get('json', {}).get('Url') == 'V1/Task/ShowFootPrintCsv':
+        if kwargs.get("json", {}).get("Url") == "V1/Task/ShowFootPrintCsv":
             return MockResponse("download_rca_csv_file", status_code)
 
     raise Exception("Unrecognized endpoint")
 
 
 def mock_request_200(*args, **kwargs) -> MockResponse:
-
     return mock_conditions(args[0], args[1], 200, kwargs)
 
 
