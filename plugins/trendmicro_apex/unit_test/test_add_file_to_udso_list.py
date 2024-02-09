@@ -8,7 +8,7 @@ from unittest.mock import patch
 from icon_trendmicro_apex.actions.add_file_to_udso_list import AddFileToUdsoList
 from icon_trendmicro_apex.actions.add_file_to_udso_list.schema import Input, Output
 from jsonschema import validate
-from ..mock import Util, mock_request_200, mocked_request
+from mock import Util, mock_request_200, mocked_request
 
 
 @patch("icon_trendmicro_apex.connection.connection.create_jwt_token", side_effect="abcgdgd")
