@@ -10,7 +10,6 @@ class Component:
 class Input:
     DESCRIPTION = "description"
     FILE = "file"
-    FILE_NAME = "file_name"
     FILE_TYPE = "file_type"
     SCRIPT_ID = "script_id"
 
@@ -29,20 +28,13 @@ class UpdateCustomScriptInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Description",
       "description": "Task Description",
-      "order": 4
+      "order": 3
     },
     "file": {
       "$ref": "#/definitions/file",
       "title": "File",
       "description": "Custom Script (dict of {filename(string) & content(base64(bytes))})",
-      "order": 5
-    },
-    "file_name": {
-      "type": "string",
-      "title": "File Name",
-      "description": "File name of custom script",
-      "default": "test.ps1",
-      "order": 2
+      "order": 4
     },
     "file_type": {
       "type": "string",
@@ -53,7 +45,7 @@ class UpdateCustomScriptInput(insightconnect_plugin_runtime.Input):
         "powershell",
         "bash"
       ],
-      "order": 3
+      "order": 2
     },
     "script_id": {
       "type": "string",
