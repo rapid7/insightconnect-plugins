@@ -5,6 +5,7 @@ name: trendmicro_visionone
 title: Trend Micro Vision One
 description: Trend Micro Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
 version: 3.0.0
+connection_version: 3
 supported_versions: [ "Trend Micro Vision One API v3" ]
 vendor: trendmicro
 support: community
@@ -2037,13 +2038,6 @@ actions:
         description: Unique alphanumeric string that identifies a script file
         required: true
         example: 44c99cb0-8c5f-4182-af55-62135dbe32f1
-      file_name:
-        title: File Name
-        type: string
-        description: File name of custom script
-        required: false
-        example: test.ps1
-        default: test.ps1
       file_type:
         title: File Type
         type: string

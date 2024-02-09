@@ -2333,7 +2333,6 @@ encoding
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |description|string|None|False|Task Description|None|example desc|
 |file|file|None|False|Custom Script (dict of {filename(string) & content(base64(bytes))})|None|{"content":"dGVzdA==","filename":"r7-test11.sh"}|
-|file_name|string|test.ps1|False|File name of custom script|None|test.ps1|
 |file_type|string|bash|True|File type of custom script|["powershell", "bash"]|bash|
 |script_id|string|None|True|Unique alphanumeric string that identifies a script file|None|44c99cb0-8c5f-4182-af55-62135dbe32f1|
   
@@ -2346,7 +2345,6 @@ Example input:
     "content": "dGVzdA==",
     "filename": "r7-test11.sh"
   },
-  "file_name": "test.ps1",
   "file_type": "bash",
   "script_id": "44c99cb0-8c5f-4182-af55-62135dbe32f1"
 }
