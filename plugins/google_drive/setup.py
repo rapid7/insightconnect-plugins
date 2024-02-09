@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="google_drive-rapid7-plugin",
       version="2.3.0",
-      description="Upload and retrieve files from Google drive",
+      description="Upload and retrieve files from Google Drive",
       author="rapid7",
       author_email="",
       url="",
