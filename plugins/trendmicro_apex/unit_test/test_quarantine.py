@@ -8,7 +8,7 @@ from unittest.mock import patch
 from icon_trendmicro_apex.actions.quarantine import Quarantine
 from icon_trendmicro_apex.actions.quarantine.schema import Input, Output
 from jsonschema import validate
-from unit_test.mock import Util, mock_request_200, mocked_request
+from mock import Util, mock_request_200, mocked_request
 
 
 @patch("icon_trendmicro_apex.connection.connection.create_jwt_token", side_effect="abcgdgd")

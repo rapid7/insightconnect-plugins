@@ -8,7 +8,7 @@ from unittest.mock import patch
 from icon_trendmicro_apex.actions.search_agents import SearchAgents
 from icon_trendmicro_apex.actions.search_agents.schema import Input, Output
 from jsonschema import validate
-from unit_test.mock import Util, mock_request_200, mocked_request
+from mock import Util, mock_request_200, mocked_request
 
 
 @patch("icon_trendmicro_apex.connection.connection.create_jwt_token", side_effect="abcgdgd")

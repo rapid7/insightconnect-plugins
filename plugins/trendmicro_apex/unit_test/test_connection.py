@@ -7,7 +7,7 @@ from unittest import TestCase
 from unittest.mock import patch
 from icon_trendmicro_apex.connection.connection import Connection
 import logging
-from unit_test.mock import STUB_CONNECTION, mock_request_200_connection, mocked_request
+from mock import STUB_CONNECTION, mock_request_200_connection, mocked_request
 
 
 @patch("icon_trendmicro_apex.connection.connection.create_jwt_token", side_effect="abcgdgd")

@@ -7,7 +7,7 @@ from unittest import TestCase
 from unittest.mock import patch
 from icon_trendmicro_apex.actions.download_openioc_file import DownloadOpeniocFile
 from icon_trendmicro_apex.actions.download_openioc_file.schema import Input, Output
-from unit_test.mock import Util, mock_request_200, mocked_request
+from mock import Util, mock_request_200, mocked_request
 from jsonschema import validate
 
 
