@@ -1,14 +1,19 @@
 import json
 import logging
 import os
-from typing import Callable, Optional
+from typing import Callable
 from unittest import mock
 from unittest.mock import MagicMock
 import requests
 from insightconnect_plugin_runtime.action import Action
 from icon_trendmicro_apex.connection.connection import Connection
+from icon_trendmicro_apex.connection.schema import Input
 
-STUB_CONNECTION = {"url": "URL", "application_id": {"secretKey": "ABCDEF"}, "api_key": {"secretKey": "ABCDEF"}}
+STUB_CONNECTION = {
+    Input.URL: "URL",
+    Input.APPLICATION_ID: {"secretKey": "ABCDEF"},
+    Input.API_KEY: {"secretKey": "ABCDEF"},
+}
 
 
 class Util:
@@ -48,9 +53,11 @@ def mock_conditions(method: str, url: str, status_code: int, kwargs: dict) -> Mo
         if method == "put":
             return MockResponse("add_file_to_usdo_list", status_code)
 
-    if url == "URL/WebApp/api/SuspiciousObjects/UserDefinedSO":
+    if "URL/WebApp/api/SuspiciousObjects/UserDefinedSO" in url:
         if method == "put":
             return MockResponse("blacklist", status_code)
+        if method == "get":
+            return MockResponse("connection_test", status_code)
 
     if "URL/WebApp/IOCBackend/OpenIOCResource/File?param=" in url:
         if method == "delete":
@@ -83,6 +90,10 @@ def mock_conditions(method: str, url: str, status_code: int, kwargs: dict) -> Mo
 
 def mock_request_200(*args, **kwargs) -> MockResponse:
     return mock_conditions(args[0], args[1], 200, kwargs)
+
+
+def mock_request_200_connection(**kwargs) -> MockResponse:
+    return mock_conditions(kwargs.get("method"), kwargs.get("url"), 200, {})
 
 
 def mock_request_400(*args, **kwargs) -> MockResponse:

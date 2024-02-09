@@ -4,32 +4,21 @@ import os
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+from unittest.mock import patch
 from icon_trendmicro_apex.connection.connection import Connection
-import json
 import logging
+from unit_test.mock import STUB_CONNECTION, mock_request_200_connection, mocked_request
 
 
-class TestAddFileToUdsoList(TestCase):
-    def test_integration_add_file_to_udso_list(self):
-        log = logging.getLogger("Test")
-        test_conn = Connection()
+@patch("icon_trendmicro_apex.connection.connection.create_jwt_token", side_effect="abcgdgd")
+class TestConnectionTest(TestCase):
+    def setUp(self) -> None:
+        self.connection = Connection()
+        self.connection.logger = logging.getLogger("Connection Logger")
+        self.connection.connect(STUB_CONNECTION)
 
-        test_conn.logger = log
-
-        try:
-            filename = "files/connection.json"
-            with open(filename) as file:
-                test_json = json.loads(file.read())
-                connection_params = test_json.get("connection")
-        except Exception as error:
-            message = f"Exception opening {filename}. Exception is:\n{error}"
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_results = None
-        try:
-            test_results = test_conn.test()
-        except Exception as error:
-            log.error(f"Exception connecting to Apex: {error}")
-
-        self.assertEqual({"success": True}, test_results)
+    @patch("requests.request", side_effect=mock_request_200_connection)
+    def test_connection_test(self, mock_get, mock_token) -> None:
+        mocked_request(mock_get)
+        response = self.connection.test()
+        self.assertEqual(response, {"success": True})
