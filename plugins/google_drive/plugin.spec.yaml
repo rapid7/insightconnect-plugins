@@ -249,18 +249,7 @@ actions:
         description: Returns a list of file names and their IDs
         type: '[]file_info'
         required: false
-        example: {
-                  "files_found": [
-                    {
-                      "file_name": "test.txt",
-                      "file_id": "1t4HfdfndRpYHRw4uRtqnu83XC7Oc3nBGqEHyaiPIDy0"
-                    },
-                    {
-                      "file_name": "test_new2.txt",
-                      "file_id":"13Cxn1BPUnvQGcRVcnCBSF4ZbS0MbVxaxNJe2iuj_NTA"
-                    }
-                  ]
-                }
+        example: '[{"file_name":"test.txt","file_id":"1t4HfdfndRpYHRw4uRtqnu83XC7Oc3nBGqEHyaiPIDy0"},{"file_name":"test_new2.txt","file_id":"13Cxn1BPUnvQGcRVcnCBSF4ZbS0MbVxaxNJe2iuj_NTA"}]'
   create_folder:
     title: Create Folder
     description: Create a folder
@@ -329,7 +318,7 @@ actions:
         description: The result containing the ID of the file and ID of the folder to which the file was moved
         type: move_file_result
         required: true
-        example: { "id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR", "parents": ["0BwwA4oUTeiV1TGRPeTVjaWRDY1E"] }
+        example: '{"id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR", "parents": ["0BwwA4oUTeiV1TGRPeTVjaWRDY1E"]}'
   copy_file:
     title: Copy File
     description: Copy a file to a folder
@@ -358,5 +347,5 @@ actions:
         description: The result containing the ID of the file and ID of the folder to which the file was copied
         type: copy_file_result
         required: true
-        example: { "id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR", "parents": ["0BwwA4oUTeiV1TGRPeTVjaWRDY1E"] }
+        example: '{"id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR", "parents": ["0BwwA4oUTeiV1TGRPeTVjaWRDY1E"]}'
         

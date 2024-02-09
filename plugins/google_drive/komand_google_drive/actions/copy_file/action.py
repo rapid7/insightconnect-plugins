@@ -17,12 +17,7 @@ class CopyFile(insightconnect_plugin_runtime.Action):
         folder_id = params.get(Input.FOLDER_ID)
         new_file_name=params.get(Input.NEW_FILE_NAME)
         try:
-
-            if new_file_name:
-                metadata_body = {"name": new_file_name,"parents": [folder_id]}
-            else:
-                metadata_body = {"parents": [folder_id]}
-
+            metadata_body = clean({"name": new_file_name, "parents": [folder_id]})
             return {
                 Output.RESULT: self.connection.service.files().copy(fileId=file_id, body=metadata_body, fields='id, parents', supportsAllDrives=True).execute()
             }
