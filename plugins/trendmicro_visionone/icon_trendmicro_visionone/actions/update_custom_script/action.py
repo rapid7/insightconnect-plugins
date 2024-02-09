@@ -23,7 +23,6 @@ class UpdateCustomScript(insightconnect_plugin_runtime.Action):
         script_id = params.get(Input.SCRIPT_ID)
         file = params.get(Input.FILE)
         file_type = params.get(Input.FILE_TYPE)
-        file_name = params.get(Input.FILE_NAME)
         description = params.get(Input.DESCRIPTION, "")
         # Choose enum
         if "bash" in file_type:
