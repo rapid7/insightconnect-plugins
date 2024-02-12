@@ -184,7 +184,10 @@ class MimecastAPI:
                 combined_json_list = []
                 for file_name in my_zip.namelist():
                     try:
+                        # To avoid potential path traversal vulnerabilities, only valid files should be allowed.
+                        # Due to the nature of the IO buffer, the filename cannot be checked until it is read in.
                         file_name = secure_filename(file_name)
+
                         contents = my_zip.read(file_name)
                         for log in json.loads(contents).get("data"):
                             combined_json_list += [log]
