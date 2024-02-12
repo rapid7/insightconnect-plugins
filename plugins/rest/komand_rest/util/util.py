@@ -1,8 +1,8 @@
 import json
 from logging import Logger
 
-from urllib.parse import urlparse, urlsplit, urlunsplit, urlencode
-from typing import Dict, Any, Union, List
+from urllib.parse import urlparse, urlencode, urljoin
+from typing import Dict, Any, Union
 import base64
 
 import requests
@@ -53,19 +53,14 @@ class Common:
             return {"object": body_object}
 
 
-def url_path_join(*parts):
-    """Normalize url parts and join them with a slash."""
-    schemes, netlocs, paths, queries, fragments = zip(*(urlsplit(part.strip()) for part in parts))
-    scheme = first(schemes)
-    netloc = first(netlocs)
-    path = "/".join(x.strip("/") for x in paths if x)
-    query = first(queries)
-    fragment = first(fragments)
-    return urlunsplit((scheme, netloc, path, query, fragment))
+def url_path_join(base: str, path: str, ssl_verify: bool) -> str:
+    scheme = "https://"
+    if not ssl_verify:
+        scheme = "http://"
+    if not base.startswith(("http://", "https://")):
+        base = scheme + base.replace("www.", "")
 
-
-def first(sequence, default=""):
-    return next((x for x in sequence if x), default)
+    return urljoin(base, path)
 
 
 def check_header(headers: Union[Dict[str, str], None], header_key: str, header_value: str) -> bool:
@@ -233,7 +228,7 @@ class RestAPI(object):
 
             request_params = {
                 "method": method,
-                "url": url_path_join(self.url, path),
+                "url": url_path_join(self.url, path, self.ssl_verify),
                 "data": data,
                 "json": json_data,
                 "headers": Common.merge_dicts(self.default_headers, headers or {}),
