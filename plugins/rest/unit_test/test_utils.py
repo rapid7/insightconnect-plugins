@@ -1,10 +1,13 @@
+import json
 import os
 import sys
 
+from insightconnect_plugin_runtime.exceptions import PluginException
+from requests.auth import HTTPBasicAuth
+
 sys.path.append(os.path.abspath("../"))
 
-from komand_rest.util.util import *
-
+from komand_rest.util.util import RestAPI, Common
 
 import logging
 from unittest import TestCase, mock
@@ -35,13 +38,13 @@ def mocked_requests_get(*args, **kwargs):
         f"ARGS {kwargs}",
     )
     if kwargs["method"] == "get":
-        if kwargs["url"] == "www.google.com/":
+        if kwargs["url"] == "https://google.com/":
             return MockResponse(payload, 200, data=None)
-        if kwargs["url"] == "www.401.com/":
+        if kwargs["url"] == "https://401.com/":
             return MockResponse(payload, 401, data=None)
-        if kwargs["url"] == "www.418.com/":
+        if kwargs["url"] == "https://418.com/":
             return MockResponse(payload, 418, data=None)
-        if kwargs["url"] == "www.httpbin.org/":
+        if kwargs["url"] == "https://httpbin.org/":
             return MockResponse(None, 200, data)
 
     print(f"mocked_requests_get failed looking for: {kwargs['method']}")
@@ -52,7 +55,7 @@ class TestUtil(TestCase):
     @mock.patch("requests.request", side_effect=mocked_requests_get)
     def test_get_non_object(self, mock_get):
         log = logging.getLogger("Test")
-        api = RestAPI("www.google.com", log, False, {})
+        api = RestAPI("www.google.com", log, True, {})
 
         actual = api.call_api("get", "/", None, None, None)
         expected = [{"key": "value"}]
@@ -107,7 +110,7 @@ class TestUtil(TestCase):
     @mock.patch("requests.request", side_effect=mocked_requests_get)
     def test_get_401(self, mock_get):
         log = logging.getLogger("Test")
-        api = RestAPI("www.401.com", log, False, {})
+        api = RestAPI("www.401.com", log, True, {})
         with self.assertRaises(PluginException) as e:
             api.call_api("get", "/", None, None, None)
 
@@ -116,7 +119,7 @@ class TestUtil(TestCase):
     @mock.patch("requests.request", side_effect=mocked_requests_get)
     def test_get_json_decode_error(self, mock_get):
         log = logging.getLogger("Test")
-        api = RestAPI("www.418.com", log, False, {})
+        api = RestAPI("www.418.com", log, True, {})
         with self.assertRaises(PluginException) as e:
             api.call_api("get", "/", None, None, None)
             self.assertIn("I am a teapot", e.exception.data.msg)
