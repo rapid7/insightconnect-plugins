@@ -25,7 +25,7 @@ class CollectFile(insightconnect_plugin_runtime.Action):
         for collect_file in collect_files:
             if collect_file.get("endpoint_name") and collect_file.get("agent_guid"):
                 files.append(
-                    pytmv1.FileTask(
+                    pytmv1.CollectFileRequest(
                         endpointName=collect_file.get("endpoint_name"),
                         agentGuid=collect_file.get("agent_guid"),
                         filePath=collect_file["file_path"],
@@ -34,7 +34,7 @@ class CollectFile(insightconnect_plugin_runtime.Action):
                 )
             elif collect_file.get("endpoint_name") and not collect_file.get("agent_guid"):
                 files.append(
-                    pytmv1.FileTask(
+                    pytmv1.CollectFileRequest(
                         endpointName=collect_file.get("endpoint_name"),
                         filePath=collect_file["file_path"],
                         description=collect_file.get("description", "Collect File by endpointName"),
@@ -42,7 +42,7 @@ class CollectFile(insightconnect_plugin_runtime.Action):
                 )
             elif collect_file.get("agent_guid") and not collect_file.get("endpoint_name"):
                 files.append(
-                    pytmv1.FileTask(
+                    pytmv1.CollectFileRequest(
                         agentGuid=collect_file.get("agent_guid"),
                         filePath=collect_file["file_path"],
                         description=collect_file.get("description", "Collect File by agentGuid"),
@@ -55,7 +55,7 @@ class CollectFile(insightconnect_plugin_runtime.Action):
                 )
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.collect_file(*files)
+        response = client.endpoint.collect_file(*files)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while collecting file.",
@@ -64,4 +64,4 @@ class CollectFile(insightconnect_plugin_runtime.Action):
             )
         # Return results
         self.logger.info("Returning Results...")
-        return {Output.MULTI_RESPONSE: response.response.dict().get("items")}
+        return {Output.MULTI_RESPONSE: response.response.model_dump().get("items")}

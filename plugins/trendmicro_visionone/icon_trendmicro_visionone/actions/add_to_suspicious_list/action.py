@@ -60,7 +60,7 @@ class AddToSuspiciousList(insightconnect_plugin_runtime.Action):
         objects = []
         for block_object in block_objects:
             objects.append(
-                pytmv1.SuspiciousObjectTask(
+                pytmv1.SuspiciousObjectRequest(
                     objectType=block_object["object_type"],
                     objectValue=block_object["object_value"],
                     scan_action=block_object.get("scan_action", "block"),
@@ -70,14 +70,14 @@ class AddToSuspiciousList(insightconnect_plugin_runtime.Action):
             )
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.add_to_suspicious_list(*objects)
+        response = client.object.add_suspicious(*objects)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while adding to the suspicious list.",
                 assistance="Please check the input parameters and try again.",
                 data=response.errors,
             )
-        items = response.response.dict().get("items")
+        items = response.response.model_dump().get("items")
         # Avoid None value
         for item in items:
             item["task_id"] = "None" if item.get("task_id") is None else item["task_id"]

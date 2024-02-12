@@ -28,6 +28,6 @@ class TestRemoveFromExceptionList(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_remove_from_exception_list_failure(self):
-        self.action.connection.client.remove_from_exception_list = MagicMock(side_effect=PluginException)
+        self.action.connection.client.object.delete_exception = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

@@ -28,6 +28,6 @@ class TestGetAlertDetails(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_get_alert_details_failure(self):
-        self.action.connection.client.get_alert_details = MagicMock(side_effect=PluginException)
+        self.action.connection.client.alert.get = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

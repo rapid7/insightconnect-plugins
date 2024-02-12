@@ -21,5 +21,5 @@ def mock_connection():
     connection.url = "https://tmv1-mock.trendmicro.com"
     connection.key = "Dummy-Secret-Token"
     connection.app = "TM-R7"
-    connection.client = pytmv1.client(connection.app, connection.key, connection.url)
+    connection.client = pytmv1.init(connection.app, connection.key, connection.url)
     return connection

@@ -24,14 +24,14 @@ class EnableAccount(insightconnect_plugin_runtime.Action):
         accounts = []
         for account_identifier in account_identifiers:
             accounts.append(
-                pytmv1.AccountTask(
+                pytmv1.AccountRequest(
                     accountName=account_identifier["account_name"],
                     description=account_identifier.get("description", ""),
                 )
             )
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.enable_account(*accounts)
+        response = client.account.enable(*accounts)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while enabling an account.",
@@ -40,4 +40,4 @@ class EnableAccount(insightconnect_plugin_runtime.Action):
             )
         # Return results
         self.logger.info("Returning Results...")
-        return {Output.MULTI_RESPONSE: response.response.dict().get("items")}
+        return {Output.MULTI_RESPONSE: response.response.model_dump().get("items")}

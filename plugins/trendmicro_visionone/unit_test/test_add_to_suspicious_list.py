@@ -28,6 +28,6 @@ class TestAddToSuspiciousList(TestCase):
             self.assertIn(key, str(expected_result.keys()))
 
     def test_add_to_suspicious_list_failure(self):
-        self.action.connection.client.add_to_suspicious_list = MagicMock(side_effect=PluginException)
+        self.action.connection.client.object.add_suspicious = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

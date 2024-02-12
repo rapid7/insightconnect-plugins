@@ -26,7 +26,7 @@ class GetEndpointData(insightconnect_plugin_runtime.Action):
         # Get Connection Client
         client = self.connection.client
         # Get Action Parameters
-        endpoints = params.get(Input.ENDPOINTS)
+        fields = params.get(Input.FIELDS)
         query_op = params.get(Input.QUERY_OP)
         # Choose enum
         if "or" in query_op:
@@ -37,10 +37,10 @@ class GetEndpointData(insightconnect_plugin_runtime.Action):
         # Make Action API Call
         self.logger.info("Making API Call...")
         try:
-            client.consume_endpoint_data(
-                lambda endpoint_data: new_endpoint_data.append(endpoint_data.json()),
+            client.endpoint.consume_data(
+                lambda endpoint_data: new_endpoint_data.append(endpoint_data.model_dump_json()),
                 pytmv1.QueryOp(query_op),
-                *endpoints,
+                **fields,
             )
         except Exception as error:
             raise PluginException(

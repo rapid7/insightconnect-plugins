@@ -47,7 +47,7 @@ class AddToExceptionList(insightconnect_plugin_runtime.Action):
         objects = []
         for block_object in block_objects:
             objects.append(
-                pytmv1.ObjectTask(
+                pytmv1.ObjectRequest(
                     objectType=block_object["object_type"],
                     objectValue=block_object["object_value"],
                     description=block_object.get("description", "Add to Exception List"),
@@ -55,14 +55,14 @@ class AddToExceptionList(insightconnect_plugin_runtime.Action):
             )
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.add_to_exception_list(*objects)
+        response = client.object.add_exception(*objects)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while adding to exception list.",
                 assistance="Please check the object_value and object_type parameters.",
                 data=response.errors,
             )
-        items = response.response.dict().get("items")
+        items = response.response.model_dump().get("items")
         # Avoid None value
         for item in items:
             item["task_id"] = "None" if item.get("task_id") is None else item["task_id"]
