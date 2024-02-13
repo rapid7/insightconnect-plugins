@@ -9,7 +9,7 @@ from unittest.mock import patch, Mock
 
 from icon_domaintools_phisheye.actions.domain_list import DomainList
 from icon_domaintools_phisheye.actions.domain_list.schema import Input
-from unit_test.mock import (
+from mock import (
     Util,
     mock_request_200,
     mock_connection_200,

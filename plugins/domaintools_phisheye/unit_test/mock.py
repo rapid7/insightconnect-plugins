@@ -11,7 +11,6 @@ from insightconnect_plugin_runtime.action import Action
 import requests
 
 STUB_CONNECTION = {Input.API_KEY: {"secretKey": "11111-aaaaa-aaa11-111aa-aaa11"}, Input.USERNAME: "good"}
-STUB_CONNECTION_NOT_AUTHORISED = {}
 
 
 class Util:
