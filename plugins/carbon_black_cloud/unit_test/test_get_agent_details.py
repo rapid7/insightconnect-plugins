@@ -25,16 +25,20 @@ from util import (
 )
 
 STUB_AGENT_ID = "192.168.0.1"
+STUB_AGENT_ID_HOSTNAME = "carbonblack\\test"
+STUB_AGENT_ID_HOSTNAME_CAPS = "CARBONBLACK\\TEST"
 
 
 class TestGetAgentDetails(TestCase):
     def setUp(self) -> None:
         self.action = Util.default_connector(GetAgentDetails())
-        self.payload = {Input.AGENT: STUB_AGENT_ID}
 
+    @parameterized.expand(
+        [STUB_AGENT_ID, STUB_AGENT_ID_HOSTNAME, STUB_AGENT_ID_HOSTNAME_CAPS],
+    )
     @patch("requests.post", side_effect=mock_request_200)
-    def test_get_agent_details(self, mocked_post: MagicMock) -> None:
-        response = self.action.run(self.payload)
+    def test_get_agent_details(self, input: str, mocked_post: MagicMock) -> None:
+        response = self.action.run({Input.AGENT: input})
         expected = {
             Output.AGENT: {
                 "activation_code_expiry_time": "2022-07-11T06:53:06.190Z",
@@ -66,7 +70,7 @@ class TestGetAgentDetails(TestCase):
                 "last_shutdown_time": "2022-07-04T06:58:55.867Z",
                 "login_user_name": "CARBONBLACK\\testuser",
                 "mac_address": "fa163e92d344",
-                "name": "carbonblack",
+                "name": "carbonblack\\test",
                 "organization_id": 1105,
                 "organization_name": "cb-internal-alliances.com",
                 "os": "WINDOWS",
@@ -112,7 +116,7 @@ class TestGetAgentDetails(TestCase):
     def test_get_agent_details_exception(self, mock_request: MagicMock, exception: str) -> None:
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
-            self.action.run(self.payload)
+            self.action.run({Input.AGENT: STUB_AGENT_ID})
         self.assertEqual(
             context.exception.cause,
             exception,
