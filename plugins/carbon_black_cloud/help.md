@@ -50,7 +50,7 @@ Example input:
 
 #### Get Agent Details
   
-This action is used to get agent details.
+This action is used to get agent details
 
 ##### Input
 
@@ -168,7 +168,7 @@ Example output:
 
 #### Quarantine
   
-This action is used to quarantine an agent.
+This action is used to quarantine an agent
 
 ##### Input
 
@@ -298,6 +298,7 @@ Example output:
 
 # Version History
 
+* 2.0.1 - Allows user entered hostnames to be case insensitive for `get_agent_details` and `quarantine` actions | Fix bug where error is raised if endpoint was not found in `get_agent` method | To add escaping of special characters in hostnames when performing hostname searches to Carbon Black
 * 2.0.0 - Updated the SDK version | Cloud enabled
 * 1.0.2 - Updated branding
 * 1.0.1 - Fix issue where retry on error call could crash plugin
