@@ -4,7 +4,7 @@ products: [insightconnect]
 name: carbon_black_cloud
 title: VMware Carbon Black Cloud
 description: Quarantine endpoints and get device details with the VMware Carbon Black Cloud plugin
-version: 2.0.0
+version: 2.0.1
 vendor: rapid7
 support: rapid7
 cloud_ready: true
@@ -23,7 +23,7 @@ tags:
 - vmware
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [carbon black, vmware, cloud, antivirus, cloud_enabled]
+  keywords: [carbon_black, vmware, cloud, antivirus, cloud_enabled]
   features: []
 sdk:
   type: full
@@ -454,7 +454,7 @@ connection:
 actions:
   get_agent_details:
     title: Get Agent Details
-    description: Get Agent Details
+    description: Get agent details
     input:
       agent:
         title: Agent

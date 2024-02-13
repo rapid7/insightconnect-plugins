@@ -7,6 +7,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException, Connection
 import time
 from icon_carbon_black_cloud.util import agent_typer
 from icon_carbon_black_cloud.util.constants import DEFAULT_TIMEOUT
+import re
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -26,14 +27,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
         agent_type = agent_typer.get_agent_type(agent)
         endpoint = f"appservices/v6/orgs/{self.org_key}/devices/_search"
         url = f"{self.base_url}/{endpoint}"
-        payload = {"query": agent}
-
-        self.logger.info(f"Searching at {url}")
+        payload = {"query": re.escape(agent)}
         results = self.post_to_api(url, payload).get("results")
 
-        device = None
+        device = {}
         if agent_type == agent_typer.DEVICE_ID:
-            device = next((element for element in results if str(element.get("id", "")) == agent), None)
+            device = next((element for element in results if str(element.get("id", "")) == agent), {})
         if agent_type == agent_typer.IP_ADDRESS:
             device = next(
                 (
@@ -41,12 +40,14 @@ class Connection(insightconnect_plugin_runtime.Connection):
                     for element in results
                     if element.get("last_internal_ip_address") == agent or element.get("last_external_ip_address")
                 ),
-                None,
+                {},
             )
         if agent_type == agent_typer.HOSTNAME:
-            device = next((element for element in results if element.get("name", "") == agent), None)
-        if agent_typer == agent_typer.MAC_ADDRESS:
-            device = next((element for element in results if element.get("mac_address", "") == agent), None)
+            device = next(
+                (element for element in results if str(element.get("name", "")).lower() == str(agent).lower()), {}
+            )
+        if agent_type == agent_typer.MAC_ADDRESS:
+            device = next((element for element in results if element.get("mac_address", "") == agent), {})
 
         if not device:
             self.logger.error(f"Could not find any device that matched {agent}")
@@ -80,7 +81,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             if result.status_code == 404:
                 raise PluginException(
                     cause="The object referenced in the request cannot be found.",
-                    assistance="Verify that your request contains objects that haven’t been deleted. Verify that the organization key in the URL is correct.",
+                    assistance="Verify that your request contains objects that haven't been deleted. Verify that the organization key in the URL is correct.",
                     data=result.text,
                 )
             if result.status_code == 409:
