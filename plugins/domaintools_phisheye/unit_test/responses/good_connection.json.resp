@@ -1,0 +1,12 @@
+{
+  "response": {
+    "terms": [
+      {
+        "term": "good"
+      },
+      {
+        "term": "bad"
+      }
+    ]
+  }
+}

@@ -3,13 +3,15 @@ import logging
 import os
 from typing import Callable
 from unittest import mock
+from domaintools.exceptions import NotAuthorizedException
 
 from icon_domaintools_phisheye.connection.connection import Connection
 from icon_domaintools_phisheye.connection.schema import Input
 from insightconnect_plugin_runtime.action import Action
 import requests
 
-STUB_CONNECTION = {Input.API_KEY: {"secretKey": "11111-aaaaa-aaa11-111aa-aaa11"}, Input.USERNAME: "user1"}
+STUB_CONNECTION = {Input.API_KEY: {"secretKey": "11111-aaaaa-aaa11-111aa-aaa11"}, Input.USERNAME: "good"}
+STUB_CONNECTION_NOT_AUTHORISED = {}
 
 
 class Util:
@@ -33,6 +35,34 @@ class Util:
     def read_file_to_dict(filename: str) -> dict:
         return json.loads(Util.read_file_to_string(filename))
 
+    @staticmethod
+    def mock_api(*args, **kwargs):
+        class MockApi:
+            def __init__(self, username, key, phisheye=None):
+                self.username = username
+                self.key = key
+                self.phisheye = phisheye
+
+            def account_information(self):
+                if self.username == "good":
+                    return AccountInfo()
+                if self.username == "not_authorised":
+                    raise NotAuthorizedException()
+                if self.username == "error":
+                    raise Exception()
+
+            def phisheye_term_list(self):
+                pass
+
+        class AccountInfo:
+            def __init__(self):
+                pass
+
+            def data(self):
+                pass
+
+        return MockApi(args[0], args[1])
+
 
 class MockResponse:
     def __init__(self, filename: str, status_code: int):
@@ -51,16 +81,9 @@ class MockResponse:
 def mock_conditions(status: str) -> MockResponse:
     if status == "success":
         return MockResponse("domain_list", 200)
-    if status == "bad_request":
-        return MockResponse("", 400)
-    if status == "service_unavailable":
-        return MockResponse("", 503)
-    if status == "not_authorised":
-        return MockResponse("", 403)
-    if status == "not_found":
-        return MockResponse("", 404)
-    if status == "internal_service_error":
-        return MockResponse("", 500)
+
+    if status == "good_connection":
+        return MockResponse("good_connection", 200)
 
     raise Exception("Unrecognized endpoint")
 
@@ -71,4 +94,8 @@ def mocked_request(side_effect: Callable) -> None:
 
 
 def mock_request_200(*args) -> MockResponse:
-    return mock_conditions("success")
+    return mock_conditions("success").json()
+
+
+def mock_connection_200(*args) -> MockResponse:
+    return mock_conditions("good_connection").json()
