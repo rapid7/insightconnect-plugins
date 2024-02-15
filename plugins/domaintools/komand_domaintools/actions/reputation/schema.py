@@ -69,6 +69,13 @@ class ReputationOutput(insightconnect_plugin_runtime.Output):
         "risk_score": {
           "type": "integer",
           "order": 2
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "order": 3
         }
       }
     }

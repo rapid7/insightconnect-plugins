@@ -30,4 +30,7 @@ class DomainProfile(insightconnect_plugin_runtime.Action):
             history.get("ip_address", {})["timespan_in_years"] = 0
 
         response.get("response", {})["history"] = history
+
+        if response.get("response", {}).get("seo", {}).get("score") == "":
+            response.get("response", {}).get("seo", {}).pop("score")
         return response

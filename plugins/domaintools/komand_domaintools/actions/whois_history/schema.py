@@ -108,6 +108,10 @@ class WhoisHistoryOutput(insightconnect_plugin_runtime.Output):
         "registration": {
           "$ref": "#/definitions/registration",
           "order": 4
+        },
+        "server": {
+          "type": "string",
+          "order": 5
         }
       }
     },

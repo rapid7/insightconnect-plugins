@@ -276,7 +276,10 @@ class DomainProfileOutput(insightconnect_plugin_runtime.Output):
       "title": "website_data",
       "properties": {
         "meta": {
-          "$ref": "#/definitions/meta",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "order": 1
         },
         "product_url": {
@@ -294,16 +297,6 @@ class DomainProfileOutput(insightconnect_plugin_runtime.Output):
         "title": {
           "type": "string",
           "order": 5
-        }
-      }
-    },
-    "meta": {
-      "type": "object",
-      "title": "meta",
-      "properties": {
-        "description": {
-          "type": "string",
-          "order": 1
         }
       }
     }

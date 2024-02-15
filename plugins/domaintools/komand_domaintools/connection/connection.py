@@ -5,10 +5,11 @@ from .schema import ConnectionSchema, Input
 # Custom imports below
 from domaintools import API
 from domaintools.exceptions import NotAuthorizedException
-
+import logging
 
 class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
+        logging.basicConfig(encoding='utf-8', level=logging.INFO)
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.api = None
 

@@ -284,7 +284,7 @@ types:
       required: false
   website_data:
     meta:
-      type: meta
+      type: "[]string"
       required: false
     product_url:
       type: string
@@ -383,6 +383,9 @@ types:
       required: false
     risk_score:
       type: int
+      required: false
+    reasons:
+      type: "[]string"
       required: false
   admin:
     city:
@@ -614,6 +617,9 @@ types:
     registration:
       type: registration
       required: false
+    server:
+      type: string
+      required: false
   history:
     date:
       type: string
@@ -748,7 +754,7 @@ actions:
           )
         required: true
       days_back:
-        type: string
+        type: int
         description: Use this parameter search domain changes up to six days prior
           to the current date
         default: 0
@@ -960,10 +966,6 @@ actions:
         title: IP
         type: string
         description: Required for single IP result
-        required: false
-      query:
-        type: string
-        description: A space separated list of free text query terms
         required: false
       country:
         type: string

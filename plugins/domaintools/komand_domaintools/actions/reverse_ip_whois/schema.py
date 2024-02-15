@@ -12,7 +12,6 @@ class Input:
     INCLUDE_TOTAL_COUNT = "include_total_count"
     IP = "ip"
     PAGE = "page"
-    QUERY = "query"
     SERVER = "server"
 
 
@@ -29,13 +28,13 @@ class ReverseIpWhoisInput(insightconnect_plugin_runtime.Input):
     "country": {
       "type": "string",
       "description": "Limits results to IP addresses allocated to an entity with a particular country",
-      "order": 3
+      "order": 2
     },
     "include_total_count": {
       "type": "boolean",
       "description": "Returns the total number of results for a query",
       "default": false,
-      "order": 5
+      "order": 4
     },
     "ip": {
       "type": "string",
@@ -46,17 +45,12 @@ class ReverseIpWhoisInput(insightconnect_plugin_runtime.Input):
     "page": {
       "type": "string",
       "description": "Providing the page number allows access to additional pages of data",
-      "order": 6
-    },
-    "query": {
-      "type": "string",
-      "description": "A space separated list of free text query terms",
-      "order": 2
+      "order": 5
     },
     "server": {
       "type": "string",
       "description": "Limits results to ranges from a particular WHOIS server",
-      "order": 4
+      "order": 3
     }
   },
   "definitions": {}

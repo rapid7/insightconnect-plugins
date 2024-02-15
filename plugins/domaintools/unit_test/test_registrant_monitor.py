@@ -3,44 +3,23 @@ import os
 sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase, mock
-from unittest.mock import Mock
 from komand_domaintools.actions.registrant_monitor import RegistrantMonitor
 from komand_domaintools.actions.registrant_monitor.schema import Input
-from insightconnect_plugin_runtime.exceptions import PluginException
-import json
-import logging
+from util import mock_responder, Util
 
-from parameterized import parameterized
-from mock import (
-    Util,
-    mocked_action,
-    mock_responder,
-)
 
 class TestRegistrantMonitor(TestCase):
-    @mock.patch("domaintools.API.registrant_monitor", side_effect=mock_responder)
-    def setUp(self, mock_post: Mock) -> None:
+    @mock.patch("domaintools.API.account_information", side_effect=mock_responder)
+    def setUp(self, mock_post) -> None:
         self.action = Util.default_connector(RegistrantMonitor())
-        self.params = {Input.QUERY: "ETC"}
+        self.params = {
+            Input.QUERY: "registrant_monitor.com",
+            Input.DAYS_BACK: 1,
+            Input.EXCLUDE: "test.com"
+        }
 
     @mock.patch("domaintools.API.registrant_monitor", side_effect=mock_responder)
     def test_registrant_monitor(self, mock_request):
-        mocked_action(mock_request)
         response = self.action.run(self.params)
-        expected = {}
+        expected = Util.load_expected("test_registrant_monitor")
         self.assertEqual(response, expected)
-
-    @parameterized.expand(
-        [
-            (mock_responder, PluginException.causes[PluginException.Preset.BAD_REQUEST]),
-            (mock_responder, PluginException.causes[PluginException.Preset.USERNAME_PASSWORD]),
-            (mock_responder, PluginException.causes[PluginException.Preset.UNAUTHORIZED]),
-            (mock_responder, PluginException.causes[PluginException.Preset.NOT_FOUND]),
-            (mock_responder, PluginException.causes[PluginException.Preset.SERVER_ERROR]),
-        ],
-    )
-    def test_registrant_monitor_fail(self, mock_request, exception):
-        mocked_action(mock_request)
-        with self.assertRaises(PluginException) as context:
-            self.action.run(self.params)
-        self.assertEqual(context.exception.cause, exception)

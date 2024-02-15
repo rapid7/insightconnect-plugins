@@ -1,0 +1,22 @@
+{
+   "response": {
+     "query": "finance",
+     "exclude": "auto|best",
+     "new": True,
+     "on-hold": True,
+     "date": "2011-03-02",
+     "limit": 1,
+     "utf-8": False,
+     "total": 2,
+     "alerts": [
+       {
+         "domain": "24hourfinance.info",
+         "status": "on-hold"
+       },
+       {
+         "domain": "actionis-finance.com",
+         "status": "new"
+       }
+     ]
+   }
+}

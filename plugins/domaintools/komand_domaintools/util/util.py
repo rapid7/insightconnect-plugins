@@ -7,12 +7,14 @@ from domaintools.exceptions import (
     NotFoundException,
     InternalServerErrorException,
 )
+import logging
 
-
-@staticmethod
 def make_request(action, *args, **kwargs):
     try:
         response = action(*args, **kwargs)
+        logging.info("RESPONSE-----")
+        logging.info(response)
+        logging.info("END-----")
         return response.data()
     except BadRequestException as exception:
         raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=f"DomainToolsAPI: Bad Request: code "

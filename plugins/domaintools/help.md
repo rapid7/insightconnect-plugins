@@ -176,9 +176,7 @@ Example output:
       "product_url": {}
     },
     "website_data": {
-      "meta": {
-        "description": {}
-      },
+      "meta": {},
       "product_url": {},
       "response_code": {},
       "server": {},
@@ -370,7 +368,7 @@ Searches the daily activity of all our monitored TLDs on any given name server.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|days_back|string|0|False|Use this parameter search domain changes up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|None|
+|days_back|int|0|False|Use this parameter search domain changes up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|None|
 |page|integer|1|False|If the result set is larger than 1000 records for a given day, request additional pages with this parameter|None|None|
 |query|string|None|True|The hostname of the Name Server you wish to query ( i.e. dynect.net )|None|None|
   
@@ -585,6 +583,9 @@ Example output:
 {
   "response": {
     "domain": "",
+    "reasons": [
+      {}
+    ],
     "risk_score": 0
   }
 }
@@ -646,7 +647,6 @@ Provides a list of IP network ranges with WHOIS records that match a specific qu
 |include_total_count|boolean|False|False|Returns the total number of results for a query|None|None|
 |ip|string|None|False|Required for single IP result|None|None|
 |page|string|None|False|Providing the page number allows access to additional pages of data|None|None|
-|query|string|None|False|A space separated list of free text query terms|None|None|
 |server|string|None|False|Limits results to ranges from a particular WHOIS server|None|None|
   
 Example input:
@@ -657,7 +657,6 @@ Example input:
   "include_total_count": false,
   "ip": "",
   "page": "",
-  "query": "",
   "server": ""
 }
 ```
@@ -874,7 +873,8 @@ Example output:
             "registrar": {},
             "statuses": {},
             "updated": {}
-          }
+          },
+          "server": {}
         }
       }
     ],
@@ -1063,7 +1063,7 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|meta|meta|None|False|None|None|
+|meta|[]string|None|False|None|None|
 |product_url|string|None|False|None|None|
 |response_code|int|None|False|None|None|
 |server|string|None|False|None|None|
@@ -1118,6 +1118,7 @@ Example output:
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |domain|string|None|False|None|None|
+|reasons|[]string|None|False|None|None|
 |risk_score|int|None|False|None|None|
   
 **admin**
@@ -1259,6 +1260,7 @@ Example output:
 |record|string|None|False|None|None|
 |registrant|string|None|False|None|None|
 |registration|registration|None|False|None|None|
+|server|string|None|False|None|None|
   
 **history**
 

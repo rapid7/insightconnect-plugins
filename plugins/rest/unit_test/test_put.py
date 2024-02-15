@@ -3,7 +3,7 @@ import sys
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase, mock
+from unittest import TestCase, moc
 from komand_rest.actions.put import Put
 from util import Util
 from parameterized import parameterized

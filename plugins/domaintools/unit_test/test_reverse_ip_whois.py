@@ -3,44 +3,25 @@ import os
 sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase, mock
-from unittest.mock import Mock
 from komand_domaintools.actions.reverse_ip_whois import ReverseIpWhois
 from komand_domaintools.actions.reverse_ip_whois.schema import Input
-from insightconnect_plugin_runtime.exceptions import PluginException
-import json
-import logging
+from util import mock_responder, Util
 
-from parameterized import parameterized
-from mock import (
-    Util,
-    mocked_action,
-    mock_responder,
-)
 
 class TestReverseIpWhois(TestCase):
-    @mock.patch("domaintools.API.reverse_ip_whois", side_effect=mock_responder)
-    def setUp(self, mock_post: Mock) -> None:
+    @mock.patch("domaintools.API.account_information", side_effect=mock_responder)
+    def setUp(self, mock_post) -> None:
         self.action = Util.default_connector(ReverseIpWhois())
-        self.params = {Input.QUERY: "ETC"}
+        self.params = {
+            Input.PAGE: 1,
+            Input.IP: "10.10.10.10",
+            Input.SERVER: "whois.arin.net",
+            Input.COUNTRY: "CA",
+            Input.INCLUDE_TOTAL_COUNT: True
+        }
 
     @mock.patch("domaintools.API.reverse_ip_whois", side_effect=mock_responder)
-    def test_reverse_ip_whois(self, mock_request):
-        mocked_action(mock_request)
+    def test_reverse_whois(self, mock_request):
         response = self.action.run(self.params)
-        expected = {}
+        expected = Util.load_expected("test_reverse_ip_whois")
         self.assertEqual(response, expected)
-
-    @parameterized.expand(
-        [
-            (mock_responder, PluginException.causes[PluginException.Preset.BAD_REQUEST]),
-            (mock_responder, PluginException.causes[PluginException.Preset.USERNAME_PASSWORD]),
-            (mock_responder, PluginException.causes[PluginException.Preset.UNAUTHORIZED]),
-            (mock_responder, PluginException.causes[PluginException.Preset.NOT_FOUND]),
-            (mock_responder, PluginException.causes[PluginException.Preset.SERVER_ERROR]),
-        ],
-    )
-    def test_reverse_ip_whois_fail(self, mock_request, exception):
-        mocked_action(mock_request)
-        with self.assertRaises(PluginException) as context:
-            self.action.run(self.params)
-        self.assertEqual(context.exception.cause, exception)

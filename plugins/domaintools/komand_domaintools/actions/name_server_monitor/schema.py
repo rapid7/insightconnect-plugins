@@ -24,7 +24,7 @@ class NameServerMonitorInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "days_back": {
-      "type": "string",
+      "type": "integer",
       "description": "Use this parameter search domain changes up to six days prior to the current date",
       "default": 0,
       "enum": [

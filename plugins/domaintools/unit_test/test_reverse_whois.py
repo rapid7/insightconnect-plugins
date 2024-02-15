@@ -3,44 +3,42 @@ import os
 sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase, mock
-from unittest.mock import Mock
 from komand_domaintools.actions.reverse_whois import ReverseWhois
 from komand_domaintools.actions.reverse_whois.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
-import json
-import logging
-
+from util import mock_responder, Util
 from parameterized import parameterized
-from mock import (
-    Util,
-    mocked_action,
-    mock_responder,
-)
+
 
 class TestReverseWhois(TestCase):
-    @mock.patch("domaintools.API.reverse_whois", side_effect=mock_responder)
-    def setUp(self, mock_post: Mock) -> None:
+    @mock.patch("domaintools.API.account_information", side_effect=mock_responder)
+    def setUp(self, mock_post) -> None:
         self.action = Util.default_connector(ReverseWhois())
-        self.params = {Input.QUERY: "ETC"}
+        self.params = {
+            Input.TERMS: "test.com",
+            Input.EXCLUDE: "example.com",
+            Input.SCOPE: "historic",
+            Input.MODE: "quote"
+        }
 
     @mock.patch("domaintools.API.reverse_whois", side_effect=mock_responder)
     def test_reverse_whois(self, mock_request):
-        mocked_action(mock_request)
         response = self.action.run(self.params)
-        expected = {}
+        expected = Util.load_expected("test_reverse_whois")
         self.assertEqual(response, expected)
 
     @parameterized.expand(
         [
-            (mock_responder, PluginException.causes[PluginException.Preset.BAD_REQUEST]),
-            (mock_responder, PluginException.causes[PluginException.Preset.USERNAME_PASSWORD]),
-            (mock_responder, PluginException.causes[PluginException.Preset.UNAUTHORIZED]),
-            (mock_responder, PluginException.causes[PluginException.Preset.NOT_FOUND]),
-            (mock_responder, PluginException.causes[PluginException.Preset.SERVER_ERROR]),
+            ("500.com", PluginException.causes[PluginException.Preset.UNKNOWN]),
+            ("400.com", PluginException.causes[PluginException.Preset.BAD_REQUEST]),
+            ("503.com", PluginException.causes[PluginException.Preset.SERVICE_UNAVAILABLE]),
+            ("401.com", PluginException.causes[PluginException.Preset.UNAUTHORIZED]),
+            ("404.com", PluginException.causes[PluginException.Preset.NOT_FOUND]),
         ],
     )
-    def test_reverse_whois_fail(self, mock_request, exception):
-        mocked_action(mock_request)
+    @mock.patch("domaintools.API.reverse_whois", side_effect=mock_responder)
+    def test_reverse_whois_fail(self, terms, exception, mock_request):
         with self.assertRaises(PluginException) as context:
+            self.params["terms"] = terms
             self.action.run(self.params)
         self.assertEqual(context.exception.cause, exception)
