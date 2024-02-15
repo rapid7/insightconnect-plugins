@@ -112,13 +112,15 @@ Example output:
 #### Advanced Query on Log
   
 This action is used to realtime query an InsightIDR log. This will query individual logs for results. Note only 500 
-results will be returned from a single call, if all results are required for this query please use smaller timeranges
+results will be returned from a single call, if all results are required for this query please use smaller timeranges. 
+If both a log name and log ID are provided, the log ID will used over the log name
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|log|string|None|True|Log to search|None|Firewall Activity|
+|log|string|None|False|Log name to search|None|Firewall Activity|
+|log_id|string|None|False|Log id to search|None|123456-abcd-1234-abcd-123456abc|
 |query|string|None|True|LEQL Query|None|where(user=adagentadmin, loose)|
 |relative_time|string|Last 5 Minutes|True|A relative time in the past to look for alerts|["Last 5 Minutes", "Last 10 Minutes", "Last 20 Minutes", "Last 30 Minutes", "Last 45 Minutes", "Last 1 Hour", "Last 2 Hours", "Last 3 Hours", "Last 6 Hours", "Last 12 Hours", "Use Time From Value"]|Last 5 Minutes|
 |time_from|string|None|False|Beginning date and time for the query. This will be ignored unless Relative Time input is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)|None|01-01-2020T00:00:00|
@@ -130,6 +132,7 @@ Example input:
 ```
 {
   "log": "Firewall Activity",
+  "log_id": "123456-abcd-1234-abcd-123456abc",
   "query": "where(user=adagentadmin, loose)",
   "relative_time": "Last 5 Minutes",
   "time_from": "01-01-2020T00:00:00",
@@ -3021,6 +3024,7 @@ Example output:
 
 # Version History
 
+* 9.0.0 - Actions: `Advanced Query On Log` - Now allows for ethier log id or log name to be used
 * 8.2.0 - Actions: `Advanced Query On Log Set` and `Advanced Query On Log` - optimized data fetching mechanisms 
 * 8.1.1 - Extended error logging for all the actions
 * 8.1.0 - New actions added: `Search Accounts` and `Get Account Information`
