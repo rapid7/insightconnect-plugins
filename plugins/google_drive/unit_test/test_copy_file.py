@@ -1,14 +1,13 @@
 import sys
 import os
+
+sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from komand_google_drive.actions.copy_file import CopyFile
 from komand_google_drive.actions.copy_file.schema import Input, Output
 from insightconnect_plugin_runtime.exceptions import PluginException
-from tests.util import Util
+from util import Util
 from parameterized import parameterized
-
-
-sys.path.append(os.path.abspath("../"))
 
 
 class TestCopyFile(TestCase):
