@@ -4,6 +4,8 @@ from .schema import CopyFileInput, CopyFileOutput, Input, Output, Component
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 from googleapiclient.errors import HttpError
+from insightconnect_plugin_runtime.helper import clean
+
 
 
 class CopyFile(insightconnect_plugin_runtime.Action):
