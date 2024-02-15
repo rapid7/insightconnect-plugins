@@ -4,19 +4,20 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Move a file to a different folder"
+    DESCRIPTION = "Copy a file to a folder"
 
 
 class Input:
     FILE_ID = "file_id"
     FOLDER_ID = "folder_id"
+    NEW_FILE_NAME = "new_file_name"
 
 
 class Output:
     RESULT = "result"
 
 
-class MoveFileInput(insightconnect_plugin_runtime.Input):
+class CopyFileInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {
   "type": "object",
@@ -25,14 +26,20 @@ class MoveFileInput(insightconnect_plugin_runtime.Input):
     "file_id": {
       "type": "string",
       "title": "File ID",
-      "description": "The ID of the file that will be moved to another folder",
+      "description": "The ID of the file that will be copied to another folder",
       "order": 2
     },
     "folder_id": {
       "type": "string",
       "title": "Folder ID",
-      "description": "ID of the folder where the file will be moved",
+      "description": "ID of the folder where the file will be copied",
       "order": 1
+    },
+    "new_file_name": {
+      "type": "string",
+      "title": "New File Name",
+      "description": "Select a new file name. e.g. testfile.csv",
+      "order": 3
     }
   },
   "required": [
@@ -47,16 +54,16 @@ class MoveFileInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class MoveFileOutput(insightconnect_plugin_runtime.Output):
+class CopyFileOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
     "result": {
-      "$ref": "#/definitions/move_file_result",
+      "$ref": "#/definitions/copy_file_result",
       "title": "Result",
-      "description": "The result containing the ID of the file and ID of the folder to which the file was moved",
+      "description": "The result containing the ID of the file and ID of the folder to which the file was copied",
       "order": 1
     }
   },
@@ -64,9 +71,9 @@ class MoveFileOutput(insightconnect_plugin_runtime.Output):
     "result"
   ],
   "definitions": {
-    "move_file_result": {
+    "copy_file_result": {
       "type": "object",
-      "title": "move_file_result",
+      "title": "copy_file_result",
       "properties": {
         "parents": {
           "type": "array",

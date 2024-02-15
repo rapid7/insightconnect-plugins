@@ -52,6 +52,7 @@ class OverwriteFile(insightconnect_plugin_runtime.Action):
                     fileId=file_id,
                     media_mime_type=mime_type,
                     media_body=media,
+                    supportsAllDrives=True
                 )
                 .execute()
             )
