@@ -1,11 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
+
 from .schema import HostingHistoryInput, HostingHistoryOutput
-
-# Custom imports below
-from komand_domaintools.util import util
+from ...util.util import make_request
 
 
-class HostingHistory(komand.Action):
+class HostingHistory(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="hosting_history",
@@ -16,7 +15,7 @@ class HostingHistory(komand.Action):
 
     def run(self, params={}):
         query = params.get("domain")
-        response = utils.make_request(self.connection.api.hosting_history, query)
+        response = make_request(self.connection.api.hosting_history, query)
         return self._cleanup_response(response)
 
     def _cleanup_response(self, response):
@@ -30,7 +29,3 @@ class HostingHistory(komand.Action):
 
         response["response"]["ip_history"] = ip_history
         return response
-
-    def test(self):
-        """TODO: Test action"""
-        return {}

@@ -1,11 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
+
 from .schema import DomainProfileInput, DomainProfileOutput
-
-# Custom imports below
-from komand_domaintools.util import util
+from ...util.util import make_request
 
 
-class DomainProfile(komand.Action):
+class DomainProfile(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="domain_profile",
@@ -16,7 +15,7 @@ class DomainProfile(komand.Action):
 
     def run(self, params={}):
         query = params.get("domain")
-        response = utils.make_request(self.connection.api.domain_profile, query)
+        response = make_request(self.connection.api.domain_profile, query)
         return self._cleanup_response(response)
 
     def _cleanup_response(self, response):
@@ -31,7 +30,3 @@ class DomainProfile(komand.Action):
 
         response["response"]["history"] = history
         return response
-
-    def test(self):
-        """TODO: Test action"""
-        return {}

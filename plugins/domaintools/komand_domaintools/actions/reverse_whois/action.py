@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import ReverseWhoisInput, ReverseWhoisOutput
-
-# Custom imports below
-from komand_domaintools.util import util
+from ...util.util import make_request
 
 
-class ReverseWhois(komand.Action):
+class ReverseWhois(insightconnect_plugin_runtime.Action):
 
     MODES = ["purchase", "quote"]
 
@@ -18,15 +18,11 @@ class ReverseWhois(komand.Action):
         )
 
     def run(self, params={}):
-        params = komand.helper.clean_dict(params)
+        params = insightconnect_plugin_runtime.helper.clean_dict(params)
         params["query"] = params.pop("terms")
         mode = params.get("mode")
         if mode and mode not in self.MODES:
-            raise Exception("DomainTools: mode must be one of: {}".format(", ".join(self.MODES)))
+            raise PluginException(cause=f"DomainTools: mode must be one of: {', '.join(self.MODES)}")
 
-        response = utils.make_request(self.connection.api.reverse_whois, **params)
+        response = make_request(self.connection.api.reverse_whois, **params)
         return response
-
-    def test(self):
-        """TODO: Test action"""
-        return {}

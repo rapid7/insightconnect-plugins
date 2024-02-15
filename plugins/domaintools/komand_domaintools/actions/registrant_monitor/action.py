@@ -1,11 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
+
 from .schema import RegistrantMonitorInput, RegistrantMonitorOutput
-
-# Custom imports below
-from komand_domaintools.util import util
+from ...util.util import make_request
 
 
-class RegistrantMonitor(komand.Action):
+class RegistrantMonitor(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="registrant_monitor",
@@ -15,11 +14,6 @@ class RegistrantMonitor(komand.Action):
         )
 
     def run(self, params={}):
-        params = komand.helper.clean_dict(params)
-        response = utils.make_request(self.connection.api.registrant_monitor, **params)
-        # return { 'response': response.data() }
+        params = insightconnect_plugin_runtime.helper.clean_dict(params)
+        response = make_request(self.connection.api.registrant_monitor, **params)
         return response
-
-    def test(self):
-        """TODO: Test action"""
-        return {}
