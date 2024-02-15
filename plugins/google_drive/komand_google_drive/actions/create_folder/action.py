@@ -22,7 +22,7 @@ class CreateFolder(insightconnect_plugin_runtime.Action):
             folder_metadata["parents"] = [parent_folder_id]
 
         try:
-            result = self.connection.service.files().create(body=folder_metadata, fields="id").execute()
+            result = self.connection.service.files().create(body=folder_metadata, fields="id", supportsAllDrives=True).execute()
             return {Output.FOLDER_ID: result.get("id")}
         except HttpError as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=str(error))
