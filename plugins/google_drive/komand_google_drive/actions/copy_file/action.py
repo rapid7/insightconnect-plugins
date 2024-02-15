@@ -7,7 +7,6 @@ from googleapiclient.errors import HttpError
 from insightconnect_plugin_runtime.helper import clean
 
 
-
 class CopyFile(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
