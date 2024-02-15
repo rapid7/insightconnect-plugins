@@ -2,11 +2,11 @@
    "response": {
      "query": "finance",
      "exclude": "auto|best",
-     "new": True,
-     "on-hold": True,
+     "new": true,
+     "on-hold": true,
      "date": "2011-03-02",
      "limit": 1,
-     "utf-8": False,
+     "utf-8": false,
      "total": 2,
      "alerts": [
        {

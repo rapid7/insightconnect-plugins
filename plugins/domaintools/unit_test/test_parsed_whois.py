@@ -17,5 +17,5 @@ class TestParsedWhois(TestCase):
     @mock.patch("domaintools.API.parsed_whois", side_effect=mock_responder)
     def test_parsed_whois_monitor(self, mock_request):
         response = self.action.run(self.params)
-        expected = Util.load_expected("test_parsed_whois.py")
+        expected = Util.load_expected("test_parsed_whois")
         self.assertEqual(response, expected)
