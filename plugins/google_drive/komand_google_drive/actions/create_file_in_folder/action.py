@@ -34,7 +34,11 @@ class CreateFileInFolder(insightconnect_plugin_runtime.Action):
         media = MediaIoBaseUpload(file_bytes, mime_type, resumable=True)
 
         try:
-            result = self.connection.service.files().create(body=file_metadata, media_body=media, fields="id", supportsAllDrives=True).execute()
+            result = (
+                self.connection.service.files()
+                .create(body=file_metadata, media_body=media, fields="id", supportsAllDrives=True)
+                .execute()
+            )
             return {Output.FILE_ID: result.get("id")}
         except HttpError as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=str(error))

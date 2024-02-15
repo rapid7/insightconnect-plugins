@@ -16,12 +16,20 @@ class MoveFile(insightconnect_plugin_runtime.Action):
         file_id = params.get(Input.FILE_ID)
         folder_id = params.get(Input.FOLDER_ID)
         try:
-            file_parents = self.connection.service.files().get(fileId=file_id, fields="parents", supportsAllDrives=True).execute()
+            file_parents = (
+                self.connection.service.files().get(fileId=file_id, fields="parents", supportsAllDrives=True).execute()
+            )
             file_parents = ",".join(file_parents.get("parents", []))
 
             return {
                 Output.RESULT: self.connection.service.files()
-                .update(fileId=file_id, addParents=folder_id, removeParents=file_parents, fields="id, parents", supportsAllDrives=True)
+                .update(
+                    fileId=file_id,
+                    addParents=folder_id,
+                    removeParents=file_parents,
+                    fields="id, parents",
+                    supportsAllDrives=True,
+                )
                 .execute()
             }
         except HttpError as error:
