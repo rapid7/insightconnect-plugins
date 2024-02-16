@@ -50,7 +50,7 @@ Searches across all new domain registrations worldwide
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |days_back|integer|None|False|Use this parameter when you need to search domains registered up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|0|
-|domain_status|string|None|False|Sets the scope of domain names to search|['new', 'on-hold']|new|
+|domain_status|string|None|False|Sets the scope of domain names to search|["new", "on-hold"]|new|
 |exclude|string|None|False|Domain names with these words will be excluded from the result set. Separate multiple terms with the pipe character|None|auto|
 |query|string|None|True|One or more terms separated by the pipe character|None|domaintools|
   
@@ -587,7 +587,7 @@ Provides a list of domain names that share the same Registrant Information
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |exclude|string|None|False|Domain names with WHOIS records that match these terms will be excluded from the result set. Separate multiple terms with the pipe character|None|Private|Proxy|
 |mode|string|None|False|Quote only lists the size and retail price of the query whiles purchase includes the complete list of domain names|None|purchase|
-|scope|string|None|False|Sets the scope of the report to include only current WHOIS records, or to include both current and historic records|['current', 'historic']|current|
+|scope|string|None|False|Sets the scope of the report to include only current WHOIS records, or to include both current and historic records|["current", "historic"]|current|
 |terms|string|None|True|List of one or more terms to search for in the WHOIS record, separated with the pipe character|None|John Doe|Example Company|
   
 Example input:
