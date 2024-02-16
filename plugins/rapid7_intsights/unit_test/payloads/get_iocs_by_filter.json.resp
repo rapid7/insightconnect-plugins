@@ -5,7 +5,7 @@
       "type": "Domains",
       "severity": "High",
       "score": 100,
-      "whitelisted": "false",
+      "whitelisted": false,
       "firstSeen": "2020-01-01T20:01:27.344Z",
       "lastSeen": "2020-01-30T16:18:51.148Z",
       "lastUpdateDate": "2020-02-21T23:00:51.268Z",

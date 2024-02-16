@@ -137,9 +137,11 @@ class IOCParams:
                 "severity[]": list(self.severity) if self.severity else None,
                 "sourceIds[]": list(self.source_ids) if self.source_ids else None,
                 "killChainPhases[]": list(self.kill_chain_phases) if self.kill_chain_phases else None,
-                "limit": self.limit_range(self.limit, self.OFFSET_MINIMUM, self.OFFSET_MAXIMUM)
-                if self.limit
-                else self.OFFSET_DEFAULT,
+                "limit": (
+                    self.limit_range(self.limit, self.OFFSET_MINIMUM, self.OFFSET_MAXIMUM)
+                    if self.limit
+                    else self.OFFSET_DEFAULT
+                ),
                 "offset": self.offset if self.offset else None,
                 "enterpriseTactics[]": list(self.enterprise_tactics) if self.enterprise_tactics else None,
             }
@@ -261,7 +263,8 @@ class IntSightsAPI:
     def make_json_request(self, method: str, path: str, json_data: dict = None, params: dict = None) -> dict:
         try:
             response = self.make_request(method=method, path=path, json_data=json_data, params=params)
-            if response.status_code == 204:
+
+            if response.status_code == 204 or (response.status_code == 200 and response.text == ""):
                 return {}
 
             json_response = response.json()
@@ -283,26 +286,10 @@ class IntSightsAPI:
                 params=params,
                 json=json_data,
                 auth=HTTPBasicAuth(self.account_id, self.api_key),
+                timeout=60,
             )
-            if response.status_code == 400:
-                raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
-            if response.status_code in [401, 403]:
-                raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
-            if response.status_code == 404:
-                raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
-            if response.status_code == 422:
-                raise PluginException(
-                    cause=Cause.INVALID_DETAILS,
-                    assistance=Assistance.VERIFY_INPUT,
-                    data=response.text,
-                )
-            if 400 <= response.status_code < 500:
-                raise PluginException(
-                    preset=PluginException.Preset.UNKNOWN,
-                    data=response.text,
-                )
-            if response.status_code >= 500:
-                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+
+            self.check_status_codes(response=response)
 
             if 200 <= response.status_code < 300:
                 return response
@@ -310,3 +297,36 @@ class IntSightsAPI:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except requests.exceptions.HTTPError as e:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+
+    def check_status_codes(self, response: requests.Response):
+        if response.status_code == 400:
+            if "StatusNotChanged" in response.text:
+                raise PluginException(
+                    cause="The status for the alert was not changed by this request",
+                    assistance="This alert may already be in the process of a takedown request",
+                    data=response.text,
+                )
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
+        if response.status_code in [401, 403]:
+            if "CantRequestTakedownForAlert" in response.text:
+                raise PluginException(
+                    cause="A takedown cannot be made to this alert",
+                    assistance="Please ensure that a takedown request is allowed for this alert",
+                    data=response.text,
+                )
+            raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
+        if response.status_code == 404:
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
+        if response.status_code == 422:
+            raise PluginException(
+                cause=Cause.INVALID_DETAILS,
+                assistance=Assistance.VERIFY_INPUT,
+                data=response.text,
+            )
+        if 400 <= response.status_code < 500:
+            raise PluginException(
+                preset=PluginException.Preset.UNKNOWN,
+                data=response.text,
+            )
+        if response.status_code >= 500:
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)

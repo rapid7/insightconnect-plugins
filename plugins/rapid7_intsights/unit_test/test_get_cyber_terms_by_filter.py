@@ -5,9 +5,14 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
-from unit_test.util import Util
+from util import Util
 from parameterized import parameterized
 from icon_rapid7_intsights.actions.get_cyber_terms_by_filter import GetCyberTermsByFilter
+from icon_rapid7_intsights.actions.get_cyber_terms_by_filter.schema import (
+    GetCyberTermsByFilterInput,
+    GetCyberTermsByFilterOutput,
+)
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mock_request)
@@ -51,5 +56,7 @@ class TestGetCyberTermsByFilter(TestCase):
         ]
     )
     def test_get_cyber_terms_by_filter(self, mock_request, test_name, input_params, expected):
+        validate(input_params, GetCyberTermsByFilterInput.schema)
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
+        validate(actual, GetCyberTermsByFilterOutput.schema)
