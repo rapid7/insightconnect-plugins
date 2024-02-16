@@ -4,5 +4,4 @@
 domaintools_api==1.0.1
 
 setuptools~=57.0.0
-requests~=2.31.0
 parameterized~=0.9.0

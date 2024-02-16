@@ -1,11 +1,13 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
 from komand_domaintools.actions.whois_history import WhoisHistory
 from komand_domaintools.actions.whois_history.schema import Input
 from util import mock_responder, Util
+
 
 class TestWhoisHistory(TestCase):
     @mock.patch("domaintools.API.account_information", side_effect=mock_responder)

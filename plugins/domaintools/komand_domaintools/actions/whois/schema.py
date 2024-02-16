@@ -23,7 +23,7 @@ class WhoisInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "query": {
       "type": "string",
-      "description": "Domain name or an IP address to perform a whois lookup",
+      "description": "Domain name or an IP address to perform a WHOIS lookup",
       "order": 1
     }
   },

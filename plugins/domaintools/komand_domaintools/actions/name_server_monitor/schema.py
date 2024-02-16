@@ -46,7 +46,7 @@ class NameServerMonitorInput(insightconnect_plugin_runtime.Input):
     },
     "query": {
       "type": "string",
-      "description": "The hostname of the Name Server you wish to query ( i.e. dynect.net )",
+      "description": "The hostname of the Name Server you wish to query",
       "order": 1
     }
   },

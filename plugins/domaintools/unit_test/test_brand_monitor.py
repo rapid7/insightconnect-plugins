@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
 from util import mock_responder, Util
@@ -16,7 +17,7 @@ class TestBrandMonitor(TestCase):
             Input.QUERY: "test.com",
             Input.EXCLUDE: "example.com",
             Input.DOMAIN_STATUS: "new",
-            Input.DAYS_BACK: 1
+            Input.DAYS_BACK: 1,
         }
 
     @mock.patch("domaintools.API.brand_monitor", side_effect=mock_responder)

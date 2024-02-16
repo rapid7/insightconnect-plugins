@@ -29,9 +29,7 @@ class Util:
 
     @staticmethod
     def load_expected(filename: str) -> dict:
-        with open(
-            os.path.join(os.path.dirname(os.path.realpath(__file__)), f"expected/{filename}.json.resp")
-        ) as file:
+        with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), f"expected/{filename}.json.resp")) as file:
             return json.load(file)
 
 
@@ -46,45 +44,63 @@ class MockResponse:
         with open(
             os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp")
         ) as file:
-          return json.load(file)
+            return json.load(file)
 
     def data(self):
         with open(
             os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp")
         ) as file:
-          return json.load(file)
+            return json.load(file)
 
 
 def mock_responder(*args, **kwargs) -> MockResponse:
     if args == ("hosting_history.com",):
         return MockResponse("test_hosting_history")
-    if kwargs == {'page': 1, 'days_back': 1, 'query': 'ip_monitor.com'}:
+    if kwargs == {"page": 1, "days_back": 1, "query": "ip_monitor.com"}:
         return MockResponse("test_ip_monitor")
-    if args == ('example.com',):
+    if args == ("example.com",):
         return MockResponse("test_domain_profile")
-    if kwargs == {'query': 'name_server_monitor.com', 'page': 1, 'days_back': 0}:
+    if kwargs == {"query": "name_server_monitor.com", "page": 1, "days_back": 0}:
         return MockResponse("test_name_server_monitor")
-    if args == ('parsed_whois.com',):
+    if args == ("parsed_whois.com",):
         return MockResponse("test_parsed_whois")
-    if kwargs == {'query': 'registrant_monitor.com', 'days_back': 1, 'exclude': 'test.com'}:
+    if kwargs == {"query": "registrant_monitor.com", "days_back": 1, "exclude": "test.com"}:
         return MockResponse("test_registrant_monitor")
-    if args == ('reputation.com', True):
+    if args == ("reputation.com", True):
         return MockResponse("test_reputation")
-    if kwargs == {'domain': 'reverse_ip.com', 'limit': 1}:
+    if kwargs == {"domain": "reverse_ip.com", "limit": 1}:
         return MockResponse("test_reverse_ip")
-    if kwargs == {'query': 'reverse_name_server.com', 'limit': 1}:
+    if kwargs == {"query": "reverse_name_server.com", "limit": 1}:
         return MockResponse("test_reverse_name_server")
-    if kwargs == {'page': 1, 'ip': '10.10.10.10', 'server': 'whois.arin.net', 'country': 'CA', 'include_total_count': True}:
+    if kwargs == {
+        "page": 1,
+        "ip": "10.10.10.10",
+        "server": "whois.arin.net",
+        "country": "CA",
+        "include_total_count": True,
+    }:
         return MockResponse("test_reverse_ip_whois")
-    if args == ('whois.com',):
+    if args == ("whois.com",):
         return MockResponse("test_whois")
-    if args == ('whois_history.com',):
+    if args == ("whois_history.com",):
         return MockResponse("test_whois_history")
     if kwargs == {} and args == ():
         return MockResponse("account_information")
-    if kwargs == {'query': 'example.com', 'exclude_query': 'test.com', 'max_length': 25, 'min_length': 1, 'has_hyphen': False, 'has_number': False, 'active_only': False, 'deleted_only': False, 'anchor_left': False, 'anchor_right': False, 'page': 1}:
+    if kwargs == {
+        "query": "example.com",
+        "exclude_query": "test.com",
+        "max_length": 25,
+        "min_length": 1,
+        "has_hyphen": False,
+        "has_number": False,
+        "active_only": False,
+        "deleted_only": False,
+        "anchor_left": False,
+        "anchor_right": False,
+        "page": 1,
+    }:
         return MockResponse("test_domain_search")
-    if kwargs == {'query': 'test.com', 'exclude': 'example.com', 'domain_status': 'new', 'days_back': 1}:
+    if kwargs == {"query": "test.com", "exclude": "example.com", "domain_status": "new", "days_back": 1}:
         return MockResponse("test_brand_monitor")
     if kwargs.get("query", "") == "test.com":
         return MockResponse("test_reverse_whois")

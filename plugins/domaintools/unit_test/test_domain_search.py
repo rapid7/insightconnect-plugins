@@ -1,5 +1,6 @@
 import sys
 import os
+
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
@@ -23,7 +24,7 @@ class TestDomainSearch(TestCase):
             Input.DELETED_ONLY: False,
             Input.ANCHOR_LEFT: False,
             Input.ANCHOR_RIGHT: False,
-            Input.PAGE: 1
+            Input.PAGE: 1,
         }
 
     @mock.patch("domaintools.API.domain_search", side_effect=mock_responder)

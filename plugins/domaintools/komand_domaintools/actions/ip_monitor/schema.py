@@ -46,7 +46,7 @@ class IpMonitorInput(insightconnect_plugin_runtime.Input):
     },
     "query": {
       "type": "string",
-      "description": "The IP Address you wish to query (i.e. 65.55.53.233)",
+      "description": "The IP Address you wish to query",
       "order": 1
     }
   },

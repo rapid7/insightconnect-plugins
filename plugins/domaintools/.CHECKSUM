@@ -1,7 +1,7 @@
 {
-	"spec": "a7d136a43862450f44546fe92d6d5abb",
-	"manifest": "b15ecf8c519f96b320ac09cc29a293a5",
-	"setup": "4d1648d231ea02579f86965fefee5c88",
+	"spec": "b7b4fd6f4cdb28d264bc6f3c37e8b5a9",
+	"manifest": "3a2191064e2a1ed2b9919a85f9561451",
+	"setup": "c94a701c262db6a4aa5af91da91019c1",
 	"schemas": [
 		{
 			"identifier": "brand_monitor/schema.py",
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "domain_search/schema.py",
-			"hash": "bb7d05f86e3d413a4ed4f4a0c4db9d5f"
+			"hash": "6a0072c24c8f806564bcc96536b2c997"
 		},
 		{
 			"identifier": "hosting_history/schema.py",
@@ -21,11 +21,11 @@
 		},
 		{
 			"identifier": "ip_monitor/schema.py",
-			"hash": "22e7710b8d007018d6aaf8048e931398"
+			"hash": "e017cf1f0ac28a6bf74c15f79b5b05b7"
 		},
 		{
 			"identifier": "name_server_monitor/schema.py",
-			"hash": "d08bb05f4dbe61a198daa8cf4870ac4a"
+			"hash": "3b333f41795c5348b4d6e6ec5a7dd8a7"
 		},
 		{
 			"identifier": "parsed_whois/schema.py",
@@ -57,7 +57,7 @@
 		},
 		{
 			"identifier": "whois/schema.py",
-			"hash": "522dedebdb02f0fdd3aa1562d8af3293"
+			"hash": "91a587da208ec9e7138efb395119e9df"
 		},
 		{
 			"identifier": "whois_history/schema.py",

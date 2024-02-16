@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
 from komand_domaintools.actions.name_server_monitor import NameServerMonitor
@@ -12,11 +13,7 @@ class TestNameServerMonitor(TestCase):
     @mock.patch("domaintools.API.account_information", side_effect=mock_responder)
     def setUp(self, mock_post) -> None:
         self.action = Util.default_connector(NameServerMonitor())
-        self.params = {
-            Input.QUERY: "name_server_monitor.com",
-            Input.PAGE: 1,
-            Input.DAYS_BACK: 0
-        }
+        self.params = {Input.QUERY: "name_server_monitor.com", Input.PAGE: 1, Input.DAYS_BACK: 0}
 
     @mock.patch("domaintools.API.name_server_monitor", side_effect=mock_responder)
     def test_name_server_monitor(self, mock_request):

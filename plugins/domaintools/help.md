@@ -1,18 +1,21 @@
 # Description
-
-Domain name search tool that allows a wildcard search, monitoring of WHOIS record changes and history caching, as well as Reverse IP queries
+[DomainTools](https://www.domaintools.com) data and products work in harmony to enable security teams to start getting ahead of attacks, gain context and visibility into potential threats, and lower the skills barrier. The DomainTools plugin for InsightConnect allows for the automation of domain lookups and retrieval of threat information related to the domain.
+This plugin utilizes the [DomainTools Python API](https://github.com/domaintools/python_api).
 
 # Key Features
-  
-*This plugin does not contain any key features.*
+
+* Whois
+* WHOIS
+* Domain search
+* Brand monitor
 
 # Requirements
-  
-*This plugin does not contain any requirements.*
+
+* Requires an API Key from DomainTools
 
 # Supported Product Versions
-  
-*This plugin does not contain any supported product versions.*
+
+* DomainTools_api 1.0.1
 
 # Documentation
 
@@ -22,17 +25,15 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_key|credential_secret_key|None|True|Enter the API key|None|None|
-|username|string|None|True|Enter the API username|None|None|
+|api_key|credential_secret_key|None|True|Enter the API key|None|9de50-69c5a-fe602-b2ea0-a04b6|
+|username|string|None|True|Enter the API username|None|username|
   
 Example input:
 
 ```
 {
-  "api_key": {
-    "secretKey": ""
-  },
-  "username": ""
+  "api_key": "9de50-69c5a-fe602-b2ea0-a04b6",
+  "username": "username"
 }
 ```
 
@@ -49,10 +50,10 @@ Searches across all new domain registrations worldwide
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|days_back|integer|None|False|Use this parameter when you need to search domains registered up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|None|
-|domain_status|string|None|False|Sets the scope of domain names to search|['new', 'on-hold']|None|
-|exclude|string|None|False|Domain names with these words will be excluded from the result set. Separate multiple terms with the pipe character|None|None|
-|query|string|None|True|One or more terms separated by the pipe character|None|None|
+|days_back|integer|None|False|Use this parameter when you need to search domains registered up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|0|
+|domain_status|string|None|False|Sets the scope of domain names to search|['new', 'on-hold']|new|
+|exclude|string|None|False|Domain names with these words will be excluded from the result set. Separate multiple terms with the pipe character|None|auto|
+|query|string|None|True|One or more terms separated by the pipe character|None|domaintools|
   
 Example input:
 
@@ -60,8 +61,8 @@ Example input:
 {
   "days_back": 0,
   "domain_status": "new",
-  "exclude": "",
-  "query": ""
+  "exclude": "auto",
+  "query": "domaintools"
 }
 ```
 
@@ -69,30 +70,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|brand_monitor_response|False|Response|None|
+|response|brand_monitor_response|False|Response|{"query: "domaintools", "exclude": [], "new": true, "total": 0, "alerts": [], "on-hold": true}|
   
 Example output:
 
 ```
 {
-  "response": {
-    "alerts": [
-      {
-        "domain": "",
-        "status": {}
-      }
-    ],
-    "date": {},
-    "exclude": [
-      {}
-    ],
-    "limit": 0,
-    "new": "true",
-    "on-hold": {},
-    "query": {},
-    "total": {},
-    "utf8": {}
-  }
+  "response": "{\"query: \"domaintools\", \"exclude\": [], \"new\": true, \"total\": 0, \"alerts\": [], \"on-hold\": true}"
 }
 ```
 
@@ -104,13 +88,13 @@ Provides basic domain name registration details and a preview of additional data
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain|string|None|True|Domain name you wish to query|None|None|
+|domain|string|None|True|Domain name you wish to query|None|example.com|
   
 Example input:
 
 ```
 {
-  "domain": ""
+  "domain": "example.com"
 }
 ```
 
@@ -118,70 +102,39 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|domain_profile_response|False|Response|None|
+|response|domain_profile_response|False|Response|{"registrant": {"name": "DOMAINTOOLS, LLC", "domains": 258, "product_url": "https://reversewhois.domaintools.com/?all[]=DOMAINTOOLS%2C+LLC&none[]="}, "server": {"ip_address": "199.30.228.112", "other_domains": 2, "product_url": "https://reverseip.domaintools.com/search/?q=domaintools.com"}, "registration": {"created": "1998-08-02", "expires": "2017-08-01", "updated": "2014-10-18", "registrar": "ENOM, INC.", "statuses": ["clientTransferProhibited"]}, "name_servers": [], "history": {}, "seo": {"score": 77, "product_url": "http://research.domaintools.com/seo-browser/?domain=domaintools.com"}, "website_data": {}}|
   
 Example output:
 
 ```
 {
   "response": {
-    "history": {
-      "IP Address": {
-        "events": 0,
-        "product_url": "",
-        "timespan_in_years": {}
-      },
-      "name_server": {},
-      "registrar": {
-        "abuse_contact_email": {},
-        "abuse_contact_phone": {},
-        "iana_id": {},
-        "name": {},
-        "url": {},
-        "whois_server": {}
-      },
-      "whois": {
-        "earliest_event": {},
-        "product_url": {},
-        "records": {}
-      }
-    },
-    "name_servers": [
-      {
-        "product_url": {},
-        "server": {}
-      }
-    ],
+    "history": {},
+    "name_servers": [],
     "registrant": {
-      "domains": {},
-      "name": {},
-      "product_url": {}
+      "domains": 258,
+      "name": "DOMAINTOOLS, LLC",
+      "product_url": "https://reversewhois.domaintools.com/?all[]=DOMAINTOOLS%2C+LLC&none[]="
     },
     "registration": {
-      "created": {},
-      "expires": {},
-      "registrar": {},
+      "created": "1998-08-02",
+      "expires": "2017-08-01",
+      "registrar": "ENOM, INC.",
       "statuses": [
-        {}
+        "clientTransferProhibited"
       ],
-      "updated": {}
+      "updated": "2014-10-18"
     },
     "seo": {
-      "product_url": {},
-      "score": {}
+      "product_url": "http://research.domaintools.com/seo-browser/?domain=domaintools.com",
+      "score": 77
     },
     "server": {
-      "IP Address": {},
-      "other_domains": {},
-      "product_url": {}
+      "ip_address": "199.30.228.112",
+      "other_domains": 2,
+      "product_url": "https://reverseip.domaintools.com/search/?q=domaintools.com"
     },
-    "website_data": {
-      "meta": {},
-      "product_url": {},
-      "response_code": {},
-      "server": {},
-      "title": {}
-    }
+    "website_data": {}
   }
 }
 ```
@@ -194,17 +147,17 @@ Searches for domain names that match your specific search string
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|active_only|boolean|False|False|Return only domains currently registered|None|None|
-|anchor_left|boolean|False|False|Return only domains that start with the query term|None|None|
-|anchor_right|boolean|False|False|Return only domains that end with the query term|None|None|
-|deleted_only|boolean|False|False|Return only domains previously registered but not currently registered|None|None|
-|exclude_query|string|None|False|Terms to exclude from matching — each term in the query string must be at least three characters long|None|None|
-|has_hyphen|boolean|True|False|Return results with hyphens in the domain name|None|None|
-|has_number|boolean|True|False|Return results with numbers in the domain name|None|None|
-|max_length|integer|25|False|Limit the maximum domain character count|None|None|
-|min_length|integer|1|False|Limit the minimum domain character count|None|None|
-|page|integer|1|False|If the result set is larger than 1000 records for a given day, request additional pages with this parameter|None|None|
-|query|string|None|True|Query string — each term in the query string must be at least three characters long|None|None|
+|active_only|boolean|False|False|Return only domains currently registered|None|False|
+|anchor_left|boolean|False|False|Return only domains that start with the query term|None|default|
+|anchor_right|boolean|False|False|Return only domains that end with the query term|None|False|
+|deleted_only|boolean|False|False|Return only domains previously registered but not currently registered|None|default|
+|exclude_query|string|None|False|Terms to exclude from matching, each term in the query string must be at least three characters long|None|test|
+|has_hyphen|boolean|True|False|Return results with hyphens in the domain name|None|True|
+|has_number|boolean|True|False|Return results with numbers in the domain name|None|True|
+|max_length|integer|25|False|Limit the maximum domain character count|None|25|
+|min_length|integer|1|False|Limit the minimum domain character count|None|1|
+|page|integer|1|False|If the result set is larger than 1000 records for a given day, request additional pages with this parameter|None|1|
+|query|string|None|True|Query string, each term in the query string must be at least three characters long|None|domaintools|
   
 Example input:
 
@@ -214,13 +167,13 @@ Example input:
   "anchor_left": false,
   "anchor_right": false,
   "deleted_only": false,
-  "exclude_query": "",
+  "exclude_query": "test",
   "has_hyphen": true,
   "has_number": true,
   "max_length": 25,
   "min_length": 1,
   "page": 1,
-  "query": ""
+  "query": "domaintools"
 }
 ```
 
@@ -228,30 +181,15 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|domain_search_response|False|Response|None|
+|response|domain_search_response|False|Response|{"query_info": {}, "results": []}|
   
 Example output:
 
 ```
 {
   "response": {
-    "query_info": {
-      "active_only": "true",
-      "anchor_left": {},
-      "anchor_right": {},
-      "deleted_only": {},
-      "exclude_query": "",
-      "has_hyphen": {},
-      "has_number": {},
-      "limit": 0,
-      "max_length": {},
-      "min_length": {},
-      "page": {},
-      "total_results": {}
-    },
-    "results": [
-      {}
-    ]
+    "query_info": {},
+    "results": []
   }
 }
 ```
@@ -264,13 +202,13 @@ Provides a list of changes that have occurred in a Domain Name\'s registrar, IP 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain|string|None|True|Domain name you wish to query|None|None|
+|domain|string|None|True|Domain name you wish to query|None|example.com|
   
 Example input:
 
 ```
 {
-  "domain": ""
+  "domain": "example.com"
 }
 ```
 
@@ -278,38 +216,17 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|hosting_history_response|False|Response|None|
+|response|hosting_history_response|False|Response|{"domain_name": "example.com", "ip_history": [], "nameserver_history": [], "registrar_history": []}|
   
 Example output:
 
 ```
 {
   "response": {
-    "IP History": [
-      {
-        "Post IP": {},
-        "Pre IP": {},
-        "action": {},
-        "action_in_words": {},
-        "actiondate": {},
-        "domain": {}
-      }
-    ],
-    "domain_name": "",
-    "nameserver_history": [
-      {}
-    ],
-    "registrar_history": [
-      {
-        "date_created": {},
-        "date_expires": {},
-        "date_lastchecked": {},
-        "date_updated": {},
-        "domain": {},
-        "registrar": {},
-        "registrartag": {}
-      }
-    ]
+    "domain_name": "example.com",
+    "ip_history": [],
+    "nameserver_history": [],
+    "registrar_history": []
   }
 }
 ```
@@ -322,9 +239,9 @@ Searches the daily activity of all our monitored TLDs on any given IP address
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|days_back|integer|0|False|Use this parameter when you need to search domain changes up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|None|
-|page|integer|1|False|If the result set is larger than 1000 records for a given day, request additional pages with this parameter|None|None|
-|query|string|None|True|The IP Address you wish to query (i.e. 65.55.53.233)|None|None|
+|days_back|integer|0|False|Use this parameter when you need to search domain changes up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|0|
+|page|integer|1|False|If the result set is larger than 1000 records for a given day, request additional pages with this parameter|None|1|
+|query|string|None|True|The IP Address you wish to query|None|65.55.53.233|
   
 Example input:
 
@@ -332,7 +249,7 @@ Example input:
 {
   "days_back": 0,
   "page": 1,
-  "query": ""
+  "query": "65.55.53.233"
 }
 ```
 
@@ -340,22 +257,19 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|ip_monitor_response|False|Response|None|
+|response|ip_monitor_response|False|Response|{"alerts": [], "date": "2013-11-18", "ip_address": "65.55.53.233", "page": 1, "page_count": 0, "total": 0}|
   
 Example output:
 
 ```
 {
   "response": {
-    "alerts": [
-      {}
-    ],
-    "date": "",
-    "ip_address": {},
-    "limit": 0,
-    "page": {},
-    "page_count": {},
-    "total": {}
+    "alerts": [],
+    "date": "2013-11-18",
+    "ip_address": "65.55.53.233",
+    "page": 1,
+    "page_count": 0,
+    "total": 0
   }
 }
 ```
@@ -368,9 +282,9 @@ Searches the daily activity of all our monitored TLDs on any given name server.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|days_back|int|0|False|Use this parameter search domain changes up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|None|
-|page|integer|1|False|If the result set is larger than 1000 records for a given day, request additional pages with this parameter|None|None|
-|query|string|None|True|The hostname of the Name Server you wish to query ( i.e. dynect.net )|None|None|
+|days_back|int|0|False|Use this parameter search domain changes up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|0|
+|page|integer|1|False|If the result set is larger than 1000 records for a given day, request additional pages with this parameter|None|1|
+|query|string|None|True|The hostname of the Name Server you wish to query|None|DNSPOD.NET|
   
 Example input:
 
@@ -378,7 +292,7 @@ Example input:
 {
   "days_back": 0,
   "page": 1,
-  "query": ""
+  "query": "DNSPOD.NET"
 }
 ```
 
@@ -386,27 +300,20 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|name_server_monitor_response|False|Response|None|
+|response|name_server_monitor_response|False|Response|{"alerts": [], "date": "2013-11-20", "limit": 1000, "name_server": "DNSPOD.NET", "page": 1, "page_count": 0, "total": 0}|
   
 Example output:
 
 ```
 {
   "response": {
-    "alerts": [
-      {
-        "action": "",
-        "domain": {},
-        "new_name_server": {},
-        "old_name_server": {}
-      }
-    ],
-    "date": {},
-    "limit": 0,
-    "name_server": {},
-    "page": {},
-    "page_count": {},
-    "total": {}
+    "alerts": [],
+    "date": "2013-11-20",
+    "limit": 1000,
+    "name_server": "DNSPOD.NET",
+    "page": 1,
+    "page_count": 0,
+    "total": 0
   }
 }
 ```
@@ -419,13 +326,13 @@ Provides parsed information extracted from the raw WHOIS record
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain|string|None|True|Domain name you wish to query|None|None|
+|domain|string|None|True|Domain name you wish to query|None|example.com|
   
 Example input:
 
 ```
 {
-  "domain": ""
+  "domain": "example.com"
 }
 ```
 
@@ -433,7 +340,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|parsed_whois_response|False|Response|None|
+|response|parsed_whois_response|False|Response|{"registrant": "DomainTools, LLC", "registration": {"created": "1998-08-02", "expires": "2014-08-01", "updated": "2014-06-27", "registrar": "NAME TRANCE LLC", "statuses": ["clientTransferProhibited"]}, "name_servers": ["NS1.P09.DYNECT.NET", "NS2.P09.DYNECT.NET", "NS3.P09.DYNECT.NET", "NS4.P09.DYNECT.NET"], "parsed_whois": {}, "whois": {}}|
   
 Example output:
 
@@ -441,59 +348,23 @@ Example output:
 {
   "response": {
     "name_servers": [
-      ""
+      "NS1.P09.DYNECT.NET",
+      "NS2.P09.DYNECT.NET",
+      "NS3.P09.DYNECT.NET",
+      "NS4.P09.DYNECT.NET"
     ],
-    "parsed_whois": {
-      "contacts": {
-        "admin": {
-          "city": {},
-          "country": {},
-          "email": {},
-          "fax": {},
-          "name": {},
-          "org": {},
-          "phone": {},
-          "postal": {},
-          "state": {},
-          "street": {}
-        },
-        "billing": {},
-        "registrant": {},
-        "tech": {}
-      },
-      "created_date": {},
-      "domain": {},
-      "expired_date": {},
-      "name_servers": {},
-      "other_properties": {
-        "dnssec": {},
-        "registry_id": {}
-      },
-      "registrar": {
-        "abuse_contact_email": {},
-        "abuse_contact_phone": {},
-        "iana_id": {},
-        "name": {},
-        "url": {},
-        "whois_server": {}
-      },
-      "statuses": {},
-      "updated_date": {}
-    },
-    "record_source": {},
-    "registrant": {},
+    "parsed_whois": {},
+    "registrant": "DomainTools, LLC",
     "registration": {
-      "created": {},
-      "expires": {},
-      "registrar": {},
-      "statuses": {},
-      "updated": {}
+      "created": "1998-08-02",
+      "expires": "2014-08-01",
+      "registrar": "NAME TRANCE LLC",
+      "statuses": [
+        "clientTransferProhibited"
+      ],
+      "updated": "2014-06-27"
     },
-    "whois": {
-      "earliest_event": {},
-      "product_url": {},
-      "records": 0
-    }
+    "whois": {}
   }
 }
 ```
@@ -506,19 +377,19 @@ Searches the ownership (WHOIS) records of domain names for specific search terms
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|days_back|integer|None|False|Use this parameter in exceptional circumstances where you need to search domains registered up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|None|
-|exclude|string|None|False|WHOIS records with these words will be excluded from the result set. Separate multiple terms with the pipe character|None|None|
-|limit|integer|None|False|Limit the number of matched domain names that are returned in your result set|None|None|
-|query|string|None|True|One or more terms separated by the pipe character|None|None|
+|days_back|integer|None|False|Use this parameter in exceptional circumstances where you need to search domains registered up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|0|
+|exclude|string|None|False|WHOIS records with these words will be excluded from the result set. Separate multiple terms with the pipe character|None|Private|Proxy|
+|limit|integer|None|False|Limit the number of matched domain names that are returned in your result set|None|100|
+|query|string|None|True|One or more terms separated by the pipe character|None|John Doe|Example Company|
   
 Example input:
 
 ```
 {
   "days_back": 0,
-  "exclude": "",
-  "limit": 0,
-  "query": ""
+  "exclude": "Private|Proxy",
+  "limit": 100,
+  "query": "John Doe|Example Company"
 }
 ```
 
@@ -526,27 +397,18 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|registrant_monitor_response|False|Response|None|
+|response|registrant_monitor_response|False|Response|{"query": "DomainTools", "limit": 500, "total": 2, "date": "2011-03-02", "alerts": []}|
   
 Example output:
 
 ```
 {
   "response": {
-    "alerts": [
-      {
-        "created": "",
-        "current_owner": {},
-        "domain": {},
-        "last_owner": {},
-        "match_type": {},
-        "modified": {}
-      }
-    ],
-    "date": {},
-    "limit": 0,
-    "query": {},
-    "total": {}
+    "alerts": [],
+    "date": "2011-03-02",
+    "limit": 500,
+    "query": "DomainTools",
+    "total": 2
   }
 }
 ```
@@ -559,14 +421,14 @@ Retrieves reputation score of specified domain name
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain|string|None|True|Input domain for which the risk score is desired|None|None|
-|include_reasons|boolean|False|False|Return a list of reasons for the risk score determination|None|None|
+|domain|string|None|True|Input domain for which the risk score is desired|None|example.com|
+|include_reasons|boolean|False|False|Return a list of reasons for the risk score determination|None|False|
   
 Example input:
 
 ```
 {
-  "domain": "",
+  "domain": "example.com",
   "include_reasons": false
 }
 ```
@@ -575,18 +437,18 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|reputation_response|False|Response|None|
+|response|reputation_response|False|Response|{"domain": "domaintools.com", "risk_score": 21.13, "reasons": ["registrant"]}|
   
 Example output:
 
 ```
 {
   "response": {
-    "domain": "",
+    "domain": "domaintools.com",
     "reasons": [
-      {}
+      "registrant"
     ],
-    "risk_score": 0
+    "risk_score": 21.13
   }
 }
 ```
@@ -599,15 +461,15 @@ Provides a list of domain names that share the same Internet host (i.e. the same
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain|string|None|True|Domain name you wish to query|None|None|
-|limit|integer|None|False|Limits the size of the domain list than can appear in a response|None|None|
+|domain|string|None|True|Domain name you wish to query|None|example.com|
+|limit|integer|None|False|Limits the size of the domain list than can appear in a response|None|100|
   
 Example input:
 
 ```
 {
-  "domain": "",
-  "limit": 0
+  "domain": "example.com",
+  "limit": 100
 }
 ```
 
@@ -615,22 +477,14 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|reverse_ip_response|False|Response|None|
+|response|reverse_ip_response|False|Response|{"ip_addresses": []}|
   
 Example output:
 
 ```
 {
   "response": {
-    "IP Addresses": [
-      {
-        "IP Address": {},
-        "domain_count": 0,
-        "domain_names": [
-          ""
-        ]
-      }
-    ]
+    "ip_addresses": []
   }
 }
 ```
@@ -643,21 +497,21 @@ Provides a list of IP network ranges with WHOIS records that match a specific qu
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|country|string|None|False|Limits results to IP addresses allocated to an entity with a particular country|None|None|
-|include_total_count|boolean|False|False|Returns the total number of results for a query|None|None|
-|ip|string|None|False|Required for single IP result|None|None|
-|page|string|None|False|Providing the page number allows access to additional pages of data|None|None|
-|server|string|None|False|Limits results to ranges from a particular WHOIS server|None|None|
+|country|string|None|False|Limits results to IP addresses allocated to an entity with a particular country|None|US|
+|include_total_count|boolean|False|False|Returns the total number of results for a query|None|False|
+|ip|string|None|False|Required for single IP result|None|0.0.0.0|
+|page|string|None|False|Providing the page number allows access to additional pages of data|None|2|
+|server|string|None|False|Limits results to ranges from a particular WHOIS server|None|whois.arin.net|
   
 Example input:
 
 ```
 {
-  "country": "",
+  "country": "US",
   "include_total_count": false,
-  "ip": "",
-  "page": "",
-  "server": ""
+  "ip": "0.0.0.0",
+  "page": 2,
+  "server": "whois.arin.net"
 }
 ```
 
@@ -665,24 +519,18 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|reverse_ip_whois_response|False|Response|None|
+|response|reverse_ip_whois_response|False|Response|{"has_more_pages": true, "page": 1, "total_count": 1105, "record_count": 1000, "records": []}|
   
 Example output:
 
 ```
 {
   "response": {
-    "IP From": {},
-    "IP From Alloc": {},
-    "IP To": {},
-    "IP To Alloc": {},
-    "Record IP": {},
-    "country": "",
-    "organization": {},
-    "range": {},
-    "record_date": {},
-    "server": {},
-    "whois_record": {}
+    "has_more_pages": true,
+    "page": 1,
+    "record_count": 1000,
+    "records": [],
+    "total_count": 1105
   }
 }
 ```
@@ -695,15 +543,15 @@ Provides a list of domain names that share the same primary or secondary name se
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain|string|None|True|Domain name you wish to query|None|None|
-|limit|integer|None|False|Limits the size of the domain list than can appear in a response|None|None|
+|domain|string|None|True|Domain name you wish to query|None|example.com|
+|limit|integer|None|False|Limits the size of the domain list than can appear in a response|None|100|
   
 Example input:
 
 ```
 {
-  "domain": "",
-  "limit": 0
+  "domain": "example.com",
+  "limit": 100
 }
 ```
 
@@ -711,7 +559,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|reverse_name_server_response|False|Response|None|
+|response|reverse_name_server_response|False|Response|{"name_server": {"hostname": "domaintools.net", "primary": 159, "secondary": 0, "total": 159}, "primary_domains": [], "secondary_domains": []}|
   
 Example output:
 
@@ -719,17 +567,13 @@ Example output:
 {
   "response": {
     "name_server": {
-      "hostname": "",
-      "primary": 0,
-      "secondary": {},
-      "total": {}
+      "hostname": "domaintools.net",
+      "primary": 159,
+      "secondary": 0,
+      "total": 159
     },
-    "primary_domains": [
-      {}
-    ],
-    "secondary_domains": [
-      {}
-    ]
+    "primary_domains": [],
+    "secondary_domains": []
   }
 }
 ```
@@ -742,19 +586,19 @@ Provides a list of domain names that share the same Registrant Information
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|exclude|string|None|False|Domain names with WHOIS records that match these terms will be excluded from the result set. Separate multiple terms with the pipe character|None|None|
-|mode|string|None|False|Quote only lists the size and retail price of the query whiles purchase includes the complete list of domain names|None|None|
-|scope|string|None|False|Sets the scope of the report to include only current WHOIS records, or to include both current and historic records|['current', 'historic']|None|
-|terms|string|None|True|List of one or more terms to search for in the WHOIS record, separated with the pipe character|None|None|
+|exclude|string|None|False|Domain names with WHOIS records that match these terms will be excluded from the result set. Separate multiple terms with the pipe character|None|Private|Proxy|
+|mode|string|None|False|Quote only lists the size and retail price of the query whiles purchase includes the complete list of domain names|None|purchase|
+|scope|string|None|False|Sets the scope of the report to include only current WHOIS records, or to include both current and historic records|['current', 'historic']|current|
+|terms|string|None|True|List of one or more terms to search for in the WHOIS record, separated with the pipe character|None|John Doe|Example Company|
   
 Example input:
 
 ```
 {
-  "exclude": "",
-  "mode": "",
+  "exclude": "Private|Proxy",
+  "mode": "purchase",
   "scope": "current",
-  "terms": ""
+  "terms": "John Doe|Example Company"
 }
 ```
 
@@ -762,7 +606,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|reverse_whois_response|False|Response|None|
+|response|reverse_whois_response|False|Response|{"domain_count": {"current": 310, "historic": 412}, "domains": [], "report_price": {"current": 299, "historic": 299}}|
   
 Example output:
 
@@ -770,11 +614,14 @@ Example output:
 {
   "response": {
     "domain_count": {
-      "current": 0,
-      "historic": {}
+      "current": 310,
+      "historic": 412
     },
-    "report_cost": {},
-    "report_price": {}
+    "domains": [],
+    "report_price": {
+      "current": 299,
+      "historic": 299
+    }
   }
 }
 ```
@@ -787,13 +634,13 @@ Provides the ownership record for a domain name or IP address with basic registr
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|query|string|None|True|Domain name or an IP address to perform a whois lookup|None|None|
+|query|string|None|True|Domain name or an IP address to perform a WHOIS lookup|None|example.com|
   
 Example input:
 
 ```
 {
-  "query": ""
+  "query": "example.com"
 }
 ```
 
@@ -801,7 +648,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|whois_response|False|Response|None|
+|response|whois_response|False|Response|{"registrant": "DomainTools, LLC", "registration": {"created": "1998-08-02", "expires": "2027-08-01", "updated": "2020-01-09", "registrar": "eNon, LLC", "statuses": ["clientTransferProhibited"]}, "name_servers": ["NS1.P09.DYNECT.NET", "NS2.P09.DYNECT.NET", "NS3.P09.DYNECT.NET", "NS4.P09.DYNECT.NET"], "whois": {}, "record_source": "domaintools.com"}|
   
 Example output:
 
@@ -809,21 +656,23 @@ Example output:
 {
   "response": {
     "name_servers": [
-      ""
+      "NS1.P09.DYNECT.NET",
+      "NS2.P09.DYNECT.NET",
+      "NS3.P09.DYNECT.NET",
+      "NS4.P09.DYNECT.NET"
     ],
-    "record_source": {},
-    "registrant": {},
+    "record_source": "domaintools.com",
+    "registrant": "DomainTools, LLC",
     "registration": {
-      "created": {},
-      "expires": {},
-      "registrar": {},
-      "statuses": {},
-      "updated": {}
+      "created": "1998-08-02",
+      "expires": "2027-08-01",
+      "registrar": "eNon, LLC",
+      "statuses": [
+        "clientTransferProhibited"
+      ],
+      "updated": "2020-01-09"
     },
-    "whois": {
-      "date": {},
-      "record": {}
-    }
+    "whois": {}
   }
 }
 ```
@@ -836,13 +685,13 @@ Provides a list of historic WHOIS records for a domain name
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain|string|None|True|Domain name you wish to query|None|None|
+|domain|string|None|True|Domain name you wish to query|None|example.com|
   
 Example input:
 
 ```
 {
-  "domain": ""
+  "domain": "example.com"
 }
 ```
 
@@ -850,35 +699,15 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|whois_history_response|False|Response|None|
+|response|whois_history_response|False|Response|{"record_count": 744, "history": []}|
   
 Example output:
 
 ```
 {
   "response": {
-    "history": [
-      {
-        "date": "",
-        "is_private": 0,
-        "whois": {
-          "name_servers": [
-            {}
-          ],
-          "record": {},
-          "registrant": {},
-          "registration": {
-            "created": {},
-            "expires": {},
-            "registrar": {},
-            "statuses": {},
-            "updated": {}
-          },
-          "server": {}
-        }
-      }
-    ],
-    "record_count": {}
+    "history": [],
+    "record_count": 744
   }
 }
 ```
@@ -1297,15 +1126,23 @@ Example output:
 
 ## Troubleshooting
   
+  
 *There is no troubleshooting for this plugin.*
 
 # Version History
-  
-*This plugin does not contain a version history.*
+
+* 2.0.0 - Update vulnerability and to latest SDK version | Fix import issues on all actions | Change `Days Back` input of `Name Server Monitor` to type `int` | Remove `Query` input from `Reverse IP WHOIS` | Add `Server` to `WHOIS History` output `Response` | Add `Reasons` to `Reputation` output `Response` | Change `Meta` to type `List` for `Domain Profile` output `Response`
+* 1.0.1 - New spec and help.md format for the Extension Library
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types | Bug fix logging credentials
+* 0.1.1 - SSL bug fix in SDK
+* 0.1.0 - Initial plugin
 
 # Links
 
+* [DomainTools](https://www.domaintools.com)
 
 ## References
-  
-*This plugin does not contain any references.*
+
+* [DomainTools](https://www.domaintools.com)
+* [DomainTools API](https://www.domaintools.com/resources/api-documentation/)
+* [DomainTools Python API](https://github.com/domaintools/python_api)

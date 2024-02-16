@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
 from komand_domaintools.actions.reverse_whois import ReverseWhois
@@ -18,7 +19,7 @@ class TestReverseWhois(TestCase):
             Input.TERMS: "test.com",
             Input.EXCLUDE: "example.com",
             Input.SCOPE: "historic",
-            Input.MODE: "quote"
+            Input.MODE: "quote",
         }
 
     @mock.patch("domaintools.API.reverse_whois", side_effect=mock_responder)

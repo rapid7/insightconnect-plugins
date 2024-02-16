@@ -57,7 +57,7 @@ class DomainSearchInput(insightconnect_plugin_runtime.Input):
     },
     "exclude_query": {
       "type": "string",
-      "description": "Terms to exclude from matching \u2014 each term in the query string must be at least three characters long",
+      "description": "Terms to exclude from matching, each term in the query string must be at least three characters long",
       "order": 2
     },
     "has_hyphen": {
@@ -92,7 +92,7 @@ class DomainSearchInput(insightconnect_plugin_runtime.Input):
     },
     "query": {
       "type": "string",
-      "description": "Query string \u2014 each term in the query string must be at least three characters long",
+      "description": "Query string, each term in the query string must be at least three characters long",
       "order": 1
     }
   },

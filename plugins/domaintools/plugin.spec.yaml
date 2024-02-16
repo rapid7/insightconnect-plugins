@@ -5,11 +5,16 @@ name: domaintools
 title: DomainTools
 vendor: rapid7
 support: community
+supported_versions: ["DomainTools_api 1.0.1"]
 status: []
 description: Domain name search tool that allows a wildcard search, monitoring of
   WHOIS record changes and history caching, as well as Reverse IP queries
-version: 1.0.2
+version: 2.0.2
 connection_version: 1
+sdk:
+  type: slim
+  version: 5
+  user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/domaintools
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -665,11 +670,13 @@ connection:
     type: string
     description: Enter the API username
     required: true
+    example: username
   api_key:
     title: API Key
     type: credential_secret_key
     description: Enter the API key
     required: true
+    example: 9de50-69c5a-fe602-b2ea0-a04b6
 actions:
   brand_monitor:
     title: Brand Monitor
@@ -679,11 +686,13 @@ actions:
         type: string
         description: One or more terms separated by the pipe character
         required: true
+        example: domaintools
       exclude:
         type: string
         description: Domain names with these words will be excluded from the result
           set. Separate multiple terms with the pipe character
         required: false
+        example: auto
       domain_status:
         type: string
         description: Sets the scope of domain names to search
@@ -691,6 +700,7 @@ actions:
         - new
         - on-hold
         required: false
+        example: new
       days_back:
         type: integer
         description: Use this parameter when you need to search domains registered
@@ -704,11 +714,13 @@ actions:
         - 5
         - 6
         required: false
+        example: 0
     output:
       response:
         type: brand_monitor_response
         description: Response
         required: false
+        example: '{"query: "domaintools", "exclude": [], "new": true, "total": 0, "alerts": [], "on-hold": true}'
   ip_monitor:
     title: IP Monitor
     description: Searches the daily activity of all our monitored TLDs on any given
@@ -716,8 +728,9 @@ actions:
     input:
       query:
         type: string
-        description: The IP Address you wish to query (i.e. 65.55.53.233)
+        description: The IP Address you wish to query
         required: true
+        example: 65.55.53.233
       days_back:
         type: integer
         description: Use this parameter when you need to search domain changes up
@@ -732,17 +745,20 @@ actions:
         - 5
         - 6
         required: false
+        example: 0
       page:
         type: integer
         description: If the result set is larger than 1000 records for a given day,
           request additional pages with this parameter
         default: 1
         required: false
+        example: 1
     output:
       response:
         type: ip_monitor_response
         description: Response
         required: false
+        example: '{"alerts": [], "date": "2013-11-18", "ip_address": "65.55.53.233", "page": 1, "page_count": 0, "total": 0}'
   name_server_monitor:
     title: Name Server Monitor
     description: 'Searches the daily activity of all our monitored TLDs on any given
@@ -750,9 +766,9 @@ actions:
     input:
       query:
         type: string
-        description: The hostname of the Name Server you wish to query ( i.e. dynect.net
-          )
+        description: The hostname of the Name Server you wish to query
         required: true
+        example: DNSPOD.NET
       days_back:
         type: int
         description: Use this parameter search domain changes up to six days prior
@@ -767,82 +783,97 @@ actions:
         - 5
         - 6
         required: false
+        example: 0
       page:
         type: integer
         description: If the result set is larger than 1000 records for a given day,
           request additional pages with this parameter
         default: 1
         required: false
+        example: 1
     output:
       response:
         description: Response
         type: name_server_monitor_response
         required: false
+        example: '{"alerts": [], "date": "2013-11-20", "limit": 1000, "name_server": "DNSPOD.NET", "page": 1, "page_count": 0, "total": 0}'
   domain_search:
     title: Domain Search
     description: Searches for domain names that match your specific search string
     input:
       query:
         type: string
-        description: Query string — each term in the query string must be at least
+        description: Query string, each term in the query string must be at least
           three characters long
         required: true
+        example: domaintools
       exclude_query:
         type: string
-        description: Terms to exclude from matching — each term in the query string
+        description: Terms to exclude from matching, each term in the query string
           must be at least three characters long
         required: false
+        example: test
       max_length:
         type: integer
         description: Limit the maximum domain character count
         default: 25
         required: false
+        example: 25
       min_length:
         type: integer
         description: Limit the minimum domain character count
         default: 1
         required: false
+        example: 1
       has_hyphen:
         type: boolean
         description: Return results with hyphens in the domain name
         default: true
         required: false
+        example: true
       has_number:
         type: boolean
         description: Return results with numbers in the domain name
         default: true
         required: false
+        example: true
       active_only:
         type: boolean
         description: Return only domains currently registered
         default: false
         required: false
+        example: false
       deleted_only:
         type: boolean
         description: Return only domains previously registered but not currently registered
         default: false
         required: false
+        example: default
       anchor_left:
         type: boolean
         description: Return only domains that start with the query term
         default: false
         required: false
+        example: default
       anchor_right:
         type: boolean
         description: Return only domains that end with the query term
         default: false
         required: false
+        example: false
       page:
         type: integer
         description: If the result set is larger than 1000 records for a given day,
           request additional pages with this parameter
         default: 1
         required: false
+        example: 1
     output:
       response:
         description: Response
         type: domain_search_response
         required: false
+        example: '{"query_info": {}, "results": []}'
   domain_profile:
     title: Domain Profile
     description: Provides basic domain name registration details and a preview of
@@ -852,11 +883,13 @@ actions:
         type: string
         description: Domain name you wish to query
         required: true
+        example: example.com
     output:
       response:
         description: Response
         type: domain_profile_response
         required: false
+        example: '{"registrant": {"name": "DOMAINTOOLS, LLC", "domains": 258, "product_url": "https://reversewhois.domaintools.com/?all[]=DOMAINTOOLS%2C+LLC&none[]="}, "server": {"ip_address": "199.30.228.112", "other_domains": 2, "product_url": "https://reverseip.domaintools.com/search/?q=domaintools.com"}, "registration": {"created": "1998-08-02", "expires": "2017-08-01", "updated": "2014-10-18", "registrar": "ENOM, INC.", "statuses": ["clientTransferProhibited"]}, "name_servers": [], "history": {}, "seo": {"score": 77, "product_url": "http://research.domaintools.com/seo-browser/?domain=domaintools.com"}, "website_data": {}}'
   hosting_history:
     title: Hosting History
     description: Provides a list of changes that have occurred in a Domain Name\'s
@@ -866,11 +899,13 @@ actions:
         type: string
         description: Domain name you wish to query
         required: true
+        example: example.com
     output:
       response:
         description: Response
         type: hosting_history_response
         required: false
+        example: '{"domain_name": "example.com", "ip_history": [], "nameserver_history": [], "registrar_history": []}'
   reputation:
     title: Reputation
     description: Retrieves reputation score of specified domain name
@@ -879,16 +914,19 @@ actions:
         type: string
         description: Input domain for which the risk score is desired
         required: true
+        example: example.com
       include_reasons:
         type: boolean
         description: Return a list of reasons for the risk score determination
         default: false
         required: false
+        example: false
     output:
       response:
         description: Response
         type: reputation_response
         required: false
+        example: '{"domain": "domaintools.com", "risk_score": 21.13, "reasons": ["registrant"]}'
   parsed_whois:
     title: Parsed WHOIS
     description: Provides parsed information extracted from the raw WHOIS record
@@ -897,11 +935,13 @@ actions:
         type: string
         description: Domain name you wish to query
         required: true
+        example: example.com
     output:
       response:
         description: Response
         type: parsed_whois_response
         required: false
+        example: '{"registrant": "DomainTools, LLC", "registration": {"created": "1998-08-02", "expires": "2014-08-01", "updated": "2014-06-27", "registrar": "NAME TRANCE LLC", "statuses": ["clientTransferProhibited"]}, "name_servers": ["NS1.P09.DYNECT.NET", "NS2.P09.DYNECT.NET", "NS3.P09.DYNECT.NET", "NS4.P09.DYNECT.NET"], "parsed_whois": {}, "whois": {}}'
   registrant_monitor:
     title: Registrant Monitor
     description: Searches the ownership (WHOIS) records of domain names for specific
@@ -911,11 +951,13 @@ actions:
         type: string
         description: One or more terms separated by the pipe character
         required: true
+        example: "John Doe|Example Company"
       exclude:
         type: string
         description: WHOIS records with these words will be excluded from the result
           set. Separate multiple terms with the pipe character
         required: false
+        example: "Private|Proxy"
       days_back:
         type: integer
         description: Use this parameter in exceptional circumstances where you need
@@ -929,16 +971,19 @@ actions:
         - 5
         - 6
         required: false
+        example: 0
       limit:
         type: integer
         description: Limit the number of matched domain names that are returned in
           your result set
         required: false
+        example: 100
     output:
       response:
         description: Response
         type: registrant_monitor_response
         required: false
+        example: '{"query": "DomainTools", "limit": 500, "total": 2, "date": "2011-03-02", "alerts": []}'
   reverse_ip:
     title: Reverse IP
     description: Provides a list of domain names that share the same Internet host
@@ -948,15 +993,18 @@ actions:
         type: string
         description: Domain name you wish to query
         required: true
+        example: example.com
       limit:
         type: integer
         description: Limits the size of the domain list than can appear in a response
         required: false
+        example: 100
     output:
       response:
         description: Response
         type: reverse_ip_response
         required: false
+        example: '{"ip_addresses": []}'
   reverse_ip_whois:
     title: Reverse IP WHOIS
     description: Provides a list of IP network ranges with WHOIS records that match
@@ -967,30 +1015,36 @@ actions:
         type: string
         description: Required for single IP result
         required: false
+        example: 0.0.0.0
       country:
         type: string
         description: Limits results to IP addresses allocated to an entity with a
           particular country
         required: false
+        example: US
       server:
         type: string
         description: Limits results to ranges from a particular WHOIS server
         required: false
+        example: whois.arin.net
       include_total_count:
         type: boolean
         description: Returns the total number of results for a query
         default: false
         required: false
+        example: false
       page:
         type: string
         description: Providing the page number allows access to additional pages of
           data
         required: false
+        example: 2
     output:
       response:
         description: Response
         type: reverse_ip_whois_response
         required: false
+        example: '{"has_more_pages": true, "page": 1, "total_count": 1105, "record_count": 1000, "records": []}'
   reverse_whois:
     title: Reverse WHOIS
     description: Provides a list of domain names that share the same Registrant Information
@@ -1000,11 +1054,13 @@ actions:
         description: List of one or more terms to search for in the WHOIS record,
           separated with the pipe character
         required: true
+        example: John Doe|Example Company
       exclude:
         type: string
         description: Domain names with WHOIS records that match these terms will be
           excluded from the result set. Separate multiple terms with the pipe character
         required: false
+        example: Private|Proxy
       scope:
         type: string
         description: Sets the scope of the report to include only current WHOIS records,
@@ -1013,16 +1069,19 @@ actions:
         - current
         - historic
         required: false
+        example: current
       mode:
         type: string
         description: Quote only lists the size and retail price of the query whiles
           purchase includes the complete list of domain names
         required: false
+        example: purchase
     output:
       response:
         description: Response
         type: reverse_whois_response
         required: false
+        example: '{"domain_count": {"current": 310, "historic": 412}, "domains": [], "report_price": {"current": 299, "historic": 299}}'
   whois:
     title: WHOIS
     description: Provides the ownership record for a domain name or IP address with
@@ -1030,13 +1089,15 @@ actions:
     input:
       query:
         type: string
-        description: Domain name or an IP address to perform a whois lookup
+        description: Domain name or an IP address to perform a WHOIS lookup
         required: true
+        example: example.com
     output:
       response:
         description: Response
         type: whois_response
         required: false
+        example: '{"registrant": "DomainTools, LLC", "registration": {"created": "1998-08-02", "expires": "2027-08-01", "updated": "2020-01-09", "registrar": "eNon, LLC", "statuses": ["clientTransferProhibited"]}, "name_servers": ["NS1.P09.DYNECT.NET", "NS2.P09.DYNECT.NET", "NS3.P09.DYNECT.NET", "NS4.P09.DYNECT.NET"], "whois": {}, "record_source": "domaintools.com"}'
   whois_history:
     title: WHOIS History
     description: Provides a list of historic WHOIS records for a domain name
@@ -1045,11 +1106,13 @@ actions:
         type: string
         description: Domain name you wish to query
         required: true
+        example: example.com
     output:
       response:
         description: Response
         type: whois_history_response
         required: false
+        example: '{"record_count": 744, "history": []}'
   reverse_name_server:
     title: Reverse Name Server
     description: Provides a list of domain names that share the same primary or secondary
@@ -1059,12 +1122,15 @@ actions:
         type: string
         description: Domain name you wish to query
         required: true
+        example: example.com
       limit:
         type: integer
         description: Limits the size of the domain list than can appear in a response
         required: false
+        example: 100
     output:
       response:
         description: Response
         type: reverse_name_server_response
         required: false
+        example: '{"name_server": {"hostname": "domaintools.net", "primary": 159, "secondary": 0, "total": 159}, "primary_domains": [], "secondary_domains": []}'

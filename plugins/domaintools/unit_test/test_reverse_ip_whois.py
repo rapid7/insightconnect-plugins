@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
 from komand_domaintools.actions.reverse_ip_whois import ReverseIpWhois
@@ -17,7 +18,7 @@ class TestReverseIpWhois(TestCase):
             Input.IP: "10.10.10.10",
             Input.SERVER: "whois.arin.net",
             Input.COUNTRY: "CA",
-            Input.INCLUDE_TOTAL_COUNT: True
+            Input.INCLUDE_TOTAL_COUNT: True,
         }
 
     @mock.patch("domaintools.API.reverse_ip_whois", side_effect=mock_responder)
