@@ -21,6 +21,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         query = params.get(Input.QUERY)
         log_name = params.get(Input.LOG)
+        log_id = params.get(Input.LOG_ID)
         timeout = params.get(Input.TIMEOUT)
 
         time_from_string = params.get(Input.TIME_FROM)
@@ -39,7 +40,17 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
                 data=f"\nTime From: {time_from}\nTime To:{time_to}",
             )
 
-        log_id = self.get_log_id(log_name)
+        if log_id is None and log_name is None:
+            raise PluginException(
+                cause="No values were provided for log id or log name",
+                assistance="Please enter a valid value for either log id or log name",
+            )
+
+        if log_id and log_name:
+            self.logger.info("Values were provided for both log ID and log name, the value for log id will be used")
+
+        if not log_id:
+            log_id = self.get_log_id(log_name)
 
         # The IDR API will SOMETIMES return results immediately.
         # It will return results if it gets them. If not, we'll get a call back URL to work on
