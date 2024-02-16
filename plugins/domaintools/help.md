@@ -4,7 +4,6 @@ This plugin utilizes the [DomainTools Python API](https://github.com/domaintools
 
 # Key Features
 
-* Whois
 * WHOIS
 * Domain search
 * Brand monitor

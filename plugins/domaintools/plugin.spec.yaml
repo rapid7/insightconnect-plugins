@@ -9,8 +9,8 @@ supported_versions: ["DomainTools_api 1.0.1"]
 status: []
 description: Domain name search tool that allows a wildcard search, monitoring of
   WHOIS record changes and history caching, as well as Reverse IP queries
-version: 2.0.2
-connection_version: 1
+version: 2.0.0
+connection_version: 2
 sdk:
   type: slim
   version: 5
