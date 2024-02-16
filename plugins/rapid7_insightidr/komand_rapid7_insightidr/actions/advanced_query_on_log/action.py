@@ -42,7 +42,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
 
         if log_id is None and log_name is None:
             raise PluginException(
-                cause="No values were provided for either log id and log name",
+                cause="No values were provided for log id or log name",
                 assistance="Please enter a valid value for either log id or log name",
             )
 

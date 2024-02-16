@@ -280,5 +280,5 @@ class TestAdvancedQueryOnLog(TestCase):
         validate(test_input, AdvancedQueryOnLogInput.schema)
         with self.assertRaises(PluginException) as error:
             self.action.run(test_input)
-        self.assertEqual(error.exception.cause, "No values were provided for either log id and log name")
+        self.assertEqual(error.exception.cause, "No values were provided for log id or log name")
         self.assertEqual(error.exception.assistance, "Please enter a valid value for either log id or log name")

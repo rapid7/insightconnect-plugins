@@ -3024,7 +3024,7 @@ Example output:
 
 # Version History
 
-* 9.0.0 - Actions: `Advanced Query On Log` - Now allows for ethier log id or log name to be used
+* 9.0.0 - Actions: `Advanced Query On Log` - Now allows for either log id or log name to be used
 * 8.2.0 - Actions: `Advanced Query On Log Set` and `Advanced Query On Log` - optimized data fetching mechanisms 
 * 8.1.1 - Extended error logging for all the actions
 * 8.1.0 - New actions added: `Search Accounts` and `Get Account Information`
