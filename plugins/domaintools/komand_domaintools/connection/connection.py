@@ -29,7 +29,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
             )
         except Exception as exception:
             self.logger.error(f"DomainTools: Connect: error {exception}")
-            raise ConnectionTestException(cause=f"DomainTools: Connect: Failed to connect to server {exception}", data=response)
+            raise ConnectionTestException(
+                cause=f"DomainTools: Connect: Failed to connect to server {exception}", data=response
+            )
         self.api = api
 
     def test(self):
