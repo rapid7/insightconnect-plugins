@@ -411,10 +411,9 @@ Example output:
 * When using file overwrite, the MIME Type should be set to the correct type to avoid data formatting issues.
 
 # Version History
-  
-* 2.3.0 - Implement shared drive support | Add Copy file action | Code refactor  
-* 2.2.0 - Add Create Folder, Create File in Folder and Move File actions | Add missing input and output examples | Code 
-refactor  
+
+* 3.0.0 - Implement shared drive support | Add Copy file action | Code refactor  
+* 2.2.0 - Add Create Folder, Create File in Folder and Move File actions | Add missing input and output examples | Code refactor  
 * 2.1.3 - Correct spelling in help.md  
 * 2.1.2 - New spec and help.md format for the Extension Library  
 * 2.1.1 - Fix typo in plugin spec  
