@@ -4,8 +4,8 @@ products: [insightconnect]
 name: google_drive
 title: Google Drive
 description: Upload and retrieve files from Google Drive
-version: 2.3.0
-connection_version: 2
+version: 3.0.0
+connection_version: 3
 supported_versions: ["Google Drive API v3 2021-09-27"]
 vendor: rapid7
 support: community
@@ -21,7 +21,7 @@ requirements:
 - A JWT With Google Drive Permissions
 - The Google Drive API must be enabled
 version_history:
-- 2.3.0 - Implement shared drive support | Add Copy file action | Code refactor
+- 3.0.0 - Implement shared drive support | Add Copy file action | Code refactor
 - 2.2.0 - Add Create Folder, Create File in Folder and Move File actions | Add missing input and output examples | Code refactor
 - 2.1.3 - Correct spelling in help.md
 - 2.1.2 - New spec and help.md format for the Extension Library

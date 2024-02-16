@@ -1,13 +1,13 @@
 import sys
 import os
+
+sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from komand_google_drive.actions.create_file_in_folder import CreateFileInFolder
 from komand_google_drive.actions.create_file_in_folder.schema import Input, Output
 from insightconnect_plugin_runtime.exceptions import PluginException
-from unit_test.util import Util
+from util import Util
 from parameterized import parameterized
-
-sys.path.append(os.path.abspath("../"))
 
 
 class TestCreateFileInFolder(TestCase):

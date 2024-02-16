@@ -23,24 +23,36 @@ class MockClient:
     def files(self):
         return self
 
-    def create(self, body, fields, media_body=None, supportsTeamDrives=None):
+    def create(self, body, fields, media_body=None, supportsTeamDrives=None, supportsAllDrives=None):
         self.body = body
+        return self
+
+    def copy(self, fileId, fields, body=None, supportsAllDrives=None):
+        self.get_file_id = fileId
         return self
 
     def export(self, fileId, mimeType):
         self.export_file_id = fileId
         return self
 
-    def get(self, fileId, fields):
+    def get(self, fileId, fields, supportsAllDrives=None):
         self.get_file_id = fileId
         return self
 
-    def list(self, q, spaces, fields):
+    def list(self, q, spaces, fields, supportsAllDrives=None, includeItemsFromAllDrives=None):
         self.query = q
         return self
 
     def update(
-        self, fileId, body=None, media_mime_type=None, media_body=None, fields=None, addParents=None, removeParents=None
+        self,
+        fileId,
+        body=None,
+        media_mime_type=None,
+        media_body=None,
+        fields=None,
+        addParents=None,
+        removeParents=None,
+        supportsAllDrives=None,
     ):
         self.update_file_id = fileId
         return self
@@ -87,7 +99,7 @@ class MockClient:
             return {"id": "upload_file3"}
         elif self.get_file_id == "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR":
             self.get_file_id = None
-            return {"parents": ["1HJz7NbjASN8szc_MS1-BoDn_q4opJFmn"]}
+            return {"id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR", "parents": ["0BwwA4oUTeiV1TGRPeTVjaWRDY1E"]}
         elif self.get_file_id == "File Not Found":
             self.get_file_id = None
             raise HttpError(
