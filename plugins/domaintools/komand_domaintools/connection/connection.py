@@ -23,7 +23,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         except NotAuthorizedException as exception:
             self.logger.error(f"DomainTools: Connect: error {exception}")
             raise ConnectionTestException(
-                cause="DomainTools: Connect: Authorization failed. Please try again",
+                cause="DomainTools: Connect: Authorization failed",
                 assistance="Please review your connection details",
                 data=response,
             )
@@ -36,11 +36,18 @@ class Connection(insightconnect_plugin_runtime.Connection):
         try:
             response = self.api.account_information()
             response.data()
+        except NotAuthorizedException as exception:
+            self.logger.error(f"DomainTools: Connect: error {exception}")
+            raise ConnectionTestException(
+                cause="DomainTools: Connect: Authorization failed",
+                assistance="Please review your connection details",
+                data=response,
+            )
         except Exception as exception:
             self.logger.error(f"DomainTools: Connect: error {exception}")
             raise ConnectionTestException(
-                cause="DomainTools: Connect: Authorization failed. Please try again",
-                assistance="Please review your connection details",
+                cause=PluginException.Preset.UNKNOWN,
+                assistance=PluginException.Preset.UNKNOWN,
                 data=exception,
             )
         return {"success": True}
