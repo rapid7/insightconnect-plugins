@@ -4,11 +4,12 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Realtime query an InsightIDR log. This will query individual logs for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges"
+    DESCRIPTION = "Realtime query an InsightIDR log. This will query individual logs for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges. If both a log name and log ID are provided, the log ID will used over the log name"
 
 
 class Input:
     LOG = "log"
+    LOG_ID = "log_id"
     QUERY = "query"
     RELATIVE_TIME = "relative_time"
     TIME_FROM = "time_from"
@@ -30,9 +31,15 @@ class AdvancedQueryOnLogInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "log": {
       "type": "string",
-      "title": "Log",
-      "description": "Log to search",
+      "title": "Log Name",
+      "description": "Log name to search",
       "order": 6
+    },
+    "log_id": {
+      "type": "string",
+      "title": "Log ID",
+      "description": "Log id to search",
+      "order": 7
     },
     "query": {
       "type": "string",
@@ -81,7 +88,6 @@ class AdvancedQueryOnLogInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "log",
     "query",
     "relative_time",
     "timeout"

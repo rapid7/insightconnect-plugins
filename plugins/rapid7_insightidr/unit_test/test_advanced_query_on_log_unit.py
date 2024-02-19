@@ -14,6 +14,7 @@ from komand_rapid7_insightidr.actions.advanced_query_on_log.schema import (
 from util import Util
 from unittest.mock import patch
 from jsonschema import validate
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 @patch("requests.Session.get", side_effect=Util.mocked_requests)
@@ -243,3 +244,41 @@ class TestAdvancedQueryOnLog(TestCase):
 
         self.assertEqual(actual, expected)
         validate(actual, AdvancedQueryOnLogOutput.schema)
+
+    def test_advanced_query_on_log_using_log_id(self, mock_get, mock_async_get):
+        test_input = {
+            Input.QUERY: "",
+            Input.LOG_ID: "123456-abcd-1234-abcd-123456abc",
+            Input.TIMEOUT: 60,
+            Input.RELATIVE_TIME: "Last 5 Minutes",
+        }
+        validate(test_input, AdvancedQueryOnLogInput.schema)
+        actual = self.action.run(test_input)
+        self.assertEqual(actual.get(Output.COUNT), 1)
+        validate(actual, AdvancedQueryOnLogOutput.schema)
+
+    def test_advanced_query_on_log_both_name_and_id(self, mock_get, mock_async_get):
+        test_input = {
+            Input.QUERY: "",
+            Input.LOG_ID: "123456-abcd-1234-abcd-123456abc",
+            Input.LOG: "example_log7",
+            Input.TIMEOUT: 60,
+            Input.RELATIVE_TIME: "Last 5 Minutes",
+        }
+        validate(test_input, AdvancedQueryOnLogInput.schema)
+        actual = self.action.run(test_input)
+        self.assertEqual(actual.get(Output.COUNT), 1)
+        validate(actual, AdvancedQueryOnLogOutput.schema)
+
+    def test_advanced_query_on_log_no_name_and_id(self, mock_get, mock_async_get):
+        test_input = {
+            Input.QUERY: "",
+            Input.TIMEOUT: 60,
+            Input.RELATIVE_TIME: "Last 5 Minutes",
+        }
+
+        validate(test_input, AdvancedQueryOnLogInput.schema)
+        with self.assertRaises(PluginException) as error:
+            self.action.run(test_input)
+        self.assertEqual(error.exception.cause, "No values were provided for log id or log name")
+        self.assertEqual(error.exception.assistance, "Please enter a valid value for either log id or log name")

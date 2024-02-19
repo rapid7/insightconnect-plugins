@@ -4,9 +4,9 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 8.2.0
+version: 9.0.0
 connection_version: 5
-supported_versions: ["Latest release successfully tested on 2022-07-20."]
+supported_versions: ["Latest release successfully tested on 2024-02-15."]
 vendor: rapid7
 cloud_ready: true
 resources:
@@ -1737,7 +1737,7 @@ actions:
         example: {"log": {"id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f","name": "Windows Defender","tokens": ["bc38a911-65f1-4755-cca3-a330a6336b3a"],"structures": ["1238a911-65f1-4755-cca3-a330a6336b3a"],"user_data": {"platform_managed": "true"},"source_type": "token","token_seed": null,"retention_period": "default","links": [{"rel": "Related","href": "https://example.com"}],"rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a","logsets_info": [{"id": "bc38a911-65f1-4755-cca3-a330a6336b3a","name": "Unparsed Data","rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a","links": [{"rel": "Self","href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85"}]}]}}
   advanced_query_on_log:
     title: Advanced Query on Log
-    description: Realtime query an InsightIDR log. This will query individual logs for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges
+    description: Realtime query an InsightIDR log. This will query individual logs for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges. If both a log name and log ID are provided, the log ID will used over the log name
     input:
       query:
         title: Query
@@ -1789,12 +1789,19 @@ actions:
         required: true
         order: 5
       log:
-        title: Log
-        description: Log to search
+        title: Log Name
+        description: Log name to search
         type: string
         example: Firewall Activity
-        required: true
+        required: false
         order: 6
+      log_id:
+        title: Log ID
+        description: Log id to search
+        type: string
+        example: 123456-abcd-1234-abcd-123456abc
+        required: false
+        order: 7
     output:
       results_events:
         title: Query Results (Events)
