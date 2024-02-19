@@ -625,13 +625,55 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|content|[]content|False|Response content|{ "content": [ { "cveId": "CVE-2020-7064", "cpe": [ { "Value": "cpe:2.3:a:php:php:*:*:*:*:*:*:*:*", "Range": { "VersionStartIncluding": "7.2.0", "VersionEndIncluding": "", "VersionStartExcluding": "", "VersionEndExcluding": "7.2.9" }, "Title": "Php", "VendorProduct": "Php Php" } ], "publishedDate": "2020-04-01T04:15:00.000Z", "updateDate": "2021-10-25T10:14:52.978Z", "severity": "Low", "intsightsScore": 36, "cvssScore": 5.4, "mentionsAmount": 39, "mentionsPerSource": { "PasteSite": 0, "HackingForum": 0, "InstantMessage": 0, "DarkWeb": 0, "ClearWebCyberBlogs": 0, "CodeRepositories": 9, "Exploit": 0, "SocialMedia": 30 }, "firstMentionDate": "2020-03-19T15:09:00.000Z", "lastMentionDate": "2021-07-22T20:41:00.000Z", "exploitAvailability": false, "vulnerabilityOrigin": [ "API" ], "relatedThreatActors": [], "relatedMalware": [], "relatedCampaigns": [] } ], }|
+|content|[]content|False|Response content|[ { "cveId": "CVE-2020-7064", "cpe": [ { "Value": "cpe:2.3:a:php:php:*:*:*:*:*:*:*:*", "Range": { "VersionStartIncluding": "7.2.0", "VersionEndIncluding": "", "VersionStartExcluding": "", "VersionEndExcluding": "7.2.9" }, "Title": "Php", "VendorProduct": "Php Php" } ], "publishedDate": "2020-04-01T04:15:00.000Z", "updateDate": "2021-10-25T10:14:52.978Z", "severity": "Low", "intsightsScore": 36, "cvssScore": 5.4, "mentionsAmount": 39, "mentionsPerSource": { "PasteSite": 0, "HackingForum": 0, "InstantMessage": 0, "DarkWeb": 0, "ClearWebCyberBlogs": 0, "CodeRepositories": 9, "Exploit": 0, "SocialMedia": 30 }, "firstMentionDate": "2020-03-19T15:09:00.000Z", "lastMentionDate": "2021-07-22T20:41:00.000Z", "exploitAvailability": false, "vulnerabilityOrigin": [ "API" ], "relatedThreatActors": [], "relatedMalware": [], "relatedCampaigns": [] } ]|
   
 Example output:
 
 ```
 {
-  "content": "{ \"content\": [ { \"cveId\": \"CVE-2020-7064\", \"cpe\": [ { \"Value\": \"cpe:2.3:a:php:php:*:*:*:*:*:*:*:*\", \"Range\": { \"VersionStartIncluding\": \"7.2.0\", \"VersionEndIncluding\": \"\", \"VersionStartExcluding\": \"\", \"VersionEndExcluding\": \"7.2.9\" }, \"Title\": \"Php\", \"VendorProduct\": \"Php Php\" } ], \"publishedDate\": \"2020-04-01T04:15:00.000Z\", \"updateDate\": \"2021-10-25T10:14:52.978Z\", \"severity\": \"Low\", \"intsightsScore\": 36, \"cvssScore\": 5.4, \"mentionsAmount\": 39, \"mentionsPerSource\": { \"PasteSite\": 0, \"HackingForum\": 0, \"InstantMessage\": 0, \"DarkWeb\": 0, \"ClearWebCyberBlogs\": 0, \"CodeRepositories\": 9, \"Exploit\": 0, \"SocialMedia\": 30 }, \"firstMentionDate\": \"2020-03-19T15:09:00.000Z\", \"lastMentionDate\": \"2021-07-22T20:41:00.000Z\", \"exploitAvailability\": false, \"vulnerabilityOrigin\": [ \"API\" ], \"relatedThreatActors\": [], \"relatedMalware\": [], \"relatedCampaigns\": [] } ], }"
+  "content": [
+    {
+      "cpe": [
+        {
+          "Range": {
+            "VersionEndExcluding": "7.2.9",
+            "VersionEndIncluding": "",
+            "VersionStartExcluding": "",
+            "VersionStartIncluding": "7.2.0"
+          },
+          "Title": "Php",
+          "Value": "cpe:2.3:a:php:php:*:*:*:*:*:*:*:*",
+          "VendorProduct": "Php Php"
+        }
+      ],
+      "cveId": "CVE-2020-7064",
+      "cvssScore": 5.4,
+      "exploitAvailability": false,
+      "firstMentionDate": "2020-03-19T15:09:00.000Z",
+      "intsightsScore": 36,
+      "lastMentionDate": "2021-07-22T20:41:00.000Z",
+      "mentionsAmount": 39,
+      "mentionsPerSource": {
+        "ClearWebCyberBlogs": 0,
+        "CodeRepositories": 9,
+        "DarkWeb": 0,
+        "Exploit": 0,
+        "HackingForum": 0,
+        "InstantMessage": 0,
+        "PasteSite": 0,
+        "SocialMedia": 30
+      },
+      "publishedDate": "2020-04-01T04:15:00.000Z",
+      "relatedCampaigns": [],
+      "relatedMalware": [],
+      "relatedThreatActors": [],
+      "severity": "Low",
+      "updateDate": "2021-10-25T10:14:52.978Z",
+      "vulnerabilityOrigin": [
+        "API"
+      ]
+    }
+  ]
 }
 ```
 
@@ -1387,7 +1429,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 5.1.1 - Better handling of response fromt he threat connect API when using the `takedown_request` action | Bumped to use the newest version of the SDK | Updated old unit tests / added new unit tests
+* 5.1.1 - Better handling of response from the threat connect API when using the `takedown_request` action | Bumped to use the newest version of the SDK | Updated old unit tests / added new unit tests
 * 5.1.0 - Add actions: `Get Cyber Terms by Filter`, `Get IOCs for Cyber Term`, `Get CVEs for Cyber Term`, `Close Alert`. Add new input for `Get IOCs By Filter` action
 * 5.0.0 - Add action Get IOCs By Filter which returns a list of paginated IOC data based on input filters applied against IOC properties | Fix Bug relating to mismatched property names of output types geolocation, sources, and reported feeds for Get Indicator by Value action
 * 4.0.0 - Rename Plugin to Threat Command | Update descriptions to Threat Command | Update Get Indicator By Value to use API V3 | Remove Rescan Indicator and Get Indicator Scan Status | Update Get CVE List to request one page of results only
