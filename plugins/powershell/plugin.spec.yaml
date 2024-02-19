@@ -4,7 +4,12 @@ products: [insightconnect]
 name: powershell
 title: PowerShell
 description: Run a PowerShell script
-version: 3.0.2
+version: 3.0.3
+connection_version: 3
+sdk:
+  type: slim
+  version: 5
+  user: nobody
 supported_versions: ["PowerShell 6.1.2"]
 vendor: rapid7
 support: community
