@@ -188,6 +188,7 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 # Version History
 
+* 3.0.3 - Fix decoding error in `Powershell String` action and `Execute Script` action
 * 3.0.2 - Updated the SDK version to include output masking | Updated all the dependencies to the newest versions
 * 3.0.1 - Bug fix - Fix issue where single quotes in password causes parsing error
 * 3.0.0 - Move custom script credentials to Connection | Update runtime to insightconnect_plugin_runtime
