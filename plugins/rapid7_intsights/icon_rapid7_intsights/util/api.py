@@ -289,7 +289,7 @@ class IntSightsAPI:
                 timeout=60,
             )
 
-            self.check_status_codes(response=response)
+            IntSightsAPI.check_status_codes(response=response)
 
             if 200 <= response.status_code < 300:
                 return response
@@ -298,7 +298,8 @@ class IntSightsAPI:
         except requests.exceptions.HTTPError as e:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
-    def check_status_codes(self, response: requests.Response):
+    @staticmethod
+    def check_status_codes(response: requests.Response):
         if response.status_code == 400:
             if "StatusNotChanged" in response.text:
                 raise PluginException(
