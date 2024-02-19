@@ -63,6 +63,9 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "order": 6
     }
   },
+  "required": [
+    "auth"
+  ],
   "definitions": {
     "credential_username_password": {
       "id": "credential_username_password",
