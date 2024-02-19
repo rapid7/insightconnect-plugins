@@ -56,17 +56,17 @@ Example input:
 
 #### Create User
   
-This action is used to create user associated to account  
+This action is used to create user associated to account
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action|string|create|True|Specify how to create the new user|['create', 'autoCreate', 'custCreate', 'ssoCreate']|create|
+|action|string|create|True|Specify how to create the new user|["create", "autoCreate", "custCreate", "ssoCreate"]|create|
 |email|string|None|True|Email address of user|None|user@example.com|
 |first_name|string|None|False|First name of user|None|John|
 |last_name|string|None|True|Last name of user|None|Smith|
-|type|string|None|True|User type|['Basic', 'Licensed']|Basic|
+|type|string|None|True|User type|["Basic", "Licensed"]|Basic|
   
 Example input:
 
@@ -104,13 +104,13 @@ Example output:
 
 #### Delete User
   
-This action is used to delete or disassociate user from account  
+This action is used to delete or disassociate user from account
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action|string|None|True|Specify how to delete the user. To delete pending user, use disassociate|['delete', 'disassociate']|delete|
+|action|string|None|True|Specify how to delete the user. To delete pending user, use disassociate|["delete", "disassociate"]|delete|
 |id|string|None|True|The user identifier or email address|None|user@example.com|
 |transfer_email|string|None|False|Email to transfer meetings, webinars, or recordings|None|user@example.com|
 |transfer_meetings|boolean|False|False|Whether to transfer meetings to defined transfer email|None|False|
@@ -186,13 +186,13 @@ Example output:
 
 #### User Activity Event
   
-This trigger is used to poll for user activity events  
+This trigger is used to poll for user activity events
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|activity_type|string|None|True|Type of user activity to match event|['Sign in', 'Sign out', 'All']|All|
+|activity_type|string|None|True|Type of user activity to match event|["Sign in", "Sign out", "All"]|All|
   
 Example input:
 
@@ -227,7 +227,7 @@ Example output:
 
 #### Monitor Sign in and out Activity
   
-This task is used to monitor sign in and out activity  
+This task is used to monitor sign in and out activity
 
 ##### Input
   
@@ -242,16 +242,26 @@ This task is used to monitor sign in and out activity
 Example output:
 
 ```
-[
-  {
-    "client_type": "Browser",
-    "email": "user@example.com",
-    "ip_address": "198.51.100.100",
-    "time": "2020-06-05T16:51:28Z",
-    "type": "Sign in",
-    "version": "5.12.2"
-  }
-]
+{
+  "activity_logs": [
+    {
+      "client_type": "Browser",
+      "email": "user@example.com",
+      "ip_address": "198.51.100.100",
+      "time": "2020-06-05T16:51:28Z",
+      "type": "Sign in",
+      "version": "5.12.2"
+    },
+    {
+      "client_type": "Browser",
+      "email": "user@example.com",
+      "ip_address": "198.51.100.100",
+      "time": "2020-06-05T17:51:28Z",
+      "type": "Sign out",
+      "version": "5.12.2"
+    }
+  ]
+}
 ```
 
 ### Custom Types
@@ -276,10 +286,10 @@ Example output:
 |Department|string|None|False|Department of user|example department|
 |Email|string|None|False|Email address of user|user@example.com|
 |First Name|string|None|False|First name of user|John|
-|Web Group IDs|[]string|None|False|IDs of the web groups user belongs to|['t-_-d56CSWG-7BF15LLrOw', 't-_-d56CSWG-7BF15LLrow']|
+|Web Group IDs|[]string|None|False|IDs of the web groups user belongs to|["t-_-d56CSWG-7BF15LLrOw", "t-_-d56CSWG-7BF15LLrow"]|
 |Host Key|string|None|False|User's host key|123321|
 |ID|string|None|True|User identifier|T9ti3NBxR42swGKrqABGig|
-|IM Group IDs|[]string|None|False|IM IDs of the groups user belongs to|['t-_-d56CSWG-7BF15LLrOw', 't-_-d56CSWG-7BF15LLrow']|
+|IM Group IDs|[]string|None|False|IM IDs of the groups user belongs to|["t-_-d56CSWG-7BF15LLrOw", "t-_-d56CSWG-7BF15LLrow"]|
 |JID|string|None|False|JID of user|user@example.com|
 |Language|string|None|False|Language of user|en-US|
 |Last Login Time|string|None|False|Last login datetime of user|2023-06-21 13:41:14+00:00|
@@ -302,6 +312,7 @@ Example output:
 
 # Version History
 
+* 4.1.6 - Adding better handling to `monitor_sign_in_out_activity` if the users account does not have all of the required permsions 
 * 4.1.5 - Monitor Sign in and out Activity: Added exception logging and bumped latest plugin SDK
 * 4.1.4 - Update to the latest plugin SDK
 * 4.1.3 - Monitor Sign in and out Activity: set cutoff time of 24 hours
