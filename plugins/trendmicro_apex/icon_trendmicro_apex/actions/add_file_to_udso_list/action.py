@@ -35,27 +35,12 @@ class AddFileToUdsoList(insightconnect_plugin_runtime.Action):
             "note": payload_notes,
         }
         json_payload = json.dumps(payload)
-        self.connection.create_jwt_token(self.api_path, self.api_http_method, json_payload)
-        request_url = self.connection.url + self.api_path
 
-        response = None
-        try:
-            response = requests.request(
-                "put",
-                request_url,
-                headers=self.connection.header_dict,
-                data=json_payload,
-                verify=False,
-                timeout=60,
-            )  # noqa: B501
-            response.raise_for_status()
-            return {Output.SUCCESS: response is not None}
-        except RequestException as rex:
-            if response:
-                self.logger.error(f"Received status code: {response.status_code}")
-                self.logger.error(f"Response was: {response.text}")
-            raise PluginException(
-                assistance="Please verify the connection details and input data.",
-                cause="Error processing the Apex request.",
-                data=rex,
-            )
+        response = self.connection.api.execute(
+            self.api_http_method,
+            self.api_path,
+            json_payload
+        )
+
+        return {Output.SUCCESS: response is not None}
+

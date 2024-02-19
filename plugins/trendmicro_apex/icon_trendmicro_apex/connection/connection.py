@@ -49,25 +49,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
         # list UDSO's
         json_payload = ""
         api_path = "/WebApp/api/SuspiciousObjects/UserDefinedSO/"
-        request_url = self.url + api_path
         self.create_jwt_token(api_path, "GET", json_payload)
 
-        response = None
+        response = self.connection.api.execute("get", api_path, json_payload)
 
-        try:
-            response = requests.get(
-                request_url, headers=self.header_dict, data=json_payload, verify=False, timeout=60  # noqa: B501
-            )
-            response.raise_for_status()
-            if response.status_code != 200:
-                raise ConnectionTestException(f"{response.text} (HTTP status: {response.status_code})")
+        if response.status_code != 200:
+            raise ConnectionTestException(f"{response.text} (HTTP status: {response.status_code})")
 
-            return {"success": True}
-        except RequestException as rex:
-            if response:
-                self.logger.error(f"Received status code: {response.status_code}")
-                self.logger.error(f"Response was: {response.text}")
-            raise ConnectionTestException(
-                assistance="Please verify the connection details and input data.",
-                cause=f"Error processing the Apex request: {rex}",
-            )
+        return {"success": True}
+

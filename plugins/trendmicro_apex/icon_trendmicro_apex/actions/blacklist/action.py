@@ -36,28 +36,13 @@ class Blacklist(insightconnect_plugin_runtime.Action):
         else:
             method = "PUT"
 
-        self.connection.create_jwt_token(self.api_path, method, json_payload)
-        request_url = self.connection.url + self.api_path
+        response = self.connection.api.execute(
+            method,
+            self.api_path,
+            payload
+        )
 
-        response = None
-        try:
-            response = requests.request(
-                method.lower(),
-                request_url,
-                headers=self.connection.header_dict,
-                data=json_payload,
-                verify=False,
-            )
-            response.raise_for_status()
-            return {Output.SUCCESS: response is not None}
-        except RequestException as rex:
-            if response:
-                self.logger.error(f"Received status code: {response.status_code}")
-                self.logger.error(f"Response was: {response.text}")
-            raise PluginException(
-                assistance="Please verify the connection details and input data.",
-                cause=f"Error processing the Apex request: {rex}",
-            )
+        return {Output.SUCCESS: response is not None}
 
     @staticmethod
     def get_data_type(indicator):
