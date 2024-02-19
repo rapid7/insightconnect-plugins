@@ -212,5 +212,12 @@ class Util:
             if "invalid_id" in url:
                 return MockResponse(404)
 
+        elif "https://api.intsights.com/public/v1/data/alerts/takedown-request/valid_id" == url:
+            return MockResponse(200)
+        elif "https://api.intsights.com/public/v1/data/alerts/takedown-request/invalid_id_400" == url:
+            return MockResponse(400, "invalid_id_400")
+        elif "https://api.intsights.com/public/v1/data/alerts/takedown-request/invalid_id_403" == url:
+            return MockResponse(403, "invalid_id_403")
+
         else:
             raise NotImplementedError("Not implemented", kwargs)

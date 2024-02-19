@@ -6,10 +6,15 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 from parameterized import parameterized
-from unit_test.util import Util
+from util import Util
 from icon_rapid7_intsights.actions.get_cves_for_cyber_term import GetCvesForCyberTerm
 from insightconnect_plugin_runtime.exceptions import PluginException
-from icon_rapid7_intsights.actions.get_cves_for_cyber_term.schema import Input
+from icon_rapid7_intsights.actions.get_cves_for_cyber_term.schema import (
+    Input,
+    GetCvesForCyberTermInput,
+    GetCvesForCyberTermOutput,
+)
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mock_request)
@@ -38,8 +43,10 @@ class TestGetCvesForCyberTerm(TestCase):
         ]
     )
     def test_test_get_cves_for_cyber_term(self, mock_request, test_name, input_params, expected):
+        validate(input_params, GetCvesForCyberTermInput.schema)
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
+        validate(actual, GetCvesForCyberTermOutput.schema)
 
     @parameterized.expand(
         [
@@ -58,6 +65,7 @@ class TestGetCvesForCyberTerm(TestCase):
     def test_test_get_cves_for_cyber_term_raise_exception(
         self, mock_request, test_name, input_parameters, expected_exception
     ):
+        validate(input_parameters, GetCvesForCyberTermInput.schema)
         with self.assertRaises(PluginException) as error:
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, expected_exception.cause)

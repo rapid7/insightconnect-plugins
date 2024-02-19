@@ -5,10 +5,12 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
-from unit_test.util import Util
+from util import Util
 from parameterized import parameterized
 from icon_rapid7_intsights.actions.close_alert import CloseAlert
+from icon_rapid7_intsights.actions.close_alert.schema import CloseAlertInput, CloseAlertOutput
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mock_request)
@@ -42,8 +44,10 @@ class TestCloseAlert(TestCase):
         ]
     )
     def test_close_alert(self, mock_request, test_name, input_params, expected):
+        validate(input_params, CloseAlertInput.schema)
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
+        validate(actual, CloseAlertOutput.schema)
 
     @parameterized.expand(
         [
@@ -56,6 +60,7 @@ class TestCloseAlert(TestCase):
         ]
     )
     def test_close_alert_bad(self, mock_request, test_name, input_parameters, cause, assistance):
+        validate(input_parameters, CloseAlertInput.schema)
         with self.assertRaises(PluginException) as error:
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)

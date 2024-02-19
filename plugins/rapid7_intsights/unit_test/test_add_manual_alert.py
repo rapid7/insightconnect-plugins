@@ -5,10 +5,11 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
-from unit_test.util import Util
+from util import Util
 from icon_rapid7_intsights.actions.add_manual_alert import AddManualAlert
-from icon_rapid7_intsights.actions.add_manual_alert.schema import Input
+from icon_rapid7_intsights.actions.add_manual_alert.schema import Input, AddManualAlertInput, AddManualAlertOutput
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 
 class TestAddManualAlert(TestCase):
@@ -19,23 +20,24 @@ class TestAddManualAlert(TestCase):
 
     @patch("requests.request", side_effect=Util.mock_request)
     def test_add_manual_alert_should_success(self, make_request):
-        actual = self.action.run(
-            {
-                Input.TITLE: "Test Alert",
-                Input.DESCRIPTION: "Test description",
-                Input.TYPE: "Phishing",
-                Input.SUB_TYPE: "SuspiciousEmailAddress",
-                Input.SEVERITY: "High",
-                Input.SOURCE_TYPE: "Application Store",
-                Input.SOURCE_NETWORK_TYPE: "ClearWeb",
-                Input.SOURCE_URL: "http://www.rapid7.com",
-                Input.SOURCE_DATE: "2020-01-01T20:01:27.344Z",
-                Input.FOUND_DATE: "2020-01-01T20:01:27.344Z",
-                Input.IMAGES: [{"type": "gif", "data": "R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="}],
-            }
-        )
+        input_params = {
+            Input.TITLE: "Test Alert",
+            Input.DESCRIPTION: "Test description",
+            Input.TYPE: "Phishing",
+            Input.SUB_TYPE: "SuspiciousEmailAddress",
+            Input.SEVERITY: "High",
+            Input.SOURCE_TYPE: "Application Store",
+            Input.SOURCE_NETWORK_TYPE: "ClearWeb",
+            Input.SOURCE_URL: "http://www.rapid7.com",
+            Input.SOURCE_DATE: "2020-01-01T20:01:27.344Z",
+            Input.FOUND_DATE: "2020-01-01T20:01:27.344Z",
+            Input.IMAGES: [{"type": "gif", "data": "R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="}],
+        }
+        validate(input_params, AddManualAlertInput.schema)
+        actual = self.action.run(input_params)
         expected = {"alert_id": "7cafac7ec5adaebf62257a4c"}
         self.assertEqual(expected, actual)
+        validate(actual, AddManualAlertOutput.schema)
 
     @patch("requests.request", side_effect=Util.mock_request)
     def test_add_manual_alert_should_fail_when_wrong_image(self, make_request):

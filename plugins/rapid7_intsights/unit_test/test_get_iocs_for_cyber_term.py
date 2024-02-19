@@ -5,11 +5,16 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
-from unit_test.util import Util
+from util import Util
 from parameterized import parameterized
 from icon_rapid7_intsights.actions.get_iocs_for_cyber_term import GetIocsForCyberTerm
+from icon_rapid7_intsights.actions.get_iocs_for_cyber_term.schema import (
+    GetIocsForCyberTermInput,
+    GetIocsForCyberTermOutput,
+)
 from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_rapid7_intsights.util.constants import Assistance, Cause
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mock_request)
@@ -38,8 +43,10 @@ class TestGetIocsForCyberTerm(TestCase):
         ]
     )
     def test_get_iocs_for_cyber_term(self, mock_request, test_name, input_params, expected):
+        validate(input_params, GetIocsForCyberTermInput.schema)
         actual = self.action.run(input_params)
         self.assertEqual(actual, expected)
+        validate(actual, GetIocsForCyberTermOutput.schema)
 
     @parameterized.expand(
         [
@@ -53,13 +60,14 @@ class TestGetIocsForCyberTerm(TestCase):
                 "cyber_term_not_found",
                 Util.read_file_to_dict("inputs/get_iocs_cyber_term_invalid_id.json.inp"),
                 "Invalid or unreachable endpoint provided.",
-                "Verify the endpoint/URL/hostname configured in your plugin connection is correct.",
+                "Verify the URLs or endpoints in your configuration are correct.",
             ],
         ]
     )
     def test_get_iocs_for_cyber_term_raise_exception(
         self, mock_request, test_name, input_parameters, cause, assistance
     ):
+        validate(input_parameters, GetIocsForCyberTermInput.schema)
         with self.assertRaises(PluginException) as error:
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)

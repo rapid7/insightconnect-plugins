@@ -5,9 +5,14 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
-from unit_test.util import Util
+from util import Util
 from icon_rapid7_intsights.actions.get_complete_alert_by_id import GetCompleteAlertById
-from icon_rapid7_intsights.actions.get_complete_alert_by_id.schema import Input
+from icon_rapid7_intsights.actions.get_complete_alert_by_id.schema import (
+    Input,
+    GetCompleteAlertByIdInput,
+    GetCompleteAlertByIdOutput,
+)
+from jsonschema import validate
 
 
 class TestAddManualAlert(TestCase):
@@ -19,7 +24,9 @@ class TestAddManualAlert(TestCase):
 
     @patch("requests.request", side_effect=Util.mock_request)
     def test_get_complete_alert_by_id_should_success(self, make_request):
-        actual = self.action.run({Input.ALERT_ID: "123"})
+        input_params = {Input.ALERT_ID: "123"}
+        validate(input_params, GetCompleteAlertByIdInput.schema)
+        actual = self.action.run(input_params)
         expected = {
             "assets": [{"Type": "Domain", "Value": "https://example.com"}],
             "assignees": [],
@@ -41,3 +48,4 @@ class TestAddManualAlert(TestCase):
             "update_date": "2021-09-30T19:35:42.441Z",
         }
         self.assertEqual(expected, actual)
+        validate(actual, GetCompleteAlertByIdOutput.schema)
