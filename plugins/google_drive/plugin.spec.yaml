@@ -3,12 +3,40 @@ extension: plugin
 products: [insightconnect]
 name: google_drive
 title: Google Drive
-description: Upload and retrieve files from Google drive
-version: 2.2.0
+description: Upload and retrieve files from Google Drive
+version: 3.0.0
+connection_version: 3
 supported_versions: ["Google Drive API v3 2021-09-27"]
 vendor: rapid7
 support: community
 status: []
+key_features:
+- Get file contents
+- Upload files
+- Create files
+- Move files to a different folder
+- Find files by name
+- Copy files to a folder
+requirements:
+- A JWT With Google Drive Permissions
+- The Google Drive API must be enabled
+version_history:
+- 3.0.0 - Implement shared drive support | Add Copy file action | Code refactor
+- 2.2.0 - Add Create Folder, Create File in Folder and Move File actions | Add missing input and output examples | Code refactor
+- 2.1.3 - Correct spelling in help.md
+- 2.1.2 - New spec and help.md format for the Extension Library
+- 2.1.1 - Fix typo in plugin spec
+- 2.1.0 - Add Download File action
+- 2.0.0 - Update to use new credential types
+- 1.2.1 - Fixed a bug that caused an error if Folder ID was left blank
+- 1.2.0 - Add the ability to rename and force a MIME type on the overwrite action
+- 1.1.0 - Add overwrite file action and search file action
+- 1.0.0 - Initial plugin
+references:
+- oauth2client - https://github.com/google/oauth2client
+- httplib2 - https://github.com/httplib2/httplib2
+- google-api-python-client - https://github.com/google/google-api-python-client
+- Google Drive API - https://developers.google.com/drive/api/guides/about-sdk
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/google_drive
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -30,11 +58,20 @@ types:
       title: File ID
       type: string
   move_file_result:
-    folder_id:
+    parents:
       title: Folder ID
       description: Folder ID
+      type: '[]string'
+    id:
+      title: File ID
+      description: File ID
       type: string
-    file_id:
+  copy_file_result:
+    parents:
+      title: Folder ID
+      description: Folder ID
+      type: '[]string'
+    id:
       title: File ID
       description: File ID
       type: string
@@ -129,6 +166,7 @@ actions:
         description: The file in bytes
         type: bytes
         required: false
+        example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
   upload_file:
     title: Upload File
     description: Upload a file to Google Drive
@@ -161,11 +199,13 @@ actions:
         description: Return the ID of the file created on Google Drive
         type: string
         required: false
+        example: "1vGnLfWUInJ5OhuTXQO1-UpVfPfsXVlmaFnvqY_uhT0M"
       file_link:
         title: File Link
         description: A direct link to the created file
         type: string
         required: false
+        example: "https://docs.google.com/document/d/1vGnLfWUInJ5OhuTXQO1-UpVfPfsXVlmaFnvqY_uhT0M"
   overwrite_file:
     title: Overwrite File
     description: Overwrites a file with new data
@@ -204,6 +244,7 @@ actions:
         description: Return the ID of the file created on Google Drive
         type: string
         required: false
+        example: 1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLREW
   find_file_by_name:
     title: Find File by Name
     description: Find a file ID
@@ -236,6 +277,7 @@ actions:
         description: Returns a list of file names and their IDs
         type: '[]file_info'
         required: false
+        example: '[{"file_name":"test.txt","file_id":"1t4HfdfndRpYHRw4uRtqnu83XC7Oc3nBGqEHyaiPIDy0"},{"file_name":"test_new2.txt","file_id":"13Cxn1BPUnvQGcRVcnCBSF4ZbS0MbVxaxNJe2iuj_NTA"}]'
   create_folder:
     title: Create Folder
     description: Create a folder
@@ -258,6 +300,7 @@ actions:
         description: Return the ID of the folder created on Google Drive
         type: string
         required: true
+        example: "1eYy68j4cIucDRE1pAkar5bOgyLxCM_Rj"
   create_file_in_folder:
     title: Create File in Folder
     description: Create a file in a folder
@@ -280,6 +323,7 @@ actions:
         description: Return the ID of the file created on Google Drive
         type: string
         required: true
+        example: "1bKpnBMV1TQ5iU6sM7d0sfovqWwdVJSet"
   move_file:
     title: Move File
     description: Move a file to a different folder
@@ -302,3 +346,34 @@ actions:
         description: The result containing the ID of the file and ID of the folder to which the file was moved
         type: move_file_result
         required: true
+        example: '{"id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR", "parents": ["0BwwA4oUTeiV1TGRPeTVjaWRDY1E"]}'
+  copy_file:
+    title: Copy File
+    description: Copy a file to a folder
+    input:
+      folder_id:
+        title: Folder ID
+        description: ID of the folder where the file will be copied
+        type: string
+        required: true
+        example: 0BwwA4oUTeiV1TGRPeTVjaWRDY1E
+      file_id:
+        title: File ID
+        description: The ID of the file that will be copied to another folder
+        type: string
+        required: true
+        example: 1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR
+      new_file_name:
+        title: New File Name
+        description: Select a new file name. e.g. testfile.csv
+        type: string
+        required: false
+        example: test.txt
+    output:
+      result:
+        title: Result
+        description: The result containing the ID of the file and ID of the folder to which the file was copied
+        type: copy_file_result
+        required: true
+        example: '{"id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR", "parents": ["0BwwA4oUTeiV1TGRPeTVjaWRDY1E"]}'
+        

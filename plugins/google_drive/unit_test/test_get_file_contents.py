@@ -1,14 +1,13 @@
 import sys
 import os
+
+sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from komand_google_drive.actions.get_file_contents import GetFileContents
 from komand_google_drive.actions.get_file_contents.schema import Input, Output
 from insightconnect_plugin_runtime.exceptions import PluginException
-from unit_test.util import Util
+from util import Util
 from parameterized import parameterized
-
-
-sys.path.append(os.path.abspath("../"))
 
 
 class TestGetFileContents(TestCase):

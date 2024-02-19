@@ -1,12 +1,12 @@
 import sys
 import os
+
+sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from komand_google_drive.actions.find_file_by_name import FindFileByName
 from komand_google_drive.actions.find_file_by_name.schema import Input, Output
-from unit_test.util import Util
+from util import Util
 from parameterized import parameterized
-
-sys.path.append(os.path.abspath("../"))
 
 
 class TestFindFileByName(TestCase):

@@ -3,29 +3,29 @@ import os
 
 sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
-from komand_google_drive.actions.move_file import MoveFile
-from komand_google_drive.actions.move_file.schema import Input, Output
+from komand_google_drive.actions.copy_file import CopyFile
+from komand_google_drive.actions.copy_file.schema import Input, Output
 from insightconnect_plugin_runtime.exceptions import PluginException
 from util import Util
 from parameterized import parameterized
 
 
-class TestMoveFile(TestCase):
+class TestCopyFile(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.action = Util.default_connector(MoveFile())
+        cls.action = Util.default_connector(CopyFile())
 
     @parameterized.expand(
         [
             [
-                "move_file",
+                "copy_file",
                 "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR",
                 "0BwwA4oUTeiV1TGRPeTVjaWRDY1E",
                 {"id": "1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR", "parents": ["0BwwA4oUTeiV1TGRPeTVjaWRDY1E"]},
             ]
         ]
     )
-    def test_move_file(self, name, file_id, folder_id, expected):
+    def test_copy_file(self, name, file_id, folder_id, expected):
         actual = self.action.run({Input.FOLDER_ID: folder_id, Input.FILE_ID: file_id})
         expected = {Output.RESULT: expected}
         self.assertEqual(actual, expected)
@@ -43,9 +43,9 @@ class TestMoveFile(TestCase):
             ]
         ]
     )
-    def test_move_file_bad(self, name, file_id, folder_id, cause, assistance, data):
-        with self.assertRaises(PluginException) as e:
+    def test_copy_file_bad(self, name, file_id, folder_id, cause, assistance, data):
+        with self.assertRaises(PluginException) as error:
             self.action.run({Input.FOLDER_ID: folder_id, Input.FILE_ID: file_id})
-        self.assertEqual(e.exception.cause, cause)
-        self.assertEqual(e.exception.assistance, assistance)
-        self.assertEqual(e.exception.data, data)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)
+        self.assertEqual(error.exception.data, data)
