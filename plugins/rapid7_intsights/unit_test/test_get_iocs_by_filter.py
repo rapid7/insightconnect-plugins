@@ -5,10 +5,11 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
-from unit_test.util import Util
+from util import Util
 from icon_rapid7_intsights.actions.get_iocs_by_filter import GetIocsByFilter
-from icon_rapid7_intsights.actions.get_iocs_by_filter.schema import Input
+from icon_rapid7_intsights.actions.get_iocs_by_filter.schema import Input, GetIocsByFilterInput, GetIocsByFilterOutput
 from parameterized import parameterized
+from jsonschema import validate
 
 
 class TestGetIocsByFilter(TestCase):
@@ -30,7 +31,7 @@ class TestGetIocsByFilter(TestCase):
                     "tags": ["MyTag_1"],
                     "type": "Domains",
                     "value": "rapid7.com",
-                    "whitelisted": "false",
+                    "whitelisted": False,
                     "reportedFeeds": [{"id": "SampleID", "confidenceLevel": 3, "name": "AlienVault OTX"}],
                 }
             ],
@@ -43,7 +44,7 @@ class TestGetIocsByFilter(TestCase):
             ["lower_limit", {Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z", Input.LIMIT: 1}, None],
             ["below_limit", {Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z", Input.LIMIT: 0}, None],
             ["above_limit", {Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z", Input.LIMIT: 1001}, None],
-            ["single_input", {Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z", Input.LIMIT: None}, None],
+            ["single_input", {Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z", Input.LIMIT: 1}, None],
             [
                 "all_inputs",
                 {
@@ -64,12 +65,14 @@ class TestGetIocsByFilter(TestCase):
                 },
                 None,
             ],
-            ["no_results", {Input.LAST_UPDATED_FROM: "2000-12-30T00:00:00Z", Input.LIMIT: None}, {"content": []}],
+            ["no_results", {Input.LAST_UPDATED_FROM: "2000-12-30T00:00:00Z", Input.LIMIT: 1}, {"content": []}],
         ]
     )
     @patch("requests.request", side_effect=Util.mock_request)
     def test_get_indicator_by_filter_limit(self, test_name, input, expected, make_request):
+        validate(input, GetIocsByFilterInput.schema)
         if expected is None:
             expected = self.expected
         actual = self.action.run(input)
         self.assertEqual(expected, actual)
+        validate(actual, GetIocsByFilterOutput.schema)
