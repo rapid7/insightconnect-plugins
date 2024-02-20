@@ -57,12 +57,6 @@ class UserActivityEventOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
-  "required": [
-    "email",
-    "ip_address",
-    "time",
-    "type"
-  ],
   "definitions": {
     "user_activity": {
       "type": "object",
@@ -107,14 +101,14 @@ class UserActivityEventOutput(insightconnect_plugin_runtime.Output):
           "title": "Version",
           "description": "The version of the client of the user's device",
           "order": 6
-        },
-        "required": [
-          "email",
-          "ip_address",
-          "time",
-          "type"
-        ]
-      }
+        }
+      },
+      "required": [
+        "email",
+        "ip_address",
+        "time",
+        "type"
+      ]
     }
   }
 }

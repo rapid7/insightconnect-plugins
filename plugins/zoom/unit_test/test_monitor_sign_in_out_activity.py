@@ -10,9 +10,14 @@ from unittest.mock import MagicMock, patch
 
 from icon_zoom.connection.connection import Connection
 from icon_zoom.tasks.monitor_sign_in_out_activity.task import MonitorSignInOutActivity
+from icon_zoom.tasks.monitor_sign_in_out_activity.schema import (
+    MonitorSignInOutActivityOutput,
+    MonitorSignInOutActivityState,
+)
 from icon_zoom.util.event import Event
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
+from jsonschema import validate
 
 from mock import STUB_CONNECTION, STUB_OAUTH_TOKEN, Util
 
@@ -122,6 +127,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
             None,
         )
         expected_state = STUB_EXPECTED_PREVIOUS_STATE
+
         output, state, has_more_pages, status_code, error = self.task.run({})
 
         self.assertListEqual(output, expected_output)
@@ -129,6 +135,9 @@ class TestGetUserActivityEvents(unittest.TestCase):
         self.assertFalse(has_more_pages, expected_has_more_pages)
         self.assertEqual(status_code, expected_status_code)
         self.assertEqual(error, expected_error)
+
+        validate(output, MonitorSignInOutActivityOutput.schema)
+        validate(state, MonitorSignInOutActivityState.schema)
 
     @patch(GET_DATETIME_LAST_24_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
     @patch(GET_DATETIME_NOW_PATH, side_effect=[STUB_DATETIME_NOW + datetime.timedelta(minutes=DEFAULT_TIMEDELTA)])
@@ -148,6 +157,9 @@ class TestGetUserActivityEvents(unittest.TestCase):
         self.assertFalse(output, expected_has_more_pages)
         self.assertEqual(status_code, expected_status_code)
         self.assertEqual(error, expected_error)
+
+        validate(output, MonitorSignInOutActivityOutput.schema)
+        validate(state, MonitorSignInOutActivityState.schema)
 
     @patch(GET_DATETIME_LAST_24_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
     @patch(GET_DATETIME_NOW_PATH, side_effect=[STUB_DATETIME_NOW])
@@ -208,6 +220,9 @@ class TestGetUserActivityEvents(unittest.TestCase):
         self.assertEqual(status_code, first_expected_status_code)
         self.assertEqual(error, first_expected_error)
 
+        validate(output, MonitorSignInOutActivityOutput.schema)
+        validate(state, MonitorSignInOutActivityState.schema)
+
         # Second run
         mock_datetime_last_24.side_effect = [STUB_DATETIME_LAST_24_HOURS]
         mock_datetime_now.side_effect = [STUB_DATETIME_NOW + datetime.timedelta(minutes=DEFAULT_TIMEDELTA)]
@@ -246,6 +261,9 @@ class TestGetUserActivityEvents(unittest.TestCase):
         self.assertEqual(status_code, second_expected_status_code)
         self.assertEqual(error, second_expected_error)
 
+        validate(output, MonitorSignInOutActivityOutput.schema)
+        validate(state, MonitorSignInOutActivityState.schema)
+
     @patch(GET_DATETIME_NOW_PATH, return_value=datetime.datetime(2000, 1, 1))
     @patch(GET_USER_ACTIVITY_EVENTS_PATH, return_value=([{"test": "value"}], ""))
     def test_api_output_changed_error_catch(self, mock_call: MagicMock, mock_datetime: MagicMock) -> None:
@@ -270,6 +288,9 @@ class TestGetUserActivityEvents(unittest.TestCase):
         self.assertEqual(status_code, expected_status_code)
         self.assertEqual(error.cause, expected_error.cause)
         self.assertEqual(error.assistance, expected_error.assistance)
+
+        validate(output, MonitorSignInOutActivityOutput.schema)
+        validate(state, MonitorSignInOutActivityState.schema)
 
     @parameterized.expand(
         [
