@@ -47,11 +47,7 @@ class MonitorSignInOutActivityOutput(insightconnect_plugin_runtime.Output):
     "$ref": "#/definitions/user_activity"
   },
   "required": [
-    "activity_logs",
-    "email",
-    "ip_address",
-    "time",
-    "type"
+    "activity_logs"
   ],
   "definitions": {
     "user_activity": {
