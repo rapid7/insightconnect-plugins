@@ -52,25 +52,35 @@ class ExecuteScript(insightconnect_plugin_runtime.Action):
             )
         try:
             powershell_script = powershell_script.decode("utf-8")
-        except (base64.binascii.Error, UnicodeDecodeError):
+        except UnicodeDecodeError:
             try:
                 powershell_script = powershell_script.decode("ISO-8859-1")
-            except (base64.binascii.Error, UnicodeDecodeError) as exception:
-                self.logger.error("Base64 input " + encoded_powershell_script)
-                self.logger.error("Base64 decoded as bytes" + powershell_script)
+            except (UnicodeDecodeError, base64.binascii.Error) as exception:
+                # Log the base64 input and decoded bytes
+                self.logger.error("Base64 input: " + encoded_powershell_script)
+                self.logger.error("Base64 decoded as bytes: " + powershell_script)
+
+                # Raise a PluginException with the error information
                 raise PluginException(
-                    cause="Something went wrong decoding the base64 script bytes into UTF-8 or ISO-8859-1.",
-                    assistance="See log for more information",
+                    cause="While decoding the bytes into UTF-8 or ISO-8859-1 the following error occurred",
                     data=exception
                 )
             except Exception as exception:
                 self.logger.error("Base64 input " + encoded_powershell_script)
                 self.logger.error("Base64 decoded as bytes" + powershell_script)
                 raise PluginException(
-                    cause="Something went wrong decoding the base64 script bytes into UTF-8 or ISO-8859-1.",
+                    cause="Something went wrong decoding the base64 script bytes into utf-8.",
                     assistance="See log for more information",
                     data=exception,
                 )
+        except Exception as exception:
+            self.logger.error("Base64 input " + encoded_powershell_script)
+            self.logger.error("Base64 decoded as bytes" + powershell_script)
+            raise PluginException(
+                cause="Something went wrong decoding the base64 script bytes into utf-8.",
+                assistance="See log for more information",
+                data=exception,
+            )
         return powershell_script
 
     @staticmethod
