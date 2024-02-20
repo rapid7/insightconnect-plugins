@@ -66,9 +66,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         )
 
     # pylint: disable=unused-argument
-    def run(self, params={}, state={}):
+    def run(self, params={}, state={}, custom_config={}):
         try:
-            task_output: TaskOutput = self.loop(state=state)
+            task_output: TaskOutput = self.loop(state=state, custom_config=custom_config)
 
             # Turn events list back into a list of dicts
             output = [event.__dict__ for event in task_output.output]
@@ -80,9 +80,23 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             )
             return [], {}, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
-    def loop(self, state: Dict[str, Any]):  # noqa: C901
+    def loop(self, state: Dict[str, Any], custom_config: Dict[str, Any]):  # noqa: C901
         now = self._format_datetime_for_zoom(dt=self._get_datetime_now())
-        last_day = self._format_datetime_for_zoom(dt=self._get_datetime_last_24_hours())
+
+        if custom_config is not None:
+            last_day = self._format_datetime_for_zoom(
+                datetime(
+                    custom_config.get("year", 1970),
+                    custom_config.get("month", 1),
+                    custom_config.get("day", 1),
+                    custom_config.get("hour", 0),
+                    custom_config.get("minute", 0),
+                    custom_config.get("second", 0),
+                )
+            )
+            self.logger.info(f"A custom start time of {last_day} will be used")
+        else:
+            last_day = self._format_datetime_for_zoom(dt=self._get_datetime_last_24_hours())
 
         start_date_params = {
             RunState.starting: now,
