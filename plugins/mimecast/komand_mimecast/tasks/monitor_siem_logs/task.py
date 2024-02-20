@@ -112,9 +112,8 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
     def _get_filter_time(self, custom_config: Dict[str, int]) -> int:
         """
-        We want to apply the custom_config params if provided to the task. The logic is that if
-        a lookback value exists, this should take precedence to allow a larger filter time and only
-        once this no longer exists do we want to use the default value.
+        Apply custom_config params (if provided) to the task. If a lookback value exists, it should take
+        precedence (this can allow a larger filter time), otherwise use the default value.
         :param custom_config: dictionary passed containing `default` or `lookback` values
         :return: filter time to be applied in `_filter_and_sort_recent_events`
         """
