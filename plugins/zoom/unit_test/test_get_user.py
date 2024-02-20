@@ -9,8 +9,9 @@ from unittest import TestCase, mock
 from unittest.mock import MagicMock
 
 from icon_zoom.actions.get_user import GetUser
-from icon_zoom.actions.get_user.schema import Input
+from icon_zoom.actions.get_user.schema import Input, GetUserInput, GetUserOutput
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 from mock import STUB_USER_ID, Util, mock_request_201, mock_request_400, mock_request_404, mocked_request
 
@@ -25,6 +26,7 @@ class TestGetUser(TestCase):
     @mock.patch("icon_zoom.util.api.ZoomAPI.authenticate")
     @mock.patch("requests.request", side_effect=mock_request_201)
     def test_get_user_success(self, mock_get, mock_authenticate):
+        validate(self.params, GetUserInput.schema)
         mock_authenticate.return_value = 200
         response = self.action.run(self.params)
         expected_response = {
@@ -74,6 +76,7 @@ class TestGetUser(TestCase):
             }
         }
         self.assertEqual(response, expected_response)
+        validate(response, GetUserOutput.schema)
 
     @parameterized.expand(
         [
@@ -83,6 +86,7 @@ class TestGetUser(TestCase):
     )
     @mock.patch("icon_zoom.util.api.ZoomAPI._refresh_oauth_token", return_value=None)
     def test_not_ok(self, mock_request: MagicMock, exception: str, mock_refresh: MagicMock) -> None:
+        validate(self.params, GetUserInput.schema)
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
             self.action.run(self.params)
