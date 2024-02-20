@@ -1,15 +1,18 @@
 import sys
 import os
+
+sys.path.append(os.path.abspath("../"))
+
 import timeout_decorator
-from icon_rapid7_intsights.triggers import NewAlert
-from icon_rapid7_intsights.triggers.new_alert.schema import Input
-from unit_test.util import Util
+from icon_rapid7_intsights.triggers.new_alert import NewAlert
+from icon_rapid7_intsights.triggers.new_alert.schema import Input, NewAlertInput
+from util import Util
 from unittest import TestCase
 from unittest.mock import patch
 from parameterized import parameterized_class
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
-sys.path.append(os.path.abspath("../"))
 
 actual = None
 
@@ -86,7 +89,9 @@ class TestNewAlert(TestCase):
                 ]
             }
         )
-        self.action.run({Input.IS_CLOSED: "Open"})
+        input_params = {Input.IS_CLOSED: "Open"}
+        validate(input_params, NewAlertInput.schema)
+        self.action.run(input_params)
 
     @timeout_pass(error_callback=ErrorChecker.check_error)
     @timeout_decorator.timeout(2)
@@ -94,7 +99,9 @@ class TestNewAlert(TestCase):
     @patch("requests.request", side_effect=Util.mock_request)
     def test_trigger_with_list_of_alert_types(self, make_request, ss):
         ErrorChecker.set_expected({"alert_ids": ["7cafac7ec5adaebf62257a4a", "7cafac7ec5adaebf62257a4b"]})
-        self.action.run({Input.ALERT_TYPE: ["Phishing", "AttackIndication"]})
+        input_params = {Input.ALERT_TYPE: ["Phishing", "AttackIndication"]}
+        validate(input_params, NewAlertInput.schema)
+        self.action.run(input_params)
 
     @timeout_pass(error_callback=ErrorChecker.check_error)
     @timeout_decorator.timeout(2)
@@ -111,6 +118,7 @@ class TestNewAlert(TestCase):
                 ]
             }
         )
+        validate({}, NewAlertInput.schema)
         self.action.run()
 
     @timeout_pass(error_callback=ErrorChecker.check_error)
@@ -128,8 +136,9 @@ class TestNewAlert(TestCase):
                 ]
             }
         )
-
-        self.action.run({self.input_source: self.time_value})
+        input_params = {self.input_source: self.time_value}
+        validate(input_params, NewAlertInput.schema)
+        self.action.run(input_params)
 
     @timeout_pass(error_callback=ErrorChecker.check_error)
     @timeout_decorator.timeout(2)
