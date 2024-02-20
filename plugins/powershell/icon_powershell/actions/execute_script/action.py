@@ -52,18 +52,25 @@ class ExecuteScript(insightconnect_plugin_runtime.Action):
             )
         try:
             powershell_script = powershell_script.decode("utf-8")
-        except (base64.binascii.Error, UnicodeDecodeError) as e:
-            self.logger.error("Base64 input " + encoded_powershell_script)
-            self.logger.error("Base64 decoded as bytes" + powershell_script)
-            raise PluginException(cause="While decoding the bytes into utf-8 the following error occurred", data=e)
-        except Exception as e:
-            self.logger.error("Base64 input " + encoded_powershell_script)
-            self.logger.error("Base64 decoded as bytes" + powershell_script)
-            raise PluginException(
-                cause="Something went wrong decoding the base64 script bytes into utf-8.",
-                assistance="See log for more information",
-                data=e,
-            )
+        except (base64.binascii.Error, UnicodeDecodeError):
+            try:
+                powershell_script = powershell_script.decode("ISO-8859-1")
+            except (base64.binascii.Error, UnicodeDecodeError) as exception:
+                self.logger.error("Base64 input " + encoded_powershell_script)
+                self.logger.error("Base64 decoded as bytes" + powershell_script)
+                raise PluginException(
+                    cause="Something went wrong decoding the base64 script bytes into UTF-8 or ISO-8859-1.",
+                    assistance="See log for more information",
+                    data=exception
+                )
+            except Exception as exception:
+                self.logger.error("Base64 input " + encoded_powershell_script)
+                self.logger.error("Base64 decoded as bytes" + powershell_script)
+                raise PluginException(
+                    cause="Something went wrong decoding the base64 script bytes into UTF-8 or ISO-8859-1.",
+                    assistance="See log for more information",
+                    data=exception,
+                )
         return powershell_script
 
     @staticmethod
