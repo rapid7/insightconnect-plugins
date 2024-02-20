@@ -51,6 +51,10 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         "Health check failed. An error occurred during event collection: insufficient permissions for this action. "
         "Please ensure you add all required scopes for the Rapid7 app in Zoom."
     )
+    PERMISSIONS_ERROR_MESSAGE_USER = (
+        "Health check failed. An error occurred during event collection: insufficient permissions for this action. "
+        "Please ensure you add all required user permissions for the Rapid7 app in Zoom."
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -285,6 +289,22 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     error=PluginException(
                         cause=PluginException.causes[PluginException.Preset.UNAUTHORIZED],
                         assistance=self.PERMISSIONS_ERROR_MESSAGE,
+                        data=exception.data,
+                    ),
+                )
+            elif "No permission." in exception.data:
+                self.logger.error(self.PERMISSIONS_ERROR_MESSAGE_USER)
+                return TaskOutput(
+                    output=[],
+                    state={
+                        self.LAST_REQUEST_TIMESTAMP: now,
+                        self.LATEST_EVENT_TIMESTAMP: None,
+                    },
+                    has_more_pages=False,
+                    status_code=403,
+                    error=PluginException(
+                        cause=PluginException.causes[PluginException.Preset.UNAUTHORIZED],
+                        assistance=self.PERMISSIONS_ERROR_MESSAGE_USER,
                         data=exception.data,
                     ),
                 )
