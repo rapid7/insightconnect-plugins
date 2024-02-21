@@ -27,7 +27,7 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
 
         policies = self.connection.cisco_firepower_api.get_policies()
         # If get AND found, return whole individual policy object
-        for policy in policies.get("items", []):
+        for policy in policies:
             if policy.get("name") == policy_name:
                 return self.connection.cisco_firepower_api.get_policies(policy.get("id", ""))
         return None

@@ -85,7 +85,7 @@ class CiscoFirePowerApi:
         if policy_id:
             return self._call_api("GET", f"fmc_config/v1/domain/{self.domain_uuid}/policy/accesspolicies/{policy_id}")
         else:
-            return self._call_api("GET", f"fmc_config/v1/domain/{self.domain_uuid}/policy/accesspolicies")
+            return self.run_with_pages(f"fmc_config/v1/domain/{self.domain_uuid}/policy/accesspolicies")
 
     def post_rule(self, path: str, payload: dict):
         return self._call_api(
