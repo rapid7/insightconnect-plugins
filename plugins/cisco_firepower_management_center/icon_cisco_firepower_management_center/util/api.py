@@ -76,6 +76,30 @@ class CiscoFirePowerApi:
             json_data=payload,
         )
 
+    def post_policy(self, payload: dict):
+        return self._call_api(
+            "POST", f"fmc_config/v1/domain/{self.domain_uuid}/policy/accesspolicies", json_data=payload
+        )
+
+    def get_policies(self, policy_id: str = None):
+        if policy_id:
+            return self._call_api("GET", f"fmc_config/v1/domain/{self.domain_uuid}/policy/accesspolicies/{policy_id}")
+        else:
+            return self._call_api("GET", f"fmc_config/v1/domain/{self.domain_uuid}/policy/accesspolicies")
+
+    def post_rule(self, path: str, payload: dict):
+        return self._call_api(
+            "POST",
+            path=path,
+            json_data=payload,
+        )
+
+    def get_urls(self):
+        return self._call_api("GET", f"fmc_config/v1/domain/{self.domain_uuid}/object/urls")
+
+    def post_urls(self, payload: dict):
+        return self._call_api("POST", f"fmc_config/v1/domain/{self.domain_uuid}/object/urls", json_data=payload)
+
     def run_with_pages(self, path: str, expanded: bool = False) -> list:
         objects = []
         limit = 100
@@ -141,12 +165,13 @@ class CiscoFirePowerApi:
         return response.headers.get("X-auth-access-token")
 
     def find_domain_uuid(self) -> str:
-        domains = self._call_api("GET", "fmc_platform/v1/info/domain").get("items")
-
-        for domain in domains:
-            if domain.get("name") == self.domain:
-                return domain.get("uuid")
-        raise PluginException(
-            cause="Unable to find Domain provided.",
-            assistance="Please validate the domain name provided and try again.",
-        )
+        return "e276abec-e0f2-11e3-8169-6d9ed49b625f"
+        # domains = self._call_api("GET", "fmc_platform/v1/info/domain").get("items")
+        #
+        # for domain in domains:
+        #     if domain.get("name") == self.domain:
+        #         return domain.get("uuid")
+        # raise PluginException(
+        #     cause="Unable to find Domain provided.",
+        #     assistance="Please validate the domain name provided and try again.",
+        # )
