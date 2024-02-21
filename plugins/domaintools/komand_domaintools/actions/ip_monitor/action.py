@@ -1,24 +1,20 @@
-import komand
-from .schema import IpMonitorInput, IpMonitorOutput
+import insightconnect_plugin_runtime
+from .schema import IpMonitorInput, IpMonitorOutput, Input, Output, Component
 
 # Custom imports below
 from komand_domaintools.util import util
 
 
-class IpMonitor(komand.Action):
+class IpMonitor(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="ip_monitor",
-            description="Searches the daily activity of all our monitored TLDs on any given IP address",
+            description=Component.DESCRIPTION,
             input=IpMonitorInput(),
             output=IpMonitorOutput(),
         )
 
     def run(self, params={}):
-        params = komand.helper.clean_dict(params)
-        response = utils.make_request(self.connection.api.ip_monitor, **params)
+        params = insightconnect_plugin_runtime.helper.clean_dict(params)
+        response = util.make_request(self.connection.api.ip_monitor, **params)
         return response
-
-    def test(self):
-        """TODO: Test action"""
-        return {}
