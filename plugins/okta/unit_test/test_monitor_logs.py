@@ -21,6 +21,7 @@ class TestMonitorLogs(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.action = Util.default_connector(MonitorLogs())
+        cls.custom_config = {"default": 24, "lookback": 108}
 
     @parameterized.expand(
         [
@@ -62,7 +63,9 @@ class TestMonitorLogs(TestCase):
         if test_name in ["next_page_no_results", "without_state_no_results"]:
             mock_request.side_effect = Util.mock_empty_response
 
-        actual, actual_state, has_more_pages, status_code, error = self.action.run(state=current_state)
+        actual, actual_state, has_more_pages, status_code, error = self.action.run(
+            state=current_state, custom_config=self.custom_config
+        )
         self.assertEqual(actual, expected.get("logs"))
         self.assertEqual(actual_state, expected.get("state"))
         self.assertEqual(has_more_pages, expected.get("has_more_pages"))
@@ -85,7 +88,9 @@ class TestMonitorLogs(TestCase):
 
         current_state = {"last_collection_timestamp": "2023-04-27T08:49:21.764Z"}
         expected = Util.read_file_to_dict("expected/get_logs_filtered.json.exp")
-        actual, actual_state, has_more_pages, status_code, error = self.action.run(state=current_state)
+        actual, actual_state, has_more_pages, status_code, error = self.action.run(
+            state=current_state, custom_config=self.custom_config
+        )
         self.assertEqual(actual_state, expected.get("state"))
         self.assertEqual(has_more_pages, expected.get("has_more_pages"))
 
@@ -108,7 +113,9 @@ class TestMonitorLogs(TestCase):
         mocks[1].return_value = datetime(2023, 4, 27, 8, 45, 46, 123156, timezone.utc)
         now = "2023-04-28T08:33:46.123Z"  # Mocked value of 'now' - 1 minute
         current_state = {"last_collection_timestamp": "2023-04-27T07:49:21.777Z"}  # TS of the event in mocked response
-        actual, actual_state, has_more_pages, status_code, error = self.action.run(state=current_state)
+        actual, actual_state, has_more_pages, status_code, error = self.action.run(
+            state=current_state, custom_config=self.custom_config
+        )
         self.assertEqual(actual_state, current_state)  # state has not changed because no new events.
         self.assertNotEqual(actual_state.get("last_collection_timestamp"), now)  # we have not moved the TS forward.
         self.assertEqual(has_more_pages, False)  # empty results so no next pages.
@@ -132,7 +139,9 @@ class TestMonitorLogs(TestCase):
 
         paused_time = "2022-04-27T07:49:21.777Z"
         current_state = {"last_collection_timestamp": paused_time}  # Task has been paused for 1 year+
-        actual, state, _has_more_pages, _status_code, _error = self.action.run(state=current_state)
+        actual, state, _has_more_pages, _status_code, _error = self.action.run(
+            state=current_state, custom_config=self.custom_config
+        )
 
         # Basic check that we match the same as a first test/run which returns logs from the last 24 hours
         self.assertEqual(actual, expected.get("logs"))
@@ -140,8 +149,8 @@ class TestMonitorLogs(TestCase):
 
         # Check we called with the current parameters by looking at the info log
         logger = call(
-            f"Saved state {paused_time} exceeds the cut off (24 hours). "
-            f"Reverting to use time: 2023-04-27T08:33:46.123Z"
+            f"Saved state {paused_time} exceeds the cut off (108 hours). "
+            f"Reverting to use time: 2023-04-23T20:33:46.123Z"
         )
         self.assertIn(logger, mocked_info_log.call_args_list)
 
@@ -155,7 +164,9 @@ class TestMonitorLogs(TestCase):
 
         # Part one: call a normal next page workflow when we expect the TS to not exist in the response
         current_state = {"last_collection_timestamp": first_ts, "next_page_link": "https://example.com/nextLink?q=next"}
-        actual, new_state, has_more_pages, _status_code, _error = self.action.run(state=current_state)
+        actual, new_state, has_more_pages, _status_code, _error = self.action.run(
+            state=current_state, custom_config=self.custom_config
+        )
         self.assertEqual(1, len(actual))
         self.assertEqual(True, has_more_pages)
         self.assertIn(logger, mocked_info_log.call_args_list)
@@ -165,7 +176,9 @@ class TestMonitorLogs(TestCase):
         mocked_info_log.call_args_list = []  # reset the call list
         self.assertNotEqual(first_ts, new_state["last_collection_timestamp"])  # we have moved TS forward...
         self.assertEqual(actual[0]["published"], new_state["last_collection_timestamp"])  # to the returned log TS
-        new_logs, new_state_2, _has_more_pages, _status_code, _error = self.action.run(state=new_state)
+        new_logs, new_state_2, _has_more_pages, _status_code, _error = self.action.run(
+            state=new_state, custom_config=self.custom_config
+        )
         self.assertEqual(1, len(new_logs))
         self.assertEqual(new_state_2["last_collection_timestamp"], new_logs[0]["published"])
         self.assertIn(logger, mocked_info_log.call_args_list)
