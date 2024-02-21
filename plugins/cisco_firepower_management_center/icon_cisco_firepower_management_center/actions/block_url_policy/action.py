@@ -102,7 +102,6 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
             url_id = self.make_url_object(name=url_object_name, url=url)
             urls["objects"].append({"type": "URL", "id": url_id, "name": url_object_name})
         policy = self.make_policy(policy_name=policy_name)
-        print(f"Policy:\n{policy}\nRule Name:\n{rule_name}\nURLS:\n{urls}")
         self.make_rule(policy=policy, rule_name=rule_name, urls=urls)
 
         return {Output.SUCCESS: True}
