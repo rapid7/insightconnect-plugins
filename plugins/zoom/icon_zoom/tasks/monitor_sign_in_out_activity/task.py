@@ -83,15 +83,16 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     def loop(self, state: Dict[str, Any], custom_config: Dict[str, Any]):  # noqa: C901
         now = self._format_datetime_for_zoom(dt=self._get_datetime_now())
 
-        if custom_config is not None:
+        if custom_config.get("lookback") is not None:
+            lookback = custom_config.get("lookback", {})
             last_day = self._format_datetime_for_zoom(
                 datetime(
-                    custom_config.get("year", 1970),
-                    custom_config.get("month", 1),
-                    custom_config.get("day", 1),
-                    custom_config.get("hour", 0),
-                    custom_config.get("minute", 0),
-                    custom_config.get("second", 0),
+                    lookback.get("year", 1970),
+                    lookback.get("month", 1),
+                    lookback.get("day", 1),
+                    lookback.get("hour", 0),
+                    lookback.get("minute", 0),
+                    lookback.get("second", 0),
                 )
             )
             self.logger.info(f"A custom start time of {last_day} will be used")
