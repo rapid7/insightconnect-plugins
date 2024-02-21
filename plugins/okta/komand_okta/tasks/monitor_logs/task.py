@@ -10,6 +10,7 @@ import re
 
 CUTOFF = 24
 
+
 class MonitorLogs(insightconnect_plugin_runtime.Task):
     LAST_COLLECTION_TIMESTAMP = "last_collection_timestamp"
     NEXT_PAGE_LINK = "next_page_link"
@@ -102,7 +103,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
         if saved_time < cut_off:
             self.logger.info(
-                f"Saved state {saved_time} exceeds the cut off ({filter_hours} hours)." 
+                f"Saved state {saved_time} exceeds the cut off ({filter_hours} hours)."
                 f" Reverting to use time: {cut_off}"
             )
             state[self.LAST_COLLECTION_TIMESTAMP] = cut_off
