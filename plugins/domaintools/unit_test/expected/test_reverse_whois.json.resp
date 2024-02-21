@@ -1,0 +1,16 @@
+{
+    "response": {
+        "domain_count": {
+            "current": 0,
+            "historic": 1
+        },
+        "report_cost": {
+            "current": 0,
+            "historic": 49
+        },
+        "report_price": {
+            "current": 0,
+            "historic": 49
+        }
+    }
+}

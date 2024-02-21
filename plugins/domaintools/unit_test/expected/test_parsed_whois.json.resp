@@ -1,0 +1,112 @@
+{
+  "response": {
+    "registrant": "REDACTED FOR PRIVACY",
+    "registration": {
+      "created": "1998-08-02",
+      "expires": "2027-08-01",
+      "updated": "2020-01-09",
+      "registrar": "eNom, LLC",
+      "statuses": [
+        "clientTransferProhibited"
+      ]
+    },
+    "name_servers": [
+      "DNS1.P04.NSONE.NET",
+      "DNS2.P04.NSONE.NET",
+      "DNS3.P04.NSONE.NET",
+      "DNS4.P04.NSONE.NET"
+    ],
+    "whois": {
+      "date": "2024-02-14",
+      "record": "Domain Name: domaintools.com\nRegistry Domain ID: 1697312_DOMAIN_COM-VRSN\nRegistrar WHOIS Server: WHOIS.ENOM.COM\nRegistrar URL: WWW.ENOMDOMAINS.COM\nUpdated Date: 2020-01-09T23:06:29.00Z\nCreation Date: 1998-08-02T04:00:00.00Z\nRegistrar Registration Expiration Date: 2027-08-01T04:00:00.00Z\nRegistrar: ENOM, INC.\nRegistrar IANA ID: 48\nDomain Status: clientTransferProhibited https://www.icann.org/epp#clientTransferProhibited\nRegistrant Name: REDACTED FOR PRIVACY\nRegistrant Organization: REDACTED FOR PRIVACY\nRegistrant Street: REDACTED FOR PRIVACY\nRegistrant Street: \nRegistrant City: REDACTED FOR PRIVACY\nRegistrant State/Province: WA\nRegistrant Postal Code: REDACTED FOR PRIVACY\nRegistrant Country: US\nRegistrant Phone: REDACTED FOR PRIVACY\nRegistrant Phone Ext: \nRegistrant Fax: REDACTED FOR PRIVACY\nRegistrant Email: https://tieredaccess.com/contact/10459545-9c90-469f-976f-e92e546f081d\nAdmin Name: REDACTED FOR PRIVACY\nAdmin Organization: REDACTED FOR PRIVACY\nAdmin Street: REDACTED FOR PRIVACY\nAdmin Street: \nAdmin City: REDACTED FOR PRIVACY\nAdmin State/Province: REDACTED FOR PRIVACY\nAdmin Postal Code: REDACTED FOR PRIVACY\nAdmin Country: REDACTED FOR PRIVACY\nAdmin Phone: REDACTED FOR PRIVACY\nAdmin Phone Ext: \nAdmin Fax: REDACTED FOR PRIVACY\nAdmin Email: REDACTED FOR PRIVACY\nTech Name: REDACTED FOR PRIVACY\nTech Organization: REDACTED FOR PRIVACY\nTech Street: REDACTED FOR PRIVACY\nTech Street: \nTech City: REDACTED FOR PRIVACY\nTech State/Province: REDACTED FOR PRIVACY\nTech Postal Code: REDACTED FOR PRIVACY\nTech Country: REDACTED FOR PRIVACY\nTech Phone: REDACTED FOR PRIVACY\nTech Phone Ext: \nTech Fax: REDACTED FOR PRIVACY\nTech Email: REDACTED FOR PRIVACY\nName Server: DNS1.P04.NSONE.NET.\nName Server: DNS2.P04.NSONE.NET.\nName Server: DNS3.P04.NSONE.NET.\nName Server: DNS4.P04.NSONE.NET.\nDNSSEC: unsigned\nRegistrar Abuse Contact Email: ABUSE@ENOM.COM\nRegistrar Abuse Contact Phone: +1.4259744689\nURL of the ICANN WHOIS Data Problem Reporting System: HTTP://WDPRS.INTERNIC.NET/\n"
+    },
+    "parsed_whois": {
+      "domain": "domaintools.com",
+      "created_date": "1998-08-02T04:00:00+00:00",
+      "updated_date": "2020-01-09T23:06:29+00:00",
+      "expired_date": "2027-08-01T04:00:00+00:00",
+      "statuses": [
+        "clientTransferProhibited"
+      ],
+      "name_servers": [
+        "dns1.p04.nsone.net",
+        "dns1.p04.nsone.net.",
+        "dns2.p04.nsone.net",
+        "dns2.p04.nsone.net.",
+        "dns3.p04.nsone.net",
+        "dns3.p04.nsone.net.",
+        "dns4.p04.nsone.net",
+        "dns4.p04.nsone.net."
+      ],
+      "registrar": {
+        "name": "ENOM, INC. eNom, LLC",
+        "abuse_contact_phone": "+1.4259744689",
+        "abuse_contact_email": "ABUSE@ENOM.COM",
+        "iana_id": "48",
+        "url": "WWW.ENOMDOMAINS.COM,http://www.enomdomains.com",
+        "whois_server": "WHOIS.ENOM.COM"
+      },
+      "contacts": {
+        "registrant": {
+          "name": "REDACTED FOR PRIVACY",
+          "org": "REDACTED FOR PRIVACY",
+          "street": [
+            "REDACTED FOR PRIVACY"
+          ],
+          "city": "REDACTED FOR PRIVACY",
+          "state": "WA",
+          "postal": "REDACTED FOR PRIVACY",
+          "country": "US",
+          "phone": "REDACTED FOR PRIVACY",
+          "fax": "REDACTED FOR PRIVACY",
+          "email": "https://tieredaccess.com/contact/10459545-9c90-469f-976f-e92e546f081d"
+        },
+        "admin": {
+          "name": "REDACTED FOR PRIVACY",
+          "org": "REDACTED FOR PRIVACY",
+          "street": [
+            "REDACTED FOR PRIVACY"
+          ],
+          "city": "REDACTED FOR PRIVACY",
+          "state": "REDACTED FOR PRIVACY",
+          "postal": "REDACTED FOR PRIVACY",
+          "country": "REDACTED FOR PRIVACY",
+          "phone": "REDACTED FOR PRIVACY",
+          "fax": "REDACTED FOR PRIVACY",
+          "email": "REDACTED FOR PRIVACY"
+        },
+        "tech": {
+          "name": "REDACTED FOR PRIVACY",
+          "org": "REDACTED FOR PRIVACY",
+          "street": [
+            "REDACTED FOR PRIVACY"
+          ],
+          "city": "REDACTED FOR PRIVACY",
+          "state": "REDACTED FOR PRIVACY",
+          "postal": "REDACTED FOR PRIVACY",
+          "country": "REDACTED FOR PRIVACY",
+          "phone": "REDACTED FOR PRIVACY",
+          "fax": "REDACTED FOR PRIVACY",
+          "email": "REDACTED FOR PRIVACY"
+        },
+        "billing": {
+          "name": "",
+          "org": "",
+          "street": [],
+          "city": "",
+          "state": "",
+          "postal": "",
+          "country": "",
+          "phone": "",
+          "fax": "",
+          "email": ""
+        }
+      },
+      "other_properties": {
+        "dnssec": "unsigned",
+        "registry_domain_id": "1697312_DOMAIN_COM-VRSN"
+      }
+    },
+    "record_source": "domaintools.com"
+  }
+}

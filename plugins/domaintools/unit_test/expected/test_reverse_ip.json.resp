@@ -1,0 +1,16 @@
+{
+    "response": {
+        "ip_addresses": [
+            {
+                "domain_count": 1,
+                "domain_names": ["DOMAINTOOLS.NET"],
+                "ip_address": "199.30.228.77"
+            },
+            {
+                "domain_count": 3,
+                "domain_names": ["DOMAINTOOLS.COM", "SANTASFAVORITEWHOIS.COM", "WHOISSUGGEST.COM"],
+                "ip_address": "8.247.14.160"
+            }
+        ]
+    }
+}
