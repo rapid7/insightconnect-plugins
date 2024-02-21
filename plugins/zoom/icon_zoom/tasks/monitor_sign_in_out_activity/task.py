@@ -9,7 +9,7 @@ from .schema import (
 )
 
 # Custom imports below
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, date
 from typing import Optional, Union
 
 from icon_zoom.tasks.enums import RunState
@@ -83,11 +83,13 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     def loop(self, state: Dict[str, Any], custom_config: Dict[str, Any]):  # noqa: C901
         now = self._format_datetime_for_zoom(dt=self._get_datetime_now())
 
-        if custom_config.get("lookback") is not None:
-            lookback = custom_config.get("lookback", {})
+        lookback = custom_config.get("lookback")
+        if lookback is not None:
             last_day = self._format_datetime_for_zoom(
+                # a default of up to 12 months is used to allow for this to always run if there is missing value in the custom config
+                # as if the request is larger than 30 days, the api will only return 30 days worth of data
                 datetime(
-                    lookback.get("year", 1970),
+                    lookback.get("year", date.today().year),
                     lookback.get("month", 1),
                     lookback.get("day", 1),
                     lookback.get("hour", 0),
