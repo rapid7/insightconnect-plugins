@@ -1612,6 +1612,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 4.2.4 - Monitor Logs tasK: Update to latest SDK which adds new task custom_config parameter
 * 4.2.3 - Monitor Logs task: Added exception logging and use latest plugin SDK. Also Fixed schemas that contain passwords.
 * 4.2.2 - Monitor Logs task: log deduplication only applied when querying Okta using since and until parameters.
 * 4.2.1 - Monitor Logs task: filter previously returned log events | only update time checkpoint when an event is returned | update timestamp format | set cutoff time of 24 hours.

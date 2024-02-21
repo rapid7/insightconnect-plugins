@@ -69,7 +69,10 @@ class CreateUserInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "nextLogin"
+    "activate",
+    "nextLogin",
+    "profile",
+    "provider"
   ],
   "definitions": {
     "credentials": {

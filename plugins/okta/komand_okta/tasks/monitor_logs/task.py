@@ -5,8 +5,10 @@ from .schema import MonitorLogsInput, MonitorLogsOutput, MonitorLogsState, Compo
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_okta.util.exceptions import ApiException
 from datetime import datetime, timedelta, timezone
+from typing import Dict
 import re
 
+CUTOFF = 24
 
 class MonitorLogs(insightconnect_plugin_runtime.Task):
     LAST_COLLECTION_TIMESTAMP = "last_collection_timestamp"
@@ -22,26 +24,28 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             state=MonitorLogsState(),
         )
 
-    def run(self, params={}, state={}):  # pylint: disable=unused-argument
+    def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument
         self.connection.api_client.toggle_rate_limiting = False
         has_more_pages = False
         parameters = {}
         try:
+            filter_time = self._get_filter_time(custom_config)
             now = self.get_current_time() - timedelta(minutes=1)  # allow for latency of this being triggered
             now_iso = self.get_iso(now)
-            last_24_hours = self.get_iso(now - timedelta(hours=24))  # cut off point - never query beyond 24 hours
+            filter_hours = self.get_iso(now - timedelta(hours=filter_time))  # cut off point - never query beyond
+            # cutoff hours
             next_page_link = state.get(self.NEXT_PAGE_LINK)
             if not state:
                 self.logger.info("First run")
-                parameters = {"since": last_24_hours, "until": now_iso, "limit": 1000}
-                state[self.LAST_COLLECTION_TIMESTAMP] = last_24_hours  # we only change this once we get new events
+                parameters = {"since": filter_hours, "until": now_iso, "limit": 1000}
+                state[self.LAST_COLLECTION_TIMESTAMP] = filter_hours  # we only change this once we get new events
             else:
                 if next_page_link:
                     state.pop(self.NEXT_PAGE_LINK)
                     self.logger.info("Getting the next page of results...")
                 else:
                     parameters = {
-                        "since": self.get_since(state, last_24_hours),
+                        "since": self.get_since(state, filter_hours, filter_time),
                         "until": now_iso,
                         "limit": 1000,
                     }
@@ -84,19 +88,22 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         """
         return time.isoformat("T", "milliseconds").replace("+00:00", "Z")
 
-    def get_since(self, state: dict, cut_off: str) -> str:
+    def get_since(self, state: dict, cut_off: str, filter_hours: int) -> str:
         """
         If the customer has paused this task for an extended amount of time we don't want start polling events that
-        exceed 24 hours ago. Check if the saved state is beyond this and revert to use the last 24 hours time.
+        exceed the cutoff hours. Check if the saved state is beyond this and revert to use the last cutoff hours time.
+        Default 24 hours.
         :param state: saved state to check and update the time being used.
-        :param cut_off: string time of now - 24 hours.
+        :param cut_off: string time of now - default 24 hours.
+        :param filter_hours: filter time in hours
         :return: updated time string to use in the parameters.
         """
         saved_time = state.get(self.LAST_COLLECTION_TIMESTAMP)
 
         if saved_time < cut_off:
             self.logger.info(
-                f"Saved state {saved_time} exceeds the cut off (24 hours)." f" Reverting to use time: {cut_off}"
+                f"Saved state {saved_time} exceeds the cut off ({filter_hours} hours)." 
+                f" Reverting to use time: {cut_off}"
             )
             state[self.LAST_COLLECTION_TIMESTAMP] = cut_off
 
@@ -170,3 +177,16 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             new_ts = state_time
 
         return new_ts
+
+    def _get_filter_time(self, custom_config: Dict[str, int]) -> int:
+        """
+        Apply custom_config params (if provided) to the task. If a lookback value exists, it should take
+        precedence (this can allow a larger filter time), otherwise use the default value.
+        :param custom_config: dictionary passed containing `default` or `lookback` values
+        :return: filter time to be applied in `_filter_and_sort_recent_events`
+        """
+
+        default, lookback = custom_config.get("default", CUTOFF), custom_config.get("lookback")
+        filter_value = lookback if lookback else default
+        self.logger.info(f"Task execution will be applying filter period of {filter_value} hours...")
+        return int(filter_value)
