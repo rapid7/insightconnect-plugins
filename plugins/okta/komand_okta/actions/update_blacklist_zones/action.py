@@ -20,7 +20,7 @@ class UpdateBlacklistZones(insightconnect_plugin_runtime.Action):
         name = params.get(Input.NAME)
         value = params.get(Input.ADDRESS)
 
-        if validators.ipv4_cidr(value=value, cidr=True) or validators.ipv6_cidr(value=value, cidr=True):
+        if validators.ipv4(value=value, cidr=True) or validators.ipv6(value=value, cidr=True):
             value_type = "CIDR"
         else:
             value_type = "RANGE"
