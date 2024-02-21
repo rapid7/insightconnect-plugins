@@ -53,6 +53,25 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
             self.logger.info(f"Found policy returned for: {policy_name}")
             return policy_obj
 
+    def check_url_exists(self, name: str) -> Union[str, None]:
+        """
+        Helper method to check if the name for the URL already exists,
+        to prevent the code breaking if name is already found.
+
+        :param name: URL name
+
+        :return: The ID for the associated URL name if found, else None
+        """
+
+        response = self.connection.cisco_firepower_api.get_urls()
+
+        for item in response:
+            if item.get("name") == name:
+                self.logger.info(f"{name} found in URL List...")
+                return item.get("id")
+
+        return None
+
     def make_url_object(self, name: str, url: str) -> str:
         """
         A method to post the input URLs to add them to the db,
@@ -63,15 +82,17 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
 
         :return: Unique ID associated with URL
         """
-        payload = {"name": name, "url": url}
-        self.connection.cisco_firepower_api.post_urls(payload)
 
-        response = self.connection.cisco_firepower_api.get_urls()
-        url_list = response.get("items")
+        # Check if URL exists first
+        check_url = self.check_url_exists(name)
 
-        for item in url_list:
-            if item.get("name") == name:
-                return item.get("id")
+        # If it does not exist, post
+        if not check_url:
+            self.logger.info(f"{name} not found, creating...")
+            response = self.connection.cisco_firepower_api.post_urls({"name": name, "url": url})
+            return response.get("id", "")
+
+        return check_url
 
     def make_rule(self, policy: dict, rule_name: str, urls: dict) -> None:
         """

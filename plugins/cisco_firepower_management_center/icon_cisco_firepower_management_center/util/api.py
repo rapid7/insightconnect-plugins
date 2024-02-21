@@ -95,7 +95,7 @@ class CiscoFirePowerApi:
         )
 
     def get_urls(self):
-        return self._call_api("GET", f"fmc_config/v1/domain/{self.domain_uuid}/object/urls")
+        return self.run_with_pages(f"fmc_config/v1/domain/{self.domain_uuid}/object/urls")
 
     def post_urls(self, payload: dict):
         return self._call_api("POST", f"fmc_config/v1/domain/{self.domain_uuid}/object/urls", json_data=payload)
