@@ -1017,7 +1017,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
-* 5.3.7 - Task `monitor_siem_logs` adding in sanitisation for names of files to be read in.
+* 5.3.7 - Task `monitor_siem_logs` adding in sanitization for names of files to be read in | Include SDK 5.4 which adds new task custom_config parameter | Bump setuptools.
 * 5.3.6 - Task `monitor_siem_logs` revert filter logic to 24 hours.
 * 5.3.5 - Task `monitor_siem_logs` further error logging and bump filter logic to 108 hours.
 * 5.3.4 - Task `monitor_siem_logs` exception handling for JSONDecodeError.
