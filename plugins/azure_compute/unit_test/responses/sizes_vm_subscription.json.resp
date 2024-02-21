@@ -1,0 +1,12 @@
+{
+  "value": [
+    {
+      "maxDataDiskCount": 2,
+      "memoryInMB": 4096,
+      "name": "ExampleName",
+      "numberOfCores": 4,
+      "osDiskSizeInMB": 120000,
+      "resourceDiskSizeInMB": 60000
+    }
+  ]
+}
