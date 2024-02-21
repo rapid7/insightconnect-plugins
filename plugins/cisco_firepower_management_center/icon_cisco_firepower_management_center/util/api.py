@@ -165,13 +165,12 @@ class CiscoFirePowerApi:
         return response.headers.get("X-auth-access-token")
 
     def find_domain_uuid(self) -> str:
-        return "e276abec-e0f2-11e3-8169-6d9ed49b625f"
-        # domains = self._call_api("GET", "fmc_platform/v1/info/domain").get("items")
-        #
-        # for domain in domains:
-        #     if domain.get("name") == self.domain:
-        #         return domain.get("uuid")
-        # raise PluginException(
-        #     cause="Unable to find Domain provided.",
-        #     assistance="Please validate the domain name provided and try again.",
-        # )
+        domains = self._call_api("GET", "fmc_platform/v1/info/domain").get("items")
+
+        for domain in domains:
+            if domain.get("name") == self.domain:
+                return domain.get("uuid")
+        raise PluginException(
+            cause="Unable to find Domain provided.",
+            assistance="Please validate the domain name provided and try again.",
+        )
