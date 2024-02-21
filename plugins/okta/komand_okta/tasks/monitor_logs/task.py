@@ -189,5 +189,5 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
         default, lookback = custom_config.get("default", CUTOFF), custom_config.get("lookback")
         filter_value = lookback if lookback else default
-        self.logger.info(f"Task execution will be applying filter period of {filter_value} hours...")
+        print(f"Task execution will be applying filter period of {filter_value} hours...")
         return int(filter_value)
