@@ -19,8 +19,7 @@ class UpdateBlacklistZones(insightconnect_plugin_runtime.Action):
     def run(self, params={}):  # noqa: C901
         name = params.get(Input.NAME)
         value = params.get(Input.ADDRESS)
-
-        if validators.ipv4(value=value, cidr=True) or validators.ipv6(value=value, cidr=True):
+        if validators.ipv4(value, cidr=True, strict=True) or validators.ipv6(value, cidr=True, strict=True):
             value_type = "CIDR"
         else:
             value_type = "RANGE"

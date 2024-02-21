@@ -53,7 +53,6 @@ class Util:
         params = kwargs.get("params")
         json_data = kwargs.get("json")
         global first_request
-
         if url == "https://example.com/api/v1/logs":
             resp_args = {
                 "status_code": 200,
