@@ -17,9 +17,12 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
 
     def get_policy_object(self, policy_name: str) -> Union[dict, None]:
         """
+        A method to get the individual policy object if it is found, otherwise
+        return None
 
-        :param policy_name:
-        :return:
+        :param policy_name: Name of the policy
+
+        :return: Policy object if found, else None
         """
 
         policies = self.connection.cisco_firepower_api.get_policies()
@@ -31,9 +34,12 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
 
     def make_policy(self, policy_name: str) -> dict:
         """
+        A method to create a new policy object with the given name if not found,
+        else return the policy object matching the input name
 
-        :param policy_name:
-        :return:
+        :param policy_name: Name of the policy
+
+        :return: Policy object
         """
 
         policy_obj = self.get_policy_object(policy_name)
@@ -49,10 +55,13 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
 
     def make_url_object(self, name: str, url: str) -> str:
         """
+        A method to post the input URLs to add them to the db,
+        then get the URLs and return the corresponding, newly created ID for each.
 
-        :param name:
-        :param url:
-        :return:
+        :param name: URL Name, e.g. google
+        :param url: URL, e.g. https://www.google.com
+
+        :return: Unique ID associated with URL
         """
         payload = {"name": name, "url": url}
         self.connection.cisco_firepower_api.post_urls(payload)
@@ -66,11 +75,13 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
 
     def make_rule(self, policy: dict, rule_name: str, urls: dict) -> None:
         """
+        Make a new rule based on the input.
 
-        :param policy:
-        :param rule_name:
-        :param urls:
-        :return:
+        :param policy: Policy object from previous steps
+        :param rule_name: Name of the rule
+        :param urls: Object containing the URLs
+
+        :return: None
         """
         payload = {
             "name": rule_name,
@@ -87,10 +98,11 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         policy_name = params.get(Input.ACCESS_POLICY)
         rule_name = params.get(Input.RULE_NAME)
+        url_objects = params.get(Input.URL_OBJECTS)
 
         urls = {"objects": []}
         self.logger.info("Posting URLS")
-        for url_object in params.get(Input.URL_OBJECTS):
+        for url_object in url_objects:
             url = url_object.get("url")
             url_object_name = url_object.get("name")
             if len(url) > 400:
