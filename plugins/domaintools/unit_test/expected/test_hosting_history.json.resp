@@ -1,0 +1,99 @@
+{
+    "response": {
+        "domain_name": "example.com",
+        "ip_history": [
+            {
+                "action": "D",
+                "action_in_words": "Not Resolvable",
+                "actiondate": "2005-10-16",
+                "domain": "EXAMPLE.COM",
+                "post_ip": "",
+                "pre_ip": "192.0.34.166"
+            },
+            {
+                "action": "D",
+                "action_in_words": "Not Resolvable",
+                "actiondate": "2005-10-22",
+                "domain": "EXAMPLE.COM",
+                "post_ip": "",
+                "pre_ip": "192.0.34.166"
+            },
+            {
+                "action": "N",
+                "action_in_words": "New",
+                "actiondate": "2005-11-19",
+                "domain": "EXAMPLE.COM",
+                "post_ip": "192.0.34.166",
+                "pre_ip": ""
+            },
+            {
+                "action": "C",
+                "action_in_words": "Change",
+                "actiondate": "2007-05-20",
+                "domain": "EXAMPLE.COM",
+                "post_ip": "208.77.188.166",
+                "pre_ip": "192.0.34.166"
+            },
+            {
+                "action": "C",
+                "action_in_words": "Change",
+                "actiondate": "2009-10-14",
+                "domain": "EXAMPLE.COM",
+                "post_ip": "192.0.32.10",
+                "pre_ip": "208.77.188.166"
+            },
+            {
+                "action": "N",
+                "action_in_words": "New",
+                "actiondate": "2011-04-10",
+                "domain": "EXAMPLE.COM",
+                "post_ip": "192.0.32.10",
+                "pre_ip": ""
+            },
+            {
+                "action": "C",
+                "action_in_words": "Change",
+                "actiondate": "2011-06-21",
+                "domain": "EXAMPLE.COM",
+                "post_ip": "192.0.43.10",
+                "pre_ip": "192.0.32.10"
+            },
+            {
+                "action": "C",
+                "action_in_words": "Change",
+                "actiondate": "2013-08-12",
+                "domain": "EXAMPLE.COM",
+                "post_ip": "93.184.216.119",
+                "pre_ip": "192.0.43.10"
+            },
+            {
+                "action": "C",
+                "action_in_words": "Change",
+                "actiondate": "2014-12-18",
+                "domain": "EXAMPLE.COM",
+                "post_ip": "93.184.216.34",
+                "pre_ip": "93.184.216.119"
+            },
+            {
+                "action": "N",
+                "action_in_words": "New",
+                "actiondate": "2022-10-28",
+                "domain": "EXAMPLE.COM",
+                "post_ip": "93.184.216.34",
+                "pre_ip": ""
+            }
+        ],
+        "nameserver_history": [],
+        "registrar_history": [
+            {
+                "date_created": "1995-08-14",
+                "date_expires": "2011-08-13",
+                "date_lastchecked": "2006-11-20",
+                "date_updated": "2004-03-25",
+                "domain": "EXAMPLE.COM",
+                "registrar": "IANA - Reserved",
+                "registrartag": "RESERVED-INTERNET ASSIGNED NUMBERS AUTHORITY"
+            }
+        ]
+    }
+}
