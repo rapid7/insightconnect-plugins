@@ -59,6 +59,9 @@ class ListGroupsOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
+  "required": [
+    "success"
+  ],
   "definitions": {
     "group": {
       "type": "object",
