@@ -184,7 +184,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         Apply custom_config params (if provided) to the task. If a lookback value exists, it should take
         precedence (this can allow a larger filter time), otherwise use the default value.
         :param custom_config: dictionary passed containing `default` or `lookback` values
-        :return: filter time to be applied in `_filter_and_sort_recent_events`
+        :return: filter time to be applied in request to Okta
         """
 
         default, lookback = custom_config.get("default", CUTOFF), custom_config.get("lookback")
