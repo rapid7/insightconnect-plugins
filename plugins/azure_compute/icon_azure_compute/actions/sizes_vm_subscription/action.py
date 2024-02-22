@@ -5,6 +5,7 @@ from .schema import SizesVmSubscriptionInput, SizesVmSubscriptionOutput, Input, 
 import requests
 import json
 from insightconnect_plugin_runtime.exceptions import PluginException
+from icon_azure_compute.util.constants import DEFAULT_REQUESTS_TIMEOUT
 
 
 class SizesVmSubscription(insightconnect_plugin_runtime.Action):
@@ -17,20 +18,20 @@ class SizesVmSubscription(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        server = self.connection.server
+        token = self.connection.token
+        api_version = self.connection.api_version
+
+        # Get request parameter
+        subscription_id = params.get(Input.SUBSCRIPTIONID)
+        location = params.get(Input.LOCATION)
+
+        url = (
+            f"{server}/subscriptions/{subscription_id}/providers/Microsoft.Compute/locations/{location}/vmSizes"
+            f"?api-version={api_version}"
+        )
+
         try:
-            server = self.connection.server
-            token = self.connection.token
-            api_version = self.connection.api_version
-
-            # Get request parameter
-            subscription_id = params.get(Input.SUBSCRIPTIONID)
-            location = params.get("location", "")
-
-            url = (
-                f"{server}/subscriptions/{subscription_id}/providers/Microsoft.Compute/locations/{location}/vmSizes"
-                f"?api-version={api_version}"
-            )
-
             # New Request, Call API and response data
             response = requests.get(
                 url,
@@ -38,17 +39,13 @@ class SizesVmSubscription(insightconnect_plugin_runtime.Action):
                     "Content-Type": "application/json",
                     "Authorization": f"Bearer {token}",
                 },
+                timeout=DEFAULT_REQUESTS_TIMEOUT,
             )
-
-            # Handle decoding json
-            try:
-                result_dic = response.json()
-            except json.decoder.JSONDecodeError:
-                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.read())
-
-            return result_dic
-        # Handle exception
+            result_dict = response.json()
+        except json.decoder.JSONDecodeError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
         except requests.exceptions.HTTPError as error:
             raise PluginException(cause="HTTP Error", assistance=str(error))
-        except Exception:
-            raise PluginException(cause="URL Request Failed")
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+        return {Output.VALUE: result_dict.get(Output.VALUE, [])}

@@ -1,0 +1,35 @@
+{
+  "id": "5cdad72f-c848-4df0-8aaa-ffe033e75d57",
+  "location": "ExampleLocation",
+  "name": "ExampleName",
+  "properties": {
+    "availabilitySet": {
+      "id": "ExampleAvailabilitySetID"
+    },
+    "diagnosticsProfile": {
+      "bootDiagnostics": {
+        "storageUri": "ExampleStorageUri",
+        "enabled": true
+      }
+    },
+    "hardwareProfile": {
+      "vmSize": "ExampleVmSize"
+    },
+    "networkProfile": {
+      "networkInterfaces": [
+        {
+          "id": "ExampleAvailabilitySetID"
+        }
+      ]
+    },
+    "osProfile": {},
+    "storageProfile": {},
+    "provisioningState": "Succeeded",
+    "vmId": "1234567890"
+  },
+  "tags": {
+    "environment": "test"
+  },
+  "type": "ExampleType",
+  "vmId": "ExampleVMId"
+}
