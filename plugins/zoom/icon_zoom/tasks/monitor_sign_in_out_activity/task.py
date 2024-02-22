@@ -9,7 +9,7 @@ from .schema import (
 )
 
 # Custom imports below
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, date
 from typing import Optional, Union
 
 from icon_zoom.tasks.enums import RunState
@@ -66,9 +66,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         )
 
     # pylint: disable=unused-argument
-    def run(self, params={}, state={}):
+    def run(self, params={}, state={}, custom_config={}):
         try:
-            task_output: TaskOutput = self.loop(state=state)
+            task_output: TaskOutput = self.loop(state=state, custom_config=custom_config)
 
             # Turn events list back into a list of dicts
             output = [event.__dict__ for event in task_output.output]
@@ -80,9 +80,26 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             )
             return [], {}, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
-    def loop(self, state: Dict[str, Any]):  # noqa: C901
+    def loop(self, state: Dict[str, Any], custom_config: Dict[str, Any]):  # noqa: C901
         now = self._format_datetime_for_zoom(dt=self._get_datetime_now())
-        last_day = self._format_datetime_for_zoom(dt=self._get_datetime_last_24_hours())
+
+        lookback = custom_config.get("lookback")
+        if lookback is not None:
+            last_day = self._format_datetime_for_zoom(
+                # a default of up to 12 months is used to allow for this to always run if there is missing value in the custom config
+                # as if the request is larger than 30 days, the api will only return 30 days worth of data
+                datetime(
+                    lookback.get("year", date.today().year),
+                    lookback.get("month", 1),
+                    lookback.get("day", 1),
+                    lookback.get("hour", 0),
+                    lookback.get("minute", 0),
+                    lookback.get("second", 0),
+                )
+            )
+            self.logger.info(f"A custom start time of {last_day} will be used")
+        else:
+            last_day = self._format_datetime_for_zoom(dt=self._get_datetime_last_24_hours())
 
         start_date_params = {
             RunState.starting: now,
