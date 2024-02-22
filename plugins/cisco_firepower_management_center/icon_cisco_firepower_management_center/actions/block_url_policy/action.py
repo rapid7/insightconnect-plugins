@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import BlockUrlPolicyInput, BlockUrlPolicyOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
-from typing import Union, Dict, Any
+from typing import Union, Dict, Any, List
 
 # Custom imports below
 
@@ -94,7 +94,7 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
 
         return check_url
 
-    def make_rule(self, policy: Dict[str, Any], rule_name: str, urls: list[dict[str, str | Any]]) -> None:
+    def make_rule(self, policy: Dict[str, Any], rule_name: str, urls: List[Dict[str, str | Any]]) -> None:
         """
         Make a new rule based on the input.
 
