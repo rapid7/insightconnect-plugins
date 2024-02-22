@@ -11,7 +11,7 @@ support: community
 supported_versions: ["2022-06-01"]
 sdk:
   type: slim
-  version: 5.3.2
+  version: 5.4.0
   user: nobody
 status: []
 author: komand
