@@ -9,7 +9,6 @@ class Component:
 
 class Input:
     FIELDS = "fields"
-    ORDER_BY = "order_by"
     QUERY_OP = "query_op"
     TOP = "top"
 
@@ -29,13 +28,7 @@ class ListApiKeysInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "Fields",
       "description": "JSON object of fields to query by fileName or fileType",
-      "order": 4
-    },
-    "order_by": {
-      "type": "string",
-      "title": "Order by",
-      "description": "Specifies the field by which the results are sorted",
-      "order": 1
+      "order": 3
     },
     "query_op": {
       "type": "string",
@@ -46,7 +39,7 @@ class ListApiKeysInput(insightconnect_plugin_runtime.Input):
         " or ",
         " and "
       ],
-      "order": 3
+      "order": 2
     },
     "top": {
       "type": "integer",
@@ -57,7 +50,7 @@ class ListApiKeysInput(insightconnect_plugin_runtime.Input):
         100,
         200
       ],
-      "order": 2
+      "order": 1
     }
   },
   "required": [
@@ -143,9 +136,9 @@ class ListApiKeysOutput(insightconnect_plugin_runtime.Output):
           "description": "Timestamp in ISO 8601 format indicating the expiration date of the API key",
           "order": 6
         },
-        "last_updated_date_time": {
+        "last_used_date_time": {
           "type": "string",
-          "title": "Last Updated Date Time",
+          "title": "Last Used Date Time",
           "description": "The last time the API key was used in ISO 8601 format",
           "order": 7
         }
@@ -153,7 +146,7 @@ class ListApiKeysOutput(insightconnect_plugin_runtime.Output):
       "required": [
         "expired_date_time",
         "id",
-        "last_updated_date_time",
+        "last_used_date_time",
         "name",
         "role"
       ]

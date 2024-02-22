@@ -1001,8 +1001,8 @@ types:
       type: string
       description: Timestamp in ISO 8601 format indicating the expiration date of the API key
       required: true
-    last_updated_date_time:
-      title: Last Updated Date Time
+    last_used_date_time:
+      title: Last Used Date Time
       type: string
       description: The last time the API key was used in ISO 8601 format
       required: true
@@ -2623,12 +2623,6 @@ actions:
     title: List API Keys
     description: Displays a list of all your API keys in a list
     input:
-      order_by:
-        title: Order by
-        type: string
-        description: Specifies the field by which the results are sorted
-        required: false
-        example: createdDateTime desc
       top:
         title: Top
         type: integer
