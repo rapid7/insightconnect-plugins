@@ -911,6 +911,102 @@ types:
       type: string
       description: Log unique identity
       required: false
+  api_keys_objects:
+    name:
+      title: Name
+      type: string
+      description: The unique name of an API key
+      required: true
+    role:
+      title: Role
+      type: string
+      description: The user role assigned to the API key
+      required: true
+    months_to_expiration:
+      title: Months to Expiration
+      type: integer
+      description: The duration of validity for the API key (in months, 0 for no expiration)
+      required: false
+      enum:
+        - 1
+        - 3
+        - 6
+        - 12
+        - 0
+    description:
+      title: Description
+      type: string
+      description: A brief note about the API key
+      required: false
+    status:
+      title: Status
+      type: string
+      description: The status of an API key
+      required: false
+      enum:
+        - enabled
+        - disabled
+  api_keys_resp:
+    status:
+      title: Status
+      type: integer
+      description: The Status Code of the submitted API keys task
+      required: true
+    id:
+      title: ID
+      type: string
+      description: The unique identifier of the API key
+      required: true
+    value:
+      title: Value
+      type: string
+      description: The API key
+      required: true
+    expired_date_time:
+      title: Expired Date Time
+      type: string
+      description: Timestamp in ISO 8601 format indicating the expiration date of the API key
+      required: true
+  api_keys_list_resp:
+    id:
+      title: ID
+      type: string
+      description: The unique identifier of the API key
+      required: true
+    name:
+      title: Name
+      type: string
+      description: The unique name of an API key
+      required: true
+    status:
+      title: Status
+      type: string
+      description: The status of an API key
+      required: false
+      enum:
+        - enabled
+        - disabled
+    role:
+      title: Role
+      type: string
+      description: The user role assigned to the API key
+      required: true
+    description:
+      title: Description
+      type: string
+      description: A brief note about the API key
+      required: false
+    expired_date_time:
+      title: Expired Date Time
+      type: string
+      description: Timestamp in ISO 8601 format indicating the expiration date of the API key
+      required: true
+    last_updated_date_time:
+      title: Last Updated Date Time
+      type: string
+      description: The last time the API key was used in ISO 8601 format
+      required: true
+
 
 connection:
   api_url:
@@ -2377,3 +2473,198 @@ actions:
         description: Number of records returned by a query
         required: true
         example: 5
+  create_api_keys:
+    title: Create API Keys
+    description: Generates API keys that allow third-party applications to access the Trend Vision One APIs
+    input:
+      api_keys_objects:
+        title: API Keys Objects
+        type: "[]api_keys_objects"
+        description: List of JSON objects containing data for API keys creation
+        required: true
+        example: '[{"name":"TestKey","role":"Analyst","months_to_expiration":1,"description":"Test API Key create","status":"enabled"}]'
+    output:
+      api_keys_resp:
+        title: API Keys Response
+        type: "[]api_keys_resp"
+        description: List of API keys responses
+        required: true
+        example: '[{"status":200,"id":"d367abdd-7739-4129-a36a-862c4ec018b4","value":"API-KEY","expiredDateTime":"2025-02-06T10:00:00Z"}]'
+  get_api_key:
+    title: Get API Key
+    description: Displays information of the specified API key
+    input:
+      id:
+        title: ID
+        type: string
+        description: The unique identifier of the API key
+        required: true
+        example: 2ee04177-53d7-4fc7-a9d7-39285d80f58a
+    output:
+      etag:
+        title: ETag
+        type: string
+        description: Unique alphanumeric string that identifies the version of a resource
+        required: false
+        example: d41d8cd98f00b204e9800998ecf8427e
+      id:
+        title: ID
+        type: string
+        description: The unique identifier of the API key
+        required: true
+        example: d367abdd-7739-4129-a36a-862c4ec018b4
+      name:
+        title: Name
+        type: string
+        description: The unique name of the API key
+        required: true
+        example: test
+      status:
+        title: Status
+        type: string
+        description: The status of an API key
+        required: true
+        example: enabled
+        enum:
+          - enabled
+          - disabled
+      role:
+        title: Role
+        type: string
+        description: The user role assigned to the API key
+        required: true
+        example: Master Administrator
+      description:
+        title: Description
+        type: string
+        description: A brief note about the API key
+        required: false
+        example: this is a test apikey
+      last_used_date_time:
+        title: Last Used Date Time
+        type: string
+        description: Timestamp in ISO 8601 format indicating the last time the API key was used
+        required: true
+        example: 2023-02-06T10:00:00Z
+      expired_date_time:
+        title: Expired Date Time
+        type: string
+        description: Timestamp in ISO 8601 format indicating the expiration date of the API key
+        required: true
+        example: 2025-02-06T10:00:00Z
+  update_api_key:
+    title: Update API Key
+    description: Updates the specified API key
+    input:
+      id:
+        title: ID
+        type: string
+        description: The unique identifier of the API key
+        required: true
+        example: 2ee04177-53d7-4fc7-a9d7-39285d80f58a
+      if_match:
+        title: If Match
+        type: string
+        description: The ETag of the resource you want to update. The resource is updated only if the provided value matches the ETag of the resource
+        required: false
+        example: "d41d8cd98f00b204e9800998ecf8427e"
+      name:
+        title: Name
+        type: string
+        description: The unique name of the API key
+        required: true
+        example: test
+      status:
+        title: Status
+        type: string
+        description: The status of an API key
+        required: true
+        example: enabled
+        enum:
+          - enabled
+          - disabled
+      role:
+        title: Role
+        type: string
+        description: The user role assigned to the API key
+        required: true
+        example: Master Administrator
+      description:
+        title: Description
+        type: string
+        description: A brief note about the API key
+        required: false
+        example: this is a test apikey
+    output:
+      status:
+        title: Status
+        type: integer
+        description: The Status Code of the API key update
+        required: true
+        example: 204
+  delete_api_keys:
+    title: Delete API Keys
+    description: Deletes the specified API keys
+    input:
+      id:
+        title: ID
+        type: "[]string"
+        description: List of unique identifiers of the API keys
+        required: true
+        example: '["d367abdd-7739-4129-a36a-862c4ec018b4","b667abdd-7739-4129-a36a-862c4ec019se"]'
+    output:
+      status:
+        title: Status
+        type: integer
+        description: The Status Code of the API key update
+        required: true
+        example: 207
+  list_api_keys:
+    title: List API Keys
+    description: Displays a list of all your API keys in a list
+    input:
+      order_by:
+        title: Order by
+        type: string
+        description: Specifies the field by which the results are sorted
+        required: false
+        example: createdDateTime desc
+      top:
+        title: Top
+        type: integer
+        description: Number of records displayed on a page
+        required: false
+        example: 50
+        enum:
+          - 50
+          - 100
+          - 200
+      query_op:
+        title: Query Operator
+        type: string
+        description: Logical operator to employ in the query. (AND/OR)
+        required: true
+        example: " or "
+        default: " or "
+        enum:
+          - " or "
+          - " and "
+      fields:
+        title: Fields
+        type: object
+        description: JSON object of fields to query by fileName or fileType
+        required: true
+        example: '{"role":"Master Administrator"}'
+    output:
+      total_count:
+        title: Total Count
+        type: integer
+        description: The number of retrieved API keys
+        required: true
+        example: 5
+      items:
+        title: Items
+        type: "[]api_keys_list_resp"
+        description: List of API key object responses
+        required: true
+        example: '[{"id":"d367abdd-7739-4129-a36a-862c4ec018b4","name":"test","status":"enabled","role":"Master Administrator","description":"this is a test","expiredDateTime":"2025-02-06T10:00:00Z","lastUsedDateTime":"2023-02-06T10:00:00Z"}]'

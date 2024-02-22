@@ -122,6 +122,16 @@ def main():
         
             self.add_action(actions.GetEndpointActivityDataCount())
         
+            self.add_action(actions.CreateApiKeys())
+        
+            self.add_action(actions.GetApiKey())
+        
+            self.add_action(actions.UpdateApiKey())
+        
+            self.add_action(actions.DeleteApiKeys())
+        
+            self.add_action(actions.ListApiKeys())
+        
 
     """Run plugin"""
     cli = insightconnect_plugin_runtime.CLI(ICONTrendmicroVisionone())
