@@ -106,10 +106,16 @@ class Util:
             return MockResponse("get_server_version", 200)
         if args[0] == "https://example.com/api/fmc_config/v1/domain/1/object/urls":
             return MockResponse("url_object", 201)
-        if kwargs.get('json', {}) is None:
-            if args[1] == "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/urls":
+        if kwargs.get("json", {}) is None:
+            if (
+                args[1]
+                == "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/urls"
+            ):
                 return MockResponse("url_object", 200)
-            if args[1] == "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/policy/accesspolicies":
+            if (
+                args[1]
+                == "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/policy/accesspolicies"
+            ):
                 return MockResponse("access_policy", 200)
         if args[0] == "https://example.com/api/fmc_config/v1/domain/1/object/urls/00000000-0000-0000-0000-000000000001":
             return MockResponse("url_object", 200)
@@ -229,7 +235,8 @@ class Util:
             return MockResponse("create_object_ipv6_cidr", 200)
         if (
             args[0] == "POST"
-            and args[1] == "https://example.com/api/fmc_config/v1/domain/1/policy/accesspolicies/00000000-0000-0000-0000-000000000001/accessrules"
+            and args[1]
+            == "https://example.com/api/fmc_config/v1/domain/1/policy/accesspolicies/00000000-0000-0000-0000-000000000001/accessrules"
         ):
             return MockResponse("access_rule", 200)
         if kwargs.get("json", {}).get("name") == "example.com":
