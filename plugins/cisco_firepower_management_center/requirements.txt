@@ -1,7 +1,6 @@
 # List third-party dependencies here, separated by newlines. 
 # All dependencies must be version-pinned, eg. requests==1.2.0
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
-fmcapi==20231211.0
-pyOpenSSL==23.3.0
 validators==0.22.0
 parameterized==0.9.0
+cryptography==42.0.2
