@@ -118,7 +118,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 )
             else:
                 start_time = self._format_datetime_for_zoom(
-                    dt=self._get_datetime_last_x_hours(cutoff.get("hours", self.DEFAULT_CUTOFF))
+                    dt=self._get_datetime_last_x_hours(cutoff.get("hours", self.DEFAULT_CUTOFF_HOURS))
                 )
 
         start_date_params = {
