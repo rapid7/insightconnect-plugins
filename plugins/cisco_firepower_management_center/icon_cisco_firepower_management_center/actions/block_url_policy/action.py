@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import BlockUrlPolicyInput, BlockUrlPolicyOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
-from typing import Union
+from typing import Union, Dict, Any
 
 # Custom imports below
 
@@ -28,7 +28,7 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
         policies = self.connection.cisco_firepower_api.get_policies()
         # If get AND found, return whole individual policy object
         for policy in policies:
-            if policy.get("name") == policy_name:
+            if policy.get("name", "") == policy_name:
                 return self.connection.cisco_firepower_api.get_policies(policy.get("id", ""))
         return None
 
@@ -66,9 +66,9 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
         response = self.connection.cisco_firepower_api.get_urls()
 
         for item in response:
-            if item.get("name") == name:
+            if item.get("name", "") == name:
                 self.logger.info(f"{name} found in URL List...")
-                return item.get("id")
+                return item.get("id", "")
 
         return None
 
@@ -94,7 +94,7 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
 
         return check_url
 
-    def make_rule(self, policy: dict, rule_name: str, urls: dict) -> None:
+    def make_rule(self, policy: Dict[str, Any], rule_name: str, urls: list[dict[str, str | Any]]) -> None:
         """
         Make a new rule based on the input.
 
@@ -106,7 +106,7 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
         """
         payload = {
             "name": rule_name,
-            "urls": urls,
+            "urls": {"objects": urls},
             "action": "BLOCK",
             "enabled": True,
         }
@@ -121,7 +121,7 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
         rule_name = params.get(Input.RULE_NAME)
         url_objects = params.get(Input.URL_OBJECTS)
 
-        urls = {"objects": []}
+        urls = []
         self.logger.info("Posting URLS")
         for url_object in url_objects:
             url = url_object.get("url")
@@ -133,7 +133,7 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
                 )
 
             url_id = self.make_url_object(name=url_object_name, url=url)
-            urls["objects"].append({"type": "URL", "id": url_id, "name": url_object_name})
+            urls.append({"type": "URL", "id": url_id, "name": url_object_name})
         policy = self.make_policy(policy_name=policy_name)
         self.make_rule(policy=policy, rule_name=rule_name, urls=urls)
 
