@@ -94,7 +94,7 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
 
         return check_url
 
-    def make_rule(self, policy: Dict[str, Any], rule_name: str, urls: List[Dict[str, str | Any]]) -> None:
+    def make_rule(self, policy: Dict[str, Any], rule_name: str, urls: List[Dict[str, Union[str, Any]]]) -> None:
         """
         Make a new rule based on the input.
 
