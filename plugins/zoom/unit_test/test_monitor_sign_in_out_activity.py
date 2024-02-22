@@ -24,8 +24,8 @@ from mock import STUB_CONNECTION, STUB_OAUTH_TOKEN, Util
 REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI._refresh_oauth_token"
 GET_USER_ACTIVITY_EVENTS_PATH = "icon_zoom.util.api.ZoomAPI.get_user_activity_events_task"
 GET_DATETIME_NOW_PATH = "icon_zoom.tasks.monitor_sign_in_out_activity.task.MonitorSignInOutActivity._get_datetime_now"
-GET_DATETIME_LAST_24_HOURS_PATH = (
-    "icon_zoom.tasks.monitor_sign_in_out_activity.task.MonitorSignInOutActivity._get_datetime_last_24_hours"
+GET_DATETIME_LAST_X_HOURS_PATH = (
+    "icon_zoom.tasks.monitor_sign_in_out_activity.task.MonitorSignInOutActivity._get_datetime_last_x_hours"
 )
 
 STUB_SAMPLES = [
@@ -114,7 +114,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
     def setUp(self, mock_refresh_call: MagicMock) -> None:
         self.task = Util.default_connector(MonitorSignInOutActivity())
 
-    @patch(GET_DATETIME_LAST_24_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
+    @patch(GET_DATETIME_LAST_X_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
     @patch(GET_DATETIME_NOW_PATH, side_effect=[STUB_DATETIME_NOW])
     @patch(GET_USER_ACTIVITY_EVENTS_PATH, return_value=(STUB_EXPECTED_PREVIOUS_OUTPUT, ""))
     def test_first_run(
@@ -139,7 +139,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
         validate(output, MonitorSignInOutActivityOutput.schema)
         validate(state, MonitorSignInOutActivityState.schema)
 
-    @patch(GET_DATETIME_LAST_24_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
+    @patch(GET_DATETIME_LAST_X_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
     @patch(GET_DATETIME_NOW_PATH, side_effect=[STUB_DATETIME_NOW + datetime.timedelta(minutes=DEFAULT_TIMEDELTA)])
     @patch(GET_USER_ACTIVITY_EVENTS_PATH, return_value=(STUB_EXPECTED_PREVIOUS_OUTPUT, ""))
     def test_subsequent_run(
@@ -161,7 +161,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
         validate(output, MonitorSignInOutActivityOutput.schema)
         validate(state, MonitorSignInOutActivityState.schema)
 
-    @patch(GET_DATETIME_LAST_24_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
+    @patch(GET_DATETIME_LAST_X_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
     @patch(GET_DATETIME_NOW_PATH, side_effect=[STUB_DATETIME_NOW])
     @patch(GET_USER_ACTIVITY_EVENTS_PATH)
     def test_first_and_subsequent_runs(
