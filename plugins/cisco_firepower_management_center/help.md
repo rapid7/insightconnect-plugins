@@ -712,6 +712,7 @@ Example output:
 
 # Version History
 
+* 2.1.2 - `Block URL Policy` - Refactor the action to use local API calls | Remove vulnerable dependencies
 * 2.1.1 - Updated to latest SDK version | Fixed issue related to pagination
 * 2.1.0 - `Check if Address in Group`: Extended search for manually added literals | Added new output field `literal_objects`
 * 2.0.1 - Fix issue in Add Address to Group action where Network Groups that had no objects would result in action failure
