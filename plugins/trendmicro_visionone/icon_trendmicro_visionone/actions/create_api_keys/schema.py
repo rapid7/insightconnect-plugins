@@ -52,7 +52,7 @@ class CreateApiKeysInput(insightconnect_plugin_runtime.Input):
           "order": 2
         },
         "months_to_expiration": {
-          "type": "integer",
+          "type": "string",
           "title": "Months to Expiration",
           "description": "The duration of validity for the API key (in months, 0 for no expiration)",
           "enum": [
