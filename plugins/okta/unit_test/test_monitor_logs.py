@@ -141,7 +141,7 @@ class TestMonitorLogs(TestCase):
         # Test the scenario that a customer has paused the collector for an extended amount of time to test when they
         # resume the task we should cut off, at a max 24 hours ago for since parameter.
         expected = Util.read_file_to_dict("expected/get_logs.json.exp")  # logs from last 24 hours
-        custom_config = {"default": 108, "lookback": 108}
+        custom_config = {"default": 108, "lookback": "2023-04-23T20:33:46.123Z"}
         paused_time = "2022-04-27T07:49:21.777Z"
         current_state = {"last_collection_timestamp": paused_time}  # Task has been paused for 1 year+
         actual, state, _has_more_pages, _status_code, _error = self.action.run(
@@ -154,7 +154,7 @@ class TestMonitorLogs(TestCase):
 
         # Check we called with the current parameters by looking at the info log
         logger = call(
-            f"Saved state {paused_time} exceeds the cut off (108 hours). "
+            f"Saved state {paused_time} is before the cut off date (2023-04-23T20:33:46.123Z). "
             f"Reverting to use time: 2023-04-23T20:33:46.123Z"
         )
         self.assertIn(logger, mocked_info_log.call_args_list)
