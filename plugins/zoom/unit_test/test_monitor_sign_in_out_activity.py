@@ -313,7 +313,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
             [
                 {
                     "lookback": CUSTOM_LOOKBACK,
-                    "cuttoff": CUSTOM_CUTOFF_DATE,
+                    "cutoff": CUSTOM_CUTOFF_DATE,
                 },
                 {
                     "start_date": "2023-01-23T22:00:00Z",
@@ -326,7 +326,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
             [
                 {
                     "lookback": CUSTOM_LOOKBACK,
-                    "cuttoff": CUSTOM_CUTOFF_HOURS,
+                    "cutoff": CUSTOM_CUTOFF_HOURS,
                 },
                 {
                     "start_date": "2023-01-23T22:00:00Z",
@@ -348,7 +348,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
             ],
             [
                 {
-                    "cuttoff": CUSTOM_CUTOFF_HOURS,
+                    "cutoff": CUSTOM_CUTOFF_HOURS,
                 },
                 {
                     "start_date": "2023-01-23T22:00:00Z",
