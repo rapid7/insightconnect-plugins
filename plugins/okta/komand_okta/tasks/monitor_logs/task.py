@@ -5,7 +5,7 @@ from .schema import MonitorLogsInput, MonitorLogsOutput, MonitorLogsState, Compo
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_okta.util.exceptions import ApiException
 from datetime import datetime, timedelta, timezone
-from typing import Dict
+from typing import Dict, Any
 import re
 
 CUTOFF = 24
@@ -30,11 +30,15 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         has_more_pages = False
         parameters = {}
         try:
-            filter_time = self._get_filter_time(custom_config)
+            filter_time, is_filter_datetime = self._get_filter_time(custom_config)
             now = self.get_current_time() - timedelta(minutes=1)  # allow for latency of this being triggered
             now_iso = self.get_iso(now)
-            filter_hours = self.get_iso(now - timedelta(hours=filter_time))  # cut off point - never query beyond
-            # cutoff hours
+            # Whether to convert filter_time in hours to datetime
+            if is_filter_datetime:
+                filter_hours = filter_time
+            else:
+                # If false, we assume filter_time is an integer or string representing hours and get datetime
+                filter_hours = self.get_iso(now - timedelta(hours=int(filter_time)))  # cutoff point, never query beyond
             next_page_link = state.get(self.NEXT_PAGE_LINK)
             if not state:
                 self.logger.info("First run")
@@ -46,7 +50,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     self.logger.info("Getting the next page of results...")
                 else:
                     parameters = {
-                        "since": self.get_since(state, filter_hours, filter_time),
+                        "since": self.get_since(state, filter_hours, filter_time, is_filter_datetime),
                         "until": now_iso,
                         "limit": 1000,
                     }
@@ -80,6 +84,19 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         return datetime.now(timezone.utc)
 
     @staticmethod
+    def check_if_datetime(date_time: Any):
+        """
+        Check if passed value is a date_time, returning True or False
+        :param date_time: date_time value, or int/string representing hours
+        :return: boolean result based on date_time value type check
+        """
+        try:
+            datetime.fromisoformat(str(date_time).rstrip("Z"))
+            return True
+        except ValueError:
+            return False
+
+    @staticmethod
     def get_iso(time: datetime) -> str:
         """
         Match the timestamp format used in old collector code and the format that Okta uses for 'published' to allow
@@ -89,23 +106,30 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         """
         return time.isoformat("T", "milliseconds").replace("+00:00", "Z")
 
-    def get_since(self, state: dict, cut_off: str, filter_hours: int) -> str:
+    def get_since(self, state: dict, cut_off: str, filter_hours: int, is_date_time: bool) -> str:
         """
         If the customer has paused this task for an extended amount of time we don't want start polling events that
         exceed the cutoff hours. Check if the saved state is beyond this and revert to use the last cutoff hours time.
-        Default 24 hours.
+        Default CUTOFF value.
         :param state: saved state to check and update the time being used.
-        :param cut_off: string time of now - default 24 hours.
-        :param filter_hours: filter time in hours
+        :param cut_off: string time of now - default CUTOFF value.
+        :param filter_hours: filter time in hours or timestamp
+        :param is_date_time: is filter time datetime or hours
         :return: updated time string to use in the parameters.
         """
         saved_time = state.get(self.LAST_COLLECTION_TIMESTAMP)
 
         if saved_time < cut_off:
-            self.logger.info(
-                f"Saved state {saved_time} exceeds the cut off ({filter_hours} hours)."
-                f" Reverting to use time: {cut_off}"
-            )
+            if is_date_time:
+                self.logger.info(
+                    f"Saved state {saved_time} is before the cut off date ({filter_hours})."
+                    f" Reverting to use time: {cut_off}"
+                )
+            else:
+                self.logger.info(
+                    f"Saved state {saved_time} exceeds the cut off ({filter_hours} hours)."
+                    f" Reverting to use time: {cut_off}"
+                )
             state[self.LAST_COLLECTION_TIMESTAMP] = cut_off
 
         return state[self.LAST_COLLECTION_TIMESTAMP]
@@ -179,15 +203,22 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
         return new_ts
 
-    def _get_filter_time(self, custom_config: Dict[str, int]) -> int:
+    def _get_filter_time(self, custom_config: Dict) -> int:
         """
         Apply custom_config params (if provided) to the task. If a lookback value exists, it should take
-        precedence (this can allow a larger filter time), otherwise use the default value.
-        :param custom_config: dictionary passed containing `default` or `lookback` values
-        :return: filter time to be applied in request to Okta
+        precedence (this can allow a larger filter time), otherwise use the cutoff value.
+        :param custom_config: dictionary passed containing `cutoff` or `lookback` values
+        :return: filter_value to be applied in request to Okta
+        :return: is_filter_datetime boolean value if filter_value is of type datetime
         """
-
-        default, lookback = custom_config.get("default", CUTOFF), custom_config.get("lookback")
-        filter_value = lookback if lookback else default
-        self.logger.info(f"Task execution will be applying filter period of {filter_value} hours...")
-        return int(filter_value)
+        filter_cutoff = custom_config.get("cutoff", {}).get("date")
+        if filter_cutoff is None:
+            filter_cutoff = custom_config.get("cutoff", {}).get("hours", CUTOFF)
+        filter_lookback = custom_config.get("lookback")
+        filter_value = filter_lookback if filter_lookback else filter_cutoff
+        is_filter_datetime = self.check_if_datetime(filter_value)
+        if is_filter_datetime:
+            self.logger.info(f"Task execution will be applying a lookback to {filter_value}...")
+        else:
+            self.logger.info(f"Task execution will be applying filter period of {filter_value} hours...")
+        return filter_value, is_filter_datetime
