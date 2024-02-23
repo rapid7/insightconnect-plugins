@@ -18,6 +18,7 @@ from icon_zoom.util.event import Event
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
 from jsonschema import validate
+from datetime import timedelta
 
 from mock import STUB_CONNECTION, STUB_OAUTH_TOKEN, Util
 
@@ -107,6 +108,11 @@ STUB_EXPECTED_PREVIOUS_STATE = {
     "latest_event_timestamp": "2023-02-22T21:44:44Z",
     "previous_run_state": "starting",
 }
+
+CUSTOM_LOOKBACK = {"year": 2023, "month": 1, "day": 23, "hour": 22, "minute": 0, "second": 0}
+CUSTOM_CUTOFF_DATE = {"date": {"year": 2023, "month": 1, "day": 23, "hour": 22, "minute": 0, "second": 0}}
+CUSTOM_CUTOFF_HOURS = {"hours": 744}
+STUB_DATETIME_LAST_CUTOFF_HOURS = STUB_DATETIME_NOW - timedelta(hours=CUSTOM_CUTOFF_HOURS.get("hours"))
 
 
 class TestGetUserActivityEvents(unittest.TestCase):
@@ -301,3 +307,106 @@ class TestGetUserActivityEvents(unittest.TestCase):
     def test_dedupe_events(self, events: List[Event], latest_event_time: str, expected: List[Event]) -> None:
         output = self.task._dedupe_events(all_events=events, latest_event_timestamp=latest_event_time)
         self.assertEqual(expected, output)
+
+    @parameterized.expand(
+        [
+            [
+                {
+                    "lookback": CUSTOM_LOOKBACK,
+                    "cuttoff": CUSTOM_CUTOFF_DATE,
+                },
+                {
+                    "start_date": "2023-01-23T22:00:00Z",
+                    "end_date": "2023-02-23T22:00:00Z",
+                    "page_size": 300,
+                    "next_page_token": None,
+                },
+                STUB_DATETIME_LAST_CUTOFF_HOURS,
+            ],
+            [
+                {
+                    "lookback": CUSTOM_LOOKBACK,
+                    "cuttoff": CUSTOM_CUTOFF_HOURS,
+                },
+                {
+                    "start_date": "2023-01-23T22:00:00Z",
+                    "end_date": "2023-02-23T22:00:00Z",
+                    "page_size": 300,
+                    "next_page_token": None,
+                },
+                STUB_DATETIME_LAST_CUTOFF_HOURS,
+            ],
+            [
+                {"lookback": CUSTOM_LOOKBACK},
+                {
+                    "start_date": "2023-01-23T22:00:00Z",
+                    "end_date": "2023-02-23T22:00:00Z",
+                    "page_size": 300,
+                    "next_page_token": None,
+                },
+                STUB_DATETIME_LAST_24_HOURS,
+            ],
+            [
+                {
+                    "cuttoff": CUSTOM_CUTOFF_HOURS,
+                },
+                {
+                    "start_date": "2023-01-23T22:00:00Z",
+                    "end_date": "2023-02-23T22:00:00Z",
+                    "page_size": 300,
+                    "next_page_token": None,
+                },
+                STUB_DATETIME_LAST_CUTOFF_HOURS,
+            ],
+            [
+                {},
+                {
+                    "start_date": "2023-02-22T22:00:00Z",
+                    "end_date": "2023-02-23T22:00:00Z",
+                    "page_size": 300,
+                    "next_page_token": None,
+                },
+                STUB_DATETIME_LAST_24_HOURS,
+            ],
+        ]
+    )
+    @patch(GET_DATETIME_LAST_X_HOURS_PATH)
+    @patch(GET_DATETIME_NOW_PATH, side_effect=[STUB_DATETIME_NOW])
+    @patch(GET_USER_ACTIVITY_EVENTS_PATH, return_value=(STUB_EXPECTED_PREVIOUS_OUTPUT, ""))
+    def test_first_run_with_backfill_logic(
+        self,
+        custom_config: dict,
+        expected_api_call_params: dict,
+        mock_last_x_hours: str,
+        mock_call: MagicMock,
+        mock_datetime_now: MagicMock,
+        mock_datetime_last_x: MagicMock,
+    ) -> None:
+
+        mock_datetime_last_x.side_effect = [mock_last_x_hours]
+
+        expected_output, expected_has_more_pages, expected_status_code, expected_error = (
+            STUB_EXPECTED_PREVIOUS_OUTPUT,
+            False,
+            200,
+            None,
+        )
+        expected_state = STUB_EXPECTED_PREVIOUS_STATE
+
+        output, state, has_more_pages, status_code, error = self.task.run(state={}, custom_config=custom_config)
+
+        self.assertListEqual(output, expected_output)
+        self.assertDictEqual(state, expected_state)
+        self.assertFalse(has_more_pages, expected_has_more_pages)
+        self.assertEqual(status_code, expected_status_code)
+        self.assertEqual(error, expected_error)
+
+        validate(output, MonitorSignInOutActivityOutput.schema)
+        validate(state, MonitorSignInOutActivityState.schema)
+
+        mock_call.assert_called_with(
+            start_date=expected_api_call_params.get("start_date"),
+            end_date=expected_api_call_params.get("end_date"),
+            page_size=expected_api_call_params.get("page_size"),
+            next_page_token=expected_api_call_params.get("next_page_token"),
+        )
