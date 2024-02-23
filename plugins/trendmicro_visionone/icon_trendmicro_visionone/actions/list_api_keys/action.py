@@ -50,6 +50,4 @@ class ListApiKeys(insightconnect_plugin_runtime.Action):
             api_keys.append(json.loads(api_key))
         # Return results
         self.logger.info("Returning Results...")
-        self.logger.info(api_keys_list)
-        self.logger.info(api_keys)
         return {Output.TOTAL_COUNT: len(api_keys_list), Output.ITEMS: api_keys}

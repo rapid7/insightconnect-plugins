@@ -924,7 +924,7 @@ types:
       required: true
     months_to_expiration:
       title: Months to Expiration
-      type: integer
+      type: string
       description: The duration of validity for the API key (in months, 0 for no expiration)
       required: false
       enum:

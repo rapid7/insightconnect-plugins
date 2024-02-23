@@ -1,19 +1,36 @@
 import insightconnect_plugin_runtime
 from .schema import DeleteApiKeysInput, DeleteApiKeysOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 # Custom imports below
 
 
 class DeleteApiKeys(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name="delete_api_keys",
-                description=Component.DESCRIPTION,
-                input=DeleteApiKeysInput(),
-                output=DeleteApiKeysOutput())
+            name="delete_api_keys",
+            description=Component.DESCRIPTION,
+            input=DeleteApiKeysInput(),
+            output=DeleteApiKeysOutput(),
+        )
 
     def run(self, params={}):
-        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        # END INPUT BINDING - DO NOT REMOVE
-        # TODO - If input bindings for connection can be done check to same if it you can do the same here
-        return {}
+        # Get Connection Client
+        client = self.connection.client
+        # Get Action Parameters
+        key_ids = params.get(Input.ID)
+        # Make Action API Call
+        self.logger.info("Making API Call...")
+        response = client.api_key.delete(
+            *key_ids,
+        )
+        if "error" in response.result_code.lower():
+            raise PluginException(
+                cause="An error occurred while deleting API key.",
+                assistance="Please check your inputs and try again.",
+                data=response.error,
+            )
+        # Return results
+        self.logger.info("Returning Results...")
+        response = 207 if "SUCCESS" in response.result_code else 0
+        return {Output.STATUS: response}
