@@ -55,6 +55,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         "Health check failed. An error occurred during event collection: insufficient permissions for this action. "
         "Please ensure you add all required user permissions for the Rapid7 app in Zoom."
     )
+    DEFAULT_CUTOFF_HOURS = 24
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -83,9 +84,12 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     def loop(self, state: Dict[str, Any], custom_config: Dict[str, Any]):  # noqa: C901
         now = self._format_datetime_for_zoom(dt=self._get_datetime_now())
 
+        cutoff = custom_config.get("cutoff", {})
+        cutoff_date = cutoff.get("date")
         lookback = custom_config.get("lookback")
+
         if lookback is not None:
-            last_day = self._format_datetime_for_zoom(
+            start_time = self._format_datetime_for_zoom(
                 # a default of up to 12 months is used to allow for this to always run if there is missing value in the custom config
                 # as if the request is larger than 30 days, the api will only return 30 days worth of data
                 datetime(
@@ -97,18 +101,34 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     lookback.get("second", 0),
                 )
             )
-            self.logger.info(f"A custom start time of {last_day} will be used")
+            self.logger.info(f"A custom start time of {start_time} will be used")
         else:
-            last_day = self._format_datetime_for_zoom(dt=self._get_datetime_last_24_hours())
+            if cutoff_date is not None:
+                start_time = self._format_datetime_for_zoom(
+                    # a default of up to 12 months is used to allow for this to always run if there is missing value in the custom config
+                    # as if the request is larger than 30 days, the api will only return 30 days worth of data
+                    datetime(
+                        cutoff_date.get("year", date.today().year),
+                        cutoff_date.get("month", 1),
+                        cutoff_date.get("day", 1),
+                        cutoff_date.get("hour", 0),
+                        cutoff_date.get("minute", 0),
+                        cutoff_date.get("second", 0),
+                    )
+                )
+            else:
+                start_time = self._format_datetime_for_zoom(
+                    dt=self._get_datetime_last_x_hours(cutoff.get("hours", self.DEFAULT_CUTOFF_HOURS))
+                )
 
         start_date_params = {
-            RunState.starting: now,
+            RunState.starting: start_time,
             RunState.paginating: state.get(self.PARAM_START_DATE),
-            RunState.continuing: self._get_last_valid_timestamp(last_day, state),
+            RunState.continuing: self._get_last_valid_timestamp(start_time, state),
         }
 
         end_date_params = {
-            RunState.starting: last_day,
+            RunState.starting: now,
             RunState.paginating: state.get(self.PARAM_END_DATE),
             # last request timestamp if coming from end of pagination, otherwise default to now
             RunState.continuing: state.get(self.PARAM_END_DATE, now),
@@ -200,16 +220,16 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         self.logger.info(f"Updated state, state is now: {state}")
         return TaskOutput(output=new_events, state=state, has_more_pages=has_more_pages, status_code=200, error=None)
 
-    def _get_last_valid_timestamp(self, last_day: str, state: Dict[str, Union[str, None]]) -> Optional[str]:
+    def _get_last_valid_timestamp(self, start_time: str, state: Dict[str, Union[str, None]]) -> Optional[str]:
         """
-        Get the last valid timestamp based on the provided last_day and state.
+        Get the last valid timestamp based on the provided start_time and state.
 
         This method checks if the last request timestamp in the 'state' dictionary is earlier
-        than 'last_day' and returns 'last_day' if true, or returns the last request timestamp
+        than 'start_time' and returns 'start_time' if true, or returns the last request timestamp
         from the 'state' dictionary if it is later.
 
         Args:
-            last_day (int): The last day to compare against.
+            start_time (str): The last day to compare against.
             state (dict): The state dictionary containing the last request timestamp.
 
         Returns:
@@ -219,12 +239,11 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         last_request_timestamp = state.get(self.LAST_REQUEST_TIMESTAMP)
         if not last_request_timestamp:
             return
-        if last_request_timestamp < last_day:
+        if last_request_timestamp < start_time:
             self.logger.info(
-                f"Saved state {last_request_timestamp} exceeds the cut off 24 hours. "
-                f"Reverting to use time: {last_day}"
+                f"Saved state {last_request_timestamp} exceeds the cut off. Reverting to use time: {start_time}"
             )
-            return last_day
+            return start_time
         else:
             return last_request_timestamp
 
@@ -338,8 +357,8 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     def _get_datetime_now() -> datetime:
         return datetime.now(timezone.utc)
 
-    def _get_datetime_last_24_hours(self) -> datetime:
-        return self._get_datetime_now() - timedelta(hours=24)
+    def _get_datetime_last_x_hours(self, hours: int) -> datetime:
+        return self._get_datetime_now() - timedelta(hours=hours)
 
     def _format_datetime_for_zoom(self, dt: datetime) -> str:
         return dt.strftime(self.ZOOM_TIME_FORMAT)
