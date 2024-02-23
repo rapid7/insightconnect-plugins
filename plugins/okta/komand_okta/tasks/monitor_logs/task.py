@@ -34,7 +34,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             now = self.get_current_time() - timedelta(minutes=1)  # allow for latency of this being triggered
             now_iso = self.get_iso(now)
             # Whether to convert filter_time in hours to datetime
-            if self.check_if_datetime(self, filter_time):
+            if self.check_if_datetime(filter_time):
                 filter_hours = filter_time
             else:
                 # If false, we assume filter_time is an integer or string representing hours and get datetime
@@ -84,14 +84,14 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         return datetime.now(timezone.utc)
 
     @staticmethod
-    def check_if_datetime(self, date_time: Any):
+    def check_if_datetime(date_time: Any):
         """
         Check if passed value is a date_time, returning True or False
         :param date_time: date_time value, or int/string representing hours
         :return: boolean result based on date_time value type check
         """
         try:
-            datetime.fromisoformat(str(date_time).rstrip('Z'))
+            datetime.fromisoformat(str(date_time).rstrip("Z"))
             return True
         except ValueError:
             return False
@@ -208,7 +208,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             filter_cutoff = custom_config.get("filter_cutoff", {}).get("hours", CUTOFF)
         filter_lookback = custom_config.get("lookback")
         filter_value = filter_lookback if filter_lookback else filter_cutoff
-        if self.check_if_datetime(self, filter_value):
+        if self.check_if_datetime(filter_value):
             self.logger.info(f"Task execution will be applying a lookback to {filter_value}...")
         else:
             self.logger.info(f"Task execution will be applying filter period of {filter_value} hours...")

@@ -29,31 +29,31 @@ class TestMonitorLogs(TestCase):
                 "without_state",
                 Util.read_file_to_dict("inputs/monitor_logs_without_state.json.inp"),
                 Util.read_file_to_dict("expected/get_logs.json.exp"),
-                {"cutoff": {"hours": 24}, "lookback": None}
+                {"cutoff": {"hours": 24}, "lookback": None},
             ],
             [
                 "with_state",
                 Util.read_file_to_dict("inputs/monitor_logs_with_state.json.inp"),
                 Util.read_file_to_dict("expected/get_logs.json.exp"),
-                {"cutoff": {"hours": 24}, "lookback": None}
+                {"cutoff": {"hours": 24}, "lookback": None},
             ],
             [
                 "next_page",
                 Util.read_file_to_dict("inputs/monitor_logs_next_page.json.inp"),
                 Util.read_file_to_dict("expected/get_logs_next_page.json.exp"),
-                {"cutoff": {"hours": 24}, "lookback": None}
+                {"cutoff": {"hours": 24}, "lookback": None},
             ],
             [
                 "next_page_no_results",
                 Util.read_file_to_dict("inputs/monitor_logs_next_page.json.inp"),
                 Util.read_file_to_dict("expected/get_logs_next_empty.json.exp"),
-                {"cutoff": {"hours": 24}, "lookback": None}
+                {"cutoff": {"hours": 24}, "lookback": None},
             ],
             [
                 "without_state_no_results",
                 Util.read_file_to_dict("inputs/monitor_logs_without_state.json.inp"),
                 Util.read_file_to_dict("expected/get_logs_empty_resp.json.exp"),
-                {"default": 108, "lookback": 108}
+                {"default": 108, "lookback": 108},
             ],
         ]
     )
