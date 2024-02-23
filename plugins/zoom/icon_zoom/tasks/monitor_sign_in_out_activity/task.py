@@ -124,7 +124,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         start_date_params = {
             RunState.starting: start_time,
             RunState.paginating: state.get(self.PARAM_START_DATE),
-            RunState.continuing: self._get_last_valid_timestamp(start_time, state, cutoff),
+            RunState.continuing: self._get_last_valid_timestamp(start_time, state),
         }
 
         end_date_params = {
@@ -220,9 +220,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         self.logger.info(f"Updated state, state is now: {state}")
         return TaskOutput(output=new_events, state=state, has_more_pages=has_more_pages, status_code=200, error=None)
 
-    def _get_last_valid_timestamp(
-        self, start_time: str, state: Dict[str, Union[str, None]], cutoff: int
-    ) -> Optional[str]:
+    def _get_last_valid_timestamp(self, start_time: str, state: Dict[str, Union[str, None]]) -> Optional[str]:
         """
         Get the last valid timestamp based on the provided start_time and state.
 
@@ -231,7 +229,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         from the 'state' dictionary if it is later.
 
         Args:
-            start_time (int): The last day to compare against.
+            start_time (str): The last day to compare against.
             state (dict): The state dictionary containing the last request timestamp.
 
         Returns:
@@ -243,8 +241,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return
         if last_request_timestamp < start_time:
             self.logger.info(
-                f"Saved state {last_request_timestamp} exceeds the cut off {cutoff} hours. "
-                f"Reverting to use time: {start_time}"
+                f"Saved state {last_request_timestamp} exceeds the cut off." f"Reverting to use time: {start_time}"
             )
             return start_time
         else:
