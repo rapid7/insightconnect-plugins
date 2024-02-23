@@ -900,5 +900,91 @@
     "output": {
       "total_count": 5
     }
+  },
+  "list_api_keys": {
+    "input": {
+      "top": 50,
+      "fields": {
+        "role": "Master Administrator"
+      },
+      "query_op": " or "
+    },
+    "output": {
+      "total_count": 1,
+      "items": [
+        {
+          "id": "d367abdd-7739-4129-a36a-862c4ec018b4",
+          "name": "test",
+          "status": "enabled",
+          "role": "Master Administrator",
+          "expired_date_time": "2025-02-06T10:00:00Z",
+          "last_used_date_time": "2023-02-06T10:00:00Z",
+          "description": "this is a test"
+        }
+      ]
+    }
+  },
+  "update_api_key": {
+    "input": {
+      "id": "2345245",
+      "if_match": "this is a test comment",
+      "name": "name",
+      "status": "enabled",
+      "role": "Master Administrator",
+      "description": "update api key test"
+    },
+    "output": {
+      "status": 204
+    }
+  },
+  "get_api_key": {
+    "input": {
+      "id": "2ee04177-53d7-4fc7-a9d7-39285d80f58a"
+    },
+    "output": {
+      "etag": "d41d8cd98f00b204e9800998ecf8427e",
+      "name": "test",
+      "id": "d367abdd-7739-4129-a36a-862c4ec018b4",
+      "role": "Master Administrator",
+      "status": "enabled",
+      "description": "this is a test apikey",
+      "expired_date_time": "2025-02-06T10:00:00Z",
+      "last_used_date_time": "2023-02-06T10:00:00Z"
+    }
+  },
+  "delete_api_keys": {
+    "input": {
+      "id": [
+        "d367abdd-7739-4129-a36a-862c4ec018b4",
+        "b667abdd-7739-4129-a36a-862c4ec019se"
+      ]
+    },
+    "output": {
+      "status": 207
+    }
+  },
+  "create_api_keys": {
+    "input": {
+      "api_keys_objects": [
+        {
+          "name": "TestKey",
+          "role": "Analyst",
+          "months_to_expiration": 1,
+          "description": "Test API Key create",
+          "status": "enabled"
+        }
+      ]
+    },
+    "output": {
+      "api_keys_resp": [
+        {
+          "status": 201,
+          "task_id": null,
+          "id": "d367abdd-7739-4129-a36a-862c4ec018b4",
+          "value": "string",
+          "expired_date_time": "2025-02-06T10:00:00Z"
+        }
+      ]
+    }
   }
 }
