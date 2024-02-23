@@ -1,13 +1,13 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetSandboxReportInput, GetSandboxReportOutput, Input, Output, Component
 
 # Custom imports below
 from copy import copy
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from json.decoder import JSONDecodeError
 
 
-class GetSandboxReport(komand.Action):
+class GetSandboxReport(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_sandbox_report",

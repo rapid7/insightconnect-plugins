@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ConnectionSchema
 
 # Custom imports below
@@ -8,10 +8,10 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import logging
 from copy import copy
 import re
-from komand.exceptions import ConnectionTestException, PluginException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.session = Session()

@@ -1,13 +1,13 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import LookupUrlInput, LookupUrlOutput
 
 # Custom imports below
 from copy import copy
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from json.decoder import JSONDecodeError
 
 
-class LookupUrl(komand.Action):
+class LookupUrl(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="lookup_url",
@@ -56,7 +56,7 @@ class LookupUrl(komand.Action):
             self.request.params["offset"] += 1000
             self.results.extend(response_data["objects"])
 
-        self.results = komand.helper.clean(self.results)
+        self.results = insightconnect_plugin_runtime.helper.clean(self.results)
         return {"results": self.results}
 
     def test(self):

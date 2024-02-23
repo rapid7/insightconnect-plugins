@@ -1,14 +1,14 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ImportObservableInput, ImportObservableOutput, Component
 
 # Custom imports below
 import base64
 from copy import copy
 from json import JSONDecodeError
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class ImportObservable(komand.Action):
+class ImportObservable(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="import_observable",
@@ -56,7 +56,7 @@ class ImportObservable(komand.Action):
         except JSONDecodeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
-        clean_response = komand.helper.clean(response_data)
+        clean_response = insightconnect_plugin_runtime.helper.clean(response_data)
         return {"results": clean_response}
 
     def test(self):

@@ -1,13 +1,13 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SubmitUrlInput, SubmitUrlOutput, Input, Output, Component
 
 # Custom imports below
 from copy import copy
 from json.decoder import JSONDecodeError
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class SubmitUrl(komand.Action):
+class SubmitUrl(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="submit_url",

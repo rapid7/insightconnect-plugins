@@ -1,6 +1,6 @@
 from unittest import TestCase
 from komand_anomali_threatstream.connection.connection import Connection
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class TestConnection(TestCase):

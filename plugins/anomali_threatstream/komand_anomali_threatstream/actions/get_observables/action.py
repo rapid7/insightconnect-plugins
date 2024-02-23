@@ -1,13 +1,13 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetObservablesInput, GetObservablesOutput, Component
 
 # Custom imports below
 from copy import copy
 from json import JSONDecodeError
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class GetObservables(komand.Action):
+class GetObservables(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_observables",
@@ -55,5 +55,5 @@ class GetObservables(komand.Action):
             self.request.params["offset"] += 1000
             self.results.extend(response_data["objects"])
 
-        self.results = komand.helper.clean(self.results)
+        self.results = insightconnect_plugin_runtime.helper.clean(self.results)
         return {"results": self.results}
