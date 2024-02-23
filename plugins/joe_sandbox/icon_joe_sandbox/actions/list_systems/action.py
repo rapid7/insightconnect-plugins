@@ -13,6 +13,8 @@ class ListSystems(insightconnect_plugin_runtime.Action):
             output=ListSystemsOutput(),
         )
 
-    def run(self, params={}):
+    def run(
+        self,
+    ):
         systems = self.connection.api.systems()
         return {Output.SYSTEMS: systems}

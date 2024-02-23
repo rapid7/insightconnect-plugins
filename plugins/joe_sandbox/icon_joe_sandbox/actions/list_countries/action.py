@@ -13,6 +13,8 @@ class ListCountries(insightconnect_plugin_runtime.Action):
             output=ListCountriesOutput(),
         )
 
-    def run(self, params={}):
+    def run(
+        self,
+    ):
         countries = self.connection.api.server_lia_countries()
         return {Output.COUNTRIES: countries}

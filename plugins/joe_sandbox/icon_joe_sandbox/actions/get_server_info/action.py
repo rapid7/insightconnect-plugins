@@ -13,6 +13,8 @@ class GetServerInfo(insightconnect_plugin_runtime.Action):
             output=GetServerInfoOutput(),
         )
 
-    def run(self, params={}):
+    def run(
+        self,
+    ):
         server_info = self.connection.api.server_info()
         return {Output.QUEUESIZE: server_info.get("queuesize")}

@@ -13,6 +13,8 @@ class GetAccountInfo(insightconnect_plugin_runtime.Action):
             output=GetAccountInfoOutput(),
         )
 
-    def run(self, params={}):
+    def run(
+        self,
+    ):
         account_info = self.connection.api.account_info()
         return {Output.TYPE: account_info.get("type"), Output.QUOTA: account_info.get("quota")}

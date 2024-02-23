@@ -13,6 +13,8 @@ class ListKeyboardLayouts(insightconnect_plugin_runtime.Action):
             output=ListKeyboardLayoutsOutput(),
         )
 
-    def run(self, params={}):
+    def run(
+        self,
+    ):
         keyboard_layouts = self.connection.api.server_keyboard_layouts()
         return {Output.KEYBOARD_LAYOUTS: keyboard_layouts}
