@@ -5,7 +5,7 @@ from .schema import MonitorLogsInput, MonitorLogsOutput, MonitorLogsState, Compo
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_okta.util.exceptions import ApiException
 from datetime import datetime, timedelta, timezone
-from typing import Dict
+from typing import Dict, Any
 import re
 
 CUTOFF = 24
@@ -33,8 +33,12 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             filter_time = self._get_filter_time(custom_config)
             now = self.get_current_time() - timedelta(minutes=1)  # allow for latency of this being triggered
             now_iso = self.get_iso(now)
-            filter_hours = self.get_iso(now - timedelta(hours=filter_time))  # cut off point - never query beyond
-            # cutoff hours
+            # Whether to convert filter_time in hours to datetime
+            if self.check_if_datetime(self, filter_time):
+                filter_hours = filter_time
+            else:
+                # If false, we assume filter_time is an integer or string representing hours and get datetime
+                filter_hours = self.get_iso(now - timedelta(hours=int(filter_time)))  # cutoff point, never query beyond
             next_page_link = state.get(self.NEXT_PAGE_LINK)
             if not state:
                 self.logger.info("First run")
@@ -78,6 +82,19 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
     @staticmethod
     def get_current_time():
         return datetime.now(timezone.utc)
+
+    @staticmethod
+    def check_if_datetime(self, date_time: Any):
+        """
+        Check if passed value is a date_time, returning True or False
+        :param date_time: date_time value, or int/string representing hours
+        :return: boolean result based on date_time value type check
+        """
+        try:
+            datetime.fromisoformat(str(date_time).rstrip('Z'))
+            return True
+        except ValueError:
+            return False
 
     @staticmethod
     def get_iso(time: datetime) -> str:
@@ -179,15 +196,20 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
         return new_ts
 
-    def _get_filter_time(self, custom_config: Dict[str, int]) -> int:
+    def _get_filter_time(self, custom_config: Dict) -> int:
         """
         Apply custom_config params (if provided) to the task. If a lookback value exists, it should take
-        precedence (this can allow a larger filter time), otherwise use the default value.
-        :param custom_config: dictionary passed containing `default` or `lookback` values
+        precedence (this can allow a larger filter time), otherwise use the cutoff value.
+        :param custom_config: dictionary passed containing `cutoff` or `lookback` values
         :return: filter time to be applied in request to Okta
         """
-
-        default, lookback = custom_config.get("default", CUTOFF), custom_config.get("lookback")
-        filter_value = lookback if lookback else default
-        self.logger.info(f"Task execution will be applying filter period of {filter_value} hours...")
-        return int(filter_value)
+        filter_cutoff = custom_config.get("filter_cutoff", {}).get("date")
+        if filter_cutoff is None:
+            filter_cutoff = custom_config.get("filter_cutoff", {}).get("hours", CUTOFF)
+        filter_lookback = custom_config.get("lookback")
+        filter_value = filter_lookback if filter_lookback else filter_cutoff
+        if self.check_if_datetime(self, filter_value):
+            self.logger.info(f"Task execution will be applying a lookback to {filter_value}...")
+        else:
+            self.logger.info(f"Task execution will be applying filter period of {filter_value} hours...")
+        return filter_value
