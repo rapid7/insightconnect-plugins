@@ -44,7 +44,7 @@ class MonitorLogsOutput(insightconnect_plugin_runtime.Output):
   "title": "Logs",
   "description": "All system logs within the specified time range",
   "items": {
-    "$ref": {}
+    "type": "object"
   },
   "required": [
     "logs"
