@@ -10,8 +10,10 @@ Trend Micro Vision One is an enhanced threat defense platform, surpassing standa
 * Add to Exception List
 * Add to Suspicious List
 * Collect File
+* Create API Keys
 * Delete Custom Script
 * Delete Email Message
+* Delete API Keys
 * Disable Account
 * Download Custom Script
 * Download Sandbox Analysis Result
@@ -20,6 +22,7 @@ Trend Micro Vision One is an enhanced threat defense platform, surpassing standa
 * Enable Account
 * Get Alert Details
 * Get Alert List
+* Get API Key
 * Get Custom Script List
 * Get Email Activity Data
 * Get Email Activity Data Count
@@ -33,6 +36,7 @@ Trend Micro Vision One is an enhanced threat defense platform, surpassing standa
 * Get Suspicious List
 * Get Task Result
 * Isolate Endpoint
+* List API Keys
 * Poll Alert List
 * Poll Sandbox Suspicious List
 * Quarantine Email Message
@@ -47,6 +51,7 @@ Trend Micro Vision One is an enhanced threat defense platform, surpassing standa
 * Submit File to Sandbox
 * Submit URLs to Sandbox
 * Terminate Process
+* Update API Key
 * Update Custom Script
 
 # Requirements
@@ -398,6 +403,102 @@ Example output:
       "task_id": "00002195"
     }
   ]
+}
+```
+
+#### Create API Keys
+
+This action is used to generates API keys that allow third-party applications to access the Trend Vision One APIs
+
+**API key role permissions required:**
+
+**API Keys**
+
+- View
+- Configure Settings
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_keys_objects|[]api_keys_objects|None|True|List of JSON objects containing data for API keys creation|None|[{"name":"TestKey","role":"Analyst","months_to_expiration":1,"description":"Test API Key create","status":"enabled"}]|
+
+Example input:
+
+```
+{
+  "api_keys_objects": [
+    {
+      "description": "Test API Key create",
+      "months_to_expiration": 1,
+      "name": "TestKey",
+      "role": "Analyst",
+      "status": "enabled"
+    }
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|api_keys_resp|[]api_keys_resp|True|List of API keys responses|[{"status":200,"id":"d367abdd-7739-4129-a36a-862c4ec018b4","value":"API-KEY","expiredDateTime":"2025-02-06T10:00:00Z"}]|
+
+Example output:
+
+```
+{
+  "api_keys_resp": [
+    {
+      "expiredDateTime": "2025-02-06T10:00:00Z",
+      "id": "d367abdd-7739-4129-a36a-862c4ec018b4",
+      "status": 200,
+      "value": "API-KEY"
+    }
+  ]
+}
+```
+
+#### Delete API Keys
+
+This action is used to deletes the specified API keys
+
+**API key role permissions required:**
+
+**API Keys**
+
+- View
+- Configure Settings
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|[]string|None|True|List of unique identifiers of the API keys|None|["d367abdd-7739-4129-a36a-862c4ec018b4","b667abdd-7739-4129-a36a-862c4ec019se"]|
+
+Example input:
+
+```
+{
+  "id": [
+    "d367abdd-7739-4129-a36a-862c4ec018b4",
+    "b667abdd-7739-4129-a36a-862c4ec019se"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|status|integer|True|The Status Code of the API key update|207|
+
+Example output:
+
+```
+{
+  "status": 207
 }
 ```
 
@@ -852,6 +953,58 @@ Example output:
     "<<referenced:bigdata>>"
   ],
   "total_count": 5
+}
+```
+
+#### Get API Key
+
+This action is used to displays information of the specified API key
+
+**API key role permissions required:**
+
+**API Keys**
+
+- View
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|The unique identifier of the API key|None|2ee04177-53d7-4fc7-a9d7-39285d80f58a|
+
+Example input:
+
+```
+{
+  "id": "2ee04177-53d7-4fc7-a9d7-39285d80f58a"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|description|string|False|A brief note about the API key|this is a test apikey|
+|etag|string|False|Unique alphanumeric string that identifies the version of a resource|d41d8cd98f00b204e9800998ecf8427e|
+|expired_date_time|string|True|Timestamp in ISO 8601 format indicating the expiration date of the API key|2025-02-06 10:00:00+00:00|
+|id|string|True|The unique identifier of the API key|d367abdd-7739-4129-a36a-862c4ec018b4|
+|last_used_date_time|string|True|Timestamp in ISO 8601 format indicating the last time the API key was used|2023-02-06 10:00:00+00:00|
+|name|string|True|The unique name of the API key|test|
+|role|string|True|The user role assigned to the API key|Master Administrator|
+|status|string|True|The status of an API key|enabled|
+
+Example output:
+
+```
+{
+  "description": "this is a test apikey",
+  "etag": "d41d8cd98f00b204e9800998ecf8427e",
+  "expired_date_time": "2025-02-06 10:00:00+00:00",
+  "id": "d367abdd-7739-4129-a36a-862c4ec018b4",
+  "last_used_date_time": "2023-02-06 10:00:00+00:00",
+  "name": "test",
+  "role": "Master Administrator",
+  "status": "enabled"
 }
 ```
 
@@ -1691,6 +1844,62 @@ Example output:
 }
 ```
 
+#### List API Keys
+
+This action is used to displays a list of all your API keys in a list
+
+**API key role permissions required:**
+
+**API Keys**
+
+- View
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|fields|object|None|True|JSON object of fields to query by fileName or fileType|None|{"role":"Master Administrator"}|
+|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |
+|top|integer|None|False|Number of records displayed on a page|[50, 100, 200]|50|
+
+Example input:
+
+```
+{
+  "fields": {
+    "role": "Master Administrator"
+  },
+  "query_op": " or ",
+  "top": 50
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|items|[]api_keys_list_resp|True|List of API key object responses|[{"id":"d367abdd-7739-4129-a36a-862c4ec018b4","name":"test","status":"enabled","role":"Master Administrator","description":"this is a test","expiredDateTime":"2025-02-06T10:00:00Z","lastUsedDateTime":"2023-02-06T10:00:00Z"}]|
+|total_count|integer|True|The number of retrieved API keys|5|
+
+Example output:
+
+```
+{
+  "items": [
+    {
+      "description": "this is a test",
+      "expiredDateTime": "2025-02-06T10:00:00Z",
+      "id": "d367abdd-7739-4129-a36a-862c4ec018b4",
+      "lastUsedDateTime": "2023-02-06T10:00:00Z",
+      "name": "test",
+      "role": "Master Administrator",
+      "status": "enabled"
+    }
+  ],
+  "total_count": 5
+}
+```
+
 #### Quarantine Email Message
   
 This action is used to moves a message from a mailbox to the quarantine folder
@@ -2314,6 +2523,55 @@ Example output:
 }
 ```
 
+#### Update API Key
+
+This action is used to updates the specified API key
+
+**API key role permissions required:**
+
+**API Keys**
+
+- View
+- Configure Settings
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|description|string|None|False|A brief note about the API key|None|this is a test apikey|
+|id|string|None|True|The unique identifier of the API key|None|2ee04177-53d7-4fc7-a9d7-39285d80f58a|
+|if_match|string|None|False|The ETag of the resource you want to update. The resource is updated only if the provided value matches the ETag of the resource|None|d41d8cd98f00b204e9800998ecf8427e|
+|name|string|None|True|The unique name of the API key|None|test|
+|role|string|None|True|The user role assigned to the API key|None|Master Administrator|
+|status|string|None|True|The status of an API key|["enabled", "disabled"]|enabled|
+
+Example input:
+
+```
+{
+  "description": "this is a test apikey",
+  "id": "2ee04177-53d7-4fc7-a9d7-39285d80f58a",
+  "if_match": "d41d8cd98f00b204e9800998ecf8427e",
+  "name": "test",
+  "role": "Master Administrator",
+  "status": "enabled"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|status|integer|True|The Status Code of the API key update|204|
+
+Example output:
+
+```
+{
+  "status": 204
+}
+```
+
 #### Update Custom Script
   
 This action is used to updates a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 
@@ -2711,6 +2969,37 @@ Example output:
 |UUID|string|None|False|Log unique identity|None|
 |Win Event ID|integer|None|False|Win Event ID|None|
 
+**api_keys_objects**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Description|string|None|False|A brief note about the API key|None|
+|Months to Expiration|string|None|False|The duration of validity for the API key (in months, 0 for no expiration)|None|
+|Name|string|None|True|The unique name of an API key|None|
+|Role|string|None|True|The user role assigned to the API key|None|
+|Status|string|None|False|The status of an API key|None|
+
+**api_keys_resp**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Expired Date Time|string|None|True|Timestamp in ISO 8601 format indicating the expiration date of the API key|None|
+|ID|string|None|True|The unique identifier of the API key|None|
+|Status|integer|None|True|The Status Code of the submitted API keys task|None|
+|Value|string|None|True|The API key|None|
+
+**api_keys_list_resp**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Description|string|None|False|A brief note about the API key|None|
+|Expired Date Time|string|None|True|Timestamp in ISO 8601 format indicating the expiration date of the API key|None|
+|ID|string|None|True|The unique identifier of the API key|None|
+|Last Used Date Time|string|None|True|The last time the API key was used in ISO 8601 format|None|
+|Name|string|None|True|The unique name of an API key|None|
+|Role|string|None|True|The user role assigned to the API key|None|
+|Status|string|None|False|The status of an API key|None|
+
 
 ## Troubleshooting
   
@@ -2718,6 +3007,7 @@ Example output:
 
 # Version History
 
+* 3.1.0 - Added API Keys related actions
 * 3.0.0 - Refactored pytmv1 usage | Added Custom Scripts and Activity related actions
 * 2.0.1 - Version bump of pytmv1 library
 * 2.0.0 - Enabled multiple inputs for Get Endpoint Data, reduced API call frequency & General Refactoring
