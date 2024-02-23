@@ -241,7 +241,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return
         if last_request_timestamp < start_time:
             self.logger.info(
-                f"Saved state {last_request_timestamp} exceeds the cut off." f"Reverting to use time: {start_time}"
+                f"Saved state {last_request_timestamp} exceeds the cut off. Reverting to use time: {start_time}"
             )
             return start_time
         else:
