@@ -171,6 +171,7 @@ actions:
         title: Online
         description: Is the server online
         type: boolean
+        example: true
         required: true
   get_server_info:
     title: Get Server Info
@@ -180,6 +181,7 @@ actions:
         title: Queue Size
         description: Queue size
         type: integer
+        example: 5
         required: true
   list_systems:
     title: List Systems
@@ -405,6 +407,7 @@ actions:
         title: Deleted
         description: Was the analysis deleted
         type: boolean
+        example: true
         required: true
   search_analysis:
     title: Search Analysis
@@ -436,7 +439,7 @@ actions:
         example: 10001
       type:
         title: Type
-        description: The report type, e.g. 'html', 'bins'
+        description: The report type
         type: string
         enum:
         - bins
@@ -488,6 +491,7 @@ actions:
         title: Resource Name
         description: Name of the resource associated with the analysis
         type: string
+        example: Resource Name
         required: true
       resource_content:
         title: Resource Content
