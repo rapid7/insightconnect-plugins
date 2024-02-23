@@ -33,7 +33,7 @@ class DownloadAnalysisInput(insightconnect_plugin_runtime.Input):
     "type": {
       "type": "string",
       "title": "Type",
-      "description": "The report type, e.g. 'html', 'bins'",
+      "description": "The report type",
       "default": "html",
       "enum": [
         "bins",

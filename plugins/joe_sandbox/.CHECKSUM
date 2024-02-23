@@ -1,7 +1,7 @@
 {
-	"spec": "3bf27b3c91f2b7e5b4243fa98b289b6e",
-	"manifest": "81dde48bb3f6d66ff47daeaf44df3dd0",
-	"setup": "336e44bce8d7660f0dda4a2b1dedf164",
+	"spec": "746434af2fa5c6259627d3dd5e44d508",
+	"manifest": "b62e8c65c9db34a06351c94f88005728",
+	"setup": "d8542fc6be4b0913c3f234ad9b295899",
 	"schemas": [
 		{
 			"identifier": "check_server_status/schema.py",
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "download_analysis/schema.py",
-			"hash": "7cee8389bdb2c88dc78749e559d435c8"
+			"hash": "7ad63c2dc6d2d54d9a4473fb174e5681"
 		},
 		{
 			"identifier": "get_account_info/schema.py",

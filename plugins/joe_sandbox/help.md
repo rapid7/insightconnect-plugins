@@ -1,14 +1,19 @@
 # Description
 
-Joe Sandbox Cloud executes files and URLs fully automated in a controlled environment and monitors the behavior of applications and the operating system for suspicious activities
+[Joe Sandbox](https://www.joesecurity.org) executes files and URLs fully automated in a controlled environment and monitors the behavior of applications and the operating system for suspicious activities.
+
+This plugin supports Joe Sandbox Cloud and Joe Sandbox (on-premise) instances and utilizes the [Joe Sandbox API](https://github.com/joesecurity/jbxapi).
 
 # Key Features
   
-*This plugin does not contain any key features.*
-
+* Submit samples and URLs for sandbox analysis
+* Search, list, get, download, and delete analyses
+* Get, list, and manage server and user info
+* 
 # Requirements
   
-*This plugin does not contain any requirements.*
+* API Key
+* Sandbox server (if not using cloud)
 
 # Supported Product Versions
   
@@ -51,7 +56,7 @@ This action is used to check if Joe Sandbox is online or in maintenance mode
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|online|boolean|True|Is the server online|None|
+|online|boolean|True|Is the server online|True|
   
 Example output:
 
@@ -83,7 +88,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|deleted|boolean|True|Was the analysis deleted|None|
+|deleted|boolean|True|Was the analysis deleted|True|
   
 Example output:
 
@@ -102,7 +107,7 @@ This action is used to download a resource for an analysis. This can be a full r
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |run|integer|None|False|The number of the run. If not specified, Joe Sandbox will choose one automatically|None|1|
-|type|string|html|False|The report type, e.g. 'html', 'bins'|["bins", "binstrings", "classhtml", "classxml", "clusterxml", "cookbook", "executive", "graphreports", "html", "ida", "irjson", "irjsonfixed", "irxml", "ishots", "json", "jsonfixed", "lighthtml", "lightjson", "lightjsonfixed", "lightxml", "maec", "memdumps", "memstrings", "misp", "openioc", "pcap", "pcapslim", "pdf", "sample", "shoots", "unpack", "unpackpe", "xml", "yara"]|pdf|
+|type|string|html|False|The report type|["bins", "binstrings", "classhtml", "classxml", "clusterxml", "cookbook", "executive", "graphreports", "html", "ida", "irjson", "irjsonfixed", "irxml", "ishots", "json", "jsonfixed", "lighthtml", "lightjson", "lightjsonfixed", "lightxml", "maec", "memdumps", "memstrings", "misp", "openioc", "pcap", "pcapslim", "pdf", "sample", "shoots", "unpack", "unpackpe", "xml", "yara"]|pdf|
 |webid|string|None|True|The web ID of the analysis|None|10001|
   
 Example input:
@@ -120,14 +125,14 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |resource_content|bytes|True|Content of the resource associated with the analysis in base64|None|
-|resource_name|string|True|Name of the resource associated with the analysis|None|
+|resource_name|string|True|Name of the resource associated with the analysis|Resource Name|
   
 Example output:
 
 ```
 {
   "resource_content": "",
-  "resource_name": ""
+  "resource_name": "Resource Name"
 }
 ```
 
@@ -229,13 +234,13 @@ This action is used to query information about the server
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|queuesize|integer|True|Queue size|None|
+|queuesize|integer|True|Queue size|5|
   
 Example output:
 
 ```
 {
-  "queuesize": 0
+  "queuesize": 5
 }
 ```
 
@@ -654,12 +659,20 @@ Example output:
 *There is no troubleshooting for this plugin.*
 
 # Version History
-  
-*This plugin does not contain a version history.*
+
+* 1.0.5 - Update SDK | Update `jbxapi` dependency
+* 1.0.4 - Add extra optional input for Submit Sample action
+* 1.0.3 - Add example inputs
+* 1.0.2 - Fix misspelling in error message | Remove generic "automation" keyword
+* 1.0.1 - New spec and help.md format for the Extension Library
+* 1.0.0 - Initial plugin
 
 # Links
 
+* [Joe Sandbox](https://www.joesecurity.org)
 
 ## References
   
-*This plugin does not contain any references.*
+* [Joe Sandbox API](https://jbxcloud.joesecurity.org/userguide?sphinxurl=usage%2Fwebapi.html)
+* [Joe Sandbox API wrapper](https://github.com/joesecurity/jbxapi)
+* [Report formats](https://jbxcloud.joesecurity.org/userguide?sphinxurl=usage/reportformats.html)
