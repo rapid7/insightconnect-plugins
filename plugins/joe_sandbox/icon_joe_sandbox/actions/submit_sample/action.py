@@ -4,6 +4,7 @@ from .schema import SubmitSampleInput, SubmitSampleOutput, Input, Output
 # Custom imports below
 from base64 import b64decode
 import binascii
+from insightconnect_plugin_runtime import PluginException
 
 
 class SubmitSample(insightconnect_plugin_runtime.Action):
@@ -29,15 +30,17 @@ class SubmitSample(insightconnect_plugin_runtime.Action):
         try:
             sample_bytes = b64decode(sample)
         except binascii.Error:
-            raise Exception(
-                'Unable to decode base64 input for "sample". ' "Contents of the file must be encoded with base64!"
+            raise PluginException(
+                cause='Unable to decode base64 input for "sample". ',
+                assistance="Contents of the file must be encoded with base64!",
             )
 
         try:
             cookbook_bytes = b64decode(cookbook) if cookbook else None
         except binascii.Error:
-            raise Exception(
-                'Unable to decode base64 input for "cookbook". ' "Contents of the file must be encoded with base64!"
+            raise PluginException(
+                cause='Unable to decode base64 input for "cookbook". ',
+                assistance="Contents of the file must be encoded with base64!",
             )
         webids = None
         if filename:

@@ -4,6 +4,7 @@ from .schema import SubmitCookbookInput, SubmitCookbookOutput, Input, Output
 # Custom imports below
 from base64 import b64decode
 import binascii
+from insightconnect_plugin_runtime import PluginException
 
 
 class SubmitCookbook(insightconnect_plugin_runtime.Action):
@@ -25,8 +26,9 @@ class SubmitCookbook(insightconnect_plugin_runtime.Action):
         try:
             cookbook_bytes = b64decode(cookbook) if cookbook else None
         except binascii.Error:
-            raise Exception(
-                'Unable to decode base64 input for "cookbook". ' "Contents of the file must be encoded with base64!"
+            raise PluginException(
+                cause='Unable to decode base64 input for "cookbook". ',
+                assistance="Contents of the file must be encoded with base64!",
             )
 
         webids = self.connection.api.submit_cookbook(cookbook_bytes, parameters, additional_parameters)
