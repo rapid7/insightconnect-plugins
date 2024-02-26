@@ -17,7 +17,7 @@ class UpdateSiteIncludedTargets(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         scope = params.get(Input.INCLUDED_TARGETS)
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         endpoint = endpoints.Site.site_included_targets(self.connection.console_url, params.get(Input.ID))
 
         # Pull current site scope in order to append to list instead of overwriting

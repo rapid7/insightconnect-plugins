@@ -21,7 +21,7 @@ class CreateTag(insightconnect_plugin_runtime.Action):
         if params.get("searchCriteria") == {}:
             params.pop("searchCriteria")
 
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         self.logger.info(f"Creating tag with name {params.get('name')} and type {params.get('type')}")
         endpoint = endpoints.Tag.tags(self.connection.console_url)
 

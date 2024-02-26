@@ -21,7 +21,7 @@ class CreateScanEnginePool(insightconnect_plugin_runtime.Action):
         # Note: ID is not a required payload parameter despite the API docs saying it is
         # Providing it actually causes the request to fail
         #
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         endpoint = endpoints.ScanEnginePool.scan_engine_pools(self.connection.console_url)
 
         if ("engines" not in params) or (("engines" in params) and (len(params["engines"]) == 0)):

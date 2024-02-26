@@ -17,7 +17,7 @@ class GetAssetGroups(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         name = params.get("name")
 
         endpoint = endpoints.AssetGroup.asset_groups(self.connection.console_url)
