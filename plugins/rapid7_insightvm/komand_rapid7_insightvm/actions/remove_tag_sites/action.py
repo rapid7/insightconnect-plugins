@@ -16,7 +16,7 @@ class RemoveTagSites(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         site_id = params.get("id")
         endpoint = endpoints.Tag.tag_sites(self.connection.console_url, site_id)
         self.logger.info(f"Using {endpoint}")

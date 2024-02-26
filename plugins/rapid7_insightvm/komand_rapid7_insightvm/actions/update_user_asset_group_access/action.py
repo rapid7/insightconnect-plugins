@@ -16,7 +16,7 @@ class UpdateUserAssetGroupAccess(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         endpoint = endpoints.User.user_asset_groups(self.connection.console_url, params.get("user_id"))
         payload = params.get("asset_group_ids")
         self.logger.info(f"Using {endpoint}")
