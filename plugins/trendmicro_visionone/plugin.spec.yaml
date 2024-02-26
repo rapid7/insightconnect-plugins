@@ -14,6 +14,68 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/trendmicro_visionone
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://trendmicro.com
+key_features:
+  - Add Alert Note
+  - Add Custom Script
+  - Add to Block List
+  - Add to Exception List
+  - Add to Suspicious List
+  - Collect File
+  - Create API Keys
+  - Delete Custom Script
+  - Delete Email Message
+  - Delete API Keys
+  - Disable Account
+  - Download Custom Script
+  - Download Sandbox Analysis Result
+  - Download Sandbox Investigation Package
+  - Edit Alert Status
+  - Enable Account
+  - Get Alert Details
+  - Get Alert List
+  - Get API Key
+  - Get Custom Script List
+  - Get Email Activity Data
+  - Get Email Activity Data Count
+  - Get Endpoint Activity Data
+  - Get Endpoint Activity Data Count
+  - Get Endpoint Data
+  - Get Exception List
+  - Get Sandbox Analysis Result
+  - Get Sandbox Submission Status
+  - Get Sandbox Suspicious List
+  - Get Suspicious List
+  - Get Task Result
+  - Isolate Endpoint
+  - List API Keys
+  - Poll Alert List
+  - Poll Sandbox Suspicious List
+  - Quarantine Email Message
+  - Remove from Block List
+  - Remove from Exception List
+  - Remove from Suspicious List
+  - Reset Password Account
+  - Restore Email Message
+  - Restore Endpoint
+  - Run Custom Script
+  - Sign out Account
+  - Submit File to Sandbox
+  - Submit URLs to Sandbox
+  - Terminate Process
+  - Update API Key
+  - Update Custom Script
+requirements:
+  - Requires a Trend Micro Vision One API Key
+  - API must be enabled on the Settings page in the product's user interface
+references:
+  - "[Trend Micro Vision One](https://docs.trendmicro.com/en-us/enterprise/trend-micro-xdr-help/home)"
+version_history:
+  - 3.1.0 - Added API Keys related actions
+  - 3.0.0 - Refactored pytmv1 usage | Added Custom Scripts and Activity related actions
+  - 2.0.1 - Version bump of pytmv1 library
+  - 2.0.0 - Enabled multiple inputs for Get Endpoint Data, reduced API call frequency & General Refactoring
+  - 1.0.1 - Alert Details Output Fix (Minor Fix)
+  - 1.0.0 - Initial plugin
 tags:
   - vulnerability_scanning
   - vulnerability_management
