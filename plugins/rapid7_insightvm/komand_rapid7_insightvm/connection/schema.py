@@ -5,6 +5,7 @@ import json
 
 class Input:
     CREDENTIALS = "credentials"
+    SSL_VERIFY = "ssl_verify"
     URL = "url"
 
 
@@ -20,6 +21,13 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "Username and password",
       "order": 2
     },
+    "ssl_verify": {
+      "type": "boolean",
+      "title": "SSL Verify",
+      "description": "Specify whether to verify SSL or not",
+      "default": true,
+      "order": 3
+    },
     "url": {
       "type": "string",
       "title": "URL",
@@ -29,6 +37,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "credentials",
+    "ssl_verify",
     "url"
   ],
   "definitions": {

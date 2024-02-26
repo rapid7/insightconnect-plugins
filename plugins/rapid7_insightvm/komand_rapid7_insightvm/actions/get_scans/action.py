@@ -16,7 +16,7 @@ class GetScans(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         site_id = params.get("id")
         state = params.get("active")
         params = {"active": state}

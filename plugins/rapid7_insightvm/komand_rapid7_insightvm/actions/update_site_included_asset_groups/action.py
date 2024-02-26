@@ -17,7 +17,7 @@ class UpdateSiteIncludedAssetGroups(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         scope = params.get(Input.INCLUDED_ASSET_GROUPS)
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         endpoint = endpoints.Site.site_included_asset_groups(self.connection.console_url, params.get(Input.ID))
 
         # Pull current site scope in order to append to list instead of overwriting
