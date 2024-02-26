@@ -56,11 +56,11 @@ class CreateApiKeysInput(insightconnect_plugin_runtime.Input):
           "title": "Months to Expiration",
           "description": "The duration of validity for the API key (in months, 0 for no expiration)",
           "enum": [
-            1,
-            3,
-            6,
-            12,
-            0
+            "1",
+            "3",
+            "6",
+            "12",
+            "0"
           ],
           "order": 3
         },
