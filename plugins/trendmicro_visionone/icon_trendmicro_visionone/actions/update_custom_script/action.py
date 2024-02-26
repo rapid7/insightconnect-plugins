@@ -23,20 +23,19 @@ class UpdateCustomScript(insightconnect_plugin_runtime.Action):
         script_id = params.get(Input.SCRIPT_ID)
         file = params.get(Input.FILE)
         file_type = params.get(Input.FILE_TYPE)
-        file_name = params.get(Input.FILE_NAME)
         description = params.get(Input.DESCRIPTION, "")
         # Choose enum
         if "bash" in file_type:
-            file_type = pytmv1.FileType.BASH
+            file_type = pytmv1.ScriptType.BASH
         elif "powershell" in file_type:
-            file_type = pytmv1.FileType.POWERSHELL
+            file_type = pytmv1.ScriptType.POWERSHELL
         # Make Action API Call
         self.logger.info("Making API Call...")
         response = client.script.update(
             script_id=script_id,
-            file_content=b64decode(file.get("content")).decode("utf-8"),
-            file_name=file.get("filename"),
-            file_type=file_type,
+            script_content=b64decode(file.get("content")).decode("utf-8"),
+            script_name=file.get("filename"),
+            script_type=file_type,
             description=description,
         )
         if "error" in response.result_code.lower():

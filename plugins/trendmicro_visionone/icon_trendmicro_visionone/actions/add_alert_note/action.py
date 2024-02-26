@@ -22,7 +22,7 @@ class AddAlertNote(insightconnect_plugin_runtime.Action):
         content = params.get(Input.CONTENT)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.note.add(alert_id=alert_id, note=content)
+        response = client.note.create(alert_id=alert_id, note_content=content)
         if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while adding an alert note.",

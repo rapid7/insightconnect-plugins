@@ -969,7 +969,7 @@
         {
           "name": "TestKey",
           "role": "Analyst",
-          "months_to_expiration": 1,
+          "months_to_expiration": "1",
           "description": "Test API Key create",
           "status": "enabled"
         }
