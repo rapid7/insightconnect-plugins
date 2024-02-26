@@ -1,4 +1,4 @@
-FROM rapid7/insightconnect-python-3-plugin:5
+FROM rapid7/insightconnect-python-3-plugin:5.4
 
 LABEL organization=rapid7
 LABEL sdk=python

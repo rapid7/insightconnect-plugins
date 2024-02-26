@@ -1,4 +1,3 @@
-import json
 from typing import Union
 
 import insightconnect_plugin_runtime
@@ -7,6 +6,8 @@ from .schema import MonitorUsersInput, MonitorUsersOutput, MonitorUsersState, Co
 from datetime import datetime, timedelta, timezone
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_salesforce.util.exceptions import ApiException
+
+DEFAULT_CUTOFF_HOURS = 24
 
 
 class MonitorUsers(insightconnect_plugin_runtime.Task):
@@ -33,36 +34,34 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
         )
 
     # pylint: disable=unused-argument
-    def run(self, params={}, state={}):  # noqa: C901
+    def run(self, params={}, state={}, custom_config={}):  # noqa: C901
         self.connection.api.enable_rate_limiting = False
         has_more_pages = False
         try:
             now = self.get_current_time()
             get_users = False
             get_user_login_history = False
-            last_24_hours = now - timedelta(hours=24)
+
+            cut_off_time, start_time = self._get_timings(now, custom_config, state)
 
             remove_duplicates = state.pop(self.REMOVE_DUPLICATES, True)  # true as a default
             users_next_page_id = state.pop(self.USERS_NEXT_PAGE_ID, None)
             user_login_next_page_id = state.pop(self.USER_LOGIN_NEXT_PAGE_ID, None)
             updated_users_next_page_id = state.pop(self.UPDATED_USERS_NEXT_PAGE_ID, None)
 
-            user_update_end_timestamp = now
-
             # group of timestamps for retrieving updated users data
-            user_update_start_timestamp = user_update_end_timestamp - timedelta(hours=24)
-            user_update_last_collection = user_update_end_timestamp
+            user_update_start_timestamp = start_time
+            user_update_last_collection = now
 
             # group of timestamps for retrieving login history data
+            user_login_start_timestamp = start_time
             user_login_end_timestamp = now
-            user_login_start_timestamp = user_login_end_timestamp - timedelta(hours=24)
 
             if not state:
                 self.logger.info("First run")
-                state[self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP] = str(user_update_last_collection)
-
                 get_users = True
                 state[self.NEXT_USER_COLLECTION_TIMESTAMP] = str(now + timedelta(hours=24))
+                state[self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP] = str(user_update_last_collection)
 
                 get_user_login_history = True
                 state[self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP] = str(now + timedelta(hours=1))
@@ -91,7 +90,7 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                     )
 
                 user_update_start_timestamp = self._get_recent_timestamp(
-                    state, last_24_hours, self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP
+                    state, cut_off_time, self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP
                 )
                 state[self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP] = str(user_update_last_collection)
                 next_user_collection_timestamp = state.get(self.NEXT_USER_COLLECTION_TIMESTAMP)
@@ -108,7 +107,7 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                     get_user_login_history = True
                     state[self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP] = str(now + timedelta(hours=1))
                     user_login_start_timestamp = self._get_recent_timestamp(
-                        state, last_24_hours, self.LAST_USER_LOGIN_COLLECTION_TIMESTAMP
+                        state, cut_off_time, self.LAST_USER_LOGIN_COLLECTION_TIMESTAMP
                     )
                     state[self.LAST_USER_LOGIN_COLLECTION_TIMESTAMP] = str(user_login_end_timestamp)
 
@@ -207,7 +206,48 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                  `fallback_timestamp`.
         """
         stored_timestamp = self.convert_to_datetime(state.get(key, fallback_timestamp))
-        return max(stored_timestamp, fallback_timestamp)
+        new_ts = max(stored_timestamp, fallback_timestamp)
+
+        if new_ts != stored_timestamp:
+            self.logger.info(
+                f"State stored timestamp is: {stored_timestamp}, "
+                f"returning {new_ts} to keep within our fallback period."
+            )
+        return new_ts
+
+    def _get_timings(self, now: datetime, custom_config: dict, state: dict) -> (datetime, datetime):
+        """
+        If custom_config values have been passed to the task use these to calculate lookback and cut off
+        values otherwise default to a lookback and cut off being 24 hours.
+
+        Args:
+            now (datetime): datetime object that holds the current time
+            custom_config (dict): dictionary containing values passed from the SDK to calculate timing values.
+            state (dict): existing state of the integration used to fine tune the logger.
+
+        Returns:
+            cut_off_time (datetime): datetime that will be used to stop time values going back beyond a set date.
+            lookback_time (datetime): datetime to use on the first run to carry out a backfill of data.
+        """
+        cut_off_timings, lookback_time = custom_config.get("cutoff", {}), custom_config.get("lookback")
+
+        cut_off_date, cut_off_hours = cut_off_timings.get("date"), cut_off_timings.get("hours", DEFAULT_CUTOFF_HOURS)
+        cut_off_time = (
+            datetime(**cut_off_date, tzinfo=timezone.utc) if cut_off_date else now - timedelta(hours=cut_off_hours)
+        )
+
+        log_msg = f"Cut off time being applied: {cut_off_time}"
+        if lookback_time:
+            start_time = datetime(**lookback_time, tzinfo=timezone.utc)
+            additional_msg = f", along with custom lookback of {start_time}"
+        else:
+            start_time = now - timedelta(hours=cut_off_hours)
+            additional_msg = f", along with default lookback time of {cut_off_hours} hours ({start_time})"
+
+        if not state:  # we only care about lookback time if there's no state.
+            log_msg += additional_msg
+        self.logger.info(log_msg)
+        return cut_off_time, start_time
 
     def remove_duplicates_user_login_history(self, records: list) -> list:
         """
