@@ -16,7 +16,7 @@ class GetScanEngine(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         engine_id = params.get("id")
         endpoint = endpoints.ScanEngine.scan_engines(self.connection.console_url, engine_id)
         scan_engine_response = resource_helper.resource_request(endpoint=endpoint)

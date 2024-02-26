@@ -16,7 +16,7 @@ class TagAssetGroup(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         asset_group_id = params.get("asset_group_id")
         tag_id = params.get("tag_id")
         endpoint = endpoints.AssetGroup.asset_group_tags(self.connection.console_url, asset_group_id, tag_id)

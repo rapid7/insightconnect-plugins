@@ -113,7 +113,7 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
         return track_site_scans
 
     def get_scan_details(self, endpoint: str, scan: dict) -> dict:
-        response = self.connection.session.get(url=endpoint, verify=False)
+        response = self.connection.session.get(url=endpoint, verify=self.connection.ssl_verify)
         if response.status_code in [200, 201]:  # 200 is documented, 201 is undocumented
             try:
                 scan_details = response.json()
@@ -131,7 +131,7 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
         return scan_details
 
     def get_sites_within_scope(self, site_regex):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         endpoint = endpoints.Site.sites(self.connection.console_url)
 
         sites = resource_helper.paged_resource_request(endpoint=endpoint)
