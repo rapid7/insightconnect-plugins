@@ -2,6 +2,7 @@ from datetime import datetime, timedelta, timezone
 from hashlib import sha1
 from json import loads
 from os import getenv
+from typing import Dict
 
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -31,7 +32,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             state=MonitorEventsState(),
         )
 
-    def run(self, params={}, state={}):  # noqa: MC0001
+    def run(self, params={}, state={}, custom_config={}):  # noqa: MC0001
         self.connection.client.toggle_rate_limiting = False
         has_more_pages = False
         try:
@@ -40,10 +41,12 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             next_page_index = state.get(self.NEXT_PAGE_INDEX)
             now = self.get_current_time() - timedelta(minutes=1)
 
-            # [PLGN-701] ignore any look back limitations if we're forcing a backfill date
-            if not SPECIFIC_DATE:
-                max_allowed_lookback = now - timedelta(hours=MAX_ALLOWED_LOOKBACK_HOURS)
+            max_allowed_lookback, backfill_date = self._apply_custom_timings(custom_config, now)
+
+            # [PLGN-727] skip comparison check if first run of a backfill, next run should specify lookback to match.
+            if not backfill_date:
                 # Don't allow collection to go back further than MAX_ALLOWED_LOOKBACK_HOURS (24) hours max
+                # Unless otherwise defined externally and passed in via custom_config parameter.
                 if last_collection_date and datetime.fromisoformat(last_collection_date) < max_allowed_lookback:
                     last_collection_date = max_allowed_lookback.isoformat()
                     if next_page_index:
@@ -56,10 +59,10 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
 
             if not state or not last_collection_date:
                 task_start = "First run... "
-                first_time = now - timedelta(hours=MAX_ALLOWED_LOOKBACK_HOURS)
-                if SPECIFIC_DATE:
-                    first_time = datetime(**loads(SPECIFIC_DATE), tzinfo=timezone.utc)  # PLGN-701: hard set to 27th Jan
-                    task_start += f"Using env var value of {SPECIFIC_DATE}"
+                first_time = max_allowed_lookback
+                if backfill_date:
+                    first_time = datetime(**backfill_date, tzinfo=timezone.utc)  # PLGN-727: allow backfill
+                    task_start += f"Using custom value of {backfill_date}"
                 self.logger.info(task_start)
                 last_time = first_time + timedelta(hours=1)
                 state[self.LAST_COLLECTION_DATE] = last_time.isoformat()
@@ -177,3 +180,25 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                 f"Original number of events: {len(new_logs)}. Number of events after de-duplication: {len(logs_to_return)} "
             )
         return logs_to_return, new_logs_hashes
+
+    def _apply_custom_timings(self, custom_config: Dict[str, Dict], now: datetime) -> (datetime, int):
+        """
+        If a custom_config is supplied to the plugin we can modify our timing logic.
+        Lookback is applied for the first run with no state.
+        Default is applied to the max look back hours being enforced on the parameters.
+        """
+        cutoff_values = custom_config.get("cutoff", {"hours": MAX_ALLOWED_LOOKBACK_HOURS})
+        cutoff_date, cutoff_hours = cutoff_values.get("date", {}), cutoff_values.get("hours")
+        if cutoff_date:
+            max_lookback = datetime(**cutoff_date, tzinfo=timezone.utc)
+        else:
+            max_lookback = now - timedelta(hours=cutoff_hours)
+
+        # if using env var we need to convert to dict from string, CPS API will return us a dict.
+        env_var_date = loads(SPECIFIC_DATE) if SPECIFIC_DATE else None
+        specific_date = custom_config.get("lookback", env_var_date)
+        self.logger.info(
+            "Plugin task execution will apply the following restrictions. "
+            f"Max lookback={max_lookback}, specific date={specific_date}"
+        )
+        return max_lookback, specific_date
