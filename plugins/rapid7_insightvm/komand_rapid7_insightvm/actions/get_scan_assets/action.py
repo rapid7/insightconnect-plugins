@@ -59,7 +59,7 @@ class GetScanAssets(insightconnect_plugin_runtime.Action):
                 scan_site_id = row["site_id"]
 
         # Get assets of site of scan
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         search_criteria = {
             "filters": [{"field": "site-id", "operator": "in", "values": [scan_site_id]}],
             "match": "all",

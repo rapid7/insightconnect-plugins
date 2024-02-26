@@ -16,7 +16,7 @@ class TagSite(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         site_id = params.get("site_id")
         tag_id = params.get("tag_id")
         endpoint = endpoints.Site.site_tags(self.connection.console_url, site_id, tag_id)

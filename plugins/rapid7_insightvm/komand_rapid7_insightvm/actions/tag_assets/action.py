@@ -13,7 +13,7 @@ class TagAssets(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         asset_ids = params.get(Input.ASSET_IDS)
         tag_id = params.get(Input.TAG_ID)
         tag_name = params.get(Input.TAG_NAME)
