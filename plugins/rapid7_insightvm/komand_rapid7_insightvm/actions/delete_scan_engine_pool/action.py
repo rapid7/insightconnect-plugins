@@ -16,7 +16,7 @@ class DeleteScanEnginePool(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         endpoint = endpoints.ScanEnginePool.scan_engine_pools(self.connection.console_url, params["id"])
 
         response = resource_helper.resource_request(endpoint=endpoint, method="delete")

@@ -25,7 +25,8 @@ class ListReports(insightconnect_plugin_runtime.Action):
 
         try:
             page_response = self.connection.session.get(
-                url=endpoints.Report.list_reports(self.connection.console_url, page, size, sort), verify=False
+                url=endpoints.Report.list_reports(self.connection.console_url, page, size, sort),
+                verify=self.connection.ssl_verify,
             ).json()
             total_pages = page_response.get("page", {}).get("totalPages", 0)
         except json.decoder.JSONDecodeError:
@@ -42,7 +43,7 @@ class ListReports(insightconnect_plugin_runtime.Action):
             endpoint = endpoints.Report.list_reports(self.connection.console_url, page, size, sort)
             try:
                 self.logger.info(f"Trying {endpoint}")
-                current_page = self.connection.session.get(url=endpoint, verify=False)
+                current_page = self.connection.session.get(url=endpoint, verify=self.connection.ssl_verify)
                 if current_page.status_code in [200, 201]:  # 200 is documented, 201 is undocumented
                     obtained_reports = current_page.json().get("resources", [])
                     if obtained_reports and isinstance(obtained_reports, list):

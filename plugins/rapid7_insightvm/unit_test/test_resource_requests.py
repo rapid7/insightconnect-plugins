@@ -47,7 +47,7 @@ class TestResourceRequests(TestCase):
     def test_init(self):
         logger = logging.getLogger("logger")
         session = requests.session()
-        test_object = resource_requests.ResourceRequests(logger=logger, session=session)
+        test_object = resource_requests.ResourceRequests(logger=logger, session=session, ssl_verify=False)
         self.assertIsNotNone(test_object)
         self.assertTrue(test_object.logger.name == "logger")
 
@@ -55,7 +55,7 @@ class TestResourceRequests(TestCase):
     def test_resource_request(self):
         logger = logging.getLogger("logger")
         session = MockSession()
-        test_object = resource_requests.ResourceRequests(logger=logger, session=session)
+        test_object = resource_requests.ResourceRequests(logger=logger, session=session, ssl_verify=False)
         response = test_object.resource_request("google")
         self.assertIsNotNone(response)
         self.assertEqual(response.get("resources"), [{"thing1": "data"}, {"thing2": "data"}])
@@ -63,14 +63,14 @@ class TestResourceRequests(TestCase):
     def test_resource_request_requests_exception(self):
         logger = logging.getLogger("logger")
         session = MockSession()
-        test_object = resource_requests.ResourceRequests(logger=logger, session=session)
+        test_object = resource_requests.ResourceRequests(logger=logger, session=session, ssl_verify=False)
         with pytest.raises(PluginException):
             test_object.resource_request("exception.com")
 
     def test_resource_request_401(self):
         logger = logging.getLogger("logger")
         session = MockSession()
-        test_object = resource_requests.ResourceRequests(logger=logger, session=session)
+        test_object = resource_requests.ResourceRequests(logger=logger, session=session, ssl_verify=False)
         with pytest.raises(PluginException, match="InsightVM returned an error message. Unauthorized"):
             test_object.resource_request("bad password")
 
@@ -79,7 +79,7 @@ class TestPagedResourceRequest(TestCase):
     def test_paged_resource_request_no_params(self):
         logger = logging.getLogger("logger")
         session = MockSession()
-        test_object = resource_requests.ResourceRequests(logger=logger, session=session)
+        test_object = resource_requests.ResourceRequests(logger=logger, session=session, ssl_verify=False)
         response = test_object.paged_resource_request("paged_request")
         self.assertIsNotNone(response)
         self.assertEqual(
@@ -90,7 +90,7 @@ class TestPagedResourceRequest(TestCase):
     def test_paged_resource_request_with_params_dict(self):
         logger = logging.getLogger("logger")
         session = MockSession()
-        test_object = resource_requests.ResourceRequests(logger=logger, session=session)
+        test_object = resource_requests.ResourceRequests(logger=logger, session=session, ssl_verify=False)
         response = test_object.paged_resource_request("paged_request", params={"size": 100})
         self.assertIsNotNone(response)
         self.assertEqual(
@@ -101,7 +101,7 @@ class TestPagedResourceRequest(TestCase):
     def test_paged_resource_request_with_params_tuple(self):
         logger = logging.getLogger("logger")
         session = MockSession()
-        test_object = resource_requests.ResourceRequests(logger=logger, session=session)
+        test_object = resource_requests.ResourceRequests(logger=logger, session=session, ssl_verify=False)
         response = test_object.paged_resource_request("paged_request", params=[("size", 100)])
         self.assertIsNotNone(response)
         self.assertEqual(
