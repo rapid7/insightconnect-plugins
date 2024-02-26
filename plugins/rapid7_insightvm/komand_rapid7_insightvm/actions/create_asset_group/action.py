@@ -21,7 +21,7 @@ class CreateAssetGroup(insightconnect_plugin_runtime.Action):
         if params.get("searchCriteria") == {}:
             params.pop("searchCriteria")
 
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         self.logger.info(f"Creating asset group with name {params.get(Input.NAME)} and type {params.get(Input.TYPE)}")
 
         return {

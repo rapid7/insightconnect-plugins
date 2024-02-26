@@ -25,6 +25,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |credentials|credential_username_password|None|True|Username and password|None|{'username': 'user1', 'password': 'mypassword'}|
+|ssl_verify|boolean|True|True|Specify whether to verify SSL or not|None|True|
 |url|string|None|True|URL to your InsightVM console, without trailing slashes|None|https://insightvm.example.com:3780|
   
 Example input:
@@ -32,6 +33,7 @@ Example input:
 ```
 {
   "credentials": "{'username': 'user1', 'password': 'mypassword'}",
+  "ssl_verify": true,
   "url": "https://insightvm.example.com:3780"
 }
 ```
@@ -3976,6 +3978,7 @@ Example output:
 
 # Version History
 
+* 8.0.0 - Updated to the latest SDK version | Updated dependencies to the latest version | Added new connection parameter `SSL Verify`
 * 7.0.2 - `Scan Completion` - Update query outputs to match schema types
 * 7.0.1 - `Scan Completion` - Update query outputs to match schema names
 * 7.0.0 - `Scan Completion` - Rework trigger to use a new query, resulting in a new output & removed all inputs except for `site_id` | `Top Remediations` - Update vulnerability_id to nexpose_id
