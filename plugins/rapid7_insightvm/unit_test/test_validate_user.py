@@ -58,14 +58,14 @@ class TestValidateUser(TestCase):
     def test_init(self):
         logger = logging.getLogger("logger")
         session = requests.session()
-        test_object = resource_helpers.ValidateUser(logger=logger, session=session)
+        test_object = resource_helpers.ValidateUser(logger=logger, session=session, ssl_verify=False)
         self.assertIsNotNone(test_object)
         self.assertTrue(test_object.logger.name == "logger")
 
     def test_validate_role_exists(self):
         logger = logging.getLogger("logger")
         session = requests.session()
-        test_object = resource_helpers.ValidateUser(logger=logger, session=session)
+        test_object = resource_helpers.ValidateUser(logger=logger, session=session, ssl_verify=False)
         test_object.validate_user_email(user["email"])
         with self.assertRaises(PluginException) as error:
             test_object.validate_user_email("foo")

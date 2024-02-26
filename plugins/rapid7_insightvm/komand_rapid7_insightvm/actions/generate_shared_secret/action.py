@@ -17,8 +17,8 @@ class GenerateSharedSecret(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
-        v1_session = V1Session(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
+        v1_session = V1Session(self.connection.session, self.logger, self.connection.ssl_verify)
         time_to_live = params.get("time_to_live")
         endpoint = endpoints.SharedSecret.generate_shared_secret(self.connection.console_url, time_to_live)
 

@@ -54,7 +54,7 @@ class GetSiteAssets(insightconnect_plugin_runtime.Action):
         self.logger.info(f"Fetching up to {size} assets from endpoint page {endpoint_page} ...")
         try:
             response = self.connection.session.get(
-                url=endpoint, verify=False, params={"size": size, "page": endpoint_page}
+                url=endpoint, verify=self.connection.ssl_verify, params={"size": size, "page": endpoint_page}
             )
         except requests.RequestException as e:
             self.logger.error(e)

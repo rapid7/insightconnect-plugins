@@ -16,7 +16,7 @@ class UpdateUserSiteAccess(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         endpoint = endpoints.User.user_sites(self.connection.console_url, params.get("user_id"))
         payload = params.get("site_ids")
         self.logger.info(f"Using {endpoint}")

@@ -16,8 +16,8 @@ class GetScanEngines(insightconnect_plugin_runtime.Action):
             output=GetScanEnginesOutput(),
         )
 
-    def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+    def run(self, params={}):  # noqa MC0001
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         name = params.get("name")
         address = params.get("address")
         endpoint = endpoints.ScanEngine.scan_engines(self.connection.console_url)

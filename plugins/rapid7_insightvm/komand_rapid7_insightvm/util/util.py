@@ -26,7 +26,7 @@ def adhoc_sql_report(connection, logger, report_payload: dict):
     :param report_payload: string of generated SQL report contents
     :return: String of generated SQL report contents
     """
-    resource_helper = ResourceRequests(connection.session, logger)
+    resource_helper = ResourceRequests(connection.session, logger, connection.ssl_verify)
 
     # Create Report
     endpoint = endpoints.Report.create(connection.console_url)
