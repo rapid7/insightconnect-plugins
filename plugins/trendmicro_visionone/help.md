@@ -421,7 +421,7 @@ This action is used to generates API keys that allow third-party applications to
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_keys_objects|[]api_keys_objects|None|True|List of JSON objects containing data for API keys creation|None|[{"name":"TestKey","role":"Analyst","months_to_expiration":1,"description":"Test API Key create","status":"enabled"}]|
+|api_keys_objects|[]api_keys_objects|None|True|List of JSON objects containing data for API keys creation|None|[{"name":"TestKey","role":"Analyst","months_to_expiration":"1","description":"Test API Key create","status":"enabled"}]|
 
 Example input:
 
