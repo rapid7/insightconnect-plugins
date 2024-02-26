@@ -16,7 +16,7 @@ class Scan(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
 
         hosts = params.get(Input.HOSTS)
         endpoint = endpoints.Scan.site_scans(self.connection.console_url, params.get(Input.SITE_ID))

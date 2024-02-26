@@ -17,7 +17,7 @@ class UpdateSiteExcludedTargets(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         scope = params.get(Input.EXCLUDED_TARGETS)
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         endpoint = endpoints.Site.site_excluded_targets(self.connection.console_url, params.get(Input.ID))
 
         # Pull current site scope in order to append to list instead of overwriting
