@@ -16,7 +16,7 @@ class UpdateSite(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         endpoint = endpoints.Site.sites(self.connection.console_url, params.get(Input.ID))
 
         update_site = {

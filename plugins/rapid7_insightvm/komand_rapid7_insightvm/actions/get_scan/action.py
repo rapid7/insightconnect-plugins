@@ -32,7 +32,7 @@ class GetScan(insightconnect_plugin_runtime.Action):
         self.logger.info(f"Using {endpoint}")
 
         try:
-            response = self.connection.session.get(url=endpoint, verify=False)
+            response = self.connection.session.get(url=endpoint, verify=self.connection.ssl_verify)
         except requests.RequestException as e:
             self.logger.error(e)
             raise
