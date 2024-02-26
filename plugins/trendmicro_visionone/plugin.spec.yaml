@@ -990,11 +990,11 @@ types:
       description: The duration of validity for the API key (in months, 0 for no expiration)
       required: false
       enum:
-        - 1
-        - 3
-        - 6
-        - 12
-        - 0
+        - "1"
+        - "3"
+        - "6"
+        - "12"
+        - "0"
     description:
       title: Description
       type: string
