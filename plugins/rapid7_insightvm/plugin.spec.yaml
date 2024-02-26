@@ -4,23 +4,23 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM Console
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans
-version: 7.0.2
-connection_version: 7
+version: 8.0.0
+connection_version: 8
 supported_versions: ["Rapid7 InsightVM API v3 2022-05-25"]
 vendor: rapid7
 support: rapid7
 status: []
 sdk:
-  type: slim
-  version: 5
+  type: full
+  version: 5.4.2
   user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insightvm
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.rapid7.com
 tags:
-- insightvm
-- rapid7
+  - insightvm
+  - rapid7
 hub_tags:
   use_cases: [asset_inventory, remediation_management, vulnerability_management, reporting_and_analytics]
   keywords: [insightvm, rapid7]
@@ -2029,6 +2029,13 @@ connection:
     type: credential_username_password
     required: true
     example: "{'username': 'user1', 'password': 'mypassword'}"
+  ssl_verify:
+    title: SSL Verify
+    description: Specify whether to verify SSL or not
+    type: boolean
+    required: true
+    default: true
+    example: true
 actions:
   scan:
     title: Scan

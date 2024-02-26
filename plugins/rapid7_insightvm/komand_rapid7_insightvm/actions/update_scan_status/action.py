@@ -16,7 +16,7 @@ class UpdateScanStatus(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         scan_id = params.get("id")
         status = params.get("status")
         endpoint = endpoints.Scan.scan_status(self.connection.console_url, scan_id, status)
