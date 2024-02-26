@@ -16,7 +16,7 @@ class DeleteAsset(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
 
         asset_id = params.get(Input.ID)
         endpoint = endpoints.Asset.assets(self.connection.console_url, asset_id)

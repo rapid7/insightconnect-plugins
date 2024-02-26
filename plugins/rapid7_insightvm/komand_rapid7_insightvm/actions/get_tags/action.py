@@ -17,7 +17,7 @@ class GetTags(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         tag_name = params.get("name")
         tag_type = params.get("type")
 
