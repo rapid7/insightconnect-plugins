@@ -1,63 +1,63 @@
 {
-	"spec": "9c4db651324bfaa4edd3df5c9a950e11",
-	"manifest": "d0a961ee4f407e005bac9a224b338b33",
-	"setup": "fec615d4f2cae1d8dadd50b37d06c2e1",
+	"spec": "8046ee5dbe42453e6a39274966534803",
+	"manifest": "32ceef3407f156b46c7d7c455571c323",
+	"setup": "e959a2807760e8754f273e1d5d140ea1",
 	"schemas": [
 		{
 			"identifier": "availability_set_vm/schema.py",
-			"hash": "bd6433d4af965af7b586f041a4d75ac6"
+			"hash": "5d890ef5b21df1a24ee516806da94f30"
 		},
 		{
 			"identifier": "delete_vm/schema.py",
-			"hash": "c1b3cd0af96adb394c2e97fa3d584750"
+			"hash": "60e0d9e6ea29a6e2c69edde9783c44f8"
 		},
 		{
 			"identifier": "generalized_vm/schema.py",
-			"hash": "671938b3b4e5ba6a32a5ff77627923fc"
+			"hash": "0445eed9a934f50a64a1ffab32887701"
 		},
 		{
 			"identifier": "info_vm/schema.py",
-			"hash": "91574aa6c4df92c40d9b4cc801aad600"
+			"hash": "1d65abd22349f6da44556922a467edb3"
 		},
 		{
 			"identifier": "list_vm/schema.py",
-			"hash": "dba4ffaac81d26daf935296a0df10591"
+			"hash": "d7409f015bd67d60d02891a4c9b53c6d"
 		},
 		{
 			"identifier": "restart_vm/schema.py",
-			"hash": "2423336df74632984cf045a8f4baf5f8"
+			"hash": "0bd13a8e4bc5cb283fa3a98dfedba5f6"
 		},
 		{
 			"identifier": "save_image_vm/schema.py",
-			"hash": "bb0cea0274e1fd7d9c236d8a7b448531"
+			"hash": "0e72e666073ce9fe720df39b0a20d01a"
 		},
 		{
 			"identifier": "sizes_vm/schema.py",
-			"hash": "151a76e92553ce2669fe68518dec62a5"
+			"hash": "6e1a5f44d4fc099ee16dd0720f42ac58"
 		},
 		{
 			"identifier": "sizes_vm_subscription/schema.py",
-			"hash": "42fe715d8af9f8364f17628ce3f25964"
+			"hash": "3c6f7204d8bf4fa89d611f6ee444e358"
 		},
 		{
 			"identifier": "start_vm/schema.py",
-			"hash": "69d8d2b883a881de9d703ed249c4117e"
+			"hash": "6523af831e87b57f373e589ba7e359be"
 		},
 		{
 			"identifier": "stop_deallocate_vm/schema.py",
-			"hash": "ee1b23a51aa592715aafb340459021d3"
+			"hash": "5ba53ee9ce6ae3747a406c5ac225579b"
 		},
 		{
 			"identifier": "stop_vm/schema.py",
-			"hash": "64b4ae9024438e6caf0191ec5771a2e0"
+			"hash": "43fad6ccfe1c59ed7f6aa648cb900f83"
 		},
 		{
 			"identifier": "vm_in_subscription/schema.py",
-			"hash": "bfe3d054898fc0a518ea97cd222a1479"
+			"hash": "6249c6c1c731f0ded44541d97f6bafc4"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "67b6699a31fa550c11d20d6e1e1b07ff"
+			"hash": "9f52389f5efa5e48dd5feec0fce87d82"
 		}
 	]
 }

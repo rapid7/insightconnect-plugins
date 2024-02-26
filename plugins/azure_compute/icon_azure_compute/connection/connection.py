@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import ConnectionSchema
+from .schema import ConnectionSchema, Input
 
 # Custom imports below
 import requests
@@ -18,7 +18,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 "client_secret": client_secret,
                 "resource": "https://management.azure.com/",
             }
-            response = requests.post(endpoint, data=payload).json()
+            response = requests.post(endpoint, data=payload).json()  # noqa
             return response["access_token"]
         except Exception as error:
             self.logger.error(f"Cannot request get access token : {error}")
@@ -26,11 +26,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params):
         self.logger.info("Connect: Connecting..")
-        server = params.get("host", "https://management.azure.com")
-        api_version = params.get("api_version", "2016-04-30-preview")
-        client_id = params.get("client_id", "")
-        client_secret = params.get("client_secret").get("privateKey")
-        tenant_id = params.get("tenant_id", "")
+        server = params.get(Input.HOST, "https://management.azure.com")
+        api_version = params.get(Input.API_VERSION, "2016-04-30-preview")
+        client_id = params.get(Input.CLIENT_ID, "")
+        client_secret = params.get(Input.CLIENT_SECRET, {}).get("secretKey", "")
+        tenant_id = params.get(Input.TENANT_ID, "")
 
         endpoint = f"https://login.microsoftonline.com/{tenant_id}/oauth2/token/"
 

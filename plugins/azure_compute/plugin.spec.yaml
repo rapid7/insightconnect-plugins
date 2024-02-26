@@ -4,10 +4,15 @@ products: [insightconnect]
 name: azure_compute
 title: Azure Compute
 description: Azure Virtual Machines is one of several types of on-demand, scalable computing resources that Azure offers
-version: 3.0.2
+version: 4.0.0
+connection_version: 4
 vendor: rapid7
 support: community
 supported_versions: ["2022-06-01"]
+sdk:
+  type: slim
+  version: 5.4.0
+  user: nobody
 status: []
 author: komand
 resources:
@@ -15,11 +20,11 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.microsoft.com/
 tags:
-- Azure Compute
-- Azure Virtual Machines
-- Azure
-- VM
-- cloud
+  - Azure Compute
+  - Azure Virtual Machines
+  - Azure
+  - VM
+  - cloud
 hub_tags:
   use_cases: [threat_detection_and_response, asset_inventory]
   keywords: [azure compute, azure virtual machines, azure, vm, cloud, microsoft]
@@ -43,8 +48,7 @@ types:
     networkInterfaces:
       type: '[]availabilitySet'
       title: Network Interfaces
-      description: Specifies the list of resource ids for the network interfaces associated
-        with the virtual machine
+      description: Specifies the list of resource ids for the network interfaces associated with the virtual machine
   additionalUnattendContent:
     component:
       type: string
@@ -54,38 +58,33 @@ types:
     content:
       type: string
       title: Content
-      description: Specifies the XML formatted content that is added to the unattend.xml
-        file for the specified path and component
+      description: Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component
     pass:
       type: string
       title: Pass
-      description: Specifies the name of the pass that the content applies to, the
-        only allowable value is oobeSystem
+      description: Specifies the name of the pass that the content applies to, the only allowable value is oobeSystem
     settingName:
       type: string
       title: Setting Name
-      description: 'Specifies the name of the setting to which the content applies,
-        possible values are: firstlogoncommands and autologon'
+      description: 'Specifies the name of the setting to which the content applies, possible values are: firstlogoncommands and autologon'
   listeners:
     certificateUrl:
       type: string
       title: Certificate URL
-      description: Specifies URL of the certificate with which new virtual machines
-        is provisioned
+      description: Specifies URL of the certificate with which new virtual machines is provisioned
     protocol:
       type: string
       title: Protocol
       description: Specifies the protocol of listener
   winRM:
     listeners:
-      type: '[]listeners'
       title: Listeners
+      type: '[]listeners'
   windowsConfiguration:
     additionalUnattendContent:
       type: additionalUnattendContent
       title: Additional Unattend Content
-      description: Specifies additional XML formatted information that can be included
-        in the unattend.xml file, which is used by windows setup
+      description: Specifies additional XML formatted information that can be included in the unattend.xml file, which is used by windows setup
     enableAutomaticUpdates:
       type: bool
       title: Enable Automatic Updates
@@ -93,18 +92,15 @@ types:
     provisionVMAgent:
       type: bool
       title: Provision VM Agent
-      description: Indicates whether virtual machine agent should be provisioned on
-        the virtual machine
+      description: Indicates whether virtual machine agent should be provisioned on the virtual machine
     winRM:
       type: winRM
       title: Win RM
-      description: Specifies the windows remote management listeners, this enables
-        remote windows powershell
+      description: Specifies the windows remote management listeners, this enables remote windows powershell
     winrRMListener:
       type: listeners
       title: WinrRM Listener
-      description: Contains configuration settings for the windows remote management
-        service on the virtual machine
+      description: Contains configuration settings for the windows remote management service on the virtual machine
   bootDiagnostics:
     enabled:
       type: bool
@@ -113,25 +109,21 @@ types:
     storageUri:
       type: string
       title: Storage URI
-      description: URI of the storage account to use for placing the console output
-        and screenshot
+      description: URI of the storage account to use for placing the console output and screenshot
   diagnosticsProfile:
     bootDiagnostics:
       type: bootDiagnostics
       title: Boot Diagnostics
-      description: Boot diagnostics is a debugging feature which allows you to view
-        console Output and screenshot to diagnose VM status
+      description: Boot diagnostics is a debugging feature which allows you to view console Output and screenshot to diagnose VM status
   publicKeys:
     keyData:
       type: string
       title: Key Data
-      description: SSH public key certificate used to authenticate with the VM through
-        SSH
+      description: SSH public key certificate used to authenticate with the VM through SSH
     path:
       type: string
       title: Path
-      description: Specifies the full path on the created VM where SSH public key
-        is stored
+      description: Specifies the full path on the created VM where SSH public key is stored
   SSH:
     publicKeys:
       type: '[]publicKeys'
@@ -166,8 +158,7 @@ types:
     secrets:
       type: '[]object'
       title: Secrets
-      description: Specifies set of certificates that should be installed onto the
-        virtual machine
+      description: Specifies set of certificates that should be installed onto the virtual machine
     windowsConfiguration:
       type: windowsConfiguration
       title: Windows Configuration
@@ -180,28 +171,23 @@ types:
     id:
       type: string
       title: Image Reference
-      description: Specifies the resource identifier of a virtual machine image in
-        your subscription
+      description: Specifies the resource identifier of a virtual machine image in your subscription
     offer:
       type: string
       title: Offer
-      description: Specifies the offer of the platform image or marketplace image
-        used to create the virtual machine
+      description: Specifies the offer of the platform image or marketplace image used to create the virtual machine
     publisher:
       type: string
       title: Publisher
-      description: Specifies the publisher of the platform image or marketplace image
-        used to create the virtual machine
+      description: Specifies the publisher of the platform image or marketplace image used to create the virtual machine
     sku:
       type: string
       title: SKU
-      description: Specifies the sku of the platform image or marketplace image used
-        to create the virtual machine
+      description: Specifies the sku of the platform image or marketplace image used to create the virtual machine
     version:
       type: string
       title: Version
-      description: Specifies the version of the platform image or marketplace image
-        used to create the virtual machine
+      description: Specifies the version of the platform image or marketplace image used to create the virtual machine
   managedDisk:
     Id:
       type: string
@@ -237,19 +223,16 @@ types:
     osType:
       type: string
       title: OS Type
-      description: This property allows you to specify the type of the os that is
-        included in the disk if creating a VM from user-image or a specialized vhd
+      description: This property allows you to specify the type of the os that is included in the disk if creating a VM from user-image or a specialized vhd
     vhd:
       type: vhd
       title: VHD
-      description: Specifies the URI of the location in storage where the vhd for
-        the virtual machine should be placed
+      description: Specifies the URI of the location in storage where the vhd for the virtual machine should be placed
   storageProfile:
     dataDisks:
       type: '[]object'
       title: Data Disks
-      description: Specifies the parameters that are used to add a data disk to a
-        virtual machine
+      description: Specifies the parameters that are used to add a data disk to a virtual machine
     imageReference:
       type: imageReference
       title: Image Reference
@@ -257,8 +240,7 @@ types:
     osDisk:
       type: osDisk
       title: OS Disk
-      description: Specifies information about the operating system disk used by the
-        virtual machine
+      description: Specifies information about the operating system disk used by the virtual machine
   properties:
     availabilitySet:
       type: availabilitySet
@@ -300,8 +282,7 @@ types:
     location:
       type: string
       title: Location
-      description: Specifies the supported Azure location where the virtual machine
-        should be created
+      description: Specifies the supported Azure location where the virtual machine should be created
     name:
       type: string
       title: Name Virtual Machine
@@ -322,8 +303,7 @@ types:
     maxDataDiskCount:
       type: int
       title: Max Data Disk Count
-      description: Specifies the maximum number of data disks that can be attached
-        to the VM size
+      description: Specifies the maximum number of data disks that can be attached to the VM size
     memoryInMB:
       type: int
       title: Memory In MB
@@ -347,23 +327,21 @@ types:
 connection:
   host:
     title: Host
-    type: string
     description: Azure REST API Server
+    type: string
     required: true
     default: https://management.azure.com
     example: https://management.azure.com
   client_id:
     title: Client ID
+    description: The application ID that the application registration portal assigned to your app
     type: string
-    description: The application ID that the application registration portal assigned
-      to your app
     required: true
     example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
   client_secret:
     title: Client Secret
-    type: credential_asymmetric_key
-    description: The application secret that you generated for your app in the app
-      registration portal
+    description: The application secret that you generated for your app in the app registration portal
+    type: credential_secret_key
     required: true
     example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
   tenant_id:
@@ -408,9 +386,10 @@ actions:
         title: Status
         description: HTTP status code
         required: false
+        example: 200
   info_vm:
     title: Get Information About a Virtual Machine
-    description: Get information about a virtual machine
+    description: Get information about a virtual machine (model view and instance view)
     input:
       subscriptionId:
         type: string
@@ -435,48 +414,55 @@ actions:
         title: Mode
         description: This mode get information of model view or instance view or both
         enum:
-        - modelView
-        - instanceView
-        - modelViewAndInstanceView
+          - modelView
+          - instanceView
+          - modelViewAndInstanceView
         default: modelViewAndInstanceView
         example: modelViewAndInstanceView
         required: false
     output:
       name:
         title: Name
-        type: string
         description: Name
+        type: string
         required: false
+        example: ExampleName
       tags:
         title: Tags
-        type: tags
         description: Tags
+        type: tags
         required: false
+        example: '{"environment": "test"}'
       vmId:
         title: VM ID
-        type: string
         description: VM ID
+        type: string
         required: false
+        example: ExampleVMId
       properties:
         title: Properties
-        type: properties
         description: Properties
+        type: properties
         required: false
+        example: '{"availabilitySet":"ExampleAvailabilitySet","diagnosticsProfile":"ExampleDiagnosticsProfile","hardwareProfile":"ExampleHardwareProfile","networkProfile":"ExampleNetworkProfile","osProfile":"ExampleOSProfile","provisioningState":"Succeeded","storageProfile":"ExampleStorageProfile","vmId":"1234567890"}'
       location:
         title: Location
-        type: string
         description: Location
+        type: string
         required: false
+        example: ExampleLocation
       type:
         title: Type
-        type: string
         description: Type
+        type: string
         required: false
+        example: ExampleType
       id:
         title: ID
-        type: string
         description: ID
+        type: string
         required: false
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
   delete_vm:
     title: Delete a Virtual Machine
     description: Delete a virtual machine
@@ -505,6 +491,7 @@ actions:
         title: Status
         description: HTTP status code
         required: false
+        example: 200
   list_vm:
     title: List the Virtual Machines
     description: List the virtual machines in a resource group
@@ -527,6 +514,7 @@ actions:
         title: Value
         description: List items virtual machine in a resource group
         required: false
+        example: '[{"name":"myVM","id":"/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM","type":"Microsoft.Compute/virtualMachines","location":"West US","tags":{"myTag1":"tagValue1"},"properties":{"vmId":"0f47b100-583c-48e3-a4c0-aefc2c9bbcc1","availabilitySet":{"id":"/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/availabilitySets/my-AvailabilitySet"},"hardwareProfile":{"vmSize":"Standard_DS3_v2","vmSizeProperties":{"vCPUsAvailable":1,"vCPUsPerCore":1}},"storageProfile":{"imageReference":{"publisher":"MicrosoftWindowsServer","offer":"WindowsServer","sku":"2016-Datacenter","version":"latest"},"osDisk":{"osType":"Windows","name":"myOsDisk","createOption":"FromImage","caching":"ReadWrite","managedDisk":{"storageAccountType":"Premium_LRS","id":"/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myOsDisk"},"diskSizeGB":30},"dataDisks":[{"lun":0,"name":"myDataDisk0","createOption":"Empty","caching":"ReadWrite","managedDisk":{"storageAccountType":"Premium_LRS","id":"/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDataDisk0"},"diskSizeGB":30},{"lun":1,"name":"myDataDisk1","createOption":"Attach","caching":"ReadWrite","managedDisk":{"storageAccountType":"Premium_LRS","id":"/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDataDisk1"},"diskSizeGB":100}]},"applicationProfile":{"galleryApplications":[{"tags":"myTag1","order":1,"packageReferenceId":"/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdb/resourceGroups/myresourceGroupName2/providers/Microsoft.Compute/galleries/myGallery1/applications/MyApplication1/versions/1.0","configurationReference":"https://mystorageaccount.blob.core.windows.net/configurations/settings.config"},{"packageReferenceId":"/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdg/resourceGroups/myresourceGroupName3/providers/Microsoft.Compute/galleries/myGallery2/applications/MyApplication2/versions/1.1"}]},"userData":"RXhhbXBsZSBVc2VyRGF0YQ==","osProfile":{"computerName":"myVM","adminUsername":"admin","windowsConfiguration":{"provisionVMAgent":true,"enableAutomaticUpdates":false},"secrets":[]},"networkProfile":{"networkInterfaces":[{"id":"/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/{myNIC}"}]},"diagnosticsProfile":{"bootDiagnostics":{"enabled":true,"storageUri":"http://{myStorageAccount}.blob.core.windows.net"}},"extensionsTimeBudget":"PT50M","provisioningState":"Succeeded"}}]'
   availability_set_vm:
     title: Get Virtual Machines Sizes in AvailabilitySet
     description: List available virtual machine sizes in an availability set
@@ -555,6 +543,7 @@ actions:
         title: Value
         description: List sizes in availability set
         required: false
+        example: '[{"maxDataDiskCount":2,"memoryInMB":4096,"name":"ExampleName","numberOfCores":4,"osDiskSizeInMB":120000,"resourceDiskSizeInMB":60000},{"maxDataDiskCount":3,"memoryInMB":8192,"name":"ExampleName2","numberOfCores":8,"osDiskSizeInMB":130000,"resourceDiskSizeInMB":40000}]'
   sizes_vm:
     title: Virtual Machines Sizes
     description: List available virtual machine sizes for resizing
@@ -583,6 +572,7 @@ actions:
         title: Value
         description: List sizes
         required: false
+        example: '[{"maxDataDiskCount":2,"memoryInMB":4096,"name":"ExampleName","numberOfCores":4,"osDiskSizeInMB":120000,"resourceDiskSizeInMB":60000},{"maxDataDiskCount":3,"memoryInMB":8192,"name":"ExampleName2","numberOfCores":8,"osDiskSizeInMB":130000,"resourceDiskSizeInMB":40000}]'
   sizes_vm_subscription:
     title: Virtual Machines Sizes for Subscription
     description: Lists available virtual machine sizes for a subscription
@@ -605,6 +595,7 @@ actions:
         title: Value
         description: List sizes of location
         required: false
+        example: '[{"maxDataDiskCount":2,"memoryInMB":4096,"name":"ExampleName","numberOfCores":4,"osDiskSizeInMB":120000,"resourceDiskSizeInMB":60000},{"maxDataDiskCount":3,"memoryInMB":8192,"name":"ExampleName2","numberOfCores":8,"osDiskSizeInMB":130000,"resourceDiskSizeInMB":40000}]'
   vm_in_subscription:
     title: Virtual Machines in Subscription
     description: Lists the virtual machines in a subscription
@@ -621,6 +612,7 @@ actions:
         title: Value
         description: List virtual machines in subscription
         required: false
+        example: '[{"name":"myVM","id":"/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM","type":"Microsoft.Compute/virtualMachines","location":"West US","tags":{"myTag1":"tagValue1"},"properties":{"vmId":"0f47b100-583c-48e3-a4c0-aefc2c9bbcc1","availabilitySet":{"id":"/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/availabilitySets/my-AvailabilitySet"},"hardwareProfile":{"vmSize":"Standard_DS3_v2","vmSizeProperties":{"vCPUsAvailable":1,"vCPUsPerCore":1}},"storageProfile":{"imageReference":{"publisher":"MicrosoftWindowsServer","offer":"WindowsServer","sku":"2016-Datacenter","version":"latest"},"osDisk":{"osType":"Windows","name":"myOsDisk","createOption":"FromImage","caching":"ReadWrite","managedDisk":{"storageAccountType":"Premium_LRS","id":"/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myOsDisk"},"diskSizeGB":30},"dataDisks":[{"lun":0,"name":"myDataDisk0","createOption":"Empty","caching":"ReadWrite","managedDisk":{"storageAccountType":"Premium_LRS","id":"/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDataDisk0"},"diskSizeGB":30},{"lun":1,"name":"myDataDisk1","createOption":"Attach","caching":"ReadWrite","managedDisk":{"storageAccountType":"Premium_LRS","id":"/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDataDisk1"},"diskSizeGB":100}]},"applicationProfile":{"galleryApplications":[{"tags":"myTag1","order":1,"packageReferenceId":"/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdb/resourceGroups/myresourceGroupName2/providers/Microsoft.Compute/galleries/myGallery1/applications/MyApplication1/versions/1.0","configurationReference":"https://mystorageaccount.blob.core.windows.net/configurations/settings.config"},{"packageReferenceId":"/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdg/resourceGroups/myresourceGroupName3/providers/Microsoft.Compute/galleries/myGallery2/applications/MyApplication2/versions/1.1"}]},"userData":"RXhhbXBsZSBVc2VyRGF0YQ==","osProfile":{"computerName":"myVM","adminUsername":"admin","windowsConfiguration":{"provisionVMAgent":true,"enableAutomaticUpdates":false},"secrets":[]},"networkProfile":{"networkInterfaces":[{"id":"/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/{myNIC}"}]},"diagnosticsProfile":{"bootDiagnostics":{"enabled":true,"storageUri":"http://{myStorageAccount}.blob.core.windows.net"}},"extensionsTimeBudget":"PT50M","provisioningState":"Succeeded"}}]'
   restart_vm:
     title: Restart a Virtual Machine
     description: Restart a virtual machine
@@ -649,6 +641,7 @@ actions:
         title: Status
         description: HTTP status code
         required: false
+        example: 202
   save_image_vm:
     title: Capture Virtual Machine
     description: Save an image of a virtual machine (VM must be stopped, generalized, and be an unmanaged disk)
@@ -674,22 +667,19 @@ actions:
       vhdPrefix:
         type: string
         title: VHDPrefix
-        description: Specifies the prefix in the name of the blobs that constitute
-          the storage profile of the image
+        description: Specifies the prefix in the name of the blobs that constitute the storage profile of the image
         required: true
         example: ExamplePrefix
       destinationContainerName:
         type: string
         title: Destination Container Name
-        description: Specifies the name of the container inside which the vhds constituting
-          the image resides
+        description: Specifies the name of the container inside which the vhds constituting the image resides
         required: true
         example: ExampleContainerName
       overwriteVhds:
         type: boolean
         title: VHDPrefix
-        description: Specifies if an existing vhd with same prefix inside the destination
-          container is overwritten
+        description: Specifies if an existing vhd with same prefix inside the destination container is overwritten
         required: true
         default: true
         example: true
@@ -699,6 +689,7 @@ actions:
         title: Status
         description: HTTP status code
         required: false
+        example: 202
   start_vm:
     title: Start a Virtual Machine
     description: Start a virtual machine
@@ -727,6 +718,7 @@ actions:
         title: Status
         description: HTTP status code
         required: false
+        example: 202
   stop_vm:
     title: Stop a Virtual Machine
     description: Stop a virtual machine
@@ -755,6 +747,7 @@ actions:
         title: Status
         description: HTTP status code
         required: false
+        example: 202
   stop_deallocate_vm:
     title: Stop and Deallocate a Virtual Machine
     description: Stop and deallocate a virtual machine
@@ -783,3 +776,4 @@ actions:
         title: Status
         description: HTTP status code
         required: false
+        example: 202
