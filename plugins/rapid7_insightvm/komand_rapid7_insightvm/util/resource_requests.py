@@ -5,6 +5,8 @@ import requests
 import urllib3
 from insightconnect_plugin_runtime.exceptions import PluginException
 from typing import NamedTuple, Collection
+from requests import Session
+from logging import Logger
 
 # Suppress insecure request messages
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -59,7 +61,7 @@ class ResourceRequests(object):
     # For request exceptions not in REQUEST_EXCEPTIONS
     _UNHANDLED_EXCEPTION = "Contact support for assistance"
 
-    def __init__(self, session, logger):
+    def __init__(self, session: Session, logger: Logger, ssl_verify: bool) -> None:
         """
         Creates a new instance of ResourceHelper
         :param session: Session object available to Komand actions/triggers, usually self.connection.session
@@ -69,6 +71,7 @@ class ResourceRequests(object):
         self.logger = logger
         self.session = session
         self.session.headers.update(self._HEADERS)
+        self.ssl_verify = ssl_verify
 
     def resource_request(
         self,
@@ -102,7 +105,7 @@ class ResourceRequests(object):
 
         extras = {"json": payload, "params": parameters.params}
         try:
-            response = request_method(url=endpoint, verify=False, **extras)
+            response = request_method(url=endpoint, verify=self.ssl_verify, **extras)
         except requests.RequestException as error:
             assistance = self._REQUEST_EXCEPTIONS.get(type(error), self._UNHANDLED_EXCEPTION)
             raise PluginException(cause=error, assistance=assistance)
@@ -192,7 +195,7 @@ class ResourceRequests(object):
 
         extras = {"json": payload, "params": params.params}
         try:
-            response = request_method(url=endpoint, verify=False, **extras)
+            response = request_method(url=endpoint, verify=self.ssl_verify, **extras)
         except requests.RequestException as error:
             assistance = self._REQUEST_EXCEPTIONS.get(type(error), self._UNHANDLED_EXCEPTION)
             raise PluginException(cause=error, assistance=assistance)

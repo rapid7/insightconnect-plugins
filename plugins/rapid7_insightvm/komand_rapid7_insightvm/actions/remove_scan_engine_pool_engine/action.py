@@ -16,7 +16,7 @@ class RemoveScanEnginePoolEngine(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         engine_pool_id = params.get("pool_id")
         engine_id = params.get("engine_id")
         endpoint = endpoints.ScanEnginePool.scan_engine_pool_engines(self.connection.console_url, engine_pool_id)
