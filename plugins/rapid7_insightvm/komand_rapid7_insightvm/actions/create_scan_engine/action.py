@@ -19,7 +19,7 @@ class CreateScanEngine(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         # Note: ID is not a required payload parameter despite the API docs saying it is
         # Providing it actually causes the request to fail
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         endpoint = endpoints.ScanEngine.scan_engines(self.connection.console_url)
         payload = params
 

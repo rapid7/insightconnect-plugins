@@ -22,7 +22,7 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
         sort_criteria = params.get(Input.SORT_CRITERIA, {})
 
         self.logger.info(f"Performing filtered asset search with criteria {search_criteria}...")
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         endpoint = endpoints.Asset.search(self.connection.console_url)
 
         parameters = []

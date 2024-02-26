@@ -16,7 +16,7 @@ class ReviewException(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
 
         translate = {"Approved": "approve", "Rejected": "reject"}
 
