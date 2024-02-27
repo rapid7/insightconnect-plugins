@@ -23,6 +23,7 @@ class V1Session:
         Creates a new instance of V1Session
         :param session: Session object available to InsightConnect actions/triggers, usually self.connection.session
         :param logger: Logger object available to InsightConnect actions/triggers, usually self.logger
+        :param ssl_verify: Indicates whether to verify SSL certificate or not
         :return: ResourceHelper object
         """
         self.logger = logger
