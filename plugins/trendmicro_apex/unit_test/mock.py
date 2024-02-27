@@ -50,11 +50,11 @@ def mocked_request(side_effect: Callable) -> None:
 
 def mock_conditions(method: str, url: str, status_code: int, kwargs: dict) -> MockResponse:
     if url == "URL/WebApp/API/SuspiciousObjectResource/FileUDSO":
-        if method == "put":
+        if method.lower() == "put":
             return MockResponse("add_file_to_usdo_list", status_code)
 
     if "URL/WebApp/api/SuspiciousObjects/UserDefinedSO" in url:
-        if method == "put":
+        if method.lower() == "put":
             return MockResponse("blacklist", status_code)
         if method == "get":
             return MockResponse("connection_test", status_code)
