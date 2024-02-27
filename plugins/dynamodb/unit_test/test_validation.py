@@ -1,13 +1,13 @@
 import os.path
 import sys
 from unittest import TestCase
-from unittest.mock import patch
-from parameterized import parameterized, param
+
+from parameterized import param, parameterized
 
 sys.path.append(os.path.abspath("../"))
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_dynamodb.util.extra_schemas.scan import exclusive_start_key_schema
 from komand_dynamodb.util.validation import additional_argument_validator
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 KEY_NAME = "exclusive_start_key"
 
