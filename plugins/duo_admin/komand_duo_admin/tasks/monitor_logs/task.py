@@ -14,6 +14,7 @@ ADMIN_LOGS_LOG_TYPE = "Admin logs"
 AUTH_LOGS_LOG_TYPE = "Auth logs"
 TRUST_MONITOR_EVENTS_LOG_TYPE = "Trust monitor events"
 CUTOFF_HOURS = 24
+MAX_CUTOFF_HOURS = 720
 
 
 class MonitorLogs(insightconnect_plugin_runtime.Task):
@@ -44,15 +45,15 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         # If no previous timestamp retrieved (first run) then query 24 hours
         if not last_log_timestamp:
             self.logger.info(f"First run for {log_type}")
-            cutoff_time = self._get_filter_time(custom_config)
+            filter_time = self._get_filter_time(custom_config, now)
             if log_type != "Admin logs":
-                mintime = self.convert_to_milliseconds(cutoff_time)
+                mintime = self.convert_to_milliseconds(filter_time)
                 maxtime = self.convert_to_milliseconds(last_two_minutes)
             else:
                 # Use seconds for admin log endpoint
-                mintime = self.convert_to_seconds(cutoff_time)
+                mintime = self.convert_to_seconds(filter_time)
                 maxtime = self.convert_to_seconds(last_two_minutes)
-        # Else if a previous timestamp was retrieved (subsequent runs) then query to that timestamp, or 72 hours max?
+        # Else if a previous timestamp was retrieved (subsequent runs) then query to that timestamp
         else:
             if next_page_params:
                 self.logger.info("Getting the next page of results...")
@@ -61,11 +62,10 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 self.logger.info(f"Subsequent run for {log_type}")
 
             # If for some reason no logs or event have been picked up,
-            # need to ensure that no more than the previous 72 hours is queried - use cutoff check to ensure this
-            # Why?
-            last_72_hours = now - timedelta(hours=72)
-            cutoff_time_secs = self.convert_to_seconds(last_72_hours)
-            cutoff_time_millisecs = self.convert_to_milliseconds(last_72_hours)
+            # need to ensure that no more than the previous 30 days is queried - use cutoff check to ensure this
+            max_cutoff_time = now - timedelta(hours=MAX_CUTOFF_HOURS)
+            cutoff_time_secs = self.convert_to_seconds(max_cutoff_time)
+            cutoff_time_millisecs = self.convert_to_milliseconds(max_cutoff_time)
             if backward_comp_first_run:
                 # This is a special case where the previous last collection timestamp needs to change to 3 different
                 # timestamps getting held. Once all systems are updated to 3 timestamp method, remove this clause
@@ -149,6 +149,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                         trust_monitor_last_log_timestamp,
                         trust_monitor_next_page_params,
                         backward_comp_first_run,
+                        custom_config
                     )
 
                     if (get_next_page and trust_monitor_next_page_params) or not get_next_page:
@@ -187,6 +188,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                         admin_logs_last_log_timestamp,
                         admin_logs_next_page_params,
                         backward_comp_first_run,
+                        custom_config
                     )
 
                     if (get_next_page and admin_logs_next_page_params) or not get_next_page:
@@ -221,6 +223,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     auth_logs_last_log_timestamp,
                     auth_logs_next_page_params,
                     backward_comp_first_run,
+                    custom_config
                 )
 
                 if (get_next_page and auth_logs_next_page_params) or not get_next_page:
@@ -385,6 +388,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         return trust_monitor_events, parameters
 
     def _get_filter_time(self, custom_config: Dict, current_time) -> int:
+        self.logger.info(f"Getting custom config {custom_config}")
         """
         Apply custom_config params (if provided) to the task. If a lookback value exists, it should take
         precedence (this can allow a larger filter time), otherwise use the cutoff_hours value.
@@ -397,11 +401,13 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 "hours", CUTOFF_HOURS
             )
         filter_lookback = custom_config.get("lookback")
+        print(f"filter cutoff is {filter_cutoff}")
         filter_value = filter_lookback if filter_lookback else filter_cutoff
         # If CUTOFF_HOURS (hours in int) applied find date time from now
-        if isinstance(int, filter_value):
-            filter_value = current_time - timedelta(filter_value=filter_cutoff)
+
+        if isinstance(filter_value, int):
+            filter_value = current_time - timedelta(hours=filter_cutoff)
         else:
             filter_value = datetime.fromisoformat(filter_value.replace('Z', '+00:00'))
-        self.logger.info(f"Task execution will be applying a lookback to {filter_value}...")
+        print(f"Task execution will be applying a lookback to {filter_value}...")
         return filter_value

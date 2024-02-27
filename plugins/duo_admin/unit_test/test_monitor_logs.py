@@ -22,6 +22,7 @@ class TestMonitorLogs(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.action = Util.default_connector(MonitorLogs())
+        cls.custom_config = {"cutoff": {"date": "2023-04-30T08:34:46.000Z"}, "lookback": "2023-04-30T08:34:46.000Z"}
 
     @parameterized.expand(
         [
@@ -56,7 +57,7 @@ class TestMonitorLogs(TestCase):
     def test_monitor_logs(
         self, mock_request, mock_request_instance, mock_get_headers, mock_get_time, test_name, current_state, expected
     ):
-        actual, actual_state, has_more_pages, status_code, _ = self.action.run(state=current_state)
+        actual, actual_state, has_more_pages, status_code, _ = self.action.run(state=current_state, custom_config=self.custom_config)
         self.assertEqual(actual, expected.get("logs"))
         self.assertEqual(actual_state, expected.get("state"))
         self.assertEqual(status_code, expected.get("status_code"))
