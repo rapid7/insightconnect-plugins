@@ -390,7 +390,6 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         return trust_monitor_events, parameters
 
     def _get_filter_time(self, custom_config: Dict, current_time) -> int:
-        self.logger.info(f"Getting custom config {custom_config}")
         """
         Apply custom_config params (if provided) to the task. If a lookback value exists, it should take
         precedence (this can allow a larger filter time), otherwise use the cutoff_hours value.
@@ -403,7 +402,6 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         filter_lookback = custom_config.get("lookback")
         filter_value = filter_lookback if filter_lookback else filter_cutoff
         # If CUTOFF_HOURS (hours in int) applied find date time from now
-
         if isinstance(filter_value, int):
             filter_value = current_time - timedelta(hours=filter_cutoff)
         else:
