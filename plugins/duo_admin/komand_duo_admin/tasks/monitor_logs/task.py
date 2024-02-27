@@ -1,3 +1,5 @@
+from typing import Dict
+
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 
@@ -11,6 +13,7 @@ from hashlib import sha1
 ADMIN_LOGS_LOG_TYPE = "Admin logs"
 AUTH_LOGS_LOG_TYPE = "Auth logs"
 TRUST_MONITOR_EVENTS_LOG_TYPE = "Trust monitor events"
+CUTOFF_HOURS = 24
 
 
 class MonitorLogs(insightconnect_plugin_runtime.Task):
@@ -35,20 +38,21 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             state=MonitorLogsState(),
         )
 
-    def get_parameters_for_query(self, log_type, now, last_log_timestamp, next_page_params, backward_comp_first_run):
+    def get_parameters_for_query(self, log_type, now, last_log_timestamp, next_page_params, backward_comp_first_run, custom_config):
         get_next_page = False
         last_two_minutes = now - timedelta(minutes=2)
+        # If no previous timestamp retrieved (first run) then query 24 hours
         if not last_log_timestamp:
             self.logger.info(f"First run for {log_type}")
-            last_24_hours = now - timedelta(hours=24)
+            cutoff_time = self._get_filter_time(custom_config)
             if log_type != "Admin logs":
-                mintime = self.convert_to_milliseconds(last_24_hours)
+                mintime = self.convert_to_milliseconds(cutoff_time)
                 maxtime = self.convert_to_milliseconds(last_two_minutes)
             else:
                 # Use seconds for admin log endpoint
-                mintime = self.convert_to_seconds(last_24_hours)
+                mintime = self.convert_to_seconds(cutoff_time)
                 maxtime = self.convert_to_seconds(last_two_minutes)
-
+        # Else if a previous timestamp was retrieved (subsequent runs) then query to that timestamp, or 72 hours max?
         else:
             if next_page_params:
                 self.logger.info("Getting the next page of results...")
@@ -58,6 +62,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
             # If for some reason no logs or event have been picked up,
             # need to ensure that no more than the previous 72 hours is queried - use cutoff check to ensure this
+            # Why?
             last_72_hours = now - timedelta(hours=72)
             cutoff_time_secs = self.convert_to_seconds(last_72_hours)
             cutoff_time_millisecs = self.convert_to_milliseconds(last_72_hours)
@@ -94,7 +99,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         self.logger.info(f"Retrieve data from {mintime} to {maxtime}. Get next page is set to {get_next_page}")
         return mintime, maxtime, get_next_page
 
-    def run(self, params={}, state={}):  # noqa: C901
+    def run(self, params={}, state={}, custom_config={}):  # noqa: C901
         self.connection.admin_api.toggle_rate_limiting = False
         has_more_pages = False
         backward_comp_first_run = False
@@ -278,6 +283,12 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             hash_.update(f"{key}{value}".encode("utf-8"))
         return hash_.hexdigest()
 
+    @staticmethod
+    def timestamp_to_epoch(timestamp: datetime):
+        # Parse the timestamp string into a datetime object and convert to epoch time in seconds
+        date_object = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
+        return int(date_object.timestamp())
+
     def compare_hashes(self, previous_logs_hashes: list, new_logs: list):
         new_logs_hashes = []
         logs_to_return = []
@@ -372,3 +383,25 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             parameters = {}
         trust_monitor_events = self.add_log_type_field(response.get("events", []), "trust_monitor_event")
         return trust_monitor_events, parameters
+
+    def _get_filter_time(self, custom_config: Dict, current_time) -> int:
+        """
+        Apply custom_config params (if provided) to the task. If a lookback value exists, it should take
+        precedence (this can allow a larger filter time), otherwise use the cutoff_hours value.
+        :param custom_config: dictionary passed containing `cutoff` or `lookback` values
+        :return: filter_value (epoch seconds) to be applied in request to Duo
+        """
+        filter_cutoff = custom_config.get("cutoff", {}).get("date")
+        if filter_cutoff is None:
+            filter_cutoff = custom_config.get("cutoff", {}).get(
+                "hours", CUTOFF_HOURS
+            )
+        filter_lookback = custom_config.get("lookback")
+        filter_value = filter_lookback if filter_lookback else filter_cutoff
+        # If CUTOFF_HOURS (hours in int) applied find date time from now
+        if isinstance(int, filter_value):
+            filter_value = current_time - timedelta(filter_value=filter_cutoff)
+        else:
+            filter_value = datetime.fromisoformat(filter_value.replace('Z', '+00:00'))
+        self.logger.info(f"Task execution will be applying a lookback to {filter_value}...")
+        return filter_value
