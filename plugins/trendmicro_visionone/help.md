@@ -3007,13 +3007,12 @@ Example output:
 
 # Version History
 
-* 3.1.0 - Added API Keys related actions
+* 4.0.0 - Added API Keys related actions
 * 3.0.0 - Refactored pytmv1 usage | Added Custom Scripts and Activity related actions
 * 2.0.1 - Version bump of pytmv1 library
 * 2.0.0 - Enabled multiple inputs for Get Endpoint Data, reduced API call frequency & General Refactoring
 * 1.0.1 - Alert Details Output Fix (Minor Fix)
 * 1.0.0 - Initial plugin
-
 # Links
 
 * [TrendMicro](https://www.trendmicro.com/en_us/business.html)
