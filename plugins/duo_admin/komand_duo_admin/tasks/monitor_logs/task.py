@@ -39,7 +39,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             state=MonitorLogsState(),
         )
 
-    def get_parameters_for_query(self, log_type, now, last_log_timestamp, next_page_params, backward_comp_first_run, custom_config):
+    def get_parameters_for_query(
+        self, log_type, now, last_log_timestamp, next_page_params, backward_comp_first_run, custom_config
+    ):
         get_next_page = False
         last_two_minutes = now - timedelta(minutes=2)
         # If no previous timestamp retrieved (first run) then query 24 hours
@@ -149,7 +151,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                         trust_monitor_last_log_timestamp,
                         trust_monitor_next_page_params,
                         backward_comp_first_run,
-                        custom_config
+                        custom_config,
                     )
 
                     if (get_next_page and trust_monitor_next_page_params) or not get_next_page:
@@ -188,7 +190,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                         admin_logs_last_log_timestamp,
                         admin_logs_next_page_params,
                         backward_comp_first_run,
-                        custom_config
+                        custom_config,
                     )
 
                     if (get_next_page and admin_logs_next_page_params) or not get_next_page:
@@ -223,7 +225,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     auth_logs_last_log_timestamp,
                     auth_logs_next_page_params,
                     backward_comp_first_run,
-                    custom_config
+                    custom_config,
                 )
 
                 if (get_next_page and auth_logs_next_page_params) or not get_next_page:
@@ -289,7 +291,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
     @staticmethod
     def timestamp_to_epoch(timestamp: datetime):
         # Parse the timestamp string into a datetime object and convert to epoch time in seconds
-        date_object = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
+        date_object = datetime.fromisoformat(timestamp.replace("Z", "+00:00"))
         return int(date_object.timestamp())
 
     def compare_hashes(self, previous_logs_hashes: list, new_logs: list):
@@ -397,17 +399,14 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         """
         filter_cutoff = custom_config.get("cutoff", {}).get("date")
         if filter_cutoff is None:
-            filter_cutoff = custom_config.get("cutoff", {}).get(
-                "hours", CUTOFF_HOURS
-            )
+            filter_cutoff = custom_config.get("cutoff", {}).get("hours", CUTOFF_HOURS)
         filter_lookback = custom_config.get("lookback")
-        print(f"filter cutoff is {filter_cutoff}")
         filter_value = filter_lookback if filter_lookback else filter_cutoff
         # If CUTOFF_HOURS (hours in int) applied find date time from now
 
         if isinstance(filter_value, int):
             filter_value = current_time - timedelta(hours=filter_cutoff)
         else:
-            filter_value = datetime.fromisoformat(filter_value.replace('Z', '+00:00'))
-        print(f"Task execution will be applying a lookback to {filter_value}...")
+            filter_value = datetime.fromisoformat(filter_value.replace("Z", "+00:00"))
+        self.logger.info(f"Task execution will be applying a lookback to {filter_value}...")
         return filter_value
