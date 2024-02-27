@@ -8,7 +8,7 @@ description: Trend Micro Vision One is an enhanced threat defense platform, surp
   security layers and automates data correlation for rapid response, effectively preventing
   most attacks
 version: 4.0.0
-connection_version: 3
+connection_version: 4
 supported_versions: [Trend Micro Vision One API v3]
 vendor: trendmicro
 support: community
