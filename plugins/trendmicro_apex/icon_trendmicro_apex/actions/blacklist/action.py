@@ -26,7 +26,6 @@ class Blacklist(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         payload = self.generate_payload(params)
-        json_payload = json.dumps(payload)
         blacklist_state = params.get(Input.BLACKLIST_STATE, True)
         if blacklist_state is False:
             method = "DELETE"
@@ -36,11 +35,7 @@ class Blacklist(insightconnect_plugin_runtime.Action):
         else:
             method = "PUT"
 
-        response = self.connection.api.execute(
-            method,
-            self.api_path,
-            payload
-        )
+        response = self.connection.api.execute(method, self.api_path, payload)
 
         return {Output.SUCCESS: response is not None}
 

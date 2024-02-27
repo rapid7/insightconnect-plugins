@@ -36,11 +36,6 @@ class AddFileToUdsoList(insightconnect_plugin_runtime.Action):
         }
         json_payload = json.dumps(payload)
 
-        response = self.connection.api.execute(
-            self.api_http_method,
-            self.api_path,
-            json_payload
-        )
+        response = self.connection.api.execute(self.api_http_method, self.api_path, json_payload)
 
         return {Output.SUCCESS: response is not None}
-

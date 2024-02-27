@@ -57,4 +57,3 @@ class Connection(insightconnect_plugin_runtime.Connection):
             raise ConnectionTestException(f"{response.text} (HTTP status: {response.status_code})")
 
         return {"success": True}
-
