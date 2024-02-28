@@ -2,13 +2,12 @@ import os
 import sys
 from unittest import TestCase
 from unittest.mock import Mock
+
 import botocore
 import botocore.exceptions
-
 from insightconnect_plugin_runtime.exceptions import PluginException
-from parameterized.parameterized import param, parameterized
-
 from komand_dynamodb.util.api import AWSCommunicationAPI
+from parameterized.parameterized import param, parameterized
 
 sys.path.append(os.path.abspath("../"))
 
