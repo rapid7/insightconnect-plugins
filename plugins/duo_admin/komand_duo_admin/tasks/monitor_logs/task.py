@@ -289,12 +289,6 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             hash_.update(f"{key}{value}".encode("utf-8"))
         return hash_.hexdigest()
 
-    @staticmethod
-    def timestamp_to_epoch(timestamp: datetime):
-        # Parse the timestamp string into a datetime object and convert to epoch time in seconds
-        date_object = datetime.fromisoformat(timestamp.replace("Z", "+00:00"))
-        return int(date_object.timestamp())
-
     def compare_hashes(self, previous_logs_hashes: list, new_logs: list):
         new_logs_hashes = []
         logs_to_return = []
