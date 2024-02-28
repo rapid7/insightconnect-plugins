@@ -1,7 +1,7 @@
 {
-	"spec": "746434af2fa5c6259627d3dd5e44d508",
-	"manifest": "b62e8c65c9db34a06351c94f88005728",
-	"setup": "d8542fc6be4b0913c3f234ad9b295899",
+	"spec": "130665f566784807d1d633e3b3ca4a36",
+	"manifest": "31b4a97233aa9b919ea7ee820938e199",
+	"setup": "f0407b136e81ef2ace16e53ffdbc7ff8",
 	"schemas": [
 		{
 			"identifier": "check_server_status/schema.py",
@@ -28,6 +28,10 @@
 			"hash": "6b089c13636437a2eef22ce200cc70b0"
 		},
 		{
+			"identifier": "get_submitted_info/schema.py",
+			"hash": "6e830094df19e4a542bfdab9c472955e"
+		},
+		{
 			"identifier": "list_analyses/schema.py",
 			"hash": "0914dd3c760e816d02411c8831a1bde1"
 		},
@@ -49,7 +53,7 @@
 		},
 		{
 			"identifier": "submit_cookbook/schema.py",
-			"hash": "76c188d37c1325e4fbfcda4298083d15"
+			"hash": "cb7c47b45e5b9a258f1c20239f7e3b22"
 		},
 		{
 			"identifier": "submit_sample/schema.py",
@@ -57,11 +61,11 @@
 		},
 		{
 			"identifier": "submit_sample_url/schema.py",
-			"hash": "ff34a9a9ee44d0e88e93543d05d80d64"
+			"hash": "067ceac4db69ce87f1934bcf2b919305"
 		},
 		{
 			"identifier": "submit_url/schema.py",
-			"hash": "d74ccb3436c123af7c76a0cc2ecfd713"
+			"hash": "9fcbb526e290cecd0593bad7054d9108"
 		},
 		{
 			"identifier": "connection/schema.py",

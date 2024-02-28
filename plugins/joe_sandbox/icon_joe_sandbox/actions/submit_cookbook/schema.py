@@ -14,7 +14,7 @@ class Input:
 
 
 class Output:
-    WEBIDS = "webids"
+    SUBMISSION_ID = "submission_id"
 
 
 class SubmitCookbookInput(insightconnect_plugin_runtime.Input):
@@ -61,18 +61,15 @@ class SubmitCookbookOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "webids": {
-      "type": "array",
-      "title": "Web IDs",
-      "description": "Web IDs associated with the cookbook",
-      "items": {
-        "type": "string"
-      },
+    "submission_id": {
+      "type": "string",
+      "title": "Submission ID",
+      "description": "Submission ID for submitted analysis",
       "order": 1
     }
   },
   "required": [
-    "webids"
+    "submission_id"
   ],
   "definitions": {}
 }

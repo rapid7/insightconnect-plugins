@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Joe Sandbox"
 Vendor = "rapid7"
-Version = "1.0.5"
+Version = "2.0.0"
 Description = "Joe Sandbox Cloud executes files and URLs fully automated in a controlled environment and monitors the behavior of applications and the operating system for suspicious activities"
 
 
@@ -42,8 +42,6 @@ def main():
         
             self.add_action(actions.ListCountries())
         
-            self.add_action(actions.ListKeyboardLayouts())
-        
             self.add_action(actions.GetAccountInfo())
         
             self.add_action(actions.SubmitSample())
@@ -63,6 +61,8 @@ def main():
             self.add_action(actions.SearchAnalysis())
         
             self.add_action(actions.DownloadAnalysis())
+        
+            self.add_action(actions.GetSubmittedInfo())
         
 
     """Run plugin"""

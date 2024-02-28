@@ -20,5 +20,5 @@ class SubmitSampleUrl(insightconnect_plugin_runtime.Action):
 
         additional_parameters.update({"accept-tac": 1})
 
-        webids = self.connection.api.submit_sample_url(sample_url, parameters, additional_parameters)
-        return {Output.WEBIDS: webids}
+        submission_id = self.connection.api.submit_sample_url(sample_url, parameters, additional_parameters)
+        return {Output.SUBMISSION_ID: submission_id}

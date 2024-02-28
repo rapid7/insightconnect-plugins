@@ -8,8 +8,6 @@ from .list_systems.action import ListSystems
 
 from .list_countries.action import ListCountries
 
-from .list_keyboard_layouts.action import ListKeyboardLayouts
-
 from .get_account_info.action import GetAccountInfo
 
 from .submit_sample.action import SubmitSample
@@ -29,4 +27,6 @@ from .delete_analysis.action import DeleteAnalysis
 from .search_analysis.action import SearchAnalysis
 
 from .download_analysis.action import DownloadAnalysis
+
+from .get_submitted_info.action import GetSubmittedInfo
 

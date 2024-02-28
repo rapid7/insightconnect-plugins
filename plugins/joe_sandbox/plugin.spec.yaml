@@ -6,7 +6,8 @@ title: Joe Sandbox
 description: Joe Sandbox Cloud executes files and URLs fully automated in a controlled
   environment and monitors the behavior of applications and the operating system for
   suspicious activities
-version: 1.0.5
+version: 2.0.0
+supported_versions: [2.0.0]
 vendor: rapid7
 support: community
 status: []
@@ -14,14 +15,19 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/joe_sandbox
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.joesecurity.org
+key_features:
+  - Sandbox
+  - Analysis
+  - Malware
 tags:
-- security
-- malware
-- analysis
+  - security
+  - malware
+  - analysis
+  - sandbox
 hub_tags:
-  use_cases: [application_management, cloud_security]
-  keywords: [security, malware, analysis]
-  features: []
+  use_cases: [application_management, cloud_security, reporting_and_analytics]
+  keywords: [sandbox, malware, analysis]
+  features: [sandbox, analysis]
 types:
   system:
     name:
@@ -44,11 +50,6 @@ types:
     name:
       title: Name
       description: Name of the country
-      type: string
-  keyboard_layout:
-    name:
-      title: Name
-      description: Name of the keyboard layout language
       type: string
   single_quota:
     current:
@@ -94,6 +95,31 @@ types:
       title: Yara
       description: Yara
       type: boolean
+  submission_info:
+    submission_id:
+      title: Submission ID
+      description: submission ID
+      type: string
+    name:
+      title: name
+      description: name
+      type: string
+    time:
+      title: time
+      description: time
+      type: string
+    status:
+      title: Status
+      description: Status of the analysis e.g. submitted, running, finished
+      type: string
+    analyses:
+      title: analyses
+      description: Analysis details
+      type: "[]object"
+    most_relevant_analysis:
+      title: Most Relevant Analysis
+      description: Webid, detection & score
+      type: "object"
   analysis:
     webid:
       title: WebID
@@ -142,11 +168,11 @@ types:
     tags:
       title: Tags
       description: Tags
-      type: '[]string'
+      type: "[]string"
     runs:
       title: Runs
       description: Runs
-      type: '[]run'
+      type: "[]run"
 connection:
   api_key:
     title: API Key
@@ -190,7 +216,7 @@ actions:
       systems:
         title: Systems
         description: List of systems on the server
-        type: '[]system'
+        type: "[]system"
         required: true
   list_countries:
     title: List Countries
@@ -201,15 +227,6 @@ actions:
         description: List of localized internet anonymization countries
         type: '[]country'
         required: true
-  list_keyboard_layouts:
-    title: List Keyboard Layouts
-    description: Retrieve a list of available keyboard layouts for Windows analyzers
-    output:
-      keyboard_layouts:
-        title: Keyboard Layouts
-        description: List of available keyboard layouts
-        type: '[]keyboard_layout'
-        required: true
   get_account_info:
     title: Get Account Info
     description: Query information about Joe Sandbox user account
@@ -219,11 +236,13 @@ actions:
         description: Type of the account
         type: string
         required: true
+        example: tbd
       quota:
         title: Quota
         description: Account quota
         type: full_quota
         required: true
+        example: tbd
   submit_sample:
     title: Submit Sample
     description: Submit a sample for analysis and return the associated web IDs for
@@ -268,7 +287,7 @@ actions:
       webids:
         title: Web IDs
         description: Web IDs associated with the sample
-        type: '[]string'
+        type: "[]string"
         required: true
   submit_sample_url:
     title: Submit Sample URL
@@ -297,11 +316,12 @@ actions:
         required: false
         example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }'
     output:
-      webids:
-        title: Web IDs
-        description: Web IDs associated with the sample
-        type: '[]string'
+      submission_id:
+        title: Submission ID
+        description: Submission ID associated with the sample
+        type: string
         required: true
+        example: '1234567'
   submit_url:
     title: Submit URL
     description: Submit a website for analysis and return the associated web IDs for
@@ -329,11 +349,12 @@ actions:
         required: false
         example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }'
     output:
-      webids:
-        title: Web IDs
-        description: Web IDs associated with the sample
-        type: '[]string'
+      submission_id:
+        title: Submission ID
+        description: Submission ID associated with the sample
+        type: string
         required: true
+        example: '1001'
   submit_cookbook:
     title: Submit Cookbook
     description: Submit a cookbook for analysis and return the associated web IDs
@@ -361,11 +382,12 @@ actions:
         required: false
         example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }'
     output:
-      webids:
-        title: Web IDs
-        description: Web IDs associated with the cookbook
-        type: '[]string'
+      submission_id:
+        title: Submission ID
+        description: Submission ID for submitted analysis
+        type: string
         required: true
+        example: '1234567'
   list_analyses:
     title: List Analyses
     description: Fetch a list of all analyses
@@ -373,7 +395,7 @@ actions:
       analyses:
         title: Analyses
         description: A list of all analyses IDs
-        type: '[]webid'
+        type: "[]webid"
         required: true
         example: [ "10001", "10002", "10003" ]
   get_analysis_info:
@@ -442,40 +464,40 @@ actions:
         description: The report type
         type: string
         enum:
-        - bins
-        - binstrings
-        - classhtml
-        - classxml
-        - clusterxml
-        - cookbook
-        - executive
-        - graphreports
-        - html
-        - ida
-        - irjson
-        - irjsonfixed
-        - irxml
-        - ishots
-        - json
-        - jsonfixed
-        - lighthtml
-        - lightjson
-        - lightjsonfixed
-        - lightxml
-        - maec
-        - memdumps
-        - memstrings
-        - misp
-        - openioc
-        - pcap
-        - pcapslim
-        - pdf
-        - sample
-        - shoots
-        - unpack
-        - unpackpe
-        - xml
-        - yara
+          - bins
+          - binstrings
+          - classhtml
+          - classxml
+          - clusterxml
+          - cookbook
+          - executive
+          - graphreports
+          - html
+          - ida
+          - irjson
+          - irjsonfixed
+          - irxml
+          - ishots
+          - json
+          - jsonfixed
+          - lighthtml
+          - lightjson
+          - lightjsonfixed
+          - lightxml
+          - maec
+          - memdumps
+          - memstrings
+          - misp
+          - openioc
+          - pcap
+          - pcapslim
+          - pdf
+          - sample
+          - shoots
+          - unpack
+          - unpackpe
+          - xml
+          - yara
         default: html
         required: false
         example: pdf
@@ -498,3 +520,20 @@ actions:
         description: Content of the resource associated with the analysis in base64
         type: bytes
         required: true
+  get_submitted_info:
+    title: Get Submitted Info
+    description: Show the status and info of submission
+    input:
+      submission_id:
+        title: Submission ID
+        description: Submission ID from analysis
+        type: string
+        required: true
+        example: '1001'
+    output:
+      submission_info:
+        title: Submission Info
+        description: Submission Info
+        type: submission_info
+        required: true
+        example: '1001'

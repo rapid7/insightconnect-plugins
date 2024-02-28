@@ -14,7 +14,7 @@ class Input:
 
 
 class Output:
-    WEBIDS = "webids"
+    SUBMISSION_ID = "submission_id"
 
 
 class SubmitUrlInput(insightconnect_plugin_runtime.Input):
@@ -59,18 +59,15 @@ class SubmitUrlOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "webids": {
-      "type": "array",
-      "title": "Web IDs",
-      "description": "Web IDs associated with the sample",
-      "items": {
-        "type": "string"
-      },
+    "submission_id": {
+      "type": "string",
+      "title": "Submission ID",
+      "description": "Submission ID associated with the sample",
       "order": 1
     }
   },
   "required": [
-    "webids"
+    "submission_id"
   ],
   "definitions": {}
 }

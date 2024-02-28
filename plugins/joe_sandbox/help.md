@@ -6,10 +6,10 @@ This plugin supports Joe Sandbox Cloud and Joe Sandbox (on-premise) instances an
 
 # Key Features
   
-* Submit samples and URLs for sandbox analysis
-* Search, list, get, download, and delete analyses
-* Get, list, and manage server and user info
-* 
+* Sandbox  
+* Analysis  
+* Malware
+
 # Requirements
   
 * API Key
@@ -17,7 +17,7 @@ This plugin supports Joe Sandbox Cloud and Joe Sandbox (on-premise) instances an
 
 # Supported Product Versions
   
-*This plugin does not contain any supported product versions.*
+* 2.0.0
 
 # Documentation
 
@@ -148,22 +148,15 @@ This action is used to query information about Joe Sandbox user account
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|quota|full_quota|True|Account quota|None|
-|type|string|True|Type of the account|None|
+|quota|full_quota|True|Account quota|tbd|
+|type|string|True|Type of the account|tbd|
   
 Example output:
 
 ```
 {
-  "quota": {
-    "Daily": {
-      "Current": 0,
-      "Limit": {},
-      "Remaining": {}
-    },
-    "Monthly": {}
-  },
-  "type": ""
+  "quota": "tbd",
+  "type": "tbd"
 }
 ```
 
@@ -244,6 +237,38 @@ Example output:
 }
 ```
 
+#### Get Submitted Info
+  
+This action is used to show the status and info of submission
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|submission_id|string|None|True|Submission ID from analysis|None|1001|
+  
+Example input:
+
+```
+{
+  "submission_id": 1001
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|submission_info|submission_info|True|Submission Info|1001|
+  
+Example output:
+
+```
+{
+  "submission_info": 1001
+}
+```
+
 #### List Analyses
   
 This action is used to fetch a list of all analyses
@@ -289,32 +314,6 @@ Example output:
 ```
 {
   "countries": [
-    {
-      "Name": ""
-    }
-  ]
-}
-```
-
-#### List Keyboard Layouts
-  
-This action is used to retrieve a list of available keyboard layouts for Windows analyzers
-
-##### Input
-  
-*This action does not contain any inputs.*
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|keyboard_layouts|[]keyboard_layout|True|List of available keyboard layouts|None|
-  
-Example output:
-
-```
-{
-  "keyboard_layouts": [
     {
       "Name": ""
     }
@@ -422,15 +421,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|webids|[]string|True|Web IDs associated with the cookbook|None|
+|submission_id|string|True|Submission ID for submitted analysis|1234567|
   
 Example output:
 
 ```
 {
-  "webids": [
-    ""
-  ]
+  "submission_id": 1234567
 }
 ```
 
@@ -518,15 +515,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|webids|[]string|True|Web IDs associated with the sample|None|
+|submission_id|string|True|Submission ID associated with the sample|1234567|
   
 Example output:
 
 ```
 {
-  "webids": [
-    ""
-  ]
+  "submission_id": 1234567
 }
 ```
 
@@ -564,15 +559,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|webids|[]string|True|Web IDs associated with the sample|None|
+|submission_id|string|True|Submission ID associated with the sample|1001|
   
 Example output:
 
 ```
 {
-  "webids": [
-    ""
-  ]
+  "submission_id": 1001
 }
 ```
 ### Triggers
@@ -598,12 +591,6 @@ Example output:
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Name|string|None|None|Name of the country|None|
-  
-**keyboard_layout**
-
-|Name|Type|Default|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- |
-|Name|string|None|None|Name of the keyboard layout language|None|
   
 **single_quota**
 
@@ -635,6 +622,17 @@ Example output:
 |System|string|None|None|System|None|
 |Yara|boolean|None|None|Yara|None|
   
+**submission_info**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|analyses|[]object|None|None|Analysis details|None|
+|Most Relevant Analysis|object|None|None|Webid, detection & score|None|
+|name|string|None|None|name|None|
+|Status|string|None|None|Status of the analysis e.g. submitted, running, finished|None|
+|Submission ID|string|None|None|submission ID|None|
+|time|string|None|None|time|None|
+  
 **analysis**
 
 |Name|Type|Default|Required|Description|Example|
@@ -660,7 +658,7 @@ Example output:
 
 # Version History
 
-* 1.0.5 - Update SDK | Update `jbxapi` dependency
+* 2.0.0 - `Get Submitted Info` - New action | `List Keyboard Layouts` - Action removed | Update SDK | Update `jbxapi` dependency 
 * 1.0.4 - Add extra optional input for Submit Sample action
 * 1.0.3 - Add example inputs
 * 1.0.2 - Fix misspelling in error message | Remove generic "automation" keyword
