@@ -4,11 +4,12 @@ import os
 import sys
 
 sys.path.append(os.path.abspath("../"))
+from unittest.mock import create_autospec
+
 from insightconnect_plugin_runtime import Action
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_dynamodb.connection import Connection
 from komand_dynamodb.util.api import AWSCommunicationAPI
-from unittest.mock import create_autospec
 
 
 class Util:
