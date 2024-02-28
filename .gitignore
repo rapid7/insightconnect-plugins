@@ -1,6 +1,12 @@
 # AWS
 .boto
 
+# Snyk
+.dccache
+
+# Coverage
+.coverage
+
 # vim
 *.sw*
 
