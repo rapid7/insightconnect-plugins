@@ -4,59 +4,59 @@ Trend Micro Vision One is an enhanced threat defense platform, surpassing standa
 
 # Key Features
   
-* Add Alert Note
-* Add Custom Script
-* Add to Block List
-* Add to Exception List
-* Add to Suspicious List
-* Collect File
-* Create API Keys
-* Delete Custom Script
-* Delete Email Message
-* Delete API Keys
-* Disable Account
-* Download Custom Script
-* Download Sandbox Analysis Result
-* Download Sandbox Investigation Package
-* Edit Alert Status
-* Enable Account
-* Get Alert Details
-* Get Alert List
-* Get API Key
-* Get Custom Script List
-* Get Email Activity Data
-* Get Email Activity Data Count
-* Get Endpoint Activity Data
-* Get Endpoint Activity Data Count
-* Get Endpoint Data
-* Get Exception List
-* Get Sandbox Analysis Result
-* Get Sandbox Submission Status
-* Get Sandbox Suspicious List
-* Get Suspicious List
-* Get Task Result
-* Isolate Endpoint
-* List API Keys
-* Poll Alert List
-* Poll Sandbox Suspicious List
-* Quarantine Email Message
-* Remove from Block List
-* Remove from Exception List
-* Remove from Suspicious List
-* Reset Password Account
-* Restore Email Message
-* Restore Endpoint
-* Run Custom Script
-* Sign out Account
-* Submit File to Sandbox
-* Submit URLs to Sandbox
-* Terminate Process
-* Update API Key
+* Add Alert Note  
+* Add Custom Script  
+* Add to Block List  
+* Add to Exception List  
+* Add to Suspicious List  
+* Collect File  
+* Create API Keys  
+* Delete Custom Script  
+* Delete Email Message  
+* Delete API Keys  
+* Disable Account  
+* Download Custom Script  
+* Download Sandbox Analysis Result  
+* Download Sandbox Investigation Package  
+* Edit Alert Status  
+* Enable Account  
+* Get Alert Details  
+* Get Alert List  
+* Get API Key  
+* Get Custom Script List  
+* Get Email Activity Data  
+* Get Email Activity Data Count  
+* Get Endpoint Activity Data  
+* Get Endpoint Activity Data Count  
+* Get Endpoint Data  
+* Get Exception List  
+* Get Sandbox Analysis Result  
+* Get Sandbox Submission Status  
+* Get Sandbox Suspicious List  
+* Get Suspicious List  
+* Get Task Result  
+* Isolate Endpoint  
+* List API Keys  
+* Poll Alert List  
+* Poll Sandbox Suspicious List  
+* Quarantine Email Message  
+* Remove from Block List  
+* Remove from Exception List  
+* Remove from Suspicious List  
+* Reset Password Account  
+* Restore Email Message  
+* Restore Endpoint  
+* Run Custom Script  
+* Sign out Account  
+* Submit File to Sandbox  
+* Submit URLs to Sandbox  
+* Terminate Process  
+* Update API Key  
 * Update Custom Script
 
 # Requirements
   
-* Requires a Trend Micro Vision One API Key
+* Requires a Trend Micro Vision One API Key  
 * API must be enabled on the Settings page in the product's user interface
 
 # Supported Product Versions
@@ -407,7 +407,7 @@ Example output:
 ```
 
 #### Create API Keys
-
+  
 This action is used to generates API keys that allow third-party applications to access the Trend Vision One APIs
 
 **API key role permissions required:**
@@ -422,7 +422,7 @@ This action is used to generates API keys that allow third-party applications to
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_keys_objects|[]api_keys_objects|None|True|List of JSON objects containing data for API keys creation|None|[{"name":"TestKey","role":"Analyst","months_to_expiration":"1","description":"Test API Key create","status":"enabled"}]|
-
+  
 Example input:
 
 ```
@@ -430,7 +430,7 @@ Example input:
   "api_keys_objects": [
     {
       "description": "Test API Key create",
-      "months_to_expiration": 1,
+      "months_to_expiration": "1",
       "name": "TestKey",
       "role": "Analyst",
       "status": "enabled"
@@ -444,7 +444,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |api_keys_resp|[]api_keys_resp|True|List of API keys responses|[{"status":200,"id":"d367abdd-7739-4129-a36a-862c4ec018b4","value":"API-KEY","expiredDateTime":"2025-02-06T10:00:00Z"}]|
-
+  
 Example output:
 
 ```
@@ -461,7 +461,7 @@ Example output:
 ```
 
 #### Delete API Keys
-
+  
 This action is used to deletes the specified API keys
 
 **API key role permissions required:**
@@ -476,7 +476,7 @@ This action is used to deletes the specified API keys
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|[]string|None|True|List of unique identifiers of the API keys|None|["d367abdd-7739-4129-a36a-862c4ec018b4","b667abdd-7739-4129-a36a-862c4ec019se"]|
-
+  
 Example input:
 
 ```
@@ -493,7 +493,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |status|integer|True|The Status Code of the API key update|207|
-
+  
 Example output:
 
 ```
@@ -957,7 +957,7 @@ Example output:
 ```
 
 #### Get API Key
-
+  
 This action is used to displays information of the specified API key
 
 **API key role permissions required:**
@@ -971,7 +971,7 @@ This action is used to displays information of the specified API key
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|string|None|True|The unique identifier of the API key|None|2ee04177-53d7-4fc7-a9d7-39285d80f58a|
-
+  
 Example input:
 
 ```
@@ -992,7 +992,7 @@ Example input:
 |name|string|True|The unique name of the API key|test|
 |role|string|True|The user role assigned to the API key|Master Administrator|
 |status|string|True|The status of an API key|enabled|
-
+  
 Example output:
 
 ```
@@ -1845,7 +1845,7 @@ Example output:
 ```
 
 #### List API Keys
-
+  
 This action is used to displays a list of all your API keys in a list
 
 **API key role permissions required:**
@@ -1861,7 +1861,7 @@ This action is used to displays a list of all your API keys in a list
 |fields|object|None|True|JSON object of fields to query by fileName or fileType|None|{"role":"Master Administrator"}|
 |query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |
 |top|integer|None|False|Number of records displayed on a page|[50, 100, 200]|50|
-
+  
 Example input:
 
 ```
@@ -1880,7 +1880,7 @@ Example input:
 | :--- | :--- | :--- | :--- | :--- |
 |items|[]api_keys_list_resp|True|List of API key object responses|[{"id":"d367abdd-7739-4129-a36a-862c4ec018b4","name":"test","status":"enabled","role":"Master Administrator","description":"this is a test","expiredDateTime":"2025-02-06T10:00:00Z","lastUsedDateTime":"2023-02-06T10:00:00Z"}]|
 |total_count|integer|True|The number of retrieved API keys|5|
-
+  
 Example output:
 
 ```
@@ -2524,7 +2524,7 @@ Example output:
 ```
 
 #### Update API Key
-
+  
 This action is used to updates the specified API key
 
 **API key role permissions required:**
@@ -2544,7 +2544,7 @@ This action is used to updates the specified API key
 |name|string|None|True|The unique name of the API key|None|test|
 |role|string|None|True|The user role assigned to the API key|None|Master Administrator|
 |status|string|None|True|The status of an API key|["enabled", "disabled"]|enabled|
-
+  
 Example input:
 
 ```
@@ -2563,7 +2563,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |status|integer|True|The Status Code of the API key update|204|
-
+  
 Example output:
 
 ```
@@ -2591,7 +2591,6 @@ encoding
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |description|string|None|False|Task Description|None|example desc|
 |file|file|None|False|Custom Script (dict of {filename(string) & content(base64(bytes))})|None|{"content":"dGVzdA==","filename":"r7-test11.sh"}|
-|file_name|string|test.ps1|False|File name of custom script|None|test.ps1|
 |file_type|string|bash|True|File type of custom script|["powershell", "bash"]|bash|
 |script_id|string|None|True|Unique alphanumeric string that identifies a script file|None|44c99cb0-8c5f-4182-af55-62135dbe32f1|
   
@@ -2604,7 +2603,6 @@ Example input:
     "content": "dGVzdA==",
     "filename": "r7-test11.sh"
   },
-  "file_name": "test.ps1",
   "file_type": "bash",
   "script_id": "44c99cb0-8c5f-4182-af55-62135dbe32f1"
 }
@@ -2968,7 +2966,7 @@ Example output:
 |Tags|[]string|None|False|Detected by Security Analytics Engine filters|None|
 |UUID|string|None|False|Log unique identity|None|
 |Win Event ID|integer|None|False|Win Event ID|None|
-
+  
 **api_keys_objects**
 
 |Name|Type|Default|Required|Description|Example|
@@ -2978,7 +2976,7 @@ Example output:
 |Name|string|None|True|The unique name of an API key|None|
 |Role|string|None|True|The user role assigned to the API key|None|
 |Status|string|None|False|The status of an API key|None|
-
+  
 **api_keys_resp**
 
 |Name|Type|Default|Required|Description|Example|
@@ -2987,7 +2985,7 @@ Example output:
 |ID|string|None|True|The unique identifier of the API key|None|
 |Status|integer|None|True|The Status Code of the submitted API keys task|None|
 |Value|string|None|True|The API key|None|
-
+  
 **api_keys_list_resp**
 
 |Name|Type|Default|Required|Description|Example|
@@ -3006,12 +3004,12 @@ Example output:
 *There is no troubleshooting for this plugin.*
 
 # Version History
-
-* 4.0.0 - Added API Keys related actions
-* 3.0.0 - Refactored pytmv1 usage | Added Custom Scripts and Activity related actions
-* 2.0.1 - Version bump of pytmv1 library
-* 2.0.0 - Enabled multiple inputs for Get Endpoint Data, reduced API call frequency & General Refactoring
-* 1.0.1 - Alert Details Output Fix (Minor Fix)
+  
+* 4.0.0 - Added API Keys related actions  
+* 3.0.0 - Refactored pytmv1 usage | Added Custom Scripts and Activity related actions  
+* 2.0.1 - Version bump of pytmv1 library  
+* 2.0.0 - Enabled multiple inputs for Get Endpoint Data, reduced API call frequency & General Refactoring  
+* 1.0.1 - Alert Details Output Fix (Minor Fix)  
 * 1.0.0 - Initial plugin
 
 # Links
@@ -3019,5 +3017,5 @@ Example output:
 * [TrendMicro](https://www.trendmicro.com/en_us/business.html)
 
 ## References
-
+  
 * [Trend Micro Vision One](https://docs.trendmicro.com/en-us/enterprise/trend-micro-xdr-help/home)
