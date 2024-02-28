@@ -8,6 +8,7 @@ description: Joe Sandbox Cloud executes files and URLs fully automated in a cont
   suspicious activities
 version: 2.0.0
 supported_versions: [2.0.0]
+connection_version: 2
 vendor: rapid7
 support: community
 status: []
@@ -520,6 +521,7 @@ actions:
         description: Content of the resource associated with the analysis in base64
         type: bytes
         required: true
+        example: "01001001"
   get_submitted_info:
     title: Get Submitted Info
     description: Show the status and info of submission

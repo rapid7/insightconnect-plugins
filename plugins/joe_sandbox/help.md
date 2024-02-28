@@ -124,14 +124,14 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|resource_content|bytes|True|Content of the resource associated with the analysis in base64|None|
+|resource_content|bytes|True|Content of the resource associated with the analysis in base64|01001001|
 |resource_name|string|True|Name of the resource associated with the analysis|Resource Name|
   
 Example output:
 
 ```
 {
-  "resource_content": "",
+  "resource_content": "01001001",
   "resource_name": "Resource Name"
 }
 ```
