@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 import time
 import json
 import urllib
@@ -9,7 +9,7 @@ from .schema import IssueInput, IssueOutput
 # Custom imports below
 
 
-class Issue(komand.Trigger):
+class Issue(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="issue", description="Monitor new issues", input=IssueInput(), output=IssueOutput()

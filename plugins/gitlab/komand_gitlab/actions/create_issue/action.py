@@ -1,5 +1,5 @@
-import komand
-from .schema import CreateIssueInput, CreateIssueOutput
+import insightconnect_plugin_runtime
+from .schema import CreateIssueInput, CreateIssueOutput, Input, Output, Component
 
 # Custom imports below
 import json
@@ -7,11 +7,11 @@ import requests
 import urllib
 
 
-class CreateIssue(komand.Action):
+class CreateIssue(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_issue",
-            description="Create issue",
+            description=Component.DESCRIPTION,
             input=CreateIssueInput(),
             output=CreateIssueOutput(),
         )
@@ -68,6 +68,3 @@ class CreateIssue(komand.Action):
             self.logger.error(e)
             raise Exception(e)
 
-    def test(self):
-        """TODO: Test action"""
-        return {}

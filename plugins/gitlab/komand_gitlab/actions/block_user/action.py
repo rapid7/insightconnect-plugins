@@ -1,30 +1,27 @@
-import komand
-from .schema import BlockUserInput, BlockUserOutput
+import insightconnect_plugin_runtime
+from .schema import BlockUserInput, BlockUserOutput, Input, Output, Component
 
 # Custom imports below
 import requests
 
 
-class BlockUser(komand.Action):
+class BlockUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="block_user",
-            description="Block Gitlab user",
+            description=Component.DESCRIPTION,
             input=BlockUserInput(),
             output=BlockUserOutput(),
         )
 
     def run(self, params={}):
-        r_url = "%s/users/%s/block" % (self.connection.url, params.get("id"))
+        request_url = f"{self.connection.url}/users/{params.get(Input.ID)}/block"
 
         try:
-            r = requests.post(r_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)  # noqa: B501
-        except requests.exceptions.RequestException as e:  # This is the correct syntax
-            self.logger.error(e)
-            raise Exception(e)
+            response = requests.post(request_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)  # noqa: B501
+        except requests.exceptions.RequestException as error:  # This is the correct syntax
+            self.logger.error(error)
+            raise Exception(error)
 
-        return {"status": r.ok}
+        return {Output.STATUS: response.ok}
 
-    def test(self):
-        """TODO: Test action"""
-        return {}

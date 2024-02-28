@@ -1,16 +1,16 @@
-import komand
-from .schema import ListSshInput, ListSshOutput
+import insightconnect_plugin_runtime
+from .schema import ListSshInput, ListSshOutput, Input, Output, Component
 
 # Custom imports below
 import json
 import requests
 
 
-class ListSsh(komand.Action):
+class ListSsh(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="list_ssh",
-            description="List user SSH keys",
+            description=Component.DESCRIPTION,
             input=ListSshInput(),
             output=ListSshOutput(),
         )
@@ -34,9 +34,5 @@ class ListSsh(komand.Action):
                 }
                 ssh_keys.append(key_obj)
 
-            return {"ssh_keys": ssh_keys}
+            return {Output.SSH_KEYS: ssh_keys}
         raise Exception(r.text)
-
-    def test(self):
-        """TODO: Test action"""
-        return {}

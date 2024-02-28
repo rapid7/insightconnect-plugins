@@ -1,15 +1,15 @@
-import komand
-from .schema import DeleteUserInput, DeleteUserOutput
+import insightconnect_plugin_runtime
+from .schema import DeleteUserInput, DeleteUserOutput, Input, Output, Component
 
 # Custom imports below
 import requests
 
 
-class DeleteUser(komand.Action):
+class DeleteUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="delete_user",
-            description="Delete Gitlab user",
+            description=Component.DESCRIPTION,
             input=DeleteUserInput(),
             output=DeleteUserOutput(),
         )
@@ -24,6 +24,3 @@ class DeleteUser(komand.Action):
             raise Exception(e)
         return {"status": False if r.ok else True}
 
-    def test(self):
-        """TODO: Test action"""
-        return {}

@@ -1,16 +1,16 @@
-import komand
-from .schema import GetUserInput, GetUserOutput
+import insightconnect_plugin_runtime
+from .schema import GetUserInput, GetUserOutput, Input, Output, Component
 
 # Custom imports below
 import json
 import requests
 
 
-class GetUser(komand.Action):
+class GetUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_user",
-            description="Get Gitlab user",
+            description=Component.DESCRIPTION,
             input=GetUserInput(),
             output=GetUserOutput(),
         )
@@ -46,7 +46,3 @@ class GetUser(komand.Action):
             raise Exception(e)
 
         return user_obj
-
-    def test(self):
-        """TODO: Test action"""
-        return {}
