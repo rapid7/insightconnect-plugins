@@ -71,6 +71,8 @@ key_features:
 requirements:
 - Requires a Trend Micro Vision One API Key
 - API must be enabled on the Settings page in the product's user interface
+links:
+- '[TrendMicro](https://www.trendmicro.com/en_us/business.html)'
 references:
 - '[Trend Micro Vision One](https://docs.trendmicro.com/en-us/enterprise/trend-micro-xdr-help/home)'
 version_history:
