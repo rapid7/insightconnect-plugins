@@ -4,7 +4,7 @@ from .schema import SubmitCookbookInput, SubmitCookbookOutput, Input, Output
 # Custom imports below
 from base64 import b64decode
 import binascii
-from insightconnect_plugin_runtime import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class SubmitCookbook(insightconnect_plugin_runtime.Action):

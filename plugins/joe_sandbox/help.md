@@ -17,7 +17,7 @@ This plugin supports Joe Sandbox Cloud and Joe Sandbox (on-premise) instances an
 
 # Supported Product Versions
   
-* 2.0.0
+* Joe Sandbox API v2
 
 # Documentation
 

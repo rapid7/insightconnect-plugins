@@ -7,8 +7,12 @@ description: Joe Sandbox Cloud executes files and URLs fully automated in a cont
   environment and monitors the behavior of applications and the operating system for
   suspicious activities
 version: 2.0.0
-supported_versions: [2.0.0]
+supported_versions: ['Joe Sandbox API v2']
 connection_version: 2
+sdk:
+  type: slim
+  version: 5.4.3
+  user: nobody
 vendor: rapid7
 support: community
 status: []

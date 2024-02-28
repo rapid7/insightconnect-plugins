@@ -4,7 +4,7 @@ from .schema import SubmitSampleInput, SubmitSampleOutput, Input, Output
 # Custom imports below
 from base64 import b64decode
 import binascii
-from insightconnect_plugin_runtime import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class SubmitSample(insightconnect_plugin_runtime.Action):
