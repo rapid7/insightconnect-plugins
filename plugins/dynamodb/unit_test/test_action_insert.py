@@ -7,7 +7,8 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 sys.path.append(os.path.abspath("../"))
 from komand_dynamodb.actions import Insert
 from komand_dynamodb.actions.insert.schema import Input
-from unit_test.util import Util
+
+from util import Util
 
 
 class TestActionInsrt(TestCase):
