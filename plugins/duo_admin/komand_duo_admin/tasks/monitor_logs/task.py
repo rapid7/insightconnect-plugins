@@ -14,7 +14,7 @@ ADMIN_LOGS_LOG_TYPE = "Admin logs"
 AUTH_LOGS_LOG_TYPE = "Auth logs"
 TRUST_MONITOR_EVENTS_LOG_TYPE = "Trust monitor events"
 CUTOFF_HOURS = 24
-MAX_CUTOFF_HOURS = 720
+MAX_CUTOFF_HOURS = 72
 
 
 class MonitorLogs(insightconnect_plugin_runtime.Task):
@@ -47,7 +47,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         # If no previous timestamp retrieved (first run) then query 24 hours
         if not last_log_timestamp:
             self.logger.info(f"First run for {log_type}")
-            filter_time = self._get_filter_time(custom_config, now)
+            filter_time = self._get_filter_time(custom_config, now, CUTOFF_HOURS)
             if log_type != "Admin logs":
                 mintime = self.convert_to_milliseconds(filter_time)
                 maxtime = self.convert_to_milliseconds(last_two_minutes)
@@ -65,7 +65,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
             # If for some reason no logs or event have been picked up,
             # need to ensure that no more than the previous 30 days is queried - use cutoff check to ensure this
-            max_cutoff_time = now - timedelta(hours=MAX_CUTOFF_HOURS)
+            max_cutoff_time = self._get_filter_time(custom_config, now, MAX_CUTOFF_HOURS)
             cutoff_time_secs = self.convert_to_seconds(max_cutoff_time)
             cutoff_time_millisecs = self.convert_to_milliseconds(max_cutoff_time)
             if backward_comp_first_run:
@@ -389,21 +389,23 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         trust_monitor_events = self.add_log_type_field(response.get("events", []), "trust_monitor_event")
         return trust_monitor_events, parameters
 
-    def _get_filter_time(self, custom_config: Dict, current_time) -> int:
+    def _get_filter_time(self, custom_config: Dict, current_time: datetime, default_hours: int) -> int:
         """
         Apply custom_config params (if provided) to the task. If a lookback value exists, it should take
         precedence (this can allow a larger filter time), otherwise use the cutoff_hours value.
         :param custom_config: dictionary passed containing `cutoff` or `lookback` values
+        :param current_time: Datetime of now
+        :param default_hours: integer value representing default cutoff hours
         :return: filter_value (epoch seconds) to be applied in request to Duo
         """
         filter_cutoff = custom_config.get("cutoff", {}).get("date")
         if filter_cutoff is None:
-            filter_cutoff = custom_config.get("cutoff", {}).get("hours", CUTOFF_HOURS)
+            filter_cutoff = custom_config.get("cutoff", {}).get("hours", default_hours)
         filter_lookback = custom_config.get("lookback")
         filter_value = filter_lookback if filter_lookback else filter_cutoff
         # If CUTOFF_HOURS (hours in int) applied find date time from now
         if isinstance(filter_value, int):
-            filter_value = current_time - timedelta(hours=filter_cutoff)
+            filter_value = current_time - timedelta(hours=filter_value)
         else:
             filter_value = datetime.fromisoformat(filter_value.replace("Z", "+00:00"))
         self.logger.info(f"Task execution will be applying a lookback to {filter_value}...")

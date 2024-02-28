@@ -30,35 +30,40 @@ class TestMonitorLogs(TestCase):
                 "without_state",
                 Util.read_file_to_dict("inputs/monitor_logs_without_state.json.inp"),
                 Util.read_file_to_dict("expected/monitor_logs.json.exp"),
+                {"cutoff": {"date": "2023-04-30T08:34:46.000Z"}, "lookback": "2023-04-30T08:34:46.000Z"}
             ],
             [
                 "with_state",
                 Util.read_file_to_dict("inputs/monitor_logs_with_state.json.inp"),
                 Util.read_file_to_dict("expected/monitor_logs_2.json.exp"),
+                {"cutoff": {"date": "2023-04-30T08:34:46.000Z"}, "lookback": "2023-04-30T08:34:46.000Z"}
             ],
             [
                 "next_page",
                 Util.read_file_to_dict("inputs/monitor_logs_next_page.json.inp"),
                 Util.read_file_to_dict("expected/monitor_logs_3.json.exp"),
+                {"cutoff": {"date": "2023-04-30T08:34:46.000Z"}, "lookback": "2023-04-30T08:34:46.000Z"}
             ],
             [
                 "bad_request",
                 # TODO WORK OUT WHICH REQUEST SHOULD BE BAD and how to make it fail
                 Util.read_file_to_dict("inputs/monitor_logs_bad_request.json.inp"),
                 Util.read_file_to_dict("expected/monitor_logs_bad_request.json.exp"),
+                {"cutoff": {"date": "2023-04-30T08:34:46.000Z"}, "lookback": 72},
             ],
             [
                 "server_error",
                 Util.read_file_to_dict("inputs/monitor_logs_server_error.json.inp"),
                 Util.read_file_to_dict("expected/monitor_logs_server_error.json.exp"),
+                {"cutoff": {"date": "2023-04-30T08:34:46.000Z"}, "lookback": "2023-03-30T08:34:46.000Z"}
             ],
         ]
     )
     def test_monitor_logs(
-        self, mock_request, mock_request_instance, mock_get_headers, mock_get_time, test_name, current_state, expected
+        self, mock_request, mock_request_instance, mock_get_headers, mock_get_time, test_name, current_state, expected, config
     ):
         actual, actual_state, has_more_pages, status_code, _ = self.action.run(
-            state=current_state, custom_config=self.custom_config
+            state=current_state, custom_config=config
         )
         self.assertEqual(actual, expected.get("logs"))
         self.assertEqual(actual_state, expected.get("state"))
