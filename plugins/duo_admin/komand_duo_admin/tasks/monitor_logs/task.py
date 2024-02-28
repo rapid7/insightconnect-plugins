@@ -64,7 +64,8 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 self.logger.info(f"Subsequent run for {log_type}")
 
             # If for some reason no logs or event have been picked up,
-            # need to ensure that no more than the previous 30 days is queried - use cutoff check to ensure this
+            # Need to ensure that no more than the previous 3 days is queried - use cutoff check to ensure this
+            # Prevent resuming of task from previous timestamp if beyond 3 days resulting in large data collection
             max_cutoff_time = self._get_filter_time(custom_config, now, MAX_CUTOFF_HOURS)
             cutoff_time_secs = self.convert_to_seconds(max_cutoff_time)
             cutoff_time_millisecs = self.convert_to_milliseconds(max_cutoff_time)
