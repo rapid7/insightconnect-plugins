@@ -5,7 +5,8 @@ from unittest import TestCase
 sys.path.append(os.path.abspath("../"))
 from komand_dynamodb.actions import Scan
 from komand_dynamodb.actions.scan.schema import Input
-from unit_test.util import Util
+
+from util import Util
 
 
 class TestActionScan(TestCase):
