@@ -15,9 +15,6 @@ class GetSubmittedInfo(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        # END INPUT BINDING - DO NOT REMOVE
-
         submission_id = params.get(Input.SUBMISSION_ID)
         self.logger.info(f"Submission ID: {submission_id}")
 

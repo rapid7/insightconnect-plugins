@@ -40,10 +40,6 @@
 			"hash": "3877a1e4c0add8ca3691a8f4322fb48e"
 		},
 		{
-			"identifier": "list_keyboard_layouts/schema.py",
-			"hash": "ac2014585403ca68b6241210a32edda3"
-		},
-		{
 			"identifier": "list_systems/schema.py",
 			"hash": "3cb1976d99d58235a7ef2b360a97ba60"
 		},
