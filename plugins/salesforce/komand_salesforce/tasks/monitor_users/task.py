@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Tuple
 
 import insightconnect_plugin_runtime
 from .schema import MonitorUsersInput, MonitorUsersOutput, MonitorUsersState, Component
@@ -49,20 +49,25 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
             user_login_next_page_id = state.pop(self.USER_LOGIN_NEXT_PAGE_ID, None)
             updated_users_next_page_id = state.pop(self.UPDATED_USERS_NEXT_PAGE_ID, None)
 
-            # group of timestamps for retrieving updated users data
+            # group of timestamps for retrieving updated users data - we poll this every time the C2C task runs
             user_update_start_timestamp = start_time
             user_update_last_collection = now
 
-            # group of timestamps for retrieving login history data
+            # group of timestamps for retrieving login history data - we only collect these hourly from Salesforce
             user_login_start_timestamp = start_time
             user_login_end_timestamp = now
 
             if not state:
                 self.logger.info("First run")
+
+                # we only check Salesforce for new users every 24 hours / first run
                 get_users = True
                 state[self.NEXT_USER_COLLECTION_TIMESTAMP] = str(now + timedelta(hours=24))
+
+                # we check for any user profile updates every task execution
                 state[self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP] = str(user_update_last_collection)
 
+                # we only check for login data every hour
                 get_user_login_history = True
                 state[self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP] = str(now + timedelta(hours=1))
                 state[self.LAST_USER_LOGIN_COLLECTION_TIMESTAMP] = str(user_login_end_timestamp)
@@ -89,23 +94,28 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                         ),
                     )
 
+                # check if the stored TS has extended beyond our cut-off (customer may have paused integration)
                 user_update_start_timestamp = self._get_recent_timestamp(
                     state, cut_off_time, self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP
                 )
+                # move the end time stamp to now
                 state[self.LAST_USER_UPDATE_COLLECTION_TIMESTAMP] = str(user_update_last_collection)
+
+                # this allows us to poll for new users every 24 hours
                 next_user_collection_timestamp = state.get(self.NEXT_USER_COLLECTION_TIMESTAMP)
                 if next_user_collection_timestamp and self.compare_timestamp(
                     now, self.convert_to_datetime(next_user_collection_timestamp)
                 ):
                     get_users = True
-                    state[self.NEXT_USER_COLLECTION_TIMESTAMP] = str(now + timedelta(hours=24))
+                    state[self.NEXT_USER_COLLECTION_TIMESTAMP] = str(now + timedelta(hours=24))  # poll again in 24 hrs
 
+                # this allows us to poll for user login data every hour
                 next_user_login_collection_timestamp = state.get(self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP)
                 if next_user_login_collection_timestamp and self.compare_timestamp(
                     now, self.convert_to_datetime(next_user_login_collection_timestamp)
                 ):
                     get_user_login_history = True
-                    state[self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP] = str(now + timedelta(hours=1))
+                    state[self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP] = str(now + timedelta(hours=1))  # poll again in 1 hr
                     user_login_start_timestamp = self._get_recent_timestamp(
                         state, cut_off_time, self.LAST_USER_LOGIN_COLLECTION_TIMESTAMP
                     )
@@ -178,7 +188,7 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
             self.logger.info(f"An Exception has been raised. Error: {error}")
             return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
-    def _is_valid_state(self, state: dict) -> Union[bool, str]:
+    def _is_valid_state(self, state: dict) -> Tuple[bool, str]:
         for key, value in state.items():
             try:
                 self.convert_to_datetime(value)
@@ -242,7 +252,7 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
             additional_msg = f", along with custom lookback of {start_time}"
         else:
             start_time = now - timedelta(hours=cut_off_hours)
-            additional_msg = f", along with default lookback time of {cut_off_hours} hours ({start_time})"
+            additional_msg = f", along with lookback time of {cut_off_hours} hours ({start_time})"
 
         if not state:  # we only care about lookback time if there's no state.
             log_msg += additional_msg

@@ -13,7 +13,7 @@ status: []
 supported_versions: ["Salesforce API v58 2023-06-30"]
 sdk:
   type: full
-  version: 5.4
+  version: 5.4.4
   user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/salesforce
