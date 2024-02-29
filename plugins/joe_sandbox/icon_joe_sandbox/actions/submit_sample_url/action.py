@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import SubmitSampleUrlInput, SubmitSampleUrlOutput, Input, Output
+from .schema import SubmitSampleUrlInput, SubmitSampleUrlOutput, Input, Output, Component
 
 # Custom imports below
 
@@ -8,7 +8,7 @@ class SubmitSampleUrl(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="submit_sample_url",
-            description="Submit a sample at a given URL for analysis and return the associated web IDs for the sample",
+            description=Component.DESCRIPTION,
             input=SubmitSampleUrlInput(),
             output=SubmitSampleUrlOutput(),
         )

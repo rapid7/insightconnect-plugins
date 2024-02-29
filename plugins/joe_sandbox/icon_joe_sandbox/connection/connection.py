@@ -23,6 +23,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Connect: Connected successfully")
 
     def test(self):
+        self.logger.info("Running test server_online()")
+
         try:
             self.api.server_online()
             return {"success": True}

@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import ListCountriesInput, ListCountriesOutput, Output
+from .schema import ListCountriesInput, ListCountriesOutput, Output, Component
 
 # Custom imports below
 
@@ -13,8 +13,7 @@ class ListCountries(insightconnect_plugin_runtime.Action):
             output=ListCountriesOutput(),
         )
 
-    def run(
-        self,
-    ):
+    def run(self, params={}):
+        self.logger.info("Running server_lia_countries")
         countries = self.connection.api.server_lia_countries()
         return {Output.COUNTRIES: countries}

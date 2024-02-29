@@ -20,5 +20,11 @@ class SubmitUrl(insightconnect_plugin_runtime.Action):
 
         additional_parameters.update({"accept-tac": 1})
 
-        submission_id = self.connection.api.submit_url(url, parameters, additional_parameters)
-        return {Output.SUBMISSION_ID: submission_id}
+        self.logger.info(f"URL: {url} parameters: {parameters} additional_parameters: {additional_parameters}")
+
+        submission_id_request = self.connection.api.submit_url(url, parameters, additional_parameters)
+
+        submission_id_number = submission_id_request.get("submission_id")
+        self.logger.info(f"Submission_id_request: {submission_id_request} Submission_id_number: {submission_id_number}")
+
+        return {Output.SUBMISSION_ID: submission_id_number}

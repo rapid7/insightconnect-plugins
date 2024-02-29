@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import SubmitSampleInput, SubmitSampleOutput, Input, Output
+from .schema import SubmitSampleInput, SubmitSampleOutput, Input, Output, Component
 
 # Custom imports below
 from base64 import b64decode
@@ -11,7 +11,7 @@ class SubmitSample(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="submit_sample",
-            description="Submit a sample for analysis and return the associated web IDs for the sample",
+            description=Component.DESCRIPTION,
             input=SubmitSampleInput(),
             output=SubmitSampleOutput(),
         )
@@ -42,7 +42,7 @@ class SubmitSample(insightconnect_plugin_runtime.Action):
                 cause='Unable to decode base64 input for "cookbook". ',
                 assistance="Contents of the file must be encoded with base64!",
             )
-        webids = None
+
         if filename:
             sample_tuple = (filename, sample_bytes)
             webids = self.connection.api.submit_sample(sample_tuple, cookbook_bytes, parameters, additional_parameters)
