@@ -15,13 +15,13 @@ class TestGetAnalysisInfo(TestCase):
     @patch("requests.request", side_effect=mock_request_200)
     def setUp(self, mock_client) -> None:
         self.action = Util.default_connector(GetAnalysisInfo())
-        self.params = {}
+        self.params = {Input.WEBID: "abc"}
 
-    def test_get_analysis_info(self):
-        """
-        DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
+    @patch("requests.request", side_effect=mock_request_200)
+    def test_get_analysis_info(self, mock_get):
+        mocked_request(mock_get)
+        response = self.action.run()
 
-        TODO: Implement test cases here
-        """
-
-        self.fail("Unimplemented Test Case")
+        expected = {Output.ANALYSIS: "abc"}
+        validate(response, self.action.output.schema)
+        self.assertEqual(response, expected)

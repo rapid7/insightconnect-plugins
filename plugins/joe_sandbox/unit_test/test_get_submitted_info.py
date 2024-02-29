@@ -15,13 +15,13 @@ class TestGetSubmittedInfo(TestCase):
     @patch("requests.request", side_effect=mock_request_200)
     def setUp(self, mock_client) -> None:
         self.action = Util.default_connector(GetSubmittedInfo())
-        self.params = {}
+        self.params = {Input.SUBMISSION_ID: "abc"}
 
-    def test_get_submitted_info(self):
-        """
-        DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
+    @patch("requests.request", side_effect=mock_request_200)
+    def test_get_submitted_info(self, mock_get):
+        mocked_request(mock_get)
+        response = self.action.run()
 
-        TODO: Implement test cases here
-        """
-
-        self.fail("Unimplemented Test Case")
+        expected = {Output.SUBMISSION_INFO: "abc"}
+        validate(response, self.action.output.schema)
+        self.assertEqual(response, expected)

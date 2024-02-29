@@ -15,13 +15,12 @@ class TestSubmitUrl(TestCase):
     @patch("requests.request", side_effect=mock_request_200)
     def setUp(self, mock_client) -> None:
         self.action = Util.default_connector(SubmitUrl())
-        self.params = {}
+        self.params = {Input.URL: "https://www.example.com", Input.PARAMETERS: "", Input.ADDITIONAL_PARAMETERS: ""}
 
-    def test_submit_url(self):
-        """
-        DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
+    def test_submit_url(self, mock_post):
+        mocked_request(mock_post)
+        response = self.action.run()
 
-        TODO: Implement test cases here
-        """
-
-        self.fail("Unimplemented Test Case")
+        expected = {Output.SUBMISSION_ID: "abc"}
+        validate(response, self.action.output.schema)
+        self.assertEqual(response, expected)

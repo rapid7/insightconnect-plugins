@@ -17,11 +17,11 @@ class TestDeleteAnalysis(TestCase):
         self.action = Util.default_connector(DeleteAnalysis())
         self.params = {Input.WEBID: "abc"}
 
-    def test_delete_analysis(self):
-        """
-        DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
+    @patch("requests.request", side_effect=mock_request_200)
+    def test_delete_analysis(self, mock_delete):
+        mocked_request(mock_delete)
+        response = self.action.run()
 
-        TODO: Implement test cases here
-        """
-
-        self.fail("Unimplemented Test Case")
+        expected = {Output.DELETED: "abc"}
+        validate(response, self.action.output.schema)
+        self.assertEqual(response, expected)
