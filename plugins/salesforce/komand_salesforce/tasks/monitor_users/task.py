@@ -115,7 +115,9 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                     now, self.convert_to_datetime(next_user_login_collection_timestamp)
                 ):
                     get_user_login_history = True
-                    state[self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP] = str(now + timedelta(hours=1))  # poll again in 1 hr
+                    state[self.NEXT_USER_LOGIN_COLLECTION_TIMESTAMP] = str(
+                        now + timedelta(hours=1)
+                    )  # poll again in 1 hr
                     user_login_start_timestamp = self._get_recent_timestamp(
                         state, cut_off_time, self.LAST_USER_LOGIN_COLLECTION_TIMESTAMP
                     )
@@ -125,9 +127,10 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                 records = []
 
                 if not users_next_page_id and not user_login_next_page_id or updated_users_next_page_id:
-                    self.logger.info(
-                        f"Get updated users - start: {user_update_start_timestamp} end: {user_update_last_collection}"
-                    )
+                    msg = f"Get updated users - start: {user_update_start_timestamp} end: {user_update_last_collection}"
+                    if updated_users_next_page_id:  # log if we're not actually using times and using next page ID
+                        msg += f", next page ID: {updated_users_next_page_id}"
+                    self.logger.info(msg)
                     response = self.connection.api.query(
                         self.UPDATED_USERS_QUERY.format(
                             start_timestamp=user_update_start_timestamp.isoformat(),
@@ -157,9 +160,12 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
                     records.extend(self.add_data_type_field(users, "User"))
 
                 if get_user_login_history:
-                    self.logger.info(
+                    msg = (
                         f"Get user login history - start: {user_login_start_timestamp} end: {user_login_end_timestamp}"
                     )
+                    if user_login_next_page_id:  # log if we're not actually using times and using next page ID
+                        msg += f", next page ID: {user_login_next_page_id}"
+                    self.logger.info(msg)
                     response = self.connection.api.query(
                         self.USER_LOGIN_QUERY.format(
                             start_timestamp=user_login_start_timestamp.isoformat(),

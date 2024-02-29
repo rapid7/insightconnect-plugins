@@ -534,7 +534,7 @@ Example output:
 
 # Version History
 
-* 2.1.6 - Task Monitor Users: Implement SDK 5.4 for custom_config.
+* 2.1.6 - Task Monitor Users: Implement SDK 5.4.4 for custom_config parameter.
 * 2.1.5 - Task Monitor Users: Improved logging
 * 2.1.4 - Connection: Remove unnecessary logging 
 * 2.1.3 - Task Monitor Users: improve deduplication logic on user login history
