@@ -13,6 +13,6 @@ class ListAnalyses(insightconnect_plugin_runtime.Action):
             output=ListAnalysesOutput(),
         )
 
-    def run(self, params={}):
+    def run(self):
         analyses = self.connection.api.analysis_list()
         return {Output.ANALYSES: analyses}

@@ -4,6 +4,7 @@ from .schema import GetAnalysisInfoInput, GetAnalysisInfoOutput, Input, Output, 
 # Custom imports below
 from insightconnect_plugin_runtime.helper import clean
 
+
 class GetAnalysisInfo(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(

@@ -38,14 +38,14 @@ class SubmitCookbook(insightconnect_plugin_runtime.Action):
         except jbxapi.MissingParameterError as error:
             raise ConnectionTestException(
                 cause=f"An error occurred: {error}",
-                assistance=f"If the issue persists please contact support.",
+                assistance="If the issue persists please contact support.",
             )
         except jbxapi.InvalidParameterError as error:
             raise ConnectionTestException(cause=str(error), assistance="If the issue persists please contact support.")
         except jbxapi.ApiError as error:
             raise ConnectionTestException(
                 cause=f"An error occurred: {error}",
-                assistance=f"If the issue persists please contact support.",
+                assistance="If the issue persists please contact support.",
             )
 
         return {Output.SUBMISSION_ID: webids.get("submission_id")}
