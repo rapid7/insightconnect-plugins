@@ -1171,7 +1171,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 4.1.6 - Include SDK 5.4.4 which prevents any potential memory leaks.
+* 4.1.6 - Include SDK 5.4.4 which prevents any potential memory leaks | first task lookup should only be 1 hour unless override supplied.
 * 4.1.5 - Include SDK 5.4 which adds new task custom_config parameter.
 * 4.1.4 - Remove hard coded env var from Dockerfile.
 * 4.1.3 - Allow task `monitor_events` to poll from a set date in env var. | Fix issue where an MD5 value of None from Proofpoint was breaking the sorting of the list in the `monitor_events` task
