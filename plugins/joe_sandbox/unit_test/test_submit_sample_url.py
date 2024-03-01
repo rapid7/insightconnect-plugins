@@ -21,6 +21,7 @@ class TestSubmitSampleUrl(TestCase):
             Input.ADDITIONAL_PARAMETERS: "",
         }
 
+    @patch("requests.request", side_effect=mock_request_200)
     def test_submit_sample_url(self, mock_post):
         mocked_request(mock_post)
         response = self.action.run()

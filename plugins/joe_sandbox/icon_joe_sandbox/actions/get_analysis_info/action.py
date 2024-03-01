@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import GetAnalysisInfoInput, GetAnalysisInfoOutput, Input, Output, Component
 
 # Custom imports below
-
+from insightconnect_plugin_runtime.helper import clean
 
 class GetAnalysisInfo(insightconnect_plugin_runtime.Action):
     def __init__(self):
@@ -17,4 +17,6 @@ class GetAnalysisInfo(insightconnect_plugin_runtime.Action):
         webid = params.get(Input.WEBID)
 
         analysis = self.connection.api.analysis_info(webid)
+
+        analysis = clean(analysis)
         return {Output.ANALYSIS: analysis}
