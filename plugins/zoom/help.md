@@ -312,6 +312,7 @@ Example output:
 
 # Version History
 
+* 4.1.7 - Updated to include latest SDK functionality
 * 4.1.6 - Adding better handling to `monitor_sign_in_out_activity` task, if the users account does not have all of the required permissions | Include SDK 5.4 which adds new task custom_config parameter
 * 4.1.5 - Monitor Sign in and out Activity: Added exception logging and bumped latest plugin SDK
 * 4.1.4 - Update to the latest plugin SDK
