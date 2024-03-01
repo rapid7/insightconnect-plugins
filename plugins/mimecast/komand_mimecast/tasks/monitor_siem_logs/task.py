@@ -47,6 +47,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 try:
                     output, headers, status_code = self.connection.client.get_siem_logs(header_next_token)
                     if not output:
+                        self.logger.info("No new logs returned from Mimecast")
                         break
                 except ApiClientException as error:
                     self.logger.error(
