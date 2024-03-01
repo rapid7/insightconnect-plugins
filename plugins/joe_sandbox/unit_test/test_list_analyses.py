@@ -21,6 +21,6 @@ class TestListAnalyses(TestCase):
         mocked_request(mock_get)
         response = self.action.run()
 
-        expected = {Output.ANALYSES: ["abc", "def"]}
+        expected = {Output.ANALYSES: [{"webid": "1"}, {"webid": "2"}, {"webid": "3"}, {"webid": "4"}]}
         validate(response, self.action.output.schema)
         self.assertEqual(response, expected)

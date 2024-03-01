@@ -21,6 +21,6 @@ class TestGetServerInfo(TestCase):
         mocked_request(mock_get)
         response = self.action.run()
 
-        expected = {Output.QUEUESIZE: 33}
+        expected = {Output.QUEUESIZE: 3}
         validate(response, self.action.output.schema)
         self.assertEqual(response, expected)

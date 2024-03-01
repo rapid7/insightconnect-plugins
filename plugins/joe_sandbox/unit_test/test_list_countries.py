@@ -21,6 +21,6 @@ class TestListCountries(TestCase):
         mocked_request(mock_get)
         response = self.action.run()
 
-        expected = {Output.COUNTRIES: ["country1", "country2"]}
+        expected = {Output.COUNTRIES: [{"name": "Argentina"}, {"name": "Australia"}]}
         validate(response, self.action.output.schema)
         self.assertEqual(response, expected)

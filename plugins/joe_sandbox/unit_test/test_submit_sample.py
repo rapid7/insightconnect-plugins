@@ -16,7 +16,7 @@ class TestSubmitSample(TestCase):
     def setUp(self, mock_client) -> None:
         self.action = Util.default_connector(SubmitSample())
         self.params = {
-            Input.SAMPLE: b'ZGhkCg==',
+            Input.SAMPLE: b"ZGhkCg==",
             Input.PARAMETERS: "",
             Input.COOKBOOK: "",
             Input.ADDITIONAL_PARAMETERS: "",

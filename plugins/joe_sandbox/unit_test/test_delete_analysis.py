@@ -22,6 +22,6 @@ class TestDeleteAnalysis(TestCase):
         mocked_request(mock_delete)
         response = self.action.run()
 
-        expected = {Output.DELETED: "abc"}
+        expected = {Output.DELETED: True}
         validate(response, self.action.output.schema)
         self.assertEqual(response, expected)

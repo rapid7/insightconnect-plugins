@@ -22,6 +22,33 @@ class TestGetAnalysisInfo(TestCase):
         mocked_request(mock_get)
         response = self.action.run()
 
-        expected = {Output.ANALYSIS: "abc"}
+        expected = {
+            Output.ANALYSIS: {
+                "analysis": {
+                    "webid": "3675753",
+                    "time": "2024-03-01T11:46:34+01:00",
+                    "runs": [
+                        {
+                            "detection": "clean",
+                            "system": "w10x64_office",
+                            "yara": False,
+                            "sigma": False,
+                            "snort": False,
+                            "score": 0,
+                        }
+                    ],
+                    "tags": [],
+                    "encrypted": False,
+                    "analysisid": "3675753",
+                    "duration": 253,
+                    "filename": "http://conor",
+                    "scriptname": "browseurl.jbs",
+                    "status": "finished",
+                    "score": 0,
+                    "detection": "clean",
+                    "has_malwareconfig": False,
+                }
+            }
+        }
         validate(response, self.action.output.schema)
         self.assertEqual(response, expected)

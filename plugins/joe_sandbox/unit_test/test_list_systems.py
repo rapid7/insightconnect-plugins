@@ -23,8 +23,18 @@ class TestListSystems(TestCase):
 
         expected = {
             Output.SYSTEMS: [
-                {"name": "system1", "description": "system1desc", "arch": "WINDOWS", "count": 1},
-                {"name": "system2", "description": "system2desc", "arch": "MAC", "count": 1},
+                {
+                    "name": "w10x64_office",
+                    "description": "Windows 10 64 bit (version 1803) with <b>Office 2016</b> Adobe Reader DC 19, Chrome 104, Firefox 63, Java 8.171, Flash 30.0.0.113",
+                    "arch": "WINDOWS",
+                    "count": 8,
+                },
+                {
+                    "name": "w7_1",
+                    "description": "Windows 7 (<b>Office 2010 SP2</b>, Java 1.8.0_40 1.8.0_191, Flash 16.0.0.305, Acrobat Reader 11.0.08, Internet Explorer 11, Chrome 55, Firefox 43)",
+                    "arch": "WINDOWS",
+                    "count": 8,
+                },
             ]
         }
         validate(response, self.action.output.schema)

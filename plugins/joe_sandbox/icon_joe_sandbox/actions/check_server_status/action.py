@@ -13,6 +13,6 @@ class CheckServerStatus(insightconnect_plugin_runtime.Action):
             output=CheckServerStatusOutput(),
         )
 
-    def run(self):
+    def run(self, params={}):
         is_server_online = self.connection.api.server_online()
         return {Output.ONLINE: is_server_online.get("online", "")}

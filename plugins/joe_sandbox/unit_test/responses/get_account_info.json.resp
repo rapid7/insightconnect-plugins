@@ -1,3 +1,4 @@
+{"data":
 {
   "type": "desktop",
   "quota": {
@@ -12,4 +13,5 @@
       "remaining": 30
     }
   }
+}
 }

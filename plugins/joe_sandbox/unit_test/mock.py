@@ -28,9 +28,8 @@ class MockResponse:
         self.filename = filename
         self.status_code = status_code
         self.text = json.dumps(self.json())
-        self.request = MagicMock()
-        self.headers = MagicMock()
-        self.raise_for_status = MagicMock()
+        self.ok = True
+        self.iter_content = json.dumps(self.json())
 
     def json(self):
         with open(
@@ -45,7 +44,7 @@ def mocked_request(side_effect: Callable) -> None:
 
 
 def mock_conditions(method: str, url: str, status_code: int, kwargs) -> MockResponse:
-    breakpoint()
+    # breakpoint()
     if url == "https://example.com/v2/server/online":
         return MockResponse("check_server_status", status_code)
     if url == "https://example.com/v2/analysis/delete":
@@ -70,9 +69,9 @@ def mock_conditions(method: str, url: str, status_code: int, kwargs) -> MockResp
         return MockResponse("search_analysis", status_code)
     # if url == "https://example.com/v2/submission/new":
     #     return MockResponse("submit_cookbook", status_code)
-        # return MockResponse("submit_sample", status_code)
-        # return MockResponse("submit_sample_url", status_code)
-        # return MockResponse("submit_url", status_code)
+    # return MockResponse("submit_sample", status_code)
+    # return MockResponse("submit_sample_url", status_code)
+    # return MockResponse("submit_url", status_code)
 
     raise Exception("Unrecognised Endpoint")
 

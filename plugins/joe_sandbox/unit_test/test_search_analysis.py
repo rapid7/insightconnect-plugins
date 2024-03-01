@@ -22,6 +22,40 @@ class TestSearchAnalysis(TestCase):
         mocked_request(mock_get)
         response = self.action.run()
 
-        expected = {Output.ANALYSES: ["abc"]}
+        expected = {
+            Output.ANALYSES: [
+                {
+                    "webid": "1",
+                    "time": "2024-02-29T12:50:03+01:00",
+                    "runs": [
+                        {
+                            "detection": "clean",
+                            "error": None,
+                            "system": "w10x64_office",
+                            "yara": False,
+                            "sigma": False,
+                            "snort": False,
+                            "score": 0,
+                        }
+                    ],
+                    "tags": [],
+                    "encrypted": False,
+                    "analysisid": "3673217",
+                    "duration": 397,
+                    "md5": "",
+                    "sha1": "",
+                    "sha256": "",
+                    "filename": "https://www.google.com",
+                    "scriptname": "browseurl.jbs",
+                    "status": "finished",
+                    "comments": "",
+                    "classification": "",
+                    "threatname": "",
+                    "score": 0,
+                    "detection": "clean",
+                    "has_malwareconfig": False,
+                }
+            ]
+        }
         validate(response, self.action.output.schema)
         self.assertEqual(response, expected)

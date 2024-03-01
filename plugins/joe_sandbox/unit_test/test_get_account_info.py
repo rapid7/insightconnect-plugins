@@ -21,6 +21,12 @@ class TestGetAccountInfo(TestCase):
         mocked_request(mock_get)
         response = self.action.run()
 
-        expected = {Output.TYPE: "", Output.QUOTA: {}}
+        expected = {
+            Output.TYPE: "desktop",
+            Output.QUOTA: {
+                "daily": {"current": 0, "limit": 30, "remaining": 30},
+                "monthly": {"current": 0, "limit": 30, "remaining": 30},
+            },
+        }
         validate(response, self.action.output.schema)
         self.assertEqual(response, expected)

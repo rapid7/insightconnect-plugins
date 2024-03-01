@@ -1,5 +1,5 @@
 {
-  "systems": [
+  "data": [
     {
       "name": "w10x64_office",
       "description": "Windows 10 64 bit (version 1803) with <b>Office 2016</b> Adobe Reader DC 19, Chrome 104, Firefox 63, Java 8.171, Flash 30.0.0.113",
