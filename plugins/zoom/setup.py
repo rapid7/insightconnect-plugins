@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="zoom-rapid7-plugin",
-      version="4.1.6",
+      version="4.1.7",
       description="Trigger workflows on user activity while also managing your users with the Zoom plugin",
       author="rapid7",
       author_email="",
