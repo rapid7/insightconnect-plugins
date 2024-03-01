@@ -29,7 +29,7 @@ class MockResponse:
         self.status_code = status_code
         self.text = json.dumps(self.json())
         self.ok = True
-        self.iter_content = json.dumps(self.json())
+        # self.iter_content = json.dumps(self.json)
 
     def json(self):
         with open(
