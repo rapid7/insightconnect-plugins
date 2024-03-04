@@ -24,7 +24,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|True|User or Organization Key from the Insight Platform|None|a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99|
-|region|string|United States|True|Region|['United States', 'United States 2', 'United States 3', 'Europe', 'Canada', 'Australia', 'Japan']|United States|
+|region|string|United States|True|Region|["United States", "United States 2", "United States 3", "Europe", "Canada", "Australia", "Japan"]|United States|
   
 Example input:
 
@@ -42,7 +42,7 @@ Example input:
 
 #### Check Agent Status
   
-Get the online status and quarantine state of an agent
+This action is used to get the online status and quarantine state of an agent
 
 ##### Input
 
@@ -100,19 +100,185 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|agent|agent|True|Agent information|{}|
+|agent|agent|True|Agent information|{"id":"ExampleID","platform":"windows","publicIpAddress":"192.168.0.1","host":{"vendor":"Microsoft","version":"10","description":"ExampleDescription","hostNames":[{"name":"ExampleHostname"}],"primaryAddress":{"ip":"12.43.13.43","mac":""},"uniqueIdentity":[],"attributes":[]},"agent_info":{"agentSemanticVersion":"ExampleVersion","agentStatus":"STALE","quarantineState":{"currentState":"QUARANTINED"}}}|
   
 Example output:
 
 ```
 {
-  "agent": {}
+  "agent": {
+    "agent_info": {
+      "agentSemanticVersion": "ExampleVersion",
+      "agentStatus": "STALE",
+      "quarantineState": {
+        "currentState": "QUARANTINED"
+      }
+    },
+    "host": {
+      "attributes": [],
+      "description": "ExampleDescription",
+      "hostNames": [
+        {
+          "name": "ExampleHostname"
+        }
+      ],
+      "primaryAddress": {
+        "ip": "12.43.13.43",
+        "mac": ""
+      },
+      "uniqueIdentity": [],
+      "vendor": "Microsoft",
+      "version": "10"
+    },
+    "id": "ExampleID",
+    "platform": "windows",
+    "publicIpAddress": "192.168.0.1"
+  }
+}
+```
+
+#### Get All Agents by IP Address
+  
+This action is used to find all agents that share the same public or private IP address and display details about them
+
+**WARNING!**
+
+Please note that taking actions such as automatically quarantining machines (`Quarantine` action) based on the response of this action may result in the isolation of all machines that share the same public IP address. This action should be taken at your own risk.
+
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|ip_address|string|None|True|The public or private IP address for all the agents to be searched for|None|192.168.0.1|
+  
+Example input:
+
+```
+{
+  "ip_address": "192.168.0.1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|agents|[]agent|True|The list of all found agents|[[{"id":"ExampleID1","platform":"linux","publicIpAddress":"192.168.0.2","host":{"vendor":"Ubuntu","version":"20.04","description":"ExampleDescription1","hostNames":[{"name":"ExampleHostname1"}],"primaryAddress":{"ip":"10.20.30.40","mac":"00:11:22:33:44:55"},"uniqueIdentity":["1234567890"],"attributes":["attribute1","attribute2"]},"agent_info":{"agentSemanticVersion":"ExampleVersion1","agentStatus":"ACTIVE","quarantineState":{"currentState":"QUARANTINED"}}},{"id":"ExampleID2","platform":"mac","publicIpAddress":"192.168.0.3","host":{"vendor":"Apple","version":"11","description":"ExampleDescription2","hostNames":[{"name":"ExampleHostname2"}],"primaryAddress":{"ip":"50.60.70.80","mac":"AA:BB:CC:DD:EE:FF"},"uniqueIdentity":["0987654321"],"attributes":["attribute3","attribute4"]},"agent_info":{"agentSemanticVersion":"ExampleVersion2","agentStatus":"INACTIVE","quarantineState":{"currentState":"QUARANTINED"}}},{"id":"ExampleID3","platform":"windows","publicIpAddress":"192.168.0.4","host":{"vendor":"Microsoft","version":"11","description":"ExampleDescription3","hostNames":[{"name":"ExampleHostname3"}],"primaryAddress":{"ip":"90.80.70.60","mac":"11:22:33:44:55:66"},"uniqueIdentity":["2468135790"],"attributes":["attribute5","attribute6"]},"agent_info":{"agentSemanticVersion":"ExampleVersion3","agentStatus":"STALE","quarantineState":{"currentState":"QUARANTINED"}}}]]|
+  
+Example output:
+
+```
+{
+  "agents": [
+    [
+      {
+        "agent_info": {
+          "agentSemanticVersion": "ExampleVersion1",
+          "agentStatus": "ACTIVE",
+          "quarantineState": {
+            "currentState": "QUARANTINED"
+          }
+        },
+        "host": {
+          "attributes": [
+            "attribute1",
+            "attribute2"
+          ],
+          "description": "ExampleDescription1",
+          "hostNames": [
+            {
+              "name": "ExampleHostname1"
+            }
+          ],
+          "primaryAddress": {
+            "ip": "10.20.30.40",
+            "mac": "00:11:22:33:44:55"
+          },
+          "uniqueIdentity": [
+            "1234567890"
+          ],
+          "vendor": "Ubuntu",
+          "version": "20.04"
+        },
+        "id": "ExampleID1",
+        "platform": "linux",
+        "publicIpAddress": "192.168.0.2"
+      },
+      {
+        "agent_info": {
+          "agentSemanticVersion": "ExampleVersion2",
+          "agentStatus": "INACTIVE",
+          "quarantineState": {
+            "currentState": "QUARANTINED"
+          }
+        },
+        "host": {
+          "attributes": [
+            "attribute3",
+            "attribute4"
+          ],
+          "description": "ExampleDescription2",
+          "hostNames": [
+            {
+              "name": "ExampleHostname2"
+            }
+          ],
+          "primaryAddress": {
+            "ip": "50.60.70.80",
+            "mac": "AA:BB:CC:DD:EE:FF"
+          },
+          "uniqueIdentity": [
+            "0987654321"
+          ],
+          "vendor": "Apple",
+          "version": "11"
+        },
+        "id": "ExampleID2",
+        "platform": "mac",
+        "publicIpAddress": "192.168.0.3"
+      },
+      {
+        "agent_info": {
+          "agentSemanticVersion": "ExampleVersion3",
+          "agentStatus": "STALE",
+          "quarantineState": {
+            "currentState": "QUARANTINED"
+          }
+        },
+        "host": {
+          "attributes": [
+            "attribute5",
+            "attribute6"
+          ],
+          "description": "ExampleDescription3",
+          "hostNames": [
+            {
+              "name": "ExampleHostname3"
+            }
+          ],
+          "primaryAddress": {
+            "ip": "90.80.70.60",
+            "mac": "11:22:33:44:55:66"
+          },
+          "uniqueIdentity": [
+            "2468135790"
+          ],
+          "vendor": "Microsoft",
+          "version": "11"
+        },
+        "id": "ExampleID3",
+        "platform": "windows",
+        "publicIpAddress": "192.168.0.4"
+      }
+    ]
+  ]
 }
 ```
 
 #### Quarantine
   
-Quarantine or unquarantine on a device
+This action is used to quarantine or unquarantine on a device
 
 ##### Input
 
@@ -148,7 +314,7 @@ Example output:
 
 #### Quarantine Multiple
   
-Quarantine or unquarantine multiple hosts
+This action is used to quarantine or unquarantine multiple hosts
 
 ##### Input
 
@@ -162,7 +328,10 @@ Example input:
 
 ```
 {
-  "agent_array": "abcdef123",
+  "agent_array": [
+    "abcdef123",
+    "abcdef123"
+  ],
   "interval": 604800,
   "quarantine_state": true
 }
@@ -179,11 +348,15 @@ Example output:
 
 ```
 {
-  "completed": "abcdef123",
-  "failed": {
-    "error": "Hostname could not be found",
-    "hostname": "abcdef123"
-  }
+  "completed": [
+    "abcdef123"
+  ],
+  "failed": [
+    {
+      "error": "Hostname could not be found",
+      "hostname": "abcdef123"
+    }
+  ]
 }
 ```
 ### Triggers
@@ -193,7 +366,7 @@ Example output:
   
 *This plugin does not contain any tasks.*
 
-### Custom Output Types
+### Custom Types
   
 **attribute**
 
@@ -271,6 +444,7 @@ Example output:
 
 # Version History
 
+* 2.1.0 - Updated SDK to the latest version | New action added `Get All Agents by IP Address`
 * 2.0.1 - Update `Connection Test` to identify if `Region` is incorrect  | Update Plugin runtime to version 5
 * 2.0.0 - Update action `Quarantine Multiple` outputs to Completed and Failed, removed All Operations Successful, replaced output Agent IDs with Hostname  
 * 1.2.0 - New action: `Quarantine Multiple`  
