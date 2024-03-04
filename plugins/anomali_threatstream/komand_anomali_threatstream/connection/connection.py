@@ -3,7 +3,8 @@ from .schema import ConnectionSchema
 
 # Custom imports below
 import requests
-from requests import Session, Request
+import json
+from requests import Session, Request, Response
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import logging
 from copy import copy
@@ -45,13 +46,32 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def send(self, request):
         try:
-            return self.session.send(request.prepare(), verify=request.verify)
-        except Exception as e:
-            raise PluginException(
-                cause=f"The following exception was raised: {self.hide_api_key(str(e))}",
-                assistance="Please verify your ThreatStream server status and try again. "
-                "If the issue persists please contact support.",
-            ) from None  # Suppresses the exception context from the original error that exposes API key
+            response = self.session.send(request.prepare(), verify=request.verify)
+            self.logger.info(response)
+            self.response_handler(response)
+            return response
+        except json.decoder.JSONDecodeError as exception:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=exception)
+        except requests.exceptions.HTTPError as exception:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=exception)
+
+    @staticmethod
+    def response_handler(response: Response) -> Response:
+        if response.status_code == 400:
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
+        if response.status_code == 401:
+            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
+        if response.status_code == 403:
+            raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
+        if response.status_code == 404:
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
+        if 400 <= response.status_code < 500:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+        if response.status_code >= 500:
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+        if 200 <= response.status_code < 300:
+            return response
+        raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
 
     @staticmethod
     def hide_api_key(string):

@@ -37,7 +37,8 @@ class GetSandboxReport(insightconnect_plugin_runtime.Action):
             js = response.json()
         except JSONDecodeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
-
+        print("REPORT")
+        print(js)
         try:
             domains_detail = js["results"]["network"]["domains"]
             info = js["results"]["info"]
@@ -62,5 +63,4 @@ class GetSandboxReport(insightconnect_plugin_runtime.Action):
             "info": info,
             "domains": domains,
         }
-
         return {Output.SANDBOX_REPORT: report}

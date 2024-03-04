@@ -1,0 +1,25 @@
+{
+  "results": [
+    {
+      "classification": "private",
+      "confidence": "17",
+      "date_first": "2019-10-16T16:12:48",
+      "date_last": "2019-10-21T14:01:39",
+      "detail": "Delivery",
+      "detail2": "imported by user 121",
+      "domain": "window.google",
+      "email": "user@example.com",
+      "id": 112879000,
+      "import_session_id": 205,
+      "itype": "apt_domain",
+      "maltype": "Delivery",
+      "resource_uri": "/api/v1/intelligence/112879000/",
+      "severity": "very-high",
+      "source": "user@example.com",
+      "source_feed_id": 205,
+      "srcip": "127.0.53.53",
+      "state": "active",
+      "update_id": "272270002"
+    }
+  ]
+}
