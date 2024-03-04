@@ -364,7 +364,7 @@ Any situation in which you provide a ConditionExpression and it causes the job t
 
 # Version History
 
-* 3.1.1 - Updated to latest SDK | Updated plugin packages
+* 3.1.1 - Updated to the latest SDK to address memory usage issues | Updated plugin packages
 * 3.1.0 - Add Get Item action 
 * 3.0.2 - Fix number should be a string for boto3 input bug
 * 3.0.1 - Validate exclusive_start_key parameter for Scan action
