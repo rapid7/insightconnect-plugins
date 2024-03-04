@@ -16,7 +16,7 @@ resources:
   vendor_url: https://www.amazon.com
 sdk:
   type: slim
-  version: 5.4.3
+  version: 5.4.4
   user: nobody
 tags:
   - dynamodb
