@@ -2,7 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import DeleteSshInput, DeleteSshOutput, Input, Output, Component
 
 # Custom imports below
-import requests
 
 
 class DeleteSsh(insightconnect_plugin_runtime.Action):
@@ -15,14 +14,9 @@ class DeleteSsh(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        request_url = "%s/users/%s/keys/%s" % (
-            self.connection.url,
-            params.get(Input.ID),
-            params.get(Input.KEY_ID),
-        )
-        try:
-            response= requests.delete(request_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)  # noqa: B501
-        except requests.exceptions.RequestException as error:  # This is the correct syntax
-            self.logger.error(error)
-            raise Exception(error)
-        return {Output.STATUS: response.ok}
+        # TODO - Change their type to string
+        user_id = params.get(Input.ID)
+        key_id = params.get(Input.KEY_ID)
+        self.connection.client.delete_ssh(user_id=user_id, key_id=key_id)
+
+        return {Output.STATUS: True}

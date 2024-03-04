@@ -15,12 +15,6 @@ class UnblockUser(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        request_url = "%s/users/%s/unblock" % (self.connection.url, params.get("id"))
-
-        try:
-            r = requests.post(request_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)  # noqa: B501
-        except requests.exceptions.RequestException as error:  # This is the correct syntax
-            self.logger.error(error)
-            raise Exception(error)
-
-        return {Output.STATUS: r.ok}
+        user_id = params.get(Input.ID)
+        self.connection.client.unblock_user(user_id=user_id)
+        return {Output.STATUS: True}

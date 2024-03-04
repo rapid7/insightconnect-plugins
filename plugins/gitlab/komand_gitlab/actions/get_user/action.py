@@ -2,8 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import GetUserInput, GetUserOutput, Input, Output, Component
 
 # Custom imports below
-import json
-import requests
 
 
 class GetUser(insightconnect_plugin_runtime.Action):
@@ -16,33 +14,22 @@ class GetUser(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        r_url = "%s/users/%s" % (self.connection.url, params.get("id"))
+        user_id = params.get(Input.ID)
+        response = self.connection.client.get_user(user_id=user_id)
 
-        try:
-            r = requests.get(r_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)  # noqa: B501
-            if not r.ok:
-                self.logger.error("Run: Error: ID Does not exist")
-                raise Exception("Run: Error: ID Does not exist")
-                return
-            u = json.loads(json.dumps(r.json()))
-            user_obj = {
-                "avatar_url": u["avatar_url"] or "None",
-                "bio": u["bio"] or "None",
-                "created_at": u["created_at"] or "None",
-                "id": u["id"] or -1,
-                "linkedin": u["linkedin"] or "None",
-                "location": u["location"] or "None",
-                "name": u["name"] or "None",
-                "organization": u["organization"] or "None",
-                "skype": u["skype"] or "None",
-                "state": u["state"] or "None",
-                "twitter": u["twitter"] or "None",
-                "username": u["username"] or "None",
-                "web_url": u["web_url"] or "None",
-                "website_url": u["website_url"] or "None",
-            }
-        except requests.exceptions.RequestException as e:  # This is the correct syntax
-            self.logger.error(e)
-            raise Exception(e)
-
-        return user_obj
+        return {
+            Output.AVATAR_URL: response.get("avatar_url", "None"),
+            Output.BIO: response.get("bio", "None"),
+            Output.CREATED_AT: response.get("created_at", "None"),
+            Output.ID: response.get("id", -1),
+            Output.LINKEDIN: response.get("linkedin", "None"),
+            Output.LOCATION: response.get("location", "None"),
+            Output.NAME: response.get("name", "None"),
+            Output.ORGANIZATION: response.get("organization", "None"),
+            Output.SKYPE: response.get("skype", "None"),
+            Output.STATE: response.get("state", "None"),
+            Output.TWITTER: response.get("twitter", "None"),
+            Output.USERNAME: response.get("username", "None"),
+            Output.WEB_URL: response.get("web_url", "None"),
+            Output.WEBSITE_URL: response.get("website_url", "None"),
+        }

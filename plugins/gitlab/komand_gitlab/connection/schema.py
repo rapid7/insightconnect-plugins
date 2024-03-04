@@ -5,6 +5,7 @@ import json
 
 class Input:
     CREDENTIALS = "credentials"
+    SSL_VERIFY = "ssl_verify"
     URL = "url"
 
 
@@ -20,15 +21,22 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "Enter GitLab username and password (or token)",
       "order": 1
     },
+    "ssl_verify": {
+      "type": "boolean",
+      "title": "SSL Verify",
+      "description": "Toggle SSL verify on or off for requests",
+      "order": 3
+    },
     "url": {
       "type": "string",
       "title": "Host URL",
-      "description": "Host URL e.g. https://gitlab.example.com:8000/api/v4/",
+      "description": "Host URL",
       "order": 2
     }
   },
   "required": [
     "credentials",
+    "ssl_verify",
     "url"
   ],
   "definitions": {

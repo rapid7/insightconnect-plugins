@@ -16,23 +16,17 @@ class ListSsh(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        r_url = "%s/users/%s/keys" % (self.connection.url, params.get("id"))
+        user_id = params.get(Input.ID)
+        response = self.connection.client.list_ssh(user_id)
+
         ssh_keys = []
+        for key in response:
+            key_obj = {
+                "created_at": key.get("created_at", ""),
+                "id": key.get("id", ""),
+                "key": key.get("key", ""),
+                "title": key.get("title", "")
+            }
+            ssh_keys.append(key_obj)
 
-        try:
-            r = requests.get(r_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)  # noqa: B501
-        except requests.exceptions.RequestException as e:  # This is the correct syntax
-            self.logger.error(e)
-            raise Exception(e)
-        if r.ok:
-            for key in json.loads(json.dumps(r.json())):
-                key_obj = {
-                    "created_at": key["created_at"],
-                    "id": key["id"],
-                    "key": key["key"],
-                    "title": key["title"],
-                }
-                ssh_keys.append(key_obj)
-
-            return {Output.SSH_KEYS: ssh_keys}
-        raise Exception(r.text)
+        return {Output.SSH_KEYS: ssh_keys}

@@ -2,7 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import BlockUserInput, BlockUserOutput, Input, Output, Component
 
 # Custom imports below
-import requests
 
 
 class BlockUser(insightconnect_plugin_runtime.Action):
@@ -15,13 +14,7 @@ class BlockUser(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        request_url = f"{self.connection.url}/users/{params.get(Input.ID)}/block"
-
-        try:
-            response = requests.post(request_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)  # noqa: B501
-        except requests.exceptions.RequestException as error:  # This is the correct syntax
-            self.logger.error(error)
-            raise Exception(error)
-
-        return {Output.STATUS: response.ok}
-
+        # TODO - Change the type to string
+        user_id = params.get(Input.ID)
+        self.connection.client.block_user(user_id=user_id)
+        return {Output.STATUS: True}

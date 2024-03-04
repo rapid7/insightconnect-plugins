@@ -187,8 +187,15 @@ connection:
   url:
     title: Host URL
     type: string
-    description: Host URL e.g. https://gitlab.example.com:8000/api/v4/
+    description: Host URL
+    example: https://gitlab.example.com:8000/api/v4/
     required: true
+  ssl_verify:
+    title: SSL Verify
+    description: Toggle SSL verify on or off for requests
+    type: boolean
+    example: True
+    required: True
 actions:
   delete_ssh:
     title: Delete User SSH Key
