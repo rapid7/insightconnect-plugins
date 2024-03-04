@@ -105,7 +105,7 @@ The default output variables are `result1` and `result2`, both of type `string`.
 | :--- | :--- | :--- | :--- | :--- |
 |result1|string|False|Sample output result1 (delete or edit)|example output 1|
 |result2|string|False|Sample output result2 (delete or edit)|example output 2|
-
+  
 Make sure you edit the output variables in the user interface so that they match the keys returned by the `run()` function. This allows you to pass the variables to other steps using the names chosen by the user.
 
 Example output:
@@ -134,6 +134,7 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 
 # Version History
 
+* 4.0.9 - Updated the SDK to the latest version to address memory usage issues
 * 4.0.8 - Updated the SDK to latest version | Fix issue where input argument was too long
 * 4.0.7 - Updated the SDK | Updated Python version to `3.9.18` | Added handler to run function separately
 * 4.0.6 - Added empty `__init__.py` file to `unit_test` folder | Refreshed with new tooling
@@ -163,5 +164,5 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 
 ## References
   
-* [Python 3 Language Reference](https://docs.python.org/3/reference/index.html) 
+* [Python 3 Language Reference](https://docs.python.org/3/reference/index.html)
 * [InsightConnect Python Plugin Guide](https://docs.rapid7.com/insightconnect/python-2-or-3-script/)
