@@ -7,12 +7,12 @@ vendor: rapid7
 support: rapid7
 status: []
 description: Python is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.18 and its standard library as well as the following 3rd party libraries
-version: 4.0.8
+version: 4.0.9
 connection_version: 4
 supported_versions: ["Python 3.9.18"]
 sdk:
   type: slim
-  version: 5.3.2
+  version: 5.4.4
   user: root
   packages:
     - libxslt-dev
@@ -25,10 +25,10 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   docs_url: https://docs.rapid7.com/insightconnect/python-2-or-3-script/
 tags:
- - python
- - python3
- - scripting
- - utilities
+   - python
+   - python3
+   - scripting
+   - utilities
 hub_tags:
   use_cases: [data_utility]
   keywords: [python, scripting]
@@ -37,16 +37,16 @@ key_features: ["Run a Python 3 Script to securely orchestrate, automate, and res
 references: ["[Python 3 Language Reference](https://docs.python.org/3/reference/index.html)", "[InsightConnect Python Plugin Guide](https://docs.rapid7.com/insightconnect/python-2-or-3-script/)"]
 connection:
   modules:
-    title: "Third-Party Modules"
-    description: "List of third-party modules to install for use in the supplied Python script"
-    required: false
+    title: Third-Party Modules
+    description: List of third-party modules to install for use in the supplied Python script
     type: "[]string"
+    required: false
     example: '["pandas", "numpy"]'
   timeout:
-    title: "Timeout"
-    description: "Timeout (in seconds) for installing third-party modules"
-    required: true
+    title: Timeout
+    description: Timeout (in seconds) for installing third-party modules
     type: integer
+    required: true
     default: 60
     example: 120
   script_secret_key:
