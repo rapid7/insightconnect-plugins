@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rest
 title: HTTP Requests
 description: The HTTP Requests plugin makes it easy to integrate with RESTful services
-version: 6.0.5
+version: 6.0.6
 connection_version: 6
 vendor: rapid7
 support: community
@@ -18,12 +18,12 @@ key_features: ["Make RESTful API calls", "Quickly integrate with 3rd party API's
 requirements: ["A RESTFUL HTTP/HTTPS resource and supported authentication, if any"]
 references: ["https://requests.readthedocs.io/en/latest/", "[InsightConnect HTTP Request Plugin Guide](https://docs.rapid7.com/insightconnect/http-requests)"]
 tags:
-- rest
-- request
-- http
-- rpc
-- microservices
-- api
+  - rest
+  - request
+  - http
+  - rpc
+  - microservices
+  - api
 hub_tags:
   use_cases: [data_utility]
   keywords: [rest, request, http, rpc, microservices, api]
@@ -31,7 +31,7 @@ hub_tags:
 enable_cache: true
 sdk:
   type: full
-  version: 5
+  version: 5.4.4
   user: root
 connection:
   base_url:
