@@ -61,4 +61,3 @@ class CreateIssue(insightconnect_plugin_runtime.Action):
         response = self.connection.client.create_issue(project_id=project_id, params=issue_params)
 
         return {}
-

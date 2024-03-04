@@ -25,7 +25,7 @@ class ListSsh(insightconnect_plugin_runtime.Action):
                 "created_at": key.get("created_at", ""),
                 "id": key.get("id", ""),
                 "key": key.get("key", ""),
-                "title": key.get("title", "")
+                "title": key.get("title", ""),
             }
             ssh_keys.append(key_obj)
 
