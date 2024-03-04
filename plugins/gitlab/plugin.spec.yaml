@@ -9,17 +9,21 @@ status: []
 description: GitLab plugin allows user management and issue management in Gitlab
 version: 1.1.0
 connection_version: 1
+sdk:
+  type: slim
+  version: 5.4.4
+  user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/gitlab
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.gitlab.com
 tags:
-- gitlab
-- version control
-- repository
-- manage
-- project
-- snippet
+  - gitlab
+  - version control
+  - repository
+  - manage
+  - project
+  - snippet
 hub_tags:
   use_cases: [user_management]
   keywords: [gitlab, version control, repository, manage, project, snippet]
