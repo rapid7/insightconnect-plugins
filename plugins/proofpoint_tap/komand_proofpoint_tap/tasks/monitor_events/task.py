@@ -59,7 +59,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
 
             if not state or not last_collection_date:
                 task_start = "First run... "
-                first_time = max_allowed_lookback
+                first_time = now - timedelta(hours=1)
                 if backfill_date:
                     first_time = datetime(**backfill_date, tzinfo=timezone.utc)  # PLGN-727: allow backfill
                     task_start += f"Using custom value of {backfill_date}"
