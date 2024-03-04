@@ -327,7 +327,7 @@ This action is used to add or remove an object from an Active Directory group
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|add_remove|string|None|True|Add or remove the group|['add', 'remove']|add|
+|add_remove|string|None|True|Add or remove the group|["add", "remove"]|add|
 |distinguished_name|string|None|True|The distinguished name of the object whose membership will be modified|None|CN=user,OU=domain_users,DC=mydomain,DC=com|
 |group_dn|string|None|True|The Distinguished Name of the group to add or remove|None|CN=group_name,OU=domain_groups,DC=example,DC=com|
   
@@ -760,6 +760,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 9.0.2 - Updated the SDK to the latest version to address memory usage issues
 * 9.0.1 - Fix problem where some ASCII characters were not escaped properly
 * 9.0.0 - Action: `Disable User` & `Enable User` - Rename title of actions from `Disable` & `Enable` to `Disable Users` & `Enable Users` on the front-end.
 * 8.0.0 - Update actions Enable Users and Enable Users to add outputs Completed and Failed and remove output All Operations Succeeded
