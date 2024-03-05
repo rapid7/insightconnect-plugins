@@ -1,6 +1,8 @@
 # Description
 
-Joe Sandbox Cloud executes files and URLs fully automated in a controlled environment and monitors the behavior of applications and the operating system for suspicious activities
+[Joe Sandbox](https://www.joesecurity.org) executes files and URLs fully automated in a controlled environment and monitors the behavior of applications and the operating system for suspicious activities.
+
+This plugin supports Joe Sandbox Cloud and Joe Sandbox (on-premise) instances and utilizes the [Joe Sandbox API](https://github.com/joesecurity/jbxapi).
 
 # Key Features
   
@@ -691,12 +693,20 @@ Example output:
 *There is no troubleshooting for this plugin.*
 
 # Version History
-  
-*This plugin does not contain a version history.*
+ 
+* 2.0.0 - Update `jbxapi` dependency | `List Keyboard Layouts` - Renamed to `List Languages and Locales` | Updated SDK 
+* 1.0.4 - Add extra optional input for Submit Sample action
+* 1.0.3 - Add example inputs
+* 1.0.2 - Fix misspelling in error message | Remove generic "automation" keyword
+* 1.0.1 - New spec and help.md format for the Extension Library
+* 1.0.0 - Initial plugin
 
 # Links
 
+* [Joe Sandbox](https://www.joesecurity.org)
 
 ## References
-  
-*This plugin does not contain any references.*
+
+* [Joe Sandbox API](https://jbxcloud.joesecurity.org/userguide?sphinxurl=usage%2Fwebapi.html)
+* [Joe Sandbox API wrapper](https://github.com/joesecurity/jbxapi)
+* [Report formats](https://jbxcloud.joesecurity.org/userguide?sphinxurl=usage/reportformats.html)
