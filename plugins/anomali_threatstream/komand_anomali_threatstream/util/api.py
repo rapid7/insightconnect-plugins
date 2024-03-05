@@ -38,11 +38,7 @@ class API(object):
         if response.status_code == 400:
             raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
         if response.status_code == 401:
-            raise PluginException(
-                cause="Invalid username or password provided.",
-                assistance="Please check your credentials and ensure the necessary permissions have been granted.",
-                data=response.text
-            )
+            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.text)
         if response.status_code == 403:
             raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
         if response.status_code == 404:

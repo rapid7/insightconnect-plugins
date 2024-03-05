@@ -9,6 +9,7 @@ from copy import copy
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from ..util.api import API
 
+
 class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
@@ -28,7 +29,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             url=f"{threatstream_url}/api/v1",
             verify=params.get("ssl_verify"),
             params={"username": username, "api_key": api_key},
-            logger=self.logger
+            logger=self.logger,
         )
         # Set up the base request
 

@@ -18,7 +18,6 @@ class TestGetObservables(TestCase):
     def setUpClass(cls) -> None:
         cls.action = Util.default_connector(GetObservables())
 
-
     @parameterized.expand(
         [
             [
@@ -40,42 +39,42 @@ class TestGetObservables(TestCase):
                 "The server is unable to process the request.",
                 "Verify your plugin input is correct and not malformed and try again. If the issue persists, "
                 "please contact support.",
-                "{}"
+                "{}",
             ],
             [
                 "401",
                 Util.read_file_to_dict("inputs/get_observables_401.json.inp"),
-                "Invalid username or password provided.",
-                "Verify your username and password are correct.",
-                "{}"
+                "The account configured in your connection is unauthorized to access this service.",
+                "Verify the permissions for your account and try again.",
+                "{}",
             ],
             [
                 "403",
                 Util.read_file_to_dict("inputs/get_observables_403.json.inp"),
                 "Invalid API key provided.",
                 "Verify your API key configured in your connection is correct.",
-                "{}"
+                "{}",
             ],
             [
                 "404",
                 Util.read_file_to_dict("inputs/get_observables_404.json.inp"),
                 "Invalid or unreachable endpoint provided.",
                 "Verify the URLs or endpoints in your configuration are correct.",
-                "{}"
+                "{}",
             ],
             [
                 "409",
                 Util.read_file_to_dict("inputs/get_observables_409.json.inp"),
                 "Something unexpected occurred.",
                 "Check the logs and if the issue persists please contact support.",
-                "{}"
+                "{}",
             ],
             [
                 "500",
                 Util.read_file_to_dict("inputs/get_observables_500.json.inp"),
                 "Server error occurred",
                 "Verify your plugin connection inputs are correct and not malformed and try again. If the issue persists, please contact support.",
-                "{}"
+                "{}",
             ],
         ]
     )

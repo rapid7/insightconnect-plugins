@@ -1,9 +1,8 @@
 import insightconnect_plugin_runtime
-from .schema import GetObservablesInput, GetObservablesOutput, Component
+from .schema import GetObservablesInput, GetObservablesOutput, Component, Input, Output
 
 # Custom imports below
 from copy import copy
-from json import JSONDecodeError
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -26,7 +25,9 @@ class GetObservables(insightconnect_plugin_runtime.Action):
         # Pagination flag and results placeholder
         self.continue_paging, self.results = True, list()
         # Update the request with the supplied domain, page size, and offset
-        self.request.params.update({"value": "{value}".format(value=params.get("value")), "limit": 1000, "offset": 0})
+        self.request.params.update(
+            {"value": "{value}".format(value=params.get(Input.VALUE)), "limit": 1000, "offset": 0}
+        )
 
         while self.continue_paging:
             response_data = self.connection.api.send(self.request)
@@ -46,4 +47,4 @@ class GetObservables(insightconnect_plugin_runtime.Action):
             self.results.extend(response_data["objects"])
 
         self.results = insightconnect_plugin_runtime.helper.clean(self.results)
-        return {"results": self.results}
+        return {Output.RESULTS: self.results}

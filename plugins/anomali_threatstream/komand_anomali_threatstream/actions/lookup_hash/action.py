@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import LookupHashInput, LookupHashOutput
+from .schema import LookupHashInput, LookupHashOutput, Input, Output
 
 # Custom imports below
 from copy import copy
@@ -16,27 +16,21 @@ class LookupHash(insightconnect_plugin_runtime.Action):
             output=LookupHashOutput(),
         )
 
-        # Copy and update the base request to avoid mutating the original
-        # self.request = copy(self.connection.request)
-        # self.request.url, self.request.method = "/intelligence", "GET"
-        # Pagination flag and results placeholder
-        # self.continue_paging, self.results = True, list()
-
     def run(self, params={}):
-        self.request = copy(self.connection.request)
+        self.request = copy(self.connection.api.request)
         self.request.url, self.request.method = self.request.url + "/intelligence", "GET"
 
         # Pagination flag and results placeholder
         self.continue_paging, self.results = True, list()
         # Update the request with the supplied IP address, page size, and offset
-        self.request.params.update({"md5": params["hash"], "limit": 1000, "offset": 0})
+        self.request.params.update({"md5": params.get(Input.HASH), "limit": 1000, "offset": 0})
 
         while self.continue_paging:
-            response_data = self.connection.send(self.request)
+            response_data = self.connection.api.send(self.request)
 
             try:
                 # Check pagination indicator. A "null" value means no more pages.
-                if not response_data["meta"]["next"]:
+                if not response_data.get("meta", {}).get("next"):
                     self.continue_paging = False
             except KeyError:
                 raise PluginException(
@@ -46,12 +40,8 @@ class LookupHash(insightconnect_plugin_runtime.Action):
                 )
 
             self.request.params["offset"] += 1000
-            self.results.extend(response_data["objects"])
+            self.results.extend(response_data.get("objects"))
 
         self.results = insightconnect_plugin_runtime.helper.clean(self.results)
 
-        return {"results": self.results}
-
-    def test(self):
-        # TODO: Implement test function
-        return {}
+        return {Output.RESULTS: self.results}

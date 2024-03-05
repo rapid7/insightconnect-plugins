@@ -17,14 +17,14 @@ class GetSandboxReport(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        self.request = copy(self.connection.request)
+        self.request = copy(self.connection.api.request)
         report_id = params.get(Input.REPORT_ID)
         self.request.url, self.request.method = (
             f"{self.request.url}/submit/{report_id}/report/",
             "GET",
         )
         self.logger.info(f"Submitting URL to {self.request.url}")
-        response_data = self.connection.send(self.request)
+        response_data = self.connection.api.send(self.request)
 
         print("REPORT")
         print(response_data)

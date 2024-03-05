@@ -3,8 +3,6 @@ from .schema import SubmitUrlInput, SubmitUrlOutput, Input, Output, Component
 
 # Custom imports below
 from copy import copy
-from json.decoder import JSONDecodeError
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class SubmitUrl(insightconnect_plugin_runtime.Action):
@@ -17,7 +15,7 @@ class SubmitUrl(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        self.request = copy(self.connection.request)
+        self.request = copy(self.connection.api.request)
         self.request.url, self.request.method = self.request.url + "/submit/new/", "POST"
 
         platform = params.get(Input.PLATFORM)
@@ -36,11 +34,11 @@ class SubmitUrl(insightconnect_plugin_runtime.Action):
 
         self.request.data = data
         self.logger.info(f"Submitting URL to {self.request.url}")
-        response_data = self.connection.send(self.request)
+        response_data = self.connection.api.send(self.request)
 
         reports = []
-        for os in response_data["reports"].keys():
-            report = response_data["reports"][os]
+        for os in response_data.get("reports", {}).keys():
+            report = response_data.get("reports", {}).get(os)
             report["platform"] = os
             reports.append(report)
-        return {Output.SUCCESS: response_data["success"], Output.REPORTS: reports}
+        return {Output.SUCCESS: response_data.get("success"), Output.REPORTS: reports}
