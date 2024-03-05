@@ -23,6 +23,7 @@ from util import Util
     ),
 )
 @patch("requests.request", side_effect=Util.mock_request)
+@patch("logging.Logger.info")
 class TestMonitorUsers(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -64,8 +65,9 @@ class TestMonitorUsers(TestCase):
     )
     def test_monitor_users(
         self,
-        mock_request: MagicMock,
-        mock_get_time: MagicMock,
+        mocked_logger: MagicMock,
+        _mock_request: MagicMock,
+        _mock_get_time: MagicMock,
         test_name: str,
         current_state: Dict[str, Any],
         expected: Dict[str, Any],
@@ -76,3 +78,65 @@ class TestMonitorUsers(TestCase):
         self.assertEqual(actual_state, expected.get("state"))
         self.assertEqual(has_more_pages, expected.get("has_more_pages"))
         self.assertEqual(status_code, expected.get("status_code"))
+
+        if test_name == "without_state":
+            self.assertTrue(mocked_logger.called)
+            self.assertIn("lookback time of 24 hours", mocked_logger.call_args_list[0][0][0])
+
+    def test_monitor_events_uses_custom_config_for_backfill(self, mocked_logger, _mock_request, _mock_get_time):
+        config = {
+            "lookback": {"year": 2023, "month": 6, "day": 5, "hour": 3, "minute": 45, "second": 0},
+            "cutoff": {"date": {"year": 2023, "month": 6, "day": 5}},
+        }
+
+        # for the first run we should be querying using the `lookback` value until `now` (mocked to 2023).
+        _logs, actual_state, _more_pages, status_code, error = self.action.run({}, {}, config)
+        expected_state = {
+            "last_user_login_collection_timestamp": "2023-07-20 16:21:15.340262+00:00",  # current time
+            "next_user_collection_timestamp": "2023-07-21 16:21:15.340262+00:00",  # current time + 24 hours
+            "last_user_update_collection_timestamp": "2023-07-20 16:21:15.340262+00:00",  # current time
+            "next_user_login_collection_timestamp": "2023-07-20 17:21:15.340262+00:00",  # current time + 1 hours
+            "users_next_page_id": "/01gRO0000087654321-500",  # mocked response gives us next page
+        }
+        self.assertEqual(200, status_code)
+        self.assertEqual(None, error)
+        self.assertDictEqual(actual_state, expected_state)
+
+        self.assertIn("custom lookback", mocked_logger.call_args_list[0][0][0])
+
+        # on the second iteration we then carry on as normal that we query from last poll end time to now
+        mocked_logger.reset_mock()
+        _logs, updated_state, _more_pages, status_code, error = self.action.run({}, expected_state, config)
+        self.assertNotIn("custom lookback", mocked_logger.call_args_list[0][0][0])  # lookback no longer used
+
+        # This means we won't query for user login activity (every hour)
+        for mock_log in mocked_logger.call_args_list:
+            self.assertNotIn("Get user login history", mock_log[0][0])
+        self.assertIn("Get all internal users", mocked_logger.call_args_list[2][0][0])  # we had a next page of users
+
+        # State time for these should not have changed since the last call
+        for state_key in ["next_user_login_collection_timestamp", "next_user_collection_timestamp"]:
+            self.assertEqual(updated_state[state_key], expected_state[state_key])
+
+    def test_monitor_events_uses_custom_config_for_cutoff_override(self, mocked_logger, _mock_request, _mock_get_time):
+        config = {"cutoff": {"hours": 2}}
+        customers_paused_state = {
+            "last_user_login_collection_timestamp": "2023-06-21 16:21:15.340262+00:00",  # last time customer ran this
+            "next_user_collection_timestamp": "2023-06-21 16:21:15.340262+00:00",  # saved next expected
+            "last_user_update_collection_timestamp": "2023-06-20 16:21:15.340262+00:00",  # last time customer ran this
+            "next_user_login_collection_timestamp": "2023-06-20 17:21:15.340262+00:00",  # saved next expected
+        }
+
+        _logs, new_state, _more_pages, _status_code, _error = self.action.run({}, customers_paused_state, config)
+        cut_off_log = "Cut off time being applied: 2023-07-20 14:21:15.340262+00:00"  # now - 2 hours
+        self.assertIn(cut_off_log, mocked_logger.call_args_list[0][0][0])
+
+        # All timestamps should have been moved forward as cut off was applied
+        expected_state = {
+            "last_user_login_collection_timestamp": "2023-07-20 16:21:15.340262+00:00",  # just executed 'now'
+            "next_user_collection_timestamp": "2023-07-21 16:21:15.340262+00:00",  # next expected now + 24 hours
+            "last_user_update_collection_timestamp": "2023-07-20 16:21:15.340262+00:00",  # just executed 'now'
+            "next_user_login_collection_timestamp": "2023-07-20 17:21:15.340262+00:00",  # next expected: now + 1 hour
+        }
+
+        self.assertDictEqual(expected_state, new_state)
