@@ -4,16 +4,16 @@ products: [insightconnect]
 name: rapid7_insight_agent
 title: Rapid7 Insight Agent
 description: Using the Insight Agent plugin from InsightConnect, you can quarantine, unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices across your organization
-version: 2.0.1
+version: 2.1.0
+connection_version: 2
 supported_versions: ["Rapid7 Insight Agent 2023-08-18"]
 vendor: rapid7
 support: rapid7
 status: []
 cloud_ready: true
-connection_version: 2
 sdk:
   type: full
-  version: 5
+  version: 5.4.4
   user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insight_agent
@@ -21,15 +21,15 @@ resources:
   vendor_url: https://www.rapid7.com
   docs_url: https://docs.rapid7.com/insightconnect/insight-agent
 tags:
-- rapid7
-- agent
-- insight
-- edr
-- endpoint
-- detection
-- response
-- idr
-- ivm
+  - rapid7
+  - agent
+  - insight
+  - edr
+  - endpoint
+  - detection
+  - response
+  - idr
+  - ivm
 hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [rapid7, endpoint, incident_response, detection,  insightidr, cloud_enabled]
@@ -226,7 +226,7 @@ actions:
         required: false
   get_agent_details:
     title: Get Agent Details
-    description: This action is used to find and display detailed information about a device
+    description: Find and display detailed information about a device
     input:
       agent:
         title: Agent
@@ -239,7 +239,24 @@ actions:
         title: Agent
         description: Agent information
         type: agent
-        example: {}
+        example: '{"id":"ExampleID","platform":"windows","publicIpAddress":"192.168.0.1","host":{"vendor":"Microsoft","version":"10","description":"ExampleDescription","hostNames":[{"name":"ExampleHostname"}],"primaryAddress":{"ip":"12.43.13.43","mac":""},"uniqueIdentity":[],"attributes":[]},"agent_info":{"agentSemanticVersion":"ExampleVersion","agentStatus":"STALE","quarantineState":{"currentState":"QUARANTINED"}}}'
+        required: true
+  get_all_agents_by_ip:
+    title: Get All Agents by IP Address
+    description: Find all agents that share the same public or private IP address and display details about them
+    input:
+      ip_address:
+        title: IP Address
+        description: The public or private IP address for all the agents to be searched for
+        type: string
+        required: true
+        example: 192.168.0.1
+    output:
+      agents:
+        title: Agents
+        description: The list of all found agents
+        type: "[]agent"
+        example: '[[{"id":"ExampleID1","platform":"linux","publicIpAddress":"192.168.0.2","host":{"vendor":"Ubuntu","version":"20.04","description":"ExampleDescription1","hostNames":[{"name":"ExampleHostname1"}],"primaryAddress":{"ip":"10.20.30.40","mac":"00:11:22:33:44:55"},"uniqueIdentity":["1234567890"],"attributes":["attribute1","attribute2"]},"agent_info":{"agentSemanticVersion":"ExampleVersion1","agentStatus":"ACTIVE","quarantineState":{"currentState":"QUARANTINED"}}},{"id":"ExampleID2","platform":"mac","publicIpAddress":"192.168.0.3","host":{"vendor":"Apple","version":"11","description":"ExampleDescription2","hostNames":[{"name":"ExampleHostname2"}],"primaryAddress":{"ip":"50.60.70.80","mac":"AA:BB:CC:DD:EE:FF"},"uniqueIdentity":["0987654321"],"attributes":["attribute3","attribute4"]},"agent_info":{"agentSemanticVersion":"ExampleVersion2","agentStatus":"INACTIVE","quarantineState":{"currentState":"QUARANTINED"}}},{"id":"ExampleID3","platform":"windows","publicIpAddress":"192.168.0.4","host":{"vendor":"Microsoft","version":"11","description":"ExampleDescription3","hostNames":[{"name":"ExampleHostname3"}],"primaryAddress":{"ip":"90.80.70.60","mac":"11:22:33:44:55:66"},"uniqueIdentity":["2468135790"],"attributes":["attribute5","attribute6"]},"agent_info":{"agentSemanticVersion":"ExampleVersion3","agentStatus":"STALE","quarantineState":{"currentState":"QUARANTINED"}}}]]'
         required: true
   quarantine:
     title: Quarantine
