@@ -16,8 +16,5 @@ class GetAnalysisInfo(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         webid = params.get(Input.WEBID)
-
         analysis = self.connection.api.analysis_info(webid)
-
-        analysis = clean(analysis)
-        return {Output.ANALYSIS: analysis}
+        return {Output.ANALYSIS: clean(analysis)}

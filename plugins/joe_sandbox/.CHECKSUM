@@ -1,6 +1,6 @@
 {
-	"spec": "663f12a7735760616a5b8c0457e05404",
-	"manifest": "31b4a97233aa9b919ea7ee820938e199",
+	"spec": "fc6fdd57f9b08045eb931236c199e5a3",
+	"manifest": "d9a6f0e9e13d521d38573d83e3f232e8",
 	"setup": "f0407b136e81ef2ace16e53ffdbc7ff8",
 	"schemas": [
 		{
@@ -38,6 +38,10 @@
 		{
 			"identifier": "list_countries/schema.py",
 			"hash": "3877a1e4c0add8ca3691a8f4322fb48e"
+		},
+		{
+			"identifier": "list_keyboard_layouts/schema.py",
+			"hash": "ac2014585403ca68b6241210a32edda3"
 		},
 		{
 			"identifier": "list_systems/schema.py",

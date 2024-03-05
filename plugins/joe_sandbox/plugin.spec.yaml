@@ -9,6 +9,7 @@ description: Joe Sandbox Cloud executes files and URLs fully automated in a cont
 version: 2.0.0
 supported_versions: ['Joe Sandbox API v2']
 connection_version: 2
+requirements: ["API Key", "Sandbox server (if not using cloud)"]
 sdk:
   type: slim
   version: 5.4.4
@@ -39,36 +40,50 @@ types:
       title: Name
       description: Name
       type: string
+      example: w10x64_office
     description:
       title: Description
       description: Description
       type: string
+      example: "Windows 10 64 bit (version 1803) with <b>Office 2016</b> Adobe Reader DC 19, Chrome 104, Firefox 63, Java 8.171, Flash 30.0.0.113"
     arch:
       title: Arch
       description: Architecture (one of WINDOWS, MAC, LINUX, IOS, ANDROID)
       type: string
+      example: WINDOWS
     count:
       title: Count
       description: How many systems of given type exist
       type: integer
+      example: 8
+  keyboard_layout:
+    name:
+      title: Name
+      description: Name of the keyboard layout language
+      type: string
+      example: US-English
   country:
     name:
       title: Name
       description: Name of the country
       type: string
+      example: America
   single_quota:
     current:
       title: Current
       description: Current quota
       type: integer
+      example: 20
     limit:
       title: Limit
       description: Limit of quota
       type: integer
+      example: 30
     remaining:
       title: Remaining
       description: Remaining quota
       type: integer
+      example: 30
   full_quota:
     daily:
       title: Daily
@@ -83,97 +98,120 @@ types:
       title: WebID
       description: Web ID
       type: string
+      example: 1234567
   run:
     detection:
       title: Detection
       description: 'Detection, one of: unknown, clean, suspicious, malicious'
       type: string
+      example: clean
     error:
       title: Error
       description: Error description, will not be present if no error was detected
       type: string
+      example: null
     system:
       title: System
       description: System
       type: string
+      example: w10x64_office
     yara:
       title: Yara
       description: Yara
       type: boolean
+      example: false
   submission_info:
     submission_id:
       title: Submission ID
       description: submission ID
       type: string
+      example: 1234567
     name:
       title: name
       description: name
       type: string
+      example: w10x64_office
     time:
       title: time
       description: time
       type: string
+      example: "2012-10-03:10-00"
     status:
       title: Status
       description: Status of the analysis e.g. submitted, running, finished
       type: string
+      example: submitted
     analyses:
       title: analyses
       description: Analysis details
       type: "[]object"
+      example: [{}]
     most_relevant_analysis:
       title: Most Relevant Analysis
       description: Webid, detection & score
       type: "object"
+      example: {}
   analysis:
     webid:
       title: WebID
       description: Web ID
       type: string
+      example: 1234567
     analysisid:
       title: AnalysisID
       description: Analysis ID. Will not be returned if the analysis is not finished
       type: string
+      example: 1234567
     status:
       title: Status
       description: 'Status of the analysis, one of: submitted, running, finished'
       type: string
+      example: submitted
     comments:
       title: Comments
       description: Comments
       type: string
+      example: Suspicious URL here
     filename:
       title: Filename
       description: File name
       type: string
+      example: testfile.txt
     scriptname:
       title: Scriptname
       description: Script name
       type: string
+      example: browseurl.jbs
     time:
       title: Time
       description: Time
       type: date
+      example: 2024-02-29T12:50:03+01:00
     duration:
       title: Duration
       description: Duration of the analysis in seconds (only for finished analyses)
       type: integer
+      example: 397
     md5:
       title: MD5
       description: MD5
       type: string
+      example: 0f0c95e3facb5859ea37e7e033390b1a
     sha1:
       title: SHA1
       description: SHA1
       type: string
+      example: 0f0c95e3facb5859ea37e7e033390b1a
     sha256:
       title: SHA256
       description: SHA256
       type: string
+      example: 0f0c95e3facb5859ea37e7e033390b1a
     tags:
       title: Tags
       description: Tags
       type: "[]string"
+      example: ["malicious", "suspicious"]
     runs:
       title: Runs
       description: Runs
@@ -213,6 +251,16 @@ actions:
         description: Queue size
         type: integer
         example: 5
+        required: true
+  list_keyboard_layouts:
+    title: List Keyboard Layouts
+    description: Retrieve a list of available keyboard layouts for Windows analyzers
+    output:
+      keyboard_layouts:
+        title: Keyboard Layouts
+        description: List of available keyboard layouts
+        type: '[]keyboard_layout'
+        example: "['US-English', 'UK-English']"
         required: true
   list_systems:
     title: List Systems
@@ -535,11 +583,11 @@ actions:
         description: Submission ID from analysis
         type: string
         required: true
-        example: '1001'
+        example: 1001
     output:
       submission_info:
         title: Submission Info
         description: Submission Info
         type: submission_info
         required: true
-        example: '1001'
+        example: 1001

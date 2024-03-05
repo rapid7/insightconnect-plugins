@@ -29,7 +29,6 @@ class MockResponse:
         self.status_code = status_code
         self.text = json.dumps(self.json())
         self.ok = True
-        # self.iter_content = json.dumps(self.json)
 
     def json(self):
         with open(
@@ -43,8 +42,7 @@ def mocked_request(side_effect: Callable) -> None:
     mock_function.Session.request = mock.Mock(side_effect=side_effect)
 
 
-def mock_conditions(method: str, url: str, status_code: int, kwargs) -> MockResponse:
-    # breakpoint()
+def mock_conditions(url: str, status_code: int) -> MockResponse:
     if url == "https://example.com/v2/server/online":
         return MockResponse("check_server_status", status_code)
     if url == "https://example.com/v2/analysis/delete":
@@ -67,14 +65,9 @@ def mock_conditions(method: str, url: str, status_code: int, kwargs) -> MockResp
         return MockResponse("list_systems", status_code)
     if url == "https://example.com/v2/analysis/search":
         return MockResponse("search_analysis", status_code)
-    # if url == "https://example.com/v2/submission/new":
-    #     return MockResponse("submit_cookbook", status_code)
-    # return MockResponse("submit_sample", status_code)
-    # return MockResponse("submit_sample_url", status_code)
-    # return MockResponse("submit_url", status_code)
 
     raise Exception("Unrecognised Endpoint")
 
 
 def mock_request_200(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 200, kwargs)
+    return mock_conditions(args[0], 200)

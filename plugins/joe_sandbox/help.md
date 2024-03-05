@@ -1,8 +1,6 @@
 # Description
 
-[Joe Sandbox](https://www.joesecurity.org) executes files and URLs fully automated in a controlled environment and monitors the behavior of applications and the operating system for suspicious activities.
-
-This plugin supports Joe Sandbox Cloud and Joe Sandbox (on-premise) instances and utilizes the [Joe Sandbox API](https://github.com/joesecurity/jbxapi).
+Joe Sandbox Cloud executes files and URLs fully automated in a controlled environment and monitors the behavior of applications and the operating system for suspicious activities
 
 # Key Features
   
@@ -12,7 +10,7 @@ This plugin supports Joe Sandbox Cloud and Joe Sandbox (on-premise) instances an
 
 # Requirements
   
-* API Key
+* API Key  
 * Sandbox server (if not using cloud)
 
 # Supported Product Versions
@@ -322,6 +320,28 @@ Example output:
 }
 ```
 
+#### List Keyboard Layouts
+  
+This action is used to retrieve a list of available keyboard layouts for Windows analyzers
+
+##### Input
+  
+*This action does not contain any inputs.*
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|keyboard_layouts|[]keyboard_layout|True|List of available keyboard layouts|['US-English', 'UK-English']|
+  
+Example output:
+
+```
+{
+  "keyboard_layouts": "['US-English', 'UK-English']"
+}
+```
+
 #### List Systems
   
 This action is used to retrieve a list of systems on the server
@@ -586,6 +606,12 @@ Example output:
 |Count|integer|None|None|How many systems of given type exist|8|
 |Description|string|None|None|Description|Windows 10 64 bit (version 1803) with <b>Office 2016</b> Adobe Reader DC 19, Chrome 104, Firefox 63, Java 8.171, Flash 30.0.0.113|
 |Name|string|None|None|Name|w10x64_office|
+  
+**keyboard_layout**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Name|string|None|None|Name of the keyboard layout language|US-English|
   
 **country**
 
