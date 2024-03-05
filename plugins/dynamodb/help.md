@@ -17,21 +17,21 @@ Rapid7 InsightConnect.
 * Secret key
 
 # Supported Product Versions
-
-* Amazon DynamoDB 2022-03-11
+  
+* Amazon DynamoDB 2024-02-27
 
 # Documentation
 
 ## Setup
-
-The connection configuration accepts the following parameters:
+  
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |access_key|credential_secret_key|None|True|Access key ID|None|602B2EA0A04B66BEB2C0|
 |region|string|us-east-1|False|Region|None|us-east-1|
 |secret_key|credential_secret_key|None|True|Secret access key|None|9de5069c5afe602b2ea0a04b66beb2c0|
-
+  
 Example input:
 
 ```
@@ -46,59 +46,62 @@ Example input:
 
 ### Actions
 
-#### GetItem
 
-This action is used to the GetItem operation returns a set of attributes for the item with the given primary key.
+#### GetItem
+  
+This action is used to return a set of attributes for the item with the given primary key
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |consistent_read|boolean|None|False|Determines the read consistency model; If set to true, then the operation uses strongly consistent reads; otherwise, the operation uses eventually consistent reads|None|True|
 |expression_attribute_names|object|None|False|One or more substitution tokens for attribute names in an expression|None|{"#P":"Percentile"}|
 |key|object|None|True|A map of attribute names to AttributeValue objects, representing the primary key of the item to retrieve|None|{"CustomerID": {"S":"12345"}}|
 |projection_expression|string|None|False|A string that identifies one or more attributes to retrieve from the specified table or index|None|Description|
-|return_consumed_capacity|string|TOTAL|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|['NONE', 'INDEXES', 'TOTAL']|TOTAL|
+|return_consumed_capacity|string|TOTAL|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|["NONE", "INDEXES", "TOTAL"]|TOTAL|
 |table_name|string|None|True|The table name to search|None|Table-name|
-
+  
 Example input:
 
 ```
 {
-  "consistent_read":true,
-  "expression_attribute_names":{
-    "#P":"Percentile"
+  "consistent_read": true,
+  "expression_attribute_names": {
+    "#P": "Percentile"
   },
-  "key":{
-    "CustomerID":{
-      "S":"12345"
+  "key": {
+    "CustomerID": {
+      "S": "12345"
     }
   },
-  "projection_expression":"Description",
-  "return_consumed_capacity":"TOTAL",
-  "table_name":"Table-name"
+  "projection_expression": "Description",
+  "return_consumed_capacity": "TOTAL",
+  "table_name": "Table-name"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|item|object|True|Output item|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|item|object|True|Output item|{"ClientID": {"S": "2"}}|
+  
 Example output:
+
 ```
 {
   "item": {
-    "ClientID" : {
-      "S": "1234"
+    "ClientID": {
+      "S": "2"
     }
   }
 }
 ```
-#### Insert
 
-This action will insert the provided data into the specified table.
+#### Insert
+  
+This action is used to add the provided data into the specified table
 
 Optionally, you can specify a ConditionExpression which can prevent Dynamo from accepting writes if the conditions
 are met. For example, if you had a primary key of "myid", you could set this to "attribute_not_exist(myid)" to reject
@@ -108,16 +111,16 @@ overwrite the existing record.
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |condition_expression|string|None|False|An optional expression that can be used to reject inserts based on evaluating existing data|None|keytable<>user|
 |expression_attribute_names|object|None|False|One or more substitution tokens for attribute names in an expression|None|{"#P":"Percentile"}|
 |expression_attribute_values|object|None|False|One or more values that can be substituted in an expression|None|{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }|
 |item|object|None|True|The object data to store|None|{"keytable": "login", "e-mail": "user@example.com", "user": "Username"}|
-|return_consumed_capacity|string|TOTAL|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|['NONE', 'INDEXES', 'TOTAL']|TOTAL|
+|return_consumed_capacity|string|TOTAL|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|["NONE", "INDEXES", "TOTAL"]|TOTAL|
 |return_item_collection_metrics|boolean|None|False|Determines whether item collection metrics are returned|None|False|
 |return_values|boolean|None|False|Use ReturnValues if you want to get the item attributes as they appeared before they were updated with the PutItem request|None|False|
 |table_name|string|None|True|The table name to store into|None|Table-name|
-
+  
 Example input:
 
 ```
@@ -138,8 +141,8 @@ Example input:
     }
   },
   "item": {
-    "keytable": "login",
     "e-mail": "user@example.com",
+    "keytable": "login",
     "user": "Username"
   },
   "return_consumed_capacity": "TOTAL",
@@ -151,74 +154,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Success|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
-#### Update
-
-This action will upset the provided data under the specified key (or key pair) for a given table.
-Optionally, you can specify a ConditionExpression which can prevent Dynamo from accepting writes if the conditions
-are met.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|condition_expression|string|None|False|An optional expression that can be used to reject updates based on evaluating existing data|None|keytable<>user|
-|expression_attribute_names|object|None|False|One or more substitution tokens for attribute names in an expression|None|{"#P":"Percentile"}|
-|expression_attribute_values|object|None|False|One or more values that can be substituted in an expression|None|{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }|
-|key|object|None|True|The primary key and optionally the sort key of the object to update. Provided as a pair of key/values|None|{"keytable": "login"}|
-|return_consumed_capacity|string|TOTAL|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|['NONE', 'INDEXES', 'TOTAL']|TOTAL|
-|return_item_collection_metrics|boolean|None|False|Determines whether item collection metrics are returned|None|False|
-|return_values|string|NONE|False|Use ReturnValues if you want to get the item attributes as they appear before or after they are updated|['NONE', 'ALL_OLD', 'UPDATE_OLD', 'ALL_NEW', 'UPDATED_NEW']|ALL_OLD|
-|table_name|string|None|True|The table name to store into|None|Table-name|
-|update_expression|string|None|False|An expression that defines one or more attributes to be updated, the action to be performed on them, and new values for them|None|SET #Y = :y, #AT = :t|
-
-Example input:
-
-```
-{
-  "condition_expression": "keytable<>euser",
-  "expression_attribute_names": {
-    "#P": "Percentile"
-  },
-  "expression_attribute_values": {
-    ":avail": {
-      "S": "Available"
-    },
-    ":back": {
-      "S": "Backordered"
-    },
-    ":disc": {
-      "S": "Discontinued"
-    }
-  },
-  "key": {
-    "keytable": "login"
-  },
-  "return_consumed_capacity": "TOTAL",
-  "return_item_collection_metrics": false,
-  "return_values": "ALL_OLD",
-  "table_name": "Table-name",
-  "update_expression": "SET #Y = :y, #AT = :t"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Success|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Success|True|
+  
 Example output:
 
 ```
@@ -228,15 +167,16 @@ Example output:
 ```
 
 #### Scan
+  
+This action is used to scan the provided table using the metrics you give it to look up any matching data
 
-This action will scan the provided table using the metrics you give it to look up any matching data.
 Optionally, you can provide the name of an index which can be used in lieu of performing a full scan
 It will return the list of objects found, and a count of the records.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |consistent_read|boolean|None|False|Value that determines the read consistency model during the scan|None|False|
 |exclusive_start_key|object|None|False|The primary key of the first item that this operation will evaluate. Follows AttributeValue formatting, please refer to https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html#DynamoDB.Client.scan|None|{"email": {"S": "user@example.com"}}|
 |expression_attribute_names|object|None|False|One or more substitution tokens for attribute names in an expression|None|{"#P":"Percentile"}|
@@ -245,19 +185,21 @@ It will return the list of objects found, and a count of the records.
 |index_name|string|None|False|The index to use. If empty, defaults to a full Scan of the table|None|index-name|
 |limit|integer|100|False|The maximum number of items to evaluate (not necessarily the number of matching items)|None|100|
 |projection_expression|string|None|False|A string that identifies one or more attributes to retrieve from the specified table or index|None|Description|
-|return_consumed_capacity|string|TOTAL|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|['NONE', 'INDEXES', 'TOTAL']|TOTAL|
+|return_consumed_capacity|string|TOTAL|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|["NONE", "INDEXES", "TOTAL"]|TOTAL|
 |segment|integer|None|False|For a parallel Scan request, Segment identifies an individual segment to be scanned by an application worker|None|100|
-|select|string|ALL_ATTRIBUTES|False|The attributes to be returned in the result|['ALL_ATTRIBUTES', 'ALL_PROJECTED_ATTRIBUTES', 'COUNT', 'SPECIFIC_ATTRIBUTES']|ALL_ATTRIBUTES|
+|select|string|ALL_ATTRIBUTES|False|The attributes to be returned in the result|["ALL_ATTRIBUTES", "ALL_PROJECTED_ATTRIBUTES", "COUNT", "SPECIFIC_ATTRIBUTES"]|ALL_ATTRIBUTES|
 |table_name|string|None|True|The table name to search|None|Table-name|
 |total_segments|integer|None|False|For a parallel Scan request, TotalSegments represents the total number of segments into which the Scan operation will be divided|None|100|
-
+  
 Example input:
 
 ```
 {
   "consistent_read": false,
   "exclusive_start_key": {
-    "email": {"S": "user@example.com"}
+    "email": {
+      "S": "user@example.com"
+    }
   },
   "expression_attribute_names": {
     "#P": "Percentile"
@@ -287,53 +229,134 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Count|integer|True|Items count|
-|Items|[]object|True|Database items|
-|ResponseMetadata|ResponseMetadata|False|Response metadata|
-|ScannedCount|integer|False|Scanned count|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|Count|integer|True|Items count|1|
+|Items|[]object|True|Database items|[{"e-mail":"user@example.com","user":"Username","keytable":"login"}]|
+|ResponseMetadata|ResponseMetadata|False|Response metadata|{"RequestId":"b42ec8b47deb2dc75edebd01132d63f8e8d4cd08e5d26d8bd366","HTTPStatusCode":200,"HTTPHeaders":{"server":"Server","date":"Sun, 25 Jul 2021 20:46:19 GMT","content-type":"application/x-amz-json-1.0","content-length":"130","connection":"keep-alive","x-amzn-requestid":"b42ec8b47deb2dc75edebd01132d63f8e8d4cd08e5d26d8bd366","x-amz-crc32":"1592874513"},"RetryAttempts":0}|
+|ScannedCount|integer|False|Scanned count|2|
+  
 Example output:
 
 ```
 {
-  "response": {
-    "Items": [
-      {
-        "e-mail": "user@example.com",
-        "user": "Username",
-        "keytable": "login"
-      }
-    ],
-    "Count": 1,
-    "ScannedCount": 2,
-    "ResponseMetadata": {
-      "RequestId": "b42ec8b47deb2dc75edebd01132d63f8e8d4cd08e5d26d8bd366",
-      "HTTPStatusCode": 200,
-      "HTTPHeaders": {
-        "server": "Server",
-        "date": "Sun, 25 Jul 2021 20:46:19 GMT",
-        "content-type": "application/x-amz-json-1.0",
-        "content-length": "130",
-        "connection": "keep-alive",
-        "x-amzn-requestid": "b42ec8b47deb2dc75edebd01132d63f8e8d4cd08e5d26d8bd366",
-        "x-amz-crc32": "1592874513"
-      },
-      "RetryAttempts": 0
+  "Count": 1,
+  "Items": [
+    {
+      "e-mail": "user@example.com",
+      "keytable": "login",
+      "user": "Username"
     }
-  }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "connection": "keep-alive",
+      "content-length": "130",
+      "content-type": "application/x-amz-json-1.0",
+      "date": "Sun, 25 Jul 2021 20:46:19 GMT",
+      "server": "Server",
+      "x-amz-crc32": "1592874513",
+      "x-amzn-requestid": "b42ec8b47deb2dc75edebd01132d63f8e8d4cd08e5d26d8bd366"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "b42ec8b47deb2dc75edebd01132d63f8e8d4cd08e5d26d8bd366",
+    "RetryAttempts": 0
+  },
+  "ScannedCount": 2
 }
-
 ```
 
+#### Update
+  
+This action is used to update an object in DynamoDB
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|condition_expression|string|None|False|An optional expression that can be used to reject updates based on evaluating existing data|None|keytable<>user|
+|expression_attribute_names|object|None|False|One or more substitution tokens for attribute names in an expression|None|{"#P":"Percentile"}|
+|expression_attribute_values|object|None|False|One or more values that can be substituted in an expression|None|{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }|
+|key|object|None|True|The primary key and optionally the sort key of the object to update. Provided as a pair of key/values|None|{"keytable": "login"}|
+|return_consumed_capacity|string|TOTAL|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|["NONE", "INDEXES", "TOTAL"]|TOTAL|
+|return_item_collection_metrics|boolean|None|False|Determines whether item collection metrics are returned|None|False|
+|return_values|string|NONE|False|Use ReturnValues if you want to get the item attributes as they appear before or after they are updated|["NONE", "ALL_OLD", "UPDATE_OLD", "ALL_NEW", "UPDATED_NEW"]|ALL_OLD|
+|table_name|string|None|True|The table name to store into|None|Table-name|
+|update_expression|string|None|False|An expression that defines one or more attributes to be updated, the action to be performed on them, and new values for them|None|SET #Y = :y, #AT = :t|
+  
+Example input:
+
+```
+{
+  "condition_expression": "keytable<>user",
+  "expression_attribute_names": {
+    "#P": "Percentile"
+  },
+  "expression_attribute_values": {
+    ":avail": {
+      "S": "Available"
+    },
+    ":back": {
+      "S": "Backordered"
+    },
+    ":disc": {
+      "S": "Discontinued"
+    }
+  },
+  "key": {
+    "keytable": "login"
+  },
+  "return_consumed_capacity": "TOTAL",
+  "return_item_collection_metrics": false,
+  "return_values": "NONE",
+  "table_name": "Table-name",
+  "update_expression": "SET #Y = :y, #AT = :t"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Success|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
+### Custom Types
+  
+**HTTPHeaders**
 
-### Custom Output Types
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Connection|string|None|False|Connection|None|
+|Content-Length|string|None|False|Content-length|None|
+|Content-Type|string|None|False|Content-type|None|
+|Date|string|None|False|Date|None|
+|Server|string|None|False|Server|None|
+|X-Amz-Crc32|string|None|False|X-amz-crc32|None|
+|X-Amzn-RequestID|string|None|False|X-amzn-requestID|None|
+  
+**ResponseMetadata**
 
-_This plugin does not contain any custom output types._
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|HTTP Headers|HTTPHeaders|None|False|HTTP headers|None|
+|HTTP Status Code|integer|None|False|HTTP status code|None|
+|Request ID|string|None|False|Request ID|None|
+|Retry Attempts|integer|None|False|Retry attempts|None|
+
 
 ## Troubleshooting
 
@@ -341,6 +364,7 @@ Any situation in which you provide a ConditionExpression and it causes the job t
 
 # Version History
 
+* 3.1.1 - Updated to the latest SDK to address memory usage issues | Updated plugin packages
 * 3.1.0 - Add Get Item action 
 * 3.0.2 - Fix number should be a string for boto3 input bug
 * 3.0.1 - Validate exclusive_start_key parameter for Scan action
@@ -355,6 +379,8 @@ Any situation in which you provide a ConditionExpression and it causes the job t
 * 0.1.0 - Initial plugin
 
 # Links
+
+* [Dynamo Developer Resources](https://aws.amazon.com/dynamodb/developer-resources/)
 
 ## References
 
