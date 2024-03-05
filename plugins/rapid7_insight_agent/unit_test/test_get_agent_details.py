@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 from unittest.mock import patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -8,9 +8,11 @@ from parameterized import parameterized
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from util import Util
+
 from icon_rapid7_insight_agent.actions.get_agent_details import GetAgentDetails
 from icon_rapid7_insight_agent.actions.get_agent_details.schema import Input
+
+from util import Util
 
 
 @patch("requests.sessions.Session.post", side_effect=Util.mocked_request)

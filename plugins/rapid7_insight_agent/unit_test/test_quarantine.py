@@ -8,6 +8,7 @@ from parameterized import parameterized
 sys.path.append(os.path.abspath("../"))
 from icon_rapid7_insight_agent.actions.quarantine.action import Quarantine
 from icon_rapid7_insight_agent.actions.quarantine.schema import Input
+
 from util import Util
 
 

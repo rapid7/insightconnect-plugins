@@ -8,8 +8,9 @@ from parameterized import parameterized
 sys.path.append(os.path.abspath("../"))
 from icon_rapid7_insight_agent.actions.quarantine_multiple.action import QuarantineMultiple
 from icon_rapid7_insight_agent.actions.quarantine_multiple.schema import Input
-from util import Util
 from insightconnect_plugin_runtime.exceptions import PluginException
+
+from util import Util
 
 
 @patch("requests.sessions.Session.post", side_effect=Util.mocked_request)
