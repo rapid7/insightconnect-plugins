@@ -469,6 +469,7 @@ actions:
         description: Analysis details
         type: analysis
         required: true
+        example: {"AnalysisID": 1234567,"Comments": Suspicious URL here,"Duration": 397,"Filename": testfile.txt,"MD5": 0f0c95e3facb5859ea37e7e033390b1a,"Runs": [{"Detection": clean,"Error": null,"System": w10x64_office,"Yara": false}],"SHA1": 0f0c95e3facb5859ea37e7e033390b1a,"SHA256": 0f0c95e3facb5859ea37e7e033390b1a,"Scriptname": browseurl.jbs,"Status": submitted,"Tags": ["malicious","suspicious"],"Time": "2024-02-29 12:50:03+01:00","WebID": 1234567}
   delete_analysis:
     title: Delete Analysis
     description: Delete an analysis

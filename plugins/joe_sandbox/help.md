@@ -1,8 +1,6 @@
 # Description
 
-[Joe Sandbox](https://www.joesecurity.org) executes files and URLs fully automated in a controlled environment and monitors the behavior of applications and the operating system for suspicious activities.
-
-This plugin supports Joe Sandbox Cloud and Joe Sandbox (on-premise) instances and utilizes the [Joe Sandbox API](https://github.com/joesecurity/jbxapi).
+Joe Sandbox Cloud executes files and URLs fully automated in a controlled environment and monitors the behavior of applications and the operating system for suspicious activities
 
 # Key Features
   
@@ -193,7 +191,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|analysis|analysis|True|Analysis details|None|
+|analysis|analysis|True|Analysis details|{'AnalysisID': 1234567, 'Comments': 'Suspicious URL here', 'Duration': 397, 'Filename': 'testfile.txt', 'MD5': '0f0c95e3facb5859ea37e7e033390b1a', 'Runs': [{'Detection': 'clean', 'Error': None, 'System': 'w10x64_office', 'Yara': False}], 'SHA1': '0f0c95e3facb5859ea37e7e033390b1a', 'SHA256': '0f0c95e3facb5859ea37e7e033390b1a', 'Scriptname': 'browseurl.jbs', 'Status': 'submitted', 'Tags': ['malicious', 'suspicious'], 'Time': '2024-02-29 12:50:03+01:00', 'WebID': 1234567}|
   
 Example output:
 
@@ -201,22 +199,22 @@ Example output:
 {
   "analysis": {
     "AnalysisID": 1234567,
-    "Comments": Suspicious URL here,
+    "Comments": "Suspicious URL here",
     "Duration": 397,
-    "Filename": testfile.txt,
-    "MD5": 0f0c95e3facb5859ea37e7e033390b1a,
+    "Filename": "testfile.txt",
+    "MD5": "0f0c95e3facb5859ea37e7e033390b1a",
     "Runs": [
       {
-        "Detection": clean,
+        "Detection": "clean",
         "Error": null,
-        "System": w10x64_office,
+        "System": "w10x64_office",
         "Yara": false
       }
     ],
-    "SHA1": 0f0c95e3facb5859ea37e7e033390b1a,
-    "SHA256": 0f0c95e3facb5859ea37e7e033390b1a,
-    "Scriptname": browseurl.jbs,
-    "Status": submitted,
+    "SHA1": "0f0c95e3facb5859ea37e7e033390b1a",
+    "SHA256": "0f0c95e3facb5859ea37e7e033390b1a",
+    "Scriptname": "browseurl.jbs",
+    "Status": "submitted",
     "Tags": [
       "malicious",
       "suspicious"
@@ -319,7 +317,7 @@ This action is used to retrieve a list of localized internet anonymization count
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|countries|[]country|True|List of localized internet anonymization countries|None|
+|countries|[]country|True|List of localized internet anonymization countries|[{"Name": "America"}, {"Name": "Australia"}]|
   
 Example output:
 
