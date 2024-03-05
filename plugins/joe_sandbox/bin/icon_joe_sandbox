@@ -38,7 +38,7 @@ def main():
         
             self.add_action(actions.GetServerInfo())
         
-            self.add_action(actions.ListKeyboardLayouts())
+            self.add_action(actions.ListLanguagesAndLocales())
         
             self.add_action(actions.ListSystems())
         

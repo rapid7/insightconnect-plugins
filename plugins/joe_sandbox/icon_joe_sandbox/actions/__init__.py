@@ -4,7 +4,7 @@ from .check_server_status.action import CheckServerStatus
 
 from .get_server_info.action import GetServerInfo
 
-from .list_keyboard_layouts.action import ListKeyboardLayouts
+from .list_languages_and_locales.action import ListLanguagesAndLocales
 
 from .list_systems.action import ListSystems
 

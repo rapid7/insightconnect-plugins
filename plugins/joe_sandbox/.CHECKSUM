@@ -1,6 +1,6 @@
 {
-	"spec": "fc6fdd57f9b08045eb931236c199e5a3",
-	"manifest": "d9a6f0e9e13d521d38573d83e3f232e8",
+	"spec": "d15337e0b8ad209a6b5b00b1585809b1",
+	"manifest": "c6ce22bd383963cc96f5c7e9fe92d071",
 	"setup": "f0407b136e81ef2ace16e53ffdbc7ff8",
 	"schemas": [
 		{
@@ -40,8 +40,8 @@
 			"hash": "3877a1e4c0add8ca3691a8f4322fb48e"
 		},
 		{
-			"identifier": "list_keyboard_layouts/schema.py",
-			"hash": "ac2014585403ca68b6241210a32edda3"
+			"identifier": "list_languages_and_locales/schema.py",
+			"hash": "e2850eccf89c1f14be6a975648e8b506"
 		},
 		{
 			"identifier": "list_systems/schema.py",

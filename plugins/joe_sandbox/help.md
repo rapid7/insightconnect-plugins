@@ -320,7 +320,7 @@ Example output:
 }
 ```
 
-#### List Keyboard Layouts
+#### List Languages And Locales
   
 This action is used to retrieve a list of available keyboard layouts for Windows analyzers
 
@@ -332,13 +332,20 @@ This action is used to retrieve a list of available keyboard layouts for Windows
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|keyboard_layouts|[]keyboard_layout|True|List of available keyboard layouts|['US-English', 'UK-English']|
+|keyboard_layouts|[]keyboard_layout|True|List of available keyboard layouts|[{"name": "English - United States"}, {"name": "English - Great Britain"}]|
   
 Example output:
 
 ```
 {
-  "keyboard_layouts": "['US-English', 'UK-English']"
+  "keyboard_layouts": [
+    {
+      "name": "English - United States"
+    },
+    {
+      "name": "English - Great Britain"
+    }
+  ]
 }
 ```
 
@@ -611,7 +618,7 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Name|string|None|None|Name of the keyboard layout language|US-English|
+|Name|string|None|None|Name of the keyboard layout language|English - Great Britain|
   
 **country**
 
@@ -684,20 +691,12 @@ Example output:
 *There is no troubleshooting for this plugin.*
 
 # Version History
-
-* 2.0.0 - `Get Submitted Info` - New action | `List Keyboard Layouts` - Action removed | Update SDK | Update `jbxapi` dependency 
-* 1.0.4 - Add extra optional input for Submit Sample action
-* 1.0.3 - Add example inputs
-* 1.0.2 - Fix misspelling in error message | Remove generic "automation" keyword
-* 1.0.1 - New spec and help.md format for the Extension Library
-* 1.0.0 - Initial plugin
+  
+*This plugin does not contain a version history.*
 
 # Links
 
-* [Joe Sandbox](https://www.joesecurity.org)
 
 ## References
   
-* [Joe Sandbox API](https://jbxcloud.joesecurity.org/userguide?sphinxurl=usage%2Fwebapi.html)
-* [Joe Sandbox API wrapper](https://github.com/joesecurity/jbxapi)
-* [Report formats](https://jbxcloud.joesecurity.org/userguide?sphinxurl=usage/reportformats.html)
+*This plugin does not contain any references.*

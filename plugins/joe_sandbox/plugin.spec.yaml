@@ -61,7 +61,7 @@ types:
       title: Name
       description: Name of the keyboard layout language
       type: string
-      example: US-English
+      example: English - Great Britain
   country:
     name:
       title: Name
@@ -252,15 +252,15 @@ actions:
         type: integer
         example: 5
         required: true
-  list_keyboard_layouts:
-    title: List Keyboard Layouts
+  list_languages_and_locales:
+    title: List Languages And Locales
     description: Retrieve a list of available keyboard layouts for Windows analyzers
     output:
       keyboard_layouts:
         title: Keyboard Layouts
         description: List of available keyboard layouts
         type: '[]keyboard_layout'
-        example: "['US-English', 'UK-English']"
+        example: [{'name': 'English - United States'}, {'name': 'English - Great Britain'}]
         required: true
   list_systems:
     title: List Systems
