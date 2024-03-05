@@ -6,9 +6,9 @@ This plugin supports Joe Sandbox Cloud and Joe Sandbox (on-premise) instances an
 
 # Key Features
   
-* Sandbox  
-* Analysis  
-* Malware
+* Submit samples and URLs for sandbox analysis  
+* Search, list, get, download, and delete analyses  
+* Get, list, and manage server and user info
 
 # Requirements
   
@@ -148,8 +148,8 @@ This action is used to query information about Joe Sandbox user account
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|quota|full_quota|True|Account quota|tbd|
-|type|string|True|Type of the account|tbd|
+|quota|full_quota|True|Account quota|{'daily': {'current': 30, 'limit': 30, 'remaining': 30}, 'monthly': {'current': 30, 'limit': 30, 'remaining': 30}}|
+|type|string|True|Type of the account|Premium|
   
 Example output:
 
@@ -377,7 +377,7 @@ This action is used to retrieve a list of systems on the server
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|systems|[]system|True|List of systems on the server|None|
+|systems|[]system|True|List of systems on the server|[{"Arch": "WINDOWS", "Count": 8, "Description": "Suspicious", "Name": "w10x64_office"}]|
   
 Example output:
 
@@ -385,9 +385,9 @@ Example output:
 {
   "systems": [
     {
-      "Arch": {},
+      "Arch": "WINDOWS",
       "Count": 8,
-      "Description": {},
+      "Description": "Suspicious",
       "Name": "w10x64_office"
     }
   ]
@@ -513,7 +513,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|webids|[]string|True|Web IDs associated with the sample|None|
+|webids|[]string|True|Web IDs associated with the sample|["1234567", "7654321"]|
   
 Example output:
 

@@ -281,6 +281,7 @@ actions:
         description: List of localized internet anonymization countries
         type: '[]country'
         required: true
+        example: [{"Name": "America"}, {"Name": "Australia"}]
   get_account_info:
     title: Get Account Info
     description: Query information about Joe Sandbox user account
