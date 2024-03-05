@@ -34,7 +34,6 @@ The connection configuration accepts the following parameters:
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |clientId|string|None|True|Consumer Key of the connected app|None|1234567890aBcdEFRoeRxDE1234567890abCDef6Etz7VLwwLQZn19jyW3U_1234567890AbcdEF4VkuMS4ze|
 |clientSecret|credential_secret_key|None|True|Consumer Secret of the connected app|None|1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF|
-|instanceUrl|string|https://login.salesforce.com|False|Salesforce URL that is used to retrieve OAuth token|None|https://login.salesforce.com|
 |salesforceAccountUsernameAndPassword|credential_username_password|None|True|Name and password of the Salesforce user|None|{"username": "user@example.com", "password": "password"}|
 |securityToken|credential_secret_key|None|True|Security token of the Salesforce user|None|Ier6YY78KxJwKtHy7HeK0oPc|
   
@@ -44,7 +43,6 @@ Example input:
 {
   "clientId": "1234567890aBcdEFRoeRxDE1234567890abCDef6Etz7VLwwLQZn19jyW3U_1234567890AbcdEF4VkuMS4ze",
   "clientSecret": "1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF",
-  "instanceUrl": "https://login.salesforce.com",
   "salesforceAccountUsernameAndPassword": {
     "password": "password",
     "username": "user@example.com"
@@ -60,7 +58,7 @@ Example input:
 
 #### Advanced Search
   
-This action is used to execute a SOQL (Salesforce Object Query Language) query
+This action is used to execute a SOQL (Salesforce Object Query Language) query.
 
 ##### Input
 
@@ -99,7 +97,7 @@ Example output:
 
 #### Create Record
   
-This action is used to create a new SObject record
+This action is used to create a new SObject record.
 
 ##### Input
 
@@ -169,7 +167,7 @@ Example output:
 
 #### Get Blob Data
   
-This action is used to retrieve blob data for a given record
+This action is used to retrieve blob data for a given record.
 
 ##### Input
 
@@ -205,7 +203,7 @@ Example output:
 
 #### Get Fields
   
-This action is used to retrieve field values from the record of the given object
+This action is used to retrieve field values from the record of the given object.
 
 ##### Input
 
@@ -249,7 +247,7 @@ Example output:
 
 #### Get Record
   
-This action is used to retrieve a record
+This action is used to retrieve a record.
 
 ##### Input
 
@@ -302,7 +300,7 @@ Example output:
 
 #### Simple Search
   
-This action is used to execute a simple search for a text
+This action is used to execute a simple search for a text.
 
 ##### Input
 
@@ -365,7 +363,7 @@ Example output:
 
 #### Update Record
   
-This action is used to update a record
+This action is used to update a record.
 
 ##### Input
 
@@ -408,7 +406,7 @@ Example output:
 
 #### Monitor Users
   
-This task is used to get information about users, their login history and which users have been updated
+This task is used to get information about users, their login history and which users have been updated.
 
 ##### Input
   
@@ -536,7 +534,6 @@ Example output:
 
 # Version History
 
-* 2.1.7 - Task Monitor Users: Update connection to accept instance URL and force new token request per execution.
 * 2.1.6 - Task Monitor Users: Implement SDK 5.4.4 for custom_config parameter.
 * 2.1.5 - Task Monitor Users: Improved logging
 * 2.1.4 - Connection: Remove unnecessary logging 

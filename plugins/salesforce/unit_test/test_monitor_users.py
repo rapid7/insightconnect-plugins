@@ -24,7 +24,6 @@ from util import Util
 )
 @patch("requests.request", side_effect=Util.mock_request)
 @patch("logging.Logger.info")
-@patch("komand_salesforce.util.api.SalesforceAPI.unset_token")
 class TestMonitorUsers(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -66,7 +65,6 @@ class TestMonitorUsers(TestCase):
     )
     def test_monitor_users(
         self,
-        mocked_unset: MagicMock,
         mocked_logger: MagicMock,
         _mock_request: MagicMock,
         _mock_get_time: MagicMock,
@@ -81,16 +79,11 @@ class TestMonitorUsers(TestCase):
         self.assertEqual(has_more_pages, expected.get("has_more_pages"))
         self.assertEqual(status_code, expected.get("status_code"))
 
-        if test_name != "bad_request":
-            mocked_unset.assert_called()  # corrupt state so a token is never retrieved from Salesforce
-
         if test_name == "without_state":
             self.assertTrue(mocked_logger.called)
             self.assertIn("lookback time of 24 hours", mocked_logger.call_args_list[0][0][0])
 
-    def test_monitor_events_uses_custom_config_for_backfill(
-        self, mock_unset, mocked_logger, _mock_request, _mock_get_time
-    ):
+    def test_monitor_events_uses_custom_config_for_backfill(self, mocked_logger, _mock_request, _mock_get_time):
         config = {
             "lookback": {"year": 2023, "month": 6, "day": 5, "hour": 3, "minute": 45, "second": 0},
             "cutoff": {"date": {"year": 2023, "month": 6, "day": 5}},
@@ -110,11 +103,9 @@ class TestMonitorUsers(TestCase):
         self.assertDictEqual(actual_state, expected_state)
 
         self.assertIn("custom lookback", mocked_logger.call_args_list[0][0][0])
-        mock_unset.assert_called()
 
         # on the second iteration we then carry on as normal that we query from last poll end time to now
         mocked_logger.reset_mock()
-        mock_unset.reset_mock()
         _logs, updated_state, _more_pages, status_code, error = self.action.run({}, expected_state, config)
         self.assertNotIn("custom lookback", mocked_logger.call_args_list[0][0][0])  # lookback no longer used
 
@@ -127,11 +118,7 @@ class TestMonitorUsers(TestCase):
         for state_key in ["next_user_login_collection_timestamp", "next_user_collection_timestamp"]:
             self.assertEqual(updated_state[state_key], expected_state[state_key])
 
-        mock_unset.assert_called()
-
-    def test_monitor_events_uses_custom_config_for_cutoff_override(
-        self, mock_unset, mocked_logger, _mock_request, _mock_get_time
-    ):
+    def test_monitor_events_uses_custom_config_for_cutoff_override(self, mocked_logger, _mock_request, _mock_get_time):
         config = {"cutoff": {"hours": 2}}
         customers_paused_state = {
             "last_user_login_collection_timestamp": "2023-06-21 16:21:15.340262+00:00",  # last time customer ran this
@@ -153,5 +140,3 @@ class TestMonitorUsers(TestCase):
         }
 
         self.assertDictEqual(expected_state, new_state)
-
-        mock_unset.assert_called()
