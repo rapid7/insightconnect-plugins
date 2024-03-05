@@ -1,0 +1,12 @@
+{
+  "status": {
+    "success": true,
+    "info": [
+      {
+        "level": "string",
+        "code": "string",
+        "message": "string"
+      }
+    ]
+  }
+}

@@ -30,7 +30,7 @@ class AddAddressObjectToGroup(insightconnect_plugin_runtime.Action):
         try:
             object_action = self.connection.sonicwall_api.add_address_object_to_group(
                 group_type,
-                params.get(Input.GROUP),
+                group_name,
                 {
                     "address_group": {
                         group_type: {
@@ -40,8 +40,8 @@ class AddAddressObjectToGroup(insightconnect_plugin_runtime.Action):
                     }
                 },
             )
-        except PluginException as e:
-            if "E_NO_MATCH" in e.data:
+        except PluginException as error:
+            if "E_NO_MATCH" in error.data:
                 raise PluginException(
                     cause="The address object or address group does not exist in SonicWall.",
                     assistance="Please enter valid names and try again.",
