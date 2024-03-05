@@ -708,7 +708,7 @@ Example output:
 *There is no troubleshooting for this plugin.*
 
 # Version History
- 
+
 * 2.0.0 - Update `jbxapi` dependency | `List Keyboard Layouts` - Renamed to `List Languages and Locales` | Updated SDK | `Get Submitted Info` - New action
 * 1.0.4 - Add extra optional input for Submit Sample action
 * 1.0.3 - Add example inputs
