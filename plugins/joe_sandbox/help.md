@@ -155,8 +155,19 @@ Example output:
 
 ```
 {
-  "quota": "tbd",
-  "type": "tbd"
+  "quota": {
+    "daily": {
+      "current": 30,
+      "limit": 30,
+      "remaining": 30
+    },
+    "monthly": {
+      "current": 30,
+      "limit": 30,
+      "remaining": 30
+    }
+  },
+  "type": "Premium"
 }
 ```
 
@@ -325,7 +336,7 @@ Example output:
 }
 ```
 
-#### List Languages And Locales
+#### List Languages and Locales
   
 This action is used to retrieve a list of available keyboard layouts for Windows analyzers
 

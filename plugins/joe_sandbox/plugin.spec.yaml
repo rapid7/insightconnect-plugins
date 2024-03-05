@@ -253,7 +253,7 @@ actions:
         example: 5
         required: true
   list_languages_and_locales:
-    title: List Languages And Locales
+    title: List Languages and Locales
     description: Retrieve a list of available keyboard layouts for Windows analyzers
     output:
       keyboard_layouts:
@@ -290,13 +290,13 @@ actions:
         description: Type of the account
         type: string
         required: true
-        example: tbd
+        example: Premium
       quota:
         title: Quota
         description: Account quota
         type: full_quota
         required: true
-        example: tbd
+        example: {"daily": {"current": 30, "limit": 30, "remaining": 30}, "monthly": {"current": 30, "limit": 30, "remaining": 30}}
   submit_sample:
     title: Submit Sample
     description: Submit a sample for analysis and return the associated web IDs for the sample
