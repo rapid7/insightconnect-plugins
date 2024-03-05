@@ -8,7 +8,7 @@ from unittest.mock import patch
 from icon_joe_sandbox.actions.list_countries import ListCountries
 from icon_joe_sandbox.actions.list_countries.schema import Output
 from jsonschema import validate
-from mock import Util, mock_request_200, mocked_request
+from mock import Util, mock_request_200, mocked_request, MagicMock
 
 
 class TestListCountries(TestCase):
@@ -17,7 +17,7 @@ class TestListCountries(TestCase):
         self.action = Util.default_connector(ListCountries())
 
     @patch("requests.request", side_effect=mock_request_200)
-    def test_list_countries(self, mock_get):
+    def test_list_countries(self, mock_get: MagicMock) -> None:
         mocked_request(mock_get)
         response = self.action.run()
 

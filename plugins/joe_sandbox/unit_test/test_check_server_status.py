@@ -8,7 +8,7 @@ from unittest.mock import patch
 from icon_joe_sandbox.actions.check_server_status import CheckServerStatus
 from icon_joe_sandbox.actions.check_server_status.schema import Output
 from jsonschema import validate
-from mock import Util, mock_request_200, mocked_request
+from mock import Util, mock_request_200, mocked_request, MagicMock
 
 
 class TestCheckServerStatus(TestCase):
@@ -17,7 +17,7 @@ class TestCheckServerStatus(TestCase):
         self.action = Util.default_connector(CheckServerStatus())
 
     @patch("requests.request", side_effect=mock_request_200)
-    def test_check_server_status(self, mock_get):
+    def test_check_server_status(self, mock_get: MagicMock) -> None:
         mocked_request(mock_get)
         response = self.action.run()
 

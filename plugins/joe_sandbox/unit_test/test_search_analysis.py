@@ -8,7 +8,7 @@ from unittest.mock import patch
 from icon_joe_sandbox.actions.search_analysis import SearchAnalysis
 from icon_joe_sandbox.actions.search_analysis.schema import Input, Output
 from jsonschema import validate
-from mock import Util, mock_request_200, mocked_request
+from mock import Util, mock_request_200, mocked_request, MagicMock
 
 
 class TestSearchAnalysis(TestCase):
@@ -18,7 +18,7 @@ class TestSearchAnalysis(TestCase):
         self.params = {Input.QUERY: "query"}
 
     @patch("requests.request", side_effect=mock_request_200)
-    def test_search_analysis(self, mock_get):
+    def test_search_analysis(self, mock_get: MagicMock) -> None:
         mocked_request(mock_get)
         response = self.action.run()
 
