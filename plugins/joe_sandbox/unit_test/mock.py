@@ -70,4 +70,4 @@ def mock_conditions(url: str, status_code: int) -> MockResponse:
 
 
 def mock_request_200(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], 200)
+    return mock_conditions(args[1], 200)
