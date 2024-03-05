@@ -1,0 +1,196 @@
+{
+  "parameters": [
+    [
+      "192.168.0.1",
+      [
+        {
+          "id": "a1cfb273EQWE12312EDSAXZc8e7d46a9e2a0e2dae01a0ce",
+          "platform": "windows",
+          "publicIpAddress": "192.168.0.1",
+          "host": {
+            "vendor": "Microsoft",
+            "version": "10",
+            "description": "Windows 10 10.0.19041  Multiprocessor Free",
+            "hostNames": [
+              {
+                "name": "ExampleHostname"
+              }
+            ],
+            "primaryAddress": {
+              "ip": "12.43.13.43",
+              "mac": ""
+            },
+            "uniqueIdentity": [],
+            "attributes": []
+          },
+          "agent_info": {
+            "agentSemanticVersion": "3.1.4.52",
+            "agentStatus": "STALE",
+            "quarantineState": {
+              "currentState": "QUARANTINED"
+            }
+          }
+        },
+        {
+          "id": "ac88c0ac243d35da0943wqewqe21312e12qxa35d4d65dee24",
+          "platform": "linux",
+          "publicIpAddress": "192.168.0.1",
+          "host": {
+            "vendor": "Ubuntu",
+            "version": "18.04",
+            "description": "Ubuntu Linux 18.04",
+            "hostNames": [
+              {
+                "name": "ExampleHostname"
+              }
+            ],
+            "primaryAddress": {
+              "ip": "11.44.23.53",
+              "mac": "01-51-53-44-A8-D1"
+            },
+            "uniqueIdentity": [
+              {
+                "source": "Endpoint Agent",
+                "id": "ac88c0ac243d35da094335d4d65dee24eq3412edqwdqw"
+              }
+            ],
+            "attributes": [
+              {
+                "key": "cpuinfo",
+                "value": "Intel(R) Xeon(R) CPU E5-2697 v4 @ 2.30GHz"
+              },
+              {
+                "key": "timezone",
+                "value": "GMT-7"
+              },
+              {
+                "key": "release",
+                "value": "4.15.0-43-generic"
+              },
+              {
+                "key": "proxies",
+                "value": "{}"
+              }
+            ]
+          },
+          "agent_info": {
+            "agentSemanticVersion": "3.1.5.14",
+            "agentStatus": "ONLINE",
+            "quarantineState": {
+              "currentState": "UNQUARANTINED"
+            }
+          }
+        }
+      ]
+    ],
+    [
+      "11.44.23.53",
+      [
+        {
+          "id": "ac88c0ac243d35da0943wqewqe21312e12qxa35d4d65dee24",
+          "platform": "linux",
+          "publicIpAddress": "192.168.0.1",
+          "host": {
+            "vendor": "Ubuntu",
+            "version": "18.04",
+            "description": "Ubuntu Linux 18.04",
+            "hostNames": [
+              {
+                "name": "ExampleHostname"
+              }
+            ],
+            "primaryAddress": {
+              "ip": "11.44.23.53",
+              "mac": "01-51-53-44-A8-D1"
+            },
+            "uniqueIdentity": [
+              {
+                "source": "Endpoint Agent",
+                "id": "ac88c0ac243d35da094335d4d65dee24eq3412edqwdqw"
+              }
+            ],
+            "attributes": [
+              {
+                "key": "cpuinfo",
+                "value": "Intel(R) Xeon(R) CPU E5-2697 v4 @ 2.30GHz"
+              },
+              {
+                "key": "timezone",
+                "value": "GMT-7"
+              },
+              {
+                "key": "release",
+                "value": "4.15.0-43-generic"
+              },
+              {
+                "key": "proxies",
+                "value": "{}"
+              }
+            ]
+          },
+          "agent_info": {
+            "agentSemanticVersion": "3.1.5.14",
+            "agentStatus": "ONLINE",
+            "quarantineState": {
+              "currentState": "UNQUARANTINED"
+            }
+          }
+        },
+        {
+          "id": "asd21w312312kl353nqewqe21312e12qxa35d4d65dee24",
+          "platform": "linux",
+          "publicIpAddress": "0.0.0.0",
+          "host": {
+            "vendor": "Ubuntu",
+            "version": "20.04",
+            "description": "Ubuntu Linux 20.04",
+            "hostNames": [
+              {
+                "name": "ExampleHostname"
+              }
+            ],
+            "primaryAddress": {
+              "ip": "11.44.23.53",
+              "mac": "01-51-53-44-A8-D1"
+            },
+            "uniqueIdentity": [
+              {
+                "source": "Endpoint Agent",
+                "id": "ac88c0ac243d35da094335d4d65dee24eq3412edqwdqw"
+              }
+            ],
+            "attributes": [
+              {
+                "key": "cpuinfo",
+                "value": "Intel(R) Xeon(R) CPU E5-2697 v4 @ 2.30GHz"
+              },
+              {
+                "key": "timezone",
+                "value": "GMT-7"
+              },
+              {
+                "key": "release",
+                "value": "4.15.0-43-generic"
+              },
+              {
+                "key": "proxies",
+                "value": "{}"
+              }
+            ]
+          },
+          "agent_info": {
+            "agentSemanticVersion": "3.1.5.14",
+            "agentStatus": "ONLINE",
+            "quarantineState": {
+              "currentState": "UNQUARANTINED"
+            }
+          }
+        }
+      ]
+    ],
+    [
+      "127.0.0.1",
+      []
+    ]
+  ]
+}

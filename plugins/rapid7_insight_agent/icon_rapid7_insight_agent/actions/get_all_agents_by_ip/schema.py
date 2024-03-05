@@ -4,32 +4,32 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Find and display detailed information about a device"
+    DESCRIPTION = "Find all agents that share the same public or private IP address and display details about them"
 
 
 class Input:
-    AGENT = "agent"
+    IP_ADDRESS = "ip_address"
 
 
 class Output:
-    AGENT = "agent"
+    AGENTS = "agents"
 
 
-class GetAgentDetailsInput(insightconnect_plugin_runtime.Input):
+class GetAllAgentsByIpInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "agent": {
+    "ip_address": {
       "type": "string",
-      "title": "Agent",
-      "description": "IP address, MAC address, or hostname of the device to get information from",
+      "title": "IP Address",
+      "description": "The public or private IP address for all the agents to be searched for",
       "order": 1
     }
   },
   "required": [
-    "agent"
+    "ip_address"
   ],
   "definitions": {}
 }
@@ -39,21 +39,24 @@ class GetAgentDetailsInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
+class GetAllAgentsByIpOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "agent": {
-      "$ref": "#/definitions/agent",
-      "title": "Agent",
-      "description": "Agent information",
+    "agents": {
+      "type": "array",
+      "title": "Agents",
+      "description": "The list of all found agents",
+      "items": {
+        "$ref": "#/definitions/agent"
+      },
       "order": 1
     }
   },
   "required": [
-    "agent"
+    "agents"
   ],
   "definitions": {
     "agent": {

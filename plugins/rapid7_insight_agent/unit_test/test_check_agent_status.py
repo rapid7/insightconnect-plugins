@@ -8,6 +8,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 sys.path.append(os.path.abspath("../"))
 from icon_rapid7_insight_agent.actions.check_agent_status.action import CheckAgentStatus
 from icon_rapid7_insight_agent.actions.check_agent_status.schema import Input
+
 from util import Util
 
 
