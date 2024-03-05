@@ -28,20 +28,7 @@ class LookupIp(insightconnect_plugin_runtime.Action):
         self.request.params.update({"ip": params.get("ip_address"), "limit": 1000, "offset": 0})
 
         while self.continue_paging:
-            response = self.connection.send(self.request)
-
-            if response.status_code not in range(200, 299):
-                raise PluginException(
-                    cause="Received %d HTTP status code from ThreatStream." % response.status_code,
-                    assistance="Please verify your ThreatStream server status and try again. "
-                    "If the issue persists please contact support. "
-                    "Server response was: %s" % response.text,
-                )
-
-            try:
-                response_data = response.json()
-            except JSONDecodeError:
-                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+            response_data = self.connection.send(self.request)
 
             # Check pagination indicator. A "null" value means no more pages.
             try:

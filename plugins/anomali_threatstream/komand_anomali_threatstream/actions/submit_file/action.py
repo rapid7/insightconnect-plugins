@@ -38,23 +38,11 @@ class SubmitFile(insightconnect_plugin_runtime.Action):
         self.request.files = {"file": (f["filename"], file_bytes)}
         self.request.data = data
         self.logger.info(f"Submitting file to {self.request.url}")
-        response = self.connection.send(self.request)
-
-        if response.status_code not in range(200, 299):
-            raise PluginException(
-                cause="Received %d HTTP status code from ThreatStream." % response.status_code,
-                assistance="Please verify your ThreatStream server status and try again. "
-                "If the issue persists please contact support. "
-                "Server response was: %s" % response.text,
-            )
-        try:
-            js = response.json()
-        except JSONDecodeError:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+        response_data = self.connection.send(self.request)
 
         reports = []
-        for os in js["reports"].keys():
-            report = js["reports"][os]
+        for os in response_data["reports"].keys():
+            report = response_data["reports"][os]
             report["platform"] = os
             reports.append(report)
-        return {Output.SUCCESS: js["success"], Output.REPORTS: reports}
+        return {Output.SUCCESS: response_data["success"], Output.REPORTS: reports}

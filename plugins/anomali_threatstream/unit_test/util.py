@@ -69,7 +69,7 @@ class Util:
             return MockResponse(500, "get_observables_failure.json.resp")
         #Get Sandbox Report
         if url == "https://example.com/api/v1/submit/exampleid/report/?username=test&api_key=anomali_api_key":
-            return MockResponse(200, "get_observables_success.json.resp")
+            return MockResponse(200, "get_sandbox_report_success.json.resp")
         raise NotImplementedError("Not implemented", kwargs)
 
 

@@ -18,7 +18,9 @@ class GetObservables(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         # Copy and update the base request to avoid mutating the original
-        self.request = copy(self.connection.request)
+        self.request = copy(self.connection.api.request)
+        print(self.connection.api.request)
+        print(self.request.url)
         self.request.url, self.request.method = self.request.url + "/intelligence", "GET"
 
         # Pagination flag and results placeholder
@@ -27,19 +29,7 @@ class GetObservables(insightconnect_plugin_runtime.Action):
         self.request.params.update({"value": "{value}".format(value=params.get("value")), "limit": 1000, "offset": 0})
 
         while self.continue_paging:
-            response = self.connection.send(self.request)
-
-            if response.status_code not in range(200, 299):
-                raise PluginException(
-                    cause="Received %d HTTP status code from ThreatStream." % response.status_code,
-                    assistance="Please verify your ThreatStream server status and try again. "
-                    "If the issue persists please contact support. "
-                    "Server response was: %s" % response.text,
-                )
-            try:
-                response_data = response.json()
-            except JSONDecodeError:
-                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+            response_data = self.connection.api.send(self.request)
 
             try:
                 # Check pagination indicator. A "null" value means no more pages.

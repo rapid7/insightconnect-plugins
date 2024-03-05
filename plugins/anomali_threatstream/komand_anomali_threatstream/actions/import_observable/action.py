@@ -42,19 +42,7 @@ class ImportObservable(insightconnect_plugin_runtime.Action):
             data[key] = value
         self.request.files = {"file": (file_["filename"], file_bytes)}
         self.request.data = data
-        response = self.connection.send(self.request)
-        if response.status_code not in range(200, 299):
-            raise PluginException(
-                cause="Received %d HTTP status code from ThreatStream." % response.status_code,
-                assistance="Please verify your ThreatStream server status and try again. "
-                "If the issue persists please contact support. "
-                "Server response was: %s" % response.text,
-            )
-
-        try:
-            response_data = response.json()
-        except JSONDecodeError:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+        response_data = self.connection.send(self.request)
 
         clean_response = insightconnect_plugin_runtime.helper.clean(response_data)
         return {"results": clean_response}

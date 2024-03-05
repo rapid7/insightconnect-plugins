@@ -24,31 +24,20 @@ class GetSandboxReport(insightconnect_plugin_runtime.Action):
             "GET",
         )
         self.logger.info(f"Submitting URL to {self.request.url}")
-        response = self.connection.send(self.request)
+        response_data = self.connection.send(self.request)
 
-        if response.status_code not in range(200, 299):
-            raise PluginException(
-                cause="Received %d HTTP status code from ThreatStream." % response.status_code,
-                assistance="Please verify your ThreatStream server status and try again. "
-                "If the issue persists please contact support. "
-                "Server response was: %s" % response.text,
-            )
-        try:
-            js = response.json()
-        except JSONDecodeError:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
         print("REPORT")
-        print(js)
+        print(response_data)
         try:
-            domains_detail = js["results"]["network"]["domains"]
-            info = js["results"]["info"]
-            signatures = js["results"]["signatures"]
-            screenshots = js["results"]["screenshots"]
+            domains_detail = response_data["results"]["network"]["domains"]
+            info = response_data["results"]["info"]
+            signatures = response_data["results"]["signatures"]
+            screenshots = response_data["results"]["screenshots"]
         except KeyError:
             raise PluginException(
                 cause="The output did not contain expected keys.",
                 assistance="Contact support for help.",
-                data=js,
+                data=response_data,
             )
 
         domains = []
