@@ -191,7 +191,7 @@ Example output:
   "analysis": {
     "AnalysisID": {},
     "Comments": {},
-    "Duration": 0,
+    "Duration": 397,
     "Filename": {},
     "MD5": {},
     "Runs": [
@@ -199,7 +199,7 @@ Example output:
         "Detection": {},
         "Error": {},
         "System": {},
-        "Yara": "true"
+        "Yara": false
       }
     ],
     "SHA1": {},
@@ -207,10 +207,11 @@ Example output:
     "Scriptname": {},
     "Status": {},
     "Tags": [
-      {}
+      "malicious",
+      "suspicious"
     ],
-    "Time": "",
-    "WebID": ""
+    "Time": "2024-02-29 12:50:03+01:00",
+    "WebID": 1234567
   }
 }
 ```
@@ -315,7 +316,7 @@ Example output:
 {
   "countries": [
     {
-      "Name": ""
+      "Name": "America"
     }
   ]
 }
@@ -342,9 +343,9 @@ Example output:
   "systems": [
     {
       "Arch": {},
-      "Count": 0,
+      "Count": 8,
       "Description": {},
-      "Name": ""
+      "Name": "w10x64_office"
     }
   ]
 }
@@ -381,7 +382,7 @@ Example output:
 {
   "analyses": [
     {
-      "WebID": ""
+      "WebID": 1234567
     }
   ]
 }
@@ -581,24 +582,24 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Arch|string|None|None|Architecture (one of WINDOWS, MAC, LINUX, IOS, ANDROID)|None|
-|Count|integer|None|None|How many systems of given type exist|None|
-|Description|string|None|None|Description|None|
-|Name|string|None|None|Name|None|
+|Arch|string|None|None|Architecture (one of WINDOWS, MAC, LINUX, IOS, ANDROID)|WINDOWS|
+|Count|integer|None|None|How many systems of given type exist|8|
+|Description|string|None|None|Description|Windows 10 64 bit (version 1803) with <b>Office 2016</b> Adobe Reader DC 19, Chrome 104, Firefox 63, Java 8.171, Flash 30.0.0.113|
+|Name|string|None|None|Name|w10x64_office|
   
 **country**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Name|string|None|None|Name of the country|None|
+|Name|string|None|None|Name of the country|America|
   
 **single_quota**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Current|integer|None|None|Current quota|None|
-|Limit|integer|None|None|Limit of quota|None|
-|Remaining|integer|None|None|Remaining quota|None|
+|Current|integer|None|None|Current quota|20|
+|Limit|integer|None|None|Limit of quota|30|
+|Remaining|integer|None|None|Remaining quota|30|
   
 **full_quota**
 
@@ -611,45 +612,45 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|WebID|string|None|None|Web ID|None|
+|WebID|string|None|None|Web ID|1234567|
   
 **run**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Detection|string|None|None|Detection, one of: unknown, clean, suspicious, malicious|None|
+|Detection|string|None|None|Detection, one of: unknown, clean, suspicious, malicious|clean|
 |Error|string|None|None|Error description, will not be present if no error was detected|None|
-|System|string|None|None|System|None|
-|Yara|boolean|None|None|Yara|None|
+|System|string|None|None|System|w10x64_office|
+|Yara|boolean|None|None|Yara|False|
   
 **submission_info**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|analyses|[]object|None|None|Analysis details|None|
-|Most Relevant Analysis|object|None|None|Webid, detection & score|None|
-|name|string|None|None|name|None|
-|Status|string|None|None|Status of the analysis e.g. submitted, running, finished|None|
-|Submission ID|string|None|None|submission ID|None|
-|time|string|None|None|time|None|
+|analyses|[]object|None|None|Analysis details|[{}]|
+|Most Relevant Analysis|object|None|None|Webid, detection & score|{}|
+|name|string|None|None|name|w10x64_office|
+|Status|string|None|None|Status of the analysis e.g. submitted, running, finished|submitted|
+|Submission ID|string|None|None|submission ID|1234567|
+|time|string|None|None|time|2012-10-03:10-00|
   
 **analysis**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|AnalysisID|string|None|None|Analysis ID. Will not be returned if the analysis is not finished|None|
-|Comments|string|None|None|Comments|None|
-|Duration|integer|None|None|Duration of the analysis in seconds (only for finished analyses)|None|
-|Filename|string|None|None|File name|None|
-|MD5|string|None|None|MD5|None|
+|AnalysisID|string|None|None|Analysis ID. Will not be returned if the analysis is not finished|1234567|
+|Comments|string|None|None|Comments|Suspicious URL here|
+|Duration|integer|None|None|Duration of the analysis in seconds (only for finished analyses)|397|
+|Filename|string|None|None|File name|testfile.txt|
+|MD5|string|None|None|MD5|0f0c95e3facb5859ea37e7e033390b1a|
 |Runs|[]run|None|None|Runs|None|
-|Scriptname|string|None|None|Script name|None|
-|SHA1|string|None|None|SHA1|None|
-|SHA256|string|None|None|SHA256|None|
-|Status|string|None|None|Status of the analysis, one of: submitted, running, finished|None|
-|Tags|[]string|None|None|Tags|None|
-|Time|date|None|None|Time|None|
-|WebID|string|None|None|Web ID|None|
+|Scriptname|string|None|None|Script name|browseurl.jbs|
+|SHA1|string|None|None|SHA1|0f0c95e3facb5859ea37e7e033390b1a|
+|SHA256|string|None|None|SHA256|0f0c95e3facb5859ea37e7e033390b1a|
+|Status|string|None|None|Status of the analysis, one of: submitted, running, finished|submitted|
+|Tags|[]string|None|None|Tags|["malicious", "suspicious"]|
+|Time|date|None|None|Time|2024-02-29 12:50:03+01:00|
+|WebID|string|None|None|Web ID|1234567|
 
 
 ## Troubleshooting
