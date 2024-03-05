@@ -4,6 +4,8 @@ from .quarantine_multiple.action import QuarantineMultiple
 
 from .get_agent_details.action import GetAgentDetails
 
+from .get_all_agents_by_ip.action import GetAllAgentsByIp
+
 from .quarantine.action import Quarantine
 
 from .check_agent_status.action import CheckAgentStatus
