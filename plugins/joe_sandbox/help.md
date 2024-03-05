@@ -189,23 +189,23 @@ Example output:
 ```
 {
   "analysis": {
-    "AnalysisID": {},
-    "Comments": {},
+    "AnalysisID": 1234567,
+    "Comments": Suspicious URL here,
     "Duration": 397,
-    "Filename": {},
-    "MD5": {},
+    "Filename": testfile.txt,
+    "MD5": 0f0c95e3facb5859ea37e7e033390b1a,
     "Runs": [
       {
-        "Detection": {},
-        "Error": {},
-        "System": {},
+        "Detection": clean,
+        "Error": null,
+        "System": w10x64_office,
         "Yara": false
       }
     ],
-    "SHA1": {},
-    "SHA256": {},
-    "Scriptname": {},
-    "Status": {},
+    "SHA1": 0f0c95e3facb5859ea37e7e033390b1a,
+    "SHA256": 0f0c95e3facb5859ea37e7e033390b1a,
+    "Scriptname": browseurl.jbs,
+    "Status": submitted,
     "Tags": [
       "malicious",
       "suspicious"
@@ -317,6 +317,9 @@ Example output:
   "countries": [
     {
       "Name": "America"
+    },
+    {
+      "Name": "Australia"
     }
   ]
 }
@@ -506,7 +509,8 @@ Example output:
 ```
 {
   "webids": [
-    ""
+    "1234567",
+    "7654321"
   ]
 }
 ```
@@ -598,9 +602,11 @@ Example output:
   "submission_id": 1001
 }
 ```
+
 ### Triggers
   
 *This plugin does not contain any triggers.*
+
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -694,7 +700,7 @@ Example output:
 
 # Version History
  
-* 2.0.0 - Update `jbxapi` dependency | `List Keyboard Layouts` - Renamed to `List Languages and Locales` | Updated SDK 
+* 2.0.0 - Update `jbxapi` dependency | `List Keyboard Layouts` - Renamed to `List Languages and Locales` | Updated SDK | `Get Submitted Info` - New action
 * 1.0.4 - Add extra optional input for Submit Sample action
 * 1.0.3 - Add example inputs
 * 1.0.2 - Fix misspelling in error message | Remove generic "automation" keyword

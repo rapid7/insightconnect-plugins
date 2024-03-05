@@ -270,6 +270,7 @@ actions:
         title: Systems
         description: List of systems on the server
         type: "[]system"
+        example: [{"Arch": "WINDOWS", "Count": 8, "Description": "Suspicious", "Name": "w10x64_office"}]
         required: true
   list_countries:
     title: List Countries
@@ -298,8 +299,7 @@ actions:
         example: tbd
   submit_sample:
     title: Submit Sample
-    description: Submit a sample for analysis and return the associated web IDs for
-      the sample
+    description: Submit a sample for analysis and return the associated web IDs for the sample
     input:
       sample:
         title: Sample
@@ -341,6 +341,7 @@ actions:
         title: Web IDs
         description: Web IDs associated with the sample
         type: "[]string"
+        example: ["1234567", "7654321"]
         required: true
   submit_sample_url:
     title: Submit Sample URL
