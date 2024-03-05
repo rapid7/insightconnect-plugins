@@ -1,0 +1,17 @@
+{
+  "data": {
+    "type": "desktop",
+    "quota": {
+      "daily": {
+        "current": 0,
+        "limit": 30,
+        "remaining": 30
+      },
+      "monthly": {
+        "current": 0,
+        "limit": 30,
+        "remaining": 30
+      }
+    }
+  }
+}
