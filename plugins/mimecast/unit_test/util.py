@@ -145,7 +145,7 @@ class Util:
         elif kwargs.get("url") == "https://eu-api.mimecast.com/api/audit/get-siem-logs":
             data = kwargs.get("data")
             headers = {"mc-siem-token": "token123", "Content-Disposition": "attachment"}
-            resp = MockResponseZip(200, Util.get_mocked_zip(), headers, {"meta": {"status": 200}})
+            resp = MockResponseZip(200, Util.get_mocked_zip(), headers, json.dumps({"meta": {"status": 200}}))
             if "force_401" in data:
                 json_value = {
                     "meta": {"isLastToken": False, "status": 401},
@@ -163,9 +163,13 @@ class Util:
                 }
                 resp = MockResponseZip(401, b"", {}, json.dumps(json_value))
             elif "force_json" in data:
-                resp = MockResponseZip(200, Util.get_mocked_zip(), headers, "throw json error")
+                resp = MockResponseZip(200, b'{ "type" : "MTA", "data" : ', headers, '{"meta": {"status": 200}}')
             elif "no_results" in data:
-                resp = MockResponseZip(200, b"", {"mc-siem-token": "token123"}, '{"meta": {"status": 200}}')
+                # isLastToken returns `true` when testing against live API and no results returned from Mimecast.
+                no_results = b'{"meta":{"isLastToken":true,"status":200},"data":[],"fail":[]}'
+                no_results_headers = headers.copy()
+                no_results_headers["isLastToken"] = "true"
+                resp = MockResponseZip(200, no_results, no_results_headers, '{"meta": {"status": 200}}')
             elif "path_traversal" in data:
                 resp = MockResponseZip(200, Util.get_mocked_zip(True), headers, '{"meta": {"status": 200}}')
             elif "request.json" in data:
