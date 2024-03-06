@@ -23,9 +23,7 @@ class GetObservables(insightconnect_plugin_runtime.Action):
         # Pagination flag and results placeholder
         self.continue_paging, self.results = True, []
         # Update the request with the supplied domain, page size, and offset
-        self.request.params.update(
-            {"value": f"{params.get(Input.VALUE)}", "limit": 1000, "offset": 0}
-        )
+        self.request.params.update({"value": f"{params.get(Input.VALUE)}", "limit": 1000, "offset": 0})
 
         while self.continue_paging:
             response_data = self.connection.api.send(self.request)
