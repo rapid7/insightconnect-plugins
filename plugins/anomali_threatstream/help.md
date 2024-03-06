@@ -453,7 +453,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|reports|[]report|False|Reports containing submission details|[]|
+|reports|[]report|False|Reports containing submission details|[ { "Details": {}, "ID": 0, "Platform": {}, "Status": "" } ]|
 |success|boolean|False|Operation status|True|
 
 Example output:

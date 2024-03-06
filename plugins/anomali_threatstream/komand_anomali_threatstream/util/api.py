@@ -3,7 +3,7 @@ import json
 from requests import Session, Request, Response
 import re
 from insightconnect_plugin_runtime.exceptions import PluginException
-from typing import Dict
+from typing import Dict, Any
 from logging import Logger
 
 
@@ -22,7 +22,7 @@ class API(object):
         self.request.verify = verify
         self.request.params = params
 
-    def send(self, request):
+    def send(self, request) -> Dict[str, Any]:
         try:
             response = self.session.send(request.prepare(), verify=request.verify)
             self.logger.info(response)
@@ -52,7 +52,7 @@ class API(object):
         raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
 
     @staticmethod
-    def hide_api_key(string):
+    def hide_api_key(api_string: str) -> str:
         """
         ThreatStream queries expose the API key as a URL query parameter. This method hides the API key using a regex that
         substitutes with the replacement the first instance in string of a substring that matches pattern.
@@ -61,4 +61,4 @@ class API(object):
         """
         pattern = r"api_key=([a-zA-Z0-9]+)(?P<end>\&|$)"
         replacement = r"api_key=********\g<end>"
-        return re.sub(pattern, replacement, string)
+        return re.sub(pattern, replacement, api_string)

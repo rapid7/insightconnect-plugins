@@ -12,7 +12,7 @@ support: community
 supported_versions: ["Anomali API API 22-02-2022"]
 sdk:
   type: slim
-  version: 5
+  version: 5.4.4
   user: nobody
 status: []
 resources:
@@ -550,7 +550,7 @@ actions:
         description: Reports containing submission details
         type: "[]report"
         required: false
-        example: []
+        example: '[ { "Details": {}, "ID": 0, "Platform": {}, "Status": "" } ]'
   get_sandbox_report:
     title: Get Sandbox Report
     description: Get a sandbox report
