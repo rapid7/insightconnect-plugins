@@ -43,6 +43,7 @@ class IssueInput(insightconnect_plugin_runtime.Input):
     },
     "labels": {
       "type": "string",
+      "title": "Labels",
       "description": "Comma-separated list of label names, issues must have all labels to be returned",
       "order": 2
     },

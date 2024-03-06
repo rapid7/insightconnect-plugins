@@ -541,7 +541,7 @@ triggers:
         example: Opened
         required: false
       labels:
-        name: Labels
+        title: Labels
         description: Comma-separated list of label names, issues must have all labels to be returned
         type: string
         example: "label1,label2,label3"
