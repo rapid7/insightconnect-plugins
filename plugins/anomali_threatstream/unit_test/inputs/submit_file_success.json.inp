@@ -1,7 +1,10 @@
 {
   "classification": "private",
   "detail": "Credential-Exposure,compromised_email",
-  "file": {"content": "SGVsbG8gV29ybGQK", "filename": "testfile"},
+  "file": {
+    "content": "SGVsbG8gV29ybGQK",
+    "filename": "testfile"
+  },
   "platform": "WINDOWS7",
   "use_premium_sandbox": true
 }

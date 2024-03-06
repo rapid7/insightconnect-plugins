@@ -1,21 +1,21 @@
 {
-"meta":{
-"classification":"public",
-"tags":[
-{
-"name":"private_tag",
-"tlp":"red"
-},
-{
-"name":"public_tag",
-"tlp":"white"
-}
-]
-},
-"objects":[
-{
-"email":"email@test.com",
-"itype":"apt_email"
-}
-]
+  "meta": {
+    "classification": "public",
+    "tags": [
+      {
+        "name": "private_tag",
+        "tlp": "red"
+      },
+      {
+        "name": "public_tag",
+        "tlp": "white"
+      }
+    ]
+  },
+  "objects": [
+    {
+      "email": "email@test.com",
+      "itype": "apt_email"
+    }
+  ]
 }

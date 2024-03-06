@@ -1,4 +1,7 @@
 {
-  "file": {"content": "SGVsbG8gV29ybGQK", "filename": "testfile"},
+  "file": {
+    "content": "SGVsbG8gV29ybGQK",
+    "filename": "testfile"
+  },
   "observable_settings": {}
 }

@@ -119,22 +119,50 @@ Example output:
 ```
 {
   "sandbox_report": {
-    "Domains": {},
-    "Info": {
-      "Category": {},
-      "Confidence": 0,
-      "Duration": {},
-      "Ended": {},
-      "Is Malicious": {},
-      "Is Suspicious": {},
-      "Is Unknown": "true",
-      "Started": {}
-    },
-    "Screenshots": [
-      ""
+    "domains": [
+      "star-mini.c10r.facebook.com",
+      "pagead46.l.doubleclick.net",
+      "star.c10r.facebook.com",
+      "us-u.openx.net"
     ],
-    "Signatures": [
-      {}
+    "info": {
+      "category": "URL",
+      "confidence": 0,
+      "duration": 302,
+      "ended": "2019-12-04 21:09:32",
+      "is_malicious": false,
+      "is_suspicious": false,
+      "is_unknown": false,
+      "started": "2019-12-04 21:04:30"
+    },
+    "screenshots": [
+      "http://domain.com/userUploads/2019-12-04/20191204_201304_userId-121_tmpsandbox-report-full-PaRfUDscreenshot_00.png",
+      "http://domain.com/userUploads/2019-12-04/20191204_201305_userId-121_tmpsandbox-report-full-PaRfUDscreenshot_01.png",
+      "http://domain.com/userUploads/2019-12-04/20191204_201305_userId-121_tmpsandbox-report-full-PaRfUDscreenshot_02.png"
+    ],
+    "signatures": [
+      {
+        "data": [
+          {
+            "operation": "Window detected",
+            "process": "Window Recorder",
+            "value": "More than 3 window changes detected"
+          }
+        ],
+        "description": "Found graphical window changes (likely an installer)",
+        "severity": "-2.0"
+      },
+      {
+        "data": [
+          {
+            "operation": "File opened",
+            "process": "C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe",
+            "value": "C:\\Program Files (x86)\\Java\\jre1.8.0_191\\bin\\msvcr100.dll"
+          }
+        ],
+        "description": "Uses new MSVCR Dlls",
+        "severity": "-1.0"
+      }
     ]
   }
 }
@@ -171,9 +199,9 @@ Example output:
 ```
 {
   "results": {
-    "Import Session ID": {},
-    "Job ID": "",
-    "Success": "true"
+    "job_id": "00bc2d03-c608-4824-863d-0a7c9126615a",
+    "success": true,
+    "import_session_id": "1000000344"
   }
 }
 ```
@@ -208,29 +236,23 @@ Example output:
 {
   "results": [
     {
-      "ASN": "",
-      "Classification": {},
-      "Confidence": {},
-      "Country": {},
-      "Date First": {},
-      "Date Last": {},
-      "Details": {},
-      "Domain": {},
-      "Email": {},
-      "ID": 0,
-      "Itype": {},
-      "Latitude": 0,
-      "Longitude": {},
-      "MD5": {},
-      "Organization": {},
-      "Resource URI": {},
-      "Severity": {},
-      "Source": {},
-      "Source Feed ID": {},
-      "Source IP": {},
-      "State": {},
-      "URL": {},
-      "Update ID": {}
+      "classification": "private",
+      "confidence": "17",
+      "date_first": "2019-10-16T16:12:48",
+      "date_last": "2019-10-21T14:01:39",
+      "detail": "Delivery",
+      "detail2": "imported by user 121",
+      "domain": "window.google",
+      "id": 112879000,
+      "import_session_id": 205,
+      "itype": "apt_domain",
+      "maltype": "Delivery",
+      "resource_uri": "/api/v1/intelligence/112879000/",
+      "severity": "very-high",
+      "source": "user@example.com",
+      "srcip": "127.0.53.53",
+      "state": "active",
+      "update_id": "272270002"
     }
   ]
 }
@@ -266,29 +288,26 @@ Example output:
 {
   "results": [
     {
-      "ASN": "",
-      "Classification": {},
-      "Confidence": {},
-      "Country": {},
-      "Date First": {},
-      "Date Last": {},
-      "Details": {},
-      "Domain": {},
-      "Email": {},
-      "ID": 0,
-      "Itype": {},
-      "Latitude": 0,
-      "Longitude": {},
-      "MD5": {},
-      "Organization": {},
-      "Resource URI": {},
-      "Severity": {},
-      "Source": {},
-      "Source Feed ID": {},
-      "Source IP": {},
-      "State": {},
-      "URL": {},
-      "Update ID": {}
+      "asn": "26496",
+      "classification": "private",
+      "confidence": "100",
+      "country": "US",
+      "date_first": "2018-09-06T23:01:26",
+      "date_last": "2018-09-06T23:01:26",
+      "detail2": "imported by user 1000000012",
+      "id": 1000000181,
+      "itype": "mal_url",
+      "lat": 33.6119,
+      "lon": -111.8906,
+      "org": "GoDaddy.com, LLC",
+      "resource_uri": "/api/v1/intelligence/1000000181/",
+      "severity": "very-high",
+      "source": "Test Name 1",
+      "source_feed_id": 1000000004,
+      "srcip": "107.180.51.15",
+      "state": "active",
+      "update_id": "2075600",
+      "url": "http://aadroid.net/wp-content/plugins/coming-soon/themes/default/images/seedprod-credit.png"
     }
   ]
 }
@@ -324,29 +343,26 @@ Example output:
 {
   "results": [
     {
-      "ASN": "",
-      "Classification": {},
-      "Confidence": {},
-      "Country": {},
-      "Date First": {},
-      "Date Last": {},
-      "Details": {},
-      "Domain": {},
-      "Email": {},
-      "ID": 0,
-      "Itype": {},
-      "Latitude": 0,
-      "Longitude": {},
-      "MD5": {},
-      "Organization": {},
-      "Resource URI": {},
-      "Severity": {},
-      "Source": {},
-      "Source Feed ID": {},
-      "Source IP": {},
-      "State": {},
-      "URL": {},
-      "Update ID": {}
+      "asn": "26496",
+      "classification": "private",
+      "confidence": "100",
+      "country": "US",
+      "date_first": "2018-09-06T23:01:26",
+      "date_last": "2018-09-06T23:01:26",
+      "detail2": "imported by user 1000000012",
+      "id": 1000000178,
+      "itype": "mal_url",
+      "lat": 33.6119,
+      "lon": -111.8906,
+      "org": "GoDaddy.com, LLC",
+      "resource_uri": "/api/v1/intelligence/1000000178/",
+      "severity": "very-high",
+      "source": "Test Name 1",
+      "source_feed_id": 1000000004,
+      "srcip": "107.180.51.15",
+      "state": "active",
+      "update_id": "2075597",
+      "url": "http://aadroid.net/wp-includes/js/jquery/jquery.js"
     }
   ]
 }
@@ -389,8 +405,21 @@ Example output:
 
 ```
 {
-  "reports": [],
-  "success": true
+  "success": true,
+  "reports": [
+    {
+      "status": "/api/v1/submit/101/",
+      "detail": "/api/v1/submit/101/report/",
+      "id": 101,
+      "platform": "WINDOWS7"
+    },
+    {
+      "status": "/api/v1/submit/100/",
+      "detail": "/api/v1/submit/100/report/",
+      "id": 100,
+      "platform": "WINDOWSXP"
+    }
+  ]
 }
 ```
 
@@ -431,15 +460,21 @@ Example output:
 
 ```
 {
+  "success": true,
   "reports": [
     {
-      "Details": {},
-      "ID": 0,
-      "Platform": {},
-      "Status": ""
+      "status": "/api/v1/submit/101/",
+      "detail": "/api/v1/submit/101/report/",
+      "id": 101,
+      "platform": "WINDOWS7"
+    },
+    {
+      "status": "/api/v1/submit/100/",
+      "detail": "/api/v1/submit/100/report/",
+      "id": 100,
+      "platform": "WINDOWSXP"
     }
-  ],
-  "success": true
+  ]
 }
 ```
 ### Triggers

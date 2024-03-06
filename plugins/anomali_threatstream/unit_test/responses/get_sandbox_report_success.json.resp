@@ -1,51 +1,59 @@
 {
-    "results": {
-        "network": {
-            "domains": [
-                {"domain": "star-mini.c10r.facebook.com"},
-                {"domain": "pagead46.l.doubleclick.net"},
-                {"domain": "star.c10r.facebook.com"},
-                {"domain": "us-u.openx.net"}
-            ]
+  "results": {
+    "network": {
+      "domains": [
+        {
+          "domain": "star-mini.c10r.facebook.com"
         },
-        "info": {
-            "category": "URL",
-            "confidence": 0,
-            "duration": 302,
-            "ended": "2019-12-04 21:09:32",
-            "is_malicious": false,
-            "is_suspicious": false,
-            "is_unknown": false,
-            "started": "2019-12-04 21:04:30"
+        {
+          "domain": "pagead46.l.doubleclick.net"
         },
-        "screenshots": [
-            "http://domain.com/userUploads/2019-12-04/20191204_201304_userId-121_tmpsandbox-report-full-PaRfUDscreenshot_00.png",
-            "http://domain.com/userUploads/2019-12-04/20191204_201305_userId-121_tmpsandbox-report-full-PaRfUDscreenshot_01.png",
-            "http://domain.com/userUploads/2019-12-04/20191204_201305_userId-121_tmpsandbox-report-full-PaRfUDscreenshot_02.png"
+        {
+          "domain": "star.c10r.facebook.com"
+        },
+        {
+          "domain": "us-u.openx.net"
+        }
+      ]
+    },
+    "info": {
+      "category": "URL",
+      "confidence": 0,
+      "duration": 302,
+      "ended": "2019-12-04 21:09:32",
+      "is_malicious": false,
+      "is_suspicious": false,
+      "is_unknown": false,
+      "started": "2019-12-04 21:04:30"
+    },
+    "screenshots": [
+      "http://domain.com/userUploads/2019-12-04/20191204_201304_userId-121_tmpsandbox-report-full-PaRfUDscreenshot_00.png",
+      "http://domain.com/userUploads/2019-12-04/20191204_201305_userId-121_tmpsandbox-report-full-PaRfUDscreenshot_01.png",
+      "http://domain.com/userUploads/2019-12-04/20191204_201305_userId-121_tmpsandbox-report-full-PaRfUDscreenshot_02.png"
+    ],
+    "signatures": [
+      {
+        "data": [
+          {
+            "operation": "Window detected",
+            "process": "Window Recorder",
+            "value": "More than 3 window changes detected"
+          }
         ],
-        "signatures": [
-            {
-                "data": [
-                    {
-                        "operation": "Window detected",
-                        "process": "Window Recorder",
-                        "value": "More than 3 window changes detected"
-                    }
-                ],
-                "description": "Found graphical window changes (likely an installer)",
-                "severity": "-2.0"
-            },
-            {
-                "data": [
-                    {
-                        "operation": "File opened",
-                        "process": "C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe",
-                        "value": "C:\\Program Files (x86)\\Java\\jre1.8.0_191\\bin\\msvcr100.dll"
-                    }
-                ],
-                "description": "Uses new MSVCR Dlls",
-                "severity": "-1.0"
-            }
-        ]
-    }
+        "description": "Found graphical window changes (likely an installer)",
+        "severity": "-2.0"
+      },
+      {
+        "data": [
+          {
+            "operation": "File opened",
+            "process": "C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe",
+            "value": "C:\\Program Files (x86)\\Java\\jre1.8.0_191\\bin\\msvcr100.dll"
+          }
+        ],
+        "description": "Uses new MSVCR Dlls",
+        "severity": "-1.0"
+      }
+    ]
+  }
 }
