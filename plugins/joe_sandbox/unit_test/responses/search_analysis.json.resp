@@ -1,0 +1,35 @@
+{
+  "data": [
+    {
+      "webid": "1",
+      "time": "2024-02-29T12:50:03+01:00",
+      "runs": [
+        {
+          "detection": "clean",
+          "error": null,
+          "system": "w10x64_office",
+          "yara": false,
+          "sigma": false,
+          "snort": false,
+          "score": 0
+        }
+      ],
+      "tags": [],
+      "encrypted": false,
+      "analysisid": "3673217",
+      "duration": 397,
+      "md5": "",
+      "sha1": "",
+      "sha256": "",
+      "filename": "https://www.google.com",
+      "scriptname": "browseurl.jbs",
+      "status": "finished",
+      "comments": "",
+      "classification": "",
+      "threatname": "",
+      "score": 0,
+      "detection": "clean",
+      "has_malwareconfig": false
+    }
+  ]
+}

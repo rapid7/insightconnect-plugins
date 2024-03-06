@@ -6,7 +6,14 @@ title: Joe Sandbox
 description: Joe Sandbox Cloud executes files and URLs fully automated in a controlled
   environment and monitors the behavior of applications and the operating system for
   suspicious activities
-version: 1.0.4
+version: 2.0.0
+supported_versions: ['Joe Sandbox API v2']
+connection_version: 2
+requirements: ["API Key", "Sandbox server (if not using cloud)"]
+sdk:
+  type: slim
+  version: 5.4.4
+  user: nobody
 vendor: rapid7
 support: community
 status: []
@@ -14,55 +21,69 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/joe_sandbox
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.joesecurity.org
+key_features:
+  - Submit samples and URLs for sandbox analysis
+  - Search, list, get, download, and delete analyses
+  - Get, list, and manage server and user info
 tags:
-- security
-- malware
-- analysis
+  - security
+  - malware
+  - analysis
+  - sandbox
 hub_tags:
-  use_cases: [application_management, cloud_security]
-  keywords: [security, malware, analysis]
-  features: []
+  use_cases: [application_management, cloud_security, reporting_and_analytics]
+  keywords: [sandbox, malware, analysis]
+  features: [sandbox, analysis]
 types:
   system:
     name:
       title: Name
       description: Name
       type: string
+      example: w10x64_office
     description:
       title: Description
       description: Description
       type: string
+      example: "Windows 10 64 bit (version 1803) with <b>Office 2016</b> Adobe Reader DC 19, Chrome 104, Firefox 63, Java 8.171, Flash 30.0.0.113"
     arch:
       title: Arch
       description: Architecture (one of WINDOWS, MAC, LINUX, IOS, ANDROID)
       type: string
+      example: WINDOWS
     count:
       title: Count
       description: How many systems of given type exist
       type: integer
-  country:
-    name:
-      title: Name
-      description: Name of the country
-      type: string
+      example: 8
   keyboard_layout:
     name:
       title: Name
       description: Name of the keyboard layout language
       type: string
+      example: English - Great Britain
+  country:
+    name:
+      title: Name
+      description: Name of the country
+      type: string
+      example: America
   single_quota:
     current:
       title: Current
       description: Current quota
       type: integer
+      example: 20
     limit:
       title: Limit
       description: Limit of quota
       type: integer
+      example: 30
     remaining:
       title: Remaining
       description: Remaining quota
       type: integer
+      example: 30
   full_quota:
     daily:
       title: Daily
@@ -77,76 +98,124 @@ types:
       title: WebID
       description: Web ID
       type: string
+      example: 1234567
   run:
     detection:
       title: Detection
       description: 'Detection, one of: unknown, clean, suspicious, malicious'
       type: string
+      example: clean
     error:
       title: Error
       description: Error description, will not be present if no error was detected
       type: string
+      example: null
     system:
       title: System
       description: System
       type: string
+      example: w10x64_office
     yara:
       title: Yara
       description: Yara
       type: boolean
+      example: false
+  submission_info:
+    submission_id:
+      title: Submission ID
+      description: submission ID
+      type: string
+      example: 1234567
+    name:
+      title: name
+      description: name
+      type: string
+      example: w10x64_office
+    time:
+      title: time
+      description: time
+      type: string
+      example: "2012-10-03:10-00"
+    status:
+      title: Status
+      description: Status of the analysis e.g. submitted, running, finished
+      type: string
+      example: submitted
+    analyses:
+      title: analyses
+      description: Analysis details
+      type: "[]object"
+      example: [{}]
+    most_relevant_analysis:
+      title: Most Relevant Analysis
+      description: Webid, detection & score
+      type: "object"
+      example: {}
   analysis:
     webid:
       title: WebID
       description: Web ID
       type: string
+      example: 1234567
     analysisid:
       title: AnalysisID
       description: Analysis ID. Will not be returned if the analysis is not finished
       type: string
+      example: 1234567
     status:
       title: Status
       description: 'Status of the analysis, one of: submitted, running, finished'
       type: string
+      example: submitted
     comments:
       title: Comments
       description: Comments
       type: string
+      example: Suspicious URL here
     filename:
       title: Filename
       description: File name
       type: string
+      example: testfile.txt
     scriptname:
       title: Scriptname
       description: Script name
       type: string
+      example: browseurl.jbs
     time:
       title: Time
       description: Time
       type: date
+      example: 2024-02-29T12:50:03+01:00
     duration:
       title: Duration
       description: Duration of the analysis in seconds (only for finished analyses)
       type: integer
+      example: 397
     md5:
       title: MD5
       description: MD5
       type: string
+      example: 0f0c95e3facb5859ea37e7e033390b1a
     sha1:
       title: SHA1
       description: SHA1
       type: string
+      example: 0f0c95e3facb5859ea37e7e033390b1a
     sha256:
       title: SHA256
       description: SHA256
       type: string
+      example: 0f0c95e3facb5859ea37e7e033390b1a
     tags:
       title: Tags
       description: Tags
-      type: '[]string'
+      type: "[]string"
+      example: ["malicious", "suspicious"]
     runs:
       title: Runs
       description: Runs
-      type: '[]run'
+      type: "[]run"
 connection:
   api_key:
     title: API Key
@@ -171,6 +240,7 @@ actions:
         title: Online
         description: Is the server online
         type: boolean
+        example: true
         required: true
   get_server_info:
     title: Get Server Info
@@ -180,6 +250,17 @@ actions:
         title: Queue Size
         description: Queue size
         type: integer
+        example: 5
+        required: true
+  list_languages_and_locales:
+    title: List Languages and Locales
+    description: Retrieve a list of available keyboard layouts for Windows analyzers
+    output:
+      keyboard_layouts:
+        title: Keyboard Layouts
+        description: List of available keyboard layouts
+        type: '[]keyboard_layout'
+        example: [{'name': 'English - United States'}, {'name': 'English - Great Britain'}]
         required: true
   list_systems:
     title: List Systems
@@ -188,7 +269,8 @@ actions:
       systems:
         title: Systems
         description: List of systems on the server
-        type: '[]system'
+        type: "[]system"
+        example: [{"Arch": "WINDOWS", "Count": 8, "Description": "Suspicious", "Name": "w10x64_office"}]
         required: true
   list_countries:
     title: List Countries
@@ -199,15 +281,7 @@ actions:
         description: List of localized internet anonymization countries
         type: '[]country'
         required: true
-  list_keyboard_layouts:
-    title: List Keyboard Layouts
-    description: Retrieve a list of available keyboard layouts for Windows analyzers
-    output:
-      keyboard_layouts:
-        title: Keyboard Layouts
-        description: List of available keyboard layouts
-        type: '[]keyboard_layout'
-        required: true
+        example: [{"Name": "America"}, {"Name": "Australia"}]
   get_account_info:
     title: Get Account Info
     description: Query information about Joe Sandbox user account
@@ -217,15 +291,16 @@ actions:
         description: Type of the account
         type: string
         required: true
+        example: Premium
       quota:
         title: Quota
         description: Account quota
         type: full_quota
         required: true
+        example: {"daily": {"current": 30, "limit": 30, "remaining": 30}, "monthly": {"current": 30, "limit": 30, "remaining": 30}}
   submit_sample:
     title: Submit Sample
-    description: Submit a sample for analysis and return the associated web IDs for
-      the sample
+    description: Submit a sample for analysis and return the associated web IDs for the sample
     input:
       sample:
         title: Sample
@@ -266,7 +341,8 @@ actions:
       webids:
         title: Web IDs
         description: Web IDs associated with the sample
-        type: '[]string'
+        type: "[]string"
+        example: ["1234567", "7654321"]
         required: true
   submit_sample_url:
     title: Submit Sample URL
@@ -295,11 +371,12 @@ actions:
         required: false
         example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }'
     output:
-      webids:
-        title: Web IDs
-        description: Web IDs associated with the sample
-        type: '[]string'
+      submission_id:
+        title: Submission ID
+        description: Submission ID associated with the sample
+        type: string
         required: true
+        example: '1234567'
   submit_url:
     title: Submit URL
     description: Submit a website for analysis and return the associated web IDs for
@@ -327,11 +404,12 @@ actions:
         required: false
         example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }'
     output:
-      webids:
-        title: Web IDs
-        description: Web IDs associated with the sample
-        type: '[]string'
+      submission_id:
+        title: Submission ID
+        description: Submission ID associated with the sample
+        type: string
         required: true
+        example: '1001'
   submit_cookbook:
     title: Submit Cookbook
     description: Submit a cookbook for analysis and return the associated web IDs
@@ -359,11 +437,12 @@ actions:
         required: false
         example: '{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }'
     output:
-      webids:
-        title: Web IDs
-        description: Web IDs associated with the cookbook
-        type: '[]string'
+      submission_id:
+        title: Submission ID
+        description: Submission ID for submitted analysis
+        type: string
         required: true
+        example: '1234567'
   list_analyses:
     title: List Analyses
     description: Fetch a list of all analyses
@@ -371,7 +450,7 @@ actions:
       analyses:
         title: Analyses
         description: A list of all analyses IDs
-        type: '[]webid'
+        type: "[]webid"
         required: true
         example: [ "10001", "10002", "10003" ]
   get_analysis_info:
@@ -390,6 +469,7 @@ actions:
         description: Analysis details
         type: analysis
         required: true
+        example: {"AnalysisID": 1234567,"Comments": Suspicious URL here,"Duration": 397,"Filename": testfile.txt,"MD5": 0f0c95e3facb5859ea37e7e033390b1a,"Runs": [{"Detection": clean,"Error": null,"System": w10x64_office,"Yara": false}],"SHA1": 0f0c95e3facb5859ea37e7e033390b1a,"SHA256": 0f0c95e3facb5859ea37e7e033390b1a,"Scriptname": browseurl.jbs,"Status": submitted,"Tags": ["malicious","suspicious"],"Time": "2024-02-29 12:50:03+01:00","WebID": 1234567}
   delete_analysis:
     title: Delete Analysis
     description: Delete an analysis
@@ -405,6 +485,7 @@ actions:
         title: Deleted
         description: Was the analysis deleted
         type: boolean
+        example: true
         required: true
   search_analysis:
     title: Search Analysis
@@ -436,43 +517,43 @@ actions:
         example: 10001
       type:
         title: Type
-        description: The report type, e.g. 'html', 'bins'
+        description: The report type
         type: string
         enum:
-        - bins
-        - binstrings
-        - classhtml
-        - classxml
-        - clusterxml
-        - cookbook
-        - executive
-        - graphreports
-        - html
-        - ida
-        - irjson
-        - irjsonfixed
-        - irxml
-        - ishots
-        - json
-        - jsonfixed
-        - lighthtml
-        - lightjson
-        - lightjsonfixed
-        - lightxml
-        - maec
-        - memdumps
-        - memstrings
-        - misp
-        - openioc
-        - pcap
-        - pcapslim
-        - pdf
-        - sample
-        - shoots
-        - unpack
-        - unpackpe
-        - xml
-        - yara
+          - bins
+          - binstrings
+          - classhtml
+          - classxml
+          - clusterxml
+          - cookbook
+          - executive
+          - graphreports
+          - html
+          - ida
+          - irjson
+          - irjsonfixed
+          - irxml
+          - ishots
+          - json
+          - jsonfixed
+          - lighthtml
+          - lightjson
+          - lightjsonfixed
+          - lightxml
+          - maec
+          - memdumps
+          - memstrings
+          - misp
+          - openioc
+          - pcap
+          - pcapslim
+          - pdf
+          - sample
+          - shoots
+          - unpack
+          - unpackpe
+          - xml
+          - yara
         default: html
         required: false
         example: pdf
@@ -488,9 +569,28 @@ actions:
         title: Resource Name
         description: Name of the resource associated with the analysis
         type: string
+        example: Resource Name
         required: true
       resource_content:
         title: Resource Content
         description: Content of the resource associated with the analysis in base64
         type: bytes
         required: true
+        example: "01001001"
+  get_submitted_info:
+    title: Get Submitted Info
+    description: Show the status and info of submission
+    input:
+      submission_id:
+        title: Submission ID
+        description: Submission ID from analysis
+        type: string
+        required: true
+        example: 1001
+    output:
+      submission_info:
+        title: Submission Info
+        description: Submission Info
+        type: submission_info
+        required: true
+        example: 1001
