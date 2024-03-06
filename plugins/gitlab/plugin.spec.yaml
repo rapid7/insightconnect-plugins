@@ -206,7 +206,7 @@ actions:
     description: Block GitLab user
     input:
       id:
-        title: User Id
+        title: User ID
         description: User ID to block
         type: integer
         example: 17
@@ -231,7 +231,7 @@ actions:
     output:
       success:
         title: Success
-        description: Indicicate if action was successful
+        description: Indicate if action was successful
         type: boolean
         example: True
         required: false
@@ -240,7 +240,7 @@ actions:
     description: Delete GitLab user
     input:
       id:
-        title: User Id
+        title: User ID
         description: User ID to unblock
         type: integer
         example: 34
@@ -364,13 +364,13 @@ actions:
         example: 4
         required: true
       title:
-        title: Issue title
+        title: Issue
         description: The title of an issue
         type: string
         example: Issues with auth
         required: true
       description:
-        title: Description title
+        title: Description
         description: The description of an issue
         type: string
         example: Description of the issue
@@ -464,7 +464,7 @@ actions:
         title: Assignees
         description: Assignees
         type: '[]user_output'
-        example: [{"name" : "Alexandra Bashirian","avatar_url" : null,"state" : "active","web_url" : "https://gitlab.example.com/eileen.lowe","id" : 18,"username" : "eileen.lowe"}, {"name" : "John Smith","avatar_url" : null,"state" : "active","web_url" : "https://gitlab.example.com/john.smith","id" : 19,"username" : "john.smith"}]
+        example: [{"name" : "Alexandra Bashirian","avatar_url": None,"state" : "active","web_url" : "https://gitlab.example.com/eileen.lowe","id" : 18,"username" : "eileen.lowe"}, {"name" : "John Smith","avatar_url" : null,"state" : "active","web_url" : "https://gitlab.example.com/john.smith","id" : 19,"username" : "john.smith"}]
         required: false
       labels:
         title: Labels

@@ -23,7 +23,7 @@ class BlockUserInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "id": {
       "type": "integer",
-      "title": "User Id",
+      "title": "User ID",
       "description": "User ID to block",
       "order": 1
     }

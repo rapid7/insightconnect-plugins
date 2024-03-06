@@ -73,7 +73,7 @@ class CreateIssueInput(insightconnect_plugin_runtime.Input):
     },
     "description": {
       "type": "string",
-      "title": "Description title",
+      "title": "Description",
       "description": "The description of an issue",
       "order": 4
     },
@@ -123,7 +123,7 @@ class CreateIssueInput(insightconnect_plugin_runtime.Input):
     },
     "title": {
       "type": "string",
-      "title": "Issue title",
+      "title": "Issue",
       "description": "The title of an issue",
       "order": 3
     }

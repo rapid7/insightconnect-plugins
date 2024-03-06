@@ -88,7 +88,6 @@ This action is used to create issue
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|assignees|[]user_output|False|Assignees|[{"name": "Alexandra Bashirian", "avatar_url": None, "state": "active", "web_url": "https://gitlab.example.com/eileen.lowe", "id": 18, "username": "eileen.lowe"}, {"name": "John Smith", "avatar_url": None, "state": "active", "web_url": "https://gitlab.example.com/john.smith", "id": 19, "username": "john.smith"}]|
 |assignee_ids|[]integer|None|False|The ID of a user to assign issue|None|[1, 2, 3, 4]|
 |confidential|boolean|None|False|Set an issue to be confidential|None|False|
 |created_at|date|None|False|Date, ISO 8601 formatted (requires admin or project owner rights)|None|2016-01-07 12:44:33.959000+00:00|
@@ -130,7 +129,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|assignees|[]user_output|False|Assignees|[{"name": "Alexandra Bashirian", "avatar_url": null, "state": "active", "web_url": "https://gitlab.example.com/eileen.lowe", "id": 18, "username": "eileen.lowe"}, {"name": "John Smith", "avatar_url": null, "state": "active", "web_url": "https://gitlab.example.com/john.smith", "id": 19, "username": "john.smith"}]|
+|assignees|[]user_output|False|Assignees|[{"name": "Alexandra Bashirian", "avatar_url": "None", "state": "active", "web_url": "https://gitlab.example.com/eileen.lowe", "id": 18, "username": "eileen.lowe"}, {"name": "John Smith", "avatar_url": null, "state": "active", "web_url": "https://gitlab.example.com/john.smith", "id": 19, "username": "john.smith"}]|
 |author|user_output|False|Author|{'name': 'Alexandra Bashirian', 'avatar_url': None, 'state': 'active', 'web_url': 'https://gitlab.example.com/eileen.lowe', 'id': 18, 'username': 'eileen.lowe'}|
 |confidential|boolean|False|Confidential|True|
 |created_at|date|False|Created at|2016-01-07 12:44:33.959000+00:00|
@@ -154,7 +153,7 @@ Example output:
 {
   "assignees": [
     {
-      "avatar_url": null,
+      "avatar_url": "None",
       "id": 18,
       "name": "Alexandra Bashirian",
       "state": "active",
@@ -401,7 +400,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|False|Indicicate if action was successful|True|
+|success|boolean|False|Indicate if action was successful|True|
   
 Example output:
 

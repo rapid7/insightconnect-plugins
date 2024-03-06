@@ -23,7 +23,7 @@ class DeleteUserInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "id": {
       "type": "integer",
-      "title": "User Id",
+      "title": "User ID",
       "description": "User ID to unblock",
       "order": 1
     }
