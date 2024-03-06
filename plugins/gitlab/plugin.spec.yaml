@@ -6,9 +6,12 @@ title: GitLab
 vendor: rapid7
 support: community
 status: []
-description: GitLab plugin allows user management and issue management in Gitlab
+description: GitLab is a next generation developer collaboration software with version control capabilities. The GitLab InsightConnect plugin enables user and issue management.
 version: 1.1.0
 connection_version: 1
+supported_versions: [GitLab API v4]
+version_history: ['2.0.0 - Update SDK | Refactor Plugin | `Connection` - New input: `ssl_verify`', 1.0.1 - New spec and help.md format for the Extension Library, 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types, 0.1.1 - SSL bug fix in SDK, 0.1.0 - Initial plugin]
+references: ['[GitLab API](https://docs.gitlab.com/ce/api/README.html)']
 sdk:
   type: slim
   version: 5.4.4
@@ -28,6 +31,8 @@ hub_tags:
   use_cases: [user_management]
   keywords: [gitlab, version control, repository, manage, project, snippet]
   features: []
+key_features: [Block and unblock users, Delete SSH keys, Retrieve users details, Create issues]
+requirements: ['GitLab host URL', 'GitLab account username and password (or token)']
 types:
   ssh_output:
     id:
@@ -86,102 +91,55 @@ types:
       title: ID
       description: Unique milestone ID
       type: integer
+      example: 2
       required: false
     iid:
       title: IID
       description: Unique ID only in scope of a single project
       type: integer
+      example: 23
       required: false
     project_id:
       title: Project ID
       description: Project ID
       type: integer
+      example: 3
       required: false
     title:
       title: Title
       description: Project title
       type: string
+      example: Project title
       required: false
     description:
       title: Description
-      description: Project Description
+      description: Project description
       type: string
+      example: Description about the project
       required: false
     state:
       title: State
-      description: Project State e.g. 'Opened', 'Closed'
+      description: Project state
       type: string
+      example: Opened
       required: false
     created_at:
       title: Created At
       description: Date project was created
       type: date
+      example: 2016-01-07T12:44:33.959Z
       required: false
     updated_at:
       title: Updated At
       description: Date project was updated
       type: date
+      example: 2016-01-07T12:44:33.959Z
       required: false
     due_date:
       title: Due Date
       description: Date project is to be closed
       type: date
-      required: false
-  issue_input:
-    project_id:
-      title: Project ID
-      type: integer
-      description: ID of project
-      required: true
-    title:
-      title: Issue title
-      type: string
-      description: The title of an issue
-      required: true
-    description:
-      title: Description title
-      type: string
-      description: The description of an issue
-      required: false
-    confidential:
-      title: Confidential
-      type: boolean
-      description: Set an issue to be confidential
-      required: false
-    assignee_ids:
-      title: Assignees
-      type: '[]integer'
-      description: The ID of a user to assign issue
-      required: false
-    milestone_id:
-      title: Milestone
-      type: integer
-      description: The ID of a milestone to assign issue
-      required: false
-    labels:
-      title: Labels
-      type: string
-      description: Comma-separated label names for an issue
-      required: false
-    created_at:
-      title: Created At
-      type: date
-      description: Date, ISO 8601 formatted (requires admin or project owner rights)
-      required: false
-    due_date:
-      title: Due Date
-      type: date
-      description: Date time string in the format YEAR-MONTH-DAY
-      required: false
-    merge_request:
-      title: Merge Request To Resolve Discussions Of
-      type: integer
-      description: The IID of a merge request in which to resolve all issues
-      required: false
-    discussion_resolve:
-      title: Discussion To Resolve
-      type: string
-      description: The ID of a discussion to resolve
+      example: 2016-01-07T12:44:33.959Z
       required: false
 connection:
   credentials:
@@ -208,34 +166,39 @@ actions:
     input:
       id:
         title: User ID
-        type: integer
         description: User ID
+        type: integer
+        example: 18
         required: true
       key_id:
         title: Key ID
-        type: integer
         description: Key ID
+        type: integer
+        example: 17
         required: true
     output:
-      status:
-        title: Status
-        description: Status
+      success:
+        title: Success
+        description: Indicicate if action was successful
         type: boolean
+        example: True
         required: false
   list_ssh:
     title: List User SSH Keys
     description: List user SSH keys
     input:
       id:
-        title: User II
+        title: User ID
+        description: The ID of the user
         type: integer
-        description: User ID
+        example: 17
         required: true
     output:
       ssh_keys:
         title: SSH Keys
         description: SSH keys
         type: '[]ssh_output'
+        example: [{"created_at": "12.02.23", "id": 17, "key": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAiPWx6WM4lhHNedGfBpPJNPpZ7yKu+dnn1SJejgt4596k6YjzGGphH2TUxwKzxcKDKKezwkpfnxPkSMkuEspGRt/aZZ9wa++Oi7Qkr8prgHc4soW6NUlfDzpvZK2H5E7eQaSeP3SAwGmQKUFHCddNaP0L+hM7zhFNzjFvpaMgJw0=", "title": "MyPubKey"}, {"created_at": "12.02.23", "id": 18, "key": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAiPWx6WM4lhHNedGfBpPJNPpZ7yKu+dnn1SJejgt4596k6YjzGGphH2TUxwKzxcKDKKezwkpfnxPkSMkuEspGRt/aZZ9wa++Oi7Qkr8prgHc4soW6NUlfDzpvZK2H5E7eQaSeP3SAwGmQKUFHCddNaP0L+hM7zhFNzjFvpaMgJw0=", "title": "MyPubKey2"}]
         required: false
   block_user:
     title: Block User
@@ -243,14 +206,16 @@ actions:
     input:
       id:
         title: User Id
-        type: integer
         description: User ID to block
+        type: integer
+        example: 17
         required: true
     output:
-      status:
-        title: Status
-        description: Status
+      success:
+        title: Success
+        description: Indicicate if action was successful
         type: boolean
+        example: True
         required: false
   unblock_user:
     title: Unblock User
@@ -258,14 +223,16 @@ actions:
     input:
       id:
         title: User ID
-        type: integer
         description: User ID to unblock
+        type: integer
+        example: 17
         required: true
     output:
-      status:
-        title: Status
-        description: Status
+      success:
+        title: Success
+        description: Indicicate if action was successful
         type: boolean
+        example: True
         required: false
   delete_user:
     title: Delete User
@@ -277,10 +244,11 @@ actions:
         description: User ID to unblock
         required: true
     output:
-      status:
-        title: Status
-        description: Status
+      success:
+        title: Success
+        description: Indicicate if action was successful
         type: boolean
+        example: True
         required: false
   get_user:
     title: Get User
@@ -288,79 +256,94 @@ actions:
     input:
       id:
         title: User ID
-        type: integer
         description: User ID
+        type: integer
+        example: 17
         required: true
     output:
       name:
         title: Name
         description: Name
         type: string
+        example: John Smith
         required: false
       avatar_url:
         title: Avatar URL
         description: Avatar URL
         type: string
+        example: http://localhost:3000/uploads/user/avatar/1/cd8.jpeg
         required: false
       state:
         title: State
         description: State
         type: string
+        example: active
         required: false
       web_url:
         title: Web URL
         description: Web URL
         type: string
+        example: http://localhost:3000/john_smith
         required: false
       id:
         title: ID
         description: ID
         type: integer
+        example: 17
         required: false
       username:
         title: Username
         description: Username
         type: string
+        example: john_smith
         required: false
       created_at:
         title: Created At
         description: Create at
         type: date
+        example: 2012-05-23T08:00:58Z
         required: false
       bio:
         title: Bio
         description: Bio
         type: string
+        example: Software engineer from blahblah I love coding
         required: false
       location:
         title: Location
         description: Location
         type: string
+        example: East Coast
         required: false
       skype:
         title: Skype
         description: Skype
         type: string
+        example: user@skype.com
         required: false
       linkedin:
         title: LinkedIn
         description: LinkedIn
         type: string
+        example: user@linkedin.com
         required: false
       twitter:
         title: Twitter
         description: Twitter
         type: string
+        example: user@twitter.com
         required: false
       website_url:
         title: Website URL
         description: Website URL
         type: string
+        example: john_smith@john_smith.com
         required: false
       organization:
         title: Organization
         description: Organization
         type: string
+        example: Rapid7
         required: false
   create_issue:
     title: Create Issue
@@ -368,104 +351,178 @@ actions:
     input:
       id:
         title: User ID
-        type: integer
         description: User ID to unblock
+        type: integer
+        example: 17
         required: true
-      parameters:
-        title: Issue Parameters
-        type: issue_input
-        description: Issue parameters
+      project_id:
+        title: Project ID
+        description: ID of project
+        type: integer
+        example: 4
+        required: true
+      title:
+        title: Issue title
+        description: The title of an issue
+        type: string
+        example: Issues with auth
+        required: true
+      description:
+        title: Description title
+        description: The description of an issue
+        type: string
+        example: Description of the issue
+        required: false
+      confidential:
+        title: Confidential
+        description: Set an issue to be confidential
+        type: boolean
+        example: False
+        required: false
+      assignee_ids:
+        title: Assignees
+        description: The ID of a user to assign issue
+        type: '[]integer'
+        example: [1, 2, 3, 4]
+        required: false
+      milestone_id:
+        title: Milestone
+        description: The ID of a milestone to assign issue
+        type: integer
+        example: 23
+        required: false
+      labels:
+        title: Labels
+        description: Comma-separated label names for an issue
+        type: string
+        example: False,Alert,Seen,Unseen
+        required: false
+      created_at:
+        title: Created At
+        description: Date, ISO 8601 formatted (requires admin or project owner rights)
+        type: date
+        example: 2016-01-07T12:44:33.959Z
+        required: false
+      due_date:
+        title: Due Date
+        description: Date time string in the format YEAR-MONTH-DAY
+        type: date
+        example: 2016-01-07T12:44:33.959Z
+        required: false
+      merge_request:
+        title: Merge Request To Resolve Discussions Of
+        description: The IID of a merge request in which to resolve all issues
+        type: integer
+        example: 13
+        required: false
+      discussion_resolve:
+        title: Discussion To Resolve
+        description: The ID of a discussion to resolve
+        type: string
+        example: TheDiscussion
         required: false
     output:
       project_id:
         title: Project ID
         description: Project ID
         type: integer
+        example: 13
         required: false
       id:
         title: ID
         description: ID
         type: integer
+        example: 12
         required: false
       created_at:
         title: Created At
         description: Created at
         type: date
+        example: 2016-01-07T12:44:33.959Z
         required: false
       iid:
         title: IID
         description: IID
         type: integer
+        example: 12
         required: false
       title:
         title: Title
         description: Title
         type: string
+        example: Issues with auth
         required: false
       state:
         title: State
         description: State
         type: string
+        example: opened
         required: false
       assignees:
         title: Assignees
         description: Assignees
         type: '[]user_output'
-        required: false
-      assignee:
-        title: Assignee
-        description: Assignee
-        type: user_output
+        example: [{"name" : "Alexandra Bashirian","avatar_url" : null,"state" : "active","web_url" : "https://gitlab.example.com/eileen.lowe","id" : 18,"username" : "eileen.lowe"}, {"name" : "John Smith","avatar_url" : null,"state" : "active","web_url" : "https://gitlab.example.com/john.smith","id" : 19,"username" : "john.smith"}]
         required: false
       labels:
         title: Labels
         description: Labels
         type: '[]string'
+        example: [label1, label2, label3]
         required: false
       description:
         title: Description
         description: Description
         type: string
+        example: Short description about the issue
         required: false
       updated_at:
         title: Updated At
         description: Updated at
         type: date
+        example: 2016-01-07T12:44:33.959Z
         required: false
       milestone:
         title: Milestone
         description: Milestone
         type: milestone_output
+        example: {"id": 3, "project_id": 3, "iid": 34, "title": "project title", "description": "project description", "state": "Opened", "created_at": 2016-01-07T12:44:33.959Z, "updated_at": 2016-01-07T12:44:33.959Z, "due_date": 2016-01-07T12:44:33.959Z}
         required: false
       subscribed:
         title: Subscribed
         description: Subscribed
         type: boolean
+        example: True
         required: false
       user_notes_count:
         title: User Notes Count
         description: User notes count
         type: integer
+        example: 20
         required: false
       due_date:
         title: Due Date
         description: Due date
         type: date
+        example: 2016-01-07T12:44:33.959Z
         required: false
       web_url:
         title: Web URL
         description: Web URL
         type: string
+        example: https://gitlab.example.com/eileen.lowe
         required: false
       confidential:
         title: Confidential
         description: Confidential
         type: boolean
+        example: True
         required: false
       author:
         title: Author
         description: Author
         type: user_output
+        example: {"name" : "Alexandra Bashirian","avatar_url" : null,"state" : "active","web_url" : "https://gitlab.example.com/eileen.lowe","id" : 18,"username" : "eileen.lowe"}
         required: false
 triggers:
   issue:
@@ -473,36 +530,48 @@ triggers:
     description: Monitor new issues
     input:
       state:
-        type: string
+        title: State
         description: Return all issues or just those that are opened or closed
+        type: string
         required: false
         enum:
-        - Opened
-        - Closed
+          - Opened
+          - Closed
+        example: Opened
       labels:
+        name: Labels
+        description: Comma-separated list of label names, issues must have all labels to be returned
         type: string
-        description: Comma-separated list of label names, issues must have all labels
-          to be returned
+        example: "label1,label2,label3"
         required: true
       milestone:
-        type: string
+        title: Milestone
         description: The milestone title
+        type: string
+        example: v4.0
         required: false
       iids:
-        type: integer
+        title: IIDS
         description: Return only the issues having the given iid
+        type: '[]integer'
+        example: [116, 115]
         required: false
       search:
-        type: string
+        title: Search
         description: Search issues against their title and description
+        type: string
+        example: Example issue
         required: false
       interval:
+        title: Interval
+        description: How often to check for new issues
         type: integer
-        description: How often receive new issues
+        example: 10
         required: false
     output:
       issue:
         title: Issue
         description: Issue
         type: object
+        example: {"state" : "opened","description" : "Ratione dolores corrupti mollitia soluta quia.","author" : {"state" : "active","id" : 18,"web_url" : "https://gitlab.example.com/eileen.lowe","name" : "Alexandra Bashirian","avatar_url" : null,"username" : "eileen.lowe"},"milestone" : {"project_id" : 1,"description" : "Ducimus nam enim ex consequatur cumque ratione.","state" : "closed","due_date" : null,"iid" : 2,"created_at" : "2016-01-04T15:31:39.996Z","title" : "v4.0","id" : 17,"updated_at" : "2016-01-04T15:31:39.996Z"},"project_id" : 1,"assignees" : [{"state" : "active","id" : 1,"name" : "Administrator","web_url" : "https://gitlab.example.com/root","avatar_url" : null,"username" : "root"}],"assignee" : {"state" : "active","id" : 1,"name" : "Administrator","web_url" : "https://gitlab.example.com/root","avatar_url" : null,"username" : "root"},"type" : "ISSUE","updated_at" : "2016-01-04T15:31:51.081Z","closed_at" : null,"closed_by" : null,"id" : 76,"title" : "Consequatur vero maxime deserunt laboriosam est voluptas dolorem.","created_at" : "2016-01-04T15:31:51.081Z","moved_to_id" : null,"iid" : 6,"labels" : ["foo", "bar"],"upvotes": 4,"downvotes": 0,"merge_requests_count": 0,"user_notes_count": 1,"due_date": "2016-07-22","web_url": "http://gitlab.example.com/my-group/my-project/issues/6","references": {"short": "#6","relative": "my-group/my-project#6","full": "my-group/my-project#6"},"time_stats": {"time_estimate": 0,"total_time_spent": 0,"human_time_estimate": null,"human_total_time_spent": null},"has_tasks": true,"task_status": "10 of 15 tasks completed","confidential": false,"discussion_locked": false,"issue_type": "issue","severity": "UNKNOWN","_links":{"self":"http://gitlab.example.com/api/v4/projects/1/issues/76","notes":"http://gitlab.example.com/api/v4/projects/1/issues/76/notes","award_emoji":"http://gitlab.example.com/api/v4/projects/1/issues/76/award_emoji","project":"http://gitlab.example.com/api/v4/projects/1","closed_as_duplicate_of": "http://gitlab.example.com/api/v4/projects/1/issues/75"},"task_completion_status":{"count":0,"completed_count":0}}
         required: false

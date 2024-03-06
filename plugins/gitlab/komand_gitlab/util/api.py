@@ -1,5 +1,6 @@
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
+from typing import List, Tuple, Union
 
 
 class GitLabAPI:
@@ -12,7 +13,7 @@ class GitLabAPI:
     def block_user(self, user_id: int):
         return self._call_api(method="POST", path=f"/users/{str(user_id)}/block")
 
-    def create_issue(self, project_id: int, issue_params):
+    def create_issue(self, project_id: int, issue_params: List[Tuple[str, Union[str, int]]]):
         return self._call_api(method="POST", path=f"projects/{str(project_id)}/issues", params=issue_params)
 
     def delete_ssh(self, user_id: int, key_id: int):
@@ -28,12 +29,16 @@ class GitLabAPI:
         return self._call_api(method="GET", path=f"/users/{str(user_id)}/keys")
 
     def unblock_user(self, user_id: int):
-        return self._call_api(method="POST", path=f"users/{str(user_id)}/unblock")
+        return self._call_api(method="POST", path=f"/users/{str(user_id)}/unblock")
 
-    def _call_api(self, method, path, params=None):
+    def get_issues(self, issue_params: List[Tuple[str, Union[str, int]]]):
+        return self._call_api(method="GET", path="/issues", params=issue_params)
+
+    def _call_api(self, method: str, path: str, params=None):
         headers = {"PRIVATE-TOKEN": self.token}
 
         response = requests.request(method, self.base_url + path, headers=headers, params=params, verify=self.verify)
+
         if response.status_code == 400:
             raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.json())
         if response.status_code == 401:

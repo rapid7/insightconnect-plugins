@@ -1,18 +1,22 @@
 # Description
 
-GitLab plugin allows user management and issue management in Gitlab
+GitLab is a next generation developer collaboration software with version control capabilities. The GitLab InsightConnect plugin enables user and issue management.
 
 # Key Features
   
-*This plugin does not contain any key features.*
+* Block and unblock users  
+* Delete SSH keys  
+* Retrieve users details  
+* Create issues
 
 # Requirements
   
-*This plugin does not contain any requirements.*
+* GitLab host URL  
+* GitLab account username and password (or token)
 
 # Supported Product Versions
   
-*This plugin does not contain any supported product versions.*
+* GitLab API v4
 
 # Documentation
 
@@ -23,7 +27,8 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |credentials|credential_username_password|None|True|Enter GitLab username and password (or token)|None|None|
-|url|string|None|True|Host URL e.g. https://gitlab.example.com:8000/api/v4/|None|None|
+|ssl_verify|boolean|None|True|Toggle SSL verify on or off for requests|None|True|
+|url|string|None|True|Host URL|None|https://gitlab.example.com:8000/api/v4/|
   
 Example input:
 
@@ -33,7 +38,8 @@ Example input:
     "password": "",
     "username": ""
   },
-  "url": ""
+  "ssl_verify": true,
+  "url": "https://gitlab.example.com:8000/api/v4/"
 }
 ```
 
@@ -50,13 +56,13 @@ This action is used to block GitLab user
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|integer|None|True|User ID to block|None|None|
+|id|integer|None|True|User ID to block|None|17|
   
 Example input:
 
 ```
 {
-  "id": 0
+  "id": 17
 }
 ```
 
@@ -64,13 +70,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|status|boolean|False|Status|None|
+|success|boolean|False|Indicicate if action was successful|True|
   
 Example output:
 
 ```
 {
-  "status": true
+  "success": true
 }
 ```
 
@@ -82,29 +88,40 @@ This action is used to create issue
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|integer|None|True|User ID to unblock|None|None|
-|parameters|issue_input|None|False|Issue parameters|None|None|
+|assignee_ids|[]integer|None|False|The ID of a user to assign issue|None|[1, 2, 3, 4]|
+|confidential|boolean|None|False|Set an issue to be confidential|None|False|
+|created_at|date|None|False|Date, ISO 8601 formatted (requires admin or project owner rights)|None|2016-01-07 12:44:33.959000+00:00|
+|description|string|None|False|The description of an issue|None|Description of the issue|
+|discussion_resolve|string|None|False|The ID of a discussion to resolve|None|TheDiscussion|
+|due_date|date|None|False|Date time string in the format YEAR-MONTH-DAY|None|2016-01-07 12:44:33.959000+00:00|
+|id|integer|None|True|User ID to unblock|None|17|
+|labels|string|None|False|Comma-separated label names for an issue|None|False,Alert,Seen,Unseen|
+|merge_request|integer|None|False|The IID of a merge request in which to resolve all issues|None|13|
+|milestone_id|integer|None|False|The ID of a milestone to assign issue|None|23|
+|project_id|integer|None|True|ID of project|None|4|
+|title|string|None|True|The title of an issue|None|Issues with auth|
   
 Example input:
 
 ```
 {
-  "id": 0,
-  "parameters": {
-    "Assignees": [
-      {}
-    ],
-    "Confidential": "true",
-    "Created At": "",
-    "Description title": {},
-    "Discussion To Resolve": {},
-    "Due Date": {},
-    "Issue title": "",
-    "Labels": {},
-    "Merge Request To Resolve Discussions Of": {},
-    "Milestone": {},
-    "Project ID": 0
-  }
+  "assignee_ids": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "confidential": false,
+  "created_at": "2016-01-07 12:44:33.959000+00:00",
+  "description": "Description of the issue",
+  "discussion_resolve": "TheDiscussion",
+  "due_date": "2016-01-07 12:44:33.959000+00:00",
+  "id": 17,
+  "labels": "False,Alert,Seen,Unseen",
+  "merge_request": 13,
+  "milestone_id": 23,
+  "project_id": 4,
+  "title": "Issues with auth"
 }
 ```
 
@@ -112,82 +129,83 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|assignee|user_output|False|Assignee|None|
-|assignees|[]user_output|False|Assignees|None|
-|author|user_output|False|Author|None|
-|confidential|boolean|False|Confidential|None|
-|created_at|date|False|Created at|None|
-|description|string|False|Description|None|
-|due_date|date|False|Due date|None|
-|id|integer|False|ID|None|
-|iid|integer|False|IID|None|
-|labels|[]string|False|Labels|None|
-|milestone|milestone_output|False|Milestone|None|
-|project_id|integer|False|Project ID|None|
-|state|string|False|State|None|
-|subscribed|boolean|False|Subscribed|None|
-|title|string|False|Title|None|
-|updated_at|date|False|Updated at|None|
-|user_notes_count|integer|False|User notes count|None|
-|web_url|string|False|Web URL|None|
+|assignees|[]user_output|False|Assignees|[{"name": "Alexandra Bashirian", "avatar_url": null, "state": "active", "web_url": "https://gitlab.example.com/eileen.lowe", "id": 18, "username": "eileen.lowe"}, {"name": "John Smith", "avatar_url": null, "state": "active", "web_url": "https://gitlab.example.com/john.smith", "id": 19, "username": "john.smith"}]|
+|author|user_output|False|Author|{'name': 'Alexandra Bashirian', 'avatar_url': None, 'state': 'active', 'web_url': 'https://gitlab.example.com/eileen.lowe', 'id': 18, 'username': 'eileen.lowe'}|
+|confidential|boolean|False|Confidential|True|
+|created_at|date|False|Created at|2016-01-07 12:44:33.959000+00:00|
+|description|string|False|Description|Short description about the issue|
+|due_date|date|False|Due date|2016-01-07 12:44:33.959000+00:00|
+|id|integer|False|ID|12|
+|iid|integer|False|IID|12|
+|labels|[]string|False|Labels|["label1", "label2", "label3"]|
+|milestone|milestone_output|False|Milestone|{'id': 3, 'project_id': 3, 'iid': 34, 'title': 'project title', 'description': 'project description', 'state': 'Opened', 'created_at': datetime.datetime(2016, 1, 7, 12, 44, 33, 959000, tzinfo=datetime.timezone.utc), 'updated_at': datetime.datetime(2016, 1, 7, 12, 44, 33, 959000, tzinfo=datetime.timezone.utc), 'due_date': datetime.datetime(2016, 1, 7, 12, 44, 33, 959000, tzinfo=datetime.timezone.utc)}|
+|project_id|integer|False|Project ID|13|
+|state|string|False|State|opened|
+|subscribed|boolean|False|Subscribed|True|
+|title|string|False|Title|Issues with auth|
+|updated_at|date|False|Updated at|2016-01-07 12:44:33.959000+00:00|
+|user_notes_count|integer|False|User notes count|20|
+|web_url|string|False|Web URL|https://gitlab.example.com/eileen.lowe|
   
 Example output:
 
 ```
 {
-  "assignee": {
-    "Avatar URL": {},
-    "ID": 0,
-    "Name": "",
-    "State": {},
-    "Username": {},
-    "Web URL": {}
-  },
   "assignees": [
     {
-      "Avatar URL": {},
-      "ID": 0,
-      "Name": "",
-      "State": {},
-      "Username": {},
-      "Web URL": {}
+      "avatar_url": null,
+      "id": 18,
+      "name": "Alexandra Bashirian",
+      "state": "active",
+      "username": "eileen.lowe",
+      "web_url": "https://gitlab.example.com/eileen.lowe"
+    },
+    {
+      "avatar_url": null,
+      "id": 19,
+      "name": "John Smith",
+      "state": "active",
+      "username": "john.smith",
+      "web_url": "https://gitlab.example.com/john.smith"
     }
   ],
   "author": {
-    "Avatar URL": {},
-    "ID": 0,
-    "Name": "",
-    "State": {},
-    "Username": {},
-    "Web URL": {}
+    "avatar_url": null,
+    "id": 18,
+    "name": "Alexandra Bashirian",
+    "state": "active",
+    "username": "eileen.lowe",
+    "web_url": "https://gitlab.example.com/eileen.lowe"
   },
   "confidential": true,
-  "created_at": "",
-  "description": "",
-  "due_date": "",
-  "id": 0,
-  "iid": 0,
+  "created_at": "2016-01-07 12:44:33.959000+00:00",
+  "description": "Short description about the issue",
+  "due_date": "2016-01-07 12:44:33.959000+00:00",
+  "id": 12,
+  "iid": 12,
   "labels": [
-    ""
+    "label1",
+    "label2",
+    "label3"
   ],
   "milestone": {
-    "Created At": "",
-    "Description": {},
-    "Due Date": {},
-    "ID": 0,
-    "IID": {},
-    "Project ID": {},
-    "State": {},
-    "Title": "",
-    "Updated At": {}
+    "created_at": "2016-01-07 12:44:33.959000+00:00",
+    "description": "project description",
+    "due_date": "2016-01-07 12:44:33.959000+00:00",
+    "id": 3,
+    "iid": 34,
+    "project_id": 3,
+    "state": "Opened",
+    "title": "project title",
+    "updated_at": "2016-01-07 12:44:33.959000+00:00"
   },
-  "project_id": 0,
-  "state": "",
+  "project_id": 13,
+  "state": "opened",
   "subscribed": true,
-  "title": "",
-  "updated_at": "",
-  "user_notes_count": 0,
-  "web_url": ""
+  "title": "Issues with auth",
+  "updated_at": "2016-01-07 12:44:33.959000+00:00",
+  "user_notes_count": 20,
+  "web_url": "https://gitlab.example.com/eileen.lowe"
 }
 ```
 
@@ -199,15 +217,15 @@ This action is used to delete user SSH key
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|integer|None|True|User ID|None|None|
-|key_id|integer|None|True|Key ID|None|None|
+|id|integer|None|True|User ID|None|18|
+|key_id|integer|None|True|Key ID|None|17|
   
 Example input:
 
 ```
 {
-  "id": 0,
-  "key_id": 0
+  "id": 18,
+  "key_id": 17
 }
 ```
 
@@ -215,13 +233,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|status|boolean|False|Status|None|
+|success|boolean|False|Indicicate if action was successful|True|
   
 Example output:
 
 ```
 {
-  "status": true
+  "success": true
 }
 ```
 
@@ -247,13 +265,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|status|boolean|False|Status|None|
+|success|boolean|False|Indicicate if action was successful|True|
   
 Example output:
 
 ```
 {
-  "status": true
+  "success": true
 }
 ```
 
@@ -265,13 +283,13 @@ This action is used to get GitLab user
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|integer|None|True|User ID|None|None|
+|id|integer|None|True|User ID|None|17|
   
 Example input:
 
 ```
 {
-  "id": 0
+  "id": 17
 }
 ```
 
@@ -279,39 +297,39 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|avatar_url|string|False|Avatar URL|None|
-|bio|string|False|Bio|None|
-|created_at|date|False|Create at|None|
-|id|integer|False|ID|None|
-|linkedin|string|False|LinkedIn|None|
-|location|string|False|Location|None|
-|name|string|False|Name|None|
-|organization|string|False|Organization|None|
-|skype|string|False|Skype|None|
-|state|string|False|State|None|
-|twitter|string|False|Twitter|None|
-|username|string|False|Username|None|
-|web_url|string|False|Web URL|None|
-|website_url|string|False|Website URL|None|
+|avatar_url|string|False|Avatar URL|http://localhost:3000/uploads/user/avatar/1/cd8.jpeg|
+|bio|string|False|Bio|Software engineer from blahblah I love coding|
+|created_at|date|False|Create at|2012-05-23 08:00:58+00:00|
+|id|integer|False|ID|17|
+|linkedin|string|False|LinkedIn|user@linkedin.com|
+|location|string|False|Location|East Coast|
+|name|string|False|Name|John Smith|
+|organization|string|False|Organization|Rapid7|
+|skype|string|False|Skype|user@skype.com|
+|state|string|False|State|active|
+|twitter|string|False|Twitter|user@twitter.com|
+|username|string|False|Username|john_smith|
+|web_url|string|False|Web URL|http://localhost:3000/john_smith|
+|website_url|string|False|Website URL|john_smith@john_smith.com|
   
 Example output:
 
 ```
 {
-  "avatar_url": "",
-  "bio": "",
-  "created_at": "",
-  "id": 0,
-  "linkedin": "",
-  "location": "",
-  "name": "",
-  "organization": "",
-  "skype": "",
-  "state": "",
-  "twitter": "",
-  "username": "",
-  "web_url": "",
-  "website_url": ""
+  "avatar_url": "http://localhost:3000/uploads/user/avatar/1/cd8.jpeg",
+  "bio": "Software engineer from blahblah I love coding",
+  "created_at": "2012-05-23 08:00:58+00:00",
+  "id": 17,
+  "linkedin": "user@linkedin.com",
+  "location": "East Coast",
+  "name": "John Smith",
+  "organization": "Rapid7",
+  "skype": "user@skype.com",
+  "state": "active",
+  "twitter": "user@twitter.com",
+  "username": "john_smith",
+  "web_url": "http://localhost:3000/john_smith",
+  "website_url": "john_smith@john_smith.com"
 }
 ```
 
@@ -323,13 +341,13 @@ This action is used to list user SSH keys
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|integer|None|True|User ID|None|None|
+|id|integer|None|True|The ID of the user|None|17|
   
 Example input:
 
 ```
 {
-  "id": 0
+  "id": 17
 }
 ```
 
@@ -337,7 +355,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|ssh_keys|[]ssh_output|False|SSH keys|None|
+|ssh_keys|[]ssh_output|False|SSH keys|[{"created_at": "12.02.23", "id": 17, "key": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAiPWx6WM4lhHNedGfBpPJNPpZ7yKu+dnn1SJejgt4596k6YjzGGphH2TUxwKzxcKDKKezwkpfnxPkSMkuEspGRt/aZZ9wa++Oi7Qkr8prgHc4soW6NUlfDzpvZK2H5E7eQaSeP3SAwGmQKUFHCddNaP0L+hM7zhFNzjFvpaMgJw0=", "title": "MyPubKey"}, {"created_at": "12.02.23", "id": 18, "key": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAiPWx6WM4lhHNedGfBpPJNPpZ7yKu+dnn1SJejgt4596k6YjzGGphH2TUxwKzxcKDKKezwkpfnxPkSMkuEspGRt/aZZ9wa++Oi7Qkr8prgHc4soW6NUlfDzpvZK2H5E7eQaSeP3SAwGmQKUFHCddNaP0L+hM7zhFNzjFvpaMgJw0=", "title": "MyPubKey2"}]|
   
 Example output:
 
@@ -345,10 +363,16 @@ Example output:
 {
   "ssh_keys": [
     {
-      "Created At": "",
-      "ID": 0,
-      "SSH Key": {},
-      "Title": ""
+      "created_at": "12.02.23",
+      "id": 17,
+      "key": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAiPWx6WM4lhHNedGfBpPJNPpZ7yKu+dnn1SJejgt4596k6YjzGGphH2TUxwKzxcKDKKezwkpfnxPkSMkuEspGRt/aZZ9wa++Oi7Qkr8prgHc4soW6NUlfDzpvZK2H5E7eQaSeP3SAwGmQKUFHCddNaP0L+hM7zhFNzjFvpaMgJw0=",
+      "title": "MyPubKey"
+    },
+    {
+      "created_at": "12.02.23",
+      "id": 18,
+      "key": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAiPWx6WM4lhHNedGfBpPJNPpZ7yKu+dnn1SJejgt4596k6YjzGGphH2TUxwKzxcKDKKezwkpfnxPkSMkuEspGRt/aZZ9wa++Oi7Qkr8prgHc4soW6NUlfDzpvZK2H5E7eQaSeP3SAwGmQKUFHCddNaP0L+hM7zhFNzjFvpaMgJw0=",
+      "title": "MyPubKey2"
     }
   ]
 }
@@ -362,13 +386,13 @@ This action is used to unlock GitLab user
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|integer|None|True|User ID to unblock|None|None|
+|id|integer|None|True|User ID to unblock|None|17|
   
 Example input:
 
 ```
 {
-  "id": 0
+  "id": 17
 }
 ```
 
@@ -376,15 +400,16 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|status|boolean|False|Status|None|
+|success|boolean|False|Indicicate if action was successful|True|
   
 Example output:
 
 ```
 {
-  "status": true
+  "success": true
 }
 ```
+
 ### Triggers
 
 
@@ -396,26 +421,26 @@ This trigger is used to monitor new issues
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|iids|integer|None|False|Return only the issues having the given iid|None|None|
-|interval|integer|None|False|How often receive new issues|None|None|
-|labels|string|None|True|Comma-separated list of label names, issues must have all labels to be returned|None|None|
-|milestone|string|None|False|The milestone title|None|None|
-|search|string|None|False|Search issues against their title and description|None|None|
-|state|string|None|False|Return all issues or just those that are opened or closed|["Opened", "Closed"]|None|
+|iids|[]integer|None|False|Return only the issues having the given iid|None|[116, 115]|
+|interval|integer|None|False|How often to check for new issues|None|10|
+|labels|string|None|True|Comma-separated list of label names, issues must have all labels to be returned|None|label1,label2,label3|
+|milestone|string|None|False|The milestone title|None|v4.0|
+|search|string|None|False|Search issues against their title and description|None|Example issue|
+|state|string|None|False|Return all issues or just those that are opened or closed|["Opened", "Closed"]|Opened|
   
 Example input:
 
 ```
 {
-  "iids": 0,
-  "interval": 0,
-  "labels": "",
-  "milestone": "",
-  "search": "",
-  "state": [
-    "Opened",
-    "Closed"
-  ]
+  "iids": [
+    116,
+    115
+  ],
+  "interval": 10,
+  "labels": "label1,label2,label3",
+  "milestone": "v4.0",
+  "search": "Example issue",
+  "state": "Opened"
 }
 ```
 
@@ -423,13 +448,101 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|issue|object|False|Issue|None|
+|issue|object|False|Issue|{'state': 'opened', 'description': 'Ratione dolores corrupti mollitia soluta quia.', 'author': {'state': 'active', 'id': 18, 'web_url': 'https://gitlab.example.com/eileen.lowe', 'name': 'Alexandra Bashirian', 'avatar_url': None, 'username': 'eileen.lowe'}, 'milestone': {'project_id': 1, 'description': 'Ducimus nam enim ex consequatur cumque ratione.', 'state': 'closed', 'due_date': None, 'iid': 2, 'created_at': '2016-01-04T15:31:39.996Z', 'title': 'v4.0', 'id': 17, 'updated_at': '2016-01-04T15:31:39.996Z'}, 'project_id': 1, 'assignees': [{'state': 'active', 'id': 1, 'name': 'Administrator', 'web_url': 'https://gitlab.example.com/root', 'avatar_url': None, 'username': 'root'}], 'assignee': {'state': 'active', 'id': 1, 'name': 'Administrator', 'web_url': 'https://gitlab.example.com/root', 'avatar_url': None, 'username': 'root'}, 'type': 'ISSUE', 'updated_at': '2016-01-04T15:31:51.081Z', 'closed_at': None, 'closed_by': None, 'id': 76, 'title': 'Consequatur vero maxime deserunt laboriosam est voluptas dolorem.', 'created_at': '2016-01-04T15:31:51.081Z', 'moved_to_id': None, 'iid': 6, 'labels': ['foo', 'bar'], 'upvotes': 4, 'downvotes': 0, 'merge_requests_count': 0, 'user_notes_count': 1, 'due_date': '2016-07-22', 'web_url': 'http://gitlab.example.com/my-group/my-project/issues/6', 'references': {'short': '#6', 'relative': 'my-group/my-project#6', 'full': 'my-group/my-project#6'}, 'time_stats': {'time_estimate': 0, 'total_time_spent': 0, 'human_time_estimate': None, 'human_total_time_spent': None}, 'has_tasks': True, 'task_status': '10 of 15 tasks completed', 'confidential': False, 'discussion_locked': False, 'issue_type': 'issue', 'severity': 'UNKNOWN', '_links': {'self': 'http://gitlab.example.com/api/v4/projects/1/issues/76', 'notes': 'http://gitlab.example.com/api/v4/projects/1/issues/76/notes', 'award_emoji': 'http://gitlab.example.com/api/v4/projects/1/issues/76/award_emoji', 'project': 'http://gitlab.example.com/api/v4/projects/1', 'closed_as_duplicate_of': 'http://gitlab.example.com/api/v4/projects/1/issues/75'}, 'task_completion_status': {'count': 0, 'completed_count': 0}}|
   
 Example output:
 
 ```
 {
-  "issue": {}
+  "issue": {
+    "_links": {
+      "award_emoji": "http://gitlab.example.com/api/v4/projects/1/issues/76/award_emoji",
+      "closed_as_duplicate_of": "http://gitlab.example.com/api/v4/projects/1/issues/75",
+      "notes": "http://gitlab.example.com/api/v4/projects/1/issues/76/notes",
+      "project": "http://gitlab.example.com/api/v4/projects/1",
+      "self": "http://gitlab.example.com/api/v4/projects/1/issues/76"
+    },
+    "assignee": {
+      "avatar_url": null,
+      "id": 1,
+      "name": "Administrator",
+      "state": "active",
+      "username": "root",
+      "web_url": "https://gitlab.example.com/root"
+    },
+    "assignees": [
+      {
+        "avatar_url": null,
+        "id": 1,
+        "name": "Administrator",
+        "state": "active",
+        "username": "root",
+        "web_url": "https://gitlab.example.com/root"
+      }
+    ],
+    "author": {
+      "avatar_url": null,
+      "id": 18,
+      "name": "Alexandra Bashirian",
+      "state": "active",
+      "username": "eileen.lowe",
+      "web_url": "https://gitlab.example.com/eileen.lowe"
+    },
+    "closed_at": null,
+    "closed_by": null,
+    "confidential": false,
+    "created_at": "2016-01-04T15:31:51.081Z",
+    "description": "Ratione dolores corrupti mollitia soluta quia.",
+    "discussion_locked": false,
+    "downvotes": 0,
+    "due_date": "2016-07-22",
+    "has_tasks": true,
+    "id": 76,
+    "iid": 6,
+    "issue_type": "issue",
+    "labels": [
+      "foo",
+      "bar"
+    ],
+    "merge_requests_count": 0,
+    "milestone": {
+      "created_at": "2016-01-04T15:31:39.996Z",
+      "description": "Ducimus nam enim ex consequatur cumque ratione.",
+      "due_date": null,
+      "id": 17,
+      "iid": 2,
+      "project_id": 1,
+      "state": "closed",
+      "title": "v4.0",
+      "updated_at": "2016-01-04T15:31:39.996Z"
+    },
+    "moved_to_id": null,
+    "project_id": 1,
+    "references": {
+      "full": "my-group/my-project#6",
+      "relative": "my-group/my-project#6",
+      "short": "#6"
+    },
+    "severity": "UNKNOWN",
+    "state": "opened",
+    "task_completion_status": {
+      "completed_count": 0,
+      "count": 0
+    },
+    "task_status": "10 of 15 tasks completed",
+    "time_stats": {
+      "human_time_estimate": null,
+      "human_total_time_spent": null,
+      "time_estimate": 0,
+      "total_time_spent": 0
+    },
+    "title": "Consequatur vero maxime deserunt laboriosam est voluptas dolorem.",
+    "type": "ISSUE",
+    "updated_at": "2016-01-04T15:31:51.081Z",
+    "upvotes": 4,
+    "user_notes_count": 1,
+    "web_url": "http://gitlab.example.com/my-group/my-project/issues/6"
+  }
 }
 ```
 ### Tasks
@@ -462,31 +575,15 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Created At|date|None|False|Date project was created|None|
-|Description|string|None|False|Project Description|None|
-|Due Date|date|None|False|Date project is to be closed|None|
-|ID|integer|None|False|Unique milestone ID|None|
-|IID|integer|None|False|Unique ID only in scope of a single project|None|
-|Project ID|integer|None|False|Project ID|None|
-|State|string|None|False|Project State e.g. 'Opened', 'Closed'|None|
-|Title|string|None|False|Project title|None|
-|Updated At|date|None|False|Date project was updated|None|
-  
-**issue_input**
-
-|Name|Type|Default|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- |
-|Assignees|[]integer|None|False|The ID of a user to assign issue|None|
-|Confidential|boolean|None|False|Set an issue to be confidential|None|
-|Created At|date|None|False|Date, ISO 8601 formatted (requires admin or project owner rights)|None|
-|Description title|string|None|False|The description of an issue|None|
-|Discussion To Resolve|string|None|False|The ID of a discussion to resolve|None|
-|Due Date|date|None|False|Date time string in the format YEAR-MONTH-DAY|None|
-|Labels|string|None|False|Comma-separated label names for an issue|None|
-|Merge Request To Resolve Discussions Of|integer|None|False|The IID of a merge request in which to resolve all issues|None|
-|Milestone|integer|None|False|The ID of a milestone to assign issue|None|
-|Project ID|integer|None|True|ID of project|None|
-|Issue title|string|None|True|The title of an issue|None|
+|Created At|date|None|False|Date project was created|2016-01-07 12:44:33.959000+00:00|
+|Description|string|None|False|Project description|Description about the project|
+|Due Date|date|None|False|Date project is to be closed|2016-01-07 12:44:33.959000+00:00|
+|ID|integer|None|False|Unique milestone ID|2|
+|IID|integer|None|False|Unique ID only in scope of a single project|23|
+|Project ID|integer|None|False|Project ID|3|
+|State|string|None|False|Project state|Opened|
+|Title|string|None|False|Project title|Project title|
+|Updated At|date|None|False|Date project was updated|2016-01-07 12:44:33.959000+00:00|
 
 
 ## Troubleshooting
@@ -495,11 +592,16 @@ Example output:
 
 # Version History
   
-*This plugin does not contain a version history.*
+* 2.0.0 - Update SDK | Refactor Plugin | `Connection` - New input: `ssl_verify`  
+* 1.0.1 - New spec and help.md format for the Extension Library  
+* 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types  
+* 0.1.1 - SSL bug fix in SDK  
+* 0.1.0 - Initial plugin
 
 # Links
 
+* [GitLab](https://gitlab.com)
 
 ## References
   
-*This plugin does not contain any references.*
+* [GitLab API](https://docs.gitlab.com/ce/api/README.html)

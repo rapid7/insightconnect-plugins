@@ -1,86 +1,46 @@
 import insightconnect_plugin_runtime
 import time
-import json
-import urllib
-import requests
-import datetime
-from .schema import IssueInput, IssueOutput
+from .schema import IssueInput, IssueOutput, Input, Output, Component
 
 # Custom imports below
+from komand_gitlab.util.util import Util
 
 
 class Issue(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="issue", description="Monitor new issues", input=IssueInput(), output=IssueOutput()
+            name="issue", description=Component.DESCRIPTION, input=IssueInput(), output=IssueOutput()
         )
 
-    def clean_json(self, obj):
-        new_json = []
-        for key, value in obj.items():
-            if value is None:
-                value = ""
-            if key == "assignee" and value == "":
-                value = {}
-            if key == "milestone" and value == "":
-                value = {}
-            new_json.append((key, value))
-        output = json.dumps(dict(new_json))
-        return json.loads(output)
-
-    def new(self, date):
-        acceptable = "0:00:30.000000"  # last 15 sec
-        #'0:00:15.761923'
-        time_now = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
-        time_now = datetime.datetime.strptime(time_now, "%Y-%m-%dT%H:%M:%S.%fZ")
-
-        date = datetime.datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%fZ")
-
-        differance = str(time_now - date)
-        if differance > acceptable:
-            return False
-        return True
-
     def run(self, params={}):
-        issues = None
         issue_params = []
         new_issues = []
         seen = []
-        if params.get("milestone"):
-            issue_params.append(("milestone", params.get("milestone")))
-        if params.get("labels"):
-            issue_params.append(("labels", params.get("labels")))
-        if params.get("state"):
-            issue_params.append(("state", params.get("state").lower()))
-        if params.get("search"):
-            issue_params.append(("search", params.get("search")))
-        if params.get("iid"):
-            issue_params.append(("iid", params.get("iid")))
+
+        if params.get(Input.MILESTONE):
+            issue_params.append(("milestone", params.get(Input.MILESTONE)))
+        if params.get(Input.LABELS):
+            issue_params.append(("labels", params.get(Input.LABELS)))
+        if params.get(Input.STATE):
+            issue_params.append(("state", params.get(Input.STATE).lower()))
+        if params.get(Input.SEARCH):
+            issue_params.append(("search", params.get(Input.SEARCH)))
+        if params.get(Input.IIDS):
+            issue_params.append(("iid", params.get(Input.IIDS)))
 
         while True:
-            self.logger.info("Searching")
-            r_url = "%s/issues" % (self.connection.url)
-            r_url += "?%s" % (urllib.parse.urlencode(issue_params))
+            self.logger.info("Searching for new issues.. ")
 
-            try:
-                r = requests.get(r_url, headers={"PRIVATE-TOKEN": self.connection.token}, verify=False)  # noqa: B501
-                if r.ok:
-                    issues = r.json()
-                    for issue in issues:
-                        issue = self.clean_json(json.loads(json.dumps(issue)))
-                        if self.new(issue["updated_at"]):
-                            new_issues.append(issue)
-                if len(new_issues):
-                    if new_issues[0] in seen:
-                        a = "seen"
-                    else:
-                        self.send(new_issues[0])
-                        seen.append(new_issues[0])
-            except requests.exceptions.RequestException as e:  # This is the correct syntax
-                self.logger.error(e)
+            issues = self.connection.client.get_issues(params=issue_params)
+            for issue in issues:
+                issue = Util.clean_json(issue)
+                if Util.is_issue_new(issue.get("updated_at", "")):
+                    new_issues.append(issue)
+            if len(new_issues):
+                if new_issues[0] not in seen:
+                    self.send({Output.ISSUE: new_issues[0]})
+                    seen.append(new_issues[0])
+                else:
+                    continue
 
-            time.sleep(params.get("interval") or 5)
-
-    def test(self):
-        """TODO: Test the trigger"""
-        return {}
+            time.sleep(params.get(Input.INTERVAL, 5))

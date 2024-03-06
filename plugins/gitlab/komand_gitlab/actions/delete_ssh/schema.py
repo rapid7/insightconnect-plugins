@@ -13,7 +13,7 @@ class Input:
 
 
 class Output:
-    STATUS = "status"
+    SUCCESS = "success"
 
 
 class DeleteSshInput(insightconnect_plugin_runtime.Input):
@@ -53,10 +53,10 @@ class DeleteSshOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "status": {
+    "success": {
       "type": "boolean",
-      "title": "Status",
-      "description": "Status",
+      "title": "Success",
+      "description": "Indicicate if action was successful",
       "order": 1
     }
   },

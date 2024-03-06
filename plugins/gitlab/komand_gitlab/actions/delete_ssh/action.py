@@ -14,7 +14,6 @@ class DeleteSsh(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        # TODO - Change their type to string
         user_id = params.get(Input.ID)
         key_id = params.get(Input.KEY_ID)
         self.connection.client.delete_ssh(user_id=user_id, key_id=key_id)

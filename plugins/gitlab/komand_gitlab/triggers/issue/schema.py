@@ -27,13 +27,18 @@ class IssueInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "iids": {
-      "type": "integer",
+      "type": "array",
+      "title": "IIDS",
       "description": "Return only the issues having the given iid",
+      "items": {
+        "type": "integer"
+      },
       "order": 4
     },
     "interval": {
       "type": "integer",
-      "description": "How often receive new issues",
+      "title": "Interval",
+      "description": "How often to check for new issues",
       "order": 6
     },
     "labels": {
@@ -43,16 +48,19 @@ class IssueInput(insightconnect_plugin_runtime.Input):
     },
     "milestone": {
       "type": "string",
+      "title": "Milestone",
       "description": "The milestone title",
       "order": 3
     },
     "search": {
       "type": "string",
+      "title": "Search",
       "description": "Search issues against their title and description",
       "order": 5
     },
     "state": {
       "type": "string",
+      "title": "State",
       "description": "Return all issues or just those that are opened or closed",
       "enum": [
         "Opened",

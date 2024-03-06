@@ -8,12 +8,21 @@ class Component:
 
 
 class Input:
+    ASSIGNEE_IDS = "assignee_ids"
+    CONFIDENTIAL = "confidential"
+    CREATED_AT = "created_at"
+    DESCRIPTION = "description"
+    DISCUSSION_RESOLVE = "discussion_resolve"
+    DUE_DATE = "due_date"
     ID = "id"
-    PARAMETERS = "parameters"
+    LABELS = "labels"
+    MERGE_REQUEST = "merge_request"
+    MILESTONE_ID = "milestone_id"
+    PROJECT_ID = "project_id"
+    TITLE = "title"
 
 
 class Output:
-    ASSIGNEE = "assignee"
     ASSIGNEES = "assignees"
     AUTHOR = "author"
     CONFIDENTIAL = "confidential"
@@ -39,107 +48,92 @@ class CreateIssueInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "assignee_ids": {
+      "type": "array",
+      "title": "Assignees",
+      "description": "The ID of a user to assign issue",
+      "items": {
+        "type": "integer"
+      },
+      "order": 6
+    },
+    "confidential": {
+      "type": "boolean",
+      "title": "Confidential",
+      "description": "Set an issue to be confidential",
+      "order": 5
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "displayType": "date",
+      "title": "Created At",
+      "description": "Date, ISO 8601 formatted (requires admin or project owner rights)",
+      "order": 9
+    },
+    "description": {
+      "type": "string",
+      "title": "Description title",
+      "description": "The description of an issue",
+      "order": 4
+    },
+    "discussion_resolve": {
+      "type": "string",
+      "title": "Discussion To Resolve",
+      "description": "The ID of a discussion to resolve",
+      "order": 12
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date-time",
+      "displayType": "date",
+      "title": "Due Date",
+      "description": "Date time string in the format YEAR-MONTH-DAY",
+      "order": 10
+    },
     "id": {
       "type": "integer",
       "title": "User ID",
       "description": "User ID to unblock",
       "order": 1
     },
-    "parameters": {
-      "$ref": "#/definitions/issue_input",
-      "title": "Issue Parameters",
-      "description": "Issue parameters",
+    "labels": {
+      "type": "string",
+      "title": "Labels",
+      "description": "Comma-separated label names for an issue",
+      "order": 8
+    },
+    "merge_request": {
+      "type": "integer",
+      "title": "Merge Request To Resolve Discussions Of",
+      "description": "The IID of a merge request in which to resolve all issues",
+      "order": 11
+    },
+    "milestone_id": {
+      "type": "integer",
+      "title": "Milestone",
+      "description": "The ID of a milestone to assign issue",
+      "order": 7
+    },
+    "project_id": {
+      "type": "integer",
+      "title": "Project ID",
+      "description": "ID of project",
       "order": 2
+    },
+    "title": {
+      "type": "string",
+      "title": "Issue title",
+      "description": "The title of an issue",
+      "order": 3
     }
   },
   "required": [
-    "id"
+    "id",
+    "project_id",
+    "title"
   ],
-  "definitions": {
-    "issue_input": {
-      "type": "object",
-      "title": "issue_input",
-      "properties": {
-        "project_id": {
-          "type": "integer",
-          "title": "Project ID",
-          "description": "ID of project",
-          "order": 1
-        },
-        "title": {
-          "type": "string",
-          "title": "Issue title",
-          "description": "The title of an issue",
-          "order": 2
-        },
-        "description": {
-          "type": "string",
-          "title": "Description title",
-          "description": "The description of an issue",
-          "order": 3
-        },
-        "confidential": {
-          "type": "boolean",
-          "title": "Confidential",
-          "description": "Set an issue to be confidential",
-          "order": 4
-        },
-        "assignee_ids": {
-          "type": "array",
-          "title": "Assignees",
-          "description": "The ID of a user to assign issue",
-          "items": {
-            "type": "integer"
-          },
-          "order": 5
-        },
-        "milestone_id": {
-          "type": "integer",
-          "title": "Milestone",
-          "description": "The ID of a milestone to assign issue",
-          "order": 6
-        },
-        "labels": {
-          "type": "string",
-          "title": "Labels",
-          "description": "Comma-separated label names for an issue",
-          "order": 7
-        },
-        "created_at": {
-          "type": "string",
-          "format": "date-time",
-          "displayType": "date",
-          "title": "Created At",
-          "description": "Date, ISO 8601 formatted (requires admin or project owner rights)",
-          "order": 8
-        },
-        "due_date": {
-          "type": "string",
-          "format": "date-time",
-          "displayType": "date",
-          "title": "Due Date",
-          "description": "Date time string in the format YEAR-MONTH-DAY",
-          "order": 9
-        },
-        "merge_request": {
-          "type": "integer",
-          "title": "Merge Request To Resolve Discussions Of",
-          "description": "The IID of a merge request in which to resolve all issues",
-          "order": 10
-        },
-        "discussion_resolve": {
-          "type": "string",
-          "title": "Discussion To Resolve",
-          "description": "The ID of a discussion to resolve",
-          "order": 11
-        }
-      },
-      "required": [
-        "project_id",
-        "title"
-      ]
-    }
-  }
+  "definitions": {}
 }
     """)
 
@@ -153,12 +147,6 @@ class CreateIssueOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "assignee": {
-      "$ref": "#/definitions/user_output",
-      "title": "Assignee",
-      "description": "Assignee",
-      "order": 8
-    },
     "assignees": {
       "type": "array",
       "title": "Assignees",
@@ -172,13 +160,13 @@ class CreateIssueOutput(insightconnect_plugin_runtime.Output):
       "$ref": "#/definitions/user_output",
       "title": "Author",
       "description": "Author",
-      "order": 18
+      "order": 17
     },
     "confidential": {
       "type": "boolean",
       "title": "Confidential",
       "description": "Confidential",
-      "order": 17
+      "order": 16
     },
     "created_at": {
       "type": "string",
@@ -192,7 +180,7 @@ class CreateIssueOutput(insightconnect_plugin_runtime.Output):
       "type": "string",
       "title": "Description",
       "description": "Description",
-      "order": 10
+      "order": 9
     },
     "due_date": {
       "type": "string",
@@ -200,7 +188,7 @@ class CreateIssueOutput(insightconnect_plugin_runtime.Output):
       "displayType": "date",
       "title": "Due Date",
       "description": "Due date",
-      "order": 15
+      "order": 14
     },
     "id": {
       "type": "integer",
@@ -221,13 +209,13 @@ class CreateIssueOutput(insightconnect_plugin_runtime.Output):
       "items": {
         "type": "string"
       },
-      "order": 9
+      "order": 8
     },
     "milestone": {
       "$ref": "#/definitions/milestone_output",
       "title": "Milestone",
       "description": "Milestone",
-      "order": 12
+      "order": 11
     },
     "project_id": {
       "type": "integer",
@@ -245,7 +233,7 @@ class CreateIssueOutput(insightconnect_plugin_runtime.Output):
       "type": "boolean",
       "title": "Subscribed",
       "description": "Subscribed",
-      "order": 13
+      "order": 12
     },
     "title": {
       "type": "string",
@@ -259,19 +247,19 @@ class CreateIssueOutput(insightconnect_plugin_runtime.Output):
       "displayType": "date",
       "title": "Updated At",
       "description": "Updated at",
-      "order": 11
+      "order": 10
     },
     "user_notes_count": {
       "type": "integer",
       "title": "User Notes Count",
       "description": "User notes count",
-      "order": 14
+      "order": 13
     },
     "web_url": {
       "type": "string",
       "title": "Web URL",
       "description": "Web URL",
-      "order": 16
+      "order": 15
     }
   },
   "definitions": {
@@ -348,13 +336,13 @@ class CreateIssueOutput(insightconnect_plugin_runtime.Output):
         "description": {
           "type": "string",
           "title": "Description",
-          "description": "Project Description",
+          "description": "Project description",
           "order": 5
         },
         "state": {
           "type": "string",
           "title": "State",
-          "description": "Project State e.g. 'Opened', 'Closed'",
+          "description": "Project state",
           "order": 6
         },
         "created_at": {

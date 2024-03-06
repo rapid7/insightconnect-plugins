@@ -23,8 +23,8 @@ class ListSshInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "id": {
       "type": "integer",
-      "title": "User II",
-      "description": "User ID",
+      "title": "User ID",
+      "description": "The ID of the user",
       "order": 1
     }
   },
