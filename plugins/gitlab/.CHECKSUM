@@ -1,5 +1,5 @@
 {
-	"spec": "8beaaabf1f0669f810488ec62aacf41d",
+	"spec": "28f727140ed3ea9b7ad8caab2b6e9a8d",
 	"manifest": "931ef307a3e134804411cc0a72b4a0fa",
 	"setup": "46fe1e77c43c33d26cbd33978225be94",
 	"schemas": [
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "create_issue/schema.py",
-			"hash": "0000e8600862a9989848ac0474f4d319"
+			"hash": "de790800ed7b6b9c2cbc3946764ff7e1"
 		},
 		{
 			"identifier": "delete_ssh/schema.py",

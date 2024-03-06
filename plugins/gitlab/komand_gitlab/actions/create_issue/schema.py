@@ -105,7 +105,7 @@ class CreateIssueInput(insightconnect_plugin_runtime.Input):
     },
     "merge_request": {
       "type": "integer",
-      "title": "Merge Request To Resolve Discussions Of",
+      "title": "Merge Request to Resolve Discussions of",
       "description": "The IID of a merge request in which to resolve all issues",
       "order": 11
     },
