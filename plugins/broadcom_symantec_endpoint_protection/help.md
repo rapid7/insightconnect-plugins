@@ -309,6 +309,7 @@ Domain IDs are not the actual domain names - they are individual, unique IDs tha
 
 # Version History
 
+* 1.0.3 - Update SDK to version to 5.4.4
 * 1.0.2 - Update Blacklist action to not accept SHA256 hashes
 * 1.0.1 - Workflow usability fixes
 * 1.0.0 - Initial plugin
