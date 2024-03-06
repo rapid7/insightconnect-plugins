@@ -4,7 +4,6 @@ from .schema import ImportObservableInput, ImportObservableOutput, Component, In
 # Custom imports below
 import base64
 from copy import copy
-from json import JSONDecodeError
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -33,11 +32,10 @@ class ImportObservable(insightconnect_plugin_runtime.Action):
         data = {}
         observable_settings = params.get(Input.OBSERVABLE_SETTINGS, {})
         # Format observable settings
-        print(observable_settings)
         if observable_settings.get("expiration_ts", "").startswith("0001-01-01"):
             del observable_settings["expiration_ts"]
         for key, value in observable_settings.items():
-            if key == "notes" or key == "trustedcircles":
+            if key in ("notes", "trustedcircles"):
                 value = ",".join(str(val) for val in value)
 
             data[key] = value

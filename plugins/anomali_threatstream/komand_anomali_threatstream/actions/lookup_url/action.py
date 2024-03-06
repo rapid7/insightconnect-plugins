@@ -21,9 +21,9 @@ class LookupUrl(insightconnect_plugin_runtime.Action):
         self.request.url, self.request.method = self.request.url + "/intelligence", "GET"
 
         # Pagination flag and results placeholder
-        self.continue_paging, self.results = True, list()
+        self.continue_paging, self.results = True, []
         # Update the request with the supplied domain, page size, and offset
-        self.request.params.update({"url": "{url}".format(url=params.get(Input.URL)), "limit": 1000, "offset": 0})
+        self.request.params.update({"url": f"{params.get(Input.URL)}", "limit": 1000, "offset": 0})
 
         while self.continue_paging:
             response_data = self.connection.api.send(self.request)

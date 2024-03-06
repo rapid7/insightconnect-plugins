@@ -4,7 +4,6 @@ from .schema import GetSandboxReportInput, GetSandboxReportOutput, Input, Output
 # Custom imports below
 from copy import copy
 from insightconnect_plugin_runtime.exceptions import PluginException
-from json.decoder import JSONDecodeError
 
 
 class GetSandboxReport(insightconnect_plugin_runtime.Action):
@@ -26,8 +25,6 @@ class GetSandboxReport(insightconnect_plugin_runtime.Action):
         self.logger.info(f"Submitting URL to {self.request.url}")
         response_data = self.connection.api.send(self.request)
 
-        print("REPORT")
-        print(response_data)
         try:
             domains_detail = response_data["results"]["network"]["domains"]
             info = response_data["results"]["info"]

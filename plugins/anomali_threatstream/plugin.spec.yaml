@@ -420,6 +420,7 @@ actions:
         description: Results returned
         type: '[]result'
         required: false
+        example: '[ { "status": "/api/v1/submit/101/", "detail": "/api/v1/submit/101/report/", "id": 101, "platform": "WINDOWS7" }, { "status": "/api/v1/submit/100/", "detail": "/api/v1/submit/100/report/", "id": 100, "platform": "WINDOWSXP" } ]'
   submit_file:
     title: Submit File
     description: Submit a file to a ThreatStream sandbox
@@ -478,11 +479,13 @@ actions:
         description: Operation status
         type: boolean
         required: false
+        example: true
       reports:
         title: Reports
         description: Reports containing submission details
         type: "[]report"
         required: false
+        example: '[ { "Details": {}, "ID": 0, "Platform": {}, "Status": "" } ]'
   submit_url:
     title: Submit URL
     description: Submit a URL to a ThreatStream sandbox
@@ -541,11 +544,13 @@ actions:
         description: Operation status
         type: boolean
         required: false
+        example: true
       reports:
         title: Reports
         description: Reports containing submission details
         type: "[]report"
         required: false
+        example: []
   get_sandbox_report:
     title: Get Sandbox Report
     description: Get a sandbox report

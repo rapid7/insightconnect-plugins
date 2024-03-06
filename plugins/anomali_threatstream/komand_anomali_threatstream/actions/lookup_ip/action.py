@@ -21,7 +21,7 @@ class LookupIp(insightconnect_plugin_runtime.Action):
         self.request.url, self.request.method = self.request.url + "/intelligence", "GET"
 
         # Pagination flag and results placeholder
-        self.continue_paging, self.results = True, list()
+        self.continue_paging, self.results = True, []
 
         # Update the request with the supplied IP address, page size, and offset
         self.request.params.update({"ip": params.get(Input.IP_ADDRESS), "limit": 1000, "offset": 0})

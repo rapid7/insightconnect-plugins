@@ -4,7 +4,6 @@ from .schema import LookupHashInput, LookupHashOutput, Input, Output
 # Custom imports below
 from copy import copy
 from insightconnect_plugin_runtime.exceptions import PluginException
-from json.decoder import JSONDecodeError
 
 
 class LookupHash(insightconnect_plugin_runtime.Action):
@@ -21,7 +20,7 @@ class LookupHash(insightconnect_plugin_runtime.Action):
         self.request.url, self.request.method = self.request.url + "/intelligence", "GET"
 
         # Pagination flag and results placeholder
-        self.continue_paging, self.results = True, list()
+        self.continue_paging, self.results = True, []
         # Update the request with the supplied IP address, page size, and offset
         self.request.params.update({"md5": params.get(Input.HASH), "limit": 1000, "offset": 0})
 

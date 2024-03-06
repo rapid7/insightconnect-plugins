@@ -48,9 +48,7 @@ class Util:
 
     @staticmethod
     def mock_request(*args, **kwargs):
-        print(args[0].url)
         url = args[0].url
-        print(kwargs)
         # Get Observables
         if (
             url

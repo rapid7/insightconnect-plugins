@@ -18,15 +18,13 @@ class GetObservables(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         # Copy and update the base request to avoid mutating the original
         self.request = copy(self.connection.api.request)
-        print(self.connection.api.request)
-        print(self.request.url)
         self.request.url, self.request.method = self.request.url + "/intelligence", "GET"
 
         # Pagination flag and results placeholder
-        self.continue_paging, self.results = True, list()
+        self.continue_paging, self.results = True, []
         # Update the request with the supplied domain, page size, and offset
         self.request.params.update(
-            {"value": "{value}".format(value=params.get(Input.VALUE)), "limit": 1000, "offset": 0}
+            {"value": f"{params.get(Input.VALUE)}", "limit": 1000, "offset": 0}
         )
 
         while self.continue_paging:
