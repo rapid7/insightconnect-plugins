@@ -18,4 +18,4 @@ class DeleteSsh(insightconnect_plugin_runtime.Action):
         key_id = params.get(Input.KEY_ID)
         self.connection.client.delete_ssh(user_id=user_id, key_id=key_id)
 
-        return {Output.STATUS: True}
+        return {Output.SUCCESS: True}

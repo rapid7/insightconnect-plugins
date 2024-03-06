@@ -13,14 +13,15 @@ class Issue(insightconnect_plugin_runtime.Trigger):
         )
 
     def run(self, params={}):
-        issue_params = []
         new_issues = []
         seen = []
 
+        # Required: True
+        issue_params = [("labels", params.get(Input.LABELS))]
+
+        # Required: False
         if params.get(Input.MILESTONE):
             issue_params.append(("milestone", params.get(Input.MILESTONE)))
-        if params.get(Input.LABELS):
-            issue_params.append(("labels", params.get(Input.LABELS)))
         if params.get(Input.STATE):
             issue_params.append(("state", params.get(Input.STATE).lower()))
         if params.get(Input.SEARCH):
@@ -36,7 +37,7 @@ class Issue(insightconnect_plugin_runtime.Trigger):
                 issue = Util.clean_json(issue)
                 if Util.is_issue_new(issue.get("updated_at", "")):
                     new_issues.append(issue)
-            if len(new_issues):
+            if len(new_issues) > 0:
                 if new_issues[0] not in seen:
                     self.send({Output.ISSUE: new_issues[0]})
                     seen.append(new_issues[0])

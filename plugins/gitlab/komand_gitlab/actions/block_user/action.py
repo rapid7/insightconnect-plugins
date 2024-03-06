@@ -16,4 +16,4 @@ class BlockUser(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         user_id = params.get(Input.ID)
         self.connection.client.block_user(user_id=user_id)
-        return {Output.STATUS: True}
+        return {Output.SUCCESS: True}
