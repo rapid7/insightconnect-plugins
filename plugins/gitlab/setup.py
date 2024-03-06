@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name="gitlab-rapid7-plugin",
-      version="1.1.0",
-      description="GitLab is a next generation developer collaboration software with version control capabilities. The GitLab InsightConnect plugin enables user and issue management.",
+      version="2.0.0",
+      description="GitLab is a next generation developer collaboration software with version control capabilities. The GitLab InsightConnect plugin enables user and issue management",
       author="rapid7",
       author_email="",
       url="",

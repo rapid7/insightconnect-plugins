@@ -1,6 +1,6 @@
 # Description
 
-GitLab is a next generation developer collaboration software with version control capabilities. The GitLab InsightConnect plugin enables user and issue management.
+GitLab is a next generation developer collaboration software with version control capabilities. The GitLab InsightConnect plugin enables user and issue management
 
 # Key Features
   
@@ -26,7 +26,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|credentials|credential_username_password|None|True|Enter GitLab username and password (or token)|None|None|
+|credentials|credential_username_password|None|True|Enter GitLab username and password (or token)|None|{'username': 'user_name', 'password': 'personal_access_token'}|
 |ssl_verify|boolean|None|True|Toggle SSL verify on or off for requests|None|True|
 |url|string|None|True|Host URL|None|https://gitlab.example.com:8000/api/v4/|
   
@@ -35,8 +35,8 @@ Example input:
 ```
 {
   "credentials": {
-    "password": "",
-    "username": ""
+    "password": "personal_access_token",
+    "username": "user_name"
   },
   "ssl_verify": true,
   "url": "https://gitlab.example.com:8000/api/v4/"
@@ -251,13 +251,13 @@ This action is used to delete GitLab user
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|integer|None|True|User ID to unblock|None|None|
+|id|integer|None|True|User ID to unblock|None|34|
   
 Example input:
 
 ```
 {
-  "id": 0
+  "id": 34
 }
 ```
 

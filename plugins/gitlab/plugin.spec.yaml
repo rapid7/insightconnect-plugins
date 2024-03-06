@@ -6,9 +6,9 @@ title: GitLab
 vendor: rapid7
 support: community
 status: []
-description: GitLab is a next generation developer collaboration software with version control capabilities. The GitLab InsightConnect plugin enables user and issue management.
-version: 1.1.0
-connection_version: 1
+description: GitLab is a next generation developer collaboration software with version control capabilities. The GitLab InsightConnect plugin enables user and issue management
+version: 2.0.0
+connection_version: 2
 supported_versions: [GitLab API v4]
 version_history: ['2.0.0 - Update SDK | Refactor Plugin | `Connection` - New input: `ssl_verify`', 1.0.1 - New spec and help.md format for the Extension Library, 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types, 0.1.1 - SSL bug fix in SDK, 0.1.0 - Initial plugin]
 references: ['[GitLab API](https://docs.gitlab.com/ce/api/README.html)']
@@ -146,6 +146,7 @@ connection:
     title: GitLab Username and Password (or token)
     description: Enter GitLab username and password (or token)
     type: credential_username_password
+    example: {"username": "user_name", "password": "personal_access_token"}
     required: true
   url:
     title: Host URL
@@ -240,8 +241,9 @@ actions:
     input:
       id:
         title: User Id
-        type: integer
         description: User ID to unblock
+        type: integer
+        example: 34
         required: true
     output:
       success:
