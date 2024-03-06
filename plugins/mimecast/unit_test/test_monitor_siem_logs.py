@@ -24,7 +24,7 @@ class TestMonitorSiemLogs(TestCase):
         token = SIEM_LOGS_HEADERS_RESPONSE.get("mc-siem-token")
         tests = [
             {"next_token": "happy_token", "resp": content, "has_more_pages": True, "token": token},
-            {"next_token": "force_json_error", "resp": content, "has_more_pages": True, "token": token},
+            {"next_token": "force_json_error", "resp": [], "has_more_pages": True, "token": "force_json_error"},
             {"next_token": "no_results", "resp": [], "has_more_pages": False, "token": "no_results"},
         ]
         for test in tests:
@@ -38,7 +38,6 @@ class TestMonitorSiemLogs(TestCase):
                 self.assertEqual(status_code, 200)
                 validate(response, MonitorSiemLogsOutput.schema)
 
-    @skip("Have not pulled logic to raise 401 successfully - TODO in 5.3.6")
     def test_monitor_siem_logs_raises_401(self, _mock_data):
         # TODO: update 401 logic to successfully check is_last_token that was introduced in 5.3.3
         state_params = {"next_token": "force_401"}
