@@ -28,7 +28,6 @@ from komand_mimecast.util.constants import (
     STATUS_FIELD,
     DEVELOPER_KEY_ERROR,
     IS_LAST_TOKEN_FIELD,
-    INVALID_REGION,
 )
 from komand_mimecast.util.exceptions import ApiClientException
 from komand_mimecast.util.util import Utils
@@ -123,12 +122,6 @@ class MimecastAPI:
             )
         except PluginException as error:
             status_code = error.status_code if isinstance(error, ApiClientException) else status_code
-
-            # From Mimecast API we can see that some errors are coming back as a 200
-            # if the status code here is a 200 then these errors will not be correctly shown to the UI
-            if status_code in [200, 201]:
-                status_code = 400
-
             raise ApiClientException(
                 cause=error.cause,
                 assistance=error.assistance,
@@ -299,17 +292,9 @@ class MimecastAPI:
                         data=response,
                         status_code=401,
                     )
-                elif error.get(CODE) == INVALID_REGION:
-                    raise ApiClientException(
-                        assistance="Please ensure that the correct region is selected",
-                        cause="Incorrect region supplied.",
-                        data=response,
-                        status_code=403,
-                    )
                 elif error.get(CODE) == DEVELOPER_KEY_ERROR:
                     raise ApiClientException(
-                        assistance="Please ensure that the correct app ID is selected",
-                        cause="Incorrect app ID supplied.",
+                        preset=PluginException.Preset.INVALID_CREDENTIALS,
                         data=response,
                         status_code=401,
                     )
