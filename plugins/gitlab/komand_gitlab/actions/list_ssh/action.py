@@ -17,7 +17,7 @@ class ListSsh(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         user_id = params.get(Input.ID)
-        response = self.connection.client.list_ssh(user_id)
+        response = self.connection.client.list_ssh(user_id=user_id)
 
         ssh_keys = []
         for key in response:

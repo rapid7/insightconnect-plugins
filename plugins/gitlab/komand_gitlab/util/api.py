@@ -5,7 +5,7 @@ from typing import List, Tuple, Union
 
 class GitLabAPI:
     def __init__(self, base_url: str, token: str, verify: bool):
-        super().__init__(base_url, token, verify)
+        super().__init__()
         self.base_url = base_url
         self.token = token
         self.verify = verify
@@ -14,7 +14,7 @@ class GitLabAPI:
         return self._call_api(method="POST", path=f"/users/{str(user_id)}/block")
 
     def create_issue(self, project_id: int, issue_params: List[Tuple[str, Union[str, int]]]):
-        return self._call_api(method="POST", path=f"projects/{str(project_id)}/issues", params=issue_params)
+        return self._call_api(method="POST", path=f"/projects/{str(project_id)}/issues", params=issue_params)
 
     def delete_ssh(self, user_id: int, key_id: int):
         return self._call_api(method="DELETE", path=f"/users/{str(user_id)}/keys/{str(key_id)}")

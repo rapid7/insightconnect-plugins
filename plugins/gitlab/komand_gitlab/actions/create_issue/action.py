@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import CreateIssueInput, CreateIssueOutput, Input, Output, Component
 
 # Custom imports below
+from komand_gitlab.util.util import Util
 
 
 class CreateIssue(insightconnect_plugin_runtime.Action):
@@ -17,7 +18,7 @@ class CreateIssue(insightconnect_plugin_runtime.Action):
         project_id = params.get(Input.PROJECT_ID)
 
         # Required: True inputs
-        issue_params = [("id", params.get(Input.ID)), ("title", params.get(Input.TITLE))]
+        issue_params = [("title", params.get(Input.TITLE))]
 
         # Required: False inputs
         if params.get(Input.DESCRIPTION):
@@ -39,7 +40,8 @@ class CreateIssue(insightconnect_plugin_runtime.Action):
         if params.get(Input.DISCUSSION_RESOLVE):
             issue_params.append(("discussion_to_resolve", params.get(Input.DISCUSSION_RESOLVE)))
 
-        response = self.connection.client.create_issue(project_id=project_id, params=issue_params)
+        response = self.connection.client.create_issue(project_id=project_id, issue_params=issue_params)
+        response = Util.clean_json(response)
 
         return {
             Output.ID: response.get("id"),

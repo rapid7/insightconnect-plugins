@@ -351,12 +351,6 @@ actions:
     title: Create Issue
     description: Create issue
     input:
-      id:
-        title: User ID
-        description: User ID to unblock
-        type: integer
-        example: 17
-        required: true
       project_id:
         title: Project ID
         description: ID of project

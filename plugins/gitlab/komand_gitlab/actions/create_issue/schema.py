@@ -14,7 +14,6 @@ class Input:
     DESCRIPTION = "description"
     DISCUSSION_RESOLVE = "discussion_resolve"
     DUE_DATE = "due_date"
-    ID = "id"
     LABELS = "labels"
     MERGE_REQUEST = "merge_request"
     MILESTONE_ID = "milestone_id"
@@ -55,13 +54,13 @@ class CreateIssueInput(insightconnect_plugin_runtime.Input):
       "items": {
         "type": "integer"
       },
-      "order": 6
+      "order": 5
     },
     "confidential": {
       "type": "boolean",
       "title": "Confidential",
       "description": "Set an issue to be confidential",
-      "order": 5
+      "order": 4
     },
     "created_at": {
       "type": "string",
@@ -69,19 +68,19 @@ class CreateIssueInput(insightconnect_plugin_runtime.Input):
       "displayType": "date",
       "title": "Created At",
       "description": "Date, ISO 8601 formatted (requires admin or project owner rights)",
-      "order": 9
+      "order": 8
     },
     "description": {
       "type": "string",
       "title": "Description",
       "description": "The description of an issue",
-      "order": 4
+      "order": 3
     },
     "discussion_resolve": {
       "type": "string",
       "title": "Discussion To Resolve",
       "description": "The ID of a discussion to resolve",
-      "order": 12
+      "order": 11
     },
     "due_date": {
       "type": "string",
@@ -89,47 +88,40 @@ class CreateIssueInput(insightconnect_plugin_runtime.Input):
       "displayType": "date",
       "title": "Due Date",
       "description": "Date time string in the format YEAR-MONTH-DAY",
-      "order": 10
-    },
-    "id": {
-      "type": "integer",
-      "title": "User ID",
-      "description": "User ID to unblock",
-      "order": 1
+      "order": 9
     },
     "labels": {
       "type": "string",
       "title": "Labels",
       "description": "Comma-separated label names for an issue",
-      "order": 8
+      "order": 7
     },
     "merge_request": {
       "type": "integer",
       "title": "Merge Request to Resolve Discussions of",
       "description": "The IID of a merge request in which to resolve all issues",
-      "order": 11
+      "order": 10
     },
     "milestone_id": {
       "type": "integer",
       "title": "Milestone",
       "description": "The ID of a milestone to assign issue",
-      "order": 7
+      "order": 6
     },
     "project_id": {
       "type": "integer",
       "title": "Project ID",
       "description": "ID of project",
-      "order": 2
+      "order": 1
     },
     "title": {
       "type": "string",
       "title": "Issue",
       "description": "The title of an issue",
-      "order": 3
+      "order": 2
     }
   },
   "required": [
-    "id",
     "project_id",
     "title"
   ],

@@ -94,7 +94,6 @@ This action is used to create issue
 |description|string|None|False|The description of an issue|None|Description of the issue|
 |discussion_resolve|string|None|False|The ID of a discussion to resolve|None|TheDiscussion|
 |due_date|date|None|False|Date time string in the format YEAR-MONTH-DAY|None|2016-01-07 12:44:33.959000+00:00|
-|id|integer|None|True|User ID to unblock|None|17|
 |labels|string|None|False|Comma-separated label names for an issue|None|False,Alert,Seen,Unseen|
 |merge_request|integer|None|False|The IID of a merge request in which to resolve all issues|None|13|
 |milestone_id|integer|None|False|The ID of a milestone to assign issue|None|23|
@@ -116,7 +115,6 @@ Example input:
   "description": "Description of the issue",
   "discussion_resolve": "TheDiscussion",
   "due_date": "2016-01-07 12:44:33.959000+00:00",
-  "id": 17,
   "labels": "False,Alert,Seen,Unseen",
   "merge_request": 13,
   "milestone_id": 23,
@@ -590,9 +588,9 @@ Example output:
 *There is no troubleshooting for this plugin.*
 
 # Version History
-  
+
 * 2.0.0 - Update SDK | Refactor Plugin | `Connection` - New input: `ssl_verify`  
-* 1.0.1 - New spec and help.md format for the Extension Library
+* 1.0.1 - New spec and help.md format for the Extension Library  
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types  
 * 0.1.1 - SSL bug fix in SDK  
 * 0.1.0 - Initial plugin
