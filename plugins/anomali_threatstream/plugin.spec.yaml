@@ -5,9 +5,15 @@ name: anomali_threatstream
 title: Anomali ThreatStream
 description: Anomali ThreatStream operationalizes threat intelligence, automating collection
   and integration that enables security teams to analyze and respond to threats
-version: 3.1.1
+version: 3.1.2
+connection_version: 3
 vendor: rapid7
 support: community
+supported_versions: ["Anomali API API 22-02-2022"]
+sdk:
+  type: slim
+  version: 5.4.4
+  user: nobody
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/anomali_threatstream
@@ -414,6 +420,7 @@ actions:
         description: Results returned
         type: '[]result'
         required: false
+        example: '[ { "status": "/api/v1/submit/101/", "detail": "/api/v1/submit/101/report/", "id": 101, "platform": "WINDOWS7" }, { "status": "/api/v1/submit/100/", "detail": "/api/v1/submit/100/report/", "id": 100, "platform": "WINDOWSXP" } ]'
   submit_file:
     title: Submit File
     description: Submit a file to a ThreatStream sandbox
@@ -472,11 +479,13 @@ actions:
         description: Operation status
         type: boolean
         required: false
+        example: true
       reports:
         title: Reports
         description: Reports containing submission details
         type: "[]report"
         required: false
+        example: '[ { "Details": {}, "ID": 0, "Platform": {}, "Status": "" } ]'
   submit_url:
     title: Submit URL
     description: Submit a URL to a ThreatStream sandbox
@@ -535,11 +544,13 @@ actions:
         description: Operation status
         type: boolean
         required: false
+        example: true
       reports:
         title: Reports
         description: Reports containing submission details
         type: "[]report"
         required: false
+        example: '[ { "Details": {}, "ID": 0, "Platform": {}, "Status": "" } ]'
   get_sandbox_report:
     title: Get Sandbox Report
     description: Get a sandbox report
