@@ -52,9 +52,18 @@ class Util:
         # Authenticate
         if url == "https://sepm-14:8446/sepm/api/v1/identity/authenticate":
             return MockResponse(200, "authenticate.json.resp")
+        raise NotImplementedError("Not implemented", kwargs)
+
+    @staticmethod
+    async def async_mock_request(*args, **kwargs):
+        print("ARGS")
+        print(args)
+        print("KWARGS")
+        print(kwargs)
+        url = kwargs.get("url", "")
         # Blacklist
         if url == "https://sepm-14:8446/sepm/api/v1/policy-objects/fingerprints":
-            return MockResponse(200, "blacklist_success.json.resp")
+            return AsyncMockResponse(200, "blacklist_success.json.resp")
         raise NotImplementedError("Not implemented", kwargs)
 
 
@@ -67,4 +76,16 @@ class MockResponse:
             self.text = Util.read_file_to_string(f"responses/{filename}")
 
     def json(self):
+        return json.loads(self.text)
+
+
+class AsyncMockResponse:
+    def __init__(self, status_code: int, filename: str = None, headers: dict = {}):
+        self.status = status_code
+        self.text = ""
+        self.headers = headers
+        if filename:
+            self.text = Util.read_file_to_string(f"responses/{filename}")
+
+    async def json(self):
         return json.loads(self.text)
