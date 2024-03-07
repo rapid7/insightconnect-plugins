@@ -5,7 +5,7 @@ import json
 from sys import argv
 
 Name = "Anomali ThreatStream"
-Vendor = "rapid7_sentry"
+Vendor = "rapid7"
 Version = "3.1.2"
 Description = "Anomali ThreatStream operationalizes threat intelligence, automating collection and integration that enables security teams to analyze and respond to threats"
 

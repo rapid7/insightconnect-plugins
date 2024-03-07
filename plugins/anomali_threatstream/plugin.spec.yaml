@@ -7,7 +7,7 @@ description: Anomali ThreatStream operationalizes threat intelligence, automatin
   and integration that enables security teams to analyze and respond to threats
 version: 3.1.2
 connection_version: 3
-vendor: rapid7_sentry
+vendor: rapid7
 support: community
 supported_versions: ["Anomali API API 22-02-2022"]
 sdk:

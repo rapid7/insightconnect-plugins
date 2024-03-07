@@ -1,6 +1,6 @@
 FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:5.4.4
 
-LABEL organization=rapid7_sentry
+LABEL organization=rapid7
 LABEL sdk=python
 
 WORKDIR /python/src
