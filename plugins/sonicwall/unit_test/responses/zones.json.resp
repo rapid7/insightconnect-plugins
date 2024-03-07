@@ -1,0 +1,208 @@
+{
+  "zones": [
+    {
+      "name": "string",
+      "uuid": "string",
+      "security_type": "trusted",
+      "interface_trust": true,
+      "auto_generate_access_rules": {
+        "allow_from_to_equal": true,
+        "allow_from_higher": true,
+        "allow_to_lower": true,
+        "deny_from_lower": true
+      },
+      "websense_content_filtering": true,
+      "gateway_anti_virus": true,
+      "intrusion_prevention": true,
+      "app_control": true,
+      "anti_spyware": true,
+      "create_group_vpn": true,
+      "ssl_control": true,
+      "sslvpn_access": true,
+      "dpi_ssl_client": true,
+      "dpi_ssl_server": true,
+      "wireless": {
+        "sslvpn_enforcement": {
+          "server": {},
+          "service": {}
+        },
+        "wifi_sec_enforcement": {
+          "exception_service": {}
+        },
+        "wifi_sec_for_site_to_site_vpn": true,
+        "trust_wpa_traffic_as_wifi_sec": true,
+        "sonicpoint": {
+          "profile": {
+            "n": {
+              "profile_name": "string",
+              "auto_provisioning": true
+            },
+            "ndr": {
+              "profile_name": "string",
+              "auto_provisioning": true
+            },
+            "ac": {
+              "profile_name": "string",
+              "auto_provisioning": true
+            },
+            "wave2": {
+              "profile_name": "string",
+              "auto_provisioning": true
+            }
+          }
+        },
+        "bypass_gateway_firewalling": true,
+        "only_sonicpoint_traffic": true,
+        "auto_channel_limitation": true,
+        "sonicwave_online_registeration": true,
+        "sonicpoint_management": true
+      },
+      "guest_services": {
+        "enable": true,
+        "inter_guest": true,
+        "external_auth": {
+          "enable": true,
+          "client_redirect": "http",
+          "web_server_1": {
+            "protocol": "http",
+            "name": "string",
+            "port": 0
+          },
+          "web_server_2": {
+            "protocol": "http",
+            "name": "string",
+            "port": 0
+          },
+          "web_server": {
+            "timeout": 0
+          },
+          "message_auth": {
+            "method": "md5",
+            "shared_secret": "string",
+            "confirm_secret": "string",
+            "enable": true
+          },
+          "social_network": {
+            "enable": true,
+            "facebook": true,
+            "google": true,
+            "twitter": true
+          },
+          "auth_pages": {
+            "web_server_1": {
+              "login": "string",
+              "expiration": "string",
+              "timeout": "string",
+              "max_sessions": "string",
+              "traffic_exceeded": "string"
+            },
+            "web_server_2": {
+              "login": "string",
+              "expiration": "string",
+              "timeout": "string",
+              "max_sessions": "string",
+              "traffic_exceeded": "string"
+            }
+          },
+          "web_content": {
+            "redirect": {
+              "custom": "string",
+              "use_default": true
+            },
+            "server_down": {
+              "custom": "string",
+              "use_default": true
+            }
+          },
+          "logout_expired": {
+            "enable": true,
+            "every": 0,
+            "cgi": {
+              "web_server_1": "string",
+              "web_server_2": "string"
+            }
+          },
+          "status_check": {
+            "enable": true,
+            "every": 0,
+            "cgi": {
+              "web_server_1": "string",
+              "web_server_2": "string"
+            }
+          },
+          "session_sync": {
+            "enable": true,
+            "every": 0,
+            "cgi": {
+              "web_server_1": "string",
+              "web_server_2": "string"
+            }
+          }
+        },
+        "policy_page_non_authentication": {
+          "enable": true,
+          "guest_usage_policy": "string",
+          "idle_timeout": {
+            "value": 0,
+            "unit": "seconds"
+          },
+          "auto_accept": true
+        },
+        "captive_portal_authentication": {
+          "enable": true,
+          "internal_url": "string",
+          "external_url": "string",
+          "welcome_url_source": "from-radius",
+          "welcome_url": "string",
+          "session_timeout_source": "from-radius",
+          "session_timeout": {
+            "value": 0,
+            "unit": "minutes"
+          },
+          "idle_timeout_source": "from-radius",
+          "idle_timeout": {
+            "value": 0,
+            "unit": "minutes"
+          },
+          "method": "chap"
+        },
+        "custom_auth_page": {
+          "enable": true,
+          "header": {},
+          "footer": {}
+        },
+        "post_auth": "string",
+        "bypass_guest_auth": {},
+        "smtp_redirect": {},
+        "deny_networks": {},
+        "pass_networks": {},
+        "max_guests": 0
+      },
+      "local_radius_server": {
+        "enable": true,
+        "interface_server_numbers": 0,
+        "port": 0,
+        "client_password": "string",
+        "tls_cache": true,
+        "tls_cache_lifetime": 0,
+        "ldap_server": {
+          "enable": true,
+          "server": "string",
+          "base_dn": "string",
+          "identity_dn": "string",
+          "identity_dn_password": "string",
+          "tls": true,
+          "cache": true,
+          "cache_lifetime": 0
+        },
+        "active_directory_server": {
+          "enable": true,
+          "domain": "string",
+          "full_name": "string",
+          "admin_user_name": "string",
+          "admin_user_password": "string"
+        }
+      }
+    }
+  ]
+}

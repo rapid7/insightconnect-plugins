@@ -4,10 +4,31 @@ products: [insightconnect]
 name: sonicwall
 title: SonicWall Firewall
 description: Manage firewalls and block hosts with SonicWall firewalls
-version: 1.3.1
+version: 1.3.2
+connection_version: 1
+supported_versions: ["SonicWall 04-03-2024"]
 vendor: rapid7
 support: rapid7
 status: []
+sdk:
+  type: slim
+  version: 5.4.4
+  user: nobody
+key_features:
+  - Block and unblock hosts by managing address groups
+requirements:
+  - Username and password
+  - Base URL of firewall
+version_history:
+  - 1.3.2 - Updated SDK to the latest version to address memory usage issue | Fixed connection test
+  - 1.3.1 - Replace the PluginException with a logger in Create Address Object action | Add `host_status` output parameter in Create Address Object action
+  - 1.3.0 - New action Remove Address from Group
+  - 1.2.0 - New action Check If Address In Address Group
+  - 1.1.0 - New actions Create Address Object and Delete Address Object
+  - 1.0.0 - Initial plugin
+references:
+  -[SonicWall Firewall](https://www.sonicwall.com/products/firewalls/)
+  -[SonicWall](https://www.sonicwall.com)
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/sonicwall
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -84,7 +105,6 @@ types:
       type: status
       description: Status
       required: false
-
 connection:
   url:
     title: URL
@@ -135,6 +155,7 @@ actions:
         description: Return information about add address object to group
         type: object_action
         required: false
+        example: '{"status":{"status":{"success":true,"cli":{"mode":"config_mode","depth":1,"configuring":true,"pending_config":false,"restart_required":"FALSE"},"info":[{"level":"info","code":"E_OK","message":"Changes made."}]}}}'
   create_address_object:
     title: Create Address Object
     description: Creates a new address object
@@ -162,7 +183,7 @@ actions:
         description: This list contains a set of hosts that should not be blocked. This can include IPs, CIDRs, and domains
         type: "[]string"
         required: false
-        example: ["198.51.100.100", "192.0.2.0/24", "example.com" ]
+        example: '["198.51.100.100", "192.0.2.0/24", "example.com"]'
       zone:
         title: Zone
         description: Name of the zone where the new object will be placed
@@ -176,11 +197,13 @@ actions:
         description: Returns information about creating new address object
         type: status
         required: false
+        example: '{"success":true,"cli":{"mode":"config_mode","depth":1,"configuring":true,"pending_config":true,"restart_required":"FALSE"},"info":[{"level":"info","code":"E_OK","message":"Success."}]}'
       host_status:
         title: Host Status
         description: Returns information about the host status
         type: string
         required: false
+        example: created
   delete_address_object:
     title: Delete Address Object
     description: Deletes an address object
@@ -197,6 +220,7 @@ actions:
         description: Returns information about creating new address object
         type: status
         required: false
+        example: '{"cli":{"configuring":true,"depth":1,"mode":"config_mode","pending_config":true,"restart_required":"FALSE"},"info":[{"code":"E_OK","level":"info","message":"Success."}],"success": true}'
   check_if_address_in_address_group:
     title: Check if Address in Group
     description: Check that a host or address object is in an address group
@@ -226,11 +250,13 @@ actions:
         description: Return true if address was found in group, return false if not found
         type: boolean
         required: true
+        example: true
       address_objects:
         title: Address Objects
         description: The names and details of the address objects that match or contain the address
         type: "[]object"
         required: false
+        example: '[{"dns_ttl":0,"domain":"example.com","name":"InsightConnect Block List","uuid":"00000000-0000-0001-0100-00401034ea00","zone":"DMZ"}]'
   remove_address_from_group:
     title: Remove Address Object from Group
     description: Deletes an address object from an address group
@@ -253,3 +279,4 @@ actions:
         description: Returns information about removing the address object from the address group
         type: status
         required: false
+        example: '{"cli":{"configuring":true,"depth":1,"mode":"config_mode","pending_config":true,"restart_required":"FALSE"},"info":[{"code":"E_OK","level":"info","message":"Success."}],"success":true}'

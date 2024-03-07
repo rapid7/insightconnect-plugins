@@ -15,20 +15,19 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Connect: Connecting...")
         self.sonicwall_api = SonicWallAPI(
             verify_ssl=params.get(Input.VERIFY_SSL, True),
-            username=params.get(Input.CREDENTIALS).get("username"),
-            password=params.get(Input.CREDENTIALS).get("password"),
-            url=params.get(Input.URL),
+            username=params.get(Input.CREDENTIALS, {}).get("username", ""),
+            password=params.get(Input.CREDENTIALS, {}).get("password", ""),
+            url=params.get(Input.URL, ""),
             port=params.get(Input.PORT, 443),
             logger=self.logger,
         )
 
     def test(self):
         try:
-            if self.sonicwall_api.login().get("status", {}).get("success", False):
-                return {}
-        except PluginException as e:
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED, data=e)
+            self.sonicwall_api.login()
+            return {"success": True}
+        except PluginException as error:
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED, data=error)
         finally:
             self.sonicwall_api.logout()
-
         raise ConnectionTestException(preset=ConnectionTestException.Preset.UNKNOWN)

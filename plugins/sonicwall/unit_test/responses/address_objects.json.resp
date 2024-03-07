@@ -1,0 +1,13 @@
+{
+  "address_objects": [
+    {
+      "fqdn": {
+        "name": "string",
+        "uuid": "string",
+        "domain": "string",
+        "zone": "string",
+        "dns_ttl": 0
+      }
+    }
+  ]
+}
