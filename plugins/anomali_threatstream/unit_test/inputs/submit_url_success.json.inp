@@ -1,0 +1,7 @@
+{
+  "classification": "private",
+  "detail": "Credential-Exposure,compromised_email",
+  "url": "example.com",
+  "platform": "WINDOWS7",
+  "use_premium_sandbox": true
+}
