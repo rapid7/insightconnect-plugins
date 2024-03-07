@@ -1,13 +1,12 @@
-import komand
-from .schema import GetObservablesInput, GetObservablesOutput, Component
+import insightconnect_plugin_runtime
+from .schema import GetObservablesInput, GetObservablesOutput, Component, Input, Output
 
 # Custom imports below
 from copy import copy
-from json import JSONDecodeError
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class GetObservables(komand.Action):
+class GetObservables(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_observables",
@@ -18,28 +17,16 @@ class GetObservables(komand.Action):
 
     def run(self, params={}):
         # Copy and update the base request to avoid mutating the original
-        self.request = copy(self.connection.request)
+        self.request = copy(self.connection.api.request)
         self.request.url, self.request.method = self.request.url + "/intelligence", "GET"
 
         # Pagination flag and results placeholder
-        self.continue_paging, self.results = True, list()
+        self.continue_paging, self.results = True, []
         # Update the request with the supplied domain, page size, and offset
-        self.request.params.update({"value": "{value}".format(value=params.get("value")), "limit": 1000, "offset": 0})
+        self.request.params.update({"value": f"{params.get(Input.VALUE)}", "limit": 1000, "offset": 0})
 
         while self.continue_paging:
-            response = self.connection.send(self.request)
-
-            if response.status_code not in range(200, 299):
-                raise PluginException(
-                    cause="Received %d HTTP status code from ThreatStream." % response.status_code,
-                    assistance="Please verify your ThreatStream server status and try again. "
-                    "If the issue persists please contact support. "
-                    "Server response was: %s" % response.text,
-                )
-            try:
-                response_data = response.json()
-            except JSONDecodeError:
-                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+            response_data = self.connection.api.send(self.request)
 
             try:
                 # Check pagination indicator. A "null" value means no more pages.
@@ -55,5 +42,5 @@ class GetObservables(komand.Action):
             self.request.params["offset"] += 1000
             self.results.extend(response_data["objects"])
 
-        self.results = komand.helper.clean(self.results)
-        return {"results": self.results}
+        self.results = insightconnect_plugin_runtime.helper.clean(self.results)
+        return {Output.RESULTS: self.results}

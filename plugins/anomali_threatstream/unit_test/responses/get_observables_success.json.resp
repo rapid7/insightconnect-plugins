@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "limit": 1000,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total_count": 1
+  },
+  "objects": [
+    {
+      "asn": null,
+      "classification": "private",
+      "confidence": "17",
+      "country": null,
+      "date_first": "2019-10-16T16:12:48",
+      "date_last": "2019-10-21T14:01:39",
+      "detail": "Delivery",
+      "detail2": "imported by user 121",
+      "domain": "window.google",
+      "email": "user@example.com",
+      "id": 112879000,
+      "import_session_id": 205,
+      "itype": "apt_domain",
+      "lat": null,
+      "lon": null,
+      "maltype": "Delivery",
+      "md5": "",
+      "media": null,
+      "media_type": null,
+      "org": null,
+      "resource_uri": "/api/v1/intelligence/112879000/",
+      "severity": "very-high",
+      "source": "user@example.com",
+      "source_feed_id": 205,
+      "srcip": "127.0.53.53",
+      "srcipv6": null,
+      "state": "active",
+      "trusted_circle_ids": null,
+      "update_id": "272270002",
+      "url": ""
+    }
+  ]
+}

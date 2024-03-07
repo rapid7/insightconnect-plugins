@@ -1,32 +1,86 @@
 import sys
 import os
 
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_anomali_threatstream.connection.connection import Connection
 from komand_anomali_threatstream.actions.get_observables import GetObservables
-import json
-import logging
+from util import Util
+from unittest.mock import patch
+from parameterized import parameterized
 
 
+@patch("requests.Session.send", side_effect=Util.mock_request)
 class TestGetObservables(TestCase):
-    def test_integration_get_observables(self):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.action = Util.default_connector(GetObservables())
 
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = GetObservables()
+    @parameterized.expand(
+        [
+            [
+                "Success",
+                Util.read_file_to_dict("inputs/get_observables_success.json.inp"),
+                Util.read_file_to_dict("expected/get_observables_success.json.exp"),
+            ],
+        ]
+    )
+    def test_get_observables(self, mock_request, test_name, input_params, expected):
+        actual = self.action.run(input_params)
+        self.assertEqual(expected, actual)
 
-        test_conn.logger = log
-        test_action.logger = log
-
-        with open("../tests/get_observables.json") as file:
-            test_json = json.loads(file.read()).get("body")
-            connection_params = test_json.get("connection")
-            action_params = test_json.get("input")
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        self.assertIsNotNone(results)
+    @parameterized.expand(
+        [
+            [
+                "400",
+                Util.read_file_to_dict("inputs/get_observables_400.json.inp"),
+                "The server is unable to process the request.",
+                "Verify your plugin input is correct and not malformed and try again. If the issue persists, "
+                "please contact support.",
+                "{}",
+            ],
+            [
+                "401",
+                Util.read_file_to_dict("inputs/get_observables_401.json.inp"),
+                "The account configured in your connection is unauthorized to access this service.",
+                "Verify the permissions for your account and try again.",
+                "{}",
+            ],
+            [
+                "403",
+                Util.read_file_to_dict("inputs/get_observables_403.json.inp"),
+                "Invalid API key provided.",
+                "Verify your API key configured in your connection is correct.",
+                "{}",
+            ],
+            [
+                "404",
+                Util.read_file_to_dict("inputs/get_observables_404.json.inp"),
+                "Invalid or unreachable endpoint provided.",
+                "Verify the URLs or endpoints in your configuration are correct.",
+                "{}",
+            ],
+            [
+                "409",
+                Util.read_file_to_dict("inputs/get_observables_409.json.inp"),
+                "Something unexpected occurred.",
+                "Check the logs and if the issue persists please contact support.",
+                "{}",
+            ],
+            [
+                "500",
+                Util.read_file_to_dict("inputs/get_observables_500.json.inp"),
+                "Server error occurred",
+                "Verify your plugin connection inputs are correct and not malformed and try again. If the issue persists, please contact support.",
+                "{}",
+            ],
+        ]
+    )
+    def test_get_observables(self, mock_request, test_name, input_params, cause, assistance, data):
+        with self.assertRaises(PluginException) as error:
+            self.action.run(input_params)
+        self.assertEqual(cause, error.exception.cause)
+        self.assertEqual(assistance, error.exception.assistance)
+        self.assertEqual(data, error.exception.data)
