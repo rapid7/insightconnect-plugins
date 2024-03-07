@@ -96,27 +96,29 @@ class MimecastAPI:
         data = {"compress": True, "file_format": "JSON", "type": "MTA", "token": next_page_token}
 
         payload = {DATA_FIELD: ([convert_dict_to_camel_case(data)] if data is not None else [])}
-        request = requests.request(
+        response = requests.request(
             method="POST", url=f"{self.url}{uri}", headers=self._prepare_header(uri), data=str(payload)
         )
-        self._check_rate_limiting(request)
+        self._check_rate_limiting(response)
 
-        if "attachment" in request.headers.get("Content-Disposition", "") or self._is_last_token(request):
-            combined_json_list = self._handle_zip_file(request)
-            return combined_json_list, request.headers, request.status_code
+        if "attachment" in response.headers.get("Content-Disposition", "") or self._is_last_token(response):
+            combined_json_list = self._handle_zip_file(response)
+            return combined_json_list, response.headers, response.status_code
 
+        # Due to how Mimecast returns a zip file in the response content, this error handling needs to happen after
+        # the attempt to parse the content. Otherwise we hit json errors on the zipped content.
         try:
-            response = request.json()
+            response = response.json()
             status_code = response.get(META_FIELD, {}).get(STATUS_FIELD)
             if response.get(FAIL_FIELD):
                 self._handle_siem_logs_error_response(response, status_code)
         except json.JSONDecodeError as json_error:
-            error_info = f'response content="{request.content}", response headers="{request.headers}"'
+            error_info = f'response content="{response.content}", response headers="{response.headers}"'
             raise ApiClientException(
                 cause=json_error,
                 data=error_info,
                 preset=PluginException.Preset.INVALID_JSON,
-                status_code=request.status_code,
+                status_code=response.status_code,
             )
         except PluginException as error:
             status_code = error.status_code if isinstance(error, ApiClientException) else status_code
@@ -127,7 +129,10 @@ class MimecastAPI:
                 preset=error.preset,
                 status_code=status_code,
             )
-        raise ApiClientException(preset=PluginException.Preset.UNKNOWN, data=response, status_code=status_code)
+
+        raise ApiClientException(
+            preset=PluginException.Preset.UNKNOWN, data=response.content, status_code=response.status_code
+        )
 
     def _is_last_token(self, request: requests.Response) -> bool:
         """
@@ -141,9 +146,9 @@ class MimecastAPI:
         """
 
         try:
-            last_token = IS_LAST_TOKEN_FIELD in json.dumps(request.json())
+            last_token = request.json().get("meta", {}).get(IS_LAST_TOKEN_FIELD, False)
             request.headers.update({IS_LAST_TOKEN_FIELD: last_token})
-            return True
+            return last_token
         except json.JSONDecodeError:
             return False
 
@@ -289,7 +294,7 @@ class MimecastAPI:
                     )
                 elif error.get(CODE) == DEVELOPER_KEY_ERROR:
                     raise ApiClientException(
-                        preset=PluginException.Preset.API_KEY,
+                        preset=PluginException.Preset.INVALID_CREDENTIALS,
                         data=response,
                         status_code=401,
                     )
