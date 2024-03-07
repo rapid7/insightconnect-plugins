@@ -1,0 +1,10 @@
+{
+  "reports": [
+    {
+      "detail": "/api/v1/submit/188/report/",
+      "platform": "WINDOWS7",
+      "status": "/api/v1/submit/188/"
+    }
+  ],
+  "success": true
+}
