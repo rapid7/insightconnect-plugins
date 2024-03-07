@@ -186,7 +186,7 @@ class APIClient(object):
                 "of the target resource. The file fingerprint already exists.",
             ),
         }
-
+        print("WAH")
         response = await session.post(url=url, data=json.dumps(body))
         if response.status == 200:
             try:
