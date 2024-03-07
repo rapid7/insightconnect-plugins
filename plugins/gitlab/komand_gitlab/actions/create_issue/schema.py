@@ -78,7 +78,7 @@ class CreateIssueInput(insightconnect_plugin_runtime.Input):
     },
     "discussion_resolve": {
       "type": "string",
-      "title": "Discussion To Resolve",
+      "title": "Discussion to Resolve",
       "description": "The ID of a discussion to resolve",
       "order": 11
     },

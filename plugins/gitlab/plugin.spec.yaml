@@ -412,7 +412,7 @@ actions:
         example: 13
         required: false
       discussion_resolve:
-        title: Discussion To Resolve
+        title: Discussion to Resolve
         description: The ID of a discussion to resolve
         type: string
         example: TheDiscussion
