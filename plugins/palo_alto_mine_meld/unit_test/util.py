@@ -1,7 +1,7 @@
 import json
 import logging
 import os
-from insightconnect_plugin_runtime.exceptions import PluginException
+
 from icon_palo_alto_mine_meld.connection.connection import Connection
 from icon_palo_alto_mine_meld.connection.schema import Input
 

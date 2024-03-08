@@ -3,36 +3,39 @@
 [Palo Alto MineMeld](https://www.paloaltonetworks.com/) is an open-source application that streamlines the aggregation, enforcement and sharing of threat intelligence.
 
 # Key Features
-
+  
 * Add and remove indicators in External Dynamic Lists
 
 # Requirements
-
-* Username and password
+  
+* Username and password  
 * Base URL for Palo Alto MineMeld
 
 # Supported Product Versions
-
+  
 * 0.9.70
 
 # Documentation
 
 ## Setup
-
-The connection configuration accepts the following parameters:
+  
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |credentials|credential_username_password|None|True|Username and password to access Palo Alto MineMeld|None|{"username":"user1", "password":"mypassword"}|
 |port|number|443|False|Palo Alto MineMeld port|None|443|
 |ssl_verify|boolean|True|False|Verify TLS/SSL Certificate|None|True|
 |url|string|None|True|Palo Alto MindMeld URL|None|https://www.example.com|
-
+  
 Example input:
 
 ```
 {
-  "credentials": {"username": "user1", "password": "mypassword"},
+  "credentials": {
+    "password": "mypassword",
+    "username": "user1"
+  },
   "port": 443,
   "ssl_verify": true,
   "url": "https://www.example.com"
@@ -43,34 +46,41 @@ Example input:
 
 ### Actions
 
-#### Update External Dynamic List
 
-This action is used to add and remove IP addresses and domains to/from an external dynamic list.
+#### Update External Dynamic List
+  
+This action is used to add and remove indicators to and from an external dynamic list
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|comment|string|None|False|Additional information or context about the indicator|None|This is an example comment|
+|direction|string|None|False|Indicates whether the IP address is typically considered to be the source of a session (inbound) or the destination (outbound)|["", "Inbound", "Outbound"]|Inbound|
 |indicator|string|None|True|Indicator type which is IP address, domain name, or URL|None|198.51.100.100|
 |list_name|string|None|True|Name of the dynamic list|None|example_list_name|
-|operation|string|Add|False|Choose operation to add or remove indicator|['Add', 'Remove']|Add|
-
+|operation|string|Add|False|Choose operation to add or remove indicator|["Add", "Remove"]|Add|
+|share_level|string|None|False|Indicates the sensitivity of the indicators, where RED is highly sensitive, YELLOW is moderately sensitive and GREEN is less sensitive|["", "Green", "Yellow", "Red", "Unknown"]|Green|
+  
 Example input:
 
 ```
 {
+  "comment": "This is an example comment",
+  "direction": "Inbound",
   "indicator": "198.51.100.100",
   "list_name": "example_list_name",
-  "operation": "Add"
+  "operation": "Add",
+  "share_level": "Green"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Returned true if operation success|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|True|Returned true if operation success|True|
+  
 Example output:
 
 ```
@@ -78,14 +88,16 @@ Example output:
   "success": true
 }
 ```
-
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
-
-### Custom Output Types
-
-_This plugin does not contain any custom output types._
+### Custom Types
+  
+*This plugin does not contain any custom output types.*
 
 ## Troubleshooting
 
@@ -103,11 +115,14 @@ Custom prototype can also be used when creating new nodes. To create a new custo
 
 # Version History
 
-* 1.0.2 - Action: Update External Dynamic List - Added extra validators to handle CIDR IP addresses
-* 1.0.1 - Improve error messaging
+* 1.1.0 - Action: `Update External Dynamic List` - Added new fields to the input: Direction, Share Level, and Comment  
+* 1.0.2 - Action: `Update External Dynamic List` - Added extra validators to handle CIDR IP addresses  
+* 1.0.1 - Improve error messaging  
 * 1.0.0 - Initial plugin
 
 # Links
+
+* [Palo Alto MineMeld](https://www.paloaltonetworks.com/)
 
 ## References
 
