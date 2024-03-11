@@ -613,6 +613,7 @@ Example output:
 
 # Links
 
+* [GitLab](https://gitlab.com)
 
 ## References
   
