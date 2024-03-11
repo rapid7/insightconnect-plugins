@@ -33,13 +33,10 @@ class GetNewIssue(insightconnect_plugin_runtime.Trigger):
             self.logger.info("Searching for new issues.. ")
 
             issues = self.connection.client.get_issues(issue_params=issue_params)
-            print(f"Issues:\n{issues}")
             for issue in issues:
                 issue = Util.clean_json(issue)
-                # print(f"ISSUE:\n{issue}")
                 if Util.is_issue_new(issue.get("updated_at", "")):
                     new_issues.append(issue)
-                    # print(f"NEW ISSUES:\n{new_issues}")
 
             if len(new_issues) > 0:
                 if new_issues[0] not in seen:
@@ -50,5 +47,4 @@ class GetNewIssue(insightconnect_plugin_runtime.Trigger):
                     time.sleep(60)
                     continue
 
-            # print("final sleep hit")
             time.sleep(params.get(Input.INTERVAL, 5))

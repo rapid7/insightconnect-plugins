@@ -43,21 +43,4 @@ class CreateIssue(insightconnect_plugin_runtime.Action):
         response = self.connection.client.create_issue(project_id=project_id, issue_params=issue_params)
         response = Util.clean_json(response)
 
-        return {
-            Output.ID: response.get("id"),
-            Output.TITLE: response.get("title"),
-            Output.LABELS: response.get("labels"),
-            Output.CREATED_AT: response.get("created_at"),
-            Output.DUE_DATE: response.get("due_date"),
-            Output.PROJECT_ID: response.get("project_id"),
-            Output.STATE: response.get("state"),
-            Output.MILESTONE: response.get("milestone"),
-            Output.DESCRIPTION: response.get("description"),
-            Output.WEB_URL: response.get("web_url"),
-            Output.ASSIGNEES: response.get("assignees"),
-            Output.AUTHOR: response.get("author"),
-            Output.IID: response.get("iid"),
-            Output.SUBSCRIBED: response.get("subscribed"),
-            Output.UPDATED_AT: response.get("updated_at"),
-            Output.USER_NOTES_COUNT: response.get("user_notes_count"),
-        }
+        return {Output.ISSUE: response}

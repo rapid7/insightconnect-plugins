@@ -32,7 +32,7 @@ class GitLabAPI:
         return self._call_api(method="POST", path=f"/users/{str(user_id)}/unblock")
 
     def get_issues(self, issue_params: List[Tuple[str, Union[str, int]]]):
-        return self._call_api(method="GET", path=f"/issues", params=issue_params)
+        return self._call_api(method="GET", path="/issues", params=issue_params)
 
     def _call_api(self, method: str, path: str, params=None):
         headers = {"PRIVATE-TOKEN": self.token}
