@@ -22,23 +22,7 @@ class Input:
 
 
 class Output:
-    ASSIGNEES = "assignees"
-    AUTHOR = "author"
-    CONFIDENTIAL = "confidential"
-    CREATED_AT = "created_at"
-    DESCRIPTION = "description"
-    DUE_DATE = "due_date"
-    ID = "id"
-    IID = "iid"
-    LABELS = "labels"
-    MILESTONE = "milestone"
-    PROJECT_ID = "project_id"
-    STATE = "state"
-    SUBSCRIBED = "subscribed"
-    TITLE = "title"
-    UPDATED_AT = "updated_at"
-    USER_NOTES_COUNT = "user_notes_count"
-    WEB_URL = "web_url"
+    ISSUE = "issue"
 
 
 class CreateIssueInput(insightconnect_plugin_runtime.Input):
@@ -139,122 +123,134 @@ class CreateIssueOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "assignees": {
-      "type": "array",
-      "title": "Assignees",
-      "description": "Assignees",
-      "items": {
-        "$ref": "#/definitions/user_output"
-      },
-      "order": 7
-    },
-    "author": {
-      "$ref": "#/definitions/user_output",
-      "title": "Author",
-      "description": "Author",
-      "order": 17
-    },
-    "confidential": {
-      "type": "boolean",
-      "title": "Confidential",
-      "description": "Confidential",
-      "order": 16
-    },
-    "created_at": {
-      "type": "string",
-      "format": "date-time",
-      "displayType": "date",
-      "title": "Created At",
-      "description": "Created at",
-      "order": 3
-    },
-    "description": {
-      "type": "string",
-      "title": "Description",
-      "description": "Description",
-      "order": 9
-    },
-    "due_date": {
-      "type": "string",
-      "format": "date-time",
-      "displayType": "date",
-      "title": "Due Date",
-      "description": "Due date",
-      "order": 14
-    },
-    "id": {
-      "type": "integer",
-      "title": "ID",
-      "description": "ID",
-      "order": 2
-    },
-    "iid": {
-      "type": "integer",
-      "title": "IID",
-      "description": "IID",
-      "order": 4
-    },
-    "labels": {
-      "type": "array",
-      "title": "Labels",
-      "description": "Labels",
-      "items": {
-        "type": "string"
-      },
-      "order": 8
-    },
-    "milestone": {
-      "$ref": "#/definitions/milestone_output",
-      "title": "Milestone",
-      "description": "Milestone",
-      "order": 11
-    },
-    "project_id": {
-      "type": "integer",
-      "title": "Project ID",
-      "description": "Project ID",
+    "issue": {
+      "$ref": "#/definitions/create_issue_output",
+      "title": "Issue",
+      "description": "Newly created issue",
       "order": 1
-    },
-    "state": {
-      "type": "string",
-      "title": "State",
-      "description": "State",
-      "order": 6
-    },
-    "subscribed": {
-      "type": "boolean",
-      "title": "Subscribed",
-      "description": "Subscribed",
-      "order": 12
-    },
-    "title": {
-      "type": "string",
-      "title": "Title",
-      "description": "Title",
-      "order": 5
-    },
-    "updated_at": {
-      "type": "string",
-      "format": "date-time",
-      "displayType": "date",
-      "title": "Updated At",
-      "description": "Updated at",
-      "order": 10
-    },
-    "user_notes_count": {
-      "type": "integer",
-      "title": "User Notes Count",
-      "description": "User notes count",
-      "order": 13
-    },
-    "web_url": {
-      "type": "string",
-      "title": "Web URL",
-      "description": "Web URL",
-      "order": 15
     }
   },
   "definitions": {
+    "create_issue_output": {
+      "type": "object",
+      "title": "create_issue_output",
+      "properties": {
+        "project_id": {
+          "type": "integer",
+          "title": "Project ID",
+          "description": "Project ID",
+          "order": 1
+        },
+        "id": {
+          "type": "integer",
+          "title": "ID",
+          "description": "ID",
+          "order": 2
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "displayType": "date",
+          "title": "Created At",
+          "description": "Created at",
+          "order": 3
+        },
+        "iid": {
+          "type": "integer",
+          "title": "IID",
+          "description": "IID",
+          "order": 4
+        },
+        "title": {
+          "type": "string",
+          "title": "Title",
+          "description": "Title",
+          "order": 5
+        },
+        "state": {
+          "type": "string",
+          "title": "State",
+          "description": "State",
+          "order": 6
+        },
+        "assignees": {
+          "type": "array",
+          "title": "Assignees",
+          "description": "Assignees",
+          "items": {
+            "$ref": "#/definitions/user_output"
+          },
+          "order": 7
+        },
+        "labels": {
+          "type": "array",
+          "title": "Labels",
+          "description": "Labels",
+          "items": {
+            "type": "string"
+          },
+          "order": 8
+        },
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Description",
+          "order": 9
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "displayType": "date",
+          "title": "Updated At",
+          "description": "Updated at",
+          "order": 10
+        },
+        "milestone": {
+          "$ref": "#/definitions/milestone_output",
+          "title": "Milestone",
+          "description": "Milestone",
+          "order": 11
+        },
+        "subscribed": {
+          "type": "boolean",
+          "title": "Subscribed",
+          "description": "Subscribed",
+          "order": 12
+        },
+        "user_notes_count": {
+          "type": "integer",
+          "title": "User Notes Count",
+          "description": "User notes count",
+          "order": 13
+        },
+        "due_date": {
+          "type": "string",
+          "format": "date-time",
+          "displayType": "date",
+          "title": "Due Date",
+          "description": "Due date",
+          "order": 14
+        },
+        "web_url": {
+          "type": "string",
+          "title": "Web URL",
+          "description": "Web URL",
+          "order": 15
+        },
+        "confidential": {
+          "type": "boolean",
+          "title": "Confidential",
+          "description": "Confidential",
+          "order": 16
+        },
+        "author": {
+          "$ref": "#/definitions/user_output",
+          "title": "Author",
+          "description": "Author",
+          "order": 17
+        }
+      }
+    },
     "user_output": {
       "type": "object",
       "title": "user_output",

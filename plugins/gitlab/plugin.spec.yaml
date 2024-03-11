@@ -141,6 +141,195 @@ types:
       type: date
       example: 2016-01-07T12:44:33.959Z
       required: false
+  get_user_output:
+    name:
+      title: Name
+      description: Name
+      type: string
+      example: John Smith
+      required: false
+    avatar_url:
+      title: Avatar URL
+      description: Avatar URL
+      type: string
+      example: http://localhost:3000/uploads/user/avatar/1/cd8.jpeg
+      required: false
+    state:
+      title: State
+      description: State
+      type: string
+      example: active
+      required: false
+    web_url:
+      title: Web URL
+      description: Web URL
+      type: string
+      example: http://localhost:3000/john_smith
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: integer
+      example: 17
+      required: false
+    username:
+      title: Username
+      description: Username
+      type: string
+      example: john_smith
+      required: false
+    created_at:
+      title: Created At
+      description: Create at
+      type: date
+      example: 2012-05-23T08:00:58Z
+      required: false
+    bio:
+      title: Bio
+      description: Bio
+      type: string
+      example: Software engineer from blahblah I love coding
+      required: false
+    location:
+      title: Location
+      description: Location
+      type: string
+      example: East Coast
+      required: false
+    skype:
+      title: Skype
+      description: Skype
+      type: string
+      example: user@skype.com
+      required: false
+    linkedin:
+      title: LinkedIn
+      description: LinkedIn
+      type: string
+      example: user@linkedin.com
+      required: false
+    twitter:
+      title: Twitter
+      description: Twitter
+      type: string
+      example: user@twitter.com
+      required: false
+    website_url:
+      title: Website URL
+      description: Website URL
+      type: string
+      example: john_smith@john_smith.com
+      required: false
+    organization:
+      title: Organization
+      description: Organization
+      type: string
+      example: Rapid7
+      required: false
+  create_issue_output:
+    project_id:
+      title: Project ID
+      description: Project ID
+      type: integer
+      example: 13
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: integer
+      example: 12
+      required: false
+    created_at:
+      title: Created At
+      description: Created at
+      type: date
+      example: 2016-01-07T12:44:33.959Z
+      required: false
+    iid:
+      title: IID
+      description: IID
+      type: integer
+      example: 12
+      required: false
+    title:
+      title: Title
+      description: Title
+      type: string
+      example: Issues with auth
+      required: false
+    state:
+      title: State
+      description: State
+      type: string
+      example: opened
+      required: false
+    assignees:
+      title: Assignees
+      description: Assignees
+      type: '[]user_output'
+      example: [ { "name": "Alexandra Bashirian","avatar_url": None,"state": "active","web_url": "https://gitlab.example.com/eileen.lowe","id": 18,"username": "eileen.lowe" }, { "name": "John Smith","avatar_url": null,"state": "active","web_url": "https://gitlab.example.com/john.smith","id": 19,"username": "john.smith" } ]
+      required: false
+    labels:
+      title: Labels
+      description: Labels
+      type: '[]string'
+      example: [ label1, label2, label3 ]
+      required: false
+    description:
+      title: Description
+      description: Description
+      type: string
+      example: Short description about the issue
+      required: false
+    updated_at:
+      title: Updated At
+      description: Updated at
+      type: date
+      example: 2016-01-07T12:44:33.959Z
+      required: false
+    milestone:
+      title: Milestone
+      description: Milestone
+      type: milestone_output
+      example: { "id": 3, "project_id": 3, "iid": 34, "title": "project title", "description": "project description", "state": "Opened", "created_at": 2016-01-07T12:44:33.959Z, "updated_at": 2016-01-07T12:44:33.959Z, "due_date": 2016-01-07T12:44:33.959Z }
+      required: false
+    subscribed:
+      title: Subscribed
+      description: Subscribed
+      type: boolean
+      example: True
+      required: false
+    user_notes_count:
+      title: User Notes Count
+      description: User notes count
+      type: integer
+      example: 20
+      required: false
+    due_date:
+      title: Due Date
+      description: Due date
+      type: date
+      example: 2016-01-07T12:44:33.959Z
+      required: false
+    web_url:
+      title: Web URL
+      description: Web URL
+      type: string
+      example: https://gitlab.example.com/eileen.lowe
+      required: false
+    confidential:
+      title: Confidential
+      description: Confidential
+      type: boolean
+      example: True
+      required: false
+    author:
+      title: Author
+      description: Author
+      type: user_output
+      example: { "name": "Alexandra Bashirian", "avatar_url": null, "state": "active", "web_url": "https://gitlab.example.com/eileen.lowe", "id": 18, "username": "eileen.lowe" }
+      required: false
+
 connection:
   credentials:
     title: GitLab Username and Password (or token)
@@ -263,89 +452,11 @@ actions:
         example: 17
         required: true
     output:
-      name:
-        title: Name
-        description: Name
-        type: string
-        example: John Smith
-        required: false
-      avatar_url:
-        title: Avatar URL
-        description: Avatar URL
-        type: string
-        example: http://localhost:3000/uploads/user/avatar/1/cd8.jpeg
-        required: false
-      state:
-        title: State
-        description: State
-        type: string
-        example: active
-        required: false
-      web_url:
-        title: Web URL
-        description: Web URL
-        type: string
-        example: http://localhost:3000/john_smith
-        required: false
-      id:
-        title: ID
-        description: ID
-        type: integer
-        example: 17
-        required: false
-      username:
-        title: Username
-        description: Username
-        type: string
-        example: john_smith
-        required: false
-      created_at:
-        title: Created At
-        description: Create at
-        type: date
-        example: 2012-05-23T08:00:58Z
-        required: false
-      bio:
-        title: Bio
-        description: Bio
-        type: string
-        example: Software engineer from blahblah I love coding
-        required: false
-      location:
-        title: Location
-        description: Location
-        type: string
-        example: East Coast
-        required: false
-      skype:
-        title: Skype
-        description: Skype
-        type: string
-        example: user@skype.com
-        required: false
-      linkedin:
-        title: LinkedIn
-        description: LinkedIn
-        type: string
-        example: user@linkedin.com
-        required: false
-      twitter:
-        title: Twitter
-        description: Twitter
-        type: string
-        example: user@twitter.com
-        required: false
-      website_url:
-        title: Website URL
-        description: Website URL
-        type: string
-        example: john_smith@john_smith.com
-        required: false
-      organization:
-        title: Organization
-        description: Organization
-        type: string
-        example: Rapid7
+      user:
+        title: User
+        description: User profile
+        type: get_user_output
+        example: {"avatar_url": "http://localhost:3000/uploads/user/avatar/1/cd8.jpeg","bio": "Software engineer from blahblah I love coding","created_at": "2012-05-23 08:00:58+00:00","id": 17,"linkedin": "user@linkedin.com","location": "East Coast","name": "John Smith","organization": "Rapid7","skype": "user@skype.com","state": "active","twitter": "user@twitter.com","username": "john_smith","web_url": "http://localhost:3000/john_smith","website_url": "john_smith@john_smith.com"}
         required: false
   create_issue:
     title: Create Issue
@@ -418,107 +529,11 @@ actions:
         example: TheDiscussion
         required: false
     output:
-      project_id:
-        title: Project ID
-        description: Project ID
-        type: integer
-        example: 13
-        required: false
-      id:
-        title: ID
-        description: ID
-        type: integer
-        example: 12
-        required: false
-      created_at:
-        title: Created At
-        description: Created at
-        type: date
-        example: 2016-01-07T12:44:33.959Z
-        required: false
-      iid:
-        title: IID
-        description: IID
-        type: integer
-        example: 12
-        required: false
-      title:
-        title: Title
-        description: Title
-        type: string
-        example: Issues with auth
-        required: false
-      state:
-        title: State
-        description: State
-        type: string
-        example: opened
-        required: false
-      assignees:
-        title: Assignees
-        description: Assignees
-        type: '[]user_output'
-        example: [{"name" : "Alexandra Bashirian","avatar_url": None,"state" : "active","web_url" : "https://gitlab.example.com/eileen.lowe","id" : 18,"username" : "eileen.lowe"}, {"name" : "John Smith","avatar_url" : null,"state" : "active","web_url" : "https://gitlab.example.com/john.smith","id" : 19,"username" : "john.smith"}]
-        required: false
-      labels:
-        title: Labels
-        description: Labels
-        type: '[]string'
-        example: [label1, label2, label3]
-        required: false
-      description:
-        title: Description
-        description: Description
-        type: string
-        example: Short description about the issue
-        required: false
-      updated_at:
-        title: Updated At
-        description: Updated at
-        type: date
-        example: 2016-01-07T12:44:33.959Z
-        required: false
-      milestone:
-        title: Milestone
-        description: Milestone
-        type: milestone_output
-        example: {"id": 3, "project_id": 3, "iid": 34, "title": "project title", "description": "project description", "state": "Opened", "created_at": 2016-01-07T12:44:33.959Z, "updated_at": 2016-01-07T12:44:33.959Z, "due_date": 2016-01-07T12:44:33.959Z}
-        required: false
-      subscribed:
-        title: Subscribed
-        description: Subscribed
-        type: boolean
-        example: True
-        required: false
-      user_notes_count:
-        title: User Notes Count
-        description: User notes count
-        type: integer
-        example: 20
-        required: false
-      due_date:
-        title: Due Date
-        description: Due date
-        type: date
-        example: 2016-01-07T12:44:33.959Z
-        required: false
-      web_url:
-        title: Web URL
-        description: Web URL
-        type: string
-        example: https://gitlab.example.com/eileen.lowe
-        required: false
-      confidential:
-        title: Confidential
-        description: Confidential
-        type: boolean
-        example: True
-        required: false
-      author:
-        title: Author
-        description: Author
-        type: user_output
-        example: {"name": "Alexandra Bashirian", "avatar_url": null, "state": "active", "web_url": "https://gitlab.example.com/eileen.lowe", "id": 18, "username": "eileen.lowe"}
+      issue:
+        title: Issue
+        description: Newly created issue
+        type: create_issue_output
+        example: {"assignees": [{"avatar_url": "None","id": 18,"name": "Alexandra Bashirian","state": "active","username": "eileen.lowe","web_url": "https://gitlab.example.com/eileen.lowe"},{"avatar_url": null,"id": 19,"name": "John Smith","state": "active","username": "john.smith","web_url": "https://gitlab.example.com/john.smith"}],"author": {"avatar_url": null,"id": 18,"name": "Alexandra Bashirian","state": "active","username": "eileen.lowe","web_url": "https://gitlab.example.com/eileen.lowe"},"confidential": true,"created_at": "2016-01-07 12:44:33.959000+00:00","description": "Short description about the issue","due_date": "2016-01-07 12:44:33.959000+00:00","id": 12,"iid": 12,"labels": ["label1","label2","label3"],"milestone": {"created_at": "2016-01-07 12:44:33.959000+00:00","description": "project description","due_date": "2016-01-07 12:44:33.959000+00:00","id": 3,"iid": 34,"project_id": 3,"state": "Opened","title": "project title","updated_at": "2016-01-07 12:44:33.959000+00:00"},"project_id": 13,"state": "opened","subscribed": true,"title": "Issues with auth","updated_at": "2016-01-07 12:44:33.959000+00:00","user_notes_count": 20,"web_url": "https://gitlab.example.com/eileen.lowe"}
         required: false
 triggers:
   get_new_issue:

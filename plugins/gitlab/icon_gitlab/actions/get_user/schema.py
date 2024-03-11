@@ -12,20 +12,7 @@ class Input:
 
 
 class Output:
-    AVATAR_URL = "avatar_url"
-    BIO = "bio"
-    CREATED_AT = "created_at"
-    ID = "id"
-    LINKEDIN = "linkedin"
-    LOCATION = "location"
-    NAME = "name"
-    ORGANIZATION = "organization"
-    SKYPE = "skype"
-    STATE = "state"
-    TWITTER = "twitter"
-    USERNAME = "username"
-    WEB_URL = "web_url"
-    WEBSITE_URL = "website_url"
+    USER = "user"
 
 
 class GetUserInput(insightconnect_plugin_runtime.Input):
@@ -58,94 +45,107 @@ class GetUserOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "avatar_url": {
-      "type": "string",
-      "title": "Avatar URL",
-      "description": "Avatar URL",
-      "order": 2
-    },
-    "bio": {
-      "type": "string",
-      "title": "Bio",
-      "description": "Bio",
-      "order": 8
-    },
-    "created_at": {
-      "type": "string",
-      "format": "date-time",
-      "displayType": "date",
-      "title": "Created At",
-      "description": "Create at",
-      "order": 7
-    },
-    "id": {
-      "type": "integer",
-      "title": "ID",
-      "description": "ID",
-      "order": 5
-    },
-    "linkedin": {
-      "type": "string",
-      "title": "LinkedIn",
-      "description": "LinkedIn",
-      "order": 11
-    },
-    "location": {
-      "type": "string",
-      "title": "Location",
-      "description": "Location",
-      "order": 9
-    },
-    "name": {
-      "type": "string",
-      "title": "Name",
-      "description": "Name",
+    "user": {
+      "$ref": "#/definitions/get_user_output",
+      "title": "User",
+      "description": "User profile",
       "order": 1
-    },
-    "organization": {
-      "type": "string",
-      "title": "Organization",
-      "description": "Organization",
-      "order": 14
-    },
-    "skype": {
-      "type": "string",
-      "title": "Skype",
-      "description": "Skype",
-      "order": 10
-    },
-    "state": {
-      "type": "string",
-      "title": "State",
-      "description": "State",
-      "order": 3
-    },
-    "twitter": {
-      "type": "string",
-      "title": "Twitter",
-      "description": "Twitter",
-      "order": 12
-    },
-    "username": {
-      "type": "string",
-      "title": "Username",
-      "description": "Username",
-      "order": 6
-    },
-    "web_url": {
-      "type": "string",
-      "title": "Web URL",
-      "description": "Web URL",
-      "order": 4
-    },
-    "website_url": {
-      "type": "string",
-      "title": "Website URL",
-      "description": "Website URL",
-      "order": 13
     }
   },
-  "definitions": {}
+  "definitions": {
+    "get_user_output": {
+      "type": "object",
+      "title": "get_user_output",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 1
+        },
+        "avatar_url": {
+          "type": "string",
+          "title": "Avatar URL",
+          "description": "Avatar URL",
+          "order": 2
+        },
+        "state": {
+          "type": "string",
+          "title": "State",
+          "description": "State",
+          "order": 3
+        },
+        "web_url": {
+          "type": "string",
+          "title": "Web URL",
+          "description": "Web URL",
+          "order": 4
+        },
+        "id": {
+          "type": "integer",
+          "title": "ID",
+          "description": "ID",
+          "order": 5
+        },
+        "username": {
+          "type": "string",
+          "title": "Username",
+          "description": "Username",
+          "order": 6
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "displayType": "date",
+          "title": "Created At",
+          "description": "Create at",
+          "order": 7
+        },
+        "bio": {
+          "type": "string",
+          "title": "Bio",
+          "description": "Bio",
+          "order": 8
+        },
+        "location": {
+          "type": "string",
+          "title": "Location",
+          "description": "Location",
+          "order": 9
+        },
+        "skype": {
+          "type": "string",
+          "title": "Skype",
+          "description": "Skype",
+          "order": 10
+        },
+        "linkedin": {
+          "type": "string",
+          "title": "LinkedIn",
+          "description": "LinkedIn",
+          "order": 11
+        },
+        "twitter": {
+          "type": "string",
+          "title": "Twitter",
+          "description": "Twitter",
+          "order": 12
+        },
+        "website_url": {
+          "type": "string",
+          "title": "Website URL",
+          "description": "Website URL",
+          "order": 13
+        },
+        "organization": {
+          "type": "string",
+          "title": "Organization",
+          "description": "Organization",
+          "order": 14
+        }
+      }
+    }
+  }
 }
     """)
 

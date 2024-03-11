@@ -127,83 +127,69 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|assignees|[]user_output|False|Assignees|[{"name": "Alexandra Bashirian", "avatar_url": "None", "state": "active", "web_url": "https://gitlab.example.com/eileen.lowe", "id": 18, "username": "eileen.lowe"}, {"name": "John Smith", "avatar_url": null, "state": "active", "web_url": "https://gitlab.example.com/john.smith", "id": 19, "username": "john.smith"}]|
-|author|user_output|False|Author|{'name': 'Alexandra Bashirian', 'avatar_url': None, 'state': 'active', 'web_url': 'https://gitlab.example.com/eileen.lowe', 'id': 18, 'username': 'eileen.lowe'}|
-|confidential|boolean|False|Confidential|True|
-|created_at|date|False|Created at|2016-01-07 12:44:33.959000+00:00|
-|description|string|False|Description|Short description about the issue|
-|due_date|date|False|Due date|2016-01-07 12:44:33.959000+00:00|
-|id|integer|False|ID|12|
-|iid|integer|False|IID|12|
-|labels|[]string|False|Labels|["label1", "label2", "label3"]|
-|milestone|milestone_output|False|Milestone|{'id': 3, 'project_id': 3, 'iid': 34, 'title': 'project title', 'description': 'project description', 'state': 'Opened', 'created_at': datetime.datetime(2016, 1, 7, 12, 44, 33, 959000, tzinfo=datetime.timezone.utc), 'updated_at': datetime.datetime(2016, 1, 7, 12, 44, 33, 959000, tzinfo=datetime.timezone.utc), 'due_date': datetime.datetime(2016, 1, 7, 12, 44, 33, 959000, tzinfo=datetime.timezone.utc)}|
-|project_id|integer|False|Project ID|13|
-|state|string|False|State|opened|
-|subscribed|boolean|False|Subscribed|True|
-|title|string|False|Title|Issues with auth|
-|updated_at|date|False|Updated at|2016-01-07 12:44:33.959000+00:00|
-|user_notes_count|integer|False|User notes count|20|
-|web_url|string|False|Web URL|https://gitlab.example.com/eileen.lowe|
+|issue|create_issue_output|False|Newly created issue|{'assignees': [{'avatar_url': 'None', 'id': 18, 'name': 'Alexandra Bashirian', 'state': 'active', 'username': 'eileen.lowe', 'web_url': 'https://gitlab.example.com/eileen.lowe'}, {'avatar_url': None, 'id': 19, 'name': 'John Smith', 'state': 'active', 'username': 'john.smith', 'web_url': 'https://gitlab.example.com/john.smith'}], 'author': {'avatar_url': None, 'id': 18, 'name': 'Alexandra Bashirian', 'state': 'active', 'username': 'eileen.lowe', 'web_url': 'https://gitlab.example.com/eileen.lowe'}, 'confidential': True, 'created_at': '2016-01-07 12:44:33.959000+00:00', 'description': 'Short description about the issue', 'due_date': '2016-01-07 12:44:33.959000+00:00', 'id': 12, 'iid': 12, 'labels': ['label1', 'label2', 'label3'], 'milestone': {'created_at': '2016-01-07 12:44:33.959000+00:00', 'description': 'project description', 'due_date': '2016-01-07 12:44:33.959000+00:00', 'id': 3, 'iid': 34, 'project_id': 3, 'state': 'Opened', 'title': 'project title', 'updated_at': '2016-01-07 12:44:33.959000+00:00'}, 'project_id': 13, 'state': 'opened', 'subscribed': True, 'title': 'Issues with auth', 'updated_at': '2016-01-07 12:44:33.959000+00:00', 'user_notes_count': 20, 'web_url': 'https://gitlab.example.com/eileen.lowe'}|
   
 Example output:
 
 ```
 {
-  "assignees": [
-    {
-      "avatar_url": "None",
+  "issue": {
+    "assignees": [
+      {
+        "avatar_url": "None",
+        "id": 18,
+        "name": "Alexandra Bashirian",
+        "state": "active",
+        "username": "eileen.lowe",
+        "web_url": "https://gitlab.example.com/eileen.lowe"
+      },
+      {
+        "avatar_url": null,
+        "id": 19,
+        "name": "John Smith",
+        "state": "active",
+        "username": "john.smith",
+        "web_url": "https://gitlab.example.com/john.smith"
+      }
+    ],
+    "author": {
+      "avatar_url": null,
       "id": 18,
       "name": "Alexandra Bashirian",
       "state": "active",
       "username": "eileen.lowe",
       "web_url": "https://gitlab.example.com/eileen.lowe"
     },
-    {
-      "avatar_url": null,
-      "id": 19,
-      "name": "John Smith",
-      "state": "active",
-      "username": "john.smith",
-      "web_url": "https://gitlab.example.com/john.smith"
-    }
-  ],
-  "author": {
-    "avatar_url": null,
-    "id": 18,
-    "name": "Alexandra Bashirian",
-    "state": "active",
-    "username": "eileen.lowe",
-    "web_url": "https://gitlab.example.com/eileen.lowe"
-  },
-  "confidential": true,
-  "created_at": "2016-01-07 12:44:33.959000+00:00",
-  "description": "Short description about the issue",
-  "due_date": "2016-01-07 12:44:33.959000+00:00",
-  "id": 12,
-  "iid": 12,
-  "labels": [
-    "label1",
-    "label2",
-    "label3"
-  ],
-  "milestone": {
+    "confidential": true,
     "created_at": "2016-01-07 12:44:33.959000+00:00",
-    "description": "project description",
+    "description": "Short description about the issue",
     "due_date": "2016-01-07 12:44:33.959000+00:00",
-    "id": 3,
-    "iid": 34,
-    "project_id": 3,
-    "state": "Opened",
-    "title": "project title",
-    "updated_at": "2016-01-07 12:44:33.959000+00:00"
-  },
-  "project_id": 13,
-  "state": "opened",
-  "subscribed": true,
-  "title": "Issues with auth",
-  "updated_at": "2016-01-07 12:44:33.959000+00:00",
-  "user_notes_count": 20,
-  "web_url": "https://gitlab.example.com/eileen.lowe"
+    "id": 12,
+    "iid": 12,
+    "labels": [
+      "label1",
+      "label2",
+      "label3"
+    ],
+    "milestone": {
+      "created_at": "2016-01-07 12:44:33.959000+00:00",
+      "description": "project description",
+      "due_date": "2016-01-07 12:44:33.959000+00:00",
+      "id": 3,
+      "iid": 34,
+      "project_id": 3,
+      "state": "Opened",
+      "title": "project title",
+      "updated_at": "2016-01-07 12:44:33.959000+00:00"
+    },
+    "project_id": 13,
+    "state": "opened",
+    "subscribed": true,
+    "title": "Issues with auth",
+    "updated_at": "2016-01-07 12:44:33.959000+00:00",
+    "user_notes_count": 20,
+    "web_url": "https://gitlab.example.com/eileen.lowe"
+  }
 }
 ```
 
@@ -295,39 +281,28 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|avatar_url|string|False|Avatar URL|http://localhost:3000/uploads/user/avatar/1/cd8.jpeg|
-|bio|string|False|Bio|Software engineer from blahblah I love coding|
-|created_at|date|False|Create at|2012-05-23 08:00:58+00:00|
-|id|integer|False|ID|17|
-|linkedin|string|False|LinkedIn|user@linkedin.com|
-|location|string|False|Location|East Coast|
-|name|string|False|Name|John Smith|
-|organization|string|False|Organization|Rapid7|
-|skype|string|False|Skype|user@skype.com|
-|state|string|False|State|active|
-|twitter|string|False|Twitter|user@twitter.com|
-|username|string|False|Username|john_smith|
-|web_url|string|False|Web URL|http://localhost:3000/john_smith|
-|website_url|string|False|Website URL|john_smith@john_smith.com|
+|user|get_user_output|False|User profile|{'avatar_url': 'http://localhost:3000/uploads/user/avatar/1/cd8.jpeg', 'bio': 'Software engineer from blahblah I love coding', 'created_at': '2012-05-23 08:00:58+00:00', 'id': 17, 'linkedin': 'user@linkedin.com', 'location': 'East Coast', 'name': 'John Smith', 'organization': 'Rapid7', 'skype': 'user@skype.com', 'state': 'active', 'twitter': 'user@twitter.com', 'username': 'john_smith', 'web_url': 'http://localhost:3000/john_smith', 'website_url': 'john_smith@john_smith.com'}|
   
 Example output:
 
 ```
 {
-  "avatar_url": "http://localhost:3000/uploads/user/avatar/1/cd8.jpeg",
-  "bio": "Software engineer from blahblah I love coding",
-  "created_at": "2012-05-23 08:00:58+00:00",
-  "id": 17,
-  "linkedin": "user@linkedin.com",
-  "location": "East Coast",
-  "name": "John Smith",
-  "organization": "Rapid7",
-  "skype": "user@skype.com",
-  "state": "active",
-  "twitter": "user@twitter.com",
-  "username": "john_smith",
-  "web_url": "http://localhost:3000/john_smith",
-  "website_url": "john_smith@john_smith.com"
+  "user": {
+    "avatar_url": "http://localhost:3000/uploads/user/avatar/1/cd8.jpeg",
+    "bio": "Software engineer from blahblah I love coding",
+    "created_at": "2012-05-23 08:00:58+00:00",
+    "id": 17,
+    "linkedin": "user@linkedin.com",
+    "location": "East Coast",
+    "name": "John Smith",
+    "organization": "Rapid7",
+    "skype": "user@skype.com",
+    "state": "active",
+    "twitter": "user@twitter.com",
+    "username": "john_smith",
+    "web_url": "http://localhost:3000/john_smith",
+    "website_url": "john_smith@john_smith.com"
+  }
 }
 ```
 
@@ -581,6 +556,47 @@ Example output:
 |State|string|None|False|Project state|Opened|
 |Title|string|None|False|Project title|Project title|
 |Updated At|date|None|False|Date project was updated|2016-01-07 12:44:33.959000+00:00|
+  
+**get_user_output**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Avatar URL|string|None|False|Avatar URL|http://localhost:3000/uploads/user/avatar/1/cd8.jpeg|
+|Bio|string|None|False|Bio|Software engineer from blahblah I love coding|
+|Created At|date|None|False|Create at|2012-05-23 08:00:58+00:00|
+|ID|integer|None|False|ID|17|
+|LinkedIn|string|None|False|LinkedIn|user@linkedin.com|
+|Location|string|None|False|Location|East Coast|
+|Name|string|None|False|Name|John Smith|
+|Organization|string|None|False|Organization|Rapid7|
+|Skype|string|None|False|Skype|user@skype.com|
+|State|string|None|False|State|active|
+|Twitter|string|None|False|Twitter|user@twitter.com|
+|Username|string|None|False|Username|john_smith|
+|Web URL|string|None|False|Web URL|http://localhost:3000/john_smith|
+|Website URL|string|None|False|Website URL|john_smith@john_smith.com|
+  
+**create_issue_output**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Assignees|[]user_output|None|False|Assignees|[{"name": "Alexandra Bashirian", "avatar_url": "None", "state": "active", "web_url": "https://gitlab.example.com/eileen.lowe", "id": 18, "username": "eileen.lowe"}, {"name": "John Smith", "avatar_url": null, "state": "active", "web_url": "https://gitlab.example.com/john.smith", "id": 19, "username": "john.smith"}]|
+|Author|user_output|None|False|Author|{'name': 'Alexandra Bashirian', 'avatar_url': None, 'state': 'active', 'web_url': 'https://gitlab.example.com/eileen.lowe', 'id': 18, 'username': 'eileen.lowe'}|
+|Confidential|boolean|None|False|Confidential|True|
+|Created At|date|None|False|Created at|2016-01-07 12:44:33.959000+00:00|
+|Description|string|None|False|Description|Short description about the issue|
+|Due Date|date|None|False|Due date|2016-01-07 12:44:33.959000+00:00|
+|ID|integer|None|False|ID|12|
+|IID|integer|None|False|IID|12|
+|Labels|[]string|None|False|Labels|["label1", "label2", "label3"]|
+|Milestone|milestone_output|None|False|Milestone|{'id': 3, 'project_id': 3, 'iid': 34, 'title': 'project title', 'description': 'project description', 'state': 'Opened', 'created_at': datetime.datetime(2016, 1, 7, 12, 44, 33, 959000, tzinfo=datetime.timezone.utc), 'updated_at': datetime.datetime(2016, 1, 7, 12, 44, 33, 959000, tzinfo=datetime.timezone.utc), 'due_date': datetime.datetime(2016, 1, 7, 12, 44, 33, 959000, tzinfo=datetime.timezone.utc)}|
+|Project ID|integer|None|False|Project ID|13|
+|State|string|None|False|State|opened|
+|Subscribed|boolean|None|False|Subscribed|True|
+|Title|string|None|False|Title|Issues with auth|
+|Updated At|date|None|False|Updated at|2016-01-07 12:44:33.959000+00:00|
+|User Notes Count|integer|None|False|User notes count|20|
+|Web URL|string|None|False|Web URL|https://gitlab.example.com/eileen.lowe|
 
 
 ## Troubleshooting

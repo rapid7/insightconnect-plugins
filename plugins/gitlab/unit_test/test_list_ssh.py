@@ -4,18 +4,24 @@ import os
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from icon_gitlab.connection.connection import Connection
+from unittest.mock import patch
 from icon_gitlab.actions.list_ssh import ListSsh
-import json
-import logging
+from icon_gitlab.actions.list_ssh.schema import Output, Input
+from jsonschema import validate
+from mock import Util, mock_request_200, mocked_request, MagicMock
 
 
 class TestListSsh(TestCase):
-    def test_list_ssh(self):
-        """
-        DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
+    @patch("requests.request", side_effect=mock_request_200)
+    def setUp(self, mock_client) -> None:
+        self.action = Util.default_connector(ListSsh())
+        self.params = {Input.ID: "123"}
 
-        TODO: Implement test cases here
-        """
+    @patch("requests.request", side_effect=mock_request_200)
+    def test_list_ssh(self, mock_get: MagicMock) -> None:
+        mocked_request(mock_get)
+        response = self.action.run(self.params)
 
-        self.fail("Unimplemented Test Case")
+        expected = {Output.SSH_KEYS: []}
+        validate(response, self.action.output.schema)
+        self.assertEqual(response, expected)
