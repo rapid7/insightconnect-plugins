@@ -604,7 +604,7 @@ Example output:
 *There is no troubleshooting for this plugin.*
 
 # Version History
-  
+
 * 2.0.0 - Update SDK | Refactor Plugin | `Connection` - New input: `ssl_verify` | `Issues` - Renamed to `Get New Issues` | Added unit tests  
 * 1.0.1 - New spec and help.md format for the Extension Library  
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types  
