@@ -1,0 +1,17 @@
+{
+  "cli": {
+    "configuring": true,
+    "depth": 1,
+    "mode": "config_mode",
+    "pending_config": true,
+    "restart_required": "FALSE"
+  },
+  "info": [
+    {
+      "code": "E_OK",
+      "level": "info",
+      "message": "Success."
+    }
+  ],
+  "success": true
+}
