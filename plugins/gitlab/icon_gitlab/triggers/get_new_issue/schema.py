@@ -20,7 +20,7 @@ class Output:
     ISSUE = "issue"
 
 
-class IssueInput(insightconnect_plugin_runtime.Input):
+class GetNewIssueInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {
   "type": "object",
@@ -70,9 +70,6 @@ class IssueInput(insightconnect_plugin_runtime.Input):
       "order": 1
     }
   },
-  "required": [
-    "labels"
-  ],
   "definitions": {}
 }
     """)
@@ -81,7 +78,7 @@ class IssueInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class IssueOutput(insightconnect_plugin_runtime.Output):
+class GetNewIssueOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "object",

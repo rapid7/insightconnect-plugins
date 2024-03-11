@@ -4,8 +4,8 @@ import os
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_gitlab.connection.connection import Connection
-from komand_gitlab.actions.delete_ssh import DeleteSsh
+from icon_gitlab.connection.connection import Connection
+from icon_gitlab.actions.delete_ssh import DeleteSsh
 import json
 import logging
 

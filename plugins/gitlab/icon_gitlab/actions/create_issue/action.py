@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import CreateIssueInput, CreateIssueOutput, Input, Output, Component
 
 # Custom imports below
-from komand_gitlab.util.util import Util
+from icon_gitlab.util.util import Util
 
 
 class CreateIssue(insightconnect_plugin_runtime.Action):

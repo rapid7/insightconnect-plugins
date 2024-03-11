@@ -4,8 +4,8 @@ import os
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_gitlab.connection.connection import Connection
-from komand_gitlab.actions.block_user import BlockUser
+from icon_gitlab.connection.connection import Connection
+from icon_gitlab.actions.block_user import BlockUser
 import json
 import logging
 

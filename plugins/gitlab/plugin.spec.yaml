@@ -521,8 +521,8 @@ actions:
         example: {"name": "Alexandra Bashirian", "avatar_url": null, "state": "active", "web_url": "https://gitlab.example.com/eileen.lowe", "id": 18, "username": "eileen.lowe"}
         required: false
 triggers:
-  issue:
-    title: Issue
+  get_new_issue:
+    title: Get New Issues
     description: Monitor new issues
     input:
       state:
@@ -539,7 +539,7 @@ triggers:
         description: Comma-separated list of label names, issues must have all labels to be returned
         type: string
         example: "label1,label2,label3"
-        required: true
+        required: false
       milestone:
         title: Milestone
         description: The milestone title

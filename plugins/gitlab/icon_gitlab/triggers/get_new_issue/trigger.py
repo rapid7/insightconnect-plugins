@@ -1,25 +1,25 @@
 import insightconnect_plugin_runtime
 import time
-from .schema import IssueInput, IssueOutput, Input, Output, Component
+from .schema import GetNewIssueInput, GetNewIssueOutput, Input, Output, Component
 
 # Custom imports below
-from komand_gitlab.util.util import Util
+from icon_gitlab.util.util import Util
 
 
-class Issue(insightconnect_plugin_runtime.Trigger):
+class GetNewIssue(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="issue", description=Component.DESCRIPTION, input=IssueInput(), output=IssueOutput()
+            name="issue", description=Component.DESCRIPTION, input=GetNewIssueInput(), output=GetNewIssueOutput()
         )
 
     def run(self, params={}):
         new_issues = []
         seen = []
-
-        # Required: True
-        issue_params = [("labels", params.get(Input.LABELS))]
+        issue_params = []
 
         # Required: False
+        if params.get(Input.LABELS):
+            issue_params.append(("labels", params.get(Input.LABELS)))
         if params.get(Input.MILESTONE):
             issue_params.append(("milestone", params.get(Input.MILESTONE)))
         if params.get(Input.STATE):
@@ -32,16 +32,25 @@ class Issue(insightconnect_plugin_runtime.Trigger):
         while True:
             self.logger.info("Searching for new issues.. ")
 
-            issues = self.connection.client.get_issues(params=issue_params)
+            issues = self.connection.client.get_issues(issue_params=issue_params)
+            print(f"Issues hit")
+            print(f"Issues:\n{issues}")
             for issue in issues:
+                print("for hit")
                 issue = Util.clean_json(issue)
+                print("clean hit")
                 if Util.is_issue_new(issue.get("updated_at", "")):
+                    print("if hit")
                     new_issues.append(issue)
+                    print("append hit")
             if len(new_issues) > 0:
+                print("len hit")
                 if new_issues[0] not in seen:
                     self.send({Output.ISSUE: new_issues[0]})
                     seen.append(new_issues[0])
                 else:
+                    self.logger.info("No new issues found, sleeping 1 minute.")
+                    time.sleep(60)
                     continue
 
             time.sleep(params.get(Input.INTERVAL, 5))

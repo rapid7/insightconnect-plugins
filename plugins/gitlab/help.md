@@ -410,7 +410,7 @@ Example output:
 ### Triggers
 
 
-#### Issue
+#### Get New Issues
   
 This trigger is used to monitor new issues
 
@@ -420,7 +420,7 @@ This trigger is used to monitor new issues
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |iids|[]integer|None|False|Return only the issues having the given iid|None|[116, 115]|
 |interval|integer|None|False|How often to check for new issues|None|10|
-|labels|string|None|True|Comma-separated list of label names, issues must have all labels to be returned|None|label1,label2,label3|
+|labels|string|None|False|Comma-separated list of label names, issues must have all labels to be returned|None|label1,label2,label3|
 |milestone|string|None|False|The milestone title|None|v4.0|
 |search|string|None|False|Search issues against their title and description|None|Example issue|
 |state|string|None|False|Return all issues or just those that are opened or closed|["Opened", "Closed"]|Opened|
