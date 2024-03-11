@@ -1,5 +1,5 @@
 import logging
-from typing import Optional, List, Tuple, Union
+from typing import Optional, List, Tuple, Dict, Any
 
 import requests
 
@@ -261,6 +261,52 @@ class ApiConnection:
 
         return endpoint
 
+    def get_agents_by_ip(self, ip_address: str) -> List[Dict[str, Any]]:
+        agents = []
+        payload = {
+            "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
+            "variables": {"orgId": self.org_key},
+        }
+
+        self.logger.info(f"Getting all agents by IP: {ip_address}...")
+        results_object = self._post_payload(payload)
+
+        has_next_page = (
+            results_object.get("data", {})
+            .get("organization", {})
+            .get("assets", {})
+            .get("pageInfo", {})
+            .get("hasNextPage")
+        )
+        agents.extend(self._get_agents_from_result_object(results_object))
+        self.logger.info("Initial agents received.")
+
+        # See if we have more pages of data, if so get next page and append until we reach the end
+        self.logger.info(f"Extra pages of agents: {has_next_page}")
+        while has_next_page:
+            self.logger.info("Getting next page of agents.")
+            has_next_page, results_object, next_agents = self._get_next_page_of_agents(results_object)
+            agents.extend(next_agents)
+
+        # Filter and return agents
+        self.logger.info("Returning results...")
+        filtered_agents = list(
+            filter(
+                lambda agent_: any(
+                    (
+                        agent_.get("publicIpAddress") == ip_address,
+                        agent_.get("host", {}).get("primaryAddress", {}).get("ip") == ip_address,
+                    )
+                ),
+                agents,
+            ),
+        )
+
+        # Rename 'agent' field name to 'agent_info'
+        for agent in filtered_agents:
+            agent["agent_info"] = agent.pop("agent")
+        return filtered_agents
+
     def _get_agent(self, agent_input: str, agent_type: str) -> dict:
         """
         Gets an agent by MAC address, IP address, or hostname.
@@ -377,20 +423,20 @@ class ApiConnection:
         for agent in agents:
             if agent and len(agent) and agent.get("host"):  # Some hosts come back None...need to check for that
                 if agent_type == agent_typer.IP_ADDRESS:
-                    if agent_input == agent.get("host").get("primaryAddress").get("ip"):
+                    if agent_input == agent.get("host", {}).get("primaryAddress", {}).get("ip"):
                         return agent
                 elif agent_type == agent_typer.HOSTNAME:
                     # In this case, we have an alpha/numeric value. This could be the ID or the Hostname. Need to check both
-                    if agent_input == agent.get("host").get("id"):
+                    if agent_input == agent.get("host", {}).get("id"):
                         return agent
-                    for host_name in agent.get("host").get("hostNames"):
+                    for host_name in agent.get("host", {}).get("hostNames"):
                         if agent_input.lower() == host_name.get("name", "").lower():
                             return agent
                 elif agent_type == agent_typer.MAC_ADDRESS:
                     # MAC addresses can come in with : or - as a separator, remove all of it and compare
                     stripped_input_mac = agent_input.replace("-", "").replace(":", "")
                     stripped_target_mac = (
-                        agent.get("host").get("primaryAddress").get("mac").replace("-", "").replace(":", "")
+                        agent.get("host", {}).get("primaryAddress", {}).get("mac", "").replace("-", "").replace(":", "")
                     )
                     if stripped_input_mac == stripped_target_mac:
                         return agent
