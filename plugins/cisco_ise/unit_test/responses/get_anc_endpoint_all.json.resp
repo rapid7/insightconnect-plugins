@@ -1,0 +1,17 @@
+{
+  "SearchResult": {
+    "total": 1,
+    "resources": [
+      {
+        "id": "1",
+        "name": "name1",
+        "description": "description1"
+      }
+    ],
+    "nextPage": {
+      "rel": "next",
+      "href": "link-to-next-page",
+      "type": "application/xml"
+    }
+  }
+}

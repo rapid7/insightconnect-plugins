@@ -1,0 +1,36 @@
+{
+  "ERSEndPoint": {
+    "id": "id",
+    "name": "ExampleHostname",
+    "description": "description",
+    "mac": "00:01:02:03:04:05",
+    "profileId": "profileId",
+    "staticProfileAssignment": false,
+    "groupId": "groupId",
+    "staticGroupAssignment": true,
+    "portalUser": "portalUser",
+    "identityStore": "identityStore",
+    "identityStoreId": "identityStoreId",
+    "customAttributes": {
+      "customAttributes": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    },
+    "mdmAttributes": {
+      "mdmServerName": "MdmServerName",
+      "mdmReachable": true,
+      "mdmEnrolled": false,
+      "mdmComplianceStatus": false,
+      "mdmOS": "",
+      "mdmManufacturer": "",
+      "mdmModel": "",
+      "mdmSerial": "",
+      "mdmEncrypted": false,
+      "mdmPinlock": false,
+      "mdmJailBroken": false,
+      "mdmIMEI": "",
+      "mdmPhoneNumber": ""
+    }
+  }
+}
