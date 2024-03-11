@@ -1,14 +1,18 @@
-import sys
 import os
-from unittest import TestCase
-from icon_palo_alto_mine_meld.actions.update_external_dynamic_list import UpdateExternalDynamicList
-from icon_palo_alto_mine_meld.actions.update_external_dynamic_list.schema import Input, Output
-from unit_test.util import Util
-from unittest.mock import patch
-from parameterized import parameterized
-from insightconnect_plugin_runtime.exceptions import PluginException
+import sys
 
 sys.path.append(os.path.abspath("../"))
+
+from typing import Any, Dict
+from unittest import TestCase
+from unittest.mock import MagicMock, patch
+
+from icon_palo_alto_mine_meld.actions.update_external_dynamic_list import UpdateExternalDynamicList
+from icon_palo_alto_mine_meld.actions.update_external_dynamic_list.schema import Input, Output
+from insightconnect_plugin_runtime.exceptions import PluginException
+from parameterized import parameterized
+
+from util import Util
 
 
 @patch("requests.request", side_effect=Util.mocked_requests)
@@ -29,7 +33,9 @@ class TestUpdateExternalDynamicList(TestCase):
             ["remove_url", "https://example.com", "url_list_remove", "Remove", {"success": True}],
         ]
     )
-    def test_update_external_dynamic_list(self, mock, name, indicator, list_name, operation, expected):
+    def test_update_external_dynamic_list(
+        self, mock: MagicMock, name: str, indicator: str, list_name: str, operation: str, expected: Dict[str, Any]
+    ) -> None:
         actual = self.action.run({Input.INDICATOR: indicator, Input.LIST_NAME: list_name, Input.OPERATION: operation})
         self.assertEqual(actual, expected)
 
@@ -106,17 +112,25 @@ class TestUpdateExternalDynamicList(TestCase):
                 "example.com",
                 "invalid_list",
                 "Add",
-                "Bad request.",
-                "Verify your inputs are correct and try again. If the issue persists, please contact support.",
+                PluginException.causes[PluginException.Preset.BAD_REQUEST],
+                PluginException.assistances[PluginException.Preset.BAD_REQUEST],
                 {"error": {"message": "Unknown config data file"}},
             ]
         ]
     )
     def test_update_external_dynamic_list_bad(
-        self, mock, name, indicator, list_name, operation, cause, assistance, data
-    ):
-        with self.assertRaises(PluginException) as e:
+        self,
+        mock: MagicMock,
+        name: str,
+        indicator: str,
+        list_name: str,
+        operation: str,
+        cause: str,
+        assistance: str,
+        data: Dict[str, Any],
+    ) -> None:
+        with self.assertRaises(PluginException) as error:
             self.action.run({Input.INDICATOR: indicator, Input.LIST_NAME: list_name, Input.OPERATION: operation})
-        self.assertEqual(e.exception.cause, cause)
-        self.assertEqual(e.exception.assistance, assistance)
-        self.assertEqual(e.exception.data, str(data))
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)
+        self.assertEqual(error.exception.data, str(data))
