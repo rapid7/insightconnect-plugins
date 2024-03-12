@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Permits or blocks a sender"
+    DESCRIPTION = "Permit or block a sender"
 
 
 class Input:
@@ -26,7 +26,7 @@ class PermitOrBlockSenderInput(insightconnect_plugin_runtime.Input):
     "action": {
       "type": "string",
       "title": "Action",
-      "description": "Either 'permit' (to bypass spam checks) or 'block' (to reject the email)",
+      "description": "Either \"permit\" (to bypass spam checks) or \"block\" (to reject the email)",
       "default": "block",
       "enum": [
         "block",

@@ -80,31 +80,31 @@ class FindGroupsOutput(insightconnect_plugin_runtime.Output):
         },
         "source": {
           "type": "string",
-          "title": "source",
-          "description": "Source of the group, either cloud or ldap",
+          "title": "Source",
+          "description": "Source of the group, either cloud or LDAP",
           "order": 2
         },
         "folder_count": {
           "type": "integer",
-          "title": "folderCount",
+          "title": "Folder Count",
           "description": "Number of folders allocated to this group",
           "order": 3
         },
         "parent_id": {
           "type": "string",
-          "title": "parentID",
+          "title": "Parent ID",
           "description": "The parent ID",
           "order": 4
         },
         "id": {
           "type": "string",
-          "title": "id",
+          "title": "ID",
           "description": "ID of the group",
           "order": 5
         },
         "user_count": {
           "type": "integer",
-          "title": "userCount",
+          "title": "User Count",
           "description": "Number of users in the group",
           "order": 6
         }

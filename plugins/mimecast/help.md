@@ -32,7 +32,7 @@ The connection configuration accepts the following parameters:
 |access_key|credential_secret_key|None|True|The application access key|None|eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi|
 |app_id|string|None|True|Application ID|None|78d2e4b1-8cc2-4806-nt79-6ef332a47374|
 |app_key|credential_secret_key|None|True|The application key|None|475x54c6-4f61-4fab-8be7-a0710f3859e3|
-|region|string|EU|True|The region for the Mimecast server| ['EU', 'DE', 'US', 'CA', 'ZA', 'AU', 'Offshore', 'Sandbox', 'USB', 'USBCOM']|EU|
+|region|string|EU|True|The region for the Mimecast server|['EU', 'DE', 'US', 'CA', 'ZA', 'AU', 'Offshore', 'Sandbox', 'USB', 'USBCOM']|EU|
 |secret_key|credential_secret_key|None|True|The application secret key|None|FgHrtydiP4TynI+rTZF42Qu0FtGuhJtuNM5bDh82goJQHed9kJZ5t/ORwGnI5r2hkl/bzCosZ+KVapJFeaf3Yw==|
   
 Example input:
@@ -54,7 +54,7 @@ Example input:
 
 #### Add Group Member
   
-Add an email address or domain to a group
+This action is used to add an email address or domain to a group
 
 ##### Input
 
@@ -96,7 +96,7 @@ Example output:
 
 #### Create Blocked Sender Policy
   
-Creates a blocked sender policy
+This action is used to create a blocked sender policy
 
 ##### Input
 
@@ -130,47 +130,45 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|sender_policy|[]sender_policy|False|The policy that was created|[]|
+|sender_policy|[]sender_policy|False|The policy that was created|[{"option": "block_sender", "id": "eNo1jU0LgjAYgP_LrgpusZl2EzWwUoaKJHibb7W-pk4tif57euj-fHyQBjF0IGu0QW0c20cSFkXgKt_Z2Zz6nNN8wjqU5aqyEuOcRmP6arfgGXl_Si_X_UE0-p0pGFhl6RsyUaPuUkxLjzDiONREYtC9ekAnVA3zxc-SgHhrl9GZHqHTUj1n-G_mUwPRYmNM8fcHIHEysg", "policy": {"description": "komand test", "fromPart": "envelope_from", "from": {"type": "email_domain", "emailDomain": "example.com"}, "to": {"type": "everyone"}, "fromType": "email_domain", "fromValue": "example.com", "toType": "everyone", "fromEternal": True, "toEternal": True, "fromDate": "1900-01-01T00:00:00+0000", "toDate": "2100-01-01T23:59:59+0000", "override": False, "bidirectional": False, "conditions": {}, "createTime": "2019-01-28T17:09:01+0000", "lastUpdated": "2019-01-28T17:09:01+0000"}}]|
   
 Example output:
 
 ```
 {
-  "response": [
-    {
-      "option": "block_sender",
-      "id": "eNo1jU0LgjAYgP_LrgpusZl2EzWwUoaKJHibb7W-pk4tif57euj-fHyQBjF0IGu0QW0c20cSFkXgKt_Z2Zz6nNN8wjqU5aqyEuOcRmP6arfgGXl_Si_X_UE0-p0pGFhl6RsyUaPuUkxLjzDiONREYtC9ekAnVA3zxc-SgHhrl9GZHqHTUj1n-G_mUwPRYmNM8fcHIHEysg",
-      "policy": {
-        "description": "komand test",
-        "fromPart": "envelope_from",
-        "from": {
-          "type": "email_domain",
-          "emailDomain": "example.com"
-        },
-        "to": {
-          "type": "everyone"
-        },
-        "fromType": "email_domain",
-        "fromValue": "example.com",
-        "toType": "everyone",
-        "fromEternal": true,
-        "toEternal": true,
-        "fromDate": "1900-01-01T00:00:00+0000",
-        "toDate": "2100-01-01T23:59:59+0000",
-        "override": false,
-        "bidirectional": false,
-        "conditions": {},
-        "createTime": "2019-01-28T17:09:01+0000",
-        "lastUpdated": "2019-01-28T17:09:01+0000"
-      }
+  "sender_policy": {
+    "id": "eNo1jU0LgjAYgP_LrgpusZl2EzWwUoaKJHibb7W-pk4tif57euj-fHyQBjF0IGu0QW0c20cSFkXgKt_Z2Zz6nNN8wjqU5aqyEuOcRmP6arfgGXl_Si_X_UE0-p0pGFhl6RsyUaPuUkxLjzDiONREYtC9ekAnVA3zxc-SgHhrl9GZHqHTUj1n-G_mUwPRYmNM8fcHIHEysg",
+    "option": "block_sender",
+    "policy": {
+      "bidirectional": false,
+      "conditions": {},
+      "createTime": "2019-01-28T17:09:01+0000",
+      "description": "komand test",
+      "from": {
+        "emailDomain": "example.com",
+        "type": "email_domain"
+      },
+      "fromDate": "1900-01-01T00:00:00+0000",
+      "fromEternal": true,
+      "fromPart": "envelope_from",
+      "fromType": "email_domain",
+      "fromValue": "example.com",
+      "lastUpdated": "2019-01-28T17:09:01+0000",
+      "override": false,
+      "to": {
+        "type": "everyone"
+      },
+      "toDate": "2100-01-01T23:59:59+0000",
+      "toEternal": true,
+      "toType": "everyone"
     }
-  ]
+  }
 }
 ```
 
 #### Create Managed URL
   
-Create a managed URL
+This action is used to create a managed URL
 
 ##### Input
 
@@ -202,34 +200,32 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|[]managed_url|False|Managed URL that was created|[]|
+|response|[]managed_url|False|Managed URL that was created|[{"id": "wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4", "scheme": "https", "domain": "www.test.net", "port": -1, "path": "/", "queryString": "", "matchType": "explicit", "action": "permit", "comment": "", "disableUserAwareness": False, "disableRewrite": False, "disableLogClick": False}]|
   
 Example output:
 
 ```
 {
-  "response": [
-    {
-      "id": "wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4",
-      "scheme": "https",
-      "domain": "www.test.net",
-      "port": -1,
-      "path": "/",
-      "queryString": "",
-      "matchType": "explicit",
-      "action": "permit",
-      "comment": "",
-      "disableUserAwareness": false,
-      "disableRewrite": false,
-      "disableLogClick": false
-    }
-  ]
+  "response": {
+    "action": "permit",
+    "comment": "",
+    "disableLogClick": false,
+    "disableRewrite": false,
+    "disableUserAwareness": false,
+    "domain": "www.test.net",
+    "id": "wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4",
+    "matchType": "explicit",
+    "path": "/",
+    "port": -1,
+    "queryString": "",
+    "scheme": "https"
+  }
 }
 ```
 
 #### Decode URL
   
-Decode a Mimecast encoded URL
+This action is used to decode a Mimecast encoded URL
 
 ##### Input
 
@@ -261,7 +257,7 @@ Example output:
 
 #### Delete Blocked Sender Policy
   
-Deletes a blocked sender policy
+This action is used to delete a blocked sender policy
 
 ##### Input
 
@@ -292,9 +288,8 @@ Example output:
 ```
 
 #### Delete Group Member
-
-This action is used to remove an email address or domain from a group.
-Delete on an email or domain that does not exist will result in no operation performed.
+  
+This action is used to delete an email address or domain from a group
 
 ##### Input
 
@@ -330,7 +325,7 @@ Example output:
 
 #### Delete Managed URL
   
-Delete a managed URL
+This action is used to delete a managed URL
 
 ##### Input
 
@@ -362,7 +357,7 @@ Example output:
 
 #### Find Groups
   
-Find groups that match a given query
+This action is used to find groups that match a given query
 
 ##### Input
 
@@ -384,36 +379,26 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|groups|[]group|False|A list of groups that mach the query|[]|
+|groups|[]group|False|A list of groups that mach the query|[{"id": "eNoVzrEOgjAUQNF_eTMDaLGBDSUCBjAWjDqS9qGYlmorRjH-u7jfnNwPWOSDwU5ACJkbXJLZklWJ5nlBajWyFaeY3uPFZu2r9Mj6Qvbvck-TMTtHJ1e98uZQX7e6JYxGO3BAiuYGYdtIiw7wwT60QsO1wIlfVWXsRTTwyRQ-0dhO9xB6DrRaCjT_BULn1Pv-ACT0L3A", "description": "Relay", "source": "cloud", "parentId": "eNoVzr0OgjAUQOF3uasMkFAq3RqJ4h8E1IAjaS8EU6i2oqLx3cX95Mv5gEUxGGwlMHgWzUgCvk2t0HbI5iFXM0kxvkXBZkm6uMz7verH5ERX73XDz2732lXF8ZLq2s8pz8ABJasrsLpSFh0Qg73rDo3QEid-cUgij9OQ-FP4QGNb3QPzHKi1kmj-C-73B7L7LyY", "userCount": 0, "folderCount": 0}, {"id": "eNoVzssOgjAQQNF_mTWJoGAjOwIqGkVFQUnc1HYgaKHaCvER_x3c35zcL2hkjcKSgwsqbWlmJmx6Hmz9NNAXJymam8LwEYyXM6cKT3G9FvU7Ssj8syi8zKxeK3o8XDcyt2Pi7cAAwekd3JwKjQawRj9lhYpJjr3v76PA8sjEsfuwRaVLWYNrGZBLwVH9H2wyIsNfB8G2MJw", "description": "Permitted senders", "source": "cloud", "parentId": "eNoVzr0OgjAUQOF3uasMkFAq3RqJ4h8E1IAjaS8EU6i2oqLx3cX95Mv5gEUxGGwlMHgWzUgCvk2t0HbI5iFXM0kxvkXBZkm6uMz7verH5ERX73XDz2732lXF8ZLq2s8pz8ABJasrsLpSFh0Qg73rDo3QEid-cUgij9OQ-FP4QGNb3QPzHKi1kmj-C-73B7L7LyY", "userCount": 0, "folderCount": 0}]|
   
 Example output:
 
 ```
 {
-  "groups": [
-    {
-      "id": "eNoVzrEOgjAUQNF_eTMDaLGBDSUCBjAWjDqS9qGYlmorRjH-u7jfnNwPWOSDwU5ACJkbXJLZklWJ5nlBajWyFaeY3uPFZu2r9Mj6Qvbvck-TMTtHJ1e98uZQX7e6JYxGO3BAiuYGYdtIiw7wwT60QsO1wIlfVWXsRTTwyRQ-0dhO9xB6DrRaCjT_BULn1Pv-ACT0L3A",
-      "description": "Relay",
-      "source": "cloud",
-      "parentId": "eNoVzr0OgjAUQOF3uasMkFAq3RqJ4h8E1IAjaS8EU6i2oqLx3cX95Mv5gEUxGGwlMHgWzUgCvk2t0HbI5iFXM0kxvkXBZkm6uMz7verH5ERX73XDz2732lXF8ZLq2s8pz8ABJasrsLpSFh0Qg73rDo3QEid-cUgij9OQ-FP4QGNb3QPzHKi1kmj-C-73B7L7LyY",
-      "userCount": 0,
-      "folderCount": 0
-    },
-    {
-      "id": "eNoVzssOgjAQQNF_mTWJoGAjOwIqGkVFQUnc1HYgaKHaCvER_x3c35zcL2hkjcKSgwsqbWlmJmx6Hmz9NNAXJymam8LwEYyXM6cKT3G9FvU7Ssj8syi8zKxeK3o8XDcyt2Pi7cAAwekd3JwKjQawRj9lhYpJjr3v76PA8sjEsfuwRaVLWYNrGZBLwVH9H2wyIsNfB8G2MJw",
-      "description": "Permitted senders",
-      "source": "cloud",
-      "parentId": "eNoVzr0OgjAUQOF3uasMkFAq3RqJ4h8E1IAjaS8EU6i2oqLx3cX95Mv5gEUxGGwlMHgWzUgCvk2t0HbI5iFXM0kxvkXBZkm6uMz7verH5ERX73XDz2732lXF8ZLq2s8pz8ABJasrsLpSFh0Qg73rDo3QEid-cUgij9OQ-FP4QGNb3QPzHKi1kmj-C-73B7L7LyY",
-      "userCount": 0,
-      "folderCount": 0
-    }
-  ]
+  "groups": {
+    "description": "Relay",
+    "folderCount": 0,
+    "id": "eNoVzrEOgjAUQNF_eTMDaLGBDSUCBjAWjDqS9qGYlmorRjH-u7jfnNwPWOSDwU5ACJkbXJLZklWJ5nlBajWyFaeY3uPFZu2r9Mj6Qvbvck-TMTtHJ1e98uZQX7e6JYxGO3BAiuYGYdtIiw7wwT60QsO1wIlfVWXsRTTwyRQ-0dhO9xB6DrRaCjT_BULn1Pv-ACT0L3A",
+    "parentId": "eNoVzr0OgjAUQOF3uasMkFAq3RqJ4h8E1IAjaS8EU6i2oqLx3cX95Mv5gEUxGGwlMHgWzUgCvk2t0HbI5iFXM0kxvkXBZkm6uMz7verH5ERX73XDz2732lXF8ZLq2s8pz8ABJasrsLpSFh0Qg73rDo3QEid-cUgij9OQ-FP4QGNb3QPzHKi1kmj-C-73B7L7LyY",
+    "source": "cloud",
+    "userCount": 0
+  }
 }
 ```
 
 #### Get Audit Events
-
-This action is used to get audit of events in Mimecast service.
+  
+This action is used to get audit of events in Mimecast service
 
 ##### Input
 
@@ -421,7 +406,7 @@ This action is used to get audit of events in Mimecast service.
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |audit_events_data|audit_events_data|None|True|Data for request|None|{"categories": ["test", "malware"], "endDateTime": "2022-02-02T08:15:30-05:00", "query": "example query", "startDateTime": "2022-02-02T08:15:30-05:00"}|
 |audit_events_pagination|audit_events_request_pagination|None|False|Pagination object for request|None|{"pageSize": 25, "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"}|
-
+  
 Example input:
 
 ```
@@ -446,39 +431,37 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|pagination|pagination|False|Pagination for request|{}|
-|response|[]audit_events_response|True|Event logs data|[]|
-
+|pagination|pagination|False|Pagination for request|{'pageSize': 25, 'pageToken': '9de5069c5afe602b2ea0a04b66beb2c0'}|
+|response|[]audit_events_response|True|Event logs data|[{"id": "wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U", "scheme": "https", "domain": "www.testset3444412312.net", "port": -1, "path": "/", "queryString": "", "matchType": "explicit", "action": "block", "comment": "", "disableUserAwareness": False, "disableRewrite": False, "disableLogClick": False}]|
+  
 Example output:
 
 ```
 {
-  "response": [
-    {
-      "id": "wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U",
-      "scheme": "https",
-      "domain": "www.testset3444412312.net",
-      "port": -1,
-      "path": "/",
-      "queryString": "",
-      "matchType": "explicit",
-      "action": "block",
-      "comment": "",
-      "disableUserAwareness": false,
-      "disableRewrite": false,
-      "disableLogClick": false
-    }
-  ],
   "pagination": {
     "pageSize": 25,
     "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"
+  },
+  "response": {
+    "action": "block",
+    "comment": "",
+    "disableLogClick": false,
+    "disableRewrite": false,
+    "disableUserAwareness": false,
+    "domain": "www.testset3444412312.net",
+    "id": "wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U",
+    "matchType": "explicit",
+    "path": "/",
+    "port": -1,
+    "queryString": "",
+    "scheme": "https"
   }
 }
 ```
 
 #### Get Managed URL
-
-This action is used to get information on a managed URL.
+  
+This action is used to get information on a managed URL
 
 ##### Input
 
@@ -494,20 +477,20 @@ This action is used to get information on a managed URL.
 |id|string|None|False|Filter on the Mimecast secure ID of the managed URL|None|wOi3MCwjYFYhZfkYlp2RMAhwOgsDZixCK43rDjLP0YPWrtBgqVtVbzzFK8SjGLNE4|
 |match_type|string|none|False|Filter on whether or not the match type is "explicit" or "domain"|["none", "explicit", "domain"]|domain|
 |scheme|string|None|False|Filter on whether or not the protocol is HTTP or HTTPS|None|http|
-
+  
 Example input:
 
 ```
 {
-  "action": "block",
-  "disable_log_click": true,
-  "disable_rewrite": false,
-  "disable_user_awareness": false,
+  "action": "none",
+  "disable_log_click": "None",
+  "disable_rewrite": "None",
+  "disable_user_awareness": "None",
   "domain": "https://example.com",
   "domainOrUrl": "https://example.com",
   "exactMatch": false,
   "id": "wOi3MCwjYFYhZfkYlp2RMAhwOgsDZixCK43rDjLP0YPWrtBgqVtVbzzFK8SjGLNE4",
-  "match_type": "domain",
+  "match_type": "none",
   "scheme": "http"
 }
 ```
@@ -516,32 +499,30 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|[]managed_url|False|Managed URLs matching |[]|
-
+|response|[]managed_url|False|Managed URLs matching |[{"id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLho3KMtTMfYm2C21vDPXvKC5vmEJWDAcvTHtH4L4Kw20c", "scheme": "https", "domain": "steam.com", "port": -1, "matchType": "explicit", "action": "block", "comment": "ui test", "disableUserAwareness": True, "disableRewrite": True, "disableLogClick": False}]|
+  
 Example output:
 
 ```
 {
-  "response": [
-    {
-      "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLho3KMtTMfYm2C21vDPXvKC5vmEJWDAcvTHtH4L4Kw20c",
-      "scheme": "https",
-      "domain": "steam.com",
-      "port": -1,
-      "matchType": "explicit",
-      "action": "block",
-      "comment": "ui test",
-      "disableUserAwareness": true,
-      "disableRewrite": true,
-      "disableLogClick": false
-    }
-  ]
+  "response": {
+    "action": "block",
+    "comment": "ui test",
+    "disableLogClick": false,
+    "disableRewrite": true,
+    "disableUserAwareness": true,
+    "domain": "steam.com",
+    "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLho3KMtTMfYm2C21vDPXvKC5vmEJWDAcvTHtH4L4Kw20c",
+    "matchType": "explicit",
+    "port": -1,
+    "scheme": "https"
+  }
 }
 ```
 
 #### Get TTP URL Logs
   
-Get TTP URL logs
+This action is used to get TTP URL logs
 
 ##### Input
 
@@ -575,33 +556,31 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|click_logs|[]click_logs|False|Click Logs|[]|
+|click_logs|[]click_logs|False|Click Logs|[{"userEmailAddress": "user@example.com", "url": "https://example.com", "ttpDefinition": "Default URL Protection Definition", "action": "warn", "adminOverride": "N/A", "userOverride": None, "scanResult": "malicious", "category": "Compromised", "userAwarenessAction": "N/A", "date": "2019-04-23T19:50:28+0000", "route": "inbound"}]|
   
 Example output:
 
 ```
 {
-  "click_logs": [
-    {
-      "userEmailAddress": "user@example.com",
-      "url": "https://example.com",
-      "ttpDefinition": "Default URL Protection Definition",
-      "action": "warn",
-      "adminOverride": "N/A",
-      "userOverride": null,
-      "scanResult": "malicious",
-      "category": "Compromised",
-      "userAwarenessAction": "N/A",
-      "date": "2019-04-23T19:50:28+0000",
-      "route": "inbound"
-    }
-  ]
+  "click_logs": {
+    "action": "warn",
+    "adminOverride": "N/A",
+    "category": "Compromised",
+    "date": "2019-04-23T19:50:28+0000",
+    "route": "inbound",
+    "scanResult": "malicious",
+    "ttpDefinition": "Default URL Protection Definition",
+    "url": "https://example.com",
+    "userAwarenessAction": "N/A",
+    "userEmailAddress": "user@example.com",
+    "userOverride": null
+  }
 }
 ```
 
 #### Permit or Block Sender
-
-This action is used to permit or block a sender.
+  
+This action is used to permit or block a sender
 
 ##### Input
 
@@ -610,7 +589,7 @@ This action is used to permit or block a sender.
 |action|string|block|True|Either "permit" (to bypass spam checks) or "block" (to reject the email)|["block", "permit"]|block|
 |sender|string|None|True|The email address of the external sender|None|user@example.com|
 |to|string|None|True|The email address of the internal recipient|None|user@example.com|
-
+  
 Example input:
 
 ```
@@ -625,26 +604,25 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|[]managed_sender|False|The Managed Sender that was created|[]|
-
+|response|[]managed_sender|False|The Managed Sender that was created|[{"id": "MTOKEN:eNoVzbEOgjAUQNF_eTMDGArK1oC2GARFjTpi-zQQ28ZWDGr8d3G-ybkfcCh6i62EBM4MB5Z2hpIiWlM_n0tecYv8nkXLBVH8WOvVTb_Kfcze-ZWefDUUzWHXVeYS1jHdgAeidw-j0AojcRTTbZkFNJ6RcGxPtK41GpLAA9Voh1r-t5OATL8_1zIraQ", "sender": "user@example.com", "to": "user@example.com", "type": "Block"}]|
+  
 Example output:
 
 ```
 {
-  "response": [
-    {
-      "id": "MTOKEN:eNoVzbEOgjAUQNF_eTMDGArK1oC2GARFjTpi-zQQ28ZWDGr8d3G-ybkfcCh6i62EBM4MB5Z2hpIiWlM_n0tecYv8nkXLBVH8WOvVTb_Kfcze-ZWefDUUzWHXVeYS1jHdgAeidw-j0AojcRTTbZkFNJ6RcGxPtK41GpLAA9Voh1r-t5OATL8_1zIraQ",
-      "sender": "user@example.com",
-      "to": "user@example.com",
-      "type": "Block"
-    }
-  ]
+  "response": {
+    "id": "MTOKEN:eNoVzbEOgjAUQNF_eTMDGArK1oC2GARFjTpi-zQQ28ZWDGr8d3G-ybkfcCh6i62EBM4MB5Z2hpIiWlM_n0tecYv8nkXLBVH8WOvVTb_Kfcze-ZWefDUUzWHXVeYS1jHdgAeidw-j0AojcRTTbZkFNJ6RcGxPtK41GpLAA9Voh1r-t5OATL8_1zIraQ",
+    "sender": "user@example.com",
+    "to": "user@example.com",
+    "type": "Block"
+  }
 }
 ```
 
 #### Track Messages
-
-This action is used to search for messages processing, and current state using specific message information. Either one of `send_from`, `send_to`, `subject`, `sender_ip` fields, or `message_id` must not be empty.
+  
+This action is used to search for messages processing, and current state using specific message information. Either one 
+of `Send From`, `Send To`, `Subject`, `Sender IP` fields, or `Message ID` must not be empty
 
 ##### Input
 
@@ -659,7 +637,7 @@ This action is used to search for messages processing, and current state using s
 |sender_ip|string|None|False|The source IP address of messages to track|None|192.168.0.1|
 |start_date|date|None|False|The date and time of the earliest message to track|None|Example Reason|
 |subject|string|None|False|The subject of the messages to track|None|Example Email Subject|
-
+  
 Example input:
 
 ```
@@ -683,41 +661,38 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|tracked_emails|[]tracked_emails|True|An array of found tracked emails|[]|
-
+|tracked_emails|[]tracked_emails|True|An array of found tracked emails|[{"detectionLevel": "", "fromEnv": {"emailAddress": "user@example.com"}, "fromHdr": {"emailAddress": ""}, "id": "123456789", "info": "Envelope Rejected", "received": "2022-12-01T12:49:46+0000", "route": "inbound", "senderIP": "192.168.0.1", "sent": "2022-12-01T12:49:46+0000", "spamScore": 0, "status": "rejected", "subject": "Example Subject", "to": [{"displayableName": "Example User", "emailAddress": "user@example.com"}]}]|
+  
 Example output:
 
 ```
 {
-  "tracked_emails": [
-    {
-      "detectionLevel": "",
-      "fromEnv": {
+  "tracked_emails": {
+    "detectionLevel": "",
+    "fromEnv": {
+      "emailAddress": "user@example.com"
+    },
+    "fromHdr": {
+      "emailAddress": ""
+    },
+    "id": "123456789",
+    "info": "Envelope Rejected",
+    "received": "2022-12-01T12:49:46+0000",
+    "route": "inbound",
+    "senderIP": "192.168.0.1",
+    "sent": "2022-12-01T12:49:46+0000",
+    "spamScore": 0,
+    "status": "rejected",
+    "subject": "Example Subject",
+    "to": [
+      {
+        "displayableName": "Example User",
         "emailAddress": "user@example.com"
-      },
-      "fromHdr": {
-        "emailAddress": ""
-      },
-      "id": "123456789",
-      "info": "Envelope Rejected",
-      "received": "2022-12-01T12:49:46+0000",
-      "route": "inbound",
-      "senderIP": "192.168.0.1",
-      "sent": "2022-12-01T12:49:46+0000",
-      "spamScore": 0,
-      "status": "rejected",
-      "subject": "Example Subject",
-      "to": [
-        {
-          "displayableName": "Example User",
-          "emailAddress": "user@example.com"
-        }
-      ]
-    }
-  ]
+      }
+    ]
+  }
 }
 ```
-
 ### Triggers
   
 *This plugin does not contain any triggers.*
@@ -726,7 +701,7 @@ Example output:
 
 #### Monitor SIEM Logs
   
-Monitor and retrieve the latest logs
+This action is used to monitor and retrieve the latest logs
 
 ##### Input
   
@@ -736,22 +711,22 @@ Monitor and retrieve the latest logs
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|data|[]object|True|List of logs|[]|
+|data|[]object|True|List of logs|[{"Dir": "Example", "Rcpt": "user@example.com", "RcptHdrType": "To", "Sender": "user1@example.com", "aCode": "1234code", "acc": "ABCD12345", "datetime": "2023-05-09T12:00:00"}]|
   
 Example output:
 
 ```
-[
-  {
+{
+  "data": {
     "Dir": "Example",
     "Rcpt": "user@example.com",
     "RcptHdrType": "To",
     "Sender": "user1@example.com",
     "aCode": "1234code",
-    "acc": "ABCD12345"
+    "acc": "ABCD12345",
     "datetime": "2023-05-09T12:00:00"
   }
-]
+}
 ```
 
 ### Custom Types
@@ -814,11 +789,11 @@ Example output:
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Description|string|None|False|The name of the group|None|
-|None|integer|None|False|None|None|
-|None|string|None|False|None|None|
-|None|string|None|False|None|None|
-|None|string|None|False|None|None|
-|None|integer|None|False|None|None|
+|Folder Count|integer|None|False|Number of folders allocated to this group|None|
+|ID|string|None|False|ID of the group|None|
+|Parent ID|string|None|False|The parent ID|None|
+|Source|string|None|False|Source of the group, either cloud or ldap|None|
+|User Count|integer|None|False|Number of users in the group|None|
   
 **click_logs**
 
@@ -1017,6 +992,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
+* 5.3.9 - Task `monitor_siem_logs`: Add in better error messages if the wrong region is provided
 * 5.3.8 - Task `monitor_siem_logs` Update to use SDK 5.4.4 | Add additional logger for traceability when no logs returned | Improve error handling.
 * 5.3.7 - Task `monitor_siem_logs` adding in sanitization for names of files to be read in | Include SDK 5.4 which adds new task custom_config parameter | Bump setuptools.
 * 5.3.6 - Task `monitor_siem_logs` revert filter logic to 24 hours.
