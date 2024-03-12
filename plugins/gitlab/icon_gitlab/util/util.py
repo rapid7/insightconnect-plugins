@@ -36,11 +36,11 @@ class Util:
         time_now = datetime.strptime(time_now, "%Y-%m-%dT%H:%M:%S.%fZ")
 
         # Get current time minus 30 seconds
-        acceptable = time_now - timedelta(0, 30)
+        acceptable = time_now - timedelta(seconds=30)
 
         # Get and convert the 'updated_at' time
         updated_at_delta = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%fZ")
-        
+
         if updated_at_delta > acceptable:
             return False
         return True
