@@ -1,5 +1,4 @@
-import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class Util:
@@ -31,14 +30,17 @@ class Util:
         :param date: Datetime string
         :return: True or False
         """
-        acceptable = "0:00:30.000000"  # last 30 sec
 
+        # Get current time
         time_now = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
         time_now = datetime.strptime(time_now, "%Y-%m-%dT%H:%M:%S.%fZ")
 
-        date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%fZ")
+        # Get current time minus 30 seconds
+        acceptable = time_now - timedelta(0, 30)
 
-        difference = str(time_now - date)
-        if difference > acceptable:
+        # Get and convert the 'updated_at' time
+        updated_at_delta = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%fZ")
+        
+        if updated_at_delta > acceptable:
             return False
         return True
