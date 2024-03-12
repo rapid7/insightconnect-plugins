@@ -4,6 +4,7 @@ from .schema import GetNewIssueInput, GetNewIssueOutput, Input, Output, Componen
 
 # Custom imports below
 from icon_gitlab.util.util import Util
+from typing import List, Dict, Any
 
 
 class GetNewIssue(insightconnect_plugin_runtime.Trigger):
@@ -39,7 +40,7 @@ class GetNewIssue(insightconnect_plugin_runtime.Trigger):
             time.sleep(params.get(Input.INTERVAL, 5))
 
     @staticmethod
-    def get_issue_params(params: dict):
+    def get_issue_params(params: dict) -> List[Dict[str, Any]]:
         """
         Helper method to retrieve inputs and reduce 'run' method complexity
 

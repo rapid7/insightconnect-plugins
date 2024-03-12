@@ -3,7 +3,6 @@ import logging
 import os
 from typing import Callable
 from unittest import mock
-from unittest.mock import MagicMock
 import requests
 from insightconnect_plugin_runtime.action import Action
 from icon_gitlab.connection.connection import Connection
@@ -49,30 +48,22 @@ def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
     if url == "https://example.com/api/v4/users/123":
         if method == "GET":
             return MockResponse("get_user", status_code)
-    # if url == "https://example.com/v2/analysis/delete":
-    #     return MockResponse("delete_analysis", status_code)
-    # if url == "https://example.com/v2/analysis/download":
-    #     return MockResponse("download_analysis", status_code)
-    # if url == "https://example.com/v2/account/info":
-    #     return MockResponse("get_account_info", status_code)
-    # if url == "https://example.com/v2/analysis/info":
-    #     return MockResponse("get_analysis_info", status_code)
-    # if url == "https://example.com/v2/server/info":
-    #     return MockResponse("get_server_info", status_code)
-    # if url == "https://example.com/v2/submission/info":
-    #     return MockResponse("get_submitted_info", status_code)
-    # if url == "https://example.com/v2/analysis/list":
-    #     return MockResponse("list_analysis", status_code)
-    # if url == "https://example.com/v2/server/lia_countries":
-    #     return MockResponse("list_countries", status_code)
-    # if url == "https://example.com/v2/server/systems":
-    #     return MockResponse("list_systems", status_code)
-    # if url == "https://example.com/v2/analysis/search":
-    #     return MockResponse("search_analysis", status_code)
+        if method == "DELETE":
+            return MockResponse("delete_user", status_code)
+    if url == "https://example.com/api/v4/users/123/block":
+        return MockResponse("block_user", status_code)
+    if url == "https://example.com/api/v4/projects/123/issues":
+        return MockResponse("create_issue", status_code)
+    if url == "https://example.com/api/v4/users/123/keys/123":
+        if method == "GET":
+            return MockResponse("list_ssh", status_code)
+        if method == "DELETE":
+            return MockResponse("delete_ssh", status_code)
+    if url == "https://example.com/api/v4/users/123/unblock":
+        return MockResponse("unblock_user", status_code)
 
     raise Exception("Unrecognised Endpoint")
 
 
 def mock_request_200(*args, **kwargs) -> MockResponse:
-    # breakpoint()
     return mock_conditions(args[0], args[1], 200)

@@ -4,11 +4,11 @@ import os
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 from icon_gitlab.actions.list_ssh import ListSsh
 from icon_gitlab.actions.list_ssh.schema import Output, Input
 from jsonschema import validate
-from mock import Util, mock_request_200, mocked_request, MagicMock
+from mock import Util, mock_request_200, mocked_request
 
 
 class TestListSsh(TestCase):

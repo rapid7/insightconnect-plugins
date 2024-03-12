@@ -17,8 +17,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params={}):
         self.logger.info("Connect: Connecting..")
 
-        self.token = params.get(Input.CREDENTIALS).get("password")
-        self.username = params.get(Input.CREDENTIALS).get("username")
+        self.token = params.get(Input.CREDENTIALS, {}).get("password")
+        self.username = params.get(Input.CREDENTIALS, {}).get("username")
         self.url = params.get(Input.URL) + "/api/v4"
         self.ssl_verify = params.get(Input.SSL_VERIFY, True)
 

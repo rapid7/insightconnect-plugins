@@ -16,9 +16,7 @@ class Util:
         for key, value in obj.items():
             if value is None:
                 value = ""
-            if key == "assignee" and value == "":
-                value = {}
-            if key == "milestone" and value == "":
+            if key in ("assignee", "milestone") and value == "":
                 value = {}
             new_json.append((key, value))
         output = json.dumps(dict(new_json))
