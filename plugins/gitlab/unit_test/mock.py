@@ -55,10 +55,9 @@ def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
     if url == "https://example.com/api/v4/projects/123/issues":
         return MockResponse("create_issue", status_code)
     if url == "https://example.com/api/v4/users/123/keys/123":
-        if method == "GET":
-            return MockResponse("list_ssh", status_code)
-        if method == "DELETE":
-            return MockResponse("delete_ssh", status_code)
+        return MockResponse("delete_ssh", status_code)
+    if url == "https://example.com/api/v4/users/123/keys":
+        return MockResponse("list_ssh", status_code)
     if url == "https://example.com/api/v4/users/123/unblock":
         return MockResponse("unblock_user", status_code)
 
