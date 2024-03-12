@@ -33,7 +33,7 @@ class GetManagedUrlInput(insightconnect_plugin_runtime.Input):
     "action": {
       "type": "string",
       "title": "Filter: Action",
-      "description": "Filter on whether or not the action is 'block' or 'permit'",
+      "description": "Filter on whether or not the action is \"block\" or \"permit\"",
       "default": "none",
       "enum": [
         "none",
@@ -106,7 +106,7 @@ class GetManagedUrlInput(insightconnect_plugin_runtime.Input):
     "match_type": {
       "type": "string",
       "title": "Filter: Match Type",
-      "description": "Filter on whether or not the match type is 'explicit' or 'domain'",
+      "description": "Filter on whether or not the match type is \"explicit\" or \"domain\"",
       "default": "none",
       "enum": [
         "none",
