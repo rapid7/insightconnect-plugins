@@ -1,408 +1,101 @@
 # Description
 
-[Cuckoo Sandbox](https://cuckoosandbox.org/) is an open source automated malware analysis system. It enables
-tracing of API calls, file behavior, and analysis of memory and network traffic. Using the Cuckoo Sandbox plugin for
-Rapid7 InsightConnect, users can analyze files and URLs, manage tasks, and more.
-
-Use Cuckoo Sandbox in your automation workflows to manage tasks and analyze PCAPs or suspicious files obtained through
-investigations. Automatically report findings to your favorite ticketing system when this plugin is used in combination
-with any of our available ticketing plugins.
-
-For brevity and readability, the term "base64-encoded file" is used in examples
-throughout this documentation in place of real base64-encoded data.
+Cuckoo Sandbox is an open source automated malware analysis system. Using the Cuckoo Sandbox plugin for Rapid7 InsightConnect, users can analyze files and URLs, manage tasks, and more
 
 # Key Features
-
-* File analysis
-* Manage tasks
+  
+*This plugin does not contain any key features.*
 
 # Requirements
-
-* Cuckoo Sandbox API URL for your Cuckoo instance
+  
+*This plugin does not contain any requirements.*
 
 # Supported Product Versions
-
-* 2019-06-19
+  
+* 2024-03-12
 
 # Documentation
 
 ## Setup
-
-The connection configuration accepts the following parameters:
+  
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |url|string|http://localhost:8090/api|True|Cuckoo Sandbox API URL|None|http://localhost:8090/api|
-
+  
 Example input:
 
-
 ```
-
 {
-
   "url": "http://localhost:8090/api"
-
 }
-
 ```
 
 ## Technical Details
 
 ### Actions
 
-#### View Task
-
-This action is used to return details on the task associated with the specified ID.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|task_id|integer|None|True|Task ID|None|12345678910|
-
-Example input:
-
-
-```
-
-{
-  "task_id": 12345678910
-}
-
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|task|task|True|Cuckoo task|{'task_id': 1}|
-
-Example output:
-
-```
-
-{
-  "found": true,
-  "task": {
-      "category": "url",
-      "machine": null,
-      "errors": [],
-      "target": "http://www.malicious.site",
-      "package": null,
-      "sample_id": null,
-      "guest": {},
-      "custom": null,
-      "owner": "",
-      "priority": 1,
-      "platform": null,
-      "options": null,
-      "status": "pending",
-      "enforce_timeout": false,
-      "timeout": 0,
-      "memory": false,
-      "tags": [
-                  "32bit",
-                  "acrobat_6",
-              ],
-      "id": 1,
-      "added_on": "2012-12-19 14:18:25",
-      "completed_on": null
-  }
-}
-
-```
-
-#### List Tasks
-
-This action is used to return list of tasks.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|limit|integer|None|False|Maximum number of returned tasks|None|10|
-|offset|integer|None|False|Data offset|None|5|
-
-Example input:
-
-
-```
-
-{
-  "limit": 10,
-  "offset": 5
-}
-
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|tasks|[]task|True|Cuckoo tasks|[{"completed": 1, "pending": 1, "reported": 1, "running": 1, "total": 1}]|
-
-Example output:
-
-```
-
-{
-  "tasks": [
-      {
-          "category": "url",
-          "machine": null,
-          "errors": [],
-          "target": "http://www.malicious.site",
-          "package": null,
-          "sample_id": null,
-          "guest": {},
-          "custom": null,
-          "owner": "",
-          "priority": 1,
-          "platform": null,
-          "options": null,
-          "status": "pending",
-          "enforce_timeout": false,
-          "timeout": 0,
-          "memory": false,
-          "tags": []
-          "id": 1,
-          "added_on": "2012-12-19 14:18:25",
-          "completed_on": null
-      },
-      {
-          "category": "file",
-          "machine": null,
-          "errors": [],
-          "target": "/tmp/malware.exe",
-          "package": null,
-          "sample_id": 1,
-          "guest": {},
-          "custom": null,
-          "owner": "",
-          "priority": 1,
-          "platform": null,
-          "options": null,
-          "status": "pending",
-          "enforce_timeout": false,
-          "timeout": 0,
-          "memory": false,
-          "tags": [
-                      "32bit",
-                      "acrobat_6",
-                  ],
-          "id": 2,
-          "added_on": "2012-12-19 14:18:25",
-          "completed_on": null
-      }
-  ]
-}
-
-```
-
-#### Delete Task
-
-This action is used to remove the given task from the database and delete the results.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|task_id|integer|None|True|Task ID|None|12345678910|
-
-Example input:
-
-```
-{
-  "task_id": 12345678910
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|------|
-|error|boolean|True|Error true or false|True|
-|error_value|string|True|Error message|Error|
-|message|string|True|Message associated with status code|Bad Request|
-
-Example output:
-
-```
-
-{
-  "status_code": 200,
-  "message": "OK"
-}
-
-```
-
-#### Reschedule Task
-
-This action is used to reschedule a task with the specified ID and priority (default priority is 1).
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|priority|integer|None|False|Priority|None|1|
-|task_id|integer|None|True|Task ID|None|12345678910|
-
-Example input:
-
-```
-{
-  "priority": 1,
-  "task_id": 12345678910
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|task_id|integer|True|Task ID|12345678910|
-
-Example output:
-
-```
-
-{
-  "status": "OK",
-  "task_id": 12345678910
-}
-
-```
-
-#### View Machine
-
-This action is used to return details on the analysis machine associated with the given name.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|machine_name|string|None|True|Machine name|None|example_machine|
-
-Example input:
-
-```
-{
-  "machine_name": "example_machine"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|machine|machine|True|Machine details|Example Machine|
-
-Example output:
-
-```
-
-{
-  "machine": {
-      "status": null,
-      "locked": false,
-      "name": "cuckoo1",
-      "resultserver_ip": "192.168.56.1",
-      "ip": "192.168.56.101",
-      "tags": [
-                  "32bit",
-                  "acrobat_6",
-              ],
-      "label": "cuckoo1",
-      "locked_changed_on": null,
-      "platform": "windows",
-      "snapshot": null,
-      "interface": null,
-      "status_changed_on": null,
-      "id": 1,
-      "resultserver_port": 2042
-  }
-}
-
-```
 
 #### Cuckoo Status
-
-This action is used to return the status of the cuckoo server.
+  
+This action is used to returns status of the cuckoo server
 
 ##### Input
-
-_This action does not contain any inputs._
+  
+*This action does not contain any inputs.*
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
 |cpuload|[]float|True|CPU load for the past 1, 5 and 15 minutes respectively|[0.123]|
 |diskspace|diskspace|True|Free, total and used diskspace of $CUCKOO/storage/analyses/, $CUCKOO/storage/binaries/, and specified tmppath|100|
 |hostname|string|True|Cuckoo hostname|Example Hostname|
 |machines|machines|True|Details about available and total analysis machines|{'available': 10, 'total': 10}|
 |tasks|tasks|True|Details about analysis tasks|[{"completed": 1, "pending": 1, "reported": 1, "running": 1, "total": 1}]|
 |version|string|True|Cuckoo version|2.0.7|
-
-The contents of this output vary greatly based on Cuckoo's internal settings.
-
+  
 Example output:
 
 ```
-
 {
-  "tasks": {
-      "reported": 165,
-      "running": 2,
-      "total": 167,
-      "completed": 0,
-      "pending": 0
-  },
-  "diskspace": {
-      "analyses": {
-          "total": 491271233536,
-          "free": 71403470848,
-          "used": 419867762688
-      },
-      "binaries": {
-          "total": 491271233536,
-          "free": 71403470848,
-          "used": 419867762688
-      },
-      "temporary": {
-          "total": 491271233536,
-          "free": 71403470848,
-          "used": 419867762688
-      }
-  },
-  "version": "1.0",
-  "protocol_version": 1,
-  "hostname": "Patient0",
+  "cpuload": [
+    0.123
+  ],
+  "diskspace": 100,
+  "hostname": "Example Hostname",
   "machines": {
-      "available": 4,
-      "total": 5
-  }
+    "available": 10,
+    "total": 10
+  },
+  "tasks": [
+    {
+      "completed": 1,
+      "pending": 1,
+      "reported": 1,
+      "running": 1,
+      "total": 1
+    }
+  ],
+  "version": "2.0.7"
 }
-
 ```
 
-#### Get Screenshots
-
-This action is used to return one (JPEG) or all (ZIP) screenshots associated with the specified task ID.
+#### Delete Task
+  
+This action is used to removes the given task from the database and deletes the results
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|screenshot_id|string|None|False|Screenshot ID|None|12345678910|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |task_id|integer|None|True|Task ID|None|12345678910|
-
+  
 Example input:
 
 ```
 {
-  "screenshot_id": 12345678910,
   "task_id": 12345678910
 }
 ```
@@ -410,68 +103,86 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|screenshots|bytes|True|Base64 encoded screenshot|VGhpcyBpcyBhbiBleGFtcGxl|
-
+| :--- | :--- | :--- | :--- | :--- |
+|error|boolean|True|Error true or false|True|
+|error_value|string|True|Error message|Error|
+|message|string|True|Message associated with status code|Bad Request|
+  
 Example output:
 
 ```
-
 {
-  "found": true,
-  "screenshots": [base64-encoded files]
+  "error": true,
+  "error_value": "Error",
+  "message": "Bad Request"
 }
-
 ```
 
-#### Get Report
+#### Exit
+  
+This action is used to shuts down the server if in debug mode and using the werkzeug server
 
-This action is used to return the report associated with the specified task ID.
+##### Input
+  
+*This action does not contain any inputs.*
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|message|string|True|Exit message|Exit Message|
+  
+Example output:
+
+```
+{
+  "message": "Exit Message"
+}
+```
+
+#### Get File
+  
+This action is used to returns the binary content of the file matching the specified SHA256 hash
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|format|string|None|False|One of [json/html/all/dropped/package_files]. Details on formats here: http://docs.cuckoosandbox.org/en/latest/usage/api/#tasks-report|None|json|
-|task_id|integer|None|True|Task ID|None|12345678910|
-
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|sha256|string|None|True|SHA256 Hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+  
 Example input:
 
 ```
 {
-  "format": "json",
-  "task_id": 12345678910
+  "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|report|bytes|True|Base64 encoded report|VGhpcyBpcyBhbiBleGFtcGxl|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|contents|bytes|True|Binary contents|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
+  
 Example output:
 
 ```
-
-  {
-    "message": "OK",
-    "report": VGhpcyBpcyBhbiBleGFtcGxl
-  }
-
+{
+  "contents": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
+}
 ```
 
 #### Get Memory
-
-This action is used to return one memory dump file associated with the specified task ID.
+  
+This action is used to returns one memory dump file associated with the specified task ID
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |pid|string|None|True|Process ID|None|12345678910|
 |task_id|integer|None|True|Task ID|None|12345678910|
-
+  
 Example input:
 
 ```
@@ -484,171 +195,404 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |contents|bytes|True|Base64 encoded contents|VGhpcyBpcyBhbiBleGFtcGxl|
-
+  
 Example output:
 
 ```
-
 {
-  "found": true,
-  "contents": [base64-encoded files]
+  "contents": "VGhpcyBpcyBhbiBleGFtcGxl"
 }
-
-```
-
-#### VPN Status
-
-This action is used to return VPN status.
-
-##### Input
-
-_This action does not contain any inputs._
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|vpns|[]vpn|True|VPN status array|[{"name": "Example", "status": "Running"}]|
-
-This action is currently not supported by Cuckoo for MAC OS and will return a 500.
-
-#### List Machines
-
-This action is used to return a list with details on the analysis machines available to Cuckoo.
-
-##### Input
-
-_This action does not contain any inputs._
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|machines|[]machine|True|List of machines available to Cuckoo|["Example Machine"]|
-
-Example output:
-
-```
-
-{
-  "machines": [
-      {
-          "status": null,
-          "locked": false,
-          "name": "cuckoo1",
-          "resultserver_ip": "192.168.56.1",
-          "ip": "192.168.56.101",
-          "tags": [
-                      "32bit",
-                      "acrobat_6",
-                  ],
-          "label": "cuckoo1",
-          "locked_changed_on": null,
-          "platform": "windows",
-          "snapshot": null,
-          "interface": null,
-          "status_changed_on": null,
-          "id": 1,
-          "resultserver_port": 2042
-      }
-  ]
-}
-
 ```
 
 #### Get PCAP
-
-This action is used to return the content of the PCAP associated with the given task.
+  
+This action is used to returns the content of the PCAP associated with the given task
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |task_id|integer|None|True|Task ID|None|12345678910|
-
+  
 Example input:
 
 ```
 {
-  "task_id": 1234568910
+  "task_id": 12345678910
 }
-
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |contents|bytes|True|PCAP contents|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
-
+  
 Example output:
 
 ```
-
 {
-  "found": true,
-  "contents": [base64-encoded files]
+  "contents": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
 }
+```
 
+#### Get Report
+  
+This action is used to returns the report associated with the specified task ID
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|format|string|None|False|One of [json/html/all/dropped/package_files]. Details on formats here: http://docs.cuckoosandbox.org/en/latest/usage/api/#tasks-report|None|json|
+|task_id|integer|None|True|Task ID|None|12345678910|
+  
+Example input:
+
+```
+{
+  "format": "json",
+  "task_id": 12345678910
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|report|bytes|True|Base64 encoded report|VGhpcyBpcyBhbiBleGFtcGxl|
+  
+Example output:
+
+```
+{
+  "report": "VGhpcyBpcyBhbiBleGFtcGxl"
+}
+```
+
+#### Get Screenshots
+  
+This action is used to returns one (jpeg) or all (zip) screenshots associated with the specified task ID
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|screenshot_id|string|None|False|Screenshot ID|None|12345678910|
+|task_id|integer|None|True|Task ID|None|12345678910|
+  
+Example input:
+
+```
+{
+  "screenshot_id": 12345678910,
+  "task_id": 12345678910
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|screenshots|bytes|True|Base64 encoded screenshot|VGhpcyBpcyBhbiBleGFtcGxl|
+  
+Example output:
+
+```
+{
+  "screenshots": "VGhpcyBpcyBhbiBleGFtcGxl"
+}
+```
+
+#### List Machines
+  
+This action is used to returns a list with details on the analysis machines available to Cuckoo
+
+##### Input
+  
+*This action does not contain any inputs.*
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|machines|[]machine|True|List of machines available to Cuckoo|["Example Machine"]|
+  
+Example output:
+
+```
+{
+  "machines": [
+    "Example Machine"
+  ]
+}
+```
+
+#### List Memory
+  
+This action is used to returns a list of memory dump files or one memory dump file associated with the specified task ID
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|task_id|integer|None|True|Task ID|None|12345678910|
+  
+Example input:
+
+```
+{
+  "task_id": 12345678910
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|dump_files|[]string|True|Dumped Files|["Example file"]|
+  
+Example output:
+
+```
+{
+  "dump_files": [
+    "Example file"
+  ]
+}
+```
+
+#### List Tasks
+  
+This action is used to returns list of tasks
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|limit|integer|None|False|Maximum number of returned tasks|None|10|
+|offset|integer|None|False|Data offset|None|5|
+  
+Example input:
+
+```
+{
+  "limit": 10,
+  "offset": 5
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|tasks|[]task|True|Cuckoo tasks|[{"completed": 1, "pending": 1, "reported": 1, "running": 1, "total": 1}]|
+  
+Example output:
+
+```
+{
+  "tasks": [
+    {
+      "completed": 1,
+      "pending": 1,
+      "reported": 1,
+      "running": 1,
+      "total": 1
+    }
+  ]
+}
+```
+
+#### Reboot Task
+  
+This action is used to add a reboot task to database from an existing analysis ID
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|task_id|integer|None|True|Task ID|None|12345678910|
+  
+Example input:
+
+```
+{
+  "task_id": 12345678910
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|reboot_id|integer|True|Reboot ID|1234678910|
+|task_id|integer|True|Task ID|12345678910|
+  
+Example output:
+
+```
+{
+  "reboot_id": 1234678910,
+  "task_id": 12345678910
+}
+```
+
+#### Re-run Reporting
+  
+This action is used to re-run reporting for task associated with the specified task ID
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|task_id|integer|None|True|Task ID|None|12345678910|
+  
+Example input:
+
+```
+{
+  "task_id": 12345678910
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|True|Action success or failure|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Reschedule Task
+  
+This action is used to reschedule a task with the specified ID and priority (default priority is 1)
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|priority|integer|None|False|Priority|None|1|
+|task_id|integer|None|True|Task ID|None|12345678910|
+  
+Example input:
+
+```
+{
+  "priority": 1,
+  "task_id": 12345678910
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|task_id|integer|True|Task ID|12345678910|
+  
+Example output:
+
+```
+{
+  "task_id": 12345678910
+}
 ```
 
 #### Submit Files
-
-This action is used to add one or more files and/or files embedded in archives to the list of pending tasks.
+  
+This action is used to adds one or more files and/or files embedded in archives to the list of pending tasks
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |files|[]file|None|True|List of files of the format: {'filename': 'blah.exe', 'contents': '<b64-encoded-bytes>'}|None|[{"filename": "example.exe", "contents": "VGhpcyBpcyBhbiBleGFtcGxl"}]|
-
+  
 Example input:
- 
+
 ```
 {
-   "files":[
-      {
-         "filename":"example.exe",
-         "contents":"VGhpcyBpcyBhbiBleGFtcGxl"
-      }
-   ]
+  "files": [
+    {
+      "contents": "VGhpcyBpcyBhbiBleGFtcGxl",
+      "filename": "example.exe"
+    }
+  ]
 }
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|errors|[]string|False|Errors if any||
-|submit_id|integer|False|Submission ID||
-|task_id|integer|True|Task ID|1234678910|', '|submit_id|integer|False|Submission ID|12345678910|', '|errors|[]string|False|Errors if any|["ExampleError"]|
-
+| :--- | :--- | :--- | :--- | :--- |
+|errors|[]string|False|Errors if any|["ExampleError"]|
+|submit_id|integer|False|Submission ID|12345678910|
+|task_id|integer|True|Task ID|1234678910|
+  
 Example output:
 
 ```
-
 {
-  "success": true,
-  "task_id": 1,
-  "submit_id": 1
+  "errors": [
+    "ExampleError"
+  ],
+  "submit_id": 12345678910,
+  "task_id": 1234678910
 }
-
 ```
 
-#### View File
-
-This action is used to return details on the file matching either the specified MD5 hash, SHA256 hash or ID.
+#### Submit URL
+  
+This action is used to adds a file (from URL) to the list of pending tasks
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|url|string|None|True|URL to analyze (multipart encoded content)|None|www.example.com|
+  
+Example input:
+
+```
+{
+  "url": "www.example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|task_id|integer|True|Task ID|12345678910|
+  
+Example output:
+
+```
+{
+  "task_id": 12345678910
+}
+```
+
+#### View File
+  
+This action is used to returns details on the file matching either the specified MD5 hash, SHA256 hash or ID
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|False|ID|None|12345678910|
 |md5|string|None|False|MD5 Hash|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |sha256|string|None|False|SHA256 Hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
-
+  
 Example input:
 
 ```
@@ -662,264 +606,292 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |data|data|True|Data|3395856ce81f2b7382dee72602f798b642f14140|
 |error|boolean|True|Error information|True|
-
+  
 Example output:
 
 ```
-
 {
-  "found": true,
-  "sample": {
-      "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
-      "file_type": "empty",
-      "file_size": 0,
-      "crc32": "00000000",
-      "ssdeep": "3::",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "sha512": "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e",
-      "id": 1,
-      "md5": "d41d8cd98f00b204e9800998ecf8427e"
+  "data": "3395856ce81f2b7382dee72602f798b642f14140",
+  "error": true
+}
+```
+
+#### View Machine
+  
+This action is used to returns details on the analysis machine associated with the given name
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|machine_name|string|None|True|Machine name|None|example_machine|
+  
+Example input:
+
+```
+{
+  "machine_name": "example_machine"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|machine|machine|True|Machine details|Example Machine|
+  
+Example output:
+
+```
+{
+  "machine": "Example Machine"
+}
+```
+
+#### View Task
+  
+This action is used to returns details on the task associated with the specified ID
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|task_id|integer|None|True|Task ID|None|12345678910|
+  
+Example input:
+
+```
+{
+  "task_id": 12345678910
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|task|task|True|Cuckoo task|{'task_id': 1}|
+  
+Example output:
+
+```
+{
+  "task": {
+    "task_id": 1
   }
 }
-
 ```
 
-#### Submit URL
-
-This action is used to add a file (from URL) to the list of pending tasks.
+#### VPN Status
+  
+This action is used to returns VPN status
 
 ##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|url|string|None|True|URL to analyze (multipart encoded content)|None|www.example.com|
-
-Example input:
-
-```
-{
-  "url": "www.example.com"
-}
-```
+  
+*This action does not contain any inputs.*
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|task_id|integer|True|Task ID|12345678910|
-
-Example output:
-
-```
-
-{
-  "task_id" : 12345678910
-}
-
-```
-
-#### List Memory
-
-This action is used to return a list of memory dump files or one memory dump file associated with the specified task ID.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|task_id|integer|None|True|Task ID|None|12345678910|
-
-Example input:
-
-```
-{
-  "task_id": 12345678910
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|dump_files|[]string|True|Dumped Files|["Example file"]|
-
-Example output:
-
-```
-
-{
-  "found": true,
-  "dump_files": ["Win32Test.exe"]
-}
-
-```
-
-#### Exit
-
-This action is used to shut down the server if in debug mode and using the werkzeug server.
-
-##### Input
-
-_This action does not contain any inputs._
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|message|string|True|Exit message|Exit Message|
-
-Example output:
-
-```
-
-{
-  "status_code": 200,
-  "message": "OK"
-}
-
-```
-
-#### Reboot Task
-
-This action is used to add a reboot task to the database from an existing analysis ID.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|task_id|integer|None|True|Task ID|None|12345678910|
-
-Example input:
-
-```
-{
-  "task_id": 12345678910
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|reboot_id|integer|True|Reboot ID|1234678910|
-|task_id|integer|True|Task ID|12345678910|
-
-Example output:
-
-```
-
-{
-  "success": true,
-  "task_id": 1,
-  "reboot_id": 3
-}
-
-```
-
-#### Get File
-
-This action is used to return the binary content of the file matching the specified SHA256 hash.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|sha256|string|None|True|SHA256 Hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
-
-Example input:
-
-```
-
-{
-  "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
-}
-
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|contents|bytes|True|Binary contents|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
-
-Example output:
-
-```
-
-{
-  "found": true,
-  "contents": [base64-encoded files]
-}
-
-```
-
-#### Re-run Reporting
-
-This action is used to re-run reporting for a task associated with the specified task ID.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|task_id|integer|None|True|Task ID|None|12345678910|
-
-
-Example input:
-
-```
-
-{
-  "task_id": 12345678910
-}
-
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|------|
-|success|boolean|True|Action success or failure|True|
-
+| :--- | :--- | :--- | :--- | :--- |
+|vpns|[]vpn|True|VPN status array|[{"name": "Example", "status": "Running"}]|
+  
 Example output:
 
 ```
 {
-  "success": true  
+  "vpns": [
+    {
+      "name": "Example",
+      "status": "Running"
+    }
+  ]
 }
 ```
-
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
+### Custom Types
+  
+**vpn**
 
-### Custom Output Types
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|name|string|None|None|None|None|
+|status|string|None|None|None|None|
+  
+**guest**
 
-_This plugin does not contain any custom output types._
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|None|None|None|
+|label|string|None|None|None|None|
+|manager|string|None|None|None|None|
+|name|string|None|None|None|None|
+|Shutdown On|date|None|None|None|None|
+|Started On|date|None|None|None|None|
+|Task ID|integer|None|None|None|None|
+  
+**file**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|contents|bytes|None|None|None|None|
+|filename|string|None|None|None|None|
+  
+**data**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|CRC-32|string|None|None|None|None|
+|File Size|integer|None|None|None|None|
+|File Type|string|None|None|None|None|
+|ID|integer|None|None|None|None|
+|MD5|string|None|None|None|None|
+|SHA1|string|None|None|None|None|
+|SHA256|string|None|None|None|None|
+|SHA512|string|None|None|None|None|
+|SSDeep Fuzzy Hash|string|None|None|None|None|
+  
+**sample**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|CRC-32|string|None|None|None|None|
+|error|boolean|None|None|None|None|
+|File Size|integer|None|None|None|None|
+|File Type|string|None|None|None|None|
+|ID|integer|None|None|None|None|
+|MD5|string|None|None|None|None|
+|SHA1|string|None|None|None|None|
+|SHA256|string|None|None|None|None|
+|SHA512|string|None|None|None|None|
+|SSDeep Fuzzy Hash|string|None|None|None|None|
+  
+**option**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|option|string|None|None|None|None|
+|value|string|None|None|None|None|
+  
+**task**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Added On|date|None|None|None|None|
+|category|string|None|None|None|None|
+|clock|date|None|None|None|None|
+|Completed On|date|None|None|None|None|
+|custom|string|None|None|None|None|
+|Enforce Timeout?|boolean|None|None|None|None|
+|errors|[]string|None|None|None|None|
+|guest|guest|None|None|None|None|
+|ID|integer|None|None|None|None|
+|machine|string|None|None|None|None|
+|options|[]option|None|None|None|None|
+|owner|string|None|None|None|None|
+|package|string|None|None|None|None|
+|platform|string|None|None|None|None|
+|priority|integer|None|None|None|None|
+|processing|string|None|None|None|None|
+|route|string|None|None|None|None|
+|sample|sample|None|None|None|None|
+|sample_id|integer|None|None|None|None|
+|Started On|date|None|None|None|None|
+|status|string|None|None|None|None|
+|submit_id|integer|None|None|None|None|
+|tags|[]string|None|None|None|None|
+|target|string|None|None|None|None|
+|timeout|integer|None|None|Timeout in seconds|None|
+  
+**machine**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|integer|None|None|None|None|
+|interface|string|None|None|None|None|
+|IP|string|None|None|None|None|
+|label|string|None|None|None|None|
+|Locked?|boolean|None|None|None|None|
+|Date on which locked status was changed|date|None|None|None|None|
+|name|string|None|None|None|None|
+|platform|string|None|None|None|None|
+|Resultserver IP|string|None|None|None|None|
+|Resultserver Port|integer|None|None|None|None|
+|snapshot|string|None|None|None|None|
+|status|string|None|None|None|None|
+|status_changed_on|date|None|None|Date on which status was changed|None|
+|tags|[]string|None|None|None|None|
+  
+**tasks**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|completed|integer|None|None|None|None|
+|pending|integer|None|None|None|None|
+|reported|integer|None|None|None|None|
+|running|integer|None|None|None|None|
+|total|integer|None|None|None|None|
+  
+**machines**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|available|integer|None|None|None|None|
+|total|integer|None|None|None|None|
+  
+**temporary**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|free|integer|None|None|Free diskspace|None|
+|total|integer|None|None|Total diskspace|None|
+|used|integer|None|None|Used diskspace|None|
+  
+**binaries**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|free|integer|None|None|Free diskspace|None|
+|total|integer|None|None|Total diskspace|None|
+|used|integer|None|None|Used diskspace|None|
+  
+**analyses**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|free|integer|None|None|Free diskspace|None|
+|total|integer|None|None|Total diskspace|None|
+|used|integer|None|None|Used diskspace|None|
+  
+**diskspace**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|analyses|analyses|None|None|None|None|
+|binaries|binaries|None|None|None|None|
+|temporary|temporary|None|None|None|None|
+
 
 ## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
+  
+*There is no troubleshooting for this plugin.*
 
 # Version History
-
-* 1.0.3 - Updated Requests version to 2.20.0
-* 1.0.2 - New spec and help.md format for the Extension Library
-* 1.0.1 - Bug fix for Submit Files where Submit ID was required
-* 1.0.0 - Support web server mode | Bug fix for testing outputs | Semver compliance
-* 0.2.3 - Bug fix for Cuckoo API version 2.0.5
-* 0.2.2 - URL endpoints not ending in `/`, rename server to URL in connection, and bug fix for file submission
-* 0.2.1 - SSL bug fix in SDK
-* 0.2.0 - Rewrite
-* 0.1.0 - Initial plugin
+  
+*This plugin does not contain a version history.*
 
 # Links
 
-* [cuckoo](https://cuckoosandbox.org/)
 
 ## References
-
-* [Cuckoo Sandbox](https://cuckoosandbox.org/)
-* [Cuckoo API](http://docs.cuckoosandbox.org/en/latest/)
-
+  
+*This plugin does not contain any references.*

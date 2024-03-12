@@ -1,12 +1,11 @@
-import komand
-from .schema import ListMachinesInput, ListMachinesOutput
+import insightconnect_plugin_runtime
+from .schema import ListMachinesInput, ListMachinesOutput, Input, Output
 
 # Custom imports below
-import json
 import requests
 
 
-class ListMachines(komand.Action):
+class ListMachines(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="list_machines",
@@ -17,24 +16,21 @@ class ListMachines(komand.Action):
 
     def run(self, params={}):
         server = self.connection.server
-        endpoint = server + "/machines/list"
+        endpoint = f"{server}/machines/list"
 
         try:
-            r = requests.get(endpoint)
-            r.raise_for_status()
-            response = r.json()
+            response = requests.get(endpoint)
+            response.raise_for_status()
+            response = response.json()
             result = {"machines": []}
-            for machine in response["data"]:
+            for machine in response.get("data", []):
                 keys = machine.keys()
                 cleaned_machine = {}
                 for key in keys:
-                    if machine[key] is not None:
-                        cleaned_machine[key] = machine[key]
+                    if machine.get(key) is not None:
+                        cleaned_machine[key] = machine.get(key)
                 result["machines"].append(cleaned_machine)
             return result
 
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
-
-    def test(self):
-        return {"machines": [self.connection.test()]}
+        except Exception as exception:
+            self.logger.error(f"Error: {str(exception)}")

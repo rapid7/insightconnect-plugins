@@ -1,13 +1,12 @@
-import komand
-from .schema import GetPcapInput, GetPcapOutput
+import insightconnect_plugin_runtime
+from .schema import GetPcapInput, GetPcapOutput, Input, Output
 
 # Custom imports below
-import json
 import requests
 import base64
 
 
-class GetPcap(komand.Action):
+class GetPcap(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_pcap",
@@ -18,26 +17,21 @@ class GetPcap(komand.Action):
 
     def run(self, params={}):
         server = self.connection.server
-        task_id = params.get("task_id", "")
-        endpoint = server + "/pcap/get/" + str(task_id)
+        task_id = params.get(Input.TASK_ID, "")
+        endpoint = f"{server}/pcap/get/{task_id}"
 
         try:
-            r = requests.get(endpoint)
-            r.raise_for_status()
-            ctype = r.headers["Content-Type"]
+            response = requests.get(endpoint)
+            response.raise_for_status()
+            ctype = response.headers.get("Content-Type", "")
             if (
                 ctype.startswith("application/x-tar")
                 or ctype.startswith("application/octet-stream")
                 or ctype.startswith("application/json")
                 or ctype.startswith("application/vnd.tcpdump.pcap")
             ):
-                content = r.content
-                return {"contents": base64.b64encode(content).decode("UTF-8")}
+                content = response.content
+                return {Output.CONTENTS: base64.b64encode(content).decode("UTF-8")}
 
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
-
-    def test(self):
-        out = self.connection.test()
-        out["contents"] = ""
-        return out
+        except Exception as exception:
+            self.logger.error(f"Error: {str(exception)}")

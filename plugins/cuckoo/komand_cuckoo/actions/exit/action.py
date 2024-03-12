@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ExitInput, ExitOutput
 
 # Custom imports below
@@ -6,7 +6,7 @@ import json
 import requests
 
 
-class Exit(komand.Action):
+class Exit(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="exit",
@@ -17,18 +17,13 @@ class Exit(komand.Action):
 
     def run(self, params={}):
         server = self.connection.server
-        endpoint = server + "/exit"
+        endpoint = f"{server}/exit"
 
         try:
-            r = requests.get(endpoint)
-            r.raise_for_status()
-            response = r.json()
+            response = requests.get(endpoint)
+            response.raise_for_status()
+            response = response.json()
             return response
 
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
-
-    def test(self):
-        out = self.connection.test()
-        out["message"] = "Test passed"
-        return out
+        except Exception as exception:
+            self.logger.error("Error: " + str(exception))

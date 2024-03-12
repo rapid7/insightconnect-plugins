@@ -1,12 +1,11 @@
-import komand
-from .schema import ListTasksInput, ListTasksOutput
+import insightconnect_plugin_runtime
+from .schema import ListTasksInput, ListTasksOutput, Input, Output
 
 # Custom imports below
-import json
 import requests
 
 
-class ListTasks(komand.Action):
+class ListTasks(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="list_tasks",
@@ -17,29 +16,24 @@ class ListTasks(komand.Action):
 
     def run(self, params={}):
         server = self.connection.server
+        offset = params.get(Input.OFFSET, "")
+        limit = params.get(Input.LIMIT, "")
 
-        if params.get("offset", ""):
-            offset = params.get("offset", "")
-            limit = params.get("limit", "")
+        if offset:
             if limit:
-                endpoint = server + "/tasks/list/%d/%d" % (limit, offset)
+                endpoint = f"{server}/tasks/list/{limit}/{offset}"
             else:
-                endpoint = server + "/tasks/list"
-        elif params.get("limit", ""):
-            limit = params.get("limit", "")
-            endpoint = server + "/tasks/list/%d" % (limit)
+                endpoint = f"{server}/tasks/list"
+        elif limit:
+            endpoint = f"{server}/tasks/list/{limit}"
         else:
-            endpoint = server + "/tasks/list"
+            endpoint = f"{server}/tasks/list"
 
         try:
-            r = requests.get(endpoint)
-            r.raise_for_status()
-            response = r.json()
-            result = {"tasks": response}
-            return result
+            response = requests.get(endpoint)
+            response.raise_for_status()
+            response = response.json()
+            return {Output.TASKS: response}
 
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
-
-    def test(self):
-        return {"tasks": [self.connection.test()]}
+        except Exception as exception:
+            self.logger.error(f"Error: {str(exception)}")

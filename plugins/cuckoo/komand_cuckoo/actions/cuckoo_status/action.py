@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CuckooStatusInput, CuckooStatusOutput
 
 # Custom imports below
@@ -6,7 +6,7 @@ import json
 import requests
 
 
-class CuckooStatus(komand.Action):
+class CuckooStatus(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="cuckoo_status",
@@ -17,16 +17,13 @@ class CuckooStatus(komand.Action):
 
     def run(self, params={}):
         server = self.connection.server
-        endpoint = server + "/cuckoo/status"
+        endpoint = f"{server}/cuckoo/status"
 
         try:
-            r = requests.get(endpoint)
-            r.raise_for_status()
-            response = r.json()
+            response = requests.get(endpoint)
+            response.raise_for_status()
+            response = response.json()
             return response
 
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
-
-    def test(self):
-        return self.connection.test()
+        except Exception as exception:
+            self.logger.error(f"Error: {str(exception)}")

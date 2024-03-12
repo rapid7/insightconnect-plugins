@@ -1,12 +1,12 @@
-import komand
-from .schema import DeleteTaskInput, DeleteTaskOutput
+import insightconnect_plugin_runtime
+from .schema import DeleteTaskInput, DeleteTaskOutput, Input
 
 # Custom imports below
 import json
 import requests
 
 
-class DeleteTask(komand.Action):
+class DeleteTask(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="delete_task",
@@ -17,23 +17,16 @@ class DeleteTask(komand.Action):
 
     def run(self, params={}):
         server = self.connection.server
-        task_id = params.get("task_id", "")
-        endpoint = server + "/tasks/delete/" + str(task_id)
+        task_id = params.get(Input.TASK_ID, "")
+        endpoint = f"{server}/tasks/delete/{task_id}"
 
         try:
-            r = requests.get(endpoint)
-            r.raise_for_status()
-            response = r.json()
+            response = requests.get(endpoint)
+            response.raise_for_status()
+            response = response.json()
             response["message"] = "Task deleted"
             del response["status"]
             return response
 
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
-
-    def test(self):
-        out = self.connection.test()
-        out["error"] = False
-        out["error_value"] = "No error"
-        out["message"] = "Test passed"
-        return out
+        except Exception as exception:
+            self.logger.error(f"Error: {str(exception)}")
