@@ -20,7 +20,7 @@ class Util:
                 value = {}
             new_json.append((key, value))
 
-        return json.loads(json.dumps(dict(new_json)))
+        return dict(new_json)
 
     @staticmethod
     def is_issue_new(date: str) -> bool:
