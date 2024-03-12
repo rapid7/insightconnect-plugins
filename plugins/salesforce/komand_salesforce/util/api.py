@@ -316,6 +316,6 @@ class SalesforceAPI:
     def unset_token(self) -> None:
         """
         Reset API token now that all API calls have been made during the task execution so that on the next trigger
-        we will reach out to Salesforce and get a new API.
+        we will reach out to Salesforce and get a new API token.
         """
         self.token = None
