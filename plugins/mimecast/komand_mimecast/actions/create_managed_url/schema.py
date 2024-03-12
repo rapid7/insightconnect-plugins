@@ -30,7 +30,7 @@ class CreateManagedUrlInput(insightconnect_plugin_runtime.Input):
     "action": {
       "type": "string",
       "title": "Action",
-      "description": "Set to 'block' to blacklist the URL, 'permit' to whitelist it",
+      "description": "Set to \"block\" to blacklist the URL, \"permit\" to whitelist it",
       "default": "block",
       "enum": [
         "block",
@@ -65,7 +65,7 @@ class CreateManagedUrlInput(insightconnect_plugin_runtime.Input):
     "match_type": {
       "type": "string",
       "title": "Match Type",
-      "description": "Set to 'explicit' to block or permit only instances of the full URL. Set to 'domain' to block or permit any URL with the same domain",
+      "description": "Set to \"explicit\" to block or permit only instances of the full URL. Set to \"domain\" to block or permit any URL with the same domain",
       "default": "explicit",
       "enum": [
         "explicit",
