@@ -19,8 +19,8 @@ class Util:
             if key in ("assignee", "milestone") and value == "":
                 value = {}
             new_json.append((key, value))
-        output = json.dumps(dict(new_json))
-        return json.loads(output)
+
+        return json.loads(json.dumps(dict(new_json)))
 
     @staticmethod
     def is_issue_new(date: str) -> bool:
@@ -31,8 +31,8 @@ class Util:
         :param date: Datetime string
         :return: True or False
         """
-        acceptable = "0:00:30.000000"  # last 15 sec
-        #'0:00:15.761923'
+        acceptable = "0:00:30.000000"  # last 30 sec
+
         time_now = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
         time_now = datetime.strptime(time_now, "%Y-%m-%dT%H:%M:%S.%fZ")
 
