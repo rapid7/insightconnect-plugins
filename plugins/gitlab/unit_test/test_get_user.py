@@ -22,6 +22,30 @@ class TestGetUser(TestCase):
         mocked_request(mock_get)
         response = self.action.run(self.params)
 
-        expected = {Output.USER: response}
+        expected = {
+            Output.USER: {
+                "id": 20455089,
+                "username": "baggelisp.keph",
+                "name": "baggelisSP",
+                "state": "active",
+                "locked": False,
+                "avatar_url": "https://secure.gravatar.com/avatar/ef525c89fc7ba9dc5f5cc287edb77d45763c427e14f9083e38a71fc048a3998e?s=80&d=identicon",
+                "web_url": "https://gitlab.com/baggelisp.keph",
+                "bio": "",
+                "location": "",
+                "public_email": None,
+                "skype": "",
+                "linkedin": "",
+                "twitter": "",
+                "discord": "",
+                "website_url": "",
+                "organization": "",
+                "job_title": "",
+                "pronouns": None,
+                "bot": False,
+                "work_information": None,
+                "local_time": None,
+            }
+        }
         validate(response, self.action.output.schema)
         self.assertEqual(response, expected)

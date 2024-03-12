@@ -22,6 +22,21 @@ class TestListSsh(TestCase):
         mocked_request(mock_get)
         response = self.action.run(self.params)
 
-        expected = {Output.SSH_KEYS: []}
+        expected = {
+            Output.SSH_KEYS: [
+                {
+                    "created_at": "12.02.23",
+                    "id": 17,
+                    "key": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAiPWx6WM4lhHNedGfBpPJNPpZ7yKu+dnn1SJejgt4596k6YjzGGphH2TUxwKzxcKDKKezwkpfnxPkSMkuEspGRt/aZZ9wa++Oi7Qkr8prgHc4soW6NUlfDzpvZK2H5E7eQaSeP3SAwGmQKUFHCddNaP0L+hM7zhFNzjFvpaMgJw0=",
+                    "title": "MyPubKey",
+                },
+                {
+                    "created_at": "12.02.23",
+                    "id": 18,
+                    "key": "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAiPWx6WM4lhHNedGfBpPJNPpZ7yKu+dnn1SJejgt4596k6YjzGGphH2TUxwKzxcKDKKezwkpfnxPkSMkuEspGRt/aZZ9wa++Oi7Qkr8prgHc4soW6NUlfDzpvZK2H5E7eQaSeP3SAwGmQKUFHCddNaP0L+hM7zhFNzjFvpaMgJw0=",
+                    "title": "MyPubKey2",
+                },
+            ]
+        }
         validate(response, self.action.output.schema)
         self.assertEqual(response, expected)
