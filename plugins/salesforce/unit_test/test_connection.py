@@ -36,6 +36,7 @@ class TestConnection(TestCase):
             self.action.connection.api._username,
             self.action.connection.api._password,
             self.action.connection.api._security_token,
+            self.action.connection.api._oauth_url,
         )
         self.assertEqual(token, expected)
 
@@ -46,7 +47,13 @@ class TestConnection(TestCase):
                 Util.read_file_to_dict("inputs/connection_invalid.json.inp"),
                 PluginException.causes[PluginException.Preset.INVALID_CREDENTIALS],
                 PluginException.assistances[PluginException.Preset.INVALID_CREDENTIALS],
-            ]
+            ],
+            [
+                "salesforce_server_error",
+                Util.read_file_to_dict("inputs/connection_server_error.json.inp"),
+                PluginException.causes[PluginException.Preset.UNKNOWN],
+                PluginException.assistances[PluginException.Preset.UNKNOWN],
+            ],
         ]
     )
     def test_connection_raise_exception(
@@ -60,6 +67,7 @@ class TestConnection(TestCase):
                 self.action.connection.api._username,
                 self.action.connection.api._password,
                 self.action.connection.api._security_token,
+                self.action.connection.api._oauth_url,
             )
 
         self.assertEqual(error.exception.cause, cause)
