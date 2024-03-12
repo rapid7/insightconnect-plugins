@@ -106,12 +106,12 @@ class APIClient(object):
         url = f"https://{host}:{port}/sepm/api/v1"
         auth_url = f"{url}/identity/authenticate"
 
-        logger.info(f"Authenticating with Symantec Endpoint Protection console at '{url}'")
+        logger.info("Authenticating with Symantec Endpoint Protection console at '%s'", url)
 
         auth_body = {"username": username, "password": password, "domain": domain}
         headers = {"Content-Type": "application/json"}
         response = requests.post(url=auth_url, json=auth_body, headers=headers, verify=False)  # noqa: B501
-        logger.info(f"Received status code '{response.status_code}' from Symantec Endpoint Protection console.")
+        logger.info("Received status code '%s' from Symantec Endpoint Protection console.", response.status_code)
 
         if response.status_code == 200:
             try:
