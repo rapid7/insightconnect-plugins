@@ -4,10 +4,15 @@ products: [insightconnect]
 name: misp
 title: MISP
 description: MISP is an open source threat sharing platform
-version: 5.0.1
+version: 5.0.2
+connection_version: 5
+sdk:
+  type: slim
+  version: 5
+  user: nobody
 vendor: rapid7
 support: community
-supported_versions: ["2.4.96"]
+supported_versions: ["2.4.187"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/misp
@@ -421,6 +426,7 @@ triggers:
         description: A list of event_ids with the tag
         type: '[]string'
         required: true
+        example: ["1098", "1099"]
 actions:
   create_an_event:
     title: Create Event
@@ -477,13 +483,13 @@ actions:
       orgc_id:
         title: Organization C ID
         description: Organization C ID
-        example: "1"
+        example: "12345"
         type: string
         required: false
       org_id:
         title: Organization ID
         description: Organization ID
-        example: "1"
+        example: "12345"
         type: string
         required: false
       sharing_group_id:
@@ -498,101 +504,121 @@ actions:
         description: Organization C ID
         type: string
         required: false
+        example: "12345"
       id:
         title: ID
         description: Event ID
         type: string
         required: false
+        example: "12345"
       threat_level_id:
         title: Threat Level ID
         description: Threat level ID
         type: string
         required: false
+        example: "1"
       event_creator_email:
         title: Email
         description: Event creator's email
         type: string
         required: false
+        example: user@example.com
       uuid:
         title: UUID
         description: Unique event ID
         type: string
         required: false
+        example: c99506a6-1255-4b71-afa5-7b8ba48c3b1b
       RelatedEvent:
         title: Related Event
         description: Related event
         type: '[]object'
         required: false
+        example: []
       sharing_group_id:
         title: Group ID
         description: Sharing group ID
         type: string
         required: false
+        example: "1"
       timestamp:
         title: Timestamp
         description: Timestamp
         type: string
         required: false
+        example: "1617875568"
       date:
         title: Date
         description: Date
         type: date
         required: false
+        example: 1991-01-15
       disable_correlation:
         title: Disable Correlation
         description: Disable correlation
         type: boolean
         required: false
+        example: false
       info:
         title: Info
         description: Info
         type: string
         required: false
+        example: logged source ip
       locked:
         title: Locked
         description: Locked
         type: boolean
         required: false
+        example: true
       publish_timestamp:
         title: Publish Timestamp
         description: Publish timestamp
         type: string
         required: false
+        example: "1617875568"
       Attribute:
         title: Attribute
         description: Attribute
         type: '[]base_output'
         required: false
+        example: []
       attribute_count:
         title: Attribute Count
         description: Attribute count
         type: string
         required: false
+        example: "1"
       org_id:
         title: Organization ID
         description: Organization ID
         type: string
         required: false
+        example: "12345"
       analysis:
         title: Analysis
         description: Analysis
         type: string
         required: false
+        example: "0"
       published:
         title: Published
         description: Published
         type: boolean
         required: false
+        example: false
       distribution:
         title: Distribution
         description: Distribution
         type: string
         required: false
+        example: "0"
       proposal_email_lock:
         title: Proposal Email Lock
         description: Lock proposal email
         type: boolean
         required: false
+        example: true
   add_attachment:
     title: Add Attachment
     description: Add attachment to event
@@ -621,6 +647,7 @@ actions:
         description: Status of add attachment
         type: boolean
         required: false
+        example: true
   add_urls:
     title: Add URLs
     description: Add URLs to event
@@ -667,6 +694,7 @@ actions:
         description: URL add status
         type: boolean
         required: false
+        example: true
   add_email_recipient:
     title: Add Email Recipient
     description: Add email recipient to event
@@ -713,6 +741,7 @@ actions:
         description: Email recipient add status
         type: boolean
         required: true
+        example: true
   add_email_sender:
     title: Add Email Sender
     description: Add email sender to event
@@ -759,6 +788,7 @@ actions:
         description: Email sender add status
         type: boolean
         required: true
+        example: true
   add_email_subject:
     title: Add Email Subject
     description: Add email subject to event
@@ -805,6 +835,7 @@ actions:
         description: Email subject add status
         type: boolean
         required: true
+        example: true
   add_context:
     title: Add Context
     description: Add context
@@ -846,6 +877,7 @@ actions:
         description: Context add status
         type: boolean
         required: false
+        example: true
   add_sightings:
     title: Add Sightings
     description: Add sightings to organization
@@ -862,6 +894,7 @@ actions:
         description: Sightings add status
         type: boolean
         required: false
+        example: true
   add_tag:
     title: Add Tag
     description: Add tag
@@ -884,6 +917,7 @@ actions:
         description: Tag add status
         type: boolean
         required: false
+        example: true
   export_events:
     title: Export Events
     description: Export all events in XML format
@@ -931,6 +965,7 @@ actions:
         description: Event output
         type: bytes
         required: false
+        example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
   export_attributes:
     title: Export Attributes
     description: Export all attributes in CSV format
@@ -997,6 +1032,7 @@ actions:
         description: Attributes output
         type: bytes
         required: false
+        example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
   export_rules:
     title: Rules Export
     description: Export Snort or Suricata rules
@@ -1053,6 +1089,7 @@ actions:
         description: Rules output
         type: bytes
         required: false
+        example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
   export_hashes:
     title: Export Hashes
     description: Export hashes from HIDS database
@@ -1096,6 +1133,7 @@ actions:
         description: Hashes
         type: bytes
         required: false
+        example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
   export_stix:
     title: Export STIX
     description: Export events in STIX format
@@ -1143,6 +1181,7 @@ actions:
         description: STIX output
         type: bytes
         required: false
+        example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
   export_rpz:
     title: Export RPZ
     description: Export RPZ zone files
@@ -1177,6 +1216,7 @@ actions:
         description: RPZ output
         type: bytes
         required: false
+        example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
   download_attachment:
     title: Download Attachment
     description: Download attachment
@@ -1193,6 +1233,7 @@ actions:
         description: Attachment
         type: bytes
         required: false
+        example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
   find_event:
     title: Find Event
     description: Receive events based on criteria
@@ -1209,16 +1250,19 @@ actions:
         description: Event
         type: Event
         required: false
+        example: {"ShadowAttribute":[],"locked":false,"proposal_email_lock":false,"published":false,"event_creator_email":"user@example.com","RelatedEvent":[],"analysis":"1","org_id":"1","distribution":"2","Tag":[{"hide_tag":false,"name":"Phishing","exportable":true,"id":"167","colour":"#856c13"}],"Galaxy":[],"id":"773","Attribute":[{"ShadowAttribute":[],"timestamp":"1516127675","id":"172996","value":"http://badguy.net","sharing_group_id":"0","event_id":"773","type":"url","distribution":"5","disable_correlation":false,"to_ids":false,"deleted":false,"category":"Network activity","comment":"URLs found in suspected phishing e-mail","uuid":"5a5e45bb-c994-46da-9cb5-711f0a04180d"},{"ShadowAttribute":[],"timestamp":"1516127671","id":"172999","value":"Hey,Check out this cool link!","sharing_group_id":"0","event_id":"773","type":"email-subject","distribution":"5","disable_correlation":false,"to_ids":true,"deleted":false,"category":"Payload delivery","comment":"Suspected phishing e-mail with this subject","uuid":"5a5e45b7-8500-443b-8c38-03780a04180d"}],"Orgc":{"name":"MISP","id":"1","uuid":"56ef3277-1ad4-42f6-b90b-04e5c0a83832"},"orgc_id":"1","attribute_count":"4","sharing_group_id":"0","date":"2018-01-16","Org":{"name":"MISP","id":"1","uuid":"56ef3277-1ad4-42f6-b90b-04e5c0a83832"},"timestamp":"1516127664","disable_correlation":false,"publish_timestamp":"1516127661","info":"Test from Komand","threat_level_id":"2","uuid":"5a5e45ad-55b4-4e8e-8c97-711c0a04180d"}
       message:
         title: Message
         description: Message
         type: string
         required: false
+        example: Event found
       errors:
         title: Errors
         description: Errors
         type: '[]string'
         required: false
+        example: ["No errors."]
   remove_tag:
     title: Remove Tag
     description: Remove tag
@@ -1241,6 +1285,7 @@ actions:
         description: Tag add status
         type: boolean
         required: false
+        example: true
   add_attribute:
     title: Add Attribute
     description: Add an attribute to an event
@@ -1281,6 +1326,7 @@ actions:
         description: A summary of the added attribute
         type: attribute
         required: false
+        example: {"id":"173007","event_id":"777","category":"Network activity","type":"url","value1":"https://malware.com","value2":"","to_ids":false,"uuid":"5b05a903-f35c-42aa-8ed2-64d60a041dcd","timestamp":"1527097603","distribution":"0","sharing_group_id":"0","comment":"this is a test","deleted":false,"disable_correlation":false,"value":"https://malware.com"}
   search_events:
     title: Search Events
     description: Search for events
@@ -1375,6 +1421,7 @@ actions:
         description: A list of event IDs that match the search
         type: '[]string'
         required: false
+        example: ["1", "2"]
   publish:
     title: Publish
     description: Publish an event
@@ -1391,3 +1438,4 @@ actions:
         description: Info on published event
         type: published
         required: false
+        example: {"name": "Alert", "message": "Job queued", "url": "/events/alert/776", "id": "776"}

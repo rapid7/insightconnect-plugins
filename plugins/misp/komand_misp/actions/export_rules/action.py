@@ -1,4 +1,6 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import ExportRulesInput, ExportRulesOutput
 
 # Custom imports below
@@ -66,7 +68,7 @@ class ExportRules(insightconnect_plugin_runtime.Action):
             response_json = response.json()
             message = str(response_json["message"])
             self.logger.error(message)
-            raise Exception(message)
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, cause=message)
 
         # Encode data as b64
         rules = base64.b64encode(response.text.encode("ascii"))

@@ -1,8 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import AddContextInput, AddContextOutput
 
-# Custom imports below
-
 
 class AddContext(insightconnect_plugin_runtime.Action):
     def __init__(self):
@@ -71,10 +69,6 @@ class AddContext(insightconnect_plugin_runtime.Action):
             )
 
             return {"status": True}
-        except:  # pylint: disable=bare-except
-            self.logger.error(event_cmt)
-            self.logger.error(event_link)
-            self.logger.error(event_other)
-            self.logger.error(event_txt)
-
+        except Exception as error:
+            self.logger.error(error)
         return {"status": False}
