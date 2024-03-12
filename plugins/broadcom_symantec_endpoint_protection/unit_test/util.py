@@ -52,6 +52,12 @@ class Util:
         # Authenticate
         if url == "https://sepm-14:8446/sepm/api/v1/identity/authenticate":
             return MockResponse(200, "authenticate.json.resp")
+        # Get agent details
+        if url == "https://sepm-14:8446/sepm/api/v1/computers":
+            return MockResponse(200, "get_computers.json.resp")
+        # Quarantine
+        if url == "https://sepm-14:8446/sepm/api/v1/command-queue/quarantine":
+            return MockResponse(200, "quarantine.json.resp")
         raise NotImplementedError("Not implemented", kwargs)
 
     @staticmethod
