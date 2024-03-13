@@ -1,4 +1,6 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import FindEventInput, FindEventOutput
 
 # Custom imports below
@@ -34,9 +36,9 @@ class FindEvent(insightconnect_plugin_runtime.Action):
                     message = "Event found."
                     errors = ["No errors."]
             else:
-                Exception("Something went wrong with the request")
+                raise PluginException(preset=PluginException.Preset.BAD_REQUEST)
         except:
             self.logger.error("Event %s not found or failure occurred", params.get("event_id"))
-            raise
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND)
 
-        return {"event": event["Event"], "message": message, "errors": errors}
+        return {"event": event.get("Event"), "message": message, "errors": errors}

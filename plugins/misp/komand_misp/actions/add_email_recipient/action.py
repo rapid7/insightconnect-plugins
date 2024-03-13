@@ -29,7 +29,7 @@ class AddEmailRecipient(insightconnect_plugin_runtime.Action):
             if isinstance(event, tuple):
                 event = event[0]
 
-            recip = client.add_email_dst(
+            client.add_email_dst(
                 event,
                 email=params.get("recipient"),
                 category="Payload delivery",
@@ -38,8 +38,8 @@ class AddEmailRecipient(insightconnect_plugin_runtime.Action):
                 distribution=dist[params.get("distribution")],
                 proposal=proposal,
             )
-        except:  # pylint: disable=bare-except
-            self.logger.error(recip)
+        except Exception as error:
+            self.logger.error(error)
             return {"status": False}
 
         return {"status": True}

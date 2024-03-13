@@ -1,7 +1,8 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import ExportAttributesInput, ExportAttributesOutput
 
-# Custom imports below
 import json
 import requests
 import base64
@@ -58,7 +59,7 @@ class ExportAttributes(insightconnect_plugin_runtime.Action):
             response_json = response.json()
             message = str(response_json["message"])
             self.logger.error(message)
-            raise Exception(message)
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, cause=message)
 
         # Encode data as b64
         attributes = base64.b64encode(response.text.encode("ascii"))

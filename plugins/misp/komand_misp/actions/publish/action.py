@@ -1,4 +1,6 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import PublishInput, PublishOutput
 
 # Custom imports below
@@ -22,6 +24,6 @@ class Publish(insightconnect_plugin_runtime.Action):
         try:
             published["id"]
         except KeyError:
-            self.logger.error("Something went wrong see returned request, %s", published)
-            raise
+            self.logger.error("Something went wrong see returned request")
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST)
         return {"published": published}
