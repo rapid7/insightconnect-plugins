@@ -5,7 +5,7 @@ name: mimecast
 title: Mimecast
 description: Services for email security, archiving and continuity. Protect, manage
   and archive without compromise
-version: 5.3.8
+version: 5.3.9
 connection_version: 5
 supported_versions: ["Mimecast API 2022-11-07"]
 vendor: rapid7
@@ -220,28 +220,28 @@ types:
       type: string
       required: false
     source:
-      title:
-      description:
+      title: Source 
+      description: Source of the group, either cloud or LDAP
       type: string
       required: false
     folder_count:
-      title:
-      description:
+      title: Folder Count
+      description: Number of folders allocated to this group
       type: integer
       required: false
     parent_id:
-      title:
-      description:
+      title: Parent ID
+      description: The parent ID
       type: string
       required: false
     id:
-      title:
-      description:
+      title: ID
+      description: ID of the group
       type: string
       required: false
     user_count:
-      title:
-      description:
+      title: User Count
+      description: Number of users in the group
       type: integer
       required: false
   click_logs:
@@ -941,10 +941,10 @@ actions:
         description: An array of found tracked emails
         type: "[]tracked_emails"
         required: true
-        example: []
+        example: [{"detectionLevel": "","fromEnv": {"emailAddress": "user@example.com"},"fromHdr": {"emailAddress": ""},"id": "123456789","info": "Envelope Rejected","received": "2022-12-01T12:49:46+0000","route": "inbound","senderIP": "192.168.0.1","sent": "2022-12-01T12:49:46+0000","spamScore": 0,"status": "rejected","subject": "Example Subject","to": [{"displayableName": "Example User","emailAddress": "user@example.com"}]}]
   delete_blocked_sender_policy:
     title: Delete Blocked Sender Policy
-    description: Deletes a blocked sender policy
+    description: Delete a blocked sender policy
     input:
       id:
         title: ID
@@ -1022,7 +1022,7 @@ actions:
         description: Managed URL that was created
         type: '[]managed_url'
         required: false
-        example: []
+        example: [{"id": "wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4","scheme": "https","domain": "www.test.net","port": -1,"path": "/","queryString": "","matchType": "explicit","action": "permit","comment": "","disableUserAwareness": false,"disableRewrite": false,"disableLogClick": false}]
   delete_managed_url:
     title: Delete Managed URL
     description: Delete a managed URL
@@ -1136,10 +1136,10 @@ actions:
         description: 'Managed URLs matching '
         type: '[]managed_url'
         required: false
-        example: []
+        example: [{"id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLho3KMtTMfYm2C21vDPXvKC5vmEJWDAcvTHtH4L4Kw20c","scheme": "https","domain": "steam.com","port": -1,"matchType": "explicit","action": "block","comment": "ui test","disableUserAwareness": true,"disableRewrite": true,"disableLogClick": false}]
   permit_or_block_sender:
     title: Permit or Block Sender
-    description: Permits or blocks a sender
+    description: Permit or block a sender
     input:
       action:
         title: Action
@@ -1170,10 +1170,10 @@ actions:
         description: The Managed Sender that was created
         type: '[]managed_sender'
         required: false
-        example: []
+        example: [{"id": "MTOKEN:eNoVzbEOgjAUQNF_eTMDGArK1oC2GARFjTpi-zQQ28ZWDGr8d3G-ybkfcCh6i62EBM4MB5Z2hpIiWlM_n0tecYv8nkXLBVH8WOvVTb_Kfcze-ZWefDUUzWHXVeYS1jHdgAeidw-j0AojcRTTbZkFNJ6RcGxPtK41GpLAA9Voh1r-t5OATL8_1zIraQ","sender": "user@example.com","to": "user@example.com","type": "Block"}]
   create_blocked_sender_policy:
     title: Create Blocked Sender Policy
-    description: Creates a blocked sender policy
+    description: Create a blocked sender policy
     input:
       option:
         title: Option
@@ -1266,7 +1266,7 @@ actions:
         description: The policy that was created
         type: '[]sender_policy'
         required: false
-        example: []
+        example: [{"option": "block_sender","id": "eNo1jU0LgjAYgP_LrgpusZl2EzWwUoaKJHibb7W-pk4tif57euj-fHyQBjF0IGu0QW0c20cSFkXgKt_Z2Zz6nNN8wjqU5aqyEuOcRmP6arfgGXl_Si_X_UE0-p0pGFhl6RsyUaPuUkxLjzDiONREYtC9ekAnVA3zxc-SgHhrl9GZHqHTUj1n-G_mUwPRYmNM8fcHIHEysg","policy": {"description": "komand test","fromPart": "envelope_from","from": {"type": "email_domain","emailDomain": "example.com"},"to": {"type": "everyone"},"fromType": "email_domain","fromValue": "example.com","toType": "everyone","fromEternal": true,"toEternal": true,"fromDate": "1900-01-01T00:00:00+0000","toDate": "2100-01-01T23:59:59+0000","override": false,"bidirectional": false,"conditions": {},"createTime": "2019-01-28T17:09:01+0000","lastUpdated": "2019-01-28T17:09:01+0000"}}]
   add_group_member:
     title: Add Group Member
     description: Add an email address or domain to a group
@@ -1369,7 +1369,7 @@ actions:
         description: A list of groups that mach the query
         type: "[]group"
         required: false
-        example: []
+        example: [{"id": "eNoVzrEOgjAUQNF_eTMDaLGBDSUCBjAWjDqS9qGYlmorRjH-u7jfnNwPWOSDwU5ACJkbXJLZklWJ5nlBajWyFaeY3uPFZu2r9Mj6Qvbvck-TMTtHJ1e98uZQX7e6JYxGO3BAiuYGYdtIiw7wwT60QsO1wIlfVWXsRTTwyRQ-0dhO9xB6DrRaCjT_BULn1Pv-ACT0L3A","description": "Relay","source": "cloud","parentId": "eNoVzr0OgjAUQOF3uasMkFAq3RqJ4h8E1IAjaS8EU6i2oqLx3cX95Mv5gEUxGGwlMHgWzUgCvk2t0HbI5iFXM0kxvkXBZkm6uMz7verH5ERX73XDz2732lXF8ZLq2s8pz8ABJasrsLpSFh0Qg73rDo3QEid-cUgij9OQ-FP4QGNb3QPzHKi1kmj-C-73B7L7LyY","userCount": 0,"folderCount": 0},{"id": "eNoVzssOgjAQQNF_mTWJoGAjOwIqGkVFQUnc1HYgaKHaCvER_x3c35zcL2hkjcKSgwsqbWlmJmx6Hmz9NNAXJymam8LwEYyXM6cKT3G9FvU7Ssj8syi8zKxeK3o8XDcyt2Pi7cAAwekd3JwKjQawRj9lhYpJjr3v76PA8sjEsfuwRaVLWYNrGZBLwVH9H2wyIsNfB8G2MJw","description": "Permitted senders","source": "cloud","parentId": "eNoVzr0OgjAUQOF3uasMkFAq3RqJ4h8E1IAjaS8EU6i2oqLx3cX95Mv5gEUxGGwlMHgWzUgCvk2t0HbI5iFXM0kxvkXBZkm6uMz7verH5ERX73XDz2732lXF8ZLq2s8pz8ABJasrsLpSFh0Qg73rDo3QEid-cUgij9OQ-FP4QGNb3QPzHKi1kmj-C-73B7L7LyY","userCount": 0,"folderCount": 0}]
   get_ttp_url_logs:
     title: Get TTP URL Logs
     description: Get TTP URL logs
@@ -1442,7 +1442,7 @@ actions:
         description: Click Logs
         type: "[]click_logs"
         required: false
-        example: []
+        example: [{"userEmailAddress": "user@example.com","url": "https://example.com","ttpDefinition": "Default URL Protection Definition","action": "warn","adminOverride": "N/A","userOverride": null,"scanResult": "malicious","category": "Compromised","userAwarenessAction": "N/A","date": "2019-04-23T19:50:28+0000","route": "inbound"}]     
   decode_url:
     title: Decode URL
     description: Decode a Mimecast encoded URL
@@ -1482,13 +1482,13 @@ actions:
         description: Event logs data
         type: "[]audit_events_response"
         required: true
-        example: []
+        example: [{"id": "wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U","scheme": "https","domain": "www.testset3444412312.net","port": -1,"path": "/","queryString": "","matchType": "explicit","action": "block","comment": "","disableUserAwareness": false,"disableRewrite": false,"disableLogClick": false}]      
       pagination:
         title: Pagination
         description: Pagination for request
         type: "pagination"
         required: false
-        example: {}
+        example: {"pageSize": 25,"pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"}
 tasks:
   monitor_siem_logs:
     title: Monitor SIEM Logs
@@ -1499,4 +1499,4 @@ tasks:
         description: List of logs
         type: "[]object"
         required: true
-        example: []
+        example: [{"Dir": "Example", "Rcpt": "user@example.com", "RcptHdrType": "To", "Sender": "user1@example.com","aCode": "1234code","acc": "ABCD12345", "datetime": "2023-05-09T12:00:00"}]

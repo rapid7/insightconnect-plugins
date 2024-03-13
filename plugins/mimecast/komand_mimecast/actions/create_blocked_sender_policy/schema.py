@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Creates a blocked sender policy"
+    DESCRIPTION = "Create a blocked sender policy"
 
 
 class Input:

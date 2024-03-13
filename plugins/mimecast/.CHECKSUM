@@ -1,7 +1,7 @@
 {
-	"spec": "fb7361ebf56ebaf52def6f5234251bc5",
-	"manifest": "092b0e57820bdad2fd0b0244e0e84163",
-	"setup": "92f33b42e4b58d16f2cf86706360c5a9",
+	"spec": "e009e19b1f42da6e844c6dd43e108327",
+	"manifest": "ca96fba53d76c1dff39941519ace1ec1",
+	"setup": "e0d7b6da70f710e2eab78741ab2ee843",
 	"schemas": [
 		{
 			"identifier": "add_group_member/schema.py",
@@ -9,11 +9,11 @@
 		},
 		{
 			"identifier": "create_blocked_sender_policy/schema.py",
-			"hash": "cf248bc09643695079889ba15ae6abf0"
+			"hash": "a65af7e110c8edc42c3b6db21b7ed2dc"
 		},
 		{
 			"identifier": "create_managed_url/schema.py",
-			"hash": "ee397039de9c277bd43f440adaa1afd6"
+			"hash": "b6d07b6a99f94fff2faddf8db94d2c45"
 		},
 		{
 			"identifier": "decode_url/schema.py",
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "delete_blocked_sender_policy/schema.py",
-			"hash": "a054369a93f3af33e3f6d30ff873c3c9"
+			"hash": "c695cf1efadb79985da61505bbd648e8"
 		},
 		{
 			"identifier": "delete_group_member/schema.py",
@@ -33,7 +33,7 @@
 		},
 		{
 			"identifier": "find_groups/schema.py",
-			"hash": "0991456d139c291460b81704916dfe90"
+			"hash": "13ff6fa6d64c6bbf773989923e0e8aeb"
 		},
 		{
 			"identifier": "get_audit_events/schema.py",
@@ -41,7 +41,7 @@
 		},
 		{
 			"identifier": "get_managed_url/schema.py",
-			"hash": "d9b379224e918c98f66737327f4552a8"
+			"hash": "2b48e043740b10260225018b2c919189"
 		},
 		{
 			"identifier": "get_ttp_url_logs/schema.py",
@@ -49,7 +49,7 @@
 		},
 		{
 			"identifier": "permit_or_block_sender/schema.py",
-			"hash": "f5d7b1dd1dd8252a229c269109056e23"
+			"hash": "74ec72c05b50dbb531ed4ac68ea9d6cb"
 		},
 		{
 			"identifier": "track_messages/schema.py",
