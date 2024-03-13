@@ -57,6 +57,8 @@ class GitLabAPI:
             raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.json())
         if response.status_code == 404:
             raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.json())
+        if 404 < response.status_code < 500:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.json())
         if response.status_code == 429:
             raise PluginException(preset=PluginException.Preset.RATE_LIMIT, data=response.json())
         if response.status_code >= 500:
