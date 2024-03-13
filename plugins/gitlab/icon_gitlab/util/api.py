@@ -37,18 +37,7 @@ class GitLabAPI:
         headers = {"PRIVATE-TOKEN": self.token}
 
         response = requests.request(method, self.base_url + path, headers=headers, params=params, verify=self.verify)
-        if response.status_code == 301:
-            raise PluginException(
-                cause="Moved Permanently",
-                assistance="The resource has been definitively moved to the URL given by the Location headers",
-                data=response.headers,
-            )
-        if response.status_code == 304:
-            raise PluginException(
-                cause="Not Modified",
-                assistance="The resource hasn’t been modified since the last request.",
-                data=response.json(),
-            )
+        
         if response.status_code == 400:
             raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.json())
         if response.status_code == 401:
@@ -57,10 +46,8 @@ class GitLabAPI:
             raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.json())
         if response.status_code == 404:
             raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.json())
-        if 404 < response.status_code < 500:
+        if (404 < response.status_code < 500) or (300 <= response.status_code < 400):
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.json())
-        if response.status_code == 429:
-            raise PluginException(preset=PluginException.Preset.RATE_LIMIT, data=response.json())
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.json())
         if 200 <= response.status_code < 300:
