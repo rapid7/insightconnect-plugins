@@ -70,7 +70,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|False|Indicicate if action was successful|True|
+|success|boolean|False|Indicate if action was successful|True|
   
 Example output:
 
@@ -217,7 +217,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|False|Indicicate if action was successful|True|
+|success|boolean|False|Indicate if action was successful|True|
   
 Example output:
 
@@ -249,7 +249,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|False|Indicicate if action was successful|True|
+|success|boolean|False|Indicate if action was successful|True|
   
 Example output:
 
