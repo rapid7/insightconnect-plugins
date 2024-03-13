@@ -6,6 +6,7 @@ import json
 class Input:
     CLIENTID = "clientId"
     CLIENTSECRET = "clientSecret"
+    INSTANCEURL = "instanceUrl"
     SALESFORCEACCOUNTUSERNAMEANDPASSWORD = "salesforceAccountUsernameAndPassword"
     SECURITYTOKEN = "securityToken"
 
@@ -20,25 +21,32 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Client ID",
       "description": "Consumer Key of the connected app",
-      "order": 1
+      "order": 2
     },
     "clientSecret": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Client Secret",
       "description": "Consumer Secret of the connected app",
-      "order": 2
+      "order": 3
+    },
+    "instanceUrl": {
+      "type": "string",
+      "title": "Salesforce URL",
+      "description": "Salesforce URL that is used to retrieve OAuth token",
+      "default": "https://login.salesforce.com",
+      "order": 1
     },
     "salesforceAccountUsernameAndPassword": {
       "$ref": "#/definitions/credential_username_password",
       "title": "Salesforce Account Username and Password",
       "description": "Name and password of the Salesforce user",
-      "order": 3
+      "order": 4
     },
     "securityToken": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Security Token",
       "description": "Security token of the Salesforce user",
-      "order": 4
+      "order": 5
     }
   },
   "required": [
