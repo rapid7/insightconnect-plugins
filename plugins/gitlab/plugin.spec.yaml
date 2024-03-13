@@ -11,7 +11,6 @@ version: 2.0.0
 connection_version: 2
 supported_versions: [GitLab API v4]
 version_history: ['2.0.0 - Update SDK | Refactor Plugin | `Connection` - New input: `ssl_verify` | `Issues` - Renamed to `Get New Issues` | Added unit tests', 1.0.1 - New spec and help.md format for the Extension Library, 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types, 0.1.1 - SSL bug fix in SDK, 0.1.0 - Initial plugin]
-links: ['[GitLab](https://gitlab.com)']
 references: ['[GitLab API](https://docs.gitlab.com/ce/api/README.html)']
 sdk:
   type: slim
@@ -370,7 +369,7 @@ actions:
     output:
       success:
         title: Success
-        description: Indicate if action was successful
+        description: Indicicate if action was successful
         type: boolean
         example: True
         required: false
@@ -404,7 +403,7 @@ actions:
     output:
       success:
         title: Success
-        description: Indicate if action was successful
+        description: Indicicate if action was successful
         type: boolean
         example: True
         required: false
@@ -438,7 +437,7 @@ actions:
     output:
       success:
         title: Success
-        description: Indicate if action was successful
+        description: Indicicate if action was successful
         type: boolean
         example: True
         required: false
