@@ -1,4 +1,6 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import ExportEventsInput, ExportEventsOutput
 
 # Custom imports below
@@ -56,7 +58,7 @@ class ExportEvents(insightconnect_plugin_runtime.Action):
             response_json = response.json()
             message = str(response_json["message"])
             self.logger.error(message)
-            raise Exception(message)
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, cause=message)
 
         # Encode data as b64
         events = base64.b64encode(response.text.encode("ascii"))

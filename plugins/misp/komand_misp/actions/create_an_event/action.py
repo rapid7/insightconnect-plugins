@@ -1,4 +1,6 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import CreateAnEventInput, CreateAnEventOutput
 
 # Custom imports below
@@ -35,10 +37,10 @@ class CreateAnEvent(insightconnect_plugin_runtime.Action):
                 sharing_group_id=params.get("sharing_group_id") or None,
             )
             output = json.loads(json.dumps(event))
-        except Exception as e:
-            self.logger.error(e)
-            raise
+        except Exception as error:
+            self.logger.error(error)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
         try:
             return output["Event"]
-        except Exception:
-            raise Exception(output["message"])
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)

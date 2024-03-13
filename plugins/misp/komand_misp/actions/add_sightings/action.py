@@ -24,6 +24,6 @@ class AddSightings(insightconnect_plugin_runtime.Action):
             else:
                 self.logger.info(item)
                 return {"status": False}
-        except:  # pylint: disable=bare-except
-            self.logger.error(item)
+        except Exception as error:
+            self.logger.error(error)
             return {"status": False}

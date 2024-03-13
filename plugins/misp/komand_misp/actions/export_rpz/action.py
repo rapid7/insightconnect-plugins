@@ -1,4 +1,6 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import ExportRpzInput, ExportRpzOutput
 
 # Custom imports below
@@ -57,7 +59,7 @@ class ExportRpz(insightconnect_plugin_runtime.Action):
             response_json = response.json()
             message = str(response_json["message"])
             self.logger.error(message)
-            raise Exception(message)
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=message)
         # Encode data as b64
         self.logger.debug("*" * 10)
         self.logger.debug(response)

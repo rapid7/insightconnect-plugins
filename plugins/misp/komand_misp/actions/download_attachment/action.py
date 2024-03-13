@@ -1,4 +1,6 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import DownloadAttachmentInput, DownloadAttachmentOutput
 
 # Custom imports below
@@ -31,10 +33,10 @@ class DownloadAttachment(insightconnect_plugin_runtime.Action):
             response.raise_for_status()
         except ValueError:
             self.logger.error("Attribute ID did not contain an attachment")
-            raise Exception("No attachment found for ID")
-        except requests.exceptions.HTTPError as e:
-            self.logger.error(e)
-            raise
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND)
+        except requests.exceptions.HTTPError as error:
+            self.logger.error(error)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
         # Encode data as b64
         attachment = base64.b64encode(response.content).decode("utf-8")
