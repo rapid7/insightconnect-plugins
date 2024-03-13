@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 import pdfkit
 import tempfile
 import shutil
-from komand_markdown.util import utils
+from icon_markdown.util import utils
 from .schema import MarkdownToPdfInput, MarkdownToPdfOutput, Output, Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 

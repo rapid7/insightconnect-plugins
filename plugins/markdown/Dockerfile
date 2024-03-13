@@ -1,7 +1,7 @@
-FROM rapid7/insightconnect-python-3-38-plugin:4
-LABEL organization=komand
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:5.4.4
+
+LABEL organization=rapid7
 LABEL sdk=python
-LABEL type=plugin
 
 ENV SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
 ENV SSL_CERT_DIR /etc/ssl/certs
@@ -19,4 +19,4 @@ RUN python setup.py build && python setup.py install
 
 USER nobody
 
-ENTRYPOINT ["/usr/local/bin/komand_markdown"]
+ENTRYPOINT ["/usr/local/bin/icon_markdown"]

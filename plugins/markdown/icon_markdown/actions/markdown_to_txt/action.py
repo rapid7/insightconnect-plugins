@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import MarkdownToTxtInput, MarkdownToTxtOutput, Input, Output, Component
-from komand_markdown.util import utils
+from icon_markdown.util import utils
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 

@@ -4,12 +4,11 @@ import os
 sys.path.append(os.path.abspath("../"))
 from parameterized import parameterized
 from unittest import TestCase
-from komand_markdown.actions.markdown_to_txt import MarkdownToTxt
+from icon_markdown.actions.markdown_to_txt import MarkdownToTxt
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class TestMarkdownToTxt(TestCase):
-
     expected_result = {"txt_string": "Rapid7 InsightConnect\n", "txt": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}
     expected_error = "Input Error"
 

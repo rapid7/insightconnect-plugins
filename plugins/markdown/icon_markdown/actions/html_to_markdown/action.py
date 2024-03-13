@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from komand_markdown.util import utils
+from icon_markdown.util import utils
 from .schema import HtmlToMarkdownInput, HtmlToMarkdownOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
 

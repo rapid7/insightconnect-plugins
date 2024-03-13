@@ -4,7 +4,7 @@ import os
 sys.path.append(os.path.abspath("../"))
 from parameterized import parameterized
 from unittest import TestCase
-from komand_markdown.actions.markdown_to_html import MarkdownToHtml
+from icon_markdown.actions.markdown_to_html import MarkdownToHtml
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
