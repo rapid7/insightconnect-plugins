@@ -37,7 +37,7 @@ class GitLabAPI:
         headers = {"PRIVATE-TOKEN": self.token}
 
         response = requests.request(method, self.base_url + path, headers=headers, params=params, verify=self.verify)
-        
+
         if response.status_code == 400:
             raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.json())
         if response.status_code == 401:
