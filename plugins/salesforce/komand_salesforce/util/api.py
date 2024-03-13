@@ -79,21 +79,29 @@ def refresh_token(max_tries: int) -> Callable:
 
 
 class SalesforceAPI:
-    RETRY_LIMIT = 5
+    RETRY_LIMIT = 2
 
     def __init__(
-        self, client_id: str, client_secret: str, username: str, password: str, security_token: str, logger: Logger
+        self,
+        client_id: str,
+        client_secret: str,
+        oauth_url: str,
+        username: str,
+        password: str,
+        security_token: str,
+        logger: Logger,
     ):
         self.logger = logger
         self._client_id = client_id
         self._client_secret = client_secret
+        self._oauth_url = oauth_url
         self._username = username
         self._password = password
         self._security_token = security_token
         self.enable_rate_limiting = True
         self.token = None
         self.instance_url = None
-        self.retry_count = 0
+        self.retry_count = 1
 
     def simple_search(self, text: str) -> list:
         return self._make_json_request("GET", PARAMETERIZED_SEARCH_ENDPOINT, params={"q": text}).get(
@@ -169,15 +177,20 @@ class SalesforceAPI:
             "GET", SOBJECT_RECORD_FIELD_ENDPOINT.format(object=object_name, record=record_id, field=field_name)
         ).content
 
-    def _get_token(self, client_id: str, client_secret: str, username: str, password: str, security_token: str):
+    def _get_token(
+        self, client_id: str, client_secret: str, username: str, password: str, security_token: str, oauth_url: str
+    ):
+        # A single task run makes multiple API calls to Salesforce, we can keep the token for one task execution
         if self.token and self.instance_url:
             return self.token, self.instance_url
 
-        self.logger.info("SalesforceAPI: Getting API token...")
+        salesforce_url = "login.salesforce.com" if not oauth_url else oauth_url.strip("/").replace("https://", "")
+        client_url = f"https://{salesforce_url}/services/oauth2/token"
 
+        self.logger.info(f"SalesforceAPI: Getting API token from {client_url}... ")
         response = requests.request(
             method="POST",
-            url="https://login.salesforce.com/services/oauth2/token",
+            url=client_url,
             data={
                 "grant_type": "password",
                 "client_id": client_id,
@@ -187,22 +200,25 @@ class SalesforceAPI:
             },
         )
 
-        if 400 <= response.status_code < 500:
-            if "invalid_grant" in response.content.decode():
-                self.logger.info("SalesforceAPI: invalid_grant error received.")
-                if self.retry_count <= self.RETRY_LIMIT:
-                    self.logger.info("SalesforceAPI: Retrying...")
-                    time.sleep(2**self.retry_count)
+        if 400 <= response.status_code <= 504:
+            decoded_response = response.content.decode()
+            if "invalid_grant" in decoded_response:
+                self.logger.info("SalesforceAPI: invalid_grant error received. Not retrying...")
+                preset_error = PluginException.Preset.INVALID_CREDENTIALS
+            else:
+                if self.retry_count < self.RETRY_LIMIT:
+                    retry_sleep = 5
+                    self.logger.info(f"SalesforceAPI: Retrying in {retry_sleep} seconds...")
+                    time.sleep(retry_sleep)
                     self.retry_count += 1
-                    return self._get_token(client_id, client_secret, username, password, security_token)
+                    return self._get_token(client_id, client_secret, username, password, security_token, oauth_url)
                 else:
-                    self.logger.error(
-                        "SalesforceAPI: Max retry attempts reached following invalid_grant error. Exiting."
-                    )
+                    self.logger.error(f"SalesforceAPI: Max retry attempts reached ({self.retry_count}). Exiting...")
+                    preset_error = PluginException.Preset.UNKNOWN
 
-            self.logger.error(f"SalesforceAPI: {response.content.decode()}")
+            self.logger.error(f"SalesforceAPI: {decoded_response}")
             raise ApiException(
-                preset=PluginException.Preset.INVALID_CREDENTIALS,
+                preset=preset_error,
                 status_code=response.status_code,
                 data=response.text,
             )
@@ -228,7 +244,7 @@ class SalesforceAPI:
     @refresh_token(1)
     def _make_request(self, method: str, url: str, params: dict = {}, json: dict = {}):  # noqa: C901
         access_token, instance_url = self._get_token(
-            self._client_id, self._client_secret, self._username, self._password, self._security_token
+            self._client_id, self._client_secret, self._username, self._password, self._security_token, self._oauth_url
         )
         instance_url = self._get_version(instance_url)
         try:
@@ -296,3 +312,10 @@ class SalesforceAPI:
             return response.json()
         except JSONDecodeError as error:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
+
+    def unset_token(self) -> None:
+        """
+        Reset API token now that all API calls have been made during the task execution so that on the next trigger
+        we will reach out to Salesforce and get a new API token.
+        """
+        self.token = None

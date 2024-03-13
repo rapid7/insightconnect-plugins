@@ -4,7 +4,7 @@ products: [insightconnect]
 name: salesforce
 title: Salesforce
 description: The Salesforce plugin allows you to search, update, and manage salesforce records
-version: 2.1.6
+version: 2.1.7
 connection_version: 2
 vendor: rapid7
 support: community
@@ -145,6 +145,13 @@ types:
       required: false
       example: Chrome 114
 connection:
+  instanceUrl:
+    title: Salesforce URL
+    description: Salesforce URL that is used to retrieve OAuth token
+    type: string
+    required: false
+    example: https://login.salesforce.com
+    default: https://login.salesforce.com
   clientId:
     title: Client ID
     description: Consumer Key of the connected app
