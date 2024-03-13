@@ -1,4 +1,6 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import AddAttributeInput, AddAttributeOutput
 
 # Custom imports below
@@ -26,17 +28,11 @@ class AddAttribute(insightconnect_plugin_runtime.Action):
         try:
             attribute = item[0]
         except IndexError:
-            self.logger.error("Add attribute return invalid, " + item)
-            raise
+            self.logger.error("Add attribute return invalid")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
         try:
             attribute = attribute["Attribute"]
         except KeyError:
-            self.logger.error("Improperly formatted attribute, " + attribute)
-            raise
+            self.logger.error("Improperly formatted attribute")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
         return {"attribute": attribute}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        self.logger.info(output)
-        return {"status": True}

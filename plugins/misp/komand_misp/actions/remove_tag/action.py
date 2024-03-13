@@ -1,4 +1,6 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import RemoveTagInput, RemoveTagOutput
 
 # Custom imports below
@@ -23,12 +25,6 @@ class RemoveTag(insightconnect_plugin_runtime.Action):
             else:
                 self.logger.info(item)
                 return {"status": False}
-        except:
-            self.logger.error(item)
-            raise
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        self.logger.info(output)
-        return {"status": True}
+        except Exception as error:
+            self.logger.error(error)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)

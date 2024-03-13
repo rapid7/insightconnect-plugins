@@ -40,6 +40,6 @@ class AddUrls(insightconnect_plugin_runtime.Action):
                     proposal=proposal,
                 )
             return {"status": True}
-        except Exception as e:
-            self.logger.error("An error has occurred adding one or more URLs. Error: %s", e)
+        except Exception as error:
+            self.logger.error(f"An error has occurred adding one or more URLs. Error: {error}")
             return {"status": False}

@@ -34,8 +34,8 @@ class AddEmailSender(insightconnect_plugin_runtime.Action):
                 distribution=dist[params.get("distribution")],
                 proposal=proposal,
             )
-        except:  # pylint: disable=bare-except
-            self.logger.error(event)
+        except Exception as error:
+            self.logger.error(error)
             return {"status": False}
 
         return {"status": True}
