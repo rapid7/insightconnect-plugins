@@ -56,7 +56,7 @@ class DeleteSshOutput(insightconnect_plugin_runtime.Output):
     "success": {
       "type": "boolean",
       "title": "Success",
-      "description": "Indicicate if action was successful",
+      "description": "Indicate if action was successful",
       "order": 1
     }
   },
