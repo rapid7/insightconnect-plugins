@@ -1,11 +1,11 @@
 {
-	"spec": "2d49dfca1f2daf63b303cb8be4536d90",
+	"spec": "17eabc0fb076e7f9ca090b7916033c66",
 	"manifest": "da4edf1da0b7c644db52ea601eb49cf9",
 	"setup": "b5d33b93e0230f5398117b88c08b35a2",
 	"schemas": [
 		{
 			"identifier": "block_user/schema.py",
-			"hash": "e2b6cb2d06236909730460b2f2d6c06e"
+			"hash": "4f7fe1b1a09958635f04ecc5e85b56ec"
 		},
 		{
 			"identifier": "create_issue/schema.py",
@@ -13,11 +13,11 @@
 		},
 		{
 			"identifier": "delete_ssh/schema.py",
-			"hash": "dc316739082a2c1321f77175d578e6c9"
+			"hash": "26e651b6f0fc1fb148fd42790e89e093"
 		},
 		{
 			"identifier": "delete_user/schema.py",
-			"hash": "ef3cbf7927a94448fe71c797cce425a9"
+			"hash": "7a919c1a92f1cab6ba04ee4cbdbf02da"
 		},
 		{
 			"identifier": "get_user/schema.py",
