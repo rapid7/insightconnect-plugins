@@ -54,6 +54,12 @@ class TestConnection(TestCase):
                 PluginException.causes[PluginException.Preset.UNKNOWN],
                 PluginException.assistances[PluginException.Preset.UNKNOWN],
             ],
+            [
+                "invalid_client_id",
+                Util.read_file_to_dict("inputs/connection_invalid_client_id.json.inp"),
+                "Salesforce error: 'client identifier invalid'",
+                PluginException.assistances[PluginException.Preset.UNKNOWN],
+            ],
         ]
     )
     def test_connection_raise_exception(

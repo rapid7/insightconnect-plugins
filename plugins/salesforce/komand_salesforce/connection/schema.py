@@ -6,7 +6,7 @@ import json
 class Input:
     CLIENTID = "clientId"
     CLIENTSECRET = "clientSecret"
-    INSTANCEURL = "instanceUrl"
+    LOGINURL = "loginURL"
     SALESFORCEACCOUNTUSERNAMEANDPASSWORD = "salesforceAccountUsernameAndPassword"
     SECURITYTOKEN = "securityToken"
 
@@ -29,10 +29,10 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "Consumer Secret of the connected app",
       "order": 3
     },
-    "instanceUrl": {
+    "loginURL": {
       "type": "string",
-      "title": "Salesforce URL",
-      "description": "Salesforce URL that is used to retrieve OAuth token",
+      "title": "Login URL",
+      "description": "Salesforce login URL",
       "default": "https://login.salesforce.com",
       "order": 1
     },

@@ -69,6 +69,8 @@ class Util:
                 return MockResponse(400, "invalid_grant.json.resp")  # returns 400 when failing to get a token.
             if data.get("client_id") == "valid-id-bad-endpoint":
                 return MockResponse(503)
+            if data.get("client_id") == "invalid-id-for-connection":
+                return MockResponse(400, "invalid_client_id.json.resp")
             return MockResponse(200, "get_token.json.resp")
         if url == "https://example.com/services/data/":
             return MockResponse(200, "get_version.json.resp")
