@@ -1,42 +1,18 @@
-import komand
-from .schema import ViewMachineInput, ViewMachineOutput
-
-# Custom imports below
-import json
-import requests
+import insightconnect_plugin_runtime
+from .schema import ViewMachineInput, ViewMachineOutput, Input, Component
 
 
-class ViewMachine(komand.Action):
+class ViewMachine(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="view_machine",
-            description="Returns details on the analysis machine associated with the given name",
+            description=Component.DESCRIPTION,
             input=ViewMachineInput(),
             output=ViewMachineOutput(),
         )
 
     def run(self, params={}):
-        server = self.connection.server
-        machine_name = params.get("machine_name", "")
-        endpoint = server + "/machines/view/" + machine_name
-
-        try:
-            r = requests.get(endpoint)
-            r.raise_for_status()
-            response = r.json()
-            """
-            result = {"machine": {}}
-            keys = response['machine'].keys()
-            for key in keys:
-                if response['machine'][key] is not None:
-                    result['machine'][key] = response['machine'][key]
-            """
-            return response
-
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
-
-    def test(self):
-        out = self.connection.test()
-        out["machine"] = {"message": "Test passed"}
-        return out
+        machine_name = params.get(Input.MACHINE_NAME, "")
+        endpoint = f"machines/view/{machine_name}"
+        response = self.connection.api.send(endpoint)
+        return response

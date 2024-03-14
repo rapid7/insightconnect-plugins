@@ -1,37 +1,21 @@
 import insightconnect_plugin_runtime
-from .schema import GetPcapInput, GetPcapOutput, Input, Output
-
+from .schema import GetPcapInput, GetPcapOutput, Input, Output, Component
 # Custom imports below
-import requests
-import base64
+from ...util.util import Util
 
 
 class GetPcap(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_pcap",
-            description="Returns the content of the PCAP associated with the given task",
+            description=Component.DESCRIPTION,
             input=GetPcapInput(),
             output=GetPcapOutput(),
         )
 
     def run(self, params={}):
-        server = self.connection.server
         task_id = params.get(Input.TASK_ID, "")
-        endpoint = f"{server}/pcap/get/{task_id}"
-
-        try:
-            response = requests.get(endpoint)
-            response.raise_for_status()
-            ctype = response.headers.get("Content-Type", "")
-            if (
-                ctype.startswith("application/x-tar")
-                or ctype.startswith("application/octet-stream")
-                or ctype.startswith("application/json")
-                or ctype.startswith("application/vnd.tcpdump.pcap")
-            ):
-                content = response.content
-                return {Output.CONTENTS: base64.b64encode(content).decode("UTF-8")}
-
-        except Exception as exception:
-            self.logger.error(f"Error: {str(exception)}")
+        endpoint = f"pcap/get/{task_id}"
+        response = self.connection.api.send(endpoint, _json=False)
+        content = response.content
+        return {Output.CONTENTS: Util.prepare_decoded_value(content)}
