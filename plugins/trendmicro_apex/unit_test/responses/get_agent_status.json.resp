@@ -5,12 +5,12 @@
         {
           "content": {
             "agentEntity": [
-             {
+              {
                 "agentGuid": "123456789-1234-1234-1234-123456789",
                 "ip": "198.51.100.100",
-                "isEnable": True,
-                "isImportant": False,
-                "isOnline": False,
+                "isEnable": true,
+                "isImportant": false,
+                "isOnline": false,
                 "isolateStatus": 1,
                 "machineGuid": "123456789-1234-1234-1234-123456789",
                 "machineName": "TREND-MICRO-TES",
@@ -19,8 +19,8 @@
                 "productType": 15,
                 "serverGuid": "123456789-1234-1234-1234-123456789",
                 "userGuid": "123456789-1234-1234-1234-123456789",
-                "userName": "TREND-MICRO-TES\\vagrant",
-            }
+                "userName": "TREND-MICRO-TES\\vagrant"
+              }
             ],
             "agentQueryStatus": {
               "hasFullAgents": true,

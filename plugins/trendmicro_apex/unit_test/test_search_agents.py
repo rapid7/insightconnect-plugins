@@ -34,7 +34,7 @@ class TestSearchAgents(TestCase):
                     "entity_id": "test",
                     "folder_path": "Workgroup",
                     "host_name": "TREND-MICRO-TES",
-                    "ip_address_list": "192,168.0.1",
+                    "ip_address_list": "192.168.0.1",
                     "isolation_status": "normal",
                     "mac_address_list": "08-00-27-96-86-8E",
                     "managing_server_id": "test",
