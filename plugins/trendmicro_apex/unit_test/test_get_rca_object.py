@@ -39,7 +39,7 @@ class TestGetRcaObject(TestCase):
                                 "agentServerMeta": [
                                     {
                                         "agentGuid": "123456789-1234-1234-1234-123456789",
-                                        "ip": "198.51.100.100",
+                                        "ip": "192.168.0.1",
                                         "isCriteriaExceedMaxMetaCount": [False],
                                         "isEnable": True,
                                         "isImportant": False,
@@ -74,7 +74,7 @@ class TestGetRcaObject(TestCase):
                         }
                     ],
                     "hasMore": False,
-                    "lastContentId": '[\r\n  {\r\n    "serverGuid": "C22E1795-BF95-45BB-BC82-486B0F5161BE",\r\n    "lastContentId": 48,\r\n    "hasMore": false,\r\n    "totalProgress": 0,\r\n    "currentProgress": 0\r\n  }\r\n]',
+                    "lastContentId": '[\r\n  {\r\n    "serverGuid": "1234",\r\n    "lastContentId": 48,\r\n    "hasMore": false,\r\n    "totalProgress": 0,\r\n    "currentProgress": 0\r\n  }\r\n]',
                     "serverGuid": "test",
                     "serverName": "Apex One as a Service",
                     "taskId": "123456789-1234-1234-1234-123456789",

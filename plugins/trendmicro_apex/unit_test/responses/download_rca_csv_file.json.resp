@@ -13,9 +13,9 @@
         }
       ],
       "hasMore": false,
-      "serverGuid": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
+      "serverGuid": "test",
       "serverName": "Apex One as a Service",
-      "taskId": "21afcb09-05c9-4dfe-9d1e-5751e99e639c"
+      "taskId": "test"
     },
     "Message": "OK",
     "TimeZone": -4
