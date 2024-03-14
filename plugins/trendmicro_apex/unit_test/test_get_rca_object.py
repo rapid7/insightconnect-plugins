@@ -75,7 +75,7 @@ class TestGetRcaObject(TestCase):
                     ],
                     "hasMore": False,
                     "lastContentId": '[\r\n  {\r\n    "serverGuid": "C22E1795-BF95-45BB-BC82-486B0F5161BE",\r\n    "lastContentId": 48,\r\n    "hasMore": false,\r\n    "totalProgress": 0,\r\n    "currentProgress": 0\r\n  }\r\n]',
-                    "serverGuid": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
+                    "serverGuid": "test",
                     "serverName": "Apex One as a Service",
                     "taskId": "123456789-1234-1234-1234-123456789",
                 },

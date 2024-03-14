@@ -29,7 +29,7 @@ class TestUploadOpeniocFile(TestCase):
             Output.SYSTEMCTRL: {"TmcmSoDist_Role": "none"},
             Output.UPLOADED_INFO_LIST: [
                 {
-                    "FileHashID": "cd9b739b7c6e488080412e9a831e9260a468564f",
+                    "FileHashID": "test",
                     "FileName": "file.txt",
                     "UploadedStatus": 1,
                 }
