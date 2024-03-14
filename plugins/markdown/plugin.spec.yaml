@@ -87,7 +87,7 @@ actions:
         description: HTML data
         type: string
         required: false
-        example: "\u003ch1 id=\"rapid7-insightconnect\"\u003eRapid7 InsightConnect\u003c/h1\u003e\n"
+        example: "\u003ch1 id=\"rapid7-insightconnect\"\u003eRapid7 InsightConnect\u003c/h1\u003e"
   markdown_to_pdf:
     title: Markdown to PDF
     description: Convert Markdown to PDF
@@ -116,7 +116,7 @@ actions:
         description: PDF data as string
         type: string
         required: false
-        example: "%PDF-1.4\n%\u00e2\u00e3\n1 0 obj\n<<\n/Title ()\n/Creator()"
+        example: "PDF-1.4\\u00e2\u00e31 0 obj<</Title Creator"
   markdown_to_txt:
     title: Markdown to TXT
     description: Convert Markdown to TXT
@@ -145,4 +145,4 @@ actions:
         description: TXT data as string
         type: string
         required: false
-        example: "Rapid7 InsightConnect\n"
+        example: "Rapid7 InsightConnect"

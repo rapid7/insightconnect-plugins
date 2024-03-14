@@ -93,7 +93,7 @@ Example output:
 ```
 {
   "html": "PGgxIGlkPSJyYXBpZDctaW5zaWdodGNvbm5lY3QiPlJhcGlkNyBJbnNpZ2h0Q29ubmVjdDwvaDE+Cg==",
-  "html_string": "<h1 id=\"rapid7-insightconnect\">Rapid7 InsightConnect</h1>\n"
+  "html_string": "<h1 id=\"rapid7-insightconnect\">Rapid7 InsightConnect</h1>"
 }
 ```
 
@@ -122,14 +122,14 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |pdf|bytes|False|PDF data as bytes|JVBERi0xLjQKJcOiw6MKMSAwIG9iago8PAovVGl0bGUgKCkKL0NyZWF0b3IgKO+/v|
-|pdf_string|string|False|PDF data as string|%PDF-1.4%âã-1-0-obj<</Title ()/Creator()|
+|pdf_string|string|False|PDF data as string|PDF-1.4\u00e2ã1 0 obj<</Title Creator|
 
 Example output:
 
 ```
 {
   "pdf": "JVBERi0xLjQKJcOiw6MKMSAwIG9iago8PAovVGl0bGUgKCkKL0NyZWF0b3IgKO+/v",
-  "pdf_string": "%PDF-1.4\n%\u00e2\u00e3\n1 0 obj\n<<\n/Title ()\n/Creator()"
+  "pdf_string": "PDF-1.4\\u00e2\u00e31 0 obj<</Title Creator"
 }
 ```
 
@@ -165,7 +165,7 @@ Example output:
 ```
 {
   "txt": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
-  "txt_string": "Rapid7 InsightConnect\n"
+  "txt_string": "Rapid7 InsightConnect"
 }
 ```
 
