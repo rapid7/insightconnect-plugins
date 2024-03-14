@@ -1,8 +1,9 @@
 import time
 from functools import wraps
 from json.decoder import JSONDecodeError
+from json import loads
 from logging import Logger
-from typing import Callable, Any
+from typing import Callable, Any, Tuple
 
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -204,21 +205,31 @@ class SalesforceAPI:
             decoded_response = response.content.decode()
             if "invalid_grant" in decoded_response:
                 self.logger.info("SalesforceAPI: invalid_grant error received. Not retrying...")
-                preset_error = PluginException.Preset.INVALID_CREDENTIALS
+                cause_error, assistance, preset_error = "", "", PluginException.Preset.INVALID_CREDENTIALS
             else:
                 if self.retry_count < self.RETRY_LIMIT:
                     retry_sleep = 5
-                    self.logger.info(f"SalesforceAPI: Retrying in {retry_sleep} seconds...")
+                    self.logger.info(
+                        f"SalesforceAPI: Received {response.status_code} status code. "
+                        f"Retrying in {retry_sleep} seconds..."
+                    )
                     time.sleep(retry_sleep)
                     self.retry_count += 1
                     return self._get_token(client_id, client_secret, username, password, security_token, oauth_url)
                 else:
                     self.logger.error(f"SalesforceAPI: Max retry attempts reached ({self.retry_count}). Exiting...")
-                    preset_error = PluginException.Preset.UNKNOWN
+                    cause_error, assistance = self.get_error(decoded_response)
+                    preset_error = "" if cause_error else PluginException.Preset.UNKNOWN
+
+            # reset counter back to 1 so the next task execution can try again - some errors could've persisted for
+            # the retry logic and not occur on the next run.
+            self.retry_count = 1
 
             self.logger.error(f"SalesforceAPI: {decoded_response}")
             raise ApiException(
                 preset=preset_error,
+                cause=cause_error,
+                assistance=assistance,
                 status_code=response.status_code,
                 data=response.text,
             )
@@ -229,6 +240,7 @@ class SalesforceAPI:
         self.logger.info("SalesforceAPI: API token received")
         self.token = access_token
         self.instance_url = instance_url
+        self.retry_count = 1  # reset on success also
         return access_token, instance_url
 
     @staticmethod
@@ -319,3 +331,20 @@ class SalesforceAPI:
         we will reach out to Salesforce and get a new API token.
         """
         self.token = None
+
+    @staticmethod
+    def get_error(response: str) -> Tuple[str, str]:
+        """
+        Small helper method that takes Salesforce content response and attempts to parse an error_description
+        to bubble this to the UI to the customer. If we can't get an error description then default to use
+        `Preset.Unknown`
+        """
+        try:
+            json_response = loads(response)
+            error_desc = json_response.get("error_description")
+            if error_desc:
+                return f"Salesforce error: '{error_desc}'", PluginException.assistances[PluginException.Preset.UNKNOWN]
+        except JSONDecodeError:
+            pass
+
+        return "", ""
