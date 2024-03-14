@@ -145,9 +145,9 @@ types:
       required: false
       example: Chrome 114
 connection:
-  instanceUrl:
-    title: Salesforce URL
-    description: Salesforce URL that is used to retrieve OAuth token
+  loginURL:
+    title: Login URL
+    description: Salesforce login URL
     type: string
     required: false
     example: https://login.salesforce.com
