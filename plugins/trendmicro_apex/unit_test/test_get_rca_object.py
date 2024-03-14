@@ -38,20 +38,20 @@ class TestGetRcaObject(TestCase):
                             "content": {
                                 "agentServerMeta": [
                                     {
-                                        "agentGuid": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
+                                        "agentGuid": "123456789-1234-1234-1234-123456789",
                                         "ip": "198.51.100.100",
                                         "isCriteriaExceedMaxMetaCount": [False],
                                         "isEnable": True,
                                         "isImportant": False,
                                         "isOnline": True,
                                         "isolateStatus": 4,
-                                        "machineGuid": "3E4EC062-A620-4DE6-9DA9-395DD98EC1D8",
+                                        "machineGuid": "123456789-1234-1234-1234-123456789",
                                         "machineName": "TREND-MICRO-TES",
                                         "machineOS": "Windows 10",
                                         "machineType": "Desktop",
                                         "minFirstSeen": 1589061887,
                                         "productType": 15,
-                                        "serverGuid": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
+                                        "serverGuid": "123456789-1234-1234-1234-123456789",
                                         "serverMeta": [
                                             {
                                                 "criteriaNo": 0,
@@ -64,8 +64,8 @@ class TestGetRcaObject(TestCase):
                                         ],
                                         "serverMode": 1,
                                         "serverName": "Apex One as a Service",
-                                        "userGuid": "6AC1B3DCF-CE52-8279-EE9E-E101FD504E3",
-                                        "userName": "TREND-MICRO-TES\\vagrant",
+                                        "userGuid": "123456789-1234-1234-1234-123456789",
+                                        "userName": "TREND-MICRO-TES\\temp",
                                     }
                                 ]
                             },
@@ -77,7 +77,7 @@ class TestGetRcaObject(TestCase):
                     "lastContentId": '[\r\n  {\r\n    "serverGuid": "C22E1795-BF95-45BB-BC82-486B0F5161BE",\r\n    "lastContentId": 48,\r\n    "hasMore": false,\r\n    "totalProgress": 0,\r\n    "currentProgress": 0\r\n  }\r\n]',
                     "serverGuid": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
                     "serverName": "Apex One as a Service",
-                    "taskId": "B44BE9AE-80A9-4048-A4CE-064D90CB6D4C",
+                    "taskId": "123456789-1234-1234-1234-123456789",
                 },
                 "Message": "OK",
                 "TimeZone": -4,

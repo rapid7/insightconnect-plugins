@@ -25,19 +25,19 @@ class TestGetAgentStatus(TestCase):
 
         expected = {
             Output.AGENTENTITY: {
-                "agentGuid": "626dcf14-b0c3-4b00-bc76-71cf5713ab2e",
+                "agentGuid": "123456789-1234-1234-1234-123456789",
                 "ip": "198.51.100.100",
                 "isEnable": True,
                 "isImportant": False,
                 "isOnline": False,
                 "isolateStatus": 1,
-                "machineGuid": "3E4EC062-A620-4DE6-9DA9-395DD98EC1D8",
+                "machineGuid": "123456789-1234-1234-1234-123456789",
                 "machineName": "TREND-MICRO-TES",
                 "machineOS": "Windows 10",
                 "machineType": "Desktop",
                 "productType": 15,
-                "serverGuid": "C22E1795-BF95-45BB-BC82-486B0F5161BE",
-                "userGuid": "6AC1B3DCF-CE52-8279-EE9E-E101FD504E3",
+                "serverGuid": "123456789-1234-1234-1234-123456789",
+                "userGuid": "123456789-1234-1234-1234-123456789",
                 "userName": "TREND-MICRO-TES\\vagrant",
             },
             Output.AGENTQUERYSTATUS: {"hasFullAgents": True, "hasFullRbac": True},

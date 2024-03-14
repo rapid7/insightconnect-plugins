@@ -25,6 +25,7 @@ class Blacklist(insightconnect_plugin_runtime.Action):
         self.MAX_URL_LENGTH = 2046
 
     def run(self, params={}):
+        response = None
         payload = self.generate_payload(params)
         blacklist_state = params.get(Input.BLACKLIST_STATE, True)
         if blacklist_state is False:
@@ -35,9 +36,18 @@ class Blacklist(insightconnect_plugin_runtime.Action):
         else:
             method = "PUT"
 
-        response = self.connection.api.execute(method, self.api_path, payload)
-
-        return {Output.SUCCESS: response is not None}
+        try:
+            response = self.connection.api.execute(method, self.api_path, payload)
+            response.raise_for_status()
+            return {Output.SUCCESS: response is not None}
+        except RequestException as rex:
+            if response:
+                self.logger.error(f"Received status code: {response.status_code}")
+                self.logger.error(f"Response was: {response.text}")
+            raise PluginException(
+                assistance="Please verify the connection details and input data.",
+                cause=f"Error processing the Apex request: {rex}",
+            )
 
     @staticmethod
     def get_data_type(indicator):

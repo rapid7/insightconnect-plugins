@@ -3,9 +3,6 @@ from .schema import AddFileToUdsoListInput, AddFileToUdsoListOutput, Input, Outp
 
 # Custom imports below
 import json
-import requests
-from insightconnect_plugin_runtime.exceptions import PluginException
-from requests.exceptions import RequestException
 
 
 class AddFileToUdsoList(insightconnect_plugin_runtime.Action):
