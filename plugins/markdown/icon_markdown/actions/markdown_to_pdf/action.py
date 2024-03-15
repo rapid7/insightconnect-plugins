@@ -3,7 +3,7 @@ import pdfkit
 import tempfile
 import shutil
 from icon_markdown.util import utils
-from .schema import MarkdownToPdfInput, MarkdownToPdfOutput, Output, Input
+from .schema import MarkdownToPdfInput, MarkdownToPdfOutput, Output, Input, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -22,7 +22,7 @@ class MarkdownToPdf(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="markdown_to_pdf",
-            description="Convert Markdown to PDF",
+            description=Component.DESCRIPTION,
             input=MarkdownToPdfInput(),
             output=MarkdownToPdfOutput(),
         )
