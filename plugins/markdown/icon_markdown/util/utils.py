@@ -32,7 +32,7 @@ def convert(content, from_format, to_format, use_file=False):
     else:
         filename = None
     output = pypandoc.convert_text(
-        content, to_format, format=from_format, outputfile=filename, extra_args=["--markdown-headings=atx"]
+        content, to_format, format=from_format, outputfile=filename, extra_args=["--atx-headers"]
     )
     if use_file:
         content = read_file(filename)
