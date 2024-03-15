@@ -11,7 +11,8 @@ from jsonschema import validate
 
 
 class TestHtmlToMarkdown(TestCase):
-    expected_result = {Output.MARKDOWN_STRING: "# Rapid7\n", Output.MARKDOWN: "IyBSYXBpZDcK"}
+    expected_result_header = {Output.MARKDOWN_STRING: "Rapid7\n======\n", Output.MARKDOWN: "UmFwaWQ3Cj09PT09PQo="}
+    expected_result_bold = {Output.MARKDOWN_STRING: "", Output.MARKDOWN: ""}
     expected_error = "Input error"
 
     def setUp(self) -> None:
@@ -19,8 +20,8 @@ class TestHtmlToMarkdown(TestCase):
 
     @parameterized.expand(
         [
-            ({Input.HTML: "PGgxPlJhcGlkNzwvaDE+"}, expected_result),
-            ({Input.HTML_STRING: "<h1>Rapid7</h1>"}, expected_result),
+            ({Input.HTML: "PGgxPlJhcGlkNzwvaDE+"}, expected_result_header),
+            ({Input.HTML_STRING: "<h1>Rapid7</h1>"}, expected_result_header),
         ]
     )
     def test_html_to_markdown_valid(self, input_params, expected):
