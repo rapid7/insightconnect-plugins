@@ -122,14 +122,14 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |pdf|bytes|False|PDF data as bytes|JVBERi0xLjQKJcOiw6MKMSAwIG9iago8PAovVGl0bGUgKCkKL0NyZWF0b3IgKO+/v|
-|pdf_string|string|False|PDF data as string|PDF-1.4\u00e2ã1 0 obj<</Title Creator|
+|pdf_string|string|False|PDF data as string|PDF-1.4 0 obj<</Title Creator|
 
 Example output:
 
 ```
 {
   "pdf": "JVBERi0xLjQKJcOiw6MKMSAwIG9iago8PAovVGl0bGUgKCkKL0NyZWF0b3IgKO+/v",
-  "pdf_string": "PDF-1.4\\u00e2\u00e31 0 obj<</Title Creator"
+  "pdf_string": "PDF-1.4 0 obj<</Title Creator"
 }
 ```
 

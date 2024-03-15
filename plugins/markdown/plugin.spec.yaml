@@ -116,7 +116,7 @@ actions:
         description: PDF data as string
         type: string
         required: false
-        example: "PDF-1.4\\u00e2\u00e31 0 obj<</Title Creator"
+        example: "PDF-1.4\ 0 obj<</Title Creator"
   markdown_to_txt:
     title: Markdown to TXT
     description: Convert Markdown to TXT
