@@ -11,7 +11,7 @@ from jsonschema import validate
 
 
 class TestHtmlToMarkdown(TestCase):
-    expected_result_header = {Output.MARKDOWN_STRING: "Rapid7\n======\n", Output.MARKDOWN: "UmFwaWQ3Cj09PT09PQo="}
+    expected_result_header = {Output.MARKDOWN_STRING: "# Rapid7\n", Output.MARKDOWN: "IyBSYXBpZDcK"}
     expected_result_bold = {Output.MARKDOWN_STRING: "", Output.MARKDOWN: ""}
     expected_error = "Input error"
 
