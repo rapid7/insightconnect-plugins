@@ -187,7 +187,7 @@ Example output:
 
 # Version History
 
-* 3.1.3 - Update PyPandoc dependency
+* 3.1.3 - Update PyPandoc dependency | Update SDK
 * 3.1.2 - Added additional error messaging | Refactored code | Fixed bug in Markdown to TXT action which resulted in an incorrect output
 * 3.1.1 - Use input and output constants inm Markdown to PDF action | Change docker image from `komand/python-2-plugin:2` to `insightconnect-python-3-38-plugin:4` | Changed `Exception` to `PluginException` in Markdown to PDF action | Add `USER nobody` in Dockerfile | Update `pypandoc` and `beautifulsoup4` version in requirements | Add example inputs and outputs
 * 3.1.0 - New action: Markdown to TXT

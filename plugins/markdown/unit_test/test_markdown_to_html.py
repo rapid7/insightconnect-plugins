@@ -5,13 +5,15 @@ sys.path.append(os.path.abspath("../"))
 from parameterized import parameterized
 from unittest import TestCase
 from icon_markdown.actions.markdown_to_html import MarkdownToHtml
+from icon_markdown.actions.markdown_to_html.schema import Input, Output
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 
 class TestMarkdownToHtml(TestCase):
     expected_result = {
-        "html_string": '<h1 id="rapid7-insightconnect">Rapid7 InsightConnect</h1>\n',
-        "html": "PGgxIGlkPSJyYXBpZDctaW5zaWdodGNvbm5lY3QiPlJhcGlkNyBJbnNpZ2h0Q29ubmVjdDwvaDE+Cg==",
+        Output.HTML_STRING: '<h1 id="rapid7-insightconnect">Rapid7 InsightConnect</h1>\n',
+        Output.HTML: "PGgxIGlkPSJyYXBpZDctaW5zaWdodGNvbm5lY3QiPlJhcGlkNyBJbnNpZ2h0Q29ubmVjdDwvaDE+Cg==",
     }
     expected_error = "Input error"
 
@@ -20,21 +22,22 @@ class TestMarkdownToHtml(TestCase):
 
     @parameterized.expand(
         [
-            ({"markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q="}, expected_result),
-            ({"markdown_string": "# Rapid7 InsightConnect"}, expected_result),
+            ({Input.MARKDOWN: "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q="}, expected_result),
+            ({Input.MARKDOWN_STRING: "# Rapid7 InsightConnect"}, expected_result),
         ]
     )
     def test_markdown_to_html_valid_markdown(self, input_params, expected):
         results = self.action.run(input_params)
+        validate(results, self.action.output.schema)
         self.assertEqual(results, expected)
 
     @parameterized.expand(
         [
             (
-                {"markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=", "markdown_string": "# Rapid7 InsightConnect"},
+                {Input.MARKDOWN: "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=", Input.MARKDOWN_STRING: "# Rapid7 InsightConnect"},
                 expected_error,
             ),
-            ({"markdown": "", "markdown_string": ""}, expected_error),
+            ({Input.MARKDOWN: "", Input.MARKDOWN_STRING: ""}, expected_error),
         ]
     )
     def test_markdown_to_html_invalid(self, input_params, exception):
