@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from komand_markdown.util import utils
+from icon_markdown.util import utils
 from .schema import MarkdownToHtmlInput, MarkdownToHtmlOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
 
@@ -8,7 +8,7 @@ class MarkdownToHtml(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="markdown_to_html",
-            description="Convert Markdown to HTML",
+            description=Component.DESCRIPTION,
             input=MarkdownToHtmlInput(),
             output=MarkdownToHtmlOutput(),
         )

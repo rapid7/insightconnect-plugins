@@ -4,28 +4,35 @@ import os
 sys.path.append(os.path.abspath("../"))
 from parameterized import parameterized
 from unittest import TestCase
-from komand_markdown.actions.html_to_markdown import HtmlToMarkdown
+from icon_markdown.actions.html_to_markdown import HtmlToMarkdown
+from icon_markdown.actions.html_to_markdown.schema import Output, Input
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 
 class TestHtmlToMarkdown(TestCase):
-    expected_result = {"markdown_string": "# Rapid7\n", "markdown": "IyBSYXBpZDcK"}
+    expected_result_header = {Output.MARKDOWN_STRING: "# Rapid7\n", Output.MARKDOWN: "IyBSYXBpZDcK"}
+    expected_result_bold = {Output.MARKDOWN_STRING: "", Output.MARKDOWN: ""}
     expected_error = "Input error"
 
     def setUp(self) -> None:
         self.action = HtmlToMarkdown()
 
     @parameterized.expand(
-        [({"html": "PGgxPlJhcGlkNzwvaDE+"}, expected_result), ({"html_string": "<h1>Rapid7</h1>"}, expected_result)]
+        [
+            ({Input.HTML: "PGgxPlJhcGlkNzwvaDE+"}, expected_result_header),
+            ({Input.HTML_STRING: "<h1>Rapid7</h1>"}, expected_result_header),
+        ]
     )
     def test_html_to_markdown_valid(self, input_params, expected):
         results = self.action.run(input_params)
+        validate(results, self.action.output.schema)
         self.assertEqual(results, expected)
 
     @parameterized.expand(
         [
-            ({"html": "PGgxPlJhcGlkNzwvaDE+", "html_string": "<h1>Rapid7</h1>"}, expected_error),
-            ({"html": "", "html_string": ""}, expected_error),
+            ({Input.HTML: "PGgxPlJhcGlkNzwvaDE+", Input.HTML_STRING: "<h1>Rapid7</h1>"}, expected_error),
+            ({Input.HTML: "", Input.HTML_STRING: ""}, expected_error),
         ]
     )
     def test_html_to_markdown_invalid(self, input_params, exception):

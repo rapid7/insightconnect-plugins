@@ -1,26 +1,25 @@
 # Description
 
-[Markdown](https://en.wikipedia.org/wiki/Markdown) is a lightweight markup language with plain text formatting syntax.
-This plugin utilizes [pandoc](https://pandoc.org/) via [pypandoc](https://pypi.python.org/pypi/pypandoc/) to manipulate Markdown content.
+[Markdown](https://en.wikipedia.org/wiki/Markdown) is a lightweight markup language with plain text formatting syntax. This plugin utilizes [pandoc](https://pandoc.org/) via [pypandoc](https://pypi.python.org/pypi/pypandoc/) to manipulate Markdown content
 
 # Key Features
 
-* Convert HTML to Markdown for simpler editing
+* Convert HTML to Markdown for simpler editing  
 * Convert Markdown to HTML or PDF for formatted beautification
 
 # Requirements
 
-_This plugin does not contain any requirements._
+*This plugin does not contain any requirements.*
 
 # Supported Product Versions
 
-* 2022-10-03
+* 2024-03-13
 
 # Documentation
 
 ## Setup
 
-_This plugin does not contain a connection._
+*This plugin does not contain a connection.*
 
 ## Technical Details
 
@@ -28,12 +27,12 @@ _This plugin does not contain a connection._
 
 #### HTML to Markdown
 
-This action is used to convert HTML to Markdown.
+This action is used to convert HTML to Markdown
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |html|bytes|None|False|HTML data as bytes|None|PGgxPlJhcGlkNzwvaDE+|
 |html_string|string|None|False|HTML data as string|None|<h1>Rapid7</h1>|
 
@@ -48,64 +47,28 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|markdown|bytes|False|Markdown data as bytes|
-|markdown_string|bytes|False|Markdown data as string|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|markdown|bytes|False|Markdown data as bytes|UmFwaWQ3Cj09PT09PQo=|
+|markdown_string|bytes|False|Markdown data as string|Rapid7\n======\n|
 
 Example output:
 
 ```
 {
-  "markdown_string": "Rapid7\n======\n",
-  "markdown": "UmFwaWQ3Cj09PT09PQo="
-}
-```
-
-#### Markdown to PDF
-
-This action is used to convert Markdown to PDF.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|
-|markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|
-
-Example input:
-
-```
-{
-  "markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=",
-  "markdown_string": "# Rapid7 InsightConnect"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|pdf|bytes|False|PDF data as bytes|
-|pdf_string|string|False|PDF data as string|
-
-Example output:
-
-```
-{
-  "pdf_string": "%PDF-1.4\n%\u00e2\u00e3\n1 0 obj\n<<\n/Title ()\n/Creator()",
-  "pdf": "JVBERi0xLjQKJcOiw6MKMSAwIG9iago8PAovVGl0bGUgKCkKL0NyZWF0b3IgKO+/v"
+  "markdown": "UmFwaWQ3Cj09PT09PQo=",
+  "markdown_string": "Rapid7\\n======\\n"
 }
 ```
 
 #### Markdown to HTML
 
-This action is used to convert Markdown to HTML.
+This action is used to convert Markdown to HTML
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|
 |markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|
 
@@ -120,28 +83,28 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|html|bytes|False|HTML data as bytes|
-|html_string|string|False|HTML data|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|html|bytes|False|HTML data as bytes|PGgxIGlkPSJyYXBpZDctaW5zaWdodGNvbm5lY3QiPlJhcGlkNyBJbnNpZ2h0Q29ubmVjdDwvaDE+Cg==|
+|html_string|string|False|HTML data|<h1 id="rapid7-insightconnect">Rapid7 InsightConnect</h1>|
 
 Example output:
 
 ```
 {
   "html": "PGgxIGlkPSJyYXBpZDctaW5zaWdodGNvbm5lY3QiPlJhcGlkNyBJbnNpZ2h0Q29ubmVjdDwvaDE+Cg==",
-  "html_string": "\u003ch1 id=\"rapid7-insightconnect\"\u003eRapid7 InsightConnect\u003c/h1\u003e\n"
+  "html_string": "<h1 id=\"rapid7-insightconnect\">Rapid7 InsightConnect</h1>"
 }
 ```
 
-#### Markdown to TXT
+#### Markdown to PDF
 
-This action is used to convert Markdown to TXT.
+This action is used to convert Markdown to PDF
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|
 |markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|
 
@@ -156,34 +119,75 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|txt|bytes|False|TXT data as bytes|
-|txt_string|string|False|TXT data as string|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|pdf|bytes|False|PDF data as bytes|JVBERi0xLjQKJcOiw6MKMSAwIG9iago8PAovVGl0bGUgKCkKL0NyZWF0b3IgKO+/v|
+|pdf_string|string|False|PDF data as string|PDF-1.4 0 obj<</Title Creator|
 
 Example output:
 
 ```
 {
-  "txt_string": "Rapid7 InsightConnect\n",
-  "txt": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
+  "pdf": "JVBERi0xLjQKJcOiw6MKMSAwIG9iago8PAovVGl0bGUgKCkKL0NyZWF0b3IgKO+/v",
+  "pdf_string": "PDF-1.4 0 obj<</Title Creator"
+}
+```
+
+#### Markdown to TXT
+
+This action is used to convert Markdown to TXT
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|
+|markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|
+
+Example input:
+
+```
+{
+  "markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=",
+  "markdown_string": "# Rapid7 InsightConnect"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|txt|bytes|False|TXT data as bytes|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
+|txt_string|string|False|TXT data as string|Rapid7 InsightConnect|
+
+Example output:
+
+```
+{
+  "txt": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
+  "txt_string": "Rapid7 InsightConnect"
 }
 ```
 
 ### Triggers
 
-_This plugin does not contain any triggers._
+*This plugin does not contain any triggers.*
 
-### Custom Output Types
+### Tasks
 
-_This plugin does not contain any custom output types._
+*This plugin does not contain any tasks.*
+
+### Custom Types
+
+*This plugin does not contain any custom output types.*
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+*There is no troubleshooting for this plugin.*
 
 # Version History
 
+* 3.1.3 - Update PyPandoc dependency | Update SDK
 * 3.1.2 - Added additional error messaging | Refactored code | Fixed bug in Markdown to TXT action which resulted in an incorrect output
 * 3.1.1 - Use input and output constants inm Markdown to PDF action | Change docker image from `komand/python-2-plugin:2` to `insightconnect-python-3-38-plugin:4` | Changed `Exception` to `PluginException` in Markdown to PDF action | Add `USER nobody` in Dockerfile | Update `pypandoc` and `beautifulsoup4` version in requirements | Add example inputs and outputs
 * 3.1.0 - New action: Markdown to TXT
@@ -198,8 +202,9 @@ _This plugin does not contain any troubleshooting information._
 
 # Links
 
+* [Markdown](https://en.wikipedia.org/wiki/Markdown)
+
 ## References
 
-* [Markdown](https://en.wikipedia.org/wiki/Markdown)
-* [pandoc](https://pandoc.org/)
+* [pandoc](https://pandoc.org/)  
 * [pypandoc](https://pypi.python.org/pypi/pypandoc/)
