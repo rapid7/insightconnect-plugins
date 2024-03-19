@@ -1,0 +1,37 @@
+{
+  "Data": {
+    "Code": 0,
+    "CodeType": 1,
+    "Data": {
+      "content": [
+        {
+          "content": {
+            "csv": "test"
+            },
+          "message": "TMSL_S_SUCCESS",
+          "statusCode": 0
+        }
+      ],
+      "hasMore": false,
+      "serverGuid": "test",
+      "serverName": "Apex One as a Service",
+      "taskId": "test"
+    },
+    "Message": "OK",
+    "TimeZone": -4
+  },
+  "FeatureCtrl": {
+    "mode": "0"
+  },
+  "Meta": {
+    "errorCode": 0,
+    "errorMessgae": "Success",
+    "result": 1
+  },
+  "PermissionCtrl": {
+    "permission": "255"
+  },
+  "SystemCtrl": {
+    "TmcmSoDist_Role": "none"
+  }
+}

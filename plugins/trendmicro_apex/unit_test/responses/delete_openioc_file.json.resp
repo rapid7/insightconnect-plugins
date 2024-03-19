@@ -1,0 +1,19 @@
+{
+  "Data": [{
+    "DeletedStatus": 1,
+    "FileHashID": "abcdef"
+  }],
+  "FeatureCtrl": {
+    "mode": "0"
+  },
+  "Meta": {
+    "ErrorCode": 0,
+    "Result": 1
+  },
+  "PermissionCtrl": {
+    "permission": "255"
+  },
+  "SystemCtrl": {
+    "TmcmSoDist_Role": "none"
+  }
+}

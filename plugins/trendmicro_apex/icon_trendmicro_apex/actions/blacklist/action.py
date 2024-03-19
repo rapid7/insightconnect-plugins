@@ -6,12 +6,12 @@ import validators
 from icon_trendmicro_apex.util.util import get_expiration_utc_date_string
 from requests.exceptions import RequestException
 
-import komand
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import BlacklistInput, BlacklistOutput, Input, Output, Component
 
 
-class Blacklist(komand.Action):
+class Blacklist(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="blacklist",
@@ -25,8 +25,8 @@ class Blacklist(komand.Action):
         self.MAX_URL_LENGTH = 2046
 
     def run(self, params={}):
+        response = None
         payload = self.generate_payload(params)
-        json_payload = json.dumps(payload)
         blacklist_state = params.get(Input.BLACKLIST_STATE, True)
         if blacklist_state is False:
             method = "DELETE"
@@ -36,18 +36,8 @@ class Blacklist(komand.Action):
         else:
             method = "PUT"
 
-        self.connection.create_jwt_token(self.api_path, method, json_payload)
-        request_url = self.connection.url + self.api_path
-
-        response = None
         try:
-            response = requests.request(
-                method.lower(),
-                request_url,
-                headers=self.connection.header_dict,
-                data=json_payload,
-                verify=False,
-            )
+            response = self.connection.api.execute(method, self.api_path, payload)
             response.raise_for_status()
             return {Output.SUCCESS: response is not None}
         except RequestException as rex:

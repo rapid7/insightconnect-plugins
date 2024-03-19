@@ -1,0 +1,71 @@
+{
+  "Data": {
+    "Code": 0,
+    "CodeType": 1,
+    "Data": {
+      "content": [
+        {
+          "content": {
+            "agentServerMeta": [
+              {
+                "agentGuid": "123456789-1234-1234-1234-123456789",
+                "ip": "192.168.0.1",
+                "isCriteriaExceedMaxMetaCount": [
+                  false
+                ],
+                "isEnable": true,
+                "isImportant": false,
+                "isOnline": true,
+                "isolateStatus": 4,
+                "machineGuid": "123456789-1234-1234-1234-123456789",
+                "machineName": "TREND-MICRO-TES",
+                "machineOS": "Windows 10",
+                "machineType": "Desktop",
+                "minFirstSeen": 1589061887,
+                "productType": 15,
+                "serverGuid": "123456789-1234-1234-1234-123456789",
+                "serverMeta": [
+                  {
+                    "criteriaNo": 0,
+                    "firstSeen": 1589061887,
+                    "lastSeen": 1589131161,
+                    "metaHashId": "-1666102285318829169",
+                    "metaValue": "notepad.exe",
+                    "sweepingType": 7
+                  }
+                ],
+                "serverMode": 1,
+                "serverName": "Apex One as a Service",
+                "userGuid": "123456789-1234-1234-1234-123456789",
+                "userName": "TREND-MICRO-TES\\temp"
+              }
+            ]
+          },
+          "message": "TMSL_S_SUCCESS",
+          "statusCode": 0
+        }
+      ],
+      "hasMore": false,
+      "lastContentId": "[\r\n  {\r\n    \"serverGuid\": \"1234\",\r\n    \"lastContentId\": 48,\r\n    \"hasMore\": false,\r\n    \"totalProgress\": 0,\r\n    \"currentProgress\": 0\r\n  }\r\n]",
+      "serverGuid": "test",
+      "serverName": "Apex One as a Service",
+      "taskId": "123456789-1234-1234-1234-123456789"
+    },
+    "Message": "OK",
+    "TimeZone": -4
+  },
+  "FeatureCtrl": {
+    "mode": "0"
+  },
+  "Meta": {
+    "errorCode": 0,
+    "errorMessgae": "Success",
+    "result": 1
+  },
+  "PermissionCtrl": {
+    "permission": "255"
+  },
+  "SystemCtrl": {
+    "TmcmSoDist_Role": "none"
+  }
+}

@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SearchAgentsInput, SearchAgentsOutput, Input, Output, Component
 
 # Custom imports below
@@ -6,7 +6,7 @@ import re
 import urllib.parse
 
 
-class SearchAgents(komand.Action):
+class SearchAgents(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="search_agents",

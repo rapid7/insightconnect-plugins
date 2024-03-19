@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import OpeniocFilesListInput, OpeniocFilesListOutput, Input, Component
 
 # Custom imports below
@@ -6,7 +6,7 @@ import urllib.parse
 import json
 
 
-class OpeniocFilesList(komand.Action):
+class OpeniocFilesList(insightconnect_plugin_runtime.Action):
     SORTING_COLUMNS = {
         "FileName": 1,
         "Title": 2,

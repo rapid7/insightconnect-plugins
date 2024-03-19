@@ -4,33 +4,29 @@ import os
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from icon_trendmicro_apex.connection.connection import Connection
+from unittest.mock import patch
 from icon_trendmicro_apex.actions.add_file_to_udso_list import AddFileToUdsoList
-import json
-import logging
+from icon_trendmicro_apex.actions.add_file_to_udso_list.schema import Input, Output
+from jsonschema import validate
+from mock import Util, mock_request_200, mocked_request
 
 
+@patch("icon_trendmicro_apex.connection.connection.create_jwt_token", side_effect="abcgdgd")
 class TestAddFileToUdsoList(TestCase):
-    def test_integration_add_file_to_udso_list(self):
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = AddFileToUdsoList()
+    @patch("requests.request", side_effect=mock_request_200)
+    def setUp(self, mock_client) -> None:
+        self.action = Util.default_connector(AddFileToUdsoList())
+        self.params = {
+            Input.FILE: {"filename": "", "content": ""},
+            Input.SCAN_ACTION: "QUARANTINE",
+            Input.DESCRIPTION: "File Blacklisted from InsightConnect",
+        }
 
-        test_conn.logger = log
-        test_action.logger = log
+    @patch("requests.request", side_effect=mock_request_200)
+    def test_add_file_to_usdo_list(self, mock_put, mock_token):
+        mocked_request(mock_put)
+        response = self.action.run(self.params)
 
-        try:
-            filename = "../tests/test_add_file_to_udso_list.json"
-            with open(filename) as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = "Could not find or read: " + filename
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        self.assertEqual({"success": True}, results)
+        expected = {Output.SUCCESS: True}
+        validate(response, self.action.output.schema)
+        self.assertEqual(response, expected)

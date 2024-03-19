@@ -1,0 +1,19 @@
+{
+  "Data": {
+    "FileContentBase64": "abcdef",
+    "FileName": "file.txt"
+  },
+  "FeatureCtrl": {
+    "mode": "0"
+  },
+  "Meta": {
+    "ErrorCode": 0,
+    "Result": 1
+  },
+  "PermissionCtrl": {
+    "permission": "255"
+  },
+  "SystemCtrl": {
+    "TmcmSoDist_Role": "none"
+  }
+}

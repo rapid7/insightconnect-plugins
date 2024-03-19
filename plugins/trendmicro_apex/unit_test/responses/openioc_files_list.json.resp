@@ -1,0 +1,47 @@
+{
+  "data": {
+    "FilingCabinet": [
+      {
+        "ExtractingStatus": 999,
+        "FileAddedDatetime": "05/10/2020 15:58:41",
+        "FileHashID": "test",
+        "FileName": "file.txt",
+        "ShortDesc": "Cryptolocker Detection (EXPERIMENTAL)",
+        "UploadedBy": "Integration Lab",
+        "UploadedFrom": 1
+      },
+      {
+        "ExtractingStatus": 1,
+        "FileAddedDatetime": "05/10/2020 12:28:18",
+        "FileHashID": "test",
+        "FileName": "test",
+        "ShortDesc": "SHELLDC.DLL (BACKDOOR)",
+        "UploadedBy": "Integration Lab",
+        "UploadedFrom": 1
+      },
+      {
+        "ExtractingStatus": 1,
+        "FileAddedDatetime": "05/10/2020 10:39:17",
+        "FileHashID": "test",
+        "FileName": "test",
+        "ShortDesc": "Cryptolocker Detection (EXPERIMENTAL)",
+        "UploadedBy": "Integration Lab",
+        "UploadedFrom": 1
+      }
+    ],
+    "TotalIOCCount": 3
+  },
+  "feature_ctrl": {
+    "mode": "0"
+  },
+  "meta": {
+    "ErrorCode": 0,
+    "Result": 1
+  },
+  "permission_ctrl": {
+    "permission": "255"
+  },
+  "system_ctrl": {
+    "TmcmSoDist_Role": "none"
+  }
+}

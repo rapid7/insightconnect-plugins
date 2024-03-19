@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import QuarantineInput, QuarantineOutput, Input, Output, Component
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import validators
 
 
-class Quarantine(komand.Action):
+class Quarantine(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="quarantine",
@@ -28,7 +28,7 @@ class Quarantine(komand.Action):
         if "cmd_isolate_agent" == action and agent in params.get(Input.WHITELIST, []):
             raise PluginException(
                 cause="Unable to block whitelisted entry.",
-                assistance=f"Please remove the host from the action's whitelist or quarantine a different host.",
+                assistance="Please remove the host from the action's whitelist or quarantine a different host.",
             )
 
         payload = {"act": action, "allow_multiple_match": True}
@@ -51,4 +51,4 @@ class Quarantine(komand.Action):
 
     @staticmethod
     def validate_host_name(agent):
-        return agent is not ""
+        return agent != ""
