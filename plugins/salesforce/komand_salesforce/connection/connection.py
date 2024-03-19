@@ -16,11 +16,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         client_id = params.get(Input.CLIENTID)
         client_secret = params.get(Input.CLIENTSECRET, {}).get("secretKey")
+        oauth_url = params.get(Input.LOGINURL)
         username = params.get(Input.SALESFORCEACCOUNTUSERNAMEANDPASSWORD, {}).get("username")
         password = params.get(Input.SALESFORCEACCOUNTUSERNAMEANDPASSWORD, {}).get("password")
         security_token = params.get(Input.SECURITYTOKEN).get("secretKey")
 
-        self.api = SalesforceAPI(client_id, client_secret, username, password, security_token, self.logger)
+        self.api = SalesforceAPI(client_id, client_secret, oauth_url, username, password, security_token, self.logger)
 
     def test(self):
         try:

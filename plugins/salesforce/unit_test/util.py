@@ -52,7 +52,9 @@ class Util:
                     if filename == "bytes":
                         self.content = b"test"
                     else:
-                        self.text = Util.read_file_to_string(f"responses/{filename}")
+                        file_content = Util.read_file_to_string(f"responses/{filename}")
+                        self.text = file_content
+                        self.content = f"{file_content}".encode()
 
             def json(self):
                 return json.loads(self.text)
@@ -64,7 +66,11 @@ class Util:
 
         if url == "https://login.salesforce.com/services/oauth2/token":
             if data.get("client_id") == "invalid-client-id":
-                return MockResponse(401)
+                return MockResponse(400, "invalid_grant.json.resp")  # returns 400 when failing to get a token.
+            if data.get("client_id") == "valid-id-bad-endpoint":
+                return MockResponse(503)
+            if data.get("client_id") == "invalid-id-for-connection":
+                return MockResponse(400, "invalid_client_id.json.resp")
             return MockResponse(200, "get_token.json.resp")
         if url == "https://example.com/services/data/":
             return MockResponse(200, "get_version.json.resp")

@@ -185,13 +185,15 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
 
                     self.logger.info(f"{len(users_login)} users login history added to output")
                     records.extend(self.add_data_type_field(users_login, "User Login"))
-
+                self.connection.api.unset_token()
                 return records, state, has_more_pages, 200, None
             except ApiException as error:
                 self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
+                self.connection.api.unset_token()
                 return [], state, False, error.status_code, error
         except Exception as error:
             self.logger.info(f"An Exception has been raised. Error: {error}")
+            self.connection.api.unset_token()
             return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def _is_valid_state(self, state: dict) -> Tuple[bool, str]:

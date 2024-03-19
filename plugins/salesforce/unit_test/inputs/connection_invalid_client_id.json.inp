@@ -1,0 +1,13 @@
+{
+  "clientId": "invalid-id-for-connection",
+  "clientSecret": {
+    "secretKey": "example-secret-key"
+  },
+  "salesforceAccountUsernameAndPassword": {
+    "username": "example-username",
+    "password": "example-password"
+  },
+  "securityToken": {
+    "secretKey": "example-secret-key"
+  }
+}
