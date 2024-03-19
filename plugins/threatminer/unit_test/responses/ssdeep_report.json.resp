@@ -1,0 +1,22 @@
+{
+  "status_code": "200",
+  "status_message": "Results found.",
+  "results": [
+    {
+      "hash": "3:6QKm2A3T:6QKm2A3T",
+      "similarity": "97",
+      "matches": [
+        {
+          "file_name": "file1.exe",
+          "file_size": "1536",
+          "ssdeep_hash": "3:6QKm2A3T:6QKm2A3T"
+        },
+        {
+          "file_name": "file2.exe",
+          "file_size": "1536",
+          "ssdeep_hash": "3:6QKm2A3T:6QKm2A3T"
+        }
+      ]
+    }
+  ]
+}
