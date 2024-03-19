@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import LookupInput, LookupOutput
 
 # Custom imports below
 import requests
 
 
-class Lookup(komand.Action):
+class Lookup(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="lookup", description="IP Check", input=LookupInput(), output=LookupOutput()
@@ -14,7 +14,7 @@ class Lookup(komand.Action):
     def run(self, params={}):
         found_status = False
         url = "http://www.talosintelligence.com/feeds/ip-filter.blf"
-        response = requests.get(url)
+        response = requests.get(url)  # nosec B113
         # Check supplied address against each address in list
         bad_addresses = response.text
         bad_addresses_list = bad_addresses.split("\n")
@@ -35,8 +35,3 @@ class Lookup(komand.Action):
             "url": url,
             "status": "No Error",
         }
-
-    def test(self, params={}):
-        url = "http://www.talosintelligence.com/feeds/ip-filter.blf"
-        response = requests.get(url)
-        return {}
