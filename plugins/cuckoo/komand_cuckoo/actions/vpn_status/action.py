@@ -11,7 +11,7 @@ class VpnStatus(insightconnect_plugin_runtime.Action):
             output=VpnStatusOutput(),
         )
 
-    def run(self, params={}):
+    def run(self):
         endpoint = "vpn/status"
         response = self.connection.api.send(endpoint)
         vpns = response.get("vpns", [])

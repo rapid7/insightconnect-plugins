@@ -11,7 +11,7 @@ class CuckooStatus(insightconnect_plugin_runtime.Action):
             output=CuckooStatusOutput(),
         )
 
-    def run(self, params={}):
+    def run(self):
         endpoint = "cuckoo/status"
         response = self.connection.api.send(endpoint)
         return response

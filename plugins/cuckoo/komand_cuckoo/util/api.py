@@ -15,33 +15,23 @@ class API(object):
         self.url = url
 
     def send(
-        self,
-        endpoint: str,
-        method: str = "GET",
-        data: Dict = None,
-        files: List = None,
-        _json: bool = True
+        self, endpoint: str, method: str = "GET", data: Dict = None, files: List = None, _json: bool = True
     ) -> Any:
-      """
-      Sends a HTTP request, returning the response body or JSON
-      """
-      logging.basicConfig(level=logging.INFO)
-      logging.info(f"ENDPOINT {endpoint}")
-      try:
-        response = requests.request(
-          url=f"{self.url}/{endpoint}",
-          method=method,
-          data=data,
-          files=files
-        )
-        self.response_handler(response)
-        if _json:
-          data = Util.extract_json(response)
-          logging.info(f"JSON {data}")
-          return insightconnect_plugin_runtime.helper.clean(data)
-        return response
-      except requests.exceptions.HTTPError as exception:
-        raise PluginException(preset=PluginException.Preset.UNKNOWN, data=exception)
+        """
+        Sends a HTTP request, returning the response body or JSON
+        """
+        logging.basicConfig(level=logging.INFO)
+        logging.info(f"ENDPOINT {endpoint}")
+        try:
+            response = requests.request(url=f"{self.url}/{endpoint}", method=method, data=data, files=files)
+            self.response_handler(response)
+            if _json:
+                data = Util.extract_json(response)
+                logging.info(f"JSON {data}")
+                return insightconnect_plugin_runtime.helper.clean(data)
+            return response
+        except requests.exceptions.HTTPError as exception:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=exception)
 
     @staticmethod
     def response_handler(response: Response) -> Response:

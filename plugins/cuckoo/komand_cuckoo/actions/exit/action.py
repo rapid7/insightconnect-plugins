@@ -13,7 +13,7 @@ class Exit(insightconnect_plugin_runtime.Action):
             output=ExitOutput(),
         )
 
-    def run(self, params={}):
+    def run(self):
         endpoint = "exit"
         response = self.connection.api.send(endpoint)
         message = response.get("message", "")

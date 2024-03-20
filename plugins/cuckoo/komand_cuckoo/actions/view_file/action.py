@@ -20,7 +20,7 @@ class ViewFile(insightconnect_plugin_runtime.Action):
             endpoint = f"files/view/md5/{md5}"
         elif sha256:
             endpoint = f"files/view/sha256/{sha256}"
-        elif id:
+        elif task_id:
             endpoint = f"files/view/id/{task_id}"
         else:
             raise PluginException(

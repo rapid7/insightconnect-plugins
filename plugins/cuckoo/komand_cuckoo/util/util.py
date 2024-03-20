@@ -6,7 +6,6 @@ from requests import Response
 
 
 class Util(object):
-
     @staticmethod
     def extract_json(response: Response) -> Dict:
         """

@@ -16,7 +16,7 @@ class ListTasks(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         offset = params.get(Input.OFFSET, "")
         limit = params.get(Input.LIMIT, "")
-        endpoint = f"tasks/list"
+        endpoint = "tasks/list"
         if offset and limit:
             endpoint = f"tasks/list/{limit}/{offset}"
         elif limit:

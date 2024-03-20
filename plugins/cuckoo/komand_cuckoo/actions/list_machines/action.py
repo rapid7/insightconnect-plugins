@@ -11,7 +11,7 @@ class ListMachines(insightconnect_plugin_runtime.Action):
             output=ListMachinesOutput(),
         )
 
-    def run(self, params={}):
+    def run(self):
         endpoint = "machines/list"
         response = self.connection.api.send(endpoint)
         machines = response.get("machines")

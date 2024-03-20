@@ -17,7 +17,4 @@ class RebootTask(insightconnect_plugin_runtime.Action):
         response = self.connection.api.send(endpoint)
         task_id = response.get("task_id")
         reboot_id = response.get("reboot_id")
-        return {
-            Output.TASK_ID: task_id,
-            Output.REBOOT_ID: reboot_id
-        }
+        return {Output.TASK_ID: task_id, Output.REBOOT_ID: reboot_id}
