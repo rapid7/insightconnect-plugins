@@ -1,34 +1,20 @@
-import komand
-from .schema import ExitInput, ExitOutput
+import insightconnect_plugin_runtime
+from .schema import ExitInput, ExitOutput, Component, Output
 
 # Custom imports below
-import json
-import requests
 
 
-class Exit(komand.Action):
+class Exit(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="exit",
-            description="Shuts down the server if in debug mode and using the werkzeug server",
+            description=Component.DESCRIPTION,
             input=ExitInput(),
             output=ExitOutput(),
         )
 
-    def run(self, params={}):
-        server = self.connection.server
-        endpoint = server + "/exit"
-
-        try:
-            r = requests.get(endpoint)
-            r.raise_for_status()
-            response = r.json()
-            return response
-
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
-
-    def test(self):
-        out = self.connection.test()
-        out["message"] = "Test passed"
-        return out
+    def run(self):
+        endpoint = "exit"
+        response = self.connection.api.send(endpoint)
+        message = response.get("message", "")
+        return {Output.MESSAGE: message}
