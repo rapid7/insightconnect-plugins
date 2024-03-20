@@ -3017,5 +3017,4 @@ Example output:
 * [TrendMicro](https://www.trendmicro.com/en_us/business.html)
 
 ## References
-  
 * [Trend Micro Vision One](https://docs.trendmicro.com/en-us/enterprise/trend-micro-xdr-help/home)
