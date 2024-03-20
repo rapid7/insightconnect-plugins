@@ -890,7 +890,7 @@ Example output:
 
 # Version History
 
-* 2.0.0 - Update to insightconnect-plugin-runtime | Update `Reschedule Task` output to include `success` | Update title of `Delete Task` output from `Error message` to `Error Message`
+* 2.0.0 - Update to insightconnect-plugin-runtime | Update `Reschedule Task` output to include `success` | Update title of `Delete Task` output from `Error message` to `Error Message` | Add `options` to `Machine` type
 * 1.0.3 - Updated Requests version to 2.20.0
 * 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Bug fix for Submit Files where Submit ID was required
