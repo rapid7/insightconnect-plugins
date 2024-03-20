@@ -1,45 +1,29 @@
-import komand
-from .schema import ListTasksInput, ListTasksOutput
+from typing import Dict
 
-# Custom imports below
-import json
-import requests
+import insightconnect_plugin_runtime
+from .schema import ListTasksInput, ListTasksOutput, Input, Output, Component
 
 
-class ListTasks(komand.Action):
+class ListTasks(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="list_tasks",
-            description="Returns list of tasks",
+            description=Component.DESCRIPTION,
             input=ListTasksInput(),
             output=ListTasksOutput(),
         )
 
     def run(self, params={}):
-        server = self.connection.server
-
-        if params.get("offset", ""):
-            offset = params.get("offset", "")
-            limit = params.get("limit", "")
-            if limit:
-                endpoint = server + "/tasks/list/%d/%d" % (limit, offset)
-            else:
-                endpoint = server + "/tasks/list"
-        elif params.get("limit", ""):
-            limit = params.get("limit", "")
-            endpoint = server + "/tasks/list/%d" % (limit)
-        else:
-            endpoint = server + "/tasks/list"
-
-        try:
-            r = requests.get(endpoint)
-            r.raise_for_status()
-            response = r.json()
-            result = {"tasks": response}
-            return result
-
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
-
-    def test(self):
-        return {"tasks": [self.connection.test()]}
+        offset = params.get(Input.OFFSET, "")
+        limit = params.get(Input.LIMIT, "")
+        endpoint = "tasks/list"
+        if offset and limit:
+            endpoint = f"tasks/list/{limit}/{offset}"
+        elif limit:
+            endpoint = f"tasks/list/{limit}"
+        response = self.connection.api.send(endpoint)
+        tasks = response.get("tasks", [])
+        for task in tasks:
+            if isinstance(task.get("options"), Dict):
+                task["options"] = [task.get("options")]
+        return {Output.TASKS: response.get("tasks", [])}

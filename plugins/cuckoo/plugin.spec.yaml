@@ -5,9 +5,13 @@ name: cuckoo
 title: Cuckoo Sandbox
 description: "Cuckoo Sandbox is an open source automated malware analysis system. Using the Cuckoo Sandbox plugin for
 Rapid7 InsightConnect, users can analyze files and URLs, manage tasks, and more"
-version: 1.0.3
-supported_versions: ["2019-06-19"]
+version: 2.0.0
+connection_version: 2
+supported_versions: ["2.0.6"]
 vendor: rapid7
+sdk:
+  type: slim
+  version: 5
 support: community
 status: []
 resources:
@@ -122,6 +126,7 @@ types:
       type: string
     machine:
       type: string
+      required: false
     errors:
       type: '[]string'
     target:
@@ -191,6 +196,8 @@ types:
       type: date
     name:
       type: string
+    options:
+      type: "[]option"
     platform:
       type: string
     resultserver_ip:
@@ -285,7 +292,7 @@ actions:
         title: Task ID
         type: integer
         description: Task ID
-        required: true
+        required: false
         example: 12345678910
   submit_files:
     title: Submit Files
@@ -303,7 +310,7 @@ actions:
         title: Task ID
         type: integer
         description: Task ID
-        required: true
+        required: false
         example: 1234678910
       submit_id:
         title: Submit ID
@@ -334,7 +341,7 @@ actions:
       tasks:
         type: '[]task'
         description: Cuckoo tasks
-        required: true
+        required: false
         example: [{ "completed" : 1,"pending": 1, "reported": 1, "running": 1, "total": 1}]
   view_task:
     title: View Task
@@ -350,7 +357,7 @@ actions:
       task:
         type: task
         description: Cuckoo task
-        required: true
+        required: false
         example: {"task_id" : 1}
   reschedule_task:
     title: Reschedule Task
@@ -373,8 +380,14 @@ actions:
         title: Task ID
         type: integer
         description: Task ID
-        required: true
+        required: false
         example: 12345678910
+      success:
+        title: Success
+        type: boolean
+        description: Reschedule success flag
+        required: false
+        example: True
   delete_task:
     title: Delete Task
     description: Removes the given task from the database and deletes the results
@@ -390,19 +403,19 @@ actions:
         title: Error
         description: Error true or false
         type: boolean
-        required: true
+        required: false
         example: true
       error_value:
-        title: Error message
+        title: Error Message
         description: Error message
         type: string
-        required: true
+        required: false
         example: Error
       message:
         title: Message
         description: Message associated with status code
         type: string
-        required: true
+        required: false
         example: Bad Request
   get_report:
     title: Get Report
@@ -425,7 +438,7 @@ actions:
       report:
         type: bytes
         description: Base64 encoded report
-        required: true
+        required: false
         example: VGhpcyBpcyBhbiBleGFtcGxl
   get_screenshots:
     title: Get Screenshots
@@ -448,7 +461,7 @@ actions:
       screenshots:
         type: bytes
         description: Base64 encoded screenshot
-        required: true
+        required: false
         example: VGhpcyBpcyBhbiBleGFtcGxl
   rerun_report:
     title: Re-run Reporting
@@ -464,7 +477,7 @@ actions:
       success:
         type: boolean
         description: Action success or failure
-        required: true
+        required: false
         example: true
   reboot_task:
     title: Reboot Task
@@ -481,7 +494,7 @@ actions:
         title: Task ID
         type: integer
         description: Task ID
-        required: true
+        required: false
         example: 12345678910
       reboot_id:
         title: Reboot ID
@@ -505,7 +518,7 @@ actions:
         title: Dump Files
         type: '[]string'
         description: Dumped Files
-        required: true
+        required: false
         example: ["Example file"]
   get_memory:
     title: Get Memory
@@ -528,7 +541,7 @@ actions:
         title: Dump Contents
         type: bytes
         description: Base64 encoded contents
-        required: true
+        required: false
         example: VGhpcyBpcyBhbiBleGFtcGxl
   view_file:
     title: View File
@@ -558,13 +571,13 @@ actions:
         title: Data
         type: data
         description: Data
-        required: true
+        required: false
         example: 3395856ce81f2b7382dee72602f798b642f14140
       error:
         title: Error
         type: boolean
         description: Error information
-        required: true
+        required: false
         example: true
   get_file:
     title: Get File
@@ -581,7 +594,7 @@ actions:
       contents:
         description: Binary contents
         type: bytes
-        required: true
+        required: false
         example: UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==
   get_pcap:
     title: Get PCAP
@@ -607,7 +620,7 @@ actions:
       machines:
         description: List of machines available to Cuckoo
         type: '[]machine'
-        required: true
+        required: false
         example: ["Example Machine"]
   view_machine:
     title: View Machine
@@ -623,7 +636,7 @@ actions:
       machine:
         description: Machine details
         type: machine
-        required: true
+        required: false
         example: Example Machine
   cuckoo_status:
     title: Cuckoo Status
@@ -633,34 +646,34 @@ actions:
         title: CPU Load
         description: CPU load for the past 1, 5 and 15 minutes respectively
         type: '[]float'
-        required: true
+        required: false
         example: [0.123]
       diskspace:
         title: Diskspace
         description: Free, total and used diskspace of $CUCKOO/storage/analyses/,
           $CUCKOO/storage/binaries/, and specified tmppath
         type: diskspace
-        required: true
+        required: false
         example: 100
       hostname:
         type: string
         description: Cuckoo hostname
-        required: true
+        required: false
         example: Example Hostname
       machines:
         description: Details about available and total analysis machines
         type: machines
-        required: true
+        required: false
         example: {"available": 10, "total": 10}
       tasks:
         description: Details about analysis tasks
         type: tasks
-        required: true
+        required: false
         example: [{ "completed" : 1,"pending": 1, "reported": 1, "running": 1, "total": 1}]
       version:
         type: string
         description: Cuckoo version
-        required: true
+        required: false
         example: 2.0.7
   vpn_status:
     title: VPN Status
@@ -670,7 +683,7 @@ actions:
         title: VPN Statuses
         type: '[]vpn'
         description: VPN status array
-        required: true
+        required: false
         example: [{"name": "Example", "status": "Running"}]
   exit:
     title: Exit
@@ -678,6 +691,7 @@ actions:
     output:
       message:
         type: string
+        title: Message
         description: Exit message
-        required: true
+        required: false
         example: "Exit Message"

@@ -1,40 +1,22 @@
-import komand
-from .schema import ListMachinesInput, ListMachinesOutput
-
-# Custom imports below
-import json
-import requests
+import insightconnect_plugin_runtime
+from .schema import ListMachinesInput, ListMachinesOutput, Component, Output
 
 
-class ListMachines(komand.Action):
+class ListMachines(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="list_machines",
-            description="Returns a list with details on the analysis machines available to Cuckoo",
+            description=Component.DESCRIPTION,
             input=ListMachinesInput(),
             output=ListMachinesOutput(),
         )
 
-    def run(self, params={}):
-        server = self.connection.server
-        endpoint = server + "/machines/list"
-
-        try:
-            r = requests.get(endpoint)
-            r.raise_for_status()
-            response = r.json()
-            result = {"machines": []}
-            for machine in response["data"]:
-                keys = machine.keys()
-                cleaned_machine = {}
-                for key in keys:
-                    if machine[key] is not None:
-                        cleaned_machine[key] = machine[key]
-                result["machines"].append(cleaned_machine)
-            return result
-
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
-
-    def test(self):
-        return {"machines": [self.connection.test()]}
+    def run(self):
+        endpoint = "machines/list"
+        response = self.connection.api.send(endpoint)
+        machines = response.get("machines")
+        for machine in machines:
+            resultserver_port = machine.get("resultserver_port")
+            if resultserver_port:
+                machine["resultserver_port"] = int(resultserver_port)
+        return {Output.MACHINES: response.get("machines", [])}

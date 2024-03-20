@@ -1,52 +1,30 @@
-import komand
-from .schema import ViewFileInput, ViewFileOutput
-
-# Custom imports below
-import json
-import requests
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+from .schema import ViewFileInput, ViewFileOutput, Input, Component, Output
 
 
-class ViewFile(komand.Action):
+class ViewFile(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="view_file",
-            description="Returns details on the file matching either the specified MD5 hash, SHA256 hash or ID",
+            description=Component.DESCRIPTION,
             input=ViewFileInput(),
             output=ViewFileOutput(),
         )
 
     def run(self, params={}):
-        server = self.connection.server
-
-        if params.get("md5", ""):
-            md5 = params.get("md5", "")
-            endpoint = server + "/files/view/md5/" + str(md5)
-        elif params.get("sha256", ""):
-            sha256 = params.get("sha256", "")
-            endpoint = server + "/files/view/sha256/" + str(sha256)
-        elif params.get("id", ""):
-            task_id = params.get("id", "")
-            endpoint = server + "/files/view/id/" + str(task_id)
-
-        try:
-            r = requests.get(endpoint)
-            r.raise_for_status()
-            response = r.json()
-            """
-            result = {'sample': {}}
-
-            keys = response['sample'].keys()
-            for key in keys:
-                if response['sample'][key] is not None:
-                    result['sample'][key] = response['sample'][key]
-            """
-            return response
-
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
-
-    def test(self):
-        out = self.connection.test()
-        out["error"] = False
-        out["data"] = {"message": "Test passed"}
-        return out
+        md5 = params.get(Input.MD5, "")
+        sha256 = params.get(Input.SHA256, "")
+        task_id = params.get(Input.ID, "")
+        if md5:
+            endpoint = f"files/view/md5/{md5}"
+        elif sha256:
+            endpoint = f"files/view/sha256/{sha256}"
+        elif task_id:
+            endpoint = f"files/view/id/{task_id}"
+        else:
+            raise PluginException(
+                cause="Invalid input provided.", assistance="Please provide one of ID, MD5, or SHA256"
+            )
+        response = self.connection.api.send(endpoint)
+        return {Output.DATA: response.get("sample", {})}

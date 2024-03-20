@@ -1,0 +1,6 @@
+{
+ "vpns": {
+    "vpn1": true,
+    "vpn2": false
+ }
+}
