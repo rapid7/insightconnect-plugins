@@ -19,6 +19,7 @@ class ExportRules(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         key = self.connection.key
+        ssl = self.connection.ssl
         _format = params.get("format")
         event_id = params.get("event_id")
         frame = params.get("frame")
@@ -61,7 +62,7 @@ class ExportRules(insightconnect_plugin_runtime.Action):
         headers = {"content-type": "application/json", "Authorization": key}
 
         # Generate request
-        response = requests.get(url, headers=headers, verify=False)  # noqa: B501
+        response = requests.get(url, headers=headers, verify=ssl)  # noqa: B501
 
         # Raise exception if 200 response is not returned
         if response.status_code != 200:
