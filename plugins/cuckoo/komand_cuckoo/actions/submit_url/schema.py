@@ -52,9 +52,6 @@ class SubmitUrlOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
-  "required": [
-    "task_id"
-  ],
   "definitions": {}
 }
     """)

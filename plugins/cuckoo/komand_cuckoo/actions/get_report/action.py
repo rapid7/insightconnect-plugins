@@ -18,9 +18,9 @@ class GetReport(insightconnect_plugin_runtime.Action):
         desired_format = params.get(Input.FORMAT, "")
 
         if desired_format:
-            endpoint = f"/tasks/report/{task_id}/{desired_format}"
+            endpoint = f"tasks/report/{task_id}/{desired_format}"
         else:
-            endpoint = f"/tasks/report/{task_id}"
+            endpoint = f"tasks/report/{task_id}"
         response = self.connection.api.send(endpoint, _json=False)
         content = response.content
         return {Output.REPORT: Util.prepare_decoded_value(content)}

@@ -17,7 +17,7 @@ class DeleteTask(insightconnect_plugin_runtime.Action):
         task_id = params.get(Input.TASK_ID, "")
         endpoint = f"tasks/delete/{task_id}"
 
-        response = requests.get(endpoint)
+        response = self.connection.api.send(endpoint)
         response["message"] = "Task deleted"
         if response.get("status"):
             del response["status"]

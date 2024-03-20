@@ -51,9 +51,6 @@ class ViewTaskOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
-  "required": [
-    "task"
-  ],
   "definitions": {
     "task": {
       "type": "object",

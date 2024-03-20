@@ -53,9 +53,6 @@ class GetFileOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
-  "required": [
-    "contents"
-  ],
   "definitions": {}
 }
     """)

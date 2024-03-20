@@ -60,9 +60,6 @@ class GetScreenshotsOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
-  "required": [
-    "screenshots"
-  ],
   "definitions": {}
 }
     """)

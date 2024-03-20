@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import ListMachinesInput, ListMachinesOutput, Component
+from .schema import ListMachinesInput, ListMachinesOutput, Component, Output
 
 
 class ListMachines(insightconnect_plugin_runtime.Action):
@@ -12,14 +12,6 @@ class ListMachines(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        endpoint = "/machines/list"
+        endpoint = "machines/list"
         response = self.connection.api.send(endpoint)
-        result = {"machines": []}
-        for machine in response.get("data", []):
-            keys = machine.keys()
-            cleaned_machine = {}
-            for key in keys:
-                if machine.get(key) is not None:
-                    cleaned_machine[key] = machine.get(key)
-            result["machines"].append(cleaned_machine)
-        return result
+        return {Output.MACHINES: response.get("machines", [])}

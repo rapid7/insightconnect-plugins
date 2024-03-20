@@ -60,8 +60,7 @@ class RebootTaskOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "reboot_id",
-    "task_id"
+    "reboot_id"
   ],
   "definitions": {}
 }

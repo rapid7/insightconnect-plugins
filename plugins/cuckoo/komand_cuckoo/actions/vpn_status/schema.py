@@ -40,9 +40,6 @@ class VpnStatusOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
-  "required": [
-    "vpns"
-  ],
   "definitions": {
     "vpn": {
       "type": "object",

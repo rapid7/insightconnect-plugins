@@ -16,7 +16,7 @@ class GetMemory(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         task_id = params.get(Input.TASK_ID, "")
         pid = params.get(Input.PID, "")
-        endpoint = f"/memory/get/{task_id}/{pid}"
+        endpoint = f"memory/get/{task_id}/{pid}"
         response = self.connection.api.send(endpoint, _json=False)
         content = response.content
         return {Output.CONTENTS: Util.prepare_decoded_value(content)}

@@ -1,5 +1,7 @@
+from typing import List
+
 import insightconnect_plugin_runtime
-from .schema import ListMemoryInput, ListMemoryOutput, Input, Component
+from .schema import ListMemoryInput, ListMemoryOutput, Input, Component, Output
 
 
 class ListMemory(insightconnect_plugin_runtime.Action):
@@ -15,4 +17,6 @@ class ListMemory(insightconnect_plugin_runtime.Action):
         task_id = params.get(Input.TASK_ID, "")
         endpoint = f"memory/list/{task_id}"
         response = self.connection.api.send(endpoint)
-        return response
+        if not isinstance(response, List):
+            response = [response]
+        return {Output.DUMP_FILES: response}

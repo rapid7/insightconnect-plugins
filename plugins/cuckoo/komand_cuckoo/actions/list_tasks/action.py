@@ -1,3 +1,5 @@
+from typing import Dict
+
 import insightconnect_plugin_runtime
 from .schema import ListTasksInput, ListTasksOutput, Input, Output, Component
 
@@ -20,4 +22,8 @@ class ListTasks(insightconnect_plugin_runtime.Action):
         elif limit:
             endpoint = f"tasks/list/{limit}"
         response = self.connection.api.send(endpoint)
-        return {Output.TASKS: response}
+        tasks = response.get("tasks", [])
+        for task in tasks:
+            if isinstance(task.get("options"), Dict):
+                task["options"] = [task.get("options")]
+        return {Output.TASKS: response.get("tasks", [])}

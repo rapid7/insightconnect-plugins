@@ -70,10 +70,6 @@ class ViewFileOutput(insightconnect_plugin_runtime.Output):
       "order": 2
     }
   },
-  "required": [
-    "data",
-    "error"
-  ],
   "definitions": {
     "data": {
       "type": "object",

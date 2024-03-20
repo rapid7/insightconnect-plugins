@@ -71,14 +71,6 @@ class CuckooStatusOutput(insightconnect_plugin_runtime.Output):
       "order": 6
     }
   },
-  "required": [
-    "cpuload",
-    "diskspace",
-    "hostname",
-    "machines",
-    "tasks",
-    "version"
-  ],
   "definitions": {
     "diskspace": {
       "type": "object",

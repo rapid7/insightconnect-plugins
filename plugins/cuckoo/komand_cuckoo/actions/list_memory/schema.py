@@ -55,9 +55,6 @@ class ListMemoryOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
-  "required": [
-    "dump_files"
-  ],
   "definitions": {}
 }
     """)

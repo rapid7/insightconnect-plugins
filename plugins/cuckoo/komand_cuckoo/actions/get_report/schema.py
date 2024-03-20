@@ -60,9 +60,6 @@ class GetReportOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
-  "required": [
-    "report"
-  ],
   "definitions": {}
 }
     """)

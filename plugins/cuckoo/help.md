@@ -12,7 +12,7 @@ Cuckoo Sandbox is an open source automated malware analysis system. Using the Cu
 
 # Supported Product Versions
   
-* 2024-03-12
+* 2.0.6
 
 # Documentation
 
@@ -49,12 +49,12 @@ This action is used to returns status of the cuckoo server
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|cpuload|[]float|True|CPU load for the past 1, 5 and 15 minutes respectively|[0.123]|
-|diskspace|diskspace|True|Free, total and used diskspace of $CUCKOO/storage/analyses/, $CUCKOO/storage/binaries/, and specified tmppath|100|
-|hostname|string|True|Cuckoo hostname|Example Hostname|
-|machines|machines|True|Details about available and total analysis machines|{'available': 10, 'total': 10}|
-|tasks|tasks|True|Details about analysis tasks|[{"completed": 1, "pending": 1, "reported": 1, "running": 1, "total": 1}]|
-|version|string|True|Cuckoo version|2.0.7|
+|cpuload|[]float|False|CPU load for the past 1, 5 and 15 minutes respectively|[0.123]|
+|diskspace|diskspace|False|Free, total and used diskspace of $CUCKOO/storage/analyses/, $CUCKOO/storage/binaries/, and specified tmppath|100|
+|hostname|string|False|Cuckoo hostname|Example Hostname|
+|machines|machines|False|Details about available and total analysis machines|{'available': 10, 'total': 10}|
+|tasks|tasks|False|Details about analysis tasks|[{"completed": 1, "pending": 1, "reported": 1, "running": 1, "total": 1}]|
+|version|string|False|Cuckoo version|2.0.7|
   
 Example output:
 
@@ -104,9 +104,9 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|error|boolean|True|Error true or false|True|
-|error_value|string|True|Error message|Error|
-|message|string|True|Message associated with status code|Bad Request|
+|error|boolean|False|Error true or false|True|
+|error_value|string|False|Error message|Error|
+|message|string|False|Message associated with status code|Bad Request|
   
 Example output:
 
@@ -130,7 +130,7 @@ This action is used to shuts down the server if in debug mode and using the werk
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|message|string|True|Exit message|Exit Message|
+|message|string|False|Exit message|Exit Message|
   
 Example output:
 
@@ -162,7 +162,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|contents|bytes|True|Binary contents|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
+|contents|bytes|False|Binary contents|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
   
 Example output:
 
@@ -196,7 +196,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|contents|bytes|True|Base64 encoded contents|VGhpcyBpcyBhbiBleGFtcGxl|
+|contents|bytes|False|Base64 encoded contents|VGhpcyBpcyBhbiBleGFtcGxl|
   
 Example output:
 
@@ -262,7 +262,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|report|bytes|True|Base64 encoded report|VGhpcyBpcyBhbiBleGFtcGxl|
+|report|bytes|False|Base64 encoded report|VGhpcyBpcyBhbiBleGFtcGxl|
   
 Example output:
 
@@ -296,7 +296,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|screenshots|bytes|True|Base64 encoded screenshot|VGhpcyBpcyBhbiBleGFtcGxl|
+|screenshots|bytes|False|Base64 encoded screenshot|VGhpcyBpcyBhbiBleGFtcGxl|
   
 Example output:
 
@@ -318,7 +318,7 @@ This action is used to returns a list with details on the analysis machines avai
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|machines|[]machine|True|List of machines available to Cuckoo|["Example Machine"]|
+|machines|[]machine|False|List of machines available to Cuckoo|["Example Machine"]|
   
 Example output:
 
@@ -352,7 +352,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|dump_files|[]string|True|Dumped Files|["Example file"]|
+|dump_files|[]string|False|Dumped Files|["Example file"]|
   
 Example output:
 
@@ -388,7 +388,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|tasks|[]task|True|Cuckoo tasks|[{"completed": 1, "pending": 1, "reported": 1, "running": 1, "total": 1}]|
+|tasks|[]task|False|Cuckoo tasks|[{"completed": 1, "pending": 1, "reported": 1, "running": 1, "total": 1}]|
   
 Example output:
 
@@ -429,7 +429,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |reboot_id|integer|True|Reboot ID|1234678910|
-|task_id|integer|True|Task ID|12345678910|
+|task_id|integer|False|Task ID|12345678910|
   
 Example output:
 
@@ -462,7 +462,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|True|Action success or failure|True|
+|success|boolean|False|Action success or failure|True|
   
 Example output:
 
@@ -496,7 +496,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|task_id|integer|True|Task ID|12345678910|
+|task_id|integer|False|Task ID|12345678910|
   
 Example output:
 
@@ -535,7 +535,7 @@ Example input:
 | :--- | :--- | :--- | :--- | :--- |
 |errors|[]string|False|Errors if any|["ExampleError"]|
 |submit_id|integer|False|Submission ID|12345678910|
-|task_id|integer|True|Task ID|1234678910|
+|task_id|integer|False|Task ID|1234678910|
   
 Example output:
 
@@ -571,7 +571,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|task_id|integer|True|Task ID|12345678910|
+|task_id|integer|False|Task ID|12345678910|
   
 Example output:
 
@@ -607,8 +607,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|data|data|True|Data|3395856ce81f2b7382dee72602f798b642f14140|
-|error|boolean|True|Error information|True|
+|data|data|False|Data|3395856ce81f2b7382dee72602f798b642f14140|
+|error|boolean|False|Error information|True|
   
 Example output:
 
@@ -641,7 +641,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|machine|machine|True|Machine details|Example Machine|
+|machine|machine|False|Machine details|Example Machine|
   
 Example output:
 
@@ -673,7 +673,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|task|task|True|Cuckoo task|{'task_id': 1}|
+|task|task|False|Cuckoo task|{'task_id': 1}|
   
 Example output:
 
@@ -697,7 +697,7 @@ This action is used to returns VPN status
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|vpns|[]vpn|True|VPN status array|[{"name": "Example", "status": "Running"}]|
+|vpns|[]vpn|False|VPN status array|[{"name": "Example", "status": "Running"}]|
   
 Example output:
 
@@ -795,7 +795,7 @@ Example output:
 |errors|[]string|None|None|None|None|
 |guest|guest|None|None|None|None|
 |ID|integer|None|None|None|None|
-|machine|string|None|None|None|None|
+|machine|string|None|False|None|None|
 |options|[]option|None|None|None|None|
 |owner|string|None|None|None|None|
 |package|string|None|None|None|None|
@@ -823,6 +823,7 @@ Example output:
 |Locked?|boolean|None|None|None|None|
 |Date on which locked status was changed|date|None|None|None|None|
 |name|string|None|None|None|None|
+|options|[]option|None|None|None|None|
 |platform|string|None|None|None|None|
 |Resultserver IP|string|None|None|None|None|
 |Resultserver Port|integer|None|None|None|None|

@@ -56,9 +56,6 @@ class ListTasksOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
-  "required": [
-    "tasks"
-  ],
   "definitions": {
     "task": {
       "type": "object",

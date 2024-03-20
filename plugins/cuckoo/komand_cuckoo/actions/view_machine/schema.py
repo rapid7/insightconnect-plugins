@@ -50,9 +50,6 @@ class ViewMachineOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
-  "required": [
-    "machine"
-  ],
   "definitions": {
     "machine": {
       "type": "object",
@@ -92,41 +89,62 @@ class ViewMachineOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "order": 7
         },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/option"
+          },
+          "order": 8
+        },
         "platform": {
           "type": "string",
-          "order": 8
+          "order": 9
         },
         "resultserver_ip": {
           "type": "string",
           "title": "Resultserver IP",
-          "order": 9
+          "order": 10
         },
         "resultserver_port": {
           "type": "integer",
           "title": "Resultserver Port",
-          "order": 10
+          "order": 11
         },
         "snapshot": {
           "type": "string",
-          "order": 11
+          "order": 12
         },
         "status": {
           "type": "string",
-          "order": 12
+          "order": 13
         },
         "status_changed_on": {
           "type": "string",
           "format": "date-time",
           "displayType": "date",
           "description": "Date on which status was changed",
-          "order": 13
+          "order": 14
         },
         "tags": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "order": 14
+          "order": 15
+        }
+      }
+    },
+    "option": {
+      "type": "object",
+      "title": "option",
+      "properties": {
+        "option": {
+          "type": "string",
+          "order": 1
+        },
+        "value": {
+          "type": "string",
+          "order": 2
         }
       }
     }

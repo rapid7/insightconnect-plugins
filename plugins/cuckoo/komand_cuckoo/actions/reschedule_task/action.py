@@ -17,6 +17,6 @@ class RescheduleTask(insightconnect_plugin_runtime.Action):
         if priority:
             endpoint = f"tasks/reschedule/{task_id}/{priority}"
         else:
-            endpoint = f"/tasks/reschedule/{task_id}"
+            endpoint = f"tasks/reschedule/{task_id}"
         response = self.connection.api.send(endpoint)
         return response

@@ -12,7 +12,7 @@ class SubmitUrl(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        endpoint = "/tasks/create/url"
+        endpoint = "tasks/create/url"
         url = params.get(Input.URL, "")
         data = {"url": url}
         response = self.connection.api.send(endpoint, method="POST", data=data)

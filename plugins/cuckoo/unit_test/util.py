@@ -32,8 +32,12 @@ class Util:
             return file_reader.read()
 
     @staticmethod
+    def read_file_to_dict(filename: str) -> dict:
+        return json.loads(Util.read_file_to_string(filename))
+
+    @staticmethod
     def mock_request(*args, **kwargs):
-        url = args[0].url
+        url = kwargs.get("url")
         # Cuckoo Status
         if url == f"{STUB_URL}/cuckoo/status":
             return MockResponse(200, "cuckoo_status_success.json.resp")
@@ -53,17 +57,17 @@ class Util:
         if url == f"{STUB_URL}/pcap/get/1":
             return MockResponse(200, "get_pcap_success.json.resp")
         # Get Report
-        if url == f"{STUB_URL}/tasks/report/1":
+        if url == f"{STUB_URL}/tasks/report/1/json":
             return MockResponse(200, "get_report_success.json.resp")
         # Get Screenshots
-        if url == f"{STUB_URL}/tasks/screenshots/1":
+        if url == f"{STUB_URL}/tasks/screenshots/1/1":
             return MockResponse(200, "get_screenshots_success.json.resp")
         # List Machines
         if url == f"{STUB_URL}/machines/list":
-            return MockResponse(200, "list_machines_success..json.resp")
+            return MockResponse(200, "list_machines_success.json.resp")
         # List Memory
         if url == f"{STUB_URL}/memory/list/1":
-            return MockResponse(200, "list_memory_success..json.resp")
+            return MockResponse(200, "list_memory_success.json.resp")
         # List Tasks
         if url == f"{STUB_URL}/tasks/list/1/1":
             return MockResponse(200, "list_tasks_success.json.resp")
@@ -84,6 +88,10 @@ class Util:
             return MockResponse(200, "submit_url_success.json.resp")
         # View File
         if url == f"{STUB_URL}/files/view/id/1":
+            return MockResponse(200, "view_file_success.json.resp")
+        if url == f"{STUB_URL}/files/view/sha256/275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f":
+            return MockResponse(200, "view_file_success.json.resp")
+        if url == f"{STUB_URL}/files/view/md5/9de5069c5afe602b2ea0a04b66beb2c0":
             return MockResponse(200, "view_file_success.json.resp")
         # View Machine
         if url == f"{STUB_URL}/machines/view/machine":
@@ -109,6 +117,7 @@ class Util:
             return MockResponse(500, "error.json.resp")
         if url == f"{STUB_URL}/machines/view/threehundredandone":
             return MockResponse(301, "error.json.resp")
+        raise NotImplementedError("Not implemented", kwargs)
 
 
 class MockResponse:
@@ -118,6 +127,7 @@ class MockResponse:
         self.headers = headers
         if filename:
             self.text = Util.read_file_to_string(f"responses/{filename}")
+            self.content = bytes(Util.read_file_to_string(f"responses/{filename}"), "utf-8")
 
     def json(self):
         return json.loads(self.text)

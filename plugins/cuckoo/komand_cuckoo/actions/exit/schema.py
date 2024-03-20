@@ -36,9 +36,6 @@ class ExitOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
-  "required": [
-    "message"
-  ],
   "definitions": {}
 }
     """)

@@ -1,20 +1,29 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_cuckoo.connection.connection import Connection
 from komand_cuckoo.actions.exit import Exit
-import json
-import logging
+from util import Util
+from unittest.mock import patch
+from parameterized import parameterized
 
 
 class TestExit(TestCase):
-    def test_exit(self):
-        """
-        DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.action = Util.default_connector(Exit())
 
-        TODO: Implement test cases here
-        """
-
-        self.fail("Unimplemented Test Case")
+    @parameterized.expand(
+        [
+            [
+                "Success",
+                Util.read_file_to_dict("expected/exit_success.json.exp"),
+            ],
+        ]
+    )
+    @patch("requests.request", side_effect=Util.mock_request)
+    def test_exit(self, test_name, expected, mock_request):
+        actual = self.action.run()
+        self.assertEqual(expected, actual)
