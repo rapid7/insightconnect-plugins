@@ -44,7 +44,10 @@ class Util:
 
     @staticmethod
     def mock_request(*args, **kwargs):
-        url = kwargs.get("url", "")
+        print("ARGS")
+        print(args)
+        print("KWARGS")
+        print(kwargs)        url = kwargs.get("url", "")
         # Authenticate
         if url == "https://sepm-14:8446/sepm/api/v1/identity/authenticate":
             return MockResponse(200, "authenticate.json.resp")

@@ -1,4 +1,3 @@
-import json.decoder
 from typing import Dict, List, Any
 
 import insightconnect_plugin_runtime.helper
@@ -6,7 +5,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 from requests import Response
 
-import logging
 from komand_cuckoo.util.util import Util
 
 
@@ -20,14 +18,11 @@ class API(object):
         """
         Sends a HTTP request, returning the response body or JSON
         """
-        logging.basicConfig(level=logging.INFO)
-        logging.info(f"ENDPOINT {endpoint}")
         try:
             response = requests.request(url=f"{self.url}/{endpoint}", method=method, data=data, files=files)
             self.response_handler(response)
             if _json:
                 data = Util.extract_json(response)
-                logging.info(f"JSON {data}")
                 return insightconnect_plugin_runtime.helper.clean(data)
             return response
         except requests.exceptions.HTTPError as exception:

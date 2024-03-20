@@ -82,7 +82,6 @@ class TestViewMachine(TestCase):
     )
     @patch("requests.request", side_effect=Util.mock_request)
     def test_view_machines_error(self, test_name, input_params, cause, assistance, data, mock_request):
-        print(mock_request)
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
         self.assertEqual(cause, error.exception.cause)
