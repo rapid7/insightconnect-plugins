@@ -5,9 +5,11 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_cuckoo.actions.cuckoo_status import CuckooStatus
+from komand_cuckoo.actions.cuckoo_status.schema import CuckooStatusOutput
 from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
+from jsonschema import validate
 
 
 class TestCuckooStatus(TestCase):
@@ -27,3 +29,4 @@ class TestCuckooStatus(TestCase):
     def test_cuckoo_status(self, test_name, expected, mock_request):
         actual = self.action.run()
         self.assertEqual(expected, actual)
+        validate(actual, CuckooStatusOutput.schema)

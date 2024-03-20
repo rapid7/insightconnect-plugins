@@ -5,9 +5,11 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_cuckoo.actions.get_screenshots import GetScreenshots
+from komand_cuckoo.actions.get_screenshots.schema import GetScreenshotsOutput
 from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
+from jsonschema import validate
 
 
 class TestGetScreenshots(TestCase):
@@ -28,3 +30,4 @@ class TestGetScreenshots(TestCase):
     def test_get_screenshots(self, test_name, input, expected, mock_request):
         actual = self.action.run(input)
         self.assertEqual(expected, actual)
+        validate(actual, GetScreenshotsOutput.schema)

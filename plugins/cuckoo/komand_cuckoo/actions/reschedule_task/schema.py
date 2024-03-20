@@ -13,6 +13,7 @@ class Input:
 
 
 class Output:
+    SUCCESS = "success"
     TASK_ID = "task_id"
 
 
@@ -51,6 +52,12 @@ class RescheduleTaskOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "success": {
+      "type": "boolean",
+      "title": "Success",
+      "description": "Reschedule success flag",
+      "order": 2
+    },
     "task_id": {
       "type": "integer",
       "title": "Task ID",

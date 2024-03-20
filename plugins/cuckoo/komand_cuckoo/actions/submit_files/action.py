@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
-from .schema import SubmitFilesInput, SubmitFilesOutput, Input, Component
+from .schema import SubmitFilesInput, SubmitFilesOutput, Input, Component, Output
+
 # Custom imports below
 import base64
 

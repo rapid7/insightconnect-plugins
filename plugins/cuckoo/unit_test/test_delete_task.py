@@ -5,9 +5,11 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_cuckoo.actions.delete_task import DeleteTask
+from komand_cuckoo.actions.delete_task.schema import DeleteTaskOutput
 from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
+from jsonschema import validate
 
 
 class TestDeleteTask(TestCase):
@@ -28,3 +30,4 @@ class TestDeleteTask(TestCase):
     def test_delete_task(self, test_name, input, expected, mock_request):
         actual = self.action.run(input)
         self.assertEqual(expected, actual)
+        validate(actual, DeleteTaskOutput.schema)

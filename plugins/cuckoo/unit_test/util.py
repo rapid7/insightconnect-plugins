@@ -16,9 +16,7 @@ class Util:
     def default_connector(action: insightconnect_plugin_runtime.Action):
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
-        params = {
-            Input.URL: STUB_URL
-        }
+        params = {Input.URL: STUB_URL}
         default_connection.connect(params)
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
@@ -116,7 +114,7 @@ class Util:
         if url == f"{STUB_URL}/machines/view/fivehundred":
             return MockResponse(500, "error.json.resp")
         if url == f"{STUB_URL}/machines/view/threehundredandone":
-            return MockResponse(301, "error.json.resp")
+            return MockResponse(202, "error.json.resp")
         raise NotImplementedError("Not implemented", kwargs)
 
 

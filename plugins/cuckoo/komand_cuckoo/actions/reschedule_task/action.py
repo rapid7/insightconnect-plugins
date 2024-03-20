@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import RescheduleTaskInput, RescheduleTaskOutput, Input, Component
+from .schema import RescheduleTaskInput, RescheduleTaskOutput, Input, Component, Output
 
 
 class RescheduleTask(insightconnect_plugin_runtime.Action):
@@ -19,4 +19,7 @@ class RescheduleTask(insightconnect_plugin_runtime.Action):
         else:
             endpoint = f"tasks/reschedule/{task_id}"
         response = self.connection.api.send(endpoint)
-        return response
+        return {
+            Output.TASK_ID: response.get("task_id"),
+            Output.SUCCESS: response.get("success")
+        }

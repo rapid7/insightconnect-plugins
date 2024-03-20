@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
-from .schema import DeleteTaskInput, DeleteTaskOutput, Input, Component
+from .schema import DeleteTaskInput, DeleteTaskOutput, Input, Component, Output
+
 # Custom imports below
 import requests
 

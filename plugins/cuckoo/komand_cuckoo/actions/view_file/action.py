@@ -24,9 +24,7 @@ class ViewFile(insightconnect_plugin_runtime.Action):
             endpoint = f"files/view/id/{task_id}"
         else:
             raise PluginException(
-                cause="Invalid input provided.",
-                assistance="Please provide one of ID, MD5, or SHA256"
+                cause="Invalid input provided.", assistance="Please provide one of ID, MD5, or SHA256"
             )
-        response = self.connection.api.send(endpoint, _json=False)
-        content = response.content
-        return {Output.DATA: content}
+        response = self.connection.api.send(endpoint)
+        return {Output.DATA: response.get("sample", {})}

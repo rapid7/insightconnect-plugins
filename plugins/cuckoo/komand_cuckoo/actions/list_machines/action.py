@@ -14,4 +14,9 @@ class ListMachines(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         endpoint = "machines/list"
         response = self.connection.api.send(endpoint)
+        machines = response.get("machines")
+        for machine in machines:
+            resultserver_port = machine.get("resultserver_port")
+            if resultserver_port:
+                machine["resultserver_port"] = int(resultserver_port)
         return {Output.MACHINES: response.get("machines", [])}

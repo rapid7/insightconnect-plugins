@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import RerunReportInput, RerunReportOutput, Input, Component
+from .schema import RerunReportInput, RerunReportOutput, Input, Component, Output
 
 
 class RerunReport(insightconnect_plugin_runtime.Action):
@@ -15,4 +15,4 @@ class RerunReport(insightconnect_plugin_runtime.Action):
         task_id = params.get(Input.TASK_ID, "")
         endpoint = f"tasks/rereport/{task_id}"
         response = self.connection.api.send(endpoint)
-        return response
+        return {Output.SUCCESS: response.get("success")}

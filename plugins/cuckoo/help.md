@@ -496,12 +496,14 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Reschedule success flag|True|
 |task_id|integer|False|Task ID|12345678910|
   
 Example output:
 
 ```
 {
+  "success": true,
   "task_id": 12345678910
 }
 ```
@@ -887,12 +889,23 @@ Example output:
 *There is no troubleshooting for this plugin.*
 
 # Version History
-  
-*This plugin does not contain a version history.*
+
+* 2.0.0 - Update to insightconnect-plugin-runtime | Update `Reschedule Task` output to include `success` | Update title of `Delete Task` output from `Error message` to `Error Message`
+* 1.0.3 - Updated Requests version to 2.20.0
+* 1.0.2 - New spec and help.md format for the Extension Library
+* 1.0.1 - Bug fix for Submit Files where Submit ID was required
+* 1.0.0 - Support web server mode | Bug fix for testing outputs | Semver compliance
+* 0.2.3 - Bug fix for Cuckoo API version 2.0.5
+* 0.2.2 - URL endpoints not ending in `/`, rename server to URL in connection, and bug fix for file submission
+* 0.2.1 - SSL bug fix in SDK
+* 0.2.0 - Rewrite
+* 0.1.0 - Initial plugin
 
 # Links
 
+* [cuckoo](https://cuckoosandbox.org/)
 
 ## References
-  
-*This plugin does not contain any references.*
+
+* [Cuckoo Sandbox](https://cuckoosandbox.org/)
+* [Cuckoo API](http://docs.cuckoosandbox.org/en/latest/)

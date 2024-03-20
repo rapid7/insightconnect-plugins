@@ -5,9 +5,11 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_cuckoo.actions.rerun_report import RerunReport
+from komand_cuckoo.actions.vpn_status.schema import VpnStatusOutput
 from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
+from jsonschema import validate
 
 
 class TestRerunReport(TestCase):
@@ -28,3 +30,4 @@ class TestRerunReport(TestCase):
     def test_rerun_report(self, test_name, input, expected, mock_request):
         actual = self.action.run(input)
         self.assertEqual(expected, actual)
+        validate(actual, VpnStatusOutput.schema)

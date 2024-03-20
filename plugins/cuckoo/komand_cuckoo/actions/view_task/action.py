@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import ViewTaskInput, ViewTaskOutput, Input, Component
+from .schema import ViewTaskInput, ViewTaskOutput, Input, Component, Output
 
 
 class ViewTask(insightconnect_plugin_runtime.Action):
@@ -15,4 +15,4 @@ class ViewTask(insightconnect_plugin_runtime.Action):
         task_id = params.get(Input.TASK_ID, "")
         endpoint = f"tasks/view/{task_id}"
         response = self.connection.api.send(endpoint)
-        return response
+        return {Output.TASK: response.get("task")}

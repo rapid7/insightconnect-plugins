@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import VpnStatusInput, VpnStatusOutput, Component
+from .schema import VpnStatusInput, VpnStatusOutput, Component, Output
 
 
 class VpnStatus(insightconnect_plugin_runtime.Action):
@@ -19,5 +19,4 @@ class VpnStatus(insightconnect_plugin_runtime.Action):
         for vpn, running_status in vpns.items():
             status = "Running" if running_status else "Not running"
             vpn_list.append({"name": vpn, "status": status})
-        response["vpns"] = vpn_list
-        return response
+        return {Output.VPNS: vpn_list}

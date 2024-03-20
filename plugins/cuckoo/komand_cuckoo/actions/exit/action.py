@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
-from .schema import ExitInput, ExitOutput, Component
+from .schema import ExitInput, ExitOutput, Component, Output
+
 # Custom imports below
 
 
@@ -15,4 +16,5 @@ class Exit(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         endpoint = "exit"
         response = self.connection.api.send(endpoint)
-        return response
+        message = response.get("message", "")
+        return {Output.MESSAGE: message}

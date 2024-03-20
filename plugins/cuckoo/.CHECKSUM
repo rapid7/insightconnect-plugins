@@ -1,7 +1,7 @@
 {
-	"spec": "cbe6d67813c8ccaecc28bc95238f25eb",
-	"manifest": "a9e4ab57aeebececd1ad57767dac4936",
-	"setup": "2698197e21cb1f775415e6547ecf2239",
+	"spec": "f44307814c9d61cc737585d0e530f102",
+	"manifest": "df4d2bb633ba7b13ec89178a62dc0abc",
+	"setup": "c45e2c823af289694f329d51a9fe1546",
 	"schemas": [
 		{
 			"identifier": "cuckoo_status/schema.py",
@@ -9,11 +9,11 @@
 		},
 		{
 			"identifier": "delete_task/schema.py",
-			"hash": "d8c893fd4ce91d8525008275e8c6b3b4"
+			"hash": "b22f2c13fa65cab8b41c63722f47824e"
 		},
 		{
 			"identifier": "exit/schema.py",
-			"hash": "89d2a2f851581ae5c4a0bb790c3404e9"
+			"hash": "4cd0afd04dfc9ad34ec020367463ab41"
 		},
 		{
 			"identifier": "get_file/schema.py",
@@ -57,7 +57,7 @@
 		},
 		{
 			"identifier": "reschedule_task/schema.py",
-			"hash": "cc13a1299745626af38a76f494252036"
+			"hash": "6377a718768100b96b2f1fef0c6774b0"
 		},
 		{
 			"identifier": "submit_files/schema.py",

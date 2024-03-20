@@ -5,9 +5,11 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_cuckoo.actions.get_file import GetFile
+from komand_cuckoo.actions.get_file.schema import GetFileOutput
 from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
+from jsonschema import validate
 
 
 class TestGetFile(TestCase):
@@ -28,3 +30,4 @@ class TestGetFile(TestCase):
     def test_get_file(self, test_name, input, expected, mock_request):
         actual = self.action.run(input)
         self.assertEqual(expected, actual)
+        validate(actual, GetFileOutput.schema)

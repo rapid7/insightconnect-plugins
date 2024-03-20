@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import ViewMachineInput, ViewMachineOutput, Input, Component
+from .schema import ViewMachineInput, ViewMachineOutput, Input, Component, Output
 
 
 class ViewMachine(insightconnect_plugin_runtime.Action):
@@ -15,4 +15,8 @@ class ViewMachine(insightconnect_plugin_runtime.Action):
         machine_name = params.get(Input.MACHINE_NAME, "")
         endpoint = f"machines/view/{machine_name}"
         response = self.connection.api.send(endpoint)
-        return response
+        machine = response.get("machine", {})
+        resultserver_port = machine.get("resultserver_port")
+        if resultserver_port:
+            machine["resultserver_port"] = int(resultserver_port)
+        return {Output.MACHINE: machine}

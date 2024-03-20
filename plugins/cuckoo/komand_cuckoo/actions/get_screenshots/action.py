@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import GetScreenshotsInput, GetScreenshotsOutput, Input, Output, Component
+
 # Custom imports below
 from ...util.util import Util
 

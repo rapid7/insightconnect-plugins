@@ -5,9 +5,11 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_cuckoo.actions.list_machines import ListMachines
+from komand_cuckoo.actions.list_machines.schema import ListMachinesOutput
 from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
+from jsonschema import validate
 
 
 class TestListMachines(TestCase):
@@ -27,3 +29,4 @@ class TestListMachines(TestCase):
     def test_list_machines(self, test_name, expected, mock_request):
         actual = self.action.run()
         self.assertEqual(expected, actual)
+        validate(actual, ListMachinesOutput.schema)

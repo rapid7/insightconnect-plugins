@@ -5,9 +5,11 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_cuckoo.actions.get_memory import GetMemory
+from komand_cuckoo.actions.get_memory.schema import GetMemoryOutput
 from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
+from jsonschema import validate
 
 
 class TestGetMemory(TestCase):
@@ -28,3 +30,4 @@ class TestGetMemory(TestCase):
     def test_get_memory(self, test_name, input, expected, mock_request):
         actual = self.action.run(input)
         self.assertEqual(expected, actual)
+        validate(actual, GetMemoryOutput.schema)

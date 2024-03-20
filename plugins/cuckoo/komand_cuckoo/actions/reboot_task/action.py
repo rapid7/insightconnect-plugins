@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import RebootTaskInput, RebootTaskOutput, Input, Component
+from .schema import RebootTaskInput, RebootTaskOutput, Input, Component, Output
 
 
 class RebootTask(insightconnect_plugin_runtime.Action):
@@ -15,4 +15,9 @@ class RebootTask(insightconnect_plugin_runtime.Action):
         task_id = params.get(Input.TASK_ID, "")
         endpoint = f"tasks/reboot/{task_id}"
         response = self.connection.api.send(endpoint)
-        return response
+        task_id = response.get("task_id")
+        reboot_id = response.get("reboot_id")
+        return {
+            Output.TASK_ID: task_id,
+            Output.REBOOT_ID: reboot_id
+        }

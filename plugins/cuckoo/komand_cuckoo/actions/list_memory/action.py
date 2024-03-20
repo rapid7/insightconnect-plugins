@@ -18,5 +18,5 @@ class ListMemory(insightconnect_plugin_runtime.Action):
         endpoint = f"memory/list/{task_id}"
         response = self.connection.api.send(endpoint)
         if not isinstance(response, List):
-            response = [response]
+            response = response.get("dump_files", [])
         return {Output.DUMP_FILES: response}

@@ -12,22 +12,23 @@ from unittest.mock import patch
 from parameterized import parameterized
 from jsonschema import validate
 
-class TestRescheduleTask(TestCase):
-  @classmethod
-  def setUpClass(cls) -> None:
-    cls.action = Util.default_connector(RescheduleTask())
 
-  @parameterized.expand(
-    [
-      [
-        "Success",
-        Util.read_file_to_dict("input/reschedule_task_success.json.inp"),
-        Util.read_file_to_dict("expected/reschedule_task_success.json.exp"),
-      ],
-    ]
-  )
-  @patch("requests.request", side_effect=Util.mock_request)
-  def test_reschedule_task(self, test_name, input, expected, mock_request):
-    actual = self.action.run(input)
-    self.assertEqual(expected, actual)
-    validate(actual, RescheduleTaskOutput.schema)
+class TestRescheduleTask(TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.action = Util.default_connector(RescheduleTask())
+
+    @parameterized.expand(
+        [
+            [
+                "Success",
+                Util.read_file_to_dict("input/reschedule_task_success.json.inp"),
+                Util.read_file_to_dict("expected/reschedule_task_success.json.exp"),
+            ],
+        ]
+    )
+    @patch("requests.request", side_effect=Util.mock_request)
+    def test_reschedule_task(self, test_name, input, expected, mock_request):
+        actual = self.action.run(input)
+        self.assertEqual(expected, actual)
+        validate(actual, RescheduleTaskOutput.schema)

@@ -5,8 +5,8 @@ name: cuckoo
 title: Cuckoo Sandbox
 description: "Cuckoo Sandbox is an open source automated malware analysis system. Using the Cuckoo Sandbox plugin for
 Rapid7 InsightConnect, users can analyze files and URLs, manage tasks, and more"
-version: 1.0.4
-connection_version: 1
+version: 2.0.0
+connection_version: 2
 supported_versions: ["2.0.6"]
 vendor: rapid7
 sdk:
@@ -382,6 +382,12 @@ actions:
         description: Task ID
         required: false
         example: 12345678910
+      success:
+        title: Success
+        type: boolean
+        description: Reschedule success flag
+        required: false
+        example: True
   delete_task:
     title: Delete Task
     description: Removes the given task from the database and deletes the results
@@ -400,7 +406,7 @@ actions:
         required: false
         example: true
       error_value:
-        title: Error message
+        title: Error Message
         description: Error message
         type: string
         required: false
@@ -685,6 +691,7 @@ actions:
     output:
       message:
         type: string
+        title: Message
         description: Exit message
         required: false
         example: "Exit Message"

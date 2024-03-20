@@ -12,7 +12,7 @@
             "label": "cuckoo1",
             "platform": "windows",
             "id": 1,
-            "resultserver_port": "2042"
+            "resultserver_port": 2042
         }
     ]
 }

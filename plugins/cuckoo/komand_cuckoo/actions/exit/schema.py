@@ -32,6 +32,7 @@ class ExitOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "message": {
       "type": "string",
+      "title": "Message",
       "description": "Exit message",
       "order": 1
     }
