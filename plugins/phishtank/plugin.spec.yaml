@@ -3,8 +3,13 @@ extension: plugin
 products: [insightconnect]
 name: phishtank
 title: PhishTank
-description: The Phishtank plugin allows you to submit URLs for analysis by the PhishTank community
-version: 1.0.2
+description: Phishtank is a community-driven anti-phishing site where users submit suspected phishes and other users 'vote' if it is a phish or not. This plugin utilizes the Phishtank API to look up URLs in the PhishTank database.
+version: 1.0.3
+sdk:
+  type: slim
+  version: 5
+  user: nobody
+supported_versions: ["2024-20-03"]
 vendor: rapid7
 support: community
 status: []
@@ -12,6 +17,10 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/phishtank
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.phishtank.com/
+key_features: ["Submit URLs to identify reported phishing links"]
+requirements: ["PhishTank API key"]
+references: ["[PhishTank](https://www.phishtank.com/)", "[PhishTank API](https://www.phishtank.com/api_info.php)"]
+links: []
 tags:
 - komand
 - phishtank
@@ -26,57 +35,67 @@ connection:
     description: The API key to use
     type: credential_secret_key
     required: true
+    example: secret_key
 actions:
   check:
     title: Check URL
-    description: Submit URL to PhishTank
+    description: Submit a URL to PhishTank
     input:
       url:
         title: URL
         description: URL to Submit
         type: string
         required: true
+        example: example.com
     output:
       url:
         title: URL
         description: Submitted URL
         type: string
         required: false
+        example: example.com
       in_database:
         title: In Database
         description: If the URL is in the PhishTank database
         type: boolean
         required: false
+        example: false
       phish_id:
         title: Phish ID
         description: The ID number by which PhishTank refers to a phish submission
         type: string
         required: false
+        example: 9014567
       phish_detail_url:
         title: Phish Detail URL
         description: PhishTank detail URL for the phish, where you can view data about
           the phish, including a screenshot and the community votes
         type: string
         required: false
+        example: http://data.phishtank.com/data/online-valid.json
       verified:
         title: Verified
         description: Whether or not this phish has been verified by the PhishTank
           community
         type: boolean
         required: false
+        example: true
       verified_at:
         title: Verified At
         description: The date and time at which the phish was verified as valid by
           the PhishTank community
         type: date
         required: false
+        example: <date><time>
       valid:
         title: Valid
         description: Whether the phish is valid or not
         type: boolean
         required: false
+        example: true
       submitted_at:
         title: Submitted At
         description: The date and time at which this phish was reported to PhishTank
         type: date
         required: false
+        example: <date><time>
