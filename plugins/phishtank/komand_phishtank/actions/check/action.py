@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import CheckInput, CheckOutput
+from .schema import CheckInput, CheckOutput, Component
 
 # Custom imports below
 import requests
@@ -9,7 +9,7 @@ class Check(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="check",
-            description="Submit URL to Phishtank",
+            description=Component.DESCRIPTION,
             input=CheckInput(),
             output=CheckOutput(),
         )
