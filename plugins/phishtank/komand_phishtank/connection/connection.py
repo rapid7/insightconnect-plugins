@@ -3,7 +3,7 @@ from .schema import ConnectionSchema
 
 # Custom imports below
 import json
-import requests # nosec B113
+import requests
 import urllib
 
 
@@ -19,6 +19,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 "url": urllib.quote(url),
                 "app_key": self.parameters.get("credentials").get("secretKey"),
             },
+            timeout=None,
         )
         result = r.json()["results"]
 
