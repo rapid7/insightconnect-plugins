@@ -382,12 +382,12 @@ actions:
         description: Task ID
         required: false
         example: 12345678910
-      success:
-        title: Success
-        type: boolean
-        description: Reschedule success flag
+      status:
+        title: Status
+        type: string
+        description: Reschedule status value
         required: false
-        example: True
+        example: OK
   delete_task:
     title: Delete Task
     description: Removes the given task from the database and deletes the results
