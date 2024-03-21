@@ -1,0 +1,14 @@
+{
+  "status_code": "200",
+  "status_message": "Results found.",
+  "results": [
+    {
+      "domain": "example.com",
+      "subdomains": [
+        "sub1.example.com",
+        "sub2.example.com",
+        "sub3.example.com"
+      ]
+    }
+  ]
+}

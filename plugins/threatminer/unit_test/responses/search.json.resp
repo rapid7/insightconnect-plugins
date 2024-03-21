@@ -1,0 +1,11 @@
+{
+  "status_code": "200",
+  "status_message": "Results found.",
+  "results": [
+    {
+      "filename": "ExampleFilename.pdf",
+      "year": "2016",
+      "URL": "https://www.threatminer.org//report.php?q=ExampleFilename.pdf&y=2016"
+    }
+  ]
+}
