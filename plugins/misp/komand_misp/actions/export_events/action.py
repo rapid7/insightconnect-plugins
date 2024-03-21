@@ -20,6 +20,7 @@ class ExportEvents(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         key = self.connection.key
+        ssl = self.connection.ssl
         event_id = params.get("event_id")
         with_attachment = params.get("encode_attachments")
         tags = params.get("tags")
@@ -51,7 +52,7 @@ class ExportEvents(insightconnect_plugin_runtime.Action):
         post = {"request": request}
 
         # Generate request
-        response = requests.post(url, data=json.dumps(post), headers=headers, verify=False)  # noqa: B501
+        response = requests.post(url, data=json.dumps(post), headers=headers, verify=ssl)  # noqa: B501
 
         # Raise exception if 200 response is not returned
         if response.status_code != 200:

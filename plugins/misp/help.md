@@ -1229,6 +1229,7 @@ Example output:
 
 # Version History
 
+* 5.0.3 - SSL configuration for all actions  
 * 5.0.2 - Update to latest SDK | Bumping `pymisp` version 
 * 5.0.1 - Set default value for fields `analysis`, `published`, `threat_level` in Search Events action | Update insight connect SDK to 4
 * 5.0.0 - New fields added to Search Events action for `values`, `category` and `type_attribute`

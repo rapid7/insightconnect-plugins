@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="misp-rapid7-plugin",
-      version="5.0.2",
+      version="5.0.3",
       description="MISP is an open source threat sharing platform",
       author="rapid7",
       author_email="",

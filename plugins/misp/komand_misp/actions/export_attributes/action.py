@@ -19,6 +19,7 @@ class ExportAttributes(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         key = self.connection.key
+        ssl = self.connection.ssl
         event_id = params.get("event_id")
         ignore = params.get("include")
         tags = params.get("tags")
@@ -52,7 +53,7 @@ class ExportAttributes(insightconnect_plugin_runtime.Action):
             request["last"] = last
 
         # Generate request
-        response = requests.post(url, data=json.dumps(request), headers=headers, verify=False)  # noqa: B501
+        response = requests.post(url, data=json.dumps(request), headers=headers, verify=ssl)  # noqa: B501
 
         # Raise exception if 200 response is not returned
         if response.status_code != 200:
