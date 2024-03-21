@@ -1,35 +1,18 @@
-import komand
-from .schema import RerunReportInput, RerunReportOutput
-
-# Custom imports below
-import json
-import requests
+import insightconnect_plugin_runtime
+from .schema import RerunReportInput, RerunReportOutput, Input, Component, Output
 
 
-class RerunReport(komand.Action):
+class RerunReport(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="rerun_report",
-            description="Re-run reporting for task associated with the specified task ID",
+            description=Component.DESCRIPTION,
             input=RerunReportInput(),
             output=RerunReportOutput(),
         )
 
     def run(self, params={}):
-        server = self.connection.server
-        task_id = params.get("task_id", "")
-        endpoint = server + "/tasks/rereport/%d" % (task_id)
-
-        try:
-            r = requests.get(endpoint)
-            r.raise_for_status()
-            response = r.json()
-            return response
-
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
-
-    def test(self):
-        out = self.connection.test()
-        out["success"] = True
-        return out
+        task_id = params.get(Input.TASK_ID, "")
+        endpoint = f"tasks/rereport/{task_id}"
+        response = self.connection.api.send(endpoint)
+        return {Output.SUCCESS: response.get("success")}

@@ -1,48 +1,27 @@
-import komand
-from .schema import GetReportInput, GetReportOutput
+import insightconnect_plugin_runtime
+from .schema import GetReportInput, GetReportOutput, Input, Output, Component
 
 # Custom imports below
-import json
-import requests
-import base64
+from ...util.util import Util
 
 
-class GetReport(komand.Action):
+class GetReport(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_report",
-            description="Returns the report associated with the specified task ID",
+            description=Component.DESCRIPTION,
             input=GetReportInput(),
             output=GetReportOutput(),
         )
 
     def run(self, params={}):
-        server = self.connection.server
-        task_id = params.get("task_id", "")
-        desired_format = params.get("format", "")
+        task_id = params.get(Input.TASK_ID, "")
+        desired_format = params.get(Input.FORMAT, "")
 
         if desired_format:
-            endpoint = server + "/tasks/report/%d/%s" % (task_id, desired_format)
+            endpoint = f"tasks/report/{task_id}/{desired_format}"
         else:
-            endpoint = server + "/tasks/report/%d" % (task_id)
-
-        try:
-            r = requests.get(endpoint)
-            r.raise_for_status()
-            ctype = r.headers["Content-Type"]
-            if (
-                ctype.startswith("application/x-tar")
-                or ctype.startswith("application/octet-stream")
-                or ctype.startswith("application/json")
-                or ctype.startswith("text/html")
-            ):
-                content = r.content
-                return {"report": base64.b64encode(content).decode("UTF-8")}
-
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
-
-    def test(self):
-        out = self.connection.test()
-        out["report"] = ""
-        return out
+            endpoint = f"tasks/report/{task_id}"
+        response = self.connection.api.send(endpoint, _json=False)
+        content = response.content
+        return {Output.REPORT: Util.prepare_decoded_value(content)}

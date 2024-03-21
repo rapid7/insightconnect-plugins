@@ -1,42 +1,26 @@
-import komand
-from .schema import GetScreenshotsInput, GetScreenshotsOutput
+import insightconnect_plugin_runtime
+from .schema import GetScreenshotsInput, GetScreenshotsOutput, Input, Output, Component
 
 # Custom imports below
-import json
-import requests
-import base64
+from ...util.util import Util
 
 
-class GetScreenshots(komand.Action):
+class GetScreenshots(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_screenshots",
-            description="Returns one (jpeg) or all (zip) screenshots associated with the specified task ID",
+            description=Component.DESCRIPTION,
             input=GetScreenshotsInput(),
             output=GetScreenshotsOutput(),
         )
 
     def run(self, params={}):
-        server = self.connection.server
-        task_id = params.get("task_id", "")
-        screenshot_id = params.get("screenshot_id", "")
-
+        task_id = params.get(Input.TASK_ID, "")
+        screenshot_id = params.get(Input.SCREENSHOT_ID, "")
         if screenshot_id:
-            endpoint = server + "/tasks/screenshots/%d/%s" % (task_id, screenshot_id)
+            endpoint = f"tasks/screenshots/{task_id}/{screenshot_id}"
         else:
-            endpoint = server + "/tasks/screenshots/%d" % (task_id)
-
-        try:
-            r = requests.get(endpoint)
-            r.raise_for_status()
-            if r.headers["Content-Type"] == "image/jpeg" or r.headers["Content-Type"] == "application/zip":
-                content = r.content
-                return {"screenshots": base64.b64encode(content).decode("UTF-8")}
-
-        except Exception as e:
-            self.logger.error("Error: " + str(e))
-
-    def test(self):
-        out = self.connection.test()
-        out["screenshots"] = ""
-        return out
+            endpoint = f"tasks/screenshots/{task_id}"
+        response = self.connection.api.send(endpoint, _json=False)
+        content = response.content
+        return {Output.SCREENSHOTS: Util.prepare_decoded_value(content)}
