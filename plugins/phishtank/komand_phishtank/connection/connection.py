@@ -19,7 +19,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 "url": urllib.quote(url),
                 "app_key": self.parameters.get("credentials").get("secretKey"),
             },
-            timeout=None,
+            timeout=60,
         )
         result = r.json()["results"]
 
