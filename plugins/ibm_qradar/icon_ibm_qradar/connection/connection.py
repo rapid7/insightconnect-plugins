@@ -13,7 +13,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.username = None
         self.password = None
         self.host_url = ""
-        self.verify_ssl = False
+        self.verify_ssl = None
 
     def connect(self, params={}):
         """To read the connection configuration.
