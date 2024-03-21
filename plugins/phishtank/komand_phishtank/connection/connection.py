@@ -3,7 +3,7 @@ from .schema import ConnectionSchema
 
 # Custom imports below
 import json
-import requests
+import requests # nosec B113
 import urllib
 
 
@@ -28,7 +28,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         return result
 
-    def connect(self, params):
+    def connect(self, params):  # pylint: disable=unused-argument
         """
         Connection config params are supplied as a dict in
         params or also accessible in self.parameters['key']
