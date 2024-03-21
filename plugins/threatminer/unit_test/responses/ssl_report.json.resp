@@ -1,0 +1,10 @@
+{
+  "status_code": "200",
+  "status_message": "Results found.",
+  "results": [
+    {
+      "filename": "ExampleFilename",
+      "year": "2010"
+    }
+  ]
+}

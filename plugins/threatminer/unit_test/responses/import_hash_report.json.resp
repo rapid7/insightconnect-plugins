@@ -1,0 +1,34 @@
+{
+  "status_code": "200",
+  "status_message": "Results found.",
+  "results": [
+    {
+      "hash": "e1faffd7f97e38b1d5c6f2bcbc7f5d3d",
+      "type": "MD5",
+      "first_seen": "2022-01-01 10:30:00",
+      "last_seen": "2022-01-05 14:45:00",
+      "samples": [
+        {
+          "sample": "sample1.exe",
+          "date": "2022-01-01",
+          "source": "malware-database"
+        },
+        {
+          "sample": "sample2.exe",
+          "date": "2022-01-02",
+          "source": "malware-database"
+        }
+      ],
+      "relationships": [
+        {
+          "type": "Related IP",
+          "value": "192.168.1.100"
+        },
+        {
+          "type": "Related Domain",
+          "value": "example.com"
+        }
+      ]
+    }
+  ]
+}

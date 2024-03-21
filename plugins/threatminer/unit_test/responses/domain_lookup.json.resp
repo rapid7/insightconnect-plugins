@@ -1,0 +1,72 @@
+{
+  "status_code": "200",
+  "status_message": "Results found.",
+  "results": [
+    {
+      "domain": "example.com",
+      "is_subdomain": true,
+      "root_domain": "example.com",
+      "whois": {
+        "updated_date": "",
+        "whois_md5": [],
+        "billing_info": {
+          "Organization": "",
+          "City": "",
+          "State": "",
+          "Country": "",
+          "Postal_Code": ""
+        },
+        "registrant_info": {
+          "Organization": "",
+          "State": "",
+          "Postal_Code": "",
+          "Country": "",
+          "City": ""
+        },
+        "creation_date": "",
+        "whois_server": "",
+        "emails": {
+          "admin": "",
+          "tech": "",
+          "registrant": "",
+          "billing": ""
+        },
+        "tech_info": {
+          "Organization": "",
+          "City": "",
+          "State": "",
+          "Country": "",
+          "Postal_Code": ""
+        },
+        "admin_info": {
+          "Organization": "",
+          "City": "",
+          "State": "",
+          "Country": "",
+          "Postal_Code": ""
+        },
+        "nameservers": [],
+        "expiration_date": "",
+        "email_hashes": {
+          "admin": "",
+          "tech": "",
+          "registrant": "",
+          "billing": ""
+        },
+        "registrar": "",
+        "date_checked": "",
+        "reg_info": {
+          "Organization": "",
+          "City": "",
+          "State": "",
+          "Country": "",
+          "Postal_Code": ""
+        }
+      },
+      "last_updated": {
+        "sec": 1581089938,
+        "usec": 463000
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "status_code": "200",
+  "status_message": "Results found.",
+  "results": [
+    {
+      "reverse_name": "reverse.in-addr.",
+      "bgp_prefix": "192.168.0.0/24",
+      "cc": "",
+      "asn": "",
+      "asn_name": "",
+      "org_name": "ExampleOrgName",
+      "register": "example.com"
+    }
+  ]
+}
