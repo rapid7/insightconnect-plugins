@@ -21,7 +21,7 @@ class TestGetAssets(TestCase):
         """Set up an action for test."""
         cls.action = AsstesHelper.default_connector(GetAssets())
 
-    @patch("requests.get", side_effect=AsstesHelper.mock_request)
+    @patch("requests.request", side_effect=AsstesHelper.mock_request)
     def test_get_assets(self, make_request):
         """To get the assets.
 
@@ -33,7 +33,7 @@ class TestGetAssets(TestCase):
         self.assertEqual(results.get("data")["data"][0]["id"], 10001)
         validate(results.get("data"), GetAssetsOutput.schema)
 
-    @patch("requests.get", side_effect=AsstesHelper.mock_request)
+    @patch("requests.request", side_effect=AsstesHelper.mock_request)
     def test_get_assets_with_fields(self, make_request):
         """To get assets with given filed list as output.
 
@@ -47,7 +47,7 @@ class TestGetAssets(TestCase):
         self.assertTrue("id" in results.get("data")["data"][0].keys())
         validate(results.get("data"), GetAssetsOutput.schema)
 
-    @patch("requests.get", side_effect=AsstesHelper.mock_request)
+    @patch("requests.request", side_effect=AsstesHelper.mock_request)
     def test_get_assets_with_range(self, make_request):
         """To get assets with given range.
 
@@ -59,7 +59,7 @@ class TestGetAssets(TestCase):
         self.assertEqual(len(results.get("data")["data"]), 1)
         validate(results.get("data"), GetAssetsOutput.schema)
 
-    @patch("requests.get", side_effect=AsstesHelper.mock_request)
+    @patch("requests.request", side_effect=AsstesHelper.mock_request)
     def test_get_assets_with_invalid_range(self, make_request):
         """To get assets with given invalid range.
 
@@ -70,7 +70,7 @@ class TestGetAssets(TestCase):
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
-    @patch("requests.get", side_effect=AsstesHelper.mock_request)
+    @patch("requests.request", side_effect=AsstesHelper.mock_request)
     def test_get_assets_with_filter(self, make_request):
         """To get assets with given filter.
 
@@ -82,7 +82,7 @@ class TestGetAssets(TestCase):
         self.assertEqual(results.get("data")["data"][0]["id"], 10001)
         validate(results.get("data"), GetAssetsOutput.schema)
 
-    @patch("requests.get", side_effect=AsstesHelper.mock_request)
+    @patch("requests.request", side_effect=AsstesHelper.mock_request)
     def test_get_assets_with_multiple_query_params_given(self, make_request):
         """To get assets with multiple option given.
 
@@ -96,7 +96,7 @@ class TestGetAssets(TestCase):
         self.assertTrue("id" in results.get("data")["data"][0].keys())
         validate(results.get("data"), GetAssetsOutput.schema)
 
-    @patch("requests.get", side_effect=AsstesHelper.mock_request)
+    @patch("requests.request", side_effect=AsstesHelper.mock_request)
     def test_with_internal_server_error(self, make_request):
         """To test the get assets by ID with internalServerError."""
         action_params = {"filter": "internalServerError"}

@@ -21,7 +21,7 @@ class TestGetOffense(TestCase):
         """Set up an action for test."""
         cls.action = UpdateOffenseHelper.default_connector(UpdateOffense())
 
-    @patch("requests.post", side_effect=UpdateOffenseHelper.mock_request)
+    @patch("requests.request", side_effect=UpdateOffenseHelper.mock_request)
     def test_update_offense(self, make_request):
         """To update the offense with multiple params.
 
@@ -38,7 +38,7 @@ class TestGetOffense(TestCase):
         self.assertEqual(results.get("data")["data"]["id"], 10001)
         validate(results.get("data"), UpdateOffenseOutput.schema)
 
-    @patch("requests.post", side_effect=UpdateOffenseHelper.mock_request)
+    @patch("requests.request", side_effect=UpdateOffenseHelper.mock_request)
     def test_update_offenses_with_fields(self, make_request):
         """To update offenses with given field list as output.
 
@@ -52,7 +52,7 @@ class TestGetOffense(TestCase):
         self.assertTrue("id" in results.get("data")["data"].keys())
         validate(results.get("data"), UpdateOffenseOutput.schema)
 
-    @patch("requests.post", side_effect=UpdateOffenseHelper.mock_request)
+    @patch("requests.request", side_effect=UpdateOffenseHelper.mock_request)
     def test_close_offense(self, make_request):
         """To update offenses with given closed status.
 
@@ -64,7 +64,7 @@ class TestGetOffense(TestCase):
         self.assertEqual(results.get("data")["data"]["status"], "CLOSED")
         validate(results.get("data"), UpdateOffenseOutput.schema)
 
-    @patch("requests.post", side_effect=UpdateOffenseHelper.mock_request)
+    @patch("requests.request", side_effect=UpdateOffenseHelper.mock_request)
     def test_close_offense_without_closing_reason(self, make_request):
         """To update offenses with given closed status without closing ID .
 
@@ -75,7 +75,7 @@ class TestGetOffense(TestCase):
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
-    @patch("requests.post", side_effect=UpdateOffenseHelper.mock_request)
+    @patch("requests.request", side_effect=UpdateOffenseHelper.mock_request)
     def test_open_offense_with_closing_reason(self, make_request):
         """To update offenses with given closed status without closing ID .
 
@@ -91,7 +91,7 @@ class TestGetOffense(TestCase):
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
-    @patch("requests.post", side_effect=UpdateOffenseHelper.mock_request)
+    @patch("requests.request", side_effect=UpdateOffenseHelper.mock_request)
     def test_with_internal_server_error(self, make_request):
         """To test the update offense with internalServerError."""
         action_params = {Input.OFFENSE_ID: 1, Input.FIELDS: "internalServerError"}

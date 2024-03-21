@@ -25,7 +25,7 @@ class TestGetArielSearchById(TestCase):
         """Set up an action for test."""
         cls.action = ArielSearchHelper.default_connector(GetArielSearchById())
 
-    @patch("requests.get", side_effect=ArielSearchHelper.mock_request)
+    @patch("requests.request", side_effect=ArielSearchHelper.mock_request)
     def test_get_ariel_search_by_id(self, make_request):
         """To test the get ariel search by ID."""
         action_params = {Input.SEARCH_ID: "search_id"}
@@ -34,7 +34,7 @@ class TestGetArielSearchById(TestCase):
         self.assertEqual(results.get("data")["cursor_id"], "test_cursor_id")
         validate(results.get("data"), GetArielSearchByIdOutput.schema)
 
-    @patch("requests.get", side_effect=ArielSearchHelper.mock_request)
+    @patch("requests.request", side_effect=ArielSearchHelper.mock_request)
     def test_get_ariel_search_by_id_with_poll_interval(self, make_request):
         """To test the get ariel search by ID."""
         action_params = {Input.SEARCH_ID: "search_id", Input.POLL_INTERVAL: 1}
@@ -43,7 +43,7 @@ class TestGetArielSearchById(TestCase):
         self.assertEqual(results.get("data")["cursor_id"], "test_cursor_id")
         validate(results.get("data"), GetArielSearchByIdOutput.schema)
 
-    @patch("requests.get", side_effect=ArielSearchHelper.mock_request)
+    @patch("requests.request", side_effect=ArielSearchHelper.mock_request)
     def test_get_ariel_search_by_wrong_id(self, make_request):
         """To test the get ariel search by ID."""
         action_params = {Input.SEARCH_ID: "wrong"}
@@ -51,7 +51,7 @@ class TestGetArielSearchById(TestCase):
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
-    @patch("requests.get", side_effect=ArielSearchHelper.mock_request)
+    @patch("requests.request", side_effect=ArielSearchHelper.mock_request)
     def test_get_ariel_search_by_id_wrong_host_url(self, make_request):
         """To test the get ariel search with wrong host_url.
 
@@ -70,7 +70,7 @@ class TestGetArielSearchById(TestCase):
         with self.assertRaises(PluginException):
             action.run(action_params)
 
-    @patch("requests.get", side_effect=ArielSearchHelper.mock_request)
+    @patch("requests.request", side_effect=ArielSearchHelper.mock_request)
     def test_get_ariel_search_by_id_with_internal_server_error(self, make_request):
         """To test the get ariel search by ID with internalServerError."""
         action_params = {Input.SEARCH_ID: "internalServerError"}
@@ -78,7 +78,7 @@ class TestGetArielSearchById(TestCase):
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
-    @patch("requests.get", side_effect=ArielSearchHelper.mock_request)
+    @patch("requests.request", side_effect=ArielSearchHelper.mock_request)
     def test_get_ariel_search_by_id_with_forbidden(self, make_request):
         """To test the get ariel search by ID with forbidden."""
         action_params = {Input.SEARCH_ID: "checkforbidden"}
@@ -86,7 +86,7 @@ class TestGetArielSearchById(TestCase):
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
-    @patch("requests.get", side_effect=ArielSearchHelper.mock_request)
+    @patch("requests.request", side_effect=ArielSearchHelper.mock_request)
     def test_get_ariel_search_by_id_with_rate_limit(self, make_request):
         """To test the get ariel search by ID with rate limit."""
         action_params = {Input.SEARCH_ID: "checkratelimit"}

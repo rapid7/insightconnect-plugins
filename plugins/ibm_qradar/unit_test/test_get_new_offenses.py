@@ -21,7 +21,7 @@ class TestGetNewOffense(TestCase):
         """Set up an action for test."""
         cls.action = OffensesHelper.default_connector(GetNewOffense())
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_get_offenses_with_invalid_range(self, make_request):
         """To get offenses with given invalid range.
 
@@ -32,7 +32,7 @@ class TestGetNewOffense(TestCase):
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_with_internal_server_error(self, make_request):
         """To test the get offense with internalServerError."""
         action_params = {Input.FILTER: "internalServerError", Input.INTERVAL: 30}

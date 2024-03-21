@@ -21,7 +21,7 @@ class TestGetOffense(TestCase):
         """Set up an action for test."""
         cls.action = OffensesHelper.default_connector(GetOffenses())
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_get_offense(self, make_request):
         """To get the offense.
 
@@ -33,7 +33,7 @@ class TestGetOffense(TestCase):
         self.assertEqual(results.get("data")["data"][0]["id"], 10001)
         validate(results.get("data"), GetOffensesOutput.schema)
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_get_offenses_with_fields(self, make_request):
         """To get offenses with given filed list as output.
 
@@ -47,7 +47,7 @@ class TestGetOffense(TestCase):
         self.assertTrue("id" in results.get("data")["data"][0].keys())
         validate(results.get("data"), GetOffensesOutput.schema)
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_get_offenses_with_range(self, make_request):
         """To get offenses with given range.
 
@@ -59,7 +59,7 @@ class TestGetOffense(TestCase):
         self.assertEqual(len(results.get("data")["data"]), 1)
         validate(results.get("data"), GetOffensesOutput.schema)
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_get_offenses_with_invalid_range(self, make_request):
         """To get offenses with given invalid range.
 
@@ -70,7 +70,7 @@ class TestGetOffense(TestCase):
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_get_offenses_with_filter(self, make_request):
         """To get offenses with given filters.
 
@@ -82,7 +82,7 @@ class TestGetOffense(TestCase):
         self.assertEqual(results.get("data")["data"][0]["id"], 10001)
         validate(results.get("data"), GetOffensesOutput.schema)
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_get_offenses_with_sort(self, make_request):
         """To get offenses with given sort options.
 
@@ -94,7 +94,7 @@ class TestGetOffense(TestCase):
         self.assertTrue(results.get("data")["data"][0]["id"] < results.get("data")["data"][1]["id"])
         validate(results.get("data"), GetOffensesOutput.schema)
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_get_offenses_with_multiple_query_params(self, make_request):
         """To get offenses with multiple query prams passed.
 
@@ -108,7 +108,7 @@ class TestGetOffense(TestCase):
         self.assertTrue("id" in results.get("data")["data"][0].keys())
         validate(results.get("data"), GetOffensesOutput.schema)
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_with_internal_server_error(self, make_request):
         """To test the get offense with internalServerError."""
         action_params = {Input.FILTER: "internalServerError"}

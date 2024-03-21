@@ -25,7 +25,7 @@ class TestGetOffenseNotesById(TestCase):
         """Set up an action for test."""
         cls.action = OffenseNotesHelper.default_connector(GetOffenseNoteById())
 
-    @patch("requests.get", side_effect=OffenseNotesHelper.mock_request)
+    @patch("requests.request", side_effect=OffenseNotesHelper.mock_request)
     def test_get_offense_notes_by_id(self, make_request):
         """To get the offense notes.
 
@@ -37,7 +37,7 @@ class TestGetOffenseNotesById(TestCase):
         self.assertEqual(results.get("data")["data"][0]["id"], 10001)
         validate(results.get("data")["data"][0], GetOffenseNoteByIdOutput.schema)
 
-    @patch("requests.get", side_effect=OffenseNotesHelper.mock_request)
+    @patch("requests.request", side_effect=OffenseNotesHelper.mock_request)
     def test_get_offense_notes_by_id_with_fields(self, make_request):
         """To Get offense notes By Id with field list given.
 
@@ -51,7 +51,7 @@ class TestGetOffenseNotesById(TestCase):
         self.assertTrue("id" in results.get("data")["data"][0].keys())
         validate(results.get("data")["data"][0], GetOffenseNoteByIdOutput.schema)
 
-    @patch("requests.get", side_effect=OffenseNotesHelper.mock_request)
+    @patch("requests.request", side_effect=OffenseNotesHelper.mock_request)
     def test_get_offense_notes_by_id_with_filter(self, make_request):
         """To Get offense notes By Id with given filter.
 
@@ -63,7 +63,7 @@ class TestGetOffenseNotesById(TestCase):
         self.assertEqual(results.get("data")["data"][0]["id"], 10001)
         validate(results.get("data")["data"][0], GetOffenseNoteByIdOutput.schema)
 
-    @patch("requests.get", side_effect=OffenseNotesHelper.mock_request)
+    @patch("requests.request", side_effect=OffenseNotesHelper.mock_request)
     def test_with_internal_server_error(self, make_request):
         """To test the Get offense notes By Id by ID with internalServerError."""
         action_params = {Input.OFFENSE_ID: 33, Input.NOTE_ID: 34, Input.FIELDS: "internalServerError"}

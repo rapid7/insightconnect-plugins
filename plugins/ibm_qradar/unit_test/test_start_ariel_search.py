@@ -25,7 +25,7 @@ class TestStartArielSearch(TestCase):
         """Set up an action for test."""
         cls.action = ArielSearchHelper.default_connector(StartArielSearch())
 
-    @patch("requests.post", side_effect=ArielSearchHelper.mock_request)
+    @patch("requests.request", side_effect=ArielSearchHelper.mock_request)
     def test_start_ariel_search(self, make_request):
         """To test the ariel search.
 
@@ -38,7 +38,7 @@ class TestStartArielSearch(TestCase):
         self.assertEqual(results.get("data")["cursor_id"], "test_cursor_id")
         validate(results.get("data"), StartArielSearchOutput.schema)
 
-    @patch("requests.post", side_effect=ArielSearchHelper.mock_request)
+    @patch("requests.request", side_effect=ArielSearchHelper.mock_request)
     def test_start_ariel_search_wrong_host_url(self, make_request):
         """To test the ariel search with wrong host_url.
 
@@ -57,7 +57,7 @@ class TestStartArielSearch(TestCase):
         with self.assertRaises(PluginException):
             action.run(params=action_params)
 
-    @patch("requests.post", side_effect=ArielSearchHelper.mock_request)
+    @patch("requests.request", side_effect=ArielSearchHelper.mock_request)
     def test_start_ariel_search_wrong_aql(self, make_request):
         """To test the ariel search with wrong aql.
 
@@ -68,7 +68,7 @@ class TestStartArielSearch(TestCase):
         with self.assertRaises(PluginException):
             self.action.run(params=action_params)
 
-    @patch("requests.post", side_effect=ArielSearchHelper.mock_request)
+    @patch("requests.request", side_effect=ArielSearchHelper.mock_request)
     def test_start_ariel_search_wrong_username(self, make_request):
         """To test the ariel search with wrong username.
 

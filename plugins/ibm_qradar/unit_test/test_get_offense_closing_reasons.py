@@ -25,7 +25,7 @@ class TestGetOffenseClosingReason(TestCase):
         """Set up an action for test."""
         cls.action = OffensesHelper.default_connector(GetOffenseClosingReasons())
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_get_offense_closing_reason(self, make_request):
         """To get the offense closing reasons.
 
@@ -37,7 +37,7 @@ class TestGetOffenseClosingReason(TestCase):
         self.assertEqual(results.get("data")["data"][0]["id"], 10001)
         validate(results.get("data"), GetOffenseClosingReasonsOutput.schema)
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_get_offense_closing_reason_with_fields(self, make_request):
         """To get offense closing reasons with given filed list as output.
 
@@ -51,7 +51,7 @@ class TestGetOffenseClosingReason(TestCase):
         self.assertTrue("id" in results.get("data")["data"][0].keys())
         validate(results.get("data"), GetOffenseClosingReasonsOutput.schema)
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_get_offense_closing_reason_with_range(self, make_request):
         """To get offenses closing reasons with given range.
 
@@ -63,7 +63,7 @@ class TestGetOffenseClosingReason(TestCase):
         self.assertEqual(len(results.get("data")["data"]), 1)
         validate(results.get("data"), GetOffenseClosingReasonsOutput.schema)
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_get_offense_closing_reason_with_invalid_range(self, make_request):
         """To get offenses closing reason with given invalid range.
 
@@ -74,7 +74,7 @@ class TestGetOffenseClosingReason(TestCase):
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_get_offense_closing_reason_with_filter(self, make_request):
         """To get offenses closing reasons with given filter.
 
@@ -86,7 +86,7 @@ class TestGetOffenseClosingReason(TestCase):
         self.assertEqual(results.get("data")["data"][0]["id"], 10001)
         validate(results.get("data"), GetOffenseClosingReasonsOutput.schema)
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_get_offense_closing_reason_with_include_delete(self, make_request):
         """To get offenses with Include_delete.
 
@@ -98,7 +98,7 @@ class TestGetOffenseClosingReason(TestCase):
         self.assertEqual(results.get("data")["data"][0]["id"], 10001)
         validate(results.get("data"), GetOffenseClosingReasonsOutput.schema)
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_get_offense_closing_reason_with_include_reserve(self, make_request):
         """To get offenses with Include_reserve.
 
@@ -110,7 +110,7 @@ class TestGetOffenseClosingReason(TestCase):
         self.assertEqual(results.get("data")["data"][0]["id"], 10001)
         validate(results.get("data"), GetOffenseClosingReasonsOutput.schema)
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_get_offense_closing_reason_with_multiple_query_params(self, make_request):
         """To get offenses with multiple query prams passed.
 
@@ -125,7 +125,7 @@ class TestGetOffenseClosingReason(TestCase):
         self.assertTrue("id" in results.get("data")["data"][0].keys())
         validate(results.get("data"), GetOffenseClosingReasonsOutput.schema)
 
-    @patch("requests.get", side_effect=OffensesHelper.mock_request)
+    @patch("requests.request", side_effect=OffensesHelper.mock_request)
     def test_get_offense_closing_reason_internal_server_error(self, make_request):
         """To test the get offense closing reason by internalServerError."""
         action_params = {Input.FILTER: "internalServerError"}
