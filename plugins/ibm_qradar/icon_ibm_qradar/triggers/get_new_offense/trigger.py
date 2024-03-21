@@ -7,6 +7,7 @@ from .schema import GetNewOffenseInput, GetNewOffenseOutput, Component, Input, O
 from icon_ibm_qradar.util.url import URL
 from icon_ibm_qradar.util.utils import prepare_request_params, handle_response
 from icon_ibm_qradar.util.constants.endpoints import GET_OFFENSES_ENDPOINT
+from icon_ibm_qradar.util.constants.constant import REQUEST_TIMEOUT
 
 
 class GetNewOffense(insightconnect_plugin_runtime.Trigger):
@@ -41,7 +42,12 @@ class GetNewOffense(insightconnect_plugin_runtime.Trigger):
             try:
                 final_url = basic_url.format(current_epoch_time=current_epoch_time)
                 response = requests.get(
-                    url=final_url, headers=headers, data={}, auth=auth, verify=self.connection.verify_ssl
+                    url=final_url,
+                    headers=headers,
+                    data={},
+                    auth=auth,
+                    verify=self.connection.verify_ssl,
+                    timeout=REQUEST_TIMEOUT,
                 )
                 new_offense = {Output.DATA: handle_response(response)}
 

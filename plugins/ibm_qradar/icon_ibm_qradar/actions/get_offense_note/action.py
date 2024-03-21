@@ -8,6 +8,7 @@ from icon_ibm_qradar.util.url import URL
 from icon_ibm_qradar.util.utils import prepare_request_params, handle_response
 from icon_ibm_qradar.util.constants.endpoints import GET_OFFENSES_NOTES
 from icon_ibm_qradar.util.constants.messages import EMPTY_OFFENSE_ID_FOUND
+from icon_ibm_qradar.util.constants.constant import REQUEST_TIMEOUT
 
 
 class GetOffenseNote(insightconnect_plugin_runtime.Action):
@@ -44,7 +45,12 @@ class GetOffenseNote(insightconnect_plugin_runtime.Action):
         try:
             self.logger.debug(f"Final URL: {basic_url}")
             response = requests.get(
-                url=basic_url, headers=headers, data={}, auth=auth, verify=self.connection.verify_ssl
+                url=basic_url,
+                headers=headers,
+                data={},
+                auth=auth,
+                verify=self.connection.verify_ssl,
+                timeout=REQUEST_TIMEOUT,
             )
         except requests.exceptions.ConnectionError:
             raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE)

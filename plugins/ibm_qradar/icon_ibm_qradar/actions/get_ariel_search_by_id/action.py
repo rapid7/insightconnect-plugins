@@ -5,6 +5,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_ibm_qradar.util.constants.endpoints import GET_ARIEL_SEARCH_BY_ID_ENDPOINT
 from icon_ibm_qradar.util.constants.messages import NEGATIVE_POLL_INTERVAL_PROVIDED
+from icon_ibm_qradar.util.constants.constant import REQUEST_TIMEOUT
 from icon_ibm_qradar.util.url import URL
 from icon_ibm_qradar.util.utils import get_default_header, handle_response
 
@@ -56,7 +57,12 @@ class GetArielSearchById(insightconnect_plugin_runtime.Action):
             headers["Prefer"] = f"wait={poll_interval}"
         try:
             response = requests.get(
-                url=basic_url, headers=headers, data={}, auth=auth, verify=self.connection.verify_ssl
+                url=basic_url,
+                headers=headers,
+                data={},
+                auth=auth,
+                verify=self.connection.verify_ssl,
+                timeout=REQUEST_TIMEOUT,
             )
         except requests.exceptions.ConnectionError:
             raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE)

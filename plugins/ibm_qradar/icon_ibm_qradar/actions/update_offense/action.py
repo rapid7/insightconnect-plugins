@@ -5,6 +5,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import UpdateOffenseInput, UpdateOffenseOutput, Component, Input, Output
 
 from icon_ibm_qradar.util.constants.endpoints import UPDATE_OFFENSES_ENDPOINT
+from icon_ibm_qradar.util.constants.constant import REQUEST_TIMEOUT
 from icon_ibm_qradar.util.constants.messages import (
     CLOSING_REASON_ID_NOT_PROVIDED,
     CLOSING_REASON_ID_PROVIDED_FOR_OTHER_STATUS,
@@ -97,7 +98,12 @@ class UpdateOffense(insightconnect_plugin_runtime.Action):
         try:
             self.logger.debug(f"Final URL: {basic_url}")
             response = requests.post(
-                url=basic_url, headers=headers, data={}, auth=auth, verify=self.connection.verify_ssl
+                url=basic_url,
+                headers=headers,
+                data={},
+                auth=auth,
+                verify=self.connection.verify_ssl,
+                timeout=REQUEST_TIMEOUT,
             )
         except requests.exceptions.ConnectionError:
             raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE)

@@ -11,6 +11,7 @@ from .schema import (
 )
 
 from icon_ibm_qradar.util.constants.endpoints import POST_OFFENSES_NOTES
+from icon_ibm_qradar.util.constants.constant import REQUEST_TIMEOUT
 from icon_ibm_qradar.util.url import URL
 from icon_ibm_qradar.util.utils import prepare_request_params, handle_response
 
@@ -53,7 +54,12 @@ class AddNotesToOffense(insightconnect_plugin_runtime.Action):
         try:
             self.logger.debug(f"Final URL: {basic_url}")
             response = requests.post(
-                url=basic_url, headers=headers, data={}, auth=auth, verify=self.connection.verify_ssl
+                url=basic_url,
+                headers=headers,
+                data={},
+                auth=auth,
+                verify=self.connection.verify_ssl,
+                timeout=REQUEST_TIMEOUT,
             )
         except requests.exceptions.ConnectionError:
             raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE)
