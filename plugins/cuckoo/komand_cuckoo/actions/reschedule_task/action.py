@@ -19,4 +19,4 @@ class RescheduleTask(insightconnect_plugin_runtime.Action):
         else:
             endpoint = f"tasks/reschedule/{task_id}"
         response = self.connection.api.send(endpoint)
-        return {Output.TASK_ID: response.get("task_id"), Output.SUCCESS: response.get("success")}
+        return {Output.TASK_ID: response.get("task_id"), Output.STATUS: response.get("status", "")}

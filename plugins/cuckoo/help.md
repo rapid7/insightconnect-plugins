@@ -497,15 +497,15 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|boolean|False|Reschedule success flag|True|
+|status|string|False|Reschedule status value|OK|
 |task_id|integer|False|Task ID|12345678910|
   
 Example output:
 
 ```
 {
-  "success": true,
-  "task_id": 12345678910
+  "status": true,
+  "task_id": "OK"
 }
 ```
 
@@ -891,7 +891,7 @@ Example output:
 
 # Version History
 
-* 2.0.0 - Update to insightconnect-plugin-runtime | Update `Reschedule Task` output to include `success` | Update title of `Delete Task` output from `Error message` to `Error Message` | Add `options` to `Machine` type
+* 2.0.0 - Update to insightconnect-plugin-runtime | Update `Reschedule Task` output to include `status` | Update title of `Delete Task` output from `Error message` to `Error Message` | Add `options` to `Machine` type
 * 1.0.3 - Updated Requests version to 2.20.0
 * 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Bug fix for Submit Files where Submit ID was required
