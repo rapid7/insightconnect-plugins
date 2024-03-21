@@ -948,7 +948,7 @@ The [jq](https://extensions.rapid7.com/extension/jq) and [JSON](https://extensio
 
 # Version History
 
-* 3.0.0 - Updated SDK to the latest version | Updated packages | Added unittests | Removed `Email Report` action as it's not handled by the current API
+* 3.0.0 - Updated SDK to the latest version | Updated packages | Added unittests
 * 2.0.1 - Updated Requests version to 2.20.0
 * 2.0.0 - Update to v3 Python plugin architecture | Convert import_hash_report API status codes to int | Update documentation
 * 1.0.1 - New spec and help.md format for the Extension Library
