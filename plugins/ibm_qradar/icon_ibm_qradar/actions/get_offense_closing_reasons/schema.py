@@ -34,7 +34,7 @@ class GetOffenseClosingReasonsInput(insightconnect_plugin_runtime.Input):
     "filter": {
       "type": "string",
       "title": "Filter",
-      "description": "Restrict the elements in a list based on the contents of various fields.",
+      "description": "Restrict the elements in a list based on the contents of various fields",
       "order": 2
     },
     "include_deleted": {

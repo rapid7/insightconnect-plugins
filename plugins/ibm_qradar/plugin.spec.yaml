@@ -798,7 +798,7 @@ actions:
         title: Filter
         type: string
         required: false
-        description: Restrict the elements in a list based on the contents of various fields.
+        description: Restrict the elements in a list based on the contents of various fields
         example: id=1000
       fields:
         title: Fields
@@ -834,7 +834,7 @@ actions:
         title: Filter
         type: string
         required: false
-        description: Restrict the elements in a list based on the contents of various fields.
+        description: Restrict the elements in a list based on the contents of various fields
         example: id=1000
       fields:
         title: Fields
@@ -940,7 +940,7 @@ actions:
         title: Filter
         type: string
         required: false
-        description: Restrict the elements in a list based on the contents of various fields.
+        description: Restrict the elements in a list based on the contents of various fields
         example: id=100
       fields:
         title: Fields
@@ -975,7 +975,7 @@ actions:
         title: Filter
         type: string
         required: false
-        description: Restrict the elements in a list based on the contents of various fields. 
+        description: Restrict the elements in a list based on the contents of various fields
         example: id=1000
       fields:
         title: Fields
@@ -1016,7 +1016,7 @@ actions:
         title: Filter
         type: string
         required: false
-        description: Restrict the elements in a list based on the contents of various fields.
+        description: Restrict the elements in a list based on the contents of various fields
         example: id=1000
     output:
       data:
@@ -1041,7 +1041,7 @@ triggers:
         title: Filter
         type: string
         required: false
-        description: Restrict the elements in a list based on the contents of various fields.
+        description: Restrict the elements in a list based on the contents of various fields
         example: id=100
       fields:
         title: Fields
