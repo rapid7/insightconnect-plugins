@@ -1,6 +1,4 @@
 import insightconnect_plugin_runtime
-import requests
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 from .schema import (
     GetOffenseNoteByIdOutput,
@@ -9,14 +7,8 @@ from .schema import (
     Input,
     Output,
 )
-from icon_ibm_qradar.util.url import URL
-from icon_ibm_qradar.util.utils import prepare_request_params, handle_response
-from icon_ibm_qradar.util.constants.endpoints import GET_OFFENSES_NOTES_BY_ID
-from icon_ibm_qradar.util.constants.constant import REQUEST_TIMEOUT
-from icon_ibm_qradar.util.constants.messages import (
-    EMPTY_OFFENSE_ID_FOUND,
-    EMPTY_NOTE_ID_FOUND,
-)
+
+from icon_ibm_qradar.util.api import IBMQRadarAPI
 
 
 class GetOffenseNoteById(insightconnect_plugin_runtime.Action):
@@ -27,7 +19,6 @@ class GetOffenseNoteById(insightconnect_plugin_runtime.Action):
             input=GetOffenseNoteByIdInput(),
             output=GetOffenseNoteByIdOutput(),
         )
-        self.endpoint = GET_OFFENSES_NOTES_BY_ID
 
     def run(self, params={}):
         """Run Method to execute action.
@@ -41,27 +32,8 @@ class GetOffenseNoteById(insightconnect_plugin_runtime.Action):
         note_id = params.get(Input.NOTE_ID, "")
         self.logger.info(f"Note ID provided: {offense_id}")
 
-        url_obj = URL(self.connection.host_url, self.endpoint)
-        basic_url = url_obj.get_basic_url()
-        if offense_id:
-            basic_url = basic_url.format(offense_id=offense_id, note_id=note_id)
-
-        url_obj.set_basic_url(basic_url)
-
-        basic_url, headers = prepare_request_params(params, self.logger, url_obj, [Input.FIELDS])
-
-        auth = (self.connection.username, self.connection.password)
-        try:
-            self.logger.debug(f"Final URL: {basic_url}")
-            response = requests.get(
-                url=basic_url,
-                headers=headers,
-                data={},
-                auth=auth,
-                verify=self.connection.verify_ssl,
-                timeout=REQUEST_TIMEOUT,
-            )
-        except requests.exceptions.ConnectionError:
-            raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE)
-
-        return {Output.DATA: handle_response(response)}
+        api = IBMQRadarAPI(connection=self.connection, logger=self.logger)
+        response = api.get_offense_note_by_id_request(
+            offense_id=offense_id, note_id=note_id, params=params, fields=[Input.FIELDS]
+        )
+        return {Output.DATA: response}

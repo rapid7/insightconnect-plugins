@@ -33,7 +33,7 @@ class AddNotesToOffenseInput(insightconnect_plugin_runtime.Input):
     "filter": {
       "type": "string",
       "title": "Filter",
-      "description": "Restrict the elements in a list based on the contents of various fields. E.g. id=55 and is_deleted = false",
+      "description": "Restrict the elements in a list based on the contents of various fields.",
       "order": 4
     },
     "note_text": {

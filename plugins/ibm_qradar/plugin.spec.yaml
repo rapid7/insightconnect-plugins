@@ -8,13 +8,26 @@ support: community
 status: []
 supported_versions: [7.3.3]
 description: IBM QRadar reduces billions of events and flows into a manageable number of actionable offenses that are prioritized by their impact on your business operations. This plugin allows you to use IBM QRadar to orchestrate and automate Ariel search queries and automate offense management
-key_features: [Start Ariel search, Get Ariel search by ID, Get offenses, Get offense closing reasons, Get assets, Get offense notes, Get offense note by ID, Add note to offense, Update offense, Watch for new offenses]
-links: ['[IBM QRadar](https://www.ibm.com/docs/en/qsip)']
-references: ['[IBM QRadar API Documentation](https://www.ibm.com/docs/en/qradar-common?topic=170-whats-new-in-rest-api-version)', '[AQL](https://www.ibm.com/docs/en/qradar-on-cloud?topic=structure-sample-aql-queries)']
+key_features:
+ - Start Ariel search
+ - Get Ariel search by ID
+ - Get offenses
+ - Get offense closing reasons
+ - Get assets
+ - Get offense notes
+ - Get offense note by ID
+ - Add note to offense
+ - Update offense
+ - Watch for new offenses
+links:
+ - '[IBM QRadar](https://www.ibm.com/docs/en/qsip)'
+references:
+ - '[IBM QRadar API Documentation](https://www.ibm.com/docs/en/qradar-common?topic=170-whats-new-in-rest-api-version)'
+ - '[AQL](https://www.ibm.com/docs/en/qradar-on-cloud?topic=structure-sample-aql-queries)'
 version: 1.1.0
 connection_version: 1
 version_history: 
-  - '1.1.0 - Adding in new connection test | Updated the SDK to version 5.4.4 | Ran refresh to upadate all schemas and unit tests'
+  - '1.1.0 - Adding in new connection test | Updated the SDK to version 5.4.5 | Ran refresh to update all schemas and unit tests'
   - '1.0.0 - Initial plugin'
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/ibm_qradar
@@ -33,7 +46,7 @@ hub_tags:
 enable_cache: false
 sdk:
   type: slim
-  version: 5.4.4
+  version: 5.4.5
   user: nobody
 connection:
   host_url:
@@ -785,7 +798,7 @@ actions:
         title: Filter
         type: string
         required: false
-        description: Restrict the elements in a list based on the contents of various fields. E.g.  id=55 and follow_up = false
+        description: Restrict the elements in a list based on the contents of various fields.
         example: id=1000
       fields:
         title: Fields
@@ -821,7 +834,7 @@ actions:
         title: Filter
         type: string
         required: false
-        description: Restrict the elements in a list based on the contents of various fields. E.g. id=55 and is_deleted = false
+        description: Restrict the elements in a list based on the contents of various fields.
         example: id=1000
       fields:
         title: Fields
@@ -927,7 +940,7 @@ actions:
         title: Filter
         type: string
         required: false
-        description: Restrict the elements in a list based on the contents of various fields. E.g. id=55 and username = admin
+        description: Restrict the elements in a list based on the contents of various fields.
         example: id=100
       fields:
         title: Fields
@@ -962,7 +975,7 @@ actions:
         title: Filter
         type: string
         required: false
-        description: Restrict the elements in a list based on the contents of various fields. E.g. id=55 and is_deleted = false
+        description: Restrict the elements in a list based on the contents of various fields. 
         example: id=1000
       fields:
         title: Fields
@@ -1003,7 +1016,7 @@ actions:
         title: Filter
         type: string
         required: false
-        description: Restrict the elements in a list based on the contents of various fields. E.g. id=55 and is_deleted = false
+        description: Restrict the elements in a list based on the contents of various fields.
         example: id=1000
     output:
       data:
@@ -1028,7 +1041,7 @@ triggers:
         title: Filter
         type: string
         required: false
-        description: Restrict the elements in a list based on the contents of various fields. E.g. id=55 and follow_up = false
+        description: Restrict the elements in a list based on the contents of various fields.
         example: id=100
       fields:
         title: Fields
