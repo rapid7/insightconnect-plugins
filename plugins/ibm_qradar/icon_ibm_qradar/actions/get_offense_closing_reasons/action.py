@@ -32,10 +32,10 @@ class GetOffenseClosingReasons(insightconnect_plugin_runtime.Action):
         :return: None
         """
         include_deleted = params.get(Input.INCLUDE_DELETED, False)
-        self.logger.info("Include_deleted provided: %s", include_deleted)
+        self.logger.info(f"Include_deleted provided: {include_deleted}")
 
         include_reserved = params.get(Input.INCLUDE_RESERVED, False)
-        self.logger.info("Include_reserved provided: %s", include_reserved)
+        self.logger.info(f"Include_reserved provided: {include_reserved}")
 
         query_params = {
             "include_deleted": "true" if include_deleted else "false",

@@ -1,15 +1,16 @@
 import os
 import sys
-from unittest.mock import patch
-
-from unittest import TestCase
-
-from insightconnect_plugin_runtime.exceptions import PluginException
-
-from icon_ibm_qradar.triggers.get_new_offense import GetNewOffense
-from unit_test.helpers.offense import OffensesHelper
 
 sys.path.append(os.path.abspath("../"))
+
+from unittest.mock import patch
+from unittest import TestCase
+from jsonschema import validate
+
+from insightconnect_plugin_runtime.exceptions import PluginException
+from icon_ibm_qradar.triggers.get_new_offense.trigger import GetNewOffense
+from icon_ibm_qradar.triggers.get_new_offense.schema import Input, GetNewOffenseInput
+from helpers.offense import OffensesHelper
 
 
 class TestGetNewOffense(TestCase):
@@ -26,13 +27,15 @@ class TestGetNewOffense(TestCase):
 
         :return: None
         """
-        action_params = {"range": "-1-2"}
+        action_params = {Input.RANGE: "-1-2", Input.INTERVAL: 30}
+        validate(action_params, GetNewOffenseInput.schema)
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
     @patch("requests.get", side_effect=OffensesHelper.mock_request)
     def test_with_internal_server_error(self, make_request):
         """To test the get offense with internalServerError."""
-        action_params = {"filter": "internalServerError"}
+        action_params = {Input.FILTER: "internalServerError", Input.INTERVAL: 30}
+        validate(action_params, GetNewOffenseInput.schema)
         with self.assertRaises(PluginException):
             self.action.run(action_params)

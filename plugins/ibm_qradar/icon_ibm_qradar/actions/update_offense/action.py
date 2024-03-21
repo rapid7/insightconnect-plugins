@@ -19,23 +19,23 @@ def parse_params(params: dict, logger) -> dict:
 
     query_params = {}
     assigned_to = params.get(Input.ASSIGNED_TO, "")
-    logger.info("Provided Assigned to: %s", assigned_to)
+    logger.info(f"Provided Assigned to: {assigned_to}")
 
     closing_reason_id = params.get(Input.CLOSING_REASON_ID, "")
-    logger.info("Provided closing reason ID: %s", closing_reason_id)
+    logger.info(f"Provided closing reason ID: {assigned_to}")
 
     if closing_reason_id != "" and not closing_reason_id.isdigit():
         raise PluginException(cause=CLOSING_REASON_ID_PROVIDED_IS_NOT_INTEGER)
 
     follow_up = params.get(Input.FOLLOW_UP, False)
-    logger.info("follow_up provided: %s", follow_up)
+    logger.info(f"follow_up provided: {follow_up}")
 
     protected = params.get(Input.PROTECTED, False)
-    logger.info("protected provided: %s", protected)
+    logger.info(f"protected provided: {protected}")
 
     status = params.get(Input.STATUS, "")
     status = status.upper()
-    logger.info("status provided: %s", status)
+    logger.info(f"status provided: {status}")
 
     if assigned_to != "":
         query_params["assigned_to"] = assigned_to
@@ -79,7 +79,7 @@ class UpdateOffense(insightconnect_plugin_runtime.Action):
         :return:
         """
         offense_id = params.get(Input.OFFENSE_ID, "")
-        self.logger.info("Provided Offense ID: %s", offense_id)
+        self.logger.info(f"Provided Offense ID: {offense_id}")
 
         query_params = parse_params(params, self.logger)
         validate(query_params)

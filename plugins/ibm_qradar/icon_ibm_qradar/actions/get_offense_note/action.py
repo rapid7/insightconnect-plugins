@@ -27,7 +27,7 @@ class GetOffenseNote(insightconnect_plugin_runtime.Action):
         :return: None
         """
         offense_id = params.get(Input.OFFENSE_ID, "")
-        self.logger.info("Offense ID provided: %s", offense_id)
+        self.logger.info(f"Offense ID provided: {offense_id}")
 
         url_obj = URL(self.connection.host_url, self.endpoint)
         basic_url = url_obj.get_basic_url()

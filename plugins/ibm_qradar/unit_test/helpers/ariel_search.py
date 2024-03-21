@@ -3,7 +3,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_ibm_qradar.util.constants.constant import SUCCESS_RESPONSE_CODES
 from icon_ibm_qradar.util.constants.endpoints import START_ARIEL_SEARCH_ENDPOINT
-from unit_test.helpers.helper import Helper, MockResponse
+from helpers.helper import Helper, MockResponse
 
 
 class ArielSearchHelper(Helper):

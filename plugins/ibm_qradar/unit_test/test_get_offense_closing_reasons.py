@@ -1,15 +1,20 @@
 import os
 import sys
-from unittest.mock import patch
 
+sys.path.append(os.path.abspath("../"))
+
+from unittest.mock import patch
 from unittest import TestCase
+from jsonschema import validate
 
 from insightconnect_plugin_runtime.exceptions import PluginException
-
-from icon_ibm_qradar.actions.get_offense_closing_reasons import GetOffenseClosingReasons
-from unit_test.helpers.offense import OffensesHelper
-
-sys.path.append(os.path.abspath("/"))
+from icon_ibm_qradar.actions.get_offense_closing_reasons.action import GetOffenseClosingReasons
+from icon_ibm_qradar.actions.get_offense_closing_reasons.schema import (
+    Input,
+    GetOffenseClosingReasonsInput,
+    GetOffenseClosingReasonsOutput,
+)
+from helpers.offense import OffensesHelper
 
 
 class TestGetOffenseClosingReason(TestCase):
@@ -27,9 +32,10 @@ class TestGetOffenseClosingReason(TestCase):
         :return: None
         """
         action_params = {}
+        validate(action_params, GetOffenseClosingReasonsInput.schema)
         results = self.action.run(action_params)
-        print(results.get("data"))
-        self.assertEqual(results.get("data")["data"][0]["id"], "10001")
+        self.assertEqual(results.get("data")["data"][0]["id"], 10001)
+        validate(results.get("data"), GetOffenseClosingReasonsOutput.schema)
 
     @patch("requests.get", side_effect=OffensesHelper.mock_request)
     def test_get_offense_closing_reason_with_fields(self, make_request):
@@ -37,11 +43,13 @@ class TestGetOffenseClosingReason(TestCase):
 
         :return: None
         """
-        action_params = {"fields": "id"}
+        action_params = {Input.FIELDS: "id"}
+        validate(action_params, GetOffenseClosingReasonsInput.schema)
         results = self.action.run(action_params)
 
         self.assertEqual(len(results.get("data")["data"][0].keys()), 1)
         self.assertTrue("id" in results.get("data")["data"][0].keys())
+        validate(results.get("data"), GetOffenseClosingReasonsOutput.schema)
 
     @patch("requests.get", side_effect=OffensesHelper.mock_request)
     def test_get_offense_closing_reason_with_range(self, make_request):
@@ -49,9 +57,11 @@ class TestGetOffenseClosingReason(TestCase):
 
         :return: None
         """
-        action_params = {"range": "1-2"}
+        action_params = {Input.RANGE: "1-2"}
+        validate(action_params, GetOffenseClosingReasonsInput.schema)
         results = self.action.run(action_params)
         self.assertEqual(len(results.get("data")["data"]), 1)
+        validate(results.get("data"), GetOffenseClosingReasonsOutput.schema)
 
     @patch("requests.get", side_effect=OffensesHelper.mock_request)
     def test_get_offense_closing_reason_with_invalid_range(self, make_request):
@@ -59,7 +69,8 @@ class TestGetOffenseClosingReason(TestCase):
 
         :return: None
         """
-        action_params = {"range": "-1-2"}
+        action_params = {Input.RANGE: "-1-2"}
+        validate(action_params, GetOffenseClosingReasonsInput.schema)
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
@@ -69,9 +80,11 @@ class TestGetOffenseClosingReason(TestCase):
 
         :return: None
         """
-        action_params = {"filter": "id=10001"}
+        action_params = {Input.FILTER: "id=10001"}
+        validate(action_params, GetOffenseClosingReasonsInput.schema)
         results = self.action.run(action_params)
-        self.assertEqual(results.get("data")["data"][0]["id"], "10001")
+        self.assertEqual(results.get("data")["data"][0]["id"], 10001)
+        validate(results.get("data"), GetOffenseClosingReasonsOutput.schema)
 
     @patch("requests.get", side_effect=OffensesHelper.mock_request)
     def test_get_offense_closing_reason_with_include_delete(self, make_request):
@@ -79,9 +92,11 @@ class TestGetOffenseClosingReason(TestCase):
 
         :return: None
         """
-        action_params = {"Include_delete": "true"}
+        action_params = {Input.INCLUDE_DELETED: True}
+        validate(action_params, GetOffenseClosingReasonsInput.schema)
         results = self.action.run(action_params)
-        self.assertEqual(results.get("data")["data"][0]["id"], "10001")
+        self.assertEqual(results.get("data")["data"][0]["id"], 10001)
+        validate(results.get("data"), GetOffenseClosingReasonsOutput.schema)
 
     @patch("requests.get", side_effect=OffensesHelper.mock_request)
     def test_get_offense_closing_reason_with_include_reserve(self, make_request):
@@ -89,9 +104,11 @@ class TestGetOffenseClosingReason(TestCase):
 
         :return: None
         """
-        action_params = {"Include_reserve": "true"}
+        action_params = {Input.INCLUDE_RESERVED: True}
+        validate(action_params, GetOffenseClosingReasonsInput.schema)
         results = self.action.run(action_params)
-        self.assertEqual(results.get("data")["data"][0]["id"], "10001")
+        self.assertEqual(results.get("data")["data"][0]["id"], 10001)
+        validate(results.get("data"), GetOffenseClosingReasonsOutput.schema)
 
     @patch("requests.get", side_effect=OffensesHelper.mock_request)
     def test_get_offense_closing_reason_with_multiple_query_params(self, make_request):
@@ -100,14 +117,17 @@ class TestGetOffenseClosingReason(TestCase):
         :return: None
         """
         action_params = {"filter": "id=10001", "fields": "id"}
+        action_params = {Input.FILTER: "id=10001", Input.FIELDS: "id"}
+        validate(action_params, GetOffenseClosingReasonsInput.schema)
         results = self.action.run(action_params)
-        self.assertEqual(results.get("data")["data"][0]["id"], "10001")
+        self.assertEqual(results.get("data")["data"][0]["id"], 10001)
         self.assertEqual(len(results.get("data")["data"][0].keys()), 1)
         self.assertTrue("id" in results.get("data")["data"][0].keys())
+        validate(results.get("data"), GetOffenseClosingReasonsOutput.schema)
 
     @patch("requests.get", side_effect=OffensesHelper.mock_request)
     def test_get_offense_closing_reason_internal_server_error(self, make_request):
         """To test the get offense closing reason by internalServerError."""
-        action_params = {"filter": "internalServerError"}
+        action_params = {Input.FILTER: "internalServerError"}
         with self.assertRaises(PluginException):
             self.action.run(action_params)

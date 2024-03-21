@@ -1,15 +1,16 @@
 import os
 import sys
-from unittest.mock import patch
-
-from unittest import TestCase
-
-from insightconnect_plugin_runtime.exceptions import PluginException
-
-from icon_ibm_qradar.actions.update_offense import UpdateOffense
-from unit_test.helpers.offense import UpdateOffenseHelper
 
 sys.path.append(os.path.abspath("../"))
+
+from unittest.mock import patch
+from unittest import TestCase
+from jsonschema import validate
+
+from insightconnect_plugin_runtime.exceptions import PluginException
+from icon_ibm_qradar.actions.update_offense.action import UpdateOffense
+from icon_ibm_qradar.actions.update_offense.schema import Input, UpdateOffenseInput, UpdateOffenseOutput
+from helpers.offense import UpdateOffenseHelper
 
 
 class TestGetOffense(TestCase):
@@ -27,13 +28,15 @@ class TestGetOffense(TestCase):
         :return: None
         """
         action_params = {
-            "offense_id": 1,
-            "protected": True,
-            "assigned_to:": "assigned_to:",
-            "follow_up": True,
+            Input.OFFENSE_ID: 1,
+            Input.PROTECTED: True,
+            Input.ASSIGNED_TO: "assigned_to:",
+            Input.FOLLOW_UP: True,
         }
+        validate(action_params, UpdateOffenseInput.schema)
         results = self.action.run(action_params)
-        self.assertEqual(results.get("data")["data"]["id"], "10001")
+        self.assertEqual(results.get("data")["data"]["id"], 10001)
+        validate(results.get("data"), UpdateOffenseOutput.schema)
 
     @patch("requests.post", side_effect=UpdateOffenseHelper.mock_request)
     def test_update_offenses_with_fields(self, make_request):
@@ -41,11 +44,13 @@ class TestGetOffense(TestCase):
 
         :return: None
         """
-        action_params = {"offense_id": 1, "fields": "id"}
+        action_params = {Input.OFFENSE_ID: 1, Input.FIELDS: "id"}
+        validate(action_params, UpdateOffenseInput.schema)
         results = self.action.run(action_params)
 
         self.assertEqual(len(results.get("data")["data"].keys()), 1)
         self.assertTrue("id" in results.get("data")["data"].keys())
+        validate(results.get("data"), UpdateOffenseOutput.schema)
 
     @patch("requests.post", side_effect=UpdateOffenseHelper.mock_request)
     def test_close_offense(self, make_request):
@@ -53,9 +58,11 @@ class TestGetOffense(TestCase):
 
         :return: None
         """
-        action_params = {"offense_id": 1, "status": "CLOSED", "closing_reason_id": "1"}
+        action_params = {Input.OFFENSE_ID: 1, Input.STATUS: "Closed", Input.CLOSING_REASON_ID: "1"}
+        validate(action_params, UpdateOffenseInput.schema)
         results = self.action.run(action_params)
         self.assertEqual(results.get("data")["data"]["status"], "CLOSED")
+        validate(results.get("data"), UpdateOffenseOutput.schema)
 
     @patch("requests.post", side_effect=UpdateOffenseHelper.mock_request)
     def test_close_offense_without_closing_reason(self, make_request):
@@ -63,11 +70,8 @@ class TestGetOffense(TestCase):
 
         :return: None
         """
-        action_params = {
-            "offense_id": 1,
-            "fields": "id",
-            "status": "CLOSED",
-        }
+        action_params = {Input.OFFENSE_ID: 1, Input.STATUS: "Closed", Input.FIELDS: "id"}
+        validate(action_params, UpdateOffenseInput.schema)
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
@@ -78,17 +82,19 @@ class TestGetOffense(TestCase):
         :return: None
         """
         action_params = {
-            "offense_id": 1,
-            "fields": "id",
-            "status": "OPEN",
-            "closing_reason_id": "1",
+            Input.OFFENSE_ID: 1,
+            Input.FIELDS: "id",
+            Input.STATUS: "Open",
+            Input.CLOSING_REASON_ID: "1",
         }
+        validate(action_params, UpdateOffenseInput.schema)
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
     @patch("requests.post", side_effect=UpdateOffenseHelper.mock_request)
     def test_with_internal_server_error(self, make_request):
         """To test the update offense with internalServerError."""
-        action_params = {"offense_id": 1, "fields": "internalServerError"}
+        action_params = {Input.OFFENSE_ID: 1, Input.FIELDS: "internalServerError"}
+        validate(action_params, UpdateOffenseInput.schema)
         with self.assertRaises(PluginException):
             print(self.action.run(action_params))

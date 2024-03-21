@@ -39,7 +39,7 @@ class StartArielSearch(insightconnect_plugin_runtime.Action):
         :return: None
         """
         aql_search_query = params.get(Input.AQL, "")
-        self.logger.info("AQL provided: %s", aql_search_query)
+        self.logger.info(f"AQL provided: {aql_search_query}")
 
         query_params = {"query_expression": aql_search_query}
 

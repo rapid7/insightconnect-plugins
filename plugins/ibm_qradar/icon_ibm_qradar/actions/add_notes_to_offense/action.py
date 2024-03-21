@@ -32,10 +32,10 @@ class AddNotesToOffense(insightconnect_plugin_runtime.Action):
         :return: None
         """
         offense_id = params.get(Input.OFFENSE_ID, "")
-        self.logger.info("Offense ID provided: %s", offense_id)
+        self.logger.info(f"Offense ID provided: {offense_id}")
 
         note_text = params.get(Input.NOTE_TEXT, "")
-        self.logger.info("Note Text provided: %s", note_text)
+        self.logger.info(f"Note Text provided: {note_text}")
 
         query_params = {}
         query_params["note_text"] = note_text

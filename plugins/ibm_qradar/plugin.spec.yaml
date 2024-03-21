@@ -8,7 +8,14 @@ support: community
 status: []
 supported_versions: [7.3.3]
 description: IBM QRadar reduces billions of events and flows into a manageable number of actionable offenses that are prioritized by their impact on your business operations. This plugin allows you to use IBM QRadar to orchestrate and automate Ariel search queries and automate offense management
-version: 1.0.0
+key_features: [Start Ariel search, Get Ariel search by ID, Get offenses, Get offense closing reasons, Get assets, Get offense notes, Get offense note by ID, Add note to offense, Update offense, Watch for new offenses]
+links: ['[IBM QRadar](https://www.ibm.com/docs/en/qsip)']
+references: ['[IBM QRadar API Documentation](https://www.ibm.com/docs/en/qradar-common?topic=170-whats-new-in-rest-api-version)', '[AQL](https://www.ibm.com/docs/en/qradar-on-cloud?topic=structure-sample-aql-queries)']
+version: 1.1.0
+connection_version: 1
+version_history: 
+  - '1.1.0 - Adding in new connection test | Updated the SDK to version 5.4.4 | Ran refresh to upadate all schemas and unit tests'
+  - '1.0.0 - Initial plugin'
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/ibm_qradar
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -24,13 +31,17 @@ hub_tags:
   keywords: [siem, search]
   features: []
 enable_cache: false
+sdk:
+  type: slim
+  version: 5.4.4
+  user: nobody
 connection:
   host_url:
     title: Host URL
     type: string
     description: Host URL of the QRadar instance.
     required: true
-    example: https://127.0.0.1
+    example: https://127.0.0.1/
   credentials:
     title: Credentials
     type: credential_username_password
@@ -705,6 +716,7 @@ actions:
         type: search
         description: JSON data for the Search
         required: false
+        example: {"completed": false,"compressed_data_file_count": 0,"index_file_count": 0,"progress_details": [],"record_count": 0,"compressed_data_total_size": 0,"data_total_size": 0,"query_execution_time": 0,"save_results": false,"status": "WAIT","cursor_id": "6eaa0819-8d37-452b-bf28-d48acd2adf32","data_file_count": 0,"progress": 0,"size_on_disk": 0,"desired_retention_time_msec": 86400000,"index_total_size": 0,"processed_record_count": 0,"query_string": "Select * from events last 10 MINUTES","search_id": "6eaa0819-8d37-452b-bf28-d48acd2adf32","subsearch_ids": []}
   get_ariel_search_by_id:
     title: Get Ariel Search by ID
     description: Get an ariel search by ID
@@ -727,6 +739,7 @@ actions:
         type: search
         description: JSON data of the Search
         required: false
+        example: {"completed": true,"compressed_data_file_count": 0,"compressed_data_total_size": 0,"cursor_id": "0ab77680-d6a5-4944-9eda-9cb95171c86f","data_file_count": 2,"data_total_size": 371376,"desired_retention_time_msec": 86400000,"index_file_count": 0,"index_total_size": 0,"processed_record_count": 28752,"progress": 100,"progress_details": [],"query_execution_time": 117,"query_string": "Select * from events","record_count": 28752,"save_results": false,"search_id": "0ab77680-d6a5-4944-9eda-9cb95171c86f","size_on_disk": 10809724,"status": "COMPLETED","subsearch_ids": []}
   get_assets:
     title: Get Assets
     description: List all assets found in the model
@@ -756,6 +769,7 @@ actions:
         type: "[]assets"
         description: JSON data of the Assets
         required: false
+        example: [{"vulnerability_count": 0,"id": 1002,"interfaces": [{"created": 1640265476716,"id": 1002,"ip_addresses": [{"type": "IPV4","value": "192.10.10.179","created": 1640265476716,"id": 1002,"network_id": 2}]}],"risk_score_sum": 0,"properties": [{"name": "Unified Name","type_id": 1002,"value": "192.10.10.179","id": 1003,"last_reported": 1640265476727,"last_reported_by": "USER:admin"}],"users": [],"domain_id": 0,"host_urls": [],"products": []}]
   get_offenses:
     title: Get Offenses
     description: List all offenses
@@ -791,6 +805,7 @@ actions:
         type: "[]offense"
         description: "JSON data of the Offense"
         required: false
+        example: '[{"source_network": "Net-10-172-192.Net_172_16_0_0","domain_id": 0,"inactive": false,"last_updated_time": 1642054761525,"magnitude": 4,"offense_source": "172.31.34.93","protected": false,"start_time": 1641970465643,"category_count": 2,"rules": [{"id": 100033,"type": "CRE_RULE"},{"id": 100626,"type": "CRE_RULE"}],"event_count": 13493550,"id": 42,"remote_destination_count": 1,"username_count": 2,"first_persisted_time": 1641970466000,"offense_type": 0,"security_category_count": 2,"source_count": 1,"credibility": 2,"description": "Excessive Firewall Denies Between Hosts\n","flow_count": 0,"local_destination_address_ids": [14],"severity": 5,"categories": ["Access Denied","ACL Deny"],"device_count": 1,"last_persisted_time": 1642054764000,"log_sources": [{"type_name": "EventCRE","id": 63,"name": "Custom Rule Engine-8 :: ip-172-31-34-93","type_id": 18}],"policy_category_count": 0,"relevance": 5,"source_address_ids": [19],"destination_networks": ["Net-10-172-192.Net_172_16_0_0","other"],"local_destination_count": 1,"status": "OPEN","follow_up": false},{"event_count": 2429,"flow_count": 0,"magnitude": 3,"offense_type": 0,"source_network": "other","username_count": 1,"close_time": 1641970533000,"first_persisted_time": 1641968803000,"id": 41,"last_updated_time": 1641970524788,"destination_networks": ["Net-10-172-192.Net_172_16_0_0"],"device_count": 1,"domain_id": 0,"local_destination_address_ids": [14],"policy_category_count": 0,"protected": false,"start_time": 1641968802643,"follow_up": false,"log_sources": [{"id": 63,"name": "Custom Rule Engine-8 :: ip-172-31-34-93","type_id": 18,"type_name": "EventCRE"}],"offense_source": "183.82.206.22","source_address_ids": [22],"source_count": 1,"categories": ["Access Denied","ACL Deny"],"closing_user": "admin","credibility": 2,"remote_destination_count": 0,"rules": [{"id": 100625,"type": "CRE_RULE"},{"id": 100033,"type": "CRE_RULE"}],"security_category_count": 2,"closing_reason_id": 54,"description": "Excessive Firewall Denies Between Hosts\n","last_persisted_time": 1641970583000,"relevance": 3,"category_count": 2,"inactive": true,"local_destination_count": 1,"severity": 5,"status": "CLOSED"}]'
   get_offense_closing_reasons:
     title: Get Offense's Closing Reasons
     description: Get Offense's Closing Reasons
@@ -832,6 +847,7 @@ actions:
         type: "[]closing_reason"
         description: JSON data of the Offense Closing Reasons
         required: false
+        example: '[ { "id": 1, "is_deleted": False, "is_reserved": False, "text": "Non-Issue" },{"id": 3,"is_deleted": False,"is_reserved": False,"text": "Policy Violation"}]'
   update_offense:
     title: Update Offenses
     description: Update Offenses
@@ -889,6 +905,7 @@ actions:
         type: "offense"
         description: "JSON data of the Offense"
         required: false
+        example: { "event_count": 4, "last_updated_time": 1640155212603, "magnitude": 3, "start_time": 1640155212500, "description": "Multiple Exploit/Malware Types Targeting a Single ...", "first_persisted_time": 1640155213000, "follow_up": false, "inactive": true, "relevance": 0, "source_count": 1, "device_count": 2, "rules": [ { "id": 100113, "type": "CRE_RULE" } ], "security_category_count": 3, "policy_category_count": 0, "source_network": "other", "credibility": 3, "flow_count": 0, "local_destination_count": 0, "offense_type": 1, "remote_destination_count": 1, "source_address_ids": [ 18 ], "categories": [ "Command Execution", "Input Validation Exploit" ], "id": 33, "offense_source": "49.206.13.49", "protected": false, "domain_id": 0, "last_persisted_time": 1642054784000, "category_count": 3, "destination_networks": [ "other" ], "local_destination_address_ids": [], "log_sources": [ { "type_name": "VirsecSecurityPlatformCustom", "id": 23312, "name": "Virsec Security Platform", "type_id": 4013 }, { "type_id": 18, "type_name": "EventCRE", "id": 63, "name": "Custom Rule Engine-8 :: ip-172-31-34-93" } ], "severity": 9, "status": "OPEN", "username_count": 0 }
   get_offense_note:
     title: Get Offense Notes
     description: Get Offense Notes
@@ -924,6 +941,7 @@ actions:
         type: "[]note"
         description: JSON data of the Offense Notes
         required: false
+        example: [ { "create_time": 1641385946573, "id": 159, "note_text": "New Note text", "username": "API_user: admin" }, { "create_time": 1641451278329, "id": 209, "note_text": "New Note text", "username": "API_user: admin" } ]
   get_offense_note_by_id:
     title: Get Offense Notes by ID
     description: Get Offense Notes by ID
@@ -940,6 +958,12 @@ actions:
         required: true
         description: The ID of the offense note to get
         example: 100
+      filter:
+        title: Filter
+        type: string
+        required: false
+        description: Restrict the elements in a list based on the contents of various fields. E.g. id=55 and is_deleted = false
+        example: id=1000
       fields:
         title: Fields
         type: string
@@ -952,6 +976,7 @@ actions:
         type: note
         description: JSON data of the Offense Notes for given ID
         required: false
+        example: [ { "create_time": 1641385946573, "id": 159, "note_text": "New Note text", "username": "API_user: admin" }, { "username": "API_user: admin", "create_time": 1641451278329, "id": 209, "note_text": "New Note text" } ]
   add_notes_to_offense:
     title: Add Notes to Offense
     description: Add Notes to Offense
@@ -974,12 +999,19 @@ actions:
         required: false
         description: Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, create_time, username, note_text. More information about the fields can be found in plugin documentation
         example: id, note_text
+      filter:
+        title: Filter
+        type: string
+        required: false
+        description: Restrict the elements in a list based on the contents of various fields. E.g. id=55 and is_deleted = false
+        example: id=1000
     output:
       data:
         title: "Newly Added Offense Notes"
         type: note
         description: "JSON data of the newly added Offense Notes "
         required: false
+        example: { "create_time": 1642056336657, "id": 404, "note_text": "New Note text", "username": "API_user: admin"}
 triggers:
   get_new_offense:
     title: Get New Offenses
@@ -1023,3 +1055,4 @@ triggers:
         type: "[]offense"
         description: "JSON data of the Offense"
         required: false
+        example: { "create_time": 1642056336657, "id": 404, "note_text": "New Note text", "username": "API_user: admin" }

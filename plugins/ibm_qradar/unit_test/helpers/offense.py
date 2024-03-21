@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_ibm_qradar.util.constants.constant import SUCCESS_RESPONSE_CODES
-from unit_test.helpers.helper import Helper, MockResponse
+from helpers.helper import Helper, MockResponse
 
 
 class OffensesHelper(Helper):
@@ -28,10 +28,10 @@ class OffensesHelper(Helper):
         if "sort" in url_component.query:
             return MockResponse(
                 SUCCESS_RESPONSE_CODES[1],
-                data={"data": [{"id": "10001"}, {"id": "10002"}]},
+                data={"data": [{"id": 10001}, {"id": 10002}]},
             )
 
-        return MockResponse(SUCCESS_RESPONSE_CODES[1], data={"data": [{"id": "10001"}]})
+        return MockResponse(SUCCESS_RESPONSE_CODES[1], data={"data": [{"id": 10001}]})
 
 
 class UpdateOffenseHelper(Helper):
@@ -59,7 +59,7 @@ class UpdateOffenseHelper(Helper):
         if url_component.query != "" and "status" in url_component.query:
             return MockResponse(
                 SUCCESS_RESPONSE_CODES[1],
-                data={"data": {"id": "10001", "status": "CLOSED"}},
+                data={"data": {"id": 10001, "status": "CLOSED"}},
             )
 
-        return MockResponse(SUCCESS_RESPONSE_CODES[1], data={"data": {"id": "10001"}})
+        return MockResponse(SUCCESS_RESPONSE_CODES[1], data={"data": {"id": 10001}})

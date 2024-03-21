@@ -36,10 +36,10 @@ class GetArielSearchById(insightconnect_plugin_runtime.Action):
         :return: None
         """
         search_id = params.get(Input.SEARCH_ID)
-        self.logger.info("Search ID provided: %s", search_id)
+        self.logger.info(f"Search ID provided: {search_id}")
 
         poll_interval = params.get(Input.POLL_INTERVAL, 0)
-        self.logger.info("Poll Interval Provided: %s", poll_interval)
+        self.logger.info(f"Poll Interval Provided: {poll_interval}")
 
         if poll_interval < 0:
             self.logger.info("Terminating: Poll interval provided as negative value.")

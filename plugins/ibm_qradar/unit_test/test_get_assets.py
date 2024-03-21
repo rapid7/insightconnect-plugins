@@ -1,15 +1,16 @@
 import os
 import sys
-from unittest.mock import patch
-
-from unittest import TestCase
-
-from insightconnect_plugin_runtime.exceptions import PluginException
-
-from icon_ibm_qradar.actions.get_assets import GetAssets
-from unit_test.helpers.assets import AsstesHelper
 
 sys.path.append(os.path.abspath("../"))
+
+from unittest.mock import patch
+from unittest import TestCase
+from jsonschema import validate
+
+from insightconnect_plugin_runtime.exceptions import PluginException
+from icon_ibm_qradar.actions.get_assets.action import GetAssets
+from icon_ibm_qradar.actions.get_assets.schema import Input, GetAssetsInput, GetAssetsOutput
+from helpers.assets import AsstesHelper
 
 
 class TestGetAssets(TestCase):
@@ -27,9 +28,10 @@ class TestGetAssets(TestCase):
         :return: None
         """
         action_params = {}
+        validate(action_params, GetAssetsInput.schema)
         results = self.action.run(action_params)
-        print(results.get("data"))
-        self.assertEqual(results.get("data")["data"][0]["id"], "10001")
+        self.assertEqual(results.get("data")["data"][0]["id"], 10001)
+        validate(results.get("data"), GetAssetsOutput.schema)
 
     @patch("requests.get", side_effect=AsstesHelper.mock_request)
     def test_get_assets_with_fields(self, make_request):
@@ -37,11 +39,13 @@ class TestGetAssets(TestCase):
 
         :return: None
         """
-        action_params = {"fields": "id"}
+        action_params = {Input.FIELDS: "id"}
+        validate(action_params, GetAssetsInput.schema)
         results = self.action.run(action_params)
 
         self.assertEqual(len(results.get("data")["data"][0].keys()), 1)
         self.assertTrue("id" in results.get("data")["data"][0].keys())
+        validate(results.get("data"), GetAssetsOutput.schema)
 
     @patch("requests.get", side_effect=AsstesHelper.mock_request)
     def test_get_assets_with_range(self, make_request):
@@ -49,9 +53,11 @@ class TestGetAssets(TestCase):
 
         :return: None
         """
-        action_params = {"range": "1-2"}
+        action_params = {Input.RANGE: "1-2"}
+        validate(action_params, GetAssetsInput.schema)
         results = self.action.run(action_params)
         self.assertEqual(len(results.get("data")["data"]), 1)
+        validate(results.get("data"), GetAssetsOutput.schema)
 
     @patch("requests.get", side_effect=AsstesHelper.mock_request)
     def test_get_assets_with_invalid_range(self, make_request):
@@ -59,7 +65,8 @@ class TestGetAssets(TestCase):
 
         :return: None
         """
-        action_params = {"range": "-1-2"}
+        action_params = {Input.RANGE: "-1-2"}
+        validate(action_params, GetAssetsInput.schema)
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
@@ -69,9 +76,11 @@ class TestGetAssets(TestCase):
 
         :return: None
         """
-        action_params = {"filter": "id=10001"}
+        action_params = {Input.FILTER: "id=10001"}
+        validate(action_params, GetAssetsInput.schema)
         results = self.action.run(action_params)
-        self.assertEqual(results.get("data")["data"][0]["id"], "10001")
+        self.assertEqual(results.get("data")["data"][0]["id"], 10001)
+        validate(results.get("data"), GetAssetsOutput.schema)
 
     @patch("requests.get", side_effect=AsstesHelper.mock_request)
     def test_get_assets_with_multiple_query_params_given(self, make_request):
@@ -79,15 +88,18 @@ class TestGetAssets(TestCase):
 
         :return: None
         """
-        action_params = {"filter": "id=10001", "fields": "id"}
+        action_params = {Input.FILTER: "id=10001", Input.FIELDS: "id"}
+        validate(action_params, GetAssetsInput.schema)
         results = self.action.run(action_params)
-        self.assertEqual(results.get("data")["data"][0]["id"], "10001")
+        self.assertEqual(results.get("data")["data"][0]["id"], 10001)
         self.assertEqual(len(results.get("data")["data"][0].keys()), 1)
         self.assertTrue("id" in results.get("data")["data"][0].keys())
+        validate(results.get("data"), GetAssetsOutput.schema)
 
     @patch("requests.get", side_effect=AsstesHelper.mock_request)
     def test_with_internal_server_error(self, make_request):
         """To test the get assets by ID with internalServerError."""
         action_params = {"filter": "internalServerError"}
+        validate(action_params, GetAssetsInput.schema)
         with self.assertRaises(PluginException):
             self.action.run(action_params)
