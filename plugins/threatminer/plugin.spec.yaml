@@ -3,25 +3,45 @@ extension: plugin
 products: [insightconnect]
 name: threatminer
 title: Threat Miner
-description: "Threat Miner is an open source search engine for fast threat intelligence research and pivoting with
-  context. With the Threat Miner plugin for Rapid7 InsightConnect, users can lookup various pieces of information for
-threat intelligence gathering"
-version: 2.0.1
-supported_versions: ["2023-05-17"]
+description: Threat Miner is an open source search engine for fast threat intelligence research and pivoting with context. With the Threat Miner plugin for Rapid7 InsightConnect, users can lookup various pieces of information for threat intelligence gathering
+version: 3.0.0
+connection_version: 3
+supported_versions: ["2024-03-14"]
 vendor: rapid7
 support: community
 status: []
+key_features:
+  - AV Report
+  - Domain Lookup
+  - Domain Lookup Extended
+  - IP Lookup
+  - IP Lookup Extended
+  - Get Samples
+  - Hash Report
+  - Hash Samples
+  - SSDeep Report
+  - SSDeep Sample
+  - SSL Hosts
+  - SSL Report
+  - Email Reverse WHOIS - Domain
+  - AV Detection Samples
+  - Search IOC Reports
+  - Search APTNotes
+sdk:
+  type: slim
+  version: 5.4.4
+  user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/threatminer
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.threatminer.org
 tags:
-- whois
-- security
-- threat
-- dns
-- traffic
-- domain
+  - whois
+  - security
+  - threat
+  - dns
+  - traffic
+  - domain
 hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [whois, security, threat, dns, traffic, domain, threatminer]
@@ -30,97 +50,94 @@ types:
   response:
     status_code:
       title: Status Code
+      description: Numerical code representing the status of the request
       type: integer
-      description: Status Code
       required: false
     status_message:
       title: Status Message
+      description: Brief message related to the status of the request
       type: string
-      description: Status message
       required: false
     results:
       title: Results
-      type: '[]object'
-      description: Results
+      description: The actual results of the API request
+      type: "[]object"
       required: false
 actions:
   av_report:
     title: AV Report
-    description: AV Report
+    description: Retrieve the antivirus (AV) report for a specific malware
     input:
       query:
         title: Query
+        description: Name of the virus for which the AV report is requested
         type: string
-        description: Virus name to query
         required: true
-        example: Trojan.Enfal
+        example: ExampleVirusname
+    output:
+      response:
+        title: Response
+        description: The results returned from the Threatminer API
+        type: response
+        required: false
+        example: '{"status_code":200,"status_message":"Results found.","results":[{"filename":"ExampleFilename1","year":"2018","URL":"https://www.threatminer.org/report.php?q=ExampleFilename1&y=2018"},{"filename":"ExampleFilename2","year":"2017","URL":"https://www.threatminer.org/report.php?q=ExampleFilename2&y=2017"}]}'
+  domain:
+    title: Domain Lookup
+    description: Fetch information related to a domain by URIs, certificates, or related samples
+    input:
+      domain:
+        title: Domain
+        description: Domain to search
+        type: string
+        required: true
+        example: example.com
+      query_type:
+        title: Query Type
+        description: Specify the type of query to be executed
+        type: string
+        enum:
+          - WHOIS
+          - PASSIVE DNS
+          - Example Query URI
+          - Report Tagging
+        required: true
+        example: WHOIS
     output:
       response:
         title: Response
         type: response
+        description: The results returned from the Threatminer API
         required: false
-        description: Response
-        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
-  domain:
-    title: Domain Lookup
-    description: Fetches information related to a domain by URIs, certificates, or
-      related samples
-    input:
-      domain:
-        title: Domain
-        type: string
-        description: Domain to search
-        required: true
-        example: www.example.com
-      query_type:
-        title: Query Type
-        type: string
-        enum:
-        - WHOIS
-        - PASSIVE DNS
-        - Example Query URI
-        - Report Tagging
-        required: true
-        description: Query Type
-        example: WHOIS
-    output:
-      response:
-        title: Responose
-        type: response
-        description: Response
-        required: false
-        example: {"response": {"status_code": 404, "status_message": "No results found.", "results": []}}
+        example: '{"status_code":200, "status_message": "Results found.", "results": [{"domain": "example.com", "is_subdomain": true, "root_domain": "example.com", "whois": {"updated_date": "", "whois_md5": [], "billing_info": {"Organization": "", "City": "", "State": "", "Country": "", "Postal_Code": ""}, "registrant_info": {"Organization": "", "State": "", "Postal_Code": "", "Country": "", "City": ""}, "creation_date": "", "whois_server": "", "emails": {"admin": "", "tech": "", "registrant": "", "billing": ""}, "tech_info": {"Organization": "", "City": "", "State": "", "Country": "", "Postal_Code": ""}, "admin_info": {"Organization": "", "City": "", "State": "", "Country": "", "Postal_Code": ""}, "nameservers": [], "expiration_date": "", "email_hashes": {"admin": "", "tech": "", "registrant": "", "billing": ""}, "registrar": "", "date_checked": "", "reg_info": {"Organization": "", "City": "", "State": "", "Country": "", "Postal_Code": ""}}, "last_updated": {"sec": 1581089938, "usec": 463000}}]}'
   domain_ext:
     title: Domain Lookup Extended
-    description: Fetches information related to a domain by URIs, certificates, or
-      related samples
+    description: Fetches information related to a domain by subdomains or related samples
     input:
       domain:
         title: Domain
-        type: string
         description: Domain to search
+        type: string
         required: true
-        example: www.example.com
+        example: example.com
       query_type:
         title: Query Type
-        description: Query type
+        description: Specify the type of query to be executed
         required: true
         type: string
         enum:
-        - Related Samples
-        - Subdomains
+          - Related Samples
+          - Subdomains
         example: Subdomains
     output:
       response:
         title: Response
+        description: The results returned from the Threatminer API
         type: response
         required: false
-        description: Response
-        example:  {"response": {"status_code": 404, "status_message": "No results found.", "results": []}}
+        example: '{"status_code":200,"status_message":"Results found.","results":[{"domain":"example.com","subdomains":["sub1.example.com","sub2.example.com","sub3.example.com"]}]}'
   ip:
     title: IP Lookup
-    description: Fetches information related to an IP by Whois, URIs, passive DNS,
-      or report tagging
+    description: Fetches information related to an IP by Whois, URIs, passive DNS, or report tagging
     input:
       address:
         title: Address
@@ -130,73 +147,71 @@ actions:
         example: 192.0.2.0/24
       query_type:
         title: Query Type
-        required: true
+        description: Specify the type of query to be executed
         type: string
+        required: true
         enum:
-        - WHOIS
-        - PASSIVE DNS
-        - URIs
-        - Report Tagging
-        description: Query Type
+          - WHOIS
+          - PASSIVE DNS
+          - URIs
+          - Report Tagging
         example: WHOIS
     output:
       response:
         title: Response
+        description: The results returned from the Threatminer API
         type: response
-        description: Response
         required: false
-        example:  {"response": {"status_code": 404, "status_message": "No results found.", "results": []}}
+        example: '{"status_code":200, "status_message": "Results found.", "results": [{"reverse_name": "reverse.in-addr.", "bgp_prefix": "192.0.2.0/24", "cc": "", "asn": "", "asn_name": "", "org_name": "ExampleOrgName", "register": "example.com"}]}'
   ip_ext:
     title: IP Lookup Extended
-    description: Fetches information related to an IP by certificates, or related
-      samples
+    description: Fetches information related to an IP by certificates, or related samples
     input:
       address:
         title: Address
-        type: string
         description: IP address to search
+        type: string
         required: true
         example: 192.0.2.0/24
       query_type:
         title: Query Type
+        description: Specify the type of query to be executed
         required: true
         type: string
         enum:
-        - Related Samples
-        - SSL Certificates
-        description: Query type
+          - Related Samples
+          - SSL Certificates
         example: Related Samples
     output:
       response:
         title: Response
-        description: Response
+        description: The results returned from the Threatminer API
         type: response
         required: false
-        example:  {"response": {"status_code": 404, "status_message": "No results found.", "results": []}}
+        example: '{"status_code":200,"status_message":"Results found.","results":[{"value":"02699626f388ed830012e5b787640e71c56d42d8"},{"value":"02699626f388ed830012e5b787640e71c56d42d8"}]}'
   samples:
     title: Get Samples
-    description: Fetches samples of data intelligence data by metadata, HTTP traffic,
-      hosts, mutants, registry keys, AV detections, or report tagging
+    description: Fetches samples of data intelligence data by metadata, HTTP traffic, hosts, mutants, registry keys, AV detections, or report tagging
     input:
       query:
         title: Query
-        type: string
         description: MD5, SHA1, or SHA256 hash to search
+        type: string
         required: true
         example: 9de5069c5afe602b2ea0a04b66beb2c0
       query_type:
         title: Query Type
-        description: Query Type
+        description: Specify the type of query to be executed
         type: string
         required: true
         enum:
-        - Metadata
-        - HTTP Traffic
-        - Hosts
-        - Mutants
-        - Registry keys
-        - AV detections
-        - Report Tagging
+          - Metadata
+          - HTTP Traffic
+          - Hosts
+          - Mutants
+          - Registry keys
+          - AV detections
+          - Report Tagging
         example: Metadata
     output:
       response:
@@ -204,49 +219,49 @@ actions:
         type: response
         description: Response
         required: false
-        example:  {"response": {"status_code": 404, "status_message": "No results found.", "results": []}}
+        example: '{"status_code":200,"status_message":"Results found.","results":[{"md5":"e6ff1bf0821f00384cdd25efb9b1cc09","sha1":"16fd388151c0e73b074faa33698b9afc5c024b59","sha256":"555b3689dec6ad888348c595426d112d041de5c989d4929284594d1e09f3d85f","sha512":"7be8545c03f26192feb6eaf361b78b91966de28d2917ba1902508ad8589e0f0df748e82a265513f0426b50fedfda8fa6947c8b9e511b5d9a771ab20dc748367b","ssdeep":"3072:HcRtvDzz\/rup4\/skvknm+GytbPlIyWYmxHznEt3xnDn\/1iyG6mb2LoUEb:HEtvD7MkvVIpPlIjYQjQ3N\/MV1AtE","imphash":"dc73a9bd8de0fd640549c85ac4089b87","file_type":"PE32 executable (GUI) Intel 80386, for MS Windows","architecture":"32 Bit","authentihash":"f3ec83f9862e9b09203a21ddac5ecdc4f874a591c2b03ffc4d9a5749e4655e28","file_name":"installaware.15-patch.exe","file_size":"546304 bytes","date_analysed":"2016-03-13 03:46:38"}]}'
   import_hash_report:
     title: Hash Report
     description: Fetches information related to a hash
     input:
       query:
         title: Query
-        type: string
         description: SHA1 hash to search e.g. 1f4f257947c1b713ca7f9bc25f914039
+        type: string
         required: true
         example: 02699626f388ed830012e5b787640e71c56d42d8
     output:
       response:
         title: Response
+        description: The results returned from the Threatminer API
         type: response
-        description: Response
         required: false
-        example:  {"response": {"status_code": 404, "status_message": "No results found.", "results": []}}
+        example: '{"status_code": 200, "status_message": "Results found.", "results": [{"hash": "e1faffd7f97e38b1d5c6f2bcbc7f5d3d", "type": "MD5", "first_seen": "2022-01-01 10:30:00", "last_seen": "2022-01-05 14:45:00", "samples": [{"sample": "sample1.exe", "date": "2022-01-01", "source": "malware-database"}, {"sample": "sample2.exe", "date": "2022-01-02", "source": "malware-database"}], "relationships": [{"type": "Related IP", "value": "192.168.1.100"}, {"type": "Related Domain", "value": "example.com"}]}]}'
   import_hash_samples:
     title: Hash Samples
     description: Fetches information related to a hash
     input:
       query:
         title: Query
-        type: string
         description: SHA1 hash to search e.g. 1f4f257947c1b713ca7f9bc25f914039
+        type: string
         required: true
         example: 02699626f388ed830012e5b787640e71c56d42d8
     output:
       response:
-        title: Query
+        title: Response
+        description: The results returned from the Threatminer API
         type: response
         required: false
-        description: Query
-        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
+        example: '{"status_code":200,"status_message":"Results found.","results":[{"value":"4c60f3f5cccdfad6137eb0a3218ec4caa3294b164c86dbda8922f1c9a75558fd"},{"value":"2acf0cb8b4bd9f4ae4298cbe4e6ac0b4ab410a29fe1b0c0d1f23996c2d08269b"}]}'
   ssdeep_report:
     title: SSDeep Report
     description: Fetches information related to a fuzzy hash
     input:
       query:
         title: Query
-        type: string
         description: SSDeep fuzzy hash to search
+        type: string
         required: true
         example: 1536:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4:TJs0oG2KSTj3o8a9PFeEHn4l
     output:
@@ -255,58 +270,58 @@ actions:
         type: response
         required: false
         description: Response
-        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
+        example: '{"status_code":200,"status_message":"Results found.","results":[{"hash":"3:6QKm2A3T:6QKm2A3T","similarity":"97","matches":[{"file_name":"file1.exe","file_size":"1536","ssdeep_hash":"3:6QKm2A3T:6QKm2A3T"},{"file_name":"file2.exe","file_size":"1536","ssdeep_hash":"3:6QKm2A3T:6QKm2A3T"}]}]}'
   ssdeep_sample:
     title: SSDeep Sample
     description: Fetches information related to a fuzzy hash
     input:
       query:
         title: Query
-        type: string
         description: SSDeep fuzzy hash to search
+        type: string
         required: true
         example: 1536:TJsNrChuG2K6IVOTjWko8a9P6W3OEHBQc4w4:TJs0oG2KSTj3o8a9PFeEHn4l
     output:
       response:
         title: Response
+        description: The results returned from the Threatminer API
         type: response
         required: false
-        description: Response
-        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
+        example: '{"status_code":200,"status_message":"Results found.","results":[{"value":"ecc5943b5c2ec75065ba1bdb668bb0a2c63c0451be259dea47a902811b318c00"}]}'
   ssl_hosts:
     title: SSL Hosts
     description: Fetches host information related to a certificate
     input:
       query:
         title: Query
-        type: string
         description: Certificate SHA1 hash to search
+        type: string
         required: true
         example: 42a8d5b3a867a59a79f44ffadd61460780fe58f2
     output:
       response:
         title: Response
+        description: The results returned from the Threatminer API
         type: response
         required: false
-        description: Response
-        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
+        example: '{"status_code":200,"status_message":"Results found.","results":[{"value":"149.154.157.170"},{"value":"149.154.157.171"}]}'
   ssl_report:
     title: SSL Report
     description: Fetches information related to a certificate
     input:
       query:
         title: Query
-        type: string
         description: Certificate SHA1 hash to search
+        type: string
         required: true
         example: 42a8d5b3a867a59a79f44ffadd61460780fe58f2
     output:
       response:
         title: Response
+        description: The results returned from the Threatminer API
         type: response
         required: false
-        description: Response
-        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
+        example: '{"status_code":404,"status_message":"No results found.","results":[]}'
   email_domain:
     title: Email Reverse WHOIS - Domain
     description: Fetches information related to an email address
@@ -320,10 +335,10 @@ actions:
     output:
       response:
         title: Response
+        description: The results returned from the Threatminer API
         type: response
         required: false
-        description: Response
-        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
+        example: '{"status_code":200,"status_message":"Results found.","results":[{"value":"example.com"}, {"value":"example2.com"}]}'
   email_report:
     title: Email Reverse WHOIS - Report Tagging
     description: Fetches information related to an email address
@@ -337,10 +352,10 @@ actions:
     output:
       response:
         title: Response
+        description: The results returned from the Threatminer API
         type: response
         required: false
-        description: Response
-        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
+        example: '{"status_code":200,"status_message":"Results found.","results":[{"value":"example.com"}, {"value":"example2.com"}]}'
   av_sample:
     title: AV Detection Samples
     description: Fetches information related to a virus
@@ -354,14 +369,13 @@ actions:
     output:
       response:
         title: Response
+        description: The results returned from the Threatminer API
         type: response
         required: false
-        description: Response
-        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
+        example: '{"status_code":200,"status_message":"Results found.","results":[{"value":"f1b341d3383b808ecfacfa22dcbe9196"}]}'
   report:
     title: Search IOC Reports
-    description: Fetches information related to an indicator by domains, hosts, emails,
-      or samples
+    description: Fetches information related to an indicator by domains, hosts, emails, or samples
     input:
       filename:
         title: Filename
@@ -377,22 +391,22 @@ actions:
         example: 2013
       query_type:
         title: Query Type
-        description: Query Type
+        description: Specify the type of query to be executed
         type: string
         required: true
         enum:
-        - Domains
-        - Hosts
-        - Emails
-        - Samples
+          - Domains
+          - Hosts
+          - Emails
+          - Samples
         example: Domains
     output:
       response:
         title: Response
+        description: The results returned from the Threatminer API
         type: response
         required: false
-        description: Response
-        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
+        example: '{"status_code":200,"status_message":"Results found.","results":[{"value":"example.com"}, {"value":"example2.com"}]}'
   search:
     title: Search APTNotes
     description: Fetches information related to a text search
@@ -405,18 +419,17 @@ actions:
         example: sofacy
       query_type:
         title: Query Type
+        description: Specify the type of query to be executed
         type: string
-        description: Query Type
         required: true
         enum:
-        - Full Text
-        - By Year
+          - Full Text
+          - By Year
         example: Full Text
     output:
       response:
         title: Response
+        description: The results returned from the Threatminer API
         type: response
         required: false
-        description: Response
-        example: { "response": { "status_code": 404, "status_message": "No results found.", "results": [ ] } }
-
+        example: '{"status_code":"200","status_message":"Results found.","results":[{"filename":"ExampleFilename.pdf","year":"2016","URL":"https:\/\/www.threatminer.org\/report.php?q=ExampleFilename.pdf&y=2016"}]}'
