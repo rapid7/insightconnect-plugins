@@ -19,6 +19,7 @@ class DownloadAttachment(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         key = self.connection.key
+        ssl = self.connection.ssl
         attribute_id = params.get("attribute_id")
 
         headers = {"content-type": "application/json", "Authorization": key}
@@ -28,7 +29,7 @@ class DownloadAttachment(insightconnect_plugin_runtime.Action):
 
         try:
             # Generate request
-            response = requests.get(url, headers=headers, verify=False)  # noqa: B501
+            response = requests.get(url, headers=headers, verify=ssl)  # noqa: B501
             str(response.json()["message"])
             response.raise_for_status()
         except ValueError:
