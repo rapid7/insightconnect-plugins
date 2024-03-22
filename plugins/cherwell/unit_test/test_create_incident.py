@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from komand_cherwell.actions.create_incident import CreateIncident
 from komand_cherwell.actions.create_incident.schema import CreateIncidentOutput
-from unit_test.util import Util
+from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
 from jsonschema import validate
