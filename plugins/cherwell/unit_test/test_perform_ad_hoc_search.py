@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from komand_cherwell.actions.perform_ad_hoc_search import PerformAdHocSearch
 from komand_cherwell.actions.perform_ad_hoc_search.schema import PerformAdHocSearchOutput
-from unit_test.util import Util
+from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
 from jsonschema import validate
