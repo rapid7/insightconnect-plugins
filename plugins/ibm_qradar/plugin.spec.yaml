@@ -54,7 +54,7 @@ connection:
     type: string
     description: Host URL of the QRadar instance.
     required: true
-    example: https://127.0.0.1/
+    example: https://127.0.0.1
   credentials:
     title: Credentials
     type: credential_username_password

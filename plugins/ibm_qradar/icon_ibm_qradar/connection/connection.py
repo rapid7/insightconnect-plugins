@@ -24,8 +24,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
         credentials = params.get(Input.CREDENTIALS)
         self.username = credentials.get("username")
         self.password = credentials.get("password")
-        self.host_url = params.get(Input.HOST_URL)
         self.verify_ssl = params.get(Input.VERIFY_SSL, False)
+        self.host_url = params.get(Input.HOST_URL)
+        if self.host_url.endswith("/"):
+            self.host_url = self.host_url[:-1]
 
     def test(self):
         """To test the connection.
@@ -35,7 +37,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         """
         auth = (self.username, self.password)
         response = requests.get(
-            url=f"{self.host_url}{SYSTEM_INFO}", auth=auth, verify=self.verify_ssl, timeout=REQUEST_TIMEOUT
+            url=f"{self.host_url}/{SYSTEM_INFO}", auth=auth, verify=self.verify_ssl, timeout=REQUEST_TIMEOUT
         )
         handle_response(response=response)
         return {"connection": "successful"}

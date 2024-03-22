@@ -32,7 +32,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |credentials|credential_username_password|None|True|Auth object consisting of username of type string and password of type password|None|{ 'username': 'user1', 'password': 'password'}|
-|host_url|string|None|True|Host URL of the QRadar instance.|None|https://127.0.0.1/|
+|host_url|string|None|True|Host URL of the QRadar instance.|None|https://127.0.0.1|
 |verify_ssl|boolean|None|False|Whether to verify the SSL for QRadar connection|None|True|
 
 Example input:
@@ -40,7 +40,7 @@ Example input:
 ```
 {
   "credentials": "{ 'username': 'user1', 'password': 'password'}",
-  "host_url": "https://127.0.0.1/",
+  "host_url": "https://127.0.0.1",
   "verify_ssl": true
 }
 ```
