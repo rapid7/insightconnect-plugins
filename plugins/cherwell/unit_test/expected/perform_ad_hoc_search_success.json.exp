@@ -1,0 +1,130 @@
+{
+  "search_results": {
+    "businessObjects": [
+      {
+        "busObId": "string",
+        "busObPublicId": "string",
+        "busObRecId": "string",
+        "errorCode": "string",
+        "errorMessage": "string",
+        "fields": [
+          {
+            "dirty": true,
+            "displayName": "string",
+            "fieldId": "string",
+            "html": "string",
+            "name": "string",
+            "value": "string"
+          }
+        ],
+        "hasError": true,
+        "links": [
+          {
+            "name": "string",
+            "url": "string"
+          }
+        ]
+      }
+    ],
+    "errorCode": "string",
+    "errorMessage": "string",
+    "hasError": true,
+    "hasPrompts": true,
+    "links": [
+      {
+        "name": "string",
+        "url": "string"
+      }
+    ],
+    "prompts": [
+      {
+        "allowValuesOnly": true,
+        "busObId": "string",
+        "collectionStoreEntireRow": "string",
+        "collectionValueField": "string",
+        "constraintXml": "string",
+        "contents": "string",
+        "default": "string",
+        "fieldId": "string",
+        "isDateRange": true,
+        "listDisplayOption": "Auto",
+        "listReturnFieldId": "string",
+        "multiLine": true,
+        "promptId": "string",
+        "promptType": "None",
+        "promptTypeName": "string",
+        "required": true,
+        "text": "string",
+        "value": {},
+        "values": [
+          "string"
+        ]
+      }
+    ],
+    "searchResultsFields": [
+      {
+        "caption": "string",
+        "currencyCulture": "string",
+        "currencySymbol": "string",
+        "decimalDigits": 0,
+        "defaultSortOrderAscending": true,
+        "displayName": "string",
+        "fieldId": "string",
+        "fieldName": "string",
+        "fullFieldId": "string",
+        "hasDefaultSortField": true,
+        "isBinary": true,
+        "isCurrency": true,
+        "isDateTime": true,
+        "isFilterAllowed": true,
+        "isLogical": true,
+        "isNumber": true,
+        "isShortDate": true,
+        "isShortTime": true,
+        "isVisible": true,
+        "sortOrder": "string",
+        "sortable": true,
+        "storageName": "string",
+        "wholeDigits": 0
+      }
+    ],
+    "simpleResults": {
+      "errorCode": "string",
+      "errorMessage": "string",
+      "groups": [
+        {
+          "errorCode": "string",
+          "errorMessage": "string",
+          "hasError": true,
+          "isBusObTarget": true,
+          "simpleResultsListItems": [
+            {
+              "busObId": "string",
+              "busObRecId": "string",
+              "docRepositoryItemId": "string",
+              "galleryImage": "string",
+              "links": [
+                {
+                  "name": "string",
+                  "url": "string"
+                }
+              ],
+              "publicId": "string",
+              "scope": "string",
+              "scopeOwner": "string",
+              "subTitle": "string",
+              "text": "string",
+              "title": "string"
+            }
+          ],
+          "subTitle": "string",
+          "targetId": "string",
+          "title": "string"
+        }
+      ],
+      "hasError": true,
+      "title": "string"
+    },
+    "totalRows": 0
+  }
+}

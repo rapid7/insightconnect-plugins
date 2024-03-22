@@ -1,0 +1,26 @@
+{
+  "raw_response": {
+    "busObPublicId": "string",
+    "busObRecId": "string",
+    "cacheKey": "string",
+    "errorCode": "string",
+    "errorMessage": "string",
+    "fieldValidationErrors": [
+      {
+        "error": "string",
+        "errorCode": "string",
+        "fieldId": "string"
+      }
+    ],
+    "hasError": true,
+    "notificationTriggers": [
+      {
+        "key": "string",
+        "sourceChange": "string",
+        "sourceId": "string",
+        "sourceType": "string"
+      }
+    ]
+  },
+  "success": true
+}

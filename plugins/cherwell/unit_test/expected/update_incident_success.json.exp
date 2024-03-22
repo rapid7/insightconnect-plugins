@@ -1,0 +1,27 @@
+{
+  "raw_response": {
+    "busObId": "string",
+    "busObPublicId": "string",
+    "busObRecId": "string",
+    "errorCode": "string",
+    "errorMessage": "string",
+    "fields": [
+      {
+        "dirty": true,
+        "displayName": "string",
+        "fieldId": "string",
+        "html": "string",
+        "name": "string",
+        "value": "string"
+      }
+    ],
+    "hasError": true,
+    "links": [
+      {
+        "name": "string",
+        "url": "string"
+      }
+    ]
+  },
+  "success": true
+}
