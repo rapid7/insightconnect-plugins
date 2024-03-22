@@ -21,7 +21,7 @@ class TestCreateIncident(TestCase):
         [
             [
                 "Success",
-                Util.read_file_to_dict("input/create_incident_success.json.inp"),
+                Util.read_file_to_dict("inputs/create_incident_success.json.inp"),
                 Util.read_file_to_dict("expected/create_incident_success.json.exp"),
             ],
         ]

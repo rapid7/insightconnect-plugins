@@ -21,7 +21,7 @@ class TestPerformAdHocSearch(TestCase):
         [
             [
                 "Success",
-                Util.read_file_to_dict("input/perform_ad_hoc_search_success.json.inp"),
+                Util.read_file_to_dict("inputs/perform_ad_hoc_search_success.json.inp"),
                 Util.read_file_to_dict("expected/perform_ad_hoc_search_success.json.exp"),
             ],
         ]
