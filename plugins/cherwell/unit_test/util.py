@@ -21,7 +21,7 @@ class Util:
         default_connection.logger = logging.getLogger("connection logger")
         params = {
             Input.URL: STUB_URL,
-            Input.CLIENT_ID: STUB_URL,
+            Input.CLIENT_ID: STUB_CLIENT_ID,
             Input.SSL_VERIFY: False,
             Input.AUTHENTICATION_MODE: STUB_AUTHENTICATION_MODE,
             Input.USERNAME_AND_PASSWORD: STUB_USERNAME_AND_PASSWORD,
