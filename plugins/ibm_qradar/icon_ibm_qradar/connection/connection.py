@@ -1,17 +1,22 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
+import requests
+
+from icon_ibm_qradar.util.utils import handle_response
+from icon_ibm_qradar.util.constants.endpoints import SYSTEM_INFO
+from icon_ibm_qradar.util.constants.constant import REQUEST_TIMEOUT
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super().__init__(input=ConnectionSchema())
-        self.username = ""
-        self.password = ""
+        self.username = None
+        self.password = None
         self.host_url = ""
-        self.verify_ssl = False
+        self.verify_ssl = None
 
     def connect(self, params={}):
-        """TO read the connection configuration.
+        """To read the connection configuration.
 
         :param params: Config Params required for connection
         :return: None
@@ -19,15 +24,20 @@ class Connection(insightconnect_plugin_runtime.Connection):
         credentials = params.get(Input.CREDENTIALS)
         self.username = credentials.get("username")
         self.password = credentials.get("password")
+        self.verify_ssl = params.get(Input.VERIFY_SSL, False)
         self.host_url = params.get(Input.HOST_URL)
-        self.verify_ssl = params.get(Input.VERIFY_SSL, False)
+        if self.host_url.endswith("/"):
+            self.host_url = self.host_url[:-1]
 
-    def test(self, params):
-        """To test the connection."""
-        credentials = params.get(Input.CREDENTIALS, {"username": "user1", "password": "password"})
-        self.username = credentials.get("username")
-        self.password = credentials.get("password")
-        self.host_url = params.get(Input.HOST_URL, "https://hostname.com")
-        self.verify_ssl = params.get(Input.VERIFY_SSL, False)
+    def test(self):
+        """To test the connection.
 
+        :param params: Config Params required for connection
+        :return dict: connection was successful
+        """
+        auth = (self.username, self.password)
+        response = requests.get(
+            url=f"{self.host_url}/{SYSTEM_INFO}", auth=auth, verify=self.verify_ssl, timeout=REQUEST_TIMEOUT
+        )
+        handle_response(response=response)
         return {"connection": "successful"}
