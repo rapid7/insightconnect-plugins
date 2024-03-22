@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+
 # Custom imports below
 from komand_cherwell.util.api import Cherwell
 

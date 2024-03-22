@@ -59,13 +59,13 @@ class Cherwell:
                 raise PluginException(
                     cause=f"An error was received when running {action_name}.",
                     assistance=f"Request status code of {resp.status_code} was returned.",
-                    data=f"{custom_error.get(resp.status_code, custom_error.get(000))}"
+                    data=f"{custom_error.get(resp.status_code, custom_error.get(000))}",
                 )
             elif resp.status_code == 405:
                 raise PluginException(
                     cause=f"An error was received when running {action_name}.",
                     assistance=f"Request status code of {resp.status_code} was returned."
-                    "Please make sure connections have been configured correctly"
+                    "Please make sure connections have been configured correctly",
                 )
             elif resp.status_code != 200:
                 raise PluginException(
@@ -73,7 +73,7 @@ class Cherwell:
                     assistance=f"Request status code of {resp.status_code} was returned."
                     " Please make sure connections have been configured correctly "
                     "as well as the correct input for the action.",
-                    data=f"Response was: {resp.text}"
+                    data=f"Response was: {resp.text}",
                 )
 
         except Exception as exception:
@@ -84,10 +84,7 @@ class Cherwell:
             results = resp.json()
             return results
         except JSONDecodeError:
-            raise PluginException(
-                preset=PluginException.Preset.INVALID_JSON,
-                data=resp.text
-            )
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=resp.text)
 
     def _token(self, client_id: str, username: str, password: str, authentication_mode: str) -> str:
         """
@@ -123,9 +120,9 @@ class Cherwell:
         if response.status_code not in range(200, 299):
             raise PluginException(
                 cause=f"Error: Received HTTP {response.status_code} status code from Cherwell."
-                      "Please verify your Cherwell server status and try again.",
+                "Please verify your Cherwell server status and try again.",
                 assistance="If the issue persists please contact support.",
-                data=response.text
+                data=response.text,
             )
 
         # Let's see if we actually have a JSON response from the server. It looks bad if we dump a JSONDecodeError
@@ -133,10 +130,7 @@ class Cherwell:
         try:
             response_data = response.json()
         except JSONDecodeError:
-            raise PluginException(
-                preset=PluginException.Preset.INVALID_JSON,
-                data=response.text
-            )
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
         # Verify the access token is present in the response. If not, there is something wrong.
         if "access_token" in response_data:
@@ -146,7 +140,7 @@ class Cherwell:
                 cause="Error: Authentication access token was not present in the authentication response from "
                 "the Cherwell server.",
                 assistance="Please verify the status of your Cherwell server and try again. "
-                "If the issue persists please contact support."
+                "If the issue persists please contact support.",
             )
 
     def get_businessobjectsummary(self, busOb):

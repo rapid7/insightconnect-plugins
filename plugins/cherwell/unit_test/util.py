@@ -13,17 +13,18 @@ STUB_AUTHENTICATION_MODE = "Internal"
 STUB_CLIENT_ID = "a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99"
 STUB_USERNAME_AND_PASSWORD = {"username": "user@example.com", "password": "mypassword"}
 
+
 class Util:
     @staticmethod
     def default_connector(action: insightconnect_plugin_runtime.Action):
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
         params = {
-          Input.URL: STUB_URL,
-          Input.CLIENT_ID: STUB_URL,
-          Input.SSL_VERIFY: False,
-          Input.AUTHENTICATION_MODE: STUB_AUTHENTICATION_MODE,
-          Input.USERNAME_AND_PASSWORD: STUB_USERNAME_AND_PASSWORD,
+            Input.URL: STUB_URL,
+            Input.CLIENT_ID: STUB_URL,
+            Input.SSL_VERIFY: False,
+            Input.AUTHENTICATION_MODE: STUB_AUTHENTICATION_MODE,
+            Input.USERNAME_AND_PASSWORD: STUB_USERNAME_AND_PASSWORD,
         }
         default_connection.connect(params)
         action.connection = default_connection
