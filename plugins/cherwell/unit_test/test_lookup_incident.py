@@ -21,7 +21,7 @@ class TestLookupIncident(TestCase):
         [
             [
                 "Success",
-                Util.read_file_to_dict("input/lookup_incident_success.json.inp"),
+                Util.read_file_to_dict("inputs/lookup_incident_success.json.inp"),
                 Util.read_file_to_dict("expected/lookup_incident_success.json.exp"),
             ],
         ]

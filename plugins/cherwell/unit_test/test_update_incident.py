@@ -21,7 +21,7 @@ class TestUpdateIncident(TestCase):
         [
             [
                 "Success",
-                Util.read_file_to_dict("input/update_incident_success.json.inp"),
+                Util.read_file_to_dict("inputs/update_incident_success.json.inp"),
                 Util.read_file_to_dict("expected/update_incident_success.json.exp"),
             ],
         ]
