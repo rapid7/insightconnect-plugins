@@ -8,10 +8,11 @@ import os
 
 sys.path.append(os.path.abspath("../"))
 
-STUB_URL = "http://0.0.0.0:0000"
+STUB_URL = "0.0.0.0"
 STUB_AUTHENTICATION_MODE = "Internal"
 STUB_CLIENT_ID = {"secretKey": "a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99"}
 STUB_USERNAME_AND_PASSWORD = {"username": "user@example.com", "password": "mypassword"}
+STUB_QUERY_PARAMS = "?auth_mode=Internal"
 
 
 class Util:
@@ -44,33 +45,37 @@ class Util:
 
     @staticmethod
     def mock_request(*args, **kwargs):
-        url = kwargs.get("url")
+        url = args[0].url
+        if url == f"http://{STUB_URL}/CherwellAPI/token{STUB_QUERY_PARAMS}":
+            return MockResponse(200, "token.json.resp")
         # Create Incident
-        if url == f"{STUB_URL}/CherwellAPI/api/V1/SaveBusinessObject":
+        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/SaveBusinessObject":
             return MockResponse(200, "create_incident_success.json.resp")
+        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/GetBusinessObjectTemplate":
+            return MockResponse(200, "get_business_object_template.json.resp")
         # Lookup Incident
-        if url == f"{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/1":
+        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/1":
             return MockResponse(200, "lookup_incident_success.json.resp")
         # Perform Ad Hoc Search
-        if url == f"{STUB_URL}/CherwellAPI/api/V1/getsearchresults":
-            return MockResponse(200, "get_search_results_success.json.resp")
+        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/getsearchresults":
+            return MockResponse(200, "perform_ad_hoc_search_success.json.resp")
         # Update Incident
-        if url == f"{STUB_URL}/CherwellAPI/api/V1/SaveBusinessObject":
+        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/SaveBusinessObject":
             return MockResponse(200, "update_incident_success.json.resp")
         # Error Handling
-        if url == f"{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/400":
+        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/400":
             return MockResponse(400, "error.json.resp")
-        if url == f"{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/401":
+        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/401":
             return MockResponse(401, "error.json.resp")
-        if url == f"{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/403":
+        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/403":
             return MockResponse(403, "error.json.resp")
-        if url == f"{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/404":
+        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/404":
             return MockResponse(404, "error.json.resp")
-        if url == f"{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/418":
-            return MockResponse(418, "error.json.resp")
-        if url == f"{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/500":
+        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/409":
+            return MockResponse(409, "error.json.resp")
+        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/500":
             return MockResponse(500, "error.json.resp")
-        if url == f"{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/202":
+        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/202":
             return MockResponse(202, "error.json.resp")
         raise NotImplementedError("Not implemented", kwargs)
 

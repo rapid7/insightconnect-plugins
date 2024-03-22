@@ -1,0 +1,26 @@
+{
+  "errorMessage": "errorMessage",
+  "errorCode": "errorCode",
+  "hasError": true,
+  "fields": [
+    {
+      "dirty": true,
+      "displayName": "displayName",
+      "fullFieldId": "fullFieldId",
+      "name": "name",
+      "html": "html",
+      "value": "value",
+      "fieldId": "fieldId"
+    },
+    {
+      "dirty": true,
+      "displayName": "displayName",
+      "fullFieldId": "fullFieldId",
+      "name": "name",
+      "html": "html",
+      "value": "value",
+      "fieldId": "fieldId"
+    }
+  ],
+  "httpStatusCode": "Continue"
+}
