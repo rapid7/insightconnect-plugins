@@ -10,7 +10,7 @@ sys.path.append(os.path.abspath("../"))
 
 STUB_URL = "http://0.0.0.0:0000"
 STUB_AUTHENTICATION_MODE = "Internal"
-STUB_CLIENT_ID = "a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99"
+STUB_CLIENT_ID = {"secret_key": "a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99"}
 STUB_USERNAME_AND_PASSWORD = {"username": "user@example.com", "password": "mypassword"}
 
 
