@@ -1,27 +1,11 @@
 {
   "raw_response": {
-    "busObId": "string",
-    "busObPublicId": "string",
-    "busObRecId": "string",
-    "errorCode": "string",
-    "errorMessage": "string",
-    "fields": [
-      {
-        "dirty": true,
-        "displayName": "string",
-        "fieldId": "string",
-        "html": "string",
-        "name": "string",
-        "value": "string"
-      }
-    ],
-    "hasError": true,
-    "links": [
-      {
-        "name": "string",
-        "url": "string"
-      }
-    ]
+    "busObPublicId": "762421",
+    "busObRecId": "9446e3f047458fd7824f3b400f94be3566ac523802",
+    "errorCode": null,
+    "errorMessage": null,
+    "fieldValidationErrors": [],
+    "hasError": false
   },
   "success": true
 }

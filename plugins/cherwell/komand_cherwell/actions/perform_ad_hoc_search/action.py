@@ -14,6 +14,7 @@ class PerformAdHocSearch(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        print(params)
         search_params = params.get(Input.DATA_REQUEST)
 
         response = self.connection.api.get_searchresults(search_params)
