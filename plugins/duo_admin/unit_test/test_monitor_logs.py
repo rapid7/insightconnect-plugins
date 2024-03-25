@@ -30,32 +30,56 @@ class TestMonitorLogs(TestCase):
                 "without_state",
                 Util.read_file_to_dict("inputs/monitor_logs_without_state.json.inp"),
                 Util.read_file_to_dict("expected/monitor_logs.json.exp"),
-                {"cutoff": {"date": "2023-04-30T08:34:46.000Z"}, "lookback": "2023-04-30T08:34:46.000Z"},
+                {
+                    "filter_cutoff_auth_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "filter_cutoff_admin_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "filter_cutoff_trust_monitor_events_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "lookback": "2023-04-30T08:34:46.000Z",
+                },
             ],
             [
                 "with_state",
                 Util.read_file_to_dict("inputs/monitor_logs_with_state.json.inp"),
                 Util.read_file_to_dict("expected/monitor_logs_2.json.exp"),
-                {"cutoff": {"date": "2023-04-30T08:34:46.000Z"}, "lookback": "2023-04-30T08:34:46.000Z"},
+                {
+                    "filter_cutoff_auth_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "filter_cutoff_admin_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "filter_cutoff_trust_monitor_events_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "lookback": "2023-04-30T08:34:46.000Z",
+                },
             ],
             [
                 "next_page",
                 Util.read_file_to_dict("inputs/monitor_logs_next_page.json.inp"),
                 Util.read_file_to_dict("expected/monitor_logs_3.json.exp"),
-                {"cutoff": {"date": "2023-04-30T08:34:46.000Z"}, "lookback": "2023-04-30T08:34:46.000Z"},
+                {
+                    "filter_cutoff_auth_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "filter_cutoff_admin_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "filter_cutoff_trust_monitor_events_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "lookback": "2023-04-30T08:34:46.000Z",
+                },
             ],
             [
                 "bad_request",
-                # TODO WORK OUT WHICH REQUEST SHOULD BE BAD and how to make it fail
                 Util.read_file_to_dict("inputs/monitor_logs_bad_request.json.inp"),
                 Util.read_file_to_dict("expected/monitor_logs_bad_request.json.exp"),
-                {"cutoff": {"date": "2023-04-30T08:34:46.000Z"}, "lookback": 72},
+                {
+                    "filter_cutoff_auth_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "filter_cutoff_admin_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "filter_cutoff_trust_monitor_events_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "lookback": 72,
+                },
             ],
             [
                 "server_error",
                 Util.read_file_to_dict("inputs/monitor_logs_server_error.json.inp"),
                 Util.read_file_to_dict("expected/monitor_logs_server_error.json.exp"),
-                {"cutoff": {"date": "2023-04-30T08:34:46.000Z"}, "lookback": "2023-03-30T08:34:46.000Z"},
+                {
+                    "filter_cutoff_auth_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "filter_cutoff_admin_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "filter_cutoff_trust_monitor_events_logs": {"date": "2023-04-30T08:34:46.000Z"},
+                    "lookback": "2023-04-30T08:34:46.000Z",
+                },
             ],
         ]
     )

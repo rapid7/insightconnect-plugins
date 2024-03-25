@@ -65,7 +65,7 @@ class MonitorLogsOutput(insightconnect_plugin_runtime.Output):
   "title": "Logs",
   "description": "List of administrator, authentication and trust monitor event logs within the specified time range",
   "items": {
-        "type": "object"
+    "$ref": {}
   },
   "required": [
     "logs"
