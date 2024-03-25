@@ -342,6 +342,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 6.0.7 - Connection: fix hard overriding custom header from `CUSTOM_SECRET_INPUT`
 * 6.0.6 - Updated the SDK to the latest version to address memory usage issues
 * 6.0.5 - Fixed a bug where we dropped the slash at the end of URLs when joining them together
 * 6.0.4 - Custom Auth: Fix bug where we could not pass the API Key from the input into the Authentication header if the header value included a prefix
