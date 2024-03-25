@@ -1,11 +1,11 @@
 import os
 import sys
 
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
 
 from icon_ibm_qradar.util.utils import delete_none, validate_query_range
-
-sys.path.append(os.path.abspath("../"))
 
 
 class TestUtils(TestCase):
