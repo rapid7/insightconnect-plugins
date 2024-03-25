@@ -563,7 +563,7 @@ This action is used to add a user in Duo Admin.
 |lastname|string|None|False|The user's surname. Required for Duo's ID Proofing feature|None|User|
 |notes|string|None|False|An optional description or notes field|None|Example note|
 |realname|string|None|False|User's real name|None|Example User|
-|status|string|active|False|User status|['active', 'bypass', 'disabled']|active|
+|status|string|active|False|User status|["active", "bypass", "disabled"]|active|
 |username|string|None|True|The name of the user to create|None|example-user|
 
 Example input:
