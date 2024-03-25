@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import DownloadReportInput, DownloadReportOutput
+from .schema import DownloadReportInput, DownloadReportOutput, Input, Output
 
 # Custom imports below
 import requests
@@ -27,22 +27,25 @@ class DownloadReport(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        report_id = params.get("id")
-        instance_id = params.get("instance")
+        report_id = params.get(Input.ID, "")
+        instance_id = params.get(Input.INSTANCE, "")
+
         endpoint = endpoints.Report.download(self.connection.console_url, report_id, instance_id)
         self.logger.info(f"Using {endpoint}")
 
         try:
-            response = self.connection.session.get(url=endpoint, verify=False)
-        except requests.RequestException as e:
-            self.logger.error(e)
+            response = self.connection.session.get(
+                url=endpoint, verify=self.connection.ssl_verify, headers={"Accept": "application/pdf"}
+            )
+        except requests.RequestException as error:
+            self.logger.error(error)
             raise
 
         else:
             if response.status_code in [200, 201]:  # 200 is documented, 201 is undocumented
                 report = base64.b64encode(response.content).decode()
 
-                return {"report": report}
+                return {Output.REPORT: report}
             else:
                 reason = ""
                 try:

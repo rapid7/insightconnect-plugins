@@ -18,15 +18,17 @@ class V1Session:
 
     _SUPPORT = "Contact support for assistance"
 
-    def __init__(self, session, logger):
+    def __init__(self, session: Session, logger: Logger, ssl_verify: bool) -> None:
         """
         Creates a new instance of V1Session
         :param session: Session object available to InsightConnect actions/triggers, usually self.connection.session
         :param logger: Logger object available to InsightConnect actions/triggers, usually self.logger
+        :param ssl_verify: Indicates whether to verify SSL certificate or not
         :return: ResourceHelper object
         """
         self.logger = logger
         self.session = session
+        self.ssl_verify = ssl_verify
 
     def v1_authenticate(self, console_url: str):
         """
@@ -38,7 +40,7 @@ class V1Session:
         response = self.session.post(
             f"{console_url}/api/1.1/xml",
             data=login_request,
-            verify=False,
+            verify=self.ssl_verify,
             headers=headers,
             allow_redirects=False,
         )
@@ -64,7 +66,7 @@ class V1Session:
         self.session.headers.update({"Content-Type": "text/xml"})
         session_id = self.session.headers.get("nexposeCCSessionID", "")
         logout_request = f'<?xml version="1.0" encoding="UTF-8"?><LogoutRequest session-id="{session_id}"/>'
-        response = self.session.post(f"{console_url}/api/1.1/xml", data=logout_request, verify=False)
+        response = self.session.post(f"{console_url}/api/1.1/xml", data=logout_request, verify=self.ssl_verify)
 
         if response.status_code == 200:
             xml_response = etree.fromstring(response.text)
@@ -84,7 +86,7 @@ class ValidateUser:
     Validates that a user exists and has the correct permissions
     """
 
-    def __init__(self, session: Session, logger: Logger):
+    def __init__(self, session: Session, logger: Logger, ssl_verify: bool) -> None:
         """
         Creates a new instance of ValidateUser
         :param session: Session object available to InsightConnect actions/triggers, usually self.connection.session
@@ -93,7 +95,10 @@ class ValidateUser:
         """
         self.logger = logger
         self.session = session
-        self.requests = resource_requests.ResourceRequests(session=self.session, logger=self.logger)
+        self.ssl_verify = ssl_verify
+        self.requests = resource_requests.ResourceRequests(
+            session=self.session, logger=self.logger, ssl_verify=self.ssl_verify
+        )
 
     def validate_role_exists(self, console_url: str, role_id: str) -> dict:
         """

@@ -16,7 +16,7 @@ class GetVulnerabilitiesByCve(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         cve_id = params.get("cve_id")
         endpoint = endpoints.Vulnerability.vulnerability_checks(self.connection.console_url)
         self.logger.info(f"Using {endpoint}...")
