@@ -125,7 +125,7 @@
 		},
 		{
 			"identifier": "get_task_result/schema.py",
-			"hash": "803939456b31bd86a9c73c3bc9f31276"
+			"hash": "db37636221a0ebf3fd19ba42c7601b44"
 		},
 		{
 			"identifier": "isolate_endpoint/schema.py",
