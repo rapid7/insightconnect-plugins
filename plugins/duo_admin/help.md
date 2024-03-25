@@ -223,7 +223,7 @@ This action is used to modify a user by ID.
 |lastname|string|None|False|The user's new surname|None|Example|
 |notes|string|None|False|The new notes field|None|Example|
 |realname|string|None|False|The new realname (or full name)|None|Example|
-|status|string|None|False|The new status. Select \'None\' to skip status change|["active", "disabled", "bypass", "None"]|active|
+|status|string|None|False|The new status. Select 'None' to skip status change|["active", "disabled", "bypass", "None"]|active|
 |userId|string|None|True|User unique ID|None|DUCUULF6HBMZ43IG9MBH|
 |username|string|None|False|The new username|None|Example|
 
