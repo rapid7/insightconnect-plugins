@@ -78,7 +78,7 @@ class TestMonitorLogs(TestCase):
                     "filter_cutoff_auth_logs": {"date": "2023-04-30T08:34:46.000Z"},
                     "filter_cutoff_admin_logs": {"date": "2023-04-30T08:34:46.000Z"},
                     "filter_cutoff_trust_monitor_events_logs": {"date": "2023-04-30T08:34:46.000Z"},
-                    "lookback": "2023-04-30T08:34:46.000Z",
+                    "lookback": 72,
                 },
             ],
         ]
