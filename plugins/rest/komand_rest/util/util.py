@@ -163,7 +163,7 @@ class RestAPI(object):
                         assistance="When using 'CUSTOM_SECRET_INPUT' as a value in authentication headers the"
                         " 'secret_key' field is required.",
                     )
-                new_headers[key] = secret_key
+                new_headers[key] = value.replace(self.CUSTOM_SECRET_INPUT, secret_key)
             else:
                 new_headers[key] = value
         return new_headers
