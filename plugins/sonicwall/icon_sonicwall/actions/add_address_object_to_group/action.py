@@ -21,8 +21,11 @@ class AddAddressObjectToGroup(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        group_name = params.get(Input.GROUP)
-        object_name = params.get(Input.ADDRESS_OBJECT)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        group_name = params.get(Input.GROUP, "")
+        object_name = params.get(Input.ADDRESS_OBJECT, "")
+        # END INPUT BINDING - DO NOT REMOVE
+
         object_type = self.connection.sonicwall_api.get_object_type(object_name)
         group_type = self.connection.sonicwall_api.get_group_type(group_name)
         object_action = None

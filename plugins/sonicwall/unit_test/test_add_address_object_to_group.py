@@ -9,6 +9,7 @@ from unittest.mock import MagicMock, patch
 
 from icon_sonicwall.actions.add_address_object_to_group import AddAddressObjectToGroup
 from icon_sonicwall.actions.add_address_object_to_group.schema import Input, Output
+from icon_sonicwall.util.util import Message
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
 from parameterized import parameterized
@@ -30,7 +31,6 @@ STUB_PAYLOAD = {Input.ADDRESS_OBJECT: "ExampleAddressObject", Input.GROUP: "Exam
 class TestAddAddressObjectToGroup(TestCase):
     def setUp(self) -> None:
         self.action = Util.default_connector(AddAddressObjectToGroup())
-        self.maxDiff = None
 
     @parameterized.expand(
         [
@@ -67,8 +67,8 @@ class TestAddAddressObjectToGroup(TestCase):
         [
             (
                 mock_request_400,
-                PluginException.causes[PluginException.Preset.UNKNOWN],
-                PluginException.assistances[PluginException.Preset.UNKNOWN],
+                Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
+                Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
             ),
             (
                 mock_request_401,
@@ -82,8 +82,8 @@ class TestAddAddressObjectToGroup(TestCase):
             ),
             (
                 mock_request_500,
-                PluginException.causes[PluginException.Preset.UNKNOWN],
-                PluginException.assistances[PluginException.Preset.UNKNOWN],
+                Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
+                Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
             ),
             (
                 mock_request_invalid_json,

@@ -21,11 +21,15 @@ class CheckIfAddressInAddressGroup(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        objects_matching = []
-        name = params.get(Input.ADDRESS)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        name = params.get(Input.ADDRESS, "")
+        group_name = params.get(Input.GROUP, "")
+        address = params.get(Input.ADDRESS, "")
+        enable_search = params.get(Input.ENABLE_SEARCH, False)
+        # END INPUT BINDING - DO NOT REMOVE
 
-        address_group = self.connection.sonicwall_api.get_group(params.get(Input.GROUP))
-        address_objects_names = []
+        objects_matching, address_objects_names = [], []
+        address_group = self.connection.sonicwall_api.get_group(group_name)
         for ip in ["ipv4", "ipv6"]:
             address_object = address_group.get("address_group", {}).get(ip, {}).get("address_object", {})
             address_objects_names.extend(address_object.get("ipv4", []))
@@ -34,10 +38,10 @@ class CheckIfAddressInAddressGroup(insightconnect_plugin_runtime.Action):
             address_objects_names.extend(address_object.get("fqdn", []))
 
         for object_from_group in address_objects_names:
-            if object_from_group.get("name") == params.get(Input.ADDRESS):
+            if object_from_group.get("name") == address:
                 objects_matching.append(object_from_group)
 
-        if len(objects_matching) == 0 and params.get(Input.ENABLE_SEARCH) is True:
+        if len(objects_matching) == 0 and enable_search is True:
             for object_from_group in address_objects_names:
                 response = self.connection.sonicwall_api.get_address_object(object_from_group.get("name"))
                 object_type = response.get("object_type", {})

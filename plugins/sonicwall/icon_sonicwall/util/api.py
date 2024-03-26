@@ -8,9 +8,12 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_sonicwall.util.util import Message
 
 
+DEFAULT_REQUESTS_TIMEOUT = 30
+
+
 class SonicWallAPI:
     def __init__(self, username: str, password: str, url: str, verify_ssl: bool, port: int, logger: Logger) -> None:
-        self.url = f"{url}:{port}/api/sonicos/"
+        self.url = f"{url}:{port}/api/sonicos"
         self.verify_ssl = verify_ssl
         self.logger = logger
         self.username = username
@@ -22,22 +25,20 @@ class SonicWallAPI:
     def logout(self) -> None:
         self._call_api("DELETE", "auth", auth=(self.username, self.password))
 
-    def get_object_type(self, name: str) -> str:
-        return self.get_address_object(name).get("object_type")
-
     def get_group(self, name: str) -> Dict[str, Any]:
-        urls_to_check = (f"address-groups/ipv4/name/{name}", f"address-groups/ipv6/name/{name}")
-        for url in urls_to_check:
+        for type_ in ("ipv4", "ipv6"):
             try:
-                response = self._make_request("GET", url)
+                self.logger.info(f"Looking for group as {type_}...")
+                response = self._make_request("GET", f"address-groups/{type_}/name/{name}")
                 if response:
+                    self.logger.info(f"Group '{name}' has been found.")
                     return response
-            except PluginException:
-                pass
-
+            except PluginException as error:
+                if error.preset != PluginException.Preset.UNKNOWN:
+                    raise
         raise PluginException(
-            cause="The address group does not exist in SonicWall.",
-            assistance="Please enter valid names and try again.",
+            cause=Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
+            assistance=Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
         )
 
     def get_group_type(self, name: str) -> str:
@@ -47,71 +48,76 @@ class SonicWallAPI:
                 return "ipv4"
             elif "ipv6" in groups:
                 return "ipv6"
-
         raise PluginException(
             cause=Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
             assistance=Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
         )
 
     def get_address_object(self, name: str) -> Union[Dict[str, Any], None]:
-        self.login()
         for object_type in ["fqdn", "mac", "ipv6", "ipv4"]:
             try:
-                address_object = self._call_api("GET", f"address-objects/{object_type}/name/{name}")
+                self.logger.info(f"Looking for address object as {object_type}...")
+                address_object = self._make_request("GET", f"address-objects/{object_type}/name/{name}")
                 if address_object:
+                    self.logger.info(f"Address object '{name}' has been found.")
                     return {"object_type": object_type, "address_object": address_object}
-            except PluginException:
-                continue
-        self.logout()
+            except PluginException as error:
+                if error.preset != PluginException.Preset.UNKNOWN:
+                    raise
         raise PluginException(
             cause=Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
             assistance=Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
         )
 
+    def get_object_type(self, name: str) -> str:
+        return self.get_address_object(name).get("object_type")
+
     def add_address_object_to_group(self, group_type: str, group_name: str, payload: Dict[str, Any]) -> Dict[str, Any]:
-        return self._make_request("PUT", f"address-groups/{group_type}/name/{group_name}", json_data=payload)
+        return self._make_request(
+            "PUT", f"address-groups/{group_type}/name/{group_name}", json_data=payload, commit_pending_changes=True
+        )
 
     def create_address_object(self, object_type: str, payload: Dict[str, Any]) -> Dict[str, Any]:
         if object_type == "cidr":
             object_type = "ipv4"
-        return self._make_request("POST", f"address-objects/{object_type}", json_data=payload)
+        self.logger.info("Creating address object...")
+        return self._make_request(
+            "POST", f"address-objects/{object_type}", json_data=payload, commit_pending_changes=True
+        )
 
     def delete_address_object(self, object_name: str, object_type: str) -> Dict[str, Any]:
-        return self._make_request("DELETE", f"address-objects/{object_type}/name/{object_name}")
+        self.logger.info("Deleting the address object...")
+        return self._make_request(
+            "DELETE", f"address-objects/{object_type}/name/{object_name}", commit_pending_changes=True
+        )
 
     def validate_if_zone_exists(self, zone_name: str) -> bool:
-        self.login()
         try:
-            if self._call_api("GET", f"zones/name/{zone_name}"):
+            if self._make_request("GET", f"zones/name/{zone_name}"):
                 return True
-        except PluginException:
+        except PluginException as error:
+            if error.preset != PluginException.Preset.UNKNOWN:
+                raise
             raise PluginException(
-                cause=f"The zone: {zone_name} does not exist in SonicWall.",
-                assistance="Please enter valid zone name and try again.",
+                cause=Message.ZONE_NOT_FOUND_CAUSE.format(zone_name=zone_name),
+                assistance=Message.ZONE_NOT_FOUND_ASSISTANCE,
+                data=error.data,
             )
-        finally:
-            self.logout()
 
     def invoke_cli_command(self, payload: str) -> Dict[str, Any]:
-        self.login()
-        try:
-            response = self._call_api("POST", "direct/cli", data=payload, content_type="text/plain")
-        except PluginException as error:
-            raise PluginException(cause=error.cause, assistance=error.assistance, data=error.data)
-        finally:
-            self.logout()
-        return response
+        return self._make_request("POST", "direct/cli", data=payload, content_type="text/plain")
 
-    def _make_request(self, method: str, path: str, json_data: Dict[str, Any] = None) -> Dict[str, Any]:
-        self.login()
+    def _make_request(
+        self, method: str, path: str, *args, commit_pending_changes: bool = False, **kwargs
+    ) -> Dict[str, Any]:
         try:
-            response = self._call_api(method, path, json_data)
-            self._call_api("POST", "config/pending")
-        except PluginException as error:
-            raise PluginException(cause=error.cause, assistance=error.assistance, data=error.data)
+            self.login()
+            return self._call_api(method, path, *args, **kwargs)
         finally:
+            if commit_pending_changes:
+                self._call_api("POST", "config/pending")
+                self.logger.info("Pending configuration committed.")
             self.logout()
-        return response
 
     def _call_api(
         self,
@@ -134,34 +140,33 @@ class SonicWallAPI:
         try:
             response = requests.request(
                 method,
-                self.url + path,
+                f"{self.url}/{path}",
                 json=json_data,
                 data=data,
                 auth=auth,
                 headers=headers,
                 verify=self.verify_ssl,
+                timeout=DEFAULT_REQUESTS_TIMEOUT,
             )
 
             if response.status_code == 401:
-                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
+                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
             if response.status_code == 403:
-                raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
+                raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.text)
             if (
                 response.status_code == 400
                 and path == "address-objects/ipv4"
-                or path == "address-objects/fqdn"
                 or path == "address-objects/ipv6"
+                or path == "address-objects/fqdn"
             ):
                 self.logger.error(
                     "Something unexpected occurred. Check the logs and if the issue persists please contact support."
                 )
                 return response.json()
             if response.status_code >= 400:
-                response_data = response.text
-                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response_data)
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
             if 200 <= response.status_code < 300:
                 return response.json()
-
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except json.decoder.JSONDecodeError as error:
             self.logger.info(f"Invalid JSON: {error}")
