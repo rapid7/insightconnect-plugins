@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Trend Micro Vision One"
 Vendor = "trendmicro"
-Version = "3.0.0"
+Version = "4.0.0"
 Description = "Trend Micro Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks"
 
 
@@ -121,6 +121,16 @@ def main():
             self.add_action(actions.GetEndpointActivityData())
         
             self.add_action(actions.GetEndpointActivityDataCount())
+        
+            self.add_action(actions.CreateApiKeys())
+        
+            self.add_action(actions.GetApiKey())
+        
+            self.add_action(actions.UpdateApiKey())
+        
+            self.add_action(actions.DeleteApiKeys())
+        
+            self.add_action(actions.ListApiKeys())
         
 
     """Run plugin"""
