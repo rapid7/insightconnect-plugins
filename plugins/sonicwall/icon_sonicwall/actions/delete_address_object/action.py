@@ -14,10 +14,12 @@ class DeleteAddressObject(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        object_name = params.get(Input.ADDRESS_OBJECT)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        object_name = params.get(Input.ADDRESS_OBJECT, "")
+        # END INPUT BINDING - DO NOT REMOVE
 
         return {
             Output.STATUS: self.connection.sonicwall_api.delete_address_object(
                 object_name, self.connection.sonicwall_api.get_object_type(object_name)
-            )["status"]
+            ).get("status")
         }

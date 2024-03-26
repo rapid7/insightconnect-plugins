@@ -9,6 +9,7 @@ from unittest.mock import MagicMock, patch
 
 from icon_sonicwall.actions.create_address_object import CreateAddressObject
 from icon_sonicwall.actions.create_address_object.schema import Input, Output
+from icon_sonicwall.util.util import Message
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
 from parameterized import parameterized
@@ -62,11 +63,7 @@ class TestCreateAddressObject(TestCase):
 
     @parameterized.expand(
         [
-            (
-                mock_request_400,
-                PluginException.causes[PluginException.Preset.UNKNOWN],
-                PluginException.assistances[PluginException.Preset.UNKNOWN],
-            ),
+            (mock_request_400, Message.ZONE_NOT_FOUND_CAUSE.format(zone_name="WAN"), Message.ZONE_NOT_FOUND_ASSISTANCE),
             (
                 mock_request_401,
                 PluginException.causes[PluginException.Preset.USERNAME_PASSWORD],
@@ -77,11 +74,7 @@ class TestCreateAddressObject(TestCase):
                 PluginException.causes[PluginException.Preset.UNAUTHORIZED],
                 PluginException.assistances[PluginException.Preset.UNAUTHORIZED],
             ),
-            (
-                mock_request_500,
-                PluginException.causes[PluginException.Preset.UNKNOWN],
-                PluginException.assistances[PluginException.Preset.UNKNOWN],
-            ),
+            (mock_request_500, Message.ZONE_NOT_FOUND_CAUSE.format(zone_name="WAN"), Message.ZONE_NOT_FOUND_ASSISTANCE),
             (
                 mock_request_invalid_json,
                 PluginException.causes[PluginException.Preset.INVALID_JSON],
