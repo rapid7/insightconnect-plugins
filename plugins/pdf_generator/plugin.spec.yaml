@@ -3,14 +3,26 @@ extension: plugin
 products: [insightconnect]
 name: pdf_generator
 title: PDF Generator
-description: Create PDF reports from workflow data
-version: 1.0.3
-supported_versions: ["Pillow 10.1.0", "fpdf2==2.7.6"]
+description: The PDF Generator plugin creates a PDF from user provided data. This allows the user to create robust reports to distribute workflow details.
+version: 1.0.4
+supported_versions: ["Pillow 10.2.0"]
 vendor: rapid7
+key_features:
+  - Generate a PDF
+version_history:
+  - 1.0.4 - Update SDK | Update vulnerable libraries
+  - 1.0.3 - Change library to generate PDF
+  - 1.0.2 - Update plugin runtime to InsightConnect | Add unit tests | Updated all dependencies to the newest versions
+  - 1.0.1 - New spec and help.md format for the Extension Library
+  - 1.0.0 - Initial plugin
 support: community
+links:
+  - '[PyPDF2](https://pypdf2.readthedocs.io/)'
+references:
+  - '[PDF](https://en.wikipedia.org/wiki/Portable_Document_Format)'
 sdk:
-  type: full
-  version: 5
+  type: slim
+  version: 5.4.5
   user: nobody
 status: []
 resources:

@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name="pdf_generator-rapid7-plugin",
-      version="1.0.3",
-      description="Create PDF reports from workflow data",
+      version="1.0.4",
+      description="The PDF Generator plugin creates a PDF from user provided data. This allows the user to create robust reports to distribute workflow details.",
       author="rapid7",
       author_email="",
       url="",

@@ -6,8 +6,8 @@ from sys import argv
 
 Name = "PDF Generator"
 Vendor = "rapid7"
-Version = "1.0.3"
-Description = "Create PDF reports from workflow data"
+Version = "1.0.4"
+Description = "The PDF Generator plugin creates a PDF from user provided data. This allows the user to create robust reports to distribute workflow details."
 
 
 def main():
