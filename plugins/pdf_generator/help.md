@@ -1,7 +1,6 @@
 # Description
 
-The PDF Generator plugin creates a PDF from user provided data. This allows the user to create robust 
-reports to distribute workflow details.
+The PDF Generator plugin creates a PDF from user provided data
 
 # Key Features
 
@@ -12,9 +11,8 @@ reports to distribute workflow details.
 *This plugin does not contain any requirements.*
 
 # Supported Product Versions
-  
-* Pillow 10.1.0  
-* fpdf2==2.7.6
+
+* Pillow 10.2.0
 
 # Documentation
 
@@ -28,8 +26,8 @@ reports to distribute workflow details.
 
 
 #### Generate PDF
-  
-Generate a PDF from a text input
+
+This action is used to generate a PDF from a text input
 
 ##### Input
 
@@ -75,6 +73,7 @@ Example output:
 
 # Version History
 
+* 1.0.4 - Update SDK | Update vulnerable libraries
 * 1.0.3 - Change library to generate PDF
 * 1.0.2 - Update plugin runtime to InsightConnect | Add unit tests | Updated all dependencies to the newest versions
 * 1.0.1 - New spec and help.md format for the Extension Library
@@ -82,9 +81,8 @@ Example output:
 
 # Links
 
-[PyPDF2](https://pypdf2.readthedocs.io/)
+* [PyPDF2](https://pypdf2.readthedocs.io/)
 
 ## References
 
 * [PDF](https://en.wikipedia.org/wiki/Portable_Document_Format)
-
