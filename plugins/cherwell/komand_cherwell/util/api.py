@@ -1,7 +1,10 @@
 import json
-from requests import Session, Request, request
+
+import requests.exceptions
+from requests import Session, Request, request, Response
 from json import JSONDecodeError
 from urllib.parse import urlencode
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class Cherwell:
@@ -53,41 +56,38 @@ class Cherwell:
             # Prep request
             req = req.prepare()
             resp = self.session.send(req)
-            # Check for custom errors
-            if custom_error and resp.status_code not in range(200, 299):
-                raise Exception(
-                    f"An error was received when running {action_name}."
-                    f"Request status code of {resp.status_code} was returned."
-                    f"{custom_error.get(resp.status_code, custom_error.get(000))}"
-                )
-            elif resp.status_code == 405:
-                raise Exception(
-                    f"An error was received when running {action_name}."
-                    f"Request status code of {resp.status_code} was returned."
-                    "Please make sure connections have been configured correctly"
-                )
-            elif resp.status_code != 200:
-                raise Exception(
-                    f"An error was received when running {action_name}."
-                    f" Request status code of {resp.status_code} was returned."
-                    " Please make sure connections have been configured correctly "
-                    f"as well as the correct input for the action. Response was: {resp.text}"
-                )
-
-        except Exception as e:
-            self.logger.error(f"An error had occurred : {e}" "If the issue persists please contact support")
-            raise
-
-        try:
+            self.response_handler(resp, action_name, custom_error)
             results = resp.json()
             return results
+        except requests.exceptions.HTTPError as exception:
+            self.logger.error(f"An error had occurred : {exception}" "If the issue persists please contact support")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=exception)
         except JSONDecodeError:
-            raise Exception(
-                f"Error: Received an unexpected response from {action_name}"
-                f"(non-JSON or no response was received). Response was: {resp.text}"
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=resp.text)
+
+    def response_handler(self, resp: Response, action_name: str = "", custom_error=None) -> None:
+        if custom_error and resp.status_code not in range(200, 299):
+            raise PluginException(
+                cause=f"An error was received when running {action_name}.",
+                assistance=f"Request status code of {resp.status_code} was returned.",
+                data=f"{custom_error.get(resp.status_code, custom_error.get(000))}",
+            )
+        elif resp.status_code == 405:
+            raise PluginException(
+                cause=f"An error was received when running {action_name}.",
+                assistance=f"Request status code of {resp.status_code} was returned."
+                "Please make sure connections have been configured correctly",
+            )
+        elif resp.status_code != 200:
+            raise PluginException(
+                cause=f"An error was received when running {action_name}.",
+                assistance=f"Request status code of {resp.status_code} was returned."
+                " Please make sure connections have been configured correctly "
+                "as well as the correct input for the action.",
+                data=f"Response was: {resp.text}",
             )
 
-    def _token(self, client_id: str, username: str, password: str, authentication_mode: str, debug=False) -> str:
+    def _token(self, client_id: str, username: str, password: str, authentication_mode: str) -> str:
         """
         Issues an authorization request to the Cherwell server asking for an access token.
         :param client_id: Client ID
@@ -119,10 +119,11 @@ class Cherwell:
 
         # Check status code - this is a great early indicator of success/failure. If non-2xx, bail early.
         if response.status_code not in range(200, 299):
-            raise Exception(
-                "Error: Received HTTP %d status code from Cherwell. Please verify your Cherwell server "
-                "status and try again. If the issue persists please contact support. "
-                "Get Access Token - Server response was: %s" % (response.status_code, response.text)
+            raise PluginException(
+                cause=f"Error: Received HTTP {response.status_code} status code from Cherwell."
+                "Please verify your Cherwell server status and try again.",
+                assistance="If the issue persists please contact support.",
+                data=response.text,
             )
 
         # Let's see if we actually have a JSON response from the server. It looks bad if we dump a JSONDecodeError
@@ -130,22 +131,17 @@ class Cherwell:
         try:
             response_data = response.json()
         except JSONDecodeError:
-            raise Exception(
-                "Error: Received an unexpected response from Cherwell during authentication "
-                "(non-JSON or no response was received). Response was: %s" % response.text
-            )
-
-        if debug:
-            self.logger.debug(f"Auth Request Response: {response_data}")
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
         # Verify the access token is present in the response. If not, there is something wrong.
         if "access_token" in response_data:
-            return response_data["access_token"]
+            return response_data.get("access_token")
         else:
-            raise Exception(
-                "Error: Authentication access token was not present in the authentication response from "
-                "the Cherwell server. Please verify the status of your Cherwell server and try again. "
-                "If the issue persists please contact support."
+            raise PluginException(
+                cause="Error: Authentication access token was not present in the authentication response from "
+                "the Cherwell server.",
+                assistance="Please verify the status of your Cherwell server and try again. "
+                "If the issue persists please contact support.",
             )
 
     def get_businessobjectsummary(self, busOb):
