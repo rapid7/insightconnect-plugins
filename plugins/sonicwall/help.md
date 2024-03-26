@@ -4,22 +4,22 @@
 Manage your firewalls and block malicious hosts through this plugin.
 
 # Key Features
-  
+
 * Block and unblock hosts by managing address groups
 
 # Requirements
-  
-* Username and password  
+ 
+* Username and password
 * Base URL of firewall
 
 # Supported Product Versions
-  
+
 * SonicWall 04-03-2024
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -28,7 +28,7 @@ The connection configuration accepts the following parameters:
 |port|integer|443|False|The port number for provided host|None|443|
 |url|string|None|True|Base URL for the SonicWall endpoint|None|https://www.example.com|
 |verify_ssl|boolean|True|False|Check the server's SSL certificate|None|True|
-  
+
 Example input:
 
 ```
@@ -49,7 +49,7 @@ Example input:
 
 
 #### Add Address Object to Group
-  
+
 This action is used to add address object (FQDN, MAC, IPv4 or IPv6) to group (IPv4, IPv6 or Mixed)
 
 ##### Input
@@ -103,7 +103,7 @@ Example output:
 ```
 
 #### Check if Address in Group
-  
+
 This action is used to check that a host or address object is in an address group
 
 ##### Input
@@ -149,7 +149,7 @@ Example output:
 ```
 
 #### Create Address Object
-  
+
 This action is used to creates a new address object
 
 ##### Input
@@ -211,7 +211,7 @@ Example output:
 ```
 
 #### Delete Address Object
-  
+
 This action is used to deletes an address object
 
 ##### Input
@@ -259,7 +259,7 @@ Example output:
 ```
 
 #### Remove Address Object from Group
-  
+
 This action is used to deletes an address object from an address group
 
 ##### Input
@@ -355,11 +355,11 @@ Example output:
 
 # Version History
 
-* 1.3.2 - Updated SDK to the latest version to address memory usage issue | Fixed connection test  
-* 1.3.1 - Replace the PluginException with a logger in Create Address Object action | Add `host_status` output parameter in Create Address Object action  
-* 1.3.0 - New action Remove Address from Group  
-* 1.2.0 - New action Check If Address In Address Group  
-* 1.1.0 - New actions Create Address Object and Delete Address Object  
+* 1.3.3 - Updated SDK to the latest version | Extended actions logging
+* 1.3.2 - Updated SDK to the latest version to address memory usage issue | Fixed connection test
+* 1.3.1 - Replace the PluginException with a logger in Create Address Object action | Add `host_status` output parameter in Create Address Object action
+* 1.3.0 - New action Remove Address from Group
+* 1.2.0 - New action Check If Address In Address Group
 * 1.0.0 - Initial plugin
 
 # Links

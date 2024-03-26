@@ -70,13 +70,13 @@ class TestRemoveAddressFromGroup(TestCase):
             ),
             (
                 mock_request_401,
-                Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
-                Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
+                PluginException.causes[PluginException.Preset.USERNAME_PASSWORD],
+                PluginException.assistances[PluginException.Preset.USERNAME_PASSWORD],
             ),
             (
                 mock_request_403,
-                Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
-                Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
+                PluginException.causes[PluginException.Preset.UNAUTHORIZED],
+                PluginException.assistances[PluginException.Preset.UNAUTHORIZED],
             ),
             (
                 mock_request_500,
@@ -85,8 +85,8 @@ class TestRemoveAddressFromGroup(TestCase):
             ),
             (
                 mock_request_invalid_json,
-                Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
-                Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
+                PluginException.causes[PluginException.Preset.INVALID_JSON],
+                PluginException.assistances[PluginException.Preset.INVALID_JSON],
             ),
         ]
     )

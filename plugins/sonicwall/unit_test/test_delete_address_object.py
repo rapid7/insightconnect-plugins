@@ -9,6 +9,7 @@ from unittest.mock import MagicMock, patch
 
 from icon_sonicwall.actions.delete_address_object import DeleteAddressObject
 from icon_sonicwall.actions.delete_address_object.schema import Input, Output
+from icon_sonicwall.util.util import Message
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jsonschema import validate
 from parameterized import parameterized
@@ -59,8 +60,8 @@ class TestDeleteAddressObject(TestCase):
         [
             (
                 mock_request_400,
-                PluginException.causes[PluginException.Preset.UNKNOWN],
-                PluginException.assistances[PluginException.Preset.UNKNOWN],
+                Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
+                Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
             ),
             (
                 mock_request_401,
@@ -74,8 +75,8 @@ class TestDeleteAddressObject(TestCase):
             ),
             (
                 mock_request_500,
-                PluginException.causes[PluginException.Preset.UNKNOWN],
-                PluginException.assistances[PluginException.Preset.UNKNOWN],
+                Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
+                Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
             ),
             (
                 mock_request_invalid_json,
