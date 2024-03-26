@@ -13,6 +13,7 @@ from komand_proofpoint_tap.util.util import SiemUtils
 from .schema import MonitorEventsInput, MonitorEventsOutput, MonitorEventsState, Component
 
 MAX_ALLOWED_LOOKBACK_HOURS = 24
+API_MAX_LOOKBACK = 24 * 7  # API limits to 7 days ago
 SPECIFIC_DATE = getenv("SPECIFIC_DATE")
 
 
@@ -105,14 +106,9 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                     self.connection.client.siem_action(Endpoint.get_all_threats(), parameters)
                 )
                 self.logger.info(f"Retrieved {len(parsed_logs)} total parsed events in time interval")
-                if (not next_page_index and len(parsed_logs) > self.SPLIT_SIZE) or (
-                    next_page_index and (next_page_index + 1) * self.SPLIT_SIZE < len(parsed_logs)
-                ):
-                    state[self.NEXT_PAGE_INDEX] = next_page_index + 1 if next_page_index else 1
-                    has_more_pages = True
-                    self.logger.info(
-                        f"Set next page index to {state[self.NEXT_PAGE_INDEX]} and has more pages to True for the next run"
-                    )
+                state, has_more_pages = self.determine_page_values(
+                    next_page_index, parsed_logs, has_more_pages, state, parameters, now
+                )
                 current_page_index = next_page_index if next_page_index else 0
                 # Send back a maximum of SPLIT_SIZE events at a time (use page index to track this in state)
                 new_unique_logs, new_logs_hashes = self.compare_hashes(
@@ -133,6 +129,23 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             self.logger.info(f"Exception occurred in monitor events task: {error}", exc_info=True)
             state[self.PREVIOUS_LOGS_HASHES] = []
             return [], state, has_more_pages, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+
+    def determine_page_values(self, next_page_index, parsed_logs, has_more_pages, state, query_params, now):
+        # Determine pagination based on the response from API vs if we've queried until now.
+        if (not next_page_index and len(parsed_logs) > self.SPLIT_SIZE) or (
+            next_page_index and (next_page_index + 1) * self.SPLIT_SIZE < len(parsed_logs)
+        ):
+            state[self.NEXT_PAGE_INDEX] = next_page_index + 1 if next_page_index else 1
+            has_more_pages = True
+            self.logger.info(
+                f"Set next page index to {state[self.NEXT_PAGE_INDEX]} and has more pages to True for the next run"
+            )
+        else:
+            end_str, now_str = query_params.get("interval").split("/")[1], now.isoformat().replace("z", "")
+            if now_str != end_str:  # we want to force more pages if the end query time is not 'now'
+                has_more_pages = True
+
+        return state, has_more_pages
 
     @staticmethod
     def get_current_time():
