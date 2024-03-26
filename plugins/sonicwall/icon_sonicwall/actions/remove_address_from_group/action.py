@@ -21,8 +21,11 @@ class RemoveAddressFromGroup(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        address_object = params.get(Input.ADDRESS_OBJECT)
-        group_name = params.get(Input.GROUP)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        address_object = params.get(Input.ADDRESS_OBJECT, "")
+        group_name = params.get(Input.GROUP, "")
+        # END INPUT BINDING - DO NOT REMOVE
+
         group_type = self.connection.sonicwall_api.get_group_type(group_name)
         object_type = self.connection.sonicwall_api.get_address_object(address_object).get("object_type")
 

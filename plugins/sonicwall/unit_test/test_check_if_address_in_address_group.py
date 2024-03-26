@@ -16,7 +16,10 @@ from parameterized import parameterized
 
 from mock import (
     mock_request_200,
+    mock_request_400,
     mock_request_401,
+    mock_request_403,
+    mock_request_500,
     mock_request_invalid_json,
     mocked_request,
 )
@@ -49,14 +52,29 @@ class TestCheckIfAddressInAddressGroup(TestCase):
     @parameterized.expand(
         [
             (
+                mock_request_400,
+                Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
+                Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
+            ),
+            (
                 mock_request_401,
+                PluginException.causes[PluginException.Preset.USERNAME_PASSWORD],
+                PluginException.assistances[PluginException.Preset.USERNAME_PASSWORD],
+            ),
+            (
+                mock_request_403,
+                PluginException.causes[PluginException.Preset.UNAUTHORIZED],
+                PluginException.assistances[PluginException.Preset.UNAUTHORIZED],
+            ),
+            (
+                mock_request_500,
                 Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
                 Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
             ),
             (
                 mock_request_invalid_json,
-                Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
-                Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
+                PluginException.causes[PluginException.Preset.INVALID_JSON],
+                PluginException.assistances[PluginException.Preset.INVALID_JSON],
             ),
         ]
     )
