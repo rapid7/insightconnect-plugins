@@ -1,32 +1,33 @@
-from unittest import TestCase
+from unittest import TestCase, skip
 from unittest.mock import MagicMock
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from icon_trendmicro_visionone.actions import AddCustomScript
+from icon_trendmicro_visionone.actions import DeleteApiKeys
 from mock import mock_connection, mock_params
 
 
-class TestAddCustomScript(TestCase):
+class TestDeleteApiKeys(TestCase):
     def setUp(self):
-        self.action = AddCustomScript()
+        self.action = DeleteApiKeys()
         self.connection = mock_connection()
         self.action.connection = self.connection
-        self.mock_params = mock_params("add_custom_script")
+        self.mock_params = mock_params("delete_api_keys")
 
-    def test_1_integration_add_custom_script(self):
+    @skip("Integration test - we don't want to run this, and it is getting 500 from endpoint causing a failure.")
+    def test_integration_delete_api_keys(self):
         response = self.action.run(self.mock_params["input"])
         for key in response.keys():
             self.assertIn(key, str(self.mock_params["output"].keys()))
 
-    def test_2_add_custom_script_success(self):
+    def test_delete_api_keys_success(self):
         expected_result = self.mock_params["output"]
         self.action.connection.client = MagicMock(return_value=expected_result)
         response = self.action.run(self.mock_params["input"])
         for key in response.keys():
             self.assertIn(key, str(expected_result.keys()))
 
-    def test_3_add_custom_script_failure(self):
-        self.action.connection.client.script.create = MagicMock(side_effect=PluginException)
+    def test_delete_api_keys_failure(self):
+        self.action.connection.client.api_key.delete = MagicMock(side_effect=PluginException)
         with self.assertRaises(PluginException):
             self.action.run(self.mock_params["input"])

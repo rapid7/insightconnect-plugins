@@ -32,15 +32,15 @@ class AddCustomScript(insightconnect_plugin_runtime.Action):
         description = params.get(Input.DESCRIPTION, "")
         # Choose enum
         if "bash" in file_type:
-            file_type = pytmv1.FileType.BASH
+            file_type = pytmv1.ScriptType.BASH
         elif "powershell" in file_type:
-            file_type = pytmv1.FileType.POWERSHELL
+            file_type = pytmv1.ScriptType.POWERSHELL
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.script.add(
-            file_type=file_type,
-            file_name=file.get("filename"),
-            file_content=b64decode(file.get("content")).decode("utf-8"),
+        response = client.script.create(
+            script_type=file_type,
+            script_name=file.get("filename"),
+            script_content=b64decode(file.get("content")).decode("utf-8"),
             description=description,
         )
         if "error" in response.result_code.lower():

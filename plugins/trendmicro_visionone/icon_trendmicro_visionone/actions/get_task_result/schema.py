@@ -220,7 +220,7 @@ class GetTaskResultOutput(insightconnect_plugin_runtime.Output):
     "status": {
       "type": "string",
       "title": "Status",
-      "description": "The status of the command sent to the managing server. Possible task statuses; queued - The server queued the command due to a high volume of requests or because the Security Agent was offline; running - Trend Micro Vision One sent the command to the managing server and is waiting for a response; succeeded - The managing server successfully received the command; rejected - The server rejected the task. For automated response task only; waitForApproval - The task is pending approval. For automated response task only; failed - An error or time-out occurred when attempting to send the command to the managing server",
+      "description": "The status of the command sent to the managing server",
       "enum": [
         "queued",
         "running",
