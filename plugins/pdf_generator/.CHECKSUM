@@ -1,7 +1,7 @@
 {
 	"spec": "4a2421d162239196842634057591853a",
-	"manifest": "163739d52f8cee1fa4fa6f5225485103",
-	"setup": "5c13c52e36107ad3083954933b0cbf7b",
+	"manifest": "2119ca1c87a718e64991c65708161c7c",
+	"setup": "083fba868945f7362c3429c4d6f1e819",
 	"schemas": [
 		{
 			"identifier": "generate_pdf/schema.py",
