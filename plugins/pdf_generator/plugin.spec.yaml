@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: pdf_generator
 title: PDF Generator
-description: The PDF Generator plugin creates a PDF from user provided data. This allows the user to create robust reports to distribute workflow details.
+description: The PDF Generator plugin creates a PDF from user provided data
 version: 1.0.4
 supported_versions: ["Pillow 10.2.0"]
 vendor: rapid7

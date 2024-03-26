@@ -7,7 +7,7 @@ from sys import argv
 Name = "PDF Generator"
 Vendor = "rapid7"
 Version = "1.0.4"
-Description = "The PDF Generator plugin creates a PDF from user provided data. This allows the user to create robust reports to distribute workflow details."
+Description = "The PDF Generator plugin creates a PDF from user provided data"
 
 
 def main():
@@ -23,7 +23,7 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
-    from komand_pdf_generator import connection, actions, triggers, tasks
+    from icon_pdf_generator import connection, actions, triggers, tasks
 
     class ICONPdfGenerator(insightconnect_plugin_runtime.Plugin):
         def __init__(self):

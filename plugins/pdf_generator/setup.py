@@ -4,11 +4,11 @@ from setuptools import setup, find_packages
 
 setup(name="pdf_generator-rapid7-plugin",
       version="1.0.4",
-      description="The PDF Generator plugin creates a PDF from user provided data. This allows the user to create robust reports to distribute workflow details.",
+      description="The PDF Generator plugin creates a PDF from user provided data",
       author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
       install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_pdf_generator']
+      scripts=['bin/icon_pdf_generator']
       )
