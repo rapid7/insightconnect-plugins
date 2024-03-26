@@ -42,7 +42,7 @@ class CreateApiKeys(insightconnect_plugin_runtime.Action):
             raise PluginException(
                 cause="An error occurred while creating API key.",
                 assistance="Please check your inputs and try again.",
-                data=response.error,
+                data=response.errors,
             )
         # Return results
         self.logger.info("Returning Results...")
