@@ -6,8 +6,8 @@ from jsonschema import validate
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_pdf_generator.actions.generate_pdf import GeneratePdf
-from komand_pdf_generator.actions.generate_pdf.schema import Input, GeneratePdfOutput
+from icon_pdf_generator.actions.generate_pdf import GeneratePdf
+from icon_pdf_generator.actions.generate_pdf.schema import Input, GeneratePdfOutput
 
 
 class TestGeneratePdf(TestCase):
