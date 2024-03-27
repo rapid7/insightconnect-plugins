@@ -3004,7 +3004,7 @@ Example output:
 *There is no troubleshooting for this plugin.*
 
 # Version History
-  
+
 * 4.0.0 - Added API Keys related actions  
 * 3.0.0 - Refactored pytmv1 usage | Added Custom Scripts and Activity related actions  
 * 2.0.1 - Version bump of pytmv1 library  
@@ -3017,4 +3017,5 @@ Example output:
 * [TrendMicro](https://www.trendmicro.com/en_us/business.html)
 
 ## References
+
 * [Trend Micro Vision One](https://docs.trendmicro.com/en-us/enterprise/trend-micro-xdr-help/home)
