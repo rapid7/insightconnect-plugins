@@ -16,3 +16,16 @@ RESPONSE_MAPPING = {
     pytmv1.TaskAction.DISABLE_ACCOUNT.value[0]: pytmv1.AccountTaskResp,
     pytmv1.TaskAction.FORCE_SIGN_OUT.value[0]: pytmv1.AccountTaskResp,
 }
+
+API_KEY_EXPIRATION = {
+    "0": pytmv1.ApiExpInMonths.ZERO,
+    "1": pytmv1.ApiExpInMonths.ONE,
+    "3": pytmv1.ApiExpInMonths.THREE,
+    "6": pytmv1.ApiExpInMonths.SIX,
+    "12": pytmv1.ApiExpInMonths.TWELVE,
+}
+
+API_KEY_STATUS = {
+    "enabled": pytmv1.ApiStatus.ENABLED,
+    "disabled": pytmv1.ApiStatus.DISABLED,
+}

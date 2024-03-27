@@ -1,7 +1,7 @@
 {
-	"spec": "f06001f1236ee4978a90078d48e17d31",
-	"manifest": "9bf136592ca18baba720fe0e4505eef0",
-	"setup": "d818708e34a38103cf1d26ce7356af3f",
+	"spec": "a24ae9c2a8261aec978116bbe1cfe0d7",
+	"manifest": "e95307b26049243818fc8069ab022632",
+	"setup": "63f66539d60bf82205f2ca239b109d41",
 	"schemas": [
 		{
 			"identifier": "add_alert_note/schema.py",
@@ -26,6 +26,14 @@
 		{
 			"identifier": "collect_file/schema.py",
 			"hash": "cdd79854b5a9c58114e6ea8d72c082ba"
+		},
+		{
+			"identifier": "create_api_keys/schema.py",
+			"hash": "4c46baca28d28deb278dc09764d66ec8"
+		},
+		{
+			"identifier": "delete_api_keys/schema.py",
+			"hash": "88b25dda8afab894e857a1e48f44e2df"
 		},
 		{
 			"identifier": "delete_custom_script/schema.py",
@@ -66,6 +74,10 @@
 		{
 			"identifier": "get_alert_list/schema.py",
 			"hash": "27fcf3370863621a0f0bf77720ef898e"
+		},
+		{
+			"identifier": "get_api_key/schema.py",
+			"hash": "ae438f44c64b791eb90a6d17e517792a"
 		},
 		{
 			"identifier": "get_custom_script_list/schema.py",
@@ -113,11 +125,15 @@
 		},
 		{
 			"identifier": "get_task_result/schema.py",
-			"hash": "803939456b31bd86a9c73c3bc9f31276"
+			"hash": "db37636221a0ebf3fd19ba42c7601b44"
 		},
 		{
 			"identifier": "isolate_endpoint/schema.py",
 			"hash": "f291f52b29e8623fc0dae0890d683ce0"
+		},
+		{
+			"identifier": "list_api_keys/schema.py",
+			"hash": "a7678b0e034201dbb7e9f220c74c3f96"
 		},
 		{
 			"identifier": "quarantine_email_message/schema.py",
@@ -166,6 +182,10 @@
 		{
 			"identifier": "terminate_process/schema.py",
 			"hash": "335ddf361e8348aa77a1ff897135771b"
+		},
+		{
+			"identifier": "update_api_key/schema.py",
+			"hash": "493f8d3408e269b8fe59a26160987115"
 		},
 		{
 			"identifier": "update_custom_script/schema.py",

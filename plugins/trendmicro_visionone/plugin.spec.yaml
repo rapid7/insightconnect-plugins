@@ -1,33 +1,98 @@
 plugin_spec_version: v2
 extension: plugin
-products: [ insightconnect ]
+products: [insightconnect]
 name: trendmicro_visionone
 title: Trend Micro Vision One
 description: Trend Micro Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
-version: 3.0.0
+version: 4.0.0
 connection_version: 3
-supported_versions: [ "Trend Micro Vision One API v3" ]
+supported_versions: [Trend Micro Vision One API v3]
 vendor: trendmicro
 support: community
-status: [ ]
+status: []
 enable_cache: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/trendmicro_visionone
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://trendmicro.com
+key_features:
+- Add Alert Note
+- Add Custom Script
+- Add to Block List
+- Add to Exception List
+- Add to Suspicious List
+- Collect File
+- Create API Keys
+- Delete Custom Script
+- Delete Email Message
+- Delete API Keys
+- Disable Account
+- Download Custom Script
+- Download Sandbox Analysis Result
+- Download Sandbox Investigation Package
+- Edit Alert Status
+- Enable Account
+- Get Alert Details
+- Get Alert List
+- Get API Key
+- Get Custom Script List
+- Get Email Activity Data
+- Get Email Activity Data Count
+- Get Endpoint Activity Data
+- Get Endpoint Activity Data Count
+- Get Endpoint Data
+- Get Exception List
+- Get Sandbox Analysis Result
+- Get Sandbox Submission Status
+- Get Sandbox Suspicious List
+- Get Suspicious List
+- Get Task Result
+- Isolate Endpoint
+- List API Keys
+- Poll Alert List
+- Poll Sandbox Suspicious List
+- Quarantine Email Message
+- Remove from Block List
+- Remove from Exception List
+- Remove from Suspicious List
+- Reset Password Account
+- Restore Email Message
+- Restore Endpoint
+- Run Custom Script
+- Sign out Account
+- Submit File to Sandbox
+- Submit URLs to Sandbox
+- Terminate Process
+- Update API Key
+- Update Custom Script
+requirements:
+- Requires a Trend Micro Vision One API Key
+- API must be enabled on the Settings page in the product's user interface
+links:
+- '[TrendMicro](https://www.trendmicro.com/en_us/business.html)'
+references:
+- '[Trend Micro Vision One](https://docs.trendmicro.com/en-us/enterprise/trend-micro-xdr-help/home)'
+version_history:
+- 4.0.0 - Added API Keys related actions
+- 3.0.0 - Refactored pytmv1 usage | Added Custom Scripts and Activity related actions
+- 2.0.1 - Version bump of pytmv1 library
+- 2.0.0 - Enabled multiple inputs for Get Endpoint Data, reduced API call frequency
+  & General Refactoring
+- 1.0.1 - Alert Details Output Fix (Minor Fix)
+- 1.0.0 - Initial plugin
 tags:
-  - vulnerability_scanning
-  - vulnerability_management
-  - intrusion_detection
-  - intrusion_protection
-  - virtual_patching
-  - remediation
-  - trend_micro
-  - vision_one
+- vulnerability_scanning
+- vulnerability_management
+- intrusion_detection
+- intrusion_protection
+- virtual_patching
+- remediation
+- trend_micro
+- vision_one
 hub_tags:
-  use_cases: [ vulnerability_management, cloud_security, remediation_management, threat_detection_and_response ]
-  keywords: [ remediation, detection ]
-  features: [ ]
+  use_cases: [vulnerability_management, cloud_security, remediation_management, threat_detection_and_response]
+  keywords: [remediation, detection]
+  features: []
 
 types:
   multi_response:
@@ -79,12 +144,12 @@ types:
       description: The type of suspicious object
       required: true
       enum:
-        - domain
-        - ip
-        - fileSha1
-        - fileSha256
-        - senderMailAddress
-        - url
+      - domain
+      - ip
+      - fileSha1
+      - fileSha256
+      - senderMailAddress
+      - url
     description:
       title: Description
       type: string
@@ -102,17 +167,17 @@ types:
       description: Action that connected products apply after detecting a suspicious object
       required: true
       enum:
-        - block
-        - log
+      - block
+      - log
     risk_level:
       title: Risk Level
       type: string
       description: Risk level of a suspicious object
       required: true
       enum:
-        - high
-        - medium
-        - low
+      - high
+      - medium
+      - low
     in_exception_list:
       title: In Exception List
       type: boolean
@@ -161,12 +226,12 @@ types:
       description: The type of exception object
       required: true
       enum:
-        - domain
-        - ip
-        - fileSha1
-        - fileSha256
-        - senderMailAddress
-        - url
+      - domain
+      - ip
+      - fileSha1
+      - fileSha256
+      - senderMailAddress
+      - url
     description:
       title: Description
       type: string
@@ -210,10 +275,10 @@ types:
       description: Operating system installed on an endpoint
       required: true
       enum:
-        - Linux
-        - Windows
-        - macOS
-        - macOSX
+      - Linux
+      - Windows
+      - macOS
+      - macOSX
     os_version:
       title: OS Version
       type: string
@@ -230,12 +295,12 @@ types:
       description: A 3-character code that identifies Trend Micro products
       required: true
       enum:
-        - sao
-        - sds
-        - xes
+      - sao
+      - sds
+      - xes
     installed_product_codes:
       title: Installed Product Codes
-      type: "[]string"
+      type: '[]string'
       description: A 3-character code that identifies the installed Trend Micro products on an endpoint
       required: true
   submit_urls_resp:
@@ -412,12 +477,12 @@ types:
       description: Object type- domain, IP, fileSha1, fileSha256, senderMailAddress or URL
       required: true
       enum:
-        - domain
-        - ip
-        - fileSha1
-        - fileSha256
-        - senderMailAddress
-        - url
+      - domain
+      - ip
+      - fileSha1
+      - fileSha256
+      - senderMailAddress
+      - url
       example: ip
     object_value:
       title: Value
@@ -438,12 +503,12 @@ types:
       description: Object type- domain, IP, fileSha1, fileSha256, senderMailAddress or URL
       required: true
       enum:
-        - domain
-        - ip
-        - fileSha1
-        - fileSha256
-        - senderMailAddress
-        - url
+      - domain
+      - ip
+      - fileSha1
+      - fileSha256
+      - senderMailAddress
+      - url
       example: ip
     object_value:
       title: Value
@@ -457,17 +522,17 @@ types:
       description: Action that connected products apply after detecting a suspicious object
       required: false
       enum:
-        - block
-        - log
+      - block
+      - log
     risk_level:
       title: Risk Level
       type: string
       description: Risk level of a suspicious object
       required: false
       enum:
-        - high
-        - medium
-        - low
+      - high
+      - medium
+      - low
     days_to_expiration:
       title: Days to Expiration
       type: integer
@@ -490,10 +555,10 @@ types:
       type: string
       required: false
       enum:
-        - New
-        - In Progress
-        - True Positive
-        - False Positive
+      - New
+      - In Progress
+      - True Positive
+      - False Positive
     workbench_link:
       title: Workbench Link
       description: Workbench URL
@@ -520,10 +585,10 @@ types:
       type: string
       required: false
       enum:
-        - critical
-        - high
-        - medium
-        - low
+      - critical
+      - high
+      - medium
+      - low
     impact_scope:
       title: Impact Scope
       description: Affected entities information
@@ -549,12 +614,12 @@ types:
     indicators:
       title: Indicators
       description: The indicators refer to those objects which are found by RCA or sweeping
-      type: "[]object"
+      type: '[]object'
       required: false
     matched_rules:
       title: Matched Rules
       description: The rules are triggered
-      type: "[]object"
+      type: '[]object'
       required: false
     campaign:
       title: Campaign
@@ -594,7 +659,7 @@ types:
     matched_indicator_patterns:
       title: Matched Indicator Patters
       description: The matched indicator patterns
-      type: "[]object"
+      type: '[]object'
       required: false
   custom_scripts_list_resp:
     id:
@@ -613,8 +678,8 @@ types:
       description: File type of a custom script
       required: true
       enum:
-        - powershell
-        - bash
+      - powershell
+      - bash
     description:
       title: Description
       description: Task Description
@@ -648,17 +713,17 @@ types:
       required: false
     mail_from_addresses:
       title: Mail From Addresses
-      type: "[]string"
+      type: '[]string'
       description: Sender email address of the email message
       required: false
     mail_whole_header:
       title: Mail Whole Header
-      type: "[]string"
+      type: '[]string'
       description: Information about the header of the email message
       required: false
     mail_to_addresses:
       title: Mail To Addresses
-      type: "[]string"
+      type: '[]string'
       description: A list of recipient email addresses of the email message
       required: false
     mail_source_domain:
@@ -688,12 +753,12 @@ types:
       required: false
     mail_urls_visible_link:
       title: Mail URLs Visible Link
-      type: "[]string"
+      type: '[]string'
       description: Visible link in email message
       required: false
     mail_urls_real_link:
       title: Mail URLs Real Link
-      type: "[]string"
+      type: '[]string'
       description: Real link in email message
       required: false
   endpoint_activity_data_resp:
@@ -719,7 +784,7 @@ types:
       required: false
     endpoint_ip:
       title: Endpoint IP
-      type: "[]string"
+      type: '[]string'
       description: Endpoint IP address list
       required: false
     event_id:
@@ -769,7 +834,7 @@ types:
       required: false
     logon_user:
       title: Logon User
-      type: "[]string"
+      type: '[]string'
       description: Logon user name
       required: false
     object_cmd:
@@ -799,7 +864,7 @@ types:
       required: false
     object_ips:
       title: Object Ips
-      type: "[]string"
+      type: '[]string'
       description: IP address list of internet event
       required: false
     object_port:
@@ -824,12 +889,12 @@ types:
       required: false
     object_signer:
       title: Object Signer
-      type: "[]string"
+      type: '[]string'
       description: Certificate signer of object process or file
       required: false
     object_signer_valid:
       title: Object Signer Valid
-      type: "[]boolean"
+      type: '[]boolean'
       description: Validity of certificate signer
       required: false
     object_user:
@@ -904,7 +969,7 @@ types:
       required: false
     tags:
       title: Tags
-      type: "[]string"
+      type: '[]string'
       description: Detected by Security Analytics Engine filters
       required: false
     uuid:
@@ -912,6 +977,102 @@ types:
       type: string
       description: Log unique identity
       required: false
+  api_keys_objects:
+    name:
+      title: Name
+      type: string
+      description: The unique name of an API key
+      required: true
+    role:
+      title: Role
+      type: string
+      description: The user role assigned to the API key
+      required: true
+    months_to_expiration:
+      title: Months to Expiration
+      type: string
+      description: The duration of validity for the API key (in months, 0 for no expiration)
+      required: false
+      enum:
+      - '1'
+      - '3'
+      - '6'
+      - '12'
+      - '0'
+    description:
+      title: Description
+      type: string
+      description: A brief note about the API key
+      required: false
+    status:
+      title: Status
+      type: string
+      description: The status of an API key
+      required: false
+      enum:
+      - enabled
+      - disabled
+  api_keys_resp:
+    status:
+      title: Status
+      type: integer
+      description: The Status Code of the submitted API keys task
+      required: true
+    id:
+      title: ID
+      type: string
+      description: The unique identifier of the API key
+      required: true
+    value:
+      title: Value
+      type: string
+      description: The API key
+      required: true
+    expired_date_time:
+      title: Expired Date Time
+      type: string
+      description: Timestamp in ISO 8601 format indicating the expiration date of the API key
+      required: true
+  api_keys_list_resp:
+    id:
+      title: ID
+      type: string
+      description: The unique identifier of the API key
+      required: true
+    name:
+      title: Name
+      type: string
+      description: The unique name of an API key
+      required: true
+    status:
+      title: Status
+      type: string
+      description: The status of an API key
+      required: false
+      enum:
+      - enabled
+      - disabled
+    role:
+      title: Role
+      type: string
+      description: The user role assigned to the API key
+      required: true
+    description:
+      title: Description
+      type: string
+      description: A brief note about the API key
+      required: false
+    expired_date_time:
+      title: Expired Date Time
+      type: string
+      description: Timestamp in ISO 8601 format indicating the expiration date of the API key
+      required: true
+    last_used_date_time:
+      title: Last Used Date Time
+      type: string
+      description: The last time the API key was used in ISO 8601 format
+      required: true
+
 
 connection:
   api_url:
@@ -932,9 +1093,9 @@ connection:
     title: App Name
     description: Name of the App to be Integrated with
     type: string
-    default: "Rapid7-InsightConnect"
+    default: Rapid7-InsightConnect
     required: true
-    example: "Rapid7-InsightConnect"
+    example: Rapid7-InsightConnect
   verify_ssl:
     title: Verify SSL
     description: Verify if connection uses SSL
@@ -953,7 +1114,7 @@ triggers:
         type: string
         description: Unique alphanumeric string that identifies the analysis results of a submission
         required: true
-        example: "6345645"
+        example: '6345645'
       poll:
         title: Poll
         type: boolean
@@ -978,7 +1139,7 @@ triggers:
       sandbox_suspicious_list_resp:
         title: Sandbox Suspicious List Response
         description: Sandbox Suspicious Object List Response
-        type: "[]sandbox_suspicious_list_resp"
+        type: '[]sandbox_suspicious_list_resp'
         required: true
         example: '[{"analysis_completion_date_time":"2023-01-11T22:40:52Z","expired_date_time":"2023-02-10T22:40:52Z","risk_level":"high","root_sha1":"ccc8c28226224755091a3462ff7704e350f2114b","type":"fileSha1","value":"0d8b8f0baf22e65a80148bcebaef082ef08932d2"}]'
   poll_alert_list:
@@ -1007,7 +1168,7 @@ triggers:
       alerts:
         title: Alerts
         description: Array of any alerts (awb-workbenchAlertV3)
-        type: "[]alert"
+        type: '[]alert'
         required: true
         example: '["<<referenced:bigdata>>"]'
 
@@ -1018,15 +1179,16 @@ actions:
     input:
       account_identifiers:
         title: Account Identifiers
-        type: "[]account_identifiers"
+        type: '[]account_identifiers'
         description: User Account Identifiers containing account name and description
         required: true
-        example: '[{"account_name":"user@example.com","description":"enable jdoe account, r7 test"}]'
+        example: '[{"account_name":"user@example.com","description":"enable jdoe account,
+          r7 test"}]'
     output:
       multi_response:
         title: Multi Response
         description: Enable Account Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":202,"task_id":"00002148"}]'
   disable_account:
@@ -1035,15 +1197,16 @@ actions:
     input:
       account_identifiers:
         title: Account Identifiers
-        type: "[]account_identifiers"
+        type: '[]account_identifiers'
         description: User Account Identifiers containing account name and description
         required: true
-        example: '[{"account_name":"user@example.com","description":"disable account r7"}]'
+        example: '[{"account_name":"user@example.com","description":"disable account
+          r7"}]'
     output:
       multi_response:
         title: Multi Response
         description: Disable Account Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":202,"task_id":"00002129"}]'
   sign_out_account:
@@ -1052,15 +1215,16 @@ actions:
     input:
       account_identifiers:
         title: Account Identifiers
-        type: "[]account_identifiers"
+        type: '[]account_identifiers'
         description: User Account Identifiers containing account name and description
         required: true
-        example: '[{"account_name":"user@example.com","description":"sign out account r7 "}]'
+        example: '[{"account_name":"user@example.com","description":"sign out account
+          r7 "}]'
     output:
       multi_response:
         title: Multi Response
         description: Sign out Account Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":202,"task_id":"00002130"}]'
   reset_password_account:
@@ -1069,15 +1233,16 @@ actions:
     input:
       account_identifiers:
         title: Account Identifiers
-        type: "[]account_identifiers"
+        type: '[]account_identifiers'
         description: User Account Identifiers containing account name and description
         required: true
-        example: '[{"account_name":"user@example.com","description":"reset password account r7 "}]'
+        example: '[{"account_name":"user@example.com","description":"reset password
+          account r7 "}]'
     output:
       multi_response:
         title: Multi Response
         description: Reset Password Account Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":202,"task_id":"00002131"}]'
   quarantine_email_message:
@@ -1086,7 +1251,7 @@ actions:
     input:
       email_identifiers:
         title: Email Identifiers
-        type: "[]email_identifiers"
+        type: '[]email_identifiers'
         description: Email Identifiers consisting of message id, mailbox and description
         required: true
         example: '[{"description":"quarantine email message r7","mailbox":"user@example.com","message_id":"AAkALgAAAAAAHYQDEapmEc2byACqAC-EWg0AAhCCNvg5sEua0nNjgfLS2AABNpgTSQAA"}]'
@@ -1094,7 +1259,7 @@ actions:
       multi_response:
         title: Multi Response
         description: Quarantine Email Message Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":202,"task_id":"00002153"}]'
   delete_email_message:
@@ -1103,7 +1268,7 @@ actions:
     input:
       email_identifiers:
         title: Email Identifiers
-        type: "[]email_identifiers"
+        type: '[]email_identifiers'
         description: Email Identifiers consisting of message id, mailbox and description
         required: true
         example: '[{"description":"delete email message r7","mailbox":"user@example.com","message_id":"AAkALgAAAAAAHYQDEapmEc2byACqAC-EWg0AAhCCNvg5sEua0nNjgfLS2AABNpgLcwAA"}]'
@@ -1111,7 +1276,7 @@ actions:
       multi_response:
         title: Multi Response
         description: Delete Email Message Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":202,"task_id":"00002127"}]'
   restore_email_message:
@@ -1120,7 +1285,7 @@ actions:
     input:
       email_identifiers:
         title: Email Identifiers
-        type: "[]email_identifiers"
+        type: '[]email_identifiers'
         description: Email Identifiers consisting of message id, mailbox and description
         required: true
         example: '[{"description":"restore email message r7","mailbox":"user@example.com","message_id":"AAkALgAAAAAAHYQDEapmEc2byACqAC-EWg0AAhCCNvg5sEua0nNjgfLS2AABNpgTSQAA"}]'
@@ -1128,7 +1293,7 @@ actions:
       multi_response:
         title: Multi Response
         description: Delete Email Message Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":202,"task_id":"00002154"}]'
   isolate_endpoint:
@@ -1137,7 +1302,7 @@ actions:
     input:
       endpoint_identifiers:
         title: Endpoint Identifiers
-        type: "[]endpoint_identifiers"
+        type: '[]endpoint_identifiers'
         description: Endpoint Identifiers consisting of endpoint(hostname or agentGuid) and description
         required: true
         example: '[{"description":"TEST isolate endpoint","endpoint_name":"client1","agent_guid":"cb9c8412-1f64-4fa0-a36b-76bf41a07ede"}]'
@@ -1145,7 +1310,7 @@ actions:
       multi_response:
         title: Multi Response
         description: Isolate Endpoint Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":202,"task_id":"00002126"}]'
   restore_endpoint:
@@ -1154,7 +1319,7 @@ actions:
     input:
       endpoint_identifiers:
         title: Endpoint Identifiers
-        type: "[]endpoint_identifiers"
+        type: '[]endpoint_identifiers'
         description: Endpoint Identifiers consisting of endpoint(hostname or agentGuid) and description
         required: true
         example: '[{"description":"restore endpoint r7","endpoint_name":"client1","agent_guid":"cb9c8412-1f64-4fa0-a36b-76bf41a07ede"}]'
@@ -1162,7 +1327,7 @@ actions:
       multi_response:
         title: Multi Response
         description: Restore Endpoint Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":202,"task_id":"00002132"}]'
   add_to_exception_list:
@@ -1171,7 +1336,7 @@ actions:
     input:
       block_objects:
         title: Block Objects
-        type: "[]block_objects"
+        type: '[]block_objects'
         description: Objects made up of type, value and description
         required: true
         example: '[{"object_type":"ip","object_value":"1.2.6.9"}]'
@@ -1179,7 +1344,7 @@ actions:
       multi_response:
         title: Multi Response
         description: Add To Exception List Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":201,"task_id":"None"},{"status":201,"task_id":"None"}]'
   remove_from_exception_list:
@@ -1188,7 +1353,7 @@ actions:
     input:
       block_objects:
         title: Block Objects
-        type: "[]block_objects"
+        type: '[]block_objects'
         description: Objects made up of type, value and description
         required: true
         example: '[{"object_type":"ip","object_value":"1.6.6.3"}]'
@@ -1196,7 +1361,7 @@ actions:
       multi_response:
         title: Multi Response
         description: Remove From Exception List Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":204,"task_id":"None"}]'
   remove_from_block_list:
@@ -1205,7 +1370,7 @@ actions:
     input:
       block_objects:
         title: Block Objects
-        type: "[]block_objects"
+        type: '[]block_objects'
         description: Objects made up of type, value and description
         required: true
         example: '[{"description":"block","object_type":"ip","object_value":"6.6.6.3"}]'
@@ -1213,7 +1378,7 @@ actions:
       multi_response:
         title: Multi Response
         description: Remove From Block List Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":202,"task_id":"00002141"},{"status":202,"task_id":"00002142"}]'
   add_to_suspicious_list:
@@ -1222,7 +1387,7 @@ actions:
     input:
       suspicious_block_objects:
         title: Suspicious Block Objects
-        type: "[]suspicious_block_objects"
+        type: '[]suspicious_block_objects'
         description: Suspicious Objects made up of type, value and scan_action, risk_level and days_to_expiration
         required: true
         example: '[{"risk_level":"high","expiry_days":"30","object_type":"ip","scan_action":"block","object_value":"6.6.6.3"}]'
@@ -1230,7 +1395,7 @@ actions:
       multi_response:
         title: Multi Response
         description: Add To Suspicious List Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":201,"task_id":"None"},{"status":201,"task_id":"None"}]'
   remove_from_suspicious_list:
@@ -1239,7 +1404,7 @@ actions:
     input:
       block_objects:
         title: Block Objects
-        type: "[]block_objects"
+        type: '[]block_objects'
         description: Objects made up of type, value and description
         required: true
         example: '[{"object_type":"ip","object_value":"6.6.6.4"}]'
@@ -1247,7 +1412,7 @@ actions:
       multi_response:
         title: Multi Response
         description: Add To Exception List Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":204,"task_id":"None"}]'
   get_endpoint_data:
@@ -1265,25 +1430,26 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: " or "
-        default: " or "
+        example: ' or '
+        default: ' or '
         enum:
-          - " or "
-          - " and "
+        - ' or '
+        - ' and '
     output:
       endpoint_data:
         title: Endpoint Data
         description: Array of Endpoint Data Objects, consisting of agent guid, login account, endpoint name, MAC address, IP, os name, or version, os description, product code and installed product code
-        type: "[]endpoint_data"
+        type: '[]endpoint_data'
         required: true
-        example: '[{"agent_guid":"35fa11da-a24e-40cf-8b56-baf8828cc151","login_account":{"updated_date_time":"2024-02-05T20:58:22Z","value":["MSEDGEWIN10\\\\IEUser"]},"endpoint_name":{"updated_date_time":"2024-02-05T20:58:22Z","value":"MSEDGEWIN10"},"mac_address":{"updated_date_time":"2024-02-05T20:58:22Z","value":["00:1c:42:be:22:5f"]},"ip":{"updated_date_time":"2024-02-05T20:58:22Z","value":["10.211.55.36"]},"os_name":"Linux","os_version":"10.0.17763","os_description":"Windows 10 Enterprise Evaluation (64 bit) build 17763","product_code":"sao","installed_product_codes":["xes"]}]'
+        example: '[{"agent_guid":"35fa11da-a24e-40cf-8b56-baf8828cc151","login_account":{"updated_date_time":"2024-02-05T20:58:22Z","value":["MSEDGEWIN10\\\\IEUser"]},"endpoint_name":{"updated_date_time":"2024-02-05T20:58:22Z","value":"MSEDGEWIN10"},"mac_address":{"updated_date_time":"2024-02-05T20:58:22Z","value":["00:1c:42:be:22:5f"]},"ip":{"updated_date_time":"2024-02-05T20:58:22Z","value":["10.211.55.36"]},"os_name":"Linux","os_version":"10.0.17763","os_description":"Windows
+          10 Enterprise Evaluation (64 bit) build 17763","product_code":"sao","installed_product_codes":["xes"]}]'
   terminate_process:
     title: Terminate Process
     description: Terminates a process that is running on an endpoint
     input:
       process_identifiers:
         title: Process Identifiers
-        type: "[]process_identifiers"
+        type: '[]process_identifiers'
         description: Process Identifiers consisting of endpoint(hostname or agentGuid), filesha1, filename(optional) and description(optional)
         required: true
         example: '[{"endpoint_name":"client1","agent_guid":"cb9c8412-1f64-4fa0-a36b-76bf41a07ede","file_sha1":"984afc7aaa2718984e15e3b5ab095b519a081321"}]'
@@ -1291,7 +1457,7 @@ actions:
       multi_response:
         title: Multi Response
         description: Terminate Process Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":202,"task_id":"00002133"}]'
   get_sandbox_submission_status:
@@ -1303,7 +1469,7 @@ actions:
         type: string
         description: Task_id from the trendmicro-visionone-submit-file-to-sandbox command output
         required: true
-        example: "02384"
+        example: '02384'
     output:
       id:
         title: ID
@@ -1316,20 +1482,20 @@ actions:
         description: Response code for the action call
         type: string
         required: true
-        example: "running"
+        example: running
         enum:
-          - "succeeded"
-          - "running"
-          - "failed"
+        - succeeded
+        - running
+        - failed
       action:
         title: Action
         description: Action applied to a submitted object
         type: string
         required: true
-        example: "analyzeFile"
+        example: analyzeFile
         enum:
-          - "analyzeFile"
-          - "analyzeUrl"
+        - analyzeFile
+        - analyzeUrl
       error:
         title: Error
         description: Error code and message for the submission
@@ -1381,7 +1547,7 @@ actions:
         type: string
         description: Report_id of the sandbox submission retrieved from the trendmicro-visionone-get-file-analysis-status command
         required: true
-        example: "02384"
+        example: '02384'
       poll:
         title: Poll
         type: boolean
@@ -1408,10 +1574,10 @@ actions:
         description: Object Type
         type: string
         required: true
-        example: "url"
+        example: url
         enum:
-          - "file"
-          - "url"
+        - file
+        - url
       digest:
         title: Digest
         description: The hash values of the analyzed file
@@ -1423,12 +1589,12 @@ actions:
         description: The risk level assigned to the object by the sandbox
         type: string
         required: true
-        example: "low"
+        example: low
         enum:
-          - "high"
-          - "medium"
-          - "low"
-          - "noRisk"
+        - high
+        - medium
+        - low
+        - noRisk
       analysis_completion_date_time:
         title: Analysis Completion Date Time
         description: Timestamp in ISO 8601 format that indicates when the analysis was completed
@@ -1444,13 +1610,13 @@ actions:
       detection_names:
         title: Detection Names
         description: The name of the threat as detected by the sandbox
-        type: "[]string"
+        type: '[]string'
         required: false
         example: '["VAN_DROPPER.UMXX"]'
       threat_types:
         title: Threat Types
         description: The threat type as detected by the sandbox
-        type: "[]string"
+        type: '[]string'
         required: false
         example: '["Dropper"]'
       true_file_type:
@@ -1465,15 +1631,16 @@ actions:
     input:
       collect_files:
         title: Collect Files
-        type: "[]collect_files"
+        type: '[]collect_files'
         description: Collect file input JSON containing endpoint, file path and description
         required: true
-        example: '[{"endpoint_name":"client1","agent_guid":"cb9c8412-1f64-4fa0-a36b-76bf41a07ede","file_path":"C:/virus.exe","description":"collect malicious file"}]'
+        example: '[{"endpoint_name":"client1","agent_guid":"cb9c8412-1f64-4fa0-a36b-76bf41a07ede","file_path":"C:/virus.exe","description":"collect
+          malicious file"}]'
     output:
       multi_response:
         title: Multi Response
         description: Add To Block List Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":202,"task_id":"00002195"}]'
   get_task_result:
@@ -1503,17 +1670,17 @@ actions:
     output:
       status:
         title: Status
-        description: The status of the command sent to the managing server. Possible task statuses; queued - The server queued the command due to a high volume of requests or because the Security Agent was offline; running - Trend Micro Vision One sent the command to the managing server and is waiting for a response; succeeded - The managing server successfully received the command; rejected - The server rejected the task. For automated response task only; waitForApproval - The task is pending approval. For automated response task only; failed - An error or time-out occurred when attempting to send the command to the managing server
+        description: The status of the command sent to the managing server
         type: string
         required: true
-        example: "queued"
+        example: queued
         enum:
-          - "queued"
-          - "running"
-          - "succeeded"
-          - "rejected"
-          - "waitForApproval"
-          - "failed"
+        - queued
+        - running
+        - succeeded
+        - rejected
+        - waitForApproval
+        - failed
       created_date_time:
         title: Created Date Time
         description: Timestamp in ISO 8601 format
@@ -1543,26 +1710,26 @@ actions:
         description: Command sent to the target
         type: string
         required: true
-        example: "isolate"
+        example: isolate
         enum:
-          - "isolate"
-          - "restoreIsolate"
-          - "collectFile"
-          - "terminateProcess"
-          - "quarantineMessage"
-          - "restoreMessage"
-          - "deleteMessage"
-          - "block"
-          - "restoreBlock"
-          - "remoteShell"
-          - "runInvestigationKit"
-          - "runCustomScript"
-          - "submitSandbox"
-          - "dumpProcessMemory"
-          - "disableAccount"
-          - "enableAccount"
-          - "forceSignOut"
-          - "resetPassword"
+        - isolate
+        - restoreIsolate
+        - collectFile
+        - terminateProcess
+        - quarantineMessage
+        - restoreMessage
+        - deleteMessage
+        - block
+        - restoreBlock
+        - remoteShell
+        - runInvestigationKit
+        - runCustomScript
+        - submitSandbox
+        - dumpProcessMemory
+        - disableAccount
+        - enableAccount
+        - forceSignOut
+        - resetPassword
       account:
         title: Account
         description: User that triggered the response
@@ -1632,9 +1799,10 @@ actions:
       tasks:
         title: Tasks
         description: Currently, it is only possible to apply tasks to one message in a mailbox or one message in several mailboxes
-        type: "[]object"
+        type: '[]object'
         required: false
-        example: '[{"status":"running","lastActionDateTime":"2021-04-06T08:22:37Z","error":{"code":"TaskError","number":4009999,"message":"An internal error has occurred."},"agentGuid":"cb9c8412-1f64-4fa0-a36b-76bf41a07ede","endpointName":"trend-host-1"}]'
+        example: '[{"status":"running","lastActionDateTime":"2021-04-06T08:22:37Z","error":{"code":"TaskError","number":4009999,"message":"An
+          internal error has occurred."},"agentGuid":"cb9c8412-1f64-4fa0-a36b-76bf41a07ede","endpointName":"trend-host-1"}]'
       url:
         title: URL
         description: Universal Resource Locator
@@ -1668,7 +1836,7 @@ actions:
         type: string
         description: Unique alphanumeric string that identifies the analysis results of a submission
         required: true
-        example: "6345645"
+        example: '6345645'
       poll:
         title: Poll
         type: boolean
@@ -1699,7 +1867,7 @@ actions:
         type: string
         description: Unique alphanumeric string that identifies the analysis results of a submission
         required: true
-        example: "6345645"
+        example: '6345645'
       poll:
         title: Poll
         type: boolean
@@ -1718,7 +1886,7 @@ actions:
       sandbox_suspicious_list_resp:
         title: Sandbox Suspicious List Response
         description: Sandbox Suspicious Object List Response
-        type: "[]sandbox_suspicious_list_resp"
+        type: '[]sandbox_suspicious_list_resp'
         required: true
         example: '[{"analysis_completion_date_time":"2023-01-11T22:40:52Z","expired_date_time":"2023-02-10T22:40:52Z","risk_level":"high","root_sha1":"ccc8c28226224755091a3462ff7704e350f2114b","type":"fileSha1","value":"0d8b8f0baf22e65a80148bcebaef082ef08932d2"}]'
   download_sandbox_analysis_result:
@@ -1730,7 +1898,7 @@ actions:
         type: string
         description: Unique alphanumeric string that identifies the analysis results of a submission
         required: true
-        example: "6345645"
+        example: '6345645'
       poll:
         title: Poll
         type: boolean
@@ -1844,17 +2012,17 @@ actions:
         description: ID of the workbench you would like to update the status for
         required: true
         enum:
-          - New
-          - In Progress
-          - True Positive
-          - False Positive
+        - New
+        - In Progress
+        - True Positive
+        - False Positive
         example: New
       if_match:
         title: If Match
         type: string
         description: The target resource will be updated only if it matches ETag of the target one
         required: false
-        example: "d41d8cd98f00b204e9800998ecf8427e"
+        example: d41d8cd98f00b204e9800998ecf8427e
     output:
       result_code:
         title: Result Code
@@ -1888,7 +2056,7 @@ actions:
       alerts:
         title: Alerts
         description: Array of any alerts (awb-workbenchAlertV3)
-        type: "[]alert"
+        type: '[]alert'
         required: true
         example: '["<<referenced:bigdata>>"]'
   get_exception_list:
@@ -1898,7 +2066,7 @@ actions:
       exception_objects:
         title: Exception Objects
         description: Array of any Exception Objects
-        type: "[]exception_objects"
+        type: '[]exception_objects'
         required: true
         example: '[{"description":"ip exception","last_modified_date_time":"2023-04-14T06:53:59Z","type":"ip","value":"1.6.6.3"}]'
   get_suspicious_list:
@@ -1908,7 +2076,7 @@ actions:
       suspicious_objects:
         title: Suspicious Objects
         description: Array of any Suspicious Objects
-        type: "[]suspicious_objects"
+        type: '[]suspicious_objects'
         required: true
         example: '[{"description":"","expired_date_time":"2023-05-14T06:55:29Z","in_exception_list":false,"last_modified_date_time":"2023-04-14T06:55:29Z","risk_level":"high","scan_action":"log","type":"ip","value":"6.6.6.3"}]'
   add_to_block_list:
@@ -1917,7 +2085,7 @@ actions:
     input:
       block_objects:
         title: Block Objects
-        type: "[]block_objects"
+        type: '[]block_objects'
         description: Objects made up of type, value and description
         required: true
         example: '[{"object_type":"ip","object_value":"6.6.6.6","description":"block"}]'
@@ -1925,7 +2093,7 @@ actions:
       multi_response:
         title: Multi Response
         description: Add To Block List Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":202,"task_id":"00002134"},{"status":202,"task_id":"00002135"}]'
   submit_urls_to_sandbox:
@@ -1934,7 +2102,7 @@ actions:
     input:
       urls:
         title: URLs
-        type: "[]string"
+        type: '[]string'
         description: URL(s) to be submitted, formated as bracket array separated by comma
         required: true
         example: '["www.urlurl.com","www.zurlzurl.com"]'
@@ -1942,7 +2110,7 @@ actions:
       submit_urls_resp:
         title: Submit URLs Response
         description: Submit URLSs response Array
-        type: "[]submit_urls_resp"
+        type: '[]submit_urls_resp'
         required: true
         example: '[{"digest":{"md5":"f3a2e1227de8d5ae7296665c1f34b28d","sha1":"d79bff55069994b1c11f7856f9f029de36adfd8f","sha256":"619a273ee4d25fb4aeb97e89c554fcfbdbc82e22d840cfdb364a8f1932f48160"},"id":"d28e22cb-c6af-4291-bf25-22f33ce7aa15","status":202,"task_id":"d28e22cb-c6af-4291-bf25-22f33ce7aa15","url":"https://example.com"}]'
   get_alert_details:
@@ -1977,11 +2145,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: " or "
-        default: " or "
+        example: ' or '
+        default: ' or '
         enum:
-          - " or "
-          - " and "
+        - ' or '
+        - ' and '
       fields:
         title: Fields
         type: object
@@ -1992,7 +2160,7 @@ actions:
       custom_scripts_list_resp:
         title: Custom Scripts List Response
         description: Custom Scripts List Response Array
-        type: "[]custom_scripts_list_resp"
+        type: '[]custom_scripts_list_resp'
         required: true
         example: '[{"description":"Terminates processes in user devices","file_name":"trendmicro-security-playbook-terminate-proc.ps1","file_type":"powershell","id":"71c7ae1f-bf14-4e6f-b3eb-30a45d13e6f2"}]'
   add_custom_script:
@@ -2004,11 +2172,11 @@ actions:
         type: string
         description: File type of custom script
         required: true
-        example: "bash"
-        default: "bash"
+        example: bash
+        default: bash
         enum:
-          - "powershell"
-          - "bash"
+        - powershell
+        - bash
       description:
         title: Description
         description: Task Description
@@ -2043,11 +2211,11 @@ actions:
         type: string
         description: File type of custom script
         required: true
-        example: "bash"
-        default: "bash"
+        example: bash
+        default: bash
         enum:
-          - "powershell"
-          - "bash"
+        - powershell
+        - bash
       description:
         title: Description
         description: Task Description
@@ -2140,7 +2308,7 @@ actions:
       multi_response:
         title: Multi Response
         description: Add To Block List Response Array
-        type: "[]multi_response"
+        type: '[]multi_response'
         required: true
         example: '[{"status":202,"task_id":"00002133"}]'
   get_email_activity_data:
@@ -2154,11 +2322,11 @@ actions:
         required: true
         example: 500
         enum:
-          - 50
-          - 100
-          - 500
-          - 1000
-          - 5000
+        - 50
+        - 100
+        - 500
+        - 1000
+        - 5000
       start_date_time:
         title: Start Date Time
         type: string
@@ -2173,7 +2341,7 @@ actions:
         example: 2020-06-15T12:00:00Z
       select:
         title: Select
-        type: "[]string"
+        type: '[]string'
         description: List of fields to include in the search results. If no fields are specified, the query returns all supported fields
         required: false
         example: '["mailMsgSubject"]'
@@ -2182,11 +2350,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: " or "
-        default: " or "
+        example: ' or '
+        default: ' or '
         enum:
-          - " or "
-          - " and "
+        - ' or '
+        - ' and '
       fields:
         title: Fields
         type: object
@@ -2197,7 +2365,7 @@ actions:
       email_activity_data_resp:
         title: Email Activity Data Response
         description: Email Activity Data Response Array
-        type: "[]email_activity_data_resp"
+        type: '[]email_activity_data_resp'
         required: true
         example: '[{"mail_msg_subject":"test sample","mail_msg_id":"<user@example.com>","msg_uuid":"ihbjkhabkjHBJKHBKJHbkjHBKJhbjkhbJKHBJKHBKJhbjHBJhbj","mailbox":"user@example.com","mail_sender_ip":"xx.yy.zz.ww","mail_from_addresses":["user@example.com"],"mail_whole_header":["user@example.com>"],"mail_to_addresses":["user@example.com"],"mail_source_domain":"example.com","search_d_l":"CAS","scan_type":"exchange","event_time":1601249307000,"org_id":"8d23a000-9a4c-11ea-80f5-1de879102030","mail_urls_visible_link":["http://xxxxxx.com"],"mail_urls_real_link":["http://xxxxxx.com"]}]'
   get_email_activity_data_count:
@@ -2211,11 +2379,11 @@ actions:
         required: true
         example: 500
         enum:
-          - 50
-          - 100
-          - 500
-          - 1000
-          - 5000
+        - 50
+        - 100
+        - 500
+        - 1000
+        - 5000
       start_date_time:
         title: Start Date Time
         type: string
@@ -2230,7 +2398,7 @@ actions:
         example: 2020-06-15T12:00:00Z
       select:
         title: Select
-        type: "[]string"
+        type: '[]string'
         description: List of fields to include in the search results. If no fields are specified, the query returns all supported fields
         required: false
         example: '["mailMsgSubject"]'
@@ -2239,11 +2407,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: " or "
-        default: " or "
+        example: ' or '
+        default: ' or '
         enum:
-          - " or "
-          - " and "
+        - ' or '
+        - ' and '
       fields:
         title: Fields
         type: object
@@ -2268,11 +2436,11 @@ actions:
         required: true
         example: 500
         enum:
-          - 50
-          - 100
-          - 500
-          - 1000
-          - 5000
+        - 50
+        - 100
+        - 500
+        - 1000
+        - 5000
       start_date_time:
         title: Start Date Time
         type: string
@@ -2287,7 +2455,7 @@ actions:
         example: 2020-06-15T12:00:00Z
       select:
         title: Select
-        type: "[]string"
+        type: '[]string'
         description: List of fields to include in the search results. If no fields are specified, the query returns all supported fields
         required: false
         example: '["endpointHostName"]'
@@ -2296,11 +2464,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: " or "
-        default: " or "
+        example: ' or '
+        default: ' or '
         enum:
-          - " or "
-          - " and "
+        - ' or '
+        - ' and '
       fields:
         title: Fields
         type: object
@@ -2311,9 +2479,17 @@ actions:
       endpoint_activity_data_resp:
         title: Endpoint Activity Data Response
         description: Endpoint Activity Data Response Array
-        type: "[]endpoint_activity_data_resp"
+        type: '[]endpoint_activity_data_resp'
         required: true
-        example: '[{"dpt":443,"dst":"","endpoint_guid":"72436165-b5a5-471a-9389-0bdc3647bc33","endpoint_host_name":"xxx-docker","endpoint_ip":["192.0.2.0"],"event_id":"1","event_sub_id":0,"object_integrity_level":0,"object_true_type":0,"object_sub_true_type":0,"win_event_id":3,"event_time":1633124154241,"event_time_d_t":"2021-10-01T21:35:54.241000+00:00","host_name":"xxx-docker","logon_user":["string"],"object_cmd":"C:\\\\Program Files (x86)\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe --type=utility --lang=en-US --no-sandbox","object_file_hash_sha1":"98A9A1C8F69373B211E5F1E303BA8762F44BC898","object_file_path":"C:\\\\Program Files (x86)\\\\temp\\\\Application\\\\test.exe","object_host_name":"string","object_ip":"string","object_ips":["string"],"object_port":0,"object_registry_data":"wscript \\","object_registry_key_handle":"hklm\\\\software\\\\wow6432node\\\\microsoft\\\\windows\\\\currentversion\\\\run","object_registry_value":"its_ie_settings","object_signer":["Microsoft Windows"],"object_signer_valid":[true],"object_user":"SYSTEM","os":"Linux","parent_cmd":"string","parent_file_hash_sha1":"string","parent_file_path":"string","process_cmd":"C:\\\\Program Files (x86)\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe --type=utility --lang=en-US --no-sandbox","process_file_hash_sha1":"string","process_file_path":"C:\\\\Program Files (x86)\\\\temp\\\\Application\\\\test.exe","request":"https://www.example.com","search_d_l":"SDL","spt":8080,"src":"192.169.1.1","src_file_hash_sha1":"string","src_file_path":"string","tags":["MITRE.T1210"],"uuid":"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"}]'
+        example: '[{"dpt":443,"dst":"","endpoint_guid":"72436165-b5a5-471a-9389-0bdc3647bc33","endpoint_host_name":"xxx-docker","endpoint_ip":["192.0.2.0"],"event_id":"1","event_sub_id":0,"object_integrity_level":0,"object_true_type":0,"object_sub_true_type":0,"win_event_id":3,"event_time":1633124154241,"event_time_d_t":"2021-10-01T21:35:54.241000+00:00","host_name":"xxx-docker","logon_user":["string"],"object_cmd":"C:\\\\Program
+          Files (x86)\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe --type=utility
+          --lang=en-US --no-sandbox","object_file_hash_sha1":"98A9A1C8F69373B211E5F1E303BA8762F44BC898","object_file_path":"C:\\\\Program
+          Files (x86)\\\\temp\\\\Application\\\\test.exe","object_host_name":"string","object_ip":"string","object_ips":["string"],"object_port":0,"object_registry_data":"wscript
+          \\","object_registry_key_handle":"hklm\\\\software\\\\wow6432node\\\\microsoft\\\\windows\\\\currentversion\\\\run","object_registry_value":"its_ie_settings","object_signer":["Microsoft
+          Windows"],"object_signer_valid":[true],"object_user":"SYSTEM","os":"Linux","parent_cmd":"string","parent_file_hash_sha1":"string","parent_file_path":"string","process_cmd":"C:\\\\Program
+          Files (x86)\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe --type=utility
+          --lang=en-US --no-sandbox","process_file_hash_sha1":"string","process_file_path":"C:\\\\Program
+          Files (x86)\\\\temp\\\\Application\\\\test.exe","request":"https://www.example.com","search_d_l":"SDL","spt":8080,"src":"192.169.1.1","src_file_hash_sha1":"string","src_file_path":"string","tags":["MITRE.T1210"],"uuid":"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"}]'
   get_endpoint_activity_data_count:
     title: Get Endpoint Activity Data Count
     description: Displays count of search results from the Endpoint Activity Data source in a paginated list
@@ -2325,11 +2501,11 @@ actions:
         required: true
         example: 500
         enum:
-          - 50
-          - 100
-          - 500
-          - 1000
-          - 5000
+        - 50
+        - 100
+        - 500
+        - 1000
+        - 5000
       start_date_time:
         title: Start Date Time
         type: string
@@ -2344,7 +2520,7 @@ actions:
         example: 2020-06-15T12:00:00Z
       select:
         title: Select
-        type: "[]string"
+        type: '[]string'
         description: List of fields to include in the search results. If no fields are specified, the query returns all supported fields
         required: false
         example: '["endpointHostName"]'
@@ -2353,11 +2529,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: " or "
-        default: " or "
+        example: ' or '
+        default: ' or '
         enum:
-          - " or "
-          - " and "
+        - ' or '
+        - ' and '
       fields:
         title: Fields
         type: object
@@ -2371,3 +2547,194 @@ actions:
         description: Number of records returned by a query
         required: true
         example: 5
+  create_api_keys:
+    title: Create API Keys
+    description: Generates API keys that allow third-party applications to access the Trend Vision One APIs
+    input:
+      api_keys_objects:
+        title: API Keys Objects
+        type: '[]api_keys_objects'
+        description: List of JSON objects containing data for API keys creation
+        required: true
+        example: '[{"name":"TestKey","role":"Analyst","months_to_expiration":"1","description":"Test
+          API Key create","status":"enabled"}]'
+    output:
+      api_keys_resp:
+        title: API Keys Response
+        type: '[]api_keys_resp'
+        description: List of API keys responses
+        required: true
+        example: '[{"status":200,"id":"d367abdd-7739-4129-a36a-862c4ec018b4","value":"API-KEY","expiredDateTime":"2025-02-06T10:00:00Z"}]'
+  get_api_key:
+    title: Get API Key
+    description: Displays information of the specified API key
+    input:
+      id:
+        title: ID
+        type: string
+        description: The unique identifier of the API key
+        required: true
+        example: 2ee04177-53d7-4fc7-a9d7-39285d80f58a
+    output:
+      etag:
+        title: ETag
+        type: string
+        description: Unique alphanumeric string that identifies the version of a resource
+        required: false
+        example: d41d8cd98f00b204e9800998ecf8427e
+      id:
+        title: ID
+        type: string
+        description: The unique identifier of the API key
+        required: true
+        example: d367abdd-7739-4129-a36a-862c4ec018b4
+      name:
+        title: Name
+        type: string
+        description: The unique name of the API key
+        required: true
+        example: test
+      status:
+        title: Status
+        type: string
+        description: The status of an API key
+        required: true
+        example: enabled
+        enum:
+        - enabled
+        - disabled
+      role:
+        title: Role
+        type: string
+        description: The user role assigned to the API key
+        required: true
+        example: Master Administrator
+      description:
+        title: Description
+        type: string
+        description: A brief note about the API key
+        required: false
+        example: this is a test apikey
+      last_used_date_time:
+        title: Last Used Date Time
+        type: string
+        description: Timestamp in ISO 8601 format indicating the last time the API key was used
+        required: true
+        example: 2023-02-06T10:00:00Z
+      expired_date_time:
+        title: Expired Date Time
+        type: string
+        description: Timestamp in ISO 8601 format indicating the expiration date of the API key
+        required: true
+        example: 2025-02-06T10:00:00Z
+  update_api_key:
+    title: Update API Key
+    description: Updates the specified API key
+    input:
+      id:
+        title: ID
+        type: string
+        description: The unique identifier of the API key
+        required: true
+        example: 2ee04177-53d7-4fc7-a9d7-39285d80f58a
+      if_match:
+        title: If Match
+        type: string
+        description: The ETag of the resource you want to update. The resource is updated only if the provided value matches the ETag of the resource
+        required: false
+        example: d41d8cd98f00b204e9800998ecf8427e
+      name:
+        title: Name
+        type: string
+        description: The unique name of the API key
+        required: true
+        example: test
+      status:
+        title: Status
+        type: string
+        description: The status of an API key
+        required: true
+        example: enabled
+        enum:
+        - enabled
+        - disabled
+      role:
+        title: Role
+        type: string
+        description: The user role assigned to the API key
+        required: true
+        example: Master Administrator
+      description:
+        title: Description
+        type: string
+        description: A brief note about the API key
+        required: false
+        example: this is a test apikey
+    output:
+      status:
+        title: Status
+        type: integer
+        description: The Status Code of the API key update
+        required: true
+        example: 204
+  delete_api_keys:
+    title: Delete API Keys
+    description: Deletes the specified API keys
+    input:
+      id:
+        title: ID
+        type: '[]string'
+        description: List of unique identifiers of the API keys
+        required: true
+        example: '["d367abdd-7739-4129-a36a-862c4ec018b4","b667abdd-7739-4129-a36a-862c4ec019se"]'
+    output:
+      status:
+        title: Status
+        type: integer
+        description: The Status Code of the API key update
+        required: true
+        example: 207
+  list_api_keys:
+    title: List API Keys
+    description: Displays a list of all your API keys in a list
+    input:
+      top:
+        title: Top
+        type: integer
+        description: Number of records displayed on a page
+        required: false
+        example: 50
+        enum:
+        - 50
+        - 100
+        - 200
+      query_op:
+        title: Query Operator
+        type: string
+        description: Logical operator to employ in the query. (AND/OR)
+        required: true
+        example: ' or '
+        default: ' or '
+        enum:
+        - ' or '
+        - ' and '
+      fields:
+        title: Fields
+        type: object
+        description: JSON object of fields to query by fileName or fileType
+        required: true
+        example: '{"role":"Master Administrator"}'
+    output:
+      total_count:
+        title: Total Count
+        type: integer
+        description: The number of retrieved API keys
+        required: true
+        example: 5
+      items:
+        title: Items
+        type: '[]api_keys_list_resp'
+        description: List of API key object responses
+        required: true
+        example: '[{"id":"d367abdd-7739-4129-a36a-862c4ec018b4","name":"test","status":"enabled","role":"Master
+          Administrator","description":"this is a test","expiredDateTime":"2025-02-06T10:00:00Z","lastUsedDateTime":"2023-02-06T10:00:00Z"}]'
