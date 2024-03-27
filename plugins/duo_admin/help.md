@@ -223,7 +223,7 @@ This action is used to modify a user by ID.
 |lastname|string|None|False|The user's new surname|None|Example|
 |notes|string|None|False|The new notes field|None|Example|
 |realname|string|None|False|The new realname (or full name)|None|Example|
-|status|string|None|False|The new status. Select 'None' to skip status change|['active', 'disabled', 'bypass', 'None']|active|
+|status|string|None|False|The new status. Select 'None' to skip status change|["active", "disabled", "bypass", "None"]|active|
 |userId|string|None|True|User unique ID|None|DUCUULF6HBMZ43IG9MBH|
 |username|string|None|False|The new username|None|Example|
 
@@ -563,7 +563,7 @@ This action is used to add a user in Duo Admin.
 |lastname|string|None|False|The user's surname. Required for Duo's ID Proofing feature|None|User|
 |notes|string|None|False|An optional description or notes field|None|Example note|
 |realname|string|None|False|User's real name|None|Example User|
-|status|string|active|False|User status|['active', 'bypass', 'disabled']|active|
+|status|string|active|False|User status|["active", "bypass", "disabled"]|active|
 |username|string|None|True|The name of the user to create|None|example-user|
 
 Example input:
@@ -1033,6 +1033,7 @@ A User ID can be obtained by passing a username to the Get User Status action.
 
 # Version History
 
+* 4.4.0 - `Monitor Logs` task updated to handle `custom_config` parameter for each log type separately | Apply lookback limit of 180 days due to Duo Admin API limitation
 * 4.3.2 - Monitor Logs task: Update to latest SDK | `Monitor Logs` task updated to handle `custom_config` parameter
 * 4.3.1 - Monitor Logs task: Added exception logging and use latest plugin SDK (`5.3.1`).
 * 4.3.0 - Monitor Logs task: Added inputs for collecting events and logs. Updated 403 error handling 
