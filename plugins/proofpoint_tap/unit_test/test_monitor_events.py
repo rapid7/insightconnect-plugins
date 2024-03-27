@@ -42,8 +42,8 @@ class TestMonitorEvents(TestCase):
             ],
             [
                 "last_page",
-                Util.read_file_to_dict("inputs/monitor_events_next_page.json.inp"),
-                Util.read_file_to_dict("expected/monitor_events_next_page.json.exp"),
+                Util.read_file_to_dict("inputs/monitor_events_last_page.json.inp"),
+                Util.read_file_to_dict("expected/monitor_events_last_page.json.exp"),
             ],
             [
                 "subsequent_run",
@@ -73,6 +73,29 @@ class TestMonitorEvents(TestCase):
         )
         self.assertEqual(actual, expected.get("events"))
         self.assertEqual(actual_state, expected.get("state"))
+        self.assertEqual(has_more_pages, expected.get("has_more_pages"))
+
+    def test_monitor_events_last_page_not_queried_to_now(self, _mock_request, mock_time):
+        """
+        Reuse the 'last_page' parameters from the test above but mock the time to be + 1 hour and we should
+        change that has_more_pages is now True to continue ingesting events until we have pulled everything from
+        the third party API.
+        """
+        current_state = Util.read_file_to_dict("inputs/monitor_events_last_page.json.inp")
+        expected = Util.read_file_to_dict("expected/monitor_events_last_page.json.exp")
+
+        # Move current time forward 1 hour from other tests to test has_more_pages logic.
+        mock_time.return_value = datetime.strptime("2023-04-04T09:00:00", "%Y-%m-%dT%H:%M:%S").replace(
+            tzinfo=timezone.utc
+        )
+
+        actual, actual_state, has_more_pages, status_code, error = self.action.run(state=current_state)
+        self.assertEqual(actual, expected.get("events"))
+        self.assertEqual(actual_state, expected.get("state"))
+        self.assertEqual(has_more_pages, True)  # this is different to enforce another call to the third party API
+
+        # add in extra failsafe that the `.exp' file has not changed this has_more_pages to True
+        self.assertNotEqual(has_more_pages, expected.get("has_more_pages"))
 
     @patch("komand_proofpoint_tap.tasks.monitor_events.task.SPECIFIC_DATE", new=ENV_VALUE)
     @patch("logging.Logger.info")
@@ -115,7 +138,8 @@ class TestMonitorEvents(TestCase):
         response, state, has_more_pages, status_code, _error = self.action.run({}, {}, cps_config)
 
         # In this example we have an env var specified but this is ignored to use the value in the custom_config
-        self.assertIn(f"Using custom value of {full_lookback_value}", mock_logger.call_args_list[2][0][0])
+        date = datetime(**full_lookback_value)
+        self.assertIn(f"Using custom value of {date}", mock_logger.call_args_list[2][0][0])
 
         # state last time should be custom config value + 1 hour
         self.assertEqual("2024-01-27T01:00:00+00:00", state["last_collection_date"])
@@ -134,7 +158,7 @@ class TestMonitorEvents(TestCase):
             with patch("komand_proofpoint_tap.tasks.monitor_events.task.MonitorEvents.SPLIT_SIZE", new=40000):
                 _resp, state_3, more_pages, _status_code, _error = self.action.run({}, state_2.copy(), cps_config)
                 self.assertEqual(state_2["last_collection_date"], state_3["last_collection_date"])
-                self.assertEqual(False, more_pages)  # finished pagination now due to split size including all logs
+                self.assertEqual(True, more_pages)  # finished 'pages' between time A-B, we haven't caught up to now
 
             # Fourth time task is called - custom_config is 'normal' and we do normal time calculations / cut off.
             new_now = datetime.strptime("2024-03-25T08:00:00", "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
@@ -147,4 +171,47 @@ class TestMonitorEvents(TestCase):
                 # get lookback time as task.py does with using now - (lookback + 1 minute latency delay)
                 lookback = new_now - timedelta(hours=config["cutoff"]["hours"], minutes=1)
                 lookback_msg = f"Last collection date reset to max lookback allowed: {lookback.isoformat()}"
-                self.assertEquals(lookback_msg, mock_logger.call_args_list[2][0][0])
+                self.assertEqual(lookback_msg, mock_logger.call_args_list[2][0][0])
+
+    @parameterized.expand(
+        [
+            [
+                "enforced_during_backfill_config",
+                [{}, {"lookback": {"year": 2023, "month": 3, "day": 4}}],
+                ["Supplied a specific date further than allowed. Moving this to 2023-03-28 08:04:00", ""],
+            ],
+            [
+                "enforced_during_lookback_config_date",
+                [{}, {"cutoff": {"date": {"year": 2023, "month": 3, "day": 4}}}],
+                ["Supplied a max lookback further than allowed. Moving this to 2023-03-28 08:04:00", ""],
+            ],
+            [
+                "enforced_during_lookback_config_hours",
+                [{}, {"cutoff": {"hours": 24 * 10}}],  # 10 days lookback
+                ["Supplied a max lookback further than allowed. Moving this to 2023-03-28 08:04:00", ""],
+            ],
+            [
+                "enforced_during_a_state_passed_value",
+                # customer has been paused since 29th March, and have an override cutoff hours to 8
+                [{"last_collection_date": "2023-03-28T07:00:00.406053+00:00"}, {"cutoff": {"hours": 24 * 8}}],
+                [
+                    "Supplied a max lookback further than allowed. Moving this to 2023-03-28 08:04:00",
+                    "Last collection date reset to max lookback allowed",
+                ],
+            ],
+        ]
+    )
+    @patch("logging.Logger.info")
+    def test_api_max_looback_enforced(
+        self, _test_name, task_params, logger_msgs, mock_logger, _mock_request, _mock_time
+    ):
+        # _mock_time is set to be 2023-04-04T08:00:00; we want to pass a date further back that 7 days in different
+        # scenarios and ensure that we don't query the API for Proofpoint as it will error out.
+        state, config = task_params
+        custom_config_logger, saved_state_logger = logger_msgs
+
+        _resp, _state, _has_more_pages, _status_code, _error = self.action.run({}, state, config)
+        self.assertIn(custom_config_logger, mock_logger.call_args_list[2][0][0])
+
+        if saved_state_logger:
+            self.assertIn(saved_state_logger, mock_logger.call_args_list[3][0][0])
