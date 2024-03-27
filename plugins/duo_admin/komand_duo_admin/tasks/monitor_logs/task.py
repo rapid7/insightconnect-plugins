@@ -15,6 +15,7 @@ AUTH_LOGS_LOG_TYPE = "Auth logs"
 TRUST_MONITOR_EVENTS_LOG_TYPE = "Trust monitor events"
 CUTOFF_HOURS = 24
 MAX_CUTOFF_HOURS = 72
+API_CUTOFF_HOURS = 4320
 
 
 class MonitorLogs(insightconnect_plugin_runtime.Task):
@@ -397,8 +398,8 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         :return: filter_value (epoch seconds) to be applied in request to Duo
         """
         log_types = {
-            ADMIN_LOGS_LOG_TYPE: "filter_cutoff_auth_logs",
-            AUTH_LOGS_LOG_TYPE: "filter_cutoff_admin_logs",
+            AUTH_LOGS_LOG_TYPE: "filter_cutoff_auth_logs",
+            ADMIN_LOGS_LOG_TYPE: "filter_cutoff_admin_logs",
             TRUST_MONITOR_EVENTS_LOG_TYPE: "filter_cutoff_trust_monitor_events_logs",
         }
         filter_cutoff = custom_config.get(log_types.get(log_type, ""), {}).get("date")
@@ -413,5 +414,12 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             filter_value = current_time - timedelta(hours=filter_value)
         else:
             filter_value = datetime.fromisoformat(filter_value.replace("Z", "+00:00"))
-        self.logger.info(f"Task execution for {log_type} will be applying a lookback to {filter_value}...")
-        return filter_value
+        # Compare lookback value to API cutoff value, applying API cutoff if lookback is beyond API limits
+        utc_filter_value = filter_value.astimezone(timezone.utc)
+        api_cutoff_date = current_time - timedelta(hours=API_CUTOFF_HOURS)
+        if api_cutoff_date > utc_filter_value:
+            self.logger.info(f"Lookback of {utc_filter_value} is older than 180 days. "
+                             f"Looking back to {api_cutoff_date}...")
+            utc_filter_value = api_cutoff_date
+        self.logger.info(f"Task execution for {log_type} will be applying a lookback to {utc_filter_value} UTC...")
+        return utc_filter_value
