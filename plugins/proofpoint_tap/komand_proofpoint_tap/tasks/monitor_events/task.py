@@ -106,7 +106,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                     self.connection.client.siem_action(Endpoint.get_all_threats(), parameters)
                 )
                 self.logger.info(f"Retrieved {len(parsed_logs)} total parsed events in time interval")
-                state, has_more_pages = self.determine_page_values(
+                state, has_more_pages = self.determine_page_and_state_values(
                     next_page_index, parsed_logs, has_more_pages, state, parameters, now
                 )
                 current_page_index = next_page_index if next_page_index else 0
@@ -130,8 +130,16 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             state[self.PREVIOUS_LOGS_HASHES] = []
             return [], state, has_more_pages, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
-    def determine_page_values(self, next_page_index, parsed_logs, has_more_pages, state, query_params, now):
-        # Determine pagination based on the response from API vs if we've queried until now.
+    def determine_page_and_state_values(
+        self,
+        next_page_index: int,
+        parsed_logs: list,
+        has_more_pages: bool,
+        state: Dict[str, str],
+        query_params: Dict[str, str],
+        now: datetime,
+    ) -> (dict, bool):
+        # Determine pagination based on the response from API or if we've queried until now.
         if (not next_page_index and len(parsed_logs) > self.SPLIT_SIZE) or (
             next_page_index and (next_page_index + 1) * self.SPLIT_SIZE < len(parsed_logs)
         ):
@@ -194,7 +202,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             )
         return logs_to_return, new_logs_hashes
 
-    def _apply_custom_timings(self, custom_config: Dict[str, Dict], now: datetime) -> (datetime, int):
+    def _apply_custom_timings(self, custom_config: Dict[str, Dict], now: datetime) -> (datetime, datetime):
         """
         If a custom_config is supplied to the plugin we can modify our timing logic.
         Lookback is applied for the first run with no state.
