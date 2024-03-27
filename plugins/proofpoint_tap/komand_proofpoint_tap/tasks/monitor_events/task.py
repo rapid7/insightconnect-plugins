@@ -13,6 +13,7 @@ from komand_proofpoint_tap.util.util import SiemUtils
 from .schema import MonitorEventsInput, MonitorEventsOutput, MonitorEventsState, Component
 
 MAX_ALLOWED_LOOKBACK_HOURS = 24
+API_MAX_LOOKBACK = 24 * 7  # API limits to 7 days ago
 SPECIFIC_DATE = getenv("SPECIFIC_DATE")
 
 
@@ -61,7 +62,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                 task_start = "First run... "
                 first_time = now - timedelta(hours=1)
                 if backfill_date:
-                    first_time = datetime(**backfill_date, tzinfo=timezone.utc)  # PLGN-727: allow backfill
+                    first_time = backfill_date  # PLGN-727: allow backfill
                     task_start += f"Using custom value of {backfill_date}"
                 self.logger.info(task_start)
                 last_time = first_time + timedelta(hours=1)
@@ -105,14 +106,9 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                     self.connection.client.siem_action(Endpoint.get_all_threats(), parameters)
                 )
                 self.logger.info(f"Retrieved {len(parsed_logs)} total parsed events in time interval")
-                if (not next_page_index and len(parsed_logs) > self.SPLIT_SIZE) or (
-                    next_page_index and (next_page_index + 1) * self.SPLIT_SIZE < len(parsed_logs)
-                ):
-                    state[self.NEXT_PAGE_INDEX] = next_page_index + 1 if next_page_index else 1
-                    has_more_pages = True
-                    self.logger.info(
-                        f"Set next page index to {state[self.NEXT_PAGE_INDEX]} and has more pages to True for the next run"
-                    )
+                state, has_more_pages = self.determine_page_and_state_values(
+                    next_page_index, parsed_logs, has_more_pages, state, parameters, now
+                )
                 current_page_index = next_page_index if next_page_index else 0
                 # Send back a maximum of SPLIT_SIZE events at a time (use page index to track this in state)
                 new_unique_logs, new_logs_hashes = self.compare_hashes(
@@ -133,6 +129,31 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             self.logger.info(f"Exception occurred in monitor events task: {error}", exc_info=True)
             state[self.PREVIOUS_LOGS_HASHES] = []
             return [], state, has_more_pages, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+
+    def determine_page_and_state_values(
+        self,
+        next_page_index: int,
+        parsed_logs: list,
+        has_more_pages: bool,
+        state: Dict[str, str],
+        query_params: Dict[str, str],
+        now: datetime,
+    ) -> (dict, bool):
+        # Determine pagination based on the response from API or if we've queried until now.
+        if (not next_page_index and len(parsed_logs) > self.SPLIT_SIZE) or (
+            next_page_index and (next_page_index + 1) * self.SPLIT_SIZE < len(parsed_logs)
+        ):
+            state[self.NEXT_PAGE_INDEX] = next_page_index + 1 if next_page_index else 1
+            has_more_pages = True
+            self.logger.info(
+                f"Set next page index to {state[self.NEXT_PAGE_INDEX]} and has more pages to True for the next run"
+            )
+        else:
+            end_str, now_str = query_params.get("interval").split("/")[1], now.isoformat().replace("z", "")
+            if now_str != end_str:  # we want to force more pages if the end query time is not 'now'
+                has_more_pages = True
+
+        return state, has_more_pages
 
     @staticmethod
     def get_current_time():
@@ -181,7 +202,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             )
         return logs_to_return, new_logs_hashes
 
-    def _apply_custom_timings(self, custom_config: Dict[str, Dict], now: datetime) -> (datetime, int):
+    def _apply_custom_timings(self, custom_config: Dict[str, Dict], now: datetime) -> (datetime, datetime):
         """
         If a custom_config is supplied to the plugin we can modify our timing logic.
         Lookback is applied for the first run with no state.
@@ -198,7 +219,21 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
         env_var_date = loads(SPECIFIC_DATE) if SPECIFIC_DATE else None
         specific_date = custom_config.get("lookback", env_var_date)
         self.logger.info(
-            "Plugin task execution will apply the following restrictions. "
+            "Plugin task execution received the following date values. "
             f"Max lookback={max_lookback}, specific date={specific_date}"
         )
+
+        # Ensure we never pass values that exceed the API limit of Proofpoint.
+        # But allow 5 minutes latency window as we actually have now = now - 1 minute
+        api_limit_date = (now - timedelta(hours=API_MAX_LOOKBACK)) + timedelta(minutes=5)
+        if api_limit_date > max_lookback:
+            max_lookback = api_limit_date
+            self.logger.info(f"**Supplied a max lookback further than allowed. Moving this to {api_limit_date}")
+
+        if specific_date:
+            specific_date = datetime(**specific_date, tzinfo=timezone.utc)
+            if api_limit_date > specific_date:
+                self.logger.info(f"**Supplied a specific date further than allowed. Moving this to {api_limit_date}")
+                specific_date = api_limit_date
+
         return max_lookback, specific_date
