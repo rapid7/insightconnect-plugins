@@ -18,17 +18,17 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        name = params.get(Input.ADDRESS_OBJECT, params.get(Input.ADDRESS))
-        address = params.get(Input.ADDRESS)
-        address_type = self._determine_address_type(address)
-        whitelist = params.get(Input.WHITELIST)
-        zone = params.get(Input.ZONE)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        address = params.get(Input.ADDRESS, "")
+        name = params.get(Input.ADDRESS_OBJECT, address)
+        whitelist = params.get(Input.WHITELIST, [])
+        zone = params.get(Input.ZONE, "")
+        skip_private_address = params.get(Input.SKIP_PRIVATE_ADDRESS, False)
+        # END INPUT BINDING - DO NOT REMOVE
 
-        if (
-            params.get(Input.SKIP_PRIVATE_ADDRESS)
-            and address_type != "fqdn"
-            and self._check_if_private(address, address_type)
-        ):
+        address_type = self._determine_address_type(address)
+
+        if skip_private_address and address_type != "fqdn" and self._check_if_private(address, address_type):
             self.logger.error(
                 f"Private IP address '{address}' provided to be blocked.\n"
                 f"To block '{address}' set the Skip Private Address parameter to false."
@@ -121,14 +121,14 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
 
     @staticmethod
     def _determine_address_type(address: str) -> str:
-        if validators.ipv4(address):
-            return "ipv4"
-        if validators.ipv6(address):
-            return "ipv6"
         if validators.domain(address):
             return "fqdn"
         if re.search("/", address):
             return "cidr"
+        if validators.ipv4(address):
+            return "ipv4"
+        if validators.ipv6(address):
+            return "ipv6"
         raise PluginException(
             cause="Unknown address type provided.",
             assistance=f"{address} is not one of the following: IPv4, IPv6, CIDR or domain name.",
