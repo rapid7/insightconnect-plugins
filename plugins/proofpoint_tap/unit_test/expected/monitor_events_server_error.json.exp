@@ -4,6 +4,6 @@
     "last_collection_date": "2023-04-04T05:00:00+00:00",
     "previous_logs_hashes": []
   },
-  "hasMorePages": true,
+  "has_more_pages": false,
   "status_code": 500
 }
