@@ -19,7 +19,7 @@ class UpdateApiKey(insightconnect_plugin_runtime.Action):
         # Get Connection Client
         client = self.connection.client
         # Get Action Parameters
-        id = params.get(Input.ID)
+        key_id = params.get(Input.ID)
         if_match = params.get(Input.IF_MATCH, "")
         name = params.get(Input.NAME)
         status = params.get(Input.STATUS)
@@ -33,7 +33,7 @@ class UpdateApiKey(insightconnect_plugin_runtime.Action):
         # Make Action API Call
         self.logger.info("Making API Call...")
         response = client.api_key.update(
-            key_id=id,
+            key_id=key_id,
             etag=if_match,
             name=name,
             status=status,
