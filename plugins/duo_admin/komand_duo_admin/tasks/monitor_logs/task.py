@@ -418,8 +418,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         utc_filter_value = filter_value.astimezone(timezone.utc)
         api_cutoff_date = current_time - timedelta(hours=API_CUTOFF_HOURS)
         if api_cutoff_date > utc_filter_value:
-            self.logger.info(f"Lookback of {utc_filter_value} is older than 180 days. "
-                             f"Looking back to {api_cutoff_date}...")
+            self.logger.info(
+                f"Lookback of {utc_filter_value} is older than 180 days. Looking back to {api_cutoff_date}..."
+            )
             utc_filter_value = api_cutoff_date
         self.logger.info(f"Task execution for {log_type} will be applying a lookback to {utc_filter_value} UTC...")
         return utc_filter_value
