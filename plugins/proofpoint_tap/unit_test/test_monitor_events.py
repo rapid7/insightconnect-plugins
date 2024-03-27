@@ -95,7 +95,7 @@ class TestMonitorEvents(TestCase):
         self.assertEqual(has_more_pages, True)  # this is different to enforce another call to the third party API
 
         # add in extra failsafe that the `.exp' file has not changed this has_more_pages to True
-        self.assertNotEquals(has_more_pages, expected.get("has_more_pages"))
+        self.assertNotEqual(has_more_pages, expected.get("has_more_pages"))
 
     @patch("komand_proofpoint_tap.tasks.monitor_events.task.SPECIFIC_DATE", new=ENV_VALUE)
     @patch("logging.Logger.info")
@@ -138,7 +138,8 @@ class TestMonitorEvents(TestCase):
         response, state, has_more_pages, status_code, _error = self.action.run({}, {}, cps_config)
 
         # In this example we have an env var specified but this is ignored to use the value in the custom_config
-        self.assertIn(f"Using custom value of {full_lookback_value}", mock_logger.call_args_list[2][0][0])
+        date = datetime(**full_lookback_value)
+        self.assertIn(f"Using custom value of {date}", mock_logger.call_args_list[2][0][0])
 
         # state last time should be custom config value + 1 hour
         self.assertEqual("2024-01-27T01:00:00+00:00", state["last_collection_date"])
@@ -170,4 +171,47 @@ class TestMonitorEvents(TestCase):
                 # get lookback time as task.py does with using now - (lookback + 1 minute latency delay)
                 lookback = new_now - timedelta(hours=config["cutoff"]["hours"], minutes=1)
                 lookback_msg = f"Last collection date reset to max lookback allowed: {lookback.isoformat()}"
-                self.assertEquals(lookback_msg, mock_logger.call_args_list[2][0][0])
+                self.assertEqual(lookback_msg, mock_logger.call_args_list[2][0][0])
+
+    @parameterized.expand(
+        [
+            [
+                "enforced_during_backfill_config",
+                [{}, {"lookback": {"year": 2023, "month": 3, "day": 4}}],
+                ["Supplied a specific date further than allowed. Moving this to 2023-03-28 08:04:00", ""],
+            ],
+            [
+                "enforced_during_lookback_config_date",
+                [{}, {"cutoff": {"date": {"year": 2023, "month": 3, "day": 4}}}],
+                ["Supplied a max lookback further than allowed. Moving this to 2023-03-28 08:04:00", ""],
+            ],
+            [
+                "enforced_during_lookback_config_hours",
+                [{}, {"cutoff": {"hours": 24 * 10}}],  # 10 days lookback
+                ["Supplied a max lookback further than allowed. Moving this to 2023-03-28 08:04:00", ""],
+            ],
+            [
+                "enforced_during_a_state_passed_value",
+                # customer has been paused since 29th March, and have an override cutoff hours to 8
+                [{"last_collection_date": "2023-03-28T07:00:00.406053+00:00"}, {"cutoff": {"hours": 24 * 8}}],
+                [
+                    "Supplied a max lookback further than allowed. Moving this to 2023-03-28 08:04:00",
+                    "Last collection date reset to max lookback allowed",
+                ],
+            ],
+        ]
+    )
+    @patch("logging.Logger.info")
+    def test_api_max_looback_enforced(
+        self, _test_name, task_params, logger_msgs, mock_logger, _mock_request, _mock_time
+    ):
+        # _mock_time is set to be 2023-04-04T08:00:00; we want to pass a date further back that 7 days in different
+        # scenarios and ensure that we don't query the API for Proofpoint as it will error out.
+        state, config = task_params
+        custom_config_logger, saved_state_logger = logger_msgs
+
+        _resp, _state, _has_more_pages, _status_code, _error = self.action.run({}, state, config)
+        self.assertIn(custom_config_logger, mock_logger.call_args_list[2][0][0])
+
+        if saved_state_logger:
+            self.assertIn(saved_state_logger, mock_logger.call_args_list[3][0][0])

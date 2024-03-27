@@ -62,7 +62,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                 task_start = "First run... "
                 first_time = now - timedelta(hours=1)
                 if backfill_date:
-                    first_time = datetime(**backfill_date, tzinfo=timezone.utc)  # PLGN-727: allow backfill
+                    first_time = backfill_date  # PLGN-727: allow backfill
                     task_start += f"Using custom value of {backfill_date}"
                 self.logger.info(task_start)
                 last_time = first_time + timedelta(hours=1)
@@ -211,7 +211,21 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
         env_var_date = loads(SPECIFIC_DATE) if SPECIFIC_DATE else None
         specific_date = custom_config.get("lookback", env_var_date)
         self.logger.info(
-            "Plugin task execution will apply the following restrictions. "
+            "Plugin task execution received the following date values. "
             f"Max lookback={max_lookback}, specific date={specific_date}"
         )
+
+        # Ensure we never pass values that exceed the API limit of Proofpoint.
+        # But allow 5 minutes latency window as we actually have now = now - 1 minute
+        api_limit_date = (now - timedelta(hours=API_MAX_LOOKBACK)) + timedelta(minutes=5)
+        if api_limit_date > max_lookback:
+            max_lookback = api_limit_date
+            self.logger.info(f"**Supplied a max lookback further than allowed. Moving this to {api_limit_date}")
+
+        if specific_date:
+            specific_date = datetime(**specific_date, tzinfo=timezone.utc)
+            if api_limit_date > specific_date:
+                self.logger.info(f"**Supplied a specific date further than allowed. Moving this to {api_limit_date}")
+                specific_date = api_limit_date
+
         return max_lookback, specific_date
