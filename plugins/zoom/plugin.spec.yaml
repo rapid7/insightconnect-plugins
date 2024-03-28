@@ -3,8 +3,16 @@ extension: plugin
 products: [insightconnect]
 name: zoom
 title: Zoom
-description: Trigger workflows on user activity while also managing your users with the Zoom plugin
-version: 4.1.7
+description: "[Zoom](https://zoom.us) is a cloud platform for video and audio conferencing, chat, and webinars. The Zoom plugin allows you to add and remove users as part of of workflow, while also providing the ability to trigger workflows on new user sign-in and sign-out activity events. \n\nThis plugin uses the [Zoom API](https://marketplace.zoom.us/docs/api-reference/introduction) and requires a Pro, Business, or Enterprise plan"
+key_features: 
+  - "Trigger workflows on user sign-in and sign-out activity events"
+  - "Add and remove user accounts to automate provisioning/deprovisioning of users"
+requirements:
+  - "Must have Zoom Pro, Business, or Enterprise plan to support REST API"
+  - "API credentials for OAuth 2.0:
+      \n\t* Requires account ID as well as client ID and secret from a Server-to-Server OAuth app in the Zoom Marketplace.
+      \n\t* Server-to-Server OAuth app has the `report:read:admin` scope enabled."
+version: 4.1.8
 connection_version: 4
 vendor: rapid7
 support: rapid7
@@ -14,7 +22,7 @@ cloud_ready: true
 tags: [zoom, chat]
 sdk:
   type: full
-  version: 5.4.4
+  version: 5.4.5
   user: nobody
 hub_tags:
   use_cases: [alerting_and_notifications, application_management, threat_detection_and_response, user_management]
@@ -26,6 +34,28 @@ resources:
   vendor_url: https://www.zoom.com/
 enable_cache: false
 
+version_history:
+  - "4.1.8 - Updated to include latest SDK functionality v5.4.5 | Adding logic to `monitor_sign_in_out_activity` task to keep paginating until endtime catches up to now"
+  - "4.1.7 - Updated to include latest SDK functionality"
+  - "4.1.6 - Adding better handling to `monitor_sign_in_out_activity` task, if the users account does not have all of the required permissions | Include SDK 5.4 which adds new task custom_config parameter"
+  - "4.1.5 - Monitor Sign in and out Activity: Added exception logging and bumped latest plugin SDK"
+  - "4.1.4 - Update to the latest plugin SDK"
+  - "4.1.3 - Monitor Sign in and out Activity: set cutoff time of 24 hours"
+  - "4.1.2 - Fix required fields for GetUserOutput schema"
+  - "4.1.1 - Fix external pagination support for Monitor Sign in and Out Activity task"
+  - "4.1.0 - Implement external pagination for Monitor Sign in and Out Activity task | Update to latest plugin SDK"
+  - "4.0.2 - Reordered status checks to avoid JSON parsing issue with 204s | Added examples to spec file and help.md"
+  - "4.0.1 - Return Zoom API status codes in Monitor Sign in And Out Activity task state"
+  - "4.0.0 - Fix time boundary checking in Monitor Sign in And Out Activity task by tracking last request time instead of latest event time | Remove JWT authentication"
+  - "3.0.0 - Add back JWT authentication in addition to OAuth (please note JWT will be removed from the Zoom API in June 2023) | Improve OAuth logic to help prevent infinite looping"
+  - "2.1.0 - Create user: Removed redundant enum option from `type` input | Added unit tests | Improve authentication logic"
+  - "2.0.0 - Update connection for latest Zoom API authentication | Add Monitor Sign In and Out Activity task"
+  - "1.0.0 - Initial plugin"
+references:
+  - "[Zoom](https://zoom.us/)"
+  - "[Zoom API Documentation](https://marketplace.zoom.us/docs/api-reference/introduction)"
+links:
+  - "[Zoom](https://zoom.us/)"
 connection:
   client_id:
     title: Client ID
