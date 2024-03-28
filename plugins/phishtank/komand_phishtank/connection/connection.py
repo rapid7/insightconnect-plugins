@@ -1,5 +1,10 @@
+import logging
+
 import insightconnect_plugin_runtime
-from .schema import ConnectionSchema
+from .schema import ConnectionSchema, Input
+
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from ..util.api import API
 
 # Custom imports below
 import json
@@ -10,28 +15,21 @@ import urllib
 class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
+        self.api = None
 
-    def check(self, url):
-        r = requests.post(
-            "https://checkurl.phishtank.com/checkurl/",
-            data={
-                "format": "json",
-                "url": urllib.quote(url),
-                "app_key": self.parameters.get("credentials").get("secretKey"),
-            },
-            timeout=60,
-        )
-        result = r.json()["results"]
+    def connect(self, params):
+        self.logger.info("Connect: Connecting...")
+        # creds aren't required - going to fail unit tests if empty - needs handled
+        credentials = Input.CREDENTIALS
+        logging.info(f"THIS IS FROM CONNECTION - CREDS: {credentials}")
+        self.api = API(credentials=credentials)
+        logging.info(f"THIS IS FROM CONNECTION - API CREDS: {credentials}")
 
-        if result.get("phish_detail_page"):
-            result["phish_detail_url"] = result["phish_detail_page"]
-            del result["phish_detail_page"]
-
-        return result
-
-    def connect(self, params):  # pylint: disable=unused-argument
-        """
-        Connection config params are supplied as a dict in
-        params or also accessible in self.parameters['key']
-        """
-        self.logger.info("Connecting to Phishtank...")
+    def test(self):
+        endpoint = "phishtank/status"
+        try:
+            self.api.check(endpoint)  # changed send to check
+            return {"success": True}
+        except Exception as exception:
+            self.logger.error(f"Error: {str(exception)}")
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED, data=exception)
