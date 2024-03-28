@@ -1,6 +1,6 @@
 # Description
 
-[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.18 and its standard library as well as the following 3rd party libraries: 
+[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.19 and its standard library as well as the following 3rd party libraries: 
 
 * [requests 2.31.0](https://requests.readthedocs.io/en/master/)
 * [maya 0.6.1](https://pypi.python.org/pypi/maya)
@@ -14,7 +14,7 @@ The Python 3 Script plugin also allows you to load custom modules via its connec
 Also, this plugin allows you to provide additional credentials in the connection such as username, password, secret_key available in the script as Python variables (`username`, `password`, `secret_key`). 
 
 # Key Features
-  
+
 * Run a Python 3 Script to securely orchestrate, automate, and respond to (almost) anything
 
 # Requirements
@@ -22,13 +22,13 @@ Also, this plugin allows you to provide additional credentials in the connection
 *This plugin does not contain any requirements.*
 
 # Supported Product Versions
-  
-* Python 3.9.18
+
+* Python 3.9.19
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -37,7 +37,7 @@ The connection configuration accepts the following parameters:
 |script_secret_key|credential_secret_key|None|False|Credential secret key available in script as python variable (`secret_key`)|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|
 |script_username_and_password|credential_username_password|None|False|Username and password available in script as python variables (`username`, `password`)|None|{"username": "user", "password": "mypassword"}|
 |timeout|integer|60|True|Timeout (in seconds) for installing third-party modules|None|120|
-  
+
 Example input:
 
 ```
@@ -63,7 +63,7 @@ Example input:
 
 
 #### Run Function
-  
+
 This action is used to run a Python 3 function
 
 ##### Input
@@ -134,15 +134,16 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 
 # Version History
 
+* 4.0.10 - Updated the SDK to the latest version | Updated Python version to `3.9.19` | Fixed issue with invalid unicode character
 * 4.0.9 - Updated the SDK to the latest version to address memory usage issues
 * 4.0.8 - Updated the SDK to latest version | Fix issue where input argument was too long
 * 4.0.7 - Updated the SDK | Updated Python version to `3.9.18` | Added handler to run function separately
 * 4.0.6 - Added empty `__init__.py` file to `unit_test` folder | Refreshed with new tooling
 * 4.0.5 - Updated the SDK version to include output masking | Updated all dependencies to the newest versions
 * 4.0.4 - Update Pyyaml to version 6.0.0
-* 4.0.3 - Run: Fix logging issue 
+* 4.0.3 - Run: Fix logging issue
 * 4.0.2 - Run: Fix issue with indentation where users have non-empty credentials for input function
-* 4.0.1 - Resolve issue where users experience issues with installing Python packages, and indentation for input function 
+* 4.0.1 - Resolve issue where users experience issues with installing Python packages, and indentation for input function
 * 4.0.0 - Add custom script credentials in Connection
 * 3.0.0 - Add custom credentials in Run action
 * 2.0.4 - Update help documentation for installing third-party modules
@@ -153,7 +154,7 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 * 1.0.6 - Fix issue where undefined output exceptions were not being handled correctly
 * 1.0.5 - Add `utilities` plugin tag for Marketplace searchability
 * 1.0.4 - Fix issue where run action was excluded from plugin on build
-* 1.0.3 - Update to v2 Python plugin architecture | Support web server mode | Add and pin 3rd party libraries: lxml, beautifulsoup, pyyaml, maya, and records
+* 1.0.3 - Update to v2 Python plugin architecture | Support web server mode | Add and pin 3rd party libraries: lxml, beautifulsoup, pyyaml, maya, and records;
 * 1.0.2 - SDK update
 * 1.0.1 - SSL bug fix in SDK
 * 0.1.0 - Initial plugin
@@ -163,6 +164,6 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 * [Python](https://www.python.org/)
 
 ## References
-  
+
 * [Python 3 Language Reference](https://docs.python.org/3/reference/index.html)
 * [InsightConnect Python Plugin Guide](https://docs.rapid7.com/insightconnect/python-2-or-3-script/)
