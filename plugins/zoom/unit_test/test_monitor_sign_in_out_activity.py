@@ -67,6 +67,7 @@ STUB_EVENTS = [Event(**sample) for sample in STUB_SAMPLES]
 
 STUB_DATETIME_LAST_24_HOURS = datetime.datetime(2023, 2, 22, 22, 0, 0)
 STUB_DATETIME_NOW = datetime.datetime(2023, 2, 23, 22, 0, 0)
+STUB_DATETIME_FUTURE = datetime.datetime(2024, 2, 23, 22, 0, 0)
 DEFAULT_TIMEDELTA = 5
 
 STUB_EXPECTED_PREVIOUS_OUTPUT = [
@@ -410,3 +411,37 @@ class TestGetUserActivityEvents(unittest.TestCase):
             page_size=expected_api_call_params.get("page_size"),
             next_page_token=expected_api_call_params.get("next_page_token"),
         )
+
+    @patch(GET_DATETIME_LAST_X_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
+    @patch(GET_DATETIME_NOW_PATH, side_effect=[STUB_DATETIME_FUTURE])
+    @patch(GET_USER_ACTIVITY_EVENTS_PATH, return_value=(STUB_EXPECTED_PREVIOUS_OUTPUT, ""))
+    def test_backfill_continiuous_pagination(
+        self, mock_call: MagicMock, mock_datetime_now: MagicMock, mock_datetime_last_24: MagicMock
+    ) -> None:
+
+        state = {
+            "param_end_date": "2023-02-23T22:00:00Z",
+            "param_start_date": "2023-02-22T21:44:44Z",
+            "previous_run_state": "paginating",
+            "next_page_token": "123456789abcdefgh",
+        }
+
+        expected_output, expected_has_more_pages, expected_status_code, expected_error = (
+            STUB_EXPECTED_PREVIOUS_OUTPUT,
+            True,
+            200,
+            None,
+        )
+
+        expected_state = {"previous_run_state": "paginating", "last_request_timestamp": "2024-02-23T22:00:00Z"}
+
+        output, state, has_more_pages, status_code, error = self.task.run(state=state)
+
+        self.assertListEqual(output, expected_output)
+        self.assertDictEqual(state, expected_state)
+        self.assertEqual(has_more_pages, expected_has_more_pages)
+        self.assertEqual(status_code, expected_status_code)
+        self.assertEqual(error, expected_error)
+
+        validate(output, MonitorSignInOutActivityOutput.schema)
+        validate(state, MonitorSignInOutActivityState.schema)

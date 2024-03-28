@@ -1,11 +1,8 @@
 # Description
 
-[Zoom](https://zoom.us) is a cloud platform for video and audio conferencing, chat, and webinars. The Zoom plugin allows 
-you to add and remove users as part of of workflow, while also providing the ability to trigger workflows on new user 
-sign-in and sign-out activity events.
+[Zoom](https://zoom.us) is a cloud platform for video and audio conferencing, chat, and webinars. The Zoom plugin allows you to add and remove users as part of of workflow, while also providing the ability to trigger workflows on new user sign-in and sign-out activity events. 
 
-This plugin uses the [Zoom API](https://marketplace.zoom.us/docs/api-reference/introduction) and requires a Pro, 
-Business, or Enterprise plan.
+This plugin uses the [Zoom API](https://marketplace.zoom.us/docs/api-reference/introduction) and requires a Pro, Business, or Enterprise plan
 
 # Key Features
 
@@ -15,18 +12,18 @@ Business, or Enterprise plan.
 # Requirements
 
 * Must have Zoom Pro, Business, or Enterprise plan to support REST API
-* API credentials for OAuth 2.0:
-  * Requires account ID as well as client ID and secret from a Server-to-Server OAuth app in the Zoom Marketplace.
-  * Server-to-Server OAuth app has the `report:read:admin` scope enabled.
-    
+* API credentials for OAuth 2.0: 
+	* Requires account ID as well as client ID and secret from a Server-to-Server OAuth app in the Zoom Marketplace. 
+	* Server-to-Server OAuth app has the `report:read:admin` scope enabled.
+
 # Supported Product Versions
-  
+
 * Zoom API v2.10
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -35,7 +32,7 @@ The connection configuration accepts the following parameters:
 |authentication_retry_limit|integer|5|True|How many times to retry authentication to Zoom before failing, required for OAuth authentication|None|5|
 |client_id|string|None|True|Zoom app client ID, required for OAuth authentication|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |client_secret|credential_secret_key|None|True|Zoom app client secret, required for OAuth authentication|None|{'secretKey': '9de5069c5afe602b2ea0a04b66beb2c0'}|
-  
+
 Example input:
 
 ```
@@ -55,7 +52,7 @@ Example input:
 
 
 #### Create User
-  
+
 This action is used to create user associated to account
 
 ##### Input
@@ -103,7 +100,7 @@ Example output:
 ```
 
 #### Delete User
-  
+
 This action is used to delete or disassociate user from account
 
 ##### Input
@@ -145,7 +142,7 @@ Example output:
 ```
 
 #### Get User
-  
+
 This action is used to get user in Zoom account
 
 ##### Input
@@ -185,7 +182,7 @@ Example output:
 
 
 #### User Activity Event
-  
+
 This trigger is used to poll for user activity events
 
 ##### Input
@@ -226,7 +223,7 @@ Example output:
 
 
 #### Monitor Sign in and out Activity
-  
+
 This task is used to monitor sign in and out activity
 
 ##### Input
@@ -312,6 +309,7 @@ Example output:
 
 # Version History
 
+* 4.1.8 - Updated to include latest SDK functionality v5.4.5 | Adding logic to `monitor_sign_in_out_activity` task to keep paginating until endtime catches up to now
 * 4.1.7 - Updated to include latest SDK functionality
 * 4.1.6 - Adding better handling to `monitor_sign_in_out_activity` task, if the users account does not have all of the required permissions | Include SDK 5.4 which adds new task custom_config parameter
 * 4.1.5 - Monitor Sign in and out Activity: Added exception logging and bumped latest plugin SDK
