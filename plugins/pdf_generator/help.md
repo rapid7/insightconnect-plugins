@@ -73,6 +73,7 @@ Example output:
 
 # Version History
 
+* 1.0.5 - Pin additional version dependency
 * 1.0.4 - Update SDK | Update vulnerable libraries
 * 1.0.3 - Change library to generate PDF
 * 1.0.2 - Update plugin runtime to InsightConnect | Add unit tests | Updated all dependencies to the newest versions
