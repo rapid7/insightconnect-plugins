@@ -4,12 +4,13 @@ products: [insightconnect]
 name: pdf_generator
 title: PDF Generator
 description: The PDF Generator plugin creates a PDF from user provided data
-version: 1.0.4
+version: 1.0.5
 supported_versions: ["Pillow 10.2.0"]
 vendor: rapid7
 key_features:
   - Generate a PDF
 version_history:
+  - 1.0.5 - Pin additional version dependency
   - 1.0.4 - Update SDK | Update vulnerable libraries
   - 1.0.3 - Change library to generate PDF
   - 1.0.2 - Update plugin runtime to InsightConnect | Add unit tests | Updated all dependencies to the newest versions
