@@ -198,7 +198,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             state[self.PARAM_END_DATE] = param_request_end_date
         else:
             if now != param_request_end_date:
-                self.logger.info("No pagination token returned by Zoom API - but end time has not caught up till now")
+                self.logger.info(
+                    "No pagination token returned by Zoom API - but end time has not caught up to current time"
+                )
                 has_more_pages = True
             else:
                 self.logger.info("No pagination token returned by Zoom API - all pages have been consumed")
