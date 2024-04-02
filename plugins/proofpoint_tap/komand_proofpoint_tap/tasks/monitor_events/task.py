@@ -118,7 +118,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                 state[self.PREVIOUS_LOGS_HASHES] = (
                     [*previous_logs_hashes, *new_logs_hashes] if current_page_index > 0 else new_logs_hashes
                 )
-                self.logger.info(f"Retrieved {len(new_unique_logs)} events")
+                self.logger.info(f"Retrieved {len(new_unique_logs)} events. Returning has_more_pages={has_more_pages}")
                 return new_unique_logs, state, has_more_pages, 200, None
 
             except ApiException as error:
@@ -151,6 +151,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
         else:
             end_str, now_str = query_params.get("interval").split("/")[1], now.isoformat().replace("z", "")
             if now_str != end_str:  # we want to force more pages if the end query time is not 'now'
+                self.logger.info("Setting has more pages to True as interval params is not querying until now")
                 has_more_pages = True
 
         return state, has_more_pages
