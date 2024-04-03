@@ -376,7 +376,8 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         )
         self.logger.info(f"Parameters for get trust monitor events set to {parameters}")
         response = self.connection.admin_api.get_trust_monitor_events(parameters).get("response", {})
-        self.logger.info(f"Response returned from get trust monitor events: {response}")
+        self.logger.info(f"Parameters to return from get admin logs set to {parameters}. "
+                         f"Return {len(response.get('events', []))} events")
         offset = response.get("metadata", {}).get("next_offset")
         if offset:
             parameters["offset"] = offset
