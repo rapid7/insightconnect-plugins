@@ -24,6 +24,7 @@ The connection configuration accepts the following parameters:
 |domain|string|None|False|The Symantec Endpoint Protection Manager domain to which the username logs on|None|mydomain|
 |host|string|None|True|Symantec Endpoint Protection Manager host, either IP address or domain|None|sepm-14|
 |port|integer|8446|True|Symantec Endpoint Protection server port, typically 8446|None|8446|
+|ssl_verify|boolean|None|True|Whether to enable SSL verification for HTTP requests|None|True|
   
 Example input:
 
@@ -35,7 +36,8 @@ Example input:
   },
   "domain": "mydomain",
   "host": "sepm-14",
-  "port": 8446
+  "port": 8446,
+  "ssl_verify": true
 }
 ```
 
@@ -479,6 +481,7 @@ Domain IDs are not the actual domain names - they are individual, unique IDs tha
 
 # Version History
 
+* 2.0.0 - Update Connection to add `ssl_verify` parameters to enable SSL verification on HTTP requests
 * 1.0.3 - Update SDK to version to 5.4.4 | Update aiohttp to 3.9.2
 * 1.0.2 - Update Blacklist action to not accept SHA256 hashes
 * 1.0.1 - Workflow usability fixes
