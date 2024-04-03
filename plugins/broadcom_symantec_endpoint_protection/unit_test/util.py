@@ -21,7 +21,7 @@ class Util:
             Input.PORT: 8446,
             Input.CREDENTIALS: {"username": "example", "password": "test"},
             Input.DOMAIN: "example.com",
-            Input.SSL_VERIFY: False
+            Input.SSL_VERIFY: False,
         }
         default_connection.connect(params)
         action.connection = default_connection

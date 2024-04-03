@@ -27,7 +27,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 domain=domain,
                 port=port,
                 logger=self.logger,
-                ssl_verify=ssl_verify
+                ssl_verify=ssl_verify,
             )
             self.logger.info("Connection to Symantec Endpoint Protection console succeeeded!")
         except APIException as e:

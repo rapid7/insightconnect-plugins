@@ -77,7 +77,9 @@ class APIClient(object):
         :return: aiohttp ClientSession
         """
 
-        return aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=self.ssl_verify), headers=self._get_headers())
+        return aiohttp.ClientSession(
+            connector=aiohttp.TCPConnector(verify_ssl=self.ssl_verify), headers=self._get_headers()
+        )
 
     @classmethod
     def new_client(
