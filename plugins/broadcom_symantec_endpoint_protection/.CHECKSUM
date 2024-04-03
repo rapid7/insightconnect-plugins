@@ -1,7 +1,7 @@
 {
-	"spec": "bf7f7539abfd1a9c39aedd93594299f6",
-	"manifest": "877d4cd92c355f3c74696520d78f6597",
-	"setup": "df04113e2a2489de6a3671b55d6914d1",
+	"spec": "542f337ecd6428f2c3b82f3d52714f10",
+	"manifest": "81a3a6d86e8a463f6a91de0b6ed34f4a",
+	"setup": "a3dc197b2aaf9c332fedd13b439bbca6",
 	"schemas": [
 		{
 			"identifier": "blacklist/schema.py",
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "8654b0042090f6b1235a13c3c3c79e4e"
+			"hash": "5aa77374e716b052e414799329ac69aa"
 		}
 	]
 }

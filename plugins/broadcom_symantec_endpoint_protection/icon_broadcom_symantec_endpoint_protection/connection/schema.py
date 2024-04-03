@@ -8,6 +8,7 @@ class Input:
     DOMAIN = "domain"
     HOST = "host"
     PORT = "port"
+    SSL_VERIFY = "ssl_verify"
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -40,12 +41,19 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "Symantec Endpoint Protection server port, typically 8446",
       "default": 8446,
       "order": 2
+    },
+    "ssl_verify": {
+      "type": "boolean",
+      "title": "SSL Verify",
+      "description": "Whether to enable SSL verification for HTTP requests",
+      "order": 5
     }
   },
   "required": [
     "credentials",
     "host",
-    "port"
+    "port",
+    "ssl_verify"
   ],
   "definitions": {
     "credential_username_password": {
