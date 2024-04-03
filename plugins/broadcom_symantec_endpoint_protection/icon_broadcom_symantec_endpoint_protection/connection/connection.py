@@ -17,6 +17,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         username = params.get(Input.CREDENTIALS)["username"]
         password = params.get(Input.CREDENTIALS)["password"]
         domain = params.get(Input.DOMAIN, "")
+        ssl_verify = params.get(Input.SSL_VERIFY, False)
 
         try:
             self.api_client: APIClient = APIClient.new_client(
@@ -26,6 +27,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 domain=domain,
                 port=port,
                 logger=self.logger,
+                ssl_verify=ssl_verify
             )
             self.logger.info("Connection to Symantec Endpoint Protection console succeeeded!")
         except APIException as e:

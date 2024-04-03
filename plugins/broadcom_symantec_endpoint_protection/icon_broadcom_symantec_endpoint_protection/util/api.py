@@ -55,11 +55,11 @@ class APIClient(object):
         ),
     }
 
-    def __init__(self, base_url: str, auth_token: str, logger: Logger):
+    def __init__(self, base_url: str, auth_token: str, logger: Logger, ssl_verify: bool):
         self.base_url = base_url
         self.auth_token = auth_token
         self.logger = logger
-
+        self.ssl_verify = ssl_verify
         self.session = requests.Session()
         self.session.headers = self._get_headers()
 
@@ -77,7 +77,7 @@ class APIClient(object):
         :return: aiohttp ClientSession
         """
 
-        return aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False), headers=self._get_headers())
+        return aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=self.ssl_verify), headers=self._get_headers())
 
     @classmethod
     def new_client(
@@ -87,6 +87,7 @@ class APIClient(object):
         password: str,
         domain: str,
         port: str,
+        ssl_verify: bool,
         logger: Optional[Logger] = None,
     ):
         """
@@ -110,7 +111,7 @@ class APIClient(object):
 
         auth_body = {"username": username, "password": password, "domain": domain}
         headers = {"Content-Type": "application/json"}
-        response = requests.post(url=auth_url, json=auth_body, headers=headers, verify=False)  # noqa: B501
+        response = requests.post(url=auth_url, json=auth_body, headers=headers, verify=ssl_verify)  # noqa: B501
         logger.info("Received status code '%s' from Symantec Endpoint Protection console.", response.status_code)
 
         if response.status_code == 200:
@@ -127,7 +128,7 @@ class APIClient(object):
                     message="Symantec Endpoint Protection did not return the " "authentication token!",
                 )
             logger.info("Authentication with Symantec Endpoint Protection console successful!")
-            return cls(base_url=url, auth_token=auth_token, logger=logger)
+            return cls(base_url=url, auth_token=auth_token, logger=logger, ssl_verify=ssl_verify)
         elif cls._STATUS_CODES.get(response.status_code) is not None:
             raise cls._STATUS_CODES[response.status_code]
         else:
@@ -148,7 +149,7 @@ class APIClient(object):
 
         query_params = {"computerName": computer_name, "mac": mac_address}
 
-        response = self.session.get(url=url, verify=False, params=query_params)
+        response = self.session.get(url=url, verify=self.ssl_verify, params=query_params)
 
         if response.status_code == 200:
             try:
@@ -279,7 +280,7 @@ class APIClient(object):
         else:
             params["hardware_ids"] = hardware_ids
 
-        response = self.session.post(url=url, params=params, verify=False)
+        response = self.session.post(url=url, params=params, verify=self.ssl_verify)
 
         if response.status_code == 200:
             try:
@@ -308,7 +309,7 @@ class APIClient(object):
 
         url = f"{self.base_url}/domains"
 
-        response = self.session.get(url=url, verify=False)
+        response = self.session.get(url=url, verify=self.ssl_verify)
 
         if response.status_code == 200:
             try:

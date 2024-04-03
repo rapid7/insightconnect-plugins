@@ -4,8 +4,8 @@ products: ["insightconnect"]
 name: broadcom_symantec_endpoint_protection
 title: Broadcom Symantec Endpoint Protection
 description: Broadcom Symantec Endpoint Protection delivers the most complete, integrated endpoint security platform on the planet
-version: 1.0.3
-connection_version: 1
+version: 2.0.0
+connection_version: 2
 vendor: rapid7
 sdk:
   type: slim
@@ -803,6 +803,12 @@ connection:
     description: The Symantec Endpoint Protection Manager domain to which the username logs on
     required: false
     example: mydomain
+  ssl_verify:
+    title: SSL Verify
+    type: boolean
+    description: Whether to enable SSL verification for HTTP requests
+    required: true
+    example: true
 
 actions:
   get_agent_details:
