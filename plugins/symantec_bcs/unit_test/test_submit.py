@@ -3,7 +3,7 @@ import os
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_symantec_bcs.actions.submit import Submit
@@ -12,6 +12,7 @@ from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
 from jsonschema import validate
+
 
 class TestSubmit(TestCase):
     @classmethod
@@ -35,30 +36,20 @@ class TestSubmit(TestCase):
 
     @parameterized.expand(
         [
-            [
-                "400",
-                Util.read_file_to_dict("input/submit_400.json.inp"),
-                "HTTP error occurred",
-                "Error: 400"
-            ],
+            ["400", Util.read_file_to_dict("input/submit_400.json.inp"), "HTTP error occurred", "Error: 400"],
             [
                 "ConnectionError",
                 Util.read_file_to_dict("input/submit_connection.json.inp"),
                 "A network problem occurred",
-                "Error: ConnectionError"
+                "Error: ConnectionError",
             ],
-            [
-                "Timeout",
-                Util.read_file_to_dict("input/submit_timeout.json.inp"),
-                "timeout",
-                "Error: Timeout"
-            ],
+            ["Timeout", Util.read_file_to_dict("input/submit_timeout.json.inp"), "timeout", "Error: Timeout"],
             [
                 "TooManyRedirects",
                 Util.read_file_to_dict("input/submit_redirect.json.inp"),
                 "Too many redirects!",
-                "Error: TooManyRedirects"
-            ]
+                "Error: TooManyRedirects",
+            ],
         ]
     )
     @patch("requests.post", side_effect=Util.mock_request)
