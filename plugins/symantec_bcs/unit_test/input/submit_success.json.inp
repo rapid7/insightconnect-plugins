@@ -1,0 +1,12 @@
+{
+    "cname": "Example",
+    "comments": "success",
+    "critical": false,
+    "data": "U0dWc2JHOGdkMjl5YkdRPT0K",
+    "email": "example@example.com",
+    "filename": "examplefile.txt",
+    "fname": "John",
+    "lname": "Smith",
+    "pin": "12345",
+    "stype": "upfile"
+}

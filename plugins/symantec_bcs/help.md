@@ -11,7 +11,7 @@ _This plugin does not contain any requirements._
 
 # Supported Product Versions
 
-* 2023-05-16
+* 2024-04-04
 
 # Documentation
 
@@ -37,8 +37,8 @@ This action is used to submit a malicious file or hash.
 |fname|string|None|True|First name|None|John|
 |lname|string|None|True|Last name|None|Smith|
 |pin|string|None|True|Support ID number|None|1|
-|stype|string|None|True|Submission type|['upfile', 'url', 'hash']|upfile|
-  
+|stype|string|None|True|Submission type|["upfile", "url", "hash"]|upfile|
+
 Example input:
 
 ```
@@ -83,6 +83,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.3 - Update requests module to version included with InsightConnect Plugin Runtime
 * 1.0.2 - Update requests to 2.20.0 | Update to insightconnect-plugin-runtime | Fix Error handling
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode

@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import SubmitInput, SubmitOutput
+from .schema import SubmitInput, SubmitOutput, Component, Output, Input
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -13,7 +13,7 @@ class Submit(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="submit",
-            description="Submit a malicious file or hash",
+            description=Component.DESCRIPTION,
             input=SubmitInput(),
             output=SubmitOutput(),
         )
@@ -60,27 +60,27 @@ class Submit(insightconnect_plugin_runtime.Action):
         # Content-Disposition: form-data; name="upfile"; filename="setup.exe"
         # Content-Type: application/x-msdownload
 
-        stype = params.get("stype")
+        stype = params.get(Input.STYPE)
         headers = {
             "Origin": "https://submit.symantec.com",
             "Referer": "https://submit.symantec.com/websubmit/bcs.cgi",
         }
         req = {
             "mode": (None, "2"),
-            "fname": (None, params.get("fname")),
-            "lname": (None, params.get("lname")),
-            "cname": (None, params.get("cname")),
-            "email": (None, params.get("email")),
-            "email2": (None, params.get("email")),
-            "pin": (None, params.get("pin")),
+            "fname": (None, params.get(Input.FNAME)),
+            "lname": (None, params.get(Input.LNAME)),
+            "cname": (None, params.get(Input.CNAME)),
+            "email": (None, params.get(Input.EMAIL)),
+            "email2": (None, params.get(Input.EMAIL)),
+            "pin": (None, params.get(Input.PIN)),
             "stype": (None, stype),
-            "comments": (None, params.get("comments")),
+            "comments": (None, params.get(Input.COMMENTS)),
         }
 
-        if params.get("critical") is True:
+        if params.get(Input.CRITICAL) is True:
             req["critical"] = (None, "on")
 
-        data = params.get("data", "")
+        data = params.get(Input.DATA, "")
 
         if stype == "url":
             self.logger.info("URL specified")
@@ -105,7 +105,7 @@ class Submit(insightconnect_plugin_runtime.Action):
 
         if stype == "upfile":
             self.logger.info("File specified")
-            filename = params.get("filename")
+            filename = params.get(Input.FILENAME)
             if not filename:
                 filename = "komand-uploaded.file"
             self.logger.info(f"Filename: {filename}")
@@ -173,4 +173,4 @@ class Submit(insightconnect_plugin_runtime.Action):
             raise PluginException(cause="Too many redirects!", assistance=f"Error: {str(error)}")
         except Exception as error:
             raise PluginException(cause=PluginException.Preset.UNKNOWN, assistance=f"Error: {str(error)}")
-        return {"response": out.decode()}
+        return {Output.RESPONSE: out.decode()}
