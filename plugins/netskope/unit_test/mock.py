@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Callable
+from typing import Any, Callable, Dict
 from unittest import mock
 
 import requests
@@ -34,19 +34,20 @@ def mocked_request(side_effect: Callable) -> None:
     mock_function.request = mock.Mock(side_effect=side_effect)
 
 
-def mock_conditions_actions_api_v1(url: str, status_code: int, params: dict = None) -> MockResponse:
-    if url == f"https://{STUB_TENANT_NAME}.goskope.com/api/v1/updateFileHashList/":
+def mock_conditions_actions_api_v1(url: str, status_code: int, params: Dict[str, Any] = None) -> MockResponse:
+    if url == f"https://{STUB_TENANT_NAME}.goskope.com/api/v1/updateFileHashList":
         if status_code == 409:
             return MockResponse("test_create_new_url_list_bad_json_response", 200)
         if not all((params.get("name", False), params.get("list", False))):
             return MockResponse("test_update_file_hash_list_bad", status_code)
         return MockResponse("test_update_file_hash_list_ok", status_code)
-
     raise Exception("Response has been not implemented")
 
 
-def mock_conditions_actions_api_v2(method: str, url: str, status_code: int, params: dict = None) -> MockResponse:
-    if url == f"https://{STUB_TENANT_NAME}.goskope.com/api/v2/policy/urllist/":
+def mock_conditions_actions_api_v2(
+    method: str, url: str, status_code: int, params: Dict[str, Any] = None
+) -> MockResponse:
+    if url == f"https://{STUB_TENANT_NAME}.goskope.com/api/v2/policy/urllist":
         if method == "GET":
             if params and params.get("pending") == 1:
                 return MockResponse("test_get_all_url_list_ok_pending", status_code)
@@ -55,7 +56,7 @@ def mock_conditions_actions_api_v2(method: str, url: str, status_code: int, para
             if status_code == 409:
                 return MockResponse("test_create_new_url_list_bad_json_response", 200)
             return MockResponse("test_create_new_url_list_ok", status_code)
-    if url == f"https://{STUB_TENANT_NAME}.goskope.com/api/v2/policy/urllist/file/":
+    if url == f"https://{STUB_TENANT_NAME}.goskope.com/api/v2/policy/urllist/file":
         if method == "POST":
             return MockResponse("test_upload_json_config_ok", status_code)
     if url == f"https://{STUB_TENANT_NAME}.goskope.com/api/v2/policy/urllist/{STUB_ID}":
@@ -64,13 +65,12 @@ def mock_conditions_actions_api_v2(method: str, url: str, status_code: int, para
     if url == f"https://{STUB_TENANT_NAME}.goskope.com/api/v2/policy/urllist/{STUB_ID}/{STUB_ACTION}":
         if method == "PATCH":
             return MockResponse("test_get_url_list_by_id_ok", status_code)
-    if url == f"https://{STUB_TENANT_NAME}.goskope.com/api/v2/policy/urllist/deploy/":
+    if url == f"https://{STUB_TENANT_NAME}.goskope.com/api/v2/policy/urllist/deploy":
         if method == "POST":
             return MockResponse("test_apply_pending_url_list_changes_ok", status_code)
     if url == f"https://{STUB_TENANT_NAME}.goskope.com/api/v2/ubadatasvc/user/uci":
         if method == "POST":
             return MockResponse("test_get_single_user_confidence_index_ok", status_code)
-
     raise Exception("Response has been not implemented")
 
 
@@ -80,9 +80,8 @@ def mock_conditions_connection(url: str, status_code: int) -> MockResponse:
             return MockResponse("test_connection_ok", status_code)
         elif status_code >= 400:
             return MockResponse("test_connection_bad", status_code)
-    if url == f"https://{STUB_TENANT_NAME}.goskope.com/api/v2/policy/urllist/":
+    if url == f"https://{STUB_TENANT_NAME}.goskope.com/api/v2/policy/urllist":
         return MockResponse("test_get_all_url_list_ok_pending", status_code)
-
     raise Exception("Response has been not implemented")
 
 

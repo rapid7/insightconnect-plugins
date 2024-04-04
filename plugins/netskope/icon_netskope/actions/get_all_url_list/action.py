@@ -13,13 +13,15 @@ class GetAllUrlList(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        request_params = (
-            {"pending": self._check_pending(params.get(Input.STATUS))} if params.get(Input.STATUS) != "any" else None
-        )
-        response = self.connection.client.get_all_url_list(request_params)
-        if response:
-            return {Output.URLLISTS: response}
-        return {Output.URLLISTS: []}
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        status = params.get(Input.STATUS)
+        # END INPUT BINDING - DO NOT REMOVE
 
-    def _check_pending(self, pending_value: str) -> int:
+        response = self.connection.client.get_all_url_list(
+            {"pending": self._check_pending(status)} if status != "any" else None
+        )
+        return {Output.URLLISTS: response if response else []}
+
+    @staticmethod
+    def _check_pending(pending_value: str) -> int:
         return 1 if pending_value == "pending" else 0

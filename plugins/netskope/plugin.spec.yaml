@@ -4,10 +4,11 @@ products: [insightconnect]
 name: netskope
 title: Netskope
 description: This plugin allows users to create, read, update, and delete URL lists in their Netskope environment
-version: 1.0.1
+version: 1.0.2
+connection_version: 1
 vendor: rapid7
 support: rapid7
-supported_versions: ["2022-04-26"]
+supported_versions: ["2024-04-02"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/netskope
@@ -21,6 +22,32 @@ hub_tags:
   use_cases: [cloud_security]
   keywords: [endpoint]
   features: []
+sdk:
+  type: slim
+  version: 5.4.5
+  user: nobody
+key_features:
+  - Apply currently pending changes for URL lists
+  - Create a new URL list
+  - Delete specific URL list by ID
+  - Get all applied or pending URL lists
+  - Get single user confidence index
+  - Get URL list by ID
+  - Update specific URL list by ID
+  - Replace specific URL list by ID
+  - Update the file hash list
+  - Upload JSON config file
+requirements:
+  - "Requires an API Keys for versions v1 and v2, tenant name from the Netskope. Note: Both API Keys are required."
+version_history:
+  - "1.0.2 - Updated SDK to the latest version | Fixed issue related to API changes | Updated unittests"
+  - "1.0.1 - Fix bug where Update URL List by ID did not support empty non-required Name field | Update Update URL List by ID input descriptions"
+  - "1.0.0 - Initial plugin (Actions: Apply Pending URL List Changes, Create a New URL List, Delete a URL List by ID, Get All URL Lists, Get Single User's Confidence Index, Get URL List by ID, Replace URL List Configuration by ID, Update URL List by ID, Update a File Hash List, Upload JSON File Configurations)"
+links:
+  - "[Netskope](https://www.netskope.com/)"
+references:
+  - "[Netskope API v1](https://docs.netskope.com/en/rest-api-v1-overview.html)"
+  - "[Netskope API v2](https://docs.netskope.com/en/rest-api-v2-overview-312207.html)"
 enable_cache: false
 types:
   data:
@@ -87,7 +114,7 @@ connection:
     description: Owner's name that is included in URL
     type: string
     required: true
-    example: exampletenant
+    example: ExampleTenant
   api_key_v1:
     title: API Key v1
     description: Netskope authorization token for v1 API
@@ -123,11 +150,13 @@ actions:
         description: API response status
         type: string
         required: true
+        example: success
       message:
         title: Message
         description: API response message
         type: string
         required: true
+        example: File Filter Profile updated successfully
   get_all_url_list:
     title: Get All URL Lists
     description: Get all applied or pending URL lists
@@ -141,14 +170,15 @@ actions:
           - applied
           - pending
         required: true
-        example: applied
         default: any
+        example: applied
     output:
       urllists:
         title: URL Lists
         description: Contains list of URL list objects
         type: "[]urllist"
         required: true
+        example: '[{"id":1,"name":"ExampleName","data":{"urls":["https://example.com","https://example.com"],"type":"exact"},"modify_by":"Netskope REST API","modify_time":"2022-01-03T00:00:00.000Z","modify_type":"Created","pending":0}]'
   create_new_url_list:
     title: Create a New URL List
     description: Create a new URL list configuration
@@ -180,36 +210,43 @@ actions:
         description: URL list identifier
         type: integer
         required: true
+        example: 0
       name:
         title: Name
         description: URL list name
         type: string
         required: true
+        example: ExampleName
       data:
         title: Data
         description: Data containing URLs and type
         type: data
         required: true
+        example: '{"urls": ["https://example.com", "https://example.com"], "type": "exact"}'
       modify_type:
         title: Modify Type
         description: Shows last modification type. Expected values are Created, Edited, Deleted
         type: string
         required: true
+        example: Created
       modify_by:
         title: Modify By
         description: Name of the URL list modifier
         type: string
         required: true
+        example: Netskope API
       modify_time:
         title: Modify Time
         description: Last URL list modification time
         type: date
         required: true
+        example: 1997-01-01 00:00:00
       pending:
         title: Pending
         description: URL list status of pending (1) and applied (0)
         type: integer
         required: true
+        example: 0
   upload_json_config:
     title: Upload JSON File Configurations
     description: Send multiple configurations via a JSON file
@@ -226,6 +263,7 @@ actions:
         description: Contains list of uploaded URL list objects
         type: "[]urllist"
         required: true
+        example: '[{"id":1,"name":"ExampleName","data":{"urls":["https://example.com","https://example.com"],"type":"exact"},"modify_by":"Netskope REST API","modify_time":"2022-01-03T00:00:00.000Z","modify_type":"Created","pending":0}]'
   get_url_list_by_id:
     title: Get URL List by ID
     description: Retrieve the configuration of a URL list by ID
@@ -242,36 +280,43 @@ actions:
         description: URL list identifier
         type: integer
         required: true
+        example: 0
       name:
         title: Name
         description: URL list name
         type: string
         required: true
+        example: ExampleName
       data:
         title: Data
         description: Data containing URLs and type
         type: data
         required: true
+        example: '{"urls": ["https://example.com", "https://example.com"], "type": "exact"}'
       modify_type:
         title: Modify Type
         description: Shows last modification type. Expected values are Created, Edited, Deleted
         type: string
         required: true
+        example: Created
       modify_by:
         title: Modify By
         description: Name of the URL list modifier
         type: string
         required: true
+        example: Netskope API
       modify_time:
         title: Modify Time
         description: Last URL list modification time
         type: date
         required: true
+        example: 1997-01-01 00:00:00
       pending:
         title: Pending
         description: URL list status of pending (1) and applied (0)
         type: integer
         required: true
+        example: 0
   replace_url_list_by_id:
     title: Replace URL List Configuration by ID
     description: Replace the configuration of the given URL list by ID
@@ -309,36 +354,43 @@ actions:
         description: URL list identifier
         type: integer
         required: true
+        example: 0
       name:
         title: Name
         description: URL list name
         type: string
         required: true
+        example: ExampleName
       data:
         title: Data
         description: Data containing URLs and type
         type: data
         required: true
+        example: '{"urls": ["https://example.com", "https://example.com"], "type": "exact"}'
       modify_type:
         title: Modify Type
         description: Shows last modification type. Expected values are Created, Edited, Deleted
         type: string
         required: true
+        example: Edited
       modify_by:
         title: Modify By
         description: Name of the URL list modifier
         type: string
         required: true
+        example: Netskope API
       modify_time:
         title: Modify Time
         description: Last URL list modification time
         type: date
         required: true
+        example: 1997-01-01 00:00:00
       pending:
         title: Pending
         description: URL list status of pending (1) and applied (0)
         type: integer
         required: true
+        example: 0
   delete_url_list_by_id:
     title: Delete a URL List by ID
     description: Mark a URL list as pending deletion
@@ -355,36 +407,43 @@ actions:
         description: URL list identifier
         type: integer
         required: true
+        example: 0
       name:
         title: Name
         description: URL list name
         type: string
         required: true
+        example: ExampleName
       data:
         title: Data
         description: Data containing URLs and type
         type: data
         required: true
+        example: '{"urls": ["https://example.com", "https://example.com"], "type": "exact"}'
       modify_type:
         title: Modify Type
         description: Shows last modification type. Expected values are Created, Edited, Deleted
         type: string
         required: true
+        example: Deleted
       modify_by:
         title: Modify By
         description: Name of the URL list modifier
         type: string
         required: true
+        example: Netskope API
       modify_time:
         title: Modify Time
         description: Last URL list modification time
         type: date
         required: true
+        example: 1997-01-01 00:00:00
       pending:
         title: Pending
         description: URL list status of pending (1) and applied (0)
         type: integer
         required: true
+        example: 0
   patch_url_list_by_id:
     title: Update URL List by ID
     description: Update the name, URLs, and/or type of a URL list object
@@ -432,36 +491,43 @@ actions:
         description: URL list identifier
         type: integer
         required: true
+        example: 0
       name:
         title: Name
         description: URL list name
         type: string
         required: true
+        example: ExampleName
       data:
         title: Data
-        description: Data containing and type
-        type: object
+        description: Data containing URLs and type
+        type: data
         required: true
+        example: '{"urls": ["https://example.com", "https://example.com"], "type": "exact"}'
       modify_type:
         title: Modify Type
         description: Shows last modification type. Expected values are Created, Edited, Deleted
         type: string
         required: true
+        example: Edited
       modify_by:
         title: Modify By
         description: Name of the URL list modifier
         type: string
         required: true
+        example: Netskope API
       modify_time:
         title: Modify Time
         description: Last URL list modification time
         type: date
         required: true
+        example: 1997-01-01 00:00:00
       pending:
         title: Pending
         description: URL list status of pending (1) and applied (0)
         type: integer
         required: true
+        example: 0
   apply_pending_url_list_changes:
     title: Apply Pending URL List Changes
     description: Applies currently pending changes for URL lists
@@ -471,6 +537,7 @@ actions:
         description: Contains list of deployed URL lists
         type: "[]urllist"
         required: true
+        example: '[{"id":1,"name":"ExampleName","data":{"urls":["https://example.com","https://example.com"],"type":"exact"},"modify_by":"Netskope REST API","modify_time":"2022-01-03T00:00:00.000Z","modify_type":"Created","pending":0}]'
   get_single_user_confidence_index:
     title: Get Single User's Confidence Index
     description: Get the confidence index for a user
@@ -493,8 +560,10 @@ actions:
         description: Identifier of user
         type: string
         required: true
+        example: ExampleUser
       confidences:
         title: Confidences
         description: Contains User Confidence Index with starting score and confidence score
         type: "[]confidence"
         required: true
+        example: '[{"start": 0, "confidenceScore": 0}]'

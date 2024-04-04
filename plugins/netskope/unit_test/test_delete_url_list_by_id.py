@@ -4,15 +4,18 @@ import sys
 sys.path.append(os.path.abspath("../"))
 
 import logging
+from typing import Callable
 from unittest import TestCase
-
-from insightconnect_plugin_runtime.exceptions import PluginException
-from parameterized import parameterized
+from unittest.mock import MagicMock, patch
 
 from icon_netskope.actions.delete_url_list_by_id import DeleteUrlListById
 from icon_netskope.actions.delete_url_list_by_id.schema import Input
 from icon_netskope.connection.connection import Connection
-from unit_test.mock import (
+from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
+from parameterized import parameterized
+
+from mock import (
     STUB_CONNECTION,
     STUB_ID,
     mock_request_200_api_v2,
@@ -37,8 +40,8 @@ class TestDeleteUrlListById(TestCase):
 
         self.params = {Input.ID: STUB_ID}
 
-    def test_delete_url_list_by_id_ok(self):
-        mocked_request(mock_request_200_api_v2)
+    @patch("requests.request", side_effect=mock_request_200_api_v2)
+    def test_delete_url_list_by_id_ok(self, mock_requests: MagicMock) -> None:
         response = self.action.run(self.params)
         expected_response = {
             "id": 1,
@@ -49,8 +52,9 @@ class TestDeleteUrlListById(TestCase):
             "modify_type": "Created",
             "pending": 0,
         }
-
+        validate(response, self.action.output.schema)
         self.assertEqual(response, expected_response)
+        mock_requests.assert_called()
 
     @parameterized.expand(
         [
@@ -61,7 +65,10 @@ class TestDeleteUrlListById(TestCase):
             (mock_request_500_api_v2, PluginException.Preset.UNKNOWN),
         ],
     )
-    def test_delete_url_list_by_id_bad(self, mock_request, exception):
+    @patch("icon_netskope.util.utils.backoff_function", return_value=0)
+    def test_delete_url_list_by_id_bad(
+        self, mock_request: Callable, exception: str, mock_backoff_function: MagicMock
+    ) -> None:
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
             self.action.run(self.params)
@@ -69,3 +76,4 @@ class TestDeleteUrlListById(TestCase):
             context.exception.cause,
             PluginException.causes[exception],
         )
+        mock_backoff_function.assert_called()
