@@ -13,5 +13,8 @@ class UploadJsonConfig(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        response = self.connection.client.upload_json_config(**params.get(Input.URLLIST))
-        return {Output.UPLOADED_URLLIST: response}
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        url_list = params.get(Input.URLLIST, [])
+        # END INPUT BINDING - DO NOT REMOVE
+
+        return {Output.UPLOADED_URLLIST: self.connection.client.upload_json_config(**url_list)}

@@ -4,15 +4,18 @@ import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from typing import Callable
 from unittest import TestCase
+from unittest.mock import MagicMock, patch
 
 from icon_netskope.actions.update_file_hash_list import UpdateFileHashList
 from icon_netskope.actions.update_file_hash_list.schema import Output
 from icon_netskope.connection.connection import Connection
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 from parameterized import parameterized
 
-from unit_test.mock import (
+from mock import (
     STUB_CONNECTION,
     mock_request_200_api_v1,
     mock_request_201_api_v1,
@@ -42,7 +45,7 @@ class TestUpdateFileHashList(TestCase):
             (mock_request_201_api_v1,),
         ]
     )
-    def test_update_file_hash_list_ok(self, mock_request):
+    def test_update_file_hash_list_ok(self, mock_request: Callable) -> None:
         mocked_request(mock_request)
         data = {
             "name": "test",
@@ -54,6 +57,7 @@ class TestUpdateFileHashList(TestCase):
         }
         response = self.action.run(data)
         expected_response = {Output.STATUS: "success", Output.MESSAGE: "File Filter Profile updated successfully"}
+        validate(response, self.action.output.schema)
         self.assertEqual(response, expected_response)
 
     @parameterized.expand(
@@ -66,7 +70,10 @@ class TestUpdateFileHashList(TestCase):
             (mock_request_bad_json_response_api_v1, PluginException.Preset.INVALID_JSON),
         ]
     )
-    def test_update_file_hash_list_bad(self, mock_request, exception):
+    @patch("icon_netskope.util.utils.backoff_function", return_value=0)
+    def test_update_file_hash_list_bad(
+        self, mock_request: Callable, exception: str, mock_backoff_function: MagicMock
+    ) -> None:
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
             self.action.run({"name": "test", "list": []})
@@ -74,3 +81,4 @@ class TestUpdateFileHashList(TestCase):
             context.exception.cause,
             PluginException.causes[exception],
         )
+        mock_backoff_function.assert_called()

@@ -4,15 +4,18 @@ import sys
 sys.path.append(os.path.abspath("../"))
 
 import logging
-from unittest import TestCase, mock
-
-from insightconnect_plugin_runtime.exceptions import PluginException
-from parameterized import parameterized
+from typing import Any, Callable, Dict
+from unittest import TestCase
+from unittest.mock import MagicMock, patch
 
 from icon_netskope.actions.get_all_url_list import GetAllUrlList
 from icon_netskope.actions.get_all_url_list.schema import Output
 from icon_netskope.connection.connection import Connection
-from unit_test.mock import (
+from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
+from parameterized import parameterized
+
+from mock import (
     STUB_CONNECTION,
     mock_request_200_api_v2,
     mock_request_400_api_v2,
@@ -115,25 +118,33 @@ class TestGetAllUrlList(TestCase):
             ("pending", STUB_EXPECTED_RESPONSE_PENDING),
         ],
     )
-    def test_get_all_url_list_input_params_ok(self, input_pending, expected_response):
-        mocked_request(mock_request_200_api_v2)
+    @patch("requests.request", side_effect=mock_request_200_api_v2)
+    def test_get_all_url_list_input_params_ok(
+        self, input_pending: str, expected_response: Dict[str, Any], mock_request: MagicMock
+    ) -> None:
         response = self.action.run({"status": input_pending})
+        validate(response, self.action.output.schema)
         self.assertEqual(response, expected_response)
+        mock_request.assert_called()
 
-    @mock.patch("icon_netskope.util.api.ApiClient.get_all_url_list", return_value=[])
-    def test_get_all_url_list_input_params_ok_no_output(self, mock_api_function):
+    @patch("icon_netskope.util.api.ApiClient.get_all_url_list", return_value=[])
+    def test_get_all_url_list_input_params_ok_no_output(self, mock_api_function: MagicMock) -> None:
         response = self.action.run()
         expected_response = {Output.URLLISTS: []}
+        validate(response, self.action.output.schema)
         self.assertEqual(response, expected_response)
+        mock_api_function.assert_called()
 
-    @mock.patch(
+    @patch(
         "icon_netskope.util.api.ApiClient.get_all_url_list",
         return_value=STUB_EXPECTED_RESPONSE_APPLIED_MANY.get("urllists", []),
     )
-    def test_get_all_url_list_input_params_ok_many_items(self, mock_api_function):
+    def test_get_all_url_list_input_params_ok_many_items(self, mock_api_function: MagicMock) -> None:
         response = self.action.run()
         expected_response = STUB_EXPECTED_RESPONSE_APPLIED_MANY
+        validate(response, self.action.output.schema)
         self.assertEqual(response, expected_response)
+        mock_api_function.assert_called()
 
     @parameterized.expand(
         [
@@ -143,7 +154,7 @@ class TestGetAllUrlList(TestCase):
             (mock_request_500_api_v2, PluginException.Preset.UNKNOWN),
         ],
     )
-    def test_get_all_url_list_bad(self, mock_request, exception):
+    def test_get_all_url_list_bad(self, mock_request: Callable, exception: str) -> None:
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
             self.action.run()
