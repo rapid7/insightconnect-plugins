@@ -15,5 +15,10 @@ class UpdateFileHashList(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        response = self.connection.client.update_file_hash_list(params.get(Input.NAME), params.get(Input.LIST))
-        return {Output.STATUS: response.get(Output.STATUS), Output.MESSAGE: response.get("msg")}
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        name = params.get(Input.NAME, "")
+        input_list = params.get(Input.LIST, [])
+        # END INPUT BINDING - DO NOT REMOVE
+
+        response = self.connection.client.update_file_hash_list(name, input_list)
+        return {Output.STATUS: response.get("status"), Output.MESSAGE: response.get("msg")}
