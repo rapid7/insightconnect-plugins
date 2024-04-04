@@ -7,7 +7,6 @@ sys.path.append(os.path.abspath("../"))
 
 
 class Util:
-
     @staticmethod
     def read_file_to_string(filename: str) -> str:
         with open(
