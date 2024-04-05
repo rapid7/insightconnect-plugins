@@ -115,9 +115,14 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
                     previous_logs_hashes,
                     parsed_logs[current_page_index * self.SPLIT_SIZE : (current_page_index + 1) * self.SPLIT_SIZE],
                 )
+
+                # PLGN-811: reduce the number of pages of hashes we store to prevent hitting DynamoDB limits
                 state[self.PREVIOUS_LOGS_HASHES] = (
-                    [*previous_logs_hashes, *new_logs_hashes] if current_page_index > 0 else new_logs_hashes
+                    [*previous_logs_hashes[-self.SPLIT_SIZE :], *new_logs_hashes]
+                    if current_page_index > 0
+                    else new_logs_hashes
                 )
+
                 self.logger.info(f"Retrieved {len(new_unique_logs)} events")
                 return new_unique_logs, state, has_more_pages, 200, None
 
