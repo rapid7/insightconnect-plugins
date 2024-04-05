@@ -13,5 +13,10 @@
   "rrn": "rrn:example",
   "source": "ALERT",
   "status": "OPEN",
-  "title": "Example Title"
+  "title": "Example Title",
+  "tags": [
+    "Incident",
+    "Security Test"
+  ],
+  "responsibility": "CUSTOMER"
 }

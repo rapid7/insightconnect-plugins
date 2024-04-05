@@ -160,6 +160,16 @@ types:
       description: Investigation title
       type: string
       required: false
+    responsibility:
+      title: Responsibility
+      description:
+      type: string
+      required: false
+    tags:
+      title: Tags
+      description:
+      type: "[]string"
+      required: false
   threat:
     indicator_count:
       title: Indicator Count
@@ -1264,20 +1274,20 @@ actions:
         type: string
         enum:
           - ""
-          - Create time Ascending
-          - Create time Descending
+          - Created time Ascending
+          - Created time Descending
           - Priority Ascending
           - Priority Descending
-          - Last alert time Ascending
-          - Last alert time Descending
           - RRN Ascending
           - RRN Descending
           - Alerts most recent created time Ascending
           - Alerts most recent created time Descending
           - Alerts most recent detection created time Ascending
           - Alerts most recent detection created time Descending
+          - Responsibility Ascending
+          - Responsibility Descending
         required: false
-        example: Create time Ascending
+        example: Created time Ascending
       sources:
         title: Sources
         description: A comma-separated list of investigation sources to include in the result, where possible values are USER, ALERT, HUNT, AUTOMATION
