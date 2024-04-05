@@ -1171,6 +1171,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.1.7 - Include SDK 5.4.5 | Task - enforce query cutoff based on Proofpoint API max lookback | Task - toggle pagination when backfilling | Task - only store previous page of hashes.
 * 4.1.6 - Include SDK 5.4.4 which prevents any potential memory leaks | first task lookup should only be 1 hour unless override supplied.
 * 4.1.5 - Include SDK 5.4 which adds new task custom_config parameter.
 * 4.1.4 - Remove hard coded env var from Dockerfile.
