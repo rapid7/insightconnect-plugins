@@ -52,9 +52,6 @@ class PerformAdHocSearchOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
-  "required": [
-    "search_results"
-  ],
   "definitions": {}
 }
     """)

@@ -63,20 +63,10 @@ class Util:
         if url == f"http://{STUB_URL}/CherwellAPI/api/V1/SaveBusinessObject":
             return MockResponse(200, "update_incident_success.json.resp")
         # Error Handling
-        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/400":
-            return MockResponse(400, "error.json.resp")
-        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/401":
-            return MockResponse(401, "error.json.resp")
-        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/403":
-            return MockResponse(403, "error.json.resp")
-        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/404":
-            return MockResponse(404, "error.json.resp")
-        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/409":
-            return MockResponse(409, "error.json.resp")
-        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/500":
-            return MockResponse(500, "error.json.resp")
-        if url == f"http://{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/202":
-            return MockResponse(202, "error.json.resp")
+        status_codes = [400, 401, 403, 404, 409, 500, 202]
+        for status_code in status_codes:
+            if url == f"http://{STUB_URL}/CherwellAPI/api/V1/getbusinessobject/busobid/1/publicid/{status_code}":
+                return MockResponse(status_code, "error.json.resp")
         raise NotImplementedError("Not implemented", kwargs)
 
 

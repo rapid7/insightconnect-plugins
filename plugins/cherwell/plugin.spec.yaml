@@ -8,7 +8,7 @@ version: 3.0.0
 connection_version: 3
 sdk:
   type: slim
-  version: 5
+  version: 5.4.5
   user: nobody
 vendor: rapid7
 support: community
@@ -142,7 +142,7 @@ actions:
         title: Search Results
         description: The raw JSON search results returned by the endpoint
         type: object
-        required: true
+        required: false
         example: { "businessObjects": [ { "busObId": "string", "busObPublicId": "string", "busObRecId": "string", "fields": [ { "dirty": true, "displayName": "string", "fieldId": "string", "html": "string", "name": "string", "value": "string" } ], "links": [ { "name": "string", "url": "string" } ], "errorCode": "string", "errorMessage": "string", "hasError": true } ], "hasPrompts": true, "links": [ { "name": "string", "url": "string" } ], "prompts": [ { "allowValuesOnly": true, "busObId": "string", "collectionStoreEntireRow": "string", "collectionValueField": "string", "constraintXml": "string", "contents": "string", "default": "string", "fieldId": "string", "isDateRange": true, "listDisplayOption": "Auto", "listReturnFieldId": "string", "multiLine": true, "promptId": "string", "promptType": "None", "promptTypeName": "string", "required": true, "text": "string", "value": {}, "values": [ "string" ] } ], "searchResultsFields": [ { "caption": "string", "currencyCulture": "string", "currencySymbol": "string", "decimalDigits": 0, "defaultSortOrderAscending": true, "displayName": "string", "fieldName": "string", "fullFieldId": "string", "hasDefaultSortField": true, "fieldId": "string", "isBinary": true, "isCurrency": true, "isDateTime": true, "isFilterAllowed": true, "isLogical": true, "isNumber": true, "isShortDate": true, "isShortTime": true, "isVisible": true, "sortable": true, "sortOrder": "string", "storageName": "string", "wholeDigits": 0 } ], "simpleResults": { "groups": [ { "isBusObTarget": true, "simpleResultsListItems": [ { "busObId": "string", "busObRecId": "string", "docRepositoryItemId": "string", "galleryImage": "string", "links": [ { "name": "string", "url": "string" } ], "publicId": "string", "scope": "string", "scopeOwner": "string", "subTitle": "string", "text": "string", "title": "string" } ], "subTitle": "string", "targetId": "string", "title": "string", "errorCode": "string", "errorMessage": "string", "hasError": true } ], "title": "string", "errorCode": "string", "errorMessage": "string", "hasError": true }, "totalRows": 0, "errorCode": "string", "errorMessage": "string", "hasError": true }
   update_incident:
     title: Update Incident
@@ -172,11 +172,11 @@ actions:
         description: Boolean indicating whether the business object was successfully
           created
         type: boolean
-        required: true
+        required: false
         example: true
       raw_response:
         title: Raw Response
         description: The raw JSON returned by the endpoint
         type: object
-        required: true
+        required: false
         example: {"fieldValidationErrors":[],"errorMessage":null,"errorCode":null,"hasError":false,"busObPublicId":"762421","busObRecId":"9446e3f047458fd7824f3b400f94be3566ac523802"}

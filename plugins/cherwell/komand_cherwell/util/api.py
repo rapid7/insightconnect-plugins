@@ -66,26 +66,20 @@ class Cherwell:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=resp.text)
 
     def response_handler(self, resp: Response, action_name: str = "", custom_error=None) -> None:
-        if custom_error and resp.status_code not in range(200, 299):
-            raise PluginException(
-                cause=f"An error was received when running {action_name}.",
-                assistance=f"Request status code of {resp.status_code} was returned.",
-                data=f"{custom_error.get(resp.status_code, custom_error.get(000))}",
-            )
-        elif resp.status_code == 405:
-            raise PluginException(
-                cause=f"An error was received when running {action_name}.",
-                assistance=f"Request status code of {resp.status_code} was returned."
-                "Please make sure connections have been configured correctly",
-            )
-        elif resp.status_code != 200:
-            raise PluginException(
-                cause=f"An error was received when running {action_name}.",
-                assistance=f"Request status code of {resp.status_code} was returned."
-                " Please make sure connections have been configured correctly "
-                "as well as the correct input for the action.",
-                data=f"Response was: {resp.text}",
-            )
+        if resp.status_code in range(200, 299):
+            return
+        cause_info = f"An error was received when running {action_name}."
+        assistance_info = f"Request status code of {resp.status_code} was returned."
+        data = None
+        if resp.status_code == 405:
+            assistance_info += " Please make sure connections have been configured correctly."
+        elif custom_error and resp.status_code not in range(200, 299):
+            data = f"{custom_error.get(resp.status_code, custom_error.get(000))}"
+        else:
+            assistance_info += "Please make sure connections have been configured correctly as well as the correct " \
+                               "input for the action. "
+            data = f"Response was: {resp.text}"
+        raise PluginException(cause=cause_info, assistance=assistance_info,data=data)
 
     def _token(self, client_id: str, username: str, password: str, authentication_mode: str) -> str:
         """
