@@ -91,8 +91,8 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |rejected_indicators|[]string|False|The list of indicators that have been rejected during the update|["https://example.com", "https://test.com"]|
-|threat|threat|False|The information about the threat|{'name': 'Contributing Collaborative Threat: Flagged Malicious', 'published': False, 'indicator_count': 13}|
-  
+|threat|threat|False|The information about the threat|{'name': 'Contributing Collaborative Threat: Flagged Malicious', 'published': False, 'note': 'Notes', 'indicator_count': 13}|
+  'note': 'Notes',
 Example output:
 
 ```

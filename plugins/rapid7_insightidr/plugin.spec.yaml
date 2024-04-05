@@ -88,6 +88,11 @@ types:
       description: The title of the alert
       type: string
       required: false
+    alert_source:
+      title: Alert Source
+      description: The source of the alert
+      type: string
+      required: false
   assignee:
     email:
       title: Email
@@ -1665,7 +1670,7 @@ actions:
         description: The information about the threat
         type: threat
         required: false
-        example: {"name": "Contributing Collaborative Threat: Flagged Malicious", "published": False,"indicator_count": 13}
+        example: {"name": "Contributing Collaborative Threat: Flagged Malicious", "published": False, "note": "Notes","indicator_count": 13}
   assign_user_to_investigation:
     title: Assign User to Investigation
     description: Assign a user to the specified investigation
@@ -2556,5 +2561,5 @@ actions:
         description: Account details
         type: account_object
         required: false
-        example: {"rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890","creator": {"type": "USER","name": "Example User"},"created_time": "2022-08-19T13:00:58.645Z","file_name": "test.txt","mime_type": "text/plain","size": 4,"scan_status": "CLEAN"}
+        example: {"rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890","user": {"rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6","name": "Example User"},"disabled": true,"authentication_service": "ACTIVE_DIRECTORY","domain": "tor.acme.com","name": jdoe@acme.com"}
       
