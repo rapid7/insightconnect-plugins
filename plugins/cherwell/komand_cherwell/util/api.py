@@ -76,10 +76,12 @@ class Cherwell:
         elif custom_error and resp.status_code not in range(200, 299):
             data = f"{custom_error.get(resp.status_code, custom_error.get(000))}"
         else:
-            assistance_info += "Please make sure connections have been configured correctly as well as the correct " \
-                               "input for the action. "
+            assistance_info += (
+                " Please make sure connections have been configured correctly as well as the correct "
+                "input for the action."
+            )
             data = f"Response was: {resp.text}"
-        raise PluginException(cause=cause_info, assistance=assistance_info,data=data)
+        raise PluginException(cause=cause_info, assistance=assistance_info, data=data)
 
     def _token(self, client_id: str, username: str, password: str, authentication_mode: str) -> str:
         """
