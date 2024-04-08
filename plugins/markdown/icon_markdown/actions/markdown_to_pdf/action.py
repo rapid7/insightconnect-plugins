@@ -5,9 +5,10 @@ import shutil
 from icon_markdown.util import utils
 from .schema import MarkdownToPdfInput, MarkdownToPdfOutput, Output, Input, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
+from typing import Tuple
 
 
-def make_pdf_bytes(html: str, path: str) -> tuple[bytes, str]:
+def make_pdf_bytes(html: str, path: str) -> Tuple[bytes, str]:
     infile = path + "str.html"
     outfile = path + "tmp.pdf"
     with open(infile, "w", encoding="utf-8") as file:

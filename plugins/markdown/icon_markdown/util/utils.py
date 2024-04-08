@@ -12,8 +12,7 @@ def to_bytes(_string):
 
 
 def to_bytes_pdf(_bytes):
-    encoded_bytes = base64.b64encode(_bytes).decode("utf-8")
-    return encoded_bytes
+    return base64.b64encode(_bytes).decode("utf-8")
 
 
 def make_file(filetype):
