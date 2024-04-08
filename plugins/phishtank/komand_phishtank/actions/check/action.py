@@ -19,5 +19,5 @@ class Check(insightconnect_plugin_runtime.Action):
             url = "https://" + url
 
         response = self.connection.api.check(url)
-        self.logger.info("result: {resp}".format(resp=response))
+        self.logger.info(f"result: {response}")
         return response

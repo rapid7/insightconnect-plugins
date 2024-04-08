@@ -38,6 +38,7 @@ Example input:
 
 ### Actions
 
+
 #### Check URL
 
 This action is used to submit a URL to PhishTank
