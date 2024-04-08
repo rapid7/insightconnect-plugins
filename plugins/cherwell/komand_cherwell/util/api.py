@@ -120,7 +120,7 @@ class Cherwell:
             "Content-Type": "application/x-www-form-urlencoded",
             "Accept": "application/json",
         }
-
+        self.logger.info("Sending token request...")
         response = request("POST", url=url, data=query_params, headers=headers, params=querystring)
 
         # Check status code - this is a great early indicator of success/failure. If non-2xx, bail early.
@@ -135,12 +135,14 @@ class Cherwell:
         # Let's see if we actually have a JSON response from the server. It looks bad if we dump a JSONDecodeError
         # on the user. Plus, this will allow us to print out the server response in lieu of the proper JSON one.
         try:
+            self.logger.info("Token request successful, retrieving JSON...")
             response_data = response.json()
         except JSONDecodeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
         # Verify the access token is present in the response. If not, there is something wrong.
         if "access_token" in response_data:
+            self.logger.info("Returning access token...")
             return response_data.get("access_token")
         else:
             raise PluginException(
