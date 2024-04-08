@@ -11,13 +11,14 @@ class Cherwell:
 
     TOKEN = ""  # noqa: B105
 
-    def __init__(self, base_url, logger, username, password, client_id, authentication_mode):
+    def __init__(self, base_url, logger, username, password, client_id, authentication_mode, ssl_verify):
         self._base_url = base_url
         self.logger = logger
         self.username = username
         self.password = password
         self.client_id = client_id
         self.authentication_mode = authentication_mode
+        self.ssl_verify = ssl_verify
         self.session = Session()
 
     def _call_api(
@@ -33,6 +34,8 @@ class Cherwell:
         url = self._base_url + endpoint
 
         if "Authorization" not in self.session.headers:
+            self.logger.info("Authorization not in session headers, generating token...")
+            self.logger.info(f"Using authentication mode {self.authentication_mode}")
             Cherwell.TOKEN = self._token(self.client_id, self.username, self.password, self.authentication_mode)
             self.session.headers.update(
                 {
@@ -55,7 +58,14 @@ class Cherwell:
         try:
             # Prep request
             req = req.prepare()
-            resp = self.session.send(req)
+            self.logger.info("Sending a request...")
+            self.logger.info(f"Data is...")
+            self.logger.info("Method:", req.method)
+            self.logger.info("URL:", req.url)
+            self.logger.info("Headers:", req.headers)
+            self.logger.info("Body:", req.body)
+            self.logger.info(f"SSL verification is {self.ssl_verify}")
+            resp = self.session.send(req, verify=self.ssl_verify)
             self.response_handler(resp, action_name, custom_error)
             results = resp.json()
             return results

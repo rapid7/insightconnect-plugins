@@ -21,12 +21,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
         )
         client_id = params.get(Input.CLIENT_ID, {}).get("secretKey")
         authentication_mode = params.get(Input.AUTHENTICATION_MODE)
+        ssl_verify = params.get(Input.SSL_VERIFY)
 
         # Form the base URL for the Cherwell server
-        scheme = "https://" if params.get(Input.SSL_VERIFY) else "http://"
+        scheme = "https://" if ssl_verify else "http://"
         self._base_url = f"{scheme}{base_uri}"
 
-        self.api = Cherwell(self._base_url, self.logger, username, password, client_id, authentication_mode)
+        self.api = Cherwell(self._base_url, self.logger, username, password, client_id, authentication_mode, ssl_verify)
 
     def test(self):
         try:
