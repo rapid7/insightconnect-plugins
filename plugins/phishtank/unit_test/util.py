@@ -36,11 +36,7 @@ class Util:
     def mock_request(*args, **kwargs):
         url = kwargs.get("data").get("url")
 
-        print(f"ARGS {args}")
-        print(f"KWARGS {kwargs}")
-        print(f"HITTING MOCK")
         if url == "https%3A//cielobbfidelidade.xyz/home/":
-            print(f"MOCK REQUEST")
             return MockResponse(200, "check.resp")
         # error handling
         if url == "https%3A//miraclecamstudio.com/":
@@ -58,7 +54,7 @@ class Util:
         if url == "https%3A//yahoocurrentlyattmail.urest.org/":
             return MockResponse(422, "check_error.json.resp")
         if url == "https%3A//returns_zero_data":
-            return MockResponse(411, "check_error.json.resp")
+            return MockResponse(409, "check_error.json.resp")
         raise NotImplementedError("Not Implemented", kwargs)
 
 

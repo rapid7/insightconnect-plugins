@@ -10,13 +10,13 @@ from urllib.parse import quote
 
 class API(object):
     def __init__(self, credentials: str):
-        self._credentials = credentials
+        self.credentials = credentials
 
     def check(self, url):
         try:
             r = requests.post(
                 "https://checkurl.phishtank.com/checkurl/",
-                data={"format": "json", "url": quote(url), "app_key": self._credentials},
+                data={"format": "json", "url": quote(url), "app_key": self.credentials},
                 timeout=60,
             )
 
@@ -38,7 +38,7 @@ class API(object):
             return result
 
         except requests.exceptions.HTTPError as exception:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=exception)
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=exception)
 
     def response_handler(response: Response) -> Response:
         """
@@ -52,6 +52,8 @@ class API(object):
             raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
         if response.status_code == 404:
             raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
+        if response.status_code == 409:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
         if response.status_code == 429:
             raise PluginException(
                 cause="Too Many Requests",

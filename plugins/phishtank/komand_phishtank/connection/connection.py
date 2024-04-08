@@ -6,11 +6,6 @@ from .schema import ConnectionSchema, Input
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from ..util.api import API
 
-# Custom imports below
-import json
-import requests
-import urllib
-
 
 class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):

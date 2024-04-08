@@ -11,7 +11,6 @@ sys.path.append(os.path.abspath("../"))
 
 
 class TestCheck(TestCase):
-
     @classmethod
     def setUp(cls) -> None:
         cls.action = Util.default_connector(Check())
@@ -80,8 +79,8 @@ class TestCheck(TestCase):
             [
                 "check_json_decoder",
                 Util.read_file_to_dict("inputs/check_json_error.json.inp"),
-                "Something unexpected occurred.",
-                "Check the logs and if the issue persists please contact support.",
+                "Received an unexpected response from the server.",
+                "(non-JSON or no response was received).",
             ],
         ]
     )
