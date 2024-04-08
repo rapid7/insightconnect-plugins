@@ -5,16 +5,17 @@ import logging
 
 import insightconnect_plugin_runtime
 from komand_phishtank.connection.connection import Connection
-
+from komand_phishtank.connection.schema import Input
 
 sys.path.append(os.path.abspath("../"))
 
 
 class Util:
     @staticmethod
-    def default_connector(action: insightconnect_plugin_runtime.Action, params: dict = None):
+    def default_connector(action: insightconnect_plugin_runtime.Action):
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
+        params = {Input.CREDENTIALS: {"secretKey": "phishtank-secret-key"}}
         default_connection.connect(params)
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
@@ -23,7 +24,7 @@ class Util:
     @staticmethod
     def read_file_to_string(filename: str) -> str:
         with open(
-                os.path.join(os.path.dirname(os.path.realpath(__file__)), filename), "r", encoding="utf-8"
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), filename), "r", encoding="utf-8"
         ) as file_reader:
             return file_reader.read()
 

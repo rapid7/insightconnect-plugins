@@ -1,31 +1,23 @@
 import logging
 import insightconnect_plugin_runtime
 
-import komand_phishtank.connection
 from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 from requests import Response
 import json
 from urllib.parse import quote
 
-from komand_phishtank.connection.schema import Input
-
 
 class API(object):
     def __init__(self, credentials: str):
-        self.credentials = credentials
+        self._credentials = credentials
 
     def check(self, url):
         try:
-            print(f"URL: {url}")
-            print(f"CREDS: {self.credentials}")
             r = requests.post(
                 "https://checkurl.phishtank.com/checkurl/",
-                data={
-                    "format": "json",
-                    "url": quote(url),
-                    "app_key": Input.CREDENTIALS
-                },
+                data={"format": "json", "url": quote(url), "app_key": self._credentials},
+                timeout=60,
             )
 
             try:
@@ -61,19 +53,13 @@ class API(object):
         if response.status_code == 404:
             raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
         if response.status_code == 429:
-            raise PluginException(cause="Too Many Requests", assistance="With no API key, phishtank does not support"
-                                        "more than a few requests per day. Please try again later")
+            raise PluginException(
+                cause="Too Many Requests",
+                assistance="With no API key, phishtank does not support"
+                "more than a few requests per day. Please try again later",
+            )
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
         if 200 <= response.status_code < 300:
             return response
         raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-
-    # data={
-    #     "url": urllib.parse.quote_plus(str(url)),
-    #     "format": "json",
-    #     "app_key": Input.CREDENTIALS
-    #     # .get(Input.CREDENTIALS).get("secretKey")
-    #     # "app_key": Input.CREDENTIALS.get("secretKey")
-    #     # "url": urllib3.util.parse_url(url)
-    # },

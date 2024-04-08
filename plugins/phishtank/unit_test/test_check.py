@@ -7,7 +7,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from util import Util
 from parameterized import parameterized
 
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath("../"))
 
 
 class TestCheck(TestCase):
@@ -17,13 +17,13 @@ class TestCheck(TestCase):
         cls.action = Util.default_connector(Check())
 
     @parameterized.expand(
-     [
-         [
-            "check",
-            Util.read_file_to_dict("inputs/check.json.inp"),
-            Util.read_file_to_dict("expected/check.json.exp"),
-         ],
-     ]
+        [
+            [
+                "check",
+                Util.read_file_to_dict("inputs/check.json.inp"),
+                Util.read_file_to_dict("expected/check.json.exp"),
+            ],
+        ]
     )
     @patch("requests.post", side_effect=Util.mock_request)
     def test_check(self, test_name, input, expected, _test_mock: MagicMock):

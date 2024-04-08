@@ -1,10 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import CheckInput, CheckOutput, Component, Input, Output
-from insightconnect_plugin_runtime.exceptions import PluginException
-
-
-# Custom imports below
-import requests
+from .schema import CheckInput, CheckOutput, Component, Input
 
 
 class Check(insightconnect_plugin_runtime.Action):
@@ -26,29 +21,3 @@ class Check(insightconnect_plugin_runtime.Action):
         response = self.connection.api.check(url)
         self.logger.info("result: {resp}".format(resp=response))
         return response
-
-    # def run(self, params={}):
-    #     url = params.get("url")
-    #     if not url:
-    #         raise ValueError("url is required")
-    #
-    #     url = url.strip()
-    #     if not url.startswith("http://") and not url.startswith("https://"):
-    #         url = "http://" + url
-    #
-    #     try:
-    #         result = self.connection.check(url)
-    #         self.logger.debug("result: %s", result)
-    #     except Exception as e:
-    #         self.logger.exception(e)
-    #         return {
-    #             "url": url,
-    #             "in_database": False,
-    #             "verified": False,
-    #         }
-    #
-        # if "verified_at" in result:
-        #     if result["verified_at"] is None:
-        #         result["verified_at"] = str(result["verified_at"])
-    #
-    #     return result
