@@ -1,47 +1,48 @@
 import logging
-import xml
-
 import insightconnect_plugin_runtime
-import urllib3.util
-import xml
 
 import komand_phishtank.connection
-import insightconnect_plugin_runtime.helper
 from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 from requests import Response
 import json
-import base64
-import urllib.parse
+from urllib.parse import quote
 
-from komand_phishtank.connection.schema import Input, ConnectionSchema
+from komand_phishtank.connection.schema import Input
 
 
 class API(object):
-    def __init__(self, credentials):
+    def __init__(self, credentials: str):
         self.credentials = credentials
 
     def check(self, url):
         try:
-            # add exception handling for post request - url exception ?
             print(f"URL: {url}")
             print(f"CREDS: {self.credentials}")
-            print(f"URL CONTENT {url.__dict__}")
             r = requests.post(
                 "https://checkurl.phishtank.com/checkurl/",
                 data={
                     "format": "json",
-                    "url": urllib.parse.quote(url),
+                    "url": quote(url),
                     "app_key": Input.CREDENTIALS
                 },
             )
-            print(r.__dict__)
-            result = r.json()["results"]
-            # add a json decode error ?
 
-            if result.get("phish_detail_page"):
+            try:
+                result = r.json()
+            except requests.exceptions.JSONDecodeError:
+                raise PluginException(preset=PluginException.Preset.UNKNOWN)
+
+            if requests.exceptions:
+                API.response_handler(r)
+
+            if "phish_detail_page" in result:
                 result["phish_detail_url"] = result["phish_detail_page"]
                 del result["phish_detail_page"]
+            if "verified_at" in result:
+                if result["verified_at"] is None:
+                    result["verified_at"] = str(result["verified_at"])
+
             return result
 
         except requests.exceptions.HTTPError as exception:
@@ -62,8 +63,6 @@ class API(object):
         if response.status_code == 429:
             raise PluginException(cause="Too Many Requests", assistance="With no API key, phishtank does not support"
                                         "more than a few requests per day. Please try again later")
-        if 400 <= response.status_code < 500:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
         if 200 <= response.status_code < 300:

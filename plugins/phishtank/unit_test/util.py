@@ -2,8 +2,6 @@ import json
 import os
 import sys
 import logging
-import datetime
-import re
 
 import insightconnect_plugin_runtime
 from komand_phishtank.connection.connection import Connection
@@ -23,15 +21,54 @@ class Util:
         return action
 
     @staticmethod
-    def read_file_to_dict(filename: str, encodingenabled: bool = False) -> dict:
+    def read_file_to_string(filename: str) -> str:
         with open(
-            os.path.join(os.path.dirname(os.path.realpath(__file__)), filename), "r", encoding="utf-8"
+                os.path.join(os.path.dirname(os.path.realpath(__file__)), filename), "r", encoding="utf-8"
         ) as file_reader:
-            data = json.load(file_reader)
-            if encodingenabled:
-                encodeddata = {}
-                for key, value in data.items():
-                    encodeddata[key] = value.encode("utf-8")
-                return encodeddata
-            else:
-                return data
+            return file_reader.read()
+
+    @staticmethod
+    def read_file_to_dict(filename: str) -> dict:
+        return json.loads(Util.read_file_to_string(filename))
+
+    @staticmethod
+    def mock_request(*args, **kwargs):
+        url = kwargs.get("data").get("url")
+
+        print(f"ARGS {args}")
+        print(f"KWARGS {kwargs}")
+        print(f"HITTING MOCK")
+        if url == "https%3A//cielobbfidelidade.xyz/home/":
+            print(f"MOCK REQUEST")
+            return MockResponse(200, "check.resp")
+        # error handling
+        if url == "https%3A//miraclecamstudio.com/":
+            return MockResponse(403, "check_error.json.resp")
+        if url == "https%3A//postmn.top/kUquEi/":
+            return MockResponse(400, "check_error.json.resp")
+        if url == "https%3A//hypevision.online/SBB/index/":
+            return MockResponse(401, "check_error.json.resp")
+        if url == "https%3A//dzaxcbngj.blogspot.com/":
+            return MockResponse(404, "check_error.json.resp")
+        if url == "https%3A//dbmobile-online.app/":
+            return MockResponse(429, "check_error.json.resp")
+        if url == "https%3A//telegram.webcsc.xyz/":
+            return MockResponse(500, "check_error.json.resp")
+        if url == "https%3A//yahoocurrentlyattmail.urest.org/":
+            return MockResponse(422, "check_error.json.resp")
+        if url == "https%3A//returns_zero_data":
+            return MockResponse(411, "check_error.json.resp")
+        raise NotImplementedError("Not Implemented", kwargs)
+
+
+class MockResponse:
+    def __init__(self, status_code: int, filename: str = None, headers: dict = {}):
+        self.status_code = status_code
+        self.text = ""
+        self.headers = headers
+        if filename:
+            self.text = Util.read_file_to_string(f"response/{filename}")
+            self.content = bytes(Util.read_file_to_string(f"response/{filename}"), "utf-8")
+
+    def json(self):
+        return json.loads(self.text)
