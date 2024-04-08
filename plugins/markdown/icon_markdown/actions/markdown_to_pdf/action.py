@@ -7,15 +7,17 @@ from .schema import MarkdownToPdfInput, MarkdownToPdfOutput, Output, Input, Comp
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-def makePDF(html: str, path: str) -> str:
+def make_pdf_bytes(html: str, path: str) -> tuple[bytes, str]:
     infile = path + "str.html"
     outfile = path + "tmp.pdf"
     with open(infile, "w", encoding="utf-8") as file:
         file.write(html)
     pdfkit.from_file(infile, outfile)
     with open(outfile, "rb") as file:
-        out_bytes = file.read().decode("UTF-8", errors="replace")
-    return out_bytes
+        pdf_string = file.read()
+
+    bytes_pdf = utils.to_bytes_pdf(pdf_string)
+    return bytes_pdf, str(pdf_string)
 
 
 class MarkdownToPdf(insightconnect_plugin_runtime.Action):
@@ -34,9 +36,11 @@ class MarkdownToPdf(insightconnect_plugin_runtime.Action):
         if not (((instr is None) ^ (inbytes is None)) or ((instr == "") ^ (inbytes == ""))):
             raise PluginException(
                 cause="Input error",
-                assistance="Only one of Markdown or Markdown String can be defined"
-                if instr != inbytes
-                else "You must define one of Markdown or Markdown String.",
+                assistance=(
+                    "Only one of Markdown or Markdown String can be defined"
+                    if instr != inbytes
+                    else "You must define one of Markdown or Markdown String."
+                ),
             )
 
         path = tempfile.mkdtemp() + "/"
@@ -45,7 +49,8 @@ class MarkdownToPdf(insightconnect_plugin_runtime.Action):
         else:
             html_string = utils.convert(utils.from_bytes(inbytes), "md", "html")
 
-        pdf_string = makePDF(html_string, path)
-        pdf_b64 = utils.to_bytes(pdf_string)
+        pdf_bytes, pdf_string = make_pdf_bytes(html_string, path)
+
         shutil.rmtree(path)
-        return {Output.PDF_STRING: pdf_string, Output.PDF: pdf_b64}
+
+        return {Output.PDF: pdf_bytes, Output.PDF_STRING: pdf_string}

@@ -19,9 +19,11 @@ class HtmlToMarkdown(insightconnect_plugin_runtime.Action):
         if not (((instr is None) ^ (inbytes is None)) or ((instr == "") ^ (inbytes == ""))):
             raise PluginException(
                 cause="Input error",
-                assistance="Only one of HTML or HTML String can be defined"
-                if instr != inbytes
-                else "You must define one of HTML or HTML String.",
+                assistance=(
+                    "Only one of HTML or HTML String can be defined"
+                    if instr != inbytes
+                    else "You must define one of HTML or HTML String."
+                ),
             )
         if instr:
             markdown_string = utils.convert(instr, "html", "md")

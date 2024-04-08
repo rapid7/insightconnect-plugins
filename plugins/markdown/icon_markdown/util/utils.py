@@ -11,6 +11,11 @@ def to_bytes(_string):
     return base64.b64encode(bytes(_string, "UTF-8")).decode("UTF-8")
 
 
+def to_bytes_pdf(_bytes):
+    encoded_bytes = base64.b64encode(_bytes).decode("utf-8")
+    return encoded_bytes
+
+
 def make_file(filetype):
     with NamedTemporaryFile("w", suffix="." + filetype, delete=False) as f:
         return f.name
