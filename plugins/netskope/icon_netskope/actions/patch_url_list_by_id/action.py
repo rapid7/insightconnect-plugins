@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 
-from .schema import Component, Input, PatchUrlListByIdInput, PatchUrlListByIdOutput
+from .schema import Component, Input, PatchUrlListByIdInput, PatchUrlListByIdOutput, Output
 
 
 class PatchUrlListById(insightconnect_plugin_runtime.Action):
@@ -13,7 +13,24 @@ class PatchUrlListById(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        data = {Input.NAME: params.get(Input.NAME)} if params.get(Input.NAME) else {}
-        if all((params.get(Input.URLS), params.get(Input.TYPE))):
-            data["data"] = {Input.URLS: params.get(Input.URLS), Input.TYPE: params.get(Input.TYPE)}
-        return self.connection.client.patch_url_list_by_id(params.get(Input.ID), params.get(Input.ACTION), data)
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        identifier = params.get(Input.ID)
+        name = params.get(Input.NAME)
+        type_ = params.get(Input.TYPE)
+        urls = params.get(Input.URLS)
+        action = params.get(Input.ACTION)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        data = {"name": name} if name else {}
+        if all((urls, type_)):
+            data["data"] = {"urls": urls, "type": type_}
+        response = self.connection.client.patch_url_list_by_id(identifier, action, data)
+        return {
+            Output.ID: response.get("id", 0),
+            Output.NAME: response.get("name", ""),
+            Output.DATA: response.get("data", {"urls": [], "type": ""}),
+            Output.PENDING: response.get("pending", 0),
+            Output.MODIFY_BY: response.get("modify_by", ""),
+            Output.MODIFY_TIME: response.get("modify_time", ""),
+            Output.MODIFY_TYPE: response.get("modify_type", ""),
+        }

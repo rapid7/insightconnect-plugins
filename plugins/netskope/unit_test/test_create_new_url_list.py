@@ -4,15 +4,18 @@ import sys
 sys.path.append(os.path.abspath("../"))
 
 import logging
-from unittest import TestCase, mock
+from typing import Callable
+from unittest import TestCase
+from unittest.mock import MagicMock, patch
 
 from icon_netskope.actions.create_new_url_list import CreateNewUrlList
 from icon_netskope.actions.create_new_url_list.schema import Input
 from icon_netskope.connection.connection import Connection
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 from parameterized import parameterized
 
-from unit_test.mock import (
+from mock import (
     STUB_CONNECTION,
     mock_request_201_api_v2,
     mock_request_400_api_v2,
@@ -52,9 +55,9 @@ class TestCreateNewUrlList(TestCase):
             Input.URLS: ["https://example.com", "https://example.com"],
         }
 
-    @mock.patch("icon_netskope.util.api.ApiClient.get_url_list_by_id", return_value=STUB_GET_URL_LIST_BY_ID)
-    def test_create_new_url_list_ok(self, mock_post):
-        mocked_request(mock_request_201_api_v2)
+    @patch("requests.request", side_effect=mock_request_201_api_v2)
+    @patch("icon_netskope.util.api.ApiClient.get_url_list_by_id", return_value=STUB_GET_URL_LIST_BY_ID)
+    def test_create_new_url_list_ok(self, mock_request: MagicMock, mock_get_url_list_by_id: MagicMock) -> None:
         response = self.action.run(self.params)
         expected_response = {
             "id": 0,
@@ -66,6 +69,9 @@ class TestCreateNewUrlList(TestCase):
             "pending": 0,
         }
         self.assertEqual(response, expected_response)
+        validate(response, self.action.output.schema)
+        mock_request.assert_called()
+        mock_get_url_list_by_id.assert_called()
 
     @parameterized.expand(
         [
@@ -78,7 +84,10 @@ class TestCreateNewUrlList(TestCase):
             (mock_request_bad_json_response_api_v2, PluginException.Preset.INVALID_JSON),
         ],
     )
-    def test_create_new_url_list_bad(self, mock_request, exception):
+    @patch("icon_netskope.util.utils.backoff_function", return_value=0)
+    def test_create_new_url_list_bad(
+        self, mock_request: Callable, exception: str, mock_backoff_function: MagicMock
+    ) -> None:
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
             self.action.run()
@@ -86,3 +95,4 @@ class TestCreateNewUrlList(TestCase):
             context.exception.cause,
             PluginException.causes[exception],
         )
+        mock_backoff_function.assert_called()
