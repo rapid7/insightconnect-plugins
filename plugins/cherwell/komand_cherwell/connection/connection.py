@@ -9,7 +9,6 @@ from komand_cherwell.util.api import Cherwell
 class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
-        self._base_url = None
         self.api = None
 
     def connect(self, params={}):
@@ -24,17 +23,19 @@ class Connection(insightconnect_plugin_runtime.Connection):
         ssl_verify = params.get(Input.SSL_VERIFY)
 
         # Form the base URL for the Cherwell server
-        if not base_uri.startswith("http://") or not base_uri.startswith("https://"):
+        if not base_uri.startswith("http://") or base_uri.startswith("https://"):
             raise PluginException(
-                cause="The input URL does not contain a protocol",
-                assistance="Ensure the URL begins wih https:// or http://"
+                cause="The input URL does not contain a scheme",
+                assistance="Ensure the URL begins wih https:// or http://",
             )
 
         if base_uri.startswith("http://"):
-            self.logger.info("Using HTTP may result in server-side errors resulting from mishandled parameters. If "
-                             "you encounter such errors, it is recommended to use HTTPS.")
-
-        self.api = Cherwell(self._base_url, self.logger, username, password, client_id, authentication_mode, ssl_verify)
+            self.logger.info(
+                "Using HTTP may result in server-side errors resulting from mishandled parameters. If "
+                "you encounter such errors, it is recommended to use HTTPS."
+            )
+        print("base")
+        self.api = Cherwell(base_uri, self.logger, username, password, client_id, authentication_mode, ssl_verify)
 
     def test(self):
         try:

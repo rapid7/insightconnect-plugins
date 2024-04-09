@@ -3,21 +3,17 @@
 The Cherwell plugin is used to administrate incidents in Cherwell
 
 # Key Features
-  
-*This plugin does not contain any key features.*
+
+* Manage incidents
 
 # Requirements
-  
-*This plugin does not contain any requirements.*
 
-# Supported Product Versions
-
-* 22-03-2024
+* Requires a Client ID, username and password from the product
 
 # Documentation
 
 ## Setup
-
+  
 The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -25,9 +21,9 @@ The connection configuration accepts the following parameters:
 |authentication_mode|string|Internal|True|Authentication mode. Either Internal, Windows, LDAP, SAML, Auto|["Internal", "Windows", "LDAP", "SAML", "Auto"]|Internal|
 |client_id|credential_secret_key|None|True|Cherwell Client ID / API Key|None|a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99|
 |ssl_verify|boolean|None|True|Whether to access the server over HTTPS|None|True|
-|url|string|https://guideit.cherwellondemand.com|True|Protocol and hostname of the Cherwell instance. HTTPS is recommended to ensure security and avoid connection errors|None|https://guideit.cherwellondemand.com|
+|url|string|guideit.cherwellondemand.com|True|Scheme and hostname of the Cherwell instance. HTTPS is recommended to ensure security and avoid connection errors|None|guideit.cherwellondemand.com|
 |username_and_password|credential_username_password|None|True|Cherwell username and password|None|{"username": "user@example.com", "password": "mypassword"}|
-
+  
 Example input:
 
 ```
@@ -35,7 +31,7 @@ Example input:
   "authentication_mode": "Internal",
   "client_id": "a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99",
   "ssl_verify": true,
-  "url": "https://guideit.cherwellondemand.com",
+  "url": "guideit.cherwellondemand.com",
   "username_and_password": {
     "password": "mypassword",
     "username": "user@example.com"
@@ -49,7 +45,7 @@ Example input:
 
 
 #### Create Incident
-
+  
 This action is used to create a Cherwell incident
 
 ##### Input
@@ -109,7 +105,7 @@ Example output:
 ```
 
 #### Lookup Incident
-
+  
 This action is used to lookup that returns an incident that includes a list of fields and their record IDs, names, and 
 set values
 
@@ -169,7 +165,7 @@ Example output:
 ```
 
 #### Perform Ad Hoc Search
-
+  
 This action is used to runs an ad-hoc Business Object search. To execute a search with Prompts, the PromptId and Value 
 are required in the data request object
 
@@ -344,7 +340,7 @@ Example output:
 ```
 
 #### Update Incident
-
+  
 This action is used to updates an incident within Cherwell
 
 ##### Input
@@ -373,7 +369,7 @@ Example input:
 | :--- | :--- | :--- | :--- | :--- |
 |raw_response|object|False|The raw JSON returned by the endpoint|{'fieldValidationErrors': [], 'errorMessage': None, 'errorCode': None, 'hasError': False, 'busObPublicId': '762421', 'busObRecId': '9446e3f047458fd7824f3b400f94be3566ac523802'}|
 |success|boolean|False|Boolean indicating whether the business object was successfully created|True|
-  
+
 Example output:
 
 ```
@@ -405,13 +401,18 @@ Example output:
 *There is no troubleshooting for this plugin.*
 
 # Version History
-  
-*This plugin does not contain a version history.*
+
+* 3.0.0 - Updated SDK to insightconnect-plugin-runtime version 5 | Action outputs have been set to non-required | Update connection `url` to require scheme
+* 2.1.1 - New spec and help.md format for the Extension Library
+* 2.1.0 - New action Update Incident
+* 2.0.1 - Fixes issue where Create Incident was not properly formatting data to be passed to Cherwell
+* 2.0.0 - Fixes issue where `client_id` was using the wrong credential type | Update pinned requests version to resolve security vulnerability [CVE-2018-18074](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2018-18074)
+* 1.0.1 - Update vendor and descriptions
+* 1.0.0 - Initial plugin
 
 # Links
-  
-*This plugin does not contain any links.*
+* [Cherwell](https://www.ivanti.com/)
 
 ## References
-  
-*This plugin does not contain any references.*
+
+* [Cherwell API Documentation](https://help.cherwell.com/bundle/cherwell_rest_api_940_help_only/page/oxy_ex-1/content/system_administration/rest_api/csm_rest_api.html)
