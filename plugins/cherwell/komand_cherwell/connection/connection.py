@@ -24,8 +24,15 @@ class Connection(insightconnect_plugin_runtime.Connection):
         ssl_verify = params.get(Input.SSL_VERIFY)
 
         # Form the base URL for the Cherwell server
-        scheme = "https://" if ssl_verify else "http://"
-        self._base_url = f"{scheme}{base_uri}"
+        if not base_uri.startswith("http://") or not base_uri.startswith("https://"):
+            raise PluginException(
+                cause="The input URL does not contain a protocol",
+                assistance="Ensure the URL begins wih https:// or http://"
+            )
+
+        if base_uri.startswith("http://"):
+            self.logger.info("Using HTTP may result in server-side errors resulting from mishandled parameters. If "
+                             "you encounter such errors, it is recommended to use HTTPS.")
 
         self.api = Cherwell(self._base_url, self.logger, username, password, client_id, authentication_mode, ssl_verify)
 

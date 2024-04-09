@@ -29,11 +29,11 @@ hub_tags:
 connection:
   url:
     title: URL
-    description: Hostname of the Cherwell instance
+    description: Protocol and hostname of the Cherwell instance. HTTPS is recommended to ensure security and avoid connection errors
     type: string
     required: true
-    default: guideit.cherwellondemand.com
-    example: guideit.cherwellondemand.com
+    default: https://guideit.cherwellondemand.com
+    example: https://guideit.cherwellondemand.com
   client_id:
     title: Client ID
     description: Cherwell Client ID / API Key

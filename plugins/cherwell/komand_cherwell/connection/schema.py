@@ -46,8 +46,8 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "Hostname of the Cherwell instance",
-      "default": "guideit.cherwellondemand.com",
+      "description": "Protocol and hostname of the Cherwell instance. HTTPS is recommended to ensure security and avoid connection errors",
+      "default": "https://guideit.cherwellondemand.com",
       "order": 1
     },
     "username_and_password": {

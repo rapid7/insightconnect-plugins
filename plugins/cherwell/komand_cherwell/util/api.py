@@ -36,7 +36,13 @@ class Cherwell:
         if "Authorization" not in self.session.headers:
             self.logger.info("Authorization not in session headers, generating token...")
             self.logger.info(f"Using authentication mode {self.authentication_mode}")
-            Cherwell.TOKEN = self._token(self.client_id, self.username, self.password, self.authentication_mode)
+            Cherwell.TOKEN = self._token(
+                self.client_id,
+                self.username,
+                self.password,
+                self.authentication_mode,
+                self.ssl_verify,
+            )
             self.session.headers.update(
                 {
                     "Authorization": f"Bearer {Cherwell.TOKEN}",
@@ -58,13 +64,6 @@ class Cherwell:
         try:
             # Prep request
             req = req.prepare()
-            self.logger.info("Sending a request...")
-            self.logger.info(f"Data is...")
-            self.logger.info("Method:", req.method)
-            self.logger.info("URL:", req.url)
-            self.logger.info("Headers:", req.headers)
-            self.logger.info("Body:", req.body)
-            self.logger.info(f"SSL verification is {self.ssl_verify}")
             resp = self.session.send(req, verify=self.ssl_verify)
             self.response_handler(resp, action_name, custom_error)
             results = resp.json()
@@ -93,14 +92,14 @@ class Cherwell:
             data = f"Response was: {resp.text}"
         raise PluginException(cause=cause_info, assistance=assistance_info, data=data)
 
-    def _token(self, client_id: str, username: str, password: str, authentication_mode: str) -> str:
+    def _token(self, client_id: str, username: str, password: str, authentication_mode: str, verify: bool) -> str:
         """
         Issues an authorization request to the Cherwell server asking for an access token.
         :param client_id: Client ID
         :param username: Cherwell account username
         :param password: Cherwell account password
         :param authentication_mode: Authentication mode used by the Cherwell server
-        :param debug: If true, log the response data
+        :param verify: SSL Verification bool
         :return: Access token as a string
         """
         url = self._base_url + "/CherwellAPI/token"
@@ -120,8 +119,7 @@ class Cherwell:
             "Content-Type": "application/x-www-form-urlencoded",
             "Accept": "application/json",
         }
-        self.logger.info("Sending token request...")
-        response = request("POST", url=url, data=query_params, headers=headers, params=querystring)
+        response = request("POST", url=url, data=query_params, headers=headers, params=querystring, verify=verify)
 
         # Check status code - this is a great early indicator of success/failure. If non-2xx, bail early.
         if response.status_code not in range(200, 299):
@@ -135,14 +133,12 @@ class Cherwell:
         # Let's see if we actually have a JSON response from the server. It looks bad if we dump a JSONDecodeError
         # on the user. Plus, this will allow us to print out the server response in lieu of the proper JSON one.
         try:
-            self.logger.info("Token request successful, retrieving JSON...")
             response_data = response.json()
         except JSONDecodeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
         # Verify the access token is present in the response. If not, there is something wrong.
         if "access_token" in response_data:
-            self.logger.info("Returning access token...")
             return response_data.get("access_token")
         else:
             raise PluginException(
