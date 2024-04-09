@@ -34,7 +34,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 "Using HTTP may result in server-side errors resulting from mishandled parameters. If "
                 "you encounter such errors, it is recommended to use HTTPS."
             )
-        print("base")
         self.api = Cherwell(base_uri, self.logger, username, password, client_id, authentication_mode, ssl_verify)
 
     def test(self):
