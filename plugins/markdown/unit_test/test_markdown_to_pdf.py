@@ -8,7 +8,7 @@ from icon_markdown.actions.markdown_to_pdf import MarkdownToPdf
 from icon_markdown.actions.markdown_to_pdf.schema import Input, Output
 from insightconnect_plugin_runtime.exceptions import PluginException
 from unittest import mock
-from unit_test.mock import mock_request_markdown_to_pdf, mocked_request
+from mock import mock_request_markdown_to_pdf, mocked_request
 
 
 class TestMarkdownToPdf(TestCase):
