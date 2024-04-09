@@ -1,0 +1,2 @@
+UTF_ENCODING = "UTF-8"
+LATIN_ENCODING = "latin-1"

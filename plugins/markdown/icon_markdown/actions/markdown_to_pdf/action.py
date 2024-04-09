@@ -5,10 +5,10 @@ import shutil
 from icon_markdown.util import utils
 from .schema import MarkdownToPdfInput, MarkdownToPdfOutput, Output, Input, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
-from typing import Tuple
+from typing import Dict
 
 
-def make_pdf_bytes(html: str, path: str) -> Tuple[bytes, str]:
+def make_pdf_bytes(html: str, path: str) -> Dict[str, str]:
     infile = path + "str.html"
     outfile = path + "tmp.pdf"
     with open(infile, "w", encoding="utf-8") as file:
@@ -18,7 +18,7 @@ def make_pdf_bytes(html: str, path: str) -> Tuple[bytes, str]:
         pdf_string = file.read()
 
     bytes_pdf = utils.to_bytes_pdf(pdf_string)
-    return bytes_pdf, str(pdf_string)
+    return {"pdf": bytes_pdf, "pdf_string": str(pdf_string)}
 
 
 class MarkdownToPdf(insightconnect_plugin_runtime.Action):
@@ -50,8 +50,8 @@ class MarkdownToPdf(insightconnect_plugin_runtime.Action):
         else:
             html_string = utils.convert(utils.from_bytes(inbytes), "md", "html")
 
-        pdf_bytes, pdf_string = make_pdf_bytes(html_string, path)
+        results = make_pdf_bytes(html_string, path)
 
         shutil.rmtree(path)
 
-        return {Output.PDF: pdf_bytes, Output.PDF_STRING: pdf_string}
+        return {Output.PDF: results.get("pdf"), Output.PDF_STRING: results.get("pdf_string")}
