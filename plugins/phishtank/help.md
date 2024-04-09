@@ -25,12 +25,14 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |credentials|credential_secret_key|None|False|The API key to use|None|secret_key|
+|username|string|rapid7-plugin|True|Phishtank username|None|UserExample|
 
 Example input:
 
 ```
 {
-  "credentials": "secret_key"
+  "credentials": "secret_key",
+  "username": "rapid7-plugin"
 }
 ```
 
@@ -102,7 +104,7 @@ Example output:
 
 # Version History
 
-* 2.0.0 - Version bumped requirements.txt | Updated SDK
+* 2.0.0 - Version bumped requirements.txt | Updated SDK | Added new connection parameter
 * 1.0.2 - Update requests library
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types

@@ -15,7 +15,7 @@ class Util:
     def default_connector(action: insightconnect_plugin_runtime.Action):
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
-        params = {Input.CREDENTIALS: {"secretKey": "phishtank-secret-key"}}
+        params = {Input.CREDENTIALS: {"secretKey": "phishtank-secret-key"}, Input.USERNAME: "phishtank-username"}
         default_connection.connect(params)
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")

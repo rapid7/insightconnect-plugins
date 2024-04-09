@@ -1,44 +1,46 @@
 import logging
+import uuid
+
 import insightconnect_plugin_runtime
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 from requests import Response
-import json
 from urllib.parse import quote
 
 
 class API(object):
-    def __init__(self, credentials: str):
+    def __init__(self, credentials: str, username: str):
         self.credentials = credentials
+        self.username = username
 
     def check(self, url):
+        # if self.username:
+        #     headers = {"User-Agent": f"phishtank/{self.username}"}
+        # else:
+        #     string = "rapid7-plugin-{random_id}"
+        #     self.username = string.format(random_id=uuid.uuid4())
+        #     headers = {"User-Agent": f"phishtank/{self.username}"}
+
+        phishtank_request = requests.post(
+            "https://checkurl.phishtank.com/checkurl/",
+            data={"format": "json", "url": quote(url), "app_key": self.credentials},
+            headers={"User-Agent": f"phishtank/{self.username}"},
+            timeout=60,
+        )
+        if requests.exceptions:
+            API.response_handler(phishtank_request)
+
         try:
-            r = requests.post(
-                "https://checkurl.phishtank.com/checkurl/",
-                data={"format": "json", "url": quote(url), "app_key": self.credentials},
-                timeout=60,
-            )
+            result = phishtank_request.json()
+        except requests.exceptions.JSONDecodeError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=phishtank_request)
 
-            try:
-                result = r.json()
-            except requests.exceptions.JSONDecodeError:
-                raise PluginException(preset=PluginException.Preset.UNKNOWN)
+        if "phish_detail_page" in result:
+            result["phish_detail_url"] = result["phish_detail_page"]
+            del result["phish_detail_page"]
 
-            if requests.exceptions:
-                API.response_handler(r)
-
-            if "phish_detail_page" in result:
-                result["phish_detail_url"] = result["phish_detail_page"]
-                del result["phish_detail_page"]
-            if "verified_at" in result:
-                if result["verified_at"] is None:
-                    result["verified_at"] = str(result["verified_at"])
-
-            return result
-
-        except requests.exceptions.HTTPError as exception:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=exception)
+        return result
 
     def response_handler(response: Response) -> Response:
         """

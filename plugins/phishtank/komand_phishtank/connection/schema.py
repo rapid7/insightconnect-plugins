@@ -5,6 +5,7 @@ import json
 
 class Input:
     CREDENTIALS = "credentials"
+    USERNAME = "username"
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -18,10 +19,18 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "API Key",
       "description": "The API key to use",
       "order": 1
+    },
+    "username": {
+      "type": "string",
+      "title": "Username",
+      "description": "Phishtank username",
+      "default": "rapid7-plugin",
+      "order": 2
     }
   },
   "required": [
-    "credentials"
+    "credentials",
+    "username"
   ],
   "definitions": {
     "credential_secret_key": {

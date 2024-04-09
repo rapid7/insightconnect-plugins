@@ -7,7 +7,7 @@ description: Phishtank is a community-driven anti-phishing site where users subm
 version: 2.0.0
 sdk:
   type: slim
-  version: 5
+  version: 5.4.5
   user: nobody
 supported_versions: ["2024-20-03"]
 connection_version: 2
@@ -23,7 +23,7 @@ requirements: ["PhishTank API key"]
 references: ["[PhishTank](https://www.phishtank.com/)", "[PhishTank API](https://www.phishtank.com/api_info.php)"]
 links: ["[PhishTank](https://www.phishtank.com/)"]
 version_history:
-- 2.0.0 - Version bumped requirements.txt | Updated SDK
+- 2.0.0 - Version bumped requirements.txt | Updated SDK | Added new connection parameter
 - 1.0.2 - Update requests library
 - 1.0.1 - New spec and help.md format for the Extension Library
 - 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
@@ -47,6 +47,12 @@ connection:
     type: credential_secret_key
     required: false
     example: secret_key
+  username:
+    title: Username
+    description: Phishtank username
+    type: string
+    required: false
+    example: UserExample
 actions:
   check:
     title: Check URL

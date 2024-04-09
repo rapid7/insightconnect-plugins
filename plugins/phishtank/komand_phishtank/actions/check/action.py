@@ -18,6 +18,6 @@ class Check(insightconnect_plugin_runtime.Action):
         if not url.startswith("http://") and not url.startswith("https://"):
             url = "https://" + url
 
-        response = self.connection.api.check(url)
+        response = self.connection.phishtank_api.check(url)
         self.logger.info(f"result: {response}")
         return response
