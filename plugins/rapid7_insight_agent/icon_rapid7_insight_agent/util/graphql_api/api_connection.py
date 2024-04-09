@@ -6,6 +6,7 @@ import requests
 from icon_rapid7_insight_agent.util.graphql_api import agent_typer
 from icon_rapid7_insight_agent.util.graphql_api.region_map import region_map
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
+from insightconnect_plugin_runtime.helper import clean
 
 
 class ApiConnection:
@@ -298,7 +299,7 @@ class ApiConnection:
                         agent_.get("host", {}).get("primaryAddress", {}).get("ip") == ip_address,
                     )
                 ),
-                agents,
+                clean(agents),
             ),
         )
 
@@ -318,14 +319,20 @@ class ApiConnection:
         """
         agents = []
         payload = {
-            "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
+            "query": "query( $orgId:String! ) { organization(id: $orgId) { assets( first: 10000 ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } publicIpAddress location { city region countryName countryCode continent } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
             "variables": {"orgId": self.org_key},
         }
 
         self.logger.info("Getting all agents...")
         results_object = self._post_payload(payload)
 
-        has_next_page = results_object.get("data").get("organization").get("assets").get("pageInfo").get("hasNextPage")
+        has_next_page = (
+            results_object.get("data", {})
+            .get("organization", {})
+            .get("assets", {})
+            .get("pageInfo", {})
+            .get("hasNextPage")
+        )
         agents.extend(self._get_agents_from_result_object(results_object))
         self.logger.info("Initial agents received.")
 
