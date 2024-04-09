@@ -40,7 +40,9 @@ def convert(content, from_format, to_format, use_file=False):
     # ubuntu-bullseye = --atx-headers
     # macos = --markdown-headings=atx
     # (This is due to apt not being able to provide the latest version of pandoc)
-    output = pypandoc.convert_text(content, to_format, format=from_format, outputfile=filename)
+    output = pypandoc.convert_text(
+        content, to_format, format=from_format, outputfile=filename, extra_args=["--atx-headers"]
+    )
     if use_file:
         content = read_file(filename)
         try:
