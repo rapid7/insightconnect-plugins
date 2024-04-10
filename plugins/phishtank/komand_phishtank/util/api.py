@@ -1,7 +1,4 @@
-import logging
 import uuid
-
-import insightconnect_plugin_runtime
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
@@ -15,17 +12,17 @@ class API(object):
         self.username = username
 
     def check(self, url):
-        # if self.username:
-        #     headers = {"User-Agent": f"phishtank/{self.username}"}
-        # else:
-        #     string = "rapid7-plugin-{random_id}"
-        #     self.username = string.format(random_id=uuid.uuid4())
-        #     headers = {"User-Agent": f"phishtank/{self.username}"}
+        if self.username:
+            headers = {"User-Agent": f"phishtank/{self.username}"}
+        else:
+            string = "rapid7-plugin-{random_id}"
+            self.username = string.format(random_id=uuid.uuid4())
+            headers = {"User-Agent": f"phishtank/{self.username}"}
 
         phishtank_request = requests.post(
             "https://checkurl.phishtank.com/checkurl/",
             data={"format": "json", "url": quote(url), "app_key": self.credentials},
-            headers={"User-Agent": f"phishtank/{self.username}"},
+            headers=headers,
             timeout=60,
         )
         if requests.exceptions:
@@ -35,10 +32,6 @@ class API(object):
             result = phishtank_request.json()
         except requests.exceptions.JSONDecodeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=phishtank_request)
-
-        if "phish_detail_page" in result:
-            result["phish_detail_url"] = result["phish_detail_page"]
-            del result["phish_detail_page"]
 
         return result
 

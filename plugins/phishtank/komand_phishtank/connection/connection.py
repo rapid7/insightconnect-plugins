@@ -1,10 +1,8 @@
-import logging
-
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
-from ..util.api import API
+from komand_phishtank.util.api import API
 
 
 class Connection(insightconnect_plugin_runtime.Connection):

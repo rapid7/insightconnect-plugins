@@ -19,5 +19,4 @@ class Check(insightconnect_plugin_runtime.Action):
             url = "https://" + url
 
         response = self.connection.phishtank_api.check(url)
-        self.logger.info(f"result: {response}")
         return response

@@ -12,27 +12,25 @@ Phishtank is a community-driven anti-phishing site where users submit suspected 
 
 # Supported Product Versions
 
-* 2024-20-03
+* 2024-10-04
 
 # Documentation
 
 ## Setup
-
-This plugin requires a PhishTank API key to authenticate.
 
 The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |credentials|credential_secret_key|None|False|The API key to use|None|secret_key|
-|username|string|rapid7-plugin|True|Phishtank username|None|UserExample|
+|username|string|None|False|Phishtank username|None|UserExample|
 
 Example input:
 
 ```
 {
   "credentials": "secret_key",
-  "username": "rapid7-plugin"
+  "username": "UserExample"
 }
 ```
 
@@ -63,10 +61,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
+|details|[]string|False|An array of details about the phish|['ip_address': '104.21.54.41', 'cidr_block': '104.21.32.0/19', 'announcing_network': '13335', 'rir': 'arin', 'country': 'US', 'detail_time': '2024-04-10T07:12:22+00:00']|
 |in_database|boolean|False|If the URL is in the PhishTank database|False|
-|phish_detail_url|string|False|PhishTank detail URL for the phish, where you can view data about the phish, including a screenshot and the community votes|http://data.phishtank.com/data/online-valid.json|
+|online|string|False|Whether or not the phish is online and optional|True|
+|phish_detail_page|string|False|PhishTank detail URL for the phish, where you can view data about the phish, including a screenshot and the community votes|http://data.phishtank.com/data/online-valid.json|
 |phish_id|string|False|The ID number by which PhishTank refers to a phish submission|9014567|
 |submitted_at|date|False|The date and time at which this phish was reported to PhishTank|2009-06-20 15:37:31+00:00|
+|target|string|False|The name of the company or brand the target is phishing, if it is known|Other|
 |url|string|False|Submitted URL|example.com|
 |valid|boolean|False|Whether the phish is valid or not|True|
 |verified|boolean|False|Whether or not this phish has been verified by the PhishTank community|True|
@@ -76,10 +77,13 @@ Example output:
 
 ```
 {
+  "details": "['ip_address': '104.21.54.41', 'cidr_block': '104.21.32.0/19', 'announcing_network': '13335', 'rir': 'arin', 'country': 'US', 'detail_time': '2024-04-10T07:12:22+00:00']",
   "in_database": false,
-  "phish_detail_url": "http://data.phishtank.com/data/online-valid.json",
+  "online": true,
+  "phish_detail_page": "http://data.phishtank.com/data/online-valid.json",
   "phish_id": 9014567,
   "submitted_at": "2009-06-20 15:37:31+00:00",
+  "target": "Other",
   "url": "example.com",
   "valid": true,
   "verified": true,
@@ -104,7 +108,7 @@ Example output:
 
 # Version History
 
-* 2.0.0 - Version bumped requirements.txt | Updated SDK | Added new connection parameter
+* 2.0.0 - Updated requirements.txt | Updated SDK | Added username as new connection parameter
 * 1.0.2 - Update requests library
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types

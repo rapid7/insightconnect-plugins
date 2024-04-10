@@ -2,10 +2,11 @@
 {
 	"phish_id": 9024601,
 	"url": "http://cielobbfidelidade.xyz/home/",
-	"phish_detail_url": "http://www.phishtank.com/phish_detail.php?phish_id=123456",
+	"phish_detail_page": "http://www.phishtank.com/phish_detail.php?phish_id=123456",
 	"submission_time": "2024-04-02T15:15:47+00:00",
 	"verified": "yes",
 	"verification_time": "2024-04-02T15:15:47+00:00",
+	"verified_at": "2024-04-02T15:15:47+00:00",
 	"online": "yes",
 	"target": "",
 	"details": [
