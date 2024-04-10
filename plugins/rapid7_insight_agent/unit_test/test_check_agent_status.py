@@ -1,9 +1,10 @@
 import os
 import sys
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 sys.path.append(os.path.abspath("../"))
 from icon_rapid7_insight_agent.actions.check_agent_status.action import CheckAgentStatus
@@ -14,13 +15,14 @@ from util import Util
 
 @patch("requests.sessions.Session.post", side_effect=Util.mocked_request)
 class TestCheckAgentStatus(TestCase):
-    def test_check_agent_status(self, mock_request):
+    def test_check_agent_status(self, mock_request: MagicMock) -> None:
         action = Util.default_connector(CheckAgentStatus())
         actual = action.run({Input.AGENT_ID: "goodID"})
         expect = Util.load_json("expected/check_agent_status.exp")
+        validate(actual, action.output.schema)
         self.assertEqual(expect, actual)
 
-    def test_bad_agent_id(self, mock_request):
+    def test_bad_agent_id(self, mock_request: MagicMock) -> None:
         with self.assertRaises(PluginException) as exception:
             action = Util.default_connector(CheckAgentStatus())
             action.run({Input.AGENT_ID: "badID"})
