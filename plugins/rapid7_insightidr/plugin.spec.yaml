@@ -514,7 +514,7 @@ types:
     token_seed:
       title: Token Seed
       type: string
-      description: he seed used to generate the log token (if the log's source type is "token")
+      description: The seed used to generate the log token (if the log's source type is "token")
       required: false
     retention_period:
       title: Retention Period
