@@ -21,7 +21,7 @@ The connection configuration accepts the following parameters:
 |authentication_mode|string|Internal|True|Authentication mode. Either Internal, Windows, LDAP, SAML, Auto|["Internal", "Windows", "LDAP", "SAML", "Auto"]|Internal|
 |client_id|credential_secret_key|None|True|Cherwell Client ID / API Key|None|a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99|
 |ssl_verify|boolean|None|True|Whether to access the server over HTTPS|None|True|
-|url|string|guideit.cherwellondemand.com|True|Scheme and hostname of the Cherwell instance. HTTPS is recommended to ensure security and avoid connection errors|None|guideit.cherwellondemand.com|
+|url|string|guideit.cherwellondemand.com|True|Scheme and hostname of the Cherwell instance. HTTPS is recommended to ensure security and avoid connection errors. If no scheme is provided, HTTPS will be used by default|None|guideit.cherwellondemand.com|
 |username_and_password|credential_username_password|None|True|Cherwell username and password|None|{"username": "user@example.com", "password": "mypassword"}|
   
 Example input:
@@ -402,7 +402,7 @@ Example output:
 
 # Version History
 
-* 3.0.0 - Updated SDK to insightconnect-plugin-runtime version 5 | Action outputs have been set to non-required | Update connection `url` to require scheme
+* 3.0.0 - Updated SDK to insightconnect-plugin-runtime version 5 | Action outputs have been set to non-required | Update connection `url` to require scheme or default to use HTTPS
 * 2.1.1 - New spec and help.md format for the Extension Library
 * 2.1.0 - New action Update Incident
 * 2.0.1 - Fixes issue where Create Incident was not properly formatting data to be passed to Cherwell
