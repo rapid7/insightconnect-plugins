@@ -1,22 +1,11 @@
 [
-{
-	"phish_id": 9024601,
-	"url": "http://cielobbfidelidade.xyz/home/",
-	"phish_detail_page": "http://www.phishtank.com/phish_detail.php?phish_id=123456",
-	"submission_time": "2024-04-02T15:15:47+00:00",
-	"verified": "yes",
-	"verification_time": "2024-04-02T15:15:47+00:00",
-	"verified_at": "2024-04-02T15:15:47+00:00",
-	"online": "yes",
-	"target": "",
-	"details": [
-	{
-		"ip_address": "1.2.3.4",
-		"cidr_block": "1.2.3.0/24",
-		"announcing_network": "1234",
-		"rir": "arin",
-		"detail_time": "2006-10-01T02:30:54+00:00"
-	}
-	]
-}
+  {
+    "phish_id": 9024601,
+    "url": "http://cielobbfidelidade.xyz/home/",
+    "in_database": true,
+    "phish_detail_page": "http://www.phishtank.com/phish_detail.php?phish_id=123456",
+    "valid": true,
+    "verified": "yes",
+    "verified_at": "2024-04-02T15:15:47+00:00"
+  }
 ]

@@ -4,7 +4,7 @@ from unittest.mock import patch, MagicMock
 from unittest import TestCase
 from komand_phishtank.actions.check import Check
 from insightconnect_plugin_runtime.exceptions import PluginException
-from util import Util
+from unit_test.util import Util
 from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))

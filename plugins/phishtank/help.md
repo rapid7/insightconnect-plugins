@@ -61,13 +61,9 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|details|[]string|False|An array of details about the phish|['ip_address': '104.21.54.41', 'cidr_block': '104.21.32.0/19', 'announcing_network': '13335', 'rir': 'arin', 'country': 'US', 'detail_time': '2024-04-10T07:12:22+00:00']|
 |in_database|boolean|False|If the URL is in the PhishTank database|False|
-|online|string|False|Whether or not the phish is online and optional|True|
 |phish_detail_page|string|False|PhishTank detail URL for the phish, where you can view data about the phish, including a screenshot and the community votes|http://data.phishtank.com/data/online-valid.json|
 |phish_id|string|False|The ID number by which PhishTank refers to a phish submission|9014567|
-|submitted_at|date|False|The date and time at which this phish was reported to PhishTank|2009-06-20 15:37:31+00:00|
-|target|string|False|The name of the company or brand the target is phishing, if it is known|Other|
 |url|string|False|Submitted URL|example.com|
 |valid|boolean|False|Whether the phish is valid or not|True|
 |verified|boolean|False|Whether or not this phish has been verified by the PhishTank community|True|
@@ -77,13 +73,9 @@ Example output:
 
 ```
 {
-  "details": "['ip_address': '104.21.54.41', 'cidr_block': '104.21.32.0/19', 'announcing_network': '13335', 'rir': 'arin', 'country': 'US', 'detail_time': '2024-04-10T07:12:22+00:00']",
   "in_database": false,
-  "online": true,
   "phish_detail_page": "http://data.phishtank.com/data/online-valid.json",
   "phish_id": 9014567,
-  "submitted_at": "2009-06-20 15:37:31+00:00",
-  "target": "Other",
   "url": "example.com",
   "valid": true,
   "verified": true,
@@ -108,7 +100,7 @@ Example output:
 
 # Version History
 
-* 2.0.0 - Updated requirements.txt | Updated SDK | Added username as new connection parameter
+* 2.0.0 - Update requirements.txt | SDK update | New connection parameter `username` | 'submitted_at' removed from action outputs
 * 1.0.2 - Update requests library
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types

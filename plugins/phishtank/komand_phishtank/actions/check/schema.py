@@ -12,13 +12,9 @@ class Input:
 
 
 class Output:
-    DETAILS = "details"
     IN_DATABASE = "in_database"
-    ONLINE = "online"
     PHISH_DETAIL_PAGE = "phish_detail_page"
     PHISH_ID = "phish_id"
-    SUBMITTED_AT = "submitted_at"
-    TARGET = "target"
     URL = "url"
     VALID = "valid"
     VERIFIED = "verified"
@@ -55,26 +51,11 @@ class CheckOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "details": {
-      "type": "array",
-      "title": "Phish Details",
-      "description": "An array of details about the phish",
-      "items": {
-        "type": "string"
-      },
-      "order": 10
-    },
     "in_database": {
       "type": "boolean",
       "title": "In Database",
       "description": "If the URL is in the PhishTank database",
       "order": 2
-    },
-    "online": {
-      "type": "string",
-      "title": "Online",
-      "description": "Whether or not the phish is online and optional",
-      "order": 9
     },
     "phish_detail_page": {
       "type": "string",
@@ -87,20 +68,6 @@ class CheckOutput(insightconnect_plugin_runtime.Output):
       "title": "Phish ID",
       "description": "The ID number by which PhishTank refers to a phish submission",
       "order": 3
-    },
-    "submitted_at": {
-      "type": "string",
-      "format": "date-time",
-      "displayType": "date",
-      "title": "Submitted At",
-      "description": "The date and time at which this phish was reported to PhishTank",
-      "order": 8
-    },
-    "target": {
-      "type": "string",
-      "title": "Target",
-      "description": "The name of the company or brand the target is phishing, if it is known",
-      "order": 11
     },
     "url": {
       "type": "string",

@@ -23,7 +23,7 @@ requirements: ["PhishTank API key"]
 references: ["[PhishTank](https://www.phishtank.com/)", "[PhishTank API](https://www.phishtank.com/api_info.php)"]
 links: ["[PhishTank](https://www.phishtank.com/)"]
 version_history:
-- 2.0.0 - Updated requirements.txt | Updated SDK | Added username as new connection parameter
+- 2.0.0 - Update requirements.txt | SDK update | New connection parameter `username` | 'submitted_at' removed from action outputs
 - 1.0.2 - Update requests library
 - 1.0.1 - New spec and help.md format for the Extension Library
 - 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
@@ -110,27 +110,3 @@ actions:
         type: boolean
         required: false
         example: true
-      submitted_at:
-        title: Submitted At
-        description: The date and time at which this phish was reported to PhishTank
-        type: date
-        required: false
-        example: 2009-06-20T15:37:31+00:00
-      online:
-        title: Online
-        description: Whether or not the phish is online and optional
-        type: string
-        required: false
-        example: yes
-      details:
-        title: Phish Details
-        description: An array of details about the phish
-        type: '[]string'
-        required: false
-        example: "['ip_address': '104.21.54.41', 'cidr_block': '104.21.32.0\/19', 'announcing_network': '13335', 'rir': 'arin', 'country': 'US', 'detail_time': '2024-04-10T07:12:22+00:00']"
-      target:
-        title: Target
-        description: The name of the company or brand the target is phishing, if it is known
-        type: string
-        required: false
-        example: Other
