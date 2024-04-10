@@ -17,8 +17,7 @@
               }
             ],
             "primaryAddress": {
-              "ip": "12.43.13.43",
-              "mac": ""
+              "ip": "12.43.13.43"
             },
             "uniqueIdentity": [],
             "attributes": []
@@ -140,6 +139,13 @@
           "id": "asd21w312312kl353nqewqe21312e12qxa35d4d65dee24",
           "platform": "linux",
           "publicIpAddress": "0.0.0.0",
+          "location": {
+            "city": "ExampleCity",
+            "region": "ExampleRegion",
+            "countryName": "ExampleCountryName",
+            "countryCode": "ExampleCountryCode",
+            "continent": "ExampleContinent"
+          },
           "host": {
             "vendor": "Ubuntu",
             "version": "20.04",

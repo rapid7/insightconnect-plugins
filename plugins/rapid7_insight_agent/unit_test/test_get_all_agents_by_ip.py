@@ -19,7 +19,6 @@ from util import Util
 class TestGetAllAgentsByIp(TestCase):
     def setUp(self) -> None:
         self.action = Util.default_connector(GetAllAgentsByIp())
-        self.maxDiff = None
 
     @parameterized.expand(Util.load_json("parameters/get_all_agents_by_ip.json.resp").get("parameters"))
     @patch("requests.sessions.Session.post", side_effect=Util.mocked_request)

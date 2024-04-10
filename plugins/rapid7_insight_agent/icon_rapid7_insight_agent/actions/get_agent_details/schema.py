@@ -72,17 +72,29 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
           "description": "Host",
           "order": 2
         },
+        "publicIpAddress": {
+          "type": "string",
+          "title": "Public IP Address",
+          "description": "The agent's public IP address",
+          "order": 3
+        },
+        "location": {
+          "$ref": "#/definitions/location",
+          "title": "Location",
+          "description": "The agent's location details",
+          "order": 4
+        },
         "id": {
           "type": "string",
           "title": "ID",
           "description": "ID",
-          "order": 3
+          "order": 5
         },
         "platform": {
           "type": "string",
           "title": "Platform",
           "description": "Platform",
-          "order": 4
+          "order": 6
         }
       }
     },
@@ -242,6 +254,42 @@ class GetAgentDetailsOutput(insightconnect_plugin_runtime.Output):
           "title": "Source",
           "description": "Source",
           "order": 2
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "title": "location",
+      "properties": {
+        "city": {
+          "type": "string",
+          "title": "City",
+          "description": "The name of the city where the agent is located",
+          "order": 1
+        },
+        "region": {
+          "type": "string",
+          "title": "Region",
+          "description": "The name of the region where the agent is located",
+          "order": 2
+        },
+        "countryName": {
+          "type": "string",
+          "title": "Country Name",
+          "description": "The name of the country where the agent is located",
+          "order": 3
+        },
+        "countryCode": {
+          "type": "string",
+          "title": "Country Code",
+          "description": "The code of the country where the agent is located",
+          "order": 4
+        },
+        "continent": {
+          "type": "string",
+          "title": "Continent",
+          "description": "The name of the continent where the agent is located",
+          "order": 5
         }
       }
     }

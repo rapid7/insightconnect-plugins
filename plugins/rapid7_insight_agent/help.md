@@ -3,29 +3,29 @@
 Using the Insight Agent plugin from InsightConnect, you can quarantine, unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices across your organization
 
 # Key Features
-  
-* The agent is used by [Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/) and [InsightVM](https://www.rapid7.com/products/insightvm/) customers to monitor endpoints. 
+
+* The agent is used by [Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/) and [InsightVM](https://www.rapid7.com/products/insightvm/) customers to monitor endpoints.
 
 # Requirements
 
-* [Platform API Key](https://docs.rapid7.com/insight/managing-platform-api-keys/)  
-* Administrator access to InsightIDR  
+* [Platform API Key](https://docs.rapid7.com/insight/managing-platform-api-keys/)
+* Administrator access to InsightIDR
 
 # Supported Product Versions
-  
+
 * Rapid7 Insight Agent 2023-08-18
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|True|User or Organization Key from the Insight Platform|None|a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99|
 |region|string|United States|True|Region|["United States", "United States 2", "United States 3", "Europe", "Canada", "Australia", "Japan"]|United States|
-  
+
 Example input:
 
 ```
@@ -41,7 +41,7 @@ Example input:
 
 
 #### Check Agent Status
-  
+
 This action is used to get the online status and quarantine state of an agent
 
 ##### Input
@@ -79,7 +79,7 @@ Example output:
 ```
 
 #### Get Agent Details
-  
+
 This action is used to find and display detailed information about a device
 
 ##### Input
@@ -138,13 +138,12 @@ Example output:
 ```
 
 #### Get All Agents by IP Address
-  
+
 This action is used to find all agents that share the same public or private IP address and display details about them
 
 **WARNING!**
 
 Please note that taking actions such as automatically quarantining machines (`Quarantine` action) based on the response of this action may result in the isolation of all machines that share the same public IP address. This action should be taken at your own risk.
-
 
 ##### Input
 
@@ -277,7 +276,7 @@ Example output:
 ```
 
 #### Quarantine
-  
+
 This action is used to quarantine or unquarantine on a device
 
 ##### Input
@@ -313,7 +312,7 @@ Example output:
 ```
 
 #### Quarantine Multiple
-  
+
 This action is used to quarantine or unquarantine multiple hosts
 
 ##### Input
@@ -421,6 +420,16 @@ Example output:
 |Vendor|string|None|False|Vendor|None|
 |Version|string|None|False|Version|None|
   
+**location**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|City|string|None|False|The name of the city where the agent is located|None|
+|Continent|string|None|False|The name of the continent where the agent is located|None|
+|Country Code|string|None|False|The code of the country where the agent is located|None|
+|Country Name|string|None|False|The name of the country where the agent is located|None|
+|Region|string|None|False|The name of the region where the agent is located|None|
+  
 **agent**
 
 |Name|Type|Default|Required|Description|Example|
@@ -428,7 +437,9 @@ Example output:
 |Agent Information|agent_info|None|False|Agent information|None|
 |Host|host|None|False|Host|None|
 |ID|string|None|False|ID|None|
+|Location|location|None|False|The agent's location details|None|
 |Platform|string|None|False|Platform|None|
+|Public IP Address|string|None|False|The agent's public IP address|None|
   
 **quarantine_multiple_error**
 
@@ -444,22 +455,23 @@ Example output:
 
 # Version History
 
+* 2.1.1 - `Get All Agents by IP Address`: Fixed issue where action failed when agent did not have a primary address, and extended output to include agent location details | `Get Agent Details`: Extended output to include agent's public IP address and location 
 * 2.1.0 - Updated SDK to the latest version | New action added `Get All Agents by IP Address`
 * 2.0.1 - Update `Connection Test` to identify if `Region` is incorrect  | Update Plugin runtime to version 5
-* 2.0.0 - Update action `Quarantine Multiple` outputs to Completed and Failed, removed All Operations Successful, replaced output Agent IDs with Hostname  
-* 1.2.0 - New action: `Quarantine Multiple`  
-* 1.1.1 - Quarantine: Fix incorrect behavior for unquarantine when the agent ID is wrong  
-* 1.1.0 - Cloud enabled  
-* 1.0.4 - Add new supported regions for API | Create unit tests for actions Check Agent Status, Quarantine, Get Agent Details    
-* 1.0.3 - Documentation update  
-* 1.0.2 - Fix for a case-sensitive agent hostname  
-* 1.0.1 - Documentation update  
-* 1.0.0 - Initial plugin  
+* 2.0.0 - Update action `Quarantine Multiple` outputs to Completed and Failed, removed All Operations Successful, replaced output Agent IDs with Hostname
+* 1.2.0 - New action: `Quarantine Multiple`
+* 1.1.1 - Quarantine: Fix incorrect behavior for unquarantine when the agent ID is wrong
+* 1.1.0 - Cloud enabled
+* 1.0.4 - Add new supported regions for API | Create unit tests for actions Check Agent Status, Quarantine, Get Agent Details
+* 1.0.3 - Documentation update
+* 1.0.2 - Fix for a case-sensitive agent hostname
+* 1.0.1 - Documentation update
+* 1.0.0 - Initial plugin
 
 # Links
 
-* [Rapid7 Insight Agent](https://docs.rapid7.com/insight-agent/overview/)  
+* [Rapid7 Insight Agent](https://docs.rapid7.com/insight-agent/overview/)
 
 ## References
-  
-* [Manage Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)  
+
+* [Manage Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)
