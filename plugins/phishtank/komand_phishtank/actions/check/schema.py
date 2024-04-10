@@ -57,7 +57,7 @@ class CheckOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "details": {
       "type": "array",
-      "title": "Phish details",
+      "title": "Phish Details",
       "description": "An array of details about the phish",
       "items": {
         "type": "string"
