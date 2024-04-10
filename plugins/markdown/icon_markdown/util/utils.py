@@ -1,14 +1,19 @@
 import base64
 import pypandoc
 from tempfile import NamedTemporaryFile
+from icon_markdown.util.constants import UTF_ENCODING, LATIN_ENCODING
 
 
 def from_bytes(_bytes):
-    return base64.b64decode(bytes(_bytes, "UTF-8")).decode("UTF-8")
+    return base64.b64decode(bytes(_bytes, UTF_ENCODING)).decode(UTF_ENCODING)
 
 
 def to_bytes(_string):
-    return base64.b64encode(bytes(_string, "UTF-8")).decode("UTF-8")
+    return base64.b64encode(bytes(_string, UTF_ENCODING)).decode(UTF_ENCODING)
+
+
+def to_bytes_pdf(_bytes):
+    return base64.b64encode(_bytes).decode(UTF_ENCODING)
 
 
 def make_file(filetype):
@@ -41,8 +46,8 @@ def convert(content, from_format, to_format, use_file=False):
     if use_file:
         content = read_file(filename)
         try:
-            return content.decode("UTF-8")
+            return content.decode(UTF_ENCODING)
         except UnicodeDecodeError:
-            return content.decode("latin-1")
+            return content.decode(LATIN_ENCODING)
     else:
         return output
