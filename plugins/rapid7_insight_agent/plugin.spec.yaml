@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insight_agent
 title: Rapid7 Insight Agent
 description: Using the Insight Agent plugin from InsightConnect, you can quarantine, unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices across your organization
-version: 2.1.0
+version: 2.1.1
 connection_version: 2
 supported_versions: ["Rapid7 Insight Agent 2023-08-18"]
 vendor: rapid7
@@ -12,9 +12,31 @@ support: rapid7
 status: []
 cloud_ready: true
 sdk:
-  type: full
-  version: 5.4.4
+  type: slim
+  version: 5.4.6
   user: nobody
+key_features:
+  - "The agent is used by [Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/) and [InsightVM](https://www.rapid7.com/products/insightvm/) customers to monitor endpoints."
+requirements:
+  - "[Platform API Key](https://docs.rapid7.com/insight/managing-platform-api-keys/)"
+  - "Administrator access to InsightIDR"
+links:
+  - "[Rapid7 Insight Agent](https://docs.rapid7.com/insight-agent/overview/)"
+references:
+  - "[Manage Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)"
+version_history:
+  - "2.1.1 - `Get All Agents by IP Address`: Fixed issue where action failed when agent did not have a primary address, and extended output to include agent location details | `Get Agent Details`: Extended output to include agent's public IP address and location "
+  - "2.1.0 - Updated SDK to the latest version | New action added `Get All Agents by IP Address`"
+  - "2.0.1 - Update `Connection Test` to identify if `Region` is incorrect  | Update Plugin runtime to version 5"
+  - "2.0.0 - Update action `Quarantine Multiple` outputs to Completed and Failed, removed All Operations Successful, replaced output Agent IDs with Hostname"
+  - "1.2.0 - New action: `Quarantine Multiple`"
+  - "1.1.1 - Quarantine: Fix incorrect behavior for unquarantine when the agent ID is wrong"
+  - "1.1.0 - Cloud enabled"
+  - "1.0.4 - Add new supported regions for API | Create unit tests for actions Check Agent Status, Quarantine, Get Agent Details"
+  - "1.0.3 - Documentation update"
+  - "1.0.2 - Fix for a case-sensitive agent hostname"
+  - "1.0.1 - Documentation update"
+  - "1.0.0 - Initial plugin"
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insight_agent
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -132,6 +154,32 @@ types:
       type: string
       description: Version
       required: false
+  location:
+    city:
+      title: City
+      description: The name of the city where the agent is located
+      type: string
+      required: false
+    region:
+      title: Region
+      description: The name of the region where the agent is located
+      type: string
+      required: false
+    countryName:
+      title: Country Name
+      description: The name of the country where the agent is located
+      type: string
+      required: false
+    countryCode:
+      title: Country Code
+      description: The code of the country where the agent is located
+      type: string
+      required: false
+    continent:
+      title: Continent
+      description: The name of the continent where the agent is located
+      type: string
+      required: false
   agent:
     agent_info:
       title: Agent Information
@@ -142,6 +190,16 @@ types:
       title: Host
       type: host
       description: Host
+      required: false
+    publicIpAddress:
+      title: Public IP Address
+      description: The agent's public IP address
+      type: string
+      required: false
+    location:
+      title: Location
+      description: The agent's location details
+      type: location
       required: false
     id:
       title: ID
