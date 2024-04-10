@@ -5,17 +5,20 @@ import shutil
 from icon_markdown.util import utils
 from .schema import MarkdownToPdfInput, MarkdownToPdfOutput, Output, Input, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
+from typing import Dict
 
 
-def makePDF(html: str, path: str) -> str:
+def make_pdf_bytes(html: str, path: str) -> Dict[str, str]:
     infile = path + "str.html"
     outfile = path + "tmp.pdf"
     with open(infile, "w", encoding="utf-8") as file:
         file.write(html)
     pdfkit.from_file(infile, outfile)
     with open(outfile, "rb") as file:
-        out_bytes = file.read().decode("UTF-8", errors="replace")
-    return out_bytes
+        pdf_string = file.read()
+
+    bytes_pdf = utils.to_bytes_pdf(pdf_string)
+    return {"pdf": bytes_pdf, "pdf_string": str(pdf_string)}
 
 
 class MarkdownToPdf(insightconnect_plugin_runtime.Action):
@@ -34,9 +37,11 @@ class MarkdownToPdf(insightconnect_plugin_runtime.Action):
         if not (((instr is None) ^ (inbytes is None)) or ((instr == "") ^ (inbytes == ""))):
             raise PluginException(
                 cause="Input error",
-                assistance="Only one of Markdown or Markdown String can be defined"
-                if instr != inbytes
-                else "You must define one of Markdown or Markdown String.",
+                assistance=(
+                    "Only one of Markdown or Markdown String can be defined"
+                    if instr != inbytes
+                    else "You must define one of Markdown or Markdown String."
+                ),
             )
 
         path = tempfile.mkdtemp() + "/"
@@ -45,7 +50,8 @@ class MarkdownToPdf(insightconnect_plugin_runtime.Action):
         else:
             html_string = utils.convert(utils.from_bytes(inbytes), "md", "html")
 
-        pdf_string = makePDF(html_string, path)
-        pdf_b64 = utils.to_bytes(pdf_string)
+        results = make_pdf_bytes(html_string, path)
+
         shutil.rmtree(path)
-        return {Output.PDF_STRING: pdf_string, Output.PDF: pdf_b64}
+
+        return {Output.PDF: results.get("pdf"), Output.PDF_STRING: results.get("pdf_string")}
