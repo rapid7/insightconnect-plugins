@@ -21,8 +21,10 @@ class Input:
 
 
 class Output:
+    AGGREGATES = "aggregates"
     ALERTS = "alerts"
     METADATA = "metadata"
+    REGION_FAILURES = "region_failures"
     RRNS = "rrns"
 
 
@@ -210,7 +212,7 @@ class SearchAlertsInput(insightconnect_plugin_runtime.Input):
         "count_order": {
           "type": "string",
           "title": "Count order",
-          "description": "TThe sort order for the count.",
+          "description": "The sort order for the count.",
           "enum": [
             "ASCENDING_NULLS_LAST",
             "ASCENDING_NULLS_FIRST",
@@ -274,6 +276,15 @@ class SearchAlertsOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "aggregates": {
+      "type": "array",
+      "title": "Aggregates",
+      "description": "The aggregation results.",
+      "items": {
+        "$ref": "#/definitions/aggregate_response_object"
+      },
+      "order": 4
+    },
     "alerts": {
       "type": "array",
       "title": "Alerts",
@@ -288,6 +299,15 @@ class SearchAlertsOutput(insightconnect_plugin_runtime.Output):
       "title": "Metadata",
       "description": "The pagination parameters used to generate this page result",
       "order": 3
+    },
+    "region_failures": {
+      "type": "array",
+      "title": "Region Failures",
+      "description": "The regions where the request failed to execute. The presence of items in this field indicates partial failure.",
+      "items": {
+        "$ref": "#/definitions/region_failure_object"
+      },
+      "order": 5
     },
     "rrns": {
       "type": "array",
@@ -688,6 +708,83 @@ class SearchAlertsOutput(insightconnect_plugin_runtime.Output):
           "title": "Total Pages",
           "description": "The total number of pages available with the given filter parameters",
           "order": 4
+        }
+      }
+    },
+    "aggregate_response_object": {
+      "type": "object",
+      "title": "aggregate_response_object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "The identifier of the aggregation, which was specified in the request.",
+          "order": 1
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type of aggregate.",
+          "order": 2
+        },
+        "value": {
+          "type": "string",
+          "title": "Value",
+          "description": "The single-value result of the requested query.",
+          "order": 3
+        },
+        "field_ids": {
+          "type": "array",
+          "title": "Field IDs",
+          "description": "The field identifiers that were aggregated by.",
+          "items": {
+            "type": "string"
+          },
+          "order": 4
+        },
+        "buckets": {
+          "type": "array",
+          "title": "Buckets",
+          "description": "The buckets that the aggregation results are grouped into.",
+          "items": {
+            "$ref": "#/definitions/bucket_object"
+          },
+          "order": 5
+        }
+      }
+    },
+    "bucket_object": {
+      "type": "object",
+      "title": "bucket_object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "description": "The values for the selected field identifiers in this bucket, in matching order.",
+          "items": {
+            "type": "string"
+          },
+          "order": 1
+        },
+        "count": {
+          "type": "integer",
+          "description": "The number of alerts in this bucket.",
+          "order": 2
+        }
+      }
+    },
+    "region_failure_object": {
+      "type": "object",
+      "title": "region_failure_object",
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "The region where the request failed.",
+          "order": 1
+        },
+        "message": {
+          "type": "string",
+          "description": "A description of the failure.",
+          "order": 2
         }
       }
     }

@@ -186,6 +186,21 @@ class UpdateInvestigationOutput(insightconnect_plugin_runtime.Output):
           "title": "Title",
           "description": "Investigation title",
           "order": 12
+        },
+        "responsibility": {
+          "type": "string",
+          "title": "Responsibility",
+          "description": null,
+          "order": 13
+        },
+        "tags": {
+          "type": "array",
+          "title": "Tags",
+          "description": null,
+          "items": {
+            "type": "string"
+          },
+          "order": 14
         }
       }
     },
