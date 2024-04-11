@@ -25,7 +25,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "cloud": {
       "type": "boolean",
       "title": "Cloud",
-      "description": "Is this a cloud instance",
+      "description": "Indicates whether the instance is cloud or not",
       "order": 4
     },
     "url": {

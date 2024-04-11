@@ -1,13 +1,16 @@
 import insightconnect_plugin_runtime
-from .schema import ConnectionSchema
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+
+from .schema import ConnectionSchema, Input
 
 # Custom imports below
-from ..util.api import ConfluenceAPI
+from komand_confluence.util.api import ConfluenceAPI
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
+        self.client = None
 
     def connect(self, params={}):
         """
@@ -15,13 +18,15 @@ class Connection(insightconnect_plugin_runtime.Connection):
         """
         self.logger.info("Connecting to Confluence: %s", params.get("url"))
         self.client = ConfluenceAPI(
-            url=params.get("url"),
-            username=params.get("username"),
-            api_token=params.get("api_token").get("secretKey"),
-            cloud=params.get("cloud"),
+            url=params.get(Input.URL, ""),
+            username=params.get(Input.USERNAME, ""),
+            api_token=params.get(Input.API_TOKEN, {}).get("secretKey"),
+            cloud=params.get(Input.CLOUD, True),
         )
-        self.client.login()
 
     def test(self):
-        self.client.health_check()
-        return {"success": True}
+        try:
+            self.client.test()
+            return {"success": True}
+        except PluginException as error:
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)
