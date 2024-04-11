@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get Page By ID"
+    DESCRIPTION = "Retrieve confluence page by ID"
 
 
 class Input:
@@ -24,7 +24,8 @@ class GetPageByIdInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "page_id": {
       "type": "string",
-      "description": "Page ID",
+      "title": "Page ID",
+      "description": "The ID of a page for content to be returned",
       "order": 1
     }
   },
@@ -47,12 +48,14 @@ class GetPageByIdOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "found": {
       "type": "boolean",
-      "description": "True if found",
+      "title": "Found",
+      "description": "Indicates whether the page content was found or not, true if found",
       "order": 1
     },
     "page": {
       "$ref": "#/definitions/page",
-      "description": "Page",
+      "title": "Page",
+      "description": "Returned page object data",
       "order": 2
     }
   },

@@ -30,12 +30,14 @@ class StorePageContentInput(insightconnect_plugin_runtime.Input):
     },
     "page": {
       "type": "string",
-      "description": "Page Name",
+      "title": "Page",
+      "description": "The page name of the content to be stored",
       "order": 1
     },
     "space": {
       "type": "string",
-      "description": "Space",
+      "title": "Space",
+      "description": "The name of a space",
       "order": 2
     }
   },
@@ -60,7 +62,8 @@ class StorePageContentOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "page": {
       "$ref": "#/definitions/page",
-      "description": "Page Stored",
+      "title": "Page",
+      "description": "Returned page object data",
       "order": 1
     }
   },
