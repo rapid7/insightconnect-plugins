@@ -1,10 +1,9 @@
+import json
 import logging
 import os
 import sys
-import json
 
 from atlassian.errors import ApiPermissionError
-
 from komand_confluence.util.api import ConfluenceAPI
 
 sys.path.append(os.path.abspath("../"))

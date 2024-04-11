@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get Page Content"
+    DESCRIPTION = "Retrieve the content of a page by its name"
 
 
 class Input:
@@ -25,12 +25,14 @@ class GetPageContentInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "page": {
       "type": "string",
-      "description": "Page Name",
+      "title": "Page",
+      "description": "The page name of the content to be retrieved",
       "order": 1
     },
     "space": {
       "type": "string",
-      "description": "Space",
+      "title": "Space",
+      "description": "The name of a space",
       "order": 2
     }
   },
@@ -54,12 +56,14 @@ class GetPageContentOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "content": {
       "type": "string",
-      "description": "Content",
+      "title": "Content",
+      "description": "The content of a page",
       "order": 1
     },
     "found": {
       "type": "boolean",
-      "description": "True if found",
+      "title": "Found",
+      "description": "Indicates whether the page content was found or not, true if found",
       "order": 2
     }
   },

@@ -1,18 +1,16 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
 from unittest.mock import Mock
-from parameterized import parameterized
-from komand_confluence.actions.get_page_by_id.schema import (
-    GetPageByIdInput,
-    Input,
-    GetPageByIdOutput,
-)
-from komand_confluence.actions.get_page_by_id import GetPageById
+
 from jsonschema import validate
+from komand_confluence.actions.get_page_by_id import GetPageById
+from komand_confluence.actions.get_page_by_id.schema import GetPageByIdInput, GetPageByIdOutput, Input
+from parameterized import parameterized
+
 from util import Util
 
 
