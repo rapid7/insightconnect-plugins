@@ -1,9 +1,9 @@
 import insightconnect_plugin_runtime
-from .schema import StorePageContentInput, StorePageContentOutput, Output
+from .schema import StorePageContentInput, StorePageContentOutput, Output, Input
 
 # Custom imports below
 from insightconnect_plugin_runtime.helper import clean_dict
-from ...util.util import extract_page_data
+from komand_confluence.util.util import extract_page_data
 
 
 class StorePageContent(insightconnect_plugin_runtime.Action):
@@ -16,11 +16,11 @@ class StorePageContent(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """Store a page"""
-        content = params.get("content")
-        title = params.get("page")
-        space = params.get("space")
-        data = self.connection.client.store_page_content(title=title, space=space, content=content)
-        page = extract_page_data(page=data)
-        page = clean_dict(page)
-        return {Output.PAGE: page}
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        content = params.get(Input.CONTENT, "")
+        page_name = params.get(Input.PAGE, "")
+        space = params.get(Input.SPACE, "")
+        # END INPUT BINDING - DO NOT REMOVE
+
+        data = self.connection.client.store_page_content(title=page_name, space=space, content=content)
+        return {Output.PAGE: clean_dict(extract_page_data(page=data))}

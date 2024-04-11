@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get Page"
+    DESCRIPTION = "Retrieve confluence page by name"
 
 
 class Input:
@@ -30,7 +30,8 @@ class GetPageInput(insightconnect_plugin_runtime.Input):
     },
     "space": {
       "type": "string",
-      "description": "Space",
+      "title": "Space",
+      "description": "The name of a space",
       "order": 2
     }
   },
@@ -54,12 +55,14 @@ class GetPageOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "found": {
       "type": "boolean",
-      "description": "True if found",
+      "title": "Found",
+      "description": "Indicates whether the page content was found or not, true if found",
       "order": 1
     },
     "page": {
       "$ref": "#/definitions/page",
-      "description": "Page",
+      "title": "Page",
+      "description": "Returned page object data",
       "order": 2
     }
   },

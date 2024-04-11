@@ -1,8 +1,11 @@
 from typing import Dict, Any, Union
 
 from atlassian import Confluence
+from atlassian.errors import ApiPermissionError
+from requests.exceptions import HTTPError
 
 from komand_confluence.util.util import exception_handler
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 import logging
 
@@ -19,9 +22,6 @@ class ConfluenceAPI:
         self.username = username
         self.api_token = api_token
         self.cloud = cloud
-        self.confluence = Confluence
-
-    def login(self):
         self.confluence = Confluence(
             url=self.url,
             username=self.username,
@@ -29,8 +29,16 @@ class ConfluenceAPI:
             cloud=self.cloud,
         )
 
-    def health_check(self):
-        self.confluence.health_check()
+    def test(self) -> None:
+        try:
+            self.confluence.get_user_details_by_username(self.username)
+        except ApiPermissionError:
+            pass
+        except HTTPError as error:
+            if error.response.status_code == 401:
+                raise PluginException(preset=PluginException.Preset.INVALID_CREDENTIALS)
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     @exception_handler
     def get_page_id(self, title: str, space: str) -> str:

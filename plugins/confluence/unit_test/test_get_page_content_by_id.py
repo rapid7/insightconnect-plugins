@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 
 from parameterized import parameterized
 
@@ -9,13 +9,14 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
 from unittest.mock import Mock
+
+from jsonschema import validate
 from komand_confluence.actions.get_page_content_by_id import GetPageContentById
 from komand_confluence.actions.get_page_content_by_id.schema import (
     GetPageContentByIdInput,
     GetPageContentByIdOutput,
     Input,
 )
-from jsonschema import validate
 
 
 class TestGetPageContentById(TestCase):
