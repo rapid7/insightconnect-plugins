@@ -1,6 +1,4 @@
 import insightconnect_plugin_runtime
-import jsonschema
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 from .schema import CheckInput, CheckOutput, Component, Input, Output
 
