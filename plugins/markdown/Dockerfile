@@ -12,7 +12,8 @@ ADD . /python/src
 
 WORKDIR /python/src
 # Add any package dependencies here
-RUN apt-get update && apt-get install -y pandoc wkhtmltopdf --no-install-recommends
+RUN apt-get update && apt-get install -y pandoc wkhtmltopdf binutils --no-install-recommends
+RUN strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
 # End package dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
