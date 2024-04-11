@@ -4,41 +4,38 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 from requests import Response
 from urllib.parse import quote
+from .constants import TIMEOUT
+
+from typing import Dict, Any
 
 
 class API(object):
-    def __init__(self, credentials: str, username: str):
+    def __init__(self, credentials: str, username: str) -> None:
         self.credentials = credentials
         self.username = username
 
-    def check(self, url):
-        if self.username:
-            headers = {"User-Agent": f"phishtank/{self.username}"}
-        else:
-            string = "rapid7-plugin-{random_id}"
-            self.username = string.format(random_id=uuid.uuid4())
-            headers = {"User-Agent": f"phishtank/{self.username}"}
+    def check(self, url: str) -> Dict[str, Any]:
+        if not self.username:
+            self.username = f"rapid7-plugin-{uuid.uuid4()}"
 
-        phishtank_request = requests.post(
+        response = requests.post(
             "https://checkurl.phishtank.com/checkurl/",
             data={"format": "json", "url": quote(url), "app_key": self.credentials},
-            headers=headers,
-            timeout=60,
+            headers={"User-Agent": f"phishtank/{self.username}"},
+            timeout=TIMEOUT,
         )
-        if requests.exceptions:
-            API.response_handler(phishtank_request)
-
         try:
-            result = phishtank_request.json()
+            API.response_handler(response)
+            return response.json()
         except requests.exceptions.JSONDecodeError:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=phishtank_request)
-
-        return result
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response)
 
     def response_handler(response: Response) -> None:
         """
         Handles response codes, returning appropriate PluginException Preset
         """
+        if 200 <= response.status_code < 300:
+            return
         if response.status_code == 400:
             raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
         if response.status_code == 401:
@@ -53,6 +50,4 @@ class API(object):
             raise PluginException(preset=PluginException.Preset.RATE_LIMIT, data=response.text)
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
-        if 200 <= response.status_code < 300:
-            return response.json()
         raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
