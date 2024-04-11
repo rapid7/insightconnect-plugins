@@ -129,10 +129,6 @@ class Util:
                     )
                 )
 
-        if args[1] == "https://us.api.insight.rapid7.com/log_search/management/logs/test_id":
-            return MockResponse("get_a_log", 200)
-        if args[1] == "https://us.api.insight.rapid7.com/idr/v1/customthreats":
-            return MockResponse("create_a_threat", 200)
         if kwargs.get("params") == {
             "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
             "index": 0,
@@ -361,5 +357,9 @@ class Util:
                 return MockResponse("test_search_accounts_1", 200)
             elif kwargs.get("params", {}).get("size") == 2:
                 return MockResponse("test_search_accounts_2", 200)
+        if args[1] == "https://us.api.insight.rapid7.com/log_search/management/logs/test_id":
+            return MockResponse("get_a_log", 200)
+        if args[1] == "https://us.api.insight.rapid7.com/idr/v1/customthreats":
+            return MockResponse("create_a_threat", 200)
 
         raise Exception("Not implemented")
