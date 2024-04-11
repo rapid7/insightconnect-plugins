@@ -136,7 +136,7 @@ class ScanCompletion(insightconnect_plugin_runtime.Trigger):
         :return: ID of the latest 'finished' scan
         """
 
-        resource_helper = ResourceRequests(self.connection.session, self.logger)
+        resource_helper = ResourceRequests(self.connection.session, self.logger, self.connection.ssl_verify)
         if site_id:
             endpoint = endpoints.Scan.site_scans(self.connection.console_url, site_id)
         else:

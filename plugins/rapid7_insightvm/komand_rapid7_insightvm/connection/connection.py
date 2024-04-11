@@ -28,7 +28,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         self.session = Session()
         self.session.auth = HTTPBasicAuth(username=username, password=password)
-        self.async_connection = async_requests.AsyncRequests(username, password)
+        self.async_connection = async_requests.AsyncRequests(username, password, self.ssl_verify)
 
         # Suppress insecure request messages
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
