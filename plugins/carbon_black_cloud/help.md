@@ -1,20 +1,19 @@
 # Description
 
-The [VMware Carbon Black Cloud](https://www.carbonblack.com/products/vmware-carbon-black-cloud/) is a cloud-native endpoint protection platform (EPP) that combines the intelligent system hardening and behavioral prevention needed to keep emerging threats at bay, using a single lightweight agent and an easy-to-use console.
-Manage and contain threats on your Carbon Black endpoints using this plugin.
+The [VMware Carbon Black Cloud](https://www.carbonblack.com/products/vmware-carbon-black-cloud/) is a cloud-native endpoint protection platform (EPP) that combines the intelligent system hardening and behavioral prevention needed to keep emerging threats at bay, using a single lightweight agent and an easy-to-use console. Manage and contain threats on your Carbon Black endpoints using this plugin.
 
 # Key Features
-  
+
 * Get device information
 * Quarantine a device
 
 # Requirements
-  
+
 * API Credentials
 * Base URL
 
 # Supported Product Versions
-  
+
 * 2023-09-19
 
 # Documentation
@@ -30,8 +29,8 @@ The connection configuration accepts the following parameters:
 |api_id|string|None|True|API ID|None|ADFF2QLIIZ|
 |api_secret_key|credential_secret_key|None|True|API secret key|None|Z1PXFRDZI321LXQVAB9IJKKZ|
 |org_key|string|None|True|Organization Key|None|1ABZY2FJ|
-|url|string|defense.conferdeploy.net|True|The Carbon Black Cloud URL you use. You can find this by looking at the web address of your Carbon Black Cloud console|['defense-eap01.conferdeploy.net', 'dashboard.confer.net', 'defense.conferdeploy.net', 'defense-prod05.conferdeploy.net', 'defense-eu.conferdeploy.net', 'defense-prodnrt.conferdeploy.net', 'defense-prodsyd.conferdeploy.net', 'ew2.carbonblackcloud.vmware.com', 'gprd1usgw1.carbonblack-us-gov.vmware.com']|defense.conferdeploy.net|
-  
+|url|string|defense.conferdeploy.net|True|The Carbon Black Cloud URL you use. You can find this by looking at the web address of your Carbon Black Cloud console|["defense-eap01.conferdeploy.net", "dashboard.confer.net", "defense.conferdeploy.net", "defense-prod05.conferdeploy.net", "defense-eu.conferdeploy.net", "defense-prodnrt.conferdeploy.net", "defense-prodsyd.conferdeploy.net", "ew2.carbonblackcloud.vmware.com", "gprd1usgw1.carbonblack-us-gov.vmware.com"]|defense.conferdeploy.net|
+
 Example input:
 
 ```
@@ -49,7 +48,7 @@ Example input:
 
 
 #### Get Agent Details
-  
+
 This action is used to get agent details
 
 ##### Input
@@ -167,7 +166,7 @@ Example output:
 ```
 
 #### Quarantine
-  
+
 This action is used to quarantine an agent
 
 ##### Input
@@ -184,7 +183,10 @@ Example input:
 {
   "agent": "198.51.100.100",
   "quarantine_state": true,
-  "whitelist": "198.51.100.100"
+  "whitelist": [
+    "198.51.100.100",
+    "win-test"
+  ]
 }
 ```
 
