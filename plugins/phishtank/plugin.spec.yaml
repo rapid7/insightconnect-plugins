@@ -7,7 +7,7 @@ description: Phishtank is a community-driven anti-phishing site where users subm
 version: 2.0.0
 sdk:
   type: slim
-  version: 5.4.5
+  version: 5.4.7
   user: nobody
 supported_versions: ["2024-10-04"]
 connection_version: 2
