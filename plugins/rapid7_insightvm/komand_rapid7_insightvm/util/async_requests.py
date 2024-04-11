@@ -12,8 +12,9 @@ class AsyncRequests:
     the __init__ function during instantiation.
     """
 
-    def __init__(self, username: str, password: str):
+    def __init__(self, username: str, password: str, ssl_verify: bool) -> None:
         self.auth = aiohttp.BasicAuth(login=username, password=password)
+        self.ssl_verify = ssl_verify
 
     def get_async_session(self) -> aiohttp.ClientSession:
         """
@@ -23,7 +24,7 @@ class AsyncRequests:
         # Per aiohttp verify_ssl is deprecated, and use ssl=False should be used instead
         # However during testing I confirmed that this behaves differently, and some times
         # causes request to fail. For now reverting to verify_ssl
-        return aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False), auth=self.auth)
+        return aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=self.ssl_verify), auth=self.auth)
 
     @staticmethod
     async def async_request(
