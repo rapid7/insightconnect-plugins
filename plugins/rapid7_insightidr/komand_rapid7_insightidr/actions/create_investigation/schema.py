@@ -181,13 +181,13 @@ class CreateInvestigationOutput(insightconnect_plugin_runtime.Output):
         "responsibility": {
           "type": "string",
           "title": "Responsibility",
-          "description": null,
+          "description": "Indicates the party responsible for the alert.",
           "order": 13
         },
         "tags": {
           "type": "array",
           "title": "Tags",
-          "description": null,
+          "description": "The tags applied to the alert.",
           "items": {
             "type": "string"
           },

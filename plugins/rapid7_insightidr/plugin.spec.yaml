@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 9.0.0
+version: 10.0.0
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2024-02-15."]
 vendor: rapid7
@@ -167,12 +167,12 @@ types:
       required: false
     responsibility:
       title: Responsibility
-      description:
+      description: Indicates the party responsible for the alert.
       type: string
       required: false
     tags:
       title: Tags
-      description:
+      description: The tags applied to the alert.
       type: "[]string"
       required: false
   threat:
@@ -514,7 +514,7 @@ types:
     token_seed:
       title: Token Seed
       type: string
-      description: The seed used to generate the log token (if the log's source type is "token")
+      description: The seed used to generate the log token (if the logs source type is "token")
       required: false
     retention_period:
       title: Retention Period
@@ -1835,7 +1835,7 @@ actions:
         description: All logs
         type: logsets_info
         required: true
-        example: {"log": {"id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f","name": "Windows Defender","tokens": ["bc38a911-65f1-4755-cca3-a330a6336b3a"],"structures": ["1238a911-65f1-4755-cca3-a330a6336b3a"],"user_data": {"platform_managed": "true"},"source_type": "token","token_seed": null,"retention_period": "default","links": [{"rel": "Related","href": "https://example.com"}],"rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a","logsets_info": [{"id": "bc38a911-65f1-4755-cca3-a330a6336b3a","name": "Unparsed Data","rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a","links": [{"rel": "Self","href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85"}]}]}}
+        example: {"logs": [{"log": {"id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f","name": "Windows Defender","tokens": ["bc38a911-65f1-4755-cca3-a330a6336b3a"],"structures": ["1238a911-65f1-4755-cca3-a330a6336b3a"],"user_data": {"platform_managed": "true"},"source_type": "token","token_seed": null,"retention_period": "default","links": [{"rel": "Related","href": "https://example.com"}],"rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a","logsets_info": [{"id": "bc38a911-65f1-4755-cca3-a330a6336b3a","name": "Unparsed Data","rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a","links": [{"rel": "Self","href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85"}]}]}}]}
   advanced_query_on_log:
     title: Advanced Query on Log
     description: Realtime query an InsightIDR log. This will query individual logs for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges. If both a log name and log ID are provided, the log ID will used over the log name
@@ -2514,15 +2514,16 @@ actions:
         example: {"index": 0,"size": 1,"total_data": 1,"total_pages": 1}
       aggregates:
         title: Aggregates
-        description: The aggregation results.
+        description: The aggregation results
         type: "[]aggregate_response_object"
         required: false
         example: [{"name": "example_id", "type": "BUCKET", "value": "example_value", "field_ids": ["example_field"], "buckets": [{"keys": ["example_key"], "count":1}]}]
       region_failures:
         title: Region Failures
-        description: The regions where the request failed to execute. The presence of items in this field indicates partial failure.
+        description: The regions where the request failed to execute. The presence of items in this field indicates partial failure
         type: "[]region_failure_object"
         example: [{"region": "US", "message": "example_message"}]
+        required: false
   get_alert_evidence:
     title: Retrieve Evidence for a Single Alert
     description: Allows the user to retrieve evidence for a single alert from an alert RRN

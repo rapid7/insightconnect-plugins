@@ -279,7 +279,7 @@ class SearchAlertsOutput(insightconnect_plugin_runtime.Output):
     "aggregates": {
       "type": "array",
       "title": "Aggregates",
-      "description": "The aggregation results.",
+      "description": "The aggregation results",
       "items": {
         "$ref": "#/definitions/aggregate_response_object"
       },
@@ -303,7 +303,7 @@ class SearchAlertsOutput(insightconnect_plugin_runtime.Output):
     "region_failures": {
       "type": "array",
       "title": "Region Failures",
-      "description": "The regions where the request failed to execute. The presence of items in this field indicates partial failure.",
+      "description": "The regions where the request failed to execute. The presence of items in this field indicates partial failure",
       "items": {
         "$ref": "#/definitions/region_failure_object"
       },

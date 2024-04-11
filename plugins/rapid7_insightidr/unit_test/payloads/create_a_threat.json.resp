@@ -1,0 +1,12 @@
+{
+  "rejected_indicators": [
+    "example.com",
+    "10.0.0.1"
+  ],
+  "threat": {
+    "indicator_count": 2,
+    "name": "Threat created via InsightConnect",
+    "note": "Threat created via InsightConnect",
+    "published": false
+  }
+}

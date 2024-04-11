@@ -13,5 +13,7 @@
   "rrn": "rrn:example",
   "source": "ALERT",
   "status": "OPEN",
-  "title": "Example Title"
+  "title": "Example Title",
+  "responsibility": "CUSTOMER",
+  "tags": ["tag1"]
 }

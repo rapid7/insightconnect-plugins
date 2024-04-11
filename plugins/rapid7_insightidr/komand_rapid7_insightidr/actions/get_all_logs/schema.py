@@ -111,7 +111,7 @@ class GetAllLogsOutput(insightconnect_plugin_runtime.Output):
         "token_seed": {
           "type": "string",
           "title": "Token Seed",
-          "description": "he seed used to generate the log token (if the log's source type is \"token\")",
+          "description": "The seed used to generate the log token (if the logs source type is \"token\")",
           "order": 10
         },
         "retention_period": {

@@ -138,7 +138,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |count|integer|True|Number of log entries found|10|
-|results_events|[]events|False|Query Results|[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": "false", "service": "ntlmssp ", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp ", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": false, "eventData": null, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]|
+|results_events|[]events|False|Query Results|[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": "false", "service": "ntlmssp ", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp ", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": False, "eventData": None, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]|
 |results_statistical|statistics|False|Query Results|{'leql': {'during': {'from': 1699579214000, 'to': 1699622414000}, 'statement': 'groupby(r7_context.asset.name)'}, 'logs': ['123456-abcd-1234-abcd-123456abc'], 'search_stats': {'bytes_all': 9961260, 'bytes_checked': 9961260, 'duration_ms': 19, 'events_all': 1640, 'events_checked': 1640, 'events_matched': 1639, 'index_factor': 0.0}, 'statistics': {'all_exact_result': True, 'cardinality': 0, 'from': 1699579214000, 'granularity': 4320000, 'groups': [{'linux': {'count': 1163.0}}, {'windowsx64': {'count': 476.0}}], 'groups_timeseries': [{'linux': {'groups_timeseries': [], 'series': [{'count': 45.0}, {'count': 21.0}, {'count': 16.0}, {'count': 270.0}, {'count': 27.0}, {'count': 43.0}, {'count': 27.0}, {'count': 39.0}, {'count': 29.0}, {'count': 646.0}], 'totals': {'count': 1163.0}}}, {'windowsx64': {'groups_timeseries': [], 'series': [{'count': 54.0}, {'count': 40.0}, {'count': 60.0}, {'count': 37.0}, {'count': 42.0}, {'count': 62.0}, {'count': 41.0}, {'count': 47.0}, {'count': 49.0}, {'count': 44.0}], 'totals': {'count': 476.0}}}], 'others': {'series': []}, 'stats': {}, 'status': 200, 'timeseries': {}, 'to': 1699622414000, 'type': 'count'}}|
   
 Example output:
@@ -959,41 +959,39 @@ Example output:
 ```
 {
   "log": {
-    "log": {
-      "id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f",
-      "links": [
-        {
-          "href": "https://example.com",
-          "rel": "Related"
-        }
-      ],
-      "logsets_info": [
-        {
-          "id": "bc38a911-65f1-4755-cca3-a330a6336b3a",
-          "links": [
-            {
-              "href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85",
-              "rel": "Self"
-            }
-          ],
-          "name": "Unparsed Data",
-          "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a"
-        }
-      ],
-      "name": "Windows Defender",
-      "retention_period": "default",
-      "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a",
-      "source_type": "token",
-      "structures": [
-        "1238a911-65f1-4755-cca3-a330a6336b3a"
-      ],
-      "token_seed": null,
-      "tokens": [
-        "bc38a911-65f1-4755-cca3-a330a6336b3a"
-      ],
-      "user_data": {
-        "platform_managed": "true"
+    "id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f",
+    "links": [
+      {
+        "href": "https://example.com",
+        "rel": "Related"
       }
+    ],
+    "logsets_info": [
+      {
+        "id": "bc38a911-65f1-4755-cca3-a330a6336b3a",
+        "links": [
+          {
+            "href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85",
+            "rel": "Self"
+          }
+        ],
+        "name": "Unparsed Data",
+        "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a"
+      }
+    ],
+    "name": "Windows Defender",
+    "retention_period": "default",
+    "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a",
+    "source_type": "token",
+    "structures": [
+      "1238a911-65f1-4755-cca3-a330a6336b3a"
+    ],
+    "token_seed": null,
+    "tokens": [
+      "bc38a911-65f1-4755-cca3-a330a6336b3a"
+    ],
+    "user_data": {
+      "platform_managed": "true"
     }
   }
 }
@@ -1415,8 +1413,8 @@ This action is used to request used to list all logs for an account
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|logs|logsets_info|True|All logs|{'log': {'id': '0b9a242d-d2fb-4e42-8656-eb5ff64d652f', 'name': 'Windows Defender', 'tokens': ['bc38a911-65f1-4755-cca3-a330a6336b3a'], 'structures': ['1238a911-65f1-4755-cca3-a330a6336b3a'], 'user_data': {'platform_managed': 'true'}, 'source_type': 'token', 'token_seed': None, 'retention_period': 'default', 'links': [{'rel': 'Related', 'href': 'https://example.com'}], 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a', 'logsets_info': [{'id': 'bc38a911-65f1-4755-cca3-a330a6336b3a', 'name': 'Unparsed Data', 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a', 'links': [{'rel': 'Self', 'href': 'https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85'}]}]}}|
-  
+|logs|logsets_info|True|All logs|{'logs': [{'log': {'id': '0b9a242d-d2fb-4e42-8656-eb5ff64d652f', 'name': 'Windows Defender', 'tokens': ['bc38a911-65f1-4755-cca3-a330a6336b3a'], 'structures': ['1238a911-65f1-4755-cca3-a330a6336b3a'], 'user_data': {'platform_managed': 'true'}, 'source_type': 'token', 'token_seed': None, 'retention_period': 'default', 'links': [{'rel': 'Related', 'href': 'https://example.com'}], 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a', 'logsets_info': [{'id': 'bc38a911-65f1-4755-cca3-a330a6336b3a', 'name': 'Unparsed Data', 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a', 'links': [{'rel': 'Self', 'href': 'https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85'}]}]}}]}|
+
 Example output:
 
 ```
@@ -2192,12 +2190,12 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|aggregates|[]aggregate_response_object|False|The aggregation results.|[{"name": "example_id", "type": "BUCKET", "value": "example_value", "field_ids": ["example_field"], "buckets": [{"keys": ["example_key"], "count": 1}]}]|
+|aggregates|[]aggregate_response_object|False|The aggregation results|[{"name": "example_id", "type": "BUCKET", "value": "example_value", "field_ids": ["example_field"], "buckets": [{"keys": ["example_key"], "count": 1}]}]|
 |alerts|[]alert_object|False|A list of found alerts|[{"alerted_at": "2023-12-04T13:59:06.349Z", "created_at": "2023-12-04T13:59:06.757109Z", "disposition": "UNDECIDED", "external_id": "12345678-abcd-cdef-1234-12345abc", "external_source": "IDR ABA", "fields": [], "ingested_at": "2023-12-04T13:59:06.751813Z", "investigation_rrn": "rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI", "organization": {"customer_id": "12345678-abcd-cdef-1234-12345abc", "customer_name": "Dev Test", "flags": [], "id": "12345678-abcd-cdef-1234-12345abc", "name": "Dev Test", "product_token": "abcdefgh12345abc", "region": "us1"}, "permissions": {"canEdit": False}, "priority": "LOW", "responsibility": "MDR", "rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abc", "rule": {"mitre_tcodes": ["Credential Access", "T1110"], "rrn": "rrn:cba:::detection-rule:ABCDEFGHIJK", "version_rrn": "rrn:cba:::detection-rule:version:ABCDEFGHIJK"}, "rule_keys_of_interest": [{"key": "result", "values": ["SUCCESS"]}, {"key": "account", "values": ["test_account"]}, {"key": "geoip_country_code", "values": ["US"]}, {"key": "source_ip", "values": ["1.1.1.1"]}], "rule_matching_keys": [{"key": "entryType", "values": ["ingress_auth"]}, {"key": "orgId", "values": ["12345678-abcd-cdef-1234-12345abc"]}], "status": "OPEN", "tags": [], "title": "MVD Verification", "type": "MVD Verification", "updated_at": "2023-12-05T11:51:39.29059Z", "version": 8}]|
 |metadata|investigation_metadata|True|The pagination parameters used to generate this page result|{'index': 0, 'size': 1, 'total_data': 1, 'total_pages': 1}|
-|region_failures|[]region_failure_object|False|The regions where the request failed to execute. The presence of items in this field indicates partial failure.|[{"region": "US", "message": "example_message"}]|
+|region_failures|[]region_failure_object|False|The regions where the request failed to execute. The presence of items in this field indicates partial failure|[{"region": "US", "message": "example_message"}]|
 |rrns|[]string|False|A list of the rrns for the found alerts|["rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg", "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abd"]|
-  
+
 Example output:
 
 ```
@@ -2705,11 +2703,11 @@ Example output:
 |Latest Alert Time|string|None|False|The create time of the most recent alert belonging to this investigation|None|
 |Organization ID|string|None|False|The id of the organization that owns this investigation|None|
 |Priority|string|None|False|The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNKNOWN|None|
-|Responsibility|string|None|False|None|None|
+|Responsibility|string|None|False|Indicates the party responsible for the alert.|None|
 |RRN|string|None|False|The RRN of the investigation|None|
 |Source|string|None|False|The source of this investigation|None|
 |Status|string|None|False|The status of the investigation|None|
-|Tags|[]string|None|False|None|None|
+|Tags|[]string|None|False|The tags applied to the alert.|None|
 |Title|string|None|False|Investigation title|None|
   
 **threat**
@@ -2824,7 +2822,7 @@ Example output:
 |RRN|string|None|False|RRN|None|
 |Source Type|string|None|False|A categorization of logs which defines how log entries are received by a server|None|
 |Structures|[]string|None|False|Structures are internal entities which may apply some additional processing to log entries written to this log|None|
-|Token Seed|string|None|False|he seed used to generate the log token (if the log's source type is "token")|None|
+|Token Seed|string|None|False|The seed used to generate the log token (if the log's source type is "token")|None|
 |Tokens|[]string|None|False|The log token(s) used for writing to the log. This only applies to token type logs|None|
 |User Data|user_data|None|False|User data|None|
   

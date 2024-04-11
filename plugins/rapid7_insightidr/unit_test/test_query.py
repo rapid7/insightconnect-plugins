@@ -70,9 +70,6 @@ class TestQuery(TestCase):
             ]
         }
 
-        print(actual)
-        print(expected)
-
         self.assertEqual(actual, expected)
         validate(actual, QueryOutput.schema)
 

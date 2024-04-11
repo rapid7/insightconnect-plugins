@@ -55,6 +55,8 @@ class TestSetStatusOfInvestigationAction(TestCase):
                 "source": "ALERT",
                 "status": "OPEN",
                 "title": "Example Title",
+                "responsibility": "CUSTOMER",
+                "tags": ["tag1"],
             }
         }
         self.assertEqual(actual, expected)

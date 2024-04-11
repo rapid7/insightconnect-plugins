@@ -105,6 +105,9 @@ class Util:
                     "test_search_alerts_rrns_false",
                     "test_search_accounts_1",
                     "test_search_accounts_2",
+                    "close_investigations_in_bulk",
+                    "get_a_log",
+                    "create_a_threat",
                 ]:
                     self.text = Util.read_file_to_string(
                         os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp")
@@ -126,6 +129,10 @@ class Util:
                     )
                 )
 
+        if args[1] == "https://us.api.insight.rapid7.com/log_search/management/logs/test_id":
+            return MockResponse("get_a_log", 200)
+        if args[1] == "https://us.api.insight.rapid7.com/idr/v1/customthreats":
+            return MockResponse("create_a_threat", 200)
         if kwargs.get("params") == {
             "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
             "index": 0,
@@ -150,6 +157,14 @@ class Util:
             "size": 1,
         }:
             return MockResponse("list_empty", 200)
+        if kwargs.get("json") == {
+            "alert_type": "Account Created",
+            "from": "2018-07-01 00:00:00 00:00",
+            "max_investigations_to_close": 10,
+            "source": "MANUAL",
+            "to": "2018-07-01 00:00:00 00:00",
+        }:
+            return MockResponse("close_investigations_in_bulk", 200)
         if (
             kwargs.get("url")
             == "https://us.api.insight.rapid7.com/idr/v1/attachments/rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890/metadata"
