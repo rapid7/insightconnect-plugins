@@ -56,7 +56,7 @@ class TestSetDispositionOfInvestigation(TestCase):
                 "status": "OPEN",
                 "title": "Example Title",
                 "tags": ["tag1"],
-                "responsibility": "CUSTOMER"
+                "responsibility": "CUSTOMER",
             }
         }
         self.assertEqual(actual, expected)
