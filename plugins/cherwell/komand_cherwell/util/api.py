@@ -69,7 +69,7 @@ class Cherwell:
             results = resp.json()
             return results
         except requests.exceptions.HTTPError as exception:
-            self.logger.error(f"An error had occurred : {exception}" "If the issue persists please contact support")
+            self.logger.error(f"An error has occurred : {exception}" "If the issue persists please contact support")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=exception)
         except JSONDecodeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=resp.text)

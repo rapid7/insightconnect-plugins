@@ -28,18 +28,11 @@ class Util:
             Input.AUTHENTICATION_MODE: STUB_AUTHENTICATION_MODE,
             Input.USERNAME_AND_PASSWORD: STUB_USERNAME_AND_PASSWORD,
         }
-        Util.overwrite_params(params, custom_params)
+        params.update(custom_params)
         default_connection.connect(params)
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
         return action
-
-    @staticmethod
-    def overwrite_params(dict_one, dict_two):
-        for key, value in dict_two.items():
-            if key in dict_one:
-                dict_one[key] = value
-        return dict_one
 
     @staticmethod
     def read_file_to_string(filename: str) -> str:
