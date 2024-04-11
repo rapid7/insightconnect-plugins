@@ -19,7 +19,7 @@ from util import Util
 from jsonschema import validate
 
 
-class TestCreateInvestigation(TestCase):
+class TestSetDispositionOfInvestigation(TestCase):
     @classmethod
     def setUpClass(self) -> None:
         self.params = {
@@ -55,6 +55,8 @@ class TestCreateInvestigation(TestCase):
                 "source": "ALERT",
                 "status": "OPEN",
                 "title": "Example Title",
+                "tags": ["tag1"],
+                "responsibility": "CUSTOMER"
             }
         }
         self.assertEqual(actual, expected)
