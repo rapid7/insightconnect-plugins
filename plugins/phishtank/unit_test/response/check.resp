@@ -1,5 +1,11 @@
-[
-  {
+{
+  "meta": {
+    "timestamp": "2024-04-11T08:52:41+00:00",
+    "serverid": "e5f3084e",
+    "status": "success",
+    "requestid": "172.17.128.1.6617a4d9200202.91377375"
+  },
+  "results": {
     "phish_id": 9024601,
     "url": "http://cielobbfidelidade.xyz/home/",
     "in_database": true,
@@ -8,4 +14,4 @@
     "verified": "yes",
     "verified_at": "2024-04-02T15:15:47+00:00"
   }
-]
+}

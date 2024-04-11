@@ -35,7 +35,7 @@ class API(object):
 
         return result
 
-    def response_handler(response: Response) -> Response:
+    def response_handler(response: Response) -> None:
         """
         Handles response codes, returning appropriate PluginException Preset
         """
@@ -50,13 +50,9 @@ class API(object):
         if response.status_code == 409:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
         if response.status_code == 429:
-            raise PluginException(
-                cause="Too Many Requests",
-                assistance="With no API key, phishtank does not support"
-                "more than a few requests per day. Please try again later",
-            )
+            raise PluginException(preset=PluginException.Preset.RATE_LIMIT, data=response.text)
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
         if 200 <= response.status_code < 300:
-            return response
+            return response.json()
         raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)

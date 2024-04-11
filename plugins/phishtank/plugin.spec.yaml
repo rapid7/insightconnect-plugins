@@ -23,15 +23,15 @@ requirements: ["PhishTank API key"]
 references: ["[PhishTank](https://www.phishtank.com/)", "[PhishTank API](https://www.phishtank.com/api_info.php)"]
 links: ["[PhishTank](https://www.phishtank.com/)"]
 version_history:
-- 2.0.0 - Update requirements.txt | SDK update | New connection parameter `username` | 'submitted_at' removed from action outputs
-- 1.0.2 - Update requests library
-- 1.0.1 - New spec and help.md format for the Extension Library
-- 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
-- 0.1.4 - SSL bug fix in SDK
-- 0.1.3 - Fix API usage
-- 0.1.2 - Fix connection test
-- 0.1.1 - Fix bug with `verified_at` containing `None` type value and improve connection title and description
-- 0.1.0 - Initial plugin
+  - 2.0.0 - Update requirements.txt | SDK update | New connection parameter `username` | 'submitted_at' removed from action outputs
+  - 1.0.2 - Update requests library
+  - 1.0.1 - New spec and help.md format for the Extension Library
+  - 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
+  - 0.1.4 - SSL bug fix in SDK
+  - 0.1.3 - Fix API usage
+  - 0.1.2 - Fix connection test
+  - 0.1.1 - Fix bug with `verified_at` containing `None` type value and improve connection title and description
+  - 0.1.0 - Initial plugin
 tags:
 - komand
 - phishtank
@@ -80,7 +80,7 @@ actions:
       phish_id:
         title: Phish ID
         description: The ID number by which PhishTank refers to a phish submission
-        type: string
+        type: integer
         required: false
         example: 9014567
       phish_detail_page:

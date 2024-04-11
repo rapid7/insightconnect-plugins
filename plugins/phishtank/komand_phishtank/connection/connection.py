@@ -13,7 +13,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
         self.phishtank_api = API(
-            credentials=params.get(Input.CREDENTIALS).get("secretKey"), username=params.get(Input.USERNAME)
+            credentials=params.get(Input.CREDENTIALS, {}).get("secretKey"), username=params.get(Input.USERNAME)
         )
 
     def test(self):

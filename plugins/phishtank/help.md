@@ -1,6 +1,6 @@
 # Description
 
-Phishtank is a community-driven anti-phishing site where users submit suspected phishes and other users 'vote' if it is a phish or not. This plugin utilizes the Phishtank API to look up URLs in the PhishTank database
+[PhishTank](https://www.phishtank.com/) is a community-driven anti-phishing site where users submit suspected phishes and other users "vote" if it is a phish or not. This plugin utilizes the [PhishTank API](https://www.phishtank.com/api_info.php) to look up URLs in the PhishTank database
 
 # Key Features
 
@@ -63,7 +63,7 @@ Example input:
 | :--- | :--- | :--- | :--- | :--- |
 |in_database|boolean|False|If the URL is in the PhishTank database|False|
 |phish_detail_page|string|False|PhishTank detail URL for the phish, where you can view data about the phish, including a screenshot and the community votes|http://data.phishtank.com/data/online-valid.json|
-|phish_id|string|False|The ID number by which PhishTank refers to a phish submission|9014567|
+|phish_id|integer|False|The ID number by which PhishTank refers to a phish submission|9014567|
 |url|string|False|Submitted URL|example.com|
 |valid|boolean|False|Whether the phish is valid or not|True|
 |verified|boolean|False|Whether or not this phish has been verified by the PhishTank community|True|

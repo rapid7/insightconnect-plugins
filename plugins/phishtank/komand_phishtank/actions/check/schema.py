@@ -64,7 +64,7 @@ class CheckOutput(insightconnect_plugin_runtime.Output):
       "order": 4
     },
     "phish_id": {
-      "type": "string",
+      "type": "integer",
       "title": "Phish ID",
       "description": "The ID number by which PhishTank refers to a phish submission",
       "order": 3

@@ -59,9 +59,8 @@ class TestCheck(TestCase):
             [
                 "check_429",
                 Util.read_file_to_dict("inputs/check_429.json.inp"),
-                "Too Many Requests",
-                "With no API key, phishtank does not support"
-                "more than a few requests per day. Please try again later",
+                "The account configured in your plugin connection is currently rate-limited.",
+                "Adjust the time between requests if possible.",
             ],
             [
                 "check_server",
