@@ -13,13 +13,13 @@ InsightVM is a powerful vulnerability management tool which finds, prioritizes, 
 * Username and password for a user with the necessary permissions
 
 # Supported Product Versions
-  
+
 * Rapid7 InsightVM API v3 2022-05-25
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -27,7 +27,7 @@ The connection configuration accepts the following parameters:
 |credentials|credential_username_password|None|True|Username and password|None|{'username': 'user1', 'password': 'mypassword'}|
 |ssl_verify|boolean|True|True|Specify whether to verify SSL or not|None|True|
 |url|string|None|True|URL to your InsightVM console, without trailing slashes|None|https://insightvm.example.com:3780|
-  
+
 Example input:
 
 ```
@@ -44,7 +44,7 @@ Example input:
 
 
 #### Add Scan Engine Pool Engine
-  
+
 This action is used to add a scan engine to a scan engine pool (AWS pre-authorized engine AMI engines cannot be pooled)
 
 ##### Input
@@ -78,7 +78,7 @@ Example output:
 ```
 
 #### Add User Asset Group Access
-  
+
 This action is used to grant an user account access to an asset group by ID
 
 ##### Input
@@ -112,7 +112,7 @@ Example output:
 ```
 
 #### Add User Site Access
-  
+
 This action is used to grant an user account access to a site by ID
 
 ##### Input
@@ -146,7 +146,7 @@ Example output:
 ```
 
 #### Asset Search
-  
+
 This action is used to search for assets using filtered asset search
 
 ##### Input
@@ -182,7 +182,7 @@ Example output:
 ```
 
 #### Get Asset Vulnerability Solutions
-  
+
 This action is used to return the highest-superceding rollup solutions for a list of vulnerabilities on an asset
 
 ##### Input
@@ -191,13 +191,15 @@ This action is used to return the highest-superceding rollup solutions for a lis
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |asset_id|integer|None|True|The identifier of the asset|None|423|
 |vulnerability_ids|[]string|None|True|A list of identifiers of the vulnerabilities|None|["flash_player-cve-2017-11305"]|
-
+  
 Example input:
 
 ```
 {
   "asset_id": 423,
-  "vulnerability_ids": "flash_player-cve-2017-11305"
+  "vulnerability_ids": [
+    "flash_player-cve-2017-11305"
+  ]
 }
 ```
 
@@ -216,7 +218,7 @@ Example output:
 ```
 
 #### Create Asset Group
-  
+
 This action is used to create an asset group
 
 ##### Input
@@ -227,7 +229,7 @@ This action is used to create an asset group
 |name|string|None|True|Asset group name|None|example name|
 |searchCriteria|object|None|False|Asset group search criteria - options documentation: https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
 |type|string|None|True|Asset group type|["dynamic", "static"]|dynamic|
-
+  
 Example input:
 
 ```
@@ -254,7 +256,7 @@ Example output:
 ```
 
 #### Create Vulnerability Exception Submission
-  
+
 This action is used to create a vulnerability exception submission
 
 ##### Input
@@ -302,7 +304,7 @@ Example output:
 ```
 
 #### Create Scan Engine
-  
+
 This action is used to create a new scan engine with console engine connectivity
 
 ##### Input
@@ -342,7 +344,7 @@ Example output:
 ```
 
 #### Create Scan Engine Pool
-  
+
 This action is used to create a new scan engine pool
 
 ##### Input
@@ -356,7 +358,10 @@ Example input:
 
 ```
 {
-  "engines": 1234,
+  "engines": [
+    1234,
+    5678
+  ],
   "name": "example name"
 }
 ```
@@ -378,7 +383,7 @@ Example output:
 ```
 
 #### Create Site
-  
+
 This action is used to create a new site
 
 ##### Input
@@ -428,7 +433,7 @@ Example output:
 ```
 
 #### Create Tag
-  
+
 This action is used to create a new tag
 
 ##### Input
@@ -439,7 +444,7 @@ This action is used to create a new tag
 |name|string|None|True|Tag name|None|example name|
 |searchCriteria|object|None|False|Tag search Criteria - options documentation https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
 |type|string|None|True|Tag type|["owner", "location", "custom"]|owner|
-
+  
 Example input:
 
 ```
@@ -466,7 +471,7 @@ Example output:
 ```
 
 #### Create User
-  
+
 This action is used to create a new user account (limited to external authentication sources)
 
 ##### Input
@@ -516,7 +521,7 @@ Example output:
 ```
 
 #### Delete an Asset
-  
+
 This action is used to delete an Asset
 
 ##### Input
@@ -548,7 +553,7 @@ Example output:
 ```
 
 #### Delete Asset Group
-  
+
 This action is used to delete an existing asset group
 
 ##### Input
@@ -580,7 +585,7 @@ Example output:
 ```
 
 #### Delete Vulnerability Exception
-  
+
 This action is used to delete an existing vulnerability exception
 
 ##### Input
@@ -612,7 +617,7 @@ Example output:
 ```
 
 #### Delete Scan Engine
-  
+
 This action is used to delete an existing scan engine from the security console
 
 ##### Input
@@ -644,7 +649,7 @@ Example output:
 ```
 
 #### Delete Scan Engine Pool
-  
+
 This action is used to delete an existing scan engine pool from the security console
 
 ##### Input
@@ -676,7 +681,7 @@ Example output:
 ```
 
 #### Delete Site
-  
+
 This action is used to delete an existing site
 
 ##### Input
@@ -708,7 +713,7 @@ Example output:
 ```
 
 #### Delete Tag
-  
+
 This action is used to delete an existing tag
 
 ##### Input
@@ -740,7 +745,7 @@ Example output:
 ```
 
 #### Delete User
-  
+
 This action is used to delete an user account
 
 ##### Input
@@ -772,7 +777,7 @@ Example output:
 ```
 
 #### Disable User
-  
+
 This action is used to disable an user account
 
 ##### Input
@@ -804,7 +809,7 @@ Example output:
 ```
 
 #### Download Report
-  
+
 This action is used to returns the contents of a generated report
 
 ##### Input
@@ -838,7 +843,7 @@ Example output:
 ```
 
 #### Enable User
-  
+
 This action is used to enable an user account
 
 ##### Input
@@ -870,7 +875,7 @@ Example output:
 ```
 
 #### Generate AdHoc SQL Report
-  
+
 This action is used to create, generate, download, and cleanup a SQL report based on the provided query
 
 ##### Input
@@ -911,7 +916,7 @@ Example output:
 ```
 
 #### Generate Shared Secret
-  
+
 This action is used to generate a shared secret to pair a scan engine to a security console
 
 ##### Input
@@ -943,7 +948,7 @@ Example output:
 ```
 
 #### Get Asset
-  
+
 This action is used to gets an asset by ID
 
 ##### Input
@@ -975,7 +980,7 @@ Example output:
 ```
 
 #### Get Asset Group
-  
+
 This action is used to get an asset group by ID
 
 ##### Input
@@ -1007,7 +1012,7 @@ Example output:
 ```
 
 #### Get Asset Group Assets
-  
+
 This action is used to get asset group assets
 
 ##### Input
@@ -1041,7 +1046,7 @@ Example output:
 ```
 
 #### Get Asset Groups
-  
+
 This action is used to get a list of asset groups
 
 ##### Input
@@ -1073,7 +1078,7 @@ Example output:
 ```
 
 #### Get Asset Software
-  
+
 This action is used to get software found on an asset. Can only be used if the asset has first been scanned
 
 ##### Input
@@ -1105,7 +1110,7 @@ Example output:
 ```
 
 #### Get Asset Tags
-  
+
 This action is used to get a listing of all tags for an asset
 
 ##### Input
@@ -1137,7 +1142,7 @@ Example output:
 ```
 
 #### Get Asset Vulnerabilities
-  
+
 This action is used to get vulnerabilities found on an asset. Can only be used if the asset has first been scanned
 
 ##### Input
@@ -1171,7 +1176,7 @@ Example output:
 ```
 
 #### Get Authentication Source
-  
+
 This action is used to get the details for an authentication source
 
 ##### Input
@@ -1203,7 +1208,7 @@ Example output:
 ```
 
 #### Get Authentication Sources
-  
+
 This action is used to list authentication sources available for InsightVM users
 
 ##### Input
@@ -1212,7 +1217,7 @@ This action is used to list authentication sources available for InsightVM users
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |name|string|None|False|Authentication source name by which to filter, accepts regular expression patterns|None|example name|
 |type|string||False|Authentication source type by which to filter|["", "admin", "kerberos", "ldap", "normal", "saml"]|admin|
-
+  
 Example input:
 
 ```
@@ -1237,7 +1242,7 @@ Example output:
 ```
 
 #### Get Expiring Vulnerability Exceptions
-  
+
 This action is used to return a list of expiring vulnerability exceptions
 
 ##### Input
@@ -1269,7 +1274,7 @@ Example output:
 ```
 
 #### Get Role
-  
+
 This action is used to get role details by ID
 
 ##### Input
@@ -1301,7 +1306,7 @@ Example output:
 ```
 
 #### Get Roles
-  
+
 This action is used to list role details
 
 ##### Input
@@ -1333,7 +1338,7 @@ Example output:
 ```
 
 #### Get Scan
-  
+
 This action is used to get the status of a scan
 
 ##### Input
@@ -1375,10 +1380,12 @@ Example output:
   "endTime": "2018-04-23 04:21:05.500000+00:00",
   "engineName": "Local scan engine",
   "id": 188934,
-  "links": {
-    "href": "https://insightvm:3780/api/3/scans/188934",
-    "rel": "self"
-  },
+  "links": [
+    {
+      "href": "https://insightvm:3780/api/3/scans/188934",
+      "rel": "self"
+    }
+  ],
   "scanName": "API Scan - 2018-04-23T04:21:05Z",
   "scanType": "Manual",
   "startTime": "2018-04-23 04:21:05.500000+00:00",
@@ -1393,7 +1400,7 @@ Example output:
 ```
 
 #### Get Scan Assets
-  
+
 This action is used to gets assets for a scan
 
 ##### Input
@@ -1425,7 +1432,7 @@ Example output:
 ```
 
 #### Get Scan Engine
-  
+
 This action is used to get a scan engine by ID
 
 ##### Input
@@ -1457,7 +1464,7 @@ Example output:
 ```
 
 #### Get Scan Engine Pool
-  
+
 This action is used to retrieve scan engine pool details by ID
 
 ##### Input
@@ -1489,7 +1496,7 @@ Example output:
 ```
 
 #### Get Scan Engine Pools
-  
+
 This action is used to retrieve a list of configured scan engine pools
 
 ##### Input
@@ -1521,7 +1528,7 @@ Example output:
 ```
 
 #### Get Scan Engines
-  
+
 This action is used to list scan engines paired with the security console
 
 ##### Input
@@ -1555,7 +1562,7 @@ Example output:
 ```
 
 #### Get Scans
-  
+
 This action is used to get scans with optional site filter
 
 ##### Input
@@ -1589,7 +1596,7 @@ Example output:
 ```
 
 #### Get Site
-  
+
 This action is used to get a site by ID
 
 ##### Input
@@ -1621,7 +1628,7 @@ Example output:
 ```
 
 #### Get Site Assets
-  
+
 This action is used to gets assets for a site
 
 ##### Input
@@ -1653,7 +1660,7 @@ Example output:
 ```
 
 #### Get Sites
-  
+
 This action is used to get a list of sites
 
 ##### Input
@@ -1685,7 +1692,7 @@ Example output:
 ```
 
 #### Get Tag
-  
+
 This action is used to get tag details by tag ID
 
 ##### Input
@@ -1717,7 +1724,7 @@ Example output:
 ```
 
 #### Get Tag Asset Groups
-  
+
 This action is used to get asset groups associated with a tag
 
 ##### Input
@@ -1749,7 +1756,7 @@ Example output:
 ```
 
 #### Get Tag Assets
-  
+
 This action is used to get asset IDs associated with a tag
 
 ##### Input
@@ -1781,7 +1788,7 @@ Example output:
 ```
 
 #### Get Tag Sites
-  
+
 This action is used to get site IDs associated with a tag
 
 ##### Input
@@ -1813,7 +1820,7 @@ Example output:
 ```
 
 #### Get Tags
-  
+
 This action is used to get a listing of all tags and return their details
 
 ##### Input
@@ -1822,7 +1829,7 @@ This action is used to get a listing of all tags and return their details
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |name|string||False|Tag name regular expression by which to filter|None|example name|
 |type|string||False|Type of tag by which to filter, all types are returned if none is specified|["owner", "location", "custom", "criticality", ""]|owner|
-
+  
 Example input:
 
 ```
@@ -1847,7 +1854,7 @@ Example output:
 ```
 
 #### Get User
-  
+
 This action is used to get user account details by ID
 
 ##### Input
@@ -1879,7 +1886,7 @@ Example output:
 ```
 
 #### Get Users
-  
+
 This action is used to list user accounts
 
 ##### Input
@@ -1913,7 +1920,7 @@ Example output:
 ```
 
 #### Get Vulnerabilities by CVE
-  
+
 This action is used to get vulnerability details associated with a CVE
 
 ##### Input
@@ -1945,7 +1952,7 @@ Example output:
 ```
 
 #### Get Vulnerability Details
-  
+
 This action is used to get the details of a specific vulnerability by id
 
 ##### Input
@@ -1977,7 +1984,7 @@ Example output:
 ```
 
 #### Get Vulnerability Affected Assets
-  
+
 This action is used to get the assets affected by the vulnerability
 
 ##### Input
@@ -2011,7 +2018,7 @@ Example output:
 ```
 
 #### List Inactive Assets
-  
+
 This action is used to returns a list of inactive assets (limit 1000) determined by how many days ago they were scanned
 
 ##### Input
@@ -2045,7 +2052,7 @@ Example output:
 ```
 
 #### List Reports
-  
+
 This action is used to list reports and return their identifiers
 
 ##### Input
@@ -2054,7 +2061,7 @@ This action is used to list reports and return their identifiers
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |name|string|None|False|Name of report, otherwise all reports by criteria|None|Name|
 |sort|string|None|True|Sort order, ascending or descending|["Ascending", "Descending"]|Ascending|
-
+  
 Example input:
 
 ```
@@ -2081,7 +2088,7 @@ Example output:
 ```
 
 #### Remove Asset Group Tags
-  
+
 This action is used to remove all tags from an asset group
 
 ##### Input
@@ -2113,7 +2120,7 @@ Example output:
 ```
 
 #### Remove Asset Tag
-  
+
 This action is used to remove a tag from an asset
 
 ##### Input
@@ -2147,7 +2154,7 @@ Example output:
 ```
 
 #### Remove Scan Engine Pool Engine
-  
+
 This action is used to remove a scan engine from a scan engine pool
 
 ##### Input
@@ -2181,7 +2188,7 @@ Example output:
 ```
 
 #### Remove Tag Asset Groups
-  
+
 This action is used to remove all asset group associations from a tag
 
 ##### Input
@@ -2213,7 +2220,7 @@ Example output:
 ```
 
 #### Remove Tag Search Criteria
-  
+
 This action is used to remove all search criteria from a tag
 
 ##### Input
@@ -2245,7 +2252,7 @@ Example output:
 ```
 
 #### Remove Tag Sites
-  
+
 This action is used to remove all site associations from a tag
 
 ##### Input
@@ -2277,7 +2284,7 @@ Example output:
 ```
 
 #### Remove User Asset Group Access
-  
+
 This action is used to remove asset group access from an user account
 
 ##### Input
@@ -2311,7 +2318,7 @@ Example output:
 ```
 
 #### Remove User Site Access
-  
+
 This action is used to remove site access from an user account
 
 ##### Input
@@ -2345,7 +2352,7 @@ Example output:
 ```
 
 #### Review Vulnerability Exception
-  
+
 This action is used to approve or Reject a Vulnerability Exception
 
 ##### Input
@@ -2355,7 +2362,7 @@ This action is used to approve or Reject a Vulnerability Exception
 |comment|string|None|False|Comment to include in the review|None|example comment|
 |exception|integer|None|True|The vulnerability exception ID to approve or reject|None|1234|
 |review|string|None|True|Approval or rejection of the exception|["Approved", "Rejected"]|Approved|
-
+  
 Example input:
 
 ```
@@ -2381,7 +2388,7 @@ Example output:
 ```
 
 #### Scan
-  
+
 This action is used to start a scan on a site
 
 ##### Input
@@ -2396,7 +2403,11 @@ Example input:
 
 ```
 {
-  "hosts": "192.0.2.3",
+  "hosts": [
+    "192.0.2.3",
+    "192.0.2.10-192.0.2.20",
+    "ADSRV.local"
+  ],
   "override_blackout": false,
   "site_id": 1
 }
@@ -2419,7 +2430,7 @@ Example output:
 ```
 
 #### Tag Asset
-  
+
 This action is used to add a tag to an asset
 
 ##### Input
@@ -2453,7 +2464,7 @@ Example output:
 ```
 
 #### Tag Asset Group
-  
+
 This action is used to add a tag to an asset group
 
 ##### Input
@@ -2487,7 +2498,7 @@ Example output:
 ```
 
 #### Tag Assets
-  
+
 This action is used to add a tag to multiple assets in bulk
 
 ##### Input
@@ -2504,7 +2515,12 @@ Example input:
 
 ```
 {
-  "asset_ids": 1,
+  "asset_ids": [
+    1,
+    2,
+    3,
+    4
+  ],
   "tag_id": 12345,
   "tag_name": "Very High",
   "tag_source": "built-in",
@@ -2527,7 +2543,7 @@ Example output:
 ```
 
 #### Tag Site
-  
+
 This action is used to add a tag to a site
 
 ##### Input
@@ -2561,7 +2577,7 @@ Example output:
 ```
 
 #### Top Remediations
-  
+
 This action is used to generate results for the top remediations based on a defined scope
 
 ##### Input
@@ -2601,7 +2617,7 @@ Example output:
 ```
 
 #### Update Asset Group Search Criteria
-  
+
 This action is used to update the search criteria for an existing asset group
 
 ##### Input
@@ -2635,7 +2651,7 @@ Example output:
 ```
 
 #### Update Scan Status
-  
+
 This action is used to update the status of a scan
 
 ##### Input
@@ -2644,7 +2660,7 @@ This action is used to update the status of a scan
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|integer|None|True|Scan ID|None|1234|
 |status|string|stop|True|Status to which the scan should be set (stop, resume, pause)|["stop", "resume", "pause"]|stop|
-
+  
 Example input:
 
 ```
@@ -2669,7 +2685,7 @@ Example output:
 ```
 
 #### Update Shared Credentials
-  
+
 This action is used to update shared credentials
 
 ##### Input
@@ -2737,7 +2753,7 @@ Example output:
 ```
 
 #### Update Site
-  
+
 This action is used to update an existing site
 
 ##### Input
@@ -2781,7 +2797,7 @@ Example output:
 ```
 
 #### Update Site Excluded Asset Groups
-  
+
 This action is used to update an existing site scope of excluded asset groups
 
 ##### Input
@@ -2796,7 +2812,10 @@ Example input:
 
 ```
 {
-  "excluded_asset_groups": 1234,
+  "excluded_asset_groups": [
+    1234,
+    567
+  ],
   "id": 1234,
   "overwrite": true
 }
@@ -2819,7 +2838,7 @@ Example output:
 ```
 
 #### Update Site Excluded Targets
-  
+
 This action is used to update an existing site scope of excluded IP address and hostname targets
 
 ##### Input
@@ -2834,7 +2853,10 @@ Example input:
 
 ```
 {
-  "excluded_targets": "10.2.144",
+  "excluded_targets": [
+    "10.2.144",
+    "10.8.36.144"
+  ],
   "id": 1234,
   "overwrite": true
 }
@@ -2857,7 +2879,7 @@ Example output:
 ```
 
 #### Update Site Included Asset Groups
-  
+
 This action is used to update an existing site scope of included asset groups
 
 ##### Input
@@ -2873,7 +2895,10 @@ Example input:
 ```
 {
   "id": 1234,
-  "included_asset_groups": 1234,
+  "included_asset_groups": [
+    1234,
+    567
+  ],
   "overwrite": true
 }
 ```
@@ -2895,7 +2920,7 @@ Example output:
 ```
 
 #### Update Site Included Targets
-  
+
 This action is used to update an existing site scope of included IP address and hostname targets
 
 ##### Input
@@ -2911,7 +2936,10 @@ Example input:
 ```
 {
   "id": 1234,
-  "included_targets": "10.2.144",
+  "included_targets": [
+    "10.2.144",
+    "10.8.36.144"
+  ],
   "overwrite": true
 }
 ```
@@ -2933,7 +2961,7 @@ Example output:
 ```
 
 #### Update Site Scan Engine
-  
+
 This action is used to update the scan engine/scan engine pool associated with a site
 
 ##### Input
@@ -2967,7 +2995,7 @@ Example output:
 ```
 
 #### Update Tag Search Criteria
-  
+
 This action is used to update the search criteria for an existing tag
 
 ##### Input
@@ -3001,7 +3029,7 @@ Example output:
 ```
 
 #### Update User
-  
+
 This action is used to update the configuration of an existing user account
 
 ##### Input
@@ -3051,8 +3079,8 @@ Example output:
 ```
 
 #### Update User Asset Group Access
-  
-This action is used to update the asset groups to which a user has access in bulk. It can be used to remove asset group 
+
+This action is used to update the asset groups to which a user has access in bulk. It can be used to remove asset group
 access as well
 
 ##### Input
@@ -3066,7 +3094,10 @@ Example input:
 
 ```
 {
-  "asset_group_ids": 1234,
+  "asset_group_ids": [
+    1234,
+    5678
+  ],
   "user_id": 1234
 }
 ```
@@ -3086,7 +3117,7 @@ Example output:
 ```
 
 #### Update User Role
-  
+
 This action is used to update the role associated with an user account
 
 ##### Input
@@ -3124,7 +3155,7 @@ Example output:
 ```
 
 #### Update User Site Access
-  
+
 This action is used to update the sites to which a user has access in bulk. It can be used to remove sites as well
 
 ##### Input
@@ -3138,7 +3169,10 @@ Example input:
 
 ```
 {
-  "site_ids": 1234,
+  "site_ids": [
+    1234,
+    567
+  ],
   "user_id": 1234
 }
 ```
@@ -3158,7 +3192,7 @@ Example output:
 ```
 
 #### Update Vulnerability Exception Expiration Date
-  
+
 This action is used to update vulnerability exception expiration date
 
 ##### Input
@@ -3194,7 +3228,7 @@ Example output:
 
 
 #### New Vulnerability Exception
-  
+
 This trigger is used to check for new InsightVM vulnerability exceptions
 
 ##### Input
@@ -3203,7 +3237,7 @@ This trigger is used to check for new InsightVM vulnerability exceptions
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |frequency|integer|5|True|How often the trigger should check for new vulnerability exception requests|None|5|
 |status_filter|[]string|["Under Review"]|False|List of vulnerability statuses to match against. Options include: Under Review and Approved|None|["Under Review"]|
-
+  
 Example input:
 
 ```
@@ -3230,7 +3264,7 @@ Example output:
 ```
 
 #### New Scans
-  
+
 This trigger is used to check for new InsightVM scans by site and scan status
 
 ##### Input
@@ -3241,7 +3275,7 @@ This trigger is used to check for new InsightVM scans by site and scan status
 |most_recent_scan|boolean|True|True|Only process the most recent scan for a site since the last time the trigger was run|None|True|
 |site_name_filter|string|.*|True|Regular expression to match sites where new scans should be triggered|None|example name|
 |status_filter|[]string|["Successful"]|False|List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown|None|["Successful"]|
-
+  
 Example input:
 
 ```
@@ -3270,7 +3304,7 @@ Example output:
 ```
 
 #### Scan Completed
-  
+
 This trigger is used to fire upon completed scan
 
 ##### Input
@@ -3978,6 +4012,7 @@ Example output:
 
 # Version History
 
+* 8.0.1 - Updated SDK to the latest version | Fixed issue where triggers were failing due to `SSL Verify`
 * 8.0.0 - Updated to the latest SDK version | Updated dependencies to the latest version | Added new connection parameter `SSL Verify`
 * 7.0.2 - `Scan Completion` - Update query outputs to match schema types
 * 7.0.1 - `Scan Completion` - Update query outputs to match schema names
