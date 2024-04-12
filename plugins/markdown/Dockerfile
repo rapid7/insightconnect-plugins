@@ -11,11 +11,11 @@ ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD . /python/src
 
 WORKDIR /python/src
+RUN chown root /
 # Add any package dependencies here
-RUN apt-get update && apt-get upgrade && apt-get install -y pandoc curl sudo --no-install-recommends
-RUN sudo apt-get clean
-# This fixes the broken install of the wkhtmltopdf package
-RUN curl -L -v -o wkhtmltox_0.12.6.1-2.bullseye_amd64.deb 'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bullseye_amd64.deb'
+RUN apt-get update && apt-get install -y pandoc curl --no-install-recommends
+RUN apt-get clean
+RUN curl -L -o wkhtmltox_0.12.6.1-2.bullseye_amd64.deb 'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bullseye_amd64.deb'
 RUN apt --fix-broken install
 RUN apt install ./wkhtmltox_0.12.6.1-2.bullseye_amd64.deb -y
 # End package dependencies
