@@ -4,7 +4,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 from requests import Response
 from urllib.parse import quote
-from .constants import *
+from .constants import TIMEOUT, URL
 
 from typing import Dict, Any
 
