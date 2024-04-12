@@ -112,9 +112,8 @@ Example output:
 
 # Links
 
-* [PhishTank](https://www.phishtank.com/)
+* [PhishTank API](https://www.phishtank.com/api_info.php)
 
 ## References
 
 * [PhishTank](https://www.phishtank.com/)
-* [PhishTank API](https://www.phishtank.com/api_info.php)

@@ -24,7 +24,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Username",
       "description": "Phishtank username",
-      "default": "rapid7-plugin",
       "order": 2
     }
   },

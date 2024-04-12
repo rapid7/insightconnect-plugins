@@ -20,8 +20,8 @@ resources:
   vendor_url: https://www.phishtank.com/
 key_features: ["Submit URLs to identify reported phishing links"]
 requirements: ["PhishTank API key"]
-references: ["[PhishTank](https://www.phishtank.com/)", "[PhishTank API](https://www.phishtank.com/api_info.php)"]
-links: ["[PhishTank](https://www.phishtank.com/)"]
+references: ["[PhishTank](https://www.phishtank.com/)"]
+links: ["[PhishTank API](https://www.phishtank.com/api_info.php)"]
 version_history:
   - 2.0.0 - Update requirements.txt | SDK update | New connection parameter `username` | 'submitted_at' removed from action outputs
   - 1.0.2 - Update requests library
