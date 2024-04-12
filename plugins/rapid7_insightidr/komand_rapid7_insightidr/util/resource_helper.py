@@ -110,7 +110,6 @@ class ResourceHelper(object):
         except requests.RequestException as error:
             self.logger.error(error)
             raise
-
         if response.status_code in range(200, 299):
             resource = response.text
             return {"resource": resource, "status": response.status_code}

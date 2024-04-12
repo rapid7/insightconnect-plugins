@@ -60,6 +60,8 @@ class TestCreateInvestigation(TestCase):
                 "source": "ALERT",
                 "status": "OPEN",
                 "title": "Example Title",
+                "tags": ["tag1"],
+                "responsibility": "CUSTOMER",
             }
         }
         self.assertEqual(actual, expected)

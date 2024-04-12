@@ -63,6 +63,8 @@ class TestListInvestigations(TestCase):
                     "source": "ALERT",
                     "status": "INVESTIGATING",
                     "title": "Example Title",
+                    "responsibility": "CUSTOMER",
+                    "tags": ["Incident", "Security Test"],
                 }
             ],
             "metadata": {"index": 0, "size": 1, "total_data": 1, "total_pages": 1},

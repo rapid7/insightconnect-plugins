@@ -136,6 +136,12 @@ class ListAlertsForInvestigationOutput(insightconnect_plugin_runtime.Output):
           "title": "Title",
           "description": "The title of the alert",
           "order": 8
+        },
+        "alert_source": {
+          "type": "string",
+          "title": "Alert Source",
+          "description": "The source of the alert",
+          "order": 9
         }
       }
     },
