@@ -11,7 +11,6 @@ ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD . /python/src
 
 WORKDIR /python/src
-RUN chown root /
 # Add any package dependencies here
 RUN apt-get update && apt-get install -y pandoc curl --no-install-recommends
 RUN apt-get clean
