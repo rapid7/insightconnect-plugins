@@ -72,7 +72,7 @@ class TestCreateUser(TestCase):
     def test_create_user_raise_domain_exception(
         self, mock_request, test_name, input_parameters, cause, assistance, data
     ):
-        with self.assertRaises(ApiException) as error:
+        with self.assertRaises(PluginException) as error:
             action = Util.default_connector(CreateUser(), {ConnectionInput.OKTAURL: "okta.com"})
             action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
