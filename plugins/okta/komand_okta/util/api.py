@@ -73,10 +73,6 @@ class OktaAPI:
             "Authorization": f"SSWS {self._okta_key}",
         }
 
-    @staticmethod
-    def get_hostname(hostname: str) -> str:
-        return hostname.replace("https://", "").replace("http://", "")
-
     def get_user_id(self, login: str) -> str:
         user_id = self.make_json_request(method="GET", url=GET_USER_BY_LOGIN_ENDPOINT.format(login=login)).get("id")
         if user_id:

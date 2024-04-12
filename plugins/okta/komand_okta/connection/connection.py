@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+from komand_okta.util.helpers import get_hostname
 
 # Custom imports below
 from komand_okta.util.api import OktaAPI
@@ -14,7 +15,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
         okta_url = params.get(Input.OKTAURL)
-        base_url = f"https://{OktaAPI.get_hostname(okta_url.rstrip('/'))}"
+        base_url = f"https://{get_hostname(okta_url.rstrip('/'))}"
         if base_url == "https://okta.com":
             raise PluginException(
                 cause="Invalid domain entered for input 'Okta Domain'.",
