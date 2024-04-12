@@ -63,8 +63,8 @@ class TestCreateUser(TestCase):
             [
                 "bad_domain",
                 Util.read_file_to_dict("inputs/create_user_profile_bad.json.inp"),
-                "Please include a valid subdomain, e.g. 'example.okta.com', if using 'okta.com'.",
                 "Invalid domain entered for input 'Okta Domain'",
+                "Please include a valid subdomain, e.g. 'example.okta.com', if using 'okta.com'.",
                 "Provided Okta Domain: okta.com",
             ],
         ]
