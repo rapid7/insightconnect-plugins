@@ -63,7 +63,7 @@ class OktaAPI:
     def __init__(self, okta_key: str, okta_url: str, logger: Logger):
         self.logger = logger
         self._okta_key = okta_key
-        self.base_url = f"https://{self._get_hostname(okta_url.rstrip('/'))}"
+        self.base_url = okta_url
         self.toggle_rate_limiting = True
 
     def get_headers(self) -> dict:
@@ -73,7 +73,8 @@ class OktaAPI:
             "Authorization": f"SSWS {self._okta_key}",
         }
 
-    def _get_hostname(self, hostname: str) -> str:
+    @staticmethod
+    def get_hostname(self, hostname: str) -> str:
         return hostname.replace("https://", "").replace("http://", "")
 
     def get_user_id(self, login: str) -> str:

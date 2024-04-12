@@ -13,8 +13,15 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
+        okta_url = params.get(Input.OKTAURL)
+        base_url = f"https://{OktaAPI.get_hostname(okta_url.rstrip('/'))}"
+        if base_url == "https://okta.com":
+            raise PluginException(
+                cause="Invalid domain entered for input 'Okta Domain'.",
+                assistance="Please include a valid subdomain, e.g. 'example.okta.com', if using 'okta.com'."
+            )
         self.api_client = OktaAPI(
-            params.get(Input.OKTAKEY).get("secretKey"), params.get(Input.OKTAURL), logger=self.logger
+            params.get(Input.OKTAKEY).get("secretKey"), base_url, logger=self.logger
         )
 
     def test(self):
