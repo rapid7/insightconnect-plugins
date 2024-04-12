@@ -74,7 +74,7 @@ class OktaAPI:
         }
 
     @staticmethod
-    def get_hostname(self, hostname: str) -> str:
+    def get_hostname(hostname: str) -> str:
         return hostname.replace("https://", "").replace("http://", "")
 
     def get_user_id(self, login: str) -> str:
