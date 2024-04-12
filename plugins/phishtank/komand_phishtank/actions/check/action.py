@@ -25,7 +25,7 @@ class Check(insightconnect_plugin_runtime.Action):
         if not in_database:
             return {
                 Output.URL: response.get("url"),
-                Output.IN_DATABASE: response.get("in_database"),
+                Output.IN_DATABASE: in_database,
             }
         else:
             return {
