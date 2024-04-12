@@ -1,36 +1,26 @@
-import komand
-from .schema import ConnectionSchema
+import insightconnect_plugin_runtime
+from .schema import ConnectionSchema, Input
 
-# Custom imports below
-import json
-import requests
-import urllib
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from komand_phishtank.util.api import API
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
+        self.phishtank_api = None
 
-    def check(self, url):
-        r = requests.post(
-            "https://checkurl.phishtank.com/checkurl/",
-            data={
-                "format": "json",
-                "url": urllib.quote(url),
-                "app_key": self.parameters.get("credentials").get("secretKey"),
-            },
+    def connect(self, params={}):
+        self.logger.info("Connect: Connecting...")
+        self.phishtank_api = API(
+            credentials=params.get(Input.CREDENTIALS, {}).get("secretKey"), username=params.get(Input.USERNAME)
         )
-        result = r.json()["results"]
 
-        if result.get("phish_detail_page"):
-            result["phish_detail_url"] = result["phish_detail_page"]
-            del result["phish_detail_page"]
-
-        return result
-
-    def connect(self, params):
-        """
-        Connection config params are supplied as a dict in
-        params or also accessible in self.parameters['key']
-        """
-        self.logger.info("Connecting to Phishtank...")
+    def test(self):
+        endpoint = "phishtank/status"
+        try:
+            self.phishtank_api.check(endpoint)
+            return {"success": True}
+        except Exception as exception:
+            self.logger.error(f"Error: {str(exception)}")
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED, data=exception)
