@@ -4,12 +4,12 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 from requests import Response
 from urllib.parse import quote
-from .constants import TIMEOUT
+from .constants import *
 
 from typing import Dict, Any
 
 
-class API(object):
+class API:
     def __init__(self, credentials: str, username: str) -> None:
         self.credentials = credentials
         self.username = username
@@ -19,18 +19,18 @@ class API(object):
             self.username = f"rapid7-plugin-{uuid.uuid4()}"
 
         response = requests.post(
-            "https://checkurl.phishtank.com/checkurl/",
+            URL,
             data={"format": "json", "url": quote(url), "app_key": self.credentials},
             headers={"User-Agent": f"phishtank/{self.username}"},
             timeout=TIMEOUT,
         )
         try:
-            API.response_handler(response)
+            self.response_handler(response)
             return response.json()
         except requests.exceptions.JSONDecodeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response)
 
-    def response_handler(response: Response) -> None:
+    def response_handler(self, response: Response) -> None:
         """
         Handles response codes, returning appropriate PluginException Preset
         """
