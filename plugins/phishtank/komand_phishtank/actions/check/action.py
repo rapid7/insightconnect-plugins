@@ -1,56 +1,39 @@
-import komand
-from .schema import CheckInput, CheckOutput
+import insightconnect_plugin_runtime
 
-# Custom imports below
-import requests
+from .schema import CheckInput, CheckOutput, Component, Input, Output
 
 
-class Check(komand.Action):
+class Check(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="check",
-            description="Submit URL to Phishtank",
+            description=Component.DESCRIPTION,
             input=CheckInput(),
             output=CheckOutput(),
         )
 
     def run(self, params={}):
-        url = params.get("url")
-        if not url:
-            raise ValueError("url is required")
 
-        url = url.strip()
+        url = params.get(Input.URL, "").strip()
         if not url.startswith("http://") and not url.startswith("https://"):
-            url = "http://" + url
+            url = f"https://{url}"
 
-        try:
-            result = self.connection.check(url)
-            self.logger.debug("result: %s", result)
-        except Exception as e:
-            self.logger.exception(e)
+        response = self.connection.phishtank_api.check(url)
+        response = response.get("results")
+
+        in_database = response.get("in_database")
+        if not in_database:
             return {
-                "url": url,
-                "in_database": False,
-                "verified": False,
+                Output.URL: response.get("url"),
+                Output.IN_DATABASE: in_database,
             }
-
-        if "verified_at" in result:
-            if result["verified_at"] is None:
-                result["verified_at"] = str(result["verified_at"])
-
-        return result
-
-    def test(self):
-        url = "http://cielobbfidelidade.xyz/home/"
-
-        try:
-            result = self.connection.check(url)
-        except Exception as e:
-            self.logger.exception(e)
+        else:
             return {
-                "url": url,
-                "in_database": False,
-                "verified": False,
+                Output.IN_DATABASE: in_database,
+                Output.PHISH_DETAIL_PAGE: response.get("phish_detail_page", ""),
+                Output.PHISH_ID: response.get("phish_id"),
+                Output.URL: response.get("url"),
+                Output.VALID: response.get("valid"),
+                Output.VERIFIED: response.get("verified"),
+                Output.VERIFIED_AT: str(response.get("verified_at")),
             }
-
-        return result
