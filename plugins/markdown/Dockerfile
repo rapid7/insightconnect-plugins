@@ -13,6 +13,8 @@ ADD . /python/src
 WORKDIR /python/src
 # Add any package dependencies here
 RUN apt-get update && apt-get install -y pandoc curl --no-install-recommends
+# Curling the wkhtmltopdf package to fix corrupted lib5QtCore.5.so file that appeared
+# when running on the front-end. Installing it this way resolves the issue.
 RUN apt-get clean
 RUN curl -L -o wkhtmltox_0.12.6.1-2.bullseye_amd64.deb 'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bullseye_amd64.deb'
 RUN apt --fix-broken install
