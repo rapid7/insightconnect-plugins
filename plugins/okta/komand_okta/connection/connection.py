@@ -18,8 +18,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         base_url = f"https://{get_hostname(okta_url.rstrip('/'))}"
         if base_url == "https://okta.com":
             raise PluginException(
-                cause="Invalid domain entered for input 'Okta Domain'.",
+                cause="Invalid subdomain entered for input 'Okta Domain'.",
                 assistance="Please include a valid subdomain, e.g. 'example.okta.com', if using 'okta.com'.",
+                data=f"Provided Okta Domain: {okta_url}"
             )
         self.api_client = OktaAPI(params.get(Input.OKTAKEY).get("secretKey"), base_url, logger=self.logger)
 
