@@ -20,7 +20,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             raise PluginException(
                 cause="Invalid subdomain entered for input 'Okta Domain'.",
                 assistance="Please include a valid subdomain, e.g. 'example.okta.com', if using 'okta.com'.",
-                data=f"Provided Okta Domain: {okta_url}"
+                data=f"Provided Okta Domain: {okta_url}",
             )
         self.api_client = OktaAPI(params.get(Input.OKTAKEY).get("secretKey"), base_url, logger=self.logger)
 
