@@ -56,6 +56,8 @@ class TestAssignUserToInvestigation(TestCase):
                 "source": "ALERT",
                 "status": "OPEN",
                 "title": "Example Title",
+                "responsibility": "CUSTOMER",
+                "tags": ["tag1"],
             },
             "success": True,
         }

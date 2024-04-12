@@ -113,7 +113,6 @@ class Investigations:
         :param console_url: URL to the InsightIDR console
         :return: TODO
         """
-
         return f"{console_url}idr/v1/investigations/bulk_close"
 
     @staticmethod
