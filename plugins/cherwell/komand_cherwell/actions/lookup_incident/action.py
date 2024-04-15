@@ -1,22 +1,22 @@
-import komand
-from .schema import LookupIncidentInput, LookupIncidentOutput
+import insightconnect_plugin_runtime
+from .schema import LookupIncidentInput, LookupIncidentOutput, Component, Output, Input
 
 # Custom imports below
 
 
-class LookupIncident(komand.Action):
+class LookupIncident(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="lookup_incident",
-            description="Lookup an Cherwell incident",
+            description=Component.DESCRIPTION,
             input=LookupIncidentInput(),
             output=LookupIncidentOutput(),
         )
 
     def run(self, params={}):
-        business_object_id = params["business_object_id"]
-        public_id = params["public_id"]
+        business_object_id = params.get(Input.BUSINESS_OBJECT_ID)
+        public_id = params.get(Input.PUBLIC_ID)
 
         response = self.connection.api.get_incident(business_object_id, public_id)
 
-        return {"success": True, "raw_response": response}
+        return {Output.SUCCESS: True, Output.RAW_RESPONSE: response}

@@ -1,14 +1,14 @@
-import komand
-from .schema import UpdateIncidentInput, UpdateIncidentOutput, Input
+import insightconnect_plugin_runtime
+from .schema import UpdateIncidentInput, UpdateIncidentOutput, Input, Output, Component
 
 # Custom imports below
 
 
-class UpdateIncident(komand.Action):
+class UpdateIncident(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="update_incident",
-            description="Updates an incident within Cherwell",
+            description=Component.DESCRIPTION,
             input=UpdateIncidentInput(),
             output=UpdateIncidentOutput(),
         )
@@ -22,10 +22,10 @@ class UpdateIncident(komand.Action):
         update_data = []
         incident = self.connection.api.get_incident(busobid=business_object_id, publicid=public_id)
         if incident:
-            for field in incident["fields"]:
-                if field["displayName"] in fields_to_update:
+            for field in incident.get("fields", []):
+                if field.get("displayName") in fields_to_update:
                     field["dirty"] = True
-                    field["value"] = fields_to_update[field["displayName"]]
+                    field["value"] = fields_to_update.get(field.get("displayName"), "")
                     update_data.append(field)
 
             business_object = {
@@ -34,6 +34,6 @@ class UpdateIncident(komand.Action):
                 "busObPublicId": public_id,
             }
             response = self.connection.api.update_incident(business_object)
-            return {"success": True, "raw_response": response}
+            return {Output.SUCCESS: True, Output.RAW_RESPONSE: response}
         else:
-            return {"success": False, "raw_response": {}}
+            return {Output.SUCCESS: False, Output.RAW_RESPONSE: {}}

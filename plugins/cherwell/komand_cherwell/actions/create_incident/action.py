@@ -1,15 +1,15 @@
-import komand
-from .schema import CreateIncidentInput, CreateIncidentOutput
+import insightconnect_plugin_runtime
+from .schema import CreateIncidentInput, CreateIncidentOutput, Component, Output, Input
 
 # Custom imports below
 from komand_cherwell.util.utils import set_field_values
 
 
-class CreateIncident(komand.Action):
+class CreateIncident(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_incident",
-            description="Create a Cherwell incident",
+            description=Component.DESCRIPTION,
             input=CreateIncidentInput(),
             output=CreateIncidentOutput(),
         )
@@ -18,8 +18,8 @@ class CreateIncident(komand.Action):
         # Will now take template id
         # And a set of key values to change in the template
         # This will then be packed up and sent off.
-        fields_to_change = params["fields_to_change"]
-        business_object_id = params["business_object_id"]
+        fields_to_change = params.get(Input.FIELDS_TO_CHANGE)
+        business_object_id = params.get(Input.BUSINESS_OBJECT_ID)
 
         # Template lookup
         bo_template = {"busObId": business_object_id, "includeRequired": True, "includeAll": True}
@@ -37,4 +37,4 @@ class CreateIncident(komand.Action):
 
         response = self.connection.api.create_incident(busOb)
 
-        return {"success": True, "raw_response": response}
+        return {Output.SUCCESS: True, Output.RAW_RESPONSE: response}
