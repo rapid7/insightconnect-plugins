@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 
 from util import Util
 
@@ -7,16 +7,12 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
 from unittest.mock import Mock
-from parameterized import parameterized
-from unittest import TestCase
-from komand_confluence.actions.get_page_content import GetPageContent
-from komand_confluence.actions.get_page_content.schema import (
-    GetPageContentInput,
-    GetPageContentOutput,
-    Input,
-)
-from jsonschema import validate
+
 from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
+from komand_confluence.actions.get_page_content import GetPageContent
+from komand_confluence.actions.get_page_content.schema import GetPageContentInput, GetPageContentOutput, Input
+from parameterized import parameterized
 
 
 class TestGetPageContent(TestCase):
@@ -55,3 +51,4 @@ class TestGetPageContent(TestCase):
         with self.assertRaises(PluginException) as error:
             self.action.run({Input.PAGE: page, Input.SPACE: space})
         self.assertEqual(cause, error.exception.cause)
+        self.assertEqual(assistance, error.exception.assistance)

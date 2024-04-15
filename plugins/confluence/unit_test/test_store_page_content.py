@@ -1,21 +1,18 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
 from unittest.mock import Mock
-from parameterized import parameterized
-from unittest import TestCase
-from util import Util
+
 from insightconnect_plugin_runtime.exceptions import PluginException
-from komand_confluence.actions.store_page_content import StorePageContent
-from komand_confluence.actions.store_page_content.schema import (
-    StorePageContentOutput,
-    StorePageContentInput,
-    Input,
-)
 from jsonschema import validate
+from komand_confluence.actions.store_page_content import StorePageContent
+from komand_confluence.actions.store_page_content.schema import Input, StorePageContentInput, StorePageContentOutput
+from parameterized import parameterized
+
+from util import Util
 
 
 class TestStorePageContent(TestCase):
@@ -83,3 +80,4 @@ class TestStorePageContent(TestCase):
         with self.assertRaises(PluginException) as error:
             self.action.run({Input.PAGE: page, Input.SPACE: space, Input.CONTENT: content})
         self.assertEqual(cause, error.exception.cause)
+        self.assertEqual(assistance, error.exception.assistance)
