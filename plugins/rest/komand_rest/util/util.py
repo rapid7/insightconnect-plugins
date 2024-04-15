@@ -156,6 +156,7 @@ class RestAPI(object):
     def create_headers_for_custom_auth(self, headers: dict, secret_key) -> dict:
         new_headers = {}
         for key, value in headers.items():
+            print(f"{key = }, {value = }")
             if self.CUSTOM_SECRET_INPUT in value:
                 if not secret_key:
                     raise PluginException(
@@ -166,6 +167,7 @@ class RestAPI(object):
                 new_headers[key] = value.replace(self.CUSTOM_SECRET_INPUT, secret_key)
             else:
                 new_headers[key] = value
+        print(f"{new_headers = }")
         return new_headers
 
     def with_credentials(
@@ -225,7 +227,7 @@ class RestAPI(object):
             elif isinstance(data, str) and check_header(headers, "content-type", "application/json"):
                 data = data.replace("\n", "\\n")
             data = data.encode("utf-8") if data else None
-
+            print(f"{Common.merge_dicts(self.default_headers, headers or {}) = }")
             request_params = {
                 "method": method,
                 "url": url_path_join(self.url, path, self.ssl_verify),
