@@ -73,18 +73,18 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
       "description": "A field for investigations to be sorted",
       "enum": [
         "",
-        "Create time Ascending",
-        "Create time Descending",
+        "Created time Ascending",
+        "Created time Descending",
         "Priority Ascending",
         "Priority Descending",
-        "Last alert time Ascending",
-        "Last alert time Descending",
         "RRN Ascending",
         "RRN Descending",
         "Alerts most recent created time Ascending",
         "Alerts most recent created time Descending",
         "Alerts most recent detection created time Ascending",
-        "Alerts most recent detection created time Descending"
+        "Alerts most recent detection created time Descending",
+        "Responsibility Ascending",
+        "Responsibility Descending"
       ],
       "order": 8
     },
@@ -229,6 +229,21 @@ class ListInvestigationsOutput(insightconnect_plugin_runtime.Output):
           "title": "Title",
           "description": "Investigation title",
           "order": 12
+        },
+        "responsibility": {
+          "type": "string",
+          "title": "Responsibility",
+          "description": "Indicates the party responsible for the alert.",
+          "order": 13
+        },
+        "tags": {
+          "type": "array",
+          "title": "Tags",
+          "description": "The tags applied to the alert.",
+          "items": {
+            "type": "string"
+          },
+          "order": 14
         }
       }
     },

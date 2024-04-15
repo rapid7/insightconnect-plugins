@@ -92,6 +92,48 @@ class GetALogOutput(insightconnect_plugin_runtime.Output):
           "title": "User Data",
           "description": "User data",
           "order": 5
+        },
+        "ip_address": {
+          "type": "string",
+          "title": "IP Address",
+          "description": "The IP address that the Log Search system receives log entries from",
+          "order": 6
+        },
+        "tokens": {
+          "type": "array",
+          "title": "Tokens",
+          "description": "The log token(s) used for writing to the log. This only applies to token type logs",
+          "items": {
+            "type": "string"
+          },
+          "order": 7
+        },
+        "structures": {
+          "type": "array",
+          "title": "Structures",
+          "description": "Structures are internal entities which may apply some additional processing to log entries written to this log",
+          "items": {
+            "type": "string"
+          },
+          "order": 8
+        },
+        "source_type": {
+          "type": "string",
+          "title": "Source Type",
+          "description": "A categorization of logs which defines how log entries are received by a server",
+          "order": 9
+        },
+        "token_seed": {
+          "type": "string",
+          "title": "Token Seed",
+          "description": "The seed used to generate the log token (if the logs source type is \"token\")",
+          "order": 10
+        },
+        "retention_period": {
+          "type": "string",
+          "title": "Retention Period",
+          "description": "Log retention period",
+          "order": 11
         }
       }
     },

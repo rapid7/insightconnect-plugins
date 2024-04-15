@@ -15,7 +15,12 @@
       "rrn": "rrn:example",
       "source": "ALERT",
       "status": "INVESTIGATING",
-      "title": "Example Title"
+      "title": "Example Title",
+      "responsibility": "CUSTOMER",
+      "tags": [
+        "Incident",
+        "Security Test"
+      ]
     }
   ],
   "metadata": {

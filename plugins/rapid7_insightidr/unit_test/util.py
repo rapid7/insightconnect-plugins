@@ -105,6 +105,9 @@ class Util:
                     "test_search_alerts_rrns_false",
                     "test_search_accounts_1",
                     "test_search_accounts_2",
+                    "close_investigations_in_bulk",
+                    "get_a_log",
+                    "create_a_threat",
                 ]:
                     self.text = Util.read_file_to_string(
                         os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp")
@@ -346,5 +349,11 @@ class Util:
                 return MockResponse("test_search_accounts_1", 200)
             elif kwargs.get("params", {}).get("size") == 2:
                 return MockResponse("test_search_accounts_2", 200)
+        if args[1] == "https://us.api.insight.rapid7.com/log_search/management/logs/test_id":
+            return MockResponse("get_a_log", 200)
+        if args[1] == "https://us.api.insight.rapid7.com/idr/v1/customthreats":
+            return MockResponse("create_a_threat", 200)
+        if args[1] == "https://us.api.insight.rapid7.com/idr/v1/investigations/bulk_close":
+            return MockResponse("close_investigations_in_bulk", 200)
 
         raise Exception("Not implemented")

@@ -14,8 +14,8 @@ from komand_rapid7_insightidr.actions.create_investigation.schema import (
 )
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
-from mock import mock_post_request, STUB_USER_EMAIL
 from util import Util
+from mock import mock_post_request, STUB_USER_EMAIL
 from jsonschema import validate
 
 
