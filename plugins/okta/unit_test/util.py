@@ -3,6 +3,8 @@ import logging
 import sys
 import os
 
+from typing import Dict
+
 sys.path.append(os.path.abspath("../"))
 
 import insightconnect_plugin_runtime
@@ -15,13 +17,14 @@ first_request = True
 
 class Util:
     @staticmethod
-    def default_connector(action: insightconnect_plugin_runtime.Action):
+    def default_connector(action: insightconnect_plugin_runtime.Action, custom_params: Dict = {}):
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
         params = {
             Input.OKTAURL: "example.com",
             Input.OKTAKEY: {"secretKey": "okta-secret-key"},
         }
+        params.update(custom_params)
         default_connection.connect(params)
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
