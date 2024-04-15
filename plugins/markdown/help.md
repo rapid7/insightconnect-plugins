@@ -4,11 +4,11 @@
 
 # Key Features
 
-* Convert HTML to Markdown for simpler editing  
+* Convert HTML to Markdown for simpler editing
 * Convert Markdown to HTML or PDF for formatted beautification
 
 # Requirements
-
+  
 *This plugin does not contain any requirements.*
 
 # Supported Product Versions
@@ -18,12 +18,13 @@
 # Documentation
 
 ## Setup
-
+  
 *This plugin does not contain a connection.*
 
 ## Technical Details
 
 ### Actions
+
 
 #### HTML to Markdown
 
@@ -35,7 +36,7 @@ This action is used to convert HTML to Markdown
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |html|bytes|None|False|HTML data as bytes|None|PGgxPlJhcGlkNzwvaDE+|
 |html_string|string|None|False|HTML data as string|None|<h1>Rapid7</h1>|
-
+  
 Example input:
 
 ```
@@ -51,7 +52,7 @@ Example input:
 | :--- | :--- | :--- | :--- | :--- |
 |markdown|bytes|False|Markdown data as bytes|UmFwaWQ3Cj09PT09PQo=|
 |markdown_string|bytes|False|Markdown data as string|Rapid7\n======\n|
-
+  
 Example output:
 
 ```
@@ -71,7 +72,7 @@ This action is used to convert Markdown to HTML
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|
 |markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|
-
+  
 Example input:
 
 ```
@@ -87,7 +88,7 @@ Example input:
 | :--- | :--- | :--- | :--- | :--- |
 |html|bytes|False|HTML data as bytes|PGgxIGlkPSJyYXBpZDctaW5zaWdodGNvbm5lY3QiPlJhcGlkNyBJbnNpZ2h0Q29ubmVjdDwvaDE+Cg==|
 |html_string|string|False|HTML data|<h1 id="rapid7-insightconnect">Rapid7 InsightConnect</h1>|
-
+  
 Example output:
 
 ```
@@ -107,7 +108,7 @@ This action is used to convert Markdown to PDF
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|
 |markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|
-
+  
 Example input:
 
 ```
@@ -123,7 +124,7 @@ Example input:
 | :--- | :--- | :--- | :--- | :--- |
 |pdf|bytes|False|PDF data as bytes|JVBERi0xLjQKJcOiw6MKMSAwIG9iago8PAovVGl0bGUgKCkKL0NyZWF0b3IgKO+/v|
 |pdf_string|string|False|PDF data as string|PDF-1.4 0 obj<</Title Creator|
-
+  
 Example output:
 
 ```
@@ -143,7 +144,7 @@ This action is used to convert Markdown to TXT
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |markdown|bytes|None|False|Markdown content represented in base64|None|IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=|
 |markdown_string|string|None|False|Markdown content as a string|None|# Rapid7 InsightConnect|
-
+  
 Example input:
 
 ```
@@ -159,7 +160,7 @@ Example input:
 | :--- | :--- | :--- | :--- | :--- |
 |txt|bytes|False|TXT data as bytes|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
 |txt_string|string|False|TXT data as string|Rapid7 InsightConnect|
-
+  
 Example output:
 
 ```
@@ -168,29 +169,28 @@ Example output:
   "txt_string": "Rapid7 InsightConnect"
 }
 ```
-
 ### Triggers
-
+  
 *This plugin does not contain any triggers.*
-
 ### Tasks
-
+  
 *This plugin does not contain any tasks.*
 
 ### Custom Types
-
+  
 *This plugin does not contain any custom output types.*
 
 ## Troubleshooting
-
+  
 *There is no troubleshooting for this plugin.*
 
 # Version History
 
+* 3.1.4 - `Markdown to PDF` - Fix issue which produced blank PDF files
 * 3.1.3 - Update PyPandoc dependency | Update SDK
 * 3.1.2 - Added additional error messaging | Refactored code | Fixed bug in Markdown to TXT action which resulted in an incorrect output
 * 3.1.1 - Use input and output constants inm Markdown to PDF action | Change docker image from `komand/python-2-plugin:2` to `insightconnect-python-3-38-plugin:4` | Changed `Exception` to `PluginException` in Markdown to PDF action | Add `USER nobody` in Dockerfile | Update `pypandoc` and `beautifulsoup4` version in requirements | Add example inputs and outputs
-* 3.1.0 - New action: Markdown to TXT
+* 3.1.0 - `Markdown to TXT`: New action
 * 3.0.0 - Update Markdown to HTML and Markdown to PDF action titles and descriptions
 * 2.2.2 - New spec and help.md format for the Extension Library
 * 2.2.1 - Add `utilities` plugin tag for Marketplace searchability
@@ -206,5 +206,5 @@ Example output:
 
 ## References
 
-* [pandoc](https://pandoc.org/)  
+* [pandoc](https://pandoc.org/)
 * [pypandoc](https://pypi.python.org/pypi/pypandoc/)

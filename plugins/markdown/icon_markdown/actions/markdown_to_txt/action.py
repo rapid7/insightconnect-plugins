@@ -25,9 +25,11 @@ class MarkdownToTxt(insightconnect_plugin_runtime.Action):
         if not (((instr is None) ^ (inbytes is None)) or ((instr == "") ^ (inbytes == ""))):
             raise PluginException(
                 cause="Input Error",
-                assistance="Only one of Markdown or Markdown String can be defined"
-                if instr != inbytes
-                else "You must define one of Markdown or Markdown String.",
+                assistance=(
+                    "Only one of Markdown or Markdown String can be defined"
+                    if instr != inbytes
+                    else "You must define one of Markdown or Markdown String."
+                ),
             )
 
         if inbytes != "":
