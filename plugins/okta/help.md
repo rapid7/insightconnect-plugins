@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |oktaKey|credential_secret_key|None|True|Okta key|None|{"secretKey": "123456789abcdef987654321GHIjklm0123456789A"}|
-|oktaUrl|string|None|True|Okta Domain e.g. example.okta.com|None|example.com|
+|oktaUrl|string|None|True| Okta Domain. Please ensure your subdomain is present if the second-level domain is 'okta', e.g. 'example.okta.com'|None|example.okta.com|
   
 Example input:
 
@@ -1612,6 +1612,7 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Version History
 
+* 4.2.6 - Connection: Update to ensure subdomain is entered correctly. Plugin will now raise an error if this value is not present.
 * 4.2.5 - Monitor Logs task: Update handing of custom_config parameter
 * 4.2.4 - Monitor Logs task: Update to latest SDK which adds new task custom_config parameter | Update validators to 0.22.0
 * 4.2.3 - Monitor Logs task: Added exception logging and use latest plugin SDK. Also Fixed schemas that contain passwords.
