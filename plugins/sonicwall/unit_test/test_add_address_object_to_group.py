@@ -51,7 +51,30 @@ class TestAddAddressObjectToGroup(TestCase):
                         }
                     }
                 },
-            )
+            ),
+            (
+                {**STUB_PAYLOAD, Input.GROUP: "ExampleGroupName2"},
+                {
+                    "address_groups": [
+                        {
+                            "ipv4": {
+                                "name": "string",
+                                "uuid": "string",
+                                "address_group": {
+                                    "ipv4": [{"name": "ExampleGroupName2"}],
+                                    "ipv6": [{"name": "string"}],
+                                },
+                                "address_object": {
+                                    "ipv4": [{"name": "string"}],
+                                    "ipv6": [{"name": "string"}],
+                                    "mac": [{"name": "string"}],
+                                    "fqdn": [{"name": "ExampleAddressObject"}],
+                                },
+                            }
+                        }
+                    ]
+                },
+            ),
         ]
     )
     @patch("requests.request", side_effect=mock_request_200)
@@ -67,8 +90,8 @@ class TestAddAddressObjectToGroup(TestCase):
         [
             (
                 mock_request_400,
-                Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
-                Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
+                Message.ADDRESS_OBJECT_NOT_FOUND_CAUSE.format(STUB_PAYLOAD.get(Input.ADDRESS_OBJECT, "")),
+                Message.ADDRESS_OBJECT_NOT_FOUND_ASSISTANCE,
             ),
             (
                 mock_request_401,
@@ -82,8 +105,8 @@ class TestAddAddressObjectToGroup(TestCase):
             ),
             (
                 mock_request_500,
-                Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
-                Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
+                Message.ADDRESS_OBJECT_NOT_FOUND_CAUSE.format(STUB_PAYLOAD.get(Input.ADDRESS_OBJECT, "")),
+                Message.ADDRESS_OBJECT_NOT_FOUND_ASSISTANCE,
             ),
             (
                 mock_request_invalid_json,

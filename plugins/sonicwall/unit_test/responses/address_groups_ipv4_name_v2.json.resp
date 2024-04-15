@@ -1,0 +1,44 @@
+{
+  "address_groups": [
+    {
+      "ipv4": {
+        "name": "string",
+        "uuid": "string",
+        "address_group": {
+          "ipv4": [
+            {
+              "name": "ExampleGroupName2"
+            }
+          ],
+          "ipv6": [
+            {
+              "name": "string"
+            }
+          ]
+        },
+        "address_object": {
+          "ipv4": [
+            {
+              "name": "string"
+            }
+          ],
+          "ipv6": [
+            {
+              "name": "string"
+            }
+          ],
+          "mac": [
+            {
+              "name": "string"
+            }
+          ],
+          "fqdn": [
+            {
+              "name": "ExampleAddressObject"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -60,8 +60,8 @@ class TestDeleteAddressObject(TestCase):
         [
             (
                 mock_request_400,
-                Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
-                Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
+                Message.ADDRESS_OBJECT_NOT_FOUND_CAUSE.format(STUB_PAYLOAD.get(Input.ADDRESS_OBJECT, "")),
+                Message.ADDRESS_OBJECT_NOT_FOUND_ASSISTANCE,
             ),
             (
                 mock_request_401,
@@ -75,8 +75,8 @@ class TestDeleteAddressObject(TestCase):
             ),
             (
                 mock_request_500,
-                Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
-                Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
+                Message.ADDRESS_OBJECT_NOT_FOUND_CAUSE.format(STUB_PAYLOAD.get(Input.ADDRESS_OBJECT, "")),
+                Message.ADDRESS_OBJECT_NOT_FOUND_ASSISTANCE,
             ),
             (
                 mock_request_invalid_json,
