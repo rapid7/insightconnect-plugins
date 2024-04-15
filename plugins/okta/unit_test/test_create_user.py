@@ -5,6 +5,7 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_okta.actions.create_user import CreateUser
+from komand_okta.connection.schema import Input as ConnectionInput
 from util import Util
 from unittest.mock import patch
 from parameterized import parameterized
@@ -56,3 +57,24 @@ class TestCreateUser(TestCase):
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
         self.assertEqual(error.exception.assistance, assistance)
+
+    @parameterized.expand(
+        [
+            [
+                "bad_domain",
+                Util.read_file_to_dict("inputs/create_user_profile_bad.json.inp"),
+                "Invalid domain entered for input 'Okta Domain'.",
+                "Please include a valid subdomain, e.g. 'example.okta.com', if using 'okta.com'.",
+                "Provided Okta Domain: okta.com",
+            ],
+        ]
+    )
+    def test_create_user_raise_domain_exception(
+        self, mock_request, test_name, input_parameters, cause, assistance, data
+    ):
+        with self.assertRaises(PluginException) as error:
+            action = Util.default_connector(CreateUser(), {ConnectionInput.OKTAURL: "okta.com"})
+            action.run(input_parameters)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)
+        self.assertEqual(error.exception.data, data)
