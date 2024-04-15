@@ -26,6 +26,8 @@ class API:
         )
         try:
             self.response_handler(response)
+            if "errortext" in response.text:
+                raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
             return response.json()
         except requests.exceptions.JSONDecodeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response)
