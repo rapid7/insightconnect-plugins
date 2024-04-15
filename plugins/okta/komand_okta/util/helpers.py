@@ -8,3 +8,7 @@ def clean(item_to_clean: Union[dict, list]) -> Union[dict, list]:
     if not isinstance(item_to_clean, dict):
         return item_to_clean
     return return_non_empty(item_to_clean.copy())
+
+
+def get_hostname(hostname: str) -> str:
+    return hostname.replace("https://", "").replace("http://", "")
