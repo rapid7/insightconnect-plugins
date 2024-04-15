@@ -29,7 +29,7 @@ class TestAsyncRequests(TestCase):
     def test_async_request(self):
         loop = asyncio.new_event_loop()
 
-        asyc_obj = async_requests.AsyncRequests("user", "pass")
+        asyc_obj = async_requests.AsyncRequests("user", "pass", False)
         session = MockSession()
         test_response = loop.run_until_complete(asyc_obj.async_request(session, "www.google.com"))
 
