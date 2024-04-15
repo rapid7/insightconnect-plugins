@@ -4,9 +4,15 @@ products: [insightconnect]
 name: cherwell
 title: Cherwell
 description: The Cherwell plugin is used to administrate incidents in Cherwell
-version: 2.1.1
+version: 3.0.0
+connection_version: 3
+sdk:
+  type: slim
+  version: 5.4.7
+  user: nobody
 vendor: rapid7
 support: community
+supported_versions: ["22-03-2024"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/cherwell
@@ -23,20 +29,23 @@ hub_tags:
 connection:
   url:
     title: URL
-    description: Hostname of the Cherwell instance
+    description: Scheme and hostname of the Cherwell instance. HTTPS is recommended to ensure security and avoid connection errors. If no scheme is provided, HTTPS will be used by default
     type: string
     required: true
-    default: guideit.cherwellondemand.com
+    default: https://guideit.cherwellondemand.com
+    example: https://guideit.cherwellondemand.com
   client_id:
     title: Client ID
     description: Cherwell Client ID / API Key
     type: credential_secret_key
     required: true
+    example: a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99
   username_and_password:
     title: Username and Password
     description: Cherwell username and password
     type: credential_username_password
     required: true
+    example: '{"username": "user@example.com", "password": "mypassword"}'
   authentication_mode:
     title: Authentication Mode
     description: Authentication mode. Either Internal, Windows, LDAP, SAML, Auto
@@ -49,11 +58,13 @@ connection:
     - Auto
     required: true
     default: Internal
+    example: Internal
   ssl_verify:
     title: SSL Verify
     description: Whether to access the server over HTTPS
     type: boolean
     required: true
+    example: true
 actions:
   create_incident:
     title: Create Incident
@@ -62,26 +73,29 @@ actions:
       fields_to_change:
         title: Fields to Change
         type: object
-        description: A JSON blob of keys and values that are to be replaced in the
-          template e.g. {"Status", "New"} will update the Status field from the template
+        description: 'A JSON blob of keys and values that are to be replaced in the template e.g. {"Status": "New"} will update the Status field from the template'
         required: true
+        example: {"Status": "New"}
       business_object_id:
         title: Business Object ID
         type: string
-        description: BusObjID of the template to create the incident from e.g 7cc53665c0c24cab86870a21cf6434cc
+        description: BusObjID of the template to create the incident from
         required: true
+        example: 7cc53665c0c24cab86870a21cf6434cc
     output:
       success:
         title: Success
         description: Boolean indicating whether the business object was successfully
           created
         type: boolean
-        required: true
+        required: false
+        example: true
       raw_response:
         title: Raw Response
         description: The raw JSON returned by the endpoint
         type: object
-        required: true
+        required: false
+        example: { "busObPublicId": "string", "busObRecId": "string", "cacheKey": "string", "fieldValidationErrors": [ { "error": "string", "errorCode": "string", "fieldId": "string" } ], "notificationTriggers": [ { "sourceType": "string", "sourceId": "string", "sourceChange": "string", "key": "string" } ], "errorCode": "string", "errorMessage": "string", "hasError": true }
   lookup_incident:
     title: Lookup Incident
     description: Lookup that returns an incident that includes a list of fields and
@@ -92,39 +106,44 @@ actions:
         type: string
         description: BusObjID of the incident
         required: true
+        example: 7cc53665c0c24cab86870a21cf6434cc
       public_id:
         title: Public ID
         type: string
         description: Public ID of the incident
         required: true
+        example: 7cc53665c0c24cab86870a21cf6434cc
     output:
       success:
         title: Success
         description: Boolean indicating whether the business object was successfully
           created
         type: boolean
-        required: true
+        required: false
+        example: true
       raw_response:
         title: Raw Response
         description: The raw JSON returned by the endpoint
         type: object
-        required: true
+        required: false
+        example: { "busObId": "string", "busObPublicId": "string", "busObRecId": "string", "fields": [ { "dirty": true, "displayName": "string", "fieldId": "string", "html": "string", "name": "string", "value": "string" } ], "links": [ { "name": "string", "url": "string" } ], "errorCode": "string", "errorMessage": "string", "hasError": true }
   perform_ad_hoc_search:
     title: Perform Ad Hoc Search
-    description: Runs an ad-hoc Business Object search. To execute a search with Prompts,
-      the PromptId and Value are required in the data request object
+    description: Runs an ad-hoc Business Object search. To execute a search with Prompts, the PromptId and Value are required in the data request object
     input:
       data_request:
         title: Data Request
         description: Request object to specify search parameters
         type: object
         required: true
+        example: { "busObId": "7cc53665c0c24cab86870a21cf6434cc", "filters": [ { "fieldId": "5eb3234ae1344c64a19819eda437f18d", "operator": "equals", "value": "open" } ], "sorting": [ { "fieldId": "5eb3234ae1344c64a19819eda437f18d", "sortDirection": 0 } ], }
     output:
       search_results:
         title: Search Results
         description: The raw JSON search results returned by the endpoint
         type: object
-        required: true
+        required: false
+        example: { "businessObjects": [ { "busObId": "string", "busObPublicId": "string", "busObRecId": "string", "fields": [ { "dirty": true, "displayName": "string", "fieldId": "string", "html": "string", "name": "string", "value": "string" } ], "links": [ { "name": "string", "url": "string" } ], "errorCode": "string", "errorMessage": "string", "hasError": true } ], "hasPrompts": true, "links": [ { "name": "string", "url": "string" } ], "prompts": [ { "allowValuesOnly": true, "busObId": "string", "collectionStoreEntireRow": "string", "collectionValueField": "string", "constraintXml": "string", "contents": "string", "default": "string", "fieldId": "string", "isDateRange": true, "listDisplayOption": "Auto", "listReturnFieldId": "string", "multiLine": true, "promptId": "string", "promptType": "None", "promptTypeName": "string", "required": true, "text": "string", "value": {}, "values": [ "string" ] } ], "searchResultsFields": [ { "caption": "string", "currencyCulture": "string", "currencySymbol": "string", "decimalDigits": 0, "defaultSortOrderAscending": true, "displayName": "string", "fieldName": "string", "fullFieldId": "string", "hasDefaultSortField": true, "fieldId": "string", "isBinary": true, "isCurrency": true, "isDateTime": true, "isFilterAllowed": true, "isLogical": true, "isNumber": true, "isShortDate": true, "isShortTime": true, "isVisible": true, "sortable": true, "sortOrder": "string", "storageName": "string", "wholeDigits": 0 } ], "simpleResults": { "groups": [ { "isBusObTarget": true, "simpleResultsListItems": [ { "busObId": "string", "busObRecId": "string", "docRepositoryItemId": "string", "galleryImage": "string", "links": [ { "name": "string", "url": "string" } ], "publicId": "string", "scope": "string", "scopeOwner": "string", "subTitle": "string", "text": "string", "title": "string" } ], "subTitle": "string", "targetId": "string", "title": "string", "errorCode": "string", "errorMessage": "string", "hasError": true } ], "title": "string", "errorCode": "string", "errorMessage": "string", "hasError": true }, "totalRows": 0, "errorCode": "string", "errorMessage": "string", "hasError": true }
   update_incident:
     title: Update Incident
     description: Updates an incident within Cherwell
@@ -134,26 +153,30 @@ actions:
         description: Business Object ID of the incident
         type: string
         required: true
+        example: 7cc53665c0c24cab86870a21cf6434cc
       public_id:
         title: Public ID
         description: Public ID of the incident
         type: string
         required: true
+        example: 7cc53665c0c24cab86870a21cf6434cc
       fields_to_update:
         title: Fields to Update
-        description: A JSON blob of keys and values that are to be updated in the
-          incident e.g. {"Status", "New"} will update the Status field of the incident
+        description: 'A JSON blob of keys and values that are to be updated in the incident e.g. {"Status", "New"} will update the Status field of the incident'
         type: object
         required: true
+        example: {"Status": "New"}
     output:
       success:
         title: Success
         description: Boolean indicating whether the business object was successfully
           created
         type: boolean
-        required: true
+        required: false
+        example: true
       raw_response:
         title: Raw Response
         description: The raw JSON returned by the endpoint
         type: object
-        required: true
+        required: false
+        example: {"fieldValidationErrors":[],"errorMessage":null,"errorCode":null,"hasError":false,"busObPublicId":"762421","busObRecId":"9446e3f047458fd7824f3b400f94be3566ac523802"}
