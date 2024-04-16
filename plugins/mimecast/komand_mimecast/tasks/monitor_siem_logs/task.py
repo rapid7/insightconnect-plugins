@@ -12,7 +12,7 @@ from ...util.constants import IS_LAST_TOKEN_FIELD
 from ...util.event import EventLogs
 from ...util.exceptions import ApiClientException
 
-CUTOFF = 24 * 7
+CUTOFF = 24
 
 
 class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
