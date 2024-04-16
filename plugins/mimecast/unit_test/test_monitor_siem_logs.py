@@ -25,16 +25,16 @@ class TestMonitorSiemLogs(TestCase):
         tests = [
             {"next_token": "happy_token", "resp": content, "has_more_pages": True, "token": token},
             {"next_token": "force_json_error", "resp": [], "has_more_pages": True, "token": "force_json_error"},
-            {"next_token": "no_results", "resp": [], "has_more_pages": False, "token": "no_results"},
+            {"next_token": "no_results", "resp": [], "has_more_pages": False, "token": token},
+            {"next_token": "force_single_json_error", "resp": [], "has_more_pages": True, "token": token},
         ]
         for test in tests:
             with self.subTest(f"Success test with token: {test.get('next_token')}"):
                 test_state = {"next_token": test.get("next_token")}
                 response, new_state, has_more_pages, status_code, _ = self.task.run(params={}, state=test_state)
-
                 self.assertEqual(has_more_pages, test.get("has_more_pages"))
                 self.assertEqual(response, test.get("resp"))
-                self.assertEqual(new_state, {"next_token": test.get("token")})
+                self.assertEqual(new_state, {"next_token": token})
                 self.assertEqual(status_code, 200)
                 validate(response, MonitorSiemLogsOutput.schema)
 
