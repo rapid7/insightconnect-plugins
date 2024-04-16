@@ -25,7 +25,7 @@ class TestMonitorSiemLogs(TestCase):
         tests = [
             {"next_token": "happy_token", "resp": content, "has_more_pages": True, "token": token},
             {"next_token": "force_json_error", "resp": [], "has_more_pages": True, "token": "force_json_error"},
-            {"next_token": "no_results", "resp": [], "has_more_pages": False, "token": "no_results"},
+            {"next_token": "no_results", "resp": [], "has_more_pages": False, "token": "new_token"},
             {"next_token": "force_single_json_error", "resp": [], "has_more_pages": True, "token": "new_token"},
         ]
         for test in tests:

@@ -178,7 +178,7 @@ class Util:
             elif "no_results" in data:
                 # isLastToken returns `true` when testing against live API and no results returned from Mimecast.
                 no_results = b'{"meta":{"isLastToken":true,"status":200},"data":[],"fail":[]}'
-                no_results_headers = {"mc-siem-token": "token123", "Content-Disposition": "attachment"}
+                no_results_headers = {"mc-siem-token": "new_token", "Content-Disposition": "attachment"}
                 no_results_headers["isLastToken"] = "true"
                 resp = MockResponseZip(200, no_results, no_results_headers, '{"meta": {"status": 200}}')
             elif "path_traversal" in data:
