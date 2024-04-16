@@ -46,6 +46,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             while time() < limit_time:
                 try:
                     output, headers, status_code = self.connection.client.get_siem_logs(header_next_token)
+                    header_next_token = headers.get(self.HEADER_NEXT_TOKEN, header_next_token)
                     if not output:
                         self.logger.info("No new logs returned from Mimecast")
                         break
@@ -55,12 +56,12 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                         f"Error: {error}, returning state={state}, has_more_pages={has_more_pages}"
                     )
                     return [], state, has_more_pages, error.status_code, error
-                header_next_token = headers.get(self.HEADER_NEXT_TOKEN)
                 output = self._filter_and_sort_recent_events(output, filter_time)
                 if output:
                     break
 
             if header_next_token:
+                self.logger.info(f"The token will be set to '{header_next_token}' in the state.")
                 state[self.NEXT_TOKEN] = header_next_token
                 # Mimecast API only returns isLastToken in the headers if no more pages, so if it is not present then
                 # we know that there are no more pages to be consumed.

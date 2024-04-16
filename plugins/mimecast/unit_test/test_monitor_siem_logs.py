@@ -31,10 +31,9 @@ class TestMonitorSiemLogs(TestCase):
             with self.subTest(f"Success test with token: {test.get('next_token')}"):
                 test_state = {"next_token": test.get("next_token")}
                 response, new_state, has_more_pages, status_code, _ = self.task.run(params={}, state=test_state)
-
                 self.assertEqual(has_more_pages, test.get("has_more_pages"))
                 self.assertEqual(response, test.get("resp"))
-                self.assertEqual(new_state, {"next_token": test.get("token")})
+                self.assertEqual(new_state, {"next_token": token})
                 self.assertEqual(status_code, 200)
                 validate(response, MonitorSiemLogsOutput.schema)
 
