@@ -12,7 +12,7 @@ from ...util.constants import IS_LAST_TOKEN_FIELD
 from ...util.event import EventLogs
 from ...util.exceptions import ApiClientException
 
-CUTOFF = 24 * 7
+DEFAULT_CUTOFF = 24
 
 
 class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
@@ -35,12 +35,16 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         try:
             has_more_pages = False
             header_next_token = state.get(self.NEXT_TOKEN, "")
-            filter_time = self._get_filter_time(custom_config)
 
             if not header_next_token:
                 self.logger.info("First run...")
+                cutoff = DEFAULT_CUTOFF
             else:
                 self.logger.info("Subsequent run using header_next_token...")
+                # in the event that the integration gets stopped for a few days we want the ability for it to catch back up again
+                cutoff = DEFAULT_CUTOFF * 7
+
+            filter_time = self._get_filter_time(custom_config, cutoff)
 
             limit_time = time() + 30
             while time() < limit_time:
@@ -118,7 +122,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             self.logger.info(f"Latest event time returned from Mimecast logs: {latest_time}")
         return task_output
 
-    def _get_filter_time(self, custom_config: Dict[str, int]) -> int:
+    def _get_filter_time(self, custom_config: Dict[str, int], cutoff: int) -> int:
         """
         Apply custom_config params (if provided) to the task. If a lookback value exists, it should take
         precedence (this can allow a larger filter time), otherwise use the default value.
@@ -126,7 +130,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         :return: filter time to be applied in `_filter_and_sort_recent_events`
         """
 
-        default, lookback = custom_config.get("default", CUTOFF), custom_config.get("lookback")
+        default, lookback = custom_config.get("default", cutoff), custom_config.get("lookback")
         filter_value = lookback if lookback else default
         self.logger.info(f"Task execution will be applying filter period of {filter_value} hours...")
         return int(filter_value)
