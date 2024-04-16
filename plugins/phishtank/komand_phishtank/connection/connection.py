@@ -18,9 +18,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         )
 
     def test(self):
-        endpoint = URL
         try:
-            self.phishtank_api.check(endpoint)
+            self.phishtank_api.check(URL)
             return {"success": True}
         except Exception as exception:
             self.logger.error(f"Error: {str(exception)}")
