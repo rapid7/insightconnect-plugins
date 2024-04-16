@@ -31,8 +31,8 @@ class SonicWallAPI:
                 self.logger.info(f"Looking for group as {type_}...")
                 response = self._make_request("GET", f"address-groups/{type_}/name/{name}")
                 if response:
-                    self.logger.info(f"Group '{name}' has been found.")
-                    return response
+                    self.logger.info(f"Group '{name}' has been found. Type: {type_}.")
+                    return {"group_object": response, "group_type": type_}
             except PluginException as error:
                 if error.preset != PluginException.Preset.UNKNOWN:
                     raise
@@ -42,19 +42,10 @@ class SonicWallAPI:
         )
 
     def get_group_type(self, name: str) -> str:
-        group = self.get_group(name)
-        for groups in group.get("address_group", {}):
-            if "ipv4" in groups:
-                return "ipv4"
-            elif "ipv6" in groups:
-                return "ipv6"
-        raise PluginException(
-            cause=Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
-            assistance=Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
-        )
+        return self.get_group(name).get("group_type")
 
     def get_address_object(self, name: str) -> Union[Dict[str, Any], None]:
-        for object_type in ["fqdn", "mac", "ipv6", "ipv4"]:
+        for object_type in ("fqdn", "mac", "ipv6", "ipv4"):
             try:
                 self.logger.info(f"Looking for address object as {object_type}...")
                 address_object = self._make_request("GET", f"address-objects/{object_type}/name/{name}")
@@ -65,8 +56,8 @@ class SonicWallAPI:
                 if error.preset != PluginException.Preset.UNKNOWN:
                     raise
         raise PluginException(
-            cause=Message.ADDRESS_GROUP_NOT_FOUND_CAUSE,
-            assistance=Message.ADDRESS_GROUP_NOT_FOUND_ASSISTANCE,
+            cause=Message.ADDRESS_OBJECT_NOT_FOUND_CAUSE.format(name),
+            assistance=Message.ADDRESS_OBJECT_NOT_FOUND_ASSISTANCE,
         )
 
     def get_object_type(self, name: str) -> str:

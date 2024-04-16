@@ -42,10 +42,15 @@ def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
         elif url == f"{BASE_URL}:{PORT}/api/sonicos/direct/cli":
             return MockResponse("remove_address_from_group", status_code)
     elif method in ("GET", "PUT"):
-        if url == f"{BASE_URL}:{PORT}/api/sonicos/address-objects/fqdn/name/ExampleAddressObject":
+        if url in (
+            f"{BASE_URL}:{PORT}/api/sonicos/address-objects/fqdn/name/ExampleAddressObject",
+            f"{BASE_URL}:{PORT}/api/sonicos/address-objects/fqdn/name/string",
+        ):
             return MockResponse("address_objects", status_code)
         elif url == f"{BASE_URL}:{PORT}/api/sonicos/address-groups/ipv4/name/ExampleGroupName":
             return MockResponse("address_groups_ipv4_name", status_code)
+        elif url == f"{BASE_URL}:{PORT}/api/sonicos/address-groups/ipv4/name/ExampleGroupName2":
+            return MockResponse("address_groups_ipv4_name_v2", status_code)
         elif url == f"{BASE_URL}:{PORT}/api/sonicos/zones/name/WAN":
             return MockResponse("zones", status_code)
     if "InvalidJSON" in method:

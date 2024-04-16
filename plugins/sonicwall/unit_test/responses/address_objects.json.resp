@@ -2,7 +2,7 @@
   "address_objects": [
     {
       "fqdn": {
-        "name": "string",
+        "name": "ExampleAddressObject",
         "uuid": "string",
         "domain": "string",
         "zone": "string",
