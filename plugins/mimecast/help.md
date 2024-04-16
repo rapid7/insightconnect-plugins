@@ -992,6 +992,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
+* 5.3.10 - Task `monitor_siem_logs`: To move token to next file even if there is no files found | bump SDK to 5.4.7
 * 5.3.9 - Task `monitor_siem_logs`: Add in better error messages if the wrong region is provided
 * 5.3.8 - Task `monitor_siem_logs` Update to use SDK 5.4.4 | Add additional logger for traceability when no logs returned | Improve error handling.
 * 5.3.7 - Task `monitor_siem_logs` adding in sanitization for names of files to be read in | Include SDK 5.4 which adds new task custom_config parameter | Bump setuptools.
