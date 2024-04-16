@@ -41,6 +41,14 @@ class Util:
             return json.loads(file.read())
 
     @staticmethod
+    def get_mocked_zip_json_decode_error(path_traversal=False):
+        zip_file = BytesIO()
+        with ZipFile(zip_file, "w") as myzip:
+            filename = get_filename("0", path_traversal)
+            myzip.writestr(filename, """{type": "MTA", "data": '}""")
+        return zip_file.getvalue()
+
+    @staticmethod
     def get_mocked_zip(path_traversal=False):
         file_contents = [
             {"type": "MTA", "data": [FILE_ZIP_CONTENT_1]},
@@ -51,7 +59,6 @@ class Util:
             for i, content in enumerate(file_contents):
                 filename = get_filename(i, path_traversal)
                 myzip.writestr(filename, json.dumps(content))
-
         return zip_file.getvalue()
 
     @staticmethod
@@ -164,6 +171,10 @@ class Util:
                 resp = MockResponseZip(401, b"", {}, json.dumps(json_value))
             elif "force_json" in data:
                 resp = MockResponseZip(200, b'{ "type" : "MTA", "data" : ', headers, '{"meta": {"status": 200}}')
+            elif "force_single_json_error" in data:
+                # isLastToken returns `true` when testing against live API and no results returned from Mimecast.
+                headers = {"mc-siem-token": "new_token", "Content-Disposition": "attachment"}
+                resp = MockResponseZip(200, Util.get_mocked_zip_json_decode_error(), headers, json.dumps({"meta": {"status": 200}}))
             elif "no_results" in data:
                 # isLastToken returns `true` when testing against live API and no results returned from Mimecast.
                 no_results = b'{"meta":{"isLastToken":true,"status":200},"data":[],"fail":[]}'
