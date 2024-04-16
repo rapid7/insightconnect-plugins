@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 
+from komand_phishtank.util.constants import URL
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from komand_phishtank.util.api import API
 
@@ -17,7 +18,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         )
 
     def test(self):
-        endpoint = "phishtank/status"
+        endpoint = URL
         try:
             self.phishtank_api.check(endpoint)
             return {"success": True}
