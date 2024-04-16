@@ -109,7 +109,11 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
             event_date_time = event.get(EventLogs.FILTER_DATETIME)
             latest_time = event_date_time if event_date_time > latest_time else latest_time
             event.pop(EventLogs.FILTER_DATETIME, None)
-        self.logger.info(f"Number of returned logs after filtering performed: {len(task_output)}")
+
+        if len(task_output) > 0:
+            self.logger.info(f"Number of returned logs after filtering performed: {len(task_output)}")
+        else:
+            self.logger.info("None of the raw logs returned from Mimecast where with in filter timerange")
         if task_output:
             self.logger.info(f"Latest event time returned from Mimecast logs: {latest_time}")
         return task_output
