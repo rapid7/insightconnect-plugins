@@ -173,12 +173,12 @@ class Util:
                 resp = MockResponseZip(200, b'{ "type" : "MTA", "data" : ', headers, '{"meta": {"status": 200}}')
             elif "force_single_json_error" in data:
                 # isLastToken returns `true` when testing against live API and no results returned from Mimecast.
-                headers = {"mc-siem-token": "new_token", "Content-Disposition": "attachment"}
+                headers = headers.copy()
                 resp = MockResponseZip(200, Util.get_mocked_zip_json_decode_error(), headers, json.dumps({"meta": {"status": 200}}))
             elif "no_results" in data:
                 # isLastToken returns `true` when testing against live API and no results returned from Mimecast.
                 no_results = b'{"meta":{"isLastToken":true,"status":200},"data":[],"fail":[]}'
-                no_results_headers = {"mc-siem-token": "new_token", "Content-Disposition": "attachment"}
+                no_results_headers = headers.copy()
                 no_results_headers["isLastToken"] = "true"
                 resp = MockResponseZip(200, no_results, no_results_headers, '{"meta": {"status": 200}}')
             elif "path_traversal" in data:
