@@ -12,7 +12,7 @@
 
 # Supported Product Versions
 
-* 2024-10-04
+* 2024-16-04
 
 # Documentation
 
@@ -100,6 +100,7 @@ Example output:
 
 # Version History
 
+* 2.0.1 - Fix connection test
 * 2.0.0 - Update requirements.txt | SDK update | New connection parameter `username` | 'submitted_at' removed from action outputs
 * 1.0.2 - Update requests library
 * 1.0.1 - New spec and help.md format for the Extension Library

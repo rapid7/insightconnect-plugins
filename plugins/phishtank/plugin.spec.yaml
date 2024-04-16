@@ -4,12 +4,12 @@ products: [insightconnect]
 name: phishtank
 title: PhishTank
 description: Phishtank is a community-driven anti-phishing site where users submit suspected phishes and other users 'vote' if it is a phish or not. This plugin utilizes the Phishtank API to look up URLs in the PhishTank database
-version: 2.0.0
+version: 2.0.1
 sdk:
   type: slim
   version: 5.4.7
   user: nobody
-supported_versions: ["2024-10-04"]
+supported_versions: ["2024-16-04"]
 connection_version: 2
 vendor: rapid7
 support: community
@@ -23,6 +23,7 @@ requirements: ["PhishTank API key"]
 references: ["[PhishTank](https://www.phishtank.com/)"]
 links: ["[PhishTank API](https://www.phishtank.com/api_info.php)"]
 version_history:
+  - 2.0.1 - Fix connection test
   - 2.0.0 - Update requirements.txt | SDK update | New connection parameter `username` | 'submitted_at' removed from action outputs
   - 1.0.2 - Update requests library
   - 1.0.1 - New spec and help.md format for the Extension Library
