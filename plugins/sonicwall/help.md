@@ -8,7 +8,7 @@ Manage your firewalls and block malicious hosts through this plugin.
 * Block and unblock hosts by managing address groups
 
 # Requirements
- 
+
 * Username and password
 * Base URL of firewall
 
@@ -355,11 +355,13 @@ Example output:
 
 # Version History
 
+* 1.3.4 - Updated SDK to the latest version | Updated objects checking
 * 1.3.3 - Updated SDK to the latest version | Extended actions logging
 * 1.3.2 - Updated SDK to the latest version to address memory usage issue | Fixed connection test
 * 1.3.1 - Replace the PluginException with a logger in Create Address Object action | Add `host_status` output parameter in Create Address Object action
 * 1.3.0 - New action Remove Address from Group
 * 1.2.0 - New action Check If Address In Address Group
+* 1.1.0 - New actions Create Address Object and Delete Address Object
 * 1.0.0 - Initial plugin
 
 # Links

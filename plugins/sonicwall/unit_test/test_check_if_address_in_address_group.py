@@ -37,7 +37,11 @@ class TestCheckIfAddressInAddressGroup(TestCase):
             (
                 STUB_PAYLOAD,
                 [{"name": STUB_PAYLOAD.get(Input.ADDRESS, "")}],
-            )
+            ),
+            (
+                {**STUB_PAYLOAD, Input.ENABLE_SEARCH: True},
+                [{"name": STUB_PAYLOAD.get(Input.ADDRESS, "")}],
+            ),
         ]
     )
     @patch("requests.request", side_effect=mock_request_200)
