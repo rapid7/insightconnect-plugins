@@ -32,14 +32,14 @@
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |account_id|string|None|True|Account ID for Threat Command|None|9de5069c5afe602b2ea0a04b|
 |api_key|credential_secret_key|None|True|API key for Threat Command|None|cc805d5fab1fd71a4ab352a9c533e65fb2d5b885518f4e565e68847223b8e6b85cb48f3afad842726d99239c9e36505c64b0dc9a061d9e507d833277ada336ab|
-  
+
 Example input:
 
 ```
@@ -55,7 +55,7 @@ Example input:
 
 
 #### Add CVEs
-  
+
 This action is used to add CVEs to account
 
 ##### Input
@@ -96,7 +96,7 @@ Example output:
 ```
 
 #### Add Manual Alert
-  
+
 This action is used to create a manual alert with the provided parameters
 
 ##### Input
@@ -153,7 +153,7 @@ Example output:
 ```
 
 #### Close Alert
-  
+
 This action is used to close the alert with the given ID
 
 ##### Input
@@ -193,7 +193,7 @@ Example output:
 ```
 
 #### Delete CVEs
-  
+
 This action is used to delete CVEs from account
 
 ##### Input
@@ -229,7 +229,7 @@ Example output:
 ```
 
 #### Enrich Indicator
-  
+
 This action is used to submit an indicator to Threat Command for investigation and return the results
 
 ##### Input
@@ -458,7 +458,7 @@ Example output:
 ```
 
 #### Get Alerts
-  
+
 This action is used to search alerts based on criteria
 
 ##### Input
@@ -532,7 +532,7 @@ Example output:
 ```
 
 #### Get Complete Alert by ID
-  
+
 This action is used to get an alert's complete details for a given alert ID
 
 ##### Input
@@ -602,7 +602,7 @@ Example output:
 ```
 
 #### Get CVE by ID
-  
+
 This action is used to get a list of CVE's with a list of IDs from an account
 
 ##### Input
@@ -678,7 +678,7 @@ Example output:
 ```
 
 #### Get CVE List
-  
+
 This action is used to get a partial list of all CVEs from an account
 
 ##### Input
@@ -779,7 +779,7 @@ Example output:
 ```
 
 #### Get CVEs for Cyber Term
-  
+
 This action is used to get the Common Vulnerabilities and Exposures that are related to a cyber term
 
 ##### Input
@@ -811,7 +811,7 @@ Example output:
 ```
 
 #### Get Cyber Terms by Filter
-  
+
 This action is used to get cyber terms for given filters
 
 ##### Input
@@ -878,7 +878,7 @@ Example output:
 ```
 
 #### Get Indicator by Value
-  
+
 This action is used to search indicators in Threat Command TIP
 
 ##### Input
@@ -962,7 +962,7 @@ Example output:
 ```
 
 #### Get IOCs by Filter
-  
+
 This action is used to get Indicators of Compromise by Filter
 
 ##### Input
@@ -1067,7 +1067,7 @@ Example output:
 ```
 
 #### Get IOCs for Cyber Term
-  
+
 This action is used to gets cyber term IOCs by cyber term ID
 
 ##### Input
@@ -1109,7 +1109,7 @@ Example output:
 ```
 
 #### Takedown Request
-  
+
 This action is used to request a takedown for a given alert in Threat Command
 
 ##### Input
@@ -1145,7 +1145,7 @@ Example output:
 
 
 #### New Alert
-  
+
 This trigger is used to triggers when a new alert that matches the given criteria is created in Threat Command
 
 ##### Input
@@ -1424,13 +1424,14 @@ Example output:
 
 
 ## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
+  
+*There is no troubleshooting for this plugin.*
 
 # Version History
 
+* 5.1.2 - Update exception presets in API and unit tests
 * 5.1.1 - Better handling of response from the threat connect API when using the `takedown_request` action | Bumped to use the newest version of the SDK | Updated old unit tests / added new unit tests
-* 5.1.0 - Add actions: `Get Cyber Terms by Filter`, `Get IOCs for Cyber Term`, `Get CVEs for Cyber Term`, `Close Alert`. Add new input for `Get IOCs By Filter` action
+* 5.1.0 - Add actions -> `Get Cyber Terms by Filter`, `Get IOCs for Cyber Term`, `Get CVEs for Cyber Term`, `Close Alert`. Add new input for `Get IOCs By Filter` action
 * 5.0.0 - Add action Get IOCs By Filter which returns a list of paginated IOC data based on input filters applied against IOC properties | Fix Bug relating to mismatched property names of output types geolocation, sources, and reported feeds for Get Indicator by Value action
 * 4.0.0 - Rename Plugin to Threat Command | Update descriptions to Threat Command | Update Get Indicator By Value to use API V3 | Remove Rescan Indicator and Get Indicator Scan Status | Update Get CVE List to request one page of results only
 * 3.2.0 - Fix is_closed bug in trigger | Add new input `source_date_from_enum` in trigger which allows user to specifiy Source Date From using ENUM rather than timestamp/string
@@ -1442,7 +1443,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Links
 
-* [Threat Command](https://www.rapid7.com/products/threat-command)
+* [Threat Command](https://intsights.com/)
 
 ## References
 
