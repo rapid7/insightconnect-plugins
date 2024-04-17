@@ -61,9 +61,7 @@ class TestGetIocsForCyberTerm(TestCase):
             ],
         ]
     )
-    def test_get_iocs_for_cyber_term_raise_exception(
-        self, mock_request, test_name, input_parameters, expected_error
-    ):
+    def test_get_iocs_for_cyber_term_raise_exception(self, mock_request, test_name, input_parameters, expected_error):
         validate(input_parameters, GetIocsForCyberTermInput.schema)
         with self.assertRaises(PluginException) as error:
             self.action.run(input_parameters)

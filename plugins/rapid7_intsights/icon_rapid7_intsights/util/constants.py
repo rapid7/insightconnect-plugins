@@ -1,4 +1,3 @@
-
 accepted_empty_fields = ["cyberTerms", "cyberTermCves", "iocs"]
 closing_ticket_reasons = {
     "Problem solved": "ProblemSolved",
