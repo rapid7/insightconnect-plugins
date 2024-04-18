@@ -19,6 +19,7 @@ class IncidentCreated(insightconnect_plugin_runtime.Trigger):
         self.last_poll_time = (datetime.now(tz=timezone.utc) - timedelta(seconds=1)).replace(microsecond=0)
         self.most_recent_system_id = ""
         self.last_sys_id = ""
+        self.most_recent_incident = True
 
     def poll(self, url, method, query, utc):
         response = self.connection.request.make_request(url, method, params=query)
@@ -38,10 +39,11 @@ class IncidentCreated(insightconnect_plugin_runtime.Trigger):
 
         # Incidents stored from least to most recent date
         # Loop from most recent incident to least recent incident
-        most_recent_incident = True
         for incident in sorted(incidents, reverse=True):
             if len(incident) == 2:
                 if incident[0] != "" and incident[1] != "":
+                    if incident[0] != self.last_sys_id:
+                        self.most_recent_incident = True
                     d = datetime.strptime(incident[0], "%Y-%m-%d %H:%M:%S")
 
                     # Turn offset naive date into offset aware date
@@ -53,9 +55,10 @@ class IncidentCreated(insightconnect_plugin_runtime.Trigger):
                     # Other condition ensures no duplicate triggers
                     if date_aware >= self.last_poll_time and sys_id != self.last_sys_id:
                         self.connection.logger.info(f"Found new incident: {sys_id}")
-                        if most_recent_incident is True:
+                        if self.most_recent_incident is True:
                             self.last_sys_id = sys_id
-                            most_recent_incident = False
+                            self.last_poll_time = date_aware
+                            self.most_recent_incident = False
                         self.send({Output.SYSTEM_ID: sys_id})
                     else:
                         break
@@ -76,22 +79,18 @@ class IncidentCreated(insightconnect_plugin_runtime.Trigger):
                     "Warning: An incident could not be read -- the incident did not have the necessary values."
                 )
 
-        # minus ~1 second to ensure that incidents between polls are not missed
-        adjusted_poll = datetime.now(tz=timezone.utc) - timedelta(seconds=1)
-        self.last_poll_time = adjusted_poll.replace(microsecond=0)
-
     def run(self, params={}):
         url = self.connection.incident_url
         method = "get"
         utc = pytz.timezone("UTC")
 
         # Pulls directly from SNOW db to grab creation date in UTC
-        query = {"sysparm_display_value": False, "sysparm_query": "ORDERBYsys_created_on"}
+        query = {"sysparm_display_value": False, "sysparm_query": "ORDERBYDESCsys_created_on"}
 
         if params.get(Input.QUERY):
-            query["sysparm_query"] = params.get(Input.QUERY) + "^ORDERBYsys_created_on"
+            query["sysparm_query"] = params.get(Input.QUERY) + "^ORDERBYDESCsys_created_on"
         else:
-            query["sysparm_query"] = "ORDERBYsys_created_on"
+            query["sysparm_query"] = "ORDERBYDESCsys_created_on"
 
         while True:
             self.poll(url, method, query, utc)
