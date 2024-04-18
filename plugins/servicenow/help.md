@@ -1681,6 +1681,7 @@ Example output:
 
 # Version History
 
+* 7.4.1 - `Incident Created`: Resolved issue related to trigger not working. Updated SDK
 * 7.4.0 - Add ability to use OAuth for API authentication (requires OAuth Client ID and OAuth Client Secret in connection)
 * 7.3.1 - `Incident Created`: Resolved issue related to object parsing
 * 7.3.0 - Add new actions Create Security Incident, Update Security Incident, Delete Security Incident, Get Security Incident and Search Security Incident
