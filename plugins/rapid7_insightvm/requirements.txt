@@ -2,7 +2,7 @@
 # All dependencies must be version-pinned, eg. requests==1.2.0
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 setuptools==69.1.1
-aiohttp==3.9.3
+aiohttp==3.9.4
 defusedxml==0.7.1
 datetime==5.4
 python-dateutil==2.8.2
