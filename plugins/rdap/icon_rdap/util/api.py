@@ -26,7 +26,7 @@ class RdapAPI:
             response = requests.request(method=method, url=url, headers=headers)
 
             if response.status_code == 400:
-                self._logger.info(f"[API ERROR] Code: {response.status_code}\n")
+                self._logger.info(f"[API ERROR] Code: {response.status_code}")
                 raise PluginException(
                     cause="The server is unable to process the request.",
                     assistance="Verify your plugin input is correct and not malformed and try again. "
@@ -34,14 +34,14 @@ class RdapAPI:
                     data=response.text,
                 )
             if response.status_code == 403:
-                self._logger.info(f"[API ERROR] Code: {response.status_code}\n")
+                self._logger.info(f"[API ERROR] Code: {response.status_code}")
                 raise PluginException(
                     cause="Operation is not allowed.",
                     assistance="Please verify inputs and if the issue persists, contact support.",
                     data=response.text,
                 )
             if response.status_code == 404:
-                self._logger.info(f"[API ERROR] Code: {response.status_code}\n")
+                self._logger.info(f"[API ERROR] Code: {response.status_code}")
                 raise PluginException(
                     cause="Resource not found.",
                     assistance="Verify your plugin input is correct and not malformed and try again. "
@@ -49,20 +49,20 @@ class RdapAPI:
                     data=response.text,
                 )
             if 400 <= response.status_code < 500:
-                self._logger.info(f"[API ERROR] Code: {response.status_code}\n")
+                self._logger.info(f"[API ERROR] Code: {response.status_code}")
                 raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
             if response.status_code >= 500:
-                self._logger.info(f"[API ERROR] Code: {response.status_code}\n")
+                self._logger.info(f"[API ERROR] Code: {response.status_code}")
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
             if 200 <= response.status_code <= 302:
-                self._logger.info(f"[API SUCCESS] Code: {response.status_code}\n")
+                self._logger.info(f"[API SUCCESS] Code: {response.status_code}")
                 return response
 
-            self._logger.info("[API ERROR] PluginException: UNKNOWN\n")
+            self._logger.info("[API ERROR] PluginException: UNKNOWN")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
 
         except requests.exceptions.HTTPError as error:
-            self._logger.info("[API ERROR] PluginException: UNKNOWN\n")
+            self._logger.info("[API ERROR] PluginException: UNKNOWN")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def _make_json_request(self, method: str, url: str, headers: dict = None) -> dict:

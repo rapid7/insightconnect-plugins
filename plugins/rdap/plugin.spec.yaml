@@ -4,23 +4,41 @@ products: [insightconnect]
 name: rdap
 title: RDAP
 description: "The Registration Data Access Protocol (RDAP) is the successor to WHOIS. Like WHOIS, RDAP provides access to information about Internet resources (domain names, autonomous system numbers, and IP addresses)"
-version: 2.0.0
+version: 2.0.1
+connection_version: 2
 vendor: rapid7
 support: rapid7
 status: []
 cloud_ready: true
 supported_versions: ["RDAP 20-12-2022"]
+sdk:
+  type: slim
+  version: 5.4.7
+  user: nobody
+key_features:
+  - IP Lookup
+  - Domain Lookup
+  - ASN Lookup
+version_history:
+  - "2.0.1 - Updated SDK to the latest version"
+  - "2.0.0 - `Domain Lookup`, `IP Address Lookup`, `ASN Lookup`: Updated action outputs and refactored"
+  - "1.0.0 - Initial plugin - Actions: `Domain Lookup`, `IP Address Lookup`, `ASN Lookup`"
+links:
+  - "[RDAP](https://rdap.org)"
+references:
+  - "[RDAP](https://rdap.org)"
+  - "[ipwhois](https://ipwhois.readthedocs.io/en/latest/index.html)"
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rdap
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://rdap.org
 tags:
-- domain
-- lookup
-- rdap
-- api
-- search
-- ip
+  - domain
+  - lookup
+  - rdap
+  - api
+  - search
+  - ip
 hub_tags:
   use_cases: [data_utility, reporting_and_analytics]
   keywords: [rdap, domains, api, search, cloud_enabled]
@@ -140,7 +158,7 @@ types:
       required: false
     kind:
       title: Kind
-      description:
+      description: The kind of the entity
       type: string
       required: false
     title:
@@ -289,56 +307,67 @@ actions:
         description: The LDH name of the domain
         type: string
         required: false
+        example: EXAMPLE.COM
       registryDomainId:
         title: Registry Domain ID
         description: The registry-unique identifier of the domain object instance
         type: string
         required: false
+        example: 2336799_DOMAIN_COM-VRSN
       entities:
         title: Entities
         description: Information of organizations, corporations, governments, non-profits, clubs, individual persons, and informal groups of people
         type: '[]entity'
         required: false
+        example: '[{"roles":["registrar"],"handle":"376","fullname":"RESERVED-Internet Assigned Numbers Authority"}]'
       variants:
         title: Variants
         description: List of variants
         type: '[]variant'
         required: false
+        example: '[]'
       nameservers:
         title: Nameservers
         description: List of nameservers
         type: '[]string'
         required: false
+        example: '["A.IANA-SERVERS.NET","B.IANA-SERVERS.NET"]'
       secureDns:
         title: Secure DNS
         description: Secure DNS
         type: secureDns
         required: false
+        example: '{"delegationSigned":true,"dsData":[{"keyTag":31406,"algorithm":8,"digestType":2,"digest":"F78CF3344F72137235098ECBBD08947C2C9001C7F6A085A17F518B5D8F6B916D"},{"keyTag":31589,"algorithm":8,"digestType":2,"digest":"CDE0D742D6998AA554A92D890F8184C698CFAC8A26FA59875A990C03E576343C"},{"keyTag":43547,"algorithm":8,"digestType":1,"digest":"B6225AB2CC613E0DCA7962BDC2342EA4F1B56083"},{"keyTag":43547,"algorithm":8,"digestType":2,"digest":"615A64233543F66F44D68933625B17497C89A70E858ED76A2145997EDF96A918"},{"keyTag":31589,"algorithm":8,"digestType":1,"digest":"3490A6806D47F17A34C29E2CE80E8A999FFBE4BE"},{"keyTag":31406,"algorithm":8,"digestType":1,"digest":"189968811E6EBA862DD6C209F75623D8D9ED9142"}]}'
       events:
         title: Events
         description: List of events that have occurred
         type: '[]event'
         required: false
+        example: '[{"eventAction":"registration","eventDate":"1995-08-14T04:00:00Z"},{"eventAction":"expiration","eventDate":"2023-08-13T04:00:00Z"},{"eventAction":"last changed","eventDate":"2022-08-14T07:01:31Z"},{"eventAction":"last update of RDAP database","eventDate":"2022-12-19T13:17:15Z"}]'
       port43:
         title: Port 43
         description: The fully qualified host name or IP address of the WHOIS server where the containing object instance may be found
         type: string
         required: false
+        example: whois.ripe.net
       status:
         title: Status
         description: The state of the IP network
         type: '[]string'
         required: false
+        example: '["client delete prohibited","client transfer prohibited","client update prohibited"]'
       publicIds:
         title: Public IDs
         description: List of public IDs
         type: '[]publicId'
         required: false
+        example: '[{"type":"IANA Registrar ID","identifier":"376"}]'
       unicodeName:
         title: Unicode Name
         description: The unicode name of the domain
         type: string
         required: false
+        example: 'ExampleUnicodeName'
   asnLookup:
     title: ASN Lookup
     description: Perform an ASN (autonomous system number) lookup
@@ -355,51 +384,61 @@ actions:
         description: The RIR-unique identifier of the autnum registration
         type: string
         required: false
+        example: AS12345
       startAutnum:
         title: Start Autonomous Number
         description: The starting number in the block of Autonomous System numbers
         type: integer
         required: false
+        example: 12345
       endAutnum:
         title: End Autonomous Number
         description: The ending number in the block of Autonomous System numbers
         type: integer
         required: false
+        example: 12345
       name:
         title: Name
         description: The identifier assigned to the autonomous number registration by the registration holder
         type: string
         required: false
+        example: AS12345
       type:
         title: Type
         description: The RIR-specific classification of the autonomous number per that RIR's registration model
         type: string
         required: false
+        example: ExampleType
       country:
         title: Country
         description: The two-character country code of the autonomous number
         type: string
         required: false
+        example: US
       events:
         title: Events
         description: List of events that have occurred
         type: "[]event"
         required: false
+        example: '[{"eventAction":"last changed","eventDate":"2020-05-13T13:44:31Z"}]'
       entities:
         title: Entities
         description: Information of organizations, corporations, governments, non-profits, clubs, individual persons, and informal groups of people
         type: "[]entity"
         required: false
+        example: '[{"roles":["registrant"],"handle":"RIPE-NCC-END-MNT"},{"roles":["administrative"],"handle":"PG12821-RIPE"},{"roles":["registrant"],"handle":"ORG-GSs1-RIPE"},{"roles":["technical","administrative"],"handle":"LG1196-ORG"},{"roles":["registrant"],"handle":"AS12345-MNT"}]'
       port43:
         title: Port 43
         description: The fully qualified host name or IP address of the WHOIS server where the containing object instance may be found
         type: string
         required: false
+        example: whois.ripe.net
       status:
         title: Status
         description: The state of the autnum
         type: "[]string"
         required: false
+        example: '["client delete prohibited","client transfer prohibited","client update prohibited"]'
   ipLookup:
     title: IP Address Lookup
     description: Perform an IP address lookup
@@ -422,88 +461,106 @@ actions:
         description: ASN
         type: string
         required: false
+        example: "3215"
       asnCidr:
         title: ASN CIDR
         description: ASN CIDR
         type: string
         required: false
+        example: "2.2.0.0/16"
       ansCountryCode:
         title: ASN Country Code
         description: ASN country code
         type: string
         required: false
+        example: FR
       asnDate:
         title: ASN Date
         description: ASN date
         type: string
         required: false
+        example: 2010-07-12
       asnDescription:
         title: ASN Description
         description: ASN description
         type: string
         required: false
+        example: "France Telecom - Orange, FR"
       ansRegistry:
         title: ASN Registry
         description: ASN registry
         type: string
         required: false
+        example: "ripencc"
       handle:
         title: Handle
         description: The RIR-unique identifier of the network registration
         type: string
         required: false
+        example: "2.0.0.0 - 2.15.255.255"
       startAddress:
         title: Start Address
         description: The starting IP address of the network, either IPv4 or IPv6
         type: string
         required: false
+        example: "2.0.0.0"
       endAddress:
         title: End Address
         description: The ending IP address of the network, either IPv4 or IPv6
         type: string
         required: false
+        example: "2.15.255.255"
       ipVersion:
         title: IP Version
         description: The IP protocol version of the network, 'v4' signifies an IPv4 network, and 'v6' signifies an IPv6 network
         type: string
         required: false
+        example: v4
       name:
         title: Name
         description: The identifier assigned to the network registration by the registration holder
         type: string
         required: false
+        example: FR-TELECOM-20100712
       type:
         title: Type
         description: The RIR-specific classification of the network per that RIR's registration model
         type: string
         required: false
+        example: ALLOCATED PA
       country:
         title: Country
         description: The two-character country code of the network
         type: string
         required: false
+        example: FR
       parentHandle:
         title: Parent Handle
         description: The RIR-unique identifier of the parent network of this network registration
         type: string
         required: false
+        example: "0.0.0.0 - 255.255.255.255"
       events:
         title: Events
         description: List of events that have occurred
         type: '[]event'
         required: false
+        example: '[{"eventAction":"last changed","eventDate":"2017-04-10T14:16:37Z"}]'
       entities:
         title: Entities
         description: Information of organizations, corporations, governments, non-profits, clubs, individual persons, and informal groups of people
         type: '[]entity'
         required: false
+        example: '[{"roles":["registrant"],"handle":"FT-BRX"}]'
       port43:
         title: Port 43
         description: The fully qualified host name or IP address of the WHOIS server where the containing object instance may be found
         type: string
         required: false
+        example: whoios.ripe.net
       status:
         title: Status
         description: The state of the IP network
         type: '[]string'
         required: false
+        example: '["client delete prohibited","client transfer prohibited","client update prohibited"]'

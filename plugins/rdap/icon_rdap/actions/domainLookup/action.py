@@ -17,7 +17,7 @@ class DomainLookup(insightconnect_plugin_runtime.Action):
 
         self.logger.info(f"[ACTION LOG] Getting information for domain: {domain}")
         domain_result = self.connection.rdap_client.domain_lookup(domain=domain)
-        self.logger.info(f"[ACTION LOG] Domain result: {domain_result}\n")
+        self.logger.info(f"[ACTION LOG] Domain result: {domain_result}")
         parsed_entities = parse_entities(domain_result.get("entities", []))
 
         return return_non_empty(

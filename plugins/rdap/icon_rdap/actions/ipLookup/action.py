@@ -14,13 +14,13 @@ class IpLookup(insightconnect_plugin_runtime.Action):
         ip_input = params.get(Input.IPADDRESS)
         include_asn = params.get(Input.GETASN)
 
-        self.logger.info(f"[ACTION LOG] Getting information for IP address: {ip_input}. Include ASN: {include_asn}.\n")
+        self.logger.info(f"[ACTION LOG] Getting information for IP address: {ip_input}. Include ASN: {include_asn}.")
         ip_result = self.connection.rdap_client.ip_lookup(ip_input)
 
         if include_asn:
             ipwhois_rdap_result = IPWhoisLookup(logger=self.logger).perform_lookup_rdap(ip_address=ip_input)
             ip_result.update(extract_asn_result(ipwhois_rdap_result))
-            self.logger.info("[ACTION LOG] IP result updated with ASN.\n")
+            self.logger.info("[ACTION LOG] IP result updated with ASN.")
         ip_result["entities"] = parse_entities(ip_result.get("entities", []))
 
         return return_non_empty(

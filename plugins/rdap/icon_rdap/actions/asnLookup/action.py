@@ -14,7 +14,7 @@ class AsnLookup(insightconnect_plugin_runtime.Action):
 
         self.logger.info(f"[ACTION LOG] Getting information for ASN number: {asn}")
         asn_result = self.connection.rdap_client.asn_lookup(asn=asn)
-        self.logger.info(f"[ACTION LOG] ASN result: {asn_result}\n")
+        self.logger.info(f"[ACTION LOG] ASN result: {asn_result}")
 
         return return_non_empty(
             {
