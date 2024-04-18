@@ -18,7 +18,7 @@ from icon_rdap.util.helpers import (
 )
 from parameterized import parameterized
 
-from unit_test.util import Util
+from util import Util
 
 
 class TestHelpers(TestCase):
