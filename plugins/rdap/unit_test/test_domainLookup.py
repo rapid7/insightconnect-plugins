@@ -13,7 +13,7 @@ from unittest.mock import Mock
 from icon_rdap.actions.domainLookup import DomainLookup
 from parameterized import parameterized
 
-from unit_test.util import Util
+from util import Util
 
 
 @patch("requests.request", side_effect=Util.mock_request)
