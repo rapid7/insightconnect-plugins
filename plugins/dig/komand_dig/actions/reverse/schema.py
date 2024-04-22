@@ -28,11 +28,13 @@ class ReverseInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "address": {
       "type": "string",
+      "title": "Address",
       "description": "Internet address to resolve",
       "order": 2
     },
     "resolver": {
       "type": "string",
+      "title": "Resolver",
       "description": "Resolver. Leave blank to use default resolver for the system",
       "order": 1
     }

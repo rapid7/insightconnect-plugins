@@ -3,14 +3,16 @@
 The DNS plugin is used for forward and reverse DNS lookups. This plugin uses [Dig](https://linux.die.net/man/1/dig), or Domain Information Groper, which is a network administration command-line tool for querying Domain Name System (DNS) name servers
 
 # Key Features
-  
-* Forward DNS lookup to find an IP address from a domain name  
+
+* Forward DNS lookup to find an IP address from a domain name
 * Reverse DNS lookup to find a domain name from an IP address
 
 # Requirements
+  
+*This plugin does not contain any requirements.*
 
 # Supported Product Versions
-  
+
 * 2023-10-12
 
 # Documentation
@@ -23,6 +25,7 @@ The DNS plugin is used for forward and reverse DNS lookups. This plugin uses [Di
 
 ### Actions
 
+
 #### Forward Lookup
   
 This action is used to request a forward lookup for a domain
@@ -32,7 +35,7 @@ This action is used to request a forward lookup for a domain
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |domain|string|None|True|Domain name to resolve|None|rapid7.com|
-|query|string|None|True|Query type e.g. ANY, A, MX, NS, etc|['A', 'AAAA', 'ANY', 'CNAME', 'MX', 'NS', 'PTR', 'SOA']|MX|
+|query|string|None|True|Query type e.g. ANY, A, MX, NS, etc|["A", "AAAA", "ANY", "CNAME", "MX", "NS", "PTR", "SOA"]|MX|
 |resolver|string|None|False|Resolver. Leave blank to use default resolver for the system|None|8.8.8.8|
   
 Example input:
@@ -127,7 +130,6 @@ On success, the raw output will look like the following:
   "question": "8.8.8.8",
   "status": "NOERROR"
 }
-
 ```
 
 On failure, the raw output will look like the following:
@@ -145,7 +147,6 @@ On failure, the raw output will look like the following:
 ### Triggers
   
 *This plugin does not contain any triggers.*
-
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -160,7 +161,6 @@ The `status` variable contains the [DNS status code](https://www.iana.org/assign
 Dig has at least the following status codes implemented:
 
 ```
-
 NOERROR
 FORMERR
 SERVFAIL
@@ -173,7 +173,6 @@ NXRRSET
 NOTAUTH
 NOTZONE
 BADVERS
-
 ```
 
 You can test the `status` variable in a Decision or Filter step to check for its value.
@@ -186,6 +185,7 @@ Common examples:
 
 # Version History
 
+* 2.0.2 - Updated SDK to the latest version | Added validation for input parameters
 * 2.0.1 - Added `__init__.py` file to `unit_test` folder | Refreshed with new Tooling
 * 2.0.0 - Rename Dig plugin to DNS
 * 1.0.7 - Fix bug in `safe_parse` function | Fix bug when `answers` in function `execute_command` is str
@@ -208,6 +208,6 @@ Common examples:
 * [Dig](https://linux.die.net/man/1/dig)
 
 ## References
-  
-* [Dig](https://linux.die.net/man/1/dig)  
+
+* [Dig](https://linux.die.net/man/1/dig)
 * [DNS Status Code](https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml)
