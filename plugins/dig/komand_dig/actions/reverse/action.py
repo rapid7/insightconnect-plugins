@@ -1,7 +1,13 @@
-import insightconnect_plugin_runtime
-from .schema import ReverseInput, ReverseOutput, Input, Output, Component
 import re
+
+import insightconnect_plugin_runtime
+import validators
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from komand_dig.util import util
+from komand_dig.util.constants import Message
+
+from .schema import Component, Input, Output, ReverseInput, ReverseOutput
 
 
 class Reverse(insightconnect_plugin_runtime.Action):
@@ -14,13 +20,31 @@ class Reverse(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        if len(params.get(Input.RESOLVER, "")) > 0:
-            cmd = f"@{params.get(Input.RESOLVER)} -x {params.get(Input.ADDRESS)}"
-        else:
-            cmd = f"-x {params.get(Input.ADDRESS)}"
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        resolver = params.get(Input.RESOLVER, "")
+        ip_address = params.get(Input.ADDRESS, "")
+        # END INPUT BINDING - DO NOT REMOVE
 
-        command_output = util.execute_command(self.logger, cmd, "ANSWER SECTION:\n(.*\n)", None)
-        answer_section = command_output["answer_section"]
+        # Validate user inputs
+        if not validators.ipv4(ip_address):
+            raise PluginException(
+                cause=Message.INVALID_IP_ADDRESS_CAUSE.format("Address"),
+                assistance=Message.INVALID_IP_ADDRESS_ASSISTANCE,
+            )
+        elif resolver and not validators.ipv4(resolver):
+            raise PluginException(
+                cause=Message.INVALID_IP_ADDRESS_CAUSE.format("Resolver"),
+                assistance=Message.INVALID_IP_ADDRESS_ASSISTANCE,
+            )
+
+        command = f"-x {ip_address}"
+        if resolver:
+            command = f"@{resolver} " + command
+
+        command_output = util.execute_command(self.logger, command, "ANSWER SECTION:\n(.*\n)")
+        answer_section = command_output.get("answer_section")
+
+        # Get the answer section
         if answer_section is None:
             address = "Not found"
         else:
@@ -30,9 +54,9 @@ class Reverse(insightconnect_plugin_runtime.Action):
                 address = address.rstrip(".")
 
         return {
-            Output.FULLOUTPUT: command_output["fulloutput"],
-            Output.QUESTION: params.get(Input.ADDRESS),
-            Output.NAMESERVER: command_output["nameserver"],
-            Output.STATUS: command_output["status"],
+            Output.FULLOUTPUT: command_output.get("full_output", ""),
+            Output.NAMESERVER: command_output.get("nameserver", ""),
+            Output.STATUS: command_output.get("status", ""),
+            Output.QUESTION: ip_address,
             Output.ANSWER: address,
         }
