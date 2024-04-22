@@ -20,7 +20,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.org_key = params.get(Input.ORG_KEY, "")
         self.base_url = f"https://{params.get(Input.URL, '')}"
         self.x_auth_token = f"{self.api_secret}/{self.api_id}"
-        self.headers = {"X-Auth-Token": self.x_auth_token}
+        self.headers = {"X-Auth-Token": self.x_auth_token, 'Content-Type': 'application/json'}
 
     def get_agent(self, agent):
         self.logger.info(f"Looking for: {agent}")
@@ -55,6 +55,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return device
 
     def post_to_api(self, url, payload, retry=True):  # noqa: MC0001
+        # TODO: tidy up the error handling and add in connection timeouts as noticed during dev testing
         result = requests.post(url, headers=self.headers, json=payload, timeout=DEFAULT_TIMEOUT)
 
         try:
@@ -99,11 +100,19 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 self.logger.error(str(error))
                 self.logger.error(result.text)
                 raise PluginException(preset=PluginException.Preset.UNKNOWN)
+            # TODO - add handling for 429 and check header status code
 
         if result.status_code != 204:
             return result.json()
         else:
             return {}
+
+    def get_from_api(self, url):
+        # TODO: add generic error handling merged from above
+        result = requests.get(url, headers=self.headers, timeout=DEFAULT_TIMEOUT)
+
+        return result
+
 
     def test(self):
         device_endpoint = "/device"

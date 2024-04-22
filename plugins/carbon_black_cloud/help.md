@@ -20,9 +20,7 @@ The [VMware Carbon Black Cloud](https://www.carbonblack.com/products/vmware-carb
 
 ## Setup
 
-For information on how to get the API credentials and your base URL please see the [Carbon Black Authentication](https://developer.carbonblack.com/reference/carbon-black-cloud/authentication/) documentation.
-
-The connection configuration accepts the following parameters:
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -207,8 +205,29 @@ Example output:
   
 *This plugin does not contain any triggers.*
 ### Tasks
+
+
+#### Monitor Alerts
+
+This task is used to monitor alerts and observations from within your Carbon Black Cloud instance.
+
+##### Input
   
-*This plugin does not contain any tasks.*
+*This task does not contain any inputs.*
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|alerts|[]alert|True|List of all alerts and observations|[]|
+  
+Example output:
+
+```
+{
+  "alerts": []
+}
+```
 
 ### Custom Types
   
@@ -292,6 +311,12 @@ Example output:
 |Virtual Machine|boolean|None|False|Virtual machine|None|
 |Virtualization Provider|string|None|False|Virtualization provider|None|
 |Windows Platform|string|None|False|Windows platform|None|
+  
+**alert**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Alert Type Code|string|None|False|Type of alert|None|
 
 
 ## Troubleshooting
@@ -300,6 +325,7 @@ Example output:
 
 # Version History
 
+* 2.2.0 - Implement new task `Monitor Alerts and Observations`
 * 2.0.1 - Allows user entered hostnames to be case insensitive for `get_agent_details` and `quarantine` actions | Fix bug where error is raised if endpoint was not found in `get_agent` method | To add escaping of special characters in hostnames when performing hostname searches to Carbon Black
 * 2.0.0 - Updated the SDK version | Cloud enabled
 * 1.0.2 - Updated branding
