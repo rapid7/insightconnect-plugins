@@ -23,7 +23,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "oktaUrl": {
       "type": "string",
       "title": "Okta Domain",
-      "description": "Okta Domain e.g. example.okta.com",
+      "description": "Okta Domain. Please ensure your subdomain is present if the second-level domain is 'okta', e.g. 'example.okta.com'",
       "order": 1
     }
   },
