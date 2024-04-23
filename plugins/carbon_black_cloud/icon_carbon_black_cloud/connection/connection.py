@@ -3,10 +3,12 @@ from .schema import ConnectionSchema, Input
 
 # Custom imports below
 import requests
+from json import JSONDecodeError
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 import time
 from icon_carbon_black_cloud.util import agent_typer
-from icon_carbon_black_cloud.util.constants import DEFAULT_TIMEOUT
+from icon_carbon_black_cloud.util.constants import DEFAULT_TIMEOUT, ERROR_HANDLING
+from icon_carbon_black_cloud.util.exceptions import RateLimitException
 import re
 
 
@@ -28,7 +30,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         endpoint = f"appservices/v6/orgs/{self.org_key}/devices/_search"
         url = f"{self.base_url}/{endpoint}"
         payload = {"query": re.escape(agent)}
-        results = self.post_to_api(url, payload).get("results")
+        results = self.request_api(url, payload).get("results")
 
         device = {}
         if agent_type == agent_typer.DEVICE_ID:
@@ -54,64 +56,47 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         return device
 
-    def post_to_api(self, url, payload, retry=True):  # noqa: MC0001
-        # TODO: tidy up the error handling and add in connection timeouts as noticed during dev testing
-        result = requests.post(url, headers=self.headers, json=payload, timeout=DEFAULT_TIMEOUT)
-
+    def request_api(self, url, payload=None, request_method="POST", retry=True):
+        payload = payload if payload else {}
         try:
-            result.raise_for_status()
-        except Exception as error:
-            if result.status_code == 400:
-                raise PluginException(
-                    cause="400 Bad Request",
-                    assistance="Verify that your request adheres to API documentation.",
-                    data=result.text,
-                )
-            if result.status_code == 401:
-                raise PluginException(
-                    cause="Authentication Error",
-                    assistance="Please verify that your Secret Key and API ID values in the plugin connection are correct.",
-                    data=result.text,
-                )
-            if result.status_code == 403:
-                raise PluginException(
-                    cause="The specified object cannot be accessed or changed.",
-                    assistance="If it has a Custom access level, check it has been assigned the correct RBAC permissions. If it is an API, SIEM or LIVE_RESPONSE type key, verify it is the right key type for the API in use.",
-                    data=result.text,
-                )
-            if result.status_code == 404:
-                raise PluginException(
-                    cause="The object referenced in the request cannot be found.",
-                    assistance="Verify that your request contains objects that haven't been deleted. Verify that the organization key in the URL is correct.",
-                    data=result.text,
-                )
-            if result.status_code == 409:
-                raise PluginException(
-                    cause="Either the name you chose already exists, or there is an unacceptable character used.",
-                    assistance="Change any spaces in the name to underscores. Look through your list of API Keys and see if there is an existing key with the same name.",
-                    data=result.text,
-                )
-            if result.status_code == 503:  # This is usually an API limit error or server error, try again
-                time.sleep(5)
-                if retry:
-                    return self.post_to_api(url, payload, False)
+            response = requests.request(method=request_method, url=url, headers=self.headers, json=payload, timeout=DEFAULT_TIMEOUT)
+            return self._handle_response(response, url, payload, retry)
+        except requests.Timeout as timeout_error:
+            self.logger.error(f"Hitting connection timeout on request to Carbon Black. error={timeout_error}")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=timeout_error)
+        # TODO: now return json and rate limited value so need to update actions to ignore and task to imp[lement
+        # return self._handle_response(response, retry)
 
-                self.logger.error("Retry on 503 failed.")
-                self.logger.error(str(error))
-                self.logger.error(result.text)
-                raise PluginException(preset=PluginException.Preset.UNKNOWN)
-            # TODO - add handling for 429 and check header status code
-
-        if result.status_code != 204:
-            return result.json()
+    def _handle_response(self, response, url, payload, retry=True):
+        error_cause = f"Unexpected status code from API - {response.status_code}"
+        error_data, error_assistance = response.text, "Unexpected response. Please contact support."
+        if response.status_code == 200:
+            try:
+                return response.json()
+            except JSONDecodeError as json_error:
+                error_data = f"Invalid JSON response: {response.content}"
+                error_cause = json_error
+        elif response.status_code == 429:
+            # We need to back off for 5 minutes until this period has passed but this is only implemented in task code
+            self.logger.error(f"Received 429 status code. Retry-After={response.headers.get('Retry-After', 'Not found')}")
+            error_cause = "Too many requests within a 5 minute period."
+            error_assistance = "Too many requests made and now rate limited. Please wait 5 minutes " \
+                               "before triggering plugin again"
+            raise RateLimitException(cause=error_cause, assistance=error_assistance, data=error_data)
+        elif response.status_code == 503:  # This is usually an API limit error or server error, try again
+            time.sleep(5)
+            if retry:
+                return self.request_api(url, payload, retry=False)
+            self.logger.error(f"Retry on 503 failed. Response: {response.text}")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
         else:
-            return {}
+            for status_code, exception_values in ERROR_HANDLING.items():
+                if response.status_code == status_code:
+                    error_cause = exception_values.get("cause")
+                    error_assistance = exception_values.get("assistance")
+                    break
 
-    def get_from_api(self, url):
-        # TODO: add generic error handling merged from above
-        result = requests.get(url, headers=self.headers, timeout=DEFAULT_TIMEOUT)
-
-        return result
+        raise PluginException(cause=error_cause, assistance=error_assistance, data=error_data)
 
 
     def test(self):
