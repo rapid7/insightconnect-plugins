@@ -4,14 +4,14 @@ products: [insightconnect]
 name: rapid7_intsights
 title: Threat Command
 description: Threat Command by Rapid7 is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
-version: 5.1.2
+version: 5.2.0
 connection_version: 5
 supported_versions: ["2.4.0"]
 vendor: rapid7
 support: rapid7
 status: []
 version_history:
-    - 5.1.2 - Update exception presets in API and unit tests
+    - 5.2.0 - Update exception presets in API and unit tests | New `sub_type` output to `get_indicator_by_value` action
     - 5.1.1 - Better handling of response from the threat connect API when using the `takedown_request` action | Bumped to use the newest version of the SDK | Updated old unit tests / added new unit tests
     - 5.1.0 - Add actions -> `Get Cyber Terms by Filter`, `Get IOCs for Cyber Term`, `Get CVEs for Cyber Term`, `Close Alert`. Add new input for `Get IOCs By Filter` action
     - 5.0.0 - Add action Get IOCs By Filter which returns a list of paginated IOC data based on input filters applied against IOC properties | Fix Bug relating to mismatched property names of output types geolocation, sources, and reported feeds for Get Indicator by Value action
@@ -641,20 +641,26 @@ actions:
         description: "Value of the indicator. Examples: IP address, URL, domain name, hash"
         type: string
         required: true
-        example: example.com
+        example: 6c62e74dd5d99fc2d610bd84114990a2
     output:
       value:
         title: Indicator Value
         description: Indicator value
         type: string
         required: false
-        example: example.com
+        example: 6c62e74dd5d99fc2d610bd84114990a2
       type:
         title: Type
         description: Type
         type: string
         required: false
-        example: Domains
+        example: Hashes
+      sub_type:
+        title: Sub_Type
+        description: SubType Value
+        type: string
+        required: false
+        example: MD5
       severity:
         title: Severity
         description: Severity

@@ -24,6 +24,7 @@ class Output:
     SEVERITY = "severity"
     SOURCES = "sources"
     STATUS = "status"
+    SUB_TYPE = "sub_type"
     SYSTEM_TAGS = "system_tags"
     TAGS = "tags"
     TYPE = "type"
@@ -65,25 +66,25 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
       "type": "string",
       "title": "First Seen",
       "description": "First seen",
-      "order": 6
+      "order": 7
     },
     "geo_location": {
       "type": "string",
       "title": "Geographic Location",
       "description": "Geographic location",
-      "order": 9
+      "order": 10
     },
     "last_seen": {
       "type": "string",
       "title": "Last Seen",
       "description": "Last seen",
-      "order": 7
+      "order": 8
     },
     "last_update": {
       "type": "string",
       "title": "Last Update",
       "description": "Last update",
-      "order": 8
+      "order": 9
     },
     "related_campaigns": {
       "type": "array",
@@ -92,7 +93,7 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
       "items": {
         "type": "string"
       },
-      "order": 14
+      "order": 15
     },
     "related_malware": {
       "type": "array",
@@ -101,7 +102,7 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
       "items": {
         "type": "string"
       },
-      "order": 13
+      "order": 14
     },
     "related_threat_actors": {
       "type": "array",
@@ -110,7 +111,7 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
       "items": {
         "type": "string"
       },
-      "order": 15
+      "order": 16
     },
     "reported_feeds": {
       "type": "array",
@@ -119,19 +120,19 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
       "items": {
         "$ref": "#/definitions/reported_feed"
       },
-      "order": 17
+      "order": 18
     },
     "score": {
       "type": "number",
       "title": "Score",
       "description": "Score",
-      "order": 4
+      "order": 5
     },
     "severity": {
       "type": "string",
       "title": "Severity",
       "description": "Severity",
-      "order": 3
+      "order": 4
     },
     "sources": {
       "type": "array",
@@ -140,13 +141,19 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
       "items": {
         "$ref": "#/definitions/source"
       },
-      "order": 10
+      "order": 11
     },
     "status": {
       "type": "string",
       "title": "Status",
       "description": "Status",
-      "order": 16
+      "order": 17
+    },
+    "sub_type": {
+      "type": "string",
+      "title": "Sub_Type",
+      "description": "SubType Value",
+      "order": 3
     },
     "system_tags": {
       "type": "array",
@@ -155,7 +162,7 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
       "items": {
         "type": "string"
       },
-      "order": 12
+      "order": 13
     },
     "tags": {
       "type": "array",
@@ -164,7 +171,7 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
       "items": {
         "type": "string"
       },
-      "order": 11
+      "order": 12
     },
     "type": {
       "type": "string",
@@ -182,7 +189,7 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
       "type": "boolean",
       "title": "Whitelist",
       "description": "Whitelist",
-      "order": 5
+      "order": 6
     }
   },
   "definitions": {

@@ -885,13 +885,13 @@ This action is used to search indicators in Threat Command TIP
 
 |Name|Type|Default|Required|Description|Enum|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|indicator_value|string|None|True|Value of the indicator. Examples: IP address, URL, domain name, hash|None|example.com|
+|indicator_value|string|None|True|Value of the indicator. Examples: IP address, URL, domain name, hash|None|6c62e74dd5d99fc2d610bd84114990a2|
   
 Example input:
 
 ```
 {
-  "indicator_value": "example.com"
+  "indicator_value": "6c62e74dd5d99fc2d610bd84114990a2"
 }
 ```
 
@@ -911,10 +911,11 @@ Example input:
 |severity|string|False|Severity|Low|
 |sources|[]source|False|Sources|[ { "confidenceLevel": 2, "name": "Cyber Threat Alliance" } ]|
 |status|string|False|Status|Active|
+|sub_type|string|False|SubType Value|MD5|
 |system_tags|[]string|False|System tags|["MyTag_1"]|
 |tags|[]string|False|Tags|["MyTag_1"]|
-|type|string|False|Type|Domains|
-|value|string|False|Indicator value|example.com|
+|type|string|False|Type|Hashes|
+|value|string|False|Indicator value|6c62e74dd5d99fc2d610bd84114990a2|
 |whitelist|boolean|False|Whitelist|True|
   
 Example output:
@@ -949,14 +950,15 @@ Example output:
     }
   ],
   "status": "Active",
+  "sub_type": "MD5",
   "system_tags": [
     "MyTag_1"
   ],
   "tags": [
     "MyTag_1"
   ],
-  "type": "Domains",
-  "value": "example.com",
+  "type": "Hashes",
+  "value": "6c62e74dd5d99fc2d610bd84114990a2",
   "whitelist": true
 }
 ```
@@ -1429,7 +1431,7 @@ Example output:
 
 # Version History
 
-* 5.1.2 - Update exception presets in API and unit tests
+* 5.2.0 - Update exception presets in API and unit tests | New `sub_type` output to `get_indicator_by_value` action
 * 5.1.1 - Better handling of response from the threat connect API when using the `takedown_request` action | Bumped to use the newest version of the SDK | Updated old unit tests / added new unit tests
 * 5.1.0 - Add actions -> `Get Cyber Terms by Filter`, `Get IOCs for Cyber Term`, `Get CVEs for Cyber Term`, `Close Alert`. Add new input for `Get IOCs By Filter` action
 * 5.0.0 - Add action Get IOCs By Filter which returns a list of paginated IOC data based on input filters applied against IOC properties | Fix Bug relating to mismatched property names of output types geolocation, sources, and reported feeds for Get Indicator by Value action
