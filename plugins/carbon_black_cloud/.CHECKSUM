@@ -1,7 +1,7 @@
 {
-	"spec": "6ffffbafc3f9b102e40d672a6d3512f8",
-	"manifest": "3ab625ed7c48b54988f346d6126ae363",
-	"setup": "7be1f3a7bc266fd5ecff093615179a58",
+	"spec": "273e405de79b0d807f8ccadcac011af9",
+	"manifest": "e7177f918ba0c6af9e4214677c682167",
+	"setup": "02fcf4bc99206f8e1678cb422d3ad518",
 	"schemas": [
 		{
 			"identifier": "get_agent_details/schema.py",
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "monitor_alerts/schema.py",
-			"hash": "ca270120fb2829b253873167a2b25a5e"
+			"hash": "4cd46ed18a69ba3c1a4810f8023ef6da"
 		}
 	]
 }

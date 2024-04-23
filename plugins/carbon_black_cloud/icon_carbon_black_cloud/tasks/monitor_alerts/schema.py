@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Monitor alerts and observations from within your Carbon Black Cloud instance."
+    DESCRIPTION = "Monitor alerts and observations from within your Carbon Black Cloud instance"
 
 
 class Input:

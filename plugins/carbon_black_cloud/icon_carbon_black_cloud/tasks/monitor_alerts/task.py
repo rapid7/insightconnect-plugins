@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import MonitorAlertsInput, MonitorAlertsOutput, MonitorAlertsState, Component
+
 # Custom imports below
 
 from datetime import datetime, timedelta, timezone
@@ -18,7 +19,7 @@ RATE_LIMITED = "rate_limited_until"
 LAST_ALERT_TIME = "last_alert_time"
 LAST_ALERT_HASHES = "last_alert_hashes"
 LAST_OBSERVATION_TIME = "last_observation_time"
-LAST_OBSERVATION_HASHES= "last_observation_hashes"
+LAST_OBSERVATION_HASHES = "last_observation_hashes"
 LAST_OBSERVATION_JOB = "last_observation_job"
 
 # CB can return 10K per API and suggest  if more than this is returned to then query from last event time.
@@ -27,17 +28,18 @@ PAGE_SIZE = 2500
 
 DEFAULT_LOOKBACK = 5  # first look back time in minutes
 
-class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
+class MonitorAlerts(insightconnect_plugin_runtime.Task):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name="monitor_alerts",
-                description=Component.DESCRIPTION,
-                input=MonitorAlertsInput(),
-                output=MonitorAlertsOutput(),
-                state=MonitorAlertsState())
+            name="monitor_alerts",
+            description=Component.DESCRIPTION,
+            input=MonitorAlertsInput(),
+            output=MonitorAlertsOutput(),
+            state=MonitorAlertsState(),
+        )
 
-    def run(self, params={}, state={}, custom_config={}):
+    def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument # noqa: MC0001
         try:
             rate_limited = state.get(RATE_LIMITED)
             now_time = datetime.now(timezone.utc)
@@ -70,13 +72,17 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 self.logger.info("No observation job ID found in state, triggering a new job...")
                 observation_job_id = self.trigger_observation_search_job(observations_start, end_time)
                 if observation_job_id:
-                    self.logger.info(f"Saving observation job ID {observation_job_id} to the state. "
-                                     f"Will query this after polling for alerts...")
+                    self.logger.info(
+                        f"Saving observation job ID {observation_job_id} to the state. "
+                        f"Will query this after polling for alerts..."
+                    )
                     state[LAST_OBSERVATION_JOB] = observation_job_id
 
                 if not state.get(LAST_OBSERVATION_TIME):
                     # We should only hit this when we have *never* returned any observations.
-                    self.logger.info(f"No {LAST_OBSERVATION_TIME} in the state, saving checkpoint as {observations_start}")
+                    self.logger.info(
+                        f"No {LAST_OBSERVATION_TIME} in the state, saving checkpoint as {observations_start}"
+                    )
 
             if not alerts_start:
                 self.logger.info("First run retrieving alerts...")
@@ -90,8 +96,10 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 alerts_and_observations.extend(observations)
             if observations_has_more_pages or alert_has_more_pages:
                 has_more_pages = True
-            self.logger.info(f"Returning a combined total of {len(alerts_and_observations)} alerts and observations, "
-                             f"with has_more_pages={has_more_pages}")
+            self.logger.info(
+                f"Returning a combined total of {len(alerts_and_observations)} alerts and observations, "
+                f"with has_more_pages={has_more_pages}"
+            )
             return alerts_and_observations, state, has_more_pages, 200, None
         except RateLimitException as rate_limit_error:
             self.logger.info("Rate limited on API, not updating state checkpoints...")
@@ -101,25 +109,24 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             self.logger.error(f"Hit an unexpected error during task execution. Error={error}", exc_info=True)
             return [], state, False, 500, error
 
-    def get_alerts(self, start_alert_time: str, end_alert_time: str, state: Dict[str, str]) -> Tuple[list, bool, Dict[str, str]]:
+    def get_alerts(
+        self, start_alert_time: str, end_alert_time: str, state: Dict[str, str]
+    ) -> Tuple[list, bool, Dict[str, str]]:
         alerts_has_more_pages = False
         endpoint = f"api/alerts/v7/orgs/{self.connection.org_key}/alerts/_search"
         url = f"{self.connection.base_url}/{endpoint}"
 
         payload = {
-            "time_range": {
-                "start": start_alert_time,
-                "end": end_alert_time
-            },
+            "time_range": {"start": start_alert_time, "end": end_alert_time},
             "criteria": {},
             "start": "1",
             "rows": str(PAGE_SIZE),  # max number of results that can be returned
-            "sort": [{"field": ALERT_TIME_FIELD, "order": "ASC"}]
+            "sort": [{"field": ALERT_TIME_FIELD, "order": "ASC"}],
         }
         self.logger.info(f"Querying alerts using parameters {payload['time_range']}")
         resp = self.connection.request_api(url, payload)
 
-        no_alerts, alerts = 0, resp.get("results", [])
+        alerts = resp.get("results", [])
         if alerts:
             # Check if we have not got all available alerts otherwise trigger task again to catch up quicker
             # CB can return max 10K during on time frame in which case we need to shorten the frame
@@ -142,8 +149,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             "start": 0,
             "fields": ["*"],
             "criteria": {"observation_type": OBSERVATION_TYPES},
-            "sort": [{"field": "device_timestamp","order": "asc"}],
-            "time_range": {"start": start_time, "end": end_time}
+            "sort": [{"field": "device_timestamp", "order": "asc"}],
+            "time_range": {"start": start_time, "end": end_time},
         }
         url = f"{self.connection.base_url}/{endpoint}"
         self.logger.info(f"Triggering observation search using parameters {search_params['time_range']}")
@@ -158,7 +165,10 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         # Strange CB API behaviour, unless rows param is specified it only returns 10 results
         url = f"{self.connection.base_url}/{endpoint}?rows={PAGE_SIZE}"
         self.logger.info(f"Get observation results from saved ID: {job_id}")
-        observation_json = self.connection.request_api(url, request_method="GET", )
+        observation_json = self.connection.request_api(
+            url,
+            request_method="GET",
+        )
         if observation_json.get("contacted") != observation_json.get("completed"):
             self.logger.info("Job is not yet finished running, will get results in next task execution...")
             has_more_pages = True  # trigger again as it should be finished imminently (jobs run for a max of 3 minutes)
@@ -169,7 +179,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 start_observation_time = observations[0].get(OBSERVATION_TIME_FIELD)
                 observations, state = self._dedupe_and_get_last_time(observations, state, start_observation_time)
 
-                if observation_json.get('num_found') > PAGE_SIZE:
+                if observation_json.get("num_found") > PAGE_SIZE:
                     self.logger.info("more data is available on the API - setting has more pages to true...")
                     has_more_pages = True
             # remove the job ID as this is completed and next run we want to trigger a new one
@@ -177,10 +187,16 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         return observations, has_more_pages, state
 
-    def _dedupe_and_get_last_time(self, alerts: list, state: Dict[str, str], start_time: str, observations: bool = True) -> Tuple[list, Dict]:
+    def _dedupe_and_get_last_time(
+        self, alerts: list, state: Dict[str, str], start_time: str, observations: bool = True
+    ) -> Tuple[list, Dict]:
         last_hash_key, last_time_key, time_key = LAST_ALERT_HASHES, LAST_ALERT_TIME, ALERT_TIME_FIELD
         if observations:
-            last_hash_key, last_time_key, time_key = LAST_OBSERVATION_HASHES, LAST_OBSERVATION_TIME, OBSERVATION_TIME_FIELD
+            last_hash_key, last_time_key, time_key = (
+                LAST_OBSERVATION_HASHES,
+                LAST_OBSERVATION_TIME,
+                OBSERVATION_TIME_FIELD,
+            )
 
         old_hashes, deduped_alerts, new_hashes = state.get(last_hash_key, []), [], []
         # First dedupe and get the alerts we want to return
@@ -198,7 +214,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         self.logger.info(f"Received {len(alerts)}, and after dedupe there is {no_alerts} results.")
         if deduped_alerts:  # check we haven't deduped all results pulled back
             last_time = deduped_alerts[-1].get(time_key)
-            for index in range(no_alerts-1, -1, -1):
+            for index in range(no_alerts - 1, -1, -1):
                 alert = deduped_alerts[index]
                 if alert.get(time_key) == last_time:
                     new_hashes.append(hash_sha1(deduped_alerts[index]))
@@ -225,6 +241,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         alerts_start = results.get("alerts").strftime(TIME_FORMAT)
         observation_start = results.get("observations").strftime(TIME_FORMAT)
 
-        self.logger.info(f"Retrieved the following custom start times: alerts='{alerts_start}' "
-                         f"and observations='{observation_start}'")
+        self.logger.info(
+            f"Retrieved the following custom start times: alerts='{alerts_start}' "
+            f"and observations='{observation_start}'"
+        )
         return alerts_start, observation_start

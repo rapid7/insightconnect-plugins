@@ -1,6 +1,6 @@
 # Description
 
-The [VMware Carbon Black Cloud](https://www.carbonblack.com/products/vmware-carbon-black-cloud/) is a cloud-native endpoint protection platform (EPP) that combines the intelligent system hardening and behavioral prevention needed to keep emerging threats at bay, using a single lightweight agent and an easy-to-use console. Manage and contain threats on your Carbon Black endpoints using this plugin.
+The [VMware Carbon Black Cloud](https://www.carbonblack.com/products/vmware-carbon-black-cloud/) is a cloud-native endpoint protection platform (EPP) that combines the intelligent system hardening and behavioral prevention needed to keep emerging threats at bay, using a single lightweight agent and an easy-to-use console. Manage and contain threats on your Carbon Black endpoints using this plugin
 
 # Key Features
 
@@ -209,7 +209,7 @@ Example output:
 
 #### Monitor Alerts
 
-This task is used to monitor alerts and observations from within your Carbon Black Cloud instance.
+This task is used to monitor alerts and observations from within your Carbon Black Cloud instance
 
 ##### Input
   

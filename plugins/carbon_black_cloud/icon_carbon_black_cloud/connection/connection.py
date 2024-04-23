@@ -22,7 +22,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.org_key = params.get(Input.ORG_KEY, "")
         self.base_url = f"https://{params.get(Input.URL, '')}"
         self.x_auth_token = f"{self.api_secret}/{self.api_id}"
-        self.headers = {"X-Auth-Token": self.x_auth_token, 'Content-Type': 'application/json'}
+        self.headers = {"X-Auth-Token": self.x_auth_token, "Content-Type": "application/json"}
 
     def get_agent(self, agent):
         self.logger.info(f"Looking for: {agent}")
@@ -59,7 +59,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def request_api(self, url, payload=None, request_method="POST", retry=True):
         payload = payload if payload else {}
         try:
-            response = requests.request(method=request_method, url=url, headers=self.headers, json=payload, timeout=DEFAULT_TIMEOUT)
+            response = requests.request(
+                method=request_method, url=url, headers=self.headers, json=payload, timeout=DEFAULT_TIMEOUT
+            )
             return self._handle_response(response, url, payload, retry)
         except requests.Timeout as timeout_error:
             self.logger.error(f"Hitting connection timeout on request to Carbon Black. error={timeout_error}")
@@ -78,10 +80,14 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 error_cause = json_error
         elif response.status_code == 429:
             # We need to back off for 5 minutes until this period has passed but this is only implemented in task code
-            self.logger.error(f"Received 429 status code. Retry-After={response.headers.get('Retry-After', 'Not found')}")
+            self.logger.error(
+                f"Received 429 status code. Retry-After header={response.headers.get('Retry-After', 'Not found')}"
+            )
             error_cause = "Too many requests within a 5 minute period."
-            error_assistance = "Too many requests made and now rate limited. Please wait 5 minutes " \
-                               "before triggering plugin again"
+            error_assistance = (
+                "Too many requests made and now rate limited. " + "Please wait 5 minutes before triggering plugin again"
+            )  # this is a result of black and linter fighting against each other
+
             raise RateLimitException(cause=error_cause, assistance=error_assistance, data=error_data)
         elif response.status_code == 503:  # This is usually an API limit error or server error, try again
             time.sleep(5)
@@ -97,7 +103,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
                     break
 
         raise PluginException(cause=error_cause, assistance=error_assistance, data=error_data)
-
 
     def test(self):
         device_endpoint = "/device"

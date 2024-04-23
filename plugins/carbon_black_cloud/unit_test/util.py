@@ -64,10 +64,11 @@ class MockResponse:
 
 def mocked_request(side_effect: Callable) -> None:
     mock_function = requests
-    mock_function.post = mock.Mock(side_effect=side_effect)
+    mock_function.request = mock.Mock(side_effect=side_effect)
 
 
-def mock_conditions(url: str, status_code: int, **kwargs: Dict[str, Any]) -> MockResponse:
+def mock_conditions(status_code: int, **kwargs: Dict[str, Any]) -> MockResponse:
+    url = kwargs.get("url")
     if url == f"{BASE_URL}/appservices/v6/orgs/{STUB_CONNECTION.get(Input.ORG_KEY, '')}/devices/_search":
         return MockResponse("get_agent_details", status_code)
     elif url == f"{BASE_URL}/appservices/v6/orgs/{STUB_CONNECTION.get(Input.ORG_KEY, '')}/device_actions":
@@ -75,29 +76,29 @@ def mock_conditions(url: str, status_code: int, **kwargs: Dict[str, Any]) -> Moc
     raise Exception("Response has been not implemented")
 
 
-def mock_request_200(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], 200, **kwargs)
+def mock_request_200(**kwargs) -> MockResponse:
+    return mock_conditions(200, **kwargs)
 
 
-def mock_request_400(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], 400, **kwargs)
+def mock_request_400(**kwargs) -> MockResponse:
+    return mock_conditions(400, **kwargs)
 
 
-def mock_request_401(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], 401, **kwargs)
+def mock_request_401(**kwargs) -> MockResponse:
+    return mock_conditions(401, **kwargs)
 
 
-def mock_request_403(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], 403, **kwargs)
+def mock_request_403(**kwargs) -> MockResponse:
+    return mock_conditions(403, **kwargs)
 
 
-def mock_request_404(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], 404, **kwargs)
+def mock_request_404(**kwargs) -> MockResponse:
+    return mock_conditions(404, **kwargs)
 
 
-def mock_request_409(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], 409, **kwargs)
+def mock_request_409(**kwargs) -> MockResponse:
+    return mock_conditions(409, **kwargs)
 
 
-def mock_request_503(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], 503, **kwargs)
+def mock_request_503(**kwargs) -> MockResponse:
+    return mock_conditions(503, **kwargs)

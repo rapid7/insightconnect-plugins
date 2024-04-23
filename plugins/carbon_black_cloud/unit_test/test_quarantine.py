@@ -32,7 +32,7 @@ class TestQuarantine(TestCase):
         self.action = Util.default_connector(Quarantine())
         self.payload = {Input.AGENT: STUB_AGENT_ID, Input.WHITELIST: [], Input.QUARANTINE_STATE: False}
 
-    @patch("requests.post", side_effect=mock_request_200)
+    @patch("requests.request", side_effect=mock_request_200)
     def test_quarantine(self, mocked_post: MagicMock) -> None:
         response = self.action.run(self.payload)
         expected = {Output.QUARANTINED: False}
