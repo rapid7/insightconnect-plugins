@@ -22,7 +22,7 @@ LAST_OBSERVATION_TIME = "last_observation_time"
 LAST_OBSERVATION_HASHES = "last_observation_hashes"
 LAST_OBSERVATION_JOB = "last_observation_job"
 
-# CB can return 10K per API and suggest  if more than this is returned to then query from last event time.
+# CB can return 10K per API and suggest that if more than this is returned to then query from last event time.
 # To prevent overloading IDR/PIF drop this limit to 2.5k on each endpoint.
 PAGE_SIZE = 2500
 
@@ -40,53 +40,33 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         )
 
     def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument # noqa: MC0001
+        alerts_and_observations, has_more_pages, observations_has_more_pages = [], False, False
         try:
             rate_limited = state.get(RATE_LIMITED)
             now_time = datetime.now(timezone.utc)
             if rate_limited:
                 log_msg = f"Rate limit value stored in state: {rate_limited}. "
-                if rate_limited < now_time.strftime(TIME_FORMAT):
-                    log_msg += "This time has not passed so task will not run this execution..."
+                if rate_limited > now_time.strftime(TIME_FORMAT):
+                    log_msg += "Still within rate limiting period, skipping task execution..."
                     self.logger.info(log_msg)
                     return [], state, False, 200, None
 
-                log_msg += "However this time has passed so task can resume..."
+                log_msg += "However no longer in rate limiting period, so task can be executed..."
                 self.logger.info(log_msg)
 
-            # Force now to be 15 minutes from 'now' as CB Analytics alerts can be updated for up to 15 minutes following
-            # the original backend_timestamp, after which time the alert is considered immutable.
+            # Force 'now' to be 15 minutes before now as CB Analytics alerts can be updated for up to 15 minutes
+            # following the original backend_timestamp, after which time the alert is considered immutable.
             now = now_time - timedelta(minutes=15)
             end_time = now.strftime(TIME_FORMAT)
-            alerts_and_observations, has_more_pages, observations_has_more_pages = [], False, False
 
             # Check if we have made use of custom config to change the start times from DEFAULT_LOOKBACK
-            alert_start_time, observation_start_time = self._parse_custom_config(custom_config, now)
-
-            # apply state timings vs task timings
-            alerts_start = state.get(LAST_ALERT_TIME)
-            observations_start = state.get(LAST_OBSERVATION_TIME, observation_start_time)
+            alerts_start, observations_start = self._parse_custom_config(custom_config, now, state)
 
             # Retrieve job ID from last run or trigger a new one
             observation_job_id = state.get(LAST_OBSERVATION_JOB)
             if not observation_job_id:
                 self.logger.info("No observation job ID found in state, triggering a new job...")
-                observation_job_id = self.trigger_observation_search_job(observations_start, end_time)
-                if observation_job_id:
-                    self.logger.info(
-                        f"Saving observation job ID {observation_job_id} to the state. "
-                        f"Will query this after polling for alerts..."
-                    )
-                    state[LAST_OBSERVATION_JOB] = observation_job_id
-
-                if not state.get(LAST_OBSERVATION_TIME):
-                    # We should only hit this when we have *never* returned any observations.
-                    self.logger.info(
-                        f"No {LAST_OBSERVATION_TIME} in the state, saving checkpoint as {observations_start}"
-                    )
-
-            if not alerts_start:
-                self.logger.info("First run retrieving alerts...")
-                alerts_start = alert_start_time
+                observation_job_id, state = self.trigger_observation_search_job(observations_start, end_time, state)
 
             alerts, alert_has_more_pages, state = self.get_alerts(alerts_start, end_time, state)
             alerts_and_observations.extend(alerts)
@@ -102,9 +82,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             )
             return alerts_and_observations, state, has_more_pages, 200, None
         except RateLimitException as rate_limit_error:
-            self.logger.info("Rate limited on API, not updating state checkpoints...")
+            self.logger.info(f"Rate limited on API, returning {(len(alerts_and_observations))} items...")
             state[RATE_LIMITED] = (datetime.now() + timedelta(minutes=5)).strftime(TIME_FORMAT)
-            return [], state, False, 200, rate_limit_error
+            return alerts_and_observations, state, False, 200, rate_limit_error
         except Exception as error:
             self.logger.error(f"Hit an unexpected error during task execution. Error={error}", exc_info=True)
             return [], state, False, 500, error
@@ -138,11 +118,11 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         else:
             self.logger.info("No alerts retrieved for time period searched...")
             state[LAST_ALERT_TIME] = end_alert_time
-        self.logger.info(f"Next time set to: {state[LAST_ALERT_TIME]}, has_more_pages={alerts_has_more_pages}")
+        self.logger.info(f"{LAST_ALERT_TIME} set to: {state[LAST_ALERT_TIME]}, has_more_pages={alerts_has_more_pages}")
 
         return alerts, alerts_has_more_pages, state
 
-    def trigger_observation_search_job(self, start_time: str, end_time: str) -> str:
+    def trigger_observation_search_job(self, start_time: str, end_time: str, state: Dict[str, str]) -> Tuple[str, Dict]:
         endpoint = f"api/investigate/v2/orgs/{self.connection.org_key}/observations/search_jobs"
         search_params = {
             "rows": PAGE_SIZE,
@@ -154,9 +134,22 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         }
         url = f"{self.connection.base_url}/{endpoint}"
         self.logger.info(f"Triggering observation search using parameters {search_params['time_range']}")
-        observation_resp = self.connection.request_api(url, search_params)
+        observation_job_id = self.connection.request_api(url, search_params).get("job_id")
 
-        return observation_resp.get("job_id")
+        if observation_job_id:
+            self.logger.info(
+                f"Saving observation job ID {observation_job_id} to the state. "
+                f"Will query this after polling for alerts..."
+            )
+            state[LAST_OBSERVATION_JOB] = observation_job_id
+
+            if not state.get(LAST_OBSERVATION_TIME):
+                # We should only hit this when we have *never* returned any observations, but after we've
+                # successfully created an observation job so that we know this start time has been queried.
+                self.logger.info(f"No {LAST_OBSERVATION_TIME} in the state, saving checkpoint as {start_time}")
+                state[LAST_OBSERVATION_TIME] = start_time
+
+        return observation_job_id, state
 
     def get_observations(self, job_id: str, state: Dict[str, str]) -> Tuple[list, bool, Dict[str, str]]:
         observations, has_more_pages = [], False
@@ -180,11 +173,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 observations, state = self._dedupe_and_get_last_time(observations, state, start_observation_time)
 
                 if observation_json.get("num_found") > PAGE_SIZE:
-                    self.logger.info("more data is available on the API - setting has more pages to true...")
+                    self.logger.info("More data is available on the API - setting has_more_pages=True...")
                     has_more_pages = True
             # remove the job ID as this is completed and next run we want to trigger a new one
             del state[LAST_OBSERVATION_JOB]
-
+        self.logger.info(
+            f"{LAST_OBSERVATION_TIME} set to: {state[LAST_OBSERVATION_TIME]}, has_more_pages={has_more_pages}"
+        )
         return observations, has_more_pages, state
 
     def _dedupe_and_get_last_time(
@@ -221,28 +216,38 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 else:
                     break
             # update the state with these new values
+            self.logger.info(f"Setting {last_time_key} to last parsed time: '{last_time}'")
             state[last_time_key], state[last_hash_key] = last_time, new_hashes
         return deduped_alerts, state
 
-    def _parse_custom_config(self, custom_config: Dict[str, str], now: datetime) -> Tuple[str, str]:
+    def _parse_custom_config(
+        self, custom_config: Dict[str, str], now: datetime, saved_state: Dict[str, str]
+    ) -> Tuple[str, str]:
         """
         Takes custom config from CPS and allows the specification of a new start time for either alerts or observations.
-        :param custom_config: dictionary of values passed from CPS {"alerts": {"date": {..}}, "observations": {...}}
+        :param custom_config: dictionary of values passed from CPS {"last_alert_time": {"date": {..}}..}
+        :param now: current time to determine the start time for each CB type.
+        :param saved_state: dictionary of state values held.
         :return: two string formatted times to apply to our alert and observation queries.
         """
-        results = {}
+        # take a copy of state so this logic will need to happen again if an exception occurs
+        state = saved_state.copy()
 
-        for cb_type in ["alerts", "observations"]:
-            custom_timings = custom_config.get(cb_type, {})
-            custom_date, custom_minutes = custom_timings.get("date"), custom_timings.get("minutes", DEFAULT_LOOKBACK)
-            start = datetime(**custom_date) if custom_date else (now - timedelta(minutes=custom_minutes))
-            results[cb_type] = start
+        log_msg = ""
+        for cb_type_time in [LAST_ALERT_TIME, LAST_OBSERVATION_TIME]:
+            if not state.get(cb_type_time):
+                log_msg += f"No {cb_type_time} within state. "
+                custom_timings = custom_config.get(cb_type_time, {})
+                custom_date = custom_timings.get("date")
+                custom_minutes = custom_timings.get("minutes", DEFAULT_LOOKBACK)
+                start = datetime(**custom_date) if custom_date else (now - timedelta(minutes=custom_minutes))
+                state[cb_type_time] = start.strftime(TIME_FORMAT)
 
-        alerts_start = results.get("alerts").strftime(TIME_FORMAT)
-        observation_start = results.get("observations").strftime(TIME_FORMAT)
+        alerts_start = state.get(LAST_ALERT_TIME)
+        observation_start = state.get(LAST_OBSERVATION_TIME)
 
         self.logger.info(
-            f"Retrieved the following custom start times: alerts='{alerts_start}' "
+            f"{log_msg}Applying the following start times: alerts='{alerts_start}' "
             f"and observations='{observation_start}'"
         )
         return alerts_start, observation_start

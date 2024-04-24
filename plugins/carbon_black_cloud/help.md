@@ -22,12 +22,12 @@ The [VMware Carbon Black Cloud](https://www.carbonblack.com/products/vmware-carb
 
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_id|string|None|True|API ID|None|ADFF2QLIIZ|
-|api_secret_key|credential_secret_key|None|True|API secret key|None|Z1PXFRDZI321LXQVAB9IJKKZ|
-|org_key|string|None|True|Organization Key|None|1ABZY2FJ|
-|url|string|defense.conferdeploy.net|True|The Carbon Black Cloud URL you use. You can find this by looking at the web address of your Carbon Black Cloud console|["defense-eap01.conferdeploy.net", "dashboard.confer.net", "defense.conferdeploy.net", "defense-prod05.conferdeploy.net", "defense-eu.conferdeploy.net", "defense-prodnrt.conferdeploy.net", "defense-prodsyd.conferdeploy.net", "ew2.carbonblackcloud.vmware.com", "gprd1usgw1.carbonblack-us-gov.vmware.com"]|defense.conferdeploy.net|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_id|string|None|True|API ID|None|ADFF2QLIIZ|None|None|
+|api_secret_key|credential_secret_key|None|True|API secret key|None|Z1PXFRDZI321LXQVAB9IJKKZ|None|None|
+|org_key|string|None|True|Organization Key|None|1ABZY2FJ|None|None|
+|url|string|defense.conferdeploy.net|True|The Carbon Black Cloud URL you use. You can find this by looking at the web address of your Carbon Black Cloud console|["defense-eap01.conferdeploy.net", "dashboard.confer.net", "defense.conferdeploy.net", "defense-prod05.conferdeploy.net", "defense-eu.conferdeploy.net", "defense-prodnrt.conferdeploy.net", "defense-prodsyd.conferdeploy.net", "ew2.carbonblackcloud.vmware.com", "gprd1usgw1.carbonblack-us-gov.vmware.com"]|defense.conferdeploy.net|None|None|
 
 Example input:
 
@@ -51,9 +51,9 @@ This action is used to get agent details
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, hostname, or device ID. Search results are case-sensitive|None|198.51.100.100|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, hostname, or device ID. Search results are case-sensitive|None|198.51.100.100|None|None|
   
 Example input:
 
@@ -169,11 +169,11 @@ This action is used to quarantine an agent
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, hostname, or device ID. Search results are case-sensitive|None|198.51.100.100|
-|quarantine_state|boolean|True|True|Set to true to quarantine the agent, set to false to unquarantine an agent|None|True|
-|whitelist|[]string|None|False|An array of IPs, hostnames, or device ID that a user can pass in that will not be quarantined|None|["198.51.100.100", "win-test"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|agent|string|None|True|Agent to retrieve device information from. Accepts IP address, hostname, or device ID. Search results are case-sensitive|None|198.51.100.100|None|None|
+|quarantine_state|boolean|True|True|Set to true to quarantine the agent, set to false to unquarantine an agent|None|True|None|None|
+|whitelist|[]string|None|False|An array of IPs, hostnames, or device ID that a user can pass in that will not be quarantined|None|["198.51.100.100", "win-test"]|None|None|
   
 Example input:
 
@@ -209,7 +209,7 @@ Example output:
 
 #### Monitor Alerts
 
-This task is used to monitor alerts and observations from within your Carbon Black Cloud instance
+This task is used to monitor alerts and observations in your Carbon Black Cloud instance
 
 ##### Input
   

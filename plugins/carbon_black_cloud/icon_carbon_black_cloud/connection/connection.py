@@ -9,6 +9,8 @@ import time
 from icon_carbon_black_cloud.util import agent_typer
 from icon_carbon_black_cloud.util.constants import DEFAULT_TIMEOUT, ERROR_HANDLING
 from icon_carbon_black_cloud.util.exceptions import RateLimitException
+
+from typing import Dict
 import re
 
 
@@ -56,7 +58,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         return device
 
-    def request_api(self, url, payload=None, request_method="POST", retry=True):
+    def request_api(
+        self, url: str, payload: Dict[str, str] = None, request_method: str = "POST", retry: bool = True
+    ) -> Dict[str, str]:
         payload = payload if payload else {}
         try:
             response = requests.request(
@@ -65,11 +69,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
             return self._handle_response(response, url, payload, retry)
         except requests.Timeout as timeout_error:
             self.logger.error(f"Hitting connection timeout on request to Carbon Black. error={timeout_error}")
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=timeout_error)
-        # TODO: now return json and rate limited value so need to update actions to ignore and task to imp[lement
-        # return self._handle_response(response, retry)
+            raise PluginException(preset=PluginException.Preset.TIMEOUT, data=timeout_error)
 
-    def _handle_response(self, response, url, payload, retry=True):
+    def _handle_response(self, response: requests.Response, url: str, payload: Dict[str, str], retry: bool = True):
         error_cause = f"Unexpected status code from API - {response.status_code}"
         error_data, error_assistance = response.text, "Unexpected response. Please contact support."
         if response.status_code == 200:
@@ -89,7 +91,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             )  # this is a result of black and linter fighting against each other
 
             raise RateLimitException(cause=error_cause, assistance=error_assistance, data=error_data)
-        elif response.status_code == 503:  # This is usually an API limit error or server error, try again
+        elif response.status_code == 503:  # This is usually a server error, try again
             time.sleep(5)
             if retry:
                 return self.request_api(url, payload, retry=False)

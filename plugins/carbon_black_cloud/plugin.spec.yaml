@@ -530,7 +530,7 @@ actions:
 tasks:
   monitor_alerts:
     title: Monitor Alerts
-    description: Monitor alerts and observations from within your Carbon Black Cloud instance
+    description: Monitor alerts and observations in your Carbon Black Cloud instance
     output:
       alerts:
         title: Alerts
