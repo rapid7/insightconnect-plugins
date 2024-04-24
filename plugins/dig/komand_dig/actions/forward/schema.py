@@ -31,11 +31,13 @@ class ForwardInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "domain": {
       "type": "string",
+      "title": "Domain",
       "description": "Domain name to resolve",
       "order": 1
     },
     "query": {
       "type": "string",
+      "title": "Query",
       "description": "Query type e.g. ANY, A, MX, NS, etc",
       "enum": [
         "A",
@@ -51,6 +53,7 @@ class ForwardInput(insightconnect_plugin_runtime.Input):
     },
     "resolver": {
       "type": "string",
+      "title": "Resolver",
       "description": "Resolver. Leave blank to use default resolver for the system",
       "order": 2
     }
