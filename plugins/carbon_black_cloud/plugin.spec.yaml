@@ -440,6 +440,8 @@ connection:
   api_id:
     title: API ID
     description: API ID
+    placeholder: APP ID
+    tooltip: Enter the API ID from your Carbon Black Account.
     type: string
     example: ADFF2QLIIZ
     required: true
@@ -447,6 +449,8 @@ connection:
   api_secret_key:
     title: API Secret Key
     description: API secret key
+    placeholder: API Secret Key
+    tooltip: Enter your Carbon Black Cloud API Secret Key.
     type: credential_secret_key
     example: Z1PXFRDZI321LXQVAB9IJKKZ
     required: true
@@ -454,6 +458,8 @@ connection:
   org_key:
     title: Org Key
     description: Organization Key
+    placeholder: Org Key
+    tooltip: Enter the Carbon Black Cloud Org Key. To obtain the Org Key, log in to your Carbon Black Cloud account and go to Settings > API Access > API Keys.
     type: string
     example: 1ABZY2FJ
     required: true
@@ -461,6 +467,8 @@ connection:
   url:
     title: URL
     description: The Carbon Black Cloud URL you use. You can find this by looking at the web address of your Carbon Black Cloud console
+    placeholder: URL
+    tooltip: To determine which URL to select, login to your Carbon Black Cloud account and refer to the URL displayed in the address bar.
     type: string
     enum:
       - defense-eap01.conferdeploy.net

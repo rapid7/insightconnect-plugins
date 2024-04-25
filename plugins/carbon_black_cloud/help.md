@@ -24,10 +24,10 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_id|string|None|True|API ID|None|ADFF2QLIIZ|None|None|
-|api_secret_key|credential_secret_key|None|True|API secret key|None|Z1PXFRDZI321LXQVAB9IJKKZ|None|None|
-|org_key|string|None|True|Organization Key|None|1ABZY2FJ|None|None|
-|url|string|defense.conferdeploy.net|True|The Carbon Black Cloud URL you use. You can find this by looking at the web address of your Carbon Black Cloud console|["defense-eap01.conferdeploy.net", "dashboard.confer.net", "defense.conferdeploy.net", "defense-prod05.conferdeploy.net", "defense-eu.conferdeploy.net", "defense-prodnrt.conferdeploy.net", "defense-prodsyd.conferdeploy.net", "ew2.carbonblackcloud.vmware.com", "gprd1usgw1.carbonblack-us-gov.vmware.com"]|defense.conferdeploy.net|None|None|
+|api_id|string|None|True|API ID|None|ADFF2QLIIZ|APP ID|Enter the API ID from your Carbon Black Account.|
+|api_secret_key|credential_secret_key|None|True|API secret key|None|Z1PXFRDZI321LXQVAB9IJKKZ|API Secret Key|Enter your Carbon Black Cloud API Secret Key.|
+|org_key|string|None|True|Organization Key|None|1ABZY2FJ|Org Key|Enter the Carbon Black Cloud Org Key. To obtain the Org Key, log in to your Carbon Black Cloud account and go to Settings > API Access > API Keys.|
+|url|string|defense.conferdeploy.net|True|The Carbon Black Cloud URL you use. You can find this by looking at the web address of your Carbon Black Cloud console|["defense-eap01.conferdeploy.net", "dashboard.confer.net", "defense.conferdeploy.net", "defense-prod05.conferdeploy.net", "defense-eu.conferdeploy.net", "defense-prodnrt.conferdeploy.net", "defense-prodsyd.conferdeploy.net", "ew2.carbonblackcloud.vmware.com", "gprd1usgw1.carbonblack-us-gov.vmware.com"]|defense.conferdeploy.net|URL|To determine which URL to select, login to your Carbon Black Cloud account and refer to the URL displayed in the address bar.|
 
 Example input:
 
