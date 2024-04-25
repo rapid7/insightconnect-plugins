@@ -52,6 +52,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                     return [], state, False, 200, None
 
                 log_msg += "However no longer in rate limiting period, so task can be executed..."
+                del state[RATE_LIMITED]
                 self.logger.info(log_msg)
 
             # Force 'now' to be 15 minutes before now as CB Analytics alerts can be updated for up to 15 minutes
@@ -109,9 +110,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         alerts = resp.get("results", [])
         if alerts:
             # Check if we have not got all available alerts otherwise trigger task again to catch up quicker
-            # CB can return max 10K during on time frame in which case we need to shorten the frame
-            if resp.get("num_found", 0) > PAGE_SIZE:
-                self.logger.info("Have not got all alerts for given time period. Returning has more pages true...")
+            # Our query to CB can return PAGE_SIZE (2.5K) during one time frame, but there could be more available.
+            num_found = resp.get("num_found", 0)
+            if num_found > PAGE_SIZE:
+                self.logger.info(
+                    f"Have not got all alerts for the searched time period. {num_found} found but "
+                    f"query page size is set to {PAGE_SIZE}. Returning has more pages true..."
+                )
                 alerts_has_more_pages = True
 
             alerts, state = self._dedupe_and_get_last_time(alerts, state, start_alert_time, observations=False)
@@ -144,8 +149,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             state[LAST_OBSERVATION_JOB] = observation_job_id
 
             if not state.get(LAST_OBSERVATION_TIME):
-                # We should only hit this when we have *never* returned any observations, but after we've
-                # successfully created an observation job so that we know this start time has been queried.
+                # First run of trying to get observations, save the start time for usage in `_dedupe_and_get_last_time`
                 self.logger.info(f"No {LAST_OBSERVATION_TIME} in the state, saving checkpoint as {start_time}")
                 state[LAST_OBSERVATION_TIME] = start_time
 
@@ -210,11 +214,11 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 break
 
         # Now grab the last time stamp and hash any alerts that match this as they could be returned in the next query
-        no_alerts = len(deduped_alerts)
-        self.logger.info(f"Received {len(alerts)}, and after dedupe there is {no_alerts} results.")
+        num_alerts = len(deduped_alerts)
+        self.logger.info(f"Received {len(alerts)}, and after dedupe there is {num_alerts} results.")
         if deduped_alerts:  # check we haven't deduped all results pulled back
             last_time = deduped_alerts[-1].get(time_key)
-            for index in range(no_alerts - 1, -1, -1):
+            for index in range(num_alerts - 1, -1, -1):
                 alert = deduped_alerts[index]
                 if alert.get(time_key) == last_time:
                     new_hashes.append(hash_sha1(deduped_alerts[index]))
