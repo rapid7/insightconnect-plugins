@@ -14,6 +14,7 @@ class Encode(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         string = params[Input.CONTENT].encode("utf-8")
+	# This will break
         adding new info and raising prospector issues
         result = base64.standard_b64encode(string)
         return {Output.DATA: result.decode("utf-8")}
