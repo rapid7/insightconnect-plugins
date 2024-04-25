@@ -129,7 +129,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             "start": 0,
             "fields": ["*"],
             "criteria": {"observation_type": OBSERVATION_TYPES},
-            "sort": [{"field": "device_timestamp", "order": "asc"}],
+            "sort": [{"field": OBSERVATION_TIME_FIELD, "order": "asc"}],
             "time_range": {"start": start_time, "end": end_time},
         }
         url = f"{self.connection.base_url}/{endpoint}"
@@ -169,7 +169,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             # only observations if the job is completed otherwise it is partial results and these are not sorted
             observations = observation_json.get("results")
             if observations:
-                start_observation_time = observations[0].get(OBSERVATION_TIME_FIELD)
+                # pass start time as the time saved in state - noticed 1 occasion CB API may return an observation
+                # with a device_timestamp before queried window in which case we can't use this as the start time
+                start_observation_time = state.get(LAST_OBSERVATION_TIME)
                 observations, state = self._dedupe_and_get_last_time(observations, state, start_observation_time)
 
                 if observation_json.get("num_found") > PAGE_SIZE:
@@ -194,11 +196,14 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             )
 
         old_hashes, deduped_alerts, new_hashes = state.get(last_hash_key, []), [], []
-        # First dedupe and get the alerts we want to return
-        self.logger.info(f"Expecting to dedupe {len(old_hashes)} based on previously stored hashes.")
+        # First dedupe and get the alerts we want to return nested list values may be re-ordered meaning a previously
+        # returned alert or observation may change hash value. Safer to return than drop or manipulate source data.
+        self.logger.info(f"Expecting to dedupe a max of {len(old_hashes)} based on previously stored hashes.")
         for index, alert in enumerate(alerts):
             alert_time = alert.get(time_key)
-            if alert_time == start_time and hash_sha1(alert) not in old_hashes:
+            # Observations quirk that it can return an alert time < start_time of the job search, should be in previous
+            # run but return anyway as it won't be held in the hash values.
+            if (alert_time == start_time and hash_sha1(alert) not in old_hashes) or alert_time < start_time:
                 deduped_alerts.append(alert)
             elif alert_time > start_time:
                 deduped_alerts += alerts[index:]  # we've gone past start time, keep the rest of the alerts
