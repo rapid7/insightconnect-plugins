@@ -1,13 +1,12 @@
-import json
-import os
-import sys
-import logging
 import datetime
+import json
+import logging
+import os
 import re
+import sys
 
 import insightconnect_plugin_runtime
 from komand_whois.connection.connection import Connection
-
 
 sys.path.append(os.path.abspath("../"))
 
@@ -23,16 +22,16 @@ class Util:
         return action
 
     @staticmethod
-    def read_file_to_dict(filename: str, encodingenabled: bool = False) -> dict:
+    def read_file_to_dict(filename: str, encoding_enabled: bool = False) -> dict:
         with open(
             os.path.join(os.path.dirname(os.path.realpath(__file__)), filename), "r", encoding="utf-8"
         ) as file_reader:
             data = json.load(file_reader)
-            if encodingenabled:
-                encodeddata = {}
+            if encoding_enabled:
+                encoded_data = {}
                 for key, value in data.items():
-                    encodeddata[key] = value.encode("utf-8")
-                return encodeddata
+                    encoded_data[key] = value.encode("utf-8")
+                return encoded_data
             else:
                 return data
 
@@ -155,20 +154,17 @@ class Util:
             raise Exception("Unknown date format: '%s'" % text)
 
         query = args[0]
-        if query == f"google.com":
+        if query == "google.com":
             filename = "domain.json.resp"
-            test_data = Util.read_file_to_dict(f"responses/{filename}", encodingenabled=False)
+            test_data = Util.read_file_to_dict(f"responses/{filename}", encoding_enabled=False)
             return MockWhois(data=test_data)
-        elif query == f"hello/world.com":
+        elif query == "hello/world.com":
             filename = "domain_error.json.resp"
-            test_data = Util.read_file_to_dict(f"responses/{filename}", encodingenabled=False)
+            test_data = Util.read_file_to_dict(f"responses/{filename}", encoding_enabled=False)
             return MockWhois(data=test_data)
-        elif query == f"/usr/bin/whois 198.51.100.100":
+        elif query == "/usr/bin/whois 198.51.100.100":
             filename = "address.json.resp"
-            test_data = Util.read_file_to_dict(f"responses/{filename}", encodingenabled=True)
-            print(f"{test_data =}")
-            return test_data
-        elif query == f"/usr/bin/whois 1":
+            return Util.read_file_to_dict(f"responses/{filename}", encoding_enabled=True)
+        elif query == "/usr/bin/whois 1":
             filename = "address_error.json.resp"
-            test_data = Util.read_file_to_dict(f"responses/{filename}", encodingenabled=True)
-            return test_data
+            return Util.read_file_to_dict(f"responses/{filename}", encoding_enabled=True)
