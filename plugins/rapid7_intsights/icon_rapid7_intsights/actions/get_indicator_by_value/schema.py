@@ -24,7 +24,7 @@ class Output:
     SEVERITY = "severity"
     SOURCES = "sources"
     STATUS = "status"
-    SUB_TYPE = "sub_type"
+    SUBTYPE = "subtype"
     SYSTEM_TAGS = "system_tags"
     TAGS = "tags"
     TYPE = "type"
@@ -149,9 +149,9 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
       "description": "Status",
       "order": 17
     },
-    "sub_type": {
+    "subtype": {
       "type": "string",
-      "title": "Sub_Type",
+      "title": "Subtype",
       "description": "SubType Value",
       "order": 3
     },

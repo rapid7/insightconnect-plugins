@@ -911,7 +911,7 @@ Example input:
 |severity|string|False|Severity|Low|
 |sources|[]source|False|Sources|[ { "confidenceLevel": 2, "name": "Cyber Threat Alliance" } ]|
 |status|string|False|Status|Active|
-|sub_type|string|False|SubType Value|MD5|
+|subtype|string|False|SubType Value|MD5|
 |system_tags|[]string|False|System tags|["MyTag_1"]|
 |tags|[]string|False|Tags|["MyTag_1"]|
 |type|string|False|Type|Hashes|
@@ -950,7 +950,7 @@ Example output:
     }
   ],
   "status": "Active",
-  "sub_type": "MD5",
+  "subtype": "MD5",
   "system_tags": [
     "MyTag_1"
   ],
@@ -1431,7 +1431,7 @@ Example output:
 
 # Version History
 
-* 5.2.0 - Update exception presets in API and unit tests | New `sub_type` output to `get_indicator_by_value` action
+* 5.2.0 - Update exception presets in API and unit tests | New `subtype` output to `get_indicator_by_value` action
 * 5.1.1 - Better handling of response from the threat connect API when using the `takedown_request` action | Bumped to use the newest version of the SDK | Updated old unit tests / added new unit tests
 * 5.1.0 - Add actions -> `Get Cyber Terms by Filter`, `Get IOCs for Cyber Term`, `Get CVEs for Cyber Term`, `Close Alert`. Add new input for `Get IOCs By Filter` action
 * 5.0.0 - Add action Get IOCs By Filter which returns a list of paginated IOC data based on input filters applied against IOC properties | Fix Bug relating to mismatched property names of output types geolocation, sources, and reported feeds for Get Indicator by Value action
