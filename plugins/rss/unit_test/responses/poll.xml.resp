@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+	<channel>
+		<title>Sample Feed 1</title>
+		<description>Sample Description 1</description>
+		<link>http://example.org/</link>
+		<language>en</language>
+		<copyright>Copyright 2021, User</copyright>
+		<managingEditor>editor@example.org</managingEditor>
+		<webMaster>webmaster@example.org</webMaster>
+		<pubDate>Sat, 07 Sep 2002 0:00:01 GMT</pubDate>
+		<category>Examples</category>
+		<generator>Sample Toolkit</generator>
+		<docs>http://feedvalidator.org/docs/rss2.html</docs>
+		<cloud domain="rpc.example.com"
+port="80"
+path="/RPC2"
+registerProcedure="pingMe"
+protocol="soap"/>
+		<ttl>60</ttl>
+		<image>
+			<url>http://example.org</url>
+			<title>Example banner</title>
+			<link>http://example.org/</link>
+			<width>80</width>
+			<height>15</height>
+		</image>
+		<textInput>
+			<title>Search</title>
+			<description>Search this site:</description>
+			<name>q</name>
+			<link>http://example.org/mt/mt-search.cgi</link>
+		</textInput>
+		<item>
+			<title>First item title</title>
+			<link>http://example.org/item/1</link>
+			<description>Example Description 1</description>
+			<author>user@example.org</author>
+			<category>Miscellaneous</category>
+			<comments>http://example.org/comments/1</comments>
+			<pubDate>Thu, 05 Sep 2002 0:00:01 GMT</pubDate>
+		</item>
+	</channel>
+</rss>

@@ -1,13 +1,14 @@
-import komand
+import insightconnect_plugin_runtime
 import time
-from .schema import PollInput, PollOutput
+from .schema import PollInput, PollOutput, Input, Output
 
 # Custom imports below
+from komand_rss.util.constants import DEFAULT_SLEEPING_TIME, DEFAULT_ENTRY_LIMIT
+from typing import List, Dict, Any
 import feedparser
 
 
-class Poll(komand.Trigger):
-
+class Poll(insightconnect_plugin_runtime.Trigger):
     _CACHE_FILE_NAME = "triggers_rss_poll"
 
     def __init__(self):
@@ -19,56 +20,39 @@ class Poll(komand.Trigger):
         )
 
     def run(self, params={}):
-        sleep_duration = params.get("frequency")
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        sleep_duration = params.get(Input.FREQUENCY, DEFAULT_SLEEPING_TIME)
+        feed_url = self.connection.feed_url
+        # END INPUT BINDING - DO NOT REMOVE
 
-        # Open and auto-close the file to create the cache file on very first start up
-        with komand.helper.open_cachefile(self._CACHE_FILE_NAME):
-            self.logger.info("Run: Got or created cache file")
+        # Retrieve all the previous feeds to begin with
+        last_feed = self.parse_feed(feed_url)
 
         while True:
-            self.logger.info("Run: Fetching entries from {feed_url}".format(feed_url=self.connection.FEED_URL))
-            feed = feedparser.parse(self.connection.FEED_URL)
-            new_count = 0  # Keep track of number of new entries
-
-            with komand.helper.open_cachefile(self._CACHE_FILE_NAME) as cache_file:
-                for entry in feed.entries:
-                    cache_file.seek(0)  # Ensure pointer is back at start
-                    link = entry["link"]  # Use link as an identifier since it is guaranteed according to W3 RSS spec
-
-                    if link in cache_file.read().splitlines():  # If entry previously parsed, skip to next
-                        self.logger.info("Run: Skipping previously parsed entry")
-                        continue
-
-                    self.logger.info("Run: New entry found, parsing")
-                    payload = self.create_payload_from_entry(entry)
-
-                    new_count += 1
-                    cache_file.write("{link}\n".format(link=link))
-                    self.send(payload)
-
-            self.logger.info(
-                "Run: Parsed {new} new entries. Sleeping for {sleep} seconds.".format(
-                    new=new_count, sleep=sleep_duration
-                )
-            )
+            self.logger.info(f"Fetching entries from '{feed_url}'")
+            feed = list(filter(lambda element: element not in last_feed, self.parse_feed(feed_url)))
+            if feed:
+                self.logger.info(f"New {len(feed)} entries found. Returning results.")
+                for entry in feed:
+                    self.send({Output.RESULTS: entry})
+                last_feed = feed
+            else:
+                self.logger.info("No new entries found.")
+            self.logger.info(f"Sleeping for {sleep_duration} seconds...")
             time.sleep(sleep_duration)
 
     @staticmethod
-    def create_payload_from_entry(entry):
-        # This method can be improved using priority/fallback properties on an RSS entry.
-        # See https://cyber.harvard.edu/rss/rss.html#requiredChannelElements for info on required/optional elements.
+    def parse_feed(feed_url: str) -> List[Dict[str, Any]]:
+        """
+        Parse the given feed URL and extract a list of objects.
 
-        return {"results": entry}
+        :param feed_url: The URL of the feed to parse.
+        :type: str
 
-    def test(self):
-        feed = feedparser.parse(self.connection.FEED_URL)
+        :return: A list of entry objects extracted from the feed.
+        :rtype: List[Dict[str, Any]]
+        """
 
-        for entry in feed.entries:
-            link = entry["link"]  # Use link as an identifier since it is guaranteed according to W3 RSS spec
-            return self.create_payload_from_entry(entry)
-
-        return {
-            "contents": "http://example.com",
-            "description": "Hello, world",
-            "title": "Example entry",
-        }
+        # The [::-1] allows to reverse the returned entries from oldest at [0] index to latest
+        # Also, in order to save the memory usage the limitation for the length returned elements was set
+        return feedparser.parse(feed_url).get("entries", [])[:DEFAULT_ENTRY_LIMIT][::-1]
