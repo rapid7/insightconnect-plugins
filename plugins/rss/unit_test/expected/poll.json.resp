@@ -1,0 +1,55 @@
+{
+  "results": {
+    "title": "Second item title",
+    "title_detail": {
+      "type": "text/plain",
+      "language": null,
+      "base": "",
+      "value": "Second item title"
+    },
+    "links": [
+      {
+        "rel": "alternate",
+        "type": "text/html",
+        "href": "http://example.org/item/2"
+      }
+    ],
+    "link": "http://example.org/item/2",
+    "summary": "Example Description 2",
+    "summary_detail": {
+      "type": "text/html",
+      "language": null,
+      "base": "",
+      "value": "Example Description 2"
+    },
+    "authors": [
+      {
+        "email": "user@example.org"
+      }
+    ],
+    "author": "user@example.org",
+    "author_detail": {
+      "email": "user@example.org"
+    },
+    "tags": [
+      {
+        "term": "Miscellaneous",
+        "scheme": null,
+        "label": null
+      }
+    ],
+    "comments": "http://example.org/comments/2",
+    "published": "Mon, 08 Sep 2021 0:00:01 GMT",
+    "published_parsed": [
+      2021,
+      9,
+      8,
+      0,
+      0,
+      1,
+      2,
+      251,
+      0
+    ]
+  }
+}
