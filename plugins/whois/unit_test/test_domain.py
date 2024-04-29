@@ -1,17 +1,17 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from typing import Any, Dict
 from unittest import TestCase
-from unittest.mock import patch, MagicMock
-from komand_whois.connection.connection import Connection
+from unittest.mock import MagicMock, patch
+
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_whois.actions.domain import Domain
 from parameterized import parameterized
+
 from util import Util
-from insightconnect_plugin_runtime.exceptions import PluginException
-import json
-import logging
 
 
 @patch("whois.query", side_effect=Util.mock_whois)
@@ -29,7 +29,9 @@ class TestDomain(TestCase):
             ]
         ]
     )
-    def test_domain(self, _mock_request: MagicMock, _test_name: str, input_params: dict, expected: dict):
+    def test_domain(
+        self, _mock_request: MagicMock, _test_name: str, input_params: Dict[str, Any], expected: Dict[str, Any]
+    ):
         actual = self.action.run(input_params)
         self.assertDictEqual(actual, expected)
 
@@ -38,12 +40,14 @@ class TestDomain(TestCase):
             [
                 "domain_error",
                 Util.read_file_to_dict("inputs/domain_error.json.inp"),
-                "Something unexpected occurred.",
-                "Check the logs and if the issue persists please contact support.",
+                "Invalid domain as input.",
+                "Ensure the domain is not prefixed with a protocol.",
             ]
         ]
     )
-    def test_invalid(self, _mock_request: MagicMock, _test_name: str, input_params: dict, cause: str, assistance: str):
+    def test_invalid(
+        self, _mock_request: MagicMock, _test_name: str, input_params: Dict[str, Any], cause: str, assistance: str
+    ):
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)
