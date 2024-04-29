@@ -1,19 +1,16 @@
+from icon_carbon_black_cloud.connection.connection import Connection
+from icon_carbon_black_cloud.connection.schema import Input
+
+from typing import Callable, Any, Dict
+from unittest import mock
+
 import json
 import logging
 import os
 import sys
-from typing import Callable
-
 import requests
 
 sys.path.append(os.path.abspath("../"))
-
-from typing import Any, Dict
-from unittest import mock
-
-from icon_carbon_black_cloud.connection.connection import Connection
-from icon_carbon_black_cloud.connection.schema import Input
-from insightconnect_plugin_runtime.action import Action
 
 STUB_CONNECTION = {
     Input.API_ID: "12345",
@@ -26,7 +23,7 @@ BASE_URL = f"https://{STUB_CONNECTION.get(Input.URL, '')}"
 
 class Util:
     @staticmethod
-    def default_connector(action: Action) -> Action:
+    def default_connector(action: Any) -> Any:
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
         default_connection.connect(STUB_CONNECTION)
@@ -51,8 +48,11 @@ class MockResponse:
         self.filename = filename
         self.status_code = status_code
         self.text = text
+        self.headers = {"Header": "Value"}
 
     def json(self):
+        if self.filename == "empty_response":
+            return {}
         with open(
             os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp")
         ) as file:
@@ -67,12 +67,14 @@ def mocked_request(side_effect: Callable) -> None:
     mock_function.request = mock.Mock(side_effect=side_effect)
 
 
-def mock_conditions(status_code: int, **kwargs: Dict[str, Any]) -> MockResponse:
+def mock_conditions(status_code: int, file_name: str = "", **kwargs: Dict[str, Any]) -> MockResponse:
     url = kwargs.get("url")
     if url == f"{BASE_URL}/appservices/v6/orgs/{STUB_CONNECTION.get(Input.ORG_KEY, '')}/devices/_search":
         return MockResponse("get_agent_details", status_code)
     elif url == f"{BASE_URL}/appservices/v6/orgs/{STUB_CONNECTION.get(Input.ORG_KEY, '')}/device_actions":
         return MockResponse("quarantine", status_code)
+    elif file_name:
+        return MockResponse(file_name, status_code)
     raise Exception("Response has been not implemented")
 
 
@@ -98,6 +100,10 @@ def mock_request_404(**kwargs) -> MockResponse:
 
 def mock_request_409(**kwargs) -> MockResponse:
     return mock_conditions(409, **kwargs)
+
+
+def mock_request_429(**kwargs) -> MockResponse:
+    return mock_conditions(429, **kwargs)
 
 
 def mock_request_503(**kwargs) -> MockResponse:

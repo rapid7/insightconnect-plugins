@@ -261,9 +261,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 comparison_date = datetime(**custom_lookback) if custom_lookback else default_date_lookback
                 comparison_date = comparison_date.replace(tzinfo=timezone.utc).strftime(TIME_FORMAT)
                 if comparison_date > saved_time:
-                    self.logger.info(
-                        f"Saved time ({saved_time}) exceeds cut off, moving to ({comparison_date})."
-                    )
+                    self.logger.info(f"Saved time ({saved_time}) exceeds cut off, moving to ({comparison_date}).")
                     state[cb_type_time] = comparison_date
 
         alerts_start = state.get(LAST_ALERT_TIME)
