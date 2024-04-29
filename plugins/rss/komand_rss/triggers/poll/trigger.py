@@ -25,17 +25,21 @@ class Poll(insightconnect_plugin_runtime.Trigger):
         feed_url = self.connection.feed_url
         # END INPUT BINDING - DO NOT REMOVE
 
-        # Retrieve all the previous feeds to begin with
-        last_feed = self.parse_feed(feed_url)
+        # Retrieve latest feed published timestamp to begin
+        last_entry_timestamp = self.get_latest_entry_timestamp(self.parse_feed(feed_url))
 
         while True:
             self.logger.info(f"Fetching entries from '{feed_url}'")
-            feed = list(filter(lambda element: element not in last_feed, self.parse_feed(feed_url)))
+            feed = list(
+                filter(
+                    lambda element: element.get("published_parsed") > last_entry_timestamp, self.parse_feed(feed_url)
+                )
+            )
             if feed:
                 self.logger.info(f"New {len(feed)} entries found. Returning results.")
                 for entry in feed:
                     self.send({Output.RESULTS: entry})
-                last_feed = feed
+                last_entry_timestamp = self.get_latest_entry_timestamp(feed)
             else:
                 self.logger.info("No new entries found.")
             self.logger.info(f"Sleeping for {sleep_duration} seconds...")
@@ -56,3 +60,17 @@ class Poll(insightconnect_plugin_runtime.Trigger):
         # The [::-1] allows to reverse the returned entries from oldest at [0] index to latest
         # Also, in order to save the memory usage the limitation for the length returned elements was set
         return feedparser.parse(feed_url).get("entries", [])[:DEFAULT_ENTRY_LIMIT][::-1]
+
+    @staticmethod
+    def get_latest_entry_timestamp(feed: List[Dict[str, Any]]) -> time.struct_time:
+        """
+        Get the latest entry timestamp from a feed.
+
+        :param feed: A list of dictionaries representing entries in the feed.
+        :type: List[Dict[str, Any]]
+
+        :return: The latest entry timestamp as a struct_time object.
+        :rtype: time.struct_time
+        """
+
+        return next(reversed(feed), {}).get("published_parsed", time.localtime())
