@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
-from .schema import AddressInput, AddressOutput, Input
+from .schema import AddressInput, AddressOutput, Input, Output
 import re
+import validators
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -77,14 +78,25 @@ class Address(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        binary = "/usr/bin/whois"
-        cmd = "%s %s" % (binary, params.get("address"))
-        stdout = insightconnect_plugin_runtime.helper.exec_command(cmd)["stdout"]
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        address = params.get(Input.ADDRESS, "")
+        registrar = params.get(Input.REGISTRAR, "")
+        # END INPUT BINDING - DO NOT REMOVE
+
+        # Validate user input
+        if not any(validator(address, cidr=False) for validator in (validators.ipv4, validators.ipv6)):
+            raise PluginException(
+                cause="Invalid IPv4 or IPv6 address specified for a field 'Address'.",
+                assistance="Please enter a valid IPv4 or IPv6 address and try again.",
+            )
+
+        command = f"/usr/bin/whois {address}"
+        stdout = insightconnect_plugin_runtime.helper.exec_command(command)["stdout"]
         try:
             stdout = stdout.decode("utf-8")
         except UnicodeDecodeError:
             stdout = stdout.decode("iso-8859-1")
-        results = self.parse_stdout(params.get(Input.REGISTRAR), stdout=stdout)
+        results = self.parse_stdout(registrar, stdout=stdout)
         results = insightconnect_plugin_runtime.helper.clean_dict(results)
 
         if not results:
@@ -104,7 +116,7 @@ class Address(insightconnect_plugin_runtime.Action):
         r = re.compile(pattern=regex, flags=re.IGNORECASE | re.MULTILINE)
         results = r.findall(string=stdout)
 
-        pairs = dict()
+        pairs = {}
         for result in results:
             pair = list(map(str.strip, result.split(":")))
             pairs[pair[0]] = pair[1]
@@ -128,10 +140,10 @@ class Address(insightconnect_plugin_runtime.Action):
         return registry
 
     def _load_normalization_map(self, refer):
-        if refer not in self.NORMALIZATION_MAP.keys():
+        if refer not in self.NORMALIZATION_MAP:
             self.logger.info(
-                "Warning: No normalization map found for: %s\n"
-                "Please contact support with the IP address used as input to this action." % refer
+                f"Warning: No normalization map found for: {refer}\n"
+                "Please contact support with the IP address used as input to this action."
             )
         return self.NORMALIZATION_MAP[refer]
 
@@ -142,18 +154,13 @@ class Address(insightconnect_plugin_runtime.Action):
         else:
             registry = registrar.lower()
 
-        self.logger.info("Info: Using registry: %s" % registry)
-
+        self.logger.info(f"Info: Using registry: {registry}")
         loaded_map = self._load_normalization_map(refer=registry)
 
-        output = dict()
+        output = {}
         for p_key, p_value in pairs.items():
             for n_key, n_value in loaded_map.items():
                 if p_key == n_value:
                     output[n_key] = p_value
 
         return output
-
-    def test(self):
-        # TODO: Implement test function
-        return {}

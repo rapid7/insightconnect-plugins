@@ -5,16 +5,16 @@ databases that store the registered users or assignee's of an Internet resource,
 block, or an autonomous system.
 
 # Key Features
-  
+
 * Perform a WHOIS lookup for a provided IP address or domain to gain information on who is responsible for a domain or IP
 
 # Requirements
   
-* This plugin does not contain any requirements
+*This plugin does not contain any requirements.*
 
 # Supported Product Versions
-  
-* 2023-10-31
+
+* 2024-04-26
 
 # Documentation
 
@@ -33,10 +33,10 @@ This action is used to retrieve data about an IP address
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|address|string|None|True|IP to Lookup|None|198.51.100.100|
-|registrar|string|Autodetect|False|Domain Registrar|['Autodetect', 'RIPE', 'ARIN', 'LACNIC', 'APNIC']|Autodetect|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|address|string|None|True|IP to Lookup|None|198.51.100.100|None|None|
+|registrar|string|Autodetect|False|Domain Registrar|["Autodetect", "RIPE", "ARIN", "LACNIC", "APNIC"]|Autodetect|None|None|
   
 Example input:
 
@@ -99,9 +99,9 @@ This action is used to retrieve data about a domain name
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain|string|None|True|Domain name to lookup|None|rapid7.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|domain|string|None|True|Domain name to lookup|None|rapid7.com|None|None|
   
 Example input:
 
@@ -169,7 +169,6 @@ Example output:
 ### Triggers
   
 *This plugin does not contain any triggers.*
-
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -184,6 +183,7 @@ Multiple records can be returned by the server, this plugin currently only retur
 
 # Version History
 
+* 3.1.2 - Updated SDK to the latest version | Added validation for input parameters
 * 3.1.1 - Add empty `__init__.py` file to `unit_test` folder | Refresh with new tooling
 * 3.1.0 - Add support for `.monster` and `.nl` domains
 * 3.0.3 - Add PluginException in Domain and Address action when response is empty
@@ -216,5 +216,5 @@ Multiple records can be returned by the server, this plugin currently only retur
 * [WHOIS](https://en.wikipedia.org/wiki/WHOIS)
 
 ## References
-  
+
 * [WHOIS](https://en.wikipedia.org/wiki/WHOIS)

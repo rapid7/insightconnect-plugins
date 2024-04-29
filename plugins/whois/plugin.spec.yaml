@@ -4,29 +4,60 @@ products: [insightconnect]
 name: whois
 title: WHOIS
 description: WHOIS is a query and response protocol that is widely used for querying databases that store the registered users or assignee's of an Internet resource, such as a domain name, an IP address block, or an autonomous system
-version: 3.1.1
+version: 3.1.2
 vendor: rapid7
 support: community
-supported_versions: ["2023-10-31"]
+supported_versions: ["2024-04-26"]
 status: []
 sdk:
-  type: full
-  version: 5
+  type: slim
+  version: 5.4.7
   user: nobody
+  packages:
+    - whois
+    - git
 cloud_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/whois
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-- whois
-- ip lookup
+  - whois
+  - ip lookup
 hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [whois, ip lookup, cloud_enabled]
   features: []
 key_features: ["Perform a WHOIS lookup for a provided IP address or domain to gain information on who is responsible for a domain or IP"]
-requirements: ["This plugin does not contain any requirements"]
 references: ["[WHOIS](https://en.wikipedia.org/wiki/WHOIS)"]
+links: ["[WHOIS](https://en.wikipedia.org/wiki/WHOIS)"]
+version_history:
+  - "3.1.2 - Updated SDK to the latest version | Added validation for input parameters"
+  - "3.1.1 - Add empty `__init__.py` file to `unit_test` folder | Refresh with new tooling"
+  - "3.1.0 - Add support for `.monster` and `.nl` domains"
+  - "3.0.3 - Add PluginException in Domain and Address action when response is empty"
+  - "3.0.2 - Support non-UTF-8 responses in the Address action"
+  - "3.0.1 - Clean up help.md formatting"
+  - "3.0.0 - Add input `registrar` for manual server selection to Address Lookup action"
+  - "2.0.3 - Upgrade to latest Python plugin runtime | Define `cloud_ready` in spec"
+  - "2.0.2 - Fix issue where com.br style domains could crash the plugin"
+  - "2.0.1 - Update to v4 Python plugin runtime"
+  - "2.0.0 - Add example inputs | Fix capitalization in the title of the `last_updated` output."
+  - "1.0.7 - Upgrade komand/python-whois version to 0.4.2 | Update whois.conf to support .in domains | Updated help.md for the Extension Library"
+  - "1.0.6 - New spec and help.md format for the Extension Library"
+  - "1.0.5 - Upgrade komand/python-whois version to 0.4.1 | Upgrade SDK"
+  - "1.0.4 - Fix variable name in domain lookup"
+  - "1.0.3 - Handle instances where domain name is prefixed with a protocol"
+  - "1.0.2 - Fix typo in plugin spec"
+  - "1.0.1 - Add support for LACNIC, APNIC, RIPE registries"
+  - "1.0.0 - Support web server mode"
+  - "0.3.3 - Bug fix for CI tool incorrectly uploading plugins"
+  - "0.3.2 - Added new date formats"
+  - "0.3.1 - Update to v2 Python plugin architecture"
+  - "0.3.0 - Support for more TLDs"
+  - "0.2.1 - SSL bug fix in SDK"
+  - "0.2.0 - Fix domain query and adjust output"
+  - "0.1.1 - Bugfixes and pagination support"
+  - "0.1.0 - Initial plugin"
 actions:
   domain:
     title: Domain Lookup
@@ -34,10 +65,10 @@ actions:
     input:
       domain:
         title: Domain
-        type: string
         description: Domain name to lookup
-        example: rapid7.com
+        type: string
         required: true
+        example: rapid7.com
     output:
       name:
         title: Domain Name
@@ -141,23 +172,23 @@ actions:
     input:
       address:
         title: Address
-        type: string
         description: IP to Lookup
-        example: 198.51.100.100
+        type: string
         required: true
+        example: 198.51.100.100
       registrar:
         title: Registrar
-        type: string
         description: Domain Registrar
-        example: Autodetect
-        required: false
-        default: Autodetect
+        type: string
         enum:
           - Autodetect
           - RIPE
           - ARIN
           - LACNIC
           - APNIC
+        required: false
+        default: Autodetect
+        example: Autodetect
     output:
       netname:
         title: Network Name
