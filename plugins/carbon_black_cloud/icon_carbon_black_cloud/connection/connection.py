@@ -10,7 +10,7 @@ from icon_carbon_black_cloud.util import agent_typer
 from icon_carbon_black_cloud.util.constants import DEFAULT_TIMEOUT, ERROR_HANDLING
 from icon_carbon_black_cloud.util.exceptions import RateLimitException
 
-from typing import Dict
+from typing import Dict, Any
 import re
 
 
@@ -71,7 +71,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.logger.error(f"Hitting connection timeout on request to Carbon Black. error={timeout_error}")
             raise PluginException(preset=PluginException.Preset.TIMEOUT, data=timeout_error)
 
-    def _handle_response(self, response: requests.Response, url: str, payload: Dict[str, str], retry: bool = True):
+    def _handle_response(
+        self, response: requests.Response, url: str, payload: Dict[str, str], retry: bool = True
+    ) -> Dict[str, Any]:
         error_cause = f"Unexpected status code from API - {response.status_code}"
         error_data, error_assistance = response.text, "Unexpected response. Please contact support."
         if response.status_code == 200:

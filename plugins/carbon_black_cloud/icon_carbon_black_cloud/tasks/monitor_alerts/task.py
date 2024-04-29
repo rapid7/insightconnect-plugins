@@ -27,6 +27,7 @@ LAST_OBSERVATION_JOB = "last_observation_job"
 PAGE_SIZE = 2500
 
 DEFAULT_LOOKBACK = 5  # first look back time in minutes
+MAX_LOOKBACK = 7  # allows saved state to be within 7 days to auto recover from an error
 
 
 class MonitorAlerts(insightconnect_plugin_runtime.Task):
@@ -43,7 +44,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         alerts_and_observations, has_more_pages, observations_has_more_pages = [], False, False
         try:
             rate_limited = state.get(RATE_LIMITED)
-            now_time = datetime.now(timezone.utc)
+            now_time = self._get_current_time()
             if rate_limited:
                 log_msg = f"Rate limit value stored in state: {rate_limited}. "
                 if rate_limited > now_time.strftime(TIME_FORMAT):
@@ -84,11 +85,11 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             return alerts_and_observations, state, has_more_pages, 200, None
         except RateLimitException as rate_limit_error:
             self.logger.info(f"Rate limited on API, returning {(len(alerts_and_observations))} items...")
-            state[RATE_LIMITED] = (datetime.now() + timedelta(minutes=5)).strftime(TIME_FORMAT)
+            state[RATE_LIMITED] = (self._get_current_time() + timedelta(minutes=5)).strftime(TIME_FORMAT)
             return alerts_and_observations, state, False, 200, rate_limit_error
         except Exception as error:
             self.logger.error(f"Hit an unexpected error during task execution. Error={error}", exc_info=True)
-            return [], state, False, 500, error
+            return alerts_and_observations, state, False, 500, error
 
     def get_alerts(
         self, start_alert_time: str, end_alert_time: str, state: Dict[str, str]
@@ -171,7 +172,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             has_more_pages = True  # trigger again as it should be finished imminently (jobs run for a max of 3 minutes)
         else:
             # only observations if the job is completed otherwise it is partial results and these are not sorted
-            observations = observation_json.get("results")
+            observations = observation_json.get("results", [])
             if observations:
                 # pass start time as the time saved in state - noticed 1 occasion CB API may return an observation
                 # with a device_timestamp before queried window in which case we can't use this as the start time
@@ -244,13 +245,26 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         log_msg = ""
         for cb_type_time in [LAST_ALERT_TIME, LAST_OBSERVATION_TIME]:
-            if not state.get(cb_type_time):
+            saved_time = state.get(cb_type_time)
+            if not saved_time:
                 log_msg += f"No {cb_type_time} within state. "
                 custom_timings = custom_config.get(cb_type_time, {})
                 custom_date = custom_timings.get("date")
                 custom_minutes = custom_timings.get("minutes", DEFAULT_LOOKBACK)
                 start = datetime(**custom_date) if custom_date else (now - timedelta(minutes=custom_minutes))
                 state[cb_type_time] = start.strftime(TIME_FORMAT)
+            else:
+                # check if we have held the TS beyond our max lookback
+                lookback_days = custom_config.get(f"{cb_type_time}_days", MAX_LOOKBACK)
+                default_date_lookback = now - timedelta(days=lookback_days)  # if not passed from CPS create on the fly
+                custom_lookback = custom_config.get(f"max_{cb_type_time}", {})
+                comparison_date = datetime(**custom_lookback) if custom_lookback else default_date_lookback
+                comparison_date = comparison_date.replace(tzinfo=timezone.utc).strftime(TIME_FORMAT)
+                if comparison_date > saved_time:
+                    self.logger.info(
+                        f"Saved time ({saved_time}) exceeds cut off, moving to ({comparison_date})."
+                    )
+                    state[cb_type_time] = comparison_date
 
         alerts_start = state.get(LAST_ALERT_TIME)
         observation_start = state.get(LAST_OBSERVATION_TIME)
@@ -260,3 +274,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             f"and observations='{observation_start}'"
         )
         return alerts_start, observation_start
+
+    @staticmethod
+    def _get_current_time():
+        return datetime.now(timezone.utc)
