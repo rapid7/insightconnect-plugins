@@ -22,12 +22,12 @@ Manage your firewalls and block malicious hosts through this plugin.
 
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|credentials|credential_username_password|None|True|Username and password|None|{"username":"user1", "password":"mypassword"}|
-|port|integer|443|False|The port number for provided host|None|443|
-|url|string|None|True|Base URL for the SonicWall endpoint|None|https://www.example.com|
-|verify_ssl|boolean|True|False|Check the server's SSL certificate|None|True|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|credentials|credential_username_password|None|True|Username and password|None|{"username":"user1", "password":"mypassword"}|None|None|
+|port|integer|443|False|The port number for provided host|None|443|None|None|
+|url|string|None|True|Base URL for the SonicWall endpoint|None|https://www.example.com|None|None|
+|verify_ssl|boolean|True|False|Check the server's SSL certificate|None|True|None|None|
 
 Example input:
 
@@ -54,10 +54,10 @@ This action is used to add address object (FQDN, MAC, IPv4 or IPv6) to group (IP
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|address_object|string|None|True|Name of the address object|None|MaliciousHost|
-|group|string|None|True|Name of the address group to add the address object to|None|BlockList|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|address_object|string|None|True|Name of the address object|None|MaliciousHost|None|None|
+|group|string|None|True|Name of the address group to add the address object to|None|BlockList|None|None|
   
 Example input:
 
@@ -108,11 +108,11 @@ This action is used to check that a host or address object is in an address grou
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|address|string|None|True|Address Object name, or IP, CIDR, or domain name when Enable Search is set to true|None|MaliciousHost|
-|enable_search|boolean|False|False|When enabled, search for contents of Address Objects for an IP, CIDR or domain. This is useful when you don't know the Address Object by its name|None|True|
-|group|string|None|True|Name of address group to check|None|InsightConnect Block List|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|address|string|None|True|Address Object name, or IP, CIDR, or domain name when Enable Search is set to true|None|MaliciousHost|None|None|
+|enable_search|boolean|False|False|When enabled, search for contents of Address Objects for an IP, CIDR or domain. This is useful when you don't know the Address Object by its name|None|True|None|None|
+|group|string|None|True|Name of address group to check|None|InsightConnect Block List|None|None|
   
 Example input:
 
@@ -154,13 +154,13 @@ This action is used to creates a new address object
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|address|string|None|True|IP, CIDR, or domain name to assign to the Address Object|None|example.com|
-|address_object|string|None|False|Name of the address object, defaults to value address if no name is given|None|MaliciousHost|
-|skip_private_address|boolean|None|True|If set to true, any addresses that are defined in the RFC1918 space will not be blocked. e.g. 10/8, 172.16/12, 192.168/16|None|True|
-|whitelist|[]string|None|False|This list contains a set of hosts that should not be blocked. This can include IPs, CIDRs, and domains|None|["198.51.100.100", "192.0.2.0/24", "example.com"]|
-|zone|string|WAN|True|Name of the zone where the new object will be placed|None|WAN|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|address|string|None|True|IP, CIDR, or domain name to assign to the Address Object|None|example.com|None|None|
+|address_object|string|None|False|Name of the address object, defaults to value address if no name is given|None|MaliciousHost|None|None|
+|skip_private_address|boolean|None|True|If set to true, any addresses that are defined in the RFC1918 space will not be blocked. e.g. 10/8, 172.16/12, 192.168/16|None|True|None|None|
+|whitelist|[]string|None|False|This list contains a set of hosts that should not be blocked. This can include IPs, CIDRs, and domains|None|["198.51.100.100", "192.0.2.0/24", "example.com"]|None|None|
+|zone|string|WAN|True|Name of the zone where the new object will be placed|None|WAN|None|None|
   
 Example input:
 
@@ -216,9 +216,9 @@ This action is used to deletes an address object
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|address_object|string|None|True|Name of the address object to delete|None|MaliciousHost|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|address_object|string|None|True|Name of the address object to delete|None|MaliciousHost|None|None|
   
 Example input:
 
@@ -264,10 +264,10 @@ This action is used to deletes an address object from an address group
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|address_object|string|None|True|Name of the address object|None|MaliciousHost|
-|group|string|None|True|Name of the address group|None|InsightConnect Block List|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|address_object|string|None|True|Name of the address object|None|MaliciousHost|None|None|
+|group|string|None|True|Name of the address group|None|InsightConnect Block List|None|None|
   
 Example input:
 
@@ -355,6 +355,7 @@ Example output:
 
 # Version History
 
+* 1.3.5 - `Add Address Object to Group`: Fixed issue with payload syntax
 * 1.3.4 - Updated SDK to the latest version | Updated objects checking
 * 1.3.3 - Updated SDK to the latest version | Extended actions logging
 * 1.3.2 - Updated SDK to the latest version to address memory usage issue | Fixed connection test
