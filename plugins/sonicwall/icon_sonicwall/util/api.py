@@ -63,10 +63,28 @@ class SonicWallAPI:
     def get_object_type(self, name: str) -> str:
         return self.get_address_object(name).get("object_type")
 
-    def add_address_object_to_group(self, group_type: str, group_name: str, payload: Dict[str, Any]) -> Dict[str, Any]:
-        return self._make_request(
-            "PUT", f"address-groups/{group_type}/name/{group_name}", json_data=payload, commit_pending_changes=True
-        )
+    def add_address_object_to_group(
+        self, group_type: str, group_name: str, object_type: str, object_name: str
+    ) -> Dict[str, Any]:
+        data = {
+            "address_group": {
+                group_type: {
+                    "name": group_name,
+                    "address_object": {object_type: [{"name": object_name}]},
+                }
+            }
+        }
+        for payload in [data, {"address_groups": [data.get("address_group", {})]}]:
+            try:
+                return self._make_request(
+                    "PUT",
+                    f"address-groups/{group_type}/name/{group_name}",
+                    json_data=payload,
+                    commit_pending_changes=True,
+                )
+            except PluginException as error:
+                if "E_SYNTAX" not in error.data:
+                    raise
 
     def create_address_object(self, object_type: str, payload: Dict[str, Any]) -> Dict[str, Any]:
         if object_type == "cidr":
