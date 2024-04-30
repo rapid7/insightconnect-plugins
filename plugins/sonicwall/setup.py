@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="sonicwall-rapid7-plugin",
-      version="1.3.4",
+      version="1.3.5",
       description="Manage firewalls and block hosts with SonicWall firewalls",
       author="rapid7",
       author_email="",
