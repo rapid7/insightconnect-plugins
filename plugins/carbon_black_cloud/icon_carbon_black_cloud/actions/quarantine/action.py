@@ -38,7 +38,7 @@ class Quarantine(insightconnect_plugin_runtime.Action):
         }
 
         url = f"{self.connection.base_url}/appservices/v6/orgs/{self.connection.org_key}/device_actions"
-        self.connection.post_to_api(url, payload)
+        self.connection.request_api(url, payload)
 
         # This API returns 204 no content if successful, we have to assume the state was applied on a successful call
         return {Output.QUARANTINED: quarantine_state}

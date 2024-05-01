@@ -20,18 +20,24 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "API ID",
       "description": "API ID",
+      "placeholder": "APP ID",
+      "tooltip": "Enter the API ID from your Carbon Black Account.",
       "order": 1
     },
     "api_secret_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Secret Key",
       "description": "API secret key",
+      "placeholder": "API Secret Key",
+      "tooltip": "Enter your Carbon Black Cloud API Secret Key.",
       "order": 2
     },
     "org_key": {
       "type": "string",
       "title": "Org Key",
       "description": "Organization Key",
+      "placeholder": "Org Key",
+      "tooltip": "Enter the Carbon Black Cloud Org Key. To obtain the Org Key, log in to your Carbon Black Cloud account and go to Settings > API Access > API Keys.",
       "order": 3
     },
     "url": {
@@ -39,6 +45,8 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "URL",
       "description": "The Carbon Black Cloud URL you use. You can find this by looking at the web address of your Carbon Black Cloud console",
       "default": "defense.conferdeploy.net",
+      "placeholder": "URL",
+      "tooltip": "To determine which URL to select, login to your Carbon Black Cloud account and refer to the URL displayed in the address bar.",
       "enum": [
         "defense-eap01.conferdeploy.net",
         "dashboard.confer.net",
