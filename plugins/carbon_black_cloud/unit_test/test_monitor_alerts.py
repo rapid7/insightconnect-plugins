@@ -32,6 +32,8 @@ from responses.task_test_data import (
     observation_job_not_finished,
     task_401_on_second_request,
     task_403_on_third_request,
+    observation_job_exceeded,
+    observation_job_not_finished_but_parsed,
 )
 
 import os
@@ -94,17 +96,26 @@ class TestMonitorAlerts(TestCase):
                 observation_job_not_finished,
                 1,  # 1 alert after dedupe and 0 observations as job not finished
             ],
+            [
+                "subsequent run - observations not finished but job time has exceeded",
+                observation_job_exceeded.copy(),
+                ("first_alerts", "observation_not_finished", "not_used_response"),
+                observation_job_not_finished_but_parsed,
+                4,  # all 2 alerts and the 2 observations
+            ],
         ]
     )
+    @patch("logging.Logger.info")
     def test_monitor_alert_happy_paths(
         self,
-        mock_req: MagicMock,
-        _mock_date: MagicMock,
         test: str,
         test_state: Dict[str, str],
         mocked_responses: Tuple[str, str, str],
         state_output: Dict[str, str],
         logs: int,
+        mock_logger: MagicMock,
+        mock_req: MagicMock,
+        _mock_date: MagicMock,
     ):
         mock_req.side_effect = [
             mock_conditions(200, file_name=mocked_responses[0]),
@@ -117,6 +128,10 @@ class TestMonitorAlerts(TestCase):
         self.assertEqual(expected_has_more_pages, has_more_pages)
         self.assertEqual(logs, len(response))
         self.assertDictEqual(state_output, new_state)
+
+        if "job time has exceeded" in test:
+            log_msg = mock_logger.call_args_list[8][0][0]  # 8th logger.info is when we log if job time exceeded
+            self.assertIn("has exceeded max run time", log_msg)
 
     def test_too_many_requests_adds_rate_limiting(self, mock_req: MagicMock, _mock_date: MagicMock):
         """

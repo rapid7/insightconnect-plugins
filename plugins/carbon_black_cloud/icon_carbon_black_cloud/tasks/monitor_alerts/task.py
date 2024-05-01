@@ -21,6 +21,7 @@ LAST_ALERT_HASHES = "last_alert_hashes"
 LAST_OBSERVATION_TIME = "last_observation_time"
 LAST_OBSERVATION_HASHES = "last_observation_hashes"
 LAST_OBSERVATION_JOB = "last_observation_job"
+LAST_OBSERVATION_JOB_TIME = "last_observation_job_time"
 
 # CB can return 10K per API and suggest that if more than this is returned to then query from last event time.
 # To prevent overloading IDR/PIF drop this limit to 2.5k on each endpoint.
@@ -148,6 +149,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 f"Will query this after polling for alerts..."
             )
             state[LAST_OBSERVATION_JOB] = observation_job_id
+            # track when our jobs have been created to avoid them never finishing. Used in `_check_if_job_time_exceeded`
+            state[LAST_OBSERVATION_JOB_TIME] = self._get_current_time().strftime(TIME_FORMAT)
 
             if not state.get(LAST_OBSERVATION_TIME):
                 # First run of trying to get observations, save the start time for usage in `_dedupe_and_get_last_time`
@@ -167,10 +170,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             url,
             request_method="GET",
         )
-        if observation_json.get("contacted") != observation_json.get("completed"):
-            self.logger.info("Job is not yet finished running, will get results in next task execution...")
-            has_more_pages = True  # trigger again as it should be finished imminently (jobs run for a max of 3 minutes)
-        else:
+        job_time_exceeded = self._check_if_job_time_exceeded(state.get(LAST_OBSERVATION_JOB_TIME))
+        job_completed = observation_json.get("contacted") == observation_json.get("completed")
+        if job_completed or job_time_exceeded:
             # only observations if the job is completed otherwise it is partial results and these are not sorted
             observations = observation_json.get("results", [])
             if observations:
@@ -184,6 +186,11 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                     has_more_pages = True
             # remove the job ID as this is completed and next run we want to trigger a new one
             del state[LAST_OBSERVATION_JOB]
+            del state[LAST_OBSERVATION_JOB_TIME]
+        else:
+            self.logger.info("Job is not yet finished running, will get results in next task execution...")
+            has_more_pages = True  # trigger again as it should be finished imminently (jobs run for a max of 3 minutes)
+
         self.logger.info(
             f"{LAST_OBSERVATION_TIME} set to: {state[LAST_OBSERVATION_TIME]}, has_more_pages={has_more_pages}"
         )
@@ -272,6 +279,22 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             f"and observations='{observation_start}'"
         )
         return alerts_start, observation_start
+
+    def _check_if_job_time_exceeded(self, job_start_time: str) -> bool:
+        """
+        Jobs can only run within CB for a maximum of 3 minutes, allow a time frame of 4 minutes to complete otherwise we
+        then we can assume that the job has been cancelled due to high usage on their platform and there will be
+        a difference of 1 between the contacted and completed values and we should parse the available observations.
+        """
+        job_cut_off = (self._get_current_time() - timedelta(minutes=4)).strftime(TIME_FORMAT)
+
+        if job_cut_off > job_start_time:
+            self.logger.info(
+                f"Job has exceeded max run time. Started at {job_start_time}. Parsing available results..."
+            )
+            return True  # job time no longer valid - parse available results
+
+        return False  # job time is still valid - honor contact vs completed values
 
     @staticmethod
     def _get_current_time():
