@@ -170,7 +170,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             url,
             request_method="GET",
         )
-        job_time_exceeded = self._check_if_job_time_exceeded(state.get(LAST_OBSERVATION_JOB_TIME))
+        job_time_exceeded = self._check_if_job_time_exceeded(state.get(LAST_OBSERVATION_JOB_TIME), job_id)
         job_completed = observation_json.get("contacted") == observation_json.get("completed")
         if job_completed or job_time_exceeded:
             # only observations if the job is completed otherwise it is partial results and these are not sorted
@@ -280,7 +280,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         )
         return alerts_start, observation_start
 
-    def _check_if_job_time_exceeded(self, job_start_time: str) -> bool:
+    def _check_if_job_time_exceeded(self, job_start_time: str, job_id: str) -> bool:
         """
         Jobs can only run within CB for a maximum of 3 minutes, allow a time frame of 4 minutes to complete otherwise we
         then we can assume that the job has been cancelled due to high usage on their platform and there will be
@@ -290,7 +290,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         if job_cut_off > job_start_time:
             self.logger.info(
-                f"Job has exceeded max run time. Started at {job_start_time}. Parsing available results..."
+                f"Job ({job_id}) has exceeded max run time. Started at {job_start_time}. Parsing available results..."
             )
             return True  # job time no longer valid - parse available results
 
