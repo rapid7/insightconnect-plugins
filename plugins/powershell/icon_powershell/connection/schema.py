@@ -53,7 +53,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "script_secret_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Script Secret Key",
-      "description": "Credential secret key available in script as powershell variable (`$secret_key`)",
+      "description": "Credential secret key available in script as PowerShell variable (`$secret_key`)",
       "order": 5
     },
     "script_username_and_password": {
