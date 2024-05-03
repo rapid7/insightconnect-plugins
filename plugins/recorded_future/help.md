@@ -30,10 +30,10 @@ returned in the [STIX](https://stixproject.github.io/about/) format.
   
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_key|credential_secret_key|None|True|API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_key|credential_secret_key|None|True|API key|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+
 Example input:
 
 ```
@@ -48,14 +48,14 @@ Example input:
 
 
 #### Download Domain Risk List
-  
-This action is used to return a risk list of domains matching a filtration rule.
+
+This action is used to return a risk list of domains matching a filtration rule
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|['', 'Historically Reported by Insikt Group', 'C&C Nameserver', 'C&C DNS Name', 'Compromised URL', 'Historical COVID-19-Related Domain Lure', 'Recently Resolved to Host of Many DDNS Names', 'Historically Reported as a Defanged DNS Name', 'Historically Reported by DHS AIS', 'Recent Fast Flux DNS Name', 'Historically Reported Fraudulent Content', 'Historically Reported in Threat List', 'Historically Linked to Cyber Attack', 'Historical Malware Analysis DNS Name', 'Historically Detected Malware Operation', 'Historically Detected Cryptocurrency Mining Techniques', 'Blacklisted DNS Name', 'Historical Phishing Lure', 'Historically Detected Phishing Techniques', 'Active Phishing URL', 'Recorded Future Predictive Risk Model', 'Historical Punycode Domain', 'Ransomware Distribution URL', 'Ransomware Payment DNS Name', 'Recently Reported by Insikt Group', 'Recent COVID-19-Related Domain Lure - Malicious', 'Recent COVID-19-Related Domain Lure - Suspicious', 'Recently Reported as a Defanged DNS Name', 'Recently Reported by DHS AIS', 'Recently Reported Fraudulent Content', 'Recently Linked to Cyber Attack', 'Recent Malware Analysis DNS Name', 'Recently Detected Malware Operation', 'Recently Detected Cryptocurrency Mining Techniques', 'Recent Phishing Lure - Malicious', 'Recent Phishing Lure - Suspicious', 'Recently Detected Phishing Techniques', 'Recent Punycode Domain', 'Recently Referenced by Insikt Group', 'Recently Reported Spam or Unwanted Content', 'Recent Threat Researcher', 'Recently Active Weaponized Domain', 'Recently Defaced Site', 'Historically Referenced by Insikt Group', 'Recently Resolved to Malicious IP', 'Recently Resolved to Suspicious IP', 'Recently Resolved to Unusual IP', 'Recently Resolved to Very Malicious IP', 'Trending in Recorded Future Analyst Community', 'Historically Reported Spam or Unwanted Content', 'Historical Threat Researcher', 'Historically Active Weaponized Domain']|Active Phishing URL|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|["", "Historically Reported by Insikt Group", "C&C Nameserver", "C&C DNS Name", "Compromised URL", "Historical COVID-19-Related Domain Lure", "Recently Resolved to Host of Many DDNS Names", "Historically Reported as a Defanged DNS Name", "Historically Reported by DHS AIS", "Recent Fast Flux DNS Name", "Historically Reported Fraudulent Content", "Historically Reported in Threat List", "Historically Linked to Cyber Attack", "Historical Malware Analysis DNS Name", "Historically Detected Malware Operation", "Historically Detected Cryptocurrency Mining Techniques", "Blacklisted DNS Name", "Historical Phishing Lure", "Historically Detected Phishing Techniques", "Active Phishing URL", "Recorded Future Predictive Risk Model", "Historical Punycode Domain", "Ransomware Distribution URL", "Ransomware Payment DNS Name", "Recently Reported by Insikt Group", "Recent COVID-19-Related Domain Lure - Malicious", "Recent COVID-19-Related Domain Lure - Suspicious", "Recently Reported as a Defanged DNS Name", "Recently Reported by DHS AIS", "Recently Reported Fraudulent Content", "Recently Linked to Cyber Attack", "Recent Malware Analysis DNS Name", "Recently Detected Malware Operation", "Recently Detected Cryptocurrency Mining Techniques", "Recent Phishing Lure - Malicious", "Recent Phishing Lure - Suspicious", "Recently Detected Phishing Techniques", "Recent Punycode Domain", "Recently Referenced by Insikt Group", "Recently Reported Spam or Unwanted Content", "Recent Threat Researcher", "Recently Active Weaponized Domain", "Recently Defaced Site", "Historically Referenced by Insikt Group", "Recently Resolved to Malicious IP", "Recently Resolved to Suspicious IP", "Recently Resolved to Unusual IP", "Recently Resolved to Very Malicious IP", "Trending in Recorded Future Analyst Community", "Historically Reported Spam or Unwanted Content", "Historical Threat Researcher", "Historically Active Weaponized Domain"]|Active Phishing URL|None|None|
   
 Example input:
 
@@ -261,14 +261,14 @@ Example output:
 ```
 
 #### Download Hash Risk List
-  
-This action is used to return a list of hashes matching a specified risk rule.
+
+This action is used to return a list of hashes matching a specified risk rule
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|['', 'Historically Reported in Threat List', 'Large', 'Linked to Attack Vector', 'Linked to Cyber Attack', 'Linked to Malware', 'Linked to Vulnerability', 'Malware SSL Certificate Fingerprint', 'Observed in Underground Virus Testing Sites', 'Positive Malware Verdict', 'Recently Active Targeting Vulnerabilities in the Wild', 'Referenced by Insikt Group', 'Reported by DHS AIS', 'Reported by Insikt Group', 'Threat Researcher', 'Trending in Recorded Future Analyst Community']|Positive Malware Verdict|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|["", "Historically Reported in Threat List", "Large", "Linked to Attack Vector", "Linked to Cyber Attack", "Linked to Malware", "Linked to Vulnerability", "Malware SSL Certificate Fingerprint", "Observed in Underground Virus Testing Sites", "Positive Malware Verdict", "Recently Active Targeting Vulnerabilities in the Wild", "Referenced by Insikt Group", "Reported by DHS AIS", "Reported by Insikt Group", "Threat Researcher", "Trending in Recorded Future Analyst Community"]|Positive Malware Verdict|None|None|
   
 Example input:
 
@@ -387,14 +387,14 @@ Example output:
 ```
 
 #### Download IP Addresses Risk List
-  
-This action is used to fetch a risk list of the IP addresses that match a specified filtration rule.
+
+This action is used to fetch a risk list of the IP addresses that match a specified filtration rule
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|['', 'Threat Actor Used Infrastructure', 'Historically Reported by Insikt Group', 'Inside Possible Bogus BGP Route', 'Historical Botnet Traffic', 'Recently Communicating With C&C Server', 'Nameserver for C&C Server', 'Historical C&C Server', 'Cyber Exploit Signal - Critical', 'Cyber Exploit Signal - Important', 'Cyber Exploit Signal - Medium', 'Recent Host of Many DDNS Names', 'Historically Reported as a Defanged IP', 'Historically Reported by DHS AIS', 'Resolution of Fast Flux DNS Name', 'Historically Reported in Threat List', 'Historical Honeypot Sighting', 'Large', 'Honeypot Host', 'Recently Active C&C Server', 'Recent C&C Server', 'Historically Linked to Intrusion Method', 'Historically Linked to APT', 'Historically Linked to Cyber Attack', 'Malicious Packet Source', 'Malware Delivery', 'Historical Multicategory Blacklist', 'Historical Open Proxies', 'Phishing Host', 'Historical Positive Malware Verdict', 'Recorded Future Predictive Risk Model', 'Actively Communicating C&C Server', 'Recently Reported by Insikt Group', 'Recent Botnet Traffic', 'Current C&C Server', 'Recently Reported as a Defanged IP', 'Recently Reported by DHS AIS', 'Recent Honeypot Sighting', 'Recently Linked to Intrusion Method', 'Recently Linked to APT', 'Recently Linked to Cyber Attack', 'Recent Multicategory Blacklist', 'Recent Open Proxies', 'Recent Positive Malware Verdict', 'Recently Referenced by Insikt Group', 'Recent Spam Source', 'Recent SSH/Dictionary Attacker', 'Recent Bad SSL Association', 'Recent Threat Researcher', 'Recently Defaced Site', 'Historically Referenced by Insikt Group', 'Trending in Recorded Future Analyst Community', 'Historical Spam Source', 'Historical SSH/Dictionary Attacker', 'Historical Bad SSL Association', 'Historical Threat Researcher', 'Tor Node', 'Unusual IP', 'Vulnerable Host']|Malware Delivery|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|["", "Threat Actor Used Infrastructure", "Historically Reported by Insikt Group", "Inside Possible Bogus BGP Route", "Historical Botnet Traffic", "Recently Communicating With C&C Server", "Nameserver for C&C Server", "Historical C&C Server", "Cyber Exploit Signal - Critical", "Cyber Exploit Signal - Important", "Cyber Exploit Signal - Medium", "Recent Host of Many DDNS Names", "Historically Reported as a Defanged IP", "Historically Reported by DHS AIS", "Resolution of Fast Flux DNS Name", "Historically Reported in Threat List", "Historical Honeypot Sighting", "Large", "Honeypot Host", "Recently Active C&C Server", "Recent C&C Server", "Historically Linked to Intrusion Method", "Historically Linked to APT", "Historically Linked to Cyber Attack", "Malicious Packet Source", "Malware Delivery", "Historical Multicategory Blacklist", "Historical Open Proxies", "Phishing Host", "Historical Positive Malware Verdict", "Recorded Future Predictive Risk Model", "Actively Communicating C&C Server", "Recently Reported by Insikt Group", "Recent Botnet Traffic", "Current C&C Server", "Recently Reported as a Defanged IP", "Recently Reported by DHS AIS", "Recent Honeypot Sighting", "Recently Linked to Intrusion Method", "Recently Linked to APT", "Recently Linked to Cyber Attack", "Recent Multicategory Blacklist", "Recent Open Proxies", "Recent Positive Malware Verdict", "Recently Referenced by Insikt Group", "Recent Spam Source", "Recent SSH/Dictionary Attacker", "Recent Bad SSL Association", "Recent Threat Researcher", "Recently Defaced Site", "Historically Referenced by Insikt Group", "Trending in Recorded Future Analyst Community", "Historical Spam Source", "Historical SSH/Dictionary Attacker", "Historical Bad SSL Association", "Historical Threat Researcher", "Tor Node", "Unusual IP", "Vulnerable Host"]|Malware Delivery|None|None|
   
 Example input:
 
@@ -583,14 +583,14 @@ Example output:
 ```
 
 #### Download URL Risk List
-  
+
 This action is used to returns a risk list of URLs matching a filtration
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|list|string|None|False|The risk list to retrieve, left this field blank to retrieve default risk list|['', 'Historically Reported by Insikt Group', 'C&C URL', 'Compromised URL', 'Historically Reported as a Defanged URL', 'Historically Reported by DHS AIS', 'Historically Reported Fraudulent Content', 'Historically Reported in Threat List', 'Large', 'Historically Detected Malicious Browser Exploits', 'Historically Detected Malware Distribution', 'Historically Detected Cryptocurrency Mining Techniques', 'Historically Detected Phishing Techniques', 'Active Phishing URL', 'Positive Malware Verdict', 'Ransomware Distribution URL', 'Recently Reported by Insikt Group', 'Recently Reported as a Defanged URL', 'Recently Reported by DHS AIS', 'Recently Reported Fraudulent Content', 'Recently Detected Malicious Browser Exploits', 'Recently Detected Malware Distribution', 'Recently Detected Cryptocurrency Mining Techniques', 'Recently Detected Phishing Techniques', 'Recent Ransomware Distribution URL', 'Recently Referenced by Insikt Group', 'Recently Reported Spam or Unwanted Content', 'Recently Detected Suspicious Content', 'Recently Active URL on Weaponized Domain', 'Historically Referenced by Insikt Group', 'Historically Reported Spam or Unwanted Content', 'Historically Detected Suspicious Content']|Historically Reported by Insikt Group|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|list|string|None|False|The risk list to retrieve, left this field blank to retrieve default risk list|["", "Historically Reported by Insikt Group", "C&C URL", "Compromised URL", "Historically Reported as a Defanged URL", "Historically Reported by DHS AIS", "Historically Reported Fraudulent Content", "Historically Reported in Threat List", "Large", "Historically Detected Malicious Browser Exploits", "Historically Detected Malware Distribution", "Historically Detected Cryptocurrency Mining Techniques", "Historically Detected Phishing Techniques", "Active Phishing URL", "Positive Malware Verdict", "Ransomware Distribution URL", "Recently Reported by Insikt Group", "Recently Reported as a Defanged URL", "Recently Reported by DHS AIS", "Recently Reported Fraudulent Content", "Recently Detected Malicious Browser Exploits", "Recently Detected Malware Distribution", "Recently Detected Cryptocurrency Mining Techniques", "Recently Detected Phishing Techniques", "Recent Ransomware Distribution URL", "Recently Referenced by Insikt Group", "Recently Reported Spam or Unwanted Content", "Recently Detected Suspicious Content", "Recently Active URL on Weaponized Domain", "Historically Referenced by Insikt Group", "Historically Reported Spam or Unwanted Content", "Historically Detected Suspicious Content"]|Historically Reported by Insikt Group|None|None|
   
 Example input:
 
@@ -702,14 +702,14 @@ Example output:
 ```
 
 #### Download Vulnerability Risk List
-  
-This action is used to fetch a risk list of vulnerabilities matching a specified filtration rule.
+
+This action is used to fetch a risk list of vulnerabilities matching a specified filtration rule
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|['', 'Historically Reported by Insikt Group', 'Web Reporting Prior to CVSS Score', 'Cyber Exploit Signal - Critical', 'Cyber Exploit Signal - Important', 'Cyber Exploit Signal - Medium', 'Historically Exploited in the Wild by Malware', 'Large', 'Linked to Historical Cyber Exploit', 'Historically Linked to Exploit Kit', 'Historically Linked to Malware', 'Historically Linked to Remote Access Trojan', 'Historically Linked to Ransomware', 'Linked to Recent Cyber Exploit', 'Recently Linked to Exploit Kit', 'Recently Linked to Malware', 'Recently Linked to Remote Access Trojan', 'Recently Linked to Ransomware', 'Exploited in the Wild by Malware', 'NIST Severity - Critical', 'Duplicate of Vulnerability in NVD', 'NIST Severity - High', 'NIST Severity - Low', 'NIST Severity - Medium', 'Web Reporting Prior to NVD Disclosure', 'Historical Unverified Proof of Concept Available', 'Historical Verified Proof of Concept Available', 'Historical Verified Proof of Concept Available Using Remote Execution', 'Recently Reported by Insikt Group', 'Exploited in the Wild by Recently Active Malware', 'Recent Unverified Proof of Concept Available', 'Recent Verified Proof of Concept Available', 'Recent Verified Proof of Concept Available Using Remote Execution', 'Recently Referenced by Insikt Group', 'Recently Linked to Penetration Testing Tools', 'Historically Referenced by Insikt Group', 'Historically Linked to Penetration Testing Tools']|NIST Severity Critical|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|["", "Historically Reported by Insikt Group", "Web Reporting Prior to CVSS Score", "Cyber Exploit Signal - Critical", "Cyber Exploit Signal - Important", "Cyber Exploit Signal - Medium", "Historically Exploited in the Wild by Malware", "Large", "Linked to Historical Cyber Exploit", "Historically Linked to Exploit Kit", "Historically Linked to Malware", "Historically Linked to Remote Access Trojan", "Historically Linked to Ransomware", "Linked to Recent Cyber Exploit", "Recently Linked to Exploit Kit", "Recently Linked to Malware", "Recently Linked to Remote Access Trojan", "Recently Linked to Ransomware", "Exploited in the Wild by Malware", "NIST Severity - Critical", "Duplicate of Vulnerability in NVD", "NIST Severity - High", "NIST Severity - Low", "NIST Severity - Medium", "Web Reporting Prior to NVD Disclosure", "Historical Unverified Proof of Concept Available", "Historical Verified Proof of Concept Available", "Historical Verified Proof of Concept Available Using Remote Execution", "Recently Reported by Insikt Group", "Exploited in the Wild by Recently Active Malware", "Recent Unverified Proof of Concept Available", "Recent Verified Proof of Concept Available", "Recent Verified Proof of Concept Available Using Remote Execution", "Recently Referenced by Insikt Group", "Recently Linked to Penetration Testing Tools", "Historically Referenced by Insikt Group", "Historically Linked to Penetration Testing Tools"]|NIST Severity Critical|None|None|
   
 Example input:
 
@@ -781,8 +781,8 @@ Example output:
 ```
 
 #### List Domain Risk Rules
-  
-This action is used to list available filtration rules for domain risk lists.
+
+This action is used to list available filtration rules for domain risk lists
 
 ##### Input
   
@@ -828,8 +828,8 @@ Example output:
 ```
 
 #### List Hash Risk Rules
-  
-This action is used to list available filtration rules for hash risk lists.
+
+This action is used to list available filtration rules for hash risk lists
 
 ##### Input
   
@@ -869,8 +869,8 @@ Example output:
 ```
 
 #### List IP Addresses Risk Rules
-  
-This action is used to list available filtration rules for IP address risk lists.
+
+This action is used to list available filtration rules for IP address risk lists
 
 ##### Input
   
@@ -916,7 +916,7 @@ Example output:
 ```
 
 #### List URL Risk Rules
-  
+
 This action is used to list available filtration rules for URL risk lists
 
 ##### Input
@@ -947,8 +947,8 @@ Example output:
 ```
 
 #### List Vulnerability Risk Rules
-  
-This action is used to retrieve available filtration rules for vulnerability risk lists.
+
+This action is used to retrieve available filtration rules for vulnerability risk lists
 
 ##### Input
   
@@ -986,14 +986,14 @@ Example output:
 ```
 
 #### Lookup Alert
-  
+
 This action is used to get information about an Alert
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|alert_id|string|None|True|Alert ID|None|fhS1El|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|alert_id|string|None|True|Alert ID|None|fhS1El|None|None|
   
 Example input:
 
@@ -1117,15 +1117,15 @@ Example output:
 ```
 
 #### Lookup Domain
-  
+
 This action is used to return information about a specific domain entry
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|comment|string|None|False|Add a comment to a domain|None|Domain look up performed by InsightConnect|
-|domain|string|None|True|Domain|None|example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|comment|string|None|False|Add a comment to a domain|None|Domain look up performed by InsightConnect|None|None|
+|domain|string|None|True|Domain|None|example.com|None|None|
   
 Example input:
 
@@ -1153,14 +1153,14 @@ Example output:
 ```
 
 #### Lookup Entity List
-  
-This action is used to fetch a specified entity list by ID.
+
+This action is used to fetch a specified entity list by ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|entity_list_id|string|None|True|Entity list ID, obtained from the 'Search Entity lists' action|None|report:Oe5eg5|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|entity_list_id|string|None|True|Entity list ID, obtained from the 'Search Entity lists' action|None|report:Oe5eg5|None|None|
   
 Example input:
 
@@ -1202,15 +1202,15 @@ Example output:
 ```
 
 #### Lookup Hash
-  
+
 This action is used to used to retrieve information about a specified hash
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|comment|string|None|False|Add a comment to a hash|None|Hash look up performed by InsightConnect|
-|hash|string|None|True|Hash|None|44d88612fea8a8f36de82e1278abb02f|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|comment|string|None|False|Add a comment to a hash|None|Hash look up performed by InsightConnect|None|None|
+|hash|string|None|True|Hash|None|44d88612fea8a8f36de82e1278abb02f|None|None|
   
 Example input:
 
@@ -1306,15 +1306,15 @@ Example output:
 ```
 
 #### Lookup IP Address
-  
+
 This action is used to query for data related to a specific IP address
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|IP_address|string|None|True|IP address|None|198.51.100.100|
-|comment|string|None|False|Add comment to IP address lookup for Recorded Future|None|IP look up performed by InsightConnect|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|IP_address|string|None|True|IP address|None|198.51.100.100|None|None|
+|comment|string|None|False|Add comment to IP address lookup for Recorded Future|None|IP look up performed by InsightConnect|None|None|
   
 Example input:
 
@@ -1452,14 +1452,14 @@ Example output:
 ```
 
 #### Lookup Malware
-  
-This action is used to return information about a specific malware entry by ID.
+
+This action is used to return information about a specific malware entry by ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|malware_ID|string|None|True|Malware ID|None|ShciZX|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|malware_ID|string|None|True|Malware ID|None|ShciZX|None|None|
   
 Example input:
 
@@ -1534,15 +1534,15 @@ Example output:
 ```
 
 #### Lookup URL
-  
+
 This action is used to retrieve information about a specified URL
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|comment|string|None|False|Add a comment to an IP address lookup for Recorded Future|None|URL look up performed by InsightConnect|
-|url|string|None|True|URL|None|https://example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|comment|string|None|False|Add a comment to an IP address lookup for Recorded Future|None|URL look up performed by InsightConnect|None|None|
+|url|string|None|True|URL|None|https://example.com|None|None|
   
 Example input:
 
@@ -1608,14 +1608,14 @@ Example output:
 ```
 
 #### Lookup Vulnerability
-  
-This action is used to fetch information about a specific vulnerability by CVE or RF ID.
+
+This action is used to fetch information about a specific vulnerability by CVE or RF ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|string|None|True|CVE or RF ID|None|CVE-2014-0160|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|CVE or RF ID|None|CVE-2014-0160|None|None|
   
 Example input:
 
@@ -1642,20 +1642,20 @@ Example output:
 ```
 
 #### Search Domains
-  
-This action is used to search for results related to a specific parent domain.
+
+This action is used to search for results related to a specific parent domain
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|direction|string|asc|True|Sort results ascending/descending|['asc', 'desc']|asc|
-|from|number|0|True|Number of initial records to skip|None|0|
-|limit|number|None|True|Number of results to retrieve, up to 100|None|10|
-|orderby|string|None|True|Which property to sort the results by|['Created', 'Firstseen', 'Lastseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Riskscore|
-|parent|string|None|True|Parent domain, if any|None|example.com|
-|riskRule|string|None|False|Filters the results by risk rule|['', 'Historically Reported by Insikt Group', 'Newly Registered Certificate With Potential for Abuse - DNS Sandwich', 'Newly Registered Certificate With Potential for Abuse - Typo or Homograph', 'C&C Nameserver', 'C&C DNS Name', 'C&C URL', 'Compromised URL', 'Historical COVID-19-Related Domain Lure', 'Recently Resolved to Host of Many DDNS Names', 'Historically Reported as a Defanged DNS Name', 'Historically Reported by DHS AIS', 'Recent Fast Flux DNS Name', 'Historically Reported Fraudulent Content', 'Historically Reported in Threat List', 'Historically Linked to Cyber Attack', 'Historical Malware Analysis DNS Name', 'Historically Detected Malware Operation', 'Historically Detected Cryptocurrency Mining Techniques', 'Blacklisted DNS Name', 'Historical Phishing Lure', 'Historically Detected Phishing Techniques', 'Active Phishing URL', 'Recorded Future Predictive Risk Model', 'Historical Punycode Domain', 'Ransomware Distribution URL', 'Ransomware Payment DNS Name', 'Recently Reported by Insikt Group', 'Recent COVID-19-Related Domain Lure - Malicious', 'Recent COVID-19-Related Domain Lure - Suspicious', 'Recently Reported as a Defanged DNS Name', 'Recently Reported by DHS AIS', 'Recently Reported Fraudulent Content', 'Recently Linked to Cyber Attack', 'Recent Malware Analysis DNS Name', 'Recently Detected Malware Operation', 'Recently Detected Cryptocurrency Mining Techniques', 'Recent Phishing Lure - Malicious', 'Recent Phishing Lure - Suspicious', 'Recently Detected Phishing Techniques', 'Recent Punycode Domain', 'Recently Referenced by Insikt Group', 'Recently Reported Spam or Unwanted Content', 'URL Recently Linked to Suspicious Content', 'Recent Threat Researcher', 'Recent Typosquat Similarity - DNS Sandwich', 'Recent Typosquat Similarity - Typo or Homograph', 'Recently Active Weaponized Domain', 'Recently Defaced Site', 'Historically Referenced by Insikt Group', 'Recently Resolved to Malicious IP', 'Recently Resolved to Suspicious IP', 'Recently Resolved to Unusual IP', 'Recently Resolved to Very Malicious IP', 'Trending in Recorded Future Analyst Community', 'Historically Reported Spam or Unwanted Content', 'URL Historically Linked to Suspicious Content', 'Historical Threat Researcher', 'Historical Typosquat Similarity - DNS Sandwich', 'Historical Typosquat Similarity - Typo or Homograph', 'Historically Active Weaponized Domain']|Active Phishing URL|
-|riskScore|string|None|False|Filters the results by risk score|None|[1,100]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|direction|string|asc|True|Sort results ascending/descending|["asc", "desc"]|asc|None|None|
+|from|number|0|True|Number of initial records to skip|None|0|None|None|
+|limit|number|None|True|Number of results to retrieve, up to 100|None|10|None|None|
+|orderby|string|None|True|Which property to sort the results by|["Created", "Firstseen", "Lastseen", "Modified", "Riskscore", "Rules", "Sevendayshits", "Sixtydayshits", "Totalhits"]|Riskscore|None|None|
+|parent|string|None|True|Parent domain, if any|None|example.com|None|None|
+|riskRule|string|None|False|Filters the results by risk rule|["", "Historically Reported by Insikt Group", "Newly Registered Certificate With Potential for Abuse - DNS Sandwich", "Newly Registered Certificate With Potential for Abuse - Typo or Homograph", "C&C Nameserver", "C&C DNS Name", "C&C URL", "Compromised URL", "Historical COVID-19-Related Domain Lure", "Recently Resolved to Host of Many DDNS Names", "Historically Reported as a Defanged DNS Name", "Historically Reported by DHS AIS", "Recent Fast Flux DNS Name", "Historically Reported Fraudulent Content", "Historically Reported in Threat List", "Historically Linked to Cyber Attack", "Historical Malware Analysis DNS Name", "Historically Detected Malware Operation", "Historically Detected Cryptocurrency Mining Techniques", "Blacklisted DNS Name", "Historical Phishing Lure", "Historically Detected Phishing Techniques", "Active Phishing URL", "Recorded Future Predictive Risk Model", "Historical Punycode Domain", "Ransomware Distribution URL", "Ransomware Payment DNS Name", "Recently Reported by Insikt Group", "Recent COVID-19-Related Domain Lure - Malicious", "Recent COVID-19-Related Domain Lure - Suspicious", "Recently Reported as a Defanged DNS Name", "Recently Reported by DHS AIS", "Recently Reported Fraudulent Content", "Recently Linked to Cyber Attack", "Recent Malware Analysis DNS Name", "Recently Detected Malware Operation", "Recently Detected Cryptocurrency Mining Techniques", "Recent Phishing Lure - Malicious", "Recent Phishing Lure - Suspicious", "Recently Detected Phishing Techniques", "Recent Punycode Domain", "Recently Referenced by Insikt Group", "Recently Reported Spam or Unwanted Content", "URL Recently Linked to Suspicious Content", "Recent Threat Researcher", "Recent Typosquat Similarity - DNS Sandwich", "Recent Typosquat Similarity - Typo or Homograph", "Recently Active Weaponized Domain", "Recently Defaced Site", "Historically Referenced by Insikt Group", "Recently Resolved to Malicious IP", "Recently Resolved to Suspicious IP", "Recently Resolved to Unusual IP", "Recently Resolved to Very Malicious IP", "Trending in Recorded Future Analyst Community", "Historically Reported Spam or Unwanted Content", "URL Historically Linked to Suspicious Content", "Historical Threat Researcher", "Historical Typosquat Similarity - DNS Sandwich", "Historical Typosquat Similarity - Typo or Homograph", "Historically Active Weaponized Domain"]|Active Phishing URL|None|None|
+|riskScore|string|None|False|Filters the results by risk score|None|[1,100]|None|None|
   
 Example input:
 
@@ -1712,15 +1712,15 @@ Example output:
 ```
 
 #### Search Entity Lists
-  
+
 This action is used to perform a freetext search across all Recorded Future entity types (IP address, domain, hash, 
-malware, and vulnerability).
+malware, and vulnerability)
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|freetext|string|None|True|Freetext search|None|example|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|freetext|string|None|True|Freetext search|None|example|None|None|
   
 Example input:
 
@@ -1762,20 +1762,20 @@ Example output:
 ```
 
 #### Search Hashes
-  
-This action is used to search for data related to hashes of a specified type.
+
+This action is used to search for data related to hashes of a specified type
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|algorithm|string|None|True|Hashing algorithm to search by|['MD5', 'SHA-1', 'SHA-256']|SHA-1|
-|direction|string|asc|True|Sort results ascending/descending|['asc', 'desc']|asc|
-|from|number|0|True|Number of initial records to skip|None|0|
-|limit|number|None|True|Number of results to retrieve, up to 100|None|10|
-|orderby|string|None|True|Which property to sort the results by|['Created', 'Lastseen', 'Firstseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Riskscore|
-|riskRule|string|None|False|Filters the results by risk rule|['', 'Reported by Insikt Group', 'Historically Reported in Threat List', 'Linked to Cyber Attack', 'Linked to Malware', 'Linked to Attack Vector', 'Linked to Vulnerability', 'Malware SSL Certificate Fingerprint', 'Observed in Underground Virus Testing Sites', 'Positive Malware Verdict', 'Recently Active Targeting Vulnerabilities in the Wild', 'Referenced by Insikt Group', 'Trending in Recorded Future Analyst Community', 'Threat Researcher']|Positive Malware Verdict|
-|riskScore|string|None|False|Filters the results by risk score|None|[1,100]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|algorithm|string|None|True|Hashing algorithm to search by|["MD5", "SHA-1", "SHA-256"]|SHA-1|None|None|
+|direction|string|asc|True|Sort results ascending/descending|["asc", "desc"]|asc|None|None|
+|from|number|0|True|Number of initial records to skip|None|0|None|None|
+|limit|number|None|True|Number of results to retrieve, up to 100|None|10|None|None|
+|orderby|string|None|True|Which property to sort the results by|["Created", "Lastseen", "Firstseen", "Modified", "Riskscore", "Rules", "Sevendayshits", "Sixtydayshits", "Totalhits"]|Riskscore|None|None|
+|riskRule|string|None|False|Filters the results by risk rule|["", "Reported by Insikt Group", "Historically Reported in Threat List", "Linked to Cyber Attack", "Linked to Malware", "Linked to Attack Vector", "Linked to Vulnerability", "Malware SSL Certificate Fingerprint", "Observed in Underground Virus Testing Sites", "Positive Malware Verdict", "Recently Active Targeting Vulnerabilities in the Wild", "Referenced by Insikt Group", "Trending in Recorded Future Analyst Community", "Threat Researcher"]|Positive Malware Verdict|None|None|
+|riskScore|string|None|False|Filters the results by risk score|None|[1,100]|None|None|
   
 Example input:
 
@@ -1809,20 +1809,20 @@ Example output:
 ```
 
 #### Search IP Addresses
-  
-This action is used to query for data related to a specified IP range.
+
+This action is used to query for data related to a specified IP range
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|direction|string|asc|True|Sort results ascending/descending|['asc', 'desc']|asc|
-|from|number|0|True|Number of initial records to skip|None|0|
-|ip_range|string|None|True|IP address range to search|None|198.51.100.0/24|
-|limit|number|None|True|Number of results to retrieve, up to 100|None|10|
-|orderby|string|None|True|Which property to sort the results by|['Created', 'Lastseen', 'Firstseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Lastseen|
-|riskRule|string|None|False|Filters the results by risk rule|['', 'Threat Actor Used Infrastructure', 'Historically Reported by Insikt Group', 'Inside Possible Bogus BGP Route', 'Historical Botnet Traffic', 'Recently Communicating With C&C Server', 'Nameserver for C&C Server', 'Historical C&C Server', 'Cyber Exploit Signal - Critical', 'Cyber Exploit Signal - Important', 'Cyber Exploit Signal - Medium', 'Recent Host of Many DDNS Names', 'Historically Reported as a Defanged IP', 'Historically Reported by DHS AIS', 'Resolution of Fast Flux DNS Name', 'Historically Reported in Threat List', 'Historical Honeypot Sighting', 'Honeypot Host', 'Recently Active C&C Server', 'Recent C&C Server', 'Historically Linked to Intrusion Method', 'Historically Linked to APT', 'Historically Linked to Cyber Attack', 'Malicious Packet Source', 'Malware Delivery', 'Historical Multicategory Blacklist', 'Historical Open Proxies', 'Phishing Host', 'Historical Positive Malware Verdict', 'Recorded Future Predictive Risk Model', 'Actively Communicating C&C Server', 'Recently Reported by Insikt Group', 'Recent Botnet Traffic', 'Current C&C Server', 'Recently Reported as a Defanged IP', 'Recently Reported by DHS AIS', 'Recent Honeypot Sighting', 'Recently Linked to Intrusion Method', 'Recently Linked to APT', 'Recently Linked to Cyber Attack', 'Recent Multicategory Blacklist', 'Recent Open Proxies', 'Recent Positive Malware Verdict', 'Recently Referenced by Insikt Group', 'Recent Spam Source', 'Recent SSH/Dictionary Attacker', 'Recent Bad SSL Association', 'Recent Threat Researcher', 'Recently Defaced Site', 'Historically Referenced by Insikt Group', 'Trending in Recorded Future Analyst Community', 'Historical Spam Source', 'Historical SSH/Dictionary Attacker', 'Historical Bad SSL Association', 'Historical Threat Researcher', 'Tor Node', 'Unusual IP', 'Vulnerable Host']|Malware Delivery|
-|riskScore|string|None|False|Filters the results by risk score|None|[1,100]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|direction|string|asc|True|Sort results ascending/descending|["asc", "desc"]|asc|None|None|
+|from|number|0|True|Number of initial records to skip|None|0|None|None|
+|ip_range|string|None|True|IP address range to search|None|198.51.100.0/24|None|None|
+|limit|number|None|True|Number of results to retrieve, up to 100|None|10|None|None|
+|orderby|string|None|True|Which property to sort the results by|["Created", "Lastseen", "Firstseen", "Modified", "Riskscore", "Rules", "Sevendayshits", "Sixtydayshits", "Totalhits"]|Lastseen|None|None|
+|riskRule|string|None|False|Filters the results by risk rule|["", "Threat Actor Used Infrastructure", "Historically Reported by Insikt Group", "Inside Possible Bogus BGP Route", "Historical Botnet Traffic", "Recently Communicating With C&C Server", "Nameserver for C&C Server", "Historical C&C Server", "Cyber Exploit Signal - Critical", "Cyber Exploit Signal - Important", "Cyber Exploit Signal - Medium", "Recent Host of Many DDNS Names", "Historically Reported as a Defanged IP", "Historically Reported by DHS AIS", "Resolution of Fast Flux DNS Name", "Historically Reported in Threat List", "Historical Honeypot Sighting", "Honeypot Host", "Recently Active C&C Server", "Recent C&C Server", "Historically Linked to Intrusion Method", "Historically Linked to APT", "Historically Linked to Cyber Attack", "Malicious Packet Source", "Malware Delivery", "Historical Multicategory Blacklist", "Historical Open Proxies", "Phishing Host", "Historical Positive Malware Verdict", "Recorded Future Predictive Risk Model", "Actively Communicating C&C Server", "Recently Reported by Insikt Group", "Recent Botnet Traffic", "Current C&C Server", "Recently Reported as a Defanged IP", "Recently Reported by DHS AIS", "Recent Honeypot Sighting", "Recently Linked to Intrusion Method", "Recently Linked to APT", "Recently Linked to Cyber Attack", "Recent Multicategory Blacklist", "Recent Open Proxies", "Recent Positive Malware Verdict", "Recently Referenced by Insikt Group", "Recent Spam Source", "Recent SSH/Dictionary Attacker", "Recent Bad SSL Association", "Recent Threat Researcher", "Recently Defaced Site", "Historically Referenced by Insikt Group", "Trending in Recorded Future Analyst Community", "Historical Spam Source", "Historical SSH/Dictionary Attacker", "Historical Bad SSL Association", "Historical Threat Researcher", "Tor Node", "Unusual IP", "Vulnerable Host"]|Malware Delivery|None|None|
+|riskScore|string|None|False|Filters the results by risk score|None|[1,100]|None|None|
   
 Example input:
 
@@ -1879,20 +1879,20 @@ Example output:
 ```
 
 #### Search Malware
-  
-This action is used to search for data related to malware.
+
+This action is used to search for data related to malware
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|direction|string|asc|True|Sort results ascending/descending|['asc', 'desc']|asc|
-|firstSeen|string|None|False|Filters the results by first seen|None|2016-06-15 07:54:38.286000|
-|freetext|string|None|False|Freetext search|None|example|
-|from|number|0|True|Number of initial records to skip|None|0|
-|limit|number|None|True|Number of results to retrieve, up to 100|None|10|
-|list|string|None|False|Filters the results by list ID|None|fKXuF0|
-|orderby|string|None|True|Which property to sort the results by|['Created', 'Lastseen', 'Firstseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Riskscore|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|direction|string|asc|True|Sort results ascending/descending|["asc", "desc"]|asc|None|None|
+|firstSeen|string|None|False|Filters the results by first seen|None|2016-06-15 07:54:38.286000|None|None|
+|freetext|string|None|False|Freetext search|None|example|None|None|
+|from|number|0|True|Number of initial records to skip|None|0|None|None|
+|limit|number|None|True|Number of results to retrieve, up to 100|None|10|None|None|
+|list|string|None|False|Filters the results by list ID|None|fKXuF0|None|None|
+|orderby|string|None|True|Which property to sort the results by|["Created", "Lastseen", "Firstseen", "Modified", "Riskscore", "Rules", "Sevendayshits", "Sixtydayshits", "Totalhits"]|Riskscore|None|None|
   
 Example input:
 
@@ -1946,19 +1946,19 @@ Example output:
 ```
 
 #### Search URLs
-  
+
 This action is used to search for data related to URLs
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|direction|string|None|False|Sort results ascending/descending|['asc', 'desc']|asc|
-|from|number|None|False|Number of initial records to skip|None|0|
-|limit|number|10|False|Number of results to retrieve, up to 100|None|10|
-|orderby|string|None|False|Which property to sort the results by|['Created', 'Criticality', 'Lastseen', 'Firstseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Riskscore|
-|riskRule|string|None|False|Risk rule of data|['Historically Reported by Insikt Group', 'C&C URL', 'Compromised URL', 'Historically Reported as a Defanged URL', 'Historically Reported by DHS AIS', 'Historically Reported Fraudulent Content', 'Historically Reported in Threat List', 'Historically Detected Malicious Browser Exploits', 'Historically Detected Malware Distribution', 'Historically Detected Cryptocurrency Mining Techniques', 'Historically Detected Phishing Techniques', 'Active Phishing URL', 'Positive Malware Verdict', 'Ransomware Distribution URL', 'Recently Reported by Insikt Group', 'Recently Reported as a Defanged URL', 'Recently Reported by DHS AIS', 'Recently Reported Fraudulent Content', 'Recently Detected Malicious Browser Exploits', 'Recently Detected Malware Distribution', 'Recently Detected Cryptocurrency Mining Techniques', 'Recently Detected Phishing Techniques', 'Recent Ransomware Distribution URL', 'Recently Referenced by Insikt Group', 'Recently Reported Spam or Unwanted Content', 'Recently Detected Suspicious Content', 'Recently Active URL on Weaponized Domain', 'Historically Referenced by Insikt Group', 'Historically Reported Spam or Unwanted Content', 'Historically Detected Suspicious Content']|Historically Reported by Insikt Group|
-|riskScore|string|None|False|Risk score of data|None|[0,100]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|direction|string|None|False|Sort results ascending/descending|["asc", "desc"]|asc|None|None|
+|from|number|None|False|Number of initial records to skip|None|0|None|None|
+|limit|number|10|False|Number of results to retrieve, up to 100|None|10|None|None|
+|orderby|string|None|False|Which property to sort the results by|["Created", "Criticality", "Lastseen", "Firstseen", "Modified", "Riskscore", "Rules", "Sevendayshits", "Sixtydayshits", "Totalhits"]|Riskscore|None|None|
+|riskRule|string|None|False|Risk rule of data|["Historically Reported by Insikt Group", "C&C URL", "Compromised URL", "Historically Reported as a Defanged URL", "Historically Reported by DHS AIS", "Historically Reported Fraudulent Content", "Historically Reported in Threat List", "Historically Detected Malicious Browser Exploits", "Historically Detected Malware Distribution", "Historically Detected Cryptocurrency Mining Techniques", "Historically Detected Phishing Techniques", "Active Phishing URL", "Positive Malware Verdict", "Ransomware Distribution URL", "Recently Reported by Insikt Group", "Recently Reported as a Defanged URL", "Recently Reported by DHS AIS", "Recently Reported Fraudulent Content", "Recently Detected Malicious Browser Exploits", "Recently Detected Malware Distribution", "Recently Detected Cryptocurrency Mining Techniques", "Recently Detected Phishing Techniques", "Recent Ransomware Distribution URL", "Recently Referenced by Insikt Group", "Recently Reported Spam or Unwanted Content", "Recently Detected Suspicious Content", "Recently Active URL on Weaponized Domain", "Historically Referenced by Insikt Group", "Historically Reported Spam or Unwanted Content", "Historically Detected Suspicious Content"]|Historically Reported by Insikt Group|None|None|
+|riskScore|string|None|False|Risk score of data|None|[0,100]|None|None|
   
 Example input:
 
@@ -2079,20 +2079,20 @@ Example output:
 ```
 
 #### Search Vulnerabilities
-  
-This action is used to search for data related to vulnerabilities.
+
+This action is used to search for data related to vulnerabilities
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|direction|string|asc|True|Sort results ascending/descending|['asc', 'desc']|asc|
-|freetext|string|None|True|Text query|None|example|
-|from|number|0|True|Number of initial records to skip|None|0|
-|limit|number|None|True|Number of results to retrieve, up to 100|None|10|
-|orderby|string|None|True|Which property to sort the results by|['Created', 'Lastseen', 'Firstseen', 'Modified', 'Riskscore', 'Rules', 'Sevendayshits', 'Sixtydayshits', 'Totalhits']|Riskscore|
-|riskRule|string|None|False|Filters the results by risk rule|['', 'Historically Reported by Insikt Group', 'Web Reporting Prior to CVSS Score', 'Cyber Exploit Signal - Critical', 'Cyber Exploit Signal - Important', 'Cyber Exploit Signal - Medium', 'Historical Suspected Exploit/Tool Development in the Wild', 'Historical Observed Exploit/Tool Development in the Wild', 'Historically Exploited in the Wild by Malware', 'Linked to Historical Cyber Exploit', 'Historically Linked to Exploit Kit', 'Historically Linked to Malware', 'Historically Linked to Remote Access Trojan', 'Historically Linked to Ransomware', 'Linked to Recent Cyber Exploit', 'Recently Linked to Exploit Kit', 'Recently Linked to Malware', 'Recently Linked to Remote Access Trojan', 'Recently Linked to Ransomware', 'Exploited in the Wild by Malware', 'NIST Severity - Critical', 'Duplicate of Vulnerability in NVD', 'NIST Severity - High', 'NIST Severity - Low', 'NIST Severity - Medium', 'Web Reporting Prior to NVD Disclosure', 'Historical Unverified Proof of Concept Available', 'Historical Verified Proof of Concept Available', 'Historical Verified Proof of Concept Available Using Remote Execution', 'Recently Reported by Insikt Group', 'Recent Suspected Exploit/Tool Development in the Wild', 'Exploited in the Wild by Recently Active Malware', 'Recent Unverified Proof of Concept Available', 'Recent Verified Proof of Concept Available', 'Recent Verified Proof of Concept Available Using Remote Execution', 'Recently Referenced by Insikt Group', 'Recently Linked to Penetration Testing Tools', 'Historically Referenced by Insikt Group', 'Historically Linked to Penetration Testing Tools']|NIST Severity - Critical|
-|riskScore|string|None|False|Filters the results by risk score|None|[1,100]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|direction|string|asc|True|Sort results ascending/descending|["asc", "desc"]|asc|None|None|
+|freetext|string|None|True|Text query|None|example|None|None|
+|from|number|0|True|Number of initial records to skip|None|0|None|None|
+|limit|number|None|True|Number of results to retrieve, up to 100|None|10|None|None|
+|orderby|string|None|True|Which property to sort the results by|["Created", "Lastseen", "Firstseen", "Modified", "Riskscore", "Rules", "Sevendayshits", "Sixtydayshits", "Totalhits"]|Riskscore|None|None|
+|riskRule|string|None|False|Filters the results by risk rule|["", "Historically Reported by Insikt Group", "Web Reporting Prior to CVSS Score", "Cyber Exploit Signal - Critical", "Cyber Exploit Signal - Important", "Cyber Exploit Signal - Medium", "Historical Suspected Exploit/Tool Development in the Wild", "Historical Observed Exploit/Tool Development in the Wild", "Historically Exploited in the Wild by Malware", "Linked to Historical Cyber Exploit", "Historically Linked to Exploit Kit", "Historically Linked to Malware", "Historically Linked to Remote Access Trojan", "Historically Linked to Ransomware", "Linked to Recent Cyber Exploit", "Recently Linked to Exploit Kit", "Recently Linked to Malware", "Recently Linked to Remote Access Trojan", "Recently Linked to Ransomware", "Exploited in the Wild by Malware", "NIST Severity - Critical", "Duplicate of Vulnerability in NVD", "NIST Severity - High", "NIST Severity - Low", "NIST Severity - Medium", "Web Reporting Prior to NVD Disclosure", "Historical Unverified Proof of Concept Available", "Historical Verified Proof of Concept Available", "Historical Verified Proof of Concept Available Using Remote Execution", "Recently Reported by Insikt Group", "Recent Suspected Exploit/Tool Development in the Wild", "Exploited in the Wild by Recently Active Malware", "Recent Unverified Proof of Concept Available", "Recent Verified Proof of Concept Available", "Recent Verified Proof of Concept Available Using Remote Execution", "Recently Referenced by Insikt Group", "Recently Linked to Penetration Testing Tools", "Historically Referenced by Insikt Group", "Historically Linked to Penetration Testing Tools"]|NIST Severity - Critical|None|None|
+|riskScore|string|None|False|Filters the results by risk score|None|[1,100]|None|None|
   
 Example input:
 
@@ -2153,14 +2153,14 @@ Example output:
 
 
 #### Get New Alerts
-  
-This action is used to get new alerts.
+
+This trigger is used to get new alerts
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|frequency|int|10|True|Frequency (in seconds)|None|10|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|frequency|int|10|True|Frequency (in seconds)|None|10|None|None|
   
 Example input:
 
@@ -2555,7 +2555,7 @@ Example output:
 
 # Version History
 
-* 6.0.2 - Fixed schemas | Updated the SDK to latest version | Refreshed with latest plugin tooling
+* 6.0.2 - Fixed schemas | Updated the SDK to latest version | Refreshed with latest plugin tooling | Added Memory Error handling for Risk Lists
 * 6.0.1 - Update Pyyaml to version 6.0.0
 * 6.0.0 - Handle 404 Not Found Error | Create unit_tests | Update example outputs in help.md | Update keywords | Update key features
 * 5.0.1 - Update error handling around a domain that is not found in Lookup Domain

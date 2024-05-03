@@ -6,6 +6,9 @@ import requests
 import xmltodict
 import xml.etree.ElementTree as ET
 
+MEMORY_ERROR_CAUSE = "Memory Error: Returned dataset too large"
+MEMORY_ERROR_ASSISTANCE = "Please allow a larger amount of memory to parse this dataset, or try another filter"
+
 class RecordedFutureApi:
     def __init__(self, logger, meta, token: str):
         self.base_url = "https://api.recordedfuture.com/v2/"
@@ -27,35 +30,17 @@ class RecordedFutureApi:
         self.logger.info(f"Plugin Version: {version}")
         return version
 
-    # Convert XML to dictionary
-    def elem_to_dict(self, elem):
-        if elem.tag.startswith("{"):
-            ns, tag = elem.tag[1:].split("}")
-            full_tag = f"{ns}:{tag}"
-        else:
-            full_tag = elem.tag
-
-        d = {}
-        for k, v in elem.attrib.items():
-            d[f"@{k}"] = v
-        if elem.text and elem.text.strip():
-            d["$"] = elem.text.strip()
-        for child in elem:
-            tag_dict = self.elem_to_dict(child)
-            tag_key = tag_dict.pop("$tag")
-            if tag_key in d:
-                if not isinstance(d[tag_key], list):
-                    d[tag_key] = [d[tag_key]]
-                d[tag_key].append(tag_dict)
-            else:
-                d[tag_key] = tag_dict
-        d["$tag"] = full_tag
-        return d
 
     def _call_api(self, method: str, endpoint: str, params: dict = None, data: dict = None, json: dict = None):
         _url = self.base_url + endpoint
-
-        response = requests.request(url=_url, method=method, params=params, data=data, json=json, headers=self.headers)
+        try:
+            response = requests.request(url=_url, method=method, params=params, data=data, json=json, headers=self.headers)
+        except MemoryError:
+            raise PluginException(
+                cause=MEMORY_ERROR_CAUSE,
+                assistance=MEMORY_ERROR_ASSISTANCE,
+                data=f"Memory Error using endpoint: {endpoint}"
+            )
         if response.status_code == 401:
             raise PluginException(preset=PluginException.Preset.API_KEY)
         if response.status_code == 403:
@@ -71,9 +56,14 @@ class RecordedFutureApi:
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
         if endpoint.endswith("risklist"):
-            root = ET.fromstring(response.text)
-            dict = self.elem_to_dict(root)
-            return dict
+            try:
+                return dict(xmltodict.parse(response.text))
+            except MemoryError:
+                raise PluginException(
+                    cause=MEMORY_ERROR_CAUSE,
+                    assistance=MEMORY_ERROR_ASSISTANCE,
+                    data=f"Memory Error using endpoint: {endpoint}"
+                )
         try:
             return response.json()
         except JSONDecodeError:
