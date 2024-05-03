@@ -130,12 +130,14 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     # no previous timestamp - this is considered first time through, use an initial lookback cutiff
                     self.logger.info("Setting min start time: No manual cutoff applied and no last request timestamp")
                     start_time = self._format_datetime_for_zoom(
-                        dt=self._get_datetime_last_x_hours(self.DEFAULT_INITIAL_LOOKBACK))
+                        dt=self._get_datetime_last_x_hours(self.DEFAULT_INITIAL_LOOKBACK)
+                    )
                 else:
                     # Not the first run, ensure a max cutoff is applied if necessary
                     self.logger.info("Setting min start time: No manual cutoff applied, last request timestamp exists")
                     start_time = self._format_datetime_for_zoom(
-                        dt=self._get_datetime_last_x_hours(self.DEFAULT_CUTOFF_HOURS))
+                        dt=self._get_datetime_last_x_hours(self.DEFAULT_CUTOFF_HOURS)
+                    )
 
         start_date_params = {
             RunState.starting: start_time,
