@@ -1,8 +1,10 @@
+from io import BytesIO
+
 from insightconnect_plugin_runtime.exceptions import PluginException
 from json import JSONDecodeError
 import requests
 import xmltodict
-
+import xml.etree.ElementTree as ET
 
 class RecordedFutureApi:
     def __init__(self, logger, meta, token: str):
@@ -25,6 +27,31 @@ class RecordedFutureApi:
         self.logger.info(f"Plugin Version: {version}")
         return version
 
+    # Convert XML to dictionary
+    def elem_to_dict(self, elem):
+        if elem.tag.startswith("{"):
+            ns, tag = elem.tag[1:].split("}")
+            full_tag = f"{ns}:{tag}"
+        else:
+            full_tag = elem.tag
+
+        d = {}
+        for k, v in elem.attrib.items():
+            d[f"@{k}"] = v
+        if elem.text and elem.text.strip():
+            d["$"] = elem.text.strip()
+        for child in elem:
+            tag_dict = self.elem_to_dict(child)
+            tag_key = tag_dict.pop("$tag")
+            if tag_key in d:
+                if not isinstance(d[tag_key], list):
+                    d[tag_key] = [d[tag_key]]
+                d[tag_key].append(tag_dict)
+            else:
+                d[tag_key] = tag_dict
+        d["$tag"] = full_tag
+        return d
+
     def _call_api(self, method: str, endpoint: str, params: dict = None, data: dict = None, json: dict = None):
         _url = self.base_url + endpoint
 
@@ -44,7 +71,9 @@ class RecordedFutureApi:
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
         if endpoint.endswith("risklist"):
-            return dict(xmltodict.parse(response.text))
+            root = ET.fromstring(response.text)
+            dict = self.elem_to_dict(root)
+            return dict
         try:
             return response.json()
         except JSONDecodeError:
