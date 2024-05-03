@@ -4,7 +4,7 @@
 dnspython==2.1.0
 termcolor==1.1.0
 certstream==1.12
-tqdm==4.62.3
+tqdm==4.66.3
 tld==0.12.6
 python_Levenshtein==0.12.2
 dnstwist==20201228
