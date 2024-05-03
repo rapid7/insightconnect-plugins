@@ -8,7 +8,7 @@ from unittest.mock import patch
 from util import Util
 from icon_rapid7_intsights.actions.get_indicator_by_value.action import GetIndicatorByValue
 from icon_rapid7_intsights.connection.schema import Input, ConnectionSchema
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 from jsonschema import validate
 
 
@@ -39,5 +39,5 @@ class TestConnection(TestCase):
         with self.assertRaises(ConnectionTestException) as error:
             action.connection.test()
 
-        self.assertEqual("Invalid API key provided.", error.exception.cause)
-        self.assertEqual("Verify your API key configured in your connection is correct.", error.exception.assistance)
+        self.assertEqual(PluginException.causes.get("api_key"), error.exception.cause)
+        self.assertEqual(PluginException.assistances.get("api_key"), error.exception.assistance)
