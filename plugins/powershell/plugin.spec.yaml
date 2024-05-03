@@ -8,7 +8,7 @@ version: 3.0.3
 connection_version: 3
 sdk:
   type: slim
-  version: 5
+  version: 5.4.8
   user: nobody
 supported_versions: ["PowerShell 6.1.2"]
 vendor: rapid7

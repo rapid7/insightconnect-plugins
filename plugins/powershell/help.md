@@ -1,6 +1,6 @@
 # Description
 
-[PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-6) is a task-based command-line shell and scripting language from Microsoft that helps system administrators, power-users, and InsightConnect customers rapidly automate tasks that manage operating systems and processes. This plugin runs a PowerShell script on a remote host or locally on an InsightConnect Orchestrator.
+Run a PowerShell script
 
 # Key Features
 
@@ -22,92 +22,54 @@
 
 The connection configuration accepts the following parameters. SSL is enforced for all ports except 5985:
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|auth|string|None|True|Authentication type|['NTLM', 'Kerberos', 'CredSSP', 'None']|Kerberos|
-|credentials|credential_username_password|None|False|Username and password|None|{"username": "user", "password": "mypassword"}|
-|kerberos|kerberos|None|False|Connection information required for Kerberos|None| {"kdc": "10.0.1.11", "domain": "EXAMPLE.domain"}|
-|port|integer|5986|False|Port number, defaults are 5986 for SSL and 5985 for unencrypted|None|5986|
-|script_secret_key|credential_secret_key|None|False|Credential secret key available in script as PowerShell variable (`$secret_key`)|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|script_username_and_password|credential_username_password|None|False|Username and password available in script as PowerShell variables (`$username`, `$password`)|None|{"username": "user", "password": "mypassword"}|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|auth|string|None|True|Authentication type|["NTLM", "Kerberos", "CredSSP", "None"]|Kerberos|None|None|
+|credentials|credential_username_password|None|False|Username and password|None|{"username": "user", "password": "mypassword"}|None|None|
+|kerberos|kerberos|None|False|Connection information required for Kerberos|None|{"kdc": "10.0.1.11", "domain": "EXAMPLE.domain"}|None|None|
+|port|integer|5986|False|Port number, defaults are 5986 for SSL and 5985 for unencrypted|None|5986|None|None|
+|script_secret_key|credential_secret_key|None|False|Credential secret key available in script as powershell variable (`$secret_key`)|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+|script_username_and_password|credential_username_password|None|False|Username and password available in script as powershell variables (`$username`, `$password`)|None|{"username": "user", "password": "mypassword"}|None|None|
 
 Example input:
 
 ```
 {
-  "auth": "Kerberos",
+  "auth": "None",
   "credentials": {
-    "username": "user",
-    "password": "mypassword"
+    "password": "mypassword",
+    "username": "user"
   },
   "kerberos": {
-    "kdc": "10.0.1.11",
-    "domain": "EXAMPLE.domain"
+    "domain": "EXAMPLE.domain",
+    "kdc": "10.0.1.11"
   },
   "port": 5986,
-  "script_secret_key": {
-    "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
-  },
+  "script_secret_key": "9de5069c5afe602b2ea0a04b66beb2c0",
   "script_username_and_password": {
-    "username": "user", 
-    "password": "mypassword"
+    "password": "mypassword",
+    "username": "user"
   }
 }
 ```
+
 ## Technical Details
 
 ### Actions
 
-#### PowerShell String
-
-This action is used to execute PowerShell script in the form of a string.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|10.0.1.17|
-|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|windows|
-|script|string|None|True|PowerShell script as a string. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|Get-Date|
-
-Example input:
-
-```
-{
-  "address": "10.0.1.17",
-  "host_name": "windows",
-  "script": "Get-Date"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|--------|
-|stderr|string|False|PowerShell standard error|Fatal error.|
-|stdout|string|False|PowerShell standard output|Tuesday, January 11, 2022 5:05:42 AM|
-
-Example output:
-
-```
-{
-  "stdout": "Tuesday, January 11, 2022 5:05:42 AM",
-  "stderr": "Fatal error."
-}
-```
 
 #### Execute Script
 
-This action is used to execute PowerShell script encoded as a base64 file on a remote host.
+This action is used to execute PowerShell script encoded as a base64 file on a remote host
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|10.0.1.15|
-|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|windows|
-|script|bytes|None|True|PowerShell script as base64. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|R2V0LURhdGU=|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|10.0.1.15|None|None|
+|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|windows|None|None|
+|script|bytes|None|True|PowerShell script as base64. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|R2V0LURhdGU=|None|None|
+  
 Example input:
 
 ```
@@ -121,10 +83,10 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|--------|
+| :--- | :--- | :--- | :--- | :--- |
 |stderr|string|False|PowerShell standard error|Fatal error.|
 |stdout|string|False|PowerShell standard output|Tuesday, January 11, 2022 5:05:42 AM|
-
+  
 Example output:
 
 ```
@@ -134,13 +96,59 @@ Example output:
 }
 ```
 
+#### PowerShell String
+
+This action is used to execute PowerShell script in the form of a string
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|10.0.1.17|None|None|
+|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|windows|None|None|
+|script|string|None|True|PowerShell script as a string. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|Get-Date|None|None|
+  
+Example input:
+
+```
+{
+  "address": "10.0.1.17",
+  "host_name": "windows",
+  "script": "Get-Date"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|stderr|string|False|PowerShell standard error|Fatal error.|
+|stdout|string|False|PowerShell standard output|Tuesday, January 11, 2022 5:05:42 AM|
+  
+Example output:
+
+```
+{
+  "stderr": "Fatal error.",
+  "stdout": "Tuesday, January 11, 2022 5:05:42 AM"
+}
+```
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
+### Custom Types
+  
+**kerberos**
 
-### Custom Output Types
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Domain Name|string|None|False|The fully qualified domain name of the remote host e.g. example.com. If Auth Type is set to None then leave this blank|None|
+|KDC|string|None|False|IP address of the Active Directory server. If Auth Type is set to None then leave this blank|None|
 
-_This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
