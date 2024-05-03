@@ -55,7 +55,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         "Health check failed. An error occurred during event collection: insufficient permissions for this action. "
         "Please ensure you add all required user permissions for the Rapid7 app in Zoom."
     )
-    DEFAULT_CUTOFF_HOURS = 24
+    DEFAULT_CUTOFF_HOURS = 168
 
     def __init__(self):
         super(self.__class__, self).__init__(
