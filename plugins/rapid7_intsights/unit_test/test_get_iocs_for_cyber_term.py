@@ -13,7 +13,6 @@ from icon_rapid7_intsights.actions.get_iocs_for_cyber_term.schema import (
     GetIocsForCyberTermOutput,
 )
 from insightconnect_plugin_runtime.exceptions import PluginException
-from icon_rapid7_intsights.util.constants import Assistance, Cause
 from jsonschema import validate
 
 
@@ -53,22 +52,18 @@ class TestGetIocsForCyberTerm(TestCase):
             [
                 "invalid_param",
                 Util.read_file_to_dict("inputs/get_iocs_cyber_term_params_bad.json.inp"),
-                Cause.INVALID_DETAILS,
-                Assistance.VERIFY_INPUT,
+                PluginException(preset=PluginException.Preset.BAD_REQUEST),
             ],
             [
                 "cyber_term_not_found",
                 Util.read_file_to_dict("inputs/get_iocs_cyber_term_invalid_id.json.inp"),
-                "Invalid or unreachable endpoint provided.",
-                "Verify the URLs or endpoints in your configuration are correct.",
+                PluginException(preset=PluginException.Preset.NOT_FOUND),
             ],
         ]
     )
-    def test_get_iocs_for_cyber_term_raise_exception(
-        self, mock_request, test_name, input_parameters, cause, assistance
-    ):
+    def test_get_iocs_for_cyber_term_raise_exception(self, mock_request, test_name, input_parameters, expected_error):
         validate(input_parameters, GetIocsForCyberTermInput.schema)
         with self.assertRaises(PluginException) as error:
             self.action.run(input_parameters)
-        self.assertEqual(error.exception.cause, cause)
-        self.assertEqual(error.exception.assistance, assistance)
+        self.assertEqual(error.exception.cause, expected_error.cause)
+        self.assertEqual(error.exception.assistance, expected_error.assistance)

@@ -20,6 +20,7 @@ class GetIndicatorByValue(insightconnect_plugin_runtime.Action):
             {
                 Output.VALUE: response.get("value"),
                 Output.TYPE: response.get("type"),
+                Output.SUBTYPE: response.get("subType"),
                 Output.SEVERITY: response.get("severity"),
                 Output.SCORE: response.get("score", 0),
                 Output.WHITELIST: response.get("whitelisted", False),

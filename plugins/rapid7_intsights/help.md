@@ -32,14 +32,14 @@
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|account_id|string|None|True|Account ID for Threat Command|None|9de5069c5afe602b2ea0a04b|
-|api_key|credential_secret_key|None|True|API key for Threat Command|None|cc805d5fab1fd71a4ab352a9c533e65fb2d5b885518f4e565e68847223b8e6b85cb48f3afad842726d99239c9e36505c64b0dc9a061d9e507d833277ada336ab|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|account_id|string|None|True|Account ID for Threat Command|None|9de5069c5afe602b2ea0a04b|None|None|
+|api_key|credential_secret_key|None|True|API key for Threat Command|None|cc805d5fab1fd71a4ab352a9c533e65fb2d5b885518f4e565e68847223b8e6b85cb48f3afad842726d99239c9e36505c64b0dc9a061d9e507d833277ada336ab|None|None|
+
 Example input:
 
 ```
@@ -55,14 +55,14 @@ Example input:
 
 
 #### Add CVEs
-  
+
 This action is used to add CVEs to account
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|cve_id|[]string|None|False|List of CVE IDs|None|["CVE-2020-0711"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|cve_id|[]string|None|False|List of CVE IDs|None|["CVE-2020-0711"]|None|None|
   
 Example input:
 
@@ -96,24 +96,24 @@ Example output:
 ```
 
 #### Add Manual Alert
-  
+
 This action is used to create a manual alert with the provided parameters
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|description|string|None|True|Alert description|None|Suspicious addresses|
-|found_date|string|None|False|Alert found date|None|2020-01-01|
-|images|[]image|None|False|Alert images|None|[{"Type": "jpeg","Data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}]|
-|severity|string|None|True|Alert severity|["High", "Medium", "Low"]|Medium|
-|source_date|string|None|False|Alert source date|None|2020-02-01|
-|source_network_type|string|None|True|Source network type|["ClearWeb", "DarkWeb"]|DarkWeb|
-|source_type|string|None|True|Source type|["Application Store", "Cyber Security Blog", "Hacking News", "Cyber Crime Forum", "Hacktivism Forum", "Social Media", "Facebook", "Twitter", "LinkedIn", "Google Plus", "VK", "Vimeo", "YouTube", "IRC Channel", "IOC Block List", "Credit Card Black Market", "Paste Site", "Data Leakage Website", "Leaked Database", "File Sharing Website", "Gray Hat Website", "Black Market", "WHOIS servers", "Company Website", "Wikileaks", "Pinterest", "Tumblr", "Instagram", "Telegram", "Webmail", "Malware Analysis", "Firehol", "VRA"]|Webmail|
-|source_url|string|None|True|Source URL|None|https://example.com|
-|sub_type|string|None|True|Alert sub type, needs to correlate with the selected "Type"|None|SuspiciousEmailAddress|
-|title|string|None|True|Alert title|None|New Alert|
-|type|string|None|True|Alert type|["AttackIndication", "DataLeakage", "Phishing", "BrandSecurity", "ExploitableData", "vip"]|Phishing|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|description|string|None|True|Alert description|None|Suspicious addresses|None|None|
+|found_date|string|None|False|Alert found date|None|2020-01-01|None|None|
+|images|[]image|None|False|Alert images|None|[{"Type": "jpeg","Data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}]|None|None|
+|severity|string|None|True|Alert severity|["High", "Medium", "Low"]|Medium|None|None|
+|source_date|string|None|False|Alert source date|None|2020-02-01|None|None|
+|source_network_type|string|None|True|Source network type|["ClearWeb", "DarkWeb"]|DarkWeb|None|None|
+|source_type|string|None|True|Source type|["Application Store", "Cyber Security Blog", "Hacking News", "Cyber Crime Forum", "Hacktivism Forum", "Social Media", "Facebook", "Twitter", "LinkedIn", "Google Plus", "VK", "Vimeo", "YouTube", "IRC Channel", "IOC Block List", "Credit Card Black Market", "Paste Site", "Data Leakage Website", "Leaked Database", "File Sharing Website", "Gray Hat Website", "Black Market", "WHOIS servers", "Company Website", "Wikileaks", "Pinterest", "Tumblr", "Instagram", "Telegram", "Webmail", "Malware Analysis", "Firehol", "VRA"]|Webmail|None|None|
+|source_url|string|None|True|Source URL|None|https://example.com|None|None|
+|sub_type|string|None|True|Alert sub type, needs to correlate with the selected "Type"|None|SuspiciousEmailAddress|None|None|
+|title|string|None|True|Alert title|None|New Alert|None|None|
+|type|string|None|True|Alert type|["AttackIndication", "DataLeakage", "Phishing", "BrandSecurity", "ExploitableData", "vip"]|Phishing|None|None|
   
 Example input:
 
@@ -153,18 +153,18 @@ Example output:
 ```
 
 #### Close Alert
-  
+
 This action is used to close the alert with the given ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|alertId|string|None|True|Alert's unique ID|None|9de5069c5afe602b2ea0a04b|
-|freeText|string|None|False|Alert's comments|None|Example comment|
-|isHidden|boolean|False|True|Alert's hidden status. Delete alert from the account instance - only when reason is False Positive|None|False|
-|rate|integer|None|False|Alert's rate|None|5|
-|reason|string|None|True|Alert's closed reason|["Problem solved", "Informational only", "Problem we are already aware of", "Company owned domain", "Legitimate application/profile", "Not related to my company", "False positive", "Other"]|False Positive|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|alertId|string|None|True|Alert's unique ID|None|9de5069c5afe602b2ea0a04b|None|None|
+|freeText|string|None|False|Alert's comments|None|Example comment|None|None|
+|isHidden|boolean|False|True|Alert's hidden status. Delete alert from the account instance - only when reason is False Positive|None|False|None|None|
+|rate|integer|None|False|Alert's rate|None|5|None|None|
+|reason|string|None|True|Alert's closed reason|["Problem solved", "Informational only", "Problem we are already aware of", "Company owned domain", "Legitimate application/profile", "Not related to my company", "False positive", "Other"]|False Positive|None|None|
   
 Example input:
 
@@ -193,14 +193,14 @@ Example output:
 ```
 
 #### Delete CVEs
-  
+
 This action is used to delete CVEs from account
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|cve_id|[]string|None|False|List of CVE IDs|None|["CVE-2020-0711"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|cve_id|[]string|None|False|List of CVE IDs|None|["CVE-2020-0711"]|None|None|
   
 Example input:
 
@@ -229,14 +229,14 @@ Example output:
 ```
 
 #### Enrich Indicator
-  
+
 This action is used to submit an indicator to Threat Command for investigation and return the results
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|indicator_value|string|None|True|Value of the indicator. Examples: IP address, URL, domain name, hash|None|example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|indicator_value|string|None|True|Value of the indicator. Examples: IP address, URL, domain name, hash|None|example.com|None|None|
   
 Example input:
 
@@ -458,27 +458,27 @@ Example output:
 ```
 
 #### Get Alerts
-  
+
 This action is used to search alerts based on criteria
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|alert_type|[]string|None|False|List of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip|None|["Phishing"]|
-|assigned|string|None|False|Show assigned/unassigned alerts|["Assigned", "Unassigned", ""]|Assigned|
-|found_date_from|string|None|False|Start date (when alert found event) to fetch from in Unix Millisecond Timestamp|None|0|
-|found_date_to|string|None|False|End date (when alert found event) to fetch to in Unix Millisecond Timestamp|None|1633047102456|
-|has_indicators|boolean|None|False|Show alerts with IOCs results|None|False|
-|is_closed|string|None|False|Status of the alert, either closed or open|["Closed", "Open", ""]|Closed|
-|is_flagged|string|None|False|Show flagged/unflagged alerts|["Flagged", "Unflagged", ""]|Flagged|
-|matched_asset_value|[]string|None|False|List of matched asset values. Examples: IP address, domain name, company name|None|["example.com"]|
-|network_type|[]string|None|False|List of network type. Allowed values: ClearWeb, DarkWeb|None|["DarkWeb"]|
-|remediation_status|[]string|None|False|List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed|None|["InProgress", "Pending"]|
-|severity|[]string|None|False|List of alerts severity. Allowed values: High, Medium, Low|None|["Low"]|
-|source_date_from|string|None|False|Start date (when the event occurred) to fetch from in Unix Millisecond Timestamp|None|1633047083142|
-|source_date_to|string|None|False|End date (when the event occurred) to fetch to in Unix Millisecond Timestamp|None|1633047102456|
-|source_type|[]string|None|False|List of alerts source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other|None|["Application Store"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|alert_type|[]string|None|False|List of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip|None|["Phishing"]|None|None|
+|assigned|string|None|False|Show assigned/unassigned alerts|["Assigned", "Unassigned", ""]|Assigned|None|None|
+|found_date_from|string|None|False|Start date (when alert found event) to fetch from in Unix Millisecond Timestamp|None|0|None|None|
+|found_date_to|string|None|False|End date (when alert found event) to fetch to in Unix Millisecond Timestamp|None|1633047102456|None|None|
+|has_indicators|boolean|None|False|Show alerts with IOCs results|None|False|None|None|
+|is_closed|string|None|False|Status of the alert, either closed or open|["Closed", "Open", ""]|Closed|None|None|
+|is_flagged|string|None|False|Show flagged/unflagged alerts|["Flagged", "Unflagged", ""]|Flagged|None|None|
+|matched_asset_value|[]string|None|False|List of matched asset values. Examples: IP address, domain name, company name|None|["example.com"]|None|None|
+|network_type|[]string|None|False|List of network type. Allowed values: ClearWeb, DarkWeb|None|["DarkWeb"]|None|None|
+|remediation_status|[]string|None|False|List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed|None|["InProgress", "Pending"]|None|None|
+|severity|[]string|None|False|List of alerts severity. Allowed values: High, Medium, Low|None|["Low"]|None|None|
+|source_date_from|string|None|False|Start date (when the event occurred) to fetch from in Unix Millisecond Timestamp|None|1633047083142|None|None|
+|source_date_to|string|None|False|End date (when the event occurred) to fetch to in Unix Millisecond Timestamp|None|1633047102456|None|None|
+|source_type|[]string|None|False|List of alerts source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other|None|["Application Store"]|None|None|
   
 Example input:
 
@@ -532,14 +532,14 @@ Example output:
 ```
 
 #### Get Complete Alert by ID
-  
+
 This action is used to get an alert's complete details for a given alert ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|alert_id|string|None|True|Alert's unique ID|None|44d88612fea8a8f36de82e12|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|alert_id|string|None|True|Alert's unique ID|None|44d88612fea8a8f36de82e12|None|None|
   
 Example input:
 
@@ -602,14 +602,14 @@ Example output:
 ```
 
 #### Get CVE by ID
-  
+
 This action is used to get a list of CVE's with a list of IDs from an account
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|cve_id|[]string|None|False|Specific CVE IDs|None|["CVE-2020-0711"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|cve_id|[]string|None|False|Specific CVE IDs|None|["CVE-2020-0711"]|None|None|
   
 Example input:
 
@@ -678,14 +678,14 @@ Example output:
 ```
 
 #### Get CVE List
-  
+
 This action is used to get a partial list of all CVEs from an account
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|offset|string|None|False|Offset value for pagination, if empty the first page of results will be returned|None|2000-00-00T00:00:00.000Z::614b8972da44a60005036b01|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|offset|string|None|False|Offset value for pagination, if empty the first page of results will be returned|None|2000-00-00T00:00:00.000Z::614b8972da44a60005036b01|None|None|
   
 Example input:
 
@@ -779,14 +779,14 @@ Example output:
 ```
 
 #### Get CVEs for Cyber Term
-  
+
 This action is used to get the Common Vulnerabilities and Exposures that are related to a cyber term
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|cyberTermId|string|None|True|Cyber term unique ID|None|311g8204kf82mr1234ab987o|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|cyberTermId|string|None|True|Cyber term unique ID|None|311g8204kf82mr1234ab987o|None|None|
   
 Example input:
 
@@ -811,24 +811,24 @@ Example output:
 ```
 
 #### Get Cyber Terms by Filter
-  
+
 This action is used to get cyber terms for given filters
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|lastUpdateFrom|date|None|False|Filter by last update date is greater than the given value (in ISO 8601 format)|None|2022-09-29 13:45:55.627000+00:00|
-|lastUpdateTo|date|None|False|Filter by last update date is less than the given value (in ISO 8601 format)|None|2022-09-30 13:45:55.627000+00:00|
-|limit|integer|None|False|Limit the results amount per chunk. Default value: 200|None|100|
-|offset|string|None|False|Request the next page of cyber terms|None|2022-09-29T13:45:55.627Z::9de5069c5afe602b2ea0a04b66beb2c0|
-|origin|[]string|None|False|Filter by one or more nationalities|None|["Korea, Republic of"]|
-|search|string|None|False|Filter by free text, which can be the cyber term name or ID|None|9de5069c5afe602b2ea0a04b|
-|severity|[]string|None|False|Filter by one or more cyber term severities. Allowed values: High, Medium, Low|None|["Medium", "High"]|
-|targetCountry|[]string|None|False|Filter by one or more targeted countries|None|["United Status"]|
-|targetSector|[]string|None|False|Filter by one or more targeted sectors|None|["Electronics"]|
-|ttp|[]string|None|False|Filter by one or more TTPs|None|["Code Execution"]|
-|type|[]string|None|False|Filter by one or more cyber term types. Allowed values: ThreatActor, Malware, Campaign|None|["ThreatActor"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|lastUpdateFrom|date|None|False|Filter by last update date is greater than the given value (in ISO 8601 format)|None|2022-09-29 13:45:55.627000+00:00|None|None|
+|lastUpdateTo|date|None|False|Filter by last update date is less than the given value (in ISO 8601 format)|None|2022-09-30 13:45:55.627000+00:00|None|None|
+|limit|integer|None|False|Limit the results amount per chunk. Default value: 200|None|100|None|None|
+|offset|string|None|False|Request the next page of cyber terms|None|2022-09-29T13:45:55.627Z::9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+|origin|[]string|None|False|Filter by one or more nationalities|None|["Korea, Republic of"]|None|None|
+|search|string|None|False|Filter by free text, which can be the cyber term name or ID|None|9de5069c5afe602b2ea0a04b|None|None|
+|severity|[]string|None|False|Filter by one or more cyber term severities. Allowed values: High, Medium, Low|None|["Medium", "High"]|None|None|
+|targetCountry|[]string|None|False|Filter by one or more targeted countries|None|["United Status"]|None|None|
+|targetSector|[]string|None|False|Filter by one or more targeted sectors|None|["Electronics"]|None|None|
+|ttp|[]string|None|False|Filter by one or more TTPs|None|["Code Execution"]|None|None|
+|type|[]string|None|False|Filter by one or more cyber term types. Allowed values: ThreatActor, Malware, Campaign|None|["ThreatActor"]|None|None|
   
 Example input:
 
@@ -878,20 +878,20 @@ Example output:
 ```
 
 #### Get Indicator by Value
-  
+
 This action is used to search indicators in Threat Command TIP
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|indicator_value|string|None|True|Value of the indicator. Examples: IP address, URL, domain name, hash|None|example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|indicator_value|string|None|True|Value of the indicator. Examples: IP address, URL, domain name, hash|None|6c62e74dd5d99fc2d610bd84114990a2|None|None|
   
 Example input:
 
 ```
 {
-  "indicator_value": "example.com"
+  "indicator_value": "6c62e74dd5d99fc2d610bd84114990a2"
 }
 ```
 
@@ -911,10 +911,11 @@ Example input:
 |severity|string|False|Severity|Low|
 |sources|[]source|False|Sources|[ { "confidenceLevel": 2, "name": "Cyber Threat Alliance" } ]|
 |status|string|False|Status|Active|
+|subtype|string|False|SubType Value|MD5|
 |system_tags|[]string|False|System tags|["MyTag_1"]|
 |tags|[]string|False|Tags|["MyTag_1"]|
-|type|string|False|Type|Domains|
-|value|string|False|Indicator value|example.com|
+|type|string|False|Type|Hashes|
+|value|string|False|Indicator value|6c62e74dd5d99fc2d610bd84114990a2|
 |whitelist|boolean|False|Whitelist|True|
   
 Example output:
@@ -949,40 +950,41 @@ Example output:
     }
   ],
   "status": "Active",
+  "subtype": "MD5",
   "system_tags": [
     "MyTag_1"
   ],
   "tags": [
     "MyTag_1"
   ],
-  "type": "Domains",
-  "value": "example.com",
+  "type": "Hashes",
+  "value": "6c62e74dd5d99fc2d610bd84114990a2",
   "whitelist": true
 }
 ```
 
 #### Get IOCs by Filter
-  
+
 This action is used to get Indicators of Compromise by Filter
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|enterprise_tactics|[]string|None|False|Filter by MITRE ATT&CK Enterprise tactic. Allowed values 'Reconnaissance', 'Resource Development', 'Initial Access', 'Execution', 'Persistence', 'Privilege Escalation', 'Defense Evasion', 'Credential Access', 'Discovery', 'Lateral Movement', 'Collection', 'Command and Control', 'Exfiltration', 'Impact'|None|["Reconnaissance"]|
-|first_seen_from|date|None|False|Filter by first seen date (IOC first-seen date is greater than)|None|2000-12-31T00:00:00Z|
-|first_seen_to|date|None|False|Filter by first seen date (IOC first-seen date is less than)|None|2000-12-31T00:00:00Z|
-|kill_chain_phases|[]string|None|False|Filter by phase of Lockheed-Martin intrusion kill chain (Allowed values: Reconnaissance, Weaponization, Delivery, Exploitation, Installation, Command and Control, Actions on Objective)|None|["Command and Control"]|
-|last_seen_from|date|None|False|Filter by last seen date (IOC last-seen date is greater than)|None|2000-12-31T00:00:00Z|
-|last_seen_to|date|None|False|Filter by last seen date (IOC last-seen date is less than)|None|2000-12-31T00:00:00Z|
-|last_updated_from|date|None|True|Filter by last update date (IOC update date is greater than)|None|2000-12-31T00:00:00Z|
-|last_updated_to|date|None|False|Filter by last update date (IOC update date is less than)|None|2000-12-31T00:00:00Z|
-|limit|integer|1000|False|Limit the results amount per page (1-1000)|None|1000|
-|offset|string|None|False|Getting the next page of IOCs from offset|None|2020-01-01T20:01:27.344Z|
-|severity|[]string|None|False|Filter by IOC severity (Allowed values: High, Medium, Low)|None|["High"]|
-|source_ids|[]string|None|False|Filter by source IDs|None|["123450000012345000001233"]|
-|status|string|None|False|Filter by IOC status|["", "Active", "Retired"]|Active|
-|type|[]string|None|False|Filter by IOC type (Allowed values: IpAddresses, Urls, Domains, Hashes, Emails)|None|["IpAddresses"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|enterprise_tactics|[]string|None|False|Filter by MITRE ATT&CK Enterprise tactic. Allowed values 'Reconnaissance', 'Resource Development', 'Initial Access', 'Execution', 'Persistence', 'Privilege Escalation', 'Defense Evasion', 'Credential Access', 'Discovery', 'Lateral Movement', 'Collection', 'Command and Control', 'Exfiltration', 'Impact'|None|["Reconnaissance"]|None|None|
+|first_seen_from|date|None|False|Filter by first seen date (IOC first-seen date is greater than)|None|2000-12-31T00:00:00Z|None|None|
+|first_seen_to|date|None|False|Filter by first seen date (IOC first-seen date is less than)|None|2000-12-31T00:00:00Z|None|None|
+|kill_chain_phases|[]string|None|False|Filter by phase of Lockheed-Martin intrusion kill chain (Allowed values: Reconnaissance, Weaponization, Delivery, Exploitation, Installation, Command and Control, Actions on Objective)|None|["Command and Control"]|None|None|
+|last_seen_from|date|None|False|Filter by last seen date (IOC last-seen date is greater than)|None|2000-12-31T00:00:00Z|None|None|
+|last_seen_to|date|None|False|Filter by last seen date (IOC last-seen date is less than)|None|2000-12-31T00:00:00Z|None|None|
+|last_updated_from|date|None|True|Filter by last update date (IOC update date is greater than)|None|2000-12-31T00:00:00Z|None|None|
+|last_updated_to|date|None|False|Filter by last update date (IOC update date is less than)|None|2000-12-31T00:00:00Z|None|None|
+|limit|integer|1000|False|Limit the results amount per page (1-1000)|None|1000|None|None|
+|offset|string|None|False|Getting the next page of IOCs from offset|None|2020-01-01T20:01:27.344Z|None|None|
+|severity|[]string|None|False|Filter by IOC severity (Allowed values: High, Medium, Low)|None|["High"]|None|None|
+|source_ids|[]string|None|False|Filter by source IDs|None|["123450000012345000001233"]|None|None|
+|status|string|None|False|Filter by IOC status|["", "Active", "Retired"]|Active|None|None|
+|type|[]string|None|False|Filter by IOC type (Allowed values: IpAddresses, Urls, Domains, Hashes, Emails)|None|["IpAddresses"]|None|None|
   
 Example input:
 
@@ -1067,17 +1069,17 @@ Example output:
 ```
 
 #### Get IOCs for Cyber Term
-  
+
 This action is used to gets cyber term IOCs by cyber term ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|cyberTermId|string|None|True|Cyber term unique ID|None|593e74cfc022ac015814f8d9|
-|iocType|[]string|None|False|IOC types to include. Allowed values "IpAddresses", "Urls", "Domains", "Hashes", "Emails"|None|["IpAddresses"]|
-|limit|integer|None|False|Desired number of results. Default value 100. Size range 1-1000|None|100|
-|offset|string|None|False|Request the next page of IOCs|None|2020-08-13T12:17:08.755Z|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|cyberTermId|string|None|True|Cyber term unique ID|None|593e74cfc022ac015814f8d9|None|None|
+|iocType|[]string|None|False|IOC types to include. Allowed values "IpAddresses", "Urls", "Domains", "Hashes", "Emails"|None|["IpAddresses"]|None|None|
+|limit|integer|None|False|Desired number of results. Default value 100. Size range 1-1000|None|100|None|None|
+|offset|string|None|False|Request the next page of IOCs|None|2020-08-13T12:17:08.755Z|None|None|
   
 Example input:
 
@@ -1109,15 +1111,15 @@ Example output:
 ```
 
 #### Takedown Request
-  
+
 This action is used to request a takedown for a given alert in Threat Command
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|alert_id|string|None|True|Alert's unique ID|None|44d88612fea8a8f36de82e12|
-|target|string|Domain|True|Target|["Website", "Domain"]|Domain|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|alert_id|string|None|True|Alert's unique ID|None|44d88612fea8a8f36de82e12|None|None|
+|target|string|Domain|True|Target|["Website", "Domain"]|Domain|None|None|
   
 Example input:
 
@@ -1145,29 +1147,29 @@ Example output:
 
 
 #### New Alert
-  
+
 This trigger is used to triggers when a new alert that matches the given criteria is created in Threat Command
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|alert_type|[]string|None|False|List of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip|None|["Phishing"]|
-|assigned|string|None|False|Show assigned/unassigned alerts|["Assigned", "Unassigned", ""]|Assigned|
-|found_date_from|string|None|False|Start date (when alert found event) to fetch from in Unix Millisecond Timestamp|None|0|
-|found_date_to|string|None|False|End date (when alert found event) to fetch to in Unix Millisecond Timestamp|None|1633047102456|
-|frequency|integer|60|False|Poll frequency in seconds|None|60|
-|has_indicators|boolean|None|False|Shows alerts with IOC results|None|False|
-|is_closed|string|None|False|Status of the alert, either closed or open|["Closed", "Open", ""]|Closed|
-|is_flagged|string|None|False|Show flagged/unflagged alerts|["Flagged", "Unflagged", ""]|Flagged|
-|matched_asset_value|[]string|None|False|List of matched asset values. Examples: IP address, domain name, company name|None|["example.com"]|
-|network_type|[]string|None|False|List of network types. Allowed values: ClearWeb, DarkWeb|None|["DarkWeb"]|
-|remediation_status|[]string|None|False|List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed|None|["InProgress", "Pending"]|
-|severity|[]string|None|False|List of alerts severity. Allowed values: High, Medium, Low|None|["Low"]|
-|source_date_from|string|None|False|Start date (when the event occured) to fetch from in Unix Millisecond Timestamp|None|1633047083142|
-|source_date_from_enum|string|None|False|Start date to fetch from with options, such as choose Hour to pull alerts in the last hour|["Hour", "Day", "Week", ""]|Hour|
-|source_date_to|string|None|False|End date (when the event occured) to fetch to in Unix Millisecond Timestamp|None|1633047102456|
-|source_type|[]string|None|False|List of alert's source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other|None|["Application Store"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|alert_type|[]string|None|False|List of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip|None|["Phishing"]|None|None|
+|assigned|string|None|False|Show assigned/unassigned alerts|["Assigned", "Unassigned", ""]|Assigned|None|None|
+|found_date_from|string|None|False|Start date (when alert found event) to fetch from in Unix Millisecond Timestamp|None|0|None|None|
+|found_date_to|string|None|False|End date (when alert found event) to fetch to in Unix Millisecond Timestamp|None|1633047102456|None|None|
+|frequency|integer|60|False|Poll frequency in seconds|None|60|None|None|
+|has_indicators|boolean|None|False|Shows alerts with IOC results|None|False|None|None|
+|is_closed|string|None|False|Status of the alert, either closed or open|["Closed", "Open", ""]|Closed|None|None|
+|is_flagged|string|None|False|Show flagged/unflagged alerts|["Flagged", "Unflagged", ""]|Flagged|None|None|
+|matched_asset_value|[]string|None|False|List of matched asset values. Examples: IP address, domain name, company name|None|["example.com"]|None|None|
+|network_type|[]string|None|False|List of network types. Allowed values: ClearWeb, DarkWeb|None|["DarkWeb"]|None|None|
+|remediation_status|[]string|None|False|List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed|None|["InProgress", "Pending"]|None|None|
+|severity|[]string|None|False|List of alerts severity. Allowed values: High, Medium, Low|None|["Low"]|None|None|
+|source_date_from|string|None|False|Start date (when the event occured) to fetch from in Unix Millisecond Timestamp|None|1633047083142|None|None|
+|source_date_from_enum|string|None|False|Start date to fetch from with options, such as choose Hour to pull alerts in the last hour|["Hour", "Day", "Week", ""]|Hour|None|None|
+|source_date_to|string|None|False|End date (when the event occured) to fetch to in Unix Millisecond Timestamp|None|1633047102456|None|None|
+|source_type|[]string|None|False|List of alert's source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other|None|["Application Store"]|None|None|
   
 Example input:
 
@@ -1424,13 +1426,14 @@ Example output:
 
 
 ## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
+  
+*There is no troubleshooting for this plugin.*
 
 # Version History
 
+* 5.2.0 - Update exception presets in API and unit tests | New `subtype` output to `get_indicator_by_value` action
 * 5.1.1 - Better handling of response from the threat connect API when using the `takedown_request` action | Bumped to use the newest version of the SDK | Updated old unit tests / added new unit tests
-* 5.1.0 - Add actions: `Get Cyber Terms by Filter`, `Get IOCs for Cyber Term`, `Get CVEs for Cyber Term`, `Close Alert`. Add new input for `Get IOCs By Filter` action
+* 5.1.0 - Add actions -> `Get Cyber Terms by Filter`, `Get IOCs for Cyber Term`, `Get CVEs for Cyber Term`, `Close Alert`. Add new input for `Get IOCs By Filter` action
 * 5.0.0 - Add action Get IOCs By Filter which returns a list of paginated IOC data based on input filters applied against IOC properties | Fix Bug relating to mismatched property names of output types geolocation, sources, and reported feeds for Get Indicator by Value action
 * 4.0.0 - Rename Plugin to Threat Command | Update descriptions to Threat Command | Update Get Indicator By Value to use API V3 | Remove Rescan Indicator and Get Indicator Scan Status | Update Get CVE List to request one page of results only
 * 3.2.0 - Fix is_closed bug in trigger | Add new input `source_date_from_enum` in trigger which allows user to specifiy Source Date From using ENUM rather than timestamp/string
@@ -1442,7 +1445,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Links
 
-* [Threat Command](https://www.rapid7.com/products/threat-command)
+* [Threat Command](https://intsights.com/)
 
 ## References
 

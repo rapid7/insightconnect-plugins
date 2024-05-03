@@ -18,7 +18,6 @@ class NewAlert(insightconnect_plugin_runtime.Trigger):
         )
 
     def run(self, params={}):
-
         SOURCE_FROM_ENUM = params.get(Input.SOURCE_DATE_FROM_ENUM, "")
         SOURCE_FROM_STRING = params.get(Input.SOURCE_DATE_FROM, "")
         source_date = ""
