@@ -63,7 +63,7 @@ class ExecuteScript(insightconnect_plugin_runtime.Action):
                 # Raise a PluginException with the error information
                 raise PluginException(
                     cause="While decoding the bytes into UTF-8 or ISO-8859-1 the following error occurred",
-                    data=exception
+                    data=exception,
                 )
             except Exception as exception:
                 self.logger.error("Base64 input " + encoded_powershell_script)
