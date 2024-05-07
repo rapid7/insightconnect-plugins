@@ -122,21 +122,23 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 )
             elif cutoff_hours is not None:
                 self.logger.info(f"Setting min start time (cutoff: {cutoff_hours} hours manually applied)")
-                start_time = self._format_datetime_for_zoom(
-                    dt=self._get_datetime_last_x_hours(cutoff_hours)
-                )
+                start_time = self._format_datetime_for_zoom(dt=self._get_datetime_last_x_hours(cutoff_hours))
             else:
                 if not state.get(self.LAST_REQUEST_TIMESTAMP):
                     # no previous timestamp - this is considered first time through, use an initial lookback cutoff
-                    self.logger.info("Setting min start time: No manual cutoff applied and no last request timestamp. "
-                                     f"Use default initial lookback cutoff: {self.DEFAULT_INITIAL_LOOKBACK} hours")
+                    self.logger.info(
+                        "Setting min start time: No manual cutoff applied and no last request timestamp. "
+                        f"Use default initial lookback cutoff: {self.DEFAULT_INITIAL_LOOKBACK} hours"
+                    )
                     start_time = self._format_datetime_for_zoom(
                         dt=self._get_datetime_last_x_hours(self.DEFAULT_INITIAL_LOOKBACK)
                     )
                 else:
                     # Not the first run, ensure a max cutoff is applied if necessary
-                    self.logger.info("Setting min start time: No manual cutoff applied, last request timestamp exists. "
-                                     f"Use default lookback cutoff: {self.DEFAULT_CUTOFF_HOURS} hours")
+                    self.logger.info(
+                        "Setting min start time: No manual cutoff applied, last request timestamp exists. "
+                        f"Use default lookback cutoff: {self.DEFAULT_CUTOFF_HOURS} hours"
+                    )
                     start_time = self._format_datetime_for_zoom(
                         dt=self._get_datetime_last_x_hours(self.DEFAULT_CUTOFF_HOURS)
                     )
