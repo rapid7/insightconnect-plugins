@@ -5,6 +5,7 @@ name: infoblox
 title: Infoblox
 description: "[Infoblox](https://www.infoblox.com) helps with managing and identifying devices connected to networks, specifically for the DNS, DHCP and IP address management (collectively, DDI)"
 version: 1.1.0
+connection_version: 1
 vendor: rapid7
 support: community
 status: []
@@ -56,6 +57,7 @@ connection:
     type: string
     required: true
     default: '2.7'
+    example: '2.7'
     enum:
     - '1.0'
     - '1.1'
@@ -247,7 +249,7 @@ actions:
       updated_host:
         type: HostUpdate
         required: false
-        title: Updated host data
+        title: Updated Host Data
         description: Values of fields that should be changed
         example: { 'aliases': [ 'alias1', 'alias2' ], 'extattrs': { 'idk': 'idk' }, 'ipv4addrs': { 'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3' }, 'ipv4addrs+': { 'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3' }, 'ipv4addrs-': { 'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3' } }
     output:

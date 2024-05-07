@@ -30,7 +30,7 @@ class ModifyHostInput(insightconnect_plugin_runtime.Input):
     },
     "updated_host": {
       "$ref": "#/definitions/HostUpdate",
-      "title": "Updated host data",
+      "title": "Updated Host Data",
       "description": "Values of fields that should be changed",
       "order": 2
     }
