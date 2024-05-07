@@ -1,4 +1,5 @@
-FROM rapid7/insightconnect-python-3-38-plugin:5
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:5.4.8
+
 LABEL organization=rapid7
 LABEL sdk=python
 LABEL type=plugin
@@ -17,7 +18,7 @@ RUN apt-get update && apt-get install -y \
     git \
     gnupg \
     krb5-user \
-    libffi6 libffi-dev \
+    libffi7 libffi-dev \
     libssl1.1 \
     ntp adcli sssd \
     samba-common \
