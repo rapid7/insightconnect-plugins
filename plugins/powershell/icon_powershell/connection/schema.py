@@ -59,7 +59,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "script_username_and_password": {
       "$ref": "#/definitions/credential_username_password",
       "title": "Script Username and Password",
-      "description": "Username and password available in script as Powershell variables (`$username`, `$password`)",
+      "description": "Username and password available in script as PowerShell variables (`$username`, `$password`)",
       "order": 6
     }
   },
