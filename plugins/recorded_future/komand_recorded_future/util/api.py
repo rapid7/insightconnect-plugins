@@ -1,10 +1,7 @@
-from io import BytesIO
-
 from insightconnect_plugin_runtime.exceptions import PluginException
 from json import JSONDecodeError
 import requests
 import xmltodict
-import xml.etree.ElementTree as ET
 
 MEMORY_ERROR_CAUSE = "Memory Error: Returned dataset too large"
 MEMORY_ERROR_ASSISTANCE = "Please allow a larger amount of memory to parse this dataset, or try another filter"
