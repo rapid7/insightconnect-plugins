@@ -4,7 +4,12 @@ products: [insightconnect]
 name: powershell
 title: PowerShell
 description: Run a PowerShell script
-version: 3.0.2
+version: 3.0.3
+connection_version: 3
+sdk:
+  type: full
+  version: 5.4.8
+  user: nobody
 supported_versions: ["PowerShell 6.1.2"]
 vendor: rapid7
 support: community
@@ -71,13 +76,13 @@ connection:
     example: '{"kdc": "10.0.1.11", "domain": "EXAMPLE.domain"}'
   script_secret_key:
     title: Script Secret Key
-    description: Credential secret key available in script as powershell variable (`$secret_key`)
+    description: Credential secret key available in script as PowerShell variable (`$secret_key`)
     type: credential_secret_key
     required: false
     example: 9de5069c5afe602b2ea0a04b66beb2c0
   script_username_and_password:
     title: Script Username and Password
-    description: Username and password available in script as powershell variables (`$username`, `$password`)
+    description: Username and password available in script as PowerShell variables (`$username`, `$password`)
     type: credential_username_password
     required: false
     example: '{"username": "user", "password": "mypassword"}'
