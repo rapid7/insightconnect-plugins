@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetHostInput, GetHostOutput
 
 # Custom imports below
 
 
-class GetHost(komand.Action):
+class GetHost(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_host",

@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AddHostInput, AddHostOutput
 
 # Custom imports below
 
 
-class AddHost(komand.Action):
+class AddHost(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_host",
@@ -14,7 +14,7 @@ class AddHost(komand.Action):
         )
 
     def run(self, params={}):
-        host = komand.helper.clean_dict(params.get("host"))
+        host = insightconnect_plugin_runtime.helper.clean_dict(params.get("host"))
         ref = self.connection.infoblox_connection.add_host(host)
         return {"_ref": ref}
 

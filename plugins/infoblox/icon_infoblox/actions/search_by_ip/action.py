@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SearchByIpInput, SearchByIpOutput
 
 # Custom imports below
 
 
-class SearchByIp(komand.Action):
+class SearchByIp(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="search_by_ip",

@@ -3,11 +3,28 @@ extension: plugin
 products: [insightconnect]
 name: infoblox
 title: Infoblox
-description: Manage and identify devices connected to networks managed by Infoblox
-version: 1.0.1
+description: "[Infoblox](https://www.infoblox.com) helps with managing and identifying devices connected to networks, specifically for the DNS, DHCP and IP address management (collectively, DDI)"
+version: 1.1.0
 vendor: rapid7
 support: community
 status: []
+supported_versions: ["2024-05-03"]
+requirements:
+  - An account from the vendor to login to services
+key_features:
+  - Get information about devices on the network
+links:
+  - "[Infoblox API](https://www.infoblox.com/wp-content/uploads/infoblox-deployment-infoblox-rest-api.pdf)"
+references:
+  - "[REST API examples](https://community.infoblox.com/t5/API-Integration/The-definitive-list-of-REST-examples/td-p/1214)"
+version_history:
+  - "1.1.0 - `Connection` - Add SSL verify input | Update SDK from `komand` to `insightconnect_plugin_runtime`"
+  - "1.0.1 - New spec and help.md format for the Extension Library"
+  - "1.0.0 - Initial plugin"
+sdk:
+  type: slim
+  version: 5.4.8
+  user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/infoblox
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -25,11 +42,13 @@ connection:
     description: The URL of a running Infoblox instance (e.g. https://192.168.1.2
       or https://example.infoblox.com)
     type: string
+    example: "https://192.168.1.2"
     required: true
   credentials:
     title: Username and Password
     description: Infoblox username and password
     type: credential_username_password
+    example: {'username': 'user', 'password': 'pass'}
     required: true
   api_version:
     title: API Version
@@ -186,14 +205,17 @@ actions:
       networks, e.g. network FQDN = info.com, host name = example.info.com)
     input:
       host:
-        type: HostCreate
+        title: Host
         description: New host data
+        type: HostCreate
+        example: {'Name': 'name', 'View': 'network_view', 'ipv4addrs': ['192.168.0.1', '192.168.0.2', '192.168.0.3']}
         required: true
     output:
       _ref:
         title: Ref
         description: Object Reference of a newly added host
         type: string
+        example: 'ExampleObjectRef'
         required: true
   get_host:
     title: Get Host
@@ -203,6 +225,7 @@ actions:
         type: string
         title: Ref
         description: Object Reference of the host
+        example: 'ExampleObjectRef'
         required: true
     output:
       host:
@@ -210,6 +233,7 @@ actions:
         required: true
         title: Host
         description: Host details
+        example: { 'ref': 'ExampleObjectRef', 'name': 'HostName', 'ipv4addrs': [ '192.168.0.1', '192.168.0.2', '192.168.0.3' ], 'view': 'FQDN', 'extattrs': { 'idk': 'idk' }, 'aliases': [ 'alias1', 'alias2' ] }
   modify_host:
     title: Modify Host
     description: Update host data
@@ -219,17 +243,20 @@ actions:
         title: Ref
         description: Object Reference of the host to update
         required: true
+        example: 'HostRef'
       updated_host:
         type: HostUpdate
         required: false
         title: Updated host data
         description: Values of fields that should be changed
+        example: { 'aliases': [ 'alias1', 'alias2' ], 'extattrs': { 'idk': 'idk' }, 'ipv4addrs': { 'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3' }, 'ipv4addrs+': { 'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3' }, 'ipv4addrs-': { 'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3' } }
     output:
       _ref:
         type: string
         required: true
         title: Ref
         description: Object Reference of the modified host
+        example: 'ObjectRef'
   delete_host:
     title: Delete Host
     description: Delete a host
@@ -239,12 +266,14 @@ actions:
         title: Ref
         description: Object Reference of the host to remove
         required: true
+        example: 'ObjectRef'
     output:
       _ref:
         type: string
         title: Ref
         description: Object Reference of the removed host
         required: true
+        example: 'ObjectRef'
   search_by_name:
     title: Search by Name
     description: Search hosts by name
@@ -254,12 +283,14 @@ actions:
         required: true
         title: Name Pattern
         description: Regular expression to match against host name
+        example: "/^[a-z ,.'-]+$/i"
     output:
       result:
         type: '[]Host'
         required: true
         title: Result
         description: Matched hosts
+        example: ['Host1', 'Host2']
   search_by_ip:
     title: Search by IP
     description: Search for any object with an IP address
@@ -269,12 +300,14 @@ actions:
         required: true
         title: IP
         description: IP address
+        example: '192.168.0.1'
     output:
       result:
         type: '[]string'
         required: true
         title: Result
         description: Object References of all objects with given IP address
+        example: ['Object1', 'Object2']
   search_by_mac:
     title: Search by MAC
     description: Search fixed addresses by MAC address
@@ -284,12 +317,14 @@ actions:
         required: true
         title: MAC
         description: MAC address
+        example: '2c549188c9e3'
     output:
       result:
         type: '[]IPv4Addr'
         required: true
         title: Result
         description: Matched fixed addresses
+        example: [{ 'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3' }, { 'ipv4addr': '192.168.0.2', 'mac': '2c549188c9e3' }]
   add_fixed_address:
     title: Add Fixed Address
     description: Add fixed address (a specific IP address that a DHCP server always
@@ -297,12 +332,15 @@ actions:
     input:
       address:
         required: true
+        # TODO - This type is a duplicate of IPV4AddrCreate
         type: FixedAddressCreate
         title: Address
         description: New fixed address data
+        example: { 'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3' }
     output:
       _ref:
         required: true
         type: string
         title: Ref
         description: Object Reference of a newly added fixed address
+        example: 'ObjectRef'
