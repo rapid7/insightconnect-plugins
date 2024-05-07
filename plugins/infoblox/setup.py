@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="infoblox-rapid7-plugin",
-      version="1.1.0",
+      version="2.0.0",
       description="[Infoblox](https://www.infoblox.com) helps with managing and identifying devices connected to networks, specifically for the DNS, DHCP and IP address management (collectively, DDI)",
       author="rapid7",
       author_email="",

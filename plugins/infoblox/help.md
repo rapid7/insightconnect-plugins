@@ -439,7 +439,7 @@ When adding a new host make sure that a corresponding network is already created
 
 # Version History
 
-* 1.1.0 - `Connection` - Add SSL verify input | Update SDK from `komand` to `insightconnect_plugin_runtime`
+* 2.0.0 - `Connection` - Add SSL verify input | Update SDK from `komand` to `insightconnect_plugin_runtime` | Update input/output names from `_ref` to `ref`
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 

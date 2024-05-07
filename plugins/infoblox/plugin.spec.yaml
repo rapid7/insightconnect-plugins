@@ -4,8 +4,8 @@ products: [insightconnect]
 name: infoblox
 title: Infoblox
 description: "[Infoblox](https://www.infoblox.com) helps with managing and identifying devices connected to networks, specifically for the DNS, DHCP and IP address management (collectively, DDI)"
-version: 1.1.0
-connection_version: 1
+version: 2.0.0
+connection_version: 2
 vendor: rapid7
 support: community
 status: []
@@ -19,7 +19,7 @@ links:
 references:
   - "[REST API examples](https://community.infoblox.com/t5/API-Integration/The-definitive-list-of-REST-examples/td-p/1214)"
 version_history:
-  - "1.1.0 - `Connection` - Add SSL verify input | Update SDK from `komand` to `insightconnect_plugin_runtime`"
+  - "2.0.0 - `Connection` - Add SSL verify input | Update SDK from `komand` to `insightconnect_plugin_runtime` | Update input/output names from `_ref` to `ref`"
   - "1.0.1 - New spec and help.md format for the Extension Library"
   - "1.0.0 - Initial plugin"
 sdk:
