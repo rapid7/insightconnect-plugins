@@ -82,7 +82,7 @@ connection:
     example: 9de5069c5afe602b2ea0a04b66beb2c0
   script_username_and_password:
     title: Script Username and Password
-    description: Username and password available in script as powershell variables (`$username`, `$password`)
+    description: Username and password available in script as Powershell variables (`$username`, `$password`)
     type: credential_username_password
     required: false
     example: '{"username": "user", "password": "mypassword"}'
