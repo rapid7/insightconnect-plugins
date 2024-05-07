@@ -1,6 +1,6 @@
 # Description
 
-[Infoblox](https://www.infoblox.com) helps with managing and identifying devices connected to networks, specifically for the DNS, DHCP and IP address management (collectively, DDI).
+[Infoblox](https://www.infoblox.com) helps with managing and identifying devices connected to networks, specifically for the DNS, DHCP and IP address management (collectively, DDI)
 
 # Key Features
 
@@ -70,13 +70,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|_ref|string|True|Object Reference of a newly added fixed address|ObjectRef|
+|ref|string|True|Object Reference of a newly added fixed address|ObjectRef|
   
 Example output:
 
 ```
 {
-  "_ref": "ObjectRef"
+  "ref": "ObjectRef"
 }
 ```
 
@@ -111,13 +111,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|_ref|string|True|Object Reference of a newly added host|ExampleObjectRef|
+|ref|string|True|Object Reference of a newly added host|ExampleObjectRef|
   
 Example output:
 
 ```
 {
-  "_ref": "ExampleObjectRef"
+  "ref": "ExampleObjectRef"
 }
 ```
 
@@ -129,13 +129,13 @@ This action is used to delete a host
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|_ref|string|None|True|Object Reference of the host to remove|None|ObjectRef|None|None|
+|ref|string|None|True|Object Reference of the host to remove|None|ObjectRef|None|None|
   
 Example input:
 
 ```
 {
-  "_ref": "ObjectRef"
+  "ref": "ObjectRef"
 }
 ```
 
@@ -143,13 +143,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|_ref|string|True|Object Reference of the removed host|ObjectRef|
+|ref|string|True|Object Reference of the removed host|ObjectRef|
   
 Example output:
 
 ```
 {
-  "_ref": "ObjectRef"
+  "ref": "ObjectRef"
 }
 ```
 
@@ -161,13 +161,13 @@ This action is used to obtain host details
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|_ref|string|None|True|Object Reference of the host|None|ExampleObjectRef|None|None|
+|ref|string|None|True|Object Reference of the host|None|ExampleObjectRef|None|None|
   
 Example input:
 
 ```
 {
-  "_ref": "ExampleObjectRef"
+  "ref": "ExampleObjectRef"
 }
 ```
 
@@ -209,14 +209,14 @@ This action is used to update host data
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|_ref|string|None|True|Object Reference of the host to update|None|HostRef|None|None|
+|ref|string|None|True|Object Reference of the host to update|None|HostRef|None|None|
 |updated_host|HostUpdate|None|False|Values of fields that should be changed|None|{'aliases': ['alias1', 'alias2'], 'extattrs': {'idk': 'idk'}, 'ipv4addrs': {'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3'}, 'ipv4addrs+': {'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3'}, 'ipv4addrs-': {'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3'}}|None|None|
   
 Example input:
 
 ```
 {
-  "_ref": "HostRef",
+  "ref": "HostRef",
   "updated_host": {
     "aliases": [
       "alias1",
@@ -245,13 +245,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|_ref|string|True|Object Reference of the modified host|ObjectRef|
+|ref|string|True|Object Reference of the modified host|ObjectRef|
   
 Example output:
 
 ```
 {
-  "_ref": "ObjectRef"
+  "ref": "ObjectRef"
 }
 ```
 
@@ -368,6 +368,7 @@ Example output:
 ### Triggers
   
 *This plugin does not contain any triggers.*
+
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -392,21 +393,21 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Ref|string|None|True|Object Reference of the IP address|None|
 |Configure for DHCP|boolean|None|False|Configure for DHCP flag|None|
 |Host|string|None|False|The name of the host|None|
 |IPv4 Address|string|None|True|Either an IP address or a function (e.g. func:nextavailableip:10.1.1.0/24)|None|
 |MAC|string|None|False|MAC address|None|
+|Ref|string|None|True|Object Reference of the IP address|None|
   
 **Host**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Ref|string|None|True|Object Reference of the host|None|
 |Aliases|[]string|None|False|Aliases associated with the host|None|
 |Extattrs|object|None|False|Extensible attributes|None|
 |IPv4 Addresses|[]IPv4Addr|None|True|IP addresses associated with the new host|None|
 |Name|string|None|True|Name of the new host|None|
+|Ref|string|None|True|Object Reference of the host|None|
 |View|string|None|False|The network view this host is associated with|None|
   
 **HostCreate**

@@ -63,7 +63,7 @@ class SearchByNameOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "Host",
       "properties": {
-        "_ref": {
+        "ref": {
           "type": "string",
           "title": "Ref",
           "description": "Object Reference of the host",
@@ -107,9 +107,9 @@ class SearchByNameOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "required": [
-        "_ref",
         "ipv4addrs",
-        "name"
+        "name",
+        "ref"
       ]
     },
     "IPv4Addr": {
@@ -140,7 +140,7 @@ class SearchByNameOutput(insightconnect_plugin_runtime.Output):
           "description": "The name of the host",
           "order": 4
         },
-        "_ref": {
+        "ref": {
           "type": "string",
           "title": "Ref",
           "description": "Object Reference of the IP address",
@@ -148,8 +148,8 @@ class SearchByNameOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "required": [
-        "_ref",
-        "ipv4addr"
+        "ipv4addr",
+        "ref"
       ]
     }
   }

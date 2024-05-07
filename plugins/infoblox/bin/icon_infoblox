@@ -7,7 +7,7 @@ from sys import argv
 Name = "Infoblox"
 Vendor = "rapid7"
 Version = "1.1.0"
-Description = "[Infoblox](https://www.infoblox.com) helps with managing and identifying devices connected to networks, specifically for the DNS, DHCP and IP address management (collectively, DDI)."
+Description = "[Infoblox](https://www.infoblox.com) helps with managing and identifying devices connected to networks, specifically for the DNS, DHCP and IP address management (collectively, DDI)"
 
 
 def main():
