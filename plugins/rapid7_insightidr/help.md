@@ -2332,18 +2332,18 @@ This action is used to allows to search for investigations that match the given 
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|end_time|date|None|False|The ending time when investigations were created|None|2020-09-06 12:07:55.136667+00:00|None|None|
+|end_time|date|None|False|The ending time when investigations were created|None|2020-09-06 12:07:55.136666+00:00|None|None|
 |index|integer|0|True|Zero-based index of the page to retrieve, where value must be greater than or equal to 0|None|1|None|None|
 |search|[]object|None|False|The criteria for which entities to return|None|[{"field": "Example Field", "operator": "EQUALS", "value": "Test"}]|None|None|
 |size|integer|100|True|Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100|None|100|None|None|
 |sort|[]object|None|False|The sorting information, where possible field values are RRN, PRIORITY, CREATED TIME, and order values are ASC, DESC|None|[{"field": "Example Field", "order": "ASC"}]|None|None|
-|start_time|date|None|False|The starting time from when investigations were created|None|2020-09-06 12:07:55.136667+00:00|None|None|
+|start_time|date|None|False|The starting time from when investigations were created|None|2020-09-06 12:07:55.136666+00:00|None|None|
   
 Example input:
 
 ```
 {
-  "end_time": "2020-09-06 12:07:55.136667+00:00",
+  "end_time": "2020-09-06 12:07:55.136666+00:00",
   "index": 0,
   "search": [
     {
@@ -2359,7 +2359,7 @@ Example input:
       "order": "ASC"
     }
   ],
-  "start_time": "2020-09-06 12:07:55.136667+00:00"
+  "start_time": "2020-09-06 12:07:55.136666+00:00"
 }
 ```
 

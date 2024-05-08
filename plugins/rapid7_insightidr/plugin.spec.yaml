@@ -346,7 +346,7 @@ types:
       required: false
     data:
       title: Data
-      type: '[]object'
+      type: "[]object"
       description: Data
       required: false
     lastQuickScanEndTime:
@@ -803,12 +803,12 @@ types:
     rule_matching_keys:
       title: Rule Matching Keys
       description: The keys and values used when matching detection rule logic.
-      type: '[]object'
+      type: "[]object"
       required: false
     rule_keys_of_interest:
       title: Rule Keys of Interest
       description: The keys and values used when matching detection rule logic.
-      type: '[]object'
+      type: "[]object"
       required: false
     responsibility:
       title: Responsibility
@@ -887,7 +887,7 @@ types:
     fields:
       title: Fields
       description: Additional fields specified in the request.
-      type: '[]object'
+      type: "[]object"
       required: false
   organization_object:
     id:
@@ -1353,7 +1353,7 @@ actions:
         description: The list of indicators that have been rejected during the update
         type: "[]string"
         required: false
-        example: ["example.com","10.0.0.1"]
+        example: ["example.com", "10.0.0.1"]
       threat:
         title: Threat
         description: The information about the threat
@@ -1504,60 +1504,60 @@ actions:
         required: true
         example: {"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}
   search_investigations:
-     title: Search Investigations
-     description: Allows to search for investigations that match the given criteria
-     input:
-       search:
-         title: Search
-         description: The criteria for which entities to return
-         type: '[]object'
-         required: false
-         example: '[{"field": "Example Field", "operator": "EQUALS", "value": "Test"}]'
-       sort:
-         title: Sort
-         description: The sorting information, where possible field values are RRN, PRIORITY, CREATED TIME, and order values are ASC, DESC
-         type: '[]object'
-         required: false
-         example: '[{"field": "Example Field", "order": "ASC"}]'
-       start_time:
-         title: Start Time
-         description: The starting time from when investigations were created
-         type: date
-         required: false
-         example: 2020-09-06T12:07:55.136667Z
-       end_time:
-         title: End Time
-         description: The ending time when investigations were created
-         type: date
-         required: false
-         example: 2020-09-06T12:07:55.136667Z
-       size:
-         title: Size
-         description: Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100
-         type: integer
-         required: true
-         default: 100
-         example: 100
-       index:
-         title: Index
-         description: Zero-based index of the page to retrieve, where value must be greater than or equal to 0
-         type: integer
-         required: true
-         default: 0
-         example: 1
-     output:
-       investigations:
-         title: Investigations
-         description: A list of found investigations
-         type: '[]investigation'
-         required: true
-         example: [{"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}]
-       metadata:
-         title: Metadata
-         description: The pagination parameters used to generate this page result
-         type: investigation_metadata
-         required: true
-         example: {"index": 0,"size": 1,"total_data": 1,"total_pages": 1}
+    title: Search Investigations
+    description: Allows to search for investigations that match the given criteria
+    input:
+      search:
+        title: Search
+        description: The criteria for which entities to return
+        type: "[]object"
+        required: false
+        example: '[{"field": "Example Field", "operator": "EQUALS", "value": "Test"}]'
+      sort:
+        title: Sort
+        description: The sorting information, where possible field values are RRN, PRIORITY, CREATED TIME, and order values are ASC, DESC
+        type: "[]object"
+        required: false
+        example: '[{"field": "Example Field", "order": "ASC"}]'
+      start_time:
+        title: Start Time
+        description: The starting time from when investigations were created
+        type: date
+        required: false
+        example: 2020-09-06T12:07:55.1366667Z
+      end_time:
+        title: End Time
+        description: The ending time when investigations were created
+        type: date
+        required: false
+        example: 2020-09-06T12:07:55.1366667Z
+      size:
+        title: Size
+        description: Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100
+        type: integer
+        required: true
+        default: 100
+        example: 100
+      index:
+        title: Index
+        description: Zero-based index of the page to retrieve, where value must be greater than or equal to 0
+        type: integer
+        required: true
+        default: 0
+        example: 1
+    output:
+      investigations:
+        title: Investigations
+        description: A list of found investigations
+        type: "[]investigation"
+        required: true
+        example: [{"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}]
+      metadata:
+        title: Metadata
+        description: The pagination parameters used to generate this page result
+        type: investigation_metadata
+        required: true
+        example: {"index": 0,"size": 1,"total_data": 1,"total_pages": 1}
   update_investigation:
     title: Update Investigation
     description: Allows to update existing investigation by ID or RRN
@@ -2147,14 +2147,14 @@ actions:
         description: Add indicators to new threat in InsightIDR. Accept IP addresses, process hashes (SHA1, MD5, SHA256), domain names, URLs
         type: '[]string'
         required: true
-        example: ["example.com","10.0.0.1"]
+        example: ["example.com", "10.0.0.1"]
     output:
       rejected_indicators:
         title: Rejected Indicators
         description: Rejected indicators in new threat
         type: "[]string"
         required: true
-        example: ["example.com","10.0.0.1"]
+        example: ["example.com", "10.0.0.1"]
       threat:
         title: Threat
         description: The information about the new threat
@@ -2336,7 +2336,7 @@ actions:
         description: Attachment details
         type: "[]attachment"
         required: false
-        example: [{rrn: rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890, creator: {type: USER, name: Example User}, created_time: '2022-08-19T13:00:58.645Z', file_name: test.txt, mime_type: text/plain, size: 4, scan_status: CLEAN}]
+        example: [{"rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890","creator": {"type": "USER","name": "Example User"},"created_time": "2022-08-19T13:00:58.645Z","file_name": "test.txt","mime_type": "text/plain","size": 4,"scan_status": "CLEAN"}]
       success:
         title: Success
         description: Whether the action was successful or not
