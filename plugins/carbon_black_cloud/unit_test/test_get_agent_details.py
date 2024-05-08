@@ -106,9 +106,12 @@ class TestGetAgentDetails(TestCase):
     @parameterized.expand(
         [
             (mock_request_400, "400 Bad Request"),
-            (mock_request_401, "Authentication Error"),
+            (mock_request_401, "Authentication Error. Please verify connection details are correct."),
             (mock_request_403, "The specified object cannot be accessed or changed."),
-            (mock_request_404, "The object referenced in the request cannot be found."),
+            (
+                mock_request_404,
+                "The requested URL can not be found. Ensure your organization key and URL in your connection is correct.",
+            ),
             (mock_request_409, "Either the name you chose already exists, or there is an unacceptable character used."),
             (mock_request_503, PluginException.causes[PluginException.Preset.UNKNOWN]),
         ],

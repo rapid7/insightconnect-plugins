@@ -7,7 +7,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Dict, Tuple
 
 from icon_carbon_black_cloud.util.helper_util import hash_sha1
-from icon_carbon_black_cloud.util.exceptions import RateLimitException
+from icon_carbon_black_cloud.util.exceptions import RateLimitException, HTTPErrorException
 from icon_carbon_black_cloud.util.constants import OBSERVATION_TYPES
 
 ALERT_TIME_FIELD = "backend_timestamp"
@@ -42,7 +42,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         )
 
     def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument # noqa: MC0001
-        alerts_and_observations, has_more_pages, observations_has_more_pages = [], False, False
+        alerts_and_observations, has_more_pages, observations_has_more_pages, alerts_success = [], False, False, False
         try:
             rate_limited = state.get(RATE_LIMITED)
             now_time = self._get_current_time()
@@ -73,6 +73,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
             alerts, alert_has_more_pages, state = self.get_alerts(alerts_start, end_time, state)
             alerts_and_observations.extend(alerts)
+            alerts_success = True
 
             if observation_job_id:
                 observations, observations_has_more_pages, state = self.get_observations(observation_job_id, state)
@@ -88,8 +89,17 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             self.logger.info(f"Rate limited on API, returning {(len(alerts_and_observations))} items...")
             state[RATE_LIMITED] = (self._get_current_time() + timedelta(minutes=5)).strftime(TIME_FORMAT)
             return alerts_and_observations, state, False, 200, rate_limit_error
+        except HTTPErrorException as http_error:
+            state = self._update_state_in_404(http_error.status_code, state, alerts_success)
+            self.logger.info(
+                f"HTTP error from Carbon Black. State={state}, Status code={http_error.status_code}, returning"
+                f" {(len(alerts_and_observations))} items..."
+            )
+            return alerts_and_observations, state, False, http_error.status_code, http_error
         except Exception as error:
-            self.logger.error(f"Hit an unexpected error during task execution. Error={error}", exc_info=True)
+            self.logger.error(
+                f"Hit an unexpected error during task execution. State={state}, Error={error}", exc_info=True
+            )
             return alerts_and_observations, state, False, 500, error
 
     def get_alerts(
@@ -295,6 +305,24 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             return True  # job time no longer valid - parse available results
 
         return False  # job time is still valid - honor contact vs completed values
+
+    def _update_state_in_404(self, status_code: int, state: Dict[str, str], alerts_success: bool) -> Dict[str, str]:
+        """
+        In the case that the observation ID from CB is no longer available and we return a 404, we should delete this ID
+        from the state so that the next run can move on and not continually poll for this missing job.
+        """
+        if alerts_success and status_code == 404:
+            observation_job_id = state.get(LAST_OBSERVATION_JOB)
+            if observation_job_id:
+                self.logger.error(
+                    f"Received a 404 when trying to retrieve the job - '{observation_job_id}'. "
+                    "Removing this job from the state to continue on the next run..."
+                )
+                # Only delete the observation ID and the time this was triggered
+                # But keep the hashes and timings in the state for the next job
+                del state[LAST_OBSERVATION_JOB]
+                del state[LAST_OBSERVATION_JOB_TIME]
+        return state
 
     @staticmethod
     def _get_current_time():
