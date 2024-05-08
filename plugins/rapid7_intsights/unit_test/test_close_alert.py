@@ -54,14 +54,13 @@ class TestCloseAlert(TestCase):
             [
                 "invalid_id",
                 Util.read_file_to_dict("inputs/close_alert_bad.json.inp"),
-                "The server is unable to process the request.",
-                "Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support.",
+                PluginException(preset=PluginException.Preset.BAD_REQUEST),
             ]
         ]
     )
-    def test_close_alert_bad(self, mock_request, test_name, input_parameters, cause, assistance):
+    def test_close_alert_bad(self, mock_request, test_name, input_parameters, expected_error):
         validate(input_parameters, CloseAlertInput.schema)
         with self.assertRaises(PluginException) as error:
             self.action.run(input_parameters)
-        self.assertEqual(error.exception.cause, cause)
-        self.assertEqual(error.exception.assistance, assistance)
+        self.assertEqual(error.exception.cause, expected_error.cause)
+        self.assertEqual(error.exception.assistance, expected_error.assistance)

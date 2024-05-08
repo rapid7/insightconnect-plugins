@@ -6,7 +6,6 @@ import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
 from requests.auth import HTTPBasicAuth
-from icon_rapid7_intsights.util.constants import Assistance, Cause
 
 
 @dataclass
@@ -300,7 +299,7 @@ class IntSightsAPI:
 
     @staticmethod
     def check_status_codes(response: requests.Response):
-        if response.status_code == 400:
+        if response.status_code in [400, 422]:
             if "StatusNotChanged" in response.text:
                 raise PluginException(
                     cause="The status for the alert was not changed by this request",
@@ -318,12 +317,6 @@ class IntSightsAPI:
             raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
         if response.status_code == 404:
             raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
-        if response.status_code == 422:
-            raise PluginException(
-                cause=Cause.INVALID_DETAILS,
-                assistance=Assistance.VERIFY_INPUT,
-                data=response.text,
-            )
         if 400 <= response.status_code < 500:
             raise PluginException(
                 preset=PluginException.Preset.UNKNOWN,
