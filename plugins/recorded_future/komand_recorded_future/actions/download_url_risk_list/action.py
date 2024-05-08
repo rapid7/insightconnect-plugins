@@ -23,14 +23,13 @@ class DownloadUrlRiskList(insightconnect_plugin_runtime.Action):
         if risk_list:
             query_params[Input.LIST] = risk_list
         response_content, response_dict = self.connection.client.make_request(
-            Endpoint.download_url_risk_list(),
-            query_params
+            Endpoint.download_url_risk_list(), query_params
         )
         data = {
             Output.RISK_LIST: response_dict,
             Output.RISK_LIST_GZIP: {
                 "filename": "risk_list.gzip",
-                "content": base64.b64encode(response_content).decode('utf-8')
-            }
+                "content": base64.b64encode(response_content).decode("utf-8"),
+            },
         }
         return clean(data)

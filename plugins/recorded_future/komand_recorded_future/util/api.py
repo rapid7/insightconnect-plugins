@@ -26,17 +26,32 @@ class RecordedFutureApi:
         self.logger.info(f"Plugin Version: {version}")
         return version
 
-
     def _call_api(self, method: str, endpoint: str, params: dict = None, data: dict = None, json: dict = None):
         _url = self.base_url + endpoint
         try:
-            response = requests.request(url=_url, method=method, params=params, data=data, json=json, headers=self.headers)
+            response = requests.request(
+                url=_url, method=method, params=params, data=data, json=json, headers=self.headers
+            )
         except MemoryError:
             raise PluginException(
                 cause="Memory Error: Returned dataset too large",
                 assistance="Please allow a larger amount of memory to parse this dataset, or try another list",
-                data=f"Memory Error using endpoint: {endpoint}"
+                data=f"Memory Error using endpoint: {endpoint}",
             )
+        self.response_handled(response)
+        if endpoint.endswith("risklist"):
+            try:
+                decompressed_data = gzip.decompress(response.content)
+                return response.content, dict(xmltodict.parse(decompressed_data))
+            except MemoryError:
+                self.logger.info("Response is too large to read. Returning GZIP...")
+                return response.content, None
+        try:
+            return response.json()
+        except JSONDecodeError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+
+    def response_handled(self, response) -> None:
         if response.status_code == 401:
             raise PluginException(preset=PluginException.Preset.API_KEY)
         if response.status_code == 403:
@@ -51,17 +66,6 @@ class RecordedFutureApi:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
-        if endpoint.endswith("risklist"):
-            try:
-                decompressed_data = gzip.decompress(response.content)
-                return response.content, dict(xmltodict.parse(decompressed_data))
-            except MemoryError:
-                self.logger.info("Response is too large to read. Returning GZIP...")
-                return response.content, None
-        try:
-            return response.json()
-        except JSONDecodeError:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
     def make_request(self, endpoint: str, params: dict = None) -> dict:
         return self._call_api("GET", endpoint, params)
