@@ -138,7 +138,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |count|integer|True|Number of log entries found|10|
-|results_events|[]events|False|Query Results|[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": false, "service": "ntlmssp", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": false, "eventData": null, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href: https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]|
+|results_events|[]events|False|Query Results|[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": "false", "service": "ntlmssp ", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp ", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": false, "eventData": null, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]|
 |results_statistical|statistics|False|Query Results|{'leql': {'during': {'from': 1699579214000, 'to': 1699622414000}, 'statement': 'groupby(r7_context.asset.name)'}, 'logs': ['123456-abcd-1234-abcd-123456abc'], 'search_stats': {'bytes_all': 9961260, 'bytes_checked': 9961260, 'duration_ms': 19, 'events_all': 1640, 'events_checked': 1640, 'events_matched': 1639, 'index_factor': 0.0}, 'statistics': {'all_exact_result': True, 'cardinality': 0, 'from': 1699579214000, 'granularity': 4320000, 'groups': [{'linux': {'count': 1163.0}}, {'windowsx64': {'count': 476.0}}], 'groups_timeseries': [{'linux': {'groups_timeseries': [], 'series': [{'count': 45.0}, {'count': 21.0}, {'count': 16.0}, {'count': 270.0}, {'count': 27.0}, {'count': 43.0}, {'count': 27.0}, {'count': 39.0}, {'count': 29.0}, {'count': 646.0}], 'totals': {'count': 1163.0}}}, {'windowsx64': {'groups_timeseries': [], 'series': [{'count': 54.0}, {'count': 40.0}, {'count': 60.0}, {'count': 37.0}, {'count': 42.0}, {'count': 62.0}, {'count': 41.0}, {'count': 47.0}, {'count': 49.0}, {'count': 44.0}], 'totals': {'count': 476.0}}}], 'others': {'series': []}, 'stats': {}, 'status': 200, 'timeseries': {}, 'to': 1699622414000, 'type': 'count'}}|
   
 Example output:
@@ -146,7 +146,63 @@ Example output:
 ```
 {
   "count": 10,
-  "results_events": "[{\"labels\": [], \"timestamp\": 1601598638768, \"sequence_number\": 123456789123456789, \"log_id\": \"64z0f0p9-1a99-4501-xe36-a6d03687f313\", \"message\": {\"timestamp\": \"2020-10-02T00:29:14.649Z\", \"destination_asset\": \"iagent-win7\", \"source_asset_address\": \"192.168.100.50\", \"destination_asset_address\": \"example-host\", \"destination_local_account\": \"user\", \"logon_type\": \"NETWORK\", \"result\": \"SUCCESS\", \"new_authentication\": false, \"service\": \"ntlmssp\", \"source_json\": {\"sourceName\": \"Microsoft-Windows-Security-Auditing\", \"insertionStrings\": [\"S-1-0-0\", \"-\", \"-\", \"0x0\", \"X-X-X-XXXXXXXXXXX\", \"user@example.com\", \"example-host\", \"0x204f163c\", \"3\", \"NtLmSsp\", \"NTLM\", \"\", \"{00000000-0000-0000-0000-000000000000}\", \"-\", \"NTLM V2\", \"128\", \"0x0\", \"-\", \"192.168.50.1\", \"59090\"], \"eventCode\": 4624, \"computerName\": \"example-host\", \"sid\": \"\", \"isDomainController\": false, \"eventData\": null, \"timeWritten\": \"2020-10-02T00:29:13.670722000Z\"}}, \"links\": [{\"rel\": \"Context\", \"href: https://us.api.insight.rapid7.com/log_search/query/context/xxxx\"}], \"sequence_number_str\": \"123456789123456789\"}]",
+  "results_events": [
+    {
+      "labels": [],
+      "links": [
+        {
+          "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx",
+          "rel": "Context"
+        }
+      ],
+      "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313",
+      "message": {
+        "destination_asset": "iagent-win7",
+        "destination_asset_address": "example-host",
+        "destination_local_account": "user",
+        "logon_type": "NETWORK",
+        "new_authentication": "false",
+        "result": "SUCCESS",
+        "service": "ntlmssp ",
+        "source_asset_address": "192.168.100.50",
+        "source_json": {
+          "computerName": "example-host",
+          "eventCode": 4624,
+          "eventData": null,
+          "insertionStrings": [
+            "S-1-0-0",
+            "-",
+            "-",
+            "0x0",
+            "X-X-X-XXXXXXXXXXX",
+            "user@example.com",
+            "example-host",
+            "0x204f163c",
+            "3",
+            "NtLmSsp ",
+            "NTLM",
+            "",
+            "{00000000-0000-0000-0000-000000000000}",
+            "-",
+            "NTLM V2",
+            "128",
+            "0x0",
+            "-",
+            "192.168.50.1",
+            "59090"
+          ],
+          "isDomainController": false,
+          "sid": "",
+          "sourceName": "Microsoft-Windows-Security-Auditing",
+          "timeWritten": "2020-10-02T00:29:13.670722000Z"
+        },
+        "timestamp": "2020-10-02T00:29:14.649Z"
+      },
+      "sequence_number": 123456789123456789,
+      "sequence_number_str": "123456789123456789",
+      "timestamp": 1601598638768
+    }
+  ],
   "results_statistical": {
     "leql": {
       "during": {
@@ -313,7 +369,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |count|integer|True|Number of log entries found|10|
-|results_events|[]events|False|Query Results|[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": false, "service": "ntlmssp", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": false, "eventData": null, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]|
+|results_events|[]events|False|Query Results|[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": "false", "service": "ntlmssp ", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp ", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": false, "eventData": null, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]|
 |results_statistical|statistics|False|Query Results|{'leql': {'during': {'from': 1699579214000, 'to': 1699622414000}, 'statement': 'groupby(r7_context.asset.name)'}, 'logs': ['123456-abcd-1234-abcd-123456abc'], 'search_stats': {'bytes_all': 9961260, 'bytes_checked': 9961260, 'duration_ms': 19, 'events_all': 1640, 'events_checked': 1640, 'events_matched': 1639, 'index_factor': 0.0}, 'statistics': {'all_exact_result': True, 'cardinality': 0, 'from': 1699579214000, 'granularity': 4320000, 'groups': [{'linux': {'count': 1163.0}}, {'windowsx64': {'count': 476.0}}], 'groups_timeseries': [{'linux': {'groups_timeseries': [], 'series': [{'count': 45.0}, {'count': 21.0}, {'count': 16.0}, {'count': 270.0}, {'count': 27.0}, {'count': 43.0}, {'count': 27.0}, {'count': 39.0}, {'count': 29.0}, {'count': 646.0}], 'totals': {'count': 1163.0}}}, {'windowsx64': {'groups_timeseries': [], 'series': [{'count': 54.0}, {'count': 40.0}, {'count': 60.0}, {'count': 37.0}, {'count': 42.0}, {'count': 62.0}, {'count': 41.0}, {'count': 47.0}, {'count': 49.0}, {'count': 44.0}], 'totals': {'count': 476.0}}}], 'others': {'series': []}, 'stats': {}, 'status': 200, 'timeseries': {}, 'to': 1699622414000, 'type': 'count'}}|
   
 Example output:
@@ -336,9 +392,9 @@ Example output:
         "destination_asset_address": "example-host",
         "destination_local_account": "user",
         "logon_type": "NETWORK",
-        "new_authentication": false,
+        "new_authentication": "false",
         "result": "SUCCESS",
-        "service": "ntlmssp",
+        "service": "ntlmssp ",
         "source_asset_address": "192.168.100.50",
         "source_json": {
           "computerName": "example-host",
@@ -354,7 +410,7 @@ Example output:
             "example-host",
             "0x204f163c",
             "3",
-            "NtLmSsp",
+            "NtLmSsp ",
             "NTLM",
             "",
             "{00000000-0000-0000-0000-000000000000}",
@@ -1012,7 +1068,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|account|account_object|False|Account details|{'rrn': 'rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:account:83002c85d7c6', 'name': 'user@example.com', 'domain': 'tor.acme.com', 'disabled': True, 'user': {'rrn': 'rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6', 'name': 'John Doe'}, 'authentication_service': 'ACTIVE_DIRECTORY'}|
+|account|account_object|False|Account details|{'rrn': 'rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:account:83002c85d7c6', 'name': 'jdoe@acme.com', 'domain': 'tor.acme.com', 'disabled': True, 'user': {'rrn': 'rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6', 'name': 'John Doe'}, 'authentication_service': 'ACTIVE_DIRECTORY'}|
   
 Example output:
 
@@ -1022,7 +1078,7 @@ Example output:
     "authentication_service": "ACTIVE_DIRECTORY",
     "disabled": true,
     "domain": "tor.acme.com",
-    "name": "user@example.com",
+    "name": "jdoe@acme.com",
     "rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:account:83002c85d7c6",
     "user": {
       "name": "John Doe",
@@ -1897,7 +1953,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|events|[]events|True|Events from logs|[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": false, "service": "ntlmssp", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": false, "eventData": null, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]|
+|events|[]events|True|Events from logs|[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": "false", "service": "ntlmssp ", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp ", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": false, "eventData": null, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]|
   
 Example output:
 
@@ -1918,9 +1974,9 @@ Example output:
         "destination_asset_address": "example-host",
         "destination_local_account": "user",
         "logon_type": "NETWORK",
-        "new_authentication": false,
+        "new_authentication": "false",
         "result": "SUCCESS",
-        "service": "ntlmssp",
+        "service": "ntlmssp ",
         "source_asset_address": "192.168.100.50",
         "source_json": {
           "computerName": "example-host",
@@ -1936,7 +1992,7 @@ Example output:
             "example-host",
             "0x204f163c",
             "3",
-            "NtLmSsp",
+            "NtLmSsp ",
             "NTLM",
             "",
             "{00000000-0000-0000-0000-000000000000}",
@@ -2064,7 +2120,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|data|[]account_object|True|The list of account information|[{"rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:account:83002c85d7c6", "name": "user@example.com", "domain": "tor.acme.com", "disabled": true, "user": {"rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6", "name": "John Doe"}, "authentication_service": "ACTIVE_DIRECTORY"}]|
+|data|[]account_object|True|The list of account information|[{"rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:account:83002c85d7c6", "name": "jdoe@acme.com", "domain": "tor.acme.com", "disabled": true, "user": {"rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6", "name": "John Doe"}, "authentication_service": "ACTIVE_DIRECTORY"}]|
 |metadata|investigation_metadata|True|The pagination parameters used to generate this page result|{'index': 0, 'size': 1, 'total_data': 1, 'total_pages': 1}|
   
 Example output:
@@ -2076,7 +2132,7 @@ Example output:
       "authentication_service": "ACTIVE_DIRECTORY",
       "disabled": true,
       "domain": "tor.acme.com",
-      "name": "user@example.com",
+      "name": "jdoe@acme.com",
       "rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:account:83002c85d7c6",
       "user": {
         "name": "John Doe",
