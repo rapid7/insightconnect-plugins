@@ -222,7 +222,7 @@ types:
     tags:
       title: Tags
       description: The tags applied to the alert.
-      type: '[]string'
+      type: "[]string"
       required: false
   threat:
     indicator_count:
@@ -346,7 +346,7 @@ types:
       required: false
     data:
       title: Data
-      type: '[]object'
+      type: "[]object"
       description: Data
       required: false
     lastQuickScanEndTime:
@@ -410,7 +410,7 @@ types:
     labels:
       title: Labels
       description: List of labels
-      type: '[]string'
+      type: "[]string"
     timestamp:
       title: Timestamp
       description: Timestamp
@@ -430,7 +430,7 @@ types:
     links:
       title: Links
       description: Links
-      type: '[]link'
+      type: "[]link"
   statistics:
     stats:
       title: Stats
@@ -440,7 +440,7 @@ types:
     groups:
       title: Groups
       description: Holds the overall result for each group in a 'groupby' query
-      type: '[]object'
+      type: "[]object"
       required: false
     granularity:
       title: Granularity
@@ -455,7 +455,7 @@ types:
     groups_timeseries:
       title: Groups Time Series
       description: For 'groupby' queries, holds the timeseries object for each group
-      type: '[]object'
+      type: "[]object"
       required: false
     from:
       title: From
@@ -522,7 +522,7 @@ types:
       required: false
     links:
       title: Links
-      type: '[]links'
+      type: "[]links"
       description: Links
       required: false
     name:
@@ -547,12 +547,12 @@ types:
       required: false
     tokens:
       title: Tokens
-      type: '[]string'
+      type: "[]string"
       description: The log token(s) used for writing to the log. This only applies to token type logs
       required: false
     structures:
       title: Structures
-      type: '[]string'
+      type: "[]string"
       description: Structures are internal entities which may apply some additional processing to log entries written to this log
       required: false
     source_type:
@@ -615,7 +615,7 @@ types:
       required: false
     logs:
       title: Logs
-      type: '[]string'
+      type: "[]string"
       description: Query logs
       required: false
   creator:
@@ -699,7 +699,7 @@ types:
     attachments:
       title: Attachments
       description: List of attachments associated with this comment
-      type: '[]attachment'
+      type: "[]attachment"
       required: false
       example: [{rrn: rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890, creator: {type: USER, name: Example User}, created_time: '2022-08-19T13:00:58.645Z', file_name: test.txt, mime_type: text/plain, size: 4, scan_status: CLEAN}]
   user:
@@ -803,12 +803,12 @@ types:
     rule_matching_keys:
       title: Rule Matching Keys
       description: The keys and values used when matching detection rule logic.
-      type: '[]object'
+      type: "[]object"
       required: false
     rule_keys_of_interest:
       title: Rule Keys of Interest
       description: The keys and values used when matching detection rule logic.
-      type: '[]object'
+      type: "[]object"
       required: false
     responsibility:
       title: Responsibility
@@ -816,9 +816,9 @@ types:
       type: string
       required: false
       enum:
-      - UNMAPPED
-      - CUSTOMER
-      - MDR
+        - UNMAPPED
+        - CUSTOMER
+        - MDR
     monitored:
       title: Monitored
       description: Indicates whether monitoring for the organization was active at the time of the alert.
@@ -835,23 +835,23 @@ types:
       type: string
       required: false
       enum:
-      - UNMAPPED
-      - INFO
-      - LOW
-      - MEDIUM
-      - HIGH
-      - CRITICAL
+        - UNMAPPED
+        - INFO
+        - LOW
+        - MEDIUM
+        - HIGH
+        - CRITICAL
     status:
       title: Status
       description: The status of the alert.
       type: string
       required: false
       enum:
-      - UNMAPPED
-      - OPEN
-      - INVESTIGATING
-      - WAITING
-      - CLOSED
+        - UNMAPPED
+        - OPEN
+        - INVESTIGATING
+        - WAITING
+        - CLOSED
     status_transitions:
       title: Status Transitions
       description: Information about when the alert status was changed.
@@ -863,12 +863,12 @@ types:
       type: string
       required: false
       enum:
-      - UNMAPPED
-      - UNDECIDED
-      - MALICIOUS
-      - BENIGN
-      - UNKNOWN
-      - NOT_APPLICABLE
+        - UNMAPPED
+        - UNDECIDED
+        - MALICIOUS
+        - BENIGN
+        - UNKNOWN
+        - NOT_APPLICABLE
     investigation_rrn:
       title: Investigation RRN
       description: The RRN of the investigation that the alert is part of.
@@ -877,7 +877,7 @@ types:
     tags:
       title: Tags
       description: The tags applied to the alert.
-      type: '[]string'
+      type: "[]string"
       required: false
     permissions:
       title: Permissions
@@ -887,7 +887,7 @@ types:
     fields:
       title: Fields
       description: Additional fields specified in the request.
-      type: '[]object'
+      type: "[]object"
       required: false
   organization_object:
     id:
@@ -933,7 +933,7 @@ types:
     flags:
       title: Flags
       description: The flags associated with the organization.
-      type: '[]string'
+      type: "[]string"
       required: false
   rule_object:
     rrn:
@@ -949,7 +949,7 @@ types:
     mitre_tcodes:
       title: Mitre Tcodes
       description: The mitreTCodes associated with the detection rule.
-      type: '[]string'
+      type: "[]string"
       required: false
     version_rrn:
       title: Version RRN
@@ -1003,7 +1003,7 @@ types:
     field_ids:
       title: Field IDs
       description: The identifier of the field for the values to match against.
-      type: '[]string'
+      type: "[]string"
       required: false
       example: []
     operator:
@@ -1012,10 +1012,10 @@ types:
       type: string
       required: false
       enum:
-      - NOT_SET
-      - EQUALS
-      - NOT_EQUALS
-      - CONTAINS
+        - NOT_SET
+        - EQUALS
+        - NOT_EQUALS
+        - CONTAINS
       default: EQUALS
       example: EQUALS
     terms:
@@ -1036,8 +1036,8 @@ types:
       type: string
       required: false
       enum:
-      - BUCKET
-      - MEDIAN
+        - BUCKET
+        - MEDIAN
       default: MEDIAN
     fields:
       title: Fields
@@ -1050,10 +1050,10 @@ types:
       type: string
       required: true
       enum:
-      - ASCENDING_NULLS_LAST
-      - ASCENDING_NULLS_FIRST
-      - DESCENDING_NULLS_LAST
-      - DESCENDING_NULLS_FIRST
+        - ASCENDING_NULLS_LAST
+        - ASCENDING_NULLS_FIRST
+        - DESCENDING_NULLS_LAST
+        - DESCENDING_NULLS_FIRST
   region_failure_object:
     region:
       name: Region
@@ -1071,7 +1071,7 @@ types:
     keys:
       name: Keys
       description: The values for the selected field identifiers in this bucket, in matching order.
-      type: '[]string'
+      type: "[]string"
       required: false
       example: [example_key]
     count:
@@ -1102,7 +1102,7 @@ types:
     field_ids:
       title: Field IDs
       description: The field identifiers that were aggregated by.
-      type: '[]string'
+      type: "[]string"
       required: false
       example: [example_field]
     buckets:
@@ -1127,10 +1127,10 @@ types:
       type: string
       required: true
       enum:
-      - ASCENDING_NULLS_LAST
-      - ASCENDING_NULLS_FIRST
-      - DESCENDING_NULLS_LAST
-      - DESCENDING_NULLS_FIRST
+        - ASCENDING_NULLS_LAST
+        - ASCENDING_NULLS_FIRST
+        - DESCENDING_NULLS_LAST
+        - DESCENDING_NULLS_FIRST
   sort_object:
     field_id:
       title: Field ID
@@ -1143,10 +1143,10 @@ types:
       type: string
       required: true
       enum:
-      - ASCENDING_NULLS_LAST
-      - ASCENDING_NULLS_FIRST
-      - DESCENDING_NULLS_LAST
-      - DESCENDING_NULLS_FIRST
+        - ASCENDING_NULLS_LAST
+        - ASCENDING_NULLS_FIRST
+        - DESCENDING_NULLS_LAST
+        - DESCENDING_NULLS_FIRST
   evidence_object:
     rrn:
       title: RRN
@@ -1226,9 +1226,9 @@ types:
       type: string
       required: false
       enum:
-      - EQUALS
-      - CONTAINS
-      - IN
+        - EQUALS
+        - CONTAINS
+        - IN
     value:
       title: Value
       description: The value to search for.
@@ -1246,8 +1246,8 @@ types:
       type: string
       required: false
       enum:
-      - ASC
-      - DESC
+        - ASC
+        - DESC
   account_object:
     rrn:
       title: RRN
@@ -1302,13 +1302,13 @@ connection:
     description: The region for InsightIDR
     type: string
     enum:
-    - United States 1
-    - United States 2
-    - United States 3
-    - Europe
-    - Canada
-    - Australia
-    - Japan
+      - United States 1
+      - United States 2
+      - United States 3
+      - Europe
+      - Canada
+      - Australia
+      - Japan
     required: true
     default: United States 1
     example: United States 1
@@ -1326,32 +1326,32 @@ actions:
       ips:
         title: IP Addresses
         description: IP addresses to add
-        type: '[]string'
+        type: "[]string"
         required: false
         example: [10.0.0.1, 10.0.0.2]
       hashes:
         title: Process Hashes
         description: Process hashes to add
-        type: '[]string'
+        type: "[]string"
         required: false
         example: [A94A8FE5CCB19BA61C4C0873D391E987982FBBD3, C3499C2729730A7F807EFB8676A92DCB6F8A3F8F]
       domain_names:
         title: Domain Names
         description: Domain names to add
-        type: '[]string'
+        type: "[]string"
         required: false
         example: [rapid7.com, google.com]
       urls:
         title: URLs
         description: URLs to add
-        type: '[]string'
+        type: "[]string"
         required: false
         example: [https://example.com, https://test.com]
     output:
       rejected_indicators:
         title: Rejected Indicators
         description: The list of indicators that have been rejected during the update
-        type: '[]string'
+        type: "[]string"
         required: false
         example: [example.com, 10.0.0.1]
       threat:
@@ -1367,7 +1367,7 @@ actions:
       statuses:
         title: Statuses
         description: Comma-separated list of investigation statuses to include in the result. Possible values are OPEN, CLOSED, INVESTIGATING, WAITING
-        type: '[]string'
+        type: "[]string"
         required: false
         example: [CLOSED]
       start_time:
@@ -1405,7 +1405,7 @@ actions:
       priorities:
         title: Priorities
         description: A comma-separated list of investigation priorities to include in the result, where possible values are LOW, MEDIUM, HIGH, CRITICAL
-        type: '[]string'
+        type: "[]string"
         required: false
         example: '["LOW", "MEDIUM", "HIGH", "CRITICAL"]'
       sort:
@@ -1413,25 +1413,25 @@ actions:
         description: A field for investigations to be sorted
         type: string
         enum:
-        - ''
-        - Created time Ascending
-        - Created time Descending
-        - Priority Ascending
-        - Priority Descending
-        - RRN Ascending
-        - RRN Descending
-        - Alerts most recent created time Ascending
-        - Alerts most recent created time Descending
-        - Alerts most recent detection created time Ascending
-        - Alerts most recent detection created time Descending
-        - Responsibility Ascending
-        - Responsibility Descending
+          - ''
+          - Created time Ascending
+          - Created time Descending
+          - Priority Ascending
+          - Priority Descending
+          - RRN Ascending
+          - RRN Descending
+          - Alerts most recent created time Ascending
+          - Alerts most recent created time Descending
+          - Alerts most recent detection created time Ascending
+          - Alerts most recent detection created time Descending
+          - Responsibility Ascending
+          - Responsibility Descending
         required: false
         example: Created time Ascending
       sources:
         title: Sources
         description: A comma-separated list of investigation sources to include in the result, where possible values are USER, ALERT, HUNT, AUTOMATION
-        type: '[]string'
+        type: "[]string"
         required: false
         example: '["USER","ALERT"]'
     output:
@@ -1462,9 +1462,9 @@ actions:
         description: Investigation's status
         type: string
         enum:
-        - ''
-        - OPEN
-        - CLOSED
+          - ''
+          - OPEN
+          - CLOSED
         required: false
         example: OPEN
       priority:
@@ -1472,11 +1472,11 @@ actions:
         description: Investigation's priority
         type: string
         enum:
-        - ''
-        - LOW
-        - MEDIUM
-        - HIGH
-        - CRITICAL
+          - ''
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
         required: false
         example: LOW
       disposition:
@@ -1484,10 +1484,10 @@ actions:
         description: Investigation's disposition
         type: string
         enum:
-        - ''
-        - BENIGN
-        - MALICIOUS
-        - NOT_APPLICABLE
+          - ''
+          - BENIGN
+          - MALICIOUS
+          - NOT_APPLICABLE
         required: false
         example: BENIGN
       email:
@@ -1510,13 +1510,13 @@ actions:
       search:
         title: Search
         description: The criteria for which entities to return
-        type: '[]object'
+        type: "[]object"
         required: false
         example: '[{"field": "Example Field", "operator": "EQUALS", "value": "Test"}]'
       sort:
         title: Sort
         description: The sorting information, where possible field values are RRN, PRIORITY, CREATED TIME, and order values are ASC, DESC
-        type: '[]object'
+        type: "[]object"
         required: false
         example: '[{"field": "Example Field", "order": "ASC"}]'
       start_time:
@@ -1579,10 +1579,10 @@ actions:
         description: Investigation's status
         type: string
         enum:
-        - ''
-        - OPEN
-        - INVESTIGATING
-        - CLOSED
+          - ''
+          - OPEN
+          - INVESTIGATING
+          - CLOSED
         required: false
         example: OPEN
       priority:
@@ -1590,12 +1590,12 @@ actions:
         description: Investigation's priority
         type: string
         enum:
-        - ''
-        - UNSPECIFIED
-        - LOW
-        - MEDIUM
-        - HIGH
-        - CRITICAL
+          - ''
+          - UNSPECIFIED
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
         required: false
         example: LOW
       disposition:
@@ -1603,10 +1603,10 @@ actions:
         description: Investigation's disposition
         type: string
         enum:
-        - ''
-        - BENIGN
-        - MALICIOUS
-        - NOT_APPLICABLE
+          - ''
+          - BENIGN
+          - MALICIOUS
+          - NOT_APPLICABLE
         required: false
         example: BENIGN
       email:
@@ -1654,11 +1654,11 @@ actions:
         description: Investigation's priority
         type: string
         enum:
-        - UNSPECIFIED
-        - LOW
-        - MEDIUM
-        - HIGH
-        - CRITICAL
+          - UNSPECIFIED
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
         required: true
         example: LOW
     output:
@@ -1683,9 +1683,9 @@ actions:
         description: Investigation's disposition
         type: string
         enum:
-        - BENIGN
-        - MALICIOUS
-        - NOT_APPLICABLE
+          - BENIGN
+          - MALICIOUS
+          - NOT_APPLICABLE
         required: true
         example: BENIGN
     output:
@@ -1713,8 +1713,8 @@ actions:
         default: CLOSED
         example: CLOSED
         enum:
-        - OPEN
-        - CLOSED
+          - OPEN
+          - CLOSED
     output:
       investigation:
         title: Investigation
@@ -1772,32 +1772,32 @@ actions:
       ips:
         title: IP Addresses
         description: IP addresses to add
-        type: '[]string'
+        type: "[]string"
         required: false
         example: [10.0.0.1, 10.0.0.2]
       hashes:
         title: Process Hashes
         description: Process hashes to add
-        type: '[]string'
+        type: "[]string"
         required: false
         example: [A94A8FE5CCB19BA61C4C0873D391E987982FBBD3, C3499C2729730A7F807EFB8676A92DCB6F8A3F8F]
       domain_names:
         title: Domain Names
         description: Domain names to add
-        type: '[]string'
+        type: "[]string"
         required: false
         example: [rapid7.com, google.com]
       urls:
         title: URLs
         description: URLs to add
-        type: '[]string'
+        type: "[]string"
         required: false
         example: [https://example.com, https://test.com]
     output:
       rejected_indicators:
         title: Rejected Indicators
         description: The list of indicators that have been rejected during the update
-        type: '[]string'
+        type: "[]string"
         required: false
         example: [https://example.com, https://test.com]
       threat:
@@ -1905,17 +1905,17 @@ actions:
         required: true
         order: 2
         enum:
-        - Last 5 Minutes
-        - Last 10 Minutes
-        - Last 20 Minutes
-        - Last 30 Minutes
-        - Last 45 Minutes
-        - Last 1 Hour
-        - Last 2 Hours
-        - Last 3 Hours
-        - Last 6 Hours
-        - Last 12 Hours
-        - Use Time From Value
+          - Last 5 Minutes
+          - Last 10 Minutes
+          - Last 20 Minutes
+          - Last 30 Minutes
+          - Last 45 Minutes
+          - Last 1 Hour
+          - Last 2 Hours
+          - Last 3 Hours
+          - Last 6 Hours
+          - Last 12 Hours
+          - Use Time From Value
       time_from:
         title: Time From
         description: Beginning date and time for the query. This will be ignored unless Relative Time input is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
@@ -1991,17 +1991,17 @@ actions:
         required: true
         order: 2
         enum:
-        - Last 5 Minutes
-        - Last 10 Minutes
-        - Last 20 Minutes
-        - Last 30 Minutes
-        - Last 45 Minutes
-        - Last 1 Hour
-        - Last 2 Hours
-        - Last 3 Hours
-        - Last 6 Hours
-        - Last 12 Hours
-        - Use Time From Value
+          - Last 5 Minutes
+          - Last 10 Minutes
+          - Last 20 Minutes
+          - Last 30 Minutes
+          - Last 45 Minutes
+          - Last 1 Hour
+          - Last 2 Hours
+          - Last 3 Hours
+          - Last 6 Hours
+          - Last 12 Hours
+          - Use Time From Value
       time_from:
         title: Time From
         description: Beginning date and time for the query. This will be ignored unless Relative Time input is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
@@ -2032,28 +2032,28 @@ actions:
         required: true
         order: 6
         enum:
-        - Advanced Malware Alert
-        - Active Directory Admin Activity
-        - Asset Authentication
-        - Cloud Service Admin Activity
-        - Cloud Service Activity
-        - DNS Query
-        - Endpoint Activity
-        - Endpoint Agent
-        - Exploit Mitigation Alert
-        - File Access Activity
-        - File Modification Activity
-        - Firewall Activity
-        - Network Flow
-        - Host To IP Observations
-        - IDS Alert
-        - Ingress Authentication
-        - Raw Log
-        - SSO Authentication
-        - Unparsed Data
-        - Third Party Alert
-        - Virus Alert
-        - Web Proxy Activity
+          - Advanced Malware Alert
+          - Active Directory Admin Activity
+          - Asset Authentication
+          - Cloud Service Admin Activity
+          - Cloud Service Activity
+          - DNS Query
+          - Endpoint Activity
+          - Endpoint Agent
+          - Exploit Mitigation Alert
+          - File Access Activity
+          - File Modification Activity
+          - Firewall Activity
+          - Network Flow
+          - Host To IP Observations
+          - IDS Alert
+          - Ingress Authentication
+          - Raw Log
+          - SSO Authentication
+          - Unparsed Data
+          - Third Party Alert
+          - Virus Alert
+          - Web Proxy Activity
     output:
       results_events:
         title: Query Results (Events)
@@ -2085,9 +2085,9 @@ actions:
         default: MANUAL
         required: false
         enum:
-        - ALERT
-        - MANUAL
-        - HUNT
+          - ALERT
+          - MANUAL
+          - HUNT
       datetime_from:
         title: Datetime From
         description: An ISO formatted timestamp, default last week
@@ -2116,7 +2116,7 @@ actions:
       ids:
         title: IDs
         description: The IDs of the investigations that were closed by the request
-        type: '[]string'
+        type: "[]string"
         required: true
         example: [6c7db8d1-abc5-b9da-dd71-1a3ffffe8a16]
       num_closed:
@@ -2145,14 +2145,14 @@ actions:
       indicators:
         title: Indicators
         description: Add indicators to new threat in InsightIDR. Accept IP addresses, process hashes (SHA1, MD5, SHA256), domain names, URLs
-        type: '[]string'
+        type: "[]string"
         required: true
         example: [example.com, 10.0.0.1]
     output:
       rejected_indicators:
         title: Rejected Indicators
         description: Rejected indicators in new threat
-        type: '[]string'
+        type: "[]string"
         required: true
         example: [example.com, 10.0.0.1]
       threat:
@@ -2244,7 +2244,7 @@ actions:
       attachments:
         title: Attachments
         description: An array of attachment RRNs to associate with the comment
-        type: '[]string'
+        type: "[]string"
         required: false
         example: [rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210]
     output:
@@ -2305,7 +2305,7 @@ actions:
       attachments:
         title: Attachments
         description: List of attachments
-        type: '[]attachment'
+        type: "[]attachment"
         required: false
         example: [{rrn: rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890, creator: {type: USER, name: Example User}, created_time: '2022-08-19T13:00:58.645Z', file_name: test.txt, mime_type: text/plain, size: 4, scan_status: CLEAN}]
       success:
@@ -2334,7 +2334,7 @@ actions:
       attachment:
         title: Attachment
         description: Attachment details
-        type: '[]attachment'
+        type: "[]attachment"
         required: false
         example: [{rrn: rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890, creator: {type: USER, name: Example User}, created_time: '2022-08-19T13:00:58.645Z', file_name: test.txt, mime_type: text/plain, size: 4, scan_status: CLEAN}]
       success:
@@ -2514,7 +2514,7 @@ actions:
       field_ids:
         title: Field IDs
         description: Additional fields to include for each alert. No additional fields are included if field_ids is empty
-        type: '[]string'
+        type: "[]string"
         required: false
         example: []
       aggregates:
@@ -2554,7 +2554,7 @@ actions:
       rrns:
         title: RRNs
         description: A list of the rrns for the found alerts
-        type: '[]string'
+        type: "[]string"
         required: false
         example: [rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg, rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abd]
       metadata:
