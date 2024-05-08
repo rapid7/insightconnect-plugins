@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Rapid7 InsightIDR"
 Vendor = "rapid7"
-Version = "10.0.0"
+Version = "10.1.0"
 Description = "This plugin allows you to add indicators to a threat and see the status of investigations"
 
 
@@ -34,6 +34,8 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_trigger(triggers.GetNewAlerts())
+        
             self.add_action(actions.ReplaceIndicators())
         
             self.add_action(actions.ListInvestigations())
