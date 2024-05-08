@@ -1,8 +1,6 @@
 # Description
 
-[Zoom](https://zoom.us) is a cloud platform for video and audio conferencing, chat, and webinars. The Zoom plugin allows you to add and remove users as part of of workflow, while also providing the ability to trigger workflows on new user sign-in and sign-out activity events. 
-
-This plugin uses the [Zoom API](https://marketplace.zoom.us/docs/api-reference/introduction) and requires a Pro, Business, or Enterprise plan
+[Zoom](https://zoom.us) is a cloud platform for video and audio conferencing, chat, and webinars. The Zoom plugin allows you to add and remove users as part of of workflow, while also providing the ability to trigger workflows on new user sign-in and sign-out activity events. This plugin uses the [Zoom API](https://marketplace.zoom.us/docs/api-reference/introduction) and requires a Pro, Business, or Enterprise plan
 
 # Key Features
 
@@ -26,12 +24,12 @@ This plugin uses the [Zoom API](https://marketplace.zoom.us/docs/api-reference/i
 
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|account_id|string|None|True|Zoom app account ID, required for OAuth authentication|None|dBs0x4Kf7HuIK0LLbzMduW|
-|authentication_retry_limit|integer|5|True|How many times to retry authentication to Zoom before failing, required for OAuth authentication|None|5|
-|client_id|string|None|True|Zoom app client ID, required for OAuth authentication|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|client_secret|credential_secret_key|None|True|Zoom app client secret, required for OAuth authentication|None|{'secretKey': '9de5069c5afe602b2ea0a04b66beb2c0'}|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|account_id|string|None|True|Zoom app account ID, required for OAuth authentication|None|dBs0x4Kf7HuIK0LLbzMduW|None|None|
+|authentication_retry_limit|integer|5|True|How many times to retry authentication to Zoom before failing, required for OAuth authentication|None|5|None|None|
+|client_id|string|None|True|Zoom app client ID, required for OAuth authentication|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+|client_secret|credential_secret_key|None|True|Zoom app client secret, required for OAuth authentication|None|{'secretKey': '9de5069c5afe602b2ea0a04b66beb2c0'}|None|None|
 
 Example input:
 
@@ -57,13 +55,13 @@ This action is used to create user associated to account
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action|string|create|True|Specify how to create the new user|["create", "autoCreate", "custCreate", "ssoCreate"]|create|
-|email|string|None|True|Email address of user|None|user@example.com|
-|first_name|string|None|False|First name of user|None|John|
-|last_name|string|None|True|Last name of user|None|Smith|
-|type|string|None|True|User type|["Basic", "Licensed"]|Basic|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|action|string|create|True|Specify how to create the new user|["create", "autoCreate", "custCreate", "ssoCreate"]|create|None|None|
+|email|string|None|True|Email address of user|None|user@example.com|None|None|
+|first_name|string|None|False|First name of user|None|John|None|None|
+|last_name|string|None|True|Last name of user|None|Smith|None|None|
+|type|string|None|True|User type|["Basic", "Licensed"]|Basic|None|None|
   
 Example input:
 
@@ -105,14 +103,14 @@ This action is used to delete or disassociate user from account
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action|string|None|True|Specify how to delete the user. To delete pending user, use disassociate|["delete", "disassociate"]|delete|
-|id|string|None|True|The user identifier or email address|None|user@example.com|
-|transfer_email|string|None|False|Email to transfer meetings, webinars, or recordings|None|user@example.com|
-|transfer_meetings|boolean|False|False|Whether to transfer meetings to defined transfer email|None|False|
-|transfer_recordings|boolean|False|False|Whether to transfer recordings to defined transfer email|None|False|
-|transfer_webinars|boolean|False|False|Whether to transfer webinars to defined transfer email|None|False|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|action|string|None|True|Specify how to delete the user. To delete pending user, use disassociate|["delete", "disassociate"]|delete|None|None|
+|id|string|None|True|The user identifier or email address|None|user@example.com|None|None|
+|transfer_email|string|None|False|Email to transfer meetings, webinars, or recordings|None|user@example.com|None|None|
+|transfer_meetings|boolean|False|False|Whether to transfer meetings to defined transfer email|None|False|None|None|
+|transfer_recordings|boolean|False|False|Whether to transfer recordings to defined transfer email|None|False|None|None|
+|transfer_webinars|boolean|False|False|Whether to transfer webinars to defined transfer email|None|False|None|None|
   
 Example input:
 
@@ -147,9 +145,9 @@ This action is used to get user in Zoom account
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|user_id|string|None|True|The user identifier or email address|None|user@example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|user_id|string|None|True|The user identifier or email address|None|user@example.com|None|None|
   
 Example input:
 
@@ -187,9 +185,9 @@ This trigger is used to poll for user activity events
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|activity_type|string|None|True|Type of user activity to match event|["Sign in", "Sign out", "All"]|All|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|activity_type|string|None|True|Type of user activity to match event|["Sign in", "Sign out", "All"]|All|None|None|
   
 Example input:
 
@@ -309,6 +307,7 @@ Example output:
 
 # Version History
 
+* 4.1.9 - Updated to include latest SDK functionality v5.4.8 | Task `monitor_sign_in_out_activity` updated to increase max lookback cutoff to 7 days
 * 4.1.8 - Updated to include latest SDK functionality v5.4.5 | Adding logic to `monitor_sign_in_out_activity` task to keep paginating until endtime catches up to now
 * 4.1.7 - Updated to include latest SDK functionality
 * 4.1.6 - Adding better handling to `monitor_sign_in_out_activity` task, if the users account does not have all of the required permissions | Include SDK 5.4 which adds new task custom_config parameter
