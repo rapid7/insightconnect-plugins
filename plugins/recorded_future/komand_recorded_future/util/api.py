@@ -38,7 +38,7 @@ class RecordedFutureApi:
                 assistance="Please allow a larger amount of memory to parse this dataset, or try another list",
                 data=f"Memory Error using endpoint: {endpoint}",
             )
-        self.response_handled(response)
+        self.response_handled(response, _url)
         if endpoint.endswith("risklist"):
             try:
                 decompressed_data = gzip.decompress(response.content)
@@ -51,7 +51,7 @@ class RecordedFutureApi:
         except JSONDecodeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
-    def response_handled(self, response) -> None:
+    def response_handled(self, response, url) -> None:
         if response.status_code == 401:
             raise PluginException(preset=PluginException.Preset.API_KEY)
         if response.status_code == 403:
@@ -60,7 +60,7 @@ class RecordedFutureApi:
             raise PluginException(
                 cause="No results found.\n",
                 assistance="Please provide valid inputs or verify the endpoint/URL/hostname configured in your plugin.\n",
-                data=f"{response.text}\nurl: {_url}",
+                data=f"{response.text}\nurl: {url}",
             )
         if 400 <= response.status_code < 500:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
