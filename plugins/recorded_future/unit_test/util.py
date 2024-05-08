@@ -10,6 +10,7 @@ sys.path.append(os.path.abspath("../"))
 from komand_recorded_future.connection import Connection
 from komand_recorded_future.connection.schema import Input
 
+GZIP_CONTENT = b'\x1f\x8b\x08\x08\xf0\x159f\x02\xffrf_hash_threatfeed_trending_in_recorded_future_analyst_community_stix_1.2.xml\x00u\xd3\xcfo\x820\x14\x07\xf0\xfb\xfe\n\xc2\xce\x85\xc2\xea\x0f\x88p\xd9B\xe6iF\xc9\xb2\xecbJ)ZG\xa9i\x8ba\xff\xfd\xc0TQ\x1c7^\xf9|_\xfa\xc8c\xa14k\xc2M\xba\xfc\xda\xae0\xf9\xc1;j\xb1<\xb2\xd7IhJ\x80\x02D\x83\xc0\x87`\x8e\xbc\x19@x\x8a\x01F\xb4\x00\xb0\xc8\x82l:\xf3^\xbc\xc9\xdc\xb64\xe3Ti\xcc\x8f\x91\xedC\x1f\x018\x01\x10\xa5\x10\x86\x08\x86\x10:\xde\xdc\xfb\xb6\xad\x13\x95\x8a\x89*\xb2=\xc7\xb7\xad\x86\x97\x95\x8a\xec\xbd\xd6\xc7\xd0u\xdb\xca\xe5T\xe3\x1ck\xbc\xd9c\xc9\xaa\x9d\xd3\xa8\xdc\xb0p\x9d\\ewcGR"dN\xf3\xa2\xd6\xb5\xa4\x0e\x11\xdc\xbd\xd0\x84\x95\xf4#;\\=\xf9\xcdD\xe3p\xa6[\'\xe4\xce\x15\xd9\x81\x12\xad\x9e\x8dk\x9f\xc1\xe56\xe1\xd9~\n\x8235\x9a\xcfi\x81\xebRoO\x1d\xab\xcb\xf6\xaaT\r:\xbc\n\xce\xbb9G:\x90\xf3\xebAf\\wu\x8f[t\xff)z\x99\xa6+\xe0]\x1c\xabrF\xb0\x16rL//\xa0\xef\xdd\x89\xc1\xf4\x83\xd0\xbf\xc3{\xb7\xf9\xc1\xec\x83\xbc\x19\xfd.1f\xbb\xb2\x95\xf1\xa2\xdf\xd1w\x8as*\xcd\xc9\x1bUD\xb2\xa3nW*^\x9b}\xb0\x92\xf3BX\x9d^\xb8\x0f\xcc\x1c=\xf6\xba~\x0c\x15?\x19tst\x1b3\xffE\xfc\x07J\n\x9c\x10:\x03\x00\x00'
 
 class Util:
     @staticmethod
@@ -35,7 +36,7 @@ class Util:
     @staticmethod
     def mock_request(*args, **kwargs):
         class MockResponse:
-            def __init__(self, status_code: int, filename: str = None):
+            def __init__(self, status_code: int, filename: str = None, contains_content: bool = False):
                 self.status_code = status_code
                 if filename:
                     self.text = Util.read_file_to_string(
@@ -43,6 +44,10 @@ class Util:
                     )
                 else:
                     self.text = ""
+                if contains_content:
+                    self.content = GZIP_CONTENT
+                else:
+                    self.content = ""
 
             def json(self):
                 return json.loads(self.text)
@@ -100,29 +105,29 @@ class Util:
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/malware/Shcfg345iZX":
             return MockResponse(404, "lookup_malware_not_found")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/domain/risklist":
-            return MockResponse(200, "domain_risk_list")
+            return MockResponse(200, "domain_risk_list", contains_content=True)
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/domain/riskrules":
             return MockResponse(200, "list_domain_risk_rules")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/domain/search":
             return MockResponse(200, "search_domains")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/hash/risklist":
-            return MockResponse(200, "hash_risk_list")
+            return MockResponse(200, "hash_risk_list", contains_content=True)
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/hash/riskrules":
             return MockResponse(200, "list_hash_risk_rules")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/hash/search":
             return MockResponse(200, "search_hashes")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/ip/risklist":
-            return MockResponse(200, "ip_risk_list")
+            return MockResponse(200, "ip_risk_list", contains_content=True)
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/ip/riskrules":
             return MockResponse(200, "list_ip_addresses_risk_rules")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/ip/search":
             return MockResponse(200, "search_ip_addresses")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/url/risklist":
-            return MockResponse(200, "url_risk_list")
+            return MockResponse(200, "url_risk_list", contains_content=True)
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/url/riskrules":
             return MockResponse(200, "list_url_risk_rules")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/vulnerability/risklist":
-            return MockResponse(200, "vulnerability_risk_list")
+            return MockResponse(200, "vulnerability_risk_list", contains_content=True)
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/vulnerability/riskrules":
             return MockResponse(200, "list_vulnerability_risk_rules")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/vulnerability/search":

@@ -1,10 +1,9 @@
+import gzip
 from insightconnect_plugin_runtime.exceptions import PluginException
 from json import JSONDecodeError
 import requests
 import xmltodict
 
-MEMORY_ERROR_CAUSE = "Memory Error: Returned dataset too large"
-MEMORY_ERROR_ASSISTANCE = "Please allow a larger amount of memory to parse this dataset, or try another filter"
 
 class RecordedFutureApi:
     def __init__(self, logger, meta, token: str):
@@ -34,8 +33,8 @@ class RecordedFutureApi:
             response = requests.request(url=_url, method=method, params=params, data=data, json=json, headers=self.headers)
         except MemoryError:
             raise PluginException(
-                cause=MEMORY_ERROR_CAUSE,
-                assistance=MEMORY_ERROR_ASSISTANCE,
+                cause="Memory Error: Returned dataset too large",
+                assistance="Please allow a larger amount of memory to parse this dataset, or try another list",
                 data=f"Memory Error using endpoint: {endpoint}"
             )
         if response.status_code == 401:
@@ -54,13 +53,11 @@ class RecordedFutureApi:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
         if endpoint.endswith("risklist"):
             try:
-                return dict(xmltodict.parse(response.text))
+                decompressed_data = gzip.decompress(response.content)
+                return response.content, dict(xmltodict.parse(decompressed_data))
             except MemoryError:
-                raise PluginException(
-                    cause=MEMORY_ERROR_CAUSE,
-                    assistance=MEMORY_ERROR_ASSISTANCE,
-                    data=f"Memory Error using endpoint: {endpoint}"
-                )
+                self.logger.info("Response is too large to read. Returning GZIP...")
+                return response.content, None
         try:
             return response.json()
         except JSONDecodeError:

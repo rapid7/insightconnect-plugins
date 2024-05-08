@@ -1,27 +1,27 @@
 {
-	"spec": "925fadd3566d956ecdd4ecae4fbbeaf5",
-	"manifest": "6dbee1faa490422b823ffc412549d12f",
-	"setup": "a7ea65f1b96cb19f61795b15a2695eff",
+	"spec": "7be9bb19b54c2a1e965b263c07c0df0f",
+	"manifest": "7a2838450d4014368875a9f8b3e98ff3",
+	"setup": "4ccdba280da688ef199437f480d87ee6",
 	"schemas": [
 		{
 			"identifier": "download_domain_risk_list/schema.py",
-			"hash": "5817981e139ee2fa977aff5b27d9cf60"
+			"hash": "2aca754786940056580e1f9478679c75"
 		},
 		{
 			"identifier": "download_hash_risk_list/schema.py",
-			"hash": "fef58cfab6fd1be06790778c2df778cb"
+			"hash": "1476a62ed2cb2a5d6e10e668f5de2f7b"
 		},
 		{
 			"identifier": "download_ip_addresses_risk_list/schema.py",
-			"hash": "bbd45d406444fca890a485dcf210ae2e"
+			"hash": "b13d6666ef703812d943f36bf403fec7"
 		},
 		{
 			"identifier": "download_url_risk_list/schema.py",
-			"hash": "e59fb3a09ce50b5eb3b0058be4de111c"
+			"hash": "ef2f20a12b2399060b7a0ac66fbe6f3e"
 		},
 		{
 			"identifier": "download_vulnerability_risk_list/schema.py",
-			"hash": "d659a20535346c57adda4b61f7c5be75"
+			"hash": "1ccad533aa1c078518cc4a042c67f389"
 		},
 		{
 			"identifier": "list_domain_risk_rules/schema.py",
@@ -58,6 +58,10 @@
 		{
 			"identifier": "lookup_hash/schema.py",
 			"hash": "a53dccc75cebb1119ec1aeab0f513c73"
+		},
+		{
+			"identifier": "lookup_hash_two/schema.py",
+			"hash": "a6ec5ce327e2878deabe7c9ef3c4e435"
 		},
 		{
 			"identifier": "lookup_ip_address/schema.py",
@@ -102,6 +106,14 @@
 		{
 			"identifier": "search_vulnerabilities/schema.py",
 			"hash": "a6d716f5888465ad5bb44fc5244d9a5c"
+		},
+		{
+			"identifier": "test1/schema.py",
+			"hash": "668c035b7e1fc5d813e7dddb328a70f1"
+		},
+		{
+			"identifier": "test_one/schema.py",
+			"hash": "da2d7bf84a07990fb4e336800ac940a6"
 		},
 		{
 			"identifier": "connection/schema.py",
