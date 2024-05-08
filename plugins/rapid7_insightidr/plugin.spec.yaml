@@ -346,7 +346,7 @@ types:
       required: false
     data:
       title: Data
-      type: "[]object"
+      type: '[]object'
       description: Data
       required: false
     lastQuickScanEndTime:
@@ -440,7 +440,7 @@ types:
     groups:
       title: Groups
       description: Holds the overall result for each group in a 'groupby' query
-      type: "[]object"
+      type: '[]object'
       required: false
     granularity:
       title: Granularity
@@ -455,7 +455,7 @@ types:
     groups_timeseries:
       title: Groups Time Series
       description: For 'groupby' queries, holds the timeseries object for each group
-      type: "[]object"
+      type: '[]object'
       required: false
     from:
       title: From
@@ -701,7 +701,7 @@ types:
       description: List of attachments associated with this comment
       type: "[]attachment"
       required: false
-      example: [{rrn: rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890, creator: {type: USER, name: Example User}, created_time: '2022-08-19T13:00:58.645Z', file_name: test.txt, mime_type: text/plain, size: 4, scan_status: CLEAN}]
+      example: [{"rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890","creator": {"type": "USER","name": "Example User"},"created_time": "2022-08-19T13:00:58.645Z","file_name": "test.txt","mime_type": "text/plain","size": 4,"scan_status": "CLEAN"}]
   user:
     domain:
       title: Domiain
@@ -803,12 +803,12 @@ types:
     rule_matching_keys:
       title: Rule Matching Keys
       description: The keys and values used when matching detection rule logic.
-      type: "[]object"
+      type: '[]object'
       required: false
     rule_keys_of_interest:
       title: Rule Keys of Interest
       description: The keys and values used when matching detection rule logic.
-      type: "[]object"
+      type: '[]object'
       required: false
     responsibility:
       title: Responsibility
@@ -887,7 +887,7 @@ types:
     fields:
       title: Fields
       description: Additional fields specified in the request.
-      type: "[]object"
+      type: '[]object'
       required: false
   organization_object:
     id:
@@ -1012,17 +1012,17 @@ types:
       type: string
       required: false
       enum:
-        - NOT_SET
-        - EQUALS
-        - NOT_EQUALS
-        - CONTAINS
+       - NOT_SET
+       - EQUALS
+       - NOT_EQUALS
+       - CONTAINS
       default: EQUALS
       example: EQUALS
     terms:
       title: Terms
       description: The value for the field to match against. Values are separated by an OR operator.
       required: true
-      type: '[]'
+      type: "[]"
       example: []
   aggregate_object:
     name:
@@ -1042,7 +1042,7 @@ types:
     fields:
       title: Fields
       description: The field identifiers to aggregate by.
-      type: '[]field_object'
+      type: "[]field_object"
       required: true
     count_order:
       title: Count order
@@ -1073,7 +1073,7 @@ types:
       description: The values for the selected field identifiers in this bucket, in matching order.
       type: "[]string"
       required: false
-      example: [example_key]
+      example: ["example_key"]
     count:
       name: Count
       description: The number of alerts in this bucket.
@@ -1104,12 +1104,12 @@ types:
       description: The field identifiers that were aggregated by.
       type: "[]string"
       required: false
-      example: [example_field]
+      example: ["example_field"]
     buckets:
       title: Buckets
       description: The buckets that the aggregation results are grouped into.
-      type: '[]bucket_object'
-      example: [{keys: [example_key], count: 1}]
+      type: "[]bucket_object"
+      example: [{"keys": ["example_key"], "count":1}]
   field_object:
     field_id:
       title: Field ID
@@ -1328,38 +1328,38 @@ actions:
         description: IP addresses to add
         type: "[]string"
         required: false
-        example: [10.0.0.1, 10.0.0.2]
+        example: ["10.0.0.1","10.0.0.2"]
       hashes:
         title: Process Hashes
         description: Process hashes to add
         type: "[]string"
         required: false
-        example: [A94A8FE5CCB19BA61C4C0873D391E987982FBBD3, C3499C2729730A7F807EFB8676A92DCB6F8A3F8F]
+        example: ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]
       domain_names:
         title: Domain Names
         description: Domain names to add
         type: "[]string"
         required: false
-        example: [rapid7.com, google.com]
+        example: ["rapid7.com","google.com"]
       urls:
         title: URLs
         description: URLs to add
         type: "[]string"
         required: false
-        example: [https://example.com, https://test.com]
+        example: ["https://example.com","https://test.com"]
     output:
       rejected_indicators:
         title: Rejected Indicators
         description: The list of indicators that have been rejected during the update
         type: "[]string"
         required: false
-        example: [example.com, 10.0.0.1]
+        example: ["example.com","10.0.0.1"]
       threat:
         title: Threat
         description: The information about the threat
         type: threat
         required: false
-        example: {name: bad-virus, note: test, published: false, indicator_count: 2}
+        example: {"name": "bad-virus","note": "test","published": False,"indicator_count": 2}
   list_investigations:
     title: List Investigations
     description: Retrieve a page of investigations matching the given request parameters
@@ -1369,19 +1369,19 @@ actions:
         description: Comma-separated list of investigation statuses to include in the result. Possible values are OPEN, CLOSED, INVESTIGATING, WAITING
         type: "[]string"
         required: false
-        example: [CLOSED]
+        example: ["CLOSED"]
       start_time:
         title: Start Time
         description: An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned
         type: date
         required: false
-        example: '2020-06-01T12:11:13+05:30'
+        example: "2020-06-01T12:11:13+05:30"
       end_time:
         title: End Time
         description: An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned
         type: date
         required: false
-        example: '2020-06-01T12:11:13+05:30'
+        example: "2020-06-01T12:11:13+05:30"
       size:
         title: Size
         description: Amount of data for a page to retrieve, where its value must be greater than 0 and less than or equal to 100
@@ -1413,7 +1413,7 @@ actions:
         description: A field for investigations to be sorted
         type: string
         enum:
-          - ''
+          - ""
           - Created time Ascending
           - Created time Descending
           - Priority Ascending
@@ -1438,15 +1438,15 @@ actions:
       investigations:
         title: Investigations
         description: A list of found investigations
-        type: '[]investigation'
+        type: "[]investigation"
         required: true
-        example: [{assignee: {email: user@example.com, name: Ellen Example}, created_time: '2018-06-06T16:56:42Z', disposition: BENIGN, first_alert_time: '2018-06-06T16:56:42Z', last_accessed: '2018-06-06T16:56:42Z', latest_alert_time: '2018-06-06T16:56:42Z', organization_id: 174e4f99-2ac7-4481-9301-4d24c34baf06, priority: CRITICAL, rrn: rrn:example, source: ALERT, status: OPEN, title: Example Title}]
+        example: [{"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}]
       metadata:
         title: Metadata
         description: The pagination parameters used to generate this page result
         type: investigation_metadata
         required: true
-        example: {index: 0, size: 1, total_data: 1, total_pages: 1}
+        example: {"index": 0,"size": 1,"total_data": 1,"total_pages": 1}
   create_investigation:
     title: Create Investigation
     description: Allows to create investigation manually
@@ -1462,7 +1462,7 @@ actions:
         description: Investigation's status
         type: string
         enum:
-          - ''
+          - ""
           - OPEN
           - CLOSED
         required: false
@@ -1472,7 +1472,7 @@ actions:
         description: Investigation's priority
         type: string
         enum:
-          - ''
+          - ""
           - LOW
           - MEDIUM
           - HIGH
@@ -1484,7 +1484,7 @@ actions:
         description: Investigation's disposition
         type: string
         enum:
-          - ''
+          - ""
           - BENIGN
           - MALICIOUS
           - NOT_APPLICABLE
@@ -1502,62 +1502,62 @@ actions:
         description: The body of the specified investigation
         type: investigation
         required: true
-        example: {assignee: {email: user@example.com, name: Ellen Example}, created_time: '2018-06-06T16:56:42Z', disposition: BENIGN, first_alert_time: '2018-06-06T16:56:42Z', last_accessed: '2018-06-06T16:56:42Z', latest_alert_time: '2018-06-06T16:56:42Z', organization_id: 174e4f99-2ac7-4481-9301-4d24c34baf06, priority: CRITICAL, rrn: rrn:example, source: ALERT, status: OPEN, title: Example Title}
+        example: {"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}
   search_investigations:
-    title: Search Investigations
-    description: Allows to search for investigations that match the given criteria
-    input:
-      search:
-        title: Search
-        description: The criteria for which entities to return
-        type: "[]object"
-        required: false
-        example: '[{"field": "Example Field", "operator": "EQUALS", "value": "Test"}]'
-      sort:
-        title: Sort
-        description: The sorting information, where possible field values are RRN, PRIORITY, CREATED TIME, and order values are ASC, DESC
-        type: "[]object"
-        required: false
-        example: '[{"field": "Example Field", "order": "ASC"}]'
-      start_time:
-        title: Start Time
-        description: The starting time from when investigations were created
-        type: date
-        required: false
-        example: 2020-09-06T12:07:55.136667Z
-      end_time:
-        title: End Time
-        description: The ending time when investigations were created
-        type: date
-        required: false
-        example: 2020-09-06T12:07:55.136667Z
-      size:
-        title: Size
-        description: Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100
-        type: integer
-        required: true
-        default: 100
-        example: 100
-      index:
-        title: Index
-        description: Zero-based index of the page to retrieve, where value must be greater than or equal to 0
-        type: integer
-        required: true
-        default: 0
-        example: 1
-    output:
-      investigations:
-        title: Investigations
-        description: A list of found investigations
-        type: '[]investigation'
-        required: true
-        example: [{assignee: {email: user@example.com, name: Ellen Example}, created_time: '2018-06-06T16:56:42Z', disposition: BENIGN, first_alert_time: '2018-06-06T16:56:42Z', last_accessed: '2018-06-06T16:56:42Z', latest_alert_time: '2018-06-06T16:56:42Z', organization_id: 174e4f99-2ac7-4481-9301-4d24c34baf06, priority: CRITICAL, rrn: rrn:example, source: ALERT, status: OPEN, title: Example Title}]
-      metadata:
-        title: Metadata
-        description: The pagination parameters used to generate this page result
-        type: investigation_metadata
-        required: true
-        example: {index: 0, size: 1, total_data: 1, total_pages: 1}
+     title: Search Investigations
+     description: Allows to search for investigations that match the given criteria
+     input:
+       search:
+         title: Search
+         description: The criteria for which entities to return
+         type: '[]object'
+         required: false
+         example: '[{"field": "Example Field", "operator": "EQUALS", "value": "Test"}]'
+       sort:
+         title: Sort
+         description: The sorting information, where possible field values are RRN, PRIORITY, CREATED TIME, and order values are ASC, DESC
+         type: '[]object'
+         required: false
+         example: '[{"field": "Example Field", "order": "ASC"}]'
+       start_time:
+         title: Start Time
+         description: The starting time from when investigations were created
+         type: date
+         required: false
+         example: 2020-09-06T12:07:55.136667Z
+       end_time:
+         title: End Time
+         description: The ending time when investigations were created
+         type: date
+         required: false
+         example: 2020-09-06T12:07:55.136667Z
+       size:
+         title: Size
+         description: Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100
+         type: integer
+         required: true
+         default: 100
+         example: 100
+       index:
+         title: Index
+         description: Zero-based index of the page to retrieve, where value must be greater than or equal to 0
+         type: integer
+         required: true
+         default: 0
+         example: 1
+     output:
+       investigations:
+         title: Investigations
+         description: A list of found investigations
+         type: '[]investigation'
+         required: true
+         example: [{"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}]
+       metadata:
+         title: Metadata
+         description: The pagination parameters used to generate this page result
+         type: investigation_metadata
+         required: true
+         example: {"index": 0,"size": 1,"total_data": 1,"total_pages": 1}
   update_investigation:
     title: Update Investigation
     description: Allows to update existing investigation by ID or RRN
@@ -1579,7 +1579,7 @@ actions:
         description: Investigation's status
         type: string
         enum:
-          - ''
+          - ""
           - OPEN
           - INVESTIGATING
           - CLOSED
@@ -1590,7 +1590,7 @@ actions:
         description: Investigation's priority
         type: string
         enum:
-          - ''
+          - ""
           - UNSPECIFIED
           - LOW
           - MEDIUM
@@ -1603,7 +1603,7 @@ actions:
         description: Investigation's disposition
         type: string
         enum:
-          - ''
+          - ""
           - BENIGN
           - MALICIOUS
           - NOT_APPLICABLE
@@ -1621,7 +1621,7 @@ actions:
         description: The body of the specified investigation
         type: investigation
         required: true
-        example: {assignee: {email: user@example.com, name: Ellen Example}, created_time: '2018-06-06T16:56:42Z', disposition: BENIGN, first_alert_time: '2018-06-06T16:56:42Z', last_accessed: '2018-06-06T16:56:42Z', latest_alert_time: '2018-06-06T16:56:42Z', organization_id: 174e4f99-2ac7-4481-9301-4d24c34baf06, priority: CRITICAL, rrn: rrn:example, source: ALERT, status: OPEN, title: Example Title}
+        example: {"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}
   get_investigation:
     title: Get Investigation
     description: Allows to get existing investigation by ID or RRN
@@ -1638,7 +1638,7 @@ actions:
         description: The body of the specified investigation
         type: investigation
         required: true
-        example: {assignee: {email: user@example.com, name: Ellen Example}, created_time: '2018-06-06T16:56:42Z', disposition: BENIGN, first_alert_time: '2018-06-06T16:56:42Z', last_accessed: '2018-06-06T16:56:42Z', latest_alert_time: '2018-06-06T16:56:42Z', organization_id: 174e4f99-2ac7-4481-9301-4d24c34baf06, priority: CRITICAL, rrn: rrn:example, source: ALERT, status: OPEN, title: Example Title}
+        example: {"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}
   set_priority_of_investigation:
     title: Set Priority of Investigation
     description: Allows to change the priority of the investigation with the given ID or RRN
@@ -1667,7 +1667,7 @@ actions:
         description: The investigation for which the priority was set
         type: investigation
         required: true
-        example: {assignee: {email: user@example.com, name: Ellen Example}, created_time: '2018-06-06T16:56:42Z', disposition: BENIGN, first_alert_time: '2018-06-06T16:56:42Z', last_accessed: '2018-06-06T16:56:42Z', latest_alert_time: '2018-06-06T16:56:42Z', organization_id: 174e4f99-2ac7-4481-9301-4d24c34baf06, priority: CRITICAL, rrn: rrn:example, source: ALERT, status: OPEN, title: Example Title}
+        example: {"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}
   set_disposition_of_investigation:
     title: Set Disposition of Investigation
     description: Allows to change the disposition of the investigation with the given ID or RRN
@@ -1694,7 +1694,7 @@ actions:
         description: The investigation for which the disposition was set
         type: investigation
         required: true
-        example: {assignee: {email: user@example.com, name: Ellen Example}, created_time: '2018-06-06T16:56:42Z', disposition: BENIGN, first_alert_time: '2018-06-06T16:56:42Z', last_accessed: '2018-06-06T16:56:42Z', latest_alert_time: '2018-06-06T16:56:42Z', organization_id: 174e4f99-2ac7-4481-9301-4d24c34baf06, priority: CRITICAL, rrn: rrn:example, source: ALERT, status: OPEN, title: Example Title}
+        example: {"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}
   set_status_of_investigation_action:
     title: Set Status of Investigation
     description: Set the status of the investigation with the given ID
@@ -1713,15 +1713,15 @@ actions:
         default: CLOSED
         example: CLOSED
         enum:
-          - OPEN
-          - CLOSED
+        - OPEN
+        - CLOSED
     output:
       investigation:
         title: Investigation
         description: The investigation for which the status was set
         type: investigation
         required: true
-        example: {assignee: {email: user@example.com, name: Ellen Example}, created_time: '2018-06-06T16:56:42Z', disposition: BENIGN, first_alert_time: '2018-06-06T16:56:42Z', last_accessed: '2018-06-06T16:56:42Z', latest_alert_time: '2018-06-06T16:56:42Z', organization_id: 174e4f99-2ac7-4481-9301-4d24c34baf06, priority: CRITICAL, rrn: rrn:example, source: ALERT, status: OPEN, title: Example Title}
+        example: {"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}
   list_alerts_for_investigation:
     title: List Alerts for Investigation
     description: Retrieve a page of alerts associated with the specified investigation
@@ -1750,15 +1750,15 @@ actions:
       alerts:
         title: Alerts
         description: A list of alerts associated with the investigation
-        type: '[]alert'
+        type: "[]alert"
         required: true
-        example: [{alert_type: Example Type, alert_type_description: Example Description, created_time: 01-01-2020T00:00:00, detection_rule_rrn: rrn:example, first_event_time: 01-01-2020T00:00:00, id: 11111111-1111-1111-1111-111111111111, latest_event_time: 01-01-2020T00:00:00, title: Example Title}]
+        example: [{"alert_type": "Example Type","alert_type_description": "Example Description","created_time": "01-01-2020T00:00:00","detection_rule_rrn": "rrn:example","first_event_time": "01-01-2020T00:00:00","id": "11111111-1111-1111-1111-111111111111","latest_event_time": "01-01-2020T00:00:00","title": "Example Title"}]
       metadata:
         title: Metadata
         description: The pagination parameters used to generate this page result
         type: investigation_metadata
         required: true
-        example: {index: 0, size: 1, total_data: 1, total_pages: 1}
+        example: {"index": 0,"size": 1,"total_data": 1,"total_pages": 1}
   add_indicators_to_a_threat:
     title: Add Indicators to a Threat
     description: Add InsightIDR threat indicators to a threat with the given threat key
@@ -1774,38 +1774,38 @@ actions:
         description: IP addresses to add
         type: "[]string"
         required: false
-        example: [10.0.0.1, 10.0.0.2]
+        example: ["10.0.0.1","10.0.0.2"]
       hashes:
         title: Process Hashes
         description: Process hashes to add
         type: "[]string"
         required: false
-        example: [A94A8FE5CCB19BA61C4C0873D391E987982FBBD3, C3499C2729730A7F807EFB8676A92DCB6F8A3F8F]
+        example: ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]
       domain_names:
         title: Domain Names
         description: Domain names to add
         type: "[]string"
         required: false
-        example: [rapid7.com, google.com]
+        example: ["rapid7.com","google.com"]
       urls:
         title: URLs
         description: URLs to add
         type: "[]string"
         required: false
-        example: [https://example.com, https://test.com]
+        example: ["https://example.com","https://test.com"]
     output:
       rejected_indicators:
         title: Rejected Indicators
         description: The list of indicators that have been rejected during the update
         type: "[]string"
         required: false
-        example: [https://example.com, https://test.com]
+        example: ["https://example.com","https://test.com"]
       threat:
         title: Threat
         description: The information about the threat
         type: threat
         required: false
-        example: {name: 'Contributing Collaborative Threat: Flagged Malicious', published: false, note: Notes, indicator_count: 13}
+        example: {"name": "Contributing Collaborative Threat: Flagged Malicious", "published": False, "note": "Notes","indicator_count": 13}
   assign_user_to_investigation:
     title: Assign User to Investigation
     description: Assign a user to the specified investigation
@@ -1834,7 +1834,7 @@ actions:
         description: The investigation that was modified
         type: investigation
         required: true
-        example: {assignee: {email: user@example.com, name: Ellen Example}, created_time: '2018-06-06T16:56:42Z', disposition: BENIGN, first_alert_time: '2018-06-06T16:56:42Z', last_accessed: '2018-06-06T16:56:42Z', latest_alert_time: '2018-06-06T16:56:42Z', organization_id: 174e4f99-2ac7-4481-9301-4d24c34baf06, priority: CRITICAL, rrn: rrn:example, source: ALERT, status: OPEN, title: Example Title}
+        example: {"assignee": {"email": "user@example.com","name": "Ellen Example"},"created_time": "2018-06-06T16:56:42Z","disposition": "BENIGN","first_alert_time": "2018-06-06T16:56:42Z","last_accessed": "2018-06-06T16:56:42Z","latest_alert_time": "2018-06-06T16:56:42Z","organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06","priority": "CRITICAL","rrn": "rrn:example","source": "ALERT","status": "OPEN","title": "Example Title"}
   query:
     title: Get Query Results
     description: Get query results for a LEQL query by log ID
@@ -1855,9 +1855,9 @@ actions:
       events:
         title: Events
         description: Events from logs
-        type: '[]events'
+        type: "[]events"
         required: true
-        example: '[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": false, "service": "ntlmssp", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": false, "eventData": null, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]'
+        example: [{"labels": [],"timestamp": 1601598638768,"sequence_number": 123456789123456789,"log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313","message": {"timestamp": "2020-10-02T00:29:14.649Z","destination_asset": "iagent-win7","source_asset_address": "192.168.100.50","destination_asset_address": "example-host","destination_local_account": "user","logon_type": "NETWORK","result": "SUCCESS","new_authentication": "false","service": "ntlmssp ","source_json": {"sourceName": "Microsoft-Windows-Security-Auditing","insertionStrings": ["S-1-0-0","-","-","0x0","X-X-X-XXXXXXXXXXX","user@example.com","example-host","0x204f163c","3","NtLmSsp ","NTLM","","{00000000-0000-0000-0000-000000000000}","-","NTLM V2","128","0x0","-","192.168.50.1","59090"],"eventCode": 4624,"computerName": "example-host","sid": "","isDomainController": false,"eventData": null,"timeWritten": "2020-10-02T00:29:13.670722000Z"}},"links": [{"rel": "Context","href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}],"sequence_number_str": "123456789123456789"}]
   get_a_log:
     title: Get a Log
     description: Get a specific log from an account
@@ -1874,7 +1874,7 @@ actions:
         description: Requested log
         type: logsets_info
         required: true
-        example: {log: {id: 0b9a242d-d2fb-4e42-8656-eb5ff64d652f, name: Windows Defender, tokens: [bc38a911-65f1-4755-cca3-a330a6336b3a], structures: [1238a911-65f1-4755-cca3-a330a6336b3a], user_data: {platform_managed: 'true'}, source_type: token, token_seed: null, retention_period: default, links: [{rel: Related, href: https://example.com}], rrn: rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a, logsets_info: [{id: bc38a911-65f1-4755-cca3-a330a6336b3a, name: Unparsed Data, rrn: rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a, links: [{rel: Self, href: https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85}]}]}}
+        example: {"log": {"id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f","name": "Windows Defender","tokens": ["bc38a911-65f1-4755-cca3-a330a6336b3a"],"structures": ["1238a911-65f1-4755-cca3-a330a6336b3a"],"user_data": {"platform_managed": "true"},"source_type": "token","token_seed": null,"retention_period": "default","links": [{"rel": "Related","href": "https://example.com"}],"rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a","logsets_info": [{"id": "bc38a911-65f1-4755-cca3-a330a6336b3a","name": "Unparsed Data","rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a","links": [{"rel": "Self","href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85"}]}]}}
   get_all_logs:
     title: Get All Logs
     description: Request used to list all logs for an account
@@ -1884,7 +1884,7 @@ actions:
         description: All logs
         type: logsets_info
         required: true
-        example: {logs: [log: {id: 0b9a242d-d2fb-4e42-8656-eb5ff64d652f, name: Windows Defender, tokens: [bc38a911-65f1-4755-cca3-a330a6336b3a], structures: [1238a911-65f1-4755-cca3-a330a6336b3a], user_data: {platform_managed: 'true'}, source_type: token, token_seed: null, retention_period: default, links: [{rel: Related, href: https://example.com}], rrn: rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a, logsets_info: [{id: bc38a911-65f1-4755-cca3-a330a6336b3a, name: Unparsed Data, rrn: rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a, links: [{rel: Self, href: https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85}]}]}]}
+        example: {"logs": [{"log": {"id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f","name": "Windows Defender","tokens": ["bc38a911-65f1-4755-cca3-a330a6336b3a"],"structures": ["1238a911-65f1-4755-cca3-a330a6336b3a"],"user_data": {"platform_managed": "true"},"source_type": "token","token_seed": null,"retention_period": "default","links": [{"rel": "Related","href": "https://example.com"}],"rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a","logsets_info": [{"id": "bc38a911-65f1-4755-cca3-a330a6336b3a","name": "Unparsed Data","rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a","links": [{"rel": "Self","href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85"}]}]}}]}
   advanced_query_on_log:
     title: Advanced Query on Log
     description: Realtime query an InsightIDR log. This will query individual logs for results. Note only 500 results will be returned from a single call, if all results are required for this query please use smaller timeranges. If both a log name and log ID are provided, the log ID will used over the log name
@@ -1893,41 +1893,41 @@ actions:
         title: Query
         description: LEQL Query
         type: string
-        example: where(user=adagentadmin, loose)
+        example: "where(user=adagentadmin, loose)"
         required: true
         order: 1
       relative_time:
         title: Relative Time
         description: A relative time in the past to look for alerts
         type: string
-        example: Last 5 Minutes
-        default: Last 5 Minutes
+        example: "Last 5 Minutes"
+        default: "Last 5 Minutes"
         required: true
         order: 2
         enum:
-          - Last 5 Minutes
-          - Last 10 Minutes
-          - Last 20 Minutes
-          - Last 30 Minutes
-          - Last 45 Minutes
-          - Last 1 Hour
-          - Last 2 Hours
-          - Last 3 Hours
-          - Last 6 Hours
-          - Last 12 Hours
-          - Use Time From Value
+          - "Last 5 Minutes"
+          - "Last 10 Minutes"
+          - "Last 20 Minutes"
+          - "Last 30 Minutes"
+          - "Last 45 Minutes"
+          - "Last 1 Hour"
+          - "Last 2 Hours"
+          - "Last 3 Hours"
+          - "Last 6 Hours"
+          - "Last 12 Hours"
+          - "Use Time From Value"
       time_from:
         title: Time From
         description: Beginning date and time for the query. This will be ignored unless Relative Time input is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
         type: string
-        example: 01-01-2020T00:00:00
+        example: "01-01-2020T00:00:00"
         required: false
         order: 3
       time_to:
         title: Time To
         description: Date and time for the end of the query. If left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
         type: string
-        example: 12-31-2020T00:00:00
+        example: "12-31-2020T00:00:00"
         required: false
         order: 4
       timeout:
@@ -1956,15 +1956,15 @@ actions:
       results_events:
         title: Query Results (Events)
         description: Query Results
-        type: '[]events'
+        type: "[]events"
         required: false
-        example: '[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": false, "service": "ntlmssp", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": false, "eventData": null, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href: https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]'
+        example: [{"labels": [],"timestamp": 1601598638768,"sequence_number": 123456789123456789,"log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313","message": {"timestamp": "2020-10-02T00:29:14.649Z","destination_asset": "iagent-win7","source_asset_address": "192.168.100.50","destination_asset_address": "example-host","destination_local_account": "user","logon_type": "NETWORK","result": "SUCCESS","new_authentication": "false","service": "ntlmssp ","source_json": {"sourceName": "Microsoft-Windows-Security-Auditing","insertionStrings": ["S-1-0-0","-","-","0x0","X-X-X-XXXXXXXXXXX","user@example.com","example-host","0x204f163c","3","NtLmSsp ","NTLM","","{00000000-0000-0000-0000-000000000000}","-","NTLM V2","128","0x0","-","192.168.50.1","59090"],"eventCode": 4624,"computerName": "example-host","sid": "","isDomainController": false,"eventData": null,"timeWritten": "2020-10-02T00:29:13.670722000Z"}},"links": [{"rel": "Context","href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}],"sequence_number_str": "123456789123456789"}]
       results_statistical:
         title: Query Results (Statistical)
         description: Query Results
         type: statistics
         required: false
-        example: {leql: {during: {from: 1699579214000, to: 1699622414000}, statement: groupby(r7_context.asset.name)}, logs: [123456-abcd-1234-abcd-123456abc], search_stats: {bytes_all: 9961260, bytes_checked: 9961260, duration_ms: 19, events_all: 1640, events_checked: 1640, events_matched: 1639, index_factor: 0.0}, statistics: {all_exact_result: true, cardinality: 0, from: 1699579214000, granularity: 4320000, groups: [linux: {count: 1163.0}, windowsx64: {count: 476.0}], groups_timeseries: [linux: {groups_timeseries: [], series: [count: 45.0, count: 21.0, count: 16.0, count: 270.0, count: 27.0, count: 43.0, count: 27., count: 39.0, count: 29.0, count: 646.0], totals: {count: 1163.0}}, windowsx64: {groups_timeseries: [], series: [count: 54.0, count: 40.0, count: 60.0, count: 37.0, count: 42.0, count: 62.0, count: 41.0, count: 47.0, count: 49.0, count: 44.0], totals: {count: 476.0}}], others: {series: []}, stats: {}, status: 200, timeseries: {}, to: 1699622414000, type: count}}
+        example: {"leql": {"during": {"from": 1699579214000,"to": 1699622414000},"statement": "groupby(r7_context.asset.name)"},"logs": ["123456-abcd-1234-abcd-123456abc"],"search_stats": {"bytes_all": 9961260,"bytes_checked": 9961260,"duration_ms": 19,"events_all": 1640,"events_checked": 1640,"events_matched": 1639,"index_factor": 0.0},"statistics": {"all_exact_result": true,"cardinality": 0,"from": 1699579214000,"granularity": 4320000,"groups": [{"linux": {"count": 1163.0}},{"windowsx64": {"count": 476.0}}],"groups_timeseries": [{"linux": {"groups_timeseries": [],"series": [{"count": 45.0},{"count": 21.0},{"count": 16.0},{"count": 270.0},{"count": 27.0},{"count": 43.0},{"count": 27.},{"count": 39.0},{"count": 29.0},{"count": 646.0}],"totals": {"count": 1163.0}}},{"windowsx64": {"groups_timeseries": [],"series": [{"count": 54.0},{"count": 40.0},{"count": 60.0},{"count": 37.0},{"count": 42.0},{"count": 62.0},{"count": 41.0},{"count": 47.0},{"count": 49.0},{"count": 44.0}],"totals": {"count": 476.0}}}],"others": {"series": []},"stats": {},"status": 200,"timeseries": {},"to": 1699622414000,"type": "count"}}
       count:
         title: Count
         description: Number of log entries found
@@ -1979,41 +1979,41 @@ actions:
         title: Query
         description: LEQL Query
         type: string
-        example: where(user=adagentadmin, loose)
+        example: "where(user=adagentadmin, loose)"
         required: true
         order: 1
       relative_time:
         title: Relative Time
         description: A relative time in the past to look for alerts
         type: string
-        example: Last 5 Minutes
-        default: Last 5 Minutes
+        example: "Last 5 Minutes"
+        default: "Last 5 Minutes"
         required: true
         order: 2
         enum:
-          - Last 5 Minutes
-          - Last 10 Minutes
-          - Last 20 Minutes
-          - Last 30 Minutes
-          - Last 45 Minutes
-          - Last 1 Hour
-          - Last 2 Hours
-          - Last 3 Hours
-          - Last 6 Hours
-          - Last 12 Hours
-          - Use Time From Value
+          - "Last 5 Minutes"
+          - "Last 10 Minutes"
+          - "Last 20 Minutes"
+          - "Last 30 Minutes"
+          - "Last 45 Minutes"
+          - "Last 1 Hour"
+          - "Last 2 Hours"
+          - "Last 3 Hours"
+          - "Last 6 Hours"
+          - "Last 12 Hours"
+          - "Use Time From Value"
       time_from:
         title: Time From
         description: Beginning date and time for the query. This will be ignored unless Relative Time input is set to 'Use Time From Value'. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
         type: string
-        example: 01-01-2020T00:00:00
+        example: "01-01-2020T00:00:00"
         required: false
         order: 3
       time_to:
         title: Time To
         description: Date and time for the end of the query. If left blank, the current time will be used. The format is flexible and will work with simple dates (e.g. 01-01-2020) to full ISO time (e.g. 01-01-2020T00:00:00)
         type: string
-        example: 12-31-2020T00:00:00
+        example: "12-31-2020T00:00:00"
         required: false
         order: 4
       timeout:
@@ -2058,15 +2058,15 @@ actions:
       results_events:
         title: Query Results (Events)
         description: Query Results
-        type: '[]events'
+        type: "[]events"
         required: false
-        example: '[{"labels": [], "timestamp": 1601598638768, "sequence_number": 123456789123456789, "log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313", "message": {"timestamp": "2020-10-02T00:29:14.649Z", "destination_asset": "iagent-win7", "source_asset_address": "192.168.100.50", "destination_asset_address": "example-host", "destination_local_account": "user", "logon_type": "NETWORK", "result": "SUCCESS", "new_authentication": false, "service": "ntlmssp", "source_json": {"sourceName": "Microsoft-Windows-Security-Auditing", "insertionStrings": ["S-1-0-0", "-", "-", "0x0", "X-X-X-XXXXXXXXXXX", "user@example.com", "example-host", "0x204f163c", "3", "NtLmSsp", "NTLM", "", "{00000000-0000-0000-0000-000000000000}", "-", "NTLM V2", "128", "0x0", "-", "192.168.50.1", "59090"], "eventCode": 4624, "computerName": "example-host", "sid": "", "isDomainController": false, "eventData": null, "timeWritten": "2020-10-02T00:29:13.670722000Z"}}, "links": [{"rel": "Context", "href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}], "sequence_number_str": "123456789123456789"}]'
+        example: [{"labels": [],"timestamp": 1601598638768,"sequence_number": 123456789123456789,"log_id": "64z0f0p9-1a99-4501-xe36-a6d03687f313","message": {"timestamp": "2020-10-02T00:29:14.649Z","destination_asset": "iagent-win7","source_asset_address": "192.168.100.50","destination_asset_address": "example-host","destination_local_account": "user","logon_type": "NETWORK","result": "SUCCESS","new_authentication": "false","service": "ntlmssp ","source_json": {"sourceName": "Microsoft-Windows-Security-Auditing","insertionStrings": ["S-1-0-0","-","-","0x0","X-X-X-XXXXXXXXXXX","user@example.com","example-host","0x204f163c","3","NtLmSsp ","NTLM","","{00000000-0000-0000-0000-000000000000}","-","NTLM V2","128","0x0","-","192.168.50.1","59090"],"eventCode": 4624,"computerName": "example-host","sid": "","isDomainController": false,"eventData": null,"timeWritten": "2020-10-02T00:29:13.670722000Z"}},"links": [{"rel": "Context","href": "https://us.api.insight.rapid7.com/log_search/query/context/xxxx"}],"sequence_number_str": "123456789123456789"}]
       results_statistical:
         title: Query Results (Statistical)
         description: Query Results
         type: statistics
         required: false
-        example: {leql: {during: {from: 1699579214000, to: 1699622414000}, statement: groupby(r7_context.asset.name)}, logs: [123456-abcd-1234-abcd-123456abc], search_stats: {bytes_all: 9961260, bytes_checked: 9961260, duration_ms: 19, events_all: 1640, events_checked: 1640, events_matched: 1639, index_factor: 0.0}, statistics: {all_exact_result: true, cardinality: 0, from: 1699579214000, granularity: 4320000, groups: [linux: {count: 1163.0}, windowsx64: {count: 476.0}], groups_timeseries: [linux: {groups_timeseries: [], series: [count: 45.0, count: 21.0, count: 16.0, count: 270.0, count: 27.0, count: 43.0, count: 27., count: 39.0, count: 29.0, count: 646.0], totals: {count: 1163.0}}, windowsx64: {groups_timeseries: [], series: [count: 54.0, count: 40.0, count: 60.0, count: 37.0, count: 42.0, count: 62.0, count: 41.0, count: 47.0, count: 49.0, count: 44.0], totals: {count: 476.0}}], others: {series: []}, stats: {}, status: 200, timeseries: {}, to: 1699622414000, type: count}}
+        example: {"leql": {"during": {"from": 1699579214000,"to": 1699622414000},"statement": "groupby(r7_context.asset.name)"},"logs": ["123456-abcd-1234-abcd-123456abc"],"search_stats": {"bytes_all": 9961260,"bytes_checked": 9961260,"duration_ms": 19,"events_all": 1640,"events_checked": 1640,"events_matched": 1639,"index_factor": 0.0},"statistics": {"all_exact_result": true,"cardinality": 0,"from": 1699579214000,"granularity": 4320000,"groups": [{"linux": {"count": 1163.0}},{"windowsx64": {"count": 476.0}}],"groups_timeseries": [{"linux": {"groups_timeseries": [],"series": [{"count": 45.0},{"count": 21.0},{"count": 16.0},{"count": 270.0},{"count": 27.0},{"count": 43.0},{"count": 27.},{"count": 39.0},{"count": 29.0},{"count": 646.0}],"totals": {"count": 1163.0}}},{"windowsx64": {"groups_timeseries": [],"series": [{"count": 54.0},{"count": 40.0},{"count": 60.0},{"count": 37.0},{"count": 42.0},{"count": 62.0},{"count": 41.0},{"count": 47.0},{"count": 49.0},{"count": 44.0}],"totals": {"count": 476.0}}}],"others": {"series": []},"stats": {},"status": 200,"timeseries": {},"to": 1699622414000,"type": "count"}}
       count:
         title: Count
         description: Number of log entries found
@@ -2118,7 +2118,7 @@ actions:
         description: The IDs of the investigations that were closed by the request
         type: "[]string"
         required: true
-        example: [6c7db8d1-abc5-b9da-dd71-1a3ffffe8a16]
+        example: ["6c7db8d1-abc5-b9da-dd71-1a3ffffe8a16"]
       num_closed:
         title: Num Closed
         description: The number of investigations closed by the request
@@ -2145,22 +2145,22 @@ actions:
       indicators:
         title: Indicators
         description: Add indicators to new threat in InsightIDR. Accept IP addresses, process hashes (SHA1, MD5, SHA256), domain names, URLs
-        type: "[]string"
+        type: '[]string'
         required: true
-        example: [example.com, 10.0.0.1]
+        example: ["example.com","10.0.0.1"]
     output:
       rejected_indicators:
         title: Rejected Indicators
         description: Rejected indicators in new threat
         type: "[]string"
         required: true
-        example: [example.com, 10.0.0.1]
+        example: ["example.com","10.0.0.1"]
       threat:
         title: Threat
         description: The information about the new threat
         type: threat
         required: true
-        example: {name: Threat created via InsightConnect, note: Threat created via InsightConnect, published: false, indicator_count: 2}
+        example: {"name": "Threat created via InsightConnect", "note": "Threat created via InsightConnect", "published": False,"indicator_count": 2}
   get_all_saved_queries:
     title: Get All Saved Queries
     description: Retrieve all saved InsightIDR LEQL queries
@@ -2168,9 +2168,9 @@ actions:
       saved_queries:
         title: Saved Queries
         description: Saved LEQL queries
-        type: '[]query'
+        type: "[]query"
         required: true
-        example: '[{"id": "00000000-0000-9eec-0000-000000000000", "leql": {"during": {"from": null, "time_range": "yesterday", "to": null}, "statement": "where(931dde6c60>=800)"}, "logs": ["31a4d56e-460e-460f-9542-c2bc8edd7c6b"], "name": "Large Values Yesterday"}]'
+        example: [{"id": "00000000-0000-9eec-0000-000000000000", "leql": {"during": {"from": null, "time_range": "yesterday", "to": null}, "statement": "where(931dde6c60>=800)"}, "logs": ["31a4d56e-460e-460f-9542-c2bc8edd7c6b"], "name": "Large Values Yesterday"}]
   get_a_saved_query:
     title: Get a Saved Query
     description: Retrieve a saved InsightIDR LEQL query by its ID
@@ -2180,14 +2180,14 @@ actions:
         description: UUID of saved query
         type: string
         required: true
-        example: 00000000-0000-10d0-0000-000000000000
+        example: "00000000-0000-10d0-0000-000000000000"
     output:
       saved_query:
         title: Saved Query
         description: Saved LEQL query
         type: query
         required: true
-        example: {id: 00000000-0000-9eec-0000-000000000000, leql: {during: {from: null, time_range: yesterday, to: null}, statement: where(931dde6c60>=800)}, logs: [31a4d56e-460e-460f-9542-c2bc8edd7c6b], name: Large Values Yesterday}
+        example: {"id": "00000000-0000-9eec-0000-000000000000", "leql": {"during": {"from": null, "time_range": "yesterday", "to": null}, "statement": "where(931dde6c60>=800)"}, "logs": ["31a4d56e-460e-460f-9542-c2bc8edd7c6b"], "name": "Large Values Yesterday"}
   list_comments:
     title: List Comments
     description: List all comments on an investigation by passing an investigation's RRN as the target value
@@ -2197,7 +2197,7 @@ actions:
         description: The target of the comment, which determines where it will appear within InsightIDR
         type: string
         required: true
-        example: rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210
+        example: "rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210"
       index:
         title: Index
         description: The optional 0 based index of the page to retrieve. Must be an integer greater than or equal to 0. Default value set to 0
@@ -2216,9 +2216,9 @@ actions:
       comments:
         title: Comments
         description: List of comments
-        type: '[]comment'
+        type: "[]comment"
         required: false
-        example: [{created_time: '2022-08-18T12:53:26.676Z', rrn: rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:1234567890, target: rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890, creator: {type: USER, name: Example User}, body: test, visibility: PUBLIC, attachments: [{rrn: rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890, creator: {type: USER, name: Example User}, created_time: '2022-08-19T13:00:58.645Z', file_name: test.txt, mime_type: text/plain, size: 4, scan_status: CLEAN}]}]
+        example: [{"created_time": "2022-08-18T12:53:26.676Z","rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:1234567890","target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890","creator": {"type": "USER","name": "Example User"},"body": "test","visibility": "PUBLIC", "attachments": [{"rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890","creator": {"type": "USER","name": "Example User"},"created_time": "2022-08-19T13:00:58.645Z","file_name": "test.txt","mime_type": "text/plain","size": 4,"scan_status": "CLEAN"}]}]
       success:
         title: Success
         description: Whether the action was successful or not
@@ -2234,7 +2234,7 @@ actions:
         description: The target of the comment, which determines where it will appear within InsightIDR
         type: string
         required: true
-        example: rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210
+        example: "rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210"
       body:
         title: Body
         description: The body of the comment
@@ -2246,14 +2246,14 @@ actions:
         description: An array of attachment RRNs to associate with the comment
         type: "[]string"
         required: false
-        example: [rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210]
+        example: ["rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210"]
     output:
       comment:
         title: Comment
         description: Newly created comment
         type: comment
         required: false
-        example: {created_time: '2022-09-22T08:38:13.962Z', rrn: rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:1234567890, target: rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210, creator: {type: USER, name: Example User}, body: test, visibility: PUBLIC, attachments: [{rrn: rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210, creator: {type: USER, name: Example User}, created_time: '2022-09-20T13:54:28.246Z', file_name: test.txt, mime_type: text/plain, size: 4, scan_status: CLEAN}]}
+        example: {"created_time": "2022-09-22T08:38:13.962Z","rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:1234567890","target": "rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210","creator": {"type": "USER","name": "Example User"},"body": "test","visibility": "PUBLIC","attachments": [{"rrn": "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210","creator": {"type": "USER","name": "Example User"},"created_time": "2022-09-20T13:54:28.246Z","file_name": "test.txt","mime_type": "text/plain","size": 4,"scan_status": "CLEAN"}]}
       success:
         title: Success
         description: Whether the action was successful or not
@@ -2269,7 +2269,7 @@ actions:
         description: The RRN of the comment
         type: string
         required: true
-        example: rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:comment:ABCDEF543210
+        example: "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:comment:ABCDEF543210"
     output:
       success:
         title: Success
@@ -2286,7 +2286,7 @@ actions:
         description: The RRN of the target, for which attachments will be returned
         type: string
         required: true
-        example: rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210
+        example: "rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210"
       index:
         title: Index
         description: The optional 0 based index of the page to retrieve. Must be an integer greater than or equal to 0. Default value set to 0
@@ -2307,7 +2307,7 @@ actions:
         description: List of attachments
         type: "[]attachment"
         required: false
-        example: [{rrn: rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890, creator: {type: USER, name: Example User}, created_time: '2022-08-19T13:00:58.645Z', file_name: test.txt, mime_type: text/plain, size: 4, scan_status: CLEAN}]
+        example: [{"rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890","creator": {"type": "USER","name": "Example User"},"created_time": "2022-08-19T13:00:58.645Z","file_name": "test.txt","mime_type": "text/plain","size": 4,"scan_status": "CLEAN"}]
       success:
         title: Success
         description: Whether the action was successful or not
@@ -2352,14 +2352,14 @@ actions:
         description: The RRN of the attachment
         type: string
         required: true
-        example: rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210
+        example: "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210"
     output:
       attachment:
         title: Attachment
         description: Attachment details
         type: attachment
         required: false
-        example: {rrn: rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890, creator: {type: USER, name: Example User}, created_time: '2022-08-19T13:00:58.645Z', file_name: test.txt, mime_type: text/plain, size: 4, scan_status: CLEAN}
+        example: {"rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890","creator": {"type": "USER","name": "Example User"},"created_time": "2022-08-19T13:00:58.645Z","file_name": "test.txt","mime_type": "text/plain","size": 4,"scan_status": "CLEAN"}
       success:
         title: Success
         description: Whether the action was successful or not
@@ -2375,7 +2375,7 @@ actions:
         description: The RRN of the attachment
         type: string
         required: true
-        example: rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210
+        example: "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210"
     output:
       success:
         title: Success
@@ -2392,7 +2392,7 @@ actions:
         description: The RRN of the attachment
         type: string
         required: true
-        example: rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210
+        example: "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210"
     output:
       attachment_content:
         title: Attachment Content
@@ -2415,14 +2415,14 @@ actions:
         description: The RRN of the user
         type: string
         required: true
-        example: rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6
+        example: "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6"
     output:
       user:
         title: User
         description: User details
         type: user
         required: false
-        example: {domain: tor.acme.com, first_name: John, last_name: Doe, name: John Doe, rrn: rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6}
+        example: {"domain": "tor.acme.com","first_name": "John","last_name": "Doe","name": "John Doe","rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6"}
       success:
         title: Success
         description: Whether the action was successful or not
@@ -2438,14 +2438,14 @@ actions:
         description: The RRN of the asset
         type: string
         required: true
-        example: rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:asset:83002c85d7c6
+        example: "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:asset:83002c85d7c6"
     output:
       asset:
         title: Asset
         description: Asset details
         type: asset
         required: false
-        example: {name: morbo.tor.acme.com, rrn: rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:asset:83002c85d7c6}
+        example: {"name": "morbo.tor.acme.com","rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:asset:83002c85d7c6"}
       success:
         title: Success
         description: Whether the action was successful or not
@@ -2461,16 +2461,14 @@ actions:
         description: The RRN of the alert
         type: string
         required: true
-        example: rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg
+        example: "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg"
     output:
       alert:
         title: Alert
         description: Alert details
         type: alert_object
         required: false
-        example: {alerted_at: '2023-12-04T13:59:06.349Z', created_at: '2023-12-04T13:59:06.757109Z', disposition: UNDECIDED, external_id: 12345678-abcd-cdef-1234-12345abc, external_source: IDR ABA, fields: [], ingested_at: '2023-12-04T13:59:06.751813Z', investigation_rrn: rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI, organization: {customer_id: 12345678-abcd-cdef-1234-12345abc, customer_name: Dev Test, flags: [], id: 12345678-abcd-cdef-1234-12345abc, name: Dev Test, product_token: abcdefgh12345abc, region: us1}, permissions: {canEdit: false}, priority: LOW, responsibility: MDR, rrn: rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abc, rule: {mitre_tcodes: [Credential Access, T1110], rrn: rrn:cba:::detection-rule:ABCDEFGHIJK, version_rrn: rrn:cba:::detection-rule:version:ABCDEFGHIJK}, rule_keys_of_interest: [{key: result, values: [SUCCESS]}, {key: account, values: [test_account]}, {key: geoip_country_code, values: [US]}, {key: source_ip, values: [1.1.1.1]}], rule_matching_keys: [{key: entryType, values: [ingress_auth]}, {key: orgId, values: [12345678-abcd-cdef-1234-12345abc]}], status: OPEN, tags: [],
-          title: MVD Verification, type: MVD Verification, updated_at: '2023-12-05T11:51:39.29059Z',
-          version: 8}
+        example: { "alerted_at": "2023-12-04T13:59:06.349Z","created_at": "2023-12-04T13:59:06.757109Z","disposition": "UNDECIDED","external_id": "12345678-abcd-cdef-1234-12345abc","external_source": "IDR ABA","fields": [],"ingested_at": "2023-12-04T13:59:06.751813Z","investigation_rrn":"rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI","organization": {"customer_id": "12345678-abcd-cdef-1234-12345abc","customer_name": "Dev Test","flags": [],"id": "12345678-abcd-cdef-1234-12345abc","name": "Dev Test","product_token": "abcdefgh12345abc","region": "us1"},"permissions": {"canEdit": false},"priority": "LOW","responsibility": "MDR","rrn":"rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abc","rule": {"mitre_tcodes": ["Credential Access","T1110"],"rrn": "rrn:cba:::detection-rule:ABCDEFGHIJK","version_rrn": "rrn:cba:::detection-rule:version:ABCDEFGHIJK"},"rule_keys_of_interest": [{"key": "result","values": ["SUCCESS"]},{"key": "account","values": ["test_account"]},{"key": "geoip_country_code","values": ["US"]},{"key": "source_ip","values": ["1.1.1.1"]}],"rule_matching_keys": [{"key": "entryType","values": ["ingress_auth"]},{"key": "orgId","values": ["12345678-abcd-cdef-1234-12345abc"]}],"status": "OPEN","tags": [],"title": "MVD Verification","type": "MVD Verification","updated_at": "2023-12-05T11:51:39.29059Z","version": 8 }
       success:
         title: Success
         description: Whether the action was successful or not
@@ -2486,29 +2484,29 @@ actions:
         description: An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned, if provided an end time will also need provided. If no times are provided a default of 6 months will be used
         type: date
         required: false
-        example: '2020-06-01T12:11:13+05:30'
+        example: "2020-06-01T12:11:13+05:30"
       end_time:
         title: End Time
         description: An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned, if provided a start time will also need provided. If no times are provided a default of 6 months will be used
         type: date
         required: false
-        example: '2020-06-01T12:11:13+05:30'
+        example: "2020-06-01T12:11:13+05:30"
       leql:
         title: LEQL
         description: The LEQL 'WHERE' clause to match against
         type: string
         required: false
-        example: ''
+        example: ""
       terms:
         title: Terms
         description: The search terms to match against
-        type: '[]terms_object'
+        type: "[]terms_object"
         required: false
-        example: ''
+        example: ""
       sorts:
         title: Sorts
         description: The sort order to apply to the matching results., where possible field values are RRN, PRIORITY, CREATED TIME, and order values are ASCENDING_NULLS_LAST, ASCENDING_NULLS_FIRST, DESCENDING_NULLS_LAST, DESCENDING_NULLS_FIRST
-        type: '[]sort_object'
+        type: "[]sort_object"
         required: false
         example: '[{"field_id": "Example Field", "order": "ASCENDING_NULLS_LAST"}]'
       field_ids:
@@ -2520,7 +2518,7 @@ actions:
       aggregates:
         title: Aggregates
         description: Aggregations to apply for all matching results
-        type: '[]aggregate_object'
+        type: "[]aggregate_object"
         required: false
         example: [{}]
       size:
@@ -2548,32 +2546,32 @@ actions:
       alerts:
         title: Alerts
         description: A list of found alerts
-        type: '[]alert_object'
+        type: "[]alert_object"
         required: false
-        example: '[{"alerted_at": "2023-12-04T13:59:06.349Z", "created_at": "2023-12-04T13:59:06.757109Z", "disposition": "UNDECIDED", "external_id": "12345678-abcd-cdef-1234-12345abc", "external_source": "IDR ABA", "fields": [], "ingested_at": "2023-12-04T13:59:06.751813Z", "investigation_rrn": "rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI", "organization": {"customer_id": "12345678-abcd-cdef-1234-12345abc", "customer_name": "Dev Test", "flags": [], "id": "12345678-abcd-cdef-1234-12345abc", "name": "Dev Test", "product_token": "abcdefgh12345abc", "region": "us1"}, "permissions": {"canEdit": false}, "priority": "LOW", "responsibility": "MDR", "rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abc", "rule": {"mitre_tcodes": ["Credential Access", "T1110"], "rrn": "rrn:cba:::detection-rule:ABCDEFGHIJK", "version_rrn": "rrn:cba:::detection-rule:version:ABCDEFGHIJK"}, "rule_keys_of_interest": [{"key": "result", "values": ["SUCCESS"]}, {"key": "account", "values": ["test_account"]}, {"key": "geoip_country_code", "values": ["US"]}, {"key": "source_ip", "values": ["1.1.1.1"]}], "rule_matching_keys": [{"key": "entryType", "values": ["ingress_auth"]}, {"key": "orgId", "values": ["12345678-abcd-cdef-1234-12345abc"]}], "status": "OPEN", "tags": [], "title": "MVD Verification", "type": "MVD Verification", "updated_at": "2023-12-05T11:51:39.29059Z", "version": 8}]'
+        example: [{ "alerted_at": "2023-12-04T13:59:06.349Z","created_at": "2023-12-04T13:59:06.757109Z","disposition": "UNDECIDED","external_id": "12345678-abcd-cdef-1234-12345abc","external_source": "IDR ABA","fields": [],"ingested_at": "2023-12-04T13:59:06.751813Z","investigation_rrn":"rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI","organization": {"customer_id": "12345678-abcd-cdef-1234-12345abc","customer_name": "Dev Test","flags": [],"id": "12345678-abcd-cdef-1234-12345abc","name": "Dev Test","product_token": "abcdefgh12345abc","region": "us1"},"permissions": {"canEdit": false},"priority": "LOW","responsibility": "MDR","rrn":"rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abc","rule": {"mitre_tcodes": ["Credential Access","T1110"],"rrn": "rrn:cba:::detection-rule:ABCDEFGHIJK","version_rrn": "rrn:cba:::detection-rule:version:ABCDEFGHIJK"},"rule_keys_of_interest": [{"key": "result","values": ["SUCCESS"]},{"key": "account","values": ["test_account"]},{"key": "geoip_country_code","values": ["US"]},{"key": "source_ip","values": ["1.1.1.1"]}],"rule_matching_keys": [{"key": "entryType","values": ["ingress_auth"]},{"key": "orgId","values": ["12345678-abcd-cdef-1234-12345abc"]}],"status": "OPEN","tags": [],"title": "MVD Verification","type": "MVD Verification","updated_at": "2023-12-05T11:51:39.29059Z","version": 8 }]
       rrns:
         title: RRNs
         description: A list of the rrns for the found alerts
         type: "[]string"
         required: false
-        example: [rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg, rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abd]
+        example: ["rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg", "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abd"]
       metadata:
         title: Metadata
         description: The pagination parameters used to generate this page result
         type: investigation_metadata
         required: true
-        example: {index: 0, size: 1, total_data: 1, total_pages: 1}
+        example: {"index": 0,"size": 1,"total_data": 1,"total_pages": 1}
       aggregates:
         title: Aggregates
         description: The aggregation results
-        type: '[]aggregate_response_object'
+        type: "[]aggregate_response_object"
         required: false
-        example: [{name: example_id, type: BUCKET, value: example_value, field_ids: [example_field], buckets: [{keys: [example_key], count: 1}]}]
+        example: [{"name": "example_id", "type": "BUCKET", "value": "example_value", "field_ids": ["example_field"], "buckets": [{"keys": ["example_key"], "count":1}]}]
       region_failures:
         title: Region Failures
         description: The regions where the request failed to execute. The presence of items in this field indicates partial failure
-        type: '[]region_failure_object'
-        example: [{region: US, message: example_message}]
+        type: "[]region_failure_object"
+        example: [{"region": "US", "message": "example_message"}]
         required: false
   get_alert_evidence:
     title: Retrieve Evidence for a Single Alert
@@ -2584,7 +2582,7 @@ actions:
         description: The RRN of the alert
         type: string
         required: true
-        example: rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:actor:1:12345678-abcd-cdef-1234-12345abg
+        example: "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:actor:1:12345678-abcd-cdef-1234-12345abg"
       size:
         title: Size
         description: Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100
@@ -2603,15 +2601,15 @@ actions:
       evidences:
         title: Evidences
         description: The alert evidence
-        type: '[]evidence_object'
+        type: "[]evidence_object"
         required: false
-        example: [{created_at: '2023-12-04T13:59:06.768731Z', data: {timestamp: '2023-12-04T13:44:56.000Z', user: test_user, account: test_user, result: SUCCESS, source_ip: 1.1.1.1, service: o365, geoip_city: Boston, geoip_country_code: US, geoip_country_name: United States, geoip_organization: TowardEX Technologies International, geoip_region: MA, source_json: {CreationTime: '2023-12-04T13:44:56', Id: 12345678-abcd-cdef-1234-12345abc0, Operation: UserLoggedIn, OrganizationId: 12345678-abcd-cdef-1234-12345abc, RecordType: 15, ResultStatus: Success, UserKey: 12345678-abcd-cdef-1234-12345abc, UserType: 0, Version: 1, Workload: AzureActiveDirectory, ClientIP: 1.1.1.1, ObjectId: 00000002-0000-0000-c000-000000000000, UserId: test_user, AzureActiveDirectoryEventType: 1, ExtendedProperties: [{Name: ResultStatusDetail, Value: Success}, {Name: UserAuthenticationMethod, Value: '1'}, {Name: RequestType, Value: OAuth2:Token}], ModifiedProperties: [], Actor: [{ID: 12345678-abcd-cdef-1234-12345abc, Type: 0}, {ID: test_user, Type: 5}], ActorContextId: 12345678-abcd-cdef-1234-12345abc, ActorIpAddress: 1.1.1.1, InterSystemsId: 1bd394a5-be1b-4af3-a608-8ec6c73d5c02, IntraSystemId: 12345678-abcd-cdef-1234-12345abc0, SupportTicketId: '', Target: [{ID: 00000002-0000-0000-c000-000000000000, Type: 0}], TargetContextId: 12345678-abcd-cdef-1234-12345abc, ApplicationId: cb1056e2-e479-49de-ae31-7812af012ed8, DeviceProperties: [{Name: OS, Value: Windows10}, {Name: BrowserType, Value: Other}, {Name: SessionId, Value: 512345678-abcd-cdef-1234-12345abc}], ErrorNumber: '0'}, custom_data: {SourceRelative Url: TargetContextId, source_account: RecordType}, r7_context: {user: {type: user, rrn: rrn:uba:us:512345678-abcd-cdef-1234-12345abc:user:ABCDEFGH, name: test_user}, account: {type: account, rrn: rrn:uba:us:512345678-abcd-cdef-1234-12345abc:account:ABCDEFGH, name: test_user}}}, event_type: ingress_auth, evented_at: '2023-12-04T13:59:06.349Z', external_source: IDR ABA, rrn: rrn:alerts:us1:512345678-abcd-cdef-1234-12345abc:evidence:1:512345678-abcd-cdef-1234-12345abc, updated_at: '2023-12-04T13:59:06.768731Z', version: 1}]
+        example: [{"created_at": "2023-12-04T13:59:06.768731Z","data": {"timestamp":"2023-12-04T13:44:56.000Z","user":"test_user","account":"test_user","result":"SUCCESS","source_ip":"1.1.1.1","service":"o365","geoip_city":"Boston","geoip_country_code":"US","geoip_country_name":"United States","geoip_organization":"TowardEX Technologies International","geoip_region":"MA","source_json":{"CreationTime":"2023-12-04T13:44:56","Id":"12345678-abcd-cdef-1234-12345abc0","Operation":"UserLoggedIn","OrganizationId":"12345678-abcd-cdef-1234-12345abc","RecordType":15,"ResultStatus":"Success","UserKey":"12345678-abcd-cdef-1234-12345abc","UserType":0,"Version":1,"Workload":"AzureActiveDirectory","ClientIP":"1.1.1.1","ObjectId":"00000002-0000-0000-c000-000000000000","UserId":"test_user","AzureActiveDirectoryEventType":1,"ExtendedProperties":[{"Name":"ResultStatusDetail","Value":"Success"},{"Name":"UserAuthenticationMethod","Value":"1"},{"Name":"RequestType","Value":"OAuth2:Token"}],"ModifiedProperties":[],"Actor":[{"ID":"12345678-abcd-cdef-1234-12345abc","Type":0},{"ID":"test_user","Type":5}],"ActorContextId":"12345678-abcd-cdef-1234-12345abc","ActorIpAddress":"1.1.1.1","InterSystemsId":"1bd394a5-be1b-4af3-a608-8ec6c73d5c02","IntraSystemId":"12345678-abcd-cdef-1234-12345abc0","SupportTicketId":"","Target":[{"ID":"00000002-0000-0000-c000-000000000000","Type":0}],"TargetContextId":"12345678-abcd-cdef-1234-12345abc","ApplicationId":"cb1056e2-e479-49de-ae31-7812af012ed8","DeviceProperties":[{"Name":"OS","Value":"Windows10"},{"Name":"BrowserType","Value":"Other"},{"Name":"SessionId","Value":"512345678-abcd-cdef-1234-12345abc"}],"ErrorNumber":"0"},"custom_data":{"SourceRelative Url":"TargetContextId","source_account":"RecordType"},"r7_context":{"user":{"type":"user","rrn":"rrn:uba:us:512345678-abcd-cdef-1234-12345abc:user:ABCDEFGH","name":"test_user"},"account":{"type":"account","rrn":"rrn:uba:us:512345678-abcd-cdef-1234-12345abc:account:ABCDEFGH","name":"test_user"}}},"event_type": "ingress_auth","evented_at": "2023-12-04T13:59:06.349Z","external_source": "IDR ABA","rrn": "rrn:alerts:us1:512345678-abcd-cdef-1234-12345abc:evidence:1:512345678-abcd-cdef-1234-12345abc","updated_at": "2023-12-04T13:59:06.768731Z","version": 1}]
       metadata:
         title: Metadata
         description: The pagination parameters used to generate this page result
         type: investigation_metadata
         required: true
-        example: {index: 0, size: 1, total_data: 1, total_pages: 1}
+        example: {"index": 0,"size": 1,"total_data": 1,"total_pages": 1}
   get_alert_actors:
     title: Retrieve Actors for a Single Alert
     description: Allows the user to retrieve actors for a single alert from an alert RRN
@@ -2621,7 +2619,7 @@ actions:
         description: The RRN of the alert
         type: string
         required: true
-        example: rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:actor:1:12345678-abcd-cdef-1234-12345abg
+        example: "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:actor:1:12345678-abcd-cdef-1234-12345abg"
       size:
         title: Size
         description: Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100
@@ -2640,15 +2638,15 @@ actions:
       actors:
         title: Actors
         description: The alerts actors
-        type: '[]actor_object'
+        type: "[]actor_object"
         required: false
-        example: [{display_name: test display name, id: 12345678-abcd-cdef-1234-12345abc, rrn: rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:actor:1:12345678-abcd-cdef-1234-12345abg, type: ACCOUNT, user_id: 12345678-abcd-cdef-1234-12345abf}]
+        example: [{"display_name": "test display name","id": "12345678-abcd-cdef-1234-12345abc","rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:actor:1:12345678-abcd-cdef-1234-12345abg","type": "ACCOUNT","user_id": "12345678-abcd-cdef-1234-12345abf"}]
       metadata:
         title: Metadata
         description: The pagination parameters used to generate this page result
         type: investigation_metadata
         required: true
-        example: {index: 0, size: 1, total_data: 1, total_pages: 1}
+        example: {"index": 0,"size": 1,"total_data": 1,"total_pages": 1}
   search_accounts:
     title: Search Accounts
     description: Allows the user to retrieve idr accounts that match the given criteria
@@ -2656,13 +2654,13 @@ actions:
       search:
         title: Search
         description: The criteria for which entities to return
-        type: '[]search_accounts_object'
+        type: "[]search_accounts_object"
         required: false
         example: '[{"field": "Example Field", "operator": "EQUALS", "value": "Test Value"}]'
       sort:
         title: Sort
         description: The criteria and sorting information for searching
-        type: '[]sort_accounts_object'
+        type: "[]sort_accounts_object"
         required: false
         example: '[{"field": "Example Field", "order": "ASC"}]'
       size:
@@ -2683,9 +2681,9 @@ actions:
       data:
         title: Data
         description: The list of account information
-        type: '[]account_object'
+        type: "[]account_object"
         required: true
-        example: '[{"rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:account:83002c85d7c6", "name": "user@example.com", "domain": "tor.acme.com", "disabled": true, "user": {"rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6", "name": "John Doe"}, "authentication_service": "ACTIVE_DIRECTORY"}]'
+        example: [ { "rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:account:83002c85d7c6", "name": "jdoe@acme.com", "domain": "tor.acme.com", "disabled": true, "user": { "rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6", "name": "John Doe" }, "authentication_service": "ACTIVE_DIRECTORY" } ]
       metadata:
         title: Metadata
         description: The pagination parameters used to generate this page result
@@ -2701,14 +2699,14 @@ actions:
         description: The RRN of the Account
         type: string
         required: true
-        example: rrn:uba:us:123456-12334-1234-abcd-123456abc:account:123456abc
+        example: "rrn:uba:us:123456-12334-1234-abcd-123456abc:account:123456abc"
     output:
       account:
         title: Account
         description: Account details
         type: account_object
         required: false
-        example: {rrn: rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:account:83002c85d7c6, name: user@example.com, domain: tor.acme.com, disabled: true, user: {rrn: rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6, name: John Doe}, authentication_service: ACTIVE_DIRECTORY}
+        example: { "rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:account:83002c85d7c6", "name": "jdoe@acme.com", "domain": "tor.acme.com", "disabled": true, "user": { "rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6", "name": "John Doe" }, "authentication_service": "ACTIVE_DIRECTORY" }
 triggers:
   get_new_alerts:
     title: Get New Alerts
