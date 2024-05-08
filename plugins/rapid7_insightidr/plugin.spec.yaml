@@ -26,10 +26,10 @@ sdk:
   version: 5
   user: nobody
 version_history:
-- 10.1.0 - New Trigger  `Get New Alerts`
+- "10.1.0 - New Trigger Added: `Get New Alerts`"
 - "10.0.0 - Actions: `List Investigations` Sort options updated | `Get Investigation`, `List Investigations`, `Create Investigation`, `Update Investigation` `Set Priority of Investigation`, `Set Disposition of Investigation`, `Set Status of Investigation Action`, `Assign User to Investigation`, `Seach Investigations`, `Get a Log`, `Get All Logs`, `Search Alerts` output now includes additional fields"
 - "9.0.0 - Actions: `Advanced Query On Log` - Now allows for either log id or log name to be used"
-- "8.2.0 - Actions:  `Advanced Query On Log Set` and `Advanced Query On Log` - optimized data fetching mechanisms"
+- "8.2.0 - Actions: `Advanced Query On Log Set` and `Advanced Query On Log` - optimized data fetching mechanisms"
 - 8.1.1 - Extended error logging for all the actions
 - "8.1.0 - New actions added: `Search Accounts` and `Get Account Information`"
 - 8.0.0 - Update schema for `Investigation` and `Statistics` | Update dependency for aiohttp | New actions added `Get Alert Information`, `Search Alerts`, `Retrieve Evidence for a Single Alert` and `Retrieve Actors for a Single Alert` | Fixed issue where index was not getting correctly passed through to `List Investigations` action from the user
