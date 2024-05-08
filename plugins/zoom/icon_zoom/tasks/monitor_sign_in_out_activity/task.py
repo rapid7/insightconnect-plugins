@@ -55,7 +55,8 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         "Health check failed. An error occurred during event collection: insufficient permissions for this action. "
         "Please ensure you add all required user permissions for the Rapid7 app in Zoom."
     )
-    DEFAULT_CUTOFF_HOURS = 24
+    DEFAULT_CUTOFF_HOURS = 168
+    DEFAULT_INITIAL_LOOKBACK = 24
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -86,9 +87,11 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
         cutoff = custom_config.get("cutoff", {})
         cutoff_date = cutoff.get("date")
+        cutoff_hours = cutoff.get("hours")
         lookback = custom_config.get("lookback")
 
         if lookback is not None:
+            self.logger.info("Setting min start time (lookback manually applied)")
             start_time = self._format_datetime_for_zoom(
                 # a default of up to 12 months is used to allow for this to always run if there is missing value in the custom config
                 # as if the request is larger than 30 days, the api will only return 30 days worth of data
@@ -104,6 +107,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             self.logger.info(f"A custom start time of {start_time} will be used")
         else:
             if cutoff_date is not None:
+                self.logger.info("Setting min start time (cutoff date manually applied)")
                 start_time = self._format_datetime_for_zoom(
                     # a default of up to 12 months is used to allow for this to always run if there is missing value in the custom config
                     # as if the request is larger than 30 days, the api will only return 30 days worth of data
@@ -116,17 +120,35 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                         cutoff_date.get("second", 0),
                     )
                 )
+            elif cutoff_hours is not None:
+                self.logger.info(f"Setting min start time (cutoff: {cutoff_hours} hours manually applied)")
+                start_time = self._format_datetime_for_zoom(dt=self._get_datetime_last_x_hours(cutoff_hours))
             else:
-                start_time = self._format_datetime_for_zoom(
-                    dt=self._get_datetime_last_x_hours(cutoff.get("hours", self.DEFAULT_CUTOFF_HOURS))
-                )
+                if not state.get(self.LAST_REQUEST_TIMESTAMP):
+                    # no previous timestamp - this is considered first time through, use an initial lookback cutoff
+                    self.logger.info(
+                        "Setting min start time: No manual cutoff applied and no last request timestamp. "
+                        f"Use default initial lookback cutoff: {self.DEFAULT_INITIAL_LOOKBACK} hours"
+                    )
+                    start_time = self._format_datetime_for_zoom(
+                        dt=self._get_datetime_last_x_hours(self.DEFAULT_INITIAL_LOOKBACK)
+                    )
+                else:
+                    # Not the first run, ensure a max cutoff is applied if necessary
+                    self.logger.info(
+                        "Setting min start time: No manual cutoff applied, last request timestamp exists. "
+                        f"Use default lookback cutoff: {self.DEFAULT_CUTOFF_HOURS} hours"
+                    )
+                    start_time = self._format_datetime_for_zoom(
+                        dt=self._get_datetime_last_x_hours(self.DEFAULT_CUTOFF_HOURS)
+                    )
 
         start_date_params = {
             RunState.starting: start_time,
             RunState.paginating: state.get(self.PARAM_START_DATE),
             RunState.continuing: self._get_last_valid_timestamp(start_time, state),
         }
-
+        self.logger.info(f"Start_date_params: {start_date_params}")
         end_date_params = {
             RunState.starting: now,
             RunState.paginating: state.get(self.PARAM_END_DATE),

@@ -174,7 +174,6 @@ class TestGetUserActivityEvents(unittest.TestCase):
     def test_first_and_subsequent_runs(
         self, mock_call: MagicMock, mock_datetime_now: MagicMock, mock_datetime_last_24: MagicMock
     ) -> None:
-
         # First run
         first_event_set = [
             {
@@ -383,7 +382,6 @@ class TestGetUserActivityEvents(unittest.TestCase):
         mock_datetime_now: MagicMock,
         mock_datetime_last_x: MagicMock,
     ) -> None:
-
         mock_datetime_last_x.side_effect = [mock_last_x_hours]
 
         expected_output, expected_has_more_pages, expected_status_code, expected_error = (
@@ -418,7 +416,6 @@ class TestGetUserActivityEvents(unittest.TestCase):
     def test_backfill_continiuous_pagination(
         self, mock_call: MagicMock, mock_datetime_now: MagicMock, mock_datetime_last_24: MagicMock
     ) -> None:
-
         state = {
             "param_end_date": "2023-02-23T22:00:00Z",
             "param_start_date": "2023-02-22T21:44:44Z",
