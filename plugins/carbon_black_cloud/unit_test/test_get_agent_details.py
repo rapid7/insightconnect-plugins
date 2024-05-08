@@ -36,7 +36,7 @@ class TestGetAgentDetails(TestCase):
     @parameterized.expand(
         [STUB_AGENT_ID, STUB_AGENT_ID_HOSTNAME, STUB_AGENT_ID_HOSTNAME_CAPS],
     )
-    @patch("requests.post", side_effect=mock_request_200)
+    @patch("requests.request", side_effect=mock_request_200)
     def test_get_agent_details(self, input: str, mocked_post: MagicMock) -> None:
         response = self.action.run({Input.AGENT: input})
         expected = {

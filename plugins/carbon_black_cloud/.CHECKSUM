@@ -1,11 +1,11 @@
 {
-	"spec": "c57b928f44386841f6bdefb46d942944",
-	"manifest": "02123fd6fd4af62463c6cab2fce3027e",
-	"setup": "7ca5be5347d5a4cb63e78c4fc376b12d",
+	"spec": "e1d828ca45a78e32ff3015dfbb487255",
+	"manifest": "e7177f918ba0c6af9e4214677c682167",
+	"setup": "02fcf4bc99206f8e1678cb422d3ad518",
 	"schemas": [
 		{
 			"identifier": "get_agent_details/schema.py",
-			"hash": "a4103fd58ab7f8d0437b352fe09f669d"
+			"hash": "f1410f52d0401ebf574b44d24fb534ff"
 		},
 		{
 			"identifier": "quarantine/schema.py",
@@ -13,7 +13,11 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "b055776a3ea5e159540fcda6a7d13f6c"
+			"hash": "caa98e14796bcb46d0a6366804d7f282"
+		},
+		{
+			"identifier": "monitor_alerts/schema.py",
+			"hash": "0d5c6d68428c80ba624d4026dcc947f9"
 		}
 	]
 }

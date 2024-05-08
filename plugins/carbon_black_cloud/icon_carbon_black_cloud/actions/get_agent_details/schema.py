@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get Agent Details"
+    DESCRIPTION = "Get agent details"
 
 
 class Input:
