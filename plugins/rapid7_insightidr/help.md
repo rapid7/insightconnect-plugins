@@ -3209,26 +3209,26 @@ Example output:
 # Version History
 
 * 10.1.0 - New Trigger  `Get New Alerts`
-* 10.0.0 - Actions : `List Investigations` Sort options updated | `Get Investigation`, `List Investigations`, `Create Investigation`, `Update Investigation` `Set Priority of Investigation`, `Set Disposition of Investigation`, `Set Status of Investigation Action`, `Assign User to Investigation`, `Seach Investigations`, `Get a Log`, `Get All Logs`, `Search Alerts` output now includes additional fields
-* 9.0.0 - Actions : `Advanced Query On Log` - Now allows for either log id or log name to be used
-* 8.2.0 - Actions :  `Advanced Query On Log Set` and `Advanced Query On Log` - optimized data fetching mechanisms
+* 10.0.0 - Actions: `List Investigations` Sort options updated | `Get Investigation`, `List Investigations`, `Create Investigation`, `Update Investigation` `Set Priority of Investigation`, `Set Disposition of Investigation`, `Set Status of Investigation Action`, `Assign User to Investigation`, `Seach Investigations`, `Get a Log`, `Get All Logs`, `Search Alerts` output now includes additional fields
+* 9.0.0 - Actions: `Advanced Query On Log` - Now allows for either log id or log name to be used
+* 8.2.0 - Actions:  `Advanced Query On Log Set` and `Advanced Query On Log` - optimized data fetching mechanisms
 * 8.1.1 - Extended error logging for all the actions
-* 8.1.0 - New actions added - `Search Accounts` and `Get Account Information`
+* 8.1.0 - New actions added: `Search Accounts` and `Get Account Information`
 * 8.0.0 - Update schema for `Investigation` and `Statistics` | Update dependency for aiohttp | New actions added `Get Alert Information`, `Search Alerts`, `Retrieve Evidence for a Single Alert` and `Retrieve Actors for a Single Alert` | Fixed issue where index was not getting correctly passed through to `List Investigations` action from the user
-* 7.0.0 - Action : `Advanced Query On Log Set` - Fixed error where statistical queries would always return 0.0 | Action - `Advanced Query On Log Set` - Increase the maximum results returned from 50 to 500 |  Action - `Advanced Query On Log` - Add new output type for statistical queries | Updated schemas to ensure all are correct and added new schema validation to unit tests
-* 6.0.1 - Action : `Advanced Query On Log` - Increase the maximum results returned from 50 to 500
-* 6.0.0 - Action : `Advanced Query On Log Set` - Add new output type for statistical queries.
-* 5.1.2 - Action : `Advanced Query on Log Set` - Fix JSONDecoderError | Action - `Query` - Update spec and help.md to show it queries log IDs, not query IDs
-* 5.1.1 - Action : `List Investigations` - Now receiving size input | Actions - `Advanced Query On Log` & `Advanced Query On Log Set` - Acronym LQL has been updated to LEQL
-* 5.1.0 - New actions added - `get_user_information` and `get_asset_information`
+* 7.0.0 - Action: `Advanced Query On Log Set` - Fixed error where statistical queries would always return 0.0 | Action: `Advanced Query On Log Set` - Increase the maximum results returned from 50 to 500 |  Action: `Advanced Query On Log` - Add new output type for statistical queries | Updated schemas to ensure all are correct and added new schema validation to unit tests
+* 6.0.1 - Action: `Advanced Query On Log` - Increase the maximum results returned from 50 to 500
+* 6.0.0 - Action: `Advanced Query On Log Set` - Add new output type for statistical queries.
+* 5.1.2 - Action: `Advanced Query on Log Set` - Fix JSONDecoderError | Action: `Query` - Update spec and help.md to show it queries log IDs, not query IDs
+* 5.1.1 - Action: `List Investigations` - Now receiving size input | Actions: `Advanced Query On Log` & `Advanced Query On Log Set` - Acronym LQL has been updated to LEQL
+* 5.1.0 - New actions added: `get_user_information` and `get_asset_information`
 * 5.0.1 - Update the endpoint `get_a_saved_query` reaches out to
 * 5.0.0 - Update `List Investigations` inputs
-* 4.4.1 - `List Alerts for Investigation` - fix issue with retrieving `detection_rule_rrn`
-* 4.4.0 - `List Alerts for Investigation` - changed schema output for `detection_rule_rrn`
-* 4.3.0 - `Query` - Add new parameter `most_recent_first`
-* 4.2.1 - `Create Investigation`, `Update Investigation` - Fix issue where action fails when email address field is not empty
-* 4.2.0 - New action added - Replace Indicators
-* 4.1.1 - Advanced Query on Log Set Action - Updated EndPoint Agent enum to Endpoint Agent in log_set
+* 4.4.1 - `List Alerts for Investigation`: fix issue with retrieving `detection_rule_rrn`
+* 4.4.0 - `List Alerts for Investigation`: changed schema output for `detection_rule_rrn`
+* 4.3.0 - `Query`: Add new parameter `most_recent_first`
+* 4.2.1 - `Create Investigation`, `Update Investigation`: Fix issue where action fails when email address field is not empty
+* 4.2.0 - New action added: Replace Indicators
+* 4.1.1 - Advanced Query on Log Set Action: Updated EndPoint Agent enum to Endpoint Agent in log_set
 * 4.1.0 - Add new actions `List Comments`, `Create Comment`, `Delete Comment`, `List Attachments`, `Upload Attachment`, `Download Attachment`, `Delete Attachment`, `Get Attachment Information`
 * 4.0.1 - Fix issue with `Get Query Results` and `Get All Saved Queries` actions
 * 4.0.0 - Add new actions Create Investigation, Search Investigations, Update Investigation, Set Investigation Priority, Set Investigation Disposition, and List Alerts for Investigation | Update actions List Investigations, Set Status of Investigation, Assign User to Investigation | Enabled cloud
