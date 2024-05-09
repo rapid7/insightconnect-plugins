@@ -31,9 +31,10 @@ from responses.task_test_data import (
     observations_more_pages,
     observation_job_not_finished,
     task_401_on_second_request,
-    task_403_on_third_request,
+    task_404_on_third_request,
     observation_job_exceeded,
     observation_job_not_finished_but_parsed,
+    task_404_on_second_request,
 )
 
 import os
@@ -223,11 +224,13 @@ class TestMonitorAlerts(TestCase):
                 [mock_request_400(file_name="empty_response"), "empty_response", "empty_response"],
                 task_first_run_output,  # we fail right away so the state never changes,
                 0,  # no observations or alerts returned
+                400,
             ],
             [
                 [mock_conditions(200, "observation_id"), mock_conditions(401, "empty"), "empty_response"],
                 task_401_on_second_request,
                 0,  # observation job created but not retrieved as got 401 on alerts
+                401,
             ],
             [
                 [
@@ -235,13 +238,25 @@ class TestMonitorAlerts(TestCase):
                     mock_conditions(200, "subsequent_alerts"),
                     mock_request_404(file_name="empty_response"),
                 ],
-                task_403_on_third_request,
-                1,  # able to retrieve the alerts then dedupe and save the observation ID
+                task_404_on_third_request,
+                1,  # able to retrieve the alerts then dedupe and save the observation ID,
+                404,
             ],
             [
                 [ConnectTimeout(), "empty_response", "empty_response"],
                 task_first_run_output,  # we fail right away so the state never changes,
                 0,  # no observations or alerts returned
+                500,
+            ],
+            [
+                [
+                    mock_conditions(200, "observation_id"),
+                    mock_request_404(file_name="empty_response"),
+                    mock_conditions(200, "empty_response"),
+                ],
+                task_404_on_second_request,
+                0,  # no observations or alerts returned
+                404,
             ],
         ],
     )
@@ -252,6 +267,7 @@ class TestMonitorAlerts(TestCase):
         req_side_effects: Tuple[Any, Any, Any],
         expected_state: Dict[str, str],
         num_logs: int,
+        expected_status_code: int,
     ):
         mock_req.side_effect = req_side_effects
         input_state = task_first_run_output.copy()
@@ -259,7 +275,7 @@ class TestMonitorAlerts(TestCase):
             state=input_state, custom_config={}
         )
 
-        self.assertEqual(500, status_code)
+        self.assertEqual(expected_status_code, status_code)
         self.assertEqual(num_logs, len(response))
         self.assertFalse(has_more_pages)
 
