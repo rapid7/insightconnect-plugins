@@ -22,9 +22,9 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
 
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        input_frequency = params.get(Input.FREQUENCY, 15)
         # END INPUT BINDING - DO NOT REMOVE
         self.logger.info("Get Alerts: trigger started")
-        input_frequency = params.get(Input.FREQUENCY)
 
         # Set initial set for storing initial alert_rrn values
         initial_alerts = set()
@@ -44,9 +44,9 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
             endpoint = Alerts.get_alert_serach(self.connection.url)
             response = request.resource_request(endpoint, "post", payload=data)
 
-            result = json.loads(response.get("resource"))
+            result = json.loads(response.get("resource", "{}"))
 
-            total_items = result["metadata"].get("total_items", 0)
+            total_items = result.get("metadata", {}).get("total_items", 0)
 
             alerts = result.get("alerts", [])
 
@@ -68,7 +68,7 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
                     endpoint = Alerts.get_alert_serach(self.connection.url)
                     response = request.resource_request(endpoint, "post", payload=data)
 
-                    result = json.loads(response.get("resource"))
+                    result = json.loads(response.get("resource", "{}"))
                     alerts.extend(result.get("alerts", []))
                     index += 100
 
@@ -78,10 +78,7 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
                     alert_rrn = alert["rrn"]
                     if alert_rrn not in initial_alerts:
                         self.send_alert(alert)
-                initial_alerts.clear()
-                for alert in alerts:
-                    alert_rrn = alert["rrn"]
-                    initial_alerts.add(alert_rrn)
+                initial_alerts = set(alerts)
             # For first iteration store alert_rrn's for last 20 minutes for comparison on next fetch.
             else:
                 initial_alerts.update(alert["rrn"] for alert in alerts)
