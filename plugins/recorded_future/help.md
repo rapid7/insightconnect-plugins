@@ -2580,7 +2580,7 @@ Example output:
 
 # Version History
 
-* 6.1.0 - Fixed schemas | Updated the SDK to latest version | Refreshed with latest plugin tooling | Added Memory Error handling for Risk Lists | Added `Risk List GZip` output to Risk List actions
+* 7.0.0 - Fixed schemas | Updated the SDK to latest version | Refreshed with latest plugin tooling | Added Memory Error handling for Risk Lists | Added `Risk List GZip` output to Risk List actions
 * 6.0.1 - Update Pyyaml to version 6.0.0
 * 6.0.0 - Handle 404 Not Found Error | Create unit_tests | Update example outputs in help.md | Update keywords | Update key features
 * 5.0.1 - Update error handling around a domain that is not found in Lookup Domain
