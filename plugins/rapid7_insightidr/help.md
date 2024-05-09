@@ -952,46 +952,48 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|log|logsets_info|True|Requested log|{'id': '0b9a242d-d2fb-4e42-8656-eb5ff64d652f', 'name': 'Windows Defender', 'tokens': ['bc38a911-65f1-4755-cca3-a330a6336b3a'], 'structures': ['1238a911-65f1-4755-cca3-a330a6336b3a'], 'user_data': {'platform_managed': 'true'}, 'source_type': 'token', 'token_seed': None, 'retention_period': 'default', 'links': [{'rel': 'Related', 'href': 'https://example.com'}], 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a', 'logsets_info': [{'id': 'bc38a911-65f1-4755-cca3-a330a6336b3a', 'name': 'Unparsed Data', 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a', 'links': [{'rel': 'Self', 'href': 'https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85'}]}]}|
+|log|logsets_info|True|Requested log|{'log': {'id': '0b9a242d-d2fb-4e42-8656-eb5ff64d652f', 'name': 'Windows Defender', 'tokens': ['bc38a911-65f1-4755-cca3-a330a6336b3a'], 'structures': ['1238a911-65f1-4755-cca3-a330a6336b3a'], 'user_data': {'platform_managed': 'true'}, 'source_type': 'token', 'token_seed': None, 'retention_period': 'default', 'links': [{'rel': 'Related', 'href': 'https://example.com'}], 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a', 'logsets_info': [{'id': 'bc38a911-65f1-4755-cca3-a330a6336b3a', 'name': 'Unparsed Data', 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a', 'links': [{'rel': 'Self', 'href': 'https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85'}]}]}}|
   
 Example output:
 
 ```
 {
   "log": {
-    "id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f",
-    "links": [
-      {
-        "href": "https://example.com",
-        "rel": "Related"
+    "log": {
+      "id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f",
+      "links": [
+        {
+          "href": "https://example.com",
+          "rel": "Related"
+        }
+      ],
+      "logsets_info": [
+        {
+          "id": "bc38a911-65f1-4755-cca3-a330a6336b3a",
+          "links": [
+            {
+              "href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85",
+              "rel": "Self"
+            }
+          ],
+          "name": "Unparsed Data",
+          "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a"
+        }
+      ],
+      "name": "Windows Defender",
+      "retention_period": "default",
+      "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a",
+      "source_type": "token",
+      "structures": [
+        "1238a911-65f1-4755-cca3-a330a6336b3a"
+      ],
+      "token_seed": null,
+      "tokens": [
+        "bc38a911-65f1-4755-cca3-a330a6336b3a"
+      ],
+      "user_data": {
+        "platform_managed": "true"
       }
-    ],
-    "logsets_info": [
-      {
-        "id": "bc38a911-65f1-4755-cca3-a330a6336b3a",
-        "links": [
-          {
-            "href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85",
-            "rel": "Self"
-          }
-        ],
-        "name": "Unparsed Data",
-        "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a"
-      }
-    ],
-    "name": "Windows Defender",
-    "retention_period": "default",
-    "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a",
-    "source_type": "token",
-    "structures": [
-      "1238a911-65f1-4755-cca3-a330a6336b3a"
-    ],
-    "token_seed": null,
-    "tokens": [
-      "bc38a911-65f1-4755-cca3-a330a6336b3a"
-    ],
-    "user_data": {
-      "platform_managed": "true"
     }
   }
 }
@@ -1413,52 +1415,54 @@ This action is used to request used to list all logs for an account
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|logs|logsets_info|True|All logs|[{"log": {"id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f", "name": "Windows Defender", "tokens": ["bc38a911-65f1-4755-cca3-a330a6336b3a"], "structures": ["1238a911-65f1-4755-cca3-a330a6336b3a"], "user_data": {"platform_managed": "true"}, "source_type": "token", "token_seed": null, "retention_period": "default", "links": [{"rel": "Related", "href": "https://example.com"}], "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a", "logsets_info": [{"id": "bc38a911-65f1-4755-cca3-a330a6336b3a", "name": "Unparsed Data", "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a", "links": [{"rel": "Self", "href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85"}]}]}}]|
+|logs|logsets_info|True|All logs|{'logs': [{'log': {'id': '0b9a242d-d2fb-4e42-8656-eb5ff64d652f', 'name': 'Windows Defender', 'tokens': ['bc38a911-65f1-4755-cca3-a330a6336b3a'], 'structures': ['1238a911-65f1-4755-cca3-a330a6336b3a'], 'user_data': {'platform_managed': 'true'}, 'source_type': 'token', 'token_seed': None, 'retention_period': 'default', 'links': [{'rel': 'Related', 'href': 'https://example.com'}], 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a', 'logsets_info': [{'id': 'bc38a911-65f1-4755-cca3-a330a6336b3a', 'name': 'Unparsed Data', 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a', 'links': [{'rel': 'Self', 'href': 'https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85'}]}]}}]}|
   
 Example output:
 
 ```
 {
-  "logs": [
-    {
-      "log": {
-        "id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f",
-        "links": [
-          {
-            "href": "https://example.com",
-            "rel": "Related"
+  "logs": {
+    "logs": [
+      {
+        "log": {
+          "id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f",
+          "links": [
+            {
+              "href": "https://example.com",
+              "rel": "Related"
+            }
+          ],
+          "logsets_info": [
+            {
+              "id": "bc38a911-65f1-4755-cca3-a330a6336b3a",
+              "links": [
+                {
+                  "href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85",
+                  "rel": "Self"
+                }
+              ],
+              "name": "Unparsed Data",
+              "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a"
+            }
+          ],
+          "name": "Windows Defender",
+          "retention_period": "default",
+          "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a",
+          "source_type": "token",
+          "structures": [
+            "1238a911-65f1-4755-cca3-a330a6336b3a"
+          ],
+          "token_seed": null,
+          "tokens": [
+            "bc38a911-65f1-4755-cca3-a330a6336b3a"
+          ],
+          "user_data": {
+            "platform_managed": "true"
           }
-        ],
-        "logsets_info": [
-          {
-            "id": "bc38a911-65f1-4755-cca3-a330a6336b3a",
-            "links": [
-              {
-                "href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85",
-                "rel": "Self"
-              }
-            ],
-            "name": "Unparsed Data",
-            "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a"
-          }
-        ],
-        "name": "Windows Defender",
-        "retention_period": "default",
-        "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a",
-        "source_type": "token",
-        "structures": [
-          "1238a911-65f1-4755-cca3-a330a6336b3a"
-        ],
-        "token_seed": null,
-        "tokens": [
-          "bc38a911-65f1-4755-cca3-a330a6336b3a"
-        ],
-        "user_data": {
-          "platform_managed": "true"
         }
       }
-    }
-  ]
+    ]
+  }
 }
 ```
 
