@@ -2669,13 +2669,23 @@ This trigger is used to get New Alerts
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|aggregates|[]aggregate_object|None|False|Aggregations to apply for all matching results|None|[{}]|None|None|
+|field_ids|[]string|None|False|Additional fields to include for each alert. No additional fields are included if field_ids is empty|None|[]|None|None|
 |frequency|integer|15|False|Poll frequency in seconds|None|15|None|None|
+|leql|string|None|False|The LEQL 'WHERE' clause to match against|None||None|None|
+|terms|[]terms_object|None|False|The search terms to match against|None||None|None|
   
 Example input:
 
 ```
 {
-  "frequency": 15
+  "aggregates": [
+    {}
+  ],
+  "field_ids": [],
+  "frequency": 15,
+  "leql": "",
+  "terms": ""
 }
 ```
 

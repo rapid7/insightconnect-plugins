@@ -2719,6 +2719,30 @@ triggers:
         required: false
         default: 15
         example: 15
+      leql:
+        title: LEQL
+        description: The LEQL 'WHERE' clause to match against
+        type: string
+        required: false
+        example: ""
+      terms:
+        title: Terms
+        description: The search terms to match against
+        type: "[]terms_object"
+        required: false
+        example: ""
+      field_ids:
+        title: Field IDs
+        description: Additional fields to include for each alert. No additional fields are included if field_ids is empty
+        type: "[]string"
+        required: false
+        example: []
+      aggregates:
+        title: Aggregates
+        description: Aggregations to apply for all matching results
+        type: "[]aggregate_object"
+        required: false
+        example: [{}]
     output:
       alert:
         title: Alert
