@@ -38,9 +38,7 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
             search = clean({"start_time": start_time.strftime("%Y-%m-%dT%H:%M:%SZ")})
             data = clean({"search": search})
 
-            self.connection.session.headers["Accept-version"] = (
-                        "strong-force-preview "
-                    )
+            self.connection.session.headers["Accept-version"] = "strong-force-preview"
             request = ResourceHelper(self.connection.session, self.logger)
 
             endpoint = Alerts.get_alert_serach(self.connection.url)
@@ -64,7 +62,7 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
                             }
                         }
                     )
-                    self.connection.session.headers["Accept-version"] = "strong-force-preview "
+                    self.connection.session.headers["Accept-version"] = "strong-force-preview"
                     request = ResourceHelper(self.connection.session, self.logger)
 
                     endpoint = Alerts.get_alert_serach(self.connection.url)
