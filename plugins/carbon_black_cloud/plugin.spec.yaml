@@ -4,7 +4,7 @@ products: [insightconnect]
 name: carbon_black_cloud
 title: VMware Carbon Black Cloud
 description: The [VMware Carbon Black Cloud](https://www.carbonblack.com/products/vmware-carbon-black-cloud/) is a cloud-native endpoint protection platform (EPP) that combines the intelligent system hardening and behavioral prevention needed to keep emerging threats at bay, using a single lightweight agent and an easy-to-use console. Manage and contain threats on your Carbon Black endpoints using this plugin
-version: 2.2.0
+version: 2.2.1
 vendor: rapid7
 support: rapid7
 cloud_ready: true
@@ -18,6 +18,7 @@ requirements:
   - API Credentials
   - Base URL
 version_history:
+  - "2.2.1 - `Monitor Alerts and Observations` surface status code from Carbon Black in task error."
   - "2.2.0 - Implement new task `Monitor Alerts and Observations` and bump to SDK 5.4.8"
   - "2.0.1 - Allows user entered hostnames to be case insensitive for `get_agent_details` and `quarantine` actions | Fix bug where error is raised if endpoint was not found in `get_agent` method | To add escaping of special characters in hostnames when performing hostname searches to Carbon Black"
   - "2.0.0 - Updated the SDK version | Cloud enabled"
