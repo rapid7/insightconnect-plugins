@@ -11,7 +11,6 @@ from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 
 
 class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
-
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_new_alerts",
