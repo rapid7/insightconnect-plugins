@@ -34,8 +34,20 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
         while True:
             start_time = datetime.datetime.utcnow() - datetime.timedelta(minutes=20)
 
-            search = clean({"start_time": start_time.strftime("%Y-%m-%dT%H:%M:%SZ")})
-            data = clean({"search": search})
+            search = clean(
+                {
+                    "start_time": start_time.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                    "leql": params.get(Input.LEQL),
+                    "terms": params.get(Input.TERMS),
+                }
+            )
+            data = clean(
+                {
+                    "search": search,
+                    "field_ids": params.get(Input.FIELD_IDS),
+                    "aggregates": params.get(Input.AGGREGATES),
+                }
+            )
 
             self.connection.session.headers["Accept-version"] = "strong-force-preview"
             request = ResourceHelper(self.connection.session, self.logger)
@@ -57,8 +69,12 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
                         {
                             "search": {
                                 "start_time": start_time.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                                "leql": params.get(Input.LEQL),
+                                "terms": params.get(Input.TERMS),
                                 "index": index,
-                            }
+                            },
+                            "field_ids": params.get(Input.FIELD_IDS),
+                            "aggregates": params.get(Input.AGGREGATES),
                         }
                     )
                     self.connection.session.headers["Accept-version"] = "strong-force-preview"

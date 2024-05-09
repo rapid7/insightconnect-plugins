@@ -8,7 +8,11 @@ class Component:
 
 
 class Input:
+    AGGREGATES = "aggregates"
+    FIELD_IDS = "field_ids"
     FREQUENCY = "frequency"
+    LEQL = "leql"
+    TERMS = "terms"
 
 
 class Output:
@@ -21,15 +25,168 @@ class GetNewAlertsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "aggregates": {
+      "type": "array",
+      "title": "Aggregates",
+      "description": "Aggregations to apply for all matching results",
+      "items": {
+        "$ref": "#/definitions/aggregate_object"
+      },
+      "order": 5
+    },
+    "field_ids": {
+      "type": "array",
+      "title": "Field IDs",
+      "description": "Additional fields to include for each alert. No additional fields are included if field_ids is empty",
+      "items": {
+        "type": "string"
+      },
+      "order": 4
+    },
     "frequency": {
       "type": "integer",
       "title": "Frequency",
       "description": "Poll frequency in seconds",
       "default": 15,
       "order": 1
+    },
+    "leql": {
+      "type": "string",
+      "title": "LEQL",
+      "description": "The LEQL 'WHERE' clause to match against",
+      "order": 2
+    },
+    "terms": {
+      "type": "array",
+      "title": "Terms",
+      "description": "The search terms to match against",
+      "items": {
+        "$ref": "#/definitions/terms_object"
+      },
+      "order": 3
     }
   },
-  "definitions": {}
+  "definitions": {
+    "terms_object": {
+      "type": "object",
+      "title": "terms_object",
+      "properties": {
+        "field_ids": {
+          "type": "array",
+          "title": "Field IDs",
+          "description": "The identifier of the field for the values to match against.",
+          "items": {
+            "type": "string"
+          },
+          "order": 1
+        },
+        "operator": {
+          "type": "string",
+          "title": "Operator",
+          "description": "The search operator to apply.",
+          "default": "EQUALS",
+          "enum": [
+            "NOT_SET",
+            "EQUALS",
+            "NOT_EQUALS",
+            "CONTAINS"
+          ],
+          "order": 2
+        },
+        "terms": {
+          "title": "Terms",
+          "description": "The value for the field to match against. Values are separated by an OR operator.",
+          "order": 3
+        }
+      },
+      "required": [
+        "terms"
+      ]
+    },
+    "aggregate_object": {
+      "type": "object",
+      "title": "aggregate_object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "The identifier of the aggregation, which you specify. Identifiers should be unique and are included in the response.",
+          "order": 1
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type of aggregate.",
+          "default": "MEDIAN",
+          "enum": [
+            "BUCKET",
+            "MEDIAN"
+          ],
+          "order": 2
+        },
+        "fields": {
+          "type": "array",
+          "title": "Fields",
+          "description": "The field identifiers to aggregate by.",
+          "items": {
+            "$ref": "#/definitions/field_object"
+          },
+          "order": 3
+        },
+        "count_order": {
+          "type": "string",
+          "title": "Count order",
+          "description": "The sort order for the count.",
+          "enum": [
+            "ASCENDING_NULLS_LAST",
+            "ASCENDING_NULLS_FIRST",
+            "DESCENDING_NULLS_LAST",
+            "DESCENDING_NULLS_FIRST"
+          ],
+          "order": 4
+        }
+      },
+      "required": [
+        "count_order",
+        "fields",
+        "name"
+      ]
+    },
+    "field_object": {
+      "type": "object",
+      "title": "field_object",
+      "properties": {
+        "field_id": {
+          "type": "string",
+          "title": "Field ID",
+          "description": "The field to aggregate on.",
+          "order": 1
+        },
+        "interval": {
+          "type": "string",
+          "title": "Interval",
+          "description": "For fields that support histograms (such as number and date fields), the interval for each bucket. For date fields, the interval is interpreted as the number of seconds.",
+          "order": 2
+        },
+        "order": {
+          "type": "string",
+          "title": "Order",
+          "description": "The sort order for the fields.",
+          "enum": [
+            "ASCENDING_NULLS_LAST",
+            "ASCENDING_NULLS_FIRST",
+            "DESCENDING_NULLS_LAST",
+            "DESCENDING_NULLS_FIRST"
+          ],
+          "order": 3
+        }
+      },
+      "required": [
+        "field_id",
+        "order"
+      ]
+    }
+  }
 }
     """)
 
