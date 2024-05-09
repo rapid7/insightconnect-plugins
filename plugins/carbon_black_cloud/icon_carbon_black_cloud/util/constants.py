@@ -20,7 +20,7 @@ OBSERVATION_TYPES = [
 ERROR_HANDLING = {
     400: {"cause": "400 Bad Request", "assistance": "Verify that your request adheres to API documentation."},
     401: {
-        "cause": "Authentication Error",
+        "cause": "Authentication Error. Please verify connection details are correct.",
         "assistance": "Please verify that your Secret Key and API ID values in the plugin connection are correct.",
     },
     403: {
@@ -30,7 +30,7 @@ ERROR_HANDLING = {
         "API in use.",
     },
     404: {
-        "cause": "The object referenced in the request cannot be found.",
+        "cause": "The requested URL can not be found. Ensure your organization key and URL in your connection is correct.",
         "assistance": "Verify that your request contains objects that haven't been deleted. Verify that the "
         "organization key in the URL is correct.",
     },

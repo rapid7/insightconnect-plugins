@@ -58,13 +58,11 @@ task_401_on_second_request = {
 }
 
 
-task_403_on_third_request = {
+task_404_on_third_request = {
     "last_alert_hashes": ["9bceab49bf5441923e8fe8345195d5ec4d270193"],
     "last_alert_time": "2024-04-25T15:50:38.389Z",
     "last_observation_hashes": ["f1c41f48654ec39d4614a0e924b2a6b96fa9f32e"],
     "last_observation_time": "2024-04-25T15:39:38.389Z",
-    "last_observation_job": "1234-abcd-5678-sqs",
-    "last_observation_job_time": "2024-04-25T16:00:00.000000Z",
 }
 
 observation_job_exceeded = {
@@ -79,3 +77,9 @@ observation_job_not_finished_but_parsed = {
     "last_observation_hashes": ["f1c41f48654ec39d4614a0e924b2a6b96fa9f32e"],
     "last_observation_time": "2024-04-25T15:39:38.389Z",
 }
+
+# the same values for observations and hashes from the input as we don't get any new values, but add the
+# new observation job details.
+task_404_on_second_request = task_first_run_output.copy()
+task_404_on_second_request["last_observation_job"] = "1234-abcd-5678-sqs"
+task_404_on_second_request["last_observation_job_time"] = "2024-04-25T16:00:00.000000Z"

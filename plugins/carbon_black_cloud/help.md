@@ -440,6 +440,7 @@ Example output:
 
 # Version History
 
+* 2.2.1 - `Monitor Alerts and Observations` surface status code from Carbon Black in task error.
 * 2.2.0 - Implement new task `Monitor Alerts and Observations` and bump to SDK 5.4.8
 * 2.0.1 - Allows user entered hostnames to be case insensitive for `get_agent_details` and `quarantine` actions | Fix bug where error is raised if endpoint was not found in `get_agent` method | To add escaping of special characters in hostnames when performing hostname searches to Carbon Black
 * 2.0.0 - Updated the SDK version | Cloud enabled

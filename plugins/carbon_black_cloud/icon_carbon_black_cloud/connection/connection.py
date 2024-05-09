@@ -8,7 +8,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException, Connection
 import time
 from icon_carbon_black_cloud.util import agent_typer
 from icon_carbon_black_cloud.util.constants import DEFAULT_TIMEOUT, ERROR_HANDLING
-from icon_carbon_black_cloud.util.exceptions import RateLimitException
+from icon_carbon_black_cloud.util.exceptions import RateLimitException, HTTPErrorException
 
 from typing import Dict, Any
 import re
@@ -106,7 +106,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
                     error_assistance = exception_values.get("assistance")
                     break
 
-        raise PluginException(cause=error_cause, assistance=error_assistance, data=error_data)
+        raise HTTPErrorException(
+            cause=error_cause, assistance=error_assistance, data=error_data, status_code=response.status_code
+        )
 
     def test(self):
         device_endpoint = "/device"
