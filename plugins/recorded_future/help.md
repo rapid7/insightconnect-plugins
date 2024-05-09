@@ -47,6 +47,207 @@ Example input:
 ### Actions
 
 
+#### Download IP Addresses Risk List
+
+This action is used to fetch a risk list of the IP addresses that match a specified filtration rule
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|["", "Threat Actor Used Infrastructure", "Historically Reported by Insikt Group", "Inside Possible Bogus BGP Route", "Historical Botnet Traffic", "Recently Communicating With C&C Server", "Nameserver for C&C Server", "Historical C&C Server", "Cyber Exploit Signal - Critical", "Cyber Exploit Signal - Important", "Cyber Exploit Signal - Medium", "Recent Host of Many DDNS Names", "Historically Reported as a Defanged IP", "Historically Reported by DHS AIS", "Resolution of Fast Flux DNS Name", "Historically Reported in Threat List", "Historical Honeypot Sighting", "Large", "Honeypot Host", "Recently Active C&C Server", "Recent C&C Server", "Historically Linked to Intrusion Method", "Historically Linked to APT", "Historically Linked to Cyber Attack", "Malicious Packet Source", "Malware Delivery", "Historical Multicategory Blacklist", "Historical Open Proxies", "Phishing Host", "Historical Positive Malware Verdict", "Recorded Future Predictive Risk Model", "Actively Communicating C&C Server", "Recently Reported by Insikt Group", "Recent Botnet Traffic", "Current C&C Server", "Recently Reported as a Defanged IP", "Recently Reported by DHS AIS", "Recent Honeypot Sighting", "Recently Linked to Intrusion Method", "Recently Linked to APT", "Recently Linked to Cyber Attack", "Recent Multicategory Blacklist", "Recent Open Proxies", "Recent Positive Malware Verdict", "Recently Referenced by Insikt Group", "Recent Spam Source", "Recent SSH/Dictionary Attacker", "Recent Bad SSL Association", "Recent Threat Researcher", "Recently Defaced Site", "Historically Referenced by Insikt Group", "Trending in Recorded Future Analyst Community", "Historical Spam Source", "Historical SSH/Dictionary Attacker", "Historical Bad SSL Association", "Historical Threat Researcher", "Tor Node", "Unusual IP", "Vulnerable Host"]|Malware Delivery|None|None|
+  
+Example input:
+
+```
+{
+  "list": "Malware Delivery"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|risk_list|object|False|Risk list|{"stix:STIX_Package":{"@xmlns":"http://xml/metadataSharing.xsd","@xmlns:indicator":"http://example.com","@xmlns:stix":"http://example.com","@xmlns:ttp":"http://example.com","stix:STIX_Header":{"stix:Description":"RecordedFutureSTIX"},"@id":"RF:Package-9144eafb-a082-49d1-97a1-e7ceb4d8e955","@timestamp":"2020-04-01T12:10:12.058Z","@xmlns:FileObj":"http://example.com","@xmlns:stixCommon":"http://example.com","stix:Indicators":{"stix:Indicator":[{"@timestamp":"2020-04-06T16:10:17.739Z","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","@xsi:type":"indicator:IndicatorType","indicator:Description":"Currentrisk:Suspicious.Triggers1of51rules","indicator:Indicated_TTP":{"stixCommon:Confidence":{"stixCommon:Value":{"#text":"Medium","@xsi:type":"stixVocabs:HighMediumLowVocab-1.0"}},"stixCommon:TTP":{"ttp:Title":"RiskRule:CurrentC&CServer","@id":"RF:TTP-42014977-2178-3d3e-b3d1-a3d39961ebca","@timestamp":"2020-04-04T17:31:26.032Z","@xsi:type":"ttp:TTPType","ttp:Description":"1sightingon1source:CobaltStrikeDefaultCert..."}},"indicator:Observable":{"@id":"RF:Observable-19894357-b884-3cd8-bd49-54540862a4a0","cybox:Object":{"@id":"RF:Address-81ec9700-57ba-3f8d-aeb9-f00418d5f31c","cybox:Properties":{"@category":"ipv4-addr","@xsi:type":"AddressObj:AddressObjectType","AddressObj:Address_Value":{"#text":"3.10.20.157","@condition":"Equals"}}}},"indicator:Producer":{"stixCommon:References":{"stixCommon:Reference":"http://example.com"},"stixCommon:Description":"RecordedFuture"},"indicator:Type":{"#text":"IPWatchlist","@xsi:type":"stixVocabs:IndicatorTypeVocab-1.1"},"@id":"RF:Indicator-02ff9864-3b18-332c-be33-35449baed75a","indicator:Confidence":{"stixCommon:Description":"RecordedFutureRiskScore","stixCommon:Value":"25"},"indicator:Title":"IPAddress3.10.20.157","indicator:Valid_Time_Position":{"indicator:Start_Time":{"#text":"2020-04-04T00:00:00.000Z","@precision":"second"},"indicator:End_Time":{"#text":"2020-04-04T23:59:59.000Z","@precision":"second"}}},{"@timestamp":"2020-04-06T16:10:17.739Z","@xsi:type":"indicator:IndicatorType","indicator:Observable":{"@id":"RF:Observable-72d63012-ab31-3324-b994-1dc391fe9299","cybox:Object":{"@id":"RF:Address-7aa0590a-8d24-36cc-aee3-a93d4200b564","cybox:Properties":{"@category":"ipv4-addr","@xsi:type":"AddressObj:AddressObjectType","AddressObj:Address_Value":{"#text":"5.34.180.206","@condition":"Equals"}}}},"indicator:Producer":{"stixCommon:Description":"RecordedFuture","stixCommon:References":{"stixCommon:Reference":"http://example.com"}},"@id":"RF:Indicator-eafa3166-7abc-33af-8789-ede692bf230a","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","indicator:Confidence":{"stixCommon:Value":"96","stixCommon:Description":"RecordedFutureRiskScore"},"indicator:Description":"Currentrisk:VeryMalicious.Triggers3of51rule...","indicator:Indicated_TTP":[{"stixCommon:Confidence":{"stixCommon:Value":{"#text":"Low","@xsi:type":"stixVocabs:HighMediumLowVocab-1.0"}},"stixCommon:TTP":{"@xsi:type":"ttp:TTPType","ttp:Description":"Previoussightingson1source:CobaltStrikeDefa...","ttp:Title":"RiskRule:HistoricallyReportedinThreatList","@id":"RF:TTP-538a4df0-0f1f-3a66-82c1-2bb9f030d044","@timestamp":"2020-04-04T18:49:02.868Z"}},{"stixCommon:Confidence":{"stixCommon:Value":{"#text":"High","@xsi:type":"stixVocabs:HighMediumLowVocab-1.0"}},"stixCommon:TTP":{"@id":"RF:TTP-373ddb7d-61ac-36a4-8f30-31e2650ea421","@timestamp":"2020-01-11T08:02:27.884Z","@xsi:type":"ttp:TTPType","ttp:Description":"1sightingon1source:RecordedFutureCommand&...","ttp:Title":"RiskRule:CurrentC&CServer"}}],"indicator:Title":"IPAddress5.34.180.206","indicator:Type":{"#text":"IPWatchlist","@xsi:type":"stixVocabs:IndicatorTypeVocab-1.1"},"indicator:Valid_Time_Position":{"indicator:End_Time":{"#text":"2020-01-11T08:02:27.884Z","@precision":"second"},"indicator:Start_Time":{"#text":"2020-01-11T08:02:27.884Z","@precision":"second"}}}]},"@xmlns:RF":"http://example.com","@xmlns:cybox":"http://cybox.mitre.org/cybox-2","@xmlns:cyboxCommon":"http://example.com","@xmlns:stixVocabs":"http://example.com","@version":"1.2","@xmlns:AddressObj":"http://cybox.mitre.org/objects#AddressObject-2","@xmlns:cyboxVocabs":"http://example.com"}}|
+|risk_list_gzip|file|False|The Base64 encoded GZIP bytes of the Risk List|{"filename": "example.file", "contents": "bhiRmprUDAA="}|
+  
+Example output:
+
+```
+{
+  "risk_list": {
+    "stix:STIX_Package": {
+      "@id": "RF:Package-9144eafb-a082-49d1-97a1-e7ceb4d8e955",
+      "@timestamp": "2020-04-01T12:10:12.058Z",
+      "@version": "1.2",
+      "@xmlns": "http://xml/metadataSharing.xsd",
+      "@xmlns:AddressObj": "http://cybox.mitre.org/objects#AddressObject-2",
+      "@xmlns:FileObj": "http://example.com",
+      "@xmlns:RF": "http://example.com",
+      "@xmlns:cybox": "http://cybox.mitre.org/cybox-2",
+      "@xmlns:cyboxCommon": "http://example.com",
+      "@xmlns:cyboxVocabs": "http://example.com",
+      "@xmlns:indicator": "http://example.com",
+      "@xmlns:stix": "http://example.com",
+      "@xmlns:stixCommon": "http://example.com",
+      "@xmlns:stixVocabs": "http://example.com",
+      "@xmlns:ttp": "http://example.com",
+      "stix:Indicators": {
+        "stix:Indicator": [
+          {
+            "@id": "RF:Indicator-02ff9864-3b18-332c-be33-35449baed75a",
+            "@timestamp": "2020-04-06T16:10:17.739Z",
+            "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+            "@xsi:type": "indicator:IndicatorType",
+            "indicator:Confidence": {
+              "stixCommon:Description": "RecordedFutureRiskScore",
+              "stixCommon:Value": "25"
+            },
+            "indicator:Description": "Currentrisk:Suspicious.Triggers1of51rules",
+            "indicator:Indicated_TTP": {
+              "stixCommon:Confidence": {
+                "stixCommon:Value": {
+                  "#text": "Medium",
+                  "@xsi:type": "stixVocabs:HighMediumLowVocab-1.0"
+                }
+              },
+              "stixCommon:TTP": {
+                "@id": "RF:TTP-42014977-2178-3d3e-b3d1-a3d39961ebca",
+                "@timestamp": "2020-04-04T17:31:26.032Z",
+                "@xsi:type": "ttp:TTPType",
+                "ttp:Description": "1sightingon1source:CobaltStrikeDefaultCert...",
+                "ttp:Title": "RiskRule:CurrentC&CServer"
+              }
+            },
+            "indicator:Observable": {
+              "@id": "RF:Observable-19894357-b884-3cd8-bd49-54540862a4a0",
+              "cybox:Object": {
+                "@id": "RF:Address-81ec9700-57ba-3f8d-aeb9-f00418d5f31c",
+                "cybox:Properties": {
+                  "@category": "ipv4-addr",
+                  "@xsi:type": "AddressObj:AddressObjectType",
+                  "AddressObj:Address_Value": {
+                    "#text": "3.10.20.157",
+                    "@condition": "Equals"
+                  }
+                }
+              }
+            },
+            "indicator:Producer": {
+              "stixCommon:Description": "RecordedFuture",
+              "stixCommon:References": {
+                "stixCommon:Reference": "http://example.com"
+              }
+            },
+            "indicator:Title": "IPAddress3.10.20.157",
+            "indicator:Type": {
+              "#text": "IPWatchlist",
+              "@xsi:type": "stixVocabs:IndicatorTypeVocab-1.1"
+            },
+            "indicator:Valid_Time_Position": {
+              "indicator:End_Time": {
+                "#text": "2020-04-04T23:59:59.000Z",
+                "@precision": "second"
+              },
+              "indicator:Start_Time": {
+                "#text": "2020-04-04T00:00:00.000Z",
+                "@precision": "second"
+              }
+            }
+          },
+          {
+            "@id": "RF:Indicator-eafa3166-7abc-33af-8789-ede692bf230a",
+            "@timestamp": "2020-04-06T16:10:17.739Z",
+            "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+            "@xsi:type": "indicator:IndicatorType",
+            "indicator:Confidence": {
+              "stixCommon:Description": "RecordedFutureRiskScore",
+              "stixCommon:Value": "96"
+            },
+            "indicator:Description": "Currentrisk:VeryMalicious.Triggers3of51rule...",
+            "indicator:Indicated_TTP": [
+              {
+                "stixCommon:Confidence": {
+                  "stixCommon:Value": {
+                    "#text": "Low",
+                    "@xsi:type": "stixVocabs:HighMediumLowVocab-1.0"
+                  }
+                },
+                "stixCommon:TTP": {
+                  "@id": "RF:TTP-538a4df0-0f1f-3a66-82c1-2bb9f030d044",
+                  "@timestamp": "2020-04-04T18:49:02.868Z",
+                  "@xsi:type": "ttp:TTPType",
+                  "ttp:Description": "Previoussightingson1source:CobaltStrikeDefa...",
+                  "ttp:Title": "RiskRule:HistoricallyReportedinThreatList"
+                }
+              },
+              {
+                "stixCommon:Confidence": {
+                  "stixCommon:Value": {
+                    "#text": "High",
+                    "@xsi:type": "stixVocabs:HighMediumLowVocab-1.0"
+                  }
+                },
+                "stixCommon:TTP": {
+                  "@id": "RF:TTP-373ddb7d-61ac-36a4-8f30-31e2650ea421",
+                  "@timestamp": "2020-01-11T08:02:27.884Z",
+                  "@xsi:type": "ttp:TTPType",
+                  "ttp:Description": "1sightingon1source:RecordedFutureCommand&...",
+                  "ttp:Title": "RiskRule:CurrentC&CServer"
+                }
+              }
+            ],
+            "indicator:Observable": {
+              "@id": "RF:Observable-72d63012-ab31-3324-b994-1dc391fe9299",
+              "cybox:Object": {
+                "@id": "RF:Address-7aa0590a-8d24-36cc-aee3-a93d4200b564",
+                "cybox:Properties": {
+                  "@category": "ipv4-addr",
+                  "@xsi:type": "AddressObj:AddressObjectType",
+                  "AddressObj:Address_Value": {
+                    "#text": "5.34.180.206",
+                    "@condition": "Equals"
+                  }
+                }
+              }
+            },
+            "indicator:Producer": {
+              "stixCommon:Description": "RecordedFuture",
+              "stixCommon:References": {
+                "stixCommon:Reference": "http://example.com"
+              }
+            },
+            "indicator:Title": "IPAddress5.34.180.206",
+            "indicator:Type": {
+              "#text": "IPWatchlist",
+              "@xsi:type": "stixVocabs:IndicatorTypeVocab-1.1"
+            },
+            "indicator:Valid_Time_Position": {
+              "indicator:End_Time": {
+                "#text": "2020-01-11T08:02:27.884Z",
+                "@precision": "second"
+              },
+              "indicator:Start_Time": {
+                "#text": "2020-01-11T08:02:27.884Z",
+                "@precision": "second"
+              }
+            }
+          }
+        ]
+      },
+      "stix:STIX_Header": {
+        "stix:Description": "RecordedFutureSTIX"
+      }
+    }
+  },
+  "risk_list_gzip": {
+    "contents": "bhiRmprUDAA=",
+    "filename": "example.file"
+  }
+}
+```
+
 #### Download Domain Risk List
 
 This action is used to return a risk list of domains matching a filtration rule
@@ -56,7 +257,7 @@ This action is used to return a risk list of domains matching a filtration rule
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|["", "Historically Reported by Insikt Group", "C&C Nameserver", "C&C DNS Name", "Compromised URL", "Historical COVID-19-Related Domain Lure", "Recently Resolved to Host of Many DDNS Names", "Historically Reported as a Defanged DNS Name", "Historically Reported by DHS AIS", "Recent Fast Flux DNS Name", "Historically Reported Fraudulent Content", "Historically Reported in Threat List", "Historically Linked to Cyber Attack", "Historical Malware Analysis DNS Name", "Historically Detected Malware Operation", "Historically Detected Cryptocurrency Mining Techniques", "Blacklisted DNS Name", "Historical Phishing Lure", "Historically Detected Phishing Techniques", "Active Phishing URL", "Recorded Future Predictive Risk Model", "Historical Punycode Domain", "Ransomware Distribution URL", "Ransomware Payment DNS Name", "Recently Reported by Insikt Group", "Recent COVID-19-Related Domain Lure - Malicious", "Recent COVID-19-Related Domain Lure - Suspicious", "Recently Reported as a Defanged DNS Name", "Recently Reported by DHS AIS", "Recently Reported Fraudulent Content", "Recently Linked to Cyber Attack", "Recent Malware Analysis DNS Name", "Recently Detected Malware Operation", "Recently Detected Cryptocurrency Mining Techniques", "Recent Phishing Lure - Malicious", "Recent Phishing Lure - Suspicious", "Recently Detected Phishing Techniques", "Recent Punycode Domain", "Recently Referenced by Insikt Group", "Recently Reported Spam or Unwanted Content", "Recent Threat Researcher", "Recently Active Weaponized Domain", "Recently Defaced Site", "Historically Referenced by Insikt Group", "Recently Resolved to Malicious IP", "Recently Resolved to Suspicious IP", "Recently Resolved to Unusual IP", "Recently Resolved to Very Malicious IP", "Trending in Recorded Future Analyst Community", "Historically Reported Spam or Unwanted Content", "Historical Threat Researcher", "Historically Active Weaponized Domain"]|Active Phishing URL|None|None|
-
+  
 Example input:
 
 ```
@@ -274,7 +475,7 @@ This action is used to return a list of hashes matching a specified risk rule
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|["", "Historically Reported in Threat List", "Large", "Linked to Attack Vector", "Linked to Cyber Attack", "Linked to Malware", "Linked to Vulnerability", "Malware SSL Certificate Fingerprint", "Observed in Underground Virus Testing Sites", "Positive Malware Verdict", "Recently Active Targeting Vulnerabilities in the Wild", "Referenced by Insikt Group", "Reported by DHS AIS", "Reported by Insikt Group", "Threat Researcher", "Trending in Recorded Future Analyst Community"]|Positive Malware Verdict|None|None|
-
+  
 Example input:
 
 ```
@@ -396,207 +597,6 @@ Example output:
 }
 ```
 
-#### Download IP Addresses Risk List
-
-This action is used to fetch a risk list of the IP addresses that match a specified filtration rule
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|["", "Threat Actor Used Infrastructure", "Historically Reported by Insikt Group", "Inside Possible Bogus BGP Route", "Historical Botnet Traffic", "Recently Communicating With C&C Server", "Nameserver for C&C Server", "Historical C&C Server", "Cyber Exploit Signal - Critical", "Cyber Exploit Signal - Important", "Cyber Exploit Signal - Medium", "Recent Host of Many DDNS Names", "Historically Reported as a Defanged IP", "Historically Reported by DHS AIS", "Resolution of Fast Flux DNS Name", "Historically Reported in Threat List", "Historical Honeypot Sighting", "Large", "Honeypot Host", "Recently Active C&C Server", "Recent C&C Server", "Historically Linked to Intrusion Method", "Historically Linked to APT", "Historically Linked to Cyber Attack", "Malicious Packet Source", "Malware Delivery", "Historical Multicategory Blacklist", "Historical Open Proxies", "Phishing Host", "Historical Positive Malware Verdict", "Recorded Future Predictive Risk Model", "Actively Communicating C&C Server", "Recently Reported by Insikt Group", "Recent Botnet Traffic", "Current C&C Server", "Recently Reported as a Defanged IP", "Recently Reported by DHS AIS", "Recent Honeypot Sighting", "Recently Linked to Intrusion Method", "Recently Linked to APT", "Recently Linked to Cyber Attack", "Recent Multicategory Blacklist", "Recent Open Proxies", "Recent Positive Malware Verdict", "Recently Referenced by Insikt Group", "Recent Spam Source", "Recent SSH/Dictionary Attacker", "Recent Bad SSL Association", "Recent Threat Researcher", "Recently Defaced Site", "Historically Referenced by Insikt Group", "Trending in Recorded Future Analyst Community", "Historical Spam Source", "Historical SSH/Dictionary Attacker", "Historical Bad SSL Association", "Historical Threat Researcher", "Tor Node", "Unusual IP", "Vulnerable Host"]|Malware Delivery|None|None|
-
-Example input:
-
-```
-{
-  "list": "Malware Delivery"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|risk_list|object|False|Risk list|{"stix:STIX_Package":{"@xmlns":"http://xml/metadataSharing.xsd","@xmlns:indicator":"http://example.com","@xmlns:stix":"http://example.com","@xmlns:ttp":"http://example.com","stix:STIX_Header":{"stix:Description":"RecordedFutureSTIX"},"@id":"RF:Package-9144eafb-a082-49d1-97a1-e7ceb4d8e955","@timestamp":"2020-04-01T12:10:12.058Z","@xmlns:FileObj":"http://example.com","@xmlns:stixCommon":"http://example.com","stix:Indicators":{"stix:Indicator":[{"@timestamp":"2020-04-06T16:10:17.739Z","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","@xsi:type":"indicator:IndicatorType","indicator:Description":"Currentrisk:Suspicious.Triggers1of51rules","indicator:Indicated_TTP":{"stixCommon:Confidence":{"stixCommon:Value":{"#text":"Medium","@xsi:type":"stixVocabs:HighMediumLowVocab-1.0"}},"stixCommon:TTP":{"ttp:Title":"RiskRule:CurrentC&CServer","@id":"RF:TTP-42014977-2178-3d3e-b3d1-a3d39961ebca","@timestamp":"2020-04-04T17:31:26.032Z","@xsi:type":"ttp:TTPType","ttp:Description":"1sightingon1source:CobaltStrikeDefaultCert..."}},"indicator:Observable":{"@id":"RF:Observable-19894357-b884-3cd8-bd49-54540862a4a0","cybox:Object":{"@id":"RF:Address-81ec9700-57ba-3f8d-aeb9-f00418d5f31c","cybox:Properties":{"@category":"ipv4-addr","@xsi:type":"AddressObj:AddressObjectType","AddressObj:Address_Value":{"#text":"3.10.20.157","@condition":"Equals"}}}},"indicator:Producer":{"stixCommon:References":{"stixCommon:Reference":"http://example.com"},"stixCommon:Description":"RecordedFuture"},"indicator:Type":{"#text":"IPWatchlist","@xsi:type":"stixVocabs:IndicatorTypeVocab-1.1"},"@id":"RF:Indicator-02ff9864-3b18-332c-be33-35449baed75a","indicator:Confidence":{"stixCommon:Description":"RecordedFutureRiskScore","stixCommon:Value":"25"},"indicator:Title":"IPAddress3.10.20.157","indicator:Valid_Time_Position":{"indicator:Start_Time":{"#text":"2020-04-04T00:00:00.000Z","@precision":"second"},"indicator:End_Time":{"#text":"2020-04-04T23:59:59.000Z","@precision":"second"}}},{"@timestamp":"2020-04-06T16:10:17.739Z","@xsi:type":"indicator:IndicatorType","indicator:Observable":{"@id":"RF:Observable-72d63012-ab31-3324-b994-1dc391fe9299","cybox:Object":{"@id":"RF:Address-7aa0590a-8d24-36cc-aee3-a93d4200b564","cybox:Properties":{"@category":"ipv4-addr","@xsi:type":"AddressObj:AddressObjectType","AddressObj:Address_Value":{"#text":"5.34.180.206","@condition":"Equals"}}}},"indicator:Producer":{"stixCommon:Description":"RecordedFuture","stixCommon:References":{"stixCommon:Reference":"http://example.com"}},"@id":"RF:Indicator-eafa3166-7abc-33af-8789-ede692bf230a","@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance","indicator:Confidence":{"stixCommon:Value":"96","stixCommon:Description":"RecordedFutureRiskScore"},"indicator:Description":"Currentrisk:VeryMalicious.Triggers3of51rule...","indicator:Indicated_TTP":[{"stixCommon:Confidence":{"stixCommon:Value":{"#text":"Low","@xsi:type":"stixVocabs:HighMediumLowVocab-1.0"}},"stixCommon:TTP":{"@xsi:type":"ttp:TTPType","ttp:Description":"Previoussightingson1source:CobaltStrikeDefa...","ttp:Title":"RiskRule:HistoricallyReportedinThreatList","@id":"RF:TTP-538a4df0-0f1f-3a66-82c1-2bb9f030d044","@timestamp":"2020-04-04T18:49:02.868Z"}},{"stixCommon:Confidence":{"stixCommon:Value":{"#text":"High","@xsi:type":"stixVocabs:HighMediumLowVocab-1.0"}},"stixCommon:TTP":{"@id":"RF:TTP-373ddb7d-61ac-36a4-8f30-31e2650ea421","@timestamp":"2020-01-11T08:02:27.884Z","@xsi:type":"ttp:TTPType","ttp:Description":"1sightingon1source:RecordedFutureCommand&...","ttp:Title":"RiskRule:CurrentC&CServer"}}],"indicator:Title":"IPAddress5.34.180.206","indicator:Type":{"#text":"IPWatchlist","@xsi:type":"stixVocabs:IndicatorTypeVocab-1.1"},"indicator:Valid_Time_Position":{"indicator:End_Time":{"#text":"2020-01-11T08:02:27.884Z","@precision":"second"},"indicator:Start_Time":{"#text":"2020-01-11T08:02:27.884Z","@precision":"second"}}}]},"@xmlns:RF":"http://example.com","@xmlns:cybox":"http://cybox.mitre.org/cybox-2","@xmlns:cyboxCommon":"http://example.com","@xmlns:stixVocabs":"http://example.com","@version":"1.2","@xmlns:AddressObj":"http://cybox.mitre.org/objects#AddressObject-2","@xmlns:cyboxVocabs":"http://example.com"}}|
-|risk_list_gzip|file|False|The Base64 encoded GZIP bytes of the Risk List|{"filename": "example.file", "contents": "bhiRmprUDAA="}|
-  
-Example output:
-
-```
-{
-  "risk_list": {
-    "stix:STIX_Package": {
-      "@id": "RF:Package-9144eafb-a082-49d1-97a1-e7ceb4d8e955",
-      "@timestamp": "2020-04-01T12:10:12.058Z",
-      "@version": "1.2",
-      "@xmlns": "http://xml/metadataSharing.xsd",
-      "@xmlns:AddressObj": "http://cybox.mitre.org/objects#AddressObject-2",
-      "@xmlns:FileObj": "http://example.com",
-      "@xmlns:RF": "http://example.com",
-      "@xmlns:cybox": "http://cybox.mitre.org/cybox-2",
-      "@xmlns:cyboxCommon": "http://example.com",
-      "@xmlns:cyboxVocabs": "http://example.com",
-      "@xmlns:indicator": "http://example.com",
-      "@xmlns:stix": "http://example.com",
-      "@xmlns:stixCommon": "http://example.com",
-      "@xmlns:stixVocabs": "http://example.com",
-      "@xmlns:ttp": "http://example.com",
-      "stix:Indicators": {
-        "stix:Indicator": [
-          {
-            "@id": "RF:Indicator-02ff9864-3b18-332c-be33-35449baed75a",
-            "@timestamp": "2020-04-06T16:10:17.739Z",
-            "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
-            "@xsi:type": "indicator:IndicatorType",
-            "indicator:Confidence": {
-              "stixCommon:Description": "RecordedFutureRiskScore",
-              "stixCommon:Value": "25"
-            },
-            "indicator:Description": "Currentrisk:Suspicious.Triggers1of51rules",
-            "indicator:Indicated_TTP": {
-              "stixCommon:Confidence": {
-                "stixCommon:Value": {
-                  "#text": "Medium",
-                  "@xsi:type": "stixVocabs:HighMediumLowVocab-1.0"
-                }
-              },
-              "stixCommon:TTP": {
-                "@id": "RF:TTP-42014977-2178-3d3e-b3d1-a3d39961ebca",
-                "@timestamp": "2020-04-04T17:31:26.032Z",
-                "@xsi:type": "ttp:TTPType",
-                "ttp:Description": "1sightingon1source:CobaltStrikeDefaultCert...",
-                "ttp:Title": "RiskRule:CurrentC&CServer"
-              }
-            },
-            "indicator:Observable": {
-              "@id": "RF:Observable-19894357-b884-3cd8-bd49-54540862a4a0",
-              "cybox:Object": {
-                "@id": "RF:Address-81ec9700-57ba-3f8d-aeb9-f00418d5f31c",
-                "cybox:Properties": {
-                  "@category": "ipv4-addr",
-                  "@xsi:type": "AddressObj:AddressObjectType",
-                  "AddressObj:Address_Value": {
-                    "#text": "3.10.20.157",
-                    "@condition": "Equals"
-                  }
-                }
-              }
-            },
-            "indicator:Producer": {
-              "stixCommon:Description": "RecordedFuture",
-              "stixCommon:References": {
-                "stixCommon:Reference": "http://example.com"
-              }
-            },
-            "indicator:Title": "IPAddress3.10.20.157",
-            "indicator:Type": {
-              "#text": "IPWatchlist",
-              "@xsi:type": "stixVocabs:IndicatorTypeVocab-1.1"
-            },
-            "indicator:Valid_Time_Position": {
-              "indicator:End_Time": {
-                "#text": "2020-04-04T23:59:59.000Z",
-                "@precision": "second"
-              },
-              "indicator:Start_Time": {
-                "#text": "2020-04-04T00:00:00.000Z",
-                "@precision": "second"
-              }
-            }
-          },
-          {
-            "@id": "RF:Indicator-eafa3166-7abc-33af-8789-ede692bf230a",
-            "@timestamp": "2020-04-06T16:10:17.739Z",
-            "@xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
-            "@xsi:type": "indicator:IndicatorType",
-            "indicator:Confidence": {
-              "stixCommon:Description": "RecordedFutureRiskScore",
-              "stixCommon:Value": "96"
-            },
-            "indicator:Description": "Currentrisk:VeryMalicious.Triggers3of51rule...",
-            "indicator:Indicated_TTP": [
-              {
-                "stixCommon:Confidence": {
-                  "stixCommon:Value": {
-                    "#text": "Low",
-                    "@xsi:type": "stixVocabs:HighMediumLowVocab-1.0"
-                  }
-                },
-                "stixCommon:TTP": {
-                  "@id": "RF:TTP-538a4df0-0f1f-3a66-82c1-2bb9f030d044",
-                  "@timestamp": "2020-04-04T18:49:02.868Z",
-                  "@xsi:type": "ttp:TTPType",
-                  "ttp:Description": "Previoussightingson1source:CobaltStrikeDefa...",
-                  "ttp:Title": "RiskRule:HistoricallyReportedinThreatList"
-                }
-              },
-              {
-                "stixCommon:Confidence": {
-                  "stixCommon:Value": {
-                    "#text": "High",
-                    "@xsi:type": "stixVocabs:HighMediumLowVocab-1.0"
-                  }
-                },
-                "stixCommon:TTP": {
-                  "@id": "RF:TTP-373ddb7d-61ac-36a4-8f30-31e2650ea421",
-                  "@timestamp": "2020-01-11T08:02:27.884Z",
-                  "@xsi:type": "ttp:TTPType",
-                  "ttp:Description": "1sightingon1source:RecordedFutureCommand&...",
-                  "ttp:Title": "RiskRule:CurrentC&CServer"
-                }
-              }
-            ],
-            "indicator:Observable": {
-              "@id": "RF:Observable-72d63012-ab31-3324-b994-1dc391fe9299",
-              "cybox:Object": {
-                "@id": "RF:Address-7aa0590a-8d24-36cc-aee3-a93d4200b564",
-                "cybox:Properties": {
-                  "@category": "ipv4-addr",
-                  "@xsi:type": "AddressObj:AddressObjectType",
-                  "AddressObj:Address_Value": {
-                    "#text": "5.34.180.206",
-                    "@condition": "Equals"
-                  }
-                }
-              }
-            },
-            "indicator:Producer": {
-              "stixCommon:Description": "RecordedFuture",
-              "stixCommon:References": {
-                "stixCommon:Reference": "http://example.com"
-              }
-            },
-            "indicator:Title": "IPAddress5.34.180.206",
-            "indicator:Type": {
-              "#text": "IPWatchlist",
-              "@xsi:type": "stixVocabs:IndicatorTypeVocab-1.1"
-            },
-            "indicator:Valid_Time_Position": {
-              "indicator:End_Time": {
-                "#text": "2020-01-11T08:02:27.884Z",
-                "@precision": "second"
-              },
-              "indicator:Start_Time": {
-                "#text": "2020-01-11T08:02:27.884Z",
-                "@precision": "second"
-              }
-            }
-          }
-        ]
-      },
-      "stix:STIX_Header": {
-        "stix:Description": "RecordedFutureSTIX"
-      }
-    }
-  },
-  "risk_list_gzip": {
-    "contents": "bhiRmprUDAA=",
-    "filename": "example.file"
-  }
-}
-```
-
 #### Download URL Risk List
 
 This action is used to returns a risk list of URLs matching a filtration
@@ -606,7 +606,7 @@ This action is used to returns a risk list of URLs matching a filtration
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |list|string|None|False|The risk list to retrieve, left this field blank to retrieve default risk list|["", "Historically Reported by Insikt Group", "C&C URL", "Compromised URL", "Historically Reported as a Defanged URL", "Historically Reported by DHS AIS", "Historically Reported Fraudulent Content", "Historically Reported in Threat List", "Large", "Historically Detected Malicious Browser Exploits", "Historically Detected Malware Distribution", "Historically Detected Cryptocurrency Mining Techniques", "Historically Detected Phishing Techniques", "Active Phishing URL", "Positive Malware Verdict", "Ransomware Distribution URL", "Recently Reported by Insikt Group", "Recently Reported as a Defanged URL", "Recently Reported by DHS AIS", "Recently Reported Fraudulent Content", "Recently Detected Malicious Browser Exploits", "Recently Detected Malware Distribution", "Recently Detected Cryptocurrency Mining Techniques", "Recently Detected Phishing Techniques", "Recent Ransomware Distribution URL", "Recently Referenced by Insikt Group", "Recently Reported Spam or Unwanted Content", "Recently Detected Suspicious Content", "Recently Active URL on Weaponized Domain", "Historically Referenced by Insikt Group", "Historically Reported Spam or Unwanted Content", "Historically Detected Suspicious Content"]|Historically Reported by Insikt Group|None|None|
-
+  
 Example input:
 
 ```
@@ -730,7 +730,7 @@ This action is used to fetch a risk list of vulnerabilities matching a specified
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |list|string|None|False|The risk list to retrieve, leaving the list parameter blank results in the default risk list|["", "Historically Reported by Insikt Group", "Web Reporting Prior to CVSS Score", "Cyber Exploit Signal - Critical", "Cyber Exploit Signal - Important", "Cyber Exploit Signal - Medium", "Historically Exploited in the Wild by Malware", "Large", "Linked to Historical Cyber Exploit", "Historically Linked to Exploit Kit", "Historically Linked to Malware", "Historically Linked to Remote Access Trojan", "Historically Linked to Ransomware", "Linked to Recent Cyber Exploit", "Recently Linked to Exploit Kit", "Recently Linked to Malware", "Recently Linked to Remote Access Trojan", "Recently Linked to Ransomware", "Exploited in the Wild by Malware", "NIST Severity - Critical", "Duplicate of Vulnerability in NVD", "NIST Severity - High", "NIST Severity - Low", "NIST Severity - Medium", "Web Reporting Prior to NVD Disclosure", "Historical Unverified Proof of Concept Available", "Historical Verified Proof of Concept Available", "Historical Verified Proof of Concept Available Using Remote Execution", "Recently Reported by Insikt Group", "Exploited in the Wild by Recently Active Malware", "Recent Unverified Proof of Concept Available", "Recent Verified Proof of Concept Available", "Recent Verified Proof of Concept Available Using Remote Execution", "Recently Referenced by Insikt Group", "Recently Linked to Penetration Testing Tools", "Historically Referenced by Insikt Group", "Historically Linked to Penetration Testing Tools"]|NIST Severity Critical|None|None|
-
+  
 Example input:
 
 ```
@@ -802,6 +802,53 @@ Example output:
     "contents": "bhiRmprUDAA=",
     "filename": "example.file"
   }
+}
+```
+
+#### List IP Addresses Risk Rules
+
+This action is used to list available filtration rules for IP address risk lists
+
+##### Input
+  
+*This action does not contain any inputs.*
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|risk_rules|[]risk_rule|True|Risk rules|[{"count":75508,"criticality":1,"criticalityLabel":"Unusual","description":"HistoricalThreatResearcher","name":"threatResearcher","relatedEntities":[]},{"count":517,"criticality":2,"criticalityLabel":"Suspicious","description":"RecentlyReportedasaDefangedIP","name":"recentDefanged","relatedEntities":[]},{"count":102959,"criticality":1,"criticalityLabel":"Unusual","description":"VulnerableHost","name":"vulnerableHost","relatedEntities":[]}]|
+  
+Example output:
+
+```
+{
+  "risk_rules": [
+    {
+      "count": 75508,
+      "criticality": 1,
+      "criticalityLabel": "Unusual",
+      "description": "HistoricalThreatResearcher",
+      "name": "threatResearcher",
+      "relatedEntities": []
+    },
+    {
+      "count": 517,
+      "criticality": 2,
+      "criticalityLabel": "Suspicious",
+      "description": "RecentlyReportedasaDefangedIP",
+      "name": "recentDefanged",
+      "relatedEntities": []
+    },
+    {
+      "count": 102959,
+      "criticality": 1,
+      "criticalityLabel": "Unusual",
+      "description": "VulnerableHost",
+      "name": "vulnerableHost",
+      "relatedEntities": []
+    }
+  ]
 }
 ```
 
@@ -893,53 +940,6 @@ Example output:
 }
 ```
 
-#### List IP Addresses Risk Rules
-
-This action is used to list available filtration rules for IP address risk lists
-
-##### Input
-  
-*This action does not contain any inputs.*
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|risk_rules|[]risk_rule|True|Risk rules|[{"count":75508,"criticality":1,"criticalityLabel":"Unusual","description":"HistoricalThreatResearcher","name":"threatResearcher","relatedEntities":[]},{"count":517,"criticality":2,"criticalityLabel":"Suspicious","description":"RecentlyReportedasaDefangedIP","name":"recentDefanged","relatedEntities":[]},{"count":102959,"criticality":1,"criticalityLabel":"Unusual","description":"VulnerableHost","name":"vulnerableHost","relatedEntities":[]}]|
-  
-Example output:
-
-```
-{
-  "risk_rules": [
-    {
-      "count": 75508,
-      "criticality": 1,
-      "criticalityLabel": "Unusual",
-      "description": "HistoricalThreatResearcher",
-      "name": "threatResearcher",
-      "relatedEntities": []
-    },
-    {
-      "count": 517,
-      "criticality": 2,
-      "criticalityLabel": "Suspicious",
-      "description": "RecentlyReportedasaDefangedIP",
-      "name": "recentDefanged",
-      "relatedEntities": []
-    },
-    {
-      "count": 102959,
-      "criticality": 1,
-      "criticalityLabel": "Unusual",
-      "description": "VulnerableHost",
-      "name": "vulnerableHost",
-      "relatedEntities": []
-    }
-  ]
-}
-```
-
 #### List URL Risk Rules
 
 This action is used to list available filtration rules for URL risk lists
@@ -1007,6 +1007,152 @@ Example output:
       "relatedEntities": []
     }
   ]
+}
+```
+
+#### Lookup IP Address
+
+This action is used to query for data related to a specific IP address
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|IP_address|string|None|True|IP address|None|198.51.100.100|None|None|
+|comment|string|None|False|Add comment to IP address lookup for Recorded Future|None|IP look up performed by InsightConnect|None|None|
+  
+Example input:
+
+```
+{
+  "IP_address": "198.51.100.100",
+  "comment": "IP look up performed by InsightConnect"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|data|ip_search_data|True|Data|{"riskyCIDRIPs":[],"enterpriseLists":[],"risk":{"criticalityLabel":"Suspicious","riskString":"11/64","rules":11,"criticality":2,"riskSummary":"11of64RiskRulescurrentlyobserved.","score":58,"evidenceDetails":[{"evidenceString":"149sightingson18sourcesincluding:AcunetixWebApplicationSecurityBlog,RecordedFutureMalwareDetonation,binarydefense.com,HackerOneHacktivity,ehcgroup.io.18relatedintrusionmethodsincludingPOSMalware,SourceAddressSpoofing,DNSSpoofing,njRAT,Mozart.Mostrecenttweet:@engage_vdms@edgecast@verizondigitalhttps://t.co/65QIJaVmkrreservedhttps://t.co/uWt2rpURVyresolvingto93.184.216.34asAdwareorspywareby@zscaler(URL:https://t.co/pd3PacufyS).Mostrecentlink(Jun25,2019):https://twitter.com/npandraju/statuses/1143466069803196416","rule":"HistoricallyLinkedtoIntrusionMethod","criticality":1,"timestamp":"2019-06-25T10:28:50.000Z","criticalityLabel":"Unusual"}]},"intelCard":"http://example.com","sightings":[{"source":"PasteBin","url":"http://pastebin.com/bDJ7rarf","published":"2014-12-16T18:49:06.000Z","fragment":"ip.addr==93.184.216.34","title":"Untitled","type":"first"}],"entity":{"id":"ip:198.51.100.100","name":"198.51.100.100","type":"IpAddress"},"relatedEntities":[{"entities":[{"count":85,"entity":{"id":"0fL5H","name":"Adware","type":"MalwareCategory"}}],"type":"RelatedMalwareCategory"},{"entities":[{"count":140,"entity":{"id":"hash:b71e4d17274636b97179ba2d97c742735b6510eb54f22893d3a2daff2ceb28db","name":"b71e4d17274636b97179ba2d97c742735b6510eb54f22893d3a2daff2ceb28db","type":"Hash"}}],"type":"RelatedProduct"}],"analystNotes":[],"location":{"organization":"EdgeCastNetworks,Inc.","cidr":{"id":"ip:93.184.216.0/24","name":"93.184.216.0/24","type":"IpAddress"},"location":{"continent":"NorthAmerica","country":"UnitedStates"},"asn":"AS15133"},"timestamps":{"lastSeen":"2022-04-08T10:57:07.595Z","firstSeen":"2014-12-16T18:51:34.533Z"},"threatLists":[{"id":"report:TmXa90","name":"AlexaTop10000DomainsandIPAddresses(WhiteList)","type":"EntityList","description":"ThisinformationallistcontainsthecurrentAlexaTop10000Sites,andIPAddressesthathaverecentlybeenobservedbyRecordedFutureasDNSNameresolutions.IPAddressriskscoringusesthislistasaevidenceofnon-maliciousness,butIPsforAlexaTop500sitesarenotcategoricallywhitelisted.DNSresolutionsincludebothIPv4andIPv6resolutions,butarenotnecessarilycomprehensive.TheseDNSNamesmayresolvetootherIPAddressesdependingontimeandDNSlookuprequestlocation.Formoreinformation,seesupport.alexa.com/hc/en-us/articles/200449834-Does-Alexa-have-a-list-of-its-top-ranked-websites-"}],"counts":[{"date":"2021-03-26","count":4},{"date":"2018-01-22","count":6}],"metrics":[{"type":"defangedSightings","value":15},{"type":"recentBruteForceSightings","value":1}]}|
+|result_found|boolean|True|Whether the result was found|True|
+  
+Example output:
+
+```
+{
+  "data": {
+    "analystNotes": [],
+    "counts": [
+      {
+        "count": 4,
+        "date": "2021-03-26"
+      },
+      {
+        "count": 6,
+        "date": "2018-01-22"
+      }
+    ],
+    "enterpriseLists": [],
+    "entity": {
+      "id": "ip:198.51.100.100",
+      "name": "198.51.100.100",
+      "type": "IpAddress"
+    },
+    "intelCard": "http://example.com",
+    "location": {
+      "asn": "AS15133",
+      "cidr": {
+        "id": "ip:93.184.216.0/24",
+        "name": "93.184.216.0/24",
+        "type": "IpAddress"
+      },
+      "location": {
+        "continent": "NorthAmerica",
+        "country": "UnitedStates"
+      },
+      "organization": "EdgeCastNetworks,Inc."
+    },
+    "metrics": [
+      {
+        "type": "defangedSightings",
+        "value": 15
+      },
+      {
+        "type": "recentBruteForceSightings",
+        "value": 1
+      }
+    ],
+    "relatedEntities": [
+      {
+        "entities": [
+          {
+            "count": 85,
+            "entity": {
+              "id": "0fL5H",
+              "name": "Adware",
+              "type": "MalwareCategory"
+            }
+          }
+        ],
+        "type": "RelatedMalwareCategory"
+      },
+      {
+        "entities": [
+          {
+            "count": 140,
+            "entity": {
+              "id": "hash:b71e4d17274636b97179ba2d97c742735b6510eb54f22893d3a2daff2ceb28db",
+              "name": "b71e4d17274636b97179ba2d97c742735b6510eb54f22893d3a2daff2ceb28db",
+              "type": "Hash"
+            }
+          }
+        ],
+        "type": "RelatedProduct"
+      }
+    ],
+    "risk": {
+      "criticality": 2,
+      "criticalityLabel": "Suspicious",
+      "evidenceDetails": [
+        {
+          "criticality": 1,
+          "criticalityLabel": "Unusual",
+          "evidenceString": "149sightingson18sourcesincluding:AcunetixWebApplicationSecurityBlog,RecordedFutureMalwareDetonation,binarydefense.com,HackerOneHacktivity,ehcgroup.io.18relatedintrusionmethodsincludingPOSMalware,SourceAddressSpoofing,DNSSpoofing,njRAT,Mozart.Mostrecenttweet:@engage_vdms@edgecast@verizondigitalhttps://t.co/65QIJaVmkrreservedhttps://t.co/uWt2rpURVyresolvingto93.184.216.34asAdwareorspywareby@zscaler(URL:https://t.co/pd3PacufyS).Mostrecentlink(Jun25,2019):https://twitter.com/npandraju/statuses/1143466069803196416",
+          "rule": "HistoricallyLinkedtoIntrusionMethod",
+          "timestamp": "2019-06-25T10:28:50.000Z"
+        }
+      ],
+      "riskString": "11/64",
+      "riskSummary": "11of64RiskRulescurrentlyobserved.",
+      "rules": 11,
+      "score": 58
+    },
+    "riskyCIDRIPs": [],
+    "sightings": [
+      {
+        "fragment": "ip.addr==93.184.216.34",
+        "published": "2014-12-16T18:49:06.000Z",
+        "source": "PasteBin",
+        "title": "Untitled",
+        "type": "first",
+        "url": "http://pastebin.com/bDJ7rarf"
+      }
+    ],
+    "threatLists": [
+      {
+        "description": "ThisinformationallistcontainsthecurrentAlexaTop10000Sites,andIPAddressesthathaverecentlybeenobservedbyRecordedFutureasDNSNameresolutions.IPAddressriskscoringusesthislistasaevidenceofnon-maliciousness,butIPsforAlexaTop500sitesarenotcategoricallywhitelisted.DNSresolutionsincludebothIPv4andIPv6resolutions,butarenotnecessarilycomprehensive.TheseDNSNamesmayresolvetootherIPAddressesdependingontimeandDNSlookuprequestlocation.Formoreinformation,seesupport.alexa.com/hc/en-us/articles/200449834-Does-Alexa-have-a-list-of-its-top-ranked-websites-",
+        "id": "report:TmXa90",
+        "name": "AlexaTop10000DomainsandIPAddresses(WhiteList)",
+        "type": "EntityList"
+      }
+    ],
+    "timestamps": {
+      "firstSeen": "2014-12-16T18:51:34.533Z",
+      "lastSeen": "2022-04-08T10:57:07.595Z"
+    }
+  },
+  "result_found": true
 }
 ```
 
@@ -1330,152 +1476,6 @@ Example output:
 }
 ```
 
-#### Lookup IP Address
-
-This action is used to query for data related to a specific IP address
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|IP_address|string|None|True|IP address|None|198.51.100.100|None|None|
-|comment|string|None|False|Add comment to IP address lookup for Recorded Future|None|IP look up performed by InsightConnect|None|None|
-  
-Example input:
-
-```
-{
-  "IP_address": "198.51.100.100",
-  "comment": "IP look up performed by InsightConnect"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|data|ip_search_data|True|Data|{"riskyCIDRIPs":[],"enterpriseLists":[],"risk":{"criticalityLabel":"Suspicious","riskString":"11/64","rules":11,"criticality":2,"riskSummary":"11of64RiskRulescurrentlyobserved.","score":58,"evidenceDetails":[{"evidenceString":"149sightingson18sourcesincluding:AcunetixWebApplicationSecurityBlog,RecordedFutureMalwareDetonation,binarydefense.com,HackerOneHacktivity,ehcgroup.io.18relatedintrusionmethodsincludingPOSMalware,SourceAddressSpoofing,DNSSpoofing,njRAT,Mozart.Mostrecenttweet:@engage_vdms@edgecast@verizondigitalhttps://t.co/65QIJaVmkrreservedhttps://t.co/uWt2rpURVyresolvingto93.184.216.34asAdwareorspywareby@zscaler(URL:https://t.co/pd3PacufyS).Mostrecentlink(Jun25,2019):https://twitter.com/npandraju/statuses/1143466069803196416","rule":"HistoricallyLinkedtoIntrusionMethod","criticality":1,"timestamp":"2019-06-25T10:28:50.000Z","criticalityLabel":"Unusual"}]},"intelCard":"http://example.com","sightings":[{"source":"PasteBin","url":"http://pastebin.com/bDJ7rarf","published":"2014-12-16T18:49:06.000Z","fragment":"ip.addr==93.184.216.34","title":"Untitled","type":"first"}],"entity":{"id":"ip:198.51.100.100","name":"198.51.100.100","type":"IpAddress"},"relatedEntities":[{"entities":[{"count":85,"entity":{"id":"0fL5H","name":"Adware","type":"MalwareCategory"}}],"type":"RelatedMalwareCategory"},{"entities":[{"count":140,"entity":{"id":"hash:b71e4d17274636b97179ba2d97c742735b6510eb54f22893d3a2daff2ceb28db","name":"b71e4d17274636b97179ba2d97c742735b6510eb54f22893d3a2daff2ceb28db","type":"Hash"}}],"type":"RelatedProduct"}],"analystNotes":[],"location":{"organization":"EdgeCastNetworks,Inc.","cidr":{"id":"ip:93.184.216.0/24","name":"93.184.216.0/24","type":"IpAddress"},"location":{"continent":"NorthAmerica","country":"UnitedStates"},"asn":"AS15133"},"timestamps":{"lastSeen":"2022-04-08T10:57:07.595Z","firstSeen":"2014-12-16T18:51:34.533Z"},"threatLists":[{"id":"report:TmXa90","name":"AlexaTop10000DomainsandIPAddresses(WhiteList)","type":"EntityList","description":"ThisinformationallistcontainsthecurrentAlexaTop10000Sites,andIPAddressesthathaverecentlybeenobservedbyRecordedFutureasDNSNameresolutions.IPAddressriskscoringusesthislistasaevidenceofnon-maliciousness,butIPsforAlexaTop500sitesarenotcategoricallywhitelisted.DNSresolutionsincludebothIPv4andIPv6resolutions,butarenotnecessarilycomprehensive.TheseDNSNamesmayresolvetootherIPAddressesdependingontimeandDNSlookuprequestlocation.Formoreinformation,seesupport.alexa.com/hc/en-us/articles/200449834-Does-Alexa-have-a-list-of-its-top-ranked-websites-"}],"counts":[{"date":"2021-03-26","count":4},{"date":"2018-01-22","count":6}],"metrics":[{"type":"defangedSightings","value":15},{"type":"recentBruteForceSightings","value":1}]}|
-|result_found|boolean|True|Whether the result was found|True|
-  
-Example output:
-
-```
-{
-  "data": {
-    "analystNotes": [],
-    "counts": [
-      {
-        "count": 4,
-        "date": "2021-03-26"
-      },
-      {
-        "count": 6,
-        "date": "2018-01-22"
-      }
-    ],
-    "enterpriseLists": [],
-    "entity": {
-      "id": "ip:198.51.100.100",
-      "name": "198.51.100.100",
-      "type": "IpAddress"
-    },
-    "intelCard": "http://example.com",
-    "location": {
-      "asn": "AS15133",
-      "cidr": {
-        "id": "ip:93.184.216.0/24",
-        "name": "93.184.216.0/24",
-        "type": "IpAddress"
-      },
-      "location": {
-        "continent": "NorthAmerica",
-        "country": "UnitedStates"
-      },
-      "organization": "EdgeCastNetworks,Inc."
-    },
-    "metrics": [
-      {
-        "type": "defangedSightings",
-        "value": 15
-      },
-      {
-        "type": "recentBruteForceSightings",
-        "value": 1
-      }
-    ],
-    "relatedEntities": [
-      {
-        "entities": [
-          {
-            "count": 85,
-            "entity": {
-              "id": "0fL5H",
-              "name": "Adware",
-              "type": "MalwareCategory"
-            }
-          }
-        ],
-        "type": "RelatedMalwareCategory"
-      },
-      {
-        "entities": [
-          {
-            "count": 140,
-            "entity": {
-              "id": "hash:b71e4d17274636b97179ba2d97c742735b6510eb54f22893d3a2daff2ceb28db",
-              "name": "b71e4d17274636b97179ba2d97c742735b6510eb54f22893d3a2daff2ceb28db",
-              "type": "Hash"
-            }
-          }
-        ],
-        "type": "RelatedProduct"
-      }
-    ],
-    "risk": {
-      "criticality": 2,
-      "criticalityLabel": "Suspicious",
-      "evidenceDetails": [
-        {
-          "criticality": 1,
-          "criticalityLabel": "Unusual",
-          "evidenceString": "149sightingson18sourcesincluding:AcunetixWebApplicationSecurityBlog,RecordedFutureMalwareDetonation,binarydefense.com,HackerOneHacktivity,ehcgroup.io.18relatedintrusionmethodsincludingPOSMalware,SourceAddressSpoofing,DNSSpoofing,njRAT,Mozart.Mostrecenttweet:@engage_vdms@edgecast@verizondigitalhttps://t.co/65QIJaVmkrreservedhttps://t.co/uWt2rpURVyresolvingto93.184.216.34asAdwareorspywareby@zscaler(URL:https://t.co/pd3PacufyS).Mostrecentlink(Jun25,2019):https://twitter.com/npandraju/statuses/1143466069803196416",
-          "rule": "HistoricallyLinkedtoIntrusionMethod",
-          "timestamp": "2019-06-25T10:28:50.000Z"
-        }
-      ],
-      "riskString": "11/64",
-      "riskSummary": "11of64RiskRulescurrentlyobserved.",
-      "rules": 11,
-      "score": 58
-    },
-    "riskyCIDRIPs": [],
-    "sightings": [
-      {
-        "fragment": "ip.addr==93.184.216.34",
-        "published": "2014-12-16T18:49:06.000Z",
-        "source": "PasteBin",
-        "title": "Untitled",
-        "type": "first",
-        "url": "http://pastebin.com/bDJ7rarf"
-      }
-    ],
-    "threatLists": [
-      {
-        "description": "ThisinformationallistcontainsthecurrentAlexaTop10000Sites,andIPAddressesthathaverecentlybeenobservedbyRecordedFutureasDNSNameresolutions.IPAddressriskscoringusesthislistasaevidenceofnon-maliciousness,butIPsforAlexaTop500sitesarenotcategoricallywhitelisted.DNSresolutionsincludebothIPv4andIPv6resolutions,butarenotnecessarilycomprehensive.TheseDNSNamesmayresolvetootherIPAddressesdependingontimeandDNSlookuprequestlocation.Formoreinformation,seesupport.alexa.com/hc/en-us/articles/200449834-Does-Alexa-have-a-list-of-its-top-ranked-websites-",
-        "id": "report:TmXa90",
-        "name": "AlexaTop10000DomainsandIPAddresses(WhiteList)",
-        "type": "EntityList"
-      }
-    ],
-    "timestamps": {
-      "firstSeen": "2014-12-16T18:51:34.533Z",
-      "lastSeen": "2022-04-08T10:57:07.595Z"
-    }
-  },
-  "result_found": true
-}
-```
-
 #### Lookup Malware
 
 This action is used to return information about a specific malware entry by ID
@@ -1666,6 +1666,76 @@ Example output:
 }
 ```
 
+#### Search IP Addresses
+
+This action is used to query for data related to a specified IP range
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|direction|string|asc|True|Sort results ascending/descending|["asc", "desc"]|asc|None|None|
+|from|number|0|True|Number of initial records to skip|None|0|None|None|
+|ip_range|string|None|True|IP address range to search|None|198.51.100.0/24|None|None|
+|limit|number|None|True|Number of results to retrieve, up to 100|None|10|None|None|
+|orderby|string|None|True|Which property to sort the results by|["Created", "Lastseen", "Firstseen", "Modified", "Riskscore", "Rules", "Sevendayshits", "Sixtydayshits", "Totalhits"]|Lastseen|None|None|
+|riskRule|string|None|False|Filters the results by risk rule|["", "Threat Actor Used Infrastructure", "Historically Reported by Insikt Group", "Inside Possible Bogus BGP Route", "Historical Botnet Traffic", "Recently Communicating With C&C Server", "Nameserver for C&C Server", "Historical C&C Server", "Cyber Exploit Signal - Critical", "Cyber Exploit Signal - Important", "Cyber Exploit Signal - Medium", "Recent Host of Many DDNS Names", "Historically Reported as a Defanged IP", "Historically Reported by DHS AIS", "Resolution of Fast Flux DNS Name", "Historically Reported in Threat List", "Historical Honeypot Sighting", "Honeypot Host", "Recently Active C&C Server", "Recent C&C Server", "Historically Linked to Intrusion Method", "Historically Linked to APT", "Historically Linked to Cyber Attack", "Malicious Packet Source", "Malware Delivery", "Historical Multicategory Blacklist", "Historical Open Proxies", "Phishing Host", "Historical Positive Malware Verdict", "Recorded Future Predictive Risk Model", "Actively Communicating C&C Server", "Recently Reported by Insikt Group", "Recent Botnet Traffic", "Current C&C Server", "Recently Reported as a Defanged IP", "Recently Reported by DHS AIS", "Recent Honeypot Sighting", "Recently Linked to Intrusion Method", "Recently Linked to APT", "Recently Linked to Cyber Attack", "Recent Multicategory Blacklist", "Recent Open Proxies", "Recent Positive Malware Verdict", "Recently Referenced by Insikt Group", "Recent Spam Source", "Recent SSH/Dictionary Attacker", "Recent Bad SSL Association", "Recent Threat Researcher", "Recently Defaced Site", "Historically Referenced by Insikt Group", "Trending in Recorded Future Analyst Community", "Historical Spam Source", "Historical SSH/Dictionary Attacker", "Historical Bad SSL Association", "Historical Threat Researcher", "Tor Node", "Unusual IP", "Vulnerable Host"]|Malware Delivery|None|None|
+|riskScore|string|None|False|Filters the results by risk score|None|[1,100]|None|None|
+  
+Example input:
+
+```
+{
+  "direction": "asc",
+  "from": 0,
+  "ip_range": "198.51.100.0/24",
+  "limit": 10,
+  "orderby": "Lastseen",
+  "riskRule": "Malware Delivery",
+  "riskScore": [
+    1,
+    100
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|data|[]ip_search_data|True|Data|[{"entity":{"name":"209.0.0.0/15","type":"IpAddress","id":"ip:209.0.0.0/15"},"timestamps":{"firstSeen":"2020-01-29T10:04:41.359Z","lastSeen":"2020-01-29T10:04:41.359Z"}},{"entity":{"id":"ip:209.0.0.230","name":"209.0.0.230","type":"IpAddress"},"timestamps":{"firstSeen":"2019-04-27T11:24:53.497Z","lastSeen":"2019-09-22T09:23:53.397Z"}}]|
+  
+Example output:
+
+```
+{
+  "data": [
+    {
+      "entity": {
+        "id": "ip:209.0.0.0/15",
+        "name": "209.0.0.0/15",
+        "type": "IpAddress"
+      },
+      "timestamps": {
+        "firstSeen": "2020-01-29T10:04:41.359Z",
+        "lastSeen": "2020-01-29T10:04:41.359Z"
+      }
+    },
+    {
+      "entity": {
+        "id": "ip:209.0.0.230",
+        "name": "209.0.0.230",
+        "type": "IpAddress"
+      },
+      "timestamps": {
+        "firstSeen": "2019-04-27T11:24:53.497Z",
+        "lastSeen": "2019-09-22T09:23:53.397Z"
+      }
+    }
+  ]
+}
+```
+
 #### Search Domains
 
 This action is used to search for results related to a specific parent domain
@@ -1833,76 +1903,6 @@ Example output:
 }
 ```
 
-#### Search IP Addresses
-
-This action is used to query for data related to a specified IP range
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|direction|string|asc|True|Sort results ascending/descending|["asc", "desc"]|asc|None|None|
-|from|number|0|True|Number of initial records to skip|None|0|None|None|
-|ip_range|string|None|True|IP address range to search|None|198.51.100.0/24|None|None|
-|limit|number|None|True|Number of results to retrieve, up to 100|None|10|None|None|
-|orderby|string|None|True|Which property to sort the results by|["Created", "Lastseen", "Firstseen", "Modified", "Riskscore", "Rules", "Sevendayshits", "Sixtydayshits", "Totalhits"]|Lastseen|None|None|
-|riskRule|string|None|False|Filters the results by risk rule|["", "Threat Actor Used Infrastructure", "Historically Reported by Insikt Group", "Inside Possible Bogus BGP Route", "Historical Botnet Traffic", "Recently Communicating With C&C Server", "Nameserver for C&C Server", "Historical C&C Server", "Cyber Exploit Signal - Critical", "Cyber Exploit Signal - Important", "Cyber Exploit Signal - Medium", "Recent Host of Many DDNS Names", "Historically Reported as a Defanged IP", "Historically Reported by DHS AIS", "Resolution of Fast Flux DNS Name", "Historically Reported in Threat List", "Historical Honeypot Sighting", "Honeypot Host", "Recently Active C&C Server", "Recent C&C Server", "Historically Linked to Intrusion Method", "Historically Linked to APT", "Historically Linked to Cyber Attack", "Malicious Packet Source", "Malware Delivery", "Historical Multicategory Blacklist", "Historical Open Proxies", "Phishing Host", "Historical Positive Malware Verdict", "Recorded Future Predictive Risk Model", "Actively Communicating C&C Server", "Recently Reported by Insikt Group", "Recent Botnet Traffic", "Current C&C Server", "Recently Reported as a Defanged IP", "Recently Reported by DHS AIS", "Recent Honeypot Sighting", "Recently Linked to Intrusion Method", "Recently Linked to APT", "Recently Linked to Cyber Attack", "Recent Multicategory Blacklist", "Recent Open Proxies", "Recent Positive Malware Verdict", "Recently Referenced by Insikt Group", "Recent Spam Source", "Recent SSH/Dictionary Attacker", "Recent Bad SSL Association", "Recent Threat Researcher", "Recently Defaced Site", "Historically Referenced by Insikt Group", "Trending in Recorded Future Analyst Community", "Historical Spam Source", "Historical SSH/Dictionary Attacker", "Historical Bad SSL Association", "Historical Threat Researcher", "Tor Node", "Unusual IP", "Vulnerable Host"]|Malware Delivery|None|None|
-|riskScore|string|None|False|Filters the results by risk score|None|[1,100]|None|None|
-  
-Example input:
-
-```
-{
-  "direction": "asc",
-  "from": 0,
-  "ip_range": "198.51.100.0/24",
-  "limit": 10,
-  "orderby": "Lastseen",
-  "riskRule": "Malware Delivery",
-  "riskScore": [
-    1,
-    100
-  ]
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|data|[]ip_search_data|True|Data|[{"entity":{"name":"209.0.0.0/15","type":"IpAddress","id":"ip:209.0.0.0/15"},"timestamps":{"firstSeen":"2020-01-29T10:04:41.359Z","lastSeen":"2020-01-29T10:04:41.359Z"}},{"entity":{"id":"ip:209.0.0.230","name":"209.0.0.230","type":"IpAddress"},"timestamps":{"firstSeen":"2019-04-27T11:24:53.497Z","lastSeen":"2019-09-22T09:23:53.397Z"}}]|
-  
-Example output:
-
-```
-{
-  "data": [
-    {
-      "entity": {
-        "id": "ip:209.0.0.0/15",
-        "name": "209.0.0.0/15",
-        "type": "IpAddress"
-      },
-      "timestamps": {
-        "firstSeen": "2020-01-29T10:04:41.359Z",
-        "lastSeen": "2020-01-29T10:04:41.359Z"
-      }
-    },
-    {
-      "entity": {
-        "id": "ip:209.0.0.230",
-        "name": "209.0.0.230",
-        "type": "IpAddress"
-      },
-      "timestamps": {
-        "firstSeen": "2019-04-27T11:24:53.497Z",
-        "lastSeen": "2019-09-22T09:23:53.397Z"
-      }
-    }
-  ]
-}
-```
-
 #### Search Malware
 
 This action is used to search for data related to malware
@@ -1912,13 +1912,13 @@ This action is used to search for data related to malware
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |direction|string|asc|True|Sort results ascending/descending|["asc", "desc"]|asc|None|None|
-|firstSeen|string|None|False|Filters the results by first seen|None|2016-06-15 07:54:38.286000|None|2016-06-15T07:54:38|
+|firstSeen|string|None|False|Filters the results by first seen|None|2016-06-15 07:54:38.286000|None|None|
 |freetext|string|None|False|Freetext search|None|example|None|None|
 |from|number|0|True|Number of initial records to skip|None|0|None|None|
 |limit|number|None|True|Number of results to retrieve, up to 100|None|10|None|None|
 |list|string|None|False|Filters the results by list ID|None|fKXuF0|None|None|
 |orderby|string|None|True|Which property to sort the results by|["Created", "Lastseen", "Firstseen", "Modified", "Riskscore", "Rules", "Sevendayshits", "Sixtydayshits", "Totalhits"]|Riskscore|None|None|
-
+  
 Example input:
 
 ```

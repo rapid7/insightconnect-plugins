@@ -1388,7 +1388,7 @@ actions:
         type: hash_search_data
         required: true
         example: '{"enterpriseLists":[],"risk":{"criticalityLabel":"Malicious","riskString":"6/14","rules":6,"criticality":3,"riskSummary":"6of14RiskRulescurrentlyobserved.","score":73,"evidenceDetails":[{"evidenceString":"2sightingson1source:DanchoDanchevsBlog.Mostrecentlink(Apr29,2021):https://ddanchev.blogspot.com/2021/04/dancho-danchevs-law-enforcement-and.html","rule":"ThreatResearcher","criticality":1,"timestamp":"2021-04-29T17:25:00.000Z","criticalityLabel":"Unusual"}]},"intelCard":"http://example.com","sightings":[{"source":"PasteBin","url":"https://pastebin.com/ws6iEuJn","published":"2021-10-06T01:02:03.000Z","fragment":"44d88612fea8a8f36de82e1278abb02f","title":"UntitledPastefromPastebin","type":"recentPaste"}],"entity":{"id":"hash:44d88612fea8a8f36de82e1278abb02f","name":"44d88612fea8a8f36de82e1278abb02f","type":"Hash"},"relatedEntities":[{"entities":[{"count":6,"entity":{"id":"0e4eL","name":"Computervirus","type":"MalwareCategory"}}]}],"analystNotes":[],"hashAlgorithm":"MD5","timestamps":{"lastSeen":"2022-03-23T05:51:50.136Z","firstSeen":"2013-10-07T07:56:14.576Z"},"threatLists":[],"counts":[{"date":"2018-08-21","count":1}],"metrics":[{"type":"sevenDaysHits","value":0}]}'
-  download_ip_addresses_risk_list:
+  download_IP_addresses_risk_list:
     title: Download IP Addresses Risk List
     description: Fetch a risk list of the IP addresses that match a specified filtration rule
     input:
@@ -1471,7 +1471,7 @@ actions:
         description: The Base64 encoded GZIP bytes of the Risk List
         example: '{"filename": "example.file", "contents": "bhiRmprUDAA="}'
         required: false
-  list_ip_addresses_risk_rules:
+  list_IP_addresses_risk_rules:
     title: List IP Addresses Risk Rules
     description: List available filtration rules for IP address risk lists
     output:
@@ -1481,7 +1481,7 @@ actions:
         description: Risk rules
         required: true
         example: '[{"count":75508,"criticality":1,"criticalityLabel":"Unusual","description":"HistoricalThreatResearcher","name":"threatResearcher","relatedEntities":[]},{"count":517,"criticality":2,"criticalityLabel":"Suspicious","description":"RecentlyReportedasaDefangedIP","name":"recentDefanged","relatedEntities":[]},{"count":102959,"criticality":1,"criticalityLabel":"Unusual","description":"VulnerableHost","name":"vulnerableHost","relatedEntities":[]}]'
-  search_ip_addresses:
+  search_IP_addresses:
     title: Search IP Addresses
     description: Query for data related to a specified IP range
     input:
@@ -1608,7 +1608,7 @@ actions:
         type: "[]ip_search_data"
         required: true
         example: '[{"entity":{"name":"209.0.0.0/15","type":"IpAddress","id":"ip:209.0.0.0/15"},"timestamps":{"firstSeen":"2020-01-29T10:04:41.359Z","lastSeen":"2020-01-29T10:04:41.359Z"}},{"entity":{"id":"ip:209.0.0.230","name":"209.0.0.230","type":"IpAddress"},"timestamps":{"firstSeen":"2019-04-27T11:24:53.497Z","lastSeen":"2019-09-22T09:23:53.397Z"}}]'
-  lookup_ip_address:
+  lookup_IP_address:
     title: Lookup IP Address
     description: Query for data related to a specific IP address
     input:

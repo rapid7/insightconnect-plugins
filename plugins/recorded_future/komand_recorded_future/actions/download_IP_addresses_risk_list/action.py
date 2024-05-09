@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import DownloadIpAddressesRiskListInput, DownloadIpAddressesRiskListOutput, Input, Output, Component
+from .schema import DownloadIPAddressesRiskListInput, DownloadIPAddressesRiskListOutput, Input, Output, Component
 
 # Custom imports below
 import base64
@@ -8,13 +8,13 @@ from komand_recorded_future.util.util import AvailableInputs
 from komand_recorded_future.util.api import Endpoint
 
 
-class DownloadIpAddressesRiskList(insightconnect_plugin_runtime.Action):
+class DownloadIPAddressesRiskList(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="download_IP_addresses_risk_list",
             description=Component.DESCRIPTION,
-            input=DownloadIpAddressesRiskListInput(),
-            output=DownloadIpAddressesRiskListOutput(),
+            input=DownloadIPAddressesRiskListInput(),
+            output=DownloadIPAddressesRiskListOutput(),
         )
 
     def run(self, params={}):

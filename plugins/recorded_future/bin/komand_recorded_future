@@ -56,13 +56,13 @@ def main():
         
             self.add_action(actions.LookupHash())
         
-            self.add_action(actions.DownloadIpAddressesRiskList())
+            self.add_action(actions.DownloadIPAddressesRiskList())
         
-            self.add_action(actions.ListIpAddressesRiskRules())
+            self.add_action(actions.ListIPAddressesRiskRules())
         
-            self.add_action(actions.SearchIpAddresses())
+            self.add_action(actions.SearchIPAddresses())
         
-            self.add_action(actions.LookupIpAddress())
+            self.add_action(actions.LookupIPAddress())
         
             self.add_action(actions.SearchMalware())
         

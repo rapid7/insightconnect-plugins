@@ -16,7 +16,7 @@ class Output:
     RISK_LIST_GZIP = "risk_list_gzip"
 
 
-class DownloadIpAddressesRiskListInput(insightconnect_plugin_runtime.Input):
+class DownloadIPAddressesRiskListInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {
   "type": "object",
@@ -98,7 +98,7 @@ class DownloadIpAddressesRiskListInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class DownloadIpAddressesRiskListOutput(insightconnect_plugin_runtime.Output):
+class DownloadIPAddressesRiskListOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "object",
