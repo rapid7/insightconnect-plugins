@@ -10,11 +10,12 @@ class Component:
 class Input:
     INTERVAL = "interval"
     MONITORED_FIELDS = "monitored_fields"
-    SYSTEM_ID = "system_id"
+    SYSTEM_IDS = "system_ids"
 
 
 class Output:
     CHANGED_FIELDS = "changed_fields"
+    SYSTEM_ID = "system_id"
 
 
 class IncidentChangedInput(insightconnect_plugin_runtime.Input):
@@ -36,16 +37,18 @@ class IncidentChangedInput(insightconnect_plugin_runtime.Input):
       "description": "Comma-separated list of fields to be monitored (e.g. resolved,resolved_by)",
       "order": 2
     },
-    "system_id": {
-      "type": "string",
-      "title": "System ID",
-      "description": "System ID of the Incident record to monitor",
+    "system_ids": {
+      "type": "array",
+      "title": "System IDs",
+      "description": "List of system IDs of the incident records to monitor",
+      "items": {
+        "type": "string"
+      },
       "order": 1
     }
   },
   "required": [
-    "monitored_fields",
-    "system_id"
+    "monitored_fields"
   ],
   "definitions": {}
 }
@@ -65,11 +68,18 @@ class IncidentChangedOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "Changed Fields",
       "description": "JSON object representing changed fields (map of field name to previous and current values)",
+      "order": 2
+    },
+    "system_id": {
+      "type": "string",
+      "title": "System ID",
+      "description": "System ID of changed incident",
       "order": 1
     }
   },
   "required": [
-    "changed_fields"
+    "changed_fields",
+    "system_id"
   ],
   "definitions": {}
 }

@@ -4,8 +4,8 @@ products: ["insightconnect"]
 name: servicenow
 title: ServiceNow
 description: ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes
-version: 7.4.1
-connection_version: 7
+version: 8.0.0
+connection_version: 8
 supported_versions: ["2023-10-28 Tokyo"]
 vendor: rapid7
 support: rapid7
@@ -16,17 +16,68 @@ resources:
   docs_url: https://docs.rapid7.com/insightconnect/servicenow
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/servicenow
 tags:
-- servicenow
-- incident
-- tables
+  - servicenow
+  - incident
+  - tables
 hub_tags:
   use_cases: [remediation_management, asset_inventory]
   keywords: [servicenow, incidents, cmdb, cloud_enabled]
   features: []
 sdk:
   type: slim
-  version: 5
+  version: 5.4.8
   user: nobody
+key_features:
+  - "Search, Read, Create, Delete, and Update incidents to accelerate ticketing operations"
+  - "Search, Get, Put, and Delete incident attachments to update tickets with additional context"
+  - "Search, Get, Create, and Update CI records to manage your configuration items"
+  - "Create, Get, Delete, Update vulnerabilities to accelerate ticketing operations"
+requirements:
+  - "ServiceNow username and password (for basic authentication)"
+  - "ServiceNow username, password, client ID, and client secret (for OAuth authentication) "
+  - "ServiceNow instance name"
+links:
+  - "[ServiceNow](https://www.servicenow.com/)"
+references:
+  - "[ServiceNow](https://www.servicenow.com/)"
+  - "[ServiceNow API](https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/)"
+  - "[ServiceNow User Administration](https://docs.servicenow.com/bundle/rome-platform-administration/page/administer/roles/concept/c_UserAdministration.html)"
+  - "[ServiceNow Operators](https://docs.servicenow.com/bundle/quebec-platform-user-interface/page/use/common-ui-elements/reference/r_OpAvailableFiltersQueries.html)"
+  - "[ServiceNow Plugin Setup Guide](https://docs.rapid7.com/insightconnect/servicenow)"
+version_history:
+  - "8.0.0 - `Incident Created, Vulnerability Updated`: Updated triggers to allow users to check a list of system_ids or all of them"
+  - "7.4.1 - `Incident Created`: Resolved issue related to trigger not working. Updated SDK"
+  - "7.4.0 - Add ability to use OAuth for API authentication (requires OAuth Client ID and OAuth Client Secret in connection)"
+  - "7.3.1 - `Incident Created`: Resolved issue related to object parsing"
+  - "7.3.0 - Add new actions Create Security Incident, Update Security Incident, Delete Security Incident, Get Security Incident and Search Security Incident"
+  - "7.2.0 - Added new actions: Create Vulnerability, Get Vulnerability, Update Vulnerability, Delete Vulnerability | Added new trigger: Vulnerability Updated"
+  - "7.1.2 - Search Incident, Search Incident Attachment: Fix issue where the action were failing on bigger results. Update Incident: Ensure non updated fields are not reset during update."
+  - "7.1.1 - Create Incident: Resolved issue when nothing was passed to `additional_fields` input field "
+  - "7.1.0 - Add new action Create Change Request"
+  - "7.0.0 - Cloud enabled | Changed connection input `URL` to `instance`"
+  - "6.0.1 - Fix base64 decoding in Put Incident Attachment action"
+  - "6.0.0 - Add additional file information in output for Get Attachments for an Incident"
+  - "5.2.0 - Add new action Get Attachments for an Incident | Add unit test for action Get Attachments for an Incident and Get Incident Attachment"
+  - "5.1.1 - Fix output parsing bug in Get Incident Attachment action"
+  - "5.1.0 - Add new Incident URL output for Create Incident action"
+  - "5.0.1 - Add new Additional Fields input for Create Incident and Update Incident actions"
+  - "5.0.0 - Add input fields to Create Incident and Update Incident action instead of JSON object"
+  - "4.1.2 - Fix input parameter in Incident Created trigger"
+  - "4.1.1 - Add `docs_url` to plugin spec with link to plugin setup guide"
+  - "4.1.0 - Add trigger Incident Created"
+  - "4.0.0 - New Number output to create incident action"
+  - "3.1.1 - New spec and help.md format for the Extension Library"
+  - "3.1.0 - Add action Get Incident Comments and Work Notes"
+  - "3.0.0 - Rewrite in Python | Renamed incident specific actions | New actions Create CI, Get CI, Update CI, Search CI"
+  - "2.0.5 - Update descriptions"
+  - "2.0.4 - Regenerate with latest Go SDK to solve bug with triggers"
+  - "2.0.3 - Fixing the loss of metadata in action messages"
+  - "2.0.2 - Disable Connection Caching"
+  - "2.0.1 - Pull the ConnectionCacheKey update from SDK 2.6.3"
+  - "2.0.0 - Update to new credential types"
+  - "1.0.0 - Support web server mode"
+  - "0.1.1 - Bug fix for CI tool incorrectly uploading plugins"
+  - "0.1.0 - Initial plugin"
 types:
   updated_vulnerability:
     sys_id:
@@ -328,7 +379,6 @@ types:
       description: Users interested in work notes
       type: string
       required: false
-
 connection:
   instance:
     title: ServiceNow Instance
@@ -354,7 +404,6 @@ connection:
     type: credential_secret_key
     required: false
     example: ad0bc2109c2642106907050c2ca6ef0c
-
   timeout:
     title: Timeout
     description: The interval in seconds before abandoning an attempt to access ServiceNow
@@ -1427,12 +1476,12 @@ triggers:
     title: Incident Changed
     description: Reports changes of the given fields in the given Incident
     input:
-      system_id:
-        title: System ID
-        description: System ID of the Incident record to monitor
-        type: string
-        required: true
-        example: 9de5069c5afe602b2ea0a04b66beb2c0
+      system_ids:
+        title: System IDs
+        description: List of system IDs of the incident records to monitor
+        type: "[]string"
+        required: false
+        example: '["9de5069c5afe602b2ea0a04b66beb2c0"]'
       monitored_fields:
         title: Monitored Fields
         description: Comma-separated list of fields to be monitored (e.g. resolved,resolved_by)
@@ -1447,6 +1496,12 @@ triggers:
         default: 5
         example: 5
     output:
+      system_id:
+        title: System ID
+        description: System ID of changed incident
+        type: string
+        required: true
+        example: 280b3cb71b9f1450c9768622dd4bcb32
       changed_fields:
         title: Changed Fields
         description: JSON object representing changed fields (map of field name to previous and current values)
