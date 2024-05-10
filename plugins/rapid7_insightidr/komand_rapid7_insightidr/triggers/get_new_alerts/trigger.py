@@ -8,6 +8,7 @@ import json
 from insightconnect_plugin_runtime.helper import clean
 from komand_rapid7_insightidr.util.endpoints import Alerts
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
+from komand_rapid7_insightidr.util.constants import TOTAL_SIZE
 
 
 class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
@@ -55,15 +56,15 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
             endpoint = Alerts.get_alert_serach(self.connection.url)
             response = request.resource_request(endpoint, "post", payload=data)
 
-            result = json.loads(response.get("resource", "{}"))
+            result = json.loads(response.get("resource", {}))
 
             total_items = result.get("metadata", {}).get("total_items", 0)
 
             alerts = result.get("alerts", [])
 
             # If there are more than 100 results fetch more until all results are stored.
-            if total_items > 100:
-                index = 100
+            if total_items > TOTAL_SIZE:
+                index = TOTAL_SIZE
                 while index < total_items:
                     data = clean(
                         {
@@ -83,7 +84,7 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
                     endpoint = Alerts.get_alert_serach(self.connection.url)
                     response = request.resource_request(endpoint, "post", payload=data)
 
-                    result = json.loads(response.get("resource", "{}"))
+                    result = json.loads(response.get("resource", {}))
                     alerts.extend(result.get("alerts", []))
                     index += 100
 
