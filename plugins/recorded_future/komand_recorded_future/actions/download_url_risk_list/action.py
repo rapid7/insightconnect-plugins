@@ -29,7 +29,7 @@ class DownloadUrlRiskList(insightconnect_plugin_runtime.Action):
             Output.RISK_LIST: response_dict,
             Output.RISK_LIST_GZIP: {
                 "filename": "risk_list.gzip",
-                "content": base64.b64encode(response_content).decode("utf-8"),
+                "content": response_content,
             },
         }
         return clean(data)

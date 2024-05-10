@@ -1,9 +1,16 @@
 import gzip
+import os
+import uuid
+from typing import Dict, ByteString, Tuple, Any
+
 from insightconnect_plugin_runtime.exceptions import PluginException
 from json import JSONDecodeError
 import requests
+from requests import Response
 import xmltodict
-
+from binascii import Error as B64EncodingError
+import base64
+from tempfile import NamedTemporaryFile
 
 class RecordedFutureApi:
     def __init__(self, logger, meta, token: str):
@@ -26,32 +33,14 @@ class RecordedFutureApi:
         self.logger.info(f"Plugin Version: {version}")
         return version
 
-    def _call_api(self, method: str, endpoint: str, params: dict = None, data: dict = None, json: dict = None):
-        _url = self.base_url + endpoint
-        try:
-            response = requests.request(
-                url=_url, method=method, params=params, data=data, json=json, headers=self.headers
-            )
-        except MemoryError:
-            raise PluginException(
-                cause="Memory Error: Returned dataset too large",
-                assistance="Please allow a larger amount of memory to parse this dataset, or try another list",
-                data=f"Memory Error using endpoint: {endpoint}",
-            )
-        self.response_handled(response, _url)
-        if endpoint.endswith("risklist"):
-            try:
-                decompressed_data = gzip.decompress(response.content)
-                return response.content, dict(xmltodict.parse(decompressed_data))
-            except MemoryError:
-                self.logger.info("Response is too large to read. Returning GZIP...")
-                return response.content, None
-        try:
-            return response.json()
-        except JSONDecodeError:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
-
-    def response_handled(self, response, url) -> None:
+    @staticmethod
+    def response_handler(response: Response, url: str) -> None:
+        """
+        Raise the correct PluginException based upon the response stats code
+        :param response: The response object to be reviewed
+        :param url: The endpoint URL to be logged out in result of an error
+        :return: None
+        """
         if response.status_code == 401:
             raise PluginException(preset=PluginException.Preset.API_KEY)
         if response.status_code == 403:
@@ -67,8 +56,107 @@ class RecordedFutureApi:
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
+    @staticmethod
+    def decompress_gzip_to_dict(compressed_data: ByteString) -> Dict:
+        """
+        Decompresses and parses a Gzip file in bytes containing XML, returning a JSON representation
+        :param compressed_data: The compressed data bytestring
+        :return: A JSON representation of the XML file
+        """
+        decompressed_data = gzip.decompress(compressed_data)
+        return dict(xmltodict.parse(decompressed_data))
+
+    @staticmethod
+    def decompress_and_process_gzip(filename: str) -> Tuple[Any, Any]:
+        """
+        Retrieves, decompresses and parses a Gzip file containing XML, returning the compressed file and a JSON
+        representation of its contents
+        :param filename: filename of the compressed Gzip
+        :return: The decoded GZIP contents in Base64 and the decompressed JSON representation of the XML file
+        """
+        try:
+            with gzip.open(filename, "rb") as file:
+                compressed_data = file.read()
+                try:
+                    parsed_data = RecordedFutureApi.decompress_gzip_to_dict(compressed_data)
+                except MemoryError:
+                    RecordedFutureApi.logger.info("Response is too large to read. Returning GZIP...")
+                    parsed_data = None
+                decoded_data = base64.b64encode(compressed_data).decode("utf-8")
+                return decoded_data, parsed_data
+        except (gzip.BadGzipFile, IOError) as exception:
+            raise PluginException(
+                cause="Error reading saved GZIP response file",
+                assistance="File may contain errors or be in an unexpected format",
+                data=exception,
+            )
+        except (B64EncodingError, UnicodeDecodeError):
+            raise PluginException(preset=PluginException.Preset.BASE64_DECODE)
+
+    def _call_api_stream_to_file(
+        self, method: str, endpoint: str, params: dict = None, data: dict = None, json: dict = None
+    ) -> Tuple[Any, Any]:
+        _url = self.base_url + endpoint
+        with requests.request(
+            url=_url, method=method, params=params, data=data, json=json, headers=self.headers, stream=True
+        ) as response:
+            RecordedFutureApi.response_handler(response, _url)
+            try:
+                with NamedTemporaryFile(delete=False) as file:
+                    temp_filename = file.name
+                    for chunk in response.iter_content(chunk_size=8192):
+                        compressed_chunk = gzip.compress(chunk)
+                        file.write(compressed_chunk)
+                        # flush increases performance overhead but reduces risk of memory error
+                        file.flush()
+                return RecordedFutureApi.decompress_and_process_gzip(temp_filename)
+            except IOError as exception:
+                raise PluginException(
+                    cause="Error writing response content to file",
+                    assistance="File may contain errors or the disk may be full",
+                    data=exception,
+                )
+            except MemoryError as exception:
+                raise PluginException(
+                    cause="Memory Error writing response content to file",
+                    assistance="Insufficient memory to process response content",
+                    data=exception,
+                )
+            except ValueError as exception:
+                raise PluginException(
+                    cause="Error processing response content when writing to file",
+                    assistance="Response content may contain invalid data",
+                    data=exception,
+                )
+            finally:
+                if os.path.exists(temp_filename):
+                    os.remove(temp_filename)
+
+    def _call_api(self, method: str, endpoint: str, params: dict = None, data: dict = None, json: dict = None):
+        _url = self.base_url + endpoint
+        try:
+            response = requests.request(
+                url=_url, method=method, params=params, data=data, json=json, headers=self.headers
+            )
+        except MemoryError:
+            raise PluginException(
+                cause="Memory Error: Returned dataset too large",
+                assistance="Please allow a larger amount of memory to parse this dataset, or try another list",
+                data=f"Memory Error using endpoint: {endpoint}",
+            )
+        RecordedFutureApi.response_handler(response, _url)
+        try:
+            return response.json()
+        except JSONDecodeError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+
     def make_request(self, endpoint: str, params: dict = None) -> dict:
-        return self._call_api("GET", endpoint, params)
+        # risklist endpoints may return large GZIP files as content, to reduce the risk of Memory Errors
+        # this content should be streamed directly to file
+        if endpoint.endswith("risklist"):
+            return self._call_api_stream_to_file("GET", endpoint, params)
+        else:
+            return self._call_api("GET", endpoint, params)
 
 
 class Endpoint:
