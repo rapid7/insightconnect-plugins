@@ -2,8 +2,9 @@ import json
 import logging
 import os
 import sys
-
+from unittest import mock
 import insightconnect_plugin_runtime
+from unittest.mock import MagicMock
 
 sys.path.append(os.path.abspath("../"))
 
@@ -33,6 +34,13 @@ class Util:
     @staticmethod
     def read_file_to_dict(filename):
         return json.loads(Util.read_file_to_string(os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)))
+
+    @staticmethod
+    def return_magic_mock(content) -> MagicMock:
+        mock_response = MagicMock()
+        type(mock_response).status_code = mock.PropertyMock(return_value=200)
+        mock_response.iter_content.return_value = [bytes(content)]
+        return mock_response
 
     @staticmethod
     def mock_request(*args, **kwargs):
@@ -106,29 +114,29 @@ class Util:
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/malware/Shcfg345iZX":
             return MockResponse(404, "lookup_malware_not_found")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/domain/risklist":
-            return MockResponse(200, "domain_risk_list", contains_content=True)
+            return Util.return_magic_mock(GZIP_CONTENT)
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/domain/riskrules":
             return MockResponse(200, "list_domain_risk_rules")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/domain/search":
             return MockResponse(200, "search_domains")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/hash/risklist":
-            return MockResponse(200, "hash_risk_list", contains_content=True)
+            return Util.return_magic_mock(GZIP_CONTENT)
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/hash/riskrules":
             return MockResponse(200, "list_hash_risk_rules")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/hash/search":
             return MockResponse(200, "search_hashes")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/ip/risklist":
-            return MockResponse(200, "ip_risk_list", contains_content=True)
+            return Util.return_magic_mock(GZIP_CONTENT)
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/ip/riskrules":
             return MockResponse(200, "list_ip_addresses_risk_rules")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/ip/search":
             return MockResponse(200, "search_ip_addresses")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/url/risklist":
-            return MockResponse(200, "url_risk_list", contains_content=True)
+            return Util.return_magic_mock(GZIP_CONTENT)
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/url/riskrules":
             return MockResponse(200, "list_url_risk_rules")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/vulnerability/risklist":
-            return MockResponse(200, "vulnerability_risk_list", contains_content=True)
+            return Util.return_magic_mock(GZIP_CONTENT)
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/vulnerability/riskrules":
             return MockResponse(200, "list_vulnerability_risk_rules")
         if kwargs.get("url") == "https://api.recordedfuture.com/v2/vulnerability/search":

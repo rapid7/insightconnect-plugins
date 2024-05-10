@@ -12,6 +12,7 @@ from binascii import Error as B64EncodingError
 import base64
 from tempfile import NamedTemporaryFile
 
+
 class RecordedFutureApi:
     def __init__(self, logger, meta, token: str):
         self.base_url = "https://api.recordedfuture.com/v2/"
@@ -97,40 +98,40 @@ class RecordedFutureApi:
         self, method: str, endpoint: str, params: dict = None, data: dict = None, json: dict = None
     ) -> Tuple[Any, Any]:
         _url = self.base_url + endpoint
-        with requests.request(
+        response = requests.request(
             url=_url, method=method, params=params, data=data, json=json, headers=self.headers, stream=True
-        ) as response:
-            RecordedFutureApi.response_handler(response, _url)
-            try:
-                with NamedTemporaryFile(delete=False) as file:
-                    temp_filename = file.name
-                    for chunk in response.iter_content(chunk_size=8192):
-                        compressed_chunk = gzip.compress(chunk)
-                        file.write(compressed_chunk)
-                        # flush increases performance overhead but reduces risk of memory error
-                        file.flush()
-                return RecordedFutureApi.decompress_and_process_gzip(temp_filename)
-            except IOError as exception:
-                raise PluginException(
-                    cause="Error writing response content to file",
-                    assistance="File may contain errors or the disk may be full",
-                    data=exception,
-                )
-            except MemoryError as exception:
-                raise PluginException(
-                    cause="Memory Error writing response content to file",
-                    assistance="Insufficient memory to process response content",
-                    data=exception,
-                )
-            except ValueError as exception:
-                raise PluginException(
-                    cause="Error processing response content when writing to file",
-                    assistance="Response content may contain invalid data",
-                    data=exception,
-                )
-            finally:
-                if os.path.exists(temp_filename):
-                    os.remove(temp_filename)
+        )
+        RecordedFutureApi.response_handler(response, _url)
+        try:
+            with NamedTemporaryFile(delete=False) as file:
+                temp_filename = file.name
+                for chunk in response.iter_content(chunk_size=8192):
+                    compressed_chunk = gzip.compress(chunk)
+                    file.write(compressed_chunk)
+                    # flush increases performance overhead but reduces risk of memory error
+                    file.flush()
+            return RecordedFutureApi.decompress_and_process_gzip(temp_filename)
+        except IOError as exception:
+            raise PluginException(
+                cause="Error writing response content to file",
+                assistance="File may contain errors or the disk may be full",
+                data=exception,
+            )
+        except MemoryError as exception:
+            raise PluginException(
+                cause="Memory Error writing response content to file",
+                assistance="Insufficient memory to process response content",
+                data=exception,
+            )
+        except ValueError as exception:
+            raise PluginException(
+                cause="Error processing response content when writing to file",
+                assistance="Response content may contain invalid data",
+                data=exception,
+            )
+        finally:
+            if os.path.exists(temp_filename):
+                os.remove(temp_filename)
 
     def _call_api(self, method: str, endpoint: str, params: dict = None, data: dict = None, json: dict = None):
         _url = self.base_url + endpoint
