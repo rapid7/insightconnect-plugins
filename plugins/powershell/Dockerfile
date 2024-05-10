@@ -41,7 +41,7 @@ RUN apk add --upgrade krb5-libs
 
 # Alipine Powershell dependencies
 
-RUN apk update && apk add --no-cache \
+RUN apk update && apk add --no-cache
 
 
 RUN apk -X https://dl-cdn.alpinelinux.org/alpine/edge/main add --no-cache \
