@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: cisco_umbrella_destinations
 title: Cisco Umbrella Destinations
-version: 4.1.0
+version: 5.0.0
 supported_versions: ["2023-03-29"]
 description: Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization
 vendor: rapid7
@@ -39,7 +39,7 @@ references:
   - "[Cisco Umbrella Destinations Docs](https://developer.cisco.com/docs/cloud-security/#!api-reference-policies-overview)"
   - "[Creating/Refreshing/Deleting Umbrella API Keys](https://developer.cisco.com/docs/cloud-security/#!authentication)"
 version_history:
-  - "4.1.0 - `dlCreate` - Changed some inputs to required"
+  - "5.0.0 - `dlCreate` - Changed some inputs to required"
   - "4.0.0 - Updated to use V2 of the Cisco Umbrella API api.umbrella.com/policies/v2 | Updated to use OAuth2 client credentials flow"
   - "3.1.0 - Added dlGetByName and dlFilterAll action | Improved error handling data output"
   - "3.0.0 - Updated output for 'typeOf' to reflect update to Cisco API"
