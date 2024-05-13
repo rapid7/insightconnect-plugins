@@ -57,7 +57,7 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
             endpoint = Alerts.get_alert_serach(self.connection.url)
             response = request.resource_request(endpoint, "post", payload=data)
 
-            result = parse_json_response(response)
+            result = self.parse_json_response(response)
 
             total_items = result.get("metadata", {}).get("total_items", 0)
 
@@ -85,7 +85,7 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
                     endpoint = Alerts.get_alert_serach(self.connection.url)
                     response = request.resource_request(endpoint, "post", payload=data)
 
-                    result = parse_json_response(response)
+                    result = self.parse_json_response(response)
 
                     alerts.extend(result.get("alerts", []))
                     index += 100
