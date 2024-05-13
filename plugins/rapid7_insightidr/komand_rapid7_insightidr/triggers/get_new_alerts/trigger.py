@@ -51,17 +51,7 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
                 }
             )
 
-            try:
-                self.connection.session.headers["Accept-version"] = "strong-force-preview"
-                request = ResourceHelper(self.connection.session, self.logger)
-                endpoint = Alerts.get_alert_serach(self.connection.url)
-                response = request.resource_request(endpoint, "post", payload=data)
-            except Exception as error:
-                raise PluginException(
-                    cause="Error: Failed to retrieve alert results.", assistance=f"Exception returned was {error}"
-                )
-
-            result = self.parse_json_response(response)
+            result = self.make_resource_request(data)
 
             total_items = result.get("metadata", {}).get("total_items", 0)
 
@@ -71,32 +61,8 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
             if total_items > TOTAL_SIZE:
                 index = TOTAL_SIZE
                 while index < total_items:
-                    data = clean(
-                        {
-                            "search": {
-                                "start_time": start_time.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                                "leql": params.get(Input.LEQL),
-                                "terms": params.get(Input.TERMS),
-                                "index": index,
-                            },
-                            "field_ids": params.get(Input.FIELD_IDS),
-                            "aggregates": params.get(Input.AGGREGATES),
-                        }
-                    )
-
-                    try:
-                        self.connection.session.headers["Accept-version"] = "strong-force-preview"
-                        request = ResourceHelper(self.connection.session, self.logger)
-                        endpoint = Alerts.get_alert_serach(self.connection.url)
-                        response = request.resource_request(endpoint, "post", payload=data)
-                    except Exception as error:
-                        raise PluginException(
-                            cause="Error: Failed to retrieve alert results.",
-                            assistance=f"Exception returned was {error}",
-                        )
-
-                    result = self.parse_json_response(response)
-
+                    data["search"]["index"] = index
+                    result = self.make_resource_request(data)
                     alerts.extend(result.get("alerts", []))
                     index += 100
 
@@ -114,6 +80,18 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
 
             # Back off before next iteration (sleep for 15 seconds)
             time.sleep(input_frequency)
+
+    def make_resource_request(self, data):
+        try:
+            self.connection.session.headers["Accept-version"] = "strong-force-preview"
+            request = ResourceHelper(self.connection.session, self.logger)
+            endpoint = Alerts.get_alert_serach(self.connection.url)
+            response = request.resource_request(endpoint, "post", payload=data)
+            return self.parse_json_response(response)
+        except Exception as error:
+            raise PluginException(
+                cause="Error: Failed to retrieve alert results.", assistance=f"Exception returned was {error}"
+            )
 
     def parse_json_response(self, response):
         try:
