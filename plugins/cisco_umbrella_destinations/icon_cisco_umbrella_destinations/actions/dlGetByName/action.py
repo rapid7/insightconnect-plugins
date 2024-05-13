@@ -1,7 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import DlGetByNameInput, DlGetByNameOutput, Input, Output, Component
 from insightconnect_plugin_runtime.helper import clean
-from typing import Any, Dict
 
 
 class DlGetByName(insightconnect_plugin_runtime.Action):
