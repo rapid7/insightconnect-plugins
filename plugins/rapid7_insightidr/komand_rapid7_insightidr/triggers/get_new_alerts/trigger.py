@@ -55,7 +55,12 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
             request = ResourceHelper(self.connection.session, self.logger)
 
             endpoint = Alerts.get_alert_serach(self.connection.url)
-            response = request.resource_request(endpoint, "post", payload=data)
+            try:
+                response = request.resource_request(endpoint, "post", payload=data)
+            except Exception as error:
+                raise PluginException(
+                    cause="Error: Failed to retrieve alert results.", assistance=f"Exception returned was {error}"
+                )
 
             result = self.parse_json_response(response)
 
@@ -83,7 +88,13 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
                     request = ResourceHelper(self.connection.session, self.logger)
 
                     endpoint = Alerts.get_alert_serach(self.connection.url)
-                    response = request.resource_request(endpoint, "post", payload=data)
+                    try:
+                        response = request.resource_request(endpoint, "post", payload=data)
+                    except Exception as error:
+                        raise PluginException(
+                            cause="Error: Failed to retrieve alert results.",
+                            assistance=f"Exception returned was {error}",
+                        )
 
                     result = self.parse_json_response(response)
 
