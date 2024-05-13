@@ -299,8 +299,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|data|[]dlCollection|False|List of all destination lists|[{"access": "allow", "bundleTypeId": 1, "createdAt": "2022-01-14T15:09:30+0000", "id": 12345678, "isGlobal": false, "isMspDefault": false, "markedForDeletion": false, "meta": {"destinationCount": 2}, "modifiedAt": "2022-01-14T15:09:30+0000", "name": "TESTLIST123"}]|
-  
+|data|[]dlCollection|False|List of all destination lists|[{"access": "allow", "bundleTypeId": 1, "createdAt": "2022-01-14T15:09:30+0000", "id": 12345678, "isGlobal": False, "isMspDefault": False, "markedForDeletion": False, "meta": {"destinationCount": 2}, "modifiedAt": "2022-01-14T15:09:30+0000", "name": "TESTLIST123"}]|
+
 Example output:
 
 ```
@@ -383,8 +383,8 @@ This action is used to retrieve all destination lists of organization
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|data|[]dlCollection|False|List of all destination lists|[{"access": "allow", "bundleTypeId": 1, "createdAt": "2022-01-14T15:09:30+0000", "id": 12345678, "isGlobal": false, "isMspDefault": false, "markedForDeletion": false, "meta": {"destinationCount": 2}, "modifiedAt": "2022-01-14T15:09:30+0000", "name": "TESTLIST123"}]|
-  
+|data|[]dlCollection|False|List of all destination lists|[{"access": "allow", "bundleTypeId": 1, "createdAt": "2022-01-14T15:09:30+0000", "id": 12345678, "isGlobal": False, "isMspDefault": False, "markedForDeletion": False, "meta": {"destinationCount": 2}, "modifiedAt": "2022-01-14T15:09:30+0000", "name": "TESTLIST123"}]|
+
 Example output:
 
 ```
@@ -430,8 +430,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|success|[]destinationList|True|Successful returned value|[{"access": "allow", "bundleTypeId": 1, "createdAt": "2021-12-06T16:03:49+0000", "id": 12345678, "isGlobal": false, "isMspDefault": false, "markedForDeletion": false, "meta": {"destinationCount": 4}, "modifiedAt": "2022-01-14T15:09:24+0000", "name": "ABCList", "organizationId": 1234567, "thirdpartyCategoryId": null}]|
-  
+|success|[]destinationList|True|Successful returned value|[{"access": "allow", "bundleTypeId": 1, "createdAt": "2021-12-06T16:03:49+0000", "id": 12345678, "isGlobal": False, "isMspDefault": False, "markedForDeletion": False, "meta": {"destinationCount": 4}, "modifiedAt": "2022-01-14T15:09:24+0000", "name": "ABCList", "organizationId": 1234567, "thirdpartyCategoryId": None}]|
+
 Example output:
 
 ```
