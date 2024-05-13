@@ -1,6 +1,6 @@
 # Description
 
-Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization.
+Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization
 
 # Key Features
 
@@ -20,12 +20,12 @@ Cisco Umbrella Destinations allows users to manage, block, and allow network des
 
 ## Setup
 
-The connection configuration accepts the following parameters:
+The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|Cisco Umbrella Management API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|api_secret|credential_secret_key|None|True|Cisco Umbrella Management API secret key|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_key|credential_secret_key|None|True|Cisco Umbrella Management API key|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+|api_secret|credential_secret_key|None|True|Cisco Umbrella Management API secret key|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
 
 Example input:
 
@@ -40,73 +40,19 @@ Example input:
 
 ### Actions
 
-#### Filter Through All Destination Lists
-
-This action is used to filter and Retrieve all destination lists of organization.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|access|string|None|False|Allow or block access to domain|['allow', 'block']|allow|
-|isGlobal|boolean|None|False|Boolean value indicating global state|None|True|
-|isMSPDefault|boolean|None|False|Boolean value indicating if MSP Default|None|True|
-|markedForDeletion|boolean|None|False|Boolean value indicating if marked for deletion|None|True|
-
-Example input:
-
-```
-{
-  "access": "allow",
-  "isGlobal": true,
-  "isMSPDefault": true,
-  "markedForDeletion": true
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|[]dlCollection|False|List of all destination lists|
-
-Example output:
-
-```
-{
-    "access": "allow",
-    "bundleTypeId": 1,
-    "createdAt": "2021-12-06T16:03:49+0000",
-    "id": 15609742,
-    "isGlobal": false,
-    "isMspDefault": false,
-    "markedForDeletion": false,
-    "meta": {
-      "applicationCount": 0,
-      "destinationCount": 4,
-      "domainCount": 3,
-      "ipv4Count": 1,
-      "urlCount": 0
-    },
-    "modifiedAt": "2022-01-14T15:09:24+0000",
-    "name": "ABCList",
-    "organizationId": 2372338,
-    "thirdpartyCategoryId": null
-}
-```
 
 #### Add Destination to Destination List
 
-This action is used to add a destination to the destination list.
+This action is used to add a destination to the destination list
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|comment|string|None|False|Information about domain|None|I trust this domain|
-|destination|string|None|True|Title for the destination list|None|www.example.com|
-|destinationListId|integer|None|True|Unique ID for destination list|None|12345678|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|comment|string|None|False|Information about domain|None|I trust this domain|None|None|
+|destination|string|None|True|Title for the destination list|None|www.example.com|None|None|
+|destinationListId|integer|None|True|Unique ID for destination list|None|12345678|None|None|
+  
 Example input:
 
 ```
@@ -119,42 +65,44 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|dlCollection|True|Successful returned value|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|dlCollection|True|Successful returned value|{'access': 'allow', 'bundleTypeId': 1, 'createdAt': '2021-12-06T16:03:49+0000', 'id': 12345678, 'isGlobal': False, 'isMspDefault': False, 'markedForDeletion': False, 'meta': {'destinationCount': 6}, 'modifiedAt': '2022-01-14T15:09:21+0000', 'name': 'ABCList', 'organizationId': 1234567, 'thirdpartyCategoryId': None}|
+  
 Example output:
 
 ```
 {
-  "access": "allow",
-  "bundleTypeId": 1,
-  "createdAt": "2021-12-06T16:03:49+0000",
-  "id": 12345678,
-  "isGlobal": false,
-  "isMspDefault": false,
-  "markedForDeletion": false,
-  "meta": {
-    "destinationCount": 6
-  },
-  "modifiedAt": "2022-01-14T15:09:21+0000",
-  "name": "ABCList",
-  "organizationId": 1234567,
-  "thirdpartyCategoryId": null
+  "success": {
+    "access": "allow",
+    "bundleTypeId": 1,
+    "createdAt": "2021-12-06T16:03:49+0000",
+    "id": 12345678,
+    "isGlobal": false,
+    "isMspDefault": false,
+    "markedForDeletion": false,
+    "meta": {
+      "destinationCount": 6
+    },
+    "modifiedAt": "2022-01-14T15:09:21+0000",
+    "name": "ABCList",
+    "organizationId": 1234567,
+    "thirdpartyCategoryId": null
+  }
 }
 ```
 
 #### Delete Destinations
 
-This action is used to delete a list of destinations from a destination list.
+This action is used to delete a list of destinations from a destination list
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|destinationListId|integer|None|True|Unique ID for destination list|None|12345678|
-|payload|string|None|True|List of destination IDs separated by a space|None|1241 67|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|destinationListId|integer|None|True|Unique ID for destination list|None|12345678|None|None|
+|payload|string|None|True|List of destination IDs separated by a space|None|1241 67|None|None|
+  
 Example input:
 
 ```
@@ -166,41 +114,43 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|dlCollection|True|Updated destination list|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|dlCollection|True|Updated destination list|{'id': 12345678, 'organizationId': 1234567, 'access': 'allow', 'isGlobal': False, 'name': 'AAAA', 'thirdpartyCategoryId': None, 'createdAt': '2021-12-06T16:03:49+0000', 'modifiedAt': '2022-01-27T16:48:52+0000', 'isMspDefault': False, 'markedForDeletion': False, 'bundleTypeId': 1, 'meta': {'destinationCount': 2}}|
+  
 Example output:
 
 ```
 {
-    "id": 12345678,
-    "organizationId": 1234567,
+  "success": {
     "access": "allow",
-    "isGlobal": false,
-    "name": "AAAA",
-    "thirdpartyCategoryId": null,
+    "bundleTypeId": 1,
     "createdAt": "2021-12-06T16:03:49+0000",
-    "modifiedAt": "2022-01-27T16:48:52+0000",
+    "id": 12345678,
+    "isGlobal": false,
     "isMspDefault": false,
     "markedForDeletion": false,
-    "bundleTypeId": 1,
     "meta": {
-        "destinationCount": 2
-    }
+      "destinationCount": 2
+    },
+    "modifiedAt": "2022-01-27T16:48:52+0000",
+    "name": "AAAA",
+    "organizationId": 1234567,
+    "thirdpartyCategoryId": null
+  }
 }
 ```
 
 #### Get Destinations
 
-This action is used to get a list of destinations related to a destination list.
+This action is used to get a list of destinations related to a destination list
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|destinationListId|integer|None|True|Unique ID for destination list|None|1234567|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|destinationListId|integer|None|True|Unique ID for destination list|None|1234567|None|None|
+  
 Example input:
 
 ```
@@ -211,69 +161,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|[]destinationsEntity|True|Successful returned value|
-
-Example output:
-
-```
-[
-    {
-        "id": "123",
-        "destination": "www.example.com",
-        "type": "domain",
-        "comment": null,
-        "createdAt": "2022-01-27 16:10:37"
-    },
-    {
-        "id": "1234",
-        "destination": "8.8.8.8",
-        "type": "ipv4",
-        "comment": "Sample comment",
-        "createdAt": "2021-12-16 13:18:57"
-    }
-]
-```
-
-#### Get Destination List by Name
-
-Get destination list by name
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|name|string|None|True|Title for the destination list|None|new list|
-
-Example input:
-
-```
-{
-  "name": "new list"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|[]destinationList|True|Successful returned value|
-
-Example input:
-
-```
-{
-  "name": "new list"
-}
-```
-
-##### Output
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-| success | destinationList | None  | True   | Successful returned value | None | None  |
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|[]destinationsEntity|True|Successful returned value|{'Access': 'allow', 'Created At': '2018-07-23 19:36:45', 'ID': 12345, 'Is Global': True, 'Is MSP Default': True, 'Marked For Deletion': True, 'Modified At': '2018-07-23 19:36:45', 'Name': 'new list', 'Organization ID': 12345, 'Third Party Category ID': 12345}|
+  
 Example output:
 
 ```
@@ -295,19 +186,19 @@ Example output:
 
 #### Create Destination List
 
-This action is used to create a destination list.
+This action is used to create a destination list
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|access|string|None|False|Allow or block access to domain|['allow', 'block']|allow|
-|comment|string|None|False|Information about the destination|None|Suspicious domain|
-|destination|string|None|False|Enter the destination here|None|www.example.com|
-|isGlobal|boolean|None|False|Boolean value indicating global state|None|True|
-|name|string|None|False|Label for the destination list|None|New list|
-|type|string|None|False|Can be DOMAIN, URL or IPV4|['DOMAIN', 'URL', 'IPV4']|URL|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|access|string|allow|True|Allow or block access to domain|["allow", "block"]|allow|None|None|
+|comment|string|None|False|Comment about the destination to be added to the newly created destination list|None|Suspicious domain|None|None|
+|destination|string|None|False|Destination to be added to the newly created destination list|None|www.example.com|None|None|
+|isGlobal|boolean|True|True|Boolean value indicating global state|None|True|None|None|
+|name|string|None|True|Label for the destination list|None|New list|None|None|
+|type|string|None|False|Type of the destination to be added to the newly created destination list|["DOMAIN", "URL", "IPV4"]|URL|None|None|
+  
 Example input:
 
 ```
@@ -323,14 +214,15 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|dlCollection|True|Successful returned value|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|dlCollection|True|Successful returned value|{'access': 'allow', 'bundleTypeId': 1, 'createdAt': '2022-01-14T15:09:30+0000', 'id': 12345678, 'isGlobal': False, 'isMspDefault': False, 'markedForDeletion': False, 'meta': {'destinationCount': 2}, 'modifiedAt': '2022-01-14T15:09:30+0000', 'name': 'TESTLIST123'}|
+  
 Example output:
 
 ```
 {
+  "success": {
     "access": "allow",
     "bundleTypeId": 1,
     "createdAt": "2022-01-14T15:09:30+0000",
@@ -343,19 +235,20 @@ Example output:
     },
     "modifiedAt": "2022-01-14T15:09:30+0000",
     "name": "TESTLIST123"
+  }
 }
 ```
 
 #### Delete Destination List
 
-This action is used to delete a destination list.
+This action is used to delete a destination list
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|destinationListId|integer|None|True|Unique ID for destination list|None|12345678|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|destinationListId|integer|None|True|Unique ID for destination list|None|12345678|None|None|
+  
 Example input:
 
 ```
@@ -366,111 +259,215 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|dlDelete|True|Successful returned value|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|dlDelete|True|Successful returned value|{}|
+  
 Example output:
-
-```
-[]
-```
-
-#### Get Destination List
-
-This action is used to get a destination list.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|destinationListId|integer|None|True|Unique ID for destination list|None|12345678|
-
-Example input:
 
 ```
 {
-  "destinationListId": 12345678
+  "success": {}
 }
 ```
 
-##### Output
+#### Filter Through All Destination Lists
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|destinationList|True|Successful returned value|
+This action is used to filter and Retrieve all destination lists of organization
 
-Example output:
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|access|string|None|False|Allow or block access to domain|["allow", "block"]|allow|None|None|
+|isGlobal|boolean|None|False|Boolean value indicating global state|None|True|None|None|
+|isMSPDefault|boolean|None|False|Boolean value indicating if MSP Default|None|True|None|None|
+|markedForDeletion|boolean|None|False|Boolean value indicating if marked for deletion|None|True|None|None|
+  
+Example input:
 
 ```
 {
   "access": "allow",
-  "bundleTypeId": 1,
-  "createdAt": "2021-12-06T16:03:49+0000",
-  "id": 12345678,
-  "isGlobal": false,
-  "isMspDefault": false,
-  "markedForDeletion": false,
-  "meta": {
-    "destinationCount": 4
-  },
-  "modifiedAt": "2022-01-14T15:09:24+0000",
-  "name": "ABCList",
-  "organizationId": 1234567,
-  "thirdpartyCategoryId": null
+  "isGlobal": true,
+  "isMSPDefault": true,
+  "markedForDeletion": true
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|data|[]dlCollection|False|List of all destination lists|[{"access": "allow", "bundleTypeId": 1, "createdAt": "2022-01-14T15:09:30+0000", "id": 12345678, "isGlobal": false, "isMspDefault": false, "markedForDeletion": false, "meta": {"destinationCount": 2}, "modifiedAt": "2022-01-14T15:09:30+0000", "name": "TESTLIST123"}]|
+  
+Example output:
+
+```
+{
+  "data": [
+    {
+      "access": "allow",
+      "bundleTypeId": 1,
+      "createdAt": "2022-01-14T15:09:30+0000",
+      "id": 12345678,
+      "isGlobal": false,
+      "isMspDefault": false,
+      "markedForDeletion": false,
+      "meta": {
+        "destinationCount": 2
+      },
+      "modifiedAt": "2022-01-14T15:09:30+0000",
+      "name": "TESTLIST123"
+    }
+  ]
+}
+```
+
+#### Get Destination List
+
+This action is used to get a destination list
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|destinationListId|integer|None|True|Unique ID for destination list|None|12345678|None|None|
+  
+Example input:
+
+```
+{
+  "destinationListId": 12345678
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|destinationList|True|Successful returned value|{'access': 'allow', 'bundleTypeId': 1, 'createdAt': '2021-12-06T16:03:49+0000', 'id': 12345678, 'isGlobal': False, 'isMspDefault': False, 'markedForDeletion': False, 'meta': {'destinationCount': 4}, 'modifiedAt': '2022-01-14T15:09:24+0000', 'name': 'ABCList', 'organizationId': 1234567, 'thirdpartyCategoryId': None}|
+  
+Example output:
+
+```
+{
+  "success": {
+    "access": "allow",
+    "bundleTypeId": 1,
+    "createdAt": "2021-12-06T16:03:49+0000",
+    "id": 12345678,
+    "isGlobal": false,
+    "isMspDefault": false,
+    "markedForDeletion": false,
+    "meta": {
+      "destinationCount": 4
+    },
+    "modifiedAt": "2022-01-14T15:09:24+0000",
+    "name": "ABCList",
+    "organizationId": 1234567,
+    "thirdpartyCategoryId": null
+  }
 }
 ```
 
 #### Get All Destination Lists
 
-This action is used to retrieve all destination lists of organization.
+This action is used to retrieve all destination lists of organization
 
 ##### Input
-
-_This action does not contain any inputs._
+  
+*This action does not contain any inputs.*
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|[]dlCollection|False|List of all destination lists|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|data|[]dlCollection|False|List of all destination lists|[{"access": "allow", "bundleTypeId": 1, "createdAt": "2022-01-14T15:09:30+0000", "id": 12345678, "isGlobal": false, "isMspDefault": false, "markedForDeletion": false, "meta": {"destinationCount": 2}, "modifiedAt": "2022-01-14T15:09:30+0000", "name": "TESTLIST123"}]|
+  
 Example output:
 
 ```
 {
-    "access": "allow",
-    "bundleTypeId": 1,
-    "createdAt": "2021-12-06T16:03:49+0000",
-    "id": 15609742,
-    "isGlobal": false,
-    "isMspDefault": false,
-    "markedForDeletion": false,
-    "meta": {
-      "applicationCount": 0,
-      "destinationCount": 4,
-      "domainCount": 3,
-      "ipv4Count": 1,
-      "urlCount": 0
-    },
-    "modifiedAt": "2022-01-14T15:09:24+0000",
-    "name": "ABCList",
-    "organizationId": 2372338,
-    "thirdpartyCategoryId": null
+  "data": [
+    {
+      "access": "allow",
+      "bundleTypeId": 1,
+      "createdAt": "2022-01-14T15:09:30+0000",
+      "id": 12345678,
+      "isGlobal": false,
+      "isMspDefault": false,
+      "markedForDeletion": false,
+      "meta": {
+        "destinationCount": 2
+      },
+      "modifiedAt": "2022-01-14T15:09:30+0000",
+      "name": "TESTLIST123"
+    }
+  ]
+}
+```
+
+#### Get Destination List by Name
+
+This action is used to get destination list by name
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|name|string|None|True|Title for the destination list|None|new list|None|None|
+  
+Example input:
+
+```
+{
+  "name": "new list"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|[]destinationList|True|Successful returned value|[{"access": "allow", "bundleTypeId": 1, "createdAt": "2021-12-06T16:03:49+0000", "id": 12345678, "isGlobal": false, "isMspDefault": false, "markedForDeletion": false, "meta": {"destinationCount": 4}, "modifiedAt": "2022-01-14T15:09:24+0000", "name": "ABCList", "organizationId": 1234567, "thirdpartyCategoryId": null}]|
+  
+Example output:
+
+```
+{
+  "success": [
+    {
+      "access": "allow",
+      "bundleTypeId": 1,
+      "createdAt": "2021-12-06T16:03:49+0000",
+      "id": 12345678,
+      "isGlobal": false,
+      "isMspDefault": false,
+      "markedForDeletion": false,
+      "meta": {
+        "destinationCount": 4
+      },
+      "modifiedAt": "2022-01-14T15:09:24+0000",
+      "name": "ABCList",
+      "organizationId": 1234567,
+      "thirdpartyCategoryId": null
+    }
+  ]
 }
 ```
 
 #### Rename Destination List
 
-This action is used to rename a destination list.
+This action is used to rename a destination list
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|destinationListId|integer|None|True|Unique ID for destination list|None|12345678|
-|name|string|None|True|Title for the destination list|None|New list|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|destinationListId|integer|None|True|Unique ID for destination list|None|12345678|None|None|
+|name|string|None|True|Title for the destination list|None|New list|None|None|
+  
 Example input:
 
 ```
@@ -482,100 +479,96 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|dlCollection|True|Successful returned value|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|dlCollection|True|Successful returned value|{'access': 'allow', 'bundleTypeId': 1, 'createdAt': '2021-12-06T16:03:49+0000', 'id': 12345678, 'isGlobal': False, 'isMspDefault': False, 'markedForDeletion': False, 'meta': {'destinationCount': 6}, 'modifiedAt': '2022-01-14T15:09:21+0000', 'name': 'ABCList', 'organizationId': 1234567, 'thirdpartyCategoryId': None}|
+  
 Example output:
 
 ```
 {
-  "access": "allow",
-  "bundleTypeId": 1,
-  "createdAt": "2021-12-06T16:03:49+0000",
-  "id": 12345678,
-  "isGlobal": false,
-  "isMspDefault": false,
-  "markedForDeletion": false,
-  "meta": {
-    "destinationCount": 4
-  },
-  "modifiedAt": "2022-01-14T15:09:41+0000",
-  "name": "NEW NAME",
-  "organizationId": 1234567,
-  "thirdpartyCategoryId": null
+  "success": {
+    "access": "allow",
+    "bundleTypeId": 1,
+    "createdAt": "2021-12-06T16:03:49+0000",
+    "id": 12345678,
+    "isGlobal": false,
+    "isMspDefault": false,
+    "markedForDeletion": false,
+    "meta": {
+      "destinationCount": 6
+    },
+    "modifiedAt": "2022-01-14T15:09:21+0000",
+    "name": "ABCList",
+    "organizationId": 1234567,
+    "thirdpartyCategoryId": null
+  }
 }
 ```
-
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
+### Custom Types
+  
+**meta**
 
-### Custom Output Types
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|destinationCount|integer|None|False|Total number of destinations in a destination list|None|
+|domainCount|integer|None|False|Total number of domains in a destination list|None|
+|ipv4Count|integer|None|False|Total number of IPs in a destination list|None|
+|urlCount|integer|None|False|Total number of URLs in a destination list|None|
+  
+**dlCollection**
 
-#### destinationList
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Access|string|None|False|Allow or block access to domain|allow|
+|Created At|integer|None|False|The unix UTC timestamp in milliseconds for creation of the destination list|1643385816|
+|ID|integer|None|False|Unique ID of the destination list|None|
+|Is Global|boolean|None|False|Boolean value indicating global state|True|
+|Is MSP Default|boolean|None|False|Whether or not MSP is default|False|
+|Marked for Deletion|boolean|None|False|Whether or not destination list is marked for deletion|False|
+|Metadata|meta|None|False|Secondary information|None|
+|Modified At|integer|None|False|The unix UTC timestamp in milliseconds for modification of the destination list|1643385816|
+|Name|string|None|False|Title for the destination list|New list|
+|Organization ID|integer|None|False|ID of organization|1234567|
+|Third Party Category ID|integer|None|False|ID, if any, for third parties|1|
+  
+**destinationList**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Access|string|False|Allow or block access to domain|
-|Created At|date|False|Timestamp for creation of the destination list|
-|ID|integer|False|Unique ID of the destination list.|
-|Is Global|boolean|False|Boolean value indicating global state|
-|Is MSP Default|boolean|False|Whether or not MSP is default|
-|Label|string|False|Title for the destination list|
-|Marked For Deletion|boolean|False|Whether or not destination list is marked for deletion|
-|Modified At|date|False|Timestamp for modification of the destination list|
-|Organization ID|integer|False|ID of organization|
-|Third Party Category Id|integer|False|ID, if any, for third parties|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Access|string|None|False|Allow or block access to domain|allow|
+|Created At|integer|None|False|The unix UTC timestamp in milliseconds for creation of the destination list|1643385816|
+|ID|integer|None|False|Unique ID of the destination list|None|
+|Is Global|boolean|None|False|Boolean value indicating global state|True|
+|Is MSP Default|boolean|None|False|Whether or not MSP is default|False|
+|Marked for Deletion|boolean|None|False|Whether or not destination list is marked for deletion|False|
+|Modified At|integer|None|False|The unix UTC timestamp in milliseconds for modification of the destination list|1643385816|
+|Name|string|None|False|Title for the destination list|New list|
+|Third Party Category ID|integer|None|False|ID, if any, for third parties|1|
+  
+**destinationsEntity**
 
-#### destinations
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Comment|string|None|False|Information about domain|Suspicious domain|
+|Created At|date|None|False|Timestamp for creation of entity|2018-07-23 19:36:45|
+|Destination|string|None|False|Destination can be DOMAIN, URL or IP|www.example.com|
+|ID|string|None|False|Unique ID of the destination|1234|
+|Type|string|None|False|Type can be DOMAIN, URL or IPV4|Domain|
+  
+**dlDelete**
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Comment|string|False|Information about the destination|
-|Label|string|True|Destination name can be domain, URL or IP|
-|Type|string|True|Can be DOMAIN, URL, IPV4|
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Delete|object|None|False|Delete|None|
 
-#### destinationsEntity
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Comment|string|False|Information about domain|
-|Created At|date|False|Timestamp for creation of entity|
-|Destination|string|False|Destination can be DOMAIN, URL or IP|
-|ID|string|False|Unique ID of the destination|
-|Type|string|False|Type can be DOMAIN, URL or IPV4|
-
-#### dlCollection
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Access|string|False|Allow or block access to domain|
-|Created At|date|False|Timestamp for creation of the destination list|
-|ID|integer|False|Unique ID of the destination list|
-|Is Global|boolean|False|Boolean value indicating global state|
-|Is MSP Default|boolean|False|Whether or not MSP is default|
-|Label|string|False|Title for the destination list|
-|Marked For Deletion|boolean|False|Whether or not destination list is marked for deletion|
-|Meta Data|meta|False|Secondary information|
-|Modified At|date|False|Timestamp for modification of the destination list|
-|Organization ID|integer|False|ID of organization|
-|Third Party Category ID|integer|False|ID, if any, for third parties|
-
-#### dlDelete
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Delete|object|False|Delete|
-
-#### meta
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|DestinationCount|integer|False|Total number of destinations in a destination list|
-|DomainCount|integer|False|Total number of domains in a destination list|
-|Ipv4Count|integer|False|Total number of IP's in a destination list|
-|UrlCount|integer|False|Total number of URLs in a destination list|
 
 ## Troubleshooting
 
@@ -585,6 +578,7 @@ to ensure an appropriate key and permissions is used for connecting (not a legac
 
 # Version History
 
+* 4.1.0 - `dlCreate` - Changed some inputs to required
 * 4.0.0 - Updated to use V2 of the Cisco Umbrella API api.umbrella.com/policies/v2 | Updated to use OAuth2 client credentials flow
 * 3.1.0 - Added dlGetByName and dlFilterAll action | Improved error handling data output
 * 3.0.0 - Updated output for 'typeOf' to reflect update to Cisco API
@@ -597,7 +591,6 @@ to ensure an appropriate key and permissions is used for connecting (not a legac
 
 ## References
 
-* [Cisco Umbrella](https://umbrella.cisco.com/)
 * [Cisco Umbrella API reference](https://developer.cisco.com/docs/cloud-security/#!api-reference-overview)
 * [Cisco Umbrella Destinations Docs](https://developer.cisco.com/docs/cloud-security/#!api-reference-policies-overview)
 * [Creating/Refreshing/Deleting Umbrella API Keys](https://developer.cisco.com/docs/cloud-security/#!authentication)
