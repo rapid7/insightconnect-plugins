@@ -51,9 +51,8 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
                 }
             )
 
-            self.connection.session.headers["Accept-version"] = "strong-force-preview"
-
             try:
+                self.connection.session.headers["Accept-version"] = "strong-force-preview"
                 request = ResourceHelper(self.connection.session, self.logger)
                 endpoint = Alerts.get_alert_serach(self.connection.url)
                 response = request.resource_request(endpoint, "post", payload=data)
@@ -84,9 +83,9 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
                             "aggregates": params.get(Input.AGGREGATES),
                         }
                     )
-                    self.connection.session.headers["Accept-version"] = "strong-force-preview"
 
                     try:
+                        self.connection.session.headers["Accept-version"] = "strong-force-preview"
                         request = ResourceHelper(self.connection.session, self.logger)
                         endpoint = Alerts.get_alert_serach(self.connection.url)
                         response = request.resource_request(endpoint, "post", payload=data)
