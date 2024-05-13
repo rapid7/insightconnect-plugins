@@ -1033,6 +1033,7 @@ A User ID can be obtained by passing a username to the Get User Status action.
 
 # Version History
 
+* 4.4.2 - Updated to include latest SDK v5.4.8 | Task `Monitor Logs` updated to increase max lookback cutoff to 7 days
 * 4.4.1 - `Monitor Logs` task updated to stop logging of trust monitor events response
 * 4.4.0 - `Monitor Logs` task updated to handle `custom_config` parameter for each log type separately | Apply lookback limit of 180 days due to Duo Admin API limitation
 * 4.3.2 - Monitor Logs task: Update to latest SDK | `Monitor Logs` task updated to handle `custom_config` parameter

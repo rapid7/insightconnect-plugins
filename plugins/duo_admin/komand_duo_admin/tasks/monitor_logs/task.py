@@ -13,8 +13,8 @@ from hashlib import sha1
 ADMIN_LOGS_LOG_TYPE = "Admin logs"
 AUTH_LOGS_LOG_TYPE = "Auth logs"
 TRUST_MONITOR_EVENTS_LOG_TYPE = "Trust monitor events"
-CUTOFF_HOURS = 24
-MAX_CUTOFF_HOURS = 72
+INITIAL_CUTOFF_HOURS = 24
+MAX_CUTOFF_HOURS = 168
 API_CUTOFF_HOURS = 4320
 
 
@@ -48,7 +48,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         # If no previous timestamp retrieved (first run) then query 24 hours
         if not last_log_timestamp:
             self.logger.info(f"First run for {log_type}")
-            filter_time = self._get_filter_time(custom_config, now, CUTOFF_HOURS, log_type)
+            filter_time = self._get_filter_time(custom_config, now, INITIAL_CUTOFF_HOURS, log_type)
             if log_type != "Admin logs":
                 mintime = self.convert_to_milliseconds(filter_time)
                 maxtime = self.convert_to_milliseconds(last_two_minutes)
@@ -65,8 +65,8 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 self.logger.info(f"Subsequent run for {log_type}")
 
             # If for some reason no logs or event have been picked up,
-            # Need to ensure that no more than the previous 3 days is queried - use cutoff check to ensure this
-            # Prevent resuming of task from previous timestamp if beyond 3 days resulting in large data collection
+            # Need to ensure that no more than the previous 7 days is queried - use cutoff check to ensure this
+            # Prevent resuming of task from previous timestamp if beyond 7 days resulting in large data collection
             max_cutoff_time = self._get_filter_time(custom_config, now, MAX_CUTOFF_HOURS, log_type)
             cutoff_time_secs = self.convert_to_seconds(max_cutoff_time)
             cutoff_time_millisecs = self.convert_to_milliseconds(max_cutoff_time)
@@ -393,7 +393,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
     ) -> int:
         """
         Apply custom_config params (if provided) to the task. If a lookback value exists for that task type, it should
-        take precedence (this can allow a larger filter time), otherwise use the cutoff_hours value.
+        take precedence (this can allow a larger filter time), otherwise use the initial_cutoff_hours value.
         :param custom_config: dictionary passed containing `cutoff` or `lookback` values
         :param current_time: Datetime of now
         :param default_hours: integer value representing default cutoff hours
@@ -412,7 +412,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             filter_cutoff = custom_config.get(log_types.get(log_type, ""), {}).get("hours", default_hours)
         filter_lookback = custom_config.get("lookback")
         filter_value = filter_lookback if filter_lookback else filter_cutoff
-        # If CUTOFF_HOURS (hours in int) applied find date time from now
+        # If INITIAL_CUTOFF_HOURS (hours in int) applied find date time from now
         if isinstance(filter_value, int):
             filter_value = current_time - timedelta(hours=filter_value)
         else:
