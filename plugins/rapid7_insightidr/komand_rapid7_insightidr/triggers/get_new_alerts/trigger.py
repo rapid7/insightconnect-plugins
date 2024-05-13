@@ -56,14 +56,8 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
 
             endpoint = Alerts.get_alert_serach(self.connection.url)
             response = request.resource_request(endpoint, "post", payload=data)
-            
-            try:
-                result = json.loads(response.get("resource", {}))
-            except Exception as error:
-                raise PluginException(
-                    cause="Error: Failed to process alert results."
-                    assistance=f"Exception returned was {error}"
-                )
+
+            result = parse_json_response(response)
 
             total_items = result.get("metadata", {}).get("total_items", 0)
 
@@ -91,13 +85,8 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
                     endpoint = Alerts.get_alert_serach(self.connection.url)
                     response = request.resource_request(endpoint, "post", payload=data)
 
-                    try:
-                        result = json.loads(response.get("resource", {}))
-                    except Exception as error:
-                        raise PluginException(
-                            cause="Error: Failed to process additional alert results."
-                            assistance=f"Exception returned was {error}"
-                        )
+                    result = parse_json_response(response)
+
                     alerts.extend(result.get("alerts", []))
                     index += 100
 
@@ -115,6 +104,14 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
 
             # Back off before next iteration (sleep for 15 seconds)
             time.sleep(input_frequency)
+
+    def parse_json_response(self, response):
+        try:
+            return json.loads(response.get("resource", {}))
+        except Exception as error:
+            raise PluginException(
+                cause="Error: Failed to process alert results.", assistance=f"Exception returned was {error}"
+            )
 
     def send_alert(self, alert: dict):
         self.logger.info(f"Alert found: {alert.get('rrn')}")
