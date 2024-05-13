@@ -6,6 +6,7 @@ from .schema import GetNewAlertsInput, GetNewAlertsOutput, Input, Output, Compon
 import datetime
 import json
 from insightconnect_plugin_runtime.helper import clean
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightidr.util.endpoints import Alerts
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 from komand_rapid7_insightidr.util.constants import TOTAL_SIZE
@@ -55,8 +56,14 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
 
             endpoint = Alerts.get_alert_serach(self.connection.url)
             response = request.resource_request(endpoint, "post", payload=data)
-
-            result = json.loads(response.get("resource", {}))
+            
+            try:
+                result = json.loads(response.get("resource", {}))
+            except Exception as error:
+                raise PluginException(
+                    cause="Error: Failed to process alert results."
+                    assistance=f"Exception returned was {error}"
+                )
 
             total_items = result.get("metadata", {}).get("total_items", 0)
 
@@ -84,7 +91,13 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
                     endpoint = Alerts.get_alert_serach(self.connection.url)
                     response = request.resource_request(endpoint, "post", payload=data)
 
-                    result = json.loads(response.get("resource", {}))
+                    try:
+                        result = json.loads(response.get("resource", {}))
+                    except Exception as error:
+                        raise PluginException(
+                            cause="Error: Failed to process additional alert results."
+                            assistance=f"Exception returned was {error}"
+                        )
                     alerts.extend(result.get("alerts", []))
                     index += 100
 
