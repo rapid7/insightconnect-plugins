@@ -1,8 +1,8 @@
-from komand.exceptions import ConnectionTestException, PluginException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 import xmltodict
 import requests
 import json
-from komand.connection import Connection
+from insightconnect_plugin_runtime.connection import Connection
 from xmltodict import ParsingInterrupted
 
 

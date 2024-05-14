@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ConnectionSchema
 
 # Custom imports below
 from komand_palo_alto_pan_os.util.pan_os_requests import Request
-from komand.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.request = None

@@ -1,6 +1,6 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import RetrieveLogsInput, RetrieveLogsOutput
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import requests
@@ -9,7 +9,7 @@ import time
 import json
 
 
-class RetrieveLogs(komand.Action):
+class RetrieveLogs(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="retrieve_logs",

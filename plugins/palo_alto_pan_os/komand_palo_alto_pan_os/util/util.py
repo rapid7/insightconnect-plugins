@@ -1,5 +1,5 @@
 import dicttoxml
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_palo_alto_pan_os.util.log_helper import LogHelper
 
 

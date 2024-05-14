@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AddExternalDynamicListInput, AddExternalDynamicListOutput
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 from komand_palo_alto_pan_os.util import util
 
 
-class AddExternalDynamicList(komand.Action):
+class AddExternalDynamicList(insightconnect_plugin_runtime.Action):
 
     _LIST_TYPE_KEY = {
         "Predefined IP List": "",

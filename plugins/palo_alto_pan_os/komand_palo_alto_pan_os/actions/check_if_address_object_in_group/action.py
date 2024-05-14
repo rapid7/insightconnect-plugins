@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CheckIfAddressObjectInGroupInput, CheckIfAddressObjectInGroupOutput, Input, Output, Component
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_palo_alto_pan_os.util.ip_check import IpCheck
 
 
-class CheckIfAddressObjectInGroup(komand.Action):
+class CheckIfAddressObjectInGroup(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="check_if_address_object_in_group",

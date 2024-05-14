@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import RemoveFromPolicyInput, RemoveFromPolicyOutput
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 from komand_palo_alto_pan_os.util import util
 
 
-class RemoveFromPolicy(komand.Action):
+class RemoveFromPolicy(insightconnect_plugin_runtime.Action):
     # used to convert from keys used by plugin input to keys expected by PAN-OS
     _CONVERSION_KEY = {
         "source": "source",

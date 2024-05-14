@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetAddressesFromGroupInput, GetAddressesFromGroupOutput, Input, Output, Component
 
 # Custom imports below
-from komand.exceptions import PluginException
-import validators
+from insightconnect_plugin_runtime.exceptions import PluginException
+from validators import ip_address
 
 
-class GetAddressesFromGroup(komand.Action):
+class GetAddressesFromGroup(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_addresses_from_group",
@@ -62,12 +62,12 @@ class GetAddressesFromGroup(komand.Action):
                     fqdn_addresses.append(address)
             elif address_object.get("ip-netmask"):
                 address = self.get_name(address_object.get("ip-netmask"))
-                if validators.ipv4(address) or validators.ipv4_cidr(address):
+                if ip_address.ipv4(address) or ip_address.ipv4(address):
                     if address in ipv4_addresses:
                         continue
                     else:
                         ipv4_addresses.append(address)
-                if validators.ipv6(address) or validators.ipv6_cidr(address):
+                if ip_address.ipv6(address) or ip_address.ipv6(address):
                     if address in ipv6_addresses:
                         continue
                     else:

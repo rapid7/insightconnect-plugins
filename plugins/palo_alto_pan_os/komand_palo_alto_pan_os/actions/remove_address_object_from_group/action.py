@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import (
     RemoveAddressObjectFromGroupInput,
     RemoveAddressObjectFromGroupOutput,
@@ -8,10 +8,10 @@ from .schema import (
 )
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class RemoveAddressObjectFromGroup(komand.Action):
+class RemoveAddressObjectFromGroup(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="remove_address_object_from_group",

@@ -1,12 +1,13 @@
 import sys
 import os
+import insightconnect_plugin_runtime
 from unittest import TestCase
 from komand_palo_alto_pan_os.actions.get_addresses_from_group import GetAddressesFromGroup
 from komand_palo_alto_pan_os.actions.get_addresses_from_group.schema import Input, Output
 from unit_test.util import Util
 from unittest.mock import patch
 from parameterized import parameterized
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 

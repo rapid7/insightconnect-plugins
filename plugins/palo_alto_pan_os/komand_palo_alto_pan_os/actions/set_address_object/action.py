@@ -1,15 +1,18 @@
-import komand
+import ipaddress
+
+import insightconnect_plugin_runtime
 from .schema import SetAddressObjectInput, SetAddressObjectOutput, Input, Output
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import re
 from ipaddress import ip_network, ip_address
 from IPy import IP
 import validators
+from validators import ip_address
 
 
-class SetAddressObject(komand.Action):
+class SetAddressObject(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="set_address_object",
@@ -22,9 +25,9 @@ class SetAddressObject(komand.Action):
     def determine_address_type(address):
         if validators.domain(address):
             return "fqdn"
-        if validators.ipv4(address) or validators.ipv4_cidr(address):
+        if validators.ipv4(address) or ip_address.ipv4(address):
             return "ip-netmask"
-        if validators.ipv6(address) or validators.ipv6_cidr(address):
+        if validators.ipv6(address) or ip_address.ipv6(address):
             return "ip-netmask"
         if re.search("-", address):
             split_range = address.split("-")
@@ -59,7 +62,7 @@ class SetAddressObject(komand.Action):
                 net = ip_network(
                     address_object, False
                 )  # False means ignore the masked bits, otherwise they need to be 0
-                ip = ip_address(trimmed_address)
+                ip = ipaddress.ip_address(trimmed_address)
                 if ip in net:
                     self.logger.info(f" Whitelist matched\nIP {address} was found in {address_object}")
                     return True

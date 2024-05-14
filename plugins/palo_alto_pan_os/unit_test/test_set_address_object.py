@@ -6,7 +6,7 @@ from komand_palo_alto_pan_os.actions.set_address_object.schema import Input, Out
 from unit_test.util import Util
 from unittest.mock import patch
 from parameterized import parameterized
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 

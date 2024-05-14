@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SetSecurityPolicyRuleInput, SetSecurityPolicyRuleOutput
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 
 
-class SetSecurityPolicyRule(komand.Action):
+class SetSecurityPolicyRule(insightconnect_plugin_runtime.Action):
 
     _BOOL_TO_VALUE = {True: "yes", False: "no"}
 

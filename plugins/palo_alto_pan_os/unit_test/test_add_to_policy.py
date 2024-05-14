@@ -6,7 +6,7 @@ from komand_palo_alto_pan_os.actions.add_to_policy.schema import Input, Output
 from unit_test.util import Util
 from unittest.mock import patch
 from parameterized import parameterized
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
@@ -140,11 +140,7 @@ class TestAddToPolicy(TestCase):
                 None,
                 "PAN-OS returned an error in response to the request.",
                 'This is likely because the provided element <entry name="Test Policy"><to><member>any</member></to><from><member>any</member></from><source><member>any</member></source><destination><member>any</member></destination><service><member>application-default</member><member>any</member></service><application><member>any</member></application><category><member>adult</member><member>abused-drugs</member><member>test1</member></category><hip-profiles><member>any</member></hip-profiles><source-user><member>Joe Smith</member></source-user><action>drop</action></entry> does not exist or the xpath is not correct. Please verify the element name and xpath and try again.',
-                [
-                    "ICON Block Rule -> category 'hacking1' is not an allowed keyword",
-                    "ICON Block Rule -> category 'hacking1' is not a valid reference",
-                    "ICON Block Rule -> category is invalid",
-                ],
+                ["ICON Block Rule -> category 'hacking1' is not an allowed keyword", "ICON Block Rule -> category 'hacking1' is not a valid reference", "ICON Block Rule -> category is invalid"],
             ],
         ]
     )
@@ -187,6 +183,10 @@ class TestAddToPolicy(TestCase):
                     Input.ACTION: new_action,
                 }
             )
+        print(f"CAUSE: {cause}")
+        print(f"EXCEPTION.CAUSE: {e.exception.cause}")
+        print(f"EXCEPTION.DATA: {e.exception.data}")
+        print(f"DATA: {data}")
         self.assertEqual(e.exception.cause, cause)
         self.assertEqual(e.exception.assistance, assistance)
-        self.assertEqual(e.exception.data, data)
+        self.assertEqual(str(e.exception.data), str(data))
