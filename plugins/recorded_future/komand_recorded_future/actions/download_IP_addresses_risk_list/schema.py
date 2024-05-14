@@ -13,9 +13,10 @@ class Input:
 
 class Output:
     RISK_LIST = "risk_list"
+    RISK_LIST_GZIP = "risk_list_gzip"
 
 
-class DownloadIpAddressesRiskListInput(insightconnect_plugin_runtime.Input):
+class DownloadIPAddressesRiskListInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {
   "type": "object",
@@ -97,7 +98,7 @@ class DownloadIpAddressesRiskListInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class DownloadIpAddressesRiskListOutput(insightconnect_plugin_runtime.Output):
+class DownloadIPAddressesRiskListOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "object",
@@ -108,12 +109,35 @@ class DownloadIpAddressesRiskListOutput(insightconnect_plugin_runtime.Output):
       "title": "Risk List",
       "description": "Risk list",
       "order": 1
+    },
+    "risk_list_gzip": {
+      "$ref": "#/definitions/file",
+      "title": "Risk List GZIP",
+      "description": "The Base64 encoded GZIP bytes of the Risk List",
+      "order": 2
     }
   },
-  "required": [
-    "risk_list"
-  ],
-  "definitions": {}
+  "definitions": {
+    "file": {
+      "id": "file",
+      "type": "object",
+      "title": "File",
+      "description": "File Object",
+      "properties": {
+        "filename": {
+          "type": "string",
+          "title": "Filename",
+          "description": "Name of file"
+        },
+        "content": {
+          "type": "string",
+          "format": "bytes",
+          "title": "Content",
+          "description": "File contents"
+        }
+      }
+    }
+  }
 }
     """)
 

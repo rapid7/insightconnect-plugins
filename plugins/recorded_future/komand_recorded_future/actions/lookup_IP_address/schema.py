@@ -17,7 +17,7 @@ class Output:
     RESULT_FOUND = "result_found"
 
 
-class LookupIpAddressInput(insightconnect_plugin_runtime.Input):
+class LookupIPAddressInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {
   "type": "object",
@@ -47,7 +47,7 @@ class LookupIpAddressInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class LookupIpAddressOutput(insightconnect_plugin_runtime.Output):
+class LookupIPAddressOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "object",
