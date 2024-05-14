@@ -72,7 +72,7 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
                     alert_rrn = alert["rrn"]
                     if alert_rrn not in initial_alerts:
                         self.send_alert(alert)
-                initial_alerts = set(alerts)
+                initial_alerts = set(alert["rrn"] for alert in alerts)
             # For first iteration store alert_rrn's for last 20 minutes for comparison on next fetch.
             else:
                 initial_alerts.update(alert["rrn"] for alert in alerts)
