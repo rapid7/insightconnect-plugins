@@ -37,6 +37,7 @@ class TestDownloadURLRiskList(TestCase):
         actual = self.action.run(input_parameters)
         validate(actual, self.action.output.schema)
         self.assertEqual(expected, actual)
+        self.assertFalse(os.path.exists("risk_list.gzip"))
 
     @parameterized.expand(
         [
