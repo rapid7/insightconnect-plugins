@@ -21,7 +21,7 @@ class Output:
     DATA = "data"
 
 
-class SearchIpAddressesInput(insightconnect_plugin_runtime.Input):
+class SearchIPAddressesInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {
   "type": "object",
@@ -162,7 +162,7 @@ class SearchIpAddressesInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class SearchIpAddressesOutput(insightconnect_plugin_runtime.Output):
+class SearchIPAddressesOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "object",

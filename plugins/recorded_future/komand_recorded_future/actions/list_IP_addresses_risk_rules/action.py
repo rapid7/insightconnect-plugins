@@ -1,18 +1,18 @@
 import insightconnect_plugin_runtime
-from .schema import ListIpAddressesRiskRulesInput, ListIpAddressesRiskRulesOutput, Output, Component
+from .schema import ListIPAddressesRiskRulesInput, ListIPAddressesRiskRulesOutput, Output, Component
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_recorded_future.util.api import Endpoint
 
 
-class ListIpAddressesRiskRules(insightconnect_plugin_runtime.Action):
+class ListIPAddressesRiskRules(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="list_IP_addresses_risk_rules",
             description=Component.DESCRIPTION,
-            input=ListIpAddressesRiskRulesInput(),
-            output=ListIpAddressesRiskRulesOutput(),
+            input=ListIPAddressesRiskRulesInput(),
+            output=ListIPAddressesRiskRulesOutput(),
         )
 
     def run(self, params={}):
