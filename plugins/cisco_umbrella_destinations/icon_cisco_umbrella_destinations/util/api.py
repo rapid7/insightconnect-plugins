@@ -1,8 +1,6 @@
 import json
 from logging import Logger
-from typing import Optional, Any, Dict
-import requests
-from requests.auth import HTTPBasicAuth
+from typing import Optional
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.clients.oauth import OAuth20ClientCredentialMixin
 from icon_cisco_umbrella_destinations.util.endpoints import Endpoints

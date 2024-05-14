@@ -1,6 +1,5 @@
 import insightconnect_plugin_runtime
 from .schema import DDeleteInput, DDeleteOutput, Input, Output, Component
-from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
 
 # Custom imports below
