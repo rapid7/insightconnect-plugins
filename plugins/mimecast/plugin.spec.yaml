@@ -3,17 +3,29 @@ extension: plugin
 products: [insightconnect]
 name: mimecast
 title: Mimecast
-description: Services for email security, archiving and continuity. Protect, manage
-  and archive without compromise
-version: 5.3.10
+description: "[Mimecast](https://www.mimecast.com) is a set of cloud services designed to provide next generation protection against advanced email-borne threats such as malicious URLs, malware, impersonation attacks, as well as internally generated threats, with a focus on email security. This plugin utilizes the [Mimecast API](https://www.mimecast.com/developer/documentation)"
+key_features:
+-  Email security
+- Malicious URL and attachment detection
+requirements:
+- Access API Key
+- Secret Key
+- Mimecast server
+- API Username and Password
+troubleshooting: "For the Create Managed URL action, the URL must include `http://` or `https://` e.g. `http://google.com` Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api-overview/global-base-urls/)"
+links: 
+ - "[Mimecast](http://mimecast.com)"
+references:
+ - "[Mimecast API](https://www.mimecast.com/developer/documentation)"
+version: 5.3.11
 connection_version: 5
-supported_versions: ["Mimecast API 2022-11-07"]
+supported_versions: ["Mimecast API 2024-05-09"]
 vendor: rapid7
 support: rapid7
 cloud_ready: true
 sdk:
   type: slim
-  version: 5.4.7
+  version: 5.4.9
   user: nobody
 status: []
 resources:
@@ -27,6 +39,42 @@ hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [mimecast, email, cloud_enabled]
   features: []
+version_history:
+- "5.3.11 - Task `monitor_siem_logs` to now use 24hrs as initial lookback, then 7 days for normal running | Task `monitor_siem_logs` allowing for a date to be supplied as a custom config | Task `monitor_siem_logs` to now log the request id of failed request to Mimecast | bump SDK to version 5.4.9"
+- "5.3.10 - Task `monitor_siem_logs`: To move token to next file even if there is no files found | bump SDK to 5.4.7"
+- "5.3.9 - Task `monitor_siem_logs`: Add in better error messages if the wrong region is provided"
+- "5.3.8 - Task `monitor_siem_logs` Update to use SDK 5.4.4 | Add additional logger for traceability when no logs returned | Improve error handling."
+- "5.3.7 - Task `monitor_siem_logs` adding in sanitization for names of files to be read in | Include SDK 5.4 which adds new task custom_config parameter | Bump setuptools." 
+- "5.3.6 - Task `monitor_siem_logs` revert filter logic to 24 hours."
+- "5.3.5 - Task `monitor_siem_logs` further error logging and bump filter logic to 108 hours."
+- "5.3.4 - Task `monitor_siem_logs` exception handling for JSONDecodeError."
+- "5.3.3 - Task `monitor_siem_logs` improved error logging and sanitization of filenames | SDK bump | fix schema for `find_groups` & `get_audit_events` | bump validators version."
+- "5.3.2 - Connection: added regions USB and USBCOM | Monitor SIEM Logs: added logs for request and results information, removed `token` input parameter, updated pagination handler"
+- "5.3.1 - Monitor SIEM Logs: stop parsing datetime field"
+- "5.3.0 - Handled rate limiting error messaging | Update to latest plugin SDK"
+- "5.2.2 - Handled status code for `Monitor SIEM Logs` | Request limit set to 1 minute in `Monitor SIEM Logs`"
+- "5.2.1 - Connection: add connection version"
+- "5.2.0 - New task added `Monitor SIEM Logs` | Update plugin to be cloud enabled"
+- "5.1.0 - Create Blocked Sender Policy: Changed defaults to `individual_email_address` | New actions added `Delete Blocked Sender Policy`, `Track Messages`"
+- "5.1.0 - Create Blocked Sender Policy: Changed defaults to `individual_email_address` | New actions added `Delete Blocked Sender Policy`, `Track Messages`"
+- "5.0.2 - Add Group Member: Fix issue when users were running into email validation error when they add a domain, and leave the email address blank on the input section." 
+- "5.0.1 - Add Sandbox availability in region"
+- "5.0.0 - Update SDK version | Add new action Get Audit Events | Add unit tests for all actions | Update error handling for all action | Create separate class for API communication | Add base URL of API for plugin"
+- "4.1.2 - Fix bug in connection test where it could succeed when an empty response was returned"
+- "4.1.1 - Fix bug where the connection test would sometimes pass even with invalid credentials"
+- "4.1.0 - Update Get TTP URL Logs action to use pagination"
+- "4.0.1 - Add example inputs"
+- "4.0.0 - Update Get TTP URL Logs to allow for better URL filtering"
+- "3.1.0 - New action Delete Managed URL and Delete Group Member"
+- "3.0.1 - New spec and help.md format for the Extension Library"
+- "3.0.0 - Add URL in Get TTP URL Logs action to filter output | Update connection settings to the proper authentication supported by the Mimecast API"
+- "2.5.0 - New action Decode URL"
+- "2.4.0 - New action Get TTP URL Logs"
+- "2.3.0 - New actions Add Group Member and Find Group"
+- "2.2.0 - New action Create Blocked Sender Policy"
+- "2.1.0 - New action Permit or Block Sender"
+- "2.0.0 - Add Get Managed URL Action | Update descriptions and output titles"
+- "1.0.0 - Initial plugin"
 types:
   managed_url:
     id:
@@ -1022,7 +1070,7 @@ actions:
         description: Managed URL that was created
         type: '[]managed_url'
         required: false
-        example: [{"id": "wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4","scheme": "https","domain": "www.test.net","port": -1,"path": "/","queryString": "","matchType": "explicit","action": "permit","comment": "","disableUserAwareness": false,"disableRewrite": false,"disableLogClick": false}]
+        example: '[{"id": "wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4","scheme": "https","domain": "www.test.net","port": -1,"path": "/","queryString": "","matchType": "explicit","action": "permit","comment": "","disableUserAwareness": False,"disableRewrite": False,"disableLogClick": False}]'
   delete_managed_url:
     title: Delete Managed URL
     description: Delete a managed URL
@@ -1136,7 +1184,7 @@ actions:
         description: 'Managed URLs matching '
         type: '[]managed_url'
         required: false
-        example: [{"id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLho3KMtTMfYm2C21vDPXvKC5vmEJWDAcvTHtH4L4Kw20c","scheme": "https","domain": "steam.com","port": -1,"matchType": "explicit","action": "block","comment": "ui test","disableUserAwareness": true,"disableRewrite": true,"disableLogClick": false}]
+        example: '[{"id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLho3KMtTMfYm2C21vDPXvKC5vmEJWDAcvTHtH4L4Kw20c","scheme": "https","domain": "steam.com","port": -1,"matchType": "explicit","action": "block","comment": "ui test","disableUserAwareness": True,"disableRewrite": True,"disableLogClick": False}]'
   permit_or_block_sender:
     title: Permit or Block Sender
     description: Permit or block a sender
@@ -1266,7 +1314,7 @@ actions:
         description: The policy that was created
         type: '[]sender_policy'
         required: false
-        example: [{"option": "block_sender","id": "eNo1jU0LgjAYgP_LrgpusZl2EzWwUoaKJHibb7W-pk4tif57euj-fHyQBjF0IGu0QW0c20cSFkXgKt_Z2Zz6nNN8wjqU5aqyEuOcRmP6arfgGXl_Si_X_UE0-p0pGFhl6RsyUaPuUkxLjzDiONREYtC9ekAnVA3zxc-SgHhrl9GZHqHTUj1n-G_mUwPRYmNM8fcHIHEysg","policy": {"description": "komand test","fromPart": "envelope_from","from": {"type": "email_domain","emailDomain": "example.com"},"to": {"type": "everyone"},"fromType": "email_domain","fromValue": "example.com","toType": "everyone","fromEternal": true,"toEternal": true,"fromDate": "1900-01-01T00:00:00+0000","toDate": "2100-01-01T23:59:59+0000","override": false,"bidirectional": false,"conditions": {},"createTime": "2019-01-28T17:09:01+0000","lastUpdated": "2019-01-28T17:09:01+0000"}}]
+        example: '[{"option": "block_sender","id": "eNo1jU0LgjAYgP_LrgpusZl2EzWwUoaKJHibb7W-pk4tif57euj-fHyQBjF0IGu0QW0c20cSFkXgKt_Z2Zz6nNN8wjqU5aqyEuOcRmP6arfgGXl_Si_X_UE0-p0pGFhl6RsyUaPuUkxLjzDiONREYtC9ekAnVA3zxc-SgHhrl9GZHqHTUj1n-G_mUwPRYmNM8fcHIHEysg","policy": {"description": "komand test","fromPart": "envelope_from","from": {"type": "email_domain","emailDomain": "example.com"},"to": {"type": "everyone"},"fromType": "email_domain","fromValue": "example.com","toType": "everyone","fromEternal": True,"toEternal": True,"fromDate": "1900-01-01T00:00:00+0000","toDate": "2100-01-01T23:59:59+0000","override": False,"bidirectional": False,"conditions": {},"createTime": "2019-01-28T17:09:01+0000","lastUpdated": "2019-01-28T17:09:01+0000"}}]'
   add_group_member:
     title: Add Group Member
     description: Add an email address or domain to a group
@@ -1442,7 +1490,7 @@ actions:
         description: Click Logs
         type: "[]click_logs"
         required: false
-        example: [{"userEmailAddress": "user@example.com","url": "https://example.com","ttpDefinition": "Default URL Protection Definition","action": "warn","adminOverride": "N/A","userOverride": null,"scanResult": "malicious","category": "Compromised","userAwarenessAction": "N/A","date": "2019-04-23T19:50:28+0000","route": "inbound"}]     
+        example: '[{"userEmailAddress": "user@example.com","url": "https://example.com","ttpDefinition": "Default URL Protection Definition","action": "warn","adminOverride": "N/A","userOverride": None,"scanResult": "malicious","category": "Compromised","userAwarenessAction": "N/A","date": "2019-04-23T19:50:28+0000","route": "inbound"}]'
   decode_url:
     title: Decode URL
     description: Decode a Mimecast encoded URL
@@ -1482,7 +1530,7 @@ actions:
         description: Event logs data
         type: "[]audit_events_response"
         required: true
-        example: [{"id": "wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U","scheme": "https","domain": "www.testset3444412312.net","port": -1,"path": "/","queryString": "","matchType": "explicit","action": "block","comment": "","disableUserAwareness": false,"disableRewrite": false,"disableLogClick": false}]      
+        example: '[{"id": "wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U","scheme": "https","domain": "www.testset3444412312.net","port": -1,"path": "/","queryString": "","matchType": "explicit","action": "block","comment": "","disableUserAwareness": False,"disableRewrite": False,"disableLogClick": False}]'      
       pagination:
         title: Pagination
         description: Pagination for request

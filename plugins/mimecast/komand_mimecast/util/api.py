@@ -97,9 +97,10 @@ class MimecastAPI:
         data = {"compress": True, "file_format": "JSON", "type": "MTA", "token": next_page_token}
 
         payload = {DATA_FIELD: ([convert_dict_to_camel_case(data)] if data is not None else [])}
-        response = requests.request(
-            method="POST", url=f"{self.url}{uri}", headers=self._prepare_header(uri), data=str(payload)
-        )
+
+        prepared_headers = self._prepare_header(uri)
+
+        response = requests.request(method="POST", url=f"{self.url}{uri}", headers=prepared_headers, data=str(payload))
         self._check_rate_limiting(response)
 
         if "attachment" in response.headers.get("Content-Disposition", "") or self._is_last_token(response):
@@ -115,6 +116,9 @@ class MimecastAPI:
                 self._handle_siem_logs_error_response(response, status_code)
         except json.JSONDecodeError as json_error:
             error_info = f'response content="{response.content}", response headers="{response.headers}"'
+            self.logger.info(
+                f"A error was raised when making an api call to Mimecast with request ID '{prepared_headers.get('x-mc-req-id')}'"
+            )
             raise ApiClientException(
                 cause=json_error,
                 data=error_info,
@@ -123,7 +127,9 @@ class MimecastAPI:
             )
         except PluginException as error:
             status_code = error.status_code if isinstance(error, ApiClientException) else status_code
-
+            self.logger.info(
+                f"A error was raised when making an api call to Mimecast with request ID '{prepared_headers.get('x-mc-req-id')}'"
+            )
             # From Mimecast API we can see that some errors are coming back as a 200
             # if the status code here is a 200 then these errors will not be correctly shown to the UI
             if status_code in [200, 201]:
@@ -137,6 +143,9 @@ class MimecastAPI:
                 status_code=status_code,
             )
 
+        self.logger.info(
+            f"A error was raised when making an api call to Mimecast with request ID '{prepared_headers.get('x-mc-req-id')}'"
+        )
         raise ApiClientException(
             preset=PluginException.Preset.UNKNOWN, data=response.content, status_code=response.status_code
         )
