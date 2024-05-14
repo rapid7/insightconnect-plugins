@@ -1,19 +1,19 @@
 {
-	"spec": "aa49354454819801dc3940d0b9e2973f",
-	"manifest": "3d7bfd49c44dbb8d5db2f0175a32e87c",
-	"setup": "9e31cdc8d4c2f602a0c4f8a655d54b1a",
+	"spec": "a0eef5eca0783861cb40fdd03f416ef2",
+	"manifest": "27c5728e6c5d375b20de8d3eea32a5c0",
+	"setup": "0d0203b361f827da7b0d42e650b4e8e2",
 	"schemas": [
 		{
 			"identifier": "execute_script/schema.py",
-			"hash": "542ec5eaccf3cdff9ec5ac3ab3a00a47"
+			"hash": "c27b01e8c7060ebd41e22c3979631958"
 		},
 		{
 			"identifier": "powershell_string/schema.py",
-			"hash": "a7202fe3af6de13ed3d07224eb8d13be"
+			"hash": "81e80516af3112fab1a00a8f6b056b4a"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "e07a2185f24153dd7ee3e3a1d09f5f4b"
+			"hash": "3227c391e5ca03c05a8943ef04d03815"
 		}
 	]
 }
