@@ -24,23 +24,23 @@ Please note that to use certain actions it's necessary to use scopes that have p
 - Create Change Request (table `sn_chg_rest` with create permissions)
 
 # Supported Product Versions
-  
+
 * 2023-10-28 Tokyo
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|client_id|string|None|False|Client ID for an application within your application registry|None|ad0bc2109c2642106907050c2ca6ef0c|
-|client_login|credential_username_password|None|True|The ServiceNow username and password for basic authentication API interaction|None|{"username":"user1", "password":"mypassword"}|
-|client_secret|credential_secret_key|None|False|Client secret for an application within your application registry|None|ad0bc2109c2642106907050c2ca6ef0c|
-|instance|string|None|True|The instance of ServiceNow from the URL, e.g. https://{instance}.service-now.com|None|instance|
-|timeout|integer|30|False|The interval in seconds before abandoning an attempt to access ServiceNow|None|30|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|client_id|string|None|False|Client ID for an application within your application registry|None|ad0bc2109c2642106907050c2ca6ef0c|None|None|
+|client_login|credential_username_password|None|True|The ServiceNow username and password for basic authentication API interaction|None|{"username":"user1", "password":"mypassword"}|None|None|
+|client_secret|credential_secret_key|None|False|Client secret for an application within your application registry|None|ad0bc2109c2642106907050c2ca6ef0c|None|None|
+|instance|string|None|True|The instance of ServiceNow from the URL, e.g. https://{instance}.service-now.com|None|instance|None|None|
+|timeout|integer|30|False|The interval in seconds before abandoning an attempt to access ServiceNow|None|30|None|None|
+
 Example input:
 
 ```
@@ -62,14 +62,14 @@ Example input:
 
 
 #### Create Change Request
-  
-This action is used to creates a change request record based on the default change request record.
+
+This action is used to creates a change request record based on the default change request record
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|additional_fields|object|None|False|JSON object containing name-value pairs for the field(s) to update in the associated change request|None|{"short_description": "My example short description"}|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|additional_fields|object|None|False|JSON object containing name-value pairs for the field(s) to update in the associated change request|None|{"short_description": "My example short description"}|None|None|
   
 Example input:
 
@@ -96,15 +96,15 @@ Example output:
 ```
 
 #### Create CI
-  
-This action is used to create a new ServiceNow CI record.
+
+This action is used to create a new ServiceNow CI record
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|create_data|object|None|True|JSON object containing the fields and values to create a new CI|None|{"Description": "Bug report", "ID": "58", "date": "2021-08-20 18:12:00"}|
-|table|string|None|True|The ServiceNow table where the new CI record will be inserted|None|catalog_category_request|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|create_data|object|None|True|JSON object containing the fields and values to create a new CI|None|{"Description": "Bug report", "ID": "58", "date": "2021-08-20 18:12:00"}|None|None|
+|table|string|None|True|The ServiceNow table where the new CI record will be inserted|None|catalog_category_request|None|None|
   
 Example input:
 
@@ -134,28 +134,28 @@ Example output:
 ```
 
 #### Create Incident
-  
-This action is used to create a new ServiceNow Incident record.
+
+This action is used to create a new ServiceNow Incident record
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|additional_fields|object|None|False|JSON object containing the additional fields and values to create incident|None|{"description": "incident description"}|
-|assigned_to|string|None|False|User ID of person assigned to the incident|None|user|
-|assignment_group|string|None|False|Assignment group name of the incident|None|Team Development Code Reviewers|
-|business_service|string|None|False|Name of business service|None|All|
-|caller|string|None|False|User ID of incident caller|None|user|
-|category|string|None|False|Category code of incident|None|software|
-|configuration_item|string|None|False|Configuration item code of the incident|None|int-jenkins|
-|contact_type|string|None|False|Contact type of the incident|None|email|
-|description|string|None|False|Full description of incident|None|Full details about new employee hire|
-|impact|string|None|False|Impact of the incident|None|Medium|
-|priority|string|None|False|Priority of the incident|None|Planning|
-|short_description|string|None|False|Short description of incident|None|New employee hire|
-|state|string|None|False|State name of the incident|None|In Progress|
-|subcategory|string|None|False|Subcategory code of incident (available values depends on the `Category` field)|None|email|
-|urgency|string|None|False|Urgency of the incident|None|Medium|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|additional_fields|object|None|False|JSON object containing the additional fields and values to create incident|None|{"description": "incident description"}|None|None|
+|assigned_to|string|None|False|User ID of person assigned to the incident|None|user|None|None|
+|assignment_group|string|None|False|Assignment group name of the incident|None|Team Development Code Reviewers|None|None|
+|business_service|string|None|False|Name of business service|None|All|None|None|
+|caller|string|None|False|User ID of incident caller|None|user|None|None|
+|category|string|None|False|Category code of incident|None|software|None|None|
+|configuration_item|string|None|False|Configuration item code of the incident|None|int-jenkins|None|None|
+|contact_type|string|None|False|Contact type of the incident|None|email|None|None|
+|description|string|None|False|Full description of incident|None|Full details about new employee hire|None|None|
+|impact|string|None|False|Impact of the incident|None|Medium|None|None|
+|priority|string|None|False|Priority of the incident|None|Planning|None|None|
+|short_description|string|None|False|Short description of incident|None|New employee hire|None|None|
+|state|string|None|False|State name of the incident|None|In Progress|None|None|
+|subcategory|string|None|False|Subcategory code of incident (available values depends on the `Category` field)|None|email|None|None|
+|urgency|string|None|False|Urgency of the incident|None|Medium|None|None|
   
 Example input:
 
@@ -200,28 +200,28 @@ Example output:
 ```
 
 #### Create Security Incident
-  
-This action is used to create a new security incident.
+
+This action is used to create a new security incident
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|additional_fields|object|None|False|JSON object containing the additional fields and values to create security incident|None|{"risk_score": 40, "risk_score_override": true, "parent_security_incident": "SIR0010010"}|
-|affected_user|string|None|False|The user ID, email or system ID of the user related to this security incident|None|jsmith|
-|assigned_to|string|None|False|The name, user ID, email or system id of the person primarily responsible for working this task|None|test_user|
-|assignment_group|string|None|False|The name or system id of the assignment group|None|Example Group|
-|caller|string|None|False|The user ID, email or system ID of the person requesting the work to be done|None|user@example.com|
-|category|string|None|False|The code of the security incident category|None|malware|
-|cmdb_ci|string|None|False|The name or system ID of the configuration item|None|Example CI|
-|contact_type|string|None|False|The code of the security incident source|None|email|
-|description|string|None|False|Description of the created security incident|None|Full description|
-|location|string|None|False|The name or system ID of the location|None|Example location|
-|priority|integer|None|False|The code of the priority in which an Incident needs to be resolved, based on impact and urgency|None|3|
-|short_description|string|None|True|Short description of the created security incident|None|Example description|
-|state|integer|None|False|The code of the security incident state|None|18|
-|subcategory|string|None|False|The code of the security incident subcategory (available values depends on the `Category` field)|None|ransomware|
-|substate|integer|None|False|The code of the security incident substate|None|2|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|additional_fields|object|None|False|JSON object containing the additional fields and values to create security incident|None|{"risk_score": 40, "risk_score_override": true, "parent_security_incident": "SIR0010010"}|None|None|
+|affected_user|string|None|False|The user ID, email or system ID of the user related to this security incident|None|jsmith|None|None|
+|assigned_to|string|None|False|The name, user ID, email or system id of the person primarily responsible for working this task|None|test_user|None|None|
+|assignment_group|string|None|False|The name or system id of the assignment group|None|Example Group|None|None|
+|caller|string|None|False|The user ID, email or system ID of the person requesting the work to be done|None|user@example.com|None|None|
+|category|string|None|False|The code of the security incident category|None|malware|None|None|
+|cmdb_ci|string|None|False|The name or system ID of the configuration item|None|Example CI|None|None|
+|contact_type|string|None|False|The code of the security incident source|None|email|None|None|
+|description|string|None|False|Description of the created security incident|None|Full description|None|None|
+|location|string|None|False|The name or system ID of the location|None|Example location|None|None|
+|priority|integer|None|False|The code of the priority in which an Incident needs to be resolved, based on impact and urgency|None|3|None|None|
+|short_description|string|None|True|Short description of the created security incident|None|Example description|None|None|
+|state|integer|None|False|The code of the security incident state|None|18|None|None|
+|subcategory|string|None|False|The code of the security incident subcategory (available values depends on the `Category` field)|None|ransomware|None|None|
+|substate|integer|None|False|The code of the security incident substate|None|2|None|None|
   
 Example input:
 
@@ -266,24 +266,24 @@ Example output:
 ```
 
 #### Create Vulnerability
-  
-This action is used to creates a new vulnerability item record.
+
+This action is used to creates a new vulnerability item record
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|additional_fields|object|None|False|JSON object containing the additional fields and values to create the vulnerability|None|{"description": "Example description"}|
-|assigned_to|string|None|False|User ID of person assigned to the vulnerability|None|ExampleUserID|
-|dns|string|None|False|The name of source DNS where the vulnerability was found|None|dns.example.com|
-|first_found|date|None|False|The time that represents the vulnerability was first found, in ISO format|None|2023-04-28 15:48:07|
-|ip_address|string|None|False|The IP address of the source where the vulnerability was found|None|192.168.0.1|
-|last_found|date|None|False|The time that represents when the vulnerability was last found, in ISO format|None|2023-04-30 12:14:10|
-|risk_score|integer|None|False|The risk score of the vulnerability, from 0 to 100|None|30|
-|short_description|string|None|False|Short description of the vulnerability|None|Example short description|
-|source|string|None|False|The vulnerability source|None|ExampleSource|
-|state|string|None|False|The state of the vulnerability|['Open', 'Under Investigation']|Open|
-|vulnerability|string|None|False|The reference of the found vulnerability (third-party vulnerability entry)|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|additional_fields|object|None|False|JSON object containing the additional fields and values to create the vulnerability|None|{"description": "Example description"}|None|None|
+|assigned_to|string|None|False|User ID of person assigned to the vulnerability|None|ExampleUserID|None|None|
+|dns|string|None|False|The name of source DNS where the vulnerability was found|None|dns.example.com|None|None|
+|first_found|date|None|False|The time that represents the vulnerability was first found, in ISO format|None|2023-04-28 15:48:07|None|None|
+|ip_address|string|None|False|The IP address of the source where the vulnerability was found|None|192.168.0.1|None|None|
+|last_found|date|None|False|The time that represents when the vulnerability was last found, in ISO format|None|2023-04-30 12:14:10|None|None|
+|risk_score|integer|None|False|The risk score of the vulnerability, from 0 to 100|None|30|None|None|
+|short_description|string|None|False|Short description of the vulnerability|None|Example short description|None|None|
+|source|string|None|False|The vulnerability source|None|ExampleSource|None|None|
+|state|string|None|False|The state of the vulnerability|["Open", "Under Investigation"]|Open|None|None|
+|vulnerability|string|None|False|The reference of the found vulnerability (third-party vulnerability entry)|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
   
 Example input:
 
@@ -324,14 +324,14 @@ Example output:
 ```
 
 #### Delete Incident
-  
-This action is used to remove the given ServiceNow Incident from the instance.
+
+This action is used to remove the given ServiceNow Incident from the instance
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|system_id|string|None|True|System ID of the Incident record to delete|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|system_id|string|None|True|System ID of the Incident record to delete|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
   
 Example input:
 
@@ -356,14 +356,14 @@ Example output:
 ```
 
 #### Delete Incident Attachment
-  
-This action is used to remove the given attachment from the ServiceNow instance.
+
+This action is used to remove the given attachment from the ServiceNow instance
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|attachment_id|string|None|True|System ID of the attachment to delete|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|attachment_id|string|None|True|System ID of the attachment to delete|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
   
 Example input:
 
@@ -388,14 +388,14 @@ Example output:
 ```
 
 #### Delete Security Incident
-  
-This action is used to deletes a security incident by sys_id.
+
+This action is used to deletes a security incident by sys_id
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|sys_id|string|None|True|The unique system ID of the security incident to delete|None|7dbc4d558bbe4c6cb635b73b5f4a2e27|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|sys_id|string|None|True|The unique system ID of the security incident to delete|None|7dbc4d558bbe4c6cb635b73b5f4a2e27|None|None|
   
 Example input:
 
@@ -420,14 +420,14 @@ Example output:
 ```
 
 #### Delete Vulnerability
-  
-This action is used to delete the vulnerability by ID.
+
+This action is used to delete the vulnerability by ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|system_id|string|None|True|System ID of the vulnerability to be retrieved|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|system_id|string|None|True|System ID of the vulnerability to be retrieved|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
   
 Example input:
 
@@ -452,14 +452,14 @@ Example output:
 ```
 
 #### Get Attachments for an Incident
-  
-This action is used to search for attachments for a given incident ID.
+
+This action is used to search for attachments for a given incident ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|incident_id|string|None|False|ID of the incident|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|incident_id|string|None|False|ID of the incident|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
   
 Example input:
 
@@ -490,15 +490,15 @@ Example output:
 ```
 
 #### Get CI
-  
-This action is used to retrieve a CI record from ServiceNow.
+
+This action is used to retrieve a CI record from ServiceNow
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|system_id|string|None|True|The system ID of the record to retrieve|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|table|string|None|True|The ServiceNow table to retrieve the CI from|None|catalog_category_request|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|system_id|string|None|True|The system ID of the record to retrieve|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+|table|string|None|True|The ServiceNow table to retrieve the CI from|None|catalog_category_request|None|None|
   
 Example input:
 
@@ -569,14 +569,14 @@ Example output:
 ```
 
 #### Get Incident Attachment
-  
-This action is used to download the Base64-encoded contents of the given attachment.
+
+This action is used to download the Base64-encoded contents of the given attachment
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|attachment_id|string|None|True|System ID of the attachment to copy|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|attachment_id|string|None|True|System ID of the attachment to copy|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
   
 Example input:
 
@@ -601,15 +601,15 @@ Example output:
 ```
 
 #### Get Incident Comments and Work Notes
-  
-This action is used to get comments and work notes for an incident.
+
+This action is used to get comments and work notes for an incident
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|system_id|string|None|True|System ID of Incident record for which comments and work notes will be retrieved|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|type|string|None|True|Type of output to be retrieved|['all', 'comments', 'work notes']|all|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|system_id|string|None|True|System ID of Incident record for which comments and work notes will be retrieved|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+|type|string|None|True|Type of output to be retrieved|["all", "comments", "work notes"]|all|None|None|
   
 Example input:
 
@@ -666,14 +666,14 @@ Example output:
 ```
 
 #### Get Security Incident
-  
-This action is used to retrieves a security incident by sys_id.
+
+This action is used to retrieves a security incident by sys_id
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|sys_id|string|None|True|The unique system ID of the security incident|None|7dbc4d558bbe4c6cb635b73b5f4a2e27|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|sys_id|string|None|True|The unique system ID of the security incident|None|7dbc4d558bbe4c6cb635b73b5f4a2e27|None|None|
   
 Example input:
 
@@ -769,15 +769,15 @@ Example output:
 ```
 
 #### Get Vulnerability
-  
-This action is used to retrieve the vulnerability by ID.
+
+This action is used to retrieve the vulnerability by ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|filtering_fields|string|None|True|Comma-separated list of fields desired in output object (e.g. opened_by,number)|None|opened_by,number|
-|system_id|string|None|True|System ID of the vulnerability to be retrieved|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|filtering_fields|string|None|True|Comma-separated list of fields desired in output object (e.g. opened_by,number)|None|opened_by,number|None|None|
+|system_id|string|None|True|System ID of the vulnerability to be retrieved|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
   
 Example input:
 
@@ -810,18 +810,18 @@ Example output:
 ```
 
 #### Put Incident Attachment
-  
-This action is used to associate a file with a ServiceNow Incident.
+
+This action is used to associate a file with a ServiceNow Incident
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|attachment_name|string|None|True|Name of the attachment in the ServiceNow instance|None|Example name|
-|base64_content|bytes|None|True|Content of the attachment, encoded into Base64|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
-|mime_type|string|None|True|MIME type (a.k.a. content type) of the file to be attached|['text/plain (.txt)', 'text/html (.html)', 'application/rtf (.rtf)', 'application/pdf (.pdf)', 'application/msword (.doc)', 'application/vnd.ms-powerpoint (.ppt)', 'image/bmp (.bmp)', 'image/gif (.gif)', 'image/jpeg (.jpg)', 'image/png (.png)', 'image/tiff (.tiff)', 'OTHER']|text/plain (.txt)|
-|other_mime_type|string|None|False|User-specified MIME type not in the enumerated list|None|.avi|
-|system_id|string|None|True|System ID of the Incident record to which the file will be attached|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|attachment_name|string|None|True|Name of the attachment in the ServiceNow instance|None|Example name|None|None|
+|base64_content|bytes|None|True|Content of the attachment, encoded into Base64|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|None|None|
+|mime_type|string|None|True|MIME type (a.k.a. content type) of the file to be attached|["text/plain (.txt)", "text/html (.html)", "application/rtf (.rtf)", "application/pdf (.pdf)", "application/msword (.doc)", "application/vnd.ms-powerpoint (.ppt)", "image/bmp (.bmp)", "image/gif (.gif)", "image/jpeg (.jpg)", "image/png (.png)", "image/tiff (.tiff)", "OTHER"]|text/plain (.txt)|None|None|
+|other_mime_type|string|None|False|User-specified MIME type not in the enumerated list|None|.avi|None|None|
+|system_id|string|None|True|System ID of the Incident record to which the file will be attached|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
   
 Example input:
 
@@ -850,15 +850,15 @@ Example output:
 ```
 
 #### Read Incident
-  
-This action is used to populate a JSON object with the specified fields of the given Incident.
+
+This action is used to populate a JSON object with the specified fields of the given Incident
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|filtering_fields|string|None|True|Comma-separated list of fields desired in output object (e.g. opened_by,number)|None|opened_by,number|
-|system_id|string|None|True|System ID of the Incident record from which to read|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|filtering_fields|string|None|True|Comma-separated list of fields desired in output object (e.g. opened_by,number)|None|opened_by,number|None|None|
+|system_id|string|None|True|System ID of the Incident record from which to read|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
   
 Example input:
 
@@ -887,15 +887,15 @@ Example output:
 ```
 
 #### Search CI
-  
-This action is used to retrieve CI record(s) from ServiceNow based on the provided query.
+
+This action is used to retrieve CI record(s) from ServiceNow based on the provided query
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|query|string|None|True|Non-encoded query string for retrieving ServiceNow CI record(s) (e.g. number=INC0000055^ORshort_description=New bug)|None|number=INC0000055^ORshort_description=New bug|
-|table|string|None|True|The ServiceNow table to execute the query against|None|catalog_category_request|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|query|string|None|True|Non-encoded query string for retrieving ServiceNow CI record(s) (e.g. number=INC0000055^ORshort_description=New bug)|None|number=INC0000055^ORshort_description=New bug|None|None|
+|table|string|None|True|The ServiceNow table to execute the query against|None|catalog_category_request|None|None|
   
 Example input:
 
@@ -972,14 +972,14 @@ Example output:
 ```
 
 #### Search Incident
-  
-This action is used to search for Incidents satisfying the given query.
+
+This action is used to search for Incidents satisfying the given query
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|query|string|None|True|Non-encoded query string (e.g. number=INC0000055^ORshort_description=New bug)|None|number=INC0000055^ORshort_description=Newbug|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|query|string|None|True|Non-encoded query string (e.g. number=INC0000055^ORshort_description=New bug)|None|number=INC0000055^ORshort_description=Newbug|None|None|
   
 Example input:
 
@@ -1011,14 +1011,14 @@ Example output:
 ```
 
 #### Search Incident Attachment
-  
-This action is used to search for attachment files with the given name.
+
+This action is used to search for attachment files with the given name
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|name|string|None|True|Name of the attachment, i.e. the base file name used to create it|None|Example name|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|name|string|None|True|Name of the attachment, i.e. the base file name used to create it|None|Example name|None|None|
   
 Example input:
 
@@ -1047,17 +1047,17 @@ Example output:
 ```
 
 #### Search Security Incident
-  
-This action is used to returns security incidents that match the search criteria.
+
+This action is used to returns security incidents that match the search criteria
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|fields|string|None|False|A comma-separated list of fields to return in the response|None|number,sys_id|
-|limit|integer|None|False|Maximum number of records to return|None|10|
-|offset|integer|None|False|Starting record index for which to begin retrieving records|None|5|
-|query|string|None|False|An encoded query string used to filter the results|None|number=SIR0000001|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|fields|string|None|False|A comma-separated list of fields to return in the response|None|number,sys_id|None|None|
+|limit|integer|None|False|Maximum number of records to return|None|10|None|None|
+|offset|integer|None|False|Starting record index for which to begin retrieving records|None|5|None|None|
+|query|string|None|False|An encoded query string used to filter the results|None|number=SIR0000001|None|None|
   
 Example input:
 
@@ -1230,16 +1230,16 @@ Example output:
 ```
 
 #### Update CI
-  
-This action is used to update an existing ServiceNow CI record.
+
+This action is used to update an existing ServiceNow CI record
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|system_id|string|None|True|System ID of the CI record to update|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|table|string|None|True|The ServiceNow table where the CI record will be updated|None|catalog_category_request|
-|update_data|object|None|True|JSON object containing the fields and values to perform a CI update|None|{"Description": "Bug report", "ID": "58"}|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|system_id|string|None|True|System ID of the CI record to update|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+|table|string|None|True|The ServiceNow table where the CI record will be updated|None|catalog_category_request|None|None|
+|update_data|object|None|True|JSON object containing the fields and values to perform a CI update|None|{"Description": "Bug report", "ID": "58"}|None|None|
   
 Example input:
 
@@ -1269,29 +1269,29 @@ Example output:
 ```
 
 #### Update Incident
-  
-This action is used to update a ServiceNow Incident with the given data.
+
+This action is used to update a ServiceNow Incident with the given data
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|additional_fields|object|None|False|JSON object containing the additional fields and values to update incident|None|{"description": "incident description"}|
-|assigned_to|string|None|False|User ID of person assigned to the incident|None|user|
-|assignment_group|string|None|False|Assignment group name of the incident|None|Recommendation Admin|
-|business_service|string|None|False|Name of business service|None|All|
-|caller|string|None|False|User ID of incident caller|None|user|
-|category|string|None|False|Category code of incident|None|hardware|
-|configuration_item|string|None|False|Configuration item code of the incident|None|int-jenkins|
-|contact_type|string|None|False|Contact type of the incident|None|phone|
-|description|string|None|False|Full description of incident|None|Full details about new employee hire update|
-|impact|string|None|False|Impact of the incident|None|Medium|
-|priority|string|None|False|Priority of the incident|None|Planning|
-|short_description|string|None|False|Short description of incident|None|New employee hire update|
-|state|string|None|False|State name of the incident|None|On Hold|
-|subcategory|string|None|False|Subcategory code of incident (available values depends on the `Category` field)|None|monitor|
-|system_id|string|None|True|System ID of the Incident record to update|None|ee7e6b24dbf4e450e9faa5730596192b|
-|urgency|string|None|False|Urgency of the incident|None|Medium|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|additional_fields|object|None|False|JSON object containing the additional fields and values to update incident|None|{"description": "incident description"}|None|None|
+|assigned_to|string|None|False|User ID of person assigned to the incident|None|user|None|None|
+|assignment_group|string|None|False|Assignment group name of the incident|None|Recommendation Admin|None|None|
+|business_service|string|None|False|Name of business service|None|All|None|None|
+|caller|string|None|False|User ID of incident caller|None|user|None|None|
+|category|string|None|False|Category code of incident|None|hardware|None|None|
+|configuration_item|string|None|False|Configuration item code of the incident|None|int-jenkins|None|None|
+|contact_type|string|None|False|Contact type of the incident|None|phone|None|None|
+|description|string|None|False|Full description of incident|None|Full details about new employee hire update|None|None|
+|impact|string|None|False|Impact of the incident|None|Medium|None|None|
+|priority|string|None|False|Priority of the incident|None|Planning|None|None|
+|short_description|string|None|False|Short description of incident|None|New employee hire update|None|None|
+|state|string|None|False|State name of the incident|None|On Hold|None|None|
+|subcategory|string|None|False|Subcategory code of incident (available values depends on the `Category` field)|None|monitor|None|None|
+|system_id|string|None|True|System ID of the Incident record to update|None|ee7e6b24dbf4e450e9faa5730596192b|None|None|
+|urgency|string|None|False|Urgency of the incident|None|Medium|None|None|
   
 Example input:
 
@@ -1333,31 +1333,31 @@ Example output:
 ```
 
 #### Update Security Incident
-  
-This action is used to update an existing security incident.
+
+This action is used to update an existing security incident
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|additional_fields|object|None|False|JSON object containing the additional fields and values to update security incident|None|{"risk_score": 40, "risk_score_override": true, "parent_security_incident": "SIR0010010"}|
-|affected_user|string|None|False|The user ID, email or system ID of the user related to this security incident|None|jsmith|
-|assigned_to|string|None|False|The name, user ID, email or system id of the person primarily responsible for working this task|None|test_user|
-|assignment_group|string|None|False|The name or system id of the assignment group|None|Example Group|
-|caller|string|None|False|The user ID, email or system ID of the person requesting the work to be done|None|user@example.com|
-|category|string|None|False|The code of the security incident category|None|malware|
-|close_code|string|None|False|The code of the incident closure reason|None|Not resolved|
-|close_notes|string|None|False|Incident closure notes|None|Example notes|
-|cmdb_ci|string|None|False|The name or system ID of the configuration item|None|Example CI|
-|contact_type|string|None|False|The code of the security incident source|None|email|
-|description|string|None|False|Description of the security incident|None|Full description|
-|location|string|None|False|The name or system ID of the location|None|Example location|
-|priority|integer|None|False|The code of the priority in which an Incident needs to be resolved, based on impact and urgency|None|3|
-|short_description|string|None|False|Short description of the security incident|None|Example description|
-|state|integer|None|False|The code of the security incident state|None|18|
-|subcategory|string|None|False|The code of the security incident subcategory (available values depends on the `Category` field)|None|ransomware|
-|substate|integer|None|False|The code of the security incident substate|None|2|
-|sys_id|string|None|True|The system ID of the security incident to be updated|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|additional_fields|object|None|False|JSON object containing the additional fields and values to update security incident|None|{"risk_score": 40, "risk_score_override": true, "parent_security_incident": "SIR0010010"}|None|None|
+|affected_user|string|None|False|The user ID, email or system ID of the user related to this security incident|None|jsmith|None|None|
+|assigned_to|string|None|False|The name, user ID, email or system id of the person primarily responsible for working this task|None|test_user|None|None|
+|assignment_group|string|None|False|The name or system id of the assignment group|None|Example Group|None|None|
+|caller|string|None|False|The user ID, email or system ID of the person requesting the work to be done|None|user@example.com|None|None|
+|category|string|None|False|The code of the security incident category|None|malware|None|None|
+|close_code|string|None|False|The code of the incident closure reason|None|Not resolved|None|None|
+|close_notes|string|None|False|Incident closure notes|None|Example notes|None|None|
+|cmdb_ci|string|None|False|The name or system ID of the configuration item|None|Example CI|None|None|
+|contact_type|string|None|False|The code of the security incident source|None|email|None|None|
+|description|string|None|False|Description of the security incident|None|Full description|None|None|
+|location|string|None|False|The name or system ID of the location|None|Example location|None|None|
+|priority|integer|None|False|The code of the priority in which an Incident needs to be resolved, based on impact and urgency|None|3|None|None|
+|short_description|string|None|False|Short description of the security incident|None|Example description|None|None|
+|state|integer|None|False|The code of the security incident state|None|18|None|None|
+|subcategory|string|None|False|The code of the security incident subcategory (available values depends on the `Category` field)|None|ransomware|None|None|
+|substate|integer|None|False|The code of the security incident substate|None|2|None|None|
+|sys_id|string|None|True|The system ID of the security incident to be updated|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
   
 Example input:
 
@@ -1405,24 +1405,24 @@ Example output:
 ```
 
 #### Update Vulnerability
-  
-This action is used to update the vulnerability by ID.
+
+This action is used to update the vulnerability by ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|additional_fields|object|None|False|JSON object containing the additional fields and values to update the vulnerability item|None|{"description": "Example description"}|
-|assigned_to|string|None|False|User ID of person assigned to the vulnerability|None|ExampleUserID|
-|dns|string|None|False|The name of the source DNS where the vulnerability was found|None|dns.example.com|
-|first_found|date|None|False|The time that represents the vulnerability was first found, in ISO format|None|2023-04-28 15:48:07|
-|ip_address|string|None|False|The IP address of the source where the vulnerability was found|None|192.168.0.1|
-|last_found|date|None|False|The time that represents when the vulnerability was last found, in ISO format|None|2023-04-30 12:14:10|
-|short_description|string|None|False|Short description of the vulnerability|None|Example short description|
-|source|string|None|False|The vulnerability source|None|ExampleSource|
-|state|string|None|False|The state of the vulnerability|['', 'Open', 'Under Investigation']|Open|
-|system_id|string|None|True|System ID of the vulnerability to be retrieved|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|vulnerability|string|None|False|The reference of the found vulnerability|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|additional_fields|object|None|False|JSON object containing the additional fields and values to update the vulnerability item|None|{"description": "Example description"}|None|None|
+|assigned_to|string|None|False|User ID of person assigned to the vulnerability|None|ExampleUserID|None|None|
+|dns|string|None|False|The name of the source DNS where the vulnerability was found|None|dns.example.com|None|None|
+|first_found|date|None|False|The time that represents the vulnerability was first found, in ISO format|None|2023-04-28 15:48:07|None|None|
+|ip_address|string|None|False|The IP address of the source where the vulnerability was found|None|192.168.0.1|None|None|
+|last_found|date|None|False|The time that represents when the vulnerability was last found, in ISO format|None|2023-04-30 12:14:10|None|None|
+|short_description|string|None|False|Short description of the vulnerability|None|Example short description|None|None|
+|source|string|None|False|The vulnerability source|None|ExampleSource|None|None|
+|state|string|None|False|The state of the vulnerability|["", "Open", "Under Investigation"]|Open|None|None|
+|system_id|string|None|True|System ID of the vulnerability to be retrieved|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+|vulnerability|string|None|False|The reference of the found vulnerability|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
   
 Example input:
 
@@ -1461,16 +1461,16 @@ Example output:
 
 
 #### Incident Changed
-  
-This action is used to reports changes of the given fields in the given Incident.
+
+This trigger is used to reports changes of the given fields in the given Incident
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|interval|integer|5|False|How often to detect changes to the given Incident (in minutes)|None|5|
-|monitored_fields|string|None|True|Comma-separated list of fields to be monitored (e.g. resolved,resolved_by)|None|resolved,resolved_by|
-|system_id|string|None|True|System ID of the Incident record to monitor|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|interval|integer|5|False|How often to detect changes to the given Incident (in minutes)|None|5|None|None|
+|monitored_fields|string|None|True|Comma-separated list of fields to be monitored (e.g. resolved,resolved_by)|None|resolved,resolved_by|None|None|
+|system_ids|[]string|None|False|List of system IDs of the incident records to monitor|None|["9de5069c5afe602b2ea0a04b66beb2c0"]|None|None|
   
 Example input:
 
@@ -1478,7 +1478,9 @@ Example input:
 {
   "interval": 5,
   "monitored_fields": "resolved,resolved_by",
-  "system_id": "9de5069c5afe602b2ea0a04b66beb2c0"
+  "system_ids": [
+    "9de5069c5afe602b2ea0a04b66beb2c0"
+  ]
 }
 ```
 
@@ -1487,6 +1489,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |changed_fields|object|True|JSON object representing changed fields (map of field name to previous and current values)|{"description":{"previous":"Description 1","current":"Description 2"}}|
+|system_id|string|True|System ID of changed incident|280b3cb71b9f1450c9768622dd4bcb32|
   
 Example output:
 
@@ -1497,20 +1500,21 @@ Example output:
       "current": "Description 2",
       "previous": "Description 1"
     }
-  }
+  },
+  "system_id": "280b3cb71b9f1450c9768622dd4bcb32"
 }
 ```
 
 #### Incident Created
-  
-This action is used to identifies if a new incident has been created.
+
+This trigger is used to identifies if a new incident has been created
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|frequency|integer|5|True|How often to poll for new incidents (in seconds)|None|5|
-|query|string|None|False|Non-encoded query string to match new incident records (will poll for any new incident if query is omitted)|None|short_description=Newbug|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|frequency|integer|5|True|How often to poll for new incidents (in seconds)|None|5|None|None|
+|query|string|None|False|Non-encoded query string to match new incident records (will poll for any new incident if query is omitted)|None|short_description=Newbug|None|None|
   
 Example input:
 
@@ -1536,16 +1540,16 @@ Example output:
 ```
 
 #### Vulnerability Updated
-  
-This action is used to identifies if a vulnerability has been updated.
+
+This trigger is used to identifies if a vulnerability has been updated
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|interval|integer|5|True|How often to detect changes to the given Incident (in seconds)|None|5|
-|monitored_fields|string|None|True|Comma-separated list of fields to be monitored (e.g. resolved,resolved_by)|None|resolved,resolved_by|
-|system_ids|[]string|None|True|List of system IDs of the vulnerability record to monitor|None|["9de5069c5afe602b2ea0a04b66beb2c0"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|interval|integer|5|True|How often to detect changes to the given Incident (in seconds)|None|5|None|None|
+|monitored_fields|string|None|True|Comma-separated list of fields to be monitored (e.g. resolved,resolved_by)|None|resolved,resolved_by|None|None|
+|system_ids|[]string|None|True|List of system IDs of the vulnerability record to monitor|None|["9de5069c5afe602b2ea0a04b66beb2c0"]|None|None|
   
 Example input:
 
@@ -1681,6 +1685,7 @@ Example output:
 
 # Version History
 
+* 8.0.0 - `Incident Created, Vulnerability Updated`: Updated triggers to allow users to check a list of system_ids or all of them
 * 7.4.1 - `Incident Created`: Resolved issue related to trigger not working. Updated SDK
 * 7.4.0 - Add ability to use OAuth for API authentication (requires OAuth Client ID and OAuth Client Secret in connection)
 * 7.3.1 - `Incident Created`: Resolved issue related to object parsing
@@ -1725,4 +1730,3 @@ Example output:
 * [ServiceNow User Administration](https://docs.servicenow.com/bundle/rome-platform-administration/page/administer/roles/concept/c_UserAdministration.html)
 * [ServiceNow Operators](https://docs.servicenow.com/bundle/quebec-platform-user-interface/page/use/common-ui-elements/reference/r_OpAvailableFiltersQueries.html)
 * [ServiceNow Plugin Setup Guide](https://docs.rapid7.com/insightconnect/servicenow)
-
