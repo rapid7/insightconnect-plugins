@@ -127,13 +127,41 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|sender_policy|[]sender_policy|False|The policy that was created|[{"option": "block_sender","id": "eNo1jU0LgjAYgP_LrgpusZl2EzWwUoaKJHibb7W-pk4tif57euj-fHyQBjF0IGu0QW0c20cSFkXgKt_Z2Zz6nNN8wjqU5aqyEuOcRmP6arfgGXl_Si_X_UE0-p0pGFhl6RsyUaPuUkxLjzDiONREYtC9ekAnVA3zxc-SgHhrl9GZHqHTUj1n-G_mUwPRYmNM8fcHIHEysg","policy": {"description": "komand test","fromPart": "envelope_from","from": {"type": "email_domain","emailDomain": "example.com"},"to": {"type": "everyone"},"fromType": "email_domain","fromValue": "example.com","toType": "everyone","fromEternal": True,"toEternal": True,"fromDate": "1900-01-01T00:00:00+0000","toDate": "2100-01-01T23:59:59+0000","override": False,"bidirectional": False,"conditions": {},"createTime": "2019-01-28T17:09:01+0000","lastUpdated": "2019-01-28T17:09:01+0000"}}]|
+|sender_policy|[]sender_policy|False|The policy that was created|[{"option": "block_sender", "id": "eNo1jU0LgjAYgP_LrgpusZl2EzWwUoaKJHibb7W-pk4tif57euj-fHyQBjF0IGu0QW0c20cSFkXgKt_Z2Zz6nNN8wjqU5aqyEuOcRmP6arfgGXl_Si_X_UE0-p0pGFhl6RsyUaPuUkxLjzDiONREYtC9ekAnVA3zxc-SgHhrl9GZHqHTUj1n-G_mUwPRYmNM8fcHIHEysg", "policy": {"description": "komand test", "fromPart": "envelope_from", "from": {"type": "email_domain", "emailDomain": "example.com"}, "to": {"type": "everyone"}, "fromType": "email_domain", "fromValue": "example.com", "toType": "everyone", "fromEternal": True, "toEternal": True, "fromDate": "1900-01-01T00:00:00+0000", "toDate": "2100-01-01T23:59:59+0000", "override": False, "bidirectional": False, "conditions": {}, "createTime": "2019-01-28T17:09:01+0000", "lastUpdated": "2019-01-28T17:09:01+0000"}}]|
   
 Example output:
 
 ```
 {
-  "sender_policy": "[{\"option\": \"block_sender\",\"id\": \"eNo1jU0LgjAYgP_LrgpusZl2EzWwUoaKJHibb7W-pk4tif57euj-fHyQBjF0IGu0QW0c20cSFkXgKt_Z2Zz6nNN8wjqU5aqyEuOcRmP6arfgGXl_Si_X_UE0-p0pGFhl6RsyUaPuUkxLjzDiONREYtC9ekAnVA3zxc-SgHhrl9GZHqHTUj1n-G_mUwPRYmNM8fcHIHEysg\",\"policy\": {\"description\": \"komand test\",\"fromPart\": \"envelope_from\",\"from\": {\"type\": \"email_domain\",\"emailDomain\": \"example.com\"},\"to\": {\"type\": \"everyone\"},\"fromType\": \"email_domain\",\"fromValue\": \"example.com\",\"toType\": \"everyone\",\"fromEternal\": True,\"toEternal\": True,\"fromDate\": \"1900-01-01T00:00:00+0000\",\"toDate\": \"2100-01-01T23:59:59+0000\",\"override\": False,\"bidirectional\": False,\"conditions\": {},\"createTime\": \"2019-01-28T17:09:01+0000\",\"lastUpdated\": \"2019-01-28T17:09:01+0000\"}}]"
+  "sender_policy": [
+    {
+      "id": "eNo1jU0LgjAYgP_LrgpusZl2EzWwUoaKJHibb7W-pk4tif57euj-fHyQBjF0IGu0QW0c20cSFkXgKt_Z2Zz6nNN8wjqU5aqyEuOcRmP6arfgGXl_Si_X_UE0-p0pGFhl6RsyUaPuUkxLjzDiONREYtC9ekAnVA3zxc-SgHhrl9GZHqHTUj1n-G_mUwPRYmNM8fcHIHEysg",
+      "option": "block_sender",
+      "policy": {
+        "bidirectional": false,
+        "conditions": {},
+        "createTime": "2019-01-28T17:09:01+0000",
+        "description": "komand test",
+        "from": {
+          "emailDomain": "example.com",
+          "type": "email_domain"
+        },
+        "fromDate": "1900-01-01T00:00:00+0000",
+        "fromEternal": true,
+        "fromPart": "envelope_from",
+        "fromType": "email_domain",
+        "fromValue": "example.com",
+        "lastUpdated": "2019-01-28T17:09:01+0000",
+        "override": false,
+        "to": {
+          "type": "everyone"
+        },
+        "toDate": "2100-01-01T23:59:59+0000",
+        "toEternal": true,
+        "toType": "everyone"
+      }
+    }
+  ]
 }
 ```
 
@@ -171,13 +199,28 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|[]managed_url|False|Managed URL that was created|[{"id": "wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4","scheme": "https","domain": "www.test.net","port": -1,"path": "/","queryString": "","matchType": "explicit","action": "permit","comment": "","disableUserAwareness": False,"disableRewrite": False,"disableLogClick": False}]|
+|response|[]managed_url|False|Managed URL that was created|[{"id": "wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4", "scheme": "https", "domain": "www.test.net", "port": -1, "path": "/", "queryString": "", "matchType": "explicit", "action": "permit", "comment": "", "disableUserAwareness": False, "disableRewrite": False, "disableLogClick": False}]|
   
 Example output:
 
 ```
 {
-  "response": "[{\"id\": \"wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4\",\"scheme\": \"https\",\"domain\": \"www.test.net\",\"port\": -1,\"path\": \"/\",\"queryString\": \"\",\"matchType\": \"explicit\",\"action\": \"permit\",\"comment\": \"\",\"disableUserAwareness\": False,\"disableRewrite\": False,\"disableLogClick\": False}]"
+  "response": [
+    {
+      "action": "permit",
+      "comment": "",
+      "disableLogClick": false,
+      "disableRewrite": false,
+      "disableUserAwareness": false,
+      "domain": "www.test.net",
+      "id": "wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4",
+      "matchType": "explicit",
+      "path": "/",
+      "port": -1,
+      "queryString": "",
+      "scheme": "https"
+    }
+  ]
 }
 ```
 
@@ -400,7 +443,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |pagination|pagination|False|Pagination for request|{'pageSize': 25, 'pageToken': '9de5069c5afe602b2ea0a04b66beb2c0'}|
-|response|[]audit_events_response|True|Event logs data|[{"id": "wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U","scheme": "https","domain": "www.testset3444412312.net","port": -1,"path": "/","queryString": "","matchType": "explicit","action": "block","comment": "","disableUserAwareness": False,"disableRewrite": False,"disableLogClick": False}]|
+|response|[]audit_events_response|True|Event logs data|[{"id": "wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U", "scheme": "https", "domain": "www.testset3444412312.net", "port": -1, "path": "/", "queryString": "", "matchType": "explicit", "action": "block", "comment": "", "disableUserAwareness": False, "disableRewrite": False, "disableLogClick": False}]|
   
 Example output:
 
@@ -410,7 +453,22 @@ Example output:
     "pageSize": 25,
     "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"
   },
-  "response": "[{\"id\": \"wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U\",\"scheme\": \"https\",\"domain\": \"www.testset3444412312.net\",\"port\": -1,\"path\": \"/\",\"queryString\": \"\",\"matchType\": \"explicit\",\"action\": \"block\",\"comment\": \"\",\"disableUserAwareness\": False,\"disableRewrite\": False,\"disableLogClick\": False}]"
+  "response": [
+    {
+      "action": "block",
+      "comment": "",
+      "disableLogClick": false,
+      "disableRewrite": false,
+      "disableUserAwareness": false,
+      "domain": "www.testset3444412312.net",
+      "id": "wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U",
+      "matchType": "explicit",
+      "path": "/",
+      "port": -1,
+      "queryString": "",
+      "scheme": "https"
+    }
+  ]
 }
 ```
 
@@ -454,13 +512,26 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|[]managed_url|False|Managed URLs matching |[{"id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLho3KMtTMfYm2C21vDPXvKC5vmEJWDAcvTHtH4L4Kw20c","scheme": "https","domain": "steam.com","port": -1,"matchType": "explicit","action": "block","comment": "ui test","disableUserAwareness": True,"disableRewrite": True,"disableLogClick": False}]|
+|response|[]managed_url|False|Managed URLs matching |[{"id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLho3KMtTMfYm2C21vDPXvKC5vmEJWDAcvTHtH4L4Kw20c", "scheme": "https", "domain": "steam.com", "port": -1, "matchType": "explicit", "action": "block", "comment": "ui test", "disableUserAwareness": True, "disableRewrite": True, "disableLogClick": False}]|
   
 Example output:
 
 ```
 {
-  "response": "[{\"id\": \"wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLho3KMtTMfYm2C21vDPXvKC5vmEJWDAcvTHtH4L4Kw20c\",\"scheme\": \"https\",\"domain\": \"steam.com\",\"port\": -1,\"matchType\": \"explicit\",\"action\": \"block\",\"comment\": \"ui test\",\"disableUserAwareness\": True,\"disableRewrite\": True,\"disableLogClick\": False}]"
+  "response": [
+    {
+      "action": "block",
+      "comment": "ui test",
+      "disableLogClick": false,
+      "disableRewrite": true,
+      "disableUserAwareness": true,
+      "domain": "steam.com",
+      "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLho3KMtTMfYm2C21vDPXvKC5vmEJWDAcvTHtH4L4Kw20c",
+      "matchType": "explicit",
+      "port": -1,
+      "scheme": "https"
+    }
+  ]
 }
 ```
 

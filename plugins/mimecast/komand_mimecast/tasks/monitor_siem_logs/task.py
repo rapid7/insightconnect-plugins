@@ -143,22 +143,22 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
 
             if custom_config.get("lookback", {}):
                 filter_time = datetime(
-                    custom_config.get("lookback").get("year", date.today().year),
-                    custom_config.get("lookback").get("month", 1),
-                    custom_config.get("lookback").get("day", 1),
-                    custom_config.get("lookback").get("hour", 0),
-                    custom_config.get("lookback").get("minute", 0),
-                    custom_config.get("lookback").get("second", 0),
+                    custom_config.get("lookback", {}).get("year", date.today().year),
+                    custom_config.get("lookback", {}).get("month", 1),
+                    custom_config.get("lookback", {}).get("day", 1),
+                    custom_config.get("lookback", {}).get("hour", 0),
+                    custom_config.get("lookback", {}).get("minute", 0),
+                    custom_config.get("lookback", {}).get("second", 0),
                 )
 
             elif custom_config.get("cutoff", {}).get("date"):
                 filter_time = datetime(
-                    custom_config.get("cutoff", {}).get("date").get("year", date.today().year),
-                    custom_config.get("cutoff", {}).get("date").get("month", 1),
-                    custom_config.get("cutoff", {}).get("date").get("day", 1),
-                    custom_config.get("cutoff", {}).get("date").get("hour", 0),
-                    custom_config.get("cutoff", {}).get("date").get("minute", 0),
-                    custom_config.get("cutoff", {}).get("date").get("second", 0),
+                    custom_config.get("cutoff", {}).get("date", {}).get("year", date.today().year),
+                    custom_config.get("cutoff", {}).get("date", {}).get("month", 1),
+                    custom_config.get("cutoff", {}).get("date", {}).get("day", 1),
+                    custom_config.get("cutoff", {}).get("date", {}).get("hour", 0),
+                    custom_config.get("cutoff", {}).get("date", {}).get("minute", 0),
+                    custom_config.get("cutoff", {}).get("date", {}).get("second", 0),
                 )
 
             elif custom_config.get("cutoff", {}).get("hours"):
@@ -172,6 +172,6 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         else:
             filter_time = get_time_hours_ago(hours_ago=FIRST_RUN_CUTOFF)
 
-        self.logger.info(f"The following filter time time will be used: {filter_time}")
+        self.logger.info(f"The following filter time will be used: {filter_time}")
 
         return filter_time

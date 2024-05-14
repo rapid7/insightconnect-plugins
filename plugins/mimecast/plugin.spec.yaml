@@ -1070,7 +1070,7 @@ actions:
         description: Managed URL that was created
         type: '[]managed_url'
         required: false
-        example: '[{"id": "wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4","scheme": "https","domain": "www.test.net","port": -1,"path": "/","queryString": "","matchType": "explicit","action": "permit","comment": "","disableUserAwareness": False,"disableRewrite": False,"disableLogClick": False}]'
+        example: [{"id": "wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4","scheme": "https","domain": "www.test.net","port": -1,"path": "/","queryString": "","matchType": "explicit","action": "permit","comment": "","disableUserAwareness": False,"disableRewrite": False,"disableLogClick": False}]
   delete_managed_url:
     title: Delete Managed URL
     description: Delete a managed URL
@@ -1184,7 +1184,7 @@ actions:
         description: 'Managed URLs matching '
         type: '[]managed_url'
         required: false
-        example: '[{"id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLho3KMtTMfYm2C21vDPXvKC5vmEJWDAcvTHtH4L4Kw20c","scheme": "https","domain": "steam.com","port": -1,"matchType": "explicit","action": "block","comment": "ui test","disableUserAwareness": True,"disableRewrite": True,"disableLogClick": False}]'
+        example: [{"id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLho3KMtTMfYm2C21vDPXvKC5vmEJWDAcvTHtH4L4Kw20c","scheme": "https","domain": "steam.com","port": -1,"matchType": "explicit","action": "block","comment": "ui test","disableUserAwareness": True,"disableRewrite": True,"disableLogClick": False}]
   permit_or_block_sender:
     title: Permit or Block Sender
     description: Permit or block a sender
@@ -1314,7 +1314,7 @@ actions:
         description: The policy that was created
         type: '[]sender_policy'
         required: false
-        example: '[{"option": "block_sender","id": "eNo1jU0LgjAYgP_LrgpusZl2EzWwUoaKJHibb7W-pk4tif57euj-fHyQBjF0IGu0QW0c20cSFkXgKt_Z2Zz6nNN8wjqU5aqyEuOcRmP6arfgGXl_Si_X_UE0-p0pGFhl6RsyUaPuUkxLjzDiONREYtC9ekAnVA3zxc-SgHhrl9GZHqHTUj1n-G_mUwPRYmNM8fcHIHEysg","policy": {"description": "komand test","fromPart": "envelope_from","from": {"type": "email_domain","emailDomain": "example.com"},"to": {"type": "everyone"},"fromType": "email_domain","fromValue": "example.com","toType": "everyone","fromEternal": True,"toEternal": True,"fromDate": "1900-01-01T00:00:00+0000","toDate": "2100-01-01T23:59:59+0000","override": False,"bidirectional": False,"conditions": {},"createTime": "2019-01-28T17:09:01+0000","lastUpdated": "2019-01-28T17:09:01+0000"}}]'
+        example: [{"option": "block_sender","id": "eNo1jU0LgjAYgP_LrgpusZl2EzWwUoaKJHibb7W-pk4tif57euj-fHyQBjF0IGu0QW0c20cSFkXgKt_Z2Zz6nNN8wjqU5aqyEuOcRmP6arfgGXl_Si_X_UE0-p0pGFhl6RsyUaPuUkxLjzDiONREYtC9ekAnVA3zxc-SgHhrl9GZHqHTUj1n-G_mUwPRYmNM8fcHIHEysg","policy": {"description": "komand test","fromPart": "envelope_from","from": {"type": "email_domain","emailDomain": "example.com"},"to": {"type": "everyone"},"fromType": "email_domain","fromValue": "example.com","toType": "everyone","fromEternal": True,"toEternal": True,"fromDate": "1900-01-01T00:00:00+0000","toDate": "2100-01-01T23:59:59+0000","override": False,"bidirectional": False,"conditions": {},"createTime": "2019-01-28T17:09:01+0000","lastUpdated": "2019-01-28T17:09:01+0000"}}]
   add_group_member:
     title: Add Group Member
     description: Add an email address or domain to a group
@@ -1530,7 +1530,7 @@ actions:
         description: Event logs data
         type: "[]audit_events_response"
         required: true
-        example: '[{"id": "wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U","scheme": "https","domain": "www.testset3444412312.net","port": -1,"path": "/","queryString": "","matchType": "explicit","action": "block","comment": "","disableUserAwareness": False,"disableRewrite": False,"disableLogClick": False}]'      
+        example: [{"id": "wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U","scheme": "https","domain": "www.testset3444412312.net","port": -1,"path": "/","queryString": "","matchType": "explicit","action": "block","comment": "","disableUserAwareness": False,"disableRewrite": False,"disableLogClick": False}]
       pagination:
         title: Pagination
         description: Pagination for request
