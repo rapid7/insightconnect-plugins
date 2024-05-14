@@ -15,7 +15,7 @@ class Output:
     RISK_RULES = "risk_rules"
 
 
-class ListIpAddressesRiskRulesInput(insightconnect_plugin_runtime.Input):
+class ListIPAddressesRiskRulesInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {}
     """)
@@ -24,7 +24,7 @@ class ListIpAddressesRiskRulesInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class ListIpAddressesRiskRulesOutput(insightconnect_plugin_runtime.Output):
+class ListIPAddressesRiskRulesOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "object",

@@ -1,5 +1,27 @@
 {
-  "risk_list": {
-    "ip": "192.168.0.1"
-  }
+    "risk_list": {
+        "stix:STIX_Package": {
+            "@id": "RF:Package-494e9920-8417-4a6a-a4ef-0fb9b6713158",
+            "@timestamp": "2024-05-04T00:40:00.181Z",
+            "@version": "1.2",
+            "@xmlns": "http://xml/metadataSharing.xsd",
+            "@xmlns:FileObj": "http://cybox.mitre.org/objects#FileObject-2",
+            "@xmlns:RF": "http://stix.recordedfuture.com/",
+            "@xmlns:cybox": "http://cybox.mitre.org/cybox-2",
+            "@xmlns:cyboxCommon": "http://cybox.mitre.org/common-2",
+            "@xmlns:cyboxVocabs": "http://cybox.mitre.org/default_vocabularies-2",
+            "@xmlns:indicator": "http://stix.mitre.org/Indicator-2",
+            "@xmlns:stix": "http://stix.mitre.org/stix-1",
+            "@xmlns:stixCommon": "http://stix.mitre.org/common-1",
+            "@xmlns:stixVocabs": "http://stix.mitre.org/default_vocabularies-1",
+            "@xmlns:ttp": "http://stix.mitre.org/TTP-1",
+            "stix:STIX_Header": {
+                "stix:Description": "Recorded Future STIX"
+            }
+        }
+    },
+    "risk_list_gzip": {
+        "content": "H4sICPAVOWYC/3JmX2hhc2hfdGhyZWF0ZmVlZF90cmVuZGluZ19pbl9yZWNvcmRlZF9mdXR1cmVfYW5hbHlzdF9jb21tdW5pdHlfc3RpeF8xLjIueG1sAHXTz2+CMBQH8Pv+CsLOhcLqD4hw2ULmaUbJsuxiSilaR6lpi2H//cBUURw3Xvl8X/rIY6E0a8JNuvzarjD5wTtqsTyy10loSoACRIPAh2COvBlAeIoBRrQAsMiCbDrzXrzJ3LY041RpzI+R7UMfATgBEKUQhgiGEDre3Pu2rROViokqsj3Ht62Gl5WK7L3Wx9B128rlVOMca7zZY8mqndOo3LBwnVxld2NHUiJkTvOi1rWkDhHcvdCElfQjO1w9+c1E43CmWyfkzhXZgRKtno1rn8HlNuHZfgqCMzWaz2mB61JvTx2ry/aqVA06vArOuzlHOpDz60FmXHd1j1t0/yl6maYr4F0cq3JGsBZyTC8voO/dicH0g9C/w3u3+cHsg7wZ/S4xZruylfGi39F3inMqzckbVUSyo25XKl6bfbCS80JYnV64D8wcPfa6fgwVPxl0c3QbM/9F/AdKCpwQOgMAAA==",
+        "filename": "risk_list.gzip"
+    }
 }
