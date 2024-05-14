@@ -37,7 +37,7 @@ class RecordedFutureApi:
     @staticmethod
     def response_handler(response: Response, url: str) -> None:
         """
-        Raise the correct PluginException based upon the response stats code
+        Raise the correct PluginException based upon the response status code
         :param response: The response object to be reviewed
         :param url: The endpoint URL to be logged out in result of an error
         :return: None
@@ -130,6 +130,7 @@ class RecordedFutureApi:
                 data=exception,
             )
         finally:
+            # Finally block removes any temporary files
             if os.path.exists(temp_filename):
                 os.remove(temp_filename)
 

@@ -13,6 +13,7 @@ from jsonschema import validate
 from komand_recorded_future.actions.download_domain_risk_list import DownloadDomainRiskList
 from komand_recorded_future.connection.schema import Input
 from parameterized import parameterized
+from mock import Mock
 
 from util import Util
 
@@ -37,6 +38,7 @@ class TestDownloadDomainRiskList(TestCase):
         actual = self.action.run(input_parameters)
         validate(actual, self.action.output.schema)
         self.assertEqual(expected, actual)
+        self.assertFalse(os.path.exists("risk_list.gzip"))
 
     @parameterized.expand(
         [
