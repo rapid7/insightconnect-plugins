@@ -210,7 +210,9 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             )
         return logs_to_return, new_logs_hashes
 
-    def _apply_custom_timings(self, custom_config: Dict[str, Dict], now: datetime, first_run: bool) -> (datetime, datetime):
+    def _apply_custom_timings(
+        self, custom_config: Dict[str, Dict], now: datetime, first_run: bool
+    ) -> (datetime, datetime):
         """
         If a custom_config is supplied to the plugin we can modify our timing logic.
         Lookback is applied for the first run with no state.
