@@ -12,7 +12,8 @@ from komand_proofpoint_tap.util.exceptions import ApiException
 from komand_proofpoint_tap.util.util import SiemUtils
 from .schema import MonitorEventsInput, MonitorEventsOutput, MonitorEventsState, Component
 
-MAX_ALLOWED_LOOKBACK_HOURS = 24
+INITIAL_LOOKBACK_HOURS = 24  # Lookback time in hours for first run
+SUBSEQUENT_LOOKBACK_HOURS = 24 * 7  # Lookback time in hours for subsequent runs
 API_MAX_LOOKBACK = 24 * 7  # API limits to 7 days ago
 SPECIFIC_DATE = getenv("SPECIFIC_DATE")
 
@@ -42,11 +43,12 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             next_page_index = state.get(self.NEXT_PAGE_INDEX)
             now = self.get_current_time() - timedelta(minutes=1)
 
-            max_allowed_lookback, backfill_date = self._apply_custom_timings(custom_config, now)
+            first_run = not state or not last_collection_date
+            max_allowed_lookback, backfill_date = self._apply_custom_timings(custom_config, now, first_run)
 
             # [PLGN-727] skip comparison check if first run of a backfill, next run should specify lookback to match.
             if not backfill_date:
-                # Don't allow collection to go back further than MAX_ALLOWED_LOOKBACK_HOURS (24) hours max
+                # Don't allow collection to go back further than <*>_LOOKBACK_HOURS > (24) hours max
                 # Unless otherwise defined externally and passed in via custom_config parameter.
                 if last_collection_date and datetime.fromisoformat(last_collection_date) < max_allowed_lookback:
                     last_collection_date = max_allowed_lookback.isoformat()
@@ -58,7 +60,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             previous_logs_hashes = state.get(self.PREVIOUS_LOGS_HASHES, [])
             query_params = {"format": "JSON"}
 
-            if not state or not last_collection_date:
+            if first_run:
                 task_start = "First run... "
                 first_time = now - timedelta(hours=1)
                 if backfill_date:
@@ -208,13 +210,17 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
             )
         return logs_to_return, new_logs_hashes
 
-    def _apply_custom_timings(self, custom_config: Dict[str, Dict], now: datetime) -> (datetime, datetime):
+    def _apply_custom_timings(self, custom_config: Dict[str, Dict], now: datetime, first_run: bool) -> (datetime, datetime):
         """
         If a custom_config is supplied to the plugin we can modify our timing logic.
         Lookback is applied for the first run with no state.
         Default is applied to the max look back hours being enforced on the parameters.
         """
-        cutoff_values = custom_config.get("cutoff", {"hours": MAX_ALLOWED_LOOKBACK_HOURS})
+        if first_run:
+            default_lookback_hours = INITIAL_LOOKBACK_HOURS
+        else:
+            default_lookback_hours = SUBSEQUENT_LOOKBACK_HOURS
+        cutoff_values = custom_config.get("cutoff", {"hours": default_lookback_hours})
         cutoff_date, cutoff_hours = cutoff_values.get("date", {}), cutoff_values.get("hours")
         if cutoff_date:
             max_lookback = datetime(**cutoff_date, tzinfo=timezone.utc)
