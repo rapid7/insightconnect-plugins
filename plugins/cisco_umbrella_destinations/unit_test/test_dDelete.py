@@ -6,16 +6,13 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
 from unittest.mock import Mock
-from icon_cisco_umbrella_destinations.connection.connection import Connection
 from icon_cisco_umbrella_destinations.actions.dDelete import DDelete
 from icon_cisco_umbrella_destinations.actions.dDelete.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-import logging
 
-from unit_test.mock import (
+from mock import (
     Util,
-    STUB_CONNECTION,
     mock_request_200,
     mock_request_403,
     mock_request_401,

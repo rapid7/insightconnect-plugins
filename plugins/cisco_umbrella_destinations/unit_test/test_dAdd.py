@@ -4,16 +4,14 @@ import os
 sys.path.append(os.path.abspath("../"))
 
 from parameterized import parameterized
-from typing import Any, Dict
 from unittest import TestCase, mock
 from unittest.mock import Mock
 
-from icon_cisco_umbrella_destinations.connection.connection import Connection
 from icon_cisco_umbrella_destinations.actions.dAdd import DAdd
 from icon_cisco_umbrella_destinations.actions.dAdd.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from unit_test.mock import (
+from mock import (
     Util,
     mock_request_200,
     mock_request_403,
