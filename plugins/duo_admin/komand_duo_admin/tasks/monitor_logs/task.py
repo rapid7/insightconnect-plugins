@@ -13,8 +13,8 @@ from hashlib import sha1
 ADMIN_LOGS_LOG_TYPE = "Admin logs"
 AUTH_LOGS_LOG_TYPE = "Auth logs"
 TRUST_MONITOR_EVENTS_LOG_TYPE = "Trust monitor events"
-CUTOFF_HOURS = 24
-MAX_CUTOFF_HOURS = 72
+INITIAL_CUTOFF_HOURS = 24
+MAX_CUTOFF_HOURS = 168
 API_CUTOFF_HOURS = 4320
 
 
@@ -48,7 +48,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         # If no previous timestamp retrieved (first run) then query 24 hours
         if not last_log_timestamp:
             self.logger.info(f"First run for {log_type}")
-            filter_time = self._get_filter_time(custom_config, now, CUTOFF_HOURS, log_type)
+            filter_time = self._get_filter_time(custom_config, now, INITIAL_CUTOFF_HOURS, log_type)
             if log_type != "Admin logs":
                 mintime = self.convert_to_milliseconds(filter_time)
                 maxtime = self.convert_to_milliseconds(last_two_minutes)
@@ -65,9 +65,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 self.logger.info(f"Subsequent run for {log_type}")
 
             # If for some reason no logs or event have been picked up,
-            # Need to ensure that no more than the previous 3 days is queried - use cutoff check to ensure this
-            # Prevent resuming of task from previous timestamp if beyond 3 days resulting in large data collection
-            max_cutoff_time = self._get_filter_time(custom_config, now, MAX_CUTOFF_HOURS, log_type)
+            # Need to ensure that no more than the previous 7 days is queried - use cutoff check to ensure this
+            # Prevent resuming of task from previous timestamp if beyond 7 days resulting in large data collection
+            max_cutoff_time = self._get_filter_time(custom_config, now, MAX_CUTOFF_HOURS, log_type, last_log_timestamp)
             cutoff_time_secs = self.convert_to_seconds(max_cutoff_time)
             cutoff_time_millisecs = self.convert_to_milliseconds(max_cutoff_time)
             if backward_comp_first_run:
@@ -86,13 +86,13 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                     mintime = max(last_log_timestamp_secs, cutoff_time_secs)
                     maxtime = self.convert_to_seconds(last_two_minutes)
             else:
-                if log_type == "Admin logs":
+                if log_type == ADMIN_LOGS_LOG_TYPE:
                     # Use seconds for admin log endpoint
                     mintime = max(last_log_timestamp, cutoff_time_secs)
                     maxtime = self.convert_to_seconds(last_two_minutes)
                 else:
                     if log_type == AUTH_LOGS_LOG_TYPE:
-                        # New method holds logmtimestamps in seconds so convert to milliseconds for auth logs
+                        # New method holds log time stamps in seconds so convert to milliseconds for auth logs
                         last_log_timestamp_millisecs = int(last_log_timestamp * 1000)
                     else:
                         # Trust monitor events hold timestamps in milliseconds(surface_timestamp is recorded)
@@ -389,8 +389,13 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         return trust_monitor_events, parameters
 
     def _get_filter_time(
-        self, custom_config: Dict, current_time: datetime, default_hours: int, log_type: str = None
-    ) -> int:
+        self,
+        custom_config: Dict,
+        current_time: datetime,
+        default_hours: int,
+        log_type: str = None,
+        last_log_timestamp: any = None,
+    ) -> datetime:
         """
         Apply custom_config params (if provided) to the task. If a lookback value exists for that task type, it should
         take precedence (this can allow a larger filter time), otherwise use the cutoff_hours value.
@@ -398,6 +403,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         :param current_time: Datetime of now
         :param default_hours: integer value representing default cutoff hours
         :param log_type: Log type value to be used to determine which lookback to retrieve from custom_config
+        :param last_log_timestamp: Last log timestamp to be used for lookback
         :return: filter_value (epoch seconds) to be applied in request to Duo
         """
         log_types = {
@@ -425,5 +431,13 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 f"Lookback of {utc_filter_value} is older than 180 days. Looking back to {api_cutoff_date}..."
             )
             utc_filter_value = api_cutoff_date
+        # Check if last_log_timestamp is within 7 days and if it is then use that as the lookback value
+        if last_log_timestamp:
+            if log_type == TRUST_MONITOR_EVENTS_LOG_TYPE:
+                last_log_datetime = datetime.utcfromtimestamp(last_log_timestamp / 1000).replace(tzinfo=timezone.utc)
+            else:
+                last_log_datetime = datetime.utcfromtimestamp(last_log_timestamp).replace(tzinfo=timezone.utc)
+            if last_log_datetime > utc_filter_value:
+                utc_filter_value = last_log_datetime
         self.logger.info(f"Task execution for {log_type} will be applying a lookback to {utc_filter_value} UTC...")
         return utc_filter_value

@@ -160,7 +160,6 @@
       }
 ],
   "state": {
-    "last_collection_timestamp": null,
     "previous_admin_log_hashes": [
       "cd9aa0fc02dd4a4538a3368025b2fab7480fbc7a",
       "79ac88bf9a2b241fc385a1501b614c39cdf7cd8c"
@@ -172,17 +171,17 @@
     "previous_trust_monitor_event_hashes": [
       "b7db98ed56420f228cf72b3b80a26c44e14e0dec"
     ],
-    "trust_monitor_last_log_timestamp": 1682843686000,
+    "trust_monitor_last_log_timestamp": 1682930026000,
     "trust_monitor_next_page_params": {
-      "mintime": "1682843686000",
+      "mintime": "1682930026000",
       "maxtime": "1682929966000",
       "limit": "200",
       "offset": "1591014"
      },
-     "admin_logs_last_log_timestamp": 1682843686,
+     "admin_logs_last_log_timestamp": 1682930026,
      "auth_logs_last_log_timestamp": 1684749133,
      "auth_logs_next_page_params": {
-       "mintime": "1682843686000",
+       "mintime": "1682930026000",
        "maxtime": "1682929966000",
        "limit": "1000",
        "sort": "ts:asc",
