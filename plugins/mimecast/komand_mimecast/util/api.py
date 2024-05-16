@@ -221,7 +221,7 @@ class MimecastAPI:
                         continue
                     except Exception as gen_exception:
                         self.logger.error(
-                            f"Hit an unexpected error, will continue loop...",
+                            "Hit an unexpected error, will continue loop...",
                             f"Mimecast request ID: '{request.headers.get('mc-siem-token')}', ",
                             f"error: {gen_exception}",
                             exc_info=True,
@@ -232,14 +232,14 @@ class MimecastAPI:
             # empty response from Mimecast can hit this, which we know is not an error, don't log it
             if error.args[0] != "File is not a zip file":
                 self.logger.error(
-                    f"Hit BadZipFile, returning []. ",
+                    "Hit BadZipFile, returning []. ",
                     f"Mimecast request ID: '{request.headers.get('mc-siem-token')}', ",
                     f"Error: {error}",
                     exc_info=True,
                 )
         except Exception as exception_error:
             self.logger.error(
-                f"Hit an unexpected error,",
+                "Hit an unexpected error,",
                 f"Mimecast request ID: '{request.headers.get('mc-siem-token')}', ",
                 f"returning []. Error: {exception_error}",
                 exc_info=True,
