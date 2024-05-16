@@ -73,6 +73,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 # if we have reached the last page then we have caught up to `now`
                 # as result we now then want to use a longer cut off incase the task gets stopped
                 if headers.get(IS_LAST_TOKEN_FIELD) and state.get("normal_running_cutoff") is None:
+                    self.logger.info("Caught up, saving 'normal_running_cutoff' as True' to the state")
                     state["normal_running_cutoff"] = True
 
             return output, state, has_more_pages, status_code, None
@@ -141,30 +142,34 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
         # if there is a custom config we first check for a custom date, then custom hours back and will use that first
         if custom_config:
 
-            if custom_config.get("lookback", {}):
+            custom_config_lookback = custom_config.get("lookback", {})
+            custom_config_date = custom_config.get("cutoff", {}).get("date", {})
+            custom_config_hours = custom_config.get("cutoff", {}).get("hours")
+
+            if custom_config_lookback:
                 filter_time = datetime(
-                    custom_config.get("lookback", {}).get("year", date.today().year),
-                    custom_config.get("lookback", {}).get("month", 1),
-                    custom_config.get("lookback", {}).get("day", 1),
-                    custom_config.get("lookback", {}).get("hour", 0),
-                    custom_config.get("lookback", {}).get("minute", 0),
-                    custom_config.get("lookback", {}).get("second", 0),
+                    custom_config_lookback.get("year", date.today().year),
+                    custom_config_lookback.get("month", 1),
+                    custom_config_lookback.get("day", 1),
+                    custom_config_lookback.get("hour", 0),
+                    custom_config_lookback.get("minute", 0),
+                    custom_config_lookback.get("second", 0),
                 )
 
-            elif custom_config.get("cutoff", {}).get("date"):
+            elif custom_config_date:
                 filter_time = datetime(
-                    custom_config.get("cutoff", {}).get("date", {}).get("year", date.today().year),
-                    custom_config.get("cutoff", {}).get("date", {}).get("month", 1),
-                    custom_config.get("cutoff", {}).get("date", {}).get("day", 1),
-                    custom_config.get("cutoff", {}).get("date", {}).get("hour", 0),
-                    custom_config.get("cutoff", {}).get("date", {}).get("minute", 0),
-                    custom_config.get("cutoff", {}).get("date", {}).get("second", 0),
+                    custom_config_date.get("year", date.today().year),
+                    custom_config_date.get("month", 1),
+                    custom_config_date.get("day", 1),
+                    custom_config_date.get("hour", 0),
+                    custom_config_date.get("minute", 0),
+                    custom_config_date.get("second", 0),
                 )
 
-            elif custom_config.get("cutoff", {}).get("hours"):
-                filter_time = get_time_hours_ago(hours_ago=int(custom_config.get("cutoff", {}).get("hours")))
+            elif custom_config_hours:
+                filter_time = get_time_hours_ago(hours_ago=int(custom_config_hours))
 
-        # if this is normal running after its been initally caught up we use  cut off time od 7 days
+        # if this is normal running after its been initially caught up we use  cut off time od 7 days
         elif normal_running_cutoff:
             filter_time = get_time_hours_ago(hours_ago=NORMAL_RUNNING_CUTOFF)
 

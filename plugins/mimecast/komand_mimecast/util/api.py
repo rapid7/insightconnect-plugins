@@ -214,22 +214,36 @@ class MimecastAPI:
                             combined_json_list += [log]
                     except json.decoder.JSONDecodeError as json_error:
                         self.logger.error(
-                            f"JSON decode error on file ({file_name}), will continue loop... "
-                            f"error: {json_error}, contents: {contents}"
+                            f"JSON decode error on file ({file_name}), will continue loop... ",
+                            f"Mimecast request ID: '{request.headers.get('mc-siem-token')}', ",
+                            f"error: {json_error}, contents: {contents}",
                         )
                         continue
                     except Exception as gen_exception:
                         self.logger.error(
-                            f"Hit an unexpected error, will continue loop..." f"error: {gen_exception}", exc_info=True
+                            f"Hit an unexpected error, will continue loop...",
+                            f"Mimecast request ID: '{request.headers.get('mc-siem-token')}', ",
+                            f"error: {gen_exception}",
+                            exc_info=True,
                         )
                         continue
             return combined_json_list
         except BadZipFile as error:
             # empty response from Mimecast can hit this, which we know is not an error, don't log it
             if error.args[0] != "File is not a zip file":
-                self.logger.error(f"Hit BadZipFile, returning []. Error: {error}", exc_info=True)
+                self.logger.error(
+                    f"Hit BadZipFile, returning []. ",
+                    f"Mimecast request ID: '{request.headers.get('mc-siem-token')}', ",
+                    f"Error: {error}",
+                    exc_info=True,
+                )
         except Exception as exception_error:
-            self.logger.error(f"Hit an unexpected error, returning []. Error: {exception_error}", exc_info=True)
+            self.logger.error(
+                f"Hit an unexpected error,",
+                f"Mimecast request ID: '{request.headers.get('mc-siem-token')}', ",
+                f"returning []. Error: {exception_error}",
+                exc_info=True,
+            )
         return []
 
     def _prepare_header(self, uri: str) -> dict:
