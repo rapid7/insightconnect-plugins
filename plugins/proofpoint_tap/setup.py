@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="proofpoint_tap-rapid7-plugin",
-      version="4.1.7",
+      version="4.1.8",
       description="Parse Proofpoint Targeted Attack Protection (TAP) alerts",
       author="rapid7",
       author_email="",
