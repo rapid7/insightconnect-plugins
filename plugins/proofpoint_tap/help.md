@@ -23,7 +23,7 @@ threats before they reach your inbox. This plugin enables users to parse TAP ale
 # Supported Product Versions
 
 * Proofpoint TAP API v2
-* Tested on 2023-06-22
+* Tested on 2024-03-27
 
 # Documentation
 
@@ -31,10 +31,10 @@ threats before they reach your inbox. This plugin enables users to parse TAP ale
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|secret|credential_secret_key|None|False|The TAP secret for basic authentication API interaction|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
-|servicePrincipal|credential_secret_key|None|False|The TAP service principal for basic authentication API interaction|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|secret|credential_secret_key|None|False|The TAP secret for basic authentication API interaction|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|None|None|
+|servicePrincipal|credential_secret_key|None|False|The TAP service principal for basic authentication API interaction|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|None|None|
 
 Example input:
 
@@ -55,11 +55,11 @@ This action is used to fetch forensic evidence about individual threats or campa
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|campaignId|string|None|False|Campaign identifier|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
-|includeCampaignForensics|boolean|None|False|Include campaign forensics in threats. This parameter works only with Threat ID|None|False|
-|threatId|string|None|False|Threat identifier|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|campaignId|string|None|False|Campaign identifier|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|None|None|
+|includeCampaignForensics|boolean|None|False|Include campaign forensics in threats. This parameter works only with Threat ID|None|False|None|None|
+|threatId|string|None|False|Threat identifier|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|None|None|
 
 Example input:
 
@@ -119,9 +119,9 @@ This action is used to decode URLs which have been rewritten by TAP to their ori
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|urls|[]string|None|True|List of URLs to decode|None|["https://example.com", "https://example2.com"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|urls|[]string|None|True|List of URLs to decode|None|["https://example.com", "https://example2.com"]|None|None|
 
 Example input:
 
@@ -160,9 +160,9 @@ This action is used to fetch the identities and attack index of the top clickers
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|window|integer|None|True|An integer indicating how many days the data should be retrieved for|[14, 30, 90]|14|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|window|integer|None|True|An integer indicating how many days the data should be retrieved for|[14, 30, 90]|14|None|None|
 
 Example input:
 
@@ -237,12 +237,12 @@ This action is used to fetch events for clicks to malicious URLs permitted in th
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|threatStatus|string|all|True|The threat statuses which will be returned in the data|["active", "cleared", "falsePositive", "all"]|active|
-|timeEnd|date|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T22:00:00+00:00|
-|timeStart|date|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T21:00:00+00:00|
-|url|string|None|False|The URL for which the results will be returned. Returns all results if left empty|None|https://example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|threatStatus|string|all|True|The threat statuses which will be returned in the data|["active", "cleared", "falsePositive", "all"]|active|None|None|
+|timeEnd|date|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T22:00:00+00:00|None|None|
+|timeStart|date|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T21:00:00+00:00|None|None|
+|url|string|None|False|The URL for which the results will be returned. Returns all results if left empty|None|https://example.com|None|None|
 
 Example input:
 
@@ -296,13 +296,13 @@ This action is used to fetch events for messages delivered in the specified time
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|subject|string|None|False|The subject of the email for which the results will be returned (performs a full-match lookup). Returns all results if left empty|None|A phishy email|
-|threatStatus|string|all|True|The threat statuses which will be returned in the data|["active", "cleared", "falsePositive", "all"]|active|
-|threatType|string|all|True|The threat type which will be returned in the data|["url", "attachment", "messageText", "all"]|url|
-|timeEnd|date|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T22:00:00+00:00|
-|timeStart|date|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T21:00:00+00:00|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|subject|string|None|False|The subject of the email for which the results will be returned (performs a full-match lookup). Returns all results if left empty|None|A phishy email|None|None|
+|threatStatus|string|all|True|The threat statuses which will be returned in the data|["active", "cleared", "falsePositive", "all"]|active|None|None|
+|threatType|string|all|True|The threat type which will be returned in the data|["url", "attachment", "messageText", "all"]|url|None|None|
+|timeEnd|date|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T22:00:00+00:00|None|None|
+|timeStart|date|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T21:00:00+00:00|None|None|
 
 Example input:
 
@@ -411,13 +411,13 @@ This action is used to fetch events for messages blocked in the specified time p
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|subject|string|None|False|The subject of the email for which the results will be returned (performs a full-match lookup). Returns all results if left empty|None|A phishy email|
-|threatStatus|string|all|True|The threat statuses which will be returned in the data|["active", "cleared", "falsePositive", "all"]|active|
-|threatType|string|all|True|The threat type which will be returned in the data|["url", "attachment", "messageText", "all"]|url|
-|timeEnd|date|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T22:00:00+00:00|
-|timeStart|date|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T21:00:00+00:00|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|subject|string|None|False|The subject of the email for which the results will be returned (performs a full-match lookup). Returns all results if left empty|None|A phishy email|None|None|
+|threatStatus|string|all|True|The threat statuses which will be returned in the data|["active", "cleared", "falsePositive", "all"]|active|None|None|
+|threatType|string|all|True|The threat type which will be returned in the data|["url", "attachment", "messageText", "all"]|url|None|None|
+|timeEnd|date|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T22:00:00+00:00|None|None|
+|timeStart|date|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T21:00:00+00:00|None|None|
 
 Example input:
 
@@ -531,12 +531,12 @@ This action is used to fetch events for all clicks and messages relating to know
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|threatStatus|string|all|True|The threat statuses which will be returned in the data|["active", "cleared", "falsePositive", "all"]|active|
-|threatType|string|all|True|The threat type which will be returned in the data|["url", "attachment", "messageText", "all"]|url|
-|timeEnd|date|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T22:00:00+00:00|
-|timeStart|date|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T21:00:00+00:00|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|threatStatus|string|all|True|The threat statuses which will be returned in the data|["active", "cleared", "falsePositive", "all"]|active|None|None|
+|threatType|string|all|True|The threat type which will be returned in the data|["url", "attachment", "messageText", "all"]|url|None|None|
+|timeEnd|date|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T22:00:00+00:00|None|None|
+|timeStart|date|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T21:00:00+00:00|None|None|
 
 Example input:
 
@@ -641,12 +641,12 @@ This action is used to fetch events for clicks to malicious URLs blocked in the 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|threatStatus|string|all|True|The threat statuses which will be returned in the data|["active", "cleared", "falsePositive", "all"]|active|
-|timeEnd|date|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T22:00:00+00:00|
-|timeStart|date|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T21:00:00+00:00|
-|url|string|None|False|The URL for which the results will be returned. Returns all results if left empty|None|https://example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|threatStatus|string|all|True|The threat statuses which will be returned in the data|["active", "cleared", "falsePositive", "all"]|active|None|None|
+|timeEnd|date|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T22:00:00+00:00|None|None|
+|timeStart|date|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20T21:00:00+00:00|None|None|
+|url|string|None|False|The URL for which the results will be returned. Returns all results if left empty|None|https://example.com|None|None|
 
 Example input:
 
@@ -700,9 +700,9 @@ This action is used to parse a TAP alert. It is often used to parse the indicato
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|tapAlert|string|None|True|A Proofpoint TAP alert|None|`proofpoint      URL DefenseAn end user has clicked on a link in their email which Proofpoint now recog=nizes as malicious. Details about the threat, the permitted click, and the =message containing the link are below:ThreatURL      hxxp://ec2-12-23-34-123[.]compute-1[.]amazonaws[.]com/[.]0[.]/ja=ke[.]user@example[.]comCategory         phishCondemnation Time        2020-04-27T12:22:54ZMessageTime Delivered   2020-04-27T09:54:49ZRecipient        user@example.comSubject  =97Sender   =97Header From      =97Header ReplyTo   =97Message-ID       =97Message-GUID     -JsyOYf--Yt7cR-ctdIo7RuUiK9kSECEThreat-ID        6b5ebcb1a7fb7e19bad6d8e02a2a5e169320b1f8a759e7db48f3da6f4e=798a39Sender IP        =97Message Size     =97ClickTime     2020-04-27T09:54:49ZSource IP        192.168.50.100User Agent       Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0)= like GeckoView Threat Details<https://threatinsight.proofpoint.com/5d1ce8c6-1234-6789=-ef71-f3998c3e92e3/threat/email/6b5ebcb1a7fb7e19bad6d8e02a2a5e169320b1f8a75=9e7db48f3da6f4e798a39?linkOrigin=3Dnotif>You are receiving this message because you are subscribed to alerts from th=e Threat Insight Dashboard. Update your subscription preferences<https://th=reatinsight.proofpoint.com/5d1ce8c6-1234-6789-ef71-f3998c3e92e3/settings/pr=ivileges?linkOrigin=3Dnotif> to stop receiving these notifications.Proofpoint Targeted Attack Protectionproofpoint--_000_01000171bb978ba8b63e1565672b4239b8d917020071a120000000e_Content-Type: text/html; charset="Windows-1252"Content-ID: <user@example.com>Content-Transfer-Encoding: quoted-printable<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=252"></head><body style=3D"margin:0px"><div style=3D"background:#f1f2f2;font-family:Arial;font-size:13px;color:#66=6666"><div style=3D"background:white"><div style=3D"max-width:720px;margin:auto;padding:0"><table style=3D"width:100%;height:60px;font-family:inherit;font-size:inheri=t;color:inherit"><tbody><tr><td><b style=3D"font-size:22px;color:black">proofpoint</b> </td><td align=3D"right">URL Defense</td></tr><tr></tr></tbody></table></div></div><div style=3D"max-width:720px;margin:auto;padding:20px 0">An end user has c=licked on a link in their email which Proofpoint now recognizes as maliciou=s. Details about the threat, the permitted click, and the message containin=g the link are below:<p><b>Threat</b></p><p><table border=3D"1" style=3D"width:100%;border-collapse:collapse;border:sol=id 1px #d1d3d4;font-family:inherit;font-size:inherit;color:inherit" cellspa=cing=3D"0" cellpadding=3D"8"><col width=3D"150"><col><tbody><tr valign=3D"top"><td><b>URL</b></td><td style=3D"background:white">hxxp://ec2-12-34-56-123[.]compute-1[.]amazo=naws[.]com/[.]0[.]/user@example[.]com</td></tr><tr valign=3D"top"><td><b>Category</b></td><td style=3D"background:white">phish</td></tr><tr valign=3D"top"><td><b>Condemnation Time</b></td><td style=3D"background:white">2020-04-27T12:22:54Z</td></tr></tbody></table></p><p><b>Message</b></p><p><table border=3D"1" style=3D"width:100%;border-collapse:collapse;border:sol=id 1px #d1d3d4;font-family:inherit;font-size:inherit;color:inherit" cellspa=cing=3D"0" cellpadding=3D"8"><col width=3D"150"><col><tbody><tr valign=3D"top"><td><b>Time Delivered</b></td><td style=3D"background:white">2020-04-27T09:54:49Z</td></tr><tr valign=3D"top"><td><b>Recipient</b></td><td style=3D"background:white">user@example.com</td></tr><tr valign=3D"top"><td><b>Subject</b></td><td style=3D"background:white">=97</td></tr><tr valign=3D"top"><td><b>Sender</b></td><td style=3D"background:white">=97</td></tr><tr valign=3D"top"><td><b>Header From</b></td><td style=3D"background:white">=97</td></tr><tr valign=3D"top"><td><b>Header ReplyTo</b></td><td style=3D"background:white">=97</td></tr><tr valign=3D"top"><td><b>Message-ID</b></td><td style=3D"background:white">=97</td></tr><tr valign=3D"top"><td><b>Message-GUID</b></td><td style=3D"background:white">-JsyOYf--Yt7cR-ctdIo7RuUiK9kSECE</td></tr><tr valign=3D"top"><td><b>Threat-ID</b></td><td style=3D"background:white">6b5ebcb1a7fb7e19bad6d8e02a2a5e169320b1f8a759=e7db48f3da6f4e798a39</td></tr><tr valign=3D"top"><td><b>Sender IP</b></td><td style=3D"background:white">=97</td></tr><tr valign=3D"top"><td><b>Message Size</b></td><td style=3D"background:white">=97</td></tr></tbody></table></p><p><b>Click</b></p><p><table border=3D"1" style=3D"width:100%;border-collapse:collapse;border:sol=id 1px #d1d3d4;font-family:inherit;font-size:inherit;color:inherit" cellspa=cing=3D"0" cellpadding=3D"8"><col width=3D"150"><col><tbody><tr valign=3D"top"><td><b>Time</b></td><td style=3D"background:white">2020-04-27T09:54:49Z</td></tr><tr valign=3D"top"><td><b>Source IP</b></td><td style=3D"background:white">192.168.50.100</td></tr><tr valign=3D"top"><td><b>User Agent</b></td><td style=3D"background:white">Mozilla/5.0 (Windows NT 10.0; WOW64; Trident=/7.0; rv:11.0) like Gecko</td></tr></tbody></table></p><p></p><div style=3D"width:120px;margin:40px auto;padding:8px 32px;background:#06a=2d5;text-align:center"><a href=3D"https://threatinsight.proofpoint.com/5d1ce8c6-1234-6789-ef71-f39=98c3e92e3/threat/email/6b5ebcb1a7fb7e19bad6d8e02a2a5e169320b1f8a759e7db48f3=da6f4e798a39?linkOrigin=3Dnotif" style=3D"color:white;text-decoration:none"=>View Threat Details</a></div><div style=3D"font-size:11px;border-bottom:solid 1px #d1d3d4;padding-bottom=:8px;">You are receiving this message because you are subscribed to alerts =from the Threat Insight Dashboard.<a href=3D"https://threatinsight.proofpoint.com/5d1ce8c6-1234-6789-ef71-f39=98c3e92e3/settings/privileges?linkOrigin=3Dnotif">Update your subscription preferences</a> to stop receiving these notificati=ons. </div><p></p><div style=3D"font-size:11px;text-align:center;padding-bottom:30px">Proofpo=int Targeted Attack Protection<p><b>proofpoint</b> </p></div></div></div></body></html>--_000_01000171bb978ba8b63e1565672b4239b8d917020071a120000000e_--`|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|tapAlert|string|None|True|A Proofpoint TAP alert|None|`proofpoint      URL DefenseAn end user has clicked on a link in their email which Proofpoint now recog=nizes as malicious. Details about the threat, the permitted click, and the =message containing the link are below:ThreatURL      hxxp://ec2-12-23-34-123[.]compute-1[.]amazonaws[.]com/[.]0[.]/ja=ke[.]user@example[.]comCategory         phishCondemnation Time        2020-04-27T12:22:54ZMessageTime Delivered   2020-04-27T09:54:49ZRecipient        user@example.comSubject  =97Sender   =97Header From      =97Header ReplyTo   =97Message-ID       =97Message-GUID     -JsyOYf--Yt7cR-ctdIo7RuUiK9kSECEThreat-ID        6b5ebcb1a7fb7e19bad6d8e02a2a5e169320b1f8a759e7db48f3da6f4e=798a39Sender IP        =97Message Size     =97ClickTime     2020-04-27T09:54:49ZSource IP        192.168.50.100User Agent       Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0)= like GeckoView Threat Details<https://threatinsight.proofpoint.com/5d1ce8c6-1234-6789=-ef71-f3998c3e92e3/threat/email/6b5ebcb1a7fb7e19bad6d8e02a2a5e169320b1f8a75=9e7db48f3da6f4e798a39?linkOrigin=3Dnotif>You are receiving this message because you are subscribed to alerts from th=e Threat Insight Dashboard. Update your subscription preferences<https://th=reatinsight.proofpoint.com/5d1ce8c6-1234-6789-ef71-f3998c3e92e3/settings/pr=ivileges?linkOrigin=3Dnotif> to stop receiving these notifications.Proofpoint Targeted Attack Protectionproofpoint--_000_01000171bb978ba8b63e1565672b4239b8d917020071a120000000e_Content-Type: text/html; charset="Windows-1252"Content-ID: <user@example.com>Content-Transfer-Encoding: quoted-printable<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=252"></head><body style=3D"margin:0px"><div style=3D"background:#f1f2f2;font-family:Arial;font-size:13px;color:#66=6666"><div style=3D"background:white"><div style=3D"max-width:720px;margin:auto;padding:0"><table style=3D"width:100%;height:60px;font-family:inherit;font-size:inheri=t;color:inherit"><tbody><tr><td><b style=3D"font-size:22px;color:black">proofpoint</b> </td><td align=3D"right">URL Defense</td></tr><tr></tr></tbody></table></div></div><div style=3D"max-width:720px;margin:auto;padding:20px 0">An end user has c=licked on a link in their email which Proofpoint now recognizes as maliciou=s. Details about the threat, the permitted click, and the message containin=g the link are below:<p><b>Threat</b></p><p><table border=3D"1" style=3D"width:100%;border-collapse:collapse;border:sol=id 1px #d1d3d4;font-family:inherit;font-size:inherit;color:inherit" cellspa=cing=3D"0" cellpadding=3D"8"><col width=3D"150"><col><tbody><tr valign=3D"top"><td><b>URL</b></td><td style=3D"background:white">hxxp://ec2-12-34-56-123[.]compute-1[.]amazo=naws[.]com/[.]0[.]/user@example[.]com</td></tr><tr valign=3D"top"><td><b>Category</b></td><td style=3D"background:white">phish</td></tr><tr valign=3D"top"><td><b>Condemnation Time</b></td><td style=3D"background:white">2020-04-27T12:22:54Z</td></tr></tbody></table></p><p><b>Message</b></p><p><table border=3D"1" style=3D"width:100%;border-collapse:collapse;border:sol=id 1px #d1d3d4;font-family:inherit;font-size:inherit;color:inherit" cellspa=cing=3D"0" cellpadding=3D"8"><col width=3D"150"><col><tbody><tr valign=3D"top"><td><b>Time Delivered</b></td><td style=3D"background:white">2020-04-27T09:54:49Z</td></tr><tr valign=3D"top"><td><b>Recipient</b></td><td style=3D"background:white">user@example.com</td></tr><tr valign=3D"top"><td><b>Subject</b></td><td style=3D"background:white">=97</td></tr><tr valign=3D"top"><td><b>Sender</b></td><td style=3D"background:white">=97</td></tr><tr valign=3D"top"><td><b>Header From</b></td><td style=3D"background:white">=97</td></tr><tr valign=3D"top"><td><b>Header ReplyTo</b></td><td style=3D"background:white">=97</td></tr><tr valign=3D"top"><td><b>Message-ID</b></td><td style=3D"background:white">=97</td></tr><tr valign=3D"top"><td><b>Message-GUID</b></td><td style=3D"background:white">-JsyOYf--Yt7cR-ctdIo7RuUiK9kSECE</td></tr><tr valign=3D"top"><td><b>Threat-ID</b></td><td style=3D"background:white">6b5ebcb1a7fb7e19bad6d8e02a2a5e169320b1f8a759=e7db48f3da6f4e798a39</td></tr><tr valign=3D"top"><td><b>Sender IP</b></td><td style=3D"background:white">=97</td></tr><tr valign=3D"top"><td><b>Message Size</b></td><td style=3D"background:white">=97</td></tr></tbody></table></p><p><b>Click</b></p><p><table border=3D"1" style=3D"width:100%;border-collapse:collapse;border:sol=id 1px #d1d3d4;font-family:inherit;font-size:inherit;color:inherit" cellspa=cing=3D"0" cellpadding=3D"8"><col width=3D"150"><col><tbody><tr valign=3D"top"><td><b>Time</b></td><td style=3D"background:white">2020-04-27T09:54:49Z</td></tr><tr valign=3D"top"><td><b>Source IP</b></td><td style=3D"background:white">192.168.50.100</td></tr><tr valign=3D"top"><td><b>User Agent</b></td><td style=3D"background:white">Mozilla/5.0 (Windows NT 10.0; WOW64; Trident=/7.0; rv:11.0) like Gecko</td></tr></tbody></table></p><p></p><div style=3D"width:120px;margin:40px auto;padding:8px 32px;background:#06a=2d5;text-align:center"><a href=3D"https://threatinsight.proofpoint.com/5d1ce8c6-1234-6789-ef71-f39=98c3e92e3/threat/email/6b5ebcb1a7fb7e19bad6d8e02a2a5e169320b1f8a759e7db48f3=da6f4e798a39?linkOrigin=3Dnotif" style=3D"color:white;text-decoration:none"=>View Threat Details</a></div><div style=3D"font-size:11px;border-bottom:solid 1px #d1d3d4;padding-bottom=:8px;">You are receiving this message because you are subscribed to alerts =from the Threat Insight Dashboard.<a href=3D"https://threatinsight.proofpoint.com/5d1ce8c6-1234-6789-ef71-f39=98c3e92e3/settings/privileges?linkOrigin=3Dnotif">Update your subscription preferences</a> to stop receiving these notificati=ons. </div><p></p><div style=3D"font-size:11px;text-align:center;padding-bottom:30px">Proofpo=int Targeted Attack Protection<p><b>proofpoint</b> </p></div></div></div></body></html>--_000_01000171bb978ba8b63e1565672b4239b8d917020071a120000000e_--`|None|None|
 
 Example input:
 
@@ -1171,6 +1171,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.1.8 - Include SDK 5.4.9 | Task - Use cutoff of 7 days for first query, use cutoff of 1 hours for subsequent queries
 * 4.1.7 - Include SDK 5.4.5 | Task - enforce query cutoff based on Proofpoint API max lookback | Task - toggle pagination when backfilling | Task - only store previous page of hashes.
 * 4.1.6 - Include SDK 5.4.4 which prevents any potential memory leaks | first task lookup should only be 1 hour unless override supplied.
 * 4.1.5 - Include SDK 5.4 which adds new task custom_config parameter.
