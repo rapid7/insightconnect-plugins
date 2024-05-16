@@ -571,13 +571,27 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|click_logs|[]click_logs|False|Click Logs|[{"userEmailAddress": "user@example.com","url": "https://example.com","ttpDefinition": "Default URL Protection Definition","action": "warn","adminOverride": "N/A","userOverride": None,"scanResult": "malicious","category": "Compromised","userAwarenessAction": "N/A","date": "2019-04-23T19:50:28+0000","route": "inbound"}]|
+|click_logs|[]click_logs|False|Click Logs|[{"userEmailAddress": "user@example.com", "url": "https://example.com", "ttpDefinition": "Default URL Protection Definition", "action": "warn", "adminOverride": "N/A", "userOverride": "None", "scanResult": "malicious", "category": "Compromised", "userAwarenessAction": "N/A", "date": "2019-04-23T19:50:28+0000", "route": "inbound"}]|
   
 Example output:
 
 ```
 {
-  "click_logs": "[{\"userEmailAddress\": \"user@example.com\",\"url\": \"https://example.com\",\"ttpDefinition\": \"Default URL Protection Definition\",\"action\": \"warn\",\"adminOverride\": \"N/A\",\"userOverride\": None,\"scanResult\": \"malicious\",\"category\": \"Compromised\",\"userAwarenessAction\": \"N/A\",\"date\": \"2019-04-23T19:50:28+0000\",\"route\": \"inbound\"}]"
+  "click_logs": [
+    {
+      "action": "warn",
+      "adminOverride": "N/A",
+      "category": "Compromised",
+      "date": "2019-04-23T19:50:28+0000",
+      "route": "inbound",
+      "scanResult": "malicious",
+      "ttpDefinition": "Default URL Protection Definition",
+      "url": "https://example.com",
+      "userAwarenessAction": "N/A",
+      "userEmailAddress": "user@example.com",
+      "userOverride": "None"
+    }
+  ]
 }
 ```
 

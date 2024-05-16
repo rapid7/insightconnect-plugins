@@ -1490,7 +1490,7 @@ actions:
         description: Click Logs
         type: "[]click_logs"
         required: false
-        example: '[{"userEmailAddress": "user@example.com","url": "https://example.com","ttpDefinition": "Default URL Protection Definition","action": "warn","adminOverride": "N/A","userOverride": None,"scanResult": "malicious","category": "Compromised","userAwarenessAction": "N/A","date": "2019-04-23T19:50:28+0000","route": "inbound"}]'
+        example: [{"userEmailAddress": "user@example.com","url": "https://example.com","ttpDefinition": "Default URL Protection Definition","action": "warn","adminOverride": "N/A","userOverride": None,"scanResult": "malicious","category": "Compromised","userAwarenessAction": "N/A","date": "2019-04-23T19:50:28+0000","route": "inbound"}]
   decode_url:
     title: Decode URL
     description: Decode a Mimecast encoded URL
