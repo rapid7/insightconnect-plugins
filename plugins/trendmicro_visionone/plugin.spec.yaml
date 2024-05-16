@@ -2,11 +2,11 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: trendmicro_visionone
-title: Trend Micro Vision One
-description: Trend Micro Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
+title: Trend Vision One
+description: Trend Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
 version: 4.0.0
 connection_version: 3
-supported_versions: [Trend Micro Vision One API v3]
+supported_versions: [Trend Vision One API v3]
 vendor: trendmicro
 support: community
 status: []
@@ -66,12 +66,12 @@ key_features:
 - Update API Key
 - Update Custom Script
 requirements:
-- Requires a Trend Micro Vision One API Key
+- Requires a Trend Vision One API Key
 - API must be enabled on the Settings page in the product's user interface
 links:
 - '[TrendMicro](https://www.trendmicro.com/en_us/business.html)'
 references:
-- '[Trend Micro Vision One](https://docs.trendmicro.com/en-us/enterprise/trend-micro-xdr-help/home)'
+- '[Trend Vision One](https://docs.trendmicro.com/en-us/enterprise/trend-micro-xdr-help/home)'
 version_history:
 - 4.0.0 - Added API Keys related actions
 - 3.0.0 - Refactored pytmv1 usage | Added Custom Scripts and Activity related actions
@@ -104,7 +104,7 @@ types:
     task_id:
       title: Task ID
       type: string
-      description: Task ID in Trend Micro Vision One of the executed action
+      description: Task ID in Trend Vision One of the executed action
       required: false
   suspicious_objects:
     url:
@@ -1077,7 +1077,7 @@ types:
 connection:
   api_url:
     title: API URL
-    description: URL of Trend Micro Vision One
+    description: URL of Trend Vision One
     type: string
     default: https://api.xdr.trendmicro.com
     required: true
@@ -1627,7 +1627,7 @@ actions:
         example: .exe
   collect_file:
     title: Collect File
-    description: Collects a file from one or more endpoints and then sends the files to Trend Micro Vision One in a password-protected archive Note- You can specify either the computer name- endpointName or the GUID of the installed agent program- agentGuid
+    description: Collects a file from one or more endpoints and then sends the files to Trend Vision One in a password-protected archive Note- You can specify either the computer name- endpointName or the GUID of the installed agent program- agentGuid
     input:
       collect_files:
         title: Collect Files
@@ -1922,7 +1922,7 @@ actions:
         example: '{"content":"dGVzdA==","filename":"r7-test11.pdf"}'
   submit_file_to_sandbox:
     title: Submit File to Sandbox
-    description: Submits a file to the sandbox for analysis (Note. For more information about the supported file types, see the Trend Micro Vision One Online Help. Submissions require credits. Does not require credits in regions where Sandbox Analysis has not been officially released.)
+    description: Submits a file to the sandbox for analysis (Note. For more information about the supported file types, see the Trend Vision One Online Help. Submissions require credits. Does not require credits in regions where Sandbox Analysis has not been officially released.)
     input:
       file:
         title: File

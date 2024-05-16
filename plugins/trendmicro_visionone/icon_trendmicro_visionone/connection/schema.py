@@ -26,7 +26,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "api_url": {
       "type": "string",
       "title": "API URL",
-      "description": "URL of Trend Micro Vision One",
+      "description": "URL of Trend Vision One",
       "default": "https://api.xdr.trendmicro.com",
       "order": 1
     },

@@ -103,7 +103,7 @@ class QuarantineEmailMessageOutput(insightconnect_plugin_runtime.Output):
         "task_id": {
           "type": "string",
           "title": "Task ID",
-          "description": "Task ID in Trend Micro Vision One of the executed action",
+          "description": "Task ID in Trend Vision One of the executed action",
           "order": 2
         }
       },
