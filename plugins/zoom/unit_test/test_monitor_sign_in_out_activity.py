@@ -478,7 +478,6 @@ class TestGetUserActivityEvents(unittest.TestCase):
         }
 
         output, state, has_more_pages, status_code, error = self.task.run(state=state)
-        print(state)
 
         self.assertListEqual(output, expected_output)
         self.assertDictEqual(state, expected_state)
