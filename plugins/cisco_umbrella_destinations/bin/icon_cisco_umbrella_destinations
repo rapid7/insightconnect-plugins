@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Cisco Umbrella Destinations"
 Vendor = "rapid7"
-Version = "5.0.0"
+Version = "5.0.1"
 Description = "Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization"
 
 
@@ -23,7 +23,7 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
-    from icon_cisco_umbrella_destinations import connection, actions, triggers, tasks
+    from icon_cisco_umbrella_destinations import connection, actions
 
     class ICONCiscoUmbrellaDestinations(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
