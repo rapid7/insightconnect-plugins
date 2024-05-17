@@ -197,9 +197,11 @@ class TestGetUserActivityEvents(unittest.TestCase):
     def test_broken_pagination_token_run(
         self, mock_call: MagicMock, mock_datetime_now: MagicMock, mock_datetime_last_24: MagicMock
     ) -> None:
+        expected_state = STUB_EXPECTED_PAGINATION_ERROR_STATE.copy()
         output, state, has_more_pages, status_code, error = self.task.run(state=STUB_EXPECTED_PAGINATION_ERROR_STATE)
+        del expected_state["next_page_token"]
+
         expected_output, expected_has_more_pages, expected_status_code, expected_error = [], False, 200, None
-        expected_state = STUB_EXPECTED_PAGINATION_ERROR_STATE_OUTPUT
         self.assertListEqual(output, expected_output)
         self.assertDictEqual(state, expected_state)
         self.assertFalse(output, expected_has_more_pages)
@@ -315,7 +317,6 @@ class TestGetUserActivityEvents(unittest.TestCase):
     @patch(GET_USER_ACTIVITY_EVENTS_PATH, return_value=([{"test": "value"}], ""))
     def test_api_output_changed_error_catch(self, mock_call: MagicMock, mock_datetime: MagicMock) -> None:
         output, state, has_more_pages, status_code, error = self.task.run(state={})
-
         expected_state = {
             "last_request_timestamp": "2000-01-01T00:00:00Z",
             "latest_event_timestamp": None,
@@ -466,19 +467,17 @@ class TestGetUserActivityEvents(unittest.TestCase):
 
         expected_output, expected_has_more_pages, expected_status_code, expected_error = (
             STUB_EXPECTED_PREVIOUS_OUTPUT,
-            False,
+            True,
             200,
             None,
         )
 
         expected_state = {
             "previous_run_state": "paginating",
-            "latest_event_timestamp": None,
             "last_request_timestamp": "2024-02-23T22:00:00Z",
         }
 
         output, state, has_more_pages, status_code, error = self.task.run(state=state)
-
         self.assertListEqual(output, expected_output)
         self.assertDictEqual(state, expected_state)
         self.assertEqual(has_more_pages, expected_has_more_pages)

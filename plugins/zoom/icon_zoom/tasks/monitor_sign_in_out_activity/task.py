@@ -228,7 +228,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 self.logger.info(
                     "No pagination token returned by Zoom API - but end time has not caught up to current time"
                 )
-                has_more_pages = False
+                has_more_pages = True
             else:
                 self.logger.info("No pagination token returned by Zoom API - all pages have been consumed")
                 has_more_pages = False
@@ -352,23 +352,10 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 # In this instance, we clear the current pagination token and begin a continuing state
                 self.logger.error("Invalid or expired pagination token received, exiting pagination.")
                 self.logger.error(f"Error received {exception.data}")
-                # We set the last request time to the last event timestamp to begin our request from that timestamp
-                if state.get(self.LATEST_EVENT_TIMESTAMP):
-                    continuation_timestamp = state.get(self.LATEST_EVENT_TIMESTAMP)
-                elif state.get(self.LATEST_EVENT_TIMESTAMP_LATCH):
-                    continuation_timestamp = state.get(self.LATEST_EVENT_TIMESTAMP_LATCH)
-                else:
-                    continuation_timestamp = now
+                del state[self.NEXT_PAGE_TOKEN]
                 return TaskOutput(
                     output=[],
-                    state={
-                        self.LAST_REQUEST_TIMESTAMP: continuation_timestamp,
-                        self.LATEST_EVENT_TIMESTAMP: state.get(
-                            self.LATEST_EVENT_TIMESTAMP, state.get(self.LATEST_EVENT_TIMESTAMP_LATCH)
-                        ),
-                        self.LATEST_EVENT_TIMESTAMP_LATCH: state.get(self.LATEST_EVENT_TIMESTAMP_LATCH),
-                        self.PREVIOUS_RUN_STATE: run_state,
-                    },
+                    state=state,
                     has_more_pages=False,
                     status_code=200,
                     error=None,
