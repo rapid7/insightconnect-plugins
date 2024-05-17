@@ -176,8 +176,13 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 next_page_token=state.get(self.NEXT_PAGE_TOKEN),
             )
         except Exception as exception:
-            self.logger.error(f"An Exception has been raised. Error: {exception}, returning state={state}")
-            return self.handle_request_exception(exception=exception, now=now)
+            if "The next page token is invalid or expired." in exception.data:
+                return self.handle_request_exception(
+                    exception=exception, now=now, state=state, run_state=rs.value, pagination_timeout=True
+                )
+            else:
+                self.logger.error(f"An Exception has been raised. Error: {exception}, returning state={state}")
+                return self.handle_request_exception(exception=exception, now=now)
 
         try:
             new_events = sorted([Event(**event) for event in new_events])
@@ -317,7 +322,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             ),
         )
 
-    def handle_request_exception(self, exception: Exception, now: str) -> TaskOutput:
+    def handle_request_exception(
+        self, exception: Exception, now: str, state: {}, run_state: str, pagination_timeout: bool = True
+    ) -> TaskOutput:
         if isinstance(exception, (AuthenticationRetryLimitError, AuthenticationError)):
             self.logger.error(
                 f"{self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_CAUSE} "
@@ -338,8 +345,34 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                     assistance=self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE_ASSISTANCE,
                 ),
             )
+
         elif isinstance(exception, PluginException):
             # Add additional information to aid customer if correct permissions are not set in the Zoom App
+            if pagination_timeout:
+                # In this instance, we clear the current pagination token and begin a continuing state
+                self.logger.error("Invalid or expired pagination token received, exiting pagination.")
+                self.logger.error(f"Error received {exception.data}")
+                # We set the last request time to the last event timestamp to begin our request from that timestamp
+                if state.get(self.LATEST_EVENT_TIMESTAMP):
+                    continuation_timestamp = state.get(self.LATEST_EVENT_TIMESTAMP)
+                elif state.get(self.LATEST_EVENT_TIMESTAMP_LATCH):
+                    continuation_timestamp = state.get(self.LATEST_EVENT_TIMESTAMP_LATCH)
+                else:
+                    continuation_timestamp = now
+                return TaskOutput(
+                    output=[],
+                    state={
+                        self.LAST_REQUEST_TIMESTAMP: continuation_timestamp,
+                        self.LATEST_EVENT_TIMESTAMP: state.get(
+                            self.LATEST_EVENT_TIMESTAMP, state.get(self.LATEST_EVENT_TIMESTAMP_LATCH)
+                        ),
+                        self.LATEST_EVENT_TIMESTAMP_LATCH: state.get(self.LATEST_EVENT_TIMESTAMP_LATCH),
+                        self.PREVIOUS_RUN_STATE: run_state,
+                    },
+                    has_more_pages=True,
+                    status_code=200,
+                    error=None,
+                )
             if "Invalid access token, does not contain scope" in exception.data:
                 self.logger.error(self.PERMISSIONS_ERROR_MESSAGE)
                 return TaskOutput(
