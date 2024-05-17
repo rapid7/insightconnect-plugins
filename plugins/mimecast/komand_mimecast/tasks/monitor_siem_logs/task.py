@@ -73,7 +73,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 # if we have reached the last page then we have caught up to `now`
                 # as result we now then want to use a longer cut off incase the task gets stopped
                 if headers.get(IS_LAST_TOKEN_FIELD) and state.get("normal_running_cutoff") is None:
-                    self.logger.info("Caught up, saving 'normal_running_cutoff' as True' to the state")
+                    self.logger.info("Caught up, saving 'normal_running_cutoff' as 'True' to the state")
                     state["normal_running_cutoff"] = True
 
             return output, state, has_more_pages, status_code, None
