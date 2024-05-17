@@ -323,7 +323,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         )
 
     def handle_request_exception(
-        self, exception: Exception, now: str, state: {} = None, run_state: str = None, pagination_timeout: bool = True
+        self, exception: Exception, now: str, state: {} = None, run_state: str = None, pagination_timeout: bool = False
     ) -> TaskOutput:
         if isinstance(exception, (AuthenticationRetryLimitError, AuthenticationError)):
             self.logger.error(
