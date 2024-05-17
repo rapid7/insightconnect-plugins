@@ -228,7 +228,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 self.logger.info(
                     "No pagination token returned by Zoom API - but end time has not caught up to current time"
                 )
-                has_more_pages = True
+                has_more_pages = False
             else:
                 self.logger.info("No pagination token returned by Zoom API - all pages have been consumed")
                 has_more_pages = False
@@ -323,7 +323,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         )
 
     def handle_request_exception(
-        self, exception: Exception, now: str, state: {}, run_state: str, pagination_timeout: bool = True
+        self, exception: Exception, now: str, state: {} = None, run_state: str = None, pagination_timeout: bool = True
     ) -> TaskOutput:
         if isinstance(exception, (AuthenticationRetryLimitError, AuthenticationError)):
             self.logger.error(
@@ -369,7 +369,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                         self.LATEST_EVENT_TIMESTAMP_LATCH: state.get(self.LATEST_EVENT_TIMESTAMP_LATCH),
                         self.PREVIOUS_RUN_STATE: run_state,
                     },
-                    has_more_pages=True,
+                    has_more_pages=False,
                     status_code=200,
                     error=None,
                 )
