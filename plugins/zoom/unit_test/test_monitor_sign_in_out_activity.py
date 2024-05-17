@@ -124,7 +124,7 @@ STUB_EXPECTED_PAGINATION_ERROR_STATE_OUTPUT = {
     "last_request_timestamp": "2023-02-22T21:44:44Z",
     "latest_event_timestamp": "2023-02-22T21:44:44Z",
     "latest_event_timestamp_latch": None,
-    "previous_run_state": "paginating"
+    "previous_run_state": "paginating",
 }
 
 CUSTOM_LOOKBACK = {"year": 2023, "month": 1, "day": 23, "hour": 22, "minute": 0, "second": 0}
@@ -187,7 +187,13 @@ class TestGetUserActivityEvents(unittest.TestCase):
 
     @patch(GET_DATETIME_LAST_X_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
     @patch(GET_DATETIME_NOW_PATH, side_effect=[STUB_DATETIME_NOW + datetime.timedelta(minutes=DEFAULT_TIMEDELTA)])
-    @patch(GET_USER_ACTIVITY_EVENTS_PATH, side_effect=PluginException(preset=PluginException.Preset.BAD_REQUEST, data={'code': 300, 'message': 'The next page token is invalid or expired.'}))
+    @patch(
+        GET_USER_ACTIVITY_EVENTS_PATH,
+        side_effect=PluginException(
+            preset=PluginException.Preset.BAD_REQUEST,
+            data={"code": 300, "message": "The next page token is invalid or expired."},
+        ),
+    )
     def test_broken_pagination_token_run(
         self, mock_call: MagicMock, mock_datetime_now: MagicMock, mock_datetime_last_24: MagicMock
     ) -> None:
