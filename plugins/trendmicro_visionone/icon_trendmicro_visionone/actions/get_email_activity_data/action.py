@@ -10,7 +10,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
-import json
 
 
 class GetEmailActivityData(insightconnect_plugin_runtime.Action):
@@ -37,9 +36,31 @@ class GetEmailActivityData(insightconnect_plugin_runtime.Action):
             query_op = pytmv1.QueryOp.OR
         elif "and" in query_op:
             query_op = pytmv1.QueryOp.AND
+        # Make sure response contains < 5K entries
+        self.logger.info("Checking Response Size...")
+        count = client.email.get_activity_count(
+            start_time=start_date_time,
+            end_time=end_date_time,
+            select=select,
+            top=top,
+            op=pytmv1.QueryOp(query_op),
+            **fields,
+        )
+        if "error" in count.result_code.lower():
+            raise PluginException(
+                cause="An error occurred while getting email activity data count.",
+                assistance="Please check your inputs and try again.",
+                data=count.error,
+            )
+        total_count = count.response.total_count
+        if total_count >= 5000:
+            raise PluginException(
+                cause="Attempted query is over-sized (more than 5K results).",
+                assistance="Please refine your inputs to reduce search size and try again.",
+            )
+        # Get Email Activity
         new_email_activity_data = []
-        # Make Action API Call
-        self.logger.info("Making API Call...")
+        self.logger.info("Getting Email Activity...")
         response = client.email.consume_activity(
             lambda email_activity_data: new_email_activity_data.append(email_activity_data.model_dump()),
             start_time=start_date_time,

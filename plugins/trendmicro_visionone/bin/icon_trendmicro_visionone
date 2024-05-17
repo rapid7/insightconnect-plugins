@@ -38,6 +38,8 @@ def main():
         
             self.add_trigger(triggers.PollAlertList())
         
+            self.add_trigger(triggers.PollOatList())
+        
             self.add_action(actions.EnableAccount())
         
             self.add_action(actions.DisableAccount())
@@ -131,6 +133,8 @@ def main():
             self.add_action(actions.DeleteApiKeys())
         
             self.add_action(actions.ListApiKeys())
+        
+            self.add_action(actions.GetOatList())
         
 
     """Run plugin"""

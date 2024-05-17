@@ -1,6 +1,6 @@
 {
-	"spec": "c35107f63f1fb949e8c7dc29d62c3232",
-	"manifest": "1249255511181cecd9139095d7fd0496",
+	"spec": "624ab0af36394d9f7a22cd8c385f8f3f",
+	"manifest": "93805204b4f9211ebff21194ea6a59bc",
 	"setup": "b589161c0fa5ed717797027248be6e21",
 	"schemas": [
 		{
@@ -108,6 +108,10 @@
 			"hash": "886cabb820246413f79f2ae52afc47eb"
 		},
 		{
+			"identifier": "get_oat_list/schema.py",
+			"hash": "3b7d95bd841b9c29c148ceaad6014ecd"
+		},
+		{
 			"identifier": "get_sandbox_analysis_result/schema.py",
 			"hash": "fddf43b1cea43e8df5ea53f1fddb5a3d"
 		},
@@ -198,6 +202,10 @@
 		{
 			"identifier": "poll_alert_list/schema.py",
 			"hash": "0ba6edc91e47e42e16d9dd18fa3e55b7"
+		},
+		{
+			"identifier": "poll_oat_list/schema.py",
+			"hash": "2b54ce2b327dd60ba440f339522623cc"
 		},
 		{
 			"identifier": "poll_sandbox_suspicious_list/schema.py",
