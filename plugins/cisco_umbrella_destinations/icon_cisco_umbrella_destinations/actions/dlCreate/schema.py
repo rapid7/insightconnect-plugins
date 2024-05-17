@@ -40,7 +40,7 @@ class DlCreateInput(insightconnect_plugin_runtime.Input):
     "comment": {
       "type": "string",
       "title": "Comment",
-      "description": "Comment about the destination to be added to the newly created destination list",
+      "description": "Comment about the destination to be added to the newly created destination list, unavailable if destination is not specified",
       "order": 6
     },
     "destination": {
@@ -65,11 +65,13 @@ class DlCreateInput(insightconnect_plugin_runtime.Input):
     "type": {
       "type": "string",
       "title": "Type",
-      "description": "Type of the destination to be added to the newly created destination list",
+      "description": "Type of the destination to be added to the newly created destination list, unavailable if destination is not specified",
+      "default": "",
       "enum": [
         "DOMAIN",
         "URL",
-        "IPV4"
+        "IPV4",
+        ""
       ],
       "order": 5
     }
