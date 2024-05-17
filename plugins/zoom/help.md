@@ -307,6 +307,7 @@ Example output:
 
 # Version History
 
+* 4.1.10 -  Update Task `monitor_sign_in_out_activity` handle invalid or expired pagination token errors
 * 4.1.9 - Updated to include latest SDK functionality v5.4.8 | Task `monitor_sign_in_out_activity` updated to increase max lookback cutoff to 7 days
 * 4.1.8 - Updated to include latest SDK functionality v5.4.5 | Adding logic to `monitor_sign_in_out_activity` task to keep paginating until endtime catches up to now
 * 4.1.7 - Updated to include latest SDK functionality
