@@ -104,10 +104,27 @@ STUB_EXPECTED_PREVIOUS_OUTPUT = [
         "version": "5.13.7.15481",
     },
 ]
+
 STUB_EXPECTED_PREVIOUS_STATE = {
     "last_request_timestamp": "2023-02-23T22:00:00Z",
     "latest_event_timestamp": "2023-02-22T21:44:44Z",
     "previous_run_state": "starting",
+}
+
+STUB_EXPECTED_PAGINATION_ERROR_STATE = {
+    "last_request_timestamp": "2023-02-23T22:00:00Z",
+    "latest_event_timestamp": "2023-02-22T21:44:44Z",
+    "previous_run_state": "starting",
+    "next_page_token": "VhJdwkpaVJisdLxsXqfZuIZpwXTOW1IKtOK2",
+    "param_end_date": "2023-02-23T22:00:00Z",
+    "param_start_date": "2023-02-23T22:00:00Z",
+}
+
+STUB_EXPECTED_PAGINATION_ERROR_STATE_OUTPUT = {
+    "last_request_timestamp": "2023-02-22T21:44:44Z",
+    "latest_event_timestamp": "2023-02-22T21:44:44Z",
+    "latest_event_timestamp_latch": None,
+    "previous_run_state": "paginating",
 }
 
 CUSTOM_LOOKBACK = {"year": 2023, "month": 1, "day": 23, "hour": 22, "minute": 0, "second": 0}
@@ -159,6 +176,32 @@ class TestGetUserActivityEvents(unittest.TestCase):
             "latest_event_timestamp": STUB_EXPECTED_PREVIOUS_STATE.get("latest_event_timestamp", ""),
             "previous_run_state": "continuing",
         }
+        self.assertListEqual(output, expected_output)
+        self.assertDictEqual(state, expected_state)
+        self.assertFalse(output, expected_has_more_pages)
+        self.assertEqual(status_code, expected_status_code)
+        self.assertEqual(error, expected_error)
+
+        validate(output, MonitorSignInOutActivityOutput.schema)
+        validate(state, MonitorSignInOutActivityState.schema)
+
+    @patch(GET_DATETIME_LAST_X_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
+    @patch(GET_DATETIME_NOW_PATH, side_effect=[STUB_DATETIME_NOW + datetime.timedelta(minutes=DEFAULT_TIMEDELTA)])
+    @patch(
+        GET_USER_ACTIVITY_EVENTS_PATH,
+        side_effect=PluginException(
+            preset=PluginException.Preset.BAD_REQUEST,
+            data={"code": 300, "message": "The next page token is invalid or expired."},
+        ),
+    )
+    def test_broken_pagination_token_run(
+        self, mock_call: MagicMock, mock_datetime_now: MagicMock, mock_datetime_last_24: MagicMock
+    ) -> None:
+        expected_state = STUB_EXPECTED_PAGINATION_ERROR_STATE.copy()
+        output, state, has_more_pages, status_code, error = self.task.run(state=STUB_EXPECTED_PAGINATION_ERROR_STATE)
+        del expected_state["next_page_token"]
+
+        expected_output, expected_has_more_pages, expected_status_code, expected_error = [], False, 200, None
         self.assertListEqual(output, expected_output)
         self.assertDictEqual(state, expected_state)
         self.assertFalse(output, expected_has_more_pages)
@@ -274,7 +317,6 @@ class TestGetUserActivityEvents(unittest.TestCase):
     @patch(GET_USER_ACTIVITY_EVENTS_PATH, return_value=([{"test": "value"}], ""))
     def test_api_output_changed_error_catch(self, mock_call: MagicMock, mock_datetime: MagicMock) -> None:
         output, state, has_more_pages, status_code, error = self.task.run(state={})
-
         expected_state = {
             "last_request_timestamp": "2000-01-01T00:00:00Z",
             "latest_event_timestamp": None,
@@ -430,10 +472,12 @@ class TestGetUserActivityEvents(unittest.TestCase):
             None,
         )
 
-        expected_state = {"previous_run_state": "paginating", "last_request_timestamp": "2024-02-23T22:00:00Z"}
+        expected_state = {
+            "previous_run_state": "paginating",
+            "last_request_timestamp": "2024-02-23T22:00:00Z",
+        }
 
         output, state, has_more_pages, status_code, error = self.task.run(state=state)
-
         self.assertListEqual(output, expected_output)
         self.assertDictEqual(state, expected_state)
         self.assertEqual(has_more_pages, expected_has_more_pages)
