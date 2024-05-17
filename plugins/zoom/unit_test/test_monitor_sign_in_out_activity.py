@@ -466,14 +466,19 @@ class TestGetUserActivityEvents(unittest.TestCase):
 
         expected_output, expected_has_more_pages, expected_status_code, expected_error = (
             STUB_EXPECTED_PREVIOUS_OUTPUT,
-            True,
+            False,
             200,
             None,
         )
 
-        expected_state = {"previous_run_state": "paginating", "last_request_timestamp": "2024-02-23T22:00:00Z"}
+        expected_state = {
+            "previous_run_state": "paginating",
+            "latest_event_timestamp": None,
+            "last_request_timestamp": "2024-02-23T22:00:00Z",
+        }
 
         output, state, has_more_pages, status_code, error = self.task.run(state=state)
+        print(state)
 
         self.assertListEqual(output, expected_output)
         self.assertDictEqual(state, expected_state)
