@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: cisco_umbrella_destinations
 title: Cisco Umbrella Destinations
-version: 5.0.0
+version: 5.0.1
 supported_versions: ["2024-05-14"]
 description: Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization
 vendor: rapid7
@@ -39,12 +39,14 @@ references:
   - "[Cisco Umbrella Destinations Docs](https://developer.cisco.com/docs/cloud-security/#!api-reference-policies-overview)"
   - "[Creating/Refreshing/Deleting Umbrella API Keys](https://developer.cisco.com/docs/cloud-security/#!authentication)"
 version_history:
+  - "5.0.1 - `dlCreate` - Added new values for `type` input and added error handling when adding destinations along with list"
   - "5.0.0 - `dlCreate` - Changed some inputs to required"
   - "4.0.0 - Updated to use V2 of the Cisco Umbrella API api.umbrella.com/policies/v2 | Updated to use OAuth2 client credentials flow"
   - "3.1.0 - Added dlGetByName and dlFilterAll action | Improved error handling data output"
   - "3.0.0 - Updated output for 'typeOf' to reflect update to Cisco API"
   - "2.0.0 - Updated output for dAdd & dDelete - Removed data element in the response"
   - "1.0.0 - Initial plugin includes create and modify destination lists"
+troubleshooting: "Version 3.2.0 uses v2 of the Cisco Umbrella API. The API endpoint for the destinations functionality is via api.umbrella.com/policies/v2/. To interact with this version of the API, use the reference in the Links session, to ensure an appropriate key and permissions is used for connecting (not a legacy key as this will not work with v2 of the API)."
 connection:
   api_key:
     title: API Key
@@ -316,17 +318,19 @@ actions:
         required: false
       type:
         title: Type
-        description: Type of the destination to be added to the newly created destination list
+        description: Type of the destination to be added to the newly created destination list, unavailable if destination is not specified
         example: URL
         type: string
         enum:
           - DOMAIN
           - URL
           - IPV4
+          - ""
+        default: ""
         required: false
       comment:
         title: Comment
-        description: Comment about the destination to be added to the newly created destination list
+        description: Comment about the destination to be added to the newly created destination list, unavailable if destination is not specified
         type: string
         example: Suspicious domain
         required: false

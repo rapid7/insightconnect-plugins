@@ -14,7 +14,7 @@ Cisco Umbrella Destinations allows users to manage, block, and allow network des
 
 # Supported Product Versions
 
-* 2023-03-29
+* 2024-05-14
 
 # Documentation
 
@@ -193,11 +193,11 @@ This action is used to create a destination list
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |access|string|allow|True|Allow or block access to domain|["allow", "block"]|allow|None|None|
-|comment|string|None|False|Comment about the destination to be added to the newly created destination list|None|Suspicious domain|None|None|
+|comment|string|None|False|Comment about the destination to be added to the newly created destination list, unavailable if destination is not specified|None|Suspicious domain|None|None|
 |destination|string|None|False|Destination to be added to the newly created destination list|None|www.example.com|None|None|
 |isGlobal|boolean|True|True|Boolean value indicating global state|None|True|None|None|
 |name|string|None|True|Label for the destination list|None|New list|None|None|
-|type|string|None|False|Type of the destination to be added to the newly created destination list|["DOMAIN", "URL", "IPV4"]|URL|None|None|
+|type|string||False|Type of the destination to be added to the newly created destination list, unavailable if destination is not specified|["DOMAIN", "URL", "IPV4", ""]|URL|None|None|
   
 Example input:
 
@@ -572,12 +572,11 @@ Example output:
 
 ## Troubleshooting
 
-Version 3.2.0 uses v2 of the Cisco Umbrella API. The API endpoint for the destinations functionality  is via 
-api.umbrella.com/policies/v2/ . To interact with this version of the API, use the reference in the Links session,
-to ensure an appropriate key and permissions is used for connecting (not a legacy key as this will not work with v2 of the API).
+Version 3.2.0 uses v2 of the Cisco Umbrella API. The API endpoint for the destinations functionality is via api.umbrella.com/policies/v2/. To interact with this version of the API, use the reference in the Links session, to ensure an appropriate key and permissions is used for connecting (not a legacy key as this will not work with v2 of the API).
 
 # Version History
 
+* 5.0.1 - `dlCreate` - Added new values for `type` input and added error handling when adding destinations along with list
 * 5.0.0 - `dlCreate` - Changed some inputs to required
 * 4.0.0 - Updated to use V2 of the Cisco Umbrella API api.umbrella.com/policies/v2 | Updated to use OAuth2 client credentials flow
 * 3.1.0 - Added dlGetByName and dlFilterAll action | Improved error handling data output
