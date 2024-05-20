@@ -8,7 +8,7 @@ from unittest.mock import Mock
 from icon_infoblox.actions.search_by_name import SearchByName
 from icon_infoblox.actions.search_by_name.schema import Input
 
-from unit_test.mock import (
+from mock import (
     Util,
     mock_request_200,
     mocked_request,

@@ -9,7 +9,7 @@ from icon_infoblox.actions.search_by_ip import SearchByIp
 from icon_infoblox.actions.search_by_ip.schema import Input
 
 
-from unit_test.mock import (
+from mock import (
     Util,
     mock_request_200,
     mocked_request,

@@ -56,14 +56,10 @@ def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
     if "fixedaddress" in url and status_code == 200:
         if method == "GET":
             return MockResponse("search_by_mac", status_code)
-        if method == "POST":
-            return MockResponse("add_fixed_address", status_code)
 
     if "record:host" in url and status_code == 200:
         if method == "GET":
             return MockResponse("search_by_name", status_code)
-        if method == "POST":
-            return MockResponse("add_host", status_code)
 
     raise Exception("Unrecognized endpoint")
 
