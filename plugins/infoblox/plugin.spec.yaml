@@ -78,6 +78,13 @@ connection:
     - '2.5'
     - '2.6'
     - '2.7'
+  ssl_verify:
+    title: SSL Verify
+    description: Toggle on or off SSL verify
+    type: boolean
+    example: true
+    default: false
+    required: true
 types:
   IPv4AddrCreate:
     ipv4addr:

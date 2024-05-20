@@ -24,6 +24,7 @@ The connection configuration accepts the following parameters:
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_version|string|2.7|True|Version of the API|["1.0", "1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "1.9", "2.0", "2.1", "2.2", "2.3", "2.4", "2.5", "2.6", "2.7"]|2.7|None|None|
 |credentials|credential_username_password|None|True|Infoblox username and password|None|{'username': 'user', 'password': 'pass'}|None|None|
+|ssl_verify|boolean|False|True|Toggle on or off SSL verify|None|True|None|None|
 |url|string|None|True|The URL of a running Infoblox instance (e.g. https://192.168.1.2 or https://example.infoblox.com)|None|https://192.168.1.2|None|None|
 
 Example input:
@@ -35,6 +36,7 @@ Example input:
     "password": "pass",
     "username": "user"
   },
+  "ssl_verify": false,
   "url": "https://192.168.1.2"
 }
 ```

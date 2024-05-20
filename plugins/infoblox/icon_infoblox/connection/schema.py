@@ -6,6 +6,7 @@ import json
 class Input:
     API_VERSION = "api_version"
     CREDENTIALS = "credentials"
+    SSL_VERIFY = "ssl_verify"
     URL = "url"
 
 
@@ -48,6 +49,13 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "Infoblox username and password",
       "order": 2
     },
+    "ssl_verify": {
+      "type": "boolean",
+      "title": "SSL Verify",
+      "description": "Toggle on or off SSL verify",
+      "default": false,
+      "order": 4
+    },
     "url": {
       "type": "string",
       "title": "URL",
@@ -58,6 +66,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "required": [
     "api_version",
     "credentials",
+    "ssl_verify",
     "url"
   ],
   "definitions": {

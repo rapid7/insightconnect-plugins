@@ -17,8 +17,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         api_version = params.get(Input.API_VERSION)
         username = params.get(Input.CREDENTIALS).get("username")
         password = params.get(Input.CREDENTIALS).get("password")
+        ssl_verify = params.get(Input.SSL_VERIFY)
 
-        self.infoblox_connection = InfobloxConnection(url, api_version, username, password, self.logger)
+        self.infoblox_connection = InfobloxConnection(url, api_version, username, password, ssl_verify, self.logger)
 
         self.logger.info("Connect: Infoblox connection established successfully")
 

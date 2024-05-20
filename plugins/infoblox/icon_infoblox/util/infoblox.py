@@ -3,11 +3,12 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class InfobloxConnection:
-    def __init__(self, host, api_version, user, password, logger):
+    def __init__(self, host, api_version, user, password, ssl_verify, logger):
         self.host = host
         self.api_version = api_version
         self.user = user
         self.password = password
+        self.ssl_verify = ssl_verify
         self.logger = logger
 
         self._validate_connection()
@@ -66,7 +67,7 @@ class InfobloxConnection:
             ref = base_url + ref
         return ref
 
-    def _call_api(self, method, url, json=None, params=None):
+    def _call_api(self, method, url, json=None, params=None, ssl_verify=True):
         response = None
 
         if not params:
@@ -83,7 +84,7 @@ class InfobloxConnection:
                 json=json,
                 params=params,
                 auth=(self.user, self.password),
-                verify=False,
+                verify=self.ssl_verify,
             )
             response.raise_for_status()
         except Exception:
