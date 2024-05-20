@@ -20,11 +20,11 @@ class TestSearchByIp(TestCase):
     @mock.patch("icon_infoblox.util.infoblox.InfobloxConnection._validate_connection", return_value=True)
     def setUp(self, mock_post: Mock) -> None:
         self.action = Util.default_connector(SearchByIp())
-        self.params = {Input.IP: "192.168.0.1"}
+        self.params = {Input.IP: "192.0.0.0"}
 
     @mock.patch("requests.Session.request", side_effect=mock_request_200)
     def test_search_by_ip(self, mock_get):
         mocked_request(mock_get)
         response = self.action.run(self.params)
-        expected_response = {}
+        expected_response = {"result": []}
         self.assertEqual(response, expected_response)

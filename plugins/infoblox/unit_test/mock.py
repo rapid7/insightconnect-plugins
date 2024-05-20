@@ -35,6 +35,7 @@ class MockResponse:
         self.text = json.dumps(self.json())
         self.request = MagicMock()
         self.headers = MagicMock()
+        self.raise_for_status = MagicMock()
 
     def json(self):
         with open(
@@ -64,14 +65,8 @@ def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
         if method == "POST":
             return MockResponse("add_host", status_code)
 
-    # TODO - There will be others with 'record:host' but with more appended so ..
-
     raise Exception("Unrecognized endpoint")
 
 
 def mock_request_200(*args, **kwargs) -> MockResponse:
     return mock_conditions(kwargs.get("method"), kwargs.get("url"), 200)
-
-
-def mock_request_400(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 400)
