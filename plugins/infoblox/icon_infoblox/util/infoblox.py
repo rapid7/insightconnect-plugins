@@ -1,4 +1,5 @@
 from requests import request
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class InfobloxConnection:
@@ -16,12 +17,10 @@ class InfobloxConnection:
         try:
             self._call_api("GET", "", params={"_schema": 1})
         except Exception:
-            message = (
-                "InfobloxConnection: Failed to connect to host. "
-                "Please make sure that the credentials and host are correct"
+            raise PluginException(
+                cause="InfobloxConnection: Failed to connect to host. ",
+                assistance="Please make sure that the credentials and host are correct",
             )
-            self.logger.error(message)
-            raise Exception(message)
 
         self.logger.info("Validate: Successfully connected to Infoblox instance")
 
@@ -90,6 +89,9 @@ class InfobloxConnection:
         except Exception:
             message = f"Requests: Failed to call {api_url} (status {response.status_code}):\n{response.json()}"
             self.logger.error(message)
-            raise Exception(message)
+            raise PluginException(
+                cause=f"Requests: Failed to call {api_url} (status {response.status_code})",
+                assistance=f"{response.json()}",
+            )
 
         return response.json()["result"]

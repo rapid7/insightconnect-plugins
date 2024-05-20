@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    _REF = "_ref"
+    REF = "ref"
 
 
 class Output:
@@ -21,7 +21,7 @@ class GetHostInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "_ref": {
+    "ref": {
       "type": "string",
       "title": "Ref",
       "description": "Object Reference of the host",
@@ -29,7 +29,7 @@ class GetHostInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "_ref"
+    "ref"
   ],
   "definitions": {}
 }
@@ -60,7 +60,7 @@ class GetHostOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "Host",
       "properties": {
-        "_ref": {
+        "ref": {
           "type": "string",
           "title": "Ref",
           "description": "Object Reference of the host",
@@ -104,9 +104,9 @@ class GetHostOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "required": [
-        "_ref",
         "ipv4addrs",
-        "name"
+        "name",
+        "ref"
       ]
     },
     "IPv4Addr": {

@@ -12,7 +12,7 @@ class Input:
 
 
 class Output:
-    _REF = "_ref"
+    REF = "ref"
 
 
 class AddFixedAddressInput(insightconnect_plugin_runtime.Input):
@@ -67,7 +67,7 @@ class AddFixedAddressOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "_ref": {
+    "ref": {
       "type": "string",
       "title": "Ref",
       "description": "Object Reference of a newly added fixed address",
@@ -75,7 +75,7 @@ class AddFixedAddressOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "_ref"
+    "ref"
   ],
   "definitions": {}
 }

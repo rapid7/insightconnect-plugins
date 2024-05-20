@@ -18,4 +18,4 @@ class AddFixedAddress(insightconnect_plugin_runtime.Action):
 
         ref = self.connection.infoblox_connection.add_fixed_address(address_data)
 
-        return {Output._REF: ref}
+        return {Output.REF: ref}

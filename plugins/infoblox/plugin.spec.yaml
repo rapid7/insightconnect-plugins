@@ -117,7 +117,7 @@ types:
       title: Ref
       description: Object Reference of the IP address
   Host:
-    _ref:
+    ref:
       type: string
       required: true
       title: Ref
@@ -203,7 +203,7 @@ actions:
         example: {'Name': 'name', 'View': 'network_view', 'ipv4addrs': ['192.168.0.1', '192.168.0.2', '192.168.0.3']}
         required: true
     output:
-      _ref:
+      ref:
         title: Ref
         description: Object Reference of a newly added host
         type: string
@@ -213,7 +213,7 @@ actions:
     title: Get Host
     description: Obtain host details
     input:
-      _ref:
+      ref:
         type: string
         title: Ref
         description: Object Reference of the host
@@ -230,7 +230,7 @@ actions:
     title: Modify Host
     description: Update host data
     input:
-      _ref:
+      ref:
         type: string
         title: Ref
         description: Object Reference of the host to update
@@ -243,7 +243,7 @@ actions:
         description: Values of fields that should be changed
         example: { 'aliases': [ 'alias1', 'alias2' ], 'extattrs': { 'idk': 'idk' }, 'ipv4addrs': { 'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3' }, 'ipv4addrs+': { 'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3' }, 'ipv4addrs-': { 'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3' } }
     output:
-      _ref:
+      ref:
         type: string
         required: true
         title: Ref
@@ -253,14 +253,14 @@ actions:
     title: Delete Host
     description: Delete a host
     input:
-      _ref:
+      ref:
         type: string
         title: Ref
         description: Object Reference of the host to remove
         required: true
         example: 'ObjectRef'
     output:
-      _ref:
+      ref:
         type: string
         title: Ref
         description: Object Reference of the removed host
@@ -329,7 +329,7 @@ actions:
         description: New fixed address data
         example: { 'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3' }
     output:
-      _ref:
+      ref:
         required: true
         type: string
         title: Ref
