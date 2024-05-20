@@ -16,6 +16,4 @@ class AddHost(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         host = insightconnect_plugin_runtime.helper.clean_dict(params.get(Input.HOST))
 
-        ref = self.connection.infoblox_connection.add_host(host)
-
-        return {Output.REF: ref}
+        return {Output.REF: self.connection.infoblox_connection.add_host(host)}

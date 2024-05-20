@@ -16,6 +16,4 @@ class GetHost(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         ref = params.get(Input.REF)
 
-        host = self.connection.infoblox_connection.get_host(ref)
-
-        return {Output.HOST: host}
+        return {Output.HOST: self.connection.infoblox_connection.get_host(ref)}

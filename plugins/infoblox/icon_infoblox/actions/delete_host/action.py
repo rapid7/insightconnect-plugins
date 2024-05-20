@@ -16,6 +16,4 @@ class DeleteHost(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         ref = params.get(Input.REF)
 
-        ref = self.connection.infoblox_connection.delete_host(ref)
-
-        return {Output.REF: ref}
+        return {Output.REF: self.connection.infoblox_connection.delete_host(ref)}

@@ -16,6 +16,4 @@ class SearchByName(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         name_pattern = params.get(Input.NAME_PATTERN)
 
-        hosts = self.connection.infoblox_connection.search_by_name(name_pattern)
-
-        return {Output.RESULT: hosts}
+        return {Output.RESULT: self.connection.infoblox_connection.search_by_name(name_pattern)}

@@ -1,7 +1,7 @@
 import json
 import logging
 import os
-from typing import Callable
+from typing import Callable, Dict, Any
 from unittest import mock
 from unittest.mock import MagicMock
 from icon_infoblox.connection.connection import Connection
@@ -37,7 +37,7 @@ class MockResponse:
         self.headers = MagicMock()
         self.raise_for_status = MagicMock()
 
-    def json(self):
+    def json(self) -> Dict[str, Any]:
         with open(
             os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp")
         ) as file:
@@ -51,15 +51,15 @@ def mocked_request(side_effect: Callable) -> None:
 
 def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
     if "ipv4address" in url and status_code == 200:
-        return MockResponse("search_by_ip", status_code)
+        return MockResponse("search_by_ip_mac_name", status_code)
 
     if "fixedaddress" in url and status_code == 200:
         if method == "GET":
-            return MockResponse("search_by_mac", status_code)
+            return MockResponse("search_by_ip_mac_name", status_code)
 
     if "record:host" in url and status_code == 200:
         if method == "GET":
-            return MockResponse("search_by_name", status_code)
+            return MockResponse("search_by_ip_mac_name", status_code)
 
     raise Exception("Unrecognized endpoint")
 

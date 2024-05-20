@@ -17,6 +17,4 @@ class ModifyHost(insightconnect_plugin_runtime.Action):
         ref = params.get(Input.REF)
         updated_host = insightconnect_plugin_runtime.helper.clean_dict(params.get(Input.UPDATED_HOST))
 
-        ref = self.connection.infoblox_connection.modify_host(ref, updated_host)
-
-        return {Output.REF: ref}
+        return {Output.REF: self.connection.infoblox_connection.modify_host(ref, updated_host)}

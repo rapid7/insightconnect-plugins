@@ -25,8 +25,8 @@ class InfobloxConnection:
 
         self.logger.info("Validate: Successfully connected to Infoblox instance")
 
-    def add_host(self, host):
-        self.logger.info(f"AddHost: Creating new host: {str(host)}")
+    def add_host(self, host: str):
+        self.logger.info(f"AddHost: Creating new host: {host}")
         return self._call_api("POST", "record:host", json=host)
 
     def get_host(self, ref):
@@ -34,29 +34,29 @@ class InfobloxConnection:
         self.logger.info(f"GetHost: Getting host: {ref_url}")
         return self._call_api("GET", ref_url, params={"_return_fields+": "aliases,extattrs"})
 
-    def modify_host(self, ref, updated_host):
+    def modify_host(self, ref: str, updated_host: str):
         ref_url = self._format_url_with_ref("record:host", ref)
         self.logger.info(f"ModifyHost: Updating host: {ref_url}")
         return self._call_api("PUT", ref_url, json=updated_host)
 
-    def delete_host(self, ref):
+    def delete_host(self, ref: str):
         ref_url = self._format_url_with_ref("record:host", ref)
         self.logger.info(f"DeleteHost: Deleting host: {ref_url}")
         return self._call_api("DELETE", ref_url)
 
-    def add_fixed_address(self, address):
-        self.logger.info(f"AddFixedAddress: Adding address: {str(address)}")
+    def add_fixed_address(self, address: str) -> None:
+        self.logger.info(f"AddFixedAddress: Adding address: {address}")
         return self._call_api("POST", "fixedaddress", json=address)
 
-    def search_by_name(self, name_pattern):
+    def search_by_name(self, name_pattern: str):
         self.logger.info(f"SearchByName: Searching for {name_pattern}")
         return self._call_api("GET", "record:host", params={"name~": name_pattern})
 
-    def search_by_ip(self, ip):
+    def search_by_ip(self, ip: str):
         self.logger.info(f"SearchByIP: Searching for {ip}")
         return self._call_api("GET", "ipv4address", params={"ip_address": ip, "status": "USED"})
 
-    def search_by_mac(self, mac):
+    def search_by_mac(self, mac: str):
         self.logger.info(f"SearchByMAC: Searching for {mac}")
         return self._call_api("GET", "fixedaddress", params={"mac": mac, "_return_fields+": "mac"})
 

@@ -16,6 +16,4 @@ class SearchByMac(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         mac = params.get(Input.MAC)
 
-        result = self.connection.infoblox_connection.search_by_mac(mac)
-
-        return {Output.RESULT: result}
+        return {Output.RESULT: self.connection.infoblox_connection.search_by_mac(mac)}

@@ -16,6 +16,4 @@ class AddFixedAddress(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         address_data = params.get(Input.ADDRESS)
 
-        ref = self.connection.infoblox_connection.add_fixed_address(address_data)
-
-        return {Output.REF: ref}
+        return {Output.REF: self.connection.infoblox_connection.add_fixed_address(address_data)}
