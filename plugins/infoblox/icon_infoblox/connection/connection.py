@@ -21,3 +21,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.infoblox_connection = InfobloxConnection(url, api_version, username, password, self.logger)
 
         self.logger.info("Connect: Infoblox connection established successfully")
+
+    def test(self):
+        return {"success": True}

@@ -60,13 +60,16 @@ class InfobloxConnection:
         self.logger.info("SearchByMAC: Searching for {}".format(mac))
         return self._call_api("GET", "fixedaddress", params={"mac": mac, "_return_fields+": "mac"})
 
-    def _format_url_with_ref(self, base_url, ref):
+    @staticmethod
+    def _format_url_with_ref(base_url, ref):
         base_url = base_url.rstrip("/") + "/"
         if not ref.startswith(base_url):
             ref = base_url + ref
         return ref
 
     def _call_api(self, method, url, json=None, params=None):
+        response = None
+
         if not params:
             params = {}
         params["_return_as_object"] = 1
