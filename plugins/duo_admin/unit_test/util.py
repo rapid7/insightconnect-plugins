@@ -59,6 +59,8 @@ class Util:
                 return MockResponse(200, "get_auth_logs.json.resp")
             if params == {"mintime": "1684009458000", "maxtime": "1684209458000", "limit": "1000"}:
                 return MockResponse(200, "get_auth_logs.json.resp")
+            if params == {"mintime": "1682930026000", "maxtime": "1682929966000", "limit": "1000", "sort": "ts:asc"}:
+                return MockResponse(200, "get_auth_logs.json.resp")
             if params == {"mintime": "1683009458000", "maxtime": "1683209458000", "limit": "1000"}:
                 return MockResponse(200, "get_auth_logs_empty.json.resp")
             if params == {
@@ -91,10 +93,14 @@ class Util:
                 return MockResponse(200, "get_admin_logs.json.resp")
             if params == {"mintime": "1682930026"}:
                 return MockResponse(200, "get_admin_logs.json.resp")
+            if params == {"mintime": "112321582426"}:
+                return MockResponse(200, "get_admin_logs.json.resp")
         if url == "https://example.com/admin/v1/trust_monitor/events":
             if params == {"mintime": "1682843686000", "maxtime": "1682929966000", "limit": "200"}:
                 return MockResponse(200, "get_trust_monitor_events.json.resp")
             if params == {"mintime": "1682670886000", "maxtime": "1682929966000", "limit": "200"}:
+                return MockResponse(200, "get_trust_monitor_events.json.resp")
+            if params == {"mintime": "1682930026000", "maxtime": "1682929966000", "limit": "200"}:
                 return MockResponse(200, "get_trust_monitor_events.json.resp")
             if params == {"mintime": "1682843686000", "maxtime": "1682930026000", "limit": "200", "offset": "1591014"}:
                 return MockResponse(200, "get_trust_monitor_events_2.json.resp")
