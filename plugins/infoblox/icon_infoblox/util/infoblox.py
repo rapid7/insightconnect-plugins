@@ -67,7 +67,7 @@ class InfobloxConnection:
             ref = base_url + ref
         return ref
 
-    def _call_api(self, method, url, json=None, params=None, ssl_verify=True):
+    def _call_api(self, method, url, json=None, params=None):
         response = None
 
         if not params:
