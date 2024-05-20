@@ -39,13 +39,13 @@ class GetOatList(insightconnect_plugin_runtime.Action):
             detected_end_date_time=detected_end_date_time,
             ingested_start_date_time=ingested_start_date_time,
             ingested_end_date_time=ingested_end_date_time,
-            top=50,
+            top=1,
             op=query_op,
             **fields,
         )
         if "error" in count.result_code.lower():
             raise PluginException(
-                cause="An error occurred while getting email activity data count.",
+                cause="An error occurred while getting OAT count.",
                 assistance="Please check your inputs and try again.",
                 data=count.error,
             )
@@ -60,7 +60,7 @@ class GetOatList(insightconnect_plugin_runtime.Action):
         self.logger.info("Creating OATs list...")
         try:
             client.oat.consume(
-                lambda alert: new_oats.append(alert.model_dump_json()),
+                lambda oat: new_oats.append(oat.model_dump_json()),
                 detected_start_date_time=detected_start_date_time,
                 detected_end_date_time=detected_end_date_time,
                 ingested_start_date_time=ingested_start_date_time,

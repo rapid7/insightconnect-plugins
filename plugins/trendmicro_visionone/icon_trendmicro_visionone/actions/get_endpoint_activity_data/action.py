@@ -39,7 +39,7 @@ class GetEndpointActivityData(insightconnect_plugin_runtime.Action):
             query_op = pytmv1.QueryOp.AND
         # Make sure response contains < 5K entries
         self.logger.info("Checking Response Size...")
-        count = client.email.get_activity_count(
+        count = client.endpoint.get_activity_count(
             start_time=start_date_time,
             end_time=end_date_time,
             select=select,

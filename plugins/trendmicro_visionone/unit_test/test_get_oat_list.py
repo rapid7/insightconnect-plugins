@@ -1,20 +1,32 @@
-import sys
-import os
-sys.path.append(os.path.abspath('../'))
-
 from unittest import TestCase
-from icon_trendmicro_visionone.connection.connection import Connection
-from icon_trendmicro_visionone.actions.get_oat_list import GetOatList
-import json
-import logging
+from unittest.mock import MagicMock
+
+from insightconnect_plugin_runtime.exceptions import PluginException
+
+from icon_trendmicro_visionone.actions import GetOatList
+from mock import mock_connection, mock_params
 
 
 class TestGetOatList(TestCase):
-    def test_get_oat_list(self):
-        """
-        DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
+    def setUp(self):
+        self.action = GetOatList()
+        self.connection = mock_connection()
+        self.action.connection = self.connection
+        self.mock_params = mock_params("get_oat_list")
 
-        TODO: Implement test cases here
-        """
+    def test_1_integration_get_oat_list(self):
+        response = self.action.run(self.mock_params["input"])
+        for key in response.keys():
+            self.assertIn(key, str(self.mock_params["output"].keys()))
 
-        self.fail("Unimplemented Test Case")
+    def test_2_get_oat_list_success(self):
+        expected_result = self.mock_params["output"]
+        self.action.connection.client = MagicMock(return_value=expected_result)
+        response = self.action.run(self.mock_params["input"])
+        for key in response.keys():
+            self.assertIn(key, str(expected_result.keys()))
+
+    def test_3_get_oat_list_failure(self):
+        self.action.connection.client.oat.consume = MagicMock(side_effect=PluginException)
+        with self.assertRaises(PluginException):
+            self.action.run(self.mock_params["input"])
