@@ -12,7 +12,7 @@ class Input:
 
 
 class Output:
-    REF = "ref"
+    _REF = "_ref"
 
 
 class AddHostInput(insightconnect_plugin_runtime.Input):
@@ -98,7 +98,7 @@ class AddHostOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "ref": {
+    "_ref": {
       "type": "string",
       "title": "Ref",
       "description": "Object Reference of a newly added host",
@@ -106,7 +106,7 @@ class AddHostOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "ref"
+    "_ref"
   ],
   "definitions": {}
 }

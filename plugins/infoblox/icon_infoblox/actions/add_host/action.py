@@ -18,4 +18,4 @@ class AddHost(insightconnect_plugin_runtime.Action):
 
         ref = self.connection.infoblox_connection.add_host(host)
 
-        return {Output.REF: ref}
+        return {Output._REF: ref}

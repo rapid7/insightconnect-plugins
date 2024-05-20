@@ -12,7 +12,7 @@ class Input:
 
 
 class Output:
-    REF = "ref"
+    _REF = "_ref"
 
 
 class AddFixedAddressInput(insightconnect_plugin_runtime.Input):
@@ -22,7 +22,7 @@ class AddFixedAddressInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "address": {
-      "$ref": "#/definitions/FixedAddressCreate",
+      "$ref": "#/definitions/IPv4AddrCreate",
       "title": "Address",
       "description": "New fixed address data",
       "order": 1
@@ -32,9 +32,9 @@ class AddFixedAddressInput(insightconnect_plugin_runtime.Input):
     "address"
   ],
   "definitions": {
-    "FixedAddressCreate": {
+    "IPv4AddrCreate": {
       "type": "object",
-      "title": "FixedAddressCreate",
+      "title": "IPv4AddrCreate",
       "properties": {
         "ipv4addr": {
           "type": "string",
@@ -50,8 +50,7 @@ class AddFixedAddressInput(insightconnect_plugin_runtime.Input):
         }
       },
       "required": [
-        "ipv4addr",
-        "mac"
+        "ipv4addr"
       ]
     }
   }
@@ -68,7 +67,7 @@ class AddFixedAddressOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "ref": {
+    "_ref": {
       "type": "string",
       "title": "Ref",
       "description": "Object Reference of a newly added fixed address",
@@ -76,7 +75,7 @@ class AddFixedAddressOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "ref"
+    "_ref"
   ],
   "definitions": {}
 }

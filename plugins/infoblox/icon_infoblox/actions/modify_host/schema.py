@@ -8,12 +8,12 @@ class Component:
 
 
 class Input:
-    REF = "ref"
+    _REF = "_ref"
     UPDATED_HOST = "updated_host"
 
 
 class Output:
-    REF = "ref"
+    _REF = "_ref"
 
 
 class ModifyHostInput(insightconnect_plugin_runtime.Input):
@@ -22,7 +22,7 @@ class ModifyHostInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "ref": {
+    "_ref": {
       "type": "string",
       "title": "Ref",
       "description": "Object Reference of the host to update",
@@ -36,7 +36,7 @@ class ModifyHostInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "ref"
+    "_ref"
   ],
   "definitions": {
     "HostUpdate": {
@@ -122,7 +122,7 @@ class ModifyHostOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "ref": {
+    "_ref": {
       "type": "string",
       "title": "Ref",
       "description": "Object Reference of the modified host",
@@ -130,7 +130,7 @@ class ModifyHostOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "ref"
+    "_ref"
   ],
   "definitions": {}
 }

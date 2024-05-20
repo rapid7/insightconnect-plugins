@@ -87,7 +87,7 @@ class SearchByMacOutput(insightconnect_plugin_runtime.Output):
           "description": "The name of the host",
           "order": 4
         },
-        "ref": {
+        "_ref": {
           "type": "string",
           "title": "Ref",
           "description": "Object Reference of the IP address",
@@ -95,8 +95,8 @@ class SearchByMacOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "required": [
-        "ipv4addr",
-        "ref"
+        "_ref",
+        "ipv4addr"
       ]
     }
   }

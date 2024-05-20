@@ -8,11 +8,11 @@ class Component:
 
 
 class Input:
-    REF = "ref"
+    _REF = "_ref"
 
 
 class Output:
-    REF = "ref"
+    _REF = "_ref"
 
 
 class DeleteHostInput(insightconnect_plugin_runtime.Input):
@@ -21,7 +21,7 @@ class DeleteHostInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "ref": {
+    "_ref": {
       "type": "string",
       "title": "Ref",
       "description": "Object Reference of the host to remove",
@@ -29,7 +29,7 @@ class DeleteHostInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "ref"
+    "_ref"
   ],
   "definitions": {}
 }
@@ -45,7 +45,7 @@ class DeleteHostOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "ref": {
+    "_ref": {
       "type": "string",
       "title": "Ref",
       "description": "Object Reference of the removed host",
@@ -53,7 +53,7 @@ class DeleteHostOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "ref"
+    "_ref"
   ],
   "definitions": {}
 }

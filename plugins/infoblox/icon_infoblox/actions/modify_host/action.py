@@ -19,4 +19,4 @@ class ModifyHost(insightconnect_plugin_runtime.Action):
 
         ref = self.connection.infoblox_connection.modify_host(ref, updated_host)
 
-        return {Output.REF: ref}
+        return {Output._REF: ref}

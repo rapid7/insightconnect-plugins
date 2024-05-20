@@ -53,7 +53,7 @@ comes from a particular MAC address of the client)
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|address|FixedAddressCreate|None|True|New fixed address data|None|{'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3'}|None|None|
+|address|IPv4AddrCreate|None|True|New fixed address data|None|{'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3'}|None|None|
   
 Example input:
 
@@ -70,13 +70,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|ref|string|True|Object Reference of a newly added fixed address|ObjectRef|
+|_ref|string|True|Object Reference of a newly added fixed address|ObjectRef|
   
 Example output:
 
 ```
 {
-  "ref": "ObjectRef"
+  "_ref": "ObjectRef"
 }
 ```
 
@@ -111,13 +111,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|ref|string|True|Object Reference of a newly added host|ExampleObjectRef|
+|_ref|string|True|Object Reference of a newly added host|ExampleObjectRef|
   
 Example output:
 
 ```
 {
-  "ref": "ExampleObjectRef"
+  "_ref": "ExampleObjectRef"
 }
 ```
 
@@ -129,13 +129,13 @@ This action is used to delete a host
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|ref|string|None|True|Object Reference of the host to remove|None|ObjectRef|None|None|
+|_ref|string|None|True|Object Reference of the host to remove|None|ObjectRef|None|None|
   
 Example input:
 
 ```
 {
-  "ref": "ObjectRef"
+  "_ref": "ObjectRef"
 }
 ```
 
@@ -143,13 +143,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|ref|string|True|Object Reference of the removed host|ObjectRef|
+|_ref|string|True|Object Reference of the removed host|ObjectRef|
   
 Example output:
 
 ```
 {
-  "ref": "ObjectRef"
+  "_ref": "ObjectRef"
 }
 ```
 
@@ -161,13 +161,13 @@ This action is used to obtain host details
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|ref|string|None|True|Object Reference of the host|None|ExampleObjectRef|None|None|
+|_ref|string|None|True|Object Reference of the host|None|ExampleObjectRef|None|None|
   
 Example input:
 
 ```
 {
-  "ref": "ExampleObjectRef"
+  "_ref": "ExampleObjectRef"
 }
 ```
 
@@ -175,13 +175,14 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|host|Host|True|Host details|{'ref': 'ExampleObjectRef', 'name': 'HostName', 'ipv4addrs': ['192.168.0.1', '192.168.0.2', '192.168.0.3'], 'view': 'FQDN', 'extattrs': {'idk': 'idk'}, 'aliases': ['alias1', 'alias2']}|
+|host|Host|True|Host details|{'_ref': 'ExampleObjectRef', 'name': 'HostName', 'ipv4addrs': ['192.168.0.1', '192.168.0.2', '192.168.0.3'], 'view': 'FQDN', 'extattrs': {'idk': 'idk'}, 'aliases': ['alias1', 'alias2']}|
   
 Example output:
 
 ```
 {
   "host": {
+    "_ref": "ExampleObjectRef",
     "aliases": [
       "alias1",
       "alias2"
@@ -195,7 +196,6 @@ Example output:
       "192.168.0.3"
     ],
     "name": "HostName",
-    "ref": "ExampleObjectRef",
     "view": "FQDN"
   }
 }
@@ -209,14 +209,14 @@ This action is used to update host data
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|ref|string|None|True|Object Reference of the host to update|None|HostRef|None|None|
+|_ref|string|None|True|Object Reference of the host to update|None|HostRef|None|None|
 |updated_host|HostUpdate|None|False|Values of fields that should be changed|None|{'aliases': ['alias1', 'alias2'], 'extattrs': {'idk': 'idk'}, 'ipv4addrs': {'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3'}, 'ipv4addrs+': {'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3'}, 'ipv4addrs-': {'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3'}}|None|None|
   
 Example input:
 
 ```
 {
-  "ref": "HostRef",
+  "_ref": "HostRef",
   "updated_host": {
     "aliases": [
       "alias1",
@@ -245,13 +245,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|ref|string|True|Object Reference of the modified host|ObjectRef|
+|_ref|string|True|Object Reference of the modified host|ObjectRef|
   
 Example output:
 
 ```
 {
-  "ref": "ObjectRef"
+  "_ref": "ObjectRef"
 }
 ```
 
@@ -375,13 +375,6 @@ Example output:
 
 ### Custom Types
   
-**FixedAddressCreate**
-
-|Name|Type|Default|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- |
-|IPv4 Address|string|None|True|Either an IP address or a function (e.g. func:nextavailableip:10.1.1.0/24)|None|
-|MAC|string|None|True|MAC address|None|
-  
 **IPv4AddrCreate**
 
 |Name|Type|Default|Required|Description|Example|
@@ -393,21 +386,21 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
+|Ref|string|None|True|Object Reference of the IP address|None|
 |Configure for DHCP|boolean|None|False|Configure for DHCP flag|None|
 |Host|string|None|False|The name of the host|None|
 |IPv4 Address|string|None|True|Either an IP address or a function (e.g. func:nextavailableip:10.1.1.0/24)|None|
 |MAC|string|None|False|MAC address|None|
-|Ref|string|None|True|Object Reference of the IP address|None|
   
 **Host**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
+|Ref|string|None|True|Object Reference of the host|None|
 |Aliases|[]string|None|False|Aliases associated with the host|None|
 |Extattrs|object|None|False|Extensible attributes|None|
 |IPv4 Addresses|[]IPv4Addr|None|True|IP addresses associated with the new host|None|
 |Name|string|None|True|Name of the new host|None|
-|Ref|string|None|True|Object Reference of the host|None|
 |View|string|None|False|The network view this host is associated with|None|
   
 **HostCreate**
@@ -439,7 +432,7 @@ When adding a new host make sure that a corresponding network is already created
 
 # Version History
 
-* 2.0.0 - `Connection` - Add SSL verify input | Update SDK from `komand` to `insightconnect_plugin_runtime` | Update input/output names from `_ref` to `ref`
+* 2.0.0 - `Connection` - Add SSL verify input | Update SDK from `komand` to `insightconnect_plugin_runtime` | Added unit tests
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
