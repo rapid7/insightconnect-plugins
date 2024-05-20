@@ -34,8 +34,11 @@ class TestMonitorSiemLogs(TestCase):
                 response, new_state, has_more_pages, status_code, _ = self.task.run(params={}, state=test_state)
                 self.assertEqual(has_more_pages, test.get("has_more_pages"))
                 self.assertEqual(response, test.get("resp"))
-                self.assertEqual(new_state, {"next_token": token})
                 self.assertEqual(status_code, 200)
+                if test.get("has_more_pages") == False:
+                    self.assertEqual(new_state, {"next_token": token, "normal_running_cutoff": True})
+                else:
+                    self.assertEqual(new_state, {"next_token": token})
                 validate(response, MonitorSiemLogsOutput.schema)
 
     def test_monitor_siem_logs_raises_401(self, _mock_data):
@@ -59,7 +62,7 @@ class TestMonitorSiemLogs(TestCase):
         self.assertEqual(new_state, test_state)  # we shouldn't change the state if we encounter an error
         mock_logger.assert_called()
         self.assertIn(
-            "There is no item named 'filename-1-from-mimecast.json' in the archive", mock_logger.call_args[0][0]
+            "There is no item named 'filename-1-from-mimecast.json' in the archive", mock_logger.call_args[0][2]
         )
 
     @patch("logging.Logger.error")
@@ -84,6 +87,64 @@ class TestMonitorSiemLogs(TestCase):
         self.assertEqual(new_state, test_state)  # we shouldn't change the state if we encounter an error
         mock_logger.assert_called()
         self.assertIn("negative seek", mock_logger.call_args[0][0])
+
+    @patch("logging.Logger.info")
+    @patch("insightconnect_plugin_runtime.helper.get_time_now", return_value=datetime.datetime(2024, 5, 13, 0, 0, 0))
+    def test_monitor_siem_logs_get_filter_time(self, mock_time, mock_logger, _mock_data):
+        content = [FILE_ZIP_CONTENT_1, FILE_ZIP_CONTENT_2]
+        token = SIEM_LOGS_HEADERS_RESPONSE.get("mc-siem-token")
+
+        tests = [
+            {
+                "resp": content,
+                "has_more_pages": True,
+                "token": token,
+                "custom_config": {},
+                "expected_filter_time": "2024-05-12 00:00:00",
+            },
+            {
+                "resp": content,
+                "has_more_pages": True,
+                "token": token,
+                "custom_config": {
+                    "lookback": {"year": 2023, "month": 1, "day": 23, "hour": 22, "minute": 0, "second": 0}
+                },
+                "expected_filter_time": "2023-01-23 22:00:00",
+            },
+            {
+                "resp": content,
+                "has_more_pages": True,
+                "token": token,
+                "custom_config": {
+                    "cutoff": {"date": {"year": 2023, "month": 1, "day": 23, "hour": 22, "minute": 0, "second": 0}}
+                },
+                "expected_filter_time": "2023-01-23 22:00:00",
+            },
+            {
+                "resp": content,
+                "has_more_pages": True,
+                "token": token,
+                "custom_config": {"cutoff": {"hours": 72}},
+                "expected_filter_time": "2024-05-10 00:00:00",
+            },
+        ]
+
+        for test in tests:
+            with self.subTest(f"Success test with token: {test.get('next_token')}"):
+                # test_state = {"next_token": test.get("next_token")}
+                response, new_state, has_more_pages, status_code, _ = self.task.run(
+                    params={}, state={}, custom_config=test.get("custom_config", {})
+                )
+                self.assertEqual(has_more_pages, test.get("has_more_pages"))
+                self.assertEqual(response, test.get("resp"))
+                self.assertEqual(status_code, 200)
+                if test.get("has_more_pages") == False:
+                    self.assertEqual(new_state, {"next_token": token, "normal_running_cutoff": True})
+                else:
+                    self.assertEqual(new_state, {"next_token": token})
+                validate(response, MonitorSiemLogsOutput.schema)
+
+                self.assertIn(f"{test.get('expected_filter_time')}", mock_logger.mock_calls[-6][1][0])
 
 
 class TestEventLogs(TestCase):
