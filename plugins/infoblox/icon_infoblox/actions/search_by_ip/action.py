@@ -18,7 +18,7 @@ class SearchByIp(insightconnect_plugin_runtime.Action):
         objects = self.connection.infoblox_connection.search_by_ip(ip)
 
         result = []
-        for o in objects:
-            result.extend(o["objects"])
+        for obj in objects:
+            result.extend(obj["objects"])
 
         return {Output.RESULT: result}
