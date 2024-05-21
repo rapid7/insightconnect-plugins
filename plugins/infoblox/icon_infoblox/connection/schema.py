@@ -53,7 +53,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "boolean",
       "title": "SSL Verify",
       "description": "Toggle on or off SSL verify",
-      "default": false,
+      "default": true,
       "order": 4
     },
     "url": {

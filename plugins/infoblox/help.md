@@ -24,7 +24,7 @@ The connection configuration accepts the following parameters:
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_version|string|2.7|True|Version of the API|["1.0", "1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "1.9", "2.0", "2.1", "2.2", "2.3", "2.4", "2.5", "2.6", "2.7"]|2.7|None|None|
 |credentials|credential_username_password|None|True|Infoblox username and password|None|{'username': 'user', 'password': 'pass'}|None|None|
-|ssl_verify|boolean|False|True|Toggle on or off SSL verify|None|True|None|None|
+|ssl_verify|boolean|True|True|Toggle on or off SSL verify|None|True|None|None|
 |url|string|None|True|The URL of a running Infoblox instance (e.g. https://192.168.1.2 or https://example.infoblox.com)|None|https://192.168.1.2|None|None|
 
 Example input:
@@ -36,7 +36,7 @@ Example input:
     "password": "pass",
     "username": "user"
   },
-  "ssl_verify": false,
+  "ssl_verify": true,
   "url": "https://192.168.1.2"
 }
 ```
@@ -55,7 +55,7 @@ comes from a particular MAC address of the client)
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|address|IPv4AddrCreate|None|True|New fixed address data|None|{'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3'}|None|None|
+|address|FixedAddressCreate|None|True|New fixed address data|None|{'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26'}|None|None|
   
 Example input:
 
@@ -63,7 +63,7 @@ Example input:
 {
   "address": {
     "ipv4addr": "192.168.0.1",
-    "mac": "2c549188c9e3"
+    "mac": "00-B0-D0-63-C2-26"
   }
 }
 ```
@@ -212,7 +212,7 @@ This action is used to update host data
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |ref|string|None|True|Object Reference of the host to update|None|HostRef|None|None|
-|updated_host|HostUpdate|None|False|Values of fields that should be changed|None|{'aliases': ['alias1', 'alias2'], 'extattrs': {'idk': 'idk'}, 'ipv4addrs': {'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3'}, 'ipv4addrs+': {'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3'}, 'ipv4addrs-': {'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3'}}|None|None|
+|updated_host|HostUpdate|None|False|Values of fields that should be changed|None|{'aliases': ['alias1', 'alias2'], 'extattrs': {'idk': 'idk'}, 'ipv4addrs': {'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26'}, 'ipv4addrs+': {'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26'}, 'ipv4addrs-': {'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26'}}|None|None|
   
 Example input:
 
@@ -229,15 +229,15 @@ Example input:
     },
     "ipv4addrs": {
       "ipv4addr": "192.168.0.1",
-      "mac": "2c549188c9e3"
+      "mac": "00-B0-D0-63-C2-26"
     },
     "ipv4addrs+": {
       "ipv4addr": "192.168.0.1",
-      "mac": "2c549188c9e3"
+      "mac": "00-B0-D0-63-C2-26"
     },
     "ipv4addrs-": {
       "ipv4addr": "192.168.0.1",
-      "mac": "2c549188c9e3"
+      "mac": "00-B0-D0-63-C2-26"
     }
   }
 }
@@ -314,7 +314,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|result|[]IPv4Addr|True|Matched fixed addresses|[{"ipv4addr": "192.168.0.1", "mac": "2c549188c9e3"}, {"ipv4addr": "192.168.0.2", "mac": "2c549188c9e3"}]|
+|result|[]IPv4Addr|True|Matched fixed addresses|[{"ipv4addr": "192.168.0.1", "mac": "00-B0-D0-63-C2-26"}, {"ipv4addr": "192.168.0.2", "mac": "00-B0-D0-63-C2-26"}]|
   
 Example output:
 
@@ -323,11 +323,11 @@ Example output:
   "result": [
     {
       "ipv4addr": "192.168.0.1",
-      "mac": "2c549188c9e3"
+      "mac": "00-B0-D0-63-C2-26"
     },
     {
       "ipv4addr": "192.168.0.2",
-      "mac": "2c549188c9e3"
+      "mac": "00-B0-D0-63-C2-26"
     }
   ]
 }
@@ -382,6 +382,13 @@ Example output:
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |IPv4 Address|string|None|True|Either an IP address or a function (e.g. func:nextavailableip:10.1.1.0/24)|None|
 |MAC|string|None|False|MAC address|None|
+  
+**FixedAddressCreate**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|IPv4 Address|string|None|True|Either an IP address or a function (e.g. func:nextavailableip:10.1.1.0/24)|None|
+|MAC|string|None|True|MAC address|None|
   
 **IPv4Addr**
 

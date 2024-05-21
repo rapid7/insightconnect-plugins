@@ -22,7 +22,7 @@ class AddFixedAddressInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "address": {
-      "$ref": "#/definitions/IPv4AddrCreate",
+      "$ref": "#/definitions/FixedAddressCreate",
       "title": "Address",
       "description": "New fixed address data",
       "order": 1
@@ -32,9 +32,9 @@ class AddFixedAddressInput(insightconnect_plugin_runtime.Input):
     "address"
   ],
   "definitions": {
-    "IPv4AddrCreate": {
+    "FixedAddressCreate": {
       "type": "object",
-      "title": "IPv4AddrCreate",
+      "title": "FixedAddressCreate",
       "properties": {
         "ipv4addr": {
           "type": "string",
@@ -50,7 +50,8 @@ class AddFixedAddressInput(insightconnect_plugin_runtime.Input):
         }
       },
       "required": [
-        "ipv4addr"
+        "ipv4addr",
+        "mac"
       ]
     }
   }

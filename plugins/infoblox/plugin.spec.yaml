@@ -83,7 +83,7 @@ connection:
     description: Toggle on or off SSL verify
     type: boolean
     example: true
-    default: false
+    default: true
     required: true
 types:
   IPv4AddrCreate:
@@ -95,6 +95,17 @@ types:
     mac:
       type: string
       required: false
+      title: MAC
+      description: MAC address
+  FixedAddressCreate:
+    ipv4addr:
+      type: string
+      required: true
+      title: IPv4 Address
+      description: Either an IP address or a function (e.g. func:nextavailableip:10.1.1.0/24)
+    mac:
+      type: string
+      required: true
       title: MAC
       description: MAC address
   IPv4Addr:
@@ -248,7 +259,7 @@ actions:
         required: false
         title: Updated Host Data
         description: Values of fields that should be changed
-        example: { 'aliases': [ 'alias1', 'alias2' ], 'extattrs': { 'idk': 'idk' }, 'ipv4addrs': { 'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3' }, 'ipv4addrs+': { 'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3' }, 'ipv4addrs-': { 'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3' } }
+        example: { 'aliases': [ 'alias1', 'alias2' ], 'extattrs': { 'idk': 'idk' }, 'ipv4addrs': { 'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26' }, 'ipv4addrs+': { 'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26' }, 'ipv4addrs-': { 'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26' } }
     output:
       ref:
         type: string
@@ -302,10 +313,10 @@ actions:
         example: '192.168.0.1'
     output:
       result:
-        type: '[]string'
-        required: true
         title: Result
         description: Object References of all objects with given IP address
+        type: '[]string'
+        required: true
         example: ['Object1', 'Object2']
   search_by_mac:
     title: Search by MAC
@@ -323,7 +334,7 @@ actions:
         required: true
         title: Result
         description: Matched fixed addresses
-        example: [{ 'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3' }, { 'ipv4addr': '192.168.0.2', 'mac': '2c549188c9e3' }]
+        example: [{ 'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26' }, { 'ipv4addr': '192.168.0.2', 'mac': '00-B0-D0-63-C2-26' }]
   add_fixed_address:
     title: Add Fixed Address
     description: Add fixed address (a specific IP address that a DHCP server always
@@ -331,10 +342,10 @@ actions:
     input:
       address:
         required: true
-        type: IPv4AddrCreate
+        type: FixedAddressCreate
         title: Address
         description: New fixed address data
-        example: { 'ipv4addr': '192.168.0.1', 'mac': '2c549188c9e3' }
+        example: { 'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26' }
     output:
       ref:
         required: true
