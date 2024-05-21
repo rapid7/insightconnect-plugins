@@ -9,7 +9,7 @@ import xmltodict
 from binascii import Error as B64EncodingError
 import base64
 from tempfile import NamedTemporaryFile
-from timeout_decorator import timeout, TimeoutError
+from timeout_decorator import timeout, TimeoutError as DecoratorTimeoutError
 
 TIMEOUT_SECONDS = 60 * 5
 
@@ -81,7 +81,7 @@ class RecordedFutureApi:
                 compressed_data = file.read()
                 try:
                     parsed_data = RecordedFutureApi.decompress_gzip_to_dict(compressed_data)
-                except (MemoryError, TimeoutError):
+                except (MemoryError, DecoratorTimeoutError):
                     self.logger.info("Response is too large to read. Returning gzip only...")
                     parsed_data = None
                 decoded_data = base64.b64encode(compressed_data).decode("utf-8")

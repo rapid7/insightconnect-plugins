@@ -1,8 +1,12 @@
 {
-	"spec": "92d095291b5f1b490247661ea0c022af",
-	"manifest": "fe99758eb08881335b00fbaadd8f5911",
-	"setup": "4ccdba280da688ef199437f480d87ee6",
+	"spec": "05aec0c1046c9238a5016c8923050df3",
+	"manifest": "8cae2d6a3750b25a2f0626f448bd9cc7",
+	"setup": "20b35bbf0e91cdaa6be7d84321fd0c62",
 	"schemas": [
+		{
+			"identifier": "download_IP_addresses_risk_list/schema.py",
+			"hash": "20bf6c48035deaff5d36edaf0dfcd052"
+		},
 		{
 			"identifier": "download_domain_risk_list/schema.py",
 			"hash": "2aca754786940056580e1f9478679c75"
@@ -10,10 +14,6 @@
 		{
 			"identifier": "download_hash_risk_list/schema.py",
 			"hash": "1476a62ed2cb2a5d6e10e668f5de2f7b"
-		},
-		{
-			"identifier": "download_ip_addresses_risk_list/schema.py",
-			"hash": "20bf6c48035deaff5d36edaf0dfcd052"
 		},
 		{
 			"identifier": "download_url_risk_list/schema.py",
@@ -24,6 +24,10 @@
 			"hash": "1ccad533aa1c078518cc4a042c67f389"
 		},
 		{
+			"identifier": "list_IP_addresses_risk_rules/schema.py",
+			"hash": "9670aebe9d1175927234496d25e1d5ea"
+		},
+		{
 			"identifier": "list_domain_risk_rules/schema.py",
 			"hash": "d8e5f15b824cf3feb2e31fc3ceb13528"
 		},
@@ -32,16 +36,16 @@
 			"hash": "820fc0f9067fc12a4a76e1e20843893b"
 		},
 		{
-			"identifier": "list_ip_addresses_risk_rules/schema.py",
-			"hash": "9670aebe9d1175927234496d25e1d5ea"
-		},
-		{
 			"identifier": "list_url_risk_rules/schema.py",
 			"hash": "6252d2ac9bb2fb999a36a248d767b008"
 		},
 		{
 			"identifier": "list_vulnerability_risk_rules/schema.py",
 			"hash": "851ec8326b387ebe250f2eea1cc86d06"
+		},
+		{
+			"identifier": "lookup_IP_address/schema.py",
+			"hash": "35972fe2b61579b15e64d16cdb90ba03"
 		},
 		{
 			"identifier": "lookup_alert/schema.py",
@@ -60,10 +64,6 @@
 			"hash": "a53dccc75cebb1119ec1aeab0f513c73"
 		},
 		{
-			"identifier": "lookup_ip_address/schema.py",
-			"hash": "35972fe2b61579b15e64d16cdb90ba03"
-		},
-		{
 			"identifier": "lookup_malware/schema.py",
 			"hash": "64faefc9ff59b4a07f2a1c6013f56a6f"
 		},
@@ -76,6 +76,10 @@
 			"hash": "6d4abc1c0fa2612d27e121df1e99d7fa"
 		},
 		{
+			"identifier": "search_IP_addresses/schema.py",
+			"hash": "0df7b4d44c282e4af6397a55faac0516"
+		},
+		{
 			"identifier": "search_domains/schema.py",
 			"hash": "00533c03afef3522e27b7e3a8319899a"
 		},
@@ -86,10 +90,6 @@
 		{
 			"identifier": "search_hashes/schema.py",
 			"hash": "bb1fbb293bbc3e119e6f4acb64c00883"
-		},
-		{
-			"identifier": "search_ip_addresses/schema.py",
-			"hash": "0df7b4d44c282e4af6397a55faac0516"
 		},
 		{
 			"identifier": "search_malware/schema.py",
