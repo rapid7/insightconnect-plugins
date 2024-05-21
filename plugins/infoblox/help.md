@@ -1,8 +1,6 @@
 # Description
 
-[Infoblox](https://www.infoblox.com) helps with managing and identifying devices connected to networks, specifically for the DNS, DHCP and IP address management (collectively, DDI).
-
-This plugin utilizes the [Infoblox API](https://www.infoblox.com/wp-content/uploads/infoblox-deployment-infoblox-rest-api.pdf).
+[Infoblox](https://www.infoblox.com) helps with managing and identifying devices connected to networks, specifically for the DNS, DHCP and IP address management (collectively, DDI)
 
 # Key Features
 
@@ -12,197 +10,324 @@ This plugin utilizes the [Infoblox API](https://www.infoblox.com/wp-content/uplo
 
 * An account from the vendor to login to services
 
+# Supported Product Versions
+
+* 2024-05-03
+
 # Documentation
 
 ## Setup
 
-The connection configuration accepts the following parameters:
+The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|True|Infoblox username and password|None|
-|url|string|None|True|The URL of a running Infoblox instance (e.g. https://192.168.1.2 or https://example.infoblox.com)|None|
-|api_version|string|2.7|True|Version of the API|['1.0', '1.1', '1.2', '1.3', '1.4', '1.5', '1.6', '1.7', '1.8', '1.9', '2.0', '2.1', '2.2', '2.3', '2.4', '2.5', '2.6', '2.7']|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_version|string|2.7|True|Version of the API|["1.0", "1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "1.9", "2.0", "2.1", "2.2", "2.3", "2.4", "2.5", "2.6", "2.7"]|2.7|None|None|
+|credentials|credential_username_password|None|True|Infoblox username and password|None|{'username': 'user', 'password': 'pass'}|None|None|
+|ssl_verify|boolean|True|True|Toggle on or off SSL verify|None|True|None|None|
+|url|string|None|True|The URL of a running Infoblox instance (e.g. https://192.168.1.2 or https://example.infoblox.com)|None|https://192.168.1.2|None|None|
+
+Example input:
+
+```
+{
+  "api_version": 2.7,
+  "credentials": {
+    "password": "pass",
+    "username": "user"
+  },
+  "ssl_verify": true,
+  "url": "https://192.168.1.2"
+}
+```
 
 ## Technical Details
 
 ### Actions
 
-#### Delete Host
 
-This action is used to delete a host.
+#### Add Fixed Address
 
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|_ref|string|None|True|Object Reference of the host to remove|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|_ref|string|True|Object Reference of the removed host|
-
-Example output:
-
-```
-{
-  "_ref": "record:host/ZG5zLmhvc3QkLl9kZWZhdWx0LmNvbS5pbmZvLnRlc3QxMTE:test111.info.com/default"
-}
-```
-
-#### Search by IP
-
-This action is used to search for any object with an IP address.
+This action is used to add fixed address (a specific IP address that a DHCP server always assigns when a lease request 
+comes from a particular MAC address of the client)
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|ip|string|None|True|IP address|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result|[]string|True|Object References of all objects with given IP address|
-
-Example output:
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|address|FixedAddressCreate|None|True|New fixed address data|None|{'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26'}|None|None|
+  
+Example input:
 
 ```
 {
-  "result": [
-    "fixedaddress/ZG5zLmZpeGVkX2FkZHJlc3MkMTAuMTAuMTAuNS4wLi4:10.10.10.5/default"
-  ]
-}
-```
-
-#### Get Host
-
-This action is used to obtain host details.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|_ref|string|None|True|Object Reference of the host|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|host|Host|True|Host details|
-
-Example output:
-
-```
-{
-  "host": {
-    "_ref": "record:host/ZG5zLmhvc3QkLm5vbl9ETlNfaG9zdF9yb290LjAuMTUzMjY4OTgzMDkxMC5jb20uZXhhbXBsZS5hZG1pbg:admin.example.com/%20",
-    "aliases": [
-      "testing"
-    ],
-    "extattrs": {
-      "Site": {
-        "value": "East"
-      }
-    },
-    "ipv4addrs": [
-      {
-        "_ref": "record:host_ipv4addr/ZG5zLmhvc3RfYWRkcmVzcyQubm9uX0ROU19ob3N0X3Jvb3QuMC4xNTMyNjg5ODMwOTEwLmNvbS5leGFtcGxlLmFkbWluLjEwLjEwLjEwLjc1Lg:10.10.10.75/admin.example.com/%20",
-        "configure_for_dhcp": false,
-        "host": "admin.example.com",
-        "ipv4addr": "10.10.10.75"
-      },
-      {
-        "_ref": "record:host_ipv4addr/ZG5zLmhvc3RfYWRkcmVzcyQubm9uX0ROU19ob3N0X3Jvb3QuMC4xNTMyNjg5ODMwOTEwLmNvbS5leGFtcGxlLmFkbWluLjEwLjEwLjEwLjc2Lg:10.10.10.76/admin.example.com/%20",
-        "configure_for_dhcp": false,
-        "host": "admin.example.com",
-        "ipv4addr": "10.10.10.76"
-      }
-    ],
-    "name": "admin.example.com",
-    "view": " "
+  "address": {
+    "ipv4addr": "192.168.0.1",
+    "mac": "00-B0-D0-63-C2-26"
   }
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|ref|string|True|Object Reference of a newly added fixed address|ObjectRef|
+  
+Example output:
+
+```
+{
+  "ref": "ObjectRef"
 }
 ```
 
 #### Add Host
 
-This action is used to add a new host (host has to match one of the existing authoritative networks, e.g. network FQDN = info.com, host name = example.info.com).
+This action is used to add a new host (host has to match one of the existing authoritative networks, e.g. network FQDN 
+= info.com, host name = example.info.com)
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|host|HostCreate|None|True|New host data|None|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|host|HostCreate|None|True|New host data|None|{'Name': 'name', 'View': 'network_view', 'ipv4addrs': ['192.168.0.1', '192.168.0.2', '192.168.0.3']}|None|None|
+  
+Example input:
+
+```
+{
+  "host": {
+    "Name": "name",
+    "View": "network_view",
+    "ipv4addrs": [
+      "192.168.0.1",
+      "192.168.0.2",
+      "192.168.0.3"
+    ]
+  }
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|_ref|string|True|Object Reference of a newly added host|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|ref|string|True|Object Reference of a newly added host|ExampleObjectRef|
+  
 Example output:
 
 ```
 {
-  "_ref": "record:host/ZG5zLmhvc3QkLl9kZWZhdWx0LmNvbS5pbmZvLmFieA:abx.info.com/default"
+  "ref": "ExampleObjectRef"
+}
+```
+
+#### Delete Host
+
+This action is used to delete a host
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|ref|string|None|True|Object Reference of the host to remove|None|ObjectRef|None|None|
+  
+Example input:
+
+```
+{
+  "ref": "ObjectRef"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|ref|string|True|Object Reference of the removed host|ObjectRef|
+  
+Example output:
+
+```
+{
+  "ref": "ObjectRef"
+}
+```
+
+#### Get Host
+
+This action is used to obtain host details
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|ref|string|None|True|Object Reference of the host|None|ExampleObjectRef|None|None|
+  
+Example input:
+
+```
+{
+  "ref": "ExampleObjectRef"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|host|Host|True|Host details|{'_ref': 'ExampleObjectRef', 'name': 'HostName', 'ipv4addrs': ['192.168.0.1', '192.168.0.2', '192.168.0.3'], 'view': 'FQDN', 'extattrs': {'idk': 'idk'}, 'aliases': ['alias1', 'alias2']}|
+  
+Example output:
+
+```
+{
+  "host": {
+    "_ref": "ExampleObjectRef",
+    "aliases": [
+      "alias1",
+      "alias2"
+    ],
+    "extattrs": {
+      "idk": "idk"
+    },
+    "ipv4addrs": [
+      "192.168.0.1",
+      "192.168.0.2",
+      "192.168.0.3"
+    ],
+    "name": "HostName",
+    "view": "FQDN"
+  }
 }
 ```
 
 #### Modify Host
 
-This action is used to update host data.
+This action is used to update host data
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|_ref|string|None|True|Object Reference of the host to update|None|
-|updated_host|HostUpdate|None|False|Values of fields that should be changed|None|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|ref|string|None|True|Object Reference of the host to update|None|HostRef|None|None|
+|updated_host|HostUpdate|None|False|Values of fields that should be changed|None|{'aliases': ['alias1', 'alias2'], 'extattrs': {'idk': 'idk'}, 'ipv4addrs': {'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26'}, 'ipv4addrs+': {'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26'}, 'ipv4addrs-': {'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26'}}|None|None|
+  
+Example input:
+
+```
+{
+  "ref": "HostRef",
+  "updated_host": {
+    "aliases": [
+      "alias1",
+      "alias2"
+    ],
+    "extattrs": {
+      "idk": "idk"
+    },
+    "ipv4addrs": {
+      "ipv4addr": "192.168.0.1",
+      "mac": "00-B0-D0-63-C2-26"
+    },
+    "ipv4addrs+": {
+      "ipv4addr": "192.168.0.1",
+      "mac": "00-B0-D0-63-C2-26"
+    },
+    "ipv4addrs-": {
+      "ipv4addr": "192.168.0.1",
+      "mac": "00-B0-D0-63-C2-26"
+    }
+  }
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|_ref|string|True|Object Reference of the modified host|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|ref|string|True|Object Reference of the modified host|ObjectRef|
+  
 Example output:
 
 ```
 {
-  "_ref": "record:host/ZG5zLmhvc3QkLl9kZWZhdWx0LmNvbS5pbmZvLnRlc3Q1:test5.info.com/default"
+  "ref": "ObjectRef"
+}
+```
+
+#### Search by IP
+
+This action is used to search for any object with an IP address
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|ip|string|None|True|IP address|None|192.168.0.1|None|None|
+  
+Example input:
+
+```
+{
+  "ip": "192.168.0.1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|result|[]string|True|Object References of all objects with given IP address|["Object1", "Object2"]|
+  
+Example output:
+
+```
+{
+  "result": [
+    "Object1",
+    "Object2"
+  ]
 }
 ```
 
 #### Search by MAC
 
-This action is used to search fixed addresses by MAC address.
+This action is used to search fixed addresses by MAC address
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|mac|string|None|True|MAC address|None|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|mac|string|None|True|MAC address|None|2c549188c9e3|None|None|
+  
+Example input:
+
+```
+{
+  "mac": "2c549188c9e3"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result|[]IPv4Addr|True|Matched fixed addresses|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|result|[]IPv4Addr|True|Matched fixed addresses|[{"ipv4addr": "192.168.0.1", "mac": "00-B0-D0-63-C2-26"}, {"ipv4addr": "192.168.0.2", "mac": "00-B0-D0-63-C2-26"}]|
+  
 Example output:
 
 ```
 {
   "result": [
     {
-      "_ref": "fixedaddress/ZG5zLmZpeGVkX2FkZHJlc3MkMTAuMTAuMTAuMi4wLi4:10.10.10.2/default",
-      "ipv4addr": "10.10.10.2",
-      "mac": "aa:bb:cc:11:22:33",
-      "network_view": "default"
+      "ipv4addr": "192.168.0.1",
+      "mac": "00-B0-D0-63-C2-26"
+    },
+    {
+      "ipv4addr": "192.168.0.2",
+      "mac": "00-B0-D0-63-C2-26"
     }
   ]
 }
@@ -210,100 +335,100 @@ Example output:
 
 #### Search by Name
 
-This action is used to search hosts by name.
+This action is used to search hosts by name
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|name_pattern|string|None|True|Regular expression to match against host name|None|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|name_pattern|string|None|True|Regular expression to match against host name|None|/^[a-z ,.'-]+$/i|None|None|
+  
+Example input:
+
+```
+{
+  "name_pattern": "/^[a-z ,.'-]+$/i"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result|[]Host|True|Matched hosts|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|result|[]Host|True|Matched hosts|["Host1", "Host2"]|
+  
 Example output:
 
 ```
 {
   "result": [
-    {
-      "_ref": "record:host/ZG5zLmhvc3QkLl9kZWZhdWx0LmNvbS5pbmZvLmFieA:abx.info.com/default",
-      "ipv4addrs": [
-        {
-          "_ref": "record:host_ipv4addr/ZG5zLmhvc3RfYWRkcmVzcyQuX2RlZmF1bHQuY29tLmluZm8uYWJ4LjEwLjEwLjEwLjUyLg:10.10.10.52/abx.info.com/default",
-          "configure_for_dhcp": false,
-          "host": "abx.info.com",
-          "ipv4addr": "10.10.10.52"
-        }
-      ],
-      "name": "abx.info.com",
-      "view": "default"
-    },
-    {
-      "_ref": "record:host/ZG5zLmhvc3QkLl9kZWZhdWx0LmNvbS5pbmZvLnRlc3Qz:test3.info.com/default",
-      "ipv4addrs": [
-        {
-          "_ref": "record:host_ipv4addr/ZG5zLmhvc3RfYWRkcmVzcyQuX2RlZmF1bHQuY29tLmluZm8udGVzdDMuMTAuMTAuMTAuMjIu:10.10.10.22/test3.info.com/default",
-          "configure_for_dhcp": true,
-          "host": "test3.info.com",
-          "ipv4addr": "10.10.10.22",
-          "mac": "11:22:33:11:22:33"
-        }
-      ],
-      "name": "test3.info.com",
-      "view": "default"
-    },
-    {
-      "_ref": "record:host/ZG5zLmhvc3QkLl9kZWZhdWx0LmNvbS5pbmZvLnRlc3Q1:test5.info.com/default",
-      "ipv4addrs": [
-        {
-          "_ref": "record:host_ipv4addr/ZG5zLmhvc3RfYWRkcmVzcyQuX2RlZmF1bHQuY29tLmluZm8udGVzdDUuMTAuMTAuMTAuNzUu:10.10.10.75/test5.info.com/default",
-          "configure_for_dhcp": false,
-          "host": "test5.info.com",
-          "ipv4addr": "10.10.10.75"
-        }
-      ],
-      "name": "test5.info.com",
-      "view": "default"
-    }
+    "Host1",
+    "Host2"
   ]
 }
 ```
-
-#### Add Fixed Address
-
-This action is used to add a fixed address (a specific IP address that a DHCP server always assigns when a lease request comes from a particular MAC address of the client).
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|address|FixedAddressCreate|None|True|New fixed address data|None|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|_ref|string|True|Object Reference of a newly added fixed address|
-
-Example output:
-
-```
-{
-  "_ref": "fixedaddress/ZG5zLmZpeGVkX2FkZHJlc3MkMTAuMTAuMTAuOC4wLi4:10.10.10.8/default"
-}
-```
-
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
+### Custom Types
+  
+**IPv4AddrCreate**
 
-### Custom Output Types
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|IPv4 Address|string|None|True|Either an IP address or a function (e.g. func:nextavailableip:10.1.1.0/24)|None|
+|MAC|string|None|False|MAC address|None|
+  
+**FixedAddressCreate**
 
-_This plugin does not contain any custom output types._
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|IPv4 Address|string|None|True|Either an IP address or a function (e.g. func:nextavailableip:10.1.1.0/24)|None|
+|MAC|string|None|True|MAC address|None|
+  
+**IPv4Addr**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Ref|string|None|True|Object Reference of the IP address|None|
+|Configure for DHCP|boolean|None|False|Configure for DHCP flag|None|
+|Host|string|None|False|The name of the host|None|
+|IPv4 Address|string|None|True|Either an IP address or a function (e.g. func:nextavailableip:10.1.1.0/24)|None|
+|MAC|string|None|False|MAC address|None|
+  
+**Host**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Aliases|[]string|None|False|Aliases associated with the host|None|
+|Extattrs|object|None|False|Extensible attributes|None|
+|IPv4 Addresses|[]IPv4Addr|None|True|IP addresses associated with the new host|None|
+|Name|string|None|True|Name of the new host|None|
+|Ref|string|None|True|Object Reference of the host|None|
+|View|string|None|False|The network view this host is associated with|None|
+  
+**HostCreate**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|IPv4 Addresses|[]IPv4AddrCreate|None|True|List of IP addresses associated with the new host|None|
+|Name|string|None|True|Name of new new host|None|
+|View|string|None|False|The network view this host is associated with|None|
+  
+**HostUpdate**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Aliases|[]string|None|False|Aliases associated with the host|None|
+|Extattrs|object|None|False|Extensible attributes|None|
+|IPv4 Addresses|[]IPv4AddrCreate|None|False|New list of IP addresses associated with the new host (overrides the original list)|None|
+|Added IPv4 Addresses|[]IPv4AddrCreate|None|False|IP addresses added to the list associated with the new host|None|
+|Removed IPv4 Addresses|[]IPv4AddrCreate|None|False|IP addresses removed from the list associated with the new host|None|
+
 
 ## Troubleshooting
 
@@ -315,12 +440,14 @@ When adding a new host make sure that a corresponding network is already created
 
 # Version History
 
+* 2.0.0 - `Connection` - Add SSL verify input | Update SDK from `komand` to `insightconnect_plugin_runtime` | Added unit tests
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
 # Links
 
+* [Infoblox API](https://www.infoblox.com/wp-content/uploads/infoblox-deployment-infoblox-rest-api.pdf)
+
 ## References
 
 * [REST API examples](https://community.infoblox.com/t5/API-Integration/The-definitive-list-of-REST-examples/td-p/1214)
-
