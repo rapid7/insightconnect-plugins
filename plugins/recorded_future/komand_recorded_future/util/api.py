@@ -1,8 +1,6 @@
 import gzip
 import os
-import uuid
 from typing import Dict, ByteString, Tuple, Any
-
 from insightconnect_plugin_runtime.exceptions import PluginException
 from json import JSONDecodeError
 import requests
@@ -11,6 +9,9 @@ import xmltodict
 from binascii import Error as B64EncodingError
 import base64
 from tempfile import NamedTemporaryFile
+from timeout_decorator import timeout, TimeoutError as DecoratorTimeoutError
+
+TIMEOUT_SECONDS = 60 * 5
 
 
 class RecordedFutureApi:
@@ -58,6 +59,7 @@ class RecordedFutureApi:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
     @staticmethod
+    @timeout(seconds=TIMEOUT_SECONDS, use_signals=False)
     def decompress_gzip_to_dict(compressed_data: ByteString) -> Dict:
         """
         Decompresses and parses a Gzip file in bytes containing XML, returning a JSON representation
@@ -67,27 +69,26 @@ class RecordedFutureApi:
         decompressed_data = gzip.decompress(compressed_data)
         return dict(xmltodict.parse(decompressed_data))
 
-    @staticmethod
-    def decompress_and_process_gzip(filename: str) -> Tuple[Any, Any]:
+    def decompress_and_process_gzip(self, filename: str) -> Tuple[Any, Any]:
         """
         Retrieves, decompresses and parses a Gzip file containing XML, returning the compressed file and a JSON
         representation of its contents
-        :param filename: filename of the compressed Gzip
-        :return: The decoded GZIP contents in Base64 and the decompressed JSON representation of the XML file
+        :param filename: filename of the compressed gzip
+        :return: The decoded gzip contents in Base64 and the decompressed JSON representation of the XML file
         """
         try:
             with gzip.open(filename, "rb") as file:
                 compressed_data = file.read()
                 try:
                     parsed_data = RecordedFutureApi.decompress_gzip_to_dict(compressed_data)
-                except MemoryError:
-                    RecordedFutureApi.logger.info("Response is too large to read. Returning GZIP...")
+                except (MemoryError, DecoratorTimeoutError):
+                    self.logger.info("Response is too large to read. Returning gzip only...")
                     parsed_data = None
                 decoded_data = base64.b64encode(compressed_data).decode("utf-8")
                 return decoded_data, parsed_data
         except (gzip.BadGzipFile, IOError) as exception:
             raise PluginException(
-                cause="Error reading saved GZIP response file",
+                cause="Error reading saved gzip response file",
                 assistance="File may contain errors or be in an unexpected format",
                 data=exception,
             )
@@ -110,7 +111,7 @@ class RecordedFutureApi:
                     file.write(compressed_chunk)
                     # flush increases performance overhead but reduces risk of memory error
                     file.flush()
-            return RecordedFutureApi.decompress_and_process_gzip(temp_filename)
+            return self.decompress_and_process_gzip(temp_filename)
         except IOError as exception:
             raise PluginException(
                 cause="Error writing response content to file",
@@ -136,16 +137,7 @@ class RecordedFutureApi:
 
     def _call_api(self, method: str, endpoint: str, params: dict = None, data: dict = None, json: dict = None):
         _url = self.base_url + endpoint
-        try:
-            response = requests.request(
-                url=_url, method=method, params=params, data=data, json=json, headers=self.headers
-            )
-        except MemoryError:
-            raise PluginException(
-                cause="Memory Error: Returned dataset too large",
-                assistance="Please allow a larger amount of memory to parse this dataset, or try another list",
-                data=f"Memory Error using endpoint: {endpoint}",
-            )
+        response = requests.request(url=_url, method=method, params=params, data=data, json=json, headers=self.headers)
         RecordedFutureApi.response_handler(response, _url)
         try:
             return response.json()
