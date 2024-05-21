@@ -9,6 +9,7 @@ from unittest import TestCase
 from parameterized import parameterized
 from datetime import datetime, timezone, timedelta
 from json import loads
+from jsonschema import validate
 
 sys.path.append(os.path.abspath("../"))
 
@@ -71,6 +72,7 @@ class TestMonitorEvents(TestCase):
         actual, actual_state, has_more_pages, status_code, error = self.action.run(
             state=current_state, custom_config={}
         )
+        validate(actual, self.action.output.schema)
         self.assertEqual(actual, expected.get("events"))
         self.assertEqual(actual_state, expected.get("state"))
         self.assertEqual(has_more_pages, expected.get("has_more_pages"))
