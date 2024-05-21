@@ -1,23 +1,20 @@
-import komand
-from .schema import ModifyHostInput, ModifyHostOutput
+import insightconnect_plugin_runtime
+from .schema import ModifyHostInput, ModifyHostOutput, Input, Output, Component
 
 # Custom imports below
 
 
-class ModifyHost(komand.Action):
+class ModifyHost(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="modify_host",
-            description="Update host data",
+            description=Component.DESCRIPTION,
             input=ModifyHostInput(),
             output=ModifyHostOutput(),
         )
 
     def run(self, params={}):
-        ref = params.get("_ref")
-        updated_host = komand.helper.clean_dict(params.get("updated_host"))
-        ref = self.connection.infoblox_connection.modify_host(ref, updated_host)
-        return {"_ref": ref}
+        ref = params.get(Input.REF)
+        updated_host = insightconnect_plugin_runtime.helper.clean_dict(params.get(Input.UPDATED_HOST))
 
-    def test(self):
-        return {"_ref": "record:host/ZG5zLmhvc3QkLl9kZWZhdWx0LmNvbS5pbmZvLmFieA" ":abx.info.com/default"}
+        return {Output.REF: self.connection.infoblox_connection.modify_host(ref, updated_host)}
