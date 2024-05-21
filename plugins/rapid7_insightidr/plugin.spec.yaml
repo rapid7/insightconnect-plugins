@@ -4,9 +4,9 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 10.0.0
+version: 10.1.0
 connection_version: 5
-supported_versions: ["Latest release successfully tested on 2024-02-15."]
+supported_versions: ["Latest release successfully tested on 2024-05-15."]
 vendor: rapid7
 cloud_ready: true
 resources:
@@ -25,6 +25,55 @@ sdk:
   type: full
   version: 5
   user: nobody
+version_history:
+- "10.1.0 - New Trigger Added: `Get New Alerts`"
+- "10.0.0 - Actions: `List Investigations` Sort options updated | `Get Investigation`, `List Investigations`, `Create Investigation`, `Update Investigation` `Set Priority of Investigation`, `Set Disposition of Investigation`, `Set Status of Investigation Action`, `Assign User to Investigation`, `Seach Investigations`, `Get a Log`, `Get All Logs`, `Search Alerts` output now includes additional fields"
+- "9.0.0 - Actions: `Advanced Query On Log` - Now allows for either log id or log name to be used"
+- "8.2.0 - Actions: `Advanced Query On Log Set` and `Advanced Query On Log` - optimized data fetching mechanisms"
+- 8.1.1 - Extended error logging for all the actions
+- "8.1.0 - New actions added: `Search Accounts` and `Get Account Information`"
+- 8.0.0 - Update schema for `Investigation` and `Statistics` | Update dependency for aiohttp | New actions added `Get Alert Information`, `Search Alerts`, `Retrieve Evidence for a Single Alert` and `Retrieve Actors for a Single Alert` | Fixed issue where index was not getting correctly passed through to `List Investigations` action from the user
+- "7.0.0 - Action: `Advanced Query On Log Set` - Fixed error where statistical queries would always return 0.0 | Action: `Advanced Query On Log Set` - Increase the maximum results returned from 50 to 500 |  Action: `Advanced Query On Log` - Add new output type for statistical queries | Updated schemas to ensure all are correct and added new schema validation to unit tests"
+- "6.0.1 - Action: `Advanced Query On Log` - Increase the maximum results returned from 50 to 500"
+- "6.0.0 - Action: `Advanced Query On Log Set` - Add new output type for statistical queries."
+- "5.1.2 - Action: `Advanced Query on Log Set` - Fix JSONDecoderError | Action: `Query` - Update spec and help.md to show it queries log IDs, not query IDs"
+- "5.1.1 - Action: `List Investigations` - Now receiving size input | Actions: `Advanced Query On Log` & `Advanced Query On Log Set` - Acronym LQL has been updated to LEQL"
+- "5.1.0 - New actions added: `get_user_information` and `get_asset_information`"
+- 5.0.1 - Update the endpoint `get_a_saved_query` reaches out to
+- 5.0.0 - Update `List Investigations` inputs
+- "4.4.1 - `List Alerts for Investigation`: fix issue with retrieving `detection_rule_rrn`"
+- "4.4.0 - `List Alerts for Investigation`: changed schema output for `detection_rule_rrn`"
+- "4.3.0 - `Query`: Add new parameter `most_recent_first`"
+- "4.2.1 - `Create Investigation`, `Update Investigation`: Fix issue where action fails when email address field is not empty"
+- "4.2.0 - New action added: Replace Indicators"
+- "4.1.1 - Advanced Query on Log Set Action: Updated EndPoint Agent enum to Endpoint Agent in log_set"
+- 4.1.0 - Add new actions `List Comments`, `Create Comment`, `Delete Comment`, `List Attachments`, `Upload Attachment`, `Download Attachment`, `Delete Attachment`, `Get Attachment Information`
+- 4.0.1 - Fix issue with `Get Query Results` and `Get All Saved Queries` actions
+- 4.0.0 - Add new actions Create Investigation, Search Investigations, Update Investigation, Set Investigation Priority, Set Investigation Disposition, and List Alerts for Investigation | Update actions List Investigations, Set Status of Investigation, Assign User to Investigation | Enabled cloud
+- 3.2.0 - Add new actions Get A Saved Query and Get All Saved Queries
+- 3.1.5 - Patch issue parsing labels in Advanced Query on Log and Advanced Query on Log Set actions
+- 3.1.4 - Add `docs_url` to plugin spec with a link to [InsightIDR plugin setup guide](https://docs.rapid7.com/insightconnect/rapid7-insightidr)
+- 3.1.3 - Fix issue where Get a Log and Get All Logs would either fail in workflow or in connection test
+- 3.1.2 - Send plugin name and version in the User-Agent string to vendor
+- 3.1.1 - Convert given date from timezone to UTC in List Investigations action
+- 3.1.0 - Add new action Create Threat
+- 3.0.0 - Added Relative Time options to Advanced Query actions | Fix issue where a query with no results would crash the plugin
+- 2.1.0 - New action Close Investigations in Bulk
+- 2.0.1 - Fix issue where long-running queries could crash the plugin
+- 2.0.0 - Refactor and split Advanced Query into two new actions Advanced Query on Log and Advanced Query on Log Set
+- 1.5.0 - New actions Get a Log and Get All Logs
+- 1.4.0 - New action Advanced Query
+- 1.3.1 - Fix ID input description in Get Query Results action
+- 1.3.0 - New action Get Query Results
+- 1.2.1 - Change default value in the `size` input parameter to 1000 in List Investigations action
+- 1.2.0 - New Action Assign User to Investigation
+- 1.1.1 - New spec and help.md format for the Extension Library
+- 1.1.0 - New Action Add Indicators to a Threat
+- 1.0.0 - Initial plugin
+links:
+- '[Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/)'
+references:
+- '[Rapid7 InsightIDR](https://www.rapid7.com/products/insightidr/)'
 types:
   investigation_metadata:
     index:
@@ -1915,7 +1964,7 @@ actions:
         description: Query Results
         type: statistics
         required: false
-        example:  {"leql": {"during": {"from": 1699579214000,"to": 1699622414000},"statement": "groupby(r7_context.asset.name)"},"logs": ["123456-abcd-1234-abcd-123456abc"],"search_stats": {"bytes_all": 9961260,"bytes_checked": 9961260,"duration_ms": 19,"events_all": 1640,"events_checked": 1640,"events_matched": 1639,"index_factor": 0.0},"statistics": {"all_exact_result": true,"cardinality": 0,"from": 1699579214000,"granularity": 4320000,"groups": [{"linux": {"count": 1163.0}},{"windowsx64": {"count": 476.0}}],"groups_timeseries": [{"linux": {"groups_timeseries": [],"series": [{"count": 45.0},{"count": 21.0},{"count": 16.0},{"count": 270.0},{"count": 27.0},{"count": 43.0},{"count": 27.},{"count": 39.0},{"count": 29.0},{"count": 646.0}],"totals": {"count": 1163.0}}},{"windowsx64": {"groups_timeseries": [],"series": [{"count": 54.0},{"count": 40.0},{"count": 60.0},{"count": 37.0},{"count": 42.0},{"count": 62.0},{"count": 41.0},{"count": 47.0},{"count": 49.0},{"count": 44.0}],"totals": {"count": 476.0}}}],"others": {"series": []},"stats": {},"status": 200,"timeseries": {},"to": 1699622414000,"type": "count"}}
+        example: {"leql": {"during": {"from": 1699579214000,"to": 1699622414000},"statement": "groupby(r7_context.asset.name)"},"logs": ["123456-abcd-1234-abcd-123456abc"],"search_stats": {"bytes_all": 9961260,"bytes_checked": 9961260,"duration_ms": 19,"events_all": 1640,"events_checked": 1640,"events_matched": 1639,"index_factor": 0.0},"statistics": {"all_exact_result": true,"cardinality": 0,"from": 1699579214000,"granularity": 4320000,"groups": [{"linux": {"count": 1163.0}},{"windowsx64": {"count": 476.0}}],"groups_timeseries": [{"linux": {"groups_timeseries": [],"series": [{"count": 45.0},{"count": 21.0},{"count": 16.0},{"count": 270.0},{"count": 27.0},{"count": 43.0},{"count": 27.},{"count": 39.0},{"count": 29.0},{"count": 646.0}],"totals": {"count": 1163.0}}},{"windowsx64": {"groups_timeseries": [],"series": [{"count": 54.0},{"count": 40.0},{"count": 60.0},{"count": 37.0},{"count": 42.0},{"count": 62.0},{"count": 41.0},{"count": 47.0},{"count": 49.0},{"count": 44.0}],"totals": {"count": 476.0}}}],"others": {"series": []},"stats": {},"status": 200,"timeseries": {},"to": 1699622414000,"type": "count"}}
       count:
         title: Count
         description: Number of log entries found
@@ -2017,7 +2066,7 @@ actions:
         description: Query Results
         type: statistics
         required: false
-        example:  {"leql": {"during": {"from": 1699579214000,"to": 1699622414000},"statement": "groupby(r7_context.asset.name)"},"logs": ["123456-abcd-1234-abcd-123456abc"],"search_stats": {"bytes_all": 9961260,"bytes_checked": 9961260,"duration_ms": 19,"events_all": 1640,"events_checked": 1640,"events_matched": 1639,"index_factor": 0.0},"statistics": {"all_exact_result": true,"cardinality": 0,"from": 1699579214000,"granularity": 4320000,"groups": [{"linux": {"count": 1163.0}},{"windowsx64": {"count": 476.0}}],"groups_timeseries": [{"linux": {"groups_timeseries": [],"series": [{"count": 45.0},{"count": 21.0},{"count": 16.0},{"count": 270.0},{"count": 27.0},{"count": 43.0},{"count": 27.},{"count": 39.0},{"count": 29.0},{"count": 646.0}],"totals": {"count": 1163.0}}},{"windowsx64": {"groups_timeseries": [],"series": [{"count": 54.0},{"count": 40.0},{"count": 60.0},{"count": 37.0},{"count": 42.0},{"count": 62.0},{"count": 41.0},{"count": 47.0},{"count": 49.0},{"count": 44.0}],"totals": {"count": 476.0}}}],"others": {"series": []},"stats": {},"status": 200,"timeseries": {},"to": 1699622414000,"type": "count"}}
+        example: {"leql": {"during": {"from": 1699579214000,"to": 1699622414000},"statement": "groupby(r7_context.asset.name)"},"logs": ["123456-abcd-1234-abcd-123456abc"],"search_stats": {"bytes_all": 9961260,"bytes_checked": 9961260,"duration_ms": 19,"events_all": 1640,"events_checked": 1640,"events_matched": 1639,"index_factor": 0.0},"statistics": {"all_exact_result": true,"cardinality": 0,"from": 1699579214000,"granularity": 4320000,"groups": [{"linux": {"count": 1163.0}},{"windowsx64": {"count": 476.0}}],"groups_timeseries": [{"linux": {"groups_timeseries": [],"series": [{"count": 45.0},{"count": 21.0},{"count": 16.0},{"count": 270.0},{"count": 27.0},{"count": 43.0},{"count": 27.},{"count": 39.0},{"count": 29.0},{"count": 646.0}],"totals": {"count": 1163.0}}},{"windowsx64": {"groups_timeseries": [],"series": [{"count": 54.0},{"count": 40.0},{"count": 60.0},{"count": 37.0},{"count": 42.0},{"count": 62.0},{"count": 41.0},{"count": 47.0},{"count": 49.0},{"count": 44.0}],"totals": {"count": 476.0}}}],"others": {"series": []},"stats": {},"status": 200,"timeseries": {},"to": 1699622414000,"type": "count"}}
       count:
         title: Count
         description: Number of log entries found
@@ -2555,7 +2604,6 @@ actions:
         type: "[]evidence_object"
         required: false
         example: [{"created_at": "2023-12-04T13:59:06.768731Z","data": {"timestamp":"2023-12-04T13:44:56.000Z","user":"test_user","account":"test_user","result":"SUCCESS","source_ip":"1.1.1.1","service":"o365","geoip_city":"Boston","geoip_country_code":"US","geoip_country_name":"United States","geoip_organization":"TowardEX Technologies International","geoip_region":"MA","source_json":{"CreationTime":"2023-12-04T13:44:56","Id":"12345678-abcd-cdef-1234-12345abc0","Operation":"UserLoggedIn","OrganizationId":"12345678-abcd-cdef-1234-12345abc","RecordType":15,"ResultStatus":"Success","UserKey":"12345678-abcd-cdef-1234-12345abc","UserType":0,"Version":1,"Workload":"AzureActiveDirectory","ClientIP":"1.1.1.1","ObjectId":"00000002-0000-0000-c000-000000000000","UserId":"test_user","AzureActiveDirectoryEventType":1,"ExtendedProperties":[{"Name":"ResultStatusDetail","Value":"Success"},{"Name":"UserAuthenticationMethod","Value":"1"},{"Name":"RequestType","Value":"OAuth2:Token"}],"ModifiedProperties":[],"Actor":[{"ID":"12345678-abcd-cdef-1234-12345abc","Type":0},{"ID":"test_user","Type":5}],"ActorContextId":"12345678-abcd-cdef-1234-12345abc","ActorIpAddress":"1.1.1.1","InterSystemsId":"1bd394a5-be1b-4af3-a608-8ec6c73d5c02","IntraSystemId":"12345678-abcd-cdef-1234-12345abc0","SupportTicketId":"","Target":[{"ID":"00000002-0000-0000-c000-000000000000","Type":0}],"TargetContextId":"12345678-abcd-cdef-1234-12345abc","ApplicationId":"cb1056e2-e479-49de-ae31-7812af012ed8","DeviceProperties":[{"Name":"OS","Value":"Windows10"},{"Name":"BrowserType","Value":"Other"},{"Name":"SessionId","Value":"512345678-abcd-cdef-1234-12345abc"}],"ErrorNumber":"0"},"custom_data":{"SourceRelative Url":"TargetContextId","source_account":"RecordType"},"r7_context":{"user":{"type":"user","rrn":"rrn:uba:us:512345678-abcd-cdef-1234-12345abc:user:ABCDEFGH","name":"test_user"},"account":{"type":"account","rrn":"rrn:uba:us:512345678-abcd-cdef-1234-12345abc:account:ABCDEFGH","name":"test_user"}}},"event_type": "ingress_auth","evented_at": "2023-12-04T13:59:06.349Z","external_source": "IDR ABA","rrn": "rrn:alerts:us1:512345678-abcd-cdef-1234-12345abc:evidence:1:512345678-abcd-cdef-1234-12345abc","updated_at": "2023-12-04T13:59:06.768731Z","version": 1}]
-
       metadata:
         title: Metadata
         description: The pagination parameters used to generate this page result
@@ -2659,3 +2707,46 @@ actions:
         type: account_object
         required: false
         example: { "rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:account:83002c85d7c6", "name": "jdoe@acme.com", "domain": "tor.acme.com", "disabled": true, "user": { "rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6", "name": "John Doe" }, "authentication_service": "ACTIVE_DIRECTORY" }
+triggers:
+  get_new_alerts:
+    title: Get New Alerts
+    description: Get New Alerts
+    input:
+      frequency:
+        title: Frequency
+        description: Poll frequency in seconds
+        type: integer
+        required: false
+        default: 15
+        example: 15
+      leql:
+        title: LEQL
+        description: The LEQL 'WHERE' clause to match against
+        type: string
+        required: false
+        example: ""
+      terms:
+        title: Terms
+        description: The search terms to match against
+        type: "[]terms_object"
+        required: false
+        example: ""
+      field_ids:
+        title: Field IDs
+        description: Additional fields to include for each alert. No additional fields are included if field_ids is empty
+        type: "[]string"
+        required: false
+        example: []
+      aggregates:
+        title: Aggregates
+        description: Aggregations to apply for all matching results
+        type: "[]aggregate_object"
+        required: false
+        example: [{}]
+    output:
+      alert:
+        title: Alert
+        description: Alert
+        type: alert_object
+        required: false
+        example: {"alerted_at": "2023-12-04T13:59:06.349Z", "created_at": "2023-12-04T13:59:06.757109Z", "disposition": "UNDECIDED", "external_id": "12345678-abcd-cdef-1234-12345abc", "external_source": "IDR ABA", "fields": [], "ingested_at": "2023-12-04T13:59:06.751813Z", "investigation_rrn": "rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI", "organization": {"customer_id": "12345678-abcd-cdef-1234-12345abc", "customer_name": "Dev Test", "flags": [], "id": "12345678-abcd-cdef-1234-12345abc", "name": "Dev Test", "product_token": "abcdefgh12345abc", "region": "us1"}, "permissions": {"canEdit": "false"}, "priority": "LOW", "responsibility": "MDR", "rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abc", "rule": {"mitre_tcodes": ["Credential Access", "T1110"], "rrn": "rrn:cba:::detection-rule:ABCDEFGHIJK", "version_rrn": "rrn:cba:::detection-rule:version:ABCDEFGHIJK"}, "rule_keys_of_interest": [{"key": "result", "values": ["SUCCESS"]}, {"key": "account", "values": ["test_account"]}, {"key": "geoip_country_code", "values": ["US"]}, {"key": "source_ip", "values": ["1.1.1.1"]}], "rule_matching_keys": [{"key": "entryType", "values": ["ingress_auth"]}, {"key": "orgId", "values": ["12345678-abcd-cdef-1234-12345abc"]}], "status": "OPEN", "tags": [], "title": "MVD Verification", "type": "MVD Verification", "updated_at": "2023-12-05T11:51:39.29059Z", "version": 8}
