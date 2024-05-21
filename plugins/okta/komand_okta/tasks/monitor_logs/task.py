@@ -5,7 +5,7 @@ from .schema import MonitorLogsInput, MonitorLogsOutput, MonitorLogsState, Compo
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_okta.util.exceptions import ApiException
 from datetime import datetime, timedelta, timezone
-from typing import Dict, Any, Union, Optional
+from typing import Dict, Any, Tuple, Union, Optional
 import re
 
 DEFAULT_CUTOFF_HOURS = 168
@@ -204,7 +204,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
         return new_ts
 
-    def _get_filter_time(self, state: Dict, custom_config: Dict) -> tuple[Union[Optional[int], Any], bool]:
+    def _get_filter_time(self, state: Dict, custom_config: Dict) -> Tuple[Union[Optional[int], Any], bool]:
         """
         Apply custom_config params (if provided) to the task. If a lookback value exists, it should take
         precedence (this can allow a larger filter time), otherwise use the default_cutoff value.
