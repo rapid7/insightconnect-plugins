@@ -11,7 +11,8 @@ import base64
 from tempfile import NamedTemporaryFile
 from timeout_decorator import timeout, TimeoutError
 
-TIMEOUT_SECONDS = 600
+TIMEOUT_SECONDS = 60 * 5
+
 
 class RecordedFutureApi:
     def __init__(self, logger, meta, token: str):
@@ -72,8 +73,8 @@ class RecordedFutureApi:
         """
         Retrieves, decompresses and parses a Gzip file containing XML, returning the compressed file and a JSON
         representation of its contents
-        :param filename: filename of the compressed Gzip
-        :return: The decoded GZIP contents in Base64 and the decompressed JSON representation of the XML file
+        :param filename: filename of the compressed gzip
+        :return: The decoded gzip contents in Base64 and the decompressed JSON representation of the XML file
         """
         try:
             with gzip.open(filename, "rb") as file:
@@ -81,13 +82,13 @@ class RecordedFutureApi:
                 try:
                     parsed_data = RecordedFutureApi.decompress_gzip_to_dict(compressed_data)
                 except (MemoryError, TimeoutError):
-                    self.logger.info("Response is too large to read. Returning GZIP...")
+                    self.logger.info("Response is too large to read. Returning gzip only...")
                     parsed_data = None
                 decoded_data = base64.b64encode(compressed_data).decode("utf-8")
                 return decoded_data, parsed_data
         except (gzip.BadGzipFile, IOError) as exception:
             raise PluginException(
-                cause="Error reading saved GZIP response file",
+                cause="Error reading saved gzip response file",
                 assistance="File may contain errors or be in an unexpected format",
                 data=exception,
             )
@@ -136,9 +137,7 @@ class RecordedFutureApi:
 
     def _call_api(self, method: str, endpoint: str, params: dict = None, data: dict = None, json: dict = None):
         _url = self.base_url + endpoint
-        response = requests.request(
-            url=_url, method=method, params=params, data=data, json=json, headers=self.headers
-        )
+        response = requests.request(url=_url, method=method, params=params, data=data, json=json, headers=self.headers)
         RecordedFutureApi.response_handler(response, _url)
         try:
             return response.json()
