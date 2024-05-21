@@ -3,11 +3,29 @@ extension: plugin
 products: [insightconnect]
 name: infoblox
 title: Infoblox
-description: Manage and identify devices connected to networks managed by Infoblox
-version: 1.0.1
+description: "[Infoblox](https://www.infoblox.com) helps with managing and identifying devices connected to networks, specifically for the DNS, DHCP and IP address management (collectively, DDI)"
+version: 2.0.0
+connection_version: 2
 vendor: rapid7
 support: community
 status: []
+supported_versions: ["2024-05-03"]
+requirements:
+  - An account from the vendor to login to services
+key_features:
+  - Get information about devices on the network
+links:
+  - "[Infoblox API](https://www.infoblox.com/wp-content/uploads/infoblox-deployment-infoblox-rest-api.pdf)"
+references:
+  - "[REST API examples](https://community.infoblox.com/t5/API-Integration/The-definitive-list-of-REST-examples/td-p/1214)"
+version_history:
+  - "2.0.0 - `Connection` - Add SSL verify input | Update SDK from `komand` to `insightconnect_plugin_runtime` | Added unit tests"
+  - "1.0.1 - New spec and help.md format for the Extension Library"
+  - "1.0.0 - Initial plugin"
+sdk:
+  type: slim
+  version: 5.4.9
+  user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/infoblox
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -19,17 +37,20 @@ hub_tags:
   use_cases: [asset_inventory]
   keywords: [infoblox, network]
   features: []
+troubleshooting: "Infoblox instance is required for this plugin. Infoblox does not provide a testing environment, but they do provide a properly configured VMWare virtual machine (the default credentials are `admin:infoblox`). Details can be found [here](https://www.infoblox.com/infoblox-download-center/).\n\nWhen adding a new host make sure that a corresponding network is already created (otherwise you will get `The action is not allowed. A parent was not found.`). More details can be found in [this post](https://community.infoblox.com/t5/API-Integration/API-testing-environment-TestDrive-not-working/m-p/14047#M1765).\n\n[Infoblox Community](https://community.infoblox.com/) provides a lot of answers on different topics, make sure to check it if you run into any problems."
 connection:
   url:
     title: URL
     description: The URL of a running Infoblox instance (e.g. https://192.168.1.2
       or https://example.infoblox.com)
     type: string
+    example: "https://192.168.1.2"
     required: true
   credentials:
     title: Username and Password
     description: Infoblox username and password
     type: credential_username_password
+    example: {'username': 'user', 'password': 'pass'}
     required: true
   api_version:
     title: API Version
@@ -37,6 +58,7 @@ connection:
     type: string
     required: true
     default: '2.7'
+    example: '2.7'
     enum:
     - '1.0'
     - '1.1'
@@ -56,18 +78,14 @@ connection:
     - '2.5'
     - '2.6'
     - '2.7'
+  ssl_verify:
+    title: SSL Verify
+    description: Toggle on or off SSL verify
+    type: boolean
+    example: true
+    default: true
+    required: true
 types:
-  FixedAddressCreate:
-    ipv4addr:
-      type: string
-      required: true
-      title: IPv4 Address
-      description: Either an IP address or a function (e.g. func:nextavailableip:10.1.1.0/24)
-    mac:
-      type: string
-      required: true
-      title: MAC
-      description: MAC address
   IPv4AddrCreate:
     ipv4addr:
       type: string
@@ -77,6 +95,17 @@ types:
     mac:
       type: string
       required: false
+      title: MAC
+      description: MAC address
+  FixedAddressCreate:
+    ipv4addr:
+      type: string
+      required: true
+      title: IPv4 Address
+      description: Either an IP address or a function (e.g. func:nextavailableip:10.1.1.0/24)
+    mac:
+      type: string
+      required: true
       title: MAC
       description: MAC address
   IPv4Addr:
@@ -106,7 +135,7 @@ types:
       title: Ref
       description: Object Reference of the IP address
   Host:
-    _ref:
+    ref:
       type: string
       required: true
       title: Ref
@@ -186,23 +215,27 @@ actions:
       networks, e.g. network FQDN = info.com, host name = example.info.com)
     input:
       host:
-        type: HostCreate
+        title: Host
         description: New host data
+        type: HostCreate
+        example: {'Name': 'name', 'View': 'network_view', 'ipv4addrs': ['192.168.0.1', '192.168.0.2', '192.168.0.3']}
         required: true
     output:
-      _ref:
+      ref:
         title: Ref
         description: Object Reference of a newly added host
         type: string
+        example: 'ExampleObjectRef'
         required: true
   get_host:
     title: Get Host
     description: Obtain host details
     input:
-      _ref:
+      ref:
         type: string
         title: Ref
         description: Object Reference of the host
+        example: 'ExampleObjectRef'
         required: true
     output:
       host:
@@ -210,41 +243,47 @@ actions:
         required: true
         title: Host
         description: Host details
+        example: { '_ref': 'ExampleObjectRef', 'name': 'HostName', 'ipv4addrs': [ '192.168.0.1', '192.168.0.2', '192.168.0.3' ], 'view': 'FQDN', 'extattrs': { 'idk': 'idk' }, 'aliases': [ 'alias1', 'alias2' ] }
   modify_host:
     title: Modify Host
     description: Update host data
     input:
-      _ref:
+      ref:
         type: string
         title: Ref
         description: Object Reference of the host to update
         required: true
+        example: 'HostRef'
       updated_host:
         type: HostUpdate
         required: false
-        title: Updated host data
+        title: Updated Host Data
         description: Values of fields that should be changed
+        example: { 'aliases': [ 'alias1', 'alias2' ], 'extattrs': { 'idk': 'idk' }, 'ipv4addrs': { 'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26' }, 'ipv4addrs+': { 'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26' }, 'ipv4addrs-': { 'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26' } }
     output:
-      _ref:
+      ref:
         type: string
         required: true
         title: Ref
         description: Object Reference of the modified host
+        example: 'ObjectRef'
   delete_host:
     title: Delete Host
     description: Delete a host
     input:
-      _ref:
+      ref:
         type: string
         title: Ref
         description: Object Reference of the host to remove
         required: true
+        example: 'ObjectRef'
     output:
-      _ref:
+      ref:
         type: string
         title: Ref
         description: Object Reference of the removed host
         required: true
+        example: 'ObjectRef'
   search_by_name:
     title: Search by Name
     description: Search hosts by name
@@ -254,12 +293,14 @@ actions:
         required: true
         title: Name Pattern
         description: Regular expression to match against host name
+        example: "/^[a-z ,.'-]+$/i"
     output:
       result:
         type: '[]Host'
         required: true
         title: Result
         description: Matched hosts
+        example: ['Host1', 'Host2']
   search_by_ip:
     title: Search by IP
     description: Search for any object with an IP address
@@ -269,12 +310,14 @@ actions:
         required: true
         title: IP
         description: IP address
+        example: '192.168.0.1'
     output:
       result:
-        type: '[]string'
-        required: true
         title: Result
         description: Object References of all objects with given IP address
+        type: '[]string'
+        required: true
+        example: ['Object1', 'Object2']
   search_by_mac:
     title: Search by MAC
     description: Search fixed addresses by MAC address
@@ -284,12 +327,14 @@ actions:
         required: true
         title: MAC
         description: MAC address
+        example: '2c549188c9e3'
     output:
       result:
         type: '[]IPv4Addr'
         required: true
         title: Result
         description: Matched fixed addresses
+        example: [{ 'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26' }, { 'ipv4addr': '192.168.0.2', 'mac': '00-B0-D0-63-C2-26' }]
   add_fixed_address:
     title: Add Fixed Address
     description: Add fixed address (a specific IP address that a DHCP server always
@@ -300,9 +345,11 @@ actions:
         type: FixedAddressCreate
         title: Address
         description: New fixed address data
+        example: { 'ipv4addr': '192.168.0.1', 'mac': '00-B0-D0-63-C2-26' }
     output:
-      _ref:
+      ref:
         required: true
         type: string
         title: Ref
         description: Object Reference of a newly added fixed address
+        example: 'ObjectRef'
