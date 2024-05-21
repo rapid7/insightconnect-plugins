@@ -5,10 +5,11 @@ from .schema import MonitorLogsInput, MonitorLogsOutput, MonitorLogsState, Compo
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_okta.util.exceptions import ApiException
 from datetime import datetime, timedelta, timezone
-from typing import Dict, Any
+from typing import Dict, Any, Union, Optional
 import re
 
-CUTOFF = 24
+DEFAULT_CUTOFF_HOURS = 168
+DEFAULT_INITIAL_LOOKBACK = 24
 
 
 class MonitorLogs(insightconnect_plugin_runtime.Task):
@@ -30,7 +31,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         has_more_pages = False
         parameters = {}
         try:
-            filter_time, is_filter_datetime = self._get_filter_time(custom_config)
+            filter_time, is_filter_datetime = self._get_filter_time(state, custom_config)
             now = self.get_current_time() - timedelta(minutes=1)  # allow for latency of this being triggered
             now_iso = self.get_iso(now)
             # Whether to convert filter_time in hours to datetime
@@ -203,17 +204,22 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
         return new_ts
 
-    def _get_filter_time(self, custom_config: Dict) -> int:
+    def _get_filter_time(self, state: Dict, custom_config: Dict) -> tuple[Union[Optional[int], Any], bool]:
         """
         Apply custom_config params (if provided) to the task. If a lookback value exists, it should take
-        precedence (this can allow a larger filter time), otherwise use the cutoff value.
+        precedence (this can allow a larger filter time), otherwise use the default_cutoff value.
+        The default_cutoff value is set based on whether this is first run, or a subsequent run.
         :param custom_config: dictionary passed containing `cutoff` or `lookback` values
         :return: filter_value to be applied in request to Okta
         :return: is_filter_datetime boolean value if filter_value is of type datetime
         """
         filter_cutoff = custom_config.get("cutoff", {}).get("date")
         if filter_cutoff is None:
-            filter_cutoff = custom_config.get("cutoff", {}).get("hours", CUTOFF)
+            default_cutoff = DEFAULT_CUTOFF_HOURS
+            if not state:
+                default_cutoff = DEFAULT_INITIAL_LOOKBACK
+            filter_cutoff = custom_config.get("cutoff", {}).get("hours", default_cutoff)
+
         filter_lookback = custom_config.get("lookback")
         filter_value = filter_lookback if filter_lookback else filter_cutoff
         is_filter_datetime = self.check_if_datetime(filter_value)
