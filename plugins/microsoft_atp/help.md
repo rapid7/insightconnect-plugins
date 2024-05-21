@@ -3,19 +3,19 @@
 The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
 
 # Key Features
-  
+
 * Trigger workflows on new security alerts
 * Manage isolation of network resources
 * Start virus scans
 * Stop execution of malicious code
 
 # Requirements
-  
+
 * Windows Defender Advanced Threat Protection application credentials
 
 # Supported Product Versions
-  
-* 2022-05-20
+
+* 2024-05-21
 
 # Documentation
 
@@ -27,12 +27,12 @@ For information on how to setup your application and assign permissions go here:
 https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|application_id|string|None|True|Application (client) ID|None|a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d|
-|application_secret|credential_secret_key|None|True|Application secret|None|kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=|
-|directory_id|string|None|True|Directory (tenant) ID|None|3a522933-ae5e-2b63-96ab-3c004b4f7f10|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|application_id|string|None|True|Application (client) ID|None|a74dfb10-i33o-44e1-ba87-5fn2bb4e6b4d|None|None|
+|application_secret|credential_secret_key|None|True|Application secret|None|kQDFcZoJYmxJpiS1x7rdyleyNFwhvLgcOZCkYG+5=|None|None|
+|directory_id|string|None|True|Directory (tenant) ID|None|3a522933-ae5e-2b63-96ab-3c004b4f7f10|None|None|
+
 Example input:
 
 ```
@@ -49,23 +49,24 @@ Example input:
 
 
 #### Blacklist
-  
-Submit or update new indicator
+
+This action is used to submit or update new indicator
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action|string|AlertAndBlock|False|The action that will be taken if the indicator will be discovered in the organization|['Alert', 'AlertAndBlock', 'Allowed']|AlertAndBlock|
-|application|string|None|False|The application associated with the indicator|None|demo-test|
-|description|string|Indicator Blacklisted from InsightConnect|False|Description of the indicator|None|Indicator Blacklisted from InsightConnect|
-|expiration_time|string|None|False|The expiration time of the indicator, default value is one year from now|None|2020-12-12T00:00:00Z|
-|indicator|string|None|True|A supported indicator to blacklist or unblacklist. Supported indicators are IP addresses, URLs, domains, and SHA1 and SHA256 hashes|None|220e7d15b011d7fac48f2bd61114db1022197f7f|
-|indicator_state|boolean|False|False|True to add indicator, false to remove it from the list|None|True|
-|rbac_group_names|[]string|None|False|List of RBAC group names the indicator would be applied to|None|["group1","group2"]|
-|recommended_actions|string|None|False|TI indicator alert recommended actions|None|nothing|
-|severity|string|High|False|The severity of the indicator|['Informational', 'Low', 'Medium', 'High']|High|
-|title|string|None|False|Indicator alert title|None|test|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|action|string|AlertAndBlock|False|The action that will be taken if the indicator will be discovered in the organization|["Alert", "AlertAndBlock", "Allowed", "Audit", "Block", "Warn"]|AlertAndBlock|None|None|
+|application|string|None|False|The application associated with the indicator|None|demo-test|None|None|
+|description|string|Indicator Blacklisted from InsightConnect|False|Description of the indicator|None|Indicator Blacklisted from InsightConnect|None|None|
+|expiration_time|string|None|False|The expiration time of the indicator, default value is one year from now|None|2020-12-12T00:00:00Z|None|None|
+|generate_alert|boolean|False|False|True if alert generation is required, False if this indicator shouldn't generate an alert. Please note this flag only affects the following action types [Allowed, Block, Warn]|None|True|None|None|
+|indicator|string|None|True|A supported indicator to blacklist or unblacklist. Supported indicators are IP addresses, URLs, domains, and SHA1 and SHA256 hashes|None|220e7d15b011d7fac48f2bd61114db1022197f7f|None|None|
+|indicator_state|boolean|False|False|True to add indicator, false to remove it from the list|None|True|None|None|
+|rbac_group_names|[]string|None|False|List of RBAC group names the indicator would be applied to|None|["group1","group2"]|None|None|
+|recommended_actions|string|None|False|TI indicator alert recommended actions|None|nothing|None|None|
+|severity|string|High|False|The severity of the indicator|["Informational", "Low", "Medium", "High"]|High|None|None|
+|title|string|None|False|Indicator alert title|None|test|None|None|
   
 Example input:
 
@@ -75,6 +76,7 @@ Example input:
   "application": "demo-test",
   "description": "Indicator Blacklisted from InsightConnect",
   "expiration_time": "2020-12-12T00:00:00Z",
+  "generate_alert": false,
   "indicator": "220e7d15b011d7fac48f2bd61114db1022197f7f",
   "indicator_state": false,
   "rbac_group_names": [
@@ -128,15 +130,15 @@ Example output:
 ```
 
 #### Collect Investigation Package
-  
-Collects investigation package from a machine
+
+This action is used to collects investigation package from a machine
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|comment|string|Investigation package collected via InsightConnect|False|Comment to associate with the action|None|Investigation package collected via InsightConnect|
-|machine|string|None|True|Machine IP address, hostname, or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|comment|string|Investigation package collected via InsightConnect|False|Comment to associate with the action|None|Investigation package collected via InsightConnect|None|None|
+|machine|string|None|True|Machine IP address, hostname, or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|None|None|
   
 Example input:
 
@@ -178,14 +180,14 @@ Example output:
 ```
 
 #### Find Machines with Installed Software
-  
-Retrieve a list of device references that have specific software installed
+
+This action is used to retrieve a list of device references that have specific software installed
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|software|string|None|True|Name of the software to be searched|None|microsoft-_-edge|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|software|string|None|True|Name of the software to be searched|None|microsoft-_-edge|None|None|
   
 Example input:
 
@@ -205,24 +207,26 @@ Example output:
 
 ```
 {
-  "machines": {
-    "computerDnsName": "mseewin10",
-    "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
-    "osPlatform": "Windows10",
-    "rbacGroupId": 0
-  }
+  "machines": [
+    {
+      "computerDnsName": "mseewin10",
+      "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+      "osPlatform": "Windows10",
+      "rbacGroupId": 0
+    }
+  ]
 }
 ```
 
 #### Get Files from Alert
-  
-Retrieve a list of file information objects related to an alert
+
+This action is used to retrieve a list of file information objects related to an alert
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|alert_id|string|None|True|Alert ID to get files from|None|da637293198146839977_2089064327|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|alert_id|string|None|True|Alert ID to get files from|None|da637293198146839977_2089064327|None|None|
   
 Example input:
 
@@ -242,32 +246,35 @@ Example output:
 
 ```
 {
-  "file_list": {
-    "determinationType": "Unknown",
-    "determinationValue": "HackTool:MSIL/AutoKms",
-    "globalFirstObserved": "2015-11-01T02:48:27.1103102Z",
-    "globalLastObserved": "2020-07-05T07:58:26.8760293Z",
-    "globalPrevalence": 437,
-    "isPeFile": true,
-    "isValidCertificate": false,
-    "md5": "a69acb01b99959efec7c0a2a8caa7545",
-    "sha1": "f093e7767bb63ac973b697d3fd1d40a78b87b8bf",
-    "sha256": "470a75fe3da2ddf9d27fb3f9c96e6c665506ea7ba26ab89f0c89606f678ae4a2",
-    "signerHash": "006276223396f7510653e20f0d10cd1a5d97176e",
-    "size": 740544
-  }
+  "file_list": [
+    {
+      "determinationType": "Unknown",
+      "determinationValue": "HackTool:MSIL/AutoKms",
+      "globalFirstObserved": "2015-11-01T02:48:27.1103102Z",
+      "globalLastObserved": "2020-07-05T07:58:26.8760293Z",
+      "globalPrevalence": 437,
+      "isPeFile": true,
+      "isValidCertificate": false,
+      "md5": "a69acb01b99959efec7c0a2a8caa7545",
+      "sha1": "f093e7767bb63ac973b697d3fd1d40a78b87b8bf",
+      "sha256": "470a75fe3da2ddf9d27fb3f9c96e6c665506ea7ba26ab89f0c89606f678ae4a2",
+      "signerHash": "006276223396f7510653e20f0d10cd1a5d97176e",
+      "size": 740544
+    }
+  ]
 }
 ```
 
 #### Get Installed Software
-  
-Retrieves a collection of installed software related to a given machine IP address, hostname, or machine ID
+
+This action is used to retrieves a collection of installed software related to a given machine IP address, hostname, or
+ machine ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|machine|string|None|True|Machine IP address, hostname, or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|machine|string|None|True|Machine IP address, hostname, or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|None|None|
   
 Example input:
 
@@ -281,34 +288,46 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|software|[]software|True|List of installed software on the machine|[{"publicExploit": True, "vendor": "microsoft", "weaknesses": 1056, "activeAlert": False, "exposedMachines": 1, "id": "microsoft-_-windows_10", "impactScore": 63.8, "name": "windows_10"}, {"exposedMachines"": 0, "id": "microsoft-_-edge_chromium-based", "impactScore": 0, "name": "edge_chromium-based", "publicExploit": False, "vendor": "microsoft", "weaknesses": 0, "activeAlert": False}]|
+|software|[]software|True|List of installed software on the machine|[{"publicExploit": True, "vendor": "microsoft", "weaknesses": 1056, "activeAlert": False, "exposedMachines": 1, "id": "microsoft-_-windows_10", "impactScore": 63.8, "name": "windows_10"}, {"exposedMachines": 0, "id": "microsoft-_-edge_chromium-based", "impactScore": 0, "name": "edge_chromium-based", "publicExploit": False, "vendor": "microsoft", "weaknesses": 0, "activeAlert": False}]|
   
 Example output:
 
 ```
 {
-  "software": {
-    "activeAlert": false,
-    "exposedMachines": 1,
-    "id": "microsoft-_-windows_10",
-    "impactScore": 63.8,
-    "name": "windows_10",
-    "publicExploit": true,
-    "vendor": "microsoft",
-    "weaknesses": 1056
-  }
+  "software": [
+    {
+      "activeAlert": false,
+      "exposedMachines": 1,
+      "id": "microsoft-_-windows_10",
+      "impactScore": 63.8,
+      "name": "windows_10",
+      "publicExploit": true,
+      "vendor": "microsoft",
+      "weaknesses": 1056
+    },
+    {
+      "activeAlert": false,
+      "exposedMachines": 0,
+      "id": "microsoft-_-edge_chromium-based",
+      "impactScore": 0,
+      "name": "edge_chromium-based",
+      "publicExploit": false,
+      "vendor": "microsoft",
+      "weaknesses": 0
+    }
+  ]
 }
 ```
 
 #### Get Machine Action
-  
-Retrieve details about an action taken on a machine
+
+This action is used to retrieve details about an action taken on a machine
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action_id|string|None|True|Action ID|None|ffd1f0cb-68ad-44ea-bf90-d01061b965ec|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|action_id|string|None|True|Action ID|None|ffd1f0cb-68ad-44ea-bf90-d01061b965ec|None|None|
   
 Example input:
 
@@ -344,14 +363,14 @@ Example output:
 ```
 
 #### Get Machine Information
-  
-Get details about a machine with its ID
+
+This action is used to get details about a machine with its ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|None|None|
   
 Example input:
 
@@ -394,14 +413,14 @@ Example output:
 ```
 
 #### Get Machine Vulnerabilities
-  
-Retrieves a collection of discovered vulnerabilities related to a given device
+
+This action is used to retrieves a collection of discovered vulnerabilities related to a given device
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|machine|string|None|True|Machine IP address, hostname or machine ID|None|9de5069c5afe602b2ea0a04b66beb2c0cef77fdf|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|machine|string|None|True|Machine IP address, hostname or machine ID|None|9de5069c5afe602b2ea0a04b66beb2c0cef77fdf|None|None|
   
 Example input:
 
@@ -421,33 +440,35 @@ Example output:
 
 ```
 {
-  "vulnerabilities": {
-    "cvssV3": 6.5,
-    "description": "Vulnerability in the Oracle VM VirtualBox product of Oracle Virtualization (component: Core).  Supported versions that are affected are Prior to 5.2.44, prior to 6.0.24 and  prior to 6.1.12. Easily exploitable vulnerability allows high privileged attacker with logon to the infrastructure where Oracle VM VirtualBox executes to compromise Oracle VM VirtualBox.  Successful attacks require human interaction from a person other than the attacker. Successful attacks of this vulnerability can result in takeover of Oracle VM VirtualBox.  Note: The CVE-2020-14711 is applicable to macOS host only. CVSS 3.1 Base Score 6.5 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:H/A:H).",
-    "exploitInKit": false,
-    "exploitTypes": [],
-    "exploitUris": [],
-    "exploitVerified": false,
-    "exposedMachines": 1,
-    "id": "CVE-2020-14711",
-    "name": "CVE-2020-14711",
-    "publicExploit": false,
-    "publishedOn": "2020-07-14T00:00:00Z",
-    "severity": "Medium",
-    "updatedOn": "2020-07-27T22:00:00Z"
-  }
+  "vulnerabilities": [
+    {
+      "cvssV3": 6.5,
+      "description": "Vulnerability in the Oracle VM VirtualBox product of Oracle Virtualization (component: Core).  Supported versions that are affected are Prior to 5.2.44, prior to 6.0.24 and  prior to 6.1.12. Easily exploitable vulnerability allows high privileged attacker with logon to the infrastructure where Oracle VM VirtualBox executes to compromise Oracle VM VirtualBox.  Successful attacks require human interaction from a person other than the attacker. Successful attacks of this vulnerability can result in takeover of Oracle VM VirtualBox.  Note: The CVE-2020-14711 is applicable to macOS host only. CVSS 3.1 Base Score 6.5 (Confidentiality, Integrity and Availability impacts).  CVSS Vector: (CVSS:3.1/AV:L/AC:L/PR:H/UI:R/S:U/C:H/I:H/A:H).",
+      "exploitInKit": false,
+      "exploitTypes": [],
+      "exploitUris": [],
+      "exploitVerified": false,
+      "exposedMachines": 1,
+      "id": "CVE-2020-14711",
+      "name": "CVE-2020-14711",
+      "publicExploit": false,
+      "publishedOn": "2020-07-14T00:00:00Z",
+      "severity": "Medium",
+      "updatedOn": "2020-07-27T22:00:00Z"
+    }
+  ]
 }
 ```
 
 #### Get Missing Software Updates
-  
-Retrieve a list of software updates
+
+This action is used to retrieve a list of software updates
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|machine|string|None|True|Machine IP address, hostname or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|machine|string|None|True|Machine IP address, hostname or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|None|None|
   
 Example input:
 
@@ -467,30 +488,32 @@ Example output:
 
 ```
 {
-  "updates": {
-    "cveAddressed": 68,
-    "id": "4570333",
-    "machineMissedOn": 1,
-    "name": "September 2020 Security Updates",
-    "osBuild": 17763,
-    "productsNames": [
-      "windows_10",
-      "internet_explorer"
-    ],
-    "url": "https://catalog.update.microsoft.com/v7/site/Searc..."
-  }
+  "updates": [
+    {
+      "cveAddressed": 68,
+      "id": "4570333",
+      "machineMissedOn": 1,
+      "name": "September 2020 Security Updates",
+      "osBuild": 17763,
+      "productsNames": [
+        "windows_10",
+        "internet_explorer"
+      ],
+      "url": "https://catalog.update.microsoft.com/v7/site/Searc..."
+    }
+  ]
 }
 ```
 
 #### Get Related Machines
-  
-Get machines related to an file hash(SHA1), domain or username indicator
+
+This action is used to get machines related to an file hash(SHA1), domain or username indicator
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|indicator|string|None|True|File hash(SHA1), domain or username indicator|None|example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|indicator|string|None|True|File hash(SHA1), domain or username indicator|None|example.com|None|None|
   
 Example input:
 
@@ -510,41 +533,43 @@ Example output:
 
 ```
 {
-  "machines": {
-    "agentVersion": "10.5850.17763.348",
-    "computerDnsName": "msedgewin10",
-    "deviceValue": "Normal",
-    "exposureLevel": "Medium",
-    "firstSeen": "2020-12-08T09:33:03.1262943Z",
-    "healthStatus": "Active",
-    "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
-    "isAadJoined": false,
-    "lastExternalIpAddress": "83.220.117.67",
-    "lastIpAddress": "10.0.2.15",
-    "lastSeen": "2020-12-08T10:37:41.2907723Z",
-    "machineTags": [
-      "tag1",
-      "tag2"
-    ],
-    "osBuild": 17763,
-    "osPlatform": "Windows10",
-    "osProcessor": "x64",
-    "rbacGroupId": 0,
-    "riskScore": "None",
-    "version": "1809"
-  }
+  "machines": [
+    {
+      "agentVersion": "10.5850.17763.348",
+      "computerDnsName": "msedgewin10",
+      "deviceValue": "Normal",
+      "exposureLevel": "Medium",
+      "firstSeen": "2020-12-08T09:33:03.1262943Z",
+      "healthStatus": "Active",
+      "id": "2df36d707c1ee5084cef77f3dbfc95db65bc4a73",
+      "isAadJoined": false,
+      "lastExternalIpAddress": "83.220.117.67",
+      "lastIpAddress": "10.0.2.15",
+      "lastSeen": "2020-12-08T10:37:41.2907723Z",
+      "machineTags": [
+        "tag1",
+        "tag2"
+      ],
+      "osBuild": 17763,
+      "osPlatform": "Windows10",
+      "osProcessor": "x64",
+      "rbacGroupId": 0,
+      "riskScore": "None",
+      "version": "1809"
+    }
+  ]
 }
 ```
 
 #### Get Security Recommendations
-  
-Retrieve a list of security recommendations
+
+This action is used to retrieve a list of security recommendations
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|machine|string|None|True|Machine IP address, hostname or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|machine|string|None|True|Machine IP address, hostname or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|None|None|
   
 Example input:
 
@@ -564,40 +589,42 @@ Example output:
 
 ```
 {
-  "recommendations": {
-    "activeAlert": false,
-    "associatedThreats": [],
-    "configScoreImpact": 0.0,
-    "exposedMachinesCount": 1,
-    "exposureImpact": 0.0,
-    "id": "va-_-microsoft-_-.net_framework",
-    "nonProductivityImpactedAssets": 0,
-    "productName": ".net_framework",
-    "publicExploit": false,
-    "recommendationCategory": "Application",
-    "recommendationName": "Update Microsoft .net Framework",
-    "relatedComponent": ".net Framework",
-    "remediationType": "Update",
-    "severityScore": 0.0,
-    "status": "Active",
-    "totalMachineCount": 0,
-    "vendor": "microsoft",
-    "weaknesses": 1
-  }
+  "recommendations": [
+    {
+      "activeAlert": false,
+      "associatedThreats": [],
+      "configScoreImpact": 0.0,
+      "exposedMachinesCount": 1,
+      "exposureImpact": 0.0,
+      "id": "va-_-microsoft-_-.net_framework",
+      "nonProductivityImpactedAssets": 0,
+      "productName": ".net_framework",
+      "publicExploit": false,
+      "recommendationCategory": "Application",
+      "recommendationName": "Update Microsoft .net Framework",
+      "relatedComponent": ".net Framework",
+      "remediationType": "Update",
+      "severityScore": 0.0,
+      "status": "Active",
+      "totalMachineCount": 0,
+      "vendor": "microsoft",
+      "weaknesses": 1
+    }
+  ]
 }
 ```
 
 #### Isolate Machine
-  
-Isolate a machine from the network
+
+This action is used to isolate a machine from the network
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|comment|string|None|True|Comment to associate with the isolation action|None|Isolated by InsightConnect|
-|isolation_type|string|None|True|Type of isolation to perform on target machine|['Full', 'Selective']|Full|
-|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|comment|string|None|True|Comment to associate with the isolation action|None|Isolated by InsightConnect|None|None|
+|isolation_type|string|None|True|Type of isolation to perform on target machine|["Full", "Selective"]|Full|None|None|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|None|None|
   
 Example input:
 
@@ -635,16 +662,16 @@ Example output:
 ```
 
 #### Manage Tags
-  
-Add or remove machine tags
+
+This action is used to add or remove machine tags
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|machine|string|None|True|Machine IP address, hostname, or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
-|tag|string|None|True|The tag value|None|example tag|
-|type|boolean|True|True|True to add tag, false to remove it|None|True|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|machine|string|None|True|Machine IP address, hostname, or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|None|None|
+|tag|string|None|True|The tag value|None|example tag|None|None|
+|type|boolean|True|True|True to add tag, false to remove it|None|True|None|None|
   
 Example input:
 
@@ -695,16 +722,16 @@ Example output:
 ```
 
 #### Run Antivirus Scan
-  
-Initiate a Windows Defender Antivirus scan on a machine
+
+This action is used to initiate a Windows Defender Antivirus scan on a machine
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|comment|string|None|True|Comment to associate with the antivirus scan action|None|InsightConnect has started an antivirus scan.|
-|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
-|scan_type|string|None|True|The type of antivirus scan to run|['Full', 'Quick']|Full|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|comment|string|None|True|Comment to associate with the antivirus scan action|None|InsightConnect has started an antivirus scan.|None|None|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|None|None|
+|scan_type|string|None|True|The type of antivirus scan to run|["Full", "Quick"]|Full|None|None|
   
 Example input:
 
@@ -742,16 +769,16 @@ Example output:
 ```
 
 #### Stop and Quarantine File
-  
-Stop the execution of a file on a machine and delete it
+
+This action is used to stop the execution of a file on a machine and delete it
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|comment|string|None|True|Comment to associate with the stop and quarantine action|None|InsightConnect has stopped a file.|
-|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
-|sha1|string|None|True|SHA1 hash of the file to stop and quarantine on the machine|None|ad0c0f2fa80411788e81a4567d1d8758b83cd76e|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|comment|string|None|True|Comment to associate with the stop and quarantine action|None|InsightConnect has stopped a file.|None|None|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|None|None|
+|sha1|string|None|True|SHA1 hash of the file to stop and quarantine on the machine|None|ad0c0f2fa80411788e81a4567d1d8758b83cd76e|None|None|
   
 Example input:
 
@@ -792,15 +819,15 @@ Example output:
 ```
 
 #### Unisolate Machine
-  
-Restore network connectivity to a machine
+
+This action is used to restore network connectivity to a machine
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|comment|string|None|True|Comment to associate with the unisolate action|None|Unisolated by InsightConnect|
-|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|comment|string|None|True|Comment to associate with the unisolate action|None|Unisolated by InsightConnect|None|None|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|None|None|
   
 Example input:
 
@@ -839,16 +866,16 @@ Example output:
 
 
 #### Get Alerts Matching Key
-  
-Get alerts that match a given key to its value
+
+This trigger is used to get alerts that match a given key to its value
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|frequency|integer|10|False|Poll frequency in seconds|None|10|
-|key|string|None|True|The key to look for in the alert. This key must match the case shown in the example output section in help|None|assignedTo|
-|value|string|None|True|The value to look for in the alert. The value must match the case of the value returned|None|user@example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|frequency|integer|10|False|Poll frequency in seconds|None|10|None|None|
+|key|string|None|True|The key to look for in the alert. This key must match the case shown in the example output section in help|None|assignedTo|None|None|
+|value|string|None|True|The value to look for in the alert. The value must match the case of the value returned|None|user@example.com|None|None|
   
 Example input:
 
@@ -927,14 +954,14 @@ Example output:
 ```
 
 #### Get Alerts
-  
-Return all new alerts
+
+This trigger is used to return all new alerts
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|frequency|integer|10|False|Poll frequency in seconds|None|10|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|frequency|integer|10|False|Poll frequency in seconds|None|10|None|None|
   
 Example input:
 
@@ -1244,6 +1271,7 @@ Example output:
 
 # Version History
 
+* 5.1.0 - Adding the following as new action types to `blacklist` action ['Warn', 'Block', 'Audit'] | Add a new flag in the `blacklist` action to toggle generateAlerts flag | Bump SDK to version 5.4.9
 * 5.0.0 - Updated the SDK version | Cloud enabled | fixed bug when machine_id is used for find_first_machine
 * 4.8.1 - Fixed a problem where some actions could not find the machine
 * 4.8.0 - Add Evidence output for Get Alerts trigger and Get Alert Matching Key trigger
