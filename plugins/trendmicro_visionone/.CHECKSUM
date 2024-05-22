@@ -1,5 +1,5 @@
 {
-	"spec": "33843f5454bd2b65e208a944cb82364c",
+	"spec": "5936f1fdf3f2bf4b60fcc9dd803f66a0",
 	"manifest": "12152a19e65986f1b05b3faac3b5f9f0",
 	"setup": "8eb78cfd27f8ab57f3d019add0d8aca1",
 	"schemas": [
@@ -109,7 +109,7 @@
 		},
 		{
 			"identifier": "get_oat_list/schema.py",
-			"hash": "3b7d95bd841b9c29c148ceaad6014ecd"
+			"hash": "02ca97ae51695e5b9850bcda7814fd18"
 		},
 		{
 			"identifier": "get_sandbox_analysis_result/schema.py",
@@ -205,7 +205,7 @@
 		},
 		{
 			"identifier": "poll_oat_list/schema.py",
-			"hash": "2b54ce2b327dd60ba440f339522623cc"
+			"hash": "46bbf5eb4dcd2c7b0b73af61d6e18625"
 		},
 		{
 			"identifier": "poll_sandbox_suspicious_list/schema.py",

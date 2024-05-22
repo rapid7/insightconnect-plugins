@@ -1238,13 +1238,13 @@ triggers:
         title: Detected Start Date Time
         type: string
         description: The start of the event detection data retrieval time range in ISO 8601 format
-        required: false
+        required: true
         example: 2021-04-05T08:22:37Z
       ingested_start_date_time:
         title: Ingested Start Date Time
         type: string
         description: The beginning of the data ingestion time range in ISO 8601 format
-        required: false
+        required: true
         example: 2021-04-06T08:22:37Z
       interval:
         title: Interval
@@ -2856,25 +2856,25 @@ actions:
         title: Detected Start Date Time
         type: string
         description: The start of the event detection data retrieval time range in ISO 8601 format
-        required: false
+        required: true
         example: 2021-04-05T08:22:37Z
       detected_end_date_time:
         title: Detected End Date Time
         type: string
         description: The end of the event detection data retrieval time range in ISO 8601 format
-        required: false
+        required: true
         example: 2021-04-06T08:22:37Z
       ingested_start_date_time:
         title: Ingested Start Date Time
         type: string
         description: The beginning of the data ingestion time range in ISO 8601 format
-        required: false
+        required: true
         example: 2021-04-06T08:22:37Z
       ingested_end_date_time:
         title: Ingested End Date Time
         type: string
         description: The end of the data ingestion time range in ISO 8601 format
-        required: false
+        required: true
         example: 2021-04-07T08:22:37Z
       fields:
         title: Fields

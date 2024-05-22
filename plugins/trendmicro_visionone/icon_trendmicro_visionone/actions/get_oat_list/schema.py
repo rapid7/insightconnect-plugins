@@ -70,7 +70,11 @@ class GetOatListInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
+    "detected_end_date_time",
+    "detected_start_date_time",
     "fields",
+    "ingested_end_date_time",
+    "ingested_start_date_time",
     "query_op"
   ],
   "definitions": {}

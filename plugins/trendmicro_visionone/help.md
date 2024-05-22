@@ -1477,15 +1477,21 @@ Example output:
 This action is used to gets information about Observed Attack Techniques (OATs) events that match the specified 
 criteria in a list
 
+**API key role permissions required:**
+
+**Observed Attack Techniques**
+
+- View, filter, and search
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|detected_end_date_time|string|None|False|The end of the event detection data retrieval time range in ISO 8601 format|None|2021-04-06 08:22:37+00:00|None|None|
-|detected_start_date_time|string|None|False|The start of the event detection data retrieval time range in ISO 8601 format|None|2021-04-05 08:22:37+00:00|None|None|
+|detected_end_date_time|string|None|True|The end of the event detection data retrieval time range in ISO 8601 format|None|2021-04-06 08:22:37+00:00|None|None|
+|detected_start_date_time|string|None|True|The start of the event detection data retrieval time range in ISO 8601 format|None|2021-04-05 08:22:37+00:00|None|None|
 |fields|object|None|True|JSON object of OAT identifiers to query|None|{"uuid":123,"endpointName":"client1"}|None|None|
-|ingested_end_date_time|string|None|False|The end of the data ingestion time range in ISO 8601 format|None|2021-04-07 08:22:37+00:00|None|None|
-|ingested_start_date_time|string|None|False|The beginning of the data ingestion time range in ISO 8601 format|None|2021-04-06 08:22:37+00:00|None|None|
+|ingested_end_date_time|string|None|True|The end of the data ingestion time range in ISO 8601 format|None|2021-04-07 08:22:37+00:00|None|None|
+|ingested_start_date_time|string|None|True|The beginning of the data ingestion time range in ISO 8601 format|None|2021-04-06 08:22:37+00:00|None|None|
 |query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |None|None|
   
 Example input:
@@ -2718,13 +2724,19 @@ Example output:
 This trigger is used to polls information about Observed Attack Techniques (OATs) events that match the specified 
 criteria in a list
 
+**API key role permissions required:**
+
+**Observed Attack Techniques**
+
+- View, filter, and search
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|detected_start_date_time|string|None|False|The start of the event detection data retrieval time range in ISO 8601 format|None|2021-04-05 08:22:37+00:00|None|None|
+|detected_start_date_time|string|None|True|The start of the event detection data retrieval time range in ISO 8601 format|None|2021-04-05 08:22:37+00:00|None|None|
 |fields|object|None|True|JSON object of OAT identifiers to query|None|{"uuid":123,"endpointName":"client1"}|None|None|
-|ingested_start_date_time|string|None|False|The beginning of the data ingestion time range in ISO 8601 format|None|2021-04-06 08:22:37+00:00|None|None|
+|ingested_start_date_time|string|None|True|The beginning of the data ingestion time range in ISO 8601 format|None|2021-04-06 08:22:37+00:00|None|None|
 |interval|integer|None|True|Interval (in seconds) in which the polling script should run again|None|1800|None|None|
 |query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |None|None|
   

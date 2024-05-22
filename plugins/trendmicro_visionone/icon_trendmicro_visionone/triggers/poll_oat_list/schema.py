@@ -63,7 +63,9 @@ class PollOatListInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
+    "detected_start_date_time",
     "fields",
+    "ingested_start_date_time",
     "interval",
     "query_op"
   ],
