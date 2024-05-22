@@ -32,10 +32,7 @@ def validate_url(url: str) -> bool:
 
     domain = urlparse(url).netloc
 
-    # checks to ensure subdomain is present
-    if domain is None or '.' not in domain:
-        return False
-
+    # checks to validate domain and ensure a subdomain is present
     if not domain.endswith((".okta.com", ".oktapreview.com", ".okta-emea.com")):
         return False
 
