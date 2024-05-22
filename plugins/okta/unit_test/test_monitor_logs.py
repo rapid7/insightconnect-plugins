@@ -168,7 +168,10 @@ class TestMonitorLogs(TestCase):
         first_ts = "2023-04-27T06:49:21.777Z"
 
         # Part one: call a normal next page workflow when we expect the TS to not exist in the response
-        current_state = {"last_collection_timestamp": first_ts, "next_page_link": "https://example.okta.com/nextLink?q=next"}
+        current_state = {
+            "last_collection_timestamp": first_ts,
+            "next_page_link": "https://example.okta.com/nextLink?q=next",
+        }
         actual, new_state, has_more_pages, _status_code, _error = self.action.run(
             state=current_state, custom_config=self.custom_config
         )
