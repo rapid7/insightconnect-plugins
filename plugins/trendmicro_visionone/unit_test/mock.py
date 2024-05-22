@@ -18,7 +18,7 @@ def mock_params(action=None):
 def mock_connection():
     connection = Connection()
     connection.logger = logging.getLogger()
-    connection.url = "https://tmv1-mock.trendmicro.com"
+    connection.url = "https://tv1-mock-dev.trendmicro.com/"
     connection.key = "Dummy-Secret-Token"
     connection.app = "TM-R7"
     connection.client = pytmv1.init(connection.app, connection.key, connection.url)
