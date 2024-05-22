@@ -12,6 +12,7 @@ class Input:
     APPLICATION = "application"
     DESCRIPTION = "description"
     EXPIRATION_TIME = "expiration_time"
+    GENERATE_ALERT = "generate_alert"
     INDICATOR = "indicator"
     INDICATOR_STATE = "indicator_state"
     RBAC_GROUP_NAMES = "rbac_group_names"
@@ -38,7 +39,10 @@ class BlacklistInput(insightconnect_plugin_runtime.Input):
       "enum": [
         "Alert",
         "AlertAndBlock",
-        "Allowed"
+        "Allowed",
+        "Audit",
+        "Block",
+        "Warn"
       ],
       "order": 2
     },
@@ -60,6 +64,13 @@ class BlacklistInput(insightconnect_plugin_runtime.Input):
       "title": "Expiration Time",
       "description": "The expiration time of the indicator, default value is one year from now",
       "order": 6
+    },
+    "generate_alert": {
+      "type": "boolean",
+      "title": "Generate Alerts",
+      "description": "True if alert generation is required, False if this indicator shouldn't generate an alert. Please note this flag only affects the following action types [Allowed, Block, Warn]",
+      "default": false,
+      "order": 11
     },
     "indicator": {
       "type": "string",
