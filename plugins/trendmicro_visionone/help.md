@@ -3098,13 +3098,13 @@ Example output:
 |UUID|string|None|True|The unique identifier of an Observed Attack Techniques event|None|
 
 
-# Troubleshooting
+## Troubleshooting
 
 For additional info about actions see https://automation.trendmicro.com/xdr/api-v3#
 
 # Version History
 
-* 4.0.1 - Added OAT list action and trigger, limit query size
+* 4.1.0 - Added OAT list action and trigger, limit query size
 * 4.0.0 - Added API Keys related actions
 * 3.0.0 - Refactored pytmv1 usage | Added Custom Scripts and Activity related actions
 * 2.0.1 - Version bump of pytmv1 library

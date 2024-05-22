@@ -78,7 +78,7 @@ links:
 references:
 - '[Trend Vision One](https://docs.trendmicro.com/en-us/enterprise/trend-micro-xdr-help/home)'
 version_history:
-- 4.0.1 - Added OAT list action and trigger, limit query size
+- 4.1.0 - Added OAT list action and trigger, limit query size
 - 4.0.0 - Added API Keys related actions
 - 3.0.0 - Refactored pytmv1 usage | Added Custom Scripts and Activity related actions
 - 2.0.1 - Version bump of pytmv1 library
