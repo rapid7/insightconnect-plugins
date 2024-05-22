@@ -209,6 +209,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         Apply custom_config params (if provided) to the task. If a lookback value exists, it should take
         precedence (this can allow a larger filter time), otherwise use the default_cutoff value.
         The default_cutoff value is set based on whether this is first run, or a subsequent run.
+        :param state: access state dictionary to determine if this is the first run (no state).
         :param custom_config: dictionary passed containing `cutoff` or `lookback` values
         :return: filter_value to be applied in request to Okta
         :return: is_filter_datetime boolean value if filter_value is of type datetime
