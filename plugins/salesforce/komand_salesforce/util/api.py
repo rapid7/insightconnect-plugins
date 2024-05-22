@@ -207,7 +207,8 @@ class SalesforceAPI:
             if "invalid_grant" in decoded_response:
                 self.logger.info(
                     f"SalesforceAPI: invalid_grant error received. Received {error_status_code}, but returning 401. "
-                    "Not retrying...")
+                    "Not retrying..."
+                )
                 cause_error, assistance, preset_error = "", "", PluginException.Preset.INVALID_CREDENTIALS
                 error_status_code = 401  # Salesforce returns 400 but change to 401 to reflect true error code
             else:

@@ -140,17 +140,29 @@ class Util:
                     return MockResponse(400)
             if url == "https://example.com/services/data/v58.0/query":
                 params_q = params.get("q")
-                params_db_table = params_q.split('FROM ')[1].split(" ")[0]
+                params_db_table = params_q.split("FROM ")[1].split(" ")[0]
                 if params_db_table == "User":
-                    if params_q == "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND LastModifiedDate >= 2023-07-20T16:10:15.340262+00:00 AND LastModifiedDate < 2023-07-20T16:21:15.340262+00:00":
+                    if (
+                        params_q
+                        == "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND LastModifiedDate >= 2023-07-20T16:10:15.340262+00:00 AND LastModifiedDate < 2023-07-20T16:21:15.340262+00:00"
+                    ):
                         return MockResponse(200, "get_specific_user_empty.json.resp")
-                    if params_q == "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND LastModifiedDate >= invalid AND LastModifiedDate < 2023-07-20T16:21:15.340262+00:00":
+                    if (
+                        params_q
+                        == "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND LastModifiedDate >= invalid AND LastModifiedDate < 2023-07-20T16:21:15.340262+00:00"
+                    ):
                         return MockResponse(400)
-                    if params_q == "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard'":
+                    if (
+                        params_q
+                        == "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard'"
+                    ):
                         return MockResponse(200, "get_users.json.resp")
                     return MockResponse(200, "get_specific_user.json.resp")
                 if params_db_table == "LoginHistory":
-                    if params_q == "SELECT LoginTime, UserId, LoginType, LoginUrl, SourceIp, Status, Application, Browser FROM LoginHistory WHERE LoginTime >= 2023-07-20T14:21:15.340262+00:00 AND LoginTime < 2023-07-20T16:21:15.340262+00:00":
+                    if (
+                        params_q
+                        == "SELECT LoginTime, UserId, LoginType, LoginUrl, SourceIp, Status, Application, Browser FROM LoginHistory WHERE LoginTime >= 2023-07-20T14:21:15.340262+00:00 AND LoginTime < 2023-07-20T16:21:15.340262+00:00"
+                    ):
                         return MockResponse(200, "get_login_history_empty.json.resp")
                     return MockResponse(200, "get_login_history.json.resp")
                 if params == {"q": "SELECT FIELDS(STANDARD) FROM Folder"}:

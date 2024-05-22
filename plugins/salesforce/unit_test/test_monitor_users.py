@@ -150,16 +150,14 @@ class TestMonitorUsers(TestCase):
             "next_user_collection_timestamp": "2023-07-21 16:21:15.340262+00:00",  # next expected now + 24 hours
             "last_user_update_collection_timestamp": "2023-07-20 16:21:15.340262+00:00",  # just executed 'now'
             "next_user_login_collection_timestamp": "2023-07-20 17:21:15.340262+00:00",  # next expected: now + 1 hour
-            "users_next_page_id": "/01gRO0000087654321-500"
+            "users_next_page_id": "/01gRO0000087654321-500",
         }
 
         self.assertDictEqual(expected_state, new_state)
 
         mock_unset.assert_called()
 
-    def test_default_cut_off_values_of_7_days(
-        self, mock_unset, mocked_logger, _mock_request, _mock_get_time
-    ):
+    def test_default_cut_off_values_of_7_days(self, mock_unset, mocked_logger, _mock_request, _mock_get_time):
         user_login_time = "2023-06-21 16:21:15.340262+00:00"  # exceeds 7 day lookback value
         user_update_time = "2023-06-20 16:21:15.340262+00:00"  # exceeds 7 day lookback value
         cutoff = "2023-07-13 16:21:15.340262+00:00"  # this is the cut off value now - 7 days
