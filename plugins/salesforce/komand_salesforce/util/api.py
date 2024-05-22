@@ -203,14 +203,18 @@ class SalesforceAPI:
 
         if 400 <= response.status_code <= 504:
             decoded_response = response.content.decode()
+            error_status_code = response.status_code
             if "invalid_grant" in decoded_response:
-                self.logger.info("SalesforceAPI: invalid_grant error received. Not retrying...")
+                self.logger.info(
+                    f"SalesforceAPI: invalid_grant error received. Received {error_status_code}, but returning 401. "
+                    "Not retrying...")
                 cause_error, assistance, preset_error = "", "", PluginException.Preset.INVALID_CREDENTIALS
+                error_status_code = 401  # Salesforce returns 400 but change to 401 to reflect true error code
             else:
                 if self.retry_count < self.RETRY_LIMIT:
                     retry_sleep = 5
                     self.logger.info(
-                        f"SalesforceAPI: Received {response.status_code} status code. "
+                        f"SalesforceAPI: Received {error_status_code} status code. "
                         f"Retrying in {retry_sleep} seconds..."
                     )
                     time.sleep(retry_sleep)
@@ -230,7 +234,7 @@ class SalesforceAPI:
                 preset=preset_error,
                 cause=cause_error,
                 assistance=assistance,
-                status_code=response.status_code,
+                status_code=error_status_code,
                 data=response.text,
             )
 

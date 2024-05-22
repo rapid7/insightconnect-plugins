@@ -107,16 +107,14 @@ class Util:
 
         if method == "GET":
             if url == "https://example.com/services/data/v58.0/sobjects/User/updated":
-                if params == {"start": "2023-07-19T16:21:15.340+00:00", "end": "2023-07-20T16:21:15.340+00:00"}:
-                    return MockResponse(200, "get_updated_users.json.resp")
-                if params == {"start": "2023-07-20T16:15:15.340+00:00", "end": "2023-07-20T16:21:15.340+00:00"}:
-                    return MockResponse(200, "get_updated_users.json.resp")
-                if params == {"start": "2023-07-20T16:10:15.340+00:00", "end": "2023-07-20T16:21:15.340+00:00"}:
+                # all of these query until now - just check the start parameter to determine the mocked resp
+                params_start = params.get("start")
+                if params_start == "2023-07-20T16:10:15.340+00:00":
                     return MockResponse(200, "get_updated_users_empty.json.resp")
-                if params == {"start": "2023-06-05T03:45:00+00:00", "end": "2023-07-20T16:21:15.340+00:00"}:
-                    return MockResponse(200, "get_updated_users.json.resp")
-                if params == {"start": "invalid", "end": "2023-07-20T16:21:15.340+00:00"}:
+                elif params_start == "invalid":
                     return MockResponse(400)
+                else:
+                    return MockResponse(200, "get_updated_users.json.resp")
             if url == "https://example.com/services/data/v58.0/sobjects/Document/invalid/body":
                 return MockResponse(404)
             if url == "https://example.com/services/data/v58.0/sobjects/Invalid/015Hn000002ge67890/body":
@@ -141,49 +139,19 @@ class Util:
                 if params == {"fields": "invalid"}:
                     return MockResponse(400)
             if url == "https://example.com/services/data/v58.0/query":
-                if params == {
-                    "q": "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE Id = '005Hn00000HVWwxIAH' AND UserType = 'Standard'"
-                }:
+                params_q = params.get("q")
+                params_db_table = params_q.split('FROM ')[1].split(" ")[0]
+                if params_db_table == "User":
+                    if params_q == "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND LastModifiedDate >= 2023-07-20T16:10:15.340262+00:00 AND LastModifiedDate < 2023-07-20T16:21:15.340262+00:00":
+                        return MockResponse(200, "get_specific_user_empty.json.resp")
+                    if params_q == "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND LastModifiedDate >= invalid AND LastModifiedDate < 2023-07-20T16:21:15.340262+00:00":
+                        return MockResponse(400)
+                    if params_q == "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard'":
+                        return MockResponse(200, "get_users.json.resp")
                     return MockResponse(200, "get_specific_user.json.resp")
-                if params == {
-                    "q": "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND LastModifiedDate >= 2023-07-19T16:21:15.340262+00:00 AND LastModifiedDate < 2023-07-20T16:21:15.340262+00:00"
-                }:
-                    return MockResponse(200, "get_specific_user.json.resp")
-                if params == {
-                    "q": "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND LastModifiedDate >= 2023-07-20T16:15:15.340262+00:00 AND LastModifiedDate < 2023-07-20T16:21:15.340262+00:00"
-                }:
-                    return MockResponse(200, "get_specific_user.json.resp")
-                if params == {
-                    "q": "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND LastModifiedDate >= 2023-06-05T03:45:00+00:00 AND LastModifiedDate < 2023-07-20T16:21:15.340262+00:00"
-                }:
-                    return MockResponse(200, "get_specific_user.json.resp")
-                if params == {
-                    "q": "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND LastModifiedDate >= 2023-07-20T16:10:15.340262+00:00 AND LastModifiedDate < 2023-07-20T16:21:15.340262+00:00"
-                }:
-                    return MockResponse(200, "get_specific_user_empty.json.resp")
-                if params == {
-                    "q": "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard' AND LastModifiedDate >= invalid AND LastModifiedDate < 2023-07-20T16:21:15.340262+00:00"
-                }:
-                    return MockResponse(400)
-                if params == {
-                    "q": "SELECT Id, FirstName, LastName, Email, Alias, IsActive FROM User WHERE UserType = 'Standard'"
-                }:
-                    return MockResponse(200, "get_users.json.resp")
-                if params == {
-                    "q": "SELECT LoginTime, UserId, LoginType, LoginUrl, SourceIp, Status, Application, Browser FROM LoginHistory WHERE LoginTime >= 2023-07-19T16:21:15.340262+00:00 AND LoginTime < 2023-07-20T16:21:15.340262+00:00"
-                }:
-                    return MockResponse(200, "get_login_history.json.resp")
-                if params == {
-                    "q": "SELECT LoginTime, UserId, LoginType, LoginUrl, SourceIp, Status, Application, Browser FROM LoginHistory WHERE LoginTime >= 2023-07-20T15:21:15.340262+00:00 AND LoginTime < 2023-07-20T16:21:15.340262+00:00"
-                }:
-                    return MockResponse(200, "get_login_history.json.resp")
-                if params == {
-                    "q": "SELECT LoginTime, UserId, LoginType, LoginUrl, SourceIp, Status, Application, Browser FROM LoginHistory WHERE LoginTime >= 2023-07-20T14:21:15.340262+00:00 AND LoginTime < 2023-07-20T16:21:15.340262+00:00"
-                }:
-                    return MockResponse(200, "get_login_history_empty.json.resp")
-                if params == {
-                    "q": "SELECT LoginTime, UserId, LoginType, LoginUrl, SourceIp, Status, Application, Browser FROM LoginHistory WHERE LoginTime >= 2023-06-05T03:45:00+00:00 AND LoginTime < 2023-07-20T16:21:15.340262+00:00"
-                }:
+                if params_db_table == "LoginHistory":
+                    if params_q == "SELECT LoginTime, UserId, LoginType, LoginUrl, SourceIp, Status, Application, Browser FROM LoginHistory WHERE LoginTime >= 2023-07-20T14:21:15.340262+00:00 AND LoginTime < 2023-07-20T16:21:15.340262+00:00":
+                        return MockResponse(200, "get_login_history_empty.json.resp")
                     return MockResponse(200, "get_login_history.json.resp")
                 if params == {"q": "SELECT FIELDS(STANDARD) FROM Folder"}:
                     return MockResponse(200, "advanced_search_all.json.resp")
