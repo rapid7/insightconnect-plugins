@@ -61,6 +61,12 @@ class Blacklist(insightconnect_plugin_runtime.Action):
         if not description:
             description = "Indicator Blacklisted from InsightConnect"
 
+        # If generateAlert false is used for action type of Audit then the request errors
+        if params.get(Input.ACTION, "") == "Audit":
+            generateAlert = True
+        else:
+            generateAlert = params.get(Input.GENERATE_ALERT, False)
+
         return {
             "indicatorValue": params.get(Input.INDICATOR),
             "indicatorType": Blacklist._get_type(indicator),
@@ -72,6 +78,7 @@ class Blacklist(insightconnect_plugin_runtime.Action):
             "severity": params.get(Input.SEVERITY, "High"),
             "recommendedActions": params.get(Input.RECOMMENDED_ACTIONS),
             "rbacGroupNames": params.get(Input.RBAC_GROUP_NAMES, []),
+            "generateAlert": generateAlert,
         }
 
     @staticmethod

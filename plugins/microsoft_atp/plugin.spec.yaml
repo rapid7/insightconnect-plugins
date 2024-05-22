@@ -4,9 +4,9 @@ products: ["insightconnect"]
 name: microsoft_atp
 title: Microsoft Windows Defender ATP
 description: The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
-version: 5.0.0
+version: 5.1.0
 connection_version: 5
-supported_versions: ["2022-05-20"]
+supported_versions: ["2024-05-21"]
 vendor: rapid7
 support: community
 cloud_ready: true
@@ -26,8 +26,45 @@ hub_tags:
   features: []
 sdk: 
   type: full 
-  version: 5 
+  version: 5.4.9 
   user: nobody
+links:
+ - "[Windows Defender ATP](https://www.microsoft.com/en-us/windowsforbusiness/windows-atp)"
+references:
+ - "[Windows Defender ATP API Start Page](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/use-apis)"
+ - "[Windows Defender ATP API Endpoints](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/exposed-apis-list)"
+version_history:
+ - "5.1.0 - Adding the following as new action types to `blacklist` action ['Warn', 'Block', 'Audit'] | Add a new flag in the `blacklist` action to toggle generateAlerts flag | Bump SDK to version 5.4.9"
+ - "5.0.0 - Updated the SDK version | Cloud enabled | fixed bug when machine_id is used for find_first_machine"
+ - "4.8.1 - Fixed a problem where some actions could not find the machine"
+ - "4.8.0 - Add Evidence output for Get Alerts trigger and Get Alert Matching Key trigger"
+ - "4.7.1 - Fix bug in Get Alerts trigger which caused trigger to crash"
+ - "4.7.0 - Add new action Collect Investigation Package"
+ - "4.6.0 - Add new actions Get Installed Software, Get Related Machines and Manage Tags"
+ - "4.5.1 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/microsoft-defender-ATP)"
+ - "4.5.0 - Add new action Get Missing Software Updates"
+ - "4.4.1 - Add validation MD5 hash in Blacklist action | Set default value for Title, Expiration Time and Description input in action Blacklist"
+ - "4.4.0 - Add new action Get Security Recommendations"
+ - "4.3.0 - Add new action Get Machine Vulnerabilities"
+ - "4.2.0 - Add new action Blacklist"
+ - "4.1.0 - Add new action Find Machines with Installed Software"
+ - "4.0.0 - Add custom type to output in action Get Machine Information"
+ - "3.0.0 - Move connection functions to their own util class | Changed `Exception` to `PluginException` | Added error handling around \"Action already in progress\" state in Isolate Machine, Unisolate Machine, Stop and Quarantine File, and Run Antivirus Scan actions | Rename `machine_id` to `machine` in machine-related actions to support hostnames and IP addresses in addition to machine IDs."
+ - "2.0.0 - Update to refactor connection and actions"
+ - "1.5.1 - New spec and help.md format for the Extension Library"
+ - "1.5.0 - Fix issue where triggers always returned a blank payload"
+ - "1.4.0 - New trigger Get Alerts | New action Get Machine Action"
+ - "1.3.0 - New actions Stop and Quarantine File and Run Antivirus Scan"
+ - "1.2.0 - New action Get File IDs from Alert"
+ - "1.1.0 - New actions Get Machine ID from Alert, Isolate Machine, and Unisolate Machine"
+ - "1.0.0 - Initial plugin"
+key_features:
+ - Trigger workflows on new security alerts
+ - Manage isolation of network resources
+ - Start virus scans
+ - Stop execution of malicious code
+requirements:
+ - Windows Defender Advanced Threat Protection application credentials
 types:
   manage_tags_response:
     "@odata.context":
@@ -1219,6 +1256,9 @@ actions:
           - Alert
           - AlertAndBlock
           - Allowed
+          - Audit
+          - Block
+          - Warn
       application:
         title: Application
         description: The application associated with the indicator
@@ -1271,6 +1311,13 @@ actions:
       indicator_state:
         title: Indicator State
         description: True to add indicator, false to remove it from the list
+        type: boolean
+        example: true
+        default: false
+        required: false
+      generate_alert:
+        title: Generate Alerts
+        description: True if alert generation is required, False if this indicator shouldn't generate an alert. Please note this flag only affects the following action types [Allowed, Block, Warn]
         type: boolean
         example: true
         default: false
@@ -1349,7 +1396,7 @@ actions:
         description: List of installed software on the machine
         type: '[]software'
         required: true
-        example: [{"publicExploit": true,"vendor": "microsoft","weaknesses": 1056,"activeAlert": false,"exposedMachines": 1,"id": "microsoft-_-windows_10","impactScore": 63.8,"name": "windows_10"}, {exposedMachines": 0,"id": "microsoft-_-edge_chromium-based","impactScore": 0,"name": "edge_chromium-based","publicExploit": false,"vendor": "microsoft","weaknesses": 0,"activeAlert": false}]
+        example: [{"publicExploit": true,"vendor": "microsoft","weaknesses": 1056,"activeAlert": false,"exposedMachines": 1,"id": "microsoft-_-windows_10","impactScore": 63.8,"name": "windows_10"}, {"exposedMachines": 0,"id": "microsoft-_-edge_chromium-based","impactScore": 0,"name": "edge_chromium-based","publicExploit": false,"vendor": "microsoft","weaknesses": 0,"activeAlert": false}]
   manage_tags:
     title: Manage Tags
     description: Add or remove machine tags
