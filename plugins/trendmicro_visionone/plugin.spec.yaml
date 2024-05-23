@@ -5,7 +5,7 @@ name: trendmicro_visionone
 title: Trend Vision One
 description: Trend Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
 version: 4.1.0
-connection_version: 3
+connection_version: 4
 supported_versions: [Trend Vision One API v3]
 vendor: trendmicro
 sdk:
