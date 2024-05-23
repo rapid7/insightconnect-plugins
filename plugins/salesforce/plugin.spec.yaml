@@ -4,7 +4,7 @@ products: [insightconnect]
 name: salesforce
 title: Salesforce
 description: The Salesforce plugin allows you to search, update, and manage salesforce records
-version: 2.1.7
+version: 2.1.8
 connection_version: 2
 vendor: rapid7
 support: community
@@ -13,12 +13,44 @@ status: []
 supported_versions: ["Salesforce API v58 2023-06-30"]
 sdk:
   type: full
-  version: 5.4.4
+  version: 5.4.9
   user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/salesforce
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.salesforce.com/
+key_features:
+  - Search records
+  - Get records
+  - Create records
+  - Update records
+  - Delete records
+  - Get record fields
+  - Get blob data for a given record
+requirements:
+  - Salesforce username, password and security token
+  - Consumer Key and Secret of the connected app
+links:
+  - "[Salesforce](https://salesforce.com)"
+references:
+  - "[Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/intro_what_is_rest_api.htm)"
+  - "[Connecting your app to the API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/quickstart.htm)"
+  - "[SOQL](https://developer.salesforce.com/docs/atlas.en-us.216.0.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm)"
+version_history:
+  - "2.1.8 - Task Monitor Users: Allow lookback to be 7 days and initial run to be 24 hours & raise PluginException for API errors."
+  - "2.1.7 - Task Monitor Users: Update connection to accept instance URL and force new token request per execution."
+  - "2.1.6 - Task Monitor Users: Implement SDK 5.4.4 for custom_config parameter."
+  - "2.1.5 - Task Monitor Users: Improved logging"
+  - "2.1.4 - Connection: Remove unnecessary logging"
+  - "2.1.3 - Task Monitor Users: improve deduplication logic on user login history"
+  - "2.1.2 - Task Monitor Users: normalisation for date in state, handle backwards compatibility"
+  - "2.1.1 - Task Monitor Users: query improvement on updated users | Add extra logs on timestamp | Add cutoff time limit for 24 hours"
+  - "2.1.0 - Implemented token auto-refresh on expiration for continuous sessions | Task Monitor Users: add flag `remove_duplicates` for duplicated events | Task Monitor Users: removed formatting of task output and cleaning null"
+  - "2.0.2 - Task Monitor Users: query improvement | Handle exception related with grant type"
+  - "2.0.1 - Add extra logs register"
+  - "2.0.0 - Code refactor | Update plugin to be cloud enabled | Add new task Monitor Users"
+  - "1.0.1 - New spec and help.md format for the Extension Library"
+  - "1.0.0 - Initial plugin"
 tags:
 - marketing
 - sales
