@@ -27,7 +27,7 @@
           "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
         }
       ],
-      "recipient": "user@example.com",
+      "recipient": ["user@example.com"],
       "sender": "user@example.com",
       "senderIP": "198.51.100.1",
       "threatID": "9de5069c5afe602b2ea0a04b66beb2c2",
@@ -46,7 +46,7 @@
       "clickTime": "2021-03-20T00:00:00.000Z",
       "id": "9de5069c5afe602b2ea0a04b66beb2c4",
       "messageID": "<user@example.com>",
-      "recipient": "user@example.com",
+      "recipient": ["user@example.com"],
       "sender": "user@example.com",
       "senderIP": "198.51.100.1",
       "threatID": "9de5069c5afe602b2ea0a04b66beb2c5",
