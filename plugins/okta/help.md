@@ -1,6 +1,6 @@
 # Description
 
-[Okta](https://www.okta.com/) is a SSO and account lifecycle management provider that allows companies to integrate their central user account system with a wide variety of other applications and services.
+[Okta](https://www.okta.com/) is a SSO and account lifecycle management provider that allows companies to integrate their central user account system with a wide variety of other applications and services
 
 # Key Features
 
@@ -129,18 +129,18 @@ Example output:
 
 #### Create User
 
-This action is used to create a new user.
+This action is used to create a new user
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |activate|boolean|True|True|Executes activation lifecycle operation when creating the user|None|True|None|None|
-|credentials|credentials|None|False|Credentials for user. If configuring the `provider` and/or `recovery_question` inputs, for each used, their respective fields must be completed otherwise Okta will return an error. This action will attempt to prevent that be removing the entire input if it detects a missing field in that input.|None|{"password":{"value":"blah"},"provider":{"name":"OKTA","type":"OKTA"},"recovery_question":{"answer":"Q","question":"A"}}|None|None|
+|credentials|credentials|None|False|Credentials for user. If configuring the `provider` and/or `recovery_question` inputs, for each used, their respective fields must be completed otherwise Okta will return an error. This action will attempt to prevent that be removing the entire input if it detects a missing field in that input|None|{"password":{"value":"blah"},"provider":{"name":"OKTA","type":"OKTA"},"recovery_question":{"answer":"Q","question":"A"}}|None|None|
 |groupIds|[]string|None|False|IDs of groups that user will be immediately added to at time of creation|None|["00a0a1qwertYUIoplK0j9"]|None|None|
 |nextLogin|boolean|None|True|Change password next time the user logs in|None|False|None|None|
 |profile|object|None|True|Profile properties for user|None|{"city":"San Francisco","costCenter":"10","countryCode":"US","department":"Engineering","displayName":"Test Tester","division":"R&D","email":"user@example.com","employeeNumber":"187","firstName":"Test","lastName":"Tester","login":"user@example.com","mobilePhone":"+1-555-415-1337","nickName":"tester","organization":"Okta","preferredLanguage":"en-US","primaryPhone":"+1-555-514-1337","profileUrl":"https://example.com","secondEmail":"user@example.com","state":"CA","streetAddress":"301 Brannan St.","title":"Director","userType":"Employee","zipCode":"94107"}|None|None|
-|provider|boolean|False|True|Indicates whether to create a user with a specified authentication provider.|None|False|None|None|
+|provider|boolean|False|True|Indicates whether to create a user with a specified authentication provider|None|False|None|None|
   
 Example input:
 
@@ -248,7 +248,7 @@ Example output:
 This action is used to deactivate / deprovision a user from the Okta system. In addition to losing the ability to log 
 in, the user will be removed from all configured applications and lose all configured settings. This is a non-
 reversible, destructive operation. This action is also considered asynchronous by the Okta API, meaning there is some 
-delay between the API returning a successful result and the actual deactivation / deprovisioning of a user.
+delay between the API returning a successful result and the actual deactivation / deprovisioning of a user
 
 ##### Input
 
@@ -818,7 +818,7 @@ Example output:
 #### Suspend User
 
 This action is used to suspend a user from the Okta system. The user will retain membership and permissions as 
-currently configured, but be unable to access the system as a whole.
+currently configured, but be unable to access the system as a whole
 
 ##### Input
 

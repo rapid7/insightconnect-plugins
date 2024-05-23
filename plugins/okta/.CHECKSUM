@@ -1,7 +1,7 @@
 {
-	"spec": "75a4f166071aa94b818020ddb3ae350b",
-	"manifest": "bc7283ae82e84ff4d2bdc567b426333a",
-	"setup": "6b4404795c8b53f900c8d4ab7383374a",
+	"spec": "b037fc2f069b8b3fa688891d3228b6cf",
+	"manifest": "6785023b2ce83e39920c7ca08154fb5d",
+	"setup": "237b1f2d526ca1c374dd1601ed44e348",
 	"schemas": [
 		{
 			"identifier": "add_user_to_group/schema.py",
@@ -13,11 +13,11 @@
 		},
 		{
 			"identifier": "create_user/schema.py",
-			"hash": "f4b50f123ede96f7b645f70db7c1260e"
+			"hash": "6e157c153ca1ee23a0afd25bc363beaf"
 		},
 		{
 			"identifier": "deactivate_user/schema.py",
-			"hash": "2053931b9686b7660ed64fea5053619b"
+			"hash": "419b39ab785f8e584270854f0da72f1d"
 		},
 		{
 			"identifier": "delete_user/schema.py",
@@ -57,7 +57,7 @@
 		},
 		{
 			"identifier": "suspend_user/schema.py",
-			"hash": "ad35a2df8da24d2533ad7876f34465b9"
+			"hash": "dd91d45846b7fc3cb20962cf1dff1c35"
 		},
 		{
 			"identifier": "unsuspend_user/schema.py",

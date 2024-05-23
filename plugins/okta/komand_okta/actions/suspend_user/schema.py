@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Suspend a user from the Okta system. The user will retain membership and permissions as currently configured, but be unable to access the system as a whole."
+    DESCRIPTION = "Suspend a user from the Okta system. The user will retain membership and permissions as currently configured, but be unable to access the system as a whole"
 
 
 class Input:
