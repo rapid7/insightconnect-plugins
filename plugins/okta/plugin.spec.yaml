@@ -1741,7 +1741,7 @@ actions:
         description: User details
         type: user
         required: false
-        example: '{"user":{"id":"00a0a1qwertYUIoplK0j9","status":"STAGED","created":"20180906T19:00:06.000Z","lastUpdated":"20180906T19:00:06.000Z","profile":{"firstName":"Test","lastName":"Tester","mobilePhone":"5554151337","login":"user@example.com","email":"user@example.com"},"credentials":{"emails":[{"value":"user@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"links":{"activate":{"href":"https://example.com","method":"POST"},"self":{"href":"https://example.com"}}}}'
+        example: '{"id":"00a0a1qwertYUIoplK0j9","status":"STAGED","created":"2018-09-06T19:00:06.000Z","lastUpdated":"2018-09-06T19:00:06.000Z","profile":{"firstName":"Test","lastName":"Tester","mobilePhone":"555-415-1337","login":"user@example.com","email":"user@example.com"},"credentials":{"emails":[{"value":"user@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"links":{"activate":{"href":"https://example.com","method":"POST"},"self":{"href":"https://example.com"}}}'
   reset_factors:
     title: Reset Factors
     description: Reset all multifactors for user by email

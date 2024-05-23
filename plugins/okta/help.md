@@ -197,48 +197,46 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|user|user|False|User details|{"user":{"id":"00a0a1qwertYUIoplK0j9","status":"STAGED","created":"20180906T19:00:06.000Z","lastUpdated":"20180906T19:00:06.000Z","profile":{"firstName":"Test","lastName":"Tester","mobilePhone":"5554151337","login":"user@example.com","email":"user@example.com"},"credentials":{"emails":[{"value":"user@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"links":{"activate":{"href":"https://example.com","method":"POST"},"self":{"href":"https://example.com"}}}}|
+|user|user|False|User details|{"id":"00a0a1qwertYUIoplK0j9","status":"STAGED","created":"2018-09-06T19:00:06.000Z","lastUpdated":"2018-09-06T19:00:06.000Z","profile":{"firstName":"Test","lastName":"Tester","mobilePhone":"555-415-1337","login":"user@example.com","email":"user@example.com"},"credentials":{"emails":[{"value":"user@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"links":{"activate":{"href":"https://example.com","method":"POST"},"self":{"href":"https://example.com"}}}|
   
 Example output:
 
 ```
 {
   "user": {
-    "user": {
-      "created": "20180906T19:00:06.000Z",
-      "credentials": {
-        "emails": [
-          {
-            "status": "VERIFIED",
-            "type": "PRIMARY",
-            "value": "user@example.com"
-          }
-        ],
-        "provider": {
-          "name": "OKTA",
-          "type": "OKTA"
+    "created": "2018-09-06T19:00:06.000Z",
+    "credentials": {
+      "emails": [
+        {
+          "status": "VERIFIED",
+          "type": "PRIMARY",
+          "value": "user@example.com"
         }
+      ],
+      "provider": {
+        "name": "OKTA",
+        "type": "OKTA"
+      }
+    },
+    "id": "00a0a1qwertYUIoplK0j9",
+    "lastUpdated": "2018-09-06T19:00:06.000Z",
+    "links": {
+      "activate": {
+        "href": "https://example.com",
+        "method": "POST"
       },
-      "id": "00a0a1qwertYUIoplK0j9",
-      "lastUpdated": "20180906T19:00:06.000Z",
-      "links": {
-        "activate": {
-          "href": "https://example.com",
-          "method": "POST"
-        },
-        "self": {
-          "href": "https://example.com"
-        }
-      },
-      "profile": {
-        "email": "user@example.com",
-        "firstName": "Test",
-        "lastName": "Tester",
-        "login": "user@example.com",
-        "mobilePhone": "5554151337"
-      },
-      "status": "STAGED"
-    }
+      "self": {
+        "href": "https://example.com"
+      }
+    },
+    "profile": {
+      "email": "user@example.com",
+      "firstName": "Test",
+      "lastName": "Tester",
+      "login": "user@example.com",
+      "mobilePhone": "555-415-1337"
+    },
+    "status": "STAGED"
   }
 }
 ```
