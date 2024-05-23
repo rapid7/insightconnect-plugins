@@ -1,7 +1,6 @@
 # Description
 
-[Okta](https://www.okta.com/) is a SSO and account lifecycle management provider that allows companies
-to integrate their central user account system with a wide variety of other applications and services.
+[Okta](https://www.okta.com/) is a SSO and account lifecycle management provider that allows companies to integrate their central user account system with a wide variety of other applications and services.
 
 # Key Features
 
@@ -14,19 +13,19 @@ to integrate their central user account system with a wide variety of other appl
 
 # Supported Product Versions
 
-* Okta API 25-04-2023
+* Okta API 22-05-2023
 
 # Documentation
 
 ## Setup
 
-The connection configuration accepts the following parameters:
+The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|oktaKey|credential_secret_key|None|True|Okta key|None|{"secretKey": "123456789abcdef987654321GHIjklm0123456789A"}|
-|oktaUrl|string|None|True| Okta Domain. Please ensure your subdomain is present if the second-level domain is 'okta', e.g. 'example.okta.com'|None|example.okta.com|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|oktaKey|credential_secret_key|None|True|Okta key|None|{"secretKey": "123456789abcdef987654321GHIjklm0123456789A"}|None|None|
+|oktaUrl|string|None|True|Okta Domain. Please ensure your subdomain is present if the second-level domain is 'okta', e.g. 'example.okta.com'|None|example.okta.com|None|None|
+
 Example input:
 
 ```
@@ -34,7 +33,7 @@ Example input:
   "oktaKey": {
     "secretKey": "123456789abcdef987654321GHIjklm0123456789A"
   },
-  "oktaUrl": "example.com"
+  "oktaUrl": "example.okta.com"
 }
 ```
 
@@ -44,15 +43,15 @@ Example input:
 
 
 #### Add User to Group
-  
-Add a user to an existing group
+
+This action is used to add a user to an existing group
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|groupId|string|None|True|The ID of the group to which the user should be added|None|00a0a1qwertYUIoplK0j9|
-|login|string|None|True|The login of the Okta user|None|user@example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|groupId|string|None|True|The ID of the group to which the user should be added|None|00a0a1qwertYUIoplK0j9|None|None|
+|login|string|None|True|The login of the Okta user|None|user@example.com|None|None|
   
 Example input:
 
@@ -80,18 +79,16 @@ Example output:
 ```
 
 #### Assign User to Application for Provisioning
-  
-Assign user to application for SSO and provisioning
+
+This action is used to assign user to application for SSO and provisioning
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|applicationId|string|None|True|ID of the application|None|00g1m22m1230eZXxe5r8|
-|appuser|object|None|False|Application user model as JSON object, see https://developer.okta.com/docs/reference/api/apps/#application-user-object|None|{"id": "00ud4tVDDXYVKPXKVLCO"}|
-
-`appuser` accepts a [application user model](https://developer.okta.com/docs/reference/api/apps/#application-user-object) JSON object.
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|applicationId|string|None|True|ID of the application|None|00g1m22m1230eZXxe5r8|None|None|
+|appuser|object|None|False|Application user model as JSON object, see https://developer.okta.com/docs/reference/api/apps/#application-user-object|None|{"id": "00ud4tVDDXYVKPXKVLCO"}|None|None|
+  
 Example input:
 
 ```
@@ -107,49 +104,43 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|result|applicationUser|True|Information about the application user|{}|
+|result|applicationUser|True|Information about the application user|{"id":"00u15s1KDETTQMQYABRL","scope":"USER","credentials":{"userName":"user@example.com"},"profile":{"salesforceGroups":["Employee"],"role":"Developer","profile":"Standard User"}}|
   
 Example output:
 
 ```
 {
   "result": {
-    "id": "00u15s1KDETTQMQYABRL",
-    "scope": "USER",
     "credentials": {
       "userName": "user@example.com"
     },
+    "id": "00u15s1KDETTQMQYABRL",
     "profile": {
+      "profile": "Standard User",
+      "role": "Developer",
       "salesforceGroups": [
         "Employee"
-      ],
-      "role": "Developer",
-      "profile": "Standard User"
-    }
+      ]
+    },
+    "scope": "USER"
   }
 }
 ```
 
 #### Create User
-  
-Create a new user
+
+This action is used to create a new user.
 
 ##### Input
 
-The profile object is a required input and is defined by Okta as [profile properties for a user](https://developer.okta.com/docs/api/resources/users#profile-object).
-e.g.: `{ "firstName": "Isaac", "lastName": "Brock", "email": "user@example.com", "login": "user@example.com", "mobilePhone": "555-415-1337" }`
-
-If configuring the `provider` and/or `recovery_question` inputs, for each used, their respective fields must be completed otherwise Okta will return an error.
-This action will attempt to prevent that be removing the entire input if it detects a missing field in that input.
-
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|activate|boolean|True|True|Executes activation lifecycle operation when creating the user|None|True|
-|credentials|credentials|None|False|Credentials for user|None|{}|
-|groupIds|[]string|None|False|IDs of groups that user will be immediately added to at time of creation|None|["00a0a1qwertYUIoplK0j9"]|
-|nextLogin|boolean|None|True|Change password next time the user logs in|None|True|
-|profile|object|None|True|Profile properties for user|None|{}|
-|provider|boolean|False|True|Indicates whether to create a user with a specified authentication provider|None|False|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|activate|boolean|True|True|Executes activation lifecycle operation when creating the user|None|True|None|None|
+|credentials|credentials|None|False|Credentials for user. If configuring the `provider` and/or `recovery_question` inputs, for each used, their respective fields must be completed otherwise Okta will return an error. This action will attempt to prevent that be removing the entire input if it detects a missing field in that input.|None|{"password":{"value":"blah"},"provider":{"name":"OKTA","type":"OKTA"},"recovery_question":{"answer":"Q","question":"A"}}|None|None|
+|groupIds|[]string|None|False|IDs of groups that user will be immediately added to at time of creation|None|["00a0a1qwertYUIoplK0j9"]|None|None|
+|nextLogin|boolean|None|True|Change password next time the user logs in|None|False|None|None|
+|profile|object|None|True|Profile properties for user|None|{"city":"San Francisco","costCenter":"10","countryCode":"US","department":"Engineering","displayName":"Test Tester","division":"R&D","email":"user@example.com","employeeNumber":"187","firstName":"Test","lastName":"Tester","login":"user@example.com","mobilePhone":"+1-555-415-1337","nickName":"tester","organization":"Okta","preferredLanguage":"en-US","primaryPhone":"+1-555-514-1337","profileUrl":"https://example.com","secondEmail":"user@example.com","state":"CA","streetAddress":"301 Brannan St.","title":"Director","userType":"Employee","zipCode":"94107"}|None|None|
+|provider|boolean|False|True|Indicates whether to create a user with a specified authentication provider.|None|False|None|None|
   
 Example input:
 
@@ -206,45 +197,47 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|user|user|False|User details|{}|
+|user|user|False|User details|{"user":{"id":"00a0a1qwertYUIoplK0j9","status":"STAGED","created":"20180906T19:00:06.000Z","lastUpdated":"20180906T19:00:06.000Z","profile":{"firstName":"Test","lastName":"Tester","mobilePhone":"5554151337","login":"user@example.com","email":"user@example.com"},"credentials":{"emails":[{"value":"user@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"links":{"activate":{"href":"https://example.com","method":"POST"},"self":{"href":"https://example.com"}}}}|
   
 Example output:
 
 ```
 {
   "user": {
-    "id": "00a0a1qwertYUIoplK0j9",
-    "status": "STAGED",
-    "created": "2018-09-06T19:00:06.000Z",
-    "lastUpdated": "2018-09-06T19:00:06.000Z",
-    "profile": {
-      "firstName": "Test",
-      "lastName": "Tester",
-      "mobilePhone": "555-415-1337",
-      "login": "user@example.com",
-      "email": "user@example.com"
-    },
-    "credentials": {
-      "emails": [
-        {
-          "value": "user@example.com",
-          "status": "VERIFIED",
-          "type": "PRIMARY"
+    "user": {
+      "created": "20180906T19:00:06.000Z",
+      "credentials": {
+        "emails": [
+          {
+            "status": "VERIFIED",
+            "type": "PRIMARY",
+            "value": "user@example.com"
+          }
+        ],
+        "provider": {
+          "name": "OKTA",
+          "type": "OKTA"
         }
-      ],
-      "provider": {
-        "type": "OKTA",
-        "name": "OKTA"
-      }
-    },
-    "links": {
-      "activate": {
-        "href": "https://example.com",
-        "method": "POST"
       },
-      "self": {
-        "href": "https://example.com"
-      }
+      "id": "00a0a1qwertYUIoplK0j9",
+      "lastUpdated": "20180906T19:00:06.000Z",
+      "links": {
+        "activate": {
+          "href": "https://example.com",
+          "method": "POST"
+        },
+        "self": {
+          "href": "https://example.com"
+        }
+      },
+      "profile": {
+        "email": "user@example.com",
+        "firstName": "Test",
+        "lastName": "Tester",
+        "login": "user@example.com",
+        "mobilePhone": "5554151337"
+      },
+      "status": "STAGED"
     }
   }
 }
@@ -252,17 +245,16 @@ Example output:
 
 #### Deactivate User
 
-This action can be used to deactivate / deprovision a user from the Okta system. In addition
-to losing the ability to log in, the user will be removed from all configured applications
-and lose all configured settings. This is a non-reversible, destructive operation. This
-action is also considered asynchronous by the Okta API, meaning there is some delay between
-the API returning a successful result and the actual deactivation / deprovisioning of a user.
+This action is used to deactivate / deprovision a user from the Okta system. In addition to losing the ability to log 
+in, the user will be removed from all configured applications and lose all configured settings. This is a non-
+reversible, destructive operation. This action is also considered asynchronous by the Okta API, meaning there is some 
+delay between the API returning a successful result and the actual deactivation / deprovisioning of a user.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|login|string|None|True|The login of the employee to deactivate|None|user@example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|login|string|None|True|The login of the employee to deactivate|None|user@example.com|None|None|
   
 Example input:
 
@@ -291,16 +283,16 @@ Example output:
 ```
 
 #### Delete User
-  
-Delete a user. This operation on a user that hasn't been deactivated causes that user to be deactivated. A second delete
- operation is required to delete the user. Warning, this action cannot be recovered
+
+This action is used to delete a user. This operation on a user that hasn't been deactivated causes that user to be 
+deactivated. A second delete operation is required to delete the user. Warning, this action cannot be recovered
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|sendAdminEmail|boolean|False|True|Sends a deactivation email to the administrator if true. Default value is false|None|False|
-|userLogin|string|None|True|The login of the user to delete|None|user@example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|sendAdminEmail|boolean|False|True|Sends a deactivation email to the administrator if true. Default value is false|None|False|None|None|
+|userLogin|string|None|True|The login of the user to delete|None|user@example.com|None|None|
   
 Example input:
 
@@ -326,14 +318,14 @@ Example output:
 ```
 
 #### Get Okta User Factors
-  
-Returns an object containing all of a user's factors for MFA
+
+This action is used to return an object containing all of a user's factors for MFA
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|userId|string|None|True|User ID to get factors for|None|00a0a1qwertYUIoplK0j6|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|userId|string|None|True|User ID to get factors for|None|00a0a1qwertYUIoplK0j6|None|None|
   
 Example input:
 
@@ -347,7 +339,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|factors|[]factor|False|Object containing all the factors of a user for MFA|[]|
+|factors|[]factor|False|Object containing all the factors of a user for MFA|[{"id":"00a0a1qwertYUIoplK0j7","factorType":"push","provider":"OKTA","vendorName":"OKTA","status":"ACTIVE","created":"2020-01-24T14:52:55.000Z","lastUpdated":"2020-01-24T14:55:18.000Z","profile":{"credentialId":"user@example.com","deviceType":"SmartPhone_IPhone","keys":[{"kty":"EC","use":"sig","kid":"default","x":"abcdef","y":"qwerty","crv":"P-256"}],"name":"iPhone XR","platform":"IOS","version":"13.3"},"links":{"self":{"href":"https://example.com","hints":{"allow":["GET","DELETE"]}},"verify":{"href":"https://example.com","hints":{"allow":["POST"]}},"user":{"href":"https://example.com","hints":{"allow":["GET"]}}}}]|
   
 Example output:
 
@@ -355,71 +347,71 @@ Example output:
 {
   "factors": [
     {
-      "id": "00a0a1qwertYUIoplK0j7",
-      "factorType": "push",
-      "provider": "OKTA",
-      "vendorName": "OKTA",
-      "status": "ACTIVE",
       "created": "2020-01-24T14:52:55.000Z",
+      "factorType": "push",
+      "id": "00a0a1qwertYUIoplK0j7",
       "lastUpdated": "2020-01-24T14:55:18.000Z",
+      "links": {
+        "self": {
+          "hints": {
+            "allow": [
+              "GET",
+              "DELETE"
+            ]
+          },
+          "href": "https://example.com"
+        },
+        "user": {
+          "hints": {
+            "allow": [
+              "GET"
+            ]
+          },
+          "href": "https://example.com"
+        },
+        "verify": {
+          "hints": {
+            "allow": [
+              "POST"
+            ]
+          },
+          "href": "https://example.com"
+        }
+      },
       "profile": {
         "credentialId": "user@example.com",
         "deviceType": "SmartPhone_IPhone",
         "keys": [
           {
+            "crv": "P-256",
+            "kid": "default",
             "kty": "EC",
             "use": "sig",
-            "kid": "default",
             "x": "abcdef",
-            "y": "qwerty",
-            "crv": "P-256"
+            "y": "qwerty"
           }
         ],
         "name": "iPhone XR",
         "platform": "IOS",
         "version": "13.3"
       },
-      "links": {
-        "self": {
-          "href": "https://example.com",
-          "hints": {
-            "allow": [
-              "GET",
-              "DELETE"
-            ]
-          }
-        },
-        "verify": {
-          "href": "https://example.com",
-          "hints": {
-            "allow": [
-              "POST"
-            ]
-          }
-        },
-        "user": {
-          "href": "https://example.com",
-          "hints": {
-            "allow": [
-              "GET"
-            ]
-          }
-        }
-      }
+      "provider": "OKTA",
+      "status": "ACTIVE",
+      "vendorName": "OKTA"
     }
   ]
 }
 ```
 
 #### Get User
-  
-Obtain information about a user
+
+This action is used to obtain information about a user
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|login|string|None|True|The login of the user to obtain information about|None|user@example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|login|string|None|True|The login of the user to obtain information about|None|user@example.com|None|None|
   
 Example input:
 
@@ -433,62 +425,16 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|user|user|False|User details|{}|
+|user|user|False|User details|{"status":"ACTIVE","profile":{"firstName":"User","lastName":"Test","login":"user@example.com","email":"user@example.com"},"passwordChanged":"2018-07-28T18:48:52.000Z","created":"2018-07-28T17:24:41.000Z","activated":"2018-07-28T18:47:24.000Z","lastUpdated":"2018-07-28T18:58:06.000Z","links":{"suspend":{"href":"https://example.com","method":"POST"},"forgotPassword":{"href":"https://example.com","method":"POST"},"self":{"href":"https://example.com"},"expirePassword":{"href":"https://example.com","method":"POST"},"deactivate":{"href":"https://example.com","method":"POST"},"changePassword":{"href":"https://example.com","method":"POST"},"changeRecoveryQuestion":{"href":"https://example.com","method":"POST"},"resetPassword":{"href":"https://example.com","method":"POST"}},"lastLogin":"2018-07-28T18:48:52.000Z","credentials":{"recoveryQuestion":{"question":"What is the food you least liked as a child?"},"emails":[{"status":"VERIFIED","type":"PRIMARY","value":"user@example.com"}],"provider":{"type":"OKTA","name":"OKTA"}},"id":"00a0a1qwertYUIoplK0j6","statusChanged":"2018-07-28T18:58:06.000Z"}|
   
 Example output:
 
 ```
 {
   "user": {
-    "status": "ACTIVE",
-    "profile": {
-      "firstName": "User",
-      "lastName": "Test",
-      "login": "user@example.com",
-      "email": "user@example.com"
-    },
-    "passwordChanged": "2018-07-28T18:48:52.000Z",
-    "created": "2018-07-28T17:24:41.000Z",
     "activated": "2018-07-28T18:47:24.000Z",
-    "lastUpdated": "2018-07-28T18:58:06.000Z",
-    "links": {
-      "suspend": {
-        "href": "https://example.com",
-        "method": "POST"
-      },
-      "forgotPassword": {
-        "href": "https://example.com",
-        "method": "POST"
-      },
-      "self": {
-        "href": "https://example.com"
-      },
-      "expirePassword": {
-        "href": "https://example.com",
-        "method": "POST"
-      },
-      "deactivate": {
-        "href": "https://example.com",
-        "method": "POST"
-      },
-      "changePassword": {
-        "href": "https://example.com",
-        "method": "POST"
-      },
-      "changeRecoveryQuestion": {
-        "href": "https://example.com",
-        "method": "POST"
-      },
-      "resetPassword": {
-        "href": "https://example.com",
-        "method": "POST"
-      }
-    },
-    "lastLogin": "2018-07-28T18:48:52.000Z",
+    "created": "2018-07-28T17:24:41.000Z",
     "credentials": {
-      "recoveryQuestion": {
-        "question": "What is the food you least liked as a child?"
-      },
       "emails": [
         {
           "status": "VERIFIED",
@@ -497,25 +443,71 @@ Example output:
         }
       ],
       "provider": {
-        "type": "OKTA",
-        "name": "OKTA"
+        "name": "OKTA",
+        "type": "OKTA"
+      },
+      "recoveryQuestion": {
+        "question": "What is the food you least liked as a child?"
       }
     },
     "id": "00a0a1qwertYUIoplK0j6",
+    "lastLogin": "2018-07-28T18:48:52.000Z",
+    "lastUpdated": "2018-07-28T18:58:06.000Z",
+    "links": {
+      "changePassword": {
+        "href": "https://example.com",
+        "method": "POST"
+      },
+      "changeRecoveryQuestion": {
+        "href": "https://example.com",
+        "method": "POST"
+      },
+      "deactivate": {
+        "href": "https://example.com",
+        "method": "POST"
+      },
+      "expirePassword": {
+        "href": "https://example.com",
+        "method": "POST"
+      },
+      "forgotPassword": {
+        "href": "https://example.com",
+        "method": "POST"
+      },
+      "resetPassword": {
+        "href": "https://example.com",
+        "method": "POST"
+      },
+      "self": {
+        "href": "https://example.com"
+      },
+      "suspend": {
+        "href": "https://example.com",
+        "method": "POST"
+      }
+    },
+    "passwordChanged": "2018-07-28T18:48:52.000Z",
+    "profile": {
+      "email": "user@example.com",
+      "firstName": "User",
+      "lastName": "Test",
+      "login": "user@example.com"
+    },
+    "status": "ACTIVE",
     "statusChanged": "2018-07-28T18:58:06.000Z"
   }
 }
 ```
 
 #### Get User Groups
-  
-Fetches the groups of which the user is a member
+
+This action is used to fetch the groups of which the user is a member
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|string|None|True|User ID or login|None|00g1m22m1230eZXxe5r8|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|User ID or login|None|00g1m22m1230eZXxe5r8|None|None|
   
 Example input:
 
@@ -529,7 +521,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|userGroups|[]group|False|List of user groups|[]|
+|userGroups|[]group|False|List of user groups|[{"id":"123456","created":"2018-07-28T20:28:20.000Z","lastUpdated":"2018-07-28T20:28:20.000Z","lastMembershipUpdated":"2023-04-26T09:53:11.000Z","objectClass":["okta:user_group"],"type":"OKTA_GROUP","name":"Example Group","description":"Example description","links":{"logo":[{"name":"medium","href":"https://example.com","type":"image/png"},{"name":"large","href":"https://example.com","type":"image/png"}],"users":{"href":"https://example.com"},"apps":{"href":"https://example.com"}}},{"id":"123457","created":"2018-07-28T20:28:20.000Z","lastUpdated":"2018-07-28T20:28:20.000Z","lastMembershipUpdated":"2023-04-26T09:53:11.000Z","objectClass":["okta:user_group"],"type":"OKTA_GROUP","name":"Example Group1","description":"Example description","links":{"logo":[{"name":"medium","href":"https://example.com","type":"image/png"},{"name":"large","href":"https://example.com","type":"image/png"}],"users":{"href":"https://example.com"},"apps":{"href":"https://example.com"}}}]|
   
 Example output:
 
@@ -537,82 +529,82 @@ Example output:
 {
   "userGroups": [
     {
-      "id": "123456",
       "created": "2018-07-28T20:28:20.000Z",
-      "lastUpdated": "2018-07-28T20:28:20.000Z",
-      "lastMembershipUpdated": "2023-04-26T09:53:11.000Z",
-      "objectClass": [
-        "okta:user_group"
-      ],
-      "type": "OKTA_GROUP",
-      "name": "Example Group",
       "description": "Example description",
+      "id": "123456",
+      "lastMembershipUpdated": "2023-04-26T09:53:11.000Z",
+      "lastUpdated": "2018-07-28T20:28:20.000Z",
       "links": {
+        "apps": {
+          "href": "https://example.com"
+        },
         "logo": [
           {
-            "name": "medium",
             "href": "https://example.com",
+            "name": "medium",
             "type": "image/png"
           },
           {
-            "name": "large",
             "href": "https://example.com",
+            "name": "large",
             "type": "image/png"
           }
         ],
         "users": {
           "href": "https://example.com"
-        },
-        "apps": {
-          "href": "https://example.com"
         }
-      }
+      },
+      "name": "Example Group",
+      "objectClass": [
+        "okta:user_group"
+      ],
+      "type": "OKTA_GROUP"
     },
     {
-      "id": "123457",
       "created": "2018-07-28T20:28:20.000Z",
-      "lastUpdated": "2018-07-28T20:28:20.000Z",
-      "lastMembershipUpdated": "2023-04-26T09:53:11.000Z",
-      "objectClass": [
-        "okta:user_group"
-      ],
-      "type": "OKTA_GROUP",
-      "name": "Example Group1",
       "description": "Example description",
+      "id": "123457",
+      "lastMembershipUpdated": "2023-04-26T09:53:11.000Z",
+      "lastUpdated": "2018-07-28T20:28:20.000Z",
       "links": {
+        "apps": {
+          "href": "https://example.com"
+        },
         "logo": [
           {
-            "name": "medium",
             "href": "https://example.com",
+            "name": "medium",
             "type": "image/png"
           },
           {
-            "name": "large",
             "href": "https://example.com",
+            "name": "large",
             "type": "image/png"
           }
         ],
         "users": {
           "href": "https://example.com"
-        },
-        "apps": {
-          "href": "https://example.com"
         }
-      }
+      },
+      "name": "Example Group1",
+      "objectClass": [
+        "okta:user_group"
+      ],
+      "type": "OKTA_GROUP"
     }
   ]
 }
 ```
 
 #### List Groups
-  
-List available groups
+
+This action is used to list available groups
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|query|string|None|False|Query to list groups. Finds a group that matches the name property. Search currently performs a startsWith match. If this parameter is not given, all groups are returned|None|Example|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|query|string|None|False|Query to list groups. Finds a group that matches the name property. Search currently performs a startsWith match. If this parameter is not given, all groups are returned|None|Example|None|None|
   
 Example input:
 
@@ -626,48 +618,48 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|groups|[]group|False|List of groups|[]|
+|groups|[]group|False|List of groups|[{"name":"Cool","created":"2018-07-28T20:28:20.000Z","objectClass":["okta:user_group"],"lastUpdated":"2018-07-28T20:28:20.000Z","links":{"logo":[{"href":"https://example.com","type":"image/png","name":"medium"},{"href":"https://example.com","type":"image/png","name":"large"}],"apps":{"href":"https://example.com"},"users":{"href":"https://example.com"}},"lastMembershipUpdated":"2018-07-28T21:15:17.000Z","type":"OKTA_GROUP","id":"00a0a1qwertYUIoplK0g3","description":"Cool people"}]|
 |success|boolean|True|Whether groups were found|True|
   
 Example output:
 
 ```
 {
-  "success": true,
   "groups": [
     {
-      "name": "Cool",
       "created": "2018-07-28T20:28:20.000Z",
-      "objectClass": [
-        "okta:user_group"
-      ],
+      "description": "Cool people",
+      "id": "00a0a1qwertYUIoplK0g3",
+      "lastMembershipUpdated": "2018-07-28T21:15:17.000Z",
       "lastUpdated": "2018-07-28T20:28:20.000Z",
       "links": {
-        "logo": [
-          {
-            "href": "https://example.com",
-            "type": "image/png",
-            "name": "medium"
-          },
-          {
-            "href": "https://example.com",
-            "type": "image/png",
-            "name": "large"
-          }
-        ],
         "apps": {
           "href": "https://example.com"
         },
+        "logo": [
+          {
+            "href": "https://example.com",
+            "name": "medium",
+            "type": "image/png"
+          },
+          {
+            "href": "https://example.com",
+            "name": "large",
+            "type": "image/png"
+          }
+        ],
         "users": {
           "href": "https://example.com"
         }
       },
-      "lastMembershipUpdated": "2018-07-28T21:15:17.000Z",
-      "type": "OKTA_GROUP",
-      "id": "00a0a1qwertYUIoplK0g3",
-      "description": "Cool people"
+      "name": "Cool",
+      "objectClass": [
+        "okta:user_group"
+      ],
+      "type": "OKTA_GROUP"
     }
-  ]
+  ],
+  "success": true
 }
 ```
 
@@ -681,15 +673,15 @@ When no groups are found, the action returns:
 ```
 
 #### Remove User from Group
-  
-Remove a user from an existing group
+
+This action is used to remove a user from an existing group
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|groupId|string|None|True|The ID of the group to which the user should be added|None|00g1m22m1230eZXxe5r8|
-|login|string|None|True|The login of the Okta user|None|user@example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|groupId|string|None|True|The ID of the group to which the user should be added|None|00g1m22m1230eZXxe5r8|None|None|
+|login|string|None|True|The login of the Okta user|None|user@example.com|None|None|
   
 Example input:
 
@@ -717,14 +709,14 @@ Example output:
 ```
 
 #### Reset Factors
-  
-Reset all multifactors for user by email
+
+This action is used to reset all multifactors for user by email
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|login|string|None|True|The login of the employee to reset factors|None|user@example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|login|string|None|True|The login of the employee to reset factors|None|user@example.com|None|None|
   
 Example input:
 
@@ -753,16 +745,16 @@ Example output:
 ```
 
 #### Reset Password
-  
-This action resets password for Okta user and transitions user status to PASSWORD_EXPIRED, so that the user is required 
-to change their password at their next login
+
+This action is used to this action resets password for Okta user and transitions user status to PASSWORD_EXPIRED, so 
+that the user is required to change their password at their next login
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|tempPassword|boolean|False|False|If set to true, sets the user's password to a temporary password and returns it|None|True|
-|userId|string|None|True|User ID whose password will be reset|None|00ub0oNGTSWTBKOLGLNR|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|tempPassword|boolean|False|False|If set to true, sets the user's password to a temporary password and returns it|None|True|None|None|
+|userId|string|None|True|User ID whose password will be reset|None|00ub0oNGTSWTBKOLGLNR|None|None|
   
 Example input:
 
@@ -790,15 +782,15 @@ Example output:
 ```
 
 #### Push MFA Challenge
-  
-Push an MFA challenge to a user's device and wait for a success or rejection
+
+This action is used to push an MFA challenge to a user's device and wait for a success or rejection
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|factorId|string|None|True|Factor ID of the user to push verification to|None|00a0a1qwertYUIoplK0j7|
-|userId|string|None|True|User ID to push verification to|None|00a0a1qwertYUIoplK0j6|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|factorId|string|None|True|Factor ID of the user to push verification to|None|00a0a1qwertYUIoplK0j7|None|None|
+|userId|string|None|True|User ID to push verification to|None|00a0a1qwertYUIoplK0j6|None|None|
   
 Example input:
 
@@ -824,16 +816,15 @@ Example output:
 ```
 
 #### Suspend User
-  
-This action can be used to suspend a user from the Okta system. The user will retain
-membership and permissions as currently configured, but be unable to access the system
-as a whole.
+
+This action is used to suspend a user from the Okta system. The user will retain membership and permissions as 
+currently configured, but be unable to access the system as a whole.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|login|string|None|True|The login of the employee to suspend|None|user@example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|login|string|None|True|The login of the employee to suspend|None|user@example.com|None|None|
   
 Example input:
 
@@ -870,14 +861,14 @@ When the user is not found, the action returns:
 ```
 
 #### Unsuspend User
-  
-Unsuspend a user
+
+This action is used to unsuspend a user
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|login|string|None|True|The login of the Okta user|None|user@example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|login|string|None|True|The login of the Okta user|None|user@example.com|None|None|
   
 Example input:
 
@@ -906,16 +897,16 @@ Example output:
 ```
 
 #### Update Blacklist Zones
-  
-Block or unblock address or network by adding or removing from a blacklist network zone
+
+This action is used to block or unblock address or network by adding or removing from a blacklist network zone
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|address|string|None|True|IP address, Network range, or CIDR to block or unblock|None|198.51.100.1|
-|blacklistState|boolean|True|False|True to block, false to unblock|None|True|
-|name|string|None|True|Name of blacklist zone|None|InsightConnect Blacklist Zone|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|address|string|None|True|IP address, Network range, or CIDR to block or unblock|None|198.51.100.1|None|None|
+|blacklistState|boolean|True|False|True to block, false to unblock|None|True|None|None|
+|name|string|None|True|Name of blacklist zone|None|InsightConnect Blacklist Zone|None|None|
   
 Example input:
 
@@ -931,13 +922,26 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|zone|zone|True|Information about the updated zone|{}|
+|zone|zone|True|Information about the updated zone|{"links":{"deactivate":{"hints":{"allow":["POST"]},"href":"https://example.com"},"self":{"hints":{"allow":["GET","PUT","DELETE"]},"href":"https://example.com"}},"created":"2020-11-01T01:00:47.000Z","gateways":[{"type":"RANGE","value":"1.1.1.1-1.1.1.1"},{"type":"RANGE","value":"1.1.2.3-1.1.2.5"}],"id":"nzohxvr9QzHuWqXI65d5","lastUpdated":"2020-11-01T23:36:53.000Z","name":"testzone","proxies":null,"status":"ACTIVE","system":false,"type":"IP"}|
   
 Example output:
 
 ```
 {
   "zone": {
+    "created": "2020-11-01T01:00:47.000Z",
+    "gateways": [
+      {
+        "type": "RANGE",
+        "value": "1.1.1.1-1.1.1.1"
+      },
+      {
+        "type": "RANGE",
+        "value": "1.1.2.3-1.1.2.5"
+      }
+    ],
+    "id": "nzohxvr9QzHuWqXI65d5",
+    "lastUpdated": "2020-11-01T23:36:53.000Z",
     "links": {
       "deactivate": {
         "hints": {
@@ -958,19 +962,6 @@ Example output:
         "href": "https://example.com"
       }
     },
-    "created": "2020-11-01T01:00:47.000Z",
-    "gateways": [
-      {
-        "type": "RANGE",
-        "value": "1.1.1.1-1.1.1.1"
-      },
-      {
-        "type": "RANGE",
-        "value": "1.1.2.3-1.1.2.5"
-      }
-    ],
-    "id": "nzohxvr9QzHuWqXI65d5",
-    "lastUpdated": "2020-11-01T23:36:53.000Z",
     "name": "testzone",
     "proxies": null,
     "status": "ACTIVE",
@@ -983,15 +974,15 @@ Example output:
 
 
 #### Monitor User Groups
-  
-Monitors a list of groups for user membership changes
+
+This trigger is used to monitors a list of groups for user membership changes
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|groupIds|[]string|None|True|A list of group ID's|None|["00g41ix8hKbsu74Ca4x6", "00g41ieu5y7i9XEYE4x6"]|
-|interval|integer|300|True|The time in seconds between checks for changes to the groups users|None|100|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|groupIds|[]string|None|True|A list of group ID's|None|["00g41ix8hKbsu74Ca4x6", "00g41ieu5y7i9XEYE4x6"]|None|None|
+|interval|integer|300|True|The time in seconds between checks for changes to the groups users|None|100|None|None|
   
 Example input:
 
@@ -1001,7 +992,7 @@ Example input:
     "00g41ix8hKbsu74Ca4x6",
     "00g41ieu5y7i9XEYE4x6"
   ],
-  "interval": 100
+  "interval": 300
 }
 ```
 
@@ -1009,79 +1000,79 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|usersAddedToGroups|[]user_group|True|Users added to a group since the last check|[]|
-|usersRemovedFromGroups|[]user_group|True|Users removed from a group since the last check|[]|
+|usersAddedToGroups|[]user_group|True|Users added to a group since the last check|[{"groupName":"test1","groupId":"00g41ix8hKbsu74Ca4x6","users":[{"id":"00u44z4o0JgUYC0OO4x6","status":"PASSWORD_EXPIRED","created":"2020-03-17T19:28:50.000Z","activated":"2020-03-17T19:28:50.000Z","statusChanged":"2020-03-17T19:28:50.000Z","lastUpdated":"2020-03-17T19:28:50.000Z","passwordChanged":"2020-03-17T19:28:50.000Z","profile":{"firstName":"doe","lastName":"test","login":"user@example.com","email":"user@example.com"},"credentials":{"password":{},"provider":{"type":"OKTA","name":"OKTA"}},"links":{"self":{"href":"https://example.com"}}}]}]|
+|usersRemovedFromGroups|[]user_group|True|Users removed from a group since the last check|[{"group_name":"test1","group_id":"00g41ix8hKbsu74Ca4x6","users":[{"id":"00u44xracEYPXjhwy4x6","status":"PASSWORD_EXPIRED","created":"2020-03-17T19:28:27.000Z","activated":"2020-03-17T19:28:28.000Z","statusChanged":"2020-03-17T19:28:28.000Z","lastUpdated":"2020-03-17T19:28:28.000Z","passwordChanged":"2020-03-17T19:28:27.000Z","profile":{"firstName":"bob","lastName":"test","login":"user@example.com","email":"user@example.com"},"credentials":{"password":{},"provider":{"type":"OKTA","name":"OKTA"}},"links":{"self":{"href":"https://example.com"}}}]}]|
   
 Example output:
 
 ```
 {
-  "usersAddedFromGroups": [
+  "usersAddedToGroups": [
     {
-      "groupName": "test1",
       "groupId": "00g41ix8hKbsu74Ca4x6",
+      "groupName": "test1",
       "users": [
         {
-          "id": "00u44z4o0JgUYC0OO4x6",
-          "status": "PASSWORD_EXPIRED",
-          "created": "2020-03-17T19:28:50.000Z",
           "activated": "2020-03-17T19:28:50.000Z",
-          "statusChanged": "2020-03-17T19:28:50.000Z",
-          "lastUpdated": "2020-03-17T19:28:50.000Z",
-          "passwordChanged": "2020-03-17T19:28:50.000Z",
-          "profile": {
-            "firstName": "doe",
-            "lastName": "test",
-            "login": "user@example.com",
-            "email": "user@example.com"
-          },
+          "created": "2020-03-17T19:28:50.000Z",
           "credentials": {
             "password": {},
             "provider": {
-              "type": "OKTA",
-              "name": "OKTA"
+              "name": "OKTA",
+              "type": "OKTA"
             }
           },
+          "id": "00u44z4o0JgUYC0OO4x6",
+          "lastUpdated": "2020-03-17T19:28:50.000Z",
           "links": {
             "self": {
               "href": "https://example.com"
             }
-          }
+          },
+          "passwordChanged": "2020-03-17T19:28:50.000Z",
+          "profile": {
+            "email": "user@example.com",
+            "firstName": "doe",
+            "lastName": "test",
+            "login": "user@example.com"
+          },
+          "status": "PASSWORD_EXPIRED",
+          "statusChanged": "2020-03-17T19:28:50.000Z"
         }
       ]
     }
   ],
   "usersRemovedFromGroups": [
     {
-      "group_name": "test1",
       "group_id": "00g41ix8hKbsu74Ca4x6",
+      "group_name": "test1",
       "users": [
         {
-          "id": "00u44xracEYPXjhwy4x6",
-          "status": "PASSWORD_EXPIRED",
-          "created": "2020-03-17T19:28:27.000Z",
           "activated": "2020-03-17T19:28:28.000Z",
-          "statusChanged": "2020-03-17T19:28:28.000Z",
-          "lastUpdated": "2020-03-17T19:28:28.000Z",
-          "passwordChanged": "2020-03-17T19:28:27.000Z",
-          "profile": {
-            "firstName": "bob",
-            "lastName": "test",
-            "login": "user@example.com",
-            "email": "user@example.com"
-          },
+          "created": "2020-03-17T19:28:27.000Z",
           "credentials": {
             "password": {},
             "provider": {
-              "type": "OKTA",
-              "name": "OKTA"
+              "name": "OKTA",
+              "type": "OKTA"
             }
           },
+          "id": "00u44xracEYPXjhwy4x6",
+          "lastUpdated": "2020-03-17T19:28:28.000Z",
           "links": {
             "self": {
               "href": "https://example.com"
             }
-          }
+          },
+          "passwordChanged": "2020-03-17T19:28:27.000Z",
+          "profile": {
+            "email": "user@example.com",
+            "firstName": "bob",
+            "lastName": "test",
+            "login": "user@example.com"
+          },
+          "status": "PASSWORD_EXPIRED",
+          "statusChanged": "2020-03-17T19:28:28.000Z"
         }
       ]
     }
@@ -1092,8 +1083,8 @@ Example output:
 
 
 #### Monitor Logs
-  
-Monitor system logs
+
+This task is used to monitor system logs
 
 ##### Input
   
@@ -1103,7 +1094,7 @@ Monitor system logs
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|logs|object|True|All system logs within the specified time range|[]|
+|logs|object|True|All system logs within the specified time range|[{"actor":{"id":"12345","type":"User","alternateId":"user@example.com","displayName":"User"},"client":{"userAgent":{"rawUserAgent":"python-requests/2.26.0","os":"Unknown","browser":"UNKNOWN"},"zone":"null","device":"Unknown","geographicalContext":{},"ipAddress":"198.51.100.1"},"authenticationContext":{"externalSessionId":"12345"},"displayMessage":"Suspend Okta user","eventType":"user.lifecycle.suspend","outcome":{"result":"SUCCESS"},"published":"2023-04-27T07:49:21.764Z","securityContext":{"asNumber":123456,"asOrg":"test","isp":"test","domain":"example.com","isProxy":false},"severity":"INFO","debugContext":{"debugData":{"requestId":"12345","dtHash":"111111cd0ecfb444ee1fcb9687ba8b174a3c8d251ce927e6016b871bc222222","requestUri":"/api/v1/users/12345/lifecycle/suspend","url":"/api/v1/users/12345/lifecycle/suspend?"}},"legacyEventType":"core.user.config.user_status.suspended","transaction":{"type":"WEB","id":"12345","detail":{"requestApiTokenId":"12345"}},"uuid":"9de5069c-5afe-602b-2ea0-a04b66beb2c0","version":"0","request":{"ipChain":[{"ip":"198.51.100.1","geographicalContext":{},"version":"V4"}]},"target":[{"id":"12345","type":"User","alternateId":"user@example.com","displayName":"Test User"}]}]|
   
 Example output:
 
@@ -1112,74 +1103,74 @@ Example output:
   "logs": [
     {
       "actor": {
-        "id": "12345",
-        "type": "User",
         "alternateId": "user@example.com",
-        "displayName": "User"
-      },
-      "client": {
-        "userAgent": {
-          "rawUserAgent": "python-requests/2.26.0",
-          "os": "Unknown",
-          "browser": "UNKNOWN"
-        },
-        "zone": "null",
-        "device": "Unknown",
-        "geographicalContext": {}
-        "ipAddress": "198.51.100.1"
+        "displayName": "User",
+        "id": "12345",
+        "type": "User"
       },
       "authenticationContext": {
         "externalSessionId": "12345"
       },
-      "displayMessage": "Suspend Okta user",
-      "eventType": "user.lifecycle.suspend",
-      "outcome": {
-        "result": "SUCCESS"
+      "client": {
+        "device": "Unknown",
+        "geographicalContext": {},
+        "ipAddress": "198.51.100.1",
+        "userAgent": {
+          "browser": "UNKNOWN",
+          "os": "Unknown",
+          "rawUserAgent": "python-requests/2.26.0"
+        },
+        "zone": "null"
       },
-      "published": "2023-04-27T07:49:21.764Z",
-      "securityContext": {
-        "asNumber": 123456,
-        "asOrg": "test",
-        "isp": "test",
-        "domain": "example.com",
-        "isProxy": false
-      },
-      "severity": "INFO",
       "debugContext": {
         "debugData": {
-          "requestId": "12345",
           "dtHash": "111111cd0ecfb444ee1fcb9687ba8b174a3c8d251ce927e6016b871bc222222",
+          "requestId": "12345",
           "requestUri": "/api/v1/users/12345/lifecycle/suspend",
           "url": "/api/v1/users/12345/lifecycle/suspend?"
         }
       },
+      "displayMessage": "Suspend Okta user",
+      "eventType": "user.lifecycle.suspend",
       "legacyEventType": "core.user.config.user_status.suspended",
-      "transaction": {
-        "type": "WEB",
-        "id": "12345",
-        "detail": {
-          "requestApiTokenId": "12345"
-        }
+      "outcome": {
+        "result": "SUCCESS"
       },
-      "uuid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
-      "version": "0",
+      "published": "2023-04-27T07:49:21.764Z",
       "request": {
         "ipChain": [
           {
+            "geographicalContext": {},
             "ip": "198.51.100.1",
-            "geographicalContext": {}
             "version": "V4"
           }
         ]
       },
+      "securityContext": {
+        "asNumber": 123456,
+        "asOrg": "test",
+        "domain": "example.com",
+        "isProxy": false,
+        "isp": "test"
+      },
+      "severity": "INFO",
       "target": [
         {
-          "id": "12345",
-          "type": "User",
           "alternateId": "user@example.com",
-          "displayName": "Test User"
+          "displayName": "Test User",
+          "id": "12345",
+          "type": "User"
         }
-      ]
+      ],
+      "transaction": {
+        "detail": {
+          "requestApiTokenId": "12345"
+        },
+        "id": "12345",
+        "type": "WEB"
+      },
+      "uuid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "version": "0"
     }
   ]
 }
@@ -1201,7 +1192,7 @@ Example output:
 |Answer|string|None|False|Answer for the recovery question|Example Answer|
 |Recovery Question|string|None|False|Question used for account recovery|Who's a major player in the cowboy scene?|
   
-**password**
+**custom_password**
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -1211,7 +1202,7 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Password|password|None|False|Password details|{}|
+|Password|custom_password|None|False|Password details|{}|
 |Provider|provider|None|False|Provider details|{}|
 |Recovery Question|recoveryQuestion|None|False|Recovery question details|{}|
   
@@ -1248,7 +1239,7 @@ Example output:
 |Last Updated|string|None|False|Timestamp when group's profile was last updated|2015-11-28 19:15:32+00:00|
 |Links|groupLinks|None|False|Links to related resources|{}|
 |Name|string|None|False|Group name|Example Group|
-|Object Class|[]string|None|False|Determines the group's profile|['okta:user_group']|
+|Object Class|[]string|None|False|Determines the group's profile|["okta:user_group"]|
 |Type|string|None|False|Type of the group|OKTA_GROUP|
   
 **userType**
@@ -1346,7 +1337,7 @@ Example output:
 
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
-|Allowed Methods|[]string|None|False|Allowed Methods|['POST']|
+|Allowed Methods|[]string|None|False|Allowed Methods|["POST"]|
   
 **deactivate**
 
@@ -1604,22 +1595,18 @@ Example output:
 
 
 ## Troubleshooting
-
-Actions may fail depending on the state of the resource you attempt to operate over.
-They will return a best-effort message indicating why the Okta API responded the way it
-did when possible. Depending on the API endpoint, this message is either provided
-by Okta themselves, or constructed by the plugin based on the information it has at hand.
+  
+Actions may fail depending on the state of the resource you attempt to operate over. They will return a best-effort message indicating why the Okta API responded the way it did when possible. Depending on the API endpoint, this message is either provided by Okta themselves, or constructed by the plugin based on the information it has at hand.
 
 # Version History
 
-* 4.2.7 - Updated to include latest SDK v5.4.9 | Task `Monitor Logs` updated to increase max lookback cutoff to 7 days
-* 4.2.6 - Connection: Update to ensure subdomain is entered correctly. Plugin will now raise an error if this value is not present.
+* 4.2.6 - Connection: Update to ensure subdomain is entered correctly. Plugin will now raise an error if this value is not present
 * 4.2.5 - Monitor Logs task: Update handing of custom_config parameter
 * 4.2.4 - Monitor Logs task: Update to latest SDK which adds new task custom_config parameter | Update validators to 0.22.0
-* 4.2.3 - Monitor Logs task: Added exception logging and use latest plugin SDK. Also Fixed schemas that contain passwords.
-* 4.2.2 - Monitor Logs task: log deduplication only applied when querying Okta using since and until parameters.
-* 4.2.1 - Monitor Logs task: filter previously returned log events | only update time checkpoint when an event is returned | update timestamp format | set cutoff time of 24 hours.
-* 4.2.0 - Monitor Logs task: return raw logs data without cleaning and use last log time as checkpoint in time for next run.
+* 4.2.3 - Monitor Logs task: Added exception logging and use latest plugin SDK. Also Fixed schemas that contain passwords
+* 4.2.2 - Monitor Logs task: log deduplication only applied when querying Okta using since and until parameters
+* 4.2.1 - Monitor Logs task: filter previously returned log events | only update time checkpoint when an event is returned | update timestamp format | set cutoff time of 24 hours
+* 4.2.0 - Monitor Logs task: return raw logs data without cleaning and use last log time as checkpoint in time for next run
 * 4.1.1 - Monitor Logs task: strip http/https in hostname
 * 4.1.0 - New action Get User Groups | Update to latest SDK version
 * 4.0.0 - Add Monitor Logs task | Code refactor | Update plugin to be cloud enabled
@@ -1633,13 +1620,13 @@ by Okta themselves, or constructed by the plugin based on the information it has
 * 3.4.1 - Fix issue where Monitor User Groups trigger would continually detect the same new group addition
 * 3.4.0 - New trigger Monitor User Groups
 * 3.3.0 - New actions Get Factors and Send Push
-* 3.2.2 - Change docker image from `komand/python-2-plugin:2` to `komand/python-3-37-slim-plugin:3` | Use input and output constants | Changed variables names to more readable | Added "f" strings | Removed duplicated code
+* 3.2.2 - Change docker image from `komand/python-2-plugin:2` to `komand/python-3-37-slim-plugin:3` | Use input and output constants | Changed variables names to more readable | Added `f` strings | Removed duplicated code
 * 3.2.1 - New spec and help.md format for the Extension Library
 * 3.2.0 - New action Delete User
 * 3.1.2 - Update connection test
 * 3.1.1 - Update descriptions
 * 3.1.0 - New action Reset Factors
-* 3.0.0 - Rename "Remove User to Group" action to "Remove User from Group"
+* 3.0.0 - Rename `Remove User to Group` action to `Remove User from Group`
 * 2.1.0 - Improved connection code | New action Create User
 * 2.0.0 - Update to new secret key credential type
 * 1.1.0 - Added new Get User, Unsuspend User, Add User to Group, and List Groups actions
@@ -1649,8 +1636,8 @@ by Okta themselves, or constructed by the plugin based on the information it has
 
 # Links
 
-* [Okta API Spec](http://developer.okta.com/docs/api/resources)
+* [Okta API Spec](https://developer.okta.com/docs/api)
 
 ## References
 
-* [Okta API Spec](http://developer.okta.com/docs/api/resources)
+* [Okta API Reference](https://developer.okta.com/docs/reference)

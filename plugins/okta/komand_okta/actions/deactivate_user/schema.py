@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Deactivate a user"
+    DESCRIPTION = "Deactivate / deprovision a user from the Okta system. In addition to losing the ability to log in, the user will be removed from all configured applications and lose all configured settings. This is a non-reversible, destructive operation. This action is also considered asynchronous by the Okta API, meaning there is some delay between the API returning a successful result and the actual deactivation / deprovisioning of a user."
 
 
 class Input:

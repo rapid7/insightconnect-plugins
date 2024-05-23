@@ -18,7 +18,8 @@ def get_hostname(hostname: str) -> str:
 
 def validate_url(url: str) -> bool:
     """
-    Check domain against allowedHost list for Okta.
+    Validate the URL to ensure it has the correct format.
+    For Okta URLs the netloc should have 3 parts, i.e. example.okta.com
     Return True if Okta URL is valid, False otherwise
     :param url: The URL to check
     :type: str
@@ -30,10 +31,11 @@ def validate_url(url: str) -> bool:
         prefix = "https://"
         url = prefix + url
 
-    domain = urlparse(url).netloc
+    # validate domain and ensure a subdomain is present
+    # e.g. dev.okta-emea.com
+    domain_parts = urlparse(url).netloc.split('.')
 
-    # checks to validate domain and ensure a subdomain is present
-    if not domain.endswith((".okta.com", ".oktapreview.com", ".okta-emea.com")):
+    if len(domain_parts) != 3:
         return False
 
     return True

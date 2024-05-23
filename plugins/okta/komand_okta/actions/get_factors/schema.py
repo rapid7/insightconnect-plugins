@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Returns an object containing all of a user's factors for MFA"
+    DESCRIPTION = "Return an object containing all of a user's factors for MFA"
 
 
 class Input:
