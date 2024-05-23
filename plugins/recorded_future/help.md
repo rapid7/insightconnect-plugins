@@ -2576,7 +2576,7 @@ Example output:
 
 ## Troubleshooting
   
-Risk List actions may return a risk list that is too large to process. In this case only the original Gzip will be returned which can then be decompressed and read separately.
+Risk List actions may return a risk list that is too large to process. In this case only the original Gzip will be returned which contains XML data. It can then be decompressed and read separately.
 
 # Version History
 
