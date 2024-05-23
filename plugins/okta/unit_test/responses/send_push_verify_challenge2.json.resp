@@ -19,7 +19,7 @@
   },
   "_links": {
     "cancel": {
-      "href": "https://example.com/api/v1/users/00u1m1qwertYUiopA0S3/factors/aaa1qwerty0UIOPaS0d2/transactions/asdfg.QWERTYUI",
+      "href": "https://example.okta.com/api/v1/users/00u1m1qwertYUiopA0S3/factors/aaa1qwerty0UIOPaS0d2/transactions/asdfg.QWERTYUI",
       "hints": {
         "allow": [
           "DELETE"
@@ -27,7 +27,7 @@
       }
     },
     "poll": {
-      "href": "https://example.com/api/v1/users/00u1m1qwertYUiopA0S3/factors/aaa1qwerty0UIOPaS0d2/transactions/asdfg.QWERTYUI",
+      "href": "https://example.okta.com/api/v1/users/00u1m1qwertYUiopA0S3/factors/aaa1qwerty0UIOPaS0d2/transactions/asdfg.QWERTYUI",
       "hints": {
         "allow": [
           "GET"
