@@ -191,7 +191,7 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
             except ApiException as error:
                 self.logger.info(f"An API Exception has been raised. Status code: {error.status_code}. Error: {error}")
                 self.connection.api.unset_token()
-                return [], state, False, error.status_code, PluginException(preset=error.preset, data=error.data)
+                return [], state, False, error.status_code, error
         except Exception as error:
             self.logger.info(f"An Exception has been raised. Error: {error}")
             self.connection.api.unset_token()
