@@ -45,7 +45,7 @@ class TestConnection(TestCase):
             [
                 "invalid_credentials",
                 Util.read_file_to_dict("inputs/connection_invalid.json.inp"),
-                PluginException.causes[PluginException.Preset.INVALID_CREDENTIALS],
+                "Salesforce error: 'Invalid password or security token supplied.'",
                 PluginException.assistances[PluginException.Preset.INVALID_CREDENTIALS],
             ],
             [
@@ -57,8 +57,8 @@ class TestConnection(TestCase):
             [
                 "invalid_client_id",
                 Util.read_file_to_dict("inputs/connection_invalid_client_id.json.inp"),
-                "Salesforce error: 'client identifier invalid'",
-                PluginException.assistances[PluginException.Preset.UNKNOWN],
+                "Salesforce error: 'Invalid client ID supplied.'",
+                PluginException.assistances[PluginException.Preset.INVALID_CREDENTIALS],
             ],
         ]
     )

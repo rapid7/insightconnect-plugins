@@ -203,14 +203,20 @@ class SalesforceAPI:
 
         if 400 <= response.status_code <= 504:
             decoded_response = response.content.decode()
-            if "invalid_grant" in decoded_response:
-                self.logger.info("SalesforceAPI: invalid_grant error received. Not retrying...")
-                cause_error, assistance, preset_error = "", "", PluginException.Preset.INVALID_CREDENTIALS
+            error_status_code = response.status_code
+            cause_error, assistance, status_code = self.get_error(decoded_response)
+            if status_code:  # get_error returns status code for invalid creds to avoid a retry
+                self.logger.info(
+                    f"SalesforceAPI: {cause_error}. Received {error_status_code}, but returning {status_code}. "
+                    "Not retrying..."
+                )
+                preset_error = ""
+                error_status_code = status_code  # Salesforce returns 400 but change to 401 to reflect true error code
             else:
                 if self.retry_count < self.RETRY_LIMIT:
                     retry_sleep = 5
                     self.logger.info(
-                        f"SalesforceAPI: Received {response.status_code} status code. "
+                        f"SalesforceAPI: Received {error_status_code} status code. "
                         f"Retrying in {retry_sleep} seconds..."
                     )
                     time.sleep(retry_sleep)
@@ -218,7 +224,6 @@ class SalesforceAPI:
                     return self._get_token(client_id, client_secret, username, password, security_token, oauth_url)
                 else:
                     self.logger.error(f"SalesforceAPI: Max retry attempts reached ({self.retry_count}). Exiting...")
-                    cause_error, assistance = self.get_error(decoded_response)
                     preset_error = "" if cause_error else PluginException.Preset.UNKNOWN
 
             # reset counter back to 1 so the next task execution can try again - some errors could've persisted for
@@ -230,7 +235,7 @@ class SalesforceAPI:
                 preset=preset_error,
                 cause=cause_error,
                 assistance=assistance,
-                status_code=response.status_code,
+                status_code=error_status_code,
                 data=response.text,
             )
 
@@ -333,18 +338,35 @@ class SalesforceAPI:
         self.token = None
 
     @staticmethod
-    def get_error(response: str) -> Tuple[str, str]:
+    def get_error(response: str) -> Tuple[str, str, Any]:
         """
-        Small helper method that takes Salesforce content response and attempts to parse an error_description
-        to bubble this to the UI to the customer. If we can't get an error description then default to use
-        `Preset.Unknown`
+        Small helper method that takes Salesforce content response and attempts to reflect the best error message
+        back to the customer on the UI. First check for invalid credential inputs which we know the error values,
+        before checking for an error description to bubble. -> cause_error, assistance, status_code
         """
+        error_mappings = {
+            "invalid_grant": "Invalid password or security token supplied.",
+            "invalid_client_id": "Invalid client ID supplied.",
+            "invalid_client": "Invalid client secret supplied.",
+        }
+
         try:
             json_response = loads(response)
-            error_desc = json_response.get("error_description")
+            error, error_desc = json_response.get("error"), json_response.get("error_description")
+            client_error = error_mappings.get(error)
+            if client_error:
+                return (
+                    f"Salesforce error: '{client_error}'",
+                    PluginException.assistances[PluginException.Preset.INVALID_CREDENTIALS],
+                    401,
+                )
             if error_desc:
-                return f"Salesforce error: '{error_desc}'", PluginException.assistances[PluginException.Preset.UNKNOWN]
+                return (
+                    f"Salesforce error: '{error_desc}'",
+                    PluginException.assistances[PluginException.Preset.UNKNOWN],
+                    "",
+                )
         except JSONDecodeError:
             pass
 
-        return "", ""
+        return "", "", ""
