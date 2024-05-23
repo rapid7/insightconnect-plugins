@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: powershell
 title: PowerShell
-description: "[PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-6) is a task-based command-line shell and scripting language from Microsoft that helps system administrators, power-users, and InsightConnect customers rapidly automate tasks that manage operating systems and processes. This plugin runs a PowerShell script on a remote host or locally on an InsightConnect Orchestrator."
+description: "[PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-6) is a task-based command-line shell and scripting language from Microsoft that helps system administrators, power-users, and InsightConnect customers rapidly automate tasks that manage operating systems and processes. This plugin runs a PowerShell script on a remote host or locally on an InsightConnect Orchestrator"
 version: 3.0.4
 connection_version: 3
 key_features:
@@ -23,7 +23,6 @@ references:
   - "[samba-common](https://packages.debian.org/sid/samba-common)"
   - "[krb5-user](https://packages.debian.org/search?keywords=krb5-user)"
   - "[realmd](https://packages.debian.org/jessie/admin/realmd)"
-  - "[InsightConnect Powershell Plugin Guide](https://docs.rapid7.com/insightconnect/mass-delete-with-PowerShell/)"
 supported_versions: ["PowerShell 6.1.2"]
 vendor: rapid7
 support: community

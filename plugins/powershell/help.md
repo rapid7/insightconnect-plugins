@@ -1,6 +1,6 @@
 # Description
 
-[PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-6) is a task-based command-line shell and scripting language from Microsoft that helps system administrators, power-users, and InsightConnect customers rapidly automate tasks that manage operating systems and processes. This plugin runs a PowerShell script on a remote host or locally on an InsightConnect Orchestrator.
+[PowerShell](https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-6) is a task-based command-line shell and scripting language from Microsoft that helps system administrators, power-users, and InsightConnect customers rapidly automate tasks that manage operating systems and processes. This plugin runs a PowerShell script on a remote host or locally on an InsightConnect Orchestrator
 
 # Key Features
 
@@ -227,4 +227,3 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 * [samba-common](https://packages.debian.org/sid/samba-common)
 * [krb5-user](https://packages.debian.org/search?keywords=krb5-user)
 * [realmd](https://packages.debian.org/jessie/admin/realmd)
-* [InsightConnect Powershell Plugin Guide](https://docs.rapid7.com/insightconnect/mass-delete-with-PowerShell/)
