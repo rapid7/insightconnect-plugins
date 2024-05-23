@@ -36,7 +36,7 @@ class CreateUserInput(insightconnect_plugin_runtime.Input):
     "credentials": {
       "$ref": "#/definitions/credentials",
       "title": "Credentials",
-      "description": "Credentials for user",
+      "description": "Credentials for user. If configuring the `provider` and/or `recovery_question` inputs, for each used, their respective fields must be completed otherwise Okta will return an error. This action will attempt to prevent that be removing the entire input if it detects a missing field in that input",
       "order": 4
     },
     "groupIds": {
