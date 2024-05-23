@@ -82,7 +82,10 @@ class RecordedFutureApi:
                 try:
                     parsed_data = RecordedFutureApi.decompress_gzip_to_dict(compressed_data)
                 except (MemoryError, DecoratorTimeoutError):
-                    self.logger.info("Response is too large to read. Returning gzip only...")
+                    file_size_bytes = os.path.getsize(filename)
+                    file_size_mb = file_size_bytes / (1024 * 1024)
+                    self.logger.info(f"File size: {round(file_size_mb, 2)}mb is too large to parse.")
+                    self.logger.info("Please see troubleshooting for more information. Returning gzip only...")
                     parsed_data = None
                 decoded_data = base64.b64encode(compressed_data).decode("utf-8")
                 return decoded_data, parsed_data
