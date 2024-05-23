@@ -4,7 +4,7 @@ products: [insightconnect]
 name: trendmicro_visionone
 title: Trend Vision One
 description: Trend Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
-version: 4.1.0
+version: 5.0.0
 connection_version: 4
 supported_versions: [Trend Vision One API v3]
 vendor: trendmicro
@@ -78,6 +78,7 @@ links:
 references:
 - '[Trend Vision One](https://docs.trendmicro.com/en-us/enterprise/trend-micro-xdr-help/home)'
 version_history:
+- 5.0.0 - Removed app name from connection
 - 4.1.0 - Added OAT list action and trigger, limit query size
 - 4.0.0 - Added API Keys related actions
 - 3.0.0 - Refactored pytmv1 usage | Added Custom Scripts and Activity related actions

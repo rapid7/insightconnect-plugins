@@ -3114,6 +3114,7 @@ For additional info about actions see https://automation.trendmicro.com/xdr/api-
 
 # Version History
 
+* 5.0.0 - Removed app name from connection
 * 4.1.0 - Added OAT list action and trigger, limit query size
 * 4.0.0 - Added API Keys related actions
 * 3.0.0 - Refactored pytmv1 usage | Added Custom Scripts and Activity related actions
