@@ -33,7 +33,7 @@ def validate_url(url: str) -> bool:
 
     # validate domain and ensure a subdomain is present
     # e.g. dev.okta-emea.com
-    domain_parts = urlparse(url).netloc.split('.')
+    domain_parts = urlparse(url).netloc.split(".")
 
     if len(domain_parts) != 3:
         return False
