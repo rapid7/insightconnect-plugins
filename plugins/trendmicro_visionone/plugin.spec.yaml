@@ -1148,13 +1148,6 @@ connection:
     default: default
     required: true
     example: 12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234
-  app_name:
-    title: App Name
-    description: Name of the App to be Integrated with
-    type: string
-    default: Rapid7-InsightConnect
-    required: true
-    example: Rapid7-InsightConnect
   verify_ssl:
     title: Verify SSL
     description: Verify if connection uses SSL
@@ -1193,6 +1186,7 @@ triggers:
         type: integer
         description: Interval (in seconds) in which the polling script should run again
         required: true
+        default: 1800
         example: 1800
     output:
       sandbox_suspicious_list_resp:
@@ -1216,6 +1210,7 @@ triggers:
         type: integer
         description: Interval (in seconds) in which the polling script should run again
         required: true
+        default: 1800
         example: 1800
     output:
       total_count:
@@ -1251,6 +1246,7 @@ triggers:
         type: integer
         description: Interval (in seconds) in which the polling script should run again
         required: true
+        default: 1800
         example: 1800
       fields:
         title: Fields

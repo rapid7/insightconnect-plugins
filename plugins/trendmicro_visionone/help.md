@@ -75,7 +75,6 @@ The connection configuration accepts the following parameters:
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|default|True|Vision One API Token|None|12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234|None|None|
 |api_url|string|https://api.xdr.trendmicro.com|True|URL of Trend Vision One|None|https://tmv1-mock.trendmicro.com|None|None|
-|app_name|string|Rapid7-InsightConnect|True|Name of the App to be Integrated with|None|Rapid7-InsightConnect|None|None|
 |verify_ssl|boolean|True|True|Verify if connection uses SSL|None|True|None|None|
 
 Example input:
@@ -84,7 +83,6 @@ Example input:
 {
   "api_key": "default",
   "api_url": "https://api.xdr.trendmicro.com",
-  "app_name": "Rapid7-InsightConnect",
   "verify_ssl": true
 }
 ```
@@ -2689,7 +2687,7 @@ This trigger is used to polls information about workbench alerts that match the 
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|interval|integer|None|True|Interval (in seconds) in which the polling script should run again|None|1800|None|None|
+|interval|integer|1800|True|Interval (in seconds) in which the polling script should run again|None|1800|None|None|
 |start_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the start of the data retrieval time range. The available oldest value is "1970-01-01T00:00:00Z"|None|2020-06-15 10:00:00+00:00|None|None|
   
 Example input:
@@ -2737,7 +2735,7 @@ criteria in a list
 |detected_start_date_time|string|None|True|The start of the event detection data retrieval time range in ISO 8601 format|None|2021-04-05 08:22:37+00:00|None|None|
 |fields|object|None|True|JSON object of OAT identifiers to query|None|{"uuid":123,"endpointName":"client1"}|None|None|
 |ingested_start_date_time|string|None|True|The beginning of the data ingestion time range in ISO 8601 format|None|2021-04-06 08:22:37+00:00|None|None|
-|interval|integer|None|True|Interval (in seconds) in which the polling script should run again|None|1800|None|None|
+|interval|integer|1800|True|Interval (in seconds) in which the polling script should run again|None|1800|None|None|
 |query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |None|None|
   
 Example input:
@@ -2783,7 +2781,7 @@ Lists are only available for objects with a high risk level
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|string|None|True|Unique alphanumeric string that identifies the analysis results of a submission|None|6345645|None|None|
-|interval|integer|None|True|Interval (in seconds) in which the polling script should run again|None|1800|None|None|
+|interval|integer|1800|True|Interval (in seconds) in which the polling script should run again|None|1800|None|None|
 |poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|None|None|
 |poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|None|None|
   

@@ -20,6 +20,6 @@ def mock_connection():
     connection.logger = logging.getLogger()
     connection.url = "https://tv1-mock-dev.trendmicro.com/"
     connection.key = "Dummy-Secret-Token"
-    connection.app = "TM-R7"
+    connection.app = "Rapid7-InsightConnect"
     connection.client = pytmv1.init(connection.app, connection.key, connection.url)
     return connection
