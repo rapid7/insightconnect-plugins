@@ -1,7 +1,7 @@
 {
-	"spec": "40fa05a162844c4a102104a71ce1d079",
-	"manifest": "b74f78602d06f0125d0338b25c7aa643",
-	"setup": "b103bf187481286495384f55b7ce114e",
+	"spec": "e03345660903bb212a81cb8522f5aa69",
+	"manifest": "b7cfbbbbea68a8b9597d8ed146306c64",
+	"setup": "9dde870591ca15687960db517bd0b41d",
 	"schemas": [
 		{
 			"identifier": "fetch_forensics/schema.py",
@@ -45,7 +45,7 @@
 		},
 		{
 			"identifier": "monitor_events/schema.py",
-			"hash": "a209946dd335677bf9a8ba403934d3c9"
+			"hash": "b871e3cb1925e5738a83b666dc74268a"
 		}
 	]
 }

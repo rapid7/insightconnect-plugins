@@ -36,6 +36,7 @@ class MonitorEventsState(insightconnect_plugin_runtime.State):
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
+
 class MonitorEventsOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
@@ -43,7 +44,7 @@ class MonitorEventsOutput(insightconnect_plugin_runtime.Output):
   "title": "Events",
   "description": "List of all events",
   "items": {
-        "type": "object"
+    "type": "object"
   },
   "required": [
     "events"
