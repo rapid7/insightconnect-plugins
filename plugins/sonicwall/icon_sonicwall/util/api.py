@@ -66,6 +66,7 @@ class SonicWallAPI:
     def add_address_object_to_group(
         self, group_type: str, group_name: str, object_type: str, object_name: str
     ) -> Dict[str, Any]:
+        # General payload data structure for SonicWall API less than 7.x.x
         data = {
             "address_group": {
                 group_type: {
@@ -74,10 +75,15 @@ class SonicWallAPI:
                 }
             }
         }
-        for payload in [data, {"address_groups": [data.get("address_group", {})]}]:
+
+        # PUT method in SonicWall API version 7.x.x it behaves as PATCH method, while PATCH behaves as PUT
+        # To handle SonicWall API version 6.x.x and 7.x.x I need to handle those two methods as the previous version API
+        # Worked fine with PUT method. Also, SonicWall API version 7.x.x has different payload structure
+        payload_map = {"PUT": data, "PATCH": {"address_groups": [data.get("address_group", {})]}}
+        for method, payload in payload_map.items():
             try:
                 return self._make_request(
-                    "PUT",
+                    method,
                     f"address-groups/{group_type}/name/{group_name}",
                     json_data=payload,
                     commit_pending_changes=True,
@@ -121,11 +127,12 @@ class SonicWallAPI:
     ) -> Dict[str, Any]:
         try:
             self.login()
-            return self._call_api(method, path, *args, **kwargs)
-        finally:
+            response = self._call_api(method, path, *args, **kwargs)
             if commit_pending_changes:
                 self._call_api("POST", "config/pending")
                 self.logger.info("Pending configuration committed.")
+            return response
+        finally:
             self.logout()
 
     def _call_api(
