@@ -88,7 +88,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     def loop(self, state: Dict[str, Any], custom_config: Dict[str, Any]):  # noqa: C901
         now = self._format_datetime_for_zoom(dt=self._get_datetime_now())
         run_state = self.determine_runstate(state=state)
-        self.logger.info(f"Current runstate is: {run_state}")
+        self.logger.info(f"Current runstate is: {run_state.value}")
 
         cutoff = custom_config.get("cutoff", {})
         cutoff_date = cutoff.get("date")
@@ -211,7 +211,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 state[self.LATEST_EVENT_TIMESTAMP] = latest_event.time
 
         state[self.LAST_REQUEST_TIMESTAMP] = now
-        state[self.PREVIOUS_RUN_STATE] = run_state
+        state[self.PREVIOUS_RUN_STATE] = run_state.value
         self.logger.info(f"Updated state, state is now: {state}")
         has_more_pages = not query_completed
         return TaskOutput(output=new_events, state=state, has_more_pages=has_more_pages, status_code=200, error=None)
@@ -236,7 +236,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return True
         return False
 
-    def get_start_time(self, lookback: dict, cutoff_date: dict, cutoff_hours: str, run_state: str) -> str:
+    def get_start_time(self, lookback: dict, cutoff_date: dict, cutoff_hours: str, run_state: RunState) -> str:
         """
         Determine the correct start time for the query to the Zoom API
         :param lookback: Lookback object from custom config containing date and time value
@@ -327,7 +327,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     def determine_runstate(self, state: Dict[str, Any]) -> RunState:
         # First run, clean state, need to calculate start and end times
         if not state.get(self.LAST_REQUEST_TIMESTAMP) and not state.get(self.NEXT_PAGE_TOKEN):
-            rs = RunState.starting
+            rs: RunState = RunState.starting
 
         # 'n' run, no need to calculate start and end times due to continuation of pagination
         elif state.get(self.NEXT_PAGE_TOKEN):
