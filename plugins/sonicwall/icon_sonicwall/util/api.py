@@ -5,10 +5,11 @@ from typing import Any, Dict, Tuple, Union
 
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
-from icon_sonicwall.util.util import Message
+from icon_sonicwall.util.util import Message, retry_login
 
 
 DEFAULT_REQUESTS_TIMEOUT = 30
+DEFAULT_MAX_LOGIN_RETRIES = 10
 
 
 class SonicWallAPI:
@@ -122,6 +123,7 @@ class SonicWallAPI:
     def invoke_cli_command(self, payload: str) -> Dict[str, Any]:
         return self._make_request("POST", "direct/cli", data=payload, content_type="text/plain")
 
+    @retry_login(max_tries=DEFAULT_MAX_LOGIN_RETRIES)
     def _make_request(
         self, method: str, path: str, *args, commit_pending_changes: bool = False, **kwargs
     ) -> Dict[str, Any]:
