@@ -21,30 +21,30 @@ This plugin utilizes the [Salesforce API](https://developer.salesforce.com/docs/
 * Consumer Key and Secret of the connected app
 
 # Supported Product Versions
-  
+
 * Salesforce API v58 2023-06-30
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|clientId|string|None|True|Consumer Key of the connected app|None|1234567890aBcdEFRoeRxDE1234567890abCDef6Etz7VLwwLQZn19jyW3U_1234567890AbcdEF4VkuMS4ze|
-|clientSecret|credential_secret_key|None|True|Consumer Secret of the connected app|None|1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF|
-|instanceUrl|string|https://login.salesforce.com|False|Salesforce URL that is used to retrieve OAuth token|None|https://login.salesforce.com|
-|salesforceAccountUsernameAndPassword|credential_username_password|None|True|Name and password of the Salesforce user|None|{"username": "user@example.com", "password": "password"}|
-|securityToken|credential_secret_key|None|True|Security token of the Salesforce user|None|Ier6YY78KxJwKtHy7HeK0oPc|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|clientId|string|None|True|Consumer Key of the connected app|None|1234567890aBcdEFRoeRxDE1234567890abCDef6Etz7VLwwLQZn19jyW3U_1234567890AbcdEF4VkuMS4ze|None|None|
+|clientSecret|credential_secret_key|None|True|Consumer Secret of the connected app|None|1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF|None|None|
+|loginURL|string|https://login.salesforce.com|False|Salesforce login URL|None|https://login.salesforce.com|None|None|
+|salesforceAccountUsernameAndPassword|credential_username_password|None|True|Name and password of the Salesforce user|None|{"username": "user@example.com", "password": "password"}|None|None|
+|securityToken|credential_secret_key|None|True|Security token of the Salesforce user|None|Ier6YY78KxJwKtHy7HeK0oPc|None|None|
+
 Example input:
 
 ```
 {
   "clientId": "1234567890aBcdEFRoeRxDE1234567890abCDef6Etz7VLwwLQZn19jyW3U_1234567890AbcdEF4VkuMS4ze",
   "clientSecret": "1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF",
-  "instanceUrl": "https://login.salesforce.com",
+  "loginURL": "https://login.salesforce.com",
   "salesforceAccountUsernameAndPassword": {
     "password": "password",
     "username": "user@example.com"
@@ -59,14 +59,14 @@ Example input:
 
 
 #### Advanced Search
-  
+
 This action is used to execute a SOQL (Salesforce Object Query Language) query
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|query|string|None|True|SOQL query|None|SELECT FIELDS(STANDARD) FROM Account WHERE Name='Example Account'|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|query|string|None|True|SOQL query|None|SELECT FIELDS(STANDARD) FROM Account WHERE Name='Example Account'|None|None|
   
 Example input:
 
@@ -98,15 +98,15 @@ Example output:
 ```
 
 #### Create Record
-  
+
 This action is used to create a new SObject record
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|objectData|object|None|True|SObject information for the newly created record|None|{"name": "example-name"}|
-|objectName|string|None|True|The name of the object (e.g. 'Account')|None|Account|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|objectData|object|None|True|SObject information for the newly created record|None|{"name": "example-name"}|None|None|
+|objectName|string|None|True|The name of the object (e.g. 'Account')|None|Account|None|None|
   
 Example input:
 
@@ -134,15 +134,15 @@ Example output:
 ```
 
 #### Delete Record
-  
+
 This action is used to delete a record
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|objectName|string|Account|True|The name of the object (e.g. 'Account')|None|Account|
-|recordId|string|None|True|The ID of an existing record|None|000AA000000aa0aAAA|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|objectName|string|Account|True|The name of the object (e.g. 'Account')|None|Account|None|None|
+|recordId|string|None|True|The ID of an existing record|None|000AA000000aa0aAAA|None|None|
   
 Example input:
 
@@ -168,16 +168,16 @@ Example output:
 ```
 
 #### Get Blob Data
-  
+
 This action is used to retrieve blob data for a given record
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|fieldName|string|body|True|Blob field name|None|body|
-|objectName|string|Attachment|True|The name of the object (e.g. 'Attachment')|None|Attachment|
-|recordId|string|None|True|The ID of an existing record|None|001Hn00001uAJRtaB3|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|fieldName|string|body|True|Blob field name|None|body|None|None|
+|objectName|string|Attachment|True|The name of the object (e.g. 'Attachment')|None|Attachment|None|None|
+|recordId|string|None|True|The ID of an existing record|None|001Hn00001uAJRtaB3|None|None|
   
 Example input:
 
@@ -204,16 +204,16 @@ Example output:
 ```
 
 #### Get Fields
-  
+
 This action is used to retrieve field values from the record of the given object
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|fields|[]string|None|True|The fields which values should be retrieved|None|["Id", "Name", "Description"]|
-|objectName|string|Account|True|The name of the object (e.g. 'Account')|None|Account|
-|recordId|string|None|True|The ID of an existing record|None|001Hn00001uAJRtaB3|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|fields|[]string|None|True|The fields which values should be retrieved|None|["Id", "Name", "Description"]|None|None|
+|objectName|string|Account|True|The name of the object (e.g. 'Account')|None|Account|None|None|
+|recordId|string|None|True|The ID of an existing record|None|001Hn00001uAJRtaB3|None|None|
   
 Example input:
 
@@ -248,16 +248,16 @@ Example output:
 ```
 
 #### Get Record
-  
+
 This action is used to retrieve a record
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|externalIdFieldName|string|None|False|The name of the external ID field that should be matched with record_id. If empty, the 'Id' field of the record is used|None|ExampleExtID__c|
-|objectName|string|Account|True|The name of the object|None|Folder|
-|recordId|string|None|True|The ID of an existing record|None|999Hn99999uM8mnBBB|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|externalIdFieldName|string|None|False|The name of the external ID field that should be matched with record_id. If empty, the 'Id' field of the record is used|None|ExampleExtID__c|None|None|
+|objectName|string|Account|True|The name of the object|None|Folder|None|None|
+|recordId|string|None|True|The ID of an existing record|None|999Hn99999uM8mnBBB|None|None|
   
 Example input:
 
@@ -301,14 +301,14 @@ Example output:
 ```
 
 #### Simple Search
-  
+
 This action is used to execute a simple search for a text
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|text|string|None|True|Text to search for|None|test|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|text|string|None|True|Text to search for|None|test|None|None|
   
 Example input:
 
@@ -364,16 +364,16 @@ Example output:
 ```
 
 #### Update Record
-  
+
 This action is used to update a record
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|objectData|object|None|True|Updated SObject information|None|{"name": "example-name"}|
-|objectName|string|Account|True|The name of the object (e.g. 'Account')|None|Account|
-|recordId|string|None|True|The ID of an existing record|None|000AA000000aa0aAAA|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|objectData|object|None|True|Updated SObject information|None|{"name": "example-name"}|None|None|
+|objectName|string|Account|True|The name of the object (e.g. 'Account')|None|Account|None|None|
+|recordId|string|None|True|The ID of an existing record|None|000AA000000aa0aAAA|None|None|
   
 Example input:
 
@@ -407,7 +407,7 @@ Example output:
 
 
 #### Monitor Users
-  
+
 This task is used to get information about users, their login history and which users have been updated
 
 ##### Input
@@ -536,14 +536,15 @@ Example output:
 
 # Version History
 
+* 2.1.8 - Task Monitor Users: Allow lookback to be 7 days and initial run to be 24 hours & raise PluginException for API errors.
 * 2.1.7 - Task Monitor Users: Update connection to accept instance URL and force new token request per execution.
 * 2.1.6 - Task Monitor Users: Implement SDK 5.4.4 for custom_config parameter.
 * 2.1.5 - Task Monitor Users: Improved logging
-* 2.1.4 - Connection: Remove unnecessary logging 
+* 2.1.4 - Connection: Remove unnecessary logging
 * 2.1.3 - Task Monitor Users: improve deduplication logic on user login history
-* 2.1.2 - Task Monitor Users: normalisation for date in state, handle backwards compatibility 
+* 2.1.2 - Task Monitor Users: normalisation for date in state, handle backwards compatibility
 * 2.1.1 - Task Monitor Users: query improvement on updated users | Add extra logs on timestamp | Add cutoff time limit for 24 hours
-* 2.1.0 - Implemented token auto-refresh on expiration for continuous sessions | Task Monitor Users: add flag `remove_duplicates` for duplicated events | Task Monitor Users: removed formatting of task output and cleaning null 
+* 2.1.0 - Implemented token auto-refresh on expiration for continuous sessions | Task Monitor Users: add flag `remove_duplicates` for duplicated events | Task Monitor Users: removed formatting of task output and cleaning null
 * 2.0.2 - Task Monitor Users: query improvement | Handle exception related with grant type
 * 2.0.1 - Add extra logs register
 * 2.0.0 - Code refactor | Update plugin to be cloud enabled | Add new task Monitor Users
@@ -559,4 +560,3 @@ Example output:
 * [Salesforce API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/intro_what_is_rest_api.htm)
 * [Connecting your app to the API](https://developer.salesforce.com/docs/atlas.en-us.216.0.api_rest.meta/api_rest/quickstart.htm)
 * [SOQL](https://developer.salesforce.com/docs/atlas.en-us.216.0.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm)
-

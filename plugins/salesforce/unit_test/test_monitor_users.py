@@ -150,8 +150,32 @@ class TestMonitorUsers(TestCase):
             "next_user_collection_timestamp": "2023-07-21 16:21:15.340262+00:00",  # next expected now + 24 hours
             "last_user_update_collection_timestamp": "2023-07-20 16:21:15.340262+00:00",  # just executed 'now'
             "next_user_login_collection_timestamp": "2023-07-20 17:21:15.340262+00:00",  # next expected: now + 1 hour
+            "users_next_page_id": "/01gRO0000087654321-500",
         }
 
         self.assertDictEqual(expected_state, new_state)
+
+        mock_unset.assert_called()
+
+    def test_default_cut_off_values_of_7_days(self, mock_unset, mocked_logger, _mock_request, _mock_get_time):
+        user_login_time = "2023-06-21 16:21:15.340262+00:00"  # exceeds 7 day lookback value
+        user_update_time = "2023-06-20 16:21:15.340262+00:00"  # exceeds 7 day lookback value
+        cutoff = "2023-07-13 16:21:15.340262+00:00"  # this is the cut off value now - 7 days
+
+        customers_paused_state = {
+            "last_user_login_collection_timestamp": user_login_time,  # last time customer ran this
+            "next_user_collection_timestamp": "2023-06-21 16:21:15.340262+00:00",  # saved next expected
+            "last_user_update_collection_timestamp": user_update_time,  # last time customer ran this
+            "next_user_login_collection_timestamp": "2023-06-20 17:21:15.340262+00:00",  # saved next expected
+        }
+
+        _logs, _new_state, _more_pages, _status_code, _error = self.action.run({}, customers_paused_state, {})
+
+        # check logger says the timestamps were moved forward for last_user login and user update endpoint
+        cutoff_msg = "State stored timestamp is: {}, returning {} to keep within our fallback period."
+        user_login_cutoff = cutoff_msg.format(user_login_time, cutoff)
+        user_update_cutoff = cutoff_msg.format(user_update_time, cutoff)
+        self.assertEqual(user_update_cutoff, mocked_logger.call_args_list[2][0][0])
+        self.assertEqual(user_login_cutoff, mocked_logger.call_args_list[3][0][0])
 
         mock_unset.assert_called()

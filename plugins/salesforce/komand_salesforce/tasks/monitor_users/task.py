@@ -7,7 +7,8 @@ from datetime import datetime, timedelta, timezone
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_salesforce.util.exceptions import ApiException
 
-DEFAULT_CUTOFF_HOURS = 24
+DEFAULT_CUTOFF_HOURS = 24 * 7
+INITIAL_LOOKBACK = 24
 
 
 class MonitorUsers(insightconnect_plugin_runtime.Task):
@@ -259,8 +260,8 @@ class MonitorUsers(insightconnect_plugin_runtime.Task):
             start_time = datetime(**lookback_time, tzinfo=timezone.utc)
             additional_msg = f", along with custom lookback of {start_time}"
         else:
-            start_time = now - timedelta(hours=cut_off_hours)
-            additional_msg = f", along with lookback time of {cut_off_hours} hours ({start_time})"
+            start_time = now - timedelta(hours=INITIAL_LOOKBACK)
+            additional_msg = f", along with lookback time of {INITIAL_LOOKBACK} hours ({start_time})"
 
         if not state:  # we only care about lookback time if there's no state.
             log_msg += additional_msg
