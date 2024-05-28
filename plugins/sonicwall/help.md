@@ -351,10 +351,11 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 1.3.6 - `Add Address Object to Group`: Fixed issue where previous address objects were removed from the group in newer versions of SonicWall
 * 1.3.5 - `Add Address Object to Group`: Fixed issue with payload syntax
 * 1.3.4 - Updated SDK to the latest version | Updated objects checking
 * 1.3.3 - Updated SDK to the latest version | Extended actions logging
