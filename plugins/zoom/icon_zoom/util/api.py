@@ -96,6 +96,7 @@ class ZoomAPI:
         Gets user activity events, paginated externally.
         Warning: Changing start date/end date/page size mid-pagination will result in the current next_page_token
         becoming invalidated!
+        Info: This endpoint accepts to and from params that don't consider hours, minutes, and seconds
         :param start_date: Optional, time to start from
         :param end_date: Optional, time to end at
         :param page_size: Optional, amount of pages to consume. Zoom API is capped at 300 results
