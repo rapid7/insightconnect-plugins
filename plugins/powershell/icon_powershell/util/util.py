@@ -1,10 +1,8 @@
 import winrm
 import base64
 import subprocess  # noqa: B404
-
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
-from icon_powershell.actions.powershell_string.schema import Input
 
 DECODING_TYPE = "utf-8"
 
@@ -247,8 +245,8 @@ def configure_machine_for_kerberos_connection(
     subprocess.call("mkdir -p /var/lib/samba/private", shell="true")  # noqa: B607,B602
     subprocess.call("systemctl enable sssd", shell="true")  # noqa: B607,B602
     # Setup realm to join the domain
-    with open("/etc/krb5.conf", "w", encoding="utf-8") as f:
-        f.write(krb_config)
+    with open("/etc/krb5.conf", "w", encoding="utf-8") as file:
+        file.write(krb_config)
 
     # Creates a Kerberos ticket
     kinit = f"""echo '{password}' | kinit {username}@{domain.upper()}"""
