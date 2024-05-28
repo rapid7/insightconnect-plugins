@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Fetches the groups of which the user is a member"
+    DESCRIPTION = "Fetch the groups of which the user is a member"
 
 
 class Input:
