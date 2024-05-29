@@ -115,7 +115,10 @@ class TestAddAddressObjectToGroup(TestCase):
             ),
         ]
     )
-    def test_add_address_object_to_group_exception(self, mock_request: Callable, cause: str, assistance: str) -> None:
+    @patch("time.sleep")
+    def test_add_address_object_to_group_exception(
+        self, mock_request: Callable, cause: str, assistance: str, mock_time: MagicMock
+    ) -> None:
         mocked_request(mock_request, "request")
         with self.assertRaises(PluginException) as context:
             self.action.run(STUB_PAYLOAD)

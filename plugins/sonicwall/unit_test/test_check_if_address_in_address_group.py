@@ -82,8 +82,9 @@ class TestCheckIfAddressInAddressGroup(TestCase):
             ),
         ]
     )
+    @patch("time.sleep")
     def test_check_if_address_in_address_group_exception(
-        self, mock_request: Callable, cause: str, assistance: str
+        self, mock_request: Callable, cause: str, assistance: str, mock_time: MagicMock
     ) -> None:
         mocked_request(mock_request, "request")
         with self.assertRaises(PluginException) as context:
