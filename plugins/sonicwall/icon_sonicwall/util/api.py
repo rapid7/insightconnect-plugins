@@ -1,4 +1,5 @@
 import json
+import time
 from collections import OrderedDict
 from logging import Logger
 from typing import Any, Dict, Tuple, Union
@@ -9,6 +10,7 @@ from icon_sonicwall.util.util import Message
 
 
 DEFAULT_REQUESTS_TIMEOUT = 30
+DEFAULT_MAX_LOGIN_RETRIES = 15
 
 
 class SonicWallAPI:
@@ -66,6 +68,7 @@ class SonicWallAPI:
     def add_address_object_to_group(
         self, group_type: str, group_name: str, object_type: str, object_name: str
     ) -> Dict[str, Any]:
+        # General payload data structure for SonicWall API less than 7.x.x
         data = {
             "address_group": {
                 group_type: {
@@ -74,10 +77,15 @@ class SonicWallAPI:
                 }
             }
         }
-        for payload in [data, {"address_groups": [data.get("address_group", {})]}]:
+
+        # PUT method in SonicWall API version 7.x.x it behaves as PATCH method, while PATCH behaves as PUT
+        # To handle SonicWall API version 6.x.x and 7.x.x I need to handle those two methods as the previous version API
+        # Worked fine with PUT method. Also, SonicWall API version 7.x.x has different payload structure
+        payload_map = {"PUT": data, "PATCH": {"address_groups": [data.get("address_group", {})]}}
+        for method, payload in payload_map.items():
             try:
                 return self._make_request(
-                    "PUT",
+                    method,
                     f"address-groups/{group_type}/name/{group_name}",
                     json_data=payload,
                     commit_pending_changes=True,
@@ -117,16 +125,62 @@ class SonicWallAPI:
         return self._make_request("POST", "direct/cli", data=payload, content_type="text/plain")
 
     def _make_request(
-        self, method: str, path: str, *args, commit_pending_changes: bool = False, **kwargs
+        self,
+        method: str,
+        path: str,
+        *args,
+        commit_pending_changes: bool = False,
+        max_tries: int = DEFAULT_MAX_LOGIN_RETRIES,
+        **kwargs,
     ) -> Dict[str, Any]:
-        try:
-            self.login()
-            return self._call_api(method, path, *args, **kwargs)
-        finally:
-            if commit_pending_changes:
-                self._call_api("POST", "config/pending")
-                self.logger.info("Pending configuration committed.")
-            self.logout()
+        """
+        Constructs and sends an HTTP request to the specified URL path using the given HTTP method. It contains retry
+        mechanism as when user logs in using SonicWall API it logs out other sessions for the same account. To allows
+        using a couple actions in parallel the retry mechanism has been added.
+
+        :param method: The HTTP method to use for the request (e.g., "GET", "POST").
+        :type: str
+
+        :param path: The URL path to which the request should be sent.
+        :type: str
+
+        :param args: Additional positional arguments passed to the requests.request.
+        :type: tuple
+
+        :param commit_pending_changes: Flag indicating whether to commit any pending changes or not. Defaults to ``False``.
+        :type: bool
+
+        :param max_tries: The maximum number of tries to attempt the request in case of failure. Defaults to `DEFAULT_MAX_LOGIN_RETRIES`.
+        :type: int
+
+        :param kwargs: Additional keyword arguments passed to the requests.request.
+        :type: dict
+
+        :return: A dictionary containing the response data from the server.
+        :rtype: Dict[str, Any]
+
+        :raises Exception: If the request fails after the maximum number of tries.
+        """
+
+        retry, attempts_counter, error_ = True, 0, None
+        while retry and attempts_counter < max_tries:
+            try:
+                retry = False
+                self.login()
+                response = self._call_api(method, path, *args, **kwargs)
+                if commit_pending_changes:
+                    self._call_api("POST", "config/pending")
+                    self.logger.info("Pending configuration committed.")
+                self.logout()
+                return response
+            except PluginException as error:
+                if error.preset != PluginException.Preset.USERNAME_PASSWORD and "E_LOST_CONN" not in error.data:
+                    raise
+                attempts_counter += 1
+                retry, error_ = True, error
+                self.logger.info(f"Retrying to login... ({attempts_counter}/{max_tries})")
+                time.sleep(1)
+        raise error_
 
     def _call_api(
         self,
