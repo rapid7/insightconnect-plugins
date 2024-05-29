@@ -118,7 +118,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
         self.logger.info(
             f"Getting events for timeframe {param_request_start_date} to {param_request_end_date}. "
-            f"Currently paginating: {'true' if run_state == RunState.paginating else 'false'}"
+            f"Currently paginating: {run_state == RunState.paginating}"
         )
 
         try:
