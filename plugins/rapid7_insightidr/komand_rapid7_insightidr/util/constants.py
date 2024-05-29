@@ -9,3 +9,6 @@ THREE_MONTHS_SECONDS = 7776000
 
 # Constants for resource_helper.py
 DEFAULT_ERROR_MESSAGE = "Unknown error occurred. Please contact support or try again later."
+
+# Constants for Get New Alerts trigger.py
+TOTAL_SIZE = 100
