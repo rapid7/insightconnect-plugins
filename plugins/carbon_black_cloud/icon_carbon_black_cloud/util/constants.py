@@ -24,8 +24,7 @@ ERROR_HANDLING = {
         "assistance": "Please verify that your Secret Key and API ID values in the plugin connection are correct.",
     },
     403: {
-        "cause": "The specified object cannot be accessed or changed.",
-        "assistance": "If it has a Custom access level, check it has been assigned the correct RBAC permissions. "
+        "cause": "The specified object cannot be accessed or changed. If it has a Custom access level, check it has been assigned the correct RBAC permissions. "
         "If it is an API, SIEM or LIVE_RESPONSE type key, verify it is the right key type for the "
         "API in use.",
     },
