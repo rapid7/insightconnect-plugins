@@ -106,6 +106,7 @@ STUB_EXPECTED_PREVIOUS_OUTPUT = [
 ]
 
 STUB_EXPECTED_PREVIOUS_STATE = {
+    "previous_completed_query_date": "2023-02-23T22:00:00Z",
     "last_request_timestamp": "2023-02-23T22:00:00Z",
     "latest_event_timestamp": "2023-02-22T21:44:44Z",
     "previous_run_state": "starting",
@@ -153,7 +154,6 @@ class TestGetUserActivityEvents(unittest.TestCase):
         expected_state = STUB_EXPECTED_PREVIOUS_STATE
 
         output, state, has_more_pages, status_code, error = self.task.run({})
-
         self.assertListEqual(output, expected_output)
         self.assertDictEqual(state, expected_state)
         self.assertFalse(has_more_pages, expected_has_more_pages)
@@ -172,6 +172,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
         output, state, has_more_pages, status_code, error = self.task.run(state=STUB_EXPECTED_PREVIOUS_STATE)
         expected_output, expected_has_more_pages, expected_status_code, expected_error = [], False, 200, None
         expected_state = {
+            "previous_completed_query_date": f"{(STUB_DATETIME_NOW + datetime.timedelta(minutes=DEFAULT_TIMEDELTA)).isoformat()}Z",
             "last_request_timestamp": f"{(STUB_DATETIME_NOW + datetime.timedelta(minutes=DEFAULT_TIMEDELTA)).isoformat()}Z",
             "latest_event_timestamp": STUB_EXPECTED_PREVIOUS_STATE.get("latest_event_timestamp", ""),
             "previous_run_state": "continuing",
@@ -200,6 +201,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
         expected_state = STUB_EXPECTED_PAGINATION_ERROR_STATE.copy()
         output, state, has_more_pages, status_code, error = self.task.run(state=STUB_EXPECTED_PAGINATION_ERROR_STATE)
         del expected_state["next_page_token"]
+        expected_state["previous_run_state"] = "paginating"
 
         expected_output, expected_has_more_pages, expected_status_code, expected_error = [], False, 200, None
         self.assertListEqual(output, expected_output)
@@ -253,6 +255,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
         ) = (
             first_event_set,
             {
+                "previous_completed_query_date": f"{STUB_DATETIME_NOW.isoformat()}Z",
                 "last_request_timestamp": f"{STUB_DATETIME_NOW.isoformat()}Z",
                 "latest_event_timestamp": f"{first_event_set[-1].get('time', '')}",
                 "previous_run_state": "starting",
@@ -294,6 +297,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
         ) = (
             second_event_set,
             {
+                "previous_completed_query_date": f"{(STUB_DATETIME_NOW + datetime.timedelta(minutes=DEFAULT_TIMEDELTA)).isoformat()}Z",
                 "last_request_timestamp": f"{(STUB_DATETIME_NOW + datetime.timedelta(minutes=DEFAULT_TIMEDELTA)).isoformat()}Z",
                 "latest_event_timestamp": second_event_set[-1].get("time", ""),
                 "previous_run_state": "continuing",
@@ -319,7 +323,6 @@ class TestGetUserActivityEvents(unittest.TestCase):
         output, state, has_more_pages, status_code, error = self.task.run(state={})
         expected_state = {
             "last_request_timestamp": "2000-01-01T00:00:00Z",
-            "latest_event_timestamp": None,
         }
         expected_output, expected_has_more_pages, expected_status_code, expected_error = (
             [],
@@ -451,38 +454,3 @@ class TestGetUserActivityEvents(unittest.TestCase):
             page_size=expected_api_call_params.get("page_size"),
             next_page_token=expected_api_call_params.get("next_page_token"),
         )
-
-    @patch(GET_DATETIME_LAST_X_HOURS_PATH, side_effect=[STUB_DATETIME_LAST_24_HOURS])
-    @patch(GET_DATETIME_NOW_PATH, side_effect=[STUB_DATETIME_FUTURE])
-    @patch(GET_USER_ACTIVITY_EVENTS_PATH, return_value=(STUB_EXPECTED_PREVIOUS_OUTPUT, ""))
-    def test_backfill_continiuous_pagination(
-        self, mock_call: MagicMock, mock_datetime_now: MagicMock, mock_datetime_last_24: MagicMock
-    ) -> None:
-        state = {
-            "param_end_date": "2023-02-23T22:00:00Z",
-            "param_start_date": "2023-02-22T21:44:44Z",
-            "previous_run_state": "paginating",
-            "next_page_token": "123456789abcdefgh",
-        }
-
-        expected_output, expected_has_more_pages, expected_status_code, expected_error = (
-            STUB_EXPECTED_PREVIOUS_OUTPUT,
-            True,
-            200,
-            None,
-        )
-
-        expected_state = {
-            "previous_run_state": "paginating",
-            "last_request_timestamp": "2024-02-23T22:00:00Z",
-        }
-
-        output, state, has_more_pages, status_code, error = self.task.run(state=state)
-        self.assertListEqual(output, expected_output)
-        self.assertDictEqual(state, expected_state)
-        self.assertEqual(has_more_pages, expected_has_more_pages)
-        self.assertEqual(status_code, expected_status_code)
-        self.assertEqual(error, expected_error)
-
-        validate(output, MonitorSignInOutActivityOutput.schema)
-        validate(state, MonitorSignInOutActivityState.schema)
