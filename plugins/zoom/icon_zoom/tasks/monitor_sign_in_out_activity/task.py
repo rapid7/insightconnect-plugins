@@ -24,6 +24,8 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     # State constants
     LAST_REQUEST_TIMESTAMP = "last_request_timestamp"
     LATEST_EVENT_TIMESTAMP = "latest_event_timestamp"
+    # Latch is used to identify the latest timestamp between pages
+    # Once pagination is complete, the latest_event_timestamp may become the latest_event_timestamp_latch
     LATEST_EVENT_TIMESTAMP_LATCH = "latest_event_timestamp_latch"
     STATUS_CODE = "status_code"
     PREVIOUS_RUN_STATE = "previous_run_state"
@@ -32,6 +34,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     NEXT_PAGE_TOKEN = "next_page_token"  # nosec
     PARAM_START_DATE = "param_start_date"
     PARAM_END_DATE = "param_end_date"
+
     # Constants for time formatting and event date logic
     ZOOM_TIME_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
     ZERO_DATE = "0001-01-01T00:00:00Z"
@@ -159,11 +162,13 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         # Dedupe if the date range has been previously queried to completion as no new events earlier than the latest
         # event timestamp will be added on subsequent requests
         if range_previously_queried:
+            dedupe_timestamp = state.get(self.LATEST_EVENT_TIMESTAMP)
             self.logger.info("Event set requires de-duping")
+            self.logger.info(f"Event timestamp being used to de-dupe: {dedupe_timestamp}")
             # De-dupe events using boundary event hashes from previous run
             deduped_events = self._dedupe_events(
                 all_events=new_events,
-                latest_event_timestamp=state.get(self.LATEST_EVENT_TIMESTAMP),
+                latest_event_timestamp=dedupe_timestamp,
             )
             self.logger.info(f"After de-duping, total event count is {len(deduped_events)}")
             new_events = deduped_events
