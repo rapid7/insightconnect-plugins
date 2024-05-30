@@ -27,6 +27,10 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "order": 1
     }
   },
+  "required": [
+    "secret",
+    "servicePrincipal"
+  ],
   "definitions": {
     "credential_secret_key": {
       "id": "credential_secret_key",
