@@ -31,9 +31,9 @@ class SearchIPAddresses(insightconnect_plugin_runtime.Action):
                     .get("results")
                 )
             }
-        except AttributeError as e:
+        except AttributeError as error:
             raise PluginException(
                 cause="Recorded Future returned unexpected response.",
                 assistance="Please check that the provided inputs are correct and try again.",
-                data=e,
+                data=error,
             )

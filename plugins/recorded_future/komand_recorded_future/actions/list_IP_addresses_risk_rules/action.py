@@ -16,11 +16,12 @@ class ListIPAddressesRiskRules(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # pylint: disable=unused-argument
         try:
             return {
                 Output.RISK_RULES: self.connection.client.make_request(Endpoint.list_ip_risk_rules())
                 .get("data", {})
                 .get("results")
             }
-        except AttributeError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+        except AttributeError as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)

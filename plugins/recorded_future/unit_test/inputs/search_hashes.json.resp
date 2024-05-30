@@ -1,0 +1,9 @@
+{
+  "limit": 10,
+  "from": 0,
+  "orderby": "Riskscore",
+  "direction": "asc",
+  "algorithm": "SHA-1",
+  "riskRule": "Positive Malware Verdict",
+  "riskScore": 1
+}
