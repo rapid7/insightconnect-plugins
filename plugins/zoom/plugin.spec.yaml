@@ -12,7 +12,7 @@ requirements:
   - "API credentials for OAuth 2.0:
       \n\t* Requires account ID as well as client ID and secret from a Server-to-Server OAuth app in the Zoom Marketplace.
       \n\t* Server-to-Server OAuth app has the `report:read:admin` scope enabled."
-version: 4.1.10
+version: 4.1.11
 connection_version: 4
 vendor: rapid7
 support: rapid7
@@ -35,6 +35,7 @@ resources:
 enable_cache: false
 
 version_history:
+  - "4.1.11 -  Update Task `monitor_sign_in_out_activity` to reduce instances of duplicate results"
   - "4.1.10 -  Update Task `monitor_sign_in_out_activity` handle invalid or expired pagination token errors"
   - "4.1.9 - Updated to include latest SDK functionality v5.4.8 | Task `monitor_sign_in_out_activity` updated to increase max lookback cutoff to 7 days"
   - "4.1.8 - Updated to include latest SDK functionality v5.4.5 | Adding logic to `monitor_sign_in_out_activity` task to keep paginating until endtime catches up to now"
