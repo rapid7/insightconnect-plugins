@@ -6,3 +6,5 @@ requests-kerberos==0.14.0
 requests-credssp==2.0.0
 parameterized==0.8.1
 requests==2.32.0
+cryptography==42.0.6
+idna==3.7
