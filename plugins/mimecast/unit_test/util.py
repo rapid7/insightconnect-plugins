@@ -15,6 +15,7 @@ from komand_mimecast.util.constants import DATA_FIELD, DEFAULT_REGION
 DATE_TIME_NOW = datetime.now().strftime("%Y-%m-%dT%H:%M:%S%z")
 FILE_ZIP_CONTENT_1 = {"acc": "ABC123", "datetime": DATE_TIME_NOW}
 FILE_ZIP_CONTENT_2 = {"acc": "ABC1234", "datetime": DATE_TIME_NOW}
+FILE_ZIP_CONTENT_3 = {"acc": "ABC12345"}
 SIEM_LOGS_HEADERS_RESPONSE = {"mc-siem-token": "token123"}
 
 
@@ -53,6 +54,7 @@ class Util:
         file_contents = [
             {"type": "MTA", "data": [FILE_ZIP_CONTENT_1]},
             {"type": "MTA", "data": [FILE_ZIP_CONTENT_2]},
+            {"type": "MTA", "data": [FILE_ZIP_CONTENT_3]},
         ]
         zip_file = BytesIO()
         with ZipFile(zip_file, "w") as myzip:
