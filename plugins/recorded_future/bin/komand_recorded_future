@@ -11,85 +11,86 @@ Description = "Recorded Future arms threat analysts, security operators, and inc
 
 
 def main():
-  if 'http' in argv:
-    if os.environ.get("GUNICORN_CONFIG_FILE"):
-      with open(os.environ.get("GUNICORN_CONFIG_FILE")) as gf:
-        gunicorn_cfg = json.load(gf)
-        if gunicorn_cfg.get("worker_class", "sync") == "gevent":
-          from gevent import monkey
-          monkey.patch_all()
-    elif 'gevent' in argv:
-      from gevent import monkey
-      monkey.patch_all()
+    if 'http' in argv:
+        if os.environ.get("GUNICORN_CONFIG_FILE"):
+            with open(os.environ.get("GUNICORN_CONFIG_FILE")) as gf:
+                gunicorn_cfg = json.load(gf)
+                if gunicorn_cfg.get("worker_class", "sync") == "gevent":
+                    from gevent import monkey
+                    monkey.patch_all()
+        elif 'gevent' in argv:
+            from gevent import monkey
+            monkey.patch_all()
 
-  import insightconnect_plugin_runtime
-  from komand_recorded_future import connection, actions, triggers, tasks
+    import insightconnect_plugin_runtime
+    from komand_recorded_future import connection, actions, triggers, tasks
 
-  class ICONRecordedFuture(insightconnect_plugin_runtime.Plugin):
-    def __init__(self):
-      super(self.__class__, self).__init__(
-        name=Name,
-        vendor=Vendor,
-        version=Version,
-        description=Description,
-        connection=connection.Connection()
-      )
-      self.add_trigger(triggers.GetNewAlerts())
+    class ICONRecordedFuture(insightconnect_plugin_runtime.Plugin):
+        def __init__(self):
+            super(self.__class__, self).__init__(
+                name=Name,
+                vendor=Vendor,
+                version=Version,
+                description=Description,
+                connection=connection.Connection()
+            )
+            self.add_trigger(triggers.GetNewAlerts())
 
-      self.add_action(actions.DownloadDomainRiskList())
+            self.add_action(actions.DownloadDomainRiskList())
 
-      self.add_action(actions.ListDomainRiskRules())
+            self.add_action(actions.ListDomainRiskRules())
 
-      self.add_action(actions.SearchDomains())
+            self.add_action(actions.SearchDomains())
 
-      self.add_action(actions.LookupDomain())
+            self.add_action(actions.LookupDomain())
 
-      self.add_action(actions.SearchEntityLists())
+            self.add_action(actions.SearchEntityLists())
 
-      self.add_action(actions.LookupEntityList())
+            self.add_action(actions.LookupEntityList())
 
-      self.add_action(actions.DownloadHashRiskList())
+            self.add_action(actions.DownloadHashRiskList())
 
-      self.add_action(actions.ListHashRiskRules())
+            self.add_action(actions.ListHashRiskRules())
 
-      self.add_action(actions.SearchHashes())
+            self.add_action(actions.SearchHashes())
 
-      self.add_action(actions.LookupHash())
+            self.add_action(actions.LookupHash())
 
-      self.add_action(actions.DownloadIPAddressesRiskList())
+            self.add_action(actions.DownloadIPAddressesRiskList())
 
-      self.add_action(actions.ListIPAddressesRiskRules())
+            self.add_action(actions.ListIPAddressesRiskRules())
 
-      self.add_action(actions.SearchIPAddresses())
+            self.add_action(actions.SearchIPAddresses())
 
-      self.add_action(actions.LookupIPAddress())
+            self.add_action(actions.LookupIPAddress())
 
-      self.add_action(actions.SearchMalware())
+            self.add_action(actions.SearchMalware())
 
-      self.add_action(actions.LookupMalware())
+            self.add_action(actions.LookupMalware())
 
-      self.add_action(actions.DownloadVulnerabilityRiskList())
+            self.add_action(actions.DownloadVulnerabilityRiskList())
 
-      self.add_action(actions.ListVulnerabilityRiskRules())
+            self.add_action(actions.ListVulnerabilityRiskRules())
 
-      self.add_action(actions.SearchVulnerabilities())
+            self.add_action(actions.SearchVulnerabilities())
 
-      self.add_action(actions.LookupVulnerability())
+            self.add_action(actions.LookupVulnerability())
 
-      self.add_action(actions.LookupUrl())
+            self.add_action(actions.LookupUrl())
 
-      self.add_action(actions.LookupAlert())
+            self.add_action(actions.LookupAlert())
 
-      self.add_action(actions.ListUrlRiskRules())
+            self.add_action(actions.ListUrlRiskRules())
 
-      self.add_action(actions.SearchUrls())
+            self.add_action(actions.SearchUrls())
 
-      self.add_action(actions.DownloadUrlRiskList())
+            self.add_action(actions.DownloadUrlRiskList())
 
-  """Run plugin"""
-  cli = insightconnect_plugin_runtime.CLI(ICONRecordedFuture())
-  cli.run()
+
+    """Run plugin"""
+    cli = insightconnect_plugin_runtime.CLI(ICONRecordedFuture())
+    cli.run()
 
 
 if __name__ == "__main__":
-  main()
+    main()
