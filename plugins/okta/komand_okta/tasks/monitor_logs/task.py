@@ -28,6 +28,21 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
     def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument
         self.connection.api_client.toggle_rate_limiting = False
+
+        if not self.connection.api_client.valid_url:
+            # return a 401 status_code so the integration goes into an error state and doesn't continually retry
+            return (
+                [],
+                state,
+                False,
+                401,
+                PluginException(
+                    cause="Invalid domain entered for input 'Okta Domain'.",
+                    assistance="Please include a valid subdomain, e.g. 'example.okta.com', if using 'okta.com'.",
+                    data=f"Provided Okta Domain: {self.connection.api_client.base_url}",
+                ),
+            )
+
         has_more_pages = False
         parameters = {}
         try:

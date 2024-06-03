@@ -19,15 +19,18 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         valid_url = validate_url(base_url)
 
-        if not valid_url:
-            raise PluginException(
-                cause="Invalid domain entered for input 'Okta Domain'.",
-                assistance="Please include a valid subdomain, e.g. 'example.okta.com', if using 'okta.com'.",
-                data=f"Provided Okta Domain: {okta_url}",
-            )
-        self.api_client = OktaAPI(params.get(Input.OKTAKEY, {}).get("secretKey"), base_url, logger=self.logger)
+        self.api_client = OktaAPI(
+            params.get(Input.OKTAKEY, {}).get("secretKey"), base_url, logger=self.logger, valid_url=valid_url
+        )
 
     def test(self):
+        if not self.api_client.valid_url:
+            raise ConnectionTestException(
+                cause="Invalid domain entered for input 'Okta Domain'.",
+                assistance="Please include a valid subdomain, e.g. 'example.okta.com', if using 'okta.com'.",
+                data=f"Provided Okta Domain: {self.api_client.base_url}",
+            )
+
         try:
             self.api_client.list_groups()
             return {"success": True}

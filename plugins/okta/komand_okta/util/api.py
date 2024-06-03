@@ -60,11 +60,12 @@ def rate_limiting(max_tries: int):
 
 
 class OktaAPI:
-    def __init__(self, okta_key: str, okta_url: str, logger: Logger):
+    def __init__(self, okta_key: str, okta_url: str, logger: Logger, valid_url: bool):
         self.logger = logger
         self._okta_key = okta_key
         self.base_url = okta_url
         self.toggle_rate_limiting = True
+        self.valid_url = valid_url
 
     def get_headers(self) -> dict:
         return {
