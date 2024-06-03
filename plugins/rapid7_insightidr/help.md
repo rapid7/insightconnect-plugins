@@ -3214,6 +3214,7 @@ Example output:
 
 # Version History
 
+* 10.1.1 - Updated query schemas to allow message to be an object or string | Updated SDK
 * 10.1.0 - New Trigger Added: `Get New Alerts`
 * 10.0.0 - Actions: `List Investigations` Sort options updated | `Get Investigation`, `List Investigations`, `Create Investigation`, `Update Investigation` `Set Priority of Investigation`, `Set Disposition of Investigation`, `Set Status of Investigation Action`, `Assign User to Investigation`, `Seach Investigations`, `Get a Log`, `Get All Logs`, `Search Alerts` output now includes additional fields
 * 9.0.0 - Actions: `Advanced Query On Log` - Now allows for either log id or log name to be used
