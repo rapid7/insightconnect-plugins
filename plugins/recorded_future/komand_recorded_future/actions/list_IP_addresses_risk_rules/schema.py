@@ -13,15 +13,9 @@ class Input:
 
 class Output:
     RISK_RULES = "risk_rules"
-<<<<<<< HEAD:plugins/recorded_future/komand_recorded_future/actions/list_IP_addresses_risk_rules/schema.py
 
 
 class ListIPAddressesRiskRulesInput(insightconnect_plugin_runtime.Input):
-=======
-
-
-class ListIpAddressesRiskRulesInput(insightconnect_plugin_runtime.Input):
->>>>>>> 917ae98c0 (Recorded Future - 366, 352 - Fixed schemas | Updated the SDK | Refreshed with latest plugin tooling (#2191)):plugins/recorded_future/komand_recorded_future/actions/list_ip_addresses_risk_rules/schema.py
     schema = json.loads(r"""
    {}
     """)
@@ -30,11 +24,7 @@ class ListIpAddressesRiskRulesInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-<<<<<<< HEAD:plugins/recorded_future/komand_recorded_future/actions/list_IP_addresses_risk_rules/schema.py
 class ListIPAddressesRiskRulesOutput(insightconnect_plugin_runtime.Output):
-=======
-class ListIpAddressesRiskRulesOutput(insightconnect_plugin_runtime.Output):
->>>>>>> 917ae98c0 (Recorded Future - 366, 352 - Fixed schemas | Updated the SDK | Refreshed with latest plugin tooling (#2191)):plugins/recorded_future/komand_recorded_future/actions/list_ip_addresses_risk_rules/schema.py
     schema = json.loads(r"""
    {
   "type": "object",
