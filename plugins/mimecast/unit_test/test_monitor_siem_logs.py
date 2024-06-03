@@ -1,6 +1,7 @@
 import datetime
 import os
 import sys
+import logging
 from jsonschema import validate
 from unittest import TestCase, skip
 from unittest.mock import patch
@@ -11,7 +12,7 @@ from komand_mimecast.util.event import EventLogs
 from komand_mimecast.util.exceptions import ApiClientException
 from komand_mimecast.tasks import MonitorSiemLogs
 from komand_mimecast.tasks.monitor_siem_logs.schema import MonitorSiemLogsOutput
-from util import Util, FILE_ZIP_CONTENT_1, FILE_ZIP_CONTENT_2, SIEM_LOGS_HEADERS_RESPONSE
+from util import Util, FILE_ZIP_CONTENT_1, FILE_ZIP_CONTENT_2, FILE_ZIP_CONTENT_3, SIEM_LOGS_HEADERS_RESPONSE
 
 
 @patch("requests.request", side_effect=Util.mocked_request)
@@ -19,8 +20,9 @@ class TestMonitorSiemLogs(TestCase):
     def setUp(self) -> None:
         self.task = Util.default_connector(MonitorSiemLogs())
 
-    def test_monitor_siem_logs_success(self, _mock_data):
-        content = [FILE_ZIP_CONTENT_1, FILE_ZIP_CONTENT_2]
+    @patch("logging.Logger.warning")
+    def test_monitor_siem_logs_success(self, mock_logger, _mock_data):
+        content = [FILE_ZIP_CONTENT_1, FILE_ZIP_CONTENT_2, FILE_ZIP_CONTENT_3]
         token = SIEM_LOGS_HEADERS_RESPONSE.get("mc-siem-token")
         tests = [
             {"next_token": "happy_token", "resp": content, "has_more_pages": True, "token": token},
@@ -39,6 +41,12 @@ class TestMonitorSiemLogs(TestCase):
                     self.assertEqual(new_state, {"next_token": token, "normal_running_cutoff": True})
                 else:
                     self.assertEqual(new_state, {"next_token": token})
+                if test.get("next_token") == "happy_token":
+                    mock_logger.assert_called()
+                    self.assertIn(
+                        "There was no datetime key for the following event: {'acc': 'ABC12345'}",
+                        mock_logger.call_args[0][0],
+                    )
                 validate(response, MonitorSiemLogsOutput.schema)
 
     def test_monitor_siem_logs_raises_401(self, _mock_data):
@@ -62,7 +70,7 @@ class TestMonitorSiemLogs(TestCase):
         self.assertEqual(new_state, test_state)  # we shouldn't change the state if we encounter an error
         mock_logger.assert_called()
         self.assertIn(
-            "There is no item named 'filename-1-from-mimecast.json' in the archive", mock_logger.call_args[0][2]
+            "There is no item named 'filename-2-from-mimecast.json' in the archive", mock_logger.call_args[0][2]
         )
 
     @patch("logging.Logger.error")
@@ -91,7 +99,7 @@ class TestMonitorSiemLogs(TestCase):
     @patch("logging.Logger.info")
     @patch("insightconnect_plugin_runtime.helper.get_time_now", return_value=datetime.datetime(2024, 5, 13, 0, 0, 0))
     def test_monitor_siem_logs_get_filter_time(self, mock_time, mock_logger, _mock_data):
-        content = [FILE_ZIP_CONTENT_1, FILE_ZIP_CONTENT_2]
+        content = [FILE_ZIP_CONTENT_1, FILE_ZIP_CONTENT_2, FILE_ZIP_CONTENT_3]
         token = SIEM_LOGS_HEADERS_RESPONSE.get("mc-siem-token")
 
         tests = [
@@ -169,20 +177,21 @@ class TestEventLogs(TestCase):
             "Dir": "Internal",
             "RcptHdrType": "To",
         }
+        self.logger = logging.getLogger("abc")
 
     def test_event_logs_get_dict(self):
-        event = EventLogs(data=self.output_data)
+        event = EventLogs(data=self.output_data, logger=self.logger)
 
         self.assertEqual(event.get_dict(), self.output_data)
 
     def test_event_logs_compare_to_datetime_when_event_is_newer(self):
-        event = EventLogs(data=self.output_data)
+        event = EventLogs(data=self.output_data, logger=self.logger)
 
         expected_result = event.compare_datetime(datetime.datetime(2023, 4, 1))
         self.assertTrue(expected_result)
 
     def test_event_logs_compare_to_datetime_when_event_is_older(self):
-        event = EventLogs(data=self.output_data)
+        event = EventLogs(data=self.output_data, logger=self.logger)
 
         expected_result = event.compare_datetime(datetime.datetime(2023, 6, 1))
         self.assertFalse(expected_result)
