@@ -109,7 +109,7 @@ class MonitorSiemLogs(insightconnect_plugin_runtime.Task):
                 lambda event: event.get_dict(),
                 filter(
                     lambda event: event.compare_datetime(filter_time),
-                    [EventLogs(data=event) for event in task_output],
+                    [EventLogs(data=event, logger=self.logger) for event in task_output],
                 ),
             ),
             key=itemgetter(EventLogs.FILTER_DATETIME),
