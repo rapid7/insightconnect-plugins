@@ -13,10 +13,16 @@ class Input:
 
 class Output:
     RISK_LIST = "risk_list"
+<<<<<<< HEAD:plugins/recorded_future/komand_recorded_future/actions/download_IP_addresses_risk_list/schema.py
     RISK_LIST_GZIP = "risk_list_gzip"
 
 
 class DownloadIPAddressesRiskListInput(insightconnect_plugin_runtime.Input):
+=======
+
+
+class DownloadIpAddressesRiskListInput(insightconnect_plugin_runtime.Input):
+>>>>>>> 917ae98c0 (Recorded Future - 366, 352 - Fixed schemas | Updated the SDK | Refreshed with latest plugin tooling (#2191)):plugins/recorded_future/komand_recorded_future/actions/download_ip_addresses_risk_list/schema.py
     schema = json.loads(r"""
    {
   "type": "object",
@@ -98,7 +104,11 @@ class DownloadIPAddressesRiskListInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
+<<<<<<< HEAD:plugins/recorded_future/komand_recorded_future/actions/download_IP_addresses_risk_list/schema.py
 class DownloadIPAddressesRiskListOutput(insightconnect_plugin_runtime.Output):
+=======
+class DownloadIpAddressesRiskListOutput(insightconnect_plugin_runtime.Output):
+>>>>>>> 917ae98c0 (Recorded Future - 366, 352 - Fixed schemas | Updated the SDK | Refreshed with latest plugin tooling (#2191)):plugins/recorded_future/komand_recorded_future/actions/download_ip_addresses_risk_list/schema.py
     schema = json.loads(r"""
    {
   "type": "object",
@@ -117,6 +127,7 @@ class DownloadIPAddressesRiskListOutput(insightconnect_plugin_runtime.Output):
       "order": 2
     }
   },
+<<<<<<< HEAD:plugins/recorded_future/komand_recorded_future/actions/download_IP_addresses_risk_list/schema.py
   "definitions": {
     "file": {
       "id": "file",
@@ -138,6 +149,12 @@ class DownloadIPAddressesRiskListOutput(insightconnect_plugin_runtime.Output):
       }
     }
   }
+=======
+  "required": [
+    "risk_list"
+  ],
+  "definitions": {}
+>>>>>>> 917ae98c0 (Recorded Future - 366, 352 - Fixed schemas | Updated the SDK | Refreshed with latest plugin tooling (#2191)):plugins/recorded_future/komand_recorded_future/actions/download_ip_addresses_risk_list/schema.py
 }
     """)
 
