@@ -50,8 +50,7 @@ Example input:
 
 #### Fetch Forensics
 
-This action is used to fetch Forensics allows users to pull detailed forensic evidence about individual threats or 
-campaigns. Either 'threatId' or 'campaignId' should be specified
+This action is used to pull detailed forensic evidence about individual threats or campaigns. Either 'threatId' or 'campaignId' should be specified
 
 ##### Input
 
@@ -657,7 +656,7 @@ Example output:
 
 #### Parse Alert
 
-This action is used to parses a TAP alert
+This action is used to parse a TAP alert
 
 ##### Input
 

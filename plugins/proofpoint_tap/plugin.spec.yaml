@@ -1253,7 +1253,7 @@ connection:
 actions:
   parse_tap_alert:
     title: Parse Alert
-    description: Parses a TAP alert
+    description: Parse a TAP alert
     input:
       tapAlert:
         title: Proofpoint TAP Alert
@@ -1896,7 +1896,7 @@ actions:
         ]
   fetch_forensics:
     title: Fetch Forensics
-    description: Fetch Forensics allows users to pull detailed forensic evidence about individual threats or campaigns. Either 'threatId' or 'campaignId' should be specified
+    description: Pull detailed forensic evidence about individual threats or campaigns. Either 'threatId' or 'campaignId' should be specified
     input:
       threatId:
         title: Threat ID
