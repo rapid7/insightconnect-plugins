@@ -7,7 +7,7 @@ from typing import Union
 from urllib.parse import urlsplit
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_okta.util.exceptions import ApiException
-from komand_okta.util.helpers import clean
+from komand_okta.util.helpers import clean, get_hostname
 from komand_okta.util.endpoints import (
     ADD_USER_TO_GROUP_ENDPOINT,
     ASSIGN_USER_TO_APP_SSO_ENDPOINT,
@@ -183,12 +183,12 @@ class OktaAPI:
         try:
             if not self.valid_url:
                 # explicitly set 401 status_code when domain is invalid so that tasks handle it correctly
-                # we want the task to go in to an 'error' state, and not continually retry
+                # we want the integration to go in to an 'error' state, and not continually retry
                 raise ApiException(
                     cause="Invalid domain entered for input 'Okta Domain'.",
                     assistance="Please include a valid subdomain, e.g. 'example.okta.com', if using 'okta.com'.",
                     status_code=401,
-                    data=f"Provided Okta Domain: {self.base_url}",
+                    data=f"Provided Okta Domain: {get_hostname(self.base_url.rstrip('/'))}",
                 )
 
             response = requests.request(
