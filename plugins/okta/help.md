@@ -1598,6 +1598,7 @@ Actions may fail depending on the state of the resource you attempt to operate o
 
 # Version History
 
+* 4.2.8 - Connection: Set appropriate error code when domain is invalid
 * 4.2.7 - Updated to include latest SDK v5.4.9 | Task `Monitor Logs` updated to increase max lookback cutoff to 7 days
 * 4.2.6 - Connection: Update to ensure subdomain is entered correctly. Plugin will now raise an error if this value is not present
 * 4.2.5 - Monitor Logs task: Update handing of custom_config parameter
