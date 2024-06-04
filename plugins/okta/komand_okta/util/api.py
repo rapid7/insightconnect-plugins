@@ -7,7 +7,7 @@ from typing import Union
 from urllib.parse import urlsplit
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_okta.util.exceptions import ApiException
-from komand_okta.util.helpers import clean
+from komand_okta.util.helpers import clean, get_hostname
 from komand_okta.util.endpoints import (
     ADD_USER_TO_GROUP_ENDPOINT,
     ASSIGN_USER_TO_APP_SSO_ENDPOINT,
@@ -60,11 +60,12 @@ def rate_limiting(max_tries: int):
 
 
 class OktaAPI:
-    def __init__(self, okta_key: str, okta_url: str, logger: Logger):
+    def __init__(self, okta_key: str, okta_url: str, logger: Logger, valid_url: bool):
         self.logger = logger
         self._okta_key = okta_key
         self.base_url = okta_url
         self.toggle_rate_limiting = True
+        self.valid_url = valid_url
 
     def get_headers(self) -> dict:
         return {
@@ -180,6 +181,16 @@ class OktaAPI:
     @rate_limiting(10)
     def make_request(self, method: str, url: str, json_data: dict = None, params: dict = None) -> requests.Response:
         try:
+            if not self.valid_url:
+                # explicitly set 401 status_code when domain is invalid so that tasks handle it correctly
+                # we want the integration to go in to an 'error' state, and not continually retry
+                raise ApiException(
+                    cause="Invalid domain entered for input 'Okta Domain'.",
+                    assistance="Please include a valid subdomain, e.g. 'example.okta.com', if using 'okta.com'.",
+                    status_code=401,
+                    data=f"Provided Okta Domain: {get_hostname(self.base_url.rstrip('/'))}",
+                )
+
             response = requests.request(
                 method=method, url=f"{self.base_url}{url}", headers=self.get_headers(), json=json_data, params=params
             )
