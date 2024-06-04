@@ -16,12 +16,12 @@
 
 # Requirements
 
-* Proofpoint TAP [service principal and secret](https://ptr-docs.proofpoint.com/ptr-guides/integrations-files/ptr-tap/#generate-tap-service-credentials) is required for all actions except Parse Alert
+* Proofpoint TAP [service principal and secret](https://ptr-docs.proofpoint.com/ptr-guides/integrations-files/ptr-tap/#generate-tap-service-credentials)
 
 # Supported Product Versions
 
 * Proofpoint TAP API v2
-* Tested on 2024-03-27
+* Tested on 2024-06-04
 
 # Documentation
 
@@ -142,13 +142,85 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|results|allThreats|True|The results containing all threats|{}|
+|results|allThreats|True|The results containing all threats|{'clicksBlocked': [], 'clicksPermitted': [], 'messagesBlocked': [{'cluster': 'proofpointdemo_cloudadminuidemo_hosted', 'impostorScore': 0, 'threatsInfoMap': [{'threat': 'klongkru.ac.th/', 'threatID': 'd22be456cbc0a0e5d900696c36c92c547bea13cc76d32b63ed...', 'threatStatus': 'active', 'threatTime': '2021-02-09T15:59:49.000Z', 'threatType': 'url', 'threatUrl': 'https://example.com', 'classification': 'phish'}], 'QID': '3823t51rm5-1', 'messageTime': '2021-04-21T11:15:26.000Z', 'spamScore': 100, 'toAddresses': ['user@example.com'], 'GUID': 'gk6qK0AUnJMM-0iF10DbYBA3lZgxMALt', 'completelyRewritten': False, 'modulesRun': ['av', 'spf'], 'messageParts': [{'contentType': 'message/delivery-status', 'disposition': 'attached', 'filename': 'message-delivery-status', 'md5': '9de5069c5afe602b2ea0a04b66beb2c0', 'oContentType': 'message/delivery-status', 'sha256': '067fc64bf84042ce48f4761097aec5c5d6cf62bb80dc66c45e...'}, {'oContentType': 'text/plain', 'sha256': 'f95b2809b1ecd4dd6de4e2318340388f8007c7ac76778532c4...', 'contentType': 'text/plain', 'disposition': 'inline', 'filename': 'text.txt', 'md5': '9de5069c5afe602b2ea0a04b66beb2c0'}], 'messageSize': 9982, 'subject': 'Mail delivery failed: returning message to sender', 'fromAddress': ['user@example.com'], 'headerFrom': 'Mail Delivery System <user@example.com>', 'quarantineFolder': 'Phish', 'recipient': ['user@example.com'], 'malwareScore': 0, 'policyRoutes': ['default_inbound', 'allow_relay'], 'messageID': '<user@example.com>', 'phishScore': 100, 'quarantineRule': 'phish', 'senderIP': '198.51.100.1', 'id': '9de5069c-5afe-602b-2ea0-a04b66beb2c0'}], 'messagesDelivered': [], 'queryEndTime': '2021-04-21T12:00:00Z'}|
   
 Example output:
 
 ```
 {
-  "results": {}
+  "results": {
+    "clicksBlocked": [],
+    "clicksPermitted": [],
+    "messagesBlocked": [
+      {
+        "GUID": "gk6qK0AUnJMM-0iF10DbYBA3lZgxMALt",
+        "QID": "3823t51rm5-1",
+        "cluster": "proofpointdemo_cloudadminuidemo_hosted",
+        "completelyRewritten": false,
+        "fromAddress": [
+          "user@example.com"
+        ],
+        "headerFrom": "Mail Delivery System <user@example.com>",
+        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+        "impostorScore": 0,
+        "malwareScore": 0,
+        "messageID": "<user@example.com>",
+        "messageParts": [
+          {
+            "contentType": "message/delivery-status",
+            "disposition": "attached",
+            "filename": "message-delivery-status",
+            "md5": "9de5069c5afe602b2ea0a04b66beb2c0",
+            "oContentType": "message/delivery-status",
+            "sha256": "067fc64bf84042ce48f4761097aec5c5d6cf62bb80dc66c45e..."
+          },
+          {
+            "contentType": "text/plain",
+            "disposition": "inline",
+            "filename": "text.txt",
+            "md5": "9de5069c5afe602b2ea0a04b66beb2c0",
+            "oContentType": "text/plain",
+            "sha256": "f95b2809b1ecd4dd6de4e2318340388f8007c7ac76778532c4..."
+          }
+        ],
+        "messageSize": 9982,
+        "messageTime": "2021-04-21T11:15:26.000Z",
+        "modulesRun": [
+          "av",
+          "spf"
+        ],
+        "phishScore": 100,
+        "policyRoutes": [
+          "default_inbound",
+          "allow_relay"
+        ],
+        "quarantineFolder": "Phish",
+        "quarantineRule": "phish",
+        "recipient": [
+          "user@example.com"
+        ],
+        "senderIP": "198.51.100.1",
+        "spamScore": 100,
+        "subject": "Mail delivery failed: returning message to sender",
+        "threatsInfoMap": [
+          {
+            "classification": "phish",
+            "threat": "klongkru.ac.th/",
+            "threatID": "d22be456cbc0a0e5d900696c36c92c547bea13cc76d32b63ed...",
+            "threatStatus": "active",
+            "threatTime": "2021-02-09T15:59:49.000Z",
+            "threatType": "url",
+            "threatUrl": "https://example.com"
+          }
+        ],
+        "toAddresses": [
+          "user@example.com"
+        ]
+      }
+    ],
+    "messagesDelivered": [],
+    "queryEndTime": "2021-04-21T12:00:00Z"
+  }
 }
 ```
 
@@ -178,15 +250,36 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|results|blockedClicks|True|The results containing blocked clicks|{}|
+|Name|Type|Required|Description| Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| :--- | :--- | :--- | :--- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|results|blockedClicks|True|The results containing blocked clicks|{'clicksBlocked': [{'GUID': 'X7sh5TwRxBZOAXb-d8ESyugsIdtfv3u', 'classification': 'malware', 'clickIP': '198.51.100.1', 'clickTime': '2021-04-20T21:08:13.000Z', 'id': '9de5069c-5afe-602b-2ea0-a04b66beb2c0', 'messageID': '<user@example.com>', 'recipient': 'user@example.com', 'sender': 'user@example.com', 'senderIP': '198.51.100.1', 'threatID': 'f1f23718b35b8db3db005cd498ff0812e53fe994537567ff0a...', 'threatStatus': 'active', 'threatTime': '2021-04-20T21:08:38.000Z', 'threatURL': 'https://example.com', 'url': 'https://example.com', 'userAgent': 'Mozilla/5.0 (Macintosh; Intel MAC OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36'}], 'queryEndTime': '2021-04-21T13:00:00Z'}|
   
 Example output:
 
 ```
 {
-  "results": {}
+  "results": {
+    "clicksBlocked": [
+      {
+        "GUID": "X7sh5TwRxBZOAXb-d8ESyugsIdtfv3u",
+        "classification": "malware",
+        "clickIP": "198.51.100.1",
+        "clickTime": "2021-04-20T21:08:13.000Z",
+        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+        "messageID": "<user@example.com>",
+        "recipient": "user@example.com",
+        "sender": "user@example.com",
+        "senderIP": "198.51.100.1",
+        "threatID": "f1f23718b35b8db3db005cd498ff0812e53fe994537567ff0a...",
+        "threatStatus": "active",
+        "threatTime": "2021-04-20T21:08:38.000Z",
+        "threatURL": "https://example.com",
+        "url": "https://example.com",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel MAC OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36"
+      }
+    ],
+    "queryEndTime": "2021-04-21T13:00:00Z"
+  }
 }
 ```
 
@@ -220,13 +313,93 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|results|blockedMessages|True|The results containing blocked messages|{}|
+|results|blockedMessages|True|The results containing blocked messages|{'messagesBlocked': [{'headerFrom': '"amazon" <user@example.com>', 'impostorScore': 0, 'sender': 'user@example.com', 'QID': '381f1q3k77-1', 'completelyRewritten': False, 'malwareScore': 0, 'modulesRun': ['av', 'spf'], 'phishScore': 100, 'policyRoutes': ['default_inbound', 'allow_relay'], 'senderIP': '198.51.100.1', 'fromAddress': ['user@example.com'], 'messageParts': [{'md5': '9de5069c5afe602b2ea0a04b66beb2c0', 'oContentType': 'text/html', 'sha256': '7e38804bf4e90803cc6ef24b6c5e79dd9b9d84b48b23f04ea5...', 'contentType': 'text/html', 'disposition': 'inline', 'filename': 'text.html'}, {'sha256': 'b31b0a1f2b61146af3377833db02811d9af26596e9b5e81457...', 'contentType': 'text/plain', 'disposition': 'inline', 'filename': 'text.txt', 'md5': '9de5069c5afe602b2ea0a04b66beb2c0', 'oContentType': 'text/plain'}], 'toAddresses': ['user@example.com'], 'cluster': 'proofpointdemo_cloudadminuidemo_hosted', 'recipient': ['user@example.com'], 'xmailer': 'Fenokohthk 9', 'spamScore': 100, 'GUID': 'fA8S1YIRh2taWGdoS02QyNccz985vY2D', 'messageID': '<user@example.com>', 'messageSize': 26539, 'messageTime': '2021-04-21T12:27:35.000Z', 'id': '9de5069c-5afe-602b-2ea0-a04b66beb2c0', 'quarantineFolder': 'Phish', 'quarantineRule': 'phish', 'subject': 'A phishy email', 'threatsInfoMap': [{'threatStatus': 'active', 'threatTime': '2021-04-20T09:31:34.000Z', 'threatType': 'url', 'threatUrl': 'https://example.com', 'classification': 'phish', 'threat': '198.51.100.1/ap/signin', 'threatID': '0e10e285491d55c6dba3016e31243af7dabf5842433a3c4735...'}, {'threat': 'https://example.com', 'threatID': '378a3a7731552a2f06349d066f2853f833fa6094ed660d8789...', 'threatStatus': 'active', 'threatTime': '2021-04-20T09:29:43.000Z', 'threatType': 'url', 'threatUrl': 'https://example.com', 'classification': 'phish'}]}], 'queryEndTime': '2021-04-21T13:00:00Z'}|
   
 Example output:
 
 ```
 {
-  "results": {}
+  "results": {
+    "messagesBlocked": [
+      {
+        "GUID": "fA8S1YIRh2taWGdoS02QyNccz985vY2D",
+        "QID": "381f1q3k77-1",
+        "cluster": "proofpointdemo_cloudadminuidemo_hosted",
+        "completelyRewritten": false,
+        "fromAddress": [
+          "user@example.com"
+        ],
+        "headerFrom": "\"amazon\" <user@example.com>",
+        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+        "impostorScore": 0,
+        "malwareScore": 0,
+        "messageID": "<user@example.com>",
+        "messageParts": [
+          {
+            "contentType": "text/html",
+            "disposition": "inline",
+            "filename": "text.html",
+            "md5": "9de5069c5afe602b2ea0a04b66beb2c0",
+            "oContentType": "text/html",
+            "sha256": "7e38804bf4e90803cc6ef24b6c5e79dd9b9d84b48b23f04ea5..."
+          },
+          {
+            "contentType": "text/plain",
+            "disposition": "inline",
+            "filename": "text.txt",
+            "md5": "9de5069c5afe602b2ea0a04b66beb2c0",
+            "oContentType": "text/plain",
+            "sha256": "b31b0a1f2b61146af3377833db02811d9af26596e9b5e81457..."
+          }
+        ],
+        "messageSize": 26539,
+        "messageTime": "2021-04-21T12:27:35.000Z",
+        "modulesRun": [
+          "av",
+          "spf"
+        ],
+        "phishScore": 100,
+        "policyRoutes": [
+          "default_inbound",
+          "allow_relay"
+        ],
+        "quarantineFolder": "Phish",
+        "quarantineRule": "phish",
+        "recipient": [
+          "user@example.com"
+        ],
+        "sender": "user@example.com",
+        "senderIP": "198.51.100.1",
+        "spamScore": 100,
+        "subject": "A phishy email",
+        "threatsInfoMap": [
+          {
+            "classification": "phish",
+            "threat": "198.51.100.1/ap/signin",
+            "threatID": "0e10e285491d55c6dba3016e31243af7dabf5842433a3c4735...",
+            "threatStatus": "active",
+            "threatTime": "2021-04-20T09:31:34.000Z",
+            "threatType": "url",
+            "threatUrl": "https://example.com"
+          },
+          {
+            "classification": "phish",
+            "threat": "https://example.com",
+            "threatID": "378a3a7731552a2f06349d066f2853f833fa6094ed660d8789...",
+            "threatStatus": "active",
+            "threatTime": "2021-04-20T09:29:43.000Z",
+            "threatType": "url",
+            "threatUrl": "https://example.com"
+          }
+        ],
+        "toAddresses": [
+          "user@example.com"
+        ],
+        "xmailer": "Fenokohthk 9"
+      }
+    ],
+    "queryEndTime": "2021-04-21T13:00:00Z"
+  }
 }
 ```
 
@@ -260,13 +433,88 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|results|deliveredThreats|True|The results containing delivered threats|{}|
+|results|deliveredThreats|True|The results containing delivered threats|{'messagesDelivered': [{'messageParts': [{'disposition': 'inline', 'filename': 'text-rfc822-headers', 'md5': '9de5069c5afe602b2ea0a04b66beb2c0', 'oContentType': 'text/plain', 'sha256': '12aea580d129035f1e424484a818bec62455db3f5632cf5bac...', 'contentType': 'text/plain'}, {'contentType': 'message/delivery-status', 'disposition': 'attached', 'filename': 'message-delivery-status', 'md5': '9de5069c5afe602b2ea0a04b66beb2c0', 'oContentType': 'message/delivery-status', 'sha256': '15ec858c84dd6d44ae94cfed9b9edbab8bb1341d75cea30b48...'}], 'messageSize': 16026, 'threatsInfoMap': [{'threatID': '22a340fea5cb89908a7576b5e387ce6b296a61a8ac35aac574...', 'threatStatus': 'active', 'threatTime': '2021-04-13T14:45:53.000Z', 'threatType': 'url', 'threatUrl': 'https://example.com', 'classification': 'phish', 'threat': 'starbrandb2bedm.xyz/emm/'}, {'threat': 'starbrandb2bedm.xyz/emm/index.php', 'threatID': 'bcef1812236a940d5e7bb743439e2dc883d3e666124896c339...', 'threatStatus': 'active', 'threatTime': '2021-04-13T08:51:37.000Z', 'threatType': 'url', 'threatUrl': 'https://example.com', 'classification': 'phish'}], 'malwareScore': 0, 'messageID': '<user@example.com>', 'policyRoutes': ['allow_relay', 'firewallsafe'], 'subject': 'A phishy email', 'senderIP': '198.51.100.1', 'spamScore': 0, 'completelyRewritten': False, 'modulesRun': ['access'], 'id': '9de5069c-5afe-602b-2ea0-a04b66beb2c0', 'messageTime': '2021-04-21T17:26:30.000Z', 'toAddresses': ['info-cheri=user@example.com'], 'headerFrom': 'Mail Delivery Subsystem <user@example.com>', 'impostorScore': 0, 'recipient': ['info-cheri=user@example.com'], 'GUID': 'sVfuaRyZ59_UnD2m8RX9i7uGsW4pHcUX', 'phishScore': 0, 'fromAddress': ['user@example.com'], 'QID': '13LHPoqE012261', 'cluster': 'proofpointdemo_cloudadminuidemo_hosted'}], 'queryEndTime': '2021-04-21T18:00:00Z'}|
   
 Example output:
 
 ```
 {
-  "results": {}
+  "results": {
+    "messagesDelivered": [
+      {
+        "GUID": "sVfuaRyZ59_UnD2m8RX9i7uGsW4pHcUX",
+        "QID": "13LHPoqE012261",
+        "cluster": "proofpointdemo_cloudadminuidemo_hosted",
+        "completelyRewritten": false,
+        "fromAddress": [
+          "user@example.com"
+        ],
+        "headerFrom": "Mail Delivery Subsystem <user@example.com>",
+        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+        "impostorScore": 0,
+        "malwareScore": 0,
+        "messageID": "<user@example.com>",
+        "messageParts": [
+          {
+            "contentType": "text/plain",
+            "disposition": "inline",
+            "filename": "text-rfc822-headers",
+            "md5": "9de5069c5afe602b2ea0a04b66beb2c0",
+            "oContentType": "text/plain",
+            "sha256": "12aea580d129035f1e424484a818bec62455db3f5632cf5bac..."
+          },
+          {
+            "contentType": "message/delivery-status",
+            "disposition": "attached",
+            "filename": "message-delivery-status",
+            "md5": "9de5069c5afe602b2ea0a04b66beb2c0",
+            "oContentType": "message/delivery-status",
+            "sha256": "15ec858c84dd6d44ae94cfed9b9edbab8bb1341d75cea30b48..."
+          }
+        ],
+        "messageSize": 16026,
+        "messageTime": "2021-04-21T17:26:30.000Z",
+        "modulesRun": [
+          "access"
+        ],
+        "phishScore": 0,
+        "policyRoutes": [
+          "allow_relay",
+          "firewallsafe"
+        ],
+        "recipient": [
+          "info-cheri=user@example.com"
+        ],
+        "senderIP": "198.51.100.1",
+        "spamScore": 0,
+        "subject": "A phishy email",
+        "threatsInfoMap": [
+          {
+            "classification": "phish",
+            "threat": "starbrandb2bedm.xyz/emm/",
+            "threatID": "22a340fea5cb89908a7576b5e387ce6b296a61a8ac35aac574...",
+            "threatStatus": "active",
+            "threatTime": "2021-04-13T14:45:53.000Z",
+            "threatType": "url",
+            "threatUrl": "https://example.com"
+          },
+          {
+            "classification": "phish",
+            "threat": "starbrandb2bedm.xyz/emm/index.php",
+            "threatID": "bcef1812236a940d5e7bb743439e2dc883d3e666124896c339...",
+            "threatStatus": "active",
+            "threatTime": "2021-04-13T08:51:37.000Z",
+            "threatType": "url",
+            "threatUrl": "https://example.com"
+          }
+        ],
+        "toAddresses": [
+          "info-cheri=user@example.com"
+        ]
+      }
+    ],
+    "queryEndTime": "2021-04-21T18:00:00Z"
+  }
 }
 ```
 
@@ -296,15 +544,36 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|results|permittedClicks|True|The results containing permitted clicks|{}|
+|Name|Type|Required|Description| Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| :--- | :--- | :--- | :--- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|results|permittedClicks|True|The results containing permitted clicks|{'clicksPermitted': [{'GUID': 'X7sh5TwRxBZOAXb-d8ESyugsIdtfv3u', 'classification': 'malware', 'clickIP': '198.51.100.1', 'clickTime': '2021-04-20T21:08:13.000Z', 'id': '9de5069c-5afe-602b-2ea0-a04b66beb2c0', 'messageID': '<user@example.com>', 'recipient': 'user@example.com', 'sender': 'user@example.com', 'senderIP': '198.51.100.1', 'threatID': 'f1f23718b35b8db3db005cd498ff0812e53fe994537567ff0a...', 'threatStatus': 'active', 'threatTime': '2021-04-20T21:08:38.000Z', 'threatURL': 'https://example.com', 'url': 'https://example.com', 'userAgent': 'Mozilla/5.0 (Macintosh; Intel MAC OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36'}], 'queryEndTime': '2021-04-21T13:00:00Z'}|
   
 Example output:
 
 ```
 {
-  "results": {}
+  "results": {
+    "clicksPermitted": [
+      {
+        "GUID": "X7sh5TwRxBZOAXb-d8ESyugsIdtfv3u",
+        "classification": "malware",
+        "clickIP": "198.51.100.1",
+        "clickTime": "2021-04-20T21:08:13.000Z",
+        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+        "messageID": "<user@example.com>",
+        "recipient": "user@example.com",
+        "sender": "user@example.com",
+        "senderIP": "198.51.100.1",
+        "threatID": "f1f23718b35b8db3db005cd498ff0812e53fe994537567ff0a...",
+        "threatStatus": "active",
+        "threatTime": "2021-04-20T21:08:38.000Z",
+        "threatURL": "https://example.com",
+        "url": "https://example.com",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel MAC OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36"
+      }
+    ],
+    "queryEndTime": "2021-04-21T13:00:00Z"
+  }
 }
 ```
 
@@ -333,7 +602,7 @@ Example input:
 | :--- | :--- | :--- | :--- | :--- |
 |interval|string|False|An ISO8601-formatted interval showing what time the response was calculated for|2023-03-07T06:01:00Z/2023-06-05T06:01:00Z|
 |totalTopClickers|integer|False|An integer describing the total number of top clickers in the time interval|2|
-|users|[]user|False|An array of user objects that contain information about the user's identity and statistics of the clicking behavior|[]|
+|users|[]user|False|An array of user objects that contain information about the user's identity and statistics of the clicking behavior|[{"clickStatistics": {"families": [{"clicks": 28, "name": "Malware"}], "clickCount": 28}, "identity": {"emails": ["user@example.com"], "guid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "vip": False}}, {"clickStatistics": {"clickCount": 8, "families": [{"clicks": 6, "name": "MalSpam"}, {"clicks": 8, "name": "Malware"}]}, "identity": {"emails": ["user@example.com"], "guid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "vip": False}}]|
   
 Example output:
 
@@ -341,7 +610,48 @@ Example output:
 {
   "interval": "2023-03-07T06:01:00Z/2023-06-05T06:01:00Z",
   "totalTopClickers": 2,
-  "users": []
+  "users": [
+    {
+      "clickStatistics": {
+        "clickCount": 28,
+        "families": [
+          {
+            "clicks": 28,
+            "name": "Malware"
+          }
+        ]
+      },
+      "identity": {
+        "emails": [
+          "user@example.com"
+        ],
+        "guid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+        "vip": false
+      }
+    },
+    {
+      "clickStatistics": {
+        "clickCount": 8,
+        "families": [
+          {
+            "clicks": 6,
+            "name": "MalSpam"
+          },
+          {
+            "clicks": 8,
+            "name": "Malware"
+          }
+        ]
+      },
+      "identity": {
+        "emails": [
+          "user@example.com"
+        ],
+        "guid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+        "vip": false
+      }
+    }
+  ]
 }
 ```
 
@@ -367,13 +677,38 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|results|tapResults|False|Proofpoint TAP results|{}|
+|results|tapResults|False|Proofpoint TAP results|{'threat': {'attachmentSha256': '275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f', 'category': 'Malware', 'condemnationTime': '2019-01-10T12:34:05Z', 'threatDetailsUrl': 'https://example.com/9de5069c5afe602b2ea0a04b66beb2c0/threat/email/275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f?linkOrigin=notif'}, 'message': {'timeDelivered': '2019-01-10T12:10:21Z', 'recipients': 'user@example.com', 'subject': 'January Invoice', 'sender': 'user@example.com', 'headerFrom': 'Bob', 'headerReplyto': 'user@example.com', 'messageId': 'user@example.com', 'senderIp': '198.51.100.1', 'messageSize': '152 KB', 'messageGuid': '9de5069c5afe602b2ea0a04b66beb2c0', 'threatId': '9de5069c5afe602b2ea0a04b66beb2c0'}, 'browser': {'time': '2020-05-11T11:01:13Z', 'sourceIp': '198.51.100.1', 'userAgent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko'}}|
   
 Example output:
 
 ```
 {
-  "results": {}
+  "results": {
+    "browser": {
+      "sourceIp": "198.51.100.1",
+      "time": "2020-05-11T11:01:13Z",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+    },
+    "message": {
+      "headerFrom": "Bob",
+      "headerReplyto": "user@example.com",
+      "messageGuid": "9de5069c5afe602b2ea0a04b66beb2c0",
+      "messageId": "user@example.com",
+      "messageSize": "152 KB",
+      "recipients": "user@example.com",
+      "sender": "user@example.com",
+      "senderIp": "198.51.100.1",
+      "subject": "January Invoice",
+      "threatId": "9de5069c5afe602b2ea0a04b66beb2c0",
+      "timeDelivered": "2019-01-10T12:10:21Z"
+    },
+    "threat": {
+      "attachmentSha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+      "category": "Malware",
+      "condemnationTime": "2019-01-10T12:34:05Z",
+      "threatDetailsUrl": "https://example.com/9de5069c5afe602b2ea0a04b66beb2c0/threat/email/275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f?linkOrigin=notif"
+    }
+  }
 }
 ```
 
@@ -402,13 +737,19 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|urls|[]urls|False|Decoded URLs|[]|
+|urls|[]urls|False|Decoded URLs|[{"encodedUrl": "https://urldefense.proofpoint.com/v1/url?u=http://www.example.com/&amp;k=oIvRg1%2BdGAgOoM1BIlLLqw%3D%3D%0A&amp;r=IKM5u8%2B%2F%2Fi8EBhWOS%2BqGbTqCC%2BrMqWI%2FVfEAEsQO%2F0Y%3D%0A&amp;m=Ww6iaHO73mDQpPQwOwfLfN8WMapqHyvtu8jM8SjqmVQ%3D%0A&amp;s=d3583cfa53dade97025bc6274c6c8951dc29fe0f38830cf8e5a447723b9f1c9a"", "decodedUrl": "http://www.example.com/", "success": True}]|
   
 Example output:
 
 ```
 {
-  "urls": []
+  "urls": [
+    {
+      "decodedUrl": "http://www.example.com/",
+      "encodedUrl": "https://urldefense.proofpoint.com/v1/url?u=http://www.example.com/&amp;k=oIvRg1%2BdGAgOoM1BIlLLqw%3D%3D%0A&amp;r=IKM5u8%2B%2F%2Fi8EBhWOS%2BqGbTqCC%2BrMqWI%2FVfEAEsQO%2F0Y%3D%0A&amp;m=Ww6iaHO73mDQpPQwOwfLfN8WMapqHyvtu8jM8SjqmVQ%3D%0A&amp;s=d3583cfa53dade97025bc6274c6c8951dc29fe0f38830cf8e5a447723b9f1c9a\"",
+      "success": true
+    }
+  ]
 }
 ```
 ### Triggers
