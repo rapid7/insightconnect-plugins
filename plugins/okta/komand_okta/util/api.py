@@ -181,6 +181,16 @@ class OktaAPI:
     @rate_limiting(10)
     def make_request(self, method: str, url: str, json_data: dict = None, params: dict = None) -> requests.Response:
         try:
+            if not self.valid_url:
+                # explicitly set 401 status_code when domain is invalid so that tasks handle it correctly
+                # we want the task to go in to an 'error' state, and not continually retry
+                raise ApiException(
+                    cause="Invalid domain entered for input 'Okta Domain'.",
+                    assistance="Please include a valid subdomain, e.g. 'example.okta.com', if using 'okta.com'.",
+                    status_code=401,
+                    data=f"Provided Okta Domain: {self.base_url}",
+                )
+
             response = requests.request(
                 method=method, url=f"{self.base_url}{url}", headers=self.get_headers(), json=json_data, params=params
             )
