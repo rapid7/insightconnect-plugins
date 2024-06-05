@@ -3264,9 +3264,9 @@ Example output:
 |RRN|string|None|True|The unique RRN of the user.|None|
 
 
-# Troubleshooting
+## Troubleshooting
   
-*This plugin does not contain a troubleshooting.*
+*There is no troubleshooting for this plugin.*
 
 # Version History
 
