@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Fetch Forensics allows users to pull detailed forensic evidence about individual threats or campaigns"
+    DESCRIPTION = "Fetch Forensics allows users to pull detailed forensic evidence about individual threats or campaigns. Either 'threatId' or 'campaignId' should be specified"
 
 
 class Input:
