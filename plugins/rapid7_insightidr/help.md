@@ -2776,6 +2776,62 @@ Example output:
   }
 }
 ```
+
+#### Get New Investigations
+
+This trigger is used to get New Investigations
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|frequency|integer|15|False|Poll frequency in seconds|None|15|None|None|
+|search|[]object|None|False|The criteria for which entities to return|None|[{"field": "Example Field", "operator": "EQUALS", "value": "Test"}]|None|None|
+  
+Example input:
+
+```
+{
+  "frequency": 15,
+  "search": [
+    {
+      "field": "Example Field",
+      "operator": "EQUALS",
+      "value": "Test"
+    }
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|investigation|investigation|True|A new investigation|{'assignee': {'email': 'user@example.com', 'name': 'Ellen Example'}, 'created_time': '2018-06-06T16:56:42Z', 'disposition': 'BENIGN', 'first_alert_time': '2018-06-06T16:56:42Z', 'last_accessed': '2018-06-06T16:56:42Z', 'latest_alert_time': '2018-06-06T16:56:42Z', 'organization_id': '174e4f99-2ac7-4481-9301-4d24c34baf06', 'priority': 'CRITICAL', 'rrn': 'rrn:example', 'source': 'ALERT', 'status': 'OPEN', 'title': 'Example Title'}|
+  
+Example output:
+
+```
+{
+  "investigation": {
+    "assignee": {
+      "email": "user@example.com",
+      "name": "Ellen Example"
+    },
+    "created_time": "2018-06-06T16:56:42Z",
+    "disposition": "BENIGN",
+    "first_alert_time": "2018-06-06T16:56:42Z",
+    "last_accessed": "2018-06-06T16:56:42Z",
+    "latest_alert_time": "2018-06-06T16:56:42Z",
+    "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
+    "priority": "CRITICAL",
+    "rrn": "rrn:example",
+    "source": "ALERT",
+    "status": "OPEN",
+    "title": "Example Title"
+  }
+}
+```
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -3214,6 +3270,7 @@ Example output:
 
 # Version History
 
+* 10.2.0 - New Trigger Added: `Get New Investigations`
 * 10.1.1 - Updated query schemas to allow message to be an object or string | Updated SDK
 * 10.1.0 - New Trigger Added: `Get New Alerts`
 * 10.0.0 - Actions: `List Investigations` Sort options updated | `Get Investigation`, `List Investigations`, `Create Investigation`, `Update Investigation` `Set Priority of Investigation`, `Set Disposition of Investigation`, `Set Status of Investigation Action`, `Assign User to Investigation`, `Seach Investigations`, `Get a Log`, `Get All Logs`, `Search Alerts` output now includes additional fields
