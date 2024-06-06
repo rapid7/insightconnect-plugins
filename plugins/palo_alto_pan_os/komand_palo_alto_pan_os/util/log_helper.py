@@ -1,4 +1,4 @@
-from komand.action import Action
+from insightconnect_plugin_runtime.action import Action
 
 
 class LogHelper(Action):

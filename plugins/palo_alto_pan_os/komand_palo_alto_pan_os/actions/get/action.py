@@ -1,21 +1,21 @@
-import komand
-from .schema import GetInput, GetOutput
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from .schema import GetInput, GetOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 
 
-class Get(komand.Action):
+class Get(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get",
-            description="Get candidate configuration",
+            description=Component.DESCRIPTION,
             input=GetInput(),
             output=GetOutput(),
         )
 
     def run(self, params={}):
-        xpath = params.get("xpath", "")
+        xpath = params.get(Input.XPATH, "")
 
         output = self.connection.request.get_(xpath=xpath)
         try:

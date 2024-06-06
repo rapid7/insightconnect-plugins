@@ -1,13 +1,14 @@
 import sys
 import os
-from unittest import TestCase
-from komand_palo_alto_pan_os.actions.edit import Edit
-from komand_palo_alto_pan_os.actions.edit.schema import Input, Output
-from unit_test.util import Util
-from unittest.mock import patch
-from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
+from unittest import TestCase
+from komand_palo_alto_pan_os.actions.edit import Edit
+from komand_palo_alto_pan_os.actions.edit.schema import Input, EditInput, EditOutput
+from util import Util
+from unittest.mock import patch
+from parameterized import parameterized
+from jsonschema import validate
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -37,5 +38,8 @@ class TestEdit(TestCase):
     )
     def test_edit(self, mock_get, mock_post, name, xpath, element, expected):
         action = Util.default_connector(Edit())
-        actual = action.run({Input.XPATH: xpath, Input.ELEMENT: element})
+        input_data = {Input.XPATH: xpath, Input.ELEMENT: element}
+        validate(input_data, EditInput.schema)
+        actual = action.run(input_data)
         self.assertEqual(actual, expected)
+        validate(actual, EditOutput.schema)

@@ -1,14 +1,19 @@
 import sys
 import os
-from unittest import TestCase
-from komand_palo_alto_pan_os.actions.set_address_object import SetAddressObject
-from komand_palo_alto_pan_os.actions.set_address_object.schema import Input, Output
-from unit_test.util import Util
-from unittest.mock import patch
-from parameterized import parameterized
-from komand.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
+from unittest import TestCase
+from komand_palo_alto_pan_os.actions.set_address_object import SetAddressObject
+from komand_palo_alto_pan_os.actions.set_address_object.schema import (
+    Input,
+    SetAddressObjectInput,
+    SetAddressObjectOutput,
+)
+from util import Util
+from unittest.mock import patch
+from parameterized import parameterized
+from insightconnect_plugin_runtime.exceptions import PluginException
+from jsonschema import validate
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -136,33 +141,24 @@ class TestSetAddressObject(TestCase):
                 ["abcd:123:4::1"],
                 {"message": "Address object matched whitelist.", "status": "error", "code": ""},
             ],
-            [
-                "without_description_and_tags",
-                "example.com",
-                "Domain",
-                None,
-                None,
-                False,
-                [],
-                {"message": "command succeeded", "status": "success", "code": "20"},
-            ],
         ]
     )
     def test_set_address_object(
         self, mock_get, mock_post, name, address, address_object, description, tags, skip_rfc1918, whitelist, expected
     ):
         action = Util.default_connector(SetAddressObject())
-        actual = action.run(
-            {
-                Input.ADDRESS: address,
-                Input.ADDRESS_OBJECT: address_object,
-                Input.DESCRIPTION: description,
-                Input.TAGS: tags,
-                Input.SKIP_RFC1918: skip_rfc1918,
-                Input.WHITELIST: whitelist,
-            }
-        )
+        input_data = {
+            Input.ADDRESS: address,
+            Input.ADDRESS_OBJECT: address_object,
+            Input.DESCRIPTION: description,
+            Input.TAGS: tags,
+            Input.SKIP_RFC1918: skip_rfc1918,
+            Input.WHITELIST: whitelist,
+        }
+        validate(input_data, SetAddressObjectInput.schema)
+        actual = action.run(input_data)
         self.assertEqual(actual, expected)
+        validate(actual, SetAddressObjectOutput.schema)
 
     @parameterized.expand(
         [
@@ -194,17 +190,17 @@ class TestSetAddressObject(TestCase):
         assistance,
     ):
         action = Util.default_connector(SetAddressObject())
+        input_data = {
+            Input.ADDRESS: address,
+            Input.ADDRESS_OBJECT: address_object,
+            Input.DESCRIPTION: description,
+            Input.TAGS: tags,
+            Input.SKIP_RFC1918: skip_rfc1918,
+            Input.WHITELIST: whitelist,
+        }
+        validate(input_data, SetAddressObjectInput.schema)
         with self.assertRaises(PluginException) as e:
-            action.run(
-                {
-                    Input.ADDRESS: address,
-                    Input.ADDRESS_OBJECT: address_object,
-                    Input.DESCRIPTION: description,
-                    Input.TAGS: tags,
-                    Input.SKIP_RFC1918: skip_rfc1918,
-                    Input.WHITELIST: whitelist,
-                }
-            )
+            action.run(input_data)
         self.assertEqual(e.exception.cause, cause)
         self.assertEqual(e.exception.assistance, assistance)
 

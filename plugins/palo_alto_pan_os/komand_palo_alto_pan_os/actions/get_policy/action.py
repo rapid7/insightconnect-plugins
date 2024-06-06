@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetPolicyInput, GetPolicyOutput, Input, Output, Component
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class GetPolicy(komand.Action):
+class GetPolicy(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_policy", description=Component.DESCRIPTION, input=GetPolicyInput(), output=GetPolicyOutput()
@@ -31,7 +31,7 @@ class GetPolicy(komand.Action):
             )
 
         entry_action = entry.get("action")
-        if type(entry_action) is dict:
+        if isinstance(entry_action, dict):
             action = entry_action.get("#text")
         else:
             action = entry_action
@@ -54,15 +54,15 @@ class GetPolicy(komand.Action):
 
         member = entry.get(key, {}).get("member")
 
-        if type(member) is str:
+        if isinstance(member, str):
             out.append(member)
-        elif type(member) is list:
-            for m in member:
-                if type(m) is dict:
-                    out.append(m.get("#text", ""))
-                if type(m) is str:
-                    out.append(m)
-        elif type(member) is dict:
+        elif isinstance(member, list):
+            for mem in member:
+                if isinstance(mem, dict):
+                    out.append(mem.get("#text", ""))
+                if isinstance(mem, str):
+                    out.append(mem)
+        elif isinstance(member, dict):
             out.append(member.get("#text", ""))
 
         return out

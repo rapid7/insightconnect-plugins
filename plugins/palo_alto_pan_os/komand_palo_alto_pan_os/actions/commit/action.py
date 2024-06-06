@@ -1,22 +1,22 @@
-import komand
-from .schema import CommitInput, CommitOutput
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from .schema import CommitInput, CommitOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 
 
-class Commit(komand.Action):
+class Commit(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="commit",
-            description="Commit the candidate configuration",
+            description=Component.DESCRIPTION,
             input=CommitInput(),
             output=CommitOutput(),
         )
 
     def run(self, params={}):
-        cmd = params.get("cmd")
-        action = params.get("action")
+        cmd = params.get(Input.CMD)
+        action = params.get(Input.ACTION)
 
         output = self.connection.request.commit(action, cmd)
 

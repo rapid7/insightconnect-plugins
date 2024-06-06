@@ -1,13 +1,14 @@
 import sys
 import os
-from unittest import TestCase
-from komand_palo_alto_pan_os.actions.commit import Commit
-from komand_palo_alto_pan_os.actions.commit.schema import Input, Output
-from unit_test.util import Util
-from unittest.mock import patch
-from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
+from unittest import TestCase
+from komand_palo_alto_pan_os.actions.commit import Commit
+from komand_palo_alto_pan_os.actions.commit.schema import Input, CommitInput, CommitOutput
+from util import Util
+from unittest.mock import patch
+from parameterized import parameterized
+from jsonschema import validate
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -17,7 +18,7 @@ class TestCommit(TestCase):
         [
             [
                 "no_changes",
-                None,
+                "",
                 "<commit></commit>",
                 {
                     "response": {
@@ -43,5 +44,8 @@ class TestCommit(TestCase):
     )
     def test_commit(self, mock_get, mock_get2, name, commit_action, cmd, expected):
         action = Util.default_connector(Commit())
-        actual = action.run({Input.ACTION: commit_action, Input.CMD: cmd})
+        input_data = {Input.ACTION: commit_action, Input.CMD: cmd}
+        validate(input_data, CommitInput.schema)
+        actual = action.run(input_data)
         self.assertEqual(actual, expected)
+        validate(actual, CommitOutput.schema)
