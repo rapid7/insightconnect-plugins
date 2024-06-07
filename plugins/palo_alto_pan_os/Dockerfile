@@ -15,6 +15,6 @@ ADD . /python/src
 RUN python setup.py build && python setup.py install
 
 # User to run plugin code. The two supported users are: root, nobody
-USER root
+USER nobody
 
 ENTRYPOINT ["/usr/local/bin/komand_palo_alto_pan_os"]

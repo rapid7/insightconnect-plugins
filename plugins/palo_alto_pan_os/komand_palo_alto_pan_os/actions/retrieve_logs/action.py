@@ -8,7 +8,7 @@ import xmltodict
 import time
 import json
 
-timeout = 60
+TIMEOUT = 60
 
 
 class RetrieveLogs(insightconnect_plugin_runtime.Action):
@@ -40,7 +40,7 @@ class RetrieveLogs(insightconnect_plugin_runtime.Action):
         }
 
         response = requests.get(
-            self.connection.request.url, params=querystring, verify=self.connection.request.verify_cert, timeout=timeout
+            self.connection.request.url, params=querystring, verify=self.connection.request.verify_cert, timeout=TIMEOUT
         )
         try:
             dict_response = xmltodict.parse(response.text)
@@ -86,7 +86,7 @@ class RetrieveLogs(insightconnect_plugin_runtime.Action):
                     self.connection.request.url,
                     params=querystring,
                     verify=self.connection.request.verify_cert,
-                    timeout=timeout,
+                    timeout=TIMEOUT,
                 )
                 dict_job_poll_response = xmltodict.parse(job_poll_response.text)
             except BaseException as e:

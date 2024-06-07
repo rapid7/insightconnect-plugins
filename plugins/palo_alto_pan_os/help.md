@@ -138,7 +138,7 @@ Example input:
 | :--- | :--- | :--- | :--- | :--- |
 |code|string|False|Response code from the firewall|20|
 |message|string|False|A message with more detail about the status|command succeeded|
-|status|string|False|The status of the requested operation e.g. success, error, etc|True|
+|status|string|False|The status of the requested operation e.g. success, error, etc|success|
   
 Example output:
 
@@ -146,7 +146,7 @@ Example output:
 {
   "code": 20,
   "message": "command succeeded",
-  "status": true
+  "status": "success"
 }
 ```
 
@@ -196,7 +196,7 @@ Example input:
 | :--- | :--- | :--- | :--- | :--- |
 |code|string|False|Response code from firewall|20|
 |message|string|False|A message with more detail about the status|command succeeded|
-|status|string|False|Status of the requested operation e.g. success, error, etc|True|
+|status|string|False|Status of the requested operation e.g. success, error, etc|success|
   
 Example output:
 
@@ -204,7 +204,7 @@ Example output:
 {
   "code": 20,
   "message": "command succeeded",
-  "status": true
+  "status": "success"
 }
 ```
 

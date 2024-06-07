@@ -17,8 +17,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         hostname = params.get(Input.SERVER)
         verify_cert = params.get(Input.VERIFY_CERT)
 
-        username = params.get(Input.CREDENTIALS).get("username")
-        password = params.get(Input.CREDENTIALS).get("password")
+        username = params.get(Input.CREDENTIALS, {}).get("username")
+        password = params.get(Input.CREDENTIALS, {}).get("password")
         self.request = Request.new_session(self, username, password, hostname, verify_cert)
 
     def test(self):

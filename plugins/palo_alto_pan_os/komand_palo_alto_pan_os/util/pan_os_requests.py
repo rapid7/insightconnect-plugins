@@ -5,7 +5,7 @@ import json
 from insightconnect_plugin_runtime.connection import Connection
 from xmltodict import ParsingInterrupted
 
-timeout = 60
+TIMEOUT = 60
 
 
 class Request(object):
@@ -141,7 +141,7 @@ class Request(object):
             elif method == "SESSION.GET":
                 response = self.session.get(self.url, params=params, verify=self.verify_cert)
             elif method == "REQUESTS.GET":
-                response = requests.get(self.url, params=params, verify=self.verify_cert, timeout=timeout)
+                response = requests.get(self.url, params=params, verify=self.verify_cert, timeout=TIMEOUT)
         except requests.exceptions.HTTPError as e:
             self.logger.info(f"Call to Palo Alto Firewall API failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
