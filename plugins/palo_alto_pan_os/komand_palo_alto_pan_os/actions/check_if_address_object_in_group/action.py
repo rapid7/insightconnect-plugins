@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CheckIfAddressObjectInGroupInput, CheckIfAddressObjectInGroupOutput, Input, Output, Component
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_palo_alto_pan_os.util.ip_check import IpCheck
 
 
-class CheckIfAddressObjectInGroup(komand.Action):
+class CheckIfAddressObjectInGroup(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="check_if_address_object_in_group",
@@ -41,7 +41,7 @@ class CheckIfAddressObjectInGroup(komand.Action):
         self.logger.info(f"Searching through {len(ip_objects)} address objects.")
         ip_object_names = []
         for member in ip_objects.get("member", {}):
-            if type(member) == str:
+            if isinstance(member, str):
                 ip_object_names.append(member)
             else:
                 object_name = member.get("#text", "")
@@ -77,7 +77,7 @@ class CheckIfAddressObjectInGroup(komand.Action):
                     raise PluginException(
                         cause="PAN OS returned an unexpected response.",
                         assistance=f"Address object '{name}' was not found. Check the name and try again.",
-                        date=object_result,
+                        data=object_result,
                     )
 
                 # Now try and deal with that address object
@@ -88,7 +88,7 @@ class CheckIfAddressObjectInGroup(komand.Action):
 
                     # Depending on how PAN OS is feeling on a given day, it will either have a string or list returned
                     # in the XML for the key we just found
-                    if type(address_object) is str:
+                    if isinstance(address_object, str):
                         if ip_checker.check_address_against_object(address_object, address_to_check):
                             object_names_to_return.append(name)
                             found = True

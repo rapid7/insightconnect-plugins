@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import (
     RemoveAddressObjectFromGroupInput,
     RemoveAddressObjectFromGroupOutput,
@@ -8,10 +8,10 @@ from .schema import (
 )
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class RemoveAddressObjectFromGroup(komand.Action):
+class RemoveAddressObjectFromGroup(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="remove_address_object_from_group",
@@ -42,7 +42,7 @@ class RemoveAddressObjectFromGroup(komand.Action):
         found = False
         names = []
         for name in address_objects:
-            if type(name) == str:
+            if isinstance(name, str):
                 names.append(name)
             else:
                 names.append(name.get("#text"))
@@ -58,7 +58,7 @@ class RemoveAddressObjectFromGroup(komand.Action):
     def make_xml(self, names, group_name):
         members = ""
         for name in names:
-            members += f"<member>{name}</member>"
+            members = members.join(f"<member>{name}</member>")
 
         xml_template = f'<entry name="{group_name}"><static>{members}</static></entry>'
 
