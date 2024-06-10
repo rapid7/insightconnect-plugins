@@ -32,3 +32,5 @@ from .get_related_machines.action import GetRelatedMachines
 
 from .collect_investigation_package.action import CollectInvestigationPackage
 
+from .update_alert.action import UpdateAlert
+

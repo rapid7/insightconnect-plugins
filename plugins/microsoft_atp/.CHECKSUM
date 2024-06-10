@@ -1,7 +1,7 @@
 {
-	"spec": "086a1500187382147022b87dff39f53c",
-	"manifest": "fa4bf102f530582155e71d86ce585e9f",
-	"setup": "a4733c5076c3208b5c4199eddc149719",
+	"spec": "6b5c2a23274f42938ad2456af460fcf6",
+	"manifest": "f8b184aa7e3d5f0372b8c7bddb7be876",
+	"setup": "2da039fba6c12797f2ae4614af7cd153",
 	"schemas": [
 		{
 			"identifier": "blacklist/schema.py",
@@ -66,6 +66,10 @@
 		{
 			"identifier": "unisolate_machine/schema.py",
 			"hash": "7ca6d21c5f6871a97334486cb9435b6a"
+		},
+		{
+			"identifier": "update_alert/schema.py",
+			"hash": "35752f8364c14c6879ef940db13ec117"
 		},
 		{
 			"identifier": "connection/schema.py",
