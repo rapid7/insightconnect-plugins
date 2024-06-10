@@ -307,6 +307,7 @@ Example output:
 
 # Version History
 
+* 4.1.12 -  Fix defect where 401 errors may not be raised or logged correctly
 * 4.1.11 -  Update Task `monitor_sign_in_out_activity` to reduce instances of duplicate results
 * 4.1.10 -  Update Task `monitor_sign_in_out_activity` handle invalid or expired pagination token errors
 * 4.1.9 - Updated to include latest SDK functionality v5.4.8 | Task `monitor_sign_in_out_activity` updated to increase max lookback cutoff to 7 days
