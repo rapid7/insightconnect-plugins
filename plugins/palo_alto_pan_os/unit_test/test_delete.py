@@ -1,13 +1,14 @@
 import sys
 import os
-from unittest import TestCase
-from komand_palo_alto_pan_os.actions.delete import Delete
-from komand_palo_alto_pan_os.actions.delete.schema import Input, Output
-from unit_test.util import Util
-from unittest.mock import patch
-from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
+from unittest import TestCase
+from komand_palo_alto_pan_os.actions.delete import Delete
+from komand_palo_alto_pan_os.actions.delete.schema import Input, DeleteInput, DeleteOutput
+from util import Util
+from unittest.mock import patch
+from parameterized import parameterized
+from jsonschema import validate
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -33,5 +34,8 @@ class TestDelete(TestCase):
     )
     def test_delete(self, mock_get, name, xpath, expected):
         action = Util.default_connector(Delete())
-        actual = action.run({Input.XPATH: xpath})
+        input_data = {Input.XPATH: xpath}
+        validate(input_data, DeleteInput.schema)
+        actual = action.run(input_data)
         self.assertEqual(actual, expected)
+        validate(actual, DeleteOutput.schema)

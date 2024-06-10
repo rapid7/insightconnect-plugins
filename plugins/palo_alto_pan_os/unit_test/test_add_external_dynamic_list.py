@@ -1,13 +1,18 @@
 import sys
 import os
-from unittest import TestCase
-from komand_palo_alto_pan_os.actions.add_external_dynamic_list import AddExternalDynamicList
-from komand_palo_alto_pan_os.actions.add_external_dynamic_list.schema import Input, Output
-from unit_test.util import Util
-from unittest.mock import patch
-from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
+from unittest import TestCase
+from komand_palo_alto_pan_os.actions.add_external_dynamic_list import AddExternalDynamicList
+from komand_palo_alto_pan_os.actions.add_external_dynamic_list.schema import (
+    Input,
+    AddExternalDynamicListInput,
+    AddExternalDynamicListOutput,
+)
+from util import Util
+from unittest.mock import patch
+from parameterized import parameterized
+from jsonschema import validate
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -65,15 +70,16 @@ class TestAddExternalDynamicList(TestCase):
         self, mock_get, mock_post, name, list_name, list_type, description, source, repeat, time, day, expected
     ):
         action = Util.default_connector(AddExternalDynamicList())
-        actual = action.run(
-            {
-                Input.NAME: list_name,
-                Input.LIST_TYPE: list_type,
-                Input.DESCRIPTION: description,
-                Input.SOURCE: source,
-                Input.REPEAT: repeat,
-                Input.TIME: time,
-                Input.DAY: day,
-            }
-        )
+        input_data = {
+            Input.NAME: list_name,
+            Input.LIST_TYPE: list_type,
+            Input.DESCRIPTION: description,
+            Input.SOURCE: source,
+            Input.REPEAT: repeat,
+            Input.TIME: time,
+            Input.DAY: day,
+        }
+        validate(input_data, AddExternalDynamicListInput.schema)
+        actual = action.run(input_data)
         self.assertEqual(actual, expected)
+        validate(actual, AddExternalDynamicListOutput.schema)
