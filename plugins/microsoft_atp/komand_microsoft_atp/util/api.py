@@ -221,9 +221,7 @@ class WindwosDefenderATP_API:
         return machine_info.get("id", "")
 
     def update_alert(self, alert_id: str, payload: dict) -> dict:
-        return self._make_request(
-            "PATCH", f"alerts/{alert_id}", json_data=payload
-        )
+        return self._make_request("PATCH", f"alerts/{alert_id}", json_data=payload)
 
     def _make_request(
         self, method: str, path: str, json_data: dict = None, allow_empty: bool = False, params: dict = None
