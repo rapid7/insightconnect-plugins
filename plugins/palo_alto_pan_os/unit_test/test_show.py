@@ -1,13 +1,15 @@
 import sys
 import os
-from unittest import TestCase
-from komand_palo_alto_pan_os.actions.show import Show
-from komand_palo_alto_pan_os.actions.show.schema import Input, Output
-from unit_test.util import Util
-from unittest.mock import patch
-from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
+from unittest import TestCase
+from komand_palo_alto_pan_os.actions.show import Show
+from komand_palo_alto_pan_os.actions.show.schema import Input, ShowInput, ShowOutput
+from util import Util
+
+from unittest.mock import patch
+from parameterized import parameterized
+from jsonschema import validate
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -55,5 +57,8 @@ class TestShow(TestCase):
     )
     def test_show(self, mock_get, name, xpath, expected):
         action = Util.default_connector(Show())
-        actual = action.run({Input.XPATH: xpath})
+        input_data = {Input.XPATH: xpath}
+        validate(input_data, ShowInput.schema)
+        actual = action.run(input_data)
         self.assertEqual(actual, expected)
+        validate(actual, ShowOutput.schema)

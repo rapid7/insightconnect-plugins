@@ -1,12 +1,12 @@
-import komand
-from .schema import RemoveFromPolicyInput, RemoveFromPolicyOutput
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from .schema import RemoveFromPolicyInput, RemoveFromPolicyOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 from komand_palo_alto_pan_os.util import util
 
 
-class RemoveFromPolicy(komand.Action):
+class RemoveFromPolicy(insightconnect_plugin_runtime.Action):
     # used to convert from keys used by plugin input to keys expected by PAN-OS
     _CONVERSION_KEY = {
         "source": "source",
@@ -24,20 +24,20 @@ class RemoveFromPolicy(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="remove_from_policy",
-            description="Remove a rule to a PAN-OS security policy",
+            description=Component.DESCRIPTION,
             input=RemoveFromPolicyInput(),
             output=RemoveFromPolicyOutput(),
         )
 
     def run(self, params={}):
         update = util.SecurityPolicy()
-        rule_name = params.get("rule_name")
+        rule_name = params.get(Input.RULE_NAME)
         policy_type = False
         if params.get("update_active_or_candidate_configuration") == "active":
             policy_type = True
 
         # Set xpath to security polices
-        xpath = "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='{0}']".format(rule_name)
+        xpath = f"/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='{rule_name}']"
 
         # Get current policy config
         if policy_type:
@@ -62,26 +62,26 @@ class RemoveFromPolicy(komand.Action):
             "action",
         ]
         new_policy = {}
-        for i in key_list:
-            value = self._CONVERSION_KEY[i]
+        for key in key_list:
+            value = self._CONVERSION_KEY.get("key")
             if params.get(value):
-                new_policy[i] = update.remove_from_key(current_config[i], params.get(value))
+                new_policy[key] = update.remove_from_key(current_config[key], params.get(value))
             else:
-                new_policy[i] = current_config[i]
+                new_policy[key] = current_config[key]
 
         # Build new element
         element = update.element_for_policy_update(
             rule_name=rule_name,
-            to=new_policy["to"],
-            from_=new_policy["from"],
-            source=new_policy["source"],
-            destination=new_policy["destination"],
-            service=new_policy["service"],
-            application=new_policy["application"],
-            category=new_policy["category"],
-            hip_profiles=new_policy["hip-profiles"],
-            source_user=new_policy["source-user"],
-            fire_wall_action=new_policy["action"],
+            to=new_policy.get("to"),
+            from_=new_policy.get("from"),
+            source=new_policy.get("source"),
+            destination=new_policy.get("destination"),
+            service=new_policy.get("service"),
+            application=new_policy.get("application"),
+            category=new_policy.get("category"),
+            hip_profiles=new_policy.get("hip-profiles"),
+            source_user=new_policy.get("source-user"),
+            fire_wall_action=new_policy.get("action"),
         )
 
         # Update policy

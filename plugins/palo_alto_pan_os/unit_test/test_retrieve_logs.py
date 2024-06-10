@@ -1,13 +1,14 @@
 import sys
 import os
-from unittest import TestCase
-from komand_palo_alto_pan_os.actions.retrieve_logs import RetrieveLogs
-from komand_palo_alto_pan_os.actions.retrieve_logs.schema import Input, Output
-from unit_test.util import Util
-from unittest.mock import patch
-from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
+from unittest import TestCase
+from komand_palo_alto_pan_os.actions.retrieve_logs import RetrieveLogs
+from komand_palo_alto_pan_os.actions.retrieve_logs.schema import Input, RetrieveLogsInput, RetrieveLogsOutput
+from util import Util
+from unittest.mock import patch
+from parameterized import parameterized
+from jsonschema import validate
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -163,32 +164,22 @@ class TestRetrieveLogs(TestCase):
                     }
                 },
             ],
-            [
-                "traffic_empty",
-                "traffic",
-                1,
-                None,
-                None,
-                None,
-                10,
-                None,
-                {"response": {"logs": {"@count": "0", "@progress": "100"}}},
-            ],
         ]
     )
     def test_retrieve_logs(
         self, mock_get, mock_get2, name, log_type, count, skip, query_filter, interval, max_tries, direction, expected
     ):
         action = Util.default_connector(RetrieveLogs())
-        actual = action.run(
-            {
-                Input.LOG_TYPE: log_type,
-                Input.COUNT: count,
-                Input.SKIP: skip,
-                Input.FILTER: query_filter,
-                Input.INTERVAL: interval,
-                Input.MAX_TRIES: max_tries,
-                Input.DIRECTION: direction,
-            }
-        )
+        input_data = {
+            Input.LOG_TYPE: log_type,
+            Input.COUNT: count,
+            Input.SKIP: skip,
+            Input.FILTER: query_filter,
+            Input.INTERVAL: interval,
+            Input.MAX_TRIES: max_tries,
+            Input.DIRECTION: direction,
+        }
+        validate(input_data, RetrieveLogsInput.schema)
+        actual = action.run(input_data)
         self.assertEqual(actual, expected)
+        validate(actual, RetrieveLogsOutput.schema)

@@ -1,6 +1,6 @@
-import komand
-from .schema import RetrieveLogsInput, RetrieveLogsOutput
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from .schema import RetrieveLogsInput, RetrieveLogsOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import requests
@@ -8,24 +8,26 @@ import xmltodict
 import time
 import json
 
+TIMEOUT = 60
 
-class RetrieveLogs(komand.Action):
+
+class RetrieveLogs(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="retrieve_logs",
-            description="Query firewall logs",
+            description=Component.DESCRIPTION,
             input=RetrieveLogsInput(),
             output=RetrieveLogsOutput(),
         )
 
-    def run(self, params={}):
-        log_type = params.get("log_type")
-        query = params.get("filter")
-        direction = params.get("direction")
-        count = params.get("count")
-        skip = params.get("skip")
-        max_tries = params.get("max_tries")
-        interval = params.get("interval")
+    def run(self, params={}):  # noqa: MC0001
+        log_type = params.get(Input.LOG_TYPE)
+        query = params.get(Input.FILTER)
+        direction = params.get(Input.DIRECTION)
+        count = params.get(Input.COUNT)
+        skip = params.get(Input.SKIP)
+        max_tries = params.get(Input.MAX_TRIES)
+        interval = params.get(Input.INTERVAL)
 
         querystring = {
             "type": "log",
@@ -38,9 +40,7 @@ class RetrieveLogs(komand.Action):
         }
 
         response = requests.get(
-            self.connection.request.url,
-            params=querystring,
-            verify=self.connection.request.verify_cert,
+            self.connection.request.url, params=querystring, verify=self.connection.request.verify_cert, timeout=TIMEOUT
         )
         try:
             dict_response = xmltodict.parse(response.text)
@@ -86,6 +86,7 @@ class RetrieveLogs(komand.Action):
                     self.connection.request.url,
                     params=querystring,
                     verify=self.connection.request.verify_cert,
+                    timeout=TIMEOUT,
                 )
                 dict_job_poll_response = xmltodict.parse(job_poll_response.text)
             except BaseException as e:
@@ -103,7 +104,7 @@ class RetrieveLogs(komand.Action):
                     data=error,
                 )
             if dict_job_poll_response["response"]["result"]["job"]["status"] == "FIN":
-                return {"response": dict_job_poll_response["response"]["result"]["log"]}
+                return {Output.RESPONSE: dict_job_poll_response["response"]["result"]["log"]}
             tries_completed += 1
             if tries_completed != max_tries:
                 self.logger.info("Job not completed, waiting before re-polling...")

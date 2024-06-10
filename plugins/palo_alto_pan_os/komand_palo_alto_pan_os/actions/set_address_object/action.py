@@ -1,6 +1,6 @@
-import komand
-from .schema import SetAddressObjectInput, SetAddressObjectOutput, Input, Output
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from .schema import SetAddressObjectInput, SetAddressObjectOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import re
@@ -9,11 +9,11 @@ from IPy import IP
 import validators
 
 
-class SetAddressObject(komand.Action):
+class SetAddressObject(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="set_address_object",
-            description="Create a new address object",
+            description=Component.DESCRIPTION,
             input=SetAddressObjectInput(),
             output=SetAddressObjectOutput(),
         )
@@ -22,9 +22,9 @@ class SetAddressObject(komand.Action):
     def determine_address_type(address):
         if validators.domain(address):
             return "fqdn"
-        if validators.ipv4(address) or validators.ipv4_cidr(address):
+        if validators.ipv4(address) or validators.ipv4(address, cidr=True, strict=True):
             return "ip-netmask"
-        if validators.ipv6(address) or validators.ipv6_cidr(address):
+        if validators.ipv6(address) or validators.ipv6(address, cidr=True, strict=True):
             return "ip-netmask"
         if re.search("-", address):
             split_range = address.split("-")
@@ -77,7 +77,7 @@ class SetAddressObject(komand.Action):
         # Other
         return IP(address).iptype() in ip_types
 
-    def run(self, params={}):
+    def run(self, params={}):  # noqa: MC0001
         address = params.get(Input.ADDRESS)
         # object_type = params.get(Input.TYPE)
         name = params.get(Input.ADDRESS_OBJECT)

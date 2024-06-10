@@ -1,5 +1,5 @@
 import dicttoxml
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_palo_alto_pan_os.util.log_helper import LogHelper
 
 
@@ -30,17 +30,17 @@ class SecurityPolicy:
             "hip-profiles",
         ]
         output = {}
-        for i in key_list:
+        for key in key_list:
             try:
-                output[i] = policy["response"]["result"]["entry"][i]["member"]
+                output[key] = policy["response"]["result"]["entry"][key]["member"]
             except KeyError:
                 self.logger.info(f"Current policy {policy}")
-                self.logger.info(f"The current policy has no {i} policy: Setting to any.")
-                output[i] = "any"
+                self.logger.info(f"The current policy has no {key} policy: Setting to any.")
+                output[key] = "any"
             except TypeError:
                 self.logger.info(f"Current policy {policy}")
-                self.logger.info(f"The current policy has no policy config for {i}: Setting to any.")
-                output[i] = "any"
+                self.logger.info(f"The current policy has no policy config for {key}: Setting to any.")
+                output[key] = "any"
             except BaseException:
                 raise PluginException(
                     cause="An unknown formatting error occurred when formatting a security policy.",
@@ -56,21 +56,21 @@ class SecurityPolicy:
                 data=f"Policy config: {policy}",
             )
 
-        for i in output:
-            if isinstance(output[i], list):
-                if isinstance(output[i][0], dict):
-                    for k, val in enumerate(output[i]):
+        for _, object_value in output.items():
+            if isinstance(object_value, list):
+                if isinstance(object_value[0], dict):
+                    for _, object_value_value in object_value.items():
                         try:
-                            output[i][k] = val["#text"]
+                            object_value[key] = object_value_value["#text"]
                         except KeyError:
                             raise PluginException(
                                 cause="An unknown formatting error occurred when formatting a security subpolicy.",
                                 assistance="Contact support for help.",
-                                data=f"Subpolicy {output[i][0]}",
+                                data=f"Subpolicy {object_value[0]}",
                             )
-            if isinstance(output[i], dict):
-                if isinstance(output[i], dict) and "#text" in output[i]:
-                    output[i] = output[i]["#text"]
+            if isinstance(object_value, dict):
+                if isinstance(object_value, dict) and "#text" in object_value:
+                    object_value = object_value["#text"]
 
         return output
 
@@ -171,17 +171,17 @@ class SecurityPolicy:
 
         self.logger.debug(f"Dictionary to convert to XML {element}")
 
-        for value in element:
-            if not value == "action" and isinstance(element[value], str):
-                temp = element[value]
-                element[value] = {"member": temp}
+        for key, value in element.items():
+            if not value == "action" and isinstance(key, str):
+                temp = key
+                key = {"member": temp}
 
         element = dicttoxml.dicttoxml(element, attr_type=False, root=False)
         element = element.decode()
         element = element.replace("<item>", "<member>")
         element = element.replace("</item>", "</member>")
-        element = '<entry name="{name}">{data}</entry>'.format(name=rule_name, data=element)
-        self.logger.info("XML :{}".format(element))
+        element = f'<entry name="{rule_name}">{element}</entry>'
+        self.logger.info(f"XML :{element}")
         return element
 
 
@@ -234,13 +234,11 @@ class ExternalList:
             )
         else:
             element = (
-                "<type><{list_type}>"
-                "<recurring><{repeat}/></recurring>"
-                "<description>{description}</description>"
-                "<url>{source}</url>"
-                "</{list_type}></type>".format(
-                    list_type=list_type, repeat=repeat, description=description, source=source
-                )
+                f"<type><{list_type}>"
+                f"<recurring><{repeat}/></recurring>"
+                f"<description>{description}</description>"
+                f"<url>{source}</url>"
+                f"</{list_type}></type>"
             )
-        self.logger.info("XML :{}".format(element))
+        self.logger.info(f"XML :{element}")
         return element

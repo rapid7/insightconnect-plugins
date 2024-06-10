@@ -1,12 +1,12 @@
-import komand
-from .schema import AddExternalDynamicListInput, AddExternalDynamicListOutput
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from .schema import AddExternalDynamicListInput, AddExternalDynamicListOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 from komand_palo_alto_pan_os.util import util
 
 
-class AddExternalDynamicList(komand.Action):
+class AddExternalDynamicList(insightconnect_plugin_runtime.Action):
 
     _LIST_TYPE_KEY = {
         "Predefined IP List": "",
@@ -24,27 +24,27 @@ class AddExternalDynamicList(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_external_dynamic_list",
-            description="Add an external dynamic list",
+            description=Component.DESCRIPTION,
             input=AddExternalDynamicListInput(),
             output=AddExternalDynamicListOutput(),
         )
 
     def run(self, params={}):
         add = util.ExternalList()
-        name = params.get("name")
-        list_type = params.get("list_type")
-        description = params.get("description")
-        source = params.get("source")
-        repeat = params.get("repeat")
-        time = params.get("time")
-        day = params.get("day")
+        name = params.get(Input.NAME)
+        list_type = params.get(Input.LIST_TYPE)
+        description = params.get(Input.DESCRIPTION)
+        source = params.get(Input.SOURCE)
+        repeat = params.get(Input.REPEAT)
+        time = params.get(Input.TIME)
+        day = params.get(Input.DAY)
 
         xpath = f"/config/devices/entry/vsys/entry/external-list/entry[@name='{name}']"
         element = add.element_for_create_external_list(
-            self._LIST_TYPE_KEY[list_type],
+            self._LIST_TYPE_KEY.get(list_type),
             description,
             source,
-            self._REPEAT_KEY[repeat],
+            self._REPEAT_KEY.get(repeat),
             time,
             day.lower(),
         )

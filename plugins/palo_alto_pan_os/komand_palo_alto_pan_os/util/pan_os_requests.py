@@ -1,9 +1,11 @@
-from komand.exceptions import ConnectionTestException, PluginException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 import xmltodict
 import requests
 import json
-from komand.connection import Connection
+from insightconnect_plugin_runtime.connection import Connection
 from xmltodict import ParsingInterrupted
+
+TIMEOUT = 60
 
 
 class Request(object):
@@ -139,7 +141,7 @@ class Request(object):
             elif method == "SESSION.GET":
                 response = self.session.get(self.url, params=params, verify=self.verify_cert)
             elif method == "REQUESTS.GET":
-                response = requests.get(self.url, params=params, verify=self.verify_cert)
+                response = requests.get(self.url, params=params, verify=self.verify_cert, timeout=TIMEOUT)
         except requests.exceptions.HTTPError as e:
             self.logger.info(f"Call to Palo Alto Firewall API failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
@@ -163,7 +165,7 @@ class Request(object):
         )
 
     @staticmethod
-    def get_output_with_exceptions(response, element=None):
+    def get_output_with_exceptions(response, element=None):  # noqa: MC0001
         if response.status_code == 401:
             raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
         if response.status_code == 403:
