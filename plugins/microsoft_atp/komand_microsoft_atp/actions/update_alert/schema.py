@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Updates properties of existing Alert"
+    DESCRIPTION = "Updates properties of existing alert"
 
 
 class Input:
@@ -24,14 +24,14 @@ class UpdateAlertInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "alert_fields": {
       "type": "object",
-      "title": "Alert Fields",
-      "description": "Fields of the Alert to Update",
+      "title": "Alert fields",
+      "description": "Fields of the alert to update",
       "order": 2
     },
     "alert_id": {
       "type": "string",
       "title": "Alert ID",
-      "description": "ID of Alert to Update",
+      "description": "ID of alert to update",
       "order": 1
     }
   },
@@ -55,7 +55,7 @@ class UpdateAlertOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "alert": {
       "title": "Alert",
-      "description": "Alert",
+      "description": "Alert entity with the updated properties",
       "order": 1
     }
   },

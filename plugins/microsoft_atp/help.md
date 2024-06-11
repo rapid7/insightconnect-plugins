@@ -863,16 +863,16 @@ Example output:
 }
 ```
 
-#### Update Alert
+#### Update alert
 
-This action is used to updates properties of existing Alert
+This action is used to updates properties of existing alert
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|alert_fields|object|None|True|Fields of the Alert to Update|None|{'status': 'Resolved', 'assignedTo': 'email@example.com', 'classification': 'FalsePositive', 'determination': 'Malware', 'comment': 'Resolve my alert and assign to secop2'}|None|None|
-|alert_id|string|None|True|ID of Alert to Update|None|1216885583807651612136280442|None|None|
+|alert_fields|object|None|True|Fields of the alert to update|None|{'status': 'Resolved', 'assignedTo': 'email@example.com', 'classification': 'FalsePositive', 'determination': 'Malware', 'comment': 'Resolve my alert and assign to secop2'}|None|None|
+|alert_id|string|None|True|ID of alert to update|None|1216885583807651612136280442|None|None|
   
 Example input:
 
@@ -893,7 +893,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|alert|Alert|True|Alert|{'id': 'da637292082891366787_322129023', 'incidentId': 1, 'investigationId': 1, 'assignedTo': 'Automation', 'severity': 'Informational', 'status': 'Resolved', 'investigationState': 'Benign', 'detectionSource': 'WindowsDefenderAv', 'category': 'Malware', 'title': 'EICAR_Test_File malware was detected', 'description': 'Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks. This detection might indicate that the malware was stopped from delivering its payload. However, it is prudent to check the machine for signs of infection.', 'alertCreationTime': '2020-07-01T13:51:29.0741799Z', 'firstEventTime': '2020-07-01T13:49:55.2853766Z', 'lastEventTime': '2020-07-01T13:49:55.8520351Z', 'lastUpdateTime': '2020-07-02T20:11:23.0966667Z', 'resolvedTime': '2020-07-01T14:02:24.4812386Z', 'machineId': '2df36d707c1ee508xyFf77f3dbfc95db65bc4a73', 'computerDnsName': 'example-desktop', 'aadTenantId': '5c824599-ab2c-43ab-651x-3b886d4f8f10', 'comments': [], 'evidence': []}|
+|alert|Alert|True|Alert entity with the updated properties|{'id': 'da637292082891366787_322129023', 'incidentId': 1, 'investigationId': 1, 'assignedTo': 'Automation', 'severity': 'Informational', 'status': 'Resolved', 'investigationState': 'Benign', 'detectionSource': 'WindowsDefenderAv', 'category': 'Malware', 'title': 'EICAR_Test_File malware was detected', 'description': 'Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks. This detection might indicate that the malware was stopped from delivering its payload. However, it is prudent to check the machine for signs of infection.', 'alertCreationTime': '2020-07-01T13:51:29.0741799Z', 'firstEventTime': '2020-07-01T13:49:55.2853766Z', 'lastEventTime': '2020-07-01T13:49:55.8520351Z', 'lastUpdateTime': '2020-07-02T20:11:23.0966667Z', 'resolvedTime': '2020-07-01T14:02:24.4812386Z', 'machineId': '2df36d707c1ee508xyFf77f3dbfc95db65bc4a73', 'computerDnsName': 'example-desktop', 'aadTenantId': '5c824599-ab2c-43ab-651x-3b886d4f8f10', 'comments': [], 'evidence': []}|
   
 Example output:
 
