@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from komand_mimecast.util.exceptions import ApiClientException
 from komand_mimecast.util import util
 from komand_mimecast.util.api import MimecastAPI
 from .schema import ConnectionSchema, Input
@@ -37,3 +38,16 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 data=response.get(FAIL_FIELD),
             )
         return {"success": True}
+
+
+    def test_task(self):
+        try:
+            _, _, status_code = self.client.get_siem_logs()
+            return {"success": True}
+        except ApiClientException as error:
+            self.logger.error(error)
+            raise ConnectionTestException(
+                cause=error.cause,
+                assistance=error.assistance,
+                data=error.data
+            )

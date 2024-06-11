@@ -92,7 +92,7 @@ class MimecastAPI:
     def find_remediation_incidents(self, data: dict) -> dict:
         return self._handle_rest_call("POST", f"{API}/ttp/remediation/find-incidents", data=data)
 
-    def get_siem_logs(self, next_page_token: str) -> Union[List[Dict[str, Any]], Dict[str, Any], int]:
+    def get_siem_logs(self, next_page_token: str = "") -> Union[List[Dict[str, Any]], Dict[str, Any], int]:
         uri = f"{API}/audit/get-siem-logs"
         data = {"compress": True, "file_format": "JSON", "type": "MTA", "token": next_page_token}
 
