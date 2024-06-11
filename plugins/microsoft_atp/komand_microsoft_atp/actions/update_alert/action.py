@@ -17,8 +17,6 @@ class UpdateAlert(insightconnect_plugin_runtime.Action):
         alert_id = params.get(Input.ALERT_ID)
         # END INPUT BINDING - DO NOT REMOVE
         self.logger.info("Running...")
-        self.logger.info(f"alert_id: {alert_id}")
-        self.logger.info(f"payload: {alert_fields}")
 
         return {
             Output.ALERT: self.connection.client.update_alert(alert_id, payload=alert_fields),
