@@ -1470,7 +1470,7 @@ actions:
         required: true
         example: {"collect_investigation_package_response":  {"requestorComment": "Investigation package collected via InsightConnect" ,"status": "Pending" ,"type": "CollectInvestigationPackage" ,"commands": [] ,"creationDateTimeUtc": "2021-02-25T13:53:29.1889041Z" ,"requestSource": "PublicApi" ,"id": "7de39b39-107e-4556-855b-25cf652835ef" ,"lastUpdateDateTimeUtc": "2021-02-25T13:53:29.1889041Z" ,"machineId": "8de370ca0e0e58ff2c2513bbc16f632ffa6e6024" ,"requestor": "b6e46392-61b9-48c0-ada3-63e3cd30d95b" ,"@odata.context": "https://api.securitycenter.windows.com/api/$metada..." ,"computerDnsName": "msedgewin10" ,"errorHResult":  0 }}
   update_alert:
-    title: Update alert
+    title: Update Alert
     description: Updates properties of existing alert
     input:
       alert_id:
@@ -1480,7 +1480,7 @@ actions:
         example: 121688558380765161_2136280442
         required: true
       alert_fields:
-        title: Alert fields
+        title: Alert Fields
         description: Fields of the alert to update
         type: object
         required: true

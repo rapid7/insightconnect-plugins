@@ -863,7 +863,7 @@ Example output:
 }
 ```
 
-#### Update alert
+#### Update Alert
 
 This action is used to updates properties of existing alert
 

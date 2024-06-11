@@ -24,7 +24,7 @@ class UpdateAlertInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "alert_fields": {
       "type": "object",
-      "title": "Alert fields",
+      "title": "Alert Fields",
       "description": "Fields of the alert to update",
       "order": 2
     },
