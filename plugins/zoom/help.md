@@ -57,12 +57,12 @@ This action is used to create user associated to account
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action|string|create|True|Specify how to create the new user|['create', 'autoCreate', 'custCreate', 'ssoCreate']|create|None|None|
+|action|string|create|True|Specify how to create the new user|["create", "autoCreate", "custCreate", "ssoCreate"]|create|None|None|
 |email|string|None|True|Email address of user|None|user@example.com|None|None|
 |first_name|string|None|False|First name of user|None|John|None|None|
 |last_name|string|None|True|Last name of user|None|Smith|None|None|
-|type|string|None|True|User type|['Basic', 'Licensed']|Basic|None|None|
-
+|type|string|None|True|User type|["Basic", "Licensed"]|Basic|None|None|
+  
 Example input:
 
 ```
@@ -105,7 +105,7 @@ This action is used to delete or disassociate user from account
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|action|string|None|True|Specify how to delete the user. To delete pending user, use disassociate|['delete', 'disassociate']|delete|None|None|
+|action|string|None|True|Specify how to delete the user. To delete pending user, use disassociate|["delete", "disassociate"]|delete|None|None|
 |id|string|None|True|The user identifier or email address|None|user@example.com|None|None|
 |transfer_email|string|None|False|Email to transfer meetings, webinars, or recordings|None|user@example.com|None|None|
 |transfer_meetings|boolean|False|False|Whether to transfer meetings to defined transfer email|None|False|None|None|
@@ -187,8 +187,8 @@ This trigger is used to poll for user activity events
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|activity_type|string|None|True|Type of user activity to match event|['Sign in', 'Sign out', 'All']|All|None|None|
-
+|activity_type|string|None|True|Type of user activity to match event|["Sign in", "Sign out", "All"]|All|None|None|
+  
 Example input:
 
 ```
