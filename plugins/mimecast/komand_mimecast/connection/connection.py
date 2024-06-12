@@ -41,7 +41,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test_task(self):
         try:
-            _, _, status_code = self.client.get_siem_logs()
+            _, _, _ = self.client.get_siem_logs("")
             return {"success": True}
         except ApiClientException as error:
             self.logger.error(error)
