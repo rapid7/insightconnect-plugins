@@ -862,6 +862,68 @@ Example output:
   }
 }
 ```
+
+#### Update Alert
+
+This action is used to updates properties of existing alert
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|alert_fields|object|None|True|Fields of the alert to update|None|{'status': 'Resolved', 'assignedTo': 'email@example.com', 'classification': 'FalsePositive', 'determination': 'Malware', 'comment': 'Resolve my alert and assign to secop2'}|None|None|
+|alert_id|string|None|True|ID of alert to update|None|1216885583807651612136280442|None|None|
+  
+Example input:
+
+```
+{
+  "alert_fields": {
+    "assignedTo": "email@example.com",
+    "classification": "FalsePositive",
+    "comment": "Resolve my alert and assign to secop2",
+    "determination": "Malware",
+    "status": "Resolved"
+  },
+  "alert_id": 1216885583807651612136280442
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|alert|Alert|True|Alert entity with the updated properties|{'id': 'da637292082891366787_322129023', 'incidentId': 1, 'investigationId': 1, 'assignedTo': 'Automation', 'severity': 'Informational', 'status': 'Resolved', 'investigationState': 'Benign', 'detectionSource': 'WindowsDefenderAv', 'category': 'Malware', 'title': 'EICAR_Test_File malware was detected', 'description': 'Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks. This detection might indicate that the malware was stopped from delivering its payload. However, it is prudent to check the machine for signs of infection.', 'alertCreationTime': '2020-07-01T13:51:29.0741799Z', 'firstEventTime': '2020-07-01T13:49:55.2853766Z', 'lastEventTime': '2020-07-01T13:49:55.8520351Z', 'lastUpdateTime': '2020-07-02T20:11:23.0966667Z', 'resolvedTime': '2020-07-01T14:02:24.4812386Z', 'machineId': '2df36d707c1ee508xyFf77f3dbfc95db65bc4a73', 'computerDnsName': 'example-desktop', 'aadTenantId': '5c824599-ab2c-43ab-651x-3b886d4f8f10', 'comments': [], 'evidence': []}|
+  
+Example output:
+
+```
+{
+  "alert": {
+    "aadTenantId": "5c824599-ab2c-43ab-651x-3b886d4f8f10",
+    "alertCreationTime": "2020-07-01T13:51:29.0741799Z",
+    "assignedTo": "Automation",
+    "category": "Malware",
+    "comments": [],
+    "computerDnsName": "example-desktop",
+    "description": "Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks. This detection might indicate that the malware was stopped from delivering its payload. However, it is prudent to check the machine for signs of infection.",
+    "detectionSource": "WindowsDefenderAv",
+    "evidence": [],
+    "firstEventTime": "2020-07-01T13:49:55.2853766Z",
+    "id": "da637292082891366787_322129023",
+    "incidentId": 1,
+    "investigationId": 1,
+    "investigationState": "Benign",
+    "lastEventTime": "2020-07-01T13:49:55.8520351Z",
+    "lastUpdateTime": "2020-07-02T20:11:23.0966667Z",
+    "machineId": "2df36d707c1ee508xyFf77f3dbfc95db65bc4a73",
+    "resolvedTime": "2020-07-01T14:02:24.4812386Z",
+    "severity": "Informational",
+    "status": "Resolved",
+    "title": "EICAR_Test_File malware was detected"
+  }
+}
+```
 ### Triggers
 
 
@@ -1271,6 +1333,7 @@ Example output:
 
 # Version History
 
+* 5.2.0 - Add new action: Update Alert
 * 5.1.0 - Adding the following as new action types to `blacklist` action ['Warn', 'Block', 'Audit'] | Add a new flag in the `blacklist` action to toggle generateAlerts flag | Bump SDK to version 5.4.9
 * 5.0.0 - Updated the SDK version | Cloud enabled | fixed bug when machine_id is used for find_first_machine
 * 4.8.1 - Fixed a problem where some actions could not find the machine
