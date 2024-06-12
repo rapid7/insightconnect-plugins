@@ -155,7 +155,7 @@ class ZoomAPI:
                 _request=request,
                 exception_custom_configs=custom_config,
                 timeout=120,
-                allowed_status_codes=[HTTPStatusCodes.TOO_MANY_REQUESTS]
+                allowed_status_codes=[HTTPStatusCodes.TOO_MANY_REQUESTS],
             )
 
             self.logger.info(f"Got status code {response.status_code} from OAuth token refresh")
@@ -194,8 +194,7 @@ class ZoomAPI:
             allowed_codes.append(HTTPStatusCodes.NOT_FOUND)
         custom_config = {
             HTTPStatusCodes.CONFLICT: PluginException(
-                cause="User already exists.",
-                assistance="Please check your input and try again."
+                cause="User already exists.", assistance="Please check your input and try again."
             )
         }
         # try:
@@ -204,7 +203,7 @@ class ZoomAPI:
             _request=request,
             exception_custom_configs=custom_config,
             exception_data_location=ResponseExceptionData.RESPONSE_JSON,
-            allowed_status_codes=allowed_codes
+            allowed_status_codes=allowed_codes,
         )
         self.logger.info(f"Got response status code: {response.status_code}")
 

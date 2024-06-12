@@ -3,23 +3,14 @@ import sys
 sys.path.append("../")
 
 import logging
-import unittest
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 
 from icon_zoom.util.api import AuthenticationRetryLimitError, ZoomAPI
+from mock import MockResponse
 
 REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI._refresh_oauth_token"
-REQUESTS_PATH = "requests.request"
-
-
-class MockResponse:
-    def __init__(self, status_code: int, headers: dict = {}):
-        self.status_code = status_code
-        self.headers = headers
-
-    def json(self) -> dict:
-        return {}
+REQUESTS_PATH = "requests.Session.send"
 
 
 class TestAPI(TestCase):
