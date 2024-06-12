@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: microsoft_atp
 title: Microsoft Windows Defender ATP
 description: The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
-version: 5.1.0
+version: 5.2.0
 connection_version: 5
 supported_versions: ["2024-05-21"]
 vendor: rapid7
@@ -34,6 +34,7 @@ references:
  - "[Windows Defender ATP API Start Page](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/use-apis)"
  - "[Windows Defender ATP API Endpoints](https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-atp/exposed-apis-list)"
 version_history:
+ - "5.2.0 - Add new action: Update Alert"
  - "5.1.0 - Adding the following as new action types to `blacklist` action ['Warn', 'Block', 'Audit'] | Add a new flag in the `blacklist` action to toggle generateAlerts flag | Bump SDK to version 5.4.9"
  - "5.0.0 - Updated the SDK version | Cloud enabled | fixed bug when machine_id is used for find_first_machine"
  - "4.8.1 - Fixed a problem where some actions could not find the machine"
@@ -1468,6 +1469,29 @@ actions:
         type: machine_action
         required: true
         example: {"collect_investigation_package_response":  {"requestorComment": "Investigation package collected via InsightConnect" ,"status": "Pending" ,"type": "CollectInvestigationPackage" ,"commands": [] ,"creationDateTimeUtc": "2021-02-25T13:53:29.1889041Z" ,"requestSource": "PublicApi" ,"id": "7de39b39-107e-4556-855b-25cf652835ef" ,"lastUpdateDateTimeUtc": "2021-02-25T13:53:29.1889041Z" ,"machineId": "8de370ca0e0e58ff2c2513bbc16f632ffa6e6024" ,"requestor": "b6e46392-61b9-48c0-ada3-63e3cd30d95b" ,"@odata.context": "https://api.securitycenter.windows.com/api/$metada..." ,"computerDnsName": "msedgewin10" ,"errorHResult":  0 }}
+  update_alert:
+    title: Update Alert
+    description: Updates properties of existing alert
+    input:
+      alert_id:
+        title: Alert ID
+        description: ID of alert to update
+        type: string
+        example: 121688558380765161_2136280442
+        required: true
+      alert_fields:
+        title: Alert Fields
+        description: Fields of the alert to update
+        type: object
+        required: true
+        example: {"status": "Resolved","assignedTo": "email@example.com","classification": "FalsePositive","determination": "Malware","comment": "Resolve my alert and assign to secop2"}
+    output:
+      alert:
+        title: Alert
+        description: Alert entity with the updated properties
+        type: Alert
+        required: true
+        example: {"id":"da637292082891366787_322129023","incidentId":1,"investigationId":1,"assignedTo":"Automation","severity":"Informational","status":"Resolved","investigationState":"Benign","detectionSource":"WindowsDefenderAv","category":"Malware","title":"EICAR_Test_File malware was detected","description":"Malware and unwanted software are undesirable applications that perform annoying, disruptive, or harmful actions on affected machines. Some of these undesirable applications can replicate and spread from one machine to another. Others are able to receive commands from remote attackers and perform activities associated with cyber attacks. This detection might indicate that the malware was stopped from delivering its payload. However, it is prudent to check the machine for signs of infection.","alertCreationTime":"2020-07-01T13:51:29.0741799Z","firstEventTime":"2020-07-01T13:49:55.2853766Z","lastEventTime":"2020-07-01T13:49:55.8520351Z","lastUpdateTime":"2020-07-02T20:11:23.0966667Z","resolvedTime":"2020-07-01T14:02:24.4812386Z","machineId":"2df36d707c1ee508xyFf77f3dbfc95db65bc4a73","computerDnsName":"example-desktop","aadTenantId":"5c824599-ab2c-43ab-651x-3b886d4f8f10","comments":[],"evidence":[]}
 triggers:
   get_alert_matching_key:
     title: Get Alerts Matching Key
