@@ -50,7 +50,7 @@ class GetOatList(insightconnect_plugin_runtime.Action):
                 data=count.error,
             )
         total_count = count.response.total_count
-        if total_count >= 50:
+        if total_count > 50:
             raise PluginException(
                 cause="Attempted query is over-sized (more than 50 results).",
                 assistance="Please refine your inputs to reduce search size and try again.",
@@ -60,7 +60,7 @@ class GetOatList(insightconnect_plugin_runtime.Action):
         self.logger.info("Creating OATs list...")
         try:
             client.oat.consume(
-                lambda oat: new_oats.append(oat.model_dump_json()),
+                lambda oat: new_oats.append(json.loads(oat.model_dump_json())),
                 detected_start_date_time=detected_start_date_time,
                 detected_end_date_time=detected_end_date_time,
                 ingested_start_date_time=ingested_start_date_time,
@@ -75,10 +75,6 @@ class GetOatList(insightconnect_plugin_runtime.Action):
                 assistance="Please check the provided parameters and try again.",
                 data=error,
             )
-        # Load json objects to list
-        oats_list = []
-        for new_oat in new_oats:
-            oats_list.append(json.loads(new_oat))
         # Return results
         self.logger.info("Returning Results...")
-        return {Output.TOTAL_COUNT: len(new_oats), Output.OATS: oats_list}
+        return {Output.TOTAL_COUNT: len(new_oats), Output.OATS: new_oats}

@@ -53,7 +53,7 @@ class GetEmailActivityData(insightconnect_plugin_runtime.Action):
                 data=count.error,
             )
         total_count = count.response.total_count
-        if total_count >= 5000:
+        if total_count > 5000:
             raise PluginException(
                 cause="Attempted query is over-sized (more than 5K results).",
                 assistance="Please refine your inputs to reduce search size and try again.",

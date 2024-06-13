@@ -26,7 +26,7 @@ class GetAlertList(insightconnect_plugin_runtime.Action):
         self.logger.info("Creating alert list...")
         try:
             client.alert.consume(
-                lambda alert: new_alerts.append(alert.model_dump_json()),
+                lambda alert: new_alerts.append(json.loads(alert.model_dump_json())),
                 start_time=start_date_time,
                 end_time=end_date_time,
             )
@@ -36,10 +36,6 @@ class GetAlertList(insightconnect_plugin_runtime.Action):
                 assistance="Please check the provided parameters and try again.",
                 data=error,
             )
-        # Load json objects to list
-        alert_list = []
-        for new_alert in new_alerts:
-            alert_list.append(json.loads(new_alert))
         # Return results
         self.logger.info("Returning Results...")
-        return {Output.TOTAL_COUNT: len(new_alerts), Output.ALERTS: alert_list}
+        return {Output.TOTAL_COUNT: len(new_alerts), Output.ALERTS: new_alerts}

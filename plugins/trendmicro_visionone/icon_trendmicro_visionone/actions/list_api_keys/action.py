@@ -33,7 +33,7 @@ class ListApiKeys(insightconnect_plugin_runtime.Action):
         self.logger.info("Creating API key list...")
         try:
             client.api_key.consume(
-                lambda api_key: api_keys_list.append(api_key.model_dump_json()),
+                lambda api_key: api_keys_list.append(json.loads(api_key.model_dump_json())),
                 top=top,
                 op=query_op,
                 **fields,
@@ -44,10 +44,6 @@ class ListApiKeys(insightconnect_plugin_runtime.Action):
                 assistance="Please check the provided parameters and try again.",
                 data=error,
             )
-        # Load json objects to list
-        api_keys = []
-        for api_key in api_keys_list:
-            api_keys.append(json.loads(api_key))
         # Return results
         self.logger.info("Returning Results...")
-        return {Output.TOTAL_COUNT: len(api_keys_list), Output.ITEMS: api_keys}
+        return {Output.TOTAL_COUNT: len(api_keys_list), Output.ITEMS: api_keys_list}

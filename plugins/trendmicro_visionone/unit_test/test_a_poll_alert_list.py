@@ -22,7 +22,7 @@ class TestPollAlertList(TestCase):
     def test_integration_poll_alert_list(self, mock_send):
         try:
             self.action.run(self.mock_params["input"])
-        except timeout_decorator.TimeoutError as e:
-            self.assertIsInstance(e, timeout_decorator.TimeoutError)
+        except timeout_decorator.TimeoutError as error:
+            self.assertIsInstance(error, timeout_decorator.TimeoutError)
         else:
             self.fail("Expected TimeoutError was not raised.")

@@ -5,12 +5,12 @@ name: trendmicro_visionone
 title: Trend Vision One
 description: Trend Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
 version: 5.0.0
-connection_version: 4
+connection_version: 5
 supported_versions: [Trend Vision One API v3]
 vendor: trendmicro
 sdk:
   type: slim
-  version: latest
+  version: 5.5.2
   user: nobody
 support: community
 troubleshooting: For additional info about actions see https://automation.trendmicro.com/xdr/api-v3#
@@ -1117,14 +1117,12 @@ types:
       title: Detected Date Time
       description: The date and time the OAT event was detected in ISO 8601 format
       type: string
-      format: date-time
       required: true
       example: 2021-04-05T08:22:37Z
     ingested_date_time:
       title: Ingested Date Time
       description: The date and time the data related to the OAT event was ingested in ISO 8601 format
       type: string
-      format: date-time
       required: false
       example: 2021-04-06T08:22:37Z
     detail:
@@ -1260,11 +1258,11 @@ triggers:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: ' or '
-        default: ' or '
+        example: 'or'
+        default: 'or'
         enum:
-          - ' or '
-          - ' and '
+          - 'or'
+          - 'and'
     output:
       total_count:
         title: Total Count
@@ -1537,11 +1535,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: ' or '
-        default: ' or '
+        example: 'or'
+        default: 'or'
         enum:
-        - ' or '
-        - ' and '
+        - 'or'
+        - 'and'
     output:
       endpoint_data:
         title: Endpoint Data
@@ -2252,11 +2250,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: ' or '
-        default: ' or '
+        example: 'or'
+        default: 'or'
         enum:
-        - ' or '
-        - ' and '
+        - 'or'
+        - 'and'
       fields:
         title: Fields
         type: object
@@ -2457,11 +2455,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: ' or '
-        default: ' or '
+        example: 'or'
+        default: 'or'
         enum:
-        - ' or '
-        - ' and '
+        - 'or'
+        - 'and'
       fields:
         title: Fields
         type: object
@@ -2514,11 +2512,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: ' or '
-        default: ' or '
+        example: 'or'
+        default: 'or'
         enum:
-        - ' or '
-        - ' and '
+        - 'or'
+        - 'and'
       fields:
         title: Fields
         type: object
@@ -2571,11 +2569,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: ' or '
-        default: ' or '
+        example: 'or'
+        default: 'or'
         enum:
-        - ' or '
-        - ' and '
+        - 'or'
+        - 'and'
       fields:
         title: Fields
         type: object
@@ -2636,11 +2634,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: ' or '
-        default: ' or '
+        example: 'or'
+        default: 'or'
         enum:
-        - ' or '
-        - ' and '
+        - 'or'
+        - 'and'
       fields:
         title: Fields
         type: object
@@ -2820,11 +2818,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: ' or '
-        default: ' or '
+        example: 'or'
+        default: 'or'
         enum:
-        - ' or '
-        - ' and '
+        - 'or'
+        - 'and'
       fields:
         title: Fields
         type: object
@@ -2884,11 +2882,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: ' or '
-        default: ' or '
+        example: 'or'
+        default: 'or'
         enum:
-          - ' or '
-          - ' and '
+          - 'or'
+          - 'and'
     output:
       total_count:
         title: Total Count

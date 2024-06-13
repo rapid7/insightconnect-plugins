@@ -1025,7 +1025,7 @@ paginated list
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |fields|object|None|True|JSON object of fields to query by fileName or fileType|None|{"fileName":"test.ps1","fileType":"powershell"}|None|None|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |None|None|
+|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|["or", "and"]| or |None|None|
   
 Example input:
 
@@ -1035,7 +1035,7 @@ Example input:
     "fileName": "test.ps1",
     "fileType": "powershell"
   },
-  "query_op": " or "
+  "query_op": "or"
 }
 ```
 
@@ -1076,7 +1076,7 @@ This action is used to displays search results from the Email Activity Data sour
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15 12:00:00+00:00|None|None|
 |fields|object|None|True|JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)|None|{"mailSenderIp":"192.169.1.1","mailMsgSubject":"spam"}|None|None|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |None|None|
+|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|["or", "and"]| or |None|None|
 |select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|["mailMsgSubject"]|None|None|
 |start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15 10:00:00+00:00|None|None|
 |top|integer|None|True|Number of records displayed on a page|[50, 100, 500, 1000, 5000]|500|None|None|
@@ -1090,7 +1090,7 @@ Example input:
     "mailMsgSubject": "spam",
     "mailSenderIp": "192.169.1.1"
   },
-  "query_op": " or ",
+  "query_op": "or",
   "select": [
     "mailMsgSubject"
   ],
@@ -1157,7 +1157,7 @@ This action is used to displays count of search results from the Email Activity 
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15 12:00:00+00:00|None|None|
 |fields|object|None|True|JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)|None|{"mailSenderIp":"192.169.1.1","mailMsgSubject":"spam"}|None|None|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |None|None|
+|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|["or", "and"]| or |None|None|
 |select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|["mailMsgSubject"]|None|None|
 |start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15 10:00:00+00:00|None|None|
 |top|integer|None|True|Number of records displayed on a page|[50, 100, 500, 1000, 5000]|500|None|None|
@@ -1171,7 +1171,7 @@ Example input:
     "mailMsgSubject": "spam",
     "mailSenderIp": "192.169.1.1"
   },
-  "query_op": " or ",
+  "query_op": "or",
   "select": [
     "mailMsgSubject"
   ],
@@ -1210,7 +1210,7 @@ This action is used to displays results from the Endpoint Activity Data source i
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15 12:00:00+00:00|None|None|
 |fields|object|None|True|JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)|None|{"endpointHostName":"client1","dpt":443}|None|None|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |None|None|
+|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|["or", "and"]| or |None|None|
 |select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|["endpointHostName"]|None|None|
 |start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15 10:00:00+00:00|None|None|
 |top|integer|None|True|Number of records displayed on a page|[50, 100, 500, 1000, 5000]|500|None|None|
@@ -1224,7 +1224,7 @@ Example input:
     "dpt": 443,
     "endpointHostName": "client1"
   },
-  "query_op": " or ",
+  "query_op": "or",
   "select": [
     "endpointHostName"
   ],
@@ -1321,7 +1321,7 @@ This action is used to displays count of search results from the Endpoint Activi
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15 12:00:00+00:00|None|None|
 |fields|object|None|True|JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)|None|{"endpointHostName":"client1","dpt":443}|None|None|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |None|None|
+|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|["or", "and"]| or |None|None|
 |select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|["endpointHostName"]|None|None|
 |start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15 10:00:00+00:00|None|None|
 |top|integer|None|True|Number of records displayed on a page|[50, 100, 500, 1000, 5000]|500|None|None|
@@ -1335,7 +1335,7 @@ Example input:
     "dpt": 443,
     "endpointHostName": "client1"
   },
-  "query_op": " or ",
+  "query_op": "or",
   "select": [
     "endpointHostName"
   ],
@@ -1373,7 +1373,7 @@ This action is used to retrieves information about a specific endpoint
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |fields|object|None|True|JSON object of endpoint identifiers to query by their hostname, macAddress, agentGuid or IP|None|{"ip":"127.127.127.127","endpointName":"client1"}|None|None|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |None|None|
+|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|["or", "and"]| or |None|None|
   
 Example input:
 
@@ -1383,7 +1383,7 @@ Example input:
     "endpointName": "client1",
     "ip": "127.127.127.127"
   },
-  "query_op": " or "
+  "query_op": "or"
 }
 ```
 
@@ -1490,7 +1490,7 @@ criteria in a list
 |fields|object|None|True|JSON object of OAT identifiers to query|None|{"uuid":123,"endpointName":"client1"}|None|None|
 |ingested_end_date_time|string|None|True|The end of the data ingestion time range in ISO 8601 format|None|2021-04-07 08:22:37+00:00|None|None|
 |ingested_start_date_time|string|None|True|The beginning of the data ingestion time range in ISO 8601 format|None|2021-04-06 08:22:37+00:00|None|None|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |None|None|
+|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|["or", "and"]| or |None|None|
   
 Example input:
 
@@ -1504,7 +1504,7 @@ Example input:
   },
   "ingested_end_date_time": "2021-04-07 08:22:37+00:00",
   "ingested_start_date_time": "2021-04-06 08:22:37+00:00",
-  "query_op": " or "
+  "query_op": "or"
 }
 ```
 
@@ -1908,7 +1908,7 @@ This action is used to displays a list of all your API keys in a list
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |fields|object|None|True|JSON object of fields to query by fileName or fileType|None|{"role":"Master Administrator"}|None|None|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |None|None|
+|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|["or", "and"]| or |None|None|
 |top|integer|None|False|Number of records displayed on a page|[50, 100, 200]|50|None|None|
   
 Example input:
@@ -1918,7 +1918,7 @@ Example input:
   "fields": {
     "role": "Master Administrator"
   },
-  "query_op": " or ",
+  "query_op": "or",
   "top": 50
 }
 ```
@@ -2736,7 +2736,7 @@ criteria in a list
 |fields|object|None|True|JSON object of OAT identifiers to query|None|{"uuid":123,"endpointName":"client1"}|None|None|
 |ingested_start_date_time|string|None|True|The beginning of the data ingestion time range in ISO 8601 format|None|2021-04-06 08:22:37+00:00|None|None|
 |interval|integer|1800|True|Interval (in seconds) in which the polling script should run again|None|1800|None|None|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |None|None|
+|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|["or", "and"]| or |None|None|
   
 Example input:
 
@@ -2749,7 +2749,7 @@ Example input:
   },
   "ingested_start_date_time": "2021-04-06 08:22:37+00:00",
   "interval": 1800,
-  "query_op": " or "
+  "query_op": "or"
 }
 ```
 
