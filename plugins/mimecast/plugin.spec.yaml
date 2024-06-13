@@ -25,7 +25,7 @@ support: rapid7
 cloud_ready: true
 sdk:
   type: slim
-  version: 5.5.1
+  version: 5.5.3
   user: nobody
 status: []
 resources:
