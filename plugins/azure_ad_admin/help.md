@@ -1056,7 +1056,7 @@ Trigger `risk_detection` needs Application permission to set as `IdentityRiskEve
 
 # Version History
 
-* 4.1.2 - Updated SDK to the latest version | Added additional details in requirements section
+* 4.1.2 - Updated SDK to the latest version | Added additional details in requirements section | `Risk Detection`: Fixed issue where detections were triggered randomly
 * 4.1.1 - Update requirements in help.md
 * 4.1.0 - New actions Enable Device, Disable Device, Get Device, Search Device, Delete Device
 * 4.0.0 - Get User Info action: fix data validation | New action: Change User Password
