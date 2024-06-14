@@ -49,59 +49,71 @@ class Util:
 
 
 class MockResponse:
-    def __init__(self, filename: str, status_code: int, text: str = "", headers: dict = {}) -> None:
+    def __init__(
+        self, filename: str = "", status_code: int = 200, text: str = "", headers: dict = {}, url: str = ""
+    ) -> None:
         self.filename = filename
         self.status_code = status_code
         self.text = text
         self.headers = headers
+        self.url = url
 
     def json(self):
-        with open(
-            os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp")
-        ) as file_:
-            return json.load(file_)
+        try:
+            with open(
+                os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp")
+            ) as file_:
+                return json.load(file_)
+        except FileNotFoundError:
+            return {}
+
+    def raise_for_status(self):
+        if self.status_code > 300:
+            raise requests.HTTPError(f"{self.status_code} Client Error", response=self)
 
 
 def mocked_request(side_effect: Callable) -> None:
     mock_function = requests
-    mock_function.request = mock.Mock(side_effect=side_effect)
+    mock_function.Session.send = mock.Mock(side_effect=side_effect)
 
 
 def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
     if url == STUB_OAUTH_URL:
-        return MockResponse("oauth2_token", status_code)
+        return MockResponse("oauth2_token", status_code, url)
     if method == "GET":
-        return MockResponse("get_user", status_code)
+        return MockResponse("get_user", status_code, url)
     if method == "POST":
-        return MockResponse("create_user", status_code)
+        return MockResponse("create_user", status_code, url)
     if method == "DELETE":
-        return MockResponse("delete_user", status_code)
+        return MockResponse("delete_user", status_code, url)
     raise Exception("Unrecognized endpoint")
 
 
 def mock_request_201(*args, **kwargs) -> MockResponse:
-    method = kwargs.get("method") if not args else args[0]
-    url = kwargs.get("url") if not args else args[1]
+    print(f"{args[0].url}")
+    print(f"{kwargs}")
+    method = kwargs.get("method") if not args else args[0].method
+    url = kwargs.get("url") if not args else args[0].url
     return mock_conditions(method, url, 201)
 
 
 def mock_request_204(*args, **kwargs) -> MockResponse:
-    method = kwargs.get("method") if not args else args[0]
-    url = kwargs.get("url") if not args else args[1]
+    method = kwargs.get("method") if not args else args[0].method
+    url = kwargs.get("url") if not args else args[0].url
     return mock_conditions(method, url, 204)
 
 
 def mock_request_400(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 400)
+    return mock_conditions(args[0].method, args[0].url, 400)
 
 
 def mock_request_404(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 404)
+    return mock_conditions(args[0].method, args[0].url, 404)
 
 
 def mock_request_409(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 409)
+    return mock_conditions(args[0].method, args[0].url, 409)
 
 
 def mock_request_429(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 429)
+    return mock_conditions(args[0].method, args[0].url, 429)

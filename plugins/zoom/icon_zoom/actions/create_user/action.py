@@ -2,7 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import CreateUserInput, CreateUserOutput, Input, Output, Component
 
 # Custom imports below
-from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_zoom.util.util import UserType, oauth_retry_limit_exception, authentication_error_exception
 from icon_zoom.util.api import AuthenticationRetryLimitError, AuthenticationError
 
