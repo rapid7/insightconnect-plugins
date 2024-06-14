@@ -4,11 +4,9 @@ from typing import Any, Dict, List
 sys.path.append("../")
 
 import datetime
-import logging
 import unittest
 from unittest.mock import MagicMock, patch
 
-from icon_zoom.connection.connection import Connection
 from icon_zoom.tasks.monitor_sign_in_out_activity.task import MonitorSignInOutActivity
 from icon_zoom.tasks.monitor_sign_in_out_activity.schema import (
     MonitorSignInOutActivityOutput,
@@ -20,7 +18,7 @@ from parameterized import parameterized
 from jsonschema import validate
 from datetime import timedelta
 
-from mock import STUB_CONNECTION, STUB_OAUTH_TOKEN, Util
+from mock import Util
 
 REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI._refresh_oauth_token"
 GET_USER_ACTIVITY_EVENTS_PATH = "icon_zoom.util.api.ZoomAPI.get_user_activity_events_task"

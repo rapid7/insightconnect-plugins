@@ -1,4 +1,3 @@
-import json
 from logging import Logger
 from typing import Optional
 
@@ -7,7 +6,8 @@ from requests.auth import HTTPBasicAuth
 from requests.auth import AuthBase
 from requests import Response
 
-from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException, HTTPStatusCodes, ResponseExceptionData
+from insightconnect_plugin_runtime.helper import make_request, extract_json
 
 
 class BearerAuth(AuthBase):
@@ -133,23 +133,39 @@ class ZoomAPI:
 
         try:
             self.logger.info("Calling Zoom API to refresh OAuth token...")
-            response = requests.post("https://zoom.us/oauth/token", params=params, auth=auth, timeout=120)
+            request = requests.Request(
+                method="POST",
+                url="https://zoom.us/oauth/token",
+                params=params,
+                auth=auth,
+            )
+            custom_config = {
+                HTTPStatusCodes.BAD_REQUEST: AuthenticationError(),
+                HTTPStatusCodes.UNAUTHORIZED: AuthenticationError(),
+                HTTPStatusCodes.FORBIDDEN: PluginException(
+                    cause="Configured credentials do not have permission for this API endpoint.",
+                    assistance="Please ensure credentials have required permissions.",
+                ),
+                4700: PluginException(
+                    cause="Configured credentials do not have permission for this API endpoint.",
+                    assistance="Please ensure credentials have required permissions.",
+                ),
+            }
+            response = make_request(
+                _request=request,
+                exception_custom_configs=custom_config,
+                timeout=120,
+                allowed_status_codes=[HTTPStatusCodes.TOO_MANY_REQUESTS],
+            )
 
             self.logger.info(f"Got status code {response.status_code} from OAuth token refresh")
-            self._handle_oauth_status_codes(response=response)
-            response_data = response.json()
+            if response.status_code == HTTPStatusCodes.TOO_MANY_REQUESTS:
+                raise self.get_exception_for_rate_limit(response)
+            response_data = extract_json(response)
 
-        except requests.exceptions.HTTPError as error:
-            self.logger.info(f"Request to get OAuth token failed: {error}")
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
-
-        except requests.exceptions.Timeout as error:
-            self.logger.info(f"Request to get OAuth token timed out: {error}")
-            raise PluginException(preset=PluginException.Preset.TIMEOUT)
-
-        except json.decoder.JSONDecodeError as error:
-            self.logger.info(f"Invalid JSON response was received while refreshing OAuth token: {error}")
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON)
+        except PluginException as error:
+            self.logger.info(f"Request to get OAuth token failed {error}")
+            raise error
 
         try:
             access_token = response_data["access_token"]
@@ -162,30 +178,6 @@ class ZoomAPI:
         self.logger.info("Request for new OAuth token was successful!")
         self.oauth_token = access_token
 
-    def _handle_oauth_status_codes(self, response: Response) -> None:
-        # Handle known status codes
-        codes = {
-            400: AuthenticationError,
-            401: AuthenticationError,
-            403: PluginException(
-                cause="Configured credentials do not have permission for this API endpoint.",
-                assistance="Please ensure credentials have required permissions.",
-            ),
-            429: self.get_exception_for_rate_limit(response),
-            4700: PluginException(
-                cause="Configured credentials do not have permission for this API endpoint.",
-                assistance="Please ensure credentials have required permissions.",
-            ),
-        }
-
-        for key, value in codes.items():
-            if response.status_code == key:
-                raise value
-
-        # Handle unknown status codes
-        if response.status_code in range(0, 199) or response.status_code >= 300:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
-
     def _call_api(
         self,
         method: str,
@@ -196,62 +188,43 @@ class ZoomAPI:
         retry_401_count: int = 0,
     ) -> Optional[dict]:  # noqa: MC0001
         auth = BearerAuth(access_token=self.oauth_token)
+        request = requests.Request(method=method, url=url, json=json_data, params=params, auth=auth)
+        allowed_codes = [HTTPStatusCodes.UNAUTHORIZED, HTTPStatusCodes.TOO_MANY_REQUESTS]
+        if allow_404:
+            allowed_codes.append(HTTPStatusCodes.NOT_FOUND)
+        custom_config = {
+            HTTPStatusCodes.CONFLICT: PluginException(
+                cause="User already exists.", assistance="Please check your input and try again."
+            )
+        }
+        # try:
+        self.logger.info(f"Calling {method} {url}")
+        response = make_request(
+            _request=request,
+            exception_custom_configs=custom_config,
+            exception_data_location=ResponseExceptionData.RESPONSE_JSON,
+            allowed_status_codes=allowed_codes,
+        )
+        self.logger.info(f"Got response status code: {response.status_code}")
 
-        try:
-            self.logger.info(f"Calling {method} {url}")
-            response = requests.request(method, url, json=json_data, params=params, auth=auth)
-            self.logger.info(f"Got response status code: {response.status_code}")
+        return self._handle_response(
+            response=response,
+            original_call_args={
+                "method": method,
+                "url": url,
+                "params": params,
+                "json_data": json_data,
+                "allow_404": allow_404,
+            },
+            retry_401_count=retry_401_count,
+        )
 
-            if response.status_code in [400, 401, 404, 409, 429] or (200 <= response.status_code < 300):
-                return self._handle_response(
-                    response=response,
-                    allow_404=allow_404,
-                    original_call_args={
-                        "method": method,
-                        "url": url,
-                        "params": params,
-                        "json_data": json_data,
-                        "allow_404": allow_404,
-                    },
-                    retry_401_count=retry_401_count,
-                )
-
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except json.decoder.JSONDecodeError as error:
-            self.logger.info(f"Invalid JSON: {error}")
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON)
-        except requests.exceptions.HTTPError as error:
-            self.logger.info(f"Request to {url} failed: {error}")
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
-
-    def _handle_response(self, response: Response, allow_404: bool, original_call_args: dict, retry_401_count: int):
+    def _handle_response(self, response: Response, original_call_args: dict, retry_401_count: int):
         """
         Helper function to process the response based on the status code returned.
         :param response: Response object
-        :param allow_404: Boolean value to indicate whether to allow 404 status code to be ignored
         """
 
-        # Success; no content
-        if response.status_code == 204:
-            return None
-
-        if 200 <= response.status_code < 300:
-            return response.json()
-
-        if response.status_code == 400:
-            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.json())
-        if response.status_code == 404:
-            if allow_404:
-                return None
-            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.json())
-        if response.status_code == 409:
-            raise PluginException(
-                cause="User already exists.", assistance="Please check your input and try again.", data=response.json()
-            )
-        if response.status_code == 429:
-            raise self.get_exception_for_rate_limit(response=response)
-
-        # 401 requires extra logic, so it is not included in the 4xx dict
         if response.status_code == 401:
             if retry_401_count == (self.oauth_retry_limit - 1):  # -1 to account for retries starting at 0
                 raise AuthenticationRetryLimitError
@@ -260,12 +233,14 @@ class ZoomAPI:
             self._refresh_oauth_token()
             return self._call_api(**original_call_args, retry_401_count=retry_401_count)
 
-        # If we reach this point, all known/documented status codes have been exhausted, so the Zoom API has likely
-        # changed and the plugin will require an update.
-        raise PluginException(
-            cause=f"Received an undocumented status code from the Zoom API ({response.status_code})",
-            assistance="Please contact support for assistance.",
-        )
+        if response.status_code == 429:
+            raise self.get_exception_for_rate_limit(response=response)
+
+        # Success or allow 404; no content
+        if response.status_code in [204, 404]:
+            return None
+
+        return extract_json(response)
 
     @staticmethod
     def get_exception_for_rate_limit(response: Response) -> PluginException:
