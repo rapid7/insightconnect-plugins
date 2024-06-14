@@ -1014,6 +1014,7 @@ Example output:
 
 # Version History
 
+* 5.3.13 - Adding in task connection tests | bump SDK to version 5.5.3
 * 5.3.12 - Task `monitor_siem_logs` to ingest events if there is no datetime field | bump version of werkzeug used
 * 5.3.11 - Task `monitor_siem_logs` to now use 24hrs as initial lookback, then 7 days for normal running | Task `monitor_siem_logs` allowing for a date to be supplied as a custom config | Task `monitor_siem_logs` to now log the request id of failed request to Mimecast | bump SDK to version 5.4.9
 * 5.3.10 - Task `monitor_siem_logs`: To move token to next file even if there is no files found | bump SDK to 5.4.7
