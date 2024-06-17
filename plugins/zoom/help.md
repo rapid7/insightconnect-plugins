@@ -307,8 +307,9 @@ Example output:
 
 # Version History
 
-* 4.1.11 -  Update Task `monitor_sign_in_out_activity` to reduce instances of duplicate results
-* 4.1.10 -  Update Task `monitor_sign_in_out_activity` handle invalid or expired pagination token errors
+* 4.1.12 - Fix defect where 401 errors may not be raised or logged correctly | Update insight-plugin-runtime to version 5.5.0
+* 4.1.11 - Update Task `monitor_sign_in_out_activity` to reduce instances of duplicate results
+* 4.1.10 - Update Task `monitor_sign_in_out_activity` handle invalid or expired pagination token errors
 * 4.1.9 - Updated to include latest SDK functionality v5.4.8 | Task `monitor_sign_in_out_activity` updated to increase max lookback cutoff to 7 days
 * 4.1.8 - Updated to include latest SDK functionality v5.4.5 | Adding logic to `monitor_sign_in_out_activity` task to keep paginating until endtime catches up to now
 * 4.1.7 - Updated to include latest SDK functionality

@@ -136,7 +136,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 next_page_token=next_page_token,
             )
         except Exception as exception:
-            if "The next page token is invalid or expired." in exception.data:
+            if hasattr(exception, "data") and "The next page token is invalid or expired." in exception.data:
                 return self.handle_pagination_token_error(exception=exception, state=state)
             else:
                 self.logger.error(f"An Exception has been raised. Error: {exception}, returning state={state}")
@@ -410,7 +410,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
         elif isinstance(exception, PluginException):
             # Add additional information to aid customer if correct permissions are not set in the Zoom App
-            if "Invalid access token, does not contain scope" in exception.data:
+            if hasattr(exception, "data") and "Invalid access token, does not contain scope" in exception.data:
                 self.logger.error(self.PERMISSIONS_ERROR_MESSAGE)
                 return TaskOutput(
                     output=[],
@@ -425,7 +425,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                         data=exception.data,
                     ),
                 )
-            elif "No permission." in exception.data:
+            elif hasattr(exception, "data") and "No permission." in exception.data:
                 self.logger.error(self.PERMISSIONS_ERROR_MESSAGE_USER)
                 return TaskOutput(
                     output=[],
