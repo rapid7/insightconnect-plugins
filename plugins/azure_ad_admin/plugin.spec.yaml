@@ -13,7 +13,7 @@ supported_versions: ["2022-05-30"]
 status: []
 sdk:
   type: slim
-  version: 5.5.3
+  version: 5.5.5
   user: nobody
 key_features:
   - Add and remove users
