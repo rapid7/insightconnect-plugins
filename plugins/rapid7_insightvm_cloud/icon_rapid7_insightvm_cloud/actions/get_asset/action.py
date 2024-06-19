@@ -1,9 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import GetAssetInput, GetAssetOutput, Input, Output, Component
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
-import requests
 
 
 class GetAsset(insightconnect_plugin_runtime.Action):
