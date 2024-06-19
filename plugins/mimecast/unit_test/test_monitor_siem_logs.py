@@ -70,7 +70,7 @@ class TestMonitorSiemLogs(TestCase):
         self.assertEqual(new_state, test_state)  # we shouldn't change the state if we encounter an error
         mock_logger.assert_called()
         self.assertIn(
-            "There is no item named 'filename-2-from-mimecast.json' in the archive", mock_logger.call_args[0][2]
+            "There is no item named 'filename-2-from-mimecast.json' in the archive", mock_logger.call_args[0][0]
         )
 
     @patch("logging.Logger.error")
