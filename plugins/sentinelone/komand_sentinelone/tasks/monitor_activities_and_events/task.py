@@ -70,7 +70,6 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
                 self.logger.info("State detected. Instantiating continuation run.")
             collect_activities, collect_events, collect_threats = self.check_queries(params)
             activities_logs_next_token, events_logs_next_token, threats_logs_next_token = self.get_cursors(state)
-
             # total_queries and total_forbidden_responses to determine if plugin should continue when receiving 401, 403
             total_queries = sum([collect_activities, collect_events, collect_threats])
             total_forbidden_responses = 0
@@ -81,13 +80,11 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
             if is_paginating:
                 self.log_pagination_cycle(activities_logs_next_token, events_logs_next_token, threats_logs_next_token)
 
-            # Get current runtime and time to query to
             current_run_timestamp, lookback_timestamp = self.get_lookback_values(
                 is_initial_run, custom_config, last_run_timestamp
             )
 
             all_logs = []
-            # Get activity logs
             if collect_activities:
                 if is_paginating is False or (is_paginating is True and activities_logs_next_token):
                     activities_logs = self.get_generic_logs(
@@ -100,7 +97,6 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
                     all_logs.extend(activities_logs)
                 else:
                     self.logger.info("Paginating in progress, skipping activities log collection...")
-            # Get event logs
             if collect_events:
                 if is_paginating is False or (is_paginating is True and events_logs_next_token):
                     events_logs = self.get_generic_logs(
@@ -109,7 +105,6 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
                     all_logs.extend(events_logs)
                 else:
                     self.logger.info("Paginating in progress, skipping events log collection...")
-            # Get threat logs
             if collect_threats:
                 if is_paginating is False or (is_paginating is True and threats_logs_next_token):
                     threats_logs = self.get_generic_logs(
@@ -121,7 +116,6 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
             # Check if all ran queries have returned 401 or 403 errors and raise an exception if so
             if total_forbidden_responses >= total_queries > 0:
                 raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
-            # Whether to immediately run pagination iteration on next run or set the last run timestamp
             has_more_pages = self.set_last_run_timestamp(state, lookback_timestamp, current_run_timestamp)
             return all_logs, state, has_more_pages, 200, None
         except ApiException as error:
