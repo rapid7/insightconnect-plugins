@@ -4,15 +4,30 @@ products: [insightconnect]
 name: rapid7_insightvm_cloud
 title: Rapid7 InsightVM Cloud
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM Cloud Integrations API to view assets and start scans
-version: 5.0.0
+version: 6.0.0
+connection_version: 6
+key_features:
+  - "Perform scan management functionality including starting and checking the status of scans"
+  - "Perform asset searches leveraging flexible asset and vulnerability filters"
+  - "Retrieve individual asset information"
+links:
+  - "[InsightVM Query Builder](https://docs.rapid7.com/insightvm/query-builder/)"
+  - "[InsightVM Query Operators](https://docs.rapid7.com/insightvm/query-operators-1/)"
+references:
+  - "[InsightVM Cloud API](https://help.rapid7.com/insightvm/en-us/api/integrations.html)"
+  - "[Managing Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys)"
+  - "[Scan Engine Pairing](https://docs.rapid7.com/insightvm/scan-engine-management-on-the-insight-platform/#how-to-pair-your-scan-engines-to-the-insight-platform)"
+requirements:
+  - "Requires an InsightVM API Key"
+  - "InsightVM Scan Engine(s) paired to the Insight Platform"
 vendor: rapid7
 support: rapid7
-supported_versions: ["InsightVM Cloud Integration API v4", "2023-11-24"]
+supported_versions: ["InsightVM Cloud Integration API v4", "2024-06-19"]
 status: []
 cloud_ready: true
 sdk:
   type: slim
-  version: 5
+  version: 5.5.5
   user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insightvm_cloud
@@ -26,6 +41,18 @@ hub_tags:
   use_cases: [asset_inventory, vulnerability_management]
   keywords: [insightvm, rapid7, cloud, cloud_enabled]
   features: []
+version_history:
+  - "6.0.0 - Asset Search: Modify type of output field `new` when `comparison_time` input is used."
+  - "5.0.0 - Vulnerability Search: fix malware_kits output and remove Asset Criteria input | Updated the documentation with links related to query builder and operators | Updated the SDK"
+  - "4.0.0 - Vulnerability Search: fix schema validation problem for exploits field"
+  - "3.3.0 - Asset Search: add filter fields: `current_time`, `comparison_time`"
+  - "3.2.0 - Add vulnerability search action"
+  - "3.1.0 - Add Cloud enablement to plugin | Updated exception information and error handling | Made status code output for Stop Scan and Get Scan actions more exact | Fix bug relating to empty inputs being passed in request body"
+  - "3.0.0 - Changed output of Get Asset action to include vulnerabilities properly"
+  - "2.2.0 - Added ability to include vulnerabilities on Get Asset action | API call update"
+  - "2.1.0 - Added scanned asset_ids as an output of start_scan"
+  - "2.0.0 - Fix issue where string data-type should be date in actions | Update docs"
+  - "1.0.0 - Initial plugin"
 types:
   link:
     href:
@@ -768,6 +795,11 @@ types:
       title: Moderate Vulnerabilities
       type: integer
       required: false
+    new:
+      title: New
+      description: If comparison time is supplied, the vulnerabilities that are new in the latest version at current time
+      type: '[]object'
+      required: false
     os_architecture:
       description: The srchitecture of the os
       title:  OS Architecture
@@ -832,11 +864,6 @@ types:
       description: Uniqure aspects of the asset
       title: Unique Identifiers
       type: '[]identifiers'
-      required: false
-    new:
-      description: Vulnerabilities that are the new between current and comparison time for the asset
-      title: New Vulnerabilities
-      type: '[]string'
       required: false
     remediated:
       description: Vulnerabilities that were remediated in the latest version at current time for the asset
@@ -1136,7 +1163,7 @@ actions:
         example: '[{"assessed_for_policies":false,"assessed_for_vulnerabilities":true,"credential_assessments":[],"critical_vulnerabilities":12,"exploits":5,"id":"cdc978de-4178-a1d9-d5a94a114b87-example","ip":"2001:db8:1:1:1:1:1:1","last_assessed_for_vulnerabilities":"2020-06-25T15:19:51.543Z","last_scan_end":"2020-10-26T22:35:53.590Z","last_scan_start":"2020-10-26T22:35:53.564Z","mac":"00:50:56:94:52:04","malware_kits":0,"moderate_vulnerabilities":4,"new":[],"os_architecture":"","os_description":"Linux 2.6.32","os_family":"Linux","os_name":"Linux","os_system_name":"Linux","os_type":"General","os_vendor":"Linux","os_version":"2.6.32","remediated":[],"risk_score":9304.376953125,"severe_vulnerabilities":21,"tags":[{"name":"integrations discovery","type":"SITE"}],"total_vulnerabilities":37,"unique_identifiers":[]},{"assessed_for_policies":false,"assessed_for_vulnerabilities":true,"credential_assessments":[],"critical_vulnerabilities":12,"exploits":5,"id":"cdc978de-4178-a1d9-d5a94a114b87-example","ip":"2001:db8:1:1:1:1:1:1","last_assessed_for_vulnerabilities":"2020-06-25T15:19:51.543Z","last_scan_end":"2020-10-26T22:35:53.590Z","last_scan_start":"2020-10-26T22:35:53.564Z","mac":"00:50:56:94:52:04","malware_kits":0,"moderate_vulnerabilities":4,"new":[],"os_architecture":"","os_description":"Linux 2.6.32","os_family":"Linux","os_name":"Linux","os_system_name":"Linux","os_type":"General","os_vendor":"Linux","os_version":"2.6.32","remediated":[],"risk_score":9304.376953125,"severe_vulnerabilities":21,"tags":[{"name":"integrations discovery","type":"SITE"}],"total_vulnerabilities":37,"unique_identifiers":[]}]'
   get_asset:
     title: Get Asset
-    description: Gets an asset by ID
+    description: Get an asset by ID
     input:
       id:
         title: ID

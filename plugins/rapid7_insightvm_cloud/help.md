@@ -1,6 +1,6 @@
 # Description
 
-InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM Cloud Integrations API to view assets and start scans.
+InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM Cloud Integrations API to view assets and start scans
 
 # Key Features
 
@@ -14,21 +14,21 @@ InsightVM is a powerful vulnerability management tool which finds, prioritizes, 
 * InsightVM Scan Engine(s) paired to the Insight Platform
 
 # Supported Product Versions
-  
+
 * InsightVM Cloud Integration API v4
-* 2023-11-24
+* 2024-06-19
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|credentials|credential_secret_key|None|True|API key from account|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|region|string|None|True|the region in which the plugin will work|['us', 'us2', 'us3', 'eu', 'ca', 'au', 'ap']|us|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|credentials|credential_secret_key|None|True|API key from account|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+|region|string|None|True|the region in which the plugin will work|["us", "us2", "us3", "eu", "ca", "au", "ap"]|us|None|None|
+
 Example input:
 
 ```
@@ -42,20 +42,21 @@ Example input:
 
 ### Actions
 
+
 #### Asset Search
-  
-This action is used to search for assets using filtered asset search.
+
+This action is used to search for assets using filtered asset search
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|asset_criteria|string|None|False|Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames|None|asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'|
-|comparison_time|date|None|False|The date and time to compare the asset current state against to detect changes|None|2021-04-15T17:56:47Z|
-|current_time|date|None|False|The current date and time to compare against the asset state to detect changes|None|2021-04-15T17:56:47Z|
-|size|integer|200|False|The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets|None|100|
-|sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|
-|vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|asset_criteria|string|None|False|Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames|None|asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'|None|None|
+|comparison_time|date|None|False|The date and time to compare the asset current state against to detect changes|None|2021-04-15T17:56:47Z|None|None|
+|current_time|date|None|False|The current date and time to compare against the asset state to detect changes|None|2021-04-15T17:56:47Z|None|None|
+|size|integer|200|False|The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets|None|100|None|None|
+|sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|None|None|
+|vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|None|None|
   
 Example input:
 
@@ -159,15 +160,15 @@ Example output:
 ```
 
 #### Get Asset
-  
-This action is used to get an asset by ID.
+
+This action is used to get an asset by ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|string|None|True|Get an asset by ID|None|abc978-5678-abc-a5a94a1234b8-asset|
-|include_vulns|boolean|False|False|Whether or not the list of vulnerabilities should be returned|None|True|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|Get an asset by ID|None|abc978-5678-abc-a5a94a1234b8-asset|None|None|
+|include_vulns|boolean|False|False|Whether or not the list of vulnerabilities should be returned|None|True|None|None|
   
 Example input:
 
@@ -256,14 +257,14 @@ Example output:
 ```
 
 #### Get Scan
-  
-This action is used to get the status of a scan.
+
+This action is used to get the status of a scan
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|scan_id|string|None|True|ID of the scan to obtain|None|abb37782-df95-4cf6-b4c2-8d466ca57349|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|scan_id|string|None|True|ID of the scan to obtain|None|abb37782-df95-4cf6-b4c2-8d466ca57349|None|None|
   
 Example input:
 
@@ -300,17 +301,17 @@ Example output:
 ```
 
 #### Start Scan
-  
-This action is used to start an InsightVM scan of previously scanned devices.
+
+This action is used to start an InsightVM scan of previously scanned devices
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|asset_ids|[]string|None|False|IDs of the assets to scan|None|["abc978-5678-abc-a5a94a1234b8-asset"]|
-|hostnames|[]string|None|False|List of hostnames to scan|None|["rapid7.com"]|
-|ips|[]string|None|False|List of IPv4 or IPv6 addresses to scan|None|["2001:db8:1:1:1:1:1:1"]|
-|name|string|None|True|The name of the scan|None|test cloud scan|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|asset_ids|[]string|None|False|IDs of the assets to scan|None|["abc978-5678-abc-a5a94a1234b8-asset"]|None|None|
+|hostnames|[]string|None|False|List of hostnames to scan|None|["rapid7.com"]|None|None|
+|ips|[]string|None|False|List of IPv4 or IPv6 addresses to scan|None|["2001:db8:1:1:1:1:1:1"]|None|None|
+|name|string|None|True|The name of the scan|None|test cloud scan|None|None|
   
 Example input:
 
@@ -369,14 +370,14 @@ Example output:
 ```
 
 #### Stop Scan
-  
-This action is used to stop a scan in progress.
+
+This action is used to stop a scan in progress
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|string|None|True|Scan ID|None|abb37782-df95-4cf6-b4c2-8d466ca5734|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|Scan ID|None|abb37782-df95-4cf6-b4c2-8d466ca5734|None|None|
   
 Example input:
 
@@ -405,16 +406,16 @@ Example output:
 ```
 
 #### Vulnerability Search
-  
-This action is used to search for vulnerabilities using filtered vulnerability search.
+
+This action is used to search for vulnerabilities using filtered vulnerability search
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|size|integer|200|False|The number of vulnerabilities to retrieve. If blank then will default to 200 vulnerabilities returned, the maximum limit is 500 vulnerabilities|None|100|
-|sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|
-|vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|size|integer|200|False|The number of vulnerabilities to retrieve. If blank then will default to 200 vulnerabilities returned, the maximum limit is 500 vulnerabilities|None|100|None|None|
+|sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{"risk-score": "asc", "criticality-tag": "desc"}|None|None|
+|vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|None|None|
   
 Example input:
 
@@ -548,7 +549,6 @@ Example output:
 ### Triggers
   
 *This plugin does not contain any triggers.*
-
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -830,7 +830,7 @@ Example output:
 |MAC|string|None|False|Media Access Control (MAC) address, e.g. AF:12:BC:5A:F7:48|None|
 |Malware Kits|integer|None|False|Number of malware kits|None|
 |Moderate Vulnerabilities|integer|None|False|Number of moderate vulnerabilities|None|
-|New Vulnerabilities|[]string|None|False|Vulnerabilities that are the new between current and comparison time for the asset|None|
+|New|[]object|None|False|If comparison time is supplied, the vulnerabilities that are new in the latest version at current time|None|
 |OS Architecture|string|None|False|The srchitecture of the os|None|
 |OS Description|string|None|False|Description of the os|None|
 |OS Family|string|None|False|Family of the os|None|
@@ -884,12 +884,13 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 6.0.0 - Asset Search: Modify type of output field `new` when `comparison_time` input is used.
 * 5.0.0 - Vulnerability Search: fix malware_kits output and remove Asset Criteria input | Updated the documentation with links related to query builder and operators | Updated the SDK
-* 4.0.0 - Vulnerability Search: fix schema validation problem for exploits field 
+* 4.0.0 - Vulnerability Search: fix schema validation problem for exploits field
 * 3.3.0 - Asset Search: add filter fields: `current_time`, `comparison_time`
 * 3.2.0 - Add vulnerability search action
 * 3.1.0 - Add Cloud enablement to plugin | Updated exception information and error handling | Made status code output for Stop Scan and Get Scan actions more exact | Fix bug relating to empty inputs being passed in request body
