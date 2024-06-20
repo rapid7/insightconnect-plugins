@@ -140,13 +140,12 @@ class SentineloneAPI:
         return self._call_api("GET", GET_EVENTS_ENDPOINT, params=params)
 
     def get_device_control_events(
-        self, params: dict, api_version: str = "2.1", full_response: bool = False, raise_for_status: bool = True
+        self, params: dict, full_response: bool = False, raise_for_status: bool = True
     ) -> dict:
         return self._call_api(
             "GET",
             DEVICE_CONTROL_EVENTS,
             params=params,
-            override_api_version=api_version,
             full_response=full_response,
             raise_for_status=raise_for_status,
         )
@@ -297,14 +296,11 @@ class SentineloneAPI:
                 data=error.args,
             )
 
-    def get_activities_list(
-        self, params: dict, api_version: str = "2.0", full_response: bool = False, raise_for_status: bool = True
-    ) -> dict:
+    def get_activities_list(self, params: dict, full_response: bool = False, raise_for_status: bool = True) -> dict:
         return self._call_api(
             "GET",
             "activities",
             params=params,
-            override_api_version=api_version,
             full_response=full_response,
             raise_for_status=raise_for_status,
         )

@@ -214,9 +214,9 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
             last_log_timestamp = STARTING_TIMESTAMP
         query_params = self.get_query_params(log_type, last_run_timestamp, pagination_cursor)
         if log_type == ACTIVITIES_LOGS:
-            response = self.connection.client.get_activities_list(query_params, API_VERSION, True, False)
+            response = self.connection.client.get_activities_list(query_params, True, False)
         elif log_type == EVENTS_LOGS:
-            response = self.connection.client.get_device_control_events(query_params, API_VERSION, True, False)
+            response = self.connection.client.get_device_control_events(query_params, True, False)
         else:
             response = self.connection.client.get_threats(query_params, API_VERSION, True, False)
         try:
