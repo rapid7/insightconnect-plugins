@@ -71,7 +71,6 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
             last_run_timestamp = state.get(LAST_RUN_TIMESTAMP)
             self.logger.info(cursors)
             is_paginating = any(cursors.values())
-            self.logger.info(f"IS PAGINATING {is_paginating}")
             if is_paginating:
                 self.log_pagination_cycle(cursors)
 
@@ -85,7 +84,7 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
 
             # Check if all ran queries have returned 401 or 403 errors and raise an exception if so
             if total_forbidden_responses >= total_queries > 0:
-                raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
+                return [], existing_state, False, 403, PluginException(preset=PluginException.Preset.UNAUTHORIZED)
             has_more_pages = self.determine_next_pagination_cycle(state, lookback_timestamp, current_run_timestamp)
             return all_logs, state, has_more_pages, 200, None
         except ApiException as error:
@@ -158,40 +157,24 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         Handle whether to query each endpoint based on input and pagination, gather returned data and error responses
         """
         all_logs = []
-        if queries.get(ACTIVITIES_LOGS):
-            activities_logs_next_cursor = cursors.get(ACTIVITIES_LOGS)
-            if is_paginating is False or (is_paginating is True and activities_logs_next_cursor):
-                self.logger.info("Getting activities logs...")
-                activities_logs = self.get_generic_logs(
-                    ACTIVITIES_LOGS,
-                    state,
-                    total_forbidden_responses,
-                    lookback_timestamp,
-                    activities_logs_next_cursor,
-                )
-                all_logs.extend(activities_logs)
-            else:
-                self.logger.info("Pagination in progress, skipping activities log collection...")
-        if queries.get(EVENTS_LOGS):
-            events_logs_next_cursor = cursors.get(EVENTS_LOGS)
-            if is_paginating is False or (is_paginating is True and events_logs_next_cursor):
-                self.logger.info("Getting device control events logs...")
-                events_logs = self.get_generic_logs(
-                    EVENTS_LOGS, state, total_forbidden_responses, lookback_timestamp, events_logs_next_cursor
-                )
-                all_logs.extend(events_logs)
-            else:
-                self.logger.info("Pagination in progress, skipping events log collection...")
-        if queries.get(THREATS_LOGS):
-            threats_logs_next_cursor = cursors.get(THREATS_LOGS)
-            if is_paginating is False or (is_paginating is True and threats_logs_next_cursor):
-                self.logger.info("Getting threats logs...")
-                threats_logs = self.get_generic_logs(
-                    THREATS_LOGS, state, total_forbidden_responses, lookback_timestamp, threats_logs_next_cursor
-                )
-                all_logs.extend(threats_logs)
-            else:
-                self.logger.info("Pagination in progress, skipping threats log collection...")
+        for log_type, check in queries.items():
+            if check:
+                cursor = cursors.get(log_type)
+                if is_paginating is False or (is_paginating is True and cursor):
+                    self.logger.info(f"Getting {log_type}...")
+                    if cursor:
+                        self.logger.info(f"Using next page cursor: {cursor}")
+                    logs = self.get_generic_logs(
+                        log_type,
+                        state,
+                        total_forbidden_responses,
+                        lookback_timestamp,
+                        cursor,
+                    )
+                    self.logger.info(f"{len(logs)} logs found in {log_type} query")
+                    all_logs.extend(logs)
+                else:
+                    self.logger.info(f"Pagination in progress, skipping {log_type} collection...")
         return all_logs, total_forbidden_responses
 
     def get_generic_logs(
@@ -221,14 +204,14 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
             response = self.connection.client.get_threats(query_params, API_VERSION, True, False)
         try:
             status_code = response.status_code
-            self.logger.info(f"Received {status_code} for {log_type} query")
-            response_handler(response, allowed_status_codes=[401, 404])
+            if response.status_code in [401, 403]:
+                self.logger.info(f"Received status code {status_code} for {log_type} query")
+            response_handler(response, allowed_status_codes=[401, 403])
         except PluginException as error:
             raise ApiException(cause=error.cause, assistance=error.assistance, status_code=status_code, data=response)
         logs, next_page_cursor = self.extract_query_response(response, total_forbidden_responses)
         new_logs_last_timestamp = self.get_latest_timestamp(logs, last_log_timestamp)
-        if not pagination_cursor:
-            state[timestamp_key] = new_logs_last_timestamp
+        state[timestamp_key] = new_logs_last_timestamp
         state[page_token_key] = next_page_cursor
         if next_page_cursor:
             self.logger.info(f"New next page cursor received for {log_type}: {next_page_cursor}")
@@ -243,7 +226,7 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
             timestamp_name = "eventTime"
         query_params = {
             "limit": LOGS_PAGE_LIMIT,
-            f"{timestamp_name}__gte": last_log_timestamp,
+            f"{timestamp_name}__gt": last_log_timestamp,
             "sortBy": timestamp_name,
         }
         if cursor:
