@@ -61,8 +61,8 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         Query activities, device control events, and threats logs between a supplied timeframe and the current time.
         Return all found logs and set last task run time, pagination cursors, and last log timestamps for each log type.
         """
+        existing_state = state.copy()
         try:
-            existing_state = state.copy()
             is_initial_run = self.check_initial_run(state)
             queries = self.check_queries(params)
             cursors = self.get_cursors(state)
@@ -95,8 +95,8 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
             return all_logs, state, has_more_pages, 200, None
         except ApiException as error:
             return [], existing_state, False, error.status_code, error
-        # except Exception as error:
-        #     return [], existng_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+        except Exception as error:
+            return [], existng_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def check_initial_run(self, state: Dict) -> bool:
         """
