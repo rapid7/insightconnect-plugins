@@ -80,12 +80,7 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
             )
 
             all_logs, total_forbidden_responses = self.collect_logs_handler(
-                queries,
-                cursors,
-                state,
-                lookback_timestamp,
-                total_forbidden_responses,
-                is_paginating
+                queries, cursors, state, lookback_timestamp, total_forbidden_responses, is_paginating
             )
 
             # Check if all ran queries have returned 401 or 403 errors and raise an exception if so
@@ -96,7 +91,7 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         except ApiException as error:
             return [], existing_state, False, error.status_code, error
         except Exception as error:
-            return [], existng_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+            return [], existing_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def check_initial_run(self, state: Dict) -> bool:
         """
@@ -127,7 +122,7 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         cursors = {
             ACTIVITIES_LOGS: state.get(ACTIVITIES_PAGE_CURSOR),
             EVENTS_LOGS: state.get(EVENTS_PAGE_CURSOR),
-            THREATS_LOGS: state.get(THREATS_PAGE_CURSOR)
+            THREATS_LOGS: state.get(THREATS_PAGE_CURSOR),
         }
         return cursors
 
@@ -150,7 +145,15 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         self.logger.info("Paginating cycle in progress.")
         self.logger.info(pagination_info_string)
 
-    def collect_logs_handler(self, queries: Dict, cursors: Dict, state: Dict, lookback_timestamp: str, total_forbidden_responses: int,  is_paginating: bool) -> Tuple[List[Dict], int]:
+    def collect_logs_handler(
+        self,
+        queries: Dict,
+        cursors: Dict,
+        state: Dict,
+        lookback_timestamp: str,
+        total_forbidden_responses: int,
+        is_paginating: bool,
+    ) -> Tuple[List[Dict], int]:
         """
         Handle whether to query each endpoint based on input and pagination, gather returned data and error responses
         """
