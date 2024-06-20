@@ -62,12 +62,7 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         Return all found logs and set last task run time, pagination cursors, and last log timestamps for each log type.
         """
         try:
-            # Determine first run or subsequent
-            is_initial_run = not state
-            if is_initial_run:
-                self.logger.info("No state detected. Instantiating initial run.")
-            else:
-                self.logger.info("State detected. Instantiating continuation run.")
+            is_initial_run = self.check_initial_run(state)
             collect_activities, collect_events, collect_threats = self.check_queries(params)
             activities_logs_next_token, events_logs_next_token, threats_logs_next_token = self.get_cursors(state)
             # total_queries and total_forbidden_responses to determine if plugin should continue when receiving 401, 403
@@ -123,7 +118,18 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         except Exception as error:
             return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
-    def check_queries(self, params: dict) -> Tuple[str, str, str]:
+    def check_initial_run(self, state: Dict) -> bool:
+        """
+        Check if state exists, return False if so indicating initial run
+        """
+        is_initial_run = not state
+        if is_initial_run:
+            self.logger.info("No state detected. Instantiating initial run.")
+        else:
+            self.logger.info("State detected. Instantiating continuation run.")
+        return is_initial_run
+
+    def check_queries(self, params: Dict) -> Tuple[str, str, str]:
         """
         Return whether to query a specific endpoint based on the input parameters
         """
@@ -132,7 +138,7 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         collect_threats = params.get(Input.COLLECTTHREATS)
         return collect_activities, collect_events, collect_threats
 
-    def get_cursors(self, state: dict) -> Tuple[str, str, str]:
+    def get_cursors(self, state: Dict) -> Tuple[str, str, str]:
         """
         Return existing cursors for each endpoint
         """
