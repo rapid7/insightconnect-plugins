@@ -62,61 +62,41 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         Return all found logs and set last task run time, pagination cursors, and last log timestamps for each log type.
         """
         try:
+            existing_state = state.copy()
             is_initial_run = self.check_initial_run(state)
-            collect_activities, collect_events, collect_threats = self.check_queries(params)
-            activities_logs_next_token, events_logs_next_token, threats_logs_next_token = self.get_cursors(state)
-            # total_queries and total_forbidden_responses to determine if plugin should continue when receiving 401, 403
-            total_queries = sum([collect_activities, collect_events, collect_threats])
+            queries = self.check_queries(params)
+            cursors = self.get_cursors(state)
+            total_queries = self.count_queries(queries)
             total_forbidden_responses = 0
-
             last_run_timestamp = state.get(LAST_RUN_TIMESTAMP)
-
-            is_paginating = any([activities_logs_next_token, events_logs_next_token, threats_logs_next_token])
+            self.logger.info(cursors)
+            is_paginating = any(cursors.values())
+            self.logger.info(f"IS PAGINATING {is_paginating}")
             if is_paginating:
-                self.log_pagination_cycle(activities_logs_next_token, events_logs_next_token, threats_logs_next_token)
+                self.log_pagination_cycle(cursors)
 
             current_run_timestamp, lookback_timestamp = self.get_lookback_values(
                 is_initial_run, custom_config, last_run_timestamp
             )
 
-            all_logs = []
-            if collect_activities:
-                if is_paginating is False or (is_paginating is True and activities_logs_next_token):
-                    activities_logs = self.get_generic_logs(
-                        ACTIVITIES_LOGS,
-                        state,
-                        total_forbidden_responses,
-                        lookback_timestamp,
-                        activities_logs_next_token,
-                    )
-                    all_logs.extend(activities_logs)
-                else:
-                    self.logger.info("Paginating in progress, skipping activities log collection...")
-            if collect_events:
-                if is_paginating is False or (is_paginating is True and events_logs_next_token):
-                    events_logs = self.get_generic_logs(
-                        EVENTS_LOGS, state, total_forbidden_responses, lookback_timestamp, events_logs_next_token
-                    )
-                    all_logs.extend(events_logs)
-                else:
-                    self.logger.info("Paginating in progress, skipping events log collection...")
-            if collect_threats:
-                if is_paginating is False or (is_paginating is True and threats_logs_next_token):
-                    threats_logs = self.get_generic_logs(
-                        THREATS_LOGS, state, total_forbidden_responses, lookback_timestamp, threats_logs_next_token
-                    )
-                    all_logs.extend(threats_logs)
-                else:
-                    self.logger.info("Paginating in progress, skipping threats log collection...")
+            all_logs, total_forbidden_responses = self.collect_logs_handler(
+                queries,
+                cursors,
+                state,
+                lookback_timestamp,
+                total_forbidden_responses,
+                is_paginating
+            )
+
             # Check if all ran queries have returned 401 or 403 errors and raise an exception if so
             if total_forbidden_responses >= total_queries > 0:
                 raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
-            has_more_pages = self.set_last_run_timestamp(state, lookback_timestamp, current_run_timestamp)
+            has_more_pages = self.determine_next_pagination_cycle(state, lookback_timestamp, current_run_timestamp)
             return all_logs, state, has_more_pages, 200, None
         except ApiException as error:
-            return [], state, False, error.status_code, error
-        except Exception as error:
-            return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+            return [], existing_state, False, error.status_code, error
+        # except Exception as error:
+        #     return [], existng_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def check_initial_run(self, state: Dict) -> bool:
         """
@@ -133,34 +113,83 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         """
         Return whether to query a specific endpoint based on the input parameters
         """
-        collect_activities = params.get(Input.COLLECTACTIVITIES)
-        collect_events = params.get(Input.COLLECTEVENTS)
-        collect_threats = params.get(Input.COLLECTTHREATS)
-        return collect_activities, collect_events, collect_threats
+        queries = {
+            ACTIVITIES_LOGS: params.get(Input.COLLECTACTIVITIES),
+            EVENTS_LOGS: params.get(Input.COLLECTEVENTS),
+            THREATS_LOGS: params.get(Input.COLLECTTHREATS),
+        }
+        return queries
 
     def get_cursors(self, state: Dict) -> Tuple[str, str, str]:
         """
         Return existing cursors for each endpoint
         """
-        activities_logs_next_token = state.get(ACTIVITIES_PAGE_CURSOR)
-        events_logs_next_token = state.get(EVENTS_PAGE_CURSOR)
-        threats_logs_next_token = state.get(THREATS_PAGE_CURSOR)
-        return activities_logs_next_token, events_logs_next_token, threats_logs_next_token
+        cursors = {
+            ACTIVITIES_LOGS: state.get(ACTIVITIES_PAGE_CURSOR),
+            EVENTS_LOGS: state.get(EVENTS_PAGE_CURSOR),
+            THREATS_LOGS: state.get(THREATS_PAGE_CURSOR)
+        }
+        return cursors
 
-    def log_pagination_cycle(self, activities_logs_next_token, events_logs_next_token, threats_logs_next_token) -> None:
+    def count_queries(self, queries: dict) -> int:
+        "Count how many queries are to be made and return the value"
+        total_queries = 0
+        for query in queries.values():
+            if query is not None:
+                total_queries += 1
+        return total_queries
+
+    def log_pagination_cycle(self, cursors) -> None:
         """
         Provide logging information if task is in pagination cycle
         """
         pagination_info_string = "Pagination tokens received... "
-        for log_type, cursor in {
-            "activities_logs": activities_logs_next_token,
-            "events_logs": events_logs_next_token,
-            "threats_logs": threats_logs_next_token,
-        }.items():
+        for log_type, cursor in cursors.items():
             if cursor is not None:
                 pagination_info_string += f" {log_type}:{cursor}"
         self.logger.info("Paginating cycle in progress.")
         self.logger.info(pagination_info_string)
+
+    def collect_logs_handler(self, queries: Dict, cursors: Dict, state: Dict, lookback_timestamp: str, total_forbidden_responses: int,  is_paginating: bool) -> Tuple[List[Dict], int]:
+        """
+        Handle whether to query each endpoint based on input and pagination, gather returned data and error responses
+        """
+        all_logs = []
+        if queries.get(ACTIVITIES_LOGS):
+            activities_logs_next_cursor = cursors.get(ACTIVITIES_LOGS)
+            if is_paginating is False or (is_paginating is True and activities_logs_next_cursor):
+                self.logger.info("Getting activities logs...")
+                activities_logs = self.get_generic_logs(
+                    ACTIVITIES_LOGS,
+                    state,
+                    total_forbidden_responses,
+                    lookback_timestamp,
+                    activities_logs_next_cursor,
+                )
+                all_logs.extend(activities_logs)
+            else:
+                self.logger.info("Pagination in progress, skipping activities log collection...")
+        if queries.get(EVENTS_LOGS):
+            events_logs_next_cursor = cursors.get(EVENTS_LOGS)
+            if is_paginating is False or (is_paginating is True and events_logs_next_cursor):
+                self.logger.info("Getting device control events logs...")
+                events_logs = self.get_generic_logs(
+                    EVENTS_LOGS, state, total_forbidden_responses, lookback_timestamp, events_logs_next_cursor
+                )
+                all_logs.extend(events_logs)
+            else:
+                self.logger.info("Pagination in progress, skipping events log collection...")
+        if queries.get(THREATS_LOGS):
+            threats_logs_next_cursor = cursors.get(THREATS_LOGS)
+            if is_paginating is False or (is_paginating is True and threats_logs_next_cursor):
+                self.logger.info("Getting threats logs...")
+                threats_logs = self.get_generic_logs(
+                    THREATS_LOGS, state, total_forbidden_responses, lookback_timestamp, threats_logs_next_cursor
+                )
+                all_logs.extend(threats_logs)
+            else:
+                self.logger.info("Pagination in progress, skipping threats log collection...")
+        return all_logs, total_forbidden_responses
 
     def get_generic_logs(
         self,
@@ -188,9 +217,11 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         else:
             response = self.connection.client.get_threats(query_params, API_VERSION, True, False)
         try:
+            status_code = response.status_code
+            self.logger.info(f"Received {status_code} for {log_type} query")
             response_handler(response, allowed_status_codes=[401, 404])
         except PluginException as error:
-            raise ApiException(cause=error.cause, assistance=error.assistance, status_code=response.status_code)
+            raise ApiException(cause=error.cause, assistance=error.assistance, status_code=status_code, data=response)
         logs, next_page_cursor = self.extract_query_response(response, total_forbidden_responses)
         new_logs_last_timestamp = self.get_latest_timestamp(logs, last_log_timestamp)
         if not pagination_cursor:
