@@ -68,14 +68,9 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
                 self.logger.info("No state detected. Instantiating initial run.")
             else:
                 self.logger.info("State detected. Instantiating continuation run.")
-            # Assemble params and state
-            collect_activities = params.get(Input.COLLECTACTIVITIES)
-            collect_events = params.get(Input.COLLECTEVENTS)
-            collect_threats = params.get(Input.COLLECTTHREATS)
-            # Get tokens to determine if run should be pagination
-            activities_logs_next_token = state.get(ACTIVITIES_PAGE_CURSOR)
-            events_logs_next_token = state.get(EVENTS_PAGE_CURSOR)
-            threats_logs_next_token = state.get(THREATS_PAGE_CURSOR)
+            collect_activities, collect_events, collect_threats = self.check_queries(params)
+            activities_logs_next_token, events_logs_next_token, threats_logs_next_token = self.get_cursors(state)
+
             # total_queries and total_forbidden_responses to determine if plugin should continue when receiving 401, 403
             total_queries = sum([collect_activities, collect_events, collect_threats])
             total_forbidden_responses = 0
@@ -133,6 +128,24 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
             return [], state, False, error.status_code, error
         except Exception as error:
             return [], state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+
+    def check_queries(self, params: dict) -> Tuple[str, str, str]:
+        """
+        Return whether to query a specific endpoint based on the input parameters
+        """
+        collect_activities = params.get(Input.COLLECTACTIVITIES)
+        collect_events = params.get(Input.COLLECTEVENTS)
+        collect_threats = params.get(Input.COLLECTTHREATS)
+        return collect_activities, collect_events, collect_threats
+
+    def get_cursors(self, state: dict) -> Tuple[str, str, str]:
+        """
+        Return existing cursors for each endpoint
+        """
+        activities_logs_next_token = state.get(ACTIVITIES_PAGE_CURSOR)
+        events_logs_next_token = state.get(EVENTS_PAGE_CURSOR)
+        threats_logs_next_token = state.get(THREATS_PAGE_CURSOR)
+        return activities_logs_next_token, events_logs_next_token, threats_logs_next_token
 
     def log_pagination_cycle(self, activities_logs_next_token, events_logs_next_token, threats_logs_next_token) -> None:
         """
