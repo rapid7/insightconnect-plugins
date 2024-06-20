@@ -187,59 +187,68 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
           "description": "Number of moderate vulnerabilities",
           "order": 14
         },
+        "new": {
+          "type": "array",
+          "title": "New",
+          "description": "If comparison time is supplied, the vulnerabilities that are new in the latest version at current time",
+          "items": {
+            "type": "object"
+          },
+          "order": 15
+        },
         "os_architecture": {
           "type": "string",
           "title": "OS Architecture",
           "description": "The srchitecture of the os",
-          "order": 15
+          "order": 16
         },
         "os_description": {
           "type": "string",
           "title": "OS Description",
           "description": "Description of the os",
-          "order": 16
+          "order": 17
         },
         "os_family": {
           "type": "string",
           "title": "OS Family",
           "description": "Family of the os",
-          "order": 17
+          "order": 18
         },
         "os_name": {
           "type": "string",
           "title": "OS Name",
           "description": "Name of the os",
-          "order": 18
+          "order": 19
         },
         "os_system_name": {
           "type": "string",
           "title": "OS System Name",
           "description": "Name of the system os",
-          "order": 19
+          "order": 20
         },
         "os_type": {
           "type": "string",
           "title": "OS Type",
           "description": "Type of os",
-          "order": 20
+          "order": 21
         },
         "os_vendor": {
           "type": "string",
           "title": "OS Vendor",
           "description": "Vendor of the os",
-          "order": 21
+          "order": 22
         },
         "risk_score": {
           "type": "number",
           "title": "Risk Score",
           "description": "Risk score (with criticality adjustments) of the asset",
-          "order": 22
+          "order": 23
         },
         "severe_vulnerabilities": {
           "type": "integer",
           "title": "Severe Vulnerabilities",
           "description": "Number of sever vulns",
-          "order": 23
+          "order": 24
         },
         "tags": {
           "type": "array",
@@ -248,19 +257,19 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "$ref": "#/definitions/asset_tag"
           },
-          "order": 24
+          "order": 25
         },
         "total_vulnerabilities": {
           "type": "integer",
           "title": "Total Vulnerabilities",
           "description": "Total number of vulns",
-          "order": 25
+          "order": 26
         },
         "source": {
           "type": "string",
           "title": "Source",
           "description": "Source of the asset",
-          "order": 26
+          "order": 27
         },
         "unique_identifiers": {
           "type": "array",
@@ -268,15 +277,6 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
           "description": "Uniqure aspects of the asset",
           "items": {
             "$ref": "#/definitions/identifiers"
-          },
-          "order": 27
-        },
-        "new": {
-          "type": "array",
-          "title": "New Vulnerabilities",
-          "description": "Vulnerabilities that are the new between current and comparison time for the asset",
-          "items": {
-            "type": "string"
           },
           "order": 28
         },
