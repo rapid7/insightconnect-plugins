@@ -22,15 +22,15 @@ LAST_RUN_TIMESTAMP = "last_run_timestamp"
 ACTIVITIES_LAST_LOG_TIMESTAMP = "activities_last_log_timestamp"
 EVENTS_LAST_LOG_TIMESTAMP = "events_last_log_timestamp"
 THREATS_LAST_LOG_TIMESTAMP = "threats_last_log_timestamp"
-ACTIVITIES_PAGE_TOKEN = "activities_page_token"
-EVENTS_PAGE_TOKEN = "events_page_token"
-THREATS_PAGE_TOKEN = "threats_page_token"
+ACTIVITIES_PAGE_CURSOR = "activities_page_cursor"
+EVENTS_PAGE_CURSOR = "events_page_cursor"
+THREATS_PAGE_CURSOR = "threats_page_cursor"
 
 # Cutoff values
 DATE_TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 INITIAL_CUTOFF_HOURS = 24
 MAX_CUTOFF_HOURS = 24 * 7
-LOGS_PAGE_LIMIT = 2
+LOGS_PAGE_LIMIT = 1000
 
 API_VERSION = "2.1"
 STARTING_TIMESTAMP = "1900-01-01T00:00:00.000000Z"
@@ -40,9 +40,9 @@ EVENTS_LOGS = "events_logs"
 THREATS_LOGS = "threats_logs"
 
 LOG_TYPE_MAP = {
-    ACTIVITIES_LOGS: {"LAST_LOG_TIMESTAMP": ACTIVITIES_LAST_LOG_TIMESTAMP, "PAGE_TOKEN": ACTIVITIES_PAGE_TOKEN},
-    EVENTS_LOGS: {"LAST_LOG_TIMESTAMP": EVENTS_LAST_LOG_TIMESTAMP, "PAGE_TOKEN": EVENTS_PAGE_TOKEN},
-    THREATS_LOGS: {"LAST_LOG_TIMESTAMP": THREATS_LAST_LOG_TIMESTAMP, "PAGE_TOKEN": THREATS_PAGE_TOKEN},
+    ACTIVITIES_LOGS: {"LAST_LOG_TIMESTAMP": ACTIVITIES_LAST_LOG_TIMESTAMP, "PAGE_TOKEN": ACTIVITIES_PAGE_CURSOR},
+    EVENTS_LOGS: {"LAST_LOG_TIMESTAMP": EVENTS_LAST_LOG_TIMESTAMP, "PAGE_TOKEN": EVENTS_PAGE_CURSOR},
+    THREATS_LOGS: {"LAST_LOG_TIMESTAMP": THREATS_LAST_LOG_TIMESTAMP, "PAGE_TOKEN": THREATS_PAGE_CURSOR},
 }
 
 
@@ -63,7 +63,7 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         """
         try:
             # Determine first run or subsequent
-            is_initial_run = False if state else True
+            is_initial_run = not state
             if is_initial_run:
                 self.logger.info("No state detected. Instantiating initial run.")
             else:
@@ -73,9 +73,9 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
             collect_events = params.get(Input.COLLECTEVENTS)
             collect_threats = params.get(Input.COLLECTTHREATS)
             # Get tokens to determine if run should be pagination
-            activities_logs_next_token = state.get(ACTIVITIES_PAGE_TOKEN)
-            events_logs_next_token = state.get(EVENTS_PAGE_TOKEN)
-            threats_logs_next_token = state.get(THREATS_PAGE_TOKEN)
+            activities_logs_next_token = state.get(ACTIVITIES_PAGE_CURSOR)
+            events_logs_next_token = state.get(EVENTS_PAGE_CURSOR)
+            threats_logs_next_token = state.get(THREATS_PAGE_CURSOR)
             # total_queries and total_forbidden_responses to determine if plugin should continue when receiving 401, 403
             total_queries = sum([collect_activities, collect_events, collect_threats])
             total_forbidden_responses = 0
@@ -127,16 +127,7 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
             if total_forbidden_responses >= total_queries > 0:
                 raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
             # Whether to immediately run pagination iteration on next run or set the last run timestamp
-            has_more_pages = any(
-                [state.get(ACTIVITIES_PAGE_TOKEN), state.get(EVENTS_PAGE_TOKEN), state.get(THREATS_PAGE_TOKEN)]
-            )
-            if has_more_pages:
-                self.logger.info(
-                    "Pagination token was returned. Not updating last run timestamp to current time until query completed."
-                )
-                state[LAST_RUN_TIMESTAMP] = lookback_timestamp
-            else:
-                state[LAST_RUN_TIMESTAMP] = current_run_timestamp
+            has_more_pages = self.set_last_run_timestamp(state, lookback_timestamp, current_run_timestamp)
             return all_logs, state, has_more_pages, 200, None
         except ApiException as error:
             return [], state, False, error.status_code, error
@@ -242,6 +233,23 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         if new_timestamp > latest_timestamp:
             latest_timestamp_string = new_timestamp_string
         return latest_timestamp_string
+
+    def determine_next_pagination_cycle(self, state: dict, lookback_timestamp: str, current_run_timestamp: str) -> bool:
+        """
+        Set the last run timestamp in state based upon pagination cycle.
+        Return true if pagination expected next cycle.
+        """
+        has_more_pages = any(
+            [state.get(ACTIVITIES_PAGE_CURSOR), state.get(EVENTS_PAGE_CURSOR), state.get(THREATS_PAGE_CURSOR)]
+        )
+        if has_more_pages:
+            self.logger.info(
+                "Pagination token was returned. Not updating last run timestamp to current time until query completed."
+            )
+            state[LAST_RUN_TIMESTAMP] = lookback_timestamp
+        else:
+            state[LAST_RUN_TIMESTAMP] = current_run_timestamp
+        return has_more_pages
 
     def get_lookback_values(
         self, is_initial_run: bool, custom_config: dict = {}, last_timestamp: str = None
