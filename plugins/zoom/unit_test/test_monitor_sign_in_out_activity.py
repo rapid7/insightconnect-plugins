@@ -29,7 +29,6 @@ GET_DATETIME_LAST_X_HOURS_PATH = (
 
 STUB_SAMPLES = [
     {
-        "client_type": "mac",
         "email": "test@test.com",
         "ip_address": "11.11.11.11",
         "time": "2023-02-22T21:50:44Z",
