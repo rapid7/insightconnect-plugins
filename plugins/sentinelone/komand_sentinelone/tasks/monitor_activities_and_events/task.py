@@ -79,7 +79,13 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
             )
 
             all_logs, total_forbidden_responses = self.collect_logs_handler(
-                queries, cursors, state, lookback_timestamp, total_forbidden_responses, is_paginating
+                queries,
+                cursors,
+                state,
+                lookback_timestamp,
+                current_run_timestamp,
+                total_forbidden_responses,
+                is_paginating,
             )
 
             # Check if all ran queries have returned 401 or 403 errors and raise an exception if so
@@ -150,6 +156,7 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         cursors: Dict,
         state: Dict,
         lookback_timestamp: str,
+        current_run_timestamp: str,
         total_forbidden_responses: int,
         is_paginating: bool,
     ) -> Tuple[List[Dict], int]:
@@ -161,13 +168,14 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
             if check:
                 cursor = cursors.get(log_type)
                 if is_paginating is False or (is_paginating is True and cursor):
-                    self.logger.info(f"Getting {log_type}...")
+                    self.logger.info(f"Getting {log_type} between {lookback_timestamp} and {current_run_timestamp}...")
                     if cursor:
                         self.logger.info(f"Using next page cursor: {cursor}")
                     logs = self.get_generic_logs(
                         log_type,
                         state,
                         total_forbidden_responses,
+                        current_run_timestamp,
                         lookback_timestamp,
                         cursor,
                     )
@@ -182,6 +190,7 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         log_type: str,
         state: dict,
         total_forbidden_responses: int,
+        current_run_timestamp: str,
         last_run_timestamp: str = None,
         pagination_cursor: str = None,
     ) -> List[Dict]:
@@ -195,7 +204,7 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         last_log_timestamp = state.get(timestamp_key)
         if not last_log_timestamp:
             last_log_timestamp = STARTING_TIMESTAMP
-        query_params = self.get_query_params(log_type, last_run_timestamp, pagination_cursor)
+        query_params = self.get_query_params(log_type, last_run_timestamp, current_run_timestamp, pagination_cursor)
         if log_type == ACTIVITIES_LOGS:
             response = self.connection.client.get_activities_list(query_params, True, False)
         elif log_type == EVENTS_LOGS:
@@ -217,7 +226,7 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
             self.logger.info(f"New next page cursor received for {log_type}: {next_page_cursor}")
         return logs
 
-    def get_query_params(self, log_type, last_log_timestamp, cursor) -> Dict:
+    def get_query_params(self, log_type: str, last_log_timestamp: str, current_run_timestamp: str, cursor: str) -> Dict:
         """
         Generate query parameters based on log type and availability of pagination cursor
         """
@@ -227,6 +236,7 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         query_params = {
             "limit": LOGS_PAGE_LIMIT,
             f"{timestamp_name}__gt": last_log_timestamp,
+            f"{timestamp_name}__lte": current_run_timestamp,
             "sortBy": timestamp_name,
         }
         if cursor:
