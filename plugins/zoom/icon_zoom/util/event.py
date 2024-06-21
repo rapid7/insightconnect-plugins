@@ -1,6 +1,14 @@
 class Event:
     # pylint: disable=redefined-builtin
-    def __init__(self, client_type: str, email: str, ip_address: str, time: str, type: str, version: str) -> None:
+    def __init__(
+        self,
+        client_type: str = "",
+        email: str = "",
+        ip_address: str = "",
+        time: str = "",
+        type: str = "",
+        version: str = "",
+    ) -> None:
         self.client_type = client_type
         self.email = email
         self.ip_address = ip_address

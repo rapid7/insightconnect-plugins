@@ -307,6 +307,7 @@ Example output:
 
 # Version History
 
+* 4.1.13 - Fix defect where Event objects failed to create on a missing attribute | Update insight-plugin-runtime to version 5.5.5
 * 4.1.12 - Fix defect where 401 errors may not be raised or logged correctly | Update insight-plugin-runtime to version 5.5.0
 * 4.1.11 - Update Task `monitor_sign_in_out_activity` to reduce instances of duplicate results
 * 4.1.10 - Update Task `monitor_sign_in_out_activity` handle invalid or expired pagination token errors
