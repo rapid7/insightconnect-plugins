@@ -90,7 +90,7 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
 
             # Check if all ran queries have returned 401 or 403 errors and raise an exception if so
             if total_forbidden_responses >= total_queries > 0:
-                return [], existing_state, False, 403, PluginException(preset=PluginException.Preset.UNAUTHORIZED)
+                return [], existing_state, False, 401, PluginException(preset=PluginException.Preset.UNAUTHORIZED)
             has_more_pages = self.determine_next_pagination_cycle(state, lookback_timestamp, current_run_timestamp)
             return all_logs, state, has_more_pages, 200, None
         except ApiException as error:
@@ -171,7 +171,7 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
                     self.logger.info(f"Getting {log_type} between {lookback_timestamp} and {current_run_timestamp}...")
                     if cursor:
                         self.logger.info(f"Using next page cursor: {cursor}")
-                    logs = self.get_generic_logs(
+                    logs, total_forbidden_responses = self.get_generic_logs(
                         log_type,
                         state,
                         total_forbidden_responses,
@@ -218,13 +218,15 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
             response_handler(response, allowed_status_codes=[401, 403])
         except PluginException as error:
             raise ApiException(cause=error.cause, assistance=error.assistance, status_code=status_code, data=response)
-        logs, next_page_cursor = self.extract_query_response(response, total_forbidden_responses)
+        logs, next_page_cursor, total_forbidden_responses = self.extract_query_response(
+            response, total_forbidden_responses
+        )
         new_logs_last_timestamp = self.get_latest_timestamp(logs, last_log_timestamp)
         state[timestamp_key] = new_logs_last_timestamp
         state[page_token_key] = next_page_cursor
         if next_page_cursor:
             self.logger.info(f"New next page cursor received for {log_type}: {next_page_cursor}")
-        return logs
+        return logs, total_forbidden_responses
 
     def get_query_params(self, log_type: str, last_log_timestamp: str, current_run_timestamp: str, cursor: str) -> Dict:
         """
@@ -251,10 +253,11 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         """
         if response.status_code in [HTTPStatusCodes.UNAUTHORIZED, HTTPStatusCodes.FORBIDDEN]:
             total_forbidden_responses += 1
+            return [], None, total_forbidden_responses
         response_json = extract_json(response)
         logs = response_json.get("data", [])
         next_cursor = response_json.get("pagination", {}).get("nextCursor")
-        return logs, next_cursor
+        return logs, next_cursor, total_forbidden_responses
 
     def get_latest_timestamp(self, logs, latest_timestamp_string) -> Optional[str]:
         """
