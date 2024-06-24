@@ -1,8 +1,5 @@
 import sys
 import os
-import time
-
-import komand_sentinelone.util.helper
 
 sys.path.append(os.path.abspath("../"))
 
