@@ -10,6 +10,7 @@ from requests.exceptions import HTTPError
 from komand_sentinelone.connection.connection import Connection
 from komand_sentinelone.connection.schema import Input
 from komand_sentinelone.util.constants import CONSOLE_USER_TYPE
+from komand_sentinelone.util.helper import rate_limiting
 
 
 class Util:
@@ -182,31 +183,31 @@ class Util:
                 return MockResponse(200, "activities_empty")
             if params in [
                 {
-                    'limit': 1000,
-                    'createdAt__gt': '1999-12-31T00:00:00.000000Z',
-                    'createdAt__lte': '2000-01-01T00:00:00.000000Z',
-                    'sortBy': 'createdAt'
-                },
-                    {
-                    'limit': 1000,
-                    'createdAt__gt': '1999-12-31T00:00:00.000000Z',
-                    'createdAt__lte': '2000-01-01T00:00:00.000000Z',
-                    'sortBy': 'createdAt',
-                    "cursor": "YWdlbnRfaWQ6NTgwMjkzODE="
+                    "limit": 1000,
+                    "createdAt__gt": "1999-12-31T00:00:00.000000Z",
+                    "createdAt__lte": "2000-01-01T00:00:00.000000Z",
+                    "sortBy": "createdAt",
                 },
                 {
-                    'limit': 1000,
-                    'createdAt__gt': '1999-12-30T00:00:00.000000Z',
-                    'createdAt__lte': '2000-01-01T00:00:00.000000Z',
-                    'sortBy': 'createdAt',
+                    "limit": 1000,
+                    "createdAt__gt": "1999-12-31T00:00:00.000000Z",
+                    "createdAt__lte": "2000-01-01T00:00:00.000000Z",
+                    "sortBy": "createdAt",
+                    "cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
+                },
+                {
+                    "limit": 1000,
+                    "createdAt__gt": "1999-12-30T00:00:00.000000Z",
+                    "createdAt__lte": "2000-01-01T00:00:00.000000Z",
+                    "sortBy": "createdAt",
                 },
             ]:
                 return MockResponse(200, "monitor_a_and_e_activities")
             if params == {
-                'limit': 1000,
-                'createdAt__gt': '1999-12-31T00:00:00.000000Z',
-                'createdAt__lte': '2000-01-01T00:00:00.000000Z',
-                'sortBy': 'createdAt',
+                "limit": 1000,
+                "createdAt__gt": "1999-12-31T00:00:00.000000Z",
+                "createdAt__lte": "2000-01-01T00:00:00.000000Z",
+                "sortBy": "createdAt",
                 "cursor": "ZWdlbnRfaWQ6NTgwMjkzODE=",
             }:
                 return MockResponse(401)

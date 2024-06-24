@@ -1,5 +1,8 @@
 import sys
 import os
+import time
+
+import komand_sentinelone.util.helper
 
 sys.path.append(os.path.abspath("../"))
 
@@ -60,7 +63,8 @@ class TestGetEvents(TestCase):
             ],
         ]
     )
-    def test_get_events_raise_exception(self, mock_request, test_name, input_params, cause, assistance):
+    @patch("time.sleep", lambda _: None)
+    def test_get_events_raise_exception(self, test_name, input_params, cause, assistance, mock_sleep):
         with self.assertRaises(PluginException) as error:
             self.action.run(input_params)
         self.assertEqual(error.exception.cause, cause)
