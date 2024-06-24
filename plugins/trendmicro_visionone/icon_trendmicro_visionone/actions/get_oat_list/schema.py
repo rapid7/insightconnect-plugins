@@ -61,10 +61,10 @@ class GetOatListInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Query Operator",
       "description": "Logical operator to employ in the query. (AND/OR)",
-      "default": " or ",
+      "default": "or",
       "enum": [
-        " or ",
-        " and "
+        "or",
+        "and"
       ],
       "order": 6
     }
