@@ -141,14 +141,43 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|data|[]activity|True|List of activities obtained for the given filters|[]|
+|data|[]activity|True|List of activities obtained for the given filters|[{"accountId": "400000000000000000", "accountName": "Example Account", "activityType": 22, "agentId": "9000000000000000", "createdAt": "2020-12-18T20:49:26.257525Z", "data": {"accountName": "Example Account", "computerName": "so-agent-win12", "confidenceLevel": "malicious", "fileContentHash": "02699626f388ed830012e5b787640e71c56d42d8", "fileDisplayName": "setup.exe", "filePath": "\\Device\\HarddiskVolume2\\Users\\Administrator\\Desktop\\setup.exe", "groupName": "Default Group", "siteName": "Example Site", "threatClassification": "Trojan", "threatClassificationSource": "Cloud"}, "groupId": "500000000000000000", "groupName": "Default Group", "id": "800000000000000008", "primaryDescription": "Threat with confidence level malicious detected: test.txt", "secondaryDescription": "02699626f388ed830012e5b787640e71c56d42d8", "siteId": "5000000000000001", "siteName": "Example", "threatId": "100000000000000000", "updatedAt": "2020-12-18T20:49:26.257525Z"}]|
 |totalItems|integer|False|Total number of activities found matching your query|100|
   
 Example output:
 
 ```
 {
-  "data": [],
+  "data": [
+    {
+      "accountId": "400000000000000000",
+      "accountName": "Example Account",
+      "activityType": 22,
+      "agentId": "9000000000000000",
+      "createdAt": "2020-12-18T20:49:26.257525Z",
+      "data": {
+        "accountName": "Example Account",
+        "computerName": "so-agent-win12",
+        "confidenceLevel": "malicious",
+        "fileContentHash": "02699626f388ed830012e5b787640e71c56d42d8",
+        "fileDisplayName": "setup.exe",
+        "filePath": "\\Device\\HarddiskVolume2\\Users\\Administrator\\Desktop\\setup.exe",
+        "groupName": "Default Group",
+        "siteName": "Example Site",
+        "threatClassification": "Trojan",
+        "threatClassificationSource": "Cloud"
+      },
+      "groupId": "500000000000000000",
+      "groupName": "Default Group",
+      "id": "800000000000000008",
+      "primaryDescription": "Threat with confidence level malicious detected: test.txt",
+      "secondaryDescription": "02699626f388ed830012e5b787640e71c56d42d8",
+      "siteId": "5000000000000001",
+      "siteName": "Example",
+      "threatId": "100000000000000000",
+      "updatedAt": "2020-12-18T20:49:26.257525Z"
+    }
+  ],
   "totalItems": 100
 }
 ```
@@ -165,13 +194,19 @@ This action is used to get a list of activity types
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|activityTypes|[]activityTypes|True|List of activity types|[]|
+|activityTypes|[]activityTypes|True|List of activity types|[{"id": 1234, "descriptionTemplate": "The Management user {{ username }} created Account {{ account_name }}.", "action": "Account Created"}]|
   
 Example output:
 
 ```
 {
-  "activityTypes": []
+  "activityTypes": [
+    {
+      "action": "Account Created",
+      "descriptionTemplate": "The Management user {{ username }} created Account {{ account_name }}.",
+      "id": 1234
+    }
+  ]
 }
 ```
 
@@ -325,13 +360,28 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|data|[]agentApplications|True|List of installed applications|[]|
+|data|[]agentApplications|True|List of installed applications|[{"installedDate": "2023-01-01T00:00:00.000000Z", "name": "Example App1", "publisher": "Microsoft Corporation", "size": 1234, "version": "1.0.4.5"}, {"installedDate": "2023-01-01T00:00:00.000000Z", "name": "Example App2", "publisher": "Example Publisher", "size": 1111, "version": "1.0.5.6"}]|
   
 Example output:
 
 ```
 {
-  "data": []
+  "data": [
+    {
+      "installedDate": "2023-01-01T00:00:00.000000Z",
+      "name": "Example App1",
+      "publisher": "Microsoft Corporation",
+      "size": 1234,
+      "version": "1.0.4.5"
+    },
+    {
+      "installedDate": "2023-01-01T00:00:00.000000Z",
+      "name": "Example App2",
+      "publisher": "Example Publisher",
+      "size": 1111,
+      "version": "1.0.5.6"
+    }
+  ]
 }
 ```
 
@@ -428,13 +478,15 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|querySuccess|False|SentinelOne API call response data|{}|
+|response|querySuccess|False|SentinelOne API call response data|{'success': 'FINISHED'}|
   
 Example output:
 
 ```
 {
-  "response": {}
+  "response": {
+    "success": "FINISHED"
+  }
 }
 ```
 
@@ -551,7 +603,7 @@ This action is used to disable agents that match a filter
 |agent|string|None|False|Agent to perform disable action on. Accepts IP address, MAC address, hostname, UUID or agent ID. Leave empty to perform action on all applicable Agents|None|hostname123|None|None|
 |expirationTime|date|None|False|Agents will be re-enabled after this timestamp|None|2020-02-27 04:49:26.257525+00:00|None|None|
 |expirationTimezone|string|Central Standard Time (North America) [CST]|False|Timezone for the expiration timestamp. Set with expiration time|["Australian Central Daylight Saving Time [ACDT]", "Australian Central Standard Time [ACST]", "Acre Time [ACT]", "Atlantic Daylight Time [ADT]", "Australian Eastern Daylight Saving Time [AEDT]", "Australian Eastern Standard Time [AEST]", "Australian Eastern Time [AET]", "Afghanistan Time [AFT]", "Alaska Daylight Time [AKDT]", "Alaska Standard Time [AKST]", "Alma-Ata Time [ALMT]", "Amazon Summer Time (Brazil) [AMST]", "Amazon Time (Brazil) [AMT]", "Armenia Time [AMT]", "Anadyr Time [ANAT]", "Aqtobe Time [AQTT]", "Argentina Time [ART]", "Arabia Standard Time [AST]", "Atlantic Standard Time [AST]", "Australian Western Standard Time [AWST]", "Azores Summer Time [AZOST]", "Azores Standard Time [AZOT]", "Azerbaijan Time [AZT]", "Brunei Time [BNT]", "British Indian Ocean Time [BIOT]", "Baker Island Time [BIT]", "Bolivia Time [BOT]", "Brasilia Summer Time [BRST]", "Brasilia Time [BRT]", "Bangladesh Standard Time [BST]", "Bougainville Standard Time [BST]", "Bhutan Time [BTT]", "Central Africa Time [CAT]", "Cocos Islands Time [CCT]", "Central Daylight Time (North America) [CDT]", "Cuba Daylight Time [CDT]", "Central European Summer Time [CEST]", "Central European Time [CET]", "Chatham Daylight Time [CHADT]", "Chatham Standard Time [CHAST]", "Choibalsan Standard Time [CHOT]", "Choibalsan Summer Time [CHOST]", "Chamorro Standard Time [CHST]", "Chuuk Time [CHUT]", "Clipperton Island Standard Time [CIST]", "Central Indonesia Time [WITA]", "Cook Island Time [CKT]", "Chile Summer Time [CLST]", "Chile Standard Time [CLT]", "Colombia Summer Time [COST]", "Colombia Time [COT]", "Central Standard Time (North America) [CST]", "China Standard Time [CST]", "Cuba Standard Time [CST]", "Central Time [CT]", "Cape Verde Time [CVT]", "Christmas Island Time [CXT]", "Davis Time [DAVT]", "Dumont dUrville Time [DDUT]", "AIX-specific equivalent of Central European Time [DFT]", "Easter Island Summer Time [EASST]", "Easter Island Standard Time [EAST]", "East Africa Time [EAT]", "Ecuador Time [ECT]", "Eastern Daylight Time (North America) [EDT]", "Eastern European Summer Time [EEST]", "Eastern European Time [EET]", "Eastern Greenland Summer Time [EGST]", "Eastern Greenland Time [EGT]", "Eastern Indonesian Time [WIT]", "Eastern Standard Time (North America) [EST]", "Further-eastern European Time [FET]", "Fiji Time [FJT]", "Falkland Islands Summer Time [FKST]", "Falkland Islands Time [FKT]", "Fernando de Noronha Time [FNT]", "Galapagos Time [GALT]", "Gambier Islands Time [GAMT]", "Georgia Standard Time [GET]", "French Guiana Time [GFT]", "Gilbert Island Time [GILT]", "Gambier Island Time [GIT]", "Greenwich Mean Time [GMT]", "South Georgia and the South Sandwich Islands Time [GST]", "Gulf Standard Time [GST]", "Guyana Time [GYT]", "Hawaii-Aleutian Daylight Time [HDT]", "Heure Avancee Europe Centrale French-language name for CEST [HAEC]", "Hawaii-Aleutian Standard Time [HST]", "Hong Kong Time [HKT]", "Heard and McDonald Islands Time [HMT]", "Hovd Time [HOVT]", "Indochina Time [ICT]", "International Day Line West time zone [IDLW]", "Israel Daylight Time [IDT]", "Indian Ocean Time [IOT]", "Iran Daylight Time [IRDT]", "Irkutsk Time [IRKT]", "Iran Standard Time [IRST]", "Indian Standard Time [IST]", "Irish Standard Time [IST]", "Israel Standard Time [IST]", "Japan Standard Time [JST]", "Kaliningrad Time [KALT]", "Kyrgyzstan Time [KGT]", "Kosrae Time [KOST]", "Krasnoyarsk Time [KRAT]", "Korea Standard Time [KST]", "Lord Howe Standard Time [LHST]", "Lord Howe Summer Time [LHST]", "Line Islands Time [LINT]", "Magadan Time [MAGT]", "Marquesas Islands Time [MART]", "Mawson Station Time [MAWT]", "Mountain Daylight Time (North America) [MDT]", "Middle European Time [MET]", "Middle European Summer Time [MEST]", "Marshall Islands Time [MHT]", "Macquarie Island Station Time [MIST]", "Marquesas Islands Time [MIT]", "Myanmar Standard Time [MMT]", "Moscow Time [MSK]", "Malaysia Standard Time [MST]", "Mountain Standard Time (North America) [MST]", "Mauritius Time [MUT]", "Maldives Time [MVT]", "Malaysia Time [MYT]", "New Caledonia Time [NCT]", "Newfoundland Daylight Time [NDT]", "Norfolk Island Time [NFT]", "Novosibirsk Time [NOVT]", "Nepal Time [NPT]", "Newfoundland Standard Time [NST]", "Newfoundland Time [NT]", "Niue Time [NUT]", "New Zealand Daylight Time [NZDT]", "New Zealand Standard Time [NZST]", "Omsk Time [OMST]", "Oral Time [ORAT]", "Pacific Daylight Time (North America) [PDT]", "Peru Time [PET]", "Kamchatka Time [PETT]", "Papua New Guinea Time [PGT]", "Phoenix Island Time [PHOT]", "Philippine Time [PHT]", "Pakistan Standard Time [PKT]", "Saint Pierre and Miquelon Daylight Time [PMDT]", "Saint Pierre and Miquelon Standard Time [PMST]", "Pohnpei Standard Time [PONT]", "Pacific Standard Time (North America) [PST]", "Philippine Standard Time [PST]", "Palau Time [PWT]", "Paraguay Summer Time [PYST]", "Paraguay Time [PYT]", "Reunion Time [RET]", "Rothera Research Station Time [ROTT]", "Sakhalin Island Time [SAKT]", "Samara Time [SAMT]", "South African Standard Time [SAST]", "Solomon Islands Time [SBT]", "Seychelles Time [SCT]", "Samoa Daylight Time [SDT]", "Singapore Time [SGT]", "Sri Lanka Standard Time [SLST]", "Srednekolymsk Time [SRET]", "Suriname Time [SRT]", "Samoa Standard Time [SST]", "Singapore Standard Time [SST]", "Showa Station Time [SYOT]", "Tahiti Time [TAHT]", "Thailand Standard Time [THA]", "French Southern and Antarctic Time [TFT]", "Tajikistan Time [TJT]", "Tokelau Time [TKT]", "Timor Leste Time [TLT]", "Turkmenistan Time [TMT]", "Turkey Time [TRT]", "Tonga Time [TOT]", "Tuvalu Time [TVT]", "Ulaanbaatar Summer Time [ULAST]", "Ulaanbaatar Standard Time [ULAT]", "Coordinated Universal Time [UTC]", "Uruguay Summer Time [UYST]", "Uruguay Standard Time [UYT]", "Uzbekistan Time [UZT]", "Venezuelan Standard Time [VET]", "Vladivostok Time [VLAT]", "Volgograd Time [VOLT]", "Vostok Station Time [VOST]", "Vanuatu Time [VUT]", "Wake Island Time [WAKT]", "West Africa Summer Time [WAST]", "West Africa Time [WAT]", "Western European Summer Time [WEST]", "Western European Time [WET]", "Western Indonesian Time [WIB]", "West Greenland Summer Time [WGST]", "West Greenland Time [WGT]", "Western Standard Time [WST]", "Yakutsk Time [YAKT]", "Yekaterinburg Time [YEKT]"]|Central Standard Time (North America) [CST]|None|None|
-|filter|object|None|False|Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents|None|{}|None|None|
+|filter|object|None|False|Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents|None|{'updatedAt__gt': '2019-02-27T04:49:26.257525Z'}|None|None|
 |reboot|boolean|False|True|Set true to reboot the endpoint, false to skip rebooting|None|True|None|None|
   
 Example input:
@@ -561,7 +613,9 @@ Example input:
   "agent": "hostname123",
   "expirationTime": "2020-02-27 04:49:26.257525+00:00",
   "expirationTimezone": "Central Standard Time (North America) [CST]",
-  "filter": {},
+  "filter": {
+    "updatedAt__gt": "2019-02-27T04:49:26.257525Z"
+  },
   "reboot": false
 }
 ```
@@ -589,7 +643,7 @@ This action is used to enable agents that match the filter
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |agent|string|None|False|Agent to perform disable action on. Accepts IP address, MAC address, hostname, UUID or agent ID. Leave empty to perform action on all applicable Agents|None|hostname123|None|None|
-|filter|object|None|False|Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents|None|{}|None|None|
+|filter|object|None|False|Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents|None|{'updatedAt__gt': '2019-02-27T04:49:26.257525Z'}|None|None|
 |reboot|boolean|None|True|Set true to reboot the endpoint, false to skip rebooting|None|True|None|None|
   
 Example input:
@@ -597,7 +651,9 @@ Example input:
 ```
 {
   "agent": "hostname123",
-  "filter": {},
+  "filter": {
+    "updatedAt__gt": "2019-02-27T04:49:26.257525Z"
+  },
   "reboot": true
 }
 ```
@@ -676,13 +732,13 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|agent|agentData|False|Detailed information about agent found|{}|
+|agent|agentData|False|Detailed information about agent found|{ "agent": { "accountId": "1000000000000000000", "accountName": "Example Name", "activeThreats": 0, "agentVersion": "1.0.2.3", "allowRemoteShell": false, "appsVulnerabilityStatus": "up_to_date", "computerName": "hostname123", "consoleMigrationStatus": "N/A", "coreCount": 1, "cpuCount": 1, "cpuId": "CPU A0 v1 @ 3.00GHz", "createdAt": "2023-01-01T00:00:00.000000Z", "domain": "WORKGROUP", "encryptedApplications": false, "externalIp": "198.51.100.1", "firewallEnabled": true, "groupId": "1000000000000000000", "groupIp": "1.2.3.x", "groupName": "Example Group", "id": "1000000000000000000", "inRemoteShellSession": false, "infected": false, "installerType": ".exe", "isActive": true, "isDecommissioned": false, "isPendingUninstall": false, "isUninstalled": false, "isUpToDate": true, "lastActiveDate": "2023-01-01T00:00:00.000000Z", "lastIpToMgmt": "198.51.100.1", "locationEnabled": true, "locationType": "fallback", "locations": [ { "id": "1000000000000000000", "name": "Fallback", "scope": "global" } ], "machineType": "server", "mitigationMode": "protect", "mitigationModeSuspicious": "detect", "modelName": "Example Model", "networkInterfaces": [ { "id": "1000000000000000000", "inet": [ "198.51.100.1" ], "inet6": [ "2001:db8:1:1:1:1:1:1" ], "name": "Ethernet", "physical": "12-23-45-67-89-12" } ], "networkQuarantineEnabled": false, "networkStatus": "disconnected", "operationalState": "na", "operationalStateExpiration": "None", "osArch": "64 bit", "osName": "System Name", "osRevision": "9200", "osStartTime": "2023-01-01T00:00:00Z", "osType": "windows", "osUsername": "None", "rangerStatus": "NotApplicable", "rangerVersion": "None", "registeredAt": "2023-01-01T00:00:00.000000Z", "remoteProfilingState": "disabled", "remoteProfilingStateExpiration": "None", "scanAbortedAt": "None", "scanFinishedAt": "2023-01-01T00:00:00.000000Z", "scanStartedAt": "2023-01-01T00:00:00.000000Z", "scanStatus": "finished", "siteId": "1000000000000000000", "siteName": "Example", "threatRebootRequired": false, "totalMemory": 1023, "updatedAt": "2023-01-01T00:00:00.000000Z", "uuid": "9de5069c5afe602b2ea0a04b66beb2c0" }|
   
 Example output:
 
 ```
 {
-  "agent": {}
+  "agent": "{ \"agent\": { \"accountId\": \"1000000000000000000\", \"accountName\": \"Example Name\", \"activeThreats\": 0, \"agentVersion\": \"1.0.2.3\", \"allowRemoteShell\": false, \"appsVulnerabilityStatus\": \"up_to_date\", \"computerName\": \"hostname123\", \"consoleMigrationStatus\": \"N/A\", \"coreCount\": 1, \"cpuCount\": 1, \"cpuId\": \"CPU A0 v1 @ 3.00GHz\", \"createdAt\": \"2023-01-01T00:00:00.000000Z\", \"domain\": \"WORKGROUP\", \"encryptedApplications\": false, \"externalIp\": \"198.51.100.1\", \"firewallEnabled\": true, \"groupId\": \"1000000000000000000\", \"groupIp\": \"1.2.3.x\", \"groupName\": \"Example Group\", \"id\": \"1000000000000000000\", \"inRemoteShellSession\": false, \"infected\": false, \"installerType\": \".exe\", \"isActive\": true, \"isDecommissioned\": false, \"isPendingUninstall\": false, \"isUninstalled\": false, \"isUpToDate\": true, \"lastActiveDate\": \"2023-01-01T00:00:00.000000Z\", \"lastIpToMgmt\": \"198.51.100.1\", \"locationEnabled\": true, \"locationType\": \"fallback\", \"locations\": [ { \"id\": \"1000000000000000000\", \"name\": \"Fallback\", \"scope\": \"global\" } ], \"machineType\": \"server\", \"mitigationMode\": \"protect\", \"mitigationModeSuspicious\": \"detect\", \"modelName\": \"Example Model\", \"networkInterfaces\": [ { \"id\": \"1000000000000000000\", \"inet\": [ \"198.51.100.1\" ], \"inet6\": [ \"2001:db8:1:1:1:1:1:1\" ], \"name\": \"Ethernet\", \"physical\": \"12-23-45-67-89-12\" } ], \"networkQuarantineEnabled\": false, \"networkStatus\": \"disconnected\", \"operationalState\": \"na\", \"operationalStateExpiration\": \"None\", \"osArch\": \"64 bit\", \"osName\": \"System Name\", \"osRevision\": \"9200\", \"osStartTime\": \"2023-01-01T00:00:00Z\", \"osType\": \"windows\", \"osUsername\": \"None\", \"rangerStatus\": \"NotApplicable\", \"rangerVersion\": \"None\", \"registeredAt\": \"2023-01-01T00:00:00.000000Z\", \"remoteProfilingState\": \"disabled\", \"remoteProfilingStateExpiration\": \"None\", \"scanAbortedAt\": \"None\", \"scanFinishedAt\": \"2023-01-01T00:00:00.000000Z\", \"scanStartedAt\": \"2023-01-01T00:00:00.000000Z\", \"scanStatus\": \"finished\", \"siteId\": \"1000000000000000000\", \"siteName\": \"Example\", \"threatRebootRequired\": false, \"totalMemory\": 1023, \"updatedAt\": \"2023-01-01T00:00:00.000000Z\", \"uuid\": \"9de5069c5afe602b2ea0a04b66beb2c0\" }"
 }
 ```
 
@@ -713,14 +769,91 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |errors|[]object|False|Errors|[]|
-|events|[]eventData|False|Response events data|[]|
+|events|[]eventData|False|Response events data|[{"accountId": "1000000000000000000", "agentDomain": "WORKGROUP", "agentGroupId": "1000000000000000000", "agentId": "1000000000000000000", "agentInfected": true, "agentIp": "198.51.100.1", "agentIsActive": true, "agentIsDecommissioned": false, "agentMachineType": "laptop", "agentName": "Example Name", "agentNetworkStatus": "connected", "agentOs": "windows", "agentTimestamp": "2023-10-23T00:00:00.000Z", "agentUuid": "9de5069c5afe602b2ea0a04b66beb2c0", "createdAt": "2023-10-23T00:00:00.000Z", "endpointMachineType": "desktop", "endpointName": "Example Name", "endpointOs": "windows", "eventTime": "2023-10-23T00:00:00.000Z", "eventType": "Task Update", "id": "1000000000000000000", "isAgentVersionFullySupportedForPg": false, "isAgentVersionFullySupportedForPgMessage": "Example message", "lastActivatedAt": "2023-10-23T00:00:00.000Z", "objectType": "scheduled_task", "parentProcessUniqueKey": "ABCD1234", "pid": "1234", "processGroupId": "ABCD1234", "processIntegrityLevel": "INTEGRITY_LEVEL_UNKNOWN", "processStartTime": "2023-10-23T00:00:00.000Z", "processUniqueKey": "ABCD1234", "relatedToThreat": "False", "siteId": "1000000000000000000", "storyline": "ABCD1234", "taskName": "Example Name", "trueContext": "ABCD1234"}, {"accountId": "1000000000000000001", "agentDomain": "WORKGROUP", "agentGroupId": "1000000000000000001", "agentId": "1000000000000000001", "agentInfected": true, "agentIp": "198.51.100.1", "agentIsActive": true, "agentIsDecommissioned": false, "agentMachineType": "laptop", "agentName": "Example Name", "agentNetworkStatus": "connected", "agentOs": "windows", "agentTimestamp": "2023-10-23T00:00:00.000Z", "agentUuid": "9de5069c5afe602b2ea0a04b66beb2c0", "createdAt": "2023-10-23T00:00:00.000Z", "endpointMachineType": "desktop", "endpointName": "Example Name", "endpointOs": "windows", "eventTime": "2023-10-23T00:00:00.000Z", "eventType": "Task Update", "id": "1000000000000000001", "isAgentVersionFullySupportedForPg": false, "isAgentVersionFullySupportedForPgMessage": "Example message", "lastActivatedAt": "2023-10-23T00:00:00.000Z", "objectType": "scheduled_task", "parentProcessUniqueKey": "ABCD1234", "pid": "1234", "processGroupId": "ABCD1234", "processIntegrityLevel": "INTEGRITY_LEVEL_UNKNOWN", "processStartTime": "2023-10-23T00:00:00.000Z", "processUniqueKey": "ABCD1234", "relatedToThreat": "False", "siteId": "1000000000000000001", "storyline": "ABCD1234", "taskName": "Example Name", "trueContext": "ABCD1234"}]|
   
 Example output:
 
 ```
 {
   "errors": [],
-  "events": []
+  "events": [
+    {
+      "accountId": "1000000000000000000",
+      "agentDomain": "WORKGROUP",
+      "agentGroupId": "1000000000000000000",
+      "agentId": "1000000000000000000",
+      "agentInfected": true,
+      "agentIp": "198.51.100.1",
+      "agentIsActive": true,
+      "agentIsDecommissioned": false,
+      "agentMachineType": "laptop",
+      "agentName": "Example Name",
+      "agentNetworkStatus": "connected",
+      "agentOs": "windows",
+      "agentTimestamp": "2023-10-23T00:00:00.000Z",
+      "agentUuid": "9de5069c5afe602b2ea0a04b66beb2c0",
+      "createdAt": "2023-10-23T00:00:00.000Z",
+      "endpointMachineType": "desktop",
+      "endpointName": "Example Name",
+      "endpointOs": "windows",
+      "eventTime": "2023-10-23T00:00:00.000Z",
+      "eventType": "Task Update",
+      "id": "1000000000000000000",
+      "isAgentVersionFullySupportedForPg": false,
+      "isAgentVersionFullySupportedForPgMessage": "Example message",
+      "lastActivatedAt": "2023-10-23T00:00:00.000Z",
+      "objectType": "scheduled_task",
+      "parentProcessUniqueKey": "ABCD1234",
+      "pid": "1234",
+      "processGroupId": "ABCD1234",
+      "processIntegrityLevel": "INTEGRITY_LEVEL_UNKNOWN",
+      "processStartTime": "2023-10-23T00:00:00.000Z",
+      "processUniqueKey": "ABCD1234",
+      "relatedToThreat": "False",
+      "siteId": "1000000000000000000",
+      "storyline": "ABCD1234",
+      "taskName": "Example Name",
+      "trueContext": "ABCD1234"
+    },
+    {
+      "accountId": "1000000000000000001",
+      "agentDomain": "WORKGROUP",
+      "agentGroupId": "1000000000000000001",
+      "agentId": "1000000000000000001",
+      "agentInfected": true,
+      "agentIp": "198.51.100.1",
+      "agentIsActive": true,
+      "agentIsDecommissioned": false,
+      "agentMachineType": "laptop",
+      "agentName": "Example Name",
+      "agentNetworkStatus": "connected",
+      "agentOs": "windows",
+      "agentTimestamp": "2023-10-23T00:00:00.000Z",
+      "agentUuid": "9de5069c5afe602b2ea0a04b66beb2c0",
+      "createdAt": "2023-10-23T00:00:00.000Z",
+      "endpointMachineType": "desktop",
+      "endpointName": "Example Name",
+      "endpointOs": "windows",
+      "eventTime": "2023-10-23T00:00:00.000Z",
+      "eventType": "Task Update",
+      "id": "1000000000000000001",
+      "isAgentVersionFullySupportedForPg": false,
+      "isAgentVersionFullySupportedForPgMessage": "Example message",
+      "lastActivatedAt": "2023-10-23T00:00:00.000Z",
+      "objectType": "scheduled_task",
+      "parentProcessUniqueKey": "ABCD1234",
+      "pid": "1234",
+      "processGroupId": "ABCD1234",
+      "processIntegrityLevel": "INTEGRITY_LEVEL_UNKNOWN",
+      "processStartTime": "2023-10-23T00:00:00.000Z",
+      "processUniqueKey": "ABCD1234",
+      "relatedToThreat": "False",
+      "siteId": "1000000000000000001",
+      "storyline": "ABCD1234",
+      "taskName": "Example Name",
+      "trueContext": "ABCD1234"
+    }
+  ]
 }
 ```
 
@@ -753,14 +886,91 @@ Example input:
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |errors|[]object|False|Errors|[]|
-|events|[]eventData|False|Response events data|[]|
+|events|[]eventData|False|Response events data|[{"accountId": "1000000000000000000", "agentDomain": "WORKGROUP", "agentGroupId": "1000000000000000000", "agentId": "1000000000000000000", "agentInfected": true, "agentIp": "198.51.100.1", "agentIsActive": true, "agentIsDecommissioned": false, "agentMachineType": "laptop", "agentName": "Example Name", "agentNetworkStatus": "connected", "agentOs": "windows", "agentTimestamp": "2023-10-23T00:00:00.000Z", "agentUuid": "9de5069c5afe602b2ea0a04b66beb2c0", "createdAt": "2023-10-23T00:00:00.000Z", "endpointMachineType": "desktop", "endpointName": "Example Name", "endpointOs": "windows", "eventTime": "2023-10-23T00:00:00.000Z", "eventType": "Task Update", "id": "1000000000000000000", "isAgentVersionFullySupportedForPg": false, "isAgentVersionFullySupportedForPgMessage": "Example message", "lastActivatedAt": "2023-10-23T00:00:00.000Z", "objectType": "scheduled_task", "parentProcessUniqueKey": "ABCD1234", "pid": "1234", "processGroupId": "ABCD1234", "processIntegrityLevel": "INTEGRITY_LEVEL_UNKNOWN", "processStartTime": "2023-10-23T00:00:00.000Z", "processUniqueKey": "ABCD1234", "relatedToThreat": "False", "siteId": "1000000000000000000", "storyline": "ABCD1234", "taskName": "Example Name", "trueContext": "ABCD1234"}, {"accountId": "1000000000000000001", "agentDomain": "WORKGROUP", "agentGroupId": "1000000000000000001", "agentId": "1000000000000000001", "agentInfected": true, "agentIp": "198.51.100.1", "agentIsActive": true, "agentIsDecommissioned": false, "agentMachineType": "laptop", "agentName": "Example Name", "agentNetworkStatus": "connected", "agentOs": "windows", "agentTimestamp": "2023-10-23T00:00:00.000Z", "agentUuid": "9de5069c5afe602b2ea0a04b66beb2c0", "createdAt": "2023-10-23T00:00:00.000Z", "endpointMachineType": "desktop", "endpointName": "Example Name", "endpointOs": "windows", "eventTime": "2023-10-23T00:00:00.000Z", "eventType": "Task Update", "id": "1000000000000000001", "isAgentVersionFullySupportedForPg": false, "isAgentVersionFullySupportedForPgMessage": "Example message", "lastActivatedAt": "2023-10-23T00:00:00.000Z", "objectType": "scheduled_task", "parentProcessUniqueKey": "ABCD1234", "pid": "1234", "processGroupId": "ABCD1234", "processIntegrityLevel": "INTEGRITY_LEVEL_UNKNOWN", "processStartTime": "2023-10-23T00:00:00.000Z", "processUniqueKey": "ABCD1234", "relatedToThreat": "False", "siteId": "1000000000000000001", "storyline": "ABCD1234", "taskName": "Example Name", "trueContext": "ABCD1234"}]|
   
 Example output:
 
 ```
 {
   "errors": [],
-  "events": []
+  "events": [
+    {
+      "accountId": "1000000000000000000",
+      "agentDomain": "WORKGROUP",
+      "agentGroupId": "1000000000000000000",
+      "agentId": "1000000000000000000",
+      "agentInfected": true,
+      "agentIp": "198.51.100.1",
+      "agentIsActive": true,
+      "agentIsDecommissioned": false,
+      "agentMachineType": "laptop",
+      "agentName": "Example Name",
+      "agentNetworkStatus": "connected",
+      "agentOs": "windows",
+      "agentTimestamp": "2023-10-23T00:00:00.000Z",
+      "agentUuid": "9de5069c5afe602b2ea0a04b66beb2c0",
+      "createdAt": "2023-10-23T00:00:00.000Z",
+      "endpointMachineType": "desktop",
+      "endpointName": "Example Name",
+      "endpointOs": "windows",
+      "eventTime": "2023-10-23T00:00:00.000Z",
+      "eventType": "Task Update",
+      "id": "1000000000000000000",
+      "isAgentVersionFullySupportedForPg": false,
+      "isAgentVersionFullySupportedForPgMessage": "Example message",
+      "lastActivatedAt": "2023-10-23T00:00:00.000Z",
+      "objectType": "scheduled_task",
+      "parentProcessUniqueKey": "ABCD1234",
+      "pid": "1234",
+      "processGroupId": "ABCD1234",
+      "processIntegrityLevel": "INTEGRITY_LEVEL_UNKNOWN",
+      "processStartTime": "2023-10-23T00:00:00.000Z",
+      "processUniqueKey": "ABCD1234",
+      "relatedToThreat": "False",
+      "siteId": "1000000000000000000",
+      "storyline": "ABCD1234",
+      "taskName": "Example Name",
+      "trueContext": "ABCD1234"
+    },
+    {
+      "accountId": "1000000000000000001",
+      "agentDomain": "WORKGROUP",
+      "agentGroupId": "1000000000000000001",
+      "agentId": "1000000000000000001",
+      "agentInfected": true,
+      "agentIp": "198.51.100.1",
+      "agentIsActive": true,
+      "agentIsDecommissioned": false,
+      "agentMachineType": "laptop",
+      "agentName": "Example Name",
+      "agentNetworkStatus": "connected",
+      "agentOs": "windows",
+      "agentTimestamp": "2023-10-23T00:00:00.000Z",
+      "agentUuid": "9de5069c5afe602b2ea0a04b66beb2c0",
+      "createdAt": "2023-10-23T00:00:00.000Z",
+      "endpointMachineType": "desktop",
+      "endpointName": "Example Name",
+      "endpointOs": "windows",
+      "eventTime": "2023-10-23T00:00:00.000Z",
+      "eventType": "Task Update",
+      "id": "1000000000000000001",
+      "isAgentVersionFullySupportedForPg": false,
+      "isAgentVersionFullySupportedForPgMessage": "Example message",
+      "lastActivatedAt": "2023-10-23T00:00:00.000Z",
+      "objectType": "scheduled_task",
+      "parentProcessUniqueKey": "ABCD1234",
+      "pid": "1234",
+      "processGroupId": "ABCD1234",
+      "processIntegrityLevel": "INTEGRITY_LEVEL_UNKNOWN",
+      "processStartTime": "2023-10-23T00:00:00.000Z",
+      "processUniqueKey": "ABCD1234",
+      "relatedToThreat": "False",
+      "siteId": "1000000000000000001",
+      "storyline": "ABCD1234",
+      "taskName": "Example Name",
+      "trueContext": "ABCD1234"
+    }
+  ]
 }
 ```
 
@@ -786,13 +996,20 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|response|queryStatus|False|Information about the status of the given query|{}|
+|response|queryStatus|False|Information about the status of the given query|{'progressStatus': 100, 'queryModeInfo': {'lastActivatedAt': '2022-07-31T08:11:01+00:00', 'mode': 'scalyr'}, 'responseState': 'FINISHED'}|
   
 Example output:
 
 ```
 {
-  "response": {}
+  "response": {
+    "progressStatus": 100,
+    "queryModeInfo": {
+      "lastActivatedAt": "2022-07-31T08:11:01+00:00",
+      "mode": "scalyr"
+    },
+    "responseState": "FINISHED"
+  }
 }
 ```
 
@@ -808,17 +1025,86 @@ This action is used to gets summary of all threats
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|data|[]threatData|False|Data|[]|
+|data|[]threatData|False|Data|[{"agentOsType": "windows", "automaticallyResolved": false, "cloudVerdict": "black", "id": "1000000000000000000", "engines": ["reputation"], "fileContentHash": "3395856ce81f2b7382dee72602f798b642f14140", "fromCloud": false, "mitigationMode": "protect", "mitigationReport": {"quarantine": {"status": "success"}, "kill": {"status": "success"}}, "rank": 7, "siteName": "Example Site", "whiteningOptions": ["hash"], "agentComputerName": "vagrant-pc", "collectionId": "1000000000000000000", "createdAt": "2019-02-21T16:05:49.251201Z", "mitigationStatus": "active", "classificationSource": "Static", "resolved": true, "accountName": "Example Account", "fileVerificationType": "NotSigned", "siteId": "1000000000000000000", "fileIsExecutable": false, "fromScan": false, "agentNetworkStatus": "disconnecting", "createdDate": "2019-02-21T16:05:49.175000Z", "accountId": "1000000000000000000", "initiatedBy": "agentPolicy", "initiatedByDescription": "Agent Policy", "threatAgentVersion": "3.0.1.3", "username": "vagrant-pc\\vagrant", "agentVersion": "3.0.1.3", "classifierName": "STATIC", "fileExtensionType": "Executable", "agentDomain": "WORKGROUP", "fileIsSystem": false, "agentInfected": false, "isCertValid": false, "isInteractiveSession": false, "isPartialStory": false, "updatedAt": "2020-05-28T21:53:36.064425Z", "agentId": "1000000000000000000", "agentMachineType": "desktop", "classification": "Malware", "markedAsBenign": false, "threatName": "EICAR.com", "agentIsDecommissioned": true, "description": "malware detected - not mitigated yet (static engin...", "fileDisplayName": "EICAR.com", "agentIp": "198.51.100.1", "agentIsActive": false, "fileObjectId": "1234567890", "filePath": "\\Device\\HarddiskVolume2\\Users\\vagrant\\Desktop\\EICA...", "maliciousGroupId": "1234567890"}]|
 |errors|[]object|False|Errors|[]|
-|pagination|pagination|False|Pagination|{}|
+|pagination|pagination|False|Pagination|{'totalItems': 1}|
   
 Example output:
 
 ```
 {
-  "data": [],
+  "data": [
+    {
+      "accountId": "1000000000000000000",
+      "accountName": "Example Account",
+      "agentComputerName": "vagrant-pc",
+      "agentDomain": "WORKGROUP",
+      "agentId": "1000000000000000000",
+      "agentInfected": false,
+      "agentIp": "198.51.100.1",
+      "agentIsActive": false,
+      "agentIsDecommissioned": true,
+      "agentMachineType": "desktop",
+      "agentNetworkStatus": "disconnecting",
+      "agentOsType": "windows",
+      "agentVersion": "3.0.1.3",
+      "automaticallyResolved": false,
+      "classification": "Malware",
+      "classificationSource": "Static",
+      "classifierName": "STATIC",
+      "cloudVerdict": "black",
+      "collectionId": "1000000000000000000",
+      "createdAt": "2019-02-21T16:05:49.251201Z",
+      "createdDate": "2019-02-21T16:05:49.175000Z",
+      "description": "malware detected - not mitigated yet (static engin...",
+      "engines": [
+        "reputation"
+      ],
+      "fileContentHash": "3395856ce81f2b7382dee72602f798b642f14140",
+      "fileDisplayName": "EICAR.com",
+      "fileExtensionType": "Executable",
+      "fileIsExecutable": false,
+      "fileIsSystem": false,
+      "fileObjectId": "1234567890",
+      "filePath": "\\Device\\HarddiskVolume2\\Users\\vagrant\\Desktop\\EICA...",
+      "fileVerificationType": "NotSigned",
+      "fromCloud": false,
+      "fromScan": false,
+      "id": "1000000000000000000",
+      "initiatedBy": "agentPolicy",
+      "initiatedByDescription": "Agent Policy",
+      "isCertValid": false,
+      "isInteractiveSession": false,
+      "isPartialStory": false,
+      "maliciousGroupId": "1234567890",
+      "markedAsBenign": false,
+      "mitigationMode": "protect",
+      "mitigationReport": {
+        "kill": {
+          "status": "success"
+        },
+        "quarantine": {
+          "status": "success"
+        }
+      },
+      "mitigationStatus": "active",
+      "rank": 7,
+      "resolved": true,
+      "siteId": "1000000000000000000",
+      "siteName": "Example Site",
+      "threatAgentVersion": "3.0.1.3",
+      "threatName": "EICAR.com",
+      "updatedAt": "2020-05-28T21:53:36.064425Z",
+      "username": "vagrant-pc\\vagrant",
+      "whiteningOptions": [
+        "hash"
+      ]
+    }
+  ],
   "errors": [],
-  "pagination": {}
+  "pagination": {
+    "totalItems": 1
+  }
 }
 ```
 
@@ -1116,13 +1402,97 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|agents|[]agentData|False|Detailed information about agents found|[]|
+|agents|[]agentData|False|Detailed information about agents found|[{"accountId": "100000000000000000", "accountName": "Example Name", "activeThreats": 0, "agentVersion": "1.0.2.3", "allowRemoteShell": false, "appsVulnerabilityStatus": "up_to_date", "computerName": "hostname123", "consoleMigrationStatus": "N/A", "coreCount": 1, "cpuCount": 1, "cpuId": "CPU A0 v1 @ 3.00GHz", "createdAt": "2023-01-01T00:00:00.000000Z", "domain": "WORKGROUP", "encryptedApplications": false, "externalIp": "198.51.100.1", "firewallEnabled": true, "groupId": "100000000000000000", "groupIp": "1.2.3.x", "groupName": "Example Group", "id": "100000000000000000", "inRemoteShellSession": false, "infected": false, "installerType": ".exe", "isActive": true, "isDecommissioned": false, "isPendingUninstall": false, "isUninstalled": false, "isUpToDate": true, "lastActiveDate": "2023-01-01T00:00:00.000000Z", "lastIpToMgmt": "198.51.100.1", "locationEnabled": true, "locationType": "fallback", "locations": [{"id": "100000000000000000", "name": "Fallback", "scope": "global"}], "machineType": "server", "mitigationMode": "protect", "mitigationModeSuspicious": "detect", "modelName": "Example Model", "networkInterfaces": [{"id": "100000000000000000", "inet": ["198.51.100.1"], "inet6": ["2001:db8:1:1:1:1:1:1"], "name": "Ethernet", "physical": "12-34-56-67-89-12"}], "networkQuarantineEnabled": false, "networkStatus": "disconnected", "operationalState": "na", "operationalStateExpiration": "None", "osArch": "64 bit", "osName": "System Name", "osRevision": "9200", "osStartTime": "2023-01-01T00:00:00Z", "osType": "windows", "osUsername": "None", "rangerStatus": "NotApplicable", "rangerVersion": "None", "registeredAt": "2023-01-01T00:00:00.000000Z", "remoteProfilingState": "disabled", "remoteProfilingStateExpiration": "None", "scanAbortedAt": "None", "scanFinishedAt": "2023-01-01T00:00:00.000000Z", "scanStartedAt": "2023-01-01T00:00:00.000000Z", "scanStatus": "finished", "siteId": "100000000000000000", "siteName": "Example Site", "threatRebootRequired": false, "totalMemory": 1023, "updatedAt": "2023-01-01T00:00:00.000000Z", "uuid": "9de5069c5afe602b2ea0a04b66beb2c0"}]|
   
 Example output:
 
 ```
 {
-  "agents": []
+  "agents": [
+    {
+      "accountId": "100000000000000000",
+      "accountName": "Example Name",
+      "activeThreats": 0,
+      "agentVersion": "1.0.2.3",
+      "allowRemoteShell": false,
+      "appsVulnerabilityStatus": "up_to_date",
+      "computerName": "hostname123",
+      "consoleMigrationStatus": "N/A",
+      "coreCount": 1,
+      "cpuCount": 1,
+      "cpuId": "CPU A0 v1 @ 3.00GHz",
+      "createdAt": "2023-01-01T00:00:00.000000Z",
+      "domain": "WORKGROUP",
+      "encryptedApplications": false,
+      "externalIp": "198.51.100.1",
+      "firewallEnabled": true,
+      "groupId": "100000000000000000",
+      "groupIp": "1.2.3.x",
+      "groupName": "Example Group",
+      "id": "100000000000000000",
+      "inRemoteShellSession": false,
+      "infected": false,
+      "installerType": ".exe",
+      "isActive": true,
+      "isDecommissioned": false,
+      "isPendingUninstall": false,
+      "isUninstalled": false,
+      "isUpToDate": true,
+      "lastActiveDate": "2023-01-01T00:00:00.000000Z",
+      "lastIpToMgmt": "198.51.100.1",
+      "locationEnabled": true,
+      "locationType": "fallback",
+      "locations": [
+        {
+          "id": "100000000000000000",
+          "name": "Fallback",
+          "scope": "global"
+        }
+      ],
+      "machineType": "server",
+      "mitigationMode": "protect",
+      "mitigationModeSuspicious": "detect",
+      "modelName": "Example Model",
+      "networkInterfaces": [
+        {
+          "id": "100000000000000000",
+          "inet": [
+            "198.51.100.1"
+          ],
+          "inet6": [
+            "2001:db8:1:1:1:1:1:1"
+          ],
+          "name": "Ethernet",
+          "physical": "12-34-56-67-89-12"
+        }
+      ],
+      "networkQuarantineEnabled": false,
+      "networkStatus": "disconnected",
+      "operationalState": "na",
+      "operationalStateExpiration": "None",
+      "osArch": "64 bit",
+      "osName": "System Name",
+      "osRevision": "9200",
+      "osStartTime": "2023-01-01T00:00:00Z",
+      "osType": "windows",
+      "osUsername": "None",
+      "rangerStatus": "NotApplicable",
+      "rangerVersion": "None",
+      "registeredAt": "2023-01-01T00:00:00.000000Z",
+      "remoteProfilingState": "disabled",
+      "remoteProfilingStateExpiration": "None",
+      "scanAbortedAt": "None",
+      "scanFinishedAt": "2023-01-01T00:00:00.000000Z",
+      "scanStartedAt": "2023-01-01T00:00:00.000000Z",
+      "scanStatus": "finished",
+      "siteId": "100000000000000000",
+      "siteName": "Example Site",
+      "threatRebootRequired": false,
+      "totalMemory": 1023,
+      "updatedAt": "2023-01-01T00:00:00.000000Z",
+      "uuid": "9de5069c5afe602b2ea0a04b66beb2c0"
+    }
+  ]
 }
 ```
 
@@ -1255,8 +1625,8 @@ This trigger is used to get threats
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |agentIsActive|boolean|True|False|Include agents currently connected to the management console|None|True|None|None|
-|classifications|[]string|None|False|List of classifications to search|None|[""]|None|None|
-|engines|[]string|None|False|Included engines|None|[""]|None|None|
+|classifications|[]string|None|False|List of classifications to search|None|["classification"]|None|None|
+|engines|[]string|None|False|Included engines|None|["engine"]|None|None|
 |frequency|integer|5|False|Poll frequency in seconds|None|5|None|None|
 |resolved|boolean|None|False|Set True to only trigger on resolved threats|None|True|None|None|
   
@@ -1266,10 +1636,10 @@ Example input:
 {
   "agentIsActive": true,
   "classifications": [
-    ""
+    "classification"
   ],
   "engines": [
-    ""
+    "engine"
   ],
   "frequency": 5,
   "resolved": true
@@ -1280,13 +1650,70 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|threat|threatData|False|Threat|{ 'threat': { 'agentComputerName':'vagrant-pc', 'agentDomain':'WORKGROUP', 'agentId':'1000000000000000000' }}|
+|threat|threatData|False|Threat|{'agentComputerName': 'Example Computer Name', 'agentDomain': 'WORKGROUP', 'agentId': '1000000000000000000', 'agentInfected': False, 'agentIp': '198.51.100.1', 'agentIsActive': True, 'agentIsDecommissioned': False, 'agentMachineType': 'desktop', 'agentNetworkStatus': 'connected', 'agentOsType': 'windows', 'agentVersion': '3.0.1.3', 'classification': 'Malware', 'classificationSource': 'Engine', 'classifierName': 'BLACKLIST', 'cloudVerdict': 'black', 'collectionId': '1000000000000000000', 'createdAt': '2019-02-13T15:05:21.948892Z', 'createdDate': '2019-02-13T15:05:21.605000Z', 'description': 'malware detected - not mitigated yet (static engine)', 'engines': ['reputation'], 'fileContentHash': '3395856ce81f2b7382dee72602f798b642f14140', 'fileDisplayName': '{ABCDEF}-EICAR.com', 'fileExtensionType': 'Executable', 'fileIsExecutable': False, 'fileIsSystem': False, 'fileObjectId': '1000000000000000000', 'filePath': '\\Device\\HarddiskVolume2\\ProgramData\\Microsoft\\Windows Defender\\LocalCopy\\{ABCDEF}-EICAR.com', 'fileVerificationType': 'NotSigned', 'fromCloud': False, 'fromScan': False, 'id': '1000000000000000000', 'isCertValid': False, 'isInteractiveSession': False, 'isPartialStory': False, 'maliciousGroupId': '1000000000000000000', 'mitigationMode': 'protect', 'mitigationReport': {'kill': {'status': 'success'}, 'quarantine': {'status': 'success'}}, 'mitigationStatus': 'mitigated', 'rank': 7, 'resolved': False, 'siteId': '1000000000000000000', 'siteName': 'Example Site', 'threatAgentVersion': '3.0.1.3', 'updatedAt': '2019-02-13T15:05:22.274291Z', 'whiteningOptions': ['hash']}|
   
 Example output:
 
 ```
 {
-  "threat": "{ 'threat': { 'agentComputerName':'vagrant-pc', 'agentDomain':'WORKGROUP', 'agentId':'1000000000000000000' }}"
+  "threat": {
+    "agentComputerName": "Example Computer Name",
+    "agentDomain": "WORKGROUP",
+    "agentId": "1000000000000000000",
+    "agentInfected": false,
+    "agentIp": "198.51.100.1",
+    "agentIsActive": true,
+    "agentIsDecommissioned": false,
+    "agentMachineType": "desktop",
+    "agentNetworkStatus": "connected",
+    "agentOsType": "windows",
+    "agentVersion": "3.0.1.3",
+    "classification": "Malware",
+    "classificationSource": "Engine",
+    "classifierName": "BLACKLIST",
+    "cloudVerdict": "black",
+    "collectionId": "1000000000000000000",
+    "createdAt": "2019-02-13T15:05:21.948892Z",
+    "createdDate": "2019-02-13T15:05:21.605000Z",
+    "description": "malware detected - not mitigated yet (static engine)",
+    "engines": [
+      "reputation"
+    ],
+    "fileContentHash": "3395856ce81f2b7382dee72602f798b642f14140",
+    "fileDisplayName": "{ABCDEF}-EICAR.com",
+    "fileExtensionType": "Executable",
+    "fileIsExecutable": false,
+    "fileIsSystem": false,
+    "fileObjectId": "1000000000000000000",
+    "filePath": "\\Device\\HarddiskVolume2\\ProgramData\\Microsoft\\Windows Defender\\LocalCopy\\{ABCDEF}-EICAR.com",
+    "fileVerificationType": "NotSigned",
+    "fromCloud": false,
+    "fromScan": false,
+    "id": "1000000000000000000",
+    "isCertValid": false,
+    "isInteractiveSession": false,
+    "isPartialStory": false,
+    "maliciousGroupId": "1000000000000000000",
+    "mitigationMode": "protect",
+    "mitigationReport": {
+      "kill": {
+        "status": "success"
+      },
+      "quarantine": {
+        "status": "success"
+      }
+    },
+    "mitigationStatus": "mitigated",
+    "rank": 7,
+    "resolved": false,
+    "siteId": "1000000000000000000",
+    "siteName": "Example Site",
+    "threatAgentVersion": "3.0.1.3",
+    "updatedAt": "2019-02-13T15:05:22.274291Z",
+    "whiteningOptions": [
+      "hash"
+    ]
+  }
 }
 ```
 ### Tasks
@@ -1318,8 +1745,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|logs|[]object|False|List of activity, event and threat logs within the specified time range|[{"id": "225494730938493804", "userId": "225494730938493804", "data": {"computer_name": "COMP_1234", "username": "my_user"}, "secondaryDescription": "string", "threatId": "225494730938493804", "siteName": "string", "accountName": "string", "accountId": "225494730938493804", "updatedAt": "2018-02-27T04:49:26.257525Z", "agentUpdatedVersion": "2.5.1.1320", "groupId": "225494730938493804", "hash": "string", "description": "string", "activityUuid": "string", "comments": "string", "activityType": 0, "agentId": "225494730938493804", "osFamily": "windows", "siteId": "225494730938493804", "primaryDescription": "string", "groupName": "string", "createdAt": "2018-02-27T04:49:26.257525Z"}, {"eventType": "string", "accessPermission": "Read-Only", "deviceClass": "02h", "deviceName": "string", "id": "225494730938493804", "updatedAt": "2018-02-27T04:49:26.257525Z", "ruleId": "225494730938493804", "computerName": "JOHN-WIN-4125", "profileUuids": "string", "lastLoggedInUserName": "janedoe3", "deviceId": "02", "eventTime": "2018-02-27T04:49:26.257525Z", "serviceClass": "02", "interface": "USB", "agentId": "225494730938493804", "vendorId": "02", "uId": "02", "lmpVersion": "string", "eventId": "string", "createdAt": "2018-02-27T04:49:26.257525Z", "productId": "02", "minorClass": "string"}, {"mitigationStatus": [{"groupNotFound": False, "latestReport": "string", "mitigationStartedAt": "2018-02-27T04:49:26.257525Z", "action": "kill", "mitigationEndedAt": "2018-02-27T04:49:26.257525Z", "actionsCounters": {"total": 0, "success": 0, "notFound": 0, "failed": 0, "pendingReboot": 0}, "status": "success", "agentSupportsReport": False, "lastUpdate": "2018-02-27T04:49:26.257525Z", "reportId": "225494730938493804"}], "ecsInfo": {"taskAvailabilityZone": "string", "serviceArn": "string", "taskDefinitionArn": "string", "clusterName": "string", "taskDefinitionFamily": "string", "serviceName": "string", "version": "string", "taskDefinitionRevision": "string", "type": "string", "taskArn": "string"}, "agentDetectionInfo": {"agentIpV6": "string", "agentMitigationMode": "detect", "agentOsRevision": "string", "agentIpV4": "string", "agentLastLoggedInUpn": "string", "agentRegisteredAt": "2018-02-27T04:49:26.257525Z", "agentLastLoggedInUserName": "janedoe3", "accountId": "225494730938493804", "siteId": "225494730938493804", "agentLastLoggedInUserMail": "string", "groupName": "string", "agentOsName": "string", "siteName": "string", "agentVersion": "3.6.1.14", "agentDetectionState": "string", "groupId": "225494730938493804", "agentUuid": "string", "externalIp": "string", "accountName": "string", "cloudProviders": {}, "agentDomain": "mybusiness.net"}, "id": "225494730938493804", "agentRealtimeInfo": {"agentOsRevision": "string", "agentVersion": "3.6.1.14", "agentId": "225494730938493804", "agentMitigationMode": "detect", "siteName": "string", "accountName": "string", "accountId": "225494730938493804", "agentInfected": False, "agentDomain": "string", "agentNetworkStatus": "connected", "networkInterfaces": [{"name": "string", "id": "225494730938493804", "physical": "00:25:96:FF:FE:12:34:56", "inet": [{"type": "string"}], "inet6": [{"type": "string"}]}], "groupId": "225494730938493804", "agentComputerName": "string", "scanStartedAt": "2018-02-27T04:49:26.257525Z", "scanStatus": "none", "agentUuid": "string", "operationalState": "string", "scanFinishedAt": "2018-02-27T04:49:26.257525Z", "activeThreats": 0, "scanAbortedAt": "2018-02-27T04:49:26.257525Z", "agentDecommissionedAt": False, "agentOsName": "string", "rebootRequired": False, "agentIsActive": False, "siteId": "225494730938493804", "groupName": "string", "agentIsDecommissioned": False, "storageName": "string", "storageType": "string", "agentMachineType": "unknown", "userActionsNeeded": [{"type": "string", "example": "none", "enum": ["none", "user_action_needed", "reboot_needed", "upgrade_needed", "incompatible_os", "unprotected", "rebootless_without_dynamic_detection", "extended_exclusions_partially_accepted", "reboot_required", "pending_deprecation", "ne_not_running", "ne_cf_not_active"]}], "agentOsType": "windows"}, "containerInfo": {"image": "string", "name": "string", "id": "string", "labels": [{"type": "string"}], "isContainerQuarantine": False}, "threatInfo": {"mitigationStatus": "not_mitigated", "maliciousProcessArguments": "string", "initiatedByDescription": {"readOnly": True, "description": "Initiated by description"}, "analystVerdictDescription": {"readOnly": True, "description": "Analyst verdict description"}, "storyline": "a00637fa-e18d-9b80-e803-f370524f8085", "pendingActions": False, "engines": ["reputation", "pre_execution"], "threatId": "225494730938493804", "state": "running", "pendingActionsCounter": 0, "mitigationMode": "prevent", "automaticDetection": True, "storylineParentId": "225494730938493804", "threatLevel": "0", "targetOfDetection": "process", "evidenceUuid": "225494730938493804", "hidden": False, "siteName": "string", "initiatedBy": "string", "analystVerdict": "string", "organizationId": "225494730938493804", "evidenceId": "225494730938493804", "tags": ["string"], "detectorId": "225494730938493804", "pendingActionsType": "none", "threatName": "string", "fileInfo": {"fileMaliciousContent": "string", "fileType": "string", "fileCreatedAt": "2018-02-27T04:49:26.257525Z", "filePath": "string", "fileMd5": "string", "fileSize": "0", "fileSha1": "string", "fileSha256": "string", "fileMagic": "string", "fileIsExecutable": False, "fileExtension": "string", "fileMaliciousClassification": "string"}, "resolvedBy": "string", "organizationName": "string", "processInfo": {"parentCommandLine": "string", "parentPid": "0", "commandLine": "string", "parentProcessGroup": "string", "username": "string", "pid": "0", "command": "string", "processGroup": "string", "md5": "string", "sha1": "string", "sha256": "string"}, "reportedAt": "2018-02-27T04:49:26.257525Z", "secondaryDescription": "string", "siteId": "225494730938493804", "primaryDescription": "string"}}]|
-
+|logs|[]object|False|List of activity, event and threat logs within the specified time range|[{"id": "225494730938493804", "userId": "225494730938493804", "data": {"computer_name": "COMP_1234", "username": "my_user"}, "secondaryDescription": "string", "threatId": "225494730938493804", "siteName": "string", "accountName": "string", "accountId": "225494730938493804", "updatedAt": "2018-02-27T04:49:26.257525Z", "agentUpdatedVersion": "2.5.1.1320", "groupId": "225494730938493804", "hash": "string", "description": "string", "activityUuid": "string", "comments": "string", "activityType": 0, "agentId": "225494730938493804", "osFamily": "windows", "siteId": "225494730938493804", "primaryDescription": "string", "groupName": "string", "createdAt": "2018-02-27T04:49:26.257525Z"}, {"eventType": "string", "accessPermission": "Read-Only", "deviceClass": "02h", "deviceName": "string", "id": "225494730938493804", "updatedAt": "2018-02-27T04:49:26.257525Z", "ruleId": "225494730938493804", "computerName": "JOHN-WIN-4125", "profileUuids": "string", "lastLoggedInUserName": "janedoe3", "deviceId": "02", "eventTime": "2018-02-27T04:49:26.257525Z", "serviceClass": "02", "interface": "USB", "agentId": "225494730938493804", "vendorId": "02", "uId": "02", "lmpVersion": "string", "eventId": "string", "createdAt": "2018-02-27T04:49:26.257525Z", "productId": "02", "minorClass": "string"}, {"mitigationStatus": [{"groupNotFound": false, "latestReport": "string", "mitigationStartedAt": "2018-02-27T04:49:26.257525Z", "action": "kill", "mitigationEndedAt": "2018-02-27T04:49:26.257525Z", "actionsCounters": {"total": 0, "success": 0, "notFound": 0, "failed": 0, "pendingReboot": 0}, "status": "success", "agentSupportsReport": false, "lastUpdate": "2018-02-27T04:49:26.257525Z", "reportId": "225494730938493804"}], "ecsInfo": {"taskAvailabilityZone": "string", "serviceArn": "string", "taskDefinitionArn": "string", "clusterName": "string", "taskDefinitionFamily": "string", "serviceName": "string", "version": "string", "taskDefinitionRevision": "string", "type": "string", "taskArn": "string"}, "agentDetectionInfo": {"agentIpV6": "string", "agentMitigationMode": "detect", "agentOsRevision": "string", "agentIpV4": "string", "agentLastLoggedInUpn": "string", "agentRegisteredAt": "2018-02-27T04:49:26.257525Z", "agentLastLoggedInUserName": "janedoe3", "accountId": "225494730938493804", "siteId": "225494730938493804", "agentLastLoggedInUserMail": "string", "groupName": "string", "agentOsName": "string", "siteName": "string", "agentVersion": "3.6.1.14", "agentDetectionState": "string", "groupId": "225494730938493804", "agentUuid": "string", "externalIp": "string", "accountName": "string", "cloudProviders": {}, "agentDomain": "mybusiness.net"}, "id": "225494730938493804", "agentRealtimeInfo": {"agentOsRevision": "string", "agentVersion": "3.6.1.14", "agentId": "225494730938493804", "agentMitigationMode": "detect", "siteName": "string", "accountName": "string", "accountId": "225494730938493804", "agentInfected": false, "agentDomain": "string", "agentNetworkStatus": "connected", "networkInterfaces": [{"name": "string", "id": "225494730938493804", "physical": "00:25:96:FF:FE:12:34:56", "inet": [{"type": "string"}], "inet6": [{"type": "string"}]}], "groupId": "225494730938493804", "agentComputerName": "string", "scanStartedAt": "2018-02-27T04:49:26.257525Z", "scanStatus": "none", "agentUuid": "string", "operationalState": "string", "scanFinishedAt": "2018-02-27T04:49:26.257525Z", "activeThreats": 0, "scanAbortedAt": "2018-02-27T04:49:26.257525Z", "agentDecommissionedAt": false, "agentOsName": "string", "rebootRequired": false, "agentIsActive": false, "siteId": "225494730938493804", "groupName": "string", "agentIsDecommissioned": false, "storageName": "string", "storageType": "string", "agentMachineType": "unknown", "userActionsNeeded": [{"type": "string", "example": "none", "enum": ["none", "user_action_needed", "reboot_needed", "upgrade_needed", "incompatible_os", "unprotected", "rebootless_without_dynamic_detection", "extended_exclusions_partially_accepted", "reboot_required", "pending_deprecation", "ne_not_running", "ne_cf_not_active"]}], "agentOsType": "windows"}, "containerInfo": {"image": "string", "name": "string", "id": "string", "labels": [{"type": "string"}], "isContainerQuarantine": false}, "threatInfo": {"mitigationStatus": "not_mitigated", "maliciousProcessArguments": "string", "initiatedByDescription": {"readOnly": true, "description": "Initiated by description"}, "analystVerdictDescription": {"readOnly": true, "description": "Analyst verdict description"}, "storyline": "a00637fa-e18d-9b80-e803-f370524f8085", "pendingActions": false, "engines": ["reputation", "pre_execution"], "threatId": "225494730938493804", "state": "running", "pendingActionsCounter": 0, "mitigationMode": "prevent", "automaticDetection": true, "storylineParentId": "225494730938493804", "threatLevel": "0", "targetOfDetection": "process", "evidenceUuid": "225494730938493804", "hidden": false, "siteName": "string", "initiatedBy": "string", "analystVerdict": "string", "organizationId": "225494730938493804", "evidenceId": "225494730938493804", "tags": ["string"], "detectorId": "225494730938493804", "pendingActionsType": "none", "threatName": "string", "fileInfo": {"fileMaliciousContent": "string", "fileType": "string", "fileCreatedAt": "2018-02-27T04:49:26.257525Z", "filePath": "string", "fileMd5": "string", "fileSize": "0", "fileSha1": "string", "fileSha256": "string", "fileMagic": "string", "fileIsExecutable": false, "fileExtension": "string", "fileMaliciousClassification": "string"}, "resolvedBy": "string", "organizationName": "string", "processInfo": {"parentCommandLine": "string", "parentPid": "0", "commandLine": "string", "parentProcessGroup": "string", "username": "string", "pid": "0", "command": "string", "processGroup": "string", "md5": "string", "sha1": "string", "sha256": "string"}, "reportedAt": "2018-02-27T04:49:26.257525Z", "secondaryDescription": "string", "siteId": "225494730938493804", "primaryDescription": "string"}}]|
+  
 Example output:
 
 ```

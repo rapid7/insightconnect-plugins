@@ -73,7 +73,7 @@ class MonitorActivitiesAndEventsOutput(insightconnect_plugin_runtime.Output):
   "title": "Logs",
   "description": "List of activity, event and threat logs within the specified time range",
   "items": {
-    "type": "object"
+    "$ref": {}
   },
   "definitions": {}
 }

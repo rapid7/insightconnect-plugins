@@ -113,31 +113,26 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         """
         Return whether to query a specific endpoint based on the input parameters
         """
-        queries = {
+        return {
             ACTIVITIES_LOGS: params.get(Input.COLLECTACTIVITIES),
             EVENTS_LOGS: params.get(Input.COLLECTEVENTS),
             THREATS_LOGS: params.get(Input.COLLECTTHREATS),
         }
-        return queries
 
     def get_cursors(self, state: Dict) -> Tuple[str, str, str]:
         """
         Return existing cursors for each endpoint
         """
-        cursors = {
+        return {
             ACTIVITIES_LOGS: state.get(ACTIVITIES_PAGE_CURSOR),
             EVENTS_LOGS: state.get(EVENTS_PAGE_CURSOR),
             THREATS_LOGS: state.get(THREATS_PAGE_CURSOR),
         }
-        return cursors
 
     def count_queries(self, queries: dict) -> int:
         "Count how many queries are to be made and return the value"
         total_queries = 0
-        for query in queries.values():
-            if query is not None:
-                total_queries += 1
-        return total_queries
+        return len(list(filter(lambda query: query is not None, queries.values())))
 
     def log_pagination_cycle(self, cursors) -> None:
         """
