@@ -1,0 +1,82 @@
+{
+  "building": false,
+  "built_on": "localhost",
+  "full_display_name": "ExampleName #1",
+  "items": [
+    {
+      "_class": "hudson.plugins.git.GitChangeSet",
+      "affectedPaths": [
+        "port_knocking/komand_port_knocking/__init__.py"
+      ],
+      "author": {
+        "absoluteUrl": "https://localhost:8080/user/example",
+        "fullName": "John Doe"
+      },
+      "authorEmail": "user@example.com",
+      "comment": "Update pork_knocker to v2 Python plugin architecture\n",
+      "commitId": "5a1b5315634dfac220b0b9843d02db3f8fead210",
+      "date": "2018-04-24 13:11:29 -0400",
+      "id": "5a1b5315634dfac220b0b9843d02db3f8fead210",
+      "msg": "Update pork_knocker to v2 Python plugin architecture",
+      "paths": [
+        {
+          "editType": "edit",
+          "file": "port_knocking/komand_port_knocking/__init__.py"
+        }
+      ],
+      "timestamp": 1524589889000
+    },
+    {
+      "_class": "hudson.plugins.git.GitChangeSet",
+      "affectedPaths": [
+        "port_knocking/plugin.spec.yaml"
+      ],
+      "author": {
+        "absoluteUrl": "https://localhost:8080/user/example",
+        "fullName": "John Doe"
+      },
+      "authorEmail": "user@example.com",
+      "comment": "Auto formatting plugin.spec.yaml\n",
+      "commitId": "6915b6023f84ea17c15c677262f47eb640686248",
+      "date": "2018-05-03 11:12:00 -0400",
+      "id": "6915b6023f84ea17c15c677262f47eb640686248",
+      "msg": "Auto formatting plugin.spec.yaml",
+      "paths": [
+        {
+          "editType": "edit",
+          "file": "port_knocking/.gitignore"
+        }
+      ],
+      "timestamp": 1525360320000
+    },
+    {
+      "_class": "hudson.plugins.git.GitChangeSet",
+      "affectedPaths": [
+        "port_knocking/.gitignore"
+      ],
+      "author": {
+        "absoluteUrl": "https://localhost:8080/user/example",
+        "fullName": "John Doe"
+      },
+      "authorEmail": "user@example.com",
+      "comment": "Update to v2\n",
+      "commitId": "aae7faa0389dbc3a461aedf0324913dba34a748a",
+      "date": "2018-07-31 22:49:24 -0500",
+      "id": "aae7faa0389dbc3a461aedf0324913dba34a748a",
+      "msg": "Update to v2",
+      "paths": [
+        {
+          "editType": "edit",
+          "file": "port_knocking/.gitignore"
+        }
+      ],
+      "timestamp": 1533095364000
+    }
+  ],
+  "keepLog": false,
+  "number": 1,
+  "queueId": 4423,
+  "result": "SUCCESS",
+  "timestamp": 1533096110941,
+  "url": "https://localhost:8080/job/ExampleName/1/"
+}
