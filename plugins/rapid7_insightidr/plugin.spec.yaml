@@ -2774,7 +2774,7 @@ actions:
         title: Comment
         description: The reason for updating the alert, which is captured in the alert audit log for tracking purposes
         type: string
-        require: false
+        required: false
         example: "Updated alert priority by automation through InsightConnect"
     output:
       alert:
