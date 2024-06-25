@@ -2557,7 +2557,7 @@ This action is used to updates information for a single alert
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |alert_rrn|string|None|True|The unique identifier of the alert|None|rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg|None|None|
-|assignee_id|string|None|False|The new user to assign to the alert|None|user@example.com|None|None|
+|assignee_id|string|None|False|The new user to assign to the alert|None|8205375a-1234-4652-8098-870d656bc693|None|None|
 |comment|string|None|None|The reason for updating the alert, which is captured in the alert audit log for tracking purposes|None|Updated alert priority by automation through InsightConnect|None|None|
 |disposition|string|None|False|The alert disposition|["UNMAPPED", "UNDECIDED", "MALICIOUS", "BENIGN", "UNKNOWN", "NOT_APPLICABLE"]|MALICIOUS|None|None|
 |investigation_rrn|string|None|False|The RRN of the investigation to add the alert to|None|rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI|None|None|
@@ -2570,7 +2570,7 @@ Example input:
 ```
 {
   "alert_rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg",
-  "assignee_id": "user@example.com",
+  "assignee_id": "8205375a-1234-4652-8098-870d656bc693",
   "comment": "Updated alert priority by automation through InsightConnect",
   "disposition": "MALICIOUS",
   "investigation_rrn": "rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI",

@@ -2763,7 +2763,7 @@ actions:
         description: The new user to assign to the alert
         type: string
         required: false
-        example: user@example.com
+        example: 8205375a-1234-4652-8098-870d656bc693
       investigation_rrn:
         title: Investigation RRN
         description: The RRN of the investigation to add the alert to
