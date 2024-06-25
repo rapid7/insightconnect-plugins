@@ -131,7 +131,6 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
 
     def count_queries(self, queries: dict) -> int:
         "Count how many queries are to be made and return the value"
-        total_queries = 0
         return len(list(filter(lambda query: query is not None, queries.values())))
 
     def log_pagination_cycle(self, cursors) -> None:
