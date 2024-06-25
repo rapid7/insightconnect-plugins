@@ -63,15 +63,15 @@ class PollOatList(insightconnect_plugin_runtime.Trigger):
             # Get OATs List
             self.logger.info("Getting OATs List...")
             response = client.oat.consume(
-                    lambda oat: new_oats.append(json.loads(oat.model_dump_json())),
-                    detected_start_date_time=detected_start_date_time,
-                    detected_end_date_time=detected_end_date_time,
-                    ingested_start_date_time=ingested_start_date_time,
-                    ingested_end_date_time=ingested_end_date_time,
-                    top=50,
-                    op=query_op,
-                    **fields,
-                )
+                lambda oat: new_oats.append(json.loads(oat.model_dump_json())),
+                detected_start_date_time=detected_start_date_time,
+                detected_end_date_time=detected_end_date_time,
+                ingested_start_date_time=ingested_start_date_time,
+                ingested_end_date_time=ingested_end_date_time,
+                top=50,
+                op=query_op,
+                **fields,
+            )
             if "error" in response.result_code.lower():
                 raise PluginException(
                     cause="An error occurred while polling OATs.",
