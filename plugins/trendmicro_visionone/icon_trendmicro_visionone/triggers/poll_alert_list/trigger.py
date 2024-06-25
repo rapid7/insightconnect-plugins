@@ -29,17 +29,16 @@ class PollAlertList(insightconnect_plugin_runtime.Trigger):
             new_alerts = []
             # Make Action API Call
             self.logger.info("Making API Call...")
-            try:
-                client.alert.consume(
+            response = client.alert.consume(
                     lambda alert: new_alerts.append(json.loads(alert.model_dump_json())),
                     start_time=start_date_time,
                     end_time=end_date_time,
                 )
-            except Exception as error:
+            if "error" in response.result_code.lower():
                 raise PluginException(
                     cause="An error occurred while polling alerts.",
                     assistance="Please check your inputs and try again.",
-                    data=error,
+                    data=response.error,
                 )
             # Return results
             self.logger.info("Returning Results...")

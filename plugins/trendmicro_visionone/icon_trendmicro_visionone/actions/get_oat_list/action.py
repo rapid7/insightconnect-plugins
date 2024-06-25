@@ -58,22 +58,21 @@ class GetOatList(insightconnect_plugin_runtime.Action):
         new_oats = []
         # Make Action API Call
         self.logger.info("Creating OATs list...")
-        try:
-            client.oat.consume(
-                lambda oat: new_oats.append(json.loads(oat.model_dump_json())),
-                detected_start_date_time=detected_start_date_time,
-                detected_end_date_time=detected_end_date_time,
-                ingested_start_date_time=ingested_start_date_time,
-                ingested_end_date_time=ingested_end_date_time,
-                top=50,
-                op=query_op,
-                **fields,
-            )
-        except Exception as error:
+        response = client.oat.consume(
+            lambda oat: new_oats.append(json.loads(oat.model_dump_json())),
+            detected_start_date_time=detected_start_date_time,
+            detected_end_date_time=detected_end_date_time,
+            ingested_start_date_time=ingested_start_date_time,
+            ingested_end_date_time=ingested_end_date_time,
+            top=50,
+            op=query_op,
+            **fields,
+        )
+        if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while trying to get the OATs list.",
                 assistance="Please check the provided parameters and try again.",
-                data=error,
+                data=response.error,
             )
         # Return results
         self.logger.info("Returning Results...")

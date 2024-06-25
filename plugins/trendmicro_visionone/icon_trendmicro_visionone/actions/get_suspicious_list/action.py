@@ -27,13 +27,12 @@ class GetSuspiciousList(insightconnect_plugin_runtime.Action):
         new_suspicions = []
         # Make Action API Call
         self.logger.info("Making API Call...")
-        try:
-            client.object.consume_suspicious(lambda suspicion: new_suspicions.append(suspicion.model_dump()))
-        except Exception as error:
+        response = client.object.consume_suspicious(lambda suspicion: new_suspicions.append(suspicion.model_dump()))
+        if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while getting the Suspicious List.",
                 assistance="Please check the logs for more details.",
-                data=error,
+                data=response.error,
             )
         # Load json objects to list
         suspicious_objects = []
