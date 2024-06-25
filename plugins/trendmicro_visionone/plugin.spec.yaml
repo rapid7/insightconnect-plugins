@@ -10,7 +10,7 @@ supported_versions: [Trend Vision One API v3]
 vendor: trendmicro
 sdk:
   type: slim
-  version: 5.5.2
+  version: 5.5.5
   user: nobody
 support: community
 troubleshooting: For additional info about actions see https://automation.trendmicro.com/xdr/api-v3#
