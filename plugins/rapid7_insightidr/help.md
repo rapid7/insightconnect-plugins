@@ -2563,7 +2563,6 @@ This action is used to updates information for a single alert
 |investigation_rrn|string|None|False|The RRN of the investigation to add the alert to|None|rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI|None|None|
 |priority|string|None|False|The alert priority|["UNMAPPED", "INFO", "LOW", "MEDIUM", "HIGH", "CRITICAL"]|INFO|None|None|
 |status|string|None|False|The alert status|["UNMAPPED", "OPEN", "INVESTIGATING", "WAITING", "CLOSED"]|OPEN|None|None|
-|tags|[]object|None|False|The tags to apply to the alerts.|None|{'value': ['MDR'], 'action': 'ADD'}|None|None|
   
 Example input:
 
@@ -2575,13 +2574,7 @@ Example input:
   "disposition": "MALICIOUS",
   "investigation_rrn": "rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI",
   "priority": "INFO",
-  "status": "OPEN",
-  "tags": {
-    "action": "ADD",
-    "value": [
-      "MDR"
-    ]
-  }
+  "status": "OPEN"
 }
 ```
 

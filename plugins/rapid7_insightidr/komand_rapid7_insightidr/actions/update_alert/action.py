@@ -24,9 +24,9 @@ class UpdateAlert(insightconnect_plugin_runtime.Action):
         investigation_rrn = params.get(Input.INVESTIGATION_RRN)
         priority = params.get(Input.PRIORITY)
         status = params.get(Input.STATUS)
-        tags = params.get(Input.TAGS)
         # END INPUT BINDING - DO NOT REMOVE
 
+        # Create a dictionary with the parameters
         data = clean(
             {
                 "status": {"value": status},
@@ -34,28 +34,38 @@ class UpdateAlert(insightconnect_plugin_runtime.Action):
                 "priority": {"value": priority},
                 "assignee_id": {"value": assignee_id},
                 "investigation_rrn": {"value": investigation_rrn},
-                "tags": tags,
                 "comment": comment,
             }
         )
 
+        # Remove keys with empty values to ensure only populated fields are sent in the request
+        data = {k: v for k, v in data.items() if v and (isinstance(v, dict) and v["value"] or not isinstance(v, dict))}
+
+        # Set the API version header and create a request helper instance
         self.connection.session.headers["Accept-version"] = "strong-force-preview"
         request = ResourceHelper(self.connection.session, self.logger)
 
+        # Construct the endpoint URL
         endpoint = Alerts.get_alert_information(self.connection.url, alert_rrn)
+
+        # Send the PATCH request to the API endpoint with the cleaned data
         response = request.resource_request(endpoint, "patch", payload=data)
 
         try:
+            # Attempt to parse the response JSON
             result = json.loads(response.get("resource"))
         except json.decoder.JSONDecodeError:
+            # Log the error and raise an exception if the response is not valid JSON
             self.logger.error(f"InsightIDR response: {response}")
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
                 assistance="Contact support for help. See log for more details",
             )
         try:
+            # Return the cleaned result
             return {Output.ALERT: clean(result)}
         except KeyError:
+            # Log the error and raise an exception if the expected key is not in the result
             self.logger.error(result)
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",

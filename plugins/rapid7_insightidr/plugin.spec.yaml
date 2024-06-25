@@ -2770,12 +2770,6 @@ actions:
         type: string
         required: false
         example: "rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI"
-      tags:
-        title: Tags
-        description: The tags to apply to the alerts.
-        type: "[]object"
-        required: false
-        example: {"value": ["MDR"],"action": "ADD"}
       comment:
         title: Comment
         description: The reason for updating the alert, which is captured in the alert audit log for tracking purposes

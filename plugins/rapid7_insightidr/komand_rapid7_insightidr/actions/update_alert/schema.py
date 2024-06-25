@@ -15,7 +15,6 @@ class Input:
     INVESTIGATION_RRN = "investigation_rrn"
     PRIORITY = "priority"
     STATUS = "status"
-    TAGS = "tags"
 
 
 class Output:
@@ -44,7 +43,7 @@ class UpdateAlertInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Comment",
       "description": "The reason for updating the alert, which is captured in the alert audit log for tracking purposes",
-      "order": 8
+      "order": 7
     },
     "disposition": {
       "type": "string",
@@ -92,15 +91,6 @@ class UpdateAlertInput(insightconnect_plugin_runtime.Input):
         "CLOSED"
       ],
       "order": 2
-    },
-    "tags": {
-      "type": "array",
-      "title": "Tags",
-      "description": "The tags to apply to the alerts.",
-      "items": {
-        "type": "object"
-      },
-      "order": 7
     }
   },
   "required": [
