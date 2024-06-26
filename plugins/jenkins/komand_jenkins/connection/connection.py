@@ -1,39 +1,37 @@
-import komand
-from .schema import ConnectionSchema
+import insightconnect_plugin_runtime
+from .schema import ConnectionSchema, Input
 
 # Custom imports below
 import jenkins
 from jenkins import EmptyResponseException, BadHTTPException
-from komand.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
     def connect(self, params={}):
-        username = params.get("credentials").get("username")
-        password = params.get("credentials").get("password")
-        host = params.get("host")
+        host = params.get(Input.HOST)
+        username = params.get(Input.CREDENTIALS, {}).get("username")
+        password = params.get(Input.CREDENTIALS, {}).get("password")
 
         self.logger.info("Connect: Connecting...")
-
         self.server = jenkins.Jenkins(host, username=username, password=password)
 
     def test(self):
         try:
             self.server.get_whoami()
-        except EmptyResponseException as e:
+            return {"success": True}
+        except EmptyResponseException as error:
             raise ConnectionTestException(
                 cause="An empty response was received while attempting to connect to Jenkins.",
                 assistance="Double-check your Jenkins server configuration.",
-                data=e,
+                data=error,
             )
-        except BadHTTPException as e:
+        except BadHTTPException as error:
             raise ConnectionTestException(
                 cause="A bad HTTP response was received while attempting to connect to Jenkins.",
                 assistance="Double-check your Jenkins server configuration and ensure it is reachable.",
-                data=e,
+                data=error,
             )
-
-        return {"success": True}
