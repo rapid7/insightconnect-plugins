@@ -1,11 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
+
 from .schema import BuildInfoInput, BuildInfoOutput, Input, Output
 
 # Custom imports below
-import json
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class BuildInfo(komand.Action):
+class BuildInfo(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="build_info",
@@ -15,28 +16,26 @@ class BuildInfo(komand.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         name = params.get(Input.NAME)
         build_number = params.get(Input.BUILD_NUMBER)
+        # END INPUT BINDING - DO NOT REMOVE
 
-        output = self.connection.server.get_build_info(name, build_number)
         try:
-            build_info = {
-                "building": output["building"],
-                "full_display_name": output["fullDisplayName"],
-                "keep_log": output["keepLog"],
-                "number": output["number"],
-                "queue_id": output["queueId"],
-                "result": output["result"],
-                "timestamp": output["timestamp"],
-                "url": output["url"],
-                "built_on": output["builtOn"],
-                "items": output["changeSet"]["items"],
+            output = self.connection.server.get_build_info(name, build_number)
+            return {
+                Output.BUILD_INFO: {
+                    "building": output.get("building"),
+                    "full_display_name": output.get("fullDisplayName", ""),
+                    "keep_log": output.get("keepLog"),
+                    "number": output.get("number"),
+                    "queue_id": output.get("queueId"),
+                    "result": output.get("result"),
+                    "timestamp": output.get("timestamp"),
+                    "url": output.get("url"),
+                    "built_on": output.get("builtOn", ""),
+                    "items": output.get("changeSet", {}).get("items", []),
+                }
             }
-        except KeyError as e:
-            self.logger.error(e)
-            self.logger.error("Raw build_info: " + json.dumps(output))
-            raise Exception(
-                "An expected value in the build info return was not found." " Check the error log for more information"
-            )
-
-        return {Output.BUILD_INFO: build_info}
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
