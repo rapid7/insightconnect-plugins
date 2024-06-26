@@ -86,7 +86,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|user|user|False|User|{'aliases': ['test-alias'], 'created': 1538529180, 'email': 'user@example.com', 'firstname': 'Test', 'lastname': 'User', 'notes': 'Example note', 'realname': 'Example User', 'status': 'active', 'userId': 'DUVSXMGU7NLM8H803W9L', 'username': 'example-user'}|
+|user|user|False|User|{'aliases': ['test-alias'], 'created': 1538529180, 'email': 'user@example.com', 'notes': 'Example note', 'realname': 'Example User', 'status': 'active', 'userId': 'DUVSXMGU7NLM8H803W9L', 'username': 'example-user'}|
   
 Example output:
 
@@ -98,8 +98,6 @@ Example output:
     ],
     "created": 1538529180,
     "email": "user@example.com",
-    "firstname": "Test",
-    "lastname": "User",
     "notes": "Example note",
     "realname": "Example User",
     "status": "active",
@@ -303,7 +301,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|authLogs|[]authLog|True|Logs|[{"accessDevice": {"browser": "Chrome", "browserVersion": "67.0.3396.99", "flashVersion": "uninstalled", "ip": "198.51.100.1", "isEncryptionEnabled": "true", "isFirewallEnabled": "true", "isPasswordSet": "true", "javaVersion": "uninstalled", "location": {"city": "Bloomington", "country": "United States", "state": "Illinois"}, "os": "Mac OS X", "osVersion": "10.14.1"}, "alias": "test", "application": {"key": "DIV9C5V7T6L02DRWL4RU", "name": "Microsoft Azure Active Directory"}, "authDevice": {"ip": "198.51.100.1", "location": {"city": "Bloomington", "country": "United States", "state": "Illinois"}, "name": "+11111111111"}, "email": "user@example.com", "eventType": "authentication", "factor": "duo_push", "isotimestamp": "2021-01-19T14:47:24.309957+00:00", "reason": "user_disabled", "result": "denied", "timestamp": 1611067644, "txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "user": {"groups": ["InsightConnect Group"], "key": "DUW2DKA44RFYECTU8R1O", "name": "user@example.com"}}]|
+|authLogs|[]authLog|True|Logs|[ { "accessDevice": { "browser": "Chrome", "browserVersion": "67.0.3396.99", "flashVersion": "uninstalled", "ip": "198.51.100.1", "isEncryptionEnabled": "true", "isFirewallEnabled": "true", "isPasswordSet": "true", "javaVersion": "uninstalled", "location": { "city": "Bloomington", "country": "United States", "state": "Illinois" }, "os": "Mac OS X", "osVersion": "10.14.1" }, "alias": "test", "application": { "key": "DIV9C5V7T6L02DRWL4RU", "name": "Microsoft Azure Active Directory" }, "authDevice": { "ip": "198.51.100.1", "location": { "city": "Bloomington", "country": "United States", "state": "Illinois" }, "name": "+11111111111" }, "email": "user@example.com", "eventType": "authentication", "factor": "duo_push", "isotimestamp": "2021-01-19T14:47:24.309957+00:00", "reason": "user_disabled", "result": "denied", "timestamp": 1611067644, "txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "user": { "groups": [ "InsightConnect Group" ], "key": "DUW2DKA44RFYECTU8R1O", "name": "user@example.com" } } ]|
   
 Example output:
 
@@ -384,7 +382,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|phoneList|[]phoneUser|False|List of phones associated with the user's ID|[{"activated": true, "capabilities": ["auto", "push", "sms", "phone", "mobile_otp"], "lastSeen": "2019-01-15T23:02:20", "number": "123456789", "phoneId": "DUCUULF6HBMZ43IG9MBH", "platform": "Google Android", "smsPasscodesSent": false, "type": "Mobile"}]|
+|phoneList|[]phoneUser|False|List of phones associated with the user's ID|[{ "activated": true, "capabilities": [ "auto", "push", "sms", "phone", "mobile_otp" ], "lastSeen": "2019-01-15T23:02:20", "number": "123456789", "phoneId": "DUCUULF6HBMZ43IG9MBH", "platform": "Google Android", "smsPasscodesSent": false, "type": "Mobile" }]|
   
 Example output:
 
@@ -433,40 +431,38 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|user|user|False|User details|{'user': {'created': 1111111111, 'email': 'user@example.com', 'lastLogin': 1511423501, 'phones': [{'activated': True, 'capabilities': ['auto', 'push', 'sms', 'phone', 'mobile_otp'], 'lastSeen': '2018-08-20T06:52:20', 'number': '+11111111111', 'phoneId': '1234ABCDEFG', 'platform': 'Apple iOS', 'smsPasscodesSent': False, 'type': 'Mobile'}], 'realname': 'John Doe', 'status': 'active', 'userId': 'BUUUUUUUUUUUUUUUUUUZ', 'username': 'jdoe'}}|
+|user|user|False|User details|{'created': 1111111111, 'email': 'user@example.com', 'lastLogin': 1511423501, 'phones': [{'activated': True, 'capabilities': ['auto', 'push', 'sms', 'phone', 'mobile_otp'], 'lastSeen': '2018-08-20T06:52:20', 'number': '+11111111111', 'phoneId': '1234ABCDEFG', 'platform': 'Apple iOS', 'smsPasscodesSent': False, 'type': 'Mobile'}], 'realname': 'John Doe', 'status': 'active', 'userId': 'BUUUUUUUUUUUUUUUUUUZ', 'username': 'jdoe'}|
   
 Example output:
 
 ```
 {
   "user": {
-    "user": {
-      "created": 1111111111,
-      "email": "user@example.com",
-      "lastLogin": 1511423501,
-      "phones": [
-        {
-          "activated": true,
-          "capabilities": [
-            "auto",
-            "push",
-            "sms",
-            "phone",
-            "mobile_otp"
-          ],
-          "lastSeen": "2018-08-20T06:52:20",
-          "number": "+11111111111",
-          "phoneId": "1234ABCDEFG",
-          "platform": "Apple iOS",
-          "smsPasscodesSent": false,
-          "type": "Mobile"
-        }
-      ],
-      "realname": "John Doe",
-      "status": "active",
-      "userId": "BUUUUUUUUUUUUUUUUUUZ",
-      "username": "jdoe"
-    }
+    "created": 1111111111,
+    "email": "user@example.com",
+    "lastLogin": 1511423501,
+    "phones": [
+      {
+        "activated": true,
+        "capabilities": [
+          "auto",
+          "push",
+          "sms",
+          "phone",
+          "mobile_otp"
+        ],
+        "lastSeen": "2018-08-20T06:52:20",
+        "number": "+11111111111",
+        "phoneId": "1234ABCDEFG",
+        "platform": "Apple iOS",
+        "smsPasscodesSent": false,
+        "type": "Mobile"
+      }
+    ],
+    "realname": "John Doe",
+    "status": "active",
+    "userId": "BUUUUUUUUUUUUUUUUUUZ",
+    "username": "jdoe"
   }
 }
 ```
@@ -493,39 +489,37 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|user|user|False|User details|{'user': {'created': 1462823674, 'email': 'user@example.com', 'lastLogin': 1534446415, 'phones': [{'activated': True, 'capabilities': ['auto', 'push', 'sms', 'phone', 'mobile_otp'], 'lastSeen': '2018-08-21T15:57:34', 'number': '+12222222222', 'phoneId': '11111113RP6666666666', 'platform': 'Google Android', 'smsPasscodesSent': False, 'type': 'Mobile'}], 'status': 'active', 'userId': 'A777777777777777777W', 'username': 'jdoe'}}|
+|user|user|False|User details|{'created': 1462823674, 'email': 'user@example.com', 'lastLogin': 1534446415, 'phones': [{'activated': True, 'capabilities': ['auto', 'push', 'sms', 'phone', 'mobile_otp'], 'lastSeen': '2018-08-21T15:57:34', 'number': '+12222222222', 'phoneId': '11111113RP6666666666', 'platform': 'Google Android', 'smsPasscodesSent': False, 'type': 'Mobile'}], 'status': 'active', 'userId': 'A777777777777777777W', 'username': 'jdoe'}|
   
 Example output:
 
 ```
 {
   "user": {
-    "user": {
-      "created": 1462823674,
-      "email": "user@example.com",
-      "lastLogin": 1534446415,
-      "phones": [
-        {
-          "activated": true,
-          "capabilities": [
-            "auto",
-            "push",
-            "sms",
-            "phone",
-            "mobile_otp"
-          ],
-          "lastSeen": "2018-08-21T15:57:34",
-          "number": "+12222222222",
-          "phoneId": "11111113RP6666666666",
-          "platform": "Google Android",
-          "smsPasscodesSent": false,
-          "type": "Mobile"
-        }
-      ],
-      "status": "active",
-      "userId": "A777777777777777777W",
-      "username": "jdoe"
-    }
+    "created": 1462823674,
+    "email": "user@example.com",
+    "lastLogin": 1534446415,
+    "phones": [
+      {
+        "activated": true,
+        "capabilities": [
+          "auto",
+          "push",
+          "sms",
+          "phone",
+          "mobile_otp"
+        ],
+        "lastSeen": "2018-08-21T15:57:34",
+        "number": "+12222222222",
+        "phoneId": "11111113RP6666666666",
+        "platform": "Google Android",
+        "smsPasscodesSent": false,
+        "type": "Mobile"
+      }
+    ],
+    "status": "active",
+    "userId": "A777777777777777777W",
+    "username": "jdoe"
   }
 }
 ```
@@ -576,7 +570,7 @@ This action is used to get list of users
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|users|[]user|False|List of users|[{"created": 1111111111, "email": "user@example.com", "lastLogin": 1511423501, "phones": [{"activated": true, "capabilities": ["auto", "push", "sms", "phone", "mobile_otp"], "lastSeen": "2018-08-20T06:52:20", "number": "+11111111111", "phoneId": "ABCDEFGHIJ", "platform": "Apple iOS", "smsPasscodesSent": false, "type": "Mobile"}], "realname": "John Doe", "status": "active", "userId": "BUUUUUUUUUUUUUUUUUUZ", "username": "jdoe"}]|
+|users|[]user|False|List of users|[ { "created": 1111111111, "email": "user@example.com", "lastLogin": 1511423501, "phones": [ { "activated": true, "capabilities": [ "auto", "push", "sms", "phone", "mobile_otp" ], "lastSeen": "2018-08-20T06:52:20", "number": "+11111111111", "phoneId": "ABCDEFGHIJ", "platform": "Apple iOS", "smsPasscodesSent": false, "type": "Mobile" } ], "realname": "John Doe", "status": "active", "userId": "BUUUUUUUUUUUUUUUUUUZ", "username": "jdoe" } ]|
   
 Example output:
 
@@ -654,7 +648,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|user|user|False|User details|{'alias1': 'alias1', 'alias2': 'alias2', 'alias3': 'alias3', 'alias4': 'alias4', 'aliases': {'alias1': 'alias1', 'alias2': 'alias2', 'alias3': 'alias3', 'alias4': 'alias4'}, 'created': 1684765611, 'email': 'user@example.com', 'firstname': 'Example', 'isEnrolled': False, 'lastname': 'Example', 'notes': 'Example', 'realname': 'Example', 'status': 'active', 'userId': 'DUCUULF6HBMZ43IG9MBH', 'username': 'Example'}|
+|user|user|False|User details|{'alias1': 'alias1', 'alias2': 'alias2', 'alias3': 'alias3', 'alias4': 'alias4', 'aliases': {'alias1': 'alias1', 'alias2': 'alias2', 'alias3': 'alias3', 'alias4': 'alias4'}, 'created': 1684765611, 'email': 'user@example.com', 'isEnrolled': False, 'notes': 'Example', 'realname': 'Example', 'status': 'active', 'userId': 'DUCUULF6HBMZ43IG9MBH', 'username': 'Example'}|
   
 Example output:
 
@@ -673,9 +667,7 @@ Example output:
     },
     "created": 1684765611,
     "email": "user@example.com",
-    "firstname": "Example",
     "isEnrolled": false,
-    "lastname": "Example",
     "notes": "Example",
     "realname": "Example",
     "status": "active",
@@ -714,7 +706,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|logs|[]object|True|List of administrator, authentication and trust monitor event logs within the specified time range|[{"accessDevice": {"browser": "Chrome", "browserVersion": "113.0.0.0", "ip": "198.51.100.1", "isEncryptionEnabled": "unknown", "isFirewallEnabled": "unknown", "isPasswordSet": "unknown", "location": {"city": "Los Angeles", "country": "United States", "state": "California"}, "os": "Mac OS X", "osVersion": "10.15.7"}, "alias": "unknown", "application": {"key": "DI8CODQSMK4BXPLYS47K", "name": "User Portal"}, "authDevice": {"key": "DPAVQAJMU3BW0LV7OCX3", "name": "Generic Smartphone"}, "eventType": "enrollment", "factor": "not_available", "isotimestamp": "2023-05-29T10:07:38.631165+00:00", "result": "success", "timestamp": 1685354858, "trustedEndpointStatus": "unknown", "txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "user": {"groups": ["Test Group"], "key": "DUOR48RKV2AYN7YVS9BT", "name": "example-user"}, "logType": "authentication"}, {"action": "user_create", "description": "{\"status\": \"Active\", \"email\": \"user@example.com\", \"realname\": \"\", \"notes\": \"\", \"uname\": \"user\"}", "isotimestamp": "2023-04-30T07:52:18+00:00", "object": "user", "timestamp": 1682836490, "username": "API (Admin API)", "logType": "administrator"}, {"bypassStatusEnabled": 1682836486230, "enabledBy": {"key": "DEKU19BYSSJSOABCD123", "name": "Admin"}, "enabledFor": {"key": "DUM07ZQ4LY00TABCD123", "name": "example-user"}, "priorityEvent": false, "sekey": "SE80GVU5Z47F0ABCD123", "state": "new", "surfacedTimestamp": 1682836486232, "triagedAsInteresting": false, "type": "bypass_status", "logType": "trust_monitor_event"}]|
+|logs|[]object|True|List of administrator, authentication and trust monitor event logs within the specified time range|[ { "accessDevice": { "browser": "Chrome", "browserVersion": "113.0.0.0", "ip": "198.51.100.1", "isEncryptionEnabled": "unknown", "isFirewallEnabled": "unknown", "isPasswordSet": "unknown", "location": { "city": "Los Angeles", "country": "United States", "state": "California" }, "os": "Mac OS X", "osVersion": "10.15.7" }, "alias": "unknown", "application": { "key": "DI8CODQSMK4BXPLYS47K", "name": "User Portal" }, "authDevice": { "key": "DPAVQAJMU3BW0LV7OCX3", "name": "Generic Smartphone" }, "eventType": "enrollment", "factor": "not_available", "isotimestamp": "2023-05-29T10:07:38.631165+00:00", "result": "success", "timestamp": 1685354858, "trustedEndpointStatus": "unknown", "txid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "user": { "groups": [ "Test Group" ], "key": "DUOR48RKV2AYN7YVS9BT", "name": "example-user" }, "logType": "authentication" }, { "action": "user_create", "description": "{\"status\": \"Active\", \"email\": \"user@example.com\", \"realname\": \"\", \"notes\": \"\", \"uname\": \"user\"}", "isotimestamp": "2023-04-30T07:52:18+00:00", "object": "user", "timestamp": 1682836490, "username": "API (Admin API)", "logType": "administrator" }, { "bypassStatusEnabled": 1682836486230, "enabledBy": { "key": "DEKU19BYSSJSOABCD123", "name": "Admin" }, "enabledFor": { "key": "DUM07ZQ4LY00TABCD123", "name": "example-user" }, "priorityEvent": false, "sekey": "SE80GVU5Z47F0ABCD123", "state": "new", "surfacedTimestamp": 1682836486232, "triagedAsInteresting": false, "type": "bypass_status", "logType": "trust_monitor_event" } ]|
   
 Example output:
 
