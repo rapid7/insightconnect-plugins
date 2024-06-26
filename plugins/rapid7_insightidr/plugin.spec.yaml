@@ -2725,6 +2725,7 @@ actions:
         description: The alert status
         type: string
         enum:
+          - ""
           - UNMAPPED
           - OPEN
           - INVESTIGATING
@@ -2737,6 +2738,7 @@ actions:
         description: The alert disposition
         type: string
         enum:
+          - ""
           - UNMAPPED
           - UNDECIDED
           - MALICIOUS
@@ -2750,6 +2752,7 @@ actions:
         description: The alert priority
         type: string
         enum:
+          - ""
           - UNMAPPED
           - INFO
           - LOW

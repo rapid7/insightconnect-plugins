@@ -50,6 +50,7 @@ class UpdateAlertInput(insightconnect_plugin_runtime.Input):
       "title": "Disposition",
       "description": "The alert disposition",
       "enum": [
+        "",
         "UNMAPPED",
         "UNDECIDED",
         "MALICIOUS",
@@ -70,6 +71,7 @@ class UpdateAlertInput(insightconnect_plugin_runtime.Input):
       "title": "Priority",
       "description": "The alert priority",
       "enum": [
+        "",
         "UNMAPPED",
         "INFO",
         "LOW",
@@ -84,6 +86,7 @@ class UpdateAlertInput(insightconnect_plugin_runtime.Input):
       "title": "Status",
       "description": "The alert status",
       "enum": [
+        "",
         "UNMAPPED",
         "OPEN",
         "INVESTIGATING",

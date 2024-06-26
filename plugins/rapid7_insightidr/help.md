@@ -2559,10 +2559,10 @@ This action is used to updates information for a single alert
 |alert_rrn|string|None|True|The unique identifier of the alert|None|rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg|None|None|
 |assignee_id|string|None|False|The new user to assign to the alert|None|8205375a-1234-4652-8098-870d656bc693|None|None|
 |comment|string|None|False|The reason for updating the alert, which is captured in the alert audit log for tracking purposes|None|Updated alert priority by automation through InsightConnect|None|None|
-|disposition|string|None|False|The alert disposition|["UNMAPPED", "UNDECIDED", "MALICIOUS", "BENIGN", "UNKNOWN", "NOT_APPLICABLE"]|MALICIOUS|None|None|
+|disposition|string|None|False|The alert disposition|["", "UNMAPPED", "UNDECIDED", "MALICIOUS", "BENIGN", "UNKNOWN", "NOT_APPLICABLE"]|MALICIOUS|None|None|
 |investigation_rrn|string|None|False|The RRN of the investigation to add the alert to|None|rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI|None|None|
-|priority|string|None|False|The alert priority|["UNMAPPED", "INFO", "LOW", "MEDIUM", "HIGH", "CRITICAL"]|INFO|None|None|
-|status|string|None|False|The alert status|["UNMAPPED", "OPEN", "INVESTIGATING", "WAITING", "CLOSED"]|OPEN|None|None|
+|priority|string|None|False|The alert priority|["", "UNMAPPED", "INFO", "LOW", "MEDIUM", "HIGH", "CRITICAL"]|INFO|None|None|
+|status|string|None|False|The alert status|["", "UNMAPPED", "OPEN", "INVESTIGATING", "WAITING", "CLOSED"]|OPEN|None|None|
   
 Example input:
 
