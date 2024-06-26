@@ -2548,6 +2548,128 @@ Example output:
 }
 ```
 
+#### Update Alert
+
+This action is used to updates information for a single alert
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|alert_rrn|string|None|True|The unique identifier of the alert|None|rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg|None|None|
+|assignee_id|string|None|False|The new user to assign to the alert|None|8205375a-1234-4652-8098-870d656bc693|None|None|
+|comment|string|None|False|The reason for updating the alert, which is captured in the alert audit log for tracking purposes|None|Updated alert priority by automation through InsightConnect|None|None|
+|disposition|string|None|False|The alert disposition|["UNMAPPED", "UNDECIDED", "MALICIOUS", "BENIGN", "UNKNOWN", "NOT_APPLICABLE"]|MALICIOUS|None|None|
+|investigation_rrn|string|None|False|The RRN of the investigation to add the alert to|None|rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI|None|None|
+|priority|string|None|False|The alert priority|["UNMAPPED", "INFO", "LOW", "MEDIUM", "HIGH", "CRITICAL"]|INFO|None|None|
+|status|string|None|False|The alert status|["UNMAPPED", "OPEN", "INVESTIGATING", "WAITING", "CLOSED"]|OPEN|None|None|
+  
+Example input:
+
+```
+{
+  "alert_rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg",
+  "assignee_id": "8205375a-1234-4652-8098-870d656bc693",
+  "comment": "Updated alert priority by automation through InsightConnect",
+  "disposition": "MALICIOUS",
+  "investigation_rrn": "rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI",
+  "priority": "INFO",
+  "status": "OPEN"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|alert|alert_object|False|The updated alert|{'alerted_at': '2023-12-04T13:59:06.349Z', 'created_at': '2023-12-04T13:59:06.757109Z', 'disposition': 'UNDECIDED', 'external_id': '12345678-abcd-cdef-1234-12345abc', 'external_source': 'IDR ABA', 'fields': [], 'ingested_at': '2023-12-04T13:59:06.751813Z', 'investigation_rrn': 'rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI', 'organization': {'customer_id': '12345678-abcd-cdef-1234-12345abc', 'customer_name': 'Dev Test', 'flags': [], 'id': '12345678-abcd-cdef-1234-12345abc', 'name': 'Dev Test', 'product_token': 'abcdefgh12345abc', 'region': 'us1'}, 'permissions': {'canEdit': 'false'}, 'priority': 'LOW', 'responsibility': 'MDR', 'rrn': 'rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abc', 'rule': {'mitre_tcodes': ['Credential Access', 'T1110'], 'rrn': 'rrn:cba:::detection-rule:ABCDEFGHIJK', 'version_rrn': 'rrn:cba:::detection-rule:version:ABCDEFGHIJK'}, 'rule_keys_of_interest': [{'key': 'result', 'values': ['SUCCESS']}, {'key': 'account', 'values': ['test_account']}, {'key': 'geoip_country_code', 'values': ['US']}, {'key': 'source_ip', 'values': ['1.1.1.1']}], 'rule_matching_keys': [{'key': 'entryType', 'values': ['ingress_auth']}, {'key': 'orgId', 'values': ['12345678-abcd-cdef-1234-12345abc']}], 'status': 'OPEN', 'tags': [], 'title': 'MVD Verification', 'type': 'MVD Verification', 'updated_at': '2023-12-05T11:51:39.29059Z', 'version': 8}|
+  
+Example output:
+
+```
+{
+  "alert": {
+    "alerted_at": "2023-12-04T13:59:06.349Z",
+    "created_at": "2023-12-04T13:59:06.757109Z",
+    "disposition": "UNDECIDED",
+    "external_id": "12345678-abcd-cdef-1234-12345abc",
+    "external_source": "IDR ABA",
+    "fields": [],
+    "ingested_at": "2023-12-04T13:59:06.751813Z",
+    "investigation_rrn": "rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI",
+    "organization": {
+      "customer_id": "12345678-abcd-cdef-1234-12345abc",
+      "customer_name": "Dev Test",
+      "flags": [],
+      "id": "12345678-abcd-cdef-1234-12345abc",
+      "name": "Dev Test",
+      "product_token": "abcdefgh12345abc",
+      "region": "us1"
+    },
+    "permissions": {
+      "canEdit": "false"
+    },
+    "priority": "LOW",
+    "responsibility": "MDR",
+    "rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abc",
+    "rule": {
+      "mitre_tcodes": [
+        "Credential Access",
+        "T1110"
+      ],
+      "rrn": "rrn:cba:::detection-rule:ABCDEFGHIJK",
+      "version_rrn": "rrn:cba:::detection-rule:version:ABCDEFGHIJK"
+    },
+    "rule_keys_of_interest": [
+      {
+        "key": "result",
+        "values": [
+          "SUCCESS"
+        ]
+      },
+      {
+        "key": "account",
+        "values": [
+          "test_account"
+        ]
+      },
+      {
+        "key": "geoip_country_code",
+        "values": [
+          "US"
+        ]
+      },
+      {
+        "key": "source_ip",
+        "values": [
+          "1.1.1.1"
+        ]
+      }
+    ],
+    "rule_matching_keys": [
+      {
+        "key": "entryType",
+        "values": [
+          "ingress_auth"
+        ]
+      },
+      {
+        "key": "orgId",
+        "values": [
+          "12345678-abcd-cdef-1234-12345abc"
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "tags": [],
+    "title": "MVD Verification",
+    "type": "MVD Verification",
+    "updated_at": "2023-12-05T11:51:39.29059Z",
+    "version": 8
+  }
+}
+```
+
 #### Update Investigation
 
 This action is used to allows to update existing investigation by ID or RRN
@@ -3270,6 +3392,7 @@ Example output:
 
 # Version History
 
+* 10.3.0 - New Action Added: Update Alert
 * 10.2.0 - New Trigger Added: `Get New Investigations`
 * 10.1.1 - Updated query schemas to allow message to be an object or string | Updated SDK
 * 10.1.0 - New Trigger Added: `Get New Alerts`
