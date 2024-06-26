@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 10.2.0
+version: 10.3.0
 connection_version: 5
 supported_versions: ["Latest release successfully tested on 2024-05-15."]
 vendor: rapid7
@@ -26,6 +26,7 @@ sdk:
   version: 5.4.9
   user: nobody
 version_history:
+- "10.3.0 - New Action Added: Update Alert"
 - "10.2.0 - New Trigger Added: `Get New Investigations`"
 - "10.1.1 - Updated query schemas to allow message to be an object or string | Updated SDK"
 - "10.1.0 - New Trigger Added: `Get New Alerts`"
@@ -2709,6 +2710,79 @@ actions:
         type: account_object
         required: false
         example: { "rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:account:83002c85d7c6", "name": "jdoe@acme.com", "domain": "tor.acme.com", "disabled": true, "user": { "rrn": "rrn:uba:us:6bcf6c5b-552d-49a4-a3f5-259e0514585f:user:83002c85d7c6", "name": "John Doe" }, "authentication_service": "ACTIVE_DIRECTORY" }
+  update_alert:
+    title: Update Alert
+    description: Updates information for a single alert
+    input:
+      alert_rrn:
+        title: Alert RRN
+        description: The unique identifier of the alert
+        type: string
+        required: true
+        example: "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abg"
+      status:
+        title: Status
+        description: The alert status
+        type: string
+        enum:
+          - UNMAPPED
+          - OPEN
+          - INVESTIGATING
+          - WAITING
+          - CLOSED
+        required: false
+        example: OPEN
+      disposition:
+        title: Disposition
+        description: The alert disposition
+        type: string
+        enum:
+          - UNMAPPED
+          - UNDECIDED
+          - MALICIOUS
+          - BENIGN
+          - UNKNOWN
+          - NOT_APPLICABLE
+        required: false
+        example: MALICIOUS
+      priority:
+        title: Priority
+        description: The alert priority
+        type: string
+        enum:
+          - UNMAPPED
+          - INFO
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        required: false
+        example: INFO
+      assignee_id:
+        title: Assignee ID
+        description: The new user to assign to the alert
+        type: string
+        required: false
+        example: 8205375a-1234-4652-8098-870d656bc693
+      investigation_rrn:
+        title: Investigation RRN
+        description: The RRN of the investigation to add the alert to
+        type: string
+        required: false
+        example: "rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI"
+      comment:
+        title: Comment
+        description: The reason for updating the alert, which is captured in the alert audit log for tracking purposes
+        type: string
+        required: false
+        example: "Updated alert priority by automation through InsightConnect"
+    output:
+      alert:
+        title: Alert
+        description: The updated alert
+        type: alert_object
+        required: false
+        example: {"alerted_at": "2023-12-04T13:59:06.349Z", "created_at": "2023-12-04T13:59:06.757109Z", "disposition": "UNDECIDED", "external_id": "12345678-abcd-cdef-1234-12345abc", "external_source": "IDR ABA", "fields": [], "ingested_at": "2023-12-04T13:59:06.751813Z", "investigation_rrn": "rrn:investigation:us:12345678-abcd-cdef-1234-12345abc:investigation:ABCDEFGHI", "organization": {"customer_id": "12345678-abcd-cdef-1234-12345abc", "customer_name": "Dev Test", "flags": [], "id": "12345678-abcd-cdef-1234-12345abc", "name": "Dev Test", "product_token": "abcdefgh12345abc", "region": "us1"}, "permissions": {"canEdit": "false"}, "priority": "LOW", "responsibility": "MDR", "rrn": "rrn:alerts:us1:12345678-abcd-cdef-1234-12345abc:alert:1:12345678-abcd-cdef-1234-12345abc", "rule": {"mitre_tcodes": ["Credential Access", "T1110"], "rrn": "rrn:cba:::detection-rule:ABCDEFGHIJK", "version_rrn": "rrn:cba:::detection-rule:version:ABCDEFGHIJK"}, "rule_keys_of_interest": [{"key": "result", "values": ["SUCCESS"]}, {"key": "account", "values": ["test_account"]}, {"key": "geoip_country_code", "values": ["US"]}, {"key": "source_ip", "values": ["1.1.1.1"]}], "rule_matching_keys": [{"key": "entryType", "values": ["ingress_auth"]}, {"key": "orgId", "values": ["12345678-abcd-cdef-1234-12345abc"]}], "status": "OPEN", "tags": [], "title": "MVD Verification", "type": "MVD Verification", "updated_at": "2023-12-05T11:51:39.29059Z", "version": 8}
 triggers:
   get_new_alerts:
     title: Get New Alerts
