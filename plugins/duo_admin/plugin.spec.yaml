@@ -7,13 +7,29 @@ vendor: rapid7
 support: rapid7
 cloud_ready: true
 status: []
-supported_versions: ["Duo Admin API 2023-05-19"]
+supported_versions: ["Duo Admin API 2024-06-25"]
 sdk:
   type: full
-  version: 5.4.9
+  version: 5.5.5
   user: nobody
-description: Duo is a trusted access solution for organizations. The Duo Admin plugin for Rapid7 InsightConnect allows users to manage and administrate their Duo organization
-version: 4.4.2
+description: "[Duo](https://duo.com/)'s Trusted Access platform verifies the identity of your users with two-factor authentication and
+security health of their devices before they connect to the apps they use. Using the Duo plugin for InsightConnect will allow Duo user management within automation workflows"
+key_features:
+- Add user
+- Delete user
+- Enroll user
+- Get logs
+- Get phones by user ID
+- Get user by ID
+- Get user by username
+- Get user status
+- Get users
+- Modify user
+requirements:
+- "The following information are required for using `Duo Admin` plugin:"
+- "Two secret keys - `integration key` and `secret key`"
+- "`API hostname`"
+version: 5.0.0
 connection_version: 4
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/duo_admin
@@ -27,6 +43,46 @@ hub_tags:
   keywords: [duo, admin, cloud_enabled]
   features: []
 enable_cache: false
+links:
+- "[Duo Security](https://duo.com/)"
+- "[Duo Admin API](https://duo.com/docs/adminapi)"
+references:
+- "[Duo Security](https://duo.com/)"
+- "[Duo Admin API](https://duo.com/docs/adminapi)"
+troubleshooting: "Many actions in this plugin take a User ID as input. A User ID is not the username - instead it's a unique identifier e.g. DU9I6T0F7R2S1J4XZHHA. A User ID can be obtained by passing a username to the Get User Status action."
+
+version_history:
+- "5.0.0 - Updated to include latest SDK v5.5.5 | Removing Unused fields from User Object"
+- "4.4.2 - Updated to include latest SDK v5.4.9 | Task `Monitor Logs` updated to increase max lookback cutoff to 7 days"
+- "4.4.1 - `Monitor Logs` task updated to stop logging of trust monitor events response"
+- "4.4.0 - `Monitor Logs` task updated to handle `custom_config` parameter for each log type separately | Apply lookback limit of 180 days due to Duo Admin API limitation"
+- "4.3.2 - Monitor Logs task: Update to latest SDK | `Monitor Logs` task updated to handle `custom_config` parameter"
+- "4.3.1 - Monitor Logs task: Added exception logging and use latest plugin SDK (`5.3.1`)."
+- "4.3.0 - Monitor Logs task: Added inputs for collecting events and logs. Updated 403 error handling"
+- "4.2.2 - Monitor Logs task: updated unit tests"
+- "4.2.1 - Monitor Logs task: updated timestamp handling"
+- "4.2.0 - Monitor Logs task: removed formatting of task output"
+- "4.1.1 - Monitor Logs task: strip http/https in hostname, fix problem with generating header signature"
+- "4.1.0 - Update to latest plugin SDK"
+- "4.0.0 - Add Monitor Logs task | Code refactor | Update plugin to be cloud enabled"
+- "3.4.0 - Add `maxtime`, `applications`, `users`, `event_types`, `factors`, `groups`, `phone_numbers`, `reasons`, `results`, `registration_id`, `token_id`, `webauthnkey` inputs in `Get Logs` action | Update custom type for `authlogs` output"
+- "3.3.4 - Correct spelling in help.md"
+- "3.3.3 - Changed `Exception` to `PluginException` | Moved constants to class init | Use fstring instead of concatenation"
+- "3.3.2 - New spec and help.md format for the Extension Library"
+- "3.3.1 - Update default `mintime` input and description for `Get Logs` action"
+- "3.3.0 - New action Enroll User | Support Duo Admin API v2 where applicable | Various bug fixes & improvements"
+- "3.2.0 - New action Get Phones by User ID"
+- "3.1.0 - New Action to Add User | Updated duo_client version to 3.3.0"
+- "3.0.0 - Rename `Get User By ID` action to `Get User by ID` | Rename `Get User By Username` action to `Get User by Username` | Rename `Delete User By ID` action to `Delete User by ID` | Rename `Modify User By ID` action to `Modify User by ID`"
+- "2.0.0 - Update to new credential types | Add example output"
+- "1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Add action Get User By Username"
+- "0.1.6 - Fix `NameError: global name 'param' is not defined` in Delete action"
+- "0.1.5 - SSL bug fix in SDK"
+- "0.1.4 - Bug fix in modify user action where None value is present in response, invalid schema in run and test method"
+- "0.1.3 - Bug fix in user status action when user doesn't exist"
+- "0.1.2 - Add action to get user status"
+- "0.1.0 - Initial plugin"
+
 
 types:
   phoneUser:
@@ -261,13 +317,7 @@ types:
       description: The user's email address
       type: string
       required: false
-      example: example@user.com
-    firstname:
-      title: First Name
-      description: The user's given name
-      type: string
-      required: false
-      example: Example
+      example: user@example.com
     groups:
       title: Groups
       description: List of groups to which this user belongs
@@ -292,12 +342,6 @@ types:
       type: integer
       required: false
       example: 1234
-    lastname:
-      title: Last Name
-      description: The user's surname
-      type: string
-      required: false
-      example: Example
     notes:
       title: Notes
       description: Notes about this user
@@ -1022,18 +1066,6 @@ actions:
         type: string
         required: false
         example: Example
-      firstname:
-        title: First Name
-        description: The user's new given name
-        type: string
-        required: false
-        example: Example
-      lastname:
-        title: Last Name
-        description: The user's new surname
-        type: string
-        required: false
-        example: Example
     output:
       user:
         title: User
@@ -1196,18 +1228,6 @@ actions:
         type: string
         required: false
         example: Example note
-      firstname:
-        title: First Name
-        description: The user's given name. Required for Duo's ID Proofing feature
-        type: string
-        required: false
-        example: Test
-      lastname:
-        title: Last Name
-        description: The user's surname. Required for Duo's ID Proofing feature
-        type: string
-        required: false
-        example: User
     output:
       user:
         description: User

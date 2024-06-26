@@ -30,8 +30,6 @@ class ModifyUser(insightconnect_plugin_runtime.Action):
             "email": params.get(Input.EMAIL),
             "status": None if user_status == "None" else user_status,
             "notes": params.get(Input.NOTES),
-            "firstname": params.get(Input.FIRSTNAME),
-            "lastname": params.get(Input.LASTNAME),
         }
 
         return {
