@@ -3118,7 +3118,7 @@ tasks:
     description: Monitor for new activities, device control events, and threats
     input:
       collectActivities:
-        title: Collect Activites
+        title: Collect Activities
         description: Whether to collect activity logs (note requires appropriate permissions assigned to user)
         type: bool
         required: false

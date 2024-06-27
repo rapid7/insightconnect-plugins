@@ -29,7 +29,7 @@ class MonitorLogsInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "collectActivities": {
       "type": "boolean",
-      "title": "Collect Activites",
+      "title": "Collect Activities",
       "description": "Whether to collect activity logs (note requires appropriate permissions assigned to user)",
       "default": true,
       "order": 1
