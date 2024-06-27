@@ -8,7 +8,5 @@
   "realname": "Example",
   "email": "user@example.com",
   "status": "active",
-  "notes": "Example",
-  "firstname": "Example",
-  "lastname": "Example"
+  "notes": "Example"
 }

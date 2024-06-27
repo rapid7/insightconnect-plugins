@@ -11,13 +11,11 @@
     "desktoptokens": [
     ],
     "email": "user@example.com",
-    "firstname": "Test",
     "groups": [
     ],
     "is_enrolled": false,
     "last_directory_sync": null,
     "last_login": null,
-    "lastname": "User",
     "notes": "example",
     "phones": [
     ],
