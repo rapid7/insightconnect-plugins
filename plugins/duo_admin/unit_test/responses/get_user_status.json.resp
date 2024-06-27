@@ -14,7 +14,6 @@
       "created": 1683711826,
       "desktoptokens": [],
       "email": "user@example.com",
-      "firstname": "User",
       "groups": [
         {
           "desc": "Example description",
@@ -30,7 +29,6 @@
       "is_enrolled": true,
       "last_directory_sync": null,
       "last_login": null,
-      "lastname": "Example",
       "notes": "example notes",
       "phones": [
         {
