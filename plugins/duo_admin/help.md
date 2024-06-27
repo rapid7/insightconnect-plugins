@@ -17,7 +17,6 @@
 
 # Requirements
 
-The following information are required for using `Duo Admin` plugin:
 * Two secret keys - `integration key` and `secret key`
 * `API hostname`
 
@@ -1045,9 +1044,7 @@ Many actions in this plugin take a User ID as input. A User ID is not the userna
 # Links
 
 * [Duo Security](https://duo.com/)
-* [Duo Admin API](https://duo.com/docs/adminapi)
 
 ## References
 
-* [Duo Security](https://duo.com/)
 * [Duo Admin API](https://duo.com/docs/adminapi)
