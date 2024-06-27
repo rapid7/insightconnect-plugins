@@ -13,7 +13,7 @@ def extract_job_number(response: Response) -> int:
 
 
 def extract_build_number(job_info: Dict[str, Any]) -> int:
-    last_build_number = job_info.get("lastBuild", {}).get("number")
-    if not last_build_number:
+    last_build = job_info.get("lastBuild", {})
+    if not last_build or not last_build.get("number"):
         return 1
-    return last_build_number + 1
+    return last_build.get("number", 0) + 1
