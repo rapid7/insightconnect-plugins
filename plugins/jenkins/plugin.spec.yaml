@@ -4,19 +4,43 @@ products: [insightconnect]
 name: jenkins
 title: Jenkins
 description: Reliably build, test, and deploy their software
-version: 1.1.2
+version: 1.1.3
+connection_version: 1
 vendor: rapid7
 support: community
 status: []
+supported_versions: ["2024-06-24"]
+sdk:
+  type: slim
+  version: 5.5.5
+  user: nobody
+key_features:
+  - "Continuous Integration/Continuous Deployment"
+  - "Start a new build job in Jenkins"
+  - "Get information about a specific build"
+requirements:
+  - "Username and Password"
+  - "Jenkins Server"
+troubleshooting: 'For build job parameters boolean values must be lower case and strings must be in quotes e.g. `{"mykeyone": false, "mykeytwo": "mystring", "mykeythree": 27}`'
+version_history:
+  - "1.1.3 - Updated SDK to the latest version | `Build Job`: Fixed problem where actions would fail on jobs with long parameters"
+  - "1.1.2 - Update connection test"
+  - "1.1.1 - New spec and help.md format for the Extension Library"
+  - "1.1.0 - Add build info action"
+  - "1.0.0 - Initial plugin "
+links:
+  - "[Jenkins](https://www.jenkins.io/)"
+references:
+  - "[API Documentation](https://python-jenkins.readthedocs.io/en/latest/api.html)"
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/jenkins
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://jenkins.io
 tags:
-- jenkins
-- software development
-- ci
-- build
+  - jenkins
+  - software development
+  - ci
+  - build
 hub_tags:
   use_cases: [devops]
   keywords: [jenkins, software development, ci, build]
@@ -56,7 +80,7 @@ types:
       description: URL for more information on the build
       type: string
     built_on:
-      title: 'Built On'
+      title: Built On
       description: The server the build occurred on
       type: string
     items:
@@ -69,11 +93,13 @@ connection:
     description: Jenkins server URL
     type: string
     required: true
+    example: "https://example-jenkins.com"
   credentials:
     title: Credentials
     description: Username and password
     type: credential_username_password
     required: true
+    example: '{"username": "ExampleUser", "password": "ExamplePassword"}'
 actions:
   build_job:
     title: Build Job
@@ -90,18 +116,20 @@ actions:
         description: Dictionary of job parameters
         type: object
         required: false
-        example: { \"simulate_build\": false }
+        example: '{"simulate_build": false}'
     output:
       job_number:
         title: Job Number
         description: Item queue ID
         type: integer
         required: false
+        example: 101
       build_number:
         title: Build Number
         description: Build number
         type: integer
         required: false
+        example: 4101
   build_info:
     title: Build Info
     description: Returns detailed information on a build
@@ -124,3 +152,4 @@ actions:
         description: Information on the build
         type: build_info
         required: false
+        example: '{"building":false,"full_display_name":"moose-build #529","keep_log":false,"number":529,"queue_id":4423,"result":"SUCCESS","timestamp":1533096110941,"url":"https://example.com/job/moose-build/529/","built_on":"jenkins.example.com","items":[{"_class":"hudson.plugins.git.GitChangeSet","affectedPaths":["port_knocking/komand_port_knocking/connection/__init__.py","port_knocking/komand_port_knocking/triggers/__init__.py","port_knocking/komand_port_knocking/actions/knock/action.py","port_knocking/komand_port_knocking/actions/__init__.py","port_knocking/komand_port_knocking/connection.py","port_knocking/komand_port_knocking/connection/schema.py","port_knocking/Makefile","port_knocking/komand_port_knocking/actions/knock/__init__.py","port_knocking/Dockerfile","port_knocking/komand_port_knocking/util/__init__.py","port_knocking/plugin.spec.yaml","port_knocking/bin/komand_port_knocking","port_knocking/requirements.txt","port_knocking/komand_port_knocking/connection/connection.py","port_knocking/komand_port_knocking/actions/knock/schema.py","port_knocking/komand_port_knocking/actions/knock.py","port_knocking/setup.py","port_knocking/komand_port_knocking/__init__.py"],"commitId":"5a1b5315634dfac220b0b9843d02db3f8fead210","timestamp":1524589889000,"author":{"absoluteUrl":"https://jenkins.example.com/user/example","fullName":"John Doe"},"authorEmail":"user@example.com","comment":"Update pork_knocker to v2 Python plugin architecture\n","date":"2018-04-24 13:11:29 -0400","id":"5a1b5315634dfac220b0b9843d02db3f8fead210","msg":"Update pork_knocker to v2 Python plugin architecture","paths":[{"editType":"edit","file":"port_knocking/komand_port_knocking/__init__.py"},{"editType":"edit","file":"port_knocking/Dockerfile"},{"editType":"edit","file":"port_knocking/komand_port_knocking/triggers/__init__.py"},{"editType":"add","file":"port_knocking/komand_port_knocking/actions/knock/action.py"},{"editType":"add","file":"port_knocking/komand_port_knocking/util/__init__.py"},{"editType":"add","file":"port_knocking/komand_port_knocking/connection/schema.py"},{"editType":"add","file":"port_knocking/komand_port_knocking/actions/knock/schema.py"},{"editType":"edit","file":"port_knocking/plugin.spec.yaml"},{"editType":"edit","file":"port_knocking/Makefile"},{"editType":"edit","file":"port_knocking/komand_port_knocking/actions/__init__.py"},{"editType":"delete","file":"port_knocking/komand_port_knocking/actions/knock.py"},{"editType":"add","file":"port_knocking/komand_port_knocking/actions/knock/__init__.py"},{"editType":"edit","file":"port_knocking/setup.py"},{"editType":"edit","file":"port_knocking/bin/komand_port_knocking"},{"editType":"add","file":"port_knocking/requirements.txt"},{"editType":"add","file":"port_knocking/komand_port_knocking/connection/__init__.py"},{"editType":"delete","file":"port_knocking/komand_port_knocking/connection.py"},{"editType":"add","file":"port_knocking/komand_port_knocking/connection/connection.py"}]},{"_class":"hudson.plugins.git.GitChangeSet","affectedPaths":["port_knocking/plugin.spec.yaml"],"commitId":"6915b6023f84ea17c15c677262f47eb640686248","timestamp":1525360320000,"author":{"absoluteUrl":"https://jenkins.example.com/user/example","fullName":"John Doe"},"authorEmail":"user@example.com","comment":"Auto formatting plugin.spec.yaml\n","date":"2018-05-03 11:12:00 -0400","id":"6915b6023f84ea17c15c677262f47eb640686248","msg":"Auto formatting plugin.spec.yaml","paths":[{"editType":"edit","file":"port_knocking/plugin.spec.yaml"}]},{"_class":"hudson.plugins.git.GitChangeSet","affectedPaths":["port_knocking/plugin.spec.yaml","port_knocking/Dockerfile","port_knocking/komand_port_knocking/actions/knock/action.py","port_knocking/Makefile","port_knocking/.gitignore"],"commitId":"aae7faa0389dbc3a461aedf0324913dba34a748a","timestamp":1533095364000,"author":{"absoluteUrl":"https://jenkins.example.com/user/example","fullName":"John Doe"},"authorEmail":"user@example.com","comment":"Update to v2\n","date":"2018-07-31 22:49:24 -0500","id":"aae7faa0389dbc3a461aedf0324913dba34a748a","msg":"Update to v2","paths":[{"editType":"edit","file":"port_knocking/.gitignore"},{"editType":"edit","file":"port_knocking/komand_port_knocking/actions/knock/action.py"},{"editType":"edit","file":"port_knocking/plugin.spec.yaml"},{"editType":"edit","file":"port_knocking/Makefile"},{"editType":"edit","file":"port_knocking/Dockerfile"}]}]}'
