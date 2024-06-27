@@ -3,9 +3,9 @@ import requests
 from insightconnect_plugin_runtime.exceptions import HTTPStatusCodes, PluginException
 from insightconnect_plugin_runtime.helper import extract_json, response_handler
 from .schema import (
-    MonitorActivitiesAndEventsInput,
-    MonitorActivitiesAndEventsOutput,
-    MonitorActivitiesAndEventsState,
+    MonitorLogsInput,
+    MonitorLogsOutput,
+    MonitorLogsState,
     Input,
     Output,
     Component,
@@ -33,7 +33,6 @@ MAX_CUTOFF_HOURS = 24 * 7
 LOGS_PAGE_LIMIT = 1000
 
 API_VERSION = "2.1"
-STARTING_TIMESTAMP = "1900-01-01T00:00:00.000000Z"
 
 ACTIVITIES_LOGS = "activities_logs"
 EVENTS_LOGS = "events_logs"
@@ -46,14 +45,14 @@ LOG_TYPE_MAP = {
 }
 
 
-class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
+class MonitorLogs(insightconnect_plugin_runtime.Task):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="monitor_activities_and_events",
+            name="monitor_logs",
             description=Component.DESCRIPTION,
-            input=MonitorActivitiesAndEventsInput(),
-            output=MonitorActivitiesAndEventsOutput(),
-            state=MonitorActivitiesAndEventsState(),
+            input=MonitorLogsInput(),
+            output=MonitorLogsOutput(),
+            state=MonitorLogsState(),
         )
 
     def run(self, params={}, state={}, custom_config={}):
@@ -65,11 +64,13 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         try:
             is_initial_run = self.check_initial_run(state)
             queries = self.check_queries(params)
+            self.logger.info(
+                "Input options selected to query: " + ", ".join([f"{key}: {value}" for key, value in queries.items()])
+            )
             cursors = self.get_cursors(state)
             total_queries = self.count_queries(queries)
             total_forbidden_responses = 0
             last_run_timestamp = state.get(LAST_RUN_TIMESTAMP)
-            self.logger.info(cursors)
             is_paginating = any(cursors.values())
             if is_paginating:
                 self.log_pagination_cycle(cursors)
@@ -90,24 +91,26 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
 
             # Check if all ran queries have returned 401 or 403 errors and raise an exception if so
             if total_forbidden_responses >= total_queries > 0:
+                self.logger.info("Error: Total unauthorized/forbidden responses exceed threshold")
                 return [], existing_state, False, 401, PluginException(preset=PluginException.Preset.UNAUTHORIZED)
             has_more_pages = self.determine_next_pagination_cycle(state, lookback_timestamp, current_run_timestamp)
             return all_logs, state, has_more_pages, 200, None
         except ApiException as error:
+            self.logger.info(f"Error: An API exception has occurred. Status code {error.status_code} returned.")
             return [], existing_state, False, error.status_code, error
         except Exception as error:
+            self.logger.info(f"Error: Unknown exception has occurred. No results returned. Error Data: {error}")
             return [], existing_state, False, 500, PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def check_initial_run(self, state: Dict) -> bool:
         """
         Check if state exists, return False if so indicating initial run
         """
-        is_initial_run = not state
-        if is_initial_run:
+        if not state:
             self.logger.info("No state detected. Instantiating initial run.")
         else:
             self.logger.info("State detected. Instantiating continuation run.")
-        return is_initial_run
+        return not state
 
     def check_queries(self, params: Dict) -> Tuple[str, str, str]:
         """
@@ -130,14 +133,16 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         }
 
     def count_queries(self, queries: dict) -> int:
-        "Count how many queries are to be made and return the value"
+        """
+        Count how many queries are to be made and return the value
+        """
         return len(list(filter(lambda query: query is not None, queries.values())))
 
     def log_pagination_cycle(self, cursors) -> None:
         """
         Provide logging information if task is in pagination cycle
         """
-        pagination_info_string = "Pagination tokens received... "
+        pagination_info_string = "Pagination cursors received... "
         for log_type, cursor in cursors.items():
             if cursor is not None:
                 pagination_info_string += f" {log_type}:{cursor}"
@@ -196,8 +201,6 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         timestamp_key = LOG_TYPE_MAP.get(log_type, {}).get("LAST_LOG_TIMESTAMP")
         page_token_key = LOG_TYPE_MAP.get(log_type, {}).get("PAGE_TOKEN")
         last_log_timestamp = state.get(timestamp_key)
-        if not last_log_timestamp:
-            last_log_timestamp = STARTING_TIMESTAMP
         query_params = self.get_query_params(log_type, last_run_timestamp, current_run_timestamp, pagination_cursor)
         if log_type == ACTIVITIES_LOGS:
             response = self.connection.client.get_activities_list(query_params, True, False)
@@ -222,21 +225,19 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
             self.logger.info(f"New next page cursor received for {log_type}: {next_page_cursor}")
         return logs, total_forbidden_responses
 
-    def get_query_params(self, log_type: str, last_log_timestamp: str, current_run_timestamp: str, cursor: str) -> Dict:
+    def get_query_params(self, log_type: str, last_run_timestamp: str, current_run_timestamp: str, cursor: str) -> Dict:
         """
         Generate query parameters based on log type and availability of pagination cursor
         """
         timestamp_name = "createdAt"
         if log_type == EVENTS_LOGS:
             timestamp_name = "eventTime"
-        query_params = {
-            "limit": LOGS_PAGE_LIMIT,
-            f"{timestamp_name}__gt": last_log_timestamp,
-            f"{timestamp_name}__lte": current_run_timestamp,
-            "sortBy": timestamp_name,
-        }
+        query_params = {"limit": LOGS_PAGE_LIMIT, "sortBy": timestamp_name}
         if cursor:
             query_params["cursor"] = cursor
+        else:
+            query_params[f"{timestamp_name}__gt"] = last_run_timestamp
+            query_params[f"{timestamp_name}__lte"] = current_run_timestamp
         return query_params
 
     def extract_query_response(
@@ -259,13 +260,17 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         """
         # If no logs returned, return existing timestamp or None if never previously set
         if len(logs) == 0:
-            if latest_timestamp_string == STARTING_TIMESTAMP:
+            if not latest_timestamp_string:
                 return None
             return latest_timestamp_string
-        new_timestamp_string = logs[-1].get("createdAt")
+        new_timestamp_string = logs[-1].get("eventTime")
+        if new_timestamp_string is None:
+            new_timestamp_string = logs[-1].get("createdAt")
         if new_timestamp_string is None:
             new_timestamp_string = logs[-1].get("threatInfo", {}).get("createdAt")
         new_timestamp = datetime.strptime(new_timestamp_string, DATE_TIME_FORMAT).astimezone(timezone.utc)
+        if not latest_timestamp_string:
+            return new_timestamp_string
         latest_timestamp = datetime.strptime(latest_timestamp_string, DATE_TIME_FORMAT).astimezone(timezone.utc)
         if new_timestamp > latest_timestamp:
             latest_timestamp_string = new_timestamp_string
@@ -281,7 +286,7 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         )
         if has_more_pages:
             self.logger.info(
-                "Pagination token was returned. Not updating last run timestamp to current time until query completed."
+                "Pagination cursor was returned. Not updating last run timestamp to current time until query completed."
             )
             state[LAST_RUN_TIMESTAMP] = lookback_timestamp
         else:
@@ -302,18 +307,22 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
         lookback_date = None
         if custom_config:
             self.logger.info("Custom config detected")
+
         # Set the lookback date to the last timestamp if it exists
         if last_timestamp:
             lookback_date = datetime.strptime(last_timestamp, DATE_TIME_FORMAT).astimezone(timezone.utc)
             self.logger.info(f"Last run timestamp found: {lookback_date}")
+
         # Determine cutoff date based on running state, default cutoff hours, and supplied custom config cutoff hours
         default_cutoff_hours = INITIAL_CUTOFF_HOURS if is_initial_run else MAX_CUTOFF_HOURS
         cutoff_hours = custom_config.get("cutoff_hours", default_cutoff_hours)
         cutoff_date = current_date_time - timedelta(hours=cutoff_hours)
+
         # limit the lookback to the cutoff. If there is no last timestamp, lookback to the cutoff
         if lookback_date is None or (lookback_date and lookback_date < cutoff_date):
             self.logger.info(f"Implementing cutoff hours: {cutoff_hours}")
             lookback_date = cutoff_date
+
         # Use a custom config lookback date if supplied and the task is in an initial run phase
         # Default and custom config cutoffs do not apply to this value
         custom_lookback_date = custom_config.get("lookback")
@@ -321,7 +330,9 @@ class MonitorActivitiesAndEvents(insightconnect_plugin_runtime.Task):
             lookback_date = datetime(**custom_lookback_date, tzinfo=timezone.utc).astimezone()
             self.logger.info(f"Custom lookback date provided {lookback_date} and task is in first run")
 
-        self.logger.info(f"Setting lookback date to {lookback_date}")
         lookback_date_string = datetime.strftime(lookback_date, DATE_TIME_FORMAT)
         current_date_time_string = datetime.strftime(current_date_time, DATE_TIME_FORMAT)
+        self.logger.info(
+            f"Setting lookback date to {lookback_date_string} and current time to {current_date_time_string}"
+        )
         return current_date_time_string, lookback_date_string

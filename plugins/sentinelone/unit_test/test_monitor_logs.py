@@ -5,8 +5,8 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
-from komand_sentinelone.tasks.monitor_activities_and_events import MonitorActivitiesAndEvents
-from komand_sentinelone.tasks.monitor_activities_and_events.schema import MonitorActivitiesAndEventsOutput, Input
+from komand_sentinelone.tasks.monitor_logs import MonitorLogs
+from komand_sentinelone.tasks.monitor_logs.schema import MonitorLogsOutput, Input
 from util import Util
 from parameterized import parameterized
 from jsonschema import validate
@@ -80,11 +80,11 @@ STUB_STATE_ACTIVITIES_401 = {
 
 @freeze_time("2000-01-01T00:00:00.000000Z")
 @patch("requests.request", side_effect=Util.mocked_requests_get)
-class TestMonitorActivitiesAndEvents(TestCase):
+class TestMonitorLogs(TestCase):
     @classmethod
     @patch("requests.post", side_effect=Util.mocked_requests_get)
     def setUpClass(cls, mock_request) -> None:
-        cls.task = Util.default_connector(MonitorActivitiesAndEvents())
+        cls.task = Util.default_connector(MonitorLogs())
 
     @parameterized.expand(
         [
@@ -93,8 +93,8 @@ class TestMonitorActivitiesAndEvents(TestCase):
                 STUB_INPUT_PARAMS,
                 {},
                 {},
-                Util.read_file_to_dict("expected/monitor_activities_and_events.json.exp"),
-                STUB_STATE,
+                Util.read_file_to_dict("expected/monitor_logs.json.exp"),
+                STUB_STATE.copy(),
                 True,
                 200,
                 None,
@@ -104,8 +104,8 @@ class TestMonitorActivitiesAndEvents(TestCase):
                 STUB_INPUT_PARAMS,
                 {"last_run_timestamp": "1999-12-31T00:00:00.000000Z"},
                 {},
-                Util.read_file_to_dict("expected/monitor_activities_and_events.json.exp"),
-                STUB_STATE,
+                Util.read_file_to_dict("expected/monitor_logs.json.exp"),
+                STUB_STATE.copy(),
                 True,
                 200,
                 None,
@@ -113,10 +113,10 @@ class TestMonitorActivitiesAndEvents(TestCase):
             [
                 "pagination",
                 STUB_INPUT_PARAMS,
-                STUB_STATE,
+                STUB_STATE.copy(),
                 {},
-                Util.read_file_to_dict("expected/monitor_activities_and_events.json.exp"),
-                STUB_STATE,
+                Util.read_file_to_dict("expected/monitor_logs.json.exp"),
+                STUB_STATE.copy(),
                 True,
                 200,
                 None,
@@ -126,7 +126,7 @@ class TestMonitorActivitiesAndEvents(TestCase):
                 {Input.COLLECTACTIVITIES: True},
                 {},
                 {},
-                [Util.read_file_to_dict("expected/monitor_activities_and_events.json.exp")[0]],
+                [Util.read_file_to_dict("expected/monitor_logs.json.exp")[0]],
                 STUB_STATE_ACTIVITIES,
                 True,
                 200,
@@ -137,7 +137,7 @@ class TestMonitorActivitiesAndEvents(TestCase):
                 {Input.COLLECTEVENTS: True},
                 {},
                 {},
-                [Util.read_file_to_dict("expected/monitor_activities_and_events.json.exp")[1]],
+                [Util.read_file_to_dict("expected/monitor_logs.json.exp")[1]],
                 STUB_STATE_EVENTS,
                 True,
                 200,
@@ -148,7 +148,7 @@ class TestMonitorActivitiesAndEvents(TestCase):
                 {Input.COLLECTTHREATS: True},
                 {},
                 {},
-                [Util.read_file_to_dict("expected/monitor_activities_and_events.json.exp")[2]],
+                [Util.read_file_to_dict("expected/monitor_logs.json.exp")[2]],
                 STUB_STATE_THREATS,
                 True,
                 200,
@@ -156,7 +156,7 @@ class TestMonitorActivitiesAndEvents(TestCase):
             ],
         ]
     )
-    def test_monitor_activities_and_events(
+    def test_monitor_logss(
         self,
         mock_request,
         test_name,
@@ -177,7 +177,7 @@ class TestMonitorActivitiesAndEvents(TestCase):
         self.assertEqual(expected_has_more_pages, has_more_pages)
         self.assertEqual(expected_status_code, status_code)
         self.assertEqual(expected_error, error)
-        validate(output, MonitorActivitiesAndEventsOutput.schema)
+        validate(output, MonitorLogsOutput.schema)
 
     @parameterized.expand(
         [
@@ -186,7 +186,7 @@ class TestMonitorActivitiesAndEvents(TestCase):
                 STUB_INPUT_PARAMS,
                 {},
                 {"cutoff": 48},
-                Util.read_file_to_dict("expected/monitor_activities_and_events.json.exp"),
+                Util.read_file_to_dict("expected/monitor_logs.json.exp"),
                 STUB_STATE,
                 True,
                 200,
@@ -197,7 +197,7 @@ class TestMonitorActivitiesAndEvents(TestCase):
                 STUB_INPUT_PARAMS,
                 {},
                 {"cutoff": 48, "lookback": {"year": 1999, "month": 12, "day": 30, "hour": 0, "minute": 0, "second": 0}},
-                Util.read_file_to_dict("expected/monitor_activities_and_events.json.exp"),
+                Util.read_file_to_dict("expected/monitor_logs.json.exp"),
                 STUB_STATE_LOOKBACK,
                 True,
                 200,
@@ -208,7 +208,7 @@ class TestMonitorActivitiesAndEvents(TestCase):
                 STUB_INPUT_PARAMS,
                 STUB_STATE_CONTINUATION,
                 {"cutoff": 48, "lookback": {"year": 1999, "month": 12, "day": 30, "hour": 0, "minute": 0, "second": 0}},
-                Util.read_file_to_dict("expected/monitor_activities_and_events.json.exp"),
+                Util.read_file_to_dict("expected/monitor_logs.json.exp"),
                 STUB_STATE_CONTINUATION,
                 True,
                 200,
@@ -219,7 +219,7 @@ class TestMonitorActivitiesAndEvents(TestCase):
                 {Input.COLLECTACTIVITIES: True},
                 STUB_STATE,
                 {"cutoff": 48, "lookback": {"year": 1999, "month": 12, "day": 30, "hour": 0, "minute": 0, "second": 0}},
-                [Util.read_file_to_dict("expected/monitor_activities_and_events.json.exp")[0]],
+                [Util.read_file_to_dict("expected/monitor_logs.json.exp")[0]],
                 STUB_STATE,
                 True,
                 200,
@@ -227,7 +227,7 @@ class TestMonitorActivitiesAndEvents(TestCase):
             ],
         ]
     )
-    def test_monitor_activities_and_events_custom_config(
+    def test_monitor_logs_custom_config(
         self,
         mock_request,
         test_name,
@@ -248,7 +248,7 @@ class TestMonitorActivitiesAndEvents(TestCase):
         self.assertEqual(expected_has_more_pages, has_more_pages)
         self.assertEqual(expected_status_code, status_code)
         self.assertEqual(expected_error, error)
-        validate(output, MonitorActivitiesAndEventsOutput.schema)
+        validate(output, MonitorLogsOutput.schema)
 
     @parameterized.expand(
         [
@@ -289,7 +289,7 @@ class TestMonitorActivitiesAndEvents(TestCase):
             ],
         ]
     )
-    def test_monitor_activites_and_events_api_errors(
+    def test_monitor_logs_api_errors(
         self, mock_request, test_name, state, expected_status_code, expected_cause, expected_assistance
     ):
         output, state, has_more_pages, status_code, error = self.task.run(
@@ -300,11 +300,11 @@ class TestMonitorActivitiesAndEvents(TestCase):
         self.assertEqual(expected_cause, error.cause)
         self.assertEqual(expected_assistance, error.assistance)
 
-    def test_monitor_activitites_and_events_forbidden_error(self, mock_request):
+    def test_monitor_logs_forbidden_error(self, mock_request):
         params = STUB_INPUT_PARAMS
         state = STUB_STATE_ACTIVITIES_401
         output, state, has_more_pages, status_code, error = self.task.run(params=params, state=state)
-        expected_output = Util.read_file_to_dict("expected/monitor_activities_and_events.json.exp")[1:]
+        expected_output = Util.read_file_to_dict("expected/monitor_logs.json.exp")[1:]
         expected_state = STUB_STATE
         expected_state["activities_page_cursor"] = None
         self.assertEqual(expected_output, output)
@@ -312,4 +312,4 @@ class TestMonitorActivitiesAndEvents(TestCase):
         self.assertEqual(True, has_more_pages)
         self.assertEqual(200, status_code)
         self.assertEqual(None, error)
-        validate(output, MonitorActivitiesAndEventsOutput.schema)
+        validate(output, MonitorLogsOutput.schema)

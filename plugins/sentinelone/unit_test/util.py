@@ -184,14 +184,12 @@ class Util:
             if params in [
                 {
                     "limit": 1000,
+                    "sortBy": "createdAt",
                     "createdAt__gt": "1999-12-31T00:00:00.000000Z",
                     "createdAt__lte": "2000-01-01T00:00:00.000000Z",
-                    "sortBy": "createdAt",
                 },
                 {
                     "limit": 1000,
-                    "createdAt__gt": "1999-12-31T00:00:00.000000Z",
-                    "createdAt__lte": "2000-01-01T00:00:00.000000Z",
                     "sortBy": "createdAt",
                     "cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
                 },
@@ -202,11 +200,9 @@ class Util:
                     "sortBy": "createdAt",
                 },
             ]:
-                return MockResponse(200, "monitor_a_and_e_activities")
+                return MockResponse(200, "monitor_logs_activities")
             if params == {
                 "limit": 1000,
-                "createdAt__gt": "1999-12-31T00:00:00.000000Z",
-                "createdAt__lte": "2000-01-01T00:00:00.000000Z",
                 "sortBy": "createdAt",
                 "cursor": "ZWdlbnRfaWQ6NTgwMjkzODE=",
             }:
@@ -350,7 +346,7 @@ class Util:
                 return MockResponse(200, "threats_same_status")
             if params.get("ids") in [["non_existing_threat_id_1"], ["0000000000000000000"]]:
                 return MockResponse(200, "threats_not_found")
-            return MockResponse(200, "monitor_a_and_e_threats")
+            return MockResponse(200, "monitor_logs_threats")
         elif args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/cloud-detection/alerts":
             if params.get("ids") in [["valid_alert_id_1"], ["valid_alert_id_2"]]:
                 return MockResponse(200, "alerts")
@@ -421,5 +417,5 @@ class Util:
             elif json_data.get("data", {}).get("targetSiteId", "") == "1234567891234567891":
                 return MockResponse(200, "move_between_sites_data")
         elif args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/device-control/events":
-            return MockResponse(200, "monitor_a_and_e_events")
+            return MockResponse(200, "monitor_logs_events")
         return MockResponse(404)

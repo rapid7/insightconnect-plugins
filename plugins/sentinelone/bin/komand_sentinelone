@@ -96,7 +96,7 @@ def main():
         
             self.add_action(actions.MoveBetweenSites())
         
-            self.add_task(tasks.MonitorActivitiesAndEvents())
+            self.add_task(tasks.MonitorLogs())
         
 
     """Run plugin"""

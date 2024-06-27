@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Monitor for new activities, events, and threats"
+    DESCRIPTION = "Monitor for new activities, device control events, and threats"
 
 
 class Input:
@@ -21,7 +21,7 @@ class Output:
     LOGS = "logs"
 
 
-class MonitorActivitiesAndEventsInput(insightconnect_plugin_runtime.Input):
+class MonitorLogsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
    {
   "type": "object",
@@ -57,7 +57,7 @@ class MonitorActivitiesAndEventsInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class MonitorActivitiesAndEventsState(insightconnect_plugin_runtime.State):
+class MonitorLogsState(insightconnect_plugin_runtime.State):
     schema = json.loads(r"""
    {}
     """)
@@ -66,12 +66,12 @@ class MonitorActivitiesAndEventsState(insightconnect_plugin_runtime.State):
         super(self.__class__, self).__init__(self.schema)
 
 
-class MonitorActivitiesAndEventsOutput(insightconnect_plugin_runtime.Output):
+class MonitorLogsOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads(r"""
    {
   "type": "array",
   "title": "Logs",
-  "description": "List of activity, event and threat logs within the specified time range",
+  "description": "List of activity, device control event, and threat logs within the specified time range",
   "items": {
     "type": "object"
   },
