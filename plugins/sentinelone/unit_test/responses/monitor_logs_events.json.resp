@@ -4,7 +4,7 @@
       "id": "225494730938493804",
       "profileUuids": "string",
       "lmpVersion": "string",
-      "eventTime": "2018-02-27T04:49:26.257525Z",
+      "eventTime": "1999-12-31T00:00:00.000000Z",
       "accessPermission": "Read-Only",
       "computerName": "JOHN-WIN-4125",
       "serviceClass": "02",
@@ -21,7 +21,7 @@
       "minorClass": "string",
       "agentId": "225494730938493804",
       "lastLoggedInUserName": "janedoe3",
-      "createdAt": "2018-02-27T04:49:26.257525Z",
+      "createdAt": "1999-12-31T00:00:00.000000Z",
       "deviceId": "02"
     }
   ],

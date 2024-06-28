@@ -79,7 +79,7 @@
         "mitigationStatus": "not_mitigated",
         "fileVerificationType": "string",
         "failedActions": "boolean",
-        "createdAt": "2018-02-27T04:49:26.257525Z",
+        "createdAt": "1999-12-31T00:00:00.000000Z",
         "initiatingUsername": "string",
         "incidentStatus": "unresolved",
         "isValidCertificate": "boolean",

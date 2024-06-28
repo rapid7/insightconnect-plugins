@@ -20,60 +20,73 @@ STUB_INPUT_PARAMS = {
 }
 
 STUB_STATE = {
-    "activities_last_log_timestamp": "2018-02-27T04:49:26.257525Z",
+    "activities_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
     "activities_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
-    "events_last_log_timestamp": "2018-02-27T04:49:26.257525Z",
+    "events_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
     "events_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
     "last_run_timestamp": "1999-12-31T00:00:00.000000Z",
-    "threats_last_log_timestamp": "2018-02-27T04:49:26.257525Z",
+    "threats_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
+    "threats_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
+}
+
+STUB_STATE_NO_CURSOR = {
+    "activities_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
+    "events_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
+    "last_run_timestamp": "1999-12-31T00:00:00.000000Z",
+    "threats_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
+}
+
+STUB_STATE_EXPECTED = {
+    "activities_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
+    "activities_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
+    "events_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
+    "events_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
+    "threats_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
     "threats_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
 }
 
 STUB_STATE_ACTIVITIES = {
-    "activities_last_log_timestamp": "2018-02-27T04:49:26.257525Z",
+    "activities_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
     "activities_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
-    "last_run_timestamp": "1999-12-31T00:00:00.000000Z",
 }
 
 STUB_STATE_EVENTS = {
-    "events_last_log_timestamp": "2018-02-27T04:49:26.257525Z",
+    "events_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
     "events_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
-    "last_run_timestamp": "1999-12-31T00:00:00.000000Z",
 }
 
 STUB_STATE_THREATS = {
-    "last_run_timestamp": "1999-12-31T00:00:00.000000Z",
-    "threats_last_log_timestamp": "2018-02-27T04:49:26.257525Z",
+    "threats_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
     "threats_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
 }
 
 STUB_STATE_LOOKBACK = {
-    "activities_last_log_timestamp": "2018-02-27T04:49:26.257525Z",
+    "activities_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
     "activities_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
-    "events_last_log_timestamp": "2018-02-27T04:49:26.257525Z",
+    "events_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
     "events_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
     "last_run_timestamp": "1999-12-30T00:00:00.000000Z",
-    "threats_last_log_timestamp": "2018-02-27T04:49:26.257525Z",
+    "threats_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
     "threats_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
 }
 
 STUB_STATE_CONTINUATION = {
-    "activities_last_log_timestamp": "2018-02-27T04:49:26.257525Z",
+    "activities_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
     "activities_page_cursor": None,
-    "events_last_log_timestamp": "2018-02-27T04:49:26.257525Z",
+    "events_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
     "events_page_cursor": None,
     "last_run_timestamp": "1999-12-30T00:00:00.000000Z",
-    "threats_last_log_timestamp": "2018-02-27T04:49:26.257525Z",
+    "threats_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
     "threats_page_cursor": None,
 }
 
 STUB_STATE_ACTIVITIES_401 = {
-    "activities_last_log_timestamp": "2018-02-27T04:49:26.257525Z",
+    "activities_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
     "activities_page_cursor": "ZWdlbnRfaWQ6NTgwMjkzODE=",
-    "events_last_log_timestamp": "2018-02-27T04:49:26.257525Z",
+    "events_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
     "events_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
     "last_run_timestamp": "1999-12-31T00:00:00.000000Z",
-    "threats_last_log_timestamp": "2018-02-27T04:49:26.257525Z",
+    "threats_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
     "threats_page_cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
 }
 
@@ -94,7 +107,7 @@ class TestMonitorLogs(TestCase):
                 {},
                 {},
                 Util.read_file_to_dict("expected/monitor_logs.json.exp"),
-                STUB_STATE.copy(),
+                STUB_STATE_EXPECTED,
                 True,
                 200,
                 None,
@@ -102,7 +115,7 @@ class TestMonitorLogs(TestCase):
             [
                 "continuation",
                 STUB_INPUT_PARAMS,
-                {"last_run_timestamp": "1999-12-31T00:00:00.000000Z"},
+                STUB_STATE_NO_CURSOR,
                 {},
                 Util.read_file_to_dict("expected/monitor_logs.json.exp"),
                 STUB_STATE.copy(),
@@ -187,7 +200,7 @@ class TestMonitorLogs(TestCase):
                 {},
                 {"cutoff": 48},
                 Util.read_file_to_dict("expected/monitor_logs.json.exp"),
-                STUB_STATE,
+                STUB_STATE_EXPECTED,
                 True,
                 200,
                 None,
@@ -198,7 +211,7 @@ class TestMonitorLogs(TestCase):
                 {},
                 {"cutoff": 48, "lookback": {"year": 1999, "month": 12, "day": 30, "hour": 0, "minute": 0, "second": 0}},
                 Util.read_file_to_dict("expected/monitor_logs.json.exp"),
-                STUB_STATE_LOOKBACK,
+                STUB_STATE_EXPECTED,
                 True,
                 200,
                 None,
