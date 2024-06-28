@@ -19,12 +19,16 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
       "description": "Credential secret API key",
+      "placeholder": "API Key",
+      "tooltip": "Enter an API Key with adequate permissions",
       "order": 2
     },
     "instance": {
       "type": "string",
       "title": "Instance",
       "description": "SentinelOne Console instance e.g. https://<example-instance>.sentinelone.net",
+      "placeholder": "Instance",
+      "tooltip": "Enter the subdomain associated with your SentinelOne instance",
       "order": 3
     },
     "userType": {
@@ -32,6 +36,8 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "User Type",
       "description": "Type of user",
       "default": "Console user",
+      "placeholder": "User Type",
+      "tooltip": "Select the user type linked to your API Key",
       "enum": [
         "Console user",
         "Service user"
