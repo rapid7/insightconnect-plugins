@@ -35,6 +35,7 @@ from komand_sentinelone.util.endpoints import (
     CANCEL_QUERY_ENDPOINT,
     CREATE_IOC_THREAT_ENDPOINT,
     CREATE_QUERY_ENDPOINT,
+    DEVICE_CONTROL_EVENTS,
     DISABLE_AGENT_ENDPOINT,
     ENABLE_AGENT_ENDPOINT,
     FETCH_FILE_BY_AGENT_ID_ENDPOINT,
@@ -138,6 +139,17 @@ class SentineloneAPI:
             return self.get_all_paginated_results(GET_EVENTS_ENDPOINT, params)
         return self._call_api("GET", GET_EVENTS_ENDPOINT, params=params)
 
+    def get_device_control_events(
+        self, params: dict, full_response: bool = False, raise_for_status: bool = True
+    ) -> dict:
+        return self._call_api(
+            "GET",
+            DEVICE_CONTROL_EVENTS,
+            params=params,
+            full_response=full_response,
+            raise_for_status=raise_for_status,
+        )
+
     def get_existing_blacklist(self, blacklist_hash: str) -> bool:
         ids = self.get_item_ids_by_hash(blacklist_hash)
         ids = Helper.join_or_empty(ids)
@@ -225,10 +237,19 @@ class SentineloneAPI:
     def get_alerts(self, params: dict) -> dict:
         return self._call_api("GET", ALERTS_ENDPOINT, params=params)
 
-    def get_threats(self, params: dict, api_version: str = "2.0") -> dict:
+    def get_threats(
+        self, params: dict, api_version: str = "2.0", full_response: bool = False, raise_for_status: bool = True
+    ) -> dict:
         # GET /threats has different response schemas for 2.1 and 2.0
         # Use 2.0 endpoint to be consistent and support as many S1 consoles as possible
-        return self._call_api("GET", THREAT_SUMMARY_ENDPOINT, params=params, override_api_version=api_version)
+        return self._call_api(
+            "GET",
+            THREAT_SUMMARY_ENDPOINT,
+            params=params,
+            override_api_version=api_version,
+            full_response=full_response,
+            raise_for_status=raise_for_status,
+        )
 
     def check_if_threats_exist(self, threat_ids: List[str]):
         threats = self.get_threats({"ids": threat_ids}, api_version="2.1")
@@ -275,8 +296,14 @@ class SentineloneAPI:
                 data=error.args,
             )
 
-    def get_activities_list(self, params: dict) -> dict:
-        return self._call_api("GET", "activities", params=params)
+    def get_activities_list(self, params: dict, full_response: bool = False, raise_for_status: bool = True) -> dict:
+        return self._call_api(
+            "GET",
+            "activities",
+            params=params,
+            full_response=full_response,
+            raise_for_status=raise_for_status,
+        )
 
     def get_activity_types(self) -> dict:
         return self._call_api("GET", ACTIVITY_TYPES_ENDPOINT)
@@ -475,6 +502,7 @@ class SentineloneAPI:
         params: dict = None,
         full_response: bool = False,
         override_api_version: str = "",
+        raise_for_status: bool = True,
     ):
         # We prefer to use the same api version from the token creation,
         # But some actions require 2.0 and not 2.1 (and vice versa), in that case just pass in the right version
@@ -494,7 +522,8 @@ class SentineloneAPI:
                 params=params,
                 headers=self.make_headers(),
             )
-            self.raise_for_status(response)
+            if raise_for_status:
+                self.raise_for_status(response)
             if full_response:
                 return response
             return response.json()
