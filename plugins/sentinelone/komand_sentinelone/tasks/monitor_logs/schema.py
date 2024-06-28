@@ -32,6 +32,8 @@ class MonitorLogsInput(insightconnect_plugin_runtime.Input):
       "title": "Collect Activities",
       "description": "Whether to collect activity logs (note requires appropriate permissions assigned to user)",
       "default": true,
+      "placeholder": true,
+      "tooltip": "Whether or not to query for new activity logs",
       "order": 1
     },
     "collectEvents": {
@@ -39,6 +41,8 @@ class MonitorLogsInput(insightconnect_plugin_runtime.Input):
       "title": "Collect Events",
       "description": "Whether to collect device control events logs (note requires appropriate permissions assigned to user)",
       "default": true,
+      "placeholder": true,
+      "tooltip": "Whether or not to query for new device control event logs",
       "order": 2
     },
     "collectThreats": {
@@ -46,6 +50,8 @@ class MonitorLogsInput(insightconnect_plugin_runtime.Input):
       "title": "Collect Threats",
       "description": "Whether to collect threats logs (note requires appropriate permissions assigned to user)",
       "default": true,
+      "placeholder": true,
+      "tooltip": "Whether or not to query for new threat logs",
       "order": 3
     }
   },

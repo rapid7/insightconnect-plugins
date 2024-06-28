@@ -43,9 +43,9 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|apiKey|credential_secret_key|None|True|Credential secret API key|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
-|instance|string|None|True|SentinelOne Console instance e.g. https://<example-instance>.sentinelone.net|None|example-instance|None|None|
-|userType|string|Console user|True|Type of user|["Console user", "Service user"]|Console user|None|None|
+|apiKey|credential_secret_key|None|True|Credential secret API key|None|9de5069c5afe602b2ea0a04b66beb2c0|API Key|Enter an API Key with adequate permissions|
+|instance|string|None|True|SentinelOne Console instance e.g. https://<example-instance>.sentinelone.net|None|example-instance|Instance|Enter the subdomain associated with your SentinelOne instance|
+|userType|string|Console user|True|Type of user|["Console user", "Service user"]|Console user|User Type|Select the user type linked to your API Key|
 
 Example input:
 
@@ -1727,9 +1727,9 @@ This task is used to monitor for new activities, device control events, and thre
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|collectActivities|bool|True|False|Whether to collect activity logs (note requires appropriate permissions assigned to user)|None|False|None|None|
-|collectEvents|bool|True|False|Whether to collect device control events logs (note requires appropriate permissions assigned to user)|None|False|None|None|
-|collectThreats|bool|True|False|Whether to collect threats logs (note requires appropriate permissions assigned to user)|None|False|None|None|
+|collectActivities|bool|True|False|Whether to collect activity logs (note requires appropriate permissions assigned to user)|None|False|True|Whether or not to query for new activity logs|
+|collectEvents|bool|True|False|Whether to collect device control events logs (note requires appropriate permissions assigned to user)|None|False|True|Whether or not to query for new device control event logs|
+|collectThreats|bool|True|False|Whether to collect threats logs (note requires appropriate permissions assigned to user)|None|False|True|Whether or not to query for new threat logs|
   
 Example input:
 
