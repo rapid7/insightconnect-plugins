@@ -96,7 +96,9 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             has_more_pages = self.determine_next_pagination_cycle(state, lookback_timestamp, current_run_timestamp)
             return all_logs, state, has_more_pages, 200, None
         except ApiException as error:
-            self.logger.info(f"Error: An API exception has occurred. Status code {error.status_code} returned.")
+            self.logger.info(
+                f"Error: An API exception has occurred. Status code {error.status_code} returned. Error data {error.data}."
+            )
             return [], existing_state, False, error.status_code, error
         except Exception as error:
             self.logger.info(f"Error: Unknown exception has occurred. No results returned. Error Data: {error}")
