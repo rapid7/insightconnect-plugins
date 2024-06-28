@@ -1697,18 +1697,24 @@ connection:
       - Service user
     example: Console user
     default: Console user
+    placeholder: User Type
+    tooltip: Select the user type linked to your API Key
   apiKey:
     title: API Key
     description: Credential secret API key
     type: credential_secret_key
     required: true
     example: 9de5069c5afe602b2ea0a04b66beb2c0
+    placeholder: API Key
+    tooltip: Enter an API Key with adequate permissions
   instance:
     title: Instance
     description: SentinelOne Console instance e.g. https://<example-instance>.sentinelone.net
     type: string
     required: true
     example: example-instance
+    placeholder: Instance
+    tooltip: Enter the subdomain associated with your SentinelOne instance
 actions:
   get_threat_summary:
     title: Get Threat Summary
@@ -3124,6 +3130,8 @@ tasks:
         required: false
         default: true
         example: false
+        placeholder: true
+        tooltip: Whether or not to query for new activity logs
       collectEvents:
         title: Collect Events
         description: Whether to collect device control events logs (note requires appropriate permissions assigned to user)
@@ -3131,6 +3139,8 @@ tasks:
         required: false
         default: true
         example: false
+        placeholder: true
+        tooltip: Whether or not to query for new device control event logs
       collectThreats:
         title: Collect Threats
         description: Whether to collect threats logs (note requires appropriate permissions assigned to user)
@@ -3138,6 +3148,8 @@ tasks:
         required: false
         default: true
         example: false
+        placeholder: true
+        tooltip: Whether or not to query for new threat logs
     output:
       logs:
         title: Logs
