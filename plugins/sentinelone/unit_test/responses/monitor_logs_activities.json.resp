@@ -1,0 +1,40 @@
+{
+  "data": [
+    {
+      "id": "225494730938493804",
+      "comments": "string",
+      "osFamily": "macos",
+      "siteName": "string",
+      "accountId": "225494730938493804",
+      "agentUpdatedVersion": "2.5.1.1320",
+      "primaryDescription": "string",
+      "description": "string",
+      "activityType": "integer",
+      "threatId": "225494730938493804",
+      "activityUuid": "string",
+      "data": {
+        "computer_name": "COMP_1234",
+        "username": "my_user"
+      },
+      "hash": "string",
+      "groupName": "string",
+      "userId": "225494730938493804",
+      "groupId": "225494730938493804",
+      "secondaryDescription": "string",
+      "updatedAt": "2018-02-27T04:49:26.257525Z",
+      "accountName": "string",
+      "agentId": "225494730938493804",
+      "siteId": "225494730938493804",
+      "createdAt": "1999-12-31T00:00:00.000000Z"
+    }
+  ],
+  "pagination": {
+    "totalItems": 580,
+    "nextCursor": "YWdlbnRfaWQ6NTgwMjkzODE="
+  },
+  "errors": [
+    {
+      "type": "object"
+    }
+  ]
+}
