@@ -4,10 +4,13 @@ products: [insightconnect]
 name: microsoft_defender_incidents
 title: Microsoft Defender Incidents
 description: Manage security incidents with Microsoft Defender 365
-version: 1.0.0
+version: 2.0.0
+connection_version: 2
+key_features: ["List All Incidents", "Get Incident", "Update Incident", "Get New Incidents Trigger"]
+requirements: ["Requires a set of Azure credentials such as application (client) ID, tenant ID, and client secret key with necessary permissions (Microsoft Threat Protection -> Incident.Read.All, Incident.ReadWrite.All, and AdvancedHunting.Read.All) to monitor and modify Microsoft Defender Incidents"]
 vendor: rapid7
 support: rapid7
-supported_versions: ["2022-05-06"]
+supported_versions: ["2024-06-24"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/microsoft_defender_incidents
@@ -17,23 +20,32 @@ tags:
   - cloud
   - microsoft
   - defender
+sdk:
+  type: slim
+  version: 5.5.5
+  user: nobody
 hub_tags:
   use_cases: [data_utility]
   keywords: [microsoft, defender]
   features: []
 enable_cache: false
+links:
+  - "[Microsoft Defender Incidents](https://docs.microsoft.com/en-us/microsoft-365/security/defender/api-incident?view=o365-worldwide)"
+references:
+  - "[Microsoft Defender XDR API Documentation](https://learn.microsoft.com/en-us/defender-xdr/)"
+version_history:
+  - "2.0.0 - Add better error handling for missing output values"
+  - "1.0.0 - Initial plugin (Actions: List All Incidents, Get Incident, Update Incident, Triggers: Get New Incidents)"
 connection:
   client_id:
     title: Client ID
-    description: The application ID that the application registration portal assigned
-      to your app
+    description: The application ID that the application registration portal assigned to your app
     type: string
     required: true
     example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
   client_secret:
     title: Client Secret
-    description: The application secret that you generated for your app in the app
-      registration portal
+    description: The application secret that you generated for your app in the appregistration portal
     type: credential_secret_key
     required: true
     example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
@@ -394,13 +406,13 @@ actions:
         description: Minimum time the incident was created in ISO format
         type: date
         required: false
-        example: 2022-05-06T12:20:18.364306
+        example: "2022-05-06T12:20:18.364306"
       last_update_time:
         title: Last Update Time
         description: Minimum time the incident was updated in ISO format
         type: date
         required: false
-        example: 2022-05-06T12:20:18.364306
+        example: "2022-05-06T12:20:18.364306"
       assigned_to:
         title: Assigned To
         description: Filters incidents by who they were assigned to
@@ -413,6 +425,7 @@ actions:
         description: List of all found incidents
         type: "[]incident"
         required: true
+        example: [{"incidentId": 924518, "incidentName": "Email reported by user as malware or phish", "createdTime": "2020-09-06T12:07:55.1366667Z", "lastUpdateTime": "2020-09-06T12:07:55.32Z", "classification": "Unknown", "determination": "NotAvailable", "status": "Active", "severity": "Informational", "alerts": [ { "alertId": "faf8edc936-85f8-a603-b800-08d8525cf099", "incidentId": 924518, "serviceSource": "OfficeATP", "creationTime": "2020-09-06T12:07:54.3716642Z", "lastUpdatedTime": "2020-09-06T12:37:40.88Z", "firstActivity": "2020-09-06T12:04:00Z", "lastActivity": "2020-09-06T12:04:00Z", "title": "Email reported by user as malware or phish", "description": "This alert is triggered when any email message is reported as malware or phish by users -V1.0.0.2", "category": "InitialAccess", "status": "InProgress", "severity": "Informational", "investigationState": "Queued", "detectionSource": "OfficeATP", "assignedTo": "Automation", "entities": [ { "entityType": "MailBox", "userPrincipalName": "user@example.com", "mailboxDisplayName": "user", "mailboxAddress": "user@example.com" }]}]}]
   get_incident:
     title: Get Incident by ID
     description: Retrieves specific incident by ID
@@ -429,61 +442,73 @@ actions:
         description: Identifier of incident
         type: integer
         required: true
+        example: 1
       incidentName:
         title: Incident Name
         description: String value containing incident's name
         type: string
         required: true
+        example: "IncidentName"
       createdTime:
         title: Created Time
         description: Time when incident was first created
         type: date
         required: true
+        example: "2022-05-06T12:20:18.364306"
       lastUpdateTime:
         title: Last Updated Time
         description: Time when incident was last updated on the backend
         type: date
         required: true
+        example: "2022-05-06T12:20:18.364306"
       assignedTo:
         title: Assigned To
         description: Owner of the incident
         type: string
         required: true
+        example: "user@example.com"
       classification:
         title: Classification
         description: Specification for the incident, where possible values are - Unknown, FalsePositive, and TruePositive
         type: string
         required: true
+        example: "Unknown"
       determination:
         title: Determination
         description: Specifies the determination of the incident, where possible values are - NotAvailable, Apt, Malware, SecurityPersonnel, SecurityTesting, UnwantedSoftware, and Other
         type: string
         required: true
+        example: "NotAvailable"
       status:
         title: Status
         description: Categorize incidents, where possible values are - Active, InProgress, Resolved, and Redirected
         type: string
         required: true
+        example: "Active"
       severity:
         title: Severity
         description: Indicates the possible impact on assets, where possible values are - Informational, Low, Medium, and High
         type: string
         required: true
+        example: "Informational"
       tags:
         title: Tags
         description: Array of custom tags associated with an incident
         type: "[]string"
         required: true
+        example: [ { "comment": "pen testing", "createdBy": "user@example.com", "createdTime": "2021-05-02T09:34:21.5519738Z" }, { "comment": "valid incident", "createdBy": "user@example.com", "createdTime": "2021-05-02T09:36:27.6652581Z" } ]
       comments:
         title: Comments
         description: Array of comments created by secops when managing the incident
         type: "[]comment"
         required: true
+        example: [{"comment": "pen testing","createdBy": "user@example.com","createdTime": "2021-05-02T09:34:21.5519738Z"},{"comment": "valid incident","createdBy": "user@example.com","createdTime": "2021-05-02T09:36:27.6652581Z"}]
       alerts:
         title: Alerts
         description: Array containing all of the alerts related to the incident
         type: "[]alert"
         required: true
+        example: [{"alertId": "faf8edc936-85f8-a603-b800-08d8525cf099","incidentId": 924518,"serviceSource": "OfficeATP","creationTime": "2020-09-06T12:07:54.3716642Z","lastUpdatedTime": "2020-09-06T12:37:40.88Z","firstActivity": "2020-09-06T12:04:00Z","lastActivity": "2020-09-06T12:04:00Z","title": "Email reported by user as malware or phish","description": "This alert is triggered when any email message is reported as malware or phish by users -V1.0.0.2","category": "InitialAccess","status": "InProgress","severity": "Informational","investigationState": "Queued","detectionSource": "OfficeATP","assignedTo": "Automation","entities": [{"entityType": "MailBox","userPrincipalName": "user@example.com","mailboxDisplayName": "user","mailboxAddress": "user@example.com"}]}]
   update_incident:
     title: Update Incident by ID
     description: Updates specific incident by ID
@@ -555,65 +580,77 @@ actions:
         description: Identifier of incident
         type: integer
         required: true
+        example: 1
       incidentName:
         title: Incident Name
         description: String value containing incident's name
         type: string
         required: true
+        example: "IncidentName"
       createdTime:
         title: Created Time
         description: Time when incident was first created
         type: date
         required: true
+        example: "2022-05-06T12:20:18.364306"
       lastUpdateTime:
         title: Last Updated Time
         description: Time when incident was last updated on the backend
         type: date
         required: true
+        example: "2022-05-06T12:20:18.364306"
       assignedTo:
         title: Assigned To
         description: Owner of the incident
         type: string
         required: true
+        example: "user@example.com"
       classification:
         title: Classification
         description: Specification for the incident, where possible values are - Unknown, FalsePositive, and TruePositive
         type: string
         required: true
+        example: TruePositive
       determination:
         title: Determination
         description: Specifies the determination of the incident, where possible values are - NotAvailable, Apt, Malware, SecurityPersonnel, SecurityTesting, UnwantedSoftware, and Other
         type: string
         required: true
+        example: Malware
       status:
         title: Status
         description: Categorize incidents, where possible values are - Active, InProgress, Resolved, and Redirected
         type: string
         required: true
+        example: "Resolved"
       severity:
         title: Severity
         description: Indicates the possible impact on assets, where possible values are - Informational, Low, Medium, and High
         type: string
+        example: "Informational"
         required: true
       tags:
         title: Tags
         description: Array of custom tags associated with an incident
         type: "[]string"
         required: true
+        example: ["Test1","Test2"]
       comments:
         title: Comments
         description: Array of comments created by secops when managing the incident
         type: "[]comment"
         required: true
+        example: [{"comment": "pen testing","createdBy": "user@example.com","createdTime": "2021-05-02T09:34:21.5519738Z"},{"comment": "valid incident","createdBy": "user@example.com","createdTime": "2021-05-02T09:36:27.6652581Z"}]
       alerts:
         title: Alerts
         description: Array containing all of the alerts related to the incident
         type: "[]alert"
-        required: true
+        required: false
+        example: [{"alertId": "faf8edc936-85f8-a603-b800-08d8525cf099","incidentId": 924518,"serviceSource": "OfficeATP","creationTime": "2020-09-06T12:07:54.3716642Z","lastUpdatedTime": "2020-09-06T12:37:40.88Z","firstActivity": "2020-09-06T12:04:00Z","lastActivity": "2020-09-06T12:04:00Z","title": "Email reported by user as malware or phish","description": "This alert is triggered when any email message is reported as malware or phish by users -V1.0.0.2","category": "InitialAccess","status": "InProgress","severity": "Informational","investigationState": "Queued","detectionSource": "OfficeATP","assignedTo": "Automation","entities": [{"entityType": "MailBox","userPrincipalName": "user@example.com","mailboxDisplayName": "user","mailboxAddress": "user@example.com"}]}]
 triggers:
   get_new_incidents:
     title: Get New Incidents
-    description: Retrieves all new incidents with specific status within interval time
+    description: Retrieve all new incidents with specific status within interval time
     input:
       interval:
         title: Interval
@@ -640,7 +677,7 @@ triggers:
         description: Minimum time the incident was updated in ISO format
         type: date
         required: false
-        example: 2022-05-06T12:20:18.364306
+        example: "2022-05-06T12:20:18.364306"
       assigned_to:
         title: Assigned To
         description: Filters incidents by who they were assigned to
@@ -653,3 +690,4 @@ triggers:
         description: List of all found incidents
         type: "[]incident"
         required: true
+        example: [{"incidentId": 924518,"incidentName": "Email reported by user as malware or phish","createdTime": "2020-09-06T12:07:55.1366667Z","lastUpdateTime": "2020-09-06T12:07:55.32Z","classification": "Unknown","determination": "NotAvailable","status": "Active","severity": "Informational","alerts": [{"alertId": "faf8edc936-85f8-a603-b800-08d8525cf099","incidentId": 924518,"serviceSource": "OfficeATP","creationTime": "2020-09-06T12:07:54.3716642Z","lastUpdatedTime": "2020-09-06T12:37:40.88Z","firstActivity": "2020-09-06T12:04:00Z","lastActivity": "2020-09-06T12:04:00Z","title": "Email reported by user as malware or phish","description": "This alert is triggered when any email message is reported as malware or phish by users -V1.0.0.2","category": "InitialAccess","status": "InProgress","severity": "Informational","investigationState": "Queued","detectionSource": "OfficeATP","assignedTo": "Automation","entities": [{"entityType": "MailBox","userPrincipalName": "user@example.com","mailboxDisplayName": "user","mailboxAddress": "user@example.com"}]}]}]
