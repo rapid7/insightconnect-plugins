@@ -157,7 +157,7 @@ def fill_required_fields(input_dict: Dict[str, Any]) -> dict:
         {"name": "classification", "default": "Unknown"},
         {"name": "determination", "default": "NotAvailable"},
         {"name": "status", "default": "Active"},
-        {"name": "severity", "default": "Informational"}
+        {"name": "severity", "default": "Informational"},
     ]
 
     output_dict = input_dict.copy()
