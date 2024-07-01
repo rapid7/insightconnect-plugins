@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:5.4.9
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:5.5.5
 
 LABEL organization=rapid7
 LABEL sdk=python

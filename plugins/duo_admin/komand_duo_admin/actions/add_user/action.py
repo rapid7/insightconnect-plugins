@@ -34,8 +34,6 @@ class AddUser(insightconnect_plugin_runtime.Action):
             "status": params.get(Input.STATUS),
             "notes": params.get(Input.NOTES),
             "email": params.get(Input.EMAIL),
-            "firstname": params.get(Input.FIRSTNAME),
-            "lastname": params.get(Input.LASTNAME),
             **aliases_object,
         }
 

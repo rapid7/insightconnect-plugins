@@ -99,12 +99,6 @@ class GetUserByUsernameOutput(insightconnect_plugin_runtime.Output):
           "description": "The user's email address",
           "order": 7
         },
-        "firstname": {
-          "type": "string",
-          "title": "First Name",
-          "description": "The user's given name",
-          "order": 8
-        },
         "groups": {
           "type": "array",
           "title": "Groups",
@@ -112,37 +106,31 @@ class GetUserByUsernameOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "$ref": "#/definitions/group"
           },
-          "order": 9
+          "order": 8
         },
         "isEnrolled": {
           "type": "boolean",
           "title": "Is Enrolled",
           "description": "Whether the user has a phone, hardware token, U2F token, WebAuthn security key, or other WebAuthn method available for authentication",
-          "order": 10
+          "order": 9
         },
         "lastDirectorySync": {
           "type": "integer",
           "title": "Last Directory Sync",
           "description": "An integer indicating the last update to the user via directory sync as a Unix timestamp, or null if the user has never synced with an external directory or if the directory that originally created the user has been deleted from Duo",
-          "order": 11
+          "order": 10
         },
         "lastLogin": {
           "type": "integer",
           "title": "Last Login",
           "description": "An integer indicating the last time this user logged in, as a Unix timestamp, or null if the user has not logged in",
-          "order": 12
-        },
-        "lastname": {
-          "type": "string",
-          "title": "Last Name",
-          "description": "The user's surname",
-          "order": 13
+          "order": 11
         },
         "notes": {
           "type": "string",
           "title": "Notes",
           "description": "Notes about this user",
-          "order": 14
+          "order": 12
         },
         "phones": {
           "type": "array",
@@ -151,19 +139,19 @@ class GetUserByUsernameOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "$ref": "#/definitions/phoneUser"
           },
-          "order": 15
+          "order": 13
         },
         "realname": {
           "type": "string",
           "title": "Real Name",
           "description": "The user's real name or full name",
-          "order": 16
+          "order": 14
         },
         "status": {
           "type": "string",
           "title": "Status",
           "description": "The user's status",
-          "order": 17
+          "order": 15
         },
         "tokens": {
           "type": "array",
@@ -172,19 +160,19 @@ class GetUserByUsernameOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "$ref": "#/definitions/token"
           },
-          "order": 18
+          "order": 16
         },
         "userId": {
           "type": "string",
           "title": "User ID",
           "description": "The user's ID",
-          "order": 19
+          "order": 17
         },
         "username": {
           "type": "string",
           "title": "Username",
           "description": "The user's username",
-          "order": 20
+          "order": 18
         },
         "webauthncredentials": {
           "type": "array",
@@ -193,7 +181,7 @@ class GetUserByUsernameOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "$ref": "#/definitions/webauthnaredentials"
           },
-          "order": 21
+          "order": 19
         }
       }
     },
