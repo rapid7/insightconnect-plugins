@@ -48,7 +48,7 @@ hub_tags:
   features: []
 sdk:
   type: full
-  version: 5.4.8
+  version: 5.5.5
   user: nobody
 types:
   agent:
