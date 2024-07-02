@@ -125,7 +125,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         except Exception as error:
             raise ConnectionTestException(
                 cause="Connection test to Carbon Black Cloud failed.\n",
-                assistance=f"Request failed. Please see exception data for details.",
+                assistance="Request failed. Please see exception data for details.",
                 data=str(error),
             )
         return {"success": True}
