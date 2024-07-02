@@ -19,9 +19,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
     def connect(self, params):
-        self.api_id = params.get(Input.API_ID, "")
-        self.api_secret = params.get(Input.API_SECRET_KEY, {}).get("secretKey", "")
-        self.org_key = params.get(Input.ORG_KEY, "")
+        self.api_id = params.get(Input.API_ID, "").strip()
+        self.api_secret = params.get(Input.API_SECRET_KEY, {}).get("secretKey", "").strip()
+        self.org_key = params.get(Input.ORG_KEY, "").strip()
         self.base_url = f"https://{params.get(Input.URL, '')}"
         self.x_auth_token = f"{self.api_secret}/{self.api_id}"
         self.headers = {"X-Auth-Token": self.x_auth_token, "Content-Type": "application/json"}
@@ -113,15 +113,19 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def test(self):
         device_endpoint = "/device"
         endpoint = self.base_url + device_endpoint
-
-        self.logger.info(endpoint)
-        result = requests.get(endpoint, headers=self.headers, timeout=DEFAULT_TIMEOUT)
         try:
+            result = requests.get(endpoint, headers=self.headers, timeout=DEFAULT_TIMEOUT)
             result.raise_for_status()
-        except Exception as error:
+        except HTTPErrorException as error:
             raise ConnectionTestException(
                 cause="Connection test to Carbon Black Cloud failed.\n",
                 assistance=f"{result.text}\n",
+                data=str(error),
+            )
+        except Exception as error:
+            raise ConnectionTestException(
+                cause="Connection test to Carbon Black Cloud failed.\n",
+                assistance="Request failed. Please see exception data for details.",
                 data=str(error),
             )
         return {"success": True}
