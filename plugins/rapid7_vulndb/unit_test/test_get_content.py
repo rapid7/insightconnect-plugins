@@ -8,7 +8,7 @@ from unittest.mock import patch
 from komand_rapid7_vulndb.actions.get_content import GetContent
 from komand_rapid7_vulndb.actions.get_content.schema import Input, GetContentInput, GetContentOutput
 from jsonschema import validate
-from unit_test.mock import (
+from mock import (
     mock_request,
 )
 

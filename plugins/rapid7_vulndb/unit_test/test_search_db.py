@@ -9,7 +9,7 @@ from unittest.mock import patch
 from komand_rapid7_vulndb.actions.search_db import SearchDb
 from komand_rapid7_vulndb.actions.search_db.schema import Input, SearchDbInput, SearchDbOutput
 from jsonschema import validate
-from unit_test.mock import (
+from mock import (
     mock_request,
 )
 
