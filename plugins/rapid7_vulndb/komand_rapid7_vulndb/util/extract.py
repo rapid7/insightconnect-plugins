@@ -117,7 +117,6 @@ class Content:
 
     @classmethod
     def get(cls, identifier: str) -> Dict:
-
         """
         This function extracts data from API and transforms it to match
         plugin schema

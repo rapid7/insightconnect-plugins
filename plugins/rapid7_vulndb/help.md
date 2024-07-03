@@ -1,6 +1,6 @@
 # Description
 
-Make searching the Rapid7 vulnerability and exploit data fast, easy and efficient with the InsightConnect plugin. Leverage this curated repository of vetted computer software exploits and exploitable vulnerabilities to ensure your security operations are always aware of the latest threats that could be used against your environment
+The Vulnerability & Exploit Database plugin allows you to search and compare potential threats with a curated repository of vetted computer software exploits and exploitable vulnerabilities vulnerabilities
 
 # Key Features
 
@@ -9,7 +9,6 @@ Make searching the Rapid7 vulnerability and exploit data fast, easy and efficien
 
 # Requirements
 
-_This plugin does not contain any requirements._
 
 # Supported Product Versions
 
@@ -18,24 +17,66 @@ _This plugin does not contain any requirements._
 # Documentation
 
 ## Setup
-
-_This plugin does not contain a connection._
+  
+*This plugin does not contain a connection.*
 
 ## Technical Details
 
 ### Actions
 
-#### Search Database
 
-This action is used to search the database to find vulnerabilities and exploits.
+#### Get Content
+
+This action is used to fetch content record for  vulnerability or module
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|database|string|None|True|Name of the database|['Vulnerability Database', 'Metasploit Modules']|Vulnerability Database|
-|search|string|None|True|Search parameter for database|None|cve-2015-9542|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|identifier|string|None|True|Rapid7 vulnerability/module identifier|None|apple-itunes-cve-2019-8835|None|None|
+  
+Example input:
 
+```
+{
+  "identifier": "apple-itunes-cve-2019-8835"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|content_result|content|True|Content record for the vulnerability or module|{'published_at': '2015-11-05T00:00:00.000Z', 'references': 'mozilla-thunderbird-upgrade-38_4', 'severity': '7', 'solutions': 'mozilla-thunderbird-upgrade-38_4', 'title': 'MFSA2015-123 Thunderbird: Buffer overflow during i...', 'alternate_ids': 'BID/77411,CVE/2015-7189,DEBIAN/DSA-3393,DEBIAN/DSA...', 'content_type': 'vulnerability', 'description': '\n    <p>Race condition in the JPEGEncoder function...'}|
+  
+Example output:
+
+```
+{
+  "content_result": {
+    "alternate_ids": "BID/77411,CVE/2015-7189,DEBIAN/DSA-3393,DEBIAN/DSA...",
+    "content_type": "vulnerability",
+    "description": "\n    <p>Race condition in the JPEGEncoder function...",
+    "published_at": "2015-11-05T00:00:00.000Z",
+    "references": "mozilla-thunderbird-upgrade-38_4",
+    "severity": "7",
+    "solutions": "mozilla-thunderbird-upgrade-38_4",
+    "title": "MFSA2015-123 Thunderbird: Buffer overflow during i..."
+  }
+}
+```
+
+#### Search Database
+
+This action is used to search the database to find vulnerabilities and exploits
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|database|string|None|True|Name of the database|["Vulnerability Database", "Metasploit Modules"]|Vulnerability Database|None|None|
+|search|string|None|True|Search parameter for database|None|cve-2015-9542|None|None|
+  
 Example input:
 
 ```
@@ -47,99 +88,61 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results_found|bool|True|Will return false if no results are found|
-|search_results|[]search_result|False|Vulnerability and exploits found|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|results_found|bool|True|Will return false if no results are found|None|
+|search_results|[]search_result|False|Vulnerability and exploits found|{'identifier': 'ubuntu-cve-2015-9542', 'title': 'Ubuntu: (Multiple Advisories) (CVE-2015-9542): libpam-radius-auth vulnerability', 'published_at': '2020-02-24T00:00:00.000Z', 'solutions': 'ubuntu-upgrade-chromium', 'link': 'https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/ubuntu-cve-2015-9542'}|
+  
 Example output:
 
 ```
 {
   "results_found": true,
-  "search_results": [
-    {
-      "identifier": "ubuntu-cve-2015-9542",
-      "title": "Ubuntu: (Multiple Advisories) (CVE-2015-9542): libpam-radius-auth vulnerability",
-      "published_at": "2020-02-24T00:00:00.000Z",
-      "solutions": "ubuntu-upgrade-chromium",
-      "link": "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/ubuntu-cve-2015-9542"
-    }
-  ]
-}
-```
-
-#### Get Content
-
-This action is used to fetch content results for a vulnerability or module.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|identifier|string|None|True|Rapid7 vulnerability/module identifier|None|apple-itunes-cve-2019-8835|
-
-Example input:
-
-```
-{
-  "identifier": "apple-itunes-cve-2019-8835"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|content_result|content|True|Content record for the vulnerability or module|
-
-Example output:
-
-```
-{
-  "content_result": {
-    "published_at": "2015-11-05T00:00:00.000Z",
-    "references": "mozilla-thunderbird-upgrade-38_4",
-    "severity": "7",
-    "solutions": "mozilla-thunderbird-upgrade-38_4",
-    "title": "MFSA2015-123 Thunderbird: Buffer overflow during i...",
-    "alternate_ids": "BID/77411,CVE/2015-7189,DEBIAN/DSA-3393,DEBIAN/DSA...",
-    "content_type": "vulnerability",
-    "description": "\n    <p>Race condition in the JPEGEncoder function..."
+  "search_results": {
+    "identifier": "ubuntu-cve-2015-9542",
+    "link": "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/ubuntu-cve-2015-9542",
+    "published_at": "2020-02-24T00:00:00.000Z",
+    "solutions": "ubuntu-upgrade-chromium",
+    "title": "Ubuntu: (Multiple Advisories) (CVE-2015-9542): libpam-radius-auth vulnerability"
   }
 }
 ```
-
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
+### Custom Types
+  
+**search_result**
 
-### Custom Output Types
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Content Identifier|string|None|False|Content identifier for module or vulnerability|None|
+|Link|string|None|False|Link to vulnerability|None|
+|Published At|string|None|False|Published date of vulnerability|None|
+|Solutions|string|None|False|List of possible solutions for the vulnerability|None|
+|Title|string|None|False|Title of vulnerability|None|
+  
+**content**
 
-#### content
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Alternative Identifiers|string|None|False|List of alternative identifiers for the vulnerability|None|
+|architectures|string|None|False|List of applicable architectures for the module|None|
+|Authors|string|None|False|List of module authors|None|
+|Content type|string|None|False|Type of returned content for module or vulnerability|None|
+|Description|string|None|False|Brief summary of the returned content|None|
+|Published_at|string|None|False|Published date of vulnerability|None|
+|Rank|int|None|False|Rank of module|None|
+|References|string|None|False|List of references|None|
+|Reliability|string|None|False|Reliability of module|None|
+|Severity|string|None|False|Severity of vulnerability|None|
+|Solutions|string|None|False|List of possible solutions for the vulnerability|None|
+|Title|string|None|False|Title of Vulnerability|None|
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Alternative identifiers|string|False|List of alternative identifiers of vulnerability|
-|architectures|string|False|List of applicable architectures for the module|
-|Authors|string|False|List of module authors|
-|Content type|string|False|Type of returned content, module or vulnerability|
-|Description|string|False|Brief summary of the returned content|
-|Published_at|string|False|Published date of vulnerability|
-|Rank|int|False|Rank of module|
-|References|string|False|List of references|
-|Reliability|string|False|Reliability of module|
-|Severity|string|False|Severity of vulnerability|
-|Solutions|string|False|List of possible solutions for vulnerability|
-|Title|string|False|Title of Vulnerability|
-
-#### search_result
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Link|string|False|Link to vulnerability|
-|Published_at|string|False|Published date of vulnerability|
-|Title|string|False|Title of Vulnerability|
 
 ## Troubleshooting
 
@@ -147,6 +150,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.2 - Bumping SDK version to 5.6.0
 * 2.1.1 - Add 404 and 504 error handlers | Add retry
 * 2.1.0 - Return list of vulnerability solutions in the Search Database action with new `solutions` output field
 * 2.0.4 - Correct spelling in help.md
@@ -160,6 +164,8 @@ _This plugin does not contain any troubleshooting information._
 * 1.0.0 - Initial plugin
 
 # Links
+
+* [Rapid7 Vulnerability & Exploit Database API Specification](https://vdb.rapid7.com/swagger_doc)
 
 ## References
 

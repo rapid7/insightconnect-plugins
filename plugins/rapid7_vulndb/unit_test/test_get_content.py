@@ -1,14 +1,13 @@
 import sys
 import os
 
-from insightconnect_plugin_runtime.exceptions import PluginException
-
 sys.path.append(os.path.abspath("../"))
-
 from unittest import TestCase
+from insightconnect_plugin_runtime.exceptions import PluginException
 from unittest.mock import patch
 from komand_rapid7_vulndb.actions.get_content import GetContent
-from komand_rapid7_vulndb.actions.get_content.schema import Input
+from komand_rapid7_vulndb.actions.get_content.schema import Input, GetContentInput, GetContentOutput
+from jsonschema import validate
 from unit_test.mock import (
     mock_request,
 )
@@ -30,7 +29,10 @@ class TestGetContent(TestCase):
 
     @patch("requests.get", side_effect=mock_request)
     def test_get_content(self, mock_req):
-        actual = self.action.run({Input.IDENTIFIER: self.params.get("identifier")})
+
+        input_data = {Input.IDENTIFIER: self.params.get("identifier")}
+        validate(input_data, GetContentInput.schema)
+        actual = self.action.run(input_data)
         expected = {
             "content_result": {
                 "title": "test_title_1",
@@ -44,10 +46,13 @@ class TestGetContent(TestCase):
             }
         }
         self.assertEqual(actual, expected)
+        validate(actual, GetContentOutput.schema)
 
     @patch("requests.get", side_effect=mock_request)
     def test_get_content_error(self, mock_req):
         for error, identifier, expected in self.params_list:
             with self.assertRaises(PluginException) as exception:
-                self.action.run({Input.IDENTIFIER: identifier})
+                input_data = {Input.IDENTIFIER: identifier}
+                validate(input_data, GetContentInput.schema)
+                self.action.run(input_data)
             self.assertEqual(exception.exception.cause, expected)

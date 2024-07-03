@@ -3,9 +3,10 @@ import os
 
 import requests.models
 
-from unit_test.util import Util
+from util import Util
 
 STUB_IDENTIFIER = "3395856ce81f2b7382dee72602f798b642f14140-cve"
+STUB_IDENTIFIER_2 = "testingStubIdentifier-cve"
 STUB_404_IDENTIFIER = "4416967df92g3c8493eff83513g819c753g23241-cve"
 STUB_504_IDENTIFIER = "5527178eg13h4d9514egg94624h921d864h34352-cve"
 STUB_SEARCH_IDENTIFIER = "4416967df92g3c8493eff83513g819c753g23241-cve"
@@ -69,7 +70,7 @@ def mock_request(*args, **kwargs):
             if page == 0:
                 return MockResponse("search_db_nexpose_page_0", 200)
             return MockResponse("search_db_nexpose", 200)
-        if query == STUB_SEARCH_IDENTIFIER:
+        if query in [STUB_SEARCH_IDENTIFIER, STUB_IDENTIFIER_2]:
             if page == 0:
                 return MockResponse("search_db_page_0", 200)
             if page == 1:
