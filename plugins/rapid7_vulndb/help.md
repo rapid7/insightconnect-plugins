@@ -1,6 +1,6 @@
 # Description
 
-The Vulnerability & Exploit Database plugin allows you to search and compare potential threats with a curated repository of vetted computer software exploits and exploitable vulnerabilities vulnerabilities
+Make searching the Rapid7 vulnerability and exploit data fast, easy and efficient with the InsightConnect plugin. Leverage this curated repository of vetted computer software exploits and exploitable vulnerabilities to ensure your security operations are always aware of the latest threats that could be used against your environment
 
 # Key Features
 
