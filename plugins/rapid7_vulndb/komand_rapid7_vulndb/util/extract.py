@@ -114,7 +114,7 @@ class Content:
         # extract data from API
         response = requests.get(urljoin(cls.content_url, identifier), timeout=TIMEOUT)
         _response_error_handler(response.status_code, response.text)
-        return response.json()1
+        return response.json()
 
     @classmethod
     def get(cls, identifier: str) -> Dict:
