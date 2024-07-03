@@ -19,7 +19,8 @@ from urllib.parse import urljoin
 
 from komand_rapid7_vulndb.util.util import Util
 
-TIMEOUT=60
+TIMEOUT = 60
+
 
 class Search:
     """
