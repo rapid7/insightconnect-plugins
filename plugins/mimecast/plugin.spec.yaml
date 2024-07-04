@@ -17,7 +17,7 @@ links:
  - "[Mimecast](http://mimecast.com)"
 references:
  - "[Mimecast API](https://www.mimecast.com/developer/documentation)"
-version: 5.3.13
+version: 5.3.14
 connection_version: 5
 supported_versions: ["Mimecast API 2024-05-09"]
 vendor: rapid7
@@ -25,7 +25,7 @@ support: rapid7
 cloud_ready: true
 sdk:
   type: slim
-  version: 5.5.5
+  version: 5.6.1
   user: nobody
 status: []
 resources:
@@ -40,6 +40,7 @@ hub_tags:
   keywords: [mimecast, email, cloud_enabled]
   features: []
 version_history:
+- "5.3.14 - Improving task connection tests logging | bump SDK to version 5.6.1"
 - "5.3.13 - Adding in task connection tests | bump SDK to version 5.5.5 | Fix issue with logging bad JSON error"
 - "5.3.12 - Task `monitor_siem_logs` to ingest events if there is no datetime field | bump version of werkzeug used"
 - "5.3.11 - Task `monitor_siem_logs` to now use 24hrs as initial lookback, then 7 days for normal running | Task `monitor_siem_logs` allowing for a date to be supplied as a custom config | Task `monitor_siem_logs` to now log the request id of failed request to Mimecast | bump SDK to version 5.4.9"
