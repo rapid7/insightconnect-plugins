@@ -6,7 +6,6 @@ import json
 class Input:
     APIKEY = "apiKey"
     INSTANCE = "instance"
-    USERTYPE = "userType"
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -18,10 +17,10 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "apiKey": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "Credential secret API key",
+      "description": "Service User API key",
       "placeholder": "API Key",
-      "tooltip": "Enter an API Key with adequate permissions",
-      "order": 2
+      "tooltip": "Enter a Service User API Key with adequate permissions",
+      "order": 1
     },
     "instance": {
       "type": "string",
@@ -29,26 +28,12 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "SentinelOne Console instance e.g. https://<example-instance>.sentinelone.net",
       "placeholder": "Instance",
       "tooltip": "Enter the subdomain associated with your SentinelOne instance",
-      "order": 3
-    },
-    "userType": {
-      "type": "string",
-      "title": "User Type",
-      "description": "Type of user",
-      "default": "Console user",
-      "placeholder": "User Type",
-      "tooltip": "Select the user type linked to your API Key",
-      "enum": [
-        "Console user",
-        "Service user"
-      ],
-      "order": 1
+      "order": 2
     }
   },
   "required": [
     "apiKey",
-    "instance",
-    "userType"
+    "instance"
   ],
   "definitions": {
     "credential_secret_key": {
