@@ -40,9 +40,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return {"success": True}
 
     def test_task(self):
+        self.logger.info("Running a connection test to Mimecast")
         try:
             _, _, _ = self.client.get_siem_logs("")
+            self.logger.info("The connection test to Mimecast was successful")
             return {"success": True}
         except ApiClientException as error:
+            self.logger.info("The connection test to Mimecast has failed")
             self.logger.error(error)
             raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)
