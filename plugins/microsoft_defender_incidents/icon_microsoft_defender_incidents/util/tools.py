@@ -143,10 +143,21 @@ def fill_required_fields(input_dict: Dict[str, Any]) -> dict:
     :rtype: dict
     """
 
+    # Everything in the output is required so I'm updating this to include
+    # every output field.
+    # n.b. I won't include Incident ID because we can safely assume Incident ID
+    # will be present in every call related to incidents.
+
     required_fields = [
         {"name": "assignedTo", "default": ""},
         {"name": "tags", "default": []},
         {"name": "comments", "default": []},
+        {"name": "alerts", "default": []},
+        {"name": "incidentName", "default": ""},
+        {"name": "classification", "default": "Unknown"},
+        {"name": "determination", "default": "NotAvailable"},
+        {"name": "status", "default": "Active"},
+        {"name": "severity", "default": "Informational"},
     ]
 
     output_dict = input_dict.copy()

@@ -4,7 +4,7 @@ import insightconnect_plugin_runtime
 
 # Custom imports below
 from ...util.tools import generate_query_params
-from .schema import Component, Input, ListIncidentsInput, ListIncidentsOutput, Output
+from .schema import Component, Input, Output, ListIncidentsInput, ListIncidentsOutput
 
 
 class ListIncidents(insightconnect_plugin_runtime.Action):
