@@ -43,17 +43,15 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|apiKey|credential_secret_key|None|True|Credential secret API key|None|9de5069c5afe602b2ea0a04b66beb2c0|API Key|Enter an API Key with adequate permissions|
+|apiKey|credential_secret_key|None|True|Service User API key|None|9de5069c5afe602b2ea0a04b66beb2c0|API Key|Enter a Service User API Key with adequate permissions|
 |instance|string|None|True|SentinelOne Console instance e.g. https://<example-instance>.sentinelone.net|None|example-instance|Instance|Enter the subdomain associated with your SentinelOne instance|
-|userType|string|Console user|True|Type of user|["Console user", "Service user"]|Console user|User Type|Select the user type linked to your API Key|
 
 Example input:
 
 ```
 {
   "apiKey": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "instance": "example-instance",
-  "userType": "Console user"
+  "instance": "example-instance"
 }
 ```
 
@@ -75,7 +73,7 @@ This action is used to get a list of activities
 |agentIds|[]string|None|False|Return activities related to specified agent IDs|None|["9000000000000000"]|None|None|
 |countOnly|boolean|None|False|If true, only total number of items will be returned, without any of the actual objects|None|False|None|None|
 |createdAtBetween|string|None|False|Return activities created within this range (inclusive), example 1514978764288-1514978999999|None|1514978764288-1514978999999|None|None|
-|createdAtGt|date|None|False|Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26+00:00|None|2020-12-18T18:49:26+00:00|None|None|
+|createdAtGt|date|None|False|Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|2020-12-18T18:49:26.257525Z|None|None|
 |createdAtGte|date|None|False|Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|2020-12-20T18:49:26.257525Z|None|None|
 |createdAtLt|date|None|False|Return activities created before this date in ISO-8601|None|2020-12-20T18:49:26.257525Z|None|None|
 |createdAtLte|date|None|False|Return activities created before or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|2020-12-20T18:49:26.257525Z|None|None|
@@ -2361,13 +2359,14 @@ Example output:
 
 ## Troubleshooting
 
+* To generate an API key, create a new Service User or select an existing one with adequate permissions from the SentinelOne console
 * To convert `threat` into an array use Type Converter Plugin
 * For the Trigger settings, only set the Resolved field to False if solely resolved threats should be retrieved (i.e. setting to False will not include unresolved threats)
 * The Run Remote Script action may require starting a protected actions session to function properly. To do this, in the `code` input field, enter the passcode from a third-party app, such as Duo Mobile or Google Authenticator, set up in two-factor authentication. Entering the code is not required each time you run the action, because the session is valid for 30 minutes
 
 # Version History
 
-* 9.2.0 - Added `Monitor Activities and Events` task
+* 10.0.0 - Added `Monitor Activities and Events` task | Removed `User Type` from connection | A Service User API Key must now be provided to provide enhanced security
 * 9.1.2 - Retry functionality added to requests to SenintelOne that result in a 429 (too many requests) or 503 (service unavailable) error.
 * 9.1.1 - `Threats Fetch File`: Updated action to prevent possible movement through file system
 * 9.1.0 - `Move Agent to Another Site`: Action added
