@@ -1,4 +1,3 @@
-import datetime
 import sys
 import os
 import json
@@ -9,8 +8,6 @@ sys.path.append(os.path.abspath("../"))
 from requests.exceptions import HTTPError
 from komand_sentinelone.connection.connection import Connection
 from komand_sentinelone.connection.schema import Input
-from komand_sentinelone.util.constants import CONSOLE_USER_TYPE
-from komand_sentinelone.util.helper import rate_limiting
 
 
 class Util:
@@ -23,7 +20,6 @@ class Util:
         else:
             params = {
                 Input.INSTANCE: "rapid7",
-                Input.USERTYPE: CONSOLE_USER_TYPE,
                 Input.APIKEY: {"secretKey": "test"},
             }
         default_connection.connect(params)

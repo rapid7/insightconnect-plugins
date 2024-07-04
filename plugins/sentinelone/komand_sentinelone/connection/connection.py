@@ -14,7 +14,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.client = SentineloneAPI(
             f"https://{params.get(Input.INSTANCE)}.sentinelone.net",
             params.get(Input.APIKEY, {}).get("secretKey"),
-            params.get(Input.USERTYPE),
             self.logger,
         )
 
