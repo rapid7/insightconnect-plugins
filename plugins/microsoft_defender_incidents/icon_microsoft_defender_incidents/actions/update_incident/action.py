@@ -26,4 +26,5 @@ class UpdateIncident(insightconnect_plugin_runtime.Action):
                 "comment": params.get(Input.COMMENTS),
             }
         )
+
         return self.connection.client.update_incident(identifier, data)
