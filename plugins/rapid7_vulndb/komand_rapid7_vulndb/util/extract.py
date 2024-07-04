@@ -19,6 +19,8 @@ from urllib.parse import urljoin
 
 from komand_rapid7_vulndb.util.util import Util
 
+TIMEOUT = 60
+
 
 class Search:
     """
@@ -37,7 +39,7 @@ class Search:
         :param query: free form text
         :return: Data as dictionary
         """
-        response = requests.get(cls.search_url, params=query, allow_redirects=False)
+        response = requests.get(cls.search_url, params=query, allow_redirects=False, timeout=TIMEOUT)
         _response_error_handler(response.status_code, response.text)
         return response.json()
 
@@ -111,13 +113,12 @@ class Content:
     @Util.retry(tries=1, timeout=30, exceptions=PluginException, backoff_seconds=1)
     def retrieve_by_identifier(cls, identifier: str):
         # extract data from API
-        response = requests.get(urljoin(cls.content_url, identifier))
+        response = requests.get(urljoin(cls.content_url, identifier), timeout=TIMEOUT)
         _response_error_handler(response.status_code, response.text)
         return response.json()
 
     @classmethod
     def get(cls, identifier: str) -> Dict:
-
         """
         This function extracts data from API and transforms it to match
         plugin schema

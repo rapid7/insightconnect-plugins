@@ -3,13 +3,22 @@ extension: plugin
 products: [insightconnect]
 name: rapid7_vulndb
 title: Rapid7 Vulnerability & Exploit Database
-description: The Vulnerability & Exploit Database plugin allows you to search and compare potential threats with a curated repository of vetted computer software exploits and exploitable vulnerabilities
-  vulnerabilities
-version: 2.1.1
+description: Make searching the Rapid7 vulnerability and exploit data fast, easy and efficient with the InsightConnect plugin. Leverage this curated repository of vetted computer software exploits and exploitable vulnerabilities to ensure your security operations are always aware of the latest threats that could be used against your environment vulnerabilities
+version: 2.1.2
+sdk:
+  type: slim
+  version: 5.6.0
+  user: nobody
 supported_versions: ["v1"]
+connection_version: 2
 vendor: rapid7
 support: rapid7
 cloud_ready: true
+key_features:
+- Search Database for vulnerabilities
+- Retrieve vulnerability or Metasploit module details based on a CVE or module identifier
+requirements: "_This plugin does not contain any requirements._"
+troubleshooting: "_This plugin does not contain any troubleshooting information._"
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_vulndb
@@ -21,6 +30,23 @@ tags:
 - rapid7
 - database
 - vulndb
+references:
+- "[Rapid7 Vulnerability & Exploit Database API Specification](https://vdb.rapid7.com/swagger_doc)"
+links:
+- "[Rapid7 Vulnerability & Exploit Database API Specification](https://vdb.rapid7.com/swagger_doc)"
+version_history:
+- "2.1.2 - Bumping SDK version to 5.6.0"
+- "2.1.1 - Add 404 and 504 error handlers | Add retry"
+- "2.1.0 - Return list of vulnerability solutions in the Search Database action with new `solutions` output field"
+- "2.0.4 - Correct spelling in help.md"
+- "2.0.3 - Update to v4 Python plugin runtime | Add example inputs"
+- "2.0.2 - Implement workaround for VulnDB API bug in Get Content action where the `severity` datatype response differs based on the action input"
+- "2.0.1 - Add identifier field to the Search Database action"
+- "2.0.0 - Utilize VulnDB API"
+- "1.1.1 - New spec and help.md format for the Extension Library"
+- "1.1.0 - Fix issue where Published Date input in the Search Database action would not always parse correctly | Fix issue with memory leaks"
+- "1.0.1 - Update to v2 Python plugin architecture and support web server mode"
+- "1.0.0 - Initial plugin"
 hub_tags:
   use_cases: [vulnerability_management, remediation_management]
   keywords: [exploit, rapid7, database, vulndb, cloud_enabled]
@@ -132,6 +158,7 @@ actions:
         type: 'content'
         description: Content record for the vulnerability or module
         required: true
+        example: { "published_at": "2015-11-05T00:00:00.000Z", "references": "mozilla-thunderbird-upgrade-38_4", "severity": "7", "solutions": "mozilla-thunderbird-upgrade-38_4", "title": "MFSA2015-123 Thunderbird: Buffer overflow during i...", "alternate_ids": "BID/77411,CVE/2015-7189,DEBIAN/DSA-3393,DEBIAN/DSA...", "content_type": "vulnerability", "description": "\n    <p>Race condition in the JPEGEncoder function..." }
   search_db:
     title: Search Database
     description: Search the database to find vulnerabilities and exploits
@@ -157,6 +184,7 @@ actions:
         type: '[]search_result'
         description: Vulnerability and exploits found
         required: false
+        example: { "identifier": "ubuntu-cve-2015-9542", "title": "Ubuntu: (Multiple Advisories) (CVE-2015-9542): libpam-radius-auth vulnerability", "published_at": "2020-02-24T00:00:00.000Z", "solutions": "ubuntu-upgrade-chromium", "link": "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/ubuntu-cve-2015-9542" }
       results_found:
         title: Results Found
         description: Will return false if no results are found
