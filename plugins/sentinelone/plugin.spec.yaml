@@ -3,12 +3,12 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 9.2.0
-connection_version: 9
+version: 10.0.0
+connection_version: 10
 cloud_ready: true
 sdk:
   type: slim
-  version: 5.5.5
+  version: 5.6.0
   user: nobody
 supported_versions: ["2.1.0"]
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
@@ -1687,26 +1687,14 @@ types:
       example: 2023-01-01T00:00:00.000000Z
 
 connection:
-  userType:
-    title: User Type
-    description: Type of user
-    type: string
-    required: true
-    enum:
-      - Console user
-      - Service user
-    example: Console user
-    default: Console user
-    placeholder: User Type
-    tooltip: Select the user type linked to your API Key
   apiKey:
     title: API Key
-    description: Credential secret API key
+    description: Service User API key
     type: credential_secret_key
     required: true
     example: 9de5069c5afe602b2ea0a04b66beb2c0
     placeholder: API Key
-    tooltip: Enter an API Key with adequate permissions
+    tooltip: Enter a Service User API Key with adequate permissions
   instance:
     title: Instance
     description: SentinelOne Console instance e.g. https://<example-instance>.sentinelone.net
