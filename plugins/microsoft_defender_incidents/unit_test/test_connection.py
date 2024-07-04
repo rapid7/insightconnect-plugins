@@ -10,7 +10,7 @@ from parameterized import parameterized
 
 from icon_microsoft_defender_incidents.connection.connection import Connection
 from icon_microsoft_defender_incidents.util.tools import Message
-from unit_test.mock import (
+from mock import (
     STUB_CONNECTION,
     mock_request_200,
     mock_request_201_invalid_json,

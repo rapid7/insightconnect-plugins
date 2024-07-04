@@ -31,6 +31,9 @@ from icon_microsoft_defender_incidents.connection.connection import Connection
 from icon_microsoft_defender_incidents.util.tools import Message
 
 STUB_ACTION_RESPONSE = {
+    "alerts": [],
+    "incidentName": "",
+    "severity": "",
     "status": "Resolved",
     "assignedTo": "user@example.com",
     "classification": "TruePositive",
