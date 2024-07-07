@@ -1,0 +1,220 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: sublime_security
+title: Sublime Security
+description: A plugin to interact with Sublime Security API
+version: 0.1.0
+sdk:
+  type: slim
+  version: 5.5.0
+  user: nobody
+supported_versions:
+  - Sublime Security API v0
+connection_version: 1
+vendor: edubs_rapid7
+support: community
+status: []
+tags:
+  - security
+  - email
+  - analysis
+hub_tags:
+  use_cases: [threat_detection_and_response, data_enrichment]
+  keywords: [intel, phishing, email, sublime]
+  features: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/example
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.rapid7.com
+key_features: ["Enrich alerts with message metadata or screenshots"]
+requirements: ["Sublime Security API key"]
+references: ["[Sublime Security](https://www.sublimesecurity.com/)"]
+links: ["[Sublime Security API](https://docs.sublimesecurity.com/reference/introduction)"]
+version_history:
+  - 0.1.0 - Initial Plugin
+
+types:
+  query_results:
+    error:
+      type: string
+      required: false
+    execution_time:
+      type: integer
+      required: false
+    external_errors:
+      type: "[]string"
+      required: false
+    query:
+      type: query
+      required: false
+    success:
+      type: boolean
+      required: false
+  query:
+    name:
+      type: string
+      required: false
+    severity:
+      type: string
+      required: false
+    source:
+      type: string
+      required: false
+  rule_results:
+    error:
+      type: string
+      required: false
+    execution_time:
+      type: integer
+      required: false
+    external_errors:
+      type: "[]string"
+      required: false
+    matched:
+      type: boolean
+      required: false
+    rule:
+      type: rule
+      required: false
+    success:
+      type: boolean
+      required: false
+  rule:
+    id:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    severity:
+      type: string
+      required: false
+    sources:
+      type: string
+      required: false
+  queries:
+    name:
+      type: string
+      required: false
+    severity:
+      type: string
+      required: false
+    source:
+      type: string
+      required: false
+  rules:
+    active:
+      type: boolean
+      required: false
+    feed_id:
+      type: string
+      required: false
+    name:
+      type: string
+      required: false
+    severity:
+      type: string
+      required: false
+    source:
+      type: string
+      required: false
+connection:
+  api_key:
+    type: credential_secret_key
+    title: API Key
+    required: true
+    description: The API key used for authentication with the Sublime Security API.
+actions:
+  analyze_raw_message:
+    title: Analyze Raw Message
+    description: Analyze a raw email message.
+    input:
+      queries:
+        type: '[]queries'
+        description: Queries to analyze
+        required: false
+        example: [{"name": "string","severity": "string","source": "string"}]
+      rules:
+        type: '[]rules'
+        description: Rules to analyze
+        required: false
+        example: [{"active": True,"feed_id": "string","name": "string","severity": "string","source": "string"}]
+      raw_message:
+        type: bytes
+        required: true
+        description: The full base64 encoded raw eml message
+        example: UmFwaWQ3Cj09PT09PQo=
+      run_active_detection_rules:
+        description: Whether to analyze the message with all active detection rules in your organization
+        type: boolean
+        required: false
+        example: true
+      run_all_detection_rules:
+        description: Whether to analyze with all detection rules from all Feeds, including uninstalled + inactive Feed rules, as well as any active detection rules you’ve created that are not part of a Feed
+        type: boolean
+        required: false
+        example: true
+      run_all_insights:
+        description: Whether to analyze with all insights
+        type: boolean
+        required: false
+        example: true
+    output:
+      query_results:
+        title: Query Results
+        type: '[]query_results'
+        required: false
+        description: Query result details
+        example: [{"error": "string","execution_time": 0,"external_errors": ["string"],"query": {"name": "string","severity": "string","source": "string"},"success": true}]
+      rule_results:
+        title: Rule Results
+        type: '[]rule_results'
+        required: false
+        description: Analyze result details
+        example: [{"error": "string","execution_time": 0,"external_errors": ["string"],"matched": true,"rule": {"id": "string","name": "string","severity": "string","source": "string"},"success": true}]
+  create_message:
+    title: Create Message
+    description: Create a new message.
+    input:
+      message:
+        type: object
+        required: true
+        description: The message object to be created.
+        example: {"subject": "Test Message", "body": "This is a test message.", "sender": "test@example.com", "recipients": ["recipient@example.com"]}
+    output:
+      message_id:
+        type: string
+        required: false
+        description: The ID of the created message.
+        example: "12345"
+  retrieve_message:
+    title: Retrieve Message
+    description: Retrieve a message by ID.
+    input:
+      message_id:
+        type: string
+        required: true
+        description: The ID of the message to be retrieved.
+        example: "12345"
+    output:
+      message:
+        type: object
+        required: false
+        description: The retrieved message object.
+        example: {"subject": "Test Message", "body": "This is a test message.", "sender": "test@example.com", "recipients": ["recipient@example.com"]}
+  analyze_message_by_id:
+    title: Analyze Message by ID
+    description: Analyze a message by its ID.
+    input:
+      message_id:
+        type: string
+        required: true
+        description: The ID of the message to be analyzed.
+        example: "12345"
+    output:
+      analysis:
+        type: object
+        required: false
+        description: The analysis result of the message.
+        example: {"threats": ["Phishing"], "score": 85, "details": "The message contains suspicious links and sender address."}
