@@ -1,10 +1,12 @@
-import sys
 import os
+import sys
 from unittest import TestCase
 from unittest.mock import patch
-from parameterized import parameterized
+
 from komand_typo_squatter.triggers.search_certstream import SearchCertstream
-from komand_typo_squatter.triggers.search_certstream.schema import Input, Output
+from komand_typo_squatter.triggers.search_certstream.schema import Input
+from parameterized import parameterized
+
 from unit_test.util import Util
 
 sys.path.append(os.path.abspath("../"))
