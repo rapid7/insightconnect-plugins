@@ -1,6 +1,7 @@
 # Description
 
-Domain name search tool that allows a wildcard search, monitoring of WHOIS record changes and history caching, as well as Reverse IP queries
+[DomainTools](https://www.domaintools.com) data and products work in harmony to enable security teams to start getting ahead of attacks, gain context and visibility into potential threats, and lower the skills barrier. The DomainTools plugin for InsightConnect allows for the automation of domain lookups and retrieval of threat information related to the domain.
+This plugin utilizes the [DomainTools Python API](https://github.com/domaintools/python_api).
 
 # Key Features
 
