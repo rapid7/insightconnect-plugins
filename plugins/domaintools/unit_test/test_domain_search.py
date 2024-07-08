@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase, mock
 from komand_domaintools.actions.domain_search import DomainSearch
 from komand_domaintools.actions.domain_search.schema import Input
-from unit_test.util import mock_responder, Util
+from util import mock_responder, Util
 
 
 class TestDomainSearch(TestCase):

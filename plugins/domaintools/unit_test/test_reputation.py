@@ -7,7 +7,7 @@ from unittest import TestCase, mock
 from komand_domaintools.actions.reputation import Reputation
 from komand_domaintools.actions.reputation.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
-from unit_test.util import mock_responder, Util
+from util import mock_responder, Util
 
 
 class TestReputation(TestCase):

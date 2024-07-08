@@ -3,7 +3,7 @@ import os
 
 sys.path.append(os.path.abspath("../"))
 
-from unit_test.util import mock_responder, Util
+from util import mock_responder, Util
 from unittest import TestCase, mock
 from komand_domaintools.actions.brand_monitor import BrandMonitor
 from komand_domaintools.actions.brand_monitor.schema import Input
