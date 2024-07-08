@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase, mock
 from komand_domaintools.actions.parsed_whois import ParsedWhois
 from komand_domaintools.actions.parsed_whois.schema import Input
-from util import mock_responder, Util
+from unit_test.util import mock_responder, Util
 
 
 class TestParsedWhois(TestCase):

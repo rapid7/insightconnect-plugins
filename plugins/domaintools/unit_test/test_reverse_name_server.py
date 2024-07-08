@@ -7,7 +7,7 @@ from unittest import TestCase, mock
 
 from komand_domaintools.actions.reverse_name_server import ReverseNameServer
 from komand_domaintools.actions.reverse_name_server.schema import Input
-from util import mock_responder, Util
+from unit_test.util import mock_responder, Util
 
 
 class TestReverseNameServer(TestCase):

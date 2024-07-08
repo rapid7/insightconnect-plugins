@@ -9,22 +9,40 @@ supported_versions: ["DomainTools_api 1.0.1"]
 status: []
 description: Domain name search tool that allows a wildcard search, monitoring of
   WHOIS record changes and history caching, as well as Reverse IP queries
-version: 2.0.0
+version: 2.0.1
 connection_version: 2
 sdk:
   type: slim
-  version: 5
+  version: 5.6.1
   user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/domaintools
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.domaintools.com/
+key_features:
+- WHOIS
+- Domain Search
+- Brand Monitor
+requirements: ["Requires an API Key from DomainTools"]
+troubleshooting: "There is no troubleshooting for this Plugin"
+links: ["[DomainTools](https://www.domaintools.com)"]
 tags:
 - domain
 - whois
 - ip
 - domain
 - intel
+version_history:
+- "2.0.1 - SDK Bump | bumping version of anyio used in requirements"
+- "2.0.0 - Update `DomainTools` to `1.0.1` | Update to latest SDK version | Fix import issues on all actions | Change `Days Back` input of `Name Server Monitor` to type `int` | Remove `Query` input from `Reverse IP WHOIS` | Add `Server` to `WHOIS History` output `Response` | Add `Reasons` to `Reputation` output `Response` | Change `Meta` to type `List` for `Domain Profile` output `Response`"
+- "1.0.1 - New spec and help.md format for the Extension Library"
+- "1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types | Bug fix logging credentials"
+- "0.1.1 - SSL bug fix in SDK"
+- "0.1.0 - Initial plugin"
+references:
+- "[DomainTools](https://www.domaintools.com)"
+- "[DomainTools API](https://www.domaintools.com/resources/api-documentation/)"
+- "[DomainTools Python API](https://github.com/domaintools/python_api)"
 hub_tags:
   use_cases: [threat_detection_and_response, offensive_security]
   keywords: [domain, whois, ip, domain, intel]

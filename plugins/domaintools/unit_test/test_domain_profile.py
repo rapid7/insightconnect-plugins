@@ -3,10 +3,10 @@ import os
 
 sys.path.append(os.path.abspath("../"))
 
+from unit_test.util import mock_responder, Util
 from unittest import TestCase, mock
 from komand_domaintools.actions.domain_profile import DomainProfile
 from komand_domaintools.actions.domain_profile.schema import Input
-from util import mock_responder, Util
 
 
 class TestDomainProfile(TestCase):

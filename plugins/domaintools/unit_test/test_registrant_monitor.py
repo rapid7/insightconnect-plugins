@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase, mock
 from komand_domaintools.actions.registrant_monitor import RegistrantMonitor
 from komand_domaintools.actions.registrant_monitor.schema import Input
-from util import mock_responder, Util
+from unit_test.util import mock_responder, Util
 
 
 class TestRegistrantMonitor(TestCase):
