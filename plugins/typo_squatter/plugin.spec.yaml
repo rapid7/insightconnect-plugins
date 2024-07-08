@@ -4,18 +4,49 @@ products: [insightconnect]
 name: typo_squatter
 title: Typo Squatter
 description: Detect cybersquatting of domains to aid in phishing investigation and analysis
-version: 1.0.2
-supported_versions: []
+version: 1.0.3
+supported_versions: ["dnstwist 20240116"]
+connection_version: 1
 vendor: rapid7
 support: community
 status: []
+sdk:
+  type: slim
+  version: 5.6.1
+  user: nobody
+  packages:
+    - libgeoip-dev
+    - libfuzzy-dev
+    - python3-dnspython
+    - python3-geoip
+    - python3-whois
+    - python3-requests
+    - python3-ssdeep
+    - python3-cffi
+    - gcc
+key_features:
+  - "Identify potential cybersquatters for your domain"
+  - "Get phishing score for a domain"
+version_history:
+  - "1.0.3 - Updated SDK and packages to the latest version"
+  - "1.0.2 - Fix Check for Squatters action | Fix Search Certstream trigger | Update container image | Code refactor | Add input and output examples in plugin spec and help.md"
+  - "1.0.1 - New spec and help.md format for the Extension Library"
+  - '1.0.0 - Support web server mode | Rename "Score domain" action to "Score Domain" | Rename "Search certstream" trigger to "Search Certstream"'
+  - "0.1.1 - Search certstream flag bug fix"
+  - "0.1.0 - Initial plugin"
+links:
+  - "[dnstwist](https://github.com/elceef/dnstwist)"
+references:
+  - "[dnstwist](https://github.com/elceef/dnstwist)"
+  - "[phishing_catcher](https://github.com/x0rz/phishing_catcher)"
+  - "[Typo Squatting](https://en.wikipedia.org/wiki/Typosquatting)"
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/typo_squatter
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-- dns
-- typo
-- squat
+  - dns
+  - typo
+  - squat
 hub_tags:
   use_cases: [threat_detection_and_response, data_enrichment]
   keywords: [dns]
@@ -50,15 +81,17 @@ triggers:
         description: Phishing score
         type: number
         required: false
+        example: 50
       domain:
         title: Domain
         description: Matched domain
         type: string
         required: false
+        example: example.com
 actions:
   check_for_squatters:
     title: Check for Squatters
-    description: Look for potential typo squatters
+    description: Look for potential squatters
     input:
       domain:
         description: Domain to check
@@ -78,6 +111,7 @@ actions:
         description: JSON representation of potential squatters
         type: '[]object'
         required: false
+        example: '[{"dns_a":["1.2.3.4"],"dns_mx":["test.example.com"],"dns_ns":["dns.example.com"],"domain":"example.com","fuzzer":"*original","geoip":"United States","phishing_score":20}]'
   score_domain:
     title: Score Domain
     description: Get phishing score for a domain. Scores over 65 should be considered likely phishing attempts with scores over 90 being very suspicious
@@ -95,3 +129,4 @@ actions:
         description: Phishing score
         type: number
         required: false
+        example: 50
