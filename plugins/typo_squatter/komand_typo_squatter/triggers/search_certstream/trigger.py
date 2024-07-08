@@ -51,8 +51,10 @@ class SearchCertstream(insightconnect_plugin_runtime.Trigger):
             )
 
     def run(self, params={}):
-        """Run the trigger"""
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         self.query = params.get(Input.QUERY)
         self.levenshtein = params.get(Input.LEVENSHTEIN)
         self.domain = params.get(Input.DOMAIN)
+        # END INPUT BINDING - DO NOT REMOVE
+
         certstream.listen_for_events(self.callback, "wss://certstream.calidog.io")
