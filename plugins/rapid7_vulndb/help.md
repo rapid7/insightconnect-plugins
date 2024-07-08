@@ -150,7 +150,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.1.2 - Bumping SDK version to 5.6.0
+* 2.1.2 - Bumping SDK version to 5.6.1
 * 2.1.1 - Add 404 and 504 error handlers | Add retry
 * 2.1.0 - Return list of vulnerability solutions in the Search Database action with new `solutions` output field
 * 2.0.4 - Correct spelling in help.md
