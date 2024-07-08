@@ -7,7 +7,7 @@ description: Make searching the Rapid7 vulnerability and exploit data fast, easy
 version: 2.1.2
 sdk:
   type: slim
-  version: 5.6.0
+  version: 5.6.1
   user: nobody
 supported_versions: ["v1"]
 connection_version: 2
@@ -35,7 +35,7 @@ references:
 links:
 - "[Rapid7 Vulnerability & Exploit Database API Specification](https://vdb.rapid7.com/swagger_doc)"
 version_history:
-- "2.1.2 - Bumping SDK version to 5.6.0"
+- "2.1.2 - Bumping SDK version to 5.6.1"
 - "2.1.1 - Add 404 and 504 error handlers | Add retry"
 - "2.1.0 - Return list of vulnerability solutions in the Search Database action with new `solutions` output field"
 - "2.0.4 - Correct spelling in help.md"
