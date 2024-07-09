@@ -199,7 +199,7 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
         "os_architecture": {
           "type": "string",
           "title": "OS Architecture",
-          "description": "The srchitecture of the os",
+          "description": "The architecture of the os",
           "order": 16
         },
         "os_description": {
@@ -238,38 +238,50 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
           "description": "Vendor of the os",
           "order": 22
         },
+        "os_version": {
+          "type": "string",
+          "title": "OS Version",
+          "description": "The version of the operating system",
+          "order": 23
+        },
         "risk_score": {
           "type": "number",
           "title": "Risk Score",
           "description": "Risk score (with criticality adjustments) of the asset",
-          "order": 23
+          "order": 24
         },
         "severe_vulnerabilities": {
           "type": "integer",
           "title": "Severe Vulnerabilities",
-          "description": "Number of sever vulns",
-          "order": 24
+          "description": "The count of severe vulnerability findings",
+          "order": 25
         },
         "tags": {
           "type": "array",
           "title": "Tags",
-          "description": "Asset tags",
+          "description": "The tags applied to the asset",
           "items": {
             "$ref": "#/definitions/asset_tag"
           },
-          "order": 25
+          "order": 26
         },
         "total_vulnerabilities": {
           "type": "integer",
           "title": "Total Vulnerabilities",
-          "description": "Total number of vulns",
-          "order": 26
+          "description": "The total count of vulnerability findings",
+          "order": 27
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "The type of asset",
+          "order": 28
         },
         "source": {
           "type": "string",
           "title": "Source",
           "description": "Source of the asset",
-          "order": 27
+          "order": 29
         },
         "unique_identifiers": {
           "type": "array",
@@ -278,16 +290,16 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "$ref": "#/definitions/identifiers"
           },
-          "order": 28
+          "order": 30
         },
         "remediated": {
           "type": "array",
           "title": "Remediated Vulnerabilities",
           "description": "Vulnerabilities that were remediated in the latest version at current time for the asset",
           "items": {
-            "type": "string"
+            "type": "object"
           },
-          "order": 29
+          "order": 31
         }
       },
       "required": [
