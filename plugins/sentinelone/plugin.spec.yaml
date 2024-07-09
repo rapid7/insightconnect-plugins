@@ -8,7 +8,7 @@ connection_version: 10
 cloud_ready: true
 sdk:
   type: slim
-  version: 5.6.0
+  version: 5.6.1
   user: nobody
 supported_versions: ["2.1.0"]
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
