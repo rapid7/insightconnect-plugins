@@ -1,12 +1,13 @@
 # Description
+
 [DomainTools](https://www.domaintools.com) data and products work in harmony to enable security teams to start getting ahead of attacks, gain context and visibility into potential threats, and lower the skills barrier. The DomainTools plugin for InsightConnect allows for the automation of domain lookups and retrieval of threat information related to the domain.
 This plugin utilizes the [DomainTools Python API](https://github.com/domaintools/python_api).
 
 # Key Features
 
 * WHOIS
-* Domain search
-* Brand monitor
+* Domain Search
+* Brand Monitor
 
 # Requirements
 
@@ -19,14 +20,14 @@ This plugin utilizes the [DomainTools Python API](https://github.com/domaintools
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_key|credential_secret_key|None|True|Enter the API key|None|9de50-69c5a-fe602-b2ea0-a04b6|
-|username|string|None|True|Enter the API username|None|username|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_key|credential_secret_key|None|True|Enter the API key|None|9de50-69c5a-fe602-b2ea0-a04b6|None|None|
+|username|string|None|True|Enter the API username|None|username|None|None|
+
 Example input:
 
 ```
@@ -42,17 +43,17 @@ Example input:
 
 
 #### Brand Monitor
-  
-Searches across all new domain registrations worldwide
+
+This action is used to searches across all new domain registrations worldwide
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|days_back|integer|None|False|Use this parameter when you need to search domains registered up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|0|
-|domain_status|string|None|False|Sets the scope of domain names to search|["new", "on-hold"]|new|
-|exclude|string|None|False|Domain names with these words will be excluded from the result set. Separate multiple terms with the pipe character|None|auto|
-|query|string|None|True|One or more terms separated by the pipe character|None|domaintools|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|days_back|integer|None|False|Use this parameter when you need to search domains registered up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|0|None|None|
+|domain_status|string|None|False|Sets the scope of domain names to search|["new", "on-hold"]|new|None|None|
+|exclude|string|None|False|Domain names with these words will be excluded from the result set. Separate multiple terms with the pipe character|None|auto|None|None|
+|query|string|None|True|One or more terms separated by the pipe character|None|domaintools|None|None|
   
 Example input:
 
@@ -80,14 +81,14 @@ Example output:
 ```
 
 #### Domain Profile
-  
-Provides basic domain name registration details and a preview of additional data
+
+This action is used to provides basic domain name registration details and a preview of additional data
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain|string|None|True|Domain name you wish to query|None|example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|domain|string|None|True|Domain name you wish to query|None|example.com|None|None|
   
 Example input:
 
@@ -139,24 +140,24 @@ Example output:
 ```
 
 #### Domain Search
-  
-Searches for domain names that match your specific search string
+
+This action is used to searches for domain names that match your specific search string
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|active_only|boolean|False|False|Return only domains currently registered|None|False|
-|anchor_left|boolean|False|False|Return only domains that start with the query term|None|default|
-|anchor_right|boolean|False|False|Return only domains that end with the query term|None|False|
-|deleted_only|boolean|False|False|Return only domains previously registered but not currently registered|None|default|
-|exclude_query|string|None|False|Terms to exclude from matching, each term in the query string must be at least three characters long|None|test|
-|has_hyphen|boolean|True|False|Return results with hyphens in the domain name|None|True|
-|has_number|boolean|True|False|Return results with numbers in the domain name|None|True|
-|max_length|integer|25|False|Limit the maximum domain character count|None|25|
-|min_length|integer|1|False|Limit the minimum domain character count|None|1|
-|page|integer|1|False|If the result set is larger than 1000 records for a given day, request additional pages with this parameter|None|1|
-|query|string|None|True|Query string, each term in the query string must be at least three characters long|None|domaintools|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|active_only|boolean|False|False|Return only domains currently registered|None|False|None|None|
+|anchor_left|boolean|False|False|Return only domains that start with the query term|None|default|None|None|
+|anchor_right|boolean|False|False|Return only domains that end with the query term|None|False|None|None|
+|deleted_only|boolean|False|False|Return only domains previously registered but not currently registered|None|default|None|None|
+|exclude_query|string|None|False|Terms to exclude from matching, each term in the query string must be at least three characters long|None|test|None|None|
+|has_hyphen|boolean|True|False|Return results with hyphens in the domain name|None|True|None|None|
+|has_number|boolean|True|False|Return results with numbers in the domain name|None|True|None|None|
+|max_length|integer|25|False|Limit the maximum domain character count|None|25|None|None|
+|min_length|integer|1|False|Limit the minimum domain character count|None|1|None|None|
+|page|integer|1|False|If the result set is larger than 1000 records for a given day, request additional pages with this parameter|None|1|None|None|
+|query|string|None|True|Query string, each term in the query string must be at least three characters long|None|domaintools|None|None|
   
 Example input:
 
@@ -194,14 +195,15 @@ Example output:
 ```
 
 #### Hosting History
-  
-Provides a list of changes that have occurred in a Domain Name\'s registrar, IP address, and name servers
+
+This action is used to provides a list of changes that have occurred in a Domain Name\'s registrar, IP address, and 
+name servers
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain|string|None|True|Domain name you wish to query|None|example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|domain|string|None|True|Domain name you wish to query|None|example.com|None|None|
   
 Example input:
 
@@ -231,16 +233,16 @@ Example output:
 ```
 
 #### IP Monitor
-  
-Searches the daily activity of all our monitored TLDs on any given IP address
+
+This action is used to searches the daily activity of all our monitored TLDs on any given IP address
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|days_back|integer|0|False|Use this parameter when you need to search domain changes up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|0|
-|page|integer|1|False|If the result set is larger than 1000 records for a given day, request additional pages with this parameter|None|1|
-|query|string|None|True|The IP Address you wish to query|None|65.55.53.233|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|days_back|integer|0|False|Use this parameter when you need to search domain changes up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|0|None|None|
+|page|integer|1|False|If the result set is larger than 1000 records for a given day, request additional pages with this parameter|None|1|None|None|
+|query|string|None|True|The IP Address you wish to query|None|65.55.53.233|None|None|
   
 Example input:
 
@@ -274,16 +276,16 @@ Example output:
 ```
 
 #### Name Server Monitor
-  
-Searches the daily activity of all our monitored TLDs on any given name server. 
+
+This action is used to searches the daily activity of all our monitored TLDs on any given name server. 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|days_back|int|0|False|Use this parameter search domain changes up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|0|
-|page|integer|1|False|If the result set is larger than 1000 records for a given day, request additional pages with this parameter|None|1|
-|query|string|None|True|The hostname of the Name Server you wish to query|None|DNSPOD.NET|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|days_back|int|0|False|Use this parameter search domain changes up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|0|None|None|
+|page|integer|1|False|If the result set is larger than 1000 records for a given day, request additional pages with this parameter|None|1|None|None|
+|query|string|None|True|The hostname of the Name Server you wish to query|None|DNSPOD.NET|None|None|
   
 Example input:
 
@@ -318,14 +320,14 @@ Example output:
 ```
 
 #### Parsed WHOIS
-  
-Provides parsed information extracted from the raw WHOIS record
+
+This action is used to provides parsed information extracted from the raw WHOIS record
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain|string|None|True|Domain name you wish to query|None|example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|domain|string|None|True|Domain name you wish to query|None|example.com|None|None|
   
 Example input:
 
@@ -369,17 +371,17 @@ Example output:
 ```
 
 #### Registrant Monitor
-  
-Searches the ownership (WHOIS) records of domain names for specific search terms
+
+This action is used to searches the ownership (WHOIS) records of domain names for specific search terms
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|days_back|integer|None|False|Use this parameter in exceptional circumstances where you need to search domains registered up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|0|
-|exclude|string|None|False|WHOIS records with these words will be excluded from the result set. Separate multiple terms with the pipe character|None|Private|Proxy|
-|limit|integer|None|False|Limit the number of matched domain names that are returned in your result set|None|100|
-|query|string|None|True|One or more terms separated by the pipe character|None|John Doe|Example Company|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|days_back|integer|None|False|Use this parameter in exceptional circumstances where you need to search domains registered up to six days prior to the current date|[0, 1, 2, 3, 4, 5, 6]|0|None|None|
+|exclude|string|None|False|WHOIS records with these words will be excluded from the result set. Separate multiple terms with the pipe character|None|Private|Proxy|None|None|
+|limit|integer|None|False|Limit the number of matched domain names that are returned in your result set|None|100|None|None|
+|query|string|None|True|One or more terms separated by the pipe character|None|John Doe|Example Company|None|None|
   
 Example input:
 
@@ -413,15 +415,15 @@ Example output:
 ```
 
 #### Reputation
-  
-Retrieves reputation score of specified domain name
+
+This action is used to retrieves reputation score of specified domain name
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain|string|None|True|Input domain for which the risk score is desired|None|example.com|
-|include_reasons|boolean|False|False|Return a list of reasons for the risk score determination|None|False|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|domain|string|None|True|Input domain for which the risk score is desired|None|example.com|None|None|
+|include_reasons|boolean|False|False|Return a list of reasons for the risk score determination|None|False|None|None|
   
 Example input:
 
@@ -453,15 +455,15 @@ Example output:
 ```
 
 #### Reverse IP
-  
-Provides a list of domain names that share the same Internet host (i.e. the same IP address)
+
+This action is used to provides a list of domain names that share the same Internet host (i.e. the same IP address)
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain|string|None|True|Domain name you wish to query|None|example.com|
-|limit|integer|None|False|Limits the size of the domain list than can appear in a response|None|100|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|domain|string|None|True|Domain name you wish to query|None|example.com|None|None|
+|limit|integer|None|False|Limits the size of the domain list than can appear in a response|None|100|None|None|
   
 Example input:
 
@@ -489,18 +491,18 @@ Example output:
 ```
 
 #### Reverse IP WHOIS
-  
-Provides a list of IP network ranges with WHOIS records that match a specific query
+
+This action is used to provides a list of IP network ranges with WHOIS records that match a specific query
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|country|string|None|False|Limits results to IP addresses allocated to an entity with a particular country|None|US|
-|include_total_count|boolean|False|False|Returns the total number of results for a query|None|False|
-|ip|string|None|False|Required for single IP result|None|0.0.0.0|
-|page|string|None|False|Providing the page number allows access to additional pages of data|None|2|
-|server|string|None|False|Limits results to ranges from a particular WHOIS server|None|whois.arin.net|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|country|string|None|False|Limits results to IP addresses allocated to an entity with a particular country|None|US|None|None|
+|include_total_count|boolean|False|False|Returns the total number of results for a query|None|False|None|None|
+|ip|string|None|False|Required for single IP result|None|0.0.0.0|None|None|
+|page|string|None|False|Providing the page number allows access to additional pages of data|None|2|None|None|
+|server|string|None|False|Limits results to ranges from a particular WHOIS server|None|whois.arin.net|None|None|
   
 Example input:
 
@@ -535,15 +537,15 @@ Example output:
 ```
 
 #### Reverse Name Server
-  
-Provides a list of domain names that share the same primary or secondary name server
+
+This action is used to provides a list of domain names that share the same primary or secondary name server
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain|string|None|True|Domain name you wish to query|None|example.com|
-|limit|integer|None|False|Limits the size of the domain list than can appear in a response|None|100|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|domain|string|None|True|Domain name you wish to query|None|example.com|None|None|
+|limit|integer|None|False|Limits the size of the domain list than can appear in a response|None|100|None|None|
   
 Example input:
 
@@ -578,17 +580,17 @@ Example output:
 ```
 
 #### Reverse WHOIS
-  
-Provides a list of domain names that share the same Registrant Information
+
+This action is used to provides a list of domain names that share the same Registrant Information
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|exclude|string|None|False|Domain names with WHOIS records that match these terms will be excluded from the result set. Separate multiple terms with the pipe character|None|Private|Proxy|
-|mode|string|None|False|Quote only lists the size and retail price of the query whiles purchase includes the complete list of domain names|None|purchase|
-|scope|string|None|False|Sets the scope of the report to include only current WHOIS records, or to include both current and historic records|["current", "historic"]|current|
-|terms|string|None|True|List of one or more terms to search for in the WHOIS record, separated with the pipe character|None|John Doe|Example Company|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|exclude|string|None|False|Domain names with WHOIS records that match these terms will be excluded from the result set. Separate multiple terms with the pipe character|None|Private|Proxy|None|None|
+|mode|string|None|False|Quote only lists the size and retail price of the query whiles purchase includes the complete list of domain names|None|purchase|None|None|
+|scope|string|None|False|Sets the scope of the report to include only current WHOIS records, or to include both current and historic records|["current", "historic"]|current|None|None|
+|terms|string|None|True|List of one or more terms to search for in the WHOIS record, separated with the pipe character|None|John Doe|Example Company|None|None|
   
 Example input:
 
@@ -626,14 +628,14 @@ Example output:
 ```
 
 #### WHOIS
-  
-Provides the ownership record for a domain name or IP address with basic registration details
+
+This action is used to provides the ownership record for a domain name or IP address with basic registration details
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|query|string|None|True|Domain name or an IP address to perform a WHOIS lookup|None|example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|query|string|None|True|Domain name or an IP address to perform a WHOIS lookup|None|example.com|None|None|
   
 Example input:
 
@@ -677,14 +679,14 @@ Example output:
 ```
 
 #### WHOIS History
-  
-Provides a list of historic WHOIS records for a domain name
+
+This action is used to provides a list of historic WHOIS records for a domain name
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|domain|string|None|True|Domain name you wish to query|None|example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|domain|string|None|True|Domain name you wish to query|None|example.com|None|None|
   
 Example input:
 
@@ -1124,12 +1126,12 @@ Example output:
 
 
 ## Troubleshooting
-  
-  
-*There is no troubleshooting for this plugin.*
+
+There is no troubleshooting for this Plugin
 
 # Version History
 
+* 2.0.1 - SDK Bump | bumping version of anyio used in requirements
 * 2.0.0 - Update `DomainTools` to `1.0.1` | Update to latest SDK version | Fix import issues on all actions | Change `Days Back` input of `Name Server Monitor` to type `int` | Remove `Query` input from `Reverse IP WHOIS` | Add `Server` to `WHOIS History` output `Response` | Add `Reasons` to `Reputation` output `Response` | Change `Meta` to type `List` for `Domain Profile` output `Response`
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types | Bug fix logging credentials
