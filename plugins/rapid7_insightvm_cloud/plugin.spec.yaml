@@ -27,7 +27,7 @@ status: []
 cloud_ready: true
 sdk:
   type: slim
-  version: 5.5.5
+  version: 5.6.1
   user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insightvm_cloud
