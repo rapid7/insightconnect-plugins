@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm_cloud
 title: Rapid7 InsightVM Cloud
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM Cloud Integrations API to view assets and start scans
-version: 6.0.0
+version: 7.0.0
 connection_version: 6
 key_features:
   - "Perform scan management functionality including starting and checking the status of scans"
@@ -42,6 +42,7 @@ hub_tags:
   keywords: [insightvm, rapid7, cloud, cloud_enabled]
   features: []
 version_history:
+  - "7.0.0 - `Asset Search` and `Get Asset` actions output field `remediated` updated to type array of object"
   - "6.0.0 - Asset Search: Modify type of output field `new` when `comparison_time` input is used."
   - "5.0.0 - Vulnerability Search: fix malware_kits output and remove Asset Criteria input | Updated the documentation with links related to query builder and operators | Updated the SDK"
   - "4.0.0 - Vulnerability Search: fix schema validation problem for exploits field"
@@ -801,7 +802,7 @@ types:
       type: '[]object'
       required: false
     os_architecture:
-      description: The srchitecture of the os
+      description: The architecture of the os
       title:  OS Architecture
       type: string
       required: false
@@ -835,25 +836,35 @@ types:
       title: OS Vendor
       type: string
       required: false
+    os_version:
+      description: The version of the operating system
+      title: OS Version
+      type: string
+      required: false
     risk_score:
       description: Risk score (with criticality adjustments) of the asset
       title: Risk Score
       type: float
       required: false
     severe_vulnerabilities:
-      description: Number of sever vulns
+      description: The count of severe vulnerability findings
       title: Severe Vulnerabilities
       type: integer
       required: false
     tags:
-      description: Asset tags
+      description: The tags applied to the asset
       title: Tags
       type: '[]asset_tag'
       required: false
     total_vulnerabilities:
-      description: Total number of vulns
+      description: The total count of vulnerability findings
       title: Total Vulnerabilities
       type: integer
+      required: false
+    type:
+      description: The type of asset
+      title: Type
+      type: string
       required: false
     source:
       description: Source of the asset
@@ -868,7 +879,7 @@ types:
     remediated:
       description: Vulnerabilities that were remediated in the latest version at current time for the asset
       title: Remediated Vulnerabilities
-      type: '[]string'
+      type: '[]object'
       required: false
   exploit:
     description:

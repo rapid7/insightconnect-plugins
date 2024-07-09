@@ -831,19 +831,21 @@ Example output:
 |Malware Kits|integer|None|False|Number of malware kits|None|
 |Moderate Vulnerabilities|integer|None|False|Number of moderate vulnerabilities|None|
 |New|[]object|None|False|If comparison time is supplied, the vulnerabilities that are new in the latest version at current time|None|
-|OS Architecture|string|None|False|The srchitecture of the os|None|
+|OS Architecture|string|None|False|The architecture of the os|None|
 |OS Description|string|None|False|Description of the os|None|
 |OS Family|string|None|False|Family of the os|None|
 |OS Name|string|None|False|Name of the os|None|
 |OS System Name|string|None|False|Name of the system os|None|
 |OS Type|string|None|False|Type of os|None|
 |OS Vendor|string|None|False|Vendor of the os|None|
-|Remediated Vulnerabilities|[]string|None|False|Vulnerabilities that were remediated in the latest version at current time for the asset|None|
+|OS Version|string|None|False|The version of the operating system|None|
+|Remediated Vulnerabilities|[]object|None|False|Vulnerabilities that were remediated in the latest version at current time for the asset|None|
 |Risk Score|float|None|False|Risk score (with criticality adjustments) of the asset|None|
-|Severe Vulnerabilities|integer|None|False|Number of sever vulns|None|
+|Severe Vulnerabilities|integer|None|False|The count of severe vulnerability findings|None|
 |Source|string|None|False|Source of the asset|None|
-|Tags|[]asset_tag|None|False|Asset tags|None|
-|Total Vulnerabilities|integer|None|False|Total number of vulns|None|
+|Tags|[]asset_tag|None|False|The tags applied to the asset|None|
+|Total Vulnerabilities|integer|None|False|The total count of vulnerability findings|None|
+|Type|string|None|False|The type of asset|None|
 |Unique Identifiers|[]identifiers|None|False|Uniqure aspects of the asset|None|
   
 **exploit**
@@ -888,6 +890,7 @@ Example output:
 
 # Version History
 
+* 7.0.0 - `Asset Search` and `Get Asset` actions output field `remediated` updated to type array of object
 * 6.0.0 - Asset Search: Modify type of output field `new` when `comparison_time` input is used.
 * 5.0.0 - Vulnerability Search: fix malware_kits output and remove Asset Criteria input | Updated the documentation with links related to query builder and operators | Updated the SDK
 * 4.0.0 - Vulnerability Search: fix schema validation problem for exploits field
