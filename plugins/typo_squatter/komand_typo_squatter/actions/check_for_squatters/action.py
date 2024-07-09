@@ -7,6 +7,7 @@ from komand_typo_squatter.util import utils
 import subprocess  # nosec B404
 import validators
 import json
+from typing import List, Dict, Any
 
 
 class CheckForSquatters(insightconnect_plugin_runtime.Action):
@@ -19,11 +20,14 @@ class CheckForSquatters(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {
-            Output.POTENTIAL_SQUATTERS: self.check_for_squatters(params.get(Input.DOMAIN), params.get(Input.FLAG, ""))
-        }
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        domain = params.get(Input.DOMAIN)
+        flag = params.get(Input.FLAG, "")
+        # END INPUT BINDING - DO NOT REMOVE
 
-    def check_for_squatters(self, domain: str, flag: str) -> list:
+        return {Output.POTENTIAL_SQUATTERS: self.check_for_squatters(domain, flag)}
+
+    def check_for_squatters(self, domain: str, flag: str) -> List[Dict[str, Any]]:
         if not validators.domain(domain):
             raise PluginException(
                 cause="Invalid domain provided.", assistance="Please provide a valid domain and try again."
@@ -44,8 +48,7 @@ class CheckForSquatters(insightconnect_plugin_runtime.Action):
                 assistance="Please try again and contact support if the problem persists.",
                 data=error,
             )
-        js = json.loads(results.stdout.decode().replace("\\n", ""))
-        for i, item in enumerate(js):
-            js[i]["phishing_score"] = utils.score_domain(item.get("domain-name"))
-
-        return js
+        json_output = json.loads(results.stdout.decode().replace("\\n", ""))
+        for index, item in enumerate(json_output):
+            json_output[index]["phishing_score"] = utils.score_domain(item.get("domain"))
+        return json_output

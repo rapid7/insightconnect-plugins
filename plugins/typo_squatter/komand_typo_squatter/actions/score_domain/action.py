@@ -15,4 +15,8 @@ class ScoreDomain(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {Output.SCORE: utils.score_domain(params.get(Input.DOMAIN))}
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        domain = params.get(Input.DOMAIN)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        return {Output.SCORE: utils.score_domain(domain)}
