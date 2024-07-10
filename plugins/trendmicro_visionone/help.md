@@ -2876,7 +2876,7 @@ Example output:
 |OS Description|string|None|True|Description of the operating system installed on an endpoint|None|
 |OS Name|string|None|True|Operating system installed on an endpoint|None|
 |OS Version|string|None|True|Version of the operating system installed on an endpoint|None|
-|Product Code|string|None|True|A 3-character code that identifies Trend Micro products|None|
+|Product Code|string|None|False|A 3-character code that identifies Trend Micro products|None|
   
 **submit_urls_resp**
 

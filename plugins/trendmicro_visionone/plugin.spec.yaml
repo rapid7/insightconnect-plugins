@@ -300,11 +300,7 @@ types:
       title: Product Code
       type: string
       description: A 3-character code that identifies Trend Micro products
-      required: true
-      enum:
-      - sao
-      - sds
-      - xes
+      required: false
     installed_product_codes:
       title: Installed Product Codes
       type: '[]string'
