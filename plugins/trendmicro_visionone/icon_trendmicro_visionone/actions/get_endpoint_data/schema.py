@@ -134,11 +134,6 @@ class GetEndpointDataOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Product Code",
           "description": "A 3-character code that identifies Trend Micro products",
-          "enum": [
-            "sao",
-            "sds",
-            "xes"
-          ],
           "order": 9
         },
         "installed_product_codes": {
@@ -160,8 +155,7 @@ class GetEndpointDataOutput(insightconnect_plugin_runtime.Output):
         "mac_address",
         "os_description",
         "os_name",
-        "os_version",
-        "product_code"
+        "os_version"
       ]
     }
   }
