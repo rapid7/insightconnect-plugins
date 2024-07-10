@@ -8,7 +8,6 @@ sys.path.append(os.path.abspath("../"))
 from requests.exceptions import HTTPError
 from komand_sentinelone.connection.connection import Connection
 from komand_sentinelone.connection.schema import Input
-from komand_sentinelone.util.constants import CONSOLE_USER_TYPE
 
 
 class Util:
@@ -21,7 +20,6 @@ class Util:
         else:
             params = {
                 Input.INSTANCE: "rapid7",
-                Input.USERTYPE: CONSOLE_USER_TYPE,
                 Input.APIKEY: {"secretKey": "test"},
             }
         default_connection.connect(params)
@@ -48,10 +46,11 @@ class Util:
     @staticmethod
     def mocked_requests_get(*args, **kwargs):
         class MockResponse:
-            def __init__(self, status_code: int, filename: str = None):
+            def __init__(self, status_code: int, filename: str = None, url: str = None):
                 self.filename = filename
                 self.status_code = status_code
                 self.text = "This is some error text"
+                self.url = url
                 if filename:
                     self.text = Util.read_file_to_string(f"responses/{filename}.json.resp")
 
@@ -178,6 +177,42 @@ class Util:
                 "sortOrder": "asc",
             }:
                 return MockResponse(200, "activities_empty")
+            if params in [
+                {
+                    "limit": 1000,
+                    "sortBy": "createdAt",
+                    "createdAt__gt": "1999-12-31T00:00:00.000000Z",
+                    "createdAt__lte": "2000-01-01T00:00:00.000000Z",
+                },
+                {
+                    "limit": 1000,
+                    "sortBy": "createdAt",
+                    "cursor": "YWdlbnRfaWQ6NTgwMjkzODE=",
+                },
+                {
+                    "limit": 1000,
+                    "createdAt__gt": "1999-12-30T00:00:00.000000Z",
+                    "createdAt__lte": "2000-01-01T00:00:00.000000Z",
+                    "sortBy": "createdAt",
+                },
+            ]:
+                return MockResponse(200, "monitor_logs_activities")
+            if params == {
+                "limit": 1000,
+                "sortBy": "createdAt",
+                "cursor": "ZWdlbnRfaWQ6NTgwMjkzODE=",
+            }:
+                return MockResponse(401)
+            if params.get("cursor") == "400":
+                return MockResponse(400)
+            if params.get("cursor") == "401":
+                return MockResponse(401)
+            if params.get("cursor") == "403":
+                return MockResponse(403)
+            if params.get("cursor") == "404":
+                return MockResponse(404)
+            if params.get("cursor") == "500":
+                return MockResponse(500)
             return MockResponse(200, "activities_second_page")
         elif args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/activities/types":
             return MockResponse(200, "activities_types")
@@ -307,6 +342,7 @@ class Util:
                 return MockResponse(200, "threats_same_status")
             if params.get("ids") in [["non_existing_threat_id_1"], ["0000000000000000000"]]:
                 return MockResponse(200, "threats_not_found")
+            return MockResponse(200, "monitor_logs_threats")
         elif args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/cloud-detection/alerts":
             if params.get("ids") in [["valid_alert_id_1"], ["valid_alert_id_2"]]:
                 return MockResponse(200, "alerts")
@@ -376,4 +412,6 @@ class Util:
                 return MockResponse(200, "move_between_sites_minimum")
             elif json_data.get("data", {}).get("targetSiteId", "") == "1234567891234567891":
                 return MockResponse(200, "move_between_sites_data")
+        elif args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/device-control/events":
+            return MockResponse(200, "monitor_logs_events")
         return MockResponse(404)

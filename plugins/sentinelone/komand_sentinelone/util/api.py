@@ -7,18 +7,14 @@ import zipfile
 import requests
 from json.decoder import JSONDecodeError
 from re import match
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List
 from urllib.parse import urlsplit, unquote
 from logging import Logger
 from ..util.helper import rate_limiting
 
 from komand_sentinelone.util.helper import Helper, clean, sanitise_url
 from komand_sentinelone.util.constants import (
-    DATA_FIELD,
-    API_TOKEN_FIELD,
-    CONSOLE_USER_HEADER_TOKEN_FIELD,
     SERVICE_USER_HEADER_TOKEN_FIELD,
-    SERVICE_USER_TYPE,
 )
 from komand_sentinelone.util.endpoints import (
     ACCOUNT_NAME_AVAILABLE_ENDPOINT,
@@ -35,11 +31,11 @@ from komand_sentinelone.util.endpoints import (
     CANCEL_QUERY_ENDPOINT,
     CREATE_IOC_THREAT_ENDPOINT,
     CREATE_QUERY_ENDPOINT,
+    DEVICE_CONTROL_EVENTS,
     DISABLE_AGENT_ENDPOINT,
     ENABLE_AGENT_ENDPOINT,
     FETCH_FILE_BY_AGENT_ID_ENDPOINT,
     GET_EVENTS_ENDPOINT,
-    LOGIN_BY_TOKEN_ENDPOINT,
     MARK_AS_BENIGN_ENDPOINT,
     MARK_AS_THREAT_ENDPOINT,
     MITIGATE_THREAT_ENDPOINT,
@@ -56,12 +52,11 @@ from komand_sentinelone.util.endpoints import (
 
 
 class SentineloneAPI:
-    def __init__(self, url: str, api_key: str, user_type: str, logger: Logger):
+    def __init__(self, url: str, api_key: str, logger: Logger):
         self.url = self.split_url(url)
-        self._api_key = api_key
-        self.user_type = user_type
+        self.api_key = api_key
         self.logger = logger
-        self._token, self.api_version = self._get_auth_token()
+        self.api_version = "2.1"
 
     def apps_by_agent_ids(self, identifiers: str) -> list:
         return self._call_api("GET", APPS_BY_AGENT_IDS_ENDPOINT, params={"ids": identifiers})
@@ -137,6 +132,17 @@ class SentineloneAPI:
         if get_all_results:
             return self.get_all_paginated_results(GET_EVENTS_ENDPOINT, params)
         return self._call_api("GET", GET_EVENTS_ENDPOINT, params=params)
+
+    def get_device_control_events(
+        self, params: dict, full_response: bool = False, raise_for_status: bool = True
+    ) -> dict:
+        return self._call_api(
+            "GET",
+            DEVICE_CONTROL_EVENTS,
+            params=params,
+            full_response=full_response,
+            raise_for_status=raise_for_status,
+        )
 
     def get_existing_blacklist(self, blacklist_hash: str) -> bool:
         ids = self.get_item_ids_by_hash(blacklist_hash)
@@ -225,10 +231,19 @@ class SentineloneAPI:
     def get_alerts(self, params: dict) -> dict:
         return self._call_api("GET", ALERTS_ENDPOINT, params=params)
 
-    def get_threats(self, params: dict, api_version: str = "2.0") -> dict:
+    def get_threats(
+        self, params: dict, api_version: str = "2.0", full_response: bool = False, raise_for_status: bool = True
+    ) -> dict:
         # GET /threats has different response schemas for 2.1 and 2.0
         # Use 2.0 endpoint to be consistent and support as many S1 consoles as possible
-        return self._call_api("GET", THREAT_SUMMARY_ENDPOINT, params=params, override_api_version=api_version)
+        return self._call_api(
+            "GET",
+            THREAT_SUMMARY_ENDPOINT,
+            params=params,
+            override_api_version=api_version,
+            full_response=full_response,
+            raise_for_status=raise_for_status,
+        )
 
     def check_if_threats_exist(self, threat_ids: List[str]):
         threats = self.get_threats({"ids": threat_ids}, api_version="2.1")
@@ -275,8 +290,14 @@ class SentineloneAPI:
                 data=error.args,
             )
 
-    def get_activities_list(self, params: dict) -> dict:
-        return self._call_api("GET", "activities", params=params)
+    def get_activities_list(self, params: dict, full_response: bool = False, raise_for_status: bool = True) -> dict:
+        return self._call_api(
+            "GET",
+            "activities",
+            params=params,
+            full_response=full_response,
+            raise_for_status=raise_for_status,
+        )
 
     def get_activity_types(self) -> dict:
         return self._call_api("GET", ACTIVITY_TYPES_ENDPOINT)
@@ -427,42 +448,9 @@ class SentineloneAPI:
                 data=response.text,
             )
 
-    def _get_auth_token(self) -> Tuple[str, str]:
-        version = "2.1"
-        if self.user_type == SERVICE_USER_TYPE:
-            return self._api_key, version
-        request_data = {DATA_FIELD: {API_TOKEN_FIELD: self._api_key}}
-        self.logger.info(f"Trying to authenticate with API version {version}")
-        response = requests.post(
-            f"{self.url}{LOGIN_BY_TOKEN_ENDPOINT.format(version=version)}", json=request_data, timeout=60
-        )
-        self.raise_for_status(response)
-        if response.status_code == 200:
-            token = response.json().get(DATA_FIELD, {}).get("token")
-        else:
-            version = "2.0"
-            self.logger.info(f"API v2.1 failed... trying v{version}")
-            response = requests.post(
-                f"{self.url}{LOGIN_BY_TOKEN_ENDPOINT.format(version=version)}", json=request_data, timeout=60
-            )
-            self.raise_for_status(response)
-            token = response.json().get(DATA_FIELD, {}).get("token")
-            # We know the connection failed when both 2.1 and 2.0 do not give 200 responses
-            if not token:
-                raise PluginException(
-                    cause=f"Could not authorize with SentinelOne instance at: {self.url}.",
-                    assistance="An attempt was made to connect using a version of the API 2.0 and 2.1. "
-                    "Check the inputs params and try again. If the problem persists contact with development team.",
-                )
-        return token, version
-
     def make_headers(self) -> dict:
-        if self.user_type == SERVICE_USER_TYPE:
-            token_field = SERVICE_USER_HEADER_TOKEN_FIELD
-        else:
-            token_field = CONSOLE_USER_HEADER_TOKEN_FIELD
         return {
-            "Authorization": f"{token_field} {self._token}",
+            "Authorization": f"{SERVICE_USER_HEADER_TOKEN_FIELD} {self.api_key}",
             "Content-Type": "application/json",
         }
 
@@ -475,6 +463,7 @@ class SentineloneAPI:
         params: dict = None,
         full_response: bool = False,
         override_api_version: str = "",
+        raise_for_status: bool = True,
     ):
         # We prefer to use the same api version from the token creation,
         # But some actions require 2.0 and not 2.1 (and vice versa), in that case just pass in the right version
@@ -494,7 +483,8 @@ class SentineloneAPI:
                 params=params,
                 headers=self.make_headers(),
             )
-            self.raise_for_status(response)
+            if raise_for_status:
+                self.raise_for_status(response)
             if full_response:
                 return response
             return response.json()
