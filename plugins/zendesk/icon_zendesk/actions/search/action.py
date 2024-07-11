@@ -30,24 +30,24 @@ class Search(insightconnect_plugin_runtime.Action):
             raise PluginException(preset=PluginException.Preset.NOT_FOUND)
 
         for item in results:
-            if search_type == "Organization" and results is not None:
+            if search_type == "Organization":
                 organization_object = Objects.create_organization_object(item)
                 objects.append(organization_object)
 
-            if search_type == "Ticket" and results is not None:
+            if search_type == "Ticket":
                 ticket_object = Objects.create_ticket_object(item)
                 objects.append(ticket_object)
 
-            if search_type == "User" and results is not None:
+            if search_type == "User":
                 user_object = Objects.create_user_object(item)
                 objects.append(user_object)
 
-            if search_type == "Organization":
-                return {Output.ORGANIZATIONS: insightconnect_plugin_runtime.helper.clean(objects)}
-            elif search_type == "Ticket":
-                return {Output.TICKETS: insightconnect_plugin_runtime.helper.clean(objects)}
-            else:
-                return {Output.USERS: insightconnect_plugin_runtime.helper.clean(objects)}
+        if search_type == "Organization":
+            return {Output.ORGANIZATIONS: insightconnect_plugin_runtime.helper.clean(objects)}
+        elif search_type == "Ticket":
+            return {Output.TICKETS: insightconnect_plugin_runtime.helper.clean(objects)}
+        else:
+            return {Output.USERS: insightconnect_plugin_runtime.helper.clean(objects)}
 
     @staticmethod
     def convert_to_string(values: Optional[int]) -> Optional[str]:
