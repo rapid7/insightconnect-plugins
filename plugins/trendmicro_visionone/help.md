@@ -1,88 +1,88 @@
 # Description
 
-Trend Micro Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
+Trend Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
 
 # Key Features
-  
-* Add Alert Note  
-* Add Custom Script  
-* Add to Block List  
-* Add to Exception List  
-* Add to Suspicious List  
-* Collect File  
-* Create API Keys  
-* Delete Custom Script  
-* Delete Email Message  
-* Delete API Keys  
-* Disable Account  
-* Download Custom Script  
-* Download Sandbox Analysis Result  
-* Download Sandbox Investigation Package  
-* Edit Alert Status  
-* Enable Account  
-* Get Alert Details  
-* Get Alert List  
-* Get API Key  
-* Get Custom Script List  
-* Get Email Activity Data  
-* Get Email Activity Data Count  
-* Get Endpoint Activity Data  
-* Get Endpoint Activity Data Count  
-* Get Endpoint Data  
-* Get Exception List  
-* Get Sandbox Analysis Result  
-* Get Sandbox Submission Status  
-* Get Sandbox Suspicious List  
-* Get Suspicious List  
-* Get Task Result  
-* Isolate Endpoint  
-* List API Keys  
-* Poll Alert List  
-* Poll Sandbox Suspicious List  
-* Quarantine Email Message  
-* Remove from Block List  
-* Remove from Exception List  
-* Remove from Suspicious List  
-* Reset Password Account  
-* Restore Email Message  
-* Restore Endpoint  
-* Run Custom Script  
-* Sign out Account  
-* Submit File to Sandbox  
-* Submit URLs to Sandbox  
-* Terminate Process  
-* Update API Key  
+
+* Add Alert Note
+* Add Custom Script
+* Add to Block List
+* Add to Exception List
+* Add to Suspicious List
+* Collect File
+* Create API Keys
+* Delete Custom Script
+* Delete Email Message
+* Delete API Keys
+* Disable Account
+* Download Custom Script
+* Download Sandbox Analysis Result
+* Download Sandbox Investigation Package
+* Edit Alert Status
+* Enable Account
+* Get Alert Details
+* Get Alert List
+* Get API Key
+* Get Custom Script List
+* Get Email Activity Data
+* Get Email Activity Data Count
+* Get Endpoint Activity Data
+* Get Endpoint Activity Data Count
+* Get Endpoint Data
+* Get Exception List
+* Get OAT List
+* Get Sandbox Analysis Result
+* Get Sandbox Submission Status
+* Get Sandbox Suspicious List
+* Get Suspicious List
+* Get Task Result
+* Isolate Endpoint
+* List API Keys
+* Poll Alert List
+* Poll OAT List
+* Poll Sandbox Suspicious List
+* Quarantine Email Message
+* Remove from Block List
+* Remove from Exception List
+* Remove from Suspicious List
+* Reset Password Account
+* Restore Email Message
+* Restore Endpoint
+* Run Custom Script
+* Sign out Account
+* Submit File to Sandbox
+* Submit URLs to Sandbox
+* Terminate Process
+* Update API Key
 * Update Custom Script
 
 # Requirements
-  
-* Requires a Trend Micro Vision One API Key  
+
+* Requires a Trend Vision One API Key
 * API must be enabled on the Settings page in the product's user interface
 
 # Supported Product Versions
-  
-* Trend Micro Vision One API v3
+
+* Trend Vision One API v3
 
 # Documentation
 
 ## Setup
-  
+
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_key|credential_secret_key|default|True|Vision One API Token|None|12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234|
-|api_url|string|https://example.com|True|URL of Trend Micro Vision One|None|https://example.com|
-|app_name|string|Rapid7-InsightConnect|True|Name of the App to be Integrated with|None|Rapid7-InsightConnect|
-|verify_ssl|boolean|True|True|Verify if connection uses SSL|None|True|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_key|credential_secret_key|default|True|Vision One API Token|None|12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234|None|None|
+|api_url|string|https://api.xdr.trendmicro.com|True|URL of Trend Vision One|None|https://tmv1-mock.trendmicro.com|None|None|
+|verify_ssl|boolean|True|True|Verify if connection uses SSL|None|True|None|None|
+
 Example input:
 
 ```
 {
-  "api_key": "12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234",
-  "api_url": "https://tmv1-mock.trendmicro.com",
-  "app_name": "Rapid7-InsightConnect",
+  "api_key": "default",
+  "api_url": "https://api.xdr.trendmicro.com",
   "verify_ssl": true
 }
 ```
@@ -104,10 +104,10 @@ This action is used to attaches a note to a workbench alert
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|alert_id|string|None|True|Unique alphanumeric string that identifies a Workbench alert|None|WB-14-20190709-00003|
-|content|string|None|True|Unique alphanumeric string that identifies a Workbench alert|None|Suspected False Positive, please verify|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|alert_id|string|None|True|Unique alphanumeric string that identifies a Workbench alert|None|WB-14-20190709-00003|None|None|
+|content|string|None|True|Unique alphanumeric string that identifies a Workbench alert|None|Suspected False Positive, please verify|None|None|
   
 Example input:
 
@@ -135,7 +135,7 @@ Example output:
 ```
 
 #### Add Custom Script
-  
+
 This action is used to uploads a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 
 encoding
 
@@ -149,11 +149,11 @@ encoding
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|description|string|None|False|Task Description|None|example desc|
-|file|file|None|False|Custom Script (dict of {filename(string) & content(base64(bytes))})|None|{"content":"dGVzdA==","filename":"r7-test11.sh"}|
-|file_type|string|bash|True|File type of custom script|["powershell", "bash"]|bash|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|description|string|None|False|Task Description|None|example desc|None|None|
+|file|file|None|False|Custom Script (dict of {filename(string) & content(base64(bytes))})|None|{"content":"dGVzdA==","filename":"r7-test11.sh"}|None|None|
+|file_type|string|bash|True|File type of custom script|["powershell", "bash"]|bash|None|None|
   
 Example input:
 
@@ -183,7 +183,7 @@ Example output:
 ```
 
 #### Add to Block List
-  
+
 This action is used to adds an email address, file SHA-1, domain, IP address, or URL to the Suspicious Object List, 
 which blocks the objects on subsequent detections
 
@@ -201,9 +201,9 @@ which blocks the objects on subsequent detections
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|block_objects|[]block_objects|None|True|Objects made up of type, value and description|None|[{"object_type":"ip","object_value":"6.6.6.6","description":"block"}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|block_objects|[]block_objects|None|True|Objects made up of type, value and description|None|[{"object_type":"ip","object_value":"6.6.6.6","description":"block"}]|None|None|
   
 Example input:
 
@@ -243,7 +243,7 @@ Example output:
 ```
 
 #### Add to Exception List
-  
+
 This action is used to adds domains, file SHA-1 values, IP addresses, or URLs to the Exception List and prevents these 
 objects from being added to the Suspicious Object List
 
@@ -256,9 +256,9 @@ objects from being added to the Suspicious Object List
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|block_objects|[]block_objects|None|True|Objects made up of type, value and description|None|[{"object_type":"ip","object_value":"1.2.6.9"}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|block_objects|[]block_objects|None|True|Objects made up of type, value and description|None|[{"object_type":"ip","object_value":"1.2.6.9"}]|None|None|
   
 Example input:
 
@@ -297,7 +297,7 @@ Example output:
 ```
 
 #### Add to Suspicious List
-  
+
 This action is used to adds domains, file SHA-1/SHA-256 values, IP addresses, senderMailAddress, or URLs to the Block 
 Object List
 
@@ -310,9 +310,9 @@ Object List
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|suspicious_block_objects|[]suspicious_block_objects|None|True|Suspicious Objects made up of type, value and scan_action, risk_level and days_to_expiration|None|[{"risk_level":"high","expiry_days":"30","object_type":"ip","scan_action":"block","object_value":"6.6.6.3"}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|suspicious_block_objects|[]suspicious_block_objects|None|True|Suspicious Objects made up of type, value and scan_action, risk_level and days_to_expiration|None|[{"risk_level":"high","expiry_days":"30","object_type":"ip","scan_action":"block","object_value":"6.6.6.3"}]|None|None|
   
 Example input:
 
@@ -368,9 +368,9 @@ agent program- agentGuid
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|collect_files|[]collect_files|None|True|Collect file input JSON containing endpoint, file path and description|None|[{"endpoint_name":"client1","agent_guid":"cb9c8412-1f64-4fa0-a36b-76bf41a07ede","file_path":"C:/virus.exe","description":"collect malicious file"}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|collect_files|[]collect_files|None|True|Collect file input JSON containing endpoint, file path and description|None|[{"endpoint_name":"client1","agent_guid":"cb9c8412-1f64-4fa0-a36b-76bf41a07ede","file_path":"C:/virus.exe","description":"collect malicious file"}]|None|None|
   
 Example input:
 
@@ -419,9 +419,9 @@ This action is used to generates API keys that allow third-party applications to
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_keys_objects|[]api_keys_objects|None|True|List of JSON objects containing data for API keys creation|None|[{"name":"TestKey","role":"Analyst","months_to_expiration":"1","description":"Test API Key create","status":"enabled"}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_keys_objects|[]api_keys_objects|None|True|List of JSON objects containing data for API keys creation|None|[{"name":"TestKey","role":"Analyst","months_to_expiration":"1","description":"Test API Key create","status":"enabled"}]|None|None|
   
 Example input:
 
@@ -473,9 +473,9 @@ This action is used to deletes the specified API keys
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|[]string|None|True|List of unique identifiers of the API keys|None|["d367abdd-7739-4129-a36a-862c4ec018b4","b667abdd-7739-4129-a36a-862c4ec019se"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|[]string|None|True|List of unique identifiers of the API keys|None|["d367abdd-7739-4129-a36a-862c4ec018b4","b667abdd-7739-4129-a36a-862c4ec019se"]|None|None|
   
 Example input:
 
@@ -516,9 +516,9 @@ This action is used to deletes custom script
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|script_id|string|None|True|Unique alphanumeric string that identifies a script file|None|44c99cb0-8c5f-4182-af55-62135dbe32f1|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|script_id|string|None|True|Unique alphanumeric string that identifies a script file|None|44c99cb0-8c5f-4182-af55-62135dbe32f1|None|None|
   
 Example input:
 
@@ -555,9 +555,9 @@ This action is used to deletes a message from a mailbox
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|email_identifiers|[]email_identifiers|None|True|Email Identifiers consisting of message id, mailbox and description|None|[{"description":"delete email message r7","mailbox":"user@example.com","message_id":"AAkALgAAAAAAHYQDEapmEc2byACqAC-EWg0AAhCCNvg5sEua0nNjgfLS2AABNpgLcwAA"}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|email_identifiers|[]email_identifiers|None|True|Email Identifiers consisting of message id, mailbox and description|None|[{"description":"delete email message r7","mailbox":"user@example.com","message_id":"AAkALgAAAAAAHYQDEapmEc2byACqAC-EWg0AAhCCNvg5sEua0nNjgfLS2AABNpgLcwAA"}]|None|None|
   
 Example input:
 
@@ -593,7 +593,7 @@ Example output:
 ```
 
 #### Disable Account
-  
+
 This action is used to signs the user out of all active application and browser sessions, and prevents the user from 
 signing in any new session. Supported IAM systems - Azure AD and Active Directory (on-premises)
 
@@ -606,9 +606,9 @@ signing in any new session. Supported IAM systems - Azure AD and Active Director
  
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|account_identifiers|[]account_identifiers|None|True|User Account Identifiers containing account name and description|None|[{"account_name":"user@example.com","description":"disable account r7"}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|account_identifiers|[]account_identifiers|None|True|User Account Identifiers containing account name and description|None|[{"account_name":"user@example.com","description":"disable account r7"}]|None|None|
   
 Example input:
 
@@ -656,9 +656,9 @@ This action is used to downloads custom script
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|script_id|string|None|True|Unique alphanumeric string that identifies a script file|None|44c99cb0-8c5f-4182-af55-62135dbe32f1|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|script_id|string|None|True|Unique alphanumeric string that identifies a script file|None|44c99cb0-8c5f-4182-af55-62135dbe32f1|None|None|
   
 Example input:
 
@@ -686,7 +686,7 @@ Example output:
 ```
 
 #### Download Sandbox Analysis Result
-  
+
 This action is used to downloads the analysis result for an object submitted to sandbox for analysis based on the 
 submission ID
 
@@ -699,11 +699,11 @@ submission ID
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|string|None|True|Unique alphanumeric string that identifies the analysis results of a submission|None|6345645|
-|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
-|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|Unique alphanumeric string that identifies the analysis results of a submission|None|6345645|None|None|
+|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|None|None|
+|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|None|None|
   
 Example input:
 
@@ -745,11 +745,11 @@ This action is used to downloads the investigation package based on submission I
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|string|None|True|Unique alphanumeric string that identifies the analysis results of a submission|None|6345645|
-|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
-|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|Unique alphanumeric string that identifies the analysis results of a submission|None|6345645|None|None|
+|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|None|None|
+|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|None|None|
   
 Example input:
 
@@ -790,11 +790,11 @@ This action is used to updates the status of a workbench alert
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|string|None|True|Workbench alert ID|None|WB-14-20190709-00003|
-|if_match|string|None|False|The target resource will be updated only if it matches ETag of the target one|None|d41d8cd98f00b204e9800998ecf8427e|
-|status|string|None|True|ID of the workbench you would like to update the status for|["New", "In Progress", "True Positive", "False Positive"]|New|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|Workbench alert ID|None|WB-14-20190709-00003|None|None|
+|if_match|string|None|False|The target resource will be updated only if it matches ETag of the target one|None|d41d8cd98f00b204e9800998ecf8427e|None|None|
+|status|string|None|True|ID of the workbench you would like to update the status for|["New", "In Progress", "True Positive", "False Positive"]|New|None|None|
   
 Example input:
 
@@ -834,9 +834,9 @@ This action is used to allows the user to sign in to new application and browser
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|account_identifiers|[]account_identifiers|None|True|User Account Identifiers containing account name and description|None|[{"account_name":"user@example.com","description":"enable jdoe account, r7 test"}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|account_identifiers|[]account_identifiers|None|True|User Account Identifiers containing account name and description|None|[{"account_name":"user@example.com","description":"enable jdoe account, r7 test"}]|None|None|
   
 Example input:
 
@@ -882,9 +882,9 @@ This action is used to displays information about workbench alerts that match th
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|alert_id|string|None|True|ID of the Alert to get the details of|None|WB-20837-20221111-0000|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|alert_id|string|None|True|ID of the Alert to get the details of|None|WB-20837-20221111-0000|None|None|
   
 Example input:
 
@@ -924,10 +924,10 @@ This action is used to displays information about workbench alerts that match th
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|end_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the end of the data retrieval time range. Ensure that "endDateTime" is not earlier than "startDateTime"|None|2020-06-15 12:00:00+00:00|
-|start_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the start of the data retrieval time range. The available oldest value is "1970-01-01T00:00:00Z"|None|2020-06-15 10:00:00+00:00|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|end_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the end of the data retrieval time range. Ensure that "endDateTime" is not earlier than "startDateTime"|None|2020-06-15 12:00:00+00:00|None|None|
+|start_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the start of the data retrieval time range. The available oldest value is "1970-01-01T00:00:00Z"|None|2020-06-15 10:00:00+00:00|None|None|
   
 Example input:
 
@@ -968,9 +968,9 @@ This action is used to displays information of the specified API key
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|string|None|True|The unique identifier of the API key|None|2ee04177-53d7-4fc7-a9d7-39285d80f58a|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|The unique identifier of the API key|None|2ee04177-53d7-4fc7-a9d7-39285d80f58a|None|None|
   
 Example input:
 
@@ -1009,7 +1009,7 @@ Example output:
 ```
 
 #### Get Custom Script List
-  
+
 This action is used to retrieves information about the available custom scripts and displays the information in a 
 paginated list
 
@@ -1022,10 +1022,10 @@ paginated list
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|fields|object|None|True|JSON object of fields to query by fileName or fileType|None|{"fileName":"test.ps1","fileType":"powershell"}|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|fields|object|None|True|JSON object of fields to query by fileName or fileType|None|{"fileName":"test.ps1","fileType":"powershell"}|None|None|
+|query_op|string|or|True|Logical operator to employ in the query. (AND/OR)|["or", "and"]|or|None|None|
   
 Example input:
 
@@ -1035,7 +1035,7 @@ Example input:
     "fileName": "test.ps1",
     "fileType": "powershell"
   },
-  "query_op": " or "
+  "query_op": "or"
 }
 ```
 
@@ -1072,14 +1072,14 @@ This action is used to displays search results from the Email Activity Data sour
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15 12:00:00+00:00|
-|fields|object|None|True|JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)|None|{"mailSenderIp":"192.169.1.1","mailMsgSubject":"spam"}|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |
-|select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|["mailMsgSubject"]|
-|start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15 10:00:00+00:00|
-|top|integer|None|True|Number of records displayed on a page|[50, 100, 500, 1000, 5000]|500|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15 12:00:00+00:00|None|None|
+|fields|object|None|True|JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)|None|{"mailSenderIp":"192.169.1.1","mailMsgSubject":"spam"}|None|None|
+|query_op|string|or|True|Logical operator to employ in the query. (AND/OR)|["or", "and"]|or|None|None|
+|select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|["mailMsgSubject"]|None|None|
+|start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15 10:00:00+00:00|None|None|
+|top|integer|None|True|Number of records displayed on a page|[50, 100, 500, 1000, 5000]|500|None|None|
   
 Example input:
 
@@ -1090,7 +1090,7 @@ Example input:
     "mailMsgSubject": "spam",
     "mailSenderIp": "192.169.1.1"
   },
-  "query_op": " or ",
+  "query_op": "or",
   "select": [
     "mailMsgSubject"
   ],
@@ -1153,14 +1153,14 @@ This action is used to displays count of search results from the Email Activity 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15 12:00:00+00:00|
-|fields|object|None|True|JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)|None|{"mailSenderIp":"192.169.1.1","mailMsgSubject":"spam"}|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |
-|select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|["mailMsgSubject"]|
-|start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15 10:00:00+00:00|
-|top|integer|None|True|Number of records displayed on a page|[50, 100, 500, 1000, 5000]|500|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15 12:00:00+00:00|None|None|
+|fields|object|None|True|JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)|None|{"mailSenderIp":"192.169.1.1","mailMsgSubject":"spam"}|None|None|
+|query_op|string|or|True|Logical operator to employ in the query. (AND/OR)|["or", "and"]|or|None|None|
+|select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|["mailMsgSubject"]|None|None|
+|start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15 10:00:00+00:00|None|None|
+|top|integer|None|True|Number of records displayed on a page|[50, 100, 500, 1000, 5000]|500|None|None|
   
 Example input:
 
@@ -1171,7 +1171,7 @@ Example input:
     "mailMsgSubject": "spam",
     "mailSenderIp": "192.169.1.1"
   },
-  "query_op": " or ",
+  "query_op": "or",
   "select": [
     "mailMsgSubject"
   ],
@@ -1206,14 +1206,14 @@ This action is used to displays results from the Endpoint Activity Data source i
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15 12:00:00+00:00|
-|fields|object|None|True|JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)|None|{"endpointHostName":"client1","dpt":443}|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |
-|select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|["endpointHostName"]|
-|start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15 10:00:00+00:00|
-|top|integer|None|True|Number of records displayed on a page|[50, 100, 500, 1000, 5000]|500|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15 12:00:00+00:00|None|None|
+|fields|object|None|True|JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)|None|{"endpointHostName":"client1","dpt":443}|None|None|
+|query_op|string|or|True|Logical operator to employ in the query. (AND/OR)|["or", "and"]|or|None|None|
+|select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|["endpointHostName"]|None|None|
+|start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15 10:00:00+00:00|None|None|
+|top|integer|None|True|Number of records displayed on a page|[50, 100, 500, 1000, 5000]|500|None|None|
   
 Example input:
 
@@ -1224,7 +1224,7 @@ Example input:
     "dpt": 443,
     "endpointHostName": "client1"
   },
-  "query_op": " or ",
+  "query_op": "or",
   "select": [
     "endpointHostName"
   ],
@@ -1317,14 +1317,14 @@ This action is used to displays count of search results from the Endpoint Activi
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15 12:00:00+00:00|
-|fields|object|None|True|JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)|None|{"endpointHostName":"client1","dpt":443}|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |
-|select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|["endpointHostName"]|
-|start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15 10:00:00+00:00|
-|top|integer|None|True|Number of records displayed on a page|[50, 100, 500, 1000, 5000]|500|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|end_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the end of the data retrieval time range. If no value is specified, 'endDateTime' defaults to the time the request is made|None|2020-06-15 12:00:00+00:00|None|None|
+|fields|object|None|True|JSON object of fields to query. (uuid, tags, pname, msgUuid, ...)|None|{"endpointHostName":"client1","dpt":443}|None|None|
+|query_op|string|or|True|Logical operator to employ in the query. (AND/OR)|["or", "and"]|or|None|None|
+|select|[]string|None|False|List of fields to include in the search results. If no fields are specified, the query returns all supported fields|None|["endpointHostName"]|None|None|
+|start_date_time|string|None|False|Timestamp in ISO 8601 format that indicates the start of the data retrieval range. If no value is specified, 'startDateTime' defaults to 24 hours before the request is made|None|2020-06-15 10:00:00+00:00|None|None|
+|top|integer|None|True|Number of records displayed on a page|[50, 100, 500, 1000, 5000]|500|None|None|
   
 Example input:
 
@@ -1335,7 +1335,7 @@ Example input:
     "dpt": 443,
     "endpointHostName": "client1"
   },
-  "query_op": " or ",
+  "query_op": "or",
   "select": [
     "endpointHostName"
   ],
@@ -1370,10 +1370,10 @@ This action is used to retrieves information about a specific endpoint
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|fields|object|None|True|JSON object of endpoint identifiers to query by their hostname, macAddress, agentGuid or IP|None|{"ip":"127.127.127.127","endpointName":"client1"}|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|fields|object|None|True|JSON object of endpoint identifiers to query by their hostname, macAddress, agentGuid or IP|None|{"ip":"127.127.127.127","endpointName":"client1"}|None|None|
+|query_op|string|or|True|Logical operator to employ in the query. (AND/OR)|["or", "and"]|or|None|None|
   
 Example input:
 
@@ -1383,7 +1383,7 @@ Example input:
     "endpointName": "client1",
     "ip": "127.127.127.127"
   },
-  "query_op": " or "
+  "query_op": "or"
 }
 ```
 
@@ -1470,24 +1470,73 @@ Example output:
 }
 ```
 
-#### Get Sandbox Analysis Result
-  
-This action is used to retrieves the sandbox analysis results
+#### Get OAT List
+
+This action is used to gets information about Observed Attack Techniques (OATs) events that match the specified 
+criteria in a list
 
 **API key role permissions required:**
 
-**Sandbox Analysis**
+**Observed Attack Techniques**
 
 - View, filter, and search
-- Submit objects
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
-|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|
-|report_id|string|None|True|Report_id of the sandbox submission retrieved from the trendmicro-visionone-get-file-analysis-status command|None|02384|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|detected_end_date_time|string|None|True|The end of the event detection data retrieval time range in ISO 8601 format|None|2021-04-06 08:22:37+00:00|None|None|
+|detected_start_date_time|string|None|True|The start of the event detection data retrieval time range in ISO 8601 format|None|2021-04-05 08:22:37+00:00|None|None|
+|fields|object|None|True|JSON object of OAT identifiers to query|None|{"uuid":123,"endpointName":"client1"}|None|None|
+|ingested_end_date_time|string|None|True|The end of the data ingestion time range in ISO 8601 format|None|2021-04-07 08:22:37+00:00|None|None|
+|ingested_start_date_time|string|None|True|The beginning of the data ingestion time range in ISO 8601 format|None|2021-04-06 08:22:37+00:00|None|None|
+|query_op|string|or|True|Logical operator to employ in the query. (AND/OR)|["or", "and"]|or|None|None|
+  
+Example input:
+
+```
+{
+  "detected_end_date_time": "2021-04-06 08:22:37+00:00",
+  "detected_start_date_time": "2021-04-05 08:22:37+00:00",
+  "fields": {
+    "endpointName": "client1",
+    "uuid": 123
+  },
+  "ingested_end_date_time": "2021-04-07 08:22:37+00:00",
+  "ingested_start_date_time": "2021-04-06 08:22:37+00:00",
+  "query_op": "or"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|oats|[]oat|True|Array of Observed Attack Techniques events|["<<referenced:bigdata>>"]|
+|total_count|integer|True|Number of Observed Attack Techniques events retrieved|5|
+  
+Example output:
+
+```
+{
+  "oats": [
+    "<<referenced:bigdata>>"
+  ],
+  "total_count": 5
+}
+```
+
+#### Get Sandbox Analysis Result
+
+This action is used to retrieves the sandbox analysis results
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|None|None|
+|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|None|None|
+|report_id|string|None|True|Report_id of the sandbox submission retrieved from the trendmicro-visionone-get-file-analysis-status command|None|02384|None|None|
   
 Example input:
 
@@ -1550,9 +1599,9 @@ This action is used to retrieves the status of a sandbox analysis submission
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|task_id|string|None|True|Task_id from the trendmicro-visionone-submit-file-to-sandbox command output|None|02384|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|task_id|string|None|True|Task_id from the trendmicro-visionone-submit-file-to-sandbox command output|None|02384|None|None|
   
 Example input:
 
@@ -1617,11 +1666,11 @@ This action is used to downloads the suspicious object list associated to the sp
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|string|None|True|Unique alphanumeric string that identifies the analysis results of a submission|None|6345645|
-|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
-|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|Unique alphanumeric string that identifies the analysis results of a submission|None|6345645|None|None|
+|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|None|None|
+|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|None|None|
   
 Example input:
 
@@ -1709,11 +1758,11 @@ This action is used to retrieves an object containing the results of a response 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
-|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|
-|task_id|string|None|True|TaskId output from the collect command used to collect the file|None|3456346|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|None|None|
+|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|None|None|
+|task_id|string|None|True|TaskId output from the collect command used to collect the file|None|3456346|None|None|
   
 Example input:
 
@@ -1807,9 +1856,9 @@ product)
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|endpoint_identifiers|[]endpoint_identifiers|None|True|Endpoint Identifiers consisting of endpoint(hostname or agentGuid) and description|None|[{"description":"TEST isolate endpoint","endpoint_name":"client1","agent_guid":"cb9c8412-1f64-4fa0-a36b-76bf41a07ede"}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|endpoint_identifiers|[]endpoint_identifiers|None|True|Endpoint Identifiers consisting of endpoint(hostname or agentGuid) and description|None|[{"description":"TEST isolate endpoint","endpoint_name":"client1","agent_guid":"cb9c8412-1f64-4fa0-a36b-76bf41a07ede"}]|None|None|
   
 Example input:
 
@@ -1856,11 +1905,11 @@ This action is used to displays a list of all your API keys in a list
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|fields|object|None|True|JSON object of fields to query by fileName or fileType|None|{"role":"Master Administrator"}|
-|query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[" or ", " and "]| or |
-|top|integer|None|False|Number of records displayed on a page|[50, 100, 200]|50|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|fields|object|None|True|JSON object of fields to query by fileName or fileType|None|{"role":"Master Administrator"}|None|None|
+|query_op|string|or|True|Logical operator to employ in the query. (AND/OR)|["or", "and"]|or|None|None|
+|top|integer|None|False|Number of records displayed on a page|[50, 100, 200]|50|None|None|
   
 Example input:
 
@@ -1869,7 +1918,7 @@ Example input:
   "fields": {
     "role": "Master Administrator"
   },
-  "query_op": " or ",
+  "query_op": "or",
   "top": 50
 }
 ```
@@ -1913,9 +1962,9 @@ This action is used to moves a message from a mailbox to the quarantine folder
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|email_identifiers|[]email_identifiers|None|True|Email Identifiers consisting of message id, mailbox and description|None|[{"description":"quarantine email message r7","mailbox":"user@example.com","message_id":"AAkALgAAAAAAHYQDEapmEc2byACqAC-EWg0AAhCCNvg5sEua0nNjgfLS2AABNpgTSQAA"}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|email_identifiers|[]email_identifiers|None|True|Email Identifiers consisting of message id, mailbox and description|None|[{"description":"quarantine email message r7","mailbox":"user@example.com","message_id":"AAkALgAAAAAAHYQDEapmEc2byACqAC-EWg0AAhCCNvg5sEua0nNjgfLS2AABNpgTSQAA"}]|None|None|
   
 Example input:
 
@@ -1969,9 +2018,9 @@ This action is used to removes an email address, file SHA-1, domain, IP address,
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|block_objects|[]block_objects|None|True|Objects made up of type, value and description|None|[{"description":"block","object_type":"ip","object_value":"6.6.6.3"}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|block_objects|[]block_objects|None|True|Objects made up of type, value and description|None|[{"description":"block","object_type":"ip","object_value":"6.6.6.3"}]|None|None|
   
 Example input:
 
@@ -2023,9 +2072,9 @@ This action is used to removes domains, file SHA-1 values, IP addresses, or URLs
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|block_objects|[]block_objects|None|True|Objects made up of type, value and description|None|[{"object_type":"ip","object_value":"1.6.6.3"}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|block_objects|[]block_objects|None|True|Objects made up of type, value and description|None|[{"object_type":"ip","object_value":"1.6.6.3"}]|None|None|
   
 Example input:
 
@@ -2072,9 +2121,9 @@ This action is used to removes domains, file SHA-1 values, IP addresses, or URLs
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|block_objects|[]block_objects|None|True|Objects made up of type, value and description|None|[{"object_type":"ip","object_value":"6.6.6.4"}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|block_objects|[]block_objects|None|True|Objects made up of type, value and description|None|[{"object_type":"ip","object_value":"6.6.6.4"}]|None|None|
   
 Example input:
 
@@ -2122,9 +2171,9 @@ a new password during the next sign-in attempt. Supported IAM systems - Azure AD
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|account_identifiers|[]account_identifiers|None|True|User Account Identifiers containing account name and description|None|[{"account_name":"user@example.com","description":"reset password account r7 "}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|account_identifiers|[]account_identifiers|None|True|User Account Identifiers containing account name and description|None|[{"account_name":"user@example.com","description":"reset password account r7 "}]|None|None|
   
 Example input:
 
@@ -2171,9 +2220,9 @@ This action is used to restores a quarantined email message
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|email_identifiers|[]email_identifiers|None|True|Email Identifiers consisting of message id, mailbox and description|None|[{"description":"restore email message r7","mailbox":"user@example.com","message_id":"AAkALgAAAAAAHYQDEapmEc2byACqAC-EWg0AAhCCNvg5sEua0nNjgfLS2AABNpgTSQAA"}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|email_identifiers|[]email_identifiers|None|True|Email Identifiers consisting of message id, mailbox and description|None|[{"description":"restore email message r7","mailbox":"user@example.com","message_id":"AAkALgAAAAAAHYQDEapmEc2byACqAC-EWg0AAhCCNvg5sEua0nNjgfLS2AABNpgTSQAA"}]|None|None|
   
 Example input:
 
@@ -2221,9 +2270,9 @@ This action is used to restores network connectivity to an endpoint that applied
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|endpoint_identifiers|[]endpoint_identifiers|None|True|Endpoint Identifiers consisting of endpoint(hostname or agentGuid) and description|None|[{"description":"restore endpoint r7","endpoint_name":"client1","agent_guid":"cb9c8412-1f64-4fa0-a36b-76bf41a07ede"}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|endpoint_identifiers|[]endpoint_identifiers|None|True|Endpoint Identifiers consisting of endpoint(hostname or agentGuid) and description|None|[{"description":"restore endpoint r7","endpoint_name":"client1","agent_guid":"cb9c8412-1f64-4fa0-a36b-76bf41a07ede"}]|None|None|
   
 Example input:
 
@@ -2272,13 +2321,13 @@ This action is used to run custom script
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|agent_guid|string|None|False|Unique alphanumeric string that identifies an installed agent|None|2839eu2983e23e|
-|description|string|None|False|Task Description|None|example desc|
-|endpoint_name|string|None|False|Endpoint name of the target endpoint|None|endpoint1|
-|file_name|string|test.ps1|False|File name of custom script|None|test.ps1|
-|parameter|string|None|False|Options passed to the script during execution|None|-y --verbose|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|agent_guid|string|None|False|Unique alphanumeric string that identifies an installed agent|None|2839eu2983e23e|None|None|
+|description|string|None|False|Task Description|None|example desc|None|None|
+|endpoint_name|string|None|False|Endpoint name of the target endpoint|None|endpoint1|None|None|
+|file_name|string|test.ps1|False|File name of custom script|None|test.ps1|None|None|
+|parameter|string|None|False|Options passed to the script during execution|None|-y --verbose|None|None|
   
 Example input:
 
@@ -2325,9 +2374,9 @@ AD
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|account_identifiers|[]account_identifiers|None|True|User Account Identifiers containing account name and description|None|[{"account_name":"user@example.com","description":"sign out account r7 "}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|account_identifiers|[]account_identifiers|None|True|User Account Identifiers containing account name and description|None|[{"account_name":"user@example.com","description":"sign out account r7 "}]|None|None|
   
 Example input:
 
@@ -2376,12 +2425,12 @@ where Sandbox Analysis has not been officially released.)
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|archive_password|string|None|False|Password encoded in Base64 used to decrypt the submitted archive. The maximum password length (without encoding) is 128 bytes|None|1234|
-|arguments|string|None|False|Parameter that allows you to specify Base64-encoded command line arguments to run the submitted file. The maximum argument length before encoding is 1024 bytes. Arguments are only available for Portable Executable (PE) files and script files|None|IFMlYztbQA==|
-|document_password|string|None|False|Password encoded in Base64 used to decrypt the submitted file sample. The maximum password length (without encoding) is 128 bytes|None|1234|
-|file|file|None|False|File submitted to the sandbox (dict of {filename(string) & content(base64(bytes))})|None|{"content":"dGVzdA==","filename":"r7-test11.bat"}|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|archive_password|string|None|False|Password encoded in Base64 used to decrypt the submitted archive. The maximum password length (without encoding) is 128 bytes|None|1234|None|None|
+|arguments|string|None|False|Parameter that allows you to specify Base64-encoded command line arguments to run the submitted file. The maximum argument length before encoding is 1024 bytes. Arguments are only available for Portable Executable (PE) files and script files|None|IFMlYztbQA==|None|None|
+|document_password|string|None|False|Password encoded in Base64 used to decrypt the submitted file sample. The maximum password length (without encoding) is 128 bytes|None|1234|None|None|
+|file|file|None|False|File submitted to the sandbox (dict of {filename(string) & content(base64(bytes))})|None|{"content":"dGVzdA==","filename":"r7-test11.bat"}|None|None|
   
 Example input:
 
@@ -2432,9 +2481,9 @@ This action is used to submits URLs to the sandbox for analysis. You can submit 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|urls|[]string|None|True|URL(s) to be submitted, formated as bracket array separated by comma|None|["www.urlurl.com","www.zurlzurl.com"]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|urls|[]string|None|True|URL(s) to be submitted, formated as bracket array separated by comma|None|["www.urlurl.com","www.zurlzurl.com"]|None|None|
   
 Example input:
 
@@ -2486,9 +2535,9 @@ This action is used to terminates a process that is running on an endpoint
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|process_identifiers|[]process_identifiers|None|True|Process Identifiers consisting of endpoint(hostname or agentGuid), filesha1, filename(optional) and description(optional)|None|[{"endpoint_name":"client1","agent_guid":"cb9c8412-1f64-4fa0-a36b-76bf41a07ede","file_sha1":"984afc7aaa2718984e15e3b5ab095b519a081321"}]|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|process_identifiers|[]process_identifiers|None|True|Process Identifiers consisting of endpoint(hostname or agentGuid), filesha1, filename(optional) and description(optional)|None|[{"endpoint_name":"client1","agent_guid":"cb9c8412-1f64-4fa0-a36b-76bf41a07ede","file_sha1":"984afc7aaa2718984e15e3b5ab095b519a081321"}]|None|None|
   
 Example input:
 
@@ -2536,14 +2585,14 @@ This action is used to updates the specified API key
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|description|string|None|False|A brief note about the API key|None|this is a test apikey|
-|id|string|None|True|The unique identifier of the API key|None|2ee04177-53d7-4fc7-a9d7-39285d80f58a|
-|if_match|string|None|False|The ETag of the resource you want to update. The resource is updated only if the provided value matches the ETag of the resource|None|d41d8cd98f00b204e9800998ecf8427e|
-|name|string|None|True|The unique name of the API key|None|test|
-|role|string|None|True|The user role assigned to the API key|None|Master Administrator|
-|status|string|None|True|The status of an API key|["enabled", "disabled"]|enabled|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|description|string|None|False|A brief note about the API key|None|this is a test apikey|None|None|
+|id|string|None|True|The unique identifier of the API key|None|2ee04177-53d7-4fc7-a9d7-39285d80f58a|None|None|
+|if_match|string|None|False|The ETag of the resource you want to update. The resource is updated only if the provided value matches the ETag of the resource|None|d41d8cd98f00b204e9800998ecf8427e|None|None|
+|name|string|None|True|The unique name of the API key|None|test|None|None|
+|role|string|None|True|The user role assigned to the API key|None|Master Administrator|None|None|
+|status|string|None|True|The status of an API key|["enabled", "disabled"]|enabled|None|None|
   
 Example input:
 
@@ -2573,7 +2622,7 @@ Example output:
 ```
 
 #### Update Custom Script
-  
+
 This action is used to updates a custom script. Supported file extensions are .ps1, .sh; Custom scripts must use UTF-8 
 encoding
 
@@ -2587,12 +2636,12 @@ encoding
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|description|string|None|False|Task Description|None|example desc|
-|file|file|None|False|Custom Script (dict of {filename(string) & content(base64(bytes))})|None|{"content":"dGVzdA==","filename":"r7-test11.sh"}|
-|file_type|string|bash|True|File type of custom script|["powershell", "bash"]|bash|
-|script_id|string|None|True|Unique alphanumeric string that identifies a script file|None|44c99cb0-8c5f-4182-af55-62135dbe32f1|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|description|string|None|False|Task Description|None|example desc|None|None|
+|file|file|None|False|Custom Script (dict of {filename(string) & content(base64(bytes))})|None|{"content":"dGVzdA==","filename":"r7-test11.sh"}|None|None|
+|file_type|string|bash|True|File type of custom script|["powershell", "bash"]|bash|None|None|
+|script_id|string|None|True|Unique alphanumeric string that identifies a script file|None|44c99cb0-8c5f-4182-af55-62135dbe32f1|None|None|
   
 Example input:
 
@@ -2636,10 +2685,10 @@ This trigger is used to polls information about workbench alerts that match the 
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|interval|integer|None|True|Interval (in seconds) in which the polling script should run again|None|1800|
-|start_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the start of the data retrieval time range. The available oldest value is "1970-01-01T00:00:00Z"|None|2020-06-15 10:00:00+00:00|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|interval|integer|1800|True|Interval (in seconds) in which the polling script should run again|None|1800|None|None|
+|start_date_time|string|None|True|Datetime in ISO 8601 format (yyyy-MM-ddThh:mm:ssZ in UTC) that indicates the start of the data retrieval time range. The available oldest value is "1970-01-01T00:00:00Z"|None|2020-06-15 10:00:00+00:00|None|None|
   
 Example input:
 
@@ -2668,26 +2717,73 @@ Example output:
 }
 ```
 
-#### Poll Sandbox Suspicious List
-  
-This trigger is used to polls the suspicious object list associated to the specified object. Note ~ Suspicious Object 
-Lists are only available for objects with a high risk level
+#### Poll OAT List
+
+This trigger is used to polls information about Observed Attack Techniques (OATs) events that match the specified 
+criteria in a list
 
 **API key role permissions required:**
 
-**Sandbox Analysis**
+**Observed Attack Techniques**
 
 - View, filter, and search
-- Submit objects
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|id|string|None|True|Unique alphanumeric string that identifies the analysis results of a submission|None|6345645|
-|interval|integer|None|True|Interval (in seconds) in which the polling script should run again|None|1800|
-|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
-|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|detected_start_date_time|string|None|True|The start of the event detection data retrieval time range in ISO 8601 format|None|2021-04-05 08:22:37+00:00|None|None|
+|fields|object|None|True|JSON object of OAT identifiers to query|None|{"uuid":123,"endpointName":"client1"}|None|None|
+|ingested_start_date_time|string|None|True|The beginning of the data ingestion time range in ISO 8601 format|None|2021-04-06 08:22:37+00:00|None|None|
+|interval|integer|1800|True|Interval (in seconds) in which the polling script should run again|None|1800|None|None|
+|query_op|string|or|True|Logical operator to employ in the query. (AND/OR)|["or", "and"]|or|None|None|
+  
+Example input:
+
+```
+{
+  "detected_start_date_time": "2021-04-05 08:22:37+00:00",
+  "fields": {
+    "endpointName": "client1",
+    "uuid": 123
+  },
+  "ingested_start_date_time": "2021-04-06 08:22:37+00:00",
+  "interval": 1800,
+  "query_op": "or"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|oats|[]oat|True|Array of Observed Attack Techniques events|["<<referenced:bigdata>>"]|
+|total_count|integer|True|Number of Observed Attack Techniques events retrieved|5|
+  
+Example output:
+
+```
+{
+  "oats": [
+    "<<referenced:bigdata>>"
+  ],
+  "total_count": 5
+}
+```
+
+#### Poll Sandbox Suspicious List
+
+This trigger is used to polls the suspicious object list associated to the specified object. Note ~ Suspicious Object 
+Lists are only available for objects with a high risk level
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|Unique alphanumeric string that identifies the analysis results of a submission|None|6345645|None|None|
+|interval|integer|1800|True|Interval (in seconds) in which the polling script should run again|None|1800|None|None|
+|poll|boolean|True|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|None|None|
+|poll_time_sec|float|30|False|Maximum time to wait for the result to be available|None|15.5|None|None|
   
 Example input:
 
@@ -2733,7 +2829,7 @@ Example output:
 |Name|Type|Default|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- | :--- |
 |Status|integer|None|True|Status Code of response|None|
-|Task ID|string|None|False|Task ID in Trend Micro Vision One of the executed action|None|
+|Task ID|string|None|False|Task ID in Trend Vision One of the executed action|None|
   
 **suspicious_objects**
 
@@ -2780,7 +2876,7 @@ Example output:
 |OS Description|string|None|True|Description of the operating system installed on an endpoint|None|
 |OS Name|string|None|True|Operating system installed on an endpoint|None|
 |OS Version|string|None|True|Version of the operating system installed on an endpoint|None|
-|Product Code|string|None|True|A 3-character code that identifies Trend Micro products|None|
+|Product Code|string|None|False|A 3-character code that identifies Trend Micro products|None|
   
 **submit_urls_resp**
 
@@ -2997,19 +3093,34 @@ Example output:
 |Name|string|None|True|The unique name of an API key|None|
 |Role|string|None|True|The user role assigned to the API key|None|
 |Status|string|None|False|The status of an API key|None|
+  
+**oat**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Detail|object|None|True|Object that contains detailed information about an Observed Attack Technique event|None|
+|Detected Date Time|string|None|True|The date and time the OAT event was detected in ISO 8601 format|2021-04-05 08:22:37+00:00|
+|Endpoint|object|None|False|Object that contains information about an endpoint|None|
+|Entity Type|string|None|True|Name associated with an entity|None|
+|Filters|[]object|None|True|The filters associated with the OAT|None|
+|Ingested Date Time|string|None|False|The date and time the data related to the OAT event was ingested in ISO 8601 format|2021-04-06 08:22:37+00:00|
+|Source|string|None|True|The data sources associated with log types|None|
+|UUID|string|None|True|The unique identifier of an Observed Attack Techniques event|None|
 
 
 ## Troubleshooting
-  
-*There is no troubleshooting for this plugin.*
+
+For additional info about actions see https://automation.trendmicro.com/xdr/api-v3#
 
 # Version History
 
-* 4.0.0 - Added API Keys related actions  
-* 3.0.0 - Refactored pytmv1 usage | Added Custom Scripts and Activity related actions  
-* 2.0.1 - Version bump of pytmv1 library  
-* 2.0.0 - Enabled multiple inputs for Get Endpoint Data, reduced API call frequency & General Refactoring  
-* 1.0.1 - Alert Details Output Fix (Minor Fix)  
+* 5.0.0 - Removed app name from connection
+* 4.1.0 - Added OAT list action and trigger, limit query size
+* 4.0.0 - Added API Keys related actions
+* 3.0.0 - Refactored pytmv1 usage | Added Custom Scripts and Activity related actions
+* 2.0.1 - Version bump of pytmv1 library
+* 2.0.0 - Enabled multiple inputs for Get Endpoint Data, reduced API call frequency & General Refactoring
+* 1.0.1 - Alert Details Output Fix (Minor Fix)
 * 1.0.0 - Initial plugin
 
 # Links
@@ -3018,4 +3129,4 @@ Example output:
 
 ## References
 
-* [Trend Micro Vision One](https://docs.trendmicro.com/en-us/enterprise/trend-micro-xdr-help/home)
+* [Trend Vision One](https://docs.trendmicro.com/en-us/enterprise/trend-micro-xdr-help/home)

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Collects a file from one or more endpoints and then sends the files to Trend Micro Vision One in a password-protected archive Note- You can specify either the computer name- endpointName or the GUID of the installed agent program- agentGuid"
+    DESCRIPTION = "Collects a file from one or more endpoints and then sends the files to Trend Vision One in a password-protected archive Note- You can specify either the computer name- endpointName or the GUID of the installed agent program- agentGuid"
 
 
 class Input:
@@ -109,7 +109,7 @@ class CollectFileOutput(insightconnect_plugin_runtime.Output):
         "task_id": {
           "type": "string",
           "title": "Task ID",
-          "description": "Task ID in Trend Micro Vision One of the executed action",
+          "description": "Task ID in Trend Vision One of the executed action",
           "order": 2
         }
       },

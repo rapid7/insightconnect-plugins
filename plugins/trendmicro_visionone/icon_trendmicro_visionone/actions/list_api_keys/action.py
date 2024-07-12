@@ -31,23 +31,18 @@ class ListApiKeys(insightconnect_plugin_runtime.Action):
         api_keys_list = []
         # Make Action API Call
         self.logger.info("Creating API key list...")
-        try:
-            client.api_key.consume(
-                lambda api_key: api_keys_list.append(api_key.model_dump_json()),
-                top=top,
-                op=query_op,
-                **fields,
-            )
-        except Exception as error:
+        response = client.api_key.consume(
+            lambda api_key: api_keys_list.append(json.loads(api_key.model_dump_json())),
+            top=top,
+            op=query_op,
+            **fields,
+        )
+        if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while trying to get the API key list.",
                 assistance="Please check the provided parameters and try again.",
-                data=error,
+                data=response.error,
             )
-        # Load json objects to list
-        api_keys = []
-        for api_key in api_keys_list:
-            api_keys.append(json.loads(api_key))
         # Return results
         self.logger.info("Returning Results...")
-        return {Output.TOTAL_COUNT: len(api_keys_list), Output.ITEMS: api_keys}
+        return {Output.TOTAL_COUNT: len(api_keys_list), Output.ITEMS: api_keys_list}

@@ -6,7 +6,6 @@ import json
 class Input:
     API_KEY = "api_key"
     API_URL = "api_url"
-    APP_NAME = "app_name"
     VERIFY_SSL = "verify_ssl"
 
 
@@ -26,29 +25,21 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "api_url": {
       "type": "string",
       "title": "API URL",
-      "description": "URL of Trend Micro Vision One",
+      "description": "URL of Trend Vision One",
       "default": "https://api.xdr.trendmicro.com",
       "order": 1
-    },
-    "app_name": {
-      "type": "string",
-      "title": "App Name",
-      "description": "Name of the App to be Integrated with",
-      "default": "Rapid7-InsightConnect",
-      "order": 3
     },
     "verify_ssl": {
       "type": "boolean",
       "title": "Verify SSL",
       "description": "Verify if connection uses SSL",
       "default": true,
-      "order": 4
+      "order": 3
     }
   },
   "required": [
     "api_key",
     "api_url",
-    "app_name",
     "verify_ssl"
   ],
   "definitions": {
