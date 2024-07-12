@@ -31,7 +31,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         self.url = params.get(Input.API_URL, "")
         self.key = params.get(Input.API_KEY).get("secretKey", "")
-        self.app = params.get(Input.APP_NAME, "Rapid7-InsightConnect")
+        # Hardcoded app name for metrics purposes
+        self.app = "Rapid7-InsightConnect"
 
         # Initialize PYTMV1 Client
         self.logger.info("Initializing PYTMV1 Client...")

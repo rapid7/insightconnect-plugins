@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:latest
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-slim-plugin:5.6.1
 
 LABEL organization=trendmicro
 LABEL sdk=python
