@@ -4008,10 +4008,11 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 8.0.3 - Updated `Dockerfile` permissions from `nobody` to `root`
 * 8.0.2 - Updated SDK to the latest version | `Scan Completion`: Updated the query
 * 8.0.1 - Updated SDK to the latest version | Fixed issue where triggers were failing due to `SSL Verify`
 * 8.0.0 - Updated to the latest SDK version | Updated dependencies to the latest version | Added new connection parameter `SSL Verify`

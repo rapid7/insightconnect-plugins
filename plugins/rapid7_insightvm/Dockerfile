@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:5.4.8
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:5.6.1
 
 LABEL organization=rapid7
 LABEL sdk=python
@@ -17,6 +17,6 @@ ADD . /python/src
 RUN python setup.py build && python setup.py install
 
 # User to run plugin code. The two supported users are: root, nobody
-USER nobody
+USER root
 
 ENTRYPOINT ["/usr/local/bin/komand_rapid7_insightvm"]
