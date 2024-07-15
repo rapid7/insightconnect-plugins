@@ -10,7 +10,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
-import json
 
 
 class GetEndpointActivityData(insightconnect_plugin_runtime.Action):
@@ -22,7 +21,7 @@ class GetEndpointActivityData(insightconnect_plugin_runtime.Action):
             output=GetEndpointActivityDataOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):  # noqa: MC0001
         # Get Connection Client
         client = self.connection.client
         # Get Action Parameters
