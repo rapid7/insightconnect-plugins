@@ -20,7 +20,7 @@ class RemoveTag(insightconnect_plugin_runtime.Action):
         in_event = client.get_event(params.get("event"))
         try:
             item = client.untag(in_event["Event"]["uuid"], tag=params.get("tag"))
-            if "successfully" in item["name"]:
+            if item.get("name") and "successfully" in item["name"]:
                 return {"status": True}
             else:
                 self.logger.info(item)

@@ -8,7 +8,7 @@ from .schema import SearchEventsInput, SearchEventsOutput, Input, Component
 
 
 class SearchEvents(insightconnect_plugin_runtime.Action):
-    _THREAT_LEVELS = {"Do not search on": None, "Undefined": 1, "Low": 2, "Medium": 3, "High": 4}
+    _THREAT_LEVELS = {"Do not search on": None, "Undefined": 4, "Low": 3, "Medium": 2, "High": 1}
 
     _ANALYSIS_LEVEL = {"Do not search on": None, "Initial": 0, "Ongoing": 1, "Completed": 2}
 
@@ -66,16 +66,12 @@ class SearchEvents(insightconnect_plugin_runtime.Action):
                 analysis=analysis,
                 threatlevel=threat_level,
                 org=organization,
-                dateuntil=date_until,
-                datefrom=date_from,
-                tag=tag,
+                date_to=date_until,
+                date_from=date_from,
+                tags=tag,
                 eventid=event,
             )
-            try:
-                search_index_events = search_index_events["response"]
-            except KeyError:
-                self.logger.error("Returned events were not formatted correctly, %s", json.dumps(search_index_events))
-                raise
+
             for event in search_index_events:
                 try:
                     search_index_event_id.append(event["id"])
@@ -85,11 +81,6 @@ class SearchEvents(insightconnect_plugin_runtime.Action):
 
         if should_search:
             search_events = client.search(values=values, type_attribute=type_attribute, category=category)
-            try:
-                search_events = search_events["response"]
-            except KeyError:
-                self.logger.error("Returned events were not formatted correctly, %s", json.dumps(search_events))
-                raise
             for eventWrapper in search_events:
                 try:
                     event = eventWrapper["Event"]

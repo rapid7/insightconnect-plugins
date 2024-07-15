@@ -16,7 +16,7 @@ class AddSightings(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         client = self.connection.client
         try:
-            item = client.set_sightings({"values": params.get("sightings")})
+            item = client.add_sighting({"values": params.get("sightings")})
             # API spells this wrong
             # {'url': '/sighting/add', 'message': '3 sightings successfuly added.', 'name': '3 sightings successfully added.'}
             if "successfuly added" in item["message"] or "successfully added" in item["message"]:

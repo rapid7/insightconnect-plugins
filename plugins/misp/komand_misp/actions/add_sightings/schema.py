@@ -24,7 +24,7 @@ class AddSightingsInput(insightconnect_plugin_runtime.Input):
     "sightings": {
       "type": "array",
       "title": "Sightings",
-      "description": "Event sightings E.g. sighting, false-positive, expiration",
+      "description": "Event sighting",
       "items": {
         "type": "string"
       },
@@ -51,7 +51,7 @@ class AddSightingsOutput(insightconnect_plugin_runtime.Output):
     "status": {
       "type": "boolean",
       "title": "Status",
-      "description": "Sightings add status",
+      "description": "Whether any of the sightings provided were added",
       "order": 1
     }
   },
