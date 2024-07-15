@@ -24,15 +24,16 @@ class AddAttribute(insightconnect_plugin_runtime.Action):
 
         client = self.connection.client
         in_event = client.get_event(event)
-        item = client.add_named_attribute(in_event, type_value, value, category, comment=comment)
+
+        item = client.add_attribute(event=in_event, attribute={"category": category, "type": type_value,
+                                                               "value": value, "comment": comment})
+
         try:
-            attribute = item[0]
-        except IndexError:
-            self.logger.error("Add attribute return invalid")
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
-        try:
-            attribute = attribute["Attribute"]
+            attribute = item["Attribute"]
         except KeyError:
-            self.logger.error("Improperly formatted attribute")
-            raise PluginException(preset=PluginException.Preset.UNKNOWN)
+            self.logger.error(f"Unable to add attribute {item}")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=item)
+        except Exception as error:
+            self.logger.error(f"Error when adding attribute: {error}")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
         return {"attribute": attribute}

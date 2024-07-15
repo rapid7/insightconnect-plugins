@@ -19,26 +19,24 @@ class FindEvent(insightconnect_plugin_runtime.Action):
         client = self.connection.client
         try:
             event = client.get_event(params.get("event_id"))
-
             if isinstance(event, dict):
-                # Example of when event is not found
-                # {
-                #    "message": "Invalid event.",
-                #    "url": "/events/23423432",
-                #    "errors": [ "Invalid event." ],
-                #    "name": "Invalid event."
-                # }
-                if "Event" not in event:
-                    if "message" in event:
-                        message = event.pop("message")
-                        errors = event.pop("errors")
-                else:
+                if "Event" in event:
                     message = "Event found."
                     errors = ["No errors."]
+                else:
+                    errors = event.get("errors")
+                    for field in errors:
+                        if isinstance(field, dict):
+                            if 'Invalid event' in field.get("message"):
+                                message = field.pop("message")
+                                self.logger.info(f"Invalid event message: {message}")
+                                errors = [event.pop("errors")]
+                    raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=errors)
+
             else:
                 raise PluginException(preset=PluginException.Preset.BAD_REQUEST)
-        except:
-            self.logger.error("Event %s not found or failure occurred", params.get("event_id"))
-            raise PluginException(preset=PluginException.Preset.NOT_FOUND)
+        except Exception as error:
+            self.logger.error(f"Event %s not found or failure occurred {error}")
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=error)
 
         return {"event": event.get("Event"), "message": message, "errors": errors}
