@@ -963,6 +963,38 @@
       "status": 207
     }
   },
+  "poll_oat_list": {
+    "input": {
+      "detected_start_date_time": "2023-01-15T10:00:00Z",
+      "detected_end_date_time": "2023-11-15T12:00:00Z",
+      "ingested_start_date_time": "2023-01-15T10:00:00Z",
+      "ingested_end_date_time": "2023-11-15T12:00:00Z",
+      "fields": {
+        "endpointName": "client1"
+      },
+      "query_op": " or "
+    },
+    "output": {
+      "oats": "<<referenced:bigdata>>",
+      "total_count": 9
+    }
+  },
+  "get_oat_list": {
+    "input": {
+      "detected_start_date_time": "2023-01-15T10:00:00Z",
+      "detected_end_date_time": "2023-11-15T12:00:00Z",
+      "ingested_start_date_time": "2023-01-15T10:00:00Z",
+      "ingested_end_date_time": "2023-11-15T12:00:00Z",
+      "fields": {
+        "endpointName": "client1"
+      },
+      "query_op": " or "
+    },
+    "output": {
+      "oats": "<<referenced:bigdata>>",
+      "total_count": 9
+    }
+  },
   "create_api_keys": {
     "input": {
       "api_keys_objects": [

@@ -36,21 +36,16 @@ class GetEndpointData(insightconnect_plugin_runtime.Action):
         new_endpoint_data = []
         # Make Action API Call
         self.logger.info("Making API Call...")
-        try:
-            client.endpoint.consume_data(
-                lambda endpoint_data: new_endpoint_data.append(endpoint_data.model_dump_json()),
-                pytmv1.QueryOp(query_op),
-                **fields,
-            )
-        except Exception as error:
+        response = client.endpoint.consume_data(
+            lambda endpoint_data: new_endpoint_data.append(json.loads(endpoint_data.model_dump_json())),
+            pytmv1.QueryOp(query_op),
+            **fields,
+        )
+        if "error" in response.result_code.lower():
             raise PluginException(
                 cause="An error occurred while getting endpoint data.",
                 assistance="Please check your inputs and try again.",
-                data=error,
+                data=response.error,
             )
-        # Load json objects to list
-        endpoint_data_resp = []
-        for data in new_endpoint_data:
-            endpoint_data_resp.append(json.loads(data))
         self.logger.info("Returning Results...")
-        return {Output.ENDPOINT_DATA: endpoint_data_resp}
+        return {Output.ENDPOINT_DATA: new_endpoint_data}

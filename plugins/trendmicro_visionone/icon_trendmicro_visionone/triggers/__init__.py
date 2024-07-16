@@ -4,3 +4,5 @@ from .poll_sandbox_suspicious_list.trigger import PollSandboxSuspiciousList
 
 from .poll_alert_list.trigger import PollAlertList
 
+from .poll_oat_list.trigger import PollOatList
+

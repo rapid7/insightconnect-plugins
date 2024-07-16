@@ -2,13 +2,18 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: trendmicro_visionone
-title: Trend Micro Vision One
-description: Trend Micro Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
-version: 4.0.0
-connection_version: 3
-supported_versions: [Trend Micro Vision One API v3]
+title: Trend Vision One
+description: Trend Vision One is an enhanced threat defense platform, surpassing standard XDR solutions. It offers comprehensive detection and response across various security layers and automates data correlation for rapid response, effectively preventing most attacks
+version: 5.0.0
+connection_version: 5
+supported_versions: [Trend Vision One API v3]
 vendor: trendmicro
+sdk:
+  type: slim
+  version: 5.6.1
+  user: nobody
 support: community
+troubleshooting: For additional info about actions see https://automation.trendmicro.com/xdr/api-v3#
 status: []
 enable_cache: true
 resources:
@@ -66,18 +71,19 @@ key_features:
 - Update API Key
 - Update Custom Script
 requirements:
-- Requires a Trend Micro Vision One API Key
+- Requires a Trend Vision One API Key
 - API must be enabled on the Settings page in the product's user interface
 links:
 - '[TrendMicro](https://www.trendmicro.com/en_us/business.html)'
 references:
-- '[Trend Micro Vision One](https://docs.trendmicro.com/en-us/enterprise/trend-micro-xdr-help/home)'
+- '[Trend Vision One](https://docs.trendmicro.com/en-us/enterprise/trend-micro-xdr-help/home)'
 version_history:
+- 5.0.0 - Removed app name from connection
+- 4.1.0 - Added OAT list action and trigger, limit query size
 - 4.0.0 - Added API Keys related actions
 - 3.0.0 - Refactored pytmv1 usage | Added Custom Scripts and Activity related actions
 - 2.0.1 - Version bump of pytmv1 library
-- 2.0.0 - Enabled multiple inputs for Get Endpoint Data, reduced API call frequency
-  & General Refactoring
+- 2.0.0 - Enabled multiple inputs for Get Endpoint Data, reduced API call frequency & General Refactoring
 - 1.0.1 - Alert Details Output Fix (Minor Fix)
 - 1.0.0 - Initial plugin
 tags:
@@ -104,7 +110,7 @@ types:
     task_id:
       title: Task ID
       type: string
-      description: Task ID in Trend Micro Vision One of the executed action
+      description: Task ID in Trend Vision One of the executed action
       required: false
   suspicious_objects:
     url:
@@ -293,11 +299,7 @@ types:
       title: Product Code
       type: string
       description: A 3-character code that identifies Trend Micro products
-      required: true
-      enum:
-      - sao
-      - sds
-      - xes
+      required: false
     installed_product_codes:
       title: Installed Product Codes
       type: '[]string'
@@ -1072,12 +1074,63 @@ types:
       type: string
       description: The last time the API key was used in ISO 8601 format
       required: true
+  oat:
+    source:
+      title: Source
+      description: The data sources associated with log types
+      type: string
+      required: true
+      enum:
+        - detections
+        - endpointActivityData
+        - cloudActivityData
+        - emailActivityData
+        - mobileActivityData
+        - networkActivityData
+        - containerActivityData
+    uuid:
+      title: UUID
+      description: The unique identifier of an Observed Attack Techniques event
+      type: string
+      required: true
+    filters:
+      title: Filters
+      description: The filters associated with the OAT
+      type: "[]object"
+      required: true
+    endpoint:
+      title: Endpoint
+      description: Object that contains information about an endpoint
+      type: object
+      required: false
+    entity_type:
+      title: Entity Type
+      description: Name associated with an entity
+      type: string
+      required: true
+    detected_date_time:
+      title: Detected Date Time
+      description: The date and time the OAT event was detected in ISO 8601 format
+      type: string
+      required: true
+      example: 2021-04-05T08:22:37Z
+    ingested_date_time:
+      title: Ingested Date Time
+      description: The date and time the data related to the OAT event was ingested in ISO 8601 format
+      type: string
+      required: false
+      example: 2021-04-06T08:22:37Z
+    detail:
+      title: Detail
+      description: Object that contains detailed information about an Observed Attack Technique event
+      type: object
+      required: true
 
 
 connection:
   api_url:
     title: API URL
-    description: URL of Trend Micro Vision One
+    description: URL of Trend Vision One
     type: string
     default: https://api.xdr.trendmicro.com
     required: true
@@ -1089,13 +1142,6 @@ connection:
     default: default
     required: true
     example: 12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234
-  app_name:
-    title: App Name
-    description: Name of the App to be Integrated with
-    type: string
-    default: Rapid7-InsightConnect
-    required: true
-    example: Rapid7-InsightConnect
   verify_ssl:
     title: Verify SSL
     description: Verify if connection uses SSL
@@ -1134,6 +1180,7 @@ triggers:
         type: integer
         description: Interval (in seconds) in which the polling script should run again
         required: true
+        default: 1800
         example: 1800
     output:
       sandbox_suspicious_list_resp:
@@ -1157,6 +1204,7 @@ triggers:
         type: integer
         description: Interval (in seconds) in which the polling script should run again
         required: true
+        default: 1800
         example: 1800
     output:
       total_count:
@@ -1169,6 +1217,58 @@ triggers:
         title: Alerts
         description: Array of any alerts (awb-workbenchAlertV3)
         type: '[]alert'
+        required: true
+        example: '["<<referenced:bigdata>>"]'
+  poll_oat_list:
+    title: Poll OAT List
+    description: Polls information about Observed Attack Techniques (OATs) events that match the specified criteria in a list
+    input:
+      detected_start_date_time:
+        title: Detected Start Date Time
+        type: string
+        description: The start of the event detection data retrieval time range in ISO 8601 format
+        required: true
+        example: 2021-04-05T08:22:37Z
+      ingested_start_date_time:
+        title: Ingested Start Date Time
+        type: string
+        description: The beginning of the data ingestion time range in ISO 8601 format
+        required: true
+        example: 2021-04-06T08:22:37Z
+      interval:
+        title: Interval
+        type: integer
+        description: Interval (in seconds) in which the polling script should run again
+        required: true
+        default: 1800
+        example: 1800
+      fields:
+        title: Fields
+        type: object
+        description: JSON object of OAT identifiers to query
+        required: true
+        example: '{"uuid":123,"endpointName":"client1"}'
+      query_op:
+        title: Query Operator
+        type: string
+        description: Logical operator to employ in the query. (AND/OR)
+        required: true
+        example: 'or'
+        default: 'or'
+        enum:
+          - 'or'
+          - 'and'
+    output:
+      total_count:
+        title: Total Count
+        description: Number of Observed Attack Techniques events retrieved
+        type: integer
+        required: true
+        example: 5
+      oats:
+        title: OATs
+        description: Array of Observed Attack Techniques events
+        type: '[]oat'
         required: true
         example: '["<<referenced:bigdata>>"]'
 
@@ -1430,11 +1530,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: ' or '
-        default: ' or '
+        example: 'or'
+        default: 'or'
         enum:
-        - ' or '
-        - ' and '
+        - 'or'
+        - 'and'
     output:
       endpoint_data:
         title: Endpoint Data
@@ -1627,7 +1727,7 @@ actions:
         example: .exe
   collect_file:
     title: Collect File
-    description: Collects a file from one or more endpoints and then sends the files to Trend Micro Vision One in a password-protected archive Note- You can specify either the computer name- endpointName or the GUID of the installed agent program- agentGuid
+    description: Collects a file from one or more endpoints and then sends the files to Trend Vision One in a password-protected archive Note- You can specify either the computer name- endpointName or the GUID of the installed agent program- agentGuid
     input:
       collect_files:
         title: Collect Files
@@ -1922,7 +2022,7 @@ actions:
         example: '{"content":"dGVzdA==","filename":"r7-test11.pdf"}'
   submit_file_to_sandbox:
     title: Submit File to Sandbox
-    description: Submits a file to the sandbox for analysis (Note. For more information about the supported file types, see the Trend Micro Vision One Online Help. Submissions require credits. Does not require credits in regions where Sandbox Analysis has not been officially released.)
+    description: Submits a file to the sandbox for analysis (Note. For more information about the supported file types, see the Trend Vision One Online Help. Submissions require credits. Does not require credits in regions where Sandbox Analysis has not been officially released.)
     input:
       file:
         title: File
@@ -2145,11 +2245,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: ' or '
-        default: ' or '
+        example: 'or'
+        default: 'or'
         enum:
-        - ' or '
-        - ' and '
+        - 'or'
+        - 'and'
       fields:
         title: Fields
         type: object
@@ -2350,11 +2450,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: ' or '
-        default: ' or '
+        example: 'or'
+        default: 'or'
         enum:
-        - ' or '
-        - ' and '
+        - 'or'
+        - 'and'
       fields:
         title: Fields
         type: object
@@ -2407,11 +2507,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: ' or '
-        default: ' or '
+        example: 'or'
+        default: 'or'
         enum:
-        - ' or '
-        - ' and '
+        - 'or'
+        - 'and'
       fields:
         title: Fields
         type: object
@@ -2464,11 +2564,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: ' or '
-        default: ' or '
+        example: 'or'
+        default: 'or'
         enum:
-        - ' or '
-        - ' and '
+        - 'or'
+        - 'and'
       fields:
         title: Fields
         type: object
@@ -2529,11 +2629,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: ' or '
-        default: ' or '
+        example: 'or'
+        default: 'or'
         enum:
-        - ' or '
-        - ' and '
+        - 'or'
+        - 'and'
       fields:
         title: Fields
         type: object
@@ -2713,11 +2813,11 @@ actions:
         type: string
         description: Logical operator to employ in the query. (AND/OR)
         required: true
-        example: ' or '
-        default: ' or '
+        example: 'or'
+        default: 'or'
         enum:
-        - ' or '
-        - ' and '
+        - 'or'
+        - 'and'
       fields:
         title: Fields
         type: object
@@ -2738,3 +2838,60 @@ actions:
         required: true
         example: '[{"id":"d367abdd-7739-4129-a36a-862c4ec018b4","name":"test","status":"enabled","role":"Master
           Administrator","description":"this is a test","expiredDateTime":"2025-02-06T10:00:00Z","lastUsedDateTime":"2023-02-06T10:00:00Z"}]'
+  get_oat_list:
+    title: Get OAT List
+    description: Gets information about Observed Attack Techniques (OATs) events that match the specified criteria in a list
+    input:
+      detected_start_date_time:
+        title: Detected Start Date Time
+        type: string
+        description: The start of the event detection data retrieval time range in ISO 8601 format
+        required: true
+        example: 2021-04-05T08:22:37Z
+      detected_end_date_time:
+        title: Detected End Date Time
+        type: string
+        description: The end of the event detection data retrieval time range in ISO 8601 format
+        required: true
+        example: 2021-04-06T08:22:37Z
+      ingested_start_date_time:
+        title: Ingested Start Date Time
+        type: string
+        description: The beginning of the data ingestion time range in ISO 8601 format
+        required: true
+        example: 2021-04-06T08:22:37Z
+      ingested_end_date_time:
+        title: Ingested End Date Time
+        type: string
+        description: The end of the data ingestion time range in ISO 8601 format
+        required: true
+        example: 2021-04-07T08:22:37Z
+      fields:
+        title: Fields
+        type: object
+        description: JSON object of OAT identifiers to query
+        required: true
+        example: '{"uuid":123,"endpointName":"client1"}'
+      query_op:
+        title: Query Operator
+        type: string
+        description: Logical operator to employ in the query. (AND/OR)
+        required: true
+        example: 'or'
+        default: 'or'
+        enum:
+          - 'or'
+          - 'and'
+    output:
+      total_count:
+        title: Total Count
+        description: Number of Observed Attack Techniques events retrieved
+        type: integer
+        required: true
+        example: 5
+      oats:
+        title: OATs
+        description: Array of Observed Attack Techniques events
+        type: '[]oat'
+        required: true
+        example: '["<<referenced:bigdata>>"]'

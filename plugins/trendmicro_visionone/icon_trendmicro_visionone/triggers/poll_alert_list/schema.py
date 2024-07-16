@@ -27,6 +27,7 @@ class PollAlertListInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Interval",
       "description": "Interval (in seconds) in which the polling script should run again",
+      "default": 1800,
       "order": 2
     },
     "start_date_time": {
