@@ -23,19 +23,21 @@ This plugin utilizes the [VMware Carbon Black EDR REST API](https://developer.ca
 
 ## Setup
 
-The connection configuration accepts the following parameters:
+The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|API token found in your Carbon Black profile|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|
-|ssl_verify|boolean|True|True|SSL certificate verification|None|True|
-|url|string|https://127.0.0.1/api/bit9platform/v1|True|Carbon Black Server API URL|None|https://127.0.0.1/api/bit9platform/v1|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_key|credential_secret_key|None|True|API token found in your Carbon Black profile|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|None|None|
+|ssl_verify|boolean|True|True|SSL certificate verification|None|True|None|None|
+|url|string|https://127.0.0.1/api/bit9platform/v1|True|Carbon Black Server API URL|None|https://127.0.0.1/api/bit9platform/v1|None|None|
 
 Example input:
 
 ```
 {
-  "api_key": "{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}",
+  "api_key": {
+    "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
+  },
   "ssl_verify": true,
   "url": "https://127.0.0.1/api/bit9platform/v1"
 }
@@ -45,270 +47,40 @@ Example input:
 
 ### Actions
 
-#### Uninstall Sensor
-
-This action uninstalls a sensor given a sensor ID.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|id|string|None|False|The sensor ID|None|1234|
-
-Example input:
-
-```
-{
-  "id": "1234"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Whether or not the uninstall was successful|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
-#### List Alerts
-
-This action is used to list alerts with given parameters.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|domain:www.carbonblack.com|
-|rows|integer|10|False|How many rows of data to return. Default is 10|None|10|
-|start|integer|0|False|What row of data to start at. Default is 0|None|0|
-
-Example input:
-
-```
-{
-  "query": "domain:www.carbonblack.com",
-  "rows": 10,
-  "start": 0
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|alerts|[]alert|False|The lists of alerts|
-
-Example output:
-
-```
-
-[{
-  "username": "SYSTEM",
-  "alert_type": "watchlist.hit.query.process",
-  "sensor_criticality": 3,
-  "modload_count": 0,
-  "report_score": 75,
-  "watchlist_id": "11",
-  "sensor_id": 1,
-  "feed_name": "My Watchlists",
-  "created_time": "2017-09-11T17:50:03.377Z",
-  "ioc_type": "query",
-  "watchlist_name": "Watchlist",
-  "ioc_confidence": 0.5,
-  "ioc_attr": "{\"highlights\": [\"c:\\\\windows\\\\carbonblack\\\\PREPREPREcb.exePOSTPOSTPOST\", \"PREPREPREcb.exePOSTPOSTPOST\"]}",
-  "alert_severity": 50.625,
-  "crossproc_count": 0,
-  "group": "default group",
-  "hostname": "win-6epacunb1i1",
-  "filemod_count": 0,
-  "resolved_time": "2017-09-11T18:11:32.09Z",
-  "comms_ip": "52.122.36.18",
-  "netconn_count": 1,
-  "interface_ip": "172.19.33.201",
-  "status": "Resolved",
-  "observed_hosts": {
-      "numFound": 3,
-      "hostCount": 1,
-      "globalCount": 3,
-      "hostnames": [{
-          "name": "win-6epacunb1i1",
-          "value": 27893
-      }],
-      "accurateHostCount": true,
-      "processCount": 1,
-      "numDocs": "84136",
-      "processTotal": 1
-  },
-  "process_path": "c:\\windows\\carbonblack\\cb.exe",
-  "process_name": "cb.exe",
-  "process_unique_id": "00000001-0000-0414-01d3-20c7b4fdd3cf-015e2e1f45f7",
-  "process_id": "00000001-0000-0414-01d3-20c7b4fdd3cf",
-  "_version_": 1578267828122812416,
-  "regmod_count": 0,
-  "md5": "e472001ffe350a80f4c1f3322180ca53",
-  "segment_id": 773801463,
-  "total_hosts": 1,
-  "feed_id": -1,
-  "assigned_to": "irteam",
-  "os_type": "windows",
-  "childproc_count": 0,
-  "unique_id": "a743ee18-ce1d-4fb3-adc5-f05a77c8996c",
-  "feed_rating": 3
-}]
-
-```
-
-#### Delete Feed
-
-This action is used to delete a feed.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|force|boolean|None|True|Force deletion of all matches if multiple matches found|None|False|
-|id|string|None|True|The ID of the feed|None|example_protection|
-
-Example input:
-
-```
-{
-  "force": false,
-  "id": "example_protection"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Whether or not the deletion was successful|
-
-Example output:
-
-```
-
-{
-  "success": true
-}
-
-```
-
-#### List Binaries
-
-This action is used to list binaries with given parameters.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|domain:www.carbonblack.com|
-|rows|integer|10|False|How many rows of data to return. Default is 10|None|10|
-|start|integer|0|False|What row of data to start at. Default is 0|None|0|
-
-Example input:
-
-```
-{
-  "query": "domain:www.carbonblack.com",
-  "rows": 10,
-  "start": 0
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|binaries|[]binary|False|The list of binaries|
-
-Example output:
-
-```
-
-[{
-  "host_count": 1,
-  "original_filename": "bcryptprimitives.dll",
-  "legal_copyright": "Microsoft Corporation. All rights reserved.",
-  "digsig_result": "Signed",
-  "observed_filename": [
-      "C:\\Windows\\SysWOW64\\bcryptprimitives.dll"
-  ],
-  "product_version": "6.3.9600.18344",
-  "facet_id": 737484,
-  "digsig_issuer": "Microsoft Windows Production PCA 2011",
-  "digsig_result_code": "0",
-  "server_added_timestamp": "2017-08-30T02:37:08.977Z",
-  "digsig_sign_time": "2017-08-03T10:45:00Z",
-  "digsig_prog_name": "Microsoft Windows",
-  "orig_mod_len": 340880,
-  "is_executable_image": false,
-  "is_64bit": false,
-  "md5": "026B0CB0683E48164F43AADBE50E5506",
-  "digsig_subject": "Microsoft Windows",
-  "digsig_publisher": "Microsoft Corporation",
-  "endpoint": [
-      "WIN-6EPACUNB1I1|1"
-  ],
-  "group": [
-      "Default Group"
-  ],
-  "event_partition_id": [
-      98566909329408
-  ],
-  "watchlists": [{
-      "wid": "7",
-      "value": "2017-08-30T02:40:02.488Z"
-  }],
-  "file_version": "6.3.9600.18344 (winblue_ltsb.160518-1031)",
-  "signed": "Signed",
-  "copied_mod_len": 0,
-  "company_name": "Microsoft Corporation",
-  "internal_name": "bcryptprimitives.dll",
-  "timestamp": "2017-08-30T02:37:08.977Z",
-  "cb_version": 612,
-  "os_type": "Windows",
-  "file_desc": "Windows Cryptographic Primitives Library",
-  "product_name": "Microsoft Windows Operating System",
-  "last_seen": "2017-08-30T02:40:02.727Z"
-}]
-
-```
 
 #### Add Feed
 
-This action is used to add a feed.
+This action is used to adds a feed
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|cert|file|None|False|Certificate file|None|{"filename": "name", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|
-|enabled|boolean|None|False|Enable feed|None|True|
-|feed_url|string|None|False|The URL of the feed to add|None|https://example.com|
-|force|boolean|False|False|Add feed even if the feed URL is already in use|None|False|
-|key|file|None|False|Key|None|{"filename": "<name>", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|
-|password|password|None|False|Password|None|mypassword|
-|use_proxy|boolean|None|False|Whether or not to use proxy|None|True|
-|username|string|None|False|Username|None|user1|
-|validate_server_cert|boolean|None|False|Whether or not to validate server certificate|None|True|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|cert|file|None|False|Certificate file|None|{"filename": "name", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|None|None|
+|enabled|boolean|None|False|Enable feed|None|True|None|None|
+|feed_url|string|None|False|The URL of the feed to add|None|https://example.com|None|None|
+|force|boolean|False|False|Add feed even if the feed URL is already in use|None|False|None|None|
+|key|file|None|False|Key|None|{"filename": "<name>", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|None|None|
+|password|password|None|False|Password|None|mypassword|None|None|
+|use_proxy|boolean|None|False|Whether or not to use proxy|None|True|None|None|
+|username|string|None|False|Username|None|user1|None|None|
+|validate_server_cert|boolean|None|False|Whether or not to validate server certificate|None|True|None|None|
+  
 Example input:
 
 ```
 {
-  "cert": {"filename": "name", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="},
+  "cert": {
+    "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
+    "filename": "name"
+  },
   "enabled": true,
   "feed_url": "https://example.com",
   "force": false,
-  "key": "{"filename": "name", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}",
+  "key": {
+    "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
+    "filename": "<name>"
+  },
   "password": "mypassword",
   "use_proxy": true,
   "username": "user1",
@@ -318,363 +90,30 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|integer|False|The ID of the added feed|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|id|integer|False|The ID of the added feed|5|
+  
 Example output:
 
 ```
-
 {
   "id": 5
 }
-
-```
-
-#### Blacklist Hash
-
-This action is used to ban a hash given its MD5.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|md5_hash|string|None|True|An MD5 hash|None|9de5069c5afe602b2ea0a04b66beb2c0|
-
-Example input:
-
-```
-{
-  "md5_hash": "9de5069c5afe602b2ea0a04b66beb2c0"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Status of request - true if successful, false otherwise|
-
-Example output:
-
-```
-
-{
-  "success": true
-}
-
-```
-
-#### List Watchlists
-
-This action is used to list all watchlists.
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|watchlists|[]watchlist|False|The list of watchlists|
-
-Example output:
-
-```
-
-[{
-  "last_hit_count": 8,
-  "description": "",
-  "search_query": "q=process_name%3Aconhost.exe",
-  "from_alliance": false,
-  "enabled": true,
-  "search_timestamp": "2017-09-24 17:00:03.143824",
-  "index_type": "events",
-  "readonly": false,
-  "alliance_id": null,
-  "total_hits": "30368",
-  "date_added": "2017-09-21 19:26:10.844270+00:00",
-  "group_id": -1,
-  "total_tags": "3461",
-  "id": "12",
-  "last_hit": "2017-09-24 17:00:03.329069+00:00",
-  "name": "Conhost"
-}]
-
-```
-
-#### Delete Watchlist
-
-This action is used to delete a watchlist.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|force|boolean|None|True|Force deletion of all matches if multiple matches found|None|False|
-|id|string|None|True|The ID of the watchlist|None|1234|
-
-Example input:
-
-```
-{
-  "force": false,
-  "id": "1234"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Whether or not the deletion was successful|
-
-Example output:
-
-```
-
-{
-  "success": true
-}
-
-```
-
-#### List Processes
-
-This action is used to list processes with given parameters.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|domain:www.carbonblack.com|
-|rows|integer|10|False|How many rows of data to return. Default is 10|None|10|
-|start|integer|0|False|What row of data to start at. Default is 0|None|0|
-
-Example input:
-
-```
-{
-  "query": "domain:www.carbonblack.com",
-  "rows": 10,
-  "start": 0
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|processes|[]process|False|The list of processes|
-
-Example output:
-
-```
-
-[{
-  "process_md5": "e0c7813a97ca7947ff5c18a8f3b61a45",
-  "sensor_id": 1,
-  "filtering_known_dlls": false,
-  "modload_count": 0,
-  "parent_unique_id": "00000001-0000-0250-01d3-202c7755d833-000000000001",
-  "emet_count": 0,
-  "cmdline": "C:\\Windows\\system32\\services.exe",
-  "filemod_count": 0,
-  "id": "00000001-0000-02a8-01d3-202c7d4bb023",
-  "parent_name": "wininit.exe",
-  "parent_md5": "000000000000000000000000000000",
-  "group": "default group",
-  "parent_id": "00000001-0000-0250-01d3-202c7755d833",
-  "hostname": "win-6epacunb1i1",
-  "last_update": "2017-08-29T13:07:37.238Z",
-  "start": "2017-08-28T18:35:57.663Z",
-  "comms_ip": 885592626,
-  "regmod_count": 0,
-  "interface_ip": -1407252262,
-  "process_pid": 680,
-  "username": "SYSTEM",
-  "terminated": false,
-  "process_name": "services.exe",
-  "emet_config": "",
-  "last_server_update": "2017-08-29T13:12:35.593Z",
-  "path": "c:\\windows\\system32\\services.exe",
-  "netconn_count": 0,
-  "parent_pid": 592,
-  "crossproc_count": 0,
-  "segment_id": 1504012355063,
-  "host_type": "server",
-  "processblock_count": 0,
-  "os_type": "windows",
-  "childproc_count": 19,
-  "unique_id": "00000001-0000-02a8-01d3-202c7d4bb023-015e2e1f45f7"
-}]
-
-```
-
-#### List Sensors
-
-This action is used to list all sensors.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|groupid|string|None|False|The sensor group ID|None|50|
-|hostname|string|None|False|The sensor hostname|None|cb-response-example|
-|id|string|None|False|The sensor ID|None|1234|
-|ip|string|None|False|The sensor IP address|None|192.0.2.0|
-
-Example input:
-
-```
-{
-  "groupid": "50",
-  "hostname": "cb-response-example",
-  "id": "1234",
-  "ip": "192.0.2.0"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|sensors|[]sensor|False|The list of sensors|
-
-Example output:
-
-```
-[
-    {
-      "systemvolume_total_size": "107267223552",
-      "os_environment_display_string": "Windows 7 Enterprise Service Pack 1, 64-bit",
-      "clock_delta": "0",
-      "supports_cblr": true,
-      "sensor_uptime": "7655",
-      "last_update": "2018-09-19 09:06:09.970817-07:00",
-      "physical_memory_size": "1073274880",
-      "build_id": 2,
-      "uptime": "8757",
-      "is_isolating": false,
-      "computer_dns_name": "cb-sensor-win7",
-      "emet_report_setting": " (GPO configured)",
-      "id": 1,
-      "emet_process_count": 0,
-      "emet_is_gpo": false,
-      "power_state": 0,
-      "network_isolation_enabled": false,
-      "systemvolume_free_size": "78565584896",
-      "status": "Online",
-      "num_eventlog_bytes": "11800",
-      "sensor_health_message": "Elevated memory usage",
-      "build_version_string": "006.001.002.71109",
-      "computer_sid": "S-1-5-21-2519757177-4078746215-1447329238",
-      "next_checkin_time": "2018-09-19 09:06:32.092306-07:00",
-      "node_id": 0,
-      "cookie": 1389712705,
-      "emet_exploit_action": " (Locally configured)",
-      "computer_name": "CB-SENSOR-WIN7",
-      "license_expiration": "1990-01-01 00:00:00-08:00",
-      "supports_isolation": true,
-      "parity_host_id": "0",
-      "supports_2nd_gen_modloads": false,
-      "network_adapters": "10.4.26.148,00505694808c|",
-      "sensor_health_status": 90,
-      "registration_time": "2018-09-19 06:58:31.543400-07:00",
-      "restart_queued": false,
-      "num_storefiles_bytes": "0",
-      "os_environment_id": 1,
-      "shard_id": 0,
-      "boot_id": "0",
-      "last_checkin_time": "2018-09-19 09:06:03.096077-07:00",
-      "os_type": 1,
-      "group_id": 1,
-      "display": true,
-      "uninstall": false
-    }
-]
-```
-
-#### Get Binary
-
-This action is used to retrieve a binary by its MD5 hash.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|hash|string|None|True|An MD5 hash|None|9de5069c5afe602b2ea0a04b66beb2c0|
-
-Example input:
-
-```
-{
-  "hash": "9de5069c5afe602b2ea0a04b66beb2c0"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|binary|bytes|False|A resulting binary, Base64-encoded|
-
-Example output:
-
-```
-
-{
-  "binary": "b'MZ\\x00\\x00'"
-}
-
-```
-
-#### Update Alert
-
-This action is used to update or resolve an alert.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Unique ID of the alert. |None|1cb11d0d-f86b-415d-aeb3-05f085973fbb|
-|status|string|Resolved|True|The status to update|['Resolved', 'Unresolved', 'In Progress', 'False Positive', '']|Resolved|
-
-Example input:
-
-```
-{
-  "id": "1cb11d0d-f86b-415d-aeb3-05f085973fbb",
-  "status": "Resolved"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Whether or not the update was successful|
-
-Example output:
-
-```
-
-{
-  "success": true
-}
-
 ```
 
 #### Add Watchlist
 
-This action is used to add a watchlist.
+This action is used to adds a watchlist
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|index_type|string|modules|True|Either modules or events for binary and process watchlists, respectively|['modules', 'events', '']|modules|
-|name|string|None|True|Watchlist name|None|examplename|
-|query|string|None|True|Raw Carbon Black query that this watchlist matches|None|test|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|index_type|string|modules|True|Either modules or events for binary and process watchlists, respectively|["modules", "events", ""]|modules|None|None|
+|name|string|None|True|Watchlist name|None|examplename|None|None|
+|query|string|None|True|Raw Carbon Black query that this watchlist matches|None|test|None|None|
+  
 Example input:
 
 ```
@@ -687,30 +126,160 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|string|False|The ID of the created watchlist|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|id|string|False|The ID of the created watchlist|3|
+  
 Example output:
 
 ```
-
 {
   "id": 3
 }
+```
 
+#### Blacklist Hash
+
+This action is used to ban a hash given its MD5
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|md5_hash|string|None|True|An MD5 hash|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+  
+Example input:
+
+```
+{
+  "md5_hash": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Status of request - true if successful, false otherwise|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Delete Feed
+
+This action is used to deletes a feed
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|force|boolean|None|True|Force deletion of all matches if multiple matches found|None|True|None|None|
+|id|string|None|True|The ID of the feed|None|example_protection|None|None|
+  
+Example input:
+
+```
+{
+  "force": true,
+  "id": "example_protection"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Whether or not the deletion was successful|False|
+  
+Example output:
+
+```
+{
+  "success": false
+}
+```
+
+#### Delete Watchlist
+
+This action is used to deletes a watchlist
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|force|boolean|None|True|Force deletion of all matches if multiple matches found|None|False|None|None|
+|id|string|None|True|The ID of the watchlist|None|1234|None|None|
+  
+Example input:
+
+```
+{
+  "force": false,
+  "id": 1234
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Whether or not the deletion was successful|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Get Binary
+
+This action is used to retrieve a binary by its MD5 Hash
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|hash|string|None|True|An MD5 hash|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+  
+Example input:
+
+```
+{
+  "hash": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|binary|bytes|False|A resulting binary, Base64-encoded|b'MZ\x00\x00'|
+  
+Example output:
+
+```
+{
+  "binary": "b'MZ\\x00\\x00'"
+}
 ```
 
 #### Isolate Sensor
 
-This action is used to isolate a sensor from the network.
+This action is used to isolates a sensor from the network
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|hostname|string|None|False|Hostname of the sensor to isolate|None|cb-response-example|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|hostname|string|None|False|Hostname of the sensor to isolate|None|cb-response-example|None|None|
+  
 Example input:
 
 ```
@@ -721,77 +290,424 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Whether or not the isolation was successful|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Whether or not the isolation was successful|True|
+  
 Example output:
 
 ```
-
 {
   "success": true
 }
+```
 
+#### List Alerts
+
+This action is used to list Carbon Black alerts with given parameters
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|domain:www.carbonblack.com|None|None|
+|rows|integer|10|False|How many rows of data to return. Default is 10|None|10|None|None|
+|start|integer|0|False|What row of data to start at. Default is 0|None|0|None|None|
+  
+Example input:
+
+```
+{
+  "query": "domain:www.carbonblack.com",
+  "rows": 10,
+  "start": 0
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|alerts|[]alert|False|The lists of alerts|None|
+  
+Example output:
+
+```
+{
+  "alerts": [
+    {
+      "Created Time": "",
+      "Feed ID": {},
+      "Feed Name": {},
+      "Feed Rating": {},
+      "Hostname": "",
+      "IOC Attributes": {},
+      "IOC Confidence": {},
+      "MD5": {},
+      "OS Type": {},
+      "Report Score": 0,
+      "Sensor Criticality": {},
+      "Sensor ID": {},
+      "Severity": 0,
+      "Status": {},
+      "Type": {},
+      "Unique ID": {}
+    }
+  ]
+}
+```
+
+#### List Binaries
+
+This action is used to list Carbon Black binaries with given parameters
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|domain:www.carbonblack.com|None|None|
+|rows|integer|10|False|How many rows of data to return. Default is 10|None|10|None|None|
+|start|integer|0|False|What row of data to start at. Default is 0|None|0|None|None|
+  
+Example input:
+
+```
+{
+  "query": "domain:www.carbonblack.com",
+  "rows": 10,
+  "start": 0
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|binaries|[]binary|False|The list of binaries|None|
+  
+Example output:
+
+```
+{
+  "binaries": [
+    {
+      "Alliance Score Virustotal": {},
+      "Carbon Black Version": {},
+      "Company Name": {},
+      "Copied Mod Length": {},
+      "Digital Signature Issuer": {},
+      "Digital Signature Program Name": "",
+      "Digital Signature Publisher": {},
+      "Digital Signature Result": {},
+      "Digital Signature Result Code": {},
+      "Digital Signature Subject": {},
+      "Digital Signature Times": {},
+      "Endpoint": {},
+      "File Description": {},
+      "File Version": {},
+      "Group": {},
+      "Host Count": {},
+      "Internal Name": {},
+      "Is 64-bit": {},
+      "Is Executable Image": "true",
+      "Last Seen": {},
+      "Legal Copyright": {},
+      "Legal Trademark": {},
+      "MD5": {},
+      "OS Types": {},
+      "Observed Filename": [
+        {}
+      ],
+      "Original Filename": {},
+      "Original Mod Length": 0,
+      "Private Build": {},
+      "Product Name": {},
+      "Product Version": {},
+      "Server Added Timestamp": {},
+      "Signed": {},
+      "Special Build": {},
+      "Timestamp": ""
+    }
+  ]
+}
 ```
 
 #### List Feeds
 
-This action is used to list all feeds.
+This action is used to list all feeds
 
 ##### Input
-
-_This action does not contain any inputs._
+  
+*This action does not contain any inputs.*
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|feeds|[]feed|False|The list of feeds|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|feeds|[]feed|False|The list of feeds|None|
+  
 Example output:
 
 ```
+{
+  "feeds": [
+    {
+      "Category": {},
+      "Display Name": {},
+      "Enabled": {},
+      "Feed URL": {},
+      "ID": {},
+      "Icon": {},
+      "Icon Small": "",
+      "Local Rating": 0,
+      "Manually Added": {},
+      "Name": {},
+      "Order": {},
+      "Password": {},
+      "Provider Rating": 0,
+      "Provider URL": "",
+      "Requires": {},
+      "Requires What": {},
+      "Requires Who": {},
+      "SSL Client Certificate": {},
+      "SSL Client Key": {},
+      "Summary": {},
+      "Tech Data": {},
+      "Use Proxy": "true",
+      "Username": {},
+      "Validate Server Cert": {}
+    }
+  ]
+}
+```
 
-[{
-  "provider_url": "https://www.bit9.com/solutions/cloud-services/",
-  "ssl_client_crt": null,
-  "local_rating": null,
-  "requires_who": null,
-  "icon_small": "",
-  "id": 13,
-  "category": "Bit9 + Carbon Black First Party",
-  "display_name": "Bit9 Software Reputation Service Trust",
-  "use_proxy": null,
-  "feed_url": "https://api.alliance.carbonblack.com/feed/SRSTrust",
-  "username": null,
-  "validate_server_cert": null,
-  "ssl_client_key": null,
-  "manually_added": false,
-  "password": null,
-  "icon": "",
-  "provider_rating": 3,
-  "name": "SRSTrust",
-  "tech_data": "It is necessary to share MD5s of observed binaries with the Carbon Black Alliance to use this feed",
-  "requires": null,
-  "enabled": false,
-  "summary": "The Bit9 Software Reputation Service (SRS) feed provides a level of software trustworthness",
-  "requires_what": null,
-  "order": 2
-}]
+#### List Processes
 
+This action is used to list Carbon Black processes with given parameters
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|domain:www.carbonblack.com|None|None|
+|rows|integer|10|False|How many rows of data to return. Default is 10|None|10|None|None|
+|start|integer|0|False|What row of data to start at. Default is 0|None|0|None|None|
+  
+Example input:
+
+```
+{
+  "query": "domain:www.carbonblack.com",
+  "rows": 10,
+  "start": 0
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|processes|[]process|False|The list of processes|None|
+  
+Example output:
+
+```
+{
+  "processes": [
+    {
+      "Binaries": {},
+      "CMD Line": {},
+      "Childproc Count": {},
+      "Comms IP": {},
+      "Crossproc Count": {},
+      "EMET Count": {},
+      "Filemod Complete": [
+        {}
+      ],
+      "Filemod Count": {},
+      "Filtering Known Downloads": "true",
+      "Group": {},
+      "Host Type": {},
+      "Hostname": {},
+      "ID": {},
+      "Interface IP": {},
+      "Last Update": {},
+      "MD5": {},
+      "Mod Load": 0,
+      "Name": {},
+      "Netconn Count": {},
+      "OS Type": {},
+      "PID": {},
+      "Parent Name": {},
+      "Parent PID": {},
+      "Parent Unique ID": {},
+      "Path": {},
+      "Process Block Count": {},
+      "Regmod Count": {},
+      "Segment ID": {},
+      "Sensor ID": {},
+      "Start": {},
+      "Terminated": {},
+      "UID": "",
+      "Unique ID": {},
+      "Username": {}
+    }
+  ]
+}
+```
+
+#### List Sensors
+
+This action is used to list all sensors
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|groupid|string|None|False|The sensor group ID|None|50|None|None|
+|hostname|string|None|False|The sensor hostname|None|cb-response-example|None|None|
+|id|string|None|False|The sensor ID|None|1234|None|None|
+|ip|string|None|False|The sensor IP address|None|192.0.2.0|None|None|
+  
+Example input:
+
+```
+{
+  "groupid": 50,
+  "hostname": "cb-response-example",
+  "id": 1234,
+  "ip": "192.0.2.0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|sensors|[]sensor|False|The list of sensors|None|
+  
+Example output:
+
+```
+{
+  "sensors": [
+    {
+      "Boot ID": {},
+      "Build ID": {},
+      "Build Version String": {},
+      "Computer DNS Name": {},
+      "Computer Name": {},
+      "Computer SID": {},
+      "Cookie": {},
+      "Display": {},
+      "Event Log Flush Time": {},
+      "Found": {},
+      "Group ID": {},
+      "ID": 0,
+      "Is Isolating": "true",
+      "Last Checkin Time": {},
+      "License Expiration": {},
+      "Network Adapters": {},
+      "Network Isolation Enabled": {},
+      "Next Check-In Time": {},
+      "Notes": {},
+      "OS Environment Display String": {},
+      "OS Environment ID": {},
+      "Physical Memory Size": {},
+      "Registration Time": {},
+      "Sensor Health Message": {},
+      "Sensor Health Status": {},
+      "Sensor Uptime": {},
+      "Systemvolume Free Size": {},
+      "Systemvolume Total Size": "",
+      "Uninstall": {},
+      "Uptime": {}
+    }
+  ]
+}
+```
+
+#### List Watchlists
+
+This action is used to list all watchlists
+
+##### Input
+  
+*This action does not contain any inputs.*
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|watchlists|[]watchlist|False|The list of watchlists|None|
+  
+Example output:
+
+```
+{
+  "watchlists": [
+    {
+      "Alliance ID": {},
+      "Date Added": {},
+      "Enabled": "true",
+      "From Alliance": {},
+      "Group ID": {},
+      "Index Type": {},
+      "Last Hit": {},
+      "Last Hit Count": 0,
+      "List Query": {},
+      "List Timestamp": "",
+      "Name": "",
+      "Readonly": {},
+      "Total Hits": {},
+      "Total Tags": {}
+    }
+  ]
+}
+```
+
+#### Uninstall Sensor
+
+This action is used to uninstalls a sensor given a sensor ID
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|False|The sensor ID|None|1234|None|None|
+  
+Example input:
+
+```
+{
+  "id": 1234
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Whether or not the uninstall was successful|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
 ```
 
 #### Unisolate Sensor
 
-This action is used to bring a sensor back into the network.
+This action is used to brings a sensor back into the network
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|hostname|string|None|False|Hostname of the sensor to unisolate|None|cb-response-example|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|hostname|string|None|False|Hostname of the sensor to unisolate|None|cb-response-example|None|None|
+  
 Example input:
 
 ```
@@ -802,99 +718,280 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Whether or not the unisolation was successful|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Whether or not the unisolation was successful|True|
+  
 Example output:
 
 ```
-
 {
   "success": true
 }
-
 ```
 
-### Triggers
+#### Update Alert
 
-#### New Alert
-
-This trigger is used to fire when a new alert is found.
+This action is used to updates or Resolves an Alert in Carbon Black
 
 ##### Input
 
-_This trigger does not contain any inputs._
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|Unique ID of the alert. |None|1cb11d0d-f86b-415d-aeb3-05f085973fbb|None|None|
+|status|string|Resolved|True|The status to update|["Resolved", "Unresolved", "In Progress", "False Positive", ""]|Resolved|None|None|
+  
+Example input:
+
+```
+{
+  "id": "1cb11d0d-f86b-415d-aeb3-05f085973fbb",
+  "status": "Resolved"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|alert|alert|False|Carbon Black alert|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|Whether or not the update was successful|True|
+  
 Example output:
 
 ```
-
 {
-  "username": "SYSTEM",
-  "alert_type": "watchlist.hit.query.process",
-  "sensor_criticality": 3,
-  "modload_count": 0,
-  "report_score": 75,
-  "watchlist_id": "11",
-  "sensor_id": 1,
-  "feed_name": "My Watchlists",
-  "created_time": "2017-09-11T17:50:03.377Z",
-  "ioc_type": "query",
-  "watchlist_name": "Watchlist",
-  "ioc_confidence": 0.5,
-  "ioc_attr": "{\"highlights\": [\"c:\\\\windows\\\\carbonblack\\\\PREPREPREcb.exePOSTPOSTPOST\", \"PREPREPREcb.exePOSTPOSTPOST\"]}",
-  "alert_severity": 50.625,
-  "crossproc_count": 0,
-  "group": "default group",
-  "hostname": "win-6epacunb1i1",
-  "filemod_count": 0,
-  "resolved_time": "2017-09-11T18:11:32.09Z",
-  "comms_ip": "52.122.36.18",
-  "netconn_count": 1,
-  "interface_ip": "172.19.33.201",
-  "status": "Resolved",
-  "observed_hosts": {
-      "numFound": 3,
-      "hostCount": 1,
-      "globalCount": 3,
-      "hostnames": [{
-          "name": "win-6epacunb1i1",
-          "value": 27893
-      }],
-      "accurateHostCount": true,
-      "processCount": 1,
-      "numDocs": "84136",
-      "processTotal": 1
-  },
-  "process_path": "c:\\windows\\carbonblack\\cb.exe",
-  "process_name": "cb.exe",
-  "process_unique_id": "00000001-0000-0414-01d3-20c7b4fdd3cf-015e2e1f45f7",
-  "process_id": "00000001-0000-0414-01d3-20c7b4fdd3cf",
-  "_version_": 1578267828122812416,
-  "regmod_count": 0,
-  "md5": "e472001ffe350a80f4c1f3322180ca53",
-  "segment_id": 773801463,
-  "total_hosts": 1,
-  "feed_id": -1,
-  "assigned_to": "irteam",
-  "os_type": "windows",
-  "childproc_count": 0,
-  "unique_id": "a743ee18-ce1d-4fb3-adc5-f05a77c8996c",
-  "feed_rating": 3
+  "success": true
 }
+```
+### Triggers
+
+
+#### New Alert
+
+This trigger is used to fires when a new alert is found
+
+##### Input
+  
+*This trigger does not contain any inputs.*
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|alert|alert|False|Carbon Black alert|None|
+  
+Example output:
 
 ```
+{
+  "alert": {
+    "Created Time": "",
+    "Feed ID": {},
+    "Feed Name": {},
+    "Feed Rating": {},
+    "Hostname": "",
+    "IOC Attributes": {},
+    "IOC Confidence": {},
+    "MD5": {},
+    "OS Type": {},
+    "Report Score": 0,
+    "Sensor Criticality": {},
+    "Sensor ID": {},
+    "Severity": 0,
+    "Status": {},
+    "Type": {},
+    "Unique ID": {}
+  }
+}
+```
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-### Custom Output Types
+### Custom Types
+  
+**alert**
 
-_This plugin does not contain any custom output types._
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Severity|number|None|False|None|None|
+|Type|string|None|False|None|None|
+|Created Time|date|None|False|None|None|
+|Feed ID|integer|None|False|None|None|
+|Feed Name|string|None|False|None|None|
+|Feed Rating|number|None|False|None|None|
+|Hostname|string|None|False|None|None|
+|IOC Attributes|string|None|False|None|None|
+|IOC Confidence|number|None|False|None|None|
+|MD5|string|None|False|None|None|
+|OS Type|string|None|False|None|None|
+|Report Score|integer|None|False|None|None|
+|Sensor Criticality|number|None|False|None|None|
+|Sensor ID|integer|None|False|None|None|
+|Status|string|None|False|None|None|
+|Unique ID|string|None|False|None|None|
+  
+**process**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Binaries|object|None|False|None|None|
+|Childproc Count|integer|None|False|None|None|
+|CMD Line|string|None|False|None|None|
+|Comms IP|integer|None|False|None|None|
+|Crossproc Count|integer|None|False|None|None|
+|EMET Count|integer|None|False|None|None|
+|Filemod Complete|[]string|None|False|None|None|
+|Filemod Count|integer|None|False|None|None|
+|Filtering Known Downloads|boolean|None|False|None|None|
+|Group|string|None|False|None|None|
+|Host Type|string|None|False|None|None|
+|Hostname|string|None|False|None|None|
+|ID|string|None|False|None|None|
+|Interface IP|integer|None|False|None|None|
+|Last Update|string|None|False|None|None|
+|Mod Load|integer|None|False|None|None|
+|Netconn Count|integer|None|False|None|None|
+|OS Type|string|None|False|None|None|
+|Parent Name|string|None|False|None|None|
+|Parent PID|integer|None|False|None|None|
+|Parent Unique ID|string|None|False|None|None|
+|Path|string|None|False|None|None|
+|MD5|string|None|False|None|None|
+|Name|string|None|False|None|None|
+|PID|integer|None|False|None|None|
+|Process Block Count|integer|None|False|None|None|
+|Regmod Count|integer|None|False|None|None|
+|Segment ID|integer|None|False|None|None|
+|Sensor ID|integer|None|False|None|None|
+|Start|string|None|False|None|None|
+|Terminated|boolean|None|False|None|None|
+|UID|string|None|False|None|None|
+|Unique ID|string|None|False|None|None|
+|Username|string|None|False|None|None|
+  
+**binary**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Alliance Score Virustotal|string|None|False|If enabled and the hit count is greater than one, the number of [VirusTotal](http://virustotal.com) hits for this MD5|None|
+|Carbon Black Version|integer|None|False|None|None|
+|Company Name|string|None|False|If present, company name from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)|None|
+|Copied Mod Length|integer|None|False|Bytes copied from remote host. If file is greater than 25MB this will be less than orig_mod_len|None|
+|Digital Signature Issuer|string|None|False|If signed and present, the issuer name|None|
+|Digital Signature Program Name|string|None|False|If signed and present, the program name|None|
+|Digital Signature Publisher|string|None|False|If signed and present, the publisher name|None|
+|Digital Signature Result|string|None|False|Digital signature status; One of Signed, Unsigned, Expired, Bad Signature, Invalid Signature, Invalid Chain, Untrusted Root, Explicit Distrust|None|
+|Digital Signature Result Code|string|None|False|HRESULT_FROM_WIN32 for the result of the digital signature operation via [WinVerifyTrust](http://msdn.microsoft.com/en-us/library/windows/desktop/aa388208)|None|
+|Digital Signature Times|string|None|False|If signed, the timestamp of the signature in GMT|None|
+|Digital Signature Subject|string|None|False|If signed and present, the subject|None|
+|Endpoint|[]string|None|False|None|None|
+|File Description|string|None|False|If present, file description from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)|None|
+|File Version|string|None|False|If present, file version from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)|None|
+|Group|[]string|None|False|None|None|
+|Host Count|integer|None|False|Count of unique endpoints which have ever reported this binary|None|
+|Internal Name|string|None|False|If present, internal name from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)|None|
+|Is 64-bit|boolean|None|False|True if x64|None|
+|Is Executable Image|boolean|None|False|True if an EXE|None|
+|Last Seen|date|None|False|None|None|
+|Legal Copyright|string|None|False|If present, legal copyright from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)|None|
+|Legal Trademark|string|None|False|If present, legal trademark from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)|None|
+|MD5|string|None|False|The MD5 hash of this binary|None|
+|Observed Filename|[]string|None|False|The set of unique filenames this binary has been seen as|None|
+|Original Mod Length|integer|None|False|Filesize in bytes|None|
+|Original Filename|string|None|False|If present, original filename from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)|None|
+|OS Types|string|None|False|Operating system type of this binary; one of windows, linux, osx|None|
+|Private Build|string|None|False|If present, private build from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)|None|
+|Product Name|string|None|False|If present, product name from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)|None|
+|Product Version|string|None|False|If present, product version from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)|None|
+|Server Added Timestamp|string|None|False|The first time this binary was received on the server in the server GMT time|None|
+|Signed|string|None|False|Digital signature status. One of Signed, Unsigned, Expired, Bad Signature, Invalid Signature, Invalid Chain, Untrusted Root, Explicit Distrust|None|
+|Special Build|string|None|False|If present, special build from [FileVersionInformation](http://msdn.microsoft.com/en-us/library/system.diagnostics.fileversioninfo.aspx)|None|
+|Timestamp|date|None|False|None|None|
+  
+**watchlist**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Alliance ID|integer|None|False|None|None|
+|Date Added|date|None|False|None|None|
+|Enabled|boolean|None|False|None|None|
+|From Alliance|boolean|None|False|None|None|
+|Group ID|integer|None|False|None|None|
+|Index Type|string|None|False|Index to search for this watchlist|None|
+|Last Hit|date|None|False|None|None|
+|Last Hit Count|integer|None|False|None|None|
+|List Query|string|None|False|URL-encoded search query associated with this watchlist|None|
+|List Timestamp|date|None|False|None|None|
+|Name|string|None|False|None|None|
+|Readonly|boolean|None|False|None|None|
+|Total Hits|string|None|False|None|None|
+|Total Tags|string|None|False|None|None|
+  
+**feed**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Category|string|None|False|None|None|
+|Display Name|string|None|False|None|None|
+|Enabled|boolean|None|False|None|None|
+|Feed URL|string|None|False|None|None|
+|Icon|bytes|None|False|None|None|
+|Icon Small|bytes|None|False|None|None|
+|ID|integer|None|False|None|None|
+|Local Rating|integer|None|False|None|None|
+|Manually Added|boolean|None|False|None|None|
+|Name|string|None|False|None|None|
+|Order|integer|None|False|None|None|
+|Password|string|None|False|None|None|
+|Provider Rating|number|None|False|None|None|
+|Provider URL|string|None|False|None|None|
+|Requires|string|None|False|None|None|
+|Requires What|string|None|False|None|None|
+|Requires Who|string|None|False|None|None|
+|SSL Client Certificate|string|None|False|None|None|
+|SSL Client Key|string|None|False|None|None|
+|Summary|string|None|False|None|None|
+|Tech Data|string|None|False|None|None|
+|Use Proxy|boolean|None|False|None|None|
+|Username|string|None|False|None|None|
+|Validate Server Cert|boolean|None|False|None|None|
+  
+**sensor**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Boot ID|string|None|None|Boot ID|None|
+|Build ID|integer|None|None|Sensor build ID|None|
+|Build Version String|string|None|None|Build version string|None|
+|Computer DNS Name|string|None|None|DNS name of the computer|None|
+|Computer Name|string|None|None|Computer name|None|
+|Computer SID|string|None|None|Computer SID|None|
+|Cookie|integer|None|None|Cookie|None|
+|Display|boolean|None|None|Display|None|
+|Event Log Flush Time|string|None|None|Event log flush time|None|
+|Found|boolean|None|None|If sensor was found|None|
+|Group ID|integer|None|None|Group ID|None|
+|ID|integer|None|None|Sensor ID|None|
+|Is Isolating|boolean|None|None|Is sensor isolated|None|
+|Last Checkin Time|string|None|None|Last checkin time|None|
+|License Expiration|string|None|None|License expiration|None|
+|Network Adapters|string|None|None|Network adapters|None|
+|Network Isolation Enabled|boolean|None|None|Network isolation enabled|None|
+|Next Check-In Time|string|None|None|Next check-in time|None|
+|Notes|string|None|None|Notes|None|
+|OS Environment Display String|string|None|None|OS environment display string|None|
+|OS Environment ID|integer|None|None|OS environment ID|None|
+|Physical Memory Size|string|None|None|Physical memory size|None|
+|Registration Time|string|None|None|Registration time|None|
+|Sensor Health Message|string|None|None|Sensor health message|None|
+|Sensor Health Status|integer|None|None|Sensor health status|None|
+|Sensor Uptime|string|None|None|How long the sensor has been up|None|
+|Systemvolume Free Size|string|None|None|Systemvolume free size|None|
+|Systemvolume Total Size|string|None|None|Total size of system volume|None|
+|Uninstall|boolean|None|None|Uninstall|None|
+|Uptime|string|None|None|Uptime|None|
+
 
 ## Troubleshooting
 
@@ -902,6 +999,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.3.0 - Adding 'validators', 'urllib3', 'requests', 'certifi' and bumping 'cbapi' to '1.7.10' to address snyk vulnerabilities | 'SDK' bump and Plugin refresh
 * 3.2.0 - Add uninstall sensor action | upgrade to insightconnect-plugin-runtime
 * 3.1.11 - Correct spelling in help.md
 * 3.1.10 - Rebrand plugin
@@ -921,6 +1019,8 @@ This plugin does not contain any troubleshooting information.
 * 0.1.0 - Initial plugin
 
 # Links
+
+* [CarbonBlackEDR](https://www.vmware.com/products/endpoint-detection-and-response.html)
 
 ## References
 

@@ -7,7 +7,7 @@ vendor: rapid7
 support: rapid7
 status: []
 description: Automate information collection, endpoint isolation and hash blacklisting
-version: 3.2.0
+version: 3.3.0
 supported_versions: ["6.0-6.2x Carbon Black EDR API"]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/carbon_black_response
@@ -20,11 +20,47 @@ tags:
 - endpoint
 - cb
 - detection
+key_features:
+- Investigate endpoints
+- Blacklist hashes
+- Isolate endpoints
+- Uninstall endpoints
+connection_version: 3
+version_history:
+- "3.3.0 - Adding 'validators', 'urllib3', 'requests', 'certifi' and bumping 'cbapi' to '1.7.10' to address snyk vulnerabilities | 'SDK' bump and Plugin refresh"
+- "3.2.0 - Add uninstall sensor action | upgrade to insightconnect-plugin-runtime"
+- "3.1.11 - Correct spelling in help.md"
+- "3.1.10 - Rebrand plugin"
+- "3.1.9 - Pin to latest version of cbapi (1.6.2) to fix broken isolate() function"
+- "3.1.8 - New spec and help.md format for the Extension Library"
+- "3.1.7 - Fix issue where Delete Watchlist action would not run successfully"
+- "3.1.6 - Fix issue where output from the New Alert trigger did not match the output schema"
+- "3.1.5 - Update connection tests"
+- "3.1.4 - Update descriptions"
+- "3.1.3 - Pull the ConnectionCacheKey update from SDK"
+- "3.1.2 - Fixed List Sensors action from failing when sensor doesn't exist"
+- "3.1.1 - New input parameters for List Sensors action"
+- "3.1.0 - Added action List Sensors"
+- "3.0.0 - Plugin audited and various minor bugs corrected"
+- "2.0.0 - Update to v2 Python plugin architecture | Support web server mode"
+- "1.0.1 - SSL bug fix in SDK"
+- "0.1.0 - Initial plugin"
+sdk:
+    type: full
+    version: 5.6.1
+    user: nobody
+troubleshooting: "This plugin does not contain any troubleshooting information."
+requirements:
+- "Requires an API Key from VMware Carbon Black EDR"
 hub_tags:
   use_cases: [alerting_and_notifications, threat_detection_and_response]
   keywords: [carbon black, vmware, response, endpoint, cb, detection]
   features: []
 enable_cache: true
+links: ["[CarbonBlackEDR](https://www.vmware.com/products/endpoint-detection-and-response.html)"]
+references:
+- "[VMware Carbon Black EDR REST API](https://developer.carbonblack.com/guide/enterprise-response/)"
+- "[VMware Carbon Black EDR REST API 6.0-6.2x](https://developer.carbonblack.com/reference/enterprise-response/6.1/rest-api/)"
 types:
   alert:
     alert_severity:
@@ -859,6 +895,7 @@ actions:
         description: A resulting binary, Base64-encoded
         type: bytes
         required: false
+        example: "b'MZ\\x00\\x00'"
   blacklist_hash:
     title: Blacklist Hash
     description: Ban a hash given its MD5
@@ -874,6 +911,7 @@ actions:
         type: boolean
         description: Status of request - true if successful, false otherwise
         required: false
+        example: true
   add_watchlist:
     title: Add Watchlist
     description: Adds a watchlist
@@ -904,6 +942,7 @@ actions:
         type: string
         required: false
         title: ID
+        example: 3
   add_feed:
     title: Add Feed
     description: Adds a feed
@@ -960,6 +999,7 @@ actions:
         type: integer
         required: false
         title: ID
+        example: 5
   delete_feed:
     title: Delete Feed
     description: Deletes a feed
@@ -975,12 +1015,13 @@ actions:
         description: Force deletion of all matches if multiple matches found
         required: true
         title: Force
-        example: false
+        example: true
     output:
       success:
         type: boolean
         description: Whether or not the deletion was successful
         required: false
+        example: false
   delete_watchlist:
     title: Delete Watchlist
     description: Deletes a watchlist
@@ -1002,6 +1043,7 @@ actions:
         type: boolean
         description: Whether or not the deletion was successful
         required: false
+        example: true
   update_alert:
     title: Update Alert
     description: Updates or Resolves an Alert in Carbon Black
@@ -1030,6 +1072,7 @@ actions:
         type: boolean
         description: Whether or not the update was successful
         required: false
+        example: true
   isolate_sensor:
     title: Isolate Sensor
     description: Isolates a sensor from the network
@@ -1045,6 +1088,7 @@ actions:
         type: boolean
         description: Whether or not the isolation was successful
         required: false
+        example: true
   unisolate_sensor:
     title: Unisolate Sensor
     description: Brings a sensor back into the network
@@ -1060,6 +1104,7 @@ actions:
         type: boolean
         description: Whether or not the unisolation was successful
         required: false
+        example: true
   uninstall_sensor:
     title: Uninstall Sensor
     description: Uninstalls a sensor given a sensor ID
@@ -1075,7 +1120,7 @@ actions:
         description: Whether or not the uninstall was successful
         type: boolean
         required: false
-
+        example: true
 triggers:
   new_alert:
     title: New Alert

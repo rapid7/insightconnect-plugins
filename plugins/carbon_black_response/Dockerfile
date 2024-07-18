@@ -1,20 +1,20 @@
-FROM rapid7/insightconnect-python-3-38-plugin:4
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:5.6.1
 
-# Add any custom package dependencies here
-# NOTE: Add pip packages to requirements.txt
-RUN apt-get update -y && apt-get install -y libffi6 libffi-dev
+LABEL organization=rapid7
+LABEL sdk=python
 
-# End package dependencies
-
-# Add source code
 WORKDIR /python/src
-ADD ./plugin.spec.yaml /plugin.spec.yaml
-ADD . /python/src
 
-# Install pip dependencies
+ADD ./plugin.spec.yaml /plugin.spec.yaml
+ADD ./requirements.txt /python/src/requirements.txt
+
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-# Install plugin
+ADD . /python/src
+
 RUN python setup.py build && python setup.py install
+
+# User to run plugin code. The two supported users are: root, nobody
+USER nobody
 
 ENTRYPOINT ["/usr/local/bin/icon_carbon_black_response"]
