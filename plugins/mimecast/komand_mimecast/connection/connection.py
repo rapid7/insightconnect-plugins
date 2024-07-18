@@ -43,9 +43,24 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Running a connection test to Mimecast")
         try:
             _, _, _ = self.client.get_siem_logs("")
-            self.logger.info("The connection test to Mimecast was successful")
-            return {"success": True}
+            message = "The connection test to Mimecast was successful"
+            self.logger.info(message)
+            return {"success": True}, message
         except ApiClientException as error:
-            self.logger.info("The connection test to Mimecast has failed")
+
+            return_message = ""
+
+            failed_message = "The connection test to Mimecast has failed"
+            self.logger.info(failed_message)
+            return_message += f"{failed_message}\n"
+
+            cause_message = f"This failure was caused by: {error.cause}"
+            self.logger.info(cause_message)
+            return_message += f"{cause_message}\n"
+
+            assistance_message = f"This failure is fixed by: {error.assistance}"
+            self.logger.info(assistance_message)
+            return_message += f"{assistance_message}\n"
+
             self.logger.error(error)
-            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_message)
