@@ -1,5 +1,5 @@
 {
-	"spec": "0f61f7a0105d76bd877b9aa4f90d478e",
+	"spec": "cf7099b1fdd1ff13450e61960819b7e2",
 	"manifest": "9c04da12a5a25b864cfb855f716fdc4d",
 	"setup": "b91f62dcd25c0cb7c423c2e690dd2ec3",
 	"schemas": [
@@ -117,7 +117,7 @@
 		},
 		{
 			"identifier": "vulnerability_updated/schema.py",
-			"hash": "da45fef8addc45f371b164e02ad35f17"
+			"hash": "8c92982b03b6313b57d705ba40a2916a"
 		}
 	]
 }

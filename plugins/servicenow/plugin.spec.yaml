@@ -25,7 +25,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 5.4.8
+  version: 6.0.0
   user: nobody
 key_features:
   - "Search, Read, Create, Delete, and Update incidents to accelerate ticketing operations"
@@ -45,6 +45,7 @@ references:
   - "[ServiceNow Operators](https://docs.servicenow.com/bundle/quebec-platform-user-interface/page/use/common-ui-elements/reference/r_OpAvailableFiltersQueries.html)"
   - "[ServiceNow Plugin Setup Guide](https://docs.rapid7.com/insightconnect/servicenow)"
 version_history:
+  - "8.0.1 - Update Setuptool to version 70.0.0 | Update SDK to version 6.0.0"
   - "8.0.0 - `Incident Created, Vulnerability Updated`: Updated triggers to allow users to check a list of system_ids or all of them"
   - "7.4.1 - `Incident Created`: Resolved issue related to trigger not working. Updated SDK"
   - "7.4.0 - Add ability to use OAuth for API authentication (requires OAuth Client ID and OAuth Client Secret in connection)"
