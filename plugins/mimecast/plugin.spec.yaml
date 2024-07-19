@@ -19,7 +19,7 @@ references:
  - "[Mimecast API](https://www.mimecast.com/developer/documentation)"
 version: 5.3.15
 connection_version: 5
-supported_versions: ["Mimecast API 2024-05-09"]
+supported_versions: ["Mimecast API 2024-06-18"]
 vendor: rapid7
 support: rapid7
 cloud_ready: true

@@ -16,7 +16,7 @@
 
 # Supported Product Versions
 
-* Mimecast API 2024-05-09
+* Mimecast API 2024-06-18
 
 # Documentation
 
