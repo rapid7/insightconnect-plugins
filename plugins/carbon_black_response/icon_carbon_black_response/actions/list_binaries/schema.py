@@ -38,6 +38,7 @@ class ListBinariesInput(insightconnect_plugin_runtime.Input):
     },
     "start": {
       "type": "integer",
+      "title": "Start",
       "description": "What row of data to start at. Default is 0",
       "default": 0,
       "order": 3
@@ -59,6 +60,7 @@ class ListBinariesOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "binaries": {
       "type": "array",
+      "title": "Binaries",
       "description": "The list of binaries",
       "items": {
         "$ref": "#/definitions/binary"

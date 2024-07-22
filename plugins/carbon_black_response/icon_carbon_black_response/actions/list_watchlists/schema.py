@@ -32,6 +32,7 @@ class ListWatchlistsOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "watchlists": {
       "type": "array",
+      "title": "Watchlists",
       "description": "The list of watchlists",
       "items": {
         "$ref": "#/definitions/watchlist"

@@ -47,6 +47,7 @@ class BlacklistHashOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "success": {
       "type": "boolean",
+      "title": "Success",
       "description": "Status of request - true if successful, false otherwise",
       "order": 1
     }

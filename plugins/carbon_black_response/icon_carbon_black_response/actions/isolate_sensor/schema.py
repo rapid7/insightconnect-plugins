@@ -44,6 +44,7 @@ class IsolateSensorOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "success": {
       "type": "boolean",
+      "title": "Success",
       "description": "Whether or not the isolation was successful",
       "order": 1
     }

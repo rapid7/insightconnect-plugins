@@ -49,6 +49,7 @@ class GetBinaryOutput(insightconnect_plugin_runtime.Output):
       "type": "string",
       "format": "bytes",
       "displayType": "bytes",
+      "title": "Binary",
       "description": "A resulting binary, Base64-encoded",
       "order": 1
     }

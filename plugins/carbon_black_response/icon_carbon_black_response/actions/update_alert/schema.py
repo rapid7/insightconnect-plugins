@@ -63,6 +63,7 @@ class UpdateAlertOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "success": {
       "type": "boolean",
+      "title": "Success",
       "description": "Whether or not the update was successful",
       "order": 1
     }

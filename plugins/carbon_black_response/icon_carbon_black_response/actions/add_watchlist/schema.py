@@ -25,6 +25,7 @@ class AddWatchlistInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "index_type": {
       "type": "string",
+      "title": "Index Type",
       "description": "Either modules or events for binary and process watchlists, respectively",
       "default": "modules",
       "enum": [
@@ -36,11 +37,13 @@ class AddWatchlistInput(insightconnect_plugin_runtime.Input):
     },
     "name": {
       "type": "string",
+      "title": "Name",
       "description": "Watchlist name",
       "order": 1
     },
     "query": {
       "type": "string",
+      "title": "Query",
       "description": "Raw Carbon Black query that this watchlist matches",
       "order": 3
     }

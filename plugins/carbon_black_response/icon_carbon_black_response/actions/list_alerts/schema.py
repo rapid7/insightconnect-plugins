@@ -38,6 +38,7 @@ class ListAlertsInput(insightconnect_plugin_runtime.Input):
     },
     "start": {
       "type": "integer",
+      "title": "Start",
       "description": "What row of data to start at. Default is 0",
       "default": 0,
       "order": 3
@@ -59,6 +60,7 @@ class ListAlertsOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "alerts": {
       "type": "array",
+      "title": "Alerts",
       "description": "The lists of alerts",
       "items": {
         "$ref": "#/definitions/alert"

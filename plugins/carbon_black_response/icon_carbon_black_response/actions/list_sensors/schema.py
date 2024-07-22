@@ -65,6 +65,7 @@ class ListSensorsOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "sensors": {
       "type": "array",
+      "title": "Sensors",
       "description": "The list of sensors",
       "items": {
         "$ref": "#/definitions/sensor"

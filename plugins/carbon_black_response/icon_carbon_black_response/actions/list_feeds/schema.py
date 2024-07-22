@@ -32,6 +32,7 @@ class ListFeedsOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "feeds": {
       "type": "array",
+      "title": "Feeds",
       "description": "The list of feeds",
       "items": {
         "$ref": "#/definitions/feed"

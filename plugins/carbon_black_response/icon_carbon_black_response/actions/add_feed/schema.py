@@ -31,47 +31,56 @@ class AddFeedInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "cert": {
       "$ref": "#/definitions/file",
+      "title": "Cert",
       "description": "Certificate file",
       "order": 6
     },
     "enabled": {
       "type": "boolean",
+      "title": "Enabled",
       "description": "Enable feed",
       "order": 3
     },
     "feed_url": {
       "type": "string",
+      "title": "Feed URL",
       "description": "The URL of the feed to add",
       "order": 1
     },
     "force": {
       "type": "boolean",
+      "title": "Force",
       "description": "Add feed even if the feed URL is already in use",
       "default": false,
       "order": 2
     },
     "key": {
       "$ref": "#/definitions/file",
+      "title": "Key",
       "description": "Key",
       "order": 7
     },
     "password": {
       "$ref": "#/definitions/password",
+      "title": "Password",
       "description": "Password",
       "order": 5
     },
     "use_proxy": {
       "type": "boolean",
+      "title": "Use Proxy",
       "description": "Whether or not to use proxy",
       "order": 8
     },
     "username": {
       "type": "string",
+      "title": "Username",
       "description": "Username",
       "order": 4
     },
     "validate_server_cert": {
       "type": "boolean",
+      "title": "Validate Server Certificate",
       "description": "Whether or not to validate server certificate",
       "order": 9
     }

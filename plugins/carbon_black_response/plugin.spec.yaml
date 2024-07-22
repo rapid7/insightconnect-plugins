@@ -764,6 +764,7 @@ actions:
         title: Rows
         example: 10
       start:
+        title: Start
         type: integer
         description: What row of data to start at. Default is 0
         default: 0
@@ -771,6 +772,7 @@ actions:
         example: 0
     output:
       alerts:
+        title: Alerts
         description: The lists of alerts
         type: '[]alert'
         required: false
@@ -794,6 +796,7 @@ actions:
         title: Rows
         example: 10
       start:
+        title: Start
         type: integer
         description: What row of data to start at. Default is 0
         default: 0
@@ -801,6 +804,7 @@ actions:
         example: 0
     output:
       processes:
+        title: Processes
         description: The list of processes
         type: '[]process'
         required: false
@@ -824,6 +828,7 @@ actions:
         title: Rows
         example: 10
       start:
+        title: Start
         type: integer
         description: What row of data to start at. Default is 0
         default: 0
@@ -831,6 +836,7 @@ actions:
         example: 0
     output:
       binaries:
+        title: Binaries
         description: The list of binaries
         type: '[]binary'
         required: false
@@ -840,6 +846,7 @@ actions:
     description: List all watchlists
     output:
       watchlists:
+        title: Watchlists
         description: The list of watchlists
         type: '[]watchlist'
         required: false
@@ -849,6 +856,7 @@ actions:
     description: List all feeds
     output:
       feeds:
+        title: Feeds
         description: The list of feeds
         type: '[]feed'
         required: false
@@ -883,6 +891,7 @@ actions:
         example: '50'
     output:
       sensors:
+        title: Sensors
         description: The list of sensors
         type: '[]sensor'
         required: false
@@ -899,6 +908,7 @@ actions:
         example: '9de5069c5afe602b2ea0a04b66beb2c0'
     output:
       binary:
+        title: Binary
         description: A resulting binary, Base64-encoded
         type: bytes
         required: false
@@ -915,6 +925,7 @@ actions:
         example: '9de5069c5afe602b2ea0a04b66beb2c0'
     output:
       success:
+        title: Success
         type: boolean
         description: Status of request - true if successful, false otherwise
         required: false
@@ -924,11 +935,13 @@ actions:
     description: Adds a watchlist
     input:
       name:
+        title: Name
         type: string
         description: Watchlist name
         required: true
         example: 'examplename'
       index_type:
+        title: Index Type
         type: string
         description: Either modules or events for binary and process watchlists, respectively
         required: true
@@ -939,6 +952,7 @@ actions:
         - ""
         example: 'modules'
       query:
+        title: Query
         type: string
         description: Raw Carbon Black query that this watchlist matches
         required: true
@@ -955,47 +969,56 @@ actions:
     description: Adds a feed
     input:
       feed_url:
+        title: Feed URL
         description: The URL of the feed to add
         type: string
         required: false
         example: 'https://example.com'
       force:
+        title: Force
         type: boolean
         default: false
         description: Add feed even if the feed URL is already in use
         required: false
         example: false
       enabled:
+        title: Enabled
         type: boolean
         description: Enable feed
         required: false
         example: true
       username:
+        title: Username
         description: Username
         type: string
         required: false
         example: 'user1'
       password:
+        title: Password
         description: Password
         type: password
         required: false
         example: 'mypassword'
       cert:
+        title: Cert
         description: Certificate file
         type: file
         required: false
         example: '{"filename": "name", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}'
       key:
+        title: Key
         description: Key
         type: file
         required: false
         example: '{"filename": "<name>", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}'
       use_proxy:
+        title: Use Proxy
         description: Whether or not to use proxy
         type: boolean
         required: false
         example: true
       validate_server_cert:
+        title: Validate Server Certificate
         description: Whether or not to validate server certificate
         type: boolean
         required: false
@@ -1025,6 +1048,7 @@ actions:
         example: true
     output:
       success:
+        title: Success
         type: boolean
         description: Whether or not the deletion was successful
         required: false
@@ -1047,6 +1071,7 @@ actions:
         example: false
     output:
       success:
+        title: Success
         type: boolean
         description: Whether or not the deletion was successful
         required: false
@@ -1076,6 +1101,7 @@ actions:
         example: 'Resolved'
     output:
       success:
+        title: Success
         type: boolean
         description: Whether or not the update was successful
         required: false
@@ -1092,6 +1118,7 @@ actions:
         example: 'cb-response-example'
     output:
       success:
+        title: Success
         type: boolean
         description: Whether or not the isolation was successful
         required: false
@@ -1108,6 +1135,7 @@ actions:
         example: 'cb-response-example'
     output:
       success:
+        title: Success
         type: boolean
         description: Whether or not the unisolation was successful
         required: false
@@ -1124,6 +1152,7 @@ actions:
         example: '1234'
     output:
       success:
+        title: Success
         description: Whether or not the uninstall was successful
         type: boolean
         required: false

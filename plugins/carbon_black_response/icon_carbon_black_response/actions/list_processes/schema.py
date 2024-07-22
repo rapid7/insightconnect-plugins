@@ -38,6 +38,7 @@ class ListProcessesInput(insightconnect_plugin_runtime.Input):
     },
     "start": {
       "type": "integer",
+      "title": "Start",
       "description": "What row of data to start at. Default is 0",
       "default": 0,
       "order": 3
@@ -59,6 +60,7 @@ class ListProcessesOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "processes": {
       "type": "array",
+      "title": "Processes",
       "description": "The list of processes",
       "items": {
         "$ref": "#/definitions/process"
