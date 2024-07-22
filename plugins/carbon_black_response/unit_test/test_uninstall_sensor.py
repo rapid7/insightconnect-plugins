@@ -11,8 +11,6 @@ import logging
 post_uninstall = {
     "systemvolume_total_size": "42947571712",
     "emet_telemetry_path": "",
-    "os_environment_display_string": "Windows 10 Server Enterprise (Evaluation), 64-bit",
-    "emet_version": "",
     "emet_dump_flags": "",
     "clock_delta": "0",
     "supports_cblr": True,
@@ -61,6 +59,7 @@ post_uninstall = {
     "display": True,
     "uninstall": True,
 }
+
 
 class MockResponse:
     def __init__(self, json_data, status_code):

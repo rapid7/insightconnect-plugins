@@ -6,8 +6,8 @@ from unittest.mock import MagicMock
 sys.path.append(os.path.abspath("../"))
 from unittest import mock
 from unittest import TestCase
-from carbon_black_response.icon_carbon_black_response.actions.list_watchlists.schema import Input, ListWatchlistsOutput
-from carbon_black_response.icon_carbon_black_response.actions.list_watchlists import ListWatchlists
+from icon_carbon_black_response.actions.list_watchlists.schema import Input, ListWatchlistsOutput
+from icon_carbon_black_response.actions.list_watchlists import ListWatchlists
 from jsonschema import validate
 
 

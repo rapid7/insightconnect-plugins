@@ -10,7 +10,7 @@ from unittest import TestCase
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from carbon_black_response.icon_carbon_black_response.actions.list_processes.schema import Input
+from icon_carbon_black_response.actions.list_processes.schema import Input
 from icon_carbon_black_response.connection.connection import Connection
 from icon_carbon_black_response.actions.list_processes import ListProcesses
 import json
