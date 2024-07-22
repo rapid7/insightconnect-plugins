@@ -1,25 +1,13 @@
 # Description
 
-[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.19 and its standard library as well as the following 3rd party libraries: 
-
-* [requests 2.31.0](https://requests.readthedocs.io/en/master/)
-* [maya 0.6.1](https://pypi.python.org/pypi/maya)
-* [lxml 4.9.2](http://lxml.de/)
-* [beautifulsoup 4.12.2](https://www.crummy.com/software/BeautifulSoup/)
-* [pyyaml 6.0.1](http://pyyaml.org/)
-* [records 0.5.3](https://github.com/kennethreitz/records)
-
-The Python 3 Script plugin also allows you to load custom modules via its connection parameters.
-
-Also, this plugin allows you to provide additional credentials in the connection such as username, password, secret_key available in the script as Python variables (`username`, `password`, `secret_key`). 
+[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.19 and its standard library as well as the following 3rd party libraries: * [requests 2.31.0](https://requests.readthedocs.io/en/master/) * [maya 0.6.1](https://pypi.python.org/pypi/maya) * [lxml 4.9.2](http://lxml.de/) * [beautifulsoup 4.12.2](https://www.crummy.com/software/BeautifulSoup/) * [pyyaml 6.0.1](http://pyyaml.org/) * [records 0.5.3](https://github.com/kennethreitz/records) The Python 3 Script plugin also allows you to load custom modules via its connection parameters. Also, this plugin allows you to provide additional credentials in the connection such as username, password, secret_key available in the script as Python variables (`username`, `password`, `secret_key`)
 
 # Key Features
 
 * Run a Python 3 Script to securely orchestrate, automate, and respond to (almost) anything
 
 # Requirements
-  
-*This plugin does not contain any requirements.*
+
 
 # Supported Product Versions
 
@@ -31,12 +19,12 @@ Also, this plugin allows you to provide additional credentials in the connection
 
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|modules|[]string|None|False|List of third-party modules to install for use in the supplied Python script|None|["pandas", "numpy"]|
-|script_secret_key|credential_secret_key|None|False|Credential secret key available in script as python variable (`secret_key`)|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|
-|script_username_and_password|credential_username_password|None|False|Username and password available in script as python variables (`username`, `password`)|None|{"username": "user", "password": "mypassword"}|
-|timeout|integer|60|True|Timeout (in seconds) for installing third-party modules|None|120|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|modules|[]string|None|False|List of third-party modules to install for use in the supplied Python script|None|["pandas", "numpy"]|None|None|
+|script_secret_key|credential_secret_key|None|False|Credential secret key available in script as python variable (`secret_key`)|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|None|None|
+|script_username_and_password|credential_username_password|None|False|Username and password available in script as python variables (`username`, `password`)|None|{"username": "user", "password": "mypassword"}|None|None|
+|timeout|integer|60|True|Timeout (in seconds) for installing third-party modules|None|120|None|None|
 
 Example input:
 
@@ -68,21 +56,10 @@ This action is used to run a Python 3 function
 
 ##### Input
 
-An input object can be supplied as the `params={}` parameter for the function.
-
-The run function should return an object, whose fields gets added to the results object, e.g.
-
-```
-def run(params={}):
-  return { 'hello': 'world' }
-```
-
-This returns a string with key `hello` on the output object accessible at `{{Step.hello}}`.
-
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|function|python|def run(params={}):\n    return {}|True|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection|None|def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password)\n\treturn {}|
-|input|object|None|False|Input object to be passed as `params={}` to the `run` function|None|{"some_input": "example input"}|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|function|python|def run(params={}):\n    return {}|True|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection|None|def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password)\n\treturn {}|None|None|
+|input|object|None|False|Input object to be passed as `params={}` to the `run` function|None|{"some_input": "example input"}|None|None|
   
 Example input:
 
@@ -95,19 +72,13 @@ Example input:
 }
 ```
 
-Note that `username`, `password`, and `secret_key` inputs are accessible directly in the script as variable, but arguments from `input` are stored in `params` dictionary.
-
 ##### Output
-
-The default output variables are `result1` and `result2`, both of type `string`. While these may work for you they're intended to be changed by the user to meet their naming and type needs.
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
 |result1|string|False|Sample output result1 (delete or edit)|example output 1|
 |result2|string|False|Sample output result2 (delete or edit)|example output 2|
   
-Make sure you edit the output variables in the user interface so that they match the keys returned by the `run()` function. This allows you to pass the variables to other steps using the names chosen by the user.
-
 Example output:
 
 ```
@@ -129,11 +100,11 @@ Example output:
 
 ## Troubleshooting
 
-Some third-party modules defined in the `Modules` connection input (such as `pandas`) can take a long time to install.
-If installation fails, try increasing the `Timeout` connection input to `900` (15 minutes).
+Some third-party modules defined in the Modules connection input (such as pandas) can take a long time to install. If installation fails, try increasing the Timeout connection input to 900 (15 minutes)
 
 # Version History
 
+* 4.1.0 - Updated SDK to the latest version | Addresses Snyk vulnerabilities by bumping setuptools and adding the zipp module
 * 4.0.10 - Updated the SDK to the latest version | Updated Python version to `3.9.19` | Fixed issue with invalid unicode character
 * 4.0.9 - Updated the SDK to the latest version to address memory usage issues
 * 4.0.8 - Updated the SDK to latest version | Fix issue where input argument was too long

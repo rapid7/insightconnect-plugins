@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 
 
 setup(name="python_3_script-rapid7-plugin",
-      version="4.0.10",
-      description="Python is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.19 and its standard library as well as the following 3rd party libraries",
+      version="4.1.0",
+      description="[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.19 and its standard library as well as the following 3rd party libraries: * [requests 2.31.0](https://requests.readthedocs.io/en/master/) * [maya 0.6.1](https://pypi.python.org/pypi/maya) * [lxml 4.9.2](http://lxml.de/) * [beautifulsoup 4.12.2](https://www.crummy.com/software/BeautifulSoup/) * [pyyaml 6.0.1](http://pyyaml.org/) * [records 0.5.3](https://github.com/kennethreitz/records) The Python 3 Script plugin also allows you to load custom modules via its connection parameters. Also, this plugin allows you to provide additional credentials in the connection such as username, password, secret_key available in the script as Python variables (`username`, `password`, `secret_key`)",
       author="rapid7",
       author_email="",
       url="",
