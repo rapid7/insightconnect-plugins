@@ -21,6 +21,7 @@ links:
 references:
   - "[InsightVM API 3](https://help.rapid7.com/insightvm/en-us/api/index.html)"
 version_history:
+  - "8.0.4 - Updated SDK to the latest version | Update dependencies"
   - "8.0.3 - Updated `Dockerfile` permissions from `nobody` to `root`"
   - "8.0.2 - Updated SDK to the latest version | `Scan Completion`: Updated the query"
   - "8.0.1 - Updated SDK to the latest version | Fixed issue where triggers were failing due to `SSL Verify`"
@@ -74,7 +75,7 @@ version_history:
   - "1.0.0 - Initial plugin release"
 sdk:
   type: full
-  version: 5.6.1
+  version: 6.0.0
   user: root
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insightvm
