@@ -5,6 +5,8 @@ LABEL sdk=python
 
 WORKDIR /python/src
 
+RUN apk add --no-cache --virtual .build-deps make gcc libc-dev libffi-dev openssl-dev libxml2-dev libxslt-dev
+
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD ./requirements.txt /python/src/requirements.txt
 
