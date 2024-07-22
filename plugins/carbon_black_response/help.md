@@ -1,8 +1,6 @@
 # Description
 
-[VMware Carbon Black EDR](https://www.carbonblack.com/products/edr/) is the most complete endpoint detection and response solution available to security teams. The InsightConnect plugin allows you to automate information collection, endpoint isolation and hash blacklisting.
-
-This plugin utilizes the [VMware Carbon Black EDR REST API](https://developer.carbonblack.com/guide/enterprise-response/).
+[VMware Carbon Black EDR](https://www.carbonblack.com/products/edr/) is the most complete endpoint detection and response solution available to security teams. The InsightConnect plugin allows you to automate information collection, endpoint isolation and hash blacklisting. This plugin utilizes the [VMware Carbon Black EDR REST API](https://developer.carbonblack.com/guide/enterprise-response/).
 
 # Key Features
 
@@ -328,7 +326,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|alerts|[]alert|False|The lists of alerts|None|
+|alerts|[]alert|False|The lists of alerts|[{ "username": "SYSTEM", "alert_type": "watchlist.hit.query.process", "sensor_criticality": 3, "modload_count": 0, "report_score": 75, "watchlist_id": "11", "sensor_id": 1, "feed_name": "My Watchlists", "created_time": "2017-09-11T17:50:03.377Z", "ioc_type": "query", "watchlist_name": "Watchlist", "ioc_confidence": 0.5, "ioc_attr": "{\"highlights\": [\"c:\\\\windows\\\\carbonblack\\\\PREPREPREcb.exePOSTPOSTPOST\", \"PREPREPREcb.exePOSTPOSTPOST\"]}", "alert_severity": 50.625, "crossproc_count": 0, "group": "default group", "hostname": "win-6epacunb1i1", "filemod_count": 0, "resolved_time": "2017-09-11T18:11:32.09Z", "comms_ip": "52.122.36.18", "netconn_count": 1, "interface_ip": "192.168.0.0", "status": "Resolved", "observed_hosts": { "numFound": 3, "hostCount": 1, "globalCount": 3, "hostnames": [{ "name": "test", "value": 27893 }], "accurateHostCount": true, "processCount": 1, "numDocs": "84136", "processTotal": 1 }, "process_path": "c:\\windows\\carbonblack\\cb.exe", "process_name": "cb.exe", "process_unique_id": "00000001-0000-0414-01d3-dhdhd22-00000", "process_id": "00000001-0000-0414-01d3-dshdh33", "_version_": 171716252222, "regmod_count": 0, "md5": "e486696996948733u333", "segment_id": 7721463, "total_hosts": 1, "feed_id": -1, "assigned_to": "irteam", "os_type": "windows", "childproc_count": 0, "unique_id": "a7772-c8829292-4fb3-abbabhhs-f05a77c8996c", "feed_rating": 3 }]|
   
 Example output:
 
@@ -336,22 +334,59 @@ Example output:
 {
   "alerts": [
     {
-      "Created Time": "",
-      "Feed ID": {},
-      "Feed Name": {},
-      "Feed Rating": {},
-      "Hostname": "",
-      "IOC Attributes": {},
-      "IOC Confidence": {},
-      "MD5": {},
-      "OS Type": {},
-      "Report Score": 0,
-      "Sensor Criticality": {},
-      "Sensor ID": {},
-      "Severity": 0,
-      "Status": {},
-      "Type": {},
-      "Unique ID": {}
+      "_version_": 171716252222,
+      "alert_severity": 50.625,
+      "alert_type": "watchlist.hit.query.process",
+      "assigned_to": "irteam",
+      "childproc_count": 0,
+      "comms_ip": "52.122.36.18",
+      "created_time": "2017-09-11T17:50:03.377Z",
+      "crossproc_count": 0,
+      "feed_id": -1,
+      "feed_name": "My Watchlists",
+      "feed_rating": 3,
+      "filemod_count": 0,
+      "group": "default group",
+      "hostname": "win-6epacunb1i1",
+      "interface_ip": "192.168.0.0",
+      "ioc_attr": "{\"highlights\": [\"c:\\\\windows\\\\carbonblack\\\\PREPREPREcb.exePOSTPOSTPOST\", \"PREPREPREcb.exePOSTPOSTPOST\"]}",
+      "ioc_confidence": 0.5,
+      "ioc_type": "query",
+      "md5": "e486696996948733u333",
+      "modload_count": 0,
+      "netconn_count": 1,
+      "observed_hosts": {
+        "accurateHostCount": true,
+        "globalCount": 3,
+        "hostCount": 1,
+        "hostnames": [
+          {
+            "name": "test",
+            "value": 27893
+          }
+        ],
+        "numDocs": "84136",
+        "numFound": 3,
+        "processCount": 1,
+        "processTotal": 1
+      },
+      "os_type": "windows",
+      "process_id": "00000001-0000-0414-01d3-dshdh33",
+      "process_name": "cb.exe",
+      "process_path": "c:\\windows\\carbonblack\\cb.exe",
+      "process_unique_id": "00000001-0000-0414-01d3-dhdhd22-00000",
+      "regmod_count": 0,
+      "report_score": 75,
+      "resolved_time": "2017-09-11T18:11:32.09Z",
+      "segment_id": 7721463,
+      "sensor_criticality": 3,
+      "sensor_id": 1,
+      "status": "Resolved",
+      "total_hosts": 1,
+      "unique_id": "a7772-c8829292-4fb3-abbabhhs-f05a77c8996c",
+      "username": "SYSTEM",
+      "watchlist_id": "11",
+      "watchlist_name": "Watchlist"
     }
   ]
 }
@@ -383,7 +418,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|binaries|[]binary|False|The list of binaries|None|
+|binaries|[]binary|False|The list of binaries|[{ "host_count": 1, "original_filename": "bcryptprimitives.dll", "legal_copyright": "Microsoft Corporation. All rights reserved.", "digsig_result": "Signed", "observed_filename": [ "C:\\Windows\\SysWOW64\\bcryptprimitives.dll" ], "product_version": "6.3.9600.18344", "facet_id": 737484, "digsig_issuer": "Microsoft Windows Production PCA 2011", "digsig_result_code": "0", "server_added_timestamp": "2017-08-30T02:37:08.977Z", "digsig_sign_time": "2017-08-03T10:45:00Z", "digsig_prog_name": "Microsoft Windows", "orig_mod_len": 340880, "is_executable_image": false, "is_64bit": false, "md5": "0DHDB367SXX3", "digsig_subject": "Microsoft Windows", "digsig_publisher": "Microsoft Corporation", "endpoint": [ "WIN-6EPACUNB1I1|1" ], "group": [ "Default Group" ], "event_partition_id": [ 98566909329408 ], "watchlists": [{ "wid": "7", "value": "2017-08-30T02:40:02.488Z" }], "file_version": "6.3.9600.18344 (winblue_ltsb.160518-1031)", "signed": "Signed", "copied_mod_len": 0, "company_name": "Microsoft Corporation", "internal_name": "bcryptprimitives.dll", "timestamp": "2017-08-30T02:37:08.977Z", "cb_version": 612, "os_type": "Windows", "file_desc": "Windows Cryptographic Primitives Library", "product_name": "Microsoft Windows Operating System", "last_seen": "2017-08-30T02:40:02.727Z" }]|
   
 Example output:
 
@@ -391,42 +426,52 @@ Example output:
 {
   "binaries": [
     {
-      "Alliance Score Virustotal": {},
-      "Carbon Black Version": {},
-      "Company Name": {},
-      "Copied Mod Length": {},
-      "Digital Signature Issuer": {},
-      "Digital Signature Program Name": "",
-      "Digital Signature Publisher": {},
-      "Digital Signature Result": {},
-      "Digital Signature Result Code": {},
-      "Digital Signature Subject": {},
-      "Digital Signature Times": {},
-      "Endpoint": {},
-      "File Description": {},
-      "File Version": {},
-      "Group": {},
-      "Host Count": {},
-      "Internal Name": {},
-      "Is 64-bit": {},
-      "Is Executable Image": "true",
-      "Last Seen": {},
-      "Legal Copyright": {},
-      "Legal Trademark": {},
-      "MD5": {},
-      "OS Types": {},
-      "Observed Filename": [
-        {}
+      "cb_version": 612,
+      "company_name": "Microsoft Corporation",
+      "copied_mod_len": 0,
+      "digsig_issuer": "Microsoft Windows Production PCA 2011",
+      "digsig_prog_name": "Microsoft Windows",
+      "digsig_publisher": "Microsoft Corporation",
+      "digsig_result": "Signed",
+      "digsig_result_code": "0",
+      "digsig_sign_time": "2017-08-03T10:45:00Z",
+      "digsig_subject": "Microsoft Windows",
+      "endpoint": [
+        "WIN-6EPACUNB1I1|1"
       ],
-      "Original Filename": {},
-      "Original Mod Length": 0,
-      "Private Build": {},
-      "Product Name": {},
-      "Product Version": {},
-      "Server Added Timestamp": {},
-      "Signed": {},
-      "Special Build": {},
-      "Timestamp": ""
+      "event_partition_id": [
+        98566909329408
+      ],
+      "facet_id": 737484,
+      "file_desc": "Windows Cryptographic Primitives Library",
+      "file_version": "6.3.9600.18344 (winblue_ltsb.160518-1031)",
+      "group": [
+        "Default Group"
+      ],
+      "host_count": 1,
+      "internal_name": "bcryptprimitives.dll",
+      "is_64bit": false,
+      "is_executable_image": false,
+      "last_seen": "2017-08-30T02:40:02.727Z",
+      "legal_copyright": "Microsoft Corporation. All rights reserved.",
+      "md5": "0DHDB367SXX3",
+      "observed_filename": [
+        "C:\\Windows\\SysWOW64\\bcryptprimitives.dll"
+      ],
+      "orig_mod_len": 340880,
+      "original_filename": "bcryptprimitives.dll",
+      "os_type": "Windows",
+      "product_name": "Microsoft Windows Operating System",
+      "product_version": "6.3.9600.18344",
+      "server_added_timestamp": "2017-08-30T02:37:08.977Z",
+      "signed": "Signed",
+      "timestamp": "2017-08-30T02:37:08.977Z",
+      "watchlists": [
+        {
+          "value": "2017-08-30T02:40:02.488Z",
+          "wid": "7"
+        }
+      ]
     }
   ]
 }
@@ -444,7 +489,7 @@ This action is used to list all feeds
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|feeds|[]feed|False|The list of feeds|None|
+|feeds|[]feed|False|The list of feeds|[{ "provider_url": "https://www.bit9.com/solutions/cloud-services/", "ssl_client_crt": null, "local_rating": null, "requires_who": null, "icon_small": "", "id": 132, "category": "Bit9 + Carbon Black First Party", "display_name": "Bit9 Software Reputation Service Trust", "use_proxy": null, "feed_url": "https://api.alliance.carbonblack.com/feed/SRSTrust", "username": null, "validate_server_cert": null, "ssl_client_key": null, "manually_added": false, "password": null, "icon": "", "provider_rating": 3, "name": "SRSTrust", "tech_data": "It is necessary to share MD5s of observed binaries with the Carbon Black Alliance to use this feed", "requires": null, "enabled": false, "summary": "The Bit9 Software Reputation Service (SRS) feed provides a level of software trustworthness", "requires_what": null, "order": 2 }]|
   
 Example output:
 
@@ -452,30 +497,30 @@ Example output:
 {
   "feeds": [
     {
-      "Category": {},
-      "Display Name": {},
-      "Enabled": {},
-      "Feed URL": {},
-      "ID": {},
-      "Icon": {},
-      "Icon Small": "",
-      "Local Rating": 0,
-      "Manually Added": {},
-      "Name": {},
-      "Order": {},
-      "Password": {},
-      "Provider Rating": 0,
-      "Provider URL": "",
-      "Requires": {},
-      "Requires What": {},
-      "Requires Who": {},
-      "SSL Client Certificate": {},
-      "SSL Client Key": {},
-      "Summary": {},
-      "Tech Data": {},
-      "Use Proxy": "true",
-      "Username": {},
-      "Validate Server Cert": {}
+      "category": "Bit9 + Carbon Black First Party",
+      "display_name": "Bit9 Software Reputation Service Trust",
+      "enabled": false,
+      "feed_url": "https://api.alliance.carbonblack.com/feed/SRSTrust",
+      "icon": "",
+      "icon_small": "",
+      "id": 132,
+      "local_rating": null,
+      "manually_added": false,
+      "name": "SRSTrust",
+      "order": 2,
+      "password": null,
+      "provider_rating": 3,
+      "provider_url": "https://www.bit9.com/solutions/cloud-services/",
+      "requires": null,
+      "requires_what": null,
+      "requires_who": null,
+      "ssl_client_crt": null,
+      "ssl_client_key": null,
+      "summary": "The Bit9 Software Reputation Service (SRS) feed provides a level of software trustworthness",
+      "tech_data": "It is necessary to share MD5s of observed binaries with the Carbon Black Alliance to use this feed",
+      "use_proxy": null,
+      "username": null,
+      "validate_server_cert": null
     }
   ]
 }
@@ -507,7 +552,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|processes|[]process|False|The list of processes|None|
+|processes|[]process|False|The list of processes|[{ "process_md5": "e0c7813a97ca7947ff5c18a8f3b61a45", "sensor_id": 1, "filtering_known_dlls": false, "modload_count": 0, "parent_unique_id": "00000001-0000-0250-01d3-202c7755d833-000000000001", "emet_count": 0, "cmdline": "C:\\Windows\\system32\\services.exe", "filemod_count": 0, "id": "00000001-0000-02a8-01d3-202c7d4bb023", "parent_name": "wininit.exe", "parent_md5": "000000000000000000000000000000", "group": "default group", "parent_id": "00000001-0000-0250-01d3-202c7755d833", "hostname": "win-6epacunb1i1", "last_update": "2017-08-29T13:07:37.238Z", "start": "2017-08-28T18:35:57.663Z", "comms_ip": 885592626, "regmod_count": 0, "interface_ip": -1407252262, "process_pid": 680, "username": "SYSTEM", "terminated": false, "process_name": "services.exe", "emet_config": "", "last_server_update": "2017-08-29T13:12:35.593Z", "path": "c:\\windows\\system32\\services.exe", "netconn_count": 0, "parent_pid": 592, "crossproc_count": 0, "segment_id": 1504012355063, "host_type": "server", "processblock_count": 0, "os_type": "windows", "childproc_count": 19, "unique_id": "00000001-0000-02a8-01d3-202c7d4bb023-015e2e1f45f7" }] |
   
 Example output:
 
@@ -515,42 +560,41 @@ Example output:
 {
   "processes": [
     {
-      "Binaries": {},
-      "CMD Line": {},
-      "Childproc Count": {},
-      "Comms IP": {},
-      "Crossproc Count": {},
-      "EMET Count": {},
-      "Filemod Complete": [
-        {}
-      ],
-      "Filemod Count": {},
-      "Filtering Known Downloads": "true",
-      "Group": {},
-      "Host Type": {},
-      "Hostname": {},
-      "ID": {},
-      "Interface IP": {},
-      "Last Update": {},
-      "MD5": {},
-      "Mod Load": 0,
-      "Name": {},
-      "Netconn Count": {},
-      "OS Type": {},
-      "PID": {},
-      "Parent Name": {},
-      "Parent PID": {},
-      "Parent Unique ID": {},
-      "Path": {},
-      "Process Block Count": {},
-      "Regmod Count": {},
-      "Segment ID": {},
-      "Sensor ID": {},
-      "Start": {},
-      "Terminated": {},
-      "UID": "",
-      "Unique ID": {},
-      "Username": {}
+      "childproc_count": 19,
+      "cmdline": "C:\\Windows\\system32\\services.exe",
+      "comms_ip": 885592626,
+      "crossproc_count": 0,
+      "emet_config": "",
+      "emet_count": 0,
+      "filemod_count": 0,
+      "filtering_known_dlls": false,
+      "group": "default group",
+      "host_type": "server",
+      "hostname": "win-6epacunb1i1",
+      "id": "00000001-0000-02a8-01d3-202c7d4bb023",
+      "interface_ip": -1407252262,
+      "last_server_update": "2017-08-29T13:12:35.593Z",
+      "last_update": "2017-08-29T13:07:37.238Z",
+      "modload_count": 0,
+      "netconn_count": 0,
+      "os_type": "windows",
+      "parent_id": "00000001-0000-0250-01d3-202c7755d833",
+      "parent_md5": "000000000000000000000000000000",
+      "parent_name": "wininit.exe",
+      "parent_pid": 592,
+      "parent_unique_id": "00000001-0000-0250-01d3-202c7755d833-000000000001",
+      "path": "c:\\windows\\system32\\services.exe",
+      "process_md5": "e0c7813a97ca7947ff5c18a8f3b61a45",
+      "process_name": "services.exe",
+      "process_pid": 680,
+      "processblock_count": 0,
+      "regmod_count": 0,
+      "segment_id": 1504012355063,
+      "sensor_id": 1,
+      "start": "2017-08-28T18:35:57.663Z",
+      "terminated": false,
+      "unique_id": "00000001-0000-02a8-01d3-202c7d4bb023-015e2e1f45f7",
+      "username": "SYSTEM"
     }
   ]
 }
@@ -584,7 +628,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|sensors|[]sensor|False|The list of sensors|None|
+|sensors|[]sensor|False|The list of sensors|[ { "systemvolume_total_size": "107267223552", "os_environment_display_string": "Windows 7 Enterprise Service Pack 1, 64-bit", "clock_delta": "0", "supports_cblr": true, "sensor_uptime": "7655", "last_update": "2018-09-19 09:06:09.970817-07:00", "physical_memory_size": "1073274880", "build_id": 2, "uptime": "8757", "is_isolating": false, "computer_dns_name": "cb-sensor-win7", "emet_report_setting": " (GPO configured)", "id": 1, "emet_process_count": 0, "emet_is_gpo": false, "power_state": 0, "network_isolation_enabled": false, "systemvolume_free_size": "78565584896", "status": "Online", "num_eventlog_bytes": "11800", "sensor_health_message": "Elevated memory usage", "build_version_string": "006.001.002.71109", "computer_sid": "S-1-5-21-2519757177-4078746215-1447329238", "next_checkin_time": "2018-09-19 09:06:32.092306-07:00", "node_id": 0, "cookie": 1389712705, "emet_exploit_action": " (Locally configured)", "computer_name": "CB-SENSOR-WIN7", "license_expiration": "1990-01-01 00:00:00-08:00", "supports_isolation": true, "parity_host_id": "0", "supports_2nd_gen_modloads": false, "network_adapters": "10.4.26.148,00505694808c|", "sensor_health_status": 90, "registration_time": "2018-09-19 06:58:31.543400-07:00", "restart_queued": false, "num_storefiles_bytes": "0", "os_environment_id": 1, "shard_id": 0, "boot_id": "0", "last_checkin_time": "2018-09-19 09:06:03.096077-07:00", "os_type": 1, "group_id": 1, "display": true, "uninstall": false } ]|
   
 Example output:
 
@@ -592,36 +636,51 @@ Example output:
 {
   "sensors": [
     {
-      "Boot ID": {},
-      "Build ID": {},
-      "Build Version String": {},
-      "Computer DNS Name": {},
-      "Computer Name": {},
-      "Computer SID": {},
-      "Cookie": {},
-      "Display": {},
-      "Event Log Flush Time": {},
-      "Found": {},
-      "Group ID": {},
-      "ID": 0,
-      "Is Isolating": "true",
-      "Last Checkin Time": {},
-      "License Expiration": {},
-      "Network Adapters": {},
-      "Network Isolation Enabled": {},
-      "Next Check-In Time": {},
-      "Notes": {},
-      "OS Environment Display String": {},
-      "OS Environment ID": {},
-      "Physical Memory Size": {},
-      "Registration Time": {},
-      "Sensor Health Message": {},
-      "Sensor Health Status": {},
-      "Sensor Uptime": {},
-      "Systemvolume Free Size": {},
-      "Systemvolume Total Size": "",
-      "Uninstall": {},
-      "Uptime": {}
+      "boot_id": "0",
+      "build_id": 2,
+      "build_version_string": "006.001.002.71109",
+      "clock_delta": "0",
+      "computer_dns_name": "cb-sensor-win7",
+      "computer_name": "CB-SENSOR-WIN7",
+      "computer_sid": "S-1-5-21-2519757177-4078746215-1447329238",
+      "cookie": 1389712705,
+      "display": true,
+      "emet_exploit_action": " (Locally configured)",
+      "emet_is_gpo": false,
+      "emet_process_count": 0,
+      "emet_report_setting": " (GPO configured)",
+      "group_id": 1,
+      "id": 1,
+      "is_isolating": false,
+      "last_checkin_time": "2018-09-19 09:06:03.096077-07:00",
+      "last_update": "2018-09-19 09:06:09.970817-07:00",
+      "license_expiration": "1990-01-01 00:00:00-08:00",
+      "network_adapters": "10.4.26.148,00505694808c|",
+      "network_isolation_enabled": false,
+      "next_checkin_time": "2018-09-19 09:06:32.092306-07:00",
+      "node_id": 0,
+      "num_eventlog_bytes": "11800",
+      "num_storefiles_bytes": "0",
+      "os_environment_display_string": "Windows 7 Enterprise Service Pack 1, 64-bit",
+      "os_environment_id": 1,
+      "os_type": 1,
+      "parity_host_id": "0",
+      "physical_memory_size": "1073274880",
+      "power_state": 0,
+      "registration_time": "2018-09-19 06:58:31.543400-07:00",
+      "restart_queued": false,
+      "sensor_health_message": "Elevated memory usage",
+      "sensor_health_status": 90,
+      "sensor_uptime": "7655",
+      "shard_id": 0,
+      "status": "Online",
+      "supports_2nd_gen_modloads": false,
+      "supports_cblr": true,
+      "supports_isolation": true,
+      "systemvolume_free_size": "78565584896",
+      "systemvolume_total_size": "107267223552",
+      "uninstall": false,
+      "uptime": "8757"
     }
   ]
 }
@@ -639,7 +698,7 @@ This action is used to list all watchlists
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|watchlists|[]watchlist|False|The list of watchlists|None|
+|watchlists|[]watchlist|False|The list of watchlists|[{ "last_hit_count": 8, "description": "", "search_query": "q=process_name%3Aconhost.exe", "from_alliance": false, "enabled": true, "search_timestamp": "2017-09-24 17:00:03.143824", "index_type": "events", "readonly": false, "alliance_id": null, "total_hits": "30368", "date_added": "2017-09-21 19:26:10.844270+00:00", "group_id": -1, "total_tags": "34261", "id": "123", "last_hit": "2017-09-24 17:00:03.329069+00:00", "name": "Conhost" }]|
   
 Example output:
 
@@ -647,20 +706,22 @@ Example output:
 {
   "watchlists": [
     {
-      "Alliance ID": {},
-      "Date Added": {},
-      "Enabled": "true",
-      "From Alliance": {},
-      "Group ID": {},
-      "Index Type": {},
-      "Last Hit": {},
-      "Last Hit Count": 0,
-      "List Query": {},
-      "List Timestamp": "",
-      "Name": "",
-      "Readonly": {},
-      "Total Hits": {},
-      "Total Tags": {}
+      "alliance_id": null,
+      "date_added": "2017-09-21 19:26:10.844270+00:00",
+      "description": "",
+      "enabled": true,
+      "from_alliance": false,
+      "group_id": -1,
+      "id": "123",
+      "index_type": "events",
+      "last_hit": "2017-09-24 17:00:03.329069+00:00",
+      "last_hit_count": 8,
+      "name": "Conhost",
+      "readonly": false,
+      "search_query": "q=process_name%3Aconhost.exe",
+      "search_timestamp": "2017-09-24 17:00:03.143824",
+      "total_hits": "30368",
+      "total_tags": "34261"
     }
   ]
 }
@@ -778,29 +839,66 @@ This trigger is used to fires when a new alert is found
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|alert|alert|False|Carbon Black alert|None|
+|alert|alert|False|Carbon Black alert|{ "username": "SYSTEM", "alert_type": "watchlist.hit.query.process", "sensor_criticality": 3, "modload_count": 0, "report_score": 75, "watchlist_id": "11", "sensor_id": 1, "feed_name": "My Watchlists", "created_time": "2017-09-11T17:50:03.377Z", "ioc_type": "query", "watchlist_name": "Watchlist", "ioc_confidence": 0.5, "ioc_attr": "{\"highlights\": [\"c:\\\\windows\\\\carbonblack\\\\PREPREPREcb.exePOSTPOSTPOST\", \"PREPREPREcb.exePOSTPOSTPOST\"]}", "alert_severity": 50.625, "crossproc_count": 0, "group": "default group", "hostname": "win-6epacunb1i1", "filemod_count": 0, "resolved_time": "2017-09-11T18:11:32.09Z", "comms_ip": "52.122.36.18", "netconn_count": 1, "interface_ip": "172.19.33.201", "status": "Resolved", "observed_hosts": { "numFound": 3, "hostCount": 1, "globalCount": 3, "hostnames": [{ "name": "win-6epacunb1i1", "value": 27893 }], "accurateHostCount": true, "processCount": 1, "numDocs": "84136", "processTotal": 1 }, "process_path": "c:\\windows\\carbonblack\\cb.exe", "process_name": "cb.exe", "process_unique_id": "00000001-0000-0414-01d3-20c7b4fdd3cf-015e2e1f45f7", "process_id": "00000001-0000-0414-01d3-20c7b4fdd3cf", "_version_": 1578267828122812416, "regmod_count": 0, "md5": "e472001ffe350a80f4c1f3322180ca53", "segment_id": 773801463, "total_hosts": 1, "feed_id": -1, "assigned_to": "irteam", "os_type": "windows", "childproc_count": 0, "unique_id": "a743ee18-ce1d-4fb3-adc5-f05a77c8996c", "feed_rating": 3 }|
   
 Example output:
 
 ```
 {
   "alert": {
-    "Created Time": "",
-    "Feed ID": {},
-    "Feed Name": {},
-    "Feed Rating": {},
-    "Hostname": "",
-    "IOC Attributes": {},
-    "IOC Confidence": {},
-    "MD5": {},
-    "OS Type": {},
-    "Report Score": 0,
-    "Sensor Criticality": {},
-    "Sensor ID": {},
-    "Severity": 0,
-    "Status": {},
-    "Type": {},
-    "Unique ID": {}
+    "_version_": 1578267828122812416,
+    "alert_severity": 50.625,
+    "alert_type": "watchlist.hit.query.process",
+    "assigned_to": "irteam",
+    "childproc_count": 0,
+    "comms_ip": "52.122.36.18",
+    "created_time": "2017-09-11T17:50:03.377Z",
+    "crossproc_count": 0,
+    "feed_id": -1,
+    "feed_name": "My Watchlists",
+    "feed_rating": 3,
+    "filemod_count": 0,
+    "group": "default group",
+    "hostname": "win-6epacunb1i1",
+    "interface_ip": "172.19.33.201",
+    "ioc_attr": "{\"highlights\": [\"c:\\\\windows\\\\carbonblack\\\\PREPREPREcb.exePOSTPOSTPOST\", \"PREPREPREcb.exePOSTPOSTPOST\"]}",
+    "ioc_confidence": 0.5,
+    "ioc_type": "query",
+    "md5": "e472001ffe350a80f4c1f3322180ca53",
+    "modload_count": 0,
+    "netconn_count": 1,
+    "observed_hosts": {
+      "accurateHostCount": true,
+      "globalCount": 3,
+      "hostCount": 1,
+      "hostnames": [
+        {
+          "name": "win-6epacunb1i1",
+          "value": 27893
+        }
+      ],
+      "numDocs": "84136",
+      "numFound": 3,
+      "processCount": 1,
+      "processTotal": 1
+    },
+    "os_type": "windows",
+    "process_id": "00000001-0000-0414-01d3-20c7b4fdd3cf",
+    "process_name": "cb.exe",
+    "process_path": "c:\\windows\\carbonblack\\cb.exe",
+    "process_unique_id": "00000001-0000-0414-01d3-20c7b4fdd3cf-015e2e1f45f7",
+    "regmod_count": 0,
+    "report_score": 75,
+    "resolved_time": "2017-09-11T18:11:32.09Z",
+    "segment_id": 773801463,
+    "sensor_criticality": 3,
+    "sensor_id": 1,
+    "status": "Resolved",
+    "total_hosts": 1,
+    "unique_id": "a743ee18-ce1d-4fb3-adc5-f05a77c8996c",
+    "username": "SYSTEM",
+    "watchlist_id": "11",
+    "watchlist_name": "Watchlist"
   }
 }
 ```
