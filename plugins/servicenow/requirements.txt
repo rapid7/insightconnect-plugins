@@ -4,4 +4,4 @@
 pytz~=2023.3
 datetime~=5.1
 parameterized==0.8.1
-setuptools>=65.5.1
+setuptools>=70.0.0
