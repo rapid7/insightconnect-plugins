@@ -7,6 +7,7 @@ from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightidr.util.parse_dates import parse_dates
 from requests import HTTPError
+from typing import Tuple
 
 
 class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
@@ -47,7 +48,6 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
 
         if callback_url and not log_entries:
             log_entries = self.get_results_from_callback(callback_url, timeout, statistical)
-
         if log_entries and not statistical:
             log_entries = ResourceHelper.get_log_entries_with_new_labels(
                 self.connection, insightconnect_plugin_runtime.helper.clean(log_entries)
@@ -91,10 +91,13 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
 
         while callback_url and counter > 0:
             response = self.connection.session.get(callback_url)
+            self.logger.info(f"IDR Response Status Code: {response.status_code}")
+
             try:
+                # IDR seems to return both `raise_for_status` and `status_code` - value is in `status_code` / `raise_for_status` just returns `None`
                 response.raise_for_status()
-            except Exception as e:
-                self.logger.error(f"Failed to get logs from InsightIDR: {e}")
+            except Exception as error:
+                self.logger.error(f"Failed to get logs from InsightIDR: {error}")
                 raise PluginException(
                     cause="Failed to get logs from InsightIDR",
                     assistance=f"Could not get logs from: {callback_url}",
@@ -130,17 +133,17 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
                 log_entries = results_object.get("events", [])
 
             # Check for the next link before deciding to return or continue
+            # note: It seems even successful, completed results contain next link, so check for progress first
             next_link = next((link for link in results_object.get("links", []) if link.get("rel") == "Next"), None)
-            if next_link:
+            
+            if "progress" not in results_object:
+                self.logger.info("No more results to process. Exiting.")
+                return log_entries
+            elif next_link:
                 self.logger.info(
                     "Over 500 results are available for this query, but only a limited number will be returned. Please use a more specific query to get all results."
                 )
                 callback_url = next_link.get("href")
-            else:
-                if "progress" not in results_object:
-                    self.logger.info("No more results to process. Exiting.")
-                    return log_entries
-                callback_url = ""
 
             counter -= 1
             if counter <= 0:
@@ -155,7 +158,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
 
     def maybe_get_log_entries(
         self, log_id: str, query: str, time_from: int, time_to: int, statistical: bool
-    ) -> (str, [object]):
+    ) -> Tuple[str, object]:
         """
         Make a call to the API and ask politely for log results.
 
