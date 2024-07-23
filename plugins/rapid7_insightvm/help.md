@@ -4012,6 +4012,7 @@ Example output:
 
 # Version History
 
+* 8.0.4 - Updated SDK to the latest version | Update dependencies
 * 8.0.3 - Updated `Dockerfile` permissions from `nobody` to `root`
 * 8.0.2 - Updated SDK to the latest version | `Scan Completion`: Updated the query
 * 8.0.1 - Updated SDK to the latest version | Fixed issue where triggers were failing due to `SSL Verify`
