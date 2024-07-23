@@ -1,8 +1,6 @@
 # Description
 
-[WHOIS](https://en.wikipedia.org/wiki/WHOIS) is a query and response protocol that is widely used for querying
-databases that store the registered users or assignee's of an Internet resource, such as a domain name, an IP address
-block, or an autonomous system.
+[WHOIS](https://en.wikipedia.org/wiki/WHOIS) is a query and response protocol that is widely used for querying databases that store the registered users or assignee's of an Internet resource, such as a domain name, an IP address block, or an autonomous system
 
 # Key Features
 
@@ -183,6 +181,7 @@ Multiple records can be returned by the server, this plugin currently only retur
 
 # Version History
 
+* 3.1.3 - Updated SDK to the latest version (v6.0.0) | Bump setuptools version to v70.0.0
 * 3.1.2 - Updated SDK to the latest version | Added validation for input parameters
 * 3.1.1 - Add empty `__init__.py` file to `unit_test` folder | Refresh with new tooling
 * 3.1.0 - Add support for `.monster` and `.nl` domains
