@@ -56,11 +56,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
             cause_message = f"This failure was caused by: {error.cause}"
             self.logger.info(cause_message)
-            return_message += f"{cause_message}\n"
+            return_message += f"'{cause_message}'\n"
 
-            assistance_message = f"This failure is fixed by: {error.assistance}"
-            self.logger.info(assistance_message)
-            return_message += f"{assistance_message}\n"
+            self.logger.info(error.assistance)
+            return_message += f"{error.assistance}\n"
 
             self.logger.error(error)
             raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_message)
