@@ -1,11 +1,11 @@
-FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:5.6.1
+FROM --platform=linux/amd64 rapid7/insightconnect-python-3-plugin:6.0.0
 
 LABEL organization=rapid7
 LABEL sdk=python
 
-RUN apk add --no-cache --virtual .build-deps make gcc libc-dev libffi-dev openssl-dev libxml2-dev libxslt-dev
-
 WORKDIR /python/src
+
+RUN apk add --no-cache --virtual .build-deps make gcc libc-dev libffi-dev openssl-dev libxml2-dev libxslt-dev
 
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD ./requirements.txt /python/src/requirements.txt
