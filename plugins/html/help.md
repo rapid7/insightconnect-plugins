@@ -3,15 +3,15 @@
 Hypertext Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser. This plugin provides the ability to convert an HTML document into a variety of formats using [pypandoc](https://pypi.python.org/pypi/pypandoc). Supported formats are: DOCX, EPUB, Markdown, PDF, HTML5, Plain Text
 
 # Key Features
-  
+
 * Convert an HTML document into another format to more easily export, share, or edit the document's contents
 
 # Requirements
-  
-*This plugin does not contain any requirements.*
+
+* This plugin does not contain any requirements.
 
 # Supported Product Versions
-  
+
 * 2023-08-30
 
 # Documentation
@@ -26,14 +26,14 @@ Hypertext Markup Language (HTML) is the standard markup language for documents d
 
 
 #### Windows Document
-  
+
 This action is used to convert an HTML document to DOCX
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to DOCX</p></body></html>|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to DOCX</p></body></html>|None|None|
   
 Example input:
 
@@ -58,14 +58,14 @@ Example output:
 ```
 
 #### EPUB
-  
+
 This action is used to convert an HTML document to EPUB
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to EPUB</p></body></html>|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to EPUB</p></body></html>|None|None|
   
 Example input:
 
@@ -90,14 +90,14 @@ Example output:
 ```
 
 #### HTML5
-  
+
 This action is used to convert an HTML document to HTML5
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to HTML5</p></body></html>|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to HTML5</p></body></html>|None|None|
   
 Example input:
 
@@ -124,14 +124,14 @@ Example output:
 ```
 
 #### Markdown
-  
+
 This action is used to convert an HTML document to Markdown
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to Markdown</p></body></html>|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to Markdown</p></body></html>|None|None|
   
 Example input:
 
@@ -158,14 +158,14 @@ Example output:
 ```
 
 #### PDF
-  
+
 This action is used to convert an HTML document to PDF
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to PDF</p></body></html>|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Convert HTML to PDF</p></body></html>|None|None|
   
 Example input:
 
@@ -195,16 +195,16 @@ This action is used to strip an HTML string of all tags and return only the text
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>|
-|remove_scripts|boolean|None|False|Remove non-HTML scripts from the document|None|False|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect</p></body></html>|None|None|
+|remove_scripts|boolean|None|False|Remove non-HTML scripts from the document|None|False|None|None|
   
 Example input:
 
 ```
 {
-  "doc": "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>",
+  "doc": "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect</p></body></html>",
   "remove_scripts": false
 }
 ```
@@ -224,14 +224,14 @@ Example output:
 ```
 
 #### Validate
-  
+
 This action is used to validate an HTML document using the [W3 validator](https://validator.w3.org)
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|html_contents|string|None|True|HTML Contents|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|html_contents|string|None|True|HTML Contents|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>|None|None|
   
 Example input:
 
@@ -257,7 +257,6 @@ Example output:
 ### Triggers
   
 *This plugin does not contain any triggers.*
-
 ### Tasks
   
 *This plugin does not contain any tasks.*
@@ -267,11 +266,12 @@ Example output:
 *This plugin does not contain any custom output types.*
 
 ## Troubleshooting
-  
-*There is no troubleshooting for this plugin.*
+
+There is no troubleshooting for this plugin.
 
 # Version History
 
+* 1.2.6 - SDK Bump | Addressing Snyk vulnerabilities (bumping setuptools to 70.0.0)
 * 1.2.5 - Update requirements for pypandoc
 * 1.2.4 - Actions modified in order to implement PluginExceptions
 * 1.2.3 - Action HTML5: fix error with encoding to file
