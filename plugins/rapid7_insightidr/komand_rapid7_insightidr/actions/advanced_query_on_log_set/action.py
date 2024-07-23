@@ -135,7 +135,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
             # Check for the next link before deciding to return or continue
             # note: It seems even successful, completed results contain next link, so check for progress first
             next_link = next((link for link in results_object.get("links", []) if link.get("rel") == "Next"), None)
-            
+
             if "progress" not in results_object:
                 self.logger.info("No more results to process. Exiting.")
                 return log_entries

@@ -9,6 +9,7 @@ from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 from requests import HTTPError
 from typing import Tuple
 
+
 class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -150,13 +151,12 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
             if "progress" not in results_object:
                 self.logger.info("No more results to process. Exiting.")
                 return log_entries
-            
+
             elif next_link:
                 self.logger.info(
                     "Over 500 results are available for this query, but only a limited number will be returned. Please use a more specific query to get all results."
                 )
                 callback_url = next_link.get("href")
-
 
             counter -= 1
             if counter <= 0:
