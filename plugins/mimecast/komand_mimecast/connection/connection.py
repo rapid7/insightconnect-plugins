@@ -54,9 +54,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.logger.info(failed_message)
             return_message += f"{failed_message}\n"
 
-            cause_message = f"This failure was caused by: {error.cause}"
+            cause_message = f"This failure was caused by: '{error.cause}'"
             self.logger.info(cause_message)
-            return_message += f"'{cause_message}'\n"
+            return_message += f"{cause_message}\n"
 
             self.logger.info(error.assistance)
             return_message += f"{error.assistance}\n"
