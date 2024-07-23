@@ -10,6 +10,9 @@ WORKDIR /python/src
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD ./requirements.txt /python/src/requirements.txt
 
+ENV PYTHONUSERBASE=/var/cache/python_dependencies
+ENV PYTHONPATH=/var/cache/python_dependencies
+
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
 ADD . /python/src
