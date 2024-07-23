@@ -17,6 +17,13 @@ Note: This plugin affects only the underlying tables in a ServiceNow instance, n
 * ServiceNow username, password, client ID, and client secret (for OAuth authentication) 
 * ServiceNow instance name
 
+Please note that to use certain actions it's necessary to use scopes that have permissions on certain tables. Depending on the actions, it's necessary to add specific auth scopes:
+
+- Create/Read/Update/Delete Incident and Incident Attachments (table `incident` with permissions create/read/write/delete)
+- Create/Read/Update/Delete Security Incident (table `sn_si_incident` with permissions create/read/write/delete)
+- Create/Read/Update/Delete Vulnerability (table `sn_vul_vulnerable_item` with permissions create/read/write/delete)
+- Create Change Request (table `sn_chg_rest` with create permissions)
+
 # Supported Product Versions
 
 * 2023-10-28 Tokyo
