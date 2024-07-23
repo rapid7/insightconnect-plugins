@@ -18,6 +18,7 @@ Note: This plugin affects only the underlying tables in a ServiceNow instance, n
 * ServiceNow instance name
 
 Please note that to use certain actions it's necessary to use scopes that have permissions on certain tables. Depending on the actions, it's necessary to add specific auth scopes:
+
 - Create/Read/Update/Delete Incident and Incident Attachments (table `incident` with permissions create/read/write/delete)
 - Create/Read/Update/Delete Security Incident (table `sn_si_incident` with permissions create/read/write/delete)
 - Create/Read/Update/Delete Vulnerability (table `sn_vul_vulnerable_item` with permissions create/read/write/delete)
@@ -1681,10 +1682,11 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 8.0.1 - Update Setuptool to version 70.0.0 | Update SDK to version 6.0.0
 * 8.0.0 - `Incident Created, Vulnerability Updated`: Updated triggers to allow users to check a list of system_ids or all of them
 * 7.4.1 - `Incident Created`: Resolved issue related to trigger not working. Updated SDK
 * 7.4.0 - Add ability to use OAuth for API authentication (requires OAuth Client ID and OAuth Client Secret in connection)

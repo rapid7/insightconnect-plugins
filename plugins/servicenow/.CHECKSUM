@@ -1,7 +1,7 @@
 {
-	"spec": "0f61f7a0105d76bd877b9aa4f90d478e",
-	"manifest": "9c04da12a5a25b864cfb855f716fdc4d",
-	"setup": "b91f62dcd25c0cb7c423c2e690dd2ec3",
+	"spec": "66383258e1872c8d7b97cb41c187f941",
+	"manifest": "3ae96f8b5579d7015c7ae616b98b942d",
+	"setup": "229c0103ca254f7cd51ca66efe73a79f",
 	"schemas": [
 		{
 			"identifier": "create_change_request/schema.py",
@@ -117,7 +117,7 @@
 		},
 		{
 			"identifier": "vulnerability_updated/schema.py",
-			"hash": "da45fef8addc45f371b164e02ad35f17"
+			"hash": "8c92982b03b6313b57d705ba40a2916a"
 		}
 	]
 }
