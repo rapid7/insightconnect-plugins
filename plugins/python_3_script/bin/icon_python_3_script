@@ -7,7 +7,7 @@ from sys import argv
 Name = "Python 3 Script"
 Vendor = "rapid7"
 Version = "5.0.0"
-Description = "[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.19 and its standard library as well as the following 3rd party libraries: * [requests 2.31.0](https://requests.readthedocs.io/en/master/) * [arrow 1.3.0](https://pypi.org/project/arrow/) * [lxml 5.2.2](http://lxml.de/) * [beautifulsoup 4.12.2](https://www.crummy.com/software/BeautifulSoup/) * [pyyaml 6.0.1](http://pyyaml.org/) * [records 0.6.0](https://github.com/kennethreitz/records) * [zipp 3.19.2](https://pypi.org/project/zipp/) * [parameterized 0.8.1](https://pypi.org/project/parameterized/) * [setuptools 71.1.0](https://pypi.org/project/setuptools/) * [datetime 5.5](https://pypi.org/project/DateTime/) The Python 3 Script plugin also allows you to load custom modules via its connection parameters. Also, this plugin allows you to provide additional credentials in the connection such as username, password, secret_key available in the script as Python variables (`username`, `password`, `secret_key`)"
+Description = "[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.19 and its standard library as well as the following 3rd party libraries:"
 
 
 def main():
