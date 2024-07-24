@@ -52,7 +52,7 @@ class AddAttributeInput(insightconnect_plugin_runtime.Input):
     "value": {
       "type": "string",
       "title": "Value",
-      "description": "The Value of the attribute e.g. for a URL https://malware.com",
+      "description": "The Value of the attribute e.g. for a URL",
       "order": 4
     }
   },

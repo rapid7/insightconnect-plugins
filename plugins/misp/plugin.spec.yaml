@@ -406,7 +406,7 @@ types:
 connection:
   url:
     title: URL
-    description: URL of the MISP server e.g. https://misp-2-4.example.com
+    description: URL of the MISP server e.g. https://example.com
     example: "https://example.com"
     type: string
     required: true
@@ -1018,7 +1018,7 @@ actions:
         required: true
       value:
         title: Value
-        description: The Value of the attribute e.g. for a URL https://malware.com
+        description: The Value of the attribute e.g. for a URL
         example: "https://example.com"
         type: string
         required: true
@@ -1034,7 +1034,7 @@ actions:
         description: A summary of the added attribute
         type: attribute
         required: false
-        example: {"id":"173007","event_id":"777","category":"Network activity","type":"url","value1":"https://malware.com","value2":"","to_ids":false,"uuid":"5b05a903-f35c-42aa-8ed2-64d60a041dcd","timestamp":"1527097603","distribution":"0","sharing_group_id":"0","comment":"this is a test","deleted":false,"disable_correlation":false,"value":"https://malware.com"}
+        example: {"id":"173007","event_id":"777","category":"Network activity","type":"url","value1":"https://example.com","value2":"","to_ids":false,"uuid":"5b05a903-f35c-42aa-8ed2-64d60a041dcd","timestamp":"1527097603","distribution":"0","sharing_group_id":"0","comment":"this is a test","deleted":false,"disable_correlation":false,"value":"https://malware.com"}
   search_events:
     title: Search Events
     description: Search for events

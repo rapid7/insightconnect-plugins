@@ -26,7 +26,7 @@ The connection configuration accepts the following parameters:
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |automation_code|credential_secret_key|None|True|API/Automation code of MISP server|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
 |ssl|boolean|True|True|If true will use SSL for communication to MISP|None|True|None|None|
-|url|string|None|True|URL of the MISP server e.g. https://misp-2-4.example.com|None|https://example.com|None|None|
+|url|string|None|True|URL of the MISP server e.g. https://example.com|None|https://example.com|None|None|
 
 Example input:
 
@@ -55,7 +55,7 @@ This action is used to add an attribute to an event
 |comment|string|None|False|Optional comment to add to attribute|None|Example comment|None|None|
 |event|string|None|True|ID of event to append to|None|1099|None|None|
 |type_value|string|None|True|The Type of attribute e.g. URL, SHA256|None|URL|None|None|
-|value|string|None|True|The Value of the attribute e.g. for a URL https://malware.com|None|https://example.com|None|None|
+|value|string|None|True|The Value of the attribute e.g. for a URL|None|https://example.com|None|None|
   
 Example input:
 
@@ -73,7 +73,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|attribute|attribute|False|A summary of the added attribute|{'id': '173007', 'event_id': '777', 'category': 'Network activity', 'type': 'url', 'value1': 'https://malware.com', 'value2': '', 'to_ids': False, 'uuid': '5b05a903-f35c-42aa-8ed2-64d60a041dcd', 'timestamp': '1527097603', 'distribution': '0', 'sharing_group_id': '0', 'comment': 'this is a test', 'deleted': False, 'disable_correlation': False, 'value': 'https://malware.com'}|
+|attribute|attribute|False|A summary of the added attribute|{'id': '173007', 'event_id': '777', 'category': 'Network activity', 'type': 'url', 'value1': 'https://example.com', 'value2': '', 'to_ids': False, 'uuid': '5b05a903-f35c-42aa-8ed2-64d60a041dcd', 'timestamp': '1527097603', 'distribution': '0', 'sharing_group_id': '0', 'comment': 'this is a test', 'deleted': False, 'disable_correlation': False, 'value': 'https://malware.com'}|
   
 Example output:
 
@@ -93,7 +93,7 @@ Example output:
     "type": "url",
     "uuid": "5b05a903-f35c-42aa-8ed2-64d60a041dcd",
     "value": "https://malware.com",
-    "value1": "https://malware.com",
+    "value1": "https://example.com",
     "value2": ""
   }
 }
