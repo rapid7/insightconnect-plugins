@@ -1014,7 +1014,7 @@ Example output:
 
 # Version History
 
-* 5.3.15 - Fix snyk vulnerabilities | bump SDK to version 6.0.0 | Allow for the task connection tests to pass back a message along side a status
+* 5.3.15 - Fix snyk vulnerabilities | bump SDK to version 6.0.1 | Allow for the task connection tests to pass back a message along side a status
 * 5.3.14 - Improving task connection tests logging | bump SDK to version 5.6.1
 * 5.3.13 - Adding in task connection tests | bump SDK to version 5.5.5 | Fix issue with logging bad JSON error
 * 5.3.12 - Task `monitor_siem_logs` to ingest events if there is no datetime field | bump version of werkzeug used
