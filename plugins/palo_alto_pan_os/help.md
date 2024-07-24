@@ -1114,6 +1114,7 @@ Action connection type
 
 # Version History
 
+* 6.1.6 - Update SDK | Fix critical Snyk vulnerability
 * 6.1.5 - Bumping requirements of `gunicorn` and `validators` | update the SDK to 5.4.9 | Added examples to all actions | Updated unit tests to include schema checks
 * 6.1.4 - Add information to every action on whether it uses Panorama or a direct firewall connection
 * 6.1.3 - Fix `check_if_private` method in Set Address Object action | Improve `determine_address_type` method in Set Address Object action | Fix issue where Add External Dynamic List action fails when `repeat` input has been set to retrieve updates from list weekly | Add example for `filter` input for Retrieve Logs action
