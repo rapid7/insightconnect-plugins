@@ -2,6 +2,7 @@
 
 [Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.19 and its standard library as well as the following 3rd party libraries:
 
+* [requests 2.31.0](https://requests.readthedocs.io/en/latest/)
 * [arrow 1.3.0](https://pypi.org/project/arrow/) 
 * [lxml 5.2.2](http://lxml.de/) 
 * [beautifulsoup 4.12.2](https://www.crummy.com/software/BeautifulSoup/) 
