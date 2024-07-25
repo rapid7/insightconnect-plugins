@@ -2,16 +2,14 @@
 
 [Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.19 and its standard library as well as the following 3rd party libraries:
 
- * [requests 2.31.0](https://requests.readthedocs.io/en/master/) 
- * [arrow 1.3.0](https://pypi.org/project/arrow/) 
- * [lxml 5.2.2](http://lxml.de/) 
- * [beautifulsoup 4.12.2](https://www.crummy.com/software/BeautifulSoup/) 
- * [pyyaml 6.0.1](http://pyyaml.org/) 
- * [records 0.6.0](https://github.com/kennethreitz/records) 
- * [zipp 3.19.2](https://pypi.org/project/zipp/) 
- * [parameterized 0.8.1](https://pypi.org/project/parameterized/) 
- * [setuptools 71.1.0](https://pypi.org/project/setuptools/)
- * [datetime 5.5](https://pypi.org/project/DateTime/) 
+* [requests 2.31.0](https://requests.readthedocs.io/en/latest/)
+* [arrow 1.3.0](https://pypi.org/project/arrow/) 
+* [lxml 5.2.2](http://lxml.de/) 
+* [beautifulsoup 4.12.2](https://www.crummy.com/software/BeautifulSoup/) 
+* [pyyaml 6.0.1](http://pyyaml.org/) 
+* [parameterized 0.8.1](https://pypi.org/project/parameterized/) 
+* [setuptools 71.1.0](https://pypi.org/project/setuptools/)
+* [datetime 5.5](https://pypi.org/project/DateTime/)
 
 The Python 3 Script plugin also allows you to load custom modules via its connection parameters.
 
@@ -119,7 +117,7 @@ Some third-party modules defined in the Modules connection input (such as pandas
 
 # Version History
 
-* 5.0.0 - Updated SDK to the latest version | Addressing Snyk vulnerabilities by bumping dependencies | Replacing maya with arrow (maya not maintained)
+* 5.0.0 - Updated SDK to the latest version | Removing records as its not maintained | Replacing maya with arrow (maya not maintained)
 * 4.0.10 - Updated the SDK to the latest version | Updated Python version to `3.9.19` | Fixed issue with invalid unicode character
 * 4.0.9 - Updated the SDK to the latest version to address memory usage issues
 * 4.0.8 - Updated the SDK to latest version | Fix issue where input argument was too long
