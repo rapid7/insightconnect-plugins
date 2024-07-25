@@ -30,7 +30,8 @@ sdk:
   version: 6.0.0
   user: nobody
 connection_version: 1
-links: "This plugin does not contain any links."
+links:
+- "[W3 Validator](https://validator.w3.org)"
 key_features:
 - Convert an HTML document into another format to more easily export, share, or edit the document's contents
 version_history:
@@ -48,10 +49,6 @@ version_history:
 - "0.1.0 - Initial plugin"
 references:
 - "[pypandoc](https://pypi.python.org/pypi/pypandoc)"
-- "[W3 Validator](https://validator.w3.org)"
-requirements:
-- "This plugin does not contain any requirements."
-troubleshooting: "There is no troubleshooting for this plugin."
 actions:
   validate:
     title: Validate
@@ -62,7 +59,7 @@ actions:
         description: HTML Contents
         type: string
         required: true
-        example: "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>"
+        example: "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect (HTML)!</p></body></html>"
     output:
       validated:
         title: Is Validated
@@ -176,7 +173,7 @@ actions:
         description: Document to transform
         type: string
         required: true
-        example: <!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect</p></body></html>
+        example: <!DOCTYPE html><html><head><title>Rapid7 InsightConnect HTML</title></head><body><p>Automate with InsightConnect</p></body></html>
       remove_scripts:
         title: Remove Scripts
         description: Remove non-HTML scripts from the document

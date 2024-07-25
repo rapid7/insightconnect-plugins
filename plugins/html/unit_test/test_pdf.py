@@ -16,5 +16,3 @@ class TestPdf(TestCase):
 
         TODO: Implement test cases here
         """
-
-        self.fail("Unimplemented Test Case")

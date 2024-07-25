@@ -7,8 +7,8 @@ Hypertext Markup Language (HTML) is the standard markup language for documents d
 * Convert an HTML document into another format to more easily export, share, or edit the document's contents
 
 # Requirements
-
-* This plugin does not contain any requirements.
+  
+*This plugin does not contain any requirements.*
 
 # Supported Product Versions
 
@@ -197,14 +197,14 @@ This action is used to strip an HTML string of all tags and return only the text
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect</p></body></html>|None|None|
+|doc|string|None|True|Document to transform|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect HTML</title></head><body><p>Automate with InsightConnect</p></body></html>|None|None|
 |remove_scripts|boolean|None|False|Remove non-HTML scripts from the document|None|False|None|None|
   
 Example input:
 
 ```
 {
-  "doc": "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect</p></body></html>",
+  "doc": "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect HTML</title></head><body><p>Automate with InsightConnect</p></body></html>",
   "remove_scripts": false
 }
 ```
@@ -231,13 +231,13 @@ This action is used to validate an HTML document using the [W3 validator](https:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|html_contents|string|None|True|HTML Contents|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>|None|None|
+|html_contents|string|None|True|HTML Contents|None|<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect (HTML)!</p></body></html>|None|None|
   
 Example input:
 
 ```
 {
-  "html_contents": "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect!</p></body></html>"
+  "html_contents": "<!DOCTYPE html><html><head><title>Rapid7 InsightConnect</title></head><body><p>Automate with InsightConnect (HTML)!</p></body></html>"
 }
 ```
 
@@ -266,8 +266,8 @@ Example output:
 *This plugin does not contain any custom output types.*
 
 ## Troubleshooting
-
-There is no troubleshooting for this plugin.
+  
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
@@ -286,8 +286,8 @@ There is no troubleshooting for this plugin.
 
 # Links
 
+* [W3 Validator](https://validator.w3.org)
 
 ## References
 
 * [pypandoc](https://pypi.python.org/pypi/pypandoc)
-* [W3 Validator](https://validator.w3.org)
