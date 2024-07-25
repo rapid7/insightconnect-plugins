@@ -6,7 +6,7 @@ import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_freshdesk.util.helpers import clean_dict, create_attachments_form
-from icon_freshdesk.util.endpoints import TICKETS_ENDPOINT, TICKET_ENDPOINT, TICKET_FIELDS_ENDPOINT
+from icon_freshdesk.util.endpoints import FITLER_TICKETS_ENDPOINT, TICKETS_ENDPOINT, TICKET_ENDPOINT, TICKET_FIELDS_ENDPOINT
 
 
 class FreshDeskAPI:
@@ -83,6 +83,18 @@ class FreshDeskAPI:
                     **filter_by,
                 }
             ),
+        )
+
+    def filter_tickets(self, query: str = None, page: int = None) -> dict:
+        query_params = {
+            query: query,
+            page: page
+        }
+        return self.make_json_request(
+            method="GET",
+            url=FITLER_TICKETS_ENDPOINT.format(domain=self._domain),
+            headers=self._headers,
+            params=clean_dict(query_params)
         )
 
     def get_ticket_fields(self) -> Union[list, dict]:
