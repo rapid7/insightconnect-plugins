@@ -36,8 +36,8 @@ class TestGetTicketById(TestCase):
             [
                 "ticket_not_found",
                 Util.read_file_to_dict("inputs/get_ticket_by_id_ticket_not_found.json.inp"),
-                "Resource not found.",
-                "Please verify inputs and if the issue persists, contact support.",
+                PluginException.causes.get(PluginException.Preset.NOT_FOUND),
+                PluginException.assistances.get(PluginException.Preset.NOT_FOUND),
             ]
         ]
     )

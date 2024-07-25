@@ -1,9 +1,9 @@
-import json
 from logging import Logger
 from typing import Union
 
 import requests
-from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.helper import request_error_handling, extract_json, response_handler
+from insightconnect_plugin_runtime.exceptions import ResponseExceptionData, PluginException
 
 from icon_freshdesk.util.helpers import clean_dict, create_attachments_form
 from icon_freshdesk.util.endpoints import FITLER_TICKETS_ENDPOINT, TICKETS_ENDPOINT, TICKET_ENDPOINT, TICKET_FIELDS_ENDPOINT
@@ -86,15 +86,13 @@ class FreshDeskAPI:
         )
 
     def filter_tickets(self, query: str = None, page: int = None) -> dict:
-        query_params = {
-            query: query,
-            page: page
-        }
+        url = FITLER_TICKETS_ENDPOINT.format(domain=self._domain)
+        url = f'{url}?query="{query}"' if query else url
         return self.make_json_request(
             method="GET",
-            url=FITLER_TICKETS_ENDPOINT.format(domain=self._domain),
+            url=url,
             headers=self._headers,
-            params=clean_dict(query_params)
+            params=clean_dict({"page": page})
         )
 
     def get_ticket_fields(self) -> Union[list, dict]:
@@ -115,35 +113,20 @@ class FreshDeskAPI:
                 json=clean_dict(json_data),
                 files=files,
             )
-
-            if response.status_code == 400:
-                raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
-            if response.status_code == 403:
-                raise PluginException(
-                    cause="Operation is not allowed.",
-                    assistance="Please verify inputs and if the issue persists, contact support.",
-                    data=response.text,
-                )
-            if response.status_code == 404:
-                raise PluginException(
-                    cause="Resource not found.",
-                    assistance="Please verify inputs and if the issue persists, contact support.",
-                    data=response.text,
-                )
-            if 400 <= response.status_code < 500:
-                raise PluginException(
-                    preset=PluginException.Preset.UNKNOWN,
-                    data=response.text,
-                )
-            if response.status_code >= 500:
-                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
-
-            if 200 <= response.status_code < 300:
-                return response
-
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except requests.exceptions.HTTPError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+            response_handler(response, data_location=ResponseExceptionData.RESPONSE_TEXT)
+        except requests.exceptions.Timeout as exception:
+            raise PluginException(
+                preset=PluginException.Preset.TIMEOUT, data=str(exception)
+            )
+        except requests.exceptions.ConnectionError as exception:
+            raise PluginException(
+                preset=PluginException.Preset.CONNECTION_ERROR, data=str(exception)
+            )
+        except requests.exceptions.TooManyRedirects as exception:
+            raise PluginException(
+                preset=PluginException.Preset.REDIRECT_ERROR, data=str(exception)
+            )
+        return response
 
     def make_json_request(
         self,
@@ -154,10 +137,7 @@ class FreshDeskAPI:
         json_data: dict = None,
         files: list = None,
     ) -> dict:
-        try:
-            response = self.make_request(
-                method=method, url=url, params=params, json_data=json_data, headers=headers, files=files
-            )
-            return response.json()
-        except json.decoder.JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
+        response = self.make_request(
+            method=method, url=url, params=params, json_data=json_data, headers=headers, files=files
+        )
+        return extract_json(response)
