@@ -48,7 +48,7 @@ version_history:
 - "0.1.0 - Initial plugin"
 sdk:
     type: full
-    version: 6.0.0
+    version: 6.0.1
     user: nobody
 troubleshooting: "This plugin does not contain any troubleshooting information."
 requirements:
