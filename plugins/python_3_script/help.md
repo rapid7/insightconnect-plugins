@@ -9,7 +9,11 @@
 * [pyyaml 6.0.1](http://pyyaml.org/) 
 * [parameterized 0.8.1](https://pypi.org/project/parameterized/) 
 * [setuptools 71.1.0](https://pypi.org/project/setuptools/)
-* [datetime 5.5](https://pypi.org/project/DateTime/) 
+* [datetime 5.5](https://pypi.org/project/DateTime/)
+
+The Python 3 Script plugin also allows you to load custom modules via its connection parameters.
+
+Also, this plugin allows you to provide additional credentials in the connection such as username, password, secret_key available in the script as Python variables (`username`, `password`, `secret_key`)
 
 # Key Features
 
