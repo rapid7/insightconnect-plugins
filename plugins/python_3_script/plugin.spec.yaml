@@ -12,7 +12,7 @@ connection_version: 4
 supported_versions: ["Python 3.9.19"]
 sdk:
   type: slim
-  version: 6.0.0
+  version: 6.0.1
   user: root
   packages:
     - libxslt-dev
@@ -40,7 +40,7 @@ references: ["[Python 3 Language Reference](https://docs.python.org/3/reference/
 links:
   - '[Python](https://www.python.org/)'
 version_history:
-  - '5.0.0 - Updated SDK to the latest version | Addressing Snyk vulnerabilities by bumping dependencies | Replacing maya with arrow (maya not maintained)'
+  - '5.0.0 - Updated SDK to the latest version | Removing records as its not maintained | Replacing maya with arrow (maya not maintained)'
   - '4.0.10 - Updated the SDK to the latest version | Updated Python version to `3.9.19` | Fixed issue with invalid unicode character'
   - '4.0.9 - Updated the SDK to the latest version to address memory usage issues'
   - '4.0.8 - Updated the SDK to latest version | Fix issue where input argument was too long'
