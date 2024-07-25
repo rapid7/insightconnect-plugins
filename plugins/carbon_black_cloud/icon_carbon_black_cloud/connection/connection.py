@@ -82,6 +82,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
             except JSONDecodeError as json_error:
                 error_data = f"Invalid JSON response: {response.content}"
                 error_cause = json_error
+        if response.status_code == 204:
+            return {}
         elif response.status_code == 429:
             # We need to back off for 5 minutes until this period has passed but this is only implemented in task code
             self.logger.error(
