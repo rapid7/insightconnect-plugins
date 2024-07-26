@@ -54,812 +54,635 @@ class GetAlertsOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "alert",
       "properties": {
-        "action": {
-          "type": "string",
-          "title": "Action",
-          "description": "Action",
-          "order": 1
-        },
-        "action_pretty": {
-          "type": "string",
-          "title": "Action Pretty",
-          "description": "Action pretty",
-          "order": 2
-        },
-        "agent_data_collection_status": {
-          "type": "boolean",
-          "title": "Agent Data Collection Status",
-          "description": "Agent data collection status",
-          "order": 3
-        },
-        "agent_device_domain": {
-          "type": "string",
-          "title": "Agent Device Domain",
-          "description": "Agent device domain",
-          "order": 4
-        },
-        "agent_fqdn": {
-          "type": "string",
-          "title": "Agent FQDN",
-          "description": "Agent FQDN",
-          "order": 5
-        },
         "agent_os_sub_type": {
           "type": "string",
           "title": "Agent OS Sub Type",
-          "description": "Agent OS sub type",
-          "order": 6
-        },
-        "agent_os_type": {
-          "type": "string",
-          "title": "Agent OS Type",
-          "description": "Agent OS type",
-          "order": 7
-        },
-        "agent_version": {
-          "type": "string",
-          "title": "Agent Version",
-          "description": "Agent version",
-          "order": 8
-        },
-        "alert_id": {
-          "type": "string",
-          "title": "Alert ID",
-          "description": "Alert ID",
-          "order": 9
-        },
-        "attempt_counter": {
-          "type": "string",
-          "title": "Attempt Counter",
-          "description": "Attempt counter",
-          "order": 10
-        },
-        "bioc_category_enum_key": {
-          "type": "string",
-          "title": "BIOC Category Enum Key",
-          "description": "BIOC category enum key",
-          "order": 11
-        },
-        "bioc_indicator": {
-          "type": "string",
-          "title": "BIOC Indicator",
-          "description": "BIOC indicator",
-          "order": 12
+          "description": "The subtype of the operating system running on the agent.",
+          "order": 1
         },
         "category": {
           "type": "string",
           "title": "Category",
-          "description": "Category",
+          "description": "The general category of the event.",
+          "order": 2
+        },
+        "causality_actor_process_command_line": {
+          "type": "array",
+          "title": "Causality Actor Process Command Line",
+          "description": "The command line arguments of the causality actor process.",
+          "items": {
+            "type": "string"
+          },
+          "order": 3
+        },
+        "causality_actor_process_image_md5": {
+          "type": "array",
+          "title": "Causality Actor Process Image MD5",
+          "description": "The MD5 hash of the causality actor process image.",
+          "items": {
+            "type": "string"
+          },
+          "order": 4
+        },
+        "causality_actor_process_image_name": {
+          "type": "array",
+          "title": "Causality Actor Process Image Name",
+          "description": "The name of the causality actor process image.",
+          "items": {
+            "type": "string"
+          },
+          "order": 5
+        },
+        "causality_actor_process_image_path": {
+          "type": "array",
+          "title": "Causality Actor Process Image Path",
+          "description": "The path to the causality actor process image.",
+          "items": {
+            "type": "string"
+          },
+          "order": 6
+        },
+        "causality_actor_process_image_sha256": {
+          "type": "array",
+          "title": "Causality Actor Process Image SHA256",
+          "description": "The SHA256 hash of the causality actor process image.",
+          "items": {
+            "type": "string"
+          },
+          "order": 7
+        },
+        "causality_actor_process_signature_status": {
+          "type": "array",
+          "title": "Causality Actor Process Signature Status",
+          "description": "The status of the signature associated with the causality actor process.",
+          "items": {
+            "type": "string"
+          },
+          "order": 8
+        },
+        "causality_actor_process_signature_vendor": {
+          "type": "array",
+          "title": "Causality Actor Process Signature Vendor",
+          "description": "The vendor of the signature associated with the causality actor process.",
+          "items": {
+            "type": "string"
+          },
+          "order": 9
+        },
+        "causality_actor_causality_id": {
+          "type": "array",
+          "title": "Causality Actor Causality ID",
+          "description": "The causality ID of the causality actor.",
+          "items": {
+            "type": "string"
+          },
+          "order": 10
+        },
+        "contains_featured_host": {
+          "type": "array",
+          "title": "Contains Featured Host",
+          "description": "Indicates if the event contains a featured host.",
+          "items": {
+            "type": "string"
+          },
+          "order": 11
+        },
+        "contains_featured_ip": {
+          "type": "array",
+          "title": "Contains Featured IP",
+          "description": "Indicates if the event contains a featured IP address.",
+          "items": {
+            "type": "string"
+          },
+          "order": 12
+        },
+        "contains_featured_user": {
+          "type": "array",
+          "title": "Contains Featured User",
+          "description": "Indicates if the event contains a featured user.",
+          "items": {
+            "type": "string"
+          },
           "order": 13
         },
-        "deduplicate_tokens": {
-          "type": "string",
-          "title": "Deduplicate Tokens",
-          "description": "Deduplicate tokens",
+        "action_country": {
+          "type": "array",
+          "title": "Action Country",
+          "description": "The country where the action took place.",
+          "items": {
+            "type": "string"
+          },
           "order": 14
         },
         "description": {
           "type": "string",
           "title": "Description",
-          "description": "Description",
+          "description": "A textual description of the event.",
           "order": 15
         },
-        "detection_timestamp": {
-          "type": "integer",
-          "title": "Detection Timestamp",
-          "description": "Detection timestamp",
-          "order": 16
-        },
-        "end_match_attempt_ts": {
-          "type": "string",
-          "title": "End Match Attempt TS",
-          "description": "End match attempt TS",
-          "order": 17
-        },
-        "endpoint_id": {
-          "type": "string",
-          "title": "Endpoint ID",
-          "description": "Endpoint ID",
-          "order": 18
-        },
-        "events": {
+        "event_type": {
           "type": "array",
-          "title": "Events",
-          "description": "Events",
-          "items": {
-            "$ref": "#/definitions/event"
-          },
-          "order": 19
-        },
-        "external_id": {
-          "type": "string",
-          "title": "External ID",
-          "description": "External ID",
-          "order": 20
-        },
-        "filter_rule_id": {
-          "type": "string",
-          "title": "Filter Rule ID",
-          "description": "Filter rule ID",
-          "order": 21
-        },
-        "host_ip": {
-          "type": "array",
-          "title": "Host IP",
-          "description": "Host IP",
+          "title": "Event Type",
+          "description": "The type of the event.",
           "items": {
             "type": "string"
           },
-          "order": 22
-        },
-        "host_name": {
-          "type": "string",
-          "title": "Host Name",
-          "description": "Host name",
-          "order": 23
+          "order": 16
         },
         "is_whitelisted": {
           "type": "boolean",
           "title": "Is Whitelisted",
-          "description": "Is whitelisted",
-          "order": 24
-        },
-        "local_insert_ts": {
-          "type": "integer",
-          "title": "Local Insert TS",
-          "description": "Local insert TS",
-          "order": 25
-        },
-        "mac": {
-          "type": "string",
-          "title": "MAC",
-          "description": "MAC",
-          "order": 26
-        },
-        "mac_addresses": {
-          "type": "array",
-          "title": "MAC Addresses",
-          "description": "MAC addresses",
-          "items": {
-            "type": "string"
-          },
-          "order": 27
-        },
-        "matching_service_rule_id": {
-          "type": "string",
-          "title": "Matching Service Rule ID",
-          "description": "Matching service rule ID",
-          "order": 28
-        },
-        "matching_status": {
-          "type": "string",
-          "title": "Matching Status",
-          "description": "Matching status",
-          "order": 29
-        },
-        "mitre_tactic_id_and_name": {
-          "type": "array",
-          "title": "MITRE Tactic ID And Name",
-          "description": "MITRE tactic ID and name",
-          "items": {
-            "type": "string"
-          },
-          "order": 30
-        },
-        "mitre_technique_id_and_name": {
-          "type": "array",
-          "title": "MITRE Technique ID And Name",
-          "description": "MITRE technique ID and name",
-          "items": {
-            "type": "string"
-          },
-          "order": 31
-        },
-        "name": {
-          "type": "string",
-          "title": "Name",
-          "description": "Name",
-          "order": 32
-        },
-        "severity": {
-          "type": "string",
-          "title": "Severity",
-          "description": "Severity",
-          "order": 33
-        },
-        "source": {
-          "type": "string",
-          "title": "Source",
-          "description": "Source",
-          "order": 34
-        },
-        "starred": {
-          "type": "boolean",
-          "title": "Starred",
-          "description": "Starred",
-          "order": 35
-        }
-      }
-    },
-    "event": {
-      "type": "object",
-      "title": "event",
-      "properties": {
-        "action_country": {
-          "type": "string",
-          "title": "Action Country",
-          "description": "Action country",
-          "order": 1
-        },
-        "action_external_hostname": {
-          "type": "string",
-          "title": "Action External Hostname",
-          "description": "Action external hostname",
-          "order": 2
+          "description": "Indicates if the event is whitelisted.",
+          "order": 17
         },
         "action_file_macro_sha256": {
           "type": "string",
           "title": "Action File Macro SHA256",
-          "description": "Action file macro SHA256",
-          "order": 3
+          "description": "The SHA256 hash of the macro file involved in the action.",
+          "order": 18
         },
         "action_file_md5": {
           "type": "string",
           "title": "Action File MD5",
-          "description": "Action file MD5",
-          "order": 4
+          "description": "The MD5 hash of the file involved in the action.",
+          "order": 19
         },
         "action_file_name": {
           "type": "string",
           "title": "Action File Name",
-          "description": "Action file name",
-          "order": 5
+          "description": "The name of the file involved in the action.",
+          "order": 20
         },
         "action_file_path": {
           "type": "string",
           "title": "Action File Path",
-          "description": "Action file path",
-          "order": 6
+          "description": "The path to the file involved in the action.",
+          "order": 21
         },
         "action_file_sha256": {
           "type": "string",
           "title": "Action File SHA256",
-          "description": "Action file SHA256",
-          "order": 7
-        },
-        "action_local_ip": {
-          "type": "string",
-          "title": "Action Local IP",
-          "description": "Action local IP",
-          "order": 8
-        },
-        "action_local_port": {
-          "type": "string",
-          "title": "Action Local Port",
-          "description": "Action local port",
-          "order": 9
-        },
-        "action_process_causality_id": {
-          "type": "string",
-          "title": "Action Process Causality ID",
-          "description": "Action process causality ID",
-          "order": 10
-        },
-        "action_process_image_command_line": {
-          "type": "string",
-          "title": "Action Process Image Command Line",
-          "description": "Action process image command line",
-          "order": 11
-        },
-        "action_process_image_name": {
-          "type": "string",
-          "title": "Action Process Image Name",
-          "description": "Action process image name",
-          "order": 12
-        },
-        "action_process_image_sha256": {
-          "type": "string",
-          "title": "Action Process Image SHA256",
-          "description": "Action process image SHA256",
-          "order": 13
-        },
-        "action_process_instance_id": {
-          "type": "string",
-          "title": "Action Process Instance ID",
-          "description": "Action process instance ID",
-          "order": 14
-        },
-        "action_process_signature_status": {
-          "type": "string",
-          "title": "Action Process Signature Status",
-          "description": "Action process signature status",
-          "order": 15
-        },
-        "action_process_signature_vendor": {
-          "type": "string",
-          "title": "Action Process Signature Vendor",
-          "description": "Action process signature vendor",
-          "order": 16
-        },
-        "action_registry_data": {
-          "type": "string",
-          "title": "Action Registry Data",
-          "description": "Action registry data",
-          "order": 17
-        },
-        "action_registry_full_key": {
-          "type": "string",
-          "title": "Action Registry Full Key",
-          "description": "Action registry full key",
-          "order": 18
-        },
-        "action_registry_key_name": {
-          "type": "string",
-          "title": "Action Registry Key Name",
-          "description": "Action registry key name",
-          "order": 19
-        },
-        "action_registry_value_name": {
-          "type": "string",
-          "title": "Action Registry Value Name",
-          "description": "Action registry value name",
-          "order": 20
-        },
-        "action_remote_ip": {
-          "type": "string",
-          "title": "Action Remote IP",
-          "description": "Action remote IP",
-          "order": 21
-        },
-        "action_remote_port": {
-          "type": "string",
-          "title": "Action Remote Port",
-          "description": "Action remote port",
+          "description": "The SHA256 hash of the file involved in the action.",
           "order": 22
-        },
-        "actor_causality_id": {
-          "type": "string",
-          "title": "Actor Causality ID",
-          "description": "Actor causality ID",
-          "order": 23
-        },
-        "actor_process_causality_id": {
-          "type": "string",
-          "title": "Actor Process Causality ID",
-          "description": "Actor process causality ID",
-          "order": 24
-        },
-        "actor_process_command_line": {
-          "type": "string",
-          "title": "Actor Process Command Line",
-          "description": "Actor process command line",
-          "order": 25
-        },
-        "actor_process_image_md5": {
-          "type": "string",
-          "title": "Actor Process Image MD5",
-          "description": "Actor process image MD5",
-          "order": 26
-        },
-        "actor_process_image_name": {
-          "type": "string",
-          "title": "Actor Process Image Name",
-          "description": "Actor process image name",
-          "order": 27
-        },
-        "actor_process_image_path": {
-          "type": "string",
-          "title": "Actor Process Image Path",
-          "description": "Actor process image path",
-          "order": 28
-        },
-        "actor_process_image_sha256": {
-          "type": "string",
-          "title": "Actor Process Image SHA256",
-          "description": "Actor process image SHA256",
-          "order": 29
-        },
-        "actor_process_instance_id": {
-          "type": "string",
-          "title": "Actor Process Instance ID",
-          "description": "Actor process instance ID",
-          "order": 30
-        },
-        "actor_process_os_pid": {
-          "type": "integer",
-          "title": "Actor Process OS PID",
-          "description": "Actor process OS PID",
-          "order": 31
-        },
-        "actor_process_signature_status": {
-          "type": "string",
-          "title": "Actor Process Signature Status",
-          "description": "Actor process signature status",
-          "order": 32
-        },
-        "actor_process_signature_vendor": {
-          "type": "string",
-          "title": "Actor Process Signature Vendor",
-          "description": "Actor process signature vendor",
-          "order": 33
-        },
-        "actor_thread_thread_id": {
-          "type": "string",
-          "title": "Actor Thread Thread ID",
-          "description": "Actor thread thread ID",
-          "order": 34
-        },
-        "agent_host_boot_time": {
-          "type": "string",
-          "title": "Agent Host Boot Time",
-          "description": "Agent host boot time",
-          "order": 35
-        },
-        "agent_install_type": {
-          "type": "string",
-          "title": "Agent Install Type",
-          "description": "Agent install type",
-          "order": 36
-        },
-        "association_strength": {
-          "type": "string",
-          "title": "Association Strength",
-          "description": "Association strength",
-          "order": 37
-        },
-        "causality_actor_causality_id": {
-          "type": "string",
-          "title": "Causality Actor Causality ID",
-          "description": "Causality actor causality ID",
-          "order": 38
-        },
-        "causality_actor_process_command_line": {
-          "type": "string",
-          "title": "Causality Actor Process Command Line",
-          "description": "Causality actor process command line",
-          "order": 39
-        },
-        "causality_actor_process_execution_time": {
-          "type": "string",
-          "title": "Causality Actor Process Execution Time",
-          "description": "Causality actor process execution time",
-          "order": 40
-        },
-        "causality_actor_process_image_md5": {
-          "type": "string",
-          "title": "Causality Actor Process Image MD5",
-          "description": "Causality actor process image MD5",
-          "order": 41
-        },
-        "causality_actor_process_image_name": {
-          "type": "string",
-          "title": "Causality Actor Process Image Name",
-          "description": "Causality actor process image name",
-          "order": 42
-        },
-        "causality_actor_process_image_path": {
-          "type": "string",
-          "title": "Causality Actor Process Image Path",
-          "description": "Causality actor process image path",
-          "order": 43
-        },
-        "causality_actor_process_image_sha256": {
-          "type": "string",
-          "title": "Causality Actor Process Image SHA256",
-          "description": "Causality actor process image SHA256",
-          "order": 44
-        },
-        "causality_actor_process_signature_status": {
-          "type": "string",
-          "title": "Causality Actor Process Signature Status",
-          "description": "Causality actor process signature status",
-          "order": 45
-        },
-        "causality_actor_process_signature_vendor": {
-          "type": "string",
-          "title": "Causality Actor Process Signature Vendor",
-          "description": "Causality actor process signature vendor",
-          "order": 46
-        },
-        "cluster_name": {
-          "type": "string",
-          "title": "Cluster Name",
-          "description": "Cluster name",
-          "order": 47
-        },
-        "container_id": {
-          "type": "string",
-          "title": "Container ID",
-          "description": "Container ID",
-          "order": 48
-        },
-        "contains_featured_host": {
-          "type": "string",
-          "title": "Contains Featured Host",
-          "description": "Contains featured host",
-          "order": 49
-        },
-        "contains_featured_ip": {
-          "type": "string",
-          "title": "Contains Featured IP",
-          "description": "Contains featured IP",
-          "order": 50
-        },
-        "contains_featured_user": {
-          "type": "string",
-          "title": "Contains Featured User",
-          "description": "Contains featured user",
-          "order": 51
-        },
-        "dns_query_name": {
-          "type": "string",
-          "title": "DNS Query Name",
-          "description": "DNS query name",
-          "order": 52
-        },
-        "dst_action_country": {
-          "type": "string",
-          "title": "DST Action Country",
-          "description": "DST action country",
-          "order": 53
-        },
-        "dst_action_external_hostname": {
-          "type": "string",
-          "title": "DST Action External Hostname",
-          "description": "DST action external hostname",
-          "order": 54
-        },
-        "dst_action_external_port": {
-          "type": "string",
-          "title": "DST Action External Port",
-          "description": "DST action external port",
-          "order": 55
-        },
-        "dst_agent_id": {
-          "type": "string",
-          "title": "DST Agent ID",
-          "description": "DST agent ID",
-          "order": 56
-        },
-        "dst_association_strength": {
-          "type": "string",
-          "title": "DST Association Strength",
-          "description": "DST association strength",
-          "order": 57
-        },
-        "dst_causality_actor_process_execution_time": {
-          "type": "string",
-          "title": "DST Causality Actor Process Execution Time",
-          "description": "DST causality actor process execution time",
-          "order": 58
-        },
-        "event_id": {
-          "type": "string",
-          "title": "Event ID",
-          "description": "Event ID",
-          "order": 59
-        },
-        "event_sub_type": {
-          "type": "string",
-          "title": "Event Sub Type",
-          "description": "Event sub type",
-          "order": 60
-        },
-        "event_timestamp": {
-          "type": "integer",
-          "title": "Event Timestamp",
-          "description": "Event timestamp",
-          "order": 61
-        },
-        "event_type": {
-          "type": "string",
-          "title": "Event Type",
-          "description": "Event type",
-          "order": 62
-        },
-        "fw_app_category": {
-          "type": "string",
-          "title": "FW App Category",
-          "description": "FW app category",
-          "order": 63
-        },
-        "fw_app_id": {
-          "type": "string",
-          "title": "FW App ID",
-          "description": "FW app ID",
-          "order": 64
-        },
-        "fw_app_subcategory": {
-          "type": "string",
-          "title": "FW App Subcategory",
-          "description": "FW app subcategory",
-          "order": 65
-        },
-        "fw_app_technology": {
-          "type": "string",
-          "title": "FW App Technology",
-          "description": "FW app technology",
-          "order": 66
         },
         "fw_device_name": {
           "type": "string",
-          "title": "FW Device Name",
-          "description": "FW device name",
-          "order": 67
+          "title": "Firewall Device Name",
+          "description": "The name of the firewall device.",
+          "order": 23
         },
-        "fw_email_recipient": {
+        "agent_fqdn": {
           "type": "string",
-          "title": "FW Email Recipient",
-          "description": "FW email recipient",
-          "order": 68
+          "title": "Agent Fully Qualified Domain Name",
+          "description": "The fully qualified domain name of the agent.",
+          "order": 24
         },
-        "fw_email_sender": {
+        "agent_os_type": {
           "type": "string",
-          "title": "FW Email Sender",
-          "description": "FW email sender",
-          "order": 69
-        },
-        "fw_email_subject": {
-          "type": "string",
-          "title": "FW Email Subject",
-          "description": "FW email subject",
-          "order": 70
-        },
-        "fw_interface_from": {
-          "type": "string",
-          "title": "FW Interface From",
-          "description": "FW interface from",
-          "order": 71
-        },
-        "fw_interface_to": {
-          "type": "string",
-          "title": "FW Interface To",
-          "description": "FW interface to",
-          "order": 72
-        },
-        "fw_is_phishing": {
-          "type": "string",
-          "title": "FW Is Phishing",
-          "description": "FW is phishing",
-          "order": 73
-        },
-        "fw_misc": {
-          "type": "string",
-          "title": "FW Misc",
-          "description": "FW misc",
-          "order": 74
-        },
-        "fw_rule": {
-          "type": "string",
-          "title": "FW Rule",
-          "description": "FW rule",
-          "order": 75
-        },
-        "fw_rule_id": {
-          "type": "string",
-          "title": "FW Rule ID",
-          "description": "FW rule ID",
-          "order": 76
-        },
-        "fw_serial_number": {
-          "type": "string",
-          "title": "FW Serial Number",
-          "description": "FW serial number",
-          "order": 77
-        },
-        "fw_url_domain": {
-          "type": "string",
-          "title": "FW URL Domain",
-          "description": "FW URL domain",
-          "order": 78
-        },
-        "fw_vsys": {
-          "type": "string",
-          "title": "FW VSYS",
-          "description": "FW VSYS",
-          "order": 79
-        },
-        "fw_xff": {
-          "type": "string",
-          "title": "FW XFF",
-          "description": "FW XFF",
-          "order": 80
+          "title": "Agent Operating System Type",
+          "description": "The type of the operating system running on the agent.",
+          "order": 25
         },
         "image_name": {
           "type": "string",
           "title": "Image Name",
-          "description": "Image name",
-          "order": 81
+          "description": "The name of the image.",
+          "order": 26
+        },
+        "actor_process_image_name": {
+          "type": "array",
+          "title": "Actor Process Image Name",
+          "description": "The name of the actor process image.",
+          "items": {
+            "type": "string"
+          },
+          "order": 27
+        },
+        "actor_process_command_line": {
+          "type": "array",
+          "title": "Actor Process Command Line",
+          "description": "The command line arguments of the actor process.",
+          "items": {
+            "type": "string"
+          },
+          "order": 28
+        },
+        "actor_process_image_md5": {
+          "type": "array",
+          "title": "Actor Process Image MD5",
+          "description": "The MD5 hash of the actor process image.",
+          "items": {
+            "type": "string"
+          },
+          "order": 29
+        },
+        "actor_process_image_path": {
+          "type": "array",
+          "title": "Actor Process Image Path",
+          "description": "The path to the actor process image.",
+          "items": {
+            "type": "string"
+          },
+          "order": 30
+        },
+        "actor_process_os_pid": {
+          "type": "array",
+          "title": "Actor Process Operating System PID",
+          "description": "The process ID of the actor process on the operating system.",
+          "items": {
+            "type": "integer"
+          },
+          "order": 31
+        },
+        "actor_process_image_sha256": {
+          "type": "array",
+          "title": "Actor Process Image SHA256",
+          "description": "The SHA256 hash of the actor process image.",
+          "items": {
+            "type": "string"
+          },
+          "order": 32
+        },
+        "actor_process_signature_status": {
+          "type": "array",
+          "title": "Actor Process Signature Status",
+          "description": "The status of the signature associated with the actor process.",
+          "items": {
+            "type": "string"
+          },
+          "order": 33
+        },
+        "actor_process_signature_vendor": {
+          "type": "array",
+          "title": "Actor Process Signature Vendor",
+          "description": "The vendor of the signature associated with the actor process.",
+          "items": {
+            "type": "string"
+          },
+          "order": 34
+        },
+        "actor_thread_thread_id": {
+          "type": "array",
+          "title": "Actor Thread Thread ID",
+          "description": "The thread ID of the actor thread.",
+          "items": {
+            "type": "integer"
+          },
+          "order": 35
+        },
+        "fw_is_phishing": {
+          "type": "array",
+          "title": "Firewall Is Phishing",
+          "description": "Indicates if the event is related to phishing.",
+          "items": {
+            "type": "string"
+          },
+          "order": 36
+        },
+        "mitre_tactic_id_and_name": {
+          "type": "array",
+          "title": "MITRE Tactic ID and Name",
+          "description": "The ID and name of the MITRE tactic.",
+          "items": {
+            "type": "string"
+          },
+          "order": 37
+        },
+        "mitre_technique_id_and_name": {
+          "type": "array",
+          "title": "MITRE Technique ID and Name",
+          "description": "The ID and name of the MITRE technique.",
+          "items": {
+            "type": "string"
+          },
+          "order": 38
         },
         "module_id": {
-          "type": "string",
+          "type": "array",
           "title": "Module ID",
-          "description": "Module ID",
-          "order": 82
-        },
-        "os_actor_causality_id": {
-          "type": "string",
-          "title": "OS Actor Causality ID",
-          "description": "OS actor causality ID",
-          "order": 83
-        },
-        "os_actor_effective_username": {
-          "type": "string",
-          "title": "OS Actor Effective Username",
-          "description": "OS actor effective username",
-          "order": 84
-        },
-        "os_actor_process_causality_id": {
-          "type": "string",
-          "title": "OS Actor Process Causality ID",
-          "description": "OS actor process causality ID",
-          "order": 85
+          "description": "The ID of the module.",
+          "items": {
+            "type": "string"
+          },
+          "order": 39
         },
         "os_actor_process_command_line": {
-          "type": "string",
+          "type": "array",
           "title": "OS Actor Process Command Line",
-          "description": "OS actor process command line",
-          "order": 86
-        },
-        "os_actor_process_image_name": {
-          "type": "string",
-          "title": "OS Actor Process Image Name",
-          "description": "OS actor process image name",
-          "order": 87
-        },
-        "os_actor_process_image_path": {
-          "type": "string",
-          "title": "OS Actor Process Image Path",
-          "description": "OS actor process image path",
-          "order": 88
-        },
-        "os_actor_process_image_sha256": {
-          "type": "string",
-          "title": "OS Actor Process Image SHA256",
-          "description": "OS actor process image SHA256",
-          "order": 89
-        },
-        "os_actor_process_instance_id": {
-          "type": "string",
-          "title": "OS Actor Process Instance ID",
-          "description": "OS actor process instance ID",
-          "order": 90
-        },
-        "os_actor_process_os_pid": {
-          "type": "string",
-          "title": "OS Actor Process OS PID",
-          "description": "OS actor process OS PID",
-          "order": 91
-        },
-        "os_actor_process_signature_status": {
-          "type": "string",
-          "title": "OS Actor Process Signature Status",
-          "description": "OS actor process signature status",
-          "order": 92
-        },
-        "os_actor_process_signature_vendor": {
-          "type": "string",
-          "title": "OS Actor Process Signature Vendor",
-          "description": "OS actor process signature vendor",
-          "order": 93
+          "description": "The command line arguments of the OS actor process.",
+          "items": {
+            "type": "string"
+          },
+          "order": 40
         },
         "os_actor_thread_thread_id": {
-          "type": "string",
+          "type": "array",
           "title": "OS Actor Thread Thread ID",
-          "description": "OS actor thread thread ID",
-          "order": 94
+          "description": "The thread ID of the OS actor thread.",
+          "items": {
+            "type": "integer"
+          },
+          "order": 41
         },
-        "story_id": {
+        "os_actor_process_image_name": {
+          "type": "array",
+          "title": "OS Actor Process Image Name",
+          "description": "The name of the OS actor process image.",
+          "items": {
+            "type": "string"
+          },
+          "order": 42
+        },
+        "os_actor_process_os_pid": {
+          "type": "array",
+          "title": "OS Actor Process Operating System PID",
+          "description": "The process ID of the OS actor process on the operating system.",
+          "items": {
+            "type": "integer"
+          },
+          "order": 43
+        },
+        "os_actor_process_image_sha256": {
+          "type": "array",
+          "title": "OS Actor Process Image SHA256",
+          "description": "The SHA256 hash of the OS actor process image.",
+          "items": {
+            "type": "string"
+          },
+          "order": 44
+        },
+        "os_actor_process_signature_status": {
+          "type": "array",
+          "title": "OS Actor Process Signature Status",
+          "description": "The status of the signature associated with the OS actor process.",
+          "items": {
+            "type": "string"
+          },
+          "order": 45
+        },
+        "os_actor_process_signature_vendor": {
+          "type": "array",
+          "title": "OS Actor Process Signature Vendor",
+          "description": "The vendor of the signature associated with the OS actor process.",
+          "items": {
+            "type": "string"
+          },
+          "order": 46
+        },
+        "action_process_signature_status": {
+          "type": "array",
+          "title": "Action Process Signature Status",
+          "description": "The status of the signature associated with the action process.",
+          "items": {
+            "type": "string"
+          },
+          "order": 47
+        },
+        "matching_service_rule_id": {
           "type": "string",
-          "title": "Story ID",
-          "description": "Story ID",
-          "order": 95
+          "title": "Matching Service Rule ID",
+          "description": "The ID of the service rule matched.",
+          "order": 48
+        },
+        "starred": {
+          "type": "boolean",
+          "title": "Starred",
+          "description": "Indicates if the alert is starred.",
+          "order": 49
+        },
+        "external_id": {
+          "type": "string",
+          "title": "External ID",
+          "description": "An external identifier for the alert.",
+          "order": 50
+        },
+        "severity": {
+          "type": "string",
+          "title": "Severity",
+          "description": "The severity level of the alert.",
+          "order": 51
+        },
+        "matching_status": {
+          "type": "string",
+          "title": "Matching Status",
+          "description": "The status of the matching process.",
+          "order": 52
+        },
+        "local_insert_ts": {
+          "type": "integer",
+          "title": "Local Insert Timestamp",
+          "description": "The timestamp when the alert was inserted locally.",
+          "order": 53
+        },
+        "attempt_counter": {
+          "type": "integer",
+          "title": "Attempt Counter",
+          "description": "The counter for attempts made.",
+          "order": 54
+        },
+        "case_id": {
+          "type": "integer",
+          "title": "Case ID",
+          "description": "The case ID associated with the alert.",
+          "order": 55
+        },
+        "agent_version": {
+          "type": "string",
+          "title": "Agent Version",
+          "description": "The version of the agent.",
+          "order": 56
+        },
+        "agent_data_collection_status": {
+          "type": "boolean",
+          "title": "Agent Data Collection Status",
+          "description": "The status of data collection by the agent.",
+          "order": 57
+        },
+        "agent_is_vdi": {
+          "type": "boolean",
+          "title": "Agent Is VDI",
+          "description": "Indicates if the agent is running on a VDI.",
+          "order": 58
+        },
+        "agent_install_type": {
+          "type": "string",
+          "title": "Agent Install Type",
+          "description": "The install type of the agent.",
+          "order": 59
+        },
+        "agent_host_boot_time": {
+          "type": "array",
+          "title": "Agent Host Boot Time",
+          "description": "The boot time of the host.",
+          "items": {
+            "type": "integer"
+          },
+          "order": 60
+        },
+        "event_sub_type": {
+          "type": "array",
+          "title": "Event Sub Type",
+          "description": "The subtype of the event.",
+          "items": {
+            "type": "integer"
+          },
+          "order": 61
+        },
+        "association_strength": {
+          "type": "array",
+          "title": "Association Strength",
+          "description": "The strength of association between entities.",
+          "items": {
+            "type": "integer"
+          },
+          "order": 62
+        },
+        "event_timestamp": {
+          "type": "array",
+          "title": "Event Timestamp",
+          "description": "The timestamp of the event.",
+          "items": {
+            "type": "integer"
+          },
+          "order": 63
+        },
+        "actor_process_instance_id": {
+          "type": "array",
+          "title": "Actor Process Instance ID",
+          "description": "The instance ID of the actor process.",
+          "items": {
+            "type": "string"
+          },
+          "order": 64
+        },
+        "causality_actor_process_execution_time": {
+          "type": "array",
+          "title": "Causality Actor Process Execution Time",
+          "description": "The execution time of the causality actor process.",
+          "items": {
+            "type": "integer"
+          },
+          "order": 65
+        },
+        "os_actor_process_image_path": {
+          "type": "array",
+          "title": "OS Actor Process Image Path",
+          "description": "The path to the OS actor process image.",
+          "items": {
+            "type": "string"
+          },
+          "order": 66
+        },
+        "is_pcap": {
+          "type": "boolean",
+          "title": "Is PCAP",
+          "description": "Indicates if the alert involves PCAP data.",
+          "order": 67
+        },
+        "alert_type": {
+          "type": "string",
+          "title": "Alert Type",
+          "description": "The type of the alert.",
+          "order": 68
+        },
+        "resolution_status": {
+          "type": "string",
+          "title": "Resolution Status",
+          "description": "The resolution status of the alert.",
+          "order": 69
+        },
+        "tags": {
+          "type": "array",
+          "title": "Tags",
+          "description": "Tags associated with the alert.",
+          "items": {
+            "type": "string"
+          },
+          "order": 70
+        },
+        "alert_id": {
+          "type": "string",
+          "title": "Alert ID",
+          "description": "The unique ID of the alert.",
+          "order": 71
+        },
+        "detection_timestamp": {
+          "type": "integer",
+          "title": "Detection Timestamp",
+          "description": "The timestamp when the detection occurred.",
+          "order": 72
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "The name of the alert.",
+          "order": 73
+        },
+        "endpoint_id": {
+          "type": "string",
+          "title": "Endpoint ID",
+          "description": "The ID of the endpoint.",
+          "order": 74
+        },
+        "host_ip": {
+          "type": "array",
+          "title": "Host IP",
+          "description": "The IP address of the host.",
+          "items": {
+            "type": "string"
+          },
+          "order": 75
+        },
+        "host_name": {
+          "type": "string",
+          "title": "Host Name",
+          "description": "The name of the host.",
+          "order": 76
+        },
+        "action": {
+          "type": "string",
+          "title": "Action",
+          "description": "The action taken.",
+          "order": 77
+        },
+        "original_tags": {
+          "type": "array",
+          "title": "Original Tags",
+          "description": "The original tags associated with the alert.",
+          "items": {
+            "type": "string"
+          },
+          "order": 78
         },
         "user_name": {
-          "type": "string",
+          "type": "array",
           "title": "User Name",
-          "description": "User name",
-          "order": 96
+          "description": "The name of the user.",
+          "items": {
+            "type": "string"
+          },
+          "order": 79
+        },
+        "mac_addresses": {
+          "type": "array",
+          "title": "MAC Addresses",
+          "description": "The MAC addresses associated with the alert.",
+          "items": {
+            "type": "string"
+          },
+          "order": 80
+        },
+        "source": {
+          "type": "string",
+          "title": "Source",
+          "description": "The source of the alert.",
+          "order": 81
+        },
+        "action_pretty": {
+          "type": "string",
+          "title": "Action Pretty",
+          "description": "A pretty-printed representation of the action.",
+          "order": 82
         }
       }
     }
