@@ -271,7 +271,7 @@ Example output:
 
 # Version History
 
-* 1.2.6 - SDK Bump | Addressing Snyk vulnerabilities | Fixing Unit Tests
+* 1.2.6 - SDK Bump | Addressing Snyk vulnerabilities | Fixing Unit Tests | Dockerfile USER permission updated
 * 1.2.5 - Update requirements for pypandoc
 * 1.2.4 - Actions modified in order to implement PluginExceptions
 * 1.2.3 - Action HTML5: fix error with encoding to file
