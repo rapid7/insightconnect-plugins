@@ -4,12 +4,17 @@ products: [insightconnect]
 name: freshdesk
 title: FreshDesk
 description: FreshDesk is an online cloud-based customer service software providing help desk support with all smart automations to get things done faster
-version: 1.0.0
+version: 1.1.0
+connection_version: 1
 supported_versions: ["FreshDesk API v2"]
 vendor: rapid7
 support: rapid7
 status: []
 cloud_ready: true
+sdk:
+  type: slim
+  version: 6.0.1
+  user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/freshdesk
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -594,6 +599,163 @@ types:
       type: date
       required: false
       example: 2023-12-24T12:56:15+05:00
+  filteredTicket:
+    cc_emails:
+      title: CC Emails
+      description: CC Emails
+      type: "[]string"
+      required: false
+      example: ["clark.kent@kryptonspace.com"]
+    fwd_emails:
+      title: FWD Emails
+      description: Forwarded Emails
+      type: "[]string"
+      required: false
+      example: ["clark.kent@kryptonspace.com"]
+    reply_cc_emails:
+      title: Reply CC Emails
+      description: Reply CC Emails
+      type: "[]string"
+      required: false
+      example: ["clark.kent@kryptonspace.com"]
+    fr_escalated:
+      title: FR Escalated
+      description: First Response Escalated
+      type: boolean
+      required: false
+      example: false
+    spam:
+      title: Spam
+      description: Spam
+      type: boolean
+      required: false
+      example: false
+    email_config_id:
+      title: Email Config ID
+      description: Email Configuration ID
+      type: integer
+      required: false
+      example: 17
+    group_id:
+      title: Group ID
+      description: Group ID
+      type: integer
+      required: false
+      example: 156
+    priority:
+      title: Priority
+      description: Priority
+      type: integer
+      required: false
+      example: 3
+    requester_id:
+      title: Requester ID
+      description: Requester ID
+      type: integer
+      required: false
+      example: 6007738334
+    responder_id:
+      title: Responder ID
+      description: Responder ID
+      type: integer
+      required: false
+      example: 6001263404
+    source:
+      title: Source
+      description: Source
+      type: integer
+      required: false
+      example: 2
+    company_id:
+      title: Company ID
+      description: Company ID
+      type: integer
+      required: false
+      example: 2
+    status:
+      title: Status
+      description: Status
+      type: integer
+      required: false
+      example: 2
+    subject:
+      title: Subject
+      description: Subject
+      type: string
+      required: false
+      example: "Sample Title"
+    to_emails:
+      title: To Emails
+      description: To Emails
+      type: "[]string"
+      required: false
+      example: ["clark.kent@kryptonspace.com"]
+    product_id:
+      title: Product ID
+      description: Product ID
+      type: integer
+      required: false
+      example: 1
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+      example: 47
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+      example: Incident
+    due_by:
+      title: Due By
+      description: Due By
+      type: string
+      required: false
+      example: "2016-02-23T16:00:00Z"
+    fr_due_by:
+      title: FR Due By
+      description: First Response Due By
+      type: string
+      required: false
+      example: "2016-02-22T17:00:00Z"
+    is_escalated:
+      title: Is Escalated
+      description: Is Escalated
+      type: boolean
+      required: false
+      example: true
+    description:
+      title: Description
+      description: Description
+      type: string
+      required: false
+      example: "<div>Sample description</div>"
+    description_text:
+      title: Description Text
+      description: Description Text
+      type: string
+      required: false
+      example: "Sample description"
+    created_at:
+      title: Created At
+      description: Created At
+      type: string
+      required: false
+      example: "2016-02-20T09:16:58Z"
+    updated_at:
+      title: Updated At
+      description: Updated At
+      type: string
+      required: false
+      example: "2016-02-23T16:14:57Z"
+    custom_fields:
+      title: Custom Fields
+      description: Custom Fields
+      type: object
+      required: false
+      example: '{"my_key": "my_value"}'
 connection:
   domainName:
     title: Domain Name
@@ -621,6 +783,12 @@ actions:
       requesterId:
         title: Requester ID
         description: User ID of the requester. For existing contacts, the requesterId can be passed instead of the requester's email
+        type: integer
+        required: false
+        example: 103021764889
+      responderId:
+        title: Responder ID
+        description: User ID of the responder. For existing contacts, the requesterId can be passed instead of the requester's email
         type: integer
         required: false
         example: 103021764889
@@ -774,7 +942,7 @@ actions:
         description: Ticket details
         type: ticket
         required: true
-        example: {}
+        example: { "attachments": [], "ccEmails": [], "createdAt": "2000-01-01T00:00:00Z", "customFields": { "cf_fsm_contact_name": "Example User", "cf_fsm_phone_number": "123456789", "cf_fsm_service_location": "Boston", "cf_type_of_privacy_request": "Opt out/unsubscribe" }, "description": "<div>Example Description</div>", "descriptionText": "Example Description", "frEscalated": false, "fwdEmails": [], "id": 1, "isEscalated": false, "nrEscalated": false, "priority": "Low", "replyCcEmails": [], "requesterId": 12345678912345, "responderId": 1234567891234, "source": "Portal", "spam": false, "status": "Open", "subject": "Test Subject", "tags": [], "ticketCcEmails": [], "type": "Privacy", "updatedAt": "2000-01-01T00:00:00Z" }
   updateTicket:
     title: Update Ticket
     description: Update a FreshDesk ticket
@@ -935,7 +1103,7 @@ actions:
         description: Ticket details
         type: ticket
         required: true
-        example: '{}'
+        example: { "attachments": [], "ccEmails": [], "createdAt": "2000-01-01T00:00:00Z", "customFields": { "cf_fsm_contact_name": "Example User", "cf_fsm_phone_number": "123456789", "cf_fsm_service_location": "Boston", "cf_type_of_privacy_request": "Opt out/unsubscribe" }, "description": "<div>Example Description</div>", "descriptionText": "Example Description", "frEscalated": false, "fwdEmails": [], "id": 1, "isEscalated": false, "nrEscalated": false, "priority": "Low", "replyCcEmails": [], "requesterId": 12345678912345, "responderId": 1234567891234, "source": "Portal", "spam": false, "status": "Open", "subject": "Test Subject", "tags": [], "ticketCcEmails": [], "type": "Privacy", "updatedAt": "2000-01-01T00:00:00Z" }
   getTicketById:
     title: Get Ticket by ID
     description: Get ticket details
@@ -964,7 +1132,7 @@ actions:
         description: Ticket details
         type: ticket
         required: true
-        example: '{}'
+        example: { "attachments": [], "ccEmails": [], "createdAt": "2000-01-01T00:00:00Z", "customFields": { "cf_fsm_contact_name": "Example User", "cf_fsm_phone_number": "123456789", "cf_fsm_service_location": "Boston", "cf_type_of_privacy_request": "Opt out/unsubscribe" }, "description": "<div>Example Description</div>", "descriptionText": "Example Description", "frEscalated": false, "fwdEmails": [], "id": 1, "isEscalated": false, "nrEscalated": false, "priority": "Low", "replyCcEmails": [], "requesterId": 12345678912345, "responderId": 1234567891234, "source": "Portal", "spam": false, "status": "Open", "subject": "Test Subject", "tags": [], "ticketCcEmails": [], "type": "Privacy", "updatedAt": "2000-01-01T00:00:00Z" }
   getTickets:
     title: Get Tickets List
     description: Get tickets list. In `filterBy` input you can use only one of `requester` type inputs - `Requester ID`, `Requester Email` or `Requester Unique External ID`
@@ -1030,4 +1198,33 @@ actions:
         description: List of tickets
         type: '[]ticket'
         required: true
-        example: '[]'
+        example: '[{ "attachments": [], "ccEmails": [], "createdAt": "2000-01-01T00:00:00Z", "customFields": { "cf_fsm_contact_name": "Example User", "cf_fsm_phone_number": "123456789", "cf_fsm_service_location": "Boston", "cf_type_of_privacy_request": "Opt out/unsubscribe" }, "description": "<div>Example Description</div>", "descriptionText": "Example Description", "frEscalated": false, "fwdEmails": [], "id": 1, "isEscalated": false, "nrEscalated": false, "priority": "Low", "replyCcEmails": [], "requesterId": 12345678912345, "responderId": 1234567891234, "source": "Portal", "spam": false, "status": "Open", "subject": "Test Subject", "tags": [], "ticketCcEmails": [], "type": "Privacy", "updatedAt": "2000-01-01T00:00:00Z" }]'
+  filterTickets:
+    title: Filter Tickets
+    description: Use custom ticket fields that you have created in your account to filter through the tickets and get a list of tickets matching the specified ticket fields
+    input:
+      query:
+        title: Query
+        description: Case sensitive query to filter against, supported fields are agent_id, group_id, priority, status, tag, type, due_by, fr_due_by, created_at, updated_at. Max 512 characters
+        type: string
+        required: false
+        example: "(ticket_field:integer OR ticket_field:'string') AND ticket_field:boolean"
+      page:
+        title: Page
+        description: To scroll through the pages add page parameter to the url. The page number starts with 1 and should not exceed 10
+        type: integer
+        required: false
+        example: 2
+    output:
+      results:
+        title: Results
+        description: Filtered tickets. The number of objects returned per page is 30
+        type: "[]filteredTicket"
+        required: false
+        example: [{ "cc_emails": ["clark.kent@kryptonspace.com"], "fwd_emails": ["clark.kent@kryptonspace.com"], "reply_cc_emails": ["clark.kent@kryptonspace.com"], "fr_escalated": false, "spam": false, "email_config_id": 17, "group_id": 156, "priority": 3, "requester_id": 6007738334, "responder_id": 6001263404, "source": 2, "company_id": 2, "status": 2, "subject": "Sample Title", "to_emails": ["clark.kent@kryptonspace.com"], "product_id": 1, "id": 47, "type": "Incident", "due_by": "2016-02-23T16:00:00Z", "fr_due_by": "2016-02-22T17:00:00Z", "is_escalated": true, "description": "<div>Sample description</div>", "description_text": "Sample description", "created_at": "2016-02-20T09:16:58Z", "updated_at": "2016-02-23T16:14:57Z", "custom_fields": { "my_key": "my_value" } }]
+      total:
+        title: Total
+        description: Count of filtered tickets
+        type: integer
+        required: false
+        example: 10
