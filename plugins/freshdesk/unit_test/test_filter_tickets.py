@@ -9,45 +9,48 @@ sys.path.append(os.path.abspath("../"))
 
 from util import Util
 from parameterized import parameterized
-from icon_freshdesk.actions.getTickets import GetTickets
+from icon_freshdesk.actions.filterTickets import FilterTickets
+from icon_freshdesk.actions.filterTickets.schema import FilterTicketsOutput
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mock_request)
-class TestGetTickets(TestCase):
+class TestFilterTickets(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.action = Util.default_connector(GetTickets())
+        cls.action = Util.default_connector(FilterTickets())
 
     @parameterized.expand(
         [
             [
                 "many_parameters",
-                Util.read_file_to_dict("inputs/get_tickets_many_parameters.json.inp"),
-                Util.read_file_to_dict("expected/get_tickets_many_parameters.json.exp"),
+                Util.read_file_to_dict("inputs/filter_tickets_many_parameters.json.inp"),
+                Util.read_file_to_dict("expected/filter_tickets_many_parameters.json.exp"),
             ],
             [
                 "no_parameters",
-                Util.read_file_to_dict("inputs/get_tickets_no_parameters.json.inp"),
-                Util.read_file_to_dict("expected/get_tickets_no_parameters.json.exp"),
+                Util.read_file_to_dict("inputs/filter_tickets_no_parameters.json.inp"),
+                Util.read_file_to_dict("expected/filter_tickets_no_parameters.json.exp"),
             ],
         ]
     )
-    def test_get_tickets(self, mock_request, test_name, input_params, expected):
+    def test_filter_tickets(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
+        validate(actual, FilterTicketsOutput.schema)
         self.assertEqual(actual, expected)
 
     @parameterized.expand(
         [
             [
                 "invalid_requester",
-                Util.read_file_to_dict("inputs/get_tickets_invalid_company_id.json.inp"),
+                Util.read_file_to_dict("inputs/filter_tickets_invalid_status.json.inp"),
                 PluginException.causes[PluginException.Preset.BAD_REQUEST],
                 PluginException.assistances[PluginException.Preset.BAD_REQUEST],
-                Util.read_file_to_string("expected/get_tickets_invalid_company_id.json.exp"),
+                Util.read_file_to_string("expected/filter_tickets_invalid_status.json.exp"),
             ]
         ]
     )
-    def test_get_tickets_raise_exception(self, mock_request, test_name, input_parameters, cause, assistance, data):
+    def test_filter_tickets_raise_exception(self, mock_request, test_name, input_parameters, cause, assistance, data):
         with self.assertRaises(PluginException) as error:
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
