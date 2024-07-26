@@ -3,8 +3,9 @@ import random
 
 from functools import wraps
 from _datetime import datetime
-from typing import List, Dict
+from typing import List, Dict, Any
 from insightconnect_plugin_runtime import Trigger
+from insightconnect_plugin_runtime.helper import return_non_empty
 
 
 class Util:
@@ -34,7 +35,7 @@ class Util:
     @staticmethod
     def send_items_to_platform_for_trigger(
         trigger: Trigger,
-        items: List[Dict],
+        items: List[Dict[str, Any]],
         output_type: str,
         last_event_processed_time_ms: int,
         time_field: str = "creation_time",
@@ -46,8 +47,25 @@ class Util:
                 # Record time of this incident so we don't request events older than the one we
                 # just sent on next iteration
                 last_event_processed_time_ms = item_time
-                trigger.send({output_type: item})
+                trigger.send({output_type: return_non_empty(Util.prepare_output(item))})
                 yield last_event_processed_time_ms
+
+    @staticmethod
+    def prepare_output(alert: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        This function takes an alert, represented as a dictionary, and transforms it into
+        a standardized format.
+
+        :param alert: A dictionary containing alert information.
+        :type: Dict[str, Any]
+
+        :returns: A processed dictionary representing the alert in a standardized format.
+        :rtype: Dict[str, Any]
+        """
+
+        if "mac_addresses" in alert and isinstance(alert.get("mac_addresses"), str):
+            alert["mac_addresses"] = [alert.get("mac_addresses", "")]
+        return alert
 
     def retry(tries: int, timeout: int, exceptions, backoff_seconds: int = 1):
         """Function retries passed function based on input values

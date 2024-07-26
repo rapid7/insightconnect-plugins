@@ -3,11 +3,6 @@ from .schema import ConnectionSchema, Input
 
 # Custom imports below
 from ..util.api import CortexXdrAPI
-from datetime import datetime, timezone
-import secrets
-import string
-import hashlib
-import requests
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -18,9 +13,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params):
         self.logger.info("Connect: Connecting...")
 
-        api_key = params.get(Input.API_KEY).get("secretKey")
-        api_key_id = params.get(Input.API_KEY_ID)
-        fqdn = params.get(Input.URL)
+        api_key = params.get(Input.API_KEY, {}).get("secretKey")
+        api_key_id = params.get(Input.API_KEY_ID, "")
+        fqdn = params.get(Input.URL, "")
         fqdn = self.clean_up_fqdn(fqdn)
 
         security_level = params.get(Input.SECURITY_LEVEL)
@@ -39,4 +34,4 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         self.xdr_api.test_connection()
-        return {"status": "pass"}
+        return {"success": True}
