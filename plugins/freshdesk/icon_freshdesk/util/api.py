@@ -86,13 +86,11 @@ class FreshDeskAPI:
         )
 
     def filter_tickets(self, query: str = None, page: int = None) -> dict:
-        url = FITLER_TICKETS_ENDPOINT.format(domain=self._domain)
-        url = f'{url}?query="{query}"' if query else url
         return self.make_json_request(
             method="GET",
-            url=url,
+            url=FITLER_TICKETS_ENDPOINT.format(domain=self._domain),
             headers=self._headers,
-            params=clean_dict({"page": page})
+            params=clean_dict({"query": query, "page": page})
         )
 
     def get_ticket_fields(self) -> Union[list, dict]:

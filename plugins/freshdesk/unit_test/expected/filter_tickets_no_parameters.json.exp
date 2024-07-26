@@ -1,5 +1,5 @@
 {
-  "tickets": [
+  "results": [
     {
     "cc_emails": [
       "clark.kent@kryptonspace.com"
@@ -39,5 +39,5 @@
     }
     }
   ],
-  "count": 1
+  "total": 1
 }

@@ -10,6 +10,8 @@ sys.path.append(os.path.abspath("../"))
 from unit_test.util import Util
 from parameterized import parameterized
 from icon_freshdesk.actions.filterTickets import FilterTickets
+from icon_freshdesk.actions.filterTickets.schema import FilterTicketsOutput
+from jsonschema import validate
 
 
 @patch("requests.request", side_effect=Util.mock_request)
@@ -34,6 +36,7 @@ class TestFilterTickets(TestCase):
     )
     def test_filter_tickets(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
+        validate(actual, FilterTicketsOutput.schema)
         self.assertEqual(actual, expected)
 
     @parameterized.expand(

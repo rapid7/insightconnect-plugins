@@ -14,7 +14,7 @@ class FilterTickets(insightconnect_plugin_runtime.Action):
                 output=FilterTicketsOutput())
 
     def run(self, params={}):
-        query = params.get(Input.QUERY)
+        query = f'"{params.get(Input.QUERY)}"'
         page = params.get(Input.PAGE)
         response_json = self.connection.api_client.filter_tickets(query, page)
 

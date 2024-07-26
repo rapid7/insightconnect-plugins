@@ -64,11 +64,9 @@ class Util:
         url = kwargs.get("url")
         method = kwargs.get("method")
         if url == "https://exampledomain.freshdesk.com/api/v2/search/tickets":
+            if params == {'query': '"group_id:123456789 AND status:99"', 'page': 2}:
+                return MockResponse(400, "filter_tickets_error.json.resp")
             return MockResponse(200, "filter_tickets.json.resp")
-        if url == 'https://exampledomain.freshdesk.com/api/v2/search/tickets?query="group_id:123456789 AND status:2"':
-            return MockResponse(200, "filter_tickets.json.resp")
-        if url == 'https://exampledomain.freshdesk.com/api/v2/search/tickets?query="group_id:123456789 AND status:99"':
-            return MockResponse(400, "filter_tickets_error.json.resp")
         if url == "https://exampledomain.freshdesk.com/api/v2/ticket_fields":
             return MockResponse(200, "get_ticket_fields.json.resp")
         if url == "https://exampledomain.freshdesk.com/api/v2/tickets/404":
