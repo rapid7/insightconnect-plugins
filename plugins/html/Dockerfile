@@ -17,7 +17,7 @@ ADD . /python/src
 
 RUN python setup.py build && python setup.py install
 
-# User to run plugin code. The two supported users are: root, nobody
-USER nobody
+# root is required for the conversion to work. If USER set to nobody, actions/tests will fail
+USER root
 
 ENTRYPOINT ["/usr/local/bin/icon_html"]
