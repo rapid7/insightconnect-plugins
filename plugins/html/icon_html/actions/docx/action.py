@@ -23,7 +23,7 @@ class Docx(insightconnect_plugin_runtime.Action):
             raise PluginException(cause="Invalid input.", assistance="Input must be of type HTML.")
 
         try:
-            pypandoc.convert(doc, "docx", outputfile=temp_file, format="html")
+            pypandoc.convert_text(doc, "docx", outputfile=temp_file, format="html")
         except RuntimeError as error:
             raise PluginException(cause="Error converting doc file. ", assistance="Check stack trace log.", data=error)
         with open(temp_file, "rb") as output:
