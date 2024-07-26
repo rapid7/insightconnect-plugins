@@ -28,7 +28,6 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
 
         while True:
             alerts = self.connection.xdr_api.get_alerts(from_time=start_time, to_time=end_time)
-
             for alert_time in Util.send_items_to_platform_for_trigger(
                 self, alerts, Output.ALERT, last_event_processed_time_ms, alert_timestamp_field
             ):
