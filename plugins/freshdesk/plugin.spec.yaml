@@ -1200,7 +1200,7 @@ actions:
         required: true
         example: '[]'
   filterTickets:
-    title: Filter Ticks
+    title: Filter Tickets
     description: Use custom ticket fields that you have created in your account to filter through the tickets and get a list of tickets matching the specified ticket fields
     input:
       query:
