@@ -63,7 +63,8 @@ class GetEndpointDetailsOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "endpoints"
+    "endpoints",
+    "total_count"
   ],
   "definitions": {
     "endpoint": {
