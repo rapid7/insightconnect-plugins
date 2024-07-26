@@ -1,4 +1,5 @@
 BASE_URL = "https://{domain}.freshdesk.com/api/v2"
+FITLER_TICKETS_ENDPOINT = BASE_URL + "/search/tickets"
 TICKETS_ENDPOINT = BASE_URL + "/tickets"
 TICKET_ENDPOINT = BASE_URL + "/tickets/{ticket_id}"
 TICKET_FIELDS_ENDPOINT = BASE_URL + "/ticket_fields"

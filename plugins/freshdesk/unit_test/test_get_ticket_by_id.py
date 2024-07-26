@@ -7,7 +7,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
-from unit_test.util import Util
+from util import Util
 from parameterized import parameterized
 from icon_freshdesk.actions.getTicketById import GetTicketById
 
@@ -36,8 +36,8 @@ class TestGetTicketById(TestCase):
             [
                 "ticket_not_found",
                 Util.read_file_to_dict("inputs/get_ticket_by_id_ticket_not_found.json.inp"),
-                "Resource not found.",
-                "Please verify inputs and if the issue persists, contact support.",
+                PluginException.causes.get(PluginException.Preset.NOT_FOUND),
+                PluginException.assistances.get(PluginException.Preset.NOT_FOUND),
             ]
         ]
     )

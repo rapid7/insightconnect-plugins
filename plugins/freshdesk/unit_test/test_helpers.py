@@ -2,12 +2,11 @@ import os
 import sys
 from unittest import TestCase
 
-from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
 from parameterized import parameterized
 
 from icon_freshdesk.util.constants import Ticket, TextCase
-from unit_test.util import Util
+from util import Util
 
 sys.path.append(os.path.abspath("../"))
 
