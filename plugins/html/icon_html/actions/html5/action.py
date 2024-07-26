@@ -25,7 +25,7 @@ class Html5(insightconnect_plugin_runtime.Action):
 
         try:
             output = pypandoc.convert_text(doc, "html", format="md")
-            new_output = pypandoc.convert(output, "html5", format="md")
+            new_output = pypandoc.convert_text(output, "html5", format="md")
         except RuntimeError as error:
             raise PluginException(cause="Error converting doc file. ", assistance="Check stack trace log.", data=error)
 
