@@ -287,8 +287,7 @@ class MonitorIncidentEventsOutput(insightconnect_plugin_runtime.Output):
           "description": "XDR URL",
           "order": 27
         }
-      },
-      "required": []
+      }
     }
   }
 }
