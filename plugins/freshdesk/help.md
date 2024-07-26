@@ -133,13 +133,42 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|ticket|ticket|True|Ticket details|{}|
+|ticket|ticket|True|Ticket details|{'attachments': [], 'ccEmails': [], 'createdAt': '2000-01-01T00:00:00Z', 'customFields': {'cf_fsm_contact_name': 'Example User', 'cf_fsm_phone_number': '123456789', 'cf_fsm_service_location': 'Boston', 'cf_type_of_privacy_request': 'Opt out/unsubscribe'}, 'description': '<div>Example Description</div>', 'descriptionText': 'Example Description', 'frEscalated': False, 'fwdEmails': [], 'id': 1, 'isEscalated': False, 'nrEscalated': False, 'priority': 'Low', 'replyCcEmails': [], 'requesterId': 12345678912345, 'responderId': 1234567891234, 'source': 'Portal', 'spam': False, 'status': 'Open', 'subject': 'Test Subject', 'tags': [], 'ticketCcEmails': [], 'type': 'Privacy', 'updatedAt': '2000-01-01T00:00:00Z'}|
   
 Example output:
 
 ```
 {
-  "ticket": {}
+  "ticket": {
+    "attachments": [],
+    "ccEmails": [],
+    "createdAt": "2000-01-01T00:00:00Z",
+    "customFields": {
+      "cf_fsm_contact_name": "Example User",
+      "cf_fsm_phone_number": "123456789",
+      "cf_fsm_service_location": "Boston",
+      "cf_type_of_privacy_request": "Opt out/unsubscribe"
+    },
+    "description": "<div>Example Description</div>",
+    "descriptionText": "Example Description",
+    "frEscalated": false,
+    "fwdEmails": [],
+    "id": 1,
+    "isEscalated": false,
+    "nrEscalated": false,
+    "priority": "Low",
+    "replyCcEmails": [],
+    "requesterId": 12345678912345,
+    "responderId": 1234567891234,
+    "source": "Portal",
+    "spam": false,
+    "status": "Open",
+    "subject": "Test Subject",
+    "tags": [],
+    "ticketCcEmails": [],
+    "type": "Privacy",
+    "updatedAt": "2000-01-01T00:00:00Z"
+  }
 }
 ```
 
@@ -243,13 +272,42 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|ticket|ticket|True|Ticket details|{}|
+|ticket|ticket|True|Ticket details|{'attachments': [], 'ccEmails': [], 'createdAt': '2000-01-01T00:00:00Z', 'customFields': {'cf_fsm_contact_name': 'Example User', 'cf_fsm_phone_number': '123456789', 'cf_fsm_service_location': 'Boston', 'cf_type_of_privacy_request': 'Opt out/unsubscribe'}, 'description': '<div>Example Description</div>', 'descriptionText': 'Example Description', 'frEscalated': False, 'fwdEmails': [], 'id': 1, 'isEscalated': False, 'nrEscalated': False, 'priority': 'Low', 'replyCcEmails': [], 'requesterId': 12345678912345, 'responderId': 1234567891234, 'source': 'Portal', 'spam': False, 'status': 'Open', 'subject': 'Test Subject', 'tags': [], 'ticketCcEmails': [], 'type': 'Privacy', 'updatedAt': '2000-01-01T00:00:00Z'}|
   
 Example output:
 
 ```
 {
-  "ticket": {}
+  "ticket": {
+    "attachments": [],
+    "ccEmails": [],
+    "createdAt": "2000-01-01T00:00:00Z",
+    "customFields": {
+      "cf_fsm_contact_name": "Example User",
+      "cf_fsm_phone_number": "123456789",
+      "cf_fsm_service_location": "Boston",
+      "cf_type_of_privacy_request": "Opt out/unsubscribe"
+    },
+    "description": "<div>Example Description</div>",
+    "descriptionText": "Example Description",
+    "frEscalated": false,
+    "fwdEmails": [],
+    "id": 1,
+    "isEscalated": false,
+    "nrEscalated": false,
+    "priority": "Low",
+    "replyCcEmails": [],
+    "requesterId": 12345678912345,
+    "responderId": 1234567891234,
+    "source": "Portal",
+    "spam": false,
+    "status": "Open",
+    "subject": "Test Subject",
+    "tags": [],
+    "ticketCcEmails": [],
+    "type": "Privacy",
+    "updatedAt": "2000-01-01T00:00:00Z"
+  }
 }
 ```
 
@@ -290,13 +348,44 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|tickets|[]ticket|True|List of tickets|[]|
+|tickets|[]ticket|True|List of tickets|[{ "attachments": [], "ccEmails": [], "createdAt": "2000-01-01T00:00:00Z", "customFields": { "cf_fsm_contact_name": "Example User", "cf_fsm_phone_number": "123456789", "cf_fsm_service_location": "Boston", "cf_type_of_privacy_request": "Opt out/unsubscribe" }, "description": "<div>Example Description</div>", "descriptionText": "Example Description", "frEscalated": false, "fwdEmails": [], "id": 1, "isEscalated": false, "nrEscalated": false, "priority": "Low", "replyCcEmails": [], "requesterId": 12345678912345, "responderId": 1234567891234, "source": "Portal", "spam": false, "status": "Open", "subject": "Test Subject", "tags": [], "ticketCcEmails": [], "type": "Privacy", "updatedAt": "2000-01-01T00:00:00Z" }]|
   
 Example output:
 
 ```
 {
-  "tickets": []
+  "tickets": [
+    {
+      "attachments": [],
+      "ccEmails": [],
+      "createdAt": "2000-01-01T00:00:00Z",
+      "customFields": {
+        "cf_fsm_contact_name": "Example User",
+        "cf_fsm_phone_number": "123456789",
+        "cf_fsm_service_location": "Boston",
+        "cf_type_of_privacy_request": "Opt out/unsubscribe"
+      },
+      "description": "<div>Example Description</div>",
+      "descriptionText": "Example Description",
+      "frEscalated": false,
+      "fwdEmails": [],
+      "id": 1,
+      "isEscalated": false,
+      "nrEscalated": false,
+      "priority": "Low",
+      "replyCcEmails": [],
+      "requesterId": 12345678912345,
+      "responderId": 1234567891234,
+      "source": "Portal",
+      "spam": false,
+      "status": "Open",
+      "subject": "Test Subject",
+      "tags": [],
+      "ticketCcEmails": [],
+      "type": "Privacy",
+      "updatedAt": "2000-01-01T00:00:00Z"
+    }
+  ]
 }
 ```
 
@@ -383,13 +472,42 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|ticket|ticket|True|Ticket details|{}|
+|ticket|ticket|True|Ticket details|{'attachments': [], 'ccEmails': [], 'createdAt': '2000-01-01T00:00:00Z', 'customFields': {'cf_fsm_contact_name': 'Example User', 'cf_fsm_phone_number': '123456789', 'cf_fsm_service_location': 'Boston', 'cf_type_of_privacy_request': 'Opt out/unsubscribe'}, 'description': '<div>Example Description</div>', 'descriptionText': 'Example Description', 'frEscalated': False, 'fwdEmails': [], 'id': 1, 'isEscalated': False, 'nrEscalated': False, 'priority': 'Low', 'replyCcEmails': [], 'requesterId': 12345678912345, 'responderId': 1234567891234, 'source': 'Portal', 'spam': False, 'status': 'Open', 'subject': 'Test Subject', 'tags': [], 'ticketCcEmails': [], 'type': 'Privacy', 'updatedAt': '2000-01-01T00:00:00Z'}|
   
 Example output:
 
 ```
 {
-  "ticket": {}
+  "ticket": {
+    "attachments": [],
+    "ccEmails": [],
+    "createdAt": "2000-01-01T00:00:00Z",
+    "customFields": {
+      "cf_fsm_contact_name": "Example User",
+      "cf_fsm_phone_number": "123456789",
+      "cf_fsm_service_location": "Boston",
+      "cf_type_of_privacy_request": "Opt out/unsubscribe"
+    },
+    "description": "<div>Example Description</div>",
+    "descriptionText": "Example Description",
+    "frEscalated": false,
+    "fwdEmails": [],
+    "id": 1,
+    "isEscalated": false,
+    "nrEscalated": false,
+    "priority": "Low",
+    "replyCcEmails": [],
+    "requesterId": 12345678912345,
+    "responderId": 1234567891234,
+    "source": "Portal",
+    "spam": false,
+    "status": "Open",
+    "subject": "Test Subject",
+    "tags": [],
+    "ticketCcEmails": [],
+    "type": "Privacy",
+    "updatedAt": "2000-01-01T00:00:00Z"
+  }
 }
 ```
 ### Triggers

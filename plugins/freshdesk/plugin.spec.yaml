@@ -942,7 +942,7 @@ actions:
         description: Ticket details
         type: ticket
         required: true
-        example: {}
+        example: { "attachments": [], "ccEmails": [], "createdAt": "2000-01-01T00:00:00Z", "customFields": { "cf_fsm_contact_name": "Example User", "cf_fsm_phone_number": "123456789", "cf_fsm_service_location": "Boston", "cf_type_of_privacy_request": "Opt out/unsubscribe" }, "description": "<div>Example Description</div>", "descriptionText": "Example Description", "frEscalated": false, "fwdEmails": [], "id": 1, "isEscalated": false, "nrEscalated": false, "priority": "Low", "replyCcEmails": [], "requesterId": 12345678912345, "responderId": 1234567891234, "source": "Portal", "spam": false, "status": "Open", "subject": "Test Subject", "tags": [], "ticketCcEmails": [], "type": "Privacy", "updatedAt": "2000-01-01T00:00:00Z" }
   updateTicket:
     title: Update Ticket
     description: Update a FreshDesk ticket
@@ -1103,7 +1103,7 @@ actions:
         description: Ticket details
         type: ticket
         required: true
-        example: '{}'
+        example: { "attachments": [], "ccEmails": [], "createdAt": "2000-01-01T00:00:00Z", "customFields": { "cf_fsm_contact_name": "Example User", "cf_fsm_phone_number": "123456789", "cf_fsm_service_location": "Boston", "cf_type_of_privacy_request": "Opt out/unsubscribe" }, "description": "<div>Example Description</div>", "descriptionText": "Example Description", "frEscalated": false, "fwdEmails": [], "id": 1, "isEscalated": false, "nrEscalated": false, "priority": "Low", "replyCcEmails": [], "requesterId": 12345678912345, "responderId": 1234567891234, "source": "Portal", "spam": false, "status": "Open", "subject": "Test Subject", "tags": [], "ticketCcEmails": [], "type": "Privacy", "updatedAt": "2000-01-01T00:00:00Z" }
   getTicketById:
     title: Get Ticket by ID
     description: Get ticket details
@@ -1132,7 +1132,7 @@ actions:
         description: Ticket details
         type: ticket
         required: true
-        example: '{}'
+        example: { "attachments": [], "ccEmails": [], "createdAt": "2000-01-01T00:00:00Z", "customFields": { "cf_fsm_contact_name": "Example User", "cf_fsm_phone_number": "123456789", "cf_fsm_service_location": "Boston", "cf_type_of_privacy_request": "Opt out/unsubscribe" }, "description": "<div>Example Description</div>", "descriptionText": "Example Description", "frEscalated": false, "fwdEmails": [], "id": 1, "isEscalated": false, "nrEscalated": false, "priority": "Low", "replyCcEmails": [], "requesterId": 12345678912345, "responderId": 1234567891234, "source": "Portal", "spam": false, "status": "Open", "subject": "Test Subject", "tags": [], "ticketCcEmails": [], "type": "Privacy", "updatedAt": "2000-01-01T00:00:00Z" }
   getTickets:
     title: Get Tickets List
     description: Get tickets list. In `filterBy` input you can use only one of `requester` type inputs - `Requester ID`, `Requester Email` or `Requester Unique External ID`
@@ -1198,7 +1198,7 @@ actions:
         description: List of tickets
         type: '[]ticket'
         required: true
-        example: '[]'
+        example: '[{ "attachments": [], "ccEmails": [], "createdAt": "2000-01-01T00:00:00Z", "customFields": { "cf_fsm_contact_name": "Example User", "cf_fsm_phone_number": "123456789", "cf_fsm_service_location": "Boston", "cf_type_of_privacy_request": "Opt out/unsubscribe" }, "description": "<div>Example Description</div>", "descriptionText": "Example Description", "frEscalated": false, "fwdEmails": [], "id": 1, "isEscalated": false, "nrEscalated": false, "priority": "Low", "replyCcEmails": [], "requesterId": 12345678912345, "responderId": 1234567891234, "source": "Portal", "spam": false, "status": "Open", "subject": "Test Subject", "tags": [], "ticketCcEmails": [], "type": "Privacy", "updatedAt": "2000-01-01T00:00:00Z" }]'
   filterTickets:
     title: Filter Tickets
     description: Use custom ticket fields that you have created in your account to filter through the tickets and get a list of tickets matching the specified ticket fields
