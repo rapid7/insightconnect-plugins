@@ -288,15 +288,56 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-| :--- | :--- | :--- | :--- | :--- |
-|tickets|[]ticket|True|List of tickets|[]|
-  
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|results|[]filteredTicket|False|Filtered tickets. The number of objects returned per page is 30|[{"cc_emails": ["clark.kent@kryptonspace.com"], "fwd_emails": ["clark.kent@kryptonspace.com"], "reply_cc_emails": ["clark.kent@kryptonspace.com"], "fr_escalated": False, "spam": False, "email_config_id": 17, "group_id": 156, "priority": 3, "requester_id": 6007738334, "responder_id": 6001263404, "source": 2, "company_id": 2, "status": 2, "subject": "Sample Title", "to_emails": ["clark.kent@kryptonspace.com"], "product_id": 1, "id": 47, "type": "Incident", "due_by": "2016-02-23T16:00:00Z", "fr_due_by": "2016-02-22T17:00:00Z", "is_escalated": True, "description": "<div>Sample description</div>", "description_text": "Sample description", "created_at": "2016-02-20T09:16:58Z", "updated_at": "2016-02-23T16:14:57Z", "custom_fields": {"my_key": "my_value"}}]|None|None|
+|total|integer|False|Count of filtered tickets|10|None|None|
+
 Example output:
 
 ```
 {
-  "tickets": []
+  "results": [
+    {
+      "cc_emails": [
+        "clark.kent@kryptonspace.com"
+      ],
+      "fwd_emails": [
+        "clark.kent@kryptonspace.com"
+      ],
+      "reply_cc_emails": [
+        "clark.kent@kryptonspace.com"
+      ],
+      "fr_escalated": false,
+      "spam": false,
+      "email_config_id": 17,
+      "group_id": 156,
+      "priority": 3,
+      "requester_id": 6007738334,
+      "responder_id": 6001263404,
+      "source": 2,
+      "company_id": 2,
+      "status": 2,
+      "subject": "Sample Title",
+      "to_emails": [
+        "clark.kent@kryptonspace.com"
+      ],
+      "product_id": 1,
+      "id": 47,
+      "type": "Incident",
+      "due_by": "2016-02-23T16:00:00Z",
+      "fr_due_by": "2016-02-22T17:00:00Z",
+      "is_escalated": true,
+      "description": "<div>Sample description</div>",
+      "description_text": "Sample description",
+      "created_at": "2016-02-20T09:16:58Z",
+      "updated_at": "2016-02-23T16:14:57Z",
+      "custom_fields": {
+        "my_key": "my_value"
+      }
+    }
+  ],
+  "count": 10
 }
 ```
 

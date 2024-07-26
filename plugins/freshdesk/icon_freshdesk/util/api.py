@@ -6,7 +6,12 @@ from insightconnect_plugin_runtime.helper import request_error_handling, extract
 from insightconnect_plugin_runtime.exceptions import ResponseExceptionData, PluginException
 
 from icon_freshdesk.util.helpers import clean_dict, create_attachments_form
-from icon_freshdesk.util.endpoints import FITLER_TICKETS_ENDPOINT, TICKETS_ENDPOINT, TICKET_ENDPOINT, TICKET_FIELDS_ENDPOINT
+from icon_freshdesk.util.endpoints import (
+    FITLER_TICKETS_ENDPOINT,
+    TICKETS_ENDPOINT,
+    TICKET_ENDPOINT,
+    TICKET_FIELDS_ENDPOINT,
+)
 
 
 class FreshDeskAPI:
@@ -90,7 +95,7 @@ class FreshDeskAPI:
             method="GET",
             url=FITLER_TICKETS_ENDPOINT.format(domain=self._domain),
             headers=self._headers,
-            params=clean_dict({"query": query, "page": page})
+            params=clean_dict({"query": query, "page": page}),
         )
 
     def get_ticket_fields(self) -> Union[list, dict]:
@@ -113,17 +118,11 @@ class FreshDeskAPI:
             )
             response_handler(response, data_location=ResponseExceptionData.RESPONSE_TEXT)
         except requests.exceptions.Timeout as exception:
-            raise PluginException(
-                preset=PluginException.Preset.TIMEOUT, data=str(exception)
-            )
+            raise PluginException(preset=PluginException.Preset.TIMEOUT, data=str(exception))
         except requests.exceptions.ConnectionError as exception:
-            raise PluginException(
-                preset=PluginException.Preset.CONNECTION_ERROR, data=str(exception)
-            )
+            raise PluginException(preset=PluginException.Preset.CONNECTION_ERROR, data=str(exception))
         except requests.exceptions.TooManyRedirects as exception:
-            raise PluginException(
-                preset=PluginException.Preset.REDIRECT_ERROR, data=str(exception)
-            )
+            raise PluginException(preset=PluginException.Preset.REDIRECT_ERROR, data=str(exception))
         return response
 
     def make_json_request(
