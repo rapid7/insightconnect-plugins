@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "FreshDesk"
 Vendor = "rapid7"
-Version = "1.1.0"
+Version = "1.2.0"
 Description = "FreshDesk is an online cloud-based customer service software providing help desk support with all smart automations to get things done faster"
 
 
