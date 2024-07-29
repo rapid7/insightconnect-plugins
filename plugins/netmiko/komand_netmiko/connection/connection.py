@@ -70,11 +70,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Connect: Connecting...")
         try:
             self.client(params.get("host"))
-        except (ValueError, OSError) as e:
+        except (ValueError, OSError) as error:
             raise ConnectionTestException(
                 cause="Cannot connect/configure this device.",
                 assistance="Please check provided connection data and try again.",
-                data=e,
+                data=error,
             )
 
     def test(self):
