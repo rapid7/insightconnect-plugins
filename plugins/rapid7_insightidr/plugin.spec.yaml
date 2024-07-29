@@ -23,7 +23,7 @@ hub_tags:
   features: []
 sdk:
   type: full
-  version: 6.0.0
+  version: 6.0.1
   user: nobody
 version_history:
 - "10.3.1 - `Advanced Query On Log / Log Set` - Fixed issue where results >500 returned none | Update SDK"
