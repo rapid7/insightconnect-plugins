@@ -199,8 +199,11 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 start_observation_time = state.get(LAST_OBSERVATION_TIME)
                 observations, state = self._dedupe_and_get_last_time(observations, state, start_observation_time)
 
-                if observation_json.get("num_found") > page_size:
-                    self.logger.info("More data is available on the API - setting has_more_pages=True...")
+                num_found = observation_json.get("num_found")
+                if num_found > page_size:
+                    self.logger.info(
+                        f"More data is available on the API (num_found={num_found}) - setting has_more_pages=True..."
+                    )
                     has_more_pages = True
             # remove the job ID as this is completed and next run we want to trigger a new one
             del state[LAST_OBSERVATION_JOB]

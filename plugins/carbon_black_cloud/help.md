@@ -436,7 +436,7 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 

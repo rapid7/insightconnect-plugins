@@ -371,7 +371,7 @@ class TestMonitorAlerts(TestCase):
                 {
                     LAST_OBSERVATION_TIME: "2024-04-25T15:35:00.000000Z",
                     LAST_ALERT_TIME: "2024-04-25T15:25:00.000000Z",
-                    "page_size": 2
+                    "page_size": 2,
                 },
             ],
             [
