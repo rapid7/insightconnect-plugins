@@ -59,13 +59,28 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return device
 
     def request_api(
-        self, url: str, payload: Dict[str, str] = None, request_method: str = "POST", retry: bool = True
+        self,
+        url: str,
+        payload: Dict[str, str] = None,
+        request_method: str = "POST",
+        retry: bool = True,
+        debug: bool = False,
     ) -> Dict[str, str]:
         payload = payload if payload else {}
         try:
+            if debug:
+                # start timer so we can track the duration of the request
+                request_start_epoch = time.time()
+
             response = requests.request(
                 method=request_method, url=url, headers=self.headers, json=payload, timeout=DEFAULT_TIMEOUT
             )
+
+            if debug:
+                request_end_epoch = time.time()
+                request_time = request_end_epoch - request_start_epoch
+                self.logger.info(f"Time elapsed for request to URL [{url}]: {round(request_time, 4)} seconds.")
+
             return self._handle_response(response, url, payload, retry)
         except requests.Timeout as timeout_error:
             self.logger.error(f"Hitting connection timeout on request to Carbon Black. error={timeout_error}")
@@ -82,6 +97,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
             except JSONDecodeError as json_error:
                 error_data = f"Invalid JSON response: {response.content}"
                 error_cause = json_error
+        elif response.status_code == 204:
+            return {}
         elif response.status_code == 429:
             # We need to back off for 5 minutes until this period has passed but this is only implemented in task code
             self.logger.error(
