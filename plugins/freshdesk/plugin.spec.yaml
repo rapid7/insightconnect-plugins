@@ -967,7 +967,7 @@ actions:
         example: 103021764889
       responderId:
         title: Responder ID
-        description: User ID of the responder. For existing contacts, the requesterId can be passed instead of the requester's email
+        description: User ID of the responder. For existing contacts, the responderId can be passed instead of the responders's email
         type: integer
         required: false
         example: 103021764889

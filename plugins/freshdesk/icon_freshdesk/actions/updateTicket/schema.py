@@ -161,7 +161,7 @@ class UpdateTicketInput(insightconnect_plugin_runtime.Input):
     "responderId": {
       "type": "integer",
       "title": "Responder ID",
-      "description": "User ID of the responder. For existing contacts, the requesterId can be passed instead of the requester's email",
+      "description": "User ID of the responder. For existing contacts, the responderId can be passed instead of the responders's email",
       "order": 4
     },
     "source": {
