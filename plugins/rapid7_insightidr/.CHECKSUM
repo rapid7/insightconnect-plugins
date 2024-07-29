@@ -113,7 +113,7 @@
 		},
 		{
 			"identifier": "query/schema.py",
-			"hash": "440b96851f6c0090adde3f3709aa6259"
+			"hash": "ec57e897be9e044c6607e33ab15020b0"
 		},
 		{
 			"identifier": "replace_indicators/schema.py",
