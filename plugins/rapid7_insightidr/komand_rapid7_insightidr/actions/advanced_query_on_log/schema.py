@@ -164,7 +164,7 @@ class AdvancedQueryOnLogOutput(insightconnect_plugin_runtime.Output):
           "order": 4
         },
         "message": {
-          "$ref": "#/definitions/message",
+          "$ref": ["object", "string"],
           "title": "Message",
           "description": "Message",
           "order": 5
@@ -177,47 +177,6 @@ class AdvancedQueryOnLogOutput(insightconnect_plugin_runtime.Output):
             "$ref": "#/definitions/link"
           },
           "order": 6
-        }
-      }
-    },
-    "message": {
-      "type": "object",
-      "title": "message",
-      "properties": {
-        "sourceName": {
-          "type": "string",
-          "title": "Source Name",
-          "order": 1
-        },
-        "eventCode": {
-          "type": "integer",
-          "title": "Event Code",
-          "order": 2
-        },
-        "computerName": {
-          "type": "string",
-          "title": "Computer Name",
-          "order": 3
-        },
-        "sid": {
-          "type": "string",
-          "title": "SID",
-          "order": 4
-        },
-        "isDomainController": {
-          "type": "boolean",
-          "title": "Is Domain Controller",
-          "order": 5
-        },
-        "eventData": {
-          "$ref": "#/definitions/eventData",
-          "title": "Event Data",
-          "order": 6
-        },
-        "timeWritten": {
-          "type": "string",
-          "title": "Time Written",
-          "order": 7
         }
       }
     },
