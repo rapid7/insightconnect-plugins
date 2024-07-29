@@ -4,7 +4,7 @@ from .schema import MonitorAlertsInput, MonitorAlertsOutput, MonitorAlertsState,
 # Custom imports below
 
 from datetime import datetime, timedelta, timezone
-from typing import Dict, Tuple
+from typing import Dict, Tuple, Any
 
 from icon_carbon_black_cloud.util.helper_util import hash_sha1
 from icon_carbon_black_cloud.util.exceptions import RateLimitException, HTTPErrorException
@@ -63,20 +63,24 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             end_time = now.strftime(TIME_FORMAT)
 
             # Check if we have made use of custom config to change the start times from DEFAULT_LOOKBACK
-            alerts_start, observations_start = self._parse_custom_config(custom_config, now, state)
+            alerts_start, observations_start, page_size = self._parse_custom_config(custom_config, now, state)
 
             # Retrieve job ID from last run or trigger a new one
             observation_job_id = state.get(LAST_OBSERVATION_JOB)
             if not observation_job_id:
                 self.logger.info("No observation job ID found in state, triggering a new job...")
-                observation_job_id, state = self.trigger_observation_search_job(observations_start, end_time, state)
+                observation_job_id, state = self.trigger_observation_search_job(
+                    observations_start, end_time, page_size, state
+                )
 
-            alerts, alert_has_more_pages, state = self.get_alerts(alerts_start, end_time, state)
+            alerts, alert_has_more_pages, state = self.get_alerts(alerts_start, end_time, page_size, state)
             alerts_and_observations.extend(alerts)
             alerts_success = True
 
             if observation_job_id:
-                observations, observations_has_more_pages, state = self.get_observations(observation_job_id, state)
+                observations, observations_has_more_pages, state = self.get_observations(
+                    observation_job_id, page_size, state
+                )
                 alerts_and_observations.extend(observations)
             if observations_has_more_pages or alert_has_more_pages:
                 has_more_pages = True
@@ -103,7 +107,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             return alerts_and_observations, state, False, 500, error
 
     def get_alerts(
-        self, start_alert_time: str, end_alert_time: str, state: Dict[str, str]
+        self, start_alert_time: str, page_size: int, end_alert_time: str, state: Dict[str, str]
     ) -> Tuple[list, bool, Dict[str, str]]:
         alerts_has_more_pages = False
         endpoint = f"api/alerts/v7/orgs/{self.connection.org_key}/alerts/_search"
@@ -113,7 +117,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             "time_range": {"start": start_alert_time, "end": end_alert_time},
             "criteria": {},
             "start": "1",
-            "rows": str(PAGE_SIZE),  # max number of results that can be returned
+            "rows": str(page_size),  # max number of results that can be returned
             "sort": [{"field": ALERT_TIME_FIELD, "order": "ASC"}],
         }
         self.logger.info(f"Querying alerts using parameters {payload['time_range']}")
@@ -122,12 +126,13 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         alerts = resp.get("results", [])
         if alerts:
             # Check if we have not got all available alerts otherwise trigger task again to catch up quicker
-            # Our query to CB can return PAGE_SIZE (2.5K) during one time frame, but there could be more available.
+            # Our query to CB can return page_size (custom or 2.5K) during one time frame,
+            # but there could be more available.
             num_found = resp.get("num_found", 0)
-            if num_found > PAGE_SIZE:
+            if num_found > page_size:
                 self.logger.info(
                     f"Have not got all alerts for the searched time period. {num_found} found but "
-                    f"query page size is set to {PAGE_SIZE}. Returning has more pages true..."
+                    f"query page size is set to {page_size}. Returning has more pages true..."
                 )
                 alerts_has_more_pages = True
 
@@ -139,10 +144,12 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         return alerts, alerts_has_more_pages, state
 
-    def trigger_observation_search_job(self, start_time: str, end_time: str, state: Dict[str, str]) -> Tuple[str, Dict]:
+    def trigger_observation_search_job(
+        self, start_time: str, end_time: str, page_size: int, state: Dict[str, str]
+    ) -> Tuple[str, Dict]:
         endpoint = f"api/investigate/v2/orgs/{self.connection.org_key}/observations/search_jobs"
         search_params = {
-            "rows": PAGE_SIZE,
+            "rows": page_size,
             "start": 0,
             "fields": ["*"],
             "criteria": {"observation_type": OBSERVATION_TYPES},
@@ -169,12 +176,12 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         return observation_job_id, state
 
-    def get_observations(self, job_id: str, state: Dict[str, str]) -> Tuple[list, bool, Dict[str, str]]:
+    def get_observations(self, job_id: str, page_size: int, state: Dict[str, str]) -> Tuple[list, bool, Dict[str, str]]:
         observations, has_more_pages = [], False
         endpoint = f"api/investigate/v2/orgs/{self.connection.org_key}/observations/search_jobs/{job_id}/results"
 
         # Strange CB API behaviour, unless rows param is specified it only returns 10 results
-        url = f"{self.connection.base_url}/{endpoint}?rows={PAGE_SIZE}"
+        url = f"{self.connection.base_url}/{endpoint}?rows={page_size}"
         self.logger.info(f"Get observation results from saved ID: {job_id}")
         observation_json = self.connection.request_api(
             url,
@@ -191,7 +198,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 start_observation_time = state.get(LAST_OBSERVATION_TIME)
                 observations, state = self._dedupe_and_get_last_time(observations, state, start_observation_time)
 
-                if observation_json.get("num_found") > PAGE_SIZE:
+                if observation_json.get("num_found") > page_size:
                     self.logger.info("More data is available on the API - setting has_more_pages=True...")
                     has_more_pages = True
             # remove the job ID as this is completed and next run we want to trigger a new one
@@ -248,8 +255,8 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         return deduped_alerts, state
 
     def _parse_custom_config(
-        self, custom_config: Dict[str, str], now: datetime, saved_state: Dict[str, str]
-    ) -> Tuple[str, str]:
+        self, custom_config: Dict[str, Any], now: datetime, saved_state: Dict[str, str]
+    ) -> Tuple[str, str, int]:
         """
         Takes custom config from CPS and allows the specification of a new start time for either alerts or observations.
         :param custom_config: dictionary of values passed from CPS {"last_alert_time": {"date": {..}}..}
@@ -259,6 +266,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         """
         # take a copy of state so this logic will need to happen again if an exception occurs
         state = saved_state.copy()
+
+        # set the page_size from CPS if it exists, otherwise default
+        page_size = custom_config.get("page_size", PAGE_SIZE)
 
         log_msg = ""
         for cb_type_time in [LAST_ALERT_TIME, LAST_OBSERVATION_TIME]:
@@ -288,7 +298,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             f"{log_msg}Applying the following start times: alerts='{alerts_start}' "
             f"and observations='{observation_start}'"
         )
-        return alerts_start, observation_start
+        return alerts_start, observation_start, page_size
 
     def _check_if_job_time_exceeded(self, job_start_time: str, job_id: str) -> bool:
         """
