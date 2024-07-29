@@ -4,6 +4,7 @@ import sys
 import os
 
 import insightconnect_plugin_runtime
+from requests import HTTPError
 
 sys.path.append(os.path.abspath("../"))
 
@@ -40,29 +41,39 @@ class Util:
     @staticmethod
     def mock_request(*args, **kwargs):
         class MockResponse:
-            def __init__(self, status_code: int, filename: str = None):
+            def __init__(self, status_code: int, filename: str = None, url: str = ""):
                 self.status_code = status_code
                 self.text = ""
+                self.url = url
                 if filename:
                     self.text = Util.read_file_to_string(f"responses/{filename}")
 
             def json(self):
                 return json.loads(self.text)
 
+            def text(self):
+                return self.text
+
+            def raise_for_status(self):
+                if self.status_code > 300:
+                    raise HTTPError(f"{self.status_code} Client Error", response=self)
+
         json_data = kwargs.get("json", {})
         params = kwargs.get("params", {})
         files = kwargs.get("files", {})
-
-        if kwargs.get("url") == "https://exampledomain.freshdesk.com/api/v2/ticket_fields":
+        url = kwargs.get("url")
+        method = kwargs.get("method")
+        if url == "https://exampledomain.freshdesk.com/api/v2/search/tickets":
+            if params == {"query": '"group_id:123456789 AND status:99"', "page": 2}:
+                return MockResponse(400, "filter_tickets_error.json.resp")
+            return MockResponse(200, "filter_tickets.json.resp")
+        if url == "https://exampledomain.freshdesk.com/api/v2/ticket_fields":
             return MockResponse(200, "get_ticket_fields.json.resp")
-        if kwargs.get("url") == "https://exampledomain.freshdesk.com/api/v2/tickets/404":
+        if url == "https://exampledomain.freshdesk.com/api/v2/tickets/404":
             return MockResponse(404, "")
-        if kwargs.get("url").startswith("https://exampledomain.freshdesk.com/api/v2/tickets/113"):
+        if url.startswith("https://exampledomain.freshdesk.com/api/v2/tickets/113"):
             return MockResponse(200, "get_ticket_by_id.json.resp")
-        if (
-            kwargs.get("url") == ("https://exampledomain.freshdesk.com/api/v2/tickets")
-            and kwargs.get("method") == "GET"
-        ):
+        if url == ("https://exampledomain.freshdesk.com/api/v2/tickets") and method == "GET":
             if params.get("company_id") == "404":
                 return MockResponse(400, "get_tickets_invalid_company_id.json.resp")
             elif params:
