@@ -3,12 +3,16 @@
 FreshDesk is an online cloud-based customer service software providing help desk support with all smart automations to get things done faster
 
 # Key Features
-  
-*This plugin does not contain any key features.*
+
+* Create and update FreshDesk ticket
+* Get list of FreshDesk tickets
+* Get ticket by ID
 
 # Requirements
-  
-*This plugin does not contain any requirements.*
+
+* [FreshDesk API Key](https://support.freshdesk.com/en/support/solutions/articles/215517-how-to-find-your-api-key)
+* FreshDesk domain name
+
 
 # Supported Product Versions
 
@@ -18,7 +22,7 @@ FreshDesk is an online cloud-based customer service software providing help desk
 
 ## Setup
 
-The connection configuration accepts the following parameters:  
+The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -193,7 +197,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|results|[]filteredTicket|False|Filtered tickets. The number of objects returned per page is 30|[{"cc_emails": ["clark.kent@kryptonspace.com"], "fwd_emails": ["clark.kent@kryptonspace.com"], "reply_cc_emails": ["clark.kent@kryptonspace.com"], "fr_escalated": false, "spam": false, "email_config_id": 17, "group_id": 156, "priority": 3, "requester_id": 6007738334, "responder_id": 6001263404, "source": 2, "company_id": 2, "status": 2, "subject": "Sample Title", "to_emails": ["clark.kent@kryptonspace.com"], "product_id": 1, "id": 47, "type": "Incident", "due_by": "2016-02-23T16:00:00Z", "fr_due_by": "2016-02-22T17:00:00Z", "is_escalated": true, "description": "<div>Sample description</div>", "description_text": "Sample description", "created_at": "2016-02-20T09:16:58Z", "updated_at": "2016-02-23T16:14:57Z", "custom_fields": {"my_key": "my_value"}}]|
+|results|[]filteredTicket|False|Filtered tickets. The number of objects returned per page is 30|[{"cc_emails": ["clark.kent@kryptonspace.com"], "fwd_emails": ["clark.kent@kryptonspace.com"], "reply_cc_emails": ["clark.kent@kryptonspace.com"], "fr_escalated": False, "spam": False, "email_config_id": 17, "group_id": 156, "priority": 3, "requester_id": 6007738334, "responder_id": 6001263404, "source": 2, "company_id": 2, "status": 2, "subject": "Sample Title", "to_emails": ["clark.kent@kryptonspace.com"], "product_id": 1, "id": 47, "type": "Incident", "due_by": "2016-02-23T16:00:00Z", "fr_due_by": "2016-02-22T17:00:00Z", "is_escalated": True, "description": "<div>Sample description</div>", "description_text": "Sample description", "created_at": "2016-02-20T09:16:58Z", "updated_at": "2016-02-23T16:14:57Z", "custom_fields": {"my_key": "my_value"}}]|
 |total|integer|False|Count of filtered tickets|10|
   
 Example output:
@@ -410,7 +414,6 @@ This action is used to update a FreshDesk ticket
 |productId|integer|None|False|ID of the product to which the ticket is associated. It will be ignored if the emailConfigId attribute is set in the request|None|103000000638|None|None|
 |relatedTicketIds|[]integer|None|False|List of Ticket IDs which needs to be linked to the Tracker being created. To use this parameter you have to enable `Linked tickets` in Admin > Advanced Ticketing menu|None|[21, 43]|None|None|
 |requesterId|integer|None|False|User ID of the requester. For existing contacts, the requesterId can be passed instead of the requester's email|None|103021764889|None|None|
-|responderId|integer|None|False|User ID of the responder. For existing contacts, the requesterId can be passed instead of the requester's email|None|103021764889|None|None|
 |source|string|None|False|The channel through which the ticket was created|None|Portal|None|None|
 |status|string|None|False|Status of the ticket|None|Open|None|None|
 |subject|string|None|False|Subject of the ticket|None|Example Subject|None|None|
@@ -451,7 +454,6 @@ Example input:
     43
   ],
   "requesterId": 103021764889,
-  "responderId": 103021764889,
   "source": "Portal",
   "status": "Open",
   "subject": "Example Subject",
@@ -684,17 +686,29 @@ Example output:
 
 
 ## Troubleshooting
-  
-*This plugin does not contain a troubleshooting.*
+
+**Filter Tickets**
+1. Archived tickets will not be included in the results
+2. Query can be framed using the name of the ticket fields, which can be obtained from Ticket Fields endpoint. Ticket Fields are case sensitive
+3. Query can have up to 512 characters
+4. Logical operators AND, OR along with parentheses () can be used to group conditions
+5. Relational operators greater than or equal to :> and less than or equal to :< can be used along with date fields and numeric fields
+6. Input for date fields should be in UTC Format
+7. The number of objects returned per page is 30 also the total count of the results will be returned along with the result
+8. To scroll through the pages add page parameter to the url. The page number starts with 1 and should not exceed 10
+9. To filter for fields with no values assigned, use the null keyword
+10. Please note that the updates will take a few minutes to get indexed, after which it will be available through API
 
 # Version History
-  
-*This plugin does not contain a version history.*
+
+* 1.2.0 - Update `Update Ticket` to include `Responder ID` input
+* 1.1.0 - Update `Create Ticket` to include `Responder ID` input. Add `Filter Tickets` action to retrieve tickets via additional filters
+* 1.0.0 - Initial plugin - Actions: `Create Ticket`, `Update Ticket`, `Get Tickets`, `Get Ticket by ID`
 
 # Links
-  
-*This plugin does not contain any links.*
+
+* [FreshDesk](https://freshdesk.com/)
 
 ## References
-  
-*This plugin does not contain any references.*
+
+* [FreshDesk](https://freshdesk.com/)
