@@ -4,7 +4,7 @@ products: [insightconnect]
 name: bitwarden
 title: Bitwarden
 description: Bitwarden is an integrated open source password management solution for individuals, teams, and business organizations
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: rapid7
 cloud_ready: true
@@ -14,6 +14,21 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/bitwarden
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://bitwarden.com/
+key_features:
+  - Retrieve a Member
+  - Update a Member
+  - Delete a Member
+  - Retrieve a Member's Group IDs
+  - Update a Member's Groups
+  - List All Members
+  - Create a Member
+  - Re-invite a Member
+  - List All Groups
+  - List All Collections
+  - List Events
+requirements:
+  - Bitwarden Client ID
+  - Bitwarden Client Secret
 tags:
 - bitwarden
 - api
@@ -23,6 +38,19 @@ hub_tags:
   use_cases: [credential_management, data_utility]
   keywords: [bitwarden, api, access_control, password, cloud_enabled]
   features: []
+sdk:
+  type: slim
+  version: 6.0.1
+  user: nobody
+connection_version: 1
+links:
+  - "[Bitwarden](https://bitwarden.com/)"
+references:
+  - "[Bitwarden](https://bitwarden.com/)"
+troubleshooting: "[Bitwarden API Key Documentation](https://bitwarden.com/help/public-api/#authentication). Access to the Bitwarden Public API is available to customers on the Enterprise or Teams organizations plans."
+version_history:
+  - "1.0.1 - Fix schema output type for `list all members` action."
+  - "1.0.0 - Initial plugin - Actions: `Retrieve a Member`, `Update a Member`, `Delete a Member`, `Retrieve a Member's Group Ids`, `Update a Member's Groups`, `List All Members`, `Create a Member`, `Re-invite a Member`, `List All Groups`, `List All Collections`, `List Events`."
 
 types:
   group:
@@ -94,6 +122,7 @@ types:
         - 1-Admin
         - 2-User
         - 3-Manager
+        - 4-Custom
     accessAll:
       title: Access All
       description: Determines if this member can access all collections within the organization, or only the associated collections. If set to 'true', this option overrides any collection assignments
@@ -250,7 +279,7 @@ connection:
 actions:
   retrieveMember:
     title: Retrieve a Member
-    description: Retrieves the details of an existing member of the organization. You need only supply the unique member identifier that was returned upon member creation
+    description: Retrieve the details of an existing member of the organization. You need only supply the unique member identifier that was returned upon member creation
     input:
       id:
         title: Id
@@ -286,6 +315,7 @@ actions:
           - 1-Admin
           - 2-User
           - 3-Manager
+          - 4-Custom
       accessAll:
         title: Access All
         description: Determines if this member can access all collections within the organization, or only the associated collections. If set to 'true', this option overrides any collection assignments
@@ -330,7 +360,7 @@ actions:
         example: true
   retrieveMembersGroupIds:
     title: Retrieve a Member's Group Ids
-    description: Retrieves the unique identifiers for all groups that are associated with this member. You need only supply the unique member identifier that was returned upon member creation
+    description: Retrieve the unique identifiers for all groups that are associated with this member. You need only supply the unique member identifier that was returned upon member creation
     input:
       id:
         title: ID
@@ -380,7 +410,7 @@ actions:
         example: []
   createMember:
     title: Create a Member
-    description: Creates a new member object by inviting a user to the organization
+    description: Create a new member object by inviting a user to the organization
     input:
       type:
         title: Type
@@ -393,6 +423,7 @@ actions:
           - 1-Admin
           - 2-User
           - 3-Manager
+          - 4-Custom
       accessAll:
         title: Access All
         description: Determines if this member can access all collections within the organization, or only the associated collections. If set to 'true', this option overrides any collection assignments
@@ -453,7 +484,7 @@ actions:
         example: []
   listAllCollections:
     title: List All Collections
-    description: Returns a list of your organization's collections. Collection objects listed in this call do not include information about their associated groups
+    description: Return a list of your organization's collections. Collection objects listed in this call do not include information about their associated groups
     output:
       collections:
         title: Collections

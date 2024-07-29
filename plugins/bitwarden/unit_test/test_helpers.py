@@ -1,10 +1,8 @@
 import sys
 import os
 from unittest import TestCase
-from unittest.mock import patch
 from parameterized import parameterized
 
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_bitwarden.util.helpers import clean_dict, switch_member_status_and_type
 from icon_bitwarden.util.constants import ValueType

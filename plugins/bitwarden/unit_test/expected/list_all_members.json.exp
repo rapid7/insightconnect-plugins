@@ -8,7 +8,7 @@
       "email": "user@example.com",
       "twoFactorEnabled": false,
       "status": "2-Confirmed",
-      "type": "0-Owner",
+      "type": "4-Custom",
       "accessAll": true,
       "resetPasswordEnrolled": false
     }

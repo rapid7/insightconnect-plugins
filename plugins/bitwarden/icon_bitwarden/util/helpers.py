@@ -3,7 +3,7 @@ from icon_bitwarden.util.constants import ValueType
 
 available_statuses = {"-1-Revoked": -1, "0-Invited": 0, "1-Accepted": 1, "2-Confirmed": 2}
 
-available_types = {"0-Owner": 0, "1-Admin": 1, "2-User": 2, "3-Manager": 3}
+available_types = {"0-Owner": 0, "1-Admin": 1, "2-User": 2, "3-Manager": 3, "4-Custom": 4}
 
 
 def switch_member_status_and_type(member: dict, to_type: str) -> dict:
