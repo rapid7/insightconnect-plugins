@@ -182,7 +182,7 @@ class AdvancedQueryOnLogSetOutput(insightconnect_plugin_runtime.Output):
           "order": 4
         },
         "message": {
-          "$ref": ["object", "string"],
+          "type": ["object", "string"],
           "title": "Message",
           "description": "Message",
           "order": 5

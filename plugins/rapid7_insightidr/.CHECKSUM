@@ -9,11 +9,11 @@
 		},
 		{
 			"identifier": "advanced_query_on_log/schema.py",
-			"hash": "47461eb19fd3c3e3cb284b9c7b6eae89"
+			"hash": "c25673288c3406030e64dc6f3451821d"
 		},
 		{
 			"identifier": "advanced_query_on_log_set/schema.py",
-			"hash": "7bcabc86b10fd88536170eb538b2bfd5"
+			"hash": "ff689fccb0ed297d1c5f7f45877fd138"
 		},
 		{
 			"identifier": "assign_user_to_investigation/schema.py",
