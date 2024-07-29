@@ -25,6 +25,7 @@ LAST_OBSERVATION_JOB_TIME = "last_observation_job_time"
 
 # CB can return 10K per API and suggest that if more than this is returned to then query from last event time.
 # To prevent overloading IDR/PIF drop this limit to 2.5k on each endpoint.
+# This value can also be customised via CPS with the page_size property.
 PAGE_SIZE = 2500
 
 DEFAULT_LOOKBACK = 5  # first look back time in minutes
@@ -107,7 +108,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             return alerts_and_observations, state, False, 500, error
 
     def get_alerts(
-        self, start_alert_time: str, page_size: int, end_alert_time: str, state: Dict[str, str]
+        self, start_alert_time: str, end_alert_time: str, page_size: int, state: Dict[str, str]
     ) -> Tuple[list, bool, Dict[str, str]]:
         alerts_has_more_pages = False
         endpoint = f"api/alerts/v7/orgs/{self.connection.org_key}/alerts/_search"
@@ -258,7 +259,9 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         self, custom_config: Dict[str, Any], now: datetime, saved_state: Dict[str, str]
     ) -> Tuple[str, str, int]:
         """
-        Takes custom config from CPS and allows the specification of a new start time for either alerts or observations.
+        Takes custom config from CPS and allows the specification of a new start time for either alerts or observations,
+        and allows the page_size to be customised.
+
         :param custom_config: dictionary of values passed from CPS {"last_alert_time": {"date": {..}}..}
         :param now: current time to determine the start time for each CB type.
         :param saved_state: dictionary of state values held.
@@ -267,7 +270,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         # take a copy of state so this logic will need to happen again if an exception occurs
         state = saved_state.copy()
 
-        # set the page_size from CPS if it exists, otherwise default
+        # set the page_size from CPS if it exists, otherwise default to PAGE_SIZE
         page_size = custom_config.get("page_size", PAGE_SIZE)
 
         log_msg = ""
@@ -296,7 +299,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         self.logger.info(
             f"{log_msg}Applying the following start times: alerts='{alerts_start}' "
-            f"and observations='{observation_start}'"
+            f"and observations='{observation_start}'. Max pages: page_size='{page_size}'."
         )
         return alerts_start, observation_start, page_size
 
