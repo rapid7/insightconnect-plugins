@@ -21,7 +21,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             os.makedirs(key_file)
             os.chmod(key_file, 0o700)
         key_file_path = path.join(key_file, "id_rsa")
-        with open(key_file_path, "w+") as private_key:
+        with open(key_file_path, "w+", encoding="utf-8") as private_key:
             private_key.write(base64.b64decode(params.get(Input.KEY).get("privateKey")).decode("utf-8"))
         os.chmod(key_file_path, 0o600)
         self.logger.info("Establishing connection")
