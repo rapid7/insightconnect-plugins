@@ -22,7 +22,7 @@ FreshDesk is an online cloud-based customer service software providing help desk
 
 ## Setup
 
-The connection configuration accepts the following parameters:
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -414,6 +414,7 @@ This action is used to update a FreshDesk ticket
 |productId|integer|None|False|ID of the product to which the ticket is associated. It will be ignored if the emailConfigId attribute is set in the request|None|103000000638|None|None|
 |relatedTicketIds|[]integer|None|False|List of Ticket IDs which needs to be linked to the Tracker being created. To use this parameter you have to enable `Linked tickets` in Admin > Advanced Ticketing menu|None|[21, 43]|None|None|
 |requesterId|integer|None|False|User ID of the requester. For existing contacts, the requesterId can be passed instead of the requester's email|None|103021764889|None|None|
+|responderId|integer|None|False|User ID of the responder. For existing contacts, the responderId can be passed instead of the responders's email|None|103021764889|None|None|
 |source|string|None|False|The channel through which the ticket was created|None|Portal|None|None|
 |status|string|None|False|Status of the ticket|None|Open|None|None|
 |subject|string|None|False|Subject of the ticket|None|Example Subject|None|None|
@@ -454,6 +455,7 @@ Example input:
     43
   ],
   "requesterId": 103021764889,
+  "responderId": 103021764889,
   "source": "Portal",
   "status": "Open",
   "subject": "Example Subject",
@@ -701,6 +703,7 @@ Example output:
 
 # Version History
 
+* 1.2.0 - Update `Update Ticket` to include `Responder ID` input
 * 1.1.0 - Update `Create Ticket` to include `Responder ID` input. Add `Filter Tickets` action to retrieve tickets via additional filters
 * 1.0.0 - Initial plugin - Actions: `Create Ticket`, `Update Ticket`, `Get Tickets`, `Get Ticket by ID`
 

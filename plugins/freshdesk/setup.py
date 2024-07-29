@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="freshdesk-rapid7-plugin",
-      version="1.1.0",
+      version="1.2.0",
       description="FreshDesk is an online cloud-based customer service software providing help desk support with all smart automations to get things done faster",
       author="rapid7",
       author_email="",
