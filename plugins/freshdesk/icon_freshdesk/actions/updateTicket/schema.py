@@ -25,6 +25,7 @@ class Input:
     PRODUCTID = "productId"
     RELATEDTICKETIDS = "relatedTicketIds"
     REQUESTERID = "requesterId"
+    RESPONDERID = "responderId"
     SOURCE = "source"
     STATUS = "status"
     SUBJECT = "subject"
@@ -52,25 +53,25 @@ class UpdateTicketInput(insightconnect_plugin_runtime.Input):
       "items": {
         "$ref": "#/definitions/attachmentInput"
       },
-      "order": 13
+      "order": 14
     },
     "companyId": {
       "type": "integer",
       "title": "Company ID",
       "description": "Company ID of the requester. This attribute can only be set if the Multiple Companies feature is enabled (Estate plan and above)",
-      "order": 22
+      "order": 23
     },
     "customFields": {
       "type": "object",
       "title": "Custom Fields",
       "description": "Key value pairs containing the names and values of custom fields. Read more at https://support.freshdesk.com/support/solutions/articles/216548",
-      "order": 14
+      "order": 15
     },
     "description": {
       "type": "string",
       "title": "Description",
       "description": "HTML content of the ticket",
-      "order": 12
+      "order": 13
     },
     "dueBy": {
       "type": "string",
@@ -78,19 +79,19 @@ class UpdateTicketInput(insightconnect_plugin_runtime.Input):
       "displayType": "date",
       "title": "Due By",
       "description": "Timestamp that denotes when the ticket is due to be resolved",
-      "order": 15
+      "order": 16
     },
     "email": {
       "type": "string",
       "title": "Email",
       "description": "Email address of the requester. If no contact exists with this email address in FreshDesk, it will be added as a new contact",
-      "order": 4
+      "order": 5
     },
     "emailConfigId": {
       "type": "integer",
       "title": "Email Config ID",
       "description": "ID of email config which is used for this ticket. If productId is given and emailConfigId is not given, product's primary emailConfigId will be set",
-      "order": 16
+      "order": 17
     },
     "frDueBy": {
       "type": "string",
@@ -98,25 +99,25 @@ class UpdateTicketInput(insightconnect_plugin_runtime.Input):
       "displayType": "date",
       "title": "First Response Due By",
       "description": "Timestamp that denotes when the first response is due",
-      "order": 17
+      "order": 18
     },
     "groupId": {
       "type": "integer",
       "title": "Group ID",
       "description": "ID of the group to which the ticket has been assigned. The default value is the ID of the group that is associated with the given emailConfigId",
-      "order": 18
+      "order": 19
     },
     "internalAgentId": {
       "type": "integer",
       "title": "Internal Agent ID",
       "description": "ID of the internal agent which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu",
-      "order": 23
+      "order": 24
     },
     "internalGroupId": {
       "type": "integer",
       "title": "Internal Group ID",
       "description": "ID of the internal group to which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu",
-      "order": 24
+      "order": 25
     },
     "name": {
       "type": "string",
@@ -128,19 +129,19 @@ class UpdateTicketInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Phone",
       "description": "Phone number of the requester. If no contact exists with this phone number in FreshDesk, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory",
-      "order": 5
+      "order": 6
     },
     "priority": {
       "type": "string",
       "title": "Priority",
       "description": "Priority of the ticket",
-      "order": 11
+      "order": 12
     },
     "productId": {
       "type": "integer",
       "title": "Product ID",
       "description": "ID of the product to which the ticket is associated. It will be ignored if the emailConfigId attribute is set in the request",
-      "order": 19
+      "order": 20
     },
     "relatedTicketIds": {
       "type": "array",
@@ -149,7 +150,7 @@ class UpdateTicketInput(insightconnect_plugin_runtime.Input):
       "items": {
         "type": "integer"
       },
-      "order": 25
+      "order": 26
     },
     "requesterId": {
       "type": "integer",
@@ -157,23 +158,29 @@ class UpdateTicketInput(insightconnect_plugin_runtime.Input):
       "description": "User ID of the requester. For existing contacts, the requesterId can be passed instead of the requester's email",
       "order": 3
     },
+    "responderId": {
+      "type": "integer",
+      "title": "Responder ID",
+      "description": "User ID of the responder. For existing contacts, the requesterId can be passed instead of the requester's email",
+      "order": 4
+    },
     "source": {
       "type": "string",
       "title": "Source",
       "description": "The channel through which the ticket was created",
-      "order": 20
+      "order": 21
     },
     "status": {
       "type": "string",
       "title": "Status",
       "description": "Status of the ticket",
-      "order": 10
+      "order": 11
     },
     "subject": {
       "type": "string",
       "title": "Subject",
       "description": "Subject of the ticket",
-      "order": 8
+      "order": 9
     },
     "tags": {
       "type": "array",
@@ -182,7 +189,7 @@ class UpdateTicketInput(insightconnect_plugin_runtime.Input):
       "items": {
         "type": "string"
       },
-      "order": 21
+      "order": 22
     },
     "ticketId": {
       "type": "integer",
@@ -194,19 +201,19 @@ class UpdateTicketInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Twitter ID",
       "description": "Twitter handle of the requester. If no contact exists with this handle in FreshDesk, it will be added as a new contact",
-      "order": 6
+      "order": 7
     },
     "type": {
       "type": "string",
       "title": "Type",
       "description": "Helps categorize the ticket according to the different kinds of issues your support team deals with",
-      "order": 9
+      "order": 10
     },
     "uniqueExternalId": {
       "type": "string",
       "title": "Unique External ID",
       "description": "External ID of the requester. If no contact exists with this external ID in FreshDesk, they will be added as a new contact",
-      "order": 7
+      "order": 8
     }
   },
   "required": [

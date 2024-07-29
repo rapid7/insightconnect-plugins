@@ -701,6 +701,7 @@ Example output:
 
 # Version History
 
+* 1.2.0 - Update `Update Ticket` to include `Responder ID` input
 * 1.1.0 - Update `Create Ticket` to include `Responder ID` input. Add `Filter Tickets` action to retrieve tickets via additional filters
 * 1.0.0 - Initial plugin - Actions: `Create Ticket`, `Update Ticket`, `Get Tickets`, `Get Ticket by ID`
 
