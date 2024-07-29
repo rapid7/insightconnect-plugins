@@ -6,13 +6,13 @@ title: Python 3 Script
 vendor: rapid7
 support: rapid7
 status: []
-description: Python is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.19 and its standard library as well as the following 3rd party libraries
-version: 4.0.10
+description: '[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.9.19 and its standard library as well as the following 3rd party libraries:'
+version: 5.0.0
 connection_version: 4
 supported_versions: ["Python 3.9.19"]
 sdk:
   type: slim
-  version: 5.4.5
+  version: 6.0.1
   user: root
   packages:
     - libxslt-dev
@@ -20,6 +20,8 @@ sdk:
     - gcc
     - g++
 enable_cache: true
+requirements: 'This plugin does not contain any requirements'
+troubleshooting: 'Some third-party modules defined in the Modules connection input (such as pandas) can take a long time to install. If installation fails, try increasing the Timeout connection input to 900 (15 minutes)'
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/python_3_script
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -38,6 +40,7 @@ references: ["[Python 3 Language Reference](https://docs.python.org/3/reference/
 links:
   - '[Python](https://www.python.org/)'
 version_history:
+  - '5.0.0 - Updated SDK to the latest version | Removing records as its not maintained | Replacing maya with arrow (maya not maintained)'
   - '4.0.10 - Updated the SDK to the latest version | Updated Python version to `3.9.19` | Fixed issue with invalid unicode character'
   - '4.0.9 - Updated the SDK to the latest version to address memory usage issues'
   - '4.0.8 - Updated the SDK to latest version | Fix issue where input argument was too long'
