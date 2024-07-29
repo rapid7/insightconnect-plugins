@@ -952,7 +952,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|log|logsets_info|True|Requested log|{'log': {'id': '0b9a242d-d2fb-4e42-8656-eb5ff64d652f', 'name': 'Windows Defender', 'tokens': ['bc38a911-65f1-4755-cca3-a330a6336b3a'], 'structures': ['1238a911-65f1-4755-cca3-a330a6336b3a'], 'user_data': {'platform_managed': 'true'}, 'source_type': 'token', 'token_seed': None, 'retention_period': 'default', 'links': [{'rel': 'Related', 'href': 'https://example.com'}], 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a', 'logsets_info': [{'id': 'bc38a911-65f1-4755-cca3-a330a6336b3a', 'name': 'Unparsed Data', 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a', 'links': [{'rel': 'Self', 'href': 'https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85'}]}]}}|
+|log|logsets_info|True|Requested log|{'id': '0b9a242d-d2fb-4e42-8656-eb5ff64d652f', 'name': 'Windows Defender', 'tokens': ['bc38a911-65f1-4755-cca3-a330a6336b3a'], 'structures': ['1238a911-65f1-4755-cca3-a330a6336b3a'], 'user_data': {'platform_managed': 'true'}, 'source_type': 'token', 'token_seed': None, 'retention_period': 'default', 'links': [{'rel': 'Related', 'href': 'https://example.com'}], 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a', 'logsets_info': [{'id': 'bc38a911-65f1-4755-cca3-a330a6336b3a', 'name': 'Unparsed Data', 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a', 'links': [{'rel': 'Self', 'href': 'https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85'}]}]}|
   
 Example output:
 
@@ -1413,7 +1413,7 @@ This action is used to request used to list all logs for an account
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|logs|logsets_info|True|All logs|{'logs': [{'log': {'id': '0b9a242d-d2fb-4e42-8656-eb5ff64d652f', 'name': 'Windows Defender', 'tokens': ['bc38a911-65f1-4755-cca3-a330a6336b3a'], 'structures': ['1238a911-65f1-4755-cca3-a330a6336b3a'], 'user_data': {'platform_managed': 'true'}, 'source_type': 'token', 'token_seed': None, 'retention_period': 'default', 'links': [{'rel': 'Related', 'href': 'https://example.com'}], 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a', 'logsets_info': [{'id': 'bc38a911-65f1-4755-cca3-a330a6336b3a', 'name': 'Unparsed Data', 'rrn': 'rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a', 'links': [{'rel': 'Self', 'href': 'https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85'}]}]}}]}|
+|logs|logsets_info|True|All logs|[{"log": {"id": "0b9a242d-d2fb-4e42-8656-eb5ff64d652f", "name": "Windows Defender", "tokens": ["bc38a911-65f1-4755-cca3-a330a6336b3a"], "structures": ["1238a911-65f1-4755-cca3-a330a6336b3a"], "user_data": {"platform_managed": "true"}, "source_type": "token", "token_seed": None, "retention_period": "default", "links": [{"rel": "Related", "href": "https://example.com"}], "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:log:bc38a911-65f1-4755-cca3-a330a6336b3a", "logsets_info": [{"id": "bc38a911-65f1-4755-cca3-a330a6336b3a", "name": "Unparsed Data", "rrn": "rrn:logsearch:us:bc38a911-65f1-4755-cca3-a330a6336b3a:logset:bc38a911-65f1-4755-cca3-a330a6336b3a", "links": [{"rel": "Self", "href": "https://example.com/3e966a63-bf3a-4a3c-8903-979c7e90ce85"}]}]}}]|
   
 Example output:
 
@@ -3388,10 +3388,11 @@ Example output:
 
 ## Troubleshooting
   
-*There is no troubleshooting for this plugin.*
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 10.3.1 - `Advanced Query On Log / Log Set` - Fixed issue where results >500 returned none | Update SDK
 * 10.3.0 - New Action Added: Update Alert
 * 10.2.0 - New Trigger Added: `Get New Investigations`
 * 10.1.1 - Updated query schemas to allow message to be an object or string | Updated SDK
