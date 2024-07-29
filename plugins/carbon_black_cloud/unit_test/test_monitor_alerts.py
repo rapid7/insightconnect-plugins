@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from parameterized import parameterized
 from requests import ConnectTimeout
 from unittest import TestCase
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, patch, Mock
 from typing import Dict, Tuple, Any
 
 from icon_carbon_black_cloud.tasks import MonitorAlerts
@@ -362,3 +362,87 @@ class TestMonitorAlerts(TestCase):
 
         self.assertEqual(exp_dates[LAST_OBSERVATION_TIME], requested_observation_time)
         self.assertEqual(exp_dates[LAST_ALERT_TIME], requested_alert_time)
+
+    @parameterized.expand(
+        [
+            [
+                {},  # first run but using forced minutes lookback of 10 minutes and 20 minutes
+                {LAST_OBSERVATION_TIME: {"minutes": 10}, LAST_ALERT_TIME: {"minutes": 20}},
+                {
+                    LAST_OBSERVATION_TIME: "2024-04-25T15:35:00.000000Z",
+                    LAST_ALERT_TIME: "2024-04-25T15:25:00.000000Z",
+                    "page_size": 2
+                },
+            ],
+            [
+                # now = 2024-04-25T16:00:00.000000Z but task - 15 minutes -> 2024-04-25T15:45:00.000000Z
+                # subsequent run with the both times out of limit of overridden to specific dates
+                {LAST_OBSERVATION_TIME: "2024-04-15T20:45:30.123Z", LAST_ALERT_TIME: "2024-04-19T15:15:35.123Z"},
+                {
+                    f"max_{LAST_OBSERVATION_TIME}": {
+                        "year": 2024,
+                        "month": 4,
+                        "day": 25,
+                        "hour": 12,
+                        "minute": 00,
+                        "second": 35,
+                    },
+                    f"max_{LAST_ALERT_TIME}": {
+                        "year": 2024,
+                        "month": 4,
+                        "day": 20,
+                        "hour": 10,
+                        "minute": 45,
+                        "second": 55,
+                    },
+                    "page_size": 7000,
+                    "debug": True,
+                },
+                {
+                    LAST_OBSERVATION_TIME: "2024-04-25T12:00:35.000000Z",
+                    LAST_ALERT_TIME: "2024-04-20T10:45:55.000000Z",
+                    "page_size": 7000,
+                    "debug": True,
+                },
+            ],
+        ],
+    )
+    @patch("logging.Logger.info")
+    def test_custom_config_flags(
+        self,
+        saved_state: Dict[str, str],
+        cps_config: Dict[str, Any],
+        exp_values: Dict[str, str],
+        mock_logger: Mock,
+        mock_req: MagicMock,
+        _mock_date: MagicMock,
+    ):
+        mock_req.side_effect = [
+            mock_conditions(200, file_name) for file_name in ["observation_id"] + (["empty_response"] * 2)
+        ]
+
+        _, _, _, _, _ = self.task.run(state=saved_state, custom_config=cps_config)  # not concerned about output
+
+        # check we called the request with the correct parameters passed from CPS
+        requested_observation_time = mock_req.call_args_list[0].kwargs.get("json").get("time_range").get("start")
+        requested_observation_rows = mock_req.call_args_list[0].kwargs.get("json").get("rows")
+
+        requested_alert_time = mock_req.call_args_list[1].kwargs.get("json").get("time_range").get("start")
+        requested_alert_rows = mock_req.call_args_list[1].kwargs.get("json").get("rows")
+
+        trigger_observation_search_rows = mock_req.call_args_list[2].kwargs.get("url").split("=")[1]
+
+        self.assertEqual(exp_values[LAST_OBSERVATION_TIME], requested_observation_time)
+        self.assertEqual(exp_values[LAST_ALERT_TIME], requested_alert_time)
+
+        self.assertEqual(exp_values["page_size"], requested_observation_rows)
+        self.assertEqual(str(exp_values["page_size"]), requested_alert_rows)  # converted to string in the payload
+        self.assertEqual(
+            str(exp_values["page_size"]), trigger_observation_search_rows
+        )  # formatted to string in the url
+
+        if cps_config.get("debug", None):
+            # check that we have logged request times for each call if debug is enabled
+            self.assertIn("Time elapsed for request", mock_logger.call_args_list[5][0][0])
+            self.assertIn("Time elapsed for request", mock_logger.call_args_list[8][0][0])
+            self.assertIn("Time elapsed for request", mock_logger.call_args_list[12][0][0])
