@@ -44,6 +44,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
     def run(self, params={}, state={}, custom_config={}):  # pylint: disable=unused-argument # noqa: MC0001
         alerts_and_observations, has_more_pages, observations_has_more_pages, alerts_success = [], False, False, False
+
         try:
             rate_limited = state.get(RATE_LIMITED)
             now_time = self._get_current_time()
@@ -64,23 +65,23 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             end_time = now.strftime(TIME_FORMAT)
 
             # Check if we have made use of custom config to change the start times from DEFAULT_LOOKBACK
-            alerts_start, observations_start, page_size = self._parse_custom_config(custom_config, now, state)
+            alerts_start, observations_start, page_size, debug = self._parse_custom_config(custom_config, now, state)
 
             # Retrieve job ID from last run or trigger a new one
             observation_job_id = state.get(LAST_OBSERVATION_JOB)
             if not observation_job_id:
                 self.logger.info("No observation job ID found in state, triggering a new job...")
                 observation_job_id, state = self.trigger_observation_search_job(
-                    observations_start, end_time, page_size, state
+                    observations_start, end_time, page_size, debug, state
                 )
 
-            alerts, alert_has_more_pages, state = self.get_alerts(alerts_start, end_time, page_size, state)
+            alerts, alert_has_more_pages, state = self.get_alerts(alerts_start, end_time, page_size, debug, state)
             alerts_and_observations.extend(alerts)
             alerts_success = True
 
             if observation_job_id:
                 observations, observations_has_more_pages, state = self.get_observations(
-                    observation_job_id, page_size, state
+                    observation_job_id, page_size, debug, state
                 )
                 alerts_and_observations.extend(observations)
             if observations_has_more_pages or alert_has_more_pages:
@@ -108,7 +109,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             return alerts_and_observations, state, False, 500, error
 
     def get_alerts(
-        self, start_alert_time: str, end_alert_time: str, page_size: int, state: Dict[str, str]
+        self, start_alert_time: str, end_alert_time: str, page_size: int, debug: bool, state: Dict[str, str]
     ) -> Tuple[list, bool, Dict[str, str]]:
         alerts_has_more_pages = False
         endpoint = f"api/alerts/v7/orgs/{self.connection.org_key}/alerts/_search"
@@ -122,7 +123,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             "sort": [{"field": ALERT_TIME_FIELD, "order": "ASC"}],
         }
         self.logger.info(f"Querying alerts using parameters {payload['time_range']}")
-        resp = self.connection.request_api(url, payload)
+        resp = self.connection.request_api(url, payload, debug=debug)
 
         alerts = resp.get("results", [])
         if alerts:
@@ -146,7 +147,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         return alerts, alerts_has_more_pages, state
 
     def trigger_observation_search_job(
-        self, start_time: str, end_time: str, page_size: int, state: Dict[str, str]
+        self, start_time: str, end_time: str, page_size: int, debug: bool, state: Dict[str, str]
     ) -> Tuple[str, Dict]:
         endpoint = f"api/investigate/v2/orgs/{self.connection.org_key}/observations/search_jobs"
         search_params = {
@@ -159,7 +160,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         }
         url = f"{self.connection.base_url}/{endpoint}"
         self.logger.info(f"Triggering observation search using parameters {search_params['time_range']}")
-        observation_job_id = self.connection.request_api(url, search_params).get("job_id")
+        observation_job_id = self.connection.request_api(url, search_params, debug=debug).get("job_id")
 
         if observation_job_id:
             self.logger.info(
@@ -177,17 +178,16 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         return observation_job_id, state
 
-    def get_observations(self, job_id: str, page_size: int, state: Dict[str, str]) -> Tuple[list, bool, Dict[str, str]]:
+    def get_observations(
+        self, job_id: str, page_size: int, debug: bool, state: Dict[str, str]
+    ) -> Tuple[list, bool, Dict[str, str]]:
         observations, has_more_pages = [], False
         endpoint = f"api/investigate/v2/orgs/{self.connection.org_key}/observations/search_jobs/{job_id}/results"
 
         # Strange CB API behaviour, unless rows param is specified it only returns 10 results
         url = f"{self.connection.base_url}/{endpoint}?rows={page_size}"
         self.logger.info(f"Get observation results from saved ID: {job_id}")
-        observation_json = self.connection.request_api(
-            url,
-            request_method="GET",
-        )
+        observation_json = self.connection.request_api(url, request_method="GET", debug=debug)
         job_time_exceeded = self._check_if_job_time_exceeded(state.get(LAST_OBSERVATION_JOB_TIME), job_id)
         job_completed = observation_json.get("contacted") == observation_json.get("completed")
         if job_completed or job_time_exceeded:
@@ -257,7 +257,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
     def _parse_custom_config(
         self, custom_config: Dict[str, Any], now: datetime, saved_state: Dict[str, str]
-    ) -> Tuple[str, str, int]:
+    ) -> Tuple[str, str, int, bool]:
         """
         Takes custom config from CPS and allows the specification of a new start time for either alerts or observations,
         and allows the page_size to be customised.
@@ -265,13 +265,16 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         :param custom_config: dictionary of values passed from CPS {"last_alert_time": {"date": {..}}..}
         :param now: current time to determine the start time for each CB type.
         :param saved_state: dictionary of state values held.
-        :return: two string formatted times to apply to our alert and observation queries.
+        :return: two string formatted times to apply to our alert and observation queries,
+                 max page size integer, and a boolean indicating if we want to debug request times.
         """
         # take a copy of state so this logic will need to happen again if an exception occurs
         state = saved_state.copy()
 
         # set the page_size from CPS if it exists, otherwise default to PAGE_SIZE
         page_size = custom_config.get("page_size", PAGE_SIZE)
+        # this flag will be used to allow logging of request times for debugging
+        debug = custom_config.get("debug", False)
 
         log_msg = ""
         for cb_type_time in [LAST_ALERT_TIME, LAST_OBSERVATION_TIME]:
@@ -301,7 +304,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             f"{log_msg}Applying the following start times: alerts='{alerts_start}' "
             f"and observations='{observation_start}'. Max pages: page_size='{page_size}'."
         )
-        return alerts_start, observation_start, page_size
+        return alerts_start, observation_start, page_size, debug
 
     def _check_if_job_time_exceeded(self, job_start_time: str, job_id: str) -> bool:
         """
