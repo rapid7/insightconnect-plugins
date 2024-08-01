@@ -27,19 +27,19 @@ class TestAddAttribute(unittest.TestCase):
 
     @patch("komand_misp.connection.connection.Connection")
     def test_add_attribute_success(self, mock_connection):
-        mock_response = [{"Attribute": {"type_value": "ip-dst", "value": "8.8.8.8"}}]
+        mock_response = {"Attribute": {"type_value": "ip-dst", "value": "8.8.8.8"}}
         mock_connection.client = self.mock_client
-        self.mock_client.get_event.return_value = {"Event": {"id": "1"}}
-        self.mock_client.add_named_attribute.return_value = mock_response
-
+        self.mock_client.get_event.return_value = {"Event": {"id": "1", "org_id": "1"}}
+        self.mock_client.add_attribute.return_value = mock_response
+    
         result = self.action.run(self.params)
-        self.assertEqual(result, {"attribute": mock_response[0]["Attribute"]})
+        self.assertEqual(result, {"attribute": mock_response.get("Attribute")})
 
     @patch("komand_misp.connection.connection.Connection")
     def test_add_attribute_failure(self, mock_connection):
         mock_connection.client = self.mock_client
         self.mock_client.get_event.return_value = {"Event": {"id": "1"}}
-        self.mock_client.add_named_attribute.return_value = [{}]
-
+        self.mock_client.add_attribute.return_value = {}
+    
         with self.assertRaises(PluginException):
             self.action.run(self.params)

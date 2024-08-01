@@ -20,21 +20,21 @@ class TestAddSightings(unittest.TestCase):
     @patch("komand_misp.connection.connection.Connection")
     def test_add_sightings_success(self, mock_connection):
         mock_connection.client = self.mock_client
-        self.mock_client.set_sightings.return_value = {"message": "2 sightings successfully added."}
+        self.mock_client.add_sighting.return_value = {"message": "2 sightings successfully added."}
         result = self.action.run(self.params)
         self.assertEqual(result, {"status": True})
 
     @patch("komand_misp.connection.connection.Connection")
     def test_add_sightings_failure(self, mock_connection):
         mock_connection.client = self.mock_client
-        self.mock_client.set_sightings.return_value = {"message": "Failed to add sightings."}
+        self.mock_client.add_sighting.return_value = {"message": "Failed to add sightings."}
         result = self.action.run(self.params)
         self.assertEqual(result, {"status": False})
-
+    
     @patch("komand_misp.connection.connection.Connection")
     def test_add_sightings_exception(self, mock_connection):
         mock_connection.client = self.mock_client
-        self.mock_client.set_sightings.side_effect = Exception("Test exception")
+        self.mock_client.add_sighting.side_effect = Exception("Test exception")
         result = self.action.run(self.params)
         self.assertEqual(result, {"status": False})
         self.action.logger.error.assert_called()
