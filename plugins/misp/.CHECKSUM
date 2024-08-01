@@ -1,5 +1,5 @@
 {
-	"spec": "df92d98b6863bcf0edee58fa1898c5ad",
+	"spec": "2613b0a5cd3cb40304c52455e87897a3",
 	"manifest": "67b2b8eeb21d40c82e13d9393e8635a0",
 	"setup": "4dcd8bafb70195fc0f81b98a8139e9ee",
 	"schemas": [
@@ -29,7 +29,7 @@
 		},
 		{
 			"identifier": "export_rpz/schema.py",
-			"hash": "a62a847e3933b505d412ae8fecd86cc6"
+			"hash": "f1019e31fda5063fa20f96a89b09b417"
 		},
 		{
 			"identifier": "export_rules/schema.py",

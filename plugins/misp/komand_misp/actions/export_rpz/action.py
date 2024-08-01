@@ -15,9 +15,9 @@ class ExportRpz(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
         event_id = params.get(Input.EVENT_ID)
-        from = params.get(Input.FROM)
+        from_date = params.get(Input.FROM)
         tags = params.get(Input.TAGS)
-        to = params.get(Input.TO)
+        to_date = params.get(Input.TO)
         # END INPUT BINDING - DO NOT REMOVE
 
         return {

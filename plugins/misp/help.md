@@ -356,20 +356,20 @@ This action is used to export RPZ zone files
 |Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |event_id|string|None|False|Specify single event to export|None|1099|None|None|
-|from|string|None|False|From date E.g. 2015-02-15|None|2015-02-15|None|None|
+|from_date|string|None|False|From date E.g. 2015-02-15|None|2015-02-15|None|None|
 |tags|[]string|None|False|Array of tags to include in results|None|["example tag"]|None|None|
-|to|string|None|False|To date E.g. 2015-02-17|None|2015-02-17|None|None|
+|to_date|string|None|False|To date E.g. 2015-02-17|None|2015-02-17|None|None|
   
 Example input:
 
 ```
 {
   "event_id": 1099,
-  "from": "2015-02-15",
+  "from_date": "2015-02-15",
   "tags": [
     "example tag"
   ],
-  "to": "2015-02-17"
+  "to_date": "2015-02-17"
 }
 ```
 

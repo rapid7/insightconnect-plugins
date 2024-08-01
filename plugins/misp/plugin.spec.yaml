@@ -923,13 +923,13 @@ actions:
         example: ["example tag"]
         type: '[]string'
         required: false
-      from:
+      from_date:
         title: From Date
         description: From date E.g. 2015-02-15
         example: "2015-02-15"
         type: string
         required: false
-      to:
+      to_date:
         title: To Date
         description: To date E.g. 2015-02-17
         example: "2015-02-17"
