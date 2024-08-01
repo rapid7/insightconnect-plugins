@@ -3,6 +3,6 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 PyJWT==2.4.0
 validators==0.21.0
-requests==2.31.0
+requests==2.32.2
 urllib3==2.0.7
 parameterized==0.8.1
