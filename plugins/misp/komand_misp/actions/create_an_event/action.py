@@ -25,7 +25,7 @@ class CreateAnEvent(insightconnect_plugin_runtime.Action):
         }
 
         try:
-            event = self.connection.client.add_event(event={"distribution":dist[params.get("distribution")] or None,
+            event = self.connection.client.add_event(event={"distribution": dist[params.get("distribution")] or None,
                 "threat_level_id":params.get("threat_level_id"),
                 "analysis":params.get("analysis") or None,
                 "info":params.get("info"),
