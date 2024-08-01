@@ -116,13 +116,12 @@ types:
       description: Organization user type
       type: string
       required: false
-      example: 0-Owner
+      example: Owner
       enum:
-        - 0-Owner
-        - 1-Admin
-        - 2-User
-        - 3-Manager
-        - 4-Custom
+        - Owner
+        - Admin
+        - User
+        - Custom
     accessAll:
       title: Access All
       description: Determines if this member can access all collections within the organization, or only the associated collections. If set to 'true', this option overrides any collection assignments
@@ -309,13 +308,12 @@ actions:
         description: Organization user type
         type: string
         required: true
-        example: 0-Owner
+        example: Owner
         enum:
-          - 0-Owner
-          - 1-Admin
-          - 2-User
-          - 3-Manager
-          - 4-Custom
+          - Owner
+          - Admin
+          - User
+          - Custom
       accessAll:
         title: Access All
         description: Determines if this member can access all collections within the organization, or only the associated collections. If set to 'true', this option overrides any collection assignments
@@ -417,13 +415,12 @@ actions:
         description: Organization user type
         type: string
         required: true
-        example: 0-Owner
+        example: Owner
         enum:
-          - 0-Owner
-          - 1-Admin
-          - 2-User
-          - 3-Manager
-          - 4-Custom
+          - Owner
+          - Admin
+          - User
+          - Custom
       accessAll:
         title: Access All
         description: Determines if this member can access all collections within the organization, or only the associated collections. If set to 'true', this option overrides any collection assignments

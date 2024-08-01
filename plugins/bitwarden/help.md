@@ -62,7 +62,7 @@ This action is used to create a new member object by inviting a user to the orga
 |collections|[]collection|None|False|The associated collections that this member can access|None|[]|None|None|
 |email|string|None|True|The member's email address|None|user@example.com|None|None|
 |externalId|string|None|False|External identifier for reference or linking this member to another system, such as a user directory|None|external_id_123456|None|None|
-|type|string|None|True|Organization user type|["0-Owner", "1-Admin", "2-User", "3-Manager", "4-Custom"]|0-Owner|None|None|
+|type|string|None|True|Organization user type|["Owner", "Admin", "User", "Custom"]|Owner|None|None|
   
 Example input:
 
@@ -72,7 +72,7 @@ Example input:
   "collections": [],
   "email": "user@example.com",
   "externalId": "external_id_123456",
-  "type": "0-Owner"
+  "type": "Owner"
 }
 ```
 
@@ -344,7 +344,7 @@ property will be reset
 |collections|[]collection|None|False|The associated collections that this member can access|None|[]|None|None|
 |externalId|string|None|False|External identifier for reference or linking this member to another system, such as a user directory|None|external_id_123456|None|None|
 |id|string|None|True|The identifier of the member to be updated|None|539a36c5-e0d2-4cf9-979e-51ecf5cf6593|None|None|
-|type|string|None|True|Organization user type|["0-Owner", "1-Admin", "2-User", "3-Manager", "4-Custom"]|0-Owner|None|None|
+|type|string|None|True|Organization user type|["Owner", "Admin", "User", "Custom"]|Owner|None|None|
   
 Example input:
 
@@ -354,7 +354,7 @@ Example input:
   "collections": [],
   "externalId": "external_id_123456",
   "id": "539a36c5-e0d2-4cf9-979e-51ecf5cf6593",
-  "type": "0-Owner"
+  "type": "Owner"
 }
 ```
 
@@ -454,7 +454,7 @@ Example output:
 |Reset Password Enrolled|boolean|None|False|Returns 'true' if the member has enrolled in Password Reset assistance within the organization|True|
 |Status|string|None|False|Organization user status type|0-Invited|
 |Two Factor Enabled|boolean|None|False|Returns 'true' if the member has a two-step login method enabled on their user account|True|
-|Type|string|None|False|Organization user type|0-Owner|
+|Type|string|None|False|Organization user type|Owner|
 |User ID|string|None|False|The member's unique identifier across Bitwarden|48b47ee1-493e-4c67-aef7-014996c40eca|
   
 **event**

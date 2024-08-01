@@ -57,11 +57,10 @@ class CreateMemberInput(insightconnect_plugin_runtime.Input):
       "title": "Type",
       "description": "Organization user type",
       "enum": [
-        "0-Owner",
-        "1-Admin",
-        "2-User",
-        "3-Manager",
-        "4-Custom"
+        "Owner",
+        "Admin",
+        "User",
+        "Custom"
       ],
       "order": 1
     }
@@ -121,11 +120,10 @@ class CreateMemberOutput(insightconnect_plugin_runtime.Output):
           "title": "Type",
           "description": "Organization user type",
           "enum": [
-            "0-Owner",
-            "1-Admin",
-            "2-User",
-            "3-Manager",
-            "4-Custom"
+            "Owner",
+            "Admin",
+            "User",
+            "Custom"
           ],
           "order": 1
         },
