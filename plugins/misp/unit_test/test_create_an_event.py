@@ -34,7 +34,7 @@ class TestCreateAnEvent(unittest.TestCase):
         mock_connection.client = self.mock_client
         mock_connection_class.return_value = mock_connection
 
-        self.mock_client.new_event.return_value = {"Event": {"info": "Test event"}}
+        self.mock_client.add_event.return_value = {"Event": {"info": "Test event"}}
         result = self.action.run(self.params)
         self.assertEqual(result, {"info": "Test event"})
 
@@ -44,7 +44,7 @@ class TestCreateAnEvent(unittest.TestCase):
         mock_connection.client = self.mock_client
         mock_connection_class.return_value = mock_connection
 
-        self.mock_client.new_event.side_effect = Exception("Test exception")
+        self.mock_client.add_event.side_effect = Exception("Test exception")
         with self.assertRaises(PluginException):
             self.action.run(self.params)
         self.action.logger.error.assert_called()
