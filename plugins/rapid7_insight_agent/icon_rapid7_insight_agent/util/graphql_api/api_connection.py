@@ -425,7 +425,7 @@ class ApiConnection:
         """
         self.logger.info(f"Searching for: {agent_input}")
         self.logger.info(f"Search type: {agent_type}")
-        self.logge.info("Skipping all agents where host information is not available")
+        self.logger.info("Skipping all agents where host information is not available")
         for agent in agents:
             if agent and len(agent) and agent.get("host"):  # Some hosts come back None...need to check for that
                 if agent_type == agent_typer.IP_ADDRESS:
