@@ -285,7 +285,6 @@ class ApiConnection:
         # See if we have more pages of data, if so get next page and append until we reach the end
         self.logger.info(f"Extra pages of agents: {has_next_page}")
         while has_next_page:
-            self.logger.info("Getting next page of agents.")
             has_next_page, results_object, next_agents = self._get_next_page_of_agents(results_object)
             agents.extend(next_agents)
 
@@ -352,7 +351,6 @@ class ApiConnection:
         raise PluginException(
             cause=f"Could not find agent matching {agent_input} of type {agent_type}.",
             assistance="Check the agent input value and try again.",
-            data="NA",
         )
 
     def _get_agents(self, agents_input: List[str]) -> [Tuple[str, dict]]:
@@ -399,8 +397,8 @@ class ApiConnection:
         :param results_object: dict
         :return: tuple (boolean, dict (results), list (agents))
         """
-        self.logger.info("Getting next page of agents.")
         next_cursor = results_object.get("data").get("organization").get("assets").get("pageInfo").get("endCursor")
+        self.logger.info(f"Getting next page of agents using cursor {next_cursor}")
         payload = {
             "query": "query( $orgId:String! $nextCursor:String! ) { organization(id: $orgId) { assets( first: 10000, after: $nextCursor ) { pageInfo { hasNextPage endCursor } edges { node { id platform host { vendor version description hostNames { name } primaryAddress { ip mac } uniqueIdentity { source id } attributes { key value } } agent { agentSemanticVersion agentStatus quarantineState { currentState } } } } } } }",
             "variables": {"orgId": self.org_key, "nextCursor": next_cursor},
@@ -427,6 +425,7 @@ class ApiConnection:
         """
         self.logger.info(f"Searching for: {agent_input}")
         self.logger.info(f"Search type: {agent_type}")
+        self.logge.info("Skipping all agents where host information is not available")
         for agent in agents:
             if agent and len(agent) and agent.get("host"):  # Some hosts come back None...need to check for that
                 if agent_type == agent_typer.IP_ADDRESS:
@@ -452,10 +451,6 @@ class ApiConnection:
                         cause="Could not determine agent type.",
                         assistance=f"Agent {agent_input} was not a MAC address, IP address, or hostname.",
                     )
-            else:
-                self.logger.info("Agent host information not available, skipping...")
-                self.logger.info(str(agent))
-
         return None  # No agent found
 
     def _get_agents_from_result_object(self, results_object: dict) -> [dict]:
