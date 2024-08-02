@@ -31,7 +31,7 @@ class TestAddAttribute(unittest.TestCase):
         mock_connection.client = self.mock_client
         self.mock_client.get_event.return_value = {"Event": {"id": "1", "org_id": "1"}}
         self.mock_client.add_attribute.return_value = mock_response
-    
+
         result = self.action.run(self.params)
         self.assertEqual(result, {"attribute": mock_response.get("Attribute")})
 
@@ -40,6 +40,6 @@ class TestAddAttribute(unittest.TestCase):
         mock_connection.client = self.mock_client
         self.mock_client.get_event.return_value = {"Event": {"id": "1"}}
         self.mock_client.add_attribute.return_value = {}
-    
+
         with self.assertRaises(PluginException):
             self.action.run(self.params)

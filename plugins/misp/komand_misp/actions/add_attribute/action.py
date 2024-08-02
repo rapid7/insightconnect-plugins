@@ -24,10 +24,9 @@ class AddAttribute(insightconnect_plugin_runtime.Action):
 
         client = self.connection.client
         in_event = client.get_event(event)
-        print(f"DLDEBUG: in_event: {in_event}")
-        item = client.add_attribute(event=in_event, attribute={"category": category, "type": type_value,
-                                                               "value": value, "comment": comment})
-        print(f"DLDEBUG: item: {item}")
+        item = client.add_attribute(
+            event=in_event, attribute={"category": category, "type": type_value, "value": value, "comment": comment}
+        )
         try:
             attribute = item["Attribute"]
             print(f"Attribute: {attribute}")

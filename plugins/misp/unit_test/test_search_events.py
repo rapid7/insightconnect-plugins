@@ -33,7 +33,7 @@ class TestSearchEvents(unittest.TestCase):
 
     @patch("komand_misp.connection.connection.Connection")
     def test_search_events_success(self, mock_connection):
-        mock_search_index_response = {"response": [{"id": "1"}]}
+        mock_search_index_response = [{"id": "1"}]
         mock_search_response = {"response": [{"Event": {"id": "1"}}]}
         mock_connection.client = self.mock_client
         self.mock_client.search_index.return_value = mock_search_index_response

@@ -27,7 +27,7 @@ class FindEvent(insightconnect_plugin_runtime.Action):
                     errors = event.get("errors")
                     for field in errors:
                         if isinstance(field, dict):
-                            if 'Invalid event' in field.get("message"):
+                            if "Invalid event" in field.get("message"):
                                 message = field.pop("message")
                                 self.logger.info(f"Invalid event message: {message}")
                                 errors = [event.pop("errors")]

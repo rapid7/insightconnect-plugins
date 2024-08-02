@@ -25,15 +25,18 @@ class CreateAnEvent(insightconnect_plugin_runtime.Action):
         }
 
         try:
-            event = self.connection.client.add_event(event={"distribution": dist[params.get("distribution")] or None,
-                "threat_level_id":params.get("threat_level_id"),
-                "analysis":params.get("analysis") or None,
-                "info":params.get("info"),
-                "date":None,
-                "published":params.get("published"),
-                "orgc_id":params.get("orgc_id") or None,
-                "org_id":params.get("org_id") or None,
-                "sharing_group_id":params.get("sharing_group_id") or None}
+            event = self.connection.client.add_event(
+                event={
+                    "distribution": dist[params.get("distribution")] or None,
+                    "threat_level_id": params.get("threat_level_id"),
+                    "analysis": params.get("analysis") or None,
+                    "info": params.get("info"),
+                    "date": None,
+                    "published": params.get("published"),
+                    "orgc_id": params.get("orgc_id") or None,
+                    "org_id": params.get("org_id") or None,
+                    "sharing_group_id": params.get("sharing_group_id") or None,
+                }
             )
             output = json.loads(json.dumps(event))
         except Exception as error:
