@@ -14,13 +14,17 @@ class ExportRpz(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        event_id = params.get(Input.EVENT_ID)
+        from_ = params.get(Input.FROM_DATE)
+        tags = params.get(Input.TAGS)
+        to_ = params.get(Input.TO_DATE)
+        # END INPUT BINDING - DO NOT REMOVE
+
         key = self.connection.key
         ssl = self.connection.ssl
-        event_id = params.get("event_id")
-        tags = params.get("tags")
-        from_ = params.get("from")
-        to_ = params.get("to")
         path = "/attributes/rpz/download"
+
         if tags:
             # If more than 1 tag, separate with &&
             if len(tags) > 1:
@@ -64,14 +68,3 @@ class ExportRpz(insightconnect_plugin_runtime.Action):
         self.logger.debug("*" * 10)
         self.logger.debug(rpz)
         return {"rpz": rpz.decode("utf-8")}
-
-        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
-        event_id = params.get(Input.EVENT_ID)
-        from_date = params.get(Input.FROM)
-        tags = params.get(Input.TAGS)
-        to_date = params.get(Input.TO)
-        # END INPUT BINDING - DO NOT REMOVE
-
-        return {
-            Output.RPZ: None,
-        }
