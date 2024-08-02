@@ -30,7 +30,7 @@ class TestAddSightings(unittest.TestCase):
         self.mock_client.add_sighting.return_value = {"message": "Failed to add sightings."}
         result = self.action.run(self.params)
         self.assertEqual(result, {"status": False})
-    
+
     @patch("komand_misp.connection.connection.Connection")
     def test_add_sightings_exception(self, mock_connection):
         mock_connection.client = self.mock_client
