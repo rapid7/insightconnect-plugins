@@ -1,6 +1,10 @@
-import insightconnect_plugin_runtime
-from .schema import EncodeInput, EncodeOutput, Input, Output, Component
 import base64
+
+import insightconnect_plugin_runtime
+
+from komand_base64.util.constants import DEFAULT_ENCODING
+
+from .schema import Component, EncodeInput, EncodeOutput, Input, Output
 
 
 class Encode(insightconnect_plugin_runtime.Action):
@@ -13,6 +17,9 @@ class Encode(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        string = params[Input.CONTENT].encode("utf-8")
-        result = base64.standard_b64encode(string)
-        return {Output.DATA: result.decode("utf-8")}
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        content = params.get(Input.CONTENT, "").encode(DEFAULT_ENCODING)
+        # END INPUT BINDING - DO NOT REMOVE
+
+        result = base64.standard_b64encode(content)
+        return {Output.DATA: result.decode(DEFAULT_ENCODING)}
