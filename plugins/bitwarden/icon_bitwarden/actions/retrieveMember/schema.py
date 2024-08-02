@@ -128,10 +128,10 @@ class RetrieveMemberOutput(insightconnect_plugin_runtime.Output):
           "title": "Status",
           "description": "Organization user status type",
           "enum": [
-            "-1-Revoked",
-            "0-Invited",
-            "1-Accepted",
-            "2-Confirmed"
+            "Revoked",
+            "Invited",
+            "Accepted",
+            "Confirmed"
           ],
           "order": 11
         },

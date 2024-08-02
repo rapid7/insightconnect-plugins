@@ -452,7 +452,7 @@ Example output:
 |Name|string|None|False|The member's name, set from their user account profile|John Smith|
 |Object|string|None|False|String representing the object's type. Objects of the same type share the same properties|member|
 |Reset Password Enrolled|boolean|None|False|Returns 'true' if the member has enrolled in Password Reset assistance within the organization|True|
-|Status|string|None|False|Organization user status type|0-Invited|
+|Status|string|None|False|Organization user status type|Invited|
 |Two Factor Enabled|boolean|None|False|Returns 'true' if the member has a two-step login method enabled on their user account|True|
 |Type|string|None|False|Organization user type|Owner|
 |User ID|string|None|False|The member's unique identifier across Bitwarden|48b47ee1-493e-4c67-aef7-014996c40eca|

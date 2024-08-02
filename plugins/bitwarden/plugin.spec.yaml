@@ -181,12 +181,12 @@ types:
       description: Organization user status type
       type: string
       required: false
-      example: 0-Invited
+      example: Invited
       enum:
-        - -1-Revoked
-        - 0-Invited
-        - 1-Accepted
-        - 2-Confirmed
+        - Revoked
+        - Invited
+        - Accepted
+        - Confirmed
     collections:
       title: Collections
       description: The associated collections that this member can access

@@ -1,11 +1,11 @@
 {
-	"spec": "ede39695d97beb7d5cf3a7dfe08c69aa",
+	"spec": "40e53350cc156356f6ae8332834aa733",
 	"manifest": "4f2710db2a62c4ff99220be5febfb618",
 	"setup": "cd3af2eb20c149eb89147c092864d4c2",
 	"schemas": [
 		{
 			"identifier": "createMember/schema.py",
-			"hash": "346e3ad7c2628e39788bdd94da18fa81"
+			"hash": "9427f1794797479ed01c54cf281f6c93"
 		},
 		{
 			"identifier": "deleteMember/schema.py",
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "listAllMembers/schema.py",
-			"hash": "310bc96d522dc590573f2e3ac6a4abac"
+			"hash": "5330bfbb3b890a411a66a01b35f0eae6"
 		},
 		{
 			"identifier": "listEvents/schema.py",
@@ -33,7 +33,7 @@
 		},
 		{
 			"identifier": "retrieveMember/schema.py",
-			"hash": "2711b505ce966c95f08fc0ddd59637f6"
+			"hash": "4921a06fcce15b89d9513773d0c75d61"
 		},
 		{
 			"identifier": "retrieveMembersGroupIds/schema.py",
@@ -41,7 +41,7 @@
 		},
 		{
 			"identifier": "updateMember/schema.py",
-			"hash": "9cdc95b51dbea9d0cfa81db6cbccea87"
+			"hash": "bf716d545be7d077b81b52b0a3517524"
 		},
 		{
 			"identifier": "updateMembersGroups/schema.py",
