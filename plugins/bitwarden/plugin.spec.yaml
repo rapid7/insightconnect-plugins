@@ -292,7 +292,25 @@ actions:
         description: An organization member
         type: member
         required: false
-        example: {}
+        example: {
+          "type": "Owner",
+          "accessAll": true,
+          "externalId": "external_id_123456",
+          "resetPasswordEnrolled": true,
+          "object": "member",
+          "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+          "userId": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+          "name": "John Smith",
+          "email": "user@example.com",
+          "twoFactorEnabled": true,
+          "status": "Invited",
+          "collections": [
+            {
+              "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+              "readOnly": true
+            }
+          ]
+        }
   updateMember:
     title: Update a Member
     description: Updates the specified member object. If a property is not provided, the value of the existing property will be reset
@@ -338,7 +356,25 @@ actions:
         description: An organization member
         type: member
         required: false
-        example: {}
+        example: {
+          "type": "Owner",
+          "accessAll": true,
+          "externalId": "external_id_123456",
+          "resetPasswordEnrolled": true,
+          "object": "member",
+          "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+          "userId": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+          "name": "John Smith",
+          "email": "user@example.com",
+          "twoFactorEnabled": true,
+          "status": "Invited",
+          "collections": [
+            {
+              "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+              "readOnly": true
+            }
+          ]
+        }
   deleteMember:
     title: Delete a Member
     description: Permanently delete a member from the organization. This cannot be undone. The user account will still remain. The user is only removed from the organization
@@ -405,7 +441,21 @@ actions:
         description: List of members
         type: "[]member"
         required: false
-        example: []
+        example: [
+          {
+            "type": "Owner",
+            "accessAll": true,
+            "externalId": "external_id_123456",
+            "resetPasswordEnrolled": true,
+            "object": "member",
+            "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+            "userId": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+            "name": "John Smith",
+            "email": "user@example.com",
+            "twoFactorEnabled": true,
+            "status": "Invited"
+          }
+        ]
   createMember:
     title: Create a Member
     description: Create a new member object by inviting a user to the organization
@@ -438,7 +488,7 @@ actions:
         description: The associated collections that this member can access
         type: "[]collection"
         required: false
-        example: [ ]
+        example: []
       email:
         title: Email
         description: The member's email address
@@ -451,7 +501,25 @@ actions:
         description: An organization member
         type: member
         required: false
-        example: { }
+        example: {
+          "type": "Owner",
+          "accessAll": true,
+          "externalId": "external_id_123456",
+          "resetPasswordEnrolled": true,
+          "object": "member",
+          "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+          "userId": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+          "name": "John Smith",
+          "email": "user@example.com",
+          "twoFactorEnabled": true,
+          "status": "Invited",
+          "collections": [
+            {
+              "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+              "readOnly": true
+            }
+          ]
+        }
   reinviteMember:
     title: Re-invite a Member
     description: Re-send the invitation email to an organization member
@@ -478,7 +546,15 @@ actions:
         description: List of groups
         type: "[]group"
         required: false
-        example: []
+        example: [
+          {
+            "name": "Development Team",
+            "accessAll": true,
+            "externalId": "external_id_123456",
+            "object": "group",
+            "id": "539a36c5-e0d2-4cf9-979e-51ecf5cf6593"
+          }
+        ]
   listAllCollections:
     title: List All Collections
     description: Return a list of your organization's collections. Collection objects listed in this call do not include information about their associated groups
@@ -488,7 +564,13 @@ actions:
         description: List of collections
         type: "[]collectionObject"
         required: false
-        example: [ ]
+        example: [
+          {
+            "externalId": "external_id_123456",
+            "object": "collection",
+            "id": "539a36c5-e0d2-4cf9-979e-51ecf5cf6593"
+          }
+        ]
   listEvents:
     title: List Events
     description: Return a filtered list of your organization's event logs. If no filters are provided, it will return the last 30 days of event for the organization
@@ -523,4 +605,14 @@ actions:
         description: The filtered list of your organization's event logs
         type: "[]event"
         required: false
-        example: []
+        example: [
+          {
+            "object": "event",
+            "type": 1100,
+            "itemId": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+            "actingUserId": "539a36c5-e0d2-4cf9-979e-51ecf5cf6593",
+            "date": "2023-01-11T11:59:07.6144531Z",
+            "device": 9,
+            "ipAddress": "198.51.100.1"
+          }
+        ]

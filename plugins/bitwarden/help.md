@@ -80,13 +80,31 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|member|member|False|An organization member|{}|
+|member|member|False|An organization member|{'type': 'Owner', 'accessAll': True, 'externalId': 'external_id_123456', 'resetPasswordEnrolled': True, 'object': 'member', 'id': '44d88612-fea8-a8f3-6de8-2e1278abb02f', 'userId': '44d88612-fea8-a8f3-6de8-2e1278abb02f', 'name': 'John Smith', 'email': 'user@example.com', 'twoFactorEnabled': True, 'status': 'Invited', 'collections': [{'id': '44d88612-fea8-a8f3-6de8-2e1278abb02f', 'readOnly': True}]}|
   
 Example output:
 
 ```
 {
-  "member": {}
+  "member": {
+    "accessAll": true,
+    "collections": [
+      {
+        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "readOnly": true
+      }
+    ],
+    "email": "user@example.com",
+    "externalId": "external_id_123456",
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "John Smith",
+    "object": "member",
+    "resetPasswordEnrolled": true,
+    "status": "Invited",
+    "twoFactorEnabled": true,
+    "type": "Owner",
+    "userId": "44d88612-fea8-a8f3-6de8-2e1278abb02f"
+  }
 }
 ```
 
@@ -136,13 +154,19 @@ include information about their associated groups
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|collections|[]collectionObject|False|List of collections|[]|
+|collections|[]collectionObject|False|List of collections|[{"externalId": "external_id_123456", "object": "collection", "id": "539a36c5-e0d2-4cf9-979e-51ecf5cf6593"}]|
   
 Example output:
 
 ```
 {
-  "collections": []
+  "collections": [
+    {
+      "externalId": "external_id_123456",
+      "id": "539a36c5-e0d2-4cf9-979e-51ecf5cf6593",
+      "object": "collection"
+    }
+  ]
 }
 ```
 
@@ -159,13 +183,21 @@ information about their associated collections
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|groups|[]group|False|List of groups|[]|
+|groups|[]group|False|List of groups|[{"name": "Development Team", "accessAll": true, "externalId": "external_id_123456", "object": "group", "id": "539a36c5-e0d2-4cf9-979e-51ecf5cf6593"}]|
   
 Example output:
 
 ```
 {
-  "groups": []
+  "groups": [
+    {
+      "accessAll": true,
+      "externalId": "external_id_123456",
+      "id": "539a36c5-e0d2-4cf9-979e-51ecf5cf6593",
+      "name": "Development Team",
+      "object": "group"
+    }
+  ]
 }
 ```
 
@@ -182,13 +214,27 @@ information about their associated collections
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|members|[]member|False|List of members|[]|
+|members|[]member|False|List of members|[{"type": "Owner", "accessAll": true, "externalId": "external_id_123456", "resetPasswordEnrolled": true, "object": "member", "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f", "userId": "44d88612-fea8-a8f3-6de8-2e1278abb02f", "name": "John Smith", "email": "user@example.com", "twoFactorEnabled": true, "status": "Invited"}]|
   
 Example output:
 
 ```
 {
-  "members": []
+  "members": [
+    {
+      "accessAll": true,
+      "email": "user@example.com",
+      "externalId": "external_id_123456",
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "John Smith",
+      "object": "member",
+      "resetPasswordEnrolled": true,
+      "status": "Invited",
+      "twoFactorEnabled": true,
+      "type": "Owner",
+      "userId": "44d88612-fea8-a8f3-6de8-2e1278abb02f"
+    }
+  ]
 }
 ```
 
@@ -221,13 +267,23 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|events|[]event|False|The filtered list of your organization's event logs|[]|
+|events|[]event|False|The filtered list of your organization's event logs|[{"object": "event", "type": 1100, "itemId": "44d88612-fea8-a8f3-6de8-2e1278abb02f", "actingUserId": "539a36c5-e0d2-4cf9-979e-51ecf5cf6593", "date": "2023-01-11T11:59:07.6144531Z", "device": 9, "ipAddress": "198.51.100.1"}]|
   
 Example output:
 
 ```
 {
-  "events": []
+  "events": [
+    {
+      "actingUserId": "539a36c5-e0d2-4cf9-979e-51ecf5cf6593",
+      "date": "2023-01-11T11:59:07.6144531Z",
+      "device": 9,
+      "ipAddress": "198.51.100.1",
+      "itemId": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "object": "event",
+      "type": 1100
+    }
+  ]
 }
 ```
 
@@ -286,13 +342,31 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|member|member|False|An organization member|{}|
+|member|member|False|An organization member|{'type': 'Owner', 'accessAll': True, 'externalId': 'external_id_123456', 'resetPasswordEnrolled': True, 'object': 'member', 'id': '44d88612-fea8-a8f3-6de8-2e1278abb02f', 'userId': '44d88612-fea8-a8f3-6de8-2e1278abb02f', 'name': 'John Smith', 'email': 'user@example.com', 'twoFactorEnabled': True, 'status': 'Invited', 'collections': [{'id': '44d88612-fea8-a8f3-6de8-2e1278abb02f', 'readOnly': True}]}|
   
 Example output:
 
 ```
 {
-  "member": {}
+  "member": {
+    "accessAll": true,
+    "collections": [
+      {
+        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "readOnly": true
+      }
+    ],
+    "email": "user@example.com",
+    "externalId": "external_id_123456",
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "John Smith",
+    "object": "member",
+    "resetPasswordEnrolled": true,
+    "status": "Invited",
+    "twoFactorEnabled": true,
+    "type": "Owner",
+    "userId": "44d88612-fea8-a8f3-6de8-2e1278abb02f"
+  }
 }
 ```
 
@@ -362,13 +436,31 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 | :--- | :--- | :--- | :--- | :--- |
-|member|member|False|An organization member|{}|
+|member|member|False|An organization member|{'type': 'Owner', 'accessAll': True, 'externalId': 'external_id_123456', 'resetPasswordEnrolled': True, 'object': 'member', 'id': '44d88612-fea8-a8f3-6de8-2e1278abb02f', 'userId': '44d88612-fea8-a8f3-6de8-2e1278abb02f', 'name': 'John Smith', 'email': 'user@example.com', 'twoFactorEnabled': True, 'status': 'Invited', 'collections': [{'id': '44d88612-fea8-a8f3-6de8-2e1278abb02f', 'readOnly': True}]}|
   
 Example output:
 
 ```
 {
-  "member": {}
+  "member": {
+    "accessAll": true,
+    "collections": [
+      {
+        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "readOnly": true
+      }
+    ],
+    "email": "user@example.com",
+    "externalId": "external_id_123456",
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "John Smith",
+    "object": "member",
+    "resetPasswordEnrolled": true,
+    "status": "Invited",
+    "twoFactorEnabled": true,
+    "type": "Owner",
+    "userId": "44d88612-fea8-a8f3-6de8-2e1278abb02f"
+  }
 }
 ```
 
