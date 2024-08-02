@@ -19,6 +19,12 @@ class FindEvent(insightconnect_plugin_runtime.Action):
         client = self.connection.client
         try:
             event = client.get_event(params.get("event_id"))
+
+        except Exception as error:
+            self.logger.error(f"Event %s not found or failure occurred {error}")
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=error)
+
+        try:
             if isinstance(event, dict):
                 if "Event" in event:
                     message = "Event found."
