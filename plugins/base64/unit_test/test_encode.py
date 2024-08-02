@@ -1,15 +1,21 @@
+import os
+import sys
+
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
+
 from komand_base64.actions.encode import Encode
-import logging
+from komand_base64.actions.encode.schema import Input, Output
+
+STUB_INPUT_PARAMS = {Input.CONTENT: "Rapid7"}
 
 
 class TestEncode(TestCase):
-    def test_encode(self):
-        test_encoder = Encode()
-        log = logging.getLogger("Test")
-        test_encoder.logger = log
+    def setUp(self) -> None:
+        self.action = Encode()
 
-        input_params = {"content": "Rapid7"}
-
-        results = test_encoder.run(input_params)
-        self.assertEqual("UmFwaWQ3", results.get("data"))
+    def test_encode(self) -> None:
+        response = self.action.run(STUB_INPUT_PARAMS)
+        expected = "UmFwaWQ3"
+        self.assertEqual(expected, response.get(Output.DATA))
