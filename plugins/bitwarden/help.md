@@ -572,7 +572,7 @@ Example output:
 
 # Version History
 
-* 1.0.1 - Fix schema output type for `list all members` action.
+* 2.0.0 - Update enum values for `Create a Member`, `Update a Member` and `List all Members` organisation type to support new 'Custom' type. | Update account status type to include no number prefix.
 * 1.0.0 - Initial plugin - Actions: `Retrieve a Member`, `Update a Member`, `Delete a Member`, `Retrieve a Member's Group Ids`, `Update a Member's Groups`, `List All Members`, `Create a Member`, `Re-invite a Member`, `List All Groups`, `List All Collections`, `List Events`.
 
 # Links
