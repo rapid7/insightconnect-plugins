@@ -8,29 +8,68 @@
 * Decode Base64 encoded text to reveal the plaintext
 
 # Requirements
+  
+*This plugin does not contain any requirements.*
 
-_This plugin does not contain any requirements._
+# Supported Product Versions
+
+* 2024-08-02
 
 # Documentation
 
 ## Setup
-
-_This plugin does not contain a connection._
+  
+*This plugin does not contain a connection.*
 
 ## Technical Details
 
 ### Actions
 
-#### Encoder
 
-This action is used to Base64 encode a `string` using the standard Base64 alphabet.
+#### Decoder
+
+This action is used to decode a Base64 `string` or file of type `bytes` using the standard Base64 alphabet
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|content|string|None|True|Data to encode|None|Rapid7 InsightConnect|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|base64|bytes|None|True|Data to decode|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0IQ==|None|None|
+|errors|string|nothing|False|How errors should be handled when decoding Base64|["replace", "ignore", "nothing"]|ignore|None|None|
+  
+Example input:
 
+```
+{
+  "base64": "UmFwaWQ3IEluc2lnaHRDb25uZWN0IQ==",
+  "errors": "nothing"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|data|string|True|Decoded data result|Rapid7 InsightConnect!|
+  
+Example output:
+
+```
+{
+  "data": "Rapid7 InsightConnect!"
+}
+```
+
+#### Encoder
+
+This action is used to encode a `string` using the standard Base64 alphabet
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|content|string|None|True|Data to encode|None|Rapid7 InsightConnect|None|None|
+  
 Example input:
 
 ```
@@ -41,10 +80,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|bytes|True|Encoded data result|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|data|bytes|True|Encoded data result|UmFwaWQ3IEluc2lnaHRDb25uZWN0|
+  
 Example output:
 
 ```
@@ -52,48 +91,16 @@ Example output:
   "data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0"
 }
 ```
-
-#### Decoder
-
-This action is used to decode a Base64 `string` or file of type `bytes` using the standard Base64 alphabet.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|base64|bytes|None|True|Data to decode|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cgo=|
-|errors|string|nothing|False|How errors should be handled when decoding Base64|['replace', 'ignore', 'nothing']|ignore|
-
-Example input:
-
-```
-{
-  "base64": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cgo=",
-  "errors": "ignore"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|string|True|Decoded data result|
-
-Example output:
-
-```
-{
-  "data": "Rapid7 InsightConnect\n\n"
-}
-```
-
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
 
-_This plugin does not contain any triggers._
-
-### Custom Output Types
-
-_This plugin does not contain any custom output types._
+### Custom Types
+  
+*This plugin does not contain any custom output types.*
 
 ## Troubleshooting
 
@@ -103,8 +110,10 @@ If the Base64 you're decoding contains any non UTF-8 characters the plugin will 
 option to set how errors are to be handled. These options are "replace" and "ignore". Replace will change all non UTF-8
 characters to `\uffd` or `?`. While ignore will drop the character from the output.
 
+
 # Version History
 
+* 1.1.7 - Updated SDK to the latest version
 * 1.1.6 - Update to v4 Python plugin runtime
 * 1.1.5 - Improve PluginException message in Decode action
 * 1.1.4 - Add example inputs
@@ -121,9 +130,10 @@ characters to `\uffd` or `?`. While ignore will drop the character from the outp
 
 # Links
 
+* [Base64$](https://en.wikipedia.org/wiki/Base64)
+
 ## References
 
 * [Base64](https://en.wikipedia.org/wiki/Base64)
 * [Python Base64 Encode](https://docs.python.org/2/library/base64.html#base64.standard_b64encode)
 * [Python Base64 Decode](https://docs.python.org/2/library/base64.html#base64.standard_b64decode)
-
