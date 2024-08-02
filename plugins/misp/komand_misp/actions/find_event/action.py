@@ -32,11 +32,10 @@ class FindEvent(insightconnect_plugin_runtime.Action):
                 else:
                     errors = event.get("errors")
                     for field in errors:
-                        if isinstance(field, dict):
-                            if "Invalid event" in field.get("message"):
-                                message = field.pop("message")
-                                self.logger.info(f"Invalid event message: {message}")
-                                errors = [event.pop("errors")]
+                        if isinstance(field, dict) and "Invalid event" in field.get("message"):
+                            message = field.pop("message")
+                            self.logger.info(f"Invalid event message: {message}")
+                            errors = [event.pop("errors")]
                     raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=errors)
 
             else:
