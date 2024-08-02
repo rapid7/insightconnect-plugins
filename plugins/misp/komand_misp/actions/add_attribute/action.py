@@ -29,13 +29,10 @@ class AddAttribute(insightconnect_plugin_runtime.Action):
         )
         try:
             attribute = item["Attribute"]
-            print(f"Attribute: {attribute}")
         except KeyError:
             self.logger.error(f"Unable to add attribute {item}")
-            print(f"Unable to add attribute {item}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=item)
         except Exception as error:
             self.logger.error(f"Error when adding attribute: {error}")
-            print(f"Error when adding attribute: {error}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
         return {"attribute": attribute}
