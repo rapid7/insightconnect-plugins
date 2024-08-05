@@ -42,7 +42,7 @@ sdk:
   type: slim
   version: 6.0.1
   user: nobody
-connection_version: 1
+connection_version: 2
 links:
   - "[Bitwarden](https://bitwarden.com/)"
 references:
