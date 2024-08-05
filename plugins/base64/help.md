@@ -13,7 +13,7 @@
 
 # Supported Product Versions
 
-* 2024-08-02
+* 2024-08-05
 
 # Documentation
 
