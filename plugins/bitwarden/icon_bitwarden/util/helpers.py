@@ -1,9 +1,11 @@
 from icon_bitwarden.util.constants import ValueType
 
 
-available_statuses = {"-1-Revoked": -1, "0-Invited": 0, "1-Accepted": 1, "2-Confirmed": 2}
+available_statuses = {"Revoked": -1, "Invited": 0, "Accepted": 1, "Confirmed": 2}
 
-available_types = {"0-Owner": 0, "1-Admin": 1, "2-User": 2, "3-Manager": 3}
+# SOAR-17305: bitwarden removed Manger type - enums in plugin.spec updated to remove number prefixes but
+# keep manager as an option incase an old user type still has this type assigned.
+available_types = {"Owner": 0, "Admin": 1, "User": 2, "Manager": 3, "Custom": 4}
 
 
 def switch_member_status_and_type(member: dict, to_type: str) -> dict:

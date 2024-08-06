@@ -7,8 +7,8 @@
       "name": "User",
       "email": "user@example.com",
       "twoFactorEnabled": false,
-      "status": "2-Confirmed",
-      "type": "0-Owner",
+      "status": "Confirmed",
+      "type": "Custom",
       "accessAll": true,
       "resetPasswordEnrolled": false
     }
