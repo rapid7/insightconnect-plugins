@@ -196,7 +196,7 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 # Version History
 
-* 3.0.4 - Upgrade user from `nobody` to `root`
+* 3.0.4 - Upgrade user from `nobody` to `root` | bump SDK to 6.0.1 | Add in the realm package
 * 3.0.3 - Fix decoding error in `Execute Script` action | Update SDK | Update packages for alpine image
 * 3.0.2 - Updated the SDK version to include output masking | Updated all the dependencies to the newest versions
 * 3.0.1 - Bug fix - Fix issue where single quotes in password causes parsing error
