@@ -6,7 +6,7 @@ from parameterized import parameterized
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from unit_test.util import Util
+from util import Util
 from icon_bitwarden.actions.deleteMember import DeleteMember
 
 sys.path.append(os.path.abspath("../"))
