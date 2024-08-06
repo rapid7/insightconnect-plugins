@@ -15,7 +15,7 @@ This plugin utilizes the [DomainTools Python API](https://github.com/domaintools
 
 # Supported Product Versions
 
-* DomainTools_api 1.0.1
+* DomainTools_api 2.0.0
 
 # Documentation
 
@@ -1131,6 +1131,7 @@ There is no troubleshooting for this Plugin
 
 # Version History
 
+* 2.0.2 - Updated SDK and packages to the latest version
 * 2.0.1 - 'SDK' Bump | adding 'anyio' into requirements and bumping 'DomainTools' to '2.0.0'
 * 2.0.0 - Update `DomainTools` to `1.0.1` | Update to latest SDK version | Fix import issues on all actions | Change `Days Back` input of `Name Server Monitor` to type `int` | Remove `Query` input from `Reverse IP WHOIS` | Add `Server` to `WHOIS History` output `Response` | Add `Reasons` to `Reputation` output `Response` | Change `Meta` to type `List` for `Domain Profile` output `Response`
 * 1.0.1 - New spec and help.md format for the Extension Library
