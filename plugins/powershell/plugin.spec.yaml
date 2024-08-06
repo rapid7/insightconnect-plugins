@@ -13,8 +13,8 @@ requirements:
   - "For remote server execution, a PowerShell-enabled server and administrative credentials"
   - "When adding a password for the script, try to avoid special or escape characters such as single or double quotes"
 sdk:
-  type: full
-  version: 5.4.9
+  type: slim
+  version: 6.0.1
   user: nobody
 links:
   - "[InsightConnect Powershell Plugin Guide](https://docs.rapid7.com/insightconnect/mass-delete-with-PowerShell/)"
@@ -40,7 +40,7 @@ hub_tags:
   keywords: [powershell, microsoft]
   features: []
 version_history:
-  - "3.0.4 - Upgrade user from `nobody` to `root`"
+  - "3.0.4 - Upgrade user from `nobody` to `root` | bump SDK to 6.0.1 and switch back to `Bullseye` based SDK image" 
   - "3.0.3 - Fix decoding error in `Execute Script` action | Update SDK | Update packages for alpine image"
   - "3.0.2 - Updated the SDK version to include output masking | Updated all the dependencies to the newest versions"
   - "3.0.1 - Bug fix - Fix issue where single quotes in password causes parsing error"
