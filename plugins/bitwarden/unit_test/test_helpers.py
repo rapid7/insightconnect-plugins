@@ -1,10 +1,8 @@
 import sys
 import os
 from unittest import TestCase
-from unittest.mock import patch
 from parameterized import parameterized
 
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_bitwarden.util.helpers import clean_dict, switch_member_status_and_type
 from icon_bitwarden.util.constants import ValueType
@@ -15,17 +13,17 @@ sys.path.append(os.path.abspath("../"))
 class TestHelpers(TestCase):
     @parameterized.expand(
         [
-            ["-1_to_-1-Revoked", {"status": -1}, {"status": "-1-Revoked"}],
-            ["0_to_0-Invited", {"status": 0}, {"status": "0-Invited"}],
-            ["1_to_1-Accepted", {"status": 1}, {"status": "1-Accepted"}],
-            ["2_to_2-Confirmed", {"status": 2}, {"status": "2-Confirmed"}],
-            ["0_to_0-Owner", {"type": 0}, {"type": "0-Owner"}],
-            ["1_to_1-Admin", {"type": 1}, {"type": "1-Admin"}],
-            ["2_to_2-User", {"type": 2}, {"type": "2-User"}],
-            ["3_to_3-Manager", {"type": 3}, {"type": "3-Manager"}],
-            ["both_keys_1", {"status": -1, "type": 0}, {"status": "-1-Revoked", "type": "0-Owner"}],
-            ["both_keys_2", {"status": 0, "type": 1}, {"status": "0-Invited", "type": "1-Admin"}],
-            ["keys_string", {"status": "0-Invited", "type": "0-Owner"}, {"status": "0-Invited", "type": "0-Owner"}],
+            ["-1_to_-1-Revoked", {"status": -1}, {"status": "Revoked"}],
+            ["0_to_0-Invited", {"status": 0}, {"status": "Invited"}],
+            ["1_to_1-Accepted", {"status": 1}, {"status": "Accepted"}],
+            ["2_to_2-Confirmed", {"status": 2}, {"status": "Confirmed"}],
+            ["0_to_0-Owner", {"type": 0}, {"type": "Owner"}],
+            ["1_to_1-Admin", {"type": 1}, {"type": "Admin"}],
+            ["2_to_2-User", {"type": 2}, {"type": "User"}],
+            ["3_to_3-Manager", {"type": 3}, {"type": "Manager"}],
+            ["both_keys_1", {"status": -1, "type": 0}, {"status": "Revoked", "type": "Owner"}],
+            ["both_keys_2", {"status": 0, "type": 1}, {"status": "Invited", "type": "Admin"}],
+            ["keys_string", {"status": "Invited", "type": "Owner"}, {"status": "Invited", "type": "Owner"}],
             ["no_key", {}, {}],
         ]
     )
@@ -35,16 +33,16 @@ class TestHelpers(TestCase):
 
     @parameterized.expand(
         [
-            ["-1-Revoked_to_-1", {"status": "-1-Revoked"}, {"status": -1}],
-            ["0-Invited_to_0", {"status": "0-Invited"}, {"status": 0}],
-            ["1-Accepted_to_1", {"status": "1-Accepted"}, {"status": 1}],
-            ["2-Confirmed_to_2", {"status": "2-Confirmed"}, {"status": 2}],
-            ["0-Owner_to_0", {"type": "0-Owner"}, {"type": 0}],
-            ["1-Admin_to_1", {"type": "1-Admin"}, {"type": 1}],
-            ["2-User_to_2", {"type": "2-User"}, {"type": 2}],
-            ["3-Manager_to_ 3", {"type": "3-Manager"}, {"type": 3}],
-            ["both_keys_1", {"status": "-1-Revoked", "type": "0-Owner"}, {"status": -1, "type": 0}],
-            ["both_keys_2", {"status": "0-Invited", "type": "1-Admin"}, {"status": 0, "type": 1}],
+            ["-1-Revoked_to_-1", {"status": "Revoked"}, {"status": -1}],
+            ["0-Invited_to_0", {"status": "Invited"}, {"status": 0}],
+            ["1-Accepted_to_1", {"status": "Accepted"}, {"status": 1}],
+            ["2-Confirmed_to_2", {"status": "Confirmed"}, {"status": 2}],
+            ["0-Owner_to_0", {"type": "Owner"}, {"type": 0}],
+            ["1-Admin_to_1", {"type": "Admin"}, {"type": 1}],
+            ["2-User_to_2", {"type": "User"}, {"type": 2}],
+            ["3-Manager_to_ 3", {"type": "Manager"}, {"type": 3}],
+            ["both_keys_1", {"status": "Revoked", "type": "Owner"}, {"status": -1, "type": 0}],
+            ["both_keys_2", {"status": "Invited", "type": "Admin"}, {"status": 0, "type": 1}],
             ["keys_integer", {"status": 0, "type": 0}, {"status": 0, "type": 0}],
             ["no_key", {}, {}],
         ]

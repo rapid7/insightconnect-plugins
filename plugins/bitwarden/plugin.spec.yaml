@@ -4,7 +4,7 @@ products: [insightconnect]
 name: bitwarden
 title: Bitwarden
 description: Bitwarden is an integrated open source password management solution for individuals, teams, and business organizations
-version: 1.0.0
+version: 2.0.0
 vendor: rapid7
 support: rapid7
 cloud_ready: true
@@ -14,6 +14,21 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/bitwarden
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://bitwarden.com/
+key_features:
+  - Retrieve a Member
+  - Update a Member
+  - Delete a Member
+  - Retrieve a Member's Group IDs
+  - Update a Member's Groups
+  - List All Members
+  - Create a Member
+  - Re-invite a Member
+  - List All Groups
+  - List All Collections
+  - List Events
+requirements:
+  - Bitwarden Client ID
+  - Bitwarden Client Secret
 tags:
 - bitwarden
 - api
@@ -23,7 +38,19 @@ hub_tags:
   use_cases: [credential_management, data_utility]
   keywords: [bitwarden, api, access_control, password, cloud_enabled]
   features: []
-
+sdk:
+  type: slim
+  version: 6.0.1
+  user: nobody
+connection_version: 2
+links:
+  - "[Bitwarden](https://bitwarden.com/)"
+references:
+  - "[Bitwarden](https://bitwarden.com/)"
+troubleshooting: "[Bitwarden API Key Documentation](https://bitwarden.com/help/public-api/#authentication). Access to the Bitwarden Public API is available to customers on the Enterprise or Teams organizations plans."
+version_history:
+  - "2.0.0 - Update enum values for `Create a Member`, `Update a Member` and `List all Members` organisation type to support new 'Custom' type. | Update account status type to include no number prefix."
+  - "1.0.0 - Initial plugin - Actions: `Retrieve a Member`, `Update a Member`, `Delete a Member`, `Retrieve a Member's Group Ids`, `Update a Member's Groups`, `List All Members`, `Create a Member`, `Re-invite a Member`, `List All Groups`, `List All Collections`, `List Events`."
 types:
   group:
     name:
@@ -88,12 +115,12 @@ types:
       description: Organization user type
       type: string
       required: false
-      example: 0-Owner
+      example: Owner
       enum:
-        - 0-Owner
-        - 1-Admin
-        - 2-User
-        - 3-Manager
+        - Owner
+        - Admin
+        - User
+        - Custom
     accessAll:
       title: Access All
       description: Determines if this member can access all collections within the organization, or only the associated collections. If set to 'true', this option overrides any collection assignments
@@ -153,12 +180,12 @@ types:
       description: Organization user status type
       type: string
       required: false
-      example: 0-Invited
+      example: Invited
       enum:
-        - -1-Revoked
-        - 0-Invited
-        - 1-Accepted
-        - 2-Confirmed
+        - Revoked
+        - Invited
+        - Accepted
+        - Confirmed
     collections:
       title: Collections
       description: The associated collections that this member can access
@@ -250,7 +277,7 @@ connection:
 actions:
   retrieveMember:
     title: Retrieve a Member
-    description: Retrieves the details of an existing member of the organization. You need only supply the unique member identifier that was returned upon member creation
+    description: Retrieve the details of an existing member of the organization. You need only supply the unique member identifier that was returned upon member creation
     input:
       id:
         title: Id
@@ -264,7 +291,25 @@ actions:
         description: An organization member
         type: member
         required: false
-        example: {}
+        example: {
+          "type": "Owner",
+          "accessAll": true,
+          "externalId": "external_id_123456",
+          "resetPasswordEnrolled": true,
+          "object": "member",
+          "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+          "userId": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+          "name": "John Smith",
+          "email": "user@example.com",
+          "twoFactorEnabled": true,
+          "status": "Invited",
+          "collections": [
+            {
+              "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+              "readOnly": true
+            }
+          ]
+        }
   updateMember:
     title: Update a Member
     description: Updates the specified member object. If a property is not provided, the value of the existing property will be reset
@@ -280,12 +325,12 @@ actions:
         description: Organization user type
         type: string
         required: true
-        example: 0-Owner
+        example: Owner
         enum:
-          - 0-Owner
-          - 1-Admin
-          - 2-User
-          - 3-Manager
+          - Owner
+          - Admin
+          - User
+          - Custom
       accessAll:
         title: Access All
         description: Determines if this member can access all collections within the organization, or only the associated collections. If set to 'true', this option overrides any collection assignments
@@ -310,7 +355,25 @@ actions:
         description: An organization member
         type: member
         required: false
-        example: {}
+        example: {
+          "type": "Owner",
+          "accessAll": true,
+          "externalId": "external_id_123456",
+          "resetPasswordEnrolled": true,
+          "object": "member",
+          "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+          "userId": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+          "name": "John Smith",
+          "email": "user@example.com",
+          "twoFactorEnabled": true,
+          "status": "Invited",
+          "collections": [
+            {
+              "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+              "readOnly": true
+            }
+          ]
+        }
   deleteMember:
     title: Delete a Member
     description: Permanently delete a member from the organization. This cannot be undone. The user account will still remain. The user is only removed from the organization
@@ -330,7 +393,7 @@ actions:
         example: true
   retrieveMembersGroupIds:
     title: Retrieve a Member's Group Ids
-    description: Retrieves the unique identifiers for all groups that are associated with this member. You need only supply the unique member identifier that was returned upon member creation
+    description: Retrieve the unique identifiers for all groups that are associated with this member. You need only supply the unique member identifier that was returned upon member creation
     input:
       id:
         title: ID
@@ -377,22 +440,36 @@ actions:
         description: List of members
         type: "[]member"
         required: false
-        example: []
+        example: [
+          {
+            "type": "Owner",
+            "accessAll": true,
+            "externalId": "external_id_123456",
+            "resetPasswordEnrolled": true,
+            "object": "member",
+            "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+            "userId": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+            "name": "John Smith",
+            "email": "user@example.com",
+            "twoFactorEnabled": true,
+            "status": "Invited"
+          }
+        ]
   createMember:
     title: Create a Member
-    description: Creates a new member object by inviting a user to the organization
+    description: Create a new member object by inviting a user to the organization
     input:
       type:
         title: Type
         description: Organization user type
         type: string
         required: true
-        example: 0-Owner
+        example: Owner
         enum:
-          - 0-Owner
-          - 1-Admin
-          - 2-User
-          - 3-Manager
+          - Owner
+          - Admin
+          - User
+          - Custom
       accessAll:
         title: Access All
         description: Determines if this member can access all collections within the organization, or only the associated collections. If set to 'true', this option overrides any collection assignments
@@ -410,7 +487,7 @@ actions:
         description: The associated collections that this member can access
         type: "[]collection"
         required: false
-        example: [ ]
+        example: []
       email:
         title: Email
         description: The member's email address
@@ -423,7 +500,25 @@ actions:
         description: An organization member
         type: member
         required: false
-        example: { }
+        example: {
+          "type": "Owner",
+          "accessAll": true,
+          "externalId": "external_id_123456",
+          "resetPasswordEnrolled": true,
+          "object": "member",
+          "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+          "userId": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+          "name": "John Smith",
+          "email": "user@example.com",
+          "twoFactorEnabled": true,
+          "status": "Invited",
+          "collections": [
+            {
+              "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+              "readOnly": true
+            }
+          ]
+        }
   reinviteMember:
     title: Re-invite a Member
     description: Re-send the invitation email to an organization member
@@ -450,17 +545,31 @@ actions:
         description: List of groups
         type: "[]group"
         required: false
-        example: []
+        example: [
+          {
+            "name": "Development Team",
+            "accessAll": true,
+            "externalId": "external_id_123456",
+            "object": "group",
+            "id": "539a36c5-e0d2-4cf9-979e-51ecf5cf6593"
+          }
+        ]
   listAllCollections:
     title: List All Collections
-    description: Returns a list of your organization's collections. Collection objects listed in this call do not include information about their associated groups
+    description: Return a list of your organization's collections. Collection objects listed in this call do not include information about their associated groups
     output:
       collections:
         title: Collections
         description: List of collections
         type: "[]collectionObject"
         required: false
-        example: [ ]
+        example: [
+          {
+            "externalId": "external_id_123456",
+            "object": "collection",
+            "id": "539a36c5-e0d2-4cf9-979e-51ecf5cf6593"
+          }
+        ]
   listEvents:
     title: List Events
     description: Return a filtered list of your organization's event logs. If no filters are provided, it will return the last 30 days of event for the organization
@@ -495,4 +604,14 @@ actions:
         description: The filtered list of your organization's event logs
         type: "[]event"
         required: false
-        example: []
+        example: [
+          {
+            "object": "event",
+            "type": 1100,
+            "itemId": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+            "actingUserId": "539a36c5-e0d2-4cf9-979e-51ecf5cf6593",
+            "date": "2023-01-11T11:59:07.6144531Z",
+            "device": 9,
+            "ipAddress": "198.51.100.1"
+          }
+        ]
