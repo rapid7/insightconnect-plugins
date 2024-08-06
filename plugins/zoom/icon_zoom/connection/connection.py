@@ -46,3 +46,46 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 cause="The OAuth token credentials provided in the connection configuration is invalid.",
                 assistance="Please verify the credentials are correct and try again.",
             )
+
+    def test_task(self):
+        self.logger.info("Running a connection test to Zoom")
+        return_message = "The connection test to Zoom has failed \n"
+        try:
+            _ = self.zoom_api.get_user_activity_events()
+            message = "The connection test to Zoom was successful"
+            self.logger.info(message)
+            return {"success": True}, message
+
+        except AuthenticationError as error:
+            return_message += "401 Authentication Error. Please ensure the supplied credentials are valid.\n "
+            self.logger.info(return_message)
+
+            raise ConnectionTestException(
+                cause="The OAuth token credentials provided in the connection configuration is invalid.",
+                assistance="Please verify the credentials are correct and try again.",
+                data=return_message,
+            )
+
+        except AuthenticationRetryLimitError as err:
+            return_message += "The authentication retry limit has exceeded the maximum allowance. Please ensure your credentials are correct and try again."
+            raise ConnectionTestException(
+                cause="OAuth authentication retry limit was met.",
+                assistance="Ensure your OAuth connection credentials are valid. "
+                "If running a large number of integrations with Zoom, consider "
+                "increasing the OAuth authentication retry limit to accommodate.",
+                data=return_message,
+            )
+
+        except PluginException as err:
+            return_message += "Please verify the setup within Zoom is correct and try again."
+            self.logger.info(
+                "Please check the setup within Zoom is correct and try again. This can also be caused by the appropriate scopes not added (found within App Marketplace) or the required permissions are not granted for the API endpoint."
+            )
+            raise ConnectionTestException(
+                cause="Configured credentials do not have permission for this API endpoint.",
+                assistance="Please ensure credentials have required permissions.",
+                data=return_message,
+            )
+
+            self.logger.error(error)
+            raise ConnectionTestException(data=return_message)
