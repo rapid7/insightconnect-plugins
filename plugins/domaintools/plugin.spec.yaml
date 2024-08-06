@@ -5,34 +5,34 @@ name: domaintools
 title: DomainTools
 vendor: rapid7
 support: community
-supported_versions: ["DomainTools_api 1.0.1"]
+supported_versions: ["DomainTools_api 2.0.0"]
 status: []
-description: Domain name search tool that allows a wildcard search, monitoring of
-  WHOIS record changes and history caching, as well as Reverse IP queries
-version: 2.0.1
+description: Domain name search tool that allows a wildcard search, monitoring of WHOIS record changes and history caching, as well as Reverse IP queries
+version: 2.0.2
 connection_version: 2
 sdk:
   type: slim
-  version: 5.6.1
+  version: 6.0.1
   user: nobody
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/domaintools
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.domaintools.com/
 key_features:
-- WHOIS
-- Domain Search
-- Brand Monitor
+  - "WHOIS"
+  - "Domain Search"
+  - "Brand Monitor"
 requirements: ["Requires an API Key from DomainTools"]
 troubleshooting: "There is no troubleshooting for this Plugin"
 links: ["[DomainTools](https://www.domaintools.com)"]
 tags:
-- domain
-- whois
-- ip
-- domain
-- intel
+  - domain
+  - whois
+  - ip
+  - domain
+  - intel
 version_history:
+- "2.0.2 - Updated SDK and packages to the latest version"
 - "2.0.1 - 'SDK' Bump | adding 'anyio' into requirements and bumping 'DomainTools' to '2.0.0'"
 - "2.0.0 - Update `DomainTools` to `1.0.1` | Update to latest SDK version | Fix import issues on all actions | Change `Days Back` input of `Name Server Monitor` to type `int` | Remove `Query` input from `Reverse IP WHOIS` | Add `Server` to `WHOIS History` output `Response` | Add `Reasons` to `Reputation` output `Response` | Change `Meta` to type `List` for `Domain Profile` output `Response`"
 - "1.0.1 - New spec and help.md format for the Extension Library"
