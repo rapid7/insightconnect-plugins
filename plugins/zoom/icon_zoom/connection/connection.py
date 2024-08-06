@@ -86,6 +86,3 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 assistance="Please ensure credentials have required permissions.",
                 data=return_message,
             )
-
-            self.logger.error(error)
-            raise ConnectionTestException(data=return_message)
