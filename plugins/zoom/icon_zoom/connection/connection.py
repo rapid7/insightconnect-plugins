@@ -56,7 +56,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.logger.info(message)
             return {"success": True}, message
 
-        except AuthenticationError as error:
+        except AuthenticationError:
             return_message += "401 Authentication Error. Please ensure the supplied credentials are valid.\n "
             self.logger.info(return_message)
 
@@ -66,7 +66,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 data=return_message,
             )
 
-        except AuthenticationRetryLimitError as err:
+        except AuthenticationRetryLimitError:
             return_message += "The authentication retry limit has exceeded the maximum allowance. Please ensure your credentials are correct and try again."
             raise ConnectionTestException(
                 cause="OAuth authentication retry limit was met.",
@@ -76,7 +76,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 data=return_message,
             )
 
-        except PluginException as err:
+        except PluginException:
             return_message += "Please verify the setup within Zoom is correct and try again."
             self.logger.info(
                 "Please check the setup within Zoom is correct and try again. This can also be caused by the appropriate scopes not added (found within App Marketplace) or the required permissions are not granted for the API endpoint."
