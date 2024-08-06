@@ -38,6 +38,7 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
         self.connection.client.toggle_rate_limiting = False
         has_more_pages = False
         try:
+            self.logger.info("Fake task implementation - forcing 404 for error handling testing for OPD")
             last_collection_date = state.get(self.LAST_COLLECTION_DATE)
             self.logger.info(f"Last collection date retrieved: {last_collection_date}")
             next_page_index = state.get(self.NEXT_PAGE_INDEX)
@@ -104,6 +105,9 @@ class MonitorEvents(insightconnect_plugin_runtime.Task):
 
             self.logger.info(f"Parameters used to query endpoint: {parameters}")
             try:
+                self.logger.info("About to raise 404...")
+                raise ApiException(status_code=404, cause="fake 404 to mimic proofpoint outage last week",
+                                   data="fake data")
                 parsed_logs = self.parse_logs(
                     self.connection.client.siem_action(Endpoint.get_all_threats(), parameters)
                 )
