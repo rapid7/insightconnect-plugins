@@ -1,11 +1,11 @@
 # Description
 
-[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira plugin supports cloud and on-premise versions of Jira Software, Jira Server, and Jira ServiceDesk products from Atlassian. 
+[Jira](https://www.atlassian.com/software/jira) is an issue tracking product developed by Atlassian that allows teams to plan, track, and release great software. This plugin uses the [Jira REST API](https://developer.atlassian.com/cloud/jira/platform/rest/v2/) to programmatically manage and create issues and users. The Jira plugin supports cloud and on-premise versions of Jira Software, Jira Server, and Jira ServiceDesk products from Atlassian
 
 # Key Features
 
 * Create, find, edit, comment, and generally manage your Jira tickets through the Jira REST API to expedite operations
-* (Re-)Assign issues to users to orchestrate operations 
+* (Re-)Assign issues to users to orchestrate operations
 * Find and create new users in your Jira instance to automate account provisioning
 
 # Requirements
@@ -24,20 +24,21 @@
 
 ## Setup
 
-The connection configuration accepts the following parameters:
+The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|False|Jira API key when connecting to Jira Cloud or Jira user password when connecting to on-prem Jira server|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|pat|credential_secret_key|None|False|Jira Personal Access Token, only works with the on-prem Jira Server|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|url|string|https://example.com|False|Jira URL|None|https://example.com|
-|user|string|None|False|Jira user email when connecting to Jira Cloud or Jira username when connecting to on-prem Jira server|None|https://example.com|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_key|credential_secret_key|None|False|Jira API key when connecting to Jira Cloud or Jira user password when connecting to on-prem Jira server|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+|pat|credential_secret_key|None|False|Jira Personal Access Token, only works with the on-prem Jira Server|None|9de5069c5afe602b2ea0a04b66beb2c0|None|None|
+|url|string|https://example.atlassian.net|False|Jira URL|None|https://example.atlassian.net|None|None|
+|user|string|None|False|Jira user email when connecting to Jira Cloud or Jira username when connecting to on-prem Jira server|None|user@example.com|None|None|
 
 Example input:
 
 ```
 {
   "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "pat": "9de5069c5afe602b2ea0a04b66beb2c0",
   "url": "https://example.atlassian.net",
   "user": "user@example.com"
 }
@@ -47,173 +48,18 @@ Example input:
 
 ### Actions
 
-#### Find Issues
-
-This action is used to search for issues.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|get_attachments|boolean|False|False|Get attachments from issue|None|True|
-|jql|string|None|True|JQL search string to use|None|project = "TEST"|
-|max|integer|10|True|Max results to return|None|10|
-
-Example input:
-
-```
-{
-  "get_attachments": true,
-  "jql": "project = \"TEST\"",
-  "max": 10
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|issues|[]issue|False|The list of found issues|[{"id": 1}, {"id": 2}]|
-
-Example output:
-
-```
-{
-  "issues": [{
-      "id": "10001",
-      "key": "PT-2",
-      "url": "https://example.atlassian.net/browse/PT-2",
-      "summary": "Test ticket for the plugin-test project",
-      "description": "A test ticket",
-      "status": "To Do",
-      "reporter": "User1",
-      "created_at": "2018-10-29T12:58:11.222-0500",
-      "updated_at": "2018-10-29T13:06:31.250-0500",
-      "labels": ["Needs_test"],
-      "fields": {}
-  }]
-}
-```
-
-#### Add Attachment to Issue
-
-This action is used to add an attachment to an issue in Jira.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|attachment_bytes|bytes|None|True|Attachment bytes|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|
-|attachment_filename|string|None|True|Attachment filename. Must end with a filetype extension if possible|None|document.pdf|
-|id|string|None|True|Issue ID|None|10001|
-
-Example input:
-
-```
-{
-  "attachment_bytes": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA...",
-  "attachment_filename": "document.pdf",
-  "id": 10001
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|string|False|ID of attachment|1234-abcd|
-
-Example output:
-
-```
-{
-  "id": "10001"
-}
-```
-
-#### Transition Issue
-
-This action is used to transition an issue.  For `fields` examples, see https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|comment|string|None|False|Comment to add|None|Transition executed by InsightConnect|
-|fields|object|None|False|Custom fields to assign. Fields used must be present on the screen used for project, issue, and transition type e.g: { "field1": { "attribute1": "value1" }, "field2": { "attribute2": "value2" }}|None|{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }|
-|id|string|None|True|Issue ID|None|10001|
-|transition|string|None|True|ID or name of transition to perform, e.g. In Progress|None|31|
-
-Example input:
-
-```
-{
-  "comment": "transition executed by insightconnect",
-  "id": 10001,
-  "transition": 31
-}
-```
-
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|False|True if successful|True|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
-#### Delete User
-
-This action is used to delete a user account.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|account_id|string|None|False|Unique identifier for an Atlassian account|None|5ec00968833be70b7e50df20|
-|username|string|None|False|Username|None|user1|
-
-Example input:
-
-```
-{
-  "account_id": "5ec00968833be70b7e50df20",
-  "username": "user1"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|False|True if successful|True|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
 
 #### Assign Issue
 
-This action is used to assign an issue to a user.
+This action is used to assign an issue to a user
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|assignee|string|None|True|Username of assignee|None|user1|
-|id|string|None|True|Issue ID|None|10001|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|assignee|string|None|True|Username of assignee|None|user1|None|None|
+|id|string|None|True|Issue ID|None|10001|None|None|
+  
 Example input:
 
 ```
@@ -226,9 +72,9 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |success|boolean|False|True if successful|True|
-
+  
 Example output:
 
 ```
@@ -237,80 +83,152 @@ Example output:
 }
 ```
 
-#### Create Issue
+#### Add Attachment to Issue
 
-This action is used to create an issue in Jira.  For `fields` examples, see https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/.
+This action is used to add an attachment to an issue in Jira
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|attachment_bytes|bytes|None|False|Attachment bytes|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|
-|attachment_filename|string|None|False|Attachment filename|None|document.pdf|
-|description|string||False|Issue description|None|Successfully connect Jira to InsightConnect to automate ticket management|
-|fields|object|None|False|Custom fields to assign. Fields used must be present on the same screen as the Create screen in Jira|None|{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }|
-|project|string|None|True|Project ID|None|TEST|
-|summary|string|None|False|Issue summary|None|Connect Jira to InsightConnect|
-|type|string|Task|False|Issue type. Typical issues type include Task, Story, Epic, Bug. You can also specify a custom issue type. This input is case-sensitive|None|Story|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|attachment_bytes|bytes|None|True|Attachment bytes|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|None|None|
+|attachment_filename|string|None|True|Attachment filename. Must end with a filetype extension if possible|None|document.pdf|None|None|
+|id|string|None|True|Issue ID|None|10001|None|None|
+  
 Example input:
 
 ```
 {
   "attachment_bytes": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA...",
   "attachment_filename": "document.pdf",
-  "description": "Successfully connect Jira to InsightConnect to automate ticket management"
+  "id": 10001
 }
 ```
 
-
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|issue|issue|False|Created issue|{"id": 3}|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|id|string|False|ID of attachment|1234-abcd|
+  
 Example output:
 
 ```
 {
-  "attachments": [],
-  "id": "10001",
-  "key": "TEST-2",
-  "url": "https://morecode-test2.atlassian.net/browse/TEST-2",
-  "summary": "Test issue",
-  "description": "Test test",
-  "status": "Backlog",
-  "resolution": "",
-  "reporter": "User2",
-  "assignee": "",
-  "created_at": "2020-04-09T23:08:00.782+0200",
-  "updated_at": "2020-04-09T23:08:00.782+0200",
-  "resolved_at": "",
-  "labels": [],
-  "fields": {}
+  "id": "1234-abcd"
+}
+```
+
+#### Comment Issue
+
+This action is used to comment on an issue
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|comment|string|None|True|Comment to add|None|This comment was added by InsightConnect|None|None|
+|id|string|None|True|Issue ID|None|10001|None|None|
+  
+Example input:
+
+```
+{
+  "comment": "This comment was added by InsightConnect",
+  "id": 10001
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|comment_id|string|False|Comment ID|1234-abcd|
+  
+Example output:
+
+```
+{
+  "comment_id": "1234-abcd"
+}
+```
+
+#### Create Issue
+
+This action is used to create an issue in Jira
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|attachment_bytes|bytes|None|False|Attachment bytes|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|None|None|
+|attachment_filename|string|None|False|Attachment filename|None|document.pdf|None|None|
+|description|string||False|Issue description|None|Successfully connect Jira to InsightConnect to automate ticket management|None|None|
+|fields|object|None|False|Custom fields to assign. Fields used must be present on the same screen as the Create screen in Jira|None|{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }|None|None|
+|project|string|None|True|Project ID|None|TEST|None|None|
+|summary|string|None|False|Issue summary|None|Connect Jira to InsightConnect|None|None|
+|type|string|Task|False|Issue type. Typical issues type include Task, Story, Epic, Bug. You can also specify a custom issue type. This input is case-sensitive|None|Story|None|None|
+  
+Example input:
+
+```
+{
+  "attachment_bytes": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA...",
+  "attachment_filename": "document.pdf",
+  "description": "",
+  "fields": {
+    "fields": {
+      "description": "Test ticket created from InsightConnect",
+      "issuetype": {
+        "name": "Story"
+      },
+      "project": {
+        "key": "TEST"
+      },
+      "summary": "Test Ticket"
+    }
+  },
+  "project": "TEST",
+  "summary": "Connect Jira to InsightConnect",
+  "type": "Task"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|issue|issue|False|Created issue|{"id": 3}|
+  
+Example output:
+
+```
+{
+  "issue": {
+    "id": 3
+  }
 }
 ```
 
 #### Create User
 
-This action is used to create a user account.
+This action is used to create a user account
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|email|string|None|True|Email|None|user@example.com|
-|notify|boolean|False|True|Notify if true|[True, False]|True|
-|password|string|None|False|Password|None|mypassword|
-|username|string|None|False|Username|None|user1|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|email|string|None|True|Email|None|user@example.com|None|None|
+|notify|boolean|False|True|Notify if true|[True, False]|True|None|None|
+|password|string|None|False|Password|None|mypassword|None|None|
+|username|string|None|False|Username|None|user1|None|None|
+  
 Example input:
 
 ```
 {
   "email": "user@example.com",
-  "notify": true,
+  "notify": false,
   "password": "mypassword",
   "username": "user1"
 }
@@ -318,10 +236,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
 |success|boolean|False|True if successful|True|
-
+  
 Example output:
 
 ```
@@ -330,32 +248,32 @@ Example output:
 }
 ```
 
-#### Label Issue
+#### Delete User
 
-This action is used to label an issue.
+This action is used to delete a user account
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Issue ID|None|10001|
-|label|string|None|True|Label to add. To add multiple labels, separate by commas|None|documentation|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|account_id|string|None|False|Unique identifier for an Atlassian account|None|5ec00968833be70b7e50df20|None|None|
+|username|string|None|False|Username|None|user1|None|None|
+  
 Example input:
 
 ```
 {
-  "id": 10001,
-  "label": "documentation"
+  "account_id": "5ec00968833be70b7e50df20",
+  "username": "user1"
 }
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |success|boolean|False|True if successful|True|
-
+  
 Example output:
 
 ```
@@ -364,17 +282,121 @@ Example output:
 }
 ```
 
-#### Find Users
+#### Edit Issue
 
-This action is used to find users.
+This action is used to edit an issue within Jira
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|max|integer|10|True|Max results to return|None|10|
-|query|string|None|True|Query String, e.g. Joe|None|Joe|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|description|string|None|False|Description field on the issue|None|Update ticket with additional Jira information for others teams wanting to leverage InsightConnect|None|None|
+|fields|object|None|False|An object of fields and values to change|None|{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }|None|None|
+|id|string|None|True|Issue ID|None|TEST-1|None|None|
+|notify|boolean|True|True|Will send a notification email about the issue updated. Admin and project admins credentials need to be used to disable the notification|None|True|None|None|
+|summary|string|None|False|Summary field on the issue|None|Connect Jira to InsightConnect for Multiple Teams|None|None|
+|update|object|None|False|An object that contains update operations to apply, see examples at https://developer.atlassian.com/server/jira/platform/updating-an-issue-via-the-jira-rest-apis-6848604/|None|{ "update": { "labels": [ {"add": "newlabel"} ] } }|None|None|
+  
+Example input:
 
+```
+{
+  "description": "Update ticket with additional Jira information for others teams wanting to leverage InsightConnect",
+  "fields": {
+    "fields": {
+      "description": "Test ticket created from InsightConnect",
+      "issuetype": {
+        "name": "Story"
+      },
+      "project": {
+        "key": "TEST"
+      },
+      "summary": "Test Ticket"
+    }
+  },
+  "id": "TEST-1",
+  "notify": true,
+  "summary": "Connect Jira to InsightConnect for Multiple Teams",
+  "update": {
+    "update": {
+      "labels": [
+        {
+          "add": "newlabel"
+        }
+      ]
+    }
+  }
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|If changes were successful|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Find Issues
+
+This action is used to search for issues
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|get_attachments|boolean|False|False|Get attachments from issue|None|True|None|None|
+|jql|string|None|True|JQL search string to use|None|project = "TEST"|None|None|
+|max|integer|10|True|Max results to return|None|10|None|None|
+  
+Example input:
+
+```
+{
+  "get_attachments": false,
+  "jql": "project = \"TEST\"",
+  "max": 10
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|issues|[]issue|False|The list of found issues|[{"id": 1}, {"id": 2}]|
+  
+Example output:
+
+```
+{
+  "issues": [
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    }
+  ]
+}
+```
+
+#### Find Users
+
+This action is used to search for a set of users
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|max|integer|10|True|Max results to return|None|10|None|None|
+|query|string|None|True|Query String, e.g. Joe|None|Joe|None|None|
+  
 Example input:
 
 ```
@@ -387,727 +409,321 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 |users|[]user|False|The list of found users|[{"id": 1}]|
-
-
+  
 Example output:
 
 ```
 {
   "users": [
     {
-      "account_id": "5ebaff48acdf9c0b917dac88",
-      "active": true,
-      "display_name": "user1",
-      "email_address": "user@example.com"
+      "id": 1
     }
   ]
-}
-```
-
-#### Comment Issue
-
-This action is used to comment on an issue.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|comment|string|None|True|Comment to add|None|This comment was added by InsightConnect|
-|id|string|None|True|Issue ID|None|10001|
-
-Example input:
-
-```
-{
-  "comment": "This comment was added by InsightConnect",
-  "id": 10001
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|comment_id|string|False|Comment ID|1234-abcd|
-
-Example output:
-
-```
-{
-  "comment_id": "10001"
-}
-```
-
-#### Get Issue
-
-This action is used to retrieve an issue.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|get_attachments|boolean|False|False|Get attachments from issue|None|True|
-|id|string|None|True|Issue ID|None|TEST-1|
-
-Example input:
-
-```
-{
-  "get_attachments": true,
-  "id": "TEST-1"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|found|boolean|False|True if found|True|
-|issue|issue|False|Found issue|{"id": 2}|
-
-Example output:
-
-```
-{
-  "found": true,
-  "issue": {
-      "id": "10001",
-      "key": "PT-2",
-      "url": "https://example.atlassian.net/browse/PT-2",
-      "summary": "Test ticket for the plugin-test project",
-      "description": "A test ticket",
-      "status": "To Do",
-      "resolution": "",
-      "reporter": "User1",
-      "assignee": "",
-      "created_at": "2018-10-29T12:58:11.222-0500",
-      "updated_at": "2018-10-29T13:06:31.250-0500",
-      "resolved_at": "",
-      "labels": ["Needs_test"],
-      "fields": {
-          "issuetype": {
-              "self": "https://example.atlassian.net/rest/api/2/issuetype/10002",
-              "id": "10002",
-              "description": "A task that needs to be done.",
-              "iconUrl": "https://example.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
-              "name": "Task",
-              "subtask": false,
-              "avatarId": 10318
-          },
-          "timespent": null,
-          "project": {
-              "self": "https://example.atlassian.net/rest/api/2/project/10000",
-              "id": "10000",
-              "key": "PT",
-              "name": "plugin-test",
-              "projectTypeKey": "software",
-              "avatarUrls": {
-                  "48x48": "",
-                  "24x24": "",
-                  "16x16": "",
-                  "32x32": ""
-              }
-          },
-          "fixVersions": [],
-          "aggregatetimespent": null,
-          "resolution": null,
-          "resolutiondate": null,
-          "workratio": -1,
-          "lastViewed": null,
-          "watches": {
-              "self": "https://example.atlassian.net/rest/api/2/issue/PT-2/watchers",
-              "watchCount": 1,
-              "isWatching": true
-          },
-          "created": "2018-10-29T12:58:11.222-0500",
-          "customfield_10020": [],
-          "customfield_10021": "0|i00007:",
-          "customfield_10022": [],
-          "priority": {
-              "self": "https://example.atlassian.net/rest/api/2/priority/3",
-              "iconUrl": "https://example.atlassian.net/images/icons/priorities/medium.svg",
-              "name": "Medium",
-              "id": "3"
-          },
-          "labels": ["Needs_test"],
-          "customfield_10016": null,
-          "customfield_10017": {
-              "hasEpicLinkFieldDependency": false,
-              "showField": false,
-              "nonEditableReason": {
-                  "reason": "PLUGIN_LICENSE_ERROR",
-                  "message": "Portfolio for Jira must be licensed for the Parent Link to be available."
-              }
-          },
-          "customfield_10018": null,
-          "customfield_10019": null,
-          "aggregatetimeoriginalestimate": null,
-          "timeestimate": null,
-          "versions": [],
-          "issuelinks": [],
-          "assignee": null,
-          "updated": "2018-10-29T13:06:31.250-0500",
-          "status": {
-              "self": "https://example.atlassian.net/rest/api/2/status/10001",
-              "description": "",
-              "iconUrl": "https://example.atlassian.net/",
-              "name": "To Do",
-              "id": "10001",
-              "statusCategory": {
-                  "self": "https://example.atlassian.net/rest/api/2/statuscategory/2",
-                  "id": 2,
-                  "key": "new",
-                  "colorName": "blue-gray",
-                  "name": "To Do"
-              }
-          },
-          "components": [],
-          "timeoriginalestimate": null,
-          "description": "A test ticket",
-          "customfield_10010": null,
-          "customfield_10014": null,
-          "timetracking": {},
-          "customfield_10015": null,
-          "customfield_10005": null,
-          "customfield_10006": null,
-          "security": null,
-          "customfield_10007": null,
-          "customfield_10008": null,
-          "customfield_10009": null,
-          "attachment": [],
-          "aggregatetimeestimate": null,
-          "summary": "Test ticket for the plugin-test project",
-          "creator": {
-              "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
-              "name": "admin",
-              "key": "admin",
-              "accountId": "4ac123f3f8412345a10cbaa0",
-              "emailAddress": "user@example.com",
-              "avatarUrls": {
-                  "48x48": "",
-                  "24x24": "",
-                  "16x16": "",
-                  "32x32": ""
-              },
-              "displayName": "User1",
-              "active": true,
-              "timeZone": "America/Chicago"
-          },
-          "subtasks": [],
-          "reporter": {
-              "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
-              "name": "admin",
-              "key": "admin",
-              "accountId": "4ac123f3f8412345a10cbaa0",
-              "emailAddress": "user@example.com",
-              "avatarUrls": {
-                  "48x48": "",
-                  "24x24": "",
-                  "16x16": "",
-                  "32x32": ""
-              },
-              "displayName": "User1",
-              "active": true,
-              "timeZone": "America/Chicago"
-          },
-          "aggregateprogress": {
-              "progress": 0,
-              "total": 0
-          },
-          "customfield_10000": "{}",
-          "environment": null,
-          "duedate": null,
-          "progress": {
-              "progress": 0,
-              "total": 0
-          },
-          "votes": {
-              "self": "https://example.atlassian.net/rest/api/2/issue/PT-2/votes",
-              "votes": 0,
-              "hasVoted": false
-          },
-          "comment": {
-              "comments": [{
-                  "self": "https://example.atlassian.net/rest/api/2/issue/10001/comment/10000",
-                  "id": "10000",
-                  "author": {
-                      "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
-                      "name": "admin",
-                      "key": "admin",
-                      "accountId": "4ac123f3f8412345a10cbaa0",
-                      "emailAddress": "user@example.com",
-                      "avatarUrls": {
-                          "48x48": "",
-                          "24x24": "",
-                          "16x16": "",
-                          "32x32": ""
-                      },
-                      "displayName": "User1",
-                      "active": true,
-                      "timeZone": "America/Chicago"
-                  },
-                  "body": "Needs additional testing",
-                  "updateAuthor": {
-                      "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
-                      "name": "admin",
-                      "key": "admin",
-                      "accountId": "4ac123f3f8412345a10cbaa0",
-                      "emailAddress": "user@example.com",
-                      "avatarUrls": {
-                          "48x48": "",
-                          "24x24": "",
-                          "16x16": "",
-                          "32x32": ""
-                      },
-                      "displayName": "User1",
-                      "active": true,
-                      "timeZone": "America/Chicago"
-                  },
-                  "created": "2018-10-29T13:06:31.250-0500",
-                  "updated": "2018-10-29T13:06:31.250-0500",
-                  "jsdPublic": true
-              }],
-              "maxResults": 1,
-              "total": 1,
-              "startAt": 0
-          },
-          "worklog": {
-              "startAt": 0,
-              "maxResults": 20,
-              "total": 0,
-              "worklogs": []
-          }
-      }
-  }
 }
 ```
 
 #### Get Comments
 
-This action is used to retrieve all comments on an issue.
+This action is used to retrieve all comments on an issue
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Issue ID|None|TEST-1|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|Issue ID|None|TEST-1|None|None|
+  
 Example input:
 
 ```
 {
   "id": "TEST-1"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|comments|[]comment|False|Comments list|[{"id": 1}, {"id": 2}]|
-|count|integer|False|Count of comments found|3|
-
-Example output:
-
-```
-{
-  "count":1,
-  "comments":[
-    {
-      "self":"https://example.atlassian.net/rest/api/2/issue/10001/comment/10000",
-      "id":"10000",
-      "author":{
-        "name":"admin",
-        "email_address":"user@example.com",
-        "display_name":"User1",
-        "active":true
-      },
-      "body":"Needs additional testing",
-      "updateAuthor":{
-        "self":"https://example.atlassian.net/rest/api/2/user?username=admin",
-        "name":"admin",
-        "key":"admin",
-        "accountId":"4ac123f3f8412345a10cbaa0",
-        "emailAddress":"user@example.com",
-        "avatarUrls":{
-          "48x48":"",
-          "24x24":"",
-          "16x16":"",
-          "32x32":""
-        },
-        "displayName":"User1",
-        "active":true,
-        "timeZone":"America/Chicago"
-      },
-      "created":"2018-10-29T13:06:31.250-0500",
-      "updated":"2018-10-29T13:06:31.250-0500",
-      "jsdPublic":true
-    }
-  ]
-}
-```
-
-#### Edit Issue
-
-This action is used to edit an issue within Jira. See https://developer.atlassian.com/server/jira/platform/updating-an-issue-via-the-jira-rest-apis-6848604/ for `update` examples.
-For `fields` examples, see https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|description|string|None|False|Description field on the issue|None|Update ticket with additional Jira information for others teams wanting to leverage InsightConnect|
-|fields|object|None|False|An object of fields and values to change|None|{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }|
-|id|string|None|True|Issue ID|None|TEST-1|
-|notify|boolean|True|True|Will send a notification email about the issue updated. Admin and project admins credentials need to be used to disable the notification|None|True|
-|summary|string|None|False|Summary field on the issue|None|Connect Jira to InsightConnect for Multiple Teams|
-|update|object|None|False|An object that contains update operations to apply, see examples at https://developer.atlassian.com/server/jira/platform/updating-an-issue-via-the-jira-rest-apis-6848604/|None|{ "update": { "labels": [ {"add": "newlabel"} ] } }|
-
-
-Example input:
-
-```
-{
-  "description": "Update ticket with additional Jira information for others teams wanting to leverage InsightConnect"
 }
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|success|boolean|False|If changes were successful|True|
-
+| :--- | :--- | :--- | :--- | :--- |
+|comments|[]comment|False|Comments list|[{"id": 1}, {"id": 2}]|
+|count|integer|False|Count of comments found|3|
+  
 Example output:
 
 ```
 {
-  "success": True
-}
-```
-
-### Triggers
-
-#### Monitor Issues
-
-This trigger watches for newly-created or updated issues.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|get_attachments|boolean|False|False|Get attachments from issue|None|True|
-|interval|integer|60|False|Interval between next poll in seconds, default is 60 seconds|None|60|
-|jql|string|None|False|JQL search string to use|None|reporter='Example User'|
-|projects|[]string|None|False|List of Project IDs or names|None|TEST|
-|include_fields|boolean|False|False|Whether returned Issues should include fields|None|True|
-
-Example input:
-
-```
-{
-  "get_attachments": true,
-  "interval": 60,
-  "jql": "reporter='Example User'",
-  "projects": "TEST",
-  "include_fields": "true
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|issue|issue|False|New or updated issue|{"id": 5}|
-
-Example output:
-
-```
-{
-  'attachments': [
+  "comments": [
     {
-      'filename': 'test',
-      'content': 'VGVzdA=='
+      "id": 1
+    },
+    {
+      "id": 2
     }
   ],
-  'id': '15466',
-  'key': 'TEST-1',
-  'url': 'https://example.atlassian.net/browse/TEST-1',
-  'summary': 'Test',
-  'description': 'Test',
-  'status': 'To Do',
-  'resolution': '',
-  'reporter': 'Example User',
-  'assignee': '',
-  'created_at': '2021-07-06T12:37:54.250-0400',
-  'updated_at': '2021-07-23T04:38:23.281-0400',
-  'resolved_at': '',
-  'labels': ["example_label"],
-  'fields': {}
+  "count": 3
 }
 ```
 
-#### New Issue
+#### Get Issue
 
-This trigger is used to trigger which indicates that a new issue has been created.
+This action is used to retrieve an issue
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|get_attachments|boolean|False|False|Get attachments from issue|None|True|
-|jql|string|None|False|JQL search string to use|None|project = 'TEST'|
-|poll_timeout|integer|60|False|Timeout between next poll, default 60|None|60|
-|project|string|None|False|Project ID or name|None|TEST|
-|include_fields|boolean|False|False|Whether returned Issues should include fields|None|True|
-
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|get_attachments|boolean|False|False|Get attachments from issue|None|True|None|None|
+|id|string|None|True|Issue ID|None|TEST-1|None|None|
+  
 Example input:
 
 ```
 {
-  "get_attachments": true,
-  "jql": "project = 'TEST'",
-  "poll_timeout": 60,
-  "project": "TEST",
-  "include_fields": "true
+  "get_attachments": false,
+  "id": "TEST-1"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|issue|issue|False|New issue|{"id": 4}|
-
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|found|boolean|False|True if found|True|
+|issue|issue|False|Found issue|{"id": 2}|
+  
 Example output:
 
 ```
 {
   "found": true,
   "issue": {
-      "id": "10001",
-      "key": "PT-2",
-      "url": "https://example.atlassian.net/browse/PT-2",
-      "summary": "Test ticket for the plugin-test project",
-      "description": "A test ticket",
-      "status": "To Do",
-      "resolution": "",
-      "reporter": "User1",
-      "assignee": "",
-      "created_at": "2018-10-29T12:58:11.222-0500",
-      "updated_at": "2018-10-29T13:06:31.250-0500",
-      "resolved_at": "",
-      "labels": ["Needs_test"],
-      "fields": {
-          "issuetype": {
-              "self": "https://example.atlassian.net/rest/api/2/issuetype/10002",
-              "id": "10002",
-              "description": "A task that needs to be done.",
-              "iconUrl": "https://example.atlassian.net/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
-              "name": "Task",
-              "subtask": false,
-              "avatarId": 10318
-          },
-          "timespent": null,
-          "project": {
-              "self": "https://example.atlassian.net/rest/api/2/project/10000",
-              "id": "10000",
-              "key": "PT",
-              "name": "plugin-test",
-              "projectTypeKey": "software",
-              "avatarUrls": {
-                  "48x48": "",
-                  "24x24": "",
-                  "16x16": "",
-                  "32x32": ""
-              }
-          },
-          "fixVersions": [],
-          "aggregatetimespent": null,
-          "resolution": null,
-          "resolutiondate": null,
-          "workratio": -1,
-          "lastViewed": null,
-          "watches": {
-              "self": "https://example.atlassian.net/rest/api/2/issue/PT-2/watchers",
-              "watchCount": 1,
-              "isWatching": true
-          },
-          "created": "2018-10-29T12:58:11.222-0500",
-          "customfield_10020": [],
-          "customfield_10021": "0|i00007:",
-          "customfield_10022": [],
-          "priority": {
-              "self": "https://example.atlassian.net/rest/api/2/priority/3",
-              "iconUrl": "https://example.atlassian.net/images/icons/priorities/medium.svg",
-              "name": "Medium",
-              "id": "3"
-          },
-          "labels": ["Needs_test"],
-          "customfield_10016": null,
-          "customfield_10017": {
-              "hasEpicLinkFieldDependency": false,
-              "showField": false,
-              "nonEditableReason": {
-                  "reason": "PLUGIN_LICENSE_ERROR",
-                  "message": "Portfolio for Jira must be licensed for the Parent Link to be available."
-              }
-          },
-          "customfield_10018": null,
-          "customfield_10019": null,
-          "aggregatetimeoriginalestimate": null,
-          "timeestimate": null,
-          "versions": [],
-          "issuelinks": [],
-          "assignee": null,
-          "updated": "2018-10-29T13:06:31.250-0500",
-          "status": {
-              "self": "https://example.atlassian.net/rest/api/2/status/10001",
-              "description": "",
-              "iconUrl": "https://example.atlassian.net/",
-              "name": "To Do",
-              "id": "10001",
-              "statusCategory": {
-                  "self": "https://example.atlassian.net/rest/api/2/statuscategory/2",
-                  "id": 2,
-                  "key": "new",
-                  "colorName": "blue-gray",
-                  "name": "To Do"
-              }
-          },
-          "components": [],
-          "timeoriginalestimate": null,
-          "description": "A test ticket",
-          "customfield_10010": null,
-          "customfield_10014": null,
-          "timetracking": {},
-          "customfield_10015": null,
-          "customfield_10005": null,
-          "customfield_10006": null,
-          "security": null,
-          "customfield_10007": null,
-          "customfield_10008": null,
-          "customfield_10009": null,
-          "attachment": [],
-          "aggregatetimeestimate": null,
-          "summary": "Test ticket for the plugin-test project",
-          "creator": {
-              "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
-              "name": "admin",
-              "key": "admin",
-              "accountId": "4ac123f3f8412345a10cbaa0",
-              "emailAddress": "userexample.com",
-              "avatarUrls": {
-                  "48x48": "",
-                  "24x24": "",
-                  "16x16": "",
-                  "32x32": ""
-              },
-              "displayName": "User1",
-              "active": true,
-              "timeZone": "America/Chicago"
-          },
-          "subtasks": [],
-          "reporter": {
-              "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
-              "name": "admin",
-              "key": "admin",
-              "accountId": "4ac123f3f8412345a10cbaa0",
-              "emailAddress": "user@example.com",
-              "avatarUrls": {
-                  "48x48": "",
-                  "24x24": "",
-                  "16x16": "",
-                  "32x32": ""
-              },
-              "displayName": "User1",
-              "active": true,
-              "timeZone": "America/Chicago"
-          },
-          "aggregateprogress": {
-              "progress": 0,
-              "total": 0
-          },
-          "customfield_10000": "{}",
-          "environment": null,
-          "duedate": null,
-          "progress": {
-              "progress": 0,
-              "total": 0
-          },
-          "votes": {
-              "self": "https://example.atlassian.net/rest/api/2/issue/PT-2/votes",
-              "votes": 0,
-              "hasVoted": false
-          },
-          "comment": {
-              "comments": [{
-                  "self": "https://example.atlassian.net/rest/api/2/issue/10001/comment/10000",
-                  "id": "10000",
-                  "author": {
-                      "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
-                      "name": "admin",
-                      "key": "admin",
-                      "accountId": "4ac123f3f8412345a10cbaa0",
-                      "emailAddress": "user@example.com",
-                      "avatarUrls": {
-                          "48x48": "",
-                          "24x24": "",
-                          "16x16": "",
-                          "32x32": ""
-                      },
-                      "displayName": "User1",
-                      "active": true,
-                      "timeZone": "America/Chicago"
-                  },
-                  "body": "Needs additional testing",
-                  "updateAuthor": {
-                      "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
-                      "name": "admin",
-                      "key": "admin",
-                      "accountId": "4ac123f3f8412345a10cbaa0",
-                      "emailAddress": "user@example.com",
-                      "avatarUrls": {
-                          "48x48": "",
-                          "24x24": "",
-                          "16x16": "",
-                          "32x32": ""
-                      },
-                      "displayName": "User1",
-                      "active": true,
-                      "timeZone": "America/Chicago"
-                  },
-                  "created": "2018-10-29T13:06:31.250-0500",
-                  "updated": "2018-10-29T13:06:31.250-0500",
-                  "jsdPublic": true
-              }],
-              "maxResults": 1,
-              "total": 1,
-              "startAt": 0
-          },
-          "worklog": {
-              "startAt": 0,
-              "maxResults": 20,
-              "total": 0,
-              "worklogs": []
-          }
-      }
+    "id": 2
   }
 }
 ```
 
-### Custom Output Types
+#### Label Issue
 
-_This plugin does not contain any custom output types._
+This action is used to label issue
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|Issue ID|None|10001|None|None|
+|label|string|None|True|Label to add. To add multiple labels, separate by commas|None|documentation|None|None|
+  
+Example input:
+
+```
+{
+  "id": 10001,
+  "label": "documentation"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|True if successful|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Transition Issue
+
+This action is used to transition an issue
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|comment|string|None|False|Comment to add|None|Transition executed by InsightConnect|None|None|
+|fields|object|None|False|Custom fields to assign. Fields used must be present on the screen used for project, issue, and transition type e.g: { "field1": { "attribute1": "value1" }, "field2": { "attribute2": "value2" }}|None|{ "fields": { "project": { "key": "TEST" }, "summary": "Test Ticket", "description": "Test ticket created from InsightConnect", "issuetype": { "name": "Story" } } }|None|None|
+|id|string|None|True|Issue ID|None|10001|None|None|
+|transition|string|None|True|ID or name of transition to perform, e.g. In Progress|None|31|None|None|
+  
+Example input:
+
+```
+{
+  "comment": "Transition executed by InsightConnect",
+  "fields": {
+    "fields": {
+      "description": "Test ticket created from InsightConnect",
+      "issuetype": {
+        "name": "Story"
+      },
+      "project": {
+        "key": "TEST"
+      },
+      "summary": "Test Ticket"
+    }
+  },
+  "id": 10001,
+  "transition": 31
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|success|boolean|False|True if successful|True|
+  
+Example output:
+
+```
+{
+  "success": true
+}
+```
+### Triggers
+
+
+#### Monitor Issues
+
+This trigger is used to watches for newly-created or updated issues
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|get_attachments|boolean|False|False|Get attachments from issue|None|True|None|None|
+|include_fields|boolean|False|False|Whether returned Issues should include fields|None|True|None|None|
+|interval|integer|60|False|Interval between next poll in seconds, default is 60 seconds|None|60|None|None|
+|jql|string|None|False|JQL search string to use|None|reporter='Example User'|None|None|
+|projects|[]string|None|False|List of Project IDs or names|None|TEST|None|None|
+  
+Example input:
+
+```
+{
+  "get_attachments": false,
+  "include_fields": false,
+  "interval": 60,
+  "jql": "reporter='Example User'",
+  "projects": "TEST"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|issue|issue|False|New or updated issue|{"id": 5}|
+  
+Example output:
+
+```
+{
+  "issue": {
+    "id": 5
+  }
+}
+```
+
+#### New Issue
+
+This trigger is used to trigger which indicates that a new issue has been created
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|get_attachments|boolean|False|False|Get attachments from issue|None|True|None|None|
+|include_fields|boolean|False|False|Whether returned Issues should include fields|None|True|None|None|
+|jql|string|None|False|JQL search string to use|None|project = 'TEST'|None|None|
+|poll_timeout|integer|60|False|Timeout between next poll, default 60|None|60|None|None|
+|project|string|None|False|Project ID or name|None|TEST|None|None|
+  
+Example input:
+
+```
+{
+  "get_attachments": false,
+  "include_fields": false,
+  "jql": "project = 'TEST'",
+  "poll_timeout": 60,
+  "project": "TEST"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
+|issue|issue|False|New issue|{"id": 4}|
+  
+Example output:
+
+```
+{
+  "issue": {
+    "id": 4
+  }
+}
+```
+### Tasks
+  
+*This plugin does not contain any tasks.*
+
+### Custom Types
+  
+**user**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Account ID|string|None|False|User account ID|None|
+|active|boolean|None|False|Whether the user is active|None|
+|display_name|string|None|False|User's display name|None|
+|email_address|string|None|False|User's email address|None|
+|name|string|None|False|User name|None|
+  
+**comment**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|author|user|None|False|Author|None|
+|body|string|None|False|Body of comment|None|
+|id|string|None|False|Comment ID|None|
+  
+**issue**
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|assignee|string|None|False|Assigned User|None|
+|attachments|[]file|None|False|Attachments|None|
+|created_at|string|None|False|Created At|None|
+|description|string|None|False|Description|None|
+|fields|object|None|False|Full list of fields|None|
+|id|string|None|False|Issue ID|None|
+|key|string|None|False|Issue Key|None|
+|labels|[]string|None|False|Labels|None|
+|project|string|None|False|Project|None|
+|reporter|string|None|False|Reporting User|None|
+|resolution|string|None|False|Resolution|None|
+|resolved_at|string|None|False|Resolved At|None|
+|status|string|None|False|Status|None|
+|summary|string|None|False|Summary|None|
+|updated_at|string|None|False|Updated At|None|
+|url|string|None|False|Issue URL|None|
+
 
 ## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
+  
+*This plugin does not contain a troubleshooting.*
 
 # Version History
 
+* 6.4.1 - Cloud enable the plugin | Bump SDK version to 6.0.1
 * 6.4.0 - Fix Issue Where Create Issue failed when multiple versions of the input Issue Type exists in Jira | Fix failed connection test response for PAT based connection | Include Fields input added to New Issue and Monitor Issues triggers, to specify whether to return Issue fields in the output | Removed empty Fields output from returned Issues when not requested or available
 * 6.3.0 - Add PAT authentication scheme for Jira on-prem
 * 6.2.1 - Fix issue in Find Issues action where normalize_user has an attribute error for labels | Changed Dockerfile to don't use slim version
