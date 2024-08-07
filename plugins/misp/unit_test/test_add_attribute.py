@@ -7,6 +7,8 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 from komand_misp.actions.add_attribute.action import AddAttribute
+from komand_misp.actions.add_attribute.schema import AddAttributeInput, AddAttributeOutput
+from jsonschema import validate
 
 
 class TestAddAttribute(unittest.TestCase):
@@ -32,8 +34,10 @@ class TestAddAttribute(unittest.TestCase):
         self.mock_client.get_event.return_value = {"Event": {"id": "1", "org_id": "1"}}
         self.mock_client.add_attribute.return_value = mock_response
 
+        validate(self.params, AddAttributeInput.schema)
         result = self.action.run(self.params)
         self.assertEqual(result, {"attribute": mock_response.get("Attribute")})
+        validate(result, AddAttributeOutput.schema)
 
     @patch("komand_misp.connection.connection.Connection")
     def test_add_attribute_failure(self, mock_connection):
@@ -41,5 +45,6 @@ class TestAddAttribute(unittest.TestCase):
         self.mock_client.get_event.return_value = {"Event": {"id": "1"}}
         self.mock_client.add_attribute.return_value = {}
 
+        validate(self.params, AddAttributeInput.schema)
         with self.assertRaises(PluginException):
             self.action.run(self.params)

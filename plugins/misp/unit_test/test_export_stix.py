@@ -8,6 +8,8 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 from komand_misp.actions.export_stix.action import ExportStix
+from komand_misp.actions.export_stix.schema import ExportStixInput, ExportStixOutput
+from jsonschema import validate
 
 
 class TestExportStix(unittest.TestCase):
@@ -35,9 +37,11 @@ class TestExportStix(unittest.TestCase):
         mock_response.text = "<stix></stix>"
         mock_post.return_value = mock_response
 
+        validate(self.params, ExportStixInput.schema)
         result = self.action.run(self.params)
         expected_stix = base64.b64encode("<stix></stix>".encode("ascii")).decode("utf-8")
         self.assertEqual(result, {"stix": expected_stix})
+        validate(result, ExportStixOutput.schema)
 
     @patch("komand_misp.actions.export_stix.action.requests.post")
     def test_export_stix_failure(self, mock_post):
@@ -46,6 +50,7 @@ class TestExportStix(unittest.TestCase):
         mock_response.json.return_value = {"message": "Bad request"}
         mock_post.return_value = mock_response
 
+        validate(self.params, ExportStixInput.schema)
         with self.assertRaises(PluginException) as context:
             self.action.run(self.params)
         self.assertTrue(PluginException.causes[PluginException.Preset.BAD_REQUEST] == context.exception.cause)

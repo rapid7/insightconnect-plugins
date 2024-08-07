@@ -7,6 +7,8 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 from komand_misp.actions.publish.action import Publish
+from komand_misp.actions.publish.schema import PublishInput, PublishOutput
+from jsonschema import validate
 
 
 class TestPublish(unittest.TestCase):
@@ -26,8 +28,10 @@ class TestPublish(unittest.TestCase):
         self.mock_client.get_event.return_value = {"Event": {"id": "1"}}
         self.mock_client.publish.return_value = mock_published
 
+        validate(self.params, PublishInput.schema)
         result = self.action.run(self.params)
         self.assertEqual(result, {"published": mock_published})
+        validate(result, PublishOutput.schema)
 
     @patch("komand_misp.connection.connection.Connection")
     def test_publish_failure(self, mock_connection):
@@ -35,6 +39,7 @@ class TestPublish(unittest.TestCase):
         self.mock_client.get_event.return_value = {"Event": {"id": "1"}}
         self.mock_client.publish.return_value = {"errors": ["Error publishing event"]}
 
+        validate(self.params, PublishInput.schema)
         with self.assertRaises(PluginException) as context:
             self.action.run(self.params)
         self.assertTrue(PluginException.causes[PluginException.Preset.BAD_REQUEST] == context.exception.cause)

@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from .schema import ExportStixInput, ExportStixOutput
+from .schema import ExportStixInput, ExportStixOutput, Input, Output, Component
 
 # Custom imports below
 import json
@@ -13,7 +13,7 @@ class ExportStix(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="export_stix",
-            description="Export events in STIX format",
+            description=Component.DESCRIPTION,
             input=ExportStixInput(),
             output=ExportStixOutput(),
         )
@@ -21,12 +21,12 @@ class ExportStix(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         key = self.connection.key
         ssl = self.connection.ssl
-        event_id = params.get("event_id")
-        with_attachment = params.get("encode_attachments")
-        tags = params.get("tags")
-        from_ = params.get("from")
-        to_ = params.get("to")
-        last = params.get("last")
+        event_id = params.get(Input.EVENT_ID)
+        with_attachment = params.get(Input.ENCODE_ATTACHMENTS)
+        tags = params.get(Input.TAGS)
+        from_ = params.get(Input.FROM)
+        to_ = params.get(Input.TO)
+        last = params.get(Input.LAST)
 
         path = "/events/stix/download.json"
         url = self.connection.url + path
@@ -67,4 +67,4 @@ class ExportStix(insightconnect_plugin_runtime.Action):
         # Encode data as b64
         stix = base64.b64encode(response.text.encode("ascii"))
 
-        return {"stix": stix.decode("utf-8")}
+        return {Output.STIX: stix.decode("utf-8")}

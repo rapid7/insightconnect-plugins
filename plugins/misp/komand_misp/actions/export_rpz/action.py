@@ -67,4 +67,4 @@ class ExportRpz(insightconnect_plugin_runtime.Action):
         rpz = base64.b64encode(response.text.encode("ascii"))
         self.logger.debug("*" * 10)
         self.logger.debug(rpz)
-        return {"rpz": rpz.decode("utf-8")}
+        return {Output.RPZ: rpz.decode("utf-8")}
