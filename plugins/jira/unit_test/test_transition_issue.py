@@ -1,3 +1,8 @@
+import sys
+import os
+
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
 from komand_jira.connection import Connection
 from komand_jira.actions.transition_issue import TransitionIssue
