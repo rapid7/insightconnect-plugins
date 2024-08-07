@@ -8,6 +8,8 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 from komand_misp.actions.export_rpz.action import ExportRpz
+from komand_misp.actions.export_rpz.schema import ExportRpzInput, ExportRpzOutput
+from jsonschema import validate
 
 
 class TestExportRpz(unittest.TestCase):
@@ -28,9 +30,11 @@ class TestExportRpz(unittest.TestCase):
         mock_response.text = "zone data"
         mock_get.return_value = mock_response
 
+        validate(self.params, ExportRpzInput.schema)
         result = self.action.run(self.params)
         expected_rpz = base64.b64encode("zone data".encode("ascii")).decode("utf-8")
         self.assertEqual(result, {"rpz": expected_rpz})
+        validate(result, ExportRpzOutput.schema)
 
     @patch("komand_misp.actions.export_rpz.action.requests.get")
     def test_export_rpz_failure(self, mock_get):
@@ -39,6 +43,7 @@ class TestExportRpz(unittest.TestCase):
         mock_response.json.return_value = {"message": "Bad request"}
         mock_get.return_value = mock_response
 
+        validate(self.params, ExportRpzInput.schema)
         with self.assertRaises(PluginException) as context:
             self.action.run(self.params)
         self.assertTrue(PluginException.causes[PluginException.Preset.BAD_REQUEST] in context.exception.cause)

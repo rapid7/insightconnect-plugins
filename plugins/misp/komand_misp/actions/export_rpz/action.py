@@ -1,7 +1,6 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
-
-from .schema import ExportRpzInput, ExportRpzOutput
+from .schema import ExportRpzInput, ExportRpzOutput, Input, Output, Component
 
 # Custom imports below
 import requests
@@ -11,20 +10,21 @@ import base64
 class ExportRpz(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="export_rpz",
-            description="Export RPZ zone files",
-            input=ExportRpzInput(),
-            output=ExportRpzOutput(),
+            name="export_rpz", description=Component.DESCRIPTION, input=ExportRpzInput(), output=ExportRpzOutput()
         )
 
     def run(self, params={}):
+        # START INPUT BINDING - DO NOT REMOVE - ANY INPUTS BELOW WILL UPDATE WITH YOUR PLUGIN SPEC AFTER REGENERATION
+        event_id = params.get(Input.EVENT_ID)
+        from_ = params.get(Input.FROM_DATE)
+        tags = params.get(Input.TAGS)
+        to_ = params.get(Input.TO_DATE)
+        # END INPUT BINDING - DO NOT REMOVE
+
         key = self.connection.key
         ssl = self.connection.ssl
-        event_id = params.get("event_id")
-        tags = params.get("tags")
-        from_ = params.get("from")
-        to_ = params.get("to")
         path = "/attributes/rpz/download"
+
         if tags:
             # If more than 1 tag, separate with &&
             if len(tags) > 1:
@@ -67,4 +67,4 @@ class ExportRpz(insightconnect_plugin_runtime.Action):
         rpz = base64.b64encode(response.text.encode("ascii"))
         self.logger.debug("*" * 10)
         self.logger.debug(rpz)
-        return {"rpz": rpz.decode("utf-8")}
+        return {Output.RPZ: rpz.decode("utf-8")}
