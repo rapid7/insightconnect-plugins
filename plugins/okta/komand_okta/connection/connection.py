@@ -55,16 +55,16 @@ class Connection(insightconnect_plugin_runtime.Connection):
             raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_message)
 
         # This catches if the user enters a URL in the correct format but is unreachable
-        except ConnectionError as error:
-            self.logger.info(error)
+        except con_err as error:
+            self.logger.error(error)
             raise ConnectionTestException(
                 cause="The URL provided in the connection is unreachable. Please ensure you are providing a valid URL when trying to connect.",
                 assistance="Please verify the URL specified is valid and reachable before attempting to connect again.",
                 data="Please ensure the URL specified can be reached and is valid before trying to reconnect.",
             )
 
-        except con_err as error:
-            self.logger.info("Catching egress rules for connection", error)
+        except ConnectionResetError as error:
+            self.logger.error(f"Catching egress rules for connection: '{error}'")
             raise ConnectionTestException(
                 cause="Catching egress rules.",
                 assistance="Catching egress rules.",
