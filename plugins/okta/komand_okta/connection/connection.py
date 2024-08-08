@@ -3,6 +3,7 @@ from .schema import ConnectionSchema, Input
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 from komand_okta.util.helpers import get_hostname, validate_url
 from komand_okta.util.exceptions import ApiException
+from requests.exceptions import ConnectionError
 
 # Custom imports below
 from komand_okta.util.api import OktaAPI
@@ -52,3 +53,20 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
             self.logger.error(error)
             raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_message)
+
+        # This catches if the user enters a URL in the correct format but is unreachable
+        except ConnectionError as error:
+            self.logger.info(error)
+            raise ConnectionTestException(
+                cause="The URL provided in the connection is unreachable. Please ensure you are providing a valid URL when trying to connect.",
+                assistance="Please verify the URL specified is valid and reachable before attempting to connect again.",
+                data="Please ensure the URL specified can be reached and is valid before trying to reconnect.",
+            )
+
+        except ConnectionResetError as error:
+            self.logger.info("Catching egress rules for connection")
+            raise ConnectionTestException(
+                cause="Catching egress rules.",
+                assistance="Catching egress rules.",
+                data="The connection to Okta has failed. Please ensure your details are correct before attempting to connect again.",
+            )
