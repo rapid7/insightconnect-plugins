@@ -3,7 +3,7 @@ from .schema import ConnectionSchema, Input
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 from komand_okta.util.helpers import get_hostname, validate_url
 from komand_okta.util.exceptions import ApiException
-from requests.exceptions import ConnectionError
+from requests.exceptions import ConnectionError as con_err
 
 # Custom imports below
 from komand_okta.util.api import OktaAPI
@@ -63,7 +63,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 data="Please ensure the URL specified can be reached and is valid before trying to reconnect.",
             )
 
-        except ConnectionResetError as error:
+        except con_err as error:
             self.logger.info("Catching egress rules for connection", error)
             raise ConnectionTestException(
                 cause="Catching egress rules.",
