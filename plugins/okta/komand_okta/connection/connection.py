@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 from komand_okta.util.helpers import get_hostname, validate_url
-
+from komand_okta.util.exceptions import ApiException
 # Custom imports below
 from komand_okta.util.api import OktaAPI
 
@@ -29,3 +29,25 @@ class Connection(insightconnect_plugin_runtime.Connection):
             return {"success": True}
         except PluginException as error:
             raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)
+
+    def test_task(self):
+        self.logger.info("Running a connection test to Okta")
+        return_message = "The connection test to Okta was unsuccessful \n"
+        try:
+            _ = self.api_client.list_events("")
+
+            message = "The connection test to Okta was successful"
+            self.logger.info(message)
+            return {"success": True}, message
+
+        except ApiException as error:
+
+            cause_msg = f"The failed connection test to Okta was caused by: '{error.cause}'"
+            return_message += f"{cause_msg}\n"
+            self.logger.info(cause_msg)
+
+            self.logger.info(error.assistance)
+            return_message += f"{error.assistance}\n"
+
+            self.logger.error(error)
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_message)
