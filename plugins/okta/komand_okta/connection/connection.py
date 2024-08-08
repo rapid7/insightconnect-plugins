@@ -3,6 +3,7 @@ from .schema import ConnectionSchema, Input
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 from komand_okta.util.helpers import get_hostname, validate_url
 from komand_okta.util.exceptions import ApiException
+
 # Custom imports below
 from komand_okta.util.api import OktaAPI
 
