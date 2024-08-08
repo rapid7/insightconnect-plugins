@@ -13,7 +13,7 @@ Using the Insight Agent plugin from InsightConnect, you can quarantine, unquaran
 
 # Supported Product Versions
 
-* Rapid7 Insight Agent 2023-08-18
+* Rapid7 Insight Agent 2024-08-02
 
 # Documentation
 
@@ -21,10 +21,10 @@ Using the Insight Agent plugin from InsightConnect, you can quarantine, unquaran
 
 The connection configuration accepts the following parameters:  
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|api_key|credential_secret_key|None|True|User or Organization Key from the Insight Platform|None|a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99|
-|region|string|United States|True|Region|["United States", "United States 2", "United States 3", "Europe", "Canada", "Australia", "Japan"]|United States|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|api_key|credential_secret_key|None|True|User or Organization Key from the Insight Platform|None|a5zy0a6g-504e-46bz-84xx-1b3f5ci36l99|None|None|
+|region|string|United States|True|Region|["United States", "United States 2", "United States 3", "Europe", "Canada", "Australia", "Japan"]|United States|None|None|
 
 Example input:
 
@@ -46,9 +46,9 @@ This action is used to get the online status and quarantine state of an agent
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|agent_id|string|None|True|The ID of the agent on the device to get the status from|None|a1cfb273c8e7d46a9e2a0e2dae01a0ce|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|agent_id|string|None|True|The ID of the agent on the device to get the status from|None|a1cfb273c8e7d46a9e2a0e2dae01a0ce|None|None|
   
 Example input:
 
@@ -84,9 +84,9 @@ This action is used to find and display detailed information about a device
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|agent|string|None|True|IP address, MAC address, or hostname of the device to get information from|None|Example-Hostname|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|agent|string|None|True|IP address, MAC address, or hostname of the device to get information from|None|Example-Hostname|None|None|
   
 Example input:
 
@@ -141,15 +141,11 @@ Example output:
 
 This action is used to find all agents that share the same public or private IP address and display details about them
 
-**WARNING!**
-
-Please note that taking actions such as automatically quarantining machines (`Quarantine` action) based on the response of this action may result in the isolation of all machines that share the same public IP address. This action should be taken at your own risk.
-
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|ip_address|string|None|True|The public or private IP address for all the agents to be searched for|None|192.168.0.1|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|ip_address|string|None|True|The public or private IP address for all the agents to be searched for|None|192.168.0.1|None|None|
   
 Example input:
 
@@ -281,11 +277,11 @@ This action is used to quarantine or unquarantine on a device
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|agent_id|string|None|True|The ID of the agent on the device to quarantine|None|a1cfb273c8e7d46a9e2a0e2dae01a0ce|
-|interval|int|604800|True|Length of time in seconds to try to take action on a device. This is also called Advertisement Period|None|604800|
-|quarantine_state|boolean|True|True|Set to true to quarantine a host, set to false to unquarantine|None|True|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|agent_id|string|None|True|The ID of the agent on the device to quarantine|None|a1cfb273c8e7d46a9e2a0e2dae01a0ce|None|None|
+|interval|int|604800|True|Length of time in seconds to try to take action on a device. This is also called Advertisement Period|None|604800|None|None|
+|quarantine_state|boolean|True|True|Set to true to quarantine a host, set to false to unquarantine|None|True|None|None|
   
 Example input:
 
@@ -317,11 +313,11 @@ This action is used to quarantine or unquarantine multiple hosts
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|agent_array|[]string|None|True|Agent hostnames to quarantine or unquarantine|None|["abcdef123", "abcdef123"]|
-|interval|int|604800|True|Length of time in seconds to try to take action on a device. This is also called Advertisement Period|None|604800|
-|quarantine_state|boolean|True|True|Set to true to quarantine a host, set to false to unquarantine|None|True|
+|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|agent_array|[]string|None|True|Agent hostnames to quarantine or unquarantine|None|["abcdef123", "abcdef123"]|None|None|
+|interval|int|604800|True|Length of time in seconds to try to take action on a device. This is also called Advertisement Period|None|604800|None|None|
+|quarantine_state|boolean|True|True|Set to true to quarantine a host, set to false to unquarantine|None|True|None|None|
   
 Example input:
 
@@ -455,7 +451,8 @@ Example output:
 
 # Version History
 
-* 2.1.1 - `Get All Agents by IP Address`: Fixed issue where action failed when agent did not have a primary address, and extended output to include agent location details | `Get Agent Details`: Extended output to include agent's public IP address and location 
+* 2.1.2 - Improve logging | Update SDK
+* 2.1.1 - `Get All Agents by IP Address`: Fixed issue where action failed when agent did not have a primary address, and extended output to include agent location details | `Get Agent Details`: Extended output to include agent's public IP address and location
 * 2.1.0 - Updated SDK to the latest version | New action added `Get All Agents by IP Address`
 * 2.0.1 - Update `Connection Test` to identify if `Region` is incorrect  | Update Plugin runtime to version 5
 * 2.0.0 - Update action `Quarantine Multiple` outputs to Completed and Failed, removed All Operations Successful, replaced output Agent IDs with Hostname
