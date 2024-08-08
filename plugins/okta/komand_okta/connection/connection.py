@@ -64,7 +64,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             )
 
         except ConnectionResetError as error:
-            self.logger.info("Catching egress rules for connection")
+            self.logger.info("Catching egress rules for connection", error)
             raise ConnectionTestException(
                 cause="Catching egress rules.",
                 assistance="Catching egress rules.",
