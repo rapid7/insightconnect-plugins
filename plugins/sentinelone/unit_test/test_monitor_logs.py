@@ -257,9 +257,7 @@ class TestMonitorLogs(TestCase):
     def test_monitor_logs_api_errors(
         self, mock_request, test_name, state, expected_status_code, expected_cause, expected_assistance
     ):
-        output, state, has_more_pages, status_code, error = self.task.run(
-            params={}, state=state
-        )
+        output, state, has_more_pages, status_code, error = self.task.run(params={}, state=state)
         self.assertEqual(False, has_more_pages)
         self.assertEqual(expected_status_code, status_code)
         self.assertEqual(expected_cause, error.cause)

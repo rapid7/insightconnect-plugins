@@ -156,9 +156,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
                 if cursor:
                     self.logger.info(f"Getting {log_type} using next page cursor: {cursor}...")
                 else:
-                    self.logger.info(
-                        f"Getting {log_type} between {lookback_timestamp} and {current_run_timestamp}..."
-                    )
+                    self.logger.info(f"Getting {log_type} between {lookback_timestamp} and {current_run_timestamp}...")
                 logs, total_forbidden_responses = self.get_generic_logs(
                     log_type,
                     state,
