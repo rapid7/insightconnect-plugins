@@ -3,12 +3,12 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 10.0.0
+version: 11.0.0
 connection_version: 10
 cloud_ready: true
 sdk:
   type: slim
-  version: 5.6.1
+  version: 6.0.1
   user: nobody
 supported_versions: ["2.1.0"]
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
@@ -3110,34 +3110,6 @@ tasks:
   monitor_logs:
     title: Monitor Logs
     description: Monitor for new activities, device control events, and threats
-    input:
-      collectActivities:
-        title: Collect Activities
-        description: Whether to collect activity logs (note requires appropriate permissions assigned to user)
-        type: bool
-        required: false
-        default: true
-        example: false
-        placeholder: true
-        tooltip: Whether or not to query for new activity logs
-      collectEvents:
-        title: Collect Events
-        description: Whether to collect device control events logs (note requires appropriate permissions assigned to user)
-        type: bool
-        required: false
-        default: true
-        example: false
-        placeholder: true
-        tooltip: Whether or not to query for new device control event logs
-      collectThreats:
-        title: Collect Threats
-        description: Whether to collect threats logs (note requires appropriate permissions assigned to user)
-        type: bool
-        required: false
-        default: true
-        example: false
-        placeholder: true
-        tooltip: Whether or not to query for new threat logs
     output:
       logs:
         title: Logs
