@@ -331,6 +331,10 @@ class Util:
                 return MockResponse(200, "name_not_available")
             return MockResponse(200, "name_available")
         elif args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/threats":
+            if params.get("cursor") == "401":
+                return MockResponse(401)
+            if params.get("cursor") == "403":
+                return MockResponse(403)
             if params.get("ids") in [
                 ["valid_threat_id_1"],
                 ["valid_threat_id_2"],
@@ -413,5 +417,9 @@ class Util:
             elif json_data.get("data", {}).get("targetSiteId", "") == "1234567891234567891":
                 return MockResponse(200, "move_between_sites_data")
         elif args[1] == "https://rapid7.sentinelone.net/web/api/v2.1/device-control/events":
+            if params.get("cursor") == "401":
+                return MockResponse(401)
+            if params.get("cursor") == "403":
+                return MockResponse(403)
             return MockResponse(200, "monitor_logs_events")
         return MockResponse(404)

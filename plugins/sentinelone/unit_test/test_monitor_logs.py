@@ -6,18 +6,12 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 from komand_sentinelone.tasks.monitor_logs import MonitorLogs
-from komand_sentinelone.tasks.monitor_logs.schema import MonitorLogsOutput, Input
+from komand_sentinelone.tasks.monitor_logs.schema import MonitorLogsOutput
 from util import Util
 from parameterized import parameterized
 from jsonschema import validate
 from freezegun import freeze_time
 
-
-STUB_INPUT_PARAMS = {
-    Input.COLLECTACTIVITIES: True,
-    Input.COLLECTEVENTS: True,
-    Input.COLLECTTHREATS: True,
-}
 
 STUB_STATE = {
     "activities_last_log_timestamp": "1999-12-31T00:00:00.000000Z",
@@ -103,7 +97,6 @@ class TestMonitorLogs(TestCase):
         [
             [
                 "starting",
-                STUB_INPUT_PARAMS,
                 {},
                 {},
                 Util.read_file_to_dict("expected/monitor_logs.json.exp"),
@@ -114,7 +107,6 @@ class TestMonitorLogs(TestCase):
             ],
             [
                 "continuation",
-                STUB_INPUT_PARAMS,
                 STUB_STATE_NO_CURSOR,
                 {},
                 Util.read_file_to_dict("expected/monitor_logs.json.exp"),
@@ -125,44 +117,10 @@ class TestMonitorLogs(TestCase):
             ],
             [
                 "pagination",
-                STUB_INPUT_PARAMS,
                 STUB_STATE.copy(),
                 {},
                 Util.read_file_to_dict("expected/monitor_logs.json.exp"),
                 STUB_STATE.copy(),
-                True,
-                200,
-                None,
-            ],
-            [
-                "activities",
-                {Input.COLLECTACTIVITIES: True},
-                {},
-                {},
-                [Util.read_file_to_dict("expected/monitor_logs.json.exp")[0]],
-                STUB_STATE_ACTIVITIES,
-                True,
-                200,
-                None,
-            ],
-            [
-                "events",
-                {Input.COLLECTEVENTS: True},
-                {},
-                {},
-                [Util.read_file_to_dict("expected/monitor_logs.json.exp")[1]],
-                STUB_STATE_EVENTS,
-                True,
-                200,
-                None,
-            ],
-            [
-                "threats",
-                {Input.COLLECTTHREATS: True},
-                {},
-                {},
-                [Util.read_file_to_dict("expected/monitor_logs.json.exp")[2]],
-                STUB_STATE_THREATS,
                 True,
                 200,
                 None,
@@ -173,7 +131,6 @@ class TestMonitorLogs(TestCase):
         self,
         mock_request,
         test_name,
-        input,
         state,
         custom_config,
         expected_output,
@@ -183,7 +140,7 @@ class TestMonitorLogs(TestCase):
         expected_error,
     ):
         output, state, has_more_pages, status_code, error = self.task.run(
-            params=input, state=state, custom_config=custom_config
+            params={}, state=state, custom_config=custom_config
         )
         self.assertEqual(expected_output, output)
         self.assertEqual(expected_state, state)
@@ -196,7 +153,6 @@ class TestMonitorLogs(TestCase):
         [
             [
                 "cutoff",
-                STUB_INPUT_PARAMS,
                 {},
                 {"cutoff": 48},
                 Util.read_file_to_dict("expected/monitor_logs.json.exp"),
@@ -207,7 +163,6 @@ class TestMonitorLogs(TestCase):
             ],
             [
                 "cutoff_lookback",
-                STUB_INPUT_PARAMS,
                 {},
                 {"cutoff": 48, "lookback": {"year": 1999, "month": 12, "day": 30, "hour": 0, "minute": 0, "second": 0}},
                 Util.read_file_to_dict("expected/monitor_logs.json.exp"),
@@ -218,7 +173,6 @@ class TestMonitorLogs(TestCase):
             ],
             [
                 "lookback_continuation",
-                STUB_INPUT_PARAMS,
                 STUB_STATE_CONTINUATION,
                 {"cutoff": 48, "lookback": {"year": 1999, "month": 12, "day": 30, "hour": 0, "minute": 0, "second": 0}},
                 Util.read_file_to_dict("expected/monitor_logs.json.exp"),
@@ -229,10 +183,9 @@ class TestMonitorLogs(TestCase):
             ],
             [
                 "lookback_pagination",
-                {Input.COLLECTACTIVITIES: True},
                 STUB_STATE,
                 {"cutoff": 48, "lookback": {"year": 1999, "month": 12, "day": 30, "hour": 0, "minute": 0, "second": 0}},
-                [Util.read_file_to_dict("expected/monitor_logs.json.exp")[0]],
+                Util.read_file_to_dict("expected/monitor_logs.json.exp"),
                 STUB_STATE,
                 True,
                 200,
@@ -244,7 +197,6 @@ class TestMonitorLogs(TestCase):
         self,
         mock_request,
         test_name,
-        input,
         state,
         custom_config,
         expected_output,
@@ -254,7 +206,7 @@ class TestMonitorLogs(TestCase):
         expected_error,
     ):
         output, state, has_more_pages, status_code, error = self.task.run(
-            params=input, state=state, custom_config=custom_config
+            params={}, state=state, custom_config=custom_config
         )
         self.assertEqual(expected_output, output)
         self.assertEqual(expected_state, state)
@@ -274,14 +226,14 @@ class TestMonitorLogs(TestCase):
             ],
             [
                 "401",
-                {"activities_page_cursor": "401"},
+                {"activities_page_cursor": "401", "events_page_cursor": "401", "threats_page_cursor": "401"},
                 401,
                 "The account configured in your connection is unauthorized to access this service.",
                 "Verify the permissions for your account and try again.",
             ],
             [
                 "403",
-                {"activities_page_cursor": "403"},
+                {"activities_page_cursor": "403", "events_page_cursor": "403", "threats_page_cursor": "403"},
                 401,
                 "The account configured in your connection is unauthorized to access this service.",
                 "Verify the permissions for your account and try again.",
@@ -306,7 +258,7 @@ class TestMonitorLogs(TestCase):
         self, mock_request, test_name, state, expected_status_code, expected_cause, expected_assistance
     ):
         output, state, has_more_pages, status_code, error = self.task.run(
-            params={Input.COLLECTACTIVITIES: True}, state=state
+            params={}, state=state
         )
         self.assertEqual(False, has_more_pages)
         self.assertEqual(expected_status_code, status_code)
@@ -314,7 +266,7 @@ class TestMonitorLogs(TestCase):
         self.assertEqual(expected_assistance, error.assistance)
 
     def test_monitor_logs_forbidden_error(self, mock_request):
-        params = STUB_INPUT_PARAMS
+        params = {}
         state = STUB_STATE_ACTIVITIES_401
         output, state, has_more_pages, status_code, error = self.task.run(params=params, state=state)
         expected_output = Util.read_file_to_dict("expected/monitor_logs.json.exp")[1:]
