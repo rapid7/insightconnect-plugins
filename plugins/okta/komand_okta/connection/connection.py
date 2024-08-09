@@ -37,20 +37,15 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return_message = "The connection test to Okta was unsuccessful \n"
         try:
             _ = self.api_client.list_events("")
-
             message = "The connection test to Okta was successful"
             self.logger.info(message)
             return {"success": True}, message
-
         except ApiException as error:
-
             cause_msg = f"The failed connection test to Okta was caused by: '{error.cause}'"
             return_message += f"{cause_msg}\n"
             self.logger.info(cause_msg)
-
             self.logger.info(error.assistance)
             return_message += f"{error.assistance}\n"
-
             self.logger.error(error)
             raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_message)
 
@@ -62,11 +57,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 assistance="Please verify the URL specified is valid and reachable before attempting to connect again.",
                 data="Please ensure the URL specified can be reached and is valid before trying to reconnect.",
             )
-
         except ConnectionResetError as error:
             self.logger.error(f"Catching egress rules for connection: '{error}'")
             raise ConnectionTestException(
-                cause="Catching egress rules.",
-                assistance="Catching egress rules.",
+                cause="Failed to connect to the supplied URL.",
+                assistance="Please contact support if this issue persists.",
                 data="The connection to Okta has failed. Please ensure your details are correct before attempting to connect again.",
             )
