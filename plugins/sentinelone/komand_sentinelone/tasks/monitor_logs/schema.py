@@ -8,9 +8,7 @@ class Component:
 
 
 class Input:
-    COLLECTACTIVITIES = "collectActivities"
-    COLLECTEVENTS = "collectEvents"
-    COLLECTTHREATS = "collectThreats"
+    pass
 
 
 class State:
@@ -23,40 +21,7 @@ class Output:
 
 class MonitorLogsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads(r"""
-   {
-  "type": "object",
-  "title": "Variables",
-  "properties": {
-    "collectActivities": {
-      "type": "boolean",
-      "title": "Collect Activities",
-      "description": "Whether to collect activity logs (note requires appropriate permissions assigned to user)",
-      "default": true,
-      "placeholder": true,
-      "tooltip": "Whether or not to query for new activity logs",
-      "order": 1
-    },
-    "collectEvents": {
-      "type": "boolean",
-      "title": "Collect Events",
-      "description": "Whether to collect device control events logs (note requires appropriate permissions assigned to user)",
-      "default": true,
-      "placeholder": true,
-      "tooltip": "Whether or not to query for new device control event logs",
-      "order": 2
-    },
-    "collectThreats": {
-      "type": "boolean",
-      "title": "Collect Threats",
-      "description": "Whether to collect threats logs (note requires appropriate permissions assigned to user)",
-      "default": true,
-      "placeholder": true,
-      "tooltip": "Whether or not to query for new threat logs",
-      "order": 3
-    }
-  },
-  "definitions": {}
-}
+   {}
     """)
 
     def __init__(self):
