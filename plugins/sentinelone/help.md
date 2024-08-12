@@ -1722,22 +1722,8 @@ Example output:
 This task is used to monitor for new activities, device control events, and threats
 
 ##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|Placeholder|Tooltip|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|collectActivities|bool|True|False|Whether to collect activity logs (note requires appropriate permissions assigned to user)|None|False|True|Whether or not to query for new activity logs|
-|collectEvents|bool|True|False|Whether to collect device control events logs (note requires appropriate permissions assigned to user)|None|False|True|Whether or not to query for new device control event logs|
-|collectThreats|bool|True|False|Whether to collect threats logs (note requires appropriate permissions assigned to user)|None|False|True|Whether or not to query for new threat logs|
   
-Example input:
-
-```
-{
-  "collectActivities": true,
-  "collectEvents": true,
-  "collectThreats": true
-}
-```
+*This task does not contain any inputs.*
 
 ##### Output
 
@@ -2366,6 +2352,7 @@ Example output:
 
 # Version History
 
+* 11.0.0 - Removed `Monitor Activities and Events` task input options | Update SDK
 * 10.0.0 - Added `Monitor Activities and Events` task | Removed `User Type` from connection | A Service User API Key must now be provided to provide enhanced security
 * 9.1.2 - Retry functionality added to requests to SenintelOne that result in a 429 (too many requests) or 503 (service unavailable) error.
 * 9.1.1 - `Threats Fetch File`: Updated action to prevent possible movement through file system

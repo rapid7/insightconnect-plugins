@@ -63,12 +63,8 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         existing_state = state.copy()
         try:
             is_initial_run = self.check_initial_run(state)
-            queries = self.check_queries(params)
-            self.logger.info(
-                "Input options selected to query: " + ", ".join([f"{key}: {value}" for key, value in queries.items()])
-            )
             cursors = self.get_cursors(state)
-            total_queries = self.count_queries(queries)
+            total_queries = 3
             total_forbidden_responses = 0
             is_paginating = any(cursors.values())
             if is_paginating:
@@ -86,7 +82,6 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             )
 
             all_logs, total_forbidden_responses = self.collect_logs_handler(
-                queries,
                 cursors,
                 state,
                 lookback_timestamps,
@@ -120,16 +115,6 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             self.logger.info("State detected. Instantiating continuation run.")
         return not state
 
-    def check_queries(self, params: Dict) -> Tuple[str, str, str]:
-        """
-        Return whether to query a specific endpoint based on the input parameters
-        """
-        return {
-            ACTIVITIES_LOGS: params.get(Input.COLLECTACTIVITIES),
-            EVENTS_LOGS: params.get(Input.COLLECTEVENTS),
-            THREATS_LOGS: params.get(Input.COLLECTTHREATS),
-        }
-
     def get_cursors(self, state: Dict) -> Tuple[str, str, str]:
         """
         Return existing cursors for each endpoint
@@ -139,12 +124,6 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             EVENTS_LOGS: state.get(EVENTS_PAGE_CURSOR),
             THREATS_LOGS: state.get(THREATS_PAGE_CURSOR),
         }
-
-    def count_queries(self, queries: dict) -> int:
-        """
-        Count how many queries are to be made and return the value
-        """
-        return len(list(filter(lambda query: query is not None, queries.values())))
 
     def log_pagination_cycle(self, cursors) -> None:
         """
@@ -159,7 +138,6 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
 
     def collect_logs_handler(
         self,
-        queries: Dict,
         cursors: Dict,
         state: Dict,
         lookback_timestamps: Dict,
@@ -171,29 +149,26 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
         Handle whether to query each endpoint based on input and pagination, gather returned data and error responses
         """
         all_logs = []
-        for log_type, check in queries.items():
-            if check:
-                cursor = cursors.get(log_type)
-                lookback_timestamp = lookback_timestamps.get(log_type)
-                if is_paginating is False or (is_paginating is True and cursor):
-                    if cursor:
-                        self.logger.info(f"Getting {log_type} using next page cursor: {cursor}...")
-                    else:
-                        self.logger.info(
-                            f"Getting {log_type} between {lookback_timestamp} and {current_run_timestamp}..."
-                        )
-                    logs, total_forbidden_responses = self.get_generic_logs(
-                        log_type,
-                        state,
-                        total_forbidden_responses,
-                        current_run_timestamp,
-                        lookback_timestamp,
-                        cursor,
-                    )
-                    self.logger.info(f"{len(logs)} logs found in {log_type} query")
-                    all_logs.extend(logs)
+        for log_type in [ACTIVITIES_LOGS, EVENTS_LOGS, THREATS_LOGS]:
+            cursor = cursors.get(log_type)
+            lookback_timestamp = lookback_timestamps.get(log_type)
+            if is_paginating is False or (is_paginating is True and cursor):
+                if cursor:
+                    self.logger.info(f"Getting {log_type} using next page cursor: {cursor}...")
                 else:
-                    self.logger.info(f"Pagination in progress, skipping {log_type} collection...")
+                    self.logger.info(f"Getting {log_type} between {lookback_timestamp} and {current_run_timestamp}...")
+                logs, total_forbidden_responses = self.get_generic_logs(
+                    log_type,
+                    state,
+                    total_forbidden_responses,
+                    current_run_timestamp,
+                    lookback_timestamp,
+                    cursor,
+                )
+                self.logger.info(f"{len(logs)} logs found in {log_type} query")
+                all_logs.extend(logs)
+            else:
+                self.logger.info(f"Pagination in progress, skipping {log_type} collection...")
         return all_logs, total_forbidden_responses
 
     def get_generic_logs(
