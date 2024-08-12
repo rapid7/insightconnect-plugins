@@ -146,3 +146,23 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 data=str(error),
             )
         return {"success": True}
+
+    def task_test(self):
+        self.logger.info("Running a connection test to Carbon Black Cloud")
+
+        try:
+            # Instantiate API class
+
+            # Run relevant methods
+
+            # Return true
+            return_msg = "Task connection test to Carbon Black Cloud successful"
+            return {"success": True}, return_msg
+
+        except Exception as error:
+            return_msg = "Task connection test to Carbon Black Cloud failed"
+            if x:
+                raise ConnectionTestException()
+            if y:
+                raise ConnectionTestException()
+            raise ConnectionTestException()
