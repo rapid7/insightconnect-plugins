@@ -8,10 +8,8 @@ from typing import Dict, Tuple, Any
 
 from icon_carbon_black_cloud.util.helper_util import hash_sha1
 from icon_carbon_black_cloud.util.exceptions import RateLimitException, HTTPErrorException
-from icon_carbon_black_cloud.util.constants import OBSERVATION_TYPES
+from icon_carbon_black_cloud.util.constants import OBSERVATION_TYPES, OBSERVATION_TIME_FIELD, ALERT_TIME_FIELD
 
-ALERT_TIME_FIELD = "backend_timestamp"
-OBSERVATION_TIME_FIELD = "device_timestamp"
 TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 
 # State held values
@@ -160,7 +158,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         }
         url = f"{self.connection.base_url}/{endpoint}"
         self.logger.info(f"Triggering observation search using parameters {search_params['time_range']}")
-        observation_job_id = self.connection.request_api(url, search_params, debug=debug).get("job_id")
+        observation_job_id = self.connection.requecst_api(url, search_params, debug=debug).get("job_id")
 
         if observation_job_id:
             self.logger.info(

@@ -7,10 +7,12 @@ from json import JSONDecodeError
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 import time
 from icon_carbon_black_cloud.util import agent_typer
+from icon_carbon_black_cloud.util.helper_util import get_current_time
 from icon_carbon_black_cloud.util.constants import DEFAULT_TIMEOUT, ERROR_HANDLING
 from icon_carbon_black_cloud.util.exceptions import RateLimitException, HTTPErrorException
-
+from icon_carbon_black_cloud.util.constants import OBSERVATION_TYPES, OBSERVATION_TIME_FIELD, ALERT_TIME_FIELD
 from typing import Dict, Any
+from datetime import timedelta
 import re
 
 
@@ -149,20 +151,58 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def task_test(self):
         self.logger.info("Running a connection test to Carbon Black Cloud")
+        endpoint = self.base_url
+
+        alerts_endpoint = endpoint + f"/api/alerts/v7/orgs/{self.connection.org_key}/alerts/_search"
+        observations_endpoint = endpoint + f"api/investigate/v2/orgs/{self.connection.org_key}/observations/search_jobs"
+        now = get_current_time()
+        minus_five_mins = get_current_time() - timedelta(minutes=5)
+
+        search_params_observation = {
+            "rows": 1,
+            "start": 0,
+            "fields": ["*"],
+            "criteria": {"observation_type": OBSERVATION_TYPES},
+            "sort": [{"field": OBSERVATION_TIME_FIELD, "order": "asc"}],
+            "time_range": {"start": minus_five_mins, "end": now},
+        }
+
+        search_params_alerts = {
+            "time_range": {"start": minus_five_mins, "end": now},
+            "criteria": {},
+            "start": "1",
+            "rows": str(1),  # max number of results that can be returned
+            "sort": [{"field": ALERT_TIME_FIELD, "order": "ASC"}],
+        }
+
+        return_msg_error = "Task connection test to Carbon Black Cloud failed"
 
         try:
-            # Instantiate API class
+            self.logger.info("Testing get alerts")
+            return_msg = "Task connection test to Carbon Black Cloud successful"
 
-            # Run relevant methods
+            # Get a 200 from the search jobs endpoint
+            self.request_api(observations_endpoint, search_params_observation)
+            return_msg += "\nObservations endpoint successful."
+
+            self.request_api(alerts_endpoint, search_params_alerts)
+            return_msg += "\nAlerts endpoint successful."
 
             # Return true
-            return_msg = "Task connection test to Carbon Black Cloud successful"
             return {"success": True}, return_msg
 
-        except Exception as error:
-            return_msg = "Task connection test to Carbon Black Cloud failed"
-            if x:
-                raise ConnectionTestException()
-            if y:
-                raise ConnectionTestException()
-            raise ConnectionTestException()
+        except HTTPErrorException:
+            return_msg_error += "\nHTTPErrorException hit"
+            raise ConnectionTestException(cause="", assistance="", data=return_msg_error)
+
+        except RateLimitException:
+            return_msg_error += "\nRateLimitException hit"
+            raise ConnectionTestException(cause="", assistance="", data=return_msg_error)
+
+        except PluginException:
+            return_msg_error += "\nPluginException hit"
+            raise ConnectionTestException(cause="", assistance="", data=return_msg_error)
+
+        except JSONDecodeError:
+            return_msg_error += "\nJSON Decode error hit"
+            raise ConnectionTestException(cause="", assistance="", data=return_msg_error)
