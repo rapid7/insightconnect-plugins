@@ -3,6 +3,7 @@ ENCODE_TYPE = "utf-8"
 
 OBSERVATION_TIME_FIELD = "device_timestamp"
 ALERT_TIME_FIELD = "backend_timestamp"
+TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 
 OBSERVATION_TYPES = [
     "OBSERVATION_TYPE_UNKNOWN",

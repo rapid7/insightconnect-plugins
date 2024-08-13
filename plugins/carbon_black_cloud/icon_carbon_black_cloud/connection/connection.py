@@ -10,7 +10,12 @@ from icon_carbon_black_cloud.util import agent_typer
 from icon_carbon_black_cloud.util.helper_util import get_current_time
 from icon_carbon_black_cloud.util.constants import DEFAULT_TIMEOUT, ERROR_HANDLING
 from icon_carbon_black_cloud.util.exceptions import RateLimitException, HTTPErrorException
-from icon_carbon_black_cloud.util.constants import OBSERVATION_TYPES, OBSERVATION_TIME_FIELD, ALERT_TIME_FIELD
+from icon_carbon_black_cloud.util.constants import (
+    OBSERVATION_TYPES,
+    OBSERVATION_TIME_FIELD,
+    ALERT_TIME_FIELD,
+    TIME_FORMAT,
+)
 from typing import Dict, Any
 from datetime import timedelta
 import re
@@ -149,14 +154,15 @@ class Connection(insightconnect_plugin_runtime.Connection):
             )
         return {"success": True}
 
-    def task_test(self):
+    def test_task(self):
         self.logger.info("Running a connection test to Carbon Black Cloud")
         endpoint = self.base_url
 
-        alerts_endpoint = endpoint + f"/api/alerts/v7/orgs/{self.connection.org_key}/alerts/_search"
-        observations_endpoint = endpoint + f"api/investigate/v2/orgs/{self.connection.org_key}/observations/search_jobs"
-        now = get_current_time()
-        minus_five_mins = get_current_time() - timedelta(minutes=5)
+        alerts_endpoint = endpoint + f"/api/alerts/v7/orgs/{self.org_key}/alerts/_search"
+        observations_endpoint = endpoint + f"/api/investigate/v2/orgs/{self.org_key}/observations/search_jobs"
+
+        now = get_current_time().strftime(TIME_FORMAT)
+        minus_five_mins = (get_current_time() - timedelta(minutes=5)).strftime(TIME_FORMAT)
 
         search_params_observation = {
             "rows": 1,
