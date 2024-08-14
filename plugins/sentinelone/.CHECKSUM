@@ -129,7 +129,7 @@
 		},
 		{
 			"identifier": "monitor_logs/schema.py",
-			"hash": "5e04ff3d683807975295bc22a41a6322"
+			"hash": "6ee7bc26267a2fd719aecccb08ec7f18"
 		},
 		{
 			"identifier": "get_threats/schema.py",
