@@ -7,7 +7,6 @@ from json import JSONDecodeError
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 import time
 from icon_carbon_black_cloud.util import agent_typer
-from icon_carbon_black_cloud.util.helper_util import get_current_time
 from icon_carbon_black_cloud.util.constants import DEFAULT_TIMEOUT, ERROR_HANDLING
 from icon_carbon_black_cloud.util.exceptions import RateLimitException, HTTPErrorException
 from icon_carbon_black_cloud.util.constants import (
@@ -17,7 +16,7 @@ from icon_carbon_black_cloud.util.constants import (
     TIME_FORMAT,
 )
 from typing import Dict, Any
-from datetime import timedelta
+from datetime import timedelta, datetime, timezone
 import re
 
 
@@ -156,69 +155,64 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test_task(self):
         self.logger.info("Running a connection test to Carbon Black Cloud")
-        endpoint = self.base_url
 
-        alerts_endpoint = endpoint + f"/api/alerts/v7/orgs/{self.org_key}/alerts/_search"
-        observations_endpoint = endpoint + f"/api/investigate/v2/orgs/{self.org_key}/observations/search_jobs"
+        alerts_endpoint = self.base_url + f"/api/alerts/v7/orgs/{self.org_key}/alerts/_search"
+        observations_endpoint = self.base_url + f"/api/investigate/v2/orgs/{self.org_key}/observations/search_jobs"
 
-        now = get_current_time().strftime(TIME_FORMAT)
-        minus_five_mins = (get_current_time() - timedelta(minutes=5)).strftime(TIME_FORMAT)
+        now = datetime.now(timezone.utc).strftime(TIME_FORMAT)
+        minus_five_mins = (datetime.now(timezone.utc) - timedelta(minutes=5)).strftime(TIME_FORMAT)
 
-        search_params_observation = {
-            "rows": 1,
-            "start": 0,
-            "fields": ["*"],
-            "criteria": {"observation_type": OBSERVATION_TYPES},
-            "sort": [{"field": OBSERVATION_TIME_FIELD, "order": "asc"}],
-            "time_range": {"start": minus_five_mins, "end": now},
-        }
-
-        search_params_alerts = {
-            "time_range": {"start": minus_five_mins, "end": now},
-            "criteria": {},
-            "start": "1",
-            "rows": str(1),  # max number of results that can be returned
-            "sort": [{"field": ALERT_TIME_FIELD, "order": "ASC"}],
+        fd = {
+            alerts_endpoint: {
+                "time_range": {"start": minus_five_mins, "end": now},
+                "criteria": {},
+                "start": "1",
+                "rows": str(1),  # max number of results that can be returned
+                "sort": [{"field": ALERT_TIME_FIELD, "order": "ASC"}],
+            },
+            observations_endpoint: {
+                "rows": 1,
+                "start": 0,
+                "fields": ["*"],
+                "criteria": {"observation_type": OBSERVATION_TYPES},
+                "sort": [{"field": OBSERVATION_TIME_FIELD, "order": "asc"}],
+                "time_range": {"start": minus_five_mins, "end": now},
+            },
         }
 
         return_msg_error = "Task connection test to Carbon Black Cloud failed"
+        self.logger.info("Testing get alerts")
+        return_msg = "Task connection test to Carbon Black Cloud successful"
 
-        try:
-            self.logger.info("Testing get alerts")
-            return_msg = "Task connection test to Carbon Black Cloud successful"
+        failed = ""
 
-            # Get a 200 from the search jobs endpoint
-            self.request_api(observations_endpoint, search_params_observation)
-            return_msg += "\nObservations endpoint successful."
+        for key, value in fd.items():
+            try:
+                # Get a 200 from the search jobs endpoint
+                self.request_api(key, value)
 
-            self.request_api(alerts_endpoint, search_params_alerts)
-            return_msg += "\nAlerts endpoint successful."
+            except HTTPErrorException as error:
+                # If we've already hit the same error on the first one
+                # then skip, otherwise we're just repeating ourselves
+                if error.cause in failed:
+                    pass
+                else:
+                    return_msg_error += f"\n{error.cause}"
+                    return_msg_error += f"\n{error.assistance}"
+                    return_msg_error += f"\nThis URL: {key} failed "
+                    failed += return_msg_error
 
-            # Return true
-            return {"success": True}, return_msg
-
-        except HTTPErrorException as error:
-            if error.status_code == 401:
-                return_msg_error += "\nInvalid credentials provided."
-                return_msg_error += "\nPlease verify the API ID & Secret key are correct."
-                raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
-            elif error.status_code == 403:
-                return_msg_error += "\nAccess forbidden."
-                return_msg_error += "\nPlease ensure your credentials are valid and you have the correct permissions."
-                raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
-            elif error.status_code == 200:
-                return_msg_error += "\nUnable to parse JSON in response."
-                return_msg_error += "\nPlease contact support."
+            except RateLimitException as error:
+                return_msg_error += "\nToo many requests."
+                return_msg_error += "\nPlease slow down"
                 raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
 
-            return_msg_error += f"\nUnknown HTTP error occured: {error.data}"
-            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
+            except PluginException as error:
+                return_msg_error += "\nRetry on 503 failed."
+                raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
 
-        except RateLimitException as error:
-            return_msg_error += "\nToo many requests."
-            return_msg_error += "\nPlease slow down"
-            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
+        if failed:
+            raise ConnectionTestException(cause="", assistance="", data=failed)
 
-        except PluginException as error:
-            return_msg_error += "\nRetry on 503 failed."
-            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
+        # Return true
+        return {"success": True}, return_msg

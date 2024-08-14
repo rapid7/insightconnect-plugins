@@ -6,7 +6,7 @@ from .schema import MonitorAlertsInput, MonitorAlertsOutput, MonitorAlertsState,
 from datetime import datetime, timedelta, timezone
 from typing import Dict, Tuple, Any
 
-from icon_carbon_black_cloud.util.helper_util import hash_sha1, get_current_time
+from icon_carbon_black_cloud.util.helper_util import hash_sha1
 from icon_carbon_black_cloud.util.exceptions import RateLimitException, HTTPErrorException
 from icon_carbon_black_cloud.util.constants import (
     OBSERVATION_TYPES,
@@ -48,7 +48,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
 
         try:
             rate_limited = state.get(RATE_LIMITED)
-            now_time = get_current_time()
+            now_time = self._get_current_time()
             if rate_limited:
                 log_msg = f"Rate limit value stored in state: {rate_limited}. "
                 if rate_limited > now_time.strftime(TIME_FORMAT):
@@ -94,7 +94,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             return alerts_and_observations, state, has_more_pages, 200, None
         except RateLimitException as rate_limit_error:
             self.logger.info(f"Rate limited on API, returning {(len(alerts_and_observations))} items...")
-            state[RATE_LIMITED] = (get_current_time() + timedelta(minutes=5)).strftime(TIME_FORMAT)
+            state[RATE_LIMITED] = (self._get_current_time() + timedelta(minutes=5)).strftime(TIME_FORMAT)
             return alerts_and_observations, state, False, 200, rate_limit_error
         except HTTPErrorException as http_error:
             state = self._update_state_in_404(http_error.status_code, state, alerts_success)
@@ -170,7 +170,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
             )
             state[LAST_OBSERVATION_JOB] = observation_job_id
             # track when our jobs have been created to avoid them never finishing. Used in `_check_if_job_time_exceeded`
-            state[LAST_OBSERVATION_JOB_TIME] = get_current_time().strftime(TIME_FORMAT)
+            state[LAST_OBSERVATION_JOB_TIME] = self._get_current_time().strftime(TIME_FORMAT)
 
             if not state.get(LAST_OBSERVATION_TIME):
                 # First run of trying to get observations, save the start time for usage in `_dedupe_and_get_last_time`
@@ -316,7 +316,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
         then we can assume that the job has been cancelled due to high usage on their platform and there will be
         a difference of 1 between the contacted and completed values and we should parse the available observations.
         """
-        job_cut_off = (get_current_time() - timedelta(minutes=4)).strftime(TIME_FORMAT)
+        job_cut_off = (self._get_current_time() - timedelta(minutes=4)).strftime(TIME_FORMAT)
 
         if job_cut_off > job_start_time:
             self.logger.info(
@@ -343,3 +343,7 @@ class MonitorAlerts(insightconnect_plugin_runtime.Task):
                 del state[LAST_OBSERVATION_JOB]
                 del state[LAST_OBSERVATION_JOB_TIME]
         return state
+
+    @staticmethod
+    def _get_current_time():
+        return datetime.now(timezone.utc)

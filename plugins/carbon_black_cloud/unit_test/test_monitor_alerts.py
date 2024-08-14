@@ -14,7 +14,7 @@ from icon_carbon_black_cloud.tasks.monitor_alerts.task import (
 )
 from icon_carbon_black_cloud.util.exceptions import RateLimitException
 
-from util import (
+from unit_test.util import (
     Util,
     mock_request_200,
     mock_conditions,
@@ -22,7 +22,7 @@ from util import (
     mock_request_400,
     mock_request_404,
 )
-from responses.task_test_data import (
+from unit_test.responses.task_test_data import (
     task_first_run,
     task_first_run_output,
     task_subsequent_output,
@@ -45,7 +45,7 @@ sys.path.append(os.path.abspath("../"))
 
 @patch("icon_carbon_black_cloud.tasks.monitor_alerts.task.PAGE_SIZE", new=2)  # force page size to be 2
 @patch(
-    "icon_carbon_black_cloud.util.helper_util.get_current_time",
+    "icon_carbon_black_cloud.tasks.monitor_alerts.task.MonitorAlerts._get_current_time",
     return_value=datetime(year=2024, month=4, day=25, hour=16, minute=00, tzinfo=timezone.utc),
 )
 @patch("requests.request", return_value=mock_request_200(file_name="empty_response"))

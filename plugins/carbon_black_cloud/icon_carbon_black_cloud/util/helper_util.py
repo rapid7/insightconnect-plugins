@@ -1,6 +1,5 @@
 from hashlib import sha1
 from icon_carbon_black_cloud.util.constants import ENCODE_TYPE
-from datetime import datetime, timezone
 
 
 def hash_sha1(log: dict) -> str:
@@ -11,7 +10,3 @@ def hash_sha1(log: dict) -> str:
         # returning duplicate data from the task.
         hash_.update(f"{key}{value}".encode(ENCODE_TYPE))
     return hash_.hexdigest()
-
-
-def get_current_time():
-    return datetime.now(timezone.utc)
