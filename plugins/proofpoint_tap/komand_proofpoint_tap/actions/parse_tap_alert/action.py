@@ -2,11 +2,25 @@ import insightconnect_plugin_runtime
 from .schema import ParseTapAlertInput, ParseTapAlertOutput, Input, Output
 
 # Custom imports below
+import pandas
+from bs4 import BeautifulSoup
 from html_table_parser import HTMLTableParser
 from komand_proofpoint_tap.util.tap_formatter import TAP
 from urlextract import URLExtract
 from komand_proofpoint_tap.util.helpers import clean
 from insightconnect_plugin_runtime.helper import convert_dict_to_camel_case
+
+
+def parse_html_table(table):
+    data = {}
+    rows = table.find_all("tr")
+    for row in rows:
+        cells = row.find_all("td")
+        if len(cells) == 2:
+            key = cells[0].get_text(strip=True).lower().replace(" ", "_")
+            value = cells[1].get_text(strip=True)
+            data[key] = value
+    return data
 
 
 class ParseTapAlert(insightconnect_plugin_runtime.Action):
@@ -20,9 +34,22 @@ class ParseTapAlert(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         tap_alert = params.get(Input.TAPALERT)
-        p = HTMLTableParser()
-        p.feed(tap_alert)
-        clean_data = TAP(p.tables).data
+        soup = BeautifulSoup(tap_alert, "html.parser")
+        tables = soup.find_all("table")
+
+        clean_data = {}
+
+        for idx, table in enumerate(tables):
+            parsed_data = parse_html_table(table)
+
+            if idx == 0:
+                clean_data["threat"] == parsed_data
+            elif idx == 1:
+                clean_data["message"] == parsed_data
+            elif idx == 2:
+                clean_data["browser"] == parsed_data
+
+
 
         # Get the Threat details URL which is NOT an HTML table element, but instead the <a> link of the
         #    table element
