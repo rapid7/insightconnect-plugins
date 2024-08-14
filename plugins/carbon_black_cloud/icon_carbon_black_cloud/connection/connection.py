@@ -197,18 +197,28 @@ class Connection(insightconnect_plugin_runtime.Connection):
             # Return true
             return {"success": True}, return_msg
 
-        except HTTPErrorException:
-            return_msg_error += "\nHTTPErrorException hit"
-            raise ConnectionTestException(cause="", assistance="", data=return_msg_error)
+        except HTTPErrorException as error:
+            if error.status_code == 401:
+                return_msg_error += "\nInvalid credentials provided."
+                return_msg_error += "\nPlease verify the API ID & Secret key are correct."
+                raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
+            elif error.status_code == 403:
+                return_msg_error += "\nAccess forbidden."
+                return_msg_error += "\nPlease ensure your credentials are valid and you have the correct permissions."
+                raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
+            elif error.status_code == 200:
+                return_msg_error += "\nUnable to parse JSON in response."
+                return_msg_error += "\nPlease contact support."
+                raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
 
-        except RateLimitException:
-            return_msg_error += "\nRateLimitException hit"
-            raise ConnectionTestException(cause="", assistance="", data=return_msg_error)
+            return_msg_error += f"\nUnknown HTTP error occured: {error.data}"
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
 
-        except PluginException:
-            return_msg_error += "\nPluginException hit"
-            raise ConnectionTestException(cause="", assistance="", data=return_msg_error)
+        except RateLimitException as error:
+            return_msg_error += "\nToo many requests."
+            return_msg_error += "\nPlease slow down"
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
 
-        except JSONDecodeError:
-            return_msg_error += "\nJSON Decode error hit"
-            raise ConnectionTestException(cause="", assistance="", data=return_msg_error)
+        except PluginException as error:
+            return_msg_error += "\nRetry on 503 failed."
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
