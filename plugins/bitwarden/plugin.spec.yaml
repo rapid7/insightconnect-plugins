@@ -4,12 +4,12 @@ products: [insightconnect]
 name: bitwarden
 title: Bitwarden
 description: Bitwarden is an integrated open source password management solution for individuals, teams, and business organizations
-version: 2.0.0
+version: 2.0.1
 vendor: rapid7
 support: rapid7
 cloud_ready: true
 status: []
-supported_versions: ["Cloud-hosted Bitwarden instance 2023.1.1"]
+supported_versions: ["Cloud-hosted Bitwarden instance 2024.7.3"]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/bitwarden
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -40,7 +40,7 @@ hub_tags:
   features: []
 sdk:
   type: slim
-  version: 6.0.1
+  version: 6.1.0
   user: nobody
 connection_version: 2
 links:
@@ -49,6 +49,7 @@ references:
   - "[Bitwarden](https://bitwarden.com/)"
 troubleshooting: "[Bitwarden API Key Documentation](https://bitwarden.com/help/public-api/#authentication). Access to the Bitwarden Public API is available to customers on the Enterprise or Teams organizations plans."
 version_history:
+  - "2.0.1 - Use latest SDK version (6.1.0) and update the supported product version value to `2024.7.3`"
   - "2.0.0 - Update enum values for `Create a Member`, `Update a Member` and `List all Members` organisation type to support new 'Custom' type. | Update account status type to include no number prefix."
   - "1.0.0 - Initial plugin - Actions: `Retrieve a Member`, `Update a Member`, `Delete a Member`, `Retrieve a Member's Group Ids`, `Update a Member's Groups`, `List All Members`, `Create a Member`, `Re-invite a Member`, `List All Groups`, `List All Collections`, `List Events`."
 types:
