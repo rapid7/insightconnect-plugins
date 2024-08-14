@@ -2352,7 +2352,7 @@ Example output:
 
 # Version History
 
-* 11.1.0 - Added connection test for task `Monitor Logs`
+* 11.1.0 - Added connection test for task `Monitor Logs` | Update SDK
 * 11.0.0 - Removed `Monitor Logs` task input options | Update SDK
 * 10.0.0 - Added `Monitor Logs` task | Removed `User Type` from connection | A Service User API Key must now be provided to provide enhanced security
 * 9.1.2 - Retry functionality added to requests to SenintelOne that result in a 429 (too many requests) or 503 (service unavailable) error.

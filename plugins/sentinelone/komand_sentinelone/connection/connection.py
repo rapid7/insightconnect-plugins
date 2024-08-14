@@ -36,7 +36,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         total_failures = 0
         query_params = {"limit": 1}
         return_message = ""
-        results = {ACTIVITIES_LOGS: {"success": True}, EVENTS_LOGS: {"success": True}, THREATS_LOGS: {"success": True}}
 
         for query_type in queries:
             try:
@@ -50,13 +49,16 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 self.logger.info(message)
                 return_message += message + "\n"
             except PluginException as error:
-                message = f"The connection test to Sentinelone for {query_type} has failed."
-                self.logger.info(message)
-                return_message += message + "\n"
+                failed_message = f"The connection test to Sentinelone for {query_type} has failed."
+                self.logger.info(failed_message)
+                return_message += f"{failed_message}\n"
 
-                error_data = {"cause": error.cause, "assistance": error.assistance, "data": error.data}
-                results[query_type]["success"] = False
-                results[query_type]["error"] = error_data
+                cause_message = f"This failure was caused by: '{error.cause}'"
+                self.logger.info(cause_message)
+                return_message += f"{cause_message}\n"
+
+                self.logger.info(error.assistance)
+                return_message += f"{error.assistance}\n"
 
                 total_failures += 1
                 if total_failures >= total_queries:
@@ -65,17 +67,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
                     self.logger.info(failed_cause)
                     failed_assistance = "Please check your permissions and credentials before trying again."
                     self.logger.info(failed_assistance)
-                    failed_data_message = f"Please see results of each query for more information: {results}"
-                    self.logger.info(failed_data_message)
 
-                    raise ConnectionTestException(cause=failed_cause, assistance=failed_assistance, data=results)
+                    raise ConnectionTestException(cause=failed_cause, assistance=failed_assistance, data=return_message)
         results_message = (
             f"The connection test was successful for {total_queries-total_failures}/{total_queries}" f" event types."
         )
         self.logger.info(results_message)
         return_message = f"{results_message}\n{return_message}"
-        if total_failures > 0:
-            failures_message = f"The following failures were noted: {results}"
-            self.logger.info(failures_message)
-            return_message = f"{return_message}\n{failures_message}"
-        return results, return_message
+
+        return {"success": True}, return_message
