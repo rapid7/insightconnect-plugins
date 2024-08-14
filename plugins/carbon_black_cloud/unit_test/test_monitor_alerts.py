@@ -14,7 +14,7 @@ from icon_carbon_black_cloud.tasks.monitor_alerts.task import (
 )
 from icon_carbon_black_cloud.util.exceptions import RateLimitException
 
-from unit_test.util import (
+from util import (
     Util,
     mock_request_200,
     mock_conditions,
@@ -22,7 +22,7 @@ from unit_test.util import (
     mock_request_400,
     mock_request_404,
 )
-from unit_test.responses.task_test_data import (
+from responses.task_test_data import (
     task_first_run,
     task_first_run_output,
     task_subsequent_output,
