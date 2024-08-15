@@ -42,7 +42,7 @@ hub_tags:
   keywords: [incident_response, incidents]
   features: []
 sdk: 
-  type: full 
+  type: slim
   version: 6.1.0
   user: nobody
 connection:
