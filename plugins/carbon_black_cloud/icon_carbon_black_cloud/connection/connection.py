@@ -186,6 +186,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Testing get alerts")
 
         failed = ""
+        failed_endpoint = []
 
         for key, value in fd.items():
             try:
@@ -193,14 +194,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 self.request_api(key, value)
 
             except HTTPErrorException as error:
-                # If we've already hit the same error (usually invalid creds)
-                # on the first one then skip, otherwise we're just repeating ourselves
+                # If we get a similar error for the second URL
                 if error.cause in failed:
-                    pass
+                    failed_endpoint.append(key)
                 else:
-                    return_msg_error += f"\n{error.cause}"
-                    return_msg_error += f"\n{error.assistance}"
-                    return_msg_error += f"\nThis URL: {key} failed "
+                    return_msg_error += f"\n{error.cause}\n{error.assistance}"
+                    failed_endpoint.append(key)
                     failed += return_msg_error
 
             except RateLimitException as error:
@@ -213,6 +212,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=return_msg_error)
 
         if failed:
+            if len(failed_endpoint) > 1:
+                failed += "\nThe endpoint for alerts and observations failed."
+            else:
+                for item in failed_endpoint:
+                    failed += f"\nThe endpoint for {item.rstrip('_')} failed"
             raise ConnectionTestException(data=failed)
 
         # Return true
