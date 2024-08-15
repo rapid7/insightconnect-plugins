@@ -50,7 +50,8 @@ Example input:
 
 #### Fetch Forensics
 
-This action is used to pull detailed forensic evidence about individual threats or campaigns. Either 'threatId' or 'campaignId' should be specified
+This action is used to pull detailed forensic evidence about individual threats or campaigns. Either 'threatId' or 
+'campaignId' should be specified
 
 ##### Input
 
@@ -249,8 +250,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description| Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| :--- | :--- | :--- | :--- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|Name|Type|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- |
 |results|blockedClicks|True|The results containing blocked clicks|{'clicksBlocked': [{'GUID': 'X7sh5TwRxBZOAXb-d8ESyugsIdtfv3u', 'classification': 'malware', 'clickIP': '198.51.100.1', 'clickTime': '2021-04-20T21:08:13.000Z', 'id': '9de5069c-5afe-602b-2ea0-a04b66beb2c0', 'messageID': '<user@example.com>', 'recipient': 'user@example.com', 'sender': 'user@example.com', 'senderIP': '198.51.100.1', 'threatID': 'f1f23718b35b8db3db005cd498ff0812e53fe994537567ff0a...', 'threatStatus': 'active', 'threatTime': '2021-04-20T21:08:38.000Z', 'threatURL': 'https://example.com', 'url': 'https://example.com', 'userAgent': 'Mozilla/5.0 (Macintosh; Intel MAC OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36'}], 'queryEndTime': '2021-04-21T13:00:00Z'}|
   
 Example output:
@@ -601,7 +602,7 @@ Example input:
 | :--- | :--- | :--- | :--- | :--- |
 |interval|string|False|An ISO8601-formatted interval showing what time the response was calculated for|2023-03-07T06:01:00Z/2023-06-05T06:01:00Z|
 |totalTopClickers|integer|False|An integer describing the total number of top clickers in the time interval|2|
-|users|[]user|False|An array of user objects that contain information about the user's identity and statistics of the clicking behavior|[{"clickStatistics": {"families": [{"clicks": 28, "name": "Malware"}], "clickCount": 28}, "identity": {"emails": ["user@example.com"], "guid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "vip": False}}, {"clickStatistics": {"clickCount": 8, "families": [{"clicks": 6, "name": "MalSpam"}, {"clicks": 8, "name": "Malware"}]}, "identity": {"emails": ["user@example.com"], "guid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "vip": False}}]|
+|users|[]user|False|An array of user objects that contain information about the user's identity and statistics of the clicking behavior|[{"clickStatistics": {"families": [{"clicks": 28, "name": "Malware"}], "clickCount": 28}, "identity": {"emails": ["user@example.com"], "guid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "vip": false}}, {"clickStatistics": {"clickCount": 8, "families": [{"clicks": 6, "name": "MalSpam"}, {"clicks": 8, "name": "Malware"}]}, "identity": {"emails": ["user@example.com"], "guid": "9de5069c-5afe-602b-2ea0-a04b66beb2c0", "vip": false}}]|
   
 Example output:
 
@@ -1175,7 +1176,7 @@ Example output:
 
 # Version History
 
-* 4.1.10 - SDK Bump to 6.1.0 | Task Connection test added
+* 4.1.10 - SDK Bump to 6.1.0 | Task Connection test added Update `Parse Tap Alert` to utilise BeautifulSoup resolving vulnerabilities
 * 4.1.9 - Update connection fields to be required.
 * 4.1.8 - Include SDK 5.4.9 | Task - Use cutoff of 7 days for first query, use cutoff of 1 hours for subsequent queries
 * 4.1.7 - Include SDK 5.4.5 | Task - enforce query cutoff based on Proofpoint API max lookback | Task - toggle pagination when backfilling | Task - only store previous page of hashes.
