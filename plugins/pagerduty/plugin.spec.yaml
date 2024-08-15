@@ -3,17 +3,37 @@ extension: plugin
 products: [insightconnect]
 name: pagerduty
 title: PagerDuty
-description: Leverage PagerDuty for incident management and response
-version: 3.0.0
+description: "[PagerDuty](https://www.pagerduty.com/) provides enterprise-grade incident management that helps you orchestrate the ideal response to create better customer, employee, and business value. Use this plugin to manage users and incidents within workflows. The PagerDuty plugin makes requests to the V2 API"
+version: 3.0.1
 connection_version: 3
 vendor: rapid7
 support: community
-supported_versions: ["2023-10-12"]
+supported_versions: ["2024-08-15"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/pagerduty
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.pagerduty.com/
+key_features:
+  - Create and manage PagerDuty incidents
+  - Access PagerDuty user information
+requirements:
+  - PagerDuty API key
+links:
+  - ["[PagerDuty API V2](https://v2.developer.pagerduty.com/v2/page/api-reference)"]
+references:
+  - ["[PagerDuty API V2](https://v2.developer.pagerduty.com/v2/page/api-reference)"]
+version_history:
+  - '3.0.1 - Refresh plugin with latest SDK (6.1.0) | Fix to handle empty optional inputs for `send_trigger_event` action'
+  - '3.0.0 - `Refactor`: Re-write plugin to use `requests` instead of `pypd` package | `Unit Tests`: Added for all actions'
+  - '2.2.0 - Added Schedule ID optional input to Get On Call action'
+  - '2.1.0 - New action Get On Call'
+  - '2.0.1 - New spec and help.md format for the Extension Library'
+  - '2.0.0 - Fix issue to make `service_key` required in Send Resolve Request action'
+  - '1.0.1 - Update to [PagerDuty REST API v2](https://v2.developer.pagerduty.com/docs/migrating-to-api-v2)'
+  - '1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types'
+  - '0.1.1 - SSL bug fix in SDK'
+  - '0.1.0 - Initial plugin'
 tags:
 - incident response
 - incident management
@@ -23,7 +43,7 @@ hub_tags:
   features: []
 sdk: 
   type: full 
-  version: 5 
+  version: 6.1.0
   user: nobody
 connection:
   api_key:
@@ -95,7 +115,7 @@ types:
       type: string
       example: incident
     summary:
-      description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labelling of an entity in a client
+      description: A short-form, server-generated string that provides succinct, important information about an object suitable for primary labeling of an entity in a client. In many cases, this will be identical to name, though it is not intended to be an identifier
       type: string
       example: "[#1234] The server is on fire."
     self:

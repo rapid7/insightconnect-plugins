@@ -74,9 +74,8 @@ class PagerDutyAPI:
         for key, value in dict_of_optional_fields.items():
             if value:
                 if isinstance(value, dict):
-                    # check if there are nested values
-                    cleaned = clean_dict(value)
-                    if not cleaned:
+                    optional_dict = clean_dict(value)  # check if there are non-empty nested values
+                    if not optional_dict:
                         # don't add empty optional dict to payload
                         continue
                 payload["incident"][key] = value
